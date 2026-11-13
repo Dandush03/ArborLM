@@ -1654,14 +1654,28 @@ def test_cli_parser_accepts_the_registered_commands(tmp_path: Path) -> None:
         parser.parse_args(["equivalence"])  # --output-root and --results-root are required
 
 
+def _real_results_listing() -> list[tuple[str, int]]:
+    """Paths and sizes under the registered P6-E results root (empty before the registered run).
+
+    Post-run test-only repair: these tests originally asserted that the root did not exist,
+    which stopped being true once the single registered run had written its records. They
+    now assert that a dry run leaves the root exactly as it found it.
+    """
+    root = REPO / "results" / "p6-e-2026-11-13"
+    if not root.exists():
+        return []
+    return sorted((str(p.relative_to(root)), p.stat().st_size) for p in root.rglob("*"))
+
+
 def test_dry_run_refuses_to_write_under_experiments_or_results(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.chdir(REPO)
+    before = _real_results_listing()
     for out, res in (("experiments", "/tmp/x"), ("/tmp/x", "results/p6-e-2026-11-13")):
         with pytest.raises(SystemExit, match="refuses"):
             cli.main(["dry-run", "--output-root", out, "--results-root", res])
-    assert not (REPO / "results" / "p6-e-2026-11-13").exists()
+    assert _real_results_listing() == before
 
 
 def test_dry_run_end_to_end_on_a_synthetic_fixture(
@@ -1669,6 +1683,7 @@ def test_dry_run_end_to_end_on_a_synthetic_fixture(
 ) -> None:
     """All four stages with real subprocess workers, one synthetic pair, one timing round."""
     monkeypatch.chdir(REPO)
+    real_results_before = _real_results_listing()
     code = cli.main(
         [
             "dry-run",
@@ -1720,7 +1735,7 @@ def test_dry_run_end_to_end_on_a_synthetic_fixture(
     for name in runs:
         manifest = json.loads((runs[name][0] / "manifest.json").read_text())
         assert manifest["dry_run"] is True and manifest["status"] == "completed"
-    assert not (REPO / "results" / "p6-e-2026-11-13").exists()
+    assert _real_results_listing() == real_results_before
 
 
 def test_state_digest_is_unchanged_by_wrapping(cell: common.CellSource) -> None:
