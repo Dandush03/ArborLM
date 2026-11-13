@@ -1,0 +1,44 @@
+compared 28545 differences 39
+DIFF {'path': 'fixed_tree.BRgrid.R32C128.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R32C128.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R128C32.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R128C32.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R128C64.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R128C64.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R128C128.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R128C128.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C8.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C8.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C16.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C16.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C32.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C32.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C64.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C64.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C128.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'fixed_tree.BRgrid.R512C128.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.grid.R2C128.CONC', 'mine': 'HOLDS', 'analysis': 'DEGENERATE'}
+DIFF {'path': 'learned_tree.grid.R8C32.CONC', 'mine': 'HOLDS', 'analysis': 'DEGENERATE'}
+DIFF {'path': 'learned_tree.grid.R32C8.CONC', 'mine': 'HOLDS', 'analysis': 'DEGENERATE'}
+DIFF {'path': 'learned_tree.BRgrid.R32C128.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R32C128.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R128C32.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R128C32.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R128C64.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R128C64.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R128C128.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R128C128.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C8.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C8.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C16.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C16.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C32.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C32.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C64.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C64.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C128.candidate_mean_exact', 'mine': '0', 'analysis': '0/1'}
+DIFF {'path': 'learned_tree.BRgrid.R512C128.reference_mean_exact', 'mine': '0', 'analysis': '0/1'}
+integrity problems 81 ['b101-o301-fixed_tree-s501: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-fixed_tree-s502: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-fixed_tree-s503: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-flat-s501: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-flat-s502: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-flat-s503: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-learned_tree-s501: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-learned_tree-s502: P5 checkpoint_state_sha256 differs from trace record', 'b101-o301-learned_tree-s503: P5 checkpoint_state_sha256 differs from trace record', 'b101-o302-fixed_tree-s501: P5 checkpoint_state_sha256 differs from trace record']
+fixed_tree NON-DEGENERATE LRU HOLDS 0.6634634823414106 24 9 CONC HOLDS 0.6866253760540177 24 9 BR FAILS -> CONCENTRATION-ONLY robust_other []
+learned_tree NON-DEGENERATE LRU HOLDS 0.5212661007517196 27 9 CONC HOLDS 0.534577558933468 27 9 BR FAILS -> CONCENTRATION-ONLY robust_other []
+seconds 0.3

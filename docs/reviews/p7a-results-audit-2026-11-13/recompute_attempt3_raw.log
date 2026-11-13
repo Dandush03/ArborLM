@@ -1,0 +1,9 @@
+compared 28545 differences 0
+integrity problems 0 []
+raw problems 0 []
+full b103-o303-fixed_tree-s503 270 439 0 [] 5.0
+full b103-o303-flat-s503 240 384 0 [] 4.7
+full b103-o303-learned_tree-s503 270 439 0 [] 5.3
+fixed_tree NON-DEGENERATE LRU HOLDS 0.6634634823414106 24 9 CONC HOLDS 0.6866253760540177 24 9 BR FAILS -> CONCENTRATION-ONLY robust_other []
+learned_tree NON-DEGENERATE LRU HOLDS 0.5212661007517196 27 9 CONC HOLDS 0.534577558933468 27 9 BR FAILS -> CONCENTRATION-ONLY robust_other []
+seconds 47.8
