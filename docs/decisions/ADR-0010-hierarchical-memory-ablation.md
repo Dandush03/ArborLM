@@ -1,8 +1,8 @@
 # ADR-0010 — P5: Hierarchical Memory Architecture Ablation
 
 - Date: 2026-11-13 (America/Panama).
-- Status: **PROPOSAL — PENDING AUTHORIZED SCIENTIFIC REVIEW. NOT AUTHORIZED FOR IMPLEMENTATION OR TRAINING.**
-- Prepared by root Codex under the documented human-authorized scientific-reviewer exception. **Astra spec/result review: NOT_PERFORMED.** This draft is not an approval record. The current instruction is to produce a proposal for scientific approval and stop before implementation/training.
+- Status: **SPEC APPROVED BY HUMAN RESEARCH LEAD AND HUMAN-AUTHORIZED CODEX SCIENTIFIC REVIEWER. IMPLEMENTATION AUTHORIZED; TRAINING REQUIRES ACCEPTED PREFLIGHT AND FREEZE.**
+- Prepared and scientifically reviewed by root Codex under the documented human-authorized reviewer exception. **Astra spec/result review: NOT_PERFORMED.** Human approval and the review disposition are recorded below; this authorizes implementation followed by independently accepted preflight and freeze before execution.
 - Scope: fixed-size, local CPU/RAM comparison of existing flat, fixed-tree and learned-tree mathematics on frozen backbones. No SSD, new capacity, topology restructuring, new objective, deployment or additional architectural feature. P1–P4 and every failed gate remain unchanged.
 - Read before drafting: AGENTS, canonical handoff, experiment protocol, research log, ADR-0005–0009, P1/P2 finalized review records in their result READMEs, P3/P4 authorized scientific reviews, P4 implementation, and P4 preflight/artifact audits. The handoff's historical proposed phases are not automatic authorization; the current human instruction defines P5 as this ablation.
 
@@ -186,7 +186,7 @@ Proposed hard scientific-worker ceilings: **1,800 seconds for quality/training**
 
 The earliest applicable cell, stage or combined-suite deadline takes precedence. Per-worker maxima are not additive allocations: the 600-second timing stage can terminate an unfinished worker even though its individual limit remains. Preserve that worker's partial evidence and every unexecuted worker; do not shrink repetition counts, drop variants or grant unused time from another stage to complete the matrix. The same precedence applies to quality cells. All loading, trace preparation, warmups, measured calls and ordinary evidence packaging inside a stage count toward that stage's wall time.
 
-This is a proposed increase from P4's 1,800-second total ceiling to cover a larger comparison matrix and explicit timing. **Resource approval remains pending.** No cloud/GPU/download/hardware change, silent extension, shorter replacement budget, skipped slow cell, seed substitution or rerun of an unfavorable result. Nonfinite loss/parameters, identity/freeze/optimizer/restore failure, wrong counts, failed invariance or resource breach stops the stage/suite and preserves partial, failed and unexecuted records. Engineering fixes need a recorded amendment and fresh run identity before any rerun. Timing instability retains an INCONCLUSIVE flag without retiming; it is not itself a model failure.
+This is a proposed increase from P4's 1,800-second total ceiling to cover a larger comparison matrix and explicit timing. **The human approved this exact 2,400-second budget on 2026-11-13; stage and RSS ceilings remain unchanged.** No cloud/GPU/download/hardware change, silent extension, shorter replacement budget, skipped slow cell, seed substitution or rerun of an unfavorable result. Nonfinite loss/parameters, identity/freeze/optimizer/restore failure, wrong counts, failed invariance or resource breach stops the stage/suite and preserves partial, failed and unexecuted records. Engineering fixes need a recorded amendment and fresh run identity before any rerun. Timing instability retains an INCONCLUSIVE flag without retiming; it is not itself a model failure.
 
 No experiment implementation until this exact specification receives an authorized scientific approval record. After approval, Sol implements; Luna independently reviews equations, gradients, shapes, counters, checkpoints and timing. Root provides independent scientific/preflight acceptance under the exception. Any model selection change must be disclosed; never substitute agent names for actual Astra review. Human merge, publication and further-phase/scaling approval remain separate.
 
@@ -220,7 +220,7 @@ The final report includes all initial/final/intervention losses, means/sample SD
 
 ## 12. Decisions requiring authorized scientific review
 
-This draft proposes concrete resolutions; none is represented as approved:
+The following resolutions were proposed at commit `dabb5db22b38977838da36a801c410ee3544e738` and subsequently approved in full by the human and authorized reviewer, as recorded below:
 
 1. Use the nine P4 baseline snapshots, fresh shared seeds 501–503, and freshly train the unchanged dense reference alongside all three memory architectures: 117 cells/108 trainings, with no reuse of trained P4 additions.
 2. Retain exact old retrieval/optimization mathematics and expose the real 256-scalar router difference; accept that flat-versus-tree includes the branch prior and fixed routing still has a trained query.
@@ -229,4 +229,12 @@ This draft proposes concrete resolutions; none is represented as approved:
 5. Approve the two timing workloads/scopes/repetition schedule, addition-only consulted-state definitions, distinction between algebraic/traced work and latency, and the conditional continuation recommendations. A score-work pass cannot stand in for a runtime pass.
 6. Approve the proposed 1,800+600=2,400-second worker ceiling and 2 GiB bounds. Obtain any necessary human budget decision before execution. Human approval is still required before further phases, merging or publication.
 
-**Approval record: PENDING. Implementation: NOT_STARTED. Engineering preflight: NOT_STARTED. Source/data freeze: NOT_PERFORMED. P5 model evaluation/training/timing: NOT_STARTED. Astra review: NOT_PERFORMED.**
+## 13. Approval record before implementation
+
+On 2026-11-13 (America/Panama), the human research lead explicitly instructed: “Approve ADR-0010 and the 2,400-second budget. Use Sol to implement and Luna to review, complete preflight and freeze settings before training. Report every run here and push each checkpoint to GitHub.” This supersedes the proposal-only stop instruction and approves all six decisions above and the exact existing numerical protocol. No scientific thresholds, seeds, dimensions, durations or resource ceilings were changed by this approval entry.
+
+Root Codex accepts the scientific design under the standing human-authorized reviewer exception. Rationale: all nine frozen parents and shared fresh initializations avoid checkpoint selection; identical fixed/learned starting tensors isolate router training as specified; fresh dense training keeps the reference on the same protocol; new-panel construction, paired interventions and independent artifacts guard validity; separate score-work and latency flags prevent an analytical operation reduction from becoming an unsupported speed claim. Parameter/buffer differences, branch-prior confounding, repeated key normalization, correlated cells and timing reliability limits are explicit. The stricter composite cannot be rescued by secondary fixed-tree, dense or workload results.
+
+Sol owns implementation/execution under this specification; Luna owns separate engineering review. Root must independently accept preflight and record exact source/config/spec/data/lock identities before authorizing real-data training or timing. No model outcome informed this approval. Engineering clarifications must be recorded before outcomes; substantive scientific changes require a new reviewed amendment. Human merge, publication and further-phase/scaling approvals remain pending. Astra review remains NOT_PERFORMED.
+
+**Approval record: HUMAN_AND_AUTHORIZED_REVIEWER_APPROVED. Implementation: AUTHORIZED. Engineering preflight: PENDING. Source/data freeze: NOT_PERFORMED. P5 model evaluation/training/timing: NOT_STARTED. Astra review: NOT_PERFORMED.**
