@@ -90,9 +90,14 @@ advantage, or scaling authorization.
   The CSV records each learned and control trajectory's NLL change from step 256;
   the recomputation also lists and summarizes all nine paired control changes at
   each later duration.
-  Luna's separate artifact audit is pending at this entry. Astra review was not
-  performed under the human-authorized reviewer exception; human merge and
-  publication approval remain pending.
+  Luna's [independent artifact audit](independent-artifact-audit.md) passed.
+  Root reran it and obtained identical output with no issues. See the
+  [authorized scientific review](authorized-scientific-review.md) for the
+  interpretation. [Linux CPU CI run 43361998534](https://github.com/Dandush03/ArborLM/actions/runs/43361998534)
+  passed Ruff, mypy (31 files), all 90 tests, and E0 smoke; logs and uploaded
+  artifacts were retained locally. Astra review was not performed under the
+  human-authorized reviewer exception; human merge and publication approval
+  remain pending.
 
 From the repository root, the executed command was:
 
