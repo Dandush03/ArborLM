@@ -1,0 +1,72 @@
+== R2C32
+  null_mean {"flat": 3.3385077582465277, "fixed_tree": 2.2923041449652777, "learned_tree": 1.7846913278838736}
+  null_min {"flat": 1.7976481119791667, "fixed_tree": 0.5025431315104166, "learned_tree": 0.5970052083333334}
+  null_floor_violations_0.005 {"flat": 0, "fixed_tree": 0, "learned_tree": 0}
+  nondegenerate_by_ADR14_floors {"fixed_tree": true, "learned_tree": true}
+  E_FREQ_mean {"flat": 0.9440568070870446, "fixed_tree": 0.9121150656650541, "learned_tree": 0.9149310236075751}
+  E_FREQ_sd {"flat": 0.025435506622877097, "fixed_tree": 0.02780883512634186, "learned_tree": 0.03876462160039264}
+  E_FREQ_minmax {"flat": [0.8509925530229294, 0.9765712745406353], "fixed_tree": [0.8494458153833284, 0.9640652944764346], "learned_tree": [0.8257597354467188, 0.9864059163286658]}
+  rho_FREQ_vs_FREQ {"fixed_tree": 0.9661654455725508, "learned_tree": 0.969148272370029}
+  rho_alt {"fixed_tree": {"ratio_of_mean_E": 0.9661654455725508, "ratio_of_pooled_ratios": 0.9662670583983995, "ratio_of_geometric_means": 0.9660801863064931}, "learned_tree": {"ratio_of_mean_E": 0.969148272370029, "ratio_of_pooled_ratios": 0.9750991077734239, "ratio_of_geometric_means": 0.9686441681553162}}
+  pairs_tree_lower_FREQ {"fixed_tree": {"pairs": 23, "parents": 9}, "learned_tree": {"pairs": 19, "parents": 7}}
+  paired_log_ratio {"fixed_tree": {"mean": -0.034508439615788145, "sd": 0.037715305722521894, "se_naive": 0.007258313970489016}, "learned_tree": {"mean": -0.03185795005749218, "sd": 0.04919031584884928, "se_naive": 0.009466680698951948}}
+  E_BFREQ_mean {"fixed_tree": 0.7743019759288139, "learned_tree": 0.7924418322495536}
+  rho_treeBFREQ_vs_flatFREQ {"fixed_tree": 0.8201857876730728, "learned_tree": 0.8394005808767906}
+  pairs_treeBFREQ_lower_than_flatFREQ {"fixed_tree": {"pairs": 27, "parents": 9}, "learned_tree": {"pairs": 27, "parents": 9}}
+  trend flat: slope +0.0642 (se 0.0168) per ln(eff), r2 0.369
+  trend fixed_tree: slope +0.0501 (se 0.0204) per ln(eff), r2 0.195
+  trend learned_tree: slope +0.1006 (se 0.0282) per ln(eff), r2 0.337
+  trend pooled: slope +0.0696 (se 0.0099) per ln(eff), r2 0.385
+  ancova slope 0.07 adjusted rho {"fixed_tree": 0.9893987921734649, "learned_tree": 1.0035056350674898} rho predicted by utilization alone {"fixed_tree": 0.9766325824267996, "learned_tree": 0.9658123930988329}
+== R8C8
+  null_mean {"flat": 3.0917833116319446, "fixed_tree": 2.1486522533275463, "learned_tree": 1.6774781780478394}
+  null_min {"flat": 1.6343180338541667, "fixed_tree": 0.49859619140625, "learned_tree": 0.59405517578125}
+  null_floor_violations_0.005 {"flat": 0, "fixed_tree": 0, "learned_tree": 0}
+  nondegenerate_by_ADR14_floors {"fixed_tree": true, "learned_tree": true}
+  E_FREQ_mean {"flat": 0.8810255974658935, "fixed_tree": 0.847864510501695, "learned_tree": 0.8767248822541412}
+  E_FREQ_sd {"flat": 0.031360987665408895, "fixed_tree": 0.04166611539388326, "learned_tree": 0.05163821399348686}
+  E_FREQ_minmax {"flat": [0.7962919812835739, 0.9360890159978551], "fixed_tree": [0.7552239887009742, 0.9386117185562595], "learned_tree": [0.7584411304276181, 1.0115299734270145]}
+  rho_FREQ_vs_FREQ {"fixed_tree": 0.9623608132844491, "learned_tree": 0.9951185127604437}
+  rho_alt {"fixed_tree": {"ratio_of_mean_E": 0.9623608132844491, "ratio_of_pooled_ratios": 0.9670618329873568, "ratio_of_geometric_means": 0.961830856065595}, "learned_tree": {"ratio_of_mean_E": 0.9951185127604437, "ratio_of_pooled_ratios": 0.9981562178048088, "ratio_of_geometric_means": 0.994066933381031}}
+  pairs_tree_lower_FREQ {"fixed_tree": {"pairs": 20, "parents": 9}, "learned_tree": {"pairs": 16, "parents": 7}}
+  paired_log_ratio {"fixed_tree": {"mean": -0.038916669071149046, "sd": 0.0584873544920897, "se_naive": 0.011255896620065686}, "learned_tree": {"mean": -0.005950737187160364, "sd": 0.06926199477121843, "se_naive": 0.013329477108591137}}
+  E_BFREQ_mean {"fixed_tree": 0.5667628167027386, "learned_tree": 0.6273908898330869}
+  rho_treeBFREQ_vs_flatFREQ {"fixed_tree": 0.6432989215443077, "learned_tree": 0.7121142582436427}
+  pairs_treeBFREQ_lower_than_flatFREQ {"fixed_tree": {"pairs": 27, "parents": 9}, "learned_tree": {"pairs": 27, "parents": 9}}
+  trend flat: slope +0.0126 (se 0.0259) per ln(eff), r2 0.009
+  trend fixed_tree: slope +0.0652 (se 0.0314) per ln(eff), r2 0.147
+  trend learned_tree: slope +0.0364 (se 0.0456) per ln(eff), r2 0.025
+  trend pooled: slope +0.0328 (se 0.0160) per ln(eff), r2 0.050
+  ancova slope 0.0385 adjusted rho {"fixed_tree": 0.9758959128681134, "learned_tree": 1.015496467140493} rho predicted by utilization alone {"fixed_tree": 0.9881732414651024, "learned_tree": 0.982696908186816}
+== non-degeneracy over the grid (ADR-0014 floors, L-FREQ null)
+  R2C32: null_mean {"flat": 3.3385, "fixed_tree": 2.2923, "learned_tree": 1.7847} min {"flat": 1.7976, "fixed_tree": 0.5025, "learned_tree": 0.597} nondeg {"fixed_tree": true, "learned_tree": true}
+  R8C8: null_mean {"flat": 3.0918, "fixed_tree": 2.1487, "learned_tree": 1.6775} min {"flat": 1.6343, "fixed_tree": 0.4986, "learned_tree": 0.5941} nondeg {"fixed_tree": true, "learned_tree": true}
+  R1C8: null_mean {"flat": 7.2506, "fixed_tree": 6.9401, "learned_tree": 6.8362} min {"flat": 6.9992, "fixed_tree": 5.7766, "learned_tree": 6.3554} nondeg {"fixed_tree": true, "learned_tree": true}
+  R1C16: null_mean {"flat": 6.5962, "fixed_tree": 6.0628, "learned_tree": 5.8743} min {"flat": 6.1537, "fixed_tree": 4.1201, "learned_tree": 5.0644} nondeg {"fixed_tree": true, "learned_tree": true}
+  R1C32: null_mean {"flat": 5.372, "fixed_tree": 4.4589, "learned_tree": 4.0805} min {"flat": 4.5664, "fixed_tree": 1.6854, "learned_tree": 2.8007} nondeg {"fixed_tree": true, "learned_tree": true}
+  R1C64: null_mean {"flat": 3.3763, "fixed_tree": 2.3166, "learned_tree": 1.802} min {"flat": 1.8304, "fixed_tree": 0.4987, "learned_tree": 0.5953} nondeg {"fixed_tree": true, "learned_tree": true}
+  R1C128: null_mean {"flat": 1.2398, "fixed_tree": 0.5835, "learned_tree": 0.3149} min {"flat": 0.0669, "fixed_tree": 0.084, "learned_tree": 0.0332} nondeg {"fixed_tree": true, "learned_tree": true}
+  R2C8: null_mean {"flat": 6.3507, "fixed_tree": 5.7655, "learned_tree": 5.5534} min {"flat": 5.8523, "fixed_tree": 3.796, "learned_tree": 4.7055} nondeg {"fixed_tree": true, "learned_tree": true}
+  R2C16: null_mean {"flat": 5.2583, "fixed_tree": 4.3681, "learned_tree": 3.9906} min {"flat": 4.444, "fixed_tree": 1.664, "learned_tree": 2.7325} nondeg {"fixed_tree": true, "learned_tree": true}
+  R2C64: null_mean {"flat": 1.2348, "fixed_tree": 0.5844, "learned_tree": 0.3151} min {"flat": 0.0699, "fixed_tree": 0.0843, "learned_tree": 0.0329} nondeg {"fixed_tree": true, "learned_tree": true}
+  R2C128: null_mean {"flat": 0.0981, "fixed_tree": 0.0272, "learned_tree": 0.0066} min {"flat": 0.0, "fixed_tree": 0.001, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R8C16: null_mean {"flat": 1.1968, "fixed_tree": 0.5785, "learned_tree": 0.3142} min {"flat": 0.0714, "fixed_tree": 0.0865, "learned_tree": 0.0355} nondeg {"fixed_tree": true, "learned_tree": true}
+  R8C32: null_mean {"flat": 0.1001, "fixed_tree": 0.0286, "learned_tree": 0.0075} min {"flat": 0.0005, "fixed_tree": 0.0018, "learned_tree": 0.0009} nondeg {"fixed_tree": false, "learned_tree": false}
+  R8C64: null_mean {"flat": 0.0014, "fixed_tree": 0.0005, "learned_tree": 0.0001} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R8C128: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R32C8: null_mean {"flat": 0.1013, "fixed_tree": 0.0305, "learned_tree": 0.0083} min {"flat": 0.0008, "fixed_tree": 0.0021, "learned_tree": 0.001} nondeg {"fixed_tree": false, "learned_tree": false}
+  R32C16: null_mean {"flat": 0.002, "fixed_tree": 0.0011, "learned_tree": 0.0005} min {"flat": 0.0001, "fixed_tree": 0.0002, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R32C32: null_mean {"flat": 0.0004, "fixed_tree": 0.0002, "learned_tree": 0.0001} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R32C64: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R32C128: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R128C8: null_mean {"flat": 0.0013, "fixed_tree": 0.0009, "learned_tree": 0.0006} min {"flat": 0.0001, "fixed_tree": 0.0001, "learned_tree": 0.0001} nondeg {"fixed_tree": false, "learned_tree": false}
+  R128C16: null_mean {"flat": 0.0006, "fixed_tree": 0.0003, "learned_tree": 0.0001} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R128C32: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R128C64: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R128C128: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R512C8: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R512C16: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R512C32: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R512C64: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+  R512C128: null_mean {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} min {"flat": 0.0, "fixed_tree": 0.0, "learned_tree": 0.0} nondeg {"fixed_tree": false, "learned_tree": false}
+eff slots {"flat": [85.14375905360757, 132.3427842565273, 198.98010320871867], "fixed_tree": [42.924020246588476, 96.2481362208503, 142.19205413613565], "learned_tree": [55.18039679514536, 83.02428093279005, 123.99140614751991]}

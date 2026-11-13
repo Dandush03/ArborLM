@@ -1,0 +1,3 @@
+A0[1][2] (same query) = 2 | A1[1][2] = 2 | A1[1][9] (lag 1, once each way) = 1 | A1[0][9] = 3
+first pages: [[3, 7], [5, 11], [9, 0]]
+reading checks OK

@@ -1,0 +1,5 @@
+# Review scripts are kept byte-identical to the versions whose outputs are recorded here.
+extend = "../ruff.toml"
+
+[lint]
+extend-ignore = ["E731", "F401", "UP031"]
