@@ -1,0 +1,12 @@
+{
+  "train_bytes_sha256": "1c3e7a3e02087392ae3db874935517c66e77f15d7a50c3285a8c5ba5d7fabd07",
+  "p1_validation_bytes_sha256": "2e6b71b9472abf50f9c4705f2f8f13a69465a9f1b8360119ce5882872b772200",
+  "p2_validation_bytes_sha256": "8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2",
+  "p3_validation_bytes_sha256": "a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0",
+  "p3_rows": 512,
+  "p3_targets": 32768,
+  "overlap_prior_panels": 0,
+  "overlap_all_train": 0,
+  "excluded_validation_occurrences": 15,
+  "method": "Independent raw Parquet reconstruction; no implementation selector or model evaluation"
+}
