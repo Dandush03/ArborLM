@@ -1,0 +1,1 @@
+{"active_worker_seconds":1750.7077925379854,"finished_utc":"2026-11-13T18:33:51.711131+00:00","outcome":"completed_finals_step0_partial","reason":"budget: 49.3 s of the 1800 s total remain, below the 60 s per-checkpoint cap, before b102-o303-shared_initial-s502","status":"completed_finals_step0_partial"}
