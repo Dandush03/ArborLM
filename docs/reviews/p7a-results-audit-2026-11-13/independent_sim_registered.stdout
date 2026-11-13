@@ -1,0 +1,19 @@
+b101-o301-flat-s501: AGREE  configs=240  integrity_problems=0  differences=0  9.6s
+b101-o301-flat-s502: AGREE  configs=240  integrity_problems=0  differences=0  9.6s
+b101-o301-flat-s503: AGREE  configs=240  integrity_problems=0  differences=0  9.7s
+b101-o303-flat-s501: AGREE  configs=240  integrity_problems=0  differences=0  10.1s
+b103-o302-flat-s501: AGREE  configs=240  integrity_problems=0  differences=0  10.8s
+b103-o302-flat-s502: AGREE  configs=240  integrity_problems=0  differences=0  10.3s
+b101-o301-fixed_tree-s501: AGREE  configs=270  integrity_problems=0  differences=0  10.3s
+b101-o301-fixed_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  10.4s
+b101-o301-fixed_tree-s503: AGREE  configs=270  integrity_problems=0  differences=0  10.3s
+b102-o302-fixed_tree-s503: AGREE  configs=270  integrity_problems=0  differences=0  10.5s
+b103-o302-fixed_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  10.7s
+b103-o303-fixed_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  10.6s
+b101-o301-learned_tree-s501: AGREE  configs=270  integrity_problems=0  differences=0  10.4s
+b101-o301-learned_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  10.2s
+b101-o301-learned_tree-s503: AGREE  configs=270  integrity_problems=0  differences=0  10.8s
+b102-o302-learned_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  9.9s
+b102-o303-learned_tree-s501: AGREE  configs=270  integrity_problems=0  differences=0  9.8s
+b103-o303-learned_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  12.1s
+VERDICT AGREE  checkpoints=18  seconds=186.0  summary=docs/reviews/p7a-results-audit-2026-11-13/independent_sim_registered.json
