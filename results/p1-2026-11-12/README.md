@@ -30,3 +30,5 @@ ADR-0006 separately preregisters a post-screen, frozen-checkpoint diagnostic: re
 ## Evidence
 
 Suite: `experiments/P1-20261113T023302942989Z-acbad32bf88f40b3b60e1993e042d5d8`. Code was frozen at `0b0555c`; later result-only commits during the run did not change forward/data/config code. Source archives, checkpoints and frozen data remain local. All six controls for all three seeds are preserved under seed directories here, including raw per-step events, configs, environment, source/data/checkpoint hashes and logs. `analysis.json` retains full precision and Boolean gate outcomes; `per-run.csv` is a derived table. Original run manifests remain immutable with their original pending-review fields; this report is the separate review record.
+
+Luna independently audited all raw counts, arithmetic, identities and actual checkpoint hashes; see `independent-artifact-audit.md`. One cell records the result-only commit `f231e2e` rather than `0b0555c`; all 18 executed-source archive hashes are identical. This traceability exception is retained explicitly.
