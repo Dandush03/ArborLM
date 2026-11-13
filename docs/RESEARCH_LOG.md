@@ -92,3 +92,9 @@ A candidate follow-up would separate the random seeds for backbone initializatio
 - The authorized reviewer fixed 27 crossed backbone/memory/order initializations plus 9 disabled-throughout controls, with unchanged model size and 131,072 training targets per cell. Batch-order seeds permute the same 2,048 examples. Memory and router initialization remain one combined factor; optimizer hyperparameters and training length do not vary.
 - A previously unevaluated panel takes eligible validation ranks 512–1023 under the existing exact-chunk exclusion recipe. It is not an independent corpus; shared articles and near-duplicates remain possible. Original P1 promotion failure remains unchanged.
 - Sol owns implementation and execution after root preflight; Luna independently audits controls and artifacts. Every cell and its interventions will be reported in chat, with compact evidence pushed after completion. Binary checkpoints/data remain local under existing policy. No P2 result exists at registration; Astra review NOT PERFORMED.
+
+### P2 preflight accepted before training
+
+- Sol implemented isolated P2 modules without changing the original numerical sources. Luna's five independent tests cover factor isolation, dense-equivalent controls, frozen optimizer-excluded memory, checkpoint resume, panel disjointness and hand-computed interaction arithmetic.
+- Root read the implementation and independently passed locked Ruff, mypy (25 files), 79 tests and E0 smoke (11 gates). Independent raw-Parquet reconstruction matched the P2 panel checksum and original data identities. Evidence: `results/p2-preflight-2026-11-12/`.
+- Root authorizes Sol to execute exactly ADR-0007 after committing the code freeze. No P2 outcomes were observed or used to alter the registration. During execution only result records may be committed; source/config/spec/data identities must remain invariant. Prior failed gate and Astra NOT_PERFORMED status remain unchanged.
