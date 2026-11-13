@@ -1,7 +1,7 @@
 # ADR-0013 — P7-A: storage-page locality of the existing P5 memories (trace-driven simulation)
 
 - Date: 2026-11-13 (America/Panama).
-- Status: **DRAFT PROPOSAL, REVISION 2 — SPEC: PENDING HUMAN REVIEW (Fable-drafted, Opus-reviewed). NOT APPROVED. NO IMPLEMENTATION, TRACE GENERATION, SIMULATION OR MODEL FORWARD IS AUTHORIZED BY THIS DOCUMENT.**
+- Status: **SPEC: HUMAN-APPROVED (Fable-drafted, Opus-reviewed) on 2026-11-13, as drafted in revision 2 — see §14.** The body below is unchanged from revision 2 (commit `b4ee7ad`) apart from this line and §14.
 - Prepared by Claude Fable 5.2 (`claude-fable-5-2`) at the human research lead's request of 2026-11-13. Revision 1 was reviewed by the auditor role (Claude Opus 5.5): `docs/reviews/p7a-spec-review-2026-11-13/REVIEW.md`, 2 blockers, 8 major, 11 minor. This revision answers that review; §12 lists what changed and what was not adopted. **Astra review: NOT_PERFORMED.** ADR-0012 (review arrangement) is still awaiting the human lead's decision.
 - Scope: a bounded simulation on the **existing frozen P5 checkpoints**. No training, no change to weights, routing, scoring or model quality, no SSD or NVMe device, no new CPU optimization, no capacity change, no downloads. P1–P6 code, records, thresholds and outcomes are immutable. **P6-E's timing verdict is INCONCLUSIVE and stays so**; nothing here re-times or reinterprets it.
 
@@ -234,4 +234,19 @@ Open points the auditor marked for the lead, decided above and now for the human
 
 ## 14. Approval record
 
-*Empty. No approval has been given.*
+**Human approval, 2026-11-13.** After receiving revision 2, the Opus review and the list of decisions in §13, the human research lead answered the question "Approve ADR-0013 as drafted so Sonnet can implement P7-A?" with: "Approve as drafted". The lead records this as approval of P7-A exactly as written in revision 2, covering §13 items 1–7: the primary setting, cache model, layouts, criteria and outcomes, calibration stream, resource caps and the mandatory timed dry run, and the statement that no NVMe experiment on the existing checkpoints is proposed under any outcome. Implementation by the implementer role, audit by the auditor role, freeze and a single registered execution are authorized.
+
+Not decided by that answer: §13 item 8, ADR-0012 (review arrangement), which remains open and is not inferred. As for P6, the instruction is taken as the human lead's direction to run this study under the Claude workflow.
+
+Status: **SPEC: HUMAN-APPROVED. Astra review: NOT_PERFORMED.** Training, SSD or NVMe work, capacity changes, merging and publication remain unauthorized.
+
+### Pre-outcome engineering clarifications (recorded before implementation)
+
+1. **Push timing.** As for P6, intermediate commits stay local and one push is made at the end, to limit CI usage. The freeze is identified by local commit and by source hashes in the stage manifests.
+2. **Frequency-matched stream, exact procedure.** For checkpoint c and replicate seed s ∈ {91301, 91302, 91303}, a generator is seeded with `s * 1000 + cell_index(c)`, where `cell_index` is the checkpoint's position in the registered order (parent/seed ascending; flat, fixed, learned). Each of the 32,768 queries draws eight distinct slots by weighted sampling without replacement (`torch.multinomial(counts, 8, replacement=False)`) with weights equal to that checkpoint's evaluation-trace selection counts. Slots never selected have weight zero.
+3. **Shuffles.** The order-shuffled stream is one permutation of the 32,768 queries from a generator seeded 91201; the context-shuffled stream is one permutation of the 512 contexts from a generator seeded 91202; both are the same permutation for every checkpoint. L-RAND permutations are seeded 91101–91103 and are the same for every checkpoint.
+4. **Warm-up boundary.** Queries 0–16,383 (contexts 0–255 in stream order) warm the cache; queries 16,384–32,767 are counted. For shuffled streams the boundary is by position in the shuffled order.
+5. **First-touch classification** uses the whole stream from its first query, including the warm-up.
+6. **Records.** Stage manifests cite this ADR and must not reuse the E0 record template text that mislabelled the P6 manifests. No file under version control is edited while a stage runs.
+7. **Independent simulator.** The auditor role's simulator is run on real traces after the simulation stage and before analysis, on the first three checkpoints of each architecture in the registered order plus three further checkpoints per architecture chosen by a generator seeded 91501, across every R and C, on the actual stream under L-ID and L-FREQ. Any difference in a miss count stops the study before analysis.
+
