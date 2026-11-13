@@ -14,3 +14,9 @@ Exact commands and outputs are in the two verification logs. Raw per-step events
 The intentional step-16 interruption is preserved with interrupted status. Earlier local smoke artifacts also remain intact. No failed experiment was replaced by a successful retry. Tests of failure/corruption use synthetic unit fixtures and are not scientific experiments.
 
 This checkpoint establishes E0 only. Flat memory, hierarchy, real-data quality, novelty, scaling and storage claims remain unvalidated. ADR-0005 preregisters the next bounded screen before its execution.
+
+## Subsequent Linux CI verification
+
+[GitHub Actions run 43351992585](https://github.com/Dandush03/ArborLM/actions/runs/43351992585) completed successfully at code commit `677ef8e`. Linux Ruff/mypy, all 31 tests and all 11 smoke gates passed. Status, full job log and smoke summary are preserved in `linux-ci-43351992585/`; the complete CI artifact was also downloaded locally before expiration.
+
+Linux initial NLL was 2.782654881477356, while macOS initial NLL was 2.7826549112796783. This small observed difference confirms why the contract is same-environment repeatability, not cross-platform bitwise identity. Final NLL happened to match; no cross-platform guarantee follows.

@@ -44,3 +44,10 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Fresh repeat, checkpoint reload and interrupted resume match bitwise within the tested macOS arm64 environment. G0 engineering gate accepted by the authorized reviewer; Astra validation NOT PERFORMED. Linux CI awaits execution. No memory architecture has yet been tested.
 - Human approved pinned WikiText-2 local pilot use (ADR-0004). ADR-0005 preregisters six variants × three seeds, exact data/lookup rules, token/resource budgets and screening thresholds before pilot outcomes. A failed screen will stop promotion of that configuration, not establish universal disproof.
 - Human additionally requested each checkpoint/check be pushed to GitHub for tracking; completed verification bundles and subsequent experiment outcomes will be versioned and pushed on the work branch. Merge/publication approval remains separate.
+
+### Linux CI and data-acquisition checkpoints
+
+- E0 implementation/evidence pushed as `677ef8e`; draft PR #1 tracks this work. GitHub Actions run `43351992585` passed Linux lint/typecheck, 31 tests and 11 smoke gates. Logs/status and compact CI evidence are preserved under `results/e0-2026-11-12/linux-ci-43351992585/`; full CI artifacts were downloaded locally before expiry.
+- Luna acquired approved pinned train/validation files plus the upstream README, 7,025,216 bytes transferred. Both corpus SHA-256 values match ADR-0004; test data was neither acquired nor inspected. Root reran the downloader's 9 mocked tests, Ruff and mypy successfully.
+- Root review caught an idempotency bug accepting a manifest when a data file was missing; Luna corrected it and added regression coverage before the acquisition checkpoint was accepted. Failed acquisition attempts now retain status/error history.
+- The publisher README has conflicting license metadata (front matter 3.0/GFDL, body 4.0); both are preserved without choosing legal precedence. Exact-byte local-use approval remains recorded; release rights are unresolved. No pilot model has been trained at this checkpoint.

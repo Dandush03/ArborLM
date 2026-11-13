@@ -1,0 +1,301 @@
+e0	Set up job	﻿2026-11-13T02:24:55.2351161Z Current runner version: '2.338.2'
+e0	Set up job	2026-11-13T02:24:55.2381660Z ##[group]Runner Image Provisioner
+e0	Set up job	2026-11-13T02:24:55.2382633Z Hosted Compute Agent
+e0	Set up job	2026-11-13T02:24:55.2383253Z Version: 20261103.629
+e0	Set up job	2026-11-13T02:24:55.2383907Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+e0	Set up job	2026-11-13T02:24:55.2384695Z Build Date: 2026-11-03T17:26:59Z
+e0	Set up job	2026-11-13T02:24:55.2385424Z Worker ID: {6616cbbc-838b-4650-bef2-729098059270}
+e0	Set up job	2026-11-13T02:24:55.2386125Z Region: eastus2
+e0	Set up job	2026-11-13T02:24:55.2386748Z Cloud: Azure
+e0	Set up job	2026-11-13T02:24:55.2387294Z ##[endgroup]
+e0	Set up job	2026-11-13T02:24:55.2389838Z ##[group]Operating System
+e0	Set up job	2026-11-13T02:24:55.2390575Z Ubuntu
+e0	Set up job	2026-11-13T02:24:55.2391087Z 24.04.5
+e0	Set up job	2026-11-13T02:24:55.2391694Z LTS
+e0	Set up job	2026-11-13T02:24:55.2392225Z ##[endgroup]
+e0	Set up job	2026-11-13T02:24:55.2392825Z ##[group]Runner Image
+e0	Set up job	2026-11-13T02:24:55.2393487Z Image: ubuntu-24.04
+e0	Set up job	2026-11-13T02:24:55.2394067Z Version: 20261111.370.1
+e0	Set up job	2026-11-13T02:24:55.2395212Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md
+e0	Set up job	2026-11-13T02:24:55.2397040Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370
+e0	Set up job	2026-11-13T02:24:55.2398603Z ##[endgroup]
+e0	Set up job	2026-11-13T02:24:55.2399904Z ##[group]GITHUB_TOKEN Permissions
+e0	Set up job	2026-11-13T02:24:55.2402297Z Contents: read
+e0	Set up job	2026-11-13T02:24:55.2402944Z Metadata: read
+e0	Set up job	2026-11-13T02:24:55.2403676Z ##[endgroup]
+e0	Set up job	2026-11-13T02:24:55.2406215Z Secret source: Actions
+e0	Set up job	2026-11-13T02:24:55.2407283Z Cache mode: write
+e0	Set up job	2026-11-13T02:24:55.2408617Z Prepare workflow directory
+e0	Set up job	2026-11-13T02:24:55.2772584Z Prepare all required actions
+e0	Set up job	2026-11-13T02:24:55.2824851Z Getting action download info
+e0	Set up job	2026-11-13T02:24:55.5437559Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+e0	Set up job	2026-11-13T02:24:55.6933832Z Download action repository 'astral-sh/setup-uv@v6' (SHA:d0cc045d04ccac9d8b7881df0226f9e82c39688e)
+e0	Set up job	2026-11-13T02:24:55.9881865Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+e0	Set up job	2026-11-13T02:24:56.2126446Z Complete job name: e0
+e0	Run actions/checkout@v4	﻿2026-11-13T02:24:56.3139992Z ##[group]Run actions/checkout@v4
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3141313Z with:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3141969Z   repository: Dandush03/ArborLM
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3149666Z   token: ***
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3150400Z   ssh-strict: true
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3151252Z   ssh-user: git
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3151967Z   persist-credentials: true
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3152767Z   clean: true
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3153501Z   sparse-checkout-cone-mode: true
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3154274Z   fetch-depth: 1
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3154972Z   fetch-tags: false
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3155698Z   show-progress: true
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3156428Z   lfs: false
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3157089Z   submodules: false
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3158039Z   set-safe-directory: true
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3158912Z   allow-unsafe-pr-checkout: false
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.3160254Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7422008Z Syncing repository: Dandush03/ArborLM
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7425413Z ##[group]Getting Git version info
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7426605Z Working directory is '/home/runner/work/ArborLM/ArborLM'
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7428864Z [command]/usr/bin/git version
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7512439Z git version 2.56.1
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7549867Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7569343Z Temporarily overriding HOME='/home/runner/work/_temp/54b951f7-31e1-4649-a2bc-cd97a99fab39' before making global git config changes
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7571992Z Adding repository directory to the temporary git global config as a safe directory
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7574000Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ArborLM/ArborLM
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7642957Z Deleting the contents of '/home/runner/work/ArborLM/ArborLM'
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7651109Z ##[group]Initializing the repository
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7657131Z [command]/usr/bin/git init /home/runner/work/ArborLM/ArborLM
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7780169Z hint: Using 'master' as the name for the initial branch. This default branch name
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7782632Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7784223Z hint: to use in all of your new repositories, which will suppress this warning,
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7785841Z hint: call:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7786657Z hint:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7787593Z hint: 	git config --global init.defaultBranch <name>
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7789035Z hint:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7789778Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7790844Z hint: 'development'. The just-created branch can be renamed via this command:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7792334Z hint:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7793254Z hint: 	git branch -m <name>
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7794091Z hint:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7794948Z hint: Disable this message with "git config set advice.defaultBranchName false"
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7796149Z Initialized empty Git repository in /home/runner/work/ArborLM/ArborLM/.git/
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7803509Z [command]/usr/bin/git remote add origin https://github.com/Dandush03/ArborLM
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7869206Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7870527Z ##[group]Disabling automatic garbage collection
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7873718Z [command]/usr/bin/git config --local gc.auto 0
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7917609Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7919511Z ##[group]Setting up auth
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7929038Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.7981931Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.8496729Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.8549698Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.8823420Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.8879094Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.9156676Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.9218942Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.9220272Z ##[group]Fetching the repository
+e0	Run actions/checkout@v4	2026-11-13T02:24:56.9232463Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2767d19a513ba89625fd38d5353f40fbd4eda7c6:refs/remotes/pull/1/merge
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1869160Z From https://github.com/Dandush03/ArborLM
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1871468Z  * [new ref]         2767d19a513ba89625fd38d5353f40fbd4eda7c6 -> pull/1/merge
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1876033Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1878063Z ##[group]Determining the checkout info
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1879923Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1885684Z [command]/usr/bin/git sparse-checkout disable
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.1977964Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2026980Z ##[group]Checking out the ref
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2032405Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/1/merge
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2174149Z Note: switching to 'refs/remotes/pull/1/merge'.
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2175471Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2176237Z You are in 'detached HEAD' state. You can look around, make experimental
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2178301Z changes and commit them, and you can discard any commits you make in this
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2180092Z state without impacting any branches by switching back to a branch.
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2181161Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2181884Z If you want to create a new branch to retain commits you create, you may
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2183625Z do so (now or later) by using -c with the switch command. Example:
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2185583Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2186120Z   git switch -c <new-branch-name>
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2186896Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2187384Z Or undo this operation with:
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2188418Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2188854Z   git switch -
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2189447Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2190747Z Turn off this advice by setting config variable advice.detachedHead to false
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2192125Z 
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2193699Z HEAD is now at 2767d19 Merge 677ef8e4ad2f3be73af195a1bd04aa056a65bc1d into 815f52821ed835819bda4563f0b2c0b73b420685
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2198973Z ##[endgroup]
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2247176Z [command]/usr/bin/git log -1 --format=%H
+e0	Run actions/checkout@v4	2026-11-13T02:24:57.2289101Z 2767d19a513ba89625fd38d5353f40fbd4eda7c6
+e0	Run astral-sh/setup-uv@v6	﻿2026-11-13T02:24:57.2891494Z ##[group]Run astral-sh/setup-uv@v6
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2892678Z with:
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2893443Z   version: 0.12.15
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2894340Z   activate-environment: false
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2895576Z   working-directory: /home/runner/work/ArborLM/ArborLM
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2897019Z   server-url: https://github.com
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2907953Z   github-token: ***
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2908879Z   enable-cache: auto
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2911270Z   cache-dependency-glob: **/*requirements*.txt
+e0	Run astral-sh/setup-uv@v6	**/*requirements*.in
+e0	Run astral-sh/setup-uv@v6	**/*constraints*.txt
+e0	Run astral-sh/setup-uv@v6	**/*constraints*.in
+e0	Run astral-sh/setup-uv@v6	**/pyproject.toml
+e0	Run astral-sh/setup-uv@v6	**/uv.lock
+e0	Run astral-sh/setup-uv@v6	**/*.py.lock
+e0	Run astral-sh/setup-uv@v6	
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2913940Z   restore-cache: true
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2914833Z   save-cache: true
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2915692Z   prune-cache: true
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2916615Z   ignore-nothing-to-cache: false
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2917941Z   ignore-empty-workdir: false
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2919059Z   add-problem-matchers: true
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.2920047Z ##[endgroup]
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.5124910Z (node:2307) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.5128976Z (Use `node --trace-deprecation ...` to show where the warning was created)
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.5292196Z manifest-file not provided, reading from local file.
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.5329619Z manifest-file does not contain version 0.12.15, arch x86_64, platform unknown-linux-gnu. Falling back to GitHub releases.
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.5335856Z Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.12.15/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:57.8395183Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/8b234e88-2429-4964-8164-29027e1f3cf0 -f /home/runner/work/_temp/f28f84bb-471c-45b8-9bc1-97d5229e1f5d
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2202717Z Added /home/runner/.local/bin to the path
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2207033Z Added /opt/hostedtoolcache/uv/0.12.15/x86_64 to the path
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2242747Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2243819Z Successfully installed uv version 0.12.15
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2247001Z Searching files using cache dependency glob: /home/runner/work/ArborLM/ArborLM/**/*requirements*.txt,/home/runner/work/ArborLM/ArborLM/**/*requirements*.in,/home/runner/work/ArborLM/ArborLM/**/*constraints*.txt,/home/runner/work/ArborLM/ArborLM/**/*constraints*.in,/home/runner/work/ArborLM/ArborLM/**/pyproject.toml,/home/runner/work/ArborLM/ArborLM/**/uv.lock,/home/runner/work/ArborLM/ArborLM/**/*.py.lock
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2840903Z /home/runner/work/ArborLM/ArborLM/pyproject.toml
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2988483Z /home/runner/work/ArborLM/ArborLM/uv.lock
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.2997328Z Found 2 files to hash.
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.4709201Z Trying to restore uv cache from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-unknown-pruned-d9b35394d835182cf5ce5f89bce8195a791a5684fd77520ad20262c78c896008
+e0	Run astral-sh/setup-uv@v6	2026-11-13T02:24:58.5285223Z No GitHub Actions cache found for key: setup-uv-1-x86_64-unknown-linux-gnu-unknown-pruned-d9b35394d835182cf5ce5f89bce8195a791a5684fd77520ad20262c78c896008
+e0	Install locked CPU dependencies	﻿2026-11-13T02:24:58.5490871Z ##[group]Run uv sync --locked
+e0	Install locked CPU dependencies	2026-11-13T02:24:58.5491488Z ^[[36;1muv sync --locked^[[0m
+e0	Install locked CPU dependencies	2026-11-13T02:24:58.5522494Z shell: /usr/bin/bash -e {0}
+e0	Install locked CPU dependencies	2026-11-13T02:24:58.5523291Z env:
+e0	Install locked CPU dependencies	2026-11-13T02:24:58.5523791Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+e0	Install locked CPU dependencies	2026-11-13T02:24:58.5524297Z ##[endgroup]
+e0	Install locked CPU dependencies	2026-11-13T02:24:58.6873188Z Downloading cpython-3.12.14-linux-x86_64-gnu (download) (32.6MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.5479432Z  Downloaded cpython-3.12.14-linux-x86_64-gnu (download)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.7175750Z Using CPython 3.12.14
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.7176162Z Creating virtual environment at: .venv
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.7211594Z Resolved 24 packages in 0.92ms
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.7297897Z    Building arborlm @ file:///home/runner/work/ArborLM/ArborLM
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.7603763Z Downloading torch (175.4MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.8214632Z Downloading mypy (12.1MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.8218629Z Downloading ruff (12.7MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.8231317Z Downloading pygments (1.2MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.8232478Z Downloading sympy (6.0MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:24:59.8234164Z Downloading networkx (2.0MiB)
+e0	Install locked CPU dependencies	2026-11-13T02:25:00.0039116Z  Downloaded pygments
+e0	Install locked CPU dependencies	2026-11-13T02:25:00.0524556Z  Downloaded networkx
+e0	Install locked CPU dependencies	2026-11-13T02:25:00.1647458Z  Downloaded sympy
+e0	Install locked CPU dependencies	2026-11-13T02:25:00.2339149Z  Downloaded ruff
+e0	Install locked CPU dependencies	2026-11-13T02:25:00.2775271Z  Downloaded mypy
+e0	Install locked CPU dependencies	2026-11-13T02:25:00.8924425Z       Built arborlm @ file:///home/runner/work/ArborLM/ArborLM
+e0	Install locked CPU dependencies	2026-11-13T02:25:01.9033594Z  Downloaded torch
+e0	Install locked CPU dependencies	2026-11-13T02:25:01.9034777Z Prepared 23 packages in 2.18s
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1502496Z Installed 23 packages in 246ms
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1503220Z  + arborlm==0.1.0 (from file:///home/runner/work/ArborLM/ArborLM)
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1503829Z  + filelock==4.2.10
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1504174Z  + fsspec==2026.9.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1504512Z  + hatchling==1.27.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1504861Z  + iniconfig==2.3.1
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1505196Z  + jinja2==3.1.6
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1505536Z  + markupsafe==3.0.4
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1505877Z  + mpmath==1.3.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1506430Z  + mypy==1.17.1
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1507039Z  + mypy-extensions==1.2.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1507499Z  + networkx==3.7
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1508335Z  + packaging==26.3
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1508686Z  + pathspec==1.1.1
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1509147Z  + pluggy==1.7.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1509665Z  + psutil==7.0.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1510140Z  + pygments==2.21.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1510632Z  + pytest==8.4.1
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1511059Z  + ruff==0.12.12
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1511616Z  + setuptools==84.2.1
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1512047Z  + sympy==1.14.0
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1512545Z  + torch==2.8.0+cpu
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1513135Z  + trove-classifiers==2026.9.21.13
+e0	Install locked CPU dependencies	2026-11-13T02:25:02.1513672Z  + typing-extensions==4.16.0
+e0	Lint, typecheck, and test	﻿2026-11-13T02:25:02.1701282Z ##[group]Run uv run --locked ruff check .
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1701668Z ^[[36;1muv run --locked ruff check .^[[0m
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1701963Z ^[[36;1muv run --locked mypy src/arborlm^[[0m
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1702247Z ^[[36;1muv run --locked pytest^[[0m
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1723951Z shell: /usr/bin/bash -e {0}
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1724209Z env:
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1724451Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.1724785Z ##[endgroup]
+e0	Lint, typecheck, and test	2026-11-13T02:25:02.2471494Z All checks passed!
+e0	Lint, typecheck, and test	2026-11-13T02:25:25.8278858Z Success: no issues found in 11 source files
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5736345Z ============================= test session starts ==============================
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5737298Z platform linux -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5738434Z rootdir: /home/runner/work/ArborLM/ArborLM
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5739085Z configfile: pyproject.toml
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5739680Z testpaths: tests
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5740195Z collected 31 items
+e0	Lint, typecheck, and test	2026-11-13T02:25:28.5740528Z 
+e0	Lint, typecheck, and test	2026-11-13T02:25:32.3147922Z tests/test_checkpoint.py ........                                        [ 25%]
+e0	Lint, typecheck, and test	2026-11-13T02:25:32.3553391Z tests/test_config_data.py ................                               [ 77%]
+e0	Lint, typecheck, and test	2026-11-13T02:25:32.3788506Z tests/test_independent_contract.py ....                                  [ 90%]
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3660388Z tests/test_run_records.py ...                                            [100%]
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3661574Z 
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3662846Z =============================== warnings summary ===============================
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3663799Z .venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3666009Z   /home/runner/work/ArborLM/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3669282Z     cpu = _conversion_method_template(device=torch.device("cpu"))
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3669829Z 
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3670158Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+e0	Lint, typecheck, and test	2026-11-13T02:25:33.3670989Z ======================== 31 passed, 1 warning in 4.53s =========================
+e0	Run E0 smoke	﻿2026-11-13T02:25:33.8104448Z ##[group]Run uv run --locked python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+e0	Run E0 smoke	2026-11-13T02:25:33.8105285Z ^[[36;1muv run --locked python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments^[[0m
+e0	Run E0 smoke	2026-11-13T02:25:33.8125482Z shell: /usr/bin/bash -e {0}
+e0	Run E0 smoke	2026-11-13T02:25:33.8125734Z env:
+e0	Run E0 smoke	2026-11-13T02:25:33.8125972Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+e0	Run E0 smoke	2026-11-13T02:25:33.8126274Z ##[endgroup]
+e0	Run E0 smoke	2026-11-13T02:25:47.3116795Z Recorded E0 smoke: /home/runner/work/ArborLM/ArborLM/experiments/E0-20261113T022533891661Z-a47c3b2990424f72aa2226fd6139c994
+e0	Upload E0 artifacts	﻿2026-11-13T02:25:47.3354095Z ##[group]Run actions/upload-artifact@v4
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3354407Z with:
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3354600Z   name: e0-cpu-43351992585-1
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3354834Z   path: experiments/
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3355048Z   if-no-files-found: warn
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3355277Z   compression-level: 6
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3355491Z   overwrite: false
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3355698Z   include-hidden-files: false
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3355922Z env:
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3356142Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+e0	Upload E0 artifacts	2026-11-13T02:25:47.3356454Z ##[endgroup]
+e0	Upload E0 artifacts	2026-11-13T02:25:47.5094909Z (node:2518) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+e0	Upload E0 artifacts	2026-11-13T02:25:47.5095883Z (Use `node --trace-deprecation ...` to show where the warning was created)
+e0	Upload E0 artifacts	2026-11-13T02:25:47.5428547Z With the provided path, there will be 108 files uploaded
+e0	Upload E0 artifacts	2026-11-13T02:25:47.5432456Z Artifact name is valid!
+e0	Upload E0 artifacts	2026-11-13T02:25:47.5433254Z Root directory input is valid!
+e0	Upload E0 artifacts	2026-11-13T02:25:47.7538076Z Beginning upload of artifact content to blob storage
+e0	Upload E0 artifacts	2026-11-13T02:25:47.9821365Z (node:2518) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+e0	Upload E0 artifacts	2026-11-13T02:25:48.1114116Z Uploaded bytes 2099241
+e0	Upload E0 artifacts	2026-11-13T02:25:48.1305258Z Finished uploading artifact content to blob storage!
+e0	Upload E0 artifacts	2026-11-13T02:25:48.1306532Z SHA256 digest of uploaded artifact zip is a2702c6cc956938d3af7053732fda6ca4ddb08ebe9a7482068217f06945f691f
+e0	Upload E0 artifacts	2026-11-13T02:25:48.1308750Z Finalizing artifact upload
+e0	Upload E0 artifacts	2026-11-13T02:25:48.4588329Z Artifact e0-cpu-43351992585-1.zip successfully finalized. Artifact ID 14003853643
+e0	Upload E0 artifacts	2026-11-13T02:25:48.4589817Z Artifact e0-cpu-43351992585-1 has been successfully uploaded! Final size is 2099241 bytes. Artifact ID is 14003853643
+e0	Upload E0 artifacts	2026-11-13T02:25:48.4596315Z Artifact download URL: https://github.com/Dandush03/ArborLM/actions/runs/43351992585/artifacts/14003853643
+e0	Post Run astral-sh/setup-uv@v6	﻿2026-11-13T02:25:48.4821483Z Post job cleanup.
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.6112400Z Pruning cache...
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.6126754Z (node:2530) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.6128518Z (Use `node --trace-deprecation ...` to show where the warning was created)
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.6195097Z [command]/opt/hostedtoolcache/uv/0.12.15/x86_64/uv cache prune --ci
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.6312898Z Pruning cache at: /home/runner/work/_temp/setup-uv-cache
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.8659622Z Removed 16382 files (1.8MiB)
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.8690486Z Saving cache path: /home/runner/work/_temp/setup-uv-cache
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.8856961Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/ArborLM/ArborLM --files-from manifest.txt --use-compress-program zstdmt
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:48.9794083Z (node:2530) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:49.0079432Z Sent 92113 of 92113 (100.0%), 2.4 MBs/sec
+e0	Post Run astral-sh/setup-uv@v6	2026-11-13T02:25:49.1693175Z cache saved with the key: setup-uv-1-x86_64-unknown-linux-gnu-unknown-pruned-d9b35394d835182cf5ce5f89bce8195a791a5684fd77520ad20262c78c896008
+e0	Post Run actions/checkout@v4	﻿2026-11-13T02:25:49.1847371Z Post job cleanup.
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2754564Z [command]/usr/bin/git version
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2804385Z git version 2.56.1
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2847195Z Temporarily overriding HOME='/home/runner/work/_temp/2df65f31-4d70-47c4-b49d-b5a7a79e52c4' before making global git config changes
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2849316Z Adding repository directory to the temporary git global config as a safe directory
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2853499Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ArborLM/ArborLM
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2899120Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.2953336Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.3256761Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.3288001Z http.https://github.com/.extraheader
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.3300848Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.3341723Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.3629947Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+e0	Post Run actions/checkout@v4	2026-11-13T02:25:49.3676073Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+e0	Complete job	﻿2026-11-13T02:25:49.4090604Z Cleaning up orphan processes
+e0	Complete job	2026-11-13T02:25:49.4614462Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/upload-artifact@v4, astral-sh/setup-uv@v6. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
