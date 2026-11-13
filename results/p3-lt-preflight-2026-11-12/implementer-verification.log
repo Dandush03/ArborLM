@@ -1,0 +1,66 @@
++zsh:6> uv lock --check
+Resolved 25 packages in 2ms
++zsh:7> uv run --locked --extra pilot ruff check .
+All checks passed!
++zsh:8> uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 31 source files
++zsh:9> uv run --locked --extra pilot pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 89 items
+
+tests/test_checkpoint.py ........                                        [  8%]
+tests/test_config_data.py ................                               [ 26%]
+tests/test_diagnose_memory.py ........                                   [ 35%]
+tests/test_fetch_wikitext.py .........                                   [ 46%]
+tests/test_independent_contract.py ....                                  [ 50%]
+tests/test_p2.py .......                                                 [ 58%]
+tests/test_p2_independent_contract.py .....                              [ 64%]
+tests/test_p3.py .....                                                   [ 69%]
+tests/test_p3_independent_contract.py .....                              [ 75%]
+tests/test_pilot.py ...................                                  [ 96%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 89 passed, 1 warning in 29.48s ========================
++zsh:10> uv run --locked --extra pilot python -m arborlm.longer_training --help
+usage: longer_training.py [-h] [--config CONFIG] --data-dir DATA_DIR
+                          --output-root OUTPUT_ROOT
+                          [--parent-suite PARENT_SUITE]
+                          [--results-root RESULTS_ROOT]
+
+Run ADR-0008 bounded longer training
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --data-dir DATA_DIR
+  --output-root OUTPUT_ROOT
+  --parent-suite PARENT_SUITE
+  --results-root RESULTS_ROOT
++zsh:11> uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T033146241027Z-5fdc210cb927450a8ce42b65e9d96ec5
++zsh:12> uv run --locked --extra pilot python - experiments/review/p3-implementer.6YoHtK
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+parent hashes verified 36 P3 panel sha256 a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0 data manifest hash 846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a
+verified tensor shapes (4096, 65) (512, 65) (512, 65)
++zsh:35> git diff --check
++zsh:36> git status --short
+?? configs/p3_longer_training.toml
+?? src/arborlm/longer_training.py
+?? src/arborlm/p3_analysis.py
+?? src/arborlm/p3_checkpoint.py
+?? src/arborlm/p3_config.py
+?? src/arborlm/p3_data.py
+?? src/arborlm/p3_parent.py
+?? tests/test_p3.py
+?? tests/test_p3_independent_contract.py
