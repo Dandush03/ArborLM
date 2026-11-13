@@ -1,0 +1,133 @@
+{
+  "status": "PASS",
+  "method": "Independent raw Parquet ranking and actual P3 parent-byte audit; no ArborLM imports or model forwards",
+  "source_hashes": {
+    "train": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7",
+    "validation": "204929b7ff9d6184953f867dedb860e40aa69c078fc1e54b3baaa8fb28511c4c"
+  },
+  "candidate_counts": {
+    "train": {
+      "candidates": 156678,
+      "unique_before_exclusion": 156611,
+      "eligible": 156611
+    },
+    "validation": {
+      "candidates": 16425,
+      "unique_before_exclusion": 16422,
+      "eligible": 16407
+    }
+  },
+  "train_sha256": "1c3e7a3e02087392ae3db874935517c66e77f15d7a50c3285a8c5ba5d7fabd07",
+  "panels": [
+    {
+      "panel": "P1",
+      "ranks": [
+        0,
+        511
+      ],
+      "sha256": "2e6b71b9472abf50f9c4705f2f8f13a69465a9f1b8360119ce5882872b772200"
+    },
+    {
+      "panel": "P2",
+      "ranks": [
+        512,
+        1023
+      ],
+      "sha256": "8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2"
+    },
+    {
+      "panel": "P3",
+      "ranks": [
+        1024,
+        1535
+      ],
+      "sha256": "a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0"
+    },
+    {
+      "panel": "P4",
+      "ranks": [
+        1536,
+        2047
+      ],
+      "sha256": "4c6fb3f3a8f22d2e5b14c6703d3d8e02b40681482d5b93ba491e2df0583dc28f"
+    }
+  ],
+  "exact_panel_overlaps": 0,
+  "p4_selected_ids_match_luna": true,
+  "parents": [
+    {
+      "label": "b101-o301-control",
+      "run_id": "P3LT-20261113T033547481889Z-532feba5e95947729f48474732254f39",
+      "state_sha256": "c9bb26f29d7a0fd8d321152e034135eece5f7be7e26c1b679f82e44e9e48e7b4",
+      "index_sha256": "1cb55d00a80fc8320f5753f251ca0a4bcf9cbd772e8afed0416133714fc1c166",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b101-o302-control",
+      "run_id": "P3LT-20261113T033722111446Z-1ce91a198e744563b7da429d6ca8a38c",
+      "state_sha256": "5e38ee8a80c513db90b43a1ba95c602d7e4e62d3aeee3e1bffff78e49f8617d3",
+      "index_sha256": "9a628bda541f35df8b55739700b977539b4c8aaf592d55f27e50226a48ecbaad",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b101-o303-control",
+      "run_id": "P3LT-20261113T033856819267Z-09a5183c76cb476a82b37e01e6d735a4",
+      "state_sha256": "0463609f68693d05031745f311609e2010654eeb4081adc2e080b75335c07018",
+      "index_sha256": "1f89866013674dfd6eeca2e5aedbd01cc81701d0cffbb328f54e777b2e03fdde",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b102-o301-control",
+      "run_id": "P3LT-20261113T034031800763Z-d3c8365dd4ad4fd1b5c0ffd066763e32",
+      "state_sha256": "d01c4f37054a67897bb08db8c3fea6465a5b279fa85ccd05f3d0a35e1e17b790",
+      "index_sha256": "d3df7d053a92fd0798b5fcec0ef2056a1597c0ebc17a88f6ba30aac4f3cd141d",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b102-o302-control",
+      "run_id": "P3LT-20261113T034208073597Z-d657f5f9c98b4111b6284f3a93ea03ee",
+      "state_sha256": "7c0a97c0c781f5f50b86892c86630952f8ee6d97022e8f3a0243bccb268957ca",
+      "index_sha256": "634c240832cdc978080f7e90eb9c7d50097afab5b353f4047ec272e6032eb26f",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b102-o303-control",
+      "run_id": "P3LT-20261113T034340925138Z-70ead491673b49a6bbbe26c6990f6e6b",
+      "state_sha256": "86481b02b9e2fc8f11b6c811bbfb3c6fddcdc2bc288a7c37756290fa74223196",
+      "index_sha256": "e031d1a339677ff9dd72d4897e648b4786d9ac54756cef95d6adf5c33bbfc075",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b103-o301-control",
+      "run_id": "P3LT-20261113T034520678553Z-513ee6f3e20741b58773db8871c33639",
+      "state_sha256": "90c3f0e7c935556ee25b8b973cf109513eb326247ab1f6d541769b8ee44e2e3b",
+      "index_sha256": "1edf930c519c4288ad6e0ccd31cb97a72b1b5c18c7c957e6d29a90efc0002f52",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b103-o302-control",
+      "run_id": "P3LT-20261113T034705843686Z-842a0ace4baa4a63bdb2fad2fb14b3c9",
+      "state_sha256": "47c07ced2bba2a432c11e94002a859110e10e38d28ff8cdbfb81f3fa745e62c5",
+      "index_sha256": "239177e222da33842e0f8dd61504dea481694b932fe8ca582e29cf38ab4a5cec",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    },
+    {
+      "label": "b103-o303-control",
+      "run_id": "P3LT-20261113T034842434518Z-3d57e1854dda4f30833630d58028b093",
+      "state_sha256": "4ae8a81260ff110028d778d4323d35b647918ef489700fa1e886ca2ca3da6793",
+      "index_sha256": "6c8dadd31f6acfafcaeb260227134ff1fd2125506ed983c867e8594324d4f5d3",
+      "backbone_parameters": 27392,
+      "parent_step": 1024
+    }
+  ],
+  "model_evaluations": 0,
+  "training_updates": 0
+}
