@@ -1,0 +1,10 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/experiments/review/p4-root-restore-audit.py", line 34, in <module>
+    assert torch.equal(value.view(torch.uint8),raw['model'][name].view(torch.uint8))
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/utils/_device.py", line 103, in __torch_function__
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: self.dim() cannot be 0 to view Float as Byte (different element sizes)

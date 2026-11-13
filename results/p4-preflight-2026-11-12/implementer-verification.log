@@ -1,0 +1,53 @@
++zsh:3> uv lock --check
+Resolved 25 packages in 2ms
++zsh:4> uv run --locked --extra pilot ruff check .
+All checks passed!
++zsh:5> uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 38 source files
++zsh:6> uv run --locked --extra pilot pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 116 items
+
+tests/test_checkpoint.py ........                                        [  6%]
+tests/test_config_data.py ................                               [ 20%]
+tests/test_diagnose_memory.py ........                                   [ 27%]
+tests/test_fetch_wikitext.py .........                                   [ 35%]
+tests/test_independent_contract.py ....                                  [ 38%]
+tests/test_p2.py .......                                                 [ 44%]
+tests/test_p2_independent_contract.py .....                              [ 49%]
+tests/test_p3.py .....                                                   [ 53%]
+tests/test_p3_independent_contract.py ......                             [ 58%]
+tests/test_p4.py ........                                                [ 65%]
+tests/test_p4_independent_contract.py ..................                 [ 81%]
+tests/test_pilot.py ...................                                  [ 97%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 116 passed, 1 warning in 29.40s ========================
++zsh:7> uv run --locked --extra pilot python -m arborlm.frozen_capacity --help
+usage: frozen_capacity.py [-h] [--config CONFIG] --data-dir DATA_DIR
+                          --output-root OUTPUT_ROOT
+                          [--parent-suite PARENT_SUITE]
+                          [--results-root RESULTS_ROOT]
+
+Run ADR-0009 frozen-backbone capacity
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --data-dir DATA_DIR
+  --output-root OUTPUT_ROOT
+  --parent-suite PARENT_SUITE
+  --results-root RESULTS_ROOT
++zsh:8> uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T042925468139Z-b37a34341068462b8781b945ead74079
++zsh:9> git diff --check

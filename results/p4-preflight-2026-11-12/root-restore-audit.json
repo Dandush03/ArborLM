@@ -1,0 +1,710 @@
+{
+  "status": "PASS",
+  "model_forwards": 0,
+  "training_updates": 0,
+  "parents": [
+    {
+      "backbone": 101,
+      "order": 301,
+      "frozen_backbone_sha256": "cd756e09b2a199992b090f1f6152f15dd6361bf2f61fbf20d5927a14963457ce",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T033547481889Z-532feba5e95947729f48474732254f39",
+        "code_commit": "861c137a7fcccf27e3371ca2217fd7d956753ca9",
+        "checkpoint_state_sha256": "c9bb26f29d7a0fd8d321152e034135eece5f7be7e26c1b679f82e44e9e48e7b4",
+        "checkpoint_index_sha256": "1cb55d00a80fc8320f5753f251ca0a4bcf9cbd772e8afed0416133714fc1c166",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T033547481889Z-532feba5e95947729f48474732254f39/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 101,
+            "memory": 201,
+            "order": 301,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 101,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 301
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "71b7a663c98cd78f8c9337cadf048ca31962786f9ca0460082f8991be0c89045",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030108056037Z-34c80e6729fb473488f8b31669b78aa2/checkpoint-256",
+            "checkpoint_state_sha256": "1dc66105f5d23b9c6081190c768aa94239f039550fe865ec0af078a4975f812d",
+            "code_commit": "fd61cb7a69b8d29484cf8bef0170c1eb168da1fe",
+            "original_P2_panel_nll": 2.6018648110330105,
+            "record_hashes": {
+              "checkpoint-256/index.json": "71b7a663c98cd78f8c9337cadf048ca31962786f9ca0460082f8991be0c89045",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "87021f9e24e7f8cd6dbc9885caac028a43ab542881ae0b8acae6d1c5e6c95c62",
+              "order.json": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+              "result.json": "2fe62c4545761a1ae74de842fba9717fc9d1787d2f0f5a794b45df0058a9ff76",
+              "source.json": "7066da23441f0cae473bf5b0797a90e2d93ad0b42ea09fe0c7ae4f59adab6632"
+            },
+            "run_id": "P2-20261113T030108056037Z-34c80e6729fb473488f8b31669b78aa2",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "22525f9d0191b32299b6291d76342bea5524c33ea2822fba73a9745ab01db3d9",
+          "result.json": "ffddfdfa64091ab456fe1e1f42bdfa27adaab406bf3ff5b477f539f89debd3c2",
+          "source.json": "9b0a02f86b79d8c750d4ae5c249046e23686a96b111684f4f62de20a7850efd7",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "1cb55d00a80fc8320f5753f251ca0a4bcf9cbd772e8afed0416133714fc1c166",
+          "order.json": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+          "parent_provenance.json": "0371877ef789bd60c858e46d0592d07718d666d608c1ecbae78484c8fccb8c2b"
+        },
+        "original_P3_panel_nll": 2.3750187158584595,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 101,
+      "order": 302,
+      "frozen_backbone_sha256": "dbb9a485fb0ee9dfe2599efa5432788d92cab6f1d086e12a026482e7f60ae8bb",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T033722111446Z-1ce91a198e744563b7da429d6ca8a38c",
+        "code_commit": "a77cf1d57bef489c590adce3f26d3644a182ffac",
+        "checkpoint_state_sha256": "5e38ee8a80c513db90b43a1ba95c602d7e4e62d3aeee3e1bffff78e49f8617d3",
+        "checkpoint_index_sha256": "9a628bda541f35df8b55739700b977539b4c8aaf592d55f27e50226a48ecbaad",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T033722111446Z-1ce91a198e744563b7da429d6ca8a38c/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 101,
+            "memory": 201,
+            "order": 302,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 101,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 302
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "3856b41917e7839fefffbb763f663bfd9e5fe07f3b933127b2b784b5a20b531e",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030143753957Z-1119864bf81b4cadb6e8e5084699f439/checkpoint-256",
+            "checkpoint_state_sha256": "c1dabb6670c7a0a0e90dfdf6e8055dfd1dcbad8ec7d40c385e9162f1071ba241",
+            "code_commit": "be25536a6f7fd69c2b705f9e43479c2d23a905a8",
+            "original_P2_panel_nll": 2.5862216390669346,
+            "record_hashes": {
+              "checkpoint-256/index.json": "3856b41917e7839fefffbb763f663bfd9e5fe07f3b933127b2b784b5a20b531e",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "8d1b2a281eb5b30236d9cfdd1939104638552b22d3c26fcb15545ffad9f51112",
+              "order.json": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+              "result.json": "3020751c407566a20e995165311cf5ebed50edcdc3d4f55c8da80d10c2bb4f6b",
+              "source.json": "fb9289ddb433097c513377666804b417b00559e9a1d012ff7bae67d4092cb888"
+            },
+            "run_id": "P2-20261113T030143753957Z-1119864bf81b4cadb6e8e5084699f439",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "9702cf3d6c774d5e89da17f8bd3df769a694de00f0ff6558b7c3774de76a96bc",
+          "result.json": "55701f2f4c0440eb6afd6dc8596ef552c86277431f112f64ed61412095a5475b",
+          "source.json": "b53e8980e307dad69c31cfe828f909416482ddace32ba74dbe3fa7e685ef8ad1",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "9a628bda541f35df8b55739700b977539b4c8aaf592d55f27e50226a48ecbaad",
+          "order.json": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+          "parent_provenance.json": "59d60ed902ba59de43bfa24282392b18b675dc69195ee49b48a161d0b14c3c35"
+        },
+        "original_P3_panel_nll": 2.3829865902662277,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 101,
+      "order": 303,
+      "frozen_backbone_sha256": "0d25440764c31d0677da64a55ee226a3878f4fe8e309f8826e45ad0637eaea9b",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T033856819267Z-09a5183c76cb476a82b37e01e6d735a4",
+        "code_commit": "d60159fc2f32ea11b5270a5feb1a853106e502d9",
+        "checkpoint_state_sha256": "0463609f68693d05031745f311609e2010654eeb4081adc2e080b75335c07018",
+        "checkpoint_index_sha256": "1f89866013674dfd6eeca2e5aedbd01cc81701d0cffbb328f54e777b2e03fdde",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T033856819267Z-09a5183c76cb476a82b37e01e6d735a4/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 101,
+            "memory": 201,
+            "order": 303,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 101,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 303
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "d933b1efe0ee51fdcd9f1ad92e417b3d8e1179833babc317232ba1253c9bb24b",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030219732874Z-b413a3378c104d359ecaf4532eeb2c68/checkpoint-256",
+            "checkpoint_state_sha256": "ce89ebbab325d246fdde1ddb23556e512dc396b0adb953a8495ee955a20d09d6",
+            "code_commit": "49694795da37be7a58d6a2f210505ed035e58d3c",
+            "original_P2_panel_nll": 2.552137453109026,
+            "record_hashes": {
+              "checkpoint-256/index.json": "d933b1efe0ee51fdcd9f1ad92e417b3d8e1179833babc317232ba1253c9bb24b",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "5fb618277832875ae8f5d2f73e18b9b3755b72a1b686810b1b97f800a22605fc",
+              "order.json": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+              "result.json": "fc26e5437d34a3fb6663eb2164d170a53f6ef8cb3747e1b47b9872d5d9ed047d",
+              "source.json": "e9a5d6ecb311ef4975bf9d86868bf37566bda8fdefe58ab9dfb545fc735cd85d"
+            },
+            "run_id": "P2-20261113T030219732874Z-b413a3378c104d359ecaf4532eeb2c68",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "8a09531c9aa42961fb478aebbf7461f7f5b4b2b6666778675d5f936f39939e02",
+          "result.json": "fa61972f04162673e233a2499ced3b4e021392f55db98a1b88ab2485c6581f6c",
+          "source.json": "64a8fd0956509a46fe7ed898d5ef65831ed5f1f7a6f248c42fff5097efb248e6",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "1f89866013674dfd6eeca2e5aedbd01cc81701d0cffbb328f54e777b2e03fdde",
+          "order.json": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+          "parent_provenance.json": "a65a17bc28db67bf65d940d36c836f6891872cdbcb7121c5acb7f9aaf9b18c3b"
+        },
+        "original_P3_panel_nll": 2.3766306415200233,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 102,
+      "order": 301,
+      "frozen_backbone_sha256": "09a14ea0b21d0f7dabbae0c6c9e22fe1c53f5e248e53a019d1f9d6cb387d71ed",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T034031800763Z-d3c8365dd4ad4fd1b5c0ffd066763e32",
+        "code_commit": "35bf8eaca3110cf82b6f54f69a6c25ec8ca65a60",
+        "checkpoint_state_sha256": "d01c4f37054a67897bb08db8c3fea6465a5b279fa85ccd05f3d0a35e1e17b790",
+        "checkpoint_index_sha256": "d3df7d053a92fd0798b5fcec0ef2056a1597c0ebc17a88f6ba30aac4f3cd141d",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T034031800763Z-d3c8365dd4ad4fd1b5c0ffd066763e32/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 102,
+            "memory": 201,
+            "order": 301,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 102,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 301
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "20184a0e194428561c5d4b384ecc81b129b7348e622c0443598b2f8442709dcb",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030255252452Z-37d1e25f0f1b40f1990fc7e1f714a411/checkpoint-256",
+            "checkpoint_state_sha256": "3418acc8d683c8cb19b8a4f16e9bd5b2fb420aab4bcf05d423879777cd772cbe",
+            "code_commit": "63f180a11dd04dbc8c471af0160f6d3421cdbfd5",
+            "original_P2_panel_nll": 2.5824475586414337,
+            "record_hashes": {
+              "checkpoint-256/index.json": "20184a0e194428561c5d4b384ecc81b129b7348e622c0443598b2f8442709dcb",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "a8e166232922f43cb958d9779bb16c880e0fd5d94e1752f97a5de1482a007927",
+              "order.json": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+              "result.json": "01b0cbe0af398dcf898cc0089c8160042001aa3dbb4c15e3c43da1594bcfa219",
+              "source.json": "712b5d92c58f51d8e107f3db63c4f84a6726814754497d6092b8986577fd838d"
+            },
+            "run_id": "P2-20261113T030255252452Z-37d1e25f0f1b40f1990fc7e1f714a411",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "a78b72f6d0e0b1aafdad873ca0891f1e8e25c1f1cdd69a36d5528241d85f1828",
+          "result.json": "6bbbc8dc823ee35d2a9e5f195372ee838da8c9fba04092bad35b396c0739f172",
+          "source.json": "3c0775593753c7778e372a14f6956338e1331c108dcaa96b3b336d7e22c55749",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "d3df7d053a92fd0798b5fcec0ef2056a1597c0ebc17a88f6ba30aac4f3cd141d",
+          "order.json": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+          "parent_provenance.json": "b06ecb1ffa0f7bbf17a90d2a387c429dffdb2a39777c62c2cebca8e35839e2fe"
+        },
+        "original_P3_panel_nll": 2.381383366882801,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 102,
+      "order": 302,
+      "frozen_backbone_sha256": "4e3c272f4a7f0d239a61272c2debf188e46bcadfa6f22e6d8448a2a4bce37171",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T034208073597Z-d657f5f9c98b4111b6284f3a93ea03ee",
+        "code_commit": "cb569bfc038f8df6e49376db35694e1c1efd7be6",
+        "checkpoint_state_sha256": "7c0a97c0c781f5f50b86892c86630952f8ee6d97022e8f3a0243bccb268957ca",
+        "checkpoint_index_sha256": "634c240832cdc978080f7e90eb9c7d50097afab5b353f4047ec272e6032eb26f",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T034208073597Z-d657f5f9c98b4111b6284f3a93ea03ee/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 102,
+            "memory": 201,
+            "order": 302,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 102,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 302
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "d0a415e4c1c92a0d269694602b9c6fec031feb3e8c721a88cedbe75ef3ea78e0",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030330756735Z-b9cf41b3f784432fbb8fc756f7a0b9f5/checkpoint-256",
+            "checkpoint_state_sha256": "3076c3676b3a9b42f277e15553792ca77bf6045bae9987c9bc1ad19cf0bad165",
+            "code_commit": "aa2bbb5e0a1a89c6231196c6809dac3527d7a97b",
+            "original_P2_panel_nll": 2.599185448139906,
+            "record_hashes": {
+              "checkpoint-256/index.json": "d0a415e4c1c92a0d269694602b9c6fec031feb3e8c721a88cedbe75ef3ea78e0",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "14775d7152cb7c271c183c4781817feeb3318610ecc04e4fd83e661cb324eb4b",
+              "order.json": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+              "result.json": "33a67fd209b9334c165c8472b8a42b5fb3c3bebc0a864d296959f335d0849847",
+              "source.json": "66b52156a65912d1aaa52aebb48ddf986669806bae1d0ce9bb2be42c2af207b1"
+            },
+            "run_id": "P2-20261113T030330756735Z-b9cf41b3f784432fbb8fc756f7a0b9f5",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "cc8f9de36b793e6ef533a337780ad09ca759ff2b7b78954949859c009c1e4dc8",
+          "result.json": "60df7b4483fb958815944ebb613e311fb670c4c665eb414dd14a91149eeb03bb",
+          "source.json": "f5eaf3f103733dfb239a7bf3e6944a5c2e69017ced6115c0ffb2ccd9eff4a768",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "634c240832cdc978080f7e90eb9c7d50097afab5b353f4047ec272e6032eb26f",
+          "order.json": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+          "parent_provenance.json": "1aeea04f0942573fdb006a427cc725384b9d00293842b58279d5cb750d1ac195"
+        },
+        "original_P3_panel_nll": 2.3968050703406334,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 102,
+      "order": 303,
+      "frozen_backbone_sha256": "8beb9e4bd67cd9a31471feba5de7edea8ab4e37fe9e67383f724252a1016e8d7",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T034340925138Z-70ead491673b49a6bbbe26c6990f6e6b",
+        "code_commit": "be43a9d3e3dc50b395e0774adc2bfda3c775d0d0",
+        "checkpoint_state_sha256": "86481b02b9e2fc8f11b6c811bbfb3c6fddcdc2bc288a7c37756290fa74223196",
+        "checkpoint_index_sha256": "e031d1a339677ff9dd72d4897e648b4786d9ac54756cef95d6adf5c33bbfc075",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T034340925138Z-70ead491673b49a6bbbe26c6990f6e6b/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 102,
+            "memory": 201,
+            "order": 303,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 102,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 303
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "9f9d7d8f90554549c09bff75d6609c232daa63fbf421212d9dd32a95e4406358",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030406283955Z-8d2512ea2ac548d2a9b28c3069d4ea89/checkpoint-256",
+            "checkpoint_state_sha256": "cb5e9b36a891c257abf0bc056d0cc0e7cd153223e71b2d1f6f073994da10d3f1",
+            "code_commit": "b057d403ac792549928121699caf47a5c9e32cc0",
+            "original_P2_panel_nll": 2.5945300683379173,
+            "record_hashes": {
+              "checkpoint-256/index.json": "9f9d7d8f90554549c09bff75d6609c232daa63fbf421212d9dd32a95e4406358",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "6bb7d95593bc2dc74d0aca717b93567c4178c3a530616867594da5b2ca27c07f",
+              "order.json": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+              "result.json": "5e26bbdb12268348a6099871cd327a2caa8512d602ff8891c595f9a2f7037fea",
+              "source.json": "f8058aded6a2dd1c757e57db7f638bbb295110dc4d50416a7fcc94683af0c6f6"
+            },
+            "run_id": "P2-20261113T030406283955Z-8d2512ea2ac548d2a9b28c3069d4ea89",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "e965ffc99bf05bd853ea617c1f21f7cc925184ed6ea06c13fce3f9d3364cd8c2",
+          "result.json": "414c650b0e8322686b3efe93cb966f9dc8f4aad5918be3d27e4e1835468fe8ee",
+          "source.json": "eb6e78b3809c3fc5c34d0af5b9f55c9ed93cf0375d5edfd8be621647488e0936",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "e031d1a339677ff9dd72d4897e648b4786d9ac54756cef95d6adf5c33bbfc075",
+          "order.json": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+          "parent_provenance.json": "0f9f61396bb125fdccf7e4cbee09d9c6473d671032c1f63d4dd2e6d4c9c6ecd9"
+        },
+        "original_P3_panel_nll": 2.3421153277158737,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 103,
+      "order": 301,
+      "frozen_backbone_sha256": "d695d7fbbb47ad13a2ca26330749b191c708ff189603c297d339bfabdc76ee52",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T034520678553Z-513ee6f3e20741b58773db8871c33639",
+        "code_commit": "be43a9d3e3dc50b395e0774adc2bfda3c775d0d0",
+        "checkpoint_state_sha256": "90c3f0e7c935556ee25b8b973cf109513eb326247ab1f6d541769b8ee44e2e3b",
+        "checkpoint_index_sha256": "1edf930c519c4288ad6e0ccd31cb97a72b1b5c18c7c957e6d29a90efc0002f52",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T034520678553Z-513ee6f3e20741b58773db8871c33639/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 103,
+            "memory": 201,
+            "order": 301,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 103,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 301
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "8c152113c8191ea308bb2bef636db071db689e4a1742578e939b26d4cd5af746",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030442028389Z-fba4aaaf4a3a45bc948f9b426633ef84/checkpoint-256",
+            "checkpoint_state_sha256": "91813ded2f390b9433280d0b12d492023cd4a71ea14ae759b0695f20a175f868",
+            "code_commit": "f3237afb064624ee81671f027e8eb08ffef37fee",
+            "original_P2_panel_nll": 2.5954553186893463,
+            "record_hashes": {
+              "checkpoint-256/index.json": "8c152113c8191ea308bb2bef636db071db689e4a1742578e939b26d4cd5af746",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "6c7a64088bee325c38bb39f149c8d86cf03e6b16f190c6c0668feb790399403d",
+              "order.json": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+              "result.json": "de6e48e765117bdf5b8f881fd44dc7976c3465ba061658d1e302bd1ca13575bc",
+              "source.json": "fa81b69a197f300617b978e2031db3f5158df30c8d2e341f88db36dc617d795d"
+            },
+            "run_id": "P2-20261113T030442028389Z-fba4aaaf4a3a45bc948f9b426633ef84",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "30a6e8d4ff930665642b981f83beab4e068eb247727bcd9e1305df00bfa43d04",
+          "result.json": "fad482e8068a03e5de1cd37abe54a880edf89aac9643eeb0516cde0a5b8bc70b",
+          "source.json": "eb6e78b3809c3fc5c34d0af5b9f55c9ed93cf0375d5edfd8be621647488e0936",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "1edf930c519c4288ad6e0ccd31cb97a72b1b5c18c7c957e6d29a90efc0002f52",
+          "order.json": "01c2abdae0b992eb8e113ef17a6967858896b90fce91f864b6f6c52e85c99269",
+          "parent_provenance.json": "fab5060bf49a751e514ae6ee300c01e1b292beefd1dd520d402d2b59456bfd8d"
+        },
+        "original_P3_panel_nll": 2.377186667174101,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 103,
+      "order": 302,
+      "frozen_backbone_sha256": "e4cc4f986e6fdaf019e522e6581be215dfe982380e96639dac087c87266621c6",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T034705843686Z-842a0ace4baa4a63bdb2fad2fb14b3c9",
+        "code_commit": "a8453ee0ffe38cb0f0e2cb9ebd947c6a7c63ee13",
+        "checkpoint_state_sha256": "47c07ced2bba2a432c11e94002a859110e10e38d28ff8cdbfb81f3fa745e62c5",
+        "checkpoint_index_sha256": "239177e222da33842e0f8dd61504dea481694b932fe8ca582e29cf38ab4a5cec",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T034705843686Z-842a0ace4baa4a63bdb2fad2fb14b3c9/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 103,
+            "memory": 201,
+            "order": 302,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 103,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 302
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "d941e4f6a3a7994ae6a3ab7cdf394e5c8cca5a81fe117ee7c591ae4b180636ab",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030517532166Z-7ca45773f4aa43048d4ce46a6c756767/checkpoint-256",
+            "checkpoint_state_sha256": "295b5fa5317b14fdbbcfd83ec1a7f630340716bd8c57b3ae6edc49871d43a014",
+            "code_commit": "2811aaebd19dfe65bba6663a65e2419fe9d579f3",
+            "original_P2_panel_nll": 2.6475546918809414,
+            "record_hashes": {
+              "checkpoint-256/index.json": "d941e4f6a3a7994ae6a3ab7cdf394e5c8cca5a81fe117ee7c591ae4b180636ab",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "014e8a3ce9423c152b74eecce4ce03746c787179c606051990c99b185088878a",
+              "order.json": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+              "result.json": "c6de5e1bb195ef0a5fb8da9d75ed97f8df003ee967da07da61bd7e96916bd096",
+              "source.json": "cb3ed95a7ad0281e61270aec2b90c7d01d77d158c98b0135586177e4047fed3b"
+            },
+            "run_id": "P2-20261113T030517532166Z-7ca45773f4aa43048d4ce46a6c756767",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "d5d0a2720d642249e6f2d34447991a362c862a13bb9b4e7a1bb1cac327076d3f",
+          "result.json": "526f7ddeefb54414b24d9350d15d09be585247024ed13f2c0d7ac4eabe202244",
+          "source.json": "ef1d04a27275fe0b431f227c139b7be177410fb69213e029ee7932c115afb815",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "239177e222da33842e0f8dd61504dea481694b932fe8ca582e29cf38ab4a5cec",
+          "order.json": "ae4f66641cced8690f23edf9ca276493da29af0f07429f6a55903f00e6b5bfe2",
+          "parent_provenance.json": "aa681d44ecbf3d3f05b5197c26253158c15ac64ad2997662b858ebb252f517e4"
+        },
+        "original_P3_panel_nll": 2.3421796821057796,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    },
+    {
+      "backbone": 103,
+      "order": 303,
+      "frozen_backbone_sha256": "0033a68ef0fe17e3e0112e3cdebb0d73889b3793816e3950b76bf42992f190db",
+      "parent": {
+        "suite_id": "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d",
+        "run_id": "P3LT-20261113T034842434518Z-3d57e1854dda4f30833630d58028b093",
+        "code_commit": "938e641731749e576e2a00b5682b390bdffe9848",
+        "checkpoint_state_sha256": "4ae8a81260ff110028d778d4323d35b647918ef489700fa1e886ca2ca3da6793",
+        "checkpoint_index_sha256": "6c8dadd31f6acfafcaeb260227134ff1fd2125506ed983c867e8594324d4f5d3",
+        "source_archive_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+        "checkpoint_path": "experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells/P3LT-20261113T034842434518Z-3d57e1854dda4f30833630d58028b093/checkpoint-1024",
+        "checkpoint_identity": {
+          "source_sha256": "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0",
+          "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+          "spec_sha256": "f5a06dfbda9ee22862bc0f4cb087ad1001328e4cc43ec92e53135f5c7b01f4ac",
+          "config_sha256": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "parent_spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa",
+          "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+          "dataset_manifest_sha256": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "cell": {
+            "backbone": 103,
+            "memory": 201,
+            "order": 303,
+            "condition": "disabled_throughout"
+          },
+          "order_sha256": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+          "parent": {
+            "checkpoint_identity": {
+              "cell": {
+                "backbone": 103,
+                "condition": "disabled_throughout",
+                "memory": 201,
+                "order": 303
+              },
+              "config_sha256": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "data_approval_sha256": "193cb3a68fda9739e5fcc1f3ffb7bd6573e0d0b43e26d1232ad7a67aa8b4ca3c",
+              "dataset_manifest_sha256": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+              "order_sha256": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+              "parent_spec_sha256": "6098527bac32a0d6dc835e55a6c719c2f52be30c8d2c6eab67ef1f23f2e26f82",
+              "source_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+              "spec_sha256": "7da8f2fda8eeffb7642682269821bc13c61af185c97fc302ddeb806303bcecaa"
+            },
+            "checkpoint_index_sha256": "26b79e0e51f1d157690b61898d6087f19ae3c714cc590113931547f5bcc1c87c",
+            "checkpoint_path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7/cells/P2-20261113T030552980489Z-cc3d6881a2424e31ae2f34f2fa2f518a/checkpoint-256",
+            "checkpoint_state_sha256": "0ca145faf025f7aa6dbbd7e93008843f06f6c952830caa359170360fff6b58e9",
+            "code_commit": "1370500e68f61488f7afb5150e6146582ae9f3dd",
+            "original_P2_panel_nll": 2.5791194327175617,
+            "record_hashes": {
+              "checkpoint-256/index.json": "26b79e0e51f1d157690b61898d6087f19ae3c714cc590113931547f5bcc1c87c",
+              "config.resolved.json": "a4e9c57738fd005fcf85916d264423d6e6e8a3da73dfde803551da286b3dc83c",
+              "dataset_manifest.json": "fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a",
+              "manifest.json": "8b6d45f528424165276d64fb15c5706be4c5d9551e9db97a9df3ef1bf6f59a96",
+              "order.json": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+              "result.json": "bcbcd4e5adaf9dd2cbde46784e0472ebb05ebc420273083eed4194835543a589",
+              "source.json": "6d3bb50cab2afc3abc2a4fe6c61cedf6f6c02c03bfef8ee139ec1b4322f1e510"
+            },
+            "run_id": "P2-20261113T030552980489Z-cc3d6881a2424e31ae2f34f2fa2f518a",
+            "source_archive_sha256": "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801",
+            "suite_id": "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+          }
+        },
+        "record_hashes": {
+          "manifest.json": "eb89652143473232de3228ab9a134106c6c82035f1cddc09ee3ddadd69e6edf6",
+          "result.json": "46c22b974f88394fed3003f763c00284953b52a30a6b0578109a384cfc6c83bd",
+          "source.json": "385291f982189d5df9fd075657ece79f15af1194636a168c626e9608f7117463",
+          "config.resolved.json": "0715423da37666b0b77f712f1946c273bfebeff0a5f2f9dbc9929ddc95cc8881",
+          "dataset_manifest.json": "846910aada3e36bbcbaf7331712d23c79cd2cbf4e63bb28906e7989fe33c9f6a",
+          "checkpoint-1024/index.json": "6c8dadd31f6acfafcaeb260227134ff1fd2125506ed983c867e8594324d4f5d3",
+          "order.json": "b3186b7646d4cdfaf07bf365388802c6ffb596ecb81b73d4787239ea4805f183",
+          "parent_provenance.json": "f49e45bff121e3d750ac9783c30fe0809ba576c261d6db46394f5dfce149f178"
+        },
+        "original_P3_panel_nll": 2.3960036486387253,
+        "historical_steps": 1024,
+        "historical_targets": 524288
+      }
+    }
+  ],
+  "new_panel_sha256": "4c6fb3f3a8f22d2e5b14c6703d3d8e02b40681482d5b93ba491e2df0583dc28f"
+}
