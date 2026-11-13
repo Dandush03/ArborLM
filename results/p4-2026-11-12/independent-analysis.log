@@ -1,0 +1,143 @@
+{
+  "event_counts": {
+    "train": 27648,
+    "initial": 54,
+    "final": 63,
+    "interventions": 171,
+    "old_panel": 9,
+    "checkpoints": 171
+  },
+  "baseline_nll": {
+    "mean": 2.378856372916036,
+    "sample_sd": 0.019084546446306746,
+    "minimum": 2.34395869076252,
+    "maximum": 2.404341820627451,
+    "positive": 9,
+    "negative": 0,
+    "zero": 0
+  },
+  "nll": {
+    "memory": {
+      "initial": {
+        "mean": 2.378856565665316,
+        "sample_sd": 0.018336268354395655,
+        "minimum": 2.343958143144846,
+        "maximum": 2.404345590621233,
+        "positive": 27,
+        "negative": 0,
+        "zero": 0
+      },
+      "final": {
+        "mean": 2.3568676783254854,
+        "sample_sd": 0.018494670165676266,
+        "minimum": 2.3218515254557133,
+        "maximum": 2.3779576271772385,
+        "positive": 27,
+        "negative": 0,
+        "zero": 0
+      },
+      "final_minus_initial": {
+        "mean": -0.0219888873398304,
+        "sample_sd": 0.0054633861291206445,
+        "minimum": -0.030318453907966614,
+        "maximum": -0.012240216135978699,
+        "positive": 0,
+        "negative": 27,
+        "zero": 0
+      }
+    },
+    "dense": {
+      "initial": {
+        "mean": 2.378920872868211,
+        "sample_sd": 0.018365888813382653,
+        "minimum": 2.3439260944724083,
+        "maximum": 2.4047969467937946,
+        "positive": 27,
+        "negative": 0,
+        "zero": 0
+      },
+      "final": {
+        "mean": 2.3506850405699677,
+        "sample_sd": 0.019538700858949,
+        "minimum": 2.316959623247385,
+        "maximum": 2.374204780906439,
+        "positive": 27,
+        "negative": 0,
+        "zero": 0
+      },
+      "final_minus_initial": {
+        "mean": -0.028235832298243488,
+        "sample_sd": 0.005852960495569971,
+        "minimum": -0.03759932145476341,
+        "maximum": -0.0192449651658535,
+        "positive": 0,
+        "negative": 27,
+        "zero": 0
+      }
+    }
+  },
+  "summary": {
+    "C": {
+      "mean": 0.021988694590550882,
+      "sample_sd": 0.005463392125778907,
+      "minimum": 0.012238811701536179,
+      "maximum": 0.030320093035697937,
+      "positive": 27,
+      "negative": 0,
+      "zero": 0
+    },
+    "D": {
+      "mean": 0.021988694590550882,
+      "sample_sd": 0.005463392125778907,
+      "minimum": 0.012238811701536179,
+      "maximum": 0.030320093035697937,
+      "positive": 27,
+      "negative": 0,
+      "zero": 0
+    },
+    "P": {
+      "mean": 0.022221518611466443,
+      "sample_sd": 0.005334218655965052,
+      "minimum": 0.012295875698328018,
+      "maximum": 0.030177220702171326,
+      "positive": 27,
+      "negative": 0,
+      "zero": 0
+    },
+    "C_dense": {
+      "mean": 0.028171332346068487,
+      "sample_sd": 0.0058930310665189205,
+      "minimum": 0.019236113876104355,
+      "maximum": 0.03750229254364967,
+      "positive": 27,
+      "negative": 0,
+      "zero": 0
+    },
+    "Q": {
+      "mean": -0.006182637755517606,
+      "sample_sd": 0.0025037675404897433,
+      "minimum": -0.013191983103752136,
+      "maximum": -0.0027790218591690063,
+      "positive": 0,
+      "negative": 27,
+      "zero": 0
+    }
+  },
+  "counts": {
+    "C_positive_cells": 27,
+    "C_and_P_positive_cells": 27,
+    "Q_tolerance_cells": 10,
+    "Q_positive_cells": 0,
+    "C_positive_parents": 9,
+    "P_positive_parents": 9,
+    "Q_tolerance_parents": 2,
+    "Q_positive_parents": 0
+  },
+  "flags": {
+    "added_predictive_capacity": true,
+    "useful_slot_association_dependence": true,
+    "within_dense_quality_tolerance": false,
+    "secondary_memory_advantage": false
+  },
+  "composite_success": false
+}

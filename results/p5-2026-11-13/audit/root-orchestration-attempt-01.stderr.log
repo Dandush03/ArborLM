@@ -1,0 +1,61 @@
+usage: git diff-tree [--stdin] [-m] [-s] [-v] [--no-commit-id] [--pretty]
+              [-t] [-r] [-c | --cc] [--combined-all-paths] [--root] [--merge-base]
+              [<common-diff-options>] <tree-ish> [<tree-ish>] [<path>...]
+
+  -r            diff recursively
+  -c            show combined diff for merge commits
+  --cc          show combined diff for merge commits removing uninteresting hunks
+  --combined-all-paths
+                show name of file in all parents for combined diffs
+  --root        include the initial commit as diff against /dev/null
+
+common diff options:
+  -z            output diff-raw with lines terminated with NUL.
+  -p            output patch format.
+  -u            synonym for -p.
+  --patch-with-raw
+                output both a patch and the diff-raw format.
+  --stat        show diffstat instead of patch.
+  --numstat     show numeric diffstat instead of patch.
+  --patch-with-stat
+                output a patch and prepend its diffstat.
+  --name-only   show only names of changed files.
+  --name-status show names and status of changed files.
+  --full-index  show full object name on index lines.
+  --abbrev=<n>  abbreviate object names in diff-tree header and diff-raw.
+  -R            swap input file pairs.
+  -B            detect complete rewrites.
+  -M            detect renames.
+  -C            detect copies.
+  --find-copies-harder
+                try unchanged files as candidate for copy detection.
+  -l<n>         limit rename attempts up to <n> paths.
+  -O<file>      reorder diffs according to the <file>.
+  -S<string>    find filepair whose only one side contains the string.
+  --pickaxe-all
+                show all files diff when -S is used and hit is found.
+  -a  --text    treat all files as text.
+
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/root-orchestration-audit.py", line 299, in <module>
+    main()
+    ~~~~^^
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/root-orchestration-audit.py", line 295, in main
+    print(json.dumps(audit(args), indent=2, sort_keys=True))
+                     ~~~~~^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/root-orchestration-audit.py", line 174, in audit
+    hashes = bind_bundle(bundle, quality_raw / "cells" / m["run_id"], row["commit"], ancestors)
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/root-orchestration-audit.py", line 58, in bind_bundle
+    changed = git("diff-tree", "--no-commit-id", "-rz", "--name-only", commit)
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/root-orchestration-audit.py", line 23, in git
+    return subprocess.check_output(["git", *args])
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 587, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 692, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command ['git', 'diff-tree', '--no-commit-id', '-rz', '--name-only', 'a9fe686040b9053d5df57600f8efbd617194da82'] returned non-zero exit status 129.

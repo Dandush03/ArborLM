@@ -1,0 +1,17 @@
+{"completed_step":0,"event":"evaluation","nll":2.7826549112796783,"nll_unit":"nats_per_target_token","perplexity":16.161872376760535,"perplexity_null_reason":null,"tokens":2048}
+{"completed_step":1,"event":"train_step","loss_unit":"nats_per_target_token","next_row":8,"pre_clip_gradient_norm":1.2702925205230713,"pre_update_loss":2.7965307235717773,"target_tokens_cumulative":256}
+{"completed_step":2,"event":"train_step","loss_unit":"nats_per_target_token","next_row":16,"pre_clip_gradient_norm":0.9334970712661743,"pre_update_loss":2.7903058528900146,"target_tokens_cumulative":512}
+{"completed_step":3,"event":"train_step","loss_unit":"nats_per_target_token","next_row":24,"pre_clip_gradient_norm":0.9882147908210754,"pre_update_loss":2.760836601257324,"target_tokens_cumulative":768}
+{"completed_step":4,"event":"train_step","loss_unit":"nats_per_target_token","next_row":32,"pre_clip_gradient_norm":0.8941019773483276,"pre_update_loss":2.769122362136841,"target_tokens_cumulative":1024}
+{"completed_step":5,"event":"train_step","loss_unit":"nats_per_target_token","next_row":40,"pre_clip_gradient_norm":0.8837361335754395,"pre_update_loss":2.782679557800293,"target_tokens_cumulative":1280}
+{"completed_step":6,"event":"train_step","loss_unit":"nats_per_target_token","next_row":48,"pre_clip_gradient_norm":0.7175953388214111,"pre_update_loss":2.755976438522339,"target_tokens_cumulative":1536}
+{"completed_step":7,"event":"train_step","loss_unit":"nats_per_target_token","next_row":56,"pre_clip_gradient_norm":0.8727776408195496,"pre_update_loss":2.809920310974121,"target_tokens_cumulative":1792}
+{"completed_step":8,"event":"train_step","loss_unit":"nats_per_target_token","next_row":64,"pre_clip_gradient_norm":0.8388512134552002,"pre_update_loss":2.7691049575805664,"target_tokens_cumulative":2048}
+{"completed_step":9,"event":"train_step","loss_unit":"nats_per_target_token","next_row":72,"pre_clip_gradient_norm":0.7760102152824402,"pre_update_loss":2.7788562774658203,"target_tokens_cumulative":2304}
+{"completed_step":10,"event":"train_step","loss_unit":"nats_per_target_token","next_row":80,"pre_clip_gradient_norm":0.9077915549278259,"pre_update_loss":2.7894716262817383,"target_tokens_cumulative":2560}
+{"completed_step":11,"event":"train_step","loss_unit":"nats_per_target_token","next_row":88,"pre_clip_gradient_norm":0.8797621130943298,"pre_update_loss":2.8101325035095215,"target_tokens_cumulative":2816}
+{"completed_step":12,"event":"train_step","loss_unit":"nats_per_target_token","next_row":96,"pre_clip_gradient_norm":0.6866295337677002,"pre_update_loss":2.765868663787842,"target_tokens_cumulative":3072}
+{"completed_step":13,"event":"train_step","loss_unit":"nats_per_target_token","next_row":104,"pre_clip_gradient_norm":0.8715161681175232,"pre_update_loss":2.772186756134033,"target_tokens_cumulative":3328}
+{"completed_step":14,"event":"train_step","loss_unit":"nats_per_target_token","next_row":112,"pre_clip_gradient_norm":0.8854602575302124,"pre_update_loss":2.731915235519409,"target_tokens_cumulative":3584}
+{"completed_step":15,"event":"train_step","loss_unit":"nats_per_target_token","next_row":120,"pre_clip_gradient_norm":0.7619053721427917,"pre_update_loss":2.747136354446411,"target_tokens_cumulative":3840}
+{"completed_step":16,"event":"train_step","loss_unit":"nats_per_target_token","next_row":128,"pre_clip_gradient_norm":1.489240050315857,"pre_update_loss":2.736396551132202,"target_tokens_cumulative":4096}

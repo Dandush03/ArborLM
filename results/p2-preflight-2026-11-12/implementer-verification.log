@@ -1,0 +1,62 @@
++zsh:6> uv lock --check
+Resolved 25 packages in 2ms
++zsh:7> uv run --locked --extra pilot ruff check .
+All checks passed!
++zsh:8> uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 25 source files
++zsh:9> uv run --locked --extra pilot pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 79 items
+
+tests/test_checkpoint.py ........                                        [ 10%]
+tests/test_config_data.py ................                               [ 30%]
+tests/test_diagnose_memory.py ........                                   [ 40%]
+tests/test_fetch_wikitext.py .........                                   [ 51%]
+tests/test_independent_contract.py ....                                  [ 56%]
+tests/test_p2.py .......                                                 [ 65%]
+tests/test_p2_independent_contract.py .....                              [ 72%]
+tests/test_pilot.py ...................                                  [ 96%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 79 passed, 1 warning in 7.03s =========================
++zsh:10> uv run --locked --extra pilot python -m arborlm.optimization_followup --help
+usage: optimization_followup.py [-h] [--config CONFIG] --data-dir DATA_DIR
+                                --output-root OUTPUT_ROOT
+                                [--results-root RESULTS_ROOT]
+
+Run the preregistered P2 CPU follow-up
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --data-dir DATA_DIR
+  --output-root OUTPUT_ROOT
+  --results-root RESULTS_ROOT
++zsh:11> uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T025937174570Z-38e182f980da40abbccb0efad9edfa6b
++zsh:12> uv run --locked --extra pilot python - experiments/review/p2-implementer.3iDcZS
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+shapes [4096, 65] [512, 65] manifest_sha256 fda0b06db1f8db265be122012704d85d0c5a7ada28e065858a2f283403a0338a
+checksums {'train.bytes': '1c3e7a3e02087392ae3db874935517c66e77f15d7a50c3285a8c5ba5d7fabd07', 'validation.bytes': '8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2', 'validation_first_1024.selected.json': '81bba9743b870c9356542f625eb6af31f54e6c8494b733e0c9d5ffec05619f94', 'train.selected.json': '9543109e906b81af2e04e34b0094388e126a1d9f073e6cc6dd75487bd6aba5ad', 'tokenizer.json': '575b06a29bd215e2cce3100a13140ffe72bb542be55fd2c8b5f9d4cdef59d770', 'recipe.json': '213afe84d13bd626079bd780ac2d521ffe6fe28b363fb65fc49702eefb951608', 'acquisition.json': '5bd36b25b695976325729ef66ef24c8eec5cfbe5b9b47c6a8221b442c00c49a3', 'README.upstream.md': 'd5aabf145d341366745ac703b5844c442c143943b6c77929481395c822b1c28c'}
++zsh:29> git diff --check
++zsh:30> git status --short
+?? configs/p2_optimization_followup.toml
+?? src/arborlm/optimization_followup.py
+?? src/arborlm/p2_analysis.py
+?? src/arborlm/p2_checkpoint.py
+?? src/arborlm/p2_config.py
+?? src/arborlm/p2_data.py
+?? src/arborlm/p2_model.py
+?? tests/test_p2.py
+?? tests/test_p2_independent_contract.py

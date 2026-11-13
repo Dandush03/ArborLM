@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "strict_restored_parents": [
+    {
+      "parent": [
+        101,
+        301
+      ],
+      "digest": "cd756e09b2a199992b090f1f6152f15dd6361bf2f61fbf20d5927a14963457ce",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        101,
+        302
+      ],
+      "digest": "dbb9a485fb0ee9dfe2599efa5432788d92cab6f1d086e12a026482e7f60ae8bb",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        101,
+        303
+      ],
+      "digest": "0d25440764c31d0677da64a55ee226a3878f4fe8e309f8826e45ad0637eaea9b",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        102,
+        301
+      ],
+      "digest": "09a14ea0b21d0f7dabbae0c6c9e22fe1c53f5e248e53a019d1f9d6cb387d71ed",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        102,
+        302
+      ],
+      "digest": "4e3c272f4a7f0d239a61272c2debf188e46bcadfa6f22e6d8448a2a4bce37171",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        102,
+        303
+      ],
+      "digest": "8beb9e4bd67cd9a31471feba5de7edea8ab4e37fe9e67383f724252a1016e8d7",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        103,
+        301
+      ],
+      "digest": "d695d7fbbb47ad13a2ca26330749b191c708ff189603c297d339bfabdc76ee52",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        103,
+        302
+      ],
+      "digest": "e4cc4f986e6fdaf019e522e6581be215dfe982380e96639dac087c87266621c6",
+      "parameters": 27392
+    },
+    {
+      "parent": [
+        103,
+        303
+      ],
+      "digest": "0033a68ef0fe17e3e0112e3cdebb0d73889b3793816e3950b76bf42992f190db",
+      "parameters": 27392
+    }
+  ],
+  "manifest_sha256": "481dba62b283fc7b732bcf3692f38f37c2891b9d2200f9e1fc304c0f5721e848",
+  "validation_sha256": "d50cbe4c303791148c922bfe9201fe00b192c44deef855077860ffc98cc72b98",
+  "all2560_ids_match_independent_reconstruction": true,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "scientific_evaluations": 0,
+  "source_sha256_at_check": "3696b3d6988a91e75810aee529a074f4fea962109bccbd49433f1c02e0aa8155",
+  "source_is_final_freeze": false
+}

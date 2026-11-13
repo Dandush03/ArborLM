@@ -1,0 +1,1 @@
+{"finished_utc":"2026-11-13T13:23:41.505654+00:00","peak_process_tree_rss_bytes":265338880,"process_wall_seconds":1.491848999983631,"reason":null,"returncode":0,"rss_method":"sampled sum of psutil RSS for child and descendants, in bytes","rss_platform":"darwin","rss_poll_seconds":0.1,"status":"completed"}

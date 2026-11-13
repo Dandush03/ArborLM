@@ -1,0 +1,5 @@
+queries=256
+queries whose 8 selected slots lie in one branch: 62
+  max router-gradient / key-gradient norm ratio for those: 4.873e-16
+queries whose selection spans both visited branches: 194
+  max unvisited-row / visited-row router-gradient ratio: 2.046e-15

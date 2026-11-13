@@ -1,0 +1,1 @@
+["uv", "run", "--locked", "--extra", "pilot", "python", "-m", "arborlm.diagnose_memory", "--suite", "experiments/P1-20261113T023302942989Z-acbad32bf88f40b3b60e1993e042d5d8", "--output-root", "experiments"]

@@ -1,0 +1,12 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+seed=0 prior=True: spy_identical=True max|f32-f64| score=1.631e-06 (NEAR_TIE 1e-05) p99.9=8.854e-07 min_gap=2.659e-06 sets_differ=0
+   certificate: certified=9/2048 certified_with_recall<1=0 recall_P=0.8541
+seed=0 prior=False: spy_identical=True max|f32-f64| score=9.778e-07 (NEAR_TIE 1e-05) p99.9=4.534e-07 min_gap=1.457e-05 sets_differ=0
+seed=1 prior=True: spy_identical=True max|f32-f64| score=1.743e-06 (NEAR_TIE 1e-05) p99.9=8.997e-07 min_gap=3.682e-05 sets_differ=0
+   certificate: certified=6/2048 certified_with_recall<1=0 recall_P=0.8534
+seed=1 prior=False: spy_identical=True max|f32-f64| score=9.142e-07 (NEAR_TIE 1e-05) p99.9=4.506e-07 min_gap=5.652e-06 sets_differ=0
+seed=2 prior=True: spy_identical=True max|f32-f64| score=1.947e-06 (NEAR_TIE 1e-05) p99.9=8.924e-07 min_gap=1.162e-05 sets_differ=0
+   certificate: certified=13/2048 certified_with_recall<1=0 recall_P=0.8657
+seed=2 prior=False: spy_identical=True max|f32-f64| score=9.481e-07 (NEAR_TIE 1e-05) p99.9=4.522e-07 min_gap=5.467e-06 sets_differ=0
+X16-style tracker report fields: full_key_dots_per_query=512 logical_key_elements_per_query=8192 unique_candidate_slots=4096 (constants are T2P's, not X16's)

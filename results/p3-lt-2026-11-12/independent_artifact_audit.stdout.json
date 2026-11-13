@@ -1,0 +1,52 @@
+{
+  "issues": [],
+  "cells": 36,
+  "counts": {
+    "checkpoints": 108,
+    "train": 27648,
+    "references": 108,
+    "interventions": 351,
+    "old_panel": 36
+  },
+  "additional_targets": 14155776,
+  "lifetime_targets": 18874368,
+  "source_sha256": [
+    "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0"
+  ],
+  "head_commits": 18,
+  "dirty_cells": 35,
+  "empty_hash_valid_source_diffs": 36,
+  "data_sha256": {
+    "train.bytes": "1c3e7a3e02087392ae3db874935517c66e77f15d7a50c3285a8c5ba5d7fabd07",
+    "p2_validation_integrity.bytes": "8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2",
+    "validation.bytes": "a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0"
+  },
+  "criteria": {
+    "mean_delta_D_at_threshold": false,
+    "mean_delta_P_at_threshold": false,
+    "delta_joint_positive_at_least_22": true,
+    "mean_endpoint_D_at_threshold": false,
+    "mean_endpoint_P_at_threshold": false,
+    "endpoint_joint_positive_at_least_22": true,
+    "endpoint_enabled_mean_strictly_improved": true,
+    "endpoint_mean_G_nonnegative": true
+  },
+  "flags": {
+    "duration_increases_dependence": false,
+    "endpoint_dependence": false,
+    "endpoint_quality_guard": true
+  },
+  "means": {
+    "delta_D_1024": 0.0027253499461544883,
+    "delta_P_1024": 0.00251616468584096,
+    "endpoint_D": 0.003416744923150098,
+    "endpoint_P": 0.003204836337654679,
+    "endpoint_G": 0.003421512190942411,
+    "endpoint_enabled": 2.3710573445315712,
+    "enabled_256": 2.5945463460628635
+  },
+  "positive_counts": {
+    "delta_both": 22,
+    "endpoint_both": 24
+  }
+}

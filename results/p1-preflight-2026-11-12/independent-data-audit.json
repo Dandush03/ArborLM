@@ -1,0 +1,16 @@
+{
+  "train": {
+    "cross_split_exclusions": 0,
+    "eligible_unique": 156611,
+    "independent_match": true,
+    "selected": 4096,
+    "selected_bytes_sha256": "1c3e7a3e02087392ae3db874935517c66e77f15d7a50c3285a8c5ba5d7fabd07"
+  },
+  "validation": {
+    "cross_split_exclusions": 15,
+    "eligible_unique": 16407,
+    "independent_match": true,
+    "selected": 512,
+    "selected_bytes_sha256": "2e6b71b9472abf50f9c4705f2f8f13a69465a9f1b8360119ce5882872b772200"
+  }
+}

@@ -1,0 +1,41 @@
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "ruff", "check", "."]}
+All checks passed!
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "ruff", "check", "."], "returncode": 0, "seconds": 0.027141583035700023}
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "mypy", "src/arborlm"]}
+Success: no issues found in 38 source files
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "mypy", "src/arborlm"], "returncode": 0, "seconds": 0.23635583400027826}
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "pytest"]}
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 116 items
+
+tests/test_checkpoint.py ........                                        [  6%]
+tests/test_config_data.py ................                               [ 20%]
+tests/test_diagnose_memory.py ........                                   [ 27%]
+tests/test_fetch_wikitext.py .........                                   [ 35%]
+tests/test_independent_contract.py ....                                  [ 38%]
+tests/test_p2.py .......                                                 [ 44%]
+tests/test_p2_independent_contract.py .....                              [ 49%]
+tests/test_p3.py .....                                                   [ 53%]
+tests/test_p3_independent_contract.py ......                             [ 58%]
+tests/test_p4.py ........                                                [ 65%]
+tests/test_p4_independent_contract.py ..................                 [ 81%]
+tests/test_pilot.py ...................                                  [ 97%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 116 passed, 1 warning in 29.37s ========================
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "pytest"], "returncode": 0, "seconds": 30.006314207974356}
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "python", "-m", "arborlm", "smoke", "--config", "configs/e0_cpu_smoke.toml", "--output-root", "experiments"]}
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T043021992435Z-b82abb95271c43f79f5fa9871bec417b
+{"command": ["uv", "run", "--locked", "--extra", "pilot", "python", "-m", "arborlm", "smoke", "--config", "configs/e0_cpu_smoke.toml", "--output-root", "experiments"], "returncode": 0, "seconds": 5.761321166995913}
+{"command": ["git", "diff", "--check"]}
+{"command": ["git", "diff", "--check"], "returncode": 0, "seconds": 0.012869999976828694}

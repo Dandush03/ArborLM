@@ -1,0 +1,3138 @@
+{
+  "absolute_tolerance": 1e-12,
+  "by_variant": {
+    "fixed_tree": {
+      "final": {
+        "distinct_visited_branches": {
+          "max": 16,
+          "mean": 15.851851851851851,
+          "min": 15,
+          "n": 27,
+          "sample_sd": 0.36201399289824565
+        },
+        "effective_selected_slots": {
+          "max": 142.19205413613565,
+          "mean": 96.24813622085028,
+          "min": 42.924020246588476,
+          "n": 27,
+          "sample_sd": 20.520879073616314
+        },
+        "hottest_selected_slot_fraction": {
+          "max": 0.0704193115234375,
+          "mean": 0.040757214581524884,
+          "min": 0.02851104736328125,
+          "n": 27,
+          "sample_sd": 0.011407452231366058
+        },
+        "hottest_top1_branch_fraction": {
+          "max": 0.553375244140625,
+          "mean": 0.3293502242476852,
+          "min": 0.191802978515625,
+          "n": 27,
+          "sample_sd": 0.09039710142053622
+        },
+        "mean_normalized_query_router_entropy_reported": {
+          "max": 0.7219011349321384,
+          "mean": 0.6473665072680607,
+          "min": 0.5593548883543191,
+          "n": 27,
+          "sample_sd": 0.03529587615407991
+        },
+        "nonzero_top1_branches": {
+          "max": 16,
+          "mean": 14.222222222222221,
+          "min": 12,
+          "n": 27,
+          "sample_sd": 1.3397282541141673
+        },
+        "normalized_top1_entropy": {
+          "max": 0.8304651168174084,
+          "mean": 0.6529122249395811,
+          "min": 0.37507539666846784,
+          "n": 27,
+          "sample_sd": 0.09892433057117542
+        },
+        "selected_slot_entropy_normalized": {
+          "max": 0.5959747531201449,
+          "mean": 0.5459332865790731,
+          "min": 0.45197610829592705,
+          "n": 27,
+          "sample_sd": 0.02945383564050061
+        },
+        "unique_candidate_slots": {
+          "max": 4096,
+          "mean": 4058.074074074074,
+          "min": 3840,
+          "n": 27,
+          "sample_sd": 92.67558218195089
+        },
+        "unique_selected_slots": {
+          "max": 488,
+          "mean": 383.4074074074074,
+          "min": 276,
+          "n": 27,
+          "sample_sd": 55.2450897638871
+        }
+      },
+      "initial": {
+        "distinct_visited_branches": {
+          "max": 16,
+          "mean": 15.962962962962964,
+          "min": 15,
+          "n": 27,
+          "sample_sd": 0.19245008972987526
+        },
+        "effective_selected_slots": {
+          "max": 430.84365812166016,
+          "mean": 234.80948963977977,
+          "min": 163.5040949056456,
+          "n": 27,
+          "sample_sd": 59.05374163751091
+        },
+        "hottest_selected_slot_fraction": {
+          "max": 0.048206329345703125,
+          "mean": 0.026536305745442707,
+          "min": 0.015644073486328125,
+          "n": 27,
+          "sample_sd": 0.006698714259293579
+        },
+        "hottest_top1_branch_fraction": {
+          "max": 0.484893798828125,
+          "mean": 0.3018391927083333,
+          "min": 0.138763427734375,
+          "n": 27,
+          "sample_sd": 0.09768977910103582
+        },
+        "mean_normalized_query_router_entropy_reported": {
+          "max": 0.8518907055973437,
+          "mean": 0.7944003643707304,
+          "min": 0.7486430769540863,
+          "n": 27,
+          "sample_sd": 0.024868982551329997
+        },
+        "nonzero_top1_branches": {
+          "max": 16,
+          "mean": 15.666666666666666,
+          "min": 14,
+          "n": 27,
+          "sample_sd": 0.5547001962252291
+        },
+        "normalized_top1_entropy": {
+          "max": 0.8656002281103286,
+          "mean": 0.7358080016218453,
+          "min": 0.5709312947266879,
+          "n": 27,
+          "sample_sd": 0.08715308972892752
+        },
+        "selected_slot_entropy_normalized": {
+          "max": 0.7292517198174846,
+          "mean": 0.6530978477507235,
+          "min": 0.612765246480645,
+          "n": 27,
+          "sample_sd": 0.02737844942717648
+        },
+        "unique_candidate_slots": {
+          "max": 4096,
+          "mean": 4086.5185185185187,
+          "min": 3840,
+          "n": 27,
+          "sample_sd": 49.26722297084807
+        },
+        "unique_selected_slots": {
+          "max": 1536,
+          "mean": 1101.2962962962963,
+          "min": 827,
+          "n": 27,
+          "sample_sd": 171.8250037358705
+        }
+      },
+      "training": {
+        "gate_final": {
+          "max": -1.150132417678833,
+          "mean": -1.337774634361267,
+          "min": -1.4559274911880493,
+          "n": 27,
+          "sample_sd": 0.07762870979571007
+        },
+        "gate_initial": {
+          "max": -2.0,
+          "mean": -2.0,
+          "min": -2.0,
+          "n": 27,
+          "sample_sd": 0.0
+        },
+        "gate_movement": {
+          "max": 0.849867582321167,
+          "mean": 0.6622253656387329,
+          "min": 0.5440725088119507,
+          "n": 27,
+          "sample_sd": 0.07762870979571007
+        },
+        "router_movement_l2": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 27,
+          "sample_sd": 0.0
+        },
+        "router_nonzero_gradient_steps": null
+      }
+    },
+    "flat": {
+      "final": {
+        "effective_selected_slots": {
+          "max": 198.98010320871867,
+          "mean": 132.3427842565273,
+          "min": 85.14375905360757,
+          "n": 27,
+          "sample_sd": 32.582549382596376
+        },
+        "hottest_selected_slot_fraction": {
+          "max": 0.040264129638671875,
+          "mean": 0.029284159342447918,
+          "min": 0.023296356201171875,
+          "n": 27,
+          "sample_sd": 0.005790882972102776
+        },
+        "selected_slot_entropy_normalized": {
+          "max": 0.6363733639241879,
+          "mean": 0.5839463706957909,
+          "min": 0.5343190733887087,
+          "n": 27,
+          "sample_sd": 0.02896267077057165
+        },
+        "unique_candidate_slots": {
+          "max": 4096,
+          "mean": 4096,
+          "min": 4096,
+          "n": 27,
+          "sample_sd": 0.0
+        },
+        "unique_selected_slots": {
+          "max": 555,
+          "mean": 428.5925925925926,
+          "min": 221,
+          "n": 27,
+          "sample_sd": 79.8726193863412
+        }
+      },
+      "initial": {
+        "effective_selected_slots": {
+          "max": 555.4700817345001,
+          "mean": 273.14766391326384,
+          "min": 205.2213052558567,
+          "n": 27,
+          "sample_sd": 68.08078213043596
+        },
+        "hottest_selected_slot_fraction": {
+          "max": 0.02991485595703125,
+          "mean": 0.0230137860333478,
+          "min": 0.01111602783203125,
+          "n": 27,
+          "sample_sd": 0.0032824471951622665
+        },
+        "selected_slot_entropy_normalized": {
+          "max": 0.7597971165205506,
+          "mean": 0.671709033444502,
+          "min": 0.6400863919440787,
+          "n": 27,
+          "sample_sd": 0.0247758199598865
+        },
+        "unique_candidate_slots": {
+          "max": 4096,
+          "mean": 4096,
+          "min": 4096,
+          "n": 27,
+          "sample_sd": 0.0
+        },
+        "unique_selected_slots": {
+          "max": 1712,
+          "mean": 1170.2962962962963,
+          "min": 882,
+          "n": 27,
+          "sample_sd": 184.01166660647755
+        }
+      },
+      "training": {
+        "gate_final": {
+          "max": -1.1337159872055054,
+          "mean": -1.2593301048985235,
+          "min": -1.4616485834121704,
+          "n": 27,
+          "sample_sd": 0.08122583195560738
+        },
+        "gate_initial": {
+          "max": -2.0,
+          "mean": -2.0,
+          "min": -2.0,
+          "n": 27,
+          "sample_sd": 0.0
+        },
+        "gate_movement": {
+          "max": 0.8662840127944946,
+          "mean": 0.7406698951014766,
+          "min": 0.5383514165878296,
+          "n": 27,
+          "sample_sd": 0.08122583195560738
+        },
+        "router_movement_l2": null,
+        "router_nonzero_gradient_steps": null
+      }
+    },
+    "learned_tree": {
+      "final": {
+        "distinct_visited_branches": {
+          "max": 16,
+          "mean": 14.74074074074074,
+          "min": 13,
+          "n": 27,
+          "sample_sd": 0.90267093384844
+        },
+        "effective_selected_slots": {
+          "max": 123.99140614751991,
+          "mean": 83.02428093279003,
+          "min": 55.18039679514536,
+          "n": 27,
+          "sample_sd": 19.209352615319833
+        },
+        "hottest_selected_slot_fraction": {
+          "max": 0.0577392578125,
+          "mean": 0.043198620831524884,
+          "min": 0.02721405029296875,
+          "n": 27,
+          "sample_sd": 0.00894254296624438
+        },
+        "hottest_top1_branch_fraction": {
+          "max": 0.540771484375,
+          "mean": 0.35343311451099535,
+          "min": 0.207275390625,
+          "n": 27,
+          "sample_sd": 0.08837360102500828
+        },
+        "mean_normalized_query_router_entropy_reported": {
+          "max": 0.5739100957994602,
+          "mean": 0.47792522555074185,
+          "min": 0.39238714508307765,
+          "n": 27,
+          "sample_sd": 0.054651515957418136
+        },
+        "nonzero_top1_branches": {
+          "max": 14,
+          "mean": 10.851851851851851,
+          "min": 7,
+          "n": 27,
+          "sample_sd": 1.6802862325692678
+        },
+        "normalized_top1_entropy": {
+          "max": 0.7657770381778369,
+          "mean": 0.613651577187257,
+          "min": 0.4749919046103812,
+          "n": 27,
+          "sample_sd": 0.07703203116027339
+        },
+        "selected_slot_entropy_normalized": {
+          "max": 0.5795080267136852,
+          "mean": 0.5283314798841592,
+          "min": 0.4821736604875477,
+          "n": 27,
+          "sample_sd": 0.026901878043388647
+        },
+        "unique_candidate_slots": {
+          "max": 4096,
+          "mean": 3773.6296296296296,
+          "min": 3328,
+          "n": 27,
+          "sample_sd": 231.08375906520064
+        },
+        "unique_selected_slots": {
+          "max": 434,
+          "mean": 313.1111111111111,
+          "min": 226,
+          "n": 27,
+          "sample_sd": 51.23800672677786
+        }
+      },
+      "initial": {
+        "distinct_visited_branches": {
+          "max": 16,
+          "mean": 15.962962962962964,
+          "min": 15,
+          "n": 27,
+          "sample_sd": 0.19245008972987526
+        },
+        "effective_selected_slots": {
+          "max": 430.84365812166016,
+          "mean": 234.80948963977977,
+          "min": 163.5040949056456,
+          "n": 27,
+          "sample_sd": 59.05374163751091
+        },
+        "hottest_selected_slot_fraction": {
+          "max": 0.048206329345703125,
+          "mean": 0.026536305745442707,
+          "min": 0.015644073486328125,
+          "n": 27,
+          "sample_sd": 0.006698714259293579
+        },
+        "hottest_top1_branch_fraction": {
+          "max": 0.484893798828125,
+          "mean": 0.3018391927083333,
+          "min": 0.138763427734375,
+          "n": 27,
+          "sample_sd": 0.09768977910103582
+        },
+        "mean_normalized_query_router_entropy_reported": {
+          "max": 0.8518907055973437,
+          "mean": 0.7944003643707304,
+          "min": 0.7486430769540863,
+          "n": 27,
+          "sample_sd": 0.024868982551329997
+        },
+        "nonzero_top1_branches": {
+          "max": 16,
+          "mean": 15.666666666666666,
+          "min": 14,
+          "n": 27,
+          "sample_sd": 0.5547001962252291
+        },
+        "normalized_top1_entropy": {
+          "max": 0.8656002281103286,
+          "mean": 0.7358080016218453,
+          "min": 0.5709312947266879,
+          "n": 27,
+          "sample_sd": 0.08715308972892752
+        },
+        "selected_slot_entropy_normalized": {
+          "max": 0.7292517198174846,
+          "mean": 0.6530978477507235,
+          "min": 0.612765246480645,
+          "n": 27,
+          "sample_sd": 0.02737844942717648
+        },
+        "unique_candidate_slots": {
+          "max": 4096,
+          "mean": 4086.5185185185187,
+          "min": 3840,
+          "n": 27,
+          "sample_sd": 49.26722297084807
+        },
+        "unique_selected_slots": {
+          "max": 1536,
+          "mean": 1101.2962962962963,
+          "min": 827,
+          "n": 27,
+          "sample_sd": 171.8250037358705
+        }
+      },
+      "training": {
+        "gate_final": {
+          "max": -1.1694334745407104,
+          "mean": -1.3622663727513067,
+          "min": -1.5302103757858276,
+          "n": 27,
+          "sample_sd": 0.07534714172389982
+        },
+        "gate_initial": {
+          "max": -2.0,
+          "mean": -2.0,
+          "min": -2.0,
+          "n": 27,
+          "sample_sd": 0.0
+        },
+        "gate_movement": {
+          "max": 0.8305665254592896,
+          "mean": 0.6377336272486934,
+          "min": 0.46978962421417236,
+          "n": 27,
+          "sample_sd": 0.07534714172389982
+        },
+        "router_movement_l2": {
+          "max": 1.345400094985962,
+          "mean": 1.2337659464942083,
+          "min": 1.080645203590393,
+          "n": 27,
+          "sample_sd": 0.06970823563681719
+        },
+        "router_nonzero_gradient_steps": {
+          "max": 512,
+          "mean": 512,
+          "min": 512,
+          "n": 27,
+          "sample_sd": 0.0
+        }
+      }
+    }
+  },
+  "cells": {
+    "fixed_tree": [
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 91.08939557728846,
+          "hottest_selected_slot_fraction": 0.03047943115234375,
+          "hottest_top1_branch_fraction": 0.25079345703125,
+          "mean_normalized_query_router_entropy_reported": 0.6877535215071053,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7297516534096167,
+          "selected_slot_entropy_normalized": 0.5424342669480157,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 385
+        },
+        "initial": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 227.49268668174662,
+          "hottest_selected_slot_fraction": 0.028499603271484375,
+          "hottest_top1_branch_fraction": 0.259033203125,
+          "mean_normalized_query_router_entropy_reported": 0.7603169365174488,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7685323152651289,
+          "selected_slot_entropy_normalized": 0.6524730297342533,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 972
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3590929508209229,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6409070491790771,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 96.18574707664418,
+          "hottest_selected_slot_fraction": 0.035938262939453125,
+          "hottest_top1_branch_fraction": 0.267852783203125,
+          "mean_normalized_query_router_entropy_reported": 0.6885394368506155,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.7565575870408889,
+          "selected_slot_entropy_normalized": 0.5489792686982399,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 350
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 203.56359593169188,
+          "hottest_selected_slot_fraction": 0.03134918212890625,
+          "hottest_top1_branch_fraction": 0.2777099609375,
+          "mean_normalized_query_router_entropy_reported": 0.785645032092191,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7542026071497303,
+          "selected_slot_entropy_normalized": 0.6391113142915984,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 927
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.3215878009796143,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6784121990203857,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 86.77396400798807,
+          "hottest_selected_slot_fraction": 0.04413604736328125,
+          "hottest_top1_branch_fraction": 0.367156982421875,
+          "mean_normalized_query_router_entropy_reported": 0.6229829606374797,
+          "nonzero_top1_branches": 14,
+          "normalized_top1_entropy": 0.6211967146564495,
+          "selected_slot_entropy_normalized": 0.5365991942289157,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 359
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 163.5040949056456,
+          "hottest_selected_slot_fraction": 0.04276275634765625,
+          "hottest_top1_branch_fraction": 0.407440185546875,
+          "mean_normalized_query_router_entropy_reported": 0.7895104347885546,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.5709312947266879,
+          "selected_slot_entropy_normalized": 0.612765246480645,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 978
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3819537162780762,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6180462837219238,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 107.08608804698265,
+          "hottest_selected_slot_fraction": 0.02851104736328125,
+          "hottest_top1_branch_fraction": 0.221160888671875,
+          "mean_normalized_query_router_entropy_reported": 0.6528788500560633,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7646469349849192,
+          "selected_slot_entropy_normalized": 0.561885604678661,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 428
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 222.57408974180262,
+          "hottest_selected_slot_fraction": 0.024250030517578125,
+          "hottest_top1_branch_fraction": 0.301483154296875,
+          "mean_normalized_query_router_entropy_reported": 0.7759616588027782,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7021312031885146,
+          "selected_slot_entropy_normalized": 0.649845153787697,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1147
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3231613636016846,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6768386363983154,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 114.57198866663423,
+          "hottest_selected_slot_fraction": 0.028961181640625,
+          "hottest_top1_branch_fraction": 0.24066162109375,
+          "mean_normalized_query_router_entropy_reported": 0.6147189220806766,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7138190888793662,
+          "selected_slot_entropy_normalized": 0.5700092130963063,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 441
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 240.26600453405263,
+          "hottest_selected_slot_fraction": 0.022613525390625,
+          "hottest_top1_branch_fraction": 0.18212890625,
+          "mean_normalized_query_router_entropy_reported": 0.762301330845399,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8349587891150119,
+          "selected_slot_entropy_normalized": 0.6590407270321765,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1126
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2687214612960815,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7312785387039185,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 85.47063960961701,
+          "hottest_selected_slot_fraction": 0.040557861328125,
+          "hottest_top1_branch_fraction": 0.3221435546875,
+          "mean_normalized_query_router_entropy_reported": 0.678145269791965,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6168378886406293,
+          "selected_slot_entropy_normalized": 0.5347797511293055,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 371
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 167.52242743258205,
+          "hottest_selected_slot_fraction": 0.048206329345703125,
+          "hottest_top1_branch_fraction": 0.4290771484375,
+          "mean_normalized_query_router_entropy_reported": 0.7798338528514667,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6055690125257747,
+          "selected_slot_entropy_normalized": 0.6156842035199591,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1175
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.258219838142395,
+          "gate_initial": -2.0,
+          "gate_movement": 0.741780161857605,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 109.21124576089372,
+          "hottest_selected_slot_fraction": 0.032520294189453125,
+          "hottest_top1_branch_fraction": 0.22808837890625,
+          "mean_normalized_query_router_entropy_reported": 0.6277120298751117,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.6676980749719276,
+          "selected_slot_entropy_normalized": 0.5642481343062179,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 385
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 261.18670938466784,
+          "hottest_selected_slot_fraction": 0.023334503173828125,
+          "hottest_top1_branch_fraction": 0.26580810546875,
+          "mean_normalized_query_router_entropy_reported": 0.7916342529452517,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7646027874240299,
+          "selected_slot_entropy_normalized": 0.6690781396894717,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1157
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.372611403465271,
+          "gate_initial": -2.0,
+          "gate_movement": 0.627388596534729,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 103.76503186899176,
+          "hottest_selected_slot_fraction": 0.035518646240234375,
+          "hottest_top1_branch_fraction": 0.354827880859375,
+          "mean_normalized_query_router_entropy_reported": 0.6671221881412173,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6490428744021178,
+          "selected_slot_entropy_normalized": 0.5580980447219167,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 454
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 278.02238856977317,
+          "hottest_selected_slot_fraction": 0.02254486083984375,
+          "hottest_top1_branch_fraction": 0.205108642578125,
+          "mean_normalized_query_router_entropy_reported": 0.7950190127216292,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8369071497277689,
+          "selected_slot_entropy_normalized": 0.676588104554905,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1301
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.389069676399231,
+          "gate_initial": -2.0,
+          "gate_movement": 0.610930323600769,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 99.86689963135004,
+          "hottest_selected_slot_fraction": 0.042331695556640625,
+          "hottest_top1_branch_fraction": 0.369842529296875,
+          "mean_normalized_query_router_entropy_reported": 0.6626216272581731,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.657006334679864,
+          "selected_slot_entropy_normalized": 0.5534945565252931,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 488
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 197.25912473044698,
+          "hottest_selected_slot_fraction": 0.03179168701171875,
+          "hottest_top1_branch_fraction": 0.433685302734375,
+          "mean_normalized_query_router_entropy_reported": 0.7689113511492326,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6487305599631631,
+          "selected_slot_entropy_normalized": 0.6353290189286199,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1319
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3944504261016846,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6055495738983154,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 76.4716949974488,
+          "hottest_selected_slot_fraction": 0.046024322509765625,
+          "hottest_top1_branch_fraction": 0.3751220703125,
+          "mean_normalized_query_router_entropy_reported": 0.6162777368523662,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.6305600235178381,
+          "selected_slot_entropy_normalized": 0.521404495558546,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 311
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 293.7243925978533,
+          "hottest_selected_slot_fraction": 0.0222930908203125,
+          "hottest_top1_branch_fraction": 0.325531005859375,
+          "mean_normalized_query_router_entropy_reported": 0.8175426751980568,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7630574233932131,
+          "selected_slot_entropy_normalized": 0.683193272523173,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1253
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.4233298301696777,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5766701698303223,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 82.44940687339032,
+          "hottest_selected_slot_fraction": 0.041645050048828125,
+          "hottest_top1_branch_fraction": 0.368072509765625,
+          "mean_normalized_query_router_entropy_reported": 0.5593548883543191,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6333918998179446,
+          "selected_slot_entropy_normalized": 0.5304531008409742,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 344
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 208.3908667081945,
+          "hottest_selected_slot_fraction": 0.02928924560546875,
+          "hottest_top1_branch_fraction": 0.484893798828125,
+          "mean_normalized_query_router_entropy_reported": 0.7486430769540863,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.631356633824473,
+          "selected_slot_entropy_normalized": 0.6419290198979428,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 956
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.4415664672851562,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5584335327148438,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 71.35396137757127,
+          "hottest_selected_slot_fraction": 0.0646514892578125,
+          "hottest_top1_branch_fraction": 0.48828125,
+          "mean_normalized_query_router_entropy_reported": 0.6149284901705677,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.575533588671564,
+          "selected_slot_entropy_normalized": 0.513076801775887,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 281
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 210.1637018880026,
+          "hottest_selected_slot_fraction": 0.0231475830078125,
+          "hottest_top1_branch_fraction": 0.312042236328125,
+          "mean_normalized_query_router_entropy_reported": 0.8164531081419373,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7650295236182761,
+          "selected_slot_entropy_normalized": 0.6429474756380277,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 945
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.4559274911880493,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5440725088119507,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 104.47807827027661,
+          "hottest_selected_slot_fraction": 0.04038238525390625,
+          "hottest_top1_branch_fraction": 0.35406494140625,
+          "mean_normalized_query_router_entropy_reported": 0.6958516557363233,
+          "nonzero_top1_branches": 14,
+          "normalized_top1_entropy": 0.6623483206865156,
+          "selected_slot_entropy_normalized": 0.5589213713030152,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 393
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 211.42336912818905,
+          "hottest_selected_slot_fraction": 0.0261993408203125,
+          "hottest_top1_branch_fraction": 0.24249267578125,
+          "mean_normalized_query_router_entropy_reported": 0.7846975037805061,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7279832094141676,
+          "selected_slot_entropy_normalized": 0.6436659199854609,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 921
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2226325273513794,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7773674726486206,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 98.51045012857686,
+          "hottest_selected_slot_fraction": 0.041790008544921875,
+          "hottest_top1_branch_fraction": 0.313812255859375,
+          "mean_normalized_query_router_entropy_reported": 0.6587071583037292,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.6637543623959083,
+          "selected_slot_entropy_normalized": 0.5518504058929264,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 314
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 169.37018602836244,
+          "hottest_selected_slot_fraction": 0.026580810546875,
+          "hottest_top1_branch_fraction": 0.397857666015625,
+          "mean_normalized_query_router_entropy_reported": 0.7797937088129663,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6599934901360077,
+          "selected_slot_entropy_normalized": 0.6170030109516124,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 827
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2626830339431763,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7373169660568237,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 109.24329077174582,
+          "hottest_selected_slot_fraction": 0.030651092529296875,
+          "hottest_top1_branch_fraction": 0.25762939453125,
+          "mean_normalized_query_router_entropy_reported": 0.6771931473686876,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.6171249838720622,
+          "selected_slot_entropy_normalized": 0.5642834057020476,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 405
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 203.77547917550572,
+          "hottest_selected_slot_fraction": 0.02374267578125,
+          "hottest_top1_branch_fraction": 0.25177001953125,
+          "mean_normalized_query_router_entropy_reported": 0.7975491931928725,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6952173789390669,
+          "selected_slot_entropy_normalized": 0.6392363873782675,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 959
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.150132417678833,
+          "gate_initial": -2.0,
+          "gate_movement": 0.849867582321167,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 79.63473098390561,
+          "hottest_selected_slot_fraction": 0.0499725341796875,
+          "hottest_top1_branch_fraction": 0.383575439453125,
+          "mean_normalized_query_router_entropy_reported": 0.6656519404481718,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.5847035005474238,
+          "selected_slot_entropy_normalized": 0.5262771552894892,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 391
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 304.34152514835176,
+          "hottest_selected_slot_fraction": 0.0227203369140625,
+          "hottest_top1_branch_fraction": 0.340972900390625,
+          "mean_normalized_query_router_entropy_reported": 0.8266607745649323,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.780472989855971,
+          "selected_slot_entropy_normalized": 0.6874622818430745,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1328
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2803404331207275,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7196595668792725,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 42.924020246588476,
+          "hottest_selected_slot_fraction": 0.0704193115234375,
+          "hottest_top1_branch_fraction": 0.51544189453125,
+          "mean_normalized_query_router_entropy_reported": 0.6038666505413398,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.38099534025492376,
+          "selected_slot_entropy_normalized": 0.45197610829592705,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 330
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 201.92963773520813,
+          "hottest_selected_slot_fraction": 0.02439117431640625,
+          "hottest_top1_branch_fraction": 0.353240966796875,
+          "mean_normalized_query_router_entropy_reported": 0.7551443819039392,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6224468928000277,
+          "selected_slot_entropy_normalized": 0.6381424053389688,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1219
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.4119137525558472,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5880862474441528,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 55.25684602072256,
+          "hottest_selected_slot_fraction": 0.06879425048828125,
+          "hottest_top1_branch_fraction": 0.553375244140625,
+          "mean_normalized_query_router_entropy_reported": 0.6220841821501321,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.37507539666846784,
+          "selected_slot_entropy_normalized": 0.48234010937354727,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 345
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 238.9041654429288,
+          "hottest_selected_slot_fraction": 0.0263824462890625,
+          "hottest_top1_branch_fraction": 0.213165283203125,
+          "mean_normalized_query_router_entropy_reported": 0.807923379414739,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.798869626435507,
+          "selected_slot_entropy_normalized": 0.6583573498395751,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1131
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.440300703048706,
+          "gate_initial": -2.0,
+          "gate_movement": 0.559699296951294,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 93.47299793076445,
+          "hottest_selected_slot_fraction": 0.045131683349609375,
+          "hottest_top1_branch_fraction": 0.321044921875,
+          "mean_normalized_query_router_entropy_reported": 0.6460426671888277,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6888161839912924,
+          "selected_slot_entropy_normalized": 0.5455398133885675,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 427
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 190.95855982994019,
+          "hottest_selected_slot_fraction": 0.029163360595703125,
+          "hottest_top1_branch_fraction": 0.252685546875,
+          "mean_normalized_query_router_entropy_reported": 0.8092926660180644,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8024526950102873,
+          "selected_slot_entropy_normalized": 0.6314263150699783,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1016
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2960784435272217,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7039215564727783,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 125.47087644636302,
+          "hottest_selected_slot_fraction": 0.02904510498046875,
+          "hottest_top1_branch_fraction": 0.2110595703125,
+          "mean_normalized_query_router_entropy_reported": 0.6599517805613913,
+          "nonzero_top1_branches": 14,
+          "normalized_top1_entropy": 0.7686251021800063,
+          "selected_slot_entropy_normalized": 0.5809340602513247,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 391
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 168.91687575766574,
+          "hottest_selected_slot_fraction": 0.0273284912109375,
+          "hottest_top1_branch_fraction": 0.483428955078125,
+          "mean_normalized_query_router_entropy_reported": 0.7836413954657098,
+          "nonzero_top1_branches": 14,
+          "normalized_top1_entropy": 0.6039941389931688,
+          "selected_slot_entropy_normalized": 0.6166808048802809,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 831
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2413640022277832,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7586359977722168,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 142.19205413613565,
+          "hottest_selected_slot_fraction": 0.029277801513671875,
+          "hottest_top1_branch_fraction": 0.191802978515625,
+          "mean_normalized_query_router_entropy_reported": 0.7219011349321384,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8304651168174084,
+          "selected_slot_entropy_normalized": 0.5959747531201449,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 457
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 205.19809308396486,
+          "hottest_selected_slot_fraction": 0.026378631591796875,
+          "hottest_top1_branch_fraction": 0.42236328125,
+          "mean_normalized_query_router_entropy_reported": 0.7975274776126071,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6385919537254643,
+          "selected_slot_entropy_normalized": 0.6400727928121307,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1076
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.234479308128357,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7655206918716431,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 112.38045953006495,
+          "hottest_selected_slot_fraction": 0.03708648681640625,
+          "hottest_top1_branch_fraction": 0.381134033203125,
+          "mean_normalized_query_router_entropy_reported": 0.6244174747999951,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6991006822496028,
+          "selected_slot_entropy_normalized": 0.5676872828719404,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 433
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 255.27826770877314,
+          "hottest_selected_slot_fraction": 0.023868560791015625,
+          "hottest_top1_branch_fraction": 0.1871337890625,
+          "mean_normalized_query_router_entropy_reported": 0.8099381071280394,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8478473915816239,
+          "selected_slot_entropy_normalized": 0.6663272427968666,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1114
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3726621866226196,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6273378133773804,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 114.59281584135955,
+          "hottest_selected_slot_fraction": 0.038608551025390625,
+          "hottest_top1_branch_fraction": 0.356414794921875,
+          "mean_normalized_query_router_entropy_reported": 0.6689760906196291,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7228059429707133,
+          "selected_slot_entropy_normalized": 0.5700310658278948,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 448
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 430.84365812166016,
+          "hottest_selected_slot_fraction": 0.015644073486328125,
+          "hottest_top1_branch_fraction": 0.161956787109375,
+          "mean_normalized_query_router_entropy_reported": 0.7856633121156049,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8656002281103286,
+          "selected_slot_entropy_normalized": 0.7292517198174846,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1536
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.4041931629180908,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5958068370819092,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 104.38690335433078,
+          "hottest_selected_slot_fraction": 0.0417938232421875,
+          "hottest_top1_branch_fraction": 0.365081787109375,
+          "mean_normalized_query_router_entropy_reported": 0.649035370775393,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6253708886937238,
+          "selected_slot_entropy_normalized": 0.5588164090714175,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 431
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 331.7610431197768,
+          "hottest_selected_slot_fraction": 0.017383575439453125,
+          "hottest_top1_branch_fraction": 0.138763427734375,
+          "mean_normalized_query_router_entropy_reported": 0.8275353545749358,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8500126338335259,
+          "selected_slot_entropy_normalized": 0.6978333898538156,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1259
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.383364200592041,
+          "gate_initial": -2.0,
+          "gate_movement": 0.616635799407959,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 87.86315906061823,
+          "hottest_selected_slot_fraction": 0.036334991455078125,
+          "hottest_top1_branch_fraction": 0.259185791015625,
+          "mean_normalized_query_router_entropy_reported": 0.6462039420079352,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.6709970363447469,
+          "selected_slot_entropy_normalized": 0.5380988721981349,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 276
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 220.14015187092278,
+          "hottest_selected_slot_fraction": 0.022491455078125,
+          "hottest_top1_branch_fraction": 0.237701416015625,
+          "mean_normalized_query_router_entropy_reported": 0.817397243305396,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7975099155256294,
+          "selected_slot_entropy_normalized": 0.6485232079571611,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 923
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3231080770492554,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6768919229507446,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 99.68656234847644,
+          "hottest_selected_slot_fraction": 0.032932281494140625,
+          "hottest_top1_branch_fraction": 0.29730224609375,
+          "mean_normalized_query_router_entropy_reported": 0.5954613177141685,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.6461528539057214,
+          "selected_slot_entropy_normalized": 0.5532772615608814,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 359
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 296.1686332700717,
+          "hottest_selected_slot_fraction": 0.02292633056640625,
+          "hottest_top1_branch_fraction": 0.2691650390625,
+          "mean_normalized_query_router_entropy_reported": 0.8223819115140302,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8114825733887114,
+          "selected_slot_entropy_normalized": 0.6841895870872645,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1233
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.3479686975479126,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6520313024520874,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 104.31036939822805,
+          "hottest_selected_slot_fraction": 0.03694915771484375,
+          "hottest_top1_branch_fraction": 0.27752685546875,
+          "mean_normalized_query_router_entropy_reported": 0.6505152615141168,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6762516981170462,
+          "selected_slot_entropy_normalized": 0.5587282309794357,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 355
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 237.1764917462726,
+          "hottest_selected_slot_fraction": 0.03119659423828125,
+          "hottest_top1_branch_fraction": 0.313018798828125,
+          "mean_normalized_query_router_entropy_reported": 0.8518907055973437,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7183316261185634,
+          "selected_slot_entropy_normalized": 0.6574847675791253,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1106
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3590017557144165,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6409982442855835,
+          "router_movement_l2": 0.0,
+          "router_nonzero_gradient_steps": null
+        }
+      }
+    ],
+    "flat": [
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 110.67446653054884,
+          "hottest_selected_slot_fraction": 0.02484130859375,
+          "selected_slot_entropy_normalized": 0.5658482174329764,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 332
+        },
+        "initial": {
+          "effective_selected_slots": 287.6475805480593,
+          "hottest_selected_slot_fraction": 0.022098541259765625,
+          "selected_slot_entropy_normalized": 0.680679877108206,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1136
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.296889066696167,
+          "gate_initial": -2.0,
+          "gate_movement": 0.703110933303833,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 100.50476480370014,
+          "hottest_selected_slot_fraction": 0.0279998779296875,
+          "selected_slot_entropy_normalized": 0.5542600074288567,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 341
+        },
+        "initial": {
+          "effective_selected_slots": 227.19880828911266,
+          "hottest_selected_slot_fraction": 0.028408050537109375,
+          "selected_slot_entropy_normalized": 0.6523176214470213,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 882
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2934887409210205,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7065112590789795,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 85.14375905360757,
+          "hottest_selected_slot_fraction": 0.02619171142578125,
+          "selected_slot_entropy_normalized": 0.5343190733887087,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 221
+        },
+        "initial": {
+          "effective_selected_slots": 213.90736998978667,
+          "hottest_selected_slot_fraction": 0.023311614990234375,
+          "selected_slot_entropy_normalized": 0.6450701983266096,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1050
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3085232973098755,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6914767026901245,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 146.85937795651571,
+          "hottest_selected_slot_fraction": 0.026611328125,
+          "selected_slot_entropy_normalized": 0.599857632011332,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 521
+        },
+        "initial": {
+          "effective_selected_slots": 267.36215636827075,
+          "hottest_selected_slot_fraction": 0.02146148681640625,
+          "selected_slot_entropy_normalized": 0.671887622013993,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1233
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.1589452028274536,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8410547971725464,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 142.1821782466136,
+          "hottest_selected_slot_fraction": 0.02802276611328125,
+          "selected_slot_entropy_normalized": 0.5959664026818721,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 540
+        },
+        "initial": {
+          "effective_selected_slots": 250.0753519577892,
+          "hottest_selected_slot_fraction": 0.021915435791015625,
+          "selected_slot_entropy_normalized": 0.66385158822721,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1128
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2142527103424072,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7857472896575928,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 100.47896645604139,
+          "hottest_selected_slot_fraction": 0.038036346435546875,
+          "selected_slot_entropy_normalized": 0.5542291432819583,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 445
+        },
+        "initial": {
+          "effective_selected_slots": 215.23224552039542,
+          "hottest_selected_slot_fraction": 0.02429962158203125,
+          "selected_slot_entropy_normalized": 0.6458125353817502,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1202
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.2122156620025635,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7877843379974365,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 104.25875304030248,
+          "hottest_selected_slot_fraction": 0.034481048583984375,
+          "selected_slot_entropy_normalized": 0.5586687249954742,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 416
+        },
+        "initial": {
+          "effective_selected_slots": 312.1487513668217,
+          "hottest_selected_slot_fraction": 0.02396392822265625,
+          "selected_slot_entropy_normalized": 0.69050749038534,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1313
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3368912935256958,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6631087064743042,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 124.2050793706325,
+          "hottest_selected_slot_fraction": 0.02431488037109375,
+          "selected_slot_entropy_normalized": 0.5797150302998891,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 469
+        },
+        "initial": {
+          "effective_selected_slots": 286.29962606794754,
+          "hottest_selected_slot_fraction": 0.022617340087890625,
+          "selected_slot_entropy_normalized": 0.6801151646524022,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1385
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.3276785612106323,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6723214387893677,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "effective_selected_slots": 107.15139087250503,
+          "hottest_selected_slot_fraction": 0.0367889404296875,
+          "selected_slot_entropy_normalized": 0.5619588972276042,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 462
+        },
+        "initial": {
+          "effective_selected_slots": 255.0491027803527,
+          "hottest_selected_slot_fraction": 0.025360107421875,
+          "selected_slot_entropy_normalized": 0.6662192679467608,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1382
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3590755462646484,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6409244537353516,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 130.87620379383176,
+          "hottest_selected_slot_fraction": 0.025150299072265625,
+          "selected_slot_entropy_normalized": 0.5860049164033581,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 390
+        },
+        "initial": {
+          "effective_selected_slots": 285.6116625750442,
+          "hottest_selected_slot_fraction": 0.0222625732421875,
+          "selected_slot_entropy_normalized": 0.6798259234076014,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1206
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3743783235549927,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6256216764450073,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 132.22552628045534,
+          "hottest_selected_slot_fraction": 0.027240753173828125,
+          "selected_slot_entropy_normalized": 0.5872380756117581,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 371
+        },
+        "initial": {
+          "effective_selected_slots": 276.9272343884151,
+          "hottest_selected_slot_fraction": 0.022068023681640625,
+          "selected_slot_entropy_normalized": 0.6761135943494962,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1179
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.3510901927947998,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6489098072052002,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 99.7323585978746,
+          "hottest_selected_slot_fraction": 0.038326263427734375,
+          "selected_slot_entropy_normalized": 0.5533324803458275,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 364
+        },
+        "initial": {
+          "effective_selected_slots": 221.40481285894893,
+          "hottest_selected_slot_fraction": 0.023693084716796875,
+          "selected_slot_entropy_normalized": 0.6492118977738796,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 960
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.4616485834121704,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5383514165878296,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 126.49742828469836,
+          "hottest_selected_slot_fraction": 0.02996826171875,
+          "selected_slot_entropy_normalized": 0.5819136870620578,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 421
+        },
+        "initial": {
+          "effective_selected_slots": 254.7060609308723,
+          "hottest_selected_slot_fraction": 0.02118682861328125,
+          "selected_slot_entropy_normalized": 0.6660574566547907,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1036
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.1712961196899414,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8287038803100586,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 147.25736807128288,
+          "hottest_selected_slot_fraction": 0.02413177490234375,
+          "selected_slot_entropy_normalized": 0.6001830009468008,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 471
+        },
+        "initial": {
+          "effective_selected_slots": 212.48500938756098,
+          "hottest_selected_slot_fraction": 0.023174285888671875,
+          "selected_slot_entropy_normalized": 0.64426810448931,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 925
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.1430763006210327,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8569236993789673,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 103.17192997611403,
+          "hottest_selected_slot_fraction": 0.031330108642578125,
+          "selected_slot_entropy_normalized": 0.557408891613856,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 353
+        },
+        "initial": {
+          "effective_selected_slots": 205.2213052558567,
+          "hottest_selected_slot_fraction": 0.02265167236328125,
+          "selected_slot_entropy_normalized": 0.6400863919440787,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 956
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.1337159872055054,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8662840127944946,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 94.32634299126981,
+          "hottest_selected_slot_fraction": 0.04009246826171875,
+          "selected_slot_entropy_normalized": 0.5466324025620771,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 346
+        },
+        "initial": {
+          "effective_selected_slots": 305.69855058175995,
+          "hottest_selected_slot_fraction": 0.02307891845703125,
+          "selected_slot_entropy_normalized": 0.6879971584766699,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1322
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2814801931381226,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7185198068618774,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 108.28551689090118,
+          "hottest_selected_slot_fraction": 0.040264129638671875,
+          "selected_slot_entropy_normalized": 0.5632247071843207,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 445
+        },
+        "initial": {
+          "effective_selected_slots": 300.4513490349188,
+          "hottest_selected_slot_fraction": 0.023708343505859375,
+          "selected_slot_entropy_normalized": 0.6859156324501607,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1368
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2625163793563843,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7374836206436157,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "effective_selected_slots": 96.90724376312359,
+          "hottest_selected_slot_fraction": 0.039417266845703125,
+          "selected_slot_entropy_normalized": 0.5498777171015445,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 369
+        },
+        "initial": {
+          "effective_selected_slots": 269.4766717164204,
+          "hottest_selected_slot_fraction": 0.023899078369140625,
+          "selected_slot_entropy_normalized": 0.6728347146431808,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1239
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.2743116617202759,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7256883382797241,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 171.66957595620474,
+          "hottest_selected_slot_fraction": 0.0262451171875,
+          "selected_slot_entropy_normalized": 0.6186242142461206,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 502
+        },
+        "initial": {
+          "effective_selected_slots": 208.17716283818083,
+          "hottest_selected_slot_fraction": 0.02637481689453125,
+          "selected_slot_entropy_normalized": 0.6418056668804816,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1008
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.1533652544021606,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8466347455978394,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 162.25713086079267,
+          "hottest_selected_slot_fraction": 0.0267181396484375,
+          "selected_slot_entropy_normalized": 0.6118448394012838,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 489
+        },
+        "initial": {
+          "effective_selected_slots": 253.688358376833,
+          "hottest_selected_slot_fraction": 0.02991485595703125,
+          "selected_slot_entropy_normalized": 0.6655761255159404,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 985
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.223757028579712,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7762429714202881,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 148.73100332490873,
+          "hottest_selected_slot_fraction": 0.02927398681640625,
+          "selected_slot_entropy_normalized": 0.6013801334719531,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 377
+        },
+        "initial": {
+          "effective_selected_slots": 268.02746426452177,
+          "hottest_selected_slot_fraction": 0.02346038818359375,
+          "selected_slot_entropy_normalized": 0.6721864190207764,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1160
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.1442996263504028,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8557003736495972,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 194.99385549768402,
+          "hottest_selected_slot_fraction": 0.02400970458984375,
+          "selected_slot_entropy_normalized": 0.6339404044437982,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 553
+        },
+        "initial": {
+          "effective_selected_slots": 279.46962719869106,
+          "hottest_selected_slot_fraction": 0.02130889892578125,
+          "selected_slot_entropy_normalized": 0.6772123074206383,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1087
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2400410175323486,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7599589824676514,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 198.98010320871867,
+          "hottest_selected_slot_fraction": 0.024570465087890625,
+          "selected_slot_entropy_normalized": 0.6363733639241879,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 555
+        },
+        "initial": {
+          "effective_selected_slots": 555.4700817345001,
+          "hottest_selected_slot_fraction": 0.01111602783203125,
+          "selected_slot_entropy_normalized": 0.7597971165205506,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1712
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.228052020072937,
+          "gate_initial": -2.0,
+          "gate_movement": 0.771947979927063,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 194.00207561431,
+          "hottest_selected_slot_fraction": 0.0245208740234375,
+          "selected_slot_entropy_normalized": 0.6333273564633831,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 530
+        },
+        "initial": {
+          "effective_selected_slots": 348.32827705768227,
+          "hottest_selected_slot_fraction": 0.0228271484375,
+          "selected_slot_entropy_normalized": 0.7036919820397094,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1364
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.212069034576416,
+          "gate_initial": -2.0,
+          "gate_movement": 0.787930965423584,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 140.77120923544743,
+          "hottest_selected_slot_fraction": 0.0235595703125,
+          "selected_slot_entropy_normalized": 0.5947673742918447,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 452
+        },
+        "initial": {
+          "effective_selected_slots": 227.15075853190615,
+          "hottest_selected_slot_fraction": 0.024688720703125,
+          "selected_slot_entropy_normalized": 0.652292192734653,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1034
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2967406511306763,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7032593488693237,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 147.91225361597577,
+          "hottest_selected_slot_fraction": 0.023296356201171875,
+          "selected_slot_entropy_normalized": 0.6007164804607991,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 430
+        },
+        "initial": {
+          "effective_selected_slots": 328.79833803780366,
+          "hottest_selected_slot_fraction": 0.018177032470703125,
+          "selected_slot_entropy_normalized": 0.6967549330405755,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1243
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.260255217552185,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7397447824478149,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "effective_selected_slots": 153.1993126321762,
+          "hottest_selected_slot_fraction": 0.0252685546875,
+          "selected_slot_entropy_normalized": 0.6049388345027112,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 407
+        },
+        "initial": {
+          "effective_selected_slots": 258.97320799967184,
+          "hottest_selected_slot_fraction": 0.02434539794921875,
+          "selected_slot_entropy_normalized": 0.6680549201497672,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1103
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.2818591594696045,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7181408405303955,
+          "router_movement_l2": null,
+          "router_nonzero_gradient_steps": null
+        }
+      }
+    ],
+    "learned_tree": [
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 70.77382409595306,
+          "hottest_selected_slot_fraction": 0.035846710205078125,
+          "hottest_top1_branch_fraction": 0.288909912109375,
+          "mean_normalized_query_router_entropy_reported": 0.4268688798293285,
+          "nonzero_top1_branches": 9,
+          "normalized_top1_entropy": 0.6114819727181793,
+          "selected_slot_entropy_normalized": 0.5120953307417824,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 237
+        },
+        "initial": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 227.49268668174662,
+          "hottest_selected_slot_fraction": 0.028499603271484375,
+          "hottest_top1_branch_fraction": 0.259033203125,
+          "mean_normalized_query_router_entropy_reported": 0.7603169365174488,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7685323152651289,
+          "selected_slot_entropy_normalized": 0.6524730297342533,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 972
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3963488340377808,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6036511659622192,
+          "router_movement_l2": 1.1431257724761963,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 13,
+          "effective_selected_slots": 58.94334877465463,
+          "hottest_selected_slot_fraction": 0.05084991455078125,
+          "hottest_top1_branch_fraction": 0.3548583984375,
+          "mean_normalized_query_router_entropy_reported": 0.43824095873552565,
+          "nonzero_top1_branches": 8,
+          "normalized_top1_entropy": 0.54454832473497,
+          "selected_slot_entropy_normalized": 0.4901047601793218,
+          "unique_candidate_slots": 3328,
+          "unique_selected_slots": 226
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 203.56359593169188,
+          "hottest_selected_slot_fraction": 0.03134918212890625,
+          "hottest_top1_branch_fraction": 0.2777099609375,
+          "mean_normalized_query_router_entropy_reported": 0.785645032092191,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7542026071497303,
+          "selected_slot_entropy_normalized": 0.6391113142915984,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 927
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.3716498613357544,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6283501386642456,
+          "router_movement_l2": 1.1374664306640625,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 65.26849098865793,
+          "hottest_selected_slot_fraction": 0.051601409912109375,
+          "hottest_top1_branch_fraction": 0.44696044921875,
+          "mean_normalized_query_router_entropy_reported": 0.39238714508307765,
+          "nonzero_top1_branches": 7,
+          "normalized_top1_entropy": 0.4952202605376988,
+          "selected_slot_entropy_normalized": 0.5023595649484065,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 254
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 163.5040949056456,
+          "hottest_selected_slot_fraction": 0.04276275634765625,
+          "hottest_top1_branch_fraction": 0.407440185546875,
+          "mean_normalized_query_router_entropy_reported": 0.7895104347885546,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.5709312947266879,
+          "selected_slot_entropy_normalized": 0.612765246480645,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 978
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.4203083515167236,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5796916484832764,
+          "router_movement_l2": 1.2035714387893677,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 13,
+          "effective_selected_slots": 67.9147052031866,
+          "hottest_selected_slot_fraction": 0.043972015380859375,
+          "hottest_top1_branch_fraction": 0.2894287109375,
+          "mean_normalized_query_router_entropy_reported": 0.4115234217571108,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.6798399613862681,
+          "selected_slot_entropy_normalized": 0.5071376735102041,
+          "unique_candidate_slots": 3328,
+          "unique_selected_slots": 286
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 222.57408974180262,
+          "hottest_selected_slot_fraction": 0.024250030517578125,
+          "hottest_top1_branch_fraction": 0.301483154296875,
+          "mean_normalized_query_router_entropy_reported": 0.7759616588027782,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7021312031885146,
+          "selected_slot_entropy_normalized": 0.649845153787697,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1147
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3609366416931152,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6390633583068848,
+          "router_movement_l2": 1.2266416549682617,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 89.65347580452516,
+          "hottest_selected_slot_fraction": 0.033489227294921875,
+          "hottest_top1_branch_fraction": 0.331634521484375,
+          "mean_normalized_query_router_entropy_reported": 0.4417423832823335,
+          "nonzero_top1_branches": 10,
+          "normalized_top1_entropy": 0.6753481192973837,
+          "selected_slot_entropy_normalized": 0.5405239676145596,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 297
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 240.26600453405263,
+          "hottest_selected_slot_fraction": 0.022613525390625,
+          "hottest_top1_branch_fraction": 0.18212890625,
+          "mean_normalized_query_router_entropy_reported": 0.762301330845399,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8349587891150119,
+          "selected_slot_entropy_normalized": 0.6590407270321765,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1126
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.326987624168396,
+          "gate_initial": -2.0,
+          "gate_movement": 0.673012375831604,
+          "router_movement_l2": 1.2757174968719482,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 66.83850588089267,
+          "hottest_selected_slot_fraction": 0.05426025390625,
+          "hottest_top1_branch_fraction": 0.4429931640625,
+          "mean_normalized_query_router_entropy_reported": 0.472168175030833,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.584574549922408,
+          "selected_slot_entropy_normalized": 0.5052172982001146,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 313
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 167.52242743258205,
+          "hottest_selected_slot_fraction": 0.048206329345703125,
+          "hottest_top1_branch_fraction": 0.4290771484375,
+          "mean_normalized_query_router_entropy_reported": 0.7798338528514667,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6055690125257747,
+          "selected_slot_entropy_normalized": 0.6156842035199591,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1175
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.31711745262146,
+          "gate_initial": -2.0,
+          "gate_movement": 0.68288254737854,
+          "router_movement_l2": 1.2808958292007446,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 75.72832822098282,
+          "hottest_selected_slot_fraction": 0.052448272705078125,
+          "hottest_top1_branch_fraction": 0.436737060546875,
+          "mean_normalized_query_router_entropy_reported": 0.4654906202206431,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.5906564532237019,
+          "selected_slot_entropy_normalized": 0.5202300979170522,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 350
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 261.18670938466784,
+          "hottest_selected_slot_fraction": 0.023334503173828125,
+          "hottest_top1_branch_fraction": 0.26580810546875,
+          "mean_normalized_query_router_entropy_reported": 0.7916342529452517,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7646027874240299,
+          "selected_slot_entropy_normalized": 0.6690781396894717,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1157
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.4369840621948242,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5630159378051758,
+          "router_movement_l2": 1.155802607536316,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 97.53321374302948,
+          "hottest_selected_slot_fraction": 0.035572052001953125,
+          "hottest_top1_branch_fraction": 0.279693603515625,
+          "mean_normalized_query_router_entropy_reported": 0.5204843685082148,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.6123667264205642,
+          "selected_slot_entropy_normalized": 0.5506518074642677,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 395
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 278.02238856977317,
+          "hottest_selected_slot_fraction": 0.02254486083984375,
+          "hottest_top1_branch_fraction": 0.205108642578125,
+          "mean_normalized_query_router_entropy_reported": 0.7950190127216292,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8369071497277689,
+          "selected_slot_entropy_normalized": 0.676588104554905,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1301
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.4144419431686401,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5855580568313599,
+          "router_movement_l2": 1.158888339996338,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 101,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 86.05611186799771,
+          "hottest_selected_slot_fraction": 0.042705535888671875,
+          "hottest_top1_branch_fraction": 0.437347412109375,
+          "mean_normalized_query_router_entropy_reported": 0.5600394585954116,
+          "nonzero_top1_branches": 9,
+          "normalized_top1_entropy": 0.6080750565931371,
+          "selected_slot_entropy_normalized": 0.5356004794770729,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 305
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 197.25912473044698,
+          "hottest_selected_slot_fraction": 0.03179168701171875,
+          "hottest_top1_branch_fraction": 0.433685302734375,
+          "mean_normalized_query_router_entropy_reported": 0.7689113511492326,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6487305599631631,
+          "selected_slot_entropy_normalized": 0.6353290189286199,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1319
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.4318740367889404,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5681259632110596,
+          "router_movement_l2": 1.1640479564666748,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 74.13693750481858,
+          "hottest_selected_slot_fraction": 0.04327392578125,
+          "hottest_top1_branch_fraction": 0.35321044921875,
+          "mean_normalized_query_router_entropy_reported": 0.47348032350260766,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.5906664316316494,
+          "selected_slot_entropy_normalized": 0.5176767179601975,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 291
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 293.7243925978533,
+          "hottest_selected_slot_fraction": 0.0222930908203125,
+          "hottest_top1_branch_fraction": 0.325531005859375,
+          "mean_normalized_query_router_entropy_reported": 0.8175426751980568,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7630574233932131,
+          "selected_slot_entropy_normalized": 0.683193272523173,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1253
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.4080229997634888,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5919770002365112,
+          "router_movement_l2": 1.2989393472671509,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 86.8357858252604,
+          "hottest_selected_slot_fraction": 0.04144287109375,
+          "hottest_top1_branch_fraction": 0.35504150390625,
+          "mean_normalized_query_router_entropy_reported": 0.43983187339381224,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.5988484504791947,
+          "selected_slot_entropy_normalized": 0.5366848173319317,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 314
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 208.3908667081945,
+          "hottest_selected_slot_fraction": 0.02928924560546875,
+          "hottest_top1_branch_fraction": 0.484893798828125,
+          "mean_normalized_query_router_entropy_reported": 0.7486430769540863,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.631356633824473,
+          "selected_slot_entropy_normalized": 0.6419290198979428,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 956
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.4577146768569946,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5422853231430054,
+          "router_movement_l2": 1.2997606992721558,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 55.18039679514536,
+          "hottest_selected_slot_fraction": 0.0574951171875,
+          "hottest_top1_branch_fraction": 0.540771484375,
+          "mean_normalized_query_router_entropy_reported": 0.4023517285306563,
+          "nonzero_top1_branches": 8,
+          "normalized_top1_entropy": 0.4749919046103812,
+          "selected_slot_entropy_normalized": 0.4821736604875477,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 274
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 210.1637018880026,
+          "hottest_selected_slot_fraction": 0.0231475830078125,
+          "hottest_top1_branch_fraction": 0.312042236328125,
+          "mean_normalized_query_router_entropy_reported": 0.8164531081419373,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7650295236182761,
+          "selected_slot_entropy_normalized": 0.6429474756380277,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 945
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.5302103757858276,
+          "gate_initial": -2.0,
+          "gate_movement": 0.46978962421417236,
+          "router_movement_l2": 1.080645203590393,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 69.85607963300593,
+          "hottest_selected_slot_fraction": 0.049793243408203125,
+          "hottest_top1_branch_fraction": 0.46722412109375,
+          "mean_normalized_query_router_entropy_reported": 0.4436808334440615,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.5119977886956202,
+          "selected_slot_entropy_normalized": 0.5105261479117986,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 311
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 211.42336912818905,
+          "hottest_selected_slot_fraction": 0.0261993408203125,
+          "hottest_top1_branch_fraction": 0.24249267578125,
+          "mean_normalized_query_router_entropy_reported": 0.7846975037805061,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.7279832094141676,
+          "selected_slot_entropy_normalized": 0.6436659199854609,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 921
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2508386373519897,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7491613626480103,
+          "router_movement_l2": 1.2930922508239746,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 67.50396348454251,
+          "hottest_selected_slot_fraction": 0.04013824462890625,
+          "hottest_top1_branch_fraction": 0.330352783203125,
+          "mean_normalized_query_router_entropy_reported": 0.411599770004288,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.6031245123080299,
+          "selected_slot_entropy_normalized": 0.5064083589290782,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 298
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 169.37018602836244,
+          "hottest_selected_slot_fraction": 0.026580810546875,
+          "hottest_top1_branch_fraction": 0.397857666015625,
+          "mean_normalized_query_router_entropy_reported": 0.7797937088129663,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6599934901360077,
+          "selected_slot_entropy_normalized": 0.6170030109516124,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 827
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.2783453464508057,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7216546535491943,
+          "router_movement_l2": 1.25507390499115,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 93.28164168839557,
+          "hottest_selected_slot_fraction": 0.0357666015625,
+          "hottest_top1_branch_fraction": 0.250396728515625,
+          "mean_normalized_query_router_entropy_reported": 0.5722722218732876,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.6766426536253995,
+          "selected_slot_entropy_normalized": 0.5452934395018773,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 434
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 203.77547917550572,
+          "hottest_selected_slot_fraction": 0.02374267578125,
+          "hottest_top1_branch_fraction": 0.25177001953125,
+          "mean_normalized_query_router_entropy_reported": 0.7975491931928725,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.6952173789390669,
+          "selected_slot_entropy_normalized": 0.6392363873782675,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 959
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.1694334745407104,
+          "gate_initial": -2.0,
+          "gate_movement": 0.8305665254592896,
+          "router_movement_l2": 1.3182764053344727,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 67.94945206122198,
+          "hottest_selected_slot_fraction": 0.0545196533203125,
+          "hottest_top1_branch_fraction": 0.447418212890625,
+          "mean_normalized_query_router_entropy_reported": 0.45277206945520837,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.5542826871986571,
+          "selected_slot_entropy_normalized": 0.5071991676794247,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 282
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 304.34152514835176,
+          "hottest_selected_slot_fraction": 0.0227203369140625,
+          "hottest_top1_branch_fraction": 0.340972900390625,
+          "mean_normalized_query_router_entropy_reported": 0.8266607745649323,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.780472989855971,
+          "selected_slot_entropy_normalized": 0.6874622818430745,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1328
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.2963104248046875,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7036895751953125,
+          "router_movement_l2": 1.345400094985962,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 67.3188520706508,
+          "hottest_selected_slot_fraction": 0.0577392578125,
+          "hottest_top1_branch_fraction": 0.4700927734375,
+          "mean_normalized_query_router_entropy_reported": 0.43026760051343954,
+          "nonzero_top1_branches": 9,
+          "normalized_top1_entropy": 0.5173450281058695,
+          "selected_slot_entropy_normalized": 0.5060782225626341,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 299
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 201.92963773520813,
+          "hottest_selected_slot_fraction": 0.02439117431640625,
+          "hottest_top1_branch_fraction": 0.353240966796875,
+          "mean_normalized_query_router_entropy_reported": 0.7551443819039392,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6224468928000277,
+          "selected_slot_entropy_normalized": 0.6381424053389688,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1219
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.370654582977295,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6293454170227051,
+          "router_movement_l2": 1.152908444404602,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 102,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 68.02896468489136,
+          "hottest_selected_slot_fraction": 0.05185699462890625,
+          "hottest_top1_branch_fraction": 0.357330322265625,
+          "mean_normalized_query_router_entropy_reported": 0.45064994205006764,
+          "nonzero_top1_branches": 10,
+          "normalized_top1_entropy": 0.5647615403718377,
+          "selected_slot_entropy_normalized": 0.5073397690136601,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 262
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 238.9041654429288,
+          "hottest_selected_slot_fraction": 0.0263824462890625,
+          "hottest_top1_branch_fraction": 0.213165283203125,
+          "mean_normalized_query_router_entropy_reported": 0.807923379414739,
+          "nonzero_top1_branches": 15,
+          "normalized_top1_entropy": 0.798869626435507,
+          "selected_slot_entropy_normalized": 0.6583573498395751,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1131
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3492121696472168,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6507878303527832,
+          "router_movement_l2": 1.1734097003936768,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 68.60413916335732,
+          "hottest_selected_slot_fraction": 0.04985809326171875,
+          "hottest_top1_branch_fraction": 0.39111328125,
+          "mean_normalized_query_router_entropy_reported": 0.5148057816941223,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.5609781832460375,
+          "selected_slot_entropy_normalized": 0.5083519764583133,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 257
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 190.95855982994019,
+          "hottest_selected_slot_fraction": 0.029163360595703125,
+          "hottest_top1_branch_fraction": 0.252685546875,
+          "mean_normalized_query_router_entropy_reported": 0.8092926660180644,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8024526950102873,
+          "selected_slot_entropy_normalized": 0.6314263150699783,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1016
+        },
+        "order": 301,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.3139268159866333,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6860731840133667,
+          "router_movement_l2": 1.3060686588287354,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 123.99140614751991,
+          "hottest_selected_slot_fraction": 0.03830718994140625,
+          "hottest_top1_branch_fraction": 0.276763916015625,
+          "mean_normalized_query_router_entropy_reported": 0.5739100957994602,
+          "nonzero_top1_branches": 12,
+          "normalized_top1_entropy": 0.7009940270066173,
+          "selected_slot_entropy_normalized": 0.5795080267136852,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 388
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 168.91687575766574,
+          "hottest_selected_slot_fraction": 0.0273284912109375,
+          "hottest_top1_branch_fraction": 0.483428955078125,
+          "mean_normalized_query_router_entropy_reported": 0.7836413954657098,
+          "nonzero_top1_branches": 14,
+          "normalized_top1_entropy": 0.6039941389931688,
+          "selected_slot_entropy_normalized": 0.6166808048802809,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 831
+        },
+        "order": 301,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.272149682044983,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7278503179550171,
+          "router_movement_l2": 1.2996406555175781,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 122.99995111076552,
+          "hottest_selected_slot_fraction": 0.02721405029296875,
+          "hottest_top1_branch_fraction": 0.207275390625,
+          "mean_normalized_query_router_entropy_reported": 0.5698905730153214,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.7396268176096797,
+          "selected_slot_entropy_normalized": 0.5785428276588458,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 351
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 205.19809308396486,
+          "hottest_selected_slot_fraction": 0.026378631591796875,
+          "hottest_top1_branch_fraction": 0.42236328125,
+          "mean_normalized_query_router_entropy_reported": 0.7975274776126071,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.6385919537254643,
+          "selected_slot_entropy_normalized": 0.6400727928121307,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1076
+        },
+        "order": 301,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.2694875001907349,
+          "gate_initial": -2.0,
+          "gate_movement": 0.7305124998092651,
+          "router_movement_l2": 1.2599246501922607,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 106.79274190143245,
+          "hottest_selected_slot_fraction": 0.03162384033203125,
+          "hottest_top1_branch_fraction": 0.23095703125,
+          "mean_normalized_query_router_entropy_reported": 0.5118283643021398,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.6908296876517889,
+          "selected_slot_entropy_normalized": 0.5615558156925905,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 340
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 255.27826770877314,
+          "hottest_selected_slot_fraction": 0.023868560791015625,
+          "hottest_top1_branch_fraction": 0.1871337890625,
+          "mean_normalized_query_router_entropy_reported": 0.8099381071280394,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8478473915816239,
+          "selected_slot_entropy_normalized": 0.6663272427968666,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1114
+        },
+        "order": 302,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.4093453884124756,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5906546115875244,
+          "router_movement_l2": 1.2032467126846313,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 95.77949731337391,
+          "hottest_selected_slot_fraction": 0.038944244384765625,
+          "hottest_top1_branch_fraction": 0.26654052734375,
+          "mean_normalized_query_router_entropy_reported": 0.515392425434677,
+          "nonzero_top1_branches": 10,
+          "normalized_top1_entropy": 0.6949403860483678,
+          "selected_slot_entropy_normalized": 0.5484704132231637,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 298
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 430.84365812166016,
+          "hottest_selected_slot_fraction": 0.015644073486328125,
+          "hottest_top1_branch_fraction": 0.161956787109375,
+          "mean_normalized_query_router_entropy_reported": 0.7856633121156049,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8656002281103286,
+          "selected_slot_entropy_normalized": 0.7292517198174846,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1536
+        },
+        "order": 302,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.413924217224121,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5860757827758789,
+          "router_movement_l2": 1.2937226295471191,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 95.03354891658645,
+          "hottest_selected_slot_fraction": 0.036258697509765625,
+          "hottest_top1_branch_fraction": 0.40399169921875,
+          "mean_normalized_query_router_entropy_reported": 0.49532813881270554,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.6047142248483606,
+          "selected_slot_entropy_normalized": 0.5475304167567911,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 358
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 331.7610431197768,
+          "hottest_selected_slot_fraction": 0.017383575439453125,
+          "hottest_top1_branch_fraction": 0.138763427734375,
+          "mean_normalized_query_router_entropy_reported": 0.8275353545749358,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8500126338335259,
+          "selected_slot_entropy_normalized": 0.6978333898538156,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1259
+        },
+        "order": 302,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3680634498596191,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6319365501403809,
+          "router_movement_l2": 1.2645741701126099,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 14,
+          "effective_selected_slots": 82.85639795219655,
+          "hottest_selected_slot_fraction": 0.047657012939453125,
+          "hottest_top1_branch_fraction": 0.386627197265625,
+          "mean_normalized_query_router_entropy_reported": 0.46743187398063973,
+          "nonzero_top1_branches": 11,
+          "normalized_top1_entropy": 0.5861583695228318,
+          "selected_slot_entropy_normalized": 0.5310450998113121,
+          "unique_candidate_slots": 3584,
+          "unique_selected_slots": 288
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 220.14015187092278,
+          "hottest_selected_slot_fraction": 0.022491455078125,
+          "hottest_top1_branch_fraction": 0.237701416015625,
+          "mean_normalized_query_router_entropy_reported": 0.817397243305396,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7975099155256294,
+          "selected_slot_entropy_normalized": 0.6485232079571611,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 923
+        },
+        "order": 303,
+        "seed": 501,
+        "training": {
+          "gate_final": -1.4041088819503784,
+          "gate_initial": -2.0,
+          "gate_movement": 0.5958911180496216,
+          "router_movement_l2": 1.2696129083633423,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 110.71109298289191,
+          "hottest_selected_slot_fraction": 0.03047943115234375,
+          "hottest_top1_branch_fraction": 0.24713134765625,
+          "mean_normalized_query_router_entropy_reported": 0.5226945704770771,
+          "nonzero_top1_branches": 13,
+          "normalized_top1_entropy": 0.7657770381778369,
+          "selected_slot_entropy_normalized": 0.5658879978066067,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 391
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 296.1686332700717,
+          "hottest_selected_slot_fraction": 0.02292633056640625,
+          "hottest_top1_branch_fraction": 0.2691650390625,
+          "mean_normalized_query_router_entropy_reported": 0.8223819115140302,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.8114825733887114,
+          "selected_slot_entropy_normalized": 0.6841895870872645,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1233
+        },
+        "order": 303,
+        "seed": 502,
+        "training": {
+          "gate_final": -1.3734033107757568,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6265966892242432,
+          "router_movement_l2": 1.1786582469940186,
+          "router_nonzero_gradient_steps": 512
+        }
+      },
+      {
+        "backbone": 103,
+        "final": {
+          "distinct_visited_branches": 15,
+          "effective_selected_slots": 106.08473136939442,
+          "hottest_selected_slot_fraction": 0.0332489013671875,
+          "hottest_top1_branch_fraction": 0.25189208984375,
+          "mean_normalized_query_router_entropy_reported": 0.5268474925439789,
+          "nonzero_top1_branches": 14,
+          "normalized_top1_entropy": 0.7298014280834707,
+          "selected_slot_entropy_normalized": 0.5607561013200592,
+          "unique_candidate_slots": 3840,
+          "unique_selected_slots": 355
+        },
+        "initial": {
+          "distinct_visited_branches": 16,
+          "effective_selected_slots": 237.1764917462726,
+          "hottest_selected_slot_fraction": 0.03119659423828125,
+          "hottest_top1_branch_fraction": 0.313018798828125,
+          "mean_normalized_query_router_entropy_reported": 0.8518907055973437,
+          "nonzero_top1_branches": 16,
+          "normalized_top1_entropy": 0.7183316261185634,
+          "selected_slot_entropy_normalized": 0.6574847675791253,
+          "unique_candidate_slots": 4096,
+          "unique_selected_slots": 1106
+        },
+        "order": 303,
+        "seed": 503,
+        "training": {
+          "gate_final": -1.3693913221359253,
+          "gate_initial": -2.0,
+          "gate_movement": 0.6306086778640747,
+          "router_movement_l2": 1.2725683450698853,
+          "router_nonzero_gradient_steps": 512
+        }
+      }
+    ]
+  },
+  "evaluations_checked": 162,
+  "fixed_router_unchanged_cells": 27,
+  "learned_router_all_512_nonzero_gradient_cells": 27,
+  "learned_router_positive_movement_cells": 27,
+  "limits": "Per-query router entropy is the reported mean; aggregate branch counts cannot reconstruct it. Router movement uses the saved scalar, and gradient counts are verified from raw per-step norms; binary states are outside this audit. Summaries are descriptive and add no scientific gate.",
+  "maximum_observed_reconstruction_error": {
+    "effective_selected_slots": 3.410605131648481e-13,
+    "gate_movement": 0,
+    "hottest_selected_slot_fraction": 0,
+    "hottest_top1_branch_fraction": 0,
+    "nonzero_top1_branches": 0,
+    "normalized_top1_entropy": 2.220446049250313e-16,
+    "selected_slot_entropy_normalized": 1.1102230246251565e-16,
+    "unique_selected_slots": 0
+  },
+  "memory_cells": 81,
+  "paired_tree_initial_records_equal": 27,
+  "status": "PASS"
+}

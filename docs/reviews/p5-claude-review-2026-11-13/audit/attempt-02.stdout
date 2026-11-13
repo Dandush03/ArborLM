@@ -1,0 +1,32 @@
+problems: []
+Q identity max abs diff: 0.0
+baseline_mean            pub=2.356630571600464        mine=2.356630571600464        diff=0.000e+00
+final_mean_flat          pub=2.333691890041033        mine=2.3336918900410333       diff=4.441e-16
+final_mean_fixed_tree    pub=2.334497243027996        mine=2.334497243027996        diff=0.000e+00
+final_mean_learned_tree  pub=2.335080704203358        mine=2.3350807042033583       diff=4.441e-16
+final_mean_dense         pub=2.329312946371458        mine=2.3293129463714584       diff=4.441e-16
+G_flat                   pub=0.02293868155943         mine=0.022938681559430227     diff=2.255e-16
+G_fixed_tree             pub=0.022133328572468        mine=0.022133328572467522     diff=4.788e-16
+G_learned_tree           pub=0.021549867397105        mine=0.021549867397105252     diff=2.533e-16
+G_dense                  pub=0.027317625229005        mine=0.027317625229005462     diff=4.614e-16
+P_flat                   pub=0.022679531739818        mine=0.022679531739817724     diff=2.776e-16
+P_fixed_tree             pub=0.021944248289974        mine=0.02194424828997365      diff=3.504e-16
+P_learned_tree           pub=0.02160365258654         mine=0.021603652586539585     diff=4.163e-16
+R_mean                   pub=-0.000583461175362       mine=-0.000583461175362269    diff=2.691e-16
+R_sd                     pub=0.001871343960431        mine=0.0018713439604312256    diff=2.255e-16
+R_min                    pub=-0.004701465368271       mine=-0.004701465368270874    diff=1.258e-16
+R_max                    pub=0.003432027995586        mine=0.0034320279955863953    diff=3.951e-16
+R_pos_cells              pub=10                       mine=10                       diff=0.000e+00
+R_pos_parents            pub=3                        mine=3                        diff=0.000e+00
+T_fixed                  pub=0.000805352986963        mine=0.0008053529869627069    diff=2.931e-16
+T_learned                pub=0.001388814162325        mine=0.001388814162324976     diff=2.385e-17
+Q_flat                   pub=-0.004378943669575       mine=-0.004378943669575232    diff=2.316e-16
+Q_fixed                  pub=-0.005184296656538       mine=-0.005184296656537939    diff=6.072e-17
+Q_learned                pub=-0.0057677578319         mine=-0.005767757831900208    diff=2.073e-16
+gm_add_fixed             pub=2.603052229693476        mine=2.603052229693476        diff=0.000e+00
+gm_add_learned           pub=2.598485032668176        mine=2.598485032668176        diff=0.000e+00
+gm_fwd_fixed             pub=2.190282147732538        mine=2.190282147732538        diff=0.000e+00
+gm_fwd_learned           pub=2.184085943163431        mine=2.184085943163431        diff=0.000e+00
+flags: {'U_flat': True, 'U_fixed_tree': True, 'U_learned_tree': True, 'R': False, 'Qtol_fixed_tree': True, 'Qtol_learned_tree': True, 'dense_tol_flat': False, 'dense_tol_fixed_tree': False, 'dense_tol_learned_tree': False} L: {'fixed_tree': 'FAIL', 'learned_tree': 'FAIL'} work: {'fixed_tree': {'comparisons': 216, 'all_ratio_0.12890625_and_8_values': True}, 'learned_tree': {'comparisons': 216, 'all_ratio_0.12890625_and_8_values': True}} composite: False
+unusable timing records: [([101, 302, 502], 8, 'lookup_score_select', 'flat', 1.2682), ([102, 301, 501], 8, 'lookup_score_select', 'fixed_tree', 1.2697), ([102, 302, 503], 1, 'model_forward', 'fixed_tree', 1.2649), ([102, 303, 503], 1, 'lookup_score_select', 'fixed_tree', 1.4454)]
+stored-vs-recomputed timing mismatches: 0

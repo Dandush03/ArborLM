@@ -1,0 +1,17 @@
+{"completed_step":17,"event":"train_step","loss_unit":"nats_per_target_token","next_row":136,"pre_clip_gradient_norm":1.2444392442703247,"pre_update_loss":2.7611677646636963,"target_tokens_cumulative":4352}
+{"completed_step":18,"event":"train_step","loss_unit":"nats_per_target_token","next_row":144,"pre_clip_gradient_norm":0.8621550798416138,"pre_update_loss":2.7692925930023193,"target_tokens_cumulative":4608}
+{"completed_step":19,"event":"train_step","loss_unit":"nats_per_target_token","next_row":152,"pre_clip_gradient_norm":0.7844661474227905,"pre_update_loss":2.7144978046417236,"target_tokens_cumulative":4864}
+{"completed_step":20,"event":"train_step","loss_unit":"nats_per_target_token","next_row":160,"pre_clip_gradient_norm":1.0757503509521484,"pre_update_loss":2.7147023677825928,"target_tokens_cumulative":5120}
+{"completed_step":21,"event":"train_step","loss_unit":"nats_per_target_token","next_row":168,"pre_clip_gradient_norm":0.7588831186294556,"pre_update_loss":2.7531378269195557,"target_tokens_cumulative":5376}
+{"completed_step":22,"event":"train_step","loss_unit":"nats_per_target_token","next_row":176,"pre_clip_gradient_norm":0.9066032767295837,"pre_update_loss":2.718733787536621,"target_tokens_cumulative":5632}
+{"completed_step":23,"event":"train_step","loss_unit":"nats_per_target_token","next_row":184,"pre_clip_gradient_norm":1.0869472026824951,"pre_update_loss":2.76619029045105,"target_tokens_cumulative":5888}
+{"completed_step":24,"event":"train_step","loss_unit":"nats_per_target_token","next_row":192,"pre_clip_gradient_norm":1.1882174015045166,"pre_update_loss":2.8106889724731445,"target_tokens_cumulative":6144}
+{"completed_step":25,"event":"train_step","loss_unit":"nats_per_target_token","next_row":200,"pre_clip_gradient_norm":0.8391082882881165,"pre_update_loss":2.7272753715515137,"target_tokens_cumulative":6400}
+{"completed_step":26,"event":"train_step","loss_unit":"nats_per_target_token","next_row":208,"pre_clip_gradient_norm":0.9364141821861267,"pre_update_loss":2.7067291736602783,"target_tokens_cumulative":6656}
+{"completed_step":27,"event":"train_step","loss_unit":"nats_per_target_token","next_row":216,"pre_clip_gradient_norm":0.7508684396743774,"pre_update_loss":2.7486813068389893,"target_tokens_cumulative":6912}
+{"completed_step":28,"event":"train_step","loss_unit":"nats_per_target_token","next_row":224,"pre_clip_gradient_norm":1.4043699502944946,"pre_update_loss":2.7283782958984375,"target_tokens_cumulative":7168}
+{"completed_step":29,"event":"train_step","loss_unit":"nats_per_target_token","next_row":232,"pre_clip_gradient_norm":0.9261574745178223,"pre_update_loss":2.723623037338257,"target_tokens_cumulative":7424}
+{"completed_step":30,"event":"train_step","loss_unit":"nats_per_target_token","next_row":240,"pre_clip_gradient_norm":1.4889956712722778,"pre_update_loss":2.789403200149536,"target_tokens_cumulative":7680}
+{"completed_step":31,"event":"train_step","loss_unit":"nats_per_target_token","next_row":248,"pre_clip_gradient_norm":1.1677933931350708,"pre_update_loss":2.686793565750122,"target_tokens_cumulative":7936}
+{"completed_step":32,"event":"train_step","loss_unit":"nats_per_target_token","next_row":0,"pre_clip_gradient_norm":0.7672348022460938,"pre_update_loss":2.717567205429077,"target_tokens_cumulative":8192}
+{"completed_step":32,"event":"evaluation","nll":2.7135501205921173,"nll_unit":"nats_per_target_token","perplexity":15.08272607719832,"perplexity_null_reason":null,"tokens":2048}

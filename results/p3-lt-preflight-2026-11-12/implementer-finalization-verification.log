@@ -1,0 +1,21 @@
++zsh:17> uv run --locked --extra pilot ruff check .
+All checks passed!
++zsh:18> uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 31 source files
++zsh:19> uv run --locked --extra pilot pytest tests/test_p3.py -k failure
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+collected 5 items / 4 deselected / 1 selected
+
+tests/test_p3.py .                                                       [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 1 passed, 4 deselected, 1 warning in 0.02s ==================
++zsh:20> git diff --check

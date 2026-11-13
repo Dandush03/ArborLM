@@ -1,0 +1,14 @@
+{
+  "mean_delta_nll": {
+    "original": 0.0,
+    "disabled": 0.0020039925972620645,
+    "values_permuted": 0.0021469779312610626,
+    "joint_within_branch": 0.0
+  },
+  "threshold": 0.005,
+  "memory_module_threshold_met": false,
+  "slot_binding_threshold_met": false,
+  "all_checkpoint_bytes_unchanged": true,
+  "all_replay_and_joint_deltas_zero": true,
+  "prior_promotion_gate": "FAILED_UNCHANGED"
+}

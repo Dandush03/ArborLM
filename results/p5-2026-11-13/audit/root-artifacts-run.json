@@ -1,0 +1,15 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--extra",
+    "pilot",
+    "python",
+    "results/p5-2026-11-13/audit/independent-artifacts.py"
+  ],
+  "script_sha256": "c976ab5a0a2eb4eacd6693454d439fd5e6cbde01d577971a0aca325f79d3dd47",
+  "script_unchanged_during_run": true,
+  "exit_code": 0,
+  "byte_identical_to_luna_attempt04": true
+}

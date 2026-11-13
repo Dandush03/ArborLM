@@ -1,0 +1,90 @@
++zsh:4> uv run --locked --extra pilot pytest tests/test_p5.py -k delayed_invalid_ack
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+collected 8 items / 6 deselected / 2 selected
+
+tests/test_p5.py FF                                                      [100%]
+
+=================================== FAILURES ===================================
+_____________ test_delayed_invalid_ack_wait_remains_charged[False] _____________
+
+tmp_path = PosixPath('/private/var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/pytest-of-daniellaloush/pytest-70/test_delayed_invalid_ack_wait_0')
+malformed = False
+
+    @pytest.mark.parametrize("malformed", [False, True])
+    def test_delayed_invalid_ack_wait_remains_charged(tmp_path: Path, malformed: bool) -> None:
+        now = [100.0]
+        clock = ActiveClock(1790, now=lambda: now[0])
+        ack_path = tmp_path / "report-acks" / "worker.json"
+        used: set[str] = set()
+    
+        def sleep(_duration: float) -> None:
+            now[0] += 7
+            if malformed:
+                ack_path.write_text("not JSON", encoding="utf-8")
+            else:
+                write_json(
+                    ack_path,
+                    {
+                        "suite_id": "suite",
+                        "worker_id": "wrong-worker",
+                        "commit": "a" * 40,
+                        "push_completed": True,
+                    },
+                )
+    
+        with pytest.raises(ValueError):
+            wait_for_ack(tmp_path, "suite", "worker", used, clock, announce=lambda _: None, sleep=sleep)
+        assert not used
+        accounting = clock.snapshot()
+>       assert accounting["external_reporting_wait_seconds"] == 0
+E       assert 7.0 == 0
+
+tests/test_p5.py:100: AssertionError
+_____________ test_delayed_invalid_ack_wait_remains_charged[True] ______________
+
+tmp_path = PosixPath('/private/var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/pytest-of-daniellaloush/pytest-70/test_delayed_invalid_ack_wait_1')
+malformed = True
+
+    @pytest.mark.parametrize("malformed", [False, True])
+    def test_delayed_invalid_ack_wait_remains_charged(tmp_path: Path, malformed: bool) -> None:
+        now = [100.0]
+        clock = ActiveClock(1790, now=lambda: now[0])
+        ack_path = tmp_path / "report-acks" / "worker.json"
+        used: set[str] = set()
+    
+        def sleep(_duration: float) -> None:
+            now[0] += 7
+            if malformed:
+                ack_path.write_text("not JSON", encoding="utf-8")
+            else:
+                write_json(
+                    ack_path,
+                    {
+                        "suite_id": "suite",
+                        "worker_id": "wrong-worker",
+                        "commit": "a" * 40,
+                        "push_completed": True,
+                    },
+                )
+    
+        with pytest.raises(ValueError):
+            wait_for_ack(tmp_path, "suite", "worker", used, clock, announce=lambda _: None, sleep=sleep)
+        assert not used
+        accounting = clock.snapshot()
+>       assert accounting["external_reporting_wait_seconds"] == 0
+E       assert 7.0 == 0
+
+tests/test_p5.py:100: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_p5.py::test_delayed_invalid_ack_wait_remains_charged[False]
+FAILED tests/test_p5.py::test_delayed_invalid_ack_wait_remains_charged[True]
+================== 2 failed, 6 deselected, 1 warning in 0.03s ==================

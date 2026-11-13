@@ -1,0 +1,41 @@
++ uv run --locked --extra pilot ruff check .
+All checks passed!
++ uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 47 source files
++ uv run --locked --extra pilot pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 156 items
+
+tests/test_checkpoint.py ........                                        [  5%]
+tests/test_config_data.py ................                               [ 15%]
+tests/test_diagnose_memory.py ........                                   [ 20%]
+tests/test_fetch_wikitext.py .........                                   [ 26%]
+tests/test_independent_contract.py ....                                  [ 28%]
+tests/test_p2.py .......                                                 [ 33%]
+tests/test_p2_independent_contract.py .....                              [ 36%]
+tests/test_p3.py .....                                                   [ 39%]
+tests/test_p3_independent_contract.py ......                             [ 43%]
+tests/test_p4.py ........                                                [ 48%]
+tests/test_p4_independent_contract.py ...................                [ 60%]
+tests/test_p5.py ......                                                  [ 64%]
+tests/test_p5_independent_contract.py .................................  [ 85%]
+tests/test_pilot.py ...................                                  [ 98%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+tests/test_p5_independent_contract.py::test_optimizer_rejects_group_splits_wrong_hyperparameters_and_membership
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_compile.py:53: UserWarning: optimizer contains a parameter group with duplicate parameters; in future, this will cause an error; see github.com/pytorch/pytorch/issues/40967 for more information
+    return disable_fn(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 156 passed, 2 warnings in 42.78s =======================
++ uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T124435147087Z-c639d979f77240718281e53bab42d482

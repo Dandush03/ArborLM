@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/independent-arithmetic.py", line 926, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/independent-arithmetic.py", line 884, in main
+    retrieval = retrieval_audit(indexed, errors) if indexed else {}
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/independent-arithmetic.py", line 443, in retrieval_audit
+    slots = retrieval.get("selected_slot_counts")
+            ^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'

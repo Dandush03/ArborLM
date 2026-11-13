@@ -1,0 +1,45 @@
+schema_version = 1
+experiment_family = "P3_LT"
+spec_reference = "docs/decisions/ADR-0008-bounded-longer-training.md"
+parent_spec_reference = "docs/decisions/ADR-0007-controlled-optimization-followup.md"
+parent_suite_id = "P2-20261113T030106857200Z-d08b874d11e74a7391b15f762e40f0c7"
+parent_source_freeze = "fd61cb7a69b8d29484cf8bef0170c1eb168da1fe"
+parent_source_sha256 = "6fea4b684a364ef85c8cda6ea1df683f9e7f8332dd4645caf7094b620da02801"
+
+[data]
+ranked_train = 4096
+used_train = 2048
+earlier_panels = [[0, 512], [512, 1024]]
+validation_ranks = [1024, 1536]
+order = "repeat-exact-parent-order"
+
+[training]
+execution = "strict-P2-restore-and-identical-update"
+parent_step = 256
+final_step = 1024
+batch_size = 8
+context = 64
+checkpoint_steps = [256, 512, 1024]
+additional_targets_per_cell = 393216
+lifetime_targets_per_cell = 524288
+
+[evaluation]
+scientific_steps = [256, 512, 1024]
+targets_per_panel = 32768
+conditions = ["enabled", "disabled", "values_permuted", "joint_within_branch"]
+permutation_rule = "reuse-P2-seed-and-order-per-cell"
+parent_panel_use = "bitwise-restore-integrity-only"
+joint_absolute_tolerance = 0.000001
+
+[analysis]
+primary_step = 1024
+secondary_step = 512
+dependence_threshold = 0.005
+joint_positive_cells = 22
+additive_identity_absolute_tolerance = 0.000000000001
+
+[limits]
+cell_seconds = 300
+suite_seconds = 1800
+rss_bytes = 2147483648
+poll_seconds = 0.1

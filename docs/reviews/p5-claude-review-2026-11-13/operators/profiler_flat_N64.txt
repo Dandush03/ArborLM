@@ -1,0 +1,36 @@
+# torch.profiler CPU, 20 calls of unmodified Memory.lookup, N=64, flat
+# profiler overhead inflates small ops; cross-check only
+-----------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                         Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+-----------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                   aten::topk        77.50%       4.750ms        77.50%       4.750ms     237.519us            20  
+                     aten::mm         8.02%     491.288us         8.03%     491.999us      24.600us            20  
+                    aten::div         8.00%     490.246us         8.31%     509.538us      12.738us            40  
+     aten::linalg_vector_norm         3.24%     198.543us         3.24%     198.543us       9.927us            20  
+                    aten::all         0.61%      37.288us         0.73%      44.834us       1.121us            40  
+                     aten::gt         0.40%      24.501us         0.40%      24.501us       1.225us            20  
+                 aten::gather         0.33%      20.420us         0.34%      21.083us       1.054us            20  
+                  aten::copy_         0.26%      15.788us         0.26%      15.788us       0.395us            40  
+             aten::as_strided         0.21%      13.036us         0.21%      13.036us       0.093us           140  
+              aten::clamp_min         0.20%      12.084us         0.20%      12.084us       0.604us            20  
+                  aten::slice         0.17%      10.462us         0.28%      17.292us       0.288us            60  
+                aten::permute         0.13%       7.919us         0.15%       9.294us       0.465us            20  
+               aten::_to_copy         0.12%       7.169us         0.27%      16.416us       0.821us            20  
+                  aten::clone         0.09%       5.670us         0.36%      21.793us       1.090us            20  
+                   aten::item         0.09%       5.249us         0.10%       6.041us       0.302us            20  
+                  aten::fill_         0.08%       4.880us         0.08%       4.880us       0.122us            40  
+              aten::expand_as         0.06%       3.580us         0.15%       9.166us       0.458us            20  
+                     aten::to         0.06%       3.539us         0.33%      19.955us       0.499us            40  
+                 aten::matmul         0.06%       3.459us         8.08%     495.458us      24.773us            20  
+                 aten::expand         0.06%       3.421us         0.09%       5.586us       0.279us            20  
+             aten::empty_like         0.06%       3.375us         0.11%       6.709us       0.335us            20  
+                  aten::empty         0.05%       3.334us         0.05%       3.334us       0.167us            20  
+                aten::numpy_T         0.05%       3.205us         0.20%      12.499us       0.625us            20  
+             aten::contiguous         0.05%       3.169us         0.41%      24.962us       1.248us            20  
+             aten::is_nonzero         0.05%       3.166us         0.15%       9.207us       0.460us            20  
+          aten::empty_strided         0.05%       2.873us         0.05%       2.873us       0.144us            20  
+    aten::_local_scalar_dense         0.01%       0.792us         0.01%       0.792us       0.040us            20  
+           aten::resolve_conj         0.01%       0.711us         0.01%       0.711us       0.018us            40  
+-----------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 6.130ms
+

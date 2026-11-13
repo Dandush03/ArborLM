@@ -1,0 +1,18 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+  "status": "PASS",
+  "checks": {
+    "hand_calculated_positive_effects_all_flags": true,
+    "usefulness_mean_gain": true,
+    "usefulness_mean_shuffle": true,
+    "usefulness_mean_final_below_initial": true,
+    "quality_penalty_all_clauses_reject": true,
+    "dense_tolerance_all_clauses_reject": true,
+    "usefulness_22cell_8parent_strict_sign_boundaries": true,
+    "latency_point8_and1point05_boundaries": true,
+    "latency_geometric_margin_reject": true
+  },
+  "method": "Root hand calculations against separate-reviewer scalar fixtures; no model forward, corpus, or timing call",
+  "scientific_evaluations": 0
+}

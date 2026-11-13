@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-results-audit-2026-11-13/recompute_p6q.py", line 489, in <module>
+    run_of = {c["label"]: c["run_id"] for c in suite["cells"]}
+                          ~^^^^^^^^^^
+KeyError: 'run_id'

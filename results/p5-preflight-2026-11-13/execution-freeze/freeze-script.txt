@@ -1,0 +1,25 @@
+"""Record P5 source/config/data/parent identities before model execution."""
+import json
+import subprocess
+from pathlib import Path
+from arborlm.io import canonical_json, read_json, sha256, write_json, file_sha256
+from arborlm.records import record_source, record_environment
+from arborlm.p5_config import SPEC, load_config, config_hash, cells
+assert subprocess.check_output(['git','status','--porcelain'])==b''
+local=Path('experiments/review/p5-execution-freeze')
+local.mkdir()
+source=record_source(local,Path.cwd(),spec=SPEC)
+assert not source['dirty'] and source['code_commit']=='9028507844c500bc4d296202e7c6c6e4ae552ecc'
+env=record_environment(local,family='P5_PREFLIGHT_FREEZE')
+config=load_config(Path('configs/p5_hierarchy_ablation.toml'))
+dataset=read_json(Path('results/p5-preflight-2026-11-13/root-strict-restore/dataset_manifest.json'))
+assert sha256(canonical_json(dataset))=='481dba62b283fc7b732bcf3692f38f37c2891b9d2200f9e1fc304c0f5721e848'
+review=read_json(Path('results/p5-preflight-2026-11-13/root-acceptance/acceptance.json'))
+assert all(file_sha256(Path(p))==h for p,h in review['reviewed_source_sha256'].items())
+parents=read_json(Path('results/p5-preflight-2026-11-13/independent-data-parent-audit.json'))['parent_audit']['parents']
+record={'status':'FROZEN_BEFORE_P5_REAL_DATA_MODEL_EXECUTION','date_local':'2026-11-13','scientific_reviewer':'root Codex under human-authorized exception','astra_review':'NOT_PERFORMED','human_spec_budget_approval':'ADR-0010 section13','engineering_acceptance':'ADR-0010 section14; root-acceptance/acceptance.json; luna-review.md','source_code_commit':source['code_commit'],'source_sha256':source['archive']['sha256'],'spec_sha256':source['spec_sha256'],'lock_sha256':source['lock_sha256'],'config_sha256':config_hash(config),'config_file_sha256':file_sha256(Path('configs/p5_hierarchy_ablation.toml')),'dataset_manifest_sha256':sha256(canonical_json(dataset)),'validation_bytes_sha256':dataset['checksums_sha256']['validation.bytes'],'source_snapshot_clean':not source['dirty'],'parents':parents,'execution_order':[dict(label=c.label,**c.fields()) for c in cells()],'counts':{'quality_cells':117,'trained_cells':108,'training_updates':55296,'new_training_targets':28311552,'snapshots':333,'scientific_evaluations':612,'parent_integrity_evaluations':9,'timing_workers':36,'timing_scope_calls_including_warmups':58752},'limits':config['limits'],'registered_P5_model_forwards_before_freeze':0,'source_config_test_changes_during_execution':'FORBIDDEN; results-only commits permitted','merge_publication_further_scaling':'HUMAN_APPROVAL_PENDING'}
+out=Path('results/p5-preflight-2026-11-13/execution-freeze')
+out.mkdir()
+for name,obj in [('freeze.json',record),('source.json',source),('environment.json',env),('config.resolved.json',config),('dataset_manifest.json',dataset)]:
+ write_json(out/name,obj)
+print(json.dumps({k:record[k] for k in ('source_code_commit','source_sha256','spec_sha256','lock_sha256','config_sha256','dataset_manifest_sha256','validation_bytes_sha256')},indent=2))

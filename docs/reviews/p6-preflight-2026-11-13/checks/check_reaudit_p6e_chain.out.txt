@@ -1,0 +1,22 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+[sequence] open equivalence (no supersede): OK None
+[sequence] open screen (no supersede): OK None
+[sequence] open confirm (no supersede): OK None
+[sequence] open analysis (no supersede): OK None
+[sequence] consume equivalence (implicit id): OK P6EEQD-20261113T172741340538Z-f0cae21e5fa749659af85dcc22ccb4d0
+[sequence] consume screen (implicit id): OK P6ESCRD-20261113T172746203535Z-44fcdfc8ebec4ce59598b3b6757c26b6
+[sequence] consume confirm (implicit id): OK P6ECOND-20261113T172759974459Z-59d68fa0483c402d95f49df22686d291
+[sequence] linkage of the registered chain: OK None
+[sequence] linkage with dry_run=True against non-dry records: REFUSED ValueError: P6-E run linkage check failed: worker dry-run flags match
+[rerun] equivalence again, no supersede: REFUSED ValueError: refusing to run equivalence again: earlier run(s) ['P6EEQD-20261113T172741340538Z-f0cae21e5fa749659af85dcc22ccb4d0'] exist under /private/tmp/claude-501/-Users-
+[rerun] screen again, no supersede: REFUSED ValueError: refusing to run screen again: earlier run(s) ['P6ESCRD-20261113T172746203535Z-44fcdfc8ebec4ce59598b3b6757c26b6'] exist under /private/tmp/claude-501/-Users-dani
+[rerun] confirm again, no supersede: REFUSED ValueError: refusing to run confirm again: earlier run(s) ['P6ECOND-20261113T172759974459Z-59d68fa0483c402d95f49df22686d291'] exist under /private/tmp/claude-501/-Users-dan
+[rerun] analysis again, no supersede: REFUSED ValueError: refusing to run analysis again: earlier run(s) ['P6EANAD-20261113T172806135902Z-729d82e0a8614500968e3f09c2237d4b'] exist under /private/tmp/claude-501/-Users-da
+[rerun] screen, supersede wrong id: REFUSED ValueError: --supersede 'P6ESCR-nope' is not an earlier screen run: ['P6ESCRD-20261113T172746203535Z-44fcdfc8ebec4ce59598b3b6757c26b6']
+[rerun] screen, supersede right id, blank reason: REFUSED ValueError: --supersede requires a non-empty --reason
+[rerun] screen, supersede right id with reason: OK {'run_id': 'P6ESCRD-20261113T172746203535Z-44fcdfc8ebec4ce59598b3b6757c26b6', 'reason': 'operator error', 'earlier_runs': ['P6ESCRD-20261113T172746203535Z-44fcdfc8ebec4ce59598b3b6757c26b6']}
+[superseded] confirm consumes screen with implicit id: REFUSED ValueError: expected exactly one completed screen run under /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/c
+[superseded] linkage: old confirm + new screen: REFUSED ValueError: P6-E run linkage check failed: screen result records this selection; confirm consumed this screen run; confirm consumed this selection
+[superseded] linkage: old confirm + old screen (explicit id): OK None
+[dry] explicit dry-run equivalence id consumed as registered: REFUSED ValueError: equivalence run P6EEQD-20261113T172741340538Z-f0cae21e5fa749659af85dcc22ccb4d0 has a different dry_run flag than requested (dry_run=False): a registered stage n

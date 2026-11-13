@@ -1,0 +1,37 @@
+name: E0 CPU
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  e0:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.15"
+      - name: Install locked CPU dependencies
+        id: setup
+        run: uv sync --locked --extra pilot
+      - name: Lint, typecheck, and test
+        run: |
+          uv run --locked --extra pilot ruff check .
+          uv run --locked --extra pilot mypy src/arborlm
+          uv run --locked --extra pilot pytest
+      - name: Run E0 smoke
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+      - name: Upload E0 artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e0-cpu-${{ github.run_id }}-${{ github.run_attempt }}
+          path: experiments/
+          if-no-files-found: warn
