@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import torch
-from torch import Tensor
+from torch import Tensor, nn
 from torch.optim import AdamW
 
 from .config import SCHEMA, SPEC
@@ -77,32 +77,36 @@ def save_checkpoint(
     step: int,
     identity: dict[str, Any],
 ) -> str:
-    if destination.exists():
-        raise FileExistsError(destination)
     if step not in CHECKPOINT_STEPS:
         raise ValueError(f"unsupported checkpoint step: {step}")
+    state = {
+        "schema_version": SCHEMA,
+        "spec_reference": SPEC,
+        "identity": identity,
+        "model": model.state_dict(),
+        "optimizer": optimizer.state_dict(),
+        "python_rng": random.getstate(),
+        "torch_rng": torch.get_rng_state(),
+        "completed_step": step,
+        "next_row": (step * BATCH_SIZE) % 256,
+        "train_tokens": step * BATCH_SIZE * CONTEXT,
+        "components": NOT_APPLICABLE,
+    }
+    return publish_state(destination, state, schema=SCHEMA)
+
+
+def publish_state(destination: Path, state: dict[str, Any], *, schema: int) -> str:
+    if destination.exists():
+        raise FileExistsError(destination)
     stage = Path(tempfile.mkdtemp(prefix=f".{destination.name}.", dir=destination.parent))
     try:
         state_path = stage / "state.pt"
-        state = {
-            "schema_version": SCHEMA,
-            "spec_reference": SPEC,
-            "identity": identity,
-            "model": model.state_dict(),
-            "optimizer": optimizer.state_dict(),
-            "python_rng": random.getstate(),
-            "torch_rng": torch.get_rng_state(),
-            "completed_step": step,
-            "next_row": (step * BATCH_SIZE) % 256,
-            "train_tokens": step * BATCH_SIZE * CONTEXT,
-            "components": NOT_APPLICABLE,
-        }
         with state_path.open("xb") as file:
             torch.save(state, file)
             file.flush()
             os.fsync(file.fileno())
         digest = file_sha256(state_path)
-        write_json(stage / "index.json", {"schema_version": SCHEMA, "state_sha256": digest})
+        write_json(stage / "index.json", {"schema_version": schema, "state_sha256": digest})
         _publish_exclusive(stage, destination)
         fsync_dir(destination.parent)
         return digest
@@ -133,7 +137,7 @@ def _same_tensor(value: object, reference: Tensor) -> bool:
     )
 
 
-def _validate_optimizer(state: object, model: DenseBaseline, optimizer: AdamW, step: int) -> None:
+def _validate_optimizer(state: object, model: nn.Module, optimizer: AdamW, step: int) -> None:
     opt = _dict_with_fields(state, {"state", "param_groups"}, "optimizer")
     if opt["param_groups"] != optimizer.state_dict()["param_groups"]:
         raise ValueError("checkpoint optimizer parameter groups/settings mismatch")

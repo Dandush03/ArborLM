@@ -38,10 +38,10 @@ dependencies, then run the checks from the repository root:
 
 ```sh
 uv python install
-uv sync --locked
-uv run ruff check .
-uv run mypy src/arborlm
-uv run pytest
+uv sync --locked --extra pilot
+uv run --extra pilot ruff check .
+uv run --extra pilot mypy src/arborlm
+uv run --extra pilot pytest
 uv run python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
 ```
 
@@ -70,3 +70,22 @@ checksums and raw events. Smoke stores its five child runs under `children/`.
 Training runs also retain immutable checkpoints. Retries write a fresh run
 directory; preserve failure records and local artifacts for review. CI artifact
 uploads are temporary and do not replace the local research archive.
+
+
+## Registered RAM pilot (local only)
+
+[The P1_SCREEN protocol](docs/decisions/ADR-0005-ram-pilot-spec.md) defines the
+fixed six-variant, three-seed screen. After reviewer preflight, run against the
+approved local train and validation acquisition:
+
+```sh
+uv sync --locked --extra pilot
+uv run --locked --extra pilot python -m arborlm pilot \
+  --config configs/p1_ram_screen.toml --data-dir data/wikitext2 --output-root experiments
+```
+
+The suite rechecks the pinned files, freezes one ranked byte-token dataset,
+and records all cells under a unique local run directory. The suite stops on a
+failed cell and retains partial evidence and the unexecuted cell list. Keep
+dataset bytes and binary checkpoints local. CI only exercises synthetic
+fixtures and E0; it does not acquire WikiText-2 or execute this pilot.

@@ -14,14 +14,14 @@ WIDTH = 32
 
 
 class Block(nn.Module):
-    def __init__(self) -> None:
+    def __init__(self, ffn_width: int = 64) -> None:
         super().__init__()
         self.attn_norm = nn.LayerNorm(WIDTH, eps=1e-5)
         self.qkv = _Linear(WIDTH, 96)
         self.attn_out = _Linear(WIDTH, WIDTH)
         self.ffn_norm = nn.LayerNorm(WIDTH, eps=1e-5)
-        self.ffn_in = _Linear(WIDTH, 64)
-        self.ffn_out = _Linear(64, WIDTH)
+        self.ffn_in = _Linear(WIDTH, ffn_width)
+        self.ffn_out = _Linear(ffn_width, WIDTH)
 
     def forward(self, h: Tensor, mask: Tensor) -> Tensor:
         b, t, _ = h.shape

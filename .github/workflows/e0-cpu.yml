@@ -19,15 +19,15 @@ jobs:
           version: "0.12.15"
       - name: Install locked CPU dependencies
         id: setup
-        run: uv sync --locked
+        run: uv sync --locked --extra pilot
       - name: Lint, typecheck, and test
         run: |
-          uv run --locked ruff check .
-          uv run --locked mypy src/arborlm
-          uv run --locked pytest
+          uv run --locked --extra pilot ruff check .
+          uv run --locked --extra pilot mypy src/arborlm
+          uv run --locked --extra pilot pytest
       - name: Run E0 smoke
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: uv run --locked python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+        run: uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
       - name: Upload E0 artifacts
         if: always()
         uses: actions/upload-artifact@v4

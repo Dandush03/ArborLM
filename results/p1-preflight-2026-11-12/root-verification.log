@@ -1,0 +1,32 @@
+COMMAND: uv run --locked --extra pilot ruff check .
+All checks passed!
+EXIT: 0
+COMMAND: uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 18 source files
+EXIT: 0
+COMMAND: uv run --locked --extra pilot pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 59 items
+
+tests/test_checkpoint.py ........                                        [ 13%]
+tests/test_config_data.py ................                               [ 40%]
+tests/test_fetch_wikitext.py .........                                   [ 55%]
+tests/test_independent_contract.py ....                                  [ 62%]
+tests/test_pilot.py ...................                                  [ 94%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 59 passed, 1 warning in 2.50s =========================
+EXIT: 0
+COMMAND: uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T023150557313Z-f15c15bf02b840da9638fc7f34c60d4d
+EXIT: 0

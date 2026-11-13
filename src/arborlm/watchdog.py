@@ -78,8 +78,11 @@ def supervise(
     process_seconds: float = PROCESS_SECONDS,
     rss_bytes: int = RSS_BYTES,
     worker_argv: Callable[[Path], list[str]] | None = None,
+    manifest_fields: dict[str, Any] | None = None,
+    run_prefix: str = "E0",
+    nested_workers: bool = False,
 ) -> tuple[Path, bool]:
-    run = allocate_run(root)
+    run = allocate_run(root, prefix=run_prefix)
     cwd = Path.cwd()
     argv = (
         worker_argv(run)
@@ -97,6 +100,7 @@ def supervise(
             "rss_bytes": rss_bytes,
             "poll_seconds": POLL_SECONDS,
         },
+        **(manifest_fields or {}),
     )
     write_json(run / "manifest.json", running)
     (run / "metrics.jsonl").touch()
@@ -136,7 +140,7 @@ def supervise(
                         break
                     time.sleep(min(POLL_SECONDS, max(0.0, process_seconds - elapsed)))
                 if failure and returncode is None:
-                    _stop(process, watched, graceful=operation == "smoke")
+                    _stop(process, watched, graceful=operation == "smoke" or nested_workers)
             except Interrupted as exc:
                 interrupted = True
                 failure = f"watchdog interrupted: {exc}"

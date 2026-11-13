@@ -51,3 +51,10 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Luna acquired approved pinned train/validation files plus the upstream README, 7,025,216 bytes transferred. Both corpus SHA-256 values match ADR-0004; test data was neither acquired nor inspected. Root reran the downloader's 9 mocked tests, Ruff and mypy successfully.
 - Root review caught an idempotency bug accepting a manifest when a data file was missing; Luna corrected it and added regression coverage before the acquisition checkpoint was accepted. Failed acquisition attempts now retain status/error history.
 - The publisher README has conflicting license metadata (front matter 3.0/GFDL, body 4.0); both are preserved without choosing legal precedence. Exact-byte local-use approval remains recorded; release rights are unresolved. No pilot model has been trained at this checkpoint.
+
+### RAM pilot preflight accepted before trial
+
+- Sol implemented the six registered variants and bounded suite; Luna audited lookup math, tie handling, gradients, initialization, parameter counts and data rules. Root independently reviewed code and reran locked Ruff/mypy, 59 tests and E0 smoke (11 gates), all passing.
+- Root independently reconstructed the selected UTF-8 byte chunks and matched both arrays and rank/row/offset identities. Evidence is in `results/p1-preflight-2026-11-12/`.
+- Source/config/spec are frozen before trial. Root authorizes the exact ADR-0005 command under its registered CPU/RSS/token/time bounds. No observed pilot loss was used to select thresholds or change settings.
+- At the human's request, each completed run will be reported in chat with observed loss/runtime and a bounded interpretation, and completed checkpoints will be pushed to GitHub.

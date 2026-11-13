@@ -35,10 +35,10 @@ def utc_now() -> str:
     return datetime.now(UTC).isoformat()
 
 
-def allocate_run(root: Path) -> Path:
+def allocate_run(root: Path, *, prefix: str = "E0") -> Path:
     root.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
-    run = root / f"E0-{stamp}-{uuid4().hex}"
+    run = root / f"{prefix}-{stamp}-{uuid4().hex}"
     run.mkdir(mode=0o700)
     return run
 
@@ -62,7 +62,7 @@ def _source_file(name: Path) -> bool:
     )
 
 
-def record_source(run: Path, cwd: Path) -> dict[str, Any]:
+def record_source(run: Path, cwd: Path, *, spec: str = SPEC) -> dict[str, Any]:
     root = Path(os.fsdecode(_git(cwd, "rev-parse", "--show-toplevel").rstrip(b"\n")))
     commit = _git(root, "rev-parse", "HEAD").decode().strip()
     status = _git(root, "status", "--porcelain=v1", "-z", "--untracked-files=all")
@@ -97,13 +97,13 @@ def record_source(run: Path, cwd: Path) -> dict[str, Any]:
         "scope": "tracked and untracked allowlisted project source and documentation; "
         "excluded secrets, virtual environments, caches, experiment output and .git",
         "lock_sha256": contents["uv.lock"],
-        "spec_sha256": contents[SPEC],
+        "spec_sha256": contents[spec],
     }
     write_json(run / "source.json", identity)
     return identity
 
 
-def record_environment(run: Path) -> dict[str, Any]:
+def record_environment(run: Path, *, family: str = "E0") -> dict[str, Any]:
     mem = psutil.virtual_memory()
     cpu = platform.processor()
     if sys.platform == "darwin":
@@ -126,7 +126,7 @@ def record_environment(run: Path) -> dict[str, Any]:
         "python_compiler": platform.python_compiler(),
         "accelerator": "cpu",
         "storage_device": None,
-        "storage_device_reason": "no storage experiment in E0",
+        "storage_device_reason": f"no storage experiment in {family}",
         "packages": {dist.metadata["Name"]: dist.version for dist in distributions()},
     }
     write_json(run / "environment.json", env)

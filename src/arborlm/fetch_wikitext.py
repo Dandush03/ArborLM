@@ -162,8 +162,7 @@ def fetch_dataset(
     if existing_manifest is not None:
         if existing_manifest.get("selected_files") != list(DOWNLOAD_FILES):
             raise DownloadError(
-                "existing manifest has different split selection; "
-                f"preserved: {manifest_path}"
+                f"existing manifest has different split selection; preserved: {manifest_path}"
             )
 
     budget = MAX_PAYLOAD_BYTES
@@ -227,11 +226,13 @@ def fetch_dataset(
                 f"existing publisher README conflicts with its manifest; preserved: {readme_path}"
             )
         history_path = output_dir / "acquisition-history.jsonl"
-        history_line = canonical_json({
-            "status": "completed",
-            "command_argv": command,
-            "attempted_utc": now(),
-        })
+        history_line = canonical_json(
+            {
+                "status": "completed",
+                "command_argv": command,
+                "attempted_utc": now(),
+            }
+        )
         with history_path.open("ab") as stream:
             stream.write(history_line)
             stream.flush()
@@ -267,14 +268,17 @@ def fetch_dataset(
                 raise DownloadError(
                     f"pinned file mismatch for {filename}: got {size} bytes sha256={checksum}"
                 )
-            staged[filename] = (path, {
-                "path": filename,
-                "bytes": size,
-                "sha256": checksum,
-                "source_url": _url(filename),
-                "resolved_url": final_url,
-                "downloaded_this_run": True,
-            })
+            staged[filename] = (
+                path,
+                {
+                    "path": filename,
+                    "bytes": size,
+                    "sha256": checksum,
+                    "source_url": _url(filename),
+                    "resolved_url": final_url,
+                    "downloaded_this_run": True,
+                },
+            )
 
         if not readme_existing:
             readme_stage = stage_dir / "README.upstream.md"
@@ -394,7 +398,9 @@ def main(argv: list[str] | None = None) -> int:
         description="Fetch approved WikiText-2 train and validation splits"
     )
     parser.add_argument(
-        "--output-dir", type=Path, default=Path("data/wikitext2"),
+        "--output-dir",
+        type=Path,
+        default=Path("data/wikitext2"),
         help="local ignored destination (default: data/wikitext2)",
     )
     args = parser.parse_args(argv)
@@ -402,13 +408,15 @@ def main(argv: list[str] | None = None) -> int:
         manifest = fetch_dataset(args.output_dir, command=command)
     except Exception as exc:
         args.output_dir.mkdir(parents=True, exist_ok=True)
-        failure_event = canonical_json({
-            "status": "failed",
-            "command_argv": command,
-            "attempted_utc": _utc_now(),
-            "error_type": type(exc).__name__,
-            "error": str(exc),
-        })
+        failure_event = canonical_json(
+            {
+                "status": "failed",
+                "command_argv": command,
+                "attempted_utc": _utc_now(),
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+            }
+        )
         with (args.output_dir / "acquisition-history.jsonl").open("ab") as stream:
             stream.write(failure_event)
             stream.flush()
