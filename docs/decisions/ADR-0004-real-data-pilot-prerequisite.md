@@ -26,3 +26,7 @@ The experiment protocol requires real openly licensed data before language-model
 Before training, a separate approved pilot specification must freeze tokenizer/preprocessing, boundary handling, duplicate/contamination audit, model and memory settings, dense/flat/fixed/learned controls, seeds, matched budgets and numerical gates. Strong product-key baseline adequacy and tuning/compute mismatches must be addressed explicitly. No pilot training is authorized solely by approving this data acquisition.
 
 Human approval now permits these small local downloads and their use in the preregistered RAM-only pilot once G0 passes. Publication/release approval remains separate.
+
+## Post-acquisition metadata observation
+
+The pinned publisher README's front matter lists CC-BY-SA-3.0 and GFDL, while its later licensing paragraph says CC BY-SA 4.0. Preserve both statements and the exact README checksum; do not silently choose a governing license or rewrite the original acquisition record. This remains an unresolved licensing detail for any redistribution/release review. The human approved local use of the exact pinned corpus bytes; the local pilot proceeds within that authorization, with no claim of legal resolution or permission to publish corpus/weights. Raw acquisition records stay immutable and the observation is an appended provenance note.
