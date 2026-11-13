@@ -75,3 +75,13 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Preserve the seed-44 positive dependence and the two opposite-sign outcomes. Useful memory contribution was not reliably demonstrated across seeds at this budget. Nonzero router gradients alone do not establish useful inference memory.
 - Results and all 12 raw records are in `results/memory-diagnostic-2026-11-12/`. Earlier promotion failure remains unchanged; scaling is stopped. The broad concept is unproven, not universally disproved. Human merge/publication approval remains pending and Astra review NOT PERFORMED.
 - Luna independently audited all 12 raw diagnostic records, target counts, lack of training events, arithmetic and current original checkpoint/index hashes; no discrepancy found. This is recorded separately as an engineering audit, not Astra scientific validation.
+
+### Final tracking checkpoint
+
+- At the research lead's request, each completed run was reported in chat and verification and results checkpoints were pushed to GitHub for tracking. The final local verification passed 67 tests, and [Linux CPU CI run 43354341475](https://github.com/Dandush03/ArborLM/actions/runs/43354341475) passed at commit `6ce7928`.
+
+### Follow-up hypothesis from human lead
+
+For seed 44, validation NLL was 2.5893889144062996 nats/byte for small dense, 2.5889271199703217 for the learned-tree checkpoint with memory disabled, and 2.582151535898447 with memory enabled. The interventions support a benefit from memory in that frozen checkpoint on this validation set; they do not establish statistical generalization. The lead's hypothesis is that optimization inconsistently discovers and exploits useful memory. Validation noise, effects of the shared training trajectory, the finite training budget, and sensitivity to initialization remain plausible explanations. The disabled model retains its jointly trained backbone, so it cannot substitute for a model trained without memory.
+
+A candidate follow-up would separate the random seeds for backbone initialization, memory and router initialization, and batch order; cross those seeds under a fixed budget; and pair evaluations with memory enabled, disabled, and values shuffled. It would also include a control with memory disabled throughout training, report every seed, and define interaction and dependence metrics and thresholds before running. Confirmatory claims would require fresh held-out data because the current validation set informed the hypothesis. This design is neither preregistered nor approved for execution. No new experiments started, and the failed promotion gate remains unchanged.

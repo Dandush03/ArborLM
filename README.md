@@ -2,7 +2,13 @@
 
 **ArborLM** is a research proposal for a language model with **trainable hierarchical neural parameter memory**. The motivating hypothesis is that a model might learn to navigate a very large parameter-memory store while retrieving only a small, useful and physically local working set per token, potentially reducing data movement in SSD-backed inference.
 
-> **Scientific status: untested.** No ArborLM architecture, speedup, model quality or scaling claim is validated as of this starter handoff.
+> **Scientific status: this configuration did not pass the promotion gate.** The broader hierarchical memory concept remains unproven, and scaling of this configuration has stopped. The human research lead authorized a Codex reviewer exception; Astra review was not performed.
+
+- [E0 CPU baseline](results/e0-2026-11-12/) passed its training, evaluation and checkpoint reproducibility checks.
+- [18-run RAM screen](results/p1-2026-11-12/) found a mean learned-tree improvement of 0.0092854773 nats/byte over the small dense baseline, below the registered 0.01 required for promotion.
+- [12 frozen-checkpoint evaluations](results/memory-diagnostic-2026-11-12/) found mean validation loss increases of +0.002003993 nats/byte with memory disabled and +0.002146978 with values shuffled. Effects went in opposite directions across seeds, and both means were below the registered +0.005 threshold.
+
+Whether training learned to use memory inconsistently across seeds is an [open hypothesis](docs/RESEARCH_LOG.md#follow-up-hypothesis-from-human-lead).
 
 ## Begin here
 
@@ -15,7 +21,7 @@
 
 ## Scope
 
-Initial experiments run locally on whatever ordinary machine is convenient; **this project is not intended to deploy to the owner's infrastructure**. We start with a tiny dense baseline, flat trainable memory and fixed/learned hierarchy in RAM. An NVMe backend and distillation/migration arrive only after the scientific signal is established. Scale is conditional on evidence.
+The completed model experiments ran locally on CPU with model weights in RAM. The project will not deploy to the owner's infrastructure. NVMe, distillation and scaling remain outside the current scope.
 
 ## Code license
 
