@@ -1,0 +1,5 @@
+# Audit scripts are kept byte-identical to the versions whose outputs are recorded here.
+extend = "../ruff.toml"
+
+[lint]
+extend-ignore = ["UP017", "F541"]

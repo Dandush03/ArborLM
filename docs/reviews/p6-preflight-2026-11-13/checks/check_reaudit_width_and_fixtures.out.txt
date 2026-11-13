@@ -1,0 +1,38 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+torch 2.8.0, intra-op threads 1
+1. bmm bitwise mismatches, M=256k rows vs M=4096 rows (per k):
+   N=512 seed=1: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+   N=512 seed=2: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+   N=64 seed=3: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+   N=1 seed=4: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+2. width curve over every batch with constructed ties:
+   seed=5: {'derived_vs_direct_mismatch_queries': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'my_rule_vs_direct': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'route_ties_at_rank_k_k+1_queries': {'k2': 92, 'k3': 108, 'k4': 86, 'k6': 86, 'k8': 85, 'k12': 94}}
+   seed=6: {'derived_vs_direct_mismatch_queries': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'my_rule_vs_direct': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'route_ties_at_rank_k_k+1_queries': {'k2': 105, 'k3': 91, 'k4': 91, 'k6': 111, 'k8': 128, 'k12': 85}}
+3. equivalence router fixture: rank-2/3 route ties (spurious-stop risk)
+   seed 501: fixed-tree (exact registered init) ties=10; cos a row 4-7 must exceed to break each: [0.502, 0.659, 0.505, 0.528, 0.419, 0.252, 0.235, 0.272, 0.276, 0.135]
+   seed 501: learned-tree simulation, rows 4-7 perturbed (relative scale -> runs with zero ties out of 200): {0.5: 0, 1.0: 0, 2.0: 0, 5.0: 0}; rows 4-7 fully random: 0/200
+   seed 502: fixed-tree (exact registered init) ties=8; cos a row 4-7 must exceed to break each: [0.502, 0.659, 0.505, 0.528, 0.367, 0.445, 0.252, 0.272]
+   seed 502: learned-tree simulation, rows 4-7 perturbed (relative scale -> runs with zero ties out of 200): {0.5: 0, 1.0: 0, 2.0: 0, 5.0: 0}; rows 4-7 fully random: 0/200
+   seed 503: fixed-tree (exact registered init) ties=11; cos a row 4-7 must exceed to break each: [0.502, 0.659, 0.505, 0.528, 0.419, 0.252, 0.235, 0.272, 0.295, 0.276, 0.33]
+   seed 503: learned-tree simulation, rows 4-7 perturbed (relative scale -> runs with zero ties out of 200): {0.5: 0, 1.0: 0, 2.0: 0, 5.0: 0}; rows 4-7 fully random: 0/200
+exit=0
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+torch 2.8.0, intra-op threads 6
+1. bmm bitwise mismatches, M=256k rows vs M=4096 rows (per k):
+   N=512 seed=1: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+   N=512 seed=2: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+   N=64 seed=3: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+   N=1 seed=4: {2: 0, 3: 0, 4: 0, 6: 0, 8: 0, 12: 0, 16: 0}
+2. width curve over every batch with constructed ties:
+   seed=5: {'derived_vs_direct_mismatch_queries': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'my_rule_vs_direct': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'route_ties_at_rank_k_k+1_queries': {'k2': 92, 'k3': 108, 'k4': 86, 'k6': 86, 'k8': 85, 'k12': 94}}
+   seed=6: {'derived_vs_direct_mismatch_queries': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'my_rule_vs_direct': {'k2': 0, 'k3': 0, 'k4': 0, 'k6': 0, 'k8': 0, 'k12': 0, 'k16': 0}, 'route_ties_at_rank_k_k+1_queries': {'k2': 105, 'k3': 91, 'k4': 91, 'k6': 111, 'k8': 128, 'k12': 85}}
+3. equivalence router fixture: rank-2/3 route ties (spurious-stop risk)
+   seed 501: fixed-tree (exact registered init) ties=10; cos a row 4-7 must exceed to break each: [0.502, 0.659, 0.505, 0.528, 0.419, 0.252, 0.235, 0.272, 0.276, 0.135]
+   seed 501: learned-tree simulation, rows 4-7 perturbed (relative scale -> runs with zero ties out of 200): {0.5: 0, 1.0: 0, 2.0: 0, 5.0: 0}; rows 4-7 fully random: 0/200
+   seed 502: fixed-tree (exact registered init) ties=8; cos a row 4-7 must exceed to break each: [0.502, 0.659, 0.505, 0.528, 0.367, 0.445, 0.252, 0.272]
+   seed 502: learned-tree simulation, rows 4-7 perturbed (relative scale -> runs with zero ties out of 200): {0.5: 0, 1.0: 0, 2.0: 0, 5.0: 0}; rows 4-7 fully random: 0/200
+   seed 503: fixed-tree (exact registered init) ties=11; cos a row 4-7 must exceed to break each: [0.502, 0.659, 0.505, 0.528, 0.419, 0.252, 0.235, 0.272, 0.295, 0.276, 0.33]
+   seed 503: learned-tree simulation, rows 4-7 perturbed (relative scale -> runs with zero ties out of 200): {0.5: 0, 1.0: 0, 2.0: 0, 5.0: 0}; rows 4-7 fully random: 0/200
+exit=0

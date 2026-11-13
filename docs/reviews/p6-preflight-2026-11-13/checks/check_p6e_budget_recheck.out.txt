@@ -1,0 +1,20 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+timing worker screen (15 entities, 8 rounds, 512-row synthetic panel replay): worker 28.9 s, schedule 23.7 s
+  integrity replay bitwise: {'fixed_tree': True, 'flat': True, 'learned_tree': True}
+  source recheck: {'archive_sha256': '9f36d07378329fd5deae8009c88bc40209c6f4bd3ed208b7188163be65d72bf7', 'archive_unchanged': True, 'p6_sources_unchanged': True}
+  usable measurements: 118/120
+process wall incl. imports: 29.4 s
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+timing worker confirm (6 entities, 8 rounds, 512-row synthetic panel replay): worker 12.3 s, schedule 8.7 s
+  integrity replay bitwise: {'fixed_tree': True, 'flat': True, 'learned_tree': True}
+  source recheck: {'archive_sha256': '28e9f3a3ae6217e64f1b925c448743bae1d3d1bdef9f1aa751e0639a73d6c981', 'archive_unchanged': True, 'p6_sources_unchanged': True}
+  usable measurements: 46/48
+process wall incl. imports: 12.9 s
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+synthetic cell load (512 panel rows): 1.3 s
+equivalence run_cell, full-size synthetic panel: 13.4 s
+  classes on synthetic: {'flat': {'F1': 'STRICT', 'F2': 'STRICT'}, 'fixed_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}, 'learned_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}}
+process wall incl. imports: 15.1 s

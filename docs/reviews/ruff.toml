@@ -1,0 +1,6 @@
+# Review scripts are kept byte-identical to the versions whose outputs are recorded here,
+# so style-only rules are not enforced for them. Project source keeps the root configuration.
+extend = "../../pyproject.toml"
+
+[lint]
+ignore = ["E501", "I001", "E401", "E702", "F841"]

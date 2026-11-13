@@ -1,0 +1,24 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+synthetic cell load (512 panel rows): 1.4 s
+equivalence run_cell, full-size synthetic panel: 13.5 s
+  classes on synthetic: {'flat': {'F1': 'STRICT', 'F2': 'STRICT'}, 'fixed_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}, 'learned_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}}
+process wall incl. imports: 15.3 s
+real 15.38
+user 15.10
+sys 0.20
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+timing worker screen (15 entities, 8 rounds): worker 26.7 s, schedule 24.2 s
+  W8 addition_forward medians, us (synthetic, exploratory): {'flat:F0': 2565, 'flat:F1': 2522, 'flat:F2': 5905, 'fixed_tree:T0': 6732, 'fixed_tree:T1': 5858, 'fixed_tree:T2': 5339, 'fixed_tree:T3': 4901, 'fixed_tree:T4': 2714, 'fixed_tree:T5': 1963, 'learned_tree:T0': 6692, 'learned_tree:T1': 5801, 'learned_tree:T2': 5283, 'learned_tree:T3': 4919, 'learned_tree:T4': 2659, 'learned_tree:T5': 1980}
+  usable measurements: 114/120
+process wall incl. imports: 27.1 s
+real 27.25
+user 26.50
+sys 0.49
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+timing worker confirm (6 entities, 8 rounds): worker 9.6 s, schedule 8.8 s
+  W8 addition_forward medians, us (synthetic, exploratory): {'flat:F0': 2560, 'flat:F1': 2552, 'fixed_tree:T0': 6747, 'fixed_tree:T4': 2687, 'learned_tree:T0': 6731, 'learned_tree:T4': 2684}
+  usable measurements: 48/48
+process wall incl. imports: 10.0 s
+real 10.16
+user 9.88
+sys 0.23

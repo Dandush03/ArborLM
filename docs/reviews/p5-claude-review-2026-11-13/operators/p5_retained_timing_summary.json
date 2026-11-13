@@ -1,0 +1,271 @@
+{
+ "note": "Derived only from retained P5 result.json files. NOT the same measurement as operator_profile.json: different weights, queries, process and workers.",
+ "source": "results/p5-2026-11-13/timing",
+ "workers_found": 36,
+ "cells": [
+  {
+   "variant": "baseline",
+   "scope": "model_forward",
+   "batch_size": 1,
+   "n_workers": 9,
+   "median_across_workers_of_median_ns": 220499.5,
+   "min_worker_median_ns": 203271.0,
+   "max_worker_median_ns": 224416.5,
+   "median_across_workers_of_p10_ns": 209208,
+   "median_across_workers_of_p90_ns": 227375
+  },
+  {
+   "variant": "baseline",
+   "scope": "model_forward",
+   "batch_size": 8,
+   "n_workers": 9,
+   "median_across_workers_of_median_ns": 805938.0,
+   "min_worker_median_ns": 796854.0,
+   "max_worker_median_ns": 817563.0,
+   "median_across_workers_of_p10_ns": 778958,
+   "median_across_workers_of_p90_ns": 829584
+  },
+  {
+   "variant": "dense",
+   "scope": "addition_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 321792.0,
+   "min_worker_median_ns": 317249.5,
+   "max_worker_median_ns": 362166.5,
+   "median_across_workers_of_p10_ns": 317917,
+   "median_across_workers_of_p90_ns": 331000
+  },
+  {
+   "variant": "dense",
+   "scope": "addition_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 2458000.0,
+   "min_worker_median_ns": 2390437.5,
+   "max_worker_median_ns": 2774958.0,
+   "median_across_workers_of_p10_ns": 2415625,
+   "median_across_workers_of_p90_ns": 2524291
+  },
+  {
+   "variant": "dense",
+   "scope": "model_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 536167.0,
+   "min_worker_median_ns": 522854.0,
+   "max_worker_median_ns": 579645.5,
+   "median_across_workers_of_p10_ns": 523625,
+   "median_across_workers_of_p90_ns": 553083
+  },
+  {
+   "variant": "dense",
+   "scope": "model_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 3286458.5,
+   "min_worker_median_ns": 3198104.5,
+   "max_worker_median_ns": 3657208.5,
+   "median_across_workers_of_p10_ns": 3227167,
+   "median_across_workers_of_p90_ns": 3389792
+  },
+  {
+   "variant": "fixed_tree",
+   "scope": "addition_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 839791.5,
+   "min_worker_median_ns": 762791.5,
+   "max_worker_median_ns": 898249.5,
+   "median_across_workers_of_p10_ns": 804542,
+   "median_across_workers_of_p90_ns": 887875
+  },
+  {
+   "variant": "fixed_tree",
+   "scope": "addition_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 6310958.0,
+   "min_worker_median_ns": 5986416.5,
+   "max_worker_median_ns": 6775208.5,
+   "median_across_workers_of_p10_ns": 6156041,
+   "median_across_workers_of_p90_ns": 6531167
+  },
+  {
+   "variant": "fixed_tree",
+   "scope": "lookup_score_select",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 797729.5,
+   "min_worker_median_ns": 753041.5,
+   "max_worker_median_ns": 870937.5,
+   "median_across_workers_of_p10_ns": 764084,
+   "median_across_workers_of_p90_ns": 854292
+  },
+  {
+   "variant": "fixed_tree",
+   "scope": "lookup_score_select",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 6209333.5,
+   "min_worker_median_ns": 5807041.5,
+   "max_worker_median_ns": 6675062.5,
+   "median_across_workers_of_p10_ns": 6052375,
+   "median_across_workers_of_p90_ns": 6426417
+  },
+  {
+   "variant": "fixed_tree",
+   "scope": "model_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 1083104.0,
+   "min_worker_median_ns": 1035312.5,
+   "max_worker_median_ns": 1143667.0,
+   "median_across_workers_of_p10_ns": 1035959,
+   "median_across_workers_of_p90_ns": 1149125
+  },
+  {
+   "variant": "fixed_tree",
+   "scope": "model_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 7195979.0,
+   "min_worker_median_ns": 6850500.0,
+   "max_worker_median_ns": 7578062.5,
+   "median_across_workers_of_p10_ns": 7010042,
+   "median_across_workers_of_p90_ns": 7419750
+  },
+  {
+   "variant": "flat",
+   "scope": "addition_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 352229.0,
+   "min_worker_median_ns": 336854.0,
+   "max_worker_median_ns": 376874.5,
+   "median_across_workers_of_p10_ns": 341084,
+   "median_across_workers_of_p90_ns": 371208
+  },
+  {
+   "variant": "flat",
+   "scope": "addition_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 2431000.0,
+   "min_worker_median_ns": 2276917.0,
+   "max_worker_median_ns": 2631645.5,
+   "median_across_workers_of_p10_ns": 2366792,
+   "median_across_workers_of_p90_ns": 2547708
+  },
+  {
+   "variant": "flat",
+   "scope": "lookup_score_select",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 312708.5,
+   "min_worker_median_ns": 297646.0,
+   "max_worker_median_ns": 333479.0,
+   "median_across_workers_of_p10_ns": 299208,
+   "median_across_workers_of_p90_ns": 331500
+  },
+  {
+   "variant": "flat",
+   "scope": "lookup_score_select",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 2323354.0,
+   "min_worker_median_ns": 2148333.0,
+   "max_worker_median_ns": 2461458.0,
+   "median_across_workers_of_p10_ns": 2249084,
+   "median_across_workers_of_p90_ns": 2419250
+  },
+  {
+   "variant": "flat",
+   "scope": "model_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 577146.0,
+   "min_worker_median_ns": 567208.5,
+   "max_worker_median_ns": 603896.0,
+   "median_across_workers_of_p10_ns": 561459,
+   "median_across_workers_of_p90_ns": 604334
+  },
+  {
+   "variant": "flat",
+   "scope": "model_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 3303916.5,
+   "min_worker_median_ns": 3120062.5,
+   "max_worker_median_ns": 3460812.5,
+   "median_across_workers_of_p10_ns": 3232416,
+   "median_across_workers_of_p90_ns": 3467916
+  },
+  {
+   "variant": "learned_tree",
+   "scope": "addition_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 837708.5,
+   "min_worker_median_ns": 764000.0,
+   "max_worker_median_ns": 924166.5,
+   "median_across_workers_of_p10_ns": 795459,
+   "median_across_workers_of_p90_ns": 885875
+  },
+  {
+   "variant": "learned_tree",
+   "scope": "addition_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 6325437.5,
+   "min_worker_median_ns": 5746500.5,
+   "max_worker_median_ns": 6858563.0,
+   "median_across_workers_of_p10_ns": 6165750,
+   "median_across_workers_of_p90_ns": 6491292
+  },
+  {
+   "variant": "learned_tree",
+   "scope": "lookup_score_select",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 800104.0,
+   "min_worker_median_ns": 740270.5,
+   "max_worker_median_ns": 862312.5,
+   "median_across_workers_of_p10_ns": 757041,
+   "median_across_workers_of_p90_ns": 851209
+  },
+  {
+   "variant": "learned_tree",
+   "scope": "lookup_score_select",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 6195646.0,
+   "min_worker_median_ns": 5628521.0,
+   "max_worker_median_ns": 6781833.5,
+   "median_across_workers_of_p10_ns": 6018084,
+   "median_across_workers_of_p90_ns": 6414083
+  },
+  {
+   "variant": "learned_tree",
+   "scope": "model_forward",
+   "batch_size": 1,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 1082333.5,
+   "min_worker_median_ns": 1007666.5,
+   "max_worker_median_ns": 1172666.5,
+   "median_across_workers_of_p10_ns": 1034541,
+   "median_across_workers_of_p90_ns": 1145292
+  },
+  {
+   "variant": "learned_tree",
+   "scope": "model_forward",
+   "batch_size": 8,
+   "n_workers": 27,
+   "median_across_workers_of_median_ns": 7165583.0,
+   "min_worker_median_ns": 6610250.0,
+   "max_worker_median_ns": 7596687.0,
+   "median_across_workers_of_p10_ns": 7012125,
+   "median_across_workers_of_p90_ns": 7342291
+  }
+ ]
+}

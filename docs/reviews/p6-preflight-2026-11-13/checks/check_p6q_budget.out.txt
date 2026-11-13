@@ -1,0 +1,9 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+evaluate_checkpoint (synthetic, full panel): 26.5 s
+phase seconds: {'unmodified_replay': 0.5, 'rule_T2P': 0.5, 'rule_T2N': 0.5, 'rule_X16P': 9.4, 'rule_X16N': 9.3, 'gates': 0.0, 'width_curve': 6.1, 'measurements': 0.1}
+array bytes: 25370624
+gate iv disagreements: 1 sets differ: 0
+process wall incl. imports and setup: 27.0 s
+       27.52 real        26.96 user         0.45 sys
+           799178752  maximum resident set size
+            10584496  peak memory footprint

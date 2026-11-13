@@ -1,0 +1,28 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+synthetic cell load (512 panel rows): 1.3 s
+equivalence run_cell, full-size synthetic panel: 13.6 s
+  classes on synthetic: {'flat': {'F1': 'STRICT', 'F2': 'STRICT'}, 'fixed_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}, 'learned_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}}
+process wall incl. imports: 15.2 s
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-preflight-2026-11-13/checks/check_p6e_budget.py", line 73, in <module>
+    main()
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-preflight-2026-11-13/checks/check_p6e_budget.py", line 60, in main
+    ts.timing_worker({"mode": phase, "args": args.to_json(), "plan": PLANS[phase]}, child, PAIR)
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/p6_timing_study.py", line 394, in timing_worker
+    source_recheck = verify_source_unchanged(child, spec["source"])
+                                                    ~~~~^^^^^^^^^^
+KeyError: 'source'
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-preflight-2026-11-13/checks/check_p6e_budget.py", line 73, in <module>
+    main()
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-preflight-2026-11-13/checks/check_p6e_budget.py", line 60, in main
+    ts.timing_worker({"mode": phase, "args": args.to_json(), "plan": PLANS[phase]}, child, PAIR)
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/p6_timing_study.py", line 394, in timing_worker
+    source_recheck = verify_source_unchanged(child, spec["source"])
+                                                    ~~~~^^^^^^^^^^
+KeyError: 'source'
