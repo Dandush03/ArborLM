@@ -1,7 +1,7 @@
 # ADR-0014 — P7-B: co-access layout equivalence (trace-driven simulation)
 
 - Date: 2026-11-13 (America/Panama).
-- Status: **DRAFT PROPOSAL, REVISION 4 — SPEC: PENDING FINAL HUMAN EXECUTION APPROVAL (Fable-drafted, Opus-reviewed three times). NOT APPROVED FOR EXECUTION. NO IMPLEMENTATION, LAYOUT CONSTRUCTION ON EVALUATION DATA, TRACE GENERATION, SIMULATION OR EXECUTION IS AUTHORIZED BY THIS DOCUMENT.** Revision 3 applied the human research lead's review of revision 2 (recorded in §15): option (b), five partition seeds, study-specific governance. Revision 4 answers the auditor's re-review of revision 3, which found that the five-partition rule as first written could not fail; that rule is changed and is the one substantive change since the human lead last read the document (§13, §14).
+- Status: **SPEC: HUMAN-APPROVED FOR EXECUTION on 2026-11-13, revision 4 as pushed in commit `2908ef4` — see §15.** The body is unchanged from that revision apart from this line and §15. Revision 3 applied the human research lead's review of revision 2 (recorded in §15): option (b), five partition seeds, study-specific governance. Revision 4 answers the auditor's re-review of revision 3, which found that the five-partition rule as first written could not fail; that rule is changed and is the one substantive change since the human lead last read the document (§13, §14).
 - Prepared by Claude Fable 5.2 (`claude-fable-5-2`) at the human research lead's request of 2026-11-13. Revision 1 was reviewed by the auditor role (Claude Opus 5.5): `docs/reviews/p7b-spec-review-2026-11-13/REVIEW.md`, 1 blocker, 7 major, 11 minor. This revision answers it; §13 lists what changed. **Astra review: NOT_PERFORMED.**
 - **Governance.** The human lead supports a **study-specific Claude workflow for P7-B only**. ADR-0012 stays pending, and every later phase needs human approval. Nothing under this workflow is Astra validation.
 - Scope: a bounded simulation on the **existing P7-A traces** of the 81 frozen P5 memory checkpoints. No model is run, no checkpoint is loaded, no training, no change to weights or routing, no storage device, no key-index simulation. P1–P7-A code, records, thresholds and outcomes are immutable. P6-E stays INCONCLUSIVE and P7-A stays CONCENTRATION-ONLY whatever P7-B finds.
@@ -343,4 +343,14 @@ The lead reads this as approval to execute P7-B once the amended ADR is pushed. 
 
 ### Execution approval
 
-*Conditional: given in the message above for the document as amended and pushed; the lead is holding execution until the human lead confirms the corrected PART_K rule in §14. Nothing has been implemented or run.*
+**Granted, 2026-11-13.** Revision 4 was pushed to PR #4 as commit `2908ef4`, with the corrected five-partition rule put to the human lead as the one outstanding point. Asked "Confirm the corrected five-partition rule (scored on exploited structure) so P7-B can run?", the human research lead answered: **"Confirm, proceed"**.
+
+Status: **SPEC: HUMAN-APPROVED FOR EXECUTION (Fable-drafted, Opus-reviewed), revision 4 as pushed.** Implementation, pre-freeze audit, proof that the fresh panel is unused, freeze and the single registered sequence on both streams are authorized, under a study-specific Claude workflow for P7-B only. ADR-0012 remains pending. Astra review: NOT_PERFORMED. SSD work, training, capacity scaling, publication and merging remain unauthorized.
+
+### Pre-outcome engineering clarifications (recorded before implementation)
+
+1. **Push timing.** Intermediate commits stay local and one push is made at the end, as for P6 and P7-A.
+2. **Commits between stages are required by this design** (layout hashes after the layout stage; the stream-B identity manifest before any simulation). Stage linkage therefore binds each stage to the P7-B source hashes, the specification hash and the hashes of the upstream stage's records, not to the Git HEAD.
+3. **Layouts are frozen by hash.** The layout stage writes every layout's canonical hash; the auditor role's independent rebuild must reproduce them before stream B is traced or either stream is simulated; simulation refuses to run on a layout whose hash differs from the recorded one.
+4. **Stream B panel.** Reconstructed from the local pinned validation file with the existing recipe as the 512 eligible chunks at ranks 2560–3071, by the implementer's code and independently by the auditor role's code; both must agree byte for byte and both must reproduce the recorded P1–P5 panel hashes from the same file.
+5. **Registered order.** panel proof → layouts → auditor reproduces layout hashes → stream B traces → stream-B identity manifest committed → simulate stream A → simulate stream B → auditor's independent check on both → analyze both. No analysis output of any kind is produced before both streams are simulated.
