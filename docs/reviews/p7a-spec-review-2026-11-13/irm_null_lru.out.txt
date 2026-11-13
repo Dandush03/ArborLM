@@ -1,0 +1,182 @@
+synthetic queries per cell: 8192 (warm 4096, measured 4096); rng seed 91999
+actual 4KiB FREQ pages/query
+   flat          mean 3.638590  min 2.752686  max 4.587158
+   fixed_tree    mean 3.047666  min 1.901245  max 3.857544
+   learned_tree  mean 2.784758  min 2.182983  max 3.581665
+   ratio fixed_tree/flat of means: 0.838
+   ratio learned_tree/flat of means: 0.765
+actual 4KiB FREQ warm misses/query cap=16p asc
+   flat          mean 0.000316  min 0.000000  max 0.002686
+   fixed_tree    mean 0.000018  min 0.000000  max 0.000244
+   learned_tree  mean 0.000018  min 0.000000  max 0.000244
+   ratio fixed_tree/flat of means: 0.057
+   ratio learned_tree/flat of means: 0.057
+actual 4KiB FREQ warm misses/query cap=32p asc
+   flat          mean 0.000009  min 0.000000  max 0.000244
+   fixed_tree    mean 0.000018  min 0.000000  max 0.000244
+   learned_tree  mean 0.000018  min 0.000000  max 0.000244
+   ratio fixed_tree/flat of means: 2.000
+   ratio learned_tree/flat of means: 2.000
+actual 4KiB FREQ warm misses/query cap=64p asc
+   flat          mean 0.000009  min 0.000000  max 0.000244
+   fixed_tree    mean 0.000018  min 0.000000  max 0.000244
+   learned_tree  mean 0.000018  min 0.000000  max 0.000244
+   ratio fixed_tree/flat of means: 2.000
+   ratio learned_tree/flat of means: 2.000
+actual 4KiB LID pages/query
+   flat          mean 7.782150  min 7.674316  max 7.858887
+   fixed_tree    mean 7.553960  min 7.162720  max 7.700806
+   learned_tree  mean 7.378174  min 6.480835  max 7.614014
+   ratio fixed_tree/flat of means: 0.971
+   ratio learned_tree/flat of means: 0.948
+actual 4KiB LID warm misses/query cap=16p asc
+   flat          mean 5.860017  min 5.318604  max 6.395752
+   fixed_tree    mean 4.698125  min 2.544678  max 5.612793
+   learned_tree  mean 4.027959  min 2.207031  max 5.163330
+   ratio fixed_tree/flat of means: 0.802
+   ratio learned_tree/flat of means: 0.687
+actual 4KiB LID warm misses/query cap=32p asc
+   flat          mean 3.900653  min 3.018555  max 4.838623
+   fixed_tree    mean 2.383111  min 0.802734  max 3.492920
+   learned_tree  mean 1.542272  min 0.305420  max 2.818848
+   ratio fixed_tree/flat of means: 0.611
+   ratio learned_tree/flat of means: 0.395
+actual 4KiB LID warm misses/query cap=64p asc
+   flat          mean 1.214166  min 0.175293  max 2.269531
+   fixed_tree    mean 0.397588  min 0.085449  max 0.991455
+   learned_tree  mean 0.074843  min 0.000244  max 0.398926
+   ratio fixed_tree/flat of means: 0.327
+   ratio learned_tree/flat of means: 0.062
+actual 64KiB FREQ pages/query
+   flat          mean 1.000167  min 1.000000  max 1.001465
+   fixed_tree    mean 1.000000  min 1.000000  max 1.000000
+   learned_tree  mean 1.000000  min 1.000000  max 1.000000
+   ratio fixed_tree/flat of means: 1.000
+   ratio learned_tree/flat of means: 1.000
+actual 64KiB FREQ warm misses/query cap=1p asc
+   flat          mean 0.000344  min 0.000000  max 0.002930
+   fixed_tree    mean 0.000000  min 0.000000  max 0.000000
+   learned_tree  mean 0.000000  min 0.000000  max 0.000000
+   ratio fixed_tree/flat of means: 0.000
+   ratio learned_tree/flat of means: 0.000
+actual 64KiB FREQ warm misses/query cap=1p DESC
+   flat          mean 0.000344  min 0.000000  max 0.002930
+   fixed_tree    mean 0.000000  min 0.000000  max 0.000000
+   learned_tree  mean 0.000000  min 0.000000  max 0.000000
+   ratio fixed_tree/flat of means: 0.000
+   ratio learned_tree/flat of means: 0.000
+actual 64KiB FREQ warm misses/query cap=2p asc
+   flat          mean 0.000000  min 0.000000  max 0.000000
+   fixed_tree    mean 0.000000  min 0.000000  max 0.000000
+   learned_tree  mean 0.000000  min 0.000000  max 0.000000
+   ratio fixed_tree/flat: flat mean 0
+   ratio learned_tree/flat: flat mean 0
+actual 64KiB FREQ warm misses/query cap=2p DESC
+   flat          mean 0.000000  min 0.000000  max 0.000000
+   fixed_tree    mean 0.000000  min 0.000000  max 0.000000
+   learned_tree  mean 0.000000  min 0.000000  max 0.000000
+   ratio fixed_tree/flat: flat mean 0
+   ratio learned_tree/flat: flat mean 0
+actual 64KiB FREQ warm misses/query cap=4p asc
+   flat          mean 0.000000  min 0.000000  max 0.000000
+   fixed_tree    mean 0.000000  min 0.000000  max 0.000000
+   learned_tree  mean 0.000000  min 0.000000  max 0.000000
+   ratio fixed_tree/flat: flat mean 0
+   ratio learned_tree/flat: flat mean 0
+actual 64KiB FREQ warm misses/query cap=4p DESC
+   flat          mean 0.000000  min 0.000000  max 0.000000
+   fixed_tree    mean 0.000000  min 0.000000  max 0.000000
+   learned_tree  mean 0.000000  min 0.000000  max 0.000000
+   ratio fixed_tree/flat: flat mean 0
+   ratio learned_tree/flat: flat mean 0
+actual 64KiB LID pages/query
+   flat          mean 5.246871  min 5.121704  max 5.324829
+   fixed_tree    mean 4.376379  min 3.119995  max 5.078003
+   learned_tree  mean 3.968556  min 3.046997  max 4.637573
+   ratio fixed_tree/flat of means: 0.834
+   ratio learned_tree/flat of means: 0.756
+actual 64KiB LID warm misses/query cap=1p asc
+   flat          mean 5.245117  min 5.116211  max 5.324219
+   fixed_tree    mean 4.375163  min 3.119629  max 5.085693
+   learned_tree  mean 3.967927  min 3.038818  max 4.628906
+   ratio fixed_tree/flat of means: 0.834
+   ratio learned_tree/flat of means: 0.756
+actual 64KiB LID warm misses/query cap=1p DESC
+   flat          mean 5.245126  min 5.115967  max 5.323730
+   fixed_tree    mean 4.375262  min 3.119629  max 5.085693
+   learned_tree  mean 3.967737  min 3.038818  max 4.628662
+   ratio fixed_tree/flat of means: 0.834
+   ratio learned_tree/flat of means: 0.756
+actual 64KiB LID warm misses/query cap=2p asc
+   flat          mean 5.238553  min 5.106934  max 5.320312
+   fixed_tree    mean 4.311144  min 2.617188  max 5.077393
+   learned_tree  mean 3.864475  min 2.770508  max 4.613037
+   ratio fixed_tree/flat of means: 0.823
+   ratio learned_tree/flat of means: 0.738
+actual 64KiB LID warm misses/query cap=2p DESC
+   flat          mean 5.238896  min 5.110840  max 5.320801
+   fixed_tree    mean 4.310854  min 2.612549  max 5.077637
+   learned_tree  mean 3.865479  min 2.770264  max 4.613770
+   ratio fixed_tree/flat of means: 0.823
+   ratio learned_tree/flat of means: 0.738
+actual 64KiB LID warm misses/query cap=4p asc
+   flat          mean 4.598741  min 4.369873  max 4.741699
+   fixed_tree    mean 2.817745  min 0.766113  max 4.314697
+   learned_tree  mean 1.885679  min 0.183594  max 3.320801
+   ratio fixed_tree/flat of means: 0.613
+   ratio learned_tree/flat of means: 0.410
+actual 64KiB LID warm misses/query cap=4p DESC
+   flat          mean 4.601345  min 4.374512  max 4.749023
+   fixed_tree    mean 2.815990  min 0.767334  max 4.325684
+   learned_tree  mean 1.885462  min 0.181641  max 3.307861
+   ratio fixed_tree/flat of means: 0.612
+   ratio learned_tree/flat of means: 0.410
+hyp 4KiB FREQ pages/query
+   flat          mean 7.680646  min 7.571411  max 7.792847
+   fixed_tree    mean 7.555528  min 7.082886  max 7.726929
+   learned_tree  mean 7.507623  min 7.314697  max 7.692383
+   ratio fixed_tree/flat of means: 0.984
+   ratio learned_tree/flat of means: 0.977
+hyp 4KiB FREQ warm misses/query cap=256p asc
+   flat          mean 0.003734  min 0.001465  max 0.005859
+   fixed_tree    mean 0.003364  min 0.000977  max 0.006348
+   learned_tree  mean 0.002487  min 0.000977  max 0.004395
+   ratio fixed_tree/flat of means: 0.901
+   ratio learned_tree/flat of means: 0.666
+hyp 4KiB FREQ warm misses/query cap=512p asc
+   flat          mean 0.003734  min 0.001465  max 0.005859
+   fixed_tree    mean 0.003364  min 0.000977  max 0.006348
+   learned_tree  mean 0.002487  min 0.000977  max 0.004395
+   ratio fixed_tree/flat of means: 0.901
+   ratio learned_tree/flat of means: 0.666
+hyp 4KiB FREQ warm misses/query cap=1024p asc
+   flat          mean 0.003734  min 0.001465  max 0.005859
+   fixed_tree    mean 0.003364  min 0.000977  max 0.006348
+   learned_tree  mean 0.002487  min 0.000977  max 0.004395
+   ratio fixed_tree/flat of means: 0.901
+   ratio learned_tree/flat of means: 0.666
+hyp 4KiB LID pages/query
+   flat          mean 7.993101  min 7.974854  max 7.999146
+   fixed_tree    mean 7.983362  min 7.894531  max 8.000000
+   learned_tree  mean 7.982490  min 7.947632  max 7.999146
+   ratio fixed_tree/flat of means: 0.999
+   ratio learned_tree/flat of means: 0.999
+hyp 4KiB LID warm misses/query cap=256p asc
+   flat          mean 0.079282  min 0.002930  max 0.375977
+   fixed_tree    mean 0.020652  min 0.003662  max 0.049805
+   learned_tree  mean 0.005877  min 0.002441  max 0.014648
+   ratio fixed_tree/flat of means: 0.260
+   ratio learned_tree/flat of means: 0.074
+hyp 4KiB LID warm misses/query cap=512p asc
+   flat          mean 0.006565  min 0.002197  max 0.009766
+   fixed_tree    mean 0.006501  min 0.003662  max 0.009277
+   learned_tree  mean 0.004494  min 0.002441  max 0.007812
+   ratio fixed_tree/flat of means: 0.990
+   ratio learned_tree/flat of means: 0.685
+hyp 4KiB LID warm misses/query cap=1024p asc
+   flat          mean 0.006565  min 0.002197  max 0.009766
+   fixed_tree    mean 0.006501  min 0.003662  max 0.009277
+   learned_tree  mean 0.004494  min 0.002441  max 0.007812
+   ratio fixed_tree/flat of means: 0.990
+   ratio learned_tree/flat of means: 0.685
+LRU page accesses simulated: 74365596; wall time incl. sampling 8.4 s; ~113 ns per access (upper bound, includes sampling)

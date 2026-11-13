@@ -1,0 +1,10 @@
+RAM-index value-only passes: 8262 (+972 calibration selection passes)
+  accesses per pass <= 262,144; total <= 2,420,637,696 per capacity (x3 = 7,261,913,088 if each capacity is a separate pass)
+SSD-index shared-cache accesses (value layouts x key layouts crossed): <= 14,842,331,136 per capacity (x3 = 44,526,993,408 if separate passes)
+TOTAL upper bound, separate pass per capacity: 51,788,906,496
+TOTAL upper bound, one stack-distance pass for all capacities: 17,262,968,832
+python 3.15.1 on arm64
+OrderedDict LRU: 84 ns/access; Fenwick stack distance: 2148 ns/access (cross-check: identical miss count 1050467 at 16 pages)
+estimated seconds, separate LRU pass per capacity: 4,328
+estimated seconds, one stack-distance pass: 37,072
+Budget in ADR-0013 section 10: simulation and analysis <= 3,600 s.
