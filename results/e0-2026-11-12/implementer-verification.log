@@ -1,0 +1,42 @@
++zsh:6> uv --version
+uv 0.12.15 (d35f1f270 2026-09-15 aarch64-apple-darwin)
++zsh:7> uv python list --only-installed
+cpython-3.15.1-macos-aarch64-none     /opt/homebrew/bin/python3.15 -> ../Cellar/python@3.15/3.15.1/bin/python3.15
+cpython-3.15.1-macos-aarch64-none     /opt/homebrew/bin/python3 -> ../Cellar/python@3.15/3.15.1/bin/python3
+cpython-3.14.10-macos-aarch64-none    /opt/homebrew/bin/python3.14 -> ../Cellar/python@3.14/3.14.10/bin/python3.14
+cpython-3.13.18-macos-aarch64-none    /opt/homebrew/bin/python3.13 -> ../Cellar/python@3.13/3.13.18/bin/python3.13
+cpython-3.12.14-macos-aarch64-none    /Users/daniellaloush/.local/bin/python3.12 -> /Users/daniellaloush/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12
+cpython-3.12.14-macos-aarch64-none    /Users/daniellaloush/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12
+cpython-3.9.6-macos-aarch64-none      /usr/bin/python3
++zsh:8> uv lock --check
+Resolved 24 packages in 2ms
++zsh:9> uv sync --locked
+Resolved 24 packages in 2ms
+Checked 23 packages in 0.68ms
++zsh:10> uv run ruff check .
+All checks passed!
++zsh:11> uv run mypy src/arborlm
+Success: no issues found in 11 source files
++zsh:12> uv run pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 31 items
+
+tests/test_checkpoint.py ........                                        [ 25%]
+tests/test_config_data.py ................                               [ 77%]
+tests/test_independent_contract.py ....                                  [ 90%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 31 passed, 1 warning in 1.43s =========================
++zsh:13> uv run python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T021737609016Z-f9af346e45f94803973c1a4e681d233a
++zsh:14> git diff --check

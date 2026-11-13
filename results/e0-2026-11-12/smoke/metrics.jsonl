@@ -1,0 +1,16 @@
+{"child_run_id":"E0-20261113T021751497604Z-75ff8e52b94d4909bc45bce428ea31dc","event":"child_finished","name":"fresh_a","ok":true}
+{"child_run_id":"E0-20261113T021752401137Z-222ec1416b314c5b8b07ab92905a7c9b","event":"child_finished","name":"fresh_b","ok":true}
+{"child_run_id":"E0-20261113T021753449833Z-2eeb2d54a06c46158c72553ccd0218ae","event":"child_finished","name":"reload","ok":true}
+{"child_run_id":"E0-20261113T021754354112Z-4c538e08c545423c856f8af444efdbdb","event":"child_finished","name":"registered_stop","ok":true}
+{"child_run_id":"E0-20261113T021755259415Z-9699e406af974e8e84c28b0900cb1bca","event":"child_finished","name":"resume","ok":true}
+{"event":"gate","gate":"run_records","passed":true}
+{"event":"gate","gate":"fresh_repeat_steps","passed":true}
+{"event":"gate","gate":"fresh_repeat_losses","passed":true}
+{"event":"gate","gate":"fresh_repeat_model","passed":true}
+{"event":"gate","gate":"fresh_repeat_optimizer","passed":true}
+{"event":"gate","gate":"fresh_repeat_eval_nll","passed":true}
+{"event":"gate","gate":"reload_eval_nll","passed":true}
+{"event":"gate","gate":"resume_prefix_losses","passed":true}
+{"event":"gate","gate":"resume_suffix_losses","passed":true}
+{"event":"gate","gate":"resume_final_model_optimizer_rng_counters","passed":true}
+{"event":"gate","gate":"resume_eval_nll","passed":true}

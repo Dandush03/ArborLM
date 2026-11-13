@@ -36,3 +36,11 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Attempted the required lower-tier implementation delegation using `glm-5.3-flash:cloud`. The agent failed before implementation with: `ollama cloud is disabled: remote model is unavailable`.
 - No model code or experiment was produced by that attempt. Requested an explicit human exception for this model to implement, or restoration of the lower-tier service; reviewer authorization alone was not silently extended to coding-model authorization.
 - Human response: **“use luna or sol if you see fit, not another astra agent”**. Implementation is therefore delegated to an explicitly selected Sol/Luna agent; no root-implementation exception or additional Astra agent is inferred.
+
+## 2026-11-12 — E0 local gate accepted; real-text screen preregistered
+
+- Sol implemented ADR-0003; Luna independently checked the contract and supplied hand-calculated loss/causality/state-isolation tests. Root inspected the model, generator, objective, checkpoint, orchestration and test code.
+- Root independently ran `uv run --locked ruff check .`, `uv run --locked mypy src/arborlm`, `uv run --locked pytest` (31 passed), and the registered CPU smoke (11/11 checks passed). Exact outputs and compact raw evidence are in `results/e0-2026-11-12/`; full checkpoints/source archives remain locally under the recorded experiment directories.
+- Fresh repeat, checkpoint reload and interrupted resume match bitwise within the tested macOS arm64 environment. G0 engineering gate accepted by the authorized reviewer; Astra validation NOT PERFORMED. Linux CI awaits execution. No memory architecture has yet been tested.
+- Human approved pinned WikiText-2 local pilot use (ADR-0004). ADR-0005 preregisters six variants × three seeds, exact data/lookup rules, token/resource budgets and screening thresholds before pilot outcomes. A failed screen will stop promotion of that configuration, not establish universal disproof.
+- Human additionally requested each checkpoint/check be pushed to GitHub for tracking; completed verification bundles and subsequent experiment outcomes will be versioned and pushed on the work branch. Merge/publication approval remains separate.
