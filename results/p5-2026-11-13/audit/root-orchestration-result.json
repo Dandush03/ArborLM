@@ -1,0 +1,1878 @@
+{
+  "accounting": {
+    "combined_worker_active_seconds": 1496.4592600421747,
+    "external_reporting_wait_seconds": 822.6909042488551,
+    "quality_stage_wall_seconds": 1281.554948874982,
+    "quality_worker_seconds": 1281.554948874982,
+    "timing_stage_wall_seconds": 1037.5952154160477,
+    "timing_worker_active_seconds": 214.90431116719265
+  },
+  "ack_bindings": [
+    {
+      "ack_sha256": "d420864cbbbe38851d74e4efc1bb27c09620fff077b61b1e595138c5968014b3",
+      "bundle": "results/p5-2026-11-13/quality-suite",
+      "commit": "f044d8aaa512fd1a5e986c6c120ac0af0f87d557",
+      "external_wait_seconds": 41.25377974996809,
+      "peak_rss_bytes": 679329792,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "baaeb9f9e9d563c12fa5ac8b00bf09f8b99d0910049413cc412d0b7b29aba015",
+        "result.json": "86897a43b76a2bdfa77fd3186af5741d786bea64ff13969c6d0df7e3e1d9dccd"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1281.550607083016,
+      "worker_id": "P5QUALITY-20261113T125206040450Z-aa1f203f012e4112bf137cd09944bb92"
+    },
+    {
+      "ack_sha256": "5d63331250bd99f12a36d3d30336541519821fcd6c1cc1ad2410879dc5f30bb7",
+      "bundle": "results/p5-2026-11-13/timing/b101-o301-baseline",
+      "commit": "32a6cdcccf718ad5542896d5c5a7076ff476b84a",
+      "external_wait_seconds": 38.7952058329829,
+      "peak_rss_bytes": 255836160,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "2a52365c30a43c463025d9fe7f0d0fda1a135cf866228b40e9e343e585e88e87",
+        "result.json": "496f93204f76cade7be9dea9e4606cc73f408dbae7a92bef5d3116dd77755a98"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.1975754160084762,
+      "worker_id": "P5TIME-20261113T131408858503Z-70111588d5224f3d92f55a3bc652ec78"
+    },
+    {
+      "ack_sha256": "ce6ee0cb81ed5419279ccc70e5de50ef1414b7c13f36ac3b08e9a17a891c0393",
+      "bundle": "results/p5-2026-11-13/timing/b101-o301-s501",
+      "commit": "f5911b7bae07a5e4c5b33af6760a78025f98dea0",
+      "external_wait_seconds": 32.520813457958866,
+      "peak_rss_bytes": 334168064,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "d06bcf03c7e387c73baaafeb7d9f1be3ce99df455bfb5f015c81b9bf7d5e5958",
+        "result.json": "2fa0fc68d55098109fbe85183b8715adc2ad3e18b46eb52980ce79f3fa5d5cbc"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.200273583002854,
+      "worker_id": "P5TIME-20261113T131448859775Z-f27e445e2ad9443f9839b536fde50797"
+    },
+    {
+      "ack_sha256": "ea5f9df0710eaeccb6be6e7a63b574da3361925bd4bcc2365e19116773b36671",
+      "bundle": "results/p5-2026-11-13/timing/b101-o301-s502",
+      "commit": "8d9f0b64cbba62977138d61bb46f17396d0b9038",
+      "external_wait_seconds": 22.91934924997622,
+      "peak_rss_bytes": 325337088,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "b0da7adf44b4b3deca8216b57f6d5300406e6e93c421f3e8fdaff7bad69fe88d",
+        "result.json": "4ee3b0aa96953eb5465d58ca5ee87b891ee38339c7e7b4be04b0143e500a1273"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 6.997181457991246,
+      "worker_id": "P5TIME-20261113T131528589669Z-1308fb7b72654443b2975cd3218b3545"
+    },
+    {
+      "ack_sha256": "5e70ee039dfad018739e3448ef4f950b393134cae539d91309cf9bafd92a60f0",
+      "bundle": "results/p5-2026-11-13/timing/b101-o301-s503",
+      "commit": "553bd2df1fc49d5372a4036906224e2ed6bc8fa3",
+      "external_wait_seconds": 32.97579133301042,
+      "peak_rss_bytes": 334741504,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "a100f069f493895c7747609331f2cf83566d4083cfaf4019afbd632574bbd75a",
+        "result.json": "10054000cd477a81f682be5d753419663fbbdb1d8c1a4f503adce78094f8c19c"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 6.92066566698486,
+      "worker_id": "P5TIME-20261113T131558513977Z-0dbcd097047448c197d9bf18bd4857d3"
+    },
+    {
+      "ack_sha256": "d2b23847c1a7cce039126c365072c454845d97ff9d4361d0b495f1707e846745",
+      "bundle": "results/p5-2026-11-13/timing/b101-o302-baseline",
+      "commit": "b582f4239123a8d968ec56fb00af100d5bb032e0",
+      "external_wait_seconds": 23.05784320802195,
+      "peak_rss_bytes": 261210112,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "2c1cc2361cdc20d96c2fc9c29d6618f0d56301991f5ab44cdea9823cdd2cbeea",
+        "result.json": "9cc12066c211afcb7b00032595fb7a4326bd56a8c66777c5b3bca4b16ab16c90"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.1895056660287082,
+      "worker_id": "P5TIME-20261113T131638418751Z-11d61a65763b4dfbb7ad7606778538d1"
+    },
+    {
+      "ack_sha256": "b7e637c842355c7cb8ea7541ca259fb206dddd1f90ddd96b2bc5c22205793b00",
+      "bundle": "results/p5-2026-11-13/timing/b101-o302-s501",
+      "commit": "2df2b4f695cbae600862824452093504f02fcfb2",
+      "external_wait_seconds": 17.865369874984026,
+      "peak_rss_bytes": 336199680,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "dee066a97b7905f7cb122f9bb3f89521213d685cc28733fbb5e4d60e4b7edbb7",
+        "result.json": "7af13a70cb712169d49e8682cbfaffa38f569a8b2902cc3e658a063a9cf1a5d4"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 6.986701541987713,
+      "worker_id": "P5TIME-20261113T131702675665Z-e3f9a833621347c68dbf0b211548f754"
+    },
+    {
+      "ack_sha256": "64af4c058ac15b2d7e64bf4e5ea5c27838e032476ae82a60763f0c47ee0f0dc5",
+      "bundle": "results/p5-2026-11-13/timing/b101-o302-s502",
+      "commit": "d87cb114b0d64929c383ab03bf7184e407b55176",
+      "external_wait_seconds": 18.990839083038736,
+      "peak_rss_bytes": 336396288,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "d4c26b27459642758f240b7ea4b8bbec0d89325d768f9dbeb4a825335d630d0a",
+        "result.json": "a26a276db813122211081658463ce19dcb706de908ab48ff0df3e3d253fe788e"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 6.990242000028957,
+      "worker_id": "P5TIME-20261113T131727536387Z-92ed85c5203d46fabd86fca54cde5e95"
+    },
+    {
+      "ack_sha256": "7f16d8c63e3a9a34917ef2c394045ff8cad1b9bd7031c99385264bb1792bf545",
+      "bundle": "results/p5-2026-11-13/timing/b101-o302-s503",
+      "commit": "48999d0a84f378b2b49621635ed290c10c03b94a",
+      "external_wait_seconds": 17.4505568749737,
+      "peak_rss_bytes": 339361792,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "756001984e71d0ae6fbee2102ff9c36fd6dac0945032fbf5070649b5686f3e9f",
+        "result.json": "735f36e3feecc2deb36e5cbce5cf536100f3d481e64befdc5628fa197c60ef2f"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.521567250019871,
+      "worker_id": "P5TIME-20261113T131753526004Z-cd72c4e221fc404eb56fed12ede8f166"
+    },
+    {
+      "ack_sha256": "990b2b8e61276d73d1c28aed6810e83ea40f2c06dfd4418df3f9ce977ef9cce0",
+      "bundle": "results/p5-2026-11-13/timing/b101-o303-baseline",
+      "commit": "b8169ccb4065ddca078c46ad8286683e1463ebf3",
+      "external_wait_seconds": 24.818988542014267,
+      "peak_rss_bytes": 260325376,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "db25b3db025e304c57f36f965f7ac0c53b8fe39d1d605b3f9b3b8238a00ccffa",
+        "result.json": "465eba8aa15b973977de3475ad06fa45e9afb7207a48a65410113fe8de9eb974"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.3758864590199664,
+      "worker_id": "P5TIME-20261113T131818506557Z-a899a7495c8746f79c061ab28512c80a"
+    },
+    {
+      "ack_sha256": "bf1ebd89faccd6a392b82d3c0c32a33e8e95c85c77b8fe9df9c18f8029b616af",
+      "bundle": "results/p5-2026-11-13/timing/b101-o303-s501",
+      "commit": "5b7f1dcb29f63465c6bcb129f4f19df536069528",
+      "external_wait_seconds": 19.171111499948893,
+      "peak_rss_bytes": 333987840,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "35e3e2d221a32683c57106b9c58b9435a13d9e7317733b50c954bfc37e06697f",
+        "result.json": "33fd0b0e7b18323b98031c45e490a425a5e28bbfec72bb7cefb8cb0a3e6fb151"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 8.100625374994706,
+      "worker_id": "P5TIME-20261113T131844708502Z-41bade03b6674540bbc858ee9da7ea6d"
+    },
+    {
+      "ack_sha256": "cf62a008b84d10587c816400dec8482fa503887d0a8dee003b723293dd9207d7",
+      "bundle": "results/p5-2026-11-13/timing/b101-o303-s502",
+      "commit": "29636055a77195a48183bde8c5cdcba4afa591dc",
+      "external_wait_seconds": 19.005862416990567,
+      "peak_rss_bytes": 346193920,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "46361906b126878f2d1f483142a27dc3f71acb051920e7c9394df6f9b121c276",
+        "result.json": "07b132bd8a51193640700c1edfb0eb90b9412ee16889de85637a3370577b5a52"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.966740166011732,
+      "worker_id": "P5TIME-20261113T131911989749Z-1ef1812a820f4ceba1fc9389690a55d4"
+    },
+    {
+      "ack_sha256": "524f24130b569ac3c2e119a36145b677d6c260d3b91139dba94df256ae63f23c",
+      "bundle": "results/p5-2026-11-13/timing/b101-o303-s503",
+      "commit": "141c6d212bd0a443b1b54316169e352e92acd880",
+      "external_wait_seconds": 19.60227674996713,
+      "peak_rss_bytes": 338345984,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "bd74c3bfb4bc579f0af153465463471e6eb31e9ff3a1f0c88d201a2bea982db2",
+        "result.json": "19a7b6776f7087c0abc3864ccda9fe0582a95c6f44b6106f4a34e514807146a9"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.505626541969832,
+      "worker_id": "P5TIME-20261113T131938975932Z-e23cfc414ee34906884ce4c3b47b2d6f"
+    },
+    {
+      "ack_sha256": "3d5155cc9712d59c85b5393c687c7f4c6e190c5eb7374547e9137baac04f36df",
+      "bundle": "results/p5-2026-11-13/timing/b102-o301-baseline",
+      "commit": "d67db187c14d75a0a0f3efa7e4d2106090ea32f1",
+      "external_wait_seconds": 23.500556875020266,
+      "peak_rss_bytes": 259473408,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "615b21f4072795db42d00a430fd62fd9455efb3c644c4ed878e325e5a2501b27",
+        "result.json": "02b2b30b561c0611ba6e575b2598c406a4c1686730396679ef1dfd83f9bad6dd"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.6193567079608329,
+      "worker_id": "P5TIME-20261113T132006092678Z-41156a8ce9534339a9d379c15a304ba0"
+    },
+    {
+      "ack_sha256": "903ffe35c4675207e2d569e7de89331dfeda4814246075a24d181cd2c532e850",
+      "bundle": "results/p5-2026-11-13/timing/b102-o301-s501",
+      "commit": "06624bef9bab806c87e2c8048ff33a824fff1e27",
+      "external_wait_seconds": 17.71257379098097,
+      "peak_rss_bytes": 349224960,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "7d280f16da34599d718f033f9cdb431936d34f769c3d57ce31478b959ae8125c",
+        "result.json": "108408c45c65fd68185dd0ad245200e08247ef973be72730f76ee069d6a8d54b"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.980420582985971,
+      "worker_id": "P5TIME-20261113T132031223305Z-4f7ef42933e14a4793e4fcf8c42413db"
+    },
+    {
+      "ack_sha256": "3705bc953765a04a634227b6806b5b91630a138619caf4ae5de64a5633959b32",
+      "bundle": "results/p5-2026-11-13/timing/b102-o301-s502",
+      "commit": "14d0521d6e013169ce88290c3969411fb90ff4aa",
+      "external_wait_seconds": 17.964318832964636,
+      "peak_rss_bytes": 340344832,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "a6bda112995798de554eab3d31d20d49ddbaf45fd67b3cb3b619d72db629d99e",
+        "result.json": "74b1d440d6dee3bc0f2b4ad24856b9b4d40445eccb88a84a5e4192ea463c905c"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.530085459002294,
+      "worker_id": "P5TIME-20261113T132056928111Z-b09dd10351d24ff88ab89162b645c089"
+    },
+    {
+      "ack_sha256": "753723182bb0d943e1e79552a84476aa96571005f3c9eaf4e776b9416e08841d",
+      "bundle": "results/p5-2026-11-13/timing/b102-o301-s503",
+      "commit": "447bccf53948592054379550bcd5678bc99ab961",
+      "external_wait_seconds": 24.40219612501096,
+      "peak_rss_bytes": 336183296,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "eb64d953abc99f74c4e4669f0463b04b7d62082b11c01117145efcdd32eda4ef",
+        "result.json": "060f0e7c49e3b6a4125b3f5099fd87a77a6dbbd81aa63b0cf481695ad78e7811"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.528945249971002,
+      "worker_id": "P5TIME-20261113T132122431995Z-3ae79036c3174b2cb79d3f259bc32fb9"
+    },
+    {
+      "ack_sha256": "37644e9c5b59e8db7fe67b1ea34948f69b9198c395a3e1b2d7b686d93b3af8ba",
+      "bundle": "results/p5-2026-11-13/timing/b102-o302-baseline",
+      "commit": "d488ea0c0ea51686990c2271c67ec99a4dbf9022",
+      "external_wait_seconds": 24.300946750037838,
+      "peak_rss_bytes": 255229952,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "c73b9209c00b6af8cc99cbbf8853630fa39773462338abf88c3343d57a3070d1",
+        "result.json": "e94e89ba1fb039a04325efd7801f13c5f93e608ccd58d3c280574a74f57b5523"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.4890727910096757,
+      "worker_id": "P5TIME-20261113T132154378443Z-1bc402d4cb24422492d6b2ef63928bae"
+    },
+    {
+      "ack_sha256": "f51ae843511ec5f4617ecff9143fb0ce52426fee0e789c4ffd9d102ec8bab9eb",
+      "bundle": "results/p5-2026-11-13/timing/b102-o302-s501",
+      "commit": "8646d226063ec1c8c508afde5f704328039fdc90",
+      "external_wait_seconds": 17.868076250015292,
+      "peak_rss_bytes": 346374144,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "e763209567f6ca8d49580861fdc6a4b71ad0c7467bb73101b0bfc2b0a7872131",
+        "result.json": "4189df69a70b60a410b2cce9da2afc5cbe0d4038c5bf9ba94f9640311586df20"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.887281958013773,
+      "worker_id": "P5TIME-20261113T132220176757Z-912e26fe9fbe4a33a8f5eecec0e6ef3a"
+    },
+    {
+      "ack_sha256": "c398eccebd03653b4a9053eae95e3f527e954a20e876c352579b3050e24f2b08",
+      "bundle": "results/p5-2026-11-13/timing/b102-o302-s502",
+      "commit": "e20575dfe3b602a5dae660010d6941fe94d2cb3a",
+      "external_wait_seconds": 18.241162082995288,
+      "peak_rss_bytes": 339787776,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "0d3336ecdca44bb3e2f97b51196c5cfa2ae8f10bef35b14a9f390db40d22a4d0",
+        "result.json": "2d67b8ee8f7ce18b182df9e64c81e492d8f4822385c47c68517ad5ef340c02a2"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.391703125031199,
+      "worker_id": "P5TIME-20261113T132245941246Z-a32197754bab4e329846d1b683bd19f6"
+    },
+    {
+      "ack_sha256": "89127db25bb6aeaf39565c420f1521904c25bbf37f273d4714811b0959df91b5",
+      "bundle": "results/p5-2026-11-13/timing/b102-o302-s503",
+      "commit": "9d078718385fe0dad05f10a7d8a203cf2f7c87bb",
+      "external_wait_seconds": 20.778933249996044,
+      "peak_rss_bytes": 337543168,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "31c59fefb0221cc27e19a306a7eeb32e40fc961e080bc2b3d507c9b9876d2c6b",
+        "result.json": "aae21546411df4a54db4086a5e7e3e063f50562ad77c7464a62301719e0c941e"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.633373541990295,
+      "worker_id": "P5TIME-20261113T132311588265Z-98882196ac2840348c895cdd919d3674"
+    },
+    {
+      "ack_sha256": "9e7099f332c4bf787b6ae54ad7af41f5507b323ee815df619600a3b15c1c6ca1",
+      "bundle": "results/p5-2026-11-13/timing/b102-o303-baseline",
+      "commit": "39c8d2913a54da9f33976ff44f16bc90dd2c8680",
+      "external_wait_seconds": 24.80799341702368,
+      "peak_rss_bytes": 265338880,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "85daace85272e573ef4a2f4acbec237c8060578d24784f67420f0602afce0c94",
+        "result.json": "3ec3df3e0c8ce69fa0bf0e74f7403dacd7661db3af7551f63938a9a044b15e20"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.491848999983631,
+      "worker_id": "P5TIME-20261113T132340013217Z-d2f8fc9d6b66452f86c0b37822352364"
+    },
+    {
+      "ack_sha256": "a0f6d87fea409ef9b5dc66a479027cab4a12afb321f71cf1b82bc69fd1d8990c",
+      "bundle": "results/p5-2026-11-13/timing/b102-o303-s501",
+      "commit": "4430612de9b6b65084b5913d1c0dd9b4ccd9516f",
+      "external_wait_seconds": 18.48709216696443,
+      "peak_rss_bytes": 329383936,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "fdeeaade97ab60092c3685cdf20dd64750b6bd68842d3d31894c214c898b3ca7",
+        "result.json": "b171838f56f16300561f2f19aba3fabe1353ed652dcc98e80d815b49c07b4b57"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.313224249985069,
+      "worker_id": "P5TIME-20261113T132406324481Z-fc5eeacc8c5a4280a27195acd0ab5abf"
+    },
+    {
+      "ack_sha256": "bd00803b4cbc7b89f2bafdf5af7fa5c822de9b0f6b4a90ce25bde94a41e1d746",
+      "bundle": "results/p5-2026-11-13/timing/b102-o303-s502",
+      "commit": "487b7bd8671a977df8c5f7d7b7f7b55bdf41825d",
+      "external_wait_seconds": 18.347423125000205,
+      "peak_rss_bytes": 343048192,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "9ea0991db72a6be6f41cbf2b8a7543ac3298739c4b7aca077299761bf3c94df1",
+        "result.json": "3f7c78b403d965ac028a546cbbec5b99be134d4c3bd8edd83897618dc96bc8c3"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.323763541004155,
+      "worker_id": "P5TIME-20261113T132432141284Z-6ca0d161ee9a48ecab5115be3c4d1752"
+    },
+    {
+      "ack_sha256": "ce67e7cc27ce676aa790dc3c91491791ee363c220ef2e1454c23eed8967af992",
+      "bundle": "results/p5-2026-11-13/timing/b102-o303-s503",
+      "commit": "deb13f2d534020b95bda381df9e49617ad1fc701",
+      "external_wait_seconds": 17.985134417016525,
+      "peak_rss_bytes": 346865664,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "9ce25187681a917f224f0180a1ccacc09d21a6d1f5f5a272ead4a0e25f87b0e5",
+        "result.json": "bbbb513900e56bb68795d00c6716998704d08b962b6eab42fbe6ff2de20be8f9"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.2849308750010096,
+      "worker_id": "P5TIME-20261113T132457822900Z-05fff86c9a4c446db46a53edae940238"
+    },
+    {
+      "ack_sha256": "fa02130b47a373e0ed656add11f80d72a4b78c723885dd606432b3de2fad987d",
+      "bundle": "results/p5-2026-11-13/timing/b103-o301-baseline",
+      "commit": "b9023ed1ea06786ac23bb1c96d84aaabe65eb8d3",
+      "external_wait_seconds": 23.501601499971002,
+      "peak_rss_bytes": 265175040,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "9430557f70deb930b85d3f5af6da52e476e4daf03d8eec304bba82ba660c24c9",
+        "result.json": "db06df3208aac249a7f4fdddc670e9f7ed73b98c5f126ae80e35f13992439a61"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.2661732499836944,
+      "worker_id": "P5TIME-20261113T132523104686Z-4520bffaf05f4f09a40f700087fcaad2"
+    },
+    {
+      "ack_sha256": "f04f1741a25df8479039331a9dfdb1b00e04084efbd4b232f4de723f9ac31ca6",
+      "bundle": "results/p5-2026-11-13/timing/b103-o301-s501",
+      "commit": "fd6c0fe3c4db80bd051910bcddaa51ead0c0a6cc",
+      "external_wait_seconds": 18.999718667007983,
+      "peak_rss_bytes": 340164608,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "06e4796619ed09ee5e16cf6efc943385aa532acd8e62f45dd72ec0859ab39139",
+        "result.json": "a4b4023f823e89577cf1f620bad1c4cf8389dcdbb5a26847f8299786247f1ecc"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.307306334027089,
+      "worker_id": "P5TIME-20261113T132547885603Z-6e6d7022fd9f449bb5ee161867638b18"
+    },
+    {
+      "ack_sha256": "3c42383e32f6681f941688996f9bb4c718476fd3d0602c70d4664994c79f8a1a",
+      "bundle": "results/p5-2026-11-13/timing/b103-o301-s502",
+      "commit": "686e08ac955e4f88b4b957710d48780d524ddefb",
+      "external_wait_seconds": 19.15560749999713,
+      "peak_rss_bytes": 339165184,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "afdfd6a199591161ff4cb4baac3811745ffa0430fbe8b4d4c757f439df943ce6",
+        "result.json": "b9884428eb6d3edb07b8df5f38f90a0863def0eabe911180f59a584c8fa28f3b"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.200860249984544,
+      "worker_id": "P5TIME-20261113T132614205097Z-c916457977314f49acc18e31ba8b93fc"
+    },
+    {
+      "ack_sha256": "c0811251a675fef9939e5d84536758c2c600f32c0aa6dfc280241988dff900f8",
+      "bundle": "results/p5-2026-11-13/timing/b103-o301-s503",
+      "commit": "cbd2346c7f1cec811d511d3b8937ce0ba28d878c",
+      "external_wait_seconds": 22.126052625011653,
+      "peak_rss_bytes": 343883776,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "249ea6e294e543dc2e0579a30e89507c560c5b7e8f359260c37e9b1cd9fdabc6",
+        "result.json": "9a2dbb1daa3dda8c3493ff5199d35c55504186653dbca7450f8e629ec1c0121a"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.314299541991204,
+      "worker_id": "P5TIME-20261113T132640573625Z-554d1fcabc3d4742810254a8dbf7a455"
+    },
+    {
+      "ack_sha256": "715f9e642128531fb98c1d1d0887045571ea28bf4330b43d8ccb155c3d697cd6",
+      "bundle": "results/p5-2026-11-13/timing/b103-o302-baseline",
+      "commit": "26828f8371f7816f345855b69167e191711af2a6",
+      "external_wait_seconds": 24.775105709035415,
+      "peak_rss_bytes": 258277376,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "42313e4de6075ec001aa4c4f2463f58712b27208f568b648f0288fd4c170b323",
+        "result.json": "a23b911877cecd25989eac76457f360675ad8a69501c0f7ab3bdeebb3416d8a4"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.2646227499935776,
+      "worker_id": "P5TIME-20261113T132710023563Z-73d609cb12de463a9f8e5af286a88ce7"
+    },
+    {
+      "ack_sha256": "039cdcf7f1ed05fe78ae0ead1133dc1f3660b86b5359944bc71839c56e0799d1",
+      "bundle": "results/p5-2026-11-13/timing/b103-o302-s501",
+      "commit": "5425f85f2261533054d5772631a37f4b7d30c403",
+      "external_wait_seconds": 20.2068534999853,
+      "peak_rss_bytes": 332627968,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "8af53014617bd0b3f39b00cc643838210bad4ae0d9c54fa7eaafd50e1b14ab26",
+        "result.json": "f25b5383d78d41218157b026cec48b8fc268a5bda6225cdf874aeb9b04c0f5a0"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.305961000034586,
+      "worker_id": "P5TIME-20261113T132736070043Z-9e5b1750709142b98bc16697c96b858e"
+    },
+    {
+      "ack_sha256": "743bc8d31ddf9e47222c20d9ef75af5b5be0811bb70b5bf1312e6856e321159c",
+      "bundle": "results/p5-2026-11-13/timing/b103-o302-s502",
+      "commit": "c37d41769cb392b34df09221363ebffa3a04d244",
+      "external_wait_seconds": 18.7428506250144,
+      "peak_rss_bytes": 341295104,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "8b0e6cdf574086a5317bce1b674265eec41dad91423f49392b067e26a31d0253",
+        "result.json": "cabdaaf005fbff3fb9c8bf8d47bb40fff0a1bac1c9b4dc87d220965ac894e21f"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.660590416984633,
+      "worker_id": "P5TIME-20261113T132803599436Z-7f26a9304dd14eeaa9bfbaf0cba7812e"
+    },
+    {
+      "ack_sha256": "9b854556da6ce76ca4befb3c5df4cd34fd5098d7821a316c769bcc4a91cfc4b8",
+      "bundle": "results/p5-2026-11-13/timing/b103-o302-s503",
+      "commit": "65d31d740fa81f0d83b7985552ed735bf551b3cc",
+      "external_wait_seconds": 18.45604324998567,
+      "peak_rss_bytes": 339247104,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "084702b4254a643f6292e046a89684f5fefdc7c9208291d64a0842974086b2df",
+        "result.json": "ee6f2714cf46008a9e63bb35e1e67cb4e61f25370ec4caee415619d41e05f810"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.9833875829936005,
+      "worker_id": "P5TIME-20261113T132830014462Z-4180e74d8eb447d99da965dc86c52345"
+    },
+    {
+      "ack_sha256": "6ccdb49085872b5c7afbce36273a35c8b6cce296f59f6661de25fd76f3326f45",
+      "bundle": "results/p5-2026-11-13/timing/b103-o303-baseline",
+      "commit": "2fe583fca2cdd1f45e1c6cd3f2c3969d07bd6ee1",
+      "external_wait_seconds": 27.76190450001741,
+      "peak_rss_bytes": 255655936,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "65b014356a4c4f20f67e128b97090a336bac82b5c8d248537f0f6ddced966921",
+        "result.json": "66a8c37cd7db98179b290b2f52c2967cc1e7babd2649b5e9e245ed07b4a5364b"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 1.2662203750223853,
+      "worker_id": "P5TIME-20261113T132856468593Z-6a5abcea42fb48f2b74fea28fdf0d8ca"
+    },
+    {
+      "ack_sha256": "9eddd9b97c65830c021c38e16875c66fc188521560f4a2df09a57641f9f06167",
+      "bundle": "results/p5-2026-11-13/timing/b103-o303-s501",
+      "commit": "d3a97b98f2e15e4de9922a31451ef6b72d20d162",
+      "external_wait_seconds": 17.922868499998003,
+      "peak_rss_bytes": 347734016,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "9236b32b3e627f0fda31689977ad902cc313a75668835dc3454324475d4ed5d3",
+        "result.json": "ce2e809fc2e2664e125cfbaa527c3d161ba1900060942e047bc7f1742930d3d6"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.882787749986164,
+      "worker_id": "P5TIME-20261113T132925507074Z-26f37de0d62d45ef94e409135e71622d"
+    },
+    {
+      "ack_sha256": "3310b7d9732470620be83d78e78b9d63a237284ae07c91fb839be831a62aa426",
+      "bundle": "results/p5-2026-11-13/timing/b103-o303-s502",
+      "commit": "f45af5919cd3f40297c63a01b45e37021fb5c62f",
+      "external_wait_seconds": 18.802016499976162,
+      "peak_rss_bytes": 337788928,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "45cba606238c4d97f536ff99538663406e9b3959541b6b05331db62df7e554a1",
+        "result.json": "8718bb3903ff36935bce067e269b756b804578baeed6544beb6be901bad0ffa6"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.879891416989267,
+      "worker_id": "P5TIME-20261113T132951327500Z-a392857e7adf441f968ce40e8b3322a2"
+    },
+    {
+      "ack_sha256": "f4c2b4fc251f8c0f03c98e3279754c3c30a77fe2db0060c29a7979ed7695e8b5",
+      "bundle": "results/p5-2026-11-13/timing/b103-o303-s503",
+      "commit": "38fdcec2711ed6c76ab55fad87c7dd295af8a112",
+      "external_wait_seconds": 19.41608641599305,
+      "peak_rss_bytes": 342310912,
+      "push_completed": true,
+      "sha256": {
+        "manifest.json": "b8fd6d3e603ca30008fc45745719af83417c4fbd649b5730b2b2bf4a52e488b0",
+        "result.json": "7006bbb862a3b7b330cfea04312a9e8b304ac3b21de1f7387d024cbdf1c7a6c0"
+      },
+      "suite_id": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+      "wall_seconds": 7.74532674998045,
+      "worker_id": "P5TIME-20261113T133018018933Z-f33eb7ba351c48e2a0dc09e26e3d736b"
+    }
+  ],
+  "ack_count": 37,
+  "max_timing_worker_rss_bytes": 349224960,
+  "peak_quality_stage_rss_bytes": 679329792,
+  "peak_suite_rss_bytes": 858423296,
+  "quality_checkpoint_bindings": [
+    {
+      "commit": "a9fe686040b9053d5df57600f8efbd617194da82",
+      "index": 1,
+      "label": "b101-o301-baseline",
+      "run_id": "P5HIER-20261113T125206960405Z-df264377135d471fb331ccbc851463a2",
+      "sha256": {
+        "manifest.json": "c83737253fdba173ceb356fb684864fd6c7288026a99dae7cf6b069134947779",
+        "result.json": "b5fad6aab10cefa48708f8afdaac670fd1a76f6d30ac71b6c0da36181496c742"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "42c340ab101641568e6a6f8f053ced95fa6d35d2",
+      "index": 2,
+      "label": "b101-o301-flat-s501",
+      "run_id": "P5HIER-20261113T125208328534Z-41c1d2542ea143338cadee8f1eefe34d",
+      "sha256": {
+        "manifest.json": "ca3bfc15f0324041722ee5f1914d821f8d69649fca40e06f6fd82c31c7ed3415",
+        "result.json": "db1e23cab9f65eda26a7f997cc26ec0f3b79626460cbc6978cf84607fe06a810"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "d25ab466f6ffb200e3e1c8531510ab6271edbaea",
+      "index": 3,
+      "label": "b101-o301-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T125213478222Z-ffb14d643a6e4208ace5cf0fd2debe22",
+      "sha256": {
+        "manifest.json": "bf5a1cc8c9492298b1b8ef059ab25cb920c7a495f86fc6b85e0134c0420d6cab",
+        "result.json": "afe02f8dd4b21f6fbdf6b67424a7b73040eecfc25c95fcfdd51f0ab68b96e81c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "cea19a224c1afafb61119dac3c2ab6fced60a10b",
+      "index": 4,
+      "label": "b101-o301-learned_tree-s501",
+      "run_id": "P5HIER-20261113T125231268069Z-4fe632eaa64c4f59b1c3131bb32d9f6d",
+      "sha256": {
+        "manifest.json": "cb4599b3f5bf64696c8f83959bdce88ffcf8befdf4f43a6ee23cfd48d883873f",
+        "result.json": "c7149bde579bb6f81c43617ceb02e66e14b598a2b17e1fa7976e53265ea659d2"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "c35fdcff86379b28256312597f2b92f7e3573c64",
+      "index": 5,
+      "label": "b101-o301-dense-s501",
+      "run_id": "P5HIER-20261113T125249023404Z-0328d2f36e924fdebb4e81cd928eebd6",
+      "sha256": {
+        "manifest.json": "840f003e878510e9260dd4ad441cc3ebced4ebc510683afd85a9624c3abbf772",
+        "result.json": "6bb20eb174afa53b381edd889723b703915bc88a8c27929076306a624d09b363"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "61915c86b3ffd0b6748a60172a413620f9f3ffc1",
+      "index": 6,
+      "label": "b101-o301-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T125254884938Z-a9e19da240be48d7a76f25faa45cf18c",
+      "sha256": {
+        "manifest.json": "04350b616a9c25aaa7e79c34c0a9331ea0dbe5ce212bab1a4d87255595d71530",
+        "result.json": "88f680097e177adfe5b8e62e7f7024a158d6dd8f3017de69f692dffd9dae89b7"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "604908bb78c0b8c9f78680911bc475ce4537b20a",
+      "index": 7,
+      "label": "b101-o301-learned_tree-s502",
+      "run_id": "P5HIER-20261113T125312417191Z-a00e01eb764440f29fd5e177c046a3fa",
+      "sha256": {
+        "manifest.json": "51c5e2feac1d3b01e66d79b86e63aa6ee7c220fa11ae12f15908fc754c8d470e",
+        "result.json": "d7461c725f45a3279113a91163d5743b78087f25015173fe47d02c4e1dbce138"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "bf327abd2bb6cb65182b16cefaeb286d530c03ea",
+      "index": 8,
+      "label": "b101-o301-dense-s502",
+      "run_id": "P5HIER-20261113T125330106404Z-aeee4b513f134d9a8e23fafa6bd1cacf",
+      "sha256": {
+        "manifest.json": "8f7995fdf742fdbd310fd5c97c05be5e8543a7dcfe754c2b5395df5dbb524d0c",
+        "result.json": "81bc94aa425c1342f142ef0a5a5d1312c60962de85f294dc45296c8b7b36372d"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e68149fd54a79cba8277cd5c8b7aa043335e5ffc",
+      "index": 9,
+      "label": "b101-o301-flat-s502",
+      "run_id": "P5HIER-20261113T125336428802Z-9ef50a58dc914203a121365835068c20",
+      "sha256": {
+        "manifest.json": "c734a15a6c6cd5d0b394d7c71bceec276500b539cf599a3d432587b6e6a4d405",
+        "result.json": "8df6d51abd97450e0fb3674d88b33950c670e2f9c8025f3d896bce252dd77b0b"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "37677c757eda89e932cc7221cddecc0e06afea0b",
+      "index": 10,
+      "label": "b101-o301-learned_tree-s503",
+      "run_id": "P5HIER-20261113T125341639618Z-e97148dc662348cf85cdce4070e5e7cc",
+      "sha256": {
+        "manifest.json": "89a0e7fa4707fad82eda425318afc464a56c5e029bad85e005778613dbceef00",
+        "result.json": "0491394f4f44ad08aaff7b5b09381f3e7abc895e6b370acc994a22e4151922bc"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "90bb40fc7370d5ab30395b043f48c283b63f4805",
+      "index": 11,
+      "label": "b101-o301-dense-s503",
+      "run_id": "P5HIER-20261113T125359120531Z-9f433ae80bc443579074ee49e851903b",
+      "sha256": {
+        "manifest.json": "76cd075d43ab0e95cd3b495cfaec6abe974e12c017a489dd9b0731ba687276c2",
+        "result.json": "35f1ed3719c4b5b4e53f843fd44ec2faa7b5f3fb64c08ecadffaacd213c1d6aa"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "115be09e8863dc70a42dc633860764739b136b6f",
+      "index": 12,
+      "label": "b101-o301-flat-s503",
+      "run_id": "P5HIER-20261113T125405045000Z-99dff3884d29450e827a3f45fc3da3e5",
+      "sha256": {
+        "manifest.json": "104a175974934187d25efe5d001391353769157a8f72b9cf6272a2a5135684ea",
+        "result.json": "7da71c77472b24a63118a441829c206c6d3515e75b571bb00b13c242ccbd626f"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "01ad69234de440dd9d1aeac51ca9d3eb925dd236",
+      "index": 13,
+      "label": "b101-o301-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T125410336462Z-3dc0a84aaaf843e4a62d8cac3eff7568",
+      "sha256": {
+        "manifest.json": "c4e4967d5ed60560f63f3fb47df206afbc3236c0044c233a7d59e9b63054b414",
+        "result.json": "19e9ee5d88e62806f65e00121532085e27fcc8552ad9e2baf7358e83fd1f02d5"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "64af09f88f37f464dce58f59c87048a44e7b4601",
+      "index": 14,
+      "label": "b101-o302-baseline",
+      "run_id": "P5HIER-20261113T125427914924Z-10a28168fc964a50bdd2620e855ffc77",
+      "sha256": {
+        "manifest.json": "3f1f2e9674f7236f83070d8a6e61375d56c03d2ce4c26dcd2e0b8045cf3030e7",
+        "result.json": "beb1c789df96e9137ea28cbfd7128555f62af1d120d5f89cbc79051483787d28"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "fca24ba85a9058c24224a7ee93d81e3a7019f4c3",
+      "index": 15,
+      "label": "b101-o302-dense-s501",
+      "run_id": "P5HIER-20261113T125429109021Z-f47dd90667044a93bfde457ccb84e0df",
+      "sha256": {
+        "manifest.json": "574dc0798cfe653ea6855706a411301349ed31721559338c76f022eef5ad774e",
+        "result.json": "02f5f29074b7050404fd69005f677343a0341c47e97f6a449693a2b24f89007d"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "90f198cc2af72653aca241901fe205d39c1c9f6d",
+      "index": 16,
+      "label": "b101-o302-flat-s501",
+      "run_id": "P5HIER-20261113T125435065416Z-a055b3ca0ed044a09da4f2b79559a304",
+      "sha256": {
+        "manifest.json": "d58861d209b3f93d8b55ae7ca39baf79771a42e60701739d532293b123c6808f",
+        "result.json": "f2bc254230b59a43b3eb9fe1e129f7476e651458056ec7384d9dd3210d6fb60b"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "16abb6187144a21688e0e32d8d2ad7360e7912d9",
+      "index": 17,
+      "label": "b101-o302-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T125440277401Z-6045d1429c4740d7a03f54455b77cf96",
+      "sha256": {
+        "manifest.json": "203613c12244a406b680c2d298ec7d7434dfe57c2d4e814d8cf4c4d7a847865e",
+        "result.json": "5acc3b30aaf00fc50c0d9ccb40fa65ebf43feeeed7cfe7a5b277128f351ed1e0"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "2735d9ed9d25589cde3962cbc3c33504c4c17682",
+      "index": 18,
+      "label": "b101-o302-learned_tree-s501",
+      "run_id": "P5HIER-20261113T125458184854Z-2f85e7e33c0a47a28511a8b45e86e88c",
+      "sha256": {
+        "manifest.json": "5048496f9f1f121ae40436cfed7e6af7b08dbde5067e4f36fb6d2e7bb032e36a",
+        "result.json": "d6f30eed828383fffd3581150c5a27a92409c639014edaeaf6fd0a50b1b7fc9f"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "9442523657eb6bf922d1e935597fc55752916032",
+      "index": 19,
+      "label": "b101-o302-flat-s502",
+      "run_id": "P5HIER-20261113T125516001319Z-4ce8499fdd1b4c11bd82b787a9947763",
+      "sha256": {
+        "manifest.json": "53842b650677f5edf7355f052900628e8ca237392e3ec1bc46c97ef320e50431",
+        "result.json": "2a05a8ec0cdf5711e328743cb1ab656308114d43e85779fb898a902db32c1659"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "00d10df28ffda3c92e2e35275aec31cec7e808f1",
+      "index": 20,
+      "label": "b101-o302-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T125521366796Z-444e884a22f74f4b9359cac572037ec4",
+      "sha256": {
+        "manifest.json": "7ce2777ba35e532a2740fcc88d60ae75acc399b47de6e01263f80dcfeae92b3a",
+        "result.json": "170de34f819cb350e989b23bdde0e114438f269a92f19312f0ea0167ee1e0365"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "fb3652c5072b9e82c6e6e5a1c5c33e98b80a6cb2",
+      "index": 21,
+      "label": "b101-o302-learned_tree-s502",
+      "run_id": "P5HIER-20261113T125539188939Z-4a1fb75d19d74ecc88b0fb31a3d6a661",
+      "sha256": {
+        "manifest.json": "c0a7c32f3d56c8767d20c74e7fe60892d13bcc145f7f0aced8afcbc8bc788c3c",
+        "result.json": "d99c39ac9f9673afff6ea58140dc73520bf819281972d6c3bcc369acdef4892e"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "bfa51baf2e3da5ac0f6f95cc23d4c2db1657c4dd",
+      "index": 22,
+      "label": "b101-o302-dense-s502",
+      "run_id": "P5HIER-20261113T125556997514Z-bf9027aad56f4cebab8908c82f00713f",
+      "sha256": {
+        "manifest.json": "f63ec1e92eb20e045a526e2f38be9875675eec444c9ab7b273f50214d5823f8e",
+        "result.json": "285a71223a4a9bcb0de9f0315ca1abf82a07dfae097e3377849a457b7caede81"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "4e9586f1993c6b56dac5ee3dbeb9990cf22d0021",
+      "index": 23,
+      "label": "b101-o302-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T125603179682Z-664f3dc8624e4d218f4510939d92494b",
+      "sha256": {
+        "manifest.json": "36a1b78d91bf54e2741370c03e91470df0b54c4e1c154c68924748bbe6375a2d",
+        "result.json": "1a0d354cf793d3642c51bf1a53abb17a8cceccca36121e072e596b8f140ac1b5"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "aaf6edf682e22cd2956e8a77c5490eae50e26b42",
+      "index": 24,
+      "label": "b101-o302-learned_tree-s503",
+      "run_id": "P5HIER-20261113T125620903891Z-d428bbaf80144c68a0394670958fb0c4",
+      "sha256": {
+        "manifest.json": "9c2ff40ac099f1f0285e16cad1df507b95b6ecd06b3370215e4f8de887a79c91",
+        "result.json": "c7c0285dac27818564295e57026bd3546ed41973e723b00fe92aebca505dba20"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "d960d63d1e81751f571a1fed63c8e21e3e4740de",
+      "index": 25,
+      "label": "b101-o302-dense-s503",
+      "run_id": "P5HIER-20261113T125638542948Z-c0fd7d41e38f43088f479f80bf87e9a0",
+      "sha256": {
+        "manifest.json": "85d12844e62b7fff9dcc44e096ebcca78fe39f8c8bda645a89f102e2daaf5260",
+        "result.json": "8e28ee00fc67397099972b88f2d5f52f6475f12ce76f2c2508708bf7f7f471c4"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "63628b2dfbab49e21510e04a97e0236b750a7386",
+      "index": 26,
+      "label": "b101-o302-flat-s503",
+      "run_id": "P5HIER-20261113T125644506825Z-c23bff9bc19149dc93797a2d51d4225e",
+      "sha256": {
+        "manifest.json": "5215a6bb1c21d2055e56a9c3e142ef6896e4cf876d0dea8bd203daff8c61281a",
+        "result.json": "8fbc649532cc9bc90e03d59749e04b31e192cd722da470f67869a9003ae00456"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e55443d190af5e6a2422876a5b8f2e6fabf13484",
+      "index": 27,
+      "label": "b101-o303-baseline",
+      "run_id": "P5HIER-20261113T125649781152Z-b4a8cbbdb6bb42dfb90a6ded7f07701d",
+      "sha256": {
+        "manifest.json": "ab76a7ef777b2dedf65a6808dded16e7ca51c27cc4337f8d39c2a88261149cf1",
+        "result.json": "b623ae5277c98b62cae6bfb8b3ed213d58f0fe9220b71b3d85f3aa3b5e947efb"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "afe5567e769c2dfdb016983a82ebb71fa7ffd2ab",
+      "index": 28,
+      "label": "b101-o303-learned_tree-s501",
+      "run_id": "P5HIER-20261113T125651014456Z-8269aba22a6d4d3e99221bdcc6ab5a2c",
+      "sha256": {
+        "manifest.json": "af9553d196b9d14d87c5bf59ed47a1a75ce7dd40178abef05b11ecb59147f080",
+        "result.json": "1784357d732e20f55c9c5d4da8d13d101f4c51f61bf1c45672cbcf324b09038a"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "1dad37cb2618f0d7c3f15c300be9b0a10bb2807a",
+      "index": 29,
+      "label": "b101-o303-dense-s501",
+      "run_id": "P5HIER-20261113T125708971434Z-53ff15c3288b4fa6bfd61876c4beae16",
+      "sha256": {
+        "manifest.json": "e3ab6a7e7cdec4c86766efc4b1491ba961ca74f498153a5bbe9a81b4a7681b89",
+        "result.json": "a30560cce9a19c35520153d26811bc3ea48c83cf2c8d2ddfa9da940604fd5fe8"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "fb5e4e0cc1e340bcce3a53af52bdce25ca7332c8",
+      "index": 30,
+      "label": "b101-o303-flat-s501",
+      "run_id": "P5HIER-20261113T125715095578Z-c1895ea193c343119d0d6e4f5cf91018",
+      "sha256": {
+        "manifest.json": "2939fe00a7633d6fec1f25bb0255f8303cb50ccf72206d92f56f057472dbb0eb",
+        "result.json": "ac1a8deb1460bfcf7035ee176ae24f0fb4afc7261b35e83b94856c486d5bfa8b"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "6c4198f8859dca13950f79321be5eb2c5e432517",
+      "index": 31,
+      "label": "b101-o303-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T125720389322Z-6adb1cfc645e4413929c7ad8412b3cf3",
+      "sha256": {
+        "manifest.json": "167a05a591ba87ba5ca9fb8db2a288cb95de04dc6981e9d707c437be8fad7f72",
+        "result.json": "b26869fe2380e96fe21e64107a7ee04cacf24c60c5485c8c7f50678030a8e577"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "6c8a8bf6320517878cd9174f9a3577a0c0a639da",
+      "index": 32,
+      "label": "b101-o303-dense-s502",
+      "run_id": "P5HIER-20261113T125738116478Z-b3c1cbf2fe47404a87bae380414f2c91",
+      "sha256": {
+        "manifest.json": "afafd6c3711373afd5012e339ecb8d2d6531b75cb9663325b4e58f22b9860cbb",
+        "result.json": "4d40119002c17424e973b3751182611657bad63b9c719cd49e5b76c43458cf9d"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "efd8fb443069b50b5f35ef84db4f5981647f54d5",
+      "index": 33,
+      "label": "b101-o303-flat-s502",
+      "run_id": "P5HIER-20261113T125744080752Z-d0aebfdde38041288941f82d4f50d60c",
+      "sha256": {
+        "manifest.json": "2cb6869f6a4b08364276a62f230f16b269771e4537cc0c16b4df5fcaab442f8a",
+        "result.json": "6cf763c59f24896e24c2174d0332dfbfcda8bbf49b8ad02799f5dafffe90f1c4"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "ffb3188a0bb76e4e634e94902677c1564f4fdf9a",
+      "index": 34,
+      "label": "b101-o303-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T125749345806Z-5bbc2df8cfe14103bd064de3e2619736",
+      "sha256": {
+        "manifest.json": "1706f3a5e4119e2ff48ea0dc435cecd6cfd84bfd772f32f4a42e6b6631edbbc1",
+        "result.json": "c1976365356a84f8636ddd0d9a3b23684f0c395581712dcd04a45f1e9fffafe0"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "05b8c8b47e485a72ed17107ed7ca63ceee73c68e",
+      "index": 35,
+      "label": "b101-o303-learned_tree-s502",
+      "run_id": "P5HIER-20261113T125807137897Z-5dfb0a0ff385402f86d01acc0601b321",
+      "sha256": {
+        "manifest.json": "50248aba616d139437af9c890134da4ccee4670a7f085f8214f9bb7f4a626bd1",
+        "result.json": "1edbc5b084754130d5741c9c3e1a4a19f12959e1007343142ac441be04720152"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "dae7cce6275d94b2fcaf12bdcf40e8568d08b0f6",
+      "index": 36,
+      "label": "b101-o303-flat-s503",
+      "run_id": "P5HIER-20261113T125824956530Z-8f46c555abb0416f86485ae8adc05c4b",
+      "sha256": {
+        "manifest.json": "53023ee939cdc2b558b85d84bbded53ff85e19526fd18ef59892d7b16cc9dcee",
+        "result.json": "2292d511ba678e9effd7449513ef5b2d816def4e4c3424015fdfdbd2392137de"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "ef57e8f20266eb0d8c6f540ddd7d3f026ff0ce8c",
+      "index": 37,
+      "label": "b101-o303-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T125830209265Z-24417f4314914cbd9ee4cf54350c6bf7",
+      "sha256": {
+        "manifest.json": "8f86e86416180bef2bc6d47cca3c46359b5326460a5855b5cdea5fa3ea832223",
+        "result.json": "596331fe4757d5af515545b93f9161cd28a4fce413e9feb8e4179a2647ef84df"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "0190d66b2c4150478514747af412492170f24776",
+      "index": 38,
+      "label": "b101-o303-learned_tree-s503",
+      "run_id": "P5HIER-20261113T125847720589Z-a102be257d4a4a478fc6b9f44b0dbb0d",
+      "sha256": {
+        "manifest.json": "b2a191006221696a3e66453d5cccf4bb5d314cefcb3a5c03bc3790a9a0e630bb",
+        "result.json": "40de7f033f290db64e26399af6a66aec95d49faacb60ee72eabb6eada82b9517"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "ee2af8b1bc15808c8d7a65bd4cbb6989b20088e0",
+      "index": 39,
+      "label": "b101-o303-dense-s503",
+      "run_id": "P5HIER-20261113T125905284004Z-5faa9cf4c29c4ce7a72a9433c6f41611",
+      "sha256": {
+        "manifest.json": "25cb17d4917ebe502c8a63dcafce87f1119e36fc5821b1330e50283df433fad7",
+        "result.json": "9bf2c9bde2cd32b7dc8ffdee7b8dae6e1b490dac66ce09907090383d27afb7cb"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "f0280a4e685f275d1c9c8eb9d9f08c3f104c6a94",
+      "index": 40,
+      "label": "b102-o301-baseline",
+      "run_id": "P5HIER-20261113T125911267538Z-b28c9f44814f4db7a588fdd6d1b299c1",
+      "sha256": {
+        "manifest.json": "99f590b98566b81f9679c5b683a4cc66fb5059987a0e921575a46b140daa490b",
+        "result.json": "ef5de777a7cf047d34b8e7d1e38ed3b1dce2ebfa1e01df8a0d168e70a78accd4"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "afc8cfd97412f021bd7db0ed0dbfdbae25bd34ce",
+      "index": 41,
+      "label": "b102-o301-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T125912573701Z-b45a423fad0d42fd861ed2c64f67167e",
+      "sha256": {
+        "manifest.json": "408e7b5230d76613c4c9bbc0989fe8aa1ec7abaf33e9838d12ec1a80c265afc1",
+        "result.json": "ab8f40a65ed300d6a1aac6429ac4dbc0cb1ea7b7a39d0152a83bd976f5f9440e"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "583861ef2658e878a8b5ee6354c9840c71f7f1d7",
+      "index": 42,
+      "label": "b102-o301-learned_tree-s501",
+      "run_id": "P5HIER-20261113T125930342766Z-86c32f057a1d4e339d369b35a114da35",
+      "sha256": {
+        "manifest.json": "a39d35eb207e7cbe99e11f7de848b8dd76069ca15e807546c438ee4842ce75a6",
+        "result.json": "329531a94dc151412ecb0d069d085b0e6def55bfb36e8d40264778dabfd8f8a0"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "abfabed95d5290a51a03eb3b902aeecb8bfb465f",
+      "index": 43,
+      "label": "b102-o301-dense-s501",
+      "run_id": "P5HIER-20261113T125947997669Z-57cf752f141643dda164093c95ba55e4",
+      "sha256": {
+        "manifest.json": "e4fd7b97a1b53f70f68a834650fe1f36befda221d6d327dc8ef4c465868d2f8e",
+        "result.json": "8ec4720ecd63e5a7734dd7669e8e230f064ea92f03a018abf6d639978fc038dd"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "1b170cfdd4b0bbde92113d37a8f3477189efa329",
+      "index": 44,
+      "label": "b102-o301-flat-s501",
+      "run_id": "P5HIER-20261113T125954010580Z-00d4ed3449e24d15bae7d030177be9e1",
+      "sha256": {
+        "manifest.json": "20cabb8a5ccbb9929f198a620ab7094460cc125462b60beb4c7bdd3b0ee902f1",
+        "result.json": "2d094556547d7cc71a661d4f00d6d21272818cd400aec72c5f2668964bc5c43f"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "65b94fb2dda18dc24ce67e8182d719b9fbfc9d93",
+      "index": 45,
+      "label": "b102-o301-learned_tree-s502",
+      "run_id": "P5HIER-20261113T125959271627Z-13a71618fad24635a2741b0a1039718f",
+      "sha256": {
+        "manifest.json": "5a13e29dd1d1a08ce5256af56c3ebc9c98acb5b20f81bbc6ffd749d5de8b8213",
+        "result.json": "e60424d4eff447630ba2ffea97d92cb67d08cc6ce977ea77a741c656df1b4018"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "15774b43edab368f8dc56afdf6adfc3ac83c7cd0",
+      "index": 46,
+      "label": "b102-o301-dense-s502",
+      "run_id": "P5HIER-20261113T130016948302Z-9a24cd39261f45e0a55cd464ca12bd73",
+      "sha256": {
+        "manifest.json": "f9f14d2f0a4a733dc7b6f0ee536313f16f257ea22b80394c933ca1aa6757c6af",
+        "result.json": "54233cdb3bafb20641110ae5db29ce40ef9ef497d0c39c277a06c95b5f65f829"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "523384912ff57e6ff519e3c456ae5fcbcf95d29d",
+      "index": 47,
+      "label": "b102-o301-flat-s502",
+      "run_id": "P5HIER-20261113T130023165869Z-298b0919a66e490b97bb2d4f8edb25b8",
+      "sha256": {
+        "manifest.json": "71ffa7d9a10a6c29cb5f05964bda9e5314e86c1aef7c871aecea2242dcd8595e",
+        "result.json": "fca163371f46904c46235b0b7ce6f4ea2b65b7a5aad5fe4d5e6b46d20baf03dc"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "a52146f6ec2bc312d114f7c4dab20bb7b30212f6",
+      "index": 48,
+      "label": "b102-o301-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T130028569814Z-5352ec8383854915a8cc52279dcd3379",
+      "sha256": {
+        "manifest.json": "367ce0340d07b4b7858bf1b9f0f0ab863ce4f020a9f8b7e10f053504bab9495d",
+        "result.json": "b811e8e9b7f748d33d5f03b5199e71edb6b3dfa6730581426f7d293b239acd03"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "8417c079a75596a0f42f52e1c5c41b36635e1004",
+      "index": 49,
+      "label": "b102-o301-dense-s503",
+      "run_id": "P5HIER-20261113T130046268309Z-8a1c6d8a5d7e4ec1be09c6586fa55178",
+      "sha256": {
+        "manifest.json": "dc0edd0f3de14f50bf40434c9e7ff43599d0adfe06466b6aa83e83e094e49249",
+        "result.json": "6034041cfcf275202388f7336898989d596628d54f72774210827da1038e0246"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "67e6e4ba68e1eb61b5e54998e2fe700d2988685e",
+      "index": 50,
+      "label": "b102-o301-flat-s503",
+      "run_id": "P5HIER-20261113T130052424939Z-587c8e07315c490394cfcb46720ba378",
+      "sha256": {
+        "manifest.json": "984425332d4385fa51d9376ae208ca2450615961b1669e7efe8632eaddaba09f",
+        "result.json": "ba1bb0435aefe3a864f3ae46ec93c68e6712e816a3d907cc97b8a4000cf0e846"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "c8ae7beea1c946d8f382fb2166722c901bf82fd9",
+      "index": 51,
+      "label": "b102-o301-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T130057887338Z-a72d3337965c40fcbe206cc962c090d2",
+      "sha256": {
+        "manifest.json": "0e507889cfdd045a352c9488f51c90a9c43a20676028669a6a6c5f45ba3348b9",
+        "result.json": "98d0fa955d5b541bb5a91df278e4ab402742e454bae4bc12fe8f5be340cc0d2c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "c37b4708c1fe9be8a7c3659f55e8e4208113fa50",
+      "index": 52,
+      "label": "b102-o301-learned_tree-s503",
+      "run_id": "P5HIER-20261113T130115416984Z-900199cbd14b4f4fab8a1ec5f6dc36a4",
+      "sha256": {
+        "manifest.json": "cea59fdb0bb1d3237f93aaf1f64211d63477e163911fc5dc5e43ec4fe5db3e36",
+        "result.json": "3d9d140d471cc4bfe3ecd8b2a5f6cec4bb90a65004c72375fc6b216b343eef4e"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "4a74aaffaa38e0ad077e37470e586cb004132f9c",
+      "index": 53,
+      "label": "b102-o302-baseline",
+      "run_id": "P5HIER-20261113T130133281475Z-71ef1af692e24b888b7338ee258748ca",
+      "sha256": {
+        "manifest.json": "0fadb09ce2ce78133996a6a3eed13de10e0dcb7d72346def3a98b4102f595879",
+        "result.json": "820d80e339e75e9597e2d015c860274f69067e25ce4093306fe299997a2400ad"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "fa50774cb753a4be99ca11a0ccd08cad615546f8",
+      "index": 54,
+      "label": "b102-o302-flat-s501",
+      "run_id": "P5HIER-20261113T130134620923Z-2787be1e64fc4f4994c6068368ffc68f",
+      "sha256": {
+        "manifest.json": "ef3c97b813c9aec6d9568b0b6c439a648bc891db88463fa8e3a5728c4a2ebb52",
+        "result.json": "4280fb393d4ec57a05355e25c42e549146ba0d6183c814ea2ac14bd3caf443c4"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "807f0718fa5efc2151ae347aa863636b9f1ab4d8",
+      "index": 55,
+      "label": "b102-o302-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T130140063468Z-6d665ff02a8149aa89a82102cbb7bb2f",
+      "sha256": {
+        "manifest.json": "203a1c1a1f6acf61fa73dd5295cf9c8a495606a536b83a72a37f0c2f6317238e",
+        "result.json": "2df82ea715961154b5ba98a766c9bc9f13bc32496edf0d48b71c5f79b665447c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "51c0bd9f35beef6dddaa7c3b59a5244aa0aa32c5",
+      "index": 56,
+      "label": "b102-o302-learned_tree-s501",
+      "run_id": "P5HIER-20261113T130157908729Z-167d1f7b047f44dcab99b32c5880dad2",
+      "sha256": {
+        "manifest.json": "814479299dd7e1244239e7340ca129106a525d16515d5c3f44217adc55005557",
+        "result.json": "794ff89aa00bb48f4f68fe847eb3c684d937f1a88e1cf5deda9e0ac9b855a045"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "4d105af3fa21f4c429e013ae23d910888cd20f9e",
+      "index": 57,
+      "label": "b102-o302-dense-s501",
+      "run_id": "P5HIER-20261113T130215571354Z-72442a76294b4a65b41d1fac87037157",
+      "sha256": {
+        "manifest.json": "3dd01073bdba35cf51237564cb5dfb7879372615cac9f094055b483dc539e36c",
+        "result.json": "110a5418b25398e2a6b41aa2b6fef1268ce0b771d022839bc41b90899635ec95"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "b401edd8456504e3cec284a01c5d8b621663c255",
+      "index": 58,
+      "label": "b102-o302-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T130221946986Z-384ba6bf6b4c4585b9bad837863e3d7d",
+      "sha256": {
+        "manifest.json": "7e71b1c30eb828d21389d5d62ce515eab502a32f9fc86d83ef4229a858dc635c",
+        "result.json": "66c07a66e040a382b836e0fe7c432e0dad709c29f19daca9bee6d63930d39eb3"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "346fa66af5095d112bba912f25913e825ddc547d",
+      "index": 59,
+      "label": "b102-o302-learned_tree-s502",
+      "run_id": "P5HIER-20261113T130239641484Z-c2ff57ea49914b9696ec6e9f2424b2fa",
+      "sha256": {
+        "manifest.json": "8b1cef8d1bd5c8fd06242af1d63b9e405fe37a5240d3cbf6e86e0cd01ebd6830",
+        "result.json": "5762eb4dd2d9911d9956777e9891271c4a02ee6a837c93b23be04f3a9352492c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "a9a0d9f66ad365130217f5cebd35282bcabefa87",
+      "index": 60,
+      "label": "b102-o302-dense-s502",
+      "run_id": "P5HIER-20261113T130257311248Z-c57e439c42c744048a2603f74fa49bc8",
+      "sha256": {
+        "manifest.json": "bb1ddee8bf77e3164eeff39253ccad350d9760ca976d61dfbcb11d3351675d42",
+        "result.json": "abe23c04a130a4ba1d056d33d81099de34f66eed7287c42f55cda0df6bbcac4a"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "36d9400158385fb5726ef174401655f6e4b590e8",
+      "index": 61,
+      "label": "b102-o302-flat-s502",
+      "run_id": "P5HIER-20261113T130303458254Z-97e0c89003d3412993e14a915d8270e6",
+      "sha256": {
+        "manifest.json": "3fd86277ab4fca536fb1253e068aea6a93fcf8642d9e7709fb44d4ccf8352ce1",
+        "result.json": "4aaec2a5ae162f3e57f6e943d976dc1f634dde2a6d578fa147e5e06df8cf3c2b"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "4b4a1a431de415731d20eba242c99c64ae3265b4",
+      "index": 62,
+      "label": "b102-o302-learned_tree-s503",
+      "run_id": "P5HIER-20261113T130308877158Z-c311f14312db4c7e8d2c9231c3b7cd18",
+      "sha256": {
+        "manifest.json": "da80a682718dca5d87262a160caa8910165722c2ee17839370fb7265d415d075",
+        "result.json": "9beea1829aaa7f1c531b003c1e5858cb34fc341bcc67e72dc994f877aa564d63"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "2417fb6bd87e87776cff9b29ea76582e0641ee20",
+      "index": 63,
+      "label": "b102-o302-dense-s503",
+      "run_id": "P5HIER-20261113T130326690274Z-f88a742ed8ba46e3b128c17ec99e5f62",
+      "sha256": {
+        "manifest.json": "5d15bb9fce94cb096877709d000580987a2b65a19f4dcc455041c38086227fd6",
+        "result.json": "cf160e13685956e83e95b54faff64210cdc9d8ac3ec61db5c04b7aac5dd79074"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "50766097d4e47f1b3eebe7be8d9de40aaac32f8e",
+      "index": 64,
+      "label": "b102-o302-flat-s503",
+      "run_id": "P5HIER-20261113T130332711355Z-dc0060036b35442cb1e5e6c0948fef75",
+      "sha256": {
+        "manifest.json": "0338456f29fdde131172f3de646989506ad047deb0b382dbfd51f514fbe4ce56",
+        "result.json": "5abd8c1b56fa429417c92ecbea0247fbd1ef0bc084ab6242c00f63a92946b897"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "cf621b8c35aa8e905cc1241f9431d18d0c298814",
+      "index": 65,
+      "label": "b102-o302-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T130337987331Z-2ffa1ecf7563454a99273d6b861e90d1",
+      "sha256": {
+        "manifest.json": "b6b24a231d5d7a5b92aa4d566b4ca7492a054f3f664427607eefae878aadb06d",
+        "result.json": "7a839c2ce07ccbc5ebd131c2672405b35f647d365e60794733f17725ee025fcb"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "944e979ce5e0c2c82bc0f63cea460c9e1abf9de1",
+      "index": 66,
+      "label": "b102-o303-baseline",
+      "run_id": "P5HIER-20261113T130355704780Z-dfd6803b3feb4a72ae576bb7144e1545",
+      "sha256": {
+        "manifest.json": "4e5bd7409b22a6a98e79fcddd43b1b54b933f28c1dfa6753d366b7aa640938b0",
+        "result.json": "b3610e2d844c8a53d3c2387179a15bc1062da9fc18403e504d249867cc5802c0"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "fa1bdd9290c145a3ca421c002394fda7d4a5e91d",
+      "index": 67,
+      "label": "b102-o303-dense-s501",
+      "run_id": "P5HIER-20261113T130357026605Z-178292c5c05341b4ace2623527096610",
+      "sha256": {
+        "manifest.json": "8d44212a4703deaf1cc3582075da6708413db0aca2da1f387f87ec2360bdc68a",
+        "result.json": "cd31db22d22b21e60b798c50583f6bb3639e090da708fdb2539228356c07060d"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "42ea55e0d4fbd081c42848d94ebe6092bd7cc302",
+      "index": 68,
+      "label": "b102-o303-flat-s501",
+      "run_id": "P5HIER-20261113T130403131356Z-45631e59e9274d4e99d5904b1a8f252b",
+      "sha256": {
+        "manifest.json": "a5671a3f696ef95bae49a2e41e56aa9e6d3e15949eb7044999661b8f9cdfe873",
+        "result.json": "6c1f60b0bb50fa5975d5ec973063f5af73d12feb9ff3e40189920cb83726ef8e"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "5eabdeb35e8387a48b1b7300cf4cab4f69540eef",
+      "index": 69,
+      "label": "b102-o303-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T130408667472Z-d203d6f966fa453ab14a09c66726a9a6",
+      "sha256": {
+        "manifest.json": "68468fa4073bfd7a14bfadc20133c5ec2b47cf3ae5b3e6fb237c210dcf15c578",
+        "result.json": "bf27fd2d058ccfb800816af31cce7df70ddbe9d41c80de28f8436e11a2b6c557"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "b5ede06bc083c5d79a09be83386f2e52ec5d1558",
+      "index": 70,
+      "label": "b102-o303-learned_tree-s501",
+      "run_id": "P5HIER-20261113T130426460106Z-5ea9ab44254b43208b556e2cba6a7e0d",
+      "sha256": {
+        "manifest.json": "6a225109cd35c5f7578d4d3279a9f54c514bae884b28826e2ef8c8a02c947274",
+        "result.json": "a9630e06d212433cf9d0bd39ea584aef30064b7787693c43bc9c464b55315dd3"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "659131dcf1c20f8563690d0a33ff95f6d1643317",
+      "index": 71,
+      "label": "b102-o303-flat-s502",
+      "run_id": "P5HIER-20261113T130444326850Z-182c477eae064655b2b2b4ad64a62e08",
+      "sha256": {
+        "manifest.json": "cc69cf93c3ee000b1d3dae06c1e99c1b5e29c3e7d1aa42fee59da68c57090254",
+        "result.json": "10f64a2fc731ae619e2b8c69ee7355e5e0e10e6923652bbf7388b44326052ccd"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "d85d03af3c9c7bf0e02b6bbd4ef3e7a25e0333f1",
+      "index": 72,
+      "label": "b102-o303-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T130449604957Z-55a6c0a447dc4c7aa460d967b37c435d",
+      "sha256": {
+        "manifest.json": "1c88edb2882978ea2e9e8efff557a1f55716a5e83b54bedbf88c539896d67564",
+        "result.json": "f787a6c4e7510d67240dc37e2a585ed505e4e0d4124141f30c92aec7a5e78b62"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "53b1f526c84923c9d05aeae9302d199cde82cd08",
+      "index": 73,
+      "label": "b102-o303-learned_tree-s502",
+      "run_id": "P5HIER-20261113T130507353425Z-72b2c185a0c640738cb5b9d19892dbb2",
+      "sha256": {
+        "manifest.json": "e340956e1585d2898699964db2b284f89cdeb265fa751e0606280ed89b6ddeda",
+        "result.json": "6f3817496f8834deca321ae182c3e1a2c122d1c70aa84497bf92ff662036025f"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "4a27b115b6efaa265abe20c53daee35fbd60fd4c",
+      "index": 74,
+      "label": "b102-o303-dense-s502",
+      "run_id": "P5HIER-20261113T130525049371Z-d35c6760b1a9473c92781bd61147267a",
+      "sha256": {
+        "manifest.json": "e7208c107be0e5d227cc18a98c6cb7e2a66235e9e1804408b28421e42a1a1572",
+        "result.json": "63c9a5afa3d9cc28fa8d54939ed5865c31d3b0e9275d293c7855f4f3cab713b9"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "931e2b2bada3ab1241f6f66dca31af5e3136a5a9",
+      "index": 75,
+      "label": "b102-o303-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T130531299057Z-068902e3a3764e61ace52bd7aaf180df",
+      "sha256": {
+        "manifest.json": "99ed59bac52228e15ef58de4b035005a28fe78b0fb29b8467c7ff0a4bb00a06b",
+        "result.json": "c149cf81faa46c05626ae8608e0ba00ae73f51140bfce9a634fdaac54b3a5f04"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "1b021dca33eb1b74457fdbc06ae53caeac0e6314",
+      "index": 76,
+      "label": "b102-o303-learned_tree-s503",
+      "run_id": "P5HIER-20261113T130548859189Z-191b50d7849e4e1a8ca22eb023d205c4",
+      "sha256": {
+        "manifest.json": "727ee81e485ce6d2d7b13210cd59f5b9f510f6fff35cd4aab0c310848f509b4c",
+        "result.json": "9982ac6ed070dc7e3c9f2d2c5b8866d27cf5af26eaae7af589a72a27a252eb4a"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "be6d3dc71711ec200d61ab847b334ffd5a710a9c",
+      "index": 77,
+      "label": "b102-o303-dense-s503",
+      "run_id": "P5HIER-20261113T130606617684Z-f116b2c861e24acf8d93ffe08dd86432",
+      "sha256": {
+        "manifest.json": "6a198a6138dbe5f047ba9de535331dd5fc03f240afae5ff6a8751d8f3064b254",
+        "result.json": "6c699a9ee3224997c98c35cf4adb6d6ec5cbfd47f575cf8e6b7026498f5c2a6c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "fe469fce43d43998202520e022b1bb2d5bbca417",
+      "index": 78,
+      "label": "b102-o303-flat-s503",
+      "run_id": "P5HIER-20261113T130612690086Z-456ad08d2ad3457d8fc725db5ef2f737",
+      "sha256": {
+        "manifest.json": "9308477167845a535e8fa4b03bf197f9d3aa7648e69ddd2d27eaaf74723562b1",
+        "result.json": "8e28706740fb1c92be9c6f33f80ee79a63e91c848eef127aa6a4bd2e85cca1a9"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "29f740ee7df2e3545aede3e7724d64a2758f2894",
+      "index": 79,
+      "label": "b103-o301-baseline",
+      "run_id": "P5HIER-20261113T130618201205Z-ff8923081eb8436f87052f56a2d08dc6",
+      "sha256": {
+        "manifest.json": "41f4d321b40b6ad598e92fd54f42def73022c5641d5622fe34be97da2a2b6c1e",
+        "result.json": "0554258799eddc944192b6aa1801385bd4f2f8278325a6f34613ae60b459f74e"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "a42e65edd852dd98c5626bf6055f91283df5c386",
+      "index": 80,
+      "label": "b103-o301-learned_tree-s501",
+      "run_id": "P5HIER-20261113T130619508963Z-f7a7b30a7d7347ed958af65f0bb2c269",
+      "sha256": {
+        "manifest.json": "f3b00d42be46b313e8e9548770385d260296cbc764a8bddca3295e905866ee35",
+        "result.json": "4cb68c33575547874837586a6c95368e56e9f1db949887e29cfc121c90b555c6"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "dd1e507f8cbd0721bf3f9c28a1517ad3797eec82",
+      "index": 81,
+      "label": "b103-o301-dense-s501",
+      "run_id": "P5HIER-20261113T130637270783Z-9f83a3faa76943f4bc9caf69d35a64e3",
+      "sha256": {
+        "manifest.json": "13a4ce0aa134f65b4f08b2e44e2e5cb36ad99b40ccf96e518257d72d44082983",
+        "result.json": "25d971afeb5b805835e94f0642867f82666a6719ec3fc442ba881656de551dea"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "d3c83b01da3c3adecb49b7622898185502b320b7",
+      "index": 82,
+      "label": "b103-o301-flat-s501",
+      "run_id": "P5HIER-20261113T130643510478Z-86efe37b12294110b21f5f7d5854bfaa",
+      "sha256": {
+        "manifest.json": "c934455cb026081fcfb9214ab20a3de1880dcea91db19ffacebe667bdf79c6b7",
+        "result.json": "e861dd86dfb0cd5d0d212d341dad989fcd931a290cd55bf6df5b2d491285937b"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "80105464e8cf1c1c3f30746a4132b01e3a95338c",
+      "index": 83,
+      "label": "b103-o301-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T130648980157Z-5e9b26c69563410ab9b82b90b0e9a712",
+      "sha256": {
+        "manifest.json": "7a72066a8acce2aeb428fb7c3a0e89b1d1f4617fb4f849cc5cfada3e4f4ad3b3",
+        "result.json": "60642548d95086f1f27d5738d17f323cdfb296eb4541de5d7440e19d12655557"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "ffcb64b4d2e4668b36e9436f2b82648dfbc4ed0c",
+      "index": 84,
+      "label": "b103-o301-dense-s502",
+      "run_id": "P5HIER-20261113T130706844615Z-11ef5257808c4e889e5c0d95b492a658",
+      "sha256": {
+        "manifest.json": "6678958c4fdc38af36fc647bdb8863b8209723490f18f536e8d8cd53c12d21ef",
+        "result.json": "1c2ec8f36d535317ef798a01c84255c9653f1ef83add026e75f692e1ea4d6e90"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "2c549f6e68da1d493d4fea0a5b59d36484a9f83a",
+      "index": 85,
+      "label": "b103-o301-flat-s502",
+      "run_id": "P5HIER-20261113T130713064632Z-f8abb47f581640ce8c4d689c9679c67f",
+      "sha256": {
+        "manifest.json": "e77f9688e9cc94bd4c44d8180bca59df22dd3caa94aa754c47e47bbf96f26006",
+        "result.json": "ba0e644a68f1638bcc87d7c5450426e7310fb3fe142d247d8ac68ea2a1ae611f"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e3c319ca95d10d4589f53dbe56101f048461c230",
+      "index": 86,
+      "label": "b103-o301-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T130718563148Z-9c3ed032d6c648b792af6d2bb67f9f4c",
+      "sha256": {
+        "manifest.json": "be4074055e209199e29d443465428289c7b2e2ad3684186799b60b4ea7f76b4e",
+        "result.json": "5d6f59b7d0cb4f85fdab3340f8f339a9a32cd645ca778a266d460b875fd3cd72"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "1942feca8f5ca556e87bc28c46968ea132bd6f06",
+      "index": 87,
+      "label": "b103-o301-learned_tree-s502",
+      "run_id": "P5HIER-20261113T130736366482Z-cb2791f52f8142bfa9851700c88e13eb",
+      "sha256": {
+        "manifest.json": "34c6af4306cab630630591b5646c894f2f3ae1684f84a8abed9b2f8f6a45d001",
+        "result.json": "c393af01c01f6166c73b742430de0b18dd177070891df624281464873186bfc8"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "f55ed28d61ed90741e0f4c960f2020d176ce5a57",
+      "index": 88,
+      "label": "b103-o301-flat-s503",
+      "run_id": "P5HIER-20261113T130754240276Z-4257e3ea7a0f41a4a2905c939e35b071",
+      "sha256": {
+        "manifest.json": "38d5efd77c2c55dfcbb5847c7134baa9689f51bfb3557c6dd881571abb690e66",
+        "result.json": "fccb13e2beedc7c548d9231f2bb9cca42dba53439633a4a8853ad98caf4f0a4e"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "6935070ab3287ceb9684b894b69934c9f87343a2",
+      "index": 89,
+      "label": "b103-o301-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T130759774263Z-ae508e4c17ff49e7a7390617b1fa349e",
+      "sha256": {
+        "manifest.json": "3a4d3f8e53dfd5629f6fde7236e8cb694337f9d786126877fc216cc30d4b54c9",
+        "result.json": "e2e628655266d3f4ea33eceba4542eea4b60af7db4067aabe30cc990c2250f05"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "278452320cc932151efd693e0ee7445725ab288c",
+      "index": 90,
+      "label": "b103-o301-learned_tree-s503",
+      "run_id": "P5HIER-20261113T130817651060Z-beb33201cafa4c4a991f952ccbd11387",
+      "sha256": {
+        "manifest.json": "91b553785fd4741b2740e3b501742eb32215d44ed293f2a9d02780bfcd62b31b",
+        "result.json": "375bfe186f03eba74e7a7eb17265726a3d9a9f09795a5b1a7fdd3afee1f29811"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e4f4250496ce63ce49140fbafec2fb4155956e1f",
+      "index": 91,
+      "label": "b103-o301-dense-s503",
+      "run_id": "P5HIER-20261113T130835522738Z-7ec250f4996d4e2ba7f191ab6b3de38f",
+      "sha256": {
+        "manifest.json": "2068109b2f2dd60fb54c26edb3f2b165d39dda7894c96c4d6fc013882a938692",
+        "result.json": "c024f86cc74706c4370017b8568fbe34922b66370bd7831a7338c6db506646e7"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "d2c9d78d90f367c53550318c62f40ddadd55b54d",
+      "index": 92,
+      "label": "b103-o302-baseline",
+      "run_id": "P5HIER-20261113T130841748641Z-d2762a82dfba433f860b09b196f5efde",
+      "sha256": {
+        "manifest.json": "9eaa335be1d2db90b041cf27b7ffad64f9b5b8c8fd0ddd550dfcb01388bdc81a",
+        "result.json": "150c78c1f458e7df2dc638eba8c179d2f5939002fa654e70cf5338a743bb1cb9"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e2d7e800222994a7fe4f072e151aa19e541086da",
+      "index": 93,
+      "label": "b103-o302-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T130843048738Z-0c08399a9e284daebdc7b1b3d5390444",
+      "sha256": {
+        "manifest.json": "b83203a89d320d8aa044fad8eafbd2498aa8f559c4ee9f64934749a89a44146a",
+        "result.json": "cefde1fd8cf1b94ec4f485a7366227d35a43e137bf8ff0ec3db3b54ac8183d66"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "38da0d8705e43fe6967cf7c5edceef914f6d78c4",
+      "index": 94,
+      "label": "b103-o302-learned_tree-s501",
+      "run_id": "P5HIER-20261113T130900911509Z-1876cfb7c5cf4ae08169ca9e5da1e5ca",
+      "sha256": {
+        "manifest.json": "aa955207430f51b1b238d5350cdd0c5de0ce076896175235179fca2dfe43d6ad",
+        "result.json": "1a460cb5b7369b732fc21763868d1adef452e92bca7260e7376f06fe430ef705"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e2d81c1c9c3a17ad0064f485a94c2112ff372e95",
+      "index": 95,
+      "label": "b103-o302-dense-s501",
+      "run_id": "P5HIER-20261113T130918879557Z-f2d2fdcaebde42db99d333a567e8e5e3",
+      "sha256": {
+        "manifest.json": "d10f477ca60110c8ebe30fe59264bc0a8fd63cb49c3ae04cabc72e2799910196",
+        "result.json": "d8edcf6cdec404dcfd1d0e4886ab85226c7716be64bb6bc149b5d2c080e4a955"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "b5bb47fae2be00011d3da74d35120f574a1c798c",
+      "index": 96,
+      "label": "b103-o302-flat-s501",
+      "run_id": "P5HIER-20261113T130925144277Z-356b5ccadad94736bbdc8822e26ab6d1",
+      "sha256": {
+        "manifest.json": "0e973d1f06da9799aec09712271177e5a8defee7c0ea7f2cc744496daed11dcb",
+        "result.json": "3072dc2579709d8b4bb579e2a8963a8490078106f8665e2b2f98d00026eddfbf"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "d6637d571855c044838a157ab6278a0bc9976632",
+      "index": 97,
+      "label": "b103-o302-learned_tree-s502",
+      "run_id": "P5HIER-20261113T130930670369Z-5fbee33edc29428085d31a6ef5add26f",
+      "sha256": {
+        "manifest.json": "9b5928c0b171ac26f8cae8d8a65df1eecd5f08306175d3c59a41dd400602c044",
+        "result.json": "938e9166dd3a22c5a05c4d80002056db83ffb73272017a381c0e9008ab235df7"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "36d9494a10c16496315968b071a9638e4bd1bb5c",
+      "index": 98,
+      "label": "b103-o302-dense-s502",
+      "run_id": "P5HIER-20261113T130948572774Z-b86988dcfaa74c7081a344c6673fa83a",
+      "sha256": {
+        "manifest.json": "0d27ae08a1e031bd920ccde43404ee8da27bbf3b6f4b9dd0245ce1d3cc2b848d",
+        "result.json": "b25c3cb1e099ea0933a1cb4129f93a5df0a4124597766fdb2d356b23a8bcd39a"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "8107de3b617827f90db6b3e58be6c43a12e359b9",
+      "index": 99,
+      "label": "b103-o302-flat-s502",
+      "run_id": "P5HIER-20261113T130954618288Z-4b4be94f653941319a3cbcb6b6fac35e",
+      "sha256": {
+        "manifest.json": "fda5e68b896cc1d00efd7e238a4c8a6f827e45a8b200c2ca376485218f593020",
+        "result.json": "1d01143b88657c350d90b196eafe1ff7fa2943af25bde5057cd2fb8d7c025c35"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "166668213b9068d859114c88f108268a452d8bdb",
+      "index": 100,
+      "label": "b103-o302-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T130959938028Z-4e0ea0a381cd45bcbf2e394e1df70eb2",
+      "sha256": {
+        "manifest.json": "b5811132b0f1499bd5faf4e47035761f1f9bc68641641f41798a136d936b0cc6",
+        "result.json": "2d1f1050801cb04f50cdb5e94967d9abdd0441bcc106904f05aaf991afb711a2"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "8eca68be5e0e5a41bc1a6e066e5d74fbcb8299a6",
+      "index": 101,
+      "label": "b103-o302-dense-s503",
+      "run_id": "P5HIER-20261113T131017574167Z-9636730bf3ab4c2c83a9dd040920d20d",
+      "sha256": {
+        "manifest.json": "689c624e578c490cf0454e81445aa9874204e1955c13837c004dd6a8e27de04f",
+        "result.json": "58110819eb3ac0422fad9a86be4712e03138ea03da4287dc6b19cf82af70523c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "3c22d252de742ee6301a74884395b04500ae8959",
+      "index": 102,
+      "label": "b103-o302-flat-s503",
+      "run_id": "P5HIER-20261113T131023817781Z-28feb7cbc06445a9a9e197cd0be67b4b",
+      "sha256": {
+        "manifest.json": "1c20a1757bf241fe2d3d23668fab54d104474184c0309134f2ae4008d9c346f5",
+        "result.json": "2540dbabc57e351d0f2a4c17c9b43d07a0634fa303ea74e89327453e8048f685"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "99a044cd9f4751b64d676e5f515c4d2b95f57848",
+      "index": 103,
+      "label": "b103-o302-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T131029295945Z-d5e3dc867bef4cba9608ede74d852689",
+      "sha256": {
+        "manifest.json": "4ba5d25e9e89766b5e2afb0a319c82b2c6b0872fdf91be71e951fa5ae994a73a",
+        "result.json": "8aa724c5cd32ccce2fafcc8fd0ac69239ac5f7348f7642d48b53c60d3439f7ee"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "c2cc33074d27948476baf901858050af50de812c",
+      "index": 104,
+      "label": "b103-o302-learned_tree-s503",
+      "run_id": "P5HIER-20261113T131047040747Z-43897a1866254bf19396c4bb294958fd",
+      "sha256": {
+        "manifest.json": "5a44b16afd5a324b5f4e7719dd0a78792450baa76cb0658f3a57ce99fc2a9c11",
+        "result.json": "42f80b74e21696220cace80c2b41da06334bf21fe0a1f3e978e75948ab1fa6a7"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "6d93cefac837d6b36719afaa6a755f14ca06e82a",
+      "index": 105,
+      "label": "b103-o303-baseline",
+      "run_id": "P5HIER-20261113T131104761900Z-3f5e13c46e2943d7b8d38c8d5c5ca4f0",
+      "sha256": {
+        "manifest.json": "b4492b3991d2275d957e4706eca78d7c76772fea763d05a42235f9330d370016",
+        "result.json": "a3ee0fcb6687aef4f9f1b8c61991fb61ad2975cbe06f0541596a774cd1915f4a"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "ae57dd3a5106f64d892c085cb4ba5eedeb7f526b",
+      "index": 106,
+      "label": "b103-o303-flat-s501",
+      "run_id": "P5HIER-20261113T131106124671Z-c158d20354344d4d8e5266e1dd662fa5",
+      "sha256": {
+        "manifest.json": "3e921932dd3d556cc1eb7af977de68f00133dd924ba589cf5b9a6a921ac9fb07",
+        "result.json": "8aa4929876e1e11dbcf51af3f373d8ea1d98d36e115917fa8e796c9ca9bc3b9c"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "4e77d31dff67052fa7316fcfa2185661d9f91b8c",
+      "index": 107,
+      "label": "b103-o303-fixed_tree-s501",
+      "run_id": "P5HIER-20261113T131111531727Z-30a7bc92c8304b02875da203ec8f75e8",
+      "sha256": {
+        "manifest.json": "c0eeedef6f7854d8191a2a1507821921e7171f172c4c8277b46e5ff6cfb1b0f1",
+        "result.json": "db3a0f2c43ba7f7cd8a7120165113fd9a3ebbb7005add5ab2b572527e670e431"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "86475b0a1e86ab78f942411d5105c2767e922730",
+      "index": 108,
+      "label": "b103-o303-learned_tree-s501",
+      "run_id": "P5HIER-20261113T131129103875Z-b8ae5f05309a43c8a1aaf52d922dcf56",
+      "sha256": {
+        "manifest.json": "292fb372dca218c23410883c71680df0066f23042655272ec930f6dbb758247b",
+        "result.json": "281d7db7a41eaaa91ae06bcd82fadf7ab1a7eaa0713f2b545018dabe97403331"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "48942f81590c3ba012595bf2f30895c7d8c07c03",
+      "index": 109,
+      "label": "b103-o303-dense-s501",
+      "run_id": "P5HIER-20261113T131146964031Z-b38fc27710b642229caf4a17c94c44c9",
+      "sha256": {
+        "manifest.json": "892a2e4a5ff06ed05bfe203a4828d8d7872fa319b9fa084de3cbb182613e1640",
+        "result.json": "3af83aee1afefcccb7c5e14a2ff38dea05a44d8fa137f13796f83ac9b2bd29a4"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "7f72e943591e2b4aeba7cfc801e3e4a5be45e85c",
+      "index": 110,
+      "label": "b103-o303-fixed_tree-s502",
+      "run_id": "P5HIER-20261113T131153122157Z-25df0d08c34448cb86711428e095faff",
+      "sha256": {
+        "manifest.json": "2081f0548b4d1742c9c87c83920eb93866df5e1f42e6055138db596d211d82b1",
+        "result.json": "476965b2b7dd32eaa6c676737e4f4361efb53be8f12cdabcac75fb997f4be01a"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "a846942bbb05ac56e541751c1663546e7822a33b",
+      "index": 111,
+      "label": "b103-o303-learned_tree-s502",
+      "run_id": "P5HIER-20261113T131210801786Z-d54f25994e6649ccb59de77001e3218d",
+      "sha256": {
+        "manifest.json": "827d243e864223e1c77919d2bacbfb5abefa4474097c71805fed6474bcab1796",
+        "result.json": "0d1d66803304b152471bb8fc49fbce6d218e3fbcc464f4e146045ead00e86eb8"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e7d5fc4b08326ed75a98e7aa27cec2684e02ac44",
+      "index": 112,
+      "label": "b103-o303-dense-s502",
+      "run_id": "P5HIER-20261113T131228694545Z-fde2602b575341f59673061f2c41fca0",
+      "sha256": {
+        "manifest.json": "b8536024761799375eb16a68d09c76fb1f7d5bd1ba1b9624a9a0cc4fd8dff2ca",
+        "result.json": "20f4f5905d489c99433a36c3538066cd0950145aad3ec62e7e79e233b6d2639b"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "f3b3c4579f0c7dbaf365391fcb14d8fb3df0c2c5",
+      "index": 113,
+      "label": "b103-o303-flat-s502",
+      "run_id": "P5HIER-20261113T131234911771Z-8b2a8d4b17654a7492142dc45ecb92f0",
+      "sha256": {
+        "manifest.json": "f5fdd26e7febb4e5dbc86c4e18d7eb264bc8fe27c9cc1b87a9f9d6ec647a26f9",
+        "result.json": "17a8ee93eb5d720273dd802af2c17ac3b281ee12d50be62fe7f89aadbbe14115"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "13024b55b3f0782b2ef6886763fa906887e56741",
+      "index": 114,
+      "label": "b103-o303-learned_tree-s503",
+      "run_id": "P5HIER-20261113T131240400729Z-b2e86e2319934034a32ed5a09b49957e",
+      "sha256": {
+        "manifest.json": "8b6f43298b66e9d4dbfcccfba861cc6d8ffb14ba6006a7c6fc06dbcdbeda3950",
+        "result.json": "32642b56899306dff175f3e3b4fde4b1f35a76b51ef9607b93182fa371858ebd"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "8b05800697ccedf338f7b9f196ce547cd1390731",
+      "index": 115,
+      "label": "b103-o303-dense-s503",
+      "run_id": "P5HIER-20261113T131258097843Z-385f503d237549b88749af4c28f905ca",
+      "sha256": {
+        "manifest.json": "cbcca38437d5e1e27cdf381b358affc87fba6c8dd9d18fe175920e76c6410c62",
+        "result.json": "614b8425f78b86dd7daa199389aeb6191083aed61ccf2ec43a138aa2b48f30fa"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "c2be34f9b098a7ec3b254f100d86b13529474e5b",
+      "index": 116,
+      "label": "b103-o303-flat-s503",
+      "run_id": "P5HIER-20261113T131304131125Z-59523b7cd9204f28be5028e798879bc8",
+      "sha256": {
+        "manifest.json": "03d360fe59771051f63a8082f265a071eea00769237e93bc7405ed18aed512a4",
+        "result.json": "1ba6cbf344baf3291764b9500ae75d31b4798cee98bedd7d32aafc3653469020"
+      },
+      "status": "completed"
+    },
+    {
+      "commit": "e31125443319a5b3ffae3871fbe778b32155fb55",
+      "index": 117,
+      "label": "b103-o303-fixed_tree-s503",
+      "run_id": "P5HIER-20261113T131309533164Z-5d030b363c93459b8caa198fd4bcd9f3",
+      "sha256": {
+        "manifest.json": "685769fc475b6563abd9e8708fca917e267260f0eaccbc724c72f06da9713d9c",
+        "result.json": "d7c9294653ad5822bee2c74ea2889096e7a0bb0a040534c1fdf7693b46e3a328"
+      },
+      "status": "completed"
+    }
+  ],
+  "quality_checkpoint_count": 117,
+  "quality_counts_recounted": {
+    "additional_training_targets": 28311552,
+    "integrity_evaluations": 9,
+    "scientific_evaluations": 612,
+    "snapshots": 333
+  },
+  "quality_trained_cells": 108,
+  "scope": "Git ancestry and immutable content plus recorded ACK and push attestations; Git does not establish that a chat report was delivered.",
+  "source_preservation": {
+    "frozen_source_files": 95,
+    "prior_reference_commit": "71128eaf5d6028a59ed8ea48df6747f781a4495e",
+    "protected_existing_files": 2763
+  },
+  "status": "PASS",
+  "suite": "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be",
+  "timing_scope_calls": 58752,
+  "timing_worker_count": 36
+}

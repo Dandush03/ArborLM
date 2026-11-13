@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "results/p5-2026-11-13/audit/root-orchestration-audit.py"
+  ],
+  "script_sha256": "a68bc0bc6622d2987f173ab25201221f647c6beb60de6615e308acbb9f261124",
+  "exit_code": 0,
+  "byte_identical_to_sol": true
+}
