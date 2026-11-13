@@ -1,0 +1,151 @@
+{
+  "status": "PASS",
+  "method": "Independent raw Parquet reconstruction and actual P4/P3 tensor-byte audit; no ArborLM imports/model forwards",
+  "source_hashes": {
+    "train": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7",
+    "validation": "204929b7ff9d6184953f867dedb860e40aa69c078fc1e54b3baaa8fb28511c4c"
+  },
+  "candidate_counts": {
+    "train": {
+      "candidates": 156678,
+      "unique_before_exclusion": 156611,
+      "eligible": 156611
+    },
+    "validation": {
+      "candidates": 16425,
+      "unique_before_exclusion": 16422,
+      "eligible": 16407
+    }
+  },
+  "train_sha256": "1c3e7a3e02087392ae3db874935517c66e77f15d7a50c3285a8c5ba5d7fabd07",
+  "panels": [
+    {
+      "panel": "P1",
+      "ranks": [
+        0,
+        511
+      ],
+      "sha256": "2e6b71b9472abf50f9c4705f2f8f13a69465a9f1b8360119ce5882872b772200"
+    },
+    {
+      "panel": "P2",
+      "ranks": [
+        512,
+        1023
+      ],
+      "sha256": "8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2"
+    },
+    {
+      "panel": "P3",
+      "ranks": [
+        1024,
+        1535
+      ],
+      "sha256": "a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0"
+    },
+    {
+      "panel": "P4",
+      "ranks": [
+        1536,
+        2047
+      ],
+      "sha256": "4c6fb3f3a8f22d2e5b14c6703d3d8e02b40681482d5b93ba491e2df0583dc28f"
+    },
+    {
+      "panel": "P5",
+      "ranks": [
+        2048,
+        2559
+      ],
+      "sha256": "d50cbe4c303791148c922bfe9201fe00b192c44deef855077860ffc98cc72b98"
+    }
+  ],
+  "exact_panel_overlaps": 0,
+  "prior_panel_manifest_count": 345,
+  "prior_use_audit_scope": "all available local/results dataset_manifest validation-byte hashes before P5 freeze; no claim about unknown external records",
+  "parents": [
+    {
+      "label": "b101-o301-baseline",
+      "run_id": "P4CAP-20261113T043320942044Z-8c9728afd7e140cfae5a940894d0f446",
+      "state_sha256": "0e43ccffdaf21afdd180cf9c4d82ae2059153b0f2817cfda7b4353a2f21ec901",
+      "index_sha256": "5381c20b2999a283970445ef3d8e4cdc3b9aefa720bbca13a2010e63b3bf8668",
+      "backbone_sha256": "cd756e09b2a199992b090f1f6152f15dd6361bf2f61fbf20d5927a14963457ce",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "c9bb26f29d7a0fd8d321152e034135eece5f7be7e26c1b679f82e44e9e48e7b4"
+    },
+    {
+      "label": "b101-o302-baseline",
+      "run_id": "P4CAP-20261113T043432970507Z-65ee9ef44a0f4f9f93f797adb0970222",
+      "state_sha256": "a419cdf09acf63aab599467b36c5a080865ef1d432d203a6320188ccacbaed2e",
+      "index_sha256": "db75f0fe0e92efa633f1d02954c85d672d42b36b3ae31fa8523a3157d852147d",
+      "backbone_sha256": "dbb9a485fb0ee9dfe2599efa5432788d92cab6f1d086e12a026482e7f60ae8bb",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "5e38ee8a80c513db90b43a1ba95c602d7e4e62d3aeee3e1bffff78e49f8617d3"
+    },
+    {
+      "label": "b101-o303-baseline",
+      "run_id": "P4CAP-20261113T043545627173Z-c88e47c05b0f4903b83e81e604452729",
+      "state_sha256": "49146a07068f5e75988b100bb7d912a7f46c99d11367f88b97ecfd150fb78d1e",
+      "index_sha256": "857ce8e04a9add53b867cdfa3c0353e3265d3bc133e347dac8b93913108f7cc3",
+      "backbone_sha256": "0d25440764c31d0677da64a55ee226a3878f4fe8e309f8826e45ad0637eaea9b",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "0463609f68693d05031745f311609e2010654eeb4081adc2e080b75335c07018"
+    },
+    {
+      "label": "b102-o301-baseline",
+      "run_id": "P4CAP-20261113T043658486736Z-b791d88967d444c494fdd514f6c163f1",
+      "state_sha256": "10366e4d8bc89c7aa39882176577d9f089ef11218c6d1898b282994f850b509d",
+      "index_sha256": "1e40423349f40b567a04c6d8feaa70d6460c95327e813c7d6c591347ad360cdc",
+      "backbone_sha256": "09a14ea0b21d0f7dabbae0c6c9e22fe1c53f5e248e53a019d1f9d6cb387d71ed",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "d01c4f37054a67897bb08db8c3fea6465a5b279fa85ccd05f3d0a35e1e17b790"
+    },
+    {
+      "label": "b102-o302-baseline",
+      "run_id": "P4CAP-20261113T043810791147Z-09772884d2b74bacbfc8c80c7a3ab99a",
+      "state_sha256": "9a49bcec8497958533d75b4c202f2b785898cf80dcff69b96daab2565e18070f",
+      "index_sha256": "12fc5023f987651cab36e644d4cd28391d52a8c6d61955029f50d98328ac8b43",
+      "backbone_sha256": "4e3c272f4a7f0d239a61272c2debf188e46bcadfa6f22e6d8448a2a4bce37171",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "7c0a97c0c781f5f50b86892c86630952f8ee6d97022e8f3a0243bccb268957ca"
+    },
+    {
+      "label": "b102-o303-baseline",
+      "run_id": "P4CAP-20261113T043923121033Z-f9060f2b51924d8bb19e3c0c2b504692",
+      "state_sha256": "c4213ef2c6e0d127908f801130f102afe5729e4f3358b44502b1f120a95feeeb",
+      "index_sha256": "ea42932a376577131b924ba4ccc14924aa6105de81bc11be6b139450789396fb",
+      "backbone_sha256": "8beb9e4bd67cd9a31471feba5de7edea8ab4e37fe9e67383f724252a1016e8d7",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "86481b02b9e2fc8f11b6c811bbfb3c6fddcdc2bc288a7c37756290fa74223196"
+    },
+    {
+      "label": "b103-o301-baseline",
+      "run_id": "P4CAP-20261113T044035104301Z-5a590b6e9722475abca3c15359f912b8",
+      "state_sha256": "b16c41628763cda3a8fa446b9010cc3075a00a9104a559c0c7dfba9756214ce8",
+      "index_sha256": "88561589f16c127d7c3a0f57d2650a8762f6c4bd4f14662009b2e1650312bc9a",
+      "backbone_sha256": "d695d7fbbb47ad13a2ca26330749b191c708ff189603c297d339bfabdc76ee52",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "90c3f0e7c935556ee25b8b973cf109513eb326247ab1f6d541769b8ee44e2e3b"
+    },
+    {
+      "label": "b103-o302-baseline",
+      "run_id": "P4CAP-20261113T044147084895Z-f3b60b76e88e4468bbf49278a248e13f",
+      "state_sha256": "1182d985a931e7d4109cf22e12de58ab73cd6fedfd56dfc6ef1ca8e6123b265a",
+      "index_sha256": "349c06b1c9724d0aa89032219ab104d6b2de6c3c9b1edaac8c0aad3995831f01",
+      "backbone_sha256": "e4cc4f986e6fdaf019e522e6581be215dfe982380e96639dac087c87266621c6",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "47c07ced2bba2a432c11e94002a859110e10e38d28ff8cdbfb81f3fa745e62c5"
+    },
+    {
+      "label": "b103-o303-baseline",
+      "run_id": "P4CAP-20261113T044259528572Z-17635d56b69d4880abf7148e4fd4f866",
+      "state_sha256": "62bd0e62c610ec2b12352ec107d14a816b6b087f466def0e4109574326d5d304",
+      "index_sha256": "f8d399057ac2ff7210660b66a047757860b25289ac7800376bb3132ad0810762",
+      "backbone_sha256": "0033a68ef0fe17e3e0112e3cdebb0d73889b3793816e3950b76bf42992f190db",
+      "backbone_parameters": 27392,
+      "p3_state_sha256": "4ae8a81260ff110028d778d4323d35b647918ef489700fa1e886ca2ca3da6793"
+    }
+  ],
+  "model_evaluations": 0,
+  "training_updates": 0
+}
