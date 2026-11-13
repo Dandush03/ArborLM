@@ -1,0 +1,48 @@
+# torch.profiler CPU, 20 calls of unmodified Memory.lookup, N=64, fixed_tree
+# profiler overhead inflates small ops; cross-check only
+-----------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                         Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+-----------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                  aten::index        32.45%       4.828ms        32.49%       4.835ms     241.736us            20  
+                   aten::topk        14.48%       2.154ms        14.48%       2.154ms      53.859us            40  
+                    aten::bmm        14.44%       2.149ms        21.23%       3.159ms     157.973us            20  
+     aten::linalg_vector_norm         8.96%       1.333ms         8.96%       1.333ms      33.321us            40  
+                    aten::div         5.95%     885.927us         6.31%     939.599us      11.745us            80  
+                   aten::sort         5.70%     847.594us         7.50%       1.117ms      55.834us            20  
+                 aten::select         4.88%     725.902us         6.60%     982.498us       0.256us          3840  
+                 aten::gather         3.55%     527.960us         3.57%     530.583us       4.422us           120  
+                  aten::copy_         2.22%     329.833us         2.22%     329.833us       2.356us           140  
+             aten::as_strided         2.00%     296.889us         2.00%     296.889us       0.070us          4240  
+                    aten::add         1.70%     252.216us         1.70%     252.216us       6.305us            40  
+                    aten::all         0.46%      68.543us         0.57%      85.041us       1.063us            80  
+              aten::clamp_min         0.42%      63.042us         0.42%      63.042us       1.576us            40  
+                 aten::arange         0.25%      37.413us         0.50%      74.662us       0.933us            80  
+                     aten::gt         0.24%      36.040us         0.24%      36.040us       0.901us            40  
+           aten::_log_softmax         0.21%      31.418us         0.21%      31.418us       1.571us            20  
+                     aten::mm         0.20%      29.667us         0.21%      30.874us       1.544us            20  
+           aten::resolve_conj         0.20%      29.392us         0.20%      29.392us       0.022us          1360  
+                  aten::slice         0.16%      24.339us         0.25%      37.167us       0.310us           120  
+               aten::_to_copy         0.12%      17.331us         0.31%      46.208us       1.155us            40  
+      aten::repeat_interleave         0.11%      16.709us         0.68%     100.667us       5.033us            20  
+                  aten::empty         0.10%      14.877us         0.10%      14.877us       0.149us           100  
+                  aten::clone         0.10%      14.708us         0.69%     102.040us       1.701us            60  
+                aten::flatten         0.09%      13.537us         0.13%      19.288us       0.482us            40  
+                    aten::mul         0.08%      12.456us         0.08%      12.456us       0.623us            20  
+                  aten::fill_         0.07%      10.620us         0.07%      10.620us       0.133us            80  
+              aten::unsqueeze         0.07%      10.461us         0.11%      16.084us       0.268us            60  
+                     aten::to         0.07%      10.087us         0.38%      56.295us       0.352us           160  
+                 aten::expand         0.07%      10.039us         0.12%      18.122us       0.302us            60  
+             aten::empty_like         0.06%       9.125us         0.14%      20.542us       0.342us            60  
+                   aten::item         0.06%       9.085us         0.07%      10.292us       0.257us            40  
+          aten::empty_strided         0.06%       8.919us         0.06%       8.919us       0.223us            40  
+                aten::squeeze         0.05%       7.749us         0.06%       9.459us       0.473us            20  
+                   aten::view         0.05%       7.712us         0.05%       7.712us       0.129us            60  
+              aten::expand_as         0.05%       7.417us         0.14%      20.540us       0.513us            40  
+             aten::is_nonzero         0.05%       7.080us         0.12%      17.372us       0.434us            40  
+                aten::argsort         0.04%       6.546us         7.55%       1.123ms      56.161us            20  
+            aten::log_softmax         0.04%       5.873us         0.25%      37.291us       1.865us            20  
+             aten::contiguous         0.04%       5.421us         0.29%      43.834us       1.096us            40  
+                aten::permute         0.04%       5.247us         0.05%       7.040us       0.352us            20  
+-----------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 14.879ms
+
