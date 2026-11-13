@@ -1,0 +1,488 @@
+{
+ "b101-o301-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 12540,
+  "max_count": 7990,
+  "seconds": 0.07632994651794434
+ },
+ "b101-o301-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 12550,
+  "max_count": 9421,
+  "seconds": 0.059942007064819336
+ },
+ "b101-o301-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 13861,
+  "max_count": 11570,
+  "seconds": 0.06709003448486328
+ },
+ "b101-o301-flat-s501": {
+  "kind": "flat",
+  "swaps": 10125,
+  "max_count": 6512,
+  "seconds": 0.06339263916015625
+ },
+ "b101-o301-flat-s502": {
+  "kind": "flat",
+  "swaps": 10930,
+  "max_count": 7340,
+  "seconds": 0.06789827346801758
+ },
+ "b101-o301-flat-s503": {
+  "kind": "flat",
+  "swaps": 11840,
+  "max_count": 6866,
+  "seconds": 0.0637660026550293
+ },
+ "b101-o301-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 14661,
+  "max_count": 9397,
+  "seconds": 0.06507420539855957
+ },
+ "b101-o301-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 17123,
+  "max_count": 13330,
+  "seconds": 0.07418394088745117
+ },
+ "b101-o301-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 16531,
+  "max_count": 13527,
+  "seconds": 0.07072997093200684
+ },
+ "b101-o302-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 10913,
+  "max_count": 7474,
+  "seconds": 0.05727791786193848
+ },
+ "b101-o302-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 10432,
+  "max_count": 7592,
+  "seconds": 0.05730295181274414
+ },
+ "b101-o302-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 13275,
+  "max_count": 10632,
+  "seconds": 0.05990910530090332
+ },
+ "b101-o302-flat-s501": {
+  "kind": "flat",
+  "swaps": 8270,
+  "max_count": 6976,
+  "seconds": 0.05783200263977051
+ },
+ "b101-o302-flat-s502": {
+  "kind": "flat",
+  "swaps": 8834,
+  "max_count": 7346,
+  "seconds": 0.06012678146362305
+ },
+ "b101-o302-flat-s503": {
+  "kind": "flat",
+  "swaps": 11677,
+  "max_count": 9971,
+  "seconds": 0.05777096748352051
+ },
+ "b101-o302-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 15078,
+  "max_count": 11527,
+  "seconds": 0.06448101997375488
+ },
+ "b101-o302-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 12495,
+  "max_count": 8779,
+  "seconds": 0.0632932186126709
+ },
+ "b101-o302-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 17031,
+  "max_count": 14224,
+  "seconds": 0.06377100944519043
+ },
+ "b101-o303-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 11053,
+  "max_count": 8525,
+  "seconds": 0.061946868896484375
+ },
+ "b101-o303-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 11906,
+  "max_count": 9311,
+  "seconds": 0.06034493446350098
+ },
+ "b101-o303-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 12729,
+  "max_count": 11097,
+  "seconds": 0.060585975646972656
+ },
+ "b101-o303-flat-s501": {
+  "kind": "flat",
+  "swaps": 11930,
+  "max_count": 9039,
+  "seconds": 0.05929708480834961
+ },
+ "b101-o303-flat-s502": {
+  "kind": "flat",
+  "swaps": 10124,
+  "max_count": 6374,
+  "seconds": 0.058593034744262695
+ },
+ "b101-o303-flat-s503": {
+  "kind": "flat",
+  "swaps": 11818,
+  "max_count": 9644,
+  "seconds": 0.06139016151428223
+ },
+ "b101-o303-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 15687,
+  "max_count": 13749,
+  "seconds": 0.06361699104309082
+ },
+ "b101-o303-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 12434,
+  "max_count": 9325,
+  "seconds": 0.05832409858703613
+ },
+ "b101-o303-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 13689,
+  "max_count": 11195,
+  "seconds": 0.05795478820800781
+ },
+ "b102-o301-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 16070,
+  "max_count": 12065,
+  "seconds": 0.06749606132507324
+ },
+ "b102-o301-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 14486,
+  "max_count": 10917,
+  "seconds": 0.057749032974243164
+ },
+ "b102-o301-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 16598,
+  "max_count": 16948,
+  "seconds": 0.06782197952270508
+ },
+ "b102-o301-flat-s501": {
+  "kind": "flat",
+  "swaps": 8951,
+  "max_count": 6593,
+  "seconds": 0.05940389633178711
+ },
+ "b102-o301-flat-s502": {
+  "kind": "flat",
+  "swaps": 8647,
+  "max_count": 7141,
+  "seconds": 0.05694580078125
+ },
+ "b102-o301-flat-s503": {
+  "kind": "flat",
+  "swaps": 12330,
+  "max_count": 10047,
+  "seconds": 0.0634000301361084
+ },
+ "b102-o301-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 15269,
+  "max_count": 11344,
+  "seconds": 0.06540966033935547
+ },
+ "b102-o301-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 13573,
+  "max_count": 10864,
+  "seconds": 0.05758309364318848
+ },
+ "b102-o301-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 19354,
+  "max_count": 15072,
+  "seconds": 0.07143878936767578
+ },
+ "b102-o302-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 12069,
+  "max_count": 10586,
+  "seconds": 0.06317019462585449
+ },
+ "b102-o302-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 11240,
+  "max_count": 10955,
+  "seconds": 0.0641469955444336
+ },
+ "b102-o302-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 11156,
+  "max_count": 8035,
+  "seconds": 0.06455779075622559
+ },
+ "b102-o302-flat-s501": {
+  "kind": "flat",
+  "swaps": 9603,
+  "max_count": 7856,
+  "seconds": 0.06394791603088379
+ },
+ "b102-o302-flat-s502": {
+  "kind": "flat",
+  "swaps": 8464,
+  "max_count": 6326,
+  "seconds": 0.05902409553527832
+ },
+ "b102-o302-flat-s503": {
+  "kind": "flat",
+  "swaps": 11451,
+  "max_count": 8213,
+  "seconds": 0.06500911712646484
+ },
+ "b102-o302-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 16294,
+  "max_count": 13053,
+  "seconds": 0.06903886795043945
+ },
+ "b102-o302-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 15798,
+  "max_count": 10522,
+  "seconds": 0.06334686279296875
+ },
+ "b102-o302-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 12050,
+  "max_count": 9376,
+  "seconds": 0.06309103965759277
+ },
+ "b102-o303-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 15044,
+  "max_count": 13100,
+  "seconds": 0.06403779983520508
+ },
+ "b102-o303-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 24790,
+  "max_count": 18460,
+  "seconds": 0.0655066967010498
+ },
+ "b102-o303-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 20534,
+  "max_count": 18034,
+  "seconds": 0.0699009895324707
+ },
+ "b102-o303-flat-s501": {
+  "kind": "flat",
+  "swaps": 12619,
+  "max_count": 10510,
+  "seconds": 0.05944514274597168
+ },
+ "b102-o303-flat-s502": {
+  "kind": "flat",
+  "swaps": 12016,
+  "max_count": 10555,
+  "seconds": 0.061250925064086914
+ },
+ "b102-o303-flat-s503": {
+  "kind": "flat",
+  "swaps": 12143,
+  "max_count": 10333,
+  "seconds": 0.060767173767089844
+ },
+ "b102-o303-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 16719,
+  "max_count": 14292,
+  "seconds": 0.0654900074005127
+ },
+ "b102-o303-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 17455,
+  "max_count": 15136,
+  "seconds": 0.06610894203186035
+ },
+ "b102-o303-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 17412,
+  "max_count": 13594,
+  "seconds": 0.06688880920410156
+ },
+ "b103-o301-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 14266,
+  "max_count": 11831,
+  "seconds": 0.05974388122558594
+ },
+ "b103-o301-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 9661,
+  "max_count": 7614,
+  "seconds": 0.06043696403503418
+ },
+ "b103-o301-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 8692,
+  "max_count": 7675,
+  "seconds": 0.062098026275634766
+ },
+ "b103-o301-flat-s501": {
+  "kind": "flat",
+  "swaps": 7516,
+  "max_count": 6880,
+  "seconds": 0.05937695503234863
+ },
+ "b103-o301-flat-s502": {
+  "kind": "flat",
+  "swaps": 7724,
+  "max_count": 7004,
+  "seconds": 0.06056499481201172
+ },
+ "b103-o301-flat-s503": {
+  "kind": "flat",
+  "swaps": 8542,
+  "max_count": 7674,
+  "seconds": 0.05804014205932617
+ },
+ "b103-o301-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 16603,
+  "max_count": 13070,
+  "seconds": 0.06062006950378418
+ },
+ "b103-o301-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 9853,
+  "max_count": 10042,
+  "seconds": 0.0556790828704834
+ },
+ "b103-o301-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 9231,
+  "max_count": 7134,
+  "seconds": 0.05363273620605469
+ },
+ "b103-o302-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 11609,
+  "max_count": 9722,
+  "seconds": 0.05739188194274902
+ },
+ "b103-o302-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 11047,
+  "max_count": 10121,
+  "seconds": 0.05864882469177246
+ },
+ "b103-o302-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 12094,
+  "max_count": 10956,
+  "seconds": 0.06572294235229492
+ },
+ "b103-o302-flat-s501": {
+  "kind": "flat",
+  "swaps": 6746,
+  "max_count": 6294,
+  "seconds": 0.06097888946533203
+ },
+ "b103-o302-flat-s502": {
+  "kind": "flat",
+  "swaps": 6709,
+  "max_count": 6441,
+  "seconds": 0.05716395378112793
+ },
+ "b103-o302-flat-s503": {
+  "kind": "flat",
+  "swaps": 6690,
+  "max_count": 6428,
+  "seconds": 0.05661606788635254
+ },
+ "b103-o302-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 10652,
+  "max_count": 8290,
+  "seconds": 0.059487104415893555
+ },
+ "b103-o302-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 11778,
+  "max_count": 10209,
+  "seconds": 0.060656070709228516
+ },
+ "b103-o302-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 12640,
+  "max_count": 9505,
+  "seconds": 0.07074785232543945
+ },
+ "b103-o303-fixed_tree-s501": {
+  "kind": "fixed_tree",
+  "swaps": 12473,
+  "max_count": 9525,
+  "seconds": 0.06831192970275879
+ },
+ "b103-o303-fixed_tree-s502": {
+  "kind": "fixed_tree",
+  "swaps": 11801,
+  "max_count": 8633,
+  "seconds": 0.06265783309936523
+ },
+ "b103-o303-fixed_tree-s503": {
+  "kind": "fixed_tree",
+  "swaps": 11545,
+  "max_count": 9686,
+  "seconds": 0.06735110282897949
+ },
+ "b103-o303-flat-s501": {
+  "kind": "flat",
+  "swaps": 8466,
+  "max_count": 6176,
+  "seconds": 0.06089591979980469
+ },
+ "b103-o303-flat-s502": {
+  "kind": "flat",
+  "swaps": 8386,
+  "max_count": 6107,
+  "seconds": 0.05897116661071777
+ },
+ "b103-o303-flat-s503": {
+  "kind": "flat",
+  "swaps": 7933,
+  "max_count": 6624,
+  "seconds": 0.05843496322631836
+ },
+ "b103-o303-learned_tree-s501": {
+  "kind": "learned_tree",
+  "swaps": 14038,
+  "max_count": 12493,
+  "seconds": 0.0608220100402832
+ },
+ "b103-o303-learned_tree-s502": {
+  "kind": "learned_tree",
+  "swaps": 10646,
+  "max_count": 7990,
+  "seconds": 0.06055593490600586
+ },
+ "b103-o303-learned_tree-s503": {
+  "kind": "learned_tree",
+  "swaps": 11139,
+  "max_count": 8716,
+  "seconds": 0.06439900398254395
+ }
+}

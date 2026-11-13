@@ -1,0 +1,6 @@
+b101-o301-flat-s501: AGREE  configs=60  integrity_problems=0  differences=0  3.5s
+b101-o301-fixed_tree-s501: AGREE  configs=90  integrity_problems=0  differences=0  4.7s
+b101-o301-flat-s502: AGREE  configs=60  integrity_problems=0  differences=0  4.3s
+b101-o301-learned_tree-s502: AGREE  configs=90  integrity_problems=0  differences=0  5.2s
+VERDICT AGREE  checkpoints=4  seconds=17.7  summary=docs/reviews/p7a-preflight-2026-11-13/outputs/indep_vs_study_fullsize.json
+python3 -I docs/reviews/p7a-preflight-2026-11-13/independent_sim.py  $TR  $SW  16.72s user 0.28s system 95% cpu 17.764 total

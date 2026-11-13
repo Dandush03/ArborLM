@@ -1,0 +1,97 @@
+{
+ "argv": [
+  "docs/reviews/p7a-preflight-2026-11-13/independent_sim.py",
+  "--trace-root",
+  "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/experiments/P7ATD-20261113T202226776059Z-7b28b5f3b3f04020ab4d0d2e5a36585c/traces",
+  "--sim-workers",
+  "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/results/simulate/P7ASD-20261113T202228470427Z-5aa41ee246064f73a3baa03dbd7e4a2d/workers",
+  "--trace-records",
+  "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/results/trace/P7ATD-20261113T202226776059Z-7b28b5f3b3f04020ab4d0d2e5a36585c/checkpoints",
+  "--allow-small",
+  "--labels",
+  "b101-o301-flat-s501",
+  "b101-o301-fixed_tree-s501",
+  "b101-o301-learned_tree-s501",
+  "b101-o301-flat-s502",
+  "b101-o301-fixed_tree-s502",
+  "b101-o301-learned_tree-s502",
+  "--out",
+  "docs/reviews/p7a-preflight-2026-11-13/outputs/indep_vs_study_stage_pipeline.json"
+ ],
+ "checkpoints": {
+  "b101-o301-fixed_tree-s501": {
+   "cache_configurations_compared": 90,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "fixed_tree",
+   "layout_R_groups": 18,
+   "queries": 512,
+   "seconds": 0.07586208404973149,
+   "warm_capacity_misses_L_FREQ_R2_C32": 1604
+  },
+  "b101-o301-fixed_tree-s502": {
+   "cache_configurations_compared": 90,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "fixed_tree",
+   "layout_R_groups": 18,
+   "queries": 512,
+   "seconds": 0.07475691701984033,
+   "warm_capacity_misses_L_FREQ_R2_C32": 1644
+  },
+  "b101-o301-flat-s501": {
+   "cache_configurations_compared": 60,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "flat",
+   "layout_R_groups": 12,
+   "queries": 512,
+   "seconds": 0.056371542043052614,
+   "warm_capacity_misses_L_FREQ_R2_C32": 1668
+  },
+  "b101-o301-flat-s502": {
+   "cache_configurations_compared": 60,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "flat",
+   "layout_R_groups": 12,
+   "queries": 512,
+   "seconds": 0.05633624998154119,
+   "warm_capacity_misses_L_FREQ_R2_C32": 1614
+  },
+  "b101-o301-learned_tree-s501": {
+   "cache_configurations_compared": 90,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "learned_tree",
+   "layout_R_groups": 18,
+   "queries": 512,
+   "seconds": 0.07481420796830207,
+   "warm_capacity_misses_L_FREQ_R2_C32": 1604
+  },
+  "b101-o301-learned_tree-s502": {
+   "cache_configurations_compared": 90,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "learned_tree",
+   "layout_R_groups": 18,
+   "queries": 512,
+   "seconds": 0.07465424999827519,
+   "warm_capacity_misses_L_FREQ_R2_C32": 1644
+  }
+ },
+ "python": "3.15.1 (main, Oct 21 2026, 05:55:12) [Clang 21.0.0 (clang-2100.3.34.2)]",
+ "selection": [
+  "b101-o301-flat-s501",
+  "b101-o301-fixed_tree-s501",
+  "b101-o301-learned_tree-s501",
+  "b101-o301-flat-s502",
+  "b101-o301-fixed_tree-s502",
+  "b101-o301-learned_tree-s502"
+ ],
+ "selection_rule": "explicit --labels",
+ "tie_rule": "asc",
+ "tool": "independent_sim.py (auditor, stdlib only)",
+ "total_seconds": 0.41293133300496265,
+ "verdict": "AGREE"
+}

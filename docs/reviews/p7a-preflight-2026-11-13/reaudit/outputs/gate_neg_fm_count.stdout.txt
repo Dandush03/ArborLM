@@ -1,0 +1,24 @@
+$ /Users/daniellaloush/dandush03/ArborLM/.venv/bin/python -I /Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7a-preflight-2026-11-13/independent_sim.py --trace-root /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/reaudit_gate2/p1/experiments/P7ATD-20261113T210924903144Z-f7423239456f4e3693489f5a53454bf0/traces --trace-records /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/reaudit_gate2/p1/results/trace/P7ATD-20261113T210924903144Z-f7423239456f4e3693489f5a53454bf0/checkpoints --sim-workers /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/reaudit_gate2/p1/neg_fm_count/simulate/P7ASD-20261113T210951024407Z-80058e42b8d24a7eb1bf58722f1b36fb/workers --registered-selection --allow-small --out /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/reaudit_gate2/p1/neg_fm_count.json
+b101-o301-flat-s501: AGREE  configs=240  integrity_problems=0  differences=0  0.3s
+b101-o301-flat-s502: AGREE  configs=240  integrity_problems=0  differences=0  0.3s
+b101-o301-flat-s503: AGREE  configs=240  integrity_problems=0  differences=0  0.2s
+b101-o303-flat-s501: AGREE  configs=240  integrity_problems=0  differences=0  0.2s
+b103-o302-flat-s501: AGREE  configs=240  integrity_problems=0  differences=0  0.2s
+b103-o302-flat-s502: AGREE  configs=240  integrity_problems=0  differences=0  0.2s
+b101-o301-fixed_tree-s501: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b101-o301-fixed_tree-s502: DIFFER  configs=270  integrity_problems=0  differences=2  0.2s
+    freq_matched_2 L-FREQ|R2 C=32 misses_warm: independent 1926 study 1927
+    freq_matched_2 L-FREQ|R2 C=32 warm capacity misses: independent 1675 study 1676
+b101-o301-fixed_tree-s503: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b102-o302-fixed_tree-s503: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b103-o302-fixed_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b103-o303-fixed_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b101-o301-learned_tree-s501: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b101-o301-learned_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b101-o301-learned_tree-s503: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b102-o302-learned_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b102-o303-learned_tree-s501: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+b103-o303-learned_tree-s502: AGREE  configs=270  integrity_problems=0  differences=0  0.2s
+VERDICT DIFFER  checkpoints=18  seconds=4.0  summary=/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/reaudit_gate2/p1/neg_fm_count.json
+
+exit 1

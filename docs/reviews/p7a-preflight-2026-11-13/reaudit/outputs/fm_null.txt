@@ -1,0 +1,20 @@
+python 3.12.14
+A tight k=8 q=128 (unique arrangement) | s=91302 idx=0: study error='InvariantError: count-preserving repair found no swap for slot 0 (row 123)' auditor error='RuntimeError: item-8 repair found no partner for query 123'
+A tight k=8 q=128 (unique arrangement) | s=91302 idx=80: study error='InvariantError: count-preserving repair found no swap for slot 5 (row 123)' auditor error='RuntimeError: item-8 repair found no partner for query 123'
+A tight k=8 q=128 (unique arrangement) | s=91303 idx=0: study error='InvariantError: count-preserving repair found no swap for slot 5 (row 112)' auditor error='RuntimeError: item-8 repair found no partner for query 112'
+A tight k=8 q=128 (unique arrangement) | s=91303 idx=40: study error='InvariantError: count-preserving repair found no swap for slot 4 (row 121)' auditor error='RuntimeError: item-8 repair found no partner for query 121'
+A bit-for-bit: 108/108 cases agree (rows, sha256, swaps, seed)
+A full-size generation seconds: study max 0.22 mean 0.13; auditor max 0.21 mean 0.10
+B k=8 all slots count q, q=8: study InvariantError 102/300, other 0, auditor 102/300
+B k=8 all slots count q, q=16: study InvariantError 137/300, other 0, auditor 137/300
+B k=8 all slots count q, q=128: study InvariantError 144/300, other 0, auditor 144/300
+B k=9, q=16: study InvariantError 0/300, other 0, auditor 0/300
+B k=9, q=64: study InvariantError 0/300, other 0, auditor 0/300
+B k=10, q=16: study InvariantError 0/300, other 0, auditor 0/300
+C zipf1.0, 700 slots, hot 0.56Q: shared slots consecutive before 1.4031 after 1.1444 far-pairs 1.1393 independent 1.1402; page reuse R2 before 0.1765 after 0.1442; swaps 13838
+C zipf1.2, 300 slots, hot 0.46Q: shared slots consecutive before 2.1037 after 1.8225 far-pairs 1.8257 independent 1.8246; page reuse R2 before 0.2638 after 0.2287; swaps 20575
+C zipf0.8, 1500 slots: shared slots consecutive before 0.6439 after 0.4920 far-pairs 0.4888 independent 0.4930; page reuse R2 before 0.0832 after 0.0640; swaps 6473
+D corrupted arrangement (duplicate): InvariantError: frequency-matched stream: a query lacks distinct slots
+D corrupted arrangement (count moved): InvariantError: frequency-matched stream: per-slot counts differ from the trace's
+E sufficient condition 8(Q - c_max + 1) > top-8 sum holds for 81/81 published histograms; tightest b102-o303-fixed_tree-s502: 114472 > 110120
+total 11.7s

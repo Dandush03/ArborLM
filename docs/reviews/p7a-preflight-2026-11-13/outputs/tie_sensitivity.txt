@@ -1,0 +1,33 @@
+iid        R1 C  8  flat asc 6.7681 desc 6.7681 | tree asc 5.9510 desc 5.9510 | ratio tree/flat asc 0.8793 desc 0.8793
+iid        R1 C 16  flat asc 6.0528 desc 5.8425 | tree asc 5.0902 desc 4.7884 | ratio tree/flat asc 0.8410 desc 0.8196
+iid        R1 C 32  flat asc 5.0566 desc 4.9219 | tree asc 3.9070 desc 3.7990 | ratio tree/flat asc 0.7727 desc 0.7719
+iid        R1 C 64  flat asc 3.8106 desc 3.7607 | tree asc 2.7479 desc 2.7136 | ratio tree/flat asc 0.7211 desc 0.7215
+iid        R1 C128  flat asc 2.4633 desc 2.4473 | tree asc 1.6533 desc 1.6460 | ratio tree/flat asc 0.6712 desc 0.6726
+iid        R2 C  8  flat asc 5.8385 desc 5.6646 | tree asc 4.8599 desc 4.5652 | ratio tree/flat asc 0.8324 desc 0.8059
+iid        R2 C 16  flat asc 5.0104 desc 4.7467 | tree asc 3.8795 desc 3.6707 | ratio tree/flat asc 0.7743 desc 0.7733
+iid        R2 C 32  flat asc 3.8038 desc 3.7039 | tree asc 2.7451 desc 2.6773 | ratio tree/flat asc 0.7217 desc 0.7228
+iid        R2 C 64  flat asc 2.4620 desc 2.4302 | tree asc 1.6575 desc 1.6418 | ratio tree/flat asc 0.6732 desc 0.6756
+iid        R2 C128  flat asc 0.9865 desc 0.9831 | tree asc 0.6131 desc 0.6117 | ratio tree/flat asc 0.6215 desc 0.6222
+iid        R8 C  8  flat asc 3.6423 desc 3.3457 | tree asc 2.6572 desc 2.4412 | ratio tree/flat asc 0.7296 desc 0.7297
+iid        R8 C 16  flat asc 2.4108 desc 2.2998 | tree asc 1.6202 desc 1.5632 | ratio tree/flat asc 0.6721 desc 0.6797
+iid        R8 C 32  flat asc 0.9800 desc 0.9658 | tree asc 0.6108 desc 0.6031 | ratio tree/flat asc 0.6233 desc 0.6245
+iid        R8 C 64  flat asc 0.0000 desc 0.0000 | tree asc 0.0000 desc 0.0000 | ratio tree/flat asc nan desc nan
+iid        R8 C128  flat asc 0.0000 desc 0.0000 | tree asc 0.0000 desc 0.0000 | ratio tree/flat asc nan desc nan
+persistent R1 C  8  flat asc 5.2360 desc 5.2360 | tree asc 4.7051 desc 4.7051 | ratio tree/flat asc 0.8986 desc 0.8986
+persistent R1 C 16  flat asc 4.6813 desc 4.5165 | tree asc 3.9664 desc 3.7628 | ratio tree/flat asc 0.8473 desc 0.8331
+persistent R1 C 32  flat asc 3.8478 desc 3.7664 | tree asc 3.0271 desc 2.9573 | ratio tree/flat asc 0.7867 desc 0.7852
+persistent R1 C 64  flat asc 2.9187 desc 2.8843 | tree asc 2.1281 desc 2.1066 | ratio tree/flat asc 0.7291 desc 0.7304
+persistent R1 C128  flat asc 1.8843 desc 1.8752 | tree asc 1.2909 desc 1.2864 | ratio tree/flat asc 0.6851 desc 0.6860
+persistent R2 C  8  flat asc 4.5184 desc 4.3997 | tree asc 3.8200 desc 3.6193 | ratio tree/flat asc 0.8454 desc 0.8226
+persistent R2 C 16  flat asc 3.8327 desc 3.6723 | tree asc 3.0029 desc 2.8708 | ratio tree/flat asc 0.7835 desc 0.7818
+persistent R2 C 32  flat asc 2.9107 desc 2.8488 | tree asc 2.1339 desc 2.0927 | ratio tree/flat asc 0.7331 desc 0.7346
+persistent R2 C 64  flat asc 1.8729 desc 1.8550 | tree asc 1.2892 desc 1.2784 | ratio tree/flat asc 0.6883 desc 0.6892
+persistent R2 C128  flat asc 0.7508 desc 0.7477 | tree asc 0.4802 desc 0.4792 | ratio tree/flat asc 0.6396 desc 0.6408
+persistent R8 C  8  flat asc 2.8058 desc 2.6185 | tree asc 2.0727 desc 1.9243 | ratio tree/flat asc 0.7387 desc 0.7349
+persistent R8 C 16  flat asc 1.8470 desc 1.7817 | tree asc 1.2723 desc 1.2311 | ratio tree/flat asc 0.6889 desc 0.6909
+persistent R8 C 32  flat asc 0.7392 desc 0.7291 | tree asc 0.4785 desc 0.4733 | ratio tree/flat asc 0.6473 desc 0.6491
+persistent R8 C 64  flat asc 0.0000 desc 0.0000 | tree asc 0.0000 desc 0.0000 | ratio tree/flat asc nan desc nan
+persistent R8 C128  flat asc 0.0000 desc 0.0000 | tree asc 0.0000 desc 0.0000 | ratio tree/flat asc nan desc nan
+effective slots of the synthetic eval streams: {'flat_like|iid': 147.7, 'flat_like|persistent': 150.9, 'tree_like|iid': 94.0, 'tree_like|persistent': 97.2}
+seconds 16
+python3 docs/reviews/p7a-preflight-2026-11-13/check_tie_sensitivity.py  15.44s user 0.08s system 99% cpu 15.556 total

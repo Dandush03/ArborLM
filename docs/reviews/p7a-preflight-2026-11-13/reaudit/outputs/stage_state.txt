@@ -1,0 +1,22 @@
+BEFORE a freeze commit (P7-A files untracked, as now):
+  new file docs/reviews/p7a-results-audit/independent_sim_actual.json: not detected
+  new log file at repo root (p7a_operator.log): not detected
+  new file results/p7a-2026-11-13/simulate/X/result.json (results/ is NOT git-ignored): not detected
+  edit of a tracked P5 record results/p5-2026-11-13/<cell>/result.json: DETECTED
+  edit of src/arborlm/p7a_core.py: DETECTED
+  edit of tests/test_p7a_sim.py: DETECTED
+  edit of ADR-0013: DETECTED
+  edit of docs/reviews/p7a-preflight-2026-11-13/independent_sim.py: not detected
+  new file src/arborlm/p7a_extra.py: DETECTED
+  edit of tracked README.md: DETECTED
+AFTER a simulated freeze commit of everything (P7-A sources, tests, ADR, review folder):
+  new file docs/reviews/p7a-results-audit/independent_sim_actual.json: not detected
+  new log file at repo root (p7a_operator.log): not detected
+  new file results/p7a-2026-11-13/simulate/X/result.json (results/ is NOT git-ignored): not detected
+  edit of a tracked P5 record results/p5-2026-11-13/<cell>/result.json: DETECTED
+  edit of src/arborlm/p7a_core.py: DETECTED
+  edit of tests/test_p7a_sim.py: DETECTED
+  edit of ADR-0013: DETECTED
+  edit of docs/reviews/p7a-preflight-2026-11-13/independent_sim.py: DETECTED
+  new file src/arborlm/p7a_extra.py: DETECTED
+  edit of tracked README.md: DETECTED

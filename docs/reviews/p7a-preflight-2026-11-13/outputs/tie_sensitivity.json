@@ -1,0 +1,362 @@
+{
+ "flat_like|iid|R1|C128": {
+  "asc_over_desc": 1.0065341546749134,
+  "asc_warm_capacity_per_query": 2.46331787109375,
+  "desc_warm_capacity_per_query": 2.44732666015625,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R1|C16": {
+  "asc_over_desc": 1.0359888847102086,
+  "asc_warm_capacity_per_query": 6.05279541015625,
+  "desc_warm_capacity_per_query": 5.842529296875,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R1|C32": {
+  "asc_over_desc": 1.0273685515873017,
+  "asc_warm_capacity_per_query": 5.05657958984375,
+  "desc_warm_capacity_per_query": 4.921875,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R1|C64": {
+  "asc_over_desc": 1.0132595429758504,
+  "asc_warm_capacity_per_query": 3.81060791015625,
+  "desc_warm_capacity_per_query": 3.7607421875,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R1|C8": {
+  "asc_over_desc": 1.0,
+  "asc_warm_capacity_per_query": 6.76812744140625,
+  "desc_warm_capacity_per_query": 6.76812744140625,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R2|C128": {
+  "asc_over_desc": 1.0034146644316135,
+  "asc_warm_capacity_per_query": 0.9864501953125,
+  "desc_warm_capacity_per_query": 0.98309326171875,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R2|C16": {
+  "asc_over_desc": 1.0555484119840555,
+  "asc_warm_capacity_per_query": 5.0103759765625,
+  "desc_warm_capacity_per_query": 4.7467041015625,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R2|C32": {
+  "asc_over_desc": 1.0269753645876247,
+  "asc_warm_capacity_per_query": 3.8038330078125,
+  "desc_warm_capacity_per_query": 3.70391845703125,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R2|C64": {
+  "asc_over_desc": 1.0131103074141048,
+  "asc_warm_capacity_per_query": 2.4620361328125,
+  "desc_warm_capacity_per_query": 2.43017578125,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R2|C8": {
+  "asc_over_desc": 1.0307085596069305,
+  "asc_warm_capacity_per_query": 5.8385009765625,
+  "desc_warm_capacity_per_query": 5.66455078125,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R8|C128": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R8|C16": {
+  "asc_over_desc": 1.048248407643312,
+  "asc_warm_capacity_per_query": 2.4107666015625,
+  "desc_warm_capacity_per_query": 2.2998046875,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R8|C32": {
+  "asc_over_desc": 1.0147244691607684,
+  "asc_warm_capacity_per_query": 0.98004150390625,
+  "desc_warm_capacity_per_query": 0.9658203125,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R8|C64": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|iid|R8|C8": {
+  "asc_over_desc": 1.0886420023350847,
+  "asc_warm_capacity_per_query": 3.64227294921875,
+  "desc_warm_capacity_per_query": 3.345703125,
+  "effective_slots_eval": 147.71445412804704
+ },
+ "flat_like|persistent|R1|C128": {
+  "asc_over_desc": 1.004849786804674,
+  "asc_warm_capacity_per_query": 1.88427734375,
+  "desc_warm_capacity_per_query": 1.87518310546875,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R1|C16": {
+  "asc_over_desc": 1.036500986513149,
+  "asc_warm_capacity_per_query": 4.68133544921875,
+  "desc_warm_capacity_per_query": 4.5164794921875,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R1|C32": {
+  "asc_over_desc": 1.0216179425682246,
+  "asc_warm_capacity_per_query": 3.8477783203125,
+  "desc_warm_capacity_per_query": 3.766357421875,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R1|C64": {
+  "asc_over_desc": 1.0119349923819199,
+  "asc_warm_capacity_per_query": 2.918701171875,
+  "desc_warm_capacity_per_query": 2.88427734375,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R1|C8": {
+  "asc_over_desc": 1.0,
+  "asc_warm_capacity_per_query": 5.23602294921875,
+  "desc_warm_capacity_per_query": 5.23602294921875,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R2|C128": {
+  "asc_over_desc": 1.0040812994857562,
+  "asc_warm_capacity_per_query": 0.75079345703125,
+  "desc_warm_capacity_per_query": 0.74774169921875,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R2|C16": {
+  "asc_over_desc": 1.043678428374358,
+  "asc_warm_capacity_per_query": 3.83270263671875,
+  "desc_warm_capacity_per_query": 3.67230224609375,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R2|C32": {
+  "asc_over_desc": 1.0217465826798646,
+  "asc_warm_capacity_per_query": 2.91070556640625,
+  "desc_warm_capacity_per_query": 2.8487548828125,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R2|C64": {
+  "asc_over_desc": 1.0096406949197156,
+  "asc_warm_capacity_per_query": 1.87286376953125,
+  "desc_warm_capacity_per_query": 1.85498046875,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R2|C8": {
+  "asc_over_desc": 1.0269824094112425,
+  "asc_warm_capacity_per_query": 4.51837158203125,
+  "desc_warm_capacity_per_query": 4.399658203125,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R8|C128": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R8|C16": {
+  "asc_over_desc": 1.0366196218141956,
+  "asc_warm_capacity_per_query": 1.84698486328125,
+  "desc_warm_capacity_per_query": 1.78173828125,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R8|C32": {
+  "asc_over_desc": 1.0138121546961325,
+  "asc_warm_capacity_per_query": 0.73919677734375,
+  "desc_warm_capacity_per_query": 0.7291259765625,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R8|C64": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "flat_like|persistent|R8|C8": {
+  "asc_over_desc": 1.0715601034940911,
+  "asc_warm_capacity_per_query": 2.80584716796875,
+  "desc_warm_capacity_per_query": 2.61846923828125,
+  "effective_slots_eval": 150.87654753135612
+ },
+ "tree_like|iid|R1|C128": {
+  "asc_over_desc": 1.004449718184515,
+  "asc_warm_capacity_per_query": 1.6533203125,
+  "desc_warm_capacity_per_query": 1.64599609375,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R1|C16": {
+  "asc_over_desc": 1.0630313690999706,
+  "asc_warm_capacity_per_query": 5.0902099609375,
+  "desc_warm_capacity_per_query": 4.78839111328125,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R1|C32": {
+  "asc_over_desc": 1.028453455865814,
+  "asc_warm_capacity_per_query": 3.90704345703125,
+  "desc_warm_capacity_per_query": 3.7989501953125,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R1|C64": {
+  "asc_over_desc": 1.0126633527519737,
+  "asc_warm_capacity_per_query": 2.7479248046875,
+  "desc_warm_capacity_per_query": 2.71356201171875,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R1|C8": {
+  "asc_over_desc": 1.0,
+  "asc_warm_capacity_per_query": 5.9510498046875,
+  "desc_warm_capacity_per_query": 5.9510498046875,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R2|C128": {
+  "asc_over_desc": 1.0022949511075634,
+  "asc_warm_capacity_per_query": 0.61309814453125,
+  "desc_warm_capacity_per_query": 0.6116943359375,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R2|C16": {
+  "asc_over_desc": 1.0568829916363214,
+  "asc_warm_capacity_per_query": 3.8795166015625,
+  "desc_warm_capacity_per_query": 3.67071533203125,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R2|C32": {
+  "asc_over_desc": 1.0253049128006384,
+  "asc_warm_capacity_per_query": 2.74505615234375,
+  "desc_warm_capacity_per_query": 2.67730712890625,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R2|C64": {
+  "asc_over_desc": 1.0095914346258226,
+  "asc_warm_capacity_per_query": 1.65753173828125,
+  "desc_warm_capacity_per_query": 1.64178466796875,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R2|C8": {
+  "asc_over_desc": 1.0645622760575433,
+  "asc_warm_capacity_per_query": 4.85992431640625,
+  "desc_warm_capacity_per_query": 4.565185546875,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R8|C128": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R8|C16": {
+  "asc_over_desc": 1.0365077505759244,
+  "asc_warm_capacity_per_query": 1.6202392578125,
+  "desc_warm_capacity_per_query": 1.56317138671875,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R8|C32": {
+  "asc_over_desc": 1.0127504553734061,
+  "asc_warm_capacity_per_query": 0.61083984375,
+  "desc_warm_capacity_per_query": 0.6031494140625,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R8|C64": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|iid|R8|C8": {
+  "asc_over_desc": 1.0884816361227092,
+  "asc_warm_capacity_per_query": 2.6572265625,
+  "desc_warm_capacity_per_query": 2.44122314453125,
+  "effective_slots_eval": 94.00614006596348
+ },
+ "tree_like|persistent|R1|C128": {
+  "asc_over_desc": 1.0035111026760295,
+  "asc_warm_capacity_per_query": 1.2908935546875,
+  "desc_warm_capacity_per_query": 1.286376953125,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R1|C16": {
+  "asc_over_desc": 1.0541119221411193,
+  "asc_warm_capacity_per_query": 3.9664306640625,
+  "desc_warm_capacity_per_query": 3.7628173828125,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R1|C32": {
+  "asc_over_desc": 1.0235898705962478,
+  "asc_warm_capacity_per_query": 3.027099609375,
+  "desc_warm_capacity_per_query": 2.95733642578125,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R1|C64": {
+  "asc_over_desc": 1.010227733673292,
+  "asc_warm_capacity_per_query": 2.12811279296875,
+  "desc_warm_capacity_per_query": 2.1065673828125,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R1|C8": {
+  "asc_over_desc": 1.0,
+  "asc_warm_capacity_per_query": 4.70513916015625,
+  "desc_warm_capacity_per_query": 4.70513916015625,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R2|C128": {
+  "asc_over_desc": 1.0021653292574195,
+  "asc_warm_capacity_per_query": 0.480224609375,
+  "desc_warm_capacity_per_query": 0.47918701171875,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R2|C16": {
+  "asc_over_desc": 1.0459860532358194,
+  "asc_warm_capacity_per_query": 3.00286865234375,
+  "desc_warm_capacity_per_query": 2.870849609375,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R2|C32": {
+  "asc_over_desc": 1.0197165023624803,
+  "asc_warm_capacity_per_query": 2.1339111328125,
+  "desc_warm_capacity_per_query": 2.0926513671875,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R2|C64": {
+  "asc_over_desc": 1.008402558961138,
+  "asc_warm_capacity_per_query": 1.2891845703125,
+  "desc_warm_capacity_per_query": 1.2784423828125,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R2|C8": {
+  "asc_over_desc": 1.0554478153088585,
+  "asc_warm_capacity_per_query": 3.82000732421875,
+  "desc_warm_capacity_per_query": 3.61932373046875,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R8|C128": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R8|C16": {
+  "asc_over_desc": 1.033515121467526,
+  "asc_warm_capacity_per_query": 1.2723388671875,
+  "desc_warm_capacity_per_query": 1.2310791015625,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R8|C32": {
+  "asc_over_desc": 1.0109620840856333,
+  "asc_warm_capacity_per_query": 0.47845458984375,
+  "desc_warm_capacity_per_query": 0.4732666015625,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R8|C64": {
+  "asc_over_desc": null,
+  "asc_warm_capacity_per_query": 0.0,
+  "desc_warm_capacity_per_query": 0.0,
+  "effective_slots_eval": 97.23051425504488
+ },
+ "tree_like|persistent|R8|C8": {
+  "asc_over_desc": 1.077140229010055,
+  "asc_warm_capacity_per_query": 2.07269287109375,
+  "desc_warm_capacity_per_query": 1.92425537109375,
+  "effective_slots_eval": 97.23051425504488
+ }
+}

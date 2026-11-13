@@ -1,0 +1,6 @@
+$ uv run --locked --extra pilot python -m arborlm.p7a_study dry-run
+P7-A trace completed: /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/p7a-dry-run-rh6s2_7j/experiments/P7ATD-20261113T212526436083Z-5d483f6aa34243c2974018a84da79add
+P7-A simulate completed: /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/p7a-dry-run-rh6s2_7j/experiments/P7ASD-20261113T212528259052Z-e9d9ee657e9b4546811e51f566ade853
+P7-A analyze completed: /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/p7a-dry-run-rh6s2_7j/experiments/P7AAD-20261113T212535250470Z-49ded592aea342f587b89111a64c2682
+{"analysis_missing":0,"analysis_outcomes":{"fixed_tree":"INCOMPLETE","learned_tree":"INCOMPLETE"},"analyze":0,"experiments_and_results_unchanged":true,"scratch_deleted":true,"simulate":0,"trace":0}
+exit 0

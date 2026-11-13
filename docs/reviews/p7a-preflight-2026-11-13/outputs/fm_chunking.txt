@@ -1,0 +1,8 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+b101-o301-flat-s501 seed 91301000: chunked == per-query: True (2.3s)
+b101-o301-flat-s501 seed 91303000: chunked == per-query: True (2.3s)
+b102-o302-learned_tree-s503 seed 91301044: chunked == per-query: True (2.3s)
+b102-o302-learned_tree-s503 seed 91303044: chunked == per-query: True (2.3s)
+torch 2.8.0 ALL EQUAL
+uv run --locked --extra pilot python   9.60s user 0.16s system 97% cpu 9.980 total

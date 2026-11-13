@@ -1,0 +1,9 @@
+$ uv run --locked --extra pilot pytest -q tests/test_p7a_sim.py tests/test_p7a_trace.py tests/test_p7a_analysis.py tests/test_p7a_study.py
+........................................................................ [ 63%]
+..........................................                               [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+114 passed, 1 warning in 36.23s
+exit 0
