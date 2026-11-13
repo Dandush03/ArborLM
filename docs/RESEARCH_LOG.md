@@ -23,3 +23,10 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Added `docs/decisions/ADR-0002-phase0-plan.md`, marked **SPEC: PENDING ASTRA REVIEW**, consolidating the inherited E0/G0 roadmap, reproducibility requirements, proposed correctness checks, review decisions and deferred memory/storage work.
 - This is a planning/documentation change only. No scientific settings were approved, no model code was written, and no tests, training or benchmarks were run. No result or Astra validation is claimed.
 - Next dependency: actual Astra review of the specification and recorded decisions before dependent model/data implementation; lower-tier implementation and independent validation remain pending.
+
+## 2026-11-12 — Human authorizes alternate scientific reviewer
+
+- The human lead explicitly selected **“Authorize this model as scientific reviewer”** in this project chat. This is a recorded session exception to the mandatory Astra reviewer preference; no Astra identity or review is inferred.
+- Planning files were committed/pushed as `815f528` at the human's request.
+- Added ADR-0003 as the concrete E0 specification, approved by the authorized root Codex reviewer. It resolves ADR-0002 A0–A8 for a bounded CPU correctness/reproducibility milestone; implementation and independent result inspection remain pending.
+- Lower-tier implementation will follow ADR-0003. No E0 result, core-hypothesis validation, novelty, speedup or publication approval is claimed.
