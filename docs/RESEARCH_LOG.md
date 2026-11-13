@@ -30,3 +30,9 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Planning files were committed/pushed as `815f528` at the human's request.
 - Added ADR-0003 as the concrete E0 specification, approved by the authorized root Codex reviewer. It resolves ADR-0002 A0–A8 for a bounded CPU correctness/reproducibility milestone; implementation and independent result inspection remain pending.
 - Lower-tier implementation will follow ADR-0003. No E0 result, core-hypothesis validation, novelty, speedup or publication approval is claimed.
+
+### Implementation service failure
+
+- Attempted the required lower-tier implementation delegation using `glm-5.3-flash:cloud`. The agent failed before implementation with: `ollama cloud is disabled: remote model is unavailable`.
+- No model code or experiment was produced by that attempt. Requested an explicit human exception for this model to implement, or restoration of the lower-tier service; reviewer authorization alone was not silently extended to coding-model authorization.
+- Human response: **“use luna or sol if you see fit, not another astra agent”**. Implementation is therefore delegated to an explicitly selected Sol/Luna agent; no root-implementation exception or additional Astra agent is inferred.

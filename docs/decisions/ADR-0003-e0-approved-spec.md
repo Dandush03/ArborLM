@@ -88,4 +88,8 @@ Create `pyproject.toml`, `.python-version`, `uv.lock`, `.gitignore`, source modu
 
 First implementer supplies exact dependency compatibility evidence, commands, output and raw artifacts. Root reviewer independently inspects code/data/objective/state logic and re-runs checks before accepting G0. Do not mark Astra validation. G0 acceptance permits a separately preregistered E1–E3 pilot, never establishes the core concept. Finite experiments may falsify specific configurations/hypotheses within their tested conditions; no finite E0 run proves/disproves all hierarchical-memory architectures.
 
+### Pre-run implementation clarifications
+
+Luna's read-only contract audit confirmed the 18,688 parameter calculation and identified two points requiring explicit wording. The authorized reviewer resolves them before runs: `smoke` must orchestrate separate-process full run A, fresh repeat B, checkpoint reload/eval, interrupted run C through step 16 and resumed run D through step 32, then compare every registered repeat/reload/resume output. Its 1,500-second limit covers the entire workflow and the 300-second limit applies to each child. Any non-finite training loss or gradient fails the run immediately and preserves its evidence; it cannot be logged and ignored. This is a contract clarification, not a relaxation of numerical gates.
+
 References consulted for implementation constraints: [PyTorch deterministic algorithms](https://docs.pytorch.org/docs/stable/generated/torch.use_deterministic_algorithms.html) and [AdamW](https://docs.pytorch.org/docs/stable/generated/torch.optim.AdamW.html). Exact installed version behavior still requires tests; documentation alone is not evidence of repeatability.
