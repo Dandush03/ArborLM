@@ -1,0 +1,107 @@
+e0	Lint, typecheck, and test	﻿2026-11-13T12:29:14.4108637Z ##[group]Run uv run --locked --extra pilot ruff check .
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4109005Z ^[[36;1muv run --locked --extra pilot ruff check .^[[0m
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4109312Z ^[[36;1muv run --locked --extra pilot mypy src/arborlm^[[0m
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4109601Z ^[[36;1muv run --locked --extra pilot pytest^[[0m
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4127438Z shell: /usr/bin/bash -e {0}
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4127649Z env:
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4127869Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4128300Z ##[endgroup]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4864047Z E501 Line too long (121 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4864769Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:98:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4865332Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4865904Z  96 | parents = [row for row in all_cells if row["variant"] == "baseline"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4866444Z  97 | assert len(parents)==9
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4867093Z  98 | assert {(r["backbone"],r["order"],r["seed"]) for r in parents} == {(b,o,0) for b in (101,102,103) for o in (301,302,303)}
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4867961Z     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4868474Z  99 | parent_records=[]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4868811Z 100 | for row in parents:
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4869140Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4869353Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4869636Z E501 Line too long (103 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4870108Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:103:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4870604Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4870854Z 101 |     run=P4/"cells"/row["run_id"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4871248Z 102 |     compact=ROOT/"results/p4-2026-11-12"/row["label"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4871901Z 103 |     for name in ("manifest.json","result.json","terminal.json","order.json","checkpoint-0/index.json"):
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4872589Z     |                                                                                                     ^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4873094Z 104 |         assert (run/name).read_bytes()==(compact/name).read_bytes()
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4873510Z 105 |     result=read(run/"result.json")
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4873720Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4873806Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4873887Z E501 Line too long (121 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4874161Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:108:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4874446Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4874626Z 106 |     path=run/"checkpoint-0/state.pt"
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4874878Z 107 |     digest=sha(path.read_bytes())
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4875529Z 108 |     assert digest==read(run/"checkpoint-0/index.json")["state_sha256"]==result["checkpoint_state_sha256"]["checkpoint-0"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4876577Z     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4876999Z 109 |     state=torch.load(path,map_location="cpu",weights_only=True)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4877612Z 110 |     assert state["counters"]==dict(additional_step=0,absolute_order_cursor=0,next_cyclic_order_cursor=0,additional_targets=0)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4878187Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4878311Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4878414Z E501 Line too long (125 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4878868Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:110:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4879365Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4879922Z 108 |     assert digest==read(run/"checkpoint-0/index.json")["state_sha256"]==result["checkpoint_state_sha256"]["checkpoint-0"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4880701Z 109 |     state=torch.load(path,map_location="cpu",weights_only=True)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4881500Z 110 |     assert state["counters"]==dict(additional_step=0,absolute_order_cursor=0,next_cyclic_order_cursor=0,additional_targets=0)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4882307Z     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4883035Z 111 |     assert state["bypass"] is True and state["optimizer"] is None and not state["optimizer_parameter_names"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4884056Z 112 |     assert not any(state["requires_grad"].values())
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4884437Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4884566Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4884676Z E501 Line too long (108 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4885135Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:111:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4885727Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4886076Z 109 |     state=torch.load(path,map_location="cpu",weights_only=True)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4886940Z 110 |     assert state["counters"]==dict(additional_step=0,absolute_order_cursor=0,next_cyclic_order_cursor=0,additional_targets=0)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4887517Z 111 |     assert state["bypass"] is True and state["optimizer"] is None and not state["optimizer_parameter_names"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4887943Z     |                                                                                                     ^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4888247Z 112 |     assert not any(state["requires_grad"].values())
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4888563Z 113 |     assert all(n.startswith("backbone.") for n in state["model"])
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4888830Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4888910Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4888994Z E501 Line too long (102 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4889442Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:117:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4889895Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4890200Z 115 |     p3=Path(state["identity"]["parent"]["checkpoint_path"])
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4890822Z 116 |     assert sha((p3/"state.pt").read_bytes())==state["identity"]["parent"]["checkpoint_state_sha256"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4891485Z 117 |     assert sha((p3/"index.json").read_bytes())==state["identity"]["parent"]["checkpoint_index_sha256"]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4891892Z     |                                                                                                     ^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4892246Z 118 |     source=torch.load(p3/"state.pt",map_location="cpu",weights_only=True)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4892669Z 119 |     old_backbone={n:t for n,t in source["model"].items() if not n.startswith("memory_state.")}
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4893012Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4893097Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4893183Z E501 Line too long (126 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4893471Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:124:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4893754Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4893968Z 122 |         other=old_backbone[name.removeprefix("backbone.")]
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4894306Z 123 |         assert tensor.shape==other.shape and tensor.dtype==other.dtype
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4894824Z 124 |         assert torch.equal(tensor.contiguous().reshape(-1).view(torch.uint8),other.contiguous().reshape(-1).view(torch.uint8))
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4895413Z     |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4896392Z 125 |     parent_records.append(dict(label=row["label"],run_id=row["run_id"],state_sha256=digest,index_sha256=sha((run/"checkpoint-0/index.…
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4897134Z 126 | report=dict(status="PASS",method="Independent raw Parquet reconstruction and actual P4/P3 tensor-byte audit; no ArborLM imports/model…
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4897585Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4897668Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4897751Z E501 Line too long (583 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4898032Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:126:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4898326Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4898536Z 124 | ….reshape(-1).view(torch.uint8))
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4899290Z 125 | …x_sha256=sha((run/"checkpoint-0/index.json").read_bytes()),backbone_sha256=result["backbone_sha256"],backbone_parameters=27392,p3_state_sha256=state["identity"]["parent"]["checkpoint_state_sha256"]))
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4901279Z 126 | …r-byte audit; no ArborLM imports/model forwards",source_hashes=expected_source,candidate_counts=counts,train_sha256=train_hash,panels=panels,p5_selected_rows=selected,exact_panel_overlaps=0,prior_panel_manifest_count=len(prior_manifests),prior_panel_manifests=prior_manifests,prior_use_audit_scope="all available local/results dataset_manifest validation-byte hashes before P5 freeze; no claim about unknown external records",parents=parent_records,model_evaluations=0,training_updates=0)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4903253Z     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4903994Z 127 | …
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4904196Z 128 | …nifests")},indent=2))
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4904387Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4904488Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4904572Z E501 Line too long (116 > 100)
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4904858Z    --> results/p5-preflight-2026-11-13/root-data-parent/audit.py:128:101
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4905165Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4905757Z 126 | report=dict(status="PASS",method="Independent raw Parquet reconstruction and actual P4/P3 tensor-byte audit; no ArborLM imports/model…
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4906341Z 127 | (OUT/"root-data-parent-audit.json").write_text(json.dumps(report,indent=2)+"\n")
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4906838Z 128 | print(json.dumps({k:v for k,v in report.items() if k not in ("p5_selected_rows","prior_panel_manifests")},indent=2))
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4907296Z     |                                                                                                     ^^^^^^^^^^^^^^^^
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4907565Z     |
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4907654Z 
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4907723Z Found 9 errors.
+e0	Lint, typecheck, and test	2026-11-13T12:29:14.4917288Z ##[error]Process completed with exit code 1.
