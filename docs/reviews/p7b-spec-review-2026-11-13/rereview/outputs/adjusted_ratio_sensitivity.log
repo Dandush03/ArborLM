@@ -1,0 +1,8 @@
+R2C32 asc fixed_tree   slopes tree -0.030(0.024) flat -0.021(0.016) z(diff) -0.33 | separate-slope ratio at pooled mean 0.988, at flat mean 0.986, at tree mean 0.990 | x ranges tree 3.75-4.95 flat 4.44-5.29
+R2C32 asc learned_tree slopes tree -0.108(0.046) flat -0.021(0.016) z(diff) -1.81 | separate-slope ratio at pooled mean 0.990, at flat mean 0.961, at tree mean 1.018 | x ranges tree 4.01-4.82 flat 4.44-5.29
+R2C32 desc fixed_tree   slopes tree -0.012(0.025) flat -0.017(0.016) z(diff) +0.16 | separate-slope ratio at pooled mean 0.993, at flat mean 0.995, at tree mean 0.992 | x ranges tree 3.75-4.95 flat 4.44-5.29
+R2C32 desc learned_tree slopes tree -0.089(0.046) flat -0.017(0.016) z(diff) -1.46 | separate-slope ratio at pooled mean 0.994, at flat mean 0.971, at tree mean 1.017 | x ranges tree 4.01-4.82 flat 4.44-5.29
+R8C8 asc fixed_tree   slopes tree -0.272(0.037) flat -0.137(0.024) z(diff) -3.05 | separate-slope ratio at pooled mean 0.964, at flat mean 0.921, at tree mean 1.004 | x ranges tree 3.75-4.95 flat 4.44-5.29
+R8C8 asc learned_tree slopes tree -0.345(0.071) flat -0.137(0.024) z(diff) -2.78 | separate-slope ratio at pooled mean 0.993, at flat mean 0.900, at tree mean 1.077 | x ranges tree 4.01-4.82 flat 4.44-5.29
+R8C8 desc fixed_tree   slopes tree -0.233(0.041) flat -0.167(0.026) z(diff) -1.34 | separate-slope ratio at pooled mean 0.995, at flat mean 0.976, at tree mean 1.012 | x ranges tree 3.75-4.95 flat 4.44-5.29
+R8C8 desc learned_tree slopes tree -0.337(0.079) flat -0.167(0.026) z(diff) -2.03 | separate-slope ratio at pooled mean 1.012, at flat mean 0.943, at tree mean 1.073 | x ranges tree 4.01-4.82 flat 4.44-5.29

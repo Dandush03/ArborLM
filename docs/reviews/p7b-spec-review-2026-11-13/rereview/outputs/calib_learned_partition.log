@@ -1,0 +1,13 @@
+R2C32 asc flat         m(QCOAX)/m(COAX) 1.001
+R2C32 asc fixed_tree   m(QCOAX)/m(COAX) 1.000  m(BCOAX)/m(COAX) 1.034  m(BCOAX)/m(QCOAX) 1.034
+R2C32 asc learned_tree m(QCOAX)/m(COAX) 1.000  m(BCOAX)/m(COAX) 1.018  m(BCOAX)/m(QCOAX) 1.018
+R2C32 desc flat         m(QCOAX)/m(COAX) 1.001
+R2C32 desc fixed_tree   m(QCOAX)/m(COAX) 1.000  m(BCOAX)/m(COAX) 1.038  m(BCOAX)/m(QCOAX) 1.038
+R2C32 desc learned_tree m(QCOAX)/m(COAX) 1.000  m(BCOAX)/m(COAX) 1.024  m(BCOAX)/m(QCOAX) 1.024
+R8C8 asc flat         m(QCOAX)/m(COAX) 1.000
+R8C8 asc fixed_tree   m(QCOAX)/m(COAX) 0.998  m(BCOAX)/m(COAX) 1.079  m(BCOAX)/m(QCOAX) 1.081
+R8C8 asc learned_tree m(QCOAX)/m(COAX) 1.002  m(BCOAX)/m(COAX) 1.080  m(BCOAX)/m(QCOAX) 1.079
+R8C8 desc flat         m(QCOAX)/m(COAX) 1.001
+R8C8 desc fixed_tree   m(QCOAX)/m(COAX) 0.999  m(BCOAX)/m(COAX) 1.095  m(BCOAX)/m(QCOAX) 1.097
+R8C8 desc learned_tree m(QCOAX)/m(COAX) 1.002  m(BCOAX)/m(COAX) 1.095  m(BCOAX)/m(QCOAX) 1.093
+evaluation files read: 0; calibration files read: 81

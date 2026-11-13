@@ -1,0 +1,1059 @@
+{
+ "wall": 1.6178169579943642,
+ "jobs": 3,
+ "per_checkpoint": [
+  {
+   "label": "b101-o301-flat-s501",
+   "kind": "flat",
+   "total": 1.5396755420370027,
+   "t": {
+    "A0": 0.1047785000409931,
+    "A8": 0.7437695830012672,
+    "null+An0": 0.16708637500414625,
+    "COAX|R1": 0.005152540979906917,
+    "NCOAX|R1": 0.01268308301223442,
+    "COAX8|R1": 0.019619999977294356,
+    "P1|R1": 0.0038237919798120856,
+    "P2|R1": 0.00511374999769032,
+    "P3|R1": 0.0036587920039892197,
+    "P4|R1": 0.003860750002786517,
+    "P5|R1": 0.003746124973986298,
+    "COAX|R2": 0.009725542040541768,
+    "NCOAX|R2": 0.020970874989870936,
+    "COAX8|R2": 0.046024166978895664,
+    "P1|R2": 0.00482779205776751,
+    "P2|R2": 0.004901541979052126,
+    "P3|R2": 0.004718000011052936,
+    "P4|R2": 0.00571749999653548,
+    "P5|R2": 0.004726583953015506,
+    "COAX|R8": 0.016416249971371144,
+    "NCOAX|R8": 0.02712712500942871,
+    "COAX8|R8": 0.0692736660130322,
+    "P1|R8": 0.004092540999408811,
+    "P2|R8": 0.004787499958183616,
+    "P3|R8": 0.0045501249842345715,
+    "P4|R8": 0.004561499983537942,
+    "P5|R8": 0.004435540991835296,
+    "COAX|R32": 0.024190167023334652,
+    "NCOAX|R32": 0.025703207997139543,
+    "COAX8|R32": 0.04784370795823634,
+    "P1|R32": 0.0028367500053718686,
+    "P2|R32": 0.0027419999823905528,
+    "P3|R32": 0.0028418340370990336,
+    "P4|R32": 0.002724124991800636,
+    "P5|R32": 0.0026989170000888407,
+    "COAX|R128": 0.01596916699782014,
+    "NCOAX|R128": 0.012535375019069761,
+    "COAX8|R128": 0.022816999990027398,
+    "P1|R128": 0.0026457500061951578,
+    "P2|R128": 0.0025995830073952675,
+    "P3|R128": 0.0025152500020340085,
+    "P4|R128": 0.0025183329707942903,
+    "P5|R128": 0.0024967920035123825,
+    "COAX|R512": 0.005071249965112656,
+    "NCOAX|R512": 0.00938916701124981,
+    "COAX8|R512": 0.009952374966815114,
+    "P1|R512": 0.002522249997127801,
+    "P2|R512": 0.002383959013968706,
+    "P3|R512": 0.002483916003257036,
+    "P4|R512": 0.0024297499912790954,
+    "P5|R512": 0.0024063329910859466
+   },
+   "info": {
+    "COAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R2": {
+     "passes": 3,
+     "swaps": 42,
+     "converged": true
+    },
+    "NCOAX|R2": {
+     "passes": 2,
+     "swaps": 31,
+     "converged": true
+    },
+    "COAX8|R2": {
+     "passes": 3,
+     "swaps": 80,
+     "converged": true
+    },
+    "P1|R2": {
+     "passes": 2,
+     "swaps": 19,
+     "converged": true
+    },
+    "P2|R2": {
+     "passes": 2,
+     "swaps": 24,
+     "converged": true
+    },
+    "P3|R2": {
+     "passes": 2,
+     "swaps": 26,
+     "converged": true
+    },
+    "P4|R2": {
+     "passes": 3,
+     "swaps": 38,
+     "converged": true
+    },
+    "P5|R2": {
+     "passes": 2,
+     "swaps": 20,
+     "converged": true
+    },
+    "COAX|R8": {
+     "passes": 4,
+     "swaps": 54,
+     "converged": true
+    },
+    "NCOAX|R8": {
+     "passes": 3,
+     "swaps": 49,
+     "converged": true
+    },
+    "COAX8|R8": {
+     "passes": 6,
+     "swaps": 125,
+     "converged": true
+    },
+    "P1|R8": {
+     "passes": 2,
+     "swaps": 17,
+     "converged": true
+    },
+    "P2|R8": {
+     "passes": 3,
+     "swaps": 22,
+     "converged": true
+    },
+    "P3|R8": {
+     "passes": 3,
+     "swaps": 13,
+     "converged": true
+    },
+    "P4|R8": {
+     "passes": 3,
+     "swaps": 18,
+     "converged": true
+    },
+    "P5|R8": {
+     "passes": 3,
+     "swaps": 12,
+     "converged": true
+    },
+    "COAX|R32": {
+     "passes": 4,
+     "swaps": 94,
+     "converged": true
+    },
+    "NCOAX|R32": {
+     "passes": 3,
+     "swaps": 28,
+     "converged": true
+    },
+    "COAX8|R32": {
+     "passes": 4,
+     "swaps": 96,
+     "converged": true
+    },
+    "P1|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R128": {
+     "passes": 2,
+     "swaps": 5,
+     "converged": true
+    },
+    "NCOAX|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R128": {
+     "passes": 2,
+     "swaps": 2,
+     "converged": true
+    },
+    "P1|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R512": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    },
+    "P2|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R512": {
+     "passes": 2,
+     "swaps": 4,
+     "converged": true
+    },
+    "P4|R512": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    },
+    "P5|R512": {
+     "passes": 2,
+     "swaps": 4,
+     "converged": true
+    }
+   },
+   "files_read": [
+    "experiments/P7AT-20261113T213133591303Z-0605157511b24311919ddfab8ac89b2e/traces/b101-o301-flat-s501/calib_selected.int16.bin"
+   ]
+  },
+  {
+   "label": "b101-o301-fixed_tree-s501",
+   "kind": "fixed_tree",
+   "total": 1.5808774170000106,
+   "t": {
+    "A0": 0.10466879198793322,
+    "A8": 0.70422920800047,
+    "null+An0": 0.16664066701196134,
+    "COAX|R1": 0.0048574579996056855,
+    "NCOAX|R1": 0.012093083001673222,
+    "COAX8|R1": 0.02199104195460677,
+    "BCOAX|R1": 0.005698833963833749,
+    "BCOAX8|R1": 0.014274957997258753,
+    "P1|R1": 0.003819374949671328,
+    "P2|R1": 0.003673875005915761,
+    "P3|R1": 0.0037149579729884863,
+    "P4|R1": 0.003993583028204739,
+    "P5|R1": 0.003800916951149702,
+    "COAX|R2": 0.009486792027018964,
+    "NCOAX|R2": 0.01862920797429979,
+    "COAX8|R2": 0.04533062502741814,
+    "BCOAX|R2": 0.006930499977897853,
+    "BCOAX8|R2": 0.019509042031131685,
+    "P1|R2": 0.00568816700251773,
+    "P2|R2": 0.004601082997396588,
+    "P3|R2": 0.005672500003129244,
+    "P4|R2": 0.006195082969497889,
+    "P5|R2": 0.005697040993254632,
+    "COAX|R8": 0.014813709014561027,
+    "NCOAX|R8": 0.031084333022590727,
+    "COAX8|R8": 0.051365916966460645,
+    "BCOAX|R8": 0.0061007909826003015,
+    "BCOAX8|R8": 0.014408625022042543,
+    "P1|R8": 0.004530500038526952,
+    "P2|R8": 0.004692540969699621,
+    "P3|R8": 0.0047347500221803784,
+    "P4|R8": 0.003773750038817525,
+    "P5|R8": 0.00442704203305766,
+    "COAX|R32": 0.023179082956630737,
+    "NCOAX|R32": 0.018724958004895598,
+    "COAX8|R32": 0.041181374981533736,
+    "BCOAX|R32": 0.0027802500408142805,
+    "BCOAX8|R32": 0.007697583001572639,
+    "P1|R32": 0.0028089589904993773,
+    "P2|R32": 0.0026862910017371178,
+    "P3|R32": 0.0025507090031169355,
+    "P4|R32": 0.0025562920491211116,
+    "P5|R32": 0.002585208974778652,
+    "COAX|R128": 0.028053958027157933,
+    "NCOAX|R128": 0.012539292045403272,
+    "COAX8|R128": 0.0250012920005247,
+    "BCOAX|R128": 0.0024176249862648547,
+    "BCOAX8|R128": 0.0067704159882850945,
+    "P1|R128": 0.0025303749716840684,
+    "P2|R128": 0.0024927500053308904,
+    "P3|R128": 0.0025883750058710575,
+    "P4|R128": 0.0024782499531283975,
+    "P5|R128": 0.0024912499939091504,
+    "COAX|R512": 0.00546329200733453,
+    "NCOAX|R512": 0.008307916985359043,
+    "COAX8|R512": 0.010420833015814424,
+    "BCOAX|R512": 0.002386333013419062,
+    "BCOAX8|R512": 0.007877582975197583,
+    "P1|R512": 0.0024737079511396587,
+    "P2|R512": 0.0023789589758962393,
+    "P3|R512": 0.0024020830169320107,
+    "P4|R512": 0.0024073750246316195,
+    "P5|R512": 0.0023871249868534505
+   },
+   "info": {
+    "COAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R2": {
+     "passes": 3,
+     "swaps": 59,
+     "converged": true
+    },
+    "NCOAX|R2": {
+     "passes": 2,
+     "swaps": 25,
+     "converged": true
+    },
+    "COAX8|R2": {
+     "passes": 3,
+     "swaps": 77,
+     "converged": true
+    },
+    "BCOAX|R2": {
+     "passes": 3,
+     "swaps": 39,
+     "converged": true
+    },
+    "BCOAX8|R2": {
+     "passes": 2,
+     "swaps": 40,
+     "converged": true
+    },
+    "P1|R2": {
+     "passes": 3,
+     "swaps": 28,
+     "converged": true
+    },
+    "P2|R2": {
+     "passes": 2,
+     "swaps": 31,
+     "converged": true
+    },
+    "P3|R2": {
+     "passes": 3,
+     "swaps": 42,
+     "converged": true
+    },
+    "P4|R2": {
+     "passes": 2,
+     "swaps": 34,
+     "converged": true
+    },
+    "P5|R2": {
+     "passes": 3,
+     "swaps": 29,
+     "converged": true
+    },
+    "COAX|R8": {
+     "passes": 4,
+     "swaps": 88,
+     "converged": true
+    },
+    "NCOAX|R8": {
+     "passes": 4,
+     "swaps": 45,
+     "converged": true
+    },
+    "COAX8|R8": {
+     "passes": 4,
+     "swaps": 88,
+     "converged": true
+    },
+    "BCOAX|R8": {
+     "passes": 4,
+     "swaps": 36,
+     "converged": true
+    },
+    "BCOAX8|R8": {
+     "passes": 4,
+     "swaps": 26,
+     "converged": true
+    },
+    "P1|R8": {
+     "passes": 3,
+     "swaps": 12,
+     "converged": true
+    },
+    "P2|R8": {
+     "passes": 3,
+     "swaps": 35,
+     "converged": true
+    },
+    "P3|R8": {
+     "passes": 3,
+     "swaps": 33,
+     "converged": true
+    },
+    "P4|R8": {
+     "passes": 2,
+     "swaps": 14,
+     "converged": true
+    },
+    "P5|R8": {
+     "passes": 3,
+     "swaps": 18,
+     "converged": true
+    },
+    "COAX|R32": {
+     "passes": 4,
+     "swaps": 69,
+     "converged": true
+    },
+    "NCOAX|R32": {
+     "passes": 2,
+     "swaps": 15,
+     "converged": true
+    },
+    "COAX8|R32": {
+     "passes": 3,
+     "swaps": 49,
+     "converged": true
+    },
+    "BCOAX|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R128": {
+     "passes": 4,
+     "swaps": 20,
+     "converged": true
+    },
+    "NCOAX|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R128": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    },
+    "BCOAX|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX|R512": {
+     "passes": 2,
+     "swaps": 2,
+     "converged": true
+    },
+    "BCOAX8|R512": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    },
+    "P1|R512": {
+     "passes": 2,
+     "swaps": 2,
+     "converged": true
+    },
+    "P2|R512": {
+     "passes": 2,
+     "swaps": 5,
+     "converged": true
+    },
+    "P3|R512": {
+     "passes": 2,
+     "swaps": 4,
+     "converged": true
+    },
+    "P4|R512": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    },
+    "P5|R512": {
+     "passes": 2,
+     "swaps": 3,
+     "converged": true
+    }
+   },
+   "files_read": [
+    "experiments/P7AT-20261113T213133591303Z-0605157511b24311919ddfab8ac89b2e/traces/b101-o301-fixed_tree-s501/calib_selected.int16.bin"
+   ]
+  },
+  {
+   "label": "b101-o301-learned_tree-s501",
+   "kind": "learned_tree",
+   "total": 1.3262598749715835,
+   "t": {
+    "A0": 0.11956133297644556,
+    "A8": 0.6973877499694936,
+    "null+An0": 0.1786694589536637,
+    "COAX|R1": 0.003985334013123065,
+    "NCOAX|R1": 0.007003458042163402,
+    "COAX8|R1": 0.010889041994232684,
+    "BCOAX|R1": 0.0032825410016812384,
+    "BCOAX8|R1": 0.008733582973945886,
+    "P1|R1": 0.0031168749555945396,
+    "P2|R1": 0.002984749968163669,
+    "P3|R1": 0.0029091659816913307,
+    "P4|R1": 0.002920707978773862,
+    "P5|R1": 0.0029204169986769557,
+    "COAX|R2": 0.006413041963241994,
+    "NCOAX|R2": 0.01521341601619497,
+    "COAX8|R2": 0.021781500021461397,
+    "BCOAX|R2": 0.004551458987407386,
+    "BCOAX8|R2": 0.009745709015987813,
+    "P1|R2": 0.0033576670102775097,
+    "P2|R2": 0.003402375034056604,
+    "P3|R2": 0.004890708019956946,
+    "P4|R2": 0.004330750030931085,
+    "P5|R2": 0.003451000025961548,
+    "COAX|R8": 0.00731416599592194,
+    "NCOAX|R8": 0.013361124962102622,
+    "COAX8|R8": 0.021969249995891005,
+    "BCOAX|R8": 0.003808500012382865,
+    "BCOAX8|R8": 0.00621937500545755,
+    "P1|R8": 0.0028082499629817903,
+    "P2|R8": 0.0027887909673154354,
+    "P3|R8": 0.002985708008054644,
+    "P4|R8": 0.00300437503028661,
+    "P5|R8": 0.003217332996428013,
+    "COAX|R32": 0.0064851659699343145,
+    "NCOAX|R32": 0.01035195798613131,
+    "COAX8|R32": 0.01697304198751226,
+    "BCOAX|R32": 0.0019957919721491635,
+    "BCOAX8|R32": 0.004068541980814189,
+    "P1|R32": 0.002084582985844463,
+    "P2|R32": 0.00208695896435529,
+    "P3|R32": 0.0020561250275932252,
+    "P4|R32": 0.002026250003837049,
+    "P5|R32": 0.002018416009377688,
+    "COAX|R128": 0.004746291961055249,
+    "NCOAX|R128": 0.006286541989538819,
+    "COAX8|R128": 0.007777334016282111,
+    "BCOAX|R128": 0.0018122500041499734,
+    "BCOAX8|R128": 0.003737584047485143,
+    "P1|R128": 0.0021668329718522727,
+    "P2|R128": 0.0022213750053197145,
+    "P3|R128": 0.002044042048510164,
+    "P4|R128": 0.001991666969843209,
+    "P5|R128": 0.0019974169554188848,
+    "COAX|R512": 0.0030360419768840075,
+    "NCOAX|R512": 0.004643000022042543,
+    "COAX8|R512": 0.0060384999960660934,
+    "BCOAX|R512": 0.002053083968348801,
+    "BCOAX8|R512": 0.004611582960933447,
+    "P1|R512": 0.0023418329656124115,
+    "P2|R512": 0.0022389579680748284,
+    "P3|R512": 0.0022160829976201057,
+    "P4|R512": 0.0022059580078348517,
+    "P5|R512": 0.00220529199577868
+   },
+   "info": {
+    "COAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R1": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R2": {
+     "passes": 3,
+     "swaps": 31,
+     "converged": true
+    },
+    "NCOAX|R2": {
+     "passes": 3,
+     "swaps": 23,
+     "converged": true
+    },
+    "COAX8|R2": {
+     "passes": 3,
+     "swaps": 45,
+     "converged": true
+    },
+    "BCOAX|R2": {
+     "passes": 3,
+     "swaps": 20,
+     "converged": true
+    },
+    "BCOAX8|R2": {
+     "passes": 2,
+     "swaps": 27,
+     "converged": true
+    },
+    "P1|R2": {
+     "passes": 2,
+     "swaps": 14,
+     "converged": true
+    },
+    "P2|R2": {
+     "passes": 2,
+     "swaps": 18,
+     "converged": true
+    },
+    "P3|R2": {
+     "passes": 3,
+     "swaps": 23,
+     "converged": true
+    },
+    "P4|R2": {
+     "passes": 3,
+     "swaps": 19,
+     "converged": true
+    },
+    "P5|R2": {
+     "passes": 2,
+     "swaps": 13,
+     "converged": true
+    },
+    "COAX|R8": {
+     "passes": 3,
+     "swaps": 54,
+     "converged": true
+    },
+    "NCOAX|R8": {
+     "passes": 3,
+     "swaps": 18,
+     "converged": true
+    },
+    "COAX8|R8": {
+     "passes": 3,
+     "swaps": 67,
+     "converged": true
+    },
+    "BCOAX|R8": {
+     "passes": 3,
+     "swaps": 23,
+     "converged": true
+    },
+    "BCOAX8|R8": {
+     "passes": 2,
+     "swaps": 5,
+     "converged": true
+    },
+    "P1|R8": {
+     "passes": 2,
+     "swaps": 5,
+     "converged": true
+    },
+    "P2|R8": {
+     "passes": 2,
+     "swaps": 6,
+     "converged": true
+    },
+    "P3|R8": {
+     "passes": 2,
+     "swaps": 13,
+     "converged": true
+    },
+    "P4|R8": {
+     "passes": 2,
+     "swaps": 13,
+     "converged": true
+    },
+    "P5|R8": {
+     "passes": 3,
+     "swaps": 10,
+     "converged": true
+    },
+    "COAX|R32": {
+     "passes": 2,
+     "swaps": 8,
+     "converged": true
+    },
+    "NCOAX|R32": {
+     "passes": 2,
+     "swaps": 9,
+     "converged": true
+    },
+    "COAX8|R32": {
+     "passes": 3,
+     "swaps": 10,
+     "converged": true
+    },
+    "BCOAX|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R32": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P2|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P3|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P4|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P5|R128": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "NCOAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "COAX8|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "BCOAX8|R512": {
+     "passes": 1,
+     "swaps": 0,
+     "converged": true
+    },
+    "P1|R512": {
+     "passes": 2,
+     "swaps": 2,
+     "converged": true
+    },
+    "P2|R512": {
+     "passes": 2,
+     "swaps": 2,
+     "converged": true
+    },
+    "P3|R512": {
+     "passes": 2,
+     "swaps": 3,
+     "converged": true
+    },
+    "P4|R512": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    },
+    "P5|R512": {
+     "passes": 2,
+     "swaps": 1,
+     "converged": true
+    }
+   },
+   "files_read": [
+    "experiments/P7AT-20261113T213133591303Z-0605157511b24311919ddfab8ac89b2e/traces/b101-o301-learned_tree-s501/calib_selected.int16.bin"
+   ]
+  }
+ ]
+}

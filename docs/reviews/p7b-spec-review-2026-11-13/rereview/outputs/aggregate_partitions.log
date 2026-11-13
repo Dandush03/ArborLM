@@ -1,0 +1,77 @@
+All quantities: calibration stream, in-sample (fit on all 512 contexts, warm 256, count 256), same-query affinity, greedy + registered refinement. NOT registered outcomes.
+
+Refinement: 3780 layouts (R=2 and R=8), max passes used 7, not converged within 12: 0
+  swaps ('B', 'R2C32'): mean 36.1 max 67
+  swaps ('B', 'R8C8'): mean 27.9 max 55
+  swaps ('COAX', 'R2C32'): mean 51.3 max 96
+  swaps ('COAX', 'R8C8'): mean 100.7 max 201
+  swaps ('Mi', 'R2C32'): mean 33.6 max 66
+  swaps ('Mi', 'R8C8'): mean 24.8 max 60
+  swaps ('Pi', 'R2C32'): mean 34.1 max 68
+  swaps ('Pi', 'R8C8'): mean 20.5 max 71
+  swaps ('Xi', 'R2C32'): mean 30.4 max 62
+  swaps ('Xi', 'R8C8'): mean 16.3 max 52
+  m(COAX refined)/m(greedy) R2C32 flat: 0.9828 [0.963,1.000]
+  m(COAX refined)/m(greedy) R2C32 fixed_tree: 0.9805 [0.946,1.014]
+  m(COAX refined)/m(greedy) R2C32 learned_tree: 0.9830 [0.949,1.007]
+  m(COAX refined)/m(greedy) R8C8 flat: 0.9687 [0.897,1.008]
+  m(COAX refined)/m(greedy) R8C8 fixed_tree: 0.9695 [0.910,1.051]
+  m(COAX refined)/m(greedy) R8C8 learned_tree: 0.9685 [0.867,1.070]
+
+PART analogue (trees): m_B = L-BCOAX, m_P = mean of 5 registered partition layouts
+key tie kind | mean mB/mean mP  cells parents | per-partition min..max | Jensen | CV across 5 (mean/median/max) | range/mean (mean/max) | below all 5 | clause1 clause2
+R2C32|asc|fixed_tree         | 0.616 27/27 9/9 | 0.608..0.627 | 0.611 | 0.045/0.038/0.098 | 0.111/0.234 | 27 | True True
+R2C32|asc|learned_tree       | 0.589 27/27 9/9 | 0.583..0.602 | 0.577 | 0.058/0.054/0.159 | 0.144/0.393 | 27 | True True
+R2C32|desc|fixed_tree        | 0.608 27/27 9/9 | 0.600..0.619 | 0.603 | 0.045/0.038/0.100 | 0.110/0.237 | 27 | True True
+R2C32|desc|learned_tree      | 0.581 27/27 9/9 | 0.575..0.592 | 0.569 | 0.058/0.053/0.160 | 0.143/0.399 | 27 | True True
+R8C8|asc|fixed_tree          | 0.282 27/27 9/9 | 0.279..0.285 | 0.279 | 0.063/0.053/0.167 | 0.157/0.354 | 27 | True True
+R8C8|asc|learned_tree        | 0.257 27/27 9/9 | 0.255..0.259 | 0.254 | 0.062/0.062/0.157 | 0.155/0.367 | 27 | True True
+R8C8|desc|fixed_tree         | 0.282 27/27 9/9 | 0.279..0.286 | 0.280 | 0.069/0.061/0.178 | 0.174/0.402 | 27 | True True
+R8C8|desc|learned_tree       | 0.258 27/27 9/9 | 0.256..0.260 | 0.255 | 0.074/0.073/0.194 | 0.184/0.424 | 27 | True True
+
+Stronger nulls (trees): profile-matched partitions (branch popularity profile kept, membership scrambled in 16-rank bins), and 'exploited structure' m(actual,L)/m(null,L)
+key tie kind | mB/mean mM cells parents | per-M min..max | CV(M) | pop.cost B / P / M | exploited B/P (ratio, cells, parents) | exploited B/M
+R2C32|asc|fixed_tree         | 0.719 27/27 9/9 | 0.716..0.723 | 0.035 | 1.052 / 1.331 / 1.178 | 0.768 27/27 9/9 | 0.800 27/27 9/9
+R2C32|asc|learned_tree       | 0.736 27/27 9/9 | 0.729..0.742 | 0.039 | 1.065 / 1.474 / 1.218 | 0.785 27/27 9/9 | 0.835 27/27 9/9
+R2C32|desc|fixed_tree        | 0.716 27/27 9/9 | 0.713..0.720 | 0.035 | 1.068 / 1.366 / 1.195 | 0.767 27/27 9/9 | 0.796 27/27 9/9
+R2C32|desc|learned_tree      | 0.732 27/27 9/9 | 0.725..0.738 | 0.038 | 1.081 / 1.509 / 1.235 | 0.780 27/27 9/9 | 0.829 27/27 9/9
+R8C8|asc|fixed_tree          | 0.419 27/27 9/9 | 0.414..0.427 | 0.058 | 1.279 / 2.262 / 1.597 | 0.463 27/27 9/9 | 0.520 27/27 9/9
+R8C8|asc|learned_tree        | 0.463 27/27 9/9 | 0.451..0.471 | 0.074 | 1.281 / 2.755 / 1.698 | 0.504 27/27 9/9 | 0.598 27/27 9/9
+R8C8|desc|fixed_tree         | 0.428 27/27 9/9 | 0.424..0.436 | 0.056 | 1.342 / 2.458 / 1.672 | 0.486 27/27 9/9 | 0.531 27/27 9/9
+R8C8|desc|learned_tree       | 0.470 27/27 9/9 | 0.458..0.480 | 0.075 | 1.351 / 2.984 / 1.760 | 0.521 27/27 9/9 | 0.598 27/27 9/9
+
+Operating characteristics, trees: all C(25,5) = 53,130 five-subsets of 25 random partitions
+key tie kind | per-partition aggregate ratio over 25: mean, SD, min, max | P(clause1) P(clause2) P(disagree) | subset-mean ratio: min..max
+R2C32 asc fixed_tree   | 0.617 0.0066 0.603 0.628 | 1.000 1.000 0.000 | 0.607..0.626
+R2C32 asc learned_tree | 0.593 0.0081 0.582 0.615 | 1.000 1.000 0.000 | 0.584..0.605
+R2C32 desc fixed_tree   | 0.609 0.0064 0.595 0.620 | 1.000 1.000 0.000 | 0.600..0.618
+R2C32 desc learned_tree | 0.585 0.0079 0.573 0.605 | 1.000 1.000 0.000 | 0.575..0.596
+R8C8 asc fixed_tree   | 0.282 0.0028 0.277 0.288 | 1.000 1.000 0.000 | 0.278..0.286
+R8C8 asc learned_tree | 0.259 0.0037 0.254 0.268 | 1.000 1.000 0.000 | 0.255..0.265
+R8C8 desc fixed_tree   | 0.282 0.0033 0.276 0.289 | 1.000 1.000 0.000 | 0.278..0.287
+R8C8 desc learned_tree | 0.260 0.0043 0.254 0.271 | 1.000 1.000 0.000 | 0.255..0.267
+
+Flat checkpoints: m(partition)/m(L-COAX), ratio of means, per registered partition and CV across five
+  R2C32 asc: per-partition 1.520, 1.512, 1.499, 1.513, 1.511; CV mean 0.030
+  R2C32 desc: per-partition 1.545, 1.535, 1.522, 1.537, 1.534; CV mean 0.030
+  R8C8 asc: per-partition 2.978, 2.966, 2.947, 2.955, 2.958; CV mean 0.043
+  R8C8 desc: per-partition 3.047, 3.028, 2.996, 3.021, 3.013; CV mean 0.048
+
+HB/HU calibration analogues (E = m(actual, L)/m(reviewer null, L-FREQ), x = ln calibration effective slots)
+comp key tie kind | rho cells(tree<) parents | b (SE) | a+b*xbar | rho_adj | per-arch slope flat / tree | class
+HB R2C32 asc fixed_tree   | 0.999 14/27 4/9 | -0.026 (0.014) | 0.715 | 0.988 | -0.021 / -0.030 | WITHIN 10%
+HB R2C32 asc learned_tree | 1.032 10/27 4/9 | -0.062 (0.024) | 0.725 | 0.992 | -0.021 / -0.108 | WITHIN 10%
+HB R2C32 desc fixed_tree   | 1.000 14/27 5/9 | -0.014 (0.015) | 0.725 | 0.993 | -0.017 / -0.012 | WITHIN 10%
+HB R2C32 desc learned_tree | 1.027 10/27 4/9 | -0.050 (0.024) | 0.734 | 0.996 | -0.017 / -0.089 | WITHIN 10%
+HB R8C8 asc fixed_tree   | 1.088  5/27 2/9 | -0.205 (0.024) | 0.548 | 0.964 | -0.137 / -0.272 | WITHIN 10%
+HB R8C8 asc learned_tree | 1.208  2/27 0/9 | -0.233 (0.039) | 0.569 | 0.999 | -0.137 / -0.345 | INTERMEDIATE
+HB R8C8 desc fixed_tree   | 1.108  5/27 1/9 | -0.201 (0.025) | 0.588 | 0.994 | -0.167 / -0.233 | INTERMEDIATE
+HB R8C8 desc learned_tree | 1.222  1/27 0/9 | -0.246 (0.042) | 0.613 | 1.016 | -0.167 / -0.337 | INTERMEDIATE
+HU R2C32 asc fixed_tree   | 0.967 23/27 9/9 | -0.032 (0.011) | 0.716 | 0.953 | -0.021 / -0.042 | WITHIN 10%
+HU R2C32 asc learned_tree | 1.006 11/27 4/9 | -0.038 (0.018) | 0.720 | 0.982 | -0.021 / -0.057 | WITHIN 10%
+HU R2C32 desc fixed_tree   | 0.964 23/27 9/9 | -0.021 (0.011) | 0.726 | 0.955 | -0.017 / -0.026 | WITHIN 10%
+HU R2C32 desc learned_tree | 0.997 14/27 6/9 | -0.027 (0.018) | 0.729 | 0.980 | -0.017 / -0.038 | WITHIN 10%
+HU R8C8 asc fixed_tree   | 0.998 15/27 4/9 | -0.158 (0.018) | 0.540 | 0.906 | -0.137 / -0.179 | WITHIN 10%
+HU R8C8 asc learned_tree | 1.120  5/27 0/9 | -0.227 (0.039) | 0.568 | 0.924 | -0.137 / -0.331 | INTERMEDIATE
+HU R8C8 desc fixed_tree   | 1.002 16/27 4/9 | -0.149 (0.019) | 0.580 | 0.920 | -0.167 / -0.131 | WITHIN 10%
+HU R8C8 desc learned_tree | 1.117  4/27 0/9 | -0.237 (0.041) | 0.611 | 0.927 | -0.167 / -0.317 | INTERMEDIATE

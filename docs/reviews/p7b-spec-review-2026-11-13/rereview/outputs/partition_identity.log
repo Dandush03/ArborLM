@@ -1,0 +1,21 @@
+3.12.14
+91601 group-id sha256 0ae2804b84b4ecc130c4860b5f5da2c5b75ecbcfe6b01cee5062e07c0769fcef shuffled-list sha256 ae626b43df264708466a8afc9c2b5434c3db053e7b57f27800b9674192b16487 first5 [3015, 764, 2932, 3304, 1000]
+91602 group-id sha256 1c3710a9123245697138c597ced80043ee2ef1e3d4a62bb095cd7b66010ece85 shuffled-list sha256 0d310a05d82ef6eba8cc5adbeba16a88d74a5221353eb0208c1e755f3230e9f3 first5 [797, 1872, 2551, 2136, 1169]
+91603 group-id sha256 806f4a0b146196c93f68e7146d9cab31915b5df3d79efd56906778e255a08e75 shuffled-list sha256 55cbff61076689e78f030d374b741aa28f448484694f51d3f65dbc56db183af5 first5 [2227, 513, 1251, 2329, 3480]
+91604 group-id sha256 5ed106a5370d2afadd118230986a1ecf1b47343b99279f70954eb3b12f2f73c1 shuffled-list sha256 98142918ba5f6ef34e6b9d3efc1f27a7c5ea9fd821bfb2b862641145af6f25a2 first5 [1301, 2684, 0, 3044, 921]
+91605 group-id sha256 75b8bee3da6934b1d463e5445f9f75d5656befe6be6f61f8e4d812beeaf4c8ff shuffled-list sha256 8d55366cd4d23a08e651161638e0b0cc34dbee0ad13764e3181ffa2b5db26a0c first5 [2137, 3126, 428, 4039, 1203]
+91601 vs 91602: identical partition False; max group overlap 24/256
+91601 vs 91603: identical partition False; max group overlap 25/256
+91601 vs 91604: identical partition False; max group overlap 26/256
+91601 vs 91605: identical partition False; max group overlap 27/256
+91602 vs 91603: identical partition False; max group overlap 32/256
+91602 vs 91604: identical partition False; max group overlap 25/256
+91602 vs 91605: identical partition False; max group overlap 27/256
+91603 vs 91604: identical partition False; max group overlap 27/256
+91603 vs 91605: identical partition False; max group overlap 26/256
+91604 vs 91605: identical partition False; max group overlap 33/256
+91601 max slots shared by a group and a real branch 25 (expected 16)
+91602 max slots shared by a group and a real branch 26 (expected 16)
+91603 max slots shared by a group and a real branch 26 (expected 16)
+91604 max slots shared by a group and a real branch 26 (expected 16)
+91605 max slots shared by a group and a real branch 28 (expected 16)

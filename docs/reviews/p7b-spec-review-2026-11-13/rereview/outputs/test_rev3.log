@@ -1,0 +1,4 @@
+specific swap: [[3, 1], [2, 0]] {'passes': 2, 'swaps': 1, 'converged': True}
+random cases ok; converged 300 of 300
+zero affinity ok
+partitions ok
