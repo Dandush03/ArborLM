@@ -292,21 +292,55 @@ def test_evaluation_uses_independent_token_weighted_nll_and_preserves_state() ->
     torch_rng = torch.get_rng_state().clone()
     with torch.no_grad():
         logits, _ = model(rows[:, :-1])
-        expected = (
-            F.cross_entropy(
-                logits.reshape(-1, 256), rows[:, 1:].reshape(-1), reduction="sum"
-            ).item()
-            / rows[:, 1:].numel()
-        )
+        token_losses = torch.logsumexp(logits.double(), dim=-1) - logits.double().gather(
+            -1, rows[:, 1:, None]
+        ).squeeze(-1)
+        expected = token_losses.sum().item() / rows[:, 1:].numel()
     result = evaluate(model, rows, expected_targets=rows[:, 1:].numel())
     assert result["target_tokens"] == 36
-    assert result["nll"] == pytest.approx(expected, abs=1e-7, rel=0)
+    # Evaluation uses actual 8+1 float32 batch reductions; the double oracle
+    # intentionally sums per-token losses independently, so allow float32
+    # kernel/reduction roundoff while remaining far below a meaningful NLL shift.
+    assert result["nll"] == pytest.approx(expected, abs=2e-6, rel=0)
     assert result["nll_units"] == "nats_per_byte"
     assert result["byte_perplexity"] == pytest.approx(torch.exp(torch.tensor(expected)).item())
     assert model.training
     _assert_snapshot(model, model_before)
     assert random.getstate() == python_rng
     assert _bitwise_equal(torch.get_rng_state(), torch_rng)
+
+
+def test_evaluation_weights_unequal_batches_by_token_count() -> None:
+    class KnownLogitModel(torch.nn.Module):
+        memory = None
+
+        def forward(self, tokens: torch.Tensor) -> tuple[torch.Tensor, None]:
+            logits = torch.zeros((*tokens.shape, 256), dtype=torch.float32)
+            is_last = tokens[:, 0] == 8
+            logits[~is_last, :, 1] = 10.0
+            logits[is_last, :, 2] = -10.0
+            return logits, None
+
+    rows = torch.zeros((9, 5), dtype=torch.int64)
+    rows[:, 0] = torch.arange(9)
+    rows[:8, 1:] = 1
+    rows[8, 1:] = 2
+    logits = torch.zeros((9, 4, 256), dtype=torch.float64)
+    logits[:8, :, 1] = 10.0
+    logits[8, :, 2] = -10.0
+    targets = rows[:, 1:]
+    token_losses = torch.logsumexp(logits, dim=-1) - logits.gather(
+        -1, targets.unsqueeze(-1)
+    ).squeeze(-1)
+    expected_weighted = token_losses.sum().item() / targets.numel()
+    first_batch_mean = token_losses[:8].mean().item()
+    last_batch_mean = token_losses[8:].mean().item()
+    incorrect_unweighted_batch_mean = (first_batch_mean + last_batch_mean) / 2
+
+    result = evaluate(KnownLogitModel(), rows, expected_targets=36)  # type: ignore[arg-type]
+
+    assert result["nll"] == pytest.approx(expected_weighted, abs=2e-6, rel=0)
+    assert abs(result["nll"] - incorrect_unweighted_batch_mean) > 1.0
 
 
 def test_causal_prefix_logits_are_unchanged_by_future_token_perturbation() -> None:
