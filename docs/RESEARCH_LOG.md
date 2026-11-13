@@ -1,6 +1,6 @@
 # ArborLM — Research Log
 
-Chronological, append-only notes. Scientific decisions also go into reviewed ADRs. **There are no experimental results yet.**
+Chronological, append-only notes. Scientific decisions also go into reviewed ADRs. **There were no experimental results at project initialization; subsequent run records and their limitations are recorded below.**
 
 ## 2026-11-12 — Origin and project definition
 
@@ -58,3 +58,10 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - Root independently reconstructed the selected UTF-8 byte chunks and matched both arrays and rank/row/offset identities. Evidence is in `results/p1-preflight-2026-11-12/`.
 - Source/config/spec are frozen before trial. Root authorizes the exact ADR-0005 command under its registered CPU/RSS/token/time bounds. No observed pilot loss was used to select thresholds or change settings.
 - At the human's request, each completed run will be reported in chat with observed loss/runtime and a bounded interpretation, and completed checkpoints will be pushed to GitHub.
+
+### P1 completed — promotion threshold missed
+
+- All 18 preregistered runs completed within limits; each consumed 131,072 targets. Every run was reported in chat and all six controls for seeds 42/43/44 were preserved/pushed. See `results/p1-2026-11-12/` for full-precision raw results and the authorized reviewer interpretation.
+- Learned-tree mean validation NLL: 2.578732837; small dense: 2.588018314. Improvement 0.0092854773 nats/byte is below the required 0.01. **Promotion gate FAILED; do not scale this configuration under this protocol.** The gate was not relaxed.
+- Learned routing beat fixed routing for all seeds and avoided the registered gross-collapse condition. Parameter-matched dense had lower loss for all seeds and lower observed training time. These are bounded observations, not significance, novelty, inference speed or general concept proof/disproof.
+- ADR-0006 preregisters a separate post-screen diagnostic on existing checkpoints, with no additional training. Its outcome cannot reverse the original gate. Independent artifact/arithmetic audit is pending; Astra review remains NOT PERFORMED.

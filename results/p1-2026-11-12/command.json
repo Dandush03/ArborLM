@@ -1,0 +1,1 @@
+["uv", "run", "--locked", "--extra", "pilot", "python", "-m", "arborlm", "pilot", "--config", "configs/p1_ram_screen.toml", "--data-dir", "data/wikitext2", "--output-root", "experiments"]

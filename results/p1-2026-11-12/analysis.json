@@ -1,0 +1,91 @@
+{
+  "summary": {
+    "dense_small": {
+      "nll_by_seed": [
+        2.5801559425890446,
+        2.5945100858807564,
+        2.5893889144062996
+      ],
+      "mean_nll": 2.5880183142920337,
+      "sample_sd": 0.0072745629363329045,
+      "mean_train_seconds": 0.8395078196772374
+    },
+    "dense_parameter_matched": {
+      "nll_by_seed": [
+        2.560002725571394,
+        2.570664782077074,
+        2.5758863277733326
+      ],
+      "mean_nll": 2.5688512784739337,
+      "sample_sd": 0.008095603820365109,
+      "mean_train_seconds": 2.625694805329355
+    },
+    "flat": {
+      "nll_by_seed": [
+        2.5792964696884155,
+        2.6566922180354595,
+        2.6532003581523895
+      ],
+      "mean_nll": 2.629729681958755,
+      "sample_sd": 0.043711325149091255,
+      "mean_train_seconds": 1.9136016386716317
+    },
+    "product_key": {
+      "nll_by_seed": [
+        2.579872354865074,
+        2.601106345653534,
+        2.5948654785752296
+      ],
+      "mean_nll": 2.591948059697946,
+      "sample_sd": 0.010913482069451861,
+      "mean_train_seconds": 1.360444277660766
+    },
+    "fixed_tree": {
+      "nll_by_seed": [
+        2.582552544772625,
+        2.6366424411535263,
+        2.593845598399639
+      ],
+      "mean_nll": 2.6043468614419303,
+      "sample_sd": 0.02853307934199709,
+      "mean_train_seconds": 7.405005930670693
+    },
+    "learned_tree": {
+      "nll_by_seed": [
+        2.568486038595438,
+        2.5855609364807606,
+        2.582151535898447
+      ],
+      "mean_nll": 2.5787328369915485,
+      "sample_sd": 0.00903624153675465,
+      "mean_train_seconds": 7.459394222319436
+    }
+  },
+  "gates": {
+    "all18_complete_finite_correct_tokens": true,
+    "learned_trains_and_router_updates": true,
+    "within_best_flat_plus_0_02": true,
+    "within_parameter_matched_dense_plus_0_02": true,
+    "improves_small_dense_by_at_least_0_01": false,
+    "routing_no_gross_collapse": true
+  },
+  "promotion_passed": false,
+  "small_dense_improvement_by_seed": [
+    0.011669903993606567,
+    0.008949149399995804,
+    0.007237378507852554
+  ],
+  "mean_small_dense_improvement": 0.009285477300484976,
+  "margin_below_required_improvement": 0.0007145226995150245,
+  "suite_terminal": {
+    "finished_utc": "2026-11-13T02:34:35.878465+00:00",
+    "peak_process_tree_rss_bytes": 517128192,
+    "process_wall_seconds": 92.93469937500777,
+    "reason": null,
+    "returncode": 0,
+    "rss_method": "sampled sum of psutil RSS for child and descendants, in bytes",
+    "rss_platform": "darwin",
+    "rss_poll_seconds": 0.1,
+    "status": "completed"
+  }
+}
