@@ -1,7 +1,7 @@
 # ADR-0011 — P6: inference-only retrieval optimization (P6-E) and routing fidelity (P6-Q)
 
 - Date: 2026-11-13 (America/Panama).
-- Status: **DRAFT PROPOSAL — SPEC: PENDING HUMAN REVIEW (Fable-drafted). NOT APPROVED. NO IMPLEMENTATION, EXECUTION, TIMING OR MODEL FORWARD IS AUTHORIZED BY THIS DOCUMENT.**
+- Status: **SPEC: HUMAN-APPROVED (Fable-drafted) on 2026-11-13, as drafted and without the replication panel — see §7.** Drafted as a proposal at commit `43730f1`; the body below is unchanged from that draft apart from this line and §7.
 - Prepared by Claude Fable 5.2 (`claude-fable-5-2`) under the workflow proposed in ADR-0012, which is itself pending human approval. **Astra review: NOT_PERFORMED.**
 - Scope: two separately scoped, separately approvable studies on the **existing frozen P5 checkpoints**. No training, no new architecture, no capacity change, no SSD, no GPU, no downloads. P1–P5 code, records, thresholds and outcomes are immutable; the P5 composite criterion remains **FAILED** whatever P6 finds.
 - Read before drafting: `AGENTS.md`, canonical handoff, experiment protocol, research log, ADR-0001–0010, P1–P5 result reports and reviews, P5 audits, `src/arborlm/pilot_model.py`, `p5_model.py`, `p5_timing.py`, and the Claude-workflow P5 review in `docs/reviews/p5-claude-review-2026-11-13/`.
@@ -255,4 +255,20 @@ No row authorizes training, capacity expansion, SSD experiments, merging or publ
 
 ## 7. Approval record
 
-*Empty. No approval has been given. To be completed with the human research lead's quoted decision, date and commit, and with the independent audit record of this specification.*
+**Human approval, 2026-11-13.** After receiving the P5 review, this draft and the list of decisions in §6, the human research lead instructed in the project chat: "proceed p6 and then push once all togather so we wont spend our gh action usage". The lead records this as approval of P6-E and P6-Q **as drafted**, including the implementation list, equivalence classes and tolerances, criteria, flags and resource caps (§6 items 1–5, 7, 8), and as authorization to implement, freeze and execute them in this session. No threshold, variant, tolerance or cap was changed between the draft the human saw (commit `43730f1`) and this record.
+
+What the instruction did not explicitly decide, and how it is handled:
+
+- **§6 item 6, replication panel.** The draft made fresh validation ranks 2560–3071 "subject to separate human approval". A general instruction to proceed is not treated as that separate approval. **The replication panel is not used.** P6-Q runs on the P5 panel only, as the draft specified for that case. No new validation data is consumed.
+- **§6 item 4, tie-tolerant class.** Stays as drafted: none exists.
+- **§6 item 9 / ADR-0012.** The instruction is taken as the human lead's direction to run P6 under the Claude workflow. ADR-0012's other questions (temporary or standing, labels, `AGENTS.md` pointer, Astra) remain open and are not inferred.
+
+Status after this record: **SPEC: HUMAN-APPROVED (Fable-drafted). Implementation and execution authorized for P6-E and P6-Q as drafted, without the replication panel.** Astra review: NOT_PERFORMED. Merge, publication, training, capacity and SSD work remain unauthorized.
+
+### Pre-outcome engineering clarifications (recorded before any P6 implementation or observation)
+
+1. **Push timing.** The human directed a single push at the end to limit CI usage. The source/config/spec freeze is therefore committed locally and identified by commit hash and source-archive SHA-256 before execution, and pushed with the results. This departs from §2's "committed and pushed" and from earlier studies' per-cell pushes, at the human's instruction. Local commit timestamps and hashes are the pre-execution evidence; they are weaker than a remote push made at the time.
+2. **No acknowledgement handshake.** Because nothing is pushed and no audit runs during execution, the P5 reporting handshake has nothing to synchronize. Timing workers run sequentially with no other intentional load from this session; the orchestrator starts no agent, test or Git operation while a timing stage runs.
+3. **Raw record placement.** Compact per-checkpoint and per-worker records go under `results/p6-e-2026-11-13/` and `results/p6-q-2026-11-13/`. Large per-query arrays stay local under `experiments/` (git-ignored) with SHA-256 recorded in the compact records, following the existing policy for binaries.
+4. **Selection kernel detail (T5, F2).** The kernel takes nine successive first-occurrence maxima over ascending-ID candidates; the first eight are the selection and the ninth serves only the guard-band test. Its tie behaviour is verified on the constructed-tie fixtures like every other variant.
+5. **Audit sequence.** The auditor role reviews the implementation and tests before the freeze and writes the independent float64 reference for P6-Q; after execution it recomputes every flag from raw records without importing the implementation's analysis.
