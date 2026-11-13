@@ -2,13 +2,14 @@
 
 **ArborLM** is a research proposal for a language model with **trainable hierarchical neural parameter memory**. The motivating hypothesis is that a model might learn to navigate a very large parameter-memory store while retrieving only a small, useful and physically local working set per token, potentially reducing data movement in SSD-backed inference.
 
-> **Scientific status: this configuration did not pass the promotion gate.** The broader hierarchical memory concept remains unproven, and scaling of this configuration has stopped. The human research lead authorized a Codex reviewer exception; Astra review was not performed.
+> **Scientific status: frozen-backbone memory helped, but the matched dense adapter did better.** The earlier promotion failure stands, the broader hierarchical memory concept remains unproven, and scaling is not authorized. The human research lead authorized a Codex reviewer exception; Astra review was not performed.
 
 - [E0 CPU baseline](results/e0-2026-11-12/) passed its training, evaluation and checkpoint reproducibility checks.
 - [18-run RAM screen](results/p1-2026-11-12/) found a mean learned-tree improvement of 0.0092854773 nats/byte over the small dense baseline, below the registered 0.01 required for promotion.
 - [12 frozen-checkpoint evaluations](results/memory-diagnostic-2026-11-12/) found mean validation loss increases of +0.002003993 nats/byte with memory disabled and +0.002146978 with values shuffled. Effects went in opposite directions across seeds, and both means were below the registered +0.005 threshold.
 - [36-run controlled follow-up](results/p2-2026-11-12/) found mean loss increases of +0.000693748 nats/byte with memory disabled and +0.000685635 with values shuffled. Both effects were positive in 22 of 27 learned runs; neither reached +0.005 in any run. All three registered descriptive flags were false. Most of the mean gain over controls trained without memory (0.006731979 nats/byte) persisted after disabling memory (0.006038231). Training outcomes varied, but the follow-up did not establish a strong retained memory benefit at this budget. The earlier promotion failure stands.
 - [36 longer-training continuations](results/p3-lt-2026-11-12/) improved validation loss for every learned run and control. Memory-dependence effects grew, but their mean changes and endpoint means remained below the registered 0.005 nats/byte thresholds. The endpoint quality guard passed; the two dependence flags failed.
+- [63-cell frozen-backbone comparison](results/p4-2026-11-12/) passed the registered capacity and slot-association criteria: mean loss fell by 0.021989 nats/byte versus the unchanged backbone and rose by 0.022222 when values were shuffled. The equal-parameter dense adapter had lower loss in all 27 matched pairs, so dense tolerance and the composite P4 criterion failed. P1–P3 outcomes are unchanged.
 
 ## Begin here
 
