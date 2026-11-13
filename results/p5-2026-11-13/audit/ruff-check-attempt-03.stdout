@@ -1,0 +1,25 @@
+UP038 Use `X | Y` in `isinstance` call instead of `(X, Y)`
+   --> results/p5-2026-11-13/audit/independent-arithmetic.py:461:24
+    |
+459 |             for name, value in derived.items():
+460 |                 reported = retrieval.get(name)
+461 |                 if not isinstance(reported, (int, float)) or not math.isclose(
+    |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+462 |                     float(reported), value, rel_tol=0, abs_tol=1e-12
+463 |                 ):
+    |
+help: Convert to `X | Y`
+
+F821 Undefined name `VARIANTS`
+   --> results/p5-2026-11-13/audit/independent-arithmetic.py:536:20
+    |
+534 |         "router_movement_l2",
+535 |     )
+536 |     for variant in VARIANTS:
+    |                    ^^^^^^^^
+537 |         group = [row for row in per_cell if row["variant"] == variant]
+538 |         summary[variant] = {}
+    |
+
+Found 2 errors.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).

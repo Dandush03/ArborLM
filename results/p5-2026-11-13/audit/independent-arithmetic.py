@@ -28,6 +28,7 @@ BASELINE, FLAT, FIXED, LEARNED, DENSE = (
     "dense",
 )
 MEMORIES = (FLAT, FIXED, LEARNED)
+VARIANTS = (*MEMORIES, DENSE)
 CONDITIONS = ("enabled", "disabled", "values_permuted", "joint_within_branch")
 ADDITION, FORWARD = "addition_forward", "model_forward"
 
@@ -195,6 +196,12 @@ def quality_rows(
                 **cell,
                 "final_nll": result["final"]["nll"],
                 "initial_nll": result["initial"]["nll"] if result["initial"] else None,
+                "final_retrieval": result["final"]["retrieval"],
+                "initial_retrieval": result["initial"]["retrieval"] if result["initial"] else None,
+                "gate_initial": result.get("gate_initial"),
+                "gate_final": result.get("gate_final"),
+                "gate_movement": result.get("gate_movement"),
+                "router_movement_l2": result.get("router_movement_l2"),
                 "interventions": values,
                 "targets": result["final"]["target_tokens"],
                 "training_targets": result["additional_training_targets"],
@@ -412,6 +419,149 @@ def arithmetic(indexed: dict[tuple[int, int, int, str], dict[str, Any]]) -> dict
             )
         },
     }
+
+
+def retrieval_audit(
+    indexed: dict[tuple[int, int, int, str], dict[str, Any]], errors: list[str]
+) -> dict[str, Any]:
+    per_cell = []
+
+    def entropy(counts: list[int]) -> tuple[float, float, float, int]:
+        total = sum(counts)
+        probabilities = [count / total for count in counts if count]
+        h = -math.fsum(p * math.log(p) for p in probabilities)
+        return math.exp(h), h / math.log(len(counts)), max(counts) / total, len(probabilities)
+
+    for key, row in indexed.items():
+        b, o, seed, variant = key
+        if variant == BASELINE:
+            continue
+        retrieval_sets = [("final", row["final_retrieval"])]
+        if row["initial_nll"] is not None:
+            retrieval_sets.insert(0, ("initial", row["initial_retrieval"]))
+        for phase, retrieval in retrieval_sets:
+            if retrieval is None:
+                per_cell.append(
+                    {
+                        "backbone": b,
+                        "order": o,
+                        "seed": seed,
+                        "variant": variant,
+                        "phase": phase,
+                        "nll": row["final_nll"] if phase == "final" else row["initial_nll"],
+                        "gate_initial": row["gate_initial"],
+                        "gate_final": row["gate_final"],
+                        "gate_movement": row["gate_movement"],
+                        "router_movement_l2": row["router_movement_l2"],
+                    }
+                )
+                continue
+            slots = retrieval.get("selected_slot_counts")
+            if (
+                not isinstance(slots, list)
+                or len(slots) != 4096
+                or retrieval.get("queries") != 32768
+            ):
+                errors.append(f"retrieval slot-count dimensions mismatch: {key}/{phase}")
+                continue
+            if sum(slots) != 262144:
+                errors.append(f"retrieval selected-slot total mismatch: {key}/{phase}")
+            effective, normalized, hottest, unique = entropy(slots)
+            derived = {
+                "effective_selected_slots": effective,
+                "selected_slot_entropy_normalized": normalized,
+                "hottest_selected_slot_fraction": hottest,
+                "unique_selected_slots": unique,
+            }
+            for name, value in derived.items():
+                reported = retrieval.get(name)
+                if not isinstance(reported, int | float) or not math.isclose(
+                    float(reported), value, rel_tol=0, abs_tol=1e-12
+                ):
+                    errors.append(f"retrieval count-derived metric mismatch: {key}/{phase}/{name}")
+            router_derived = {}
+            router = retrieval.get("router")
+            if variant in (FIXED, LEARNED):
+                if not isinstance(router, dict):
+                    errors.append(f"memory retrieval router metrics missing: {key}/{phase}")
+                    continue
+                branch_counts = router.get("selected_value_branch_counts")
+                top_counts = router.get("top1_branch_counts")
+                visited_counts = router.get("visited_branch_counts")
+                if (
+                    not isinstance(branch_counts, list)
+                    or len(branch_counts) != 16
+                    or not isinstance(top_counts, list)
+                    or len(top_counts) != 16
+                    or not isinstance(visited_counts, list)
+                    or len(visited_counts) != 16
+                ):
+                    errors.append(f"router count dimensions mismatch: {key}/{phase}")
+                    continue
+                slot_branches = [
+                    sum(slots[branch * 256 : (branch + 1) * 256]) for branch in range(16)
+                ]
+                if branch_counts != slot_branches or sum(branch_counts) != 262144:
+                    errors.append(f"router selected-value branch counts mismatch: {key}/{phase}")
+                if sum(top_counts) != 32768 or sum(visited_counts) != 65536:
+                    errors.append(f"router top1/visited totals mismatch: {key}/{phase}")
+                top_effective, top_entropy, top_hottest, top_unique = entropy(top_counts)
+                del top_effective
+                router_derived = {
+                    "normalized_top1_entropy": top_entropy,
+                    "hottest_top1_branch_fraction": top_hottest,
+                    "nonzero_top1_branches": top_unique,
+                }
+                for name, value in router_derived.items():
+                    if not math.isclose(float(router.get(name)), value, rel_tol=0, abs_tol=1e-12):
+                        errors.append(f"router count-derived metric mismatch: {key}/{phase}/{name}")
+            per_cell.append(
+                {
+                    "backbone": b,
+                    "order": o,
+                    "seed": seed,
+                    "variant": variant,
+                    "phase": phase,
+                    **derived,
+                    **router_derived,
+                    "reported_mean_normalized_query_router_entropy": (
+                        router.get("mean_normalized_query_router_entropy")
+                        if isinstance(router, dict)
+                        else None
+                    ),
+                    "nll": row["final_nll"] if phase == "final" else row["initial_nll"],
+                    "gate_initial": row["gate_initial"],
+                    "gate_final": row["gate_final"],
+                    "gate_movement": row["gate_movement"],
+                    "router_movement_l2": row["router_movement_l2"],
+                }
+            )
+    summary = {}
+    descriptive_metrics = (
+        "nll",
+        "effective_selected_slots",
+        "selected_slot_entropy_normalized",
+        "hottest_selected_slot_fraction",
+        "unique_selected_slots",
+        "normalized_top1_entropy",
+        "hottest_top1_branch_fraction",
+        "nonzero_top1_branches",
+        "reported_mean_normalized_query_router_entropy",
+        "gate_initial",
+        "gate_final",
+        "gate_movement",
+        "router_movement_l2",
+    )
+    for variant in VARIANTS:
+        group = [row for row in per_cell if row["variant"] == variant]
+        summary[variant] = {}
+        for phase in ("initial", "final"):
+            phase_rows = [row for row in group if row["phase"] == phase]
+            for metric in descriptive_metrics:
+                values = [float(row[metric]) for row in phase_rows if row.get(metric) is not None]
+                if values:
+                    summary[variant][f"{phase}_{metric}"] = distribution(values)
+    return {"per_cell": per_cell, "descriptive_by_variant": summary}
 
 
 def timing_records(
@@ -749,6 +899,7 @@ def main() -> int:
     errors: list[str] = []
     indexed = quality_rows(args.results, errors)
     quality = arithmetic(indexed) if indexed else {}
+    retrieval = retrieval_audit(indexed, errors) if indexed else {}
     reports, _ = timing_records(args.timing, errors)
     timing = summarize_timing(reports, errors) if reports else {}
     total_scientific_evaluations = sum(row["scientific_evaluations"] for row in indexed.values())
@@ -771,6 +922,7 @@ def main() -> int:
         "audit": "independent ADR-0010 arithmetic",
         "implementation_analysis_imported": False,
         "quality": quality,
+        "retrieval_descriptives": retrieval,
         "timing": timing,
         "accounting": {
             "scientific_evaluations": total_scientific_evaluations,

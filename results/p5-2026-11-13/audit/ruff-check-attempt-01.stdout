@@ -1,0 +1,111 @@
+E501 Line too long (107 > 100)
+   --> results/p5-2026-11-13/audit/independent-arithmetic.py:456:101
+    |
+454 |                 if round_id in group:
+455 |                     errors.append(
+456 |                         f"duplicate timing scope round in raw events: {path.parent}/{group_key}/{round_id}"
+    |                                                                                                     ^^^^^^^
+457 |                     )
+458 |                 group[round_id] = event["durations_ns"]
+    |
+
+E501 Line too long (103 > 100)
+   --> results/p5-2026-11-13/audit/independent-arithmetic.py:549:101
+    |
+547 |                     if aggregate.get(name) != value:
+548 |                         errors.append(
+549 |                             f"raw timing summary differs from report: {path.parent}/{group_key}/{name}"
+    |                                                                                                     ^^^
+550 |                         )
+551 |             if set(raw_summaries) != set(reported):
+    |
+
+E501 Line too long (114 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:473:101
+    |
+471 |                         elif not same_tensor(canonical[key], model_state[name]):
+472 |                             errors.append(
+473 |                                 f"fresh seed initialization differs across parents: {(b, o, seed, variant, name)}"
+    |                                                                                                     ^^^^^^^^^^^^^^
+474 |                             )
+475 |                 rng = states[b, o, seed, FLAT, 0]["torch_rng"]
+    |
+
+E501 Line too long (108 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:500:101
+    |
+498 |                     ):
+499 |                         errors.append(
+500 |                             f"trainable addition backbone differs from P5 baseline: {(b, o, seed, variant)}"
+    |                                                                                                     ^^^^^^^^
+501 |                         )
+502 |                 groups += 1
+    |
+
+E501 Line too long (110 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:796:101
+    |
+794 |                     ):
+795 |                         errors.append(
+796 |                             f"invalid traced value gather: {result_path}/{variant}/{size_label}/{batch_index}"
+    |                                                                                                     ^^^^^^^^^^
+797 |                         )
+798 |                         continue
+    |
+
+E501 Line too long (128 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:810:101
+    |
+808 |                     if actual_summary != expected_summary:
+809 |                         errors.append(
+810 |                             f"operand-derived logical-work summary mismatch: {result_path}/{variant}/{size_label}/{batch_index}"
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+811 |                         )
+812 |                     topk_shape = 4096 if variant == FLAT else 512
+    |
+
+E501 Line too long (121 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:824:101
+    |
+822 |                     ):
+823 |                         errors.append(
+824 |                             f"invalid top-8 score selection operands: {result_path}/{variant}/{size_label}/{batch_index}"
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^
+825 |                         )
+826 |                     if variant == FLAT:
+    |
+
+E501 Line too long (108 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:838:101
+    |
+836 |                         ):
+837 |                             errors.append(
+838 |                                 f"invalid flat score/key operands: {result_path}/{size_label}/{batch_index}"
+    |                                                                                                     ^^^^^^^^
+839 |                             )
+840 |                     else:
+    |
+
+E501 Line too long (124 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:861:101
+    |
+859 |                         ):
+860 |                             errors.append(
+861 |                                 f"invalid tree route/candidate operands: {result_path}/{variant}/{size_label}/{batch_index}"
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^
+862 |                             )
+863 |                     checked += 1
+    |
+
+E501 Line too long (101 > 100)
+   --> results/p5-2026-11-13/audit/independent-artifacts.py:918:101
+    |
+916 |                 if name not in loaded or not same_tensor(tensor, loaded[name]):
+917 |                     errors.append(
+918 |                         f"representative strict restore tensor differs: {identity_key}/{step}/{name}"
+    |                                                                                                     ^
+919 |                     )
+920 |             if optimizer is not None and not same_value(
+    |
+
+Found 10 errors.

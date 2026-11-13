@@ -16,6 +16,14 @@ source, config, test, result, ADR, packaging and lock paths. It checks both the
 current Git tip and on-disk bytes. No model call, network request or Git
 mutation is needed.
 
+After the final report changes README/research-log text, repeat this historical
+working-source check in an isolated checkout of
+`1862a2a311b894e5539fa722ce127f98b66a7afd`, before those documentation changes.
+Pass `--raw /absolute/path/to/the/original/P5HIER-suite` and
+`--journal /absolute/path/to/p5-push-journal.json` to use the retained local
+artifacts. The final documentation checkout intentionally differs from the
+95-file execution freeze; that difference is not a numerical-source change.
+
 The public [quality ledger](root-orchestration-ledger.json) contains just the
 117 checkpoint IDs and their registered order and status. The preserved
 [raw ACK files](root-orchestration-acks) contain the quality-stage and 36 timing

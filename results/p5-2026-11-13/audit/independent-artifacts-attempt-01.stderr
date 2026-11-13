@@ -1,0 +1,19 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/independent-artifacts.py", line 983, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/independent-artifacts.py", line 955, in main
+    identities = validate_source_and_inputs(cells, quality_suite, errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/results/p5-2026-11-13/audit/independent-artifacts.py", line 171, in validate_source_and_inputs
+    if (path / "source.diff").read_bytes() != b"":
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/p5-2026-11-13/b101-o301-baseline/source.diff'
