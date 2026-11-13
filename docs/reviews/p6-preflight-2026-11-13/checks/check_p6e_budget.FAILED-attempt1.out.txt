@@ -1,0 +1,14 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+synthetic cell load (512 panel rows, 3 NLL evaluations): 1.4 s
+equivalence run_cell (full-size synthetic panel): 13.5 s; classes={'flat': {'F1': 'STRICT', 'F2': 'STRICT'}, 'fixed_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}, 'learned_tree': {'T1': 'STRICT', 'T2': 'STRICT', 'T3': 'STRICT', 'T4': 'BOUNDED', 'T5': 'BOUNDED'}}
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-preflight-2026-11-13/checks/check_p6e_budget.py", line 67, in <module>
+    main()
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p6-preflight-2026-11-13/checks/check_p6e_budget.py", line 53, in main
+    ts.timing_worker(spec, child, pair)
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/p6_timing_study.py", line 271, in timing_worker
+    configure_cpu()
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/engine.py", line 24, in configure_cpu
+    torch.set_num_interop_threads(1)
+RuntimeError: Error: cannot set number of interop threads after parallel work has started or set_num_interop_threads called
+attempt 1 failed: auditor script called configure_cpu() before timing_worker(), which calls it again; torch refuses to set interop threads twice. Auditor mistake, not a defect of the code under audit.

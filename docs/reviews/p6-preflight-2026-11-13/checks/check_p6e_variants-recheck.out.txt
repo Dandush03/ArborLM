@@ -1,0 +1,68 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+fixed_tree scale=0.0: my_rule==reference selected: True
+  T1: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T2: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T3: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.012451171875
+  T4: selected_equal=True scores_bitwise=False maxabs=9.537e-07 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.012451171875
+  T5: selected_equal=True scores_bitwise=False maxabs=9.537e-07 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.012451171875
+  T3 contraction vs T2 bmm: bitwise=True frac_differ=0.0000 max_abs=0.000e+00 (guard needs < 5.0e-05)
+  T4 contraction vs T2 bmm: bitwise=False frac_differ=0.6701 max_abs=1.192e-06 (guard needs < 5.0e-05)
+fixed_tree scale=0.06: my_rule==reference selected: True
+  T1: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T2: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T3: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T4: selected_equal=True scores_bitwise=False maxabs=1.431e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T5: selected_equal=True scores_bitwise=False maxabs=1.431e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T3 contraction vs T2 bmm: bitwise=True frac_differ=0.0000 max_abs=0.000e+00 (guard needs < 5.0e-05)
+  T4 contraction vs T2 bmm: bitwise=False frac_differ=0.6694 max_abs=1.431e-06 (guard needs < 5.0e-05)
+fixed_tree scale=1.0: my_rule==reference selected: True
+  T1: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T2: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T3: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T4: selected_equal=True scores_bitwise=False maxabs=1.192e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.007568359375
+  T5: selected_equal=True scores_bitwise=False maxabs=1.192e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.007568359375
+  T3 contraction vs T2 bmm: bitwise=True frac_differ=0.0000 max_abs=0.000e+00 (guard needs < 5.0e-05)
+  T4 contraction vs T2 bmm: bitwise=False frac_differ=0.6698 max_abs=1.192e-06 (guard needs < 5.0e-05)
+learned_tree scale=0.0: my_rule==reference selected: True
+  T1: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T2: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T3: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.012451171875
+  T4: selected_equal=True scores_bitwise=False maxabs=9.537e-07 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.012451171875
+  T5: selected_equal=True scores_bitwise=False maxabs=9.537e-07 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.012451171875
+  T3 contraction vs T2 bmm: bitwise=True frac_differ=0.0000 max_abs=0.000e+00 (guard needs < 5.0e-05)
+  T4 contraction vs T2 bmm: bitwise=False frac_differ=0.6701 max_abs=1.192e-06 (guard needs < 5.0e-05)
+learned_tree scale=0.06: my_rule==reference selected: True
+  T1: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T2: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T3: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T4: selected_equal=True scores_bitwise=False maxabs=1.431e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T5: selected_equal=True scores_bitwise=False maxabs=1.431e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T3 contraction vs T2 bmm: bitwise=True frac_differ=0.0000 max_abs=0.000e+00 (guard needs < 5.0e-05)
+  T4 contraction vs T2 bmm: bitwise=False frac_differ=0.6694 max_abs=1.431e-06 (guard needs < 5.0e-05)
+learned_tree scale=1.0: my_rule==reference selected: True
+  T1: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T2: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=None
+  T3: selected_equal=True scores_bitwise=True maxabs=0.000e+00 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.0078125
+  T4: selected_equal=True scores_bitwise=False maxabs=1.192e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.007568359375
+  T5: selected_equal=True scores_bitwise=False maxabs=1.192e-06 branch_ids_bitwise=True cand_bitwise=True routes_bitwise=True fallback=0.007568359375
+  T3 contraction vs T2 bmm: bitwise=True frac_differ=0.0000 max_abs=0.000e+00 (guard needs < 5.0e-05)
+  T4 contraction vs T2 bmm: bitwise=False frac_differ=0.6698 max_abs=1.192e-06 (guard needs < 5.0e-05)
+flat scale=0.0 F1: selected_equal=True scores_bitwise=True
+flat scale=0.0 F2: selected_equal=True scores_bitwise=True
+flat scale=1.0 F1: selected_equal=True scores_bitwise=True
+flat scale=1.0 F2: selected_equal=True scores_bitwise=True
+fixture flat/flat_duplicate_rows: queries=37 queries_with_exact_top9_tie=13 boundary_8_9_ties=1 route_ties(top1=top2, top2=top3)=None
+fixture fixed_tree/tree_duplicate_keys_within_branch: queries=40 queries_with_exact_top9_tie=24 boundary_8_9_ties=6 route_ties(top1=top2, top2=top3)=(0, 0)
+fixture fixed_tree/tree_duplicate_keys_across_visited_branches: queries=32 queries_with_exact_top9_tie=11 boundary_8_9_ties=0 route_ties(top1=top2, top2=top3)=(32, 0)
+fixture fixed_tree/tree_duplicate_router_rows: queries=28 queries_with_exact_top9_tie=0 boundary_8_9_ties=0 route_ties(top1=top2, top2=top3)=(11, 10)
+fixture learned_tree/tree_duplicate_keys_within_branch: queries=40 queries_with_exact_top9_tie=24 boundary_8_9_ties=6 route_ties(top1=top2, top2=top3)=(0, 0)
+fixture learned_tree/tree_duplicate_keys_across_visited_branches: queries=32 queries_with_exact_top9_tie=11 boundary_8_9_ties=0 route_ties(top1=top2, top2=top3)=(32, 0)
+fixture learned_tree/tree_duplicate_router_rows: queries=28 queries_with_exact_top9_tie=0 boundary_8_9_ties=0 route_ties(top1=top2, top2=top3)=(11, 10)
+fingerprint detects no_grad in-place: True; full hash detects: True
+fingerprint detects .data in-place: False; full hash detects: True
+fingerprint detects detach() in-place: True; full hash detects: True
+fingerprint detects load_state_dict: True; full hash detects: True
+fingerprint detects .data write inside inference_mode: False
+guard cost binding=fingerprint: 3.8 us per call; T2 W8 lookup 5668 us (exploratory, one run, not registered)
+guard cost binding=hash: 103.3 us per call; T2 W8 lookup 6110 us (exploratory, one run, not registered)
