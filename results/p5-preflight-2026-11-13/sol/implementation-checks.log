@@ -1,0 +1,37 @@
++zsh:4> uv run --locked --extra pilot ruff check src/arborlm/hierarchy_ablation.py src/arborlm/p5_analysis.py src/arborlm/p5_checkpoint.py src/arborlm/p5_clock.py src/arborlm/p5_config.py src/arborlm/p5_data.py src/arborlm/p5_model.py src/arborlm/p5_parent.py src/arborlm/p5_timing.py tests/test_p5.py
+All checks passed!
++zsh:5> uv run --locked --extra pilot mypy src/arborlm
+Success: no issues found in 47 source files
++zsh:6> uv run --locked --extra pilot pytest tests/test_p5.py
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+collected 6 items
+
+tests/test_p5.py ......                                                  [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 6 passed, 1 warning in 6.76s =========================
++zsh:7> uv run --locked --extra pilot python -m arborlm.hierarchy_ablation --help
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+usage: hierarchy_ablation.py [-h] [--config CONFIG] --data-dir DATA_DIR
+                             --output-root OUTPUT_ROOT
+                             [--parent-suite PARENT_SUITE]
+                             [--results-root RESULTS_ROOT]
+
+Run the registered P5 hierarchy ablation
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --data-dir DATA_DIR
+  --output-root OUTPUT_ROOT
+  --parent-suite PARENT_SUITE
+  --results-root RESULTS_ROOT

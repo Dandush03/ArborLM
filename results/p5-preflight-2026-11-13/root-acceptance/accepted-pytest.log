@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 161 items
+
+tests/test_checkpoint.py ........                                        [  4%]
+tests/test_config_data.py ................                               [ 14%]
+tests/test_diagnose_memory.py ........                                   [ 19%]
+tests/test_fetch_wikitext.py .........                                   [ 25%]
+tests/test_independent_contract.py ....                                  [ 27%]
+tests/test_p2.py .......                                                 [ 32%]
+tests/test_p2_independent_contract.py .....                              [ 35%]
+tests/test_p3.py .....                                                   [ 38%]
+tests/test_p3_independent_contract.py ......                             [ 42%]
+tests/test_p4.py ........                                                [ 47%]
+tests/test_p4_independent_contract.py ...................                [ 59%]
+tests/test_p5.py ........                                                [ 63%]
+tests/test_p5_independent_contract.py .................................. [ 85%]
+..                                                                       [ 86%]
+tests/test_pilot.py ...................                                  [ 98%]
+tests/test_run_records.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+tests/test_p5_independent_contract.py::test_optimizer_rejects_group_splits_wrong_hyperparameters_and_membership
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_compile.py:53: UserWarning: optimizer contains a parameter group with duplicate parameters; in future, this will cause an error; see github.com/pytorch/pytorch/issues/40967 for more information
+    return disable_fn(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 161 passed, 2 warnings in 43.25s =======================

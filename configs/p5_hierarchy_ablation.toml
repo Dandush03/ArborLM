@@ -1,0 +1,71 @@
+schema_version = 1
+experiment_family = "P5_HIERARCHY_ABLATION"
+spec_reference = "docs/decisions/ADR-0010-hierarchical-memory-ablation.md"
+parent_spec_reference = "docs/decisions/ADR-0009-frozen-backbone-capacity.md"
+parent_suite = "P4CAP-20261113T043320081674Z-d109080245df457da81e95c6b7300ccd"
+parent_freeze = "812b3fd02d81124b0665cc96d1364a32e40d403d"
+parent_archive = "18ef61bc3608eed4382ba922dd02b714c9810279d8abed6227579be0b3a9f8c0"
+backbones = [101, 102, 103]
+orders = [301, 302, 303]
+addition_seeds = [501, 502, 503]
+variant_order = ["flat", "fixed_tree", "learned_tree", "dense"]
+baseline_seed = 0
+
+[model]
+backbone_parameters = 27392
+flat_parameters = 198145
+tree_router_scalars = 256
+dense_parameters = 198401
+dense_width = 3100
+gate = -2.0
+init_std = 0.02
+component_seed_offsets = [1000, 2000, 3000, 4000, 5000]
+memory = "unchanged-adr0005"
+
+[data]
+train_ranks = [0, 2048]
+validation_ranks = [2048, 2560]
+order = "exact-parent-two-cycles"
+
+[training]
+steps = 512
+batch = 8
+context = 64
+optimizer = "fresh-adr0005-AdamW-only-addition"
+checkpoint_steps = [0, 256, 512]
+evaluation_steps = [0, 512]
+
+[intervention]
+value_seed_offset = 60000
+joint_seed_offset = 70000
+joint_absolute_tolerance = 0.000001
+joint_relative_tolerance = 0.0
+
+[timing]
+batch_sizes = [8, 1]
+scopes = ["lookup_score_select", "addition_forward", "model_forward"]
+rounds = 8
+warmups = 2
+calls = 10
+median_resolution_ratio = 100
+round_median_ratio_limit = 1.25
+
+[analysis]
+effect_threshold = 0.005
+dense_tolerance = -0.005
+min_cells = 22
+min_parents = 8
+score_work_max_ratio = 0.25
+addition_time_max_ratio = 0.8
+model_time_max_ratio = 1.05
+identity_absolute_tolerance = 0.000000000001
+
+[limits]
+cell_seconds = 300
+quality_seconds = 1800
+timing_seconds = 600
+combined_seconds = 2400
+timing_quartet_seconds = 45
+timing_baseline_seconds = 15
+rss_bytes = 2147483648
+poll_seconds = 0.1

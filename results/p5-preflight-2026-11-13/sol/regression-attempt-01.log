@@ -1,0 +1,147 @@
++zsh:4> uv run --locked --extra pilot ruff check .
+F401 [*] `types.SimpleNamespace` imported but unused
+  --> tests/test_p5_independent_contract.py:12:19
+   |
+10 | import random
+11 | from pathlib import Path
+12 | from types import SimpleNamespace
+   |                   ^^^^^^^^^^^^^^^
+13 | from typing import Any
+   |
+help: Remove unused import: `types.SimpleNamespace`
+
+E501 Line too long (119 > 100)
+  --> tests/test_p5_independent_contract.py:60:101
+   |
+58 | …     names = p5_model.optimizer_names(model, optimizer)
+59 | …     assert sum(parameter.numel() for parameter in model.backbone.parameters()) == 27392
+60 | …     assert sum(parameter.numel() for parameter in model.parameters() if parameter.requires_grad) == trainable_count
+   |                                                                                                   ^^^^^^^^^^^^^^^^^^^
+61 | …     assert sum(parameter.numel() for group in optimizer.param_groups for parameter in group["params"]) == optimizer_count if optimiz…
+62 | …     assert len(names) == len(set(names))
+   |
+
+E501 Line too long (164 > 100)
+  --> tests/test_p5_independent_contract.py:61:101
+   |
+59 | …ne.parameters()) == 27392
+60 | …ters() if parameter.requires_grad) == trainable_count
+61 | …groups for parameter in group["params"]) == optimizer_count if optimizer else optimizer_count == 0
+   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+62 | …
+63 | …del.backbone.parameters())
+   |
+
+E501 Line too long (103 > 100)
+   --> tests/test_p5_independent_contract.py:197:101
+    |
+195 |     assert py_rng == random.getstate()
+196 |     assert torch.equal(torch_rng, torch.get_rng_state())
+197 |     assert all(torch.equal(a, b) for a, b in zip(model.parameters(), model2.parameters(), strict=True))
+    |                                                                                                     ^^^
+198 |     with pytest.raises(ValueError, match="identity|membership"):
+199 |         p5_checkpoint.restore(path, model2, optimizer2, {**identity, "synthetic": False})
+    |
+
+E501 Line too long (102 > 100)
+   --> tests/test_p5_independent_contract.py:251:101
+    |
+249 |     eval_impl = p5_model.evaluate
+250 |
+251 |     def small_eval(model: Model, rows: torch.Tensor, expected_targets: int = 32768) -> dict[str, Any]:
+    |                                                                                                     ^^
+252 |         return eval_impl(model, rows, expected_targets=rows.shape[0] * 64)
+    |
+
+E501 Line too long (113 > 100)
+   --> tests/test_p5_independent_contract.py:273:101
+    |
+271 |     monkeypatch.setattr(hierarchy_ablation, "_source_unchanged", lambda *_: True)
+272 |     monkeypatch.setattr(p5_model, "evaluate", small_eval)
+273 |     monkeypatch.setattr(arborlm.p5_data, "load_frozen", lambda *_: (synthetic_train, validation, validation, {}))
+    |                                                                                                     ^^^^^^^^^^^^^
+274 |     monkeypatch.setattr(arborlm.p5_parent, "verify_parent", lambda *_: parent)
+275 |     monkeypatch.setattr(arborlm.p5_parent, "extract_verified", lambda _: backbone)
+    |
+
+E501 Line too long (134 > 100)
+   --> tests/test_p5_independent_contract.py:296:101
+    |
+294 |     assert result["cell"] == p5_cell.fields()
+295 |     assert result["additional_training_targets"] == (0 if variant == BASELINE else 512)
+296 |     assert result["checkpoint_state_sha256"].keys() == ({"checkpoint-0"} if variant == BASELINE else {"checkpoint-0", "checkpoint-1"})
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+297 |     if variant == BASELINE:
+298 |         assert set(result["interventions"]) == {"enabled"}
+    |
+
+E501 Line too long (122 > 100)
+   --> tests/test_p5_independent_contract.py:311:101
+    |
+309 |     models = {variant: _model(variant) for variant in p5_config.VARIANTS}
+310 |     inputs = {
+311 |         size: tuple(torch.randint(0, 16, (size, 64), generator=torch.Generator().manual_seed(i + size)) for i in range(4))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^
+312 |         for size in (8, 1)
+313 |     }
+    |
+
+E501 Line too long (102 > 100)
+   --> tests/test_p5_independent_contract.py:326:101
+    |
+324 |     assert all(model.training == modes[variant] for variant, model in models.items())
+325 |     assert all(
+326 |         all(torch.equal(states[variant][name], value) for name, value in _tensor_state(model).items())
+    |                                                                                                     ^^
+327 |         for variant, model in models.items()
+328 |     )
+    |
+
+Found 9 errors.
+[*] 1 fixable with the `--fix` option.
++zsh:5> uv run --locked --extra pilot mypy src
+Success: no issues found in 47 source files
++zsh:6> uv run --locked --extra pilot pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.4.1, pluggy-1.7.0
+rootdir: /Users/daniellaloush/dandush03/ArborLM
+configfile: pyproject.toml
+testpaths: tests
+collected 148 items
+
+tests/test_checkpoint.py ........                                        [  5%]
+tests/test_config_data.py ................                               [ 16%]
+tests/test_diagnose_memory.py ........                                   [ 21%]
+tests/test_fetch_wikitext.py .........                                   [ 27%]
+tests/test_independent_contract.py ....                                  [ 30%]
+tests/test_p2.py .......                                                 [ 35%]
+tests/test_p2_independent_contract.py .....                              [ 38%]
+tests/test_p3.py .....                                                   [ 41%]
+tests/test_p3_independent_contract.py ......                             [ 45%]
+tests/test_p4.py ........                                                [ 51%]
+tests/test_p4_independent_contract.py ...................                [ 64%]
+tests/test_p5.py ......                                                  [ 68%]
+tests/test_p5_independent_contract.py ........................F          [ 85%]
+tests/test_pilot.py ...................                                  [ 97%]
+tests/test_run_records.py ...                                            [100%]
+
+=================================== FAILURES ===================================
+__________ test_ack_timing_deadline_is_not_recovered_by_external_wait __________
+
+tmp_path = PosixPath('/private/var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/pytest-of-daniellaloush/pytest-61/test_ack_timing_deadline_is_no0')
+
+>   ???
+E   Failed: DID NOT RAISE <class 'TimeoutError'>
+
+tests/test_p5_independent_contract.py:504: Failed
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_p5_independent_contract.py::test_ack_timing_deadline_is_not_recovered_by_external_wait
+================== 1 failed, 147 passed, 1 warning in 42.54s ===================
++zsh:7> uv run --locked --extra pilot python -m arborlm smoke --config configs/e0_cpu_smoke.toml --output-root experiments
+Recorded E0 smoke: /Users/daniellaloush/dandush03/ArborLM/experiments/E0-20261113T124019386667Z-dd95f779549449dc8a1c1ea7d5723ac5

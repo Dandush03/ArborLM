@@ -12,6 +12,10 @@ This audit independently reconstructed the pinned train/validation selection fro
 
 The complete machine-readable output, selected row IDs, hashes, and parent map are in `independent-data-parent-audit.json`. Raw stdout/stderr are retained alongside it. The stderr contains only a local PyTorch warning about optional NumPy being unavailable.
 
+## Temporal scope of the prior-use scan
+
+The scan for earlier declarations of ranks 2048–2559 was performed against the recorded pre-freeze repository/results inventory. P5 preflight manifests now exist and intentionally declare that interval, so rerunning the historical prior-use scan against the current tree will find P5 itself. Preserve this report and its original inventory/result snapshot as the evidence for the pre-freeze scan; do not interpret a post-freeze scan as evidence of prior use.
+
 ## Reproduction
 
 Run from the repository root with the pinned local dataset and registered P3/P4 artifacts present:
