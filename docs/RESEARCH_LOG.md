@@ -67,3 +67,11 @@ Chronological, append-only notes. Scientific decisions also go into reviewed ADR
 - ADR-0006 preregisters a separate post-screen diagnostic on existing checkpoints, with no additional training. Its outcome cannot reverse the original gate. Independent artifact/arithmetic audit is pending; Astra review remains NOT PERFORMED.
 
 - Subsequent Luna read-only artifact audit confirmed all 18 cells, target/event counts, arithmetic, identities and actual checkpoint hashes. One Git HEAD changed mid-suite because of a result-only push; the auditor verified identical source archive hashes and no code/config/spec/data changes. See the separate audit record; original metadata remains unchanged.
+
+### Frozen-memory diagnostic — inconsistent contribution
+
+- ADR-0006's 12 evaluations completed with zero training. All original replays and paired key/value permutations within branches reproduced the original validation NLL exactly; checkpoint files remained unchanged.
+- Disabling memory slightly improved loss in seeds 42 and 43 but worsened seed 44 by 0.0067755841 nats/byte. Shuffling values followed the same directions. Mean disabled delta was +0.0020039926; mean shuffled-value delta was +0.0021469779. Both missed the registered +0.005 diagnostic threshold.
+- Preserve the seed-44 positive dependence and the two opposite-sign outcomes. Useful memory contribution was not reliably demonstrated across seeds at this budget. Nonzero router gradients alone do not establish useful inference memory.
+- Results and all 12 raw records are in `results/memory-diagnostic-2026-11-12/`. Earlier promotion failure remains unchanged; scaling is stopped. The broad concept is unproven, not universally disproved. Human merge/publication approval remains pending and Astra review NOT PERFORMED.
+- Luna independently audited all 12 raw diagnostic records, target counts, lack of training events, arithmetic and current original checkpoint/index hashes; no discrepancy found. This is recorded separately as an engineering audit, not Astra scientific validation.
