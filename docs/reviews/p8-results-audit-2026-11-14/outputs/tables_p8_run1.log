@@ -1,0 +1,74 @@
+C01 A nll=2.363677 gain=0.023677 assoc=0.023045 neff=127.06 dist=391.33 x=[4.570,5.036]
+C01 B nll=2.345227 gain=0.022925 assoc=0.022166 neff=127.68 dist=396.33 x=[4.577,5.034]
+C02 A nll=2.363506 gain=0.023848 assoc=0.023872 neff=103.18 dist=397.50 x=[4.398,4.926]
+C02 B nll=2.345159 gain=0.022994 assoc=0.022948 neff=103.51 dist=395.00 x=[4.404,4.925]
+C03 A nll=2.364806 gain=0.022548 assoc=0.022850 neff=83.63 dist=312.33 x=[4.273,4.636]
+C03 B nll=2.346473 gain=0.021680 assoc=0.021920 neff=83.76 dist=308.50 x=[4.274,4.631]
+C04 A nll=2.374279 gain=0.013074 assoc=0.013104 neff=9.74 dist=17.83 x=[2.079,2.582] dNLL=+0.010602 above=6 gret=0.5522089736193423 aret=0.5686438519840807 U=0.0756 guard=False QUALITY-FAILED class=INCOMPLETE
+    null<0.05: {'R2|C32|asc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04'], 'R2|C32|desc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04'], 'R8|C8|asc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04'], 'R8|C8|desc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04']}
+C04 B nll=2.355272 gain=0.012881 assoc=0.012923 neff=9.73 dist=16.83 x=[2.079,2.580] dNLL=+0.010045 above=6 gret=0.5618583256061804 aret=0.5829873179657218 U=0.0752 guard=False QUALITY-FAILED class=INCOMPLETE
+    null<0.05: {'R2|C32|asc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04'], 'R2|C32|desc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04'], 'R8|C8|asc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04'], 'R8|C8|desc': ['b102-o302-s601-C04', 'b102-o302-s602-C04', 'b103-o303-s601-C04', 'b103-o303-s602-C04']}
+C05 A nll=2.376512 gain=0.010842 assoc=0.010420 neff=8.83 dist=19.50 x=[2.079,2.561] dNLL=+0.011706 above=6 gret=0.4808229546727337 aret=0.45601195905367486 U=0.1046 guard=False QUALITY-FAILED class=INCOMPLETE
+    null<0.05: {'R2|C32|asc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05'], 'R2|C32|desc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05'], 'R8|C8|asc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05'], 'R8|C8|desc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05']}
+C05 B nll=2.357106 gain=0.011046 assoc=0.010581 neff=8.82 dist=15.17 x=[2.079,2.560] dNLL=+0.010634 above=6 gret=0.5095194395867465 aret=0.48270207723719966 U=0.1044 guard=False QUALITY-FAILED class=INCOMPLETE
+    null<0.05: {'R2|C32|asc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05'], 'R2|C32|desc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05'], 'R8|C8|asc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05'], 'R8|C8|desc': ['b102-o302-s602-C05', 'b103-o303-s601-C05', 'b103-o303-s602-C05']}
+C06 A nll=2.367010 gain=0.020344 assoc=0.020304 neff=49.48 dist=103.17 x=[3.100,4.313] dNLL=+0.003333 above=1 gret=0.8592312896627682 aret=0.8810633820173825 U=0.3709 guard=True COLLAPSED class=COLLAPSED
+    R2|C32|asc: M=0.14941460942847745 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.14979136235603546 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.1427317754213343 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.14375775042086084 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C06'], 'R2|C32|desc': ['b101-o301-s601-C06'], 'R8|C8|asc': ['b101-o301-s601-C06'], 'R8|C8|desc': ['b101-o301-s601-C06']}
+C06 B nll=2.348642 gain=0.019511 assoc=0.019478 neff=49.84 dist=102.67 x=[3.109,4.318] dNLL=+0.003415 above=1 gret=0.8510577943731088 aret=0.8787235778581424 U=0.3718 guard=True COLLAPSED class=COLLAPSED
+    R2|C32|asc: M=0.151152588338518 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.15122825322657474 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.14462309014133287 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.14588960718823996 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C06'], 'R2|C32|desc': ['b101-o301-s601-C06'], 'R8|C8|asc': ['b101-o301-s601-C06'], 'R8|C8|desc': ['b101-o301-s601-C06']}
+C07 A nll=2.365740 gain=0.021614 assoc=0.021709 neff=45.63 dist=96.33 x=[3.420,4.097] dNLL=+0.000934 above=0 gret=0.9585701319379089 aret=0.9500443334483967 U=0.5384 guard=True rules 1-2 do not fire class=CONCENTRATION-ONLY
+    R2|C32|asc: M=0.16128134781096642 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.1611879609328284 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.18303135960816055 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.1889676806503634 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C07', 'b101-o301-s602-C07'], 'R2|C32|desc': ['b101-o301-s601-C07', 'b101-o301-s602-C07'], 'R8|C8|asc': ['b101-o301-s601-C07', 'b101-o301-s602-C07'], 'R8|C8|desc': ['b101-o301-s601-C07', 'b101-o301-s602-C07']}
+C07 B nll=2.347558 gain=0.020594 assoc=0.020762 neff=45.78 dist=93.00 x=[3.418,4.098] dNLL=+0.001086 above=0 gret=0.9499195148253783 aret=0.947179058564917 U=0.5392 guard=True rules 1-2 do not fire class=CONCENTRATION-ONLY
+    R2|C32|asc: M=0.16151088070033837 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.1618229008122787 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.18348064614446816 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.18891397657158188 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C07', 'b101-o301-s602-C07'], 'R2|C32|desc': ['b101-o301-s601-C07', 'b101-o301-s602-C07'], 'R8|C8|asc': ['b101-o301-s601-C07', 'b101-o301-s602-C07'], 'R8|C8|desc': ['b101-o301-s601-C07', 'b101-o301-s602-C07']}
+C08 A nll=2.367874 gain=0.019480 assoc=0.019438 neff=21.63 dist=32.83 x=[2.979,3.158] dNLL=+0.004197 above=2 gret=0.8227394713379137 aret=0.8434799268419089 U=0.1727 guard=False QUALITY-FAILED class=QUALITY-FAILED
+    R2|C32|asc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=5.318618488847522e-05 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=5.542200392110678e-05 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08'], 'R2|C32|desc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08'], 'R8|C8|asc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08'], 'R8|C8|desc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08']}
+C08 B nll=2.349592 gain=0.018561 assoc=0.018527 neff=21.60 dist=32.67 x=[2.978,3.155] dNLL=+0.004365 above=2 gret=0.8096117458429235 aret=0.8358165798816737 U=0.1715 guard=False QUALITY-FAILED class=QUALITY-FAILED
+    R2|C32|asc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08'], 'R2|C32|desc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08'], 'R8|C8|asc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08'], 'R8|C8|desc': ['b101-o301-s601-C08', 'b101-o301-s602-C08', 'b102-o302-s601-C08', 'b102-o302-s602-C08', 'b103-o303-s601-C08', 'b103-o303-s602-C08']}
+C09 A nll=2.368897 gain=0.018457 assoc=0.017936 neff=20.91 dist=37.67 x=[2.828,3.154] dNLL=+0.004091 above=2 gret=0.8185558980000618 aret=0.7849517179510143 U=0.2508 guard=False QUALITY-FAILED class=QUALITY-FAILED
+    R2|C32|asc: M=7.728273890026663e-05 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=8.770181383296791e-05 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.00021791918311437643 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.00024300262884662115 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09'], 'R2|C32|desc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09'], 'R8|C8|asc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09'], 'R8|C8|desc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09']}
+C09 B nll=2.350258 gain=0.017895 assoc=0.017273 neff=20.89 dist=34.83 x=[2.825,3.153] dNLL=+0.003785 above=1 gret=0.825393307427478 aret=0.7879702527369651 U=0.2502 guard=True COLLAPSED class=COLLAPSED
+    R2|C32|asc: M=7.760841896128892e-06 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=8.010638127433232e-06 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=6.305899168672293e-05 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=6.706608244657069e-05 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09'], 'R2|C32|desc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09'], 'R8|C8|asc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09'], 'R8|C8|desc': ['b101-o301-s601-C09', 'b101-o301-s602-C09', 'b102-o302-s601-C09', 'b102-o302-s602-C09', 'b103-o303-s601-C09', 'b103-o303-s602-C09']}
+C10 A nll=2.371535 gain=0.015818 assoc=0.015793 neff=20.09 dist=27.50 x=[2.619,3.135] dNLL=+0.006730 above=4 gret=0.7015444312705835 aret=0.6911424291643009 U=0.2385 guard=False QUALITY-FAILED class=QUALITY-FAILED
+    R2|C32|asc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10'], 'R2|C32|desc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10'], 'R8|C8|asc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10'], 'R8|C8|desc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10']}
+C10 B nll=2.352676 gain=0.015477 assoc=0.015451 neff=20.06 dist=27.33 x=[2.618,3.137] dNLL=+0.006203 above=5 gret=0.713871051661493 aret=0.7048701430759534 U=0.2378 guard=False QUALITY-FAILED class=QUALITY-FAILED
+    R2|C32|asc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R2|C32|desc: M=0.0 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|asc: M=1.0509831947787154e-05 E=None rho=None (None) pm=6 pe=None par=None
+    R8|C8|desc: M=1.1177680407761781e-05 E=None rho=None (None) pm=6 pe=None par=None
+    null<0.05: {'R2|C32|asc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10'], 'R2|C32|desc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10'], 'R8|C8|asc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10'], 'R8|C8|desc': ['b101-o301-s601-C10', 'b101-o301-s602-C10', 'b102-o302-s601-C10', 'b102-o302-s602-C10', 'b103-o303-s601-C10', 'b103-o303-s602-C10']}

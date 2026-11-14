@@ -1,0 +1,912 @@
+{
+ "freeze": {
+  "source_digest": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+  "py_files": 85,
+  "spec_sha256": "979274e915341327bcb10cebf69a218b3ad7447116f4a53ae82340e093fa40ba",
+  "spec_now_equal": true
+ },
+ "labels": 60,
+ "train_keys": [
+  "backbone_sha256_after",
+  "backbone_sha256_before",
+  "baseline_case",
+  "batch",
+  "case",
+  "cell",
+  "checkpoint_file_sha256",
+  "checkpoint_files",
+  "constants",
+  "data",
+  "data_dir_argument",
+  "dry_run",
+  "extra_backward_passes_per_update",
+  "gate",
+  "identity",
+  "index",
+  "key_movement_l2",
+  "label",
+  "objective",
+  "optimizer_parameter_names",
+  "parameters_trainable",
+  "peak_rss_bytes",
+  "provenance",
+  "proxy_monitor_batch_offset",
+  "proxy_values",
+  "router_movement_l2",
+  "schema",
+  "seeds",
+  "state_digests",
+  "status",
+  "steps",
+  "study",
+  "summary",
+  "training_seconds",
+  "utc_end",
+  "variant",
+  "wall_seconds"
+ ],
+ "train_digest_keys": [],
+ "source_spec_seen": {
+  "train": [
+   [
+    null,
+    null
+   ]
+  ],
+  "eval": [
+   [
+    "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "979274e915341327bcb10cebf69a218b3ad7447116f4a53ae82340e093fa40ba"
+   ]
+  ],
+  "sim": [
+   [
+    "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "979274e915341327bcb10cebf69a218b3ad7447116f4a53ae82340e093fa40ba"
+   ]
+  ]
+ },
+ "lambda": {
+  "b101-o301-s601-C01": null,
+  "b101-o301-s601-C02": null,
+  "b101-o301-s601-C03": null,
+  "b101-o301-s601-C04": null,
+  "b101-o301-s601-C05": null,
+  "b101-o301-s601-C06": null,
+  "b101-o301-s601-C07": null,
+  "b101-o301-s601-C08": null,
+  "b101-o301-s601-C09": null,
+  "b101-o301-s601-C10": null,
+  "b101-o301-s602-C01": null,
+  "b101-o301-s602-C02": null,
+  "b101-o301-s602-C03": null,
+  "b101-o301-s602-C04": null,
+  "b101-o301-s602-C05": null,
+  "b101-o301-s602-C06": null,
+  "b101-o301-s602-C07": null,
+  "b101-o301-s602-C08": null,
+  "b101-o301-s602-C09": null,
+  "b101-o301-s602-C10": null,
+  "b102-o302-s601-C01": null,
+  "b102-o302-s601-C02": null,
+  "b102-o302-s601-C03": null,
+  "b102-o302-s601-C04": null,
+  "b102-o302-s601-C05": null,
+  "b102-o302-s601-C06": null,
+  "b102-o302-s601-C07": null,
+  "b102-o302-s601-C08": null,
+  "b102-o302-s601-C09": null,
+  "b102-o302-s601-C10": null,
+  "b102-o302-s602-C01": null,
+  "b102-o302-s602-C02": null,
+  "b102-o302-s602-C03": null,
+  "b102-o302-s602-C04": null,
+  "b102-o302-s602-C05": null,
+  "b102-o302-s602-C06": null,
+  "b102-o302-s602-C07": null,
+  "b102-o302-s602-C08": null,
+  "b102-o302-s602-C09": null,
+  "b102-o302-s602-C10": null,
+  "b103-o303-s601-C01": null,
+  "b103-o303-s601-C02": null,
+  "b103-o303-s601-C03": null,
+  "b103-o303-s601-C04": null,
+  "b103-o303-s601-C05": null,
+  "b103-o303-s601-C06": null,
+  "b103-o303-s601-C07": null,
+  "b103-o303-s601-C08": null,
+  "b103-o303-s601-C09": null,
+  "b103-o303-s601-C10": null,
+  "b103-o303-s602-C01": null,
+  "b103-o303-s602-C02": null,
+  "b103-o303-s602-C03": null,
+  "b103-o303-s602-C04": null,
+  "b103-o303-s602-C05": null,
+  "b103-o303-s602-C06": null,
+  "b103-o303-s602-C07": null,
+  "b103-o303-s602-C08": null,
+  "b103-o303-s602-C09": null,
+  "b103-o303-s602-C10": null
+ },
+ "rss_train_eval_sim": {
+  "b101-o301-s601-C01": [
+   null,
+   422051840,
+   268894208
+  ],
+  "b101-o301-s601-C02": [
+   null,
+   421871616,
+   265224192
+  ],
+  "b101-o301-s601-C03": [
+   null,
+   428195840,
+   266502144
+  ],
+  "b101-o301-s601-C04": [
+   null,
+   421773312,
+   null
+  ],
+  "b101-o301-s601-C05": [
+   null,
+   421789696,
+   null
+  ],
+  "b101-o301-s601-C06": [
+   null,
+   422363136,
+   261586944
+  ],
+  "b101-o301-s601-C07": [
+   null,
+   422821888,
+   262963200
+  ],
+  "b101-o301-s601-C08": [
+   null,
+   421937152,
+   260407296
+  ],
+  "b101-o301-s601-C09": [
+   null,
+   422068224,
+   261783552
+  ],
+  "b101-o301-s601-C10": [
+   null,
+   422346752,
+   260096000
+  ],
+  "b101-o301-s602-C01": [
+   null,
+   422445056,
+   263651328
+  ],
+  "b101-o301-s602-C02": [
+   null,
+   423886848,
+   265076736
+  ],
+  "b101-o301-s602-C03": [
+   null,
+   422543360,
+   263946240
+  ],
+  "b101-o301-s602-C04": [
+   null,
+   421904384,
+   null
+  ],
+  "b101-o301-s602-C05": [
+   null,
+   422150144,
+   null
+  ],
+  "b101-o301-s602-C06": [
+   null,
+   422412288,
+   261668864
+  ],
+  "b101-o301-s602-C07": [
+   null,
+   422215680,
+   261898240
+  ],
+  "b101-o301-s602-C08": [
+   null,
+   421920768,
+   260702208
+  ],
+  "b101-o301-s602-C09": [
+   null,
+   421969920,
+   261767168
+  ],
+  "b101-o301-s602-C10": [
+   null,
+   422084608,
+   265027584
+  ],
+  "b102-o302-s601-C01": [
+   null,
+   422117376,
+   263929856
+  ],
+  "b102-o302-s601-C02": [
+   null,
+   424067072,
+   263634944
+  ],
+  "b102-o302-s601-C03": [
+   null,
+   423378944,
+   263438336
+  ],
+  "b102-o302-s601-C04": [
+   null,
+   421478400,
+   258801664
+  ],
+  "b102-o302-s601-C05": [
+   null,
+   423198720,
+   null
+  ],
+  "b102-o302-s601-C06": [
+   null,
+   422559744,
+   263012352
+  ],
+  "b102-o302-s601-C07": [
+   null,
+   422166528,
+   260980736
+  ],
+  "b102-o302-s601-C08": [
+   null,
+   421756928,
+   260898816
+  ],
+  "b102-o302-s601-C09": [
+   null,
+   421855232,
+   260833280
+  ],
+  "b102-o302-s601-C10": [
+   null,
+   421773312,
+   260734976
+  ],
+  "b102-o302-s602-C01": [
+   null,
+   421838848,
+   265093120
+  ],
+  "b102-o302-s602-C02": [
+   null,
+   423280640,
+   264519680
+  ],
+  "b102-o302-s602-C03": [
+   null,
+   423510016,
+   265191424
+  ],
+  "b102-o302-s602-C04": [
+   null,
+   422100992,
+   258326528
+  ],
+  "b102-o302-s602-C05": [
+   null,
+   421494784,
+   258801664
+  ],
+  "b102-o302-s602-C06": [
+   null,
+   423690240,
+   260505600
+  ],
+  "b102-o302-s602-C07": [
+   null,
+   422019072,
+   262340608
+  ],
+  "b102-o302-s602-C08": [
+   null,
+   421871616,
+   261488640
+  ],
+  "b102-o302-s602-C09": [
+   null,
+   421920768,
+   261160960
+  ],
+  "b102-o302-s602-C10": [
+   null,
+   421838848,
+   259555328
+  ],
+  "b103-o303-s601-C01": [
+   null,
+   421920768,
+   265011200
+  ],
+  "b103-o303-s601-C02": [
+   null,
+   422150144,
+   265420800
+  ],
+  "b103-o303-s601-C03": [
+   null,
+   422019072,
+   263766016
+  ],
+  "b103-o303-s601-C04": [
+   null,
+   422117376,
+   258228224
+  ],
+  "b103-o303-s601-C05": [
+   null,
+   422608896,
+   259719168
+  ],
+  "b103-o303-s601-C06": [
+   null,
+   421937152,
+   263045120
+  ],
+  "b103-o303-s601-C07": [
+   null,
+   422068224,
+   268206080
+  ],
+  "b103-o303-s601-C08": [
+   null,
+   422363136,
+   262045696
+  ],
+  "b103-o303-s601-C09": [
+   null,
+   421806080,
+   264912896
+  ],
+  "b103-o303-s601-C10": [
+   null,
+   421756928,
+   260620288
+  ],
+  "b103-o303-s602-C01": [
+   null,
+   421314560,
+   265191424
+  ],
+  "b103-o303-s602-C02": [
+   null,
+   422150144,
+   264601600
+  ],
+  "b103-o303-s602-C03": [
+   null,
+   422002688,
+   263831552
+  ],
+  "b103-o303-s602-C04": [
+   null,
+   422100992,
+   259457024
+  ],
+  "b103-o303-s602-C05": [
+   null,
+   421904384,
+   261750784
+  ],
+  "b103-o303-s602-C06": [
+   null,
+   422035456,
+   260587520
+  ],
+  "b103-o303-s602-C07": [
+   null,
+   428834816,
+   262832128
+  ],
+  "b103-o303-s602-C08": [
+   null,
+   422346752,
+   259538944
+  ],
+  "b103-o303-s602-C09": [
+   null,
+   422658048,
+   263929856
+  ],
+  "b103-o303-s602-C10": [
+   null,
+   422150144,
+   260849664
+  ]
+ },
+ "train_seconds": {
+  "b101-o301-s601-C01": 5.227652041998226,
+  "b101-o301-s601-C02": 15.796188665961381,
+  "b101-o301-s601-C03": 15.889764000021387,
+  "b101-o301-s601-C04": 13.075945208023768,
+  "b101-o301-s601-C05": 30.093630583025515,
+  "b101-o301-s601-C06": 13.435856249998324,
+  "b101-o301-s601-C07": 30.748557250015438,
+  "b101-o301-s601-C08": 20.179573959030677,
+  "b101-o301-s601-C09": 37.940643959038425,
+  "b101-o301-s601-C10": 47.238600541022606,
+  "b101-o301-s602-C01": 5.282055750023574,
+  "b101-o301-s602-C02": 16.504659207945224,
+  "b101-o301-s602-C03": 16.020409666001797,
+  "b101-o301-s602-C04": 12.593413624970708,
+  "b101-o301-s602-C05": 30.00875945802545,
+  "b101-o301-s602-C06": 13.508053082972765,
+  "b101-o301-s602-C07": 30.753580791992135,
+  "b101-o301-s602-C08": 19.7426878749975,
+  "b101-o301-s602-C09": 37.912889582978096,
+  "b101-o301-s602-C10": 48.0825986660202,
+  "b102-o302-s601-C01": 5.180840749992058,
+  "b102-o302-s601-C02": 16.422268541005906,
+  "b102-o302-s601-C03": 16.11358420801116,
+  "b102-o302-s601-C04": 13.28614933398785,
+  "b102-o302-s601-C05": 30.259442000009585,
+  "b102-o302-s601-C06": 13.660051167011261,
+  "b102-o302-s601-C07": 31.350473500031512,
+  "b102-o302-s601-C08": 20.437993833969813,
+  "b102-o302-s601-C09": 38.37063750001835,
+  "b102-o302-s601-C10": 47.44921533303568,
+  "b102-o302-s602-C01": 5.348314374976326,
+  "b102-o302-s602-C02": 16.424952916044276,
+  "b102-o302-s602-C03": 16.421632790996227,
+  "b102-o302-s602-C04": 12.774302291043568,
+  "b102-o302-s602-C05": 30.086791291018017,
+  "b102-o302-s602-C06": 13.33317379100481,
+  "b102-o302-s602-C07": 31.10507966700243,
+  "b102-o302-s602-C08": 20.01240491704084,
+  "b102-o302-s602-C09": 37.782382042030804,
+  "b102-o302-s602-C10": 47.389131999982055,
+  "b103-o303-s601-C01": 5.208055249997415,
+  "b103-o303-s601-C02": 16.12239179102471,
+  "b103-o303-s601-C03": 16.123545708018355,
+  "b103-o303-s601-C04": 12.883087916008662,
+  "b103-o303-s601-C05": 30.059974542004056,
+  "b103-o303-s601-C06": 13.327050166029949,
+  "b103-o303-s601-C07": 30.957805249956436,
+  "b103-o303-s601-C08": 19.728655375016388,
+  "b103-o303-s601-C09": 38.03313366702059,
+  "b103-o303-s601-C10": 47.65717062499607,
+  "b103-o303-s602-C01": 5.159025458036922,
+  "b103-o303-s602-C02": 16.224114541022573,
+  "b103-o303-s602-C03": 16.23262900003465,
+  "b103-o303-s602-C04": 12.708573250041809,
+  "b103-o303-s602-C05": 30.058028124971315,
+  "b103-o303-s602-C06": 13.269818541011773,
+  "b103-o303-s602-C07": 30.86425879097078,
+  "b103-o303-s602-C08": 19.745295416971203,
+  "b103-o303-s602-C09": 37.37479016603902,
+  "b103-o303-s602-C10": 47.356109874963295
+ },
+ "committed_vs_local": {
+  "identical": 639,
+  "different": [],
+  "missing_locally": []
+ },
+ "restore_gate": {
+  "cells": {
+   "b101-o301-s601-C01": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 336887808,
+    "reason": null,
+    "recorded_final_digest": "79a5e545394903b3adaf4fb28e43c4a7a482dff4a405c8da55fb01107eb011ff",
+    "restored_retrained_final_digest": "79a5e545394903b3adaf4fb28e43c4a7a482dff4a405c8da55fb01107eb011ff",
+    "result": {
+     "checkpoint_final_digest": "79a5e545394903b3adaf4fb28e43c4a7a482dff4a405c8da55fb01107eb011ff",
+     "dry_run": false,
+     "label": "b101-o301-s601-C01",
+     "passed": true,
+     "recorded_final_digest": "79a5e545394903b3adaf4fb28e43c4a7a482dff4a405c8da55fb01107eb011ff",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "79a5e545394903b3adaf4fb28e43c4a7a482dff4a405c8da55fb01107eb011ff",
+     "restored_step_digest": "48f136743093cb56d4c5448d115d9f611f37a05b38cbe4c0c861ba9b93b8c1ba",
+     "schema": "P8-restore-check-v1",
+     "seconds": 3.2473086249665357
+    },
+    "seconds": 4.342793249990791,
+    "status": "exited"
+   },
+   "b101-o301-s601-C02": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 468877312,
+    "reason": null,
+    "recorded_final_digest": "864f4265356750e41f4d81196218ceac2a31b7c31fc42b1186f5671169bb0a9a",
+    "restored_retrained_final_digest": "864f4265356750e41f4d81196218ceac2a31b7c31fc42b1186f5671169bb0a9a",
+    "result": {
+     "checkpoint_final_digest": "864f4265356750e41f4d81196218ceac2a31b7c31fc42b1186f5671169bb0a9a",
+     "dry_run": false,
+     "label": "b101-o301-s601-C02",
+     "passed": true,
+     "recorded_final_digest": "864f4265356750e41f4d81196218ceac2a31b7c31fc42b1186f5671169bb0a9a",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "864f4265356750e41f4d81196218ceac2a31b7c31fc42b1186f5671169bb0a9a",
+     "restored_step_digest": "5262b6e6cfb7d2738198b91bffa4d3194409d61ec6aed081e827e0d781d9e91f",
+     "schema": "P8-restore-check-v1",
+     "seconds": 8.522874124988448
+    },
+    "seconds": 9.6161925829947,
+    "status": "exited"
+   },
+   "b101-o301-s601-C03": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 450248704,
+    "reason": null,
+    "recorded_final_digest": "a7bc0ab543c8fef7a12bd261b859d7886dff636985cd8c660db514069e0d0254",
+    "restored_retrained_final_digest": "a7bc0ab543c8fef7a12bd261b859d7886dff636985cd8c660db514069e0d0254",
+    "result": {
+     "checkpoint_final_digest": "a7bc0ab543c8fef7a12bd261b859d7886dff636985cd8c660db514069e0d0254",
+     "dry_run": false,
+     "label": "b101-o301-s601-C03",
+     "passed": true,
+     "recorded_final_digest": "a7bc0ab543c8fef7a12bd261b859d7886dff636985cd8c660db514069e0d0254",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "a7bc0ab543c8fef7a12bd261b859d7886dff636985cd8c660db514069e0d0254",
+     "restored_step_digest": "9d7904ede4929ba4d3ddc1549cd9622c06c5357162551c1f14ecffbae4b24b17",
+     "schema": "P8-restore-check-v1",
+     "seconds": 8.449629083042964
+    },
+    "seconds": 9.619959125004243,
+    "status": "exited"
+   },
+   "b101-o301-s601-C04": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 371392512,
+    "reason": null,
+    "recorded_final_digest": "9d4b7c6733b17743a32e1471ddc038d6a39d963c879d90e21e234b73c27c4a3b",
+    "restored_retrained_final_digest": "9d4b7c6733b17743a32e1471ddc038d6a39d963c879d90e21e234b73c27c4a3b",
+    "result": {
+     "checkpoint_final_digest": "9d4b7c6733b17743a32e1471ddc038d6a39d963c879d90e21e234b73c27c4a3b",
+     "dry_run": false,
+     "label": "b101-o301-s601-C04",
+     "passed": true,
+     "recorded_final_digest": "9d4b7c6733b17743a32e1471ddc038d6a39d963c879d90e21e234b73c27c4a3b",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "9d4b7c6733b17743a32e1471ddc038d6a39d963c879d90e21e234b73c27c4a3b",
+     "restored_step_digest": "1ec1ed45f5f931baebea366b5387a5f8ff52ac163efdf8231d8788528c4bc782",
+     "schema": "P8-restore-check-v1",
+     "seconds": 6.995655625010841
+    },
+    "seconds": 8.193395249953028,
+    "status": "exited"
+   },
+   "b101-o301-s601-C05": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 479838208,
+    "reason": null,
+    "recorded_final_digest": "eb7e3df7c19d112601687e2283e59b3f15284c9ff77d3ccf227a28d84bf824e7",
+    "restored_retrained_final_digest": "eb7e3df7c19d112601687e2283e59b3f15284c9ff77d3ccf227a28d84bf824e7",
+    "result": {
+     "checkpoint_final_digest": "eb7e3df7c19d112601687e2283e59b3f15284c9ff77d3ccf227a28d84bf824e7",
+     "dry_run": false,
+     "label": "b101-o301-s601-C05",
+     "passed": true,
+     "recorded_final_digest": "eb7e3df7c19d112601687e2283e59b3f15284c9ff77d3ccf227a28d84bf824e7",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "eb7e3df7c19d112601687e2283e59b3f15284c9ff77d3ccf227a28d84bf824e7",
+     "restored_step_digest": "9b02db83aab0f08286b1041ebea46e8cacf8784bbdae9925d055fdede5e4d93d",
+     "schema": "P8-restore-check-v1",
+     "seconds": 15.657309750036802
+    },
+    "seconds": 17.08049179200316,
+    "status": "exited"
+   },
+   "b101-o301-s601-C06": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 369786880,
+    "reason": null,
+    "recorded_final_digest": "fce551406c9416ede9d2c7d17fa0beb5a95543dcf2f15aed04ddf1b42a8a9bf5",
+    "restored_retrained_final_digest": "fce551406c9416ede9d2c7d17fa0beb5a95543dcf2f15aed04ddf1b42a8a9bf5",
+    "result": {
+     "checkpoint_final_digest": "fce551406c9416ede9d2c7d17fa0beb5a95543dcf2f15aed04ddf1b42a8a9bf5",
+     "dry_run": false,
+     "label": "b101-o301-s601-C06",
+     "passed": true,
+     "recorded_final_digest": "fce551406c9416ede9d2c7d17fa0beb5a95543dcf2f15aed04ddf1b42a8a9bf5",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "fce551406c9416ede9d2c7d17fa0beb5a95543dcf2f15aed04ddf1b42a8a9bf5",
+     "restored_step_digest": "1010558faf7592398acd4a4a6a7f60e4001ec0375c57ee5e2ca61499215565b8",
+     "schema": "P8-restore-check-v1",
+     "seconds": 7.3817434999509715
+    },
+    "seconds": 8.693554791039787,
+    "status": "exited"
+   },
+   "b101-o301-s601-C07": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 481017856,
+    "reason": null,
+    "recorded_final_digest": "08d83b0e7e1efe3f213d49b13aa3ff71d84df85c4341fb00be74187719193c5b",
+    "restored_retrained_final_digest": "08d83b0e7e1efe3f213d49b13aa3ff71d84df85c4341fb00be74187719193c5b",
+    "result": {
+     "checkpoint_final_digest": "08d83b0e7e1efe3f213d49b13aa3ff71d84df85c4341fb00be74187719193c5b",
+     "dry_run": false,
+     "label": "b101-o301-s601-C07",
+     "passed": true,
+     "recorded_final_digest": "08d83b0e7e1efe3f213d49b13aa3ff71d84df85c4341fb00be74187719193c5b",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "08d83b0e7e1efe3f213d49b13aa3ff71d84df85c4341fb00be74187719193c5b",
+     "restored_step_digest": "a887c42964a843aa4d34dfcd5e36635d8110af7f915d1ed0156724377ca2f9e6",
+     "schema": "P8-restore-check-v1",
+     "seconds": 15.874038374982774
+    },
+    "seconds": 17.117439708963502,
+    "status": "exited"
+   },
+   "b101-o301-s601-C08": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 380469248,
+    "reason": null,
+    "recorded_final_digest": "cf44a1be78d229c2a7abcac37dd5044a96ac46d53011d680a83ba7a2e370a73e",
+    "restored_retrained_final_digest": "cf44a1be78d229c2a7abcac37dd5044a96ac46d53011d680a83ba7a2e370a73e",
+    "result": {
+     "checkpoint_final_digest": "cf44a1be78d229c2a7abcac37dd5044a96ac46d53011d680a83ba7a2e370a73e",
+     "dry_run": false,
+     "label": "b101-o301-s601-C08",
+     "passed": true,
+     "recorded_final_digest": "cf44a1be78d229c2a7abcac37dd5044a96ac46d53011d680a83ba7a2e370a73e",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "cf44a1be78d229c2a7abcac37dd5044a96ac46d53011d680a83ba7a2e370a73e",
+     "restored_step_digest": "2bde514e6e5a40f168371b595a00525e5c5526d2a473e286ee369b487417a3dc",
+     "schema": "P8-restore-check-v1",
+     "seconds": 10.624843041005079
+    },
+    "seconds": 11.813573249964975,
+    "status": "exited"
+   },
+   "b101-o301-s601-C09": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 483819520,
+    "reason": null,
+    "recorded_final_digest": "0adae2aeb3585dbfeb895345dd0f0ff39336baa4d5e64ca99ec2e8b64e0161fb",
+    "restored_retrained_final_digest": "0adae2aeb3585dbfeb895345dd0f0ff39336baa4d5e64ca99ec2e8b64e0161fb",
+    "result": {
+     "checkpoint_final_digest": "0adae2aeb3585dbfeb895345dd0f0ff39336baa4d5e64ca99ec2e8b64e0161fb",
+     "dry_run": false,
+     "label": "b101-o301-s601-C09",
+     "passed": true,
+     "recorded_final_digest": "0adae2aeb3585dbfeb895345dd0f0ff39336baa4d5e64ca99ec2e8b64e0161fb",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "0adae2aeb3585dbfeb895345dd0f0ff39336baa4d5e64ca99ec2e8b64e0161fb",
+     "restored_step_digest": "dc3f493e051e2f81d933993c496318b21611902f1e1e1cd4e95cb46f6cb8c342",
+     "schema": "P8-restore-check-v1",
+     "seconds": 19.481318458972964
+    },
+    "seconds": 20.760375375044532,
+    "status": "exited"
+   },
+   "b101-o301-s601-C10": {
+    "exit_code": 0,
+    "passed": true,
+    "peak_rss_bytes": 499908608,
+    "reason": null,
+    "recorded_final_digest": "ce83ef880658a0f34bee9f9a7503e0e72a97bf9493f619c584df5d3dab776877",
+    "restored_retrained_final_digest": "ce83ef880658a0f34bee9f9a7503e0e72a97bf9493f619c584df5d3dab776877",
+    "result": {
+     "checkpoint_final_digest": "ce83ef880658a0f34bee9f9a7503e0e72a97bf9493f619c584df5d3dab776877",
+     "dry_run": false,
+     "label": "b101-o301-s601-C10",
+     "passed": true,
+     "recorded_final_digest": "ce83ef880658a0f34bee9f9a7503e0e72a97bf9493f619c584df5d3dab776877",
+     "restored_from": "step-0256.pt",
+     "restored_run_final_digest": "ce83ef880658a0f34bee9f9a7503e0e72a97bf9493f619c584df5d3dab776877",
+     "restored_step_digest": "b562658575a69b9075015238efdf6649840bb16ecae982525cf90e7a4df630b2",
+     "schema": "P8-restore-check-v1",
+     "seconds": 24.0322251659818
+    },
+    "seconds": 25.281511750014033,
+    "status": "exited"
+   }
+  },
+  "gate": "ADR-0015 section 10 item 5 (run time)",
+  "passed": true,
+  "peak_aggregate_rss_bytes": 1793523712,
+  "run": "P8T-20261114T043005466913Z-5da1f4d298534e9390b007efd8d98156",
+  "schema": "P8-restore-gate-v1",
+  "utc": "2026-11-14T04:37:51.169867+00:00"
+ },
+ "problems": [
+  "b101-o301-s601-C01 train: source/spec None None",
+  "b101-o301-s601-C01: train outcome None",
+  "b101-o301-s601-C01: backbone digest None -> None",
+  "b101-o301-s601-C02 train: source/spec None None",
+  "b101-o301-s601-C02: train outcome None",
+  "b101-o301-s601-C02: backbone digest None -> None",
+  "b101-o301-s601-C03 train: source/spec None None",
+  "b101-o301-s601-C03: train outcome None",
+  "b101-o301-s601-C03: backbone digest None -> None",
+  "b101-o301-s601-C04 train: source/spec None None",
+  "b101-o301-s601-C04: train outcome None",
+  "b101-o301-s601-C04: backbone digest None -> None",
+  "b101-o301-s601-C05 train: source/spec None None",
+  "b101-o301-s601-C05: train outcome None",
+  "b101-o301-s601-C05: backbone digest None -> None",
+  "b101-o301-s601-C06 train: source/spec None None",
+  "b101-o301-s601-C06: train outcome None",
+  "b101-o301-s601-C06: backbone digest None -> None",
+  "b101-o301-s601-C07 train: source/spec None None",
+  "b101-o301-s601-C07: train outcome None",
+  "b101-o301-s601-C07: backbone digest None -> None",
+  "b101-o301-s601-C08 train: source/spec None None",
+  "b101-o301-s601-C08: train outcome None",
+  "b101-o301-s601-C08: backbone digest None -> None",
+  "b101-o301-s601-C09 train: source/spec None None",
+  "b101-o301-s601-C09: train outcome None",
+  "b101-o301-s601-C09: backbone digest None -> None",
+  "b101-o301-s601-C10 train: source/spec None None",
+  "b101-o301-s601-C10: train outcome None",
+  "b101-o301-s601-C10: backbone digest None -> None",
+  "b101-o301-s602-C01 train: source/spec None None",
+  "b101-o301-s602-C01: train outcome None",
+  "b101-o301-s602-C01: backbone digest None -> None",
+  "b101-o301-s602-C02 train: source/spec None None",
+  "b101-o301-s602-C02: train outcome None",
+  "b101-o301-s602-C02: backbone digest None -> None",
+  "b101-o301-s602-C03 train: source/spec None None",
+  "b101-o301-s602-C03: train outcome None",
+  "b101-o301-s602-C03: backbone digest None -> None",
+  "b101-o301-s602-C04 train: source/spec None None",
+  "b101-o301-s602-C04: train outcome None",
+  "b101-o301-s602-C04: backbone digest None -> None",
+  "b101-o301-s602-C05 train: source/spec None None",
+  "b101-o301-s602-C05: train outcome None",
+  "b101-o301-s602-C05: backbone digest None -> None",
+  "b101-o301-s602-C06 train: source/spec None None",
+  "b101-o301-s602-C06: train outcome None",
+  "b101-o301-s602-C06: backbone digest None -> None",
+  "b101-o301-s602-C07 train: source/spec None None",
+  "b101-o301-s602-C07: train outcome None",
+  "b101-o301-s602-C07: backbone digest None -> None",
+  "b101-o301-s602-C08 train: source/spec None None",
+  "b101-o301-s602-C08: train outcome None",
+  "b101-o301-s602-C08: backbone digest None -> None",
+  "b101-o301-s602-C09 train: source/spec None None",
+  "b101-o301-s602-C09: train outcome None",
+  "b101-o301-s602-C09: backbone digest None -> None",
+  "b101-o301-s602-C10 train: source/spec None None",
+  "b101-o301-s602-C10: train outcome None",
+  "b101-o301-s602-C10: backbone digest None -> None",
+  "b102-o302-s601-C01 train: source/spec None None",
+  "b102-o302-s601-C01: train outcome None",
+  "b102-o302-s601-C01: backbone digest None -> None",
+  "b102-o302-s601-C02 train: source/spec None None",
+  "b102-o302-s601-C02: train outcome None",
+  "b102-o302-s601-C02: backbone digest None -> None",
+  "b102-o302-s601-C03 train: source/spec None None",
+  "b102-o302-s601-C03: train outcome None",
+  "b102-o302-s601-C03: backbone digest None -> None",
+  "b102-o302-s601-C04 train: source/spec None None",
+  "b102-o302-s601-C04: train outcome None",
+  "b102-o302-s601-C04: backbone digest None -> None",
+  "b102-o302-s601-C05 train: source/spec None None",
+  "b102-o302-s601-C05: train outcome None",
+  "b102-o302-s601-C05: backbone digest None -> None",
+  "b102-o302-s601-C06 train: source/spec None None",
+  "b102-o302-s601-C06: train outcome None",
+  "b102-o302-s601-C06: backbone digest None -> None",
+  "b102-o302-s601-C07 train: source/spec None None",
+  "b102-o302-s601-C07: train outcome None",
+  "b102-o302-s601-C07: backbone digest None -> None",
+  "b102-o302-s601-C08 train: source/spec None None",
+  "b102-o302-s601-C08: train outcome None",
+  "b102-o302-s601-C08: backbone digest None -> None",
+  "b102-o302-s601-C09 train: source/spec None None",
+  "b102-o302-s601-C09: train outcome None",
+  "b102-o302-s601-C09: backbone digest None -> None",
+  "b102-o302-s601-C10 train: source/spec None None",
+  "b102-o302-s601-C10: train outcome None",
+  "b102-o302-s601-C10: backbone digest None -> None",
+  "b102-o302-s602-C01 train: source/spec None None",
+  "b102-o302-s602-C01: train outcome None",
+  "b102-o302-s602-C01: backbone digest None -> None",
+  "b102-o302-s602-C02 train: source/spec None None",
+  "b102-o302-s602-C02: train outcome None",
+  "b102-o302-s602-C02: backbone digest None -> None",
+  "b102-o302-s602-C03 train: source/spec None None",
+  "b102-o302-s602-C03: train outcome None",
+  "b102-o302-s602-C03: backbone digest None -> None",
+  "b102-o302-s602-C04 train: source/spec None None",
+  "b102-o302-s602-C04: train outcome None",
+  "b102-o302-s602-C04: backbone digest None -> None",
+  "b102-o302-s602-C05 train: source/spec None None",
+  "b102-o302-s602-C05: train outcome None",
+  "b102-o302-s602-C05: backbone digest None -> None",
+  "b102-o302-s602-C06 train: source/spec None None",
+  "b102-o302-s602-C06: train outcome None",
+  "b102-o302-s602-C06: backbone digest None -> None",
+  "b102-o302-s602-C07 train: source/spec None None",
+  "b102-o302-s602-C07: train outcome None",
+  "b102-o302-s602-C07: backbone digest None -> None",
+  "b102-o302-s602-C08 train: source/spec None None",
+  "b102-o302-s602-C08: train outcome None",
+  "b102-o302-s602-C08: backbone digest None -> None",
+  "b102-o302-s602-C09 train: source/spec None None",
+  "b102-o302-s602-C09: train outcome None",
+  "b102-o302-s602-C09: backbone digest None -> None",
+  "b102-o302-s602-C10 train: source/spec None None",
+  "b102-o302-s602-C10: train outcome None",
+  "b102-o302-s602-C10: backbone digest None -> None",
+  "b103-o303-s601-C01 train: source/spec None None",
+  "b103-o303-s601-C01: train outcome None",
+  "b103-o303-s601-C01: backbone digest None -> None",
+  "b103-o303-s601-C02 train: source/spec None None",
+  "b103-o303-s601-C02: train outcome None",
+  "b103-o303-s601-C02: backbone digest None -> None",
+  "b103-o303-s601-C03 train: source/spec None None",
+  "b103-o303-s601-C03: train outcome None",
+  "b103-o303-s601-C03: backbone digest None -> None",
+  "b103-o303-s601-C04 train: source/spec None None",
+  "b103-o303-s601-C04: train outcome None",
+  "b103-o303-s601-C04: backbone digest None -> None",
+  "b103-o303-s601-C05 train: source/spec None None",
+  "b103-o303-s601-C05: train outcome None",
+  "b103-o303-s601-C05: backbone digest None -> None",
+  "b103-o303-s601-C06 train: source/spec None None",
+  "b103-o303-s601-C06: train outcome None",
+  "b103-o303-s601-C06: backbone digest None -> None",
+  "b103-o303-s601-C07 train: source/spec None None",
+  "b103-o303-s601-C07: train outcome None",
+  "b103-o303-s601-C07: backbone digest None -> None",
+  "b103-o303-s601-C08 train: source/spec None None",
+  "b103-o303-s601-C08: train outcome None",
+  "b103-o303-s601-C08: backbone digest None -> None",
+  "b103-o303-s601-C09 train: source/spec None None",
+  "b103-o303-s601-C09: train outcome None",
+  "b103-o303-s601-C09: backbone digest None -> None",
+  "b103-o303-s601-C10 train: source/spec None None",
+  "b103-o303-s601-C10: train outcome None",
+  "b103-o303-s601-C10: backbone digest None -> None",
+  "b103-o303-s602-C01 train: source/spec None None",
+  "b103-o303-s602-C01: train outcome None",
+  "b103-o303-s602-C01: backbone digest None -> None",
+  "b103-o303-s602-C02 train: source/spec None None",
+  "b103-o303-s602-C02: train outcome None",
+  "b103-o303-s602-C02: backbone digest None -> None",
+  "b103-o303-s602-C03 train: source/spec None None",
+  "b103-o303-s602-C03: train outcome None",
+  "b103-o303-s602-C03: backbone digest None -> None",
+  "b103-o303-s602-C04 train: source/spec None None",
+  "b103-o303-s602-C04: train outcome None",
+  "b103-o303-s602-C04: backbone digest None -> None",
+  "b103-o303-s602-C05 train: source/spec None None",
+  "b103-o303-s602-C05: train outcome None",
+  "b103-o303-s602-C05: backbone digest None -> None",
+  "b103-o303-s602-C06 train: source/spec None None",
+  "b103-o303-s602-C06: train outcome None",
+  "b103-o303-s602-C06: backbone digest None -> None",
+  "b103-o303-s602-C07 train: source/spec None None",
+  "b103-o303-s602-C07: train outcome None",
+  "b103-o303-s602-C07: backbone digest None -> None",
+  "b103-o303-s602-C08 train: source/spec None None",
+  "b103-o303-s602-C08: train outcome None",
+  "b103-o303-s602-C08: backbone digest None -> None",
+  "b103-o303-s602-C09 train: source/spec None None",
+  "b103-o303-s602-C09: train outcome None",
+  "b103-o303-s602-C09: backbone digest None -> None",
+  "b103-o303-s602-C10 train: source/spec None None",
+  "b103-o303-s602-C10: train outcome None",
+  "b103-o303-s602-C10: backbone digest None -> None"
+ ]
+}

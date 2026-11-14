@@ -1,0 +1,194 @@
+hand-constructed checks: PASS
+{
+ "labels": 5,
+ "compared": 129,
+ "max_abs_diff": 0.0,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "report": {
+  "b101-o301-s601-C04": {
+   "sim_json": false,
+   "calibration": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    }
+   },
+   "A": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0
+   },
+   "B": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0
+   }
+  },
+  "b101-o301-s601-C05": {
+   "sim_json": false,
+   "calibration": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    }
+   },
+   "A": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0,
+    "persistence_top_pair": [
+     1.0,
+     0.6063368055555556
+    ]
+   },
+   "B": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0,
+    "persistence_top_pair": [
+     1.0,
+     0.6051897321428571
+    ]
+   }
+  },
+  "b101-o301-s602-C04": {
+   "sim_json": false,
+   "calibration": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    }
+   },
+   "A": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0
+   },
+   "B": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0
+   }
+  },
+  "b101-o301-s602-C05": {
+   "sim_json": false,
+   "calibration": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    }
+   },
+   "A": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0,
+    "persistence_top_pair": [
+     0.9495597718253969,
+     1.0
+    ]
+   },
+   "B": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0,
+    "persistence_top_pair": [
+     0.94921875,
+     1.0
+    ]
+   }
+  },
+  "b102-o302-s601-C05": {
+   "sim_json": false,
+   "calibration": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    }
+   },
+   "A": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0,
+    "persistence_top_pair": [
+     1.0,
+     0.9853980654761905
+    ]
+   },
+   "B": {
+    "utilization": {
+     "distinct_slots": 8,
+     "entropy_nats": 2.0794415416798357,
+     "n_eff": 7.999999999999998,
+     "hot64_share": 1.0,
+     "context_breadth_mean": 8.0
+    },
+    "reuse_actual": 1.0,
+    "persistence_top_pair": [
+     1.0,
+     0.9876922123015873
+    ]
+   }
+  }
+ }
+}
