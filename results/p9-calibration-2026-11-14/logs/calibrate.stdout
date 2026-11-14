@@ -1,0 +1,2 @@
+{"stage": "calibrate", "status": "COMPLETE", "tasks": 10, "manifest": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9C-20261114T182513034263Z-a529fd1946ff4e52b19980bd6d3b6fcd/calibrate/manifest.json"}
+{"calibration": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9C-20261114T182513034263Z-a529fd1946ff4e52b19980bd6d3b6fcd/calibration.json", "selected_exposure": 128, "task_ceiling_fail": [4096], "complete": true, "run_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9C-20261114T182513034263Z-a529fd1946ff4e52b19980bd6d3b6fcd"}
