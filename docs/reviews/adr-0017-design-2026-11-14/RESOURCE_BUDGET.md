@@ -70,7 +70,7 @@ These contain the threefold timing allowance. Three workers assume no thread con
 1. Drop the B102 replicates at 65,536 slots (2 cells). Rule change: the 16K→64K step uses the two B101 seeds.
 2. Drop block A7 at 65,536 slots (4 cells). Rule change: KEY-WIDTH-LIMITED is not assessed.
 3. Drop the dense adapter's second seed at 65,536 slots (1 cell). Rule change: beats-dense at 64K compares both memory seeds with the single dense seed.
-4. If E = 128 is selected: the 65,536-slot size is run for flat R0, tree R0, R2 and dense only. Rule change: EMPTY-SLOT-EFFECT, OPTIMIZER-DEPENDENT and KEY-WIDTH-LIMITED at 16K→64K, and the 64K ladder terms R1 − R0a and R0a − R0, are not assessed; a CAPACITY_POSITIVE class is then printed with "OPTIMIZER-DEPENDENT: not assessed", and decision item 1 needs the human lead's explicit acceptance of that.
+4. If E = 128 is selected: the 65,536-slot size is run for flat R0, tree R0, R2 and dense only. Rule change: EMPTY-SLOT-EFFECT (defined from 4K to 64K), KEY-WIDTH-LIMITED, OPTIMIZER-DEPENDENT at 16K→64K, and the 64K ladder terms R2 − R1, R1 − R0a and R0a − R0, are not assessed; a CAPACITY_POSITIVE class is then printed with "OPTIMIZER-DEPENDENT: not assessed", and decision item 1 needs the human lead's explicit acceptance of that.
 
 No reduction changes a threshold; each changes the rule stated with it. A reduction chosen after the rehearsal is recorded as a revision and approved at decision 2. The batch is never changed at one size only; if memory is short the score matrix is chunked, which leaves gradients identical.
 
@@ -89,3 +89,4 @@ Snapshots carry optimizer state: about 50 MB at 65,536 slots. About 4 snapshots 
 2. Cost of cached evaluation, knock-outs and group ablations.
 3. Contention with two and with three training workers.
 4. Cost of the general-N simulator and sparse co-access layouts at 65,536 slots.
+5. RSS of a simulation worker at 65,536 slots: with two training workers at 3 GiB, the 8 GiB aggregate leaves about 0.5 GiB for each of four simulation workers.

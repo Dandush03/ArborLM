@@ -1,21 +1,21 @@
 # ADR-0017 — Parallel useful-capacity, anti-collapse and locality diagnostics (P9)
 
-- **Status: DESIGN REVISION 3 — NOT APPROVED. No implementation, calibration, rehearsal, training or evaluation is authorized by this text.**
+- **Status: DESIGN REVISION 3 — AUDITOR: READY FOR HUMAN DECISION 1 — NOT APPROVED. No implementation, calibration, rehearsal, training or evaluation is authorized by this text.**
 - **Date:** 2026-11-14
 - **Revision history.**
   - Revision 0: the human lead's draft, unchanged at `docs/reviews/adr-0017-design-2026-11-14/ADR-0017-draft-rev0-human.md`.
   - Revision 1: the Claude lead's design (git history). Reviewed by Opus 5.5: **NOT READY**, 3 blockers, 14 major, 18 minor — `docs/reviews/adr-0017-design-2026-11-14/REVIEW.md`.
   - Revision 2 answered that review (git history `e46d5f8`). Re-checked by Opus 5.5: **NOT READY**, 3 blockers — `RECHECK.md` in the same folder.
-  - Revision 3 (this text) applies the re-check's changes W1–W31; §16 and §17 map findings to changes. Where the auditor left a number to the lead, the lead's choice is marked *(lead's choice)*. Revision 3 has not been re-checked.
+  - Revision 3 (this text) applies the re-check's changes W1–W31; §16 and §17 map findings to changes. Where the auditor left a number to the lead, the lead's choice is marked *(lead's choice)*. Revision 3 was confirmed by Opus 5.5 (`CONFIRM.md`), with fixes F1–F15 applied verbatim.
 - **Origin.** The human lead asked in chat on 2026-11-14 for the design to begin and stated that the request is not permission to launch the study.
 - **Roles (proposed, study-specific).** Lead: Claude Fable 5.2. Independent audit: Opus 5.5. Implementation and simulations: Sonnet 5.5. Inventory: Haiku 5.5. Actual models are recorded per delegation. ADR-0012 stays not approved. **Astra review: NOT_PERFORMED.**
 - **Companions:** `EXECUTION_PLAN.md`, `RESOURCE_BUDGET.md`, `EVIDENCE_INVENTORY.md`, `REVIEW.md`, `RECHECK.md` in `docs/reviews/adr-0017-design-2026-11-14/`.
 
 ## 0. Departures from the human draft that need the human lead's explicit acceptance
 
-1. **Family 2 (compositional) is not run.** With one memory read between frozen layers no read can depend on another read's result, so a latent two-hop answer cannot be computed (auditor confirmed). An explicit chained version would test lookup under a changed template, not composition. Running it would spend cells on a result that cannot bear the name. It is described in §4.5 as an option the human lead can restore.
+1. **Family 2 (compositional) is not run.** With one memory read between frozen layers no read can depend on another read's result, so a latent two-hop answer cannot be computed (auditor confirmed). An explicit chained version would test lookup under a changed template, not composition. Running it would spend cells on a result that cannot bear the name. It is described in §4.5 as an option the human lead can restore. The draft's question whether more memory "supports computation rather than merely a lookup table" is therefore not answered by this study.
 2. **Two approvals instead of one** (§12): approval of this specification for implementation, calibration and rehearsal; later, approval of the frozen final revision for the run.
-3. **A testbed calibration before the freeze** (§12 step 4), on rehearsal seeds, limited to controls and the readout rung, able to change only the exposure count from a fixed menu.
+3. **A testbed calibration before the freeze** (§12 step 4), on rehearsal seeds, limited to controls and the readout rung, able to change only the exposure count from a fixed menu and to mark a size TASK_CEILING_FAIL (§8 opening).
 4. **Caps are proposed, and fixed only at the second approval** on rehearsal evidence (§11). The projection exceeds the draft's 8 hours and 2 GiB.
 5. **MPS is not used.** Equal frequency only; skewed fact frequency is untested.
 6. **Cache size follows distinct selected slots on the calibration stream**, and is also reported against useful slots (§8.4).
@@ -185,19 +185,20 @@ With e = 1 − accuracy over F facts, accuracy counted on the most probable symb
 - **Per key row and value row: cumulative movement on updates where the row had a task gradient, and on updates where it had none.** This answers the P8 question directly.
 - Per snapshot: 8th–9th score margin distribution, soft mass outside the top 8, whether each regularizer's hinge was active, dead-slot count.
 - Trainable parameters, initialized slots and optimizer-state bytes per cell. Every cell reports examples, tokens, updates, unique facts, the exposure distribution and wall time.
-- **REGULARIZER-DRIVEN MOVEMENT** is printed with a B1 or C1 class when more than half of the cell's cumulative key movement occurred on updates where the row had no task gradient. (With fixed coefficients, Adam still moves a row whose only gradient is 10⁻⁶ by almost a full learning-rate step; this annotation is how the study reports it.)
+- **REGULARIZER-DRIVEN MOVEMENT** is printed with a B1 or C1 class when, in both seeds, the cell's cumulative key movement on updates where the row had no task gradient is more than 1.5 times *(lead's choice)* that of its §8.3 reference cell of the same seed (the dose-zero 16K cell for B1; the B1 cell with α_u = 0.25, α_c = 0 for C1). The share of key movement on such updates is reported for every cell but is not compared with a fixed fraction: under AdamW it is about 0.9 with no regularizer at all (§5.5; auditor check c4: 0.876 / 0.899 / 0.900).
+- Every quantity used by a class is reported with its median and full per-fact distribution. The B101 − B102 contrast is reported for A1 and A2 as descriptive; no other parent-level contrast exists with one replicate parent.
 
 ## 7. Objectives (D07, D08)
 
 Soft inclusion as ADR-0015 revision 3: π_s = σ((score_s − τ)/0.25) on a query's top-64 candidates, τ the midpoint of the 8th and 9th scores, not detached.
 
-**Global usage floor.** u_t = (1 − b)·u_{t−1} + b·ū_t with b = 128/F (one pass over the facts); u_{t−1} is detached; u₀ is the first batch's ū. ū_t is the batch-normalized π usage **at answer sites only**. The applied gradient is λ_u·(∂R_glob/∂u at u_t)·∂ū_t/∂θ, **without** the factor b *(lead's choice)*; with b the doses would shrink by 16, 64 and 256 at the three sizes. With M = min(N, 8F)/2:
+**Global usage floor.** u_t = (1 − b)·u_{t−1} + b·ū_t with b = 128/F (one pass over the facts); u_{t−1} is detached; u₀ is the first batch's ū. ū_t is the batch-normalized π usage **at answer sites only**. The applied gradient is λ_u·(∂R_glob/∂u at u_t)·∂ū_t/∂θ, **without** the factor b *(lead's choice)*; with b the doses would shrink by 16, 64 and 256 at the three sizes. H uses 0 · ln 0 = 0. ∂R_glob/∂u is evaluated at u_t, which contains b·ū_t, so it is finite on every slot where ∂ū_t/∂θ ≠ 0; no ε is added. It is implemented as λ_u·⟨g_t, ū_t⟩ with g_t = ∂R_glob/∂u at the detached u_t. Known transient: with u₀ set to the first batch's usage the hinge stays on for roughly the first 27–57 of 2,048 updates even in a perfectly spread memory (auditor check S1). With M = min(N, 8F)/2:
 
 R_glob = max(0, ln M − H(u)) / ln N.
 
 It is zero while the memory spreads over at least half of the slots it could use. A batch-local floor is not used: a memory using a thousand slots would satisfy it at any size.
 
-**Soft against hard usage.** Every B1 and C1 cell reports H(u) from π and from hard top-8 selections at answer sites, and the soft mass outside the top 8. A cell whose soft H(u) ≥ ln M while its hard entropy-effective-slot ratio is below 1.05 is annotated **SOFT-USAGE ONLY**: the floor was met by probability mass outside the selected slots.
+**Soft against hard usage.** Every B1 and C1 cell reports H(u) from π and from hard top-8 selections at answer sites, and the soft mass outside the top 8. A cell whose soft H(u) ≥ ln M while its hard entropy-effective-slot ratio to its §8.3 reference is below 1.05 is annotated **SOFT-USAGE ONLY**: the floor was met by probability mass outside the selected slots.
 
 **Stated limit.** A key that is in no query's top 64 receives no gradient from any term and cannot be revived by gradient. The study measures how many keys enter a top 64 after update 0; it does not claim a cure for dead slots.
 
@@ -218,7 +219,7 @@ After the calibration outputs are written, the only changes allowed before the f
 ### 8.1 Task gates
 
 - **G1** generator checks (§4.6).
-- **G2** chance, per primary panel: the no-memory baseline on the 2,048-, 8,192- and 32,768-fact sets (the fixed track uses the 2,048-fact proportional set), and the unseen-fact set: 8 tests, each inside the exact binomial central interval of level 1 − 0.001/8 around 1/32. The same interval is "chance" wherever a rule says so. The unseen-fact accuracy of every trained cell is reported against it; a cell outside it is flagged **LEAKAGE** and its lane is not interpreted until the auditor explains it.
+- **G2** chance, per primary panel: the no-memory baseline on the 2,048-, 8,192- and 32,768-fact sets (the fixed track uses the 2,048-fact proportional set), and the unseen-fact set: 8 tests, each inside the exact binomial central interval of level 1 − 0.001/8 around 1/32. The same interval is "chance" wherever a rule says so. The unseen-fact accuracy of every trained cell is reported against it; a cell outside it is flagged **LEAKAGE** and its lane is not interpreted until the auditor explains it. Lane D adds, per primary panel, the no-memory baseline on sets A and B (4,096 facts each): a separate family of 4 tests at level 1 − 0.001/4, whose interval is "chance" in Lane D.
 - **G3** readout ceiling, **decided in the calibration** (§12 step 4): R2 accuracy ≥ 0.95 on rehearsal panels at every size at the selected exposure. If it is not reached at E = 128 at some size, that size is `TASK_CEILING_FAIL` and is not run. In the registered run R2 is a diagnostic. If a size is TASK_CEILING_FAIL, every step involving it is NOT_EVALUATED; CAPACITY_POSITIVE cannot be assigned if 65,536 fails; if 16,384 fails, Lanes B, C (trained part) and D are NOT_EVALUATED.
 - **G4** determinism and identity: checkpoint restoration, stream hashes, P5 forward invariance.
 
@@ -251,7 +252,7 @@ Annotations (they do not change the class, and are always printed with it):
 
 **Ladder report**, per size, in Fano bits per fact with sign: exact − R2, R2 − R1, R1 − R0a, R0a − R0, and tree oracle-branch − tree R0; with the frozen-hidden probes beside R0. A gap is called material at ≥ 0.5 bits per fact. At 4,096 slots only exact − R2 and R2 − R1 are reported (R0a is not run there).
 
-### 8.3 Utilization (per architecture, against its dose-zero 16K cell; both seeds; both panels; first match wins)
+### 8.3 Utilization (per architecture and seed, against its reference: the dose-zero 16K cell for B1, the B1 cell with α_u = 0.25, α_c = 0 for C1; both seeds; both panels; first match wins)
 
 Every rule is evaluated per seed against the dose-zero cell of the same seed, and must hold in both seeds and both panels; seeds that disagree give INTERMEDIATE. Lane B classes need dose-zero 16K accuracy ≥ 0.25 in both seeds, else NOT_EVALUATED. C1 cells are classed against the B1 cell with α_u = 0.25, α_c = 0 of the same architecture and seed. If U\* is NOT INTERPRETABLE for the case or its reference, COLLAPSED is decided by the I ratio alone, and ENTROPY_INFLATION, IMPROVED and PRESERVED become INTERMEDIATE. Entropy-effective slots here are computed from hard top-8 selections at answer sites.
 
@@ -322,7 +323,7 @@ Reported: slots and bytes changed between V1 and V2, overlap of A and B minimal 
 
 ### 8.7 Decision map
 
-1. Flat or tree CAPACITY_POSITIVE without OPTIMIZER-DEPENDENT → a separately approved capacity-scaling protocol may be proposed.
+1. Flat or tree CAPACITY_POSITIVE without OPTIMIZER-DEPENDENT → a separately approved capacity-scaling protocol may be proposed. If the annotation reads OPTIMIZER-ARM UNINFORMATIVE or "OPTIMIZER-DEPENDENT: not assessed", this item needs the human lead's explicit acceptance of that.
 2. Capacity positive or partial, locality not positive → redesign placement or routing.
 3. Capacity not supported with a material ladder gap → investigate the indicated component (representation at R1 − R0a, interference at R0a − R0, keys at R2 − R1, width if KEY-WIDTH-LIMITED, optimizer if OPTIMIZER-DEPENDENT).
 4. `TASK_CEILING_FAIL`, or capacity not supported with no material gap → pause the line or redesign the testbed.
@@ -391,7 +392,7 @@ Data seeds: facts 170001, templates 170011, clusters 170031, training order 1700
 
 ## 12. Order of work
 
-1. Auditor re-check of this revision (revision 3 is not yet re-checked).
+1. Auditor re-check of this revision (done: `RECHECK.md`, `CONFIRM.md`).
 2. **Human decision 1:** approve this specification for implementation, calibration and rehearsal; accept or change the departures of §0; approve the delegation.
 3. Implementation with tests, including synthetic inputs that trigger every class and the dependent-cell stop rule.
 4. **Testbed calibration, rehearsal seeds only, written and audited.** Allowed: the frozen-hidden probes at 2,048 / 8,192 / 32,768 rehearsal facts; the R2 learning curve at each size up to E = 128; no-memory and exact controls; the largest answer probability attainable through the frozen final layers (linear algebra on frozen weights). **Not allowed:** any R0, R0a, R1, tree, dense or regularized arm. **It may change one thing, by this rule:** E is the smallest of {32, 64, 128} at which R2 reaches 0.95 at every size. A size that fails at 128 is `TASK_CEILING_FAIL`. The probes are reported and change nothing. No threshold, rule, dose or matrix entry changes on calibration evidence (§8 opening).
@@ -423,6 +424,8 @@ Data seeds: facts 170001, templates 170011, clusters 170031, training order 1700
 None. Pending.
 
 ## 16. How revision 2 answers the review
+
+Revision-2 entries. Where §17 differs (for example, G2 now has 8 tests), §17 governs.
 
 | Finding | Change |
 |---|---|
@@ -462,4 +465,4 @@ None. Pending.
 | Locality by within-query packing | W14: reported separately; §13 reworded |
 | Departures missing from §0 | items 7–12 added; the worker count and aggregate memory return to the draft's values (§11); layout controls restored (§8.4) |
 | Budget | W28 in `RESOURCE_BUDGET.md` |
-| Remaining W items | W4, W6, W9, W11, W16, W21, W24–W26, W29–W31 applied as written |
+| Remaining W items | W4, W6, W11, W16, W21, W24–W26, W29, W31 applied as written; W9 applied with α_c = 1 replaced by 0.05 (no new cells); W30 applied with TREE_AHEAD added; W28 applied except that key-32 cells are not yet costed at twice key-16 (disclosed in the budget); confirmation fixes F1–F15 (`CONFIRM.md`) |
