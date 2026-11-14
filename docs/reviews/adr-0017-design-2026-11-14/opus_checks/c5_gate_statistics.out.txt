@@ -1,0 +1,14 @@
+{"n_queries": 2048, "accept_correct_count_in": [40, 91], "accept_accuracy_in": [0.0195, 0.0444], "exact_false_failure_probability": 0.000923}
+{"n_queries": 4096, "accept_correct_count_in": [93, 166], "accept_accuracy_in": [0.0227, 0.0405], "exact_false_failure_probability": 0.000874}
+{"n_queries": 8192, "accept_correct_count_in": [206, 309], "accept_accuracy_in": [0.0251, 0.0377], "exact_false_failure_probability": 0.000951}
+{"n_queries": 32768, "accept_correct_count_in": [922, 1129], "accept_accuracy_in": [0.0281, 0.0345], "exact_false_failure_probability": 0.000958}
+{"reading": "per size and track, controls only: 4 tracks x 2 panels x 2 sets", "tests": 16, "P(at least one false G2 failure)": 0.0147}
+{"reading": "every trained cell x 2 panels, unseen set only (108 cells)", "tests": 216, "P(at least one false G2 failure)": 0.1808}
+{"reading": "every trained cell x 2 panels x {unseen, permuted, disabled}", "tests": 648, "P(at least one false G2 failure)": 0.4503}
+{"facts": 2048, "answer_x_identifier_symbol_table": "32 x 32", "expected_count_per_cell": 2.0, "chi_square_rule_of_thumb_(>=5)_met": false}
+{"facts": 4096, "answer_x_identifier_symbol_table": "32 x 32", "expected_count_per_cell": 4.0, "chi_square_rule_of_thumb_(>=5)_met": false}
+{"facts": 8192, "answer_x_identifier_symbol_table": "32 x 32", "expected_count_per_cell": 8.0, "chi_square_rule_of_thumb_(>=5)_met": true}
+{"facts": 32768, "answer_x_identifier_symbol_table": "32 x 32", "expected_count_per_cell": 32.0, "chi_square_rule_of_thumb_(>=5)_met": true}
+{"facts": 2048, "answer_x_cluster_table": "32 x 128", "expected_count_per_cell": 0.5}
+{"facts": 8192, "answer_x_cluster_table": "32 x 512", "expected_count_per_cell": 0.5}
+{"facts": 32768, "answer_x_cluster_table": "32 x 2048", "expected_count_per_cell": 0.5}
