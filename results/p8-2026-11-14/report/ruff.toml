@@ -1,0 +1,5 @@
+# Analysis-only report script, kept readable as long lines; style-only rules relaxed (precedent: docs/reviews/ruff.toml).
+extend = "../../../pyproject.toml"
+
+[lint]
+ignore = ["E501", "I001", "E401", "E702", "E402"]
