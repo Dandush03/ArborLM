@@ -10,7 +10,7 @@
 
 | Reading | Verdict | Key numbers |
 |---|---|---|
-| (1) The frozen block exposes almost none of the identifier at the answer site; R0 will be near chance | **CONFIRMED, and stronger than stated** | Recorded probes reproduced exactly. Answer-site state: ≤0.4 bits of the 20-bit identifier (logistic), ≈1.0 bit with an MLP at 32,768 facts. Every single position carries only its own symbol plus ≈0.1–0.2 bits of each other symbol (5.0–5.6 bits). The 20 bits exist only jointly across the record (concatenation: 19.8–20.0 bits). Block 1 cannot carry even an **oracle** per-fact vector written at earlier record positions to the answer site (0.028–0.047 accuracy vs 0.969 when the same table writes at the site). |
+| (1) The frozen block exposes almost none of the identifier at the answer site; R0 will be near chance | **CONFIRMED, and stronger than stated** | Recorded probes reproduced exactly. Answer-site state: ≤0.4 bits of the 20-bit identifier (logistic), 1.0–1.4 bits with an MLP at 32,768 facts. Every single position carries only its own symbol plus ≈0.1–0.2 bits of each other symbol (5.0–5.6 bits). The 20 bits exist only jointly across the record (concatenation: 19.8–20.0 bits). Block 1 cannot carry even an **oracle** per-fact vector written at earlier record positions to the answer site (0.028–0.047 accuracy vs 0.969 when the same table writes at the site). |
 | (2) R2 accuracy follows optimizer updates, not exposures per fact; the 4,096 failure is an artefact of matched exposure | **CONFIRMED** (with one qualification) | At 4,096 slots R2 crosses 0.95 at 2,560–3,584 updates (E = 160–224) and reaches its ceiling by 3,072 (B101) / 5,632 (B102). With the shared readout (wo, gate) warm-started from a converged 16K cell it reaches 0.95 in about 512 updates; with lr 0.01, 0.973 in 1,024. Qualification: at equal update counts the smaller memory is better (2,048 updates: 0.72–0.90 at 4K vs 0.53–0.68 at 16K), so exposures matter, but second-order. |
 | (3) B101 plateaus at 0.9697 because one answer symbol is unreachable through its frozen final layers | **PARTLY: one symbol, yes; unreachable, no** | All failures are facts with answer `\` (0x5C): 994/32,768, 235/8,192, 55/2,048. `\` **can** be the strict argmax within Σ (certified margin 1.16 logits; every symbol on both parents has margin ≥ 0.95). The cause is a loss/scoring mismatch. At the optimum of the 256-way training loss for `\`, `[` wins within Σ by 0.23 logits. The converged R2 sits exactly there (p_full 0.01885 vs 0.01895 ceiling; 992/994 predicted `[`). With cross-entropy over Σ, R2 reaches 1.000. |
 
@@ -18,21 +18,21 @@
 
 **What is predicted, and on which streams (checked in code and data).** `controls.nearest_stored_state_probe` predicts the answer stored with the nearest (cosine) answer-site state of the calibration stream. That stream holds every fact twice, in contexts not used in training. Evaluation is on Panel A, which holds each fact once in new contexts, restricted to trained facts. `controls.linear_probe_per_position` predicts each of the five identifier **symbols** from the answer-site state. It is a ridge least-squares classifier trained on the calibration stream and tested on Panel A. The split is fair: same facts, different contexts. The "hidden state" is the residual after block 0, where the memory is inserted. My own forward reproduces it to 2·10⁻⁶. Targets were re-read from the tokens and match the bookkeeping.
 
-**Reproduction (own code):** nearest stored state 0.0405 / 0.0391 / 0.0359 (B101, F = 2,048 / 8,192 / 32,768), B102 0.0405 at 2,048. The ridge per-position accuracies are identical to the record in every digit shown (e.g. B101 2,048: 0.044, 0.054, 0.064, 0.052, 0.073).
+**Reproduction (own code):** nearest stored state 0.0405 / 0.0391 / 0.0359 (B101, F = 2,048 / 8,192 / 32,768) and 0.0405 / 0.0415 / 0.0352 (B102). The ridge per-position accuracies are identical to the record in every digit shown (e.g. B101 2,048: 0.044, 0.054, 0.064, 0.052, 0.073).
 
 **Stronger, still fair probes** (held-out Panel A; "bits" = 5 − held-out cross-entropy in bits, a variational lower bound on I(symbol; state). Because any 4 of the 5 symbols are independent and uniform, the sum over the best 4 symbols lower-bounds the identifier bits.)
 
-| State | Probe | B101 F=2,048 | B101 8,192 | B101 32,768 | B102 2,048 |
-|---|---|---|---|---|---|
-| answer site, before block 0 | logistic | ≤ 0 bits | — | — | ≤ 0 bits |
-| answer site, after block 0 | logistic | ≈ 0 bits (−0.003) | 0.20 | 0.29 | 0.03 |
-| answer site, after block 0 | MLP (256 GELU) | < 0 | 0.40 | 1.01 (best symbol acc 0.135) | < 0 |
-| answer site, after block 1 (no memory) | logistic | 0.17 | 0.39 | — | 0.13 (8,192: 0.38) |
-| best identifier position (id5), after block 0 | logistic | 5.45 | 5.11 | 5.02 | 5.58 |
-| each id position k | logistic | own symbol 4.92–4.94 bits; each other symbol 0.12–0.19 bits | | | own 4.94–4.95; others 0.13–0.24 |
-| concatenation of the record's 7 positions | logistic / MLP | 19.82 / 19.64 | 19.86 / 19.93 | 19.87 / 19.99 | 19.81 / 19.65 |
+| State | Probe | B101 F=2,048 | B101 8,192 | B101 32,768 | B102 2,048 | B102 8,192 | B102 32,768 |
+|---|---|---|---|---|---|---|---|
+| answer site, before block 0 | logistic | ≤ 0 bits | — | — | ≤ 0 bits | — | — |
+| answer site, after block 0 | logistic | ≈ 0 bits (−0.003) | 0.20 | 0.29 | 0.03 | 0.27 | 0.35 |
+| answer site, after block 0 | MLP (256 GELU) | < 0 | 0.40 | 1.01 (best symbol acc 0.135) | < 0 | 0.66 | 1.43 |
+| answer site, after block 1 (no memory) | logistic | 0.17 | 0.39 | — | 0.13 | 0.38 | — |
+| best identifier position (id5), after block 0 | logistic | 5.45 | 5.11 | 5.02 | 5.58 | 5.21 | 5.12 |
+| each id position k | logistic | own symbol 4.92–4.94 bits; each other symbol 0.12–0.19 bits | | | own 4.94–4.95; others 0.13–0.24 | | |
+| concatenation of the record's 7 positions | logistic / MLP | 19.82 / 19.64 | 19.86 / 19.93 | 19.87 / 19.99 | 19.81 / 19.65 | 19.85 / 19.91 | 19.86 / 19.98 |
 
-Nearest stored state at each single position never exceeds 0.07 (2,048 facts) and 0.042 (8,192). The B102 rows at 8,192 and 32,768 are in `outputs/probes_8192_32768.log`; they are written as they finish and the reading above does not depend on them.
+Nearest stored state at each single position never exceeds 0.07 (2,048 facts), 0.044 (8,192) and 0.039 (32,768), on either parent.
 
 **Why.** Attention from the answer site is near-uniform in both blocks and both parents. In block 1 each own-record position gets 0.025–0.051 per head and the earlier records 0.74–0.78 (`outputs/attention_block1.log`). No head concentrates on the identifier bytes. The backbone, trained on natural text, does not aggregate five random symbols at any one position.
 
