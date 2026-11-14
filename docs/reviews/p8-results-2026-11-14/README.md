@@ -134,7 +134,7 @@ None changes a registered number. Numbers 1 and 9 need the human lead's attentio
 9. **The report generator was edited after the run.** `results/p8-2026-11-14/report/make_report.py` raised a ZeroDivisionError on its first real render (a ratio with zero misses in the denominator) and received a one-line guard that draws such ratios as undefined. It is an analysis-only plotting tool outside the frozen source tree; no registered number passes through it. The edit is in its own commit.
 10. The logged reason for a λ = 0 event can be mislabelled (known before the freeze; no such event occurred).
 11. The lead's first launcher line for the restore gate, evaluation and reproduction check failed on shell quoting before any stage started (`results/p8-2026-11-14/logs/launcher_failed_attempt.md`).
-12. All commits were local until one push, as in earlier studies; ordering rests on local history and author timestamps.
+12. All commits were local until one push, as in earlier studies; ordering rests on local history and author timestamps. Before the push the commit messages were reduced to single signed lines to satisfy the owner's pre-push hook, which changed the commit hashes but no file content: the freeze commit cited as `80f46ae` in every manifest is pushed as `378aeac`. See [COMMIT_MAP.md](COMMIT_MAP.md).
 
 ## 8. Resources
 
