@@ -1,0 +1,1 @@
+P8 analyse REFUSED: refused: 5 of 60 cells lack complete eval/sim records (first: b101-o301-s601-C04: ['sim.json missing']); use --allow-incomplete to stamp the study INCOMPLETE
