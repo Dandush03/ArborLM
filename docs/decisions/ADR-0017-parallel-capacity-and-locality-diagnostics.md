@@ -440,6 +440,22 @@ The lead's question, as put: "Do you approve revision 3 for implementation, cali
 
 The approval was one sentence. If any reading above is wrong, the correction is recorded here as a dated entry.
 
+### 15.1 Clarifications by the lead after decision 1 (implementation details the text left open)
+
+Recorded 2026-11-14 while the first implementation package was written. None changes a hypothesis, threshold, dose or the matrix. They are part of what is presented at decision 2. The full list with the config keys is `core.OPEN_CHOICES` / `[choices]` in `configs/p9_diagnostics.toml`.
+
+1. **Alphabet Σ:** bytes 0x40–0x5F. **Template pool:** the 48 most frequent bytes, outside Σ, in the 2,048 corpus rows the backbones were trained on (ties by byte value); it includes three non-ASCII bytes.
+2. **Fact tables are nested:** the proportional facts at a smaller size are the first facts of the larger, so the fixed track and the 4,096-slot cells share the same 2,048 facts. Lane D uses a second table whose identifiers avoid the first.
+3. **R_co is evaluated at answer sites**, like the usage term (§7 did not say).
+4. **Replay** adds 16 replayed A contexts to the 16 B contexts of each update; the update count is unchanged (§8.5 said "extra rows").
+5. **Snapshots at ½U_16K and U_16K** apply to fixed-track cells and not to Lane D cells, which have ½U and U.
+6. **EMPTY-SLOT-EFFECT (D04)** is read at the matched-exposure snapshot of the 2,048-fact set at every size.
+7. **Dense adapter matching:** matched exactly to the flat key-16 memory. Against the learned tree it differs by 0.13% (the router), above the 0.1% of §5.6. The tolerance for the tree comparison is therefore 0.2%. *This is a numerical relaxation of §5.6 and is flagged for decision 2.*
+8. **G1 tests per stream:** k = 8 (five identifier positions, template, cluster, record index), 16,000 permutations.
+9. **G2:** four tests per primary panel (three no-memory sets and the unseen set); Lane D uses one 4,096-fact interval for both sets.
+10. **Exact retrieval answers an unseen identifier with the first symbol of Σ**, so its unseen-fact score is the count of chance matches.
+11. **Code location:** `studies/p9/`, not `src/arborlm/` (see `INTERFACE_CONTRACT.md`).
+
 ### Decision 2
 
 None. Pending the freeze.
