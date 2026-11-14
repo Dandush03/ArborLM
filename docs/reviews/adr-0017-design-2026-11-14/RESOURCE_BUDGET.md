@@ -1,5 +1,7 @@
 # ADR-0017 — projected M5 resource budget (design revision 3)
 
+**Update after decision 1 (2026-11-14):** the human lead raised the aggregate RSS cap to 24 GiB and raised the hour budget without giving a figure. The tables below are the pre-decision projection. With 24 GiB, three or four training workers fit in memory; whether they help depends on thread contention on six performance cores, which the rehearsal measures. Calibration and rehearsal are capped at 4 hours together. The run's hour cap is proposed at decision 2 as twice the rehearsal-based projection.
+
 **A projection, not a measurement of the study.** It rests on one indicative timing of a stand-in memory update (`benchmark/indicative_update_timing.py`, output `benchmark/indicative_update_timing_run1.jsonl`) on a machine that was not isolated (load average about 3). The stand-in has no backbone, no real data and no ArborLM code. The auditor reproduced the training arithmetic and found the first version left out evaluation and under-costed the dense adapter (`REVIEW.md` M14); both are corrected here. The full-size rehearsal replaces every number before the freeze, and the caps are fixed only at the human lead's second decision.
 
 ## Machine

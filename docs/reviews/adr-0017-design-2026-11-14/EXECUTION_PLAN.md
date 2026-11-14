@@ -46,7 +46,7 @@ Required tests: P5 invariance at 4,096/16; gradient reach per parameter group; l
 
 ## Phase 3 — registered run (after decision 2), once
 
-Order within the caps; two training workers, four simulation workers, 8 GiB aggregate (a third training worker only if granted at decision 2).
+Order within the caps; two to four training workers as fixed in the freeze from the rehearsal, four simulation workers, 24 GiB aggregate (decision 1).
 
 1. Generator and chance gates (G1, G2) for every size. Failure stops that size.
 2. Lane C synthetic part and Lane D version-store test (no model needed) run alongside.

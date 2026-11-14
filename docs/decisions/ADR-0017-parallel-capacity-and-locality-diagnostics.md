@@ -1,6 +1,6 @@
 # ADR-0017 — Parallel useful-capacity, anti-collapse and locality diagnostics (P9)
 
-- **Status: DESIGN REVISION 3 — AUDITOR: READY FOR HUMAN DECISION 1 — NOT APPROVED. No implementation, calibration, rehearsal, training or evaluation is authorized by this text.**
+- **Status: DESIGN REVISION 3 — HUMAN DECISION 1 GIVEN 2026-11-14 (§15): approved for implementation, calibration and rehearsal only. The registered run is NOT authorized; it needs decision 2 after the freeze.**
 - **Date:** 2026-11-14
 - **Revision history.**
   - Revision 0: the human lead's draft, unchanged at `docs/reviews/adr-0017-design-2026-11-14/ADR-0017-draft-rev0-human.md`.
@@ -386,9 +386,9 @@ Data seeds: facts 170001, templates 170011, clusters 170031, training order 1700
 
 - Apple M5 Max, 18 cores, 48 GB; CPU only.
 - **Projection (`RESOURCE_BUDGET.md`), not a measurement:** about 5 to 6 hours of charged execution at E = 32 with two training workers, and roughly twice that at E = 64.
-- **Proposed at the first decision:** a cap of 3 hours and 3 GiB per worker for calibration and rehearsal together.
+- **Calibration and rehearsal together:** at most 4 hours and 3 GiB per worker (decision 1 raised the hour budget without a figure; 4 hours is the lead's application of it).
 - **Fixed at the second decision, on rehearsal evidence:** per-worker and aggregate RSS caps, stage caps at twice the measured stage time, and the total. The draft's 8 hours and 2 GiB are not expected to hold twofold headroom; the registered reductions are listed in the budget.
-- At most two training workers and four simulation workers, 8 GiB aggregate, as the draft says. A third training worker and a higher aggregate are options the human lead may grant at decision 2 on rehearsal evidence. Timing runs alone, with load recorded. No cloud, paid service, download or storage experiment.
+- Aggregate RSS cap 24 GiB (decision 1). Per-worker cap 3 GiB. The number of training workers (two to four) is chosen from the rehearsal's contention measurement and recorded in the freeze; four simulation workers. Timing runs alone, with load recorded. No cloud, paid service, download or storage experiment.
 
 ## 12. Order of work
 
@@ -421,7 +421,28 @@ Data seeds: facts 170001, templates 170011, clusters 170031, training order 1700
 
 ## 15. Approval record
 
-None. Pending.
+### Decision 1 — 2026-11-14
+
+The lead's question, as put: "Do you approve revision 3 for implementation, calibration and rehearsal only? The registered run would need a second approval after the freeze. Approving means accepting the twelve departures from your draft listed in §0, or telling me which to change." The message listed the Family 2 omission, the two-approval order with calibration, the relaxed tree rule, the 3-hour and 3-GiB calibration and rehearsal cap, and the Lane-A-first option that the lead had not adopted.
+
+**Human lead, in chat (verbatim):**
+
+> im ok with your assessment, increase the hour budget and you can use up to 24gb of total ram
+
+**Reading by the Claude lead:**
+
+- Revision 3 is approved for implementation, calibration and rehearsal. The registered run is not approved.
+- The departures of §0 are accepted as written; the parallel default of §3 stands.
+- The study-specific Claude delegation is accepted for this phase. ADR-0012 remains not approved.
+- **Aggregate RSS cap: 24 GiB** (replaces 8 GiB), for calibration, rehearsal and, subject to decision 2, the run.
+- **The hour budget is raised, but no figure was given.** The lead applies: calibration and rehearsal together at most 4 hours; the run's cap is proposed at decision 2 as twice the rehearsal-based projection, and the human lead fixes the figure then.
+- Not stated by the human lead and therefore unchanged: the per-worker RSS cap (3 GiB as proposed in §11) and every threshold, dose and matrix entry.
+
+The approval was one sentence. If any reading above is wrong, the correction is recorded here as a dated entry.
+
+### Decision 2
+
+None. Pending the freeze.
 
 ## 16. How revision 2 answers the review
 
