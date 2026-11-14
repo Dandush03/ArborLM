@@ -1,6 +1,6 @@
 # ADR-0016 — P8 supplement: simulating the five fully collapsed cells
 
-- **Status: revision 2 with wording changes W1–W9 — HUMAN-APPROVED for execution on 2026-11-14 (§9), including the §1.1 exception. Not yet executed. Auditor re-check: ready to implement once W1–W9 are applied (they are; recorded in §9.1).**
+- **Status: HUMAN-APPROVED (§9), EXECUTED ONCE on 2026-11-14, COMPLETE (5/5 cells). Outcome in §10. The registered P8 study remains INCOMPLETE with decision `none`.**
 - **Date:** 2026-11-14
 - **Revision history.** Revision 1 was reviewed by Opus 5.5 and found NOT READY (1 blocker, 5 major, 9 minor): `docs/reviews/p8-supplement-spec-review-2026-11-14/REVIEW.md`. Revision 2 answers those findings. Revision 2 was re-checked by Opus 5.5: `docs/reviews/p8-supplement-spec-review-2026-11-14/RECHECK.md`.
 - **Origin.** On 2026-11-14 the human lead wrote in chat: "start working on the missing simulation". The Claude lead reads that as direction to prepare this work. It is not recorded here as approval of this specification, of the exception in §1.1, or of the workflow.
@@ -145,4 +145,16 @@ Reading by the Claude lead: (a) execution; (b) the exception is accepted in the 
 
 ## 10. Outcome record
 
-None. Not executed.
+Added after execution. Adding this section and changing the status line change this file's hash; the run records cite the hash at the freeze, `22d25195…4458` (file as committed at `3018126`). No other line was changed.
+
+- **Freeze:** commit `3018126db5f8bed740813bc6722fe2319e31024c`, tree `671c184a19f183812588c5da491fa6733a1c88a3`; supplement code digest `88b86f48…5377`; frozen P8 source digest `8b5a03a0…0507`, unchanged.
+- **Reviews before the run (Opus 5.5):** specification review (NOT READY), re-check (ready once W1–W9 applied), implementation audit (NOT READY: one major, the missing P7-B citation), re-check after fixes (READY TO FREEZE). Implementation by Sonnet 5.5; 874 tests passing.
+- **Run, once:** `P8SUP-20261114T144104227089Z-fbfb3d18513749b081f9cdd93f22ad81`; 5 of 5 cells completed; 11.2 s; peak worker RSS 242 MB; one worker. Analysis `P8SUPA-20261114T144120084661Z-f008b8673e97484fa528ccf36beba4e9`, 0.31 s. No failed attempt and no re-run.
+- **Precondition:** held on all ten panel traces; the registered generator was not called.
+- **Predictions 1–9 of §2:** all hold. Every counted miss is 0; null and order-shuffled simulation records equal the actual; temporal-reuse ratio to null is 1.0; E is undefined in all five cells.
+- **Supplementary classes (not registered classes):** C04 QUALITY-FAILED and C05 QUALITY-FAILED on both panels. On all six cells each, both cases fail all four guard conditions (ΔNLL +0.0100 to +0.0117; gain retention 0.48–0.56).
+- **Comparison with the registered analysis:** differences only where §5 allows; all values for C01–C03, C06–C10 and the 55 registered cells are equal. Nested supplementary status `COMPLETE` and mechanical letter `c` describe the 60-record input only.
+- **All-six-cell means versus the registered partial means:** the partial means understated the collapse, as flagged earlier. Panel A distinct slots: C04 22.75 → 17.83, C05 31.0 → 19.5; memory gain: C04 0.0154 → 0.0131, C05 0.0139 → 0.0108. The registered files are unchanged; the supplementary values sit beside them.
+- **Independent recomputation (Opus 5.5):** 5,934 simulation values re-derived from raw traces with separate code, 1,548 analysis values, 128 case means: zero differences. `docs/reviews/p8-supplement-results-audit-2026-11-14/RESULTS_AUDIT.md`.
+- **Defects and notes, none blocking:** the tool prints `decision_inputs` as a whole among the differences seen, although only its two allowed keys differ; the 30-minute limit was enforced on the stage and only recorded for the analysis; the run-once guard checks one experiments root; the P7-B reproduction record cited by hash exists as a file only outside the repository (an older P8 preservation question); the implementer's first full test run showed ten failures in `tests/test_p7b_study.py` that did not reproduce and whose log was not kept; the two points in §9.1 remain inferred, not confirmed.
+- **What this does not change:** the registered P8 study is INCOMPLETE (55/60) with decision `none`. No case is LOCALITY-POSITIVE. The supplement tested and replicated nothing; its outcome was predicted. The null generator is not repaired in general. Astra review: NOT_PERFORMED. The single-set null rule is PENDING ASTRA REVIEW.
