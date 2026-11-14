@@ -1,14 +1,15 @@
 # ADR-0017 — Parallel useful-capacity, anti-collapse and locality diagnostics (P9)
 
-- **Status: DESIGN REVISION 2 — NOT APPROVED. No implementation, calibration, rehearsal, training or evaluation is authorized by this text.**
+- **Status: DESIGN REVISION 3 — NOT APPROVED. No implementation, calibration, rehearsal, training or evaluation is authorized by this text.**
 - **Date:** 2026-11-14
 - **Revision history.**
   - Revision 0: the human lead's draft, unchanged at `docs/reviews/adr-0017-design-2026-11-14/ADR-0017-draft-rev0-human.md`.
   - Revision 1: the Claude lead's design (git history). Reviewed by Opus 5.5: **NOT READY**, 3 blockers, 14 major, 18 minor — `docs/reviews/adr-0017-design-2026-11-14/REVIEW.md`.
-  - Revision 2 (this text) answers that review; §16 maps every finding to its change.
+  - Revision 2 answered that review (git history `e46d5f8`). Re-checked by Opus 5.5: **NOT READY**, 3 blockers — `RECHECK.md` in the same folder.
+  - Revision 3 (this text) applies the re-check's changes W1–W31; §16 and §17 map findings to changes. Where the auditor left a number to the lead, the lead's choice is marked *(lead's choice)*. Revision 3 has not been re-checked.
 - **Origin.** The human lead asked in chat on 2026-11-14 for the design to begin and stated that the request is not permission to launch the study.
 - **Roles (proposed, study-specific).** Lead: Claude Fable 5.2. Independent audit: Opus 5.5. Implementation and simulations: Sonnet 5.5. Inventory: Haiku 5.5. Actual models are recorded per delegation. ADR-0012 stays not approved. **Astra review: NOT_PERFORMED.**
-- **Companions:** `EXECUTION_PLAN.md`, `RESOURCE_BUDGET.md`, `EVIDENCE_INVENTORY.md`, `REVIEW.md` in `docs/reviews/adr-0017-design-2026-11-14/`.
+- **Companions:** `EXECUTION_PLAN.md`, `RESOURCE_BUDGET.md`, `EVIDENCE_INVENTORY.md`, `REVIEW.md`, `RECHECK.md` in `docs/reviews/adr-0017-design-2026-11-14/`.
 
 ## 0. Departures from the human draft that need the human lead's explicit acceptance
 
@@ -18,6 +19,12 @@
 4. **Caps are proposed, and fixed only at the second approval** on rehearsal evidence (§11). The projection exceeds the draft's 8 hours and 2 GiB.
 5. **MPS is not used.** Equal frequency only; skewed fact frequency is untested.
 6. **Cache size follows distinct selected slots on the calibration stream**, and is also reported against useful slots (§8.4).
+7. **The tree is not required to beat the flat memory on quality.** D03 is read as: not worse than 0.97 of flat at lower logical work is TREE_COMPETITIVE; at least 1.03 is TREE_AHEAD (§8.2).
+8. **Key-on-storage is an arithmetic identity, not a corrected simulation** (§9).
+9. **Incremental classes are defined against the dense sequential arm.** Replay and exact retrieval are run and reported beside them, but enter no class (§8.5).
+10. **Oracle routing for the tree is run at 16,384 slots only**; the 4,096-slot ladder omits R0a (§10).
+11. **One independent audit covers all lanes**, with a section per lane, instead of one audit per lane.
+12. **One data draw.** Seeds replicate initialization, not data.
 
 ## 1. Evidence boundary
 
@@ -44,7 +51,7 @@ Scope: a 27,392-parameter frozen byte-level backbone, synthetic facts, RAM only,
 |---|---|---|
 | A — capacity | D01–D06 | task gates G1–G4 |
 | B — optimization and collapse | D07 | G1–G4; controls are Lane A's 16K cells |
-| C — locality | D08, D09 | synthetic part: none. Trained part: the 4K→16K capacity step is supported for the architecture concerned (§8.2), and the cell is UTILIZATION_PRESERVED or UTILIZATION_IMPROVED |
+| C — locality | D08, D09 | synthetic part: none. Trained part: the 4K→16K step is supported for the architecture concerned (§8.2), and that architecture's B1 cell with α_u = 0.25, α_c = 0 is UTILIZATION_PRESERVED or UTILIZATION_IMPROVED against its dose-zero 16K cell |
 | D — incremental | D10 | G1–G4 on sets A and B; phase-A accuracy ≥ 0.5 |
 
 All lanes run in parallel after the common freeze, as the draft asks. If Lane C's gate fails its trained part is **H17-LOC NOT EVALUATED**, descriptive only. A passing subset is never promoted.
@@ -58,7 +65,7 @@ Generated locally from frozen seeds. No corpus, download, teacher or third-party
 ### 4.1 Facts
 
 - **Alphabet Σ:** 32 printable ASCII bytes, fixed in the config.
-- **Identifier:** 5 symbols; the first four uniform, the fifth their sum modulo 32. Any two identifiers differ in at least two positions, at every size. Without this, the share of facts with a one-symbol neighbour would rise from 22% to 98% across sizes and facts would get harder for a reason unrelated to memory.
+- **Identifier:** 5 symbols; the first four uniform, the fifth their sum modulo 32. Any two identifiers differ in at least two positions, at every size. This removes one-symbol neighbours (without it, 22% → 98% of facts would have one). It does not hold neighbour density constant: the share of facts with a two-symbol neighbour still rises from 49% to 91% to 100%, and 60% of those neighbours share the checksum symbol next to the answer site (auditor check R1). Accuracy is reported separately for facts with and without such a neighbour.
 - **Answer:** 1 symbol, uniform and independent of everything else. Chance is 1/32; a fact carries 5 bits.
 - **Counts:** proportional track 2,048 / 8,192 / 32,768 facts at 4,096 / 16,384 / 65,536 slots; fixed track (D04) 2,048 facts at every size.
 - **Unseen-fact control:** 2,048 valid identifiers never trained, random answers.
@@ -67,7 +74,7 @@ Generated locally from frozen seeds. No corpus, download, teacher or third-party
 
 - **Record:** 8 bytes — separator, 5 identifier bytes, binding byte, answer byte. The **answer site** is the binding byte's position; its target is the answer byte.
 - **Context:** 64 bytes = 8 records; with next-byte targets this gives 63 targets, of which exactly 8 are answer sites.
-- **Template:** a (separator, binding) byte pair. The pool is the 48 bytes most frequent in the backbone's training corpus that are not in Σ; 16 training pairs T, 8 pairs H1, 8 pairs H2, split by seed, so held-out templates are exchangeable with training ones. One template per context.
+- **Template:** a (separator, binding) byte pair. The pool is the 48 bytes most frequent in the backbone's training corpus that are not in Σ. It is split by seed into disjoint byte sets: 32 bytes for T (16 separators and 16 binding bytes, paired one to one), 8 for H1 and 8 for H2 (each 4 separators × 4 binding bytes, 8 of the 16 combinations by seed). No byte appears in more than one of T, H1, H2. One template per context.
 
 ### 4.3 Planted access structure
 
@@ -94,7 +101,7 @@ If restored by the human lead: link facts map an identifier to an identifier, ch
 ### 4.6 Generator checks (gate G1)
 
 1. Identifier uniqueness and checksum; exact coverage and equal frequency on every stream.
-2. Independence of answers from each identifier position, template, cluster and record index, by Monte Carlo permutation tests (10,000 permutations, seeded), none below 0.001 after Bonferroni correction. Chi-square is not used: its expected counts would be below 5.
+2. Independence of answers from each identifier position, template, cluster and record index, by seeded Monte Carlo permutation tests, none below 0.001 after Bonferroni correction within a stream. The number of tests k per stream is listed in the config; permutations ≥ 2,000·k. Chi-square is not used: its expected counts would be below 5.
 3. No panel context appears in training; no fact's record precedes its own answer site in a context.
 4. A dictionary lookup scores exactly 1.0 on trained facts and exactly the count of chance matches on unseen facts.
 5. Rehearsal and calibration seeds are disjoint from registered seeds.
@@ -148,7 +155,7 @@ Width 16 is historical. Width 32 is registered for flat R0 and R1 at 16,384 and 
 - **No-memory baseline** and **exact retrieval (D01)**.
 - **Frozen-hidden probes:** nearest stored answer-site hidden state, and a 32-way linear probe per identifier position. No memory involved; they say how much of the identity the frozen block exposes.
 - **Dense adapter**, hidden width set so its parameter count matches the key-16 memory within 0.1%, same loss, exposure and optimizer.
-- **Row-lazy Adam arm (A10):** flat R0 at the three sizes with per-row moments, a row updated only when its gradient is non-zero, bias correction by the row's own update count. Each exposure then moves a row about one learning rate at every size.
+- **Row-lazy Adam arm (A10):** flat R0 at the three sizes with per-row moments, a row updated only when its gradient is non-zero, bias correction by the row's own update count. Row-lazy applies to the key and value tables only; projections, gate and router use AdamW. Its learning rate is 0.012 *(lead's choice)*, so that a row moves per exposure about what AdamW moves it at 4,096 slots, and the same at every size.
 - **Value permutation and memory disabled** on every trained memory cell.
 
 ## 6. Measurements
@@ -158,34 +165,39 @@ Width 16 is historical. Width 32 is registered for flat R0 and R1 at 16,384 and 
 With e = 1 − accuracy over F facts, accuracy counted on the most probable symbol within Σ, ties counted wrong:
 
 - **Primary: I_acc = F · [5 − h₂(e) − e·log₂31] bits** (Fano bound; exactly 0 at chance, 1.52 bits per fact at accuracy 0.5). Every rule uses I_acc.
+- I_acc is set to 0 for a cell whose accuracy is at or below the upper end of the G2 interval for its fact count. (The formula is positive below chance: 0.046 bits per fact at accuracy 0.)
 - **Secondary:** the unfloored log-loss gain Σ_f (5 + log₂ p_f) with p_f renormalized over Σ; it can be negative.
 - Descriptive only: a floored sum (it is positive for a model that knows nothing, so it enters no rule); probability mass outside Σ; accuracy by template panel.
 - Ratios per slot, per stored parameter and per key product (logical).
 
 ### 6.2 Useful slots
 
-- **Knock-out:** at one fact's answer site, keep selection and weights, remove the chosen slots' values from the weighted sum, leave all other positions unchanged. Selections and weights are cached, so no knock-out needs a table edit.
-- **Minimal support of a fact:** the shortest prefix of its selected slots in order of weight whose knock-out makes the fact incorrect with p_f ≤ max(2/32, p_f^nomem + 0.02), p_f^nomem being the no-memory probability of the correct symbol. Facts answered incorrectly have none.
+- **Knock-out:** remove the chosen slots' values from the weighted sum at the fact's answer site **and at the record's six earlier positions** wherever those slots are selected; selections and weights stay as cached; other records are unchanged. (The memory reads at every position, and the position before the answer site already sees the whole identifier, so a fact can be stored one position early.)
+- **Minimal support of a fact:** candidate slots are the union of slots selected at the record's seven input positions, ordered by summed weight; the minimal support is the shortest prefix whose knock-out makes the fact incorrect with p_f ≤ max(2/32, p_f^nomem + 0.02), p_f^nomem being the no-memory probability of the correct symbol. Facts answered incorrectly have none.
 - **Useful slot:** a slot in at least one minimal support. **U\*** is their count.
-- **Specificity (condition for interpreting U\*):** knocking out 8 slots drawn from other facts' minimal supports changes p_f by less than 0.05 on at least 95% of facts; and zeroing one of 64 contiguous slot groups leaves facts whose minimal support avoids the group within 0.02 accuracy. If either fails, U\* is marked NOT INTERPRETABLE for the cell and the classes that use it are INTERMEDIATE.
+- **Specificity (condition for interpreting U\*):** knocking out 8 slots drawn from other facts' minimal supports, excluding every slot selected in the fact's own record, changes p_f by less than 0.05 on at least 95% of facts; and zeroing the **values** of one of 64 contiguous slot groups at all positions, selections kept, leaves facts whose minimal support avoids the group within 0.02 accuracy. If either fails, U\* is marked NOT INTERPRETABLE for the cell and the classes that use it are INTERMEDIATE.
+- Reported for every cell: the share of correct facts that stay correct when the whole answer-site read is removed, and the mean minimal-support length.
 - Reported, never used alone: distinct selected slots, entropy-effective slots, hot-64 share, dead slots, weight entropy of each read, facts per slot, keys first entering any query's top 64 after update 0.
 
 ### 6.3 Optimization (every cell, no extra cells)
 
-- Per update and parameter group: gradient norm of the task loss and of each regularizer, and norm of the parameter change.
+- Per update and parameter group (keys selected at an answer site, keys that are top-64 candidates but unselected, untouched keys, values, router, projections): gradient norm of the task loss and of each regularizer, and norm of the parameter change.
 - **Per key row and value row: cumulative movement on updates where the row had a task gradient, and on updates where it had none.** This answers the P8 question directly.
 - Per snapshot: 8th–9th score margin distribution, soft mass outside the top 8, whether each regularizer's hinge was active, dead-slot count.
-- Trainable parameters, initialized slots and optimizer-state bytes per cell.
+- Trainable parameters, initialized slots and optimizer-state bytes per cell. Every cell reports examples, tokens, updates, unique facts, the exposure distribution and wall time.
+- **REGULARIZER-DRIVEN MOVEMENT** is printed with a B1 or C1 class when more than half of the cell's cumulative key movement occurred on updates where the row had no task gradient. (With fixed coefficients, Adam still moves a row whose only gradient is 10⁻⁶ by almost a full learning-rate step; this annotation is how the study reports it.)
 
 ## 7. Objectives (D07, D08)
 
 Soft inclusion as ADR-0015 revision 3: π_s = σ((score_s − τ)/0.25) on a query's top-64 candidates, τ the midpoint of the 8th and 9th scores, not detached.
 
-**Global usage floor.** u is an exponential moving average of the batch-normalized π usage over the last F/128 updates (one pass over the facts); the gradient flows only through the current batch's term. With M = min(N, 8F)/2:
+**Global usage floor.** u_t = (1 − b)·u_{t−1} + b·ū_t with b = 128/F (one pass over the facts); u_{t−1} is detached; u₀ is the first batch's ū. ū_t is the batch-normalized π usage **at answer sites only**. The applied gradient is λ_u·(∂R_glob/∂u at u_t)·∂ū_t/∂θ, **without** the factor b *(lead's choice)*; with b the doses would shrink by 16, 64 and 256 at the three sizes. With M = min(N, 8F)/2:
 
 R_glob = max(0, ln M − H(u)) / ln N.
 
 It is zero while the memory spreads over at least half of the slots it could use. A batch-local floor is not used: a memory using a thousand slots would satisfy it at any size.
+
+**Soft against hard usage.** Every B1 and C1 cell reports H(u) from π and from hard top-8 selections at answer sites, and the soft mass outside the top 8. A cell whose soft H(u) ≥ ln M while its hard entropy-effective-slot ratio is below 1.05 is annotated **SOFT-USAGE ONLY**: the floor was met by probability mass outside the selected slots.
 
 **Stated limit.** A key that is in no query's top 64 receives no gradient from any term and cannot be revived by gradient. The study measures how many keys enter a top 64 after update 0; it does not claim a cure for dead slots.
 
@@ -194,37 +206,37 @@ It is zero while the memory spreads over at least half of the slots it could use
 **Coefficients — absolute, no measurement, no cap, no adaptation:**
 
 - λ_u = α_u · ln 32 / (ln M / ln N): a fully collapsed memory costs α_u times the chance-level answer loss.
-- λ_c = α_c · ln 32 / (1 − 1/8): the worst co-access value costs α_c times the chance-level answer loss.
-- Doses: α_u ∈ {0, 0.25, 1}; α_c ∈ {0, 0.25, 1}, the non-zero α_c only together with α_u = 0.25. No other dose is run; none is selected afterwards.
+- λ_c = α_c · ln 32 / (1 − 1/8), multiplying (R_co − 1/8): the best co-access value costs 0 and the worst α_c times the chance-level answer loss.
+- Doses: α_u ∈ {0, 0.25, 1}; α_c ∈ {0, 0.05, 0.25} *(lead's choice; a dose of 1 would cost more than the chance-level answer loss at random selection)*, the non-zero α_c only together with α_u = 0.25. No other dose is run; none is selected afterwards.
 
-Revision 1's rule (a coefficient from gradient norms at initialization, capped at 100) is withdrawn: in P8's own records the usage hinge would have been inactive at initialization in every flat cell, giving a zero gradient, and both doses would have hit the cap in the tree cells.
+Revision 1's rule (a coefficient from gradient norms at initialization, capped at 100) is withdrawn: in P8's own records the usage hinge would have been inactive at initialization in every flat cell, giving a zero gradient, and, by the auditor's argument (not computed from the records), both doses would probably have hit the cap in the tree cells.
 
 ## 8. Gates, thresholds, classes
 
-Thresholds may change only before the freeze, by a recorded revision approved at the second decision.
+After the calibration outputs are written, the only changes allowed before the freeze are E by the rule of §12, sizes marked TASK_CEILING_FAIL, and the registered reductions of `RESOURCE_BUDGET.md` with their rule amendments. Any other change to a threshold, rule, dose or the matrix is a new design revision; the auditor re-checks it and it is presented at decision 2 as made after calibration.
 
 ### 8.1 Task gates
 
 - **G1** generator checks (§4.6).
-- **G2** chance: no-memory baseline and unseen-fact accuracy, once per size × track × primary panel (16 tests), each inside the exact binomial central interval of level 1 − 0.001/16 around 1/32. The same corrected interval is "chance" wherever a rule says so.
-- **G3** readout ceiling, **decided in the calibration** (§12 step 4): R2 accuracy ≥ 0.95 on rehearsal panels at every size at the selected exposure. If it is not reached at E = 128 at some size, that size is `TASK_CEILING_FAIL` and is not run. In the registered run R2 is a diagnostic.
+- **G2** chance, per primary panel: the no-memory baseline on the 2,048-, 8,192- and 32,768-fact sets (the fixed track uses the 2,048-fact proportional set), and the unseen-fact set: 8 tests, each inside the exact binomial central interval of level 1 − 0.001/8 around 1/32. The same interval is "chance" wherever a rule says so. The unseen-fact accuracy of every trained cell is reported against it; a cell outside it is flagged **LEAKAGE** and its lane is not interpreted until the auditor explains it.
+- **G3** readout ceiling, **decided in the calibration** (§12 step 4): R2 accuracy ≥ 0.95 on rehearsal panels at every size at the selected exposure. If it is not reached at E = 128 at some size, that size is `TASK_CEILING_FAIL` and is not run. In the registered run R2 is a diagnostic. If a size is TASK_CEILING_FAIL, every step involving it is NOT_EVALUATED; CAPACITY_POSITIVE cannot be assigned if 65,536 fails; if 16,384 fails, Lanes B, C (trained part) and D are NOT_EVALUATED.
 - **G4** determinism and identity: checkpoint restoration, stream hashes, P5 forward invariance.
 
 ### 8.2 Capacity (flat and learned tree separately; R0; matched exposure; Panels A and B separately)
 
 Let I_N be I_acc at size N.
 
-- **Step supported** (N → 4N): I_{4N}/I_N ≥ 3.0 in both B101 seeds and ≥ 2.5 in the B102 replicate, and accuracy at 4N above the G2 interval in every cell.
+- **Step supported** (N → 4N): accuracy ≥ 0.25 at both N and 4N in every cell of the step (0.25 is about 0.47 Fano bits per fact) *(lead's choice)*; I_{4N}/I_N ≥ 3.0 in both B101 seeds; and ≥ 2.5 in the B102 replicate where one exists (A7 and A10 have none and use the two B101 seeds only). A ratio with I_N = 0 is +∞.
 - **Beats dense:** I ≥ 1.10 × the matched dense adapter's, both seeds, at the larger size.
 - **Dependence:** value permutation and disabling give chance accuracy; at least 90% of correctly answered facts have a minimal support.
-- **Plateau:** the gain from the ½U snapshot to U is below 5% of I at U.
+- **Plateau:** I(U) − I(U/2) ≤ 0.05·I(U) in both seeds, with I set to 0 by §6.1 (a cell at chance at both snapshots has plateaued).
 
 Classes, **first matching rule wins**:
 
 | Order | Class | Rule |
 |---|---|---|
 | 1 | NOT REPLICATED | Panels A and B would give different classes |
-| 2 | CAPACITY_NOT_SUPPORTED | some step has ratio < 2.0 in both seeds and its larger cell has plateaued |
+| 2 | CAPACITY_NOT_SUPPORTED | some step has, in both seeds, ratio < 2.0 or accuracy below 0.25 at its larger size, and its larger cell has plateaued; the failing step is printed with the class |
 | 3 | CAPACITY_POSITIVE | both steps supported; beats dense at 16K and 64K; dependence holds; accuracy at 64K ≥ 0.50 |
 | 4 | CAPACITY_PARTIAL | the 4K→16K step is supported, with beats-dense and dependence at 16K |
 | 5 | UNDERTRAINED | some step is not supported and its larger cell has not plateaued |
@@ -233,20 +245,22 @@ Classes, **first matching rule wins**:
 Annotations (they do not change the class, and are always printed with it):
 
 - **EMPTY-SLOT-EFFECT** if, at 2,048 fixed facts (D04), I_acc per fact rises by more than 25% from 4K to 64K.
-- **OPTIMIZER-DEPENDENT** if a step supported under AdamW is not supported in the row-lazy arm (A10).
-- **KEY-WIDTH-LIMITED** if key-32 R0 supports the 16K→64K step and key-16 R0 does not.
-- **TREE_COMPETITIVE** (D03) if tree I_acc ≥ 0.97 × flat I_acc at 16K in both seeds and both panels; otherwise TREE_BEHIND; the fixed tree is reported beside it.
+- **OPTIMIZER-DEPENDENT** if a step supported under AdamW is not supported in the row-lazy arm (A10), and the row-lazy arm's accuracy at the smaller size of that step is ≥ 0.25 in both seeds; otherwise the annotation reads **OPTIMIZER-ARM UNINFORMATIVE**.
+- **KEY-WIDTH-LIMITED** if key-32 R0 supports the 16K→64K step and key-16 R0 does not. "Supported" for key-32 uses the two B101 seeds. If A7 at 65,536 is dropped, it is not assessed.
+- **TREE_AHEAD** (D03) if tree I_acc ≥ 1.03 × flat I_acc at 16K in both seeds and both panels; **TREE_COMPETITIVE** if ≥ 0.97; otherwise TREE_BEHIND. Logical key products (§5.2) are printed beside it, and the fixed tree is reported beside it. The draft's "tree must beat strong flat" is relaxed in this way (§0 item 7).
 
-**Ladder report**, per size, in Fano bits per fact with sign: exact − R2, R2 − R1, R1 − R0a, R0a − R0, and tree oracle-branch − tree R0; with the frozen-hidden probes beside R0. A gap is called material at ≥ 0.5 bits per fact.
+**Ladder report**, per size, in Fano bits per fact with sign: exact − R2, R2 − R1, R1 − R0a, R0a − R0, and tree oracle-branch − tree R0; with the frozen-hidden probes beside R0. A gap is called material at ≥ 0.5 bits per fact. At 4,096 slots only exact − R2 and R2 − R1 are reported (R0a is not run there).
 
 ### 8.3 Utilization (per architecture, against its dose-zero 16K cell; both seeds; both panels; first match wins)
+
+Every rule is evaluated per seed against the dose-zero cell of the same seed, and must hold in both seeds and both panels; seeds that disagree give INTERMEDIATE. Lane B classes need dose-zero 16K accuracy ≥ 0.25 in both seeds, else NOT_EVALUATED. C1 cells are classed against the B1 cell with α_u = 0.25, α_c = 0 of the same architecture and seed. If U\* is NOT INTERPRETABLE for the case or its reference, COLLAPSED is decided by the I ratio alone, and ENTROPY_INFLATION, IMPROVED and PRESERVED become INTERMEDIATE. Entropy-effective slots here are computed from hard top-8 selections at answer sites.
 
 | Order | Class | Rule |
 |---|---|---|
 | 1 | NOT REPLICATED | panels disagree |
 | 2 | COLLAPSED | U\* ratio < 0.80 or I ratio < 0.90 |
 | 3 | ENTROPY_INFLATION | entropy-effective slots ratio ≥ 1.25, I ratio < 1.03 and U\* ratio < 1.03 |
-| 4 | UTILIZATION_IMPROVED | I ratio ≥ 1.05 and U\* ratio ≥ 1.05 |
+| 4 | UTILIZATION_IMPROVED | I ratio ≥ 1.05, U\* ratio ≥ 1.05, and mean minimal-support-length ratio ≤ 1.10 *(lead's choice)* |
 | 5 | UTILIZATION_PRESERVED | I ratio ≥ 0.97, accuracy drop ≤ 0.02, U\* ratio ≥ 0.97 |
 | 6 | NO DIFFERENCE / INTERMEDIATE | otherwise |
 
@@ -254,20 +268,20 @@ Annotations (they do not change the class, and are always printed with it):
 
 - **Simulator:** re-implemented for general N (the P7-B code fixes 4,096 slots, a dense co-access matrix that would need 16 GiB at 65,536, and 16-bit layout files). Required before use: exact equivalence with P7-B on P7-B's recorded traces at 4,096, and a sparse co-access count. ADR-0016's identity null for single-set streams only.
 - **Traces:** answer-site reads (primary); all-position reads (secondary).
-- **Cache rule, fixed before evaluation:** W = distinct slots selected at answer sites on the calibration stream; R slots per page; cache pages C = max(1, round(ρ·W/R)); primary settings ρ ∈ {1/16, 1/4} × R ∈ {8, 32}. The ratio of cache to U\* is reported for every cell.
+- **Cache rule, fixed before evaluation:** W = distinct slots selected at answer sites on the calibration stream; R slots per page; cache pages C = max(1, round(ρ·W/R)); primary settings ρ ∈ {1/16, 1/4} × R ∈ {8, 32}. W is computed separately for each trace type. The ratio of cache to U\* is reported for every cell.
 - **E** = actual misses / mean of three count-preserving nulls. Null miss rate below 0.05, or a single-set stream, makes the setting DEGENERATE.
-- **Comparison:** E of the case and E of the reference, **each under its own optimized co-access layout fitted on its calibration stream**; the same under identity layout is reported beside it.
+- **Comparison:** E of the case and E of the reference, **each under its own optimized co-access layout fitted on its calibration stream**, unconstrained for flat and tree alike. Reported beside it as controls, entering no class: identity layout, frequency packing, a random-partition layout, and for the tree a branch-constrained co-access layout (each branch's slots contiguous).
 - **References:** locality reference = the dose-zero flat 16K cell; utilization reference for a locality cell = the cell with α_u = 0.25, α_c = 0 of the same architecture.
 - **Oracle layout (bound):** each slot goes to the cluster with most of its calibration accesses, ties to the lowest cluster number; clusters contiguous.
-- **Expectation stated in advance:** on this stream the reference's own optimized layout is expected to reach E near 0.77 when slots are shared at random across clusters, and far lower when sharing follows clusters (auditor's calculation). The test is therefore whether training changes how slots are shared, beyond what a layout fitted afterwards achieves.
+- **Expectation stated in advance:** on this stream the reference's own optimized layout is expected to reach E near 0.77 when slots are shared at random across clusters, and far lower when sharing follows clusters (auditor's calculation). The test is therefore whether training changes how slots are shared, beyond what a layout fitted afterwards achieves. A memory that packs each query's eight slots into one page reaches an E ratio of about 0.15 with no cluster structure (auditor toy R4); cluster-coherent sharing must cover about 35–50% of facts to pass 0.80. **Pages per query (within-query co-selection) and cross-query reuse are reported separately for every locality cell.**
 
 Classes, all four settings, both tie rules, both seeds, both panels, first match wins:
 
 | Order | Class | Rule |
 |---|---|---|
 | 1 | NOT REPLICATED | panels disagree |
-| 2 | DEGENERATE | any primary setting is degenerate |
-| 3 | COLLAPSED / QUALITY_FAILED | §8.3 COLLAPSED, or I ratio to the locality reference < 0.97 |
+| 2 | COLLAPSED / QUALITY_FAILED | §8.3 COLLAPSED, or I ratio to the locality reference < 0.97 |
+| 3 | DEGENERATE | any primary setting is degenerate for the case or its reference |
 | 4 | LOCALITY_POSITIVE | E ratio ≤ 0.80; cell UTILIZATION_PRESERVED or IMPROVED |
 | 5 | CONCENTRATION_ONLY | raw miss ratio ≤ 0.80 and E ratio > 0.90 |
 | 6 | WORSE / NO DIFFERENCE / INTERMEDIATE | E ratio ≥ 1.10 / in (0.90, 1.10) / otherwise |
@@ -279,6 +293,10 @@ A hierarchy advantage needs the tree case to be LOCALITY_POSITIVE against the **
 - Phase A: E exposures of A. Phase B from snapshot V1: E exposures of B.
 - Arms in phase B: flat sequential (all addition parameters train); flat memory-only (keys and values train; projections and gate frozen); learned tree sequential; flat with replay; dense sequential; dense with replay; flat joint on A∪B from initialization (bound); exact retrieval (append).
 - **Replay** keeps B's E exposures and adds one replayed A record per B record as extra rows; updates and examples are reported, and replay arms are compared only with each other and the bound.
+- Sets A and B have their own clusters of 16; phase-B contexts contain B facts only; replay contexts contain A facts only.
+- Every phase-B arm starts from V1's parameters with a **fresh optimizer state** *(lead's choice; no optimizer history carries between phases)*. V1 also stores the optimizer state, for the restoration test only.
+- For the tree, memory-only is not run; tree sequential trains all addition parameters including the router.
+- Classes are assigned to flat sequential, flat memory-only and tree sequential, each against dense sequential.
 
 With a_A, a_B accuracy after phase B and a_A⁰ accuracy on A after phase A; classes need a_A⁰ ≥ 0.5, else NOT_EVALUATED. First match wins:
 
@@ -287,10 +305,10 @@ With a_A, a_B accuracy after phase B and a_A⁰ accuracy on A after phase A; cla
 | 1 | NOT REPLICATED | panels disagree |
 | 2 | NO_NEW_CAPABILITY | a_B < 0.5 × the joint bound's accuracy on B |
 | 3 | FORGETTING | a_A < 0.70 × a_A⁰ |
-| 4 | INCREMENTAL_POSITIVE | a_B ≥ 0.9 × the joint bound on B; a_A ≥ 0.90 × a_A⁰; and a_A exceeds the dense sequential arm's a_A by at least 0.10 absolute |
+| 4 | INCREMENTAL_POSITIVE | a_B ≥ 0.9 × the joint bound on B; a_A ≥ 0.90 × a_A⁰; and the arm's forgetting a_A⁰ − a_A is at least 0.10 smaller than the dense sequential arm's, whose own a_A⁰ must be ≥ 0.5 (else NOT_EVALUATED) |
 | 5 | INTERMEDIATE | otherwise |
 
-If the dense sequential arm itself retains a_A ≥ a_A⁰ − 0.10, the last condition cannot be met and the result is reported as **NO ADVANTAGE OVER DENSE**, which is a finding.
+**NO ADVANTAGE OVER DENSE** is an annotation printed with the class when the dense sequential arm's forgetting is ≤ 0.10.
 
 Reported: slots and bytes changed between V1 and V2, overlap of A and B minimal supports, updates, examples, logical lookup work.
 
@@ -308,6 +326,7 @@ Reported: slots and bytes changed between V1 and V2, overlap of A and B minimal 
 2. Capacity positive or partial, locality not positive → redesign placement or routing.
 3. Capacity not supported with a material ladder gap → investigate the indicated component (representation at R1 − R0a, interference at R0a − R0, keys at R2 − R1, width if KEY-WIDTH-LIMITED, optimizer if OPTIMIZER-DEPENDENT).
 4. `TASK_CEILING_FAIL`, or capacity not supported with no material gap → pause the line or redesign the testbed.
+5. UNDERTRAINED, INTERMEDIATE, NOT REPLICATED or NOT_EVALUATED in Lane A → no capacity decision; item 4 applies unless the human lead decides otherwise.
 
 No outcome authorizes further training, storage experiments or scaling.
 
@@ -336,30 +355,47 @@ Initialization seeds 1701 and 1702 on parent B101/O301; one replicate (seed 1701
 | A8 dense adapter, 3 sizes | 3 | 6 |
 | A10 flat R0 with row-lazy Adam, 3 sizes | 3 | 6 |
 | B1 usage dose 0.25 and 1 × flat, learned tree (16K) | 4 | 8 |
-| C1 locality dose 0.25 and 1 × flat, learned tree (usage 0.25, 16K) | 4 | 8 |
+| C1 locality dose 0.05 and 0.25 × flat, learned tree (usage 0.25, 16K) | 4 | 8 |
 | D1 phase A: flat, learned tree, dense | 3 | 6 |
 | D2 phase B: six trained arms; joint bound | 7 | 14 |
 | **Total trained cells** | | **100** |
 
 No training: exact retrieval, no-memory baseline, frozen-hidden probes, at every size and track.
 
+**Dependencies.** Training: each D2 sequential, memory-only or replay arm depends on the D1 cell of the same architecture and seed; every other cell is independent. Analysis: capacity classes depend on A1/A2 at all sizes (including B102) and on A8; annotations depend on A4 with A1 at 4K, and on A10, A7 and A3; B1 depends on A1/A2 at 16K; C1 depends on A1 16K flat and on the B1 α_u = 0.25 cells; the Lane C gate depends on A1/A2 at 4K and 16K and on the B1 α_u = 0.25 cells.
+
+**The ten diagnostic families** (auditor's mapping; none names a task family, so not running Family 2 leaves all ten):
+
+| ID | Registered blocks | Rule |
+|---|---|---|
+| D01 | A5 R2 + calibration; exact, no-memory, probes | G1, G2, G3 / TASK_CEILING_FAIL; exact − R2 |
+| D02 | A1, A8 | §8.2 flat class |
+| D03 | A1 16K, A2 16K, A3 | TREE_AHEAD / COMPETITIVE / BEHIND; fixed tree descriptive |
+| D04 | A4 + A1 4K | EMPTY-SLOT-EFFECT |
+| D05 | A1, A2, A8, A10 | §8.2 classes, both estimands; OPTIMIZER-DEPENDENT |
+| D06 | A5 R1, A5b, A6, A7 | ladder report; KEY-WIDTH-LIMITED; decision item 3 |
+| D07 | B1; controls A1/A2 16K | §8.3 |
+| D08 | C1; references A1 16K flat, B1 α_u = 0.25 | Lane C gate, §8.4, hierarchy rule |
+| D09 | traces of A/B/C cells; planted synthetic traces | §9 synthetic classes; ρ × R sweep; key-traffic identity |
+| D10 | D1, D2; exact append; version store | §8.5 |
+
 Data seeds: facts 170001, templates 170011, clusters 170031, training order 170041, calibration stream 170051, Panel A 170061, Panel B 170071, H1/H2 170081, mixed-cluster 170082, Lane D sets 170091 and 170092, R1 codes 170101, branch hash 170102, permutation tests 170111. Null seeds 171331–171333 (A) and 171341–171343 (B). Rehearsal and calibration seeds are 179001 upward and appear in no registered cell.
 
 ## 11. Resources
 
 - Apple M5 Max, 18 cores, 48 GB; CPU only.
-- **Projection (`RESOURCE_BUDGET.md`), not a measurement:** about 4 to 6 hours of charged execution at E = 32 (three or two training workers), and roughly twice that at E = 64.
+- **Projection (`RESOURCE_BUDGET.md`), not a measurement:** about 5 to 6 hours of charged execution at E = 32 with two training workers, and roughly twice that at E = 64.
 - **Proposed at the first decision:** a cap of 3 hours and 3 GiB per worker for calibration and rehearsal together.
 - **Fixed at the second decision, on rehearsal evidence:** per-worker and aggregate RSS caps, stage caps at twice the measured stage time, and the total. The draft's 8 hours and 2 GiB are not expected to hold twofold headroom; the registered reductions are listed in the budget.
-- At most three training workers, four simulation workers. Timing runs alone, with load recorded. No cloud, paid service, download or storage experiment.
+- At most two training workers and four simulation workers, 8 GiB aggregate, as the draft says. A third training worker and a higher aggregate are options the human lead may grant at decision 2 on rehearsal evidence. Timing runs alone, with load recorded. No cloud, paid service, download or storage experiment.
 
 ## 12. Order of work
 
-1. Auditor re-check of this revision.
+1. Auditor re-check of this revision (revision 3 is not yet re-checked).
 2. **Human decision 1:** approve this specification for implementation, calibration and rehearsal; accept or change the departures of §0; approve the delegation.
 3. Implementation with tests, including synthetic inputs that trigger every class and the dependent-cell stop rule.
-4. **Testbed calibration, rehearsal seeds only, written and audited.** Allowed: the frozen-hidden probes at 2,048 / 8,192 / 32,768 rehearsal facts; the R2 learning curve at each size up to E = 128; no-memory and exact controls; the largest answer probability attainable through the frozen final layers (linear algebra on frozen weights). **Not allowed:** any R0, R0a, R1, tree, dense or regularized arm. **It may change one thing, by this rule:** E is the smallest of {32, 64, 128} at which R2 reaches 0.95 at every size. A size that fails at 128 is `TASK_CEILING_FAIL`. The probes are reported and change nothing.
-5. Full-size rehearsal on rehearsal seeds for time and memory. Its record schema is a whitelist (time, RSS, finiteness, shapes); the auditor checks the schema. Loss and accuracy of compared arms are not recorded.
+4. **Testbed calibration, rehearsal seeds only, written and audited.** Allowed: the frozen-hidden probes at 2,048 / 8,192 / 32,768 rehearsal facts; the R2 learning curve at each size up to E = 128; no-memory and exact controls; the largest answer probability attainable through the frozen final layers (linear algebra on frozen weights). **Not allowed:** any R0, R0a, R1, tree, dense or regularized arm. **It may change one thing, by this rule:** E is the smallest of {32, 64, 128} at which R2 reaches 0.95 at every size. A size that fails at 128 is `TASK_CEILING_FAIL`. The probes are reported and change nothing. No threshold, rule, dose or matrix entry changes on calibration evidence (§8 opening).
+5. Full-size rehearsal on rehearsal seeds for time and memory. The rehearsal entry point writes records only through a validator whose allowed keys are the whitelist (time, RSS, finiteness, shapes); stdout and stderr go to a file the auditor checks for loss or accuracy values; no progress display shows loss.
 6. Auditor implementation audit: READY TO FREEZE.
 7. Registered data and panels generated and hashed; freeze of specification, code, configs, data and panel identities.
 8. **Human decision 2:** approve the frozen final revision, the selected E, the caps and the run.
@@ -370,7 +406,7 @@ Data seeds: facts 170001, templates 170011, clusters 170031, training order 1700
 - That slot entropy, distinct slots or the floored information sum show capacity.
 - That R0a, R1, R2 or oracle-branch results are system results, or that the ladder gives upper bounds.
 - That logical work is measured efficiency, or that simulation or the key-traffic identity is storage I/O.
-- That locality found here would arise without planted structure; equal-frequency planted clusters are a best case.
+- That cross-query locality found here would arise without planted structure; equal-frequency planted clusters are a best case, and within-query packing is not evidence about clusters.
 - That the usage term revives dead slots, unless §6.2's revival count shows it.
 - That Lane D shows continual learning in general, or teacher absorption.
 - Anything about composition or reasoning.
@@ -408,3 +444,22 @@ None. Pending.
 | M13 G2 false failures | 16 tests with corrected interval (§8.1) |
 | M14 budget | cached evaluation; dense cost; caps at decision 2 (§11, budget) |
 | m1–m18 | permutation tests; ties wrong; Σ-mass reported; 63 targets; panels and mixed-cluster panel; ½U snapshots; no batch halving; ρ = 1 descriptive; cache against U\* reported; NOT REPLICATED in every lane; precedence in §8.3; group ablation as an interpretability condition; tree oracle branch; one data draw stated; key traffic an identity; ENGINEERING_FAIL scope; per-lane analysis modules (plan); no gradient matching remains |
+
+## 17. How revision 3 answers the re-check
+
+| Re-check item | Change |
+|---|---|
+| RB1 near-chance memory could pass a step; Fano positive below chance; zero denominators; chance never plateaus | W1–W3: I set to 0 at chance, accuracy ≥ 0.25 at both sizes, ratio conventions, plateau at chance (§6.1, §8.2) |
+| RB2 moving-average gradient undefined | W7: estimator and gradient written out, without the factor b (§7) |
+| RB3 Lane C gate hid collapse; DEGENERATE before COLLAPSED | W12, W13: gate uses the usage-only cell; COLLAPSED first (§3, §8.4) |
+| Answers stored one position early | W10: knock-out over the record's seven positions (§6.2) |
+| Floor met by mass outside the top 8 | W8: hard-selection entropy in the rules; SOFT-USAGE ONLY (§7, §8.3) |
+| Adam amplifies tiny gradients | W22: REGULARIZER-DRIVEN MOVEMENT (§6.3) |
+| OPTIMIZER-DEPENDENT for the wrong reason | W5: accuracy condition, OPTIMIZER-ARM UNINFORMATIVE, learning rate 0.012 (§5.6, §8.2) |
+| Lane D dense floor, annotation, arms, optimizer state | W15 (§8.5) |
+| Calibration loophole | W23 (§8 opening, §12) |
+| Template pool, neighbour density, G2 count, permutations | W17–W20 (§4, §8.1) |
+| Locality by within-query packing | W14: reported separately; §13 reworded |
+| Departures missing from §0 | items 7–12 added; the worker count and aggregate memory return to the draft's values (§11); layout controls restored (§8.4) |
+| Budget | W28 in `RESOURCE_BUDGET.md` |
+| Remaining W items | W4, W6, W9, W11, W16, W21, W24–W26, W29–W31 applied as written |

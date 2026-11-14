@@ -1,0 +1,39 @@
+{"part": 1, "accuracy": 0.0, "fano_bits_per_fact": 0.0458}
+{"part": 1, "accuracy": 0.01, "fano_bits_per_fact": 0.01455}
+{"part": 1, "accuracy": 0.02, "fano_bits_per_fact": 0.00345}
+{"part": 1, "accuracy": 0.03, "fano_bits_per_fact": 4e-05}
+{"part": 1, "accuracy": 0.03125, "fano_bits_per_fact": 0.0}
+{"part": 1, "accuracy": 0.035, "fano_bits_per_fact": 0.00032}
+{"part": 1, "accuracy": 0.04, "fano_bits_per_fact": 0.00168}
+{"part": 1, "accuracy": 0.05, "fano_bits_per_fact": 0.00712}
+{"part": 1, "accuracy": 0.1, "fano_bits_per_fact": 0.07223}
+{"part": 1, "accuracy": 0.2, "fano_bits_per_fact": 0.31471}
+{"part": 1, "accuracy": 0.25, "fano_bits_per_fact": 0.47307}
+{"part": 1, "accuracy": 0.3, "fano_bits_per_fact": 0.65077}
+{"part": 1, "accuracy": 0.4, "fano_bits_per_fact": 1.05653}
+{"part": 1, "accuracy": 0.5, "fano_bits_per_fact": 1.5229}
+{"part": 1, "accuracy": 0.7, "fano_bits_per_fact": 2.63245}
+{"part": 1, "accuracy": 0.9, "fano_bits_per_fact": 4.03558}
+{"part": 1, "accuracy": 0.95, "fano_bits_per_fact": 4.46589}
+{"part": 1, "accuracy": 1.0, "fano_bits_per_fact": 5.0}
+{"part": 1, "small_delta_approx": "I ~ 23.83 * (acc - 1/32)^2 bits per fact", "below_chance_positive": true, "fano_at_acc_0": 0.0458, "note": "the formula is not monotone in accuracy below chance"}
+{"part": 1, "fano_bits_per_fact": 0.25, "accuracy_needed": 0.1773}
+{"part": 1, "fano_bits_per_fact": 0.5, "accuracy_needed": 0.2579}
+{"part": 1, "fano_bits_per_fact": 1.0, "accuracy_needed": 0.3869}
+{"part": 1, "fano_bits_per_fact": 2.0, "accuracy_needed": 0.5914}
+{"part": 2, "facts": 2048, "alpha": 6.25e-05, "accept_count": [35, 98], "upper_accuracy": 0.04785}
+{"part": 2, "facts": 8192, "alpha": 6.25e-05, "accept_count": [195, 321], "upper_accuracy": 0.03918}
+{"part": 2, "facts": 32768, "alpha": 6.25e-05, "accept_count": [900, 1152], "upper_accuracy": 0.03516}
+{"part": 3, "step": "4K->16K", "acc_small": 0.035, "acc_large": 0.04, "I_small_bits": 0.661, "I_large_bits": 13.757, "ratio": 20.81, "large_above_G2_upper": true, "step_supported_by_rev2_rule": true}
+{"part": 3, "step": "4K->16K", "acc_small": 0.033, "acc_large": 0.042, "I_small_bits": 0.147, "I_large_bits": 20.413, "ratio": 139.03, "large_above_G2_upper": true, "step_supported_by_rev2_rule": true}
+{"part": 3, "step": "16K->64K", "acc_small": 0.036, "acc_large": 0.036, "I_small_bits": 4.203, "I_large_bits": 16.813, "ratio": 4.0, "large_above_G2_upper": true, "step_supported_by_rev2_rule": true}
+{"part": 3, "step": "16K->64K", "acc_small": 0.034, "acc_large": 0.0358, "I_small_bits": 1.436, "I_large_bits": 15.456, "ratio": 10.76, "large_above_G2_upper": true, "step_supported_by_rev2_rule": true}
+{"part": 3, "case": "acc_small = 1/32 exactly", "I_small": 0.0, "ratio": "x/0 undefined in rev 2"}
+{"part": 3, "case": "acc_small = 0.028 (below chance, inside G2)", "I_small_bits_per_fact": 0.000261, "comment": "positive bits from a below-chance noise draw"}
+{"part": 4, "curve": "I ~ t^0.05", "gain_share_from_half_to_full": 0.0341, "plateaued_by_rev2_rule": true}
+{"part": 4, "curve": "I ~ t^0.074", "gain_share_from_half_to_full": 0.05, "plateaued_by_rev2_rule": true}
+{"part": 4, "curve": "I ~ t^0.1", "gain_share_from_half_to_full": 0.067, "plateaued_by_rev2_rule": false}
+{"part": 4, "curve": "I ~ t^0.2", "gain_share_from_half_to_full": 0.1294, "plateaued_by_rev2_rule": false}
+{"part": 4, "curve": "I ~ t^0.3", "gain_share_from_half_to_full": 0.1877, "plateaued_by_rev2_rule": false}
+{"part": 4, "curve": "I ~ t^0.5", "gain_share_from_half_to_full": 0.2929, "plateaued_by_rev2_rule": false}
+{"part": 4, "curve": "I(U/2) = I(U) = 0 (at chance)", "gain": 0, "threshold": 0, "plateaued_by_rev2_rule('gain < 5% of I(U)')": false, "consequence": "never plateaued -> UNDERTRAINED, not NOT_SUPPORTED"}

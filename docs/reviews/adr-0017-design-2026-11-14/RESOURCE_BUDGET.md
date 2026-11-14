@@ -1,4 +1,4 @@
-# ADR-0017 — projected M5 resource budget (design revision 2)
+# ADR-0017 — projected M5 resource budget (design revision 3)
 
 **A projection, not a measurement of the study.** It rests on one indicative timing of a stand-in memory update (`benchmark/indicative_update_timing.py`, output `benchmark/indicative_update_timing_run1.jsonl`) on a machine that was not isolated (load average about 3). The stand-in has no backbone, no real data and no ArborLM code. The auditor reproduced the training arithmetic and found the first version left out evaluation and under-costed the dense adapter (`REVIEW.md` M14); both are corrected here. The full-size rehearsal replaces every number before the freeze, and the caps are fixed only at the human lead's second decision.
 
@@ -60,19 +60,19 @@ These contain the threefold timing allowance. Three workers assume no thread con
 | Limit | Human draft | Projection-based proposal | Reason |
 |---|---|---|---|
 | Sampled RSS per worker | 2 GiB | 3 GiB | the 65,536-slot flat stand-in peaked at 1.11 GB; real code is expected near 1.5 GB |
-| Aggregate RSS | 8 GiB | 12 GiB with three training workers; 8 GiB with two | 3 × 3 GiB plus four simulation workers |
+| Aggregate RSS | 8 GiB | 8 GiB with two training workers (default); 12 GiB only if a third worker is granted at decision 2 | 2 × 3 GiB plus four simulation workers |
 | Charged execution | 8 h | twice the rehearsal-based projection: about 8–12 h at E = 32, about 15–21 h at E = 64 | twofold headroom |
 
-**The draft's 8 hours hold twofold headroom only at E = 32 with three training workers. They do not hold at E = 64.**
+**By this budget's figures, twice the E = 32 projection with three workers is 8.2 h, just above 8 h (the auditor's recount gives 7.6 h, or 8.4 h if key-32 cells cost twice key-16, which this table does not yet assume). With two workers — the draft's limit and this design's default — or at E ≥ 64, 8 hours do not hold twofold headroom even after the registered reductions. The human lead must then raise the cap or the study does not run as registered.**
 
 ## Registered reductions, in this order, if the human lead keeps 8 hours
 
-1. Drop the B102 replicates at 65,536 slots (2 cells; the 64K replicate condition of "step supported" then rests on two seeds).
-2. Drop block A7 at 65,536 slots (4 cells; KEY-WIDTH-LIMITED can then be assessed only at 16K).
-3. Drop the dense adapter replicate seed at 65,536 slots (1 cell; "beats dense" at 64K rests on one dense seed).
-4. If E = 128 is selected: the 65,536-slot size is run for flat R0, tree R0, R2 and dense only.
+1. Drop the B102 replicates at 65,536 slots (2 cells). Rule change: the 16K→64K step uses the two B101 seeds.
+2. Drop block A7 at 65,536 slots (4 cells). Rule change: KEY-WIDTH-LIMITED is not assessed.
+3. Drop the dense adapter's second seed at 65,536 slots (1 cell). Rule change: beats-dense at 64K compares both memory seeds with the single dense seed.
+4. If E = 128 is selected: the 65,536-slot size is run for flat R0, tree R0, R2 and dense only. Rule change: EMPTY-SLOT-EFFECT, OPTIMIZER-DEPENDENT and KEY-WIDTH-LIMITED at 16K→64K, and the 64K ladder terms R1 − R0a and R0a − R0, are not assessed; a CAPACITY_POSITIVE class is then printed with "OPTIMIZER-DEPENDENT: not assessed", and decision item 1 needs the human lead's explicit acceptance of that.
 
-No reduction changes a threshold. A reduction chosen after the rehearsal is recorded as a revision and approved at decision 2. The batch is never changed at one size only; if memory is short the score matrix is chunked, which leaves gradients identical.
+No reduction changes a threshold; each changes the rule stated with it. A reduction chosen after the rehearsal is recorded as a revision and approved at decision 2. The batch is never changed at one size only; if memory is short the score matrix is chunked, which leaves gradients identical.
 
 ## Isolation
 
