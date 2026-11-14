@@ -1,0 +1,272 @@
+{
+ "b101-o301-s601-C04": {
+  "calibration": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 470,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    733,
+    776,
+    795,
+    828,
+    1889,
+    2166,
+    2371,
+    2878
+   ]
+  },
+  "panelA": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 457,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    733,
+    776,
+    795,
+    828,
+    1889,
+    2166,
+    2371,
+    2878
+   ]
+  },
+  "panelB": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 447,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    733,
+    776,
+    795,
+    828,
+    1889,
+    2166,
+    2371,
+    2878
+   ]
+  },
+  "same_set_on_calibration_A_B": true
+ },
+ "b101-o301-s601-C05": {
+  "calibration": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 463,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    1799,
+    1818,
+    1881,
+    1889,
+    1916,
+    1952,
+    1961,
+    1992
+   ]
+  },
+  "panelA": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 452,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    1799,
+    1818,
+    1881,
+    1889,
+    1916,
+    1952,
+    1961,
+    1992
+   ]
+  },
+  "panelB": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 477,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    1799,
+    1818,
+    1881,
+    1889,
+    1916,
+    1952,
+    1961,
+    1992
+   ]
+  },
+  "same_set_on_calibration_A_B": true
+ },
+ "b101-o301-s602-C04": {
+  "calibration": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 537,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    585,
+    851,
+    882,
+    1862,
+    2753,
+    3432,
+    3472,
+    3597
+   ]
+  },
+  "panelA": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 507,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    585,
+    851,
+    882,
+    1862,
+    2753,
+    3432,
+    3472,
+    3597
+   ]
+  },
+  "panelB": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 526,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    585,
+    851,
+    882,
+    1862,
+    2753,
+    3432,
+    3472,
+    3597
+   ]
+  },
+  "same_set_on_calibration_A_B": true
+ },
+ "b101-o301-s602-C05": {
+  "calibration": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 203,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    275,
+    334,
+    401,
+    480,
+    1372,
+    1493,
+    1496,
+    1528
+   ]
+  },
+  "panelA": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 208,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    275,
+    334,
+    401,
+    480,
+    1372,
+    1493,
+    1496,
+    1528
+   ]
+  },
+  "panelB": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 219,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    275,
+    334,
+    401,
+    480,
+    1372,
+    1493,
+    1496,
+    1528
+   ]
+  },
+  "same_set_on_calibration_A_B": true
+ },
+ "b102-o302-s601-C05": {
+  "calibration": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 748,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    1357,
+    1359,
+    1378,
+    1383,
+    1384,
+    1390,
+    1524,
+    1535
+   ]
+  },
+  "panelA": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 735,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    1357,
+    1359,
+    1378,
+    1383,
+    1384,
+    1390,
+    1524,
+    1535
+   ]
+  },
+  "panelB": {
+   "distinct_sets": 1,
+   "distinct_within_row_orders": 748,
+   "queries": 32768,
+   "rows_in_ascending_order": 0,
+   "rows_with_8_distinct": 32768,
+   "the_set": [
+    1357,
+    1359,
+    1378,
+    1383,
+    1384,
+    1390,
+    1524,
+    1535
+   ]
+  },
+  "same_set_on_calibration_A_B": true
+ }
+}

@@ -1,0 +1,13 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p8-supplement-spec-review-2026-11-14/order_invariance_synthetic.py", line 131, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p8-supplement-spec-review-2026-11-14/order_invariance_synthetic.py", line 88, in main
+    "stream_hash_equal": pack_hash(stream) == pack_hash(perm),
+                         ^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p8-supplement-spec-review-2026-11-14/order_invariance_synthetic.py", line 33, in pack_hash
+    return hashlib.sha256(t.to(torch.int16).numpy().astype("<i2").tobytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Numpy is not available
