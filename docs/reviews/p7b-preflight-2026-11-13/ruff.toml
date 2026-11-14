@@ -1,0 +1,6 @@
+# Audit tools and checks are kept byte-identical to the versions whose outputs are recorded here
+# (their SHA-256 is embedded in the confirmation files), so two unused imports are tolerated.
+extend = "../ruff.toml"
+
+[lint]
+extend-ignore = ["F401", "E731"]

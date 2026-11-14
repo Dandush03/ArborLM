@@ -1,0 +1,55 @@
+{
+ "jobs": 1,
+ "labels_in_manifest": 81,
+ "python": "3.12.14 (main, Sep  1 2026, 14:09:38) [Clang 22.1.3 ]",
+ "registered_selection_used": false,
+ "results": [
+  {
+   "differences": [],
+   "entropy_nats": 4.874180010634526,
+   "integrity_problems": [],
+   "kind": "flat",
+   "label": "b102-o301-flat-s501",
+   "null_stream_sha256": [
+    "aa7045ca877e002bb4e9fbbc5df6f5167de9e9fa60b3343bb0f8fb6f5147e653",
+    "6296e234ed537d543d3a3c5cac238739a2ff1b687d93ee8d08cab5c2be259711",
+    "c4241d27fe74999c81b9e92a1271172ee0959ca082384b4922e2e273d75fcc7d"
+   ],
+   "record_sha256": "da6c23f22afb54479de907790b7e6a3dd4025b60dd35d068937ac78cfc205c68",
+   "seconds": 10.582300874986686,
+   "simulations": 116
+  },
+  {
+   "differences": [],
+   "entropy_nats": 4.671319870647786,
+   "integrity_problems": [],
+   "kind": "fixed_tree",
+   "label": "b101-o302-fixed_tree-s501",
+   "null_stream_sha256": [
+    "ee8024bb8b892db4e11b6d355e692e4af425452b76ca33ec291f1d96183aada5",
+    "c32ecf9a5869909a658f77d53fa25eedbbf4e84ca41cacd22aaa096757e5f01f",
+    "77a3d014d645b50c94033a897be4d998fd4ea0b62e3d3a521c6fb1733f547c46"
+   ],
+   "record_sha256": "f803786d58b1a049b2e76de686728aa8b0c62902208e59fd4c5b8ed197500459",
+   "seconds": 9.915071542025544,
+   "simulations": 132
+  },
+  {
+   "differences": [],
+   "entropy_nats": 4.581558433324922,
+   "integrity_problems": [],
+   "kind": "learned_tree",
+   "label": "b101-o303-learned_tree-s502",
+   "null_stream_sha256": [
+    "b4de2d655165d39be7ca7cb3fdc18f2df91090a9e73de7df3e701e7572e73f3a",
+    "07d6adda236750b08264e899fcac9dcdccaf51617ce8046db1fa5de9842d91a9",
+    "4570d1a88dfb142e2fa05ac3a74d873f0ffb062b354bc4a047fb058092a7a5f9"
+   ],
+   "record_sha256": "a2bd2fa17b778d82e56947c51394673462c1b9d8c22ddb01996944505d18dd78",
+   "seconds": 9.644955625000875,
+   "simulations": 132
+  }
+ ],
+ "tool_sha256": "4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1",
+ "wall_seconds": 30.16758149996167
+}

@@ -8,7 +8,7 @@ ArborLM is unproven research. Never describe a result as a success unless a vali
 
 1. `AGENTS.md`
 2. `docs/RESEARCH_HANDOFF.md`, `docs/EXPERIMENT_PROTOCOL.md`, `docs/RESEARCH_LOG.md`
-3. `docs/decisions/` — ADR-0010 (P5) and ADR-0011 (P6, human-approved, executed once) are completed studies. ADR-0012 (governance) and ADR-0013 (P7-A proposal) are **not approved** until their approval records are filled in. Check each ADR's status line and approval record; do not rely on this summary.
+3. `docs/decisions/` — ADR-0010 (P5) and ADR-0011 (P6, human-approved, executed once) are completed studies. ADR-0013 (P7-A, human-approved, executed once) is also complete. ADR-0014 (P7-B, human-approved for execution under a study-specific workflow, executed once on two streams) is also complete. ADR-0012 (governance) is **not approved**. Check each ADR's status line and approval record; do not rely on this summary.
 4. `docs/reviews/` — Claude-workflow reviews of completed studies.
 
 ## Standing rules

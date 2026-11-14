@@ -1,0 +1,155 @@
+{
+ "checkpoints": {
+  "b101-o301-fixed_tree-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-fixed_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-fixed_tree-s503": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-flat-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-flat-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-flat-s503": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-learned_tree-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-learned_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o301-learned_tree-s503": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o303-flat-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b102-o302-fixed_tree-s503": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b102-o302-learned_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b102-o303-learned_tree-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b103-o302-fixed_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b103-o302-flat-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b103-o302-flat-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b103-o303-fixed_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b103-o303-learned_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  }
+ },
+ "label": "independent engineering evidence; not Astra validation; not human approval",
+ "layouts_compared": [
+  "L-BCOAX",
+  "L-COAX",
+  "L-FREQ",
+  "L-PCOAX-1",
+  "L-PCOAX-2",
+  "L-PCOAX-3",
+  "L-PCOAX-4",
+  "L-PCOAX-5",
+  "L-NCOAX (actual stream only)"
+ ],
+ "record_sha256": {
+  "b101-o301-fixed_tree-s501": "d51cb872a10a59a6ca3318ca76145f728e1762e3195e16392365d1b27c22dddd",
+  "b101-o301-fixed_tree-s502": "b127743357ddfb981c1c57f445f61ef121b7b039fadc69b1ae78f2beabb7b423",
+  "b101-o301-fixed_tree-s503": "715ad5bc013552b738f4d4488ac1c8e1333249d1151432b2153ffca878ee2c49",
+  "b101-o301-flat-s501": "45b1df13cf5b819ac6c2dc87a4d4940921d985d8f3df5c7329db7454cb1c0e1b",
+  "b101-o301-flat-s502": "87a6c44e977dab4ed1b80606b4fd39f177d14bbd5213e62505476d562f9f820b",
+  "b101-o301-flat-s503": "8c0f7e87ef40103c3058f988831dc77b5611b9f817ef33b118e0f38f65af67a5",
+  "b101-o301-learned_tree-s501": "ef680afcef7c7d430f0a9a36c611f0d004dd2d3096040694d214364a98e4884e",
+  "b101-o301-learned_tree-s502": "97f3d055cf0d267446af6dda12c9c689a83d0c6d73347fc5eda43ecd4ff2897c",
+  "b101-o301-learned_tree-s503": "95df93dc6fbd2264f4b6a56aaca4e3c9fd9f771f2bd63e0a27059f426f9f562b",
+  "b101-o303-flat-s501": "7a32b186b6c64f715a2fcc6541b63f4a1063df505b2566c7978f860c024c72fe",
+  "b102-o302-fixed_tree-s503": "2b1db07b9b35691e202aec86e07274c59cb86b422eb67ebc54fc4e73efdc7b23",
+  "b102-o302-learned_tree-s502": "f2adf9104da08bece78c46210db8ca0599fa1279c7f4f24b006439d3aa19857e",
+  "b102-o303-learned_tree-s501": "543328c5c04a3e6d916b1697d6261b2e212882144f9cf4b05abc66c47b0e46c3",
+  "b103-o302-fixed_tree-s502": "9602a3127adceedf840032dc8919a0aceaa0c518f37b87fb8622a011933a35d6",
+  "b103-o302-flat-s501": "6c7727c33cf1d73f73369a074984eca2bad2731e4175d42593c758daca500df9",
+  "b103-o302-flat-s502": "60bcf6d84f8099d20381b160cc4dd9acd0585552f9d98a3a4add8527018a7c8f",
+  "b103-o303-fixed_tree-s502": "278a3dd37d3879f40e21c4ffc40d1a6b579522717044ea3c99e9dcda442ef019",
+  "b103-o303-learned_tree-s502": "0284d101c2a0d587468c20caca968a6135badc782526c81a98a9a9b4af960d32"
+ },
+ "schema": "p7b-resim-confirmation-v1",
+ "selection": [
+  "b101-o301-flat-s501",
+  "b101-o301-flat-s502",
+  "b101-o301-flat-s503",
+  "b101-o303-flat-s501",
+  "b103-o302-flat-s501",
+  "b103-o302-flat-s502",
+  "b101-o301-fixed_tree-s501",
+  "b101-o301-fixed_tree-s502",
+  "b101-o301-fixed_tree-s503",
+  "b102-o302-fixed_tree-s503",
+  "b103-o302-fixed_tree-s502",
+  "b103-o303-fixed_tree-s502",
+  "b101-o301-learned_tree-s501",
+  "b101-o301-learned_tree-s502",
+  "b101-o301-learned_tree-s503",
+  "b102-o302-learned_tree-s502",
+  "b102-o303-learned_tree-s501",
+  "b103-o303-learned_tree-s502"
+ ],
+ "settings": [
+  {
+   "C": 32,
+   "R": 2
+  },
+  {
+   "C": 8,
+   "R": 8
+  }
+ ],
+ "simulate_stage_run_id": "SCRATCH-RECHECK-CAL-AS-STREAM-B",
+ "stream": "B",
+ "stream_source": "calibration",
+ "streams_compared": [
+  "actual",
+  "null_1",
+  "null_2",
+  "null_3"
+ ],
+ "tie_rules": [
+  "asc",
+  "desc"
+ ],
+ "tool": "independent_resim.py (auditor role, Claude Opus 5.5, standard library only) v1; sha256 4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1; layouts by independent_layouts.py sha256 bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9",
+ "tool_sha256": "4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1",
+ "verdict": "AGREE"
+}

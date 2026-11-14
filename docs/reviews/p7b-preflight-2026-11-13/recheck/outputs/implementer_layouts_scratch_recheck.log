@@ -1,0 +1,2 @@
+implementer scratch build: 81 checkpoints, wall 76.5 s (jobs=1), sum of per-checkpoint seconds 74.8, max passes 7, files opened: ['calib_branches.int8.bin', 'calib_selected.int16.bin']
+.venv/bin/python -I  $SP/recheck_impl_table.json 1  85.90s user 2.98s system 115% cpu 1:17.06 total

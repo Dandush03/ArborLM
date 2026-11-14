@@ -1,0 +1,53 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "b102-o302-flat-s502": {
+  "A8_equal": true,
+  "A0_equal": true,
+  "layout_hash_equal": {
+   "L-COAX8|R2": true,
+   "L-COAXg|R2": true,
+   "L-COAX8|R8": true,
+   "L-COAXg|R8": true,
+   "L-COAX|R512": true,
+   "L-PCOAX-1|R512": true
+  },
+  "seconds": 3.67513345903717
+ },
+ "b102-o302-fixed_tree-s502": {
+  "A8_equal": true,
+  "A0_equal": true,
+  "layout_hash_equal": {
+   "L-COAX8|R2": true,
+   "L-COAXg|R2": true,
+   "L-COAX8|R8": true,
+   "L-COAXg|R8": true,
+   "L-COAX|R512": true,
+   "L-PCOAX-1|R512": true,
+   "L-BCOAX|R512": true,
+   "L-BCOAXg|R512": true,
+   "L-BCOAX8|R2": true,
+   "L-BCOAX8|R8": true
+  },
+  "seconds": 2.707760707999114
+ },
+ "b102-o302-learned_tree-s502": {
+  "A8_equal": true,
+  "A0_equal": true,
+  "layout_hash_equal": {
+   "L-COAX8|R2": true,
+   "L-COAXg|R2": true,
+   "L-COAX8|R8": true,
+   "L-COAXg|R8": true,
+   "L-COAX|R512": true,
+   "L-PCOAX-1|R512": true,
+   "L-BCOAX|R512": true,
+   "L-BCOAXg|R512": true,
+   "L-BCOAX8|R2": true,
+   "L-BCOAX8|R8": true
+  },
+  "seconds": 2.591758291993756
+ }
+}
+SENSITIVITY CROSS-CHECK PASS
+.venv/bin/python -I   9.89s user 0.28s system 107% cpu 9.470 total

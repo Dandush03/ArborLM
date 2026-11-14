@@ -1,0 +1,2 @@
+fixed_tree tree/flat eff ratio: min 0.396 median 0.729 max 1.059 | pairs within +-10%: 6, +-20%: 12, tree >= flat: 3
+learned_tree tree/flat eff ratio: min 0.400 median 0.639 max 0.904 | pairs within +-10%: 1, +-20%: 3, tree >= flat: 0

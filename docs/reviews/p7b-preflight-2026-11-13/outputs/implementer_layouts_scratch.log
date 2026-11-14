@@ -1,0 +1,6 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+implementer scratch build: 81 checkpoints, wall 63.6 s (jobs=1), sum of per-checkpoint seconds 62.1, max passes 7, files opened: ['calib_branches.int8.bin', 'calib_selected.int16.bin']
+.venv/bin/python -I  $SP/impl_table_jobs1.json 1  70.03s user 3.09s system 113% cpu 1:04.43 total

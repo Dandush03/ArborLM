@@ -1,0 +1,1 @@
+Attempt 1 failed: under zsh the unquoted $SEL variable was passed as one argument (zsh does not word-split), so --selection received one label "b102-o301-flat-s501 b101-o302-fixed_tree-s501 b101-o303-learned_tree-s502" not in the manifest -> StopIteration. Auditor command error, not a study defect. No output JSON written.

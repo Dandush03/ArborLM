@@ -1,0 +1,13 @@
+{
+ "seedset": "A",
+ "checkpoints": 81,
+ "m10_monotonicity_failures": [],
+ "m2_r1_failures": [],
+ "r1_groups_compared_total": 2538,
+ "r1_groups_in_records_total": 2538,
+ "simulate_seconds_sum": 1406.5386330791516,
+ "wall_seconds": 180.32659366598818,
+ "jobs": 9,
+ "layout_hash_table_sha256": "78adccb4e573cb89347b4ebb265b4c4a3a82bf22a38964d16d30a3ee4541737c"
+}
+.venv/bin/python -I  $SP/rc_cal$s 9 $s  1581.94s user 14.69s system 883% cpu 3:00.80 total

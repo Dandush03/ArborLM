@@ -1,0 +1,566 @@
+===== flat
+-- sparsity aff_W8
+   frac_of_all_pairs: 0.0065 [0.0022,0.0112] sd 0.0022
+   frac_of_used_pairs: 0.5816 [0.4867,0.6801] sd 0.0461
+   mean_degree_used: 247.8926 [156.3948,337.0305] sd 42.1479
+   frac_pairs_value_1: 0.1468 [0.0985,0.1692] sd 0.0160
+   frac_pairs_value_le2: 0.2346 [0.1717,0.2720] sd 0.0234
+   mass_share_top1pct_pairs: 0.2911 [0.1798,0.3931] sd 0.0569
+   mass_share_top10pct_pairs: 0.7929 [0.7014,0.8928] sd 0.0532
+   same_branch_mass_share: null
+   used_slots: 430.2963 [233.0000,557.0000] sd 80.3697
+-- sparsity aff_W0
+   frac_of_all_pairs: 0.0010 [0.0005,0.0016] sd 0.0003
+   frac_of_used_pairs: 0.0924 [0.0658,0.1429] sd 0.0157
+   mean_degree_used: 38.6580 [32.0000,49.0557] sd 4.1719
+   frac_pairs_value_1: 0.0000 [0.0000,0.0000] sd 0.0000
+   frac_pairs_value_le2: 0.2240 [0.1895,0.2665] sd 0.0192
+   mass_share_top1pct_pairs: 0.2915 [0.1928,0.3781] sd 0.0418
+   mass_share_top10pct_pairs: 0.7846 [0.7385,0.8485] sd 0.0282
+   same_branch_mass_share: null
+   used_slots: 430.2963 [233.0000,557.0000] sd 80.3697
+-- sparsity aff_W8_null
+   frac_of_all_pairs: 0.0067 [0.0022,0.0114] sd 0.0023
+   frac_of_used_pairs: 0.5937 [0.4876,0.6939] sd 0.0478
+   mean_degree_used: 253.1338 [160.1373,344.2478] sd 43.5332
+   frac_pairs_value_1: 0.1530 [0.1117,0.1827] sd 0.0167
+   frac_pairs_value_le2: 0.2374 [0.1822,0.2811] sd 0.0238
+   mass_share_top1pct_pairs: 0.2835 [0.1730,0.3870] sd 0.0560
+   mass_share_top10pct_pairs: 0.7853 [0.6889,0.8867] sd 0.0565
+   same_branch_mass_share: null
+   used_slots: 430.2963 [233.0000,557.0000] sd 80.3697
+-- tv / eff
+   tv_W8: 0.099 [0.082,0.114] sd 0.009
+   tv_W0: 0.768 [0.676,0.824] sd 0.046
+   eff: 131.674 [84.786,197.605] sd 32.385
+-- in-sample R2C32
+   m_actual_FREQ: 3.146 [1.513,4.589] sd 0.843
+   G_FREQ=m(act,L)/m(act,FREQ): 1.000 [1.000,1.000] sd 0.000
+   Ecal_FREQ=m(act,L)/m(null,FREQ): 0.944 [0.855,0.977] sd 0.025
+   m_actual_COAX: 2.396 [1.282,3.489] sd 0.623
+   G_COAX=m(act,L)/m(act,FREQ): 0.764 [0.720,0.847] sd 0.023
+   Ecal_COAX=m(act,L)/m(null,FREQ): 0.721 [0.683,0.750] sd 0.017
+   m_actual_COAX0: 2.399 [1.329,3.478] sd 0.608
+   G_COAX0=m(act,L)/m(act,FREQ): 0.767 [0.717,0.879] sd 0.030
+   Ecal_COAX0=m(act,L)/m(null,FREQ): 0.724 [0.680,0.751] sd 0.018
+   m_actual_COAXnullfit: 3.143 [1.593,4.576] sd 0.847
+   G_COAXnullfit=m(act,L)/m(act,FREQ): 0.999 [0.975,1.053] sd 0.017
+   Ecal_COAXnullfit=m(act,L)/m(null,FREQ): 0.943 [0.901,0.984] sd 0.023
+   m_actual_RPCOAX: 3.045 [1.652,4.317] sd 0.766
+   G_RPCOAX=m(act,L)/m(act,FREQ): 0.973 [0.922,1.092] sd 0.032
+   Ecal_RPCOAX=m(act,L)/m(null,FREQ): 0.918 [0.887,0.958] sd 0.015
+   null_ratio_COAX=m(null,L)/m(null,FREQ): 1.009 [1.002,1.026] sd 0.006
+   null_ratio_COAXnullfit=m(null,L)/m(null,FREQ): 0.990 [0.984,0.998] sd 0.003
+   null_ratio_RPCOAX=m(null,L)/m(null,FREQ): 1.028 [1.005,1.070] sd 0.017
+   m_null_FREQ: 3.319 [1.769,4.717] sd 0.843
+   pages_reversed_COAX/COAX: 0.975 [0.959,0.986] sd 0.007
+   pages_reversed_FREQ/FREQ: 0.972 [0.956,0.982] sd 0.007
+   rows_reversed_COAX/COAX (must be 1): 1.000 [1.000,1.000] sd 0.000
+   desc/asc COAX: 0.975 [0.959,0.986] sd 0.007
+   desc/asc FREQ: 0.972 [0.956,0.982] sd 0.007
+-- split-half R2C32
+   FREQ: out/in-sample: 1.000 [0.954,1.043] sd 0.014
+   FREQ: |log out/in|: 0.010 [0.001,0.047] sd 0.009
+   COAX: out/in-sample: 1.005 [0.973,1.024] sd 0.011
+   COAX: |log out/in|: 0.010 [0.000,0.028] sd 0.007
+   COAX_LS: out/in-sample: 1.005 [0.988,1.025] sd 0.007
+   COAX_LS: |log out/in|: 0.007 [0.000,0.025] sd 0.005
+   cross G_COAX: 0.770 [0.733,0.847] sd 0.024
+   insample-half G_COAX: 0.767 [0.729,0.847] sd 0.024
+   cross LS/greedy COAX: 0.969 [0.950,0.994] sd 0.009
+   insample LS/greedy COAX: 0.969 [0.942,0.995] sd 0.010
+   wpm LS/greedy COAX (fit half): 1.033 [1.013,1.074] sd 0.014
+-- in-sample R8C8
+   m_actual_FREQ: 2.714 [1.335,3.970] sd 0.694
+   G_FREQ=m(act,L)/m(act,FREQ): 1.000 [1.000,1.000] sd 0.000
+   Ecal_FREQ=m(act,L)/m(null,FREQ): 0.882 [0.796,0.944] sd 0.034
+   m_actual_COAX: 1.706 [1.047,2.375] sd 0.361
+   G_COAX=m(act,L)/m(act,FREQ): 0.638 [0.567,0.784] sd 0.052
+   Ecal_COAX=m(act,L)/m(null,FREQ): 0.562 [0.504,0.645] sd 0.040
+   m_actual_COAX0: 1.610 [1.088,2.235] sd 0.318
+   G_COAX0=m(act,L)/m(act,FREQ): 0.604 [0.542,0.815] sd 0.059
+   Ecal_COAX0=m(act,L)/m(null,FREQ): 0.532 [0.465,0.670] sd 0.048
+   m_actual_COAXnullfit: 2.714 [1.353,3.946] sd 0.701
+   G_COAXnullfit=m(act,L)/m(act,FREQ): 1.000 [0.967,1.030] sd 0.016
+   Ecal_COAXnullfit=m(act,L)/m(null,FREQ): 0.881 [0.797,0.928] sd 0.031
+   m_actual_RPCOAX: 3.844 [3.028,4.664] sd 0.440
+   G_RPCOAX=m(act,L)/m(act,FREQ): 1.479 [1.089,2.269] sd 0.285
+   Ecal_RPCOAX=m(act,L)/m(null,FREQ): 1.300 [0.996,1.865] sd 0.225
+   null_ratio_COAX=m(null,L)/m(null,FREQ): 1.024 [1.013,1.037] sd 0.006
+   null_ratio_COAXnullfit=m(null,L)/m(null,FREQ): 0.997 [0.992,1.001] sd 0.002
+   null_ratio_RPCOAX=m(null,L)/m(null,FREQ): 1.331 [1.079,1.979] sd 0.219
+   m_null_FREQ: 3.074 [1.623,4.375] sd 0.770
+   pages_reversed_COAX/COAX: 0.938 [0.896,0.977] sd 0.021
+   pages_reversed_FREQ/FREQ: 0.923 [0.877,0.963] sd 0.023
+   rows_reversed_COAX/COAX (must be 1): 1.000 [1.000,1.000] sd 0.000
+   desc/asc COAX: 0.938 [0.896,0.977] sd 0.021
+   desc/asc FREQ: 0.923 [0.877,0.963] sd 0.023
+-- split-half R8C8
+   FREQ: out/in-sample: 1.001 [0.967,1.043] sd 0.016
+   FREQ: |log out/in|: 0.012 [0.000,0.042] sd 0.011
+   COAX: out/in-sample: 1.008 [0.862,1.177] sd 0.045
+   COAX: |log out/in|: 0.033 [0.000,0.163] sd 0.030
+   COAX_LS: out/in-sample: 1.008 [0.931,1.096] sd 0.032
+   COAX_LS: |log out/in|: 0.025 [0.000,0.092] sd 0.021
+   cross G_COAX: 0.646 [0.588,0.763] sd 0.045
+   insample-half G_COAX: 0.642 [0.578,0.759] sd 0.045
+   cross LS/greedy COAX: 0.896 [0.841,0.983] sd 0.033
+   insample LS/greedy COAX: 0.895 [0.835,0.978] sd 0.032
+   wpm LS/greedy COAX (fit half): 1.063 [1.023,1.114] sd 0.029
+-- eviction age median (queries)
+   COAX|R2C32: 8.19 [7.00,10.00] sd 0.96
+   COAX|R8C8: 2.81 [2.00,3.00] sd 0.40
+   FREQ|R2C32: 6.19 [5.00,8.00] sd 0.83
+   FREQ|R8C8: 1.70 [1.00,2.00] sd 0.47
+-- eviction age frac <= 8
+   COAX|R2C32: 0.599 [0.252,0.901] sd 0.202
+   COAX|R8C8: 0.998 [0.990,1.000] sd 0.002
+   FREQ|R2C32: 0.885 [0.601,0.990] sd 0.110
+   FREQ|R8C8: 1.000 [0.998,1.000] sd 0.000
+-- greedy (score,f) ties
+   COAX0|R2: 3.6 [0.0,9.0] sd 2.7
+   COAX0|R8: 6.9 [0.0,17.0] sd 4.0
+   COAXnullfit|R2: 2.3 [0.0,8.0] sd 1.9
+   COAXnullfit|R8: 5.0 [1.0,9.0] sd 2.2
+   COAX|R2: 4.7 [1.0,12.0] sd 2.9
+   COAX|R8: 8.1 [2.0,16.0] sd 4.3
+   invariants {'R1_coax_equals_freq': True, 'zeroA_coax_equals_freq_R8': True, 'branch_membership_ok': True} ls max passes 9
+===== fixed_tree
+-- sparsity aff_W8
+   frac_of_all_pairs: 0.0049 [0.0027,0.0066] sd 0.0012
+   frac_of_used_pairs: 0.5568 [0.4190,0.6391] sd 0.0557
+   mean_degree_used: 212.1563 [136.6055,255.2233] sd 29.6505
+   frac_pairs_value_1: 0.1509 [0.1222,0.1865] sd 0.0170
+   frac_pairs_value_le2: 0.2411 [0.2013,0.2924] sd 0.0255
+   mass_share_top1pct_pairs: 0.3765 [0.2618,0.6375] sd 0.0832
+   mass_share_top10pct_pairs: 0.8594 [0.7682,0.9580] sd 0.0405
+   same_branch_mass_share: 0.2019 [0.1433,0.3331] sd 0.0452
+   used_slots: 383.6667 [295.0000,487.0000] sd 53.1652
+-- sparsity aff_W0
+   frac_of_all_pairs: 0.0008 [0.0005,0.0011] sd 0.0002
+   frac_of_used_pairs: 0.0904 [0.0708,0.1181] sd 0.0111
+   mean_degree_used: 34.2099 [27.4373,41.4783] sd 3.6503
+   frac_pairs_value_1: 0.0000 [0.0000,0.0000] sd 0.0000
+   frac_pairs_value_le2: 0.2258 [0.1816,0.2719] sd 0.0240
+   mass_share_top1pct_pairs: 0.3138 [0.1924,0.3925] sd 0.0478
+   mass_share_top10pct_pairs: 0.8266 [0.7550,0.9194] sd 0.0336
+   same_branch_mass_share: 0.6162 [0.5439,0.7512] sd 0.0465
+   used_slots: 383.6667 [295.0000,487.0000] sd 53.1652
+-- sparsity aff_W8_null
+   frac_of_all_pairs: 0.0050 [0.0026,0.0068] sd 0.0013
+   frac_of_used_pairs: 0.5662 [0.4158,0.6489] sd 0.0585
+   mean_degree_used: 215.7547 [135.5413,262.9606] sd 30.6907
+   frac_pairs_value_1: 0.1574 [0.1307,0.1951] sd 0.0177
+   frac_pairs_value_le2: 0.2437 [0.2049,0.2897] sd 0.0243
+   mass_share_top1pct_pairs: 0.3665 [0.2512,0.6192] sd 0.0818
+   mass_share_top10pct_pairs: 0.8568 [0.7619,0.9584] sd 0.0421
+   same_branch_mass_share: 0.1494 [0.0962,0.2893] sd 0.0449
+   used_slots: 383.6667 [295.0000,487.0000] sd 53.1652
+-- tv / eff
+   tv_W8: 0.091 [0.063,0.103] sd 0.009
+   tv_W0: 0.710 [0.517,0.804] sd 0.059
+   eff: 95.843 [42.658,140.507] sd 20.363
+-- in-sample R2C32
+   m_actual_FREQ: 2.096 [0.439,3.554] sd 0.662
+   G_FREQ=m(act,L)/m(act,FREQ): 1.000 [1.000,1.000] sd 0.000
+   Ecal_FREQ=m(act,L)/m(null,FREQ): 0.917 [0.854,0.961] sd 0.025
+   m_actual_COAX: 1.588 [0.345,2.673] sd 0.493
+   G_COAX=m(act,L)/m(act,FREQ): 0.760 [0.711,0.806] sd 0.022
+   Ecal_COAX=m(act,L)/m(null,FREQ): 0.696 [0.650,0.733] sd 0.022
+   m_actual_COAX0: 1.593 [0.357,2.621] sd 0.479
+   G_COAX0=m(act,L)/m(act,FREQ): 0.766 [0.715,0.816] sd 0.026
+   Ecal_COAX0=m(act,L)/m(null,FREQ): 0.702 [0.652,0.749] sd 0.020
+   m_actual_COAXnullfit: 2.111 [0.453,3.605] sd 0.670
+   G_COAXnullfit=m(act,L)/m(act,FREQ): 1.008 [0.939,1.040] sd 0.020
+   Ecal_COAXnullfit=m(act,L)/m(null,FREQ): 0.924 [0.842,0.966] sd 0.026
+   m_actual_RPCOAX: 2.093 [0.464,3.502] sd 0.631
+   G_RPCOAX=m(act,L)/m(act,FREQ): 1.006 [0.932,1.132] sd 0.044
+   Ecal_RPCOAX=m(act,L)/m(null,FREQ): 0.922 [0.857,1.016] sd 0.034
+   m_actual_BCOAX: 1.620 [0.359,2.685] sd 0.496
+   G_BCOAX=m(act,L)/m(act,FREQ): 0.777 [0.738,0.831] sd 0.027
+   Ecal_BCOAX=m(act,L)/m(null,FREQ): 0.712 [0.649,0.798] sd 0.030
+   m_actual_BCOAX0: 1.637 [0.364,2.664] sd 0.489
+   G_BCOAX0=m(act,L)/m(act,FREQ): 0.787 [0.742,0.843] sd 0.031
+   Ecal_BCOAX0=m(act,L)/m(null,FREQ): 0.721 [0.651,0.810] sd 0.030
+   m_actual_BFREQ: 1.777 [0.396,3.004] sd 0.560
+   G_BFREQ=m(act,L)/m(act,FREQ): 0.849 [0.803,0.904] sd 0.027
+   Ecal_BFREQ=m(act,L)/m(null,FREQ): 0.779 [0.717,0.848] sd 0.035
+   m_actual_BCOAX_idorder: 1.613 [0.358,2.678] sd 0.495
+   G_BCOAX_idorder=m(act,L)/m(act,FREQ): 0.773 [0.736,0.830] sd 0.026
+   Ecal_BCOAX_idorder=m(act,L)/m(null,FREQ): 0.709 [0.646,0.797] sd 0.030
+   null_ratio_COAX=m(null,L)/m(null,FREQ): 1.012 [1.002,1.034] sd 0.006
+   null_ratio_COAXnullfit=m(null,L)/m(null,FREQ): 0.990 [0.984,0.996] sd 0.003
+   null_ratio_RPCOAX=m(null,L)/m(null,FREQ): 1.043 [1.015,1.116] sd 0.028
+   null_ratio_BCOAX=m(null,L)/m(null,FREQ): 1.025 [1.001,1.075] sd 0.019
+   null_ratio_BFREQ=m(null,L)/m(null,FREQ): 1.004 [0.983,1.052] sd 0.018
+   m_null_FREQ: 2.278 [0.477,3.730] sd 0.691
+   pages_reversed_COAX/COAX: 0.970 [0.962,0.981] sd 0.004
+   pages_reversed_FREQ/FREQ: 0.965 [0.956,0.976] sd 0.004
+   rows_reversed_COAX/COAX (must be 1): 1.000 [1.000,1.000] sd 0.000
+   desc/asc COAX: 0.970 [0.962,0.981] sd 0.004
+   desc/asc FREQ: 0.965 [0.956,0.976] sd 0.004
+   BC=m(BCOAX)/m(COAX): 1.023 [0.987,1.092] sd 0.025
+   pages_reversed_BCOAX/BCOAX: 0.976 [0.963,0.983] sd 0.005
+   BCOAX_idorder/BCOAX: 0.995 [0.988,1.000] sd 0.003
+   desc/asc BCOAX: 0.976 [0.963,0.983] sd 0.005
+-- split-half R2C32
+   FREQ: out/in-sample: 1.000 [0.959,1.048] sd 0.021
+   FREQ: |log out/in|: 0.017 [0.001,0.047] sd 0.012
+   COAX: out/in-sample: 1.006 [0.983,1.041] sd 0.013
+   COAX: |log out/in|: 0.011 [0.000,0.040] sd 0.009
+   COAX_LS: out/in-sample: 1.007 [0.966,1.036] sd 0.012
+   COAX_LS: |log out/in|: 0.010 [0.000,0.035] sd 0.009
+   BFREQ: out/in-sample: 1.000 [0.971,1.026] sd 0.011
+   BFREQ: |log out/in|: 0.008 [0.000,0.030] sd 0.008
+   BCOAX: out/in-sample: 1.004 [0.982,1.032] sd 0.010
+   BCOAX: |log out/in|: 0.009 [0.000,0.031] sd 0.007
+   BCOAX_LS: out/in-sample: 1.004 [0.982,1.027] sd 0.009
+   BCOAX_LS: |log out/in|: 0.007 [0.000,0.027] sd 0.006
+   cross G_COAX: 0.762 [0.730,0.813] sd 0.021
+   insample-half G_COAX: 0.758 [0.726,0.802] sd 0.019
+   cross LS/greedy COAX: 0.967 [0.950,0.986] sd 0.010
+   insample LS/greedy COAX: 0.966 [0.946,0.986] sd 0.010
+   wpm LS/greedy COAX (fit half): 1.034 [1.008,1.069] sd 0.015
+   cross G_BCOAX: 0.779 [0.742,0.843] sd 0.024
+   cross BC: 1.021 [0.982,1.089] sd 0.024
+   cross LS/greedy BCOAX: 0.976 [0.961,0.994] sd 0.008
+   insample LS/greedy BCOAX: 0.976 [0.962,0.994] sd 0.008
+   cross BC with LS (BCOAX_LS/COAX_LS): 1.031 [1.006,1.108] sd 0.023
+   wpm LS/greedy BCOAX (fit half): 1.023 [1.006,1.050] sd 0.011
+-- in-sample R8C8
+   m_actual_FREQ: 1.829 [0.404,3.006] sd 0.567
+   G_FREQ=m(act,L)/m(act,FREQ): 1.000 [1.000,1.000] sd 0.000
+   Ecal_FREQ=m(act,L)/m(null,FREQ): 0.852 [0.768,0.942] sd 0.039
+   m_actual_COAX: 1.164 [0.290,1.745] sd 0.325
+   G_COAX=m(act,L)/m(act,FREQ): 0.645 [0.549,0.728] sd 0.045
+   Ecal_COAX=m(act,L)/m(null,FREQ): 0.549 [0.492,0.653] sd 0.036
+   m_actual_COAX0: 1.107 [0.340,1.548] sd 0.275
+   G_COAX0=m(act,L)/m(act,FREQ): 0.624 [0.514,0.841] sd 0.069
+   Ecal_COAX0=m(act,L)/m(null,FREQ): 0.531 [0.451,0.713] sd 0.052
+   m_actual_COAXnullfit: 1.844 [0.422,3.091] sd 0.571
+   G_COAXnullfit=m(act,L)/m(act,FREQ): 1.010 [0.983,1.080] sd 0.020
+   Ecal_COAXnullfit=m(act,L)/m(null,FREQ): 0.860 [0.791,0.935] sd 0.036
+   m_actual_RPCOAX: 3.312 [2.010,3.893] sd 0.409
+   G_RPCOAX=m(act,L)/m(act,FREQ): 2.032 [1.256,4.973] sd 0.861
+   Ecal_RPCOAX=m(act,L)/m(null,FREQ): 1.718 [1.100,4.217] sd 0.681
+   m_actual_BCOAX: 1.161 [0.408,1.724] sd 0.292
+   G_BCOAX=m(act,L)/m(act,FREQ): 0.657 [0.522,1.009] sd 0.094
+   Ecal_BCOAX=m(act,L)/m(null,FREQ): 0.558 [0.490,0.856] sd 0.072
+   m_actual_BCOAX0: 1.181 [0.427,1.721] sd 0.285
+   G_BCOAX0=m(act,L)/m(act,FREQ): 0.672 [0.499,1.057] sd 0.106
+   Ecal_BCOAX0=m(act,L)/m(null,FREQ): 0.571 [0.470,0.896] sd 0.078
+   m_actual_BFREQ: 1.188 [0.395,1.821] sd 0.308
+   G_BFREQ=m(act,L)/m(act,FREQ): 0.669 [0.523,0.979] sd 0.088
+   Ecal_BFREQ=m(act,L)/m(null,FREQ): 0.569 [0.492,0.830] sd 0.065
+   m_actual_BCOAX_idorder: 1.149 [0.401,1.717] sd 0.292
+   G_BCOAX_idorder=m(act,L)/m(act,FREQ): 0.649 [0.518,0.992] sd 0.091
+   Ecal_BCOAX_idorder=m(act,L)/m(null,FREQ): 0.551 [0.485,0.841] sd 0.070
+   null_ratio_COAX=m(null,L)/m(null,FREQ): 1.034 [1.017,1.072] sd 0.013
+   null_ratio_COAXnullfit=m(null,L)/m(null,FREQ): 0.996 [0.979,1.001] sd 0.004
+   null_ratio_RPCOAX=m(null,L)/m(null,FREQ): 1.756 [1.147,4.532] sd 0.704
+   null_ratio_BCOAX=m(null,L)/m(null,FREQ): 1.219 [1.049,1.919] sd 0.162
+   null_ratio_BFREQ=m(null,L)/m(null,FREQ): 1.162 [0.992,1.828] sd 0.155
+   m_null_FREQ: 2.135 [0.477,3.434] sd 0.630
+   pages_reversed_COAX/COAX: 0.925 [0.903,0.968] sd 0.016
+   pages_reversed_FREQ/FREQ: 0.897 [0.869,0.926] sd 0.013
+   rows_reversed_COAX/COAX (must be 1): 1.000 [1.000,1.000] sd 0.000
+   desc/asc COAX: 0.925 [0.903,0.968] sd 0.016
+   desc/asc FREQ: 0.897 [0.869,0.926] sd 0.013
+   BC=m(BCOAX)/m(COAX): 1.017 [0.897,1.407] sd 0.105
+   pages_reversed_BCOAX/BCOAX: 0.958 [0.935,0.977] sd 0.011
+   BCOAX_idorder/BCOAX: 0.988 [0.975,0.998] sd 0.006
+   desc/asc BCOAX: 0.958 [0.935,0.977] sd 0.011
+-- split-half R8C8
+   FREQ: out/in-sample: 1.002 [0.950,1.059] sd 0.023
+   FREQ: |log out/in|: 0.018 [0.000,0.058] sd 0.014
+   COAX: out/in-sample: 1.010 [0.896,1.118] sd 0.045
+   COAX: |log out/in|: 0.037 [0.001,0.112] sd 0.027
+   COAX_LS: out/in-sample: 1.014 [0.951,1.098] sd 0.038
+   COAX_LS: |log out/in|: 0.033 [0.001,0.094] sd 0.022
+   BFREQ: out/in-sample: 1.003 [0.980,1.029] sd 0.011
+   BFREQ: |log out/in|: 0.009 [0.000,0.028] sd 0.007
+   BCOAX: out/in-sample: 1.004 [0.974,1.026] sd 0.013
+   BCOAX: |log out/in|: 0.011 [0.000,0.026] sd 0.008
+   BCOAX_LS: out/in-sample: 1.005 [0.970,1.045] sd 0.013
+   BCOAX_LS: |log out/in|: 0.010 [0.000,0.044] sd 0.009
+   cross G_COAX: 0.642 [0.561,0.730] sd 0.041
+   insample-half G_COAX: 0.637 [0.563,0.725] sd 0.040
+   cross LS/greedy COAX: 0.891 [0.809,0.974] sd 0.032
+   insample LS/greedy COAX: 0.887 [0.808,0.950] sd 0.032
+   wpm LS/greedy COAX (fit half): 1.066 [1.014,1.131] sd 0.034
+   cross G_BCOAX: 0.654 [0.526,0.988] sd 0.090
+   cross BC: 1.017 [0.892,1.446] sd 0.114
+   cross LS/greedy BCOAX: 0.975 [0.925,1.006] sd 0.021
+   insample LS/greedy BCOAX: 0.973 [0.926,0.998] sd 0.020
+   cross BC with LS (BCOAX_LS/COAX_LS): 1.113 [0.972,1.484] sd 0.112
+   wpm LS/greedy BCOAX (fit half): 1.005 [1.000,1.026] sd 0.006
+-- eviction age median (queries)
+   COAX|R2C32: 10.93 [8.00,32.00] sd 4.71
+   COAX|R8C8: 3.26 [2.00,8.00] sd 1.06
+   FREQ|R2C32: 8.22 [6.00,23.00] sd 3.40
+   FREQ|R8C8: 2.11 [2.00,4.00] sd 0.42
+-- eviction age frac <= 8
+   COAX|R2C32: 0.291 [0.001,0.679] sd 0.156
+   COAX|R8C8: 0.963 [0.545,1.000] sd 0.097
+   FREQ|R2C32: 0.675 [0.037,0.967] sd 0.221
+   FREQ|R8C8: 0.983 [0.734,1.000] sd 0.054
+-- greedy (score,f) ties
+   BCOAX|R2: 4.0 [0.0,11.0] sd 2.5
+   BCOAX|R8: 8.4 [2.0,18.0] sd 4.0
+   COAX0|R2: 5.1 [0.0,15.0] sd 3.2
+   COAX0|R8: 10.2 [3.0,27.0] sd 5.0
+   COAXnullfit|R2: 2.2 [0.0,6.0] sd 1.5
+   COAXnullfit|R8: 4.4 [0.0,11.0] sd 2.4
+   COAX|R2: 6.0 [1.0,15.0] sd 2.8
+   COAX|R8: 11.1 [4.0,29.0] sd 5.3
+   invariants {'R1_coax_equals_freq': True, 'zeroA_coax_equals_freq_R8': True, 'branch_membership_ok': True} ls max passes 7
+===== learned_tree
+-- sparsity aff_W8
+   frac_of_all_pairs: 0.0035 [0.0019,0.0054] sd 0.0010
+   frac_of_used_pairs: 0.5697 [0.4758,0.6537] sd 0.0471
+   mean_degree_used: 180.5451 [132.2796,228.6177] sd 27.5976
+   frac_pairs_value_1: 0.1416 [0.1190,0.1759] sd 0.0142
+   frac_pairs_value_le2: 0.2297 [0.1996,0.2775] sd 0.0205
+   mass_share_top1pct_pairs: 0.3476 [0.2379,0.4378] sd 0.0561
+   mass_share_top10pct_pairs: 0.8591 [0.7755,0.9206] sd 0.0418
+   same_branch_mass_share: 0.2418 [0.1784,0.3641] sd 0.0460
+   used_slots: 318.9259 [234.0000,413.0000] sd 48.9709
+-- sparsity aff_W0
+   frac_of_all_pairs: 0.0007 [0.0004,0.0009] sd 0.0001
+   frac_of_used_pairs: 0.1081 [0.0820,0.1293] sd 0.0133
+   mean_degree_used: 33.9286 [27.4982,40.3118] sd 3.5816
+   frac_pairs_value_1: 0.0000 [0.0000,0.0000] sd 0.0000
+   frac_pairs_value_le2: 0.2227 [0.1899,0.2580] sd 0.0192
+   mass_share_top1pct_pairs: 0.2940 [0.2471,0.3934] sd 0.0369
+   mass_share_top10pct_pairs: 0.8264 [0.7709,0.8782] sd 0.0279
+   same_branch_mass_share: 0.6919 [0.5908,0.8066] sd 0.0486
+   used_slots: 318.9259 [234.0000,413.0000] sd 48.9709
+-- sparsity aff_W8_null
+   frac_of_all_pairs: 0.0035 [0.0019,0.0055] sd 0.0011
+   frac_of_used_pairs: 0.5753 [0.4738,0.6599] sd 0.0494
+   mean_degree_used: 182.4363 [131.7276,233.1494] sd 28.9707
+   frac_pairs_value_1: 0.1492 [0.1220,0.1735] sd 0.0130
+   frac_pairs_value_le2: 0.2326 [0.1982,0.2689] sd 0.0186
+   mass_share_top1pct_pairs: 0.3372 [0.2308,0.4260] sd 0.0553
+   mass_share_top10pct_pairs: 0.8561 [0.7701,0.9216] sd 0.0433
+   same_branch_mass_share: 0.1859 [0.1190,0.3017] sd 0.0454
+   used_slots: 318.9259 [234.0000,413.0000] sd 48.9709
+-- tv / eff
+   tv_W8: 0.085 [0.068,0.099] sd 0.008
+   tv_W0: 0.690 [0.610,0.784] sd 0.044
+   eff: 82.723 [54.892,123.479] sd 19.214
+-- in-sample R2C32
+   m_actual_FREQ: 1.645 [0.551,3.226] sd 0.748
+   G_FREQ=m(act,L)/m(act,FREQ): 1.000 [1.000,1.000] sd 0.000
+   Ecal_FREQ=m(act,L)/m(null,FREQ): 0.920 [0.835,0.988] sd 0.040
+   m_actual_COAX: 1.269 [0.453,2.372] sd 0.549
+   G_COAX=m(act,L)/m(act,FREQ): 0.780 [0.709,0.841] sd 0.035
+   Ecal_COAX=m(act,L)/m(null,FREQ): 0.717 [0.656,0.778] sd 0.033
+   m_actual_COAX0: 1.278 [0.495,2.352] sd 0.533
+   G_COAX0=m(act,L)/m(act,FREQ): 0.792 [0.729,0.898] sd 0.048
+   Ecal_COAX0=m(act,L)/m(null,FREQ): 0.728 [0.665,0.828] sd 0.037
+   m_actual_COAXnullfit: 1.651 [0.544,3.226] sd 0.734
+   G_COAXnullfit=m(act,L)/m(act,FREQ): 1.009 [0.964,1.087] sd 0.031
+   Ecal_COAXnullfit=m(act,L)/m(null,FREQ): 0.927 [0.861,0.995] sd 0.031
+   m_actual_RPCOAX: 1.659 [0.618,3.154] sd 0.702
+   G_RPCOAX=m(act,L)/m(act,FREQ): 1.026 [0.953,1.186] sd 0.058
+   Ecal_RPCOAX=m(act,L)/m(null,FREQ): 0.943 [0.836,1.115] sd 0.058
+   m_actual_BCOAX: 1.283 [0.482,2.388] sd 0.544
+   G_BCOAX=m(act,L)/m(act,FREQ): 0.793 [0.711,0.874] sd 0.043
+   Ecal_BCOAX=m(act,L)/m(null,FREQ): 0.729 [0.656,0.827] sd 0.040
+   m_actual_BCOAX0: 1.291 [0.501,2.352] sd 0.531
+   G_BCOAX0=m(act,L)/m(act,FREQ): 0.803 [0.717,0.909] sd 0.054
+   Ecal_BCOAX0=m(act,L)/m(null,FREQ): 0.738 [0.660,0.894] sd 0.052
+   m_actual_BFREQ: 1.411 [0.500,2.687] sd 0.614
+   G_BFREQ=m(act,L)/m(act,FREQ): 0.867 [0.769,0.952] sd 0.045
+   Ecal_BFREQ=m(act,L)/m(null,FREQ): 0.797 [0.710,0.910] sd 0.046
+   m_actual_BCOAX_idorder: 1.279 [0.480,2.384] sd 0.543
+   G_BCOAX_idorder=m(act,L)/m(act,FREQ): 0.791 [0.706,0.871] sd 0.043
+   Ecal_BCOAX_idorder=m(act,L)/m(null,FREQ): 0.727 [0.654,0.823] sd 0.040
+   null_ratio_COAX=m(null,L)/m(null,FREQ): 1.015 [1.000,1.029] sd 0.006
+   null_ratio_COAXnullfit=m(null,L)/m(null,FREQ): 0.989 [0.981,0.997] sd 0.004
+   null_ratio_RPCOAX=m(null,L)/m(null,FREQ): 1.068 [1.012,1.242] sd 0.056
+   null_ratio_BCOAX=m(null,L)/m(null,FREQ): 1.027 [0.999,1.084] sd 0.022
+   null_ratio_BFREQ=m(null,L)/m(null,FREQ): 1.003 [0.983,1.045] sd 0.016
+   m_null_FREQ: 1.772 [0.598,3.334] sd 0.757
+   pages_reversed_COAX/COAX: 0.968 [0.953,0.979] sd 0.005
+   pages_reversed_FREQ/FREQ: 0.960 [0.945,0.971] sd 0.006
+   rows_reversed_COAX/COAX (must be 1): 1.000 [1.000,1.000] sd 0.000
+   desc/asc COAX: 0.968 [0.953,0.979] sd 0.005
+   desc/asc FREQ: 0.960 [0.945,0.971] sd 0.006
+   BC=m(BCOAX)/m(COAX): 1.017 [0.970,1.094] sd 0.027
+   pages_reversed_BCOAX/BCOAX: 0.973 [0.962,0.984] sd 0.006
+   BCOAX_idorder/BCOAX: 0.997 [0.990,1.001] sd 0.002
+   desc/asc BCOAX: 0.973 [0.962,0.984] sd 0.006
+-- split-half R2C32
+   FREQ: out/in-sample: 0.999 [0.947,1.043] sd 0.020
+   FREQ: |log out/in|: 0.016 [0.000,0.055] sd 0.013
+   COAX: out/in-sample: 1.005 [0.972,1.037] sd 0.014
+   COAX: |log out/in|: 0.012 [0.000,0.036] sd 0.009
+   COAX_LS: out/in-sample: 1.006 [0.982,1.029] sd 0.011
+   COAX_LS: |log out/in|: 0.010 [0.000,0.028] sd 0.007
+   BFREQ: out/in-sample: 1.002 [0.970,1.044] sd 0.018
+   BFREQ: |log out/in|: 0.014 [0.000,0.043] sd 0.011
+   BCOAX: out/in-sample: 1.004 [0.971,1.040] sd 0.014
+   BCOAX: |log out/in|: 0.011 [0.000,0.040] sd 0.009
+   BCOAX_LS: out/in-sample: 1.005 [0.984,1.027] sd 0.010
+   BCOAX_LS: |log out/in|: 0.008 [0.000,0.026] sd 0.007
+   cross G_COAX: 0.782 [0.721,0.842] sd 0.031
+   insample-half G_COAX: 0.777 [0.721,0.848] sd 0.031
+   cross LS/greedy COAX: 0.969 [0.950,0.985] sd 0.009
+   insample LS/greedy COAX: 0.968 [0.947,0.987] sd 0.009
+   wpm LS/greedy COAX (fit half): 1.032 [1.008,1.063] sd 0.015
+   cross G_BCOAX: 0.792 [0.715,0.870] sd 0.036
+   cross BC: 1.014 [0.977,1.081] sd 0.023
+   cross LS/greedy BCOAX: 0.979 [0.964,1.011] sd 0.012
+   insample LS/greedy BCOAX: 0.979 [0.964,1.008] sd 0.012
+   cross BC with LS (BCOAX_LS/COAX_LS): 1.024 [0.998,1.094] sd 0.024
+   wpm LS/greedy BCOAX (fit half): 1.024 [1.004,1.051] sd 0.013
+-- in-sample R8C8
+   m_actual_FREQ: 1.469 [0.535,2.728] sd 0.617
+   G_FREQ=m(act,L)/m(act,FREQ): 1.000 [1.000,1.000] sd 0.000
+   Ecal_FREQ=m(act,L)/m(null,FREQ): 0.879 [0.745,0.998] sd 0.051
+   m_actual_COAX: 0.958 [0.415,1.691] sd 0.385
+   G_COAX=m(act,L)/m(act,FREQ): 0.664 [0.541,0.806] sd 0.073
+   Ecal_COAX=m(act,L)/m(null,FREQ): 0.583 [0.474,0.710] sd 0.065
+   m_actual_COAX0: 0.943 [0.476,1.529] sd 0.296
+   G_COAX0=m(act,L)/m(act,FREQ): 0.676 [0.540,0.952] sd 0.103
+   Ecal_COAX0=m(act,L)/m(null,FREQ): 0.595 [0.480,0.926] sd 0.102
+   m_actual_COAXnullfit: 1.475 [0.536,2.710] sd 0.611
+   G_COAXnullfit=m(act,L)/m(act,FREQ): 1.006 [0.969,1.036] sd 0.015
+   Ecal_COAXnullfit=m(act,L)/m(null,FREQ): 0.884 [0.760,0.980] sd 0.046
+   m_actual_RPCOAX: 3.106 [2.483,3.783] sd 0.329
+   G_RPCOAX=m(act,L)/m(act,FREQ): 2.453 [1.367,4.754] sd 0.924
+   Ecal_RPCOAX=m(act,L)/m(null,FREQ): 2.153 [1.213,4.245] sd 0.821
+   m_actual_BCOAX: 0.981 [0.535,1.670] sd 0.318
+   G_BCOAX=m(act,L)/m(act,FREQ): 0.703 [0.560,1.000] sd 0.115
+   Ecal_BCOAX=m(act,L)/m(null,FREQ): 0.618 [0.498,0.960] sd 0.106
+   m_actual_BCOAX0: 0.997 [0.559,1.731] sd 0.318
+   G_BCOAX0=m(act,L)/m(act,FREQ): 0.717 [0.533,1.079] sd 0.124
+   Ecal_BCOAX0=m(act,L)/m(null,FREQ): 0.630 [0.474,1.049] sd 0.117
+   m_actual_BFREQ: 1.004 [0.519,1.715] sd 0.334
+   G_BFREQ=m(act,L)/m(act,FREQ): 0.716 [0.581,0.986] sd 0.108
+   Ecal_BFREQ=m(act,L)/m(null,FREQ): 0.629 [0.520,0.958] sd 0.100
+   m_actual_BCOAX_idorder: 0.971 [0.524,1.666] sd 0.318
+   G_BCOAX_idorder=m(act,L)/m(act,FREQ): 0.695 [0.558,0.985] sd 0.112
+   Ecal_BCOAX_idorder=m(act,L)/m(null,FREQ): 0.610 [0.497,0.957] sd 0.104
+   null_ratio_COAX=m(null,L)/m(null,FREQ): 1.037 [1.012,1.075] sd 0.016
+   null_ratio_COAXnullfit=m(null,L)/m(null,FREQ): 0.997 [0.991,1.002] sd 0.003
+   null_ratio_RPCOAX=m(null,L)/m(null,FREQ): 2.184 [1.221,4.861] sd 0.878
+   null_ratio_BCOAX=m(null,L)/m(null,FREQ): 1.195 [1.042,1.466] sd 0.106
+   null_ratio_BFREQ=m(null,L)/m(null,FREQ): 1.144 [0.986,1.438] sd 0.109
+   m_null_FREQ: 1.668 [0.585,3.068] sd 0.683
+   pages_reversed_COAX/COAX: 0.921 [0.894,0.955] sd 0.015
+   pages_reversed_FREQ/FREQ: 0.884 [0.848,0.924] sd 0.019
+   rows_reversed_COAX/COAX (must be 1): 1.000 [1.000,1.000] sd 0.000
+   desc/asc COAX: 0.921 [0.894,0.955] sd 0.015
+   desc/asc FREQ: 0.884 [0.848,0.924] sd 0.019
+   BC=m(BCOAX)/m(COAX): 1.059 [0.883,1.353] sd 0.124
+   pages_reversed_BCOAX/BCOAX: 0.949 [0.925,0.975] sd 0.012
+   BCOAX_idorder/BCOAX: 0.988 [0.971,0.997] sd 0.006
+   desc/asc BCOAX: 0.949 [0.925,0.975] sd 0.012
+-- split-half R8C8
+   FREQ: out/in-sample: 1.002 [0.922,1.104] sd 0.031
+   FREQ: |log out/in|: 0.023 [0.000,0.099] sd 0.020
+   COAX: out/in-sample: 1.014 [0.869,1.156] sd 0.059
+   COAX: |log out/in|: 0.048 [0.001,0.145] sd 0.035
+   COAX_LS: out/in-sample: 1.013 [0.844,1.202] sd 0.068
+   COAX_LS: |log out/in|: 0.053 [0.000,0.184] sd 0.043
+   BFREQ: out/in-sample: 1.002 [0.951,1.053] sd 0.017
+   BFREQ: |log out/in|: 0.011 [0.000,0.052] sd 0.012
+   BCOAX: out/in-sample: 1.004 [0.969,1.047] sd 0.018
+   BCOAX: |log out/in|: 0.013 [0.000,0.046] sd 0.013
+   BCOAX_LS: out/in-sample: 1.005 [0.975,1.045] sd 0.012
+   BCOAX_LS: |log out/in|: 0.009 [0.001,0.044] sd 0.009
+   cross G_COAX: 0.676 [0.578,0.795] sd 0.063
+   insample-half G_COAX: 0.669 [0.575,0.792] sd 0.061
+   cross LS/greedy COAX: 0.899 [0.811,0.987] sd 0.044
+   insample LS/greedy COAX: 0.900 [0.805,0.984] sd 0.044
+   wpm LS/greedy COAX (fit half): 1.065 [1.012,1.133] sd 0.035
+   cross G_BCOAX: 0.700 [0.575,0.995] sd 0.109
+   cross BC: 1.033 [0.883,1.283] sd 0.104
+   cross LS/greedy BCOAX: 0.971 [0.911,1.001] sd 0.024
+   insample LS/greedy BCOAX: 0.970 [0.909,1.000] sd 0.024
+   cross BC with LS (BCOAX_LS/COAX_LS): 1.115 [0.997,1.356] sd 0.093
+   wpm LS/greedy BCOAX (fit half): 1.006 [1.000,1.029] sd 0.008
+-- eviction age median (queries)
+   COAX|R2C32: 11.93 [8.00,19.00] sd 2.88
+   COAX|R8C8: 3.41 [2.00,5.00] sd 0.64
+   FREQ|R2C32: 8.96 [6.00,15.00] sd 2.33
+   FREQ|R8C8: 2.07 [2.00,3.00] sd 0.27
+-- eviction age frac <= 8
+   COAX|R2C32: 0.204 [0.010,0.558] sd 0.176
+   COAX|R8C8: 0.959 [0.841,0.999] sd 0.043
+   FREQ|R2C32: 0.512 [0.076,0.945] sd 0.260
+   FREQ|R8C8: 0.985 [0.923,1.000] sd 0.020
+-- greedy (score,f) ties
+   BCOAX|R2: 4.0 [0.0,9.0] sd 2.6
+   BCOAX|R8: 7.5 [0.0,15.0] sd 3.3
+   COAX0|R2: 3.9 [1.0,7.0] sd 2.1
+   COAX0|R8: 8.4 [2.0,16.0] sd 3.7
+   COAXnullfit|R2: 1.1 [0.0,3.0] sd 1.0
+   COAXnullfit|R8: 2.9 [1.0,9.0] sd 1.8
+   COAX|R2: 4.5 [0.0,13.0] sd 2.7
+   COAX|R8: 8.8 [2.0,17.0] sd 3.8
+   invariants {'R1_coax_equals_freq': True, 'zeroA_coax_equals_freq_R8': True, 'branch_membership_ok': True} ls max passes 7
+===== calibration in-sample analogues (NOT registered tests)
+   R2C32 fixed_tree HB_cal: rho 0.987 lower 16/27 par 5/9 higher 11 -> EQUIVALENT
+   R2C32 fixed_tree HU_cal: rho 0.965 lower 23/27 par 9/9 higher 4 -> EQUIVALENT
+   R2C32 fixed_tree UTIL_cal(HB layouts): rho 1.015 lower 4/27 par 0/9 higher 23 -> EQUIVALENT
+   R2C32 fixed_tree UTIL_cal(HU layouts): rho 1.002 lower 10/27 par 3/9 higher 17 -> EQUIVALENT
+   R2C32 fixed_tree FREQ_vs_FREQ_cal: rho 0.971 lower 22/27 par 8/9 higher 5 -> EQUIVALENT
+   R2C32 fixed_tree nullfit_control_cal: rho 0.979 lower 18/27 par 7/9 higher 9 -> EQUIVALENT
+   R2C32 learned_tree HB_cal: rho 1.011 lower 15/27 par 5/9 higher 12 -> EQUIVALENT
+   R2C32 learned_tree HU_cal: rho 0.993 lower 14/27 par 6/9 higher 13 -> EQUIVALENT
+   R2C32 learned_tree UTIL_cal(HB layouts): rho 1.018 lower 4/27 par 0/9 higher 23 -> EQUIVALENT
+   R2C32 learned_tree UTIL_cal(HU layouts): rho 1.005 lower 4/27 par 0/9 higher 23 -> EQUIVALENT
+   R2C32 learned_tree FREQ_vs_FREQ_cal: rho 0.974 lower 19/27 par 6/9 higher 8 -> EQUIVALENT
+   R2C32 learned_tree nullfit_control_cal: rho 0.983 lower 18/27 par 8/9 higher 9 -> EQUIVALENT
+   R8C8 fixed_tree HB_cal: rho 0.994 lower 19/27 par 5/9 higher 8 -> EQUIVALENT
+   R8C8 fixed_tree HU_cal: rho 0.977 lower 17/27 par 7/9 higher 10 -> EQUIVALENT
+   R8C8 fixed_tree UTIL_cal(HB layouts): rho 1.191 lower 0/27 par 0/9 higher 27 -> MARGINAL
+   R8C8 fixed_tree UTIL_cal(HU layouts): rho 1.010 lower 6/27 par 1/9 higher 21 -> EQUIVALENT
+   R8C8 fixed_tree FREQ_vs_FREQ_cal: rho 0.966 lower 20/27 par 9/9 higher 7 -> EQUIVALENT
+   R8C8 fixed_tree nullfit_control_cal: rho 0.976 lower 19/27 par 8/9 higher 8 -> EQUIVALENT
+   R8C8 learned_tree HB_cal: rho 1.100 lower 8/27 par 2/9 higher 19 -> EQUIVALENT
+   R8C8 learned_tree HU_cal: rho 1.039 lower 10/27 par 2/9 higher 17 -> EQUIVALENT
+   R8C8 learned_tree UTIL_cal(HB layouts): rho 1.168 lower 0/27 par 0/9 higher 27 -> MARGINAL
+   R8C8 learned_tree UTIL_cal(HU layouts): rho 1.013 lower 4/27 par 0/9 higher 23 -> EQUIVALENT
+   R8C8 learned_tree FREQ_vs_FREQ_cal: rho 0.997 lower 15/27 par 5/9 higher 12 -> EQUIVALENT
+   R8C8 learned_tree nullfit_control_cal: rho 1.004 lower 16/27 par 6/9 higher 11 -> EQUIVALENT
+===== cross-fitted gain analogues
+   R2C32 fixed_tree G-ratio greedy: (BCOAX/FREQ)_tree / (COAX/FREQ)_flat: rho 1.011 lower 10/27 par 2/9 -> EQUIVALENT
+   R2C32 fixed_tree G-ratio LS: (BCOAX_LS/FREQ)_tree / (COAX_LS/FREQ)_flat: rho 1.018 lower 9/27 par 1/9 -> EQUIVALENT
+   R2C32 learned_tree G-ratio greedy: (BCOAX/FREQ)_tree / (COAX/FREQ)_flat: rho 1.028 lower 6/27 par 2/9 -> EQUIVALENT
+   R2C32 learned_tree G-ratio LS: (BCOAX_LS/FREQ)_tree / (COAX_LS/FREQ)_flat: rho 1.040 lower 7/27 par 2/9 -> EQUIVALENT
+   R8C8 fixed_tree G-ratio greedy: (BCOAX/FREQ)_tree / (COAX/FREQ)_flat: rho 1.012 lower 15/27 par 4/9 -> EQUIVALENT
+   R8C8 fixed_tree G-ratio LS: (BCOAX_LS/FREQ)_tree / (COAX_LS/FREQ)_flat: rho 1.103 lower 6/27 par 2/9 -> MARGINAL
+   R8C8 learned_tree G-ratio greedy: (BCOAX/FREQ)_tree / (COAX/FREQ)_flat: rho 1.084 lower 12/27 par 1/9 -> EQUIVALENT
+   R8C8 learned_tree G-ratio LS: (BCOAX_LS/FREQ)_tree / (COAX_LS/FREQ)_flat: rho 1.176 lower 2/27 par 0/9 -> MARGINAL
+===== trends (slope of E per ln eff slots, calibration)
+   R2C32 pooled_E_FREQ: +0.0630 (se 0.0099)
+   R2C32 flat_E_FREQ: +0.0654 (se 0.0163)
+   R2C32 fixed_tree_E_FREQ: +0.0429 (se 0.0184)
+   R2C32 learned_tree_E_FREQ: +0.0949 (se 0.0299)
+   R2C32 pooled_E_COAX: +0.0114 (se 0.0098)
+   R2C32 flat_E_COAX: +0.0125 (se 0.0138)
+   R2C32 fixed_tree_E_COAX: +0.0051 (se 0.0180)
+   R2C32 learned_tree_E_COAX: -0.0050 (se 0.0289)
+   R2C32 fixed_tree_nullratio_BCOAX: -0.0372 (se 0.0141)
+   R2C32 learned_tree_nullratio_BCOAX: -0.0692 (se 0.0133)
+   R8C8 pooled_E_FREQ: +0.0258 (se 0.0159)
+   R8C8 flat_E_FREQ: +0.0181 (se 0.0277)
+   R8C8 fixed_tree_E_FREQ: +0.0545 (se 0.0299)
+   R8C8 learned_tree_E_FREQ: +0.0151 (se 0.0455)
+   R8C8 pooled_E_COAX: -0.0618 (se 0.0173)
+   R8C8 flat_E_COAX: -0.1126 (se 0.0241)
+   R8C8 fixed_tree_E_COAX: -0.0437 (se 0.0282)
+   R8C8 learned_tree_E_COAX: -0.0909 (se 0.0553)
+   R8C8 fixed_tree_nullratio_BCOAX: -0.4998 (se 0.0869)
+   R8C8 learned_tree_nullratio_BCOAX: -0.3708 (se 0.0583)
+-- timing
+   sec_affinity_W8: 0.97 [0.79,1.16] sd 0.09
+   sec_affinity_W0: 0.11 [0.10,0.13] sd 0.01
+   sec_greedy_layouts: 0.07 [0.03,0.12] sd 0.02
+   sec_split_half: 3.54 [1.82,8.17] sd 1.10
+   seconds: 7.60 [5.01,12.70] sd 1.36

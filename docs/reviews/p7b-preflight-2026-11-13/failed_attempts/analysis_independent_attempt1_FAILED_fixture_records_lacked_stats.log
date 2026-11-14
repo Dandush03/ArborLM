@@ -1,0 +1,20 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-preflight-2026-11-13/checks/analysis_independent.py", line 386, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-preflight-2026-11-13/checks/analysis_independent.py", line 334, in main
+    theirs = A.analyze_streams(streams)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/p7b_analysis.py", line 1242, in analyze_streams
+    entry = stream_descriptive(s)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/p7b_analysis.py", line 1084, in stream_descriptive
+    "pages_and_misses": pages_and_misses(stream),
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/src/arborlm/p7b_analysis.py", line 994, in pages_and_misses
+    Fraction(g["stats"]["pages_sum"], q)
+             ~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'pages_sum'
+.venv/bin/python -I   1.00s user 0.28s system 75% cpu 1.690 total

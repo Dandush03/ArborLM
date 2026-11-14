@@ -1,0 +1,32 @@
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/multiprocessing/pool.py", line 48, in mapstar
+    return list(map(*args))
+           ^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-spec-review-2026-11-13/rereview/scripts/time_layouts.py", line 44, in work
+    A8 = L.affinity_w(sel, 512, 8)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-spec-review-2026-11-13/rereview/scripts/rev3_layouts.py", line 69, in affinity_w
+    A.setdefault(j, {})[i] = A[j].get(i, 0) + v
+                             ~^^^
+KeyError: 2289
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-spec-review-2026-11-13/rereview/scripts/time_layouts.py", line 94, in <module>
+    main()
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-spec-review-2026-11-13/rereview/scripts/time_layouts.py", line 79, in main
+    res = pool.map(work, todo, chunksize=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/multiprocessing/pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/multiprocessing/pool.py", line 774, in get
+    raise self._value
+KeyError: 2289
