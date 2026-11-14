@@ -1,7 +1,7 @@
 # ADR-0015 — P8: locality-aware memory training (bounded ten-case pilot)
 
 - Date: 2026-11-13 (America/Panama); drafted 2026-11-14 UTC.
-- Status: **SPEC: DRAFT — PENDING OPUS SPEC REVIEW AND FREEZE.** The study matrix, budgets and limits were set by the human research lead in the overnight direction recorded in §15. Astra review: **NOT_PERFORMED**.
+- Status: **SPEC: REVISION 2 — OPUS SPEC REVIEW ANSWERED (§13); PENDING IMPLEMENTATION AUDIT AND FREEZE.** The study matrix, budgets and limits were set by the human research lead in the overnight direction recorded in §15. Astra review: **NOT_PERFORMED**.
 - Prepared by Claude Fable 5.2 (`claude-fable-5-2`) as scientific lead under a **study-specific Claude workflow for P8 only**. ADR-0012 remains pending. Nothing here is Astra validation.
 - Scope: one bounded CPU/RAM training pilot on frozen P4 backbones, 60 training cells, followed by trace-driven **simulation** of value-page cache misses. No storage device, no capacity change, no new corpus, no change to any backbone parameter. P1–P7-B code, records, thresholds and outcomes are immutable; nothing P8 finds changes them.
 
@@ -37,7 +37,9 @@ All three interventions are functions of one relaxation, the **soft inclusion** 
 
 > **π_t(i) = σ((s_t(i) − τ_t) / β)**, τ_t = ½ (s_t⁽⁸⁾ + s_t⁽⁹⁾), β = 0.25,
 
-where s_t⁽ʲ⁾ is the j-th largest score among that query's candidates (4,096 for flat, 512 for trees), σ is the logistic function, and π_t(i) = 0 for slots that are not candidates. τ_t is a differentiable (piecewise-linear) function of the scores and is **not** detached. By construction the 8 hard-selected slots have π > ½ and all others π < ½, for every parameter value. π is clamped to [0, 1 − 10⁻⁶] only inside logarithms.
+where s_t⁽ʲ⁾ is the j-th largest score among that query's candidates (4,096 for flat, 512 for trees) and σ is the logistic function. **π is computed on the query's 64 highest-scoring candidates only and is 0 for every other slot**, for both architectures (revision 2; the review found that over all candidates the soft mass outside the top 8 was 14.3 for flat against 5.9 for trees at initialization, an unmatched pressure). τ_t is a differentiable (piecewise-linear) function of the scores and is **not** detached. When the 8th and 9th scores differ, the 8 hard-selected slots have π > ½ and all others π < ½; in the measure-zero tie case both tied slots have π = ½ exactly. Wherever log(1 − π) is needed it is computed exactly as −softplus((s − τ)/β), with no clamp.
+
+Discontinuities, stated: π jumps by a small amount when a slot crosses rank 64 (about 0.02 at initialization) and, for trees, when the visited branch pair changes. The proxy is differentiable almost everywhere, not everywhere.
 
 π depends on keys, the query projection `wq` and (learned tree) the router, and on nothing else. **It does not depend on values, the output projection `wo` or the gate**, so no regularizer below has a gradient on them: none can lower its loss by closing the gate or shrinking values. This is tested (§10).
 
@@ -49,7 +51,7 @@ Queries are indexed (r, t): context row r of the batch, position t = 0…63. Slo
 
 > N_{r,t} = Σ_g [1 − Π_{i∈g} (1 − π_{r,t}(i))], **R_co = mean_{r,t} N_{r,t} / Σᵢ π_{r,t}(i)**.
 
-Its minimum, 1/8, is reached when a query's eight selected slots are one whole group. It cannot be lowered by sharpening a query onto one slot: eight slots always have π > ½, and the ratio is unchanged by making π more nearly 0 or 1.
+For a query whose eight selected slots are one whole group with common inclusion p and no other mass, R_co = (1 − (1 − p)⁸) / (8p): 0.244 at p = 0.51, 0.139 at p = 0.9, and 1/8 only as p → 1.
 
 **R_temp — causal temporal reuse (C08, C09, C10).** For position t ≥ 1 in a row, the probability a slot was softly selected in the previous W = 8 positions of the same row is c_{r,t}(i) = 1 − Π_{u = max(0, t−8)}^{t−1} (1 − π_{r,u}(i)). The expected fraction of a query's selections that are new:
 
@@ -57,7 +59,11 @@ Its minimum, 1/8, is reached when a query's eight selected slots are one whole g
 
 It is causal in the sense that the reuse target of position t contains only positions before t in the same row; the model's queries are themselves causal. Gradients flow through both π_{r,t} and c_{r,t}. W = 8 because both registered cache settings hold 64 rows, eight queries' worth. R_temp is slot-level and layout-free.
 
-All three are in [0, 1]. Known degenerate optimum, stated in advance: **every query selecting the same eight slots** minimizes R_temp and R_conc (not R_co alone). The language-model loss opposes it and the utilization and quality guards (§7) detect it. An outcome reached that way is classified COLLAPSED, not positive.
+All three are in [0, 1]. (R_conc cannot reach 0: at least eight slots carry mass, so its floor is ln 8 / ln 4096 = 0.25.)
+
+**Known non-locality route, stated in advance (review B1): margin widening.** Each regularizer can be lowered without changing any hard selection, by widening the gap between the 8th and 9th scores (pushing selected π toward 1 and the rest toward 0). The review measured all three falling slightly under such sharpening and, with a regularizer applied alone, the gap growing from 0.03 to 2.9 (flat) and 5.3 (tree). This route spends regularizer pressure without creating locality. It cannot produce a positive reading, because every outcome is measured on hard traces, but it can make the dose weaker than intended. Each cell therefore records, at the logged updates, the mean 8th–9th score gap and the mean π mass outside the top 8.
+
+Known degenerate optimum, stated in advance: **every query selecting the same eight slots** minimizes R_temp and R_conc (not R_co alone). The language-model loss opposes it and the utilization and quality guards (§7) detect it. An outcome reached that way is classified COLLAPSED, not positive.
 
 ## 4. Training rule (matched pressure)
 
@@ -68,9 +74,13 @@ Per update, with L the P5 mean next-byte loss, R the case's regularizer, Θ_r = 
 3. **λ = α · ‖g_L restricted to Θ_r‖₂ / ‖g_R‖₂**, α = 0.5, treated as a constant of the step (no gradient through λ). If ‖g_R‖₂ < 10⁻¹² or either norm is non-finite, λ = 0 and the event is counted.
 4. g = g_L + λ g_R; then P5's clipping (total norm 1.0) and P5's AdamW (lr 0.003, betas (0.9, 0.999), eps 10⁻⁸, weight decay 0), one parameter group, unchanged.
 
-So each update is the gradient of L + λR with a step-wise coefficient that keeps the regularizer's pull on the routing parameters at half the language-model gradient's magnitude there. Reason for this rule over a fixed coefficient: the memory's whole contribution in P5 is about 0.02 nats/byte and the raw gradient scales of the three regularizers and two architectures (4,096 versus 512 candidates) differ by unknown factors; a fixed coefficient would give unmatched, unknowable pressure, and tuning one on outcomes is forbidden. α is a single registered dose, chosen before any P8 model exists. **A null result at α = 0.5 does not rule out an effect at another dose** (§9).
+So the raw gradient handed to the optimizer is that of L + λR with a step-wise coefficient that sets the regularizer's gradient norm on the routing parameters to half the language-model gradient's there.
 
-C10 applies R_co and R_temp together, each normalized separately by rule 3 with α = 0.5: g = g_L + λ_co g_co + λ_temp g_temp. Its total regularizer pressure is therefore up to twice that of the single-objective cases; it is exploratory.
+**What this rule does and does not match (review M1).** AdamW normalizes every coordinate separately. On a coordinate where only the regularizer has gradient — in particular the key rows of slots that are soft-included but not hard-selected — the update is about the learning rate whatever λ is (measured: 3.00·10⁻³ at λ = 1 and 0.1, 2.97·10⁻³ at 0.01). α therefore sets the *mixture* on coordinates that both objectives touch and does **not** bound the regularizer's movement of the others. In C01–C03 unselected keys never move; in regularized cases they do. The rule equalizes the raw-gradient mixture across cases and architectures; it does not equalize parameter movement, and "matched" means the first only. Each cell logs, per update, the norm of the actual parameter change on Θ_r and on the remaining parameters, so movement can be compared with the baseline case. P5's clipping never activated (largest pre-clip norm 0.081) and λ is bounded, so neither is a concern.
+
+Reason for this rule over a fixed coefficient: the memory's whole contribution in P5 is about 0.02 nats/byte and the raw gradient scales of the three regularizers and two architectures (4,096 versus 512 candidates) differ by unknown factors; a fixed coefficient would give unmatched, unknowable pressure, and tuning one on outcomes is forbidden. α is a single registered dose, chosen before any P8 model exists. **A null result at α = 0.5 does not rule out an effect at another dose** (§9).
+
+C10 applies R_co and R_temp together, each normalized separately by rule 3 with α = 0.5: g = g_L + λ_co g_co + λ_temp g_temp. Its raw regularizer gradient can be up to twice that of the single-objective cases (under AdamW this does not translate into twice the movement); it is exploratory.
 
 Standard cases (C01–C03) take step 1 only and must be bit-identical to P5's `train_step`. Gate: the P8 runner, given P5's cell b101-o301 flat seed 501, reproduces P5's recorded step-512 state digest (§10).
 
@@ -107,6 +117,8 @@ Before the freeze, the implementer's reconstruction and the auditor's independen
 
 - **Quality.** NLL (nats/byte) at step 0 and step 512; with memory disabled; with values permuted (seed 80000 + cell index). Memory gain = NLL_disabled − NLL. Value-association effect = NLL_permuted − NLL.
 - **Utilization** on the hard evaluation trace (32,768 queries × 8): distinct selected slots; entropy-effective slots N_eff = exp(H of selection counts); share of selections on the 64 most-selected slots; for trees, distinct branches visited, entropy-effective branches, share of the top branch.
+- **Proxy diagnostics** (training, at updates 1, 128, 256, 384, 512): mean 8th–9th score gap; mean π mass outside the top 8; each R value; each λ; and, at every update, the norm of the parameter change on Θ_r and on the other parameters.
+- **Per-context breadth** on the hard evaluation trace: mean number of distinct slots selected within a 64-query context (the cheapest minimizer of R_temp is one fixed set per context, which lowers this while N_eff can stay high).
 - **Gradient reach** (training, at updates 1, 128, 256, 384, 512): number of slots whose key row has nonzero g_L; number with |g_R| row norm > 10⁻¹²; number of the latter not hard-selected in that batch; cumulative distinct slots hard-selected during training.
 - **Locality (simulation, ADR-0014 page model unchanged):** per-query service, LRU among pages not used by the current query, warm-up on the first 256 contexts, counting on the last 256; **m = warm capacity misses per query**; also first-touch and cold (from-empty) misses and distinct pages per query. Settings: **primary R = 2 rows/page, C = 32 pages; confirmation R = 8, C = 8** (both hypothetical row sizes, both 64 cached rows). **Both eviction tie rules** (ascending, descending page number) on numerators and denominators.
 - **Layouts**, all fitted on the cell's **calibration trace only** with ADR-0014's unchanged constructions and budgets: L-ID, L-FREQ, **L-COAX** (co-access clustering, no hierarchy information), L-BCOAX (trees), **L-PCOAX-1…5** (arbitrary 16×256 partitions, seeds 91601–91605).
@@ -121,34 +133,38 @@ L-NCOAX, the windowed and greedy-only sensitivity layouts, R ∉ {2, 8}, C sweep
 
 For a regularized case c with baseline b (§5), over the six (parent, seed) pairs, for each panel, setting and tie rule:
 
-- **M-ratio** = mean_c m(L-COAX) ÷ mean_b m(L-COAX): what the layout-optimized memory pays.
-- **E-ratio** = mean_c E(L-COAX) ÷ mean_b E(L-COAX): locality beyond each checkpoint's own popularity null.
-- **Utilization-adjusted E-ratio**: ADR-0014 §2's regression on the 12 checkpoints, E = a + b·x + d·[case], x = ln N_eff on that panel; ρ_adj = (a + b·x̄ + d) ÷ (a + b·x̄); undefined if a + b·x̄ ≤ 0.
+- **M-ratio** = (mean over the six case cells of m(L-COAX)) ÷ (mean over the six baseline cells of m(L-COAX)): what the layout-optimized memory pays. Ratios of means throughout, never means of ratios.
+- **E-ratio** = (mean of the six case cells' E(L-COAX)) ÷ (mean of the six baseline cells' E(L-COAX)): locality beyond each checkpoint's own popularity null. **E of a checkpoint is undefined when its null mean under L-FREQ is below 0.05 misses per query** (its selections essentially fit in the cache); an E-ratio with any undefined member is undefined.
+- **Utilization-adjusted E-ratio**: ADR-0014 §2's regression on the 12 checkpoints, E = a + b·x + d·[case], x = ln N_eff on that panel; ρ_adj = (a + b·x̄ + d) ÷ (a + b·x̄), refitted for every panel × setting × tie rule; undefined if a + b·x̄ ≤ 0, if any E is undefined, or if the case's and the baseline's ranges of x do not overlap (the fit would then be pure extrapolation).
+- **Gain retention** = mean memory gain of the case ÷ mean memory gain of the baseline; **association retention** likewise for the value-association effect.
 - **ΔNLL** = mean over pairs of NLL_c − NLL_b.
 - **U-ratio** = geometric mean over pairs of N_eff,c ÷ N_eff,b.
-- Pair counts: number of the six pairs with m_c < m_b and with E_c < E_b; number of the three parents whose two-seed mean ratio is below 1.
+- Pair counts: number of the six pairs with m_c < m_b and with E_c < E_b (L-COAX); **parent count**: number of the three parents for which (mean of the case's two seeds' E(L-COAX)) ÷ (mean of the baseline's two seeds' E(L-COAX)) is below 1.
 
 For tree cases the same quantities are also computed **against the flat counterpart** (C05↔C04, C07↔C06, C09↔C08; C10 against C06 and C08 separately, descriptive only), and for every case against **C01 under L-COAX** (the well-optimized conventionally trained flat memory). For trees, every quantity is reported under L-COAX and under L-BCOAX; classification uses L-COAX for all architectures (one algorithm, no hierarchy information, no choice among layouts).
 
 ### 7.3 Screening margins (fixed; reference margins from ADR-0013/0014, not significance tests)
 
 - Ratio ≤ **0.80**: material improvement. Ratio in **[0.90, 1.10]**: no difference. Ratio ≥ 1.25: materially worse. Otherwise intermediate.
-- **Quality guard**: ΔNLL ≤ **+0.005 nats/byte** (P5's registered effect threshold) on the mean, and at most one of six pairs above +0.005; and mean memory gain of the case > 0.005.
+- **Quality guard** (all four): ΔNLL ≤ **+0.005 nats/byte** (P5's registered effect threshold) on the mean; at most one of six pairs above +0.005; **gain retention ≥ 0.75**; **association retention ≥ 0.75**. (The backbone is frozen, so ΔNLL equals the baseline's gain minus the case's; +0.005 is about a quarter of the roughly 0.02 nats/byte being trained, which is why retention is stated beside it.)
 - **Utilization guard**: U-ratio ≥ 0.80 → retained; 0.50 ≤ U-ratio < 0.80 → reduced; < 0.50 → collapsed.
 
 ### 7.4 Classification of each regularized case (per panel; evaluated in this order)
 
 1. **QUALITY-FAILED** if the quality guard fails.
 2. **COLLAPSED** if U-ratio < 0.50.
-3. **LOCALITY-POSITIVE (screening)** if, at **both** settings under **both** tie rules: M-ratio ≤ 0.80 **and** E-ratio ≤ 0.80 **and** utilization-adjusted E-ratio ≤ 0.80 (defined), **and** at least five of six pairs have E_c < E_b and all three parents have ratio below 1.
-4. **CONCENTRATION-ONLY** if M-ratio ≤ 0.80 at both settings under both tie rules but item 3 fails.
-5. **NO DIFFERENCE** if M-ratio and E-ratio are within [0.90, 1.10] at both settings under both tie rules.
-6. **WORSE** if E-ratio ≥ 1.25 at both settings under both tie rules.
-7. Otherwise **INTERMEDIATE** (including any disagreement between tie rules or settings).
+3. Let **LOC** hold if, at **both** settings under **both** tie rules: M-ratio ≤ 0.80 **and** E-ratio ≤ 0.80 **and** utilization-adjusted E-ratio ≤ 0.80 (an undefined ratio fails), **and** at least five of six pairs have E_c < E_b and the parent count is three. **LOCALITY-POSITIVE (screening)** if LOC and U-ratio ≥ 0.80.
+4. **LOCALITY WITH REDUCED UTILIZATION** if LOC and 0.50 ≤ U-ratio < 0.80. This is not a positive reading.
+5. **CONCENTRATION-ONLY** if M-ratio ≤ 0.80 at both settings under both tie rules but LOC fails.
+6. **NO DIFFERENCE** if M-ratio and E-ratio are both defined and within [0.90, 1.10] at both settings under both tie rules.
+7. **WORSE** if M-ratio ≥ 1.25 or E-ratio ≥ 1.25, the same one at both settings under both tie rules.
+8. Otherwise **INTERMEDIATE** (including any disagreement between tie rules or settings and any undefined ratio not covered above).
 
 A case's **study classification** is its Panel A class if Panel B gives the same class; otherwise **NOT REPLICATED ACROSS PANELS** with both shown.
 
-**Beats optimized flat** (required for a positive reading, §8): the case is LOCALITY-POSITIVE and its M-ratio **against C01 under L-COAX** is ≤ 0.80 at both settings, both tie rules, both panels, with ΔNLL against C01 ≤ +0.005. For a tree case, **architecture advantage** additionally requires M-ratio and E-ratio against its flat counterpart ≤ 0.80 under the same conditions, with ΔNLL against the counterpart ≤ +0.005. C10 has no flat counterpart and cannot establish an architecture advantage.
+**Beats optimized flat** (required for a positive reading, §8): the case is LOCALITY-POSITIVE and its M-ratio, E-ratio and utilization-adjusted E-ratio **against C01 under L-COAX** are all ≤ 0.80 (defined) at both settings, both tie rules, both panels, with ΔNLL against C01 ≤ +0.005. For a tree case, **architecture advantage** additionally requires the same three ratios against its flat counterpart ≤ 0.80 under the same conditions, with ΔNLL against the counterpart ≤ +0.005. The U-ratio against C01 and against the counterpart is reported beside these but is not a condition: P5's trees already use fewer slots than flat, so such a condition could not be met by any tree; the E-ratio and its utilization adjustment carry the concentration control there. C10 has no flat counterpart and cannot establish an architecture advantage.
+
+**Concentration controls bind (review M4).** If C04 or C05 is itself LOCALITY-POSITIVE on either panel, the criteria have been shown to pass on concentration alone: no "beyond concentration" statement may then be written for any case, and the decision memo defaults to (c).
 
 **Arbitrary-partition control** (reported, enters no class): for each case, mean m under the five L-PCOAX layouts ÷ m under L-COAX, and for trees L-BCOAX ÷ mean L-PCOAX.
 
@@ -167,6 +183,8 @@ A case's **study classification** is its Panel A class if Panel B gives the same
 - **One dose.** α = 0.5, β = 0.25, group size 8 and W = 8 are single registered values. Too weak gives an uninformative null; too strong fails the quality guard. Either is reported as the outcome of this dose, not of the idea.
 - **Proxy versus measure.** The regularizers act on a soft relaxation with a slot-ID grouping; the outcome is measured on hard traces under post-hoc layouts. The proxy falling during training is not a result.
 - **Utilization.** E's normalization does not fully remove utilization (ADR-0014 §2); hence the adjusted ratio, the U-ratio and the concentration controls. With 12 points the adjustment is itself noisy.
+- **Tree prior.** A learned tree can also widen its selection margin through the route prior, a route flat memory lacks; an apparent architecture difference in proxy values could come from that. Outcomes are read on hard traces only.
+- **Unselected keys move.** Under AdamW the regularizers move keys that the standard objective never touches (§4). Any difference from the baseline may come from that movement as such; the concentration controls share it.
 - **Layout heuristic.** One greedy pass and bounded refinement; P7-B's L-NCOAX flag stands.
 - **Hypothetical row sizes, one memory size, one corpus, 512 updates, three correlated parents, two seeds.**
 - **Extra compute.** Regularized cases take two backward passes; equal updates, not equal compute. Reported.
@@ -175,8 +193,8 @@ A case's **study classification** is its Panel A class if Panel B gives the same
 ## 10. Correctness requirements (all must pass before the freeze or, where marked, at run time)
 
 1. **Gradients.** Each regularizer, as a function of float64 scores on small synthetic instances away from ties, passes `torch.autograd.gradcheck`; analytic gradient with respect to values, `wo` and gate is exactly zero through the real model; gradient reaches keys, `wq` and (learned tree) router.
-2. **Proxy properties.** Exactly eight slots have π > ½ for random and adversarial score inputs; R_co = 1/8 on a constructed one-group selection and near 1 on a constructed eight-group selection; R_temp ≈ 0 on a constructed fully repeating sequence and ≈ 1 on a never-repeating one; R_conc ordering on constructed concentrated versus uniform usage; none of the three decreases when a constructed query's mass is sharpened onto one slot with the top-8 set unchanged.
-3. **Invariance.** Standard-objective path reproduces P5: recorded step-512 state digest of P5 cell b101-o301 flat seed 501 (training only; no evaluation panel is opened). λ = 0 reproduces the standard path bit for bit.
+2. **Proxy properties.** Exactly eight slots have π > ½ for random untied scores, and exactly seven (two at π = ½) when the 8th and 9th scores are tied; π is zero outside the top 64; R_co equals the closed form (1 − (1 − p)⁸)/(8p) on a constructed one-group selection and is near 1 on a constructed eight-group selection; R_temp ≈ 0 on a constructed fully repeating sequence and ≈ 1 on a never-repeating one; R_conc ordering on constructed concentrated versus uniform usage and floor 0.25.
+3. **Invariance.** Standard-objective path reproduces P5: recorded step-512 state digest of P5 cell b101-o301 flat seed 501 (training only; no evaluation panel is opened). A regularized step whose λ is 0 skips the addition (0·∞ would be NaN) and is then bit-identical to the standard path.
 4. **Freeze of the backbone.** Backbone digest identical before and after every cell (run time); optimizer holds exactly the addition parameters in registered order (run time, every step, as P5).
 5. **Checkpoint restoration.** Save at step 256 including optimizer state; a restored run reaches the identical step-512 digest. Tested pre-freeze on synthetic parents and at run time on cells with seed 601 of parent B101/O301 (ten cells).
 6. **Data identity.** §6 double reconstruction and overlap proof; training rows and order equal P5's by hash.
@@ -209,7 +227,20 @@ No analysis output of any kind is produced before both panels are simulated. No 
 
 ## 13. Independent review of assumptions and the lead's response
 
-*(To be filled from the auditor's spec review before the freeze.)*
+Revision 1 was reviewed by the auditor role (Claude Opus 5.5, `claude-opus-5-5`): `docs/reviews/p8-spec-review-2026-11-14/REVIEW.md`. Verdict NOT READY: 1 blocker, 6 major, 10 minor, all answerable by rewording; nothing conflicted with the human direction. No P8 model existed and no panel had been opened. The lead's response, applied in revision 2:
+
+| Finding | Response |
+|---|---|
+| **B1** Three statements in §3 were false (tie case; R_co's minimum is reached only by sharpening; all three regularizers fall under margin widening) and two were gates. | Adopted. §3 corrected; the margin route is declared as a known non-locality route with per-cell diagnostics; §10.2 replaced by the tie test and the closed form. |
+| **M1** Matched pressure does not survive AdamW's per-coordinate normalization. | Adopted as a correction of the claim, not of the optimizer (P5's optimizer is part of the human-fixed setup). §4 now says what is and is not matched; per-update parameter-change norms are logged. |
+| **M2** The quality guard allowed losing a quarter of the memory gain; R_temp's cheapest minimizer may escape N_eff. | Adopted: gain and association retention ≥ 0.75 added to the guard; per-context breadth reported. |
+| **M3** Utilization was not enforced on positive readings. | Adopted for the case-versus-baseline reading: LOCALITY-POSITIVE needs U-ratio ≥ 0.80; a separate non-positive class covers 0.50–0.80. Against C01 and the flat counterpart, E-ratio and adjusted E-ratio are now required. **Not adopted:** a U-ratio ≥ 0.80 condition against flat, because no tree could ever meet it (a criterion that cannot pass); it is reported instead. |
+| **M4** The concentration controls fed no criterion. | Adopted (§7.4). |
+| **M5** Undefined denominators and ambiguities. | Adopted: E undefined below 0.05 null misses per query; undefined fails LOC; parent ratio named; ratios of means; refit per panel × setting × tie; WORSE covers M-ratio. |
+| **M6** "Same formula" was not matched between flat and tree. | Adopted: π over each query's top-64 candidates for both architectures. The remaining asymmetry (the tree's prior gives a second way to widen the margin) is disclosed in §9. |
+| Minors | Adopted: −softplus in place of the clamp; λ = 0 skips the addition; C10 wording; R_conc floor; tree π discontinuity stated. The saturation of the gradient-reach count is reduced by the top-64 restriction and the metric is kept as descriptive. |
+
+Every change was made before any P8 model existed. None changes the matrix, panels, margins or limits set by the human lead.
 
 ## 14. Decisions reserved for the human lead
 
