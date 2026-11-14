@@ -1,0 +1,6 @@
+b101-o301-flat-s501: AGREE  configs=60  integrity_problems=0  differences=0  3.0s
+b101-o301-fixed_tree-s501: AGREE  configs=90  integrity_problems=0  differences=0  4.2s
+b101-o301-flat-s502: AGREE  configs=60  integrity_problems=0  differences=0  3.1s
+b101-o301-learned_tree-s502: AGREE  configs=90  integrity_problems=0  differences=0  4.2s
+VERDICT AGREE  checkpoints=4  seconds=14.5  summary=docs/reviews/p7a-preflight-2026-11-13/outputs/indep_vs_study_fullsize_py312.json
+uv run --locked python -I  --trace-root $TR --sim-workers $SW --labels        14.31s user 0.16s system 99% cpu 14.502 total

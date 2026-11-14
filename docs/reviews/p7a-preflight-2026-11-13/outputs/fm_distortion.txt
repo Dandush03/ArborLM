@@ -1,0 +1,44 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+flat
+  top1_target                  mean 0.0293  min 0.0233  max 0.0403
+  top1_realized                mean 0.0273  min 0.0220  max 0.0368
+  top8_target                  mean 0.1986  min 0.1699  max 0.2492
+  top8_realized                mean 0.1887  min 0.1617  max 0.2338
+  top32_target                 mean 0.5082  min 0.3755  max 0.6227
+  top32_realized               mean 0.4958  min 0.3654  max 0.6068
+  eff_target                   mean 132.3428  min 85.1438  max 198.9801
+  eff_realized                 mean 135.8103  min 86.6692  max 203.3516
+  eff_realized_over_target     mean 1.0272  min 1.0179  max 1.0430
+  top8_realized_over_target    mean 0.9503  min 0.9383  max 0.9639
+  tvd                          mean 0.0172  min 0.0136  max 0.0214
+  max_count                    mean 7676.6667  min 6107.0000  max 10555.0000
+fixed_tree
+  top1_target                  mean 0.0408  min 0.0285  max 0.0704
+  top1_realized                mean 0.0369  min 0.0269  max 0.0607
+  top8_target                  mean 0.2480  min 0.1849  max 0.4201
+  top8_realized                mean 0.2333  min 0.1769  max 0.3868
+  top32_target                 mean 0.6201  min 0.4600  max 0.8765
+  top32_realized               mean 0.6047  min 0.4484  max 0.8598
+  eff_target                   mean 96.2481  min 42.9240  max 142.1921
+  eff_realized                 mean 99.9511  min 46.6484  max 145.8292
+  eff_realized_over_target     mean 1.0411  min 1.0254  max 1.0868
+  top8_realized_over_target    mean 0.9426  min 0.9207  max 0.9577
+  tvd                          mean 0.0207  min 0.0159  max 0.0355
+  max_count                    mean 10684.2593  min 7474.0000  max 18460.0000
+learned_tree
+  top1_target                  mean 0.0432  min 0.0272  max 0.0577
+  top1_realized                mean 0.0391  min 0.0257  max 0.0508
+  top8_target                  mean 0.2627  min 0.1746  max 0.3473
+  top8_realized                mean 0.2468  min 0.1685  max 0.3219
+  top32_target                 mean 0.6603  min 0.4915  max 0.7775
+  top32_realized               mean 0.6444  min 0.4788  max 0.7594
+  eff_target                   mean 83.0243  min 55.1804  max 123.9914
+  eff_realized                 mean 86.2576  min 58.3908  max 127.6131
+  eff_realized_over_target     mean 1.0409  min 1.0190  max 1.0655
+  top8_realized_over_target    mean 0.9412  min 0.9198  max 0.9650
+  tvd                          mean 0.0210  min 0.0147  max 0.0290
+  max_count                    mean 11324.2593  min 7134.0000  max 15136.0000
+exact count-preserving null exists for all 81 cells: True largest max count 18460.0 of 32768
+seconds 268.1
+uv run --locked --extra pilot python   266.37s user 1.46s system 99% cpu 4:28.54 total

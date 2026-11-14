@@ -1,0 +1,5 @@
+flat: cells 27  swaps mean 9648 max 12619  max count 10555  seconds/cell 0.06
+fixed_tree: cells 27  swaps mean 13127 max 24790  max count 18460  seconds/cell 0.06
+learned_tree: cells 27  swaps mean 14268 max 19354  max count 15136  seconds/cell 0.06
+all 81 exact (counts reproduced, 8 distinct per query); total 5s
+python3 docs/reviews/p7a-preflight-2026-11-13/check_exact_null.py  5.07s user 0.04s system 98% cpu 5.213 total

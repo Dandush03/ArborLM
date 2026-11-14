@@ -1,0 +1,70 @@
+{
+ "argv": [
+  "docs/reviews/p7a-preflight-2026-11-13/independent_sim.py",
+  "--trace-root",
+  "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/full/traces",
+  "--sim-workers",
+  "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/full/workers",
+  "--labels",
+  "b101-o301-flat-s501",
+  "b101-o301-fixed_tree-s501",
+  "b101-o301-flat-s502",
+  "b101-o301-learned_tree-s502",
+  "--out",
+  "docs/reviews/p7a-preflight-2026-11-13/outputs/indep_vs_study_fullsize_py312.json"
+ ],
+ "checkpoints": {
+  "b101-o301-fixed_tree-s501": {
+   "cache_configurations_compared": 90,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "fixed_tree",
+   "layout_R_groups": 18,
+   "queries": 32768,
+   "seconds": 4.154488083033357,
+   "warm_capacity_misses_L_FREQ_R2_C32": 57973
+  },
+  "b101-o301-flat-s501": {
+   "cache_configurations_compared": 60,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "flat",
+   "layout_R_groups": 12,
+   "queries": 32768,
+   "seconds": 3.0467632089857943,
+   "warm_capacity_misses_L_FREQ_R2_C32": 66856
+  },
+  "b101-o301-flat-s502": {
+   "cache_configurations_compared": 60,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "flat",
+   "layout_R_groups": 12,
+   "queries": 32768,
+   "seconds": 3.1064953330205753,
+   "warm_capacity_misses_L_FREQ_R2_C32": 87066
+  },
+  "b101-o301-learned_tree-s502": {
+   "cache_configurations_compared": 90,
+   "differences": [],
+   "integrity_problems": [],
+   "kind": "learned_tree",
+   "layout_R_groups": 18,
+   "queries": 32768,
+   "seconds": 4.158146083005704,
+   "warm_capacity_misses_L_FREQ_R2_C32": 83439
+  }
+ },
+ "python": "3.12.14 (main, Sep  1 2026, 14:09:38) [Clang 22.1.3 ]",
+ "selection": [
+  "b101-o301-flat-s501",
+  "b101-o301-fixed_tree-s501",
+  "b101-o301-flat-s502",
+  "b101-o301-learned_tree-s502"
+ ],
+ "selection_rule": "explicit --labels",
+ "tie_rule": "asc",
+ "tool": "independent_sim.py (auditor, stdlib only)",
+ "total_seconds": 14.465985124988947,
+ "verdict": "AGREE"
+}

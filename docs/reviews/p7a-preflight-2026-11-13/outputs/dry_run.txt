@@ -1,0 +1,7 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+P7-A trace completed: /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/p7a-dry-run-ioy2cyim/experiments/P7ATD-20261113T201457483756Z-8c134a7f34424db5b58aeb65dc057f27
+P7-A simulate completed: /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/p7a-dry-run-ioy2cyim/experiments/P7ASD-20261113T201459585729Z-e841518d4f4f461f94a8f6d385cb1416
+P7-A analyze completed: /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/p7a-dry-run-ioy2cyim/experiments/P7AAD-20261113T201506659232Z-2f50fe9826484623b6b858759667bae3
+{"analysis_missing":0,"analysis_outcomes":{"fixed_tree":"INCOMPLETE","learned_tree":"INCOMPLETE"},"analyze":0,"experiments_and_results_unchanged":true,"scratch_deleted":true,"simulate":0,"trace":0}
+uv run --locked --extra pilot python -m arborlm.p7a_study dry-run  8.59s user 2.77s system 112% cpu 10.095 total

@@ -1,0 +1,42 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+P7-A trace completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/experiments/P7ATD-20261113T202226776059Z-7b28b5f3b3f04020ab4d0d2e5a36585c
+P7-A simulate completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/experiments/P7ASD-20261113T202228470427Z-5aa41ee246064f73a3baa03dbd7e4a2d
+P7-A analyze completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/experiments/P7AAD-20261113T202235392271Z-56967a496f9c4c81bffb09c52096e157
+{
+ "part1": {
+  "codes": [
+   0,
+   0,
+   0
+  ],
+  "trace_root": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/experiments/P7ATD-20261113T202226776059Z-7b28b5f3b3f04020ab4d0d2e5a36585c/traces",
+  "sim_workers": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/results/simulate/P7ASD-20261113T202228470427Z-5aa41ee246064f73a3baa03dbd7e4a2d/workers",
+  "trace_records": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/stage/results/trace/P7ATD-20261113T202226776059Z-7b28b5f3b3f04020ab4d0d2e5a36585c/checkpoints",
+  "labels": [
+   "b101-o301-flat-s501",
+   "b101-o301-fixed_tree-s501",
+   "b101-o301-learned_tree-s501",
+   "b101-o301-flat-s502",
+   "b101-o301-fixed_tree-s502",
+   "b101-o301-learned_tree-s502"
+  ]
+ },
+ "part2": {
+  "trace_root": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/full/traces",
+  "sim_workers": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/p7a2/full/workers",
+  "labels": [
+   "b101-o301-flat-s501",
+   "b101-o301-fixed_tree-s501",
+   "b101-o301-flat-s502",
+   "b101-o301-learned_tree-s502"
+  ],
+  "study_sim_seconds": {
+   "b101-o301-flat-s501": 12.569532875029836,
+   "b101-o301-fixed_tree-s501": 14.154716166958679,
+   "b101-o301-flat-s502": 13.341785583994351,
+   "b101-o301-learned_tree-s502": 15.186236417037435
+  }
+ }
+}
+uv run --locked --extra pilot python  $S/p7a2  67.38s user 2.89s system 101% cpu 1:09.31 total

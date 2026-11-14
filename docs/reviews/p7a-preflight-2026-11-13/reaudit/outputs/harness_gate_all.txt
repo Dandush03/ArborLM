@@ -1,0 +1,31 @@
+python 3.12.14 torch 2.8.0
+P1 trace=0 simulate=0 (132s) trace=P7ATD-20261113T210924903144Z-f7423239456f4e3693489f5a53454bf0 sim=P7ASD-20261113T210951024407Z-80058e42b8d24a7eb1bf58722f1b36fb
+P1 independent_sim registered selection: exit 0, verdict AGREE, 4.0s
+P1 gate (direct, dry-run): ACCEPTED
+P1 run_analyze with the genuine file: {'exit': 0, 'status': 'completed', 'independent_check_sha256': '84ee6c482d52ee6c3914d7fc4db674f201d9ee6386eb9857d2f1dcf8936402b1'}
+P1 neg_fm_count: exit 1 verdict DIFFER differences ['freq_matched_2 L-FREQ|R2 C=32 misses_warm: independent 1926 study 1927', 'freq_matched_2 L-FREQ|R2 C=32 warm capacity misses: independent 1675 study 1676'] gate REFUSED: analysis refused: independent-simulator gate failed: verdict is 'DIFFER', not 'AGREE'; b101-o301-fixed_tree-s50
+P1 neg_fm_sha: exit 1 verdict DIFFER differences ['freq_matched_3 stream_sha256: independent 79ee359427f0a7932a6cf4b014867df3ee80972c34fb6e7dad33b0387ac4e6bb study 0000000000000000000000000000000000000000000000000000000000000000'] gate REFUSED: analysis refused: independent-simulator gate failed: verdict is 'DIFFER', not 'AGREE'; b101-o301-fixed_tree-s50
+P1 neg_tie_desc: exit 1 verdict DIFFER gate REFUSED: analysis refused: independent-simulator gate failed: verdict is 'DIFFER', not 'AGREE'; tie rule is 'desc', not the registered 'asc'; b101-o301-fixed_tr
+P1 neg_wrong_selection: exit 0 verdict AGREE gate REFUSED: analysis refused: independent-simulator gate failed: selection is not the registered clarification-7 selection; it was not run with --registered-selection; per-checkpoint results do not cover
+P1 neg_wrong_run (second simulate P7ASD-20261113T211157449836Z-95cb6787102d4e919db47c4cbb0b01ac, exit 0): REFUSED: analysis refused: independent-simulator gate failed: it did not read this simulate run (P7ASD-20261113T211157449836Z-95cb6787102d4e919db47c4cbb0b01ac) workers
+P1 v1 script (no FM coverage): exit 0 verdict AGREE gate ACCEPTED
+P1 stale AGREE after a post-check edit of a study record: ACCEPTED
+P2 study record b101-o301-flat-s501: 10.0s
+P2 study record b101-o301-flat-s502: 10.8s
+P2 study record b101-o301-flat-s503: 10.6s
+P2 study record b101-o303-flat-s501: 11.8s
+P2 study record b103-o302-flat-s501: 10.9s
+P2 study record b103-o302-flat-s502: 11.7s
+P2 study record b101-o301-fixed_tree-s501: 14.3s
+P2 study record b101-o301-fixed_tree-s502: 14.3s
+P2 study record b101-o301-fixed_tree-s503: 16.1s
+P2 study record b102-o302-fixed_tree-s503: 13.4s
+P2 study record b103-o302-fixed_tree-s502: 11.8s
+P2 study record b103-o303-fixed_tree-s502: 13.1s
+P2 study record b101-o301-learned_tree-s501: 10.9s
+P2 study record b101-o301-learned_tree-s502: 11.2s
+P2 study record b101-o301-learned_tree-s503: 13.1s
+P2 study record b102-o302-learned_tree-s502: 11.9s
+P2 study record b102-o303-learned_tree-s501: 12.2s
+P2 study record b103-o303-learned_tree-s502: 13.1s
+P2 independent_sim 18 full-size: exit 0 verdict AGREE total 249s (cap 1800 s); gate registered: ACCEPTED; wrong sim run: REFUSED: analysis refused: independent-simulator gate failed; wrong trace run: REFUSED: analysis refused: independent-simulator gate failed

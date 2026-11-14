@@ -1,0 +1,12 @@
+{
+ "instances": 2000,
+ "tally": {
+  "NO ADVANTAGE": 1549,
+  "UNSPECIFIED": 606,
+  "STRUCTURAL ADVANTAGE, robust": 245,
+  "UNRESOLVED": 1272,
+  "CONCENTRATION-ONLY": 269,
+  "STRUCTURAL ADVANTAGE, not robust": 59
+ },
+ "mismatches": []
+}

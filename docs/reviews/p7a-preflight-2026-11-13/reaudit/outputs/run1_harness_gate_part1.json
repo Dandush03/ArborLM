@@ -1,0 +1,49 @@
+{
+ "part1": {
+  "agree": {
+   "exit": 0,
+   "verdict": "AGREE",
+   "seconds": 3.8363127499469556,
+   "gate_direct": "ACCEPTED"
+  },
+  "analyze": {
+   "exit": 0,
+   "status": "completed",
+   "independent_check_sha256": "f4f39e434341bfdc28a5675edc0fd2b705bf810865a3a9a4fbc143f56db2c2fb"
+  },
+  "neg_fm_count": {
+   "exit": 1,
+   "verdict": "DIFFER",
+   "differences": [
+    "freq_matched_2 L-FREQ|R2 C=32 misses_warm: independent 1926 study 1927",
+    "freq_matched_2 L-FREQ|R2 C=32 warm capacity misses: independent 1675 study 1676"
+   ],
+   "gate": "REFUSED: analysis refused: independent-simulator gate failed: verdict is 'DIFFER', not 'AGREE'; b101-o301-fixed_tree-s502: differences or integrity problems are listed"
+  },
+  "neg_fm_sha": {
+   "exit": 1,
+   "verdict": "DIFFER",
+   "differences": [
+    "freq_matched_3 stream_sha256: independent 79ee359427f0a7932a6cf4b014867df3ee80972c34fb6e7dad33b0387ac4e6bb study 0000000000000000000000000000000000000000000000000000000000000000"
+   ],
+   "gate": "REFUSED: analysis refused: independent-simulator gate failed: verdict is 'DIFFER', not 'AGREE'; b101-o301-fixed_tree-s502: differences or integrity problems are listed"
+  },
+  "neg_tie_desc": {
+   "exit": 1,
+   "verdict": "DIFFER",
+   "gate": "REFUSED: analysis refused: independent-simulator gate failed: verdict is 'DIFFER', not 'AGREE'; tie rule is 'desc', not the registered 'asc'; b101-o301-fixed_tree-s501: differences or integrity problems are listed; b101-o301-fixed_tree-s502: differences or integrity problems are listed; b101-o301-fixed_tree-s503: differences or integrity problems are listed; b101-o301-flat-s501: differences or integrity problems are listed; b101-o301-flat-s502: differences or integrity problems are listed; b101-o301-flat-s503: differences or integrity problems are listed; b101-o301-learned_tree-s501: differences or integrity problems are listed; b101-o301-learned_tree-s502: differences or integrity problems are listed; b101-o301-learned_tree-s503: differences or integrity problems are listed; b101-o303-flat-s501: differences or integrity problems are listed; b102-o302-fixed_tree-s503: differences or integrity problems are listed; b102-o302-learned_tree-s502: differences or integrity problems are listed; b102-o303-learned_tree-s501: differences or integrity problems are listed; b103-o302-fixed_tree-s502: differences or integrity problems are listed; b103-o302-flat-s501: differences or integrity problems are listed; b103-o302-flat-s502: differences or integrity problems are listed; b103-o303-fixed_tree-s502: differences or integrity problems are listed; b103-o303-learned_tree-s502: differences or integrity problems are listed"
+  },
+  "neg_wrong_selection": {
+   "exit": 0,
+   "verdict": "AGREE",
+   "gate": "REFUSED: analysis refused: independent-simulator gate failed: selection is not the registered clarification-7 selection; it was not run with --registered-selection; per-checkpoint results do not cover exactly the selection"
+  },
+  "neg_wrong_run": "REFUSED: analysis refused: independent-simulator gate failed: it did not read this simulate run (P7ASD-20261113T210709468751Z-eb6f092703b44f8f9c63918ef8ad7c6a) workers",
+  "v1_no_fm": {
+   "exit": 0,
+   "verdict": "AGREE",
+   "gate": "ACCEPTED"
+  },
+  "stale_agree_after_edit": "ACCEPTED"
+ }
+}

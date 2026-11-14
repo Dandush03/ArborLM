@@ -1,0 +1,16 @@
+geometry	block_KiB	case	closed_form	monte_carlo(200k)	abs_diff
+actual	4	flat: whole store, 4096 rows	7.791113	7.790375	0.000738
+actual	4	tree: two branches (no shared page)	6.487588	6.489655	0.002067
+actual	16	flat: whole store, 4096 rows	7.183084	7.182780	0.000304
+actual	16	tree: two branches (no shared page)	3.606865	3.604870	0.001995
+actual	64	flat: whole store, 4096 rows	5.253815	5.254580	0.000765
+actual	64	tree: two branches in the SAME 64 KiB page	1.000000	1.000000	0.000000
+actual	64	tree: two branches in DIFFERENT 64 KiB pages	1.992609	1.992610	0.000001
+hypothetical	4	flat: whole store, 4096 rows	7.993162	7.993265	0.000103
+hypothetical	4	tree: two branches (no shared page)	7.945205	7.945055	0.000150
+hypothetical	16	flat: whole store, 4096 rows	7.952277	7.952510	0.000233
+hypothetical	16	tree: two branches (no shared page)	7.625353	7.625720	0.000367
+hypothetical	64	flat: whole store, 4096 rows	7.791113	7.790395	0.000718
+hypothetical	64	tree: two branches (no shared page)	6.487588	6.484440	0.003148
+synthetic	4	general form: 300 used rows spread 30,30,...,20,10	5.834579	5.833420	0.001159
+ratio tree/flat at 4 KiB actual (uniform): 0.832691

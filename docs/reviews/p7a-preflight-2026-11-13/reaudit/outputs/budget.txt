@@ -1,0 +1,20 @@
+$ uv run --locked --extra pilot python -m arborlm.p7a_study budget
+{"cap_seconds":3600.0,"command":"budget","fixed_tree":{"complete":true,"configurations":480,"simulation_seconds":11.148817416979,"synthetic_trace_seconds":0.3958385409787297,"unique_selected_slots":400},"flat":{"complete":true,"configurations":450,"simulation_seconds":9.466044833010528,"synthetic_trace_seconds":1.8947230409830809,"unique_selected_slots":400},"label":"measured wall time on synthetic traces; a projection, not a result","margin_against_cap":4.19766647728753,"note":"in-process, excluding process start-up and trace reading (about a second per checkpoint) and the analysis stage; synthetic concentration is an implementer's guess","peak_rss_bytes_ru_maxrss":817692672,"projected_total_seconds_81_checkpoints":857.6193510081503,"queries":32768,"twofold_margin_met":true}
+       23.43 real        23.69 user         0.38 sys
+           817692672  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               69083  page reclaims
+                   5  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   1  messages received
+                   1  signals received
+                  28  voluntary context switches
+               30821  involuntary context switches
+           100021022  instructions retired
+            43149224  cycles elapsed
+            10650056  peak memory footprint
