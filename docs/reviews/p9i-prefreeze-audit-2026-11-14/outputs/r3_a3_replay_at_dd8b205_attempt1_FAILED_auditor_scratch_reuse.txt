@@ -1,0 +1,19 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+seed set rehearsal-2
+N-n4096-b101-o301-s1801 init_seed 179201
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/a3_rehearsal_replay.py", line 36, in <module>
+    train.train_cell(job)
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/train.py", line 706, in train_cell
+    return run_job(job).record
+           ^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/train.py", line 597, in run_job
+    hashes = save_snapshot(job.out_dir, update, trainer.model, optimizers, extra, write_json=not rehearsal)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/train.py", line 278, in save_snapshot
+    model_hash = _publish(folder / "model.pt", {"update": update, "label": extra.get("label"), "model": model.state_dict()})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/train.py", line 252, in _publish
+    raise FileExistsError(path)
+FileExistsError: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/a3/N-n4096-b101-o301-s1801/snapshots/u0000064/model.pt
