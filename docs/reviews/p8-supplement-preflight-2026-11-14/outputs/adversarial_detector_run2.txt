@@ -1,0 +1,19 @@
+OK  all rows S ascending: detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+OK  all rows S, each a different permutation: detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+OK  duplicates that preserve every count (only the direct check can catch it): detector=False reference=False slots=() reasons=("redundant direct check failed: some query's slot set is not S",)
+OK  one query differs (nine slots): detector=False reference=False slots=() reasons=('9 slots have a non-zero count, expected 8', '2 non-zero counts differ from Q=64')
+OK  eight slots, one count below Q, another above Q: detector=False reference=False slots=() reasons=('2 non-zero counts differ from Q=64',)
+OK  Q = 1: detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+OK  Q = 3 (not a multiple of 64): detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+OK  seven distinct slots per row padded with a repeat: detector=False reference=False slots=() reasons=('7 slots have a non-zero count, expected 8', '1 non-zero counts differ from Q=64')
+OK  slot 0 included: detector=True reference=True slots=(0, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+OK  two disjoint sets alternating: detector=False reference=False slots=() reasons=('14 slots have a non-zero count, expected 8', '12 non-zero counts differ from Q=64')
+OK  int16 dtype: detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+OK  int32 dtype: detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4095) reasons=()
+BAD negative slot id [domain excluded by load_trace]: detector=EXCEPTION RuntimeError reference=True bincount only supports 1-d non-negative integral inputs.
+OK  slot id 4096 [domain excluded by load_trace]: detector=True reference=True slots=(5, 40, 41, 900, 1023, 2047, 3000, 4096) reasons=()
+OK  empty trace: holds=False reasons=('0 slots have a non-zero count, expected 8', 'no queries')
+OK  precondition-false (9-slot near-collapse, generator raises): supplement=raised registered=raised InvariantError: count-preserving repair found no swap for slot 5 (row 56)
+OK  precondition-false (synthetic 32-hot-slot trace): supplement=ok registered=ok 
+OK  identity branch: ascending=True hashes=1 gens=[91331012, 91332012, 91333012]
+ALL AGREE

@@ -1,0 +1,4 @@
+All checks passed!
+ruff rc=0
+Success: no issues found in 94 source files
+mypy rc=0

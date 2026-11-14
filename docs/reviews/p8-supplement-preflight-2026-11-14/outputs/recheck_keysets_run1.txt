@@ -1,0 +1,15 @@
+NO sim.json: b101-o301-s601-C04
+NO sim.json: b101-o301-s601-C05
+NO sim.json: b101-o301-s602-C04
+NO sim.json: b101-o301-s602-C05
+NO sim.json: b102-o302-s601-C05
+registered sim.json read: 55
+44 panels: ["flat", ["actual", "null_1", "null_2", "null_3", "order_shuffled"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], [["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"]], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8", "L-ID|R2", "L-ID|R8", "L-PCOAX-1|R2", "L-PCOAX-1|R8", "L-PCOAX-2|R2", "L-PCOAX-2|R8", "L-PCOAX-3|R2", "L-PCOAX-3|R8", "L-PCOAX-4|R2", "L-PCOAX-4|R8", "L-PCOAX-5|R2", "L-PCOAX-5|R8"], ["actual", "null_1", "null_2", "null_3", "order_shuffled"]]
+12 panels: ["fixed_tree", ["actual", "null_1", "null_2", "null_3", "order_shuffled"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], [["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"]], ["L-BCOAX|R2", "L-BCOAX|R8", "L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8", "L-ID|R2", "L-ID|R8", "L-PCOAX-1|R2", "L-PCOAX-1|R8", "L-PCOAX-2|R2", "L-PCOAX-2|R8", "L-PCOAX-3|R2", "L-PCOAX-3|R8", "L-PCOAX-4|R2", "L-PCOAX-4|R8", "L-PCOAX-5|R2", "L-PCOAX-5|R8"], ["actual", "null_1", "null_2", "null_3", "order_shuffled"]]
+54 panels: ["learned_tree", ["actual", "null_1", "null_2", "null_3", "order_shuffled"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], [["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"], ["L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8"]], ["L-BCOAX|R2", "L-BCOAX|R8", "L-COAX|R2", "L-COAX|R8", "L-FREQ|R2", "L-FREQ|R8", "L-ID|R2", "L-ID|R8", "L-PCOAX-1|R2", "L-PCOAX-1|R8", "L-PCOAX-2|R2", "L-PCOAX-2|R8", "L-PCOAX-3|R2", "L-PCOAX-3|R8", "L-PCOAX-4|R2", "L-PCOAX-4|R8", "L-PCOAX-5|R2", "L-PCOAX-5|R8"], ["actual", "null_1", "null_2", "null_3", "order_shuffled"]]
+--- eval kinds of failed (no sim.json) cells
+b101-o301-s601-C04 {'case': 'C04', 'variant': 'flat'}
+b101-o301-s601-C05 {'case': 'C05', 'variant': 'learned_tree'}
+b101-o301-s602-C04 {'case': 'C04', 'variant': 'flat'}
+b101-o301-s602-C05 {'case': 'C05', 'variant': 'learned_tree'}
+b102-o302-s601-C05 {'case': 'C05', 'variant': 'learned_tree'}
