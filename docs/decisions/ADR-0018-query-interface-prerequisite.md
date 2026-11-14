@@ -1,10 +1,10 @@
 # ADR-0018 — The query interface: can the model tell its memory what it needs? (P9-I)
 
-- **Status: DESIGN REVISION 2 — NOT APPROVED. SPEC: PENDING ASTRA REVIEW. No implementation, calibration or execution is authorized by this text.**
+- **Status: DESIGN REVISION 3 — NOT APPROVED. SPEC: PENDING ASTRA REVIEW. No implementation, calibration or execution is authorized by this text.**
 - **Date:** 2026-11-14
 - **Origin.** ADR-0017 revision 3 is CALIBRATION BLOCKED by the human lead's direction of 2026-11-14 (ADR-0017 §15.2): "we may first need to solve a more fundamental problem: How does the language model reliably communicate what information it needs to its memory?", and "correct the scientific design if the findings hold, and only then authorize a new execution."
 - **Evidence it rests on.** `results/p9-calibration-2026-11-14/`; the independent audit `docs/reviews/p9-calibration-audit-2026-11-14/AUDIT.md`; and the independent design review of revision 1, `docs/reviews/adr-0018-design-2026-11-14/REVIEW.md` (both Opus 5.5). The review's probes are representation-only, on rehearsal draw 0. They are feasibility evidence, not results of this study.
-- **Revision history.** Revision 1 (commit `80155d6`) was reviewed NOT READY: 2 blockers, 6 majors, 14 minors. Revision 2 applies them; §16 maps each finding to its change.
+- **Revision history.** Revision 1 (commit `80155d6`) was reviewed NOT READY: 2 blockers, 6 majors, 14 minors. Revision 2 (commit `649f76f`) applied them; the auditor's confirmation (`docs/reviews/adr-0018-design-2026-11-14/CONFIRM.md`) found no blocker and required four text edits (R1–R4). Revision 3 applies R1–R4 and the minors n1–n8. §16 maps each finding to its change.
 - **Roles (proposed, study-specific).** Lead: Claude Fable 5.2. Audit: Opus 5.5. Implementation: Sonnet 5.5. Inventory: Haiku 5.5. ADR-0012 stays not approved. **Astra review: NOT_PERFORMED.**
 - **Relation to ADR-0017.** ADR-0017 stays blocked. This study is its prerequisite. It tests none of H17-CAP, H17-UTIL, H17-LOC, H17-INC. Its outcome selects, by a rule fixed here, the interface with which ADR-0017 would be revised, or records that none was selected. ADR-0017 §15.2 recorded the intent as "a new revision" of ADR-0017; a separate ADR departs from that and is the human's choice (§14.1). **Its cost:** ADR-0017 still needs its own revision, audit, calibration and two approvals afterwards.
 
@@ -22,7 +22,7 @@ So the memory can store and return an answer, and the backbone cannot say which 
 
 ## 2. Scope, question and hypotheses
 
-**Scope.** W7, E7, A4 and A4E are query encoders that belong to the memory; they read the frozen states (or the embeddings) of the input. A WORKS class for one of them shows that a memory-side encoder can address facts on this task. It does not show that the language model communicates what it needs. If BACKBONE ADDS NOTHING or BACKBONE HURTS ADDRESSING holds, the outcome is reported as "addressed by a memory-side encoder of the input; the frozen backbone contributes nothing to addressing". Only arm BB (§3.2), which runs if the human lead chooses it (§14.2), lets the model itself form the query.
+**Scope.** W7, E7, A4 and A4E are query encoders that belong to the memory; they read the frozen states (or the embeddings) of the input. A WORKS class for one of them shows that a memory-side encoder can address facts on this task. It does not show that the language model communicates what it needs. Unless BACKBONE CONTRIBUTES holds (§8.2), the outcome is reported as "addressed by a memory-side encoder of the input; the frozen backbone contributes nothing to addressing". Only arm BB (§3.2), which runs if the human lead chooses it (§14.2), lets the model itself form the query.
 
 **Question.** Can a small learned interface deliver a fact's identity to the memory at the position where the answer is produced, what is the least such interface, and does it need the model to change?
 
@@ -45,7 +45,7 @@ All use the flat memory of ADR-0017 §5 (cosine keys, top-8, temperature 0.2, ke
 | N natural | W·h_t | keys, values, W, output projection, gate | — (historical) |
 | W7 window | W·[h_{t−6}; …; h_t] | as N, with the wider W | 16 × 224 − 16 × 32 = 3,072 |
 | E7 embedding window | W·[e_{t−6}; …; e_t], e = token + position embedding (no block) | as W7 | 3,072 |
-| A4 attention | one attention layer, 4 heads × 8, bias-free q, k, v (32 × 32 each); query from h_t, keys and values over the full causal prefix h_0…h_t; its output, then W | as N, plus the layer | 3 × 32 × 32 = 3,072 |
+| A4 attention | one attention layer, 4 heads × 8, bias-free q, k, v (32 × 32 each); query from h_t, keys and values over the full causal prefix h_0…h_t; in the form of the backbone's attention (causal, scores scaled by 1/√8, no layer norm, no output projection); its output, then W | as N, plus the layer | 3 × 32 × 32 = 3,072 |
 | A4E | A4 with e in place of h | as A4 | 3,072 |
 | R1 oracle-query reference | fixed random unit code per fact (ADR-0017 §5.3) | keys, values, output projection, gate | — |
 | R2 oracle address | dedicated slot per fact | values, output projection, gate | — |
@@ -59,7 +59,7 @@ All use the flat memory of ADR-0017 §5 (cosine keys, top-8, temperature 0.2, ke
 
 ### 3.2 Arm BB — the model forms the query (runs only under §14.2 option b)
 
-- **BB:** the block-0 attention of the backbone (qkv and output projection, 4,224 parameters) is trained together with the memory. Everything else in the backbone stays frozen. The memory reads arm N's natural query W·h_t at the answer site. Same optimizer and learning rate as the memory parameters.
+- **BB:** the block-0 attention of the backbone (qkv and output projection, 4,224 parameters) is trained together with the memory. Everything else in the backbone stays frozen. The memory reads arm N's natural query W·h_t at the answer site. AdamW, lr 0.003, in the same group as the output projection and gate (ADR-0017 §5.1; the key and value tables keep row-lazy Adam at 0.012); the same gradient clip covers it.
 - **BB-D:** D plain (§3.3) with the same trainable attention.
 - **BB-0:** no memory; the same trainable attention, trained on the answer loss alone.
 - BB needs approval to train a backbone parameter. It leaves the P4–P8 frozen-backbone lineage; `docs/RESEARCH_HANDOFF.md` names joint training of backbone and memory as the eventual path.
@@ -96,6 +96,8 @@ Draw 0 informed this design, so calibration uses rehearsal draw 1 (data seeds 17
 - **Rule:** U is the smallest of {2,048, 4,096, 8,192, 16,384} at which, at every size, R2 accuracy ≥ 0.95 **and R1 accuracy ≥ 0.90**. Each is the minimum over the two B101 calibration runs and both panels; the B102 run is reported.
 - A size at which no U qualifies is `TASK_CEILING_FAIL` (R2) or `ORACLE_QUERY_FAIL` (R1) and is not run. U is then the smallest value qualifying at the remaining sizes.
 - R1 is an oracle rung, not an interface. No arm of §3 other than R1 and R2 is run, and no representation probe is run on draw 1.
+- No BB arm is calibrated. A BB class below INTERFACE_WORKS is a statement within a U calibrated on the frozen backbone's oracle rungs.
+- If calibration marks any size failed, the outcome is INCONCLUSIVE by §8.3 step 0 before the run; the human lead decides at decision 2 whether the remaining sizes are run.
 - After calibration only U and the failed sizes may change. Anything else is a new revision.
 
 ## 7. Matrix and seeds
@@ -109,8 +111,8 @@ Initialization seeds 1801 and 1802 on parent B101/O301; one replicate (seed 1801
 | 4,096 / 2,048 | N, W7, A4, R1 | 8 |
 | **Core total** | | **40** |
 | Block BB (option b only): 16,384 and 65,536 | BB, BB-D, BB-0 | 12, + B102 replicate of BB at 16,384 = 13 |
-| Block BB: 4,096 | BB | 2 |
-| **Total with block BB** | | **55** |
+| Block BB: 4,096 | BB, BB-0 | 4 |
+| **Total with block BB** | | **57** |
 
 Three sizes are included so that the selected interface is known to work across the range ADR-0017 needs, not to measure capacity. No capacity class is derived here.
 
@@ -133,19 +135,22 @@ For W7, A4 and BB (E7, A4E and N are classified the same way for the record), at
 
 | Order | Class | Rule |
 |---|---|---|
-| 1 | NOT REPLICATED | rows 2–4 applied to each panel separately give different results for Panels A and B |
-| 2 | NOT_EVALUATED | raw class NOT_EVALUATED |
-| 3 | INTERMEDIATE | within a panel, the two B101 seeds give different raw classes |
-| 4 | INTERFACE_WORKS / INTERFACE_PARTIAL / INTERFACE_FAILS | the common raw class |
+| 1 | NOT_EVALUATED | raw class NOT_EVALUATED (R1 below 0.5 at that size) |
+| 2 | NOT REPLICATED | for at least one B101 seed, the raw classes on Panels A and B differ |
+| 3 | INTERMEDIATE | not row 2, and the two B101 seeds give different raw classes |
+| 4 | INTERFACE_WORKS / INTERFACE_PARTIAL / INTERFACE_FAILS | the common raw class of all four seed–panel pairs |
+
+Step 0 of §8.3 refers to the size: a size is NOT_EVALUATED when R1 is below 0.5 there, whatever an arm prints.
 
 The B102 replicate is reported and must not have raw class FAILS on either panel for INTERFACE_WORKS to stand at 16,384; otherwise the class there is INTERMEDIATE.
 
-For BB, INTERFACE_WORKS additionally needs BB-0's accuracy inside the G2 interval at that size where BB-0 is run; otherwise the class is **MODEL_STORES_FACTS** (the trained attention, not the memory, holds the answers).
+For BB, after the B102 rule: a class INTERFACE_WORKS becomes **MODEL_STORES_FACTS** if BB-0's accuracy is above the G2 interval at that size on either B101 seed or panel. Reading fixed now: the trainable attention can by itself retrieve facts at that size, so BB's result cannot be attributed to the memory interface alone, even though BB's own ablations show that it uses its memory.
 
 ### 8.2 Annotations (printed per size; they do not change a class)
 
-- **Dense comparison**, for W7 against D7 and BB against BB-D, at each size where both run. Compared only if the arm's class is INTERFACE_WORKS or INTERFACE_PARTIAL; otherwise NOT COMPARED. With r = accuracy(arm) / accuracy(dense), the smaller value over both B101 seeds and both panels: **BEATS DENSE** if r ≥ 1.10; **DENSE SUFFICES** otherwise. Reading fixed now: DENSE SUFFICES means a dense adapter on the same input does as well within U updates at that size. It is a statement about this task and budget, not about the query interface or about memory in general. The auditor's toy predicts DENSE SUFFICES at 16,384 and probably not at 65,536; such a difference between sizes is a per-fact exposure effect.
-- **Backbone contrast** at 16,384, both B101 seeds and both panels, for the pairs E7/W7 and A4E/A4, first match wins: **BACKBONE HURTS ADDRESSING** if the embedding arm ≥ 1.03 × the state arm; **BACKBONE ADDS NOTHING** if ≥ 0.97 ×; **BACKBONE CONTRIBUTES** otherwise. Not printed if both arms are INTERFACE_FAILS.
+- **Dense comparison**, for W7 against D7 and BB against BB-D, at each size where both run. Compared only if the arm's class is INTERFACE_WORKS or INTERFACE_PARTIAL; otherwise NOT COMPARED. With r = accuracy(arm) / accuracy(dense), paired by seed and panel, the smallest of the four values: **BEATS DENSE** if r ≥ 1.10; **DENSE SUFFICES** otherwise. BEATS DENSE is unreachable when the dense accuracy exceeds 1/1.10 ≈ 0.909; DENSE SUFFICES then means within 10% relative accuracy. Reading fixed now: DENSE SUFFICES means a dense adapter on the same input does as well within U updates at that size. It is a statement about this task and budget, not about the query interface or about memory in general. The auditor's toy predicts DENSE SUFFICES at 16,384 and probably not at 65,536; such a difference between sizes would be consistent with the sixteenfold difference in exposures per fact and is not evidence about capacity or the interface. A4 and A4E have no dense comparator (no dense arm reads the full prefix); their dense comparison is NOT COMPARED, and that is carried if A4 is selected.
+- **Backbone contrast** at 16,384, for the pairs E7/W7 and A4E/A4. With r = accuracy(embedding arm) / accuracy(state arm), paired by B101 seed and panel (four values): **BACKBONE HURTS ADDRESSING** if all four r ≥ 1.03; else **BACKBONE ADDS NOTHING** if all four r ≥ 0.97; else **BACKBONE CONTRIBUTES** if all four r < 0.97; else **BACKBONE CONTRAST MIXED**. Not printed if both arms are INTERFACE_FAILS. BACKBONE HURTS is unreachable when the state arm exceeds 0.971.
+- **Language modelling** (BB arms only): **LANGUAGE MODELLING DEGRADED** if the backbone's next-byte loss on its own corpus rows rises by more than 5% relative to before training, on either B101 seed. It does not block selection; it is carried with BB, and whether a degraded backbone is acceptable is the human lead's decision when ADR-0017 is revised.
 
 ### 8.3 Selection rule for a revision of ADR-0017 (fixed now)
 
@@ -153,20 +158,20 @@ For BB, INTERFACE_WORKS additionally needs BB-0's accuracy inside the G2 interva
 1. (Option b only.) If BB is INTERFACE_WORKS at all three sizes → BB: the model forms the query. A revision of ADR-0017 would then train the block-0 attention, and needs approval for that.
 2. Else if A4 is INTERFACE_WORKS at all three sizes → A4.
 3. Else if W7 is INTERFACE_WORKS at all three sizes → W7, with the limit that it is told the record length.
-4. Else → no tested interface works within U updates; ADR-0017 stays blocked on this backbone.
+4. Else → no tested interface reached INTERFACE_WORKS at all three sizes within U updates; the class of each arm at each size is reported; ADR-0017 stays blocked on this backbone.
 
-The selected interface carries its scope statement (§2), its backbone-contrast annotation and its dense-comparison annotation into the revision of ADR-0017 and into every summary. If A4 or W7 is selected, ADR-0017 would test a memory with its own input encoder, a different system from the P4–P8 memory addressed by the backbone's state.
+The selected interface carries its scope statement (§2), its backbone-contrast annotation and its dense-comparison annotation into the revision of ADR-0017 and into every summary. If BB is selected, the before/after next-byte loss of BB, BB-D and BB-0 and the language-modelling annotation are carried with it. If A4 or W7 is selected, ADR-0017 would test a memory with its own input encoder, a different system from the P4–P8 memory addressed by the backbone's state.
 
 ## 9. Gates and status
 
 - G1 (generator), G2 (chance; 8 tests as ADR-0017 §8.1).
-- G4: determinism and checkpoint restoration. For equal parameters and inputs, arm N's forward equals ADR-0017's R0a forward bit for bit; training differs by the loss. At initialization, BB's forward equals N's.
+- G4: determinism and checkpoint restoration. For equal parameters and inputs, arm N's forward equals ADR-0017's R0a forward bit for bit; training differs by the loss. At initialization, BB's forward equals N's, BB-D's equals D plain's and BB-0's equals the no-memory baseline's.
 - `ENGINEERING_FAIL`, `INCOMPLETE` and no re-run with changed settings, as ADR-0017 §8.6. No cell here depends on another.
 
 ## 10. Resources (projection, not a measurement of this study)
 
-- Measured in P9: R2 at 65,536 slots ran 32,768 updates in 386 s (0.012 s per update). Auditor's estimate for this study: at most about 0.05 s per update at 65,536, so 8,192 updates take about 7 minutes per cell; the core matrix about 2–3 hours serial, under 1 hour with six single-thread workers. Block BB backpropagates through block 0 at every position and is not estimated; the rehearsal measures it.
-- Calibration now includes R1 at three sizes up to 16,384 updates: projected under 45 minutes.
+- Measured in P9: R2 at 65,536 slots ran 32,768 updates in 386 s (0.012 s per update). That is the only measurement. With the auditor's assumed costs (0.05 / 0.02 / 0.015 s per update at 65,536 / 16,384 / 4,096 slots), the core matrix takes 2.4 hours serial at U = 8,192 and 4.8 hours serial at U = 16,384, or about 0.4 and 0.8 hours with six single-thread workers. Block BB backpropagates through block 0 at every position and is not estimated; the rehearsal measures it.
+- Calibration (18 runs up to 16,384 updates): about 93 minutes serial, about 16 minutes with six workers, at assumed costs.
 - **Proposed caps, for the human lead's explicit decision (§14.3):** 3 GiB per worker and 24 GiB aggregate (as decided for ADR-0017); 4 hours for calibration, rehearsal and the run together for the core matrix, 6 hours with block BB. The rehearsal measures time and memory only and fixes the stage caps.
 
 ## 11. Implementation
@@ -189,6 +194,7 @@ The selected interface carries its scope statement (§2), its backbone-contrast 
 
 - Anything about capacity scaling, utilization, locality or incremental learning. None is tested. **A difference in class between sizes is not evidence about capacity:** exposures per fact differ sixteenfold.
 - That a WORKS class for W7, E7, A4 or A4E shows the language model communicating what it needs (§2).
+- That INTERFACE_WORKS for BB shows that a language model reliably communicates what it needs. BB retrains the block-0 attention on this task's answer loss alone, with its next-byte loss unprotected; it shows that a jointly trained backbone attention can form a query for this synthetic task within U updates.
 - That an interface that works here would work on natural language. The task has fixed-length records and random identifiers.
 - That W7 is a general interface: it is told the record length.
 - That a failure of all interfaces is a failure of the ArborLM concept, or more than a statement about this backbone within U updates.
@@ -198,7 +204,7 @@ The selected interface carries its scope statement (§2), its backbone-contrast 
 ## 14. Decisions reserved for the human lead
 
 1. **Separate study or revision.** Whether the prerequisite is this separate ADR or is folded into a revision of ADR-0017 (cost of the separate ADR stated in the header).
-2. **The question asked.** (a) Accept that the study tests memory-side encoders only, so that "how does the language model communicate what it needs" stays open; or (b) add block BB (§3.2, 15 cells), which trains 4,224 parameters of the backbone's block-0 attention and needs approval to train a backbone parameter. The lead recommends (b): without it no arm answers the question as asked, and the probes already predict that the frozen states add nothing.
+2. **The question asked.** (a) Accept that the study tests memory-side encoders only, so that "how does the language model communicate what it needs" stays open; or (b) add block BB (§3.2, 17 cells), which trains 4,224 parameters of the backbone's block-0 attention and needs approval to train a backbone parameter. The lead recommends (b): without it no arm answers the question as asked, and the probes already predict that the frozen states add nothing. Costs of (b): it leaves the P4–P8 frozen-backbone lineage; 17 more cells whose time is not estimated (cap +2 hours); BB is first in the selection rule, so a revision of ADR-0017 would then train a backbone parameter; U is not calibrated for BB; the answer loss does not protect the backbone's language modelling. Option (a) is cheaper and keeps the lineage, but leaves the question as asked open.
 3. **Budget.** The caps of §10.
 4. Decisions 1 and 2 of §12.
 5. ADR-0012; merge; publication; any next phase.
@@ -235,3 +241,13 @@ None. Pending.
 | m14 chance defined | §5 |
 | J(i) probes in calibration | not adopted: nothing but R1 and R2 is observed on draw 1 |
 | J(ii) 2 × 2 | adopted under option b: {W7, BB} × {memory, dense} |
+
+### Confirmation of revision 2 (CONFIRM.md)
+
+| Finding | Change |
+|---|---|
+| R1 precedence and panel disagreement | §8.1 step 2 replaced |
+| R2 backbone contrast default | four-way rule (§8.2); §2 scope "unless BACKBONE CONTRIBUTES" |
+| R3 BB block | BB-0 added at 4,096 (57 cells); MODEL_STORES_FACTS reworded and ordered after the B102 rule; learning rate stated; U not calibrated for BB |
+| R4 BB over-reading | §13 line; next-byte loss carried; lead's choice: LANGUAGE MODELLING DEGRADED annotation at 5%, not a block on selection |
+| n1–n8 | §8.2, §8.3 step 4, §6, §10, §14.2, §3.1 (A4 form), §9 |
