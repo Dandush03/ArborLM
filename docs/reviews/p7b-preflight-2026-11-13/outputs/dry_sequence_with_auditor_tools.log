@@ -1,0 +1,51 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+P7-B panel completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/dryseq/experiments/P7BPD-20261114T002522749667Z-be3c3690ae3547eb8fd9e435d7d87fc1
+P7-B layouts completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/dryseq/experiments/P7BLD-20261114T002523333005Z-7a0ca592b55f492baf984621a0c0ee67
+P7-B trace-b completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/dryseq/experiments/P7BTD-20261114T002636778875Z-e296c87a1aed4116a8df7697b488f419
+P7-B simulate-a completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/dryseq/experiments/P7BSAD-20261114T002638562836Z-8107f879591c4a06a0fea19cf82b9e5a
+P7-B simulate-b completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/dryseq/experiments/P7BSBD-20261114T002644230368Z-b028fe82b38e44308d4a9644a8c04903
+P7-B analyze completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/dryseq/experiments/P7BAD-20261114T002712421495Z-e0c3d2a00215460fa6a2977d20146d39
+{
+ "labels": [
+  "b101-o301-flat-s501",
+  "b101-o301-fixed_tree-s501",
+  "b101-o301-learned_tree-s501",
+  "b101-o301-flat-s502",
+  "b101-o301-fixed_tree-s502",
+  "b101-o301-learned_tree-s502"
+ ],
+ "panel": 0,
+ "panel_tool": [
+  0,
+  "AGREE: mode synthetic, ranks [40, 48], checks {'earlier_panels_equal_registered': True, 'zero_overlap': True, 'panel_rows': True, 'every_row_65_bytes': True}, comparison {'panel_sha256_equal': True, 'row_sha256_equal': True, 'ranks_equal': True, 'rows_detail_equal': True, 'earlier_equal': True}"
+ ],
+ "layouts": 0,
+ "layout_tool": [
+  0,
+  "AGREE: 6 checkpoints, 0 differences, L-FREQ extra check equal=True, 10.7 s wall, jobs=1"
+ ],
+ "trace-b": 0,
+ "simulate-a": 0,
+ "simulate-b": 0,
+ "resim_A": [
+  0,
+  "AGREE: stream A (evaluation), 6 checkpoints, 760 simulations, 0 differences, 0 integrity problems, 11.3 s wall, jobs=1"
+ ],
+ "resim_B": [
+  0,
+  "AGREE: stream B (evaluation), 6 checkpoints, 760 simulations, 0 differences, 0 integrity problems, 11.2 s wall, jobs=1"
+ ],
+ "analyze": 0,
+ "analysis_streams": {
+  "A": "INCOMPLETE",
+  "B": "INCOMPLETE"
+ },
+ "analyze_linkage_resim_sha256": {
+  "resim_confirmation_a": "ea0eab5a83a51e239da3a5ed5832c0df5968d8f6196a6a2845f7f36d6bd4f804",
+  "resim_confirmation_b": "772306e84d18922e33adfa6c6ff76644616c469965231e62eb4e7b4001f22f17"
+ },
+ "repo_experiments_results_unchanged": true
+}
+DRY SEQUENCE WITH AUDITOR TOOLS PASS
+uv run --locked --extra pilot python -I  $SP/dryseq  107.92s user 16.03s system 110% cpu 1:52.29 total

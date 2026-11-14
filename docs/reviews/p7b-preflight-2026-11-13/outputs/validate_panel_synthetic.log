@@ -1,0 +1,39 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "tool_stdout": "AGREE: mode synthetic, ranks [2560, 3072], checks {'earlier_panels_equal_registered': True, 'zero_overlap': True, 'panel_rows': True, 'every_row_65_bytes': True}, comparison {'panel_sha256_equal': True, 'row_sha256_equal': True, 'ranks_equal': True, 'rows_detail_equal': True, 'earlier_equal': True}",
+ "tool_exit": 0,
+ "implementer_checks": {
+  "earlier_panels_reproduced": true,
+  "zero_overlap": true,
+  "panel_rows": true,
+  "panel_rows_have_full_chunks": true
+ },
+ "implementer_overlap": {
+  "duplicates_within_panel": 0,
+  "with_P1_to_P5_panels": 0,
+  "with_calibration_stream": 0,
+  "with_full_training_candidate_pool": 0
+ },
+ "counts_validation": {
+  "rows": 890,
+  "remainder_bytes": 27674,
+  "full_chunks": 6166,
+  "excluded_cross_split": 370,
+  "duplicates_after_cross_split": 245,
+  "eligible_unique_chunks": 5551,
+  "not_selected_after_ranking": 2479
+ },
+ "gate_genuine": "ACCEPTED",
+ "gate_row_hash": "refused as expected",
+ "gate_panel_hash": "refused as expected",
+ "gate_overlap": "refused as expected",
+ "gate_run_id": "refused as expected",
+ "gate_stale_record": "refused as expected",
+ "gate_earlier": "refused as expected",
+ "gate_ranks": "refused as expected",
+ "tool_vs_altered_record_exit": 2,
+ "implementer_stops_on_wrong_earlier_hash": true
+}
+PANEL VALIDATION PASS
+.venv/bin/python -I  $SP/panelval  0.67s user 0.10s system 98% cpu 0.778 total

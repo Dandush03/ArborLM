@@ -1,0 +1,1213 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "tables": {
+  "outcome_cases": 972,
+  "outcome_mismatches": [],
+  "pairing_cases": 64,
+  "pairing_mismatches": [],
+  "decision_cases": 64,
+  "decision_mismatches": [],
+  "recommendation_cases": 16,
+  "recommendation_mismatches": [],
+  "pairs_giving_S": [
+   [
+    "HIERARCHY-SPECIFIC ADVANTAGE",
+    "HIERARCHY-SPECIFIC ADVANTAGE"
+   ]
+  ]
+ },
+ "recompute": [
+  {
+   "scenario": "hierarchy",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "HIERARCHY-SPECIFIC ADVANTAGE",
+     "learned_tree": "HIERARCHY-SPECIFIC ADVANTAGE"
+    },
+    "B": {
+     "fixed_tree": "HIERARCHY-SPECIFIC ADVANTAGE",
+     "learned_tree": "HIERARCHY-SPECIFIC ADVANTAGE"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "TREE MATERIALLY BETTER",
+      "confirmation": "TREE MATERIALLY BETTER"
+     },
+     "learned_tree": {
+      "primary": "TREE MATERIALLY BETTER",
+      "confirmation": "TREE MATERIALLY BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "TREE MATERIALLY BETTER",
+      "confirmation": "TREE MATERIALLY BETTER"
+     },
+     "learned_tree": {
+      "primary": "TREE MATERIALLY BETTER",
+      "confirmation": "TREE MATERIALLY BETTER"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "REAL BRANCHES BETTER",
+      "confirmation": "REAL BRANCHES BETTER"
+     },
+     "learned_tree": {
+      "primary": "REAL BRANCHES BETTER",
+      "confirmation": "REAL BRANCHES BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "REAL BRANCHES BETTER",
+      "confirmation": "REAL BRANCHES BETTER"
+     },
+     "learned_tree": {
+      "primary": "REAL BRANCHES BETTER",
+      "confirmation": "REAL BRANCHES BETTER"
+     }
+    }
+   },
+   "recommendation_row": 1,
+   "mismatches": []
+  },
+  {
+   "scenario": "tie_dependent",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "INTERMEDIATE (tree-favouring)",
+     "learned_tree": "INTERMEDIATE (tree-favouring)"
+    },
+    "B": {
+     "fixed_tree": "INTERMEDIATE (tree-favouring)",
+     "learned_tree": "INTERMEDIATE (tree-favouring)"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "TIE-RULE DEPENDENT"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "TIE-RULE DEPENDENT"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "flat_better",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "FLAT CO-ACCESS BETTER",
+     "learned_tree": "FLAT CO-ACCESS BETTER"
+    },
+    "B": {
+     "fixed_tree": "FLAT CO-ACCESS BETTER",
+     "learned_tree": "FLAT CO-ACCESS BETTER"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "FLAT MATERIALLY BETTER",
+      "confirmation": "FLAT MATERIALLY BETTER"
+     },
+     "learned_tree": {
+      "primary": "FLAT MATERIALLY BETTER",
+      "confirmation": "FLAT MATERIALLY BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "FLAT MATERIALLY BETTER",
+      "confirmation": "FLAT MATERIALLY BETTER"
+     },
+     "learned_tree": {
+      "primary": "FLAT MATERIALLY BETTER",
+      "confirmation": "FLAT MATERIALLY BETTER"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "within",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "degenerate_primary",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "UNRESOLVED",
+     "learned_tree": "UNRESOLVED"
+    },
+    "B": {
+     "fixed_tree": "UNRESOLVED",
+     "learned_tree": "UNRESOLVED"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     },
+     "learned_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     },
+     "learned_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     },
+     "learned_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     },
+     "learned_tree": {
+      "primary": "DEGENERATE",
+      "confirmation": "DEGENERATE"
+     }
+    }
+   },
+   "recommendation_row": 3,
+   "mismatches": []
+  },
+  {
+   "scenario": "confirm_only_degenerate",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "DEGENERATE"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "DEGENERATE"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "DEGENERATE"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "DEGENERATE"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_0",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_1",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "INTERMEDIATE (flat-favouring)",
+     "learned_tree": "INTERMEDIATE (flat-favouring)"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_2",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "INTERMEDIATE (flat-favouring)"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_3",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "INTERMEDIATE (flat-favouring)",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_4",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_5",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "INTERMEDIATE (flat-favouring)"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_6",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_7",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "INTERMEDIATE (tree-favouring)",
+     "learned_tree": "INTERMEDIATE (tree-favouring)"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_8",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "INTERMEDIATE (flat-favouring)"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_9",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "INTERMEDIATE (flat-favouring)"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_10",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_11",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "INTERMEDIATE (tree-favouring)",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_12",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "INTERMEDIATE (flat-favouring)",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "TIE-RULE DEPENDENT",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 4,
+   "mismatches": []
+  },
+  {
+   "scenario": "random_13",
+   "outcomes": {
+    "A": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    },
+    "B": {
+     "fixed_tree": "WITHIN 10% OF FLAT CO-ACCESS",
+     "learned_tree": "WITHIN 10% OF FLAT CO-ACCESS"
+    }
+   },
+   "HB": {
+    "A": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "WITHIN 10%"
+     },
+     "learned_tree": {
+      "primary": "WITHIN 10%",
+      "confirmation": "TIE-RULE DEPENDENT"
+     }
+    }
+   },
+   "PART": {
+    "A": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    },
+    "B": {
+     "fixed_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     },
+     "learned_tree": {
+      "primary": "NOT BETTER",
+      "confirmation": "NOT BETTER"
+     }
+    }
+   },
+   "recommendation_row": 2,
+   "mismatches": []
+  }
+ ],
+ "recompute_total_mismatches": 0,
+ "outcomes_reached_in_recompute": [
+  "FLAT CO-ACCESS BETTER",
+  "HIERARCHY-SPECIFIC ADVANTAGE",
+  "INTERMEDIATE (flat-favouring)",
+  "INTERMEDIATE (tree-favouring)",
+  "UNRESOLVED",
+  "WITHIN 10% OF FLAT CO-ACCESS"
+ ]
+}
+ANALYSIS INDEPENDENT CHECK PASS
+.venv/bin/python -I   10.97s user 0.20s system 97% cpu 11.404 total

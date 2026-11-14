@@ -1,0 +1,12 @@
+$ uv run --locked ruff check .
+All checks passed!
+rc=0
+$ uv run --locked ruff check src/arborlm/p7b_*.py tests/test_p7b_*.py docs/reviews/p7b-preflight-2026-11-13/tools/
+All checks passed!
+rc=0
+$ uv run --locked ruff format --check src/arborlm/p7b_*.py tests/test_p7b_*.py
+17 files already formatted
+rc=0
+$ uv run --locked mypy src/arborlm
+Success: no issues found in 76 source files
+rc=0

@@ -1,0 +1,53 @@
+PASS study code imported from the clone :: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/src/arborlm/__init__.py
+P7-B panel completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/experiments/P7BP-20261114T011855257018Z-885756ccd63b49889aacb167e7d0ccc2
+PASS panel stage (registered path) completed
+PASS independent_panel.py AGREE :: AGREE: mode synthetic, ranks [40, 48], checks {'earlier_panels_equal_registered': True, 'zero_overlap': True, 'panel_rows': True, 'every_row_65_bytes': True}, comparison {'panel_sha256_equal': True, 'row_sha256_equal': True, 'ranks_equal': True, 'rows_detail_equal': True, 'earlier_equal': True}
+P7-B layouts completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/experiments/P7BL-20261114T011855892216Z-2c80a5c0ded64876aa3121ed68e8cb4b
+PASS layouts stage (registered path) completed
+PASS independent_layouts.py AGREE :: AGREE: 6 checkpoints, 0 differences, L-FREQ extra check equal=True, 10.6 s wall, jobs=1
+PASS gate (b) accepts independent_layouts.py output, registered mode :: {"tool_sha256": "bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9", "tool_path": "docs/reviews/p7b-preflight-2026-11-13/tools/independent_layouts.py", "tool_sha256_at_head": "bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9", "stand_in": false}
+PASS gate (a) accepts independent_panel.py output, registered mode :: {"tool_sha256": "73a2176c5dc94f5843b9209f847a5dbfedf9bdac465dafa912f53c69c7e85a53", "tool_path": "docs/reviews/p7b-preflight-2026-11-13/tools/independent_panel.py", "tool_sha256_at_head": "73a2176c5dc94f5843b9209f847a5dbfedf9bdac465dafa912f53c69c7e85a53", "stand_in": false}
+PASS gate (b) refuses a stand-in outside a dry run :: GateError: refused: layout-hash confirmation gate failed: a dry-run stand-in is not accepted outside a dry run
+PASS gate (b) refuses output of an edited (uncommitted) tool :: GateError: refused: layout-hash confirmation gate failed: tool_sha256 is not the SHA-256 of docs/reviews/p7b-preflight-2026-11-13/tools/independent_layouts.py at HEAD (bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9)
+PASS tool restored byte-identical
+P7-B trace-b completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/experiments/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0
+PASS trace-b stage (registered path, after commit 1) completed: linkage intact
+PASS trace-b linkage records real tool bindings
+PASS simulate A refused: stream-B manifest untracked :: private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/results/p7b-SCRATCH/trace-b/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0/stream_b_identity_manifest.json is not tracked by Git (commit it before any simulation)
+PASS simulate B refused: stream-B manifest untracked :: private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/results/p7b-SCRATCH/trace-b/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0/stream_b_identity_manifest.json is not tracked by Git (commit it before any simulation)
+PASS simulate A refused: manifest staged but not committed ::  /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/results/p7b-SCRATCH/trace-b/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0/stream_b_identity_manifest.json differs from HEAD (staged, modified or not committed)
+PASS simulate B refused: committed manifest edited in the working tree ::  /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/results/p7b-SCRATCH/trace-b/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0/stream_b_identity_manifest.json differs from HEAD (staged, modified or not committed)
+PASS no simulate stage directory was opened by the refusals
+PASS simulate A refused after editing src/arborlm/io.py :: GateError: refused: upstream layouts run P7BL-20261114T011855892216Z-2c80a5c0ded64876aa3121ed68e8cb4b: the src/arborlm sources differ from the upstream stage's
+PASS simulate A refused after editing docs/decisions/ADR-0014-p7b-coaccess-layout-equivalence.md :: GateError: refused: upstream layouts run P7BL-20261114T011855892216Z-2c80a5c0ded64876aa3121ed68e8cb4b: the specification differs from the upstream stage's
+PASS tree clean again after the m3 probes
+P7-B simulate-a completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/experiments/P7BSA-20261114T012016878706Z-99d540032b97459fb2b628aecd59421a
+PASS simulate A (registered path) completed
+PASS simulate A linkage: real Git check and manifest SHA-256 :: b-SCRATCH/trace-b/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0/stream_b_identity_manifest.json", "git_check": "git ls-files --error-unmatch and git diff --quiet HEAD -- : tracked, clean", "sha256": "ad166bae44ae84c44977ac0cd5fc4c787290889be7b5b537db82f781cdf4f771", "stand_in": false}
+P7-B simulate-b completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/experiments/P7BSB-20261114T012023220522Z-d9b97d68a4d44456928f5e4ae4e6dc73
+PASS simulate B (registered path) completed
+PASS simulate B linkage: real Git check and manifest SHA-256 :: b-SCRATCH/trace-b/P7BT-20261114T012014505110Z-b450bf27d795475a99a50b9c01d063e0/stream_b_identity_manifest.json", "git_check": "git ls-files --error-unmatch and git diff --quiet HEAD -- : tracked, clean", "sha256": "ad166bae44ae84c44977ac0cd5fc4c787290889be7b5b537db82f781cdf4f771", "stand_in": false}
+PASS every worker record: completed, R=1 run-time check, counts identity (B)
+PASS independent_resim.py stream A AGREE :: AGREE: stream A (evaluation), 6 checkpoints, 760 simulations, 0 differences, 0 integrity problems, 11.3 s wall, jobs=1
+PASS independent_resim.py stream B AGREE (manifest-bound) :: AGREE: stream B (evaluation), 6 checkpoints, 760 simulations, 0 differences, 0 integrity problems, 11.2 s wall, jobs=1
+P7-B analyze completed: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM/c47a0921-2b26-427b-b887-15fe3547efa1/scratchpad/regpath/clone/experiments/P7BA-20261114T012052247732Z-cc663c2011af4864a80fc148874b0017
+PASS analyze (registered path, after commit 3) completed
+PASS analyze linkage: real tool bindings for both resim confirmations
+PASS every stage: dry_run false, frozen check at end passed, same package hashes
+{
+ "freeze_commit": "895a5101ae795fa6867f41bde45cf04a33a97149",
+ "tool_sha256_at_head": {
+  "independent_layouts.py": "bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9",
+  "independent_panel.py": "73a2176c5dc94f5843b9209f847a5dbfedf9bdac465dafa912f53c69c7e85a53",
+  "independent_resim.py": "4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1"
+ },
+ "git_heads_per_stage": {
+  "panel": "895a5101ae795fa6867f41bde45cf04a33a97149",
+  "layouts": "895a5101ae795fa6867f41bde45cf04a33a97149",
+  "trace-b": "946a40255dbbbf514a03006160216c0fecaa849e",
+  "simulate-a": "abd727e83a45f665548b6ed9f5903dda56381b89",
+  "simulate-b": "abd727e83a45f665548b6ed9f5903dda56381b89",
+  "analyze": "e6fd5d757a43d6aa814f649855a47c2f23fe1de8"
+ },
+ "result": "PASS"
+}

@@ -1,0 +1,16 @@
+{
+ "train_rows": 36718,
+ "train_full_chunks": 156678,
+ "train_eligible_unique": 156611,
+ "p5_manifest_train_counts": {
+  "rows": 36718,
+  "full_chunks": 156678,
+  "eligible_unique_chunks": 156611
+ },
+ "counts_equal_p5": true,
+ "train_pool_sha256_equals_P1": true,
+ "train_selection_equals_P5_frozen": true,
+ "seconds": 0.34961087501142174,
+ "validation_file_opened": false
+}
+TRAIN-ONLY REAL CHECK PASS

@@ -1,0 +1,28 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "gate_genuine": "ACCEPTED",
+ "gate_stream": "refused: refused: re-simulation (stream A) confirmation gate failed: it confirms stream 'B', not 'A'",
+ "gate_run_id": "refused: refused: re-simulation (stream A) confirmation gate failed: it confirms a different simulate run",
+ "gate_one_record_hash": "refused: refused: re-simulation (stream A) confirmation gate failed: b101-o301-fixed_tree-s501: record hash differs from the simulate record (stale)",
+ "gate_listed_difference": "refused: refused: re-simulation (stream A) confirmation gate failed: b101-o301-fixed_tree-s503: differences or integrity problems are listed",
+ "gate_selection": "refused: refused: re-simulation (stream A) confirmation gate failed: selection is not the registered 18-checkpoint selection",
+ "gate_tie_rules": "refused: refused: re-simulation (stream A) confirmation gate failed: tie rules are not both asc and desc",
+ "tool_perturbed_count": [
+  2,
+  "DISAGREE: stream A (calibration), 1 checkpoints, 132 simulations, 1 differences, 0 integrity problems, 11.1 s wall, jobs=1"
+ ],
+ "tool_altered_null_hash": [
+  2,
+  "DISAGREE: stream A (calibration), 1 checkpoints, 132 simulations, 0 differences, 1 integrity problems, 10.3 s wall, jobs=1"
+ ],
+ "tool_altered_layout_table": [
+  2,
+  "DISAGREE: stream A (calibration), 1 checkpoints, 132 simulations, 0 differences, 2 integrity problems, 9.3 s wall, jobs=1"
+ ],
+ "tool_unperturbed_single": [
+  0,
+  "AGREE: stream A (calibration), 1 checkpoints, 132 simulations, 0 differences, 0 integrity problems, 9.9 s wall, jobs=1"
+ ]
+}
+RESIM CONTROLS PASS

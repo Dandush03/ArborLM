@@ -1,0 +1,7 @@
+Auditor mistake, 2026-11-13 re-check. After independent_layouts.py reported AGREE on the rebuilt
+implementer table, I appended an ad-hoc `cmp <(table['layouts']) <(old_confirmation['checkpoints'])`
+one-liner. The two objects have different shapes (the hash table keys "<name>|R<rows>" for every
+layout incl. R-independent ones; the confirmation keys "R2"/"R8" -> required layouts only), so the
+comparison was meaningless; cmp exited early and python reported BrokenPipeError. Result discarded.
+The valid comparison (confirmation 'checkpoints' block new vs. pre-fix audit) printed True and is
+the one reported in REAUDIT.md.

@@ -1,0 +1,17 @@
+/Users/daniellaloush/dandush03/ArborLM/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "genuine": "ACCEPTED",
+ "one_hash": "refused as expected: refused: layout-hash confirmation gate failed: b101-o301-flat-s503 L-COAX R8: canonical hash differs",
+ "run_id": "refused as expected: refused: layout-hash confirmation gate failed: it confirms a different layouts run",
+ "verdict": "refused as expected: refused: layout-hash confirmation gate failed: verdict is 'DISAGREE', not 'AGREE'",
+ "missing_label": "refused as expected: refused: layout-hash confirmation gate failed: checkpoints do not cover exactly the registered checkpoints",
+ "stale_table_hash": "refused as expected: refused: layout-hash confirmation gate failed: layout_hash_table_sha256 differs from the layout hash table (stale)",
+ "missing_layout": "refused as expected: refused: layout-hash confirmation gate failed: b101-o301-flat-s503 R2: wrong layout set",
+ "tool_vs_altered_table": {
+  "exit": 2,
+  "stdout": "DISAGREE: 81 checkpoints, 1 differences, L-FREQ extra check equal=True, 11.6 s wall, jobs=9"
+ },
+ "gate_on_tool_disagree_output": "refused as expected: refused: layout-hash confirmation gate failed: verdict is 'DISAGREE', not 'AGREE'; b101-o301-flat-s503 L-PCOAX-3 R2: canonical hash differs"
+}
+CONTROLS PASS

@@ -1,0 +1,2 @@
+AGREE: stream A (calibration), 18 checkpoints, 2280 simulations, 0 differences, 0 integrity problems, 22.9 s wall, jobs=9
+.venv/bin/python -I  --repo . --stream $s --stream-source calibration          183.84s user 1.31s system 808% cpu 22.895 total

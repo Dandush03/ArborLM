@@ -1,0 +1,2 @@
+{"analysis_missing":{"A":0,"B":0},"analyze":0,"experiments_and_results_unchanged":true,"label":"dry run on synthetic data; stand-in confirmation files","layouts":0,"panel":0,"scratch_deleted":true,"simulate-a":0,"simulate-b":0,"streams":{"A":"INCOMPLETE","B":"INCOMPLETE"},"trace-b":0}
+uv run --locked --extra pilot python -m arborlm.p7b_study dry-run  87.01s user 19.09s system 115% cpu 1:31.52 total
