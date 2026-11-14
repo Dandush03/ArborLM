@@ -1,0 +1,12 @@
+ADR table cells: 57 | registry: 57 | identical: True
+calibration cells: 18 [('R1', (101, 301), 1791), ('R1', (101, 301), 1792), ('R1', (102, 302), 1791), ('R2', (101, 301), 1791), ('R2', (101, 301), 1792), ('R2', (102, 302), 1791)]
+registered data seeds: 182001 .. 182020 count 20
+  overlap with rehearsal draw 0 (design probes): 0
+  overlap with calibration draw 1: 0
+  overlap with rehearsal draw 2: 0
+  overlap with all draws 0..9: 0
+  overlap with auditor probe constants 180101..181900: 0
+  overlap with P9 registered (ADR-0017 lanes): 0
+  overlap with test 900001+: 0
+init seeds registered (1801, 1802) calibration (1791, 1792) rehearsal init = facts seed + offset: 179201
+max rehearsal-draw seed: 179933

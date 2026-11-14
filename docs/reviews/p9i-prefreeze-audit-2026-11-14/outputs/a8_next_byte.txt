@@ -1,0 +1,4 @@
+corpus rows: (2048, 65)
+next-byte loss, frozen B101: auditor (float64) 2.3494174 nats, implementer 2.3494175, diff 6.9e-08
+BB at initialization: {'before_nats': 2.350205659866333, 'after_nats': 2.350205659866333, 'relative_rise': 0.0, 'degraded': False}
+BB with perturbed block-0 qkv: {'before_nats': 2.350205659866333, 'after_nats': 2.408258080482483, 'relative_rise': 0.024700996005367296, 'degraded': False} | rule: degraded iff rise > 0.05: True

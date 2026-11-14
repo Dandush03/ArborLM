@@ -1,0 +1,23 @@
+arm   max|logit diff| trainable bb-train extra hidden reach stray causal-ok nonsite-delta=0
+N           3.815e-06    198145        0     0      0 True  []    True      True
+W7          3.099e-06    201217        0  3072      0 True  []    True      True
+E7          2.861e-06    201217        0  3072      0 True  []    True      True
+A4          3.338e-06    201217        0  3072      0 True  []    True      True
+A4E         2.861e-06    201217        0  3072      0 True  []    True      True
+D           1.287e-05    198145        0     0   3096 True  []    True      True
+D7          4.053e-06    201217        0     0    786 True  []    True      True
+BB          3.338e-06    202369     4224     0      0 True  []    True      True
+BB-D        7.868e-06    202369     4224     0   3096 True  []    True      True
+BB-0        3.338e-06      4224     4224     0      0 True  []    True      True
+E7: query unchanged when block 0 is perturbed: True
+A4E: query unchanged when block 0 is perturbed: True
+W7: query unchanged when block 0 is perturbed: False
+A4: query unchanged when block 0 is perturbed: False
+N: query unchanged when block 0 is perturbed: False
+E7: query at t changes for every token in t-6..t: True; unchanged for every token outside: True
+BB trainable backbone tensors: ['backbone.blocks.0.attn_out.bias', 'backbone.blocks.0.attn_out.weight', 'backbone.blocks.0.qkv.bias', 'backbone.blocks.0.qkv.weight'] 4224
+shared backbone object unchanged after 3 BB steps: True | requires_grad on shared backbone: False
+model's own block-0 attention moved: True | model's block-0 FFN / norms / block 1 / embeddings unchanged: True
+D7 4096: hidden 786, D7 201217, W7 201217, rel diff 0.00e+00; D plain hidden 3096 -> 198145 vs N 198145
+D7 16384: hidden 3090, D7 791041, W7 791041, rel diff 0.00e+00; D plain hidden 12312 -> 787969 vs N 787969
+D7 65536: hidden 12306, D7 3150337, W7 3150337, rel diff 0.00e+00; D plain hidden 49176 -> 3147265 vs N 3147265
