@@ -1,0 +1,28 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_train.py", line 955, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_train.py", line 950, in main
+    code: int = args.func(args)
+                ^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_train.py", line 774, in cmd_p5_invariance
+    backbone, provenance = core.load_backbone(cell, root)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_core.py", line 400, in load_backbone
+    parent = verify_parent(
+             ^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p5_parent.py", line 206, in verify_parent
+    for row in read_json(p3_suite / "cells.json")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/io.py", line 50, in read_json
+    with path.open("rb") as file:
+         ^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/audit1/exp/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d/cells.json'
+uv run --locked --extra pilot python -m arborlm.p8_train p5-invariance  $S/ex  0.85s user 0.09s system 98% cpu 0.954 total

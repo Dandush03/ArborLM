@@ -1,0 +1,54 @@
+{
+ "dry": {
+  "study_status": null,
+  "cells": null,
+  "classes": null,
+  "bind": null,
+  "decision": null,
+  "comparison": {
+   "compared_values": 2060,
+   "max_abs_difference": 0.0,
+   "mismatch_count": 0,
+   "mismatches": []
+  }
+ },
+ "stress_main": {
+  "study_status": null,
+  "cells": null,
+  "classes": null,
+  "bind": null,
+  "decision": null,
+  "comparison": {
+   "compared_values": 2060,
+   "max_abs_difference": 0.0,
+   "mismatch_count": 0,
+   "mismatches": []
+  }
+ },
+ "stress_negbase": {
+  "study_status": null,
+  "cells": null,
+  "classes": null,
+  "bind": null,
+  "decision": null,
+  "comparison": {
+   "compared_values": 2060,
+   "max_abs_difference": 0.0,
+   "mismatch_count": 0,
+   "mismatches": []
+  }
+ },
+ "stress_inc": {
+  "study_status": null,
+  "cells": null,
+  "classes": null,
+  "bind": null,
+  "decision": null,
+  "comparison": {
+   "compared_values": 1736,
+   "max_abs_difference": 0.0,
+   "mismatch_count": 0,
+   "mismatches": []
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "study_status": "COMPLETE",
+ "cells": "60/60",
+ "classes": {
+  "C04": "COLLAPSED",
+  "C05": "CONCENTRATION-ONLY",
+  "C06": "LOCALITY-POSITIVE (screening)",
+  "C07": "CONCENTRATION-ONLY",
+  "C08": "WORSE",
+  "C09": "LOCALITY-POSITIVE (screening)",
+  "C10": "NOT REPLICATED ACROSS PANELS"
+ },
+ "per_panel": {
+  "C04": [
+   "COLLAPSED",
+   "COLLAPSED"
+  ],
+  "C05": [
+   "CONCENTRATION-ONLY",
+   "CONCENTRATION-ONLY"
+  ],
+  "C06": [
+   "LOCALITY-POSITIVE (screening)",
+   "LOCALITY-POSITIVE (screening)"
+  ],
+  "C07": [
+   "CONCENTRATION-ONLY",
+   "CONCENTRATION-ONLY"
+  ],
+  "C08": [
+   "WORSE",
+   "WORSE"
+  ],
+  "C09": [
+   "LOCALITY-POSITIVE (screening)",
+   "LOCALITY-POSITIVE (screening)"
+  ],
+  "C10": [
+   "LOCALITY-POSITIVE (screening)",
+   "INTERMEDIATE"
+  ]
+ },
+ "bind": false,
+ "decision": "b",
+ "comparison": {
+  "compared_values": 2060,
+  "max_abs_difference": 0.0,
+  "mismatch_count": 0
+ },
+ "first_mismatches": []
+}

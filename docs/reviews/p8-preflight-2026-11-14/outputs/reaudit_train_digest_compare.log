@@ -1,0 +1,21 @@
+b101-o301-s601-C01 state_digests step-0000 EQUAL
+b101-o301-s601-C01 state_digests step-0256 EQUAL
+b101-o301-s601-C01 state_digests step-0512 EQUAL
+b101-o301-s601-C01 checkpoint_file_sha256 step-0000 DIFF old=73a1c2a75e383737f676cef1615f1b4e7d191ddd5015c5e7c55cd1a2540aa15d new=10f76e1a069dfe763eabfc75e77927c276cb4aedff5b142543309fb05082ffe5
+b101-o301-s601-C01 checkpoint_file_sha256 step-0256 DIFF old=6933d3b9eabad4b1f0995017d9e53156d2798d0e2c2d7da63afc2653568153f7 new=d7c593c64b1c885ca8eb852ee9633827b89856757424c4b96742ddeb01631589
+b101-o301-s601-C01 checkpoint_file_sha256 step-0512 DIFF old=3e6c4bb7b673b4d122351b10581bb830f37f830ba2e48de8d0e03718603821fc new=984db8ff19ea9458283386d7d90cf803b2c9b3b945bbd7232755105c88507bbe
+b101-o301-s601-C10 state_digests step-0000 EQUAL
+b101-o301-s601-C10 state_digests step-0256 EQUAL
+b101-o301-s601-C10 state_digests step-0512 EQUAL
+b101-o301-s601-C10 checkpoint_file_sha256 step-0000 DIFF old=63f898e396749f17a77ccc0ce6edb0a8597c8db62ebca9b9ab058d8a163744a0 new=ed6ed98feb3f6d28babc497cdcb54fe5c9b0229d2d6b7a7c3c5fbd46089cb7db
+b101-o301-s601-C10 checkpoint_file_sha256 step-0256 DIFF old=190c16592104bc75eb3561dfb2f6989716ef87ba7dd51aba4bd4e28710ea947f new=dcc2d4e585a0e958f367a16b0483a7d44fb75774ff8f98d1b1e294bf7ce36352
+b101-o301-s601-C10 checkpoint_file_sha256 step-0512 DIFF old=433f7ee78a3dd62123aebbd23d4ec71d48ed35f5ab0f9242592722efe6942965 new=3e33c5c62e35e29ad49cdf552dad505cba84be069ab54e3af7b03211d4e2776d
+b101-o301-s601-C02 state_digests step-0000 EQUAL
+b101-o301-s601-C02 state_digests step-0256 EQUAL
+b101-o301-s601-C02 state_digests step-0512 EQUAL
+b101-o301-s601-C02 checkpoint_file_sha256 step-0000 DIFF old=2a1bc7238107c484fc227f7909c4adac5f1dac00c0615ae22e7df4de3a8ab85f new=84700c2c2571344b8a03231066d1220b6f507657a063cff9399ab601680546c2
+b101-o301-s601-C02 checkpoint_file_sha256 step-0256 DIFF old=b8e211e69c0ab7961702b015fa2abde6163ec26424d9a79c93f467d5482ef07d new=75849a4eadf9dbc740ff480424538eae7c1ec947da29caf109c9b29cbe7d4c88
+b101-o301-s601-C02 checkpoint_file_sha256 step-0512 DIFF old=2cbcbba4e3c665b3c7f7861bb75cc763b7509911737f3ef57697ec88a8c134ba new=8057ce49d70d6843e0c5e07b841b036d9717551c16e24123ead3a512fb10b47e
+old source ee6645b396b3b746db4280b26242d149d1fe4a64498fa07db3487d74fb6daaec new source 8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507
+compared=24 mismatches=9
+new stage status completed {'completed': 10, 'failed': 0, 'running': 0, 'unexecuted': 0}

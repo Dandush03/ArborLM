@@ -1,0 +1,52 @@
+{
+ "study_status": "COMPLETE",
+ "cells": "60/60",
+ "classes": {
+  "C04": "QUALITY-FAILED",
+  "C05": "QUALITY-FAILED",
+  "C06": "QUALITY-FAILED",
+  "C07": "QUALITY-FAILED",
+  "C08": "QUALITY-FAILED",
+  "C09": "QUALITY-FAILED",
+  "C10": "QUALITY-FAILED"
+ },
+ "per_panel": {
+  "C04": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C05": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C06": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C07": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C08": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C09": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C10": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ]
+ },
+ "bind": false,
+ "decision": "c",
+ "comparison": {
+  "compared_values": 2060,
+  "max_abs_difference": 0.0,
+  "mismatch_count": 0
+ },
+ "first_mismatches": []
+}
+python3 -I $R/independent_recompute_p8.py --eval-run $E --sim-run $SM   --out  0.11s user 0.01s system 91% cpu 0.137 total
