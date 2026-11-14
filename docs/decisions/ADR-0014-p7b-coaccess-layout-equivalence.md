@@ -365,3 +365,15 @@ The auditor role's pre-freeze audit (`docs/reviews/p7b-preflight-2026-11-13/AUDI
 9. **Independence, stated.** The implementer's fill and refinement code resembles the auditor's earlier review script, which it was allowed to read. The auditor's registered rebuild tool was therefore written with a different structure. Agreement between them is evidence the layouts follow the specification; it is weaker than agreement between tools written in ignorance of each other.
 10. **This record is the last edit to this document until the analysis stage has completed.** Any edit to this file or to anything under `src/arborlm/` before then makes the next stage refuse to run.
 11. **Auditor tools bound by hash:** `independent_layouts.py` `bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9`; `independent_panel.py` `73a2176c5dc94f5843b9209f847a5dbfedf9bdac465dafa912f53c69c7e85a53`; `independent_resim.py` `4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1`.
+
+## 16. Outcome record (2026-11-13)
+
+Executed once from freeze `03ea952` in the registered order: panel proof (two independent reconstructions agree; all five earlier panel hashes reproduced; zero overlap), layouts (hashes reproduced by the auditor role on all 81 checkpoints), stream B traces, stream-B identity manifest committed, simulation of stream A then stream B, independent re-simulation of both (agree), one analysis. Raw simulation records were committed before the analysis ran. Review and independent recomputation: `docs/reviews/p7b-results-2026-11-13/` and `docs/reviews/p7b-results-audit-2026-11-13/`.
+
+- **Outcome: WITHIN 10% OF FLAT CO-ACCESS on both streams for both tree kinds — REPLICATED. Decision class N for both. H-P7B failed.** Primary setting, tree-to-flat ratio of E: fixed 0.994–0.996, learned 1.023–1.027; utilization-adjusted 0.985–0.995. Confirmation setting: fixed 1.083–1.104 (TIE-RULE DEPENDENT), learned 1.199–1.217 (INTERMEDIATE); utilization-adjusted about 1.0.
+- **Registered recommendation (§9, row 2):** do not scale the existing hierarchy on storage-locality grounds; redesign it or stop the hierarchy line. This is a recommendation to the human lead, not a decision.
+- PART_K: REAL BRANCHES BETTER in every setting and stream (0.77–0.79 primary, 0.47–0.52 confirmation); it enters no outcome because HB never reached TREE MATERIALLY BETTER.
+- Co-access gain over frequency packing: flat 0.755 / 0.587; trees under branch-constrained co-access 0.776–0.800 / 0.663–0.708.
+- Control L-NCOAX flagged in the confirmation setting for trees (1.060, 1.036 against the 0.97–1.03 band); direction works against the trees.
+- The lead's prediction (hypothesis fails, comparison within 10%) held in the primary setting.
+- P1–P7-A outcomes are unchanged. Astra review: NOT_PERFORMED. Human review is pending. SSD work, training, capacity scaling, publication and merging remain unauthorized.

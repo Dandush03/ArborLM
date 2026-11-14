@@ -1,0 +1,65 @@
+{
+ "checkpoints": {
+  "b101-o302-fixed_tree-s501": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b101-o303-learned_tree-s502": {
+   "differences": [],
+   "integrity_problems": []
+  },
+  "b102-o301-flat-s501": {
+   "differences": [],
+   "integrity_problems": []
+  }
+ },
+ "label": "independent engineering evidence; not Astra validation; not human approval",
+ "layouts_compared": [
+  "L-BCOAX",
+  "L-COAX",
+  "L-FREQ",
+  "L-PCOAX-1",
+  "L-PCOAX-2",
+  "L-PCOAX-3",
+  "L-PCOAX-4",
+  "L-PCOAX-5",
+  "L-NCOAX (actual stream only)"
+ ],
+ "record_sha256": {
+  "b101-o302-fixed_tree-s501": "f803786d58b1a049b2e76de686728aa8b0c62902208e59fd4c5b8ed197500459",
+  "b101-o303-learned_tree-s502": "a2bd2fa17b778d82e56947c51394673462c1b9d8c22ddb01996944505d18dd78",
+  "b102-o301-flat-s501": "da6c23f22afb54479de907790b7e6a3dd4025b60dd35d068937ac78cfc205c68"
+ },
+ "schema": "p7b-resim-confirmation-v1",
+ "selection": [
+  "b102-o301-flat-s501",
+  "b101-o302-fixed_tree-s501",
+  "b101-o303-learned_tree-s502"
+ ],
+ "settings": [
+  {
+   "C": 32,
+   "R": 2
+  },
+  {
+   "C": 8,
+   "R": 8
+  }
+ ],
+ "simulate_stage_run_id": "P7BSB-20261114T021416466847Z-5a15dae8e51147ce9a888613aced4527",
+ "stream": "B",
+ "stream_source": "evaluation",
+ "streams_compared": [
+  "actual",
+  "null_1",
+  "null_2",
+  "null_3"
+ ],
+ "tie_rules": [
+  "asc",
+  "desc"
+ ],
+ "tool": "independent_resim.py (auditor role, Claude Opus 5.5, standard library only) v1; sha256 4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1; layouts by independent_layouts.py sha256 bfb21a577f03b4643caf418b99f04bab59b7c2f2de1eb324effb63bae10477b9",
+ "tool_sha256": "4e53ebbce18418393e97cfba6f595cc419cf3fd2691c4704b901a448a38f02f1",
+ "verdict": "AGREE"
+}

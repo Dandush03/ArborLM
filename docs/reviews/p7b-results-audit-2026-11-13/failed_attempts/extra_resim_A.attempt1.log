@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-preflight-2026-11-13/tools/independent_resim.py", line 424, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-preflight-2026-11-13/tools/independent_resim.py", line 376, in main
+    results = [check_one(t) for t in tasks]
+               ^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-preflight-2026-11-13/tools/independent_resim.py", line 243, in check_one
+    cal = IL.calibration_selected(manifest, label, base)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/docs/reviews/p7b-preflight-2026-11-13/tools/independent_layouts.py", line 142, in calibration_selected
+    entry = next(c for c in manifest["checkpoints"] if c["label"] == label)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+.venv/bin/python -I $T/independent_resim.py --repo . --stream A --jobs 1  $SE  0.02s user 0.01s system 78% cpu 0.039 total
+exitA=1

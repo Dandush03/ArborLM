@@ -1,0 +1,3 @@
+AGREE: stream A (evaluation), 3 checkpoints, 380 simulations, 0 differences, 0 integrity problems, 31.1 s wall, jobs=1
+.venv/bin/python -I $T/independent_resim.py --repo . --stream A --jobs 1       29.47s user 0.33s system 95% cpu 31.164 total
+exitA=0
