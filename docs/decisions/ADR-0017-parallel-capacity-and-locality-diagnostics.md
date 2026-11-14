@@ -1,6 +1,6 @@
 # ADR-0017 — Parallel useful-capacity, anti-collapse and locality diagnostics (P9)
 
-- **Status: DESIGN REVISION 3 — HUMAN DECISION 1 GIVEN 2026-11-14 (§15): approved for implementation, calibration and rehearsal only. The registered run is NOT authorized; it needs decision 2 after the freeze.**
+- **Status: REVISION 3 — CALIBRATION BLOCKED (human lead, 2026-11-14, §15.2). Not scientifically failed: the main hypotheses have not been tested under valid conditions. No rehearsal or registered run is authorized. A corrected design needs a new revision, audit and human approval.**
 - **Date:** 2026-11-14
 - **Revision history.**
   - Revision 0: the human lead's draft, unchanged at `docs/reviews/adr-0017-design-2026-11-14/ADR-0017-draft-rev0-human.md`.
@@ -456,9 +456,27 @@ Recorded 2026-11-14 while the first implementation package was written. None cha
 10. **Exact retrieval answers an unseen identifier with the first symbol of Σ**, so its unseen-fact score is the count of chance matches.
 11. **Code location:** `studies/p9/`, not `src/arborlm/` (see `INTERFACE_CONTRACT.md`).
 
+### 15.2 Human direction after the calibration — 2026-11-14
+
+Shown the calibration numbers (`results/p9-calibration-2026-11-14/README.md`: frozen-hidden probes near chance; the readout rung limited by update count; the registered rule giving E = 128 and TASK_CEILING_FAIL at 4,096), the human lead wrote in chat (verbatim):
+
+> We've been investigating whether memory can organize itself efficiently. But we may first need to solve a more fundamental problem:
+> How does the language model reliably communicate what information it needs to its memory?
+> If that interface fails, SSD capacity, better trees and locality objectives won't fix the issue.
+> That doesn't invalidate the original ArborLM concept. It identifies a prerequisite that our tiny experimental backbone may not satisfy.
+> let Opus finish the audit, correct the scientific design if the findings hold, and only then authorize a new execution.
+> For now, I would classify ADR-0017 as calibration blocked, not scientifically failed. We haven't tested the main hypothesis under valid conditions yet.
+
+Consequences recorded by the lead:
+
+- ADR-0017 revision 3 is **CALIBRATION BLOCKED**. It is not a negative result on H17-CAP, H17-UTIL, H17-LOC or H17-INC; none was tested.
+- The rehearsal and the registered run do not proceed under revision 3.
+- The auditor finishes the calibration audit. If its findings hold, the lead corrects the design in a new revision that addresses the query interface between the backbone and the memory first. That revision is audited and returns to the human lead; no execution before that approval.
+- What the calibration itself shows is a measurement about this testbed (a 27,392-parameter frozen backbone and synthetic identifiers), not about the ArborLM concept.
+
 ### Decision 2
 
-None. Pending the freeze.
+None. Not reachable under revision 3 (calibration blocked).
 
 ## 16. How revision 2 answers the review
 

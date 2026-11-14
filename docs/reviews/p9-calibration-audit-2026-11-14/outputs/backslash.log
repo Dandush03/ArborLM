@@ -1,0 +1,3 @@
+b101 symbols NOT the alphabet argmax at their full-softmax optimum: [{"symbol": "\\", "p_full_at_point": 0.018951452582901266, "p_sigma_at_point": 0.1449359711486033, "is_sigma_argmax": false, "sigma_winner": "[", "sigma_gap_logits": -0.22964711403067195, "full_top_byte": 38}]
+b102 symbols NOT the alphabet argmax at their full-softmax optimum: []
+b101 n65536 u32768 answer '\\' facts: {"facts_with_answer_backslash": 994, "predicted_symbol_counts": {"@": 2, "[": 992}, "full_top_byte_counts": {"38": 994}, "p_full_mean": 0.018848726525902748, "p_sigma_mean": 0.14471307396888733}

@@ -1,0 +1,11 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9-calibration-audit-2026-11-14/position_tables_extra.py:69: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  row = {"update": u, "loss": loss.item(), "acc_A": ev["A"], "acc_B": ev["B"], "row_norm_mean": float(probe.tf.norm(dim=1).mean()), "seconds": time.time() - t0}
+{"update": 1024, "loss": 5.340377330780029, "acc_A": 0.03662109375, "acc_B": 0.0283203125, "row_norm_mean": 0.6177005767822266, "seconds": 7.547560930252075}
+{"update": 2048, "loss": 5.2877726554870605, "acc_A": 0.03662109375, "acc_B": 0.02880859375, "row_norm_mean": 1.2251673936843872, "seconds": 14.917179822921753}
+{"update": 3072, "loss": 4.870884418487549, "acc_A": 0.03515625, "acc_B": 0.029296875, "row_norm_mean": 1.8465962409973145, "seconds": 21.81425380706787}
+{"update": 4096, "loss": 5.083695888519287, "acc_A": 0.03515625, "acc_B": 0.02978515625, "row_norm_mean": 2.4620180130004883, "seconds": 27.794622898101807}
+{"update": 5120, "loss": 4.781242370605469, "acc_A": 0.03466796875, "acc_B": 0.02978515625, "row_norm_mean": 3.060281753540039, "seconds": 32.7259259223938}
+{"update": 6144, "loss": 4.414636611938477, "acc_A": 0.03466796875, "acc_B": 0.0302734375, "row_norm_mean": 3.625117778778076, "seconds": 38.14357399940491}
+{"update": 7168, "loss": 5.031533241271973, "acc_A": 0.03515625, "acc_B": 0.03076171875, "row_norm_mean": 4.147984981536865, "seconds": 43.68638372421265}
+{"update": 8192, "loss": 4.762724876403809, "acc_A": 0.0341796875, "acc_B": 0.03076171875, "row_norm_mean": 4.629372596740723, "seconds": 48.66201186180115}
