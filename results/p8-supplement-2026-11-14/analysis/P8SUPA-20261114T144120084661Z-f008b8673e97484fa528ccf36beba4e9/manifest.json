@@ -1,0 +1,13 @@
+{
+ "finished_utc": "2026-11-14T14:41:20.096606+00:00",
+ "label": "SUPPLEMENTARY (ADR-0016) \u2014 not the registered P8 output",
+ "outputs": {
+  "SUPPLEMENTARY_ANALYSIS.md": "accdff4d7c4bf35e1be88ac135e638c673a53a25609526270fe0ac6478b86f42",
+  "cells.csv": "9b2bdbda017193d5c51084833468ed5a2197b1d672e94eae704af56f18abc431",
+  "pairs.csv": "1cc3fe968dcca918ef7580fa0275fd84955c8f3e9aa446e302bb5a856c9678ea",
+  "scorecard.csv": "3a7bbe104f2940a24ee547cc75001e8061daa478c3c1065b65dd1d749eff4359",
+  "supplementary_analysis.json": "976201542cb5f14559d0c4d031ce40a32bf50bac0f968c68321eee665351d591"
+ },
+ "predictions_all_hold": true,
+ "schema": "P8SUP-analysis-v1-manifest"
+}
