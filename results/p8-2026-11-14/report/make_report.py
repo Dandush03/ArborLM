@@ -766,7 +766,10 @@ def fig09(data: Data, out: Path) -> str:
                         store[c] = num(ctrl.get("id_over_coax"))
                     else:
                         lay = data.means(c, p).get("layouts", {}).get(cond, {})
-                        store[c] = num((lay.get("L-BCOAX") or {}).get("m_mean")) / num((lay.get("L-COAX") or {}).get("m_mean")) if lay else NAN
+                        den = num((lay.get("L-COAX") or {}).get("m_mean")) if lay else NAN
+                        # zero misses under L-COAX: the ratio is undefined, never a number (fixed after
+                        # the registered run; the first real render raised ZeroDivisionError here)
+                        store[c] = num((lay.get("L-BCOAX") or {}).get("m_mean")) / den if lay and den > 0 else NAN
             allv = [v for v in [*vals.values(), *vals2.values()] if not math.isnan(v)]
             hi = max([1.1, *allv])
             lo = min([0.9, *allv])
