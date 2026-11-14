@@ -16,7 +16,7 @@ imported and called on ``P9IModel`` (a subclass of ``P9Model``). Definitions fix
 * "Mean cosine between queries of different facts" = the mean over all ordered pairs of distinct trained
   facts of Panel A (one query per fact); for unit queries this equals ``(|sum q|^2 - n) / (n (n - 1))``.
 * "Share of facts whose nearest other query is closer than 0.9" is read as: the largest cosine to any
-  other fact's query exceeds 0.9 (cosine, not distance). PENDING LEAD REVIEW (the ADR says "closer than 0.9").
+  other fact's query exceeds 0.9 (cosine, not distance); settled by ADR-0017 section 15.4 item 4.
 * Attention weight on the five identifier positions: for A4, A4E the interface layer's weights, for the
   BB arms block 0 of the (trained) backbone; per head, mean over trained facts of the answer sites'
   weight on positions 8r+1..8r+5 of their own record (``identifier_mass``), plus the same mass for the
@@ -34,6 +34,7 @@ from typing import TYPE_CHECKING, Any
 import torch
 from torch.nn import functional as F
 
+from arborlm.io import file_sha256
 from studies.p9 import controls
 from studies.p9 import core as p9core
 from studies.p9.core import AnswerScores
@@ -339,15 +340,29 @@ def evaluate_cell(
     secondary: bool = True,
     supports: bool = True,
     out_dir: Path | None = None,
+    extra: dict[str, Any] | None = None,
+    require_train_record: bool = False,
 ) -> list[Path]:
     """Evaluate the snapshots ``updates`` of a trained cell and write one ``eval`` record each (never over
-    an existing one). Returns the written paths."""
+    an existing one). Returns the written paths. The snapshot's model file must hash to the value recorded
+    in ``train.json`` (required when ``require_train_record``); ``extra`` is added to the record."""
     written: list[Path] = []
     cell_dir = out_dir or core.cell_dir(run_dir, cell.label)
+    train_json = cell_dir / "train.json"
+    if train_json.is_file():
+        recorded = core.read_record(train_json, "train")["snapshot_sha256"]
+    elif require_train_record:
+        raise ValueError(f"no train record at {train_json}: the snapshot hash cannot be verified")
+    else:
+        recorded = None
     for update in updates:
+        model_file = cell_dir / "snapshots" / core.snapshot_stem(update) / "model.pt"
+        if recorded is not None and file_sha256(model_file) != recorded.get(str(update)):
+            raise ValueError(f"snapshot {model_file} does not match the hash recorded in train.json")
         model = build_model(cell.arm, cell.slots, init_seed, backbone, fact_lut=fact_lut, r1_seed=r1_seed, seed_rng=False)
         load_snapshot(cell_dir / "snapshots" / core.snapshot_stem(update), model)
         record = evaluate_snapshot(cell, model, data, facts, update, frozen_backbone=backbone, rows=rows, secondary=secondary, supports=supports)
+        record.update(extra or {})
         path = cell_dir / "eval" / core.snapshot_stem(update) / "eval.json"
         if path.exists():
             raise FileExistsError(path)

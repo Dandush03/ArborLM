@@ -224,7 +224,7 @@ def test_selection_steps_1_to_4() -> None:
     partial_sizes["BB"][65536] = c.INTERMEDIATE  # WORKS at two sizes only
     partial_sizes["A4"][4096] = c.NOT_REPLICATED
     assert c.select(partial_sizes, none).outcome == c.SELECTED_W7
-    assert set(c.OUTCOMES) == {c.INCONCLUSIVE, c.SELECTED_BB, c.SELECTED_A4, c.SELECTED_W7, c.NONE_SELECTED}
+    assert set(c.OUTCOMES) == {c.INCONCLUSIVE, c.SELECTED_BB, c.SELECTED_A4, c.SELECTED_W7, c.NONE_SELECTED, c.NOT_INTERPRETED, c.NOT_INTERPRETED_INCOMPLETE}
 
 
 def test_selection_carries_the_scope_statements() -> None:

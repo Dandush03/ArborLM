@@ -36,7 +36,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
-from arborlm.io import read_json, write_json
+from arborlm.io import file_sha256, read_json, write_json
 from studies.p9 import controls, pool
 from studies.p9 import core as p9core
 from studies.p9 import data as data_mod
@@ -102,7 +102,10 @@ def study_data(args: argparse.Namespace) -> data_mod.StudyData:
     corpus = SYNTHETIC_CORPUS if args.dry or args.synthetic_backbone else p9core.load_trained_corpus(experiments_root(args))
     seeds = seeds_for(args)
     core.check_seed_set(args.mode, seeds.name)
-    return data_mod.build_study_data(seeds, corpus, sizes=DRY_SIZES if args.dry else None)
+    study = data_mod.build_study_data(seeds, corpus, sizes=DRY_SIZES if args.dry else None)
+    if args.mode == REGISTERED and study.pool != p9core.TEMPLATE_POOL:
+        raise StageError("template pool differs from the registered pool (studies.p9.core.TEMPLATE_POOL)")
+    return study
 
 
 def corpus_bytes(args: argparse.Namespace) -> bytes:
@@ -151,7 +154,58 @@ def dry_calibration_cells() -> list[core.Cell]:
 
 
 def calibration_record_of(args: argparse.Namespace) -> dict[str, Any] | None:
-    return core.read_record(Path(args.calibration), "calibration") if args.calibration else None
+    """The calibration record named by ``--calibration``; when ``--calibration-sha256`` is given (every
+    worker gets it) the file must hash to it."""
+    if not args.calibration:
+        return None
+    path = Path(args.calibration)
+    if args.calibration_sha256 and file_sha256(path) != args.calibration_sha256:
+        raise pool.StageRefused(f"refused: {path} does not hash to the calibration record the stage was started with")
+    return core.read_record(path, "calibration")
+
+
+def calibration_binding(args: argparse.Namespace) -> dict[str, Any] | None:
+    """What a stage carries into its records: the calibration record's sha256, its selected U and its
+    failed sizes (None without a record)."""
+    record = calibration_record_of(args)
+    if record is None:
+        return None
+    return {"calibration_sha256": file_sha256(Path(args.calibration)), "calibration_selected_updates": record["selected_updates"], "calibration_failed_sizes": record["failed_sizes"]}
+
+
+def check_binding(args: argparse.Namespace, run_dir: Path) -> None:
+    """The train stage writes ``calibration_binding.json``; every later stage of a registered run must
+    present the same record (same hash, selected U and failed sizes) and refuses otherwise."""
+    binding = calibration_binding(args)
+    path = run_dir / "calibration_binding.json"
+    if binding is None:
+        if args.mode == REGISTERED:
+            raise pool.StageRefused("refused: a registered stage needs --calibration")
+        return
+    if not path.is_file():
+        raise pool.StageRefused(f"refused: no {path}: the train stage has not recorded the calibration")
+    if read_json(path) != binding:
+        raise pool.StageRefused("refused: the calibration record differs (hash, selected U or failed sizes) from the one the train stage recorded")
+
+
+def require_gates_passed(run_dir: Path) -> dict[str, Any]:
+    """A registered training starts only when the ``gates`` record exists and G1, G2 and G4 all passed."""
+    path = run_dir / "gates.json"
+    if not path.is_file():
+        raise pool.StageRefused(f"refused: no gates record at {path}: run the gates stage first")
+    gates = core.read_record(path, "gates")
+    failed = [name for name, ok in (("G1", gates.get("g1_passed") is True), ("G2", gates.get("g2_passed") is True), ("G4", gates.get("g4_passed") is True)) if not ok]
+    if failed:
+        raise pool.StageRefused(f"refused: gate(s) {', '.join(failed)} did not pass; nothing is trained")
+    return gates
+
+
+def remember_updates(args: argparse.Namespace) -> int:
+    """U for a command; a registered run's workers re-derive it from the calibration record."""
+    updates = updates_for(args)
+    if args.mode != REGISTERED:
+        args.updates = updates
+    return updates
 
 
 def cells_for(args: argparse.Namespace) -> list[core.Cell]:
@@ -171,11 +225,16 @@ def cells_for(args: argparse.Namespace) -> list[core.Cell]:
 
 
 def updates_for(args: argparse.Namespace) -> int:
-    """U of the run: ``DRY_UPDATES`` in the DRY stage; else the calibration record's selected U, or
-    ``--updates`` (rehearsal and tests)."""
+    """U of the run: ``DRY_UPDATES`` in the DRY stage; else the calibration record's selected U (required
+    in a registered run, which refuses ``--updates``), or ``--updates`` (rehearsal and tests)."""
     if args.dry:
         return DRY_UPDATES
     record = calibration_record_of(args)
+    if args.mode == REGISTERED:
+        if record is None:
+            raise pool.StageRefused("refused: a registered stage needs --calibration")
+        if args.updates is not None:
+            raise pool.StageRefused("refused: a registered stage takes U from the calibration record, not from --updates")
     if record is not None:
         value = record["selected_updates"]
         if value is None:
@@ -252,7 +311,7 @@ def common_args(args: argparse.Namespace, run_dir: Path | None = None) -> list[s
     if args.synthetic_backbone:
         out.append("--synthetic-backbone")
     if args.calibration:
-        out += ["--calibration", str(args.calibration)]
+        out += ["--calibration", str(args.calibration), "--calibration-sha256", file_sha256(Path(args.calibration))]
     if args.updates is not None:
         out += ["--updates", str(args.updates)]
     return out
@@ -378,6 +437,7 @@ def build_job(args: argparse.Namespace, cell: core.Cell, study: data_mod.StudyDa
         fact_lut=train.fact_lut_for(study, facts) if cell.arm == "R2" else None,
         snapshots=snapshots,
         max_updates=max_updates,
+        extra=calibration_binding(args) or {},
     )
 
 
@@ -469,6 +529,8 @@ def work_train(args: argparse.Namespace) -> int:
     if cell.block == "CAL":
         raise StageError("calibration cells are trained by the calibrate stage")
     run_dir = Path(args.run_dir)
+    if args.mode == REGISTERED:
+        require_gates_passed(run_dir)
     study = verified_data(args, require_manifest=not args.dry and args.mode == REGISTERED)
     updates = updates_for(args)
     job = build_job(args, cell, study, core.cell_dir(run_dir, cell.label), updates)
@@ -480,7 +542,7 @@ def work_train(args: argparse.Namespace) -> int:
 def work_evaluate(args: argparse.Namespace) -> int:
     cell = core.parse_label(args.label)
     run_dir = Path(args.run_dir)
-    study = verified_data(args, require_manifest=False)
+    study = verified_data(args, require_manifest=not args.dry and args.mode == REGISTERED)
     updates = updates_for(args)
     backbone = backbone_for(args, cell.parent)
     facts = facts_for(args, cell)
@@ -496,6 +558,8 @@ def work_evaluate(args: argparse.Namespace) -> int:
         r1_seed=study.seeds.r1_codes,
         fact_lut=train.fact_lut_for(study, facts) if cell.arm == "R2" else None,
         rows=rows,
+        extra=calibration_binding(args),
+        require_train_record=True,
     )
     print(json.dumps({"label": cell.label, "evaluated": updates}))
     return 0
@@ -614,10 +678,73 @@ def work_rehearse_cell(args: argparse.Namespace) -> int:
         "wall_seconds": wall,
         "seconds_per_update": 0.0,
         "peak_rss_bytes": train.peak_rss(),
+        "seed_set": study.seeds.name,
     }
     train.write_rehearsal_record(out_dir / "rehearsal_evaluate.json", record)
     print(json.dumps({"label": cell.label, "evaluation_seconds": round(wall, 2)}))
     return 0
+
+
+def assess(
+    *,
+    table: Any,
+    lm: Any,
+    size_status: dict[int, str | None],
+    sizes: tuple[int, ...],
+    missing: list[str],
+    failed_tasks: list[str],
+    gates: dict[str, Any] | None,
+    leakage: list[str],
+) -> dict[str, Any]:
+    """Status, interpretability and the analysis of a run (pure function of its inputs).
+
+    * Status: ``ENGINEERING_FAIL`` only for identity, determinism, checkpoint or gradient-reach defects
+      (G4; ADR-0017 section 8.6); else ``INCOMPLETE`` when a registered cell lacks a record, a task did not
+      complete or the gates record is absent; else ``COMPLETE``. A G1 or G2 failure is not a status.
+    * Missing or failed cells (M1): no class, annotation or selection is derived; the outcome is
+      ``NOT_INTERPRETED (INCOMPLETE)`` with the missing labels (the denominator is never reduced).
+    * Gates to interpretation (M2): a failed or unrecorded G1, a failed G2, any LEAKAGE flag or a G4 defect
+      gives ``interpretable`` False, and the selection outcome is ``NOT_INTERPRETED`` with the reasons; the
+      classes are still returned, marked not interpreted.
+    """
+    defects = [] if gates is None else list(gates["g4_defects"])
+    g1 = None if gates is None else gates.get("g1_passed")
+    g2 = None if gates is None else gates.get("g2_passed")
+    g4 = None if gates is None else bool(gates.get("g4_passed", not defects))
+    incomplete = bool(missing or failed_tasks or gates is None)
+    status = "ENGINEERING_FAIL" if defects else ("INCOMPLETE" if incomplete else "COMPLETE")
+    reasons: list[str] = []
+    if gates is not None:
+        if g1 is not True:
+            reasons.append("G1 failed" if g1 is False else "G1 not recorded")
+        if g2 is not True:
+            reasons.append("G2 failed" if g2 is False else "G2 not recorded")
+        if g4 is not True:
+            reasons.append("G4 failed: " + "; ".join(defects))
+    if leakage:
+        reasons.append("LEAKAGE: " + ", ".join(leakage))
+    if incomplete:
+        absent = [*missing, *failed_tasks, *(["gates record"] if gates is None else [])]
+        selection: dict[str, Any] = {
+            "outcome": classes.NOT_INTERPRETED_INCOMPLETE, "step": None, "inconclusive_sizes": {},
+            "missing": absent, "reasons": reasons,
+            "scope": ["no class, annotation or selection is derived: registered cells or records are missing (ADR-0017 section 8.6)"],
+        }  # fmt: skip
+        analysis: dict[str, Any] = {
+            "classes": {}, "details": {}, "annotations": {}, "backbone_contrast": {},
+            "size_status": {str(s): size_status.get(s) for s in sizes}, "selection": selection,
+        }  # fmt: skip
+    else:
+        analysis = classes.analyze_classes(table, lm, size_status, sizes=sizes)
+        if reasons:
+            analysis["selection"] = {
+                "outcome": classes.NOT_INTERPRETED, "step": None, "inconclusive_sizes": {}, "missing": [], "reasons": reasons,
+                "scope": ["a gate to interpretation failed (ADR-0017 sections 3, 8.1, I.9): " + "; ".join(reasons) + "; the classes are descriptive until the auditor explains it and the human lead decides"],
+            }  # fmt: skip
+    return {
+        "status": status, "interpretable": not incomplete and not reasons, "gate_reasons": reasons, "defects": defects,
+        "g1_passed": g1, "g2_passed": g2, "g4_passed": g4, "analysis": analysis,
+    }  # fmt: skip
 
 
 def work_analyze(args: argparse.Namespace) -> int:
@@ -648,35 +775,32 @@ def work_analyze(args: argparse.Namespace) -> int:
         for r in records.values()
         if "language_modelling" in r and tuple(r["parent"]) == core.PRIMARY_PARENT
     }
-    result = classes.analyze_classes(table, lm, size_status, sizes=sizes)
     gates_path = run_dir / "gates.json"
     gates = read_json(gates_path) if gates_path.is_file() else None
     manifests = [read_json(p) for p in sorted(run_dir.glob("*/manifest.json"))]
     failed_tasks = sorted(f"{m['stage']}:{t['label']}" for m in manifests for t in m["tasks"] if t["status"] != "completed")
-    defects = [] if gates is None else list(gates["g4_defects"])
-    g1_ok = True if gates is None or gates.get("g1_passed") is None else bool(gates["g1_passed"])
-    status = "ENGINEERING_FAIL" if defects or not g1_ok else ("INCOMPLETE" if missing or failed_tasks or gates is None else "COMPLETE")
-    leakage = sorted(
-        f"{r['label']}/{p}"
-        for r in records.values()
-        for p, panel in r["panels"].items()
-        if panel.get("leakage")
-    )
+    leakage = sorted(f"{r['label']}/{p}" for r in records.values() for p, panel in r["panels"].items() if panel.get("leakage"))
+    verdict = assess(table=table, lm=lm, size_status=size_status, sizes=sizes, missing=missing, failed_tasks=failed_tasks, gates=gates, leakage=leakage)
+    result, status = verdict["analysis"], verdict["status"]
     write_json(
         target,
         {
             **core.envelope("analysis"),
             "dry": bool(args.dry),
             "status": status,
+            "interpretable": verdict["interpretable"],
+            "gate_reasons": verdict["gate_reasons"],
             "updates": updates,
-            "engineering_defects": defects,
-            "g1_passed": g1_ok,
-            "g2_passed": None if gates is None else gates["g2_passed"],
+            "engineering_defects": verdict["defects"],
+            "g1_passed": verdict["g1_passed"],
+            "g2_passed": verdict["g2_passed"],
+            "g4_passed": verdict["g4_passed"],
             "missing_cells": missing,
             "failed_tasks": failed_tasks,
             "leakage": leakage,
             "analysis": result,
             "cells_read": sorted(records),
+            "calibration": calibration_binding(args),
             "identity": dict(core.code_identity()),
         },
     )
@@ -757,9 +881,18 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
 
 def cmd_train(args: argparse.Namespace) -> int:
     run_dir = Path(args.run_dir)
-    updates = updates_for(args)
-    args.updates = updates
+    if args.mode == REGISTERED:
+        require_gates_passed(run_dir)  # a gate failure seen before training stops the run; nothing is trained
+    updates = remember_updates(args)
     run_dir.mkdir(parents=True, exist_ok=True)
+    binding = calibration_binding(args)
+    if binding is not None:
+        if (run_dir / "calibration_binding.json").exists():
+            check_binding(args, run_dir)
+        else:
+            write_json(run_dir / "calibration_binding.json", binding)
+    elif args.mode == REGISTERED:
+        raise pool.StageRefused("refused: a registered stage needs --calibration")
     if not (run_dir / "updates.json").exists():
         write_json(run_dir / "updates.json", {"updates": updates, "dry": bool(args.dry)})
     cells = cells_for(args)
@@ -769,8 +902,8 @@ def cmd_train(args: argparse.Namespace) -> int:
 
 def cmd_evaluate(args: argparse.Namespace) -> int:
     run_dir = Path(args.run_dir)
-    updates = updates_for(args)
-    args.updates = updates
+    check_binding(args, run_dir)
+    updates = remember_updates(args)
     cells = cells_for(args)
     manifest = run_cells("evaluate", "evaluate", args, cells, run_dir, lambda c: core.eval_path(run_dir, c.label, updates, "eval").with_name("eval.json"), previous="train")
     return 0 if manifest["status"] == "COMPLETE" else 1
@@ -778,7 +911,8 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
 
 def cmd_analyze(args: argparse.Namespace) -> int:
     run_dir = Path(args.run_dir)
-    args.updates = updates_for(args)
+    check_binding(args, run_dir)
+    remember_updates(args)
     manifest = single_task("analyze", "analysis", "analyze", args, run_dir, run_dir / "analysis.json")
     return 0 if manifest["status"] == "COMPLETE" else 1
 
@@ -840,6 +974,7 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--updates", type=int, default=None)
     p.add_argument("--freeze-commit", default=None)
     p.add_argument("--calibration", default=None, help="calibration record (selected U, failed sizes)")
+    p.add_argument("--calibration-sha256", default=None, help="worker: the sha256 the calibration record must have")
     p.add_argument("--workers", type=int, default=core.WORKERS)
     p.add_argument("--stage-cap-seconds", type=float, default=None)
     p.add_argument("--rss-worker-bytes", type=int, default=core.RSS_WORKER_BYTES)

@@ -149,6 +149,7 @@ class TrainJob:
     init_snapshot: Path | None = None
     restore_optimizer: bool = False
     max_updates: int | None = None
+    extra: dict[str, Any] = field(default_factory=dict)  # added verbatim to train.json (calibration binding)
 
 
 # --- rehearsal whitelist validator (copy of P9's with the study code P9I) -------------------------------------------
@@ -162,7 +163,7 @@ REHEARSAL_RECORD_KEYS = frozenset(
         "kind", "schema", "study", "label", "mode", "stage", "identity", "updates", "wall_seconds",
         "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average", "loss_finite",
         "parameters_finite", "gradients_finite", "shapes", "parameter_counts", "trainable_parameters",
-        "stored_parameters", "optimizer_state_bytes", "trainable_backbone_parameters",
+        "stored_parameters", "optimizer_state_bytes", "trainable_backbone_parameters", "seed_set",
     }
 )  # fmt: skip
 
@@ -218,6 +219,7 @@ _REHEARSAL_VALIDATORS: dict[str, Callable[[Any], bool]] = {
     "stored_parameters": _is_int,
     "optimizer_state_bytes": _is_int,
     "trainable_backbone_parameters": _is_int,
+    "seed_set": lambda v: isinstance(v, str),
 }
 if set(_REHEARSAL_VALIDATORS) != set(REHEARSAL_RECORD_KEYS):
     raise ImportError("rehearsal validators must cover exactly REHEARSAL_RECORD_KEYS")
@@ -484,7 +486,7 @@ class Trainer:
         self.update = update
         return {
             "update": update,
-            "task_loss": float(loss),
+            "task_loss": loss.detach().item(),
             "answer_loss_256": loss256,
             "grad_norm": norms,
             "param_change_norm": change,
@@ -663,6 +665,8 @@ def _write_train_record(
         "identity": identity,
         "status": status,
         "reason": reason,
+        "seed_set": job.data.seeds.name,
+        **job.extra,
     }
     if job.mode == "rehearsal":
         rehearsal = {
@@ -686,6 +690,7 @@ def _write_train_record(
             "stored_parameters": report.stored,
             "optimizer_state_bytes": record["optimizer_state_bytes"],
             "trainable_backbone_parameters": report.trainable_backbone,
+            "seed_set": job.data.seeds.name,
         }
         write_rehearsal_record(job.out_dir / "rehearsal.json", rehearsal)
     else:

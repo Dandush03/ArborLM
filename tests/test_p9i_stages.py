@@ -123,6 +123,8 @@ def test_rehearsal_stage_writes_only_whitelisted_records(tmp_path: Path) -> None
     files = {p.name for p in cell.rglob("*") if p.is_file()}
     assert "train.json" not in files and "updates.jsonl" not in files and "eval.json" not in files and "snapshot.json" not in files
     assert json.loads((cell / "rehearsal.json").read_text())["trainable_backbone_parameters"] == 4224
+    for name in ("rehearsal.json", "rehearsal_evaluate.json"):
+        assert json.loads((cell / name).read_text())["seed_set"] == "p9i-test-0"  # the record names its draw
     assert 0 < core.Ledger(tmp_path / "l.json").charged() < 600  # the time was charged
     manifest = core.read_record(run / "rehearse" / "manifest.json", "stage_manifest")
     assert manifest["study"] == "P9I" and manifest["status"] == "COMPLETE" and manifest["mode"] == "rehearsal"

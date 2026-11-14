@@ -53,6 +53,11 @@ def _rows_classes(analysis: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _rows_cells(trains: dict[str, dict[str, Any]], evals: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    r1: dict[tuple[int, tuple[int, int], int, str], float] = {}
+    for ev in evals.values():
+        if ev["arm"] == "R1":
+            for panel, pr in ev["panels"].items():
+                r1[(int(ev["slots"]), (int(ev["parent"][0]), int(ev["parent"][1])), int(ev["seed"]), panel)] = float(pr["accuracy"])
     rows = []
     for label, t in sorted(trains.items()):
         facts = int(t["facts"])
@@ -84,6 +89,18 @@ def _rows_cells(trains: dict[str, dict[str, Any]], evals: dict[str, dict[str, An
                 row[f"accuracy_{panel}"] = p["accuracy"]
                 row[f"unseen_accuracy_{panel}"] = p.get("unseen_accuracy")
                 row[f"leakage_{panel}"] = p.get("leakage")
+                reference = r1.get((int(e["slots"]), (int(e["parent"][0]), int(e["parent"][1])), int(e["seed"]), panel))
+                row[f"eta_{panel}"] = None if not reference else float(p["accuracy"]) / reference
+                row[f"permuted_accuracy_{panel}"] = p.get("permuted_accuracy")
+                row[f"disabled_accuracy_{panel}"] = p.get("disabled_accuracy")
+                support = p.get("support") or {}
+                row[f"support_share_{panel}"] = support.get("share_with_support")
+                row[f"support_mean_length_{panel}"] = support.get("mean_length")
+                row[f"useful_slots_{panel}"] = support.get("useful_slots")
+            lm = e.get("language_modelling") or {}
+            row["lm_before_nats"] = lm.get("before_nats")
+            row["lm_after_nats"] = lm.get("after_nats")
+            row["lm_relative_rise"] = lm.get("relative_rise")
         rows.append(row)
     return rows
 
@@ -103,15 +120,20 @@ def render_markdown(analysis: dict[str, Any], class_rows: list[dict[str, Any]], 
     lines = ["# ADR-0017 Part I (P9I) results", ""]
     if banner:
         lines += [f"**{banner}**", ""]
+    if analysis.get("interpretable") is False:
+        lines += ["**NOT INTERPRETED** (classes below, if any, are descriptive only):", *[f"- {r}" for r in analysis.get("gate_reasons", [])]]
+        if analysis["analysis"]["selection"].get("missing"):
+            lines.append("- missing or failed: " + ", ".join(analysis["analysis"]["selection"]["missing"]))
+        lines.append("")
     lines += [
         f"Study status: **{analysis['status']}** (measured: derived from the run's manifests, gates and records).",
         f"Matched updates U: {analysis['updates']} (the same at every size).",
-        f"Gate G1 passed: {analysis['g1_passed']}; gate G2 passed: {analysis['g2_passed']}; LEAKAGE flags: {analysis['leakage'] or 'none'}.",
+        f"Gate G1 passed: {analysis['g1_passed']}; gate G2 passed: {analysis['g2_passed']}; gate G4 passed: {analysis.get('g4_passed')}; LEAKAGE flags: {analysis['leakage'] or 'none'}.",
         f"Missing cells: {analysis['missing_cells'] or 'none'}; non-completed tasks: {analysis['failed_tasks'] or 'none'}.",
         "",
         "## Selection (section I.8.3)",
         "",
-        f"Outcome: **{sel['outcome']}** (decided at step {sel['step']}).",
+        f"Outcome: **{sel['outcome']}**" + (f" (decided at step {sel['step']})." if sel["step"] is not None else "."),
     ]
     if sel["inconclusive_sizes"]:
         lines.append("Step 0, sizes that make the outcome INCONCLUSIVE: " + ", ".join(f"{k}: {v}" for k, v in sorted(sel["inconclusive_sizes"].items())))
@@ -144,5 +166,5 @@ def write_report(run_dir: Path, out_dir: Path, *, banner: str | None = None) -> 
     _write_csv(paths[0], class_rows)
     _write_csv(paths[1], cell_rows)
     paths[2].write_text(render_markdown(analysis, class_rows, cell_rows, banner), encoding="utf-8")
-    write_json(paths[3], {**core.envelope("analysis"), "banner": banner, "status": analysis["status"], "selection": analysis["analysis"]["selection"], "classes": class_rows, "cells": cell_rows, "not_claimed": list(NOT_CLAIMED), "classes_module": classes.OUTCOMES})
+    write_json(paths[3], {**core.envelope("analysis"), "banner": banner, "status": analysis["status"], "selection": analysis["analysis"]["selection"], "interpretable": analysis.get("interpretable"), "gate_reasons": analysis.get("gate_reasons"), "classes": class_rows, "cells": cell_rows, "not_claimed": list(NOT_CLAIMED), "classes_module": classes.OUTCOMES})
     return paths
