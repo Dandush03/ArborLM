@@ -496,6 +496,17 @@ Recorded by the lead:
 - The delegation covers the single registered run of Part I. It does not cover Lanes A–D, any re-run, a merge, a push of weights, publication, ADR-0012, or any other study.
 - Astra review: NOT_PERFORMED.
 
+### 15.4 Clarifications by the lead after the Part I decision (implementation details)
+
+1. **Optimizer (a correction).** As approved, §I.3.2 said the key and value tables "keep row-lazy Adam at 0.012". That clause came from the auditor's confirmation edit R3(d) and is wrong: §5.1 specifies one AdamW (lr 0.003) for the memory, the row-lazy optimizer exists only in arm A10 of Lanes A–D, and the calibration this part rests on used AdamW. §I.3 says "the flat memory of §5". The lead resolves the contradiction in favour of §5.1: every Part I cell uses one AdamW over all its trainable parameters. The lead's own implementation contract repeated the error and was corrected before any calibration; the implementation audit checks it.
+2. A size at which R1 and R2 each reach their threshold at some U but never at the same U is a failed size, labelled `NOT_JOINT`.
+3. W7 and E7 query projections, and the A4/A4E q, k, v matrices, are initialized N(0, 0.02) from seeds derived from the cell's initialization seed.
+4. "Nearest other query closer than 0.9" (§I.5) means the largest cosine to another fact's query exceeds 0.9.
+5. The B102 replicate is classified by rows 2–4 of §I.8.1 step 1 against R1 of the same parent.
+6. A BB class of MODEL_STORES_FACTS has dense comparison NOT COMPARED.
+7. BB's next-byte loss is measured with nothing added, on the 2,048 corpus rows the backbone was trained on, before and after.
+8. Rehearsal uses draw 2 by default; draw 1 is refused outside calibration.
+
 ### Decision 2 (Lanes A–D)
 
 None. Not reachable (calibration blocked).
@@ -599,7 +610,7 @@ All use the flat memory of §5 (cosine keys, top-8, temperature 0.2, key width 1
 
 #### I.3.2 Arm BB — the model forms the query (included by human decision, §15.3)
 
-- **BB:** the block-0 attention of the backbone (qkv and output projection, 4,224 parameters) is trained together with the memory. Everything else in the backbone stays frozen. The memory reads arm N's natural query W·h_t at the answer site. AdamW, lr 0.003, in the same group as the output projection and gate (§5.1; the key and value tables keep row-lazy Adam at 0.012); the same gradient clip covers it.
+- **BB:** the block-0 attention of the backbone (qkv and output projection, 4,224 parameters) is trained together with the memory. Everything else in the backbone stays frozen. The memory reads arm N's natural query W·h_t at the answer site. It joins the one AdamW of §5.1 (lr 0.003) that trains every trainable parameter of the cell; the same gradient clip covers it (corrected, §15.4).
 - **BB-D:** D plain (§I.3.3) with the same trainable attention.
 - **BB-0:** no memory; the same trainable attention, trained on the answer loss alone.
 - Training these 4,224 backbone parameters is approved for this block only (§15.3). It leaves the P4–P8 frozen-backbone lineage; `docs/RESEARCH_HANDOFF.md` names joint training of backbone and memory as the eventual path.
