@@ -24,7 +24,7 @@ import subprocess
 import tomllib
 import uuid
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, NamedTuple, TypedDict
@@ -421,6 +421,9 @@ def _build_cells() -> list[Cell]:
 
 _CELLS: list[Cell] = _build_cells()
 _BY_LABEL: dict[str, Cell] = {c.label: c for c in _CELLS}
+_fixed_compute_facts = FIXED_COMPUTE_FACTS
+_registry_version = 0
+_dry_active = False
 
 
 def cells() -> list[Cell]:
@@ -429,10 +432,10 @@ def cells() -> list[Cell]:
 
 
 def parse_label(label: str) -> Cell:
-    try:
-        return _BY_LABEL[label]
-    except KeyError:
-        raise ValueError(f"unregistered P9 cell label: {label!r}") from None
+    found = _BY_LABEL.get(label) or _CALIBRATION_BY_LABEL.get(label)
+    if found is None:
+        raise ValueError(f"unregistered P9 cell label: {label!r}")
+    return found
 
 
 def all_labels() -> list[str]:
@@ -443,6 +446,74 @@ def cells_of_block(block: str) -> list[Cell]:
     if block not in BLOCKS:
         raise ValueError(f"unknown P9 block: {block!r}")
     return [c for c in _CELLS if c.block == block]
+
+
+# --- calibration cells and the DRY registry (package I7) ------------------------------------------------
+CALIBRATION_PREFIX = "CAL"
+# registered fact count -> fact count of the DRY profile (multiples of 128; nested like the registered
+# tables: proportional 2,048 / 8,192 / 32,768 -> 128 / 256 / 512, Lane D 4,096 per set -> 128, joint -> 256)
+DRY_FACTS: dict[int, int] = {2048: 128, 4096: 128, 8192: 256, 32768: 512}
+
+
+def calibration_cells() -> list[Cell]:
+    """The R2 diagnostic cells of the calibration (ADR 12 step 4): the A5 R2 cells (3 sizes, seeds 1701
+    and 1702 on B101) and, for parent B102, seed 1701 at the three sizes. Labels start with ``CAL-``;
+    these cells are not part of ``cells()`` and enter no registered class. Only R2 cells exist here."""
+    out: list[Cell] = []
+    for cell in cells_of_block("A5"):
+        if cell.rung != "R2":
+            continue
+        out.append(
+            replace(cell, label=f"{CALIBRATION_PREFIX}-{cell.label}", index=TOTAL_CELLS + len(out))
+        )
+    for cell in [c for c in out if c.seed == INIT_SEEDS[0]]:
+        label = cell.label.replace("b101-o301", "b102-o302")
+        out.append(
+            replace(cell, parent=REPLICATE_PARENT, label=label, index=TOTAL_CELLS + len(out))
+        )
+    return out
+
+
+_CALIBRATION_BY_LABEL: dict[str, Cell] = {c.label: c for c in calibration_cells()}
+
+
+def registry_version() -> int:
+    """Increments whenever the active registry changes (analysis lookup tables are rebuilt)."""
+    return _registry_version
+
+
+def dry_active() -> bool:
+    return _dry_active
+
+
+def dry_cells() -> list[Cell]:
+    """The 100 registered cells with the fact counts of the DRY profile (labels, blocks, dependencies
+    and slots unchanged: only ``facts`` is scaled, by ``DRY_FACTS``)."""
+    return [replace(c, facts=DRY_FACTS[c.facts]) for c in _build_cells()]
+
+
+def install_dry_registry() -> None:
+    """Switch this process to the DRY profile: tiny fact counts with the registered labels, slots, rungs
+    and dependencies, so the whole pipeline (train, evaluate, simulate, analysis, report) runs at tiny
+    update counts. Used only by ``studies.p9.stages dry`` and its workers; never by a registered,
+    calibration or rehearsal stage. Reversible with ``uninstall_dry_registry``."""
+    global _CELLS, _BY_LABEL, _CALIBRATION_BY_LABEL, _fixed_compute_facts, _registry_version, _dry_active
+    _CELLS = dry_cells()
+    _BY_LABEL = {c.label: c for c in _CELLS}
+    _fixed_compute_facts = DRY_FACTS[FACTS_PROPORTIONAL[16384]]
+    _dry_active = True
+    _registry_version += 1
+    _CALIBRATION_BY_LABEL = {c.label: c for c in calibration_cells()}
+
+
+def uninstall_dry_registry() -> None:
+    global _CELLS, _BY_LABEL, _CALIBRATION_BY_LABEL, _fixed_compute_facts, _registry_version, _dry_active
+    _CELLS = _build_cells()
+    _BY_LABEL = {c.label: c for c in _CELLS}
+    _fixed_compute_facts = FIXED_COMPUTE_FACTS
+    _dry_active = False
+    _registry_version += 1
+    _CALIBRATION_BY_LABEL = {c.label: c for c in calibration_cells()}
 
 
 # --- updates and snapshots (section 5.5) -------------------------------------------------------------
@@ -461,8 +532,9 @@ def matched_updates(facts: int, exposure: int) -> int:
 
 
 def fixed_compute_updates(exposure: int) -> int:
-    """U_16K: the matched-exposure update count of the 16,384-slot proportional cell."""
-    return matched_updates(FIXED_COMPUTE_FACTS, exposure)
+    """U_16K: the matched-exposure update count of the 16,384-slot proportional cell (in the DRY
+    profile, of the scaled 16,384-slot cell; see ``install_dry_registry``)."""
+    return matched_updates(_fixed_compute_facts, exposure)
 
 
 def updates(cell: Cell, exposure: int) -> int:
@@ -840,6 +912,13 @@ OPEN_CHOICES: dict[str, str] = {
     "c13_run_names": "P9<code>-<utc %Y%m%dT%H%M%S%fZ>-<uuid4 hex>, code per stage in RUN_STAGE_CODES",
     "c14_dependencies": "Cell.depends_on holds training dependencies only; analysis dependencies are block-level",
     "c15_interval_tails": "central interval: tail mass 0.001 / (2 * tests) on each side, counts, not accuracies",
+    "c16_r2_aggregation": "calibration R2 accuracy of a size and exposure = minimum over panels A and B and over all calibration runs (B101 seeds 1701 and 1702, B102 seed 1701), the conservative reading of 'R2 reaches 0.95 on the rehearsal panels'",
+    "c17_calibration_controls": "frozen-hidden probes store the calibration stream restricted to F facts and are scored on Panel A restricted to F facts (trained facts only); attainable answer probability on Panel A restricted to the smallest fact count; no-memory and exact controls on Panels A and B",
+    "c18_g2_parent": "the G2 no-memory family is counted on parent B101; parent B102 is counted and reported beside it and enters no rule",
+    "c19_init_seed_offsets": "outside a registered run the initialization seed of a cell is the rehearsal facts seed plus (cell seed - 1701), so the two seeds of a calibration or DRY cell differ; a registered run uses 1701 and 1702",
+    "c20_dry_profile": "DRY profile: registered labels, slots, rungs and dependencies, facts scaled to 128 / 256 / 512 (proportional), 128 per Lane D set, 64 unseen controls, test draw 90 (seeds >= 179001); outputs carry a DRY banner",
+    "c21_rehearsal_timing": "rehearsal cells are timed one at a time (no concurrent workers) and the contention cell is timed with 1, 2, 4 and 8 workers; seconds per update = wall seconds of the run / updates, so it includes model construction and the final snapshot write; evaluation and simulation are timed into a scratch directory that is deleted",
+    "c22_lane_d_bytes": "Lane D bytes changed counts every changed addition tensor (keys, values, projections, gate, router) and the keys-and-values-only count is reported beside it",
 }
 
 # --- run directories, identities and the frozen-input check ----------------------------------------------

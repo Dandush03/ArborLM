@@ -729,25 +729,24 @@ def test_stub_modules_import(name: str) -> None:
     assert getattr(module, "__file__", "").endswith(f"{name}.py")
 
 
-def test_stub_bodies_raise_not_implemented() -> None:
-    from studies.p9 import analysis_a, controls, data, model, pool, report, sim, store
+def test_no_public_stub_remains_and_no_notimplementederror_is_raised_in_studies_p9() -> None:
+    """Integration (I7): every module's public names are implemented. No function in ``studies/p9``
+    raises or catches ``NotImplementedError`` (the stubs of package I0 are all replaced)."""
+    import ast
 
-    with pytest.raises(NotImplementedError):
-        data.build_study_data(core.rehearsal_seeds(0), b"")
-    with pytest.raises(NotImplementedError):
-        controls.g2_report({}, 8)
-    with pytest.raises(NotImplementedError):
-        model.build_model(core.cells()[0], None, fact_lut=None)  # type: ignore[arg-type]
-    with pytest.raises(NotImplementedError):
-        analysis_a.information_ratio(1.0, 2.0)
-    with pytest.raises(NotImplementedError):
-        sim.cache_pages(10, 8, 0.25)
-    with pytest.raises(NotImplementedError):
-        pool.skipped_for_dependency([], [])
-    with pytest.raises(NotImplementedError):
-        report.study_status([], [])
-    with pytest.raises(NotImplementedError):
-        store.consistency_test(Path("."), {}, {})
+    offenders: list[str] = []
+    for path in sorted((ROOT / "studies" / "p9").rglob("*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            names = []
+            if isinstance(node, ast.Raise) and node.exc is not None:
+                target = node.exc.func if isinstance(node.exc, ast.Call) else node.exc
+                names.append(getattr(target, "id", None))
+            if isinstance(node, ast.ExceptHandler) and node.type is not None:
+                names.append(getattr(node.type, "id", None))
+            if "NotImplementedError" in names:
+                offenders.append(f"{path.name}:{node.lineno}")
+    assert offenders == []
 
 
 def test_no_stub_module_defines_a_class_that_shadows_core() -> None:
