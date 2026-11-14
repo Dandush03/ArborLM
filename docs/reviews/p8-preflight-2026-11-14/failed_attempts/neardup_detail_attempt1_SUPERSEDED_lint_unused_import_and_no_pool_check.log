@@ -1,0 +1,17 @@
+Superseded attempt (auditor role, claude-opus-5-5), kept per policy.
+Attempt 1 of neardup_detail.py had an unused `import sys` (ruff F401) and did not say whether the
+train occurrence lies in the 4,096-chunk training pool or the calibration stream. It ran anyway; its
+output (identical first 8 lines to the current outputs/neardup_detail.log, which overwrote it) was:
+
+validation articles (heuristic): 60
+panel A rank 3214 row 3079 off 0 payload b' Pacifism as Pathology : Reflections on the Role of Armed Struggl'
+   train occurrences (row, byte): [] aligned: []
+   validation occurrences: [{'row': 3026, 'byte': 283, 'aligned': False, 'in_validation_rank': 7538}, {'row': 3079, 'byte': 0, 'aligned': True, 'in_validation_rank': 3214}]
+panel B rank 3715 row 3148 off 325 payload b"tween Oxford 's Isis boat and Cambridge 's Goldie boat has been h"
+   train occurrences (row, byte): [(22071, 328)] aligned: [False]
+   validation occurrences: [{'row': 3148, 'byte': 325, 'aligned': True, 'in_validation_rank': 3715}]
+
+Fix: removed the import, added the pool/calibration coverage line, re-ran (outputs/neardup_detail.log).
+Also: independent_panel_p8.py had a pre-run cleanup (two dead placeholder blocks, one of which named an
+undefined function inside a never-evaluated expression; plus ruff UP012) before its first and only
+recorded run; no output was produced by the pre-cleanup version.

@@ -1,0 +1,18 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_train.py", line 955, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_train.py", line 950, in main
+    code: int = args.func(args)
+                ^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_train.py", line 774, in cmd_p5_invariance
+    backbone, provenance = core.load_backbone(cell, root)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/p8_core.py", line 407, in load_backbone
+    raise ValueError("P8 actual parent does not match P5 suite preflight")
+ValueError: P8 actual parent does not match P5 suite preflight
+uv run --locked --extra pilot python -m arborlm.p8_train p5-invariance  $S/ex  0.84s user 0.09s system 98% cpu 0.938 total

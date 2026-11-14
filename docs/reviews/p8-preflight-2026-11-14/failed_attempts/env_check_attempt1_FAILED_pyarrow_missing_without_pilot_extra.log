@@ -1,0 +1,15 @@
+Failed environment probe (auditor role, model claude-opus-5-5), kept per policy.
+cwd: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1
+command: uv run --locked python -I -c "import pyarrow,sys;print(pyarrow.__version__, sys.version)"
+output:
+  Using CPython 3.12.14
+  Creating virtual environment at: .venv
+     Building arborlm @ file:///.../arborlm-consolidation-experiment-2b31c1
+        Built arborlm @ file:///.../arborlm-consolidation-experiment-2b31c1
+  Installed 23 packages in 265ms
+  Traceback (most recent call last):
+    File "<string>", line 1, in <module>
+  ModuleNotFoundError: No module named 'pyarrow'
+cause: pyarrow==21.0.0 is in the locked optional extra "pilot" (pyproject.toml line 14), not the base env.
+fix: all subsequent runs use `uv run --locked --extra pilot python -I ...` (same as the P7-B preflight tool).
+     pyproject.toml and uv.lock were not changed. The worktree .venv it created is git-ignored.

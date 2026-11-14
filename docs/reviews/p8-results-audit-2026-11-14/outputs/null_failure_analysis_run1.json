@@ -1,0 +1,553 @@
+{
+ "b101-o301-s601-C04": {
+  "sim_failed_record": true,
+  "cell_index": 3,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331003,
+      "failed": false,
+      "swaps": 62557
+     },
+     {
+      "generator_seed": 91332003,
+      "failed": false,
+      "swaps": 62558
+     },
+     {
+      "generator_seed": 91333003,
+      "failed": true,
+      "slot": 776,
+      "row": 32763,
+      "row_contents": [
+       733,
+       776,
+       776,
+       795,
+       828,
+       1889,
+       2166,
+       2371
+      ],
+      "rows_lacking_x": 1,
+      "rows_lacking_x_all_subset_of_row_q": true,
+      "rows_lacking_x_indices_min": 32767,
+      "rows_with_duplicates_from_q": 5,
+      "swaps_before_failure": 62392
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "b101-o301-s601-C05": {
+  "sim_failed_record": true,
+  "cell_index": 4,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331004,
+      "failed": true,
+      "slot": 1889,
+      "row": 32760,
+      "row_contents": [
+       1799,
+       1881,
+       1889,
+       1889,
+       1916,
+       1952,
+       1961,
+       1992
+      ],
+      "rows_lacking_x": 2,
+      "rows_lacking_x_all_subset_of_row_q": true,
+      "rows_lacking_x_indices_min": 32761,
+      "rows_with_duplicates_from_q": 8,
+      "swaps_before_failure": 62296
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "b101-o301-s602-C04": {
+  "sim_failed_record": true,
+  "cell_index": 13,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331013,
+      "failed": true,
+      "slot": 1862,
+      "row": 32761,
+      "row_contents": [
+       585,
+       851,
+       882,
+       1862,
+       1862,
+       3432,
+       3472,
+       3597
+      ],
+      "rows_lacking_x": 1,
+      "rows_lacking_x_all_subset_of_row_q": true,
+      "rows_lacking_x_indices_min": 32762,
+      "rows_with_duplicates_from_q": 6,
+      "swaps_before_failure": 62482
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "b101-o301-s602-C05": {
+  "sim_failed_record": true,
+  "cell_index": 14,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331014,
+      "failed": true,
+      "slot": 275,
+      "row": 32756,
+      "row_contents": [
+       275,
+       275,
+       334,
+       401,
+       1372,
+       1493,
+       1496,
+       1528
+      ],
+      "rows_lacking_x": 2,
+      "rows_lacking_x_all_subset_of_row_q": true,
+      "rows_lacking_x_indices_min": 32758,
+      "rows_with_duplicates_from_q": 12,
+      "swaps_before_failure": 62862
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "b102-o302-s601-C05": {
+  "sim_failed_record": true,
+  "cell_index": 24,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331024,
+      "failed": true,
+      "slot": 1524,
+      "row": 32747,
+      "row_contents": [
+       1357,
+       1359,
+       1378,
+       1383,
+       1384,
+       1390,
+       1524,
+       1524
+      ],
+      "rows_lacking_x": 5,
+      "rows_lacking_x_all_subset_of_row_q": true,
+      "rows_lacking_x_indices_min": 32748,
+      "rows_with_duplicates_from_q": 21,
+      "swaps_before_failure": 62722
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 8,
+    "max_count": 32768,
+    "min_nonzero_count": 32768,
+    "slots_with_count_equal_queries": 8,
+    "distinct_query_sets": 1,
+    "most_common_set_share": 1.0,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     32768,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "b102-o302-s602-C05": {
+  "sim_failed_record": false,
+  "cell_index": 34,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 16,
+    "max_count": 26636,
+    "min_nonzero_count": 6132,
+    "slots_with_count_equal_queries": 0,
+    "distinct_query_sets": 2,
+    "most_common_set_share": 0.8128662109375,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     6132,
+     6132,
+     6132,
+     6132
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331034,
+      "failed": false,
+      "swaps": 49566
+     },
+     {
+      "generator_seed": 91332034,
+      "failed": false,
+      "swaps": 49579
+     },
+     {
+      "generator_seed": 91333034,
+      "failed": false,
+      "swaps": 49497
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 16,
+    "max_count": 26678,
+    "min_nonzero_count": 6090,
+    "slots_with_count_equal_queries": 0,
+    "distinct_query_sets": 2,
+    "most_common_set_share": 0.81414794921875,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     6090,
+     6090,
+     6090,
+     6090
+    ]
+   }
+  }
+ },
+ "b102-o302-s601-C04": {
+  "sim_failed_record": false,
+  "cell_index": 23,
+  "panels": {
+   "A": {
+    "queries": 32768,
+    "distinct_slots": 17,
+    "max_count": 26636,
+    "min_nonzero_count": 2587,
+    "slots_with_count_equal_queries": 0,
+    "distinct_query_sets": 8,
+    "most_common_set_share": 0.8128662109375,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     26636,
+     6132,
+     6132,
+     6131,
+     6066
+    ],
+    "replay": [
+     {
+      "generator_seed": 91331023,
+      "failed": false,
+      "swaps": 49368
+     },
+     {
+      "generator_seed": 91332023,
+      "failed": false,
+      "swaps": 49529
+     },
+     {
+      "generator_seed": 91333023,
+      "failed": false,
+      "swaps": 49497
+     }
+    ]
+   },
+   "B": {
+    "queries": 32768,
+    "distinct_slots": 17,
+    "max_count": 26678,
+    "min_nonzero_count": 2552,
+    "slots_with_count_equal_queries": 0,
+    "distinct_query_sets": 7,
+    "most_common_set_share": 0.81414794921875,
+    "rows_with_distinct_slots": 32768,
+    "feasible_gale_ryser": true,
+    "top_counts": [
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     26678,
+     6090,
+     6090,
+     6090,
+     6020
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,4 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"run": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/audit1/dry/P8TD-20261114T035423154406Z-fe26ee0c7a8a4164b445fb9d53620d76", "status": "completed", "counts": {"completed": 3, "failed": 0, "unexecuted": 0, "running": 0}}
+uv run --locked --extra pilot python -m arborlm.p8_train stage --dry-run       72.01s user 2.69s system 150% cpu 49.600 total

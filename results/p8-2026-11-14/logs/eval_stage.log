@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "cells_completed": 60,
+  "cells_expected": 60,
+  "wall_seconds": 105.54881841695169,
+  "peak_worker_rss_bytes": 423690240,
+  "peak_aggregate_rss_bytes": 1654800384
+}
+run directory: /Users/daniellaloush/dandush03/ArborLM/experiments/P8E-20261114T043753008527Z-ab07648862054617b63d9e4d83e5407f

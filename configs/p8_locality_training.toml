@@ -1,0 +1,122 @@
+# ADR-0015 P8 registered constants. Validated against p8_core._REGISTERED; any difference is refused.
+
+schema_version = 1
+experiment_family = "P8_LOCALITY_AWARE_MEMORY_TRAINING"
+spec_reference = "docs/decisions/ADR-0015-p8-locality-aware-memory-training.md"
+p4_suite = "P4CAP-20261113T043320081674Z-d109080245df457da81e95c6b7300ccd"
+p5_suite = "P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be"
+p5_quality = "P5QUALITY-20261113T125206040450Z-aa1f203f012e4112bf137cd09944bb92"
+cases = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "C10"]
+backbones = [101, 102, 103]
+orders = [301, 302, 303]
+seeds = [601, 602]
+
+[case_variant]
+C01 = "flat"
+C02 = "fixed_tree"
+C03 = "learned_tree"
+C04 = "flat"
+C05 = "learned_tree"
+C06 = "flat"
+C07 = "learned_tree"
+C08 = "flat"
+C09 = "learned_tree"
+C10 = "learned_tree"
+
+[case_objective]
+C01 = []
+C02 = []
+C03 = []
+C04 = ["conc"]
+C05 = ["conc"]
+C06 = ["co"]
+C07 = ["co"]
+C08 = ["temp"]
+C09 = ["temp"]
+C10 = ["co", "temp"]
+
+[case_baseline]
+C04 = "C01"
+C05 = "C03"
+C06 = "C01"
+C07 = "C03"
+C08 = "C01"
+C09 = "C03"
+C10 = "C03"
+
+[case_flat_counterpart]
+C02 = "C01"
+C03 = "C01"
+C05 = "C04"
+C07 = "C06"
+C09 = "C08"
+
+[model]
+slots = 4096
+branches = 16
+per_branch = 256
+top = 8
+backbone_parameters = 27392
+flat_parameters = 198145
+learned_tree_parameters = 198401
+
+[training]
+steps = 512
+batch = 8
+context = 64
+cycle_rows = 2048
+optimizer = "fresh-adr0005-AdamW-only-addition"
+checkpoint_steps = [0, 256, 512]
+reach_updates = [1, 128, 256, 384, 512]
+
+[regularizer]
+beta = 0.25
+alpha = 0.5
+group = 8
+window = 8
+lambda_floor = 1e-12
+soft_top = 64
+clip_norm = 1.0
+
+[data]
+train_ranks = [0, 2048]
+calibration_ranks = [2048, 2560]
+panel_a_ranks = [3072, 3584]
+panel_b_ranks = [3584, 4096]
+
+[measurement]
+permute_seed_offset = 80000
+primary_setting = [2, 32]
+confirmation_setting = [8, 8]
+partition_seeds = [91601, 91602, 91603, 91604, 91605]
+panel_a_null_seeds = [91331, 91332, 91333]
+panel_b_null_seeds = [91341, 91342, 91343]
+order_shuffle_seed = 91201
+warm_contexts = 256
+count_contexts = 256
+
+[margins]
+material_ratio = 0.8
+band_low = 0.9
+band_high = 1.1
+worse_ratio = 1.25
+quality_delta = 0.005
+retention_min = 0.75
+quality_pairs_above_max = 1
+e_null_floor = 0.05
+util_retained = 0.8
+util_collapsed = 0.5
+
+[limits]
+panel_seconds = 600
+train_stage_seconds = 5400
+train_cell_seconds = 600
+eval_seconds = 1800
+sim_seconds = 5400
+analysis_seconds = 600
+auditor_seconds = 3600
+study_seconds = 28800
+workers = 4
+rss_worker_bytes = 2147483648
+rss_aggregate_bytes = 8589934592
+rehearsal_max_fraction = 0.5

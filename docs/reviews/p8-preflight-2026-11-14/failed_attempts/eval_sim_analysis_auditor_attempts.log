@@ -1,0 +1,17 @@
+Auditor (Claude Opus 5.5, claude-opus-5-5) -- failed or erroneous checker attempts, part 2 audit (eval/sim/analysis), kept as required.
+
+1. Perturbation check of the p7b-reproduction gate, third variant, FAILED (auditor's own mistake):
+   command: uv run --locked --extra pilot python outputs/p7b_reproduction_perturbation_check.py "freq_matched_1|misses_warm" /Users/daniellaloush/dandush03/ArborLM/experiments
+   result:  KeyError: 'freq_matched_1'
+   cause:   I used P7-A's null stream name; P7-B's recorded simulate-a records name the nulls null_1..null_3
+            (p7b_core.STREAMS_NULL). Rerun with "null_1|misses_warm" -> verdict DIFFERENT, count_differences
+            ['null_1|L-COAX|R2|C32|asc'] (the gate is not vacuous for null streams either).
+
+2. A first shell attempt to run the three perturbation variants failed before running Python:
+   the pipeline filter `grep -v cpu =` was parsed by ugrep as a file argument "=" (exit 2, "ugrep: warning: =:
+   No such file or directory"). No result was produced; rerun with `tail -1`.
+
+3. An early `grep -rn GAIN_MIN src tests` returned nothing although an earlier read showed a GAIN_MIN constant in
+   p8_core.py: p8_core.py was being edited concurrently (mtime 2026-11-13 22:58:09 EST, during this audit); the
+   constant was replaced by RETENTION_MIN / QUALITY_PAIRS_ABOVE_MAX / E_NULL_FLOOR. Not a checker error, recorded
+   because it shows the source changed while the audit ran (see AUDIT_EVAL_SIM_ANALYSIS.md, MAJOR-1).

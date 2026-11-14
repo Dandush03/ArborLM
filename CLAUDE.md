@@ -8,12 +8,12 @@ ArborLM is unproven research. Never describe a result as a success unless a vali
 
 1. `AGENTS.md`
 2. `docs/RESEARCH_HANDOFF.md`, `docs/EXPERIMENT_PROTOCOL.md`, `docs/RESEARCH_LOG.md`
-3. `docs/decisions/` — ADR-0010 (P5) and ADR-0011 (P6, human-approved, executed once) are completed studies. ADR-0013 (P7-A, human-approved, executed once) is also complete. ADR-0014 (P7-B, human-approved for execution under a study-specific workflow, executed once on two streams) is also complete. ADR-0012 (governance) is **not approved**. Check each ADR's status line and approval record; do not rely on this summary.
+3. `docs/decisions/` — ADR-0010 (P5) and ADR-0011 (P6, human-approved, executed once) are completed studies. ADR-0013 (P7-A, human-approved, executed once) is also complete. ADR-0014 (P7-B, human-approved for execution under a study-specific workflow, executed once on two streams) is also complete. ADR-0015 (P8, authorized by the human lead's overnight direction, executed once; study INCOMPLETE and no positive case) is also complete. ADR-0012 (governance) is **not approved**. Check each ADR's status line and approval record; do not rely on this summary.
 4. `docs/reviews/` — Claude-workflow reviews of completed studies.
 
 ## Standing rules
 
-- P1–P5 are immutable: do not edit existing code under `src/arborlm/`, `configs/`, `tests/`, existing ADRs, `results/` or `experiments/`. New work goes in new files.
+- P1–P5 are immutable (and treat P6–P8 code, records and ADRs the same way): do not edit existing code under `src/arborlm/`, `configs/`, `tests/`, existing ADRs, `results/` or `experiments/`. New work goes in new files.
 - No implementation or execution of a new study before its specification has a recorded human approval. No training, SSD work, downloads, paid services, merges, pushes of weights or publication without explicit human approval.
 - Thresholds are fixed before observation. Never relax one, select seeds, or count logical work as measured efficiency.
 - `Astra review: NOT_PERFORMED` is historically true. Claude review is not Astra review.

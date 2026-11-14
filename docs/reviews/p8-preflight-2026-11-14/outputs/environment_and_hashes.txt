@@ -1,0 +1,14 @@
+uv: uv 0.12.15 (d35f1f270 2026-09-15 aarch64-apple-darwin)
+python 3.12.14 pyarrow 21.0.0 macOS-27.2.1-arm64-arm-64bit
+git HEAD 273a1154012ab5d5e8ba522cc3e84547efc2da45 (claude/p8-locality-aware-training)
+uv.lock sha256 07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761  pyproject.toml sha256 d1be91a1c7e96595fae93616672f0935701aa6e9ec82c665950e5511b29d0439
+a18b24e94ec1677581d5be466e7a810e61e1f73c796471817e982ad62300a81d  docs/reviews/p8-preflight-2026-11-14/independent_panel_p8.py
+072b39dcd0bdf17e8db17d9fccd0b10e6b2d1fa7ab2e0419074419cc1ab04edb  docs/reviews/p8-preflight-2026-11-14/neardup_detail.py
+93852107da279f9fdde8213e790baa1e0484afd3d684c93b6541073f8b697272  docs/reviews/p8-preflight-2026-11-14/repo_search_focused.py
+5b8fe9e88667787a367fc642c5da8a0e080633df0dda1a7f9090804feb9e96df  docs/reviews/p8-preflight-2026-11-14/panel_confirmation.json
+6c16e7f47dcd0178fd099c918f5b71a222f6e447cff19e74fbd921ea8b21ae7a  docs/reviews/p8-preflight-2026-11-14/outputs/environment_and_hashes.txt
+f3c17a9adcabf23c7f46c33b2718e79bdb844499e32d9c233b7226fe4446e67d  docs/reviews/p8-preflight-2026-11-14/outputs/independent_panel_p8_run1.log
+37eaa449eacb96beef50c31c179f198804e1d5b2dd4e54b13f1d1c0fb45ccd50  docs/reviews/p8-preflight-2026-11-14/outputs/neardup_detail.log
+0ab7edb1a17d51b60aac284d3c3d3baae3b2c93c70975ea39087caef46e4c1c0  docs/reviews/p8-preflight-2026-11-14/outputs/repo_search.log
+f2afacde3bb4832d0b459e5225e5facf92a3d06702fbb4142cdf914b7386c994  docs/reviews/p8-preflight-2026-11-14/outputs/repo_search_focused.log
+5aeee8ec28b51e63fcec244c8827c7024723fced24e7e8950dff8a0717c64003  docs/reviews/p8-preflight-2026-11-14/ruff.toml
