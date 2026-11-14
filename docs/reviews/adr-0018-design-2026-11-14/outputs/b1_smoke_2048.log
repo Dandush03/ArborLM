@@ -1,0 +1,14 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/adr-0018-design-2026-11-14/b1_code_families.py:83: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  return float(loss)
+{"facts": 2048, "key_width": 16, "family": "R1", "naive_accuracy": 1.0, "median_w_self": 0.416, "p10_w_self": 0.3762, "median_cos_nearest_other": 0.741, "share_nearest_other_gt_0.9": 0.001}
+{"facts": 2048, "key_width": 16, "family": "ADD-rand", "naive_accuracy": 0.9985, "median_w_self": 0.3682, "p10_w_self": 0.3179, "median_cos_nearest_other": 0.7803, "share_nearest_other_gt_0.9": 0.0068}
+{"facts": 2048, "key_width": 16, "family": "ADD-opt", "naive_accuracy": 1.0, "median_w_self": 0.4801, "p10_w_self": 0.4602, "median_cos_nearest_other": 0.6583, "share_nearest_other_gt_0.9": 0.0, "final_loss": 0.01, "sec": 6.8}
+{"facts": 2048, "key_width": 16, "family": "SHARED-opt", "naive_accuracy": 0.9927, "median_w_self": 0.3744, "p10_w_self": 0.3277, "median_cos_nearest_other": 0.7744, "share_nearest_other_gt_0.9": 0.04, "final_loss": 0.057, "a": [0.877, 1.014, 0.844, 0.549, 0.816]}
+{"facts": 2048, "key_width": 16, "family": "MLP-opt", "naive_accuracy": 1.0, "median_w_self": 0.5018, "p10_w_self": 0.4862, "median_cos_nearest_other": 0.6327, "share_nearest_other_gt_0.9": 0.0, "final_loss": 0.009}
+{"facts": 2048, "key_width": 32, "family": "R1", "naive_accuracy": 1.0, "median_w_self": 0.6286, "p10_w_self": 0.5893, "median_cos_nearest_other": 0.5614, "share_nearest_other_gt_0.9": 0.0}
+{"facts": 2048, "key_width": 32, "family": "ADD-rand", "naive_accuracy": 1.0, "median_w_self": 0.5216, "p10_w_self": 0.4531, "median_cos_nearest_other": 0.6606, "share_nearest_other_gt_0.9": 0.0}
+{"facts": 2048, "key_width": 32, "family": "ADD-opt", "naive_accuracy": 1.0, "median_w_self": 0.6817, "p10_w_self": 0.666, "median_cos_nearest_other": 0.488, "share_nearest_other_gt_0.9": 0.0, "final_loss": 0.0, "sec": 6.7}
+{"facts": 2048, "key_width": 32, "family": "SHARED-opt", "naive_accuracy": 0.9976, "median_w_self": 0.4215, "p10_w_self": 0.3633, "median_cos_nearest_other": 0.748, "share_nearest_other_gt_0.9": 0.0322, "final_loss": 0.031, "a": [0.975, 0.492, 0.743, 0.639, 0.744]}
+{"facts": 2048, "key_width": 32, "family": "MLP-opt", "naive_accuracy": 1.0, "median_w_self": 0.6517, "p10_w_self": 0.6315, "median_cos_nearest_other": 0.5213, "share_nearest_other_gt_0.9": 0.0, "final_loss": 0.001}
+{"python": "3.12.14", "torch": "2.8.0"}

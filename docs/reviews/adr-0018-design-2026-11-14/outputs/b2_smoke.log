@@ -1,0 +1,6 @@
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  row = {"parent": parent, "facts": facts, "variant": variant, "final_loss": round(float(loss), 4)} | r | \
+{"parent": "b101", "facts": 2048, "variant": "N", "final_loss": 7.595, "accuracy": 0.0396, "own_first": 0.0005, "own_in_top8": 0.0132, "median_w_self": 0.0, "train_contexts_accuracy": 0.0342, "mean_cos_between_facts": 0.9795, "sec": 24.3}
+{"parent": "b101", "facts": 2048, "variant": "W7", "final_loss": 0.0311, "accuracy": 1.0, "own_first": 1.0, "own_in_top8": 1.0, "median_w_self": 0.4105, "train_contexts_accuracy": 1.0, "mean_cos_between_facts": 0.0003, "sec": 25.2}
+{"parent": "b101", "facts": 2048, "variant": "A1-16", "final_loss": 3.8568, "accuracy": 0.3345, "own_first": 0.4482, "own_in_top8": 0.8398, "median_w_self": 0.144, "train_contexts_accuracy": 0.4551, "mean_cos_between_facts": 0.2479, "attention_on_identifier": 0.7336, "attention_profile_last7": [0.009, 0.112, 0.126, 0.131, 0.171, 0.193, 0.016], "sec": 45.7}
+{"parent": "b101", "facts": 2048, "variant": "R1", "accuracy": 1.0, "own_first": 1.0, "own_in_top8": 1.0, "median_w_self": 0.4168}
