@@ -31,3 +31,20 @@ Recorded by the lead, with the limits the lead puts on its own use of this:
 - The S2 package wheels and their resolver dependencies are therefore approved; the pending confirmation is closed.
 - Unchanged: every file is named in a specification or its freeze requirements first; revisions are pinned and hashes and licences recorded; `pyproject.toml` and `uv.lock` do not change; no account, login, cloud or paid service; no model above the size limits of the study's ADR; nothing is executed from a download other than pinned packages and weights loaded by the specified loaders. A download that would take the total to 30 GB or more returns to the human lead.
 - The permission is about downloading. It approves no training, no run, no design change and no publication.
+
+## Running the P10 studies at the same time (2026-11-15 UTC)
+
+Looking at the task list, the human lead wrote, verbatim:
+
+> can you keep nextime which p is running like the last Opus audit of S0 should say P10-S0 so i can follow them and also i would expect to see more process running in parallel since each P10-S have many divergent to cover on each case, make sure to maximize the time by using the m5 capabilities
+
+Recorded by the lead:
+
+- **Naming.** Every delegated task and background job carries its study code first ("P10-S0: …").
+- **Concurrency.** This answers the question ADR-0020 §17 item 4 reserved ("whether S0's blocks may overlap S1's and S2's training on the machine"): they may. It replaces item 3 of the order in `EXECUTION_PLAN.md` ("registered stages do not overlap").
+- **The lead's conditions for overlapping compute stages** (the lead's, so that a faster schedule changes no result):
+  1. A study's rehearsal is measured under the load it will run under: if its registered stages are to share the machine, the rehearsal runs with the other studies' worker counts busy (ADR-0020 §10.3 already rehearses "under 12 busy processes"), and the twofold headroom rule is applied to those loaded rates.
+  2. The machine has 18 cores and 48 GiB. CPU studies keep their registered six single-thread workers each (S0 and S1 side by side use 12 cores); S2 trains on the GPU. The sum over concurrently running studies of twice their rehearsed peak memory must stay within 40 GiB; each study's own per-worker and aggregate limits are unchanged.
+  3. Stages whose measurement is the time itself (S1's throughput and cost timing; any timing benchmark) run alone, as their ADRs say.
+  4. Charged hours are counted per study as before; running side by side does not merge budgets.
+  5. Reviews and audits are split by dimension into parallel reviewer contexts where the parts are independent.
