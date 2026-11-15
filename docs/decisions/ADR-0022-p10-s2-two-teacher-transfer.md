@@ -967,3 +967,7 @@ Three parallel independent audits (Opus 5.5) of the stand-in implementation at c
 | C reading 5 annotations | Warning annotations are printed if they hold in any replicate or order; the mean is printed beside them |
 | **C-M6 the router can pass GEN by position alone** | GEN is measured twice for the marker stratum: with the decision at token 64 as registered, and with the decision at the last token of the first marker-like string in tokens 1–64. **The existing GEN threshold (a loss increase of at most 0.02 nats) must hold under both.** No new threshold is introduced. The false-trigger rate stays a printed diagnostic. This makes GEN harder to pass and is decided before any router exists |
 
+### One further ruling — bootstrap intervals (2026-11-15 UTC)
+
+The implementer stopped on a conflict: the intervals of every printed score use listed seed 220906, but G9 allowed the 2209xx seeds only in the data-generation and partition steps, so an interval computed in the analysis would be refused. Ruling (before any S2 record exists): **220906 is drawn in the analysis stage and nowhere else**; G9 lists it for that stage, with a fresh generator per printed interval in a fixed order (the order of the registry). Intervals are descriptive and enter no rule.
+
