@@ -561,7 +561,15 @@ Recorded by the lead:
 - **Item 5: yes, as asked:** training on MPS with every score recomputed on CPU. The question did not name "packages outside the lock"; the lead reads them as covered only for the data-generation wheels already recorded above, and nothing else is installed outside the lock without a further answer.
 - All five reserved items now have an answer. No reserved item is decided by the lead.
 
-Lead's approval: PENDING the re-check of revision 4's reworded passages.
+**Correction by the lead — 2026-11-15 (UTC), after the re-check of revision 4 (`adr-0022-review/RECHECK_REV4.md`, J3 and J4).** The record above of reserved item 2 contains a false statement and is superseded here; the text above is kept as written.
+
+- The 938 MB figure shown to the human lead did **not** include the package wheels. It is 938.2 MB = teachers 604.5 + student 272.4 + Tatoeba 53.1 + Spanish (fallback) data 8.1. The lead's message named the wheels beside that figure but gave them no size, and did not mention the 6.2 MB of symmetry-check link files at all.
+- Therefore **reserved item 2 (package wheels) and the link files are not answered.** The lead does not read the approval as covering them. No wheel and no link file is fetched until the human lead says so with their sizes in front of them.
+- The same applies to "packages outside the lock" in item 5: unanswered beyond MPS training itself.
+- The download scope of §4.2, §14.1 and this section disagree on whether the Spanish data are fetched with the main session or only if the fallback is invoked (J3). Until revision 5 settles the text, the narrowest reading holds: fallback teacher and fallback data only if the fallback rule is invoked.
+- Implementation on synthetic stand-ins needs none of these.
+
+Lead's approval: PENDING revision 5, which answers the re-check (majors J1–J8), and its confirmation.
 
 ## 19. Map of the review of revision 1 to this revision
 
