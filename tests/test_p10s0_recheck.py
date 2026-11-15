@@ -191,7 +191,7 @@ def test_the_hour_cap_is_set_in_the_config_only(tmp_path: Path) -> None:
     cfg = tmp_path / "c.toml"
     cfg.write_text(core.render_config_toml(None, 20.0))
     assert core.cap_hours(cfg) == 20.0 and core.ledger_for(tmp_path, cfg).cap_seconds == 20.0 * 3600 and core.resource_limits(cfg)["cap_hours"] == 20.0
-    assert core.cap_hours() == 16.0  # the real config today
+    assert core.ledger_for(tmp_path).cap_seconds == core.cap_hours() * 3600  # whatever the real config holds: no test depends on its value
     for bad in (0.0, -1.0, float("inf"), float("nan")):
         cfg.write_text(core.render_config_toml(None, bad).replace("nan", "nan"))
         with pytest.raises(ValueError):

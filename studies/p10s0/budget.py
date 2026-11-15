@@ -76,11 +76,11 @@ Rates = dict[Item, Rate]
 def rates_from_records(train: Sequence[Mapping[str, Any]], evaluation: Sequence[Mapping[str, Any]], tasks: Mapping[str, Mapping[str, float]] | None = None) -> Rates:
     """Rates from the rehearsal's whitelisted records (``rehearsal.json`` and ``rehearsal_evaluate.json``, matched by label) and the pool's per-task ``{label: {"seconds", "peak_rss_bytes"}}``
     keyed by the item label. The overhead is the task's seconds minus the training and evaluation seconds, never negative."""
-    eval_by_label = {str(r["label"]): r for r in evaluation}
+    eval_by_label = {(str(r["label"]), str(r.get("phase", "main"))): r for r in evaluation}  # A2's pre and post records share a label: matched by (label, phase) (the pre-freeze audit's F10)
     out: Rates = {}
     for r in train:
         item = (str(r["arm"]), str(r["celltype"]), str(r["phase"]))
-        e = eval_by_label.get(str(r["label"]))
+        e = eval_by_label.get((str(r["label"]), str(r["phase"])))
         e_seconds = float(e["evaluation_wall_seconds"]) if e is not None else math.nan
         task = (tasks or {}).get(item_label(item))
         overhead = max(0.0, float(task["seconds"]) - float(r["wall_seconds"]) - e_seconds) if task is not None and math.isfinite(e_seconds) else 0.0
@@ -189,7 +189,7 @@ def most_expensive(table: Mapping[str, Mapping[str, Any]], block: str, candidate
 
 # --- the headroom rule and the cuts (section 10.4, reading A) -------------------------------------------------------------------------------------------
 def holds(charged_seconds: float, projected_seconds: Sequence[float], cap_seconds: float | None = None) -> bool:
-    """(hours already charged) + 2 x (rehearsed projection of the stages evaluated) <= 16 hours."""
+    """(hours already charged) + 2 x (rehearsed projection of the stages evaluated) <= the cap in the config (``core.cap_hours()``; ``cap_seconds`` overrides it for the ADR's worked examples)."""
     cap = core.cap_hours() * 3600.0 if cap_seconds is None else cap_seconds
     return all(math.isfinite(p) for p in projected_seconds) and charged_seconds + core.HEADROOM * float(sum(projected_seconds)) <= cap
 
@@ -233,9 +233,9 @@ def post_q1_decision(charged_seconds: float, wx_seconds: float, probe_seconds: f
     return PostQ1Decision(False, False, NOT_RUN_BUDGET, NOT_RUN_BUDGET, (1, 2), charged_seconds)
 
 
-def multiple_thresholds(table_hours: Mapping[str, float], other_hours: float = core.PROJECTED_OTHER_HOURS) -> dict[str, float]:
+def multiple_thresholds(table_hours: Mapping[str, float], other_hours: float = core.PROJECTED_OTHER_HOURS, cap_hours: float | None = None) -> dict[str, float]:
     """Context only: the multiple m of the slowest P9-I rates up to which each plan fits, (16 - 2 x other) / (2 x the block's six-worker hours) (section 10.4 bullets)."""
-    return {k: (core.cap_hours() - core.HEADROOM * other_hours) / (core.HEADROOM * v) for k, v in table_hours.items() if v > 0}
+    return {k: ((core.cap_hours() if cap_hours is None else cap_hours) - core.HEADROOM * other_hours) / (core.HEADROOM * v) for k, v in table_hours.items() if v > 0}
 
 
 # --- memory (section 10.4) ----------------------------------------------------------------------------------------------------------------------------

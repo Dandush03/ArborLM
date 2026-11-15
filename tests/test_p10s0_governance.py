@@ -319,22 +319,35 @@ def test_no_s0_test_asserts_that_a_freeze_file_is_absent() -> None:
 
 # --- M6, M8: the reserve and the gates cap ----------------------------------------------------------------------------------------------------------------------
 H = 3600.0
+CAP16 = 16 * H  # the ADR's worked examples are stated for a 16-hour cap: they pass it explicitly, so no test depends on cap_hours in the real config (the pre-freeze audit's F1)
+
+
+def holds16(charged: float, projected: list[float]) -> bool:
+    return budget.holds(charged, projected, CAP16)
+
+
+def pre16(*a: float, **k: float) -> budget.PreQ1Decision:
+    return budget.pre_q1_decision(*a, cap_seconds=CAP16, **k)
+
+
+def post16(*a: float, **k: float) -> budget.PostQ1Decision:
+    return budget.post_q1_decision(*a, cap_seconds=CAP16, **k)
 
 
 def test_both_headroom_evaluations_count_the_rehearsed_analysis_and_report_time_doubled() -> None:
     reserve = 0.05 * H
-    pre = budget.pre_q1_decision(0.0, 0.8 * H, 3.89 * H, 2.71 * H, reserve_seconds=reserve)
+    pre = pre16(0.0, 0.8 * H, 3.89 * H, 2.71 * H, reserve_seconds=reserve)
     assert pre.action == "full" and pre.required_seconds == pytest.approx(2 * (0.8 + 3.89 + 0.05) * H)
     edge = (16 * H / 2) - (0.8 * H + reserve)  # a Q1 projection that exactly fills the cap with the reserve counted
-    assert budget.pre_q1_decision(0.0, 0.8 * H, edge, 1.0 * H, reserve_seconds=reserve).action == "full"
-    assert budget.pre_q1_decision(0.0, 0.8 * H, edge + 1.0, 1.0 * H, reserve_seconds=reserve).action == "cut3"
-    assert budget.pre_q1_decision(0.0, 0.8 * H, edge + 1.0, 1.0 * H).action == "full"  # without the reserve it would have started and left too little for the analysis
-    both = budget.post_q1_decision(4.0 * H, 0.5 * H, 2.0 * H, reserve_seconds=reserve)
+    assert pre16(0.0, 0.8 * H, edge, 1.0 * H, reserve_seconds=reserve).action == "full"
+    assert pre16(0.0, 0.8 * H, edge + 1.0, 1.0 * H, reserve_seconds=reserve).action == "cut3"
+    assert pre16(0.0, 0.8 * H, edge + 1.0, 1.0 * H).action == "full"  # without the reserve it would have started and left too little for the analysis
+    both = post16(4.0 * H, 0.5 * H, 2.0 * H, reserve_seconds=reserve)
     assert (both.wx, both.probe) == (True, True)
     full = (16 * H - 4.0 * H) / 2 - 0.5 * H - reserve
-    assert budget.post_q1_decision(4.0 * H, 0.5 * H, full, reserve_seconds=reserve).probe is True and budget.post_q1_decision(4.0 * H, 0.5 * H, full + 1.0, reserve_seconds=reserve).probe is False
-    assert budget.post_q1_decision(4.0 * H, 0.5 * H, full + 1.0).probe is True  # the reserve changes the decision at the edge and nowhere else
-    assert budget.post_q1_decision(15.9 * H, 0.5 * H, 2.0 * H, reserve_seconds=0.0).wx is False
+    assert post16(4.0 * H, 0.5 * H, full, reserve_seconds=reserve).probe is True and post16(4.0 * H, 0.5 * H, full + 1.0, reserve_seconds=reserve).probe is False
+    assert post16(4.0 * H, 0.5 * H, full + 1.0).probe is True  # the reserve changes the decision at the edge and nowhere else
+    assert post16(15.9 * H, 0.5 * H, 2.0 * H, reserve_seconds=0.0).wx is False
 
 
 def test_the_gates_cap_is_measured_on_thirteen_draws() -> None:

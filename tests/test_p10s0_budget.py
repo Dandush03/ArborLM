@@ -14,6 +14,19 @@ import pytest  # noqa: E402
 from studies.p10s0 import budget, core  # noqa: E402
 
 H = 3600.0
+CAP16 = 16 * H  # the ADR's worked examples are stated for a 16-hour cap: they pass it explicitly, so no test depends on cap_hours in the real config (the pre-freeze audit's F1)
+
+
+def holds16(charged: float, projected: list[float]) -> bool:
+    return budget.holds(charged, projected, CAP16)
+
+
+def pre16(*a: float, **k: float) -> budget.PreQ1Decision:
+    return budget.pre_q1_decision(*a, cap_seconds=CAP16, **k)
+
+
+def post16(*a: float, **k: float) -> budget.PostQ1Decision:
+    return budget.post_q1_decision(*a, cap_seconds=CAP16, **k)
 SLOWEST = {4096: 0.0112, 16384: 0.0195, 65536: 0.0619}
 
 
@@ -130,22 +143,22 @@ def test_the_most_expensive_candidate_is_over_the_arms_that_can_still_be_the_can
 # --- the headroom rule and the cuts ----------------------------------------------------------------------------------------------------------
 def test_the_adr_s_worked_examples() -> None:
     other, q1, wx, probe = 0.8 * H, 3.89 * H, 0.34 * H, 2.25 * H
-    assert budget.holds(0.0, [other, q1])  # 2 x (0.8 + 3.89) = 9.38 h
-    assert budget.holds(other + q1, [wx, probe])  # 4.69 + 2 x (0.34 + 2.25) = 9.87 h
-    assert budget.holds(other + 2 * q1, [wx, probe])  # if Q1 had run up to its own cap: 13.77 h
-    assert not budget.holds(other + 2 * q1 + 3.0 * H, [wx, probe])
+    assert holds16(0.0, [other, q1])  # 2 x (0.8 + 3.89) = 9.38 h
+    assert holds16(other + q1, [wx, probe])  # 4.69 + 2 x (0.34 + 2.25) = 9.87 h
+    assert holds16(other + 2 * q1, [wx, probe])  # if Q1 had run up to its own cap: 13.77 h
+    assert not holds16(other + 2 * q1 + 3.0 * H, [wx, probe])
     assert 2 * (0.8 + 3.89) == pytest.approx(9.38) and 0.8 + 7.79 + 5.18 == pytest.approx(13.77) and 4.69 + 2 * (0.34 + 2.25) == pytest.approx(9.87)
-    assert not budget.holds(0.0, [float("inf")]) and not budget.holds(0.0, [float("nan")])
+    assert not holds16(0.0, [float("inf")]) and not holds16(0.0, [float("nan")])
 
 
 def test_pre_q1_rule_counts_unrun_stages_and_charged_hours_once() -> None:
-    d = budget.pre_q1_decision(0.0, 0.8 * H, 3.89 * H, 2.71 * H)
+    d = pre16(0.0, 0.8 * H, 3.89 * H, 2.71 * H)
     assert d.action == "full" and d.cut is None and d.status is None and d.required_seconds == pytest.approx(2 * 4.69 * H)
-    d2 = budget.pre_q1_decision(0.8 * H, 0.0, 3.89 * H, 2.71 * H)  # the 0.8 h already charged: counted once, as charged
+    d2 = pre16(0.8 * H, 0.0, 3.89 * H, 2.71 * H)  # the 0.8 h already charged: counted once, as charged
     assert d2.action == "full" and d2.required_seconds == pytest.approx(2 * 3.89 * H)
-    heavy = budget.pre_q1_decision(0.0, 0.8 * H, 7.5 * H, 5.0 * H)
+    heavy = pre16(0.0, 0.8 * H, 7.5 * H, 5.0 * H)
     assert heavy.action == "cut3" and heavy.cut == 3
-    stop = budget.pre_q1_decision(0.0, 0.8 * H, 9.0 * H, 8.0 * H)
+    stop = pre16(0.0, 0.8 * H, 9.0 * H, 8.0 * H)
     assert stop.action == "stop" and stop.status == "NOT RUN — BUDGET"
 
 
@@ -153,30 +166,30 @@ def test_the_multiples_of_the_slowest_rates_at_which_each_cut_applies() -> None:
     def pre(m: float) -> str:
         r = scaled(m)
         q1, cut3 = budget.block_projection(core.q1_cells(), r), budget.block_projection(core.q1_cells(True), r)
-        return budget.pre_q1_decision(0.0, 0.8 * H, q1.total_seconds, cut3.total_seconds).action
+        return pre16(0.0, 0.8 * H, q1.total_seconds, cut3.total_seconds).action
 
     assert [pre(m) for m in (1.0, 1.8, 1.95, 2.55, 2.8)] == ["full", "full", "cut3", "cut3", "stop"]
 
     def post(m: float) -> tuple[bool, bool]:
         r = scaled(m)
         q1 = budget.block_projection(core.q1_cells(), r)
-        d = budget.post_q1_decision(0.8 * H + q1.total_seconds, budget.block_projection(core.wx_cells("A5-D"), r).total_seconds, budget.block_projection(core.probe_cells("A5-D"), r).total_seconds)
+        d = post16(0.8 * H + q1.total_seconds, budget.block_projection(core.wx_cells("A5-D"), r).total_seconds, budget.block_projection(core.probe_cells("A5-D"), r).total_seconds)
         return d.wx, d.probe
 
     assert post(1.0) == (True, True) and post(1.6) == (True, True) and post(1.75) == (True, False)
 
 
 def test_cut_order_is_probe_then_wx() -> None:
-    both = budget.post_q1_decision(4.0 * H, 0.5 * H, 2.0 * H)
+    both = post16(4.0 * H, 0.5 * H, 2.0 * H)
     assert (both.wx, both.probe, both.cuts) == (True, True, ())
-    no_probe = budget.post_q1_decision(12.0 * H, 0.5 * H, 2.0 * H)
+    no_probe = post16(12.0 * H, 0.5 * H, 2.0 * H)
     assert (no_probe.wx, no_probe.probe, no_probe.cuts, no_probe.probe_status, no_probe.wx_status) == (True, False, (1,), "NOT RUN — BUDGET", None)
-    neither = budget.post_q1_decision(15.5 * H, 0.5 * H, 2.0 * H)
+    neither = post16(15.5 * H, 0.5 * H, 2.0 * H)
     assert (neither.wx, neither.probe, neither.cuts, neither.wx_status, neither.probe_status) == (False, False, (1, 2), "NOT RUN — BUDGET", "NOT RUN — BUDGET")
 
 
 def test_the_multiples_context_function() -> None:
-    m = budget.multiple_thresholds({"q1": 3.89, "wx": 0.34, "probe": 2.25, "q1_cut3": 2.71})
+    m = budget.multiple_thresholds({"q1": 3.89, "wx": 0.34, "probe": 2.25, "q1_cut3": 2.71}, cap_hours=16.0)
     assert m["q1"] == pytest.approx(1.85, abs=0.01) and m["q1_cut3"] == pytest.approx(2.66, abs=0.02) and m["probe"] > 3
 
 

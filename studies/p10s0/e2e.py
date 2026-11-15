@@ -26,7 +26,7 @@ from typing import Any
 
 from . import core
 
-SCALED_Q1_FULL_HOURS = 8.3  # the scaled rehearsal makes the full Q1 projection 8.3 h: 2 x 8.3 h > 16 h, so cut 3 applies, and cut 3 (about 6 h) still fits
+SCALED_Q1_FRACTION_OF_CAP = 0.52  # the scaled rehearsal makes the full Q1 projection 0.52 x the config's hour cap: 2 x that exceeds the cap, so cut 3 applies, and cut 3 (about 0.7 of it) still fits at any cap (the pre-freeze audit's F2)
 OVER_LIMIT_BYTES = 2 * 1024**3  # a rehearsal peak above 1.5 GiB for the 32K/64K items
 GIT = ["git", "-c", "commit.gpgsign=false", "-c", "user.name=e2e", "-c", "user.email=e2e@example.invalid"]
 
@@ -85,8 +85,8 @@ def script(clone: Path, log: Path, name: str, run_dir: Path, freeze: str, *, exp
     return run(["sh", f"studies/p10s0/launch/{name}.sh", str(run_dir), freeze], clone, log, expect=expect, env=clone_env(clone, clone.parent / "shim"))
 
 
-def solve_factor(projection: dict[str, Any]) -> float:
-    """The factor on seconds-per-update that makes the full Q1 projection 8.3 h. Only the training rate is scaled (start-up, evaluation and the guard are not), so the projection is linear in the factor:
+def solve_factor(projection: dict[str, Any], cap_hours: float) -> float:
+    """The factor on seconds-per-update that makes the full Q1 projection SCALED_Q1_FRACTION_OF_CAP x ``cap_hours``. Only the training rate is scaled (start-up, evaluation and the guard are not), so the projection is linear in the factor:
     total(f) = O + f R, solved from the projection at f = 1 and f = 2 with the budget functions themselves."""
     import dataclasses
 
@@ -100,7 +100,7 @@ def solve_factor(projection: dict[str, Any]) -> float:
 
     t1, t2 = total(1.0), total(2.0)
     rate_part = t2 - t1
-    return (SCALED_Q1_FULL_HOURS * 3600.0 - (t1 - rate_part)) / rate_part
+    return (SCALED_Q1_FRACTION_OF_CAP * cap_hours * 3600.0 - (t1 - rate_part)) / rate_part
 
 
 def scale_rehearsal(src: Path, dst: Path, factor: float, *, raise_probe_peak: bool = True) -> None:
@@ -174,19 +174,20 @@ def _run_e2e(out: Path, work: Path, source: Path, variant: str = "memory") -> di
     gates_manifest = json.loads((gen / "gates/manifest.json").read_text())
     gates_seconds = float(sum(t["seconds"] for t in gates_manifest["tasks"]))
     per_draw = float(json.loads((gen / "gates.json").read_text())["timing"]["per_draw_seconds"])
-    generate_seconds = float(sum(t["seconds"] for t in json.loads(gen_manifest.read_text())["tasks"]))
     summary["steps"]["generation_cap"] = core.generation_block(clone / core.DEFAULT_CONFIG)
     # --- projection, scaled so that cut 3 applies and the probe is over the memory limit; caps ---
     probe_json = exp / "E2E-projection-unscaled.json"
     stages(clone, log, "projection", "--dry", "--rehearsal-alone", str(reh), "--rehearsal-busy", str(reh), "--arm-selection", str(arm), "--out", str(probe_json))
-    factor = solve_factor(json.loads(probe_json.read_text())) if variant == "memory" else 1.0
+    cap_hours = core.cap_hours(clone / core.DEFAULT_CONFIG)
+    factor = solve_factor(json.loads(probe_json.read_text()), cap_hours) if variant == "memory" else 1.0
+    summary["steps"]["cap_hours"] = cap_hours
     scaled = exp / "E2E-rehearsal-scaled"
     scale_rehearsal(reh, scaled, factor, raise_probe_peak=variant == "memory")
     projection = exp / "E2E-projection.json"
     stages(clone, log, "projection", "--dry", "--rehearsal-alone", str(scaled), "--rehearsal-busy", str(scaled), "--arm-selection", str(arm), "--out", str(projection))
     summary["steps"]["scale_factor"] = factor
     caps = clone / "studies/p10s0/freeze/stage_caps.json"
-    stages(clone, log, "caps", "--dry", "--projection", str(projection), "--out", str(caps), "--gates-wall-seconds", str(gates_seconds), "--gates-per-draw-seconds", str(per_draw), "--analysis-wall-seconds", "1", "--report-wall-seconds", "1", "--generate-wall-seconds", str(generate_seconds))
+    stages(clone, log, "caps", "--dry", "--projection", str(projection), "--out", str(caps), "--gates-wall-seconds", str(gates_seconds), "--gates-per-draw-seconds", str(per_draw), "--analysis-wall-seconds", "1", "--report-wall-seconds", "1")
     decision = clone / "results/p10s0-freeze-e2e/DECISION.md"
     decision.parent.mkdir(parents=True)
     decision.write_text("# End-to-end exercise on test seeds (throwaway clone): not a decision about S0.\n")

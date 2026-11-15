@@ -1,6 +1,6 @@
 # ruff: noqa: E501
 """P10S0 shared contract: constants of ADR-0020 revision 4, the cell registry (pipeline check 3, Q1 230 or 190, WX 20, probe 6), seeds and their disjointness (gate G9),
-the schedules in exposures per fact, config, identity hashes, record IO, run manifests with the environment, and the one charged-time ledger (16 hours).
+the schedules in exposures per fact, config, identity hashes, record IO, run manifests with the environment, and the one charged-time ledger (the hour cap is read from the config).
 
 Specification: ``docs/decisions/ADR-0020-p10-s0-addressing-qualification.md`` (design revision 4). Every number below is copied from the ADR with its section. Nothing here trains
 or evaluates a model. The arms A0, A1, A2, A5-D, A6 and A7 are ``studies.p9ii``'s, unedited (ADR-0020 section 5.1).
@@ -260,7 +260,7 @@ STAGE_CODES: dict[str, str] = {
     "generate": "P", "drawplan": "L", "check": "K", "rehearse": "H", "gates": "G", "train": "T", "evaluate": "E", "gate": "S", "analyze": "A", "report": "R", "dry": "D",
 }  # fmt: skip
 RECORD_KINDS = (
-    "train", "snapshot", "eval", "stage_manifest", "rehearsal", "analysis", "data_manifest", "gates", "draw_plan", "projection", "ledger", "arm_selection", "q1_gate", "freeze_plan",
+    "train", "snapshot", "eval", "stage_manifest", "rehearsal", "analysis", "data_manifest", "gates", "draw_plan", "projection", "ledger", "arm_selection", "q1_gate", "freeze_plan", "timing",
 )  # fmt: skip
 PANELS = ("A", "B")
 PANEL_STREAM = {"A": "panel_a", "B": "panel_b"}
@@ -938,9 +938,9 @@ def default_experiments_root(repo: Path | None = None) -> Path:
     return p9core.default_experiments_root(repo)
 
 
-# --- the one charged-time ledger (16 hours, section 10.4) -------------------------------------------------------------------------------------
+# --- the one charged-time ledger (the cap in the config, section 10.4) -------------------------------------------------------------------------------------
 class LedgerRefused(RuntimeError):
-    """A stage cannot start: the remainder of the 16-hour cap is smaller than the stage's own cap."""
+    """A stage cannot start: the remainder of the hour cap in the config is smaller than the stage's own cap."""
 
 
 class Ledger:

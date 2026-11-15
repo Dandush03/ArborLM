@@ -6,7 +6,7 @@ Run from the repository root: ``uv run --locked python -m studies.p10s0.stages <
 (3 GiB), aggregate cap (18 GiB, both read from ``configs/p10s0_qualification.toml``), failed records kept, a failed cell stops the cells that depend on it, nothing is re-run with changed settings. Workers are
 single-thread subprocesses (six).
 
-One budget: 16 charged hours (``core.Ledger``) covering the pipeline check, the rehearsal, the gates, generation and every registered block. A block starts only under the headroom rule of section 10.4
+One budget: the charged hours of the cap in the config (``core.cap_hours()``; ``core.Ledger``) covering the pipeline check, the rehearsal, the gates, generation and every registered block. A block starts only under the headroom rule of section 10.4
 (reading A): ``budget.pre_q1_decision`` before Q1 (cut 3 is the only cut then) and ``budget.post_q1_decision`` after the Q1 gate (cuts 1 and then 2). Each block's own time cap is the frozen table's
 (twice its rehearsed projection, per configuration), passed by the fixed launch scripts through ``--caps``.
 
@@ -21,6 +21,7 @@ import dataclasses
 import functools
 import hmac
 import json
+import math
 import os
 import secrets
 import subprocess
@@ -739,6 +740,7 @@ def _item_cell(item: budget.Item, args: argparse.Namespace) -> core.Cell:
 def work_rehearse_cell(args: argparse.Namespace) -> int:
     """One (arm, cell type, phase) of the matrix for ``--updates`` (256) updates in rehearsal mode (whitelisted record only), then the time of one full evaluation with the read swap. Nothing but
     time, memory, shapes, counts and identity is written; no loss or accuracy is read out."""
+    registered_worker_guard(args)  # a typed --mode registered is refused (no token): defence in depth (F11)
     arm, ct, phase = args.item.split(",")
     item = (arm, ct, phase)
     cell = _item_cell(item, args)
@@ -974,11 +976,14 @@ def cmd_projection(args: argparse.Namespace) -> int:
         wx_arm, wx_s = budget.most_expensive(table, "wx", cands)
         pr_arm, pr_s = budget.most_expensive(table, "probe", cands)
         q1_s = float(table["q1:full"]["total_seconds"])
-        other = core.PROJECTED_OTHER_HOURS * 3600.0
+        charged = ledger_of(args).charged()
+        reserve = reserve_of(args)
+        cap = core.cap_hours(config_path(args)) * 3600.0
         record["freeze_information"] = {
             "wx_at_most_expensive_candidate": {"arm": wx_arm, "seconds": wx_s}, "probe_at_most_expensive_candidate": {"arm": pr_arm, "seconds": pr_s},
-            "rule_holds_before_q1": budget.holds(0.0, [other, q1_s]), "rule_would_hold_after_q1_at_its_projection": budget.holds(other + q1_s, [wx_s, pr_s]),
-            "projected_other_hours": core.PROJECTED_OTHER_HOURS, "kind": "information, not a start condition",
+            "rule_holds_before_q1": budget.holds(charged, [q1_s, reserve], cap), "rule_would_hold_after_q1_at_its_projection": budget.holds(charged + q1_s, [wx_s, pr_s, reserve], cap),
+            "cap_hours": cap / 3600.0, "charged_seconds_measured": charged, "reserve_seconds": reserve, "registered_gates_not_counted": "the registered gates are not yet measured here (they enter the rule at q1, from the cap table)",
+            "kind": "information, not a start condition; computed against the config's cap and the ledger's measured charges (the pre-freeze audit's F4), not a design estimate of the other stages",
         }  # fmt: skip
     core.write_record(out, core.jsonable(record))
     print(json.dumps({"projection": str(out), "missing": len(missing), "sha256": file_sha256(out)}))
@@ -995,12 +1000,18 @@ def cmd_caps(args: argparse.Namespace) -> int:
     out = Path(args.out)
     if out.exists():
         raise pool.StageRefused(f"refused: {out} exists")
-    if float(args.gates_per_draw_seconds) <= 0 or float(args.analysis_wall_seconds) <= 0 or float(args.report_wall_seconds) <= 0 or float(args.gates_wall_seconds) <= 0 or float(args.generate_wall_seconds) <= 0:
-        raise pool.StageRefused("refused: the caps need the measured wall seconds of the gates (and one draw's share), generation, analysis and report: every one is positive")
+    if float(args.gates_per_draw_seconds) <= 0 or float(args.analysis_wall_seconds) <= 0 or float(args.report_wall_seconds) <= 0 or float(args.gates_wall_seconds) <= 0:
+        raise pool.StageRefused("refused: the caps need the measured wall seconds of the gates (and one draw's share), analysis and report: every one is positive")
+    gen = core.generation_block(config_path(args))
+    if gen["provisional"] or float(gen["measured_seconds"]) <= 0:
+        raise pool.StageRefused("refused: the generation cap in the config is provisional: set it (set-generation-cap) before the caps")
+    generate_seconds = float(gen["measured_seconds"])  # the one source: the config's measured generation time (the pre-freeze audit's F9)
+    if float(args.generate_wall_seconds) > 0 and not math.isclose(float(args.generate_wall_seconds), generate_seconds, rel_tol=1e-9):
+        raise pool.StageRefused(f"refused: --generate-wall-seconds {args.generate_wall_seconds} is not the config's measured generation time {generate_seconds}: omit it")
     projection = core.read_record(Path(args.projection), "projection")
     if int(projection.get("unit_updates", core.UPDATES)) != unit_of(args):
         raise pool.StageRefused("refused: the projection was measured at another update unit (use --dry for a DRY projection and not for a real one)")
-    table = budget.caps_table(rates_of(projection), gates_wall_seconds=float(args.gates_wall_seconds), gates_per_draw_seconds=float(args.gates_per_draw_seconds), analysis_wall_seconds=float(args.analysis_wall_seconds), report_wall_seconds=float(args.report_wall_seconds), generate_wall_seconds=float(args.generate_wall_seconds), unit=unit_of(args))
+    table = budget.caps_table(rates_of(projection), gates_wall_seconds=float(args.gates_wall_seconds), gates_per_draw_seconds=float(args.gates_per_draw_seconds), analysis_wall_seconds=float(args.analysis_wall_seconds), report_wall_seconds=float(args.report_wall_seconds), generate_wall_seconds=generate_seconds, unit=unit_of(args))
     out.parent.mkdir(parents=True, exist_ok=True)
     write_json(out, core.jsonable(table))
     print(json.dumps({"caps": str(out), "sha256": file_sha256(out)}))
@@ -1088,6 +1099,19 @@ def cmd_set_generation_cap(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_measure_analysis(args: argparse.Namespace) -> int:
+    """README step 8: the wall time of one ``analysis`` and one ``report`` on synthetic full-registry records at real record sizes (``studies.p10s0.measure``); test seeds and synthetic records only; the record
+    it writes is the lead's input to ``caps --analysis-wall-seconds`` and ``--report-wall-seconds``."""
+    from . import measure
+
+    try:
+        record = measure.measure(Path(args.out), root=Path(args.out_root) if args.out_root else None, tiny=bool(args.tiny), keep=bool(args.keep), repo=repo_of(args))
+    except measure.MeasureError as exc:
+        raise StageError(str(exc)) from exc
+    print(json.dumps({"timing": str(args.out), "analysis_wall_seconds": record["analysis_wall_seconds"], "report_wall_seconds": record["report_wall_seconds"], "for_caps": record["for_caps"], "sha256": file_sha256(Path(args.out))}))
+    return 0
+
+
 def cmd_arm_selection(args: argparse.Namespace) -> int:
     out = Path(args.out)
     if out.exists():
@@ -1119,6 +1143,9 @@ def cmd_q1_gate(args: argparse.Namespace) -> int:
     target = run_dir / "q1_gate.json"
     if target.exists():
         raise pool.StageRefused(f"refused: {target} exists; a gate is computed once")
+    for stage in ("train-q1", "evaluate-q1"):  # the once-only record is written only after Q1 has finished (F3)
+        if not (run_dir / stage / "manifest.json").is_file():
+            raise pool.StageRefused(f"refused: the Q1 gate needs the manifest of {stage}: Q1 has not finished in {run_dir}")
     projection = core.read_record(Path(args.projection), "projection") if args.projection else None
     sel = arm_selection_record(args)
     start = run_dir / "q1_start.json"
@@ -1230,6 +1257,30 @@ def require_wx_before_probe(run_dir: Path, q1_gate: dict[str, Any]) -> None:
         raise pool.StageRefused("refused: WX runs before the 65,536 probe (the lead's ruling on item 7): run wx first")
 
 
+def registered_q1(args: argparse.Namespace, run_dir: Path, plan: dict[str, Any], caps: dict[str, Any], projection: dict[str, Any]) -> int:
+    """The registered Q1 stage: the gates and the draw plan are checked before anything is written (launching q1 before gates must not leave Q1 refused for good: the pre-freeze audit's F3), then the pre-Q1
+    headroom decision (full or cut 3, or nothing runs), the memory rule, the once-only ``q1_start.json`` and the block."""
+    require_gates_passed(run_dir)
+    require_draw_plan(run_dir)
+    ledger = ledger_of(args)
+    table = projection["table"]
+    ran = {e["stage"] for e in ledger.entries() if e.get("run") == run_dir.name}  # this run directory's stages: the rehearsal draw's gates (another run) do not count as run (F8)
+    before = sum(float(sec) for st, sec in (plan.get("before_q1_projected_seconds") or {}).items() if st not in ran)
+    decision = budget.pre_q1_decision(ledger.charged(), before, float(table["q1:full"]["total_seconds"]), float(table["q1:cut3"]["total_seconds"]), reserve_seconds=frozen_reserve(caps))
+    if decision.action == "stop":
+        raise pool.StageRefused(f"refused: {budget.NOT_RUN_BUDGET}: the headroom rule does not hold for Q1 even under cut 3 ({decision.required_seconds:.0f} s required with {decision.charged_seconds:.0f} s charged, the analysis and report reserved); nothing registered is run and the matter returns to the human lead")
+    key = decision.action
+    memory = projection["memory"][f"q1:{key}"]
+    if not memory["ok"]:
+        raise pool.StageRefused(f"refused: {budget.NOT_RUN_MEMORY}: Q1's rehearsal peak ({memory['peak_rss_bytes']} bytes) exceeds {memory['limit_bytes']} per worker (or an item is missing); nothing registered is run and the matter returns to the human lead")
+    start = run_dir / "q1_start.json"
+    if start.exists():
+        raise pool.StageRefused("refused: Q1 was already started in this run directory")
+    core.write_record(start, {**core.envelope("q1_gate"), "cut3": key == "cut3", "decision": decision._asdict(), "cut": decision.cut, "label": core.CUT3_LABEL if key == "cut3" else "no cut"})
+    cap = block_cap("q1", caps, key)
+    return run_block(args, "q1", cap_train=float(cap["train"]), cap_eval=float(cap["evaluate"]))
+
+
 def cmd_registered(args: argparse.Namespace) -> int:
     """One registered stage by name (``REGISTERED_STAGES``), with everything else (caps, projection, arm-selection record, seeds, ledger, memory caps, backbone) from the frozen plan, the frozen cap table and the
     config. The only options it accepts are the run directory, the freeze commit and ``--caps`` (which must be the frozen cap table's path); any other option, whatever its value, is refused. The frozen plan and
@@ -1253,27 +1304,10 @@ def cmd_registered(args: argparse.Namespace) -> int:
         args.dry_candidate = plan.get("test_candidate")  # the end-to-end exercise only; refused in a worker of any other profile
     projection = core.read_record(Path(args.projection), "projection")
     name = args.name
-    ledger = ledger_of(args)
-    reserve = frozen_reserve(caps)
     if name == "gates":
         return cmd_gates(args, cap=float(caps["gates"]))
     if name == "q1":
-        table = projection["table"]
-        ran = {e["stage"] for e in ledger.entries()}
-        before = sum(float(sec) for st, sec in (plan.get("before_q1_projected_seconds") or {}).items() if st not in ran)
-        decision = budget.pre_q1_decision(ledger.charged(), before, float(table["q1:full"]["total_seconds"]), float(table["q1:cut3"]["total_seconds"]), reserve_seconds=reserve)
-        if decision.action == "stop":
-            raise pool.StageRefused(f"refused: {budget.NOT_RUN_BUDGET}: the headroom rule does not hold for Q1 even under cut 3 ({decision.required_seconds:.0f} s required with {decision.charged_seconds:.0f} s charged, the analysis and report reserved); nothing registered is run and the matter returns to the human lead")
-        key = decision.action
-        memory = projection["memory"][f"q1:{key}"]
-        if not memory["ok"]:
-            raise pool.StageRefused(f"refused: {budget.NOT_RUN_MEMORY}: Q1's rehearsal peak ({memory['peak_rss_bytes']} bytes) exceeds {memory['limit_bytes']} per worker (or an item is missing); nothing registered is run and the matter returns to the human lead")
-        start = run_dir / "q1_start.json"
-        if start.exists():
-            raise pool.StageRefused("refused: Q1 was already started in this run directory")
-        core.write_record(start, {**core.envelope("q1_gate"), "cut3": key == "cut3", "decision": decision._asdict(), "cut": decision.cut, "label": core.CUT3_LABEL if key == "cut3" else "no cut"})
-        cap = block_cap("q1", caps, key)
-        return run_block(args, "q1", cap_train=float(cap["train"]), cap_eval=float(cap["evaluate"]))
+        return registered_q1(args, run_dir, plan, caps, projection)
     if name == "q1_gate":
         return cmd_q1_gate(args)
     if name in ("wx", "probe"):
@@ -1380,6 +1414,10 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("generate", parents=[common])
     for name in ("draw-plan", "caps", "freeze-plan", "set-generation-cap", "projection", "arm-selection", "check", "rehearse", "gates", "train", "q1-gate", "analyze", "report"):
         sub.add_parser(name, parents=[common])
+    meas = sub.add_parser("measure-analysis", parents=[common])
+    meas.add_argument("--out-root", default=None, help="measure-analysis: where the temporary registry is built (default: the system temporary directory)")
+    meas.add_argument("--tiny", action="store_true", help="measure-analysis: the DRY unit (tests); its times are not for the caps")
+    meas.add_argument("--keep", action="store_true", help="measure-analysis: keep the temporary registry")
     reg = sub.add_parser("registered", parents=[common])
     reg.add_argument("name", choices=REGISTERED_STAGES)
     dry = sub.add_parser("dry", parents=[common])
@@ -1392,13 +1430,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 COMMANDS: dict[str, Any] = {
-    "generate": cmd_generate, "draw-plan": cmd_draw_plan, "check": cmd_check, "rehearse": cmd_rehearse, "projection": cmd_projection, "caps": cmd_caps, "freeze-plan": cmd_freeze_plan, "set-generation-cap": cmd_set_generation_cap, "arm-selection": cmd_arm_selection, "gates": cmd_gates,
+    "generate": cmd_generate, "draw-plan": cmd_draw_plan, "check": cmd_check, "rehearse": cmd_rehearse, "projection": cmd_projection, "caps": cmd_caps, "freeze-plan": cmd_freeze_plan, "set-generation-cap": cmd_set_generation_cap, "arm-selection": cmd_arm_selection, "measure-analysis": cmd_measure_analysis, "gates": cmd_gates,
     "train": cmd_train, "q1-gate": cmd_q1_gate, "analyze": cmd_analyze, "report": cmd_report, "registered": cmd_registered, "dry": cmd_dry,
 }  # fmt: skip
 DEFAULT_MODE = {"generate": CHECK, "check": CHECK, "rehearse": REHEARSAL, "dry": DRY}
 
 
-MODE_FREE = ("draw-plan", "caps", "freeze-plan", "projection", "arm-selection", "set-generation-cap")  # commands that read no seed and have no mode
+MODE_FREE = ("draw-plan", "caps", "freeze-plan", "projection", "arm-selection", "set-generation-cap", "measure-analysis")  # commands that read no seed and have no mode
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1427,7 +1465,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             return int(WORKERS[args.worker](args))
         if args.command == "dry":
             args.dry, args.mode = True, DRY
-        elif args.run_dir is None and args.command not in ("check", "rehearse", "generate", "caps", "projection", "arm-selection", "set-generation-cap"):
+        elif args.run_dir is None and args.command not in ("check", "rehearse", "generate", "caps", "projection", "arm-selection", "set-generation-cap", "measure-analysis"):
             raise StageError("--run-dir is required")
         return int(COMMANDS[args.command](args))
     except (pool.StageRefused, core.LedgerRefused) as exc:

@@ -108,7 +108,7 @@ def test_dry_ledger_is_one_budget_charged_by_every_stage(dry: dict[str, Any]) ->
     ledger = core.ledger_for(dry["root"])
     stages_charged = {e["stage"] for e in ledger.entries()}
     assert {"gates", "train-q1", "evaluate-q1", "rehearse", "train-check", "train-wx", "train-probe", "analyze", "report"} <= stages_charged
-    assert ledger.cap_seconds == 16 * 3600 and ledger.remaining() < ledger.cap_seconds
+    assert ledger.cap_seconds == core.cap_hours() * 3600 and ledger.remaining() < ledger.cap_seconds
 
 
 def test_the_dry_analysis_loaded_every_cell_from_disk(dry: dict[str, Any]) -> None:
@@ -136,10 +136,13 @@ def test_projection_and_caps_procedure(dry: dict[str, Any], tmp_path: Path) -> N
     assert stages.main(["projection", "--rehearsal-alone", str(folder), "--rehearsal-busy", str(folder), "--arm-selection", str(selection), "--out", str(out), "--dry", "--repo", str(ROOT)]) == 0
     p = core.read_record(out, "projection")
     assert p["missing_items"] == [] and p["candidates"] == ["A5-D", "A1"] and set(p["table"]) == {"q1:full", "q1:cut3", "wx:A5-D", "wx:A1", "probe:A5-D", "probe:A1"} and p["arm_selection_sha256"] == file_sha256(selection)
-    assert p["guard_seconds_per_task"] > 0 and stages.measure_guard_seconds(ROOT) > 0 and set(p["memory"]) == set(p["table"]) and p["freeze_information"]["kind"] == "information, not a start condition" and p["cost_differences"]
+    assert p["guard_seconds_per_task"] > 0 and stages.measure_guard_seconds(ROOT) > 0 and set(p["memory"]) == set(p["table"]) and p["freeze_information"]["kind"].startswith("information, not a start condition") and p["cost_differences"]
     assert stages.main(["projection", "--rehearsal-alone", str(folder), "--rehearsal-busy", str(folder), "--arm-selection", str(selection), "--out", str(out), "--dry"]) == 2  # never over an existing file
     caps_out = tmp_path / "stage_caps.json"
-    assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--gates-wall-seconds", "100", "--gates-per-draw-seconds", "1", "--analysis-wall-seconds", "5", "--report-wall-seconds", "5", "--generate-wall-seconds", "60", "--dry"]) == 0
+    cfg_repo = tmp_path / "cfg_repo"  # a configuration of its own: the test does not read the real config's generation block
+    (cfg_repo / "configs").mkdir(parents=True)
+    (cfg_repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(core.set_generation_cap(60.0)))
+    assert stages.main(["caps", "--repo", str(cfg_repo), "--projection", str(out), "--out", str(caps_out), "--gates-wall-seconds", "100", "--gates-per-draw-seconds", "1", "--analysis-wall-seconds", "5", "--report-wall-seconds", "5", "--generate-wall-seconds", "60", "--dry"]) == 0
     caps = json.loads(caps_out.read_text())
     assert set(caps["q1"]) == {"full", "cut3"} and caps["gates"] == 2 * (100 + 12 * 1) and caps["generate"] == 120 and caps["analysis"] == 60.0 and caps["measured"]["reserve_analysis_report"] == 60.0
     assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--dry"]) == 2

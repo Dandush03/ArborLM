@@ -20,7 +20,7 @@ implementation audit, a rehearsal that meets the twofold rule, and the lead's se
 ## Order (each step before the next; the freeze commit is step 10)
 
 1. Implementation, tests, the DRY stage (`uv run --locked python -m studies.p10s0.stages dry`), ruff, mypy, the full test suite, and **the end-to-end exercise of the whole registered sequence through the real launch scripts
-   on test seeds**: `uv run --locked python -m studies.p10s0.e2e --out <new-dir>` (one command; a throwaway clone; the TEST_PROFILE marker selects test seeds, tiny sizes and a synthetic backbone; exit 0 when the
+   on test seeds**: `uv run --locked python -m studies.p10s0.e2e --out <new-dir>` (one command; a throwaway clone; the TEST_PROFILE marker selects test seeds, tiny sizes and a synthetic backbone; the scaled Q1 projection is derived from the config's hour cap, so cut 3 applies at any cap; exit 0 when the
    rehearsal, generation, `set-generation-cap`, gates, `projection` with cut 3 and a probe over the memory limit, `caps`, `generate.sh`, `freeze-plan`, the freeze commit, `gates.sh`, `q1.sh`, `q1_gate.sh`, `wx.sh`,
    `probe.sh` (refused), `analysis.sh`, `report.sh` and a refused second `q1.sh` behaved as expected). Repeat it after any change under `studies/`. `--variant probe` runs the same sequence without the cut and without the raised peak: the probe stage is refused until `wx` has run, then `wx` and the probe run.
 2. The pipeline check (section 10.1), on the check draw (data base 209001, init 2091): A0, A6, A7 at 2K/4K, three cells. Accuracies are not results and select nothing:
@@ -42,11 +42,17 @@ implementation audit, a rehearsal that meets the twofold rule, and the lead's se
    training, evaluation and the pool task (M2; a block whose rehearsal peak exceeds 1.5 GiB per worker is NOT RUN — MEMORY), one entry per block configuration (M3), and, as information and not as a start
    condition, the rehearsed projection of WX and the probe at the most expensive candidate and whether the rule would hold after a Q1 that ran at its projection. Rehearsal and gates must be repeated after any change
    to `train.py`, `evaluate.py` or `model.py`.
-8. Measure the wall time of one `analysis` and one `report` on synthetic full-registry records, and take the gates wall time and its per-draw part from the rehearsal-draw gates run (step 3). **The headroom rule counts the
+8. Measure the wall time of one `analysis` and one `report` on synthetic full-registry records: `uv run --locked python -m studies.p10s0.stages measure-analysis --out <timing.json> [--out-root <dir>]`
+   (test seeds and synthetic records only; no registered input). It builds, in a temporary directory, all 230 Q1 cells and the WX and probe cells of A5-D with the real number of update-log lines and diagnostics
+   per cell (about 3 GB, printed first and deleted at the end unless `--keep`; the record layout is copied from one tiny real cell trained and evaluated on test seeds), with missing cells, a failed cell, a
+   non-finite value and a replaced draw; it times the real workers `work analyze` and `work report` as subprocesses and, in process, the analysis and report of synthetic registries that reach outcome rows 1-6, missing
+   and non-finite cells, a failed gate and cut 3. The record (kind `timing`) holds both times: `analysis_wall_seconds` and `report_wall_seconds` are the figures for `caps` (the stage time plus the largest in-process row
+   time: the computation counted twice, so they err high); `--tiny` (tests only) writes the same at the DRY unit and the record says `for_caps: false`. Then take the gates wall time and its per-draw part from the rehearsal-draw gates run (step 3). **The headroom rule counts the
    analysis and report time as part of what is still to run at both evaluations; the reserve is (analysis cap + report cap) / 2, so that doubled it is the sum of the frozen analysis and report stage caps, each
    with its 60 s floor (the lead's rulings on M6 and N4). `stage_caps.json` carries it as `measured.reserve_analysis_report` with the rule stated beside it.**
 9. Write the cap table (one source of truth, a pure function of the projection) and the plan, from files and never by hand:
-   `... caps --projection <projection.json> --gates-wall-seconds G --gates-per-draw-seconds P --analysis-wall-seconds A --report-wall-seconds R --generate-wall-seconds N --out studies/p10s0/freeze/stage_caps.json`.
+   `... caps --projection <projection.json> --gates-wall-seconds G --gates-per-draw-seconds P --analysis-wall-seconds A --report-wall-seconds R --out studies/p10s0/freeze/stage_caps.json`. The generation
+   time is read from the config's `[generation].measured_seconds` (the one source; `caps` refuses while the block is provisional, and refuses a typed `--generate-wall-seconds` that differs from it).
    The gates cap is 2 x (G + 12 P): thirteen draws x three fact sets (the lead's ruling on M8). Then, after registered generation (step 11):
    `... freeze-plan --run-dir <registered-run-dir> --arm-selection studies/p10s0/freeze/arm_selection.json --projection <projection.json> --out studies/p10s0/freeze/plan.json`.
 10. **Freeze record template** (committed with the freeze; the lead approves it): code hashes, arm-selection record hash, data identities, gates, caps, projections, cut 3 of section 10.4, launch commands, the lead's
@@ -144,7 +150,7 @@ source digest. A test runs every script's argument check and parses its command 
 
 - Training and evaluation need `draw_plan.json` with `ok` true, a passed G1 for every draw they name, and a `gates.json` in which G1, G2, G4, G5, G6, G9 and G10 all passed.
 - Q1 starts only under the headroom rule of section 10.4 (reading A), with the rehearsed analysis and report time reserved: hours already charged + 2 x the rehearsed projection of Q1, of the stages before Q1 that have not
-  run, and of the analysis and report is at most 16 hours; if not, cut 3 (one initialization seed per draw at 8K/16K, printed as "one initialization seed per draw at 16,384"); if not, nothing registered is run and the matter
+  run, and of the analysis and report is at most the cap in the config (`core.cap_hours()`); if not, cut 3 (one initialization seed per draw at 8K/16K, printed as "one initialization seed per draw at 16,384"); if not, nothing registered is run and the matter
   returns to the human lead. The decision is written to `q1_start.json`.
 - After Q1, `q1_gate` computes the candidate by the fixed rule, re-evaluates the rule on WX and the probe with the candidate's rehearsed rates, the hours charged and the reserve (cut 1: drop the probe; cut 2: drop WX), and
   applies the memory rule per block. `wx` and `probe` refuse unless the Q1 gate allows them. Each block's cap is the table's entry for its configuration (Q1: full or cut3; WX and the probe: the candidate). The cap is the

@@ -246,13 +246,13 @@ def test_s0_imports_only_hashed_study_modules() -> None:
 
 def test_ledger_is_one_budget_of_sixteen_hours(tmp_path: Path) -> None:
     ledger = core.Ledger(tmp_path / "ledger.json")
-    assert ledger.cap_seconds == core.cap_hours() * 3600 == 16 * 3600 and ledger.charged() == 0 and ledger.remaining() == 16 * 3600
+    assert ledger.cap_seconds == core.cap_hours() * 3600 and ledger.charged() == 0 and ledger.remaining() == ledger.cap_seconds
     ledger.require_room("q1", 3600)
     ledger.charge("gates", "run", 100.0)
     ledger.charge("q1", "run", 5000.0)
     assert ledger.charged() == 5100.0 and len(ledger.entries()) == 2
     with pytest.raises(core.LedgerRefused):
-        ledger.require_room("big", 16 * 3600)
+        ledger.require_room("big", ledger.cap_seconds)
     with pytest.raises(core.LedgerRefused):
         ledger.require_room("none", 0)
     assert core.ledger_for(tmp_path).path.name == "P10S0-ledger.json"
