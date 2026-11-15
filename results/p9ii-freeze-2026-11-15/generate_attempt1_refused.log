@@ -1,0 +1,33 @@
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 1: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 2: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 3: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 4: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 5: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 6: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 7: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 8: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 9: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 10: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 11: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 12: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 13: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+draw 14: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+reserve 1: generation or G1 failed; the record is kept and the draw plan decides
+P9II stage REFUSED: refused: --stage-cap-seconds is required (caps are fixed after the rehearsal)
+reserve 2: generation or G1 failed; the record is kept and the draw plan decides
+{"ok": false, "replacements": {}, "reason": "14 draws failed G1 (at most 2 may be replaced)"}

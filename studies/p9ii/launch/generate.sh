@@ -23,9 +23,9 @@ if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
     exit 2
 fi
 for k in 1 2 3 4 5 6 7 8 9 10 11 12 13 14; do
-    uv run --locked python -m studies.p9ii.stages generate --mode registered --draw "$k" --run-dir "$RUN_DIR" --i-understand-freeze-time || echo "draw $k: generation or G1 failed; the record is kept and the draw plan decides" >&2
+    uv run --locked python -m studies.p9ii.stages generate --mode registered --draw "$k" --run-dir "$RUN_DIR" --stage-cap-seconds 300 --i-understand-freeze-time || echo "draw $k: generation or G1 failed; the record is kept and the draw plan decides" >&2
 done
 for r in 1 2; do
-    uv run --locked python -m studies.p9ii.stages generate --mode registered --reserve "$r" --run-dir "$RUN_DIR" --i-understand-freeze-time || echo "reserve $r: generation or G1 failed; the record is kept and the draw plan decides" >&2
+    uv run --locked python -m studies.p9ii.stages generate --mode registered --reserve "$r" --run-dir "$RUN_DIR" --stage-cap-seconds 300 --i-understand-freeze-time || echo "reserve $r: generation or G1 failed; the record is kept and the draw plan decides" >&2
 done
 exec uv run --locked python -m studies.p9ii.stages draw-plan --run-dir "$RUN_DIR"
