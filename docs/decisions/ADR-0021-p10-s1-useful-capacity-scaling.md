@@ -823,3 +823,19 @@ Recorded by the lead:
 - No registered seed of S1 has been observed. The efficiency line is unaffected by this section.
 - The dense control's learning-rate grid is taken up in the same extension, as a proposal for the independent check; no answer on it has been recorded from the human lead.
 
+
+## 24. The human lead's choice after the load-search check: shift the capacity grid down (2026-11-15 UTC)
+
+The lead drafted the extension §23 called for and had it checked independently before running anything (`docs/reviews/p10s1-load-search-2026-11-15/`: the draft, not adopted, and `CHECK_LOAD_SEARCH.md`). The check confirmed the curves and found that the row the extension would add (4,096 → 16,384 slots at 32,768 facts) can only return a positive, that the second transition is unlikely to be loadable, that the study as registered needs 17.6–20.2 hours on the calibration's measured rates against the 16-hour cap, and that both loaded rows together do not fit under 32 hours. It suggested shifting the grid down one size instead.
+
+The lead put two options to the human lead: (A) run the extension as drafted; (B) shift the capacity line to 1,024 → 4,096 → 16,384 slots at eight facts per slot, a redesign needing a revision of this specification, an independent review, code changes and a new calibration. The lead recommended B and said it changes registered rows after calibration data was seen, with no registered seed observed. The human lead answered, verbatim:
+
+> im ok with b
+
+Recorded by the lead:
+
+- **Option B is approved by the human lead.** The draft extension of `docs/reviews/p10s1-load-search-2026-11-15/DRAFT_AMENDMENT_LOAD_SEARCH.md` is not adopted and is not run.
+- Revision 5 of this specification is drafted next, reviewed independently before any code changes or runs, and replaces the grid, rows and run lengths that depend on it. Everything seen in the calibration of §10.1 and in the check is declared in revision 5 as seen before the redesign; revision 5 says which thresholds are unchanged and why each changed row is not chosen for its predicted answer.
+- The dense control's learning-rate grid: the lead extends it upward in revision 5 (the selected rate was the top of the grid, which weakens the control). This strengthens a control before any registered seed and is the lead's decision under the P10 delegation; the human lead was not asked a separate question on it.
+- The hour cap is set again from the new calibration's measured rates under the recorded delegation, before any registered seed is observed.
+- No registered seed of S1 has been observed. Nothing in S1 has run since the calibration.
