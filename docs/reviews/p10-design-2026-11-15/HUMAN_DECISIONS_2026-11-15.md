@@ -60,3 +60,11 @@ Recorded by the lead:
 - **The COMPOSES rule of ADR-0022 §11.4 is strengthened by the human lead's decision**, before any S2 calibration, rehearsal or registered record exists. The new rule measures each answer's gain over the untrained student inside the combined task against its gain in the single task, on the same sentences, and requires both answers to pass; its exact text is fixed in the combined-tasks addendum after an independent check.
 - "The cost is acceptable" is read as covering the added scoring time of the combined tasks (projected by the drafter at about 3 to 12 hours of charged time for four replicates, unchecked), within the hour-cap delegation already recorded.
 - The composition lines stay descriptive: they enter no gate, class or TRANSFER label.
+
+### The human lead's agreement with the proposed rule (2026-11-15 UTC)
+
+The lead described the proposed rule to the human lead: for each of the two answers, the arm's gain over the untrained student inside the combined task as a fraction of its gain on the same sentences in the single task; each answer must keep at least 0.80 of its single-task gain; COMPOSES only if every training order and replicate passes; DOES NOT COMPOSE if some answer keeps less than half its gain in every replicate of an order; otherwise inconclusive; the replaced rule still printed beside it. The lead also stated two assumptions: the line stays descriptive and does not feed the transfer label; "the cost is acceptable" covers the added scoring time. The human lead answered, verbatim:
+
+> agree with your proposed rule
+
+Recorded by the lead: the rule as described is approved by the human lead in substance. Its exact text is still subject to the independent check in progress; anything the check changes beyond wording is reported to the human lead before the addendum is adopted. The two stated assumptions were not objected to and stand.
