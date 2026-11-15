@@ -1,0 +1,14 @@
+# ADR-0022 revision 5, section 14.2: the packages of the one-off data-generation step, outside the lock. NOT INSTALLED, NOT FETCHED.
+# Status: the eight named packages below are approved by the human lead (ADR section 18); the human lead's confirmation with the sizes stated, transitive dependencies included, is PENDING, and
+# no wheel is fetched before it is recorded. This file lists the eight pins only. The full resolution (transitive dependencies, exact versions and hashes) is written here at fetch time and
+# is part of the freeze; that the set resolves with torch 2.8.0 on Python 3.12 has not been run.
+# Used only by: uv run --locked --with-requirements studies/p10s2/requirements-datagen.txt python -m studies.p10s2.datagen ...
+# uv.lock and pyproject.toml are untouched.
+transformers==4.57.1
+tokenizers==0.22.1
+safetensors==0.6.2
+huggingface-hub==0.35.3
+sentencepiece==0.2.1
+numpy==2.3.3
+sacremoses==0.1.1
+sacrebleu==2.5.1

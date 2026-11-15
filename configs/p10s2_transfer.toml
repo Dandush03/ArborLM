@@ -1,0 +1,220 @@
+# ADR-0022 revision 5 (P10-S2) registered constants. Every value below is quoted from the ADR section named in its comment;
+# none was chosen by the implementer. tests/test_p10s2_core.py compares this file with the ADR numbers. Implementation with
+# tests on synthetic stand-ins only (ADR-0022 section 18, "Lead's approval for implementation on synthetic stand-ins").
+# Astra review: NOT_PERFORMED. Self-check only.
+
+schema_version = 1
+experiment_family = "P10S2_TWO_TEACHER_TRANSFER"
+spec_reference = "docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md"
+spec_revision = 5
+
+[memory]  # section 3
+key_width = 16
+top = 8
+temperature = 0.2
+rows_per_stage = 4096
+init_std = 0.02            # keys and values, normal
+read_layers = [4, 12]      # calibration chooses; the read is the output of block L, 0-based block index (see studies/p10s2/model.py)
+
+[student]  # section 2 (pinned config.json values; rms_norm_eps is not here: it is read from the model's own config.json at load and checked by gate G8)
+vocab = 49152
+width = 576
+layers = 30
+heads = 9
+kv_heads = 3
+intermediate = 1536
+max_positions = 8192
+rope_base = 100000.0
+parameters = 134515008
+
+[teachers]  # section 4.1
+parameters = [73944309, 74669178]
+own_score_min = 0.55
+margin_min = 0.30
+accepted_pool_min = 8000
+
+[training]  # sections 6, 7, 12.1
+batch = 32
+clip_norm = 1.0
+weight_decay = 0.0
+updates = [2000, 1000]
+store_learning_rate = 0.003
+lora_learning_rates = [0.0003, 0.001]
+lora_rank_single = 42
+lora_rank_joint = 84
+lora_alpha_equals_rank = true
+calibration_snapshot_updates = 1000
+calibration_selection_min_difference = 0.01
+replay_rows = 32
+init_std = 0.02            # section 3 values/keys; E-table section 7
+retention_check_drop = 0.02
+modification_floor = 0.10
+
+[router]  # section 5.4
+updates = 500
+batch = 64
+learning_rate = 0.001
+none_prefixes = 8000
+none_prefixes_full_length = 4000
+prefix_tokens = 64
+temperature = 0.2
+init_std = 0.02
+false_trigger_windows = 100
+
+[data]  # section 5.2, 5.3, 6.4
+vocabulary = 2000
+min_words = 3
+max_words = 10
+large_group_pairs = 50
+evaluation_fraction = 0.20
+panel_eval = 1000
+panel_eval_min = 500
+panel_combined = 500
+panel_combined_min = 250
+panel_open = 500
+panel_q_fit = 500
+panel_q_check = 500
+panel_d_cal = 500
+panel_d_con = 300
+accepted_per_replicate = 8000
+gold_per_replicate = 8000
+sufficiency_factor = 1.25
+generation_sources_max = 60000
+generation_beam = 4
+generation_new_tokens = 48
+truncation_percentile = 0.995
+ablation_subsample = 300
+seen_items = 300
+general_windows = 200
+general_windows_marker_like = 100
+general_window_tokens = 256
+router_decision_token = 64
+tokenizer_record_sentences = 100
+random_id_sequences = 1000
+marker_strings = ["German", "French", "English", "translation"]
+marker_line_ending = ":"
+
+[filter]  # section 5.3
+tau_grid = [-0.05, -0.10, -0.15, -0.20, -0.25, -0.30, -0.35, -0.40, -0.45, -0.50, -0.55, -0.60]
+ratio_ranges = [[0.5, 2.0], [0.6, 1.6]]
+chrf_correct = 0.60
+wilson_lower_bound = 0.90
+check_precision = 0.90
+check_min_accepted = 150
+wilson_z = 1.959963984540054
+
+[scoring]  # section 10.1
+chrf_max_order = 6
+chrf_beta = 2.0
+gap_denominator_min = 0.30
+bootstrap_resamples = 10000
+crosscheck_tolerance = 0.001
+
+[gates]  # section 11.1 to 11.4, 12.2
+acq_gap_min = 0.50
+acq_margin_min = 0.30
+acq_marker_only_max = 0.25
+acq2_ratio_min = 0.80
+ret_drop_max = 0.03
+ret_gap_ratio_min = 0.90
+negative_acquisition = 0.25
+negative_retention_ratio = 0.70
+control_failed_gap = 0.50
+gen_loss_margin = 0.02
+pilot_gap_min = 0.25
+annotation_margin = 0.03
+joint_bound_ratio = 0.90
+task_coded_retention_margin = 0.10
+router_accuracy_min = 0.99
+composes_ratio_min = 0.80
+exact_match_weak = 0.10
+training_cost_ratio_max = 1.5
+value_rows_ratio_max = 0.10
+student_equivalence_tolerance = 1.0e-3
+mps_loss_tolerance = 1.0e-3
+mps_parameter_relative_tolerance = 1.0e-4
+g4_repeat_updates = 20
+
+[recompute]  # section 13.3
+own_code_item_tolerance = 1.0e-6
+frozen_code_tolerance = 0.0
+
+[calibration]  # section 12.1
+read_layers = [4, 12]
+store_lr = 0.003
+lora_lrs = [0.0003, 0.001]
+updates = 2000
+
+[seeds]  # section 9
+replicate_bases = [220001, 220101, 220201, 220301]
+offsets = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+partition = 220901
+partition_streams = [220902, 220903, 220904, 220905, 220906, 220907, 220908, 220909, 220910]
+registered_low = 220001
+registered_high = 228999
+calibration_low = 221001
+calibration_high = 221999
+calibration_base = 221001
+rehearsal_low = 222001
+rehearsal_high = 222999
+rehearsal_base = 222001
+draw_stride = 100
+draw_count = 10
+test_low = 229001
+test_high = 229999
+
+[budget]  # section 13
+cap_hours = 36.0
+cap_ceiling_hours = 72.0
+headroom = 2.0
+memory_per_worker_gib = 8.0
+memory_aggregate_gib = 24.0
+download_cap_gb = 1.5
+disk_cap_gb = 6.0
+timing_threads = 6
+timing_items = 200
+timing_repetitions = 3
+rungs = [[4, 2000], [3, 2000], [4, 1000], [3, 1000]]
+# Worker count: the ADR does not give one. Its projection sums unit times (one process at a time), so the memory rule is
+# applied for this many concurrent workers. PENDING LEAD REVIEW (reported by the implementer).
+workers = 1
+
+[prefreeze_caps]  # PROVISIONAL (the lead accepted them as provisional on 2026-11-15; the freeze refuses until the rehearsal replaces them with 2 x measured): the stage cap (seconds) of each pre-freeze stage is the upper end of the ADR's projection (section 13.3): data generation 1.8 h, calibration and pilot 2.2 h, rehearsal 3.0 h + 0.2 h
+datagen = 6480
+calibrate = 7920
+rehearse = 11520
+
+[pending]  # items the ADR leaves open; each stays OFF in the registered path until the lead records a decision
+combined_tasks_defined = false   # section 6.4: how C1 pairs two sources and how C2 lays out its prompt are not specified
+
+[dry]  # the synthetic end-to-end stage; sizes only, never registered values
+replicates = 2
+updates = 4
+batch = 4
+replay_rows = 4
+vocabulary = 24
+rows_per_stage = 16
+read_layer = 1
+router_updates = 12
+router_batch = 12
+none_prefixes = 48
+none_prefixes_full_length = 24
+prefix_tokens = 8
+window_tokens = 24
+router_decision_token = 8
+general_windows = 8
+general_windows_marker_like = 4
+panel_eval = 12
+panel_eval_min = 6
+panel_combined = 6
+panel_combined_min = 3
+panel_open = 4
+panel_q_fit = 80
+panel_q_check = 60
+panel_d_cal = 8
+panel_d_con = 6
+accepted_per_replicate = 24
+gold_per_replicate = 24
+ablation_subsample = 6
+seen_items = 6
+max_new_tokens = 12
