@@ -1,6 +1,6 @@
 # ADR-0017 — Parallel useful-capacity, anti-collapse and locality diagnostics (P9)
 
-- **Status: REVISION 4. Lanes A–D (§1–§14): CALIBRATION BLOCKED (human lead, 2026-11-14, §15.2), not scientifically failed, no run authorized. Part I (§18, the query-interface prerequisite): calibrated on rehearsal seeds, audited, FROZEN (§15.5); its single registered run is approved by the lead under the human lead's delegation (§15.6). SPEC: PENDING ASTRA REVIEW. The outcome of Part I is recorded in `results/` and the research log, not in this text.**
+- **Status: REVISION 4. Lanes A–D (§1–§14): CALIBRATION BLOCKED (human lead, 2026-11-14, §15.2), not scientifically failed, no run authorized. Part I (§18, the query-interface prerequisite): attempt 1 of the registered run stopped at the gates stage before any training (§15.7); the code was corrected, audited and RE-FROZEN (§15.8); attempt 2 is approved by the human lead (§15.7). SPEC: PENDING ASTRA REVIEW. The outcome of Part I is recorded in `results/` and the research log, not in this text.**
 - **Date:** 2026-11-14
 - **Revision history.**
   - Revision 0: the human lead's draft, unchanged at `docs/reviews/adr-0017-design-2026-11-14/ADR-0017-draft-rev0-human.md`.
@@ -539,6 +539,31 @@ The human lead delegated this decision ("you can approved it after the freeze if
 5. *No registered seed has been observed.* **Holds, with this definition:** the registered data were generated at freeze time and checked by G1 (generator properties only); no model has been trained or evaluated on them.
 
 **Decision: the lead approves the single registered run of Part I as frozen in §15.5.** This is the lead acting under the human lead's delegation, not a separate human approval. It covers nothing else: not Lanes A–D, a re-run, a merge, a push of weights, publication, ADR-0012 or any other study. Whatever the outcome, it is reported as registered, including a negative or uninterpreted one. Astra review: NOT_PERFORMED.
+
+### 15.7 Attempt 1 and the human decision on attempt 2 — 2026-11-15 (UTC)
+
+**Attempt 1** (freeze `da9d077`, code `dd8b205`, run directory `experiments/P9IP-20261114T235955649302Z-8756ef5f9d1541bd9e0efaece6f7c27b`, kept and never reused) stopped at the gates stage. G1 and G2 passed; G4 recorded "gradient reach failed for R2". By the frozen rule the train stage was not started. Records: `results/p9i-run-attempt1-2026-11-14/` (README, ADDENDUM). Charged: 11.3 s generation, 5.6 s gates.
+
+- **Causes** (lead's diagnosis, confirmed by the auditor on rehearsal draws 0 and 2, `GATE_FIX_AUDIT.md`): (i) the gate's own harness tested gradient reach on the first 8 Panel A contexts with a 4,096-slot model whose oracle-address table covers facts 0–2,047; at real proportions those contexts held none of those facts, so arm R2 read nothing; (ii) at the frozen code the gates stage could not run on rehearsal seeds, so the registered attempt was its first execution at real size. A defect of a pre-training check, not of an arm and not a result.
+- **Observed on registered seeds in attempt 1:** G1; the G2 no-memory counts for B101 and B102 (all at chance); exact retrieval 1.0; the N-against-R0a and initial-identity checks; twelve gradient-reach results; the lead's diagnostic (`lead_diagnostic_r2_gradient_reach.py`); and the checkpoint-restoration check, which trained arms N and BB for 32 updates each at 4,096 slots. The per-update loss logs of that check have not been read by anyone and are not read before the run is complete. No accuracy of any trained arm was computed.
+- **Fixes after the first freeze** (all in `studies/p9i/`, commits `0e0fbfb` and `8261f22`): the gate harness (`stages.py`: contexts the cell covers, a separate harness error, gates runnable on rehearsal seeds, DRY at real proportion); non-finite values written as strings so that analysis and report cannot crash on a zero denominator (`core.py` appended helpers, `stages.py`, `report.py`, `evaluate.py`); one line in `classes.py`. `model.py`, `train.py`, `data.py`, the config and the registry are unchanged. The auditor found no rule, class, annotation, selection, threshold, seed or finite number changed since `dd8b205` (`FINAL_RECHECK.md`: READY TO RE-FREEZE).
+- **Lead's ruling recorded before any registered evaluation (X2):** a non-finite next-byte loss or rise in a BB arm is written as a string and counts as LANGUAGE MODELLING DEGRADED.
+
+The lead's delegation (§15.6) excluded a re-run, so the question went to the human lead: approve re-freezing and a second attempt, or review first. The human lead answered in chat (verbatim):
+
+> document it, push the finding of first attempt explaining that we are running the number 2 and the we proceed with the review
+
+Recorded by the lead: **attempt 2 is approved by the human lead**; the attempt-1 finding is documented and pushed with a statement that attempt 2 is running; the review follows the run. The lead reads "push" as pushing this branch (`claude/adr-0017-design`) to the remote; no pull request is opened or merged by that. If the human lead meant that attempt 2 should wait for the review, the lead has misread, and says so here so that it can be seen.
+
+### 15.8 Part I freeze record 2 (attempt 2) — 2026-11-15 (UTC)
+
+- **Code:** commit `8261f22`; `source_sha256` `6407936e…` as reported by the stage records. 1,745 tests passing, 4 skipped; ruff and mypy clean. The freeze commit is the commit that adds this record.
+- **Calibration:** unchanged, `results/p9i-calibration-2026-11-14/calibration.json`, sha256 `087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44`, U = 8,192, no failed size.
+- **Data:** same registered seeds and backbones, regenerated into the new run directory `experiments/P9IP-20261115T020303574595Z-674730f6b8a147c0a47cac404321f2df`; `data_manifest.json` sha256 `e1bec1e37328ebf3b7d5d93874a2a4293ff12fa718ff7bd4815667d41593ad68` (it embeds the code identity, so it differs from attempt 1's file hash by design). **Comparisons C1–C3 with attempt 1 hold:** `g1.json` identical, the fourteen data hashes identical, every other manifest field identical.
+- **Comparisons with attempt 1** (`results/p9i-run-attempt2-2026-11-15/compare_with_attempt1.py`, values from `FINAL_RECHECK.md`): after gates and before train, C4 (G2 block), C5 (controls block), C6 (restoration block), C7 (restoration snapshot `model.pt`, `optimizer.pt`, `movement.pt` for N and BB) and C8 (no G4 defect, twelve arms reached) must hold. **Any mismatch stops the run before training and returns to the human lead.** `snapshot.json` is compared and reported only, because it may embed the code identity.
+- **Stages and caps,** as §15.5, with RUN the new directory and FREEZE the freeze commit: gates 600 s, train 3,600 s, evaluate 900 s, analyze 300 s, report 300 s. Charged before the run: 977 s of 14,400 s.
+- Before interpretation: `calibration_binding.json` holds the calibration hash, U = 8,192 and no failed sizes; the auditor recomputes classes, annotations and selection from the raw records. No stage is re-run with changed settings.
+- Astra review: NOT_PERFORMED.
 
 ### Decision 2 (Lanes A–D)
 
