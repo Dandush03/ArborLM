@@ -81,13 +81,29 @@ def other_task(task: str) -> str:
 
 
 # --- seeds (section 9, gate G9) --------------------------------------------------------------------------------------------------------------
-MODES = ("registered-run", "registered-data", "calibration", "rehearsal", "test")
+MODES = ("registered-run", "registered-data", "registered-analysis", "calibration", "rehearsal", "test")
 SEEDS = CFG["seeds"]
 OFFSETS: tuple[int, ...] = tuple(SEEDS["offsets"])
 OFFSET_NAMES = {0: "stage-1 store", 1: "training draw", 2: "batch order", 3: "router", 4: "permutation controls", 5: "gold draw", 6: "stage-2 appended rows", 7: "M-joint store", 8: "LoRA initialization", 9: "E-table initialization", 10: "oracle-code hash"}
 PARTITION_SEED: int = SEEDS["partition"]
-PARTITION_STREAMS: dict[str, int] = {"q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911}
-TEST_PARTITION_BASE = 229950  # test-mode stand-ins for 220901..220910 (the test range is 229001-229999)
+PARTITION_STREAMS: dict[str, int] = {"q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911, "equivalence_injection": 220912}
+# The listed use of each partition-side seed (section 9 and the rulings of the three implementation audits: 220912 is the equivalence injection vector's own seed; 220906 is drawn in the analysis stage only).
+PARTITION_USES: dict[str, str] = {
+    "partition": "assignment of identity groups, then Q, D_cal, D_con, E_A, E_B, E_C, E_open",
+    "q_split": "the split of Q into Q_fit and Q_check, by identity group",
+    "source_sample": "the sample of at most 60,000 no-gold sources per capability (A, then B)",
+    "ablation_subsample": "the 300-item ablation subsample of E_A and E_B",
+    "gen_windows": "the selection of the 200 general-language (GEN) windows",
+    "bootstrap": "the bootstrap resampling of every printed interval: drawn in the ANALYSIS STAGE ONLY, a fresh generator per printed interval, in the order of the registry (ruling of 2026-11-15)",
+    "seen_items": "the 300 seen-item training items (one permutation of each capability's accepted pool, A then B)",
+    "timing_items": "the 200 items per panel of the timing benchmark (E_A, then E_B)",
+    "tokenizer_record": "the 100 fixed sentences of each teacher's tokenizer record (A, then B)",
+    "random_id_sequences": "the 1,000 random id sequences of test (c)",
+    "c1_pairing": "the pairing of the combined task C1",
+    "equivalence_injection": "the fixed vector added at the output of block L in equivalence test (d)",
+}
+ANALYSIS_STREAMS = ("bootstrap",)  # drawn in the analysis stage only; never in the data-generation step
+TEST_PARTITION_BASE = 229950  # test-mode stand-ins for 220901..220912 (the test range is 229001-229999)
 RANGES = {
     "registered": (SEEDS["registered_low"], SEEDS["registered_high"]),
     "calibration": (SEEDS["calibration_low"], SEEDS["calibration_high"]),
@@ -109,17 +125,25 @@ def replicate_bases(mode: str) -> tuple[int, ...]:
 
 
 def partition_seeds(mode: str) -> dict[str, int]:
-    """The ten partition-side seeds 220901..220910 by name ('partition' and the nine streams); test mode uses stand-ins inside the test range."""
+    """The partition-side seeds by name ('partition' and the streams). ``registered-data`` holds the eleven drawn in the data-generation and partition steps (220901-220905 and 220907-220912);
+    ``registered-analysis`` holds 220906 alone (the bootstrap, drawn in the analysis stage only); test mode uses stand-ins inside the test range for all twelve."""
     names = ["partition", *PARTITION_STREAMS]
     if mode == "registered-data":
-        return {"partition": PARTITION_SEED, **PARTITION_STREAMS}
+        return {"partition": PARTITION_SEED, **{n: s for n, s in PARTITION_STREAMS.items() if n not in ANALYSIS_STREAMS}}
+    if mode == "registered-analysis":
+        return {n: PARTITION_STREAMS[n] for n in ANALYSIS_STREAMS}
     if mode == "test":
         return {n: TEST_PARTITION_BASE + 1 + i for i, n in enumerate(names)}
     raise ValueError(f"mode {mode!r} has no partition-side seeds")
 
 
+def listed_partition_seeds() -> dict[str, int]:
+    """All twelve listed partition-side seeds, 220901-220912 (gate G9's list), by name."""
+    return {"partition": PARTITION_SEED, **PARTITION_STREAMS}
+
+
 def allowed_seeds(mode: str) -> frozenset[int]:
-    if mode == "registered-data":
+    if mode in ("registered-data", "registered-analysis"):
         return frozenset(partition_seeds(mode).values())
     if mode == "test":
         return frozenset(range(SEEDS["test_low"], SEEDS["test_high"] + 1))
@@ -128,11 +152,24 @@ def allowed_seeds(mode: str) -> frozenset[int]:
     raise ValueError(f"unknown mode {mode!r}")
 
 
+def planned_seeds(mode: str, replicates: int | None = None) -> list[int]:
+    """Every seed a stage of ``mode`` may draw, every replicate included (sorted, without repeats): for the run modes, base + offset 0..10 of all ``replicates`` bases (all of them if None); for
+    ``registered-data`` the eleven data-step seeds; for ``registered-analysis`` 220906."""
+    if mode in ("registered-data", "registered-analysis"):
+        return sorted(partition_seeds(mode).values())
+    if mode in ("registered-run", "calibration", "rehearsal", "test"):
+        bases = replicate_bases(mode)
+        n = len(bases) if replicates is None else replicates
+        return sorted({b + o for b in bases[:n] for o in OFFSETS})
+    raise ValueError(f"unknown mode {mode!r}")
+
+
 @dataclass(frozen=True)
 class SeedUse:
     seed: int
     purpose: str
     mode: str
+    kind: str = "generator"  # "generator" (a fresh torch.Generator) or "code-hash" (the +10 oracle-code seed: it seeds no generator but is still a use of a listed seed)
 
 
 _RECORD: list[SeedUse] = []
@@ -161,6 +198,15 @@ def seeded_generator(seed: int, purpose: str, mode: str) -> torch.Generator:
     return torch.Generator().manual_seed(seed)
 
 
+def record_code_seed_use(seed: int, purpose: str, mode: str) -> None:
+    """Record a use of the +10 oracle-code seed (the hash seeds no generator, so G9 would not otherwise see it). The same refusal applies as for a generator."""
+    if mode not in MODES:
+        raise ValueError(f"unknown seed mode {mode!r}")
+    if seed not in allowed_seeds(mode):
+        raise SeedRefused(f"seed {seed} ({purpose}) is not in the set allowed for mode {mode!r}")
+    _RECORD.append(SeedUse(seed, purpose, mode, "code-hash"))
+
+
 @dataclass(frozen=True)
 class SeedPlan:
     """The seeds of one replicate: base + offset 0..10 (section 9). ``mode`` is registered-run, calibration, rehearsal or test; ``index`` the replicate (0..3 registered)."""
@@ -182,7 +228,8 @@ class SeedPlan:
         return seeded_generator(self.seed(offset), purpose or OFFSET_NAMES[offset], self.mode)
 
     def code_seed(self) -> int:
-        """The oracle-code hash seed (+10): the hash takes this listed seed and the pair as inputs and seeds no generator."""
+        """The oracle-code hash seed (+10): the hash takes this listed seed and the pair as inputs and seeds no generator. Each call is a recorded use (gate G9 reads it)."""
+        record_code_seed_use(self.seed(10), OFFSET_NAMES[10], self.mode)
         return self.seed(10)
 
     def planned(self) -> list[int]:
@@ -191,7 +238,27 @@ class SeedPlan:
 
 def partition_gen(mode: str, name: str, purpose: str | None = None) -> torch.Generator:
     seeds = partition_seeds(mode)
+    if name not in seeds:
+        raise SeedRefused(f"partition-side stream {name!r} is not drawn in mode {mode!r}")
     return seeded_generator(seeds[name], purpose or name, mode)
+
+
+def bootstrap_generator(mode: str, interval: str) -> torch.Generator:
+    """The listed seed 220906 for one printed interval: a fresh generator per interval, drawn in the analysis stage only (mode ``registered-analysis``, or ``test``). ``interval`` names it
+    (call in the order of the registry)."""
+    return partition_gen(mode, "bootstrap", f"bootstrap interval {interval}")
+
+
+def seed_table() -> list[dict[str, Any]]:
+    """The seed table of the data manifest: every listed seed with its use and the stage that draws it. Registered replicates: all four bases and all eleven offsets (the +10 code seed included).
+    Partition-side seeds: 220901-220912, with 220906 marked as drawn in the analysis stage only."""
+    rows: list[dict[str, Any]] = []
+    for i, base in enumerate(SEEDS["replicate_bases"]):
+        for o in OFFSETS:
+            rows.append({"seed": base + o, "name": f"replicate {i} +{o}", "use": OFFSET_NAMES[o], "stage": "registered run", "draws_generator": o != 10})
+    for name, seed in listed_partition_seeds().items():
+        rows.append({"seed": seed, "name": name, "use": PARTITION_USES[name], "stage": "analysis (only)" if name in ANALYSIS_STREAMS else "data generation and partition", "draws_generator": True})
+    return rows
 
 
 # --- namespaces S2 must stay disjoint from (section 9) -----------------------------------------------------------------------------------------
@@ -238,17 +305,29 @@ def config_seeds(config_dir: Path | None = None) -> frozenset[int]:
 
 
 def listed_registered_seeds() -> frozenset[int]:
-    """Replicate base + 0..10 for the four bases and 220901..220910 (G9's 'listed registered seeds')."""
-    return frozenset(allowed_seeds("registered-run") | allowed_seeds("registered-data"))
+    """Replicate base + 0..10 for the four bases and 220901..220912 (G9's 'listed registered seeds')."""
+    return frozenset(allowed_seeds("registered-run") | frozenset(listed_partition_seeds().values()))
 
 
-def seed_gate(records: Sequence[SeedUse], planned: Iterable[int] = (), *, planned_mode: str = "registered-run", extra_foreign: Iterable[int] = ()) -> dict[str, Any]:
-    """Gate G9 on the seeds planned for the registry and on the seeds actually recorded. A problem is listed, never silently dropped."""
+REGISTERED_MODES = ("registered-run", "registered-data", "registered-analysis")
+
+
+def seed_gate(
+    records: Sequence[SeedUse], planned: Iterable[int] = (), *, planned_mode: str = "registered-run", extra_foreign: Iterable[int] = (), stage_mode: str | None = None, allow_partial: bool = False,
+) -> dict[str, Any]:  # fmt: skip
+    """Gate G9 on the seeds planned for the registry and on the seeds actually recorded. A problem is listed, never silently dropped.
+
+    Without ``stage_mode`` this is the earlier, weaker check (kept for callers that have no stage). With ``stage_mode`` (the mode of the stage that is gated: ``registered-run`` in a registered
+    process, ``registered-data`` in the data-generation step, ``registered-analysis`` in the analysis stage, ...) it is the strict check of the audit's M4: every recorded use must carry exactly that
+    mode (a "test" or "rehearsal" use inside a registered process is refused), the record must not be empty, ``planned`` (built with ``planned_seeds`` for every replicate of the stages run) must not
+    be empty, and the set of recorded seeds must equal the planned set (``allow_partial`` relaxes this to "recorded is a subset of planned" for a stage that is known to draw only part of it)."""
     problems: list[str] = []
     lo_r, hi_r = RANGES["registered"]
     reg = listed_registered_seeds()
+    partition_side = frozenset(listed_partition_seeds().values())
     other_ranges = [RANGES["calibration"], RANGES["rehearsal"], RANGES["test"]]
     foreign_extra = frozenset(extra_foreign)
+    planned_list = list(planned)
 
     def check_registered(seed: int, where: str) -> None:
         if seed not in reg:
@@ -259,11 +338,11 @@ def seed_gate(records: Sequence[SeedUse], planned: Iterable[int] = (), *, planne
             if lo <= seed <= hi:
                 problems.append(f"{where}: {seed} lies inside {lo}-{hi}")
 
-    for s in planned:
+    for s in planned_list:
         hit_p = foreign_seed_hit(s, foreign_extra)
         if hit_p is not None:
             problems.append(f"planned seed {s} lies in the range of {hit_p}")
-        if planned_mode in ("registered-run", "registered-data"):
+        if planned_mode in REGISTERED_MODES:
             check_registered(s, "planned")
         else:
             lo, hi = RANGES[planned_mode]
@@ -273,20 +352,39 @@ def seed_gate(records: Sequence[SeedUse], planned: Iterable[int] = (), *, planne
         hit = foreign_seed_hit(use.seed, foreign_extra)
         if hit is not None:
             problems.append(f"recorded seed {use.seed} ({use.purpose}) lies in the range of {hit}")
+        if stage_mode is not None and use.mode != stage_mode:
+            problems.append(f"recorded[{use.purpose}]: seed {use.seed} carries mode {use.mode!r}, not the stage's {stage_mode!r}")
         if use.mode == "registered-run":
             check_registered(use.seed, f"recorded[{use.purpose}]")
-            if use.seed in allowed_seeds("registered-data"):
+            if use.seed in partition_side:
                 problems.append(f"recorded[{use.purpose}]: {use.seed} is a partition-side seed used in the registered run")
-        elif use.mode == "registered-data":
-            if use.seed not in allowed_seeds("registered-data"):
-                problems.append(f"recorded[{use.purpose}]: {use.seed} is not one of 220901-220910")
+        elif use.mode in ("registered-data", "registered-analysis"):
+            if use.seed not in allowed_seeds(use.mode):
+                analysis_only = use.seed in (PARTITION_STREAMS[n] for n in ANALYSIS_STREAMS)
+                problems.append(f"recorded[{use.purpose}]: {use.seed} in mode {use.mode!r} " + ("is drawn in the analysis stage only" if analysis_only else "is not one of the seeds of that stage"))
         elif use.mode in ("calibration", "rehearsal", "test"):
             lo, hi = RANGES[use.mode]
             if not lo <= use.seed <= hi:
                 problems.append(f"recorded[{use.purpose}]: {use.mode} seed {use.seed} lies outside {lo}-{hi}")
         else:
             problems.append(f"recorded[{use.purpose}]: unknown mode {use.mode!r}")
-    return {"ok": not problems, "problems": problems, "recorded": [{"seed": u.seed, "purpose": u.purpose, "mode": u.mode} for u in records]}
+    if stage_mode is not None:
+        recorded_set = {u.seed for u in records}
+        if not records:
+            problems.append("the seed record is empty: a stage that drew nothing cannot pass G9")
+        if not planned_list:
+            problems.append("no planned seeds were given: the gate needs the planned set of every replicate of the stages run")
+        else:
+            planned_set = set(planned_list)
+            extra = sorted(recorded_set - planned_set)
+            if extra:
+                problems.append(f"recorded seeds that are not planned: {extra}")
+            missing = sorted(planned_set - recorded_set)
+            if missing and not allow_partial:
+                problems.append(f"planned seeds never recorded: {missing}")
+    return {
+        "ok": not problems, "problems": problems, "recorded": [{"seed": u.seed, "purpose": u.purpose, "mode": u.mode, "kind": u.kind} for u in records], "stage_mode": stage_mode,
+    }  # fmt: skip
 
 
 # --- hashing and records ---------------------------------------------------------------------------------------------------------------------

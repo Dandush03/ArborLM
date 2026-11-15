@@ -90,6 +90,7 @@ class World:
     teacher_outputs: dict[str, dict[str, list[str]]] = field(default_factory=dict)  # capability (teacher) -> panel name -> stored output text per item (data-generation step)
     device: torch.device = field(default_factory=lambda: torch.device("cpu"))
     seed_mode_name: str = "test"
+    timing_items: dict[str, list[int]] = field(default_factory=dict)  # panel -> the item indices of the timing benchmark (listed seed 220908, drawn once in the data step and stored; empty only for a world built without a data bundle)
 
     def plan(self, r: int) -> core.SeedPlan:
         return core.SeedPlan(self.mode, r)

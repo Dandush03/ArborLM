@@ -16,6 +16,7 @@ default for this model, recorded in the record header (the draft expects "not pr
 reference tokenizer's offsets and is stored, never recomputed.
 """
 
+import bisect
 import codecs
 import unicodedata
 from collections import Counter
@@ -191,28 +192,48 @@ class Segment:
         return Segment(str(obj["text"]), tuple(int(i) for i in obj["ids"]), tuple((int(i), str(w)) for i, w in obj.get("word_last", [])))
 
 
+def word_letters_end(raw: str, start: int) -> int:
+    """The character offset just after the last character of the whitespace-delimited word ``raw`` (which begins at ``start``) that survives ``normalize``: attached punctuation (a trailing
+    comma, full stop, question mark, closing quote...) is not part of the word, so the read for the word is never placed on a following punctuation token (audit C-M5). A word with no
+    surviving character returns ``start``."""
+    last = -1
+    for i, c in enumerate(raw):
+        if not unicodedata.category(c).startswith("P") and not c.isspace():
+            last = i
+    return start + last + 1
+
+
+def last_token_before(starts: Sequence[int], end: int) -> int | None:
+    """The index of the last token whose start offset lies before ``end`` (None if there is none)."""
+    k = bisect.bisect_left(starts, end) - 1  # the start offsets of a tokenization are non-decreasing
+    return k if k >= 0 else None
+
+
 def tokenize_segment(tok: ReferenceTokenizer, text: str, *, with_words: bool = False) -> Segment:
-    """Tokenize one segment. For a source segment (``with_words``) the last subword of each whitespace-delimited word is found from the tokenizer's character offsets."""
+    """Tokenize one segment. For a source segment (``with_words``) the last subword of each whitespace-delimited word is found from the tokenizer's character offsets: it is the last token that
+    starts before the end of the word's letters, never a punctuation token that follows the word."""
     if not with_words:
         return Segment(text, tuple(tok.encode(text)))
     ids, offs = tok.encode_offsets(text)
+    starts = [s for s, _e in offs]
     out: list[tuple[int, str]] = []
     pos = 0
     for raw in text.split():
         start = text.index(raw, pos)
-        end = start + len(raw)
-        pos = end
+        pos = start + len(raw)
         norm = normalize(raw)
         if not norm:
             continue
-        last = max((k for k, (s, _e) in enumerate(offs) if s < end), default=None)
+        last = last_token_before(starts, word_letters_end(raw, start))
         if last is not None:
             out.append((last, norm))
     return Segment(text, tuple(ids), tuple(out))
 
 
 def prompt_segments(tok: ReferenceTokenizer, task: str, source: str) -> list[Segment]:
-    """``English: {source}\\n{German|French}:`` as segments: the label, the source (leading space), the newline, the task marker."""
+    """``English: {source}\\n{German|French}:`` as segments: the label, the source (leading space), the newline, the task marker. The source is NFC-normalized first (raw NFC text is tokenized, audit
+    minor 1) and must contain no newline (it would break the prompt layout and the stop rule)."""
+    source = nfc_line(source, "source")
     segs: list[Segment] = []
     if tok.bos_id is not None:
         segs.append(Segment("<bos>", (tok.bos_id,)))
@@ -224,8 +245,16 @@ def prompt_segments(tok: ReferenceTokenizer, task: str, source: str) -> list[Seg
 
 
 def target_segments(tok: ReferenceTokenizer, target: str) -> list[Segment]:
-    """The translation (leading space) and a newline."""
-    return [tokenize_segment(tok, " " + target), tokenize_segment(tok, NEWLINE)]
+    """The translation (leading space, NFC, no newline inside) and a newline."""
+    return [tokenize_segment(tok, " " + nfc_line(target, "target")), tokenize_segment(tok, NEWLINE)]
+
+
+def nfc_line(text: str, what: str) -> str:
+    """NFC-normalize one line of text; a newline inside it is refused (a source or target with a newline would break the layout of section 5.4 and the stop rule)."""
+    out = unicodedata.normalize("NFC", text)
+    if "\n" in out:
+        raise ValueError(f"a {what} contains a newline: {out!r}")
+    return out
 
 
 @dataclass(frozen=True)

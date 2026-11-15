@@ -34,10 +34,37 @@ def normalize(text: str) -> str:
     return " ".join(t.split())
 
 
+def _is_punctuation(c: str) -> bool:
+    return unicodedata.category(c).startswith("P")
+
+
+def _expand_token(w: str) -> str:
+    """One whitespace-delimited token: the punctuation attached to its ends (everything of category P* except the apostrophe) is set aside, the core is looked up in the contraction list
+    (if the core is wrapped in apostrophes, as in a single-quoted word, those are set aside too) and the punctuation is put back. So "can't." expands like "can't" (audit A-M2)."""
+    a = 0
+    while a < len(w) and _is_punctuation(w[a]) and w[a] != "'":
+        a += 1
+    b = len(w)
+    while b > a and _is_punctuation(w[b - 1]) and w[b - 1] != "'":
+        b -= 1
+    head, core_, tail = w[:a], w[a:b], w[b:]
+    if core_ in CONTRACTIONS:
+        return head + CONTRACTIONS[core_] + tail
+    c, d = 0, len(core_)
+    while c < d and core_[c] == "'":
+        c += 1
+    while d > c and core_[d - 1] == "'":
+        d -= 1
+    inner = core_[c:d]
+    if (c or d < len(core_)) and inner in CONTRACTIONS:
+        return head + core_[:c] + CONTRACTIONS[inner] + core_[d:] + tail
+    return w
+
+
 def expand_contractions(text: str) -> str:
-    """The raw text, lower-cased, with the fixed contraction list expanded (the apostrophe may be straight or curly)."""
+    """The raw text, lower-cased, with the fixed contraction list expanded (the apostrophe may be straight or curly); punctuation attached to a word does not hide its contraction."""
     t = unicodedata.normalize("NFC", text).lower().replace("’", "'")
-    return " ".join(CONTRACTIONS.get(w, w) for w in t.split())
+    return " ".join(_expand_token(w) for w in t.split())
 
 
 def words(text: str) -> list[str]:

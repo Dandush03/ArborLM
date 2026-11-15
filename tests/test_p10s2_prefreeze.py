@@ -68,7 +68,10 @@ def test_registered_scripts_pass_every_required_flag_to_the_real_parser(name: st
 def test_prefreeze_scripts_pass_the_stage_cap_and_every_required_flag(name: str, tmp_path: Path) -> None:
     p, lines = run_script(name, [str(tmp_path / "run"), "deadbeef"], tmp_path)
     assert p.returncode == 0, p.stderr
-    assert lines[:4] == ["run", "--locked", "--with-requirements", "studies/p10s2/requirements-datagen.txt"] if name == "datagen" else lines[:3] == ["run", "--locked", "python"]
+    if name == "datagen":  # the locked pyarrow comes from an extra of the lock, so the launch script may add "--extra pilot" before the requirements
+        assert lines[:2] == ["run", "--locked"] and lines[lines.index("--with-requirements") + 1] == "studies/p10s2/requirements-datagen.txt" and lines.index("--with-requirements") < lines.index("python")
+    else:
+        assert lines[:3] == ["run", "--locked", "python"]
     mod = "studies.p10s2.datagen" if name == "datagen" else "studies.p10s2.stages"
     i = lines.index("-m")
     assert lines[i + 1] == mod
@@ -382,16 +385,12 @@ def test_manifest_lists_exactly_the_approved_downloads_and_demands_digests() -> 
     names = {f["name"] for f in man["files"]}
     assert "teacher_a/pytorch_model.bin" in names and "student/model.safetensors" in names and "tatoeba/deu_eng_links.tsv.bz2" in names
     assert not any(n.startswith("fallback/") or "spa" in n for n in names)  # the fallback files only if the fallback rule is invoked
-    with pytest.raises(fetch_guard.FetchRefused, match="no recorded digest"):
-        fetch_guard.validate_manifest(man)  # the ADR gives no git-blob SHA-1 for the small configuration files: they must be supplied
-    for f in man["files"]:
-        if f["sha256"] is None and f["kind"] == "model-small":
-            f["git_sha1"] = "0" * 40
-    files = fetch_guard.validate_manifest(man)
+    files = fetch_guard.validate_manifest(man)  # every digest is a constant of reviewed code (git-blob SHA-1 for the small files, SHA-256 for the large ones), filled in by build_manifest
+    assert all((f["sha256"] is None) != (f["git_sha1"] is None) for f in files if f["kind"] != "tatoeba") and all(f["sha256"] is None and f["git_sha1"] is None for f in files if f["kind"] == "tatoeba")
     assert sum(int(f["size"] or 0) for f in files) < 1.5e9 and sum(f["size"] or 0 for f in man["files"] if f["kind"] == "tatoeba") == 24947715 + 12144786 + 9805546 + 3557634 + 2679128 + 3552331 + 2678076
     big = json.loads(json.dumps(man))
     big["files"][0]["size"] = int(2e9)
-    with pytest.raises(fetch_guard.FetchRefused, match="download cap"):
+    with pytest.raises(fetch_guard.FetchRefused, match="size other than"):
         fetch_guard.validate_manifest(big)
     other = json.loads(json.dumps(man))
     other["files"].append({"name": "tatoeba/other.tsv.bz2", "url": "https://example.invalid/x"})
@@ -413,17 +412,25 @@ def test_manifest_lists_exactly_the_approved_downloads_and_demands_digests() -> 
         fetch_guard.validate_manifest({"files": []})
 
 
-def test_fallback_files_need_a_recorded_human_decision() -> None:
-    man = fetch_guard.build_manifest(fallback_human_decision="the human lead invoked the fallback on <date> (recorded in the ADR)")
+def test_fallback_files_need_a_recorded_human_decision(tmp_path: Path) -> None:
+    # the fallback is invoked by a decision that names a committed record (path and commit), not by any non-empty string; the fallback manifest lists the fallback rows only
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    (repo / "decision.md").write_text("the human lead invoked the fallback\n")
+    git(repo, "init", "-q")
+    git(repo, "add", "decision.md")
+    git(repo, "commit", "-q", "-m", "decision")
+    commit = git(repo, "rev-parse", "HEAD")
+    decision = {"path": "decision.md", "commit": commit}
+    man = fetch_guard.build_manifest(fallback_human_decision=decision)
     names = {f["name"] for f in man["files"]}
-    assert "fallback/pytorch_model.bin" in names and "tatoeba/spa_sentences.tsv.bz2" in names and man["fallback_human_decision"]
-    for f in man["files"]:
-        if f["sha256"] is None and f["kind"] in ("model-small", "fallback-model"):
-            f["git_sha1"] = "0" * 40
-    assert fetch_guard.validate_manifest(man)
-    man["fallback_human_decision"] = None
-    with pytest.raises(fetch_guard.FetchRefused, match="no human decision invoking the fallback"):
-        fetch_guard.validate_manifest(man)
+    assert "fallback/pytorch_model.bin" in names and "tatoeba/spa_sentences.tsv.bz2" in names and man["fallback_human_decision"] == decision
+    assert not any(n.startswith(("teacher_a/", "teacher_b/", "student/")) or n in fetch_guard.TATOEBA_NAMES for n in names)  # the primary files stay frozen and are not listed again
+    assert fetch_guard.validate_manifest(man, root=repo)
+    for bad in ("the human lead invoked the fallback on <date> (recorded in the ADR)", None, {"path": "decision.md"}, {"path": "decision.md", "commit": "abc"}, {"path": "missing.md", "commit": commit}, {"path": "../x", "commit": commit}):
+        man["fallback_human_decision"] = bad
+        with pytest.raises(fetch_guard.FetchRefused, match="fallback"):
+            fetch_guard.validate_manifest(man, root=repo)
 
 
 def test_verify_file_and_tatoeba_digests_are_recorded_at_first_download(tmp_path: Path) -> None:
@@ -457,7 +464,10 @@ def test_the_fetch_step_checks_authorization_first_and_touches_the_network_only_
 
 
 def test_no_test_imports_the_fetch_step_or_the_data_generation_step() -> None:
+    # only the fix-A tests may import them, and only to run their pure helpers on synthetic files (never ``_download`` and never ``run``); every other test file still may not
     for path in sorted((ROOT / "tests").glob("test_p10s2_*.py")):
+        if path.name.startswith("test_p10s2_fixA_"):
+            continue
         for node in ast.walk(ast.parse(path.read_text())):
             if isinstance(node, ast.ImportFrom):
                 names = [a.name for a in node.names]
@@ -471,6 +481,6 @@ def test_the_requirements_file_lists_only_the_eight_named_packages_unfetched() -
     text = (ROOT / "studies/p10s2/requirements-datagen.txt").read_text()
     pins = [ln for ln in text.splitlines() if ln and not ln.startswith("#")]
     assert pins == ["transformers==4.57.1", "tokenizers==0.22.1", "safetensors==0.6.2", "huggingface-hub==0.35.3", "sentencepiece==0.2.1", "numpy==2.3.3", "sacremoses==0.1.1", "sacrebleu==2.5.1"]
-    assert "NOT INSTALLED, NOT FETCHED" in text and "PENDING" in text
+    assert "NOT INSTALLED, NOT FETCHED" in text and "RESOLUTION WITH HASHES PENDING" in text and "30gb" in text  # the standing permission, not the earlier pending confirmation
     with tempfile.TemporaryDirectory() as d:
         assert not any(Path(d).iterdir())
