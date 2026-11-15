@@ -84,3 +84,15 @@ Verbatim:
 > I've read P10-S2 cobined task done please continue with simulations, consider it as approved
 
 Recorded by the lead: the combined-tasks addendum to ADR-0022 (tasks C1 and C2 and the strengthened COMPOSES rule with its two tightenings) is approved by the human lead. The lead adopts the final text into ADR-0022 once the drafting context has removed the "pending confirmation" marks, without a further question. "Continue with simulations" is read as the direction to proceed with the P10 calibrations, rehearsals and registered runs under the delegations already recorded; it waives no audit, freeze or headroom rule.
+
+## Repository clean-up and reproducibility files, after P10 (2026-11-15 UTC)
+
+The human lead, verbatim:
+
+> great once we finish with p10-II-S0..2 we must clean the repo, i see it have zip folder that are unrelated and handoff that aren't needed to the study also we are missing cursial files here like the requirements libs,files,models needed in other computers to reproduce each of our finding, so we should have a list per and it's missing it's global CITATION.cff
+
+Recorded by the lead as a task for after the three P10 studies (S0, S1, S2) are finished. Nothing is removed or added now.
+
+- **Clean-up.** Candidates seen at the repository root on `main` at the time of this record: `ArborLM-Codex-Research-Starter.zip`, `ArborLM-Research-Handoff.md`, `OVERNIGHT_REPORT.md`, and `docs/ArborLM_Claude_Handoff_P5_to_P6.md`. `docs/RESEARCH_HANDOFF.md` is named by `AGENTS.md`/`CLAUDE.md` as required reading and is not a candidate without the human lead saying so. The lead lists every candidate with what refers to it and gets the human lead's yes on the list before deleting anything; removal is by an ordinary commit (history is not rewritten).
+- **Reproduction requirements, one list per study** (P1–P9-II and P10-S0, S1, S2): the Python version and locked packages, extra packages outside the lock with pinned versions and hashes, input files with hashes and where they come from, models with pinned revisions, hashes and licences, hardware and platform of record, the commands, expected run time, and which results are bit-reproducible on which platform.
+- **A global `CITATION.cff`** at the repository root. The lead asks the human lead for the author list, title, licence and preferred citation before writing it; no name or affiliation is invented.
