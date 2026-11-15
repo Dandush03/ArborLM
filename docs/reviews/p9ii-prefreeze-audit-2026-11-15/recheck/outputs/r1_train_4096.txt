@@ -1,0 +1,10 @@
+A0 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+A1 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+A2 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, 96, None, None)}
+A4 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, 128, 512)}
+A5-C 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+A5-D 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+A1-S 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+A6 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+A7 4096 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (256, None, None, None)}
+ALL IDENTICAL

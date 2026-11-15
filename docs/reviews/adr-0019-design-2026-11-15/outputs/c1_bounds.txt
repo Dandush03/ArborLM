@@ -1,0 +1,36 @@
+== 1. one-sided 95% Clopper-Pearson lower bounds
+  16/16: 0.8293
+  15/16: 0.7360
+  14/16: 0.6562
+  8/8: 0.6877
+  7/8: 0.5293
+  4/4: 0.4729
+  3/4: 0.2486
+  2/2: 0.2236
+
+== 2. P(class) for per-cell success probability p
+  p     | indep: P(>=15/16) P(>=4/16) | draw-clustered (8 draws, both seeds agree): P(>=15/16)=P(8/8)  P(>=4/16)=P(>=2/8)
+  0.50  |   0.000            0.989     |   0.004                                0.965
+  0.60  |   0.003            0.999     |   0.017                                0.991
+  0.70  |   0.026            1.000     |   0.058                                0.999
+  0.80  |   0.141            1.000     |   0.168                                1.000
+  0.90  |   0.515            1.000     |   0.430                                1.000
+  0.95  |   0.811            1.000     |   0.663                                1.000
+  0.98  |   0.960            1.000     |   0.851                                1.000
+  Stage 2 (4 draws x 2 seeds, >= 7 of 8):
+  0.80  indep P(>=7/8) 0.503   clustered P(4/4) 0.410
+  0.90  indep P(>=7/8) 0.813   clustered P(4/4) 0.656
+  0.95  indep P(>=7/8) 0.943   clustered P(4/4) 0.815
+
+== 3. Is 'every evaluated draw has at least one success' implied?
+  8 draws x 2 seeds, >= 15 of 16: implied = True
+  4 draws x 2 seeds, >= 7 of 8: implied = True
+
+== 4. NEGATIVE CONTROL FAILED from the baseline's own escape rate (A1-S no better than A0)
+  share of draws on which answer-only training escapes within U -> P(A1-S >= 4/16), draw-clustered
+  0.2 -> 0.497
+  0.3 -> 0.745
+  0.5 -> 0.965
+  0.6 -> 0.991
+  0.8 -> 1.000
+  (P9-I diagnostics: W7 at 4,096 escaped and reached 0.94-0.98 on 3 of 5 non-registered draws, 9 of 11 runs.)

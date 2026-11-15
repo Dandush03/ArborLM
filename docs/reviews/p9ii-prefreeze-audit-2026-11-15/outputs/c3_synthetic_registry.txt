@@ -1,0 +1,132 @@
+
+### S1 arm RELIABLE and improving on A0
+ expected: row 4 ADDRESSING-RELIABLE A5-C (LABEL-FREE) IMPROVES; Stage 2 COMPLETE; Stage 3 SCALE PROBE POSITIVE; H19-F supported
+ observed: outcome='ADDRESSING-RELIABLE' row=4 arm=A5-C status=COMPLETE interpretable=True
+ stage2 status: COMPLETE | stage3: {'label': 'SCALE PROBE POSITIVE', 'selected': 'A5-C', 'status': 'COMPLETE', 'successes': 2}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'UNRELIABLE'}
+ stage2 classes: {'A0': 'FAILS', 'A5-C': 'RELIABLE'} | U readout: {'A0': {'class': 'FAILS', 'label': None}, 'A5-C': {'class': 'RELIABLE', 'label': 'ALSO AT MATCHED UPDATES'}}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'supported', 'H19-G': 'not supported'}
+ carried: {'arm': 'A5-C', 'recommendation': None, 'supervision': '(LABEL-FREE)'} | exit codes 0 0 | RESULTS.md lines 54
+
+### S2 answer-only reliable
+ expected: row 3 ANSWER-ONLY RELIABLE; Stage 2 A0-only; readings at 16,384
+ observed: outcome='ANSWER-ONLY RELIABLE' row=3 arm=A0 status=COMPLETE interpretable=True
+ stage2 status: COMPLETE | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'RELIABLE', 'A1': 'RELIABLE', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'FAILS', 'A5-D': 'RELIABLE'}
+ stage2 classes: {'A0': 'RELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A5-D': 'FAILS'} | U readout: {'A0': {'class': 'RELIABLE', 'label': 'ALSO AT MATCHED UPDATES'}, 'A1': {'class': 'FAILS', 'label': None}, 'A1-S': {'class': 'FAILS', 'label': None}, 'A5-D': {'class': 'FAILS', 'label': None}}
+ NC failed s1: False | hypotheses: {'H19-A': 'not supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'supported', 'H19-E (A1)': 'supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'supported', 'H19-F': 'not supported', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': 'A0', 'recommendation': None, 'supervision': '(LABEL-FREE)'} | exit codes 0 0 | RESULTS.md lines 56
+
+### S3 negative control failed
+ expected: row 2 INCONCLUSIVE (A1-S RELIABLE, no label-free arm RELIABLE)
+ observed: outcome='INCONCLUSIVE' row=2 arm=None status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — NO ARM PASSED | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'FAILS', 'A1': 'RELIABLE', 'A1-S': 'RELIABLE', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ NC failed s1: True | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'supported', 'H19-E (A1-S)': 'supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'not supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S4 nothing reliable
+ expected: row 7 ADDRESSING-UNRELIABLE (A4 has 8 successes); Stage 2 NOT RUN — NO ARM PASSED
+ observed: outcome='ADDRESSING-UNRELIABLE' row=7 arm=None status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — NO ARM PASSED | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'FAILS', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'UNRELIABLE', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'not supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': 'the recommendation is to change the retrieval architecture, not to spend more compute (section 8.6)', 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S4b everything fails
+ expected: row 8 ADDRESSING-FAILS
+ observed: outcome='ADDRESSING-FAILS' row=8 arm=None status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — NO ARM PASSED | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'FAILS', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'not supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': 'the recommendation is to change the retrieval architecture, not to spend more compute (section 8.6)', 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S5 one NOT_EVALUATED draw
+ expected: A6 0.85 on draw 3: 14 evaluated cells, A5-C RELIABLE remains possible; row 6 with Stage 2 NOT RUN — BUDGET
+ observed: outcome='ADDRESSING-RELIABLE AT 4,096; 16,384' row=6 arm=A5-C status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'FAILS', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S5b two NOT_EVALUATED draws
+ expected: row 2 INCONCLUSIVE (Stage 1 NOT_EVALUATED)
+ observed: outcome='INCONCLUSIVE' row=2 arm=None status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — NO ARM PASSED | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'NOT_EVALUATED', 'A1': 'NOT_EVALUATED', 'A1-S': 'NOT_EVALUATED', 'A2': 'NOT_EVALUATED', 'A4': 'NOT_EVALUATED', 'A5-C': 'NOT_EVALUATED', 'A5-D': 'NOT_EVALUATED'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'not supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S6 missing cell
+ expected: row 1 NOT_INTERPRETED (INCOMPLETE), no class
+ observed: outcome='NOT_INTERPRETED (INCOMPLETE)' row=1 arm=None status=INCOMPLETE interpretable=False
+ stage2 status: None | stage3: {}
+ stage1 classes: {}
+ NC failed s1: None | hypotheses: {}
+ carried: None | exit codes 0 0 | RESULTS.md lines 30
+
+### S7 failed G2
+ expected: NOT_INTERPRETED (G2 failed) with a descriptive outcome
+ observed: outcome='NOT_INTERPRETED' row=1 arm=A0 status=COMPLETE interpretable=False
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'RELIABLE', 'A1': 'RELIABLE', 'A1-S': 'RELIABLE', 'A2': 'RELIABLE', 'A4': 'RELIABLE', 'A5-C': 'RELIABLE', 'A5-D': 'RELIABLE'}
+ NC failed s1: True | hypotheses: {'H19-A': 'not supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'supported', 'H19-E (A1)': 'supported', 'H19-E (A1-S)': 'supported', 'H19-E (A2)': 'supported', 'H19-E (A4)': 'supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'supported', 'H19-F': 'not supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 55
+
+### S7b G4 defect
+ expected: ENGINEERING_FAIL
+ observed: outcome='ENGINEERING_FAIL' row=1 arm=None status=ENGINEERING_FAIL interpretable=False
+ stage2 status: None | stage3: {}
+ stage1 classes: {}
+ NC failed s1: None | hypotheses: {}
+ carried: None | exit codes 0 0 | RESULTS.md lines 30
+
+### S8 non-finite values
+ expected: A0 cells with NaN accuracy and +inf LM rise fail / are flagged; analysis completes
+ observed: outcome='ADDRESSING-RELIABLE AT 4,096; 16,384' row=6 arm=A5-D status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'FAILS', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'FAILS', 'A5-D': 'RELIABLE'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'not supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'supported', 'H19-F': 'not supported', 'H19-G': 'supported'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S9 Stage 2 NOT RUN — BUDGET
+ expected: ADR 10: Stage 2 AND Stage 3 status NOT RUN — BUDGET; row 6
+ observed: outcome='ADDRESSING-RELIABLE AT 4,096; 16,384' row=6 arm=A4 status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'FAILS', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'RELIABLE', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'not supported', 'H19-C': 'not supported', 'H19-D': 'supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'not supported', 'H19-G': 'not supported'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S10 row 3 with Stage 2 NOT RUN — BUDGET
+ expected: ADR 8.6: row 3; B-G read at 16,384, which does not exist -> none supported
+ observed: outcome='ANSWER-ONLY RELIABLE' row=3 arm=A0 status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'RELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'not supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'not supported', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': None, 'recommendation': None, 'supervision': None} | exit codes 0 0 | RESULTS.md lines 52
+
+### S11 a draw replaced after G1 (generate manifest with a failed task)
+ expected: ADR 9: replacement allowed -> analysis COMPLETE as in S1
+ observed: outcome='NOT_INTERPRETED (INCOMPLETE)' row=1 arm=None status=INCOMPLETE interpretable=False
+ stage2 status: None | stage3: {}
+ stage1 classes: {}
+ NC failed s1: None | hypotheses: {}
+ carried: None | exit codes 0 0 | RESULTS.md lines 30
+
+### S12 Stage 2 INCOMPLETE (one cell missing)
+ expected: Stage 2 INCOMPLETE -> row 6; nothing carried forward from an incomplete stage
+ observed: outcome='ADDRESSING-RELIABLE AT 4,096; 16,384' row=6 arm=A5-C status=COMPLETE interpretable=True
+ stage2 status: INCOMPLETE | stage3: {'status': 'NOT RUN — STAGE NOT INTERPRETABLE'}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'UNRELIABLE'}
+ stage2 classes: {'A0': 'FAILS', 'A5-C': 'RELIABLE'} | U readout: {'A0': {'class': 'FAILS', 'label': None}, 'A5-C': {'class': 'RELIABLE', 'label': 'ALSO AT MATCHED UPDATES'}}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'supported', 'H19-G': 'not supported'}
+ carried: {'arm': 'A5-C', 'recommendation': None, 'supervision': '(LABEL-FREE)'} | exit codes 0 0 | RESULTS.md lines 54
+
+### S13 A2 RELIABLE at 16,384 (scheduled arm selected)
+ expected: Stage 3 NOT RUN — SCHEDULED ARM; MID-SCHEDULE at U for A2
+ observed: outcome='ADDRESSING-RELIABLE' row=4 arm=A2 status=COMPLETE interpretable=True
+ stage2 status: COMPLETE | stage3: {'status': 'NOT RUN — SCHEDULED ARM'}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'RELIABLE', 'A4': 'FAILS', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ stage2 classes: {'A0': 'FAILS', 'A1-S': 'FAILS', 'A2': 'RELIABLE'} | U readout: {'A0': {'class': 'FAILS', 'label': None}, 'A1-S': {'class': 'FAILS', 'label': None}, 'A2': {'class': None, 'label': 'MID-SCHEDULE (not a matched-update run)'}}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'supported', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'CONTRADICTED', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': 'A2', 'recommendation': None, 'supervision': '(ADDRESS-SUPERVISED IN TRAINING)'} | exit codes 0 0 | RESULTS.md lines 55

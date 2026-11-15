@@ -1,0 +1,119 @@
+{
+ "A0": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ },
+ "A1": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ },
+ "A2": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   96,
+   null,
+   null
+  ]
+ },
+ "A4": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   128,
+   512
+  ]
+ },
+ "A5-C": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ },
+ "A5-D": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ },
+ "A1-S": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ },
+ "A6": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ },
+ "A7": {
+  "parameters_identical": true,
+  "buffers_identical": true,
+  "update_records_identical": true,
+  "diagnostics_identical": true,
+  "updates": 192,
+  "schedule": [
+   256,
+   null,
+   null,
+   null
+  ]
+ }
+}

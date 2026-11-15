@@ -1,0 +1,36 @@
+{
+ "calibration": {
+  "path": "results/p9ii-calibration-2026-11-15/calibration.json",
+  "sha256": "ad5d7ee29ccd3f0be8b9875afdd957f35901e0d80f4babca6917916d0cf552cf"
+ },
+ "data_manifests": {
+  "p9ii-draw-1": "d5d7d9f58bb40f53b99223a217f604a7222d65cbce4cf580b1f70f0d154c1fca",
+  "p9ii-draw-10": "f6a229954302aa92f63b362f419db5d668c0b70a8d6f2c0a3c48381c89e9ecc6",
+  "p9ii-draw-11": "e6b747466c440926ecafab5dd65e9e7d44182c58007c434c52436c201bb59671",
+  "p9ii-draw-12": "2f153cc0640fde735c9ce300529d3fb50655c65017533bb5a81df4241055e8a4",
+  "p9ii-draw-13": "29f886afd647528a7cecdf93f99754b99aea4c474fb02247358529dd782bab24",
+  "p9ii-draw-14": "d694f761e61c363292c89f7526131ebe7e163bbd3f41709be8962956d60c87b5",
+  "p9ii-draw-2": "19a1de316b916c5c796bc5115cbc9e08220782f0e0100ca87a195bd2e4e61a02",
+  "p9ii-draw-3": "ce237b587dde1c40d6a91ee123c3d855f9bdf3194f7451a0de3480112aa39b8c",
+  "p9ii-draw-4": "b8a30e7ddd3fe149e2195f8a4849bcf8d43fc68b909028413c884b396dcf0df6",
+  "p9ii-draw-5": "e64c85d80afe3cc191727ec4aa73ed326cf16c01d3bf888c25faa8b4ca9f3926",
+  "p9ii-draw-6": "4f82f86b272d4b00acf518600cbe238dd84f1996446ccebd3cd61331d477bed1",
+  "p9ii-draw-7": "0cfa599a85752ac40fc7df7d66f0375d0de5fdb6e335849cc598b59f1463c0e0",
+  "p9ii-draw-8": "fd1b732e572b66b898de436615bb88db8eff3508dd9b57dfb8df3738d5384be6",
+  "p9ii-draw-9": "c346dd896f00dcfb6c98afc92f841eedd6aeab136688bc7e6bd2b5000f293155",
+  "p9ii-reserve-1": "ac47d087c789149debaff24abfc8897b0677965ea23e582861360a6cb80445af",
+  "p9ii-reserve-2": "144db359b6e9d95d3ca9d4999f0eedf21f7a0c8d756135a7a65e2e9418706eb5"
+ },
+ "draw_plan": {
+  "sha256": "627263112e5c36c461d1a04e0d16040aebf8a534ce09b9e55bbb8fe1b8eb773d"
+ },
+ "kind": "freeze_plan",
+ "projection": {
+  "path": "results/p9ii-rehearsal2-2026-11-15/projection.json",
+  "sha256": "6895b920b3b6869acbf4745cf1e42d249d217d01139cf4b4b058c16c8b162936"
+ },
+ "run_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9IIP-registered-20261115b",
+ "schema": 1,
+ "stage_caps_sha256": "fdc9db79dcf1a3f6a19716828f2e9bfb08591d49cd5003b891e0d4ea286fc88b",
+ "study": "P9II"
+}

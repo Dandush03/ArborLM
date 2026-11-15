@@ -1,0 +1,18 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9ii-prefreeze-audit-2026-11-15/b3_a2_mechanism.py:154: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  losses.append((u, float(loss)))
+{"variant": "F", "seed_set": "p9ii-test-5", "u_pre": 1024}
+{'update': 512, 'phase': 1, 'acc': 0.0332, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0241, 'gate': 0.1192}
+{'update': 960, 'phase': 1, 'acc': 0.0332, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0243, 'gate': 0.1192}
+{'update': 1024, 'phase': 1, 'acc': 0.0332, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.1192}
+{'update': 1088, 'phase': 2, 'acc': 0.0371, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.1476}
+{'update': 1152, 'phase': 2, 'acc': 0.043, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.1976}
+{'update': 1280, 'phase': 2, 'acc': 0.0664, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.2705}
+{'update': 1536, 'phase': 2, 'acc': 0.1328, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.4004}
+{'update': 2048, 'phase': 2, 'acc': 0.3457, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.6946}
+{'update': 2560, 'phase': 2, 'acc': 0.6367, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.838}
+{'update': 3072, 'phase': 2, 'acc': 0.7832, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.8974}
+{'update': 3584, 'phase': 2, 'acc': 0.875, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.9275}
+{'update': 4096, 'phase': 2, 'acc': 0.9141, 'distinct': 256, 'largest': 0.0039, 'top1_recall': 1.0, 'top8_recall': 1.0, 'mean_cos': 0.0247, 'gate': 0.9457}

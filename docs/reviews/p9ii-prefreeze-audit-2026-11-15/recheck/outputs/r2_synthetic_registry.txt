@@ -1,0 +1,119 @@
+
+### R-a reserve substitution (failed generate task + draw plan with a replacement)
+ expected: complete, row 4; draw 3 printed REPLACED BY RESERVE 1
+ observed: outcome='ADDRESSING-RELIABLE' row=4 arm=A5-C status=COMPLETE interpretable=True
+ stage2 status: COMPLETE | stage3: {'label': 'SCALE PROBE POSITIVE', 'selected': 'A5-C', 'status': 'COMPLETE', 'successes': 2}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'FAILS'}
+ stage2 classes: {'A0': 'FAILS', 'A5-C': 'RELIABLE'} | U readout: {'A0': {'class': 'FAILS', 'label': None}, 'A5-C': {'class': 'RELIABLE', 'label': 'ALSO AT MATCHED UPDATES'}}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'supported', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': 'A5-C', 'recommendation': None, 'stage2_status': 'COMPLETE', 'supervision': '(LABEL-FREE)'} | exit codes 0 0 | RESULTS.md lines 81
+   RESULTS.md mentions: REPLACED BY RESERVE
+   RESULTS.md mentions: NEGATIVE CONTROL FAILED
+   RESULTS.md mentions: SUPERVISION-DEPENDENT
+   RESULTS.md mentions: ADDRESS STABLE
+   hypotheses detail: {'H19-B': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-G': 'CONTRADICTED'} | outcome label: ADDRESSING-RELIABLE: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0; at 16,384: IMPROVES ON A0
+
+### R-b reserve list exhausted (draw plan not ok)
+ expected: NOT_INTERPRETED (INCOMPLETE)
+ observed: outcome='NOT_INTERPRETED (INCOMPLETE)' row=1 arm=None status=INCOMPLETE interpretable=False
+ stage2 status: None | stage3: {}
+ stage1 classes: {}
+ NC failed s1: None | hypotheses: {}
+ carried: None | exit codes 0 0 | RESULTS.md lines 30
+   hypotheses detail: {} | outcome label: NOT_INTERPRETED (INCOMPLETE)
+
+### R-c failed G2 on draw 7 only
+ expected: NOT_INTERPRETED (G2 failed on draw 7)
+ observed: outcome='NOT_INTERPRETED' row=1 arm=A5-C status=COMPLETE interpretable=False
+ stage2 status: NOT RUN — NO ARM PASSED | stage3: {'status': 'NOT RUN — NO ARM PASSED'}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'supported', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': None, 'recommendation': None, 'stage2_status': 'NOT RUN — NO ARM PASSED', 'supervision': None} | exit codes 0 0 | RESULTS.md lines 67
+   RESULTS.md mentions: NEGATIVE CONTROL FAILED
+   RESULTS.md mentions: SUPERVISION-DEPENDENT
+   RESULTS.md mentions: ADDRESS STABLE
+   hypotheses detail: {'H19-B': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-G': 'CONTRADICTED'} | outcome label: NOT_INTERPRETED (G2 failed on draw 7)
+
+### R-d INCOMPLETE Stage 2
+ expected: row 6 with INCOMPLETE; nothing carried; Stage 3 INCOMPLETE
+ observed: outcome='ADDRESSING-RELIABLE AT 4,096; 16,384' row=6 arm=A5-C status=COMPLETE interpretable=True
+ stage2 status: INCOMPLETE | stage3: {'status': 'INCOMPLETE'}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'FAILS', 'A5-C': 'RELIABLE', 'A5-D': 'FAILS'}
+ stage2 classes: {'A0': 'FAILS', 'A5-C': 'RELIABLE'} | U readout: {'A0': {'class': 'FAILS', 'label': None}, 'A5-C': {'class': 'RELIABLE', 'label': 'ALSO AT MATCHED UPDATES'}}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'supported', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': None, 'recommendation': None, 'stage2_status': 'INCOMPLETE', 'supervision': None} | exit codes 0 0 | RESULTS.md lines 73
+   RESULTS.md mentions: NEGATIVE CONTROL FAILED
+   RESULTS.md mentions: SUPERVISION-DEPENDENT
+   RESULTS.md mentions: ADDRESS STABLE
+   hypotheses detail: {'H19-B': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-G': 'CONTRADICTED'} | outcome label: ADDRESSING-RELIABLE AT 4,096; 16,384 INCOMPLETE: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)
+
+### R-e A4 and A5-D RELIABLE: gate on the real projection
+ stage gate (driver, real projection 6895b920): run=False status=NOT RUN — BUDGET advancing=['A5-D', 'A4'] budget={'projection_seconds': 6547.6, 'remaining_seconds': 10800.0, 'required_seconds': 13095.3, 'run': False, 'stage_cap_seconds': 13095.3, 'status': 'NOT RUN — BUDGET'}
+
+### R-e A4 and A5-D RELIABLE: gate on the real projection
+ expected: gate: advancing A5-D+A4, NOT RUN — BUDGET; row 6 'AT 4,096; 16,384 NOT RUN — BUDGET'; A4, A5-D print RELIABLE; Stage 3 NOT RUN — BUDGET; H19-D/G read at 4,096
+ observed: outcome='ADDRESSING-RELIABLE AT 4,096; 16,384' row=6 arm=A5-D status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — BUDGET'}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'RELIABLE', 'A5-C': 'FAILS', 'A5-D': 'RELIABLE'}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'CONTRADICTED', 'H19-D': 'supported', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'supported', 'H19-F': 'CONTRADICTED', 'H19-G': 'supported'}
+ carried: {'arm': None, 'recommendation': None, 'stage2_status': 'NOT RUN — BUDGET', 'supervision': None} | exit codes 0 0 | RESULTS.md lines 64
+   RESULTS.md mentions: NOT RUN — BUDGET
+   RESULTS.md mentions: NEGATIVE CONTROL FAILED
+   RESULTS.md mentions: SUPERVISION-DEPENDENT
+   RESULTS.md mentions: ADDRESS STABLE
+   hypotheses detail: {'H19-B': 'CONTRADICTED', 'H19-D': 'supported', 'H19-G': 'supported'} | outcome label: ADDRESSING-RELIABLE AT 4,096; 16,384 NOT RUN — BUDGET: A5-D (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)
+
+### R-f A0 RELIABLE and A4 advances: gate on the real projection
+ stage gate (driver, real projection 6895b920): run=False status=NOT RUN — BUDGET advancing=['A4'] budget={'projection_seconds': 5780.5, 'remaining_seconds': 10800.0, 'required_seconds': 11561.0, 'run': False, 'stage_cap_seconds': 11561.0, 'status': 'NOT RUN — BUDGET'}
+
+### R-f A0 RELIABLE and A4 advances: gate on the real projection
+ expected: gate: advancing A4, NOT RUN — BUDGET; row 3; B-G NOT TESTED AT 16,384; Stage 3 NOT RUN — BUDGET
+ observed: outcome='ANSWER-ONLY RELIABLE' row=3 arm=A0 status=COMPLETE interpretable=True
+ stage2 status: NOT RUN — BUDGET | stage3: {'status': 'NOT RUN — BUDGET'}
+ stage1 classes: {'A0': 'RELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'FAILS', 'A4': 'RELIABLE', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ NC failed s1: False | hypotheses: {'H19-A': 'not supported', 'H19-B': 'NOT TESTED AT 16,384', 'H19-C': 'NOT TESTED AT 16,384', 'H19-D': 'NOT TESTED AT 16,384', 'H19-E (A0)': 'supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'not supported', 'H19-E (A4)': 'supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'NOT TESTED AT 16,384', 'H19-G': 'NOT TESTED AT 16,384'}
+ carried: {'arm': None, 'recommendation': None, 'stage2_status': 'NOT RUN — BUDGET', 'supervision': None} | exit codes 0 0 | RESULTS.md lines 64
+   RESULTS.md mentions: NOT TESTED AT 16,384
+   RESULTS.md mentions: NOT RUN — BUDGET
+   RESULTS.md mentions: NEGATIVE CONTROL FAILED
+   RESULTS.md mentions: SUPERVISION-DEPENDENT
+   RESULTS.md mentions: ADDRESS STABLE
+   hypotheses detail: {'H19-B': 'NOT TESTED AT 16,384', 'H19-D': 'NOT TESTED AT 16,384', 'H19-G': 'NOT TESTED AT 16,384'} | outcome label: ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN — BUDGET; A0's Stage 2 class not run
+
+### R-g A2 advances (A1-S with it); stage 2 runs
+ expected: Stage 2 COMPLETE, A2 MID-SCHEDULE at U
+ observed: outcome='ADDRESSING-RELIABLE' row=4 arm=A2 status=COMPLETE interpretable=True
+ stage2 status: COMPLETE | stage3: {'status': 'NOT RUN — SCHEDULED ARM'}
+ stage1 classes: {'A0': 'UNRELIABLE', 'A1': 'FAILS', 'A1-S': 'FAILS', 'A2': 'RELIABLE', 'A4': 'FAILS', 'A5-C': 'FAILS', 'A5-D': 'FAILS'}
+ stage2 classes: {'A0': 'FAILS', 'A1-S': 'FAILS', 'A2': 'RELIABLE'} | U readout: {'A0': {'class': 'FAILS', 'label': None}, 'A1-S': {'class': 'FAILS', 'label': None}, 'A2': {'class': None, 'label': 'MID-SCHEDULE (not a matched-update run)'}}
+ NC failed s1: False | hypotheses: {'H19-A': 'supported', 'H19-B': 'CONTRADICTED', 'H19-C': 'supported', 'H19-D': 'CONTRADICTED', 'H19-E (A0)': 'not supported', 'H19-E (A1)': 'not supported', 'H19-E (A1-S)': 'not supported', 'H19-E (A2)': 'supported', 'H19-E (A4)': 'not supported', 'H19-E (A5-C)': 'not supported', 'H19-E (A5-D)': 'not supported', 'H19-F': 'CONTRADICTED', 'H19-G': 'CONTRADICTED'}
+ carried: {'arm': 'A2', 'recommendation': None, 'stage2_status': 'COMPLETE', 'supervision': '(ADDRESS-SUPERVISED IN TRAINING)'} | exit codes 0 0 | RESULTS.md lines 75
+   RESULTS.md mentions: NEGATIVE CONTROL FAILED
+   RESULTS.md mentions: SUPERVISION-DEPENDENT
+   RESULTS.md mentions: ADDRESS STABLE
+   RESULTS.md mentions: MID-SCHEDULE
+   hypotheses detail: {'H19-B': 'CONTRADICTED', 'H19-D': 'CONTRADICTED', 'H19-G': 'CONTRADICTED'} | outcome label: ADDRESSING-RELIABLE: A2 (ADDRESS-SUPERVISED IN TRAINING), paired against A0 at 4,096: IMPROVES ON A0; at 16,384: IMPROVES ON A0
+
+caps (train, evaluate, 2 x projected total):
+   ('A0-only', 2255, 52, 2308)
+   ('A5-C', 3332, 79, 3411)
+   ('A5-D', 3406, 79, 3484)
+   ('A4', 11482, 79, 11561)
+   ('A2', 5707, 110, 5817)
+   ('A1', 5913, 110, 6023)
+   ('A5-C+A5-D', 4870, 112, 4982)
+   ('A5-C+A4', 12947, 112, 13059)
+   ('A5-C+A2', 6554, 130, 6684)
+   ('A5-C+A1', 6760, 130, 6890)
+   ('A5-D+A4', 12984, 112, 13095)
+   ('A5-D+A2', 6591, 130, 6721)
+   ('A5-D+A1', 6797, 130, 6927)
+   ('A4+A2', 14324, 130, 14454)
+   ('A4+A1', 14530, 130, 14660)
+   ('A2+A1', 6909, 129, 7038)
+   ('stage3 A0', 580, 51, None)
+   ('stage3 A1', 1372, 69, None)
+   ('stage3 A5-C', 978, 72, None)
+   ('stage3 A5-D', 978, 70, None)
+refused (no entry): [('stage3 A2', "refused: the frozen cap table has no entry for stage3 'A2'"), ('stage3 A4', "refused: the frozen cap table has no entry for stage3 'A4'")]
+stage1 cap: {'train': 3964.9, 'evaluate': 178.5} gates: 60.0 analysis: 60.0 report: 60.0

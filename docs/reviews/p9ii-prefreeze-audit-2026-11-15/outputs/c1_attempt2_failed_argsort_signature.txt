@@ -1,0 +1,22 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  return func(*args, **kwargs)
+PASS A0 bit-identical to P9-I W7 over 40 updates (losses and all parameters) {}
+PASS L_addr value = mean over 128 sites of -log softmax over all 4096 cosine scores / 0.2 (float64 reference) {"theirs": 9.102765083312988, "mine": 9.102765225591472}
+PASS L_addr gradients reach wq and keys only, and equal my formula's {"keys_rows_with_grad": 4096}
+PASS A1 total = answer + lambda * L_addr (lambda 1.0) {}
+PASS A1 injection equals randperm(N, base+40)[:F] (target slot, a fixed injection) {}
+PASS no backbone parameter is trainable (A1) {}
+PASS A1-S targets identical under changed fact ids, change with the update, unrelated to the injection {"repeat_pairs": 23552, "same_target_rate": 0.0002972146739130435}
+PASS trainer leaves the last batch query WITH its autograd graph on the memory module (holds the graph between updates) {"held": true}
+PASS A2 phase 1 trains wq and keys only; values, wo, gate do not move in phase 1 {"phase1": ["keys", "wq"]}
+PASS A2 phase 2 trains everything with a fresh AdamW (first step = lr * sign-like Adam step of the clipped answer gradient) {"maxdiff": 7.450580596923828e-09, "phase2": ["gate", "keys", "values", "wo", "wq"], "counters": [1], "phase2_total_is_answer": true}
+PASS A4 k(t) equals the formula for every t at Stage 1 and Stage 2 (k0 = N/8 and N; T_A = U/2 and 4U/2) {"mismatches": []}
+PASS A4's first update reads k0, update T_A reads k(T_A-1), update T_A+1 reads 8 {"k_at_T_A_minus_1": 8}
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9ii-prefreeze-audit-2026-11-15/c1_arm_checks.py", line 177, in <module>
+    top = sc.argsort(-1, descending=True, stable=True)[:, :k]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argsort() takes from 1 to 0 positional arguments but 1 were given

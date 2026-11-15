@@ -1,0 +1,4 @@
+facts 2048: build+hash 0.36 s, controls_record (G2) 0.09 s, used by 8 draws, g2 passed True
+facts 8192: build+hash 0.34 s, controls_record (G2) 0.23 s, used by 4 draws, g2 passed True
+facts 32768: build+hash 0.33 s, controls_record (G2) 0.79 s, used by 2 draws, g2 passed True
+extrapolated per-draw work of the registered gates stage: 8.2 s (+ the rehearsal-mode gates work, 8.3 s measured) against the cap max(60, 2 x 8.3) = 60 s

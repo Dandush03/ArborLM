@@ -1,0 +1,52 @@
+{
+ "DIAGNOSTIC": true,
+ "backbone_next_byte_loss": 2.3494,
+ "backbone_loss_at_read_positions": 2.3332,
+ "models": {
+  "R1-n4096-b101-o301-s1801 (P9-I registered)": {
+   "loss": 2.6845,
+   "rise_rel": 0.1426,
+   "loss_at_read_positions": 4.9838
+  },
+  "R1-n4096-b101-o301-s1802 (P9-I registered)": {
+   "loss": 2.6951,
+   "rise_rel": 0.1472,
+   "loss_at_read_positions": 5.0684
+  },
+  "R1-n16384-b101-o301-s1801 (P9-I registered)": {
+   "loss": 2.6748,
+   "rise_rel": 0.1385,
+   "loss_at_read_positions": 4.9061
+  },
+  "R1-n65536-b101-o301-s1801 (P9-I registered)": {
+   "loss": 2.6689,
+   "rise_rel": 0.136,
+   "loss_at_read_positions": 4.8626
+  },
+  "W7-n4096-b101-o301-s1801 (P9-I registered)": {
+   "loss": 2.468,
+   "rise_rel": 0.0505,
+   "loss_at_read_positions": 3.2547
+  },
+  "W7-n16384-b101-o301-s1801 (P9-I registered)": {
+   "loss": 2.4345,
+   "rise_rel": 0.0362,
+   "loss_at_read_positions": 2.9949
+  },
+  "W7 d4 p9i-test-0": {
+   "loss": 2.563,
+   "rise_rel": 0.0909,
+   "loss_at_read_positions": 4.0092
+  },
+  "W7 d4 p9i-test-1": {
+   "loss": 2.5388,
+   "rise_rel": 0.0806,
+   "loss_at_read_positions": 3.8109
+  },
+  "W7 d4 p9i-test-2": {
+   "loss": 2.6651,
+   "rise_rel": 0.1344,
+   "loss_at_read_positions": 4.8316
+  }
+ }
+}

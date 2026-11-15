@@ -1,0 +1,32 @@
+== (a) soft read over all N slots, query == its target key (score 1), other keys uniform on S^15
+   E[exp(a/0.2)] for a uniform direction = 2.118
+   N=  4096 tau= 5.00: weight on target 0.0003 (expected 0.0003); on top-8 0.0023; outside top-8 0.9977
+   N=  4096 tau= 1.00: weight on target 0.0006 (expected 0.0006); on top-8 0.0040; outside top-8 0.9960
+   N=  4096 tau= 0.20: weight on target 0.0163 (expected 0.0168); on top-8 0.0436; outside top-8 0.9564
+   N=  4096 tau= 0.10: weight on target 0.2477 (expected 0.2594); on top-8 0.3499; outside top-8 0.6501
+   N=  4096 tau= 0.05: weight on target 0.9503 (expected 0.9493); on top-8 0.9773; outside top-8 0.0227
+   N=  4096 tau= 0.02: weight on target 1.0000 (expected 0.9999); on top-8 1.0000; outside top-8 0.0000
+   N= 16384 tau= 5.00: weight on target 0.0001 (expected 0.0001); on top-8 0.0006; outside top-8 0.9994
+   N= 16384 tau= 1.00: weight on target 0.0002 (expected 0.0002); on top-8 0.0010; outside top-8 0.9990
+   N= 16384 tau= 0.20: weight on target 0.0043 (expected 0.0043); on top-8 0.0127; outside top-8 0.9873
+   N= 16384 tau= 0.10: weight on target 0.0831 (expected 0.0805); on top-8 0.1295; outside top-8 0.8705
+   N= 16384 tau= 0.05: weight on target 0.8597 (expected 0.8239); on top-8 0.9002; outside top-8 0.0998
+   N= 16384 tau= 0.02: weight on target 1.0000 (expected 0.9995); on top-8 1.0000; outside top-8 0.0000
+   N= 65536 tau= 5.00: weight on target 0.0000 (expected 0.0000); on top-8 0.0001; outside top-8 0.9999
+   N= 65536 tau= 1.00: weight on target 0.0000 (expected 0.0000); on top-8 0.0003; outside top-8 0.9997
+   N= 65536 tau= 0.20: weight on target 0.0011 (expected 0.0011); on top-8 0.0040; outside top-8 0.9960
+   N= 65536 tau= 0.10: weight on target 0.0218 (expected 0.0214); on top-8 0.0453; outside top-8 0.9547
+   N= 65536 tau= 0.05: weight on target 0.5433 (expected 0.5390); on top-8 0.6372; outside top-8 0.3628
+   N= 65536 tau= 0.02: weight on target 0.9990 (expected 0.9981); on top-8 0.9999; outside top-8 0.0001
+
+== (b) A1 address loss floor at tau_a = 0.2 (query == target key; other keys uniform)
+   N=  4096: L_addr = 4.091 nats (ln N = 8.318); |dL/dq| = 3.500, tangential 0.142; target is top-1: True by construction
+   N= 16384: L_addr = 5.472 nats (ln N = 9.704); |dL/dq| = 3.529, tangential 0.069; target is top-1: True by construction
+   N= 65536: L_addr = 6.844 nats (ln N = 11.090); |dL/dq| = 3.544, tangential 0.028; target is top-1: True by construction
+   Reading: the loss cannot fall below about ln N - 5 + ln E[exp(5a)], so it never saturates and keeps a
+   gradient of order 1/tau_a on every key in the softmax bulk for the whole run (a perpetual key-spreading term).
+
+== (c) mean pairwise cosine before and after centring (A5)
+   rank-1 residual (+/- v)       : raw mean cos 0.990; centred mean cos -0.002; participation-ratio rank 1.00
+   rank-2 residual               : raw mean cos 0.981; centred mean cos -0.001; participation-ratio rank 1.78
+   isotropic residual (healthy)  : raw mean cos 0.991; centred mean cos -0.002; participation-ratio rank 15.43
