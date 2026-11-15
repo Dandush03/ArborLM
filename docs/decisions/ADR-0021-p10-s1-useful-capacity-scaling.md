@@ -759,3 +759,17 @@ The auditor re-read revision 3 (`adr-0021-review/RECHECK_REV3.md`): K1–K7 were
 
 **Consequence for the budget, stated:** at a 12-hour cap the projection had zero slack; with the two added calibration runs the draw-1 seed block is projected not to fit, by about 0.09 hours. The cap is the human lead's and is not changed here.
 
+## Addendum — the human lead's delegation on the hour cap (2026-11-15 UTC)
+
+The human lead, verbatim (the first clause concerns ADR-0022):
+
+> I Aprove the link files with 6.2mb and you can extend the hour cap if needed across all p10
+
+Recorded by the lead, with the limits the lead puts on its own use of this:
+
+- The lead may raise a P10 study's charged-hours cap when the study's own headroom rule would otherwise cut registered cells or stop the study.
+- A cap is raised only **before that study's registered seeds are observed** (at the rehearsal's headroom check, or at a stage gate that reads time and memory only). It is never raised in response to a result, and never to add cells, arms, updates or replicates beyond what the specification registers.
+- Each raise is recorded in the study's ADR with the measured projection that required it, the old and new cap, and what it protects. Memory caps (3 GiB per worker, 18 GiB aggregate, and S2's own) are not hour caps and are not changed.
+- The human lead's words do not extend to downloads, cloud or paid services, models, data, thresholds or designs.
+
+S1's cap is unchanged by this record (16 hours). Programme-level record: `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`.
