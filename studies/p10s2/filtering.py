@@ -7,6 +7,7 @@ being the share of accepted outputs with chrF >= 0.60 against the best reference
 setting must then show a point precision >= 0.90 on Q_check with at least ``check_min_accepted`` accepted items, otherwise the teacher is not qualified.
 """
 
+import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Protocol
@@ -25,11 +26,17 @@ class Teacher(Protocol):
     def translate(self, sources: Sequence[str]) -> list[tuple[str, float]]: ...
 
 
+class TokenizerRecording(Protocol):
+    """Optional: a teacher that can write the tokenizer record of section 4.1 (the real Marian teachers; the synthetic stand-ins have none)."""
+
+    def tokenizer_record(self, sentences: Sequence[str]) -> list[dict[str, Any]]: ...
+
+
 @dataclass(frozen=True)
 class Output:
     source: str
     text: str
-    score: float  # sum of the token log-probabilities of the returned hypothesis divided by its token count
+    score: float  # the library's sequence score with length penalty 1, the end-of-sequence token counted: the sum of the token log-probabilities of the returned hypothesis divided by its token count (ruling on A-M7)
 
 
 @dataclass(frozen=True)
@@ -48,7 +55,7 @@ def run_teacher(teacher: Teacher, sources: Sequence[str]) -> list[Output]:
 
 def accepts(o: Output, f: FilterSetting) -> bool:
     ws, wo = len(normalize(o.source).split()), len(normalize(o.text).split())
-    if ws == 0 or o.score != o.score:  # an empty source or a non-finite score is never accepted
+    if ws == 0 or not math.isfinite(o.score) or "\n" in o.text or "\n" in o.source:  # an empty source, a non-finite score (NaN or +-inf) or a newline in the source or output is never accepted
         return False
     ratio = wo / ws
     return o.score >= f.tau and f.rho1 <= ratio <= f.rho2 and normalize(o.text) != normalize(o.source)

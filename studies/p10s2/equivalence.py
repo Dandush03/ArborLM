@@ -75,3 +75,10 @@ def verify_record(student: Student, rec: dict[str, Any]) -> dict[str, Any]:
         greedy_ok = greedy_ok and cached == list(ref_seq)
     ok = bool(logits["ok"] and inj["ok"] and greedy_ok and cache_ok)
     return {"ok": ok, "logits": logits, "injection": inj, "greedy_matches_reference": greedy_ok, "cache_matches_recomputation": cache_ok, "tolerance": tolerance()}
+
+
+def verify_all(student: Student, records: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """Gate G8 over every read layer the data-generation step recorded (the layers calibration may choose from, 4 and 12: audit minor 8): each record is verified on its own; the gate passes only if
+    every layer passes and at least one record is given."""
+    per = {layer: verify_record(student, rec) for layer, rec in sorted(records.items())}
+    return {"ok": bool(per) and all(bool(v["ok"]) for v in per.values()), "layers": per, "tolerance": tolerance()}

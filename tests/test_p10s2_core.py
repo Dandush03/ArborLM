@@ -118,7 +118,10 @@ def test_listed_seeds_and_ranges() -> None:
     for i, base in enumerate((220001, 220101, 220201, 220301)):
         plan = core.SeedPlan("registered-run", i)
         assert plan.base == base and plan.planned() == [base + o for o in range(11)]
-    assert core.partition_seeds("registered-data") == {"partition": 220901, "q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911}
+    # the data step draws eleven of the twelve listed partition-side seeds: 220906 (the bootstrap) is drawn in the analysis stage only (ruling of 2026-11-15), 220912 is the equivalence injection vector's own seed
+    assert core.partition_seeds("registered-data") == {"partition": 220901, "q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911, "equivalence_injection": 220912}
+    assert core.partition_seeds("registered-analysis") == {"bootstrap": 220906}
+    assert sorted(core.listed_partition_seeds().values()) == list(range(220901, 220913))
     assert core.replicate_bases("calibration")[0] == 221001 and core.replicate_bases("calibration")[9] == 221901 and core.replicate_bases("rehearsal")[0] == 222001
     assert all(221001 <= s <= 221999 for s in core.allowed_seeds("calibration")) and all(222001 <= s <= 222999 for s in core.allowed_seeds("rehearsal"))
     assert min(core.allowed_seeds("test")) == 229001 and max(core.allowed_seeds("test")) == 229999
@@ -156,7 +159,7 @@ def test_no_plus_1000k_derivation_in_the_listed_sets() -> None:
 
 def test_gate_g9_on_planned_and_recorded_seeds() -> None:
     core.reset_seed_record()
-    ok = core.seed_gate([], [s for i in range(4) for s in core.SeedPlan("registered-run", i).planned()] + list(core.partition_seeds("registered-data").values()))
+    ok = core.seed_gate([], [s for i in range(4) for s in core.SeedPlan("registered-run", i).planned()] + list(core.listed_partition_seeds().values()))
     assert ok["ok"], ok["problems"]
     bad = core.seed_gate([core.SeedUse(221001, "calibration seed used as registered", "registered-run")], [220001, 221005, 229001, 5])
     assert not bad["ok"]

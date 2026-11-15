@@ -67,26 +67,84 @@ class Sizes:
 
 
 # --- parsing the exports (the real exports are bz2-compressed tab-separated files) ---------------------------------------------------------------------
-def parse_sentences(data: bytes, compressed: bool = True) -> dict[int, str]:
-    """``id <TAB> language <TAB> text`` lines (the plain sentence files, not the detailed ones)."""
+LINK_RESOLVE_MIN_SHARE = 0.5  # engineering guard, not a scientific threshold (PENDING LEAD REVIEW): a link file whose rows resolve to sentence ids below this share is read as a wrong column order or a wrong file
+
+
+class LinkFormatError(RuntimeError):
+    """A link file does not look like ``English id, translation id`` rows over the sentence files: the work stops instead of reading an insufficient corpus."""
+
+
+@dataclass(frozen=True)
+class ParseReport:
+    """What a parsed export held: lines read, rows kept, malformed lines dropped and counted (blank lines are not counted)."""
+
+    lines: int
+    kept: int
+    malformed: int
+
+    def to_json(self) -> dict[str, int]:
+        return {"lines": self.lines, "kept": self.kept, "malformed": self.malformed}
+
+
+def _text_lines(data: bytes, compressed: bool) -> list[str]:
+    """The lines of an export: split on the newline character only (``str.splitlines`` would also split inside a sentence on U+2028, U+0085, U+000B and the like and silently truncate it, audit
+    minor 2); a carriage return at the end of a line is stripped; blank lines are skipped."""
     raw = bz2.decompress(data) if compressed else data
+    return [ln.rstrip("\r") for ln in raw.decode("utf-8").split("\n") if ln.rstrip("\r")]
+
+
+def _is_id(x: str) -> bool:
+    return x.isascii() and x.isdigit()
+
+
+def parse_sentences_report(data: bytes, compressed: bool = True) -> tuple[dict[int, str], ParseReport]:
+    """``id <TAB> language <TAB> text`` lines (the plain sentence files, not the detailed ones), with the count of malformed lines. A sentence containing a newline cannot occur here (lines end at it)."""
     out: dict[int, str] = {}
-    for line in raw.decode("utf-8").splitlines():
+    lines = _text_lines(data, compressed)
+    bad = 0
+    for line in lines:
         parts = line.split("\t")
-        if len(parts) >= 3 and parts[0].isdigit():
+        if len(parts) >= 3 and _is_id(parts[0]):
             out[int(parts[0])] = parts[2]
-    return out
+        else:
+            bad += 1
+    return out, ParseReport(len(lines), len(out), bad)
+
+
+def parse_sentences(data: bytes, compressed: bool = True) -> dict[int, str]:
+    return parse_sentences_report(data, compressed)[0]
+
+
+def parse_links_report(data: bytes, compressed: bool = True) -> tuple[list[tuple[int, int]], ParseReport]:
+    """``sentence id <TAB> translation id`` lines, with the count of malformed lines."""
+    out: list[tuple[int, int]] = []
+    lines = _text_lines(data, compressed)
+    bad = 0
+    for line in lines:
+        parts = line.split("\t")
+        if len(parts) >= 2 and _is_id(parts[0]) and _is_id(parts[1]):
+            out.append((int(parts[0]), int(parts[1])))
+        else:
+            bad += 1
+    return out, ParseReport(len(lines), len(out), bad)
 
 
 def parse_links(data: bytes, compressed: bool = True) -> list[tuple[int, int]]:
-    """``sentence id <TAB> translation id`` lines. The column format is to be verified at download (section 14.1)."""
-    raw = bz2.decompress(data) if compressed else data
-    out: list[tuple[int, int]] = []
-    for line in raw.decode("utf-8").splitlines():
-        parts = line.split("\t")
-        if len(parts) >= 2 and parts[0].isdigit() and parts[1].isdigit():
-            out.append((int(parts[0]), int(parts[1])))
-    return out
+    """``sentence id <TAB> translation id`` lines. The column format is verified at download by ``check_link_resolution`` (section 14.1)."""
+    return parse_links_report(data, compressed)[0]
+
+
+def check_link_resolution(links: Sequence[tuple[int, int]], english: Mapping[int, str], target: Mapping[int, str], name: str, min_share: float = LINK_RESOLVE_MIN_SHARE) -> dict[str, Any]:
+    """The share of link rows whose first id is an English sentence and whose second id is in the target-language file, and the same for the swapped column order. Below ``min_share`` the work
+    stops (``LinkFormatError``): a swapped or wrong file would otherwise look like an insufficient corpus (audit minor 3)."""
+    n = len(links)
+    fwd = sum(1 for a, b in links if a in english and b in target)
+    swapped = sum(1 for a, b in links if b in english and a in target)
+    share = fwd / n if n else 0.0
+    rec = {"file": name, "rows": n, "resolved": fwd, "share_resolved": share, "swapped_resolved": swapped, "share_swapped": swapped / n if n else 0.0, "min_share": min_share, "ok": n > 0 and share >= min_share}
+    if not rec["ok"]:
+        raise LinkFormatError(f"{name}: {fwd} of {n} link rows resolve as (English id, {'target'} id), share {share:.3f}, below {min_share}; the swapped order resolves {swapped}")
+    return rec
 
 
 def link_symmetry(forward: Sequence[tuple[int, int]], backward: Sequence[tuple[int, int]]) -> dict[str, int]:
@@ -214,22 +272,36 @@ def build_partition(corpus: CorpusLike, mode: str, sizes: Sizes) -> Partition:
 
     all_keys = sorted(rep)
     train_keys = sorted({ne_of[e] for e in train_en})
-    eval_keys = sorted(k for k in all_keys if k in eval_strings)
+    eval_keys = sorted(k for k in all_keys if k in eval_strings and k in group_of_key and side[group_of_key[k]] == "eval")  # a group on the evaluation side, not a mere string match (audit minor 6)
     # candidate lists
     train_both = [k for k in train_keys if k in group_of_key and ok_len(k) and in_vocab(k) and all(k in refs[c] for c in core.TASKS) and side[group_of_key[k]] == "train"]
     used: set[int] = set()
     panels: dict[str, list[Item]] = {}
 
+    def group_reps(cands: list[str]) -> list[str]:
+        """One representative key per identity group among the candidates whose group is not yet used by a panel: the first key of the group in sorted order (reading: the audit allows 'one key per
+        group'; a deterministic representative adds no draw). A key without a group is its own group. Panels are drawn per identity group (ruling on A-M1)."""
+        seen: set[int] = set()
+        reps: list[str] = []
+        for k in cands:
+            gid = group_of_key.get(k, -1)
+            if gid in used or (gid >= 0 and gid in seen):
+                continue
+            if gid >= 0:
+                seen.add(gid)
+            reps.append(k)
+        return reps
+
     def draw_plain(cands: list[str], n: int) -> list[Item]:
-        avail = [k for k in cands if group_of_key.get(k, -1) not in used]
+        avail = group_reps(cands)
         order = torch.randperm(len(avail), generator=gen).tolist() if avail else []
         chosen = [avail[i] for i in order[:n]]
         items = [item(k) for k in chosen]
-        used.update(i.group for i in items)
+        used.update(i.group for i in items if i.group >= 0)
         return items
 
     def draw_stratified(cands: list[str], n: int, caps: Sequence[str]) -> list[Item]:
-        avail = [k for k in cands if group_of_key.get(k, -1) not in used]
+        avail = group_reps(cands)
         s1 = [k for k in avail if all(len(refs[c][k]) == 1 for c in caps)]
         s2 = [k for k in avail if k not in set(s1)]
         total = len(s1) + len(s2)
@@ -242,7 +314,7 @@ def build_partition(corpus: CorpusLike, mode: str, sizes: Sizes) -> Partition:
             order = torch.randperm(len(pool_), generator=gen).tolist() if pool_ else []
             chosen += [pool_[i] for i in order[:m]]
         items = [item(k) for k in chosen]
-        used.update(i.group for i in items)
+        used.update(i.group for i in items if i.group >= 0)
         return items
 
     q_all = draw_plain(train_both, sizes.panel_q_fit + sizes.panel_q_check)
@@ -310,6 +382,28 @@ def fixed_subsample(items: Sequence[Item], n: int, mode: str, name: str) -> list
     return [items[i] for i in order]
 
 
+def timing_indices(panel_sizes: Mapping[str, int], count: int, mode: str) -> dict[str, list[int]]:
+    """The items of the timing benchmark (listed seed 220908): ``count`` item indices of each panel, in the order given (E_A, then E_B), each a seeded permutation prefix kept in panel order. Drawn
+    once, in the data step, and stored with the data manifest (audit M8: the benchmark does not take the first items)."""
+    gen = core.partition_gen(mode, "timing_items", "timing benchmark items")
+    out: dict[str, list[int]] = {}
+    for name, n in panel_sizes.items():
+        out[name] = sorted(torch.randperm(n, generator=gen).tolist()[: min(count, n)]) if n else []
+    return out
+
+
+def tokenizer_record_sentences(pools: Mapping[str, Sequence[Item]], count: int, mode: str) -> dict[str, list[str]]:
+    """The fixed sentences of each teacher's tokenizer record (listed seed 220909; A, then B): ``count`` English sources of the capability's generation sources, a seeded permutation prefix
+    (reading: the ADR does not name the pool; the capability's own generation sources are used, the sentences its teacher will translate). Drawn once, in the data step."""
+    gen = core.partition_gen(mode, "tokenizer_record", "teacher tokenizer record sentences")
+    out: dict[str, list[str]] = {}
+    for c in core.TASKS:
+        pool = sorted(pools[c], key=lambda i: i.key)
+        order = torch.randperm(len(pool), generator=gen).tolist()[: min(count, len(pool))] if pool else []
+        out[c] = [pool[i].en for i in order]
+    return out
+
+
 # --- replicate training draws (section 5.2, 9) ----------------------------------------------------------------------------------------------------
 @dataclass(frozen=True)
 class TrainItem:
@@ -328,30 +422,52 @@ class Streams:
     half: int
 
 
+def source_unit(x: TrainItem | Item) -> str:
+    """The identity unit of a training source: its identity group if it has gold pairs, otherwise (a no-gold source) its contraction-expanded normalized string, so that "can't go" and "cannot go"
+    are one unit. T_A and T_B are disjoint in these units (ruling on A-M1 and reading 7 of audit C: the literal text of G1)."""
+    if x.group >= 0:
+        return f"g{x.group}"
+    return "x:" + expand_key(x.en)
+
+
+def _units(items: Sequence[TrainItem]) -> dict[str, list[str]]:
+    """unit -> its accepted keys (sorted), over one capability's accepted items."""
+    out: dict[str, list[str]] = defaultdict(list)
+    for x in sorted(items, key=lambda x: x.key):
+        out[source_unit(x)].append(x.key)
+    return dict(out)
+
+
 def sufficiency_after_filter(accepted: Mapping[str, Sequence[TrainItem]], gold_pool: Mapping[str, Sequence[Item]], s: Sizes) -> dict[str, Any]:
     """Each capability: its exclusive accepted sources plus its half of the shared ones >= 8,000 x 1.25, and 8,000 gold pairs outside Q, D_cal and D_con; otherwise DATA-INSUFFICIENT.
-    The half is the smaller one when the shared count is odd."""
-    ka = {x.key for x in accepted["A"]}
-    kb = {x.key for x in accepted["B"]}
-    shared = len(ka & kb)
+    Sources are counted per identity unit (``source_unit``): a unit accepted for both capabilities is shared and goes to one stream only; the half is the smaller one when the shared count is odd.
+    The available count is the lower bound that counts one source per shared unit assigned."""
+    ua, ub = _units(accepted["A"]), _units(accepted["B"])
+    shared_units = set(ua) & set(ub)
+    shared = len(shared_units)
     half = shared // 2
     need = math.ceil(s.accepted_per_replicate * s.sufficiency_factor)
-    avail = {"A": len(ka) - shared + half, "B": len(kb) - shared + half}
+    excl = {"A": sum(len(v) for u, v in ua.items() if u not in shared_units), "B": sum(len(v) for u, v in ub.items() if u not in shared_units)}
+    avail = {c: excl[c] + half for c in core.TASKS}
     reasons = [f"capability {c}: {avail[c]} available accepted sources, needs {need}" for c in core.TASKS if avail[c] < need]
     reasons += [f"capability {c}: {len(gold_pool[c])} gold pairs, needs {s.gold_per_replicate}" for c in core.TASKS if len(gold_pool[c]) < s.gold_per_replicate]
     return {"ok": not reasons, "reasons": reasons, "available": avail, "shared": shared, "half": half, "needed": need, "outcome": None if not reasons else "TRANSFER-INCONCLUSIVE: DATA-INSUFFICIENT"}
 
 
 def draw_streams(plan: core.SeedPlan, accepted: Mapping[str, Sequence[TrainItem]], gold_pool: Mapping[str, Sequence[Item]], s: Sizes) -> Streams:
-    """One replicate's draw. +1: the shared sources are split into two halves assigned to A and B (a seeded permutation), then A is drawn, then B; +5: gold A, then B (fresh generators)."""
+    """One replicate's draw. +1: the shared identity units are split into two halves assigned to A and B (a seeded permutation of the sorted units), then A is drawn, then B; +5: gold A, then B
+    (fresh generators). T_A and T_B are disjoint in identity units, hence in identity groups (ruling on A-M1)."""
     g1 = plan.gen(1, "training draw")
     by = {c: {x.key: x for x in sorted(accepted[c], key=lambda x: x.key)} for c in core.TASKS}
-    shared = sorted(set(by["A"]) & set(by["B"]))
+    units = {c: _units(accepted[c]) for c in core.TASKS}
+    shared = sorted(set(units["A"]) & set(units["B"]))
     half = len(shared) // 2
     perm = torch.randperm(len(shared), generator=g1).tolist() if shared else []
     to_a = {shared[i] for i in perm[:half]}
     to_b = {shared[i] for i in perm[half : 2 * half]}
-    avail = {"A": [by["A"][k] for k in sorted(by["A"]) if k not in set(shared) or k in to_a], "B": [by["B"][k] for k in sorted(by["B"]) if k not in set(shared) or k in to_b]}
+    shared_set = set(shared)
+    owner = {"A": to_a, "B": to_b}
+    avail = {c: [by[c][k] for k in sorted(by[c]) if source_unit(by[c][k]) not in shared_set or source_unit(by[c][k]) in owner[c]] for c in core.TASKS}
     t: dict[str, list[TrainItem]] = {}
     for c in core.TASKS:
         order = torch.randperm(len(avail[c]), generator=g1).tolist()[: s.accepted_per_replicate]
@@ -362,7 +478,7 @@ def draw_streams(plan: core.SeedPlan, accepted: Mapping[str, Sequence[TrainItem]
         pool = sorted(gold_pool[c], key=lambda x: x.key)
         order = torch.randperm(len(pool), generator=g5).tolist()[: s.gold_per_replicate]
         gold[c] = [TrainItem(pool[i].key, pool[i].en, pool[i].refs[c][0], pool[i].group) for i in order]  # reading: the first reference in sorted order
-    excl = {c: len(by[c]) - len(shared) for c in core.TASKS}
+    excl = {c: sum(len(v) for u, v in units[c].items() if u not in shared_set) for c in core.TASKS}
     return Streams(t, gold, len(shared), excl, half)
 
 
@@ -381,8 +497,8 @@ def replicate_overlap(streams: Sequence[Streams]) -> dict[str, float]:
 # --- gate G1 -----------------------------------------------------------------------------------------------------------------------------------
 def gate_g1(p: Partition, streams: Sequence[Streams], accepted_outputs: Mapping[str, Iterable[str]], eval_ref_norms: Iterable[str] | None = None, *, pool_level: bool = False) -> dict[str, Any]:
     """Gate G1 (partitions): every pair of panels is disjoint in identity groups; every training stream is disjoint from every evaluation panel in identity groups and in English; no normalized
-    reference or teacher output of any training stream equals a normalized reference of any evaluation panel; vocabulary closure holds. The pair of two training streams of one side is not
-    required to be group-disjoint (reading, reported): T_A and T_B are checked to be disjoint in English. The share of evaluation items with a training neighbour at word-level Levenshtein
+    reference or teacher output of any training stream equals a normalized reference of any evaluation panel; vocabulary closure holds. The pools of the two capabilities overlap by design,
+    so at the pool level T_A and T_B are not compared; within a replicate T_A and T_B are checked to be disjoint in English and in identity groups (ruling on A-M1). The share of evaluation items with a training neighbour at word-level Levenshtein
     distance 1 is reported."""
     problems: list[str] = []
     eval_names = ("E_A", "E_B", "E_C", "E_open")
@@ -408,8 +524,11 @@ def gate_g1(p: Partition, streams: Sequence[Streams], accepted_outputs: Mapping[
                     if normalize(x.target) in eval_refs:
                         problems.append(f"replicate {r} stream {stream_name}_{c} has a target equal to an evaluation reference")
                         break
-        if not pool_level and {x.key for x in s.t["A"]} & {x.key for x in s.t["B"]}:
-            problems.append(f"replicate {r}: T_A and T_B share English sources")
+        if not pool_level:
+            if {x.key for x in s.t["A"]} & {x.key for x in s.t["B"]}:
+                problems.append(f"replicate {r}: T_A and T_B share English sources")
+            if {source_unit(x) for x in s.t["A"]} & {source_unit(x) for x in s.t["B"]}:
+                problems.append(f"replicate {r}: T_A and T_B share identity groups")
     for c, outs in accepted_outputs.items():
         for o in outs:
             if normalize(o) in eval_refs:

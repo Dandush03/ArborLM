@@ -1,8 +1,13 @@
 # ADR-0022 revision 5, section 14.2: the packages of the one-off data-generation step, outside the lock. NOT INSTALLED, NOT FETCHED.
-# Status: the eight named packages below are approved by the human lead (ADR section 18); the human lead's confirmation with the sizes stated, transitive dependencies included, is PENDING, and
-# no wheel is fetched before it is recorded. This file lists the eight pins only. The full resolution (transitive dependencies, exact versions and hashes) is written here at fetch time and
-# is part of the freeze; that the set resolves with torch 2.8.0 on Python 3.12 has not been run.
-# Used only by: uv run --locked --with-requirements studies/p10s2/requirements-datagen.txt python -m studies.p10s2.datagen ...
+# Status: the eight named packages and their resolver dependencies are approved by the human lead's standing permission of 2026-11-15 (ADR section 18, addendum "the human lead's standing permission for
+# downloads": "you don't have to ask for permission to download if the overall is less than 30gb"), within the running total of docs/reviews/p10-design-2026-11-15/DOWNLOAD_LEDGER.md.
+# RESOLUTION WITH HASHES PENDING: this file lists the eight pins only. It has not been resolved: no transitive dependency and no hash is written yet, and that the set resolves with torch 2.8.0 on
+# Python 3.12 has not been run (no network was used to write it). Before the first install, resolve it once (for example
+#   uv pip compile --generate-hashes --python-version 3.12 <this file> -o <this file>
+# against the locked torch 2.8.0), review the result, record the total wheel bytes in the download ledger, commit it, and install with hashes required. ``datagen`` refuses to run while any pin
+# in this file carries no ``--hash=sha256:``. The resolution is part of the freeze.
+# Also needed, from the lock and not from this file: pyarrow (the ``pilot`` extra of uv.lock, which reads the local WikiText parquet files).
+# Used only by: uv run --locked --extra pilot --with-requirements studies/p10s2/requirements-datagen.txt python -m studies.p10s2.datagen ...
 # uv.lock and pyproject.toml are untouched.
 transformers==4.57.1
 tokenizers==0.22.1

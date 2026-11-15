@@ -8,7 +8,6 @@ substrings of the raw text; "a line ending in ':'" means a ':' immediately follo
 If either stratum has fewer than the wanted count on this grid, neither the grid nor the rule is changed: ``WindowsInsufficient`` is raised and the work returns to the lead before the freeze.
 """
 
-import bisect
 from collections.abc import Mapping, Sequence
 
 import torch
@@ -16,7 +15,7 @@ import torch
 from . import core
 from .evaluate import GeneralWindow
 from .text import normalize
-from .tokenization import ReferenceTokenizer
+from .tokenization import ReferenceTokenizer, last_token_before, word_letters_end
 
 
 class WindowsInsufficient(RuntimeError):
@@ -45,12 +44,11 @@ def cut_windows(tok: ReferenceTokenizer, text: str, vocab_index: Mapping[str, in
     pos = 0
     for raw in text.split():
         s = text.index(raw, pos)
-        e = s + len(raw)
-        pos = e
+        pos = s + len(raw)
         norm = normalize(raw)
         if norm in vocab_index:
-            k = bisect.bisect_left(starts, e) - 1
-            if k >= 0:
+            k = last_token_before(starts, word_letters_end(raw, s))  # the word's last subword, never a following punctuation token (audit C-M5)
+            if k is not None:
                 word_last.append((k, vocab_index[norm]))
     out: list[GeneralWindow] = []
     for w0 in range(0, len(ids) - window + 1, window):

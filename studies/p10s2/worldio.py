@@ -164,6 +164,7 @@ def build_world(b: DataBundle, mode: str, replicates: int, run: RunConfig) -> Wo
     return World(
         b.cfg, student, decoder, mode, replicates, b.sizes, run.layer, run.updates, run.batch, run.replay_rows, run.rows_per_stage, run.store_lr, run.lora_lr, run.rank_single, run.rank_joint, nv, bank, part,
         streams, ctx, d_con, d_cal, list(b.wiki_train_ids), run.router, seen, b.teacher_outputs, select_device(run.device), mode,
+        timing_items={k: list(v) for k, v in b.extra.get("timing_items", {}).items()},
     )  # fmt: skip
 
 

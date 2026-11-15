@@ -1,80 +1,74 @@
 # ruff: noqa: E501
-"""Fetch-and-verify of the approved downloads (ADR-0022 sections 14.1, 18). NOT RUN, and not called by any test.
+"""Fetch-and-verify of the approved downloads (ADR-0022 sections 14.1, 18 and the lead's rulings on the implementation audits). NOT RUN, and not called by any test with a real network.
 
-It refuses to run unless the explicit ``--i-have-recorded-human-approval`` flag and a manifest path are given (``fetch_guard.check_authorization``), validates the manifest against the approved set
-(``fetch_guard.validate_manifest``), and only then makes plain HTTPS requests with the standard library, each followed by a hash check: no account, no token, no Hub client. Files go to a git-ignored
-directory named by source and revision or download date. The total download is capped at 1.5 GB and the new disk use at 6 GB. The Tatoeba files are fetched in one session, and the symmetry of the link files
-is checked afterwards from the files (``data.link_symmetry``).
+It refuses to run unless the explicit ``--i-have-recorded-human-approval`` flag and a manifest path are given (``fetch_guard.check_authorization``), validates the manifest against the approved set and
+the hash constants in reviewed code (``fetch_guard.validate_manifest``: a missing or wrong digest is refused), and only then makes plain HTTPS requests with the standard library: TLS certificate and
+host verification on (a redirect to a non-HTTPS address is refused), no account, no token, no Hub client. Every downloaded file, small files included, is verified against its constant in reviewed code
+(git-blob SHA-1 for the small files, SHA-256 for the large ones) and deleted on a mismatch. Everything else, the ledger rows written before and after each file, the refusal to overwrite, the session
+cap and the destination rules, is in ``fetch_guard.fetch_session``, which takes the download function as an argument and is tested on synthetic files.
 
-The package wheels of the data-generation step are not fetched here: they wait for the human lead's confirmation with sizes (ADR-0022 section 14.2) and are installed with ``uv run --locked
---with-requirements studies/p10s2/requirements-datagen.txt`` once it is recorded.
+The destination is a fresh folder under the git-ignored ``data/`` (for example ``data/p10s2-downloads-<UTC date>/``); the seven Tatoeba files are fetched in one session. If the fallback is invoked,
+the manifest lists the fallback rows (5 and 6) only and names a committed record of the human lead's decision; it goes to a different fresh folder, so the frozen primary files are untouched.
 
-Status of this code: written, reviewed by self-check only, never executed.
+The package wheels of the data-generation step are not fetched here. They are resolved once with hashes (``uv pip compile --generate-hashes`` for Python 3.12 against torch 2.8.0), written to
+``studies/p10s2/requirements-datagen.txt``, recorded in the download ledger with their total size, and installed with hashes required (``datagen`` refuses a requirements file whose pins carry no hash).
+
+Status of this code: written, reviewed by self-check only, never executed against the network.
 """
 
 import argparse
 import json
 import sys
 from collections.abc import Sequence
-from datetime import UTC, datetime
 from pathlib import Path
 
 from . import fetch_guard as g
+from .core import ROOT
 from .output import emit_plain
 
 
-def _download(url: str, dest: Path, expected_size: int | None) -> None:  # pragma: no cover - the only function that touches the network
+def _download(url: str, dest: Path, limit: int) -> int:  # pragma: no cover - the only function that touches the network
+    """Fetch ``url`` into ``dest`` with certificate verification on and HTTPS-only redirects; refuse past ``limit`` bytes (a cumulative limit computed by the session). Returns the bytes written."""
     import urllib.request
 
+    class HttpsOnly(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[no-untyped-def]
+            if not newurl.lower().startswith("https://"):
+                raise g.FetchRefused(f"refused: redirect to a non-HTTPS address {newurl!r}")
+            return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+    opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=g.make_ssl_context()), HttpsOnly())
     req = urllib.request.Request(url, headers={"User-Agent": "p10s2-fetch"})  # noqa: S310
-    tmp = dest.with_suffix(dest.suffix + ".part")
-    with urllib.request.urlopen(req, timeout=120) as r, tmp.open("wb") as out:  # noqa: S310
-        n = 0
+    n = 0
+    with opener.open(req, timeout=120) as r, dest.open("xb") as out:  # "xb": an existing file is never overwritten
         while True:
             chunk = r.read(1 << 20)
             if not chunk:
                 break
             n += len(chunk)
-            if n > g.DOWNLOAD_CAP_BYTES:
-                raise g.FetchRefused("refused: the download exceeded the cap")
+            if n > limit:
+                raise g.FetchRefused(f"refused: {url} exceeded the byte limit of {limit}")
             out.write(chunk)
-    if expected_size is not None and tmp.stat().st_size != expected_size and "tatoeba" not in str(dest):
-        tmp.unlink()
-        raise g.FetchRefused(f"refused: {dest.name} has {n} bytes, expected {expected_size}")
-    tmp.rename(dest)
+    return n
 
 
 def run(manifest_path: Path, dest_dir: Path) -> dict[str, object]:  # pragma: no cover - network
     manifest = json.loads(manifest_path.read_text())
-    files = g.validate_manifest(manifest)
-    dest_dir.mkdir(parents=True, exist_ok=True)
-    record: dict[str, object] = {"started": datetime.now(UTC).isoformat(timespec="seconds"), "files": {}}
-    tatoeba: list[Path] = []
-    for f in files:
-        out = dest_dir / f["name"]
-        out.parent.mkdir(parents=True, exist_ok=True)
-        _download(f["url"], out, f.get("size"))
-        if f.get("sha256"):
-            g.verify_file(out, f["sha256"])
-        if f["kind"] in ("tatoeba", "fallback-data"):
-            tatoeba.append(out)
-        record["files"][f["name"]] = {"sha256": g.sha256_file(out), "bytes": out.stat().st_size}  # type: ignore[index]
-    record["tatoeba_recorded_at_first_download"] = g.record_tatoeba_digests(tatoeba)
-    record["finished"] = datetime.now(UTC).isoformat(timespec="seconds")
-    (dest_dir / "fetch_record.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n")
-    return record
+    return g.fetch_session(manifest, dest_dir, download=_download, ledger_path=ROOT / g.DOWNLOAD_LEDGER)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m studies.p10s2.fetch", description="Fetch and verify the approved downloads. Refuses without the explicit approval flag and a manifest.")
     p.add_argument(g.APPROVAL_FLAG, dest="approved", action="store_true")
     p.add_argument("--manifest", default=None)
-    p.add_argument("--dest", default=None, help="a git-ignored directory named by source and download date")
+    p.add_argument("--dest", default=None, help="a fresh folder under the git-ignored data/ directory, named by source and download date")
     a = p.parse_args(argv)
     try:
         g.check_authorization(bool(a.approved), Path(a.manifest) if a.manifest else None)
         if not a.dest:
             raise g.FetchRefused("refused: --dest is required")
+        if not g.is_git_ignored(Path(a.dest)):
+            raise g.FetchRefused(f"refused: {a.dest} is not git-ignored")
         run(Path(a.manifest), Path(a.dest))
     except g.FetchRefused as e:
         emit_plain(str(e), sys.stderr)
