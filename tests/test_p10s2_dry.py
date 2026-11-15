@@ -5,6 +5,7 @@ calibration, a pilot, a rehearsal or a registered stage, and no number is a resu
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -118,27 +119,67 @@ def test_a_stage_cap_stops_the_stage_and_the_label_is_incomplete(tmp_path: Path)
 
 
 # --- rehearsal and calibration plumbing (tiny; not a rehearsal or a calibration) --------------------------------------------------------------------------
-def test_rehearsal_measurements_feed_the_rate_rule(tmp_path: Path) -> None:
-    world, _ = dry_world()
-    bundle, _ = standins.build_synthetic_bundle(1)
-    write_bundle(bundle, tmp_path / "data")
-    ov = rehearsal.measure_task_overhead(tmp_path / "data")
-    assert ov["seconds"] > 0 and ov["peak_bytes"] > 0  # a fresh process: imports, hash-checked load, world build
-    rates, raw = rehearsal.measure_rates(world, 0, updates=2, full_updates=5, overhead=ov, timing_items=2)
-    assert raw["full_length"]["updates"] == 5.0 and set(raw["full_length"]) >= {"ST1", "MII", "LORA1", "peak_bytes"}  # the full-U store, M-ii and LoRA cells ran
+def _in_process_children(monkeypatch: pytest.MonkeyPatch, world: Any) -> None:
+    """The rehearsal's child processes run in this process on the stand-in world (the registered child builds its world from the real configuration, which the exercise ``studies.p10s2.e2e`` covers)."""
+    import contextlib
+    import io
+
+    monkeypatch.setattr(rehearsal, "_child_world", lambda data_dir, layer, lora_lr: world)
+
+    def child(args: list[str], repo: Any) -> dict[str, Any]:
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            assert rehearsal.main(args) == 0
+        return {**json.loads(buf.getvalue().strip().splitlines()[-1]), "wall_seconds": 0.5}
+
+    monkeypatch.setattr(rehearsal, "_run_child", child)
+
+
+def test_rehearsal_measures_the_registered_stage_functions_on_d_cal_and_feeds_the_rate_rule(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from test_p10s2_combined import poison_world
+
+    from studies.p10s2 import evaluate
+
+    clean, _ = dry_world()
+    world = poison_world(clean)  # a world whose evaluation panels (E_A, E_B, E_C, E_open) raise if anything reads their items: the rehearsal may count them, never score them
+    monkeypatch.setattr(core, "READ_LAYERS", (0, 1))  # the stand-in student has three blocks: the two rehearsed read layers are 0 and 1, the calibrated one is 1
+    _in_process_children(monkeypatch, world)
+    scored: set[str] = set()
+    real_score = evaluate.score_panel
+
+    def spy(ctx: Any, arm: Any, panel: Any, *a: Any, **k: Any) -> Any:
+        scored.add(panel.name)
+        return real_score(ctx, arm, panel, *a, **k)
+
+    monkeypatch.setattr(evaluate, "score_panel", spy)
+    monkeypatch.setattr(cells, "score_panel", spy)
+    ov =rehearsal.measure_task_overhead(tmp_path / "data", layer=world.layer, lora_lr=0.001)
+    assert ov["seconds"] > 0 and ov["peak_bytes"] > 0  # a fresh process: imports, hash-checked load, world build through the registered entry
+    rates, raw = rehearsal.measure_rates(world, 0, updates=2, full_updates=5, overhead=ov, gates2_seconds=1.5, scratch=tmp_path / "scratch", data_dir=tmp_path / "data")
+    assert not scored & {"E_A", "E_B", "E_C", "E_open"} and {"D_cal_A", "D_cal_B"} <= scored  # no evaluation panel is scored before the freeze (the lead's ruling A-M3): the rehearsal scores calibration items
+    assert raw["full_length"]["updates"] == 5.0 and set(raw["full_length"]) >= {"ST1", "MII", "LORA1", "peak_bytes"}  # the full-U store, M-ii (from an appended 2N store) and LoRA cells ran
     for g in ("ST1", "MAF", "MSEQ", "MAGOLD"):
-        assert raw["update_seconds"][f"{g}@L{world.layer}"] == raw["full_length"]["ST1"] != raw["short_run_update_seconds"][f"{g}@L{world.layer}"]  # the rate comes from the full-length run, not the short one
+        assert raw["update_seconds"][f"{g}@L{world.layer}"] == raw["full_length"]["ST1"]  # the rate comes from the full-length run, not the short one
     assert raw["update_seconds"][f"MII@L{world.layer}"] == raw["full_length"]["MII"] and raw["update_seconds"]["LORA1"] == raw["update_seconds"]["LSEQ"] == raw["full_length"]["LORA1"]
-    assert raw["update_seconds"]["ETABLE"] == raw["short_run_update_seconds"]["ETABLE"]  # the other cell types keep their 200-update (here 2-update) rates
-    assert set(raw) >= {"update_seconds", "panel_seconds", "replicate_extra_seconds", "fixed_seconds", "timing_seconds", "gates2_seconds"}
-    for group in ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "MAGOLD"):
-        assert f"{group}@L{world.layer}" in rates.update_seconds and rates.update_seconds[f"{group}@L{world.layer}"] > 0
-    for group in ("ETABLE", "LORA1", "LSEQ", "LJOINT"):
+    assert raw["update_seconds"]["ETABLE@L0"] == raw["short_run_update_seconds"]["ETABLE@L0"] > 0 and raw["update_seconds"]["ETABLE@L1"] > 0  # E-table is measured at both read layers
+    assert raw["other_layer_seconds"] > 0 and raw["gates2_seconds"] == 1.5 and raw["scale"] >= 1.0
+    comb = raw["probe"]["combined_check"]
+    assert all(comb[f"continuation_{k}"]["ok"] for k in ("store", "adapter", "lsep")) and comb["items"] == len(clean.partition.panels["D_cal"])  # the continuation check ran on calibration items
+    assert rates.combined_cell_seconds == comb["cell_seconds_at_panel_size"] > 0 and rates.combined_stage0_seconds == comb["stage0_seconds_at_panel_size"] > 0
+    for group in ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "MAGOLD", "ETABLE"):
+        for ly in (0, 1):
+            assert rates.update_seconds[f"{group}@L{ly}"] > 0, (group, ly)
+    for group in ("LORA1", "LSEQ", "LJOINT"):
         assert rates.update_seconds[group] > 0
-    assert rates.task_overhead_seconds == ov["seconds"] and rates.eval_peak_bytes >= rates.train_peak_bytes > 0 and rehearsal.peak_rss_bytes() > 0
+    probe = raw["probe"]
+    assert probe["eval_peak_bytes"] > 0 and probe["recompute_peak_bytes"] >= probe["eval_peak_bytes"] and probe["timing_seconds"] > 0 and probe["analysis_seconds"] > 0 and probe["report_seconds"] > 0
+    assert len(probe["synthetic_registry"]["injected"]) == 4 and "missing cell" in probe["synthetic_registry"]["injected"][0] and "non-finite" in probe["synthetic_registry"]["injected"][-1]  # the whole registry with a missing cell, a rejected consolidation, an inertia cell and a non-finite value
+    assert rates.task_overhead_seconds == ov["seconds"] and rates.train_device == "cpu" and rates.analysis_seconds == probe["analysis_seconds"] and rates.train_peak_bytes > 0
+    assert rates.recompute_peak_bytes == probe["recompute_peak_bytes"] and rehearsal.peak_rss_bytes() > 0  # the recomputation peak is measured in its own process, not copied from the evaluation
+    assert (tmp_path / "scratch" / "train-L1" / "synthetic-registry" / "evaluate" / "r3.json").exists() and (tmp_path / "scratch" / "train-L1" / "timing.json").exists()
     d = budget.rehearsal_rule(0.01, rates, 36.0)
     assert d.outcome == "rung 1" and d.replicates == 4 and d.projections["n4-U2000"] > d.projections["n3-U2000"]  # a tiny world fits any cap
-    huge = budget.rehearsal_rule(0.01, budget.Rates({**rates.update_seconds, **{k: v * 1e7 for k, v in rates.update_seconds.items()}}, rates.calibrated_layer, 1e5, 1e5, 1e5, 1e5, 1e5, 1e3), 36.0)
+    huge = budget.rehearsal_rule(0.01, budget.Rates({k: v * 1e7 for k, v in rates.update_seconds.items()}, rates.calibrated_layer, 1e5, 1e5, 1e5, 1e5, 1e5, 1e3), 36.0)
     assert huge.outcome == "NOT STARTED: BUDGET"
     cap = budget.stage_caps(rates)
     assert budget.cap_for(cap, "train", 4, 2000) > budget.training_seconds(4, 2000, rates, slower=False)

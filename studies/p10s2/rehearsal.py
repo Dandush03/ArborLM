@@ -1,83 +1,110 @@
 # ruff: noqa: E501
-"""Rehearsal measurements (ADR-0022 section 13.3, "Rehearsal content"): the rates the rung rule reads. The measuring functions here are generic over a ``World``; the rehearsal itself is not run in this
-implementation step (only a tiny test on synthetic stand-ins and test seeds checks the plumbing from timed phases to ``budget.Rates`` and to the rule).
+"""Rehearsal measurements (ADR-0022 section 13.3, "Rehearsal content"): the rates the rung rule reads. The rehearsal measures what the registered stages do, by running the registered stage functions
+themselves (revision after audit B, M5, and the lead's ruling A-M3 of 2026-11-15):
 
-Rehearsal content, at full size on rehearsal seeds: every cell type for 200 updates; one store cell, one M-ii cell and one LoRA cell for the full U; 200 updates of each store-type cell type at the read layer
-that calibration did not select (for the rule's rates); one scoring of each kind; the truncation percentile of section 5.4; the gates stage; analysis and report on synthetic records of the whole registry
-including missing cells, rejected consolidations, inertia cells and non-finite values. Peak memory is the process's maximum resident set after each phase (monotone, so a later phase's peak is an upper bound
-of an earlier one's: conservative); the whole-task peak and the per-process start-up are measured in a fresh child process.
+* training: ``stages.stage_train`` for all 18 cells of a rehearsal replicate at the short number of updates (200), at the calibrated read layer and at the other one (E-table included), on the frozen
+  training device; one store cell, one M-ii cell (from an appended 2N store, as registered) and one LoRA cell for the full U;
+* scoring: ``stages.stage_evaluate`` (Stage 0, the 18 cells, the assembled arms, retrieval, the three routers, the ensemble), ``stages.stage_timing`` at the registered item count and repetitions, and
+  ``stages.stage_recompute``, in a FRESH child process on CPU (so the evaluation and recomputation peaks are those of their own process); all of it on the rehearsal world, which scores calibration items
+  (D_cal) and never an evaluation panel, and the times are scaled by the registered item counts (``scale_factor``);
+* the analysis and report stages on synthetic records of the whole registry (four replicates, with a missing cell, a rejected consolidation, an inertia cell and a non-finite value), in the same child;
+* the second gates stage at real size comes from the separate pre-freeze gates stage on rehearsal seeds (``time_prefreeze_gates``), whose scaled time is ``gates2_seconds``;
+* memory: the peak is the larger of the process's resident set and the MPS driver's allocation, sampled (``train.process_memory_bytes``); the training peak is sampled after every training phase, the
+  evaluation and recomputation peaks come from the child, the whole-task peak from a start-up child.
+
+Nothing here is run in this implementation step except on synthetic stand-ins and test seeds. No number is a result.
 """
 
+import contextlib
 import dataclasses
-import resource
+import io
+import json
 import subprocess
 import sys
 import time
+from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
+
+from arborlm.io import read_json, write_json
 
 from . import budget, cells, core, evaluate, gates
 from . import combined as combined_mod
 from .combined import Sentence, combined_set
-from .memory import MemoryArm, NullArm, SparseStore, TableArm, new_lora_arm
-from .train import train_arm
-from .world import World
+from .memory import MemoryArm, NullArm, SparseStore, new_lora_arm
+from .registry import replicate_cells
+from .train import process_memory_bytes, train_arm
+from .world import World, load_arm
+
+ANALYSIS_REPLICATES = 4  # the synthetic registry of the rehearsal is the whole registry (four replicates, the largest rung)
+
+
+class RehearsalFailed(RuntimeError):
+    """A rehearsal cell or probe failed: the rates cannot be measured and the work stops before the freeze (a device error is reported to the lead; nothing is silently moved to another device)."""
 
 
 def peak_rss_bytes() -> int:
-    r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    return int(r if sys.platform == "darwin" else r * 1024)
+    return int(process_memory_bytes()["rss_peak"])
 
 
-def measure_update_rates(world: World, replicate: int, updates: int) -> dict[str, float]:
-    """Seconds per update for every cell type, store-type cells at both read layers (the rate the rule needs for U = 1,000), measured on ``updates`` updates."""
-    plan = world.plan(replicate)
+def timed(fn: Callable[[], Any]) -> float:
+    t0 = time.perf_counter()
+    fn()
+    return time.perf_counter() - t0
+
+
+def scale_factor(world: World) -> float:
+    """The registered scoring work over the rehearsal's: (items of E_A and E_B) / (items of D_cal for both capabilities), at least 1 (a smaller registered panel is not scaled down: the rule counts the
+    larger). Scoring time is proportional to the items scored, so the rehearsal's seconds on D_cal items are multiplied by this factor (a projection from item counts, not a measurement of E)."""
+    reg = sum(len(world.ctx.panels[n].examples) for n in ("E_A", "E_B"))
+    cal = sum(len(world.d_cal[c].examples) for c in core.TASKS)
+    return max(1.0, reg / max(1, cal))
+
+
+def rate_key(group: str, layer: int) -> str:
+    return f"{group}@L{layer}" if group in budget.STORE_TYPE_GROUPS else group
+
+
+def rates_from_records(records: Mapping[str, Mapping[str, Any]], layer: int) -> dict[str, float]:
+    """Seconds per update of each cell group from the training records of a rehearsal replicate (the slowest variant of a group counts). A cell that did not complete stops the rehearsal."""
+    bad = [f"{lab}: {r['train'][0].get('error') if r.get('train') else r['status']}" for lab, r in records.items() if r["status"] != "completed"]
+    if bad:
+        raise RehearsalFailed("rehearsal cells did not complete: " + "; ".join(bad[:4]))
     out: dict[str, float] = {}
-    ex_a = world.train_examples(replicate, "A")
-    ex_b = world.train_examples(replicate, "B")
-
-    def timed(arm: Any, examples: Any, **kw: Any) -> float:
-        rec = train_arm(world.student, arm, examples, updates, world.batch, world.store_lr, plan.gen(2, "batch order (rehearsal)"), world.marker_index, device=world.device, **kw)
-        return float(rec.seconds_per_update)
-
-    for ly in core.READ_LAYERS if world.layer in core.READ_LAYERS else (world.layer,):
-        w = dataclasses.replace(world, layer=ly)
-        codes = w.codes(replicate)
-
-        def store(rows: int, w: Any = w, codes: Any = codes) -> MemoryArm:
-            return MemoryArm(SparseStore.new(w.cfg.width, rows, plan.gen(0, "stage-1 store (rehearsal)")), w.layer, codes)
-
-        out[f"ST1@L{ly}"] = timed(store(w.rows_per_stage), ex_a)
-        out[f"MAF@L{ly}"] = out[f"ST1@L{ly}"]
-        out[f"MSEQ@L{ly}"] = out[f"ST1@L{ly}"]
-        out[f"MAGOLD@L{ly}"] = out[f"ST1@L{ly}"]
-        out[f"MJOINT@L{ly}"] = timed(store(2 * w.rows_per_stage), [*ex_a, *ex_b])
-        mii = store(w.rows_per_stage)
-        out[f"MII@L{ly}"] = timed(mii, ex_b, replay=ex_a, replay_rows=w.replay_rows, replay_generator=plan.gen(2, "M-ii replayed rows order (rehearsal)"))
-    out["ETABLE"] = timed(TableArm("A", world.cfg.width, world.vocabulary, world.layer, plan.gen(9, "E-table initialization (rehearsal)")), ex_a)
-    out["LORA1"] = timed(new_lora_arm(world.cfg, world.rank_single, plan.gen(8, "LoRA initialization (rehearsal)")), ex_a)
-    out["LSEQ"] = out["LORA1"]
-    out["LJOINT"] = timed(new_lora_arm(world.cfg, world.rank_joint, plan.gen(8, "LoRA initialization (rehearsal, L-joint)")), [*ex_a, *ex_b])
+    for lab, r in records.items():
+        group = lab.split("/")[1]
+        k = rate_key(group, layer)
+        out[k] = max(out.get(k, 0.0), float(r["train"][0]["seconds_per_update"]))
     return out
 
 
 def measure_full_length(world: World, replicate: int, full_updates: int) -> dict[str, float]:
-    """The ADR's rehearsal content: one store cell, one M-ii cell and one LoRA cell for the full U, at the calibrated read layer and learning rates. Their per-update rates (and the peak after them)
-    replace the short-run rates of the same cell types at the calibrated layer; rates must not come only from short runs."""
+    """The ADR's rehearsal content: one store cell, one M-ii cell and one LoRA cell for the full U, at the calibrated read layer and learning rates, each in its registered configuration (M-ii continues an
+    appended 2N-row store, as registered). Their per-update rates (and the peak after them) replace the short-run rates of the same cell types at the calibrated layer."""
     plan = world.plan(replicate)
     ex_a, ex_b = world.train_examples(replicate, "A"), world.train_examples(replicate, "B")
     codes = world.codes(replicate)
 
     def run(arm: Any, examples: Any, lr: float, **kw: Any) -> float:
         rec = train_arm(world.student, arm, examples, full_updates, world.batch, lr, plan.gen(2, "batch order (full-length rehearsal)"), world.marker_index, device=world.device, **kw)
+        if rec.status != "completed":
+            raise RehearsalFailed(f"the full-length rehearsal cell failed: {rec.error}")
         return float(rec.seconds_per_update)
 
     st = MemoryArm(SparseStore.new(world.cfg.width, world.rows_per_stage, plan.gen(0, "stage-1 store (full-length rehearsal)")), world.layer, codes)
     out = {"ST1": run(st, ex_a, world.store_lr)}
-    mii = MemoryArm(SparseStore.new(world.cfg.width, world.rows_per_stage, plan.gen(0, "stage-1 store (full-length rehearsal)")), world.layer, codes)
+    peak = process_memory_bytes()["max"]
+    maf = st.store.clone()
+    maf.append_stage(world.rows_per_stage, plan.gen(6, "stage-2 appended rows (full-length rehearsal)"))
+    maf.freeze_stage(0)
+    maf.set_trainable([1])
+    mii_store = maf.clone()
+    mii_store.set_trainable([0, 1])
+    mii = MemoryArm(mii_store, world.layer, codes)
     out["MII"] = run(mii, ex_b, world.store_lr, replay=ex_a, replay_rows=world.replay_rows, replay_generator=plan.gen(2, "M-ii replayed rows order (full-length rehearsal)"))
+    peak = max(peak, process_memory_bytes()["max"])
     out["LORA1"] = run(new_lora_arm(world.cfg, world.rank_single, plan.gen(8, "LoRA initialization (full-length rehearsal)")), ex_a, world.lora_lr)
-    out["peak_bytes"] = float(peak_rss_bytes())
+    out["peak_bytes"] = float(max(peak, process_memory_bytes()["max"]))
     out["updates"] = float(full_updates)
     return out
 
@@ -85,7 +112,8 @@ def measure_full_length(world: World, replicate: int, full_updates: int) -> dict
 def rehearsal_world(world: World) -> World:
     """The world as the rehearsal scores it: the single-task panels, the combined set and the teacher outputs are D_cal (the rehearsal's own scoring set), the replacement keeping every name the scoring
     code reads. E_A, E_B, E_C and E_open are not touched. Combined scorings reuse the first items of that set (item i paired with i + 1 mod m in stored order, the same alternation, no seed); an answer
-    whose source has no reference in that language is generated and timed and not scored. Rehearsal combined scores are timing records, not results."""
+    whose source has no reference in that language is generated and timed and not scored. Rehearsal combined scores are timing records, not results. (The lead's ruling A-M3: no evaluation panel is scored
+    and no gap on one is computed before the freeze.)"""
     cap = len(world.d_cal["A"].examples)
     n_sub = min(len(world.ctx.subsample["E_A"]), cap)  # the same size of subsample, taken from the first D_cal items
     panels = {"E_A": world.d_cal["A"], "E_B": world.d_cal["B"]}
@@ -99,8 +127,8 @@ def rehearsal_world(world: World) -> World:
 
 
 def measure_combined(rw: World, replicate: int, store_arm: MemoryArm, items_for_check: int = 20) -> dict[str, Any]:
-    """One combined scoring of each kind of arm on the rehearsal set (a store arm, a one-adapter arm, L-sep), timed, and the check of the addendum (section 11 item 9): cache continuation against full
-    recomputation of the step-2 input on up to 20 items, identical tokens. A difference is a G4-class defect and stops the work before the freeze."""
+    """The check of the addendum (section 11 item 9): cache continuation against full recomputation of the step-2 input on up to 20 items, identical tokens, for a store arm, a one-adapter arm and L-sep. A
+    difference is a G4-class defect and stops the work before the freeze. Times on the rehearsal set are recorded; the rates take the combined scoring from the stage functions themselves."""
     from .cells import AdapterRouteArm  # local: cells imports this module's neighbours
 
     ctx = rw.ctx
@@ -112,7 +140,7 @@ def measure_combined(rw: World, replicate: int, store_arm: MemoryArm, items_for_
     out: dict[str, Any] = {"items": len(cs.sentences)}
     times: dict[str, float] = {}
     for name, arm in (("store", store_arm), ("adapter", lora), ("lsep", lsep)):
-        times[name] = timed(lambda arm=arm: combined_mod.score_combined_cell(ctx, arm, cs))
+        times[name] = timed(lambda arm=arm: combined_mod.score_combined_cell(ctx, arm, cs))  # type: ignore[misc]
         chk = combined_mod.check_continuation(ctx, arm, cs, items_for_check)
         out[f"continuation_{name}"] = chk
         if not chk["ok"]:
@@ -125,71 +153,176 @@ def measure_combined(rw: World, replicate: int, store_arm: MemoryArm, items_for_
     return out
 
 
-def measure_task_overhead(data_dir: Path, repo: Path | None = None) -> dict[str, float]:
-    """Per-process start-up: the wall seconds of a fresh child process that imports the package, reads the frozen bundle (hash-checked) and builds the world, and the child's peak RSS (the whole-task peak)."""
+# --- the child process ---------------------------------------------------------------------------------------------------------------------------
+def _child_world(data_dir: Path, layer: int, lora_lr: float) -> World:
+    """The world of a fresh child: the REAL registered entry (``build_world`` with ``RunConfig.registered`` on rehearsal seeds, scoring device CPU), never a test-mode stand-in path (audit B m2)."""
+    from .worldio import RunConfig, build_world, read_bundle
+
+    return build_world(read_bundle(data_dir), "rehearsal", 1, RunConfig.registered(layer, 1, float(core.CFG["training"]["store_learning_rate"]), lora_lr, "cpu"))
+
+
+def _startup(data_dir: Path, layer: int, lora_lr: float) -> dict[str, Any]:
     t0 = time.perf_counter()
-    subprocess.run([sys.executable, "-m", "studies.p10s2.rehearsal", "startup", "--data-dir", str(data_dir)], cwd=repo or core.ROOT, check=True, capture_output=True)  # noqa: S603
+    _child_world(data_dir, layer, lora_lr)
+    return {"seconds_in_child": time.perf_counter() - t0, "peak_bytes": process_memory_bytes()["max"]}
+
+
+def synthetic_registry_run(src: Path, dst: Path, updates: int, replicates: int = ANALYSIS_REPLICATES) -> dict[str, Any]:
+    """Synthetic records of the whole registry (four replicates of 18 cells) built by copying the one scored rehearsal replicate under each replicate's labels, with a missing cell, a rejected consolidation,
+    an inertia cell and a non-finite value injected. They exist to run the analysis and report stages at registry size; the study they describe is synthetic and its label is not a result."""
+    base_text = (src / "r0.json").read_text()
+    dst.mkdir(parents=True, exist_ok=True)
+    for sub in ("evaluate", "recompute"):
+        (dst / sub).mkdir(exist_ok=True)
+    injected: list[str] = []
+    for r in range(replicates):
+        rep = json.loads(base_text.replace('"r0/', f'"r{r}/'))
+        labs = {c.group + "/" + c.variant: f"r{r}/{c.group}/{c.variant}" for c in replicate_cells(r)}
+        if r == 1 and replicates > 1:
+            rep["cells"].pop(labs["MAF/AB"], None)
+            injected.append(f"r{r}: a missing cell ({labs['MAF/AB']})")
+        if r == 2 and replicates > 2:
+            cons = rep["cells"].get(labs["MII/AB"], {}).get("extras", {}).get("consolidation")
+            if cons is not None:
+                cons.update(rejected=True, published=False)
+                injected.append(f"r{r}: a rejected consolidation ({labs['MII/AB']})")
+            cons = rep["cells"].get(labs["MII/BA"], {}).get("extras", {}).get("consolidation")
+            if cons is not None:
+                cons.update(below_floor=True)
+                injected.append(f"r{r}: an inertia cell ({labs['MII/BA']})")
+        if r == 3 and replicates > 3:
+            sc = rep["cells"].get(labs["MAF/BA"], {}).get("scores", {}).get(labs["MAF/BA"], {}).get("panels", {}).get("E_A")
+            if sc is not None:
+                sc["mean"] = "nan"
+                injected.append(f"r{r}: a non-finite value ({labs['MAF/BA']} E_A mean)")
+        for sub in ("evaluate", "recompute"):
+            write_json(dst / sub / f"r{r}.json", rep)
+    base = json.loads((src / "baseline.json").read_text())
+    for sub in ("evaluate", "recompute"):
+        write_json(dst / sub / "baseline.json", base)
+        write_json(dst / sub / "stopped.json", [])
+    (dst / "train").mkdir(exist_ok=True)
+    write_json(dst / "train" / "stopped.json", [])
+    write_json(dst / "gates.json", {**{f"G{i}": {"ok": True} for i in range(1, 10)}, "ok": True, "replicate_overlap": {}})
+    return {"injected": injected, "design": {"replicates": replicates, "updates": updates, "synthetic": True}, "prefreeze": {"teacher_only": True, "stop": None}}
+
+
+def _probe(data_dir: Path, scratch: Path, layer: int, lora_lr: float, updates: int) -> dict[str, Any]:
+    """The scoring half of the rehearsal in a fresh process on CPU, on the rehearsal world (D_cal in place of every evaluation panel): the registered evaluate, timing and recompute stage functions on the
+    snapshots the parent trained, the combined continuation check, and the analysis and report stages on synthetic records of the whole registry. Returns seconds on D_cal items (the parent scales them)."""
+    from . import stages
+
+    t0 = time.perf_counter()
+    world = _child_world(data_dir, layer, lora_lr)
+    rw = rehearsal_world(world)
+    out: dict[str, Any] = {"startup_world_seconds": time.perf_counter() - t0, "start_peak_bytes": process_memory_bytes()["max"]}
+    arm = load_arm(rw, 0, scratch / "snapshots", "r0/ST1/AB")
+    out["panel_seconds"] = timed(lambda: [evaluate.score_panel(rw.ctx, arm, p) for p in rw.ctx.panels.values()])
+    out["baseline_seconds"] = timed(lambda: cells.stage0_scores(rw))
+    out["evaluate_total_seconds"] = timed(lambda: stages.stage_evaluate(rw, scratch))
+    out["eval_peak_bytes"] = process_memory_bytes()["max"]
+    out["timing_seconds"] = timed(lambda: stages.stage_timing(rw, scratch))
+    out["recompute_seconds"] = timed(lambda: stages.stage_recompute(rw, scratch))
+    out["recompute_peak_bytes"] = process_memory_bytes()["max"]
+    assert isinstance(arm, MemoryArm)
+    out["combined_check"] = measure_combined(rw, 0, arm)
+    synth = scratch / "synthetic-registry"
+    meta = synthetic_registry_run(scratch / "evaluate", synth, updates)
+    with contextlib.redirect_stdout(io.StringIO()):
+        out["analysis_seconds"] = timed(lambda: stages.stage_analysis(synth, meta["design"], meta["prefreeze"]))
+        out["report_seconds"] = timed(lambda: stages.stage_report(synth))
+    out["synthetic_registry"] = {"injected": meta["injected"], "note": "synthetic records of the whole registry: a mechanics and timing check; the label printed is not a result"}
+    out["probe_peak_bytes"] = process_memory_bytes()["max"]
+    return out
+
+
+def _run_child(args: list[str], repo: Path | None) -> dict[str, Any]:
+    t0 = time.perf_counter()
+    p = subprocess.run([sys.executable, "-m", "studies.p10s2.rehearsal", *args], cwd=repo or core.ROOT, check=False, capture_output=True, text=True)  # noqa: S603
     wall = time.perf_counter() - t0
-    r = resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss
-    return {"seconds": wall, "peak_bytes": float(r if sys.platform == "darwin" else r * 1024)}
+    if p.returncode != 0:
+        raise RehearsalFailed(f"the rehearsal child {args[0]} failed (exit {p.returncode}):\n{p.stderr[-2000:]}")
+    last = [ln for ln in p.stdout.splitlines() if ln.startswith("{")][-1]
+    return {**json.loads(last), "wall_seconds": wall}
 
 
-def measure_rates(world: World, replicate: int, *, updates: int, full_updates: int, overhead: dict[str, float], timing_items: int = 3) -> tuple[budget.Rates, dict[str, Any]]:
-    """The rates of section 13.3: ``updates`` (200) updates of every cell type at both read layers, the full-U cells of ``measure_full_length`` for the calibrated layer, and one scoring of each kind. Returns
-    the rates and the raw measurements."""
-    ctx = world.ctx
-    ctx.seed_plan = world.plan(replicate)
-    rec: dict[str, Any] = {}
+def measure_task_overhead(data_dir: Path, repo: Path | None = None, *, layer: int | None = None, lora_lr: float | None = None) -> dict[str, float]:
+    """Per-process start-up: the wall seconds of a fresh child process that imports the package, reads the frozen bundle (hash-checked) and builds the world through the registered entry on rehearsal seeds,
+    and the child's own peak (the whole-task peak). The child reports its own peak (the parent's children-peak would be a maximum over every child ever run)."""
+    ly = layer if layer is not None else core.READ_LAYERS[0]
+    lr = lora_lr if lora_lr is not None else float(core.CFG["training"]["lora_learning_rates"][0])
+    r = _run_child(["startup", "--data-dir", str(data_dir), "--layer", str(ly), "--lora-lr", str(lr)], repo)
+    return {"seconds": float(r["wall_seconds"]), "peak_bytes": float(r["peak_bytes"])}
+
+
+def time_prefreeze_gates(world: World, run_dir: Path, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]], root: Path, *, updates: int | None = None, require_mps: bool = True) -> dict[str, Any]:
+    """The pre-freeze gates stage at real size on rehearsal seeds, on the rehearsal world (no evaluation panel scored, no gap on one computed). Its wall time scaled by the registered item counts is the
+    second gates stage's time in R: the scoring-bearing parts (G2's two Stage 0 scorings and the three panel scorings of G4) are multiplied by ``scale_factor``, the rest (20-update runs, hash checks) is not."""
+    rw = rehearsal_world(world)
+    plan = core.SeedPlan("rehearsal", 0)
+    s = scale_factor(world)
     t0 = time.perf_counter()
-    rates_u = measure_update_rates(world, replicate, updates)
-    rec["short_run_update_seconds"] = dict(rates_u)
+    out = gates.run_gates(rw, plan, g1=g1, g3=g3, equivalence_record=equivalence_record, file_manifest=file_manifest, root=root, updates=updates, require_mps=require_mps)
+    total = time.perf_counter() - t0
+    first = next(iter(rw.ctx.panels.values()))
+    t_g2 = timed(lambda: gates.g2(rw))
+    t_panel = timed(lambda: evaluate.score_panel(rw.ctx, NullArm(), first, route="none"))
+    scaled = total + (s - 1.0) * (t_g2 + 3.0 * t_panel)
+    return {"gates": out, "ok": bool(out["ok"]), "seconds_measured": total, "scale": s, "seconds_scaled_to_registered_panels": scaled, "scaled_parts": {"g2_seconds": t_g2, "g4_panel_scorings_seconds": 3.0 * t_panel}, "method": "wall seconds of the gates stage on D_cal items; G2's two Stage 0 scorings and G4's three panel scorings multiplied by (registered items) / (D_cal items); the rest unscaled", "type": "measured on rehearsal seeds and D_cal items, scaled by item counts (a projection, not a measurement of E)"}
+
+
+def measure_rates(world: World, replicate: int, *, updates: int, full_updates: int, overhead: dict[str, float], gates2_seconds: float, scratch: Path, data_dir: Path, repo: Path | None = None, device_reason: str = "") -> tuple[budget.Rates, dict[str, Any]]:
+    """The rates of section 13.3, measured by the registered stage functions (see the module docstring). ``world`` is a rehearsal-mode world on the frozen training device at the calibrated layer;
+    ``scratch`` receives the rehearsal's snapshots and records; ``gates2_seconds`` is the scaled time of the pre-freeze gates stage."""
+    from . import stages
+
+    t_all = time.perf_counter()
+    rec: dict[str, Any] = {"device": str(world.device), "calibrated_layer": world.layer}
+    layers = [world.layer, *[ly for ly in core.READ_LAYERS if ly != world.layer]] if world.layer in core.READ_LAYERS else [world.layer]
+    short: dict[str, float] = {}
+    train_peak = 0
+    phase_seconds: dict[str, float] = {}
+    for ly in layers:
+        w = dataclasses.replace(world, layer=ly, updates=updates)
+        d = scratch / f"train-L{ly}"
+        phase_seconds[f"train_all_cells_L{ly}"] = timed(lambda w=w, d=d: stages.stage_train(w, d))  # type: ignore[misc]
+        short.update(rates_from_records(read_json(d / "train" / f"r{replicate}.json"), ly))
+        train_peak = max(train_peak, int(process_memory_bytes()["max"]))
+    rec["short_run_update_seconds"] = dict(short)
+    rec["other_layer_seconds"] = float(sum(v for k, v in phase_seconds.items() if not k.endswith(f"L{world.layer}")))
     full = measure_full_length(world, replicate, full_updates)
     rec["full_length"] = full
+    train_peak = max(train_peak, int(full["peak_bytes"]))
+    rates_u = dict(short)
     ly = world.layer
     for g in ("ST1", "MAF", "MSEQ", "MAGOLD"):
         rates_u[f"{g}@L{ly}"] = full["ST1"]  # the same cell type as the full-length store cell
     rates_u[f"MII@L{ly}"] = full["MII"]
     rates_u["LORA1"] = rates_u["LSEQ"] = full["LORA1"]
     rec["update_seconds"] = rates_u
-    train_peak = max(peak_rss_bytes(), int(full["peak_bytes"]))
-    # one training of each kind for scoring
-    plan = world.plan(replicate)
-    arm = MemoryArm(SparseStore.new(world.cfg.width, world.rows_per_stage, plan.gen(0, "stage-1 store (rehearsal)")), world.layer, world.codes(replicate))
-    train_arm(world.student, arm, world.train_examples(replicate, "A"), updates, world.batch, world.store_lr, plan.gen(2, "batch order (rehearsal)"), world.marker_index, device=world.device)
-    t1 = time.perf_counter()
-    rw = rehearsal_world(world)  # every scoring below is on D_cal, never on E_A, E_B, E_C or any registered panel (the lead's ruling)
-    ctx = rw.ctx
-    ctx.seed_plan = world.plan(replicate)
-    panel_seconds = timed(lambda: [evaluate.score_panel(ctx, arm, p) for p in ctx.panels.values()])
-    routers = cells.build_routers(rw, replicate)
-    extra = timed(lambda: (cells.score_snapshot(rw, replicate, arm, router=routers[("A",)][0], ablation_stages=[0], ablation_tasks=core.TASKS, gen=True, learned_route=True, combined=False, seen=True), cells.retrieval_scores(rw, replicate)))
-    fixed = timed(lambda: cells.stage0_scores_without_combined(rw))
-    comb = measure_combined(rw, replicate, arm)
-    rec["combined"] = comb
-    timing = timed(lambda: evaluate.timing_benchmark(lambda: evaluate.score_panel(ctx, arm, next(iter(ctx.panels.values())), indices=list(range(timing_items))), 1))
-    eval_peak = peak_rss_bytes()
-    plan0 = core.SeedPlan(world.mode, replicate)
-    gates_seconds = timed(lambda: (gates.g4(rw, plan0, 2), gates.g5(rw, plan0)))
-    rec.update({"panel_seconds": panel_seconds, "replicate_extra_seconds": extra, "fixed_seconds": fixed, "timing_seconds": timing, "gates2_seconds": gates_seconds, "wall_seconds_total": time.perf_counter() - t0, "scoring_started_after": t1 - t0})
-    # the 18 scorings include one panel scoring each; the extras measured above are for one memory cell: scale to the cells that carry them (reading: the ADR lists the extras per replicate)
+    s = scale_factor(world)
+    probe = _run_child(["probe", "--data-dir", str(data_dir), "--scratch", str(scratch / f"train-L{ly}"), "--layer", str(ly), "--lora-lr", str(world.lora_lr), "--updates", str(updates)], repo)
+    rec["probe"] = probe
+    rec["scale"] = s
+    panel = float(probe["panel_seconds"]) * s
+    comb = probe["combined_check"]
+    combined_cell, combined_stage0 = float(comb["cell_seconds_at_panel_size"]), float(comb["stage0_seconds_at_panel_size"])  # the combined scoring at the size of E_C (addendum section 10), counted on its own line
+    base = max(0.0, float(probe["baseline_seconds"]) * s - combined_stage0)  # Stage 0 and the teacher scores, without the combined Stage 0 counted separately
+    rep_total = max(0.0, (float(probe["evaluate_total_seconds"]) - float(probe["baseline_seconds"])) * s)
+    extra = max(0.0, rep_total - 18 * panel - budget.COMBINED_CELLS * combined_cell)  # the replicate's whole scoring as measured, less the 18 panel scorings and the combined scorings the rate model counts separately
+    timing_items = int(core.CFG["budget"]["timing_items"])
+    cal_items = min(len(world.d_cal[c].examples) for c in core.TASKS)
+    t_scale = max(1.0, timing_items / max(1, min(cal_items, timing_items)))  # the timing benchmark scores min(200, items) items per panel in the probe; scaled to the registered count if the probe had fewer
+    timing = float(probe["timing_seconds"]) * t_scale
+    rec.update({"panel_seconds": panel, "replicate_extra_seconds": extra, "fixed_seconds": base, "timing_seconds": timing, "gates2_seconds": gates2_seconds, "phase_seconds": phase_seconds, "wall_seconds_total": time.perf_counter() - t_all,
+                "method": "stage functions run on the rehearsal world (D_cal items); scoring seconds multiplied by (registered E_A + E_B items) / (D_cal items); the combined scoring is timed on the D_cal set and scaled to |E_C|, and is subtracted from the replicate's measured scoring so that it is counted once"})
     rates = budget.Rates(
-        update_seconds=rates_u, calibrated_layer=world.layer, panel_seconds=panel_seconds, replicate_extra_seconds=extra * 11, fixed_seconds=fixed, timing_seconds=timing, gates2_seconds=gates_seconds,
-        combined_cell_seconds=comb["cell_seconds_at_panel_size"], combined_stage0_seconds=comb["stage0_seconds_at_panel_size"], task_overhead_seconds=float(overhead["seconds"]), train_peak_bytes=train_peak, eval_peak_bytes=eval_peak, recompute_peak_bytes=eval_peak, task_peak_bytes=int(overhead["peak_bytes"]),
+        update_seconds=rates_u, calibrated_layer=world.layer, panel_seconds=panel, replicate_extra_seconds=extra, fixed_seconds=base, timing_seconds=timing, gates2_seconds=gates2_seconds,
+        task_overhead_seconds=float(overhead["seconds"]), train_peak_bytes=train_peak, eval_peak_bytes=int(probe["eval_peak_bytes"]), recompute_peak_bytes=int(probe["recompute_peak_bytes"]), task_peak_bytes=int(max(overhead["peak_bytes"], probe["start_peak_bytes"])),
+        other_layer_seconds=rec["other_layer_seconds"], combined_cell_seconds=combined_cell, combined_stage0_seconds=combined_stage0, analysis_seconds=float(probe["analysis_seconds"]), report_seconds=float(probe["report_seconds"]),
+        train_device=world.device.type, train_device_reason=device_reason,
     )  # fmt: skip
     return rates, rec
-
-
-def timed(fn: Any) -> float:
-    t0 = time.perf_counter()
-    fn()
-    return time.perf_counter() - t0
-
-
-def _startup(data_dir: Path) -> int:
-    from .worldio import RunConfig, build_world, read_bundle
-
-    build_world(read_bundle(data_dir), "test", 1, RunConfig.dry())
-    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -197,10 +330,18 @@ def main(argv: list[str] | None = None) -> int:
 
     p = argparse.ArgumentParser(prog="python -m studies.p10s2.rehearsal")
     sub = p.add_subparsers(dest="command", required=True)
-    s = sub.add_parser("startup", help="build the world from a frozen bundle and exit (measures the per-process start-up)")
-    s.add_argument("--data-dir", required=True)
+    s = sub.add_parser("startup", help="build the world from a frozen bundle through the registered entry and report (measures the per-process start-up)")
+    pr = sub.add_parser("probe", help="the scoring half of the rehearsal in a fresh process (CPU, rehearsal world)")
+    for c in (s, pr):
+        c.add_argument("--data-dir", required=True)
+        c.add_argument("--layer", type=int, required=True)
+        c.add_argument("--lora-lr", type=float, required=True)
+    pr.add_argument("--scratch", required=True)
+    pr.add_argument("--updates", type=int, required=True)
     a = p.parse_args(argv)
-    return _startup(Path(a.data_dir)) if a.command == "startup" else 2
+    res = _startup(Path(a.data_dir), a.layer, a.lora_lr) if a.command == "startup" else _probe(Path(a.data_dir), Path(a.scratch), a.layer, a.lora_lr, a.updates)
+    sys.stdout.write(json.dumps(core.jsonable(res)) + "\n")
+    return 0
 
 
 if __name__ == "__main__":

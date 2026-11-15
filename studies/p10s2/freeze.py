@@ -1,17 +1,26 @@
 # ruff: noqa: E501
 """The freeze procedure (ADR-0022 sections 13.3, 16): writes the frozen plan and cap files, and checks them before every registered stage.
 
-Order (each step before the next; the freeze commit is the last): the rehearsal measures the rates (``rehearsal``); the rung rule decides the design from the charged hours and the rates
-(``budget.rehearsal_rule``; ``NOT STARTED: BUDGET`` is recorded and nothing is written if no rung fits); ``write_freeze`` writes ``studies/p10s2/freeze/stage_caps.json`` (one entry per design
-configuration and stage, 2x the projection), ``plan.json`` (the identities every registered stage checks) and ``rehearsal_outcome.json``; the lead writes the section 16 freeze record and makes one
-freeze commit; the launch scripts take that commit.
+Order (each step before the next; the freeze commit is the last): the rehearsal measures the rates (``rehearsal``); the rung rule decides the design from the charged hours (the one study ledger) and the
+rates (``budget.rehearsal_rule``; ``NOT STARTED: BUDGET`` is recorded and nothing is written if no rung fits); ``write_freeze`` copies the pre-freeze records into ``studies/p10s2/freeze/records/``, writes
+``studies/p10s2/freeze/stage_caps.json`` (one entry per design configuration and stage, 2x the projection), ``plan.json`` (the identities every registered stage checks) and
+``rehearsal_outcome.json``; the lead writes the section 16 freeze record and makes one freeze commit; the launch scripts take that commit.
 
-A registered stage refuses unless: the working tree is clean; the freeze commit is an ancestor of HEAD; ``studies/p10s2``, the config, the ADR, ``src/arborlm``, ``uv.lock``, ``pyproject.toml`` and every
-``tests/test_p10s2_*`` equal their content at that commit; the plan's identities hold (config, cap table, data manifest, calibration and projection records, cap raise, run directory); and the plan's
-design is one of the registered rungs. No registered stage is launched by a typed command.
+Nothing typed enters the plan (audit B M11): the read layer, the learning rates and the pilot result come from the calibration record (for U = 1,000 from the 1,000-update snapshots), the design from the
+rung rule, the cap from the study ledger and the rehearsal record, the device from the rehearsal record. A failed pilot, a missing record, a recorded registered seed or a device other than MPS stops the
+freeze.
+
+The run decision is recorded AFTER the freeze commit in ``results/p10s2-freeze-<date>/DECISION.md`` (outside every frozen path): it must contain the exact line ``DECISION: RUN`` and the full freeze commit
+hash, and it must be committed in a later commit than the freeze commit. A registered stage refuses without it. Nothing designed to be written after the freeze commit is hashed by it (the ADR itself is a
+frozen path, so a record is never written into it afterwards).
+
+A registered stage refuses unless: the working tree is clean; the freeze commit is the commit that added ``plan.json`` and an ancestor of HEAD; ``studies/p10s2``, ``studies/__init__.py``, the config, the ADR,
+``src/arborlm``, ``uv.lock``, ``pyproject.toml`` and every ``tests/test_p10s2_*`` equal their content at that commit; the plan's identities hold (config, cap table, data manifest, the copied records, cap
+raise, code digest, run directory); the study ledger's cap equals the plan's; the design is one of the registered rungs; and a committed run decision exists. No registered stage is launched by a typed command.
 """
 
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -19,15 +28,20 @@ from typing import Any
 from arborlm.io import atomic_write, file_sha256
 
 from . import budget, core
-from .ledger import Ledger
+from .ledger import Ledger, study_ledger_path
 
 
 class FreezeRefused(RuntimeError):
     """A registered stage or the freeze itself refuses (nothing is started, nothing is re-run with changed settings)."""
 
 
-FROZEN_PATHS = ("studies/p10s2", "configs/p10s2_transfer.toml", core.SPEC, "src/arborlm", "uv.lock", "pyproject.toml")
+FROZEN_PATHS = ("studies/p10s2", "studies/__init__.py", "configs/p10s2_transfer.toml", core.SPEC, "src/arborlm", "uv.lock", "pyproject.toml")
 TEST_PREFIX = "tests/test_p10s2_"
+RECORDS_DIR = core.FREEZE_DIR / "records"
+RECORD_NAMES = ("calibration.json", "prefreeze_record.json", "prefreeze_gates.json", "rehearsal.json", "rates.json")
+DECISION_GLOB = "results/p10s2-freeze-*/DECISION.md"
+DECISION_LINE = "DECISION: RUN"
+FREEZE_OUTPUTS = ("plan.json", "stage_caps.json", "cap_raise.json", "rehearsal_outcome.json", "projection.json")
 
 
 def git(repo: Path, *argv: str) -> subprocess.CompletedProcess[bytes]:
@@ -35,7 +49,15 @@ def git(repo: Path, *argv: str) -> subprocess.CompletedProcess[bytes]:
 
 
 def _rev(repo: Path, rev: str, path: str) -> bytes:
-    return git(repo, "rev-parse", f"{rev}:{path}").stdout
+    r = git(repo, "rev-parse", f"{rev}:{path}")
+    return r.stdout if r.returncode == 0 else b""  # a path absent at one revision compares equal to a path absent at another
+
+
+def refusal_dir() -> Path:
+    """Refusal records are written outside every frozen folder (a refusal that leaves an untracked file in the frozen tree makes the next stage refuse on an unclean tree)."""
+    d = study_ledger_path().parent / "refusals"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
 
 
 def check_preconditions(repo: Path, freeze_commit: str | None) -> dict[str, str]:
@@ -60,6 +82,29 @@ def check_preconditions(repo: Path, freeze_commit: str | None) -> dict[str, str]
     return {"commit": full, "tree": git(repo, "rev-parse", f"{full}^{{tree}}").stdout.decode().strip()}
 
 
+def check_freeze_identity(repo: Path, full: str) -> None:
+    """``--freeze-commit`` must be the commit that ADDED ``plan.json`` (a later commit with the same frozen paths is not the freeze commit; audit B m5)."""
+    added = git(repo, "log", "--diff-filter=A", "--format=%H", "--", str(core.PLAN_FILE)).stdout.decode().split()
+    if not added:
+        raise FreezeRefused(f"refused: no commit in the history of this branch adds {core.PLAN_FILE}: there is no freeze commit")
+    if added[-1] != full:
+        raise FreezeRefused(f"refused: {full} is not the freeze commit: the commit that added {core.PLAN_FILE} is {added[-1]}")
+
+
+def check_decision(repo: Path, full: str) -> str:
+    """The run decision: a ``results/p10s2-freeze-<date>/DECISION.md`` committed in a commit after the freeze commit, containing the exact line ``DECISION: RUN`` and the full freeze commit hash. The content is
+    read from the committed blob at HEAD, never from the working tree. Returns the path."""
+    names = [n for n in git(repo, "ls-tree", "-r", "--name-only", "HEAD", "results/").stdout.decode().split("\n") if re.fullmatch(r"results/p10s2-freeze-[^/]+/DECISION\.md", n)]
+    for rel in sorted(names):
+        text = git(repo, "show", f"HEAD:{rel}").stdout.decode()
+        if DECISION_LINE not in text.splitlines() or full not in text:
+            continue
+        added = git(repo, "log", "--diff-filter=A", "--format=%H", "-1", "--", rel).stdout.decode().strip()
+        if added and added != full and git(repo, "merge-base", "--is-ancestor", full, added).returncode == 0:
+            return rel
+    raise FreezeRefused(f"refused: no committed run decision: {DECISION_GLOB} must contain the line {DECISION_LINE!r} and the full freeze commit {full}, committed after the freeze commit")
+
+
 def check_code_commit(repo: Path, commit: str | None) -> str:
     """A pre-freeze stage (data generation, calibration, rehearsal) refuses unless the working tree is clean and its code commit equals HEAD (so the manifests record the code that ran)."""
     dirty = git(repo, "status", "--porcelain", "--untracked-files=all").stdout.decode().strip()
@@ -82,7 +127,18 @@ def load_plan(repo: Path) -> dict[str, Any]:
     return plan
 
 
-def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
+def code_digest(repo: Path) -> dict[str, str]:
+    """Per-file SHA-256 of the study package (launch scripts included) for the freeze record, without the files the freeze itself writes and the copied records."""
+    root = repo / "studies" / "p10s2"
+    skip_dirs = {"__pycache__", "records"}
+    out = {str(p.relative_to(repo)): file_sha256(p) for p in sorted(root.rglob("*")) if p.is_file() and not (skip_dirs & set(p.relative_to(root).parts)) and p.name not in FREEZE_OUTPUTS}
+    init = repo / "studies" / "__init__.py"
+    if init.is_file():
+        out[str(init.relative_to(repo))] = file_sha256(init)
+    return out
+
+
+def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path, *, ledger: Ledger | None = None) -> None:
     """Every identity the freeze recorded must hold now."""
 
     def check(path: Path, expected: str, what: str) -> None:
@@ -92,8 +148,9 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
     check(repo / core.DEFAULT_CONFIG, plan["config_sha256"], "configuration")
     check(repo / core.CAPS_FILE, plan["stage_caps_sha256"], "stage-cap table")
     check(repo / plan["data_dir"] / "manifest.json", plan["data_manifest_sha256"], "data manifest")
-    for key in ("calibration", "prefreeze_record", "projection"):
-        check(repo / plan[key]["path"], plan[key]["sha256"], f"{key} record")
+    for key in ("calibration", "prefreeze_record", "projection", "prefreeze_gates", "rehearsal", "rates"):
+        if key in plan:
+            check(repo / plan[key]["path"], plan[key]["sha256"], f"{key} record")
     raise_path = repo / core.RAISE_FILE
     if plan.get("cap_raise_sha256") is not None:
         check(raise_path, plan["cap_raise_sha256"], "cap-raise record")
@@ -101,11 +158,16 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
         raise FreezeRefused("refused: a cap-raise record exists that the freeze plan does not name")
     if budget.effective_cap(raise_path) != float(plan["cap_hours"]):
         raise FreezeRefused("refused: the cap in force differs from the cap the freeze recorded")
+    if ledger is not None and ledger.cap_hours() != float(plan["cap_hours"]):
+        raise FreezeRefused(f"refused: the study ledger's cap ({ledger.cap_hours()} h) differs from the cap the freeze recorded ({plan['cap_hours']} h): a raise after the freeze is not allowed")
     design = (int(plan["design"]["replicates"]), int(plan["design"]["updates"]))
     if design not in budget.rungs():
         raise FreezeRefused(f"refused: the plan's design {design} is not a registered rung")
     if plan.get("run_dir") is not None and Path(plan["run_dir"]).resolve() != run_dir.resolve():
         raise FreezeRefused(f"refused: the freeze names the run directory {plan['run_dir']}, not {run_dir}")
+    if "code" in plan and plan["code"] != code_digest(repo):
+        changed = sorted(set(plan["code"]) ^ set(code_digest(repo)) | {k for k, v in plan["code"].items() if code_digest(repo).get(k) != v})
+        raise FreezeRefused("refused: the code differs from the frozen digest: " + ", ".join(changed[:6]))
 
 
 def prefreeze_caps_from_ledger(ledger: Ledger) -> dict[str, Any]:
@@ -121,62 +183,97 @@ def prefreeze_caps_from_ledger(ledger: Ledger) -> dict[str, Any]:
     return {"provisional": bool(missing), "missing": missing, "measured_wall_seconds": seconds, "caps_seconds": {s: core.CFG["budget"]["headroom"] * v for s, v in seconds.items()}, "config_provisional_values_seconds": dict(core.CFG["prefreeze_caps"]), "rule": "2 x measured wall time, replacing the provisional configuration values"}
 
 
-def code_digest(repo: Path) -> dict[str, str]:
-    """Per-file SHA-256 of the study package (including the launch scripts) for the freeze record."""
-    root = repo / "studies" / "p10s2"
-    return {str(p.relative_to(repo)): file_sha256(p) for p in sorted(root.rglob("*")) if p.is_file() and "__pycache__" not in p.parts and p.name not in ("plan.json", "stage_caps.json", "cap_raise.json", "rehearsal_outcome.json")}
-
-
 def write_json_file(path: Path, obj: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     atomic_write(path, (json.dumps(core.jsonable(obj), sort_keys=True, indent=1) + "\n").encode())
 
 
-def write_freeze(
-    repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Path, data_dir: str, calibration: Path, prefreeze: Path, design_layer: int, store_lr: float, lora_lr: float,
-) -> dict[str, Any]:  # fmt: skip
-    """The freeze procedure. Refuses if a registered seed has been observed, if the data or records are missing, or if no rung fits (the outcome NOT STARTED: BUDGET is recorded first)."""
+def _refuse(name: str, obj: Any, message: str) -> FreezeRefused:
+    write_json_file(refusal_dir() / name, obj)
+    return FreezeRefused(message)
+
+
+def selection_from_calibration(cal: dict[str, Any], updates: int) -> tuple[int, float, float]:
+    """(read layer, store learning rate, LoRA learning rate) from the calibration record, never typed. For the reduced design (U = 1,000) the selection and the pilot gate of the 1,000-update snapshots
+    are used (section 12.1, 12.2). A failed pilot, or a missing selection, refuses."""
+    reduced = budget.reduced_updates(updates)
+    sel_key, pilot_key = ("selection_at_snapshot", "pilot_at_snapshot") if reduced else ("selection", "pilot")
+    if sel_key not in cal or pilot_key not in cal:
+        raise FreezeRefused(f"refused: the calibration record has no {sel_key!r}/{pilot_key!r} (needed for U = {updates})")
+    if not cal[pilot_key].get("ok"):
+        raise FreezeRefused(f"{cal[pilot_key].get('outcome')}: the registered run does not start (section 12.2; recorded with the calibration records)")
+    sel = cal[sel_key]
+    return int(sel["read_layer"]), float(core.CFG["training"]["store_learning_rate"]), float(sel["lora_lr"])
+
+
+def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Path, data_dir: str, calibration: Path, prefreeze: Path, prefreeze_gates: Path, rehearsal: Path) -> dict[str, Any]:
+    """The freeze procedure. Refuses if a registered seed has been observed (study ledger, seed record, committed plan), if the data or records are missing, if the pilot failed, if the rehearsal's gates
+    stage failed, if the rehearsal trained on a device other than MPS, if a recorded cap raise is not the one recomputed from the rehearsal record, or if no rung fits (the outcome NOT STARTED: BUDGET
+    is recorded first). The layer, the learning rates, the pilot result, the cap and the device come from the records."""
     freeze_dir = repo / core.FREEZE_DIR
-    if budget.registered_seed_observed(ledger):
+    if budget.registered_seed_observed(ledger, repo):
         raise FreezeRefused("refused: a registered seed has been observed before the freeze")
+    if ledger.unfinished():
+        raise FreezeRefused("refused: the study ledger has a start marker with no end (a killed process): its time is charged but the record is unresolved")
     p_hours = ledger.total_hours()
     measured = prefreeze_caps_from_ledger(ledger)
-    write_json_file(freeze_dir / "prefreeze_caps.json", measured)
     if measured["provisional"]:
-        raise FreezeRefused("refused: the pre-freeze stage caps are still provisional (" + ", ".join(measured["missing"]) + " not measured): the rehearsal replaces them with twice the measured wall time")
-    cap = budget.effective_cap(repo / core.RAISE_FILE)
-    decision = budget.rehearsal_rule(p_hours, rates, cap)
-    projection = budget.projection_record(p_hours, rates, decision)
-    write_json_file(freeze_dir / "rehearsal_outcome.json", {"outcome": decision.outcome, "decision": decision.to_json(), "headroom_check": budget.headroom_check(p_hours, rates, ledger, repo / core.RAISE_FILE)})
-    if decision.outcome == budget.NOT_STARTED_BUDGET:
-        raise FreezeRefused(f"{budget.NOT_STARTED_BUDGET}: recorded in {freeze_dir / 'rehearsal_outcome.json'}; the work returns to the human lead ({decision.reason})")
-    assert decision.replicates is not None and decision.updates is not None
-    for needed in (calibration, prefreeze, repo / data_dir / "manifest.json"):
+        raise _refuse("prefreeze_caps.json", measured, "refused: the pre-freeze stage caps are still provisional (" + ", ".join(measured["missing"]) + " not measured): the rehearsal replaces them with twice the measured wall time")
+    for needed in (calibration, prefreeze, prefreeze_gates, rehearsal, repo / data_dir / "manifest.json"):
         if not needed.is_file():
             raise FreezeRefused(f"refused: {needed} does not exist")
+    try:
+        cap = budget.verify_raise(repo / core.RAISE_FILE, p_hours, rates, ledger)
+    except budget.CapRefused as e:
+        raise FreezeRefused(str(e)) from e
+    decision = budget.rehearsal_rule(p_hours, rates, cap)
+    projection = budget.projection_record(p_hours, rates, decision)
+    outcome = {"outcome": decision.outcome, "decision": decision.to_json(), "headroom_check": budget.headroom_check(p_hours, rates, ledger, repo / core.RAISE_FILE)}
+    if decision.outcome == budget.NOT_STARTED_BUDGET:
+        raise _refuse("rehearsal_outcome.json", outcome, f"{budget.NOT_STARTED_BUDGET}: recorded in {refusal_dir() / 'rehearsal_outcome.json'}; the work returns to the human lead ({decision.reason})")
+    assert decision.replicates is not None and decision.updates is not None
+    frozen_device = str(core.CFG["budget"]["training_device"])
+    if rates.train_device != frozen_device:
+        raise _refuse("device.json", {"train_device": rates.train_device, "reason": rates.train_device_reason, "frozen_device": frozen_device}, f"refused: the rehearsal trained on {rates.train_device!r}; the frozen device is {frozen_device.upper()} for training and a process that cannot use it stops. PENDING LEAD REVIEW: the ADR's CPU fallback (section 13.3) and gate G4's MPS comparison")
+    pg = json.loads(prefreeze_gates.read_text())
+    if not pg.get("ok"):
+        raise _refuse("prefreeze_gates.json", pg, "refused: the pre-freeze gates stage on rehearsal seeds failed (a failed gate stops the run, section 12.3)")
+    cal = json.loads(calibration.read_text())
+    layer, store_lr, lora_lr = selection_from_calibration(cal, decision.updates)
+    if int(cal["selection"]["read_layer"]) != rates.calibrated_layer:
+        raise FreezeRefused(f"refused: the rehearsal's calibrated layer {rates.calibrated_layer} differs from the calibration record's selection {cal['selection']['read_layer']}")
     from .prefreeze import prefreeze_summary
 
     summary = prefreeze_summary(json.loads(prefreeze.read_text()))
     if not summary["combined_whole_string_ok"]:
         raise FreezeRefused("refused: the combined-task whole-string check (addendum section 4.4) is absent or has a required mismatch: the same consequence as a prompt mismatch in test (a)")
     if summary["stop"]:
-        write_json_file(freeze_dir / "prefreeze_stop.json", {"label": summary["stop"], "summary": summary})
-        raise FreezeRefused(f"{summary['stop']}: the study stops before the freeze (recorded in {freeze_dir / 'prefreeze_stop.json'})")
+        raise _refuse("prefreeze_stop.json", {"label": summary["stop"], "summary": summary}, f"{summary['stop']}: the study stops before the freeze (recorded in {refusal_dir() / 'prefreeze_stop.json'})")
+    # everything is accepted: now (and only now) the frozen folder is written
+    records: dict[str, dict[str, str]] = {}
+    for key, src in (("calibration", calibration), ("prefreeze_record", prefreeze), ("prefreeze_gates", prefreeze_gates), ("rehearsal", rehearsal)):
+        dst = freeze_dir / "records" / f"{key}.json"
+        write_json_file(dst, json.loads(src.read_text()))
+        records[key] = {"path": str(dst.relative_to(repo)), "sha256": file_sha256(dst)}
+    write_json_file(freeze_dir / "records" / "rates.json", rates.to_json())
+    records["rates"] = {"path": str((freeze_dir / "records" / "rates.json").relative_to(repo)), "sha256": file_sha256(freeze_dir / "records" / "rates.json")}
+    write_json_file(freeze_dir / "rehearsal_outcome.json", outcome)
     write_json_file(freeze_dir / "projection.json", projection)
     caps = budget.stage_caps(rates)
     write_json_file(freeze_dir / "stage_caps.json", caps)
     raise_path = repo / core.RAISE_FILE
     plan = {
         "config_sha256": file_sha256(repo / core.DEFAULT_CONFIG), "stage_caps_sha256": file_sha256(freeze_dir / "stage_caps.json"),
-        "design": {"replicates": decision.replicates, "updates": decision.updates, "layer": design_layer, "store_lr": store_lr, "lora_lr": lora_lr, "rung": decision.outcome},
+        "design": {"replicates": decision.replicates, "updates": decision.updates, "layer": layer, "store_lr": store_lr, "lora_lr": lora_lr, "rung": decision.outcome, "device": rates.train_device, "scoring_device": "cpu"},
         "cap_hours": cap, "cap_raise_sha256": file_sha256(raise_path) if raise_path.exists() else None, "charged_hours_at_freeze": p_hours,
         "data_dir": data_dir, "data_manifest_sha256": file_sha256(repo / data_dir / "manifest.json"),
-        "calibration": {"path": str(calibration.relative_to(repo)) if calibration.is_absolute() else str(calibration), "sha256": file_sha256(calibration)},
-        "prefreeze_record": {"path": str(prefreeze.relative_to(repo)) if prefreeze.is_absolute() else str(prefreeze), "sha256": file_sha256(prefreeze)},
         "projection": {"path": str((freeze_dir / "projection.json").relative_to(repo)), "sha256": file_sha256(freeze_dir / "projection.json")},
-        "prefreeze": prefreeze_summary(json.loads(prefreeze.read_text())),
+        **records,
+        "prefreeze": summary,
         "planned_seeds": sorted(s for r in range(decision.replicates) for s in core.SeedPlan("registered-run", r).planned()),
         "prefreeze_caps": measured, "run_dir": str(run_dir), "code": code_digest(repo),
+        "decision_rule": f"a run decision is committed after the freeze commit in {DECISION_GLOB} with the line {DECISION_LINE!r} and the full freeze commit hash",
     }  # fmt: skip
     write_json_file(freeze_dir / "plan.json", plan)
-    return {"written": [str(core.PLAN_FILE), str(core.CAPS_FILE), str(core.FREEZE_DIR / "rehearsal_outcome.json"), str(core.FREEZE_DIR / "projection.json")], "decision": decision.to_json()}
+    return {"written": [str(core.PLAN_FILE), str(core.CAPS_FILE), str(core.FREEZE_DIR / "rehearsal_outcome.json"), str(core.FREEZE_DIR / "projection.json"), *[v["path"] for v in records.values()]], "decision": decision.to_json()}
+

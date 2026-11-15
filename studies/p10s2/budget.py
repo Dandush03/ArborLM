@@ -12,11 +12,16 @@ registered seeds and the independent recomputation of every score. For U = 1,000
 
 Cap extension (the human lead's decision, section 18; the lead's limits on its own use). The cap stays 36 hours. At the rehearsal's headroom check only, before any registered seed of S2 is observed, if
 rung 1 does not satisfy P + 2R <= 36, the cap is raised to the smallest whole number of hours at which rung 1 satisfies it, up to 72 (the ceiling). If rung 1 would need more than 72, the rung rule
-applies in its registered order against 72. The raise is recorded once; the mechanism here refuses to act after any registered seed has been observed.
+applies in its registered order against 72. The raise is recorded once, in the study ledger and in the freeze folder; its amount is recomputed here from the rehearsal record (the rates) and P, never
+typed; the mechanism refuses to act after any registered seed has been observed (ledger, seed record or a committed plan in the repository history).
+
+Revision after the audits (2026-11-15): P is read from the one study ledger; the analysis and report time rehearsed on synthetic records of the whole registry is inside R (so the headroom rule doubles it);
+every store-type group, E-table included, has a rate at each rehearsed read layer and U = 1,000 takes the slower; the recomputation projection includes the timing row.
 """
 
 import json
 import math
+import subprocess
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -63,6 +68,10 @@ class Rates:
     other_layer_seconds: float = 0.0  # the 200-update runs at the read layer calibration did not select (part of P)
     combined_cell_seconds: float = 0.0  # one arm-cell's combined scoring (C1, C2 and the single-task E_C answers) at the size of E_C: the combined-tasks addendum section 10
     combined_stage0_seconds: float = 0.0  # Stage 0 on the combined tasks, once per study
+    analysis_seconds: float = 0.0  # the analysis stage on synthetic records of the whole registry (rehearsal), inside R
+    report_seconds: float = 0.0  # the report stage on the same records, inside R
+    train_device: str = "cpu"  # the device the rehearsal trained on: the freeze records it and registered training uses it (no silent fallback)
+    train_device_reason: str = ""  # why the rehearsal trained on CPU, when it did
 
     def to_json(self) -> dict[str, Any]:
         d = asdict(self)
@@ -74,9 +83,12 @@ class Rates:
         return Rates(**{**d, "update_seconds": dict(d["update_seconds"])})
 
 
+STORE_TYPE_GROUPS = ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "MAGOLD", "ETABLE")  # E-table is one of the 16 store-type units (section 13.1): its rate is measured at each rehearsed read layer
+
+
 def group_rate(group: str, rates: Rates, layer: int | None, slower: bool) -> float:
-    """Seconds per update of a cell group. Store-type groups depend on the read layer; ``slower`` takes the slower of the rates at L = 4 and L = 12 (the rule for U = 1,000)."""
-    if group in ("LORA1", "LSEQ", "LJOINT", "ETABLE"):
+    """Seconds per update of a cell group. Store-type groups (E-table included) depend on the read layer; ``slower`` takes the slower of the rates at L = 4 and L = 12 (the rule for U = 1,000)."""
+    if group in ("LORA1", "LSEQ", "LJOINT"):
         return float(rates.update_seconds[group])
     if slower:  # the slower of the rates measured at every read layer rehearsed (L = 4 and L = 12 in the registered rehearsal)
         measured = [float(v) for k, v in rates.update_seconds.items() if k.startswith(f"{group}@L")]
@@ -85,6 +97,11 @@ def group_rate(group: str, rates: Rates, layer: int | None, slower: bool) -> flo
         return max(measured)
     ly = rates.calibrated_layer if layer is None else layer
     return float(rates.update_seconds[f"{group}@L{ly}"])
+
+
+def reduced_updates(u: int) -> bool:
+    """True for the reduced design (the smaller U of the registered rungs, 1,000), where the setting may be re-selected and the slower layer's rate applies."""
+    return u == min(b for _a, b in rungs())
 
 
 def cell_updates(group: str, u: int) -> int:
@@ -107,18 +124,24 @@ def scoring_seconds(n: int, rates: Rates) -> float:
 
 
 def recompute_seconds(n: int, rates: Rates) -> float:
-    """The independent recomputation: one repetition of the scoring rows (an upper estimate, because the timing benchmark is not repeated)."""
-    return scoring_seconds(n, rates) - rates.timing_seconds
+    """The independent recomputation: one repetition of the scoring rows, the timing row included (the ADR's table figures 5.82-18.84 h include it; the lead's ruling of 2026-11-15)."""
+    return scoring_seconds(n, rates)
+
+
+def analysis_report_seconds(rates: Rates) -> float:
+    """The rehearsed analysis and report time, each at least half the stated floor, always reserved inside R (so the headroom rule doubles it)."""
+    return max(rates.analysis_seconds, CAP_FLOOR_SECONDS / 2) + max(rates.report_seconds, CAP_FLOOR_SECONDS / 2)
 
 
 def registered_run_seconds(n: int, u: int, rates: Rates) -> dict[str, float]:
     """R(n, U) in seconds, with its parts. For U = 1,000 the training rates are the slower of the two read layers'."""
-    slower = u == 1000
+    slower = reduced_updates(u)
     parts = {
         "training": training_seconds(n, u, rates, slower=slower),
         "scoring": scoring_seconds(n, rates),
         "second_gates_stage": rates.gates2_seconds + rates.task_overhead_seconds,
         "recomputation": recompute_seconds(n, rates),
+        "analysis_and_report": analysis_report_seconds(rates),
     }
     parts["total"] = sum(parts.values())
     return parts
@@ -194,35 +217,44 @@ def propose_raise(p_hours: float, rates: Rates) -> CapRaise | None:
     return CapRaise(base_cap(), new, p_hours, need, whole > ceiling(), proj)
 
 
-def registered_seed_observed(ledger: Ledger | None) -> bool:
-    """A registered replicate seed has been observed if the seed record holds a registered-run use, or the ledger holds a process marked registered. (The partition-side seeds 220901-220910 are drawn
-    in the data-generation and partition steps before the rehearsal and are not replicate seeds; reading.)"""
+def plan_in_history(repo: Path | None) -> bool:
+    """True if a freeze plan has ever been committed in the repository's history (any branch): a registered stage can have run after it, so the cap is never raised again."""
+    if repo is None:
+        return False
+    r = subprocess.run(["git", "-C", str(repo), "log", "--all", "--format=%H", "-1", "--", str(core.PLAN_FILE)], capture_output=True, check=False)  # noqa: S603, S607
+    return r.returncode == 0 and bool(r.stdout.strip())
+
+
+def registered_seed_observed(ledger: Ledger | None, repo: Path | None = None) -> bool:
+    """A registered replicate seed has been observed if the seed record holds a registered-run use, the study ledger holds a process marked registered, or a freeze plan is committed in the history. (The
+    partition-side seeds 220901-220912 are drawn in the data-generation and partition steps before the rehearsal and are not replicate seeds; reading.)"""
     if any(u.mode == "registered-run" for u in core.seed_record()):
         return True
-    return ledger.registered_observed() if ledger is not None else False
+    if ledger is not None and ledger.registered_observed():
+        return True
+    return plan_in_history(repo)
 
 
-def record_raise(proposal: CapRaise, path: Path, ledger: Ledger | None, *, recorded_by: str = "lead") -> dict[str, Any]:
-    """Record the raise, once. Refused: after any registered seed has been observed; a second raise; a cap above the ceiling; a raise when rung 1 already fits; a value that is not the smallest whole
-    number of hours (up to the ceiling) at which rung 1 fits."""
-    if registered_seed_observed(ledger):
+def record_raise(rates: Rates, path: Path, ledger: Ledger, *, repo: Path | None = None, recorded_by: str = "lead") -> dict[str, Any]:
+    """Record the raise, once, in the freeze folder and in the study ledger. The amount is recomputed here from the rehearsal record (``rates``) and P (the study ledger's total): the smallest whole
+    number of hours, up to the ceiling, at which rung 1 satisfies P + 2R <= cap. Refused: after any registered seed has been observed (ledger, seed record, committed plan); a second raise; a raise when
+    rung 1 already fits the base cap. Nothing is typed."""
+    if registered_seed_observed(ledger, repo):
         raise CapRefused("refused: a registered seed has been observed; the cap is raised at the rehearsal's headroom check only, never after (section 13.3)")
-    if path.exists():
+    if path.exists() or ledger.cap_raise_entry() is not None:
         raise CapRefused("refused: the cap has been raised once already")
-    if proposal.new_cap_hours > ceiling():
-        raise CapRefused(f"refused: {proposal.new_cap_hours} h is above the ceiling of {ceiling()} h")
-    if proposal.rung1_total_hours <= base_cap():
+    proposal = propose_raise(ledger.total_hours(), rates)
+    if proposal is None:
         raise CapRefused("refused: rung 1 fits the 36-hour cap; nothing to raise")
-    expect = float(min(ceiling(), math.ceil(proposal.rung1_total_hours - 1e-12)))
-    if proposal.new_cap_hours != expect or proposal.old_cap_hours != base_cap():
-        raise CapRefused(f"refused: the new cap must be the smallest whole number of hours at which rung 1 fits ({expect} h), from the cap of {base_cap()} h")
-    rec = {"recorded_by": recorded_by, "recorded_at_stage": "rehearsal headroom check", **proposal.to_json(), "rule": "ADR-0022 section 13.3 cap extension; ceiling 72 h; once; before any registered seed is observed"}
+    rec = {"recorded_by": recorded_by, "recorded_at_stage": "rehearsal headroom check", **proposal.to_json(), "rule": "ADR-0022 section 13.3 cap extension; ceiling 72 h; once; before any registered seed is observed; recomputed from the rehearsal record"}
+    ledger.append_cap_raise(proposal.new_cap_hours, {"charged_hours": proposal.charged_hours, "rung1_total_hours": proposal.rung1_total_hours})
+    path.parent.mkdir(parents=True, exist_ok=True)
     atomic_write(path, (json.dumps(core.jsonable(rec), sort_keys=True, indent=1) + "\n").encode())
     return rec
 
 
 def effective_cap(path: Path) -> float:
-    """36 hours unless a raise is recorded."""
+    """36 hours unless a raise is recorded in the file."""
     if not path.exists():
         return base_cap()
     new = float(json.loads(path.read_text())["new_cap_hours"])
@@ -231,11 +263,26 @@ def effective_cap(path: Path) -> float:
     return new
 
 
-def headroom_check(p_hours: float, rates: Rates, ledger: Ledger | None, raise_path: Path) -> dict[str, Any]:
-    """The rehearsal's headroom check: the proposal (if rung 1 does not fit 36 h), the cap in force (recorded raise or 36) and the rung rule's decision against it. The proposal is returned for the lead;
-    it takes effect only through ``record_raise``."""
+def verify_raise(path: Path, p_hours: float, rates: Rates, ledger: Ledger) -> float:
+    """The cap in force at the freeze: the raise file and the ledger's raise entry must agree, and a recorded raise must equal the amount recomputed now from P and the rates; returns the cap. Refuses on any
+    difference (a raise that was typed, edited, deleted or made twice). No recorded raise is the base cap (the lead may decline the raise)."""
+    in_file = effective_cap(path)
+    in_ledger = ledger.cap_hours()
+    if in_file != in_ledger:
+        raise CapRefused(f"refused: the raise file ({in_file} h) and the study ledger ({in_ledger} h) disagree")
+    if in_file == base_cap():
+        return in_file  # no raise was recorded (the lead may decline it: the rung rule then runs against the base cap)
     proposal = propose_raise(p_hours, rates)
-    cap = effective_cap(raise_path)
+    if proposal is None or in_file != proposal.new_cap_hours:
+        raise CapRefused(f"refused: the recorded cap {in_file} h differs from the cap recomputed from the rehearsal record and P ({'no raise' if proposal is None else str(proposal.new_cap_hours) + ' h'})")
+    return in_file
+
+
+def headroom_check(p_hours: float, rates: Rates, ledger: Ledger | None, raise_path: Path) -> dict[str, Any]:
+    """The rehearsal's headroom check: the proposal (if rung 1 does not fit 36 h), the cap in force (recorded raise or 36) and the rung rule's decision against it. The proposal takes effect only through
+    ``record_raise``."""
+    proposal = propose_raise(p_hours, rates)
+    cap = ledger.cap_hours() if ledger is not None else effective_cap(raise_path)
     decision = rehearsal_rule(p_hours, rates, cap)
     return {"proposal": None if proposal is None else proposal.to_json(), "cap_in_force_hours": cap, "decision": decision.to_json()}
 
@@ -262,7 +309,7 @@ REGISTERED_STAGES = ("gates", "train", "evaluate", "timing", "recompute", "analy
 
 def stage_seconds(n: int, u: int, rates: Rates) -> dict[str, float]:
     """The projected seconds of each registered stage at a configuration, task start-up included."""
-    slower = u == 1000
+    slower = reduced_updates(u)
     per_rep_eval = 18 * (rates.panel_seconds + rates.task_overhead_seconds) + rates.replicate_extra_seconds + COMBINED_CELLS * rates.combined_cell_seconds
     return {
         "gates": rates.gates2_seconds + rates.task_overhead_seconds,
@@ -270,8 +317,8 @@ def stage_seconds(n: int, u: int, rates: Rates) -> dict[str, float]:
         "evaluate": n * per_rep_eval + rates.fixed_seconds + rates.combined_stage0_seconds,
         "timing": rates.timing_seconds + rates.task_overhead_seconds,
         "recompute": recompute_seconds(n, rates),
-        "analysis": CAP_FLOOR_SECONDS,
-        "report": CAP_FLOOR_SECONDS,
+        "analysis": max(rates.analysis_seconds, CAP_FLOOR_SECONDS / 2),
+        "report": max(rates.report_seconds, CAP_FLOOR_SECONDS / 2),
     }
 
 

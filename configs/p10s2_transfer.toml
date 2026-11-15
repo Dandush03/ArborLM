@@ -179,6 +179,15 @@ rungs = [[4, 2000], [3, 2000], [4, 1000], [3, 1000]]
 # Worker count: the ADR does not give one. Its projection sums unit times (one process at a time), so the memory rule is
 # applied for this many concurrent workers. PENDING LEAD REVIEW (reported by the implementer).
 workers = 1
+# The frozen devices (the lead's ruling of 2026-11-15, audit B M8): MPS for training, CPU for scoring and recomputation. A process that cannot use the frozen device stops; "auto" exists in the dry stage and tests only.
+training_device = "mps"
+scoring_device = "cpu"
+watchdog_interval_seconds = 0.5   # the sampled memory and deadline watchdog of every registered stage and of the rehearsal
+
+[rehearsal]  # section 13.3, "Rehearsal content" (the rehearsal launch script passes no number: they are read here)
+short_updates = 200               # every cell type for 200 updates, at each read layer
+full_updates = 2000               # one store cell, one M-ii cell and one LoRA cell for the full U
+prefreeze_gates_cap_seconds = 1440  # PROVISIONAL, the upper end of the projection of the gates stage (0.4 h, section 13.3); the freeze records twice the measured time
 
 [prefreeze_caps]  # PROVISIONAL (the lead accepted them as provisional on 2026-11-15; the freeze refuses until the rehearsal replaces them with 2 x measured): the stage cap (seconds) of each pre-freeze stage is the upper end of the ADR's projection (section 13.3): data generation 1.8 h, calibration and pilot 2.2 h, rehearsal 3.0 h + 0.2 h
 datagen = 6480
