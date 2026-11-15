@@ -1,0 +1,53 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-results-2026-11-15/d5_gradient_check.py:112: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  print(f"{arm} {slots} {'init seed 500001' if not label else 'registered snapshot ' + label}: loss impl {float(loss):.6f} own {float(mine):.6f} diff {abs(float(loss) - float(mine)):.2e}")
+W7 4096 init seed 500001: loss impl 4.631458 own 4.631458 diff 0.00e+00
+    addition.keys          |grad| impl 4.970e-04 own 4.970e-04  max|diff| 4.37e-11  rel 5.08e-07
+    addition.values        |grad| impl 7.356e-04 own 7.356e-04  max|diff| 1.82e-11  rel 1.83e-07
+    addition.wq            |grad| impl 4.077e-04 own 4.077e-04  max|diff| 2.18e-11  rel 4.28e-07
+    addition.wo            |grad| impl 7.296e-04 own 7.296e-04  max|diff| 2.91e-11  rel 2.34e-07
+    addition.gate          |grad| impl 6.937e-06 own 6.937e-06  max|diff| 9.09e-13  rel 1.31e-07
+A4 4096 init seed 500001: loss impl 4.631447 own 4.631447 diff 0.00e+00
+    addition.keys          |grad| impl 1.047e-03 own 1.047e-03  max|diff| 5.82e-11  rel 1.95e-07
+    addition.values        |grad| impl 1.637e-03 own 1.637e-03  max|diff| 8.73e-11  rel 3.07e-07
+    addition.wq            |grad| impl 1.324e-03 own 1.324e-03  max|diff| 6.55e-11  rel 2.59e-07
+    addition.wo            |grad| impl 1.488e-03 own 1.488e-03  max|diff| 4.37e-11  rel 2.02e-07
+    addition.gate          |grad| impl 1.679e-05 own 1.679e-05  max|diff| 0.00e+00  rel 0.00e+00
+    addition.attn_q        |grad| impl 5.696e-06 own 5.696e-06  max|diff| 4.12e-13  rel 4.74e-07
+    addition.attn_k        |grad| impl 5.480e-06 own 5.480e-06  max|diff| 5.12e-13  rel 7.30e-07
+    addition.attn_v        |grad| impl 1.293e-03 own 1.293e-03  max|diff| 2.33e-10  rel 6.93e-07
+E7 16384 init seed 500001: loss impl 4.426802 own 4.426802 diff 4.77e-07
+    addition.keys          |grad| impl 2.907e-04 own 2.907e-04  max|diff| 1.09e-11  rel 3.02e-07
+    addition.values        |grad| impl 3.846e-04 own 3.846e-04  max|diff| 6.37e-12  rel 2.42e-07
+    addition.wq            |grad| impl 2.674e-04 own 2.674e-04  max|diff| 1.18e-11  rel 6.17e-07
+    addition.wo            |grad| impl 3.059e-04 own 3.059e-04  max|diff| 1.36e-11  rel 3.71e-07
+    addition.gate          |grad| impl 1.097e-06 own 1.097e-06  max|diff| 9.09e-13  rel 8.29e-07
+W7 4096 registered snapshot W7-n4096-b101-o301-s1801: loss impl 3.479994 own 3.479994 diff 0.00e+00
+    addition.keys          |grad| impl 5.628e-06 own 5.628e-06  max|diff| 1.15e-10  rel 5.34e-05
+    addition.values        |grad| impl 3.765e-04 own 3.765e-04  max|diff| 1.06e-10  rel 5.44e-07
+    addition.wq            |grad| impl 2.698e-06 own 2.698e-06  max|diff| 3.68e-12  rel 9.54e-06
+    addition.wo            |grad| impl 1.861e-02 own 1.861e-02  max|diff| 8.15e-10  rel 5.65e-07
+    addition.gate          |grad| impl 3.427e-04 own 3.427e-04  max|diff| 0.00e+00  rel 0.00e+00
+W7 16384 registered snapshot W7-n16384-b101-o301-s1801: loss impl 3.462073 own 3.462073 diff 0.00e+00
+    addition.keys          |grad| impl 6.901e-05 own 6.901e-05  max|diff| 1.49e-10  rel 5.71e-06
+    addition.values        |grad| impl 1.017e-04 own 1.017e-04  max|diff| 7.78e-11  rel 2.19e-06
+    addition.wq            |grad| impl 5.921e-05 own 5.921e-05  max|diff| 1.85e-11  rel 3.20e-06
+    addition.wo            |grad| impl 9.695e-03 own 9.695e-03  max|diff| 5.82e-10  rel 7.23e-07
+    addition.gate          |grad| impl 3.156e-05 own 3.156e-05  max|diff| 1.64e-09  rel 5.19e-05
+A4 16384 registered snapshot A4-n16384-b101-o301-s1801: loss impl 3.461786 own 3.461786 diff 2.38e-07
+    addition.keys          |grad| impl 1.427e-05 own 1.427e-05  max|diff| 7.64e-10  rel 7.00e-05
+    addition.values        |grad| impl 5.000e-05 own 5.000e-05  max|diff| 5.65e-11  rel 4.84e-06
+    addition.wq            |grad| impl 4.616e-06 own 4.616e-06  max|diff| 3.04e-11  rel 2.26e-05
+    addition.wo            |grad| impl 9.651e-03 own 9.651e-03  max|diff| 5.82e-10  rel 7.66e-07
+    addition.gate          |grad| impl 3.171e-05 own 3.171e-05  max|diff| 1.94e-09  rel 6.10e-05
+    addition.attn_q        |grad| impl 4.355e-07 own 4.355e-07  max|diff| 5.41e-13  rel 5.03e-06
+    addition.attn_k        |grad| impl 3.906e-07 own 3.906e-07  max|diff| 7.60e-13  rel 8.46e-06
+    addition.attn_v        |grad| impl 9.031e-07 own 9.031e-07  max|diff| 2.50e-12  rel 1.38e-05
+E7 16384 registered snapshot E7-n16384-b101-o301-s1801: loss impl 3.461692 own 3.461692 diff 0.00e+00
+    addition.keys          |grad| impl 1.516e-04 own 1.516e-04  max|diff| 2.02e-10  rel 2.07e-06
+    addition.values        |grad| impl 6.732e-05 own 6.732e-05  max|diff| 7.28e-11  rel 3.21e-06
+    addition.wq            |grad| impl 4.382e-05 own 4.382e-05  max|diff| 1.63e-11  rel 3.78e-06
+    addition.wo            |grad| impl 9.683e-03 own 9.683e-03  max|diff| 6.11e-10  rel 8.18e-07
+    addition.gate          |grad| impl 3.229e-05 own 3.230e-05  max|diff| 4.26e-09  rel 1.32e-04

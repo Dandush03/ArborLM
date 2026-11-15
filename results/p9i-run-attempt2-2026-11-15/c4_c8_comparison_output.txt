@@ -1,0 +1,15 @@
+(lead's run of compare_with_attempt1.py gates, after the gates stage and before the train stage of attempt 2; transcribed from the session)
+ok   C4 G2 block identical
+ok   C5 controls block identical
+ok   C6 restoration block identical
+ok   C7 N model.pt identical
+ok   C7 N optimizer.pt identical
+ok   C7 N movement.pt identical
+ok   C7 N snapshot.json identical (reported only)
+ok   C7 BB model.pt identical
+ok   C7 BB optimizer.pt identical
+ok   C7 BB movement.pt identical
+ok   C7 BB snapshot.json identical (reported only)
+ok   C8 no G4 defect, all twelve arms reached, counts as attempt 1
+ok   gates passed
+RESULT: ALL MANDATORY COMPARISONS HOLD

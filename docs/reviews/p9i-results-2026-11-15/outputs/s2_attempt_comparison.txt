@@ -1,0 +1,52 @@
+gates.json top-level keys attempt 1: ['controls', 'dry', 'g1_passed', 'g2', 'g2_passed', 'g4_defects', 'g4_passed', 'gradient_reach', 'identity', 'kind', 'restoration', 'schema', 'study']
+gates.json top-level keys attempt 2: ['controls', 'dry', 'g1_passed', 'g2', 'g2_passed', 'g4_defects', 'g4_passed', 'gradient_reach', 'identity', 'kind', 'restoration', 'schema', 'study']
+g2           identical: True
+controls     identical: True
+restoration  identical: True
+g1_passed    identical: True
+g2_passed    identical: True
+attempt 1 g4_passed / defects: False ['gradient reach failed for R2']
+attempt 2 g4_passed / defects: True []
+gradient reach attempt 2: {'A4': (True, [], 8), 'A4E': (True, [], 8), 'BB': (True, [], 9), 'BB-0': (True, [], 4), 'BB-D': (True, [], 7), 'D': (True, [], 3), 'D7': (True, [], 3), 'E7': (True, [], 5), 'N': (True, [], 5), 'R1': (True, [], 4), 'R2': (True, [], 3), 'W7': (True, [], 5)}
+gradient reach trainable counts identical to attempt 1: True
+g4_restore N/first: files 6 vs 6; identical bytes: 5/6; differing: ['train.json']
+g4_restore N/resumed: files 2 vs 2; identical bytes: 1/2; differing: ['train.json']
+g4_restore N/straight: files 2 vs 2; identical bytes: 1/2; differing: ['train.json']
+g4_restore BB/first: files 6 vs 6; identical bytes: 5/6; differing: ['train.json']
+g4_restore BB/resumed: files 2 vs 2; identical bytes: 1/2; differing: ['train.json']
+g4_restore BB/straight: files 2 vs 2; identical bytes: 1/2; differing: ['train.json']
+
+generate  files: 2 manifest count: 1
+gates     files: 2 manifest count: 1
+train     files: 58 manifest count: 1
+evaluate  files: 58 manifest count: 1
+analyze   files: 2 manifest count: 1
+report    files: 2 manifest count: 1
+cells with files other than eval/, snapshots/, train.json, updates.jsonl: []
+-- train/A4-n16384-b101-o301-s1801.log size 474
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"label": "A4-n16384-b101-o301-s1801", "status": "completed"}
+
+-- train/A4-n16384-b101-o301-s1802.log size 474
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"label": "A4-n16384-b101-o301-s1802", "status": "completed"}
+
+-- train/A4-n16384-b102-o302-s1801.log size 474
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"label": "A4-n16384-b102-o302-s1801", "status": "completed"}
+
+-- evaluate/A4-n16384-b101-o301-s1801.log size 470
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"label": "A4-n16384-b101-o301-s1801", "evaluated": 8192}
+
+-- evaluate/A4-n16384-b101-o301-s1802.log size 470
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"label": "A4-n16384-b101-o301-s1802", "evaluated": 8192}
+
+train logs with a traceback: {}
+top-level run directory entries: ['analysis.json', 'analyze', 'calibration_binding.json', 'cells', 'data_manifest.json', 'evaluate', 'g1.json', 'g4_restore', 'gates', 'gates.json', 'generate', 'report', 'results', 'train', 'updates.json']

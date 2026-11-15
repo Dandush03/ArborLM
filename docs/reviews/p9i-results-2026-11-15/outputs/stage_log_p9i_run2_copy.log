@@ -1,0 +1,33 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9IP-20261115T020303574595Z-674730f6b8a147c0a47cac404321f2df/gates/manifest.json", "charged_seconds": 5.9}
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "train", "status": "COMPLETE", "tasks": 57, "manifest": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9IP-20261115T020303574595Z-674730f6b8a147c0a47cac404321f2df/train/manifest.json", "charged_seconds": 1609.1}
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+usage: python -m studies.p9i.stages [-h]
+                                    {generate,calibrate,rehearse,gates,train,evaluate,analyze,report,dry,work}
+                                    ...
+python -m studies.p9i.stages: error: argument command: invalid choice: 'evaluate 900' (choose from generate, calibrate, rehearse, gates, train, evaluate, analyze, report, dry, work)
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+usage: python -m studies.p9i.stages [-h]
+                                    {generate,calibrate,rehearse,gates,train,evaluate,analyze,report,dry,work}
+                                    ...
+python -m studies.p9i.stages: error: argument command: invalid choice: 'analyze 300' (choose from generate, calibrate, rehearse, gates, train, evaluate, analyze, report, dry, work)
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+usage: python -m studies.p9i.stages [-h]
+                                    {generate,calibrate,rehearse,gates,train,evaluate,analyze,report,dry,work}
+                                    ...
+python -m studies.p9i.stages: error: argument command: invalid choice: 'report 300' (choose from generate, calibrate, rehearse, gates, train, evaluate, analyze, report, dry, work)
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "evaluate", "status": "COMPLETE", "tasks": 57, "manifest": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9IP-20261115T020303574595Z-674730f6b8a147c0a47cac404321f2df/evaluate/manifest.json", "charged_seconds": 97.9}
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "analyze", "status": "COMPLETE", "tasks": 1, "manifest": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9IP-20261115T020303574595Z-674730f6b8a147c0a47cac404321f2df/analyze/manifest.json", "charged_seconds": 0.6}
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "report", "status": "COMPLETE", "tasks": 1, "manifest": "/Users/daniellaloush/dandush03/ArborLM/experiments/P9IP-20261115T020303574595Z-674730f6b8a147c0a47cac404321f2df/report/manifest.json", "charged_seconds": 0.6}
