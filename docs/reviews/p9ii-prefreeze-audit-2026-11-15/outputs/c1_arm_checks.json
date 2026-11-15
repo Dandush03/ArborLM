@@ -1,0 +1,134 @@
+{
+ "A0 bit-identical to P9-I W7 over 40 updates (losses and all parameters)": {
+  "ok": true
+ },
+ "L_addr value = mean over 128 sites of -log softmax over all 4096 cosine scores / 0.2 (float64 reference)": {
+  "ok": true,
+  "theirs": 9.102765083312988,
+  "mine": 9.102765225591472
+ },
+ "L_addr gradients reach wq and keys only, and equal my formula's": {
+  "ok": true,
+  "keys_rows_with_grad": 4096
+ },
+ "A1 total = answer + lambda * L_addr (lambda 1.0)": {
+  "ok": true
+ },
+ "A1 injection equals randperm(N, base+40)[:F] (target slot, a fixed injection)": {
+  "ok": true
+ },
+ "no backbone parameter is trainable (A1)": {
+  "ok": true
+ },
+ "A1-S targets identical under changed fact ids, change with the update, unrelated to the injection": {
+  "ok": true,
+  "repeat_pairs": 23552,
+  "same_target_rate": 0.0002972146739130435
+ },
+ "trainer leaves the last batch query WITH its autograd graph on the memory module (holds the graph between updates)": {
+  "ok": true,
+  "held": true
+ },
+ "A2 phase 1 trains wq and keys only; values, wo, gate do not move in phase 1": {
+  "ok": true,
+  "phase1": [
+   "keys",
+   "wq"
+  ]
+ },
+ "A2 phase 2 trains everything with a fresh AdamW (first step = lr * sign-like Adam step of the clipped answer gradient)": {
+  "ok": true,
+  "maxdiff": 7.450580596923828e-09,
+  "phase2": [
+   "gate",
+   "keys",
+   "values",
+   "wo",
+   "wq"
+  ],
+  "counters": [
+   1
+  ],
+  "phase2_total_is_answer": true
+ },
+ "A4 k(t) equals the formula for every t at Stage 1 and Stage 2 (k0 = N/8 and N; T_A = U/2 and 4U/2)": {
+  "ok": true,
+  "mismatches": []
+ },
+ "A4's first update reads k0, update T_A reads k(T_A-1), update T_A+1 reads 8": {
+  "ok": true,
+  "k_at_T_A_minus_1": 8
+ },
+ "A4 wide read at k = 512 equals softmax(a/0.2) over the k best slots (my computation)": {
+  "ok": true,
+  "maxdiff": 0.0
+ },
+ "A4 wide read at k = 181 equals softmax(a/0.2) over the k best slots (my computation)": {
+  "ok": true,
+  "maxdiff": 0.0
+ },
+ "A4 wide read at k = 23 equals softmax(a/0.2) over the k best slots (my computation)": {
+  "ok": true,
+  "maxdiff": 0.0
+ },
+ "A4 at k = 8 (evaluation) equals P9-I's standard top-8 W7 read bit for bit": {
+  "ok": true
+ },
+ "after a training step A4's model reads k = 8 (evaluation and probes read the standard top-8)": {
+  "ok": true
+ },
+ "A5-C m initialised to the mean of z over the first 16 training batches (2,048 answer sites)": {
+  "ok": true
+ },
+ "A5-C m <- 0.99 m + 0.01 * (batch mean of z of the update's forward, pre-step parameters)": {
+  "ok": true
+ },
+ "A5-C m frozen at evaluation; no gradient (buffer)": {
+  "ok": true
+ },
+ "A5-C forward selects with q = (z - m)/|z - m|": {
+  "ok": true
+ },
+ "A5-D L_div = log mean_{i != j} exp(2 q_i.q_j) over the 128 un-centred unit queries; total = answer + mu L_div": {
+  "ok": true,
+  "theirs": 0.8905506134033203,
+  "mine": 0.8905506480943315
+ },
+ "G6: a trained A1 forward is unchanged when the injection and a fact table are changed after training; no fact-sized tensor held by the model": {
+  "ok": false,
+  "addition_state": [
+   "addition.keys",
+   "addition.values",
+   "addition.wq",
+   "addition.wo",
+   "addition.gate"
+  ],
+  "fact_sized_attributes": [
+   "addition.last_query"
+  ]
+ },
+ "schedules in exposures per fact: A2 U_pre 2,048 -> 8,192 and A4 T_A 4,096 -> 16,384, k0 512 -> 2,048 at Stage 2; refused at Stage 3": {
+  "ok": true,
+  "exposures": {
+   "stage1_U": 512.0,
+   "stage2_U": 128.0,
+   "stage2_4U": 512.0,
+   "stage3_U": 32.0
+  },
+  "a2_switch_exposures": [
+   128.0,
+   128.0
+  ]
+ },
+ "probe: 256 facts x 2 occurrences, all trained facts; none of its contexts appears in the 8,192 training batches or in Panel A": {
+  "ok": true,
+  "sites": 512,
+  "training_hits": 0
+ },
+ "calibration stream: unseen-control contexts never precede the probe (probe built from trained facts only)": {
+  "ok": true,
+  "unseen_rows": 0,
+  "first_unseen_row": null,
+  "first_trained_row": 0
+ }
+}

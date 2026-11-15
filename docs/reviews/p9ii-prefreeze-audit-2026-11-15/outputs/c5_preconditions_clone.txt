@@ -1,0 +1,33 @@
+freeze commit in the clone: fcd9521323e111446e2929bd21dbfb1148b7d4de
+--- accept: registered stage1_gate (clean tree, freeze = HEAD)
+{"gate": 1, "run": false, "status": "NOT RUN \u2014 STAGE NOT INTERPRETABLE"}
+exit: 0
+stage_gate_1.json:
+{'run': False, 'status': 'NOT RUN — STAGE NOT INTERPRETABLE', 'reason': "cells missing or failed: ['A0/d1/j0', 'A0/d1/j1', 'A0/d2/j0', 'A0/d2/j1', 'A0/d3/j0']"}
+--- dirty tree (untracked file)
+P9II stage REFUSED: refused: the working tree is not clean:
+?? untracked.txt
+exit: 0
+--- freeze commit not a commit
+P9II stage REFUSED: refused: deadbeef is not a commit of this repository
+exit: 0
+--- no freeze commit
+P9II stage REFUSED: refused: a registered stage requires --freeze-commit
+exit: 0
+--- code changed after the freeze (committed)
+P9II stage REFUSED: refused: studies at HEAD differs from the freeze commit
+exit: 0
+--- calibration record does not hash to the frozen value
+P9II stage REFUSED: refused: /Users/daniellaloush/dandush03/ArborLM/experiments/P9IIC-20261115T071159540788Z-1a93c3ded92e40628c2abb9bd4235188/calibration.json does not hash to the frozen calibration record
+exit: 0
+--- launch script with one argument
+usage: studies/p9ii/launch/stage1.sh <run-dir> <freeze-commit>
+exit: 0
+--- registered generate without the freeze-time flag
+P9II stage REFUSED: refused: registered-seed generation is used at freeze time; add --i-understand-freeze-time
+exit: 0
+--- --dry with registered
+refused: --dry cannot be combined with --mode registered
+exit: 0
+clone
+run
