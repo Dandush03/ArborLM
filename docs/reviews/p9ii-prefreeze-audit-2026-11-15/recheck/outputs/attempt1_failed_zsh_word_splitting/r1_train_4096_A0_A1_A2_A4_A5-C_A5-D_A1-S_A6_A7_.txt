@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9ii-prefreeze-audit-2026-11-15/recheck/r1_numbers_unchanged.py", line 17, in <module>
+    ROOT, OLD, SCRATCH, MODE, SLOTS, ARMS = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3]), sys.argv[4], int(sys.argv[5]), sys.argv[6].split(",")
+                                                                                                                ~~~~~~~~^^^
+IndexError: list index out of range

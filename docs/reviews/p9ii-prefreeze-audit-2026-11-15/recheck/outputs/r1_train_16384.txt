@@ -1,0 +1,10 @@
+A0 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+A1 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+A2 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, 384, None, None)}
+A4 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, 512, 2048)}
+A5-C 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+A5-D 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+A1-S 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+A6 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+A7 16384 {'parameters_identical': True, 'buffers_identical': True, 'update_records_identical': True, 'diagnostics_identical': True, 'updates': 192, 'schedule': (1024, None, None, None)}
+ALL IDENTICAL

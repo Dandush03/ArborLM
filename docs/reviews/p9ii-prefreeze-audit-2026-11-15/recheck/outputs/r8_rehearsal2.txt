@@ -1,0 +1,30 @@
+files by name: ['REH-A0-n16384-main.log', 'REH-A0-n4096-main.log', 'REH-A0-n65536-main.log', 'REH-A1-S-n16384-main.log', 'REH-A1-S-n4096-main.log', 'REH-A1-n16384-main.log', 'REH-A1-n4096-main.log', 'REH-A1-n65536-main.log', 'REH-A2-n16384-post.log', 'REH-A2-n16384-pre.log', 'REH-A2-n4096-post.log', 'REH-A2-n4096-pre.log', 'REH-A4-n16384-k0.log', 'REH-A4-n16384-k8.log', 'REH-A4-n16384-mid.log', 'REH-A4-n4096-k0.log', 'REH-A4-n4096-k8.log', 'REH-A4-n4096-mid.log', 'REH-A5-C-n16384-main.log', 'REH-A5-C-n4096-main.log', 'REH-A5-C-n65536-main.log', 'REH-A5-D-n16384-main.log', 'REH-A5-D-n4096-main.log', 'REH-A5-D-n65536-main.log', 'REH-A6-n16384-main.log', 'REH-A6-n4096-main.log', 'REH-A6-n65536-main.log', 'REH-A7-n16384-main.log', 'REH-A7-n4096-main.log', 'REH-A7-n65536-main.log', 'manifest.json', 'projection.json', 'rehearsal.json', 'rehearsal_evaluate.json'] | whitelist violations: []
+projection hyper == calibration hyper: True | projection calibration_sha256 == sha256(calibration.json): True
+items: 30 | task overhead min/max: 1.53 / 1.91 s
+rehearsed A4 widths at 16,384: k0 = 2048 mid = 128 | at 4,096: k0 = 512 mid = 64
+Stage 1: training 1982.4 + evaluation 89.2 = 2071.7 s (record 2071.7); doubled 4143.3 s vs Budget A remaining 13866.4 s
+Stage 2 A0-only    16 cells   1153.8 s (record   1153.8) doubled   2307.7 fits 10,800: True
+Stage 2 A5-C       24 cells   1705.5 s (record   1705.5) doubled   3411.0 fits 10,800: True
+Stage 2 A5-D       24 cells   1742.1 s (record   1742.1) doubled   3484.2 fits 10,800: True
+Stage 2 A4         24 cells   5780.5 s (record   5780.5) doubled  11561.0 fits 10,800: False
+Stage 2 A2         32 cells   2908.4 s (record   2908.4) doubled   5816.8 fits 10,800: True
+Stage 2 A1         32 cells   3011.4 s (record   3011.4) doubled   6022.8 fits 10,800: True
+Stage 2 A5-C+A5-D  32 cells   2491.0 s (record   2491.0) doubled   4982.0 fits 10,800: True
+Stage 2 A5-C+A4    32 cells   6529.4 s (record   6529.4) doubled  13058.9 fits 10,800: False
+Stage 2 A5-C+A2    40 cells   3342.2 s (record   3342.2) doubled   6684.4 fits 10,800: True
+Stage 2 A5-C+A1    40 cells   3445.2 s (record   3445.2) doubled   6890.5 fits 10,800: True
+Stage 2 A5-D+A4    32 cells   6547.6 s (record   6547.6) doubled  13095.3 fits 10,800: False
+Stage 2 A5-D+A2    40 cells   3360.5 s (record   3360.5) doubled   6720.9 fits 10,800: True
+Stage 2 A5-D+A1    40 cells   3463.5 s (record   3463.5) doubled   6927.0 fits 10,800: True
+Stage 2 A4+A2      40 cells   7227.0 s (record   7227.0) doubled  14454.0 fits 10,800: False
+Stage 2 A4+A1      40 cells   7330.0 s (record   7330.0) doubled  14660.1 fits 10,800: False
+Stage 2 A2+A1      40 cells   3519.1 s (record   3519.1) doubled   7038.2 fits 10,800: True
+Stage 3 A0: 315.6 s (record 315.6) doubled 631.2
+Stage 3 A1: 720.6 s (record 720.6) doubled 1441.2
+Stage 3 A5-C: 525.0 s (record 525.0) doubled 1050.0
+Stage 3 A5-D: 523.7 s (record 523.7) doubled 1047.5
+projection mismatches (> 1e-6 s): 0
+memory Stage 1: peak 0.474 GiB, doubled 0.949 GiB <= 3: True; six workers doubled 5.69 GiB <= 24: True
+memory Stage 2: peak 0.769 GiB, doubled 1.539 GiB <= 3: True; six workers doubled 9.23 GiB <= 24: True
+memory Stage 3: peak 0.999 GiB, doubled 1.997 GiB <= 3: True; six workers doubled 11.98 GiB <= 24: True
+A4 at 16,384: share of the anneal with k(t) > 512: 0.250, > 128: 0.499; rates measured k0 (2048) 0.1373, mid (128) 0.0168, k8 0.0128 s/update
