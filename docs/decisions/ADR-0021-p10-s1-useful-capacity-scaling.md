@@ -507,7 +507,7 @@ The lead does not improvise a row. When the work returns, the human lead may sto
 - Apple M5 Max, 18 cores, 48 GB; CPU only. No cloud, paid service, download, new dependency, change to `uv.lock` or `pyproject.toml`, or SSD work.
 - **Stages:** generate → gates → train (six single-thread workers) → evaluate (six workers) → timing (isolated) → simulate → analyze → report. **Each registered stage is started by a fixed launch script that is part of the freeze.** Training and evaluation never overlap a timing stage of any study.
 
-**Caps (the human lead's figures, §15):** **12 charged hours** for calibration, rehearsal and the registered stages together; **3 GiB per worker; 18 GiB aggregate.**
+**Caps (the human lead's figures, §15):** **16 charged hours** (raised from 12 by the human lead on 2026-11-15, §15) for calibration, rehearsal and the registered stages together; **3 GiB per worker; 18 GiB aggregate.**
 
 **Projection (not a measurement).** Per-update costs from the P9-I rehearsal, as tabulated in `adr-0021-review/outputs/c4b_matrix_budget_final.txt`; T-OQ assumed at twice F-OQ; the new D-OQ and the index build are unmeasured; the evaluation figure is the lead's estimate.
 
@@ -524,7 +524,7 @@ The lead does not improvise a row. When the work returns, the human lead may sto
 | **Remaining, seed block on draw 1 only** | | **about 5.3** |
 | **Remaining, seed block on draws 1 and 2** | | **about 5.6** |
 
-- **Headroom rule:** after the rehearsal, charged-so-far plus twice the projected remaining time must be at most 12 hours, and twice the measured peak memory at most the memory caps (peak at most 1.5 GiB per worker; otherwise the evaluation batch is reduced and the rehearsal repeated).
+- **Headroom rule:** after the rehearsal, charged-so-far plus twice the projected remaining time must be at most the cap (16 hours since the human lead's decision of 2026-11-15; 12 before), and twice the measured peak memory at most the memory caps (peak at most 1.5 GiB per worker; otherwise the evaluation batch is reduced and the rehearsal repeated).
 - On this projection the draw-1 seed block needs 1.4 + 2 × 5.3 = **12.0 hours: zero slack.** The projection rests on unmeasured items: T-OQ at twice F-OQ (the largest item; at 2.5× the twofold rule needs about 0.8 hours more), the new D-OQ, the index builds and the evaluation hour (each 20% over adds about 0.4 hours under the twofold rule). **It is likely that the rehearsal measures more than the projection.** The cuts of this section then apply in order: the draw-1 seed block saves about 0.7 hours under the twofold rule, the D-OQ cut, where cut 3 permits it, about 0.37 hours (8K/64K) and 0.22 hours (32K/16K) under the twofold rule. Revision 4 adds two load-calibration runs (about 0.09 charged hours before the rule), so on this projection the draw-1 seed block exceeds a 12-hour cap by about that amount and cut 2 applies unless the rehearsal measures less. Beyond that the work returns to the human lead, with the measured shortfall and the options: raise the cap, or shorten the run lengths (which changes the registered design and needs a re-review). The lead does not choose between them.
 
 **Cuts, fixed now, in this order, until the headroom rule holds; nothing else may be cut:**
@@ -631,6 +631,18 @@ Taken by the lead (Claude Fable 5.2) under the delegation quoted above. It is no
 - **Basis:** the specification reviews have no open blocker or major (revision 1 review, revision 2 confirmation K1–K7, revision 3 re-check R1, R2, m1–m11, all applied in revision 4; R1 in the auditor's words, R2 by the auditor's option (c)). No S1 record exists and no registered seed has been observed.
 - **Open with the human lead and unchanged by this approval:** the cap (12 hours; the lead asked whether to raise it to 16 and has no answer), and the answer of §13 item 5.
 - S1 uses oracle or controlled addressing. No autonomous learned-memory success may be claimed from it.
+
+### Human lead's decision on the cap — 2026-11-15 (UTC)
+
+The lead asked: "Raise S1's cap from 12 to 16 hours? I recommend 16." The human lead answered, verbatim (the sentence also answers a P9-II and an S2 question, recorded in ADR-0019 and ADR-0022):
+
+> yes I do, yes we can raise to 16 and I approve the package
+
+Recorded by the lead:
+
+- **S1's cap is 16 charged hours.** The memory caps are unchanged (3 GiB per worker, 18 GiB aggregate). The programme total is 16 + 16 + 36 = 68 hours.
+- The decision was made before any S1 calibration, rehearsal or registered record exists. No rule, cut order, run length, threshold or cell changes; only the number the headroom rule of §10.3 compares against. Passages of this ADR that compute slack against 12 hours (§10.3's projection bullets, §21) describe the earlier cap and are kept as written.
+- On the projection (about 1.5 hours before the rule, 5.3 hours remaining), 1.5 + 2 × 5.3 = 12.1 ≤ 16: both seed blocks (12.7 hours doubled) and every dense-control cell fit, with about 3.3 hours of doubled slack. The rehearsal decides.
 
 ## 16. Open questions
 
@@ -747,3 +759,17 @@ The auditor re-read revision 3 (`adr-0021-review/RECHECK_REV3.md`): K1–K7 were
 
 **Consequence for the budget, stated:** at a 12-hour cap the projection had zero slack; with the two added calibration runs the draw-1 seed block is projected not to fit, by about 0.09 hours. The cap is the human lead's and is not changed here.
 
+## Addendum — the human lead's delegation on the hour cap (2026-11-15 UTC)
+
+The human lead, verbatim (the first clause concerns ADR-0022):
+
+> I Aprove the link files with 6.2mb and you can extend the hour cap if needed across all p10
+
+Recorded by the lead, with the limits the lead puts on its own use of this:
+
+- The lead may raise a P10 study's charged-hours cap when the study's own headroom rule would otherwise cut registered cells or stop the study.
+- A cap is raised only **before that study's registered seeds are observed** (at the rehearsal's headroom check, or at a stage gate that reads time and memory only). It is never raised in response to a result, and never to add cells, arms, updates or replicates beyond what the specification registers.
+- Each raise is recorded in the study's ADR with the measured projection that required it, the old and new cap, and what it protects. Memory caps (3 GiB per worker, 18 GiB aggregate, and S2's own) are not hour caps and are not changed.
+- The human lead's words do not extend to downloads, cloud or paid services, models, data, thresholds or designs.
+
+S1's cap is unchanged by this record (16 hours). Programme-level record: `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`.

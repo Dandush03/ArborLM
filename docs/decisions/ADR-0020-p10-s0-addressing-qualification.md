@@ -1,18 +1,18 @@
 # ADR-0020 — P10-S0: Addressing qualification for the P10 programme
 
-- **Status: DESIGN REVISION 3 — CONFIRMED BY THE AUDITOR SUBJECT TO E1–E10, WHICH THIS REVISION APPLIES. SPEC: PENDING ASTRA REVIEW. Nothing is implemented or run.**
+- **Status: DESIGN REVISION 4 — CONFIRMED BY THE AUDITOR SUBJECT TO F1–F7 AND TWO EDITS, APPLIED (`adr-0020-review/confirm-rev4/CONFIRM_REV4.md`); approved by the lead for implementation, tests, gates on the rehearsal draw and rehearsal only (§18); nothing implemented or run. Fourth arm A5-D added by the human lead's decision after P9-II's outcome was observed (§3.4). SPEC: PENDING ASTRA REVIEW.**
 - **Date:** 2026-11-15 (UTC)
-- **Revision history.** Revision 1 (2026-11-15): first draft; reviewed by Opus 5.5 (`adr-0020-review/REVIEW.md`), verdict NOT READY (blockers B1–B2, majors M1–M7, minors m1–m20). Revision 2 (this text): applies that review under the lead's rulings. The design changed in substance: S0 now always runs and always contains the answer-only, supervised and staged arms; the runner-up arm, the small scope, the added-facts stage and the 65,536 label are gone; the sample is ten draws by two seeds. Confirmation review of revision 2 by Opus 5.5 (`adr-0020-review/CONFIRM.md`): READY AFTER the text edits E1–E10 (E1 and E2 required, E3–E10 minor, no blocker). Revision 3 (this text): applies E1–E10 with the auditor's text and the lead's choices on the bracketed points. §19 maps every finding of both reviews to its change; §20 lists the lead's choices. The auditor stated that with E1–E10 applied as written no further review round is needed, and that any passage worded differently needs a re-check; the passages not pasted verbatim are listed at the end of §19.
+- **Revision history.** Revision 1 (2026-11-15): first draft; reviewed by Opus 5.5 (`adr-0020-review/REVIEW.md`), verdict NOT READY (blockers B1–B2, majors M1–M7, minors m1–m20). Revision 2: applies that review under the lead's rulings. The design changed in substance: S0 now always runs and always contains the answer-only, supervised and staged arms; the runner-up arm, the small scope, the added-facts stage and the 65,536 label are gone; the sample is ten draws by two seeds. Confirmation review of revision 2 by Opus 5.5 (`adr-0020-review/CONFIRM.md`): READY AFTER the text edits E1–E10 (E1 and E2 required, E3–E10 minor, no blocker). Revision 3 (commit `c56b23a`): applies E1–E10 with the auditor's text and the lead's choices on the bracketed points. §19 maps every finding of both reviews to its change; §20 lists the lead's choices. The auditor stated that with E1–E10 applied as written no further review round is needed, and that any passage worded differently needs a re-check; the passages not pasted verbatim are listed at the end of §19. Re-check of revision 3 by Opus 5.5 against E1–E10 and against P9-II's actual records (`adr-0020-review/RECHECK_REV3.md`): READY SUBJECT TO the text edits R1–R10 (R1 and R2 major, R3–R10 minor). **Revision 4 (this text)** does two things and nothing else: it makes A5-D the fourth arm by the human lead's decision of 2026-11-15, taken after P9-II's outcome was observed and before any S0 record exists (§3.4, §18); and it applies R1–R10 and note N1. §21 maps each change to its source. No threshold, criterion, preference order, consistency rule, seed, draw count or cap is changed. Revision 3 is to be kept unchanged as `docs/reviews/p10-design-2026-11-15/revisions/ADR-0020-rev3.md`.
 - **Study code:** P10S0. Package `studies/p10s0/`. Config `configs/p10s0_qualification.toml`. Tests `tests/test_p10s0_*.py`. Launch scripts `studies/p10s0/launch/`. This text calls the study "P10-S0" or "S0" and its stages Q1 and Q2; it has no "Stage 0".
 - **Origin.** The human lead's P10 direction: "Addressing remains a mandatory prerequisite. Incorporate the most promising P9-II addressing interventions as a qualification gate rather than assuming they have succeeded." and "Phase 1 — Addressing qualification: … Compare the original answer-only method with preregistered addressing supervision and staged optimization. Evaluate across multiple independent data draws and initialization seeds. …"; and the later update that S0, S1 (ADR-0021) and S2 (ADR-0022) are "three parallel, scientifically independent experiments". The direction texts are quoted from the lead's task messages; they are not in the repository.
-- **Evidence it rests on.** P9-I (ADR-0017 Part I): COMPLETE — NO_INTERFACE_SELECTED, accepted by the human lead as a registered negative result (ADR-0017 §15.9). P9-II (ADR-0019 revision 4): **not yet run**; this text is written before any P9-II observation and uses no P9-II result. Review diagnostics are exploratory and enter no rule.
+- **Evidence it rests on.** P9-I (ADR-0017 Part I): COMPLETE — NO_INTERFACE_SELECTED, accepted by the human lead as a registered negative result (ADR-0017 §15.9). P9-II (ADR-0019 revision 4): **not yet run**; this text is written before any P9-II observation and uses no P9-II result (written at `c56b23a`, before P9-II's run records `d72b173`; that sentence is true of revisions 1–3 and of every rule and number they fixed). **Revision 4 is written after P9-II's registered outcome was observed.** P9-II is COMPLETE with the registered outcome ADDRESSING-RELIABLE: A5-D (LABEL-FREE); interface carried forward A0; recomputed by Opus 5.5 (171 comparisons, 0 disagreements); **not accepted by the human lead at the time of writing**. Revision 4 takes one thing from that outcome that revision 3's rules did not already take: the fourth arm, by the human lead's decision (§3.4). No S0 code, pipeline check, rehearsal or record exists. Review diagnostics are exploratory and enter no rule.
 - **Roles (study-specific).** Lead: Claude Fable 5.2. Specification review, implementation audit and recomputation: Opus 5.5, in contexts separate from implementation, receiving code and records and not the lead's conclusions. Implementation: Sonnet 5.5. Inventory: Haiku 5.5. The model that actually ran each delegated task is recorded from session metadata. ADR-0012 stays not approved. **Astra review: NOT_PERFORMED.** A Claude review is neither Astra validation nor a human approval.
 - **Relation to other work.** P9-II runs and is committed first. S0 imports `studies.p9ii`, `studies.p9i` and `studies.p9` unedited. S1 and S2 do not wait for S0; S0 uses no result of S1 or S2. P1–P9-II code, configs, records and ADRs are not edited.
 - **Marking.** Judgment-call numbers are marked **[lead's choice]**. "As ADR-0019 §x" means the definition of ADR-0019 revision 4 applies unchanged.
 
 ## 0. What S0 is, in one paragraph
 
-S0 is the registered qualification gate of the P10 programme and an independent replication of P9-II's central comparison. Whatever P9-II shows, S0 trains the answer-only method (A0), addressing supervision (A1) and staged optimization (A2) on ten new draws and two initialization seeds, at 4,096 and at 16,384 slots, with ADR-0019's definitions and P9-II's calibrated values. P9-II's outcome adds at most one further arm, by a mapping fixed here (§3). An interface is qualified from S0's own classes by a fixed preference order, and only if it is consistent with P9-II's registered classes (§8.5). P9-II's classes are printed beside S0's as REPLICATES or DOES NOT REPLICATE. S0 tunes nothing.
+S0 is the registered qualification gate of the P10 programme and an independent replication of P9-II's central comparison. Whatever P9-II shows, S0 trains the answer-only method (A0), addressing supervision (A1) and staged optimization (A2) on ten new draws and two initialization seeds, at 4,096 and at 16,384 slots, with ADR-0019's definitions and P9-II's calibrated values. P9-II's outcome adds at most one further arm, by a mapping fixed here (§3). Applied to P9-II's records, that mapping gives no further arm. The human lead then added A5-D, the label-free diversity penalty, as the fourth arm, after P9-II's outcome was observed and knowing that A5-D was RELIABLE there (§3.4). For A5-D, S0 is therefore a confirmatory replication on new draws, not an unbiased first test. An interface is qualified from S0's own classes by a fixed preference order, and only if it is consistent with P9-II's registered classes (§8.5). P9-II's classes are printed beside S0's as REPLICATES or DOES NOT REPLICATE. S0 tunes nothing.
 
 ## 1. What is known, and what is not
 
@@ -24,7 +24,7 @@ Not known, the subject of P9-II: which training method, if any, is reliable acro
 
 Not known, and not answerable by P9-II alone (the subject of S0):
 
-1. Whether P9-II's classes for A0, A1 and A2 are reproduced by a second study with its own draws, and with ten draws where P9-II's Stage 2 has four.
+1. Whether P9-II's classes for A0, A1 and A2 (and, by the decision of §3.4, A5-D) are reproduced by a second study with its own draws, and with ten draws where P9-II's Stage 2 has four.
 2. Whether a reliable arm also meets stricter fact-specificity criteria (read swap; address stability).
 3. Whether a label-free arm keeps addressing at two facts per slot (S1's cell 8K/4K).
 4. Whether the qualified recipe depends on being told the record length (W7's seven-position window).
@@ -39,7 +39,7 @@ Each hypothesis can fail. "At both core sizes" means cell types 2K/4K and 8K/16K
 - **H20-A (answer-only is unreliable).** A0 is not RELIABLE at one or both core sizes on S0's draws.
 - **H20-B (addressing supervision).** A1 is RELIABLE and IMPROVES ON A0 (§8.4) at both core sizes.
 - **H20-C (staged optimization).** A2 is RELIABLE and IMPROVES ON A0 at both core sizes.
-- **H20-D (the carried label-free arm; only if a fourth arm exists).** C4 is RELIABLE and IMPROVES ON A0 at both core sizes.
+- **H20-D (the carried label-free arm; only if a fourth arm exists).** C4 is RELIABLE and IMPROVES ON A0 at both core sizes. *Revision 4:* the fourth arm exists and is A5-D, added by the human lead's decision and not carried by the mapping (§3.4). The hypothesis and its reading are unchanged. Stated before S0 runs: IMPROVES ON A0 needs d ≥ 4 (§8.4), that is at least four cells in which A0 fails; in P9-II A0 succeeded in 8 of 8 cells at 16,384 (4U). If A0 fails fewer than four of its 20 cells at 8K/16K in S0 (cell success as in §8.4), H20-D reads "not supported" whatever A5-D does. That is the registered reading, not a defect to be repaired.
 - **H20-R (replication), per arm and size.** The arm's class on S0's draws under P9-II's criteria agrees with its P9-II class (RELIABLE in both, or not RELIABLE in both).
 - **H20-Q (qualification).** At least one arm meets S0's criteria and is CONSISTENT ACROSS STUDIES at both core sizes (§8.5).
 - **H20-O (overload; read on the qualified candidate, label-free candidates only).** At 8,192 facts in 4,096 slots the candidate keeps at least 0.90 of the oracle reference's accuracy and stays un-collapsed.
@@ -69,9 +69,9 @@ Read only from P9-II's records as recomputed by the auditor and committed:
 1. **The calibration record** (λ, U_pre, k_0/N, μ). If no audited P9-II calibration record exists, S0 cannot define A1 or A2 and is **NOT STARTED — NO P9-II CALIBRATION RECORD**; the matter returns to the human lead. This is the only branch in which S0 does not run.
 2. **The outcome row** of ADR-0019 §8.6. If it is ENGINEERING_FAIL, INCOMPLETE or NOT_INTERPRETED, there is no fourth arm; S0 runs A0, A1, A2, A6, A7 and prints **FOURTH ARM: NONE — P9-II \<status\>**.
 3. **Stage 2's status.** If it is not COMPLETE, there is no fourth arm (no arm is carried forward by ADR-0019 §8.6 without a class at 16,384). A class printed for a Stage 2 that is not COMPLETE is not read.
-4. **The interface carried forward** (ADR-0019 §8.6: the first RELIABLE arm at 16,384, 4U readout, in the order A0, A5-C, A5-D, A4, A2, A1, without LM CAPABILITY REDUCED; A1 and A2 skipped where NEGATIVE CONTROL FAILED is printed). If it is A4, A5-C or A5-D, **C4 is that arm** with its calibrated value. If it is A0, A2 or A1, or no arm is carried, there is no fourth arm, and the reason is printed.
+4. **The interface carried forward** (ADR-0019 §8.6: the first RELIABLE arm at 16,384, 4U readout, in the order A0, A5-C, A5-D, A4, A2, A1, without LM CAPABILITY REDUCED; A1 and A2 skipped where NEGATIVE CONTROL FAILED is printed). If it is A4, A5-C or A5-D, **C4 is that arm** with its calibrated value. If it is A0, A2 or A1, there is no fourth arm and the record prints **FOURTH ARM: NONE — P9-II CARRIED \<arm\> (ALREADY IN S0)**. If no arm is carried, there is no fourth arm, and the reason is printed.
 
-Nothing else is read: no accuracy, no per-draw table, no Stage 3 label. The mapping is evaluated by a committed script; its output, the **arm-selection record**, is part of the freeze. The auditor recomputes it from this text, not from the implementer's script (gate G10).
+Nothing else is read: no accuracy, no per-draw table, no Stage 3 label. The mapping is evaluated by a committed script; its output, the **arm-selection record**, is part of the freeze. The auditor recomputes it from this text, not from the implementer's script (gate G10). From revision 4 the record has a second part, the override of §3.4, which the script copies from this text and does not compute.
 
 ### 3.3 What the rule gives for every P9-II outcome
 
@@ -91,7 +91,94 @@ Nothing else is read: no accuracy, no per-draw table, no Stage 3 label. The mapp
 
 In every row S0 runs its full core matrix. P9-II's outcome changes only whether a fourth learned arm is present. No arm is added, removed or reordered after any S0 record exists.
 
-**Consequence, stated:** a label-free arm that P9-II finds RELIABLE at 4,096 but that is not the carried arm (because A0 precedes it, or because it failed or was not run at 16,384) is not in S0.
+**Consequence, stated:** a label-free arm that P9-II finds RELIABLE at 4,096 but that is not the carried arm (because A0 precedes it, or because it failed or was not run at 16,384) is not in S0. *Revision 4: this case occurred, for A5-D, and the human lead overrode it (§3.4).*
+
+### 3.4 Revision 4: what the rule gave on P9-II's records, and the human lead's override
+
+§3.2 and §3.3 are kept as written in revision 3. They are the record of what the rule fixed before any P9-II observation gives.
+
+**What the rule gave.** Evaluated by the auditor on P9-II's committed records (`RECHECK_REV3.md` §2):
+
+| §3.2 step | P9-II record | Result |
+|---|---|---|
+| 1 calibration | `results/p9ii-calibration-2026-11-15/calibration.json` (sha256 `ad5d7ee2…`): λ = 1.0, U_pre = 2,048, k_0/N = 0.125, μ = 1.0; audited | exists; S0 runs |
+| 2 outcome row | ADDRESSING-RELIABLE, row 4; COMPLETE, interpretable | interpreted |
+| 3 Stage 2 | COMPLETE | read |
+| 4 carried arm | A0 | **no fourth arm** |
+
+The row of §3.3 that applies is "ADDRESSING-RELIABLE, carried arm A0 (RELIABLE at 16,384, not at 4,096) — none (already in S0)". By §3.2 item 4 the mapping's own result prints **FOURTH ARM: NONE — P9-II CARRIED A0 (ALREADY IN S0)**. This is the case named in §3.3's consequence: A5-D was RELIABLE in P9-II at 4,096 (16 of 16 cells) and at 16,384 (8 of 8), and was not carried because A0 precedes it in ADR-0019's order.
+
+**The override.** The lead put this question to the human lead: "Add the diversity penalty to S0? As written, S0 cannot test it and can only qualify the supervised arm. I recommend adding it; the alternative is to run S0 as written and test the penalty in P10-I." The human lead's answer of 2026-11-15, verbatim (§18):
+
+> yes s0 should include the penalty and i approve s2 download
+
+(The second half concerns ADR-0022 and is not S0's.) By that decision **the fourth arm C4 is A5-D**: answer-only training plus μ·L_div on the batch's normalized, un-centred queries, exactly as ADR-0019 §4 defines it and as `studies.p9ii` implements it, with **μ = 1.0** from P9-II's audited calibration record. The decision overrides one result of the mapping, the entry "no fourth arm". It changes no other rule of this ADR.
+
+**Provenance. To be read with every S0 result for A5-D.**
+
+1. **The decision was made after P9-II's outcome was observed** (run records `d72b173`, recomputation `74f15d1`) **and before any S0 record exists.** No S0 code, pipeline check, rehearsal, gate output or generated draw exists.
+2. **The arm was chosen with knowledge of its result.** The human lead and the lead knew that A5-D was RELIABLE in P9-II: 16 of 16 cells at 4,096 and 8 of 8 at 16,384. A5-D is in S0 because of that observed result, not because a rule fixed in advance selected it.
+3. **For A5-D, S0 is a confirmatory replication on new draws of an arm selected on its observed result. It is not an unbiased first test.** S0's draws, seeds and panels are new and disjoint from P9-II's (§7), and every threshold was fixed in revision 3 before P9-II ran. What is not independent of P9-II is the choice to test this arm. S0's own class, draw count and per-draw bound for A5-D come from draws not used in its selection and are read as stated; the selection affects the pooled count, the consistency label and the preference order.
+4. **The pooled count adds no independent evidence for A5-D.** P9-II's A5-D cells are the cells on which the arm was selected, and none failed. CONSISTENT ACROSS STUDIES (§8.5) therefore holds for A5-D whenever it is RELIABLE in S0 (§3.5). For A5-D that label means "S0 did not contradict the records the arm was chosen on", and no more.
+5. **The preference order A0, C4, A2, A1 (§8.5) was fixed in revision 3, before P9-II ran. The occupant of C4 was chosen after.** The order therefore places an arm chosen after observation ahead of A1. The order is not changed; this is stated so that it is not read as a pre-registered preference for A5-D.
+6. **Scope.** The human lead's words do not list cells. The lead applies them thus: A5-D takes exactly the place revision 3 defines for a label-free C4 (2K/4K, 8K/16K and 8K/4K in Q1; WX and the 65,536 probe if it is the qualified candidate), and nothing more.
+7. P9-II's F1 ruling left "whether a later study uses A0, A5-D or both" to "that study's own specification and approval". This decision is that choice for S0: both.
+8. **The human lead has not accepted the P9-II outcome at the time of writing.** The decision above is not such an acceptance and is not recorded as one (§18).
+
+**Printed string (fixed).** Wherever the fourth arm is named, and wherever a class, label or annotation of A5-D is printed (§8.7):
+
+**FOURTH ARM: A5-D — ADDED BY THE HUMAN LEAD'S DECISION OF 2026-11-15; THE REGISTERED MAPPING GAVE NONE (P9-II CARRIED A0)**
+
+followed by P9-II's F1 annotation, verbatim from `results/p9ii-run-2026-11-15/OUTCOME.md`: *A0 is UNRELIABLE at 4,096 (4/16) and at chance at matched updates at 16,384; A5-D is the only label-free arm RELIABLE at both sizes; A5-D was not probed at 65,536 because the rule sent A0 to Stage 3.*
+
+and by the fixed sentence: **"A5-D was added after P9-II's outcome was observed, knowing it was RELIABLE there (16/16 at 4,096; 8/8 at 16,384). For A5-D, S0 is a confirmatory replication on new draws, not an unbiased first test. Its CONSISTENT ACROSS STUDIES label and pooled count include the P9-II records it was chosen on and add no independent evidence; no pooled per-draw bound is printed for A5-D."**
+
+**The arm-selection record** (part of the freeze) therefore holds: (a) the mapping's result as the script and the auditor compute it, with the hashes of the P9-II records read; (b) the override: the human lead's words, the date, the printed string, the F1 annotation and the fixed sentence; (c) the calibrated values used, λ = 1.0, U_pre = 2,048 and μ = 1.0 (k_0/N = 0.125 is not used: A4 is not in S0); (d) the arms that can still be the candidate (§3.5).
+
+**S0's arm set in revision 4** (n_L = 4):
+
+| Arm | Calibrated value | Cell types |
+|---|---|---|
+| A0 | — | 2K/4K, 8K/16K, 8K/4K |
+| A1 | λ = 1.0 | 2K/4K, 8K/16K |
+| A2 | U_pre = 2,048 updates at 2,048 facts, 8,192 at 8,192 facts (§5.3) | 2K/4K, 8K/16K |
+| C4 = A5-D | μ = 1.0 | 2K/4K, 8K/16K, 8K/4K; WX and the 65,536 probe if it is the candidate |
+| A6 | reference | 2K/4K, 8K/16K, 8K/4K; the 65,536 probe |
+| A7 | reference | 2K/4K, 8K/16K |
+
+μ = 1.0 was calibrated by P9-II on W7 at 4,096 slots and 0.5 facts per slot. At 8K/4K, in WX and at 65,536 it is an untested transfer (§15). In WX(A5-D), L_div is taken on WX's queries (§5.2: the same loss terms).
+
+### 3.5 What the consistency rule does with P9-II's records (a consequence; no rule is changed)
+
+The rule of §8.5 was fixed in revision 3. Applied to P9-II's committed records it gives the following before S0 runs. A P9-II draw is failed when any of its cells fails (§8.5 (b)); the counts are from `results.json` (`draw_sensitivity.draw_counts`), as read by the re-check and re-read for A5-D by the drafter. P9-II printed LM CAPABILITY REDUCED for no arm at either size.
+
+| Arm, size | P9-II class (cells) | P9-II failed draws | What §8.5 then requires of S0 |
+|---|---|---|---|
+| A0, 4,096 | UNRELIABLE (4/16) | 6 of 8 | nothing can satisfy it: more than two failed draws already. **INCONSISTENT ACROSS STUDIES whatever S0 observes** |
+| A0, 16,384 | RELIABLE (8/8) | 0 of 4 | at most two failed draws of S0's ten (P9-II's criteria). No effect on qualification, because A0 fails the rule at 4,096 |
+| A5-D, 4,096 | RELIABLE (16/16) | 0 of 8 | at most two failed draws of S0's ten. **Met whenever A5-D is RELIABLE in S0** (RELIABLE allows at most one failed cell, so at most one failed draw) |
+| A5-D, 16,384 | RELIABLE (8/8) | 0 of 4 | the same. **Met whenever A5-D is RELIABLE in S0** |
+| A2, 4,096 | FAILS (0/16) | 8 of 8 | **INCONSISTENT ACROSS STUDIES whatever S0 observes** |
+| A2, 16,384 | none (A2 has no Stage 2 class) | — | case (a): SINGLE-STUDY EVIDENCE. No effect, because A2 fails the rule at 4,096 |
+| A1, 4,096 | RELIABLE (16/16) | 0 of 8 | met whenever A1 is RELIABLE in S0 |
+| A1, 16,384 | UNRELIABLE (6/8) | 2 of 4 | **no failed draw in S0**: every evaluated 8K/16K cell of A1 succeeds under P9-II's criteria (conditions 1–5). This is stricter than RELIABLE, which allows one failed cell |
+
+**Which arms can still qualify.** Items 1 and 2 of §8.5 both need consistency at 2K/4K. So:
+
+- **A0 cannot be the candidate at any scope.** If it meets S0's criteria it is printed by §8.5 item 4 (RELIABLE IN S0; INCONSISTENT ACROSS STUDIES). "(ANSWER-ONLY SUFFICES)" cannot be printed.
+- **A2 cannot be the candidate at any scope.**
+- **A5-D can.** It is the candidate at both sizes if it is RELIABLE under S0's criteria and ADDRESS STABLE at 2K/4K and at 8K/16K. It stands first among the arms that can qualify, because the order is A0, C4, A2, A1.
+- **A1 can.** It is the candidate only if A5-D is not, and then at both sizes only if, besides meeting S0's criteria, it has no failed draw at 8K/16K under P9-II's criteria. With one such failed draw A1 is at most qualified at 4,096 only (§8.7 row 5).
+- Under cut 3 of §10.4 a draw at 8K/16K is its one cell, and the same counts apply.
+
+**The arms that can still be the candidate** are therefore A5-D and A1. This list is computed from §8.5 (b) and P9-II's committed records (an arm is excluded if at 4,096 its P9-II failed draws already exceed two, or P9-II printed LM CAPABILITY REDUCED for it there), is printed in the arm-selection record, and is recomputed by the auditor (G10). §10.3 and §10.4 use it.
+
+**What follows for the annotations (stated; nothing is changed).**
+
+- OVERLOAD (H20-O) can be read only if A5-D is the candidate. If A1 is the candidate it prints NOT RUN — NO TARGET INJECTION, as before.
+- WX (H20-L) and the 65,536 probe (H20-S) run for whichever of A5-D and A1 is the candidate at both sizes.
+- "(LABEL-FREE)" can appear in outcome rows 4–5 only with A5-D.
+- In revision 3, with no fourth arm, only A1 could qualify (`RECHECK_REV3.md` §2). That is the situation the human lead's decision changed.
 
 ## 4. What S0 adds beyond P9-II
 
@@ -103,6 +190,7 @@ In every row S0 runs its full core matrix. P9-II's outcome changes only whether 
 | Two facts per slot, cell 8K/4K, label-free arms | S1's lane step starts from 8K/4K | every P9-II cell has 0.5 facts per slot |
 | WX, a query not told the record length | every W7 result carries "told the record length" | W7 only |
 | 65,536 at 512 exposures per fact, as a probe | descriptive input for a later study | P9-II's Stage 3 has 32 exposures per fact and is skipped for A2 and A4 |
+| *Revision 4:* A5-D on ten new draws × two seeds at both sizes, under S0's stricter criteria, at two facts per slot and, if it is the candidate, in WX and at 65,536 | the human lead's decision (§3.4); as written in revision 3, S0 could qualify only the supervised arm | P9-II has 8 and 4 draws for A5-D, no read swap, 0.5 facts per slot only, and its Stage 3 probed A0. **A confirmatory replication: the arm was chosen on its P9-II result** |
 
 ## 5. System, WX and the training regime
 
@@ -129,7 +217,7 @@ With U = 8,192: 2K/4K runs U updates; 8K/4K and 8K/16K run 4U = 32,768 and are r
 
 ## 6. Matrix
 
-Cell type "8K/4K" = 8,192 facts in 4,096 slots. Init seeds 2001 and 2002. n_L = number of learned core arms = 3 (A0, A1, A2) or 4 (with C4).
+Cell type "8K/4K" = 8,192 facts in 4,096 slots. Init seeds 2001 and 2002. n_L = number of learned core arms = 3 (A0, A1, A2) or 4 (with C4). **In revision 4 n_L = 4: C4 = A5-D (§3.4).** The three-arm figures below are kept as revision 3's and no longer occur.
 
 ### 6.1 Q1 — core (ten registered draws, 1–10)
 
@@ -143,6 +231,7 @@ Cell type "8K/4K" = 8,192 facts in 4,096 slots. Init seeds 2001 and 2002. n_L = 
 - **References are draw-paired, not seed-paired:** A6 and A7 use seed 2001 on every draw.
 - Within a draw, 8K/4K and 8K/16K share facts, streams and panels; the 2,048-fact set is generated independently (§7). Within a draw and seed every arm sees the same data, batch order and initialization of shared parameters.
 - Cells: 2K/4K 20·n_L + 20; 8K/16K 20·n_L + 20; 8K/4K 20 or 30. **Q1 = 180 cells with three learned arms, 230 with four.**
+- **Revision 4, n_L = 4:** 2K/4K 80 learned + 20 reference = 100 cells; 8K/16K 80 + 20 = 100; 8K/4K 10 (A0) + 10 (A5-D) + 10 (A6) = 30. **Q1 = 230 cells.** Under cut 3 of §10.4, 8K/16K has 40 + 20 = 60 cells and Q1 has 190.
 
 ### 6.2 Q2 — annotations for the qualified candidate (after the Q1 gate)
 
@@ -156,7 +245,7 @@ Cell type "8K/4K" = 8,192 facts in 4,096 slots. Init seeds 2001 and 2002. n_L = 
 
 ### 6.3 Totals and bounds
 
-At most 230 + 26 = **256** registered training cells; 180 if there is no fourth arm and no candidate. Pipeline check: 3 cells (§10.1). Two reserve draws (§7).
+At most 230 + 26 = **256** registered training cells; 180 if there is no fourth arm and no candidate. *Revision 4:* with the fourth arm fixed, the count is **256** with a qualified candidate (230 + 20 WX + 6 probe) and **230** without one; the 180-cell case no longer occurs. Pipeline check: 3 cells (§10.1). Two reserve draws (§7).
 
 One-sided 95% Clopper–Pearson lower bounds on the per-draw success probability. **In the two-seed cell types a draw succeeds only when both of its cells succeed; every printed bound uses that count.**
 
@@ -170,14 +259,14 @@ One-sided 95% Clopper–Pearson lower bounds on the per-draw success probability
 | 3 of 3 (65,536 probe) | 0.368 |
 | 16 of 18 / 12 of 14 (pooled, the consistency threshold) | 0.690 / 0.615 |
 
-S0 states these bounds and claims no more. Where S0's protocol at a cell type is identical to P9-II's (2K/4K at U = Stage 1; 8K/16K at 4U = Stage 2; identity checked by G4), the pooled count of the two studies is printed beside the S0 count, always, as a descriptive line (for reference: 18 of 18 gives 0.847, 17 of 18 gives 0.762, 14 of 14 gives 0.807, 13 of 14 gives 0.703). The pooled count enters exactly one rule, the consistency rule of §8.5, and there it is counted in failed draws over the evaluated draws of both studies.
+S0 states these bounds and claims no more. Where S0's protocol at a cell type is identical to P9-II's (2K/4K at U = Stage 1; 8K/16K at 4U = Stage 2; identity checked by G4), the pooled count of the two studies is printed beside the S0 count, always, as a descriptive line, under P9-II's criteria; NOT AVAILABLE where P9-II has no class for the arm at that size (for reference: 18 of 18 gives 0.847, 17 of 18 gives 0.762, 14 of 14 gives 0.807, 13 of 14 gives 0.703). The pooled count enters exactly one rule, the consistency rule of §8.5, and there it is counted in failed draws over the evaluated draws of both studies.
 
 ## 7. Seeds and data identities
 
 - **Registered data seed sets** `p10s0-draw-1` … `p10s0-draw-13`, bases 200001 + 100·(d − 1). Draws 1–10: Q1 and WX. Draws 11–13: the 65,536 probe. **Reserve sets** `p10s0-reserve-1`, `-2`: bases 201301, 201401, each holding all three fact sets. Replacement as ADR-0019 §9.
 - Layout in a set (P9-I convention inside each block of twenty: fourteen data seeds, three Panel A null seeds, three Panel B null seeds): base + 0…19 the 2,048-fact set; base + 20…39 the 8,192-fact set; base + 60…79 the 32,768-fact set. Target-slot seeds, with j = init seed − 2001: base + 40 + j (2,048 facts), base + 44 + j (8,192 facts, 16,384 slots), base + 48 + j (32,768 facts). WX uses the target slots of its cell. Read-swap derangement seeds base + 50, + 51, + 52 for the three fact sets.
 - **Init seeds** 2001, 2002. **Pipeline check:** data base 209001, init 2091. **Rehearsal:** data base 209101, init 2092. **Unit tests:** 920001–920999.
-- **Bounded, disjoint namespaces (gate G9).** P9 (170001–171343, 179001–179933, 1701–1702); P9-I (182001–182020, 180101–181900, 1791–1792, 1801–1802, 900001–900233); review diagnostics (500001–500004); P9-II (190001–191599, 1891, 1901–1902, tests 910001–919999); **S0 (200001–209999, init 2001–2002, check and rehearsal init 2091–2092, tests 920001–920999)**; S1 (210001–219999, 2101–2105, 2191–2192, tests 921001–921999); S2 (220001–228999, tests 229001–229999); the seeds of P1–P8 read from their configs. G9 asserts these in code and reads P9-II's actual test seeds from its committed code at S0's freeze, asserting them inside 910001–919999.
+- **Bounded, disjoint namespaces (gate G9).** P9 (170001–171343, 179001–179933, 1701–1702); P9-I (182001–182020, 180101–181900, 1791–1792, 1801–1802, 900001–900233); review diagnostics (500001–500004); P9-II (190001–191599, 1891, 1901–1902, tests 910001–919999); **S0 (200001–209999, init 2001–2002, check and rehearsal init 2091–2092, tests 920001–920999)**; S1 (210001–219999, 2101–2105, seed-block initialization seeds 2111, 2121, 2112, 2122, 2191–2192, tests 921001–921999); S2 (220001–228999, tests 229001–229999); the seeds of P1–P8 read from their configs. G9 asserts these in code and reads P9-II's actual test seeds from its committed code at S0's freeze, asserting them inside 910001–919999.
 - The specification auditor searched `studies/`, `configs/`, `src/`, `tests/`, `results/`, `supplements/`, `docs/`, `templates/`, `prompts/` and `experiments/` (14,155 text files, with a positive control) and found S0's ranges unused (review m19).
 - Within a draw, training contexts, the calibration stream, Panels A and B, H1, H2 and the unseen-fact control are disjoint as ADR-0017 §4. All thirteen registered draws and both reserves are generated, hashed and G1-checked at the freeze, before any model sees them. No P9-II draw, panel or snapshot is used by S0.
 
@@ -216,7 +305,7 @@ UNRELIABLE and FAILS enter no rule; qualification, replication and OVERLOAD use 
 
 ### 8.4 Comparisons and annotations (enter no class)
 
-- **Paired comparison with A0**, per core cell type, as ADR-0019 §8.4: d(X) = (cells where X succeeds and A0 fails) − (cells where A0 succeeds and X fails) over the 20 pairs; IMPROVES ON A0 if d ≥ 4 and X has more successes; HARMS if d ≤ −4; otherwise NOT DISTINGUISHED. The exact sign-test p-value is printed. d(A2 against A1) is printed, descriptively.
+- **Paired comparison with A0**, per core cell type, as ADR-0019 §8.4: d(X) = (cells where X succeeds and A0 fails) − (cells where A0 succeeds and X fails) over the 20 pairs; IMPROVES ON A0 if d ≥ 4 and X has more successes; HARMS if d ≤ −4; otherwise NOT DISTINGUISHED. The exact sign-test p-value is printed. d(A2 against A1) is printed, descriptively. Cell success in d(X) is success under S0's criteria (§8.2), the criteria of the class that H20-B, H20-C and H20-D read; d(X) under P9-II's criteria is printed beside it and enters no reading. **[lead's choice, made in revision 4 after P9-II's outcome was observed; P9-II recorded no read swap]**
 - **Replication of P9-II**, per arm and size, from the class under P9-II's criteria: **REPLICATES P9-II** if the arm is RELIABLE in both studies or not RELIABLE in both; **DOES NOT REPLICATE P9-II** if RELIABLE in exactly one; **NOT COMPARABLE** if either is NOT_EVALUATED or P9-II has no class for the arm at that size (it did not advance, Stage 2 not COMPLETE, P9-II not interpreted). P9-II's class and S0's are printed side by side.
 - **ADDRESS STABLE**, per cell type: the median over cells of the share of facts with the same top-1 slot on Panels A and B ≥ 0.80 (ADR-0019's number). **ADDRESS RECALL** (A1, A2), **DENSE COMPARISON**, **sustained success**: as ADR-0019 §8.4 and §8.7.
 - **COLLAPSE-FREE: k of n** counted cells never had a collapse onset. Printed beside the class so that "collapsed and recovered" is not read as "never collapsed".
@@ -235,7 +324,7 @@ An arm **meets the criteria at a core size** if it is RELIABLE there under S0's 
 | Multiple draws and initialization seeds | the class rule of §8.3 on ten draws × two seeds, with the per-draw bound |
 | LM capability | G5 for the backbone; the relative criterion against A6 for the system |
 
-**Consistency with P9-II (fixed now; the lead's ruling 1).** For a learned arm X and a core size, let P be X's class at that size in P9-II's registered record: at 4,096 the Stage 1 class, at 16,384 the Stage 2 class at the 4U readout. P is read only if P9-II's outcome is interpreted and, at 16,384, P9-II's Stage 2 is COMPLETE and X advanced. X is **CONSISTENT ACROSS STUDIES** at that size if:
+**Consistency with P9-II (fixed now; the lead's ruling 1).** For a learned arm X and a core size, let P be X's class at that size in P9-II's registered record: at 4,096 the Stage 1 class, at 16,384 the Stage 2 class at the 4U readout. P is read only if P9-II's outcome is interpreted and, at 16,384, P9-II's Stage 2 is COMPLETE and X has a Stage 2 class at the 4U readout. X is **CONSISTENT ACROSS STUDIES** at that size if:
 
 (a) P is not available or is NOT_EVALUATED. The label then says **SINGLE-STUDY EVIDENCE** at that size. Or:
 
@@ -243,13 +332,13 @@ An arm **meets the criteria at a core size** if it is RELIABLE there under S0's 
 
 Otherwise X is **INCONSISTENT ACROSS STUDIES** at that size. P9-II's classes for A1 and A2 are read as classes even where P9-II printed NEGATIVE CONTROL FAILED; that result is printed in the label (§8.7 item 5).
 
-**Preference order, fixed (the lead's ruling 3): A0, then C4 (if present), then A2, then A1.**
+**Preference order, fixed (the lead's ruling 3): A0, then C4 (if present), then A2, then A1.** (Unchanged in revision 4. C4 is present and is A5-D; what the rule above gives on P9-II's actual records, arm by arm, is in §3.5.)
 
 1. The candidate is the first arm in the order that meets the criteria **and** is CONSISTENT ACROSS STUDIES at 2K/4K and at 8K/16K. Its scope is 4,096 and 16,384.
 2. If there is none, the first arm in the order that meets the criteria and is CONSISTENT ACROSS STUDIES at 2K/4K is printed as qualified at 4,096 only. Q2 is not run.
 3. If there is none, no arm is qualified.
 4. An arm that meets the criteria at a size but is INCONSISTENT ACROSS STUDIES there is printed **RELIABLE IN S0; INCONSISTENT ACROSS STUDIES (P9-II \<class\>; pooled \<failed\> of \<n\> draws failed)**. It is not qualified at that size, and the rule moves to the next arm.
-5. When A0 is the candidate the label reads **(ANSWER-ONLY SUFFICES)**. Every later arm in the order that would also qualify is printed as **ALSO QUALIFIES: \<arms\>**. SINGLE-STUDY EVIDENCE is printed for each size where (a) applied.
+5. When A0 is the candidate the label reads **(ANSWER-ONLY SUFFICES)**. Whatever the candidate, every later arm in the order that would also qualify is printed as **ALSO QUALIFIES: \<arm\> (\<scope\>)**. SINGLE-STUDY EVIDENCE is printed for each size where (a) applied.
 
 No other use of S0 data selects an arm.
 
@@ -267,14 +356,14 @@ No other use of S0 data selects an arm.
 | 2 | **ENGINEERING_FAIL / INCOMPLETE** | a failed gate; a difference between frozen and running code, config, launch scripts, arm-selection record or data identities; a Q1 cell without a record. No scientific label is derived and no denominator is reduced |
 | 3 | **INCONCLUSIVE** | cell type 2K/4K is NOT_EVALUATED (more than one draw where A6 < 0.90) |
 | 4 | **ADDRESSING-QUALIFIED (4,096 AND 16,384)** | §8.5 item 1 (criteria met and CONSISTENT ACROSS STUDIES at both core sizes) |
-| 5 | **ADDRESSING-QUALIFIED AT 4,096 ONLY** | §8.5 item 2. The label says why 16,384 is missing: UNRELIABLE, FAILS, NOT_EVALUATED or not ADDRESS STABLE. NOT_EVALUATED is not read as a failure at 16,384 |
-| 6 | **ADDRESSING-NOT-QUALIFIED** | §8.5 item 3. Printed as "NOT QUALIFIED IN S0" with, for every arm and size, the S0 class, the class under P9-II's criteria, the replication label and, where an arm is RELIABLE under P9-II's criteria but not under S0's, the added criterion it failed (condition 6 or ADDRESS STABLE) and every arm that met S0's criteria but was INCONSISTENT ACROSS STUDIES, with P9-II's class and the pooled count. |
+| 5 | **ADDRESSING-QUALIFIED AT 4,096 ONLY** | §8.5 item 2. The label says why 16,384 is missing: UNRELIABLE, FAILS, NOT_EVALUATED, not ADDRESS STABLE, or INCONSISTENT ACROSS STUDIES (P9-II \<class\>; pooled \<failed\> of \<n\>). NOT_EVALUATED is not read as a failure at 16,384 |
+| 6 | **ADDRESSING-NOT-QUALIFIED** | §8.5 item 3. Printed as "NOT QUALIFIED IN S0" with, for every arm and size, the S0 class, the class under P9-II's criteria, the replication label and, where an arm is RELIABLE under P9-II's criteria but not under S0's, the added criterion it failed (condition 6 or ADDRESS STABLE); and also every arm that met S0's criteria but was INCONSISTENT ACROSS STUDIES, with P9-II's class and the pooled count. |
 
 Each of Q2's blocks has a status: COMPLETE, NOT RUN — NO CANDIDATE, NOT RUN — BUDGET, NOT RUN — MEMORY, INCOMPLETE, NOT_EVALUATED. Q1's outcome is decided from Q1 alone and stands whatever happens in Q2.
 
 **The outcome of rows 4–5 is printed with, and may not be shortened to omit:**
 
-1. the arm and its calibrated value;
+1. the arm and its calibrated value; for A5-D, the fourth-arm string of §3.4 with P9-II's F1 annotation and the fixed provenance sentence;
 2. **(LABEL-FREE)** for A0, A4, A5-C, A5-D, or **(ADDRESS-SUPERVISED IN TRAINING — needs a target slot per fact)** for A1, A2;
 3. the regime: 512 exposures per fact (U at 2,048 facts, 4U at 8,192), schedules in exposures per fact, 0.5 facts per slot;
 4. per size: S0's draw count and per-draw bound; P9-II's class; REPLICATES / DOES NOT REPLICATE / NOT COMPARABLE; the pooled count; CONSISTENT ACROSS STUDIES or SINGLE-STUDY EVIDENCE;
@@ -284,6 +373,8 @@ Each of Q2's blocks has a status: COMPLETE, NOT RUN — NO CANDIDATE, NOT RUN �
 
 **The text of ADDRESSING-NOT-QUALIFIED says only what S0 found:** that no tested arm met S0's criteria on S0's draws, with item 6 of the table. It makes no statement about S1 or S2 (§17 item 0).
 
+**In every outcome row,** wherever a class, label, annotation or hypothesis reading of A5-D is printed, the fourth-arm string of §3.4, P9-II's F1 annotation and the fixed provenance sentence are printed with it, and may not be shortened away. The same string and annotation are printed where the arm-selection record or the carried arm of P9-II is cited.
+
 **Hypothesis readings, fixed now.** H20-A: supported if A0 is not RELIABLE (S0's criteria) at 2K/4K or at 8K/16K. H20-B, C, D: supported if the arm is RELIABLE and IMPROVES ON A0 at both core sizes; contradicted if it HARMS at either; not supported otherwise. H20-R, per arm and size: supported if REPLICATES; not supported if DOES NOT REPLICATE; not read if NOT COMPARABLE. Qualification is reported separately from replication. H20-Q: supported under row 4. H20-O, H20-L and H20-S are read on the qualified candidate: H20-O supported if OVERLOAD-QUALIFIED, not tested if NOT RUN; H20-L supported if the variant PASSES, otherwise not supported, never contradicted; H20-S supported as an annotation if 3 of 3, contradicted if 0 of 3 with A6 evaluated, otherwise not supported.
 
 ## 9. What the sibling studies may use
@@ -292,12 +383,12 @@ Each of Q2's blocks has a status: COMPLETE, NOT RUN — NO CANDIDATE, NOT RUN �
 
 | S0 outcome | S1 learned-address lane (ADR-0021 §5.6, which cites this ADR's labels) | S2 (ADR-0022) |
 |---|---|---|
-| ADDRESSING-QUALIFIED (4,096 AND 16,384) | The candidate exactly as S0 froze it (S0's code hash; P9-II's calibrated value from the arm-selection record; no tuning), as ADR-0021 §5.6 defines the lane: cells 2K/4K and 8K/16K, and 8K/4K only if OVERLOAD-QUALIFIED (never for A1 or A2, which have no 8K/4K cell); each cell run for 4·F updates; no step verdict. Each F-LA cell records S0's probe set, H1/H2 and the read swap, and prints whether it succeeds under S0's cell-success rule (§8.2). Without OVERLOAD-QUALIFIED the lane's 8K/16K-against-8K/4K difference is printed NOT AVAILABLE. A human acceptance is not required by either ADR. | nothing to run: S2 has no slot-level learned addressing and a different student |
+| ADDRESSING-QUALIFIED (4,096 AND 16,384) | As ADR-0021 §5.6 (revision 4) defines lane L, items 1, 2 and 4; this ADR states no lane rule of its own | nothing to run: S2 has no slot-level learned addressing and a different student |
 | ADDRESSING-QUALIFIED AT 4,096 ONLY | no lane | none |
 | ADDRESSING-NOT-QUALIFIED | no lane | none |
 | INCONCLUSIVE, ENGINEERING_FAIL, INCOMPLETE, NOT STARTED | no lane | none |
 
-No lane uses a 65,536-slot cell, any load other than 0.5 and (with OVERLOAD-QUALIFIED) 2, or any regime other than 512 exposures per fact. A lane may use a label only after the auditor has recomputed Q1 from raw records.
+Which cells the lane runs, when it is omitted and what it prints are ADR-0021 §5.6's (revision 4), not this ADR's. As a consequence of that text, stated here and not a rule of this ADR: the lane exists only when, before S1's freeze, S0 has the outcome ADDRESSING-QUALIFIED (4,096 AND 16,384) (§8.7 row 4) with Q1 recomputed by the auditor from raw records and the candidate is OVERLOAD-QUALIFIED; for candidate A1 or A2 it prints OMITTED — SUPERVISED ARM HAS NO 8K/4K CELL. With P9-II's actual records (§3.5) the lane can therefore exist only if A5-D is the candidate and is OVERLOAD-QUALIFIED.
 
 ### 9.2 Timing, stated plainly
 
@@ -305,8 +396,9 @@ No lane uses a 65,536-slot cell, any load other than 0.5 and (with OVERLOAD-QUAL
 
 ### 9.3 Corrections owed by the sibling drafts (this text cannot make them)
 
-- **ADR-0021 (revision 3, being written):** §5.6 item 1: "… S0 (ADR-0020) has the outcome **ADDRESSING-QUALIFIED (4,096 AND 16,384)**, with Q1 recomputed by the auditor (ADR-0020 §9.1)." §5.6 item 4, append: "Each F-LA cell records S0's probe set, H1/H2 and the read swap, and prints whether it succeeds under ADR-0020 §8.2." §6.3 unit tests 921001–929999 → **921001–921999** (the lead's choice; this ADR's §7 and G9 already use that range).
-- **ADR-0022 revision 4 — to be applied in ADR-0022 before its approval:** §10 "s_c(S0)" → "s_c(Stage 0)"; the stores named "S1"/"S2" in §6–§11, and "ACQ1 (S1)", renamed (for example "St1"/"St2"), because S0, S1 and S2 are study names; §5.4 "a separately approved supplement" → "a supplement approved by the human lead (ADR-0020 §17 item 3)"; §9 "disjoint … from every seed of P1–P9-II and S1" → "… of P1–P9-II, S0 (200001–209999, 2001–2002, 2091–2092, 920001–920999) and S1".
+- **ADR-0021: nothing is owed.** Its revision 4 has §5.6 item 1 as revision 3 of this ADR asked and unit tests 921001–921999. Its §5.6 item 4 was written by its own confirmation (K7: "S0's cell-success rule is applied at all three cells") and differs from the sentence revision 3 of this ADR asked for; this ADR now defers to ADR-0021's text (§9.1, R1), so no edit is owed.
+- **ADR-0022: nothing is owed.** The four corrections revision 3 listed (the Stage 0 score symbol, the store renamed ST1, the supplement approved by the human lead, S0's seeds in the disjointness check) were applied at commit `2ef6a4f`.
+- Revision 4 of this ADR asks no new edit of either sibling. ADR-0021 §5.6 takes "P9-II's calibrated value from the arm-selection record"; for A5-D that is μ = 1.0 (§3.4).
 - ADR-0019 §7's "910001 upward" is read as 910001–919999 and asserted by G9.
 
 ## 10. Gates, pipeline check, rehearsal, resources
@@ -318,13 +410,13 @@ S0 has no tuned quantity. Before the freeze, on the pipeline-check draw only: A0
 ### 10.2 Gates
 
 - **G1** as ADR-0019 §9, per draw and fact set, with its replacement rule. **G2** chance interval per draw and fact count. **G5**, **G6** as ADR-0019 §9, G6 extended to WX.
-- **G4** as ADR-0019 §9, for **every arm the mapping can select** (A0, A1, A2, A4, A5-C, A5-D and WX of each), plus:
+- **G4** as ADR-0019 §9, for **every arm in S0's arm set** (§3.4: A0, A1, A2, A5-D), A6, A7, and WX of each arm that can still be the candidate (§3.5: A5-D, A1), plus:
   - each arm's forward and one training step in S0 are bit-identical to `studies.p9ii`'s on a shared rehearsal seed;
   - WX with W_X zero outside its last 224 columns, and equal to a W7 projection there, gives W7's query bit for bit; the zero padding is as §5.2;
-  - schedules at 8K/4K, 8K/16K and 32K/64K equal the exposure-scaled formulas; at 65,536 slots the full-N score path and A4's k = N read are checked against a direct computation;
+  - schedules at 8K/4K, 8K/16K and 32K/64K equal the exposure-scaled formulas; at 65,536 slots the full-N score path is checked against a direct computation;
   - the read swap: π has no fixed point and no pair with equal answers; swapping twice restores the logits; the tie rule of §8.1;
   - no A1 or A2 cell exists at 8K/4K in the registry.
-- **G9** seed disjointness (§7). **G10** the arm-selection record equals the auditor's independent evaluation of §3.2 on P9-II's committed records, whose hashes are recorded; the auditor's enumeration script `adr-0020-review/c5_rev2_mapping_and_consistency.py` (Part 1) is re-run on P9-II's committed records.
+- **G9** seed disjointness (§7). **G10** the mapping part of the arm-selection record equals the auditor's independent evaluation of §3.2 on P9-II's committed records, whose hashes are recorded; Part 1 of the auditor's enumeration script `adr-0020-review/c5_rev2_mapping_and_consistency.py` is re-run and the table cell matching P9-II's committed outcome is cited. The override part equals §3.4 character for character (the human lead's words, the printed string, the F1 annotation, the fixed sentence, μ = 1.0). The list of arms that can still be the candidate equals the auditor's independent evaluation of §8.5 (b) on P9-II's committed records (§3.5).
 - The gates stage runs at real size on the rehearsal draw before the freeze and again on registered seeds before training. All gate outputs are written to the run directory and committed. A harness error is reported apart from a gate failure.
 - **Manifests record the platform** (OS, architecture, Python, torch, thread settings). Bit-identity gates are asserted on the registered platform; tests that depend on it are platform-conditional.
 - **Fixed launch scripts**, no free arguments, committed before the freeze and covered by its hash: gates, Q1, Q1 gate (candidate, and the headroom re-check of §10.4), probe, WX, analysis, report. No registered stage is launched by a typed command.
@@ -332,7 +424,7 @@ S0 has no tuned quantity. Before the freeze, on the pipeline-check draw only: A0
 
 ### 10.3 Rehearsal
 
-On the rehearsal draw, six single-thread workers, through the whitelist validator of P9-I (time, memory, shapes, counts, identity; no loss or accuracy is written or shown): every (arm, cell type, phase) of the frozen Q1 matrix, and WX and the 32K/64K cell for **every arm that can become the candidate** (A0, A1, A2 and C4), for 256 updates and one full evaluation with the read swap; A2 before and after its switch; A4 at k_0, mid-schedule and k = 8. Run twice: alone, and with twelve other busy single-thread processes **[lead's choice; S1 and S2 may be training on the same machine]**; the larger measured rate is used. A block's projection = measured seconds per update × planned updates (the most expensive possible candidate; A4's annealing at its most expensive measured rate) + measured evaluation, arranged in rounds of six.
+On the rehearsal draw, six single-thread workers, through the whitelist validator of P9-I (time, memory, shapes, counts, identity; no loss or accuracy is written or shown): every (arm, cell type, phase) of the frozen Q1 matrix, and WX and the 32K/64K cell for **every arm that can still be the candidate** (§3.5: A5-D and A1), and A6 at 32K/64K, for 256 updates and one full evaluation with the read swap; A2 before and after its switch; Run twice: alone, and with twelve other busy single-thread processes **[lead's choice; S1 and S2 may be training on the same machine]**; the larger measured rate is used. A block's projection = measured seconds per update × planned updates (the most expensive possible candidate; A4's annealing at its most expensive measured rate) + measured evaluation, arranged in rounds of six. *Revision 4:* "the most expensive possible candidate" is the most expensive among the arms that can still be the candidate as the arm-selection record lists them (§3.5: A5-D and A1). A4 is not in S0, so its clause has no application.
 
 ### 10.4 Resources
 
@@ -349,15 +441,34 @@ Apple M5 Max, 48 GB, CPU only, six single-thread workers. No cloud, no download,
 | Pipeline check, rehearsal (twice), gates, generation of 15 draws, evaluation, analysis | | | about 0.8 |
 | **Largest configuration** | **256 + 3** | **24.9 / 30.9 / 38.9** | **about 4.9 / 5.9 / 7.3** |
 
-Unmeasured and not in the table: L_addr's all-key backward, A4's wide read, WX's wider projection, the probes during training (about 2% in the ADR-0019 review's estimate), the read swap in evaluation.
+Unmeasured and not in the table: L_addr's all-key backward, A5-D's L_div (a 128 × 128 query product per update), A4's wide read (not in S0 after §3.4), WX's wider projection, the probes during training (about 2% in the ADR-0019 review's estimate), the read swap in evaluation.
 
 **Cap: 16 charged hours for S0, one budget**, covering the pipeline check, rehearsal, gates and every registered block. Twice the largest projection is 9.9 / 11.9 / 14.6 h. At the slowest rates this leaves 1.4 h (about 9%) for everything unmeasured. By the confirmation review's arithmetic the uncut plan absorbs rates up to 1.11 times the slowest P9-I rates, the plan without the probe up to 1.70 times, and Q1 alone up to 1.85 times.
 
-**Headroom rule.** After the rehearsal, the registered run starts only if (hours already charged) + 2 × (rehearsed projection of everything still to run, at the most expensive possible candidate) ≤ 16. Each block's own time cap is twice its rehearsed projection; a block that reaches it is stopped and is INCOMPLETE.
+**Revision 4: the arithmetic for n_L = 4, from the rates above.** The row "Q1, four learned arms" and the "Largest configuration" row were computed in revision 3 for four learned arms. They are now the only configuration; the three-arm row no longer occurs. Re-derived:
 
-After the Q1 gate the rule is evaluated once more, before WX and the probe, with the rehearsed rates of the actual candidate and the hours actually charged. Cuts 1 and 2 are applied then, not before Q1. Cut 3 is decided before Q1.
+| Block | Cells × updates, at the rate of | Summed CPU-hours (fastest / W7 / slowest) | With six workers, hours |
+|---|---|---|---|
+| Q1, 2K/4K | 100 × 8,192, 4,096 slots | 1.82 / 2.23 / 2.55 | |
+| Q1, 8K/16K | 100 × 32,768, 16,384 slots | 11.83 / 12.83 / 17.75 | |
+| Q1, 8K/4K | 30 × 32,768, 4,096 slots | 2.18 / 2.68 / 3.06 | |
+| **Q1 (230 cells)** | | **15.84 / 17.74 / 23.36** | **2.64 / 2.96 / 3.89** |
+| WX (20 cells) | 10 × 8,192 and 10 × 32,768 | 1.37 / 1.51 / 2.03 | 0.23 / 0.25 / 0.34 |
+| 65,536 probe (6 cells, one round) | 6 × 131,072, 65,536 slots | 7.65 / 11.60 / 13.52 | 1.27 / 1.93 / 2.25 |
+| Pipeline check, rehearsal, gates, generation, evaluation, analysis | | | about 0.8 |
+| **Whole plan (256 + 3 cells)** | | **24.86 / 30.85 / 38.91** | **4.94 / 5.94 / 7.28** |
+| Q1 under cut 3 (190 cells) | 8K/16K with 60 cells | 11.10 / 12.61 / 16.26 | 1.85 / 2.10 / 2.71 |
 
-**Cut order if the rule does not hold (fixed now, applied in this order; cut 3 recorded in the freeze, cuts 1 and 2 recorded at the Q1 gate):**
+- **Twice the whole plan is 9.88 / 11.88 / 14.57 hours, under the 16-hour cap.** At the slowest rates 1.43 hours (8.9%) remain for everything unmeasured. These are revision 3's figures; adding A5-D by decision does not change them, because revision 3 already budgeted for a fourth arm.
+- **What is lost is the smaller configuration.** With three learned arms the whole plan was 4.37 / 5.29 / 6.44 hours, and the uncut plan absorbed rates up to 1.28 times the slowest P9-I rates. With four it absorbs 1.11 times; the plan without the probe 1.70 times; Q1 alone 1.85 times; Q1 under cut 3 alone 2.66 times (each computed as (16 − 2 × 0.8) / (2 × the block's six-worker hours at the slowest rates)). These multiples, and the 1.43 hours above, are computed under revision 3's whole-plan rule; under reading A the thresholds are those of the last bullet.
+- **Under the headroom rule as worded below (R2).** Before Q1, counting the whole 0.8 hours as still to run: 2 × (0.8 + 3.89) = 9.39 hours at the slowest rates, which holds. After the Q1 gate, at the projected charge of 0.8 + 3.89 = 4.69 hours: 4.69 + 2 × (0.34 + 2.25) = 9.87 hours, which holds. If Q1 had run up to its own cap (2 × 3.89 = 7.79 hours): 0.8 + 7.79 + 5.18 = 13.77 hours, which still holds.
+- **On the projection the twofold rule holds with n_L = 4 and no cut applies.** The projection is not a measurement. Under the headroom rule as worded below (reading A), at a common multiple m of the slowest P9-I rates and with Q1 running at its projection: Q1 runs uncut up to m ≈ 1.85; above that cut 3 applies, and Q1 under cut 3 fits up to m ≈ 2.66; above that nothing registered is run and the matter returns to the human lead (item 4). After the Q1 gate the probe is kept up to m ≈ 1.68 (0.8 + 3.89m + 2 × 2.59m ≤ 16) and dropped above that (cut 1); WX then fits whenever Q1 ran uncut. No new cut is defined, the fourth arm is not a cut, and the cap is not raised.
+
+**Headroom rule.** The rule is: (hours already charged) + 2 × (rehearsed projection of the stages evaluated) ≤ 16. Before Q1 the rule is evaluated on Q1 and on the stages before Q1 that have not yet run; stages already run count once, as hours already charged. If it does not hold, cut 3 is applied; if it still does not hold, item 4 applies. After the Q1 gate the rule is evaluated on WX and the probe with the actual candidate's rehearsed rates and the hours charged, and cuts 1 and then 2 are applied as needed. **[lead's choice: reading A of the re-check's R2]** Each block's own time cap is twice its rehearsed projection; a block that reaches it is stopped and is INCOMPLETE.
+
+The freeze also records, as information and not as a start condition, the rehearsed projection of WX and of the probe at the most expensive candidate among the arms that can still be the candidate (§3.5), and whether the rule would hold after a Q1 that ran at its projection.
+
+**Cuts if the rule does not hold (fixed in revision 3; numbering and content unchanged). Cut 3 is the only cut available before Q1 and is recorded in the freeze. Cuts 1 and then 2 are applied at the Q1 gate and recorded there:**
 
 1. Drop the 65,536 probe (NOT RUN — BUDGET) **[lead's choice of order: the probe costs about six times WX and is the weaker annotation]**.
 2. Drop WX (the variant prints NOT RUN — BUDGET; H20-L is not tested).
@@ -370,7 +481,7 @@ No timing-sensitive comparison is made between cells; CPU seconds are descriptiv
 
 ## 11. Implementation
 
-New package `studies/p10s0/` importing `studies.p9ii`, `studies.p9i` and `studies.p9` unedited. New code: the mapping script, WX, the 8K/4K cell, the exposure-scaled schedules at 65,536, the read swap, the two-criteria classes, the replication labels, analysis and report. Records carry the study code P10S0. Implementation, gates and the pipeline check may start before P9-II's registered run finishes, because A0, A1 and A2 are in every branch and every possible fourth arm exists in P9-II's code; they need P9-II's code committed and its calibration record audited. The freeze cannot happen before P9-II's outcome is recomputed and committed.
+New package `studies/p10s0/` importing `studies.p9ii`, `studies.p9i` and `studies.p9` unedited. New code: the mapping script, WX, the 8K/4K cell, the exposure-scaled schedules at 65,536, the read swap, the two-criteria classes, the replication labels, analysis and report. Records carry the study code P10S0. Implementation, gates and the pipeline check may start before P9-II's registered run finishes, because A0, A1 and A2 are in every branch and every possible fourth arm exists in P9-II's code; they need P9-II's code committed and its calibration record audited. (Moot since revision 4: P9-II's run has finished and its records are committed.) A5-D is taken from `studies.p9ii` unedited; S0 writes no arm code for it. The freeze cannot happen before P9-II's outcome is recomputed and committed. **The freeze also requires that the human lead's acceptance of the P9-II outcome is recorded (the lead's ruling on R8). It is not recorded at the time of writing. Until it is, §13 steps 4–7 may proceed (implementation and tests, the pipeline check, the gates on the rehearsal draw, the implementation audit, the arm-selection record and its audit, the rehearsal), with P9-II's audited calibration values taken by reference (S0 has no calibration of its own, §10.1); step 8, the generation of the registered draws and the freeze, waits.**
 
 ## 12. If nothing qualifies: architectural alternatives; and what was moved out of S0
 
@@ -391,14 +502,14 @@ Revision 1's stage Q3 (train 4,096 facts, then add 4,096) is not in S0. The revi
 
 ## 13. Order of work
 
-1. Confirmation review by the auditor (done on revision 2: READY after E1–E10, applied here). The passages of §19 not pasted verbatim, and any passage changed after this revision, are re-checked by the auditor.
+1. Confirmation review by the auditor (done on revision 2: READY after E1–E10, applied in revision 3). Re-check of revision 3 (done: READY SUBJECT TO R1–R10, applied in revision 4). **Independent confirmation of revision 4: pending.** It covers every passage listed in §21, and any passage changed after this revision.
 2. The human lead's answer on §17 item 0 is recorded if it has arrived; it does not block S0 (the NOT-QUALIFIED text is neutral until then). The answer is required before any programme-level text, S1 report summary or S2 report summary cites S0's outcome (§17 item 3).
 3. Lead's approval under the delegation (§18).
 4. Implementation with tests and the fixed launch scripts. Pipeline check (§10.1).
-5. Gates at real size on the rehearsal draw and the implementation audit, for every arm the mapping can select and WX of each, at every cell type of §6. Analysis and report on synthetic registries.
-6. P9-II's registered outcome recomputed and committed. The mapping script on P9-II's committed records; arm-selection record; audited (G10).
+5. Gates at real size on the rehearsal draw and the implementation audit, for every arm in S0's arm set and WX of each arm that can still be the candidate (§3.5), at every cell type of §6. Analysis and report on synthetic registries for every row of §3.3, the override of §3.4 and the list of §3.5.
+6. P9-II's registered outcome recomputed and committed (done: `d72b173`, `74f15d1`). The mapping script on P9-II's committed records; the override of §3.4 and the list of §3.5 added; arm-selection record; audited (G10).
 7. Rehearsal, twice (§10.3), of the selected arms and of WX and the probe for every possible candidate; projections, caps, memory check, cut 3 of §10.4.
-8. Generation and G1 of all draws; freeze of specification, code, config, launch scripts, seeds, thresholds, arm-selection record, projections, caps, cuts and data identities.
+8. Generation and G1 of all draws; freeze of specification, code, config, launch scripts, seeds, thresholds, arm-selection record, projections, caps, cuts and data identities. **Not before the human lead's acceptance of the P9-II outcome is recorded (§18 condition 7).**
 9. The registered run, once, by the launch scripts: gates; Q1; Q1 gate with the headroom re-check; then WX and the probe as far as the cuts allow.
 10. Independent recomputation from raw records and snapshots by the auditor, Q1 first; outcome report with deviations, failed attempts and negative results kept.
 
@@ -410,10 +521,12 @@ Revision 1's stage Q3 (train 4,096 facts, then add 4,096) is not in S0. The revi
 - No re-run with changed settings. A second attempt after an engineering stop needs the human lead's decision, with everything observed in the first attempt listed.
 - No registered seed is seen by a model before the freeze.
 - If P9-II's outcome or calibration record is amended after S0's freeze, S0 stops and returns to the human lead.
+- S0 is not frozen while the human lead's acceptance of the P9-II outcome is not recorded. If the human lead does not accept it, or accepts it with a changed reading, S0 returns to the human lead before any freeze.
 
 ## 15. What S0 cannot establish
 
 - Anything about capacity, useful-capacity scaling, locality, transfer or adding facts later.
+- **An unbiased first test of A5-D.** A5-D was added by the human lead's decision after P9-II's outcome was observed, knowing it was RELIABLE there. S0's result for it is a confirmatory replication on new draws. For A5-D the pooled count and CONSISTENT ACROSS STUDIES include the records on which it was chosen and add no independent evidence (§3.4).
 - That the interface works on natural language, on another backbone or student (S2's included), at loads other than 0.5 and, for label-free arms, 2 facts per slot, or under any regime other than 512 exposures per fact.
 - Anything reliable about 65,536 slots: three draws, one initialization seed, a probe.
 - That the interface finds where to read: the memory is told the answer position in every arm, WX included.
@@ -430,7 +543,7 @@ Revision 1's stage Q3 (train 4,096 facts, then add 4,096) is not in S0. The revi
 
 | The human lead's requirement | Where |
 |---|---|
-| P9-II interventions as a gate, not assumed to have succeeded | A1 and A2 are re-tested on S0's own draws in every branch (§3.1). P9-II adds at most one arm, its carried label-free arm (§3.2). A label-free arm that P9-II found RELIABLE at 4,096 but did not carry is not re-tested (§3.3, consequence). |
+| P9-II interventions as a gate, not assumed to have succeeded | A1 and A2 are re-tested on S0's own draws in every branch (§3.1). P9-II adds at most one arm, its carried label-free arm (§3.2). A label-free arm that P9-II found RELIABLE at 4,096 but did not carry is not re-tested (§3.3, consequence). *Revision 4:* that arm is A5-D, and it is re-tested by the human lead's decision of 2026-11-15, as a confirmatory replication (§3.4). |
 | Compare answer-only with addressing supervision and staged optimization | A0, A1, A2 at both core sizes, ten draws × two seeds, in every branch (§3.1, §6.1); paired rule (§8.4) |
 | Multiple independent draws and initialization seeds | §6, §7; bounds in §6.3 |
 | Fact-specific retrieval, resistance to collapse, strong memory dependence, no oracle at inference | §8.2, §8.5 |
@@ -452,6 +565,7 @@ Revision 1's stage Q3 (train 4,096 facts, then add 4,096) is not in S0. The revi
 3. The use of S0's outcome in any programme-level claim; the integrated study (proposed, not executed automatically; needs his review); any supplement to S2; any P10-I.
 4. Whether S0's blocks may overlap S1's and S2's training on the machine, and the aggregate memory of concurrent P10 studies (S0 18 GiB, S1 18 GiB, S2 its own, on 48 GB).
 5. Merge, publication, weight release, ADR-0012.
+6. **Acceptance of the P9-II outcome.** Pending. S0's freeze requires it to be recorded (§11, §13 step 8, §18 condition 7).
 
 ## 18. Approval record
 
@@ -463,9 +577,26 @@ The human lead's words, verbatim:
 
 The second sentence was his answer on the P10 budgets (S0 16 hours, S1 12 hours, S2 36 hours), as relayed by the lead.
 
-The lead's conditions for using the delegation, as in ADR-0019 §16: (1) the specification review ends with no open blocker or major; (2) the implementation audit is clean before the freeze; (3) the rehearsal shows 2× headroom; (4) nothing changes after the arm-selection record except the cuts of §10.4, applied as that section fixes; (5) no registered seed has been observed; (6) P9-II's outcome is recomputed and committed before the freeze.
+**The human lead's decision on the fourth arm (2026-11-15), verbatim:**
 
-Lead's approval: PENDING.
+> yes s0 should include the penalty and i approve s2 download
+
+It answered this question, put by the lead: "Add the diversity penalty to S0? As written, S0 cannot test it and can only qualify the supervised arm. I recommend adding it; the alternative is to run S0 as written and test the penalty in P10-I." The second half of the answer concerns ADR-0022 and is not S0's. The decision was made after P9-II's outcome was observed and before any S0 record exists (§3.4). It is a decision about S0's arms. It is not an approval of this specification for execution, and it is **not an acceptance of the P9-II outcome: the human lead has not accepted that outcome at the time of writing.**
+
+The quotations in this section are recorded as relayed to the drafter by the coordinating session, misspellings included. The drafter did not read the chat record itself.
+
+The lead's conditions for using the delegation, as in ADR-0019 §16: (1) the specification review ends with no open blocker or major; (2) the implementation audit is clean before the freeze; (3) the rehearsal shows 2× headroom; (4) nothing changes after the arm-selection record except the cuts of §10.4, applied as that section fixes; (5) no registered seed has been observed; (6) P9-II's outcome is recomputed and committed before the freeze; **(7) the human lead's acceptance of the P9-II outcome is recorded before the freeze (the lead's ruling on R8). Until then §13 steps 4–7 may proceed and step 8 waits (§11).**
+
+**Independent confirmation of revision 4 (Opus 5.5, 2026-11-15):** READY SUBJECT TO listed text edits, no blocker (`docs/reviews/p10-design-2026-11-15/adr-0020-review/confirm-rev4/CONFIRM_REV4.md`). The auditor reproduced revision 4 byte for byte from revision 3 and the change list, and recomputed the cell counts, the budget and the bounds. Its edits F2–F7, F10 and its edits on the drafter's points 1 and 7 are applied verbatim. F1, the one major, was a choice for the lead: cell success in the paired comparison d(X) is success under S0's criteria, with d(X) under P9-II's criteria printed beside it (§8.4). That choice is made after P9-II's outcome was observed and before any S0 record exists; P9-II recorded no read swap, so no observation bears on it. F8 concerns ADR-0021 and is handled there.
+
+### Lead's approval for implementation and rehearsal — 2026-11-15 (UTC)
+
+Taken by the lead (Claude Fable 5.2) under the delegation quoted above. Not a human approval of the study and not an Astra review.
+
+- **Approved:** §13 steps 4–7 of revision 4: implementation in `studies/p10s0/` and its tests, the pipeline check, the gates on the rehearsal draw, the implementation audit, the arm-selection record and its audit, and the rehearsal.
+- **Not approved here:** step 8 (generation of the registered draws and the freeze) and the registered run. Step 8 waits for the human lead's recorded acceptance of the P9-II outcome (§11), a clean implementation audit, a rehearsal that meets the twofold rule, and a separate recorded decision.
+- **Basis:** revision 1 review, revision 2 confirmation (E1–E10), revision 3 re-check (R1–R10, N1) and revision 4 confirmation (F1–F10) have no open blocker or major. The fourth arm is the human lead's decision, recorded verbatim in §3.4.
+- The lead checked the human lead's quotation in §3.4 and this section against the chat record: it is verbatim.
 
 ## 19. How revision 2 answers the review
 
@@ -523,12 +654,13 @@ Review: `adr-0020-review/REVIEW.md` (Opus 5.5), verdict NOT READY.
 3. E8: the auditor offered two ways to settle S1's test range; the text states the one the lead chose, and heads the ADR-0022 list "to be applied in ADR-0022 before its approval". A third bullet on ADR-0019's test range is kept from revision 2.
 4. E1 (g): the auditor's list is verbatim; one sentence follows it naming where the points were raised.
 5. Edits that follow from E1 and E4 and were not in the auditor's list: §0 (one clause on consistency); §8.7 row 4 and print item 4 (the consistency label); §10.2 launch scripts and §13 steps 7 and 9 (the Q1-gate re-check and the new block order); §10.4 (the review's headroom multiples; "about 9%" for "about 10%"); §18 condition 4; the B1 and M7 rows of this section; §20 rows 2, 11 and 16.
+6. Added in revision 4 (R10). The re-check found this list incomplete. Revision 3 also reworded, without listing them here: the header status and revision history; the §9.1 column header; the §9.2 parenthetical; §13 step 1; §18 "Lead's approval: PENDING."; §20 rows 5, 10 and 17; the closing heading. The re-check read all of them and found that none changes a rule or a number.
 
-## 20. The lead's choices in this revision (fixed before any rehearsal)## 20. The lead's choices in this revision (fixed before any rehearsal)
+## 20. The lead's choices in this revision (fixed before any rehearsal)
 
 | No. | Choice | Where |
 |---|---|---|
-| 1 | S0 always runs with A0, A1, A2, A6, A7; at most one fourth arm, P9-II's carried arm if it is A4, A5-C or A5-D; no X2 | §3 |
+| 1 | S0 always runs with A0, A1, A2, A6, A7; at most one fourth arm, P9-II's carried arm if it is A4, A5-C or A5-D; no X2. *Revision 4: that rule gave no fourth arm; the fourth arm is A5-D by the human lead's decision, not by a choice of the lead (§3.4)* | §3 |
 | 2 | Candidate from S0's classes subject to the consistency rule of §8.5 (rulings 1 and 3); preference order A0, C4, A2, A1. | §8.5 |
 | 3 | Ten registered draws × two init seeds at 2K/4K and 8K/16K; one seed at 8K/4K and for WX; probe three draws × one seed | §6 |
 | 4 | RELIABLE at 20 cells: at most one failed cell, no draw with both seeds failed; UNRELIABLE from 5 successes; NOT_EVALUATED above one unevaluated draw | §8.3 |
@@ -538,13 +670,42 @@ Review: `adr-0020-review/REVIEW.md` (Opus 5.5), verdict NOT READY.
 | 8 | 65,536 as an annotation probe, never in the label | §8.6 |
 | 9 | Q3 dropped | §12.2 |
 | 10 | WX initializer at fan-in 2,048; WX and the probe after the Q1 gate, WX on the Q1 draws (ruling 5) | §5.2, §6.2 |
-| 11 | One cap of 16 charged hours; cut order probe, WX, second seed at 8K/16K; nothing else; cuts 1 and 2 decided after the Q1 gate | §10.4 |
+| 11 | One cap of 16 charged hours; cut order probe, WX, second seed at 8K/16K; nothing else; cuts 1 and 2 decided after the Q1 gate. *Revision 4 (R2, reading A):* before Q1 the rule is evaluated on Q1 and the stages before it only, with cut 3 the only cut available then | §10.4 |
 | 12 | Rehearsal twice, the second under twelve busy processes | §10.3 |
 | 13 | Bounded seed namespaces | §7 |
 | 14 | NOT-QUALIFIED text neutral about S1 and S2 until the human lead answers | §8.7, §17 |
 | 15 | Order of the alternatives | §12.1 |
 | 16 | Consistency threshold: at most two failed draws among the evaluated draws of both studies | §8.5 |
 | 17 | S1's unit-test seeds 921001–921999 | §7, §9.3 |
+| 18 | *Revision 4.* R4: P9-II's class at 16,384 is read for an arm that has a Stage 2 class at the 4U readout | §8.5 |
+| 19 | *Revision 4.* R8: S0's freeze requires the recorded acceptance of the P9-II outcome by the human lead | §11, §13, §14, §18 |
+| 20 | *Revision 4.* "Most expensive possible candidate" means over the arms that can still be the candidate (§3.5) | §10.3, §10.4 |
+| 21 | *Revision 4.* The human lead's decision is applied as: A5-D takes exactly the place revision 3 defines for a label-free C4 | §3.4 item 6 |
+
+## 21. Revision 4: each change and its source
+
+Revision 4 was drafted on 2026-11-15, after P9-II's outcome was observed and before any S0 record exists. It changes the fourth arm, by the human lead's decision, and applies the re-check of revision 3 (`adr-0020-review/RECHECK_REV3.md`). **No threshold, criterion, class rule, preference order, consistency rule, seed, draw count, update count or cap is changed.** Of its changes, only the fourth arm was prompted by P9-II's results; that one is the human lead's. The lead's choices among the re-check's options are R2 (reading A), R4, R5 (the reworded option) and R8.
+
+| Source | What revision 4 does | Where |
+|---|---|---|
+| **Human lead's decision, 2026-11-15** ("yes s0 should include the penalty …") | C4 = A5-D with μ = 1.0; the mapping's result (none) is kept as the record and the override is written beside it with its provenance; fixed printed string with P9-II's F1 annotation and a fixed provenance sentence; n_L = 4; Q1 = 230 cells; budget arithmetic re-derived; what the unchanged consistency rule gives per arm | header, §0, §1, §2 H20-D, §3.2, §3.4, §3.5, §4, §6, §6.3, §8.5 (pointer), §8.7 print item 1 and the paragraph after the NOT-QUALIFIED text, §10.2 G10, §10.4, §11, §13 step 6, §15, §16 row 1, §18, §20 rows 1 and 21 |
+| **R1** (major) §9.1 contradicted ADR-0021 §5.6 | lane L deferred entirely to ADR-0021 §5.6, revision 4; this ADR states no lane rule; the consequence for A1 and A5-D is stated as a consequence | §9.1 |
+| **R2** (major) pre-Q1 headroom evaluation not determined | reading A with the auditor's sentence; the cut heading reworded to match; "most expensive possible candidate" defined over the arms that can still be the candidate | §10.3, §10.4, §20 rows 11 and 20 |
+| **R3** §8.7 row 5 lacked the reason added by E1 | "or INCONSISTENT ACROSS STUDIES (P9-II \<class\>; pooled \<failed\> of \<n\>)" appended | §8.7 row 5 |
+| **R4** "X advanced" ambiguous for A0 | "X has a Stage 2 class at the 4U readout" | §8.5, §20 row 18 |
+| **R5** G10's second clause not executable | the reworded option: Part 1 is re-run and the matching table cell is cited | §10.2 |
+| **R6** no fixed fourth-arm string; F1 annotation missing | "FOURTH ARM: NONE — P9-II CARRIED \<arm\> (ALREADY IN S0)" for the mapping's own result; the revision 4 string for the override; F1 annotation verbatim wherever the carried arm or A5-D is cited | §3.2 item 4, §3.4, §8.7 |
+| **R7** descriptive pooled count underdefined | "under P9-II's criteria; NOT AVAILABLE where P9-II has no class for the arm at that size" | §6.3 |
+| **R8** P9-II's human acceptance pending | the lead's ruling: the freeze requires the recorded acceptance; implementation, set-up by reference to P9-II's calibration record and rehearsal may proceed | §11, §13 step 8, §14, §17 item 6, §18 condition 7, §20 row 19 |
+| **R9** §9.3 stale | rewritten: nothing is owed by ADR-0021 (revision 4) or ADR-0022 (`2ef6a4f`) | §9.3 |
+| **R10** editorial | "(this text)" removed from revisions 2 and 3; the evidence line keeps its sentence with the two commits; §11's moot clause marked; duplicated §20 heading removed; §19's list completed; §8.7 row 6 grammar | header, §8.7 row 6, §11, §19, §20 |
+| **N1** S1's seed-block initialization seeds | 2111, 2121, 2112, 2122 listed in S1's namespace | §7 |
+
+**Stated consequences of the re-check that revision 4 does not turn into changes:** the re-check's finding that, as written in revision 3, only A1 could qualify and no label-free qualification was possible is superseded by the human lead's decision and restated for four arms in §3.5.
+
+**Passages of revision 4 that are the drafter's wording and not the auditor's paste text, for the confirmation:** all of §3.4 and §3.5; the revision 4 additions to §0, §2, §4, §6, §6.3, §8.5, §8.7, §15, §16 and §18; G10's two added clauses; §10.3's and §10.4's definition of "most expensive possible candidate"; the informational projection recorded at the freeze (§10.4); the budget table and bullets for n_L = 4; the cut heading; §9.1's consequence sentence; §9.3; §11; §13 steps 1, 6 and 8; §14's new bullet; §17 item 6. Pasted from the re-check without change: the §9.1 cell (R1, with "revision 4" for "revision 3"), the three sentences of R2's edit, R3's clause, R4's clause, R5's reworded clause, R6's first string, R7's clause, R10's row 6 wording.
+
+**Left as revision 3 wrote them although the fourth arm is now fixed** (listed so that the confirmation can check them; none is changed here): G4 and §13 step 5 still cover every arm the mapping could have selected (A4 and A5-C included); §10.3 still rehearses WX and the 32K/64K cell for A0 and A2, which can no longer be the candidate; §10.2's synthetic registries still exercise every row of §3.3; the three-arm rows of §6.1 and §10.4.
 
 ## The lead's rulings on the drafter's points
 
@@ -559,4 +720,23 @@ ADR-0021 revision 2 was checked by the confirmation review (§9).
 
 The points were raised at the end of revision 2.
 
-Astra review: NOT_PERFORMED. A Claude review is not an Astra review, and this document is not a human approval.
+Astra review: NOT_PERFORMED. A Claude review is not an Astra review, and this document is not a human approval. The human lead's decision recorded in §18 fixes the fourth arm; it does not approve this specification for execution and does not accept the P9-II outcome.
+
+## Addendum to §18 — the human lead's acceptance of P9-II (2026-11-15 UTC)
+
+The human lead accepted the P9-II outcome as registered (verbatim in ADR-0019 §16: "yes I do, yes we can raise to 16 and I approve the package", in answer to "Do you accept the P9-II outcome as registered? S0 can be implemented and rehearsed without it but cannot be frozen."). The condition of §11 and §18 that S0's freeze waits for that acceptance is met. Step 8 still needs a clean implementation audit, a rehearsal that meets the twofold rule, and the lead's separate recorded decision. Nothing else in this ADR changes.
+
+## Addendum — the human lead's delegation on the hour cap (2026-11-15 UTC)
+
+The human lead, verbatim (the first clause concerns ADR-0022):
+
+> I Aprove the link files with 6.2mb and you can extend the hour cap if needed across all p10
+
+Recorded by the lead, with the limits the lead puts on its own use of this:
+
+- The lead may raise a P10 study's charged-hours cap when the study's own headroom rule would otherwise cut registered cells or stop the study.
+- A cap is raised only **before that study's registered seeds are observed** (at the rehearsal's headroom check, or at a stage gate that reads time and memory only). It is never raised in response to a result, and never to add cells, arms, updates or replicates beyond what the specification registers.
+- Each raise is recorded in the study's ADR with the measured projection that required it, the old and new cap, and what it protects. Memory caps (3 GiB per worker, 18 GiB aggregate, and S2's own) are not hour caps and are not changed.
+- The human lead's words do not extend to downloads, cloud or paid services, models, data, thresholds or designs.
+
+S0's cap is unchanged by this record (16 hours). Programme-level record: `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`.

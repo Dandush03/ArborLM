@@ -418,6 +418,18 @@ The lead's five conditions, checked at the freeze:
 - Records: `results/p9ii-run-2026-11-15/` (`OUTCOME.md` holds the lead's rulings on the audit's findings; no rule, threshold or reading was changed after observation). Review: `docs/reviews/p9ii-results-2026-11-15/REVIEW.md`.
 - **The outcome has not been accepted by the human lead.** This entry is a record, not an approval. Astra review: NOT_PERFORMED.
 
+### Human lead's acceptance of the outcome — 2026-11-15 (UTC)
+
+The lead asked: "Do you accept the P9-II outcome as registered? S0 can be implemented and rehearsed without it but cannot be frozen." The human lead answered, verbatim (the sentence also answers two P10 questions, recorded in ADR-0021 and ADR-0022):
+
+> yes I do, yes we can raise to 16 and I approve the package
+
+Recorded by the lead:
+
+- **P9-II is accepted by the human lead as registered: COMPLETE — ADDRESSING-RELIABLE: A5-D (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0; at 16,384: NOT DISTINGUISHED FROM A0;** interface carried forward by the registered order: A0; Stage 3: SCALE PROBE UNINFORMATIVE.
+- The acceptance is of the outcome as printed and recomputed, with the audit's findings and the lead's rulings in `results/p9ii-run-2026-11-15/OUTCOME.md` attached. It changes no rule, reading or limit of §13, and it is not a claim of a breakthrough.
+- Astra review: NOT_PERFORMED. Claude review is not Astra review.
+
 ## 17. How revisions 2, 3 and 4 answer the reviews
 
 Review: `docs/reviews/adr-0019-design-2026-11-15/REVIEW.md` (Opus 5.5), verdict NOT READY. Numbers marked *(lead's choice)* in the text are the review's suggested values or the lead's rulings; all are fixed before calibration.

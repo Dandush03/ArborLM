@@ -1,0 +1,5 @@
+rev3 19d44458 562 lines
+rev4 21db26d3 716 lines
+CHANGES aa6ca6de 794 lines
+46 change entries parsed: C46
+RESULT: rev3 + CHANGES == rev4 (byte identical)
