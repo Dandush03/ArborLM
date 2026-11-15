@@ -126,7 +126,8 @@ annotation_margin = 0.03
 joint_bound_ratio = 0.90
 task_coded_retention_margin = 0.10
 router_accuracy_min = 0.99
-composes_ratio_min = 0.80
+composes_ratio_min = 0.80          # H_a >= 0.80 per answer (combined-tasks addendum section 8); also revision 5's replaced ratio
+composes_negative = 0.50           # DOES NOT COMPOSE: H_a < 0.50 in every replicate of some order (the human lead agreed)
 exact_match_weak = 0.10
 training_cost_ratio_max = 1.5
 value_rows_ratio_max = 0.10
@@ -149,7 +150,7 @@ updates = 2000
 replicate_bases = [220001, 220101, 220201, 220301]
 offsets = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 partition = 220901
-partition_streams = [220902, 220903, 220904, 220905, 220906, 220907, 220908, 220909, 220910]
+partition_streams = [220902, 220903, 220904, 220905, 220906, 220907, 220908, 220909, 220910, 220911]
 registered_low = 220001
 registered_high = 228999
 calibration_low = 221001
@@ -183,9 +184,6 @@ workers = 1
 datagen = 6480
 calibrate = 7920
 rehearse = 11520
-
-[pending]  # items the ADR leaves open; each stays OFF in the registered path until the lead records a decision
-combined_tasks_defined = false   # section 6.4: how C1 pairs two sources and how C2 lays out its prompt are not specified
 
 [dry]  # the synthetic end-to-end stage; sizes only, never registered values
 replicates = 2

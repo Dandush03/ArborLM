@@ -31,6 +31,7 @@ from .registry import replicate_cells
 NOT_STARTED_BUDGET = "NOT STARTED: BUDGET"
 B = core.CFG["budget"]
 GIB = 2**30
+COMBINED_CELLS = 10  # arm-cells scored on C1 and C2 per replicate: M-append-frozen 2, M-ii 2, M-joint 1, L-joint 1, L-seq 2, M-i-separate 1, L-sep 1 (addendum section 10); charged inside R with its recomputation
 CAP_FLOOR_SECONDS = 60.0  # the floor for stages that are not rehearsed at real size (analysis, report); stated, not measured
 
 
@@ -60,6 +61,8 @@ class Rates:
     recompute_peak_bytes: int = 0
     task_peak_bytes: int = 0
     other_layer_seconds: float = 0.0  # the 200-update runs at the read layer calibration did not select (part of P)
+    combined_cell_seconds: float = 0.0  # one arm-cell's combined scoring (C1, C2 and the single-task E_C answers) at the size of E_C: the combined-tasks addendum section 10
+    combined_stage0_seconds: float = 0.0  # Stage 0 on the combined tasks, once per study
 
     def to_json(self) -> dict[str, Any]:
         d = asdict(self)
@@ -99,8 +102,8 @@ def training_seconds(n: int, u: int, rates: Rates, *, slower: bool) -> float:
 
 def scoring_seconds(n: int, rates: Rates) -> float:
     """Every scoring of the registered run: per replicate 18 cell scorings (each its own process) and the extras; once, the fixed rows and the timing benchmark."""
-    per_rep = 18 * (rates.panel_seconds + rates.task_overhead_seconds) + rates.replicate_extra_seconds
-    return n * per_rep + rates.fixed_seconds + rates.timing_seconds
+    per_rep = 18 * (rates.panel_seconds + rates.task_overhead_seconds) + rates.replicate_extra_seconds + COMBINED_CELLS * rates.combined_cell_seconds
+    return n * per_rep + rates.fixed_seconds + rates.combined_stage0_seconds + rates.timing_seconds
 
 
 def recompute_seconds(n: int, rates: Rates) -> float:
@@ -260,11 +263,11 @@ REGISTERED_STAGES = ("gates", "train", "evaluate", "timing", "recompute", "analy
 def stage_seconds(n: int, u: int, rates: Rates) -> dict[str, float]:
     """The projected seconds of each registered stage at a configuration, task start-up included."""
     slower = u == 1000
-    per_rep_eval = 18 * (rates.panel_seconds + rates.task_overhead_seconds) + rates.replicate_extra_seconds
+    per_rep_eval = 18 * (rates.panel_seconds + rates.task_overhead_seconds) + rates.replicate_extra_seconds + COMBINED_CELLS * rates.combined_cell_seconds
     return {
         "gates": rates.gates2_seconds + rates.task_overhead_seconds,
         "train": training_seconds(n, u, rates, slower=slower),
-        "evaluate": n * per_rep_eval + rates.fixed_seconds,
+        "evaluate": n * per_rep_eval + rates.fixed_seconds + rates.combined_stage0_seconds,
         "timing": rates.timing_seconds + rates.task_overhead_seconds,
         "recompute": recompute_seconds(n, rates),
         "analysis": CAP_FLOOR_SECONDS,

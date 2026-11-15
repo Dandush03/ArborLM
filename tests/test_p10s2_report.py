@@ -127,15 +127,19 @@ def test_no_positive_wording_can_be_emitted_without_the_line(word: str, capsys: 
         output.check_text("plain heading\n\n" + line)  # a heading is not the line
     with pytest.raises(output.OracleLineMissing):
         output.check_text(f"{LINE}\n\nplain\n\n{line}")  # the line must head the block that holds the word, not an earlier block
-    output.check_text(f"{LINE}\n{line}")
+    head = f"{LINE}\n{core.COMBINED_LINE}" if word == "COMPOSES" else LINE  # a composition word needs the second fixed line as well (addendum section 9)
+    output.check_text(f"{head}\n{line}")
+    if word == "COMPOSES":
+        with pytest.raises(output.OracleLineMissing, match="second fixed line"):
+            output.check_text(f"{LINE}\n{line}")
     with pytest.raises(output.OracleLineMissing):
         output.emit_plain(line)  # the plain printer refuses a guarded line
     output.emit([line])
     out = capsys.readouterr().out
-    assert out.splitlines()[0] == LINE and line in out.splitlines()[1]  # a terminal or log summary is printed only under the line
+    assert out.splitlines()[0] == LINE and line in out and (out.splitlines()[1] == core.COMBINED_LINE) == (word == "COMPOSES")  # a terminal or log summary is printed only under the line(s)
     with pytest.raises(output.OracleLineMissing):
         output.write_text(Path("/nonexistent-dir") / "x.md", line)  # a text file is refused before anything is written
-    assert output.positive_wording_without_line(line) and not output.positive_wording_without_line(f"{LINE}\n{line}")
+    assert output.positive_wording_without_line(line) and not output.positive_wording_without_line(f"{head}\n{line}")
 
 
 def test_the_writers_refuse_text_and_records_without_the_line(tmp_path: Path) -> None:
@@ -166,7 +170,7 @@ def test_every_guarded_word_of_the_adr_is_guarded() -> None:
 def test_cost_composition_router_and_annotation_lines_sit_under_the_line() -> None:
     out = analysis.analyze(study())
     text = report.render_report(out)
-    for needle in ("FEWER VALUE ROWS ACTIVE", "TRAINING COST", "COMPOSES", "ROUTER (keyword-level) QUALIFIED", "NO ADVANTAGE OVER SEPARATE ADAPTERS", "stored parameters (arithmetic"):
+    for needle in ("FEWER VALUE ROWS ACTIVE", "TRAINING COST", "ROUTER (keyword-level) QUALIFIED", "NO ADVANTAGE OVER SEPARATE ADAPTERS", "stored parameters (arithmetic"):
         i = text.index(needle)
         start = text.rfind("\n\n", 0, i) + 2
         assert text[start:].startswith(LINE), needle  # each such line's block begins with the oracle-assisted line

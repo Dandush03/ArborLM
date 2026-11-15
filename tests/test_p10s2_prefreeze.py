@@ -197,7 +197,7 @@ def rehearsal_inputs(tmp: Path, scale_hours: float = 10.0, peaks: dict[str, int]
     cal = tmp / "repo" / "calibration.json"
     cal.write_text(json.dumps({"selection": {"read_layer": 4}}))
     pre = tmp / "repo" / "prefreeze.json"
-    pre.write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}}))
+    pre.write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}}))
     return r, led, data, cal, pre
 
 
@@ -294,16 +294,21 @@ def test_freeze_refuses_not_started_budget_a_registered_seed_and_missing_inputs(
 def test_the_study_stops_before_the_freeze_when_teachers_or_data_do_not_qualify(tmp_path: Path) -> None:
     from studies.p10s2.prefreeze import prefreeze_summary
 
-    ok = {"g1": {"ok": True}, "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
-    assert prefreeze_summary(ok) == {"stop": None, "teacher_only": True, "g1_pool_level_ok": True}
+    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
+    assert prefreeze_summary(ok) == {"stop": None, "teacher_only": True, "g1_pool_level_ok": True, "combined_whole_string_ok": True}
     assert prefreeze_summary({**ok, "g1": {"ok": False}})["teacher_only"] is False
     nq = {**ok, "qualification": {"ok": False, "outcome": "TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED"}}
     assert prefreeze_summary(nq)["stop"] == "TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED" and prefreeze_summary(nq)["teacher_only"] is False
     di = {**ok, "sufficiency_after_filter": {"outcome": "TRANSFER-INCONCLUSIVE: DATA-INSUFFICIENT"}}
     assert prefreeze_summary(di)["stop"] == "TRANSFER-INCONCLUSIVE: DATA-INSUFFICIENT"
+    bad_ws = {**ok, "combined_whole_string": {"ok": False}}
+    assert prefreeze_summary(bad_ws)["combined_whole_string_ok"] is False
     core.reset_seed_record()
     r = plain_repo(tmp_path)
     rt, led, data, cal, pre = rehearsal_inputs(tmp_path)
+    pre.write_text(json.dumps(bad_ws))
+    with pytest.raises(freeze.FreezeRefused, match="whole-string check"):
+        freeze.write_freeze(r, rates=rt, ledger=led, run_dir=tmp_path / "x", data_dir="data", calibration=cal, prefreeze=pre, design_layer=4, store_lr=0.003, lora_lr=0.001)  # the same consequence as a prompt mismatch in test (a)
     pre.write_text(json.dumps(nq))
     with pytest.raises(freeze.FreezeRefused, match="TEACHERS-NOT-QUALIFIED"):
         freeze.write_freeze(r, rates=rt, ledger=led, run_dir=tmp_path / "x", data_dir="data", calibration=cal, prefreeze=pre, design_layer=4, store_lr=0.003, lora_lr=0.001)

@@ -127,7 +127,7 @@ def reported_cells(registered: Mapping[str, Mapping[str, Any]], recomputed: Mapp
 
 def outcome_changes(registered_outcome: Mapping[str, Any], recomputed_outcome: Mapping[str, Any]) -> list[str]:
     """Gates, classes, annotations and label compared between the registered scores and the recomputed ones; the paths that differ."""
-    keys = ("gates", "classes", "annotations", "label")
+    keys = ("gates", "classes", "annotations", "composition", "label")
     changed: list[str] = []
     for k in keys:
         a, b = flatten(registered_outcome.get(k)), flatten(recomputed_outcome.get(k))

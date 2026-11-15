@@ -46,8 +46,8 @@ def test_config_values_equal_the_adr() -> None:
     assert (b["cap_hours"], b["cap_ceiling_hours"], b["headroom"], b["memory_per_worker_gib"], b["memory_aggregate_gib"], b["rungs"]) == (36.0, 72.0, 2.0, 8.0, 24.0, [[4, 2000], [3, 2000], [4, 1000], [3, 1000]])
     assert (b["timing_threads"], b["timing_items"], b["timing_repetitions"]) == (6, 200, 3)
     s = c["seeds"]
-    assert (s["replicate_bases"], s["offsets"], s["partition"], s["partition_streams"]) == ([220001, 220101, 220201, 220301], list(range(11)), 220901, list(range(220902, 220911)))
-    assert c["pending"]["combined_tasks_defined"] is False  # the open items stay off until the lead decides
+    assert (s["replicate_bases"], s["offsets"], s["partition"], s["partition_streams"]) == ([220001, 220101, 220201, 220301], list(range(11)), 220901, list(range(220902, 220912)))
+    assert "pending" not in c  # the combined-tasks addendum settled the open item; no stop remains
     assert c["student"]["parameters"] == 134515008 and c["teachers"]["parameters"] == [73944309, 74669178]
 
 
@@ -118,7 +118,7 @@ def test_listed_seeds_and_ranges() -> None:
     for i, base in enumerate((220001, 220101, 220201, 220301)):
         plan = core.SeedPlan("registered-run", i)
         assert plan.base == base and plan.planned() == [base + o for o in range(11)]
-    assert core.partition_seeds("registered-data") == {"partition": 220901, "q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910}
+    assert core.partition_seeds("registered-data") == {"partition": 220901, "q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911}
     assert core.replicate_bases("calibration")[0] == 221001 and core.replicate_bases("calibration")[9] == 221901 and core.replicate_bases("rehearsal")[0] == 222001
     assert all(221001 <= s <= 221999 for s in core.allowed_seeds("calibration")) and all(222001 <= s <= 222999 for s in core.allowed_seeds("rehearsal"))
     assert min(core.allowed_seeds("test")) == 229001 and max(core.allowed_seeds("test")) == 229999

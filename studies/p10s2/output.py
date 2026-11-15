@@ -15,7 +15,7 @@ from typing import Any
 from arborlm.io import atomic_write
 
 from . import core
-from .core import GUARDED_WORDS, ORACLE_LINE
+from .core import COMBINED_LINE, COMPOSITION_WORDS, GUARDED_WORDS, ORACLE_LINE
 
 GUARDED_KEYS = ("class", "classes", "label", "label_with_design", "annotations", "annotation", "cost", "cost_lines", "router", "composition", "mechanism", "mechanisms", "outcome")
 
@@ -24,13 +24,19 @@ class OracleLineMissing(ValueError):
     """A guarded line, table or record without the oracle-assisted line."""
 
 
+def is_composition(line: str) -> bool:
+    return any(w in line for w in COMPOSITION_WORDS)
+
+
 def is_guarded(line: str) -> bool:
     return any(w in line for w in GUARDED_WORDS)
 
 
 def block(lines: Iterable[str]) -> str:
     """A block of lines headed by the oracle-assisted line. A markdown table passed here keeps the line directly above its header row."""
-    return "\n".join([ORACLE_LINE, *lines])
+    ls = list(lines)
+    head = [ORACLE_LINE, COMBINED_LINE] if any(is_composition(ln) for ln in ls) else [ORACLE_LINE]  # a composition line carries the second fixed line as well
+    return "\n".join([*head, *ls])
 
 
 def check_text(text: str) -> None:
@@ -42,6 +48,9 @@ def check_text(text: str) -> None:
         if any(is_guarded(ln) for ln in lines) and lines[0] != ORACLE_LINE:
             bad = next(ln for ln in lines if is_guarded(ln))
             raise OracleLineMissing(f"guarded line without the oracle-assisted line directly above its block: {bad[:120]!r}")
+        if any(is_composition(ln) for ln in lines) and (len(lines) < 2 or lines[1] != COMBINED_LINE):
+            bad = next(ln for ln in lines if is_composition(ln))
+            raise OracleLineMissing(f"composition line without the second fixed line (combined tasks) directly under the oracle-assisted line: {bad[:120]!r}")
 
 
 def guarded(record: Mapping[str, Any]) -> dict[str, Any]:
@@ -54,6 +63,8 @@ def check_record(obj: Any, path: str = "$") -> None:
     if isinstance(obj, Mapping):
         if any(k in obj for k in GUARDED_KEYS) and obj.get("oracle_line") != ORACLE_LINE:
             raise OracleLineMissing(f"record at {path} carries a guarded field without the oracle-assisted line")
+        if "composition" in obj and obj.get("combined_line") != COMBINED_LINE:
+            raise OracleLineMissing(f"record at {path} carries a composition field without the second fixed line (combined tasks)")
         for k, v in obj.items():
             check_record(v, f"{path}.{k}")
     elif isinstance(obj, list | tuple):

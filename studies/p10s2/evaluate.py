@@ -4,8 +4,7 @@ quality (GEN, always-on), seen items, and the work counts. Everything runs on CP
 key-value cache, stop at the first newline byte. A scoring is a pure function of (student weights, arm state, panel records): it is repeated bit-identically (gate G4) and recomputed
 independently (section 13.3).
 
-Combined tasks: how C1 pairs two sources and how C2 lays out its prompt are not specified by the ADR. They are implemented behind ``core.CFG["pending"]["combined_tasks_defined"]`` and, when
-that is false, ``score_combined`` raises ``PendingLeadReview``; a provisional layout (marked PROVISIONAL in every record) runs only when the caller says so explicitly (tests and the dry stage).
+Combined tasks (C1, C2) are in ``combined`` (combined-tasks addendum).
 """
 
 import math
@@ -47,14 +46,6 @@ class GeneralWindow:
     marker_end: int = -1
 
 
-@dataclass(frozen=True)
-class CombinedItem:
-    ex_a: Example
-    ex_b: Example
-    refs_a: tuple[str, ...]
-    refs_b: tuple[str, ...]
-
-
 @dataclass
 class EvalContext:
     student: Student
@@ -65,12 +56,11 @@ class EvalContext:
     newline_ids: tuple[int, ...]
     panels: dict[str, PanelData]  # E_A, E_B (and any other single-task panel)
     subsample: dict[str, list[int]]  # panel name -> indices of the 300-item ablation subsample
-    combined: list[CombinedItem] = field(default_factory=list)
     windows: list[GeneralWindow] = field(default_factory=list)
     decision_index: int = 63  # token 64 (0-based index 63)
     first_nll_index: int = 64  # tokens 65..: the loss positions start at token index 64
     vocabulary: int = core.VOCABULARY
-    provisional_combined: bool = False
+    ec: Any = None  # the combined set of the combined-tasks addendum (E_C sentences and the C1 pairing); see ``combined``
     seed_plan: core.SeedPlan | None = None
 
 
@@ -141,61 +131,6 @@ def memory_ablations(ctx: EvalContext, arm: MemoryArm, panels: Sequence[str], st
             res[kind] = score_panel(ctx, arm, panel, ablation=ab, indices=sub).to_json()
         out[name] = res
     return out
-
-
-# --- combined tasks (section 6.4) -------------------------------------------------------------------------------------------------------------------
-def _answer_ids(ctx: EvalContext, ids: Sequence[int]) -> list[int]:
-    """The model's own answer: the generated tokens before the stop token (the stop token and anything after it are dropped; the newline is re-inserted as its own segment)."""
-    k = ctx.decoder.stop_index(ids)
-    return list(ids if k is None else ids[:k])
-
-
-def _bos_len(ex: Example) -> int:
-    return len(ex.segments[0].ids) if ex.segments and ex.segments[0].text == "<bos>" else 0
-
-
-def _generate_ids(ctx: EvalContext, arm: Arm, ids: Sequence[int], reads: Sequence[Read]) -> list[int]:
-    add, adapter = arm.prepare([list(reads)], 1, len(ids), CPU, None)
-    ctx.student.read_layer = arm.layer
-    return ctx.student.greedy(torch.tensor([list(ids)]), add=add, adapter=adapter, max_new=ctx.max_new, stop_bytes=ctx.decoder.table)
-
-
-def score_combined(ctx: EvalContext, arm: Arm, kind: str) -> dict[str, Any]:
-    """C1 (two sources: ``English: {s1}\\nGerman:`` ..., then after the model's own answer ``\\nEnglish: {s2}\\nFrench:`` ...) or C2 (one source, both answers; the source words are read with both tasks'
-    codes and the reads are summed). Score: mean chrF of the two answers; an item passes if both match a reference exactly. PROVISIONAL layouts: see the module docstring."""
-    if ctx.provisional_combined and (ctx.seed_plan is None or ctx.seed_plan.mode != "test"):
-        raise core.PendingLeadReview("the provisional combined-task layout is test-only: it is unreachable in calibration, rehearsal or registered mode")
-    if not core.CFG["pending"]["combined_tasks_defined"] and not ctx.provisional_combined:
-        raise core.PendingLeadReview("combined tasks C1/C2: the ADR does not say how C1 pairs two sources or how C2 lays out its prompt (section 6.4); stopped, pending the lead's decision")
-    if kind not in ("C1", "C2"):
-        raise ValueError(kind)
-    n = len(ctx.combined)
-    scores: list[float] = []
-    passes: list[bool] = []
-    for i, it in enumerate(ctx.combined):
-        if kind == "C1":
-            ex2 = ctx.combined[(i + 1) % n].ex_b  # PROVISIONAL pairing: item i's German prompt with item i+1's French prompt (cyclic)
-            refs2 = ctx.combined[(i + 1) % n].refs_b
-            a1 = _generate_ids(ctx, arm, it.ex_a.prompt_ids, reads_of(it.ex_a, ["A"], ctx.marker_index))
-            part2 = list(ex2.prompt_ids)[_bos_len(ex2) :]
-            ids2 = [*it.ex_a.prompt_ids, *_answer_ids(ctx, a1), *ctx.newline_ids, *part2]
-            off = len(ids2) - len(part2)
-            reads2 = [(off + p - _bos_len(ex2), "B", j) for p, j in ex2.reads] + [(off + ex2.marker - _bos_len(ex2), "B", ctx.marker_index)]
-            a2 = _generate_ids(ctx, arm, ids2, reads_of(it.ex_a, ["A"], ctx.marker_index) + reads2)
-            h1, h2, r1, r2 = ctx.decoder.answer_text(a1), ctx.decoder.answer_text(a2), it.refs_a, refs2
-        else:
-            reads_first = reads_of(it.ex_a, ["A", "B"], ctx.marker_index)
-            reads_first = [r for r in reads_first if not (r[2] == ctx.marker_index and r[1] == "B")]  # PROVISIONAL: the French marker is read where it stands, in the appended part
-            a1 = _generate_ids(ctx, arm, it.ex_a.prompt_ids, reads_first)
-            marker_b = list(it.ex_b.segments[-1].ids)
-            ids2 = [*it.ex_a.prompt_ids, *_answer_ids(ctx, a1), *ctx.newline_ids, *marker_b]
-            reads2 = [*reads_first, (len(ids2) - 1, "B", ctx.marker_index)]
-            a2 = _generate_ids(ctx, arm, ids2, reads2)
-            h1, h2, r1, r2 = ctx.decoder.answer_text(a1), ctx.decoder.answer_text(a2), it.refs_a, it.refs_b
-        s1, s2 = chrf_item(h1, r1), chrf_item(h2, r2)
-        scores.append((s1 + s2) / 2)
-        passes.append(normalize(h1) in {normalize(r) for r in r1} and normalize(h2) in {normalize(r) for r in r2})
-    return {"kind": kind, "layout": "PROVISIONAL (PENDING LEAD REVIEW)" if not core.CFG["pending"]["combined_tasks_defined"] else "registered", "mean": mean(scores), "items": scores, "pass_rate": mean([float(p) for p in passes])}
 
 
 # --- general-language quality (section 6.4) ---------------------------------------------------------------------------------------------------------------

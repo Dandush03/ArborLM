@@ -33,6 +33,9 @@ ORACLE_LINE = (
     "oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; "
     "frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory."
 )
+# The second fixed line of the combined-tasks addendum section 9, on every composition line and every composition table.
+COMBINED_LINE = "combined tasks: the routes, the order of the answers and the summing of reads are supplied by rule; neither combined task was trained on; descriptive; enters no gate, class or label."
+COMPOSITION_WORDS = ("COMPOSES", "DOES NOT COMPOSE", "COMPOSITION INCONCLUSIVE")
 LEAD_RULE = "S1 and S2 must not claim autonomous learned-memory success from oracle-assisted results."
 # Words that carry a class, mechanism, router, composition or cost reading (section 11.3, "No positive wording without it"). Matched as substrings.
 GUARDED_WORDS = (
@@ -40,7 +43,7 @@ GUARDED_WORDS = (
     "TRANSFER-INCONCLUSIVE", "NO-NEW-CAPABILITY", "FORGETS", "RETENTION BY INERTIA", "NOT REPLICATED", "INTERMEDIATE", "NOT_EVALUATED", "ENGINEERING-FAILURE",
     "INCOMPLETE", "BY CONSTRUCTION", "TRAINING COST HIGHER", "NO ADVANTAGE OVER SEPARATE ADAPTERS", "EQUIVALENT TO A WORD TABLE", "RETRIEVAL SUFFICES",
     "LEXICON-EQUIVALENT", "TEACHER-EQUIVALENT-TO-GOLD", "BELOW JOINT BOUND", "BELOW ADAPTER JOINT", "TASK-CODED SPARSE RETENTION", "APPEND COST",
-    "EXACT-MATCH WEAK", "ROUTER (keyword-level)", "CONSOLIDATION-REJECTED", "NOT STARTED", "NO PERMUTATION CONTROL (ADAPTER)",
+    "EXACT-MATCH WEAK", "DOES NOT COMPOSE", "COMPOSITION INCONCLUSIVE", "composition (replaced)", "ROUTER (keyword-level)", "CONSOLIDATION-REJECTED", "NOT STARTED", "NO PERMUTATION CONTROL (ADAPTER)",
 )  # fmt: skip
 
 
@@ -83,7 +86,7 @@ SEEDS = CFG["seeds"]
 OFFSETS: tuple[int, ...] = tuple(SEEDS["offsets"])
 OFFSET_NAMES = {0: "stage-1 store", 1: "training draw", 2: "batch order", 3: "router", 4: "permutation controls", 5: "gold draw", 6: "stage-2 appended rows", 7: "M-joint store", 8: "LoRA initialization", 9: "E-table initialization", 10: "oracle-code hash"}
 PARTITION_SEED: int = SEEDS["partition"]
-PARTITION_STREAMS: dict[str, int] = {"q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910}
+PARTITION_STREAMS: dict[str, int] = {"q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911}
 TEST_PARTITION_BASE = 229950  # test-mode stand-ins for 220901..220910 (the test range is 229001-229999)
 RANGES = {
     "registered": (SEEDS["registered_low"], SEEDS["registered_high"]),

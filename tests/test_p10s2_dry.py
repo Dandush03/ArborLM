@@ -80,8 +80,8 @@ def test_frozen_data_round_trip_and_tamper_detection(tmp_path: Path) -> None:
     back = read_bundle(tmp_path / "data")
     assert back.vocab == bundle.vocab and [i.key for i in back.panels["E_A"]] == [i.key for i in bundle.panels["E_A"]] and back.max_new == bundle.max_new and back.newline_ids == bundle.newline_ids
     assert [(w.ids, w.reads, w.stratum, w.marker_end) for w in back.windows] == [(w.ids, w.reads, w.stratum, w.marker_end) for w in bundle.windows]
-    w1 = build_world(bundle, "test", 1, RunConfig.dry(), provisional_combined=True)
-    w2 = build_world(back, "test", 1, RunConfig.dry(), provisional_combined=True)
+    w1 = build_world(bundle, "test", 1, RunConfig.dry())
+    w2 = build_world(back, "test", 1, RunConfig.dry())
     assert core.digest(cells.stage0_scores(w1)) == core.digest(cells.stage0_scores(w2))  # the world rebuilt from the frozen files scores identically
     assert [x.key for x in w1.streams[0].t["A"]] == [x.key for x in w2.streams[0].t["A"]]
     assert rec["g1"]["ok"] and "pools" in rec["g1"]["level"] and rec["qualification"]["ok"]  # pool-level G1 in the data step; the stream level in the gates stage
@@ -176,8 +176,8 @@ def test_calibration_runner_trains_and_scores_the_eight_cells_on_d_cal(monkeypat
     assert set(rec["stage0_d_cal"]) == {"A", "B"} and set(rec["teacher_d_cal"]) == {"A", "B"}
 
 
-def test_the_dry_world_has_no_registered_data_and_no_pending_item_resolved() -> None:
+def test_the_dry_world_has_no_registered_data_and_nothing_pending() -> None:
     world, rec = dry_world()
-    assert world.mode == "test" and core.CFG["pending"]["combined_tasks_defined"] is False
+    assert world.mode == "test" and "pending" not in core.CFG
     assert all(not isinstance(p, torch.nn.Parameter) or not p.requires_grad for p in world.student.parameters())
     assert rec["qualification"]["ok"] and rec["sufficiency_after_filter"]["ok"] and rec["sufficiency_pools"]["ok"]

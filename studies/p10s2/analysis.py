@@ -13,7 +13,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from . import classes as C
-from . import core, recompute
+from . import combined, core, recompute
 from .classes import CellEval, ClassResult, LabelInputs, Lexical
 from .registry import registry
 from .text import gap_closed
@@ -253,22 +253,6 @@ def annotations(st: Study, classes: Mapping[str, Mapping[str, ClassResult]]) -> 
             g_ap = st.g_panel(r, "MAF", o, "E_" + o[0], suffix="@append")
             ap[f"r{r}/{o}"] = None if g_v1 is None or g_ap is None else g_ap - g_v1
     A["APPEND COST"] = {"change_in_G_first_at_append": ap}
-    # COMPOSES C1 / C2 per arm
-    comp: dict[str, Any] = {}
-    for name, (group, variants) in {"M-append-frozen": ("MAF", orders), "M-ii": ("MII", orders), "M-joint": ("MJOINT", ("-",)), "L-seq": ("LSEQ", orders), "L-joint": ("LJOINT", ("-",))}.items():
-        for k in ("C1", "C2"):
-            vals: list[float | None] = []
-            singles: list[float | None] = []
-            layout = ""
-            for r in range(n):
-                for v in variants:
-                    sn = st.snap(r, group, v)
-                    cb = None if sn is None else sn.get("combined", {}).get(k)
-                    vals.append(None if cb is None or "mean" not in cb else num(cb["mean"]))
-                    layout = layout or str((cb or {}).get("layout", ""))
-                    singles.append(mean_of([st.panel(r, group, v, "E_A"), st.panel(r, group, v, "E_B")]))
-            comp[f"{name} {k}"] = {"composes": C.composes(mean_of(vals), mean_of(singles), mean_of(singles)), "layout": layout}
-    A["COMPOSES"] = comp
     # EXACT-MATCH WEAK: gap closed on exact-match rate < 0.10 for either capability (M-append-frozen after Stage 2, mean over replicates and orders; reading)
     weak = []
     for c in core.TASKS:
@@ -279,6 +263,104 @@ def annotations(st: Study, classes: Mapping[str, Mapping[str, ClassResult]]) -> 
         weak.append(None if gx is None else bool(gx < core.CFG["gates"]["exact_match_weak"]))
     A["EXACT-MATCH WEAK"] = None if any(x is None for x in weak) else any(weak)
     return A
+
+
+COMP_ARMS = {"M-append-frozen": ("MAF", core.ORDERS), "M-ii": ("MII", core.ORDERS), "L-seq": ("LSEQ", core.ORDERS), "M-joint": ("MJOINT", ("-",)), "L-joint": ("LJOINT", ("-",)), "M-i-separate": ("M-i-separate", ("-",)), "L-sep": ("L-sep", ("-",))}  # fmt: skip
+
+
+def _comb_rec(st: Study, arm: str, r: int, variant: str) -> Mapping[str, Any] | None:
+    group = COMP_ARMS[arm][0]
+    if arm in ("M-i-separate", "L-sep"):
+        rec = (st.reps[r].get("assembled", {}).get(arm) or {}).get("combined")
+    else:
+        sn = st.snap(r, group, variant)
+        rec = None if sn is None else sn.get("combined")
+    return rec if rec and "C1" in rec else None
+
+
+def _t_single(ens: Mapping[str, Any] | None, rec: Mapping[str, Any], kind: str, lang: str) -> float | None:
+    if ens is None:
+        return None
+    idx = rec[kind]["tested_sentences"][lang]
+    vals = [num(ens["single"]["scores"][lang][i]) for i in idx]
+    return None if not vals or any(v is None for v in vals) else sum(v for v in vals if v is not None) / len(vals)
+
+
+def _comp_inputs(rec: Mapping[str, Any], kind: str, s0: Mapping[str, Any] | None, ens: Mapping[str, Any] | None) -> C.CompCell:
+    langs = core.TASKS
+    s_k = {a: combined.tested_mean(rec, kind, a) for a in langs}
+    s_single = {a: combined.single_mean_on(rec, kind, a) for a in langs}
+    s0_k = {a: None if s0 is None else combined.tested_mean(s0, kind, a) for a in langs}
+    s0_single = {a: None if s0 is None else combined.single_mean_on(s0, kind, a) for a in langs}
+    t = {a: _t_single(ens, rec, kind, a) for a in langs}
+    return C.comp_cell(s_k, s_single, s0_k, s0_single, t)
+
+
+def composition(st: Study) -> dict[str, Any]:
+    """The composition lines of the combined-tasks addendum section 8 for every scored arm and both tasks. Descriptive: nothing here enters a gate, a class or a label."""
+    comb = st.base.get("combined") or {}
+    s0, ens = comb.get("stage0"), comb.get("ensemble")
+    out: dict[str, Any] = {"n_replicates": st.n, "arms": {}}
+    for kind in ("C1", "C2"):
+        out["arms"][kind] = {}
+        for arm, (group, variants) in COMP_ARMS.items():
+            orders: dict[str, list[C.CompCell | None]] = {}
+            detail: dict[str, Any] = {}
+            rejected = False
+            pass_rates: list[float] = []
+            c_means: dict[str, list[float]] = {}
+            s_means: dict[str, list[float]] = {}
+            for o in variants:
+                orders[o] = []
+                detail[o] = []
+                for r in range(st.n):
+                    rec = _comb_rec(st, arm, r, o)
+                    if arm == "M-ii" and ((st.cell(r, "MII", o) or {}).get("extras", {}).get("consolidation", {}).get("rejected", False)):
+                        rejected = True
+                    if rec is None:
+                        orders[o].append(None)
+                        detail[o].append(None)
+                        continue
+                    cell = _comp_inputs(rec, kind, s0, ens)
+                    orders[o].append(cell)
+                    pr = num(rec[kind].get("pass_rate"))
+                    cm = num(rec[kind].get("mean"))
+                    sa = [mean_of([num(x) for x in rec["single"]["scores"][a]]) for a in core.TASKS]
+                    if pr is not None:
+                        pass_rates.append(pr)
+                    if cm is not None and all(x is not None for x in sa):
+                        c_means.setdefault(o, []).append(cm)
+                        s_means.setdefault(o, []).append(sum(x for x in sa if x is not None) / 2)
+                    detail[o].append({"replicate": r, "H": dict(cell.h), "single_task_G": dict(cell.g), "passes": cell.passes, "reasons": list(cell.reasons), "pass_rate": pr,
+                                      "s_combined": {a: combined.tested_mean(rec, kind, a) for a in core.TASKS}, "s_single": {a: combined.single_mean_on(rec, kind, a) for a in core.TASKS}})  # fmt: skip
+            name, reasons = C.composition_class(orders, rejected=rejected)
+            ratios: dict[str, float | None] = {}
+            for o in variants:
+                cbar, sbar = mean_of(c_means.get(o, [])), mean_of(s_means.get(o, []))
+                ratios[o] = cbar / (C.G["composes_ratio_min"] * sbar) if cbar is not None and sbar else None
+            out["arms"][kind][arm] = {"composition": name, "reasons": list(reasons), "orders": detail, "mean_pass_rate": mean_of(pass_rates), "revision5_ratio_replaced": ratios,
+                                      "label": "revision 5's raw-score rule, replaced by the human lead"}  # fmt: skip
+        out["arms"][kind]["_stage0"] = _floor(st, kind, s0, ens)
+        out["arms"][kind]["_ensemble"] = _ensemble_h(kind, s0, ens)
+    return out
+
+
+def _floor(st: Study, kind: str, s0: Mapping[str, Any] | None, ens: Mapping[str, Any] | None) -> dict[str, Any]:
+    if s0 is None:
+        return {"values": None}
+    return {"s_combined": {a: combined.tested_mean(s0, kind, a) for a in core.TASKS}, "s_single": {a: combined.single_mean_on(s0, kind, a) for a in core.TASKS}, "note": "the floor of the rule; printed without a composition word"}
+
+
+def _ensemble_h(kind: str, s0: Mapping[str, Any] | None, ens: Mapping[str, Any] | None) -> dict[str, Any]:
+    """The ensemble's H_a, by construction at most 1 (equal to 1 when Stage 0's combined score does not exceed its single-task score); printed without a composition word."""
+    if s0 is None or ens is None:
+        return {"H": None}
+    h: dict[str, float | None] = {}
+    for a in core.TASKS:
+        x, xs = combined.tested_mean(ens, kind, a), combined.single_mean_on(ens, kind, a)
+        k0, s00 = combined.tested_mean(s0, kind, a), combined.single_mean_on(s0, kind, a)
+        h[a] = None if x is None or xs is None or k0 is None or s00 is None or xs == s00 else (x - max(k0, s00)) / (xs - s00)
+    return {"H": h, "note": "BY CONSTRUCTION; printed without a composition word"}
 
 
 def _loss(g_before: float | None, g_after: float | None) -> float | None:
@@ -350,6 +432,12 @@ def analyze(study: Mapping[str, Any], recompute_ne: set[str] | None = None) -> d
         ens = st.reps[r].get("ensemble")
         if ens is not None and ens.get("oracle") != ens.get("teacher_own"):
             engineering.append(f"replicate {r}: the oracle-routed ensemble's score differs from the teacher's own")
+    if not missing and st.n > 0:
+        for r in range(st.n):
+            for arm, (group, variants) in COMP_ARMS.items():
+                for o in variants:
+                    if _comb_rec(st, arm, r, o) is None and not (arm in ("M-i-separate", "L-sep") and not st.reps[r].get("assembled")):
+                        incomplete.append(f"r{r} {arm} {o}: the combined-task scores are missing (a registered score)")
     classes: dict[str, dict[str, ClassResult]] = {}
     gates: dict[str, Any] = {}
     mech_missing = {m: any(f"r{r}/{g}/{o}" in x or f"r{r}/{fg}/{o}" in x or f"r{r}/{fg}/{flip(o)}" in x for x in missing for r in range(st.n)) for m, (g, fg) in MECHANISMS.items() for o in core.ORDERS}
@@ -389,7 +477,7 @@ def analyze(study: Mapping[str, Any], recompute_ne: set[str] | None = None) -> d
         "label_row": row, "label": label, "label_with_design": C.label_with_n(label, st.n, int(study.get("design", {}).get("updates", 0))),
         "classes": {m: {o: c.to_json() for o, c in by.items()} for m, by in classes.items()},
         "gates": gates, "annotations": ann, "cost_lines": cost_lines(st) if not missing and st.n else [],
-        "gen_table": gen_rows(st) if not missing else [], "router_table": router_rows(st) if not missing else [],
+        "composition": composition(st) if not missing and st.n and not incomplete else {}, "gen_table": gen_rows(st) if not missing else [], "router_table": router_rows(st) if not missing else [],
         "control_failed": ctrl, "engineering": engineering, "incomplete": incomplete, "not_evaluated_reasons": reasons,
         "gen": {"M-append-frozen": li.gen_maf_holds, "M-ii": li.gen_mii_holds},
         "by_construction": {"M-i-separate": "BY CONSTRUCTION", "L-sep": "BY CONSTRUCTION", "general_quality_under_oracle_routes": "BY CONSTRUCTION"},
@@ -446,6 +534,8 @@ def stamp(obj: Any) -> Any:
         d = {k: stamp(v) for k, v in obj.items()}
         if any(k in d for k in GUARDED_KEYS):
             d = {"oracle_line": core.ORACLE_LINE, **{k: v for k, v in d.items() if k != "oracle_line"}}
+        if "composition" in d:
+            d = {**d, "combined_line": core.COMBINED_LINE}
         return d
     if isinstance(obj, list | tuple):
         return [stamp(v) for v in obj]

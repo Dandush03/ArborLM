@@ -58,9 +58,6 @@ def annotation_lines(ann: Mapping[str, Any]) -> list[str]:
         if name == "APPEND COST":
             for k, x in v["change_in_G_first_at_append"].items():
                 out.append(f"- APPEND COST {k}: change in G of the first capability at the append point {_fmt(x)}")
-        elif name == "COMPOSES":
-            for k, x in v.items():
-                out.append(f"- COMPOSES {k}: {_fmt(x['composes'])} (layout: {x['layout'] or 'not scored'})")
         elif v is None:
             out.append(f"- {name}: {core.NOT_EVALUATED}")
         else:
@@ -74,7 +71,7 @@ NOTES = (
     "Both teachers were trained on OPUS, which includes Tatoeba; this raises the teachers' scores and enlarges the gap the student must close; it does not help the student.",
     "The two capabilities are two translation directions, two capabilities of one kind.",
     "chrF-norm is implemented in the study (sacrebleu is not in the lock); the cross-check against sacrebleu is made in the data-generation step.",
-    "The combined tasks C1 and C2 are scored only under a provisional layout until the lead decides how C1 pairs two sources and how C2 lays out its prompt (PENDING LEAD REVIEW).",
+    "The combined tasks C1 and C2 follow the ADR-0022 addendum (human-approved 2026-11-15): C1 alternates the order of the two languages by item, C2 is German then French; the composition rule is the strengthened per-answer rule, with revision 5's ratio printed beside it as replaced. The bootstrap intervals over items are not computed (the listed seed 220906 is a partition-side seed that G9 does not allow in the registered run; reported to the lead).",
 )
 
 
@@ -82,6 +79,26 @@ def overlap_line(overlap: Mapping[str, float]) -> str:
     """The share of training items common to each pair of replicates (section 5.2); the reading of 'every replicate' is given with it."""
     pairs = ", ".join(f"{k}: {v:.3f}" for k, v in sorted(overlap.items()))
     return f"Share of training items common to each pair of replicates (all replicates draw from one accepted pool per capability, so their draws overlap): {pairs}."
+
+
+def composition_lines(comp: Mapping[str, Any], design: str) -> list[str]:
+    """The composition lines of the combined-tasks addendum section 8: n, every H_a per cell, the single-task G_a^C, Stage 0's per-answer combined and single scores (the floor), the pass rate, and
+    revision 5's ratio labelled as replaced. The ensemble's and Stage 0's values carry no composition word."""
+    n = comp.get("n_replicates", "?")
+    out = [f"Table 4. Composition on E_C (the strengthened per-answer rule, addendum section 8) {design}; both fixed lines above apply to the whole table and to this caption. Descriptive; n replicates = {n}."]
+    for kind, arms in comp.get("arms", {}).items():
+        for arm, rec in arms.items():
+            if arm == "_stage0":
+                v = rec
+                out.append(f"- {kind} Stage 0 (the floor of the rule, no composition word): per-answer combined {v.get('s_combined')}, per-answer single {v.get('s_single')}")
+            elif arm == "_ensemble":
+                out.append(f"- {kind} ensemble (BY CONSTRUCTION, no composition word): H per answer {rec.get('H')}")
+            else:
+                out.append(f"- {kind} {arm}: {rec['composition']} (n replicates = {n}); pass rate {_fmt(rec['mean_pass_rate'])}; reasons: {'; '.join(rec['reasons']) or 'none'}; revision 5's ratio C/(0.80 S), {rec['label']}: {rec['revision5_ratio_replaced']}")
+                for o, cells in rec["orders"].items():
+                    for c in cells:
+                        out.append("  - order " + o + (f", replicate {c['replicate']}: H {c['H']}, single-task G {c['single_task_G']}, s combined {c['s_combined']}, s single {c['s_single']}" if c else ": no record"))
+    return out
 
 
 def gen_lines(rows: Sequence[Mapping[str, Any]], routers: Sequence[Mapping[str, Any]]) -> list[str]:
@@ -114,6 +131,8 @@ def render_report(outcome: Mapping[str, Any], *, title: str = "P10-S2 outcome re
         parts += ["", block(gen_lines(outcome["gen_table"], outcome.get("router_table", [])))]
     if outcome.get("annotations"):
         parts += ["", block(annotation_lines(outcome["annotations"]))]
+    if outcome.get("composition"):
+        parts += ["", block(composition_lines(outcome["composition"], design))]
     if outcome.get("cost_lines"):
         parts += ["", block(["Cost and active-memory lines (registered rules, descriptive standing; none is an efficiency result):", *[f"- {c}" for c in outcome["cost_lines"]]])]
     parts += ["", block(["Printed by construction (they enter no class and no label):", *[f"- {k}: {v}" for k, v in outcome.get("by_construction", {}).items()]])]

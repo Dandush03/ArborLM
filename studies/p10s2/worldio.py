@@ -17,8 +17,9 @@ import torch
 from arborlm.io import file_sha256, write_json
 
 from . import core
+from .combined import Sentence, combined_set, pairs_digest
 from .data import Item, Partition, Sizes, TrainItem, draw_streams
-from .evaluate import CombinedItem, EvalContext, GeneralWindow, PanelData
+from .evaluate import EvalContext, GeneralWindow, PanelData
 from .model import StudentConfig, build_student, load_plain_state
 from .routing import RouterSpec
 from .tokenization import ByteDecoder
@@ -121,7 +122,7 @@ class RunConfig:
         return RunConfig(d["read_layer"], updates if updates is not None else d["updates"], d["batch"], d["replay_rows"], d["rows_per_stage"], t["store_learning_rate"], t["lora_learning_rates"][1], 2, 4, RouterSpec.dry(), d["router_decision_token"], d["window_tokens"], "cpu")
 
 
-def build_world(b: DataBundle, mode: str, replicates: int, run: RunConfig, *, provisional_combined: bool = False) -> World:
+def build_world(b: DataBundle, mode: str, replicates: int, run: RunConfig) -> World:
     """The world of a run from frozen data: the student (loaded strictly from the plain state), the example bank (rebuilt from stored segment ids, no tokenizer), the panels, the replicate draws (+1 and +5
     generators of the mode's seed plan), the evaluation context."""
     student = build_student(b.cfg)
@@ -130,8 +131,6 @@ def build_world(b: DataBundle, mode: str, replicates: int, run: RunConfig, *, pr
     vocab_index = {w: i for i, w in enumerate(b.vocab)}
     bank = ExampleBank.from_records(b.bank_records, vocab_index)
     nv = len(b.vocab)
-    if provisional_combined and mode != "test":
-        raise core.PendingLeadReview("provisional_combined is test-only (the lead will specify the C1/C2 layouts before calibration)")
     streams = [draw_streams(core.SeedPlan(mode, r), b.accepted, b.gold_pool, b.sizes) for r in range(replicates)]
 
     def panel(name: str, cap: str) -> PanelData:
@@ -143,8 +142,14 @@ def build_world(b: DataBundle, mode: str, replicates: int, run: RunConfig, *, pr
     for name, key in (("E_A", "E_A"), ("E_B", "E_B")):
         keys = set(b.ablation_keys[key])
         sub[name] = [k for k, it in enumerate(b.panels[key]) if it.key in keys]
-    combined = [CombinedItem(bank.prompt("A", it.en), bank.prompt("B", it.en), tuple(it.refs["A"]), tuple(it.refs["B"])) for it in b.panels["E_C"]]
-    ctx = EvalContext(student, decoder, nv, b.max_new, run.layer, b.newline_ids, {"E_A": pa, "E_B": pb}, sub, combined, list(b.windows), decision_index=run.decision_token - 1, first_nll_index=run.decision_token, vocabulary=nv, provisional_combined=provisional_combined)
+    sentences = [Sentence(it.key, {c: bank.prompt(c, it.en) for c in core.TASKS}, {c: tuple(it.refs[c]) for c in core.TASKS}) for it in b.panels["E_C"]]
+    sigma = b.extra.get("c1_pairing", {}).get("sigma")
+    if sigma is None:
+        raise ValueError("the data manifest has no C1 pairing (the listed seed 220911 is drawn once, in the partition step)")
+    ec = combined_set(sentences, sigma)
+    if pairs_digest(ec.pairs) != b.extra["c1_pairing"]["pairs_sha256"]:
+        raise ValueError("the C1 pair list does not match its hash in the data manifest")
+    ctx = EvalContext(student, decoder, nv, b.max_new, run.layer, b.newline_ids, {"E_A": pa, "E_B": pb}, sub, list(b.windows), decision_index=run.decision_token - 1, first_nll_index=run.decision_token, vocabulary=nv, ec=ec)
     d_con = {c: PanelData("D_con_" + c, c, [bank.prompt(c, i.en) for i in b.panels["D_con"]], [list(i.refs[c]) for i in b.panels["D_con"]]) for c in core.TASKS}
     n_seen = core.CFG["data"]["seen_items"] if mode != "test" else core.CFG["dry"]["seen_items"]
     seen = []

@@ -16,13 +16,13 @@ from typing import Any
 
 import torch
 
+from . import combined as combined_mod
 from . import core, evaluate, retrieval
 from .evaluate import (
     PanelData,
     general_by_construction,
     general_quality,
     memory_ablations,
-    score_combined,
     score_panel,
 )
 from .memory import (
@@ -205,8 +205,8 @@ def score_snapshot(
     out: dict[str, Any] = {"arm_hash": arm.state_hash(), "parameters": arm.parameter_count()}
     panels = {name: score_panel(ctx, arm, p) for name, p in ctx.panels.items()}
     out["panels"] = {k: v.to_json() for k, v in panels.items()}
-    first_panel = next(iter(ctx.panels.values()))
-    out["work"] = evaluate.active_work(arm, _reads_per_item(first_panel), _generated_per_item(panels[first_panel.name].to_json()))
+    first_name = next(iter(ctx.panels))
+    out["work"] = evaluate.active_work(arm, _reads_per_item(ctx.panels[first_name]), _generated_per_item(panels[first_name].to_json()))
     if ablation_stages is not None and isinstance(arm, MemoryArm):
         out["ablations"] = memory_ablations(ctx, arm, list(ctx.panels), ablation_stages, ablation_tasks)
     if learned_route and router is not None:
@@ -215,13 +215,19 @@ def score_snapshot(
         out["gen"] = general_quality(ctx, arm, router, always_on_task=always_on)
         out["gen_by_construction"] = general_by_construction(ctx, arm)
     if combined:
-        out["combined"] = {k: score_combined(ctx, arm, k) for k in ("C1", "C2")}
+        out["combined"] = combined_mod.score_combined_cell(ctx, arm, ctx.ec)  # C1, C2 and the single-task E_C answers: oracle route only, no router lane, no ablation
     if seen:
         out["seen"] = {c: score_panel(ctx, arm, PanelData(f"seen_{c}", c, [world.bank.prompt(c, x.en) for x in world.seen_items[r][c]], [[x.target] for x in world.seen_items[r][c]])).to_json() for c in TWO}
     return out
 
 
-def stage0_scores(world: World) -> dict[str, Any]:
+def stage0_scores_without_combined(world: World) -> dict[str, Any]:
+    """Stage 0 and the stored teacher scores on the single-task panels (the rehearsal times its combined scoring separately)."""
+    res = stage0_scores(world, with_combined=False)
+    return res
+
+
+def stage0_scores(world: World, with_combined: bool = True) -> dict[str, Any]:
     """Stage 0: the untrained student on every panel and on the 300-item subsample; and the stored teacher outputs scored on the same panels (the teachers are not run here)."""
     ctx = world.ctx
     arm = NullArm()
@@ -235,6 +241,11 @@ def stage0_scores(world: World) -> dict[str, Any]:
             items = [chrf_item(o, rf) for o, rf in zip(outs, p.refs, strict=True)]
             exact = [normalize(o) in {normalize(x) for x in rf} for o, rf in zip(outs, p.refs, strict=True)]
             res["teacher"][name] = {"mean": mean(items), "items": items, "subsample_mean": mean([items[i] for i in ctx.subsample[name]]), "exact_rate": mean([float(e) for e in exact])}
+    if not with_combined:
+        return res
+    # the combined tasks (addendum section 7): Stage 0 on the layouts with no read (the floor of the rule), and the ensemble from the stored teacher outputs on E_C (both teachers generate on every E_C sentence)
+    ec_text = {c: world.teacher_outputs.get(c, {}).get("E_C") for c in TWO}
+    res["combined"] = {"stage0": combined_mod.score_combined_cell(ctx, arm, ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, ec_text) if all(v is not None for v in ec_text.values()) else None}  # type: ignore[arg-type]
     return res
 
 
@@ -325,7 +336,7 @@ def _consolidation(world: World, r: int, maf: Arm, mii: Arm) -> dict[str, Any]:
 
 def assembled_scores(world: World, r: int, snap_dir: Path) -> dict[str, Any]:
     """M-i-separate (two ST1 stores behind the oracle route) and L-sep (the two LoRA-1 adapters behind the oracle route), assembled from the replicate's snapshots, never trained. Printed BY CONSTRUCTION; no
-    class and no label. Their combined-task scores are stopped with the combined-task item (an adapter applied to a sequence of two tasks is not specified)."""
+    class and no label. Their combined-task scores follow the combined-tasks addendum (L-sep: position-wise adapters on C1, a switch per answer on C2)."""
     ctx = world.ctx
     ctx.seed_plan = world.plan(r)
     st = {c: load_arm(world, r, snap_dir, f"r{r}/ST1/{c}{core.other_task(c)}") for c in TWO}
@@ -335,10 +346,7 @@ def assembled_scores(world: World, r: int, snap_dir: Path) -> dict[str, Any]:
     out: dict[str, Any] = {"label": "BY CONSTRUCTION"}
     for name, arm in (("M-i-separate", msep), ("L-sep", lsep)):
         out[name] = {n: score_panel(ctx, arm, p).to_json() for n, p in ctx.panels.items()}
-        if name == "M-i-separate":
-            out[name]["combined"] = {k: score_combined(ctx, arm, k) for k in ("C1", "C2")}
-        else:
-            out[name]["combined"] = {"status": core.NOT_EVALUATED, "reason": "an adapter applied to a sequence of two tasks is not specified (section 6.4); PENDING LEAD REVIEW"}
+        out[name]["combined"] = combined_mod.score_combined_cell(ctx, arm, ctx.ec)
     return out
 
 

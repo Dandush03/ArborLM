@@ -29,7 +29,7 @@ def build_synthetic_bundle(replicates: int = 2, *, sizes: Sizes | None = None, m
 def build_synthetic_world(replicates: int = 2, *, updates: int | None = None, sizes: Sizes | None = None, merges: int = 60, data_seed_offset: int = 0, add_bos: bool = False) -> tuple[World, dict[str, Any]]:
     """Returns the world and the pre-freeze record."""
     bundle, rec = build_synthetic_bundle(replicates, sizes=sizes, merges=merges, data_seed_offset=data_seed_offset, add_bos=add_bos)
-    return build_world(bundle, "test", replicates, RunConfig.dry(updates), provisional_combined=True), rec
+    return build_world(bundle, "test", replicates, RunConfig.dry(updates)), rec
 
 
 def items_of(world: World, name: str) -> list[Item]:

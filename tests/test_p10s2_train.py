@@ -1,8 +1,7 @@
 # ruff: noqa: E501
-"""P10S2 training, the router recipe, the cells of a replicate, scoring sections, composites and the combined-task stop (ADR-0022 sections 5.4, 6, 6.3, 6.4, 7, 9). Tiny sizes on a synthetic world and test
+"""P10S2 training, the router recipe, the cells of a replicate, scoring sections, composites (ADR-0022 sections 5.4, 6, 6.3, 6.4, 7, 9). Tiny sizes on a synthetic world and test
 seeds; every number is a mechanics check, not a result. Self-check only: not independent review, not Astra validation, not human approval."""
 
-import copy
 import sys
 import tempfile
 from pathlib import Path
@@ -250,7 +249,8 @@ def test_assembled_composites_equal_their_parts_by_construction() -> None:
     for name, group in (("M-i-separate", "ST1"), ("L-sep", "LORA1")):
         assert a[name]["E_A"]["mean"] == sc[f"r0/{group}/AB"]["scores"][f"r0/{group}/AB"]["panels"]["E_A"]["mean"]
         assert a[name]["E_B"]["mean"] == sc[f"r0/{group}/BA"]["scores"][f"r0/{group}/BA"]["panels"]["E_B"]["mean"]
-    assert a["L-sep"]["combined"]["status"] == core.NOT_EVALUATED  # an adapter on a sequence of two tasks is not specified: stopped, reported
+    for name in ("M-i-separate", "L-sep"):
+        assert a[name]["combined"]["C1"]["n"] == len(world.ctx.ec.sentences) and a[name]["combined"]["arm"] in ("memory", "lora")  # scored on the combined tasks (addendum section 7)
 
 
 def test_retrieval_baselines_and_ensemble() -> None:
@@ -278,54 +278,6 @@ def test_stage0_teacher_and_the_oracle_routed_ensemble_equal_the_teacher() -> No
     for c in core.TASKS:
         assert stages.evaluate_mean_teacher(world, c) == s0["teacher"]["E_" + c]["mean"]  # section 11.3: a difference would be ENGINEERING-FAILURE
         assert s0["student"]["E_" + c]["panel"]["mean"] >= 0.0 and "exact_rate" in s0["teacher"]["E_" + c]
-
-
-# --- combined tasks: stopped where the ADR is silent ----------------------------------------------------------------------------------------------------
-def test_combined_tasks_stop_with_pending_lead_review_unless_provisional() -> None:
-    world, _, d, tr, _ = trained()
-    arm = cells.load_arm(world, 0, d, "r0/MAF/AB")
-    ctx = copy.copy(world.ctx)
-    ctx.provisional_combined = False
-    with pytest.raises(core.PendingLeadReview):
-        evaluate.score_combined(ctx, arm, "C1")
-    with pytest.raises(core.PendingLeadReview):
-        evaluate.score_combined(ctx, arm, "C2")
-    world.ctx.seed_plan = core.SeedPlan("test", 0)
-    r1 = evaluate.score_combined(world.ctx, arm, "C1")
-    r2 = evaluate.score_combined(world.ctx, arm, "C2")
-    for r in (r1, r2):
-        assert "PROVISIONAL" in r["layout"] and 0.0 <= r["mean"] <= 1.0 and len(r["items"]) == len(world.ctx.combined) and 0.0 <= r["pass_rate"] <= 1.0
-    assert core.CFG["pending"]["combined_tasks_defined"] is False
-    with pytest.raises(ValueError):
-        evaluate.score_combined(world.ctx, arm, "C3")
-
-
-def test_the_provisional_combined_layout_is_unreachable_outside_test_mode() -> None:
-    world, _, d, tr, _ = trained()
-    arm = cells.load_arm(world, 0, d, "r0/MAF/AB")
-    for mode in ("calibration", "rehearsal", "registered-run"):
-        ctx = copy.copy(world.ctx)
-        ctx.provisional_combined = True
-        ctx.seed_plan = core.SeedPlan(mode, 0)
-        with pytest.raises(core.PendingLeadReview, match="test-only"):
-            evaluate.score_combined(ctx, arm, "C1")
-    ctx = copy.copy(world.ctx)
-    ctx.provisional_combined = True
-    ctx.seed_plan = None
-    with pytest.raises(core.PendingLeadReview):
-        evaluate.score_combined(ctx, arm, "C2")  # no seed plan, no mode: refused
-    from studies.p10s2 import standins
-    from studies.p10s2.worldio import RunConfig, build_world, read_bundle, write_bundle
-
-    bundle, _rec = standins.build_synthetic_bundle(1)
-    with tempfile.TemporaryDirectory() as td:
-        write_bundle(bundle, Path(td) / "b")
-        b = read_bundle(Path(td) / "b")
-        core.reset_seed_record()
-        for mode in ("calibration", "rehearsal", "registered-run"):
-            with pytest.raises(core.PendingLeadReview, match="test-only"):
-                build_world(b, mode, 1, RunConfig.dry(), provisional_combined=True)
-        assert core.seed_record() == []  # refused before any replicate seed is drawn
 
 
 def test_truncation_percentile_and_work_counts_are_analytical() -> None:

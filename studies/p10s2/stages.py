@@ -246,7 +246,7 @@ def dry(run_dir: Path, replicates: int = 2, updates: int | None = None, gates_up
         data_dir = run_dir / "data"
         write_bundle(bundle, data_dir)
         bundle = read_bundle(data_dir)  # hash-checked load
-        world = build_world(bundle, "test", replicates, RunConfig.dry(updates), provisional_combined=True)
+        world = build_world(bundle, "test", replicates, RunConfig.dry(updates))
     plan0 = core.SeedPlan("test", 0)
     streams_g1, g3 = gate_inputs(world, pre)
     with ledger.charge("gates-rehearsal", process="dry: gates"):

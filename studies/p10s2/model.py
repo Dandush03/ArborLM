@@ -12,7 +12,7 @@ Interface (the same for the real SmolLM2-135M configuration and for the tiny sta
 """
 
 import math
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
@@ -112,7 +112,7 @@ class Block(nn.Module):
         self.gate_proj, self.up_proj, self.down_proj = Lin(d, cfg.intermediate), Lin(d, cfg.intermediate), Lin(cfg.intermediate, d)
         self.input_norm, self.post_norm = RMSNorm(d, cfg.rms_norm_eps), RMSNorm(d, cfg.rms_norm_eps)
 
-    def forward(self, x: Tensor, cos: Tensor, sin: Tensor, index: int, adapter: "LoRAAdapter | None", kv: tuple[Tensor, Tensor] | None) -> tuple[Tensor, tuple[Tensor, Tensor]]:
+    def forward(self, x: Tensor, cos: Tensor, sin: Tensor, index: int, adapter: "LoRAAdapter | PositionAdapter | None", kv: tuple[Tensor, Tensor] | None) -> tuple[Tensor, tuple[Tensor, Tensor]]:
         cfg = self.cfg
         b, t, _ = x.shape
         h = self.input_norm(x)
@@ -188,7 +188,7 @@ class Student(nn.Module):
         self,
         ids: Tensor,
         add: Tensor | None = None,
-        adapter: "LoRAAdapter | None" = None,
+        adapter: "LoRAAdapter | PositionAdapter | None" = None,
         cache: Cache | None = None,
         hidden_at: int | None = None,
     ) -> Tensor:
@@ -202,6 +202,8 @@ class Student(nn.Module):
         cos, sin = self._rope(positions, x.dtype)
         if cache is not None and not cache.kv:
             cache.kv = [None] * cfg.layers
+        if isinstance(adapter, PositionAdapter):
+            adapter.set_span(start, t)  # a position-wise adapter needs the absolute positions of this call
         for i, blk in enumerate(self.blocks):
             kv = cache.kv[i] if cache is not None else None
             x, new_kv = blk(x, cos, sin, i, adapter, kv)
@@ -223,23 +225,33 @@ class Student(nn.Module):
         return self.forward(ids, hidden_at=layer)
 
     @torch.no_grad()
-    def greedy(self, prompt: Tensor, *, add: Tensor | None, adapter: "LoRAAdapter | None", max_new: int, stop_bytes: list[bytes] | None, use_cache: bool = True) -> list[int]:
+    def greedy_cached(self, prompt: Tensor, *, add: Tensor | None, adapter: "LoRAAdapter | PositionAdapter | None", max_new: int, stop_bytes: list[bytes] | None, cache: Cache | None = None) -> tuple[list[int], Cache]:
+        """Greedy decoding with a key-value cache. ``prompt`` (1, T) is read with ``add``; with ``cache`` given it is the *continuation* of the sequence the cache holds (step 2 of a combined task).
+        Returns the generated ids (the stop token, the first whose bytes contain 0x0A, is kept; otherwise ``max_new`` tokens) and the cache. The last generated token is not fed through the model."""
+        cache = cache if cache is not None else Cache()
+        out: list[int] = []
+        logits = self.forward(prompt, add=add, adapter=adapter, cache=cache)
+        for _ in range(max_new):
+            nxt = int(torch.argmax(logits[0, -1]).item())
+            out.append(nxt)
+            if stop_bytes is not None and b"\n" in stop_bytes[nxt]:
+                break
+            if len(out) == max_new:
+                break  # the last generated token is not fed (a continuation feeds it first)
+            logits = self.forward(torch.tensor([[nxt]], device=prompt.device), adapter=adapter, cache=cache)
+        return out, cache
+
+    @torch.no_grad()
+    def greedy(self, prompt: Tensor, *, add: Tensor | None, adapter: "LoRAAdapter | PositionAdapter | None", max_new: int, stop_bytes: list[bytes] | None, use_cache: bool = True) -> list[int]:
         """Greedy decoding of one prompt (1, T). The prompt is read with ``add``; generated positions are never read. Stops at the first token whose bytes contain 0x0A (when
         ``stop_bytes`` is given), which is kept in the output; otherwise after ``max_new`` tokens. With ``use_cache`` False every step recomputes the whole sequence (check (e))."""
-        out: list[int] = []
         if use_cache:
-            cache = Cache()
-            logits = self.forward(prompt, add=add, adapter=adapter, cache=cache)
-            for _ in range(max_new):
-                nxt = int(torch.argmax(logits[0, -1]).item())
-                out.append(nxt)
-                if stop_bytes is not None and b"\n" in stop_bytes[nxt]:
-                    break
-                logits = self.forward(torch.tensor([[nxt]], device=prompt.device), adapter=adapter, cache=cache)
-            return out
+            return self.greedy_cached(prompt, add=add, adapter=adapter, max_new=max_new, stop_bytes=stop_bytes)[0]
+        out: list[int] = []
         ids = prompt
         for _ in range(max_new):
-            logits = self.forward(ids, add=add, adapter=adapter)
+            padded = add if add is None or add.shape[1] == ids.shape[1] else torch.cat([add, torch.zeros(add.shape[0], ids.shape[1] - add.shape[1], add.shape[2], dtype=add.dtype, device=add.device)], dim=1)  # generated positions are never read
+            logits = self.forward(ids, add=padded, adapter=adapter)
             nxt = int(torch.argmax(logits[0, -1]).item())
             out.append(nxt)
             if stop_bytes is not None and b"\n" in stop_bytes[nxt]:
@@ -276,6 +288,29 @@ class LoRAAdapter(nn.Module):
         k = 2 * block + (0 if which == "q" else 1)
         out: Tensor = (h @ self.a[k].t()) @ self.b[k].t() * self.scale
         return out
+
+
+class PositionAdapter:
+    """L-sep on C1 and C2 (combined-tasks addendum section 7): the LoRA update used at a position is that of the task owning it. ``owner(i)`` gives the task of absolute position ``i``; the span
+    of each forward call is set by the student. No parameter of its own."""
+
+    def __init__(self, adapters: "dict[str, LoRAAdapter]", owner: "Callable[[int], str]") -> None:
+        self.adapters, self.owner = adapters, owner
+        self.start, self.length = 0, 0
+
+    def set_span(self, start: int, length: int) -> None:
+        self.start, self.length = start, length
+
+    def delta(self, block: int, which: str, h: Tensor) -> Tensor:
+        owners = [self.owner(self.start + i) for i in range(self.length)]
+        res: Tensor | None = None
+        for task, ad in self.adapters.items():
+            d = ad.delta(block, which, h)
+            mask = torch.tensor([o == task for o in owners], device=h.device)[None, :, None]
+            piece = torch.where(mask, d, torch.zeros_like(d))  # an unowned position adds exactly zero, so an owned one equals that adapter's own update bit for bit
+            res = piece if res is None else res + piece
+        assert res is not None
+        return res
 
 
 # --- weights: conversion from the Hugging Face Llama naming (pure torch) ---------------------------------------------------------------------------

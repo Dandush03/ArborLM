@@ -245,12 +245,73 @@ def annotation_lines(a: Mapping[str, bool | None]) -> list[str]:
     return out
 
 
-def composes(combined_mean: float | None, single_a: float | None, single_b: float | None) -> bool | None:
-    """COMPOSES: mean over replicates of the combined score >= 0.80 x the mean of the arm's two single-task scores."""
-    if not finite_all(combined_mean, single_a, single_b):
-        return None
-    assert combined_mean is not None and single_a is not None and single_b is not None
-    return bool(combined_mean >= G["composes_ratio_min"] * (single_a + single_b) / 2)
+@dataclass(frozen=True)
+class CompCell:
+    """One (arm, order, replicate) cell of the composition rule: H_a and the single-task gap closed per answer language, with the reasons a value is not defined."""
+
+    h: Mapping[str, float | None]
+    g: Mapping[str, float | None]
+    reasons: tuple[str, ...]
+    passes: bool | None  # None: NOT_EVALUATED
+
+
+def comp_cell(s_k: Mapping[str, float | None], s_single: Mapping[str, float | None], s0_k: Mapping[str, float | None], s0_single: Mapping[str, float | None], t_single: Mapping[str, float | None]) -> CompCell:
+    """For each answer a: **defined** only if the teacher's single-task gap over Stage 0 is >= 0.30 and the arm's single-task gap closed G_a^C is >= 0.50 (B(i)); otherwise NOT_EVALUATED with the reason.
+    H_a = (s_a(X, K) - m_a) / (s_a(X, single) - s_a(Stage 0, single)), m_a = max(s_a(Stage 0, K), s_a(Stage 0, single)) (B(ii)). The cell passes if H_a >= 0.80 for both answers."""
+    h: dict[str, float | None] = {}
+    g: dict[str, float | None] = {}
+    reasons: list[str] = []
+    for a in core.TASKS:
+        vals = [s_k.get(a), s_single.get(a), s0_k.get(a), s0_single.get(a), t_single.get(a)]
+        if not finite_all(*vals):
+            h[a], g[a] = None, None
+            reasons.append(f"a combined or single-task E_C score is undefined ({a})")
+            continue
+        x, xs, k0, s0, t = (float(v) for v in vals)  # type: ignore[arg-type]
+        tg = t - s0
+        if tg < core.GAP_MIN:
+            h[a], g[a] = None, None
+            reasons.append(f"teacher gap on E_C below 0.30 ({a})")
+            continue
+        ga = (xs - s0) / tg
+        g[a] = ga
+        if ga < G["acq_gap_min"]:
+            h[a] = None
+            reasons.append(f"single-task gap below 0.50 ({a})")
+            continue
+        m = max(k0, s0)
+        h[a] = (x - m) / (xs - s0)
+    if any(v is None for v in h.values()):
+        return CompCell(h, g, tuple(reasons), None)
+    return CompCell(h, g, (), all(float(v) >= G["composes_ratio_min"] for v in h.values()))  # type: ignore[arg-type]
+
+
+COMPOSES, DOES_NOT, INCONCLUSIVE = "COMPOSES", "DOES NOT COMPOSE", "COMPOSITION INCONCLUSIVE"
+
+
+def composition_class(orders: Mapping[str, Sequence[CompCell | None]], *, rejected: bool = False) -> tuple[str, tuple[str, ...]]:
+    """First match wins: NOT_EVALUATED if any H of any cell is undefined, a cell is missing, or the arm is M-ii with a CONSOLIDATION-REJECTED cell; COMPOSES if every cell of every order passes; DOES NOT
+    COMPOSE if, for some order and some answer, H_a < 0.50 in every replicate of that order; otherwise COMPOSITION INCONCLUSIVE."""
+    reasons: list[str] = []
+    if rejected:
+        reasons.append("CONSOLIDATION-REJECTED cell")
+    for o, cells in orders.items():
+        if not cells:
+            reasons.append(f"order {o}: no cell")
+        for i, c in enumerate(cells):
+            if c is None:
+                reasons.append(f"order {o}, replicate {i}: no combined record")
+            elif c.passes is None:
+                reasons += [f"order {o}, replicate {i}: {r}" for r in c.reasons]
+    if reasons:
+        return core.NOT_EVALUATED, tuple(reasons)
+    if all(c is not None and c.passes for cells in orders.values() for c in cells):
+        return COMPOSES, ()
+    for cells in orders.values():
+        for a in core.TASKS:
+            if cells and all(c is not None and float(c.h[a]) < G["composes_negative"] for c in cells):  # type: ignore[arg-type]
+                return DOES_NOT, ()
+    return INCONCLUSIVE, ()
 
 
 def training_cost(maf_seconds: Sequence[float], lora_seconds: Sequence[float]) -> dict[str, Any]:

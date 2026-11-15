@@ -157,6 +157,8 @@ def write_freeze(
     from .prefreeze import prefreeze_summary
 
     summary = prefreeze_summary(json.loads(prefreeze.read_text()))
+    if not summary["combined_whole_string_ok"]:
+        raise FreezeRefused("refused: the combined-task whole-string check (addendum section 4.4) is absent or has a required mismatch: the same consequence as a prompt mismatch in test (a)")
     if summary["stop"]:
         write_json_file(freeze_dir / "prefreeze_stop.json", {"label": summary["stop"], "summary": summary})
         raise FreezeRefused(f"{summary['stop']}: the study stops before the freeze (recorded in {freeze_dir / 'prefreeze_stop.json'})")

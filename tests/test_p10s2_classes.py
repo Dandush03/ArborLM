@@ -21,6 +21,19 @@ from studies.p10s2.registry import registry  # noqa: E402
 S0, TEACHER = 0.1, 0.9  # Stage 0 and teacher scores on every panel: G = (s - 0.1) / 0.8
 
 
+def comb_rec(s_a: float = 0.8, s_b: float = 0.8, c1: tuple[float, float] = (0.78, 0.78), c2: tuple[float, float] = (0.78, 0.78), n: int = 6, pass_rate: float = 0.5) -> dict[str, Any]:
+    """A combined-task record of the addendum's structure: single-task scores per E_C sentence (constant per language), and per-answer means for the items in which an answer is tested (C1: second
+    position; C2: both answers on all items)."""
+    half = n // 2
+    tested1 = {"A": list(range(half)), "B": list(range(half, n))}
+    tested2 = {"A": list(range(n)), "B": list(range(n))}
+    return {
+        "n": n, "arm": "synthetic", "single": {"scores": {"A": [s_a] * n, "B": [s_b] * n}},
+        "C1": {"mean": (c1[0] + c1[1]) / 2, "pass_rate": pass_rate, "tested_sentences": tested1, "tested_by_language": {"A": c1[0], "B": c1[1]}, "second_by_language": {"A": c1[0], "B": c1[1]}},
+        "C2": {"mean": (c2[0] + c2[1]) / 2, "pass_rate": pass_rate, "tested_sentences": tested2, "tested_by_language": {"A": c2[0], "B": c2[1]}, "second_by_language": {"A": None, "B": c2[1]}},
+    }  # fmt: skip
+
+
 def panel(m: Any) -> dict[str, Any]:
     return {"mean": m, "items": [m, m, m], "exact": [False, False, False], "sequences": [[1, 2], [3], [4]], "exact_rate": 0.0}
 
@@ -50,7 +63,7 @@ def cell_record(r: int, group: str, variant: str, ea: float, eb: float) -> dict[
     if group in ("ST1", "MAF"):
         snap["learned_route"] = {"E_A": panel(ea), "E_B": panel(eb)}
     if group in ("MAF", "MII", "MJOINT", "LSEQ", "LJOINT"):
-        snap["combined"] = {k: {"kind": k, "layout": "PROVISIONAL (PENDING LEAD REVIEW)", "mean": 0.7, "items": [0.7], "pass_rate": 0.5} for k in ("C1", "C2")}
+        snap["combined"] = comb_rec()
     snap["work"] = {"kind": "memory", "key_products_per_read": 2 * 4096, "value_parameters_read_per_generated_token": 100.0} if group in MEMORY else {"kind": "lora", "adapter_parameters_applied_per_generated_token": 2419200}
     scores = {label: snap}
     extras: dict[str, Any] = {}
@@ -67,12 +80,13 @@ def study(n: int = 2, tweak: Callable[[dict[str, Any]], None] | None = None) -> 
         cells = {c.label: cell_record(r, c.group, c.variant, *good_scores()[(c.group, c.variant)]) for c in registry(n) if c.replicate == r}
         reps.append({
             "cells": cells,
-            "assembled": {"L-sep": {"E_A": panel(0.8), "E_B": panel(0.8)}, "M-i-separate": {"E_A": panel(0.8), "E_B": panel(0.8)}},
+            "assembled": {"L-sep": {"E_A": panel(0.8), "E_B": panel(0.8), "combined": comb_rec()}, "M-i-separate": {"E_A": panel(0.8), "E_B": panel(0.8), "combined": comb_rec()}},
             "retrieval": {c: {"R-icl": {"mean": 0.3}, "R-nn": {"mean": 0.3}, "R-gloss": {"mean": 0.3}, "R-exact": {"hits": 0, "mean": 0.0}} for c in core.TASKS},
             "routers": {"AB": {"accuracy": {"A": 1.0, "B": 1.0, "general": 1.0}}},
             "ensemble": {"oracle": {"A": 0.9, "B": 0.9}, "teacher_own": {"A": 0.9, "B": 0.9}},
         })  # fmt: skip
-    base = {"student": {p: {"panel": {**panel(S0)}, "subsample": panel(S0)} for p in ("E_A", "E_B")}, "teacher": {p: {"mean": TEACHER, "subsample_mean": TEACHER, "exact_rate": 0.9} for p in ("E_A", "E_B")}}
+    base = {"student": {p: {"panel": {**panel(S0)}, "subsample": panel(S0)} for p in ("E_A", "E_B")}, "teacher": {p: {"mean": TEACHER, "subsample_mean": TEACHER, "exact_rate": 0.9} for p in ("E_A", "E_B")},
+            "combined": {"stage0": comb_rec(S0, S0, (S0, S0), (S0, S0)), "ensemble": comb_rec(TEACHER, TEACHER, (TEACHER, TEACHER), (TEACHER, TEACHER))}}  # fmt: skip
     for p in base["student"].values():
         p["panel"]["exact_rate"] = 0.0
     s: dict[str, Any] = {"design": {"replicates": n, "updates": 2000}, "prefreeze": {"teacher_only": True, "stop": None}, "gates": {g: {"ok": True} for g in ("G1", "G4", "G5", "G6", "G7", "G8", "G9")}, "baseline": base, "replicates": reps, "incomplete": [], "engineering": []}
@@ -113,7 +127,8 @@ def test_all_good_gives_row_7_and_classes() -> None:
     assert a["EQUIVALENT TO A WORD TABLE"] is True and a["NO ADVANTAGE OVER SEPARATE ADAPTERS"] is True and a["BELOW JOINT BOUND"] is False
     assert a["ROUTER (keyword-level) QUALIFIED"] is True and a["TEACHER-EQUIVALENT-TO-GOLD"] is True
     assert a["APPEND COST"]["change_in_G_first_at_append"]["r0/AB"] == pytest.approx((0.5 - S0) / 0.8 - (0.8 - S0) / 0.8)
-    assert a["COMPOSES"]["M-append-frozen C1"]["composes"] is True and "PROVISIONAL" in a["COMPOSES"]["M-append-frozen C1"]["layout"]
+    comp = out["composition"]["arms"]
+    assert all(comp[k][arm]["composition"] == "COMPOSES" for k in ("C1", "C2") for arm in ("M-append-frozen", "M-ii", "L-seq", "M-joint", "L-joint", "M-i-separate", "L-sep")) and "COMPOSES" not in a
     assert a["RETRIEVAL SUFFICES"] is False and a["LEXICON-EQUIVALENT"] is False
     assert len(out["cost_lines"]) == 4 and out["cost_lines"][0].startswith("TRAINING COST HIGHER") is False
     assert any("FEWER VALUE ROWS ACTIVE" in x for x in out["cost_lines"]) and any("0.938" in x for x in out["cost_lines"])
@@ -303,7 +318,6 @@ def test_gate_functions_hand_cases() -> None:
     assert C.negative_retention(0.69, 1.0) is True and C.negative_retention(0.70, 1.0) is False
     assert C.gen_gate(0.02) is True and C.gen_gate(0.0201) is False and C.gen_gate(None) is None and C.gen_gate(float("nan")) is None
     assert C.within(0.77, 0.8) is True and C.within(0.769, 0.8) is False and C.within(None, 0.8) is None
-    assert C.composes(0.8, 1.0, 1.0) is True and C.composes(0.79, 1.0, 1.0) is False
     assert C.training_cost([15.0], [10.0])["word"] == "TRAINING COST COMPARABLE" and C.training_cost([15.1], [10.0])["word"] == "TRAINING COST HIGHER"
     assert C.value_rows(10.0, 100.0, 8192)["word"] == "FEWER VALUE ROWS ACTIVE" and "key products per read 8192" in C.value_rows(11.0, 100.0, 8192)["line"]
     assert C.stored_size_line(134_515_008, 8192, [73_944_309, 74_669_178], 0.9, None, 576).count("0.938") == 1
@@ -326,8 +340,6 @@ def test_annotation_rules() -> None:
     assert adapter["BELOW ADAPTER JOINT"] is True  # the memory-form joint student is below 0.90 x the adapter-form one
     em = analysis.analyze(study(tweak=lambda s: [cell(s, 0, "MAF", o)["scores"][f"r0/MAF/{o}"]["panels"]["E_A"].update(exact_rate=0.0) for o in core.ORDERS]))["annotations"]
     assert em["EXACT-MATCH WEAK"] is True  # gap closed on exact-match rate 0 < 0.10
-    notcomp = analysis.analyze(study(tweak=lambda s: [cell(s, 0, "MAF", o)["scores"][f"r0/MAF/{o}"]["combined"]["C1"].update(mean=0.1) for o in core.ORDERS]))["annotations"]
-    assert notcomp["COMPOSES"]["M-append-frozen C1"]["composes"] is False
     noroute = analysis.analyze(study(tweak=lambda s: s["replicates"][0]["routers"]["AB"]["accuracy"].update(general=0.98)))["annotations"]
     assert noroute["ROUTER (keyword-level) QUALIFIED"] is False  # accuracy below 0.99 on general prefixes
     nolearned = analysis.analyze(study(tweak=lambda s: cell(s, 0, "MAF", "AB")["scores"]["r0/MAF/AB"]["learned_route"].update(E_B=panel(0.1))))["annotations"]

@@ -6,13 +6,14 @@ The inputs are interfaces: a ``Corpus``, a ``ReferenceTokenizer``, the study's s
 step (``datagen``, unexecuted here) fill them differently and call the same code, so the real-data steps add no scientific code.
 """
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
 
 import torch
 
 from . import core
+from .combined import draw_sigma, duplicate_normalized, pair_list, pairs_digest
 from .data import (
     CorpusLike,
     Sizes,
@@ -133,15 +134,65 @@ def build_bundle(
     rec["filter"] = {c: fits[c].to_json() for c in core.TASKS}
     rec["dropped_eval_equal"] = dropped
     teacher_outputs = {
-        c: {name: [o.text for o in run_teacher(teachers[c], [i.en for i in part.panels[pn]])] for name, pn in (("E_" + c, "E_" + c), ("D_cal", "D_cal"))}
+        c: {name: [o.text for o in run_teacher(teachers[c], [i.en for i in part.panels[pn]])] for name, pn in (("E_" + c, "E_" + c), ("D_cal", "D_cal"), ("E_C", "E_C"))}
         for c in core.TASKS
-    }  # fmt: skip
+    }  # fmt: skip  (both teachers generate on every E_C sentence: the combined-tasks addendum)
+    n_c = len(part.panels["E_C"])
+    sigma = draw_sigma(n_c, mode)  # the listed seed 220911, drawn once, here, after E_C is built
+    pairs = pair_list(n_c, sigma)
+    rec["c1_pairing"] = {"n": n_c, "pairs_sha256": pairs_digest(pairs), "duplicate_normalized_english": duplicate_normalized([i.key for i in part.panels["E_C"]])}
+    rec["combined_whole_string"] = check_combined_whole_string(tok, part.panels["E_C"], pairs)
     bundle = DataBundle(
         student.cfg, {k: v.detach().clone() for k, v in student.state_dict().items()}, tok.token_bytes(), nl, sizes, part.vocab, part.panels, part.gold_pool, accepted, seen_order(accepted, mode), ablation_keys,
-        bank.to_records(), windows, tok.encode(text_train), teacher_outputs, max_new, {"conventions": {"bos": tok.bos_id, "segment": "label, source with leading space, newline, task marker"}},
+        bank.to_records(), windows, tok.encode(text_train), teacher_outputs, max_new, {"conventions": {"bos": tok.bos_id, "segment": "label, source with leading space, newline, task marker"}, "c1_pairing": {"sigma": sigma, "pairs_sha256": pairs_digest(pairs), "seed_name": "c1_pairing (220911)"}},
     )  # fmt: skip
     return bundle, rec
 
+
+
+def check_combined_whole_string(tok: ReferenceTokenizer, items: Sequence[Any], pairs: Sequence[Any]) -> dict[str, Any]:
+    """Extension of test (a) to the combined layouts (addendum section 4.4): for every C1 item, with the first reference of s1 in the item's first language (tokenized with its leading space) in place
+    of a1, and for every C2 item likewise, the concatenation of segment ids is compared with the whole-string ids. A mismatch at a segment boundary or inside a template piece or a source is required to
+    be 0 (the consequence of a prompt mismatch in test (a)); a mismatch inside the substituted reference is listed and requires nothing. References are used as text only."""
+    def seg(text: str) -> list[int]:
+        return list(tok.encode(text))
+
+    def one(parts: Sequence[str], ref_span: tuple[int, int]) -> str | None:
+        whole = "".join(parts)
+        wids, offs = tok.encode_offsets(whole)
+        cat = [i for p in parts for i in seg(p)]
+        if wids == cat:
+            return None
+        d = next((k for k, (a, b) in enumerate(zip(wids, cat, strict=False)) if a != b), min(len(wids), len(cat)) - 1)
+        start = offs[min(d, len(offs) - 1)][0]
+        return "reference" if ref_span[0] <= start < ref_span[1] else "required"
+
+    required: list[str] = []
+    listed = 0
+    checked = 0
+    lang = {"A": "German", "B": "French"}
+    for p in pairs:
+        s1, s2 = items[p.i1], items[p.i2]
+        ref = " " + s1.refs[p.t1][0]
+        parts = ["English:", " " + s1.en, "\n", lang[p.t1] + ":", ref, "\n", "English:", " " + s2.en, "\n", lang[p.t2] + ":"]
+        a = len("".join(parts[:4]))
+        res = one(parts, (a, a + len(ref)))
+        checked += 1
+        if res == "required":
+            required.append(f"C1 item {p.j}")
+        elif res == "reference":
+            listed += 1
+    for i, s in enumerate(items):
+        ref = " " + s.refs["A"][0]
+        parts = ["English:", " " + s.en, "\n", "German:", ref, "\n", "French:"]
+        a = len("".join(parts[:4]))
+        res = one(parts, (a, a + len(ref)))
+        checked += 1
+        if res == "required":
+            required.append(f"C2 item {i}")
+        elif res == "reference":
+            listed += 1
+    return {"checked": checked, "required_mismatches": required, "listed_inside_reference": listed, "ok": not required}
 
 
 def prefreeze_summary(rec: Mapping[str, Any]) -> dict[str, Any]:
@@ -149,4 +200,5 @@ def prefreeze_summary(rec: Mapping[str, Any]) -> dict[str, Any]:
     training material is teacher-only (every training item is an accepted teacher output on a sentence without gold in that language, and G1 holds on the pools)."""
     stops = [rec[k]["outcome"] for k in ("qualification", "sufficiency_pools", "sufficiency_after_filter") if rec.get(k, {}).get("outcome")]
     g1_ok = bool(rec.get("g1", {}).get("ok", False))
-    return {"stop": stops[0] if stops else None, "teacher_only": g1_ok and not stops, "g1_pool_level_ok": g1_ok}
+    tok_ok = bool(rec.get("combined_whole_string", {}).get("ok", False))
+    return {"stop": stops[0] if stops else None, "teacher_only": g1_ok and not stops, "g1_pool_level_ok": g1_ok, "combined_whole_string_ok": tok_ok}
