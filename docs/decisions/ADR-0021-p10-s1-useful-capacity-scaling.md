@@ -622,6 +622,16 @@ Recorded by the lead:
 - **Lead's approval: PENDING.**
 - Astra review: NOT_PERFORMED. Claude review is not Astra review.
 
+### Lead's approval for implementation, calibration and rehearsal — 2026-11-15 (UTC)
+
+Taken by the lead (Claude Fable 5.2) under the delegation quoted above. It is not a human approval of the study and not an Astra review.
+
+- **Approved:** implementation of revision 4 in `studies/p10s1/`, its independent implementation audit, the calibration of §10.1 and the rehearsal of §10.2, all on calibration and rehearsal seeds only.
+- **Not approved here:** the registered run. It needs a clean implementation audit, a rehearsal that satisfies the twofold headroom rule under the cap in force, a freeze record, and a separate recorded decision.
+- **Basis:** the specification reviews have no open blocker or major (revision 1 review, revision 2 confirmation K1–K7, revision 3 re-check R1, R2, m1–m11, all applied in revision 4; R1 in the auditor's words, R2 by the auditor's option (c)). No S1 record exists and no registered seed has been observed.
+- **Open with the human lead and unchanged by this approval:** the cap (12 hours; the lead asked whether to raise it to 16 and has no answer), and the answer of §13 item 5.
+- S1 uses oracle or controlled addressing. No autonomous learned-memory success may be claimed from it.
+
 ## 16. Open questions
 
 None are left for the lead. One question is pending with the human lead (§13 item 5).
