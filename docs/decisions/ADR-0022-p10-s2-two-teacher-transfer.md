@@ -535,7 +535,20 @@ The human lead, verbatim:
 
 > "im confortable with does number if it mean it will resolve most dough and close any posible misguidence due to a small set"
 
-Lead's approval: PENDING the human lead's answers.
+**Human lead's decision on the downloads — 2026-11-15 (UTC), verbatim:**
+
+> "yes s0 should include the penalty and i approve s2 download"
+
+It answered the lead's question: "Approve the S2 downloads? They total 938 MB, or 1,253 MB with the fallback teacher. S2 cannot start without them." The message before it described them as "the student model, the Tatoeba exports and the package wheels for data generation". (The first half of the sentence concerns ADR-0020.)
+
+Recorded by the lead:
+
+- **Reserved item 1 is answered: approved.** The student (272.4 MB), the Tatoeba data (53.1 MB), and, only if the fallback rule of this ADR calls for them, the fallback teacher and data (315.3 MB + 8.1 MB), at the pinned revisions and with the licence checks of §14.1. Nothing else may be downloaded.
+- **Reserved item 2:** the lead reads the approval as covering the package wheels for the one-off data-generation step, because the question named them and the total included them. They are installed outside the lock with `uv run --locked --with`, pinned in the requirements file of the freeze; `uv.lock` and `pyproject.toml` do not change.
+- **Reserved items 3, 4 and 5 have no answer** (complementary capabilities; the precision filter as suitable verification; training on MPS). The lead does not decide them.
+- No download has been made at the time of this record. By §16 the downloads come after implementation on synthetic stand-ins.
+
+Lead's approval: PENDING the human lead's answers on reserved items 3, 4 and 5.
 
 ## 19. Map of the review of revision 1 to this revision
 
