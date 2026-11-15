@@ -808,3 +808,18 @@ Readings (e), (f), (l) and (o) were found correct and stand.
 | M6 terms beyond the matrix products | The count is the multiply-adds of every matrix product and gather-weighted sum in the forward and backward pass of the whole update, plus 4 per trainable parameter for AdamW. Elementwise activations, normalizations and the loss are not counted. The formula is in the config |
 | (h) for DENSE FASTER | Per replicate: a replicate counts if either panel satisfies the blocking condition |
 
+## 23. The calibration's return to the human lead, and the human lead's direction (2026-11-15 UTC)
+
+The calibration of §10.1 (`results/p10s1-calibration-2026-11-15/`, 46 of 46 runs, calibration draws only) returned to the human lead by the rule of item 0: no load is loaded at 4,096 slots or at 16,384 slots within the registered run lengths. Every cell is at its ceiling or still improving when its run ends. The lead reported this with three options (run S1 as it is with the capacity line fixed as CAPACITY NOT TESTED; fund longer runs; stop and carry the question to P10-I), recommended the first, and raised the dense control's learning rate being at the top of its grid.
+
+The human lead answered, verbatim (the second half concerns ADR-0020, whose cap stays at 22 hours):
+
+> prioritize resolving S1's no-loaded-cell condition over adding runtime margin to S0.
+
+Recorded by the lead:
+
+- **The human lead directs that the no-loaded-cell condition be resolved**, not accepted. S1 does not proceed to its freeze with the capacity line fixed as NOT TESTED while a resolution is being worked out. This is the human lead's use of §10.1's "fund a row".
+- **How.** The lead does not improvise a row (§10.1). It specifies, before running anything further, a rule-bound extension of the load calibration that searches for a cell that saturates below the ceiling within a fundable run length, and a fixed rule that turns its outcome into registered rows or into CAPACITY NOT TESTED. The extension is reviewed independently before it runs, uses calibration draws only, and is charged to S1's ledger; the hour cap may be raised under the recorded delegation, before any registered seed is observed.
+- No registered seed of S1 has been observed. The efficiency line is unaffected by this section.
+- The dense control's learning-rate grid is taken up in the same extension, as a proposal for the independent check; no answer on it has been recorded from the human lead.
+
