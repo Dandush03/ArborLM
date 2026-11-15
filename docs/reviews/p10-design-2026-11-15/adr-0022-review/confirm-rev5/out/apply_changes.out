@@ -1,0 +1,12 @@
+60 changes parsed
+C02: insert needed leading '\n' (lost in CHANGES.md strip)
+C06: insert needed leading '\n' (lost in CHANGES.md strip)
+C29: insert needed leading '\n' (lost in CHANGES.md strip)
+C30: insert needed leading '\n\n' (lost in CHANGES.md strip)
+C34: insert needed leading '\n' (lost in CHANGES.md strip)
+C36: insert needed leading '\n' (lost in CHANGES.md strip)
+C37: insert needed leading '\n\n' (lost in CHANGES.md strip)
+C48: insert needed leading '\n\n' (lost in CHANGES.md strip)
+C57: insert needed leading '\n' (lost in CHANGES.md strip)
+C60: insert-before needed trailing '\n\n'
+IDENTICAL

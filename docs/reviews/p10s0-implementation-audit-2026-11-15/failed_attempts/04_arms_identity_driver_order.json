@@ -1,0 +1,221 @@
+{
+ "identity_vs_p9ii": {
+  "A0@2K/4K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A1@2K/4K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A2@2K/4K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    2,
+    2
+   ]
+  },
+  "A5-D@2K/4K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A6@2K/4K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A7@2K/4K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A0@8K/16K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": true,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A1@8K/16K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": false,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A2@8K/16K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": true,
+   "u_pre_s0_vs_p9ii": [
+    8,
+    8
+   ]
+  },
+  "A5-D@8K/16K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": false,
+   "task_losses_identical": true,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A6@8K/16K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": true,
+   "task_losses_identical": true,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  },
+  "A7@8K/16K": {
+   "forward_bit_identical": true,
+   "params_after_12_steps_bit_identical": true,
+   "task_losses_identical": true,
+   "u_pre_s0_vs_p9ii": [
+    null,
+    null
+   ]
+  }
+ },
+ "8K/4K": {
+  "A0": {
+   "slots": 4096,
+   "trainer_injection": false,
+   "updates_of_cell": 32
+  },
+  "A5-D": {
+   "slots": 4096,
+   "trainer_injection": false,
+   "updates_of_cell": 32
+  },
+  "A6": {
+   "slots": 4096,
+   "trainer_injection": false,
+   "updates_of_cell": 32
+  },
+  "A1": "refused: A1 and A2 are not run at 8K/4K: no target injection (ADR-0020 section 5.1)",
+  "A2": "refused: A1 and A2 are not run at 8K/4K: no target injection (ADR-0020 section 5.1)"
+ },
+ "A2_switch": {
+  "u_pre_at_unit8_stage1": 2,
+  "phase1_trainable": [
+   "keys",
+   "wq"
+  ],
+  "phase2_trainable": [
+   "gate",
+   "keys",
+   "values",
+   "wo",
+   "wq"
+  ],
+  "adam_step_counters_after_first_phase2_update": [
+   1
+  ],
+  "registered_u_pre_2K4K": 2048,
+  "registered_u_pre_8K16K": 8192
+ },
+ "WX": {
+  "A5-D": {
+   "state_dict_keys_that_differ_from_base": [
+    "addition.wq"
+   ],
+   "wq_shape": [
+    16,
+    2048
+   ],
+   "query_bit_identical_with_padded_w7": true,
+   "logits_bit_identical_with_padded_w7": true,
+   "own_full_window_query_max_abs_diff": 0.0,
+   "wq_init_equals_matrix_seed_plus_3000": true,
+   "aux_loss_present": {
+    "div": true,
+    "addr": false
+   }
+  },
+  "A1": {
+   "state_dict_keys_that_differ_from_base": [
+    "addition.wq"
+   ],
+   "wq_shape": [
+    16,
+    2048
+   ],
+   "query_bit_identical_with_padded_w7": true,
+   "logits_bit_identical_with_padded_w7": true,
+   "own_full_window_query_max_abs_diff": 0.0,
+   "wq_init_equals_matrix_seed_plus_3000": true,
+   "aux_loss_present": {
+    "div": false,
+    "addr": true
+   }
+  }
+ },
+ "read_swap": {
+  "A": {
+   "impl": {
+    "facts": 128,
+    "correct": 5,
+    "a_use_count": 0,
+    "swapped_still_answer": 5
+   },
+   "auditor": {
+    "facts": 128,
+    "correct": 5,
+    "a_use_count": 0,
+    "swapped_still_answer": 5
+   }
+  },
+  "B": {
+   "impl": {
+    "facts": 128,
+    "correct": 6,
+    "a_use_count": 0,
+    "swapped_still_answer": 6
+   },
+   "auditor": {
+    "facts": 128,
+    "correct": 6,
+    "a_use_count": 0,
+    "swapped_still_answer": 6
+   }
+  }
+ },
+ "perm_checks": {
+  "no_fixed_point": true,
+  "answers_differ": true,
+  "is_permutation": true
+ }
+}

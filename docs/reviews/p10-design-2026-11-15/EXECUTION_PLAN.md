@@ -53,3 +53,14 @@ P9-II (ADR-0019) has its own budgets (4 h and 3 h) and runs first.
 ## What P10 cannot establish, whatever the outcomes
 
 Oracle-addressed results are not autonomous learned memory. Nothing here measures SSD or storage latency. S2 is one kind of capability (lexical translation) with small teachers. A positive in one study implies nothing about the others.
+
+## Addendum, 2026-11-15 (UTC): caps, downloads and concurrency after the human lead's later decisions
+
+Recorded verbatim in `HUMAN_DECISIONS_2026-11-15.md` and in each ADR. This addendum supersedes the table and items above where they differ.
+
+- **Caps:** S0 16 h, S1 16 h (raised from 12), S2 36 h with the lead's extension rule up to 72 h at the rehearsal check (the CPU recomputation is charged). The lead may extend hour caps before a study's registered seeds are observed.
+- **Downloads:** no per-item permission below a running total of 30 GB; ledger in `DOWNLOAD_LEDGER.md`.
+- **S0** runs four learned arms: the diversity penalty A5-D was added by the human lead after P9-II (ADR-0020 revision 4).
+- **Order item 3 is replaced:** the studies' compute stages may run at the same time under the five conditions of `HUMAN_DECISIONS_2026-11-15.md` (rehearsal under the same load, 12 CPU workers plus the GPU, a 40 GiB bound on doubled rehearsed peaks, timing stages alone, separate budgets).
+- **P9-II** is complete and accepted by the human lead (ADR-0019 §16).
+

@@ -721,3 +721,42 @@ ADR-0021 revision 2 was checked by the confirmation review (§9).
 The points were raised at the end of revision 2.
 
 Astra review: NOT_PERFORMED. A Claude review is not an Astra review, and this document is not a human approval. The human lead's decision recorded in §18 fixes the fourth arm; it does not approve this specification for execution and does not accept the P9-II outcome.
+
+## Addendum to §18 — the human lead's acceptance of P9-II (2026-11-15 UTC)
+
+The human lead accepted the P9-II outcome as registered (verbatim in ADR-0019 §16: "yes I do, yes we can raise to 16 and I approve the package", in answer to "Do you accept the P9-II outcome as registered? S0 can be implemented and rehearsed without it but cannot be frozen."). The condition of §11 and §18 that S0's freeze waits for that acceptance is met. Step 8 still needs a clean implementation audit, a rehearsal that meets the twofold rule, and the lead's separate recorded decision. Nothing else in this ADR changes.
+
+## Addendum — the human lead's delegation on the hour cap (2026-11-15 UTC)
+
+The human lead, verbatim (the first clause concerns ADR-0022):
+
+> I Aprove the link files with 6.2mb and you can extend the hour cap if needed across all p10
+
+Recorded by the lead, with the limits the lead puts on its own use of this:
+
+- The lead may raise a P10 study's charged-hours cap when the study's own headroom rule would otherwise cut registered cells or stop the study.
+- A cap is raised only **before that study's registered seeds are observed** (at the rehearsal's headroom check, or at a stage gate that reads time and memory only). It is never raised in response to a result, and never to add cells, arms, updates or replicates beyond what the specification registers.
+- Each raise is recorded in the study's ADR with the measured projection that required it, the old and new cap, and what it protects. Memory caps (3 GiB per worker, 18 GiB aggregate, and S2's own) are not hour caps and are not changed.
+- The human lead's words do not extend to downloads, cloud or paid services, models, data, thresholds or designs.
+
+S0's cap is unchanged by this record (16 hours). Programme-level record: `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`.
+
+## Addendum — the lead's rulings on the implementation audit, fixed before the pipeline check and rehearsal (2026-11-15 UTC)
+
+The independent implementation audit (Opus 5.5, `docs/reviews/p10s0-implementation-audit-2026-11-15/AUDIT.md`) found the implementation READY AFTER LISTED FIXES: no blocker, 10 majors, 14 minors. The auditor's own implementation of the class, consistency, qualification and outcome rules agreed with the code on 5,000 random registries except for H20-A; the arms are bit-identical to `studies.p9ii`'s. The rulings below are the lead's (Claude Fable 5.2), made **before any S0 pipeline check, rehearsal, gate output or generated draw exists**. They are part of the specification from here on. Astra review: NOT_PERFORMED.
+
+| Finding | Ruling |
+|---|---|
+| **M5** records made after the freeze; the hour-cap delegation | The lead's run decision is recorded in a file outside the hashed specification (`results/p10s0-freeze-<date>/DECISION.md`), named in the freeze README, and this ADR is amended with it after the registered run. **A cap raise under the human lead's delegation can only be made before the freeze**, at the rehearsal's headroom check, by changing the cap in the config and recording it in this ADR before the freeze commit. After the freeze the cap is fixed; the checks at the Q1 gate use the frozen cap and apply the registered cuts. No raise is ever made after a registered seed has been observed |
+| **M6** analysis and report can be locked out | The headroom rule (reading A) counts, at every evaluation, the rehearsed time of the analysis and report stages (doubled like every other remaining stage) as part of what is still to run. A block is not started if it would leave less than that. This makes the rule slightly more demanding; it changes no cut and no order |
+| **M8** the gates cap | The cap of the registered gates stage is computed for 13 draws × 3 fact sets from the rehearsal draw's measured per-draw time, not copied from the one-draw rehearsal gates |
+| **m4** H20-A | As the ADR's sentence reads: supported if A0 is UNRELIABLE or FAILS at 2K/4K or at 8K/16K; not supported if A0 is RELIABLE at both; not read otherwise |
+| Item 1 | The config is `configs/p10s0_qualification.toml`, as the header says |
+| Item 2 | The generation cap is twice the measured generation time of the rehearsal draw, with a floor of 60 seconds per draw; the freeze refuses while the cap is provisional |
+| Item 6 | Every printed string this ADR does not fix is listed in the freeze record and approved there by the lead |
+| Item 7 | After the Q1 gate, WX runs before the 65,536 probe |
+| Item 10, H20-O | "Not read" when OVERLOAD is NOT_EVALUATED; "not supported" when NOT QUALIFIED |
+| M1–M4, M7, M9, M10 and the other minors | Implementation defects, fixed as the audit states. M7: the whole registered sequence is exercised end to end on test seeds through the real launch scripts before the freeze. M9: the branch is brought up to the design branch, which records the human lead's acceptance of P9-II |
+
+Items 3, 4, 5, 8 (with P9-II's test-seed constants also asserted directly), 9, 11 and the rest of item 10 were found correct and stand.
+

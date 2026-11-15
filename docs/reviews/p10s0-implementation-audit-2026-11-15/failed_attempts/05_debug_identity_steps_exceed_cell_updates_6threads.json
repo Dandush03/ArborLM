@@ -1,0 +1,27 @@
+{
+ "A0": {
+  "p9_side_deterministic": false,
+  "s0_side_deterministic": false,
+  "differ_s0_vs_p9": {
+   "addition.keys": 0.011128311976790428,
+   "addition.values": 0.011720303446054459,
+   "addition.wq": 0.011415977030992508,
+   "addition.wo": 0.012219682335853577,
+   "addition.gate": 0.011788487434387207
+  },
+  "loss_first_diff_index": null,
+  "torch_threads": 6
+ },
+ "A6": {
+  "p9_side_deterministic": false,
+  "s0_side_deterministic": false,
+  "differ_s0_vs_p9": {
+   "addition.keys": 0.012459434568881989,
+   "addition.values": 0.01254463940858841,
+   "addition.wo": 0.012500979006290436,
+   "addition.gate": 0.011781930923461914
+  },
+  "loss_first_diff_index": null,
+  "torch_threads": 6
+ }
+}

@@ -1,0 +1,33 @@
+second gates stage h: 0.107-0.397
+rung 1 4x2000: train+score 14.35-35.51; R 14.46-35.90; recompute 5.82-18.84; R+recompute 20.28-54.74
+rung 2 3x2000: train+score 10.84-26.78; R 10.95-27.18; recompute 4.44-14.28; R+recompute 15.39-41.46
+rung 3 4x1000: train+score 10.09-27.17; R 10.19-27.57; recompute 5.82-18.84; R+recompute 16.01-46.41
+rung 4 3x1000: train+score 7.64-20.53; R 7.75-20.93; recompute 4.44-14.28; R+recompute 12.19-35.21
+P=3.5: R_max=16.25
+P=7.0: R_max=14.5
+P=3.5: rung holds for x <=  {1: 0.083, 2: 0.327, 3: 0.349, 4: 0.645}
+   chosen by x: [(0.0, 1), (0.084, 2), (0.327, 3), (0.349, 4), (0.646, 'NOT STARTED')]
+P=5.0: rung holds for x <=  {1: 0.048, 2: 0.281, 3: 0.305, 4: 0.588}
+   chosen by x: [(0.0, 1), (0.049, 2), (0.281, 3), (0.306, 4), (0.589, 'NOT STARTED')]
+P=7.0: rung holds for x <=  {1: 0.002, 2: 0.219, 3: 0.248, 4: 0.512}
+   chosen by x: [(0.0, 1), (0.002, 2), (0.219, 3), (0.248, 4), (0.513, 'NOT STARTED')]
+rung 1: fits at fastest R only if P <= 7.08
+rung 2: fits at fastest R only if P <= 14.11
+rung 3: fits at fastest R only if P <= 15.61
+rung 4: fits at fastest R only if P <= 20.51
+[if charged] rung 1: R_lo 20.28; fits at fastest only if P <= -4.56
+[if charged] rung 2: R_lo 15.39; fits at fastest only if P <= 5.23
+[if charged] rung 3: R_lo 16.01; fits at fastest only if P <= 3.97
+[if charged] rung 4: R_lo 12.19; fits at fastest only if P <= 11.63
+registered seeds: 49 220001 220905
+S0 overlap with S2 sets: []
+S1 overlap with S2 sets: []
+P9 overlap with S2 sets: []
+P9-I overlap with S2 sets: []
+P9-II overlap with S2 sets: []
+S0 seed+1000k (k<=9) landing in S2 sets: []
+S1 seed+1000k (k<=9) landing in S2 sets: []
+P9 seed+1000k (k<=9) landing in S2 sets: []
+P9-I seed+1000k (k<=9) landing in S2 sets: []
+P9-II seed+1000k (k<=9) landing in S2 sets: []
+P9 convention hazard: reg+1000 in cal: 49 reg+2000 in reh: 49

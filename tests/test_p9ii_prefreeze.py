@@ -463,7 +463,9 @@ def test_generate_script_and_freeze_readme() -> None:
     for needle in ("generate.sh", "--i-understand-freeze-time", "plan.json", "stage_caps.json", "draw_plan.json", "data_manifests", "calibration_sha256", "freeze commit", "two arguments", "REPLACED BY RESERVE", "(MEMORY)"):
         assert needle in readme
     assert readme.index("generate.sh") < readme.index("One freeze commit")  # generation, G1 and the draw plan run before the freeze commit
-    assert not (ROOT / "studies" / "p9ii" / "freeze" / "plan.json").exists() and not (ROOT / "studies" / "p9ii" / "freeze" / "stage_caps.json").exists()
+    # Before the freeze neither file exists; the freeze commit adds both together (never one alone).
+    frozen = [(ROOT / "studies" / "p9ii" / "freeze" / name).exists() for name in ("plan.json", "stage_caps.json")]
+    assert all(frozen) or not any(frozen)
 
 
 # --- m3, m4, m8, m13, m15: training-side minors --------------------------------------------------------------------------------------------------

@@ -1,0 +1,74 @@
+{
+ "10/10": {
+  "auditor": 0.7411,
+  "adr": 0.741,
+  "impl": 0.7411,
+  "adr_matches_3dp": true
+ },
+ "9/10": {
+  "auditor": 0.6058,
+  "adr": 0.606,
+  "impl": 0.6058,
+  "adr_matches_3dp": true
+ },
+ "9/9": {
+  "auditor": 0.7169,
+  "adr": 0.717,
+  "impl": 0.7169,
+  "adr_matches_3dp": true
+ },
+ "8/9": {
+  "auditor": 0.5709,
+  "adr": 0.571,
+  "impl": 0.5709,
+  "adr_matches_3dp": true
+ },
+ "8/10": {
+  "auditor": 0.4931,
+  "adr": 0.493,
+  "impl": 0.4931,
+  "adr_matches_3dp": true
+ },
+ "3/3": {
+  "auditor": 0.3684,
+  "adr": 0.368,
+  "impl": 0.3684,
+  "adr_matches_3dp": true
+ },
+ "16/18": {
+  "auditor": 0.6897,
+  "adr": 0.69,
+  "impl": 0.6897,
+  "adr_matches_3dp": true
+ },
+ "12/14": {
+  "auditor": 0.6146,
+  "adr": 0.615,
+  "impl": 0.6146,
+  "adr_matches_3dp": true
+ },
+ "18/18": {
+  "auditor": 0.8467,
+  "adr": 0.847,
+  "impl": 0.8467,
+  "adr_matches_3dp": true
+ },
+ "17/18": {
+  "auditor": 0.7623,
+  "adr": 0.762,
+  "impl": 0.7623,
+  "adr_matches_3dp": true
+ },
+ "14/14": {
+  "auditor": 0.8074,
+  "adr": 0.807,
+  "impl": 0.8074,
+  "adr_matches_3dp": true
+ },
+ "13/14": {
+  "auditor": 0.7033,
+  "adr": 0.703,
+  "impl": 0.7033,
+  "adr_matches_3dp": true
+ }
+}

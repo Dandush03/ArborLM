@@ -1,0 +1,19 @@
+........................................................................ [ 22%]
+........................................................................ [ 45%]
+........................................................................ [ 67%]
+........................................................................ [ 90%]
+...............................                                          [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+tests/test_p10s0_model.py::test_wx_initializer_is_w7_s_at_fan_in_2048
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+319 passed, 2 warnings in 194.23s (0:03:14)
+uv run --locked --offline pytest tests/test_p10s0_*.py -q -p no:cacheprovider  614.69s user 78.46s system 354% cpu 3:15.73 total
+tail -25  0.00s user 0.00s system 0% cpu 3:15.73 total
