@@ -134,11 +134,19 @@ def test_chunked_equals_unchunked(arch: str) -> None:
     assert torch.equal(s0.selected, s1.selected)
     assert s0.candidate_ids is not None and s1.candidate_ids is not None
     assert torch.equal(s0.candidate_ids, s1.candidate_ids)
-    assert torch.equal(s0.scores, s1.scores)
     assert s0.candidate_scores is not None and s1.candidate_scores is not None
-    assert torch.equal(s0.candidate_scores, s1.candidate_scores)
-    assert torch.equal(l0, l1)
-    assert torch.equal(loss0, loss1)
+    if sys.platform == "darwin":  # the platform of record (macOS arm64): bit for bit
+        assert torch.equal(s0.scores, s1.scores)
+        assert torch.equal(s0.candidate_scores, s1.candidate_scores)
+        assert torch.equal(l0, l1)
+    else:  # other BLAS builds round the row-block products differently (Linux x86-64 CI, 2026-11-15)
+        assert torch.allclose(s0.scores, s1.scores, rtol=0.0, atol=1e-6)
+        assert torch.allclose(s0.candidate_scores, s1.candidate_scores, rtol=0.0, atol=1e-6)
+        assert torch.allclose(l0, l1, rtol=0.0, atol=1e-5)
+    if sys.platform == "darwin":
+        assert torch.equal(loss0, loss1)
+    else:
+        assert torch.allclose(loss0, loss1, rtol=0.0, atol=1e-5)
     assert g0.keys() == g1.keys()
     for (
         name
