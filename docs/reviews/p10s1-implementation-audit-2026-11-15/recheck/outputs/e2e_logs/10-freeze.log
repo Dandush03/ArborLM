@@ -1,0 +1,6 @@
+$ /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python -m studies.p10s1.stages freeze --run-dir <scratch>/e2e/registered-run --projection <scratch>/e2e/dry/P10S1DRY-rehearsal/projection.json --calibration <scratch>/e2e/dry/P10S1DRY-calibration/calibration.json --timing <scratch>/e2e/dry/P10S1DRY-rehearsal/timing.json --gates <scratch>/e2e/dry/P10S1DRY-rehearsal/gates.json
+
+--- stdout
+{"plan": "<scratch>/e2e/clone/studies/p10s1/freeze/plan.json", "sha256": "1d6816ea73dbae8ac002ae2dc060bf1863420d2f05bd8cef8fe9faa2c1b89bdd", "caps": "<scratch>/e2e/clone/studies/p10s1/freeze/stage_caps.json", "caps_sha256": "c73ce4568c8d370922e22e9f597453905907a5737eb813d3602f61c46a5a3487"}
+
+--- stderr

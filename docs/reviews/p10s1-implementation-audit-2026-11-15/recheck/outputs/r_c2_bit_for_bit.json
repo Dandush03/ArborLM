@@ -1,0 +1,362 @@
+{
+ "backbone": "B101/O301 from /Users/daniellaloush/dandush03/ArborLM/experiments",
+ "data": "p10s1-test-5",
+ "steps": 6,
+ "results": [
+  {
+   "arm": "F-OQ",
+   "slots": 4096,
+   "init_equal": true,
+   "same_param_names": true,
+   "trainable_s1": 197633,
+   "forward_equal_4_batches": true,
+   "steps": [
+    {
+     "update": 1,
+     "loss_p9i": 4.529343128204346,
+     "loss_s1": 4.529343128204346,
+     "loss_mine": 4.529343128204346,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 2,
+     "loss_p9i": 4.1329145431518555,
+     "loss_s1": 4.1329145431518555,
+     "loss_mine": 4.1329145431518555,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 3,
+     "loss_p9i": 4.414379596710205,
+     "loss_s1": 4.414379596710205,
+     "loss_mine": 4.414379596710205,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 4,
+     "loss_p9i": 4.272462368011475,
+     "loss_s1": 4.272462368011475,
+     "loss_mine": 4.272462368011475,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 5,
+     "loss_p9i": 4.472562313079834,
+     "loss_s1": 4.472562313079834,
+     "loss_mine": 4.472562313079834,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 6,
+     "loss_p9i": 4.533089637756348,
+     "loss_s1": 4.533089637756348,
+     "loss_mine": 4.533089637756348,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    }
+   ],
+   "all_equal": true
+  },
+  {
+   "arm": "F-OQ",
+   "slots": 16384,
+   "init_equal": true,
+   "same_param_names": true,
+   "trainable_s1": 787457,
+   "forward_equal_4_batches": true,
+   "steps": [
+    {
+     "update": 1,
+     "loss_p9i": 4.529337406158447,
+     "loss_s1": 4.529337406158447,
+     "loss_mine": 4.529337406158447,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 2,
+     "loss_p9i": 4.132920265197754,
+     "loss_s1": 4.132920265197754,
+     "loss_mine": 4.132920265197754,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 3,
+     "loss_p9i": 4.4143757820129395,
+     "loss_s1": 4.4143757820129395,
+     "loss_mine": 4.4143757820129395,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 4,
+     "loss_p9i": 4.272474765777588,
+     "loss_s1": 4.272474765777588,
+     "loss_mine": 4.272474765777588,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 5,
+     "loss_p9i": 4.472586154937744,
+     "loss_s1": 4.472586154937744,
+     "loss_mine": 4.472586154937744,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 6,
+     "loss_p9i": 4.53312349319458,
+     "loss_s1": 4.53312349319458,
+     "loss_mine": 4.53312349319458,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    }
+   ],
+   "all_equal": true
+  },
+  {
+   "arm": "F-OQ",
+   "slots": 65536,
+   "init_equal": true,
+   "same_param_names": true,
+   "trainable_s1": 3146753,
+   "forward_equal_4_batches": true,
+   "steps": [
+    {
+     "update": 1,
+     "loss_p9i": 4.529336929321289,
+     "loss_s1": 4.529336929321289,
+     "loss_mine": 4.529336929321289,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 2,
+     "loss_p9i": 4.1329193115234375,
+     "loss_s1": 4.1329193115234375,
+     "loss_mine": 4.1329193115234375,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 3,
+     "loss_p9i": 4.414379596710205,
+     "loss_s1": 4.414379596710205,
+     "loss_mine": 4.414379596710205,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 4,
+     "loss_p9i": 4.272462368011475,
+     "loss_s1": 4.272462368011475,
+     "loss_mine": 4.272462368011475,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 5,
+     "loss_p9i": 4.47258186340332,
+     "loss_s1": 4.47258186340332,
+     "loss_mine": 4.47258186340332,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 6,
+     "loss_p9i": 4.533139705657959,
+     "loss_s1": 4.533139705657959,
+     "loss_mine": 4.533139705657959,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    }
+   ],
+   "all_equal": true
+  },
+  {
+   "arm": "R2",
+   "slots": 4096,
+   "init_equal": true,
+   "same_param_names": true,
+   "trainable_s1": 132097,
+   "forward_equal_4_batches": true,
+   "steps": [
+    {
+     "update": 1,
+     "loss_p9i": 4.529341220855713,
+     "loss_s1": 4.529341220855713,
+     "loss_mine": 4.529341220855713,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 2,
+     "loss_p9i": 4.132900238037109,
+     "loss_s1": 4.132900238037109,
+     "loss_mine": 4.132900238037109,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 3,
+     "loss_p9i": 4.414402008056641,
+     "loss_s1": 4.414402008056641,
+     "loss_mine": 4.414402008056641,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 4,
+     "loss_p9i": 4.272483825683594,
+     "loss_s1": 4.272483825683594,
+     "loss_mine": 4.272483825683594,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 5,
+     "loss_p9i": 4.472582817077637,
+     "loss_s1": 4.472582817077637,
+     "loss_mine": 4.472582817077637,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 6,
+     "loss_p9i": 4.533100605010986,
+     "loss_s1": 4.533100605010986,
+     "loss_mine": 4.533100605010986,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    }
+   ],
+   "all_equal": true
+  },
+  {
+   "arm": "R2",
+   "slots": 65536,
+   "init_equal": true,
+   "same_param_names": true,
+   "trainable_s1": 2098177,
+   "forward_equal_4_batches": true,
+   "steps": [
+    {
+     "update": 1,
+     "loss_p9i": 4.529341220855713,
+     "loss_s1": 4.529341220855713,
+     "loss_mine": 4.529341220855713,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 2,
+     "loss_p9i": 4.132900238037109,
+     "loss_s1": 4.132900238037109,
+     "loss_mine": 4.132900238037109,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 3,
+     "loss_p9i": 4.414402008056641,
+     "loss_s1": 4.414402008056641,
+     "loss_mine": 4.414402008056641,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 4,
+     "loss_p9i": 4.272483825683594,
+     "loss_s1": 4.272483825683594,
+     "loss_mine": 4.272483825683594,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 5,
+     "loss_p9i": 4.472582817077637,
+     "loss_s1": 4.472582817077637,
+     "loss_mine": 4.472582817077637,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    },
+    {
+     "update": 6,
+     "loss_p9i": 4.533100605010986,
+     "loss_s1": 4.533100605010986,
+     "loss_mine": 4.533100605010986,
+     "loss_equal": true,
+     "params_s1_eq_p9i": true,
+     "params_mine_eq_p9i": true,
+     "moments_s1_eq_p9i": true
+    }
+   ],
+   "all_equal": true
+  }
+ ]
+}

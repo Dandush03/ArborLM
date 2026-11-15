@@ -1,0 +1,5 @@
+$ /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python -m studies.p10s1.stages work gates --mode registered --run-dir <scratch>/r4/run --freeze-plan <scratch>/r4/self-made-plan.json --freeze-plan-sha256 df1b900ed092d5beb397599d402b26745bbb5de847fcbb117c7b4da68456ad48
+--- stdout
+{"g4": true, "g5": true, "g6": true, "g7": true, "g8": true, "g9": true, "g1": true, "g2": true, "harness_errors": 0, "defects": 0}
+
+--- stderr

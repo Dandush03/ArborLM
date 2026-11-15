@@ -1,0 +1,5 @@
+$ /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python -m studies.p10s1.stages registered gates --run-dir <scratch>/r4/run --freeze-commit afeb02a0cda0d2a22287f49572937d961f258353
+--- stdout
+
+--- stderr
+P10S1 stage REFUSED: refused: no freeze plan at <scratch>/r4/clone/studies/p10s1/freeze/plan.json: nothing registered runs before the freeze

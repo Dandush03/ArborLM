@@ -1,0 +1,774 @@
+{
+ "scenarios": [
+  {
+   "scenario": "capacity",
+   "diffs": [],
+   "capacity": "CAPACITY-POSITIVE",
+   "capacity_printed": "CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED; WITHIN REGISTERED RUN LENGTHS; arm(s) F-OQ, F-OQ-IVF, T-OQ; F-OQ: DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT) (A1 matched updates (descriptive; D-OQ has at least the arm's compute): d = +4.62 to +4.71 bits per fact, r = 17.25 to 18.68; B2 matched updates (descriptive; D-OQ has at least the arm's compute): d = +4.62 to +4.71 bits per fact, r = 17.22 to 18.49); F-OQ-IVF: DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT) (A1 matched updates (descriptive; D-OQ has at least the arm's compute): d = +4.45 to +4.53 bits per fact, r = 16.66 to 18.01; B2 matched updates (descriptive; D-OQ has at least the arm's compute): d = +4.46 to +4.53 bits per fact, r = 16.62 to 17.83); T-OQ: DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT) (A1 matched updates (descriptive; D-OQ has at least the arm's compute): d = +4.30 to +4.39 bits per fact, r = 16.08 to 17.35; B2 matched updates (descriptive; D-OQ has at least the arm's compute): d = +4.31 to +4.37 bits per fact, r = 16.00 to 17.26); active work: F-OQ LINEAR KEY SCORING, F-OQ-IVF SUBLINEAR, T-OQ SUBLINEAR; hierarchy: TREE_BEHIND; conventional retrieval: not sufficient; DICT DOMINATES ON THIS TASK; S0 NOT YET DECIDED; learned-address lane: OMITTED \u2014 no interface qualified before the freeze; addressing was supplied by an oracle; DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE]",
+   "reading": "Storage-half reading not available: the dense comparison is not established at matched compute (capacity shown under oracle addressing only) | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-POSITIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_SUPPORTED",
+    "F-OQ-IVF": "CAPACITY_SUPPORTED",
+    "T-OQ": "CAPACITY_SUPPORTED",
+    "H8": "CAPACITY_SUPPORTED"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "F-OQ-IVF": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "T-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "H8": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": true,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "dense_ahead",
+   "diffs": [],
+   "capacity": "CAPACITY-POSITIVE",
+   "capacity_printed": "CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED; WITHIN REGISTERED RUN LENGTHS; arm(s) F-OQ, F-OQ-IVF; F-OQ: DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT) (A1 matched updates (descriptive; D-OQ has at least the arm's compute): d = -0.08 to +0.03 bits per fact, r = 0.98 to 1.01; B2 matched updates (descriptive; D-OQ has at least the arm's compute): d = -0.10 to -0.02 bits per fact, r = 0.98 to 1.00); F-OQ-IVF: DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT) (A1 matched updates (descriptive; D-OQ has at least the arm's compute): d = -0.25 to -0.15 bits per fact, r = 0.95 to 0.97; B2 matched updates (descriptive; D-OQ has at least the arm's compute): d = -0.26 to -0.19 bits per fact, r = 0.95 to 0.96); active work: F-OQ LINEAR KEY SCORING, F-OQ-IVF SUBLINEAR, T-OQ SUBLINEAR; hierarchy: TREE_BEHIND; conventional retrieval: not sufficient; DICT DOMINATES ON THIS TASK; S0 NOT YET DECIDED; learned-address lane: OMITTED \u2014 no interface qualified before the freeze; addressing was supplied by an oracle; DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE]",
+   "reading": "Storage-half reading not available: the dense comparison is not established at matched compute (capacity shown under oracle addressing only) | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-POSITIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_SUPPORTED",
+    "F-OQ-IVF": "CAPACITY_SUPPORTED",
+    "T-OQ": "CAPACITY_SUPPORTED",
+    "H8": "CAPACITY_SUPPORTED"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "F-OQ-IVF": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "T-OQ": "DENSE AHEAD",
+    "H8": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": true,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "saturated",
+   "diffs": [],
+   "capacity": "CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET",
+   "capacity_printed": "CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET",
+   "reading": "Not tested | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-NEGATIVE",
+   "arm_classes": {
+    "F-OQ": "NOT_TESTED_BY_LOAD",
+    "F-OQ-IVF": "NOT_TESTED_BY_LOAD",
+    "T-OQ": "NOT_TESTED_BY_LOAD",
+    "H8": "NOT_TESTED_BY_LOAD"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "slow_large",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: ONE TRANSITION ONLY (4K\u219216K, 16K\u219264K); F-OQ-IVF: ONE TRANSITION ONLY (4K\u219216K, 16K\u219264K); T-OQ: ONE TRANSITION ONLY (4K\u219216K, 16K\u219264K)",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_ONE_TRANSITION",
+    "F-OQ-IVF": "CAPACITY_ONE_TRANSITION",
+    "T-OQ": "CAPACITY_ONE_TRANSITION",
+    "H8": "CAPACITY_ONE_TRANSITION"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "F-OQ-IVF": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "T-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "H8": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": [
+    "F-OQ",
+    "F-OQ-IVF",
+    "T-OQ",
+    "H8"
+   ]
+  },
+  {
+   "scenario": "random0",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random1",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random2",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random3",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random4",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random5",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random6",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random7",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random8",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random9",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random10",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random11",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random12",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random13",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random14",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random15",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random16",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random17",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random18",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random19",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random20",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random21",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random22",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "random23",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "capacity_printed": "CAPACITY-INCONCLUSIVE: F-OQ: INTERMEDIATE; F-OQ-IVF: INTERMEDIATE; T-OQ: INTERMEDIATE",
+   "reading": "Not established | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": []
+  },
+  {
+   "scenario": "capacity (directed ('16K\u219264K',))",
+   "diffs": [],
+   "capacity": "CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET",
+   "capacity_printed": "CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET (16K\u219264K)",
+   "reading": "Not tested | S0 NOT YET DECIDED | addressing was supplied by an oracle",
+   "efficiency": "EFFICIENCY-POSITIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_ONE_TRANSITION",
+    "F-OQ-IVF": "CAPACITY_ONE_TRANSITION",
+    "T-OQ": "CAPACITY_ONE_TRANSITION",
+    "H8": "CAPACITY_ONE_TRANSITION"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "F-OQ-IVF": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "T-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+    "H8": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)"
+   },
+   "report": "written",
+   "report_has_DENSE_MATCHES_sentence": false,
+   "report_has_matched_updates_text": false,
+   "analysis_has_DENSE_MATCHES_sentence": false,
+   "arms_labelled_DENSE_MATCHES": [],
+   "arms_NOT_ESTABLISHED_without_MU_text_in_report": [
+    "F-OQ",
+    "F-OQ-IVF",
+    "T-OQ",
+    "H8"
+   ]
+  }
+ ],
+ "outcome_coverage": {
+  "('CAPACITY-POSITIVE', 'EFFICIENCY-POSITIVE')": 2,
+  "('CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET', 'EFFICIENCY-NEGATIVE')": 1,
+  "('CAPACITY-INCONCLUSIVE', 'EFFICIENCY-INCONCLUSIVE')": 25
+ },
+ "total_diffs": 0
+}

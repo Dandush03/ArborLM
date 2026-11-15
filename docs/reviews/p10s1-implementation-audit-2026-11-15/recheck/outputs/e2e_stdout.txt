@@ -1,0 +1,68 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "source": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1",
+ "clone": "<scratch>/e2e/clone",
+ "workdir": "<scratch>/e2e",
+ "switch": "P10S1_TEST_SEEDS=1 (test seed sets only; DRY sizes; synthetic backbone)",
+ "note": "tiny synthetic sizes: nothing here measures anything",
+ "analysis": {
+  "status": "COMPLETE",
+  "capacity": "CAPACITY-INCONCLUSIVE",
+  "efficiency": "EFFICIENCY-INCONCLUSIVE"
+ },
+ "freeze_commit": "64606b9e4b55fe53448f1900a43d2fc2bdced6a2",
+ "report": "RESULTS.md written (the run directory is removed at the end)",
+ "ledger_entries": 12,
+ "draws": [
+  "p10s1-test-0",
+  "p10s1-test-1",
+  "p10s1-test-2",
+  "p10s1-test-3",
+  "p10s1-test-4"
+ ],
+ "plan": {
+  "data_manifests": [
+   "p10s1-test-0",
+   "p10s1-test-1",
+   "p10s1-test-2",
+   "p10s1-test-3",
+   "p10s1-test-4"
+  ],
+  "generation": {
+   "cap_seconds": 600.0,
+   "provisional": false,
+   "table_facts": 32768
+  }
+ },
+ "report_bytes": 39245,
+ "ok": true,
+ "steps": [
+  "ok  git add code (exit 0, expected 0, 0.0 s)",
+  "ok  git commit code (exit 0, expected 0, 0.0 s)",
+  "ok  git rev-parse (exit 0, expected 0, 0.0 s)",
+  "ok  probe: gates.sh before the freeze (exit 2, expected 2, 1.7 s)",
+  "ok  dry prerequisites (exit 0, expected 0, 363.3 s)",
+  "ok  set-generation-cap (exit 0, expected 0, 1.2 s)",
+  "ok  git add generation cap (exit 0, expected 0, 0.0 s)",
+  "ok  git commit generation cap (exit 0, expected 0, 0.0 s)",
+  "ok  git rev-parse (exit 0, expected 0, 0.0 s)",
+  "ok  generate.sh (five test draws) (exit 0, expected 0, 60.8 s)",
+  "ok  freeze (exit 0, expected 0, 0.6 s)",
+  "ok  git add freeze (exit 0, expected 0, 0.0 s)",
+  "ok  git commit freeze (exit 0, expected 0, 0.0 s)",
+  "ok  git rev-parse (exit 0, expected 0, 0.0 s)",
+  "ok  probe: gates.sh before Decision 2 (exit 2, expected 2, 1.2 s)",
+  "ok  git add decision 2 (exit 0, expected 0, 0.0 s)",
+  "ok  git commit decision 2 (exit 0, expected 0, 0.0 s)",
+  "ok  probe: typed stage cap (exit 2, expected 2, 0.6 s)",
+  "ok  gates.sh (exit 0, expected 0, 7.4 s)",
+  "ok  train.sh (exit 0, expected 0, 61.2 s)",
+  "ok  evaluate.sh (exit 0, expected 0, 286.4 s)",
+  "ok  timing.sh (exit 0, expected 0, 69.2 s)",
+  "ok  simulate.sh (exit 0, expected 0, 10.9 s)",
+  "ok  analysis.sh (exit 0, expected 0, 24.0 s)",
+  "ok  report.sh (exit 0, expected 0, 6.6 s)"
+ ]
+}
+uv run --locked python -m studies.p10s1.e2e --workdir $S/e2e  1904.91s user 308.08s system 244% cpu 15:05.85 total

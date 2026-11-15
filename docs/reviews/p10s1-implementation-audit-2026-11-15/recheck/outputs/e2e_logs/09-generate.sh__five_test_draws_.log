@@ -1,0 +1,10 @@
+$ sh studies/p10s1/launch/generate.sh <scratch>/e2e/registered-run 9a42ee29c3448e8364e0a6f2152399366245510e
+
+--- stdout
+{"stage": "generate-p10s1-test-0", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/registered-run/generate-p10s1-test-0/manifest.json", "charged_seconds": 12.8}
+{"stage": "generate-p10s1-test-1", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/registered-run/generate-p10s1-test-1/manifest.json", "charged_seconds": 16.2}
+{"stage": "generate-p10s1-test-2", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/registered-run/generate-p10s1-test-2/manifest.json", "charged_seconds": 7.6}
+{"stage": "generate-p10s1-test-3", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/registered-run/generate-p10s1-test-3/manifest.json", "charged_seconds": 9.3}
+{"stage": "generate-p10s1-test-4", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/registered-run/generate-p10s1-test-4/manifest.json", "charged_seconds": 6.1}
+
+--- stderr

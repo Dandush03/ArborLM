@@ -1,0 +1,50 @@
+[
+ {
+  "scenario": "slow_large",
+  "diffs": [],
+  "capacity": "CAPACITY-INCONCLUSIVE",
+  "dense": {
+   "F-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+   "F-OQ-IVF": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+   "T-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+   "H8": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)"
+  },
+  "arm_classes": {
+   "F-OQ": "CAPACITY_ONE_TRANSITION",
+   "F-OQ-IVF": "CAPACITY_ONE_TRANSITION",
+   "T-OQ": "CAPACITY_ONE_TRANSITION",
+   "H8": "CAPACITY_ONE_TRANSITION"
+  },
+  "report": "written",
+  "report_has_DENSE_MATCHES_sentence": false,
+  "analysis_has_DENSE_MATCHES_sentence": false,
+  "arms_labelled_DENSE_MATCHES": [],
+  "report_lines_with_DENSE_MATCHES": [
+   "- RULED (section 22 M5): where the dense matched-compute pair is MC-SHORT or MC-AMBIGUOUS the label is DENSE NOT ESTABLISHED AT MATCHED COMPUTE (<status>), never DENSE MATCHES; the matched-updates comparison with D-OQ is printed beside it, descriptively; as designed S1 cannot show that the store beats or matches a dense map at matched compute at 65,536 slots"
+  ]
+ },
+ {
+  "scenario": "capacity",
+  "diffs": [],
+  "capacity": "CAPACITY-POSITIVE",
+  "dense": {
+   "F-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+   "F-OQ-IVF": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+   "T-OQ": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)",
+   "H8": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)"
+  },
+  "arm_classes": {
+   "F-OQ": "CAPACITY_SUPPORTED",
+   "F-OQ-IVF": "CAPACITY_SUPPORTED",
+   "T-OQ": "CAPACITY_SUPPORTED",
+   "H8": "CAPACITY_SUPPORTED"
+  },
+  "report": "written",
+  "report_has_DENSE_MATCHES_sentence": false,
+  "analysis_has_DENSE_MATCHES_sentence": false,
+  "arms_labelled_DENSE_MATCHES": [],
+  "report_lines_with_DENSE_MATCHES": [
+   "- RULED (section 22 M5): where the dense matched-compute pair is MC-SHORT or MC-AMBIGUOUS the label is DENSE NOT ESTABLISHED AT MATCHED COMPUTE (<status>), never DENSE MATCHES; the matched-updates comparison with D-OQ is printed beside it, descriptively; as designed S1 cannot show that the store beats or matches a dense map at matched compute at 65,536 slots"
+  ]
+ }
+]

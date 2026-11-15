@@ -1,0 +1,67 @@
+{
+ "steps": [
+  {
+   "step": "set-generation-cap",
+   "exit": 0,
+   "stderr_last": "  cpu = _conversion_method_template(device=torch.device(\"cpu\"))"
+  },
+  {
+   "step": "generate.sh (five test draws)",
+   "exit": 0,
+   "stderr_last": "  cpu = _conversion_method_template(device=torch.device(\"cpu\"))"
+  },
+  {
+   "step": "A: registered gates, no freeze plan, freeze commit = HEAD",
+   "exit": 2,
+   "stderr_last": "P10S1 stage REFUSED: refused: no freeze plan at <scratch>/r4/clone/studies/p10s1/freeze/plan.json: nothing registered runs befo"
+  },
+  {
+   "step": "B1: work gates --mode registered with a self-made plan",
+   "exit": 0,
+   "stderr_last": "  cpu = _conversion_method_template(device=torch.device(\"cpu\"))"
+  },
+  {
+   "step": "B2: work train --mode registered with a self-made plan",
+   "exit": 0,
+   "stderr_last": "  cpu = _conversion_method_template(device=torch.device(\"cpu\"))"
+  }
+ ],
+ "draws": [
+  "p10s1-test-0",
+  "p10s1-test-1",
+  "p10s1-test-2",
+  "p10s1-test-3",
+  "p10s1-test-4"
+ ],
+ "gates_json_written": true,
+ "trained_cell_record": [
+  "snapshots",
+  "train.json",
+  "updates.jsonl"
+ ],
+ "trained_cell_mode_and_status": {
+  "status": "completed",
+  "mode": "registered",
+  "seed_set": "p10s1-test-0",
+  "label": "P_F-OQ_f2048_n4096_d1_i2101_u8"
+ },
+ "ledger_files_in_clone": [
+  "experiments/P10S1-ledger.json"
+ ],
+ "C1 check_preconditions(freeze=c0, config changed after c0)": "refused: refused: configs/p10s1_capacity.toml at HEAD differs from the freeze commit",
+ "C2 check_preconditions(freeze=c1, studies changed after c1)": "refused: refused: studies at HEAD differs from the freeze commit",
+ "C3 check_preconditions(freeze=c2)": "PASSED",
+ "C4 check_preconditions(freeze=c2) with Decision 2 uncommitted": "refused: refused: the working tree is not clean:\n?? results/p10s1-freeze-r4/DECISION_2.md",
+ "C5 require_decision_2(c2) with the file uncommitted": "refused: refused: no committed results/p10s1-freeze-*/DECISION_2.md names the freeze commit 55c4266c6325bf01ac3cd5e08518114000b415eb: Decision 2 is recorded there before anything registered runs",
+ "C6 require_decision_2(c2)": "PASSED",
+ "C7 require_decision_2(c3 = the Decision 2 commit, not the freeze)": "refused: refused: no committed results/p10s1-freeze-*/DECISION_2.md names the freeze commit 83996647dc4b461bddd6a532839c9476177729f5: Decision 2 is recorded there before anything registered runs",
+ "C8 check_preconditions(c3) (studies equal at c3 and HEAD)": "PASSED",
+ "C9 require_decision_2(c2) when the file holds only a 12-character hash": "refused: refused: no committed results/p10s1-freeze-*/DECISION_2.md names the freeze commit 55c4266c6325bf01ac3cd5e08518114000b415eb: Decision 2 is recorded there before anything registered runs",
+ "C10 require_decision_2(c2) when the file records a refusal": "PASSED",
+ "commits": {
+  "c0 code": "6bfc081f84c8e146f1a4d2232f9eed134979c2c2",
+  "c1 generation cap": "afeb02a0cda0d2a22287f49572937d961f258353",
+  "c2 stand-in freeze": "55c4266c6325bf01ac3cd5e08518114000b415eb",
+  "c3 decision 2": "83996647dc4b461bddd6a532839c9476177729f5"
+ }
+}

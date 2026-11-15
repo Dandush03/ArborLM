@@ -1,0 +1,26 @@
+{
+ "registered_parse_accepts_extra_flags": {
+  "stage_cap_seconds": 999999.0,
+  "ledger_root": "/tmp/fresh-ledger",
+  "rss_worker_bytes": 99999999999,
+  "only": [
+   "P_F-OQ_f2048_n4096_d1_i2101"
+  ]
+ },
+ "stage_cap_prefers_typed_over_frozen": 999999.0,
+ "train_mode_registered_without_freeze_plan": {
+  "freeze_plan": null,
+  "plan_used": {
+   "overload_u_p": null,
+   "seed_block_draws": [
+    1
+   ],
+   "dense_cut": [],
+   "lane_l": false,
+   "unit": 8192
+  },
+  "cells": 164
+ },
+ "check_preconditions_mentions_plan_json": false,
+ "run_stage_tasks_mentions_plan": false
+}
