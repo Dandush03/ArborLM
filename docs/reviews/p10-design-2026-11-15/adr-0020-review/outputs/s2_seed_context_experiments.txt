@@ -1,0 +1,31 @@
+cmd: python3 -I s2_seed_context_search.py /Users/daniellaloush/dandush03/ArborLM/experiments
+files scanned: 14155
+
+[S0 registered+reserve data 200001-201499] distinct values in seed context: 0
+
+[S0 rest of 200001-209999 (pipeline 209001+, rehearsal 209101+)] distinct values in seed context: 0
+
+[S0 init 2001-2002] distinct values in seed context: 0
+
+[S0 pipeline/rehearsal init 2091-2092] distinct values in seed context: 0
+
+[S0 tests 920001-920999] distinct values in seed context: 0
+
+[S1 data 210001-219999] distinct values in seed context: 0
+
+[S1 init 2101-2105, 2191-2192] distinct values in seed context: 0
+
+[S1 cal/reh init 2191-2192] distinct values in seed context: 0
+
+[S1 tests 921001+ (to 929999)] distinct values in seed context: 0
+
+[S2 220001-229999] distinct values in seed context: 0
+
+[P9-II 190001-191599] distinct values in seed context: 0
+
+[P9-II init 1891,1901,1902] distinct values in seed context: 0
+
+[P9-II init 1901-1902] distinct values in seed context: 0
+
+[P9-II tests 910001-919999] distinct values in seed context: 0
+python3 -I s2_seed_context_search.py   7.23s user 0.90s system 88% cpu 9.153 total

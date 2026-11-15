@@ -1,0 +1,57 @@
+per-update cost (s, six contended workers):
+  D7      4096: 0.0060
+  D7     16384: 0.0088
+  D7     65536: 0.0251
+  DOQ     4096: 0.0095
+  DOQ    16384: 0.0143
+  DOQ    65536: 0.0487
+  FOQ     4096: 0.0095
+  FOQ    16384: 0.0143
+  FOQ    65536: 0.0368
+  FOQW    4096: 0.0123
+  H8      4096: 0.0050
+  H8     16384: 0.0063
+  H8     65536: 0.0120
+  H8N    65536: 0.0108
+  H8W     4096: 0.0060
+  R2      4096: 0.0050
+  R2     16384: 0.0063
+  R2     65536: 0.0120
+  TOQ     4096: 0.0189
+  TOQ    16384: 0.0285
+  TOQ    65536: 0.0735
+
+configurations per replicate: 36; x5 = 180
+
+U_P=8192: per replicate 10,805 s; FOQ 2,371, H8 947, DOQ 2,766, TOQ 3,227, R2 289, D7 727, FOQW 202, H8W 98, H8N 177
+  5 replicates: 15.0 CPU-h; six workers (ideal packing) 2.50 h
+  longest single cell: 20.1 min
+
+U_P=16384: per replicate 21,609 s; FOQ 4,742, H8 1,895, DOQ 5,532, TOQ 6,454, R2 578, D7 1,454, FOQW 403, H8W 197, H8N 354
+  5 replicates: 30.0 CPU-h; six workers (ideal packing) 5.00 h
+  longest single cell: 40.2 min
+
+== headroom (cap 12 h; calibration 0.3 h + rehearsal 0.45 h charged before the rule is applied)
+  U_P=8192: remaining projected 3.60 h; 2x = 7.20 h vs 11.25 h available -> fits
+    after cut 2 (drop D7): 3.43 h; 2x = 6.87 -> fits
+    after cut 3 (drop replicate 5): 2.83 h; 2x = 5.65 -> fits
+    after cut 4 (drop 32K/4K everywhere): 2.70 h; 2x = 5.39 -> fits
+  U_P=16384: remaining projected 6.30 h; 2x = 12.60 h vs 11.25 h available -> DOES NOT FIT
+    after cut 2 (drop D7): 5.97 h; 2x = 11.93 -> does not fit
+    after cut 3 (drop replicate 5): 4.85 h; 2x = 9.70 -> fits
+    after cut 4 (drop 32K/4K everywhere): 4.59 h; 2x = 9.18 -> fits
+
+== recommended matrix (reviewer): drop iso-parameter cells and D7; T-OQ on all seven cells; D-OQ only at the larger cells
+  configurations 30; x5 = 150; + seed block 14 cells
+  per replicate 10,804 s; 5 replicates 15.0 CPU-h; seed block 1.32 CPU-h; six workers 2.72 h
+  remaining projected 3.82 h; 2x = 7.64 vs 8.0 h cap less 0.75 -> does not fit
+
+== recommended matrix with B4 run lengths (4K cells 8 U_P, 16K cells 4 U_P, 64K cells 2 U_P; R2 1 U_P)
+  per replicate 17,234 s; 5 reps 23.9 CPU-h; seed block 2.22 CPU-h; load calibration 2.94 CPU-h
+  training with six workers 4.36 h; remaining projected 5.56 h; charged before the rule 1.34 h
+  cap 8 h: 2x remaining = 11.12 h vs 6.66 h available -> does not fit
+  cap 10 h: 2x remaining = 11.12 h vs 8.66 h available -> does not fit
+  cap 12 h: 2x remaining = 11.12 h vs 10.66 h available -> does not fit
+
+== variant: 4K cells 6 U_P, 16K cells 4 U_P
+  per replicate 15,437 s; training six workers 3.90 h; remaining 5.10 h; 2x = 10.20 h; needs cap >= 11.54 h

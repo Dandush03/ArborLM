@@ -1,0 +1,8252 @@
+---
+annotations_creators:
+- no-annotation
+language_creators:
+- crowdsourced
+language:
+- acm
+- afb
+- afr
+- ain
+- aln
+- apc
+- ara
+- arq
+- ary
+- arz
+- asm
+- avk
+- awa
+- ayl
+- aze
+- bel
+- ben
+- ber
+- bjn
+- bos
+- bre
+- bua
+- bub
+- bul
+- bzt
+- cat
+- cbk
+- ceb
+- ces
+- cha
+- chv
+- cjy
+- ckb
+- cmn
+- cor
+- crh
+- cym
+- dan
+- deu
+- dsb
+- dtp
+- egl
+- ell
+- eng
+- enm
+- epo
+- est
+- eus
+- fao
+- fin
+- fkv
+- fra
+- frr
+- fry
+- gan
+- gcf
+- gla
+- gle
+- glg
+- gos
+- got
+- grc
+- grn
+- gsw
+- hak
+- hau
+- heb
+- hin
+- hoc
+- hrv
+- hrx
+- hsb
+- hsn
+- hun
+- hye
+- ido
+- ile
+- ilo
+- ina
+- ind
+- isl
+- ita
+- jav
+- jbo
+- jpn
+- kab
+- kat
+- kaz
+- kha
+- khm
+- kmr
+- kor
+- kur
+- kzj
+- lad
+- lao
+- lat
+- lav
+- lfn
+- lij
+- lit
+- ltg
+- ltz
+- lzh
+- mal
+- mar
+- max
+- mfa
+- mhr
+- min
+- mkd
+- mlt
+- mon
+- mri
+- mya
+- nan
+- nds
+- nld
+- nno
+- nob
+- nov
+- nst
+- oci
+- orv
+- oss
+- ota
+- pam
+- pcd
+- pes
+- pmn
+- pms
+- pol
+- por
+- prg
+- que
+- rom
+- ron
+- run
+- rus
+- sah
+- sat
+- sdh
+- slv
+- spa
+- sqi
+- srp
+- swc
+- swe
+- swg
+- swh
+- tam
+- tat
+- tel
+- tgl
+- tha
+- tlh
+- tmw
+- tok
+- tuk
+- tur
+- tzl
+- uig
+- ukr
+- urd
+- uzb
+- vie
+- vol
+- vro
+- war
+- wuu
+- xal
+- xho
+- yid
+- yue
+- zlm
+- zsm
+- zza
+license:
+- cc-by-2.0
+multilinguality:
+- translation
+pretty_name: The Tatoeba Translation Challenge
+size_categories:
+- unknown
+source_datasets:
+- original
+task_categories:
+- text-generation
+- translation
+configs:
+- config_name: default
+  data_files:
+  - split: test
+    path: data/test/*.tsv
+  - split: dev
+    path: data/dev/*.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afr-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afr-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afr-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afr-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.afr-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afr-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afr-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afr-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afr-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afr-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afr-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afr-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afr-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ain_Latn-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ain_Latn-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-ber_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-ber_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-ber_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-ber_Tfng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-ber_Tfng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-ber_Tfng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-ber_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-ber_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arq-ber_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afb-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afb-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.afb-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.apc-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arq-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-ell
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-ell.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-ell
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-ell.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: acm-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.acm-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.acm-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: afb-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.afb-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.afb-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.apc-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arq-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ary-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ary-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ary-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arq-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ary-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ary-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ary-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: acm-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.acm-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-kab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-kab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-kab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-kab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arz-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.apc-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.arq-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: apc-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.apc-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ara-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arq-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.arq-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: asm-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.asm-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.asm-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: avk_Latn-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.avk_Latn-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.avk_Latn-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: avk_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.avk_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: awa-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.awa-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: aze_Latn-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.aze_Latn-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.aze_Latn-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: aze_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.aze_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: aze_Cyrl-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.aze_Cyrl-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: aze_Latn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.aze_Latn-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.aze_Latn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bel-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bel-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bel-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bel-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bel-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ben-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ben-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ben-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Latn-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Latn-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Tfng-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Tfng-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Latn-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Latn-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Latn-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Tfng-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Tfng-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Tfng-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Latn-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Latn-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Latn-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Tfng-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Tfng-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Latn-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Latn-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Latn-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Tfng-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Tfng-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Tfng-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ber_Latn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bre-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bre-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bre-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bre-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bre-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bua-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bua-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bub-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bub-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-bul
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-bul.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bul-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bul-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bul-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bul-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bul-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cat-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cat-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cat-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cat-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cbk_Latn-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cbk_Latn-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cbk_Latn-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ceb-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ceb-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ceb-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ceb-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-hun.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ces-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ces-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ces-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cha-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cha-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: mhr-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.mhr-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.mhr-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: chv-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.chv-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: chv-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.chv-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: chv-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.chv-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cor-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cor-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cor-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: crh-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.crh-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cym-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cym-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-dan
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-dan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-fin.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-nno.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dan-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dan-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dan-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-deu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-deu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-deu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-dsb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-dsb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ell
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ell.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ell.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-est
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-est.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-eus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-eus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-pes
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-pes.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-pes.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-fin.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-frr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-frr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-gos
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-gos.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-bos_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-bos_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-bos_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-hrv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-hrv.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-hrv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-srp_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-srp_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-srp_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-srp_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-srp_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-srp_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-hrx_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-hrx_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-hsb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-hsb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-hun.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ido_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ido_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ido_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ile_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ile_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ile_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ina_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ina_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-isl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-isl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-jbo_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-jbo_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-jbo_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-kab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-kab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-kor
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-kor.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ckb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ckb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-kmr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-kmr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-kur_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-kur_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-sdh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-sdh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lad
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lad.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lad_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lad_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lav
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lav.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lit
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lit.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lit.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ltz
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ltz.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-nds
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-nds.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-nds.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-nno.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ron.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-run
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-run.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-run.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-swg
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-swg.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-swg.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-tat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-tat.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-tat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-tgl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-tgl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-vol_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-vol_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-lzh_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.deu-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dsb-hsb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dsb-hsb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dsb-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dsb-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.dtp-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-zlm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: dtp-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.dtp-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: egl-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.egl-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-ell
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-ell.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ell-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ell-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ell-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-eng
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-eng.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-est
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-est.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-est.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-vro
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-vro.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-vro.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-eus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-eus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-eus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-fao
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-fao.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-pes
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-pes.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-pes.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-fin.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-fry
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-fry.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-gla
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-gla.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-gle
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-gle.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-gle.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-glg
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-glg.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-gos
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-gos.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-gos.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-got_Goth
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-got_Goth.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-grc_Grek
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-grc_Grek.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-gsw
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-gsw.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hau_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hau_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-bos_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-bos_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-bos_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hrv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hrv.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-hrv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-srp_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-srp_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-srp_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-srp_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-srp_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-srp_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hin.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-hin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hoc
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hoc.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hoc_Wara
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hoc_Wara.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hrx_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hrx_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hun.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hye
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-hye.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-hye.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ido_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ido_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ido_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ile_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ile_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ile_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ilo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ilo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ilo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ina_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ina_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-isl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-isl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-isl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-jav
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-jav.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-jav_Java
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-jav_Java.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-jbo_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-jbo_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-jbo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-jbo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-jbo_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-jbo_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-jbo_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-kab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kaz_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kaz_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kaz
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kaz.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kha
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kha.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-kha.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-khm
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-khm.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kor
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kor.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-kor.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ckb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ckb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ckb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kmr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kmr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-kmr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kur_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kur_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kur_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kur_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-kur_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-kzj_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-kzj_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lad
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lad.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lad_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lad_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lav
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lav.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lav.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ltg
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ltg.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ltg.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lit
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lit.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lit.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ltz
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ltz.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mal
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mal.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mar
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mar.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-mar.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mkd
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mkd.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-mkd.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mlt
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mlt.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mon
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mon.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-mon.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mri
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mri.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ind.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-max_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-max_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-max_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-min
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-min.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-min.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tmw_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tmw_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-zlm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-zlm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-zsm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-mya
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-mya.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nds
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nds.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-nds.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nno.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nov_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nov_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nst_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nst_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-oci
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-oci.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-orv_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-orv_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ota_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ota_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ota_Thaa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ota_Thaa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ota_Yezi
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ota_Yezi.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ota_Syrc
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ota_Syrc.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ota_Rohg
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ota_Rohg.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ota_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ota_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-pam
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-pam.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-pam.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-pmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-pmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-pms
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-pms.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-prg_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-prg_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-que
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-que.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-rom
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-rom.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ron.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-run
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-run.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-slv.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-aln
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-aln.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-sqi
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-sqi.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-swc
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-swc.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-swh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-swh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tam
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tam.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tat.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tel
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tel.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tgl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tgl_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tgl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tgl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tgl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tgl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tha
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tha.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tlh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tlh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tuk_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tuk_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tuk_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tuk
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tuk.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tzl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tzl_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-tzl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-tzl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-tzl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-uig_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-uig_Arab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-uig_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-uig_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-uig_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-urd
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-urd.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-uzb_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-uzb_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-uzb_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-uzb_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-vie.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-vol_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-vol_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-vol_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-war
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-war.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-war.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-xal
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-xal.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-cjy_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-cjy_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-cjy_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-cjy_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-cjy_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-cjy_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-cmn_Bopo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-cmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-cmn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-gan
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-gan.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-gan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-lzh_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-nan
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-nan.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-nan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-zza
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eng-zza.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-epo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-epo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-pes
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-pes.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-pes.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-fin.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-glg
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-glg.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-bos_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-bos_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-bos_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-hrv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-hrv.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-hrv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-srp_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-srp_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-srp_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-srp_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-srp_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-srp_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-hun.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ido_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ido_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-ido_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ile_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ile_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-ile_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ina_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ina_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-isl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-isl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-jbo_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-jbo_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-jbo_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-lad
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-lad.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-lad_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-lad_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-lit
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-lit.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-lit.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-nds
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-nds.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-nds.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-nno.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-oci
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-oci.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ron.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-tgl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-tgl_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-tgl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-vol_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-vol_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-vol_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.epo-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: est-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.est-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: est-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.est-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eus-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eus-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eus-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eus-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eus-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.eus-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.eus-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pes-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pes-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-fin
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-fin.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-fkv_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-fkv_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-fkv_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-kor
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-kor.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-kmr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-kmr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-kur_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-kur_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-nno.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fin-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-nan
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-nan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fin-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fin-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-fra
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-fra.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-fra.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-gcf_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-gcf_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-bos_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-bos_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-hrv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-hrv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-srp_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-srp_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-srp_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-srp_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-hun.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ido_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ido_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-ido_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ile_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ile_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ina_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ina_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-jbo_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-jbo_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-kab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-kab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-kab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-kor
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-kor.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-nds
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-nds.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-oci
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-oci.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-pcd
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-pcd.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ron.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-run
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-run.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-tat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-tat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-tgl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-tgl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-tlh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-toki
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-toki.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-uig_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-uig_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-uig_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-uig_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-cmn_Bopo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-cmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-cmn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-lzh_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-yue
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fra-yue.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fry-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.fry-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: gcf_Latn-gcf_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.gcf_Latn-gcf_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: gla-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.gla-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: glg-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.glg-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: glg-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.glg-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.glg-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: gos-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.gos-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.gos-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: grn-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.grn-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.grn-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: grn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.grn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.grn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hrv-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.srp_Cyrl-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.srp_Latn-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bos_Latn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hrv-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.srp_Cyrl-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.srp_Latn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bos_Latn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bos_Latn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hrv-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Cyrl-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Cyrl-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: srp_Latn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.srp_Latn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-heb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-heb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-heb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-ina_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-ina_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lad_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lad_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lad
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lad.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.heb-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: heb-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.heb-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-mar
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-mar.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-urd
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-urd.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-cmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hin-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hin-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hoc_Wara-sat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hoc_Wara-sat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hsb-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hsb-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-hun
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-hun.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-hun.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-kor
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-kor.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hun-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hun-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hun-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hye-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hye-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-ina_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-ina_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ido_Latn-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-lad
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-lad.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-lad_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-lad_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-tlh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ina_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ina_Latn-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ina_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: isl-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.isl-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: isl-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.isl-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: isl-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.isl-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: isl-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.isl-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-ita
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-ita.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-ita.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-jpn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-lij
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-lij.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-lit
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-lit.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-nds
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-nds.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-pms
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-pms.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ita-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ita-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ita-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jav-jav
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jav-jav.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jav-jav_Java
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jav-jav_Java.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jav-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jav-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jav_Java-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jav_Java-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jav_Java-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jav_Java-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jav-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jav-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Cyrl-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Cyrl-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jbo_Latn-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jbo_Latn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jbo_Latn-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jbo_Latn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-jpn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-jpn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-kor
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-kor.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-lit
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-lit.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-mar
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-mar.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-ind.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-zlm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-zlm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-zsm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-nds
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-nds.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-nds.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn_Hani-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn_Hani-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn_Hira-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn_Hira-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn_Hira-toki
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn_Hira-toki.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn_Kana-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn_Kana-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn_Yiii-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn_Yiii-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-toki
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-toki.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-vie.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-lzh_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-nan
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-nan.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-nan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.jpn-cmn_Bopo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kab-kab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kab-kab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.kab-kab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kab-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kab-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kab-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kab-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.kab-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kat-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kat-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kaz_Cyrl-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kaz_Cyrl-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.kaz_Cyrl-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kaz-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kaz-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: khm-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.khm-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kor-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kor-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ckb-ckb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ckb-ckb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ckb-ckb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ckb-kmr_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ckb-kmr_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ckb-kmr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ckb-kmr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ckb-kmr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ckb-sdh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ckb-sdh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kmr-ckb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kmr-ckb.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.kmr-ckb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kmr-kmr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kmr-kmr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kmr-sdh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kmr-sdh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kur_Latn-kur_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kur_Latn-kur_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: sdh-ckb
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.sdh-ckb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: sdh-kmr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.sdh-kmr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: sdh-sdh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.sdh-sdh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ckb-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ckb-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kmr-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kmr-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kur_Latn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kur_Latn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: sdh-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.sdh-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kzj_Latn-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kzj_Latn-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kzj_Latn-zlm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kzj_Latn-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kzj_Latn-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kzj_Latn-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kzj-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.kzj-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad_Latn-lat_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad_Latn-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad_Latn-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad_Latn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad_Latn-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lad-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-lat_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-lat_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-lfn_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-lfn_Cyrl.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-lfn_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-lfn_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-tlh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lat_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lat_Latn-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lat_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lav-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lav-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Cyrl-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Latn-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Cyrl-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Latn-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Cyrl-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Latn-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Cyrl-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Latn-tlh_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Cyrl-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Latn-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Cyrl-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lfn_Latn-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lit-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lit-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lit-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lit-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lit-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lit-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lit-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lit-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lit-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ltz-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ltz-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: mkd-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.mkd-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bjn-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bjn-ind.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.bjn-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bjn-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bjn-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-bjn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-bjn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ind-bjn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-ind.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ind-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-max_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-max_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-min
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-min.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-zlm_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-zlm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-zlm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-zlm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ind-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-zsm_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-zsm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-zsm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ind-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: max_Latn-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.max_Latn-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: min-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.min-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Arab-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zlm_Arab-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Arab-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zlm_Arab-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Latn-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zlm_Latn-ind.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.zlm_Latn-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Latn-zlm_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zlm_Latn-zlm_Arab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.zlm_Latn-zlm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Latn-zsm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zlm_Latn-zsm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.zlm_Latn-zsm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Arab-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Arab-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-ind
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-ind.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.zsm_Latn-ind.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-zlm_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-zlm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-zlm_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-zlm_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.zsm_Latn-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-zsm_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-zsm_Arab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.zsm_Latn-zsm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bjn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.bjn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ind-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ind-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Latn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zlm_Latn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-hak
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-hak.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.zsm_Latn-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nds-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nds-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nds-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nds-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nds-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nds-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nds-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nds-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nds-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nds-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-nld
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-nld.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-nld.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-pol.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-ron.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nld-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nno-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-nno
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-nno.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nob-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-nob
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-nob.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nob-nob.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nno-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nno-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nob-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nob-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: orv_Cyrl-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.orv_Cyrl-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: oss-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.oss-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ota_Arab-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ota_Arab-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ota_Arab-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ota_Latn-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ota_Latn-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ota_Latn-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-pol
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-pol.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.pol-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.pol-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.pol-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.pol-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: pol-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.pol-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-por
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-por.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-por.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-ron
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-ron.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-ron.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-tgl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-tgl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.por-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.por-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ron-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ron-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ron-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ron-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ron-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ron-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ron-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.ron-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: run-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.run-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: run-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.run-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-rus
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-rus.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-rus.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-sah
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-sah.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-slv
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-slv.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-slv.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-tat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-tat.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-tat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-toki
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-toki.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-toki_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-toki_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-uig_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-uig_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-uig_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-uig_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-uig_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-uig_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-xal
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-xal.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-cmn_Bopo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-cmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-lzh_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: rus-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.rus-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.rus-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: slv-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.slv-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.slv-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: slv-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.slv-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: slv-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.slv-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: slv-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.slv-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-spa
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-spa.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-swe.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-tat
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-tat.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-tgl_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-tgl_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-tgl_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-tlh_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-tlh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-toki_Latn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-cjy_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-cjy_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-cjy_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-cmn_Bopo.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-hsn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-hsn.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-hsn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.spa-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: swe-swe
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.swe-swe.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: swe-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.swe-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: swe-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.swe-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: swe-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.swe-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: swe-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.swe-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tat-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tat-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tat-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tat-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tlh_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tlh_Latn-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.tlh_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tlh-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tlh-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tlh_Latn-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tlh_Latn-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tlh_Latn-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tlh_Latn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: toki_Latn-toki_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.toki_Latn-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tok_Latn-tok_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tok_Latn-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: toki_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.toki_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tok_Latn-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tok_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-tur
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-tur.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.tur-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-uig_Arab
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-uig_Arab.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.tur-uig_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-ukr.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.tur-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-uzb_Cyrl
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-uzb_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-uzb_Latn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-uzb_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-yid.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.tur-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: tur-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.tur-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: uig_Arab-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.uig_Arab-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: uig_Arab-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.uig_Arab-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: uig_Arab-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.uig_Arab-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ukr-ukr
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ukr-ukr.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ukr-cmn_Bopo
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ukr-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ukr-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ukr-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ukr-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ukr-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ukr-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ukr-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ukr-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.ukr-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: vie-vie
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.vie-vie.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: vie-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.vie-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: vie-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.vie-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yid-yid
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yid-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-cmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-hak
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-hak.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hans-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hans-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hans-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hans-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hans-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-cmn
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-lzh
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-lzh.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hant-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-lzh_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-lzh_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-nan
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-nan.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hant-nan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hant-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hant-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.cmn_Hant-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hant-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hak-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hak-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hak-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.hak-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.hak-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lzh-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lzh-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lzh-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lzh-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.lzh-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.lzh-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nan-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nan-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.nan-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nan-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.nan-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.wuu-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.wuu-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.wuu-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.wuu-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.wuu-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-yue_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.wuu-yue_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.wuu-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.wuu-yue_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.wuu-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hans-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hans-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hans-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hans-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hans-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hans-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hans-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hans-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hans-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-cmn_Hans
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hant-cmn_Hans.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hant-cmn_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-cmn_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hant-cmn_Hant.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hant-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-hak
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hant-hak.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hant-hak.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-wuu
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hant-wuu.tsv
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hant-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-yue_Hant
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hant-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-yue
+  data_files:
+  - split: test
+    path: data/test/tatoeba-test.yue_Hant-yue.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-lad_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-lad
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-lad_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-lad
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-spa
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-tur
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ayl-tur
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ayl-tur.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ara-yid
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ara-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: arz-yid
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.arz-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber_Arab-eng
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ber_Arab-eng.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ber-spa
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ber-spa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bzt_Latn-epo
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.bzt_Latn-epo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bzt_Latn-lfn_Cyrl
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.bzt_Latn-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bzt_Latn-lfn_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.bzt_Latn-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: bzt_Latn-yid
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.bzt_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-gsw
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-gsw.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-cmn_Bopo
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: deu-cmn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.deu-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-grn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-grn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-sdh
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-sdh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-lao
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-lao.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-bjn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-bjn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-zlm_Arab
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-zlm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-zsm_Arab
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-zsm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-toki
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-toki.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-uig_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-uig_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-xho
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-xho.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hak
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-hak.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: eng-hsn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.eng-hsn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: enm_Latn-fin
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.enm_Latn-fin.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-toki
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-toki.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: epo-tok_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.epo-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lad
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lad.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: fra-lad_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.fra-lad_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hrv-nno
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.hrv-nno.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ido_Latn-ile_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ido_Latn-ile_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ile_Latn-ina_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ile_Latn-ina_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ile_Latn-lfn_Cyrl
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ile_Latn-lfn_Cyrl.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ile_Latn-lfn_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ile_Latn-lfn_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: ile_Latn-yid
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.ile_Latn-yid.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-zlm_Arab
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-zlm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-zsm_Arab
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-zsm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: jpn-mfa
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.jpn-mfa.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: kmr_Arab-ckb
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.kmr_Arab-ckb.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-tlh
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad_Latn-tlh_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lad_Latn-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-tlh
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lad-tlh_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lad-tlh_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-tlh
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-tlh
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-tlh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Cyrl-toki_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Cyrl-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lfn_Latn-toki_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lfn_Latn-toki_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zlm_Latn-zsm_Arab
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.zlm_Latn-zsm_Arab.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Arab-zlm_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.zsm_Arab-zlm_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: zsm_Latn-bjn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.zsm_Latn-bjn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: nld-wuu
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.nld-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: por-tok_Latn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.por-tok_Latn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-cjy_Hans
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-cjy_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: spa-cmn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.spa-cmn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Bopo-lzh
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Bopo-lzh.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Bopo-wuu
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Bopo-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Bopo-yue_Hant
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Bopo-yue_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hans-nan
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hans-nan.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn_Hant-hsn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn_Hant-hsn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: cmn-yue
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.cmn-yue.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hak-yue_Hans
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.hak-yue_Hans.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hsn-cmn_Hant
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.hsn-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: hsn-wuu
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.hsn-wuu.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lzh-cmn_Bopo
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lzh-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: lzh_Hans-cmn_Hant
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.lzh_Hans-cmn_Hant.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-cmn_Bopo
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.wuu-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: wuu-hsn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.wuu-hsn.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hans-hak
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hans-hak.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue_Hant-cmn_Bopo
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.yue_Hant-cmn_Bopo.tsv
+  sep: "\t"
+  quoting: 3
+- config_name: yue-cmn
+  data_files:
+  - split: dev
+    path: data/dev/tatoeba-dev.yue-cmn.tsv
+  sep: "\t"
+  quoting: 3
+---
+
+# Dataset Card for The Tatoeba Translation Challenge
+
+**Please note that this dataset is intended strictly for evaluation and benchmarking purposes. Training models on this dataset, or including it in automatically collected web-scale training corpora, may lead to benchmark contamination and invalidate evaluation results.**
+
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Dataset Description](#dataset-description)
+  - [Dataset Summary](#dataset-summary)
+  - [Supported Tasks and Leaderboards](#supported-tasks-and-leaderboards)
+  - [Languages](#languages)
+- [Dataset Structure](#dataset-structure)
+  - [Data Instances](#data-instances)
+  - [Data Fields](#data-fields)
+  - [Data Splits](#data-splits)
+- [Dataset Creation](#dataset-creation)
+  - [Curation Rationale](#curation-rationale)
+  - [Source Data](#source-data)
+  - [Annotations](#annotations)
+  - [Personal and Sensitive Information](#personal-and-sensitive-information)
+- [Considerations for Using the Data](#considerations-for-using-the-data)
+  - [Social Impact of Dataset](#social-impact-of-dataset)
+  - [Discussion of Biases](#discussion-of-biases)
+  - [Other Known Limitations](#other-known-limitations)
+- [Additional Information](#additional-information)
+  - [Dataset Curators](#dataset-curators)
+  - [Licensing Information](#licensing-information)
+  - [Citation Information](#citation-information)
+  - [Contributions](#contributions)
+
+## Dataset Description
+
+- **Homepage:** https://github.com/Helsinki-NLP/Tatoeba-Challenge/
+- **Repository:** https://github.com/Helsinki-NLP/Tatoeba-Challenge/
+- **Paper:** [The Tatoeba Translation Challenge – Realistic Data Sets for Low Resource and Multilingual MT](https://aclanthology.org/2020.wmt-1.139/)
+- **Leaderboard:**
+- **Point of Contact:** [Jörg Tiedemann](mailto:jorg.tiedemann@helsinki.fi)
+
+### Dataset Summary
+
+The Tatoeba Translation Challenge is a multilingual data set of machine translation benchmarks derived from user-contributed translations collected by [Tatoeba.org](https://tatoeba.org/) and provided as parallel corpus from [OPUS](https://opus.nlpl.eu/). This dataset includes test and development data sorted by language pair. It includes test sets for hundreds of language pairs and is continuously updated. Please, check the version number tag to refer to the release that your are using.
+
+### Supported Tasks and Leaderboards
+
+The translation task is described in detail in the [Tatoeba-Challenge repository](https://github.com/Helsinki-NLP/Tatoeba-Challenge) and covers various sub-tasks with different data coverage and resources. [Training data](https://github.com/Helsinki-NLP/Tatoeba-Challenge/blob/master/data/README.md) is also available from the same repository and [results](https://github.com/Helsinki-NLP/Tatoeba-Challenge/blob/master/results/tatoeba-results-all.md) are published and collected as well. [Models](https://github.com/Helsinki-NLP/Tatoeba-Challenge/blob/master/results/tatoeba-models-all.md) are also released for public use and are also partially available from the [huggingface model hub](https://huggingface.co/Helsinki-NLP).
+
+
+### Languages
+
+The data set covers hundreds of languages and language pairs and are organized by ISO-639-3 languages. The current release covers the following languages:
+Mesopotamian Arabic, Gulf Arabic, Afrikaans, Ainu (Japan), Gheg Albanian, Levantine Arabic, Arabic, Algerian Arabic, Moroccan Arabic, Egyptian Arabic, Assamese, Kotava, Awadhi, Libyan Arabic, Azerbaijani, Belarusian, Bengali, Berber languages, Banjar, Bosnian, Breton, Buriat, Bua, Bulgarian, Brithenig, Catalan, Chavacano, Cebuano, Czech, Chamorro, Chuvash, Jinyu Chinese, Central Kurdish, Mandarin Chinese, Cornish, Crimean Tatar, Welsh, Danish, German, Lower Sorbian, Kadazan Dusun, Emilian, Modern Greek (1453-), English, Middle English (1100-1500), Esperanto, Estonian, Basque, Faroese, Finnish, Kven Finnish, French, Northern Frisian, Western Frisian, Gan Chinese, Guadeloupean Creole French, Scottish Gaelic, Irish, Galician, Gronings, Gothic, Ancient Greek (to 1453), Guarani, Swiss German, Hakka Chinese, Hausa, Hebrew, Hindi, Ho, Croatian, Hunsrik, Upper Sorbian, Xiang Chinese, Hungarian, Armenian, Ido, Interlingue, Iloko, Interlingua (International Auxiliary Language Association), Indonesian, Icelandic, Italian, Javanese, Lojban, Japanese, Kabyle, Georgian, Kazakh, Khasi, Khmer, Northern Kurdish, Korean, Kurdish, Coastal Kadazan, Ladino, Lao, Latin, Latvian, Lingua Franca Nova, Ligurian, Lithuanian, Latgalian, Luxembourgish, Literary Chinese, Malayalam, Marathi, North Moluccan Malay, Pattani Malay, Eastern Mari, Minangkabau, Macedonian, Maltese, Mongolian, Maori, Burmese, Min Nan Chinese, Low German, Dutch, Norwegian Nynorsk, Norwegian Bokmål, Novial, Tase Naga, Occitan (post 1500), Old Russian, Ossetian, Ottoman Turkish (1500-1928), Pampanga, Picard, Iranian Persian, Pam, Piemontese, Polish, Portuguese, Prussian, Quechua, Romany, Romanian, Rundi, Russian, Yakut, Santali, Southern Kurdish, Slovenian, Spanish, Albanian, Serbian, Congo Swahili, Swedish, Swabian, Swahili (individual language), Tamil, Tatar, Telugu, Tagalog, Thai, Klingon, Temuan, Toki Pona, Turkmen, Turkish, Talossan, Uighur, Ukrainian, Urdu, Uzbek, Vietnamese, Volapük, Võro, Waray (Philippines), Wu Chinese, Kalmyk, Xhosa, Yiddish, Yue Chinese, Malay (individual language), Standard Malay, Zaza
+
+## Dataset Structure
+
+### Data Instances
+
+Data instances are given as translation units in TAB-separated files with four columns: source and target language ISO-639-3 codes, source language text and target language text. Note that we do not imply a translation direction and consider the data set to be symmetric and to be used as a test set in both directions. Language-pair-specific subsets are only provided under the label of one direction using sorted ISO-639-3 language IDs.
+
+Some subsets contain several sub-languages or language variants. They may refer to macro-languages such as Serbo-Croatian languages that are covered by the ISO code `hbs`. Language variants may also include different writing systems and in that case the ISO15924 script codes are attached to the language codes. Here are a few examples from the English to Serbo-Croation test set including examples for Bosnian, Croatian and Serbian in Cyrillic and in Latin scripts:
+
+```
+eng	bos_Latn	Children are the flowers of our lives.	Djeca su cvijeće našeg života.
+eng	hrv	A bird was flying high up in the sky.	Ptica je visoko letjela nebom.
+eng	srp_Cyrl	A bird in the hand is worth two in the bush.	Боље врабац у руци, него голуб на грани.
+eng	srp_Latn	Canada is the motherland of ice hockey.	Kanada je zemlja-majka hokeja na ledu.
+```
+
+There are also data sets with sentence pairs in the same language. In most cases, those are variants with minor spelling differences but they also include rephrased sentences. Here are a few examples from the English test set:
+
+```
+eng     eng     All of us got into the car.     We all got in the car.
+eng     eng     All of us hope that doesn't happen.     All of us hope that that doesn't happen.
+eng     eng     All the seats are booked.       The seats are all sold out.
+```
+
+
+### Data Splits
+
+Test and development data sets are disjoint with respect to sentence pairs but may include overlaps in individual source or target language sentences. Development data should not be used in training directly. The goal of the data splits is to create test sets of reasonable size with a large language coverage. Test sets include at most 10,000 instances. Development data do not exist for all language pairs.
+
+To be comparable with other results, models should use the training data distributed from the [Tatoeba MT Challenge Repository](https://github.com/Helsinki-NLP/Tatoeba-Challenge/) including monolingual data sets also listed there.
+
+
+## Dataset Creation
+
+### Curation Rationale
+
+
+The Tatoeba MT data set will be updated continuously and the data preparation procedures are also public and released on [github](https://github.com/Helsinki-NLP/Tatoeba-Challenge/). High language coverage is the main goal of the project and data sets are prepared to be consistent and systematic with standardized language labels and distribution formats.
+
+
+### Source Data
+
+#### Initial Data Collection and Normalization
+
+The Tatoeba data sets are collected from user-contributed translations submitted to [Tatoeba.org](https://tatoeba.org/) and compiled into a multi-parallel corpus in [OPUS](https://opus.nlpl.eu/Tatoeba.php). The test and development sets are incrementally updated with new releases of the Tatoeba data collection at OPUS. New releases extend the existing data sets. Test sets should not overlap with any of the released development data sets.
+
+
+#### Who are the source language producers?
+
+The data sets come from [Tatoeba.org](https://tatoeba.org/), which provides a large database of sentences and their translations into a wide varity of languages. Its content is constantly growing as a result of voluntary contributions of thousands of users.
+The original project was founded by Trang Ho in 2006, hosted on Sourceforge under the codename of multilangdict. 
+
+
+### Annotations
+
+#### Annotation process
+
+Sentences are translated by volunteers and the Tatoeba database also provides additional metadata about each record including user ratings etc. However, the metadata is currently not used in any way for the compilation of the MT benchmark. Language skills of contributors naturally vary quite a bit and not all translations are done by native speakers of the target language. More information about the contributions can be found at [Tatoeba.org](https://tatoeba.org/).
+
+
+#### Who are the annotators?
+
+### Personal and Sensitive Information
+
+For information about handling personal and sensitive information we refer to the [original provider](https://tatoeba.org/) of the data. This data set has not been processed in any way to detect or remove potentially sensitve or personal information.
+
+## Considerations for Using the Data
+
+### Social Impact of Dataset
+
+The language coverage is high and with that it represents a highly valuable resource for machine translation development especially for lesser resourced languages and language pairs. The constantly growing database also represents a dynamic resource and its value will grow further.
+
+
+### Discussion of Biases
+
+The original source lives from its contributors and there interest and background will to certain subjective and cultural biases. Language coverage and translation quality is also biased by the skills of the contributors.
+
+
+### Other Known Limitations
+
+The sentences are typically quite short and, therefore, rather easy to translate. For high-resource languages, this leads to results that will be less useful than more challenging benchmarks. For lesser resource language pairs, the limited complexity of the examples is actually a good thing to measure progress even in very challenging setups.
+
+
+## Additional Information
+
+### Dataset Curators
+
+The data set is curated by the University of Helsinki and its [language technology research group](https://blogs.helsinki.fi/language-technology/). Data and tools used for creating and using the resource are [open source](https://github.com/Helsinki-NLP/Tatoeba-Challenge/) and will be maintained as part of the [OPUS ecosystem](https://opus.nlpl.eu/) for parallel data and machine translation research.
+
+
+### Licensing Information
+
+The data sets are distributed under the same licence agreement as the original Tatoeba database using a
+[CC-BY 2.0 license](https://creativecommons.org/licenses/by/2.0/fr/). More information about the terms of use of the original data sets is listed [here](https://tatoeba.org/eng/terms_of_use).
+
+
+### Citation Information
+
+If you use the data sets then, please, cite the following paper: [The Tatoeba Translation Challenge – Realistic Data Sets for Low Resource and Multilingual MT](https://aclanthology.org/2020.wmt-1.139/)
+
+```
+@inproceedings{tiedemann-2020-tatoeba,
+    title = "The Tatoeba Translation Challenge {--} Realistic Data Sets for Low Resource and Multilingual {MT}",
+    author = {Tiedemann, J{\"o}rg},
+    booktitle = "Proceedings of the Fifth Conference on Machine Translation",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.wmt-1.139",
+    pages = "1174--1182",
+}
+```
+
+### Contributions
+
+Thanks to [@jorgtied](https://github.com/jorgtied) and [@Helsinki-NLP](https://github.com/Helsinki-NLP) for adding this dataset.
+Thanks also to [CSC Finland](https://www.csc.fi/en/solutions-for-research) for providing computational resources and storage space for the work on OPUS and other MT projects.

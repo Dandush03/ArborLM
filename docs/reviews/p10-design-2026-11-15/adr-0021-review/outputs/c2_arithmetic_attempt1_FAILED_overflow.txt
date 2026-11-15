@@ -1,0 +1,61 @@
+== 1. Fano bits per fact i(a)
+  a_use=0.050  i=0.007
+  a_use=0.100  i=0.072
+  a_use=0.250  i=0.473
+  a_use=0.500  i=1.523
+  a_use=0.800  i=3.287
+  a_use=0.850  i=3.647
+  a_use=0.900  i=4.036
+  a_use=0.950  i=4.466
+  a_use=0.954  i=4.503
+  a_use=0.970  i=4.657
+  a_use=0.990  i=4.870
+  a_use=1.000  i=5.000
+  i = 4.5 is reached at a_use = 0.9537 (draft: 'a_use about 0.95'; i(0.95) = 4.466 < 4.5)
+  accuracy points per 0.5 bits at several levels:
+    from a=0.30: +0.5 bit needs a=0.421 (+0.121)
+    from a=0.50: +0.5 bit needs a=0.596 (+0.096)
+    from a=0.70: +0.5 bit needs a=0.777 (+0.077)
+    from a=0.80: +0.5 bit needs a=0.869 (+0.069)
+    from a=0.90: +0.5 bit needs a=0.957 (+0.057)
+  di/da at a=0.5: 4.95 bits per unit accuracy; SE(acc) at F=8192, p=0.5: 0.0055 -> 0.027 bits
+  max SE of accuracy at F=2048: 0.0110
+  max SE of accuracy at F=8192: 0.0055
+  max SE of accuracy at F=32768: 0.0028
+
+== 2. Diagonal ratio I_use(4N,4F)/I_use(N,F) = 4 i'/i
+  a 1.000 -> 0.970: ratio 3.73
+  a 1.000 -> 0.900: ratio 3.23
+  a 1.000 -> 0.860: ratio 2.98
+  a 1.000 -> 0.800: ratio 2.63
+  a 0.999 -> 0.800: ratio 2.64
+  i(0.80) = 3.287: a_use 0.80 at 32K/64K with 8K/16K at ceiling gives ratio 2.63 < 3.0
+
+== 3. Replicate probabilities under 'P(pass) <= 1/2 independently per replicate'
+  n=5: at least 5 of 5: 0.0312
+  n=5: at least 4 of 5: 0.1875
+  n=4: at least 4 of 4: 0.0625
+  n=4: at least 3 of 4: 0.3125
+  n=3: at least 3 of 3: 0.1250
+  n=3: at least 2 of 3: 0.5000
+  if the per-replicate pass probability under the null is q, P(all 5) = q^5:
+    q=0.5: all5=0.031 all4=0.062
+    q=0.6: all5=0.078 all4=0.130
+    q=0.7: all5=0.168 all4=0.240
+    q=0.8: all5=0.328 all4=0.410
+
+== 4. G2 central interval at level 1 - 0.001/40 around 1/32 (count, accuracy, Fano bits at upper end)
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/adr-0021-review/c2_arithmetic.py", line 69, in <module>
+    lo, hi = central_interval(F, 1 / 32, alpha)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/adr-0021-review/c2_arithmetic.py", line 61, in central_interval
+    while 1 - binom_cdf(hi - 1, n, p) < alpha / 2:
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/adr-0021-review/c2_arithmetic.py", line 53, in binom_cdf
+    return sum(comb(n, j) * p ** j * (1 - p) ** (n - j) for j in range(0, k + 1))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/adr-0021-review/c2_arithmetic.py", line 53, in <genexpr>
+    return sum(comb(n, j) * p ** j * (1 - p) ** (n - j) for j in range(0, k + 1))
+               ~~~~~~~~~~~^~~~~~~~
+OverflowError: int too large to convert to float

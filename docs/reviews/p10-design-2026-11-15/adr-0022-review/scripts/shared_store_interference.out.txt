@@ -1,0 +1,12 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+torch 2.8.0; N=4096 per memory, W=2001 codes per task, top-8, T=0.2
+noise  seed  mean_B_mass  frac_queries_B_mass>0.10  frac_queries_any_B_slot
+  0.0     1       0.2247                     0.8676                   0.8821
+  0.0     2       0.2220                     0.8626                   0.8756
+  0.0     3       0.2221                     0.8486                   0.8671
+  0.1     1       0.2651                     0.8826                   0.9720
+  0.1     2       0.2659                     0.8716                   0.9730
+  0.1     3       0.2646                     0.8746                   0.9705
+  0.3     1       0.4434                     0.9885                   0.9955
+  0.3     2       0.4458                     0.9890                   0.9940
+  0.3     3       0.4466                     0.9895                   0.9925

@@ -1,0 +1,59 @@
+cmd: python3 -I c2_mapping_enumeration.py
+Python 3.15.1
+enumerated records: 2472716; P9-II UNCLASSIFIED (gap in ADR-0019 §8.6): 0
+
+P9-II outcome rows (count of enumerated records):
+         64  ADDRESSING-FAILS
+     424272  ADDRESSING-RELIABLE
+    1425264  ADDRESSING-RELIABLE AT 4,096 ONLY
+      99248  ADDRESSING-RELIABLE AT 4,096; 16,384 <status>
+       4032  ADDRESSING-UNRELIABLE
+     513436  ANSWER-ONLY RELIABLE
+       6400  INCONCLUSIVE
+
+S0 branch:
+         64  no run: ADDRESSING-FAILS
+       4032  no run: ADDRESSING-UNRELIABLE
+     462720  no run: E,E4 empty under ADDRESSING-RELIABLE AT 4,096 ONLY
+      11776  no run: E,E4 empty under ADDRESSING-RELIABLE AT 4,096; 16,384 <status>
+      43808  no run: E,E4 empty under ANSWER-ONLY RELIABLE
+       6400  no run: INCONCLUSIVE
+    1300236  run FULL
+     643680  run SMALL
+
+SMALL-scope candidates by P9-II outcome:
+      36864  ('ADDRESSING-RELIABLE AT 4,096 ONLY', 'A1')
+      43008  ('ADDRESSING-RELIABLE AT 4,096 ONLY', 'A2')
+     129024  ('ADDRESSING-RELIABLE AT 4,096 ONLY', 'A4')
+     160512  ('ADDRESSING-RELIABLE AT 4,096 ONLY', 'A5-C')
+     144768  ('ADDRESSING-RELIABLE AT 4,096 ONLY', 'A5-D')
+      86656  ('ANSWER-ONLY RELIABLE', 'A0')
+       3072  ('ANSWER-ONLY RELIABLE', 'A1')
+       3584  ('ANSWER-ONLY RELIABLE', 'A2')
+      10752  ('ANSWER-ONLY RELIABLE', 'A4')
+      13376  ('ANSWER-ONLY RELIABLE', 'A5-C')
+      12064  ('ANSWER-ONLY RELIABLE', 'A5-D')
+
+E and E4 both empty under P9-II rows 3-6 (ADR-0020 prints 'INCONCLUSIVE (P9-II INCONCLUSIVE; S0 NOT RUN)'):
+  ANSWER-ONLY RELIABLE: cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'U', 'A2': 'R', 'A1': 'R'} NC4=True NC16=False st2=COMPLETE cls16={'A0': 'ULM', 'A5-C': 'ULM', 'A5-D': 'ULM'}
+  ANSWER-ONLY RELIABLE: cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'U', 'A2': 'R', 'A1': 'R'} NC4=True NC16=False st2=COMPLETE cls16={'A0': 'ULM', 'A5-C': 'ULM', 'A5-D': 'FLM'}
+  ADDRESSING-RELIABLE AT 4,096 ONLY: cls4={'A0': 'U', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'U', 'A2': 'R', 'A1': 'R'} NC4=True NC16=False st2=COMPLETE cls16={'A0': 'R', 'A5-C': 'ULM', 'A5-D': 'ULM'}
+  ADDRESSING-RELIABLE AT 4,096 ONLY: cls4={'A0': 'U', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'U', 'A2': 'R', 'A1': 'R'} NC4=True NC16=False st2=COMPLETE cls16={'A0': 'R', 'A5-C': 'ULM', 'A5-D': 'FLM'}
+  ADDRESSING-RELIABLE AT 4,096; 16,384 <status>: cls4={'A0': 'U', 'A5-C': 'U', 'A5-D': 'U', 'A4': 'U', 'A2': 'R', 'A1': 'R'} NC4=False NC16=True st2=BUDGET cls16={}
+  ADDRESSING-RELIABLE AT 4,096; 16,384 <status>: cls4={'A0': 'U', 'A5-C': 'U', 'A5-D': 'U', 'A4': 'U', 'A2': 'R', 'A1': 'R'} NC4=False NC16=True st2=INCOMPLETE cls16={}
+
+Cases the §3.4 table does not list (rule still decides):
+     115568  UNLISTED (row 3/4: A0 excluded)
+             e.g. cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'R', 'A2': 'R', 'A1': 'R'} NC4=False NC16=False st2=COMPLETE cls16={'A0': 'ULM', 'A5-C': 'R', 'A5-D': 'R'} -> rule ('A5-C', 'A2', 'FULL')
+      70712  UNLISTED (row 1/2: carried arm is A0)
+             e.g. cls4={'A0': 'U', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'R', 'A2': 'R', 'A1': 'R'} NC4=False NC16=False st2=COMPLETE cls16={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R'} -> rule ('A5-C', 'A2', 'FULL')
+
+Rule vs table disagreements (literal reading of the table):
+  none
+
+c16 ambiguity (Stage 2 INCOMPLETE but an arm's 16,384 class printed RELIABLE): 9788 records where strict and loose readings choose different arms/scope
+  cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'R', 'A2': 'R', 'A1': 'R'} NC4=False st2=INCOMPLETE cls16={'A5-C': 'R'} strict=('A0', 'A2', 'FULL') loose=('A5-C', 'A2', 'FULL')
+  cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'R', 'A2': 'R', 'A1': 'R'} NC4=False st2=INCOMPLETE cls16={'A5-D': 'R'} strict=('A0', 'A2', 'FULL') loose=('A5-D', 'A2', 'FULL')
+  cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'R', 'A2': 'R', 'A1': 'R'} NC4=True st2=INCOMPLETE cls16={'A5-C': 'R'} strict=('A0', 'A5-C', 'FULL') loose=('A5-C', 'A0', 'FULL')
+  cls4={'A0': 'R', 'A5-C': 'R', 'A5-D': 'R', 'A4': 'R', 'A2': 'R', 'A1': 'R'} NC4=True st2=INCOMPLETE cls16={'A5-D': 'R'} strict=('A0', 'A5-C', 'FULL') loose=('A5-D', 'A0', 'FULL')
+python3 -I c2_mapping_enumeration.py  13.92s user 0.03s system 99% cpu 14.064 total
