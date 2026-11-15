@@ -971,3 +971,18 @@ Three parallel independent audits (Opus 5.5) of the stand-in implementation at c
 
 The implementer stopped on a conflict: the intervals of every printed score use listed seed 220906, but G9 allowed the 2209xx seeds only in the data-generation and partition steps, so an interval computed in the analysis would be refused. Ruling (before any S2 record exists): **220906 is drawn in the analysis stage and nowhere else**; G9 lists it for that stage, with a fresh generator per printed interval in a fixed order (the order of the registry). Intervals are descriptive and enter no rule.
 
+## Addendum — rulings on the points the three fix lanes left open (2026-11-15 UTC)
+
+Made by the lead (Claude Fable 5.2) before any S2 download, data-generation, calibration, rehearsal or registered record exists. Part of the specification. The lanes' own notes are `HANDOFF_A.md`, `HANDOFF_B.md` and `HANDOFF_C.md` at the repository root of the S2 branch.
+
+**Data (lane A).** Accepted as implemented, each marked [lead's choice]: one panel representative per identity group is the first key in sorted order; a source with no gold pair has its contraction-expanded string as identity unit; the 220909 sentences are drawn from the capability's own generation sources; the link-resolution guard at a share of 0.5 is an engineering guard that stops the step and enters no rule; one pooled new-token limit; R-icl demonstrations in tokenization test (a) come from the whole accepted pool; the filter-score assertion covers the first batch; the chrF cross-check pairs teacher A's outputs with the German references; tokenization test (b) records its mismatches and stops the step only where the ADR says a test stops it. **Not accepted:** leaving the teachers' outputs unchanged where §6.1 names a panel. Both teachers are run on every panel §6.1 names, D_con and E_open included; if §6.1 cannot be applied to a panel without a choice, that panel's item is stopped and returned to the lead.
+
+**Stages (lane B).**
+- *Device.* The registered training device is the one frozen. It is MPS unless the rehearsal itself cannot run on MPS, in which case the freeze may record CPU (§13.3's fallback) with every rate rehearsed on CPU; G4's MPS comparison then prints NOT APPLICABLE — TRAINING ON CPU BY THE FREEZE. In every other registered run G4 must run and pass. No device change after the freeze.
+- *The cap raise is a rule, not a discretion.* At the freeze the code computes the cap from the rehearsal record: 36 hours if rung 1 satisfies P + 2R ≤ 36; otherwise the smallest whole number of hours up to 72 at which rung 1 satisfies it; otherwise 72, with the rung order applied against 72; if no rung fits, NOT STARTED: BUDGET. A freeze that records any other cap is refused.
+- *Reserve.* The analysis and report reserve is the sum of their frozen stage caps (floor 60 seconds each), as in ADR-0020.
+- *Rehearsal scaling.* Scoring is timed on calibration items and scaled by registered item counts; combined scoring is counted once; where a full-length cell of one type stands in for another (ST1 for M-append-frozen), the record says so and the registered projection uses the larger of that rate and the type's own 200-update rate.
+- The pre-freeze gates run on rehearsal seeds with the largest rung's replicate count.
+
+**Rules (lane C).** A missing gates record, a missing gate (G2 included), or a missing ensemble record gives INCOMPLETE; a failed gate gives ENGINEERING-FAILURE. A control that is NOT_EVALUATED blocks label rows 6–8 whichever cell it belongs to. Route accuracy on general text is measured on 200 unseen WikiText-2 train pieces [lead's choice, to match the 200 GEN windows], never on the GEN windows. E_open is built and scored as §6.1 and §10 say.
+
