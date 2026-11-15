@@ -2,6 +2,7 @@
 
 - **Status: DESIGN REVISION 4 — CONFIRMED BY THE AUDITOR SUBJECT TO C1–C10 AND m1–m7, WHICH THIS REVISION APPLIES. SPEC: PENDING ASTRA REVIEW. Nothing is implemented, downloaded or run.**
 - **Date:** 2026-11-15 (UTC)
+- **Editorial corrections after revision 4 (E8 of the ADR-0020 confirmation; no rule, threshold, arm or number changed):** the single-teacher store is named **ST1** (it was "S1", which is also a study name); the Stage 0 score is written s_c(Stage 0) (it was "s_c(S0)"); a supplement for learned addressing names the human lead; the seed check lists S0. The text before these corrections is `docs/reviews/p10-design-2026-11-15/revisions/ADR-0022-rev4-before-E8.md`.
 - **Origin.** The human lead's P10 direction, milestone question 2: "Can ArborLM sequentially acquire complementary capabilities from two pretrained teacher models while preserving earlier capabilities?"
 - **Decision that stays with the human lead.** This design uses two translation directions (English→German, English→French) as the two capabilities. They are two capabilities of one kind. **Whether that satisfies "complementary capabilities" is the human lead's decision, not the lead's** (§16).
 - **Study code** P10S2. **Package** `studies/p10s2/`. **Seed namespace** 220001–229999 (§9).
@@ -165,7 +166,7 @@ General-language text: WikiText-2 raw, validation and train, already local (`dat
   - **Oracle route (the registered condition of every label row):** read from the task marker by rule; ordinary text has none. **There is no switch between memories in the primary arm**: one store, one top-8 over all rows.
   - **Every memory and every adapter arm is applied only under its route**: no read and no adapter on route "none".
   - **Learned-router lane (decides the GEN gate of §11.1; otherwise annotation).** Three router keys (A, B, none), cosine scores, a learned 16×576 projection of the student's hidden state at the last prompt token of a memory-free pass, top-1. Trained with route labels, with WikiText-2 *train* prefixes as "none", retrained at each stage on stored prompts. An answer-loss-only router is not run, because of P9-I's registered collapse. **It is a keyword-level classifier**: the prompts differ in a marker word, and a pass says nothing about fine-grained addressing.
-  - No learned slot-level addressing is run in S2. If S0 qualifies an interface, evaluating it in S2 needs a separately approved supplement.
+  - No learned slot-level addressing is run in S2. If S0 qualifies an interface, evaluating it in S2 needs a supplement approved by the human lead.
 
 ## 6. Stages
 
@@ -177,7 +178,7 @@ The untrained student and both teachers are scored on every panel.
 
 ### 6.2 Stage 1
 
-**S1**: a store of N rows trained on Teacher 1's accepted outputs. Version V1. It is also the single-teacher student of that capability.
+**ST1**: a store of N rows trained on Teacher 1's accepted outputs. Version V1. It is also the single-teacher student of that capability.
 
 ### 6.3 Stage 2, from V1
 
@@ -187,7 +188,7 @@ The untrained student and both teachers are scored on every panel.
 | **M-ii** (mechanism ii: continued training with replay and a retention constraint) | starts from M-append-frozen's result | trainable | 32 replayed first-teacher rows added to each batch of 32 | whether the first capability survives when its rows are changed |
 | M-seq (control) | none | trainable | none | a sparse store with oracle task codes trained in sequence without growth or replay; set beside L-seq, descriptively (H22-E) |
 
-- **M-i-separate** (two stores behind the oracle route) is not trained. It is assembled from the two S1 stores of the same replicate and reported as **BY CONSTRUCTION**. It enters no label.
+- **M-i-separate** (two stores behind the oracle route) is not trained. It is assembled from the two ST1 stores of the same replicate and reported as **BY CONSTRUCTION**. It enters no label.
 - **Learned routing in mechanism (i)** is realized as learned keys of all rows competing in one top-8 under oracle queries, and a learned keyword router that decides whether the store is read. The human lead's phrase may intend more; this reading is stated, not assumed.
 - **Append point.** M-append-frozen is also scored immediately after the append, before any update. The drop of the first capability at that point is reported as the *append cost*.
 - **Mechanism (ii) has no objective beyond its loss.** It is continued training of all rows on the second teacher's material plus replay. The study does not claim it improves anything; it asks whether the first capability survives modification.
@@ -204,9 +205,9 @@ Every trained snapshot is scored on E_A and E_B after its stage; "before" is the
   - C2, one source, both answers: the source words are read with both tasks' codes and the reads are summed.
   - Score: mean chrF of the two answers; an item passes if both match a reference exactly.
 - **General-language quality.** Mean next-token negative log-likelihood on 200 windows of 256 tokens of WikiText-2 validation — **100 windows that contain any of the strings "German", "French", "English", "translation" or a line ending in ":"** (selected by rule with the partition seed) and 100 ordinary windows *(lead's choice)* — with mean KL to the Stage 0 student and the share of unchanged top-1 tokens. This data is used for nothing else. Under oracle routes every arm is bit-identical to the student on this panel; gate G5 checks it and the result is printed **BY CONSTRUCTION** and counts for nothing. It is measured for real in two conditions:
-  - **(a) keyword-router condition — the registered GEN measurement.** For each window, the learned router of that snapshot reads the student's hidden state at token 64 of a memory-free pass. If it returns a task, the store is read with that task's codes at every in-vocabulary word of the whole window; if it returns "none", nothing is read. The loss is the mean next-token negative log-likelihood over tokens 65–256 of all 200 windows, and is compared with the unmodified student's loss on the same positions. Printed beside it: the router's false-trigger count per stratum, and the always-on loss increase (b). A pass is described as "the keyword router stayed silent", not as "the memory preserves general language". **GEN is measured for every S1 and stage-2 memory snapshot** (the router of an S1 snapshot knows one task and "none"), so general quality is reported before and after every stage; and for L-seq with the adapter applied when the router returns a task (comparison only).
+  - **(a) keyword-router condition — the registered GEN measurement.** For each window, the learned router of that snapshot reads the student's hidden state at token 64 of a memory-free pass. If it returns a task, the store is read with that task's codes at every in-vocabulary word of the whole window; if it returns "none", nothing is read. The loss is the mean next-token negative log-likelihood over tokens 65–256 of all 200 windows, and is compared with the unmodified student's loss on the same positions. Printed beside it: the router's false-trigger count per stratum, and the always-on loss increase (b). A pass is described as "the keyword router stayed silent", not as "the memory preserves general language". **GEN is measured for every ST1 and stage-2 memory snapshot** (the router of an ST1 snapshot knows one task and "none"), so general quality is reported before and after every stage; and for L-seq with the adapter applied when the router returns a task (comparison only).
   - **(b) always-on diagnostic** (reads with the first task's codes at every in-vocabulary word; adapter always applied), for M-append-frozen and L-seq. It enters no rule.
-- **Seen-item scores** on 300 training items are reported for S1 and M-append-frozen and enter no rule.
+- **Seen-item scores** on 300 training items are reported for ST1 and M-append-frozen and enter no rule.
 - Evaluation batches have a fixed composition, so scores do not depend on the worker.
 
 ## 7. Baselines and controls
@@ -215,13 +216,13 @@ All share partitions, U, batch size and the sequence-level loss. LoRA is impleme
 
 | Baseline | Definition | Trained? | Can show | Cannot show |
 |---|---|---|---|---|
-| Single-teacher students | S1 of each order; LoRA-1 of each order | yes | what one teacher gives alone | — |
+| Single-teacher students | ST1 of each order; LoRA-1 of each order | yes | what one teacher gives alone | — |
 | **M-joint** — ordinary multi-teacher distillation (memory form) | one store of 2N rows from initialization on the mixed material of both teachers, 2U updates | yes | the bound for sequential arms | anything about order |
 | **L-joint** — ordinary multi-teacher distillation (adapter form) | one LoRA of rank 84 on the mixed material of both teachers, 2U | yes | the ordinary multi-teacher student | anything about order |
 | **L-seq** — sequential adapter | LoRA-1 continued on the second teacher's material, no replay | yes | forgetting of a dense adapter | — |
 | **L-sep** | the two LoRA-1 adapters of a replicate behind the oracle route | assembled | the fair existing alternative to separate modules; BY CONSTRUCTION for retention | — |
 | **E-table** | one trainable 576-vector per (task, vocabulary word) and per task marker, added at layer L at the same positions as the store's reads; no keys, no top-k | yes, each capability | whether the keyed sparse store adds anything over a word-vector table | — |
-| **MA-gold** | S1 trained on Gold^r (8,000 gold pairs from gold-bearing sentences) | yes, each capability | a reference point for the teacher's material; not a bound | what the teacher adds item by item |
+| **MA-gold** | ST1 trained on Gold^r (8,000 gold pairs from gold-bearing sentences) | yes, each capability | a reference point for the teacher's material; not a bound | what the teacher adds item by item |
 | **Ensemble** | the two teachers behind the oracle route, and behind the learned router | no | the quality ceiling and its cost | it is not a student |
 | **R-exact** | table from training source to accepted output | no | zero hits on held-out items: confirms the panels are held out | — |
 | **R-nn** | nearest training source by character-trigram TF-IDF cosine; return its output | no | sentence retrieval without composition | — |
@@ -242,7 +243,7 @@ M-append-frozen has 2N rows after Stage 2. It is read against M-joint (2N, simul
 
 - **Four replicates, run unconditionally, if the rehearsal shows the whole study fits the cap with 2× headroom; otherwise three.** The choice is made by the rule of §13.3 and recorded before the freeze. There is no adaptive scheme: no replicate depends on another's result. **A positive label needs every replicate.**
 - A replicate is a new training draw (T_A^r, T_B^r, Gold^r) and a new initialization. Evaluation panels, Q, D_cal, D_con and the vocabulary are common and fixed by the partition seed. E-table, MA-gold, M-seq and L-joint run in every replicate.
-- Seeds: replicate bases 220001, 220101, 220201, 220301 (base + 0 initialization, + 1 training draw, + 2 batch order, + 3 router, + 4 permutation controls, + 5 gold draw); partition seed 220901; calibration 221001–221999; rehearsal 222001–222999; tests 229001–229999. The implementation asserts the ranges are disjoint from each other and from every seed of P1–P9-II and S1, and writes the hash of every panel and stream to the data manifest. The reviewer's search of `src`, `studies`, `configs` and `tests` found numbers in this range only as parameter counts.
+- Seeds: replicate bases 220001, 220101, 220201, 220301 (base + 0 initialization, + 1 training draw, + 2 batch order, + 3 router, + 4 permutation controls, + 5 gold draw); partition seed 220901; calibration 221001–221999; rehearsal 222001–222999; tests 229001–229999. The implementation asserts the ranges are disjoint from each other and from every seed of P1–P9-II, S0 (200001–209999, 2001–2002, 2091–2092, 920001–920999) and S1, and writes the hash of every panel and stream to the data manifest. The reviewer's search of `src`, `studies`, `configs` and `tests` found numbers in this range only as parameter counts.
 - Within a replicate every arm shares data, batch order where the data are the same, and the initialization of shared parameters.
 - **Meaning of "every replicate":** if a mechanism's per-replicate pass probability were 0.5 or less, n of n passes would occur with probability at most 0.5ⁿ (0.0625 for four, 0.125 for three). The two orders share each replicate's draw and are not independent evidence. A true per-replicate pass rate of 0.8 gives 4 of 4 with probability 0.41. A positive at n of n is therefore evidence that the per-replicate pass rate exceeds one half; it is not a confidence interval on an effect, and INTERMEDIATE or NOT REPLICATED should be expected often. No interval across replicates is printed.
 - Every class and label line prints "(n replicates, U = …)".
@@ -253,7 +254,7 @@ M-append-frozen has 2N rows after Stage 2. It is read against M-joint (2N, simul
 
 - **chrF-norm.** chrF2 on normalized strings (§5.2): character n-grams n = 1…6, no word n-grams, whitespace removed before n-gram extraction, precision and recall averaged over the **effective** orders (orders at which both hypothesis and reference have at least one n-gram), then F with β = 2, as sacrebleu 2.5.1's default (`eps_smoothing=False`); an item with no effective order scores 0; scale 0–1; item score is the maximum over references; panel score is the mean over items. Implemented in the study, unit-tested on hand cases, and cross-checked against `sacrebleu` 2.5.1 on 1,000 pairs of Q in the data-generation step (agreement within 0.001 per item *(lead's choice)* with matching settings; analysis-only).
 - Exact-match rate is descriptive only.
-- **Gap closed:** G_c = (s_c(arm) − s_c(S0)) / (s_c(teacher c) − s_c(S0)), same panel. Defined only if the denominator is ≥ 0.30; otherwise NOT_EVALUATED.
+- **Gap closed:** G_c = (s_c(arm) − s_c(Stage 0)) / (s_c(teacher c) − s_c(Stage 0)), same panel. Defined only if the denominator is ≥ 0.30; otherwise NOT_EVALUATED.
 
 ### 10.2 Costs
 
@@ -271,7 +272,7 @@ Thresholds are *(lead's choice)* unless taken from the review, and are fixed at 
 
 | Gate | Rule |
 |---|---|
-| ACQ1 (S1) | G_first ≥ 0.50; **G − max(G_value-perm, G_code-perm) ≥ 0.30** *(lead's choice)*; G_marker-only ≤ 0.25. Control G values use the teacher and Stage 0 scores of the same 300-item subsample |
+| ACQ1 (ST1) | G_first ≥ 0.50; **G − max(G_value-perm, G_code-perm) ≥ 0.30** *(lead's choice)*; G_marker-only ≤ 0.25. Control G values use the teacher and Stage 0 scores of the same 300-item subsample |
 | ACQ2 (stage-2 arm) | G_second ≥ 0.50 and ≥ 0.80 × the single-teacher student's G on that capability in the same replicate; the same lexical margin and marker-only limit (§7 says what is permuted) |
 | RET | s_first after Stage 2 ≥ s_first after Stage 1 − 0.03, and G_first after ≥ 0.90 × G_first before |
 | Negative zones | acquisition G < 0.25; retention G_first after < 0.70 × before |
@@ -300,7 +301,7 @@ M-i-separate and L-sep are printed **BY CONSTRUCTION** and receive no class.
 | 1 | **ENGINEERING-FAILURE** | a defect found by gates G1, G4–G8; a hash mismatch; a difference between frozen and running code, configuration or data; the oracle-routed ensemble's score differing from the teacher's own |
 | 2 | **INCOMPLETE** | a registered cell has no record, or a cap stopped a stage; no class is derived for a mechanism with a missing cell; no denominator is reduced |
 | 3 | **TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED** or **DATA-INSUFFICIENT** | §4.3 or §5.2; the study stops before the freeze |
-| 4 | **TRANSFER-NEGATIVE: NO-ACQUISITION** | S1's G is in the negative zone in every replicate, for both capabilities, within U updates |
+| 4 | **TRANSFER-NEGATIVE: NO-ACQUISITION** | ST1's G is in the negative zone in every replicate, for both capabilities, within U updates |
 | 5 | **TRANSFER-INCONCLUSIVE: CONTROL-FAILED** | a value permutation or a word-code permutation gives G ≥ 0.50 in any cell |
 | 6 | **TRANSFER-POSITIVE WITHHELD — GENERAL QUALITY NOT PRESERVED UNDER A LEARNED ROUTE** | M-append-frozen is ACQUIRES-AND-RETAINS in both orders, with teacher-only training material, and its GEN gate fails in any replicate of either order |
 | 7 | **TRANSFER-POSITIVE (append-frozen + consolidation)** | M-append-frozen and M-ii are both ACQUIRES-AND-RETAINS in both orders, with teacher-only training material (§5.3), and GEN holds for both in every replicate of both orders |
@@ -314,7 +315,7 @@ M-i-separate and L-sep are printed **BY CONSTRUCTION** and receive no class.
 - **Every label is printed with "(n replicates, U = …)"**, the design the rehearsal rule selected.
 - Every TRANSFER-INCONCLUSIVE label prints the reason of each NOT_EVALUATED class: undefined gap, acquisition below 0.50, lexical margin below 0.30, or marker-only above 0.25.
 - Row 6 is neither a positive nor a negative: acquisition and retention passed under controlled addresses, and the one gate that depends on a learned decision failed. It is reported with the false-trigger rate of the router on ordinary text and the loss ratio per replicate. When M-ii alone fails GEN, row 8 applies and the report says so.
-- TRANSFER-POSITIVE means, numerically: in both orders and every replicate, on held-out sentences, S1 closes at least half the gap, with a lexical margin of at least 0.30 over the permutation controls and marker-only at most 0.25; the appended rows close at least half the gap on the second capability and reach 0.80 of a single-teacher student; the first capability stays within 0.03 chrF and 0.90 of its gap closure, in one store read with one top-8; all student training material came from the teachers on sentences without gold; and, with a learned keyword router deciding whether the store is read, the loss on a general-language panel with marker-like windows rises by at most 0.02 nats per token in every replicate — that is, the keyword router stayed silent.
+- TRANSFER-POSITIVE means, numerically: in both orders and every replicate, on held-out sentences, ST1 closes at least half the gap, with a lexical margin of at least 0.30 over the permutation controls and marker-only at most 0.25; the appended rows close at least half the gap on the second capability and reach 0.80 of a single-teacher student; the first capability stays within 0.03 chrF and 0.90 of its gap closure, in one store read with one top-8; all student training material came from the teachers on sentences without gold; and, with a learned keyword router deciding whether the store is read, the loss on a general-language panel with marker-like windows rises by at most 0.02 nats per token in every replicate — that is, the keyword router stayed silent.
 - Every label is printed with the fixed line: **"oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory."**
 - Order now matters in substance: it decides which rows are frozen and which are appended.
 
@@ -323,10 +324,10 @@ M-i-separate and L-sep are printed **BY CONSTRUCTION** and receive no class.
 | Annotation | Rule |
 |---|---|
 | NO ADVANTAGE OVER SEPARATE ADAPTERS | L-sep's scores on both capabilities are within 0.03 of M-append-frozen's or above, in at least one order |
-| EQUIVALENT TO A WORD TABLE | E-table's G is within 0.03 of S1's or above, on both capabilities, in every replicate |
+| EQUIVALENT TO A WORD TABLE | E-table's G is within 0.03 of ST1's or above, on both capabilities, in every replicate |
 | RETRIEVAL SUFFICES | R-icl's or R-nn's score is within 0.03 of M-append-frozen's or above on both capabilities |
 | LEXICON-EQUIVALENT | R-gloss's score is within 0.03 of M-append-frozen's or above on both capabilities |
-| TEACHER-EQUIVALENT-TO-GOLD | MA-gold's G is within 0.03 of S1's or above |
+| TEACHER-EQUIVALENT-TO-GOLD | MA-gold's G is within 0.03 of ST1's or above |
 | BELOW JOINT BOUND | M-append-frozen's G on either capability < 0.90 × M-joint's |
 | TASK-CODED SPARSE RETENTION / NONE | M-seq's loss of G_first is smaller than L-seq's by ≥ 0.10 in every replicate of both orders / otherwise. Descriptive: a sparse store with oracle task codes against a dense adapter; not a test of sparsity |
 | BELOW ADAPTER JOINT | M-joint's G on either capability < 0.90 × L-joint's (the two ordinary multi-teacher students, memory form against adapter form) |
@@ -376,7 +377,7 @@ With the calibrated store setting, on D_cal, Stage 1 for **both** capabilities (
 
 | Group | Cells | Units of U |
 |---|---|---|
-| S1 (two orders) | 2 | 2 |
+| ST1 (two orders) | 2 | 2 |
 | M-append-frozen | 2 | 2 |
 | M-ii (64-row batches, about twice the cost per update) | 2 | 4 |
 | M-seq | 2 | 2 |
@@ -492,7 +493,7 @@ Its outputs are data files with frozen hashes. Scoring, filter fitting, qualific
 
 ## 16. Order of work, stop rules, reserved decisions
 
-**Order.** (1) The human lead's answers on the five reserved items below. (2) Lead's approval, recorded in §18. (3) Implementation review as the work proceeds. (4) Implementation with tests on synthetic stand-ins, before any download. (5) Downloads; data-generation step. (6) Partitions; filter fitting; G3; calibration; pilot. (7) Rehearsal; implementation audit; rehearsal rule. (8) Freeze of code, configuration, requirements file, seeds, thresholds, filter, calibration record, rehearsal-rule outcome, data manifest. (9) The registered run, once; the router of each S1 and stage-2 snapshot is trained and its GEN measurement taken inside the run. (10) Independent recomputation of every score from snapshots; outcome report.
+**Order.** (1) The human lead's answers on the five reserved items below. (2) Lead's approval, recorded in §18. (3) Implementation review as the work proceeds. (4) Implementation with tests on synthetic stand-ins, before any download. (5) Downloads; data-generation step. (6) Partitions; filter fitting; G3; calibration; pilot. (7) Rehearsal; implementation audit; rehearsal rule. (8) Freeze of code, configuration, requirements file, seeds, thresholds, filter, calibration record, rehearsal-rule outcome, data manifest. (9) The registered run, once; the router of each ST1 and stage-2 snapshot is trained and its GEN measurement taken inside the run. (10) Independent recomputation of every score from snapshots; outcome report.
 
 **Stop rules.** A failed gate or any difference from the freeze stops the run. A stage that would exceed a cap is not started. Nothing is re-run with changed settings. A second attempt after an engineering stop needs the human lead's decision. Failed runs and failed checker attempts are kept.
 
@@ -582,7 +583,7 @@ Lead's approval: PENDING the human lead's answers.
 | C1 | G5 replaced with the auditor's text (route "none"; empty base; gate isolation of appended values); append cost measured, not gated; key initialization stated. | §3, §12.3 |
 | C2 | Control limits replaced by the lexical margin G − max(G_value-perm, G_code-perm) ≥ 0.30; marker-only ≤ 0.25 kept; reason line on every TRANSFER-INCONCLUSIVE label. | §11.1, §11.3 |
 | C3 | M-seq-shared removed; H22-E descriptive; annotation TASK-CODED SPARSE RETENTION / NONE (M-seq against L-seq); freed units to L-joint. | §1, §6.3, §11.4, §13.1 |
-| C4 | GEN at + 0.02 nats; 100 of 200 windows chosen for marker-like strings; false-trigger counts per stratum; wording "the keyword router stayed silent"; measured for every S1 and stage-2 snapshot. | §6.4, §11.1, §11.3, §17 |
+| C4 | GEN at + 0.02 nats; 100 of 200 windows chosen for marker-like strings; false-trigger counts per stratum; wording "the keyword router stayed silent"; measured for every ST1 and stage-2 snapshot. | §6.4, §11.1, §11.3, §17 |
 | C5 | Filter selected on the 95% Wilson lower bound on Q_fit; point precision ≥ 0.90 on Q_check. | §5.3 |
 | C6 | Group size distribution reported; groups above 50 pairs to training; 20% of remaining pairs to evaluation. | §5.2 |
 | C7 | Calibration snapshots at 1,000 updates; selection and pilot re-applied at the chosen U; "(n replicates, U = …)" on every class and label; NO-ACQUISITION "within U updates"; meaning of "every replicate". | §9, §11.3, §12.1 |
@@ -600,7 +601,7 @@ Lead's approval: PENDING the human lead's answers.
 **Not applied verbatim (listed, not resolved silently):**
 
 1. **C8, BOS.** The auditor's text leaves "[prepended / not prepended]" open. This revision writes "not prepended" as the lead's choice. If the reference tokenizer's default for this model prepends it, the convention must be reconsidered before the freeze, because the student was trained with whichever convention its authors used.
-2. **C4, which snapshots.** "Every S1 and stage-2 snapshot" is applied to the memory snapshots that are read under a router (S1, M-append-frozen, M-ii, M-seq, M-joint) and to L-seq for comparison. E-table and MA-gold snapshots are scored for GEN as well only if the lead wants them; as written they are not, to keep the scoring within the projection.
+2. **C4, which snapshots.** "Every ST1 and stage-2 snapshot" is applied to the memory snapshots that are read under a router (ST1, M-append-frozen, M-ii, M-seq, M-joint) and to L-seq for comparison. E-table and MA-gold snapshots are scored for GEN as well only if the lead wants them; as written they are not, to keep the scoring within the projection.
 3. **C9, added annotation.** BELOW ADAPTER JOINT (M-joint against L-joint) is this draft's addition, so that the restored cell is read against something. It changes no label.
 4. **m3.** The auditor asked the ADR to "say whether"; the choice made (second-stage rows and second-task codes only) is this draft's.
 5. **m4.** Checking symmetry needs the `deu/` and `fra/` link files (6.2 MB more), which the download table did not list before; they are now named under row 4.
