@@ -721,3 +721,8 @@ ADR-0021 revision 2 was checked by the confirmation review (§9).
 The points were raised at the end of revision 2.
 
 Astra review: NOT_PERFORMED. A Claude review is not an Astra review, and this document is not a human approval. The human lead's decision recorded in §18 fixes the fourth arm; it does not approve this specification for execution and does not accept the P9-II outcome.
+
+## Addendum to §18 — the human lead's acceptance of P9-II (2026-11-15 UTC)
+
+The human lead accepted the P9-II outcome as registered (verbatim in ADR-0019 §16: "yes I do, yes we can raise to 16 and I approve the package", in answer to "Do you accept the P9-II outcome as registered? S0 can be implemented and rehearsed without it but cannot be frozen."). The condition of §11 and §18 that S0's freeze waits for that acceptance is met. Step 8 still needs a clean implementation audit, a rehearsal that meets the twofold rule, and the lead's separate recorded decision. Nothing else in this ADR changes.
+
