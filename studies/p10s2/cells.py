@@ -37,7 +37,7 @@ from .memory import (
     row_shares,
 )
 from .registry import Cell, replicate_cells
-from .routing import Router, false_triggers, route_accuracy, train_router
+from .routing import Router, false_triggers, none_pieces, route_accuracy, train_router
 from .text import chrf_item, mean, normalize
 from .train import NonFiniteLoss, TrainRecord, reads_of, train_arm
 from .world import World, load_arm, save_arm
@@ -176,6 +176,11 @@ def build_routers(world: World, r: int) -> dict[tuple[str, ...], tuple[Router, d
     return out
 
 
+def gap_panels(ctx: Any) -> list[str]:
+    """The panels that enter a gap, an ablation or a learned-route score: E_A and E_B (any other panel, E_open, is descriptive only and scored under the oracle route alone)."""
+    return [n for n in ctx.panels if not n.startswith("E_open")]
+
+
 def _reads_per_item(panel: PanelData) -> float:
     return sum(len(reads_of(e, [e.task], 10**9)) for e in panel.examples) / max(1, len(panel.examples))
 
@@ -208,9 +213,9 @@ def score_snapshot(
     first_name = next(iter(ctx.panels))
     out["work"] = evaluate.active_work(arm, _reads_per_item(ctx.panels[first_name]), _generated_per_item(panels[first_name].to_json()))
     if ablation_stages is not None and isinstance(arm, MemoryArm):
-        out["ablations"] = memory_ablations(ctx, arm, list(ctx.panels), ablation_stages, ablation_tasks)
+        out["ablations"] = memory_ablations(ctx, arm, gap_panels(ctx), ablation_stages, ablation_tasks)
     if learned_route and router is not None:
-        out["learned_route"] = {name: score_panel(ctx, arm, p, route="learned", router=router).to_json() for name, p in ctx.panels.items()}
+        out["learned_route"] = {name: score_panel(ctx, arm, ctx.panels[name], route="learned", router=router).to_json() for name in gap_panels(ctx)}
     if gen and router is not None:
         out["gen"] = general_quality(ctx, arm, router, always_on_task=always_on)
         out["gen_by_construction"] = general_by_construction(ctx, arm)
@@ -234,6 +239,9 @@ def stage0_scores(world: World, with_combined: bool = True) -> dict[str, Any]:
     res: dict[str, Any] = {"student": {}, "teacher": {}}
     for name, p in ctx.panels.items():
         sc = score_panel(ctx, arm, p, route="none")
+        if name not in ctx.subsample:  # E_open: descriptive only, no subsample and no gap
+            res["student"][name] = {"panel": sc.to_json()}
+            continue
         sub = score_panel(ctx, arm, p, route="none", indices=ctx.subsample[name])
         res["student"][name] = {"panel": sc.to_json(), "subsample": sub.to_json()}
         outs = world.teacher_outputs.get(p.task, {}).get(name)
@@ -350,6 +358,20 @@ def assembled_scores(world: World, r: int, snap_dir: Path) -> dict[str, Any]:
     return out
 
 
+def _leading_bos(ex: Any) -> int:
+    """The length of the stored BOS segment of an example (0 if the tokenizer does not prepend one)."""
+    return len(ex.segments[0].ids) if ex.segments and ex.segments[0].text == "<bos>" else 0
+
+
+def icl_ids(demos: Sequence[Any], query: Any) -> list[int]:
+    """The R-icl prompt: the demonstrations (nearest last) then the query prompt, with a BOS token only once at the start if the tokenizer prepends one (never before every demonstration)."""
+    ids: list[int] = []
+    for k, d in enumerate(demos):
+        ids += list(d.ids)[0 if k == 0 else _leading_bos(d) :]
+    ids += list(query.prompt_ids)[_leading_bos(query) if demos else 0 :]
+    return ids
+
+
 def retrieval_scores(world: World, r: int) -> dict[str, Any]:
     """The four retrieval baselines on E_A and E_B from the replicate's accepted pairs; R-icl is scored with the frozen student (its prompt carries the 4 nearest pairs)."""
     ctx = world.ctx
@@ -362,28 +384,27 @@ def retrieval_scores(world: World, r: int) -> dict[str, Any]:
         prompt_tokens = []
         for it, ex in zip(panel_items, ctx.panels["E_" + c].examples, strict=True):
             demos = retrieval.r_icl_prompt_items(train, it.en, 4, idx)
-            ids: list[int] = []
-            for dm in demos:
-                ids += list(world.bank.train(c, dm).ids)
-            ids += list(ex.prompt_ids)[len(ex.segments[0].ids) if ex.segments and ex.segments[0].text == "<bos>" else 0 :]
+            ids = icl_ids([world.bank.train(c, dm) for dm in demos], ex)
             prompt_tokens.append(len(ids))
             seq = ctx.student.greedy(torch.tensor([ids]), add=None, adapter=None, max_new=ctx.max_new, stop_bytes=ctx.decoder.table)
             icl_scores.append(chrf_item(ctx.decoder.answer_text(seq), ctx.panels["E_" + c].refs[len(icl_scores)]))
-        out[c] = {"R-exact": retrieval.r_exact(train, panel_items, c), "R-nn": retrieval.r_nn(train, panel_items, c, idx), "R-gloss": retrieval.r_gloss(train, panel_items, c), "R-icl": {"mean": mean(icl_scores), "prompt_tokens_mean": mean([float(x) for x in prompt_tokens])}}
+        out[c] = {"R-exact": retrieval.r_exact(train, panel_items, c), "R-nn": retrieval.r_nn(train, panel_items, c, idx), "R-gloss": retrieval.r_gloss(train, panel_items, c), "R-icl": {"mean": mean(icl_scores), "items": icl_scores, "prompt_tokens_mean": mean([float(x) for x in prompt_tokens])}}
     return out
 
 
 def router_record(world: World, r: int, routers: Mapping[tuple[str, ...], tuple[Router, dict[str, Any]]]) -> dict[str, Any]:
-    """For each router: its training record, its route accuracy on E_A, E_B and general prefixes, and the false-trigger diagnostic on the marker-like windows (decision at the last token of the first
-    marker-like string within tokens 1-64; it enters no rule)."""
+    """For each router: its training record, its route accuracy on E_A, E_B and on general prefixes, and the false-trigger diagnostic on the marker-like windows (decision at the last token of the first
+    marker-like string within tokens 1-64; it enters no rule). The general prefixes are 64-token pieces of the WikiText-2 train file that the router did not see in training (never the GEN windows: the
+    GEN panel is used for nothing else, section 6.4); this is a reading, reported to the lead."""
     ctx = world.ctx
-    prefixes = [w.ids[: ctx.decision_index + 1] for w in ctx.windows]
+    pieces = none_pieces(world.wiki_train_ids, world.router_spec.prefix_tokens)
     marker = [w for w in ctx.windows if w.stratum == "marker" and w.marker_end >= 0]
     out: dict[str, Any] = {}
     for tasks, (router, rec) in routers.items():
+        prefixes = [pieces[i] for i in rec.get("held_out_piece_indices", [])]
         acc = route_accuracy(router, ctx.student, ctx.router_layer, {c: ctx.panels["E_" + c].examples for c in TWO}, prefixes)
         diag = false_triggers(router, ctx.student, ctx.router_layer, [w.ids for w in marker], [w.marker_end for w in marker])
-        out["".join(tasks)] = {"training": rec, "accuracy": acc, "diagnostic_first_marker": {k: v for k, v in diag.items() if k != "predictions"}}
+        out["".join(tasks)] = {"training": rec, "accuracy": acc, "general_prefixes": {"source": "WikiText-2 train pieces not used in the router's training", "n": len(prefixes)}, "diagnostic_first_marker": {k: v for k, v in diag.items() if k != "predictions"}}
     return out
 
 

@@ -91,9 +91,19 @@ class PanelScore:
     exact: list[bool]
     sequences: list[list[int]]
     texts: list[str]
+    ref_counts: list[int] = field(default_factory=list)  # the number of references of each scored item
 
     def to_json(self) -> dict[str, Any]:
-        out: dict[str, Any] = core.jsonable({"mean": self.mean, "items": self.items, "exact": self.exact, "sequences": self.sequences, "exact_rate": mean([float(x) for x in self.exact])})
+        """The score record. ``reference_counts`` is the distribution of the number of references per item, and ``single_reference`` the score on the items with exactly one reference alone (section 5.2:
+        "every score is also given for single-reference items alone")."""
+        single = [x for x, k in zip(self.items, self.ref_counts, strict=False) if k == 1]
+        dist: dict[str, int] = {}
+        for k in self.ref_counts:
+            dist[str(k)] = dist.get(str(k), 0) + 1
+        out: dict[str, Any] = core.jsonable({
+            "mean": self.mean, "items": self.items, "exact": self.exact, "sequences": self.sequences, "exact_rate": mean([float(x) for x in self.exact]),
+            "reference_counts": dist, "single_reference": {"n": len(single), "mean": mean(single) if single else None},
+        })  # fmt: skip
         return out
 
 
@@ -103,6 +113,7 @@ def score_panel(ctx: EvalContext, arm: Arm, panel: PanelData, *, route: str = "o
     exact: list[bool] = []
     seqs: list[list[int]] = []
     texts: list[str] = []
+    counts: list[int] = []
     for i in idx:
         ex = panel.examples[i]
         tasks = route_for(ctx, ex, router, route)
@@ -113,7 +124,8 @@ def score_panel(ctx: EvalContext, arm: Arm, panel: PanelData, *, route: str = "o
         exact.append(normalize(text) in {normalize(r) for r in refs})
         seqs.append(ids)
         texts.append(text)
-    return PanelScore(mean(items), items, exact, seqs, texts)
+        counts.append(len(refs))
+    return PanelScore(mean(items), items, exact, seqs, texts, counts)
 
 
 # --- ablations (section 7) ----------------------------------------------------------------------------------------------------------------------------
@@ -148,19 +160,28 @@ def general_quality(ctx: EvalContext, arm: Arm, router: Router | None, *, always
     """Condition (a), the registered GEN measurement: for each window the learned router of the snapshot reads the student's hidden state at token 64 of a memory-free pass; if it returns a task
     the store is read with that task's codes at every in-vocabulary word of the whole window, if "none" nothing is read. The loss is the mean next-token negative log-likelihood over tokens 65 onwards
     of all windows, against the unmodified student's on the same positions; the router's false-trigger count per stratum is printed beside it. Condition (b), the always-on diagnostic, reads with
-    ``always_on_task``'s codes at every in-vocabulary word (an adapter is always applied); it enters no rule. Also: mean KL to the Stage 0 student and the share of unchanged top-1 tokens."""
+    ``always_on_task``'s codes at every in-vocabulary word (an adapter is always applied); it enters no rule. Also: mean KL to the Stage 0 student and the share of unchanged top-1 tokens.
+
+    The lead's ruling on C-M6: GEN is measured twice for the marker stratum, with the decision at token 64 as registered (``loss_increase``) and with the decision at the last token of the first
+    marker-like string within tokens 1-64 (``loss_increase_first_marker``; the ordinary stratum keeps token 64 in both). The existing threshold (at most 0.02 nats) must hold under BOTH for GEN to pass
+    (``passes``); no new threshold. The false-trigger rate stays a printed diagnostic."""
     null = NullArm()
     res: dict[str, Any] = {"windows": len(ctx.windows)}
     nll_base: list[float] = []
     nll_a: list[float] = []
+    nll_m: list[float] = []
     nll_b: list[float] = []
     kl_a: list[float] = []
     same_a: list[float] = []
     triggers = {"marker": 0, "ordinary": 0}
+    triggers_m = {"marker": 0, "ordinary": 0}
     counts = {"marker": 0, "ordinary": 0}
     preds: list[str] = []
+    preds_m: list[str] = []
     if router is not None and ctx.windows:
         preds = router.predict(hidden_at_ends(ctx.student, ctx.router_layer, [w.ids for w in ctx.windows], [ctx.decision_index] * len(ctx.windows)))
+        second = [w.marker_end if w.stratum == "marker" and w.marker_end >= 0 else ctx.decision_index for w in ctx.windows]
+        preds_m = router.predict(hidden_at_ends(ctx.student, ctx.router_layer, [w.ids for w in ctx.windows], second))
     for k, w in enumerate(ctx.windows):
         tgt = torch.tensor(list(w.ids[ctx.first_nll_index :]))
         base = _window_logits(ctx, null, w, [])[ctx.first_nll_index - 1 : -1]
@@ -168,22 +189,36 @@ def general_quality(ctx: EvalContext, arm: Arm, router: Router | None, *, always
         nll_base.append(float(-lp_base.gather(1, tgt[:, None]).mean()))
         counts[w.stratum] += 1
         pred = preds[k] if router is not None else "none"
+        pred_m = preds_m[k] if router is not None else "none"
         tasks = [] if pred == "none" else [pred]
+        tasks_m = [] if pred_m == "none" else [pred_m]
         if tasks:
             triggers[w.stratum] += 1
+        if tasks_m:
+            triggers_m[w.stratum] += 1
         a = _window_logits(ctx, arm, w, tasks)[ctx.first_nll_index - 1 : -1]
         lp_a = F.log_softmax(a, dim=-1)
         nll_a.append(float(-lp_a.gather(1, tgt[:, None]).mean()))
+        if tasks_m == tasks:
+            nll_m.append(nll_a[-1])
+        else:
+            m = _window_logits(ctx, arm, w, tasks_m)[ctx.first_nll_index - 1 : -1]
+            nll_m.append(float(-F.log_softmax(m, dim=-1).gather(1, tgt[:, None]).mean()))
         kl_a.append(float((lp_base.exp() * (lp_base - lp_a)).sum(-1).mean()))
         same_a.append(float((a.argmax(-1) == base.argmax(-1)).float().mean()))
         if always_on_task is not None:
             b = _window_logits(ctx, arm, w, [always_on_task])[ctx.first_nll_index - 1 : -1]
             nll_b.append(float(-F.log_softmax(b, dim=-1).gather(1, tgt[:, None]).mean()))
-    res.update({"nll_base": mean(nll_base), "nll_router": mean(nll_a), "loss_increase": mean(nll_a) - mean(nll_base), "false_trigger_count": triggers, "stratum_sizes": counts, "mean_kl_to_stage0": mean(kl_a), "top1_unchanged": mean(same_a)})
+    margin = core.CFG["gates"]["gen_loss_margin"]
+    inc_a, inc_m = mean(nll_a) - mean(nll_base), mean(nll_m) - mean(nll_base)
+    res.update({"nll_base": mean(nll_base), "nll_router": mean(nll_a), "loss_increase": inc_a, "nll_router_first_marker": mean(nll_m), "loss_increase_first_marker": inc_m, "false_trigger_count": triggers,
+                "false_trigger_count_first_marker": triggers_m, "stratum_sizes": counts, "mean_kl_to_stage0": mean(kl_a), "top1_unchanged": mean(same_a)})  # fmt: skip
     if always_on_task is not None:
         res["always_on_loss_increase"] = mean(nll_b) - mean(nll_base)
-    res["gate_margin"] = core.CFG["gates"]["gen_loss_margin"]
-    res["passes"] = bool(res["loss_increase"] <= res["gate_margin"])
+    res["gate_margin"] = margin
+    res["passes_registered_decision"] = bool(inc_a <= margin)
+    res["passes_first_marker_decision"] = bool(inc_m <= margin)
+    res["passes"] = bool(inc_a <= margin and inc_m <= margin)  # the existing threshold under both decisions
     return core.jsonable(res)  # type: ignore[no-any-return]
 
 

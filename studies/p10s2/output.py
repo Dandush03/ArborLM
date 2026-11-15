@@ -1,12 +1,17 @@
 # ruff: noqa: E501
 """The oracle-assisted line and everything that prints (ADR-0022 section 11.3).
 
-The human lead's rule: "S1 and S2 must not claim autonomous learned-memory success from oracle-assisted results." Every class, mechanism, router, composition and cost line, every table and figure
+The human lead's rule: "S1 and S2 must not claim autonomous learned-memory success from oracle-assisted results." Every class, mechanism, router, composition, GEN and cost line, every table and figure
 caption, every machine-readable record and every log summary is printed only directly under the fixed oracle-assisted line. This module is the only place that writes to the terminal; it refuses any text
-in which a guarded line is not in a block headed by the line, and any record in which a class, label or annotation lacks it. The report test on synthetic records checks every such line.
+in which a guarded line is not in a block headed by the line, and any record in which a class, label, GEN, router or cost field lacks it. The report test on synthetic records checks every such line.
+
+The line is attached STRUCTURALLY, not by a list of words (the audit's C-m4): ``emit`` always heads what it prints with the line; ``emit_plain`` sends anything that reads as a class, mechanism, router,
+GEN, composition, label, annotation or cost line through ``emit``; ``write_record`` requires the line at the root of every record, and ``needs_line`` (one predicate, used by the stamping and by the
+check) says which mappings must carry it as a field of their own. Matching is case-insensitive and broader than the listed words, because an over-match only adds the line.
 """
 
 import json
+import re
 import sys
 from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
@@ -17,19 +22,30 @@ from arborlm.io import atomic_write
 from . import core
 from .core import COMBINED_LINE, COMPOSITION_WORDS, GUARDED_WORDS, ORACLE_LINE
 
-GUARDED_KEYS = ("class", "classes", "label", "label_with_design", "annotations", "annotation", "cost", "cost_lines", "router", "composition", "mechanism", "mechanisms", "outcome")
+KEY_STEMS = frozenset({"class", "classes", "label", "annotation", "annotations", "cost", "costs", "router", "routers", "composition", "compositions", "mechanism", "mechanisms", "outcome", "gen", "verdict", "verdicts", "control", "controls", "summary"})
+GUARDED_KEYS = tuple(sorted(KEY_STEMS))  # kept for callers that listed the keys
+MARKERS = re.compile(
+    r"\b(class(es)?|label|mechanisms?|routers?|route accuracy|annotations?|compos\w*|costs?|gen|gate|verdicts?|loss increase|false[- ]trigger\w*|value rows|stored parameters|replicates, U|oracle-routed|study)\b",
+    re.IGNORECASE,
+)
 
 
 class OracleLineMissing(ValueError):
     """A guarded line, table or record without the oracle-assisted line."""
 
 
+COMPOSITION_RE = re.compile(r"\bcomposes\b|\bdoes not compose\b|\bcomposition (inconclusive|\(replaced\))", re.IGNORECASE)
+
+
 def is_composition(line: str) -> bool:
-    return any(w in line for w in COMPOSITION_WORDS)
+    """A composition verdict in any case (the three words, or their negation, or the replaced composition). A line that only names the composition rule carries no composition word (section 8 of the addendum)."""
+    low = line.lower()
+    return any(w.lower() in low for w in COMPOSITION_WORDS) or bool(COMPOSITION_RE.search(line))
 
 
 def is_guarded(line: str) -> bool:
-    return any(w in line for w in GUARDED_WORDS)
+    low = line.lower()
+    return any(w.lower() in low for w in GUARDED_WORDS) or bool(MARKERS.search(line))
 
 
 def block(lines: Iterable[str]) -> str:
@@ -58,12 +74,30 @@ def guarded(record: Mapping[str, Any]) -> dict[str, Any]:
     return {"oracle_line": ORACLE_LINE, **record}
 
 
+def _key_guarded(key: Any) -> bool:
+    return any(t in KEY_STEMS for t in re.split(r"[^a-z0-9]+", str(key).lower()))
+
+
+def _text_guarded(v: Any) -> bool:
+    if isinstance(v, str):
+        return is_guarded(v)
+    if isinstance(v, list | tuple):
+        return any(isinstance(x, str) and is_guarded(x) for x in v)
+    return False
+
+
+def needs_line(obj: Mapping[str, Any]) -> bool:
+    """A mapping must carry the oracle-assisted line as a field of its own if one of its keys names a class, label, annotation, cost, router, GEN, composition, mechanism, outcome, verdict or control (any
+    case, any compound such as ``router_table``), or one of its values is a string, or a list of strings, that reads as such a line."""
+    return any(_key_guarded(k) or _text_guarded(v) for k, v in obj.items() if k != "oracle_line")
+
+
 def check_record(obj: Any, path: str = "$") -> None:
-    """Every mapping that carries a class, label, annotation, cost, router, composition or mechanism field must carry the oracle-assisted line as a field of the same mapping."""
+    """Every mapping for which ``needs_line`` holds must carry the oracle-assisted line as a field of the same mapping; a composition field also needs the second fixed line."""
     if isinstance(obj, Mapping):
-        if any(k in obj for k in GUARDED_KEYS) and obj.get("oracle_line") != ORACLE_LINE:
+        if needs_line(obj) and obj.get("oracle_line") != ORACLE_LINE:
             raise OracleLineMissing(f"record at {path} carries a guarded field without the oracle-assisted line")
-        if "composition" in obj and obj.get("combined_line") != COMBINED_LINE:
+        if any("compos" in str(k).lower() for k in obj) and obj.get("combined_line") != COMBINED_LINE:
             raise OracleLineMissing(f"record at {path} carries a composition field without the second fixed line (combined tasks)")
         for k, v in obj.items():
             check_record(v, f"{path}.{k}")
@@ -73,7 +107,9 @@ def check_record(obj: Any, path: str = "$") -> None:
 
 
 def write_record(path: Path, record: Mapping[str, Any]) -> None:
-    """Write a machine-readable record, refusing one that lacks the line where it must have it."""
+    """Write a machine-readable record, refusing one that lacks the line at its root or wherever ``needs_line`` says."""
+    if record.get("oracle_line") != ORACLE_LINE:
+        raise OracleLineMissing("a machine-readable record is written only with the oracle-assisted line as a field at its root")
     check_record(record)
     atomic_write(path, (json.dumps(core.jsonable(record), sort_keys=True, indent=1) + "\n").encode())
 
@@ -84,17 +120,19 @@ def write_text(path: Path, text: str) -> None:
 
 
 def emit(lines: Sequence[str], stream: Any = None) -> None:
-    """The one place that prints. A summary for the terminal or a log: a guarded line is printed only inside a block headed by the oracle-assisted line (this function adds the block)."""
-    text = "\n".join(lines)
-    out = text if not any(is_guarded(ln) for ln in lines) else block(lines)
+    """The one place that prints. Whatever is printed here is printed inside a block headed by the oracle-assisted line (and the second fixed line for a composition line): the line is always attached,
+    never decided by the words of the text."""
+    out = block(lines)
     check_text(out)
     print(out, file=stream if stream is not None else sys.stdout)
 
 
 def emit_plain(line: str, stream: Any = None) -> None:
-    """A line that carries no class, mechanism, router, composition or cost reading (a path, a refusal, a count). Refused if it does."""
+    """A line that carries no class, mechanism, router, GEN, composition, label, annotation or cost reading (a path, a refusal, a count). A line that reads as one is not refused (a refusal would crash the
+    command that printed it) and not printed bare: it goes through ``emit`` and is printed under the line."""
     if is_guarded(line):
-        raise OracleLineMissing(f"emit_plain refuses a guarded line: {line[:120]!r}")
+        emit([line], stream)
+        return
     print(line, file=stream if stream is not None else sys.stdout)
 
 
