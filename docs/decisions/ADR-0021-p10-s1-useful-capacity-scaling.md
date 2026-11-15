@@ -773,3 +773,28 @@ Recorded by the lead, with the limits the lead puts on its own use of this:
 - The human lead's words do not extend to downloads, cloud or paid services, models, data, thresholds or designs.
 
 S1's cap is unchanged by this record (16 hours). Programme-level record: `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`.
+
+## 22. The lead's rulings on the implementation audit, fixed before calibration (2026-11-15 UTC)
+
+The independent implementation audit (Opus 5.5, `docs/reviews/p10s1-implementation-audit-2026-11-15/AUDIT.md`) found the implementation READY AFTER LISTED FIXES: no blocker, 8 majors, 16 minors, and several passages of this ADR that an implementer cannot apply without a choice. The rulings below are the lead's (Claude Fable 5.2), made **before any S1 calibration, rehearsal or registered record exists**; no S1 observation of any kind bears on them. Where the auditor named the most conservative option, it is taken unless a reason is given. They are part of the specification from here on. Astra review: NOT_PERFORMED.
+
+| Finding | Ruling |
+|---|---|
+| **M5** the dense matched-compute reading cannot be established at 65,536 slots (and nowhere for T-OQ and H8), so BEATS DENSE is unreachable for a supported arm and DENSE MATCHES would be printed without a comparison | The rule of §8.5 is **not changed**. Where the dense matched-compute pair is MC-SHORT or MC-AMBIGUOUS, the label printed is **DENSE NOT ESTABLISHED AT MATCHED COMPUTE (\<status\>)**, never DENSE MATCHES, and the DENSE MATCHES sentence is printed only where the reading is established. The matched-updates comparison with D-OQ (D-OQ then has at least the arm's compute) is printed beside it, descriptively, with its sign and size. An arm that is CAPACITY_SUPPORTED with this label can give CAPACITY-POSITIVE only as **CAPACITY-POSITIVE [… DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE]**, and the reading "storage half supported, as a necessary condition" (§8.7) is **not available** to it. Stated plainly: as designed, S1 cannot show that the store beats or matches a dense map at matched compute at 65,536 slots. Closing that gap needs longer runs or another matched-compute definition; that is a design change for P10-I, not for this study |
+| **M6** (reading d) the analytic multiply-add count | The count is of **one whole training update, including the frozen backbone's forward and backward pass**, which every arm pays (the auditor's option 2). Reason: §5.4 pairs it with a CPU-time measure of the whole step and takes the larger multiplier of the two; a count that omits the largest shared term is not a measure of the step. The formula is written out in the config and checked against a FLOP count at tiny size by a test. Alternative not taken: the implemented memory-plus-optimizer formula, which is harsher on the efficiency line and puts F-OQ's matched-compute readout on the run-length edge. This ruling makes matched-compute readouts easier to establish than the implemented formula did; it is made before any record exists and is stated so that it can be weighed |
+| **M7** (reading a) the dense-rate tie, "goes to the faster of the two" | "Faster" is the faster learner: among rates within 0.02 at the selection readout, compare a_use at U_P/2, then U_P/4, down the doubling grid to U_P/16; at the first of these where they differ by at least 0.02 the higher wins; if they differ nowhere, the smaller learning rate is taken. The dense-rate calibration cells are evaluated on the doubling snapshots (evaluation only, no added training) |
+| (b) lane L | As implemented (off; OMITTED labels). If S0 qualifies an interface before S1's freeze, the question returns to the lead; nothing is printed OMITTED by default in that case |
+| (c) page-miss setting | Ratified: 8 rows per page, rho = 1/4, ascending tie rule. Descriptive; enters no rule |
+| (g) which snapshots DEP reads | Every snapshot up to the run length (the stricter reading) |
+| (h) "in at least 4 replicates" and the two panels | For a label that favours the store (TREE_AHEAD, TREE_COMPETITIVE and every positive condition) a replicate counts only if both panels satisfy it. For a label that blocks (DENSE AHEAD, DENSE FASTER) a replicate counts if either panel satisfies it |
+| (i) MC-AMBIGUOUS | As implemented: not established |
+| (j) calibration items 1 and 2 | a_use, as REF uses, not raw accuracy |
+| (k), m3 the efficiency line without a decided dense reading | A FASTER STEP with no D-OQ cell prints DENSE NOT READ, and one whose dense-speed comparison is undecided from the bounds prints DENSE SPEED UNDECIDED; neither blocks, and EFFICIENCY-POSITIVE carries the label in its bracket |
+| (m), (n) | Seed-block spread at U_P and U_run; robustness is read on Panel A and printed for both panels. Descriptive |
+| m2 seed block with the overload row | The seed block is seven cells, as the ADR says |
+| m13 a no-loaded row for one transition | CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET applies to the transition concerned; since CAPACITY_SUPPORTED needs a step in each transition, no arm is CAPACITY_SUPPORTED when either transition is not tested, and the outcome names the transition |
+| **M4** recording Decision 2 | Decision 2 is recorded in a file outside the hashed specification (`results/p10s1-freeze-<date>/DECISION_2.md`), named in the freeze README; this ADR is amended with it after the registered run |
+| M1, M2, M3, M8 and the other minors | Implementation defects; fixed as the audit states. M8: the whole registered sequence is exercised end to end on test seeds before the freeze |
+
+Readings (e), (f), (l) and (o) were found correct and stand.
+

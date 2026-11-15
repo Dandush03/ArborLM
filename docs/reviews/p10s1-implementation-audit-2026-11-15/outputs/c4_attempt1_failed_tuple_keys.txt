@@ -1,0 +1,112 @@
+{
+ "registry_default": {
+  "mine": 150,
+  "impl": 150,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 30
+ },
+ "registry_sb1": {
+  "mine": 164,
+  "impl": 164,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 30
+ },
+ "registry_sb12": {
+  "mine": 178,
+  "impl": 178,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 30
+ },
+ "registry_cut_both": {
+  "mine": 140,
+  "impl": 140,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 28
+ },
+ "registry_overload_sb0": {
+  "mine": 190,
+  "impl": 190,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 38
+ },
+ "registry_overload_sb1": {
+  "mine": 204,
+  "impl": 208,
+  "only_mine": [],
+  "only_impl": [
+   "('SB', 'F-OQ', 65536, 16384, 1, 2111)",
+   "('SB', 'F-OQ', 65536, 16384, 1, 2121)",
+   "('SB', 'F-OQ', 65536, 65536, 1, 2111)",
+   "('SB', 'F-OQ', 65536, 65536, 1, 2121)"
+  ],
+  "configs_per_replicate_impl": 38
+ },
+ "run_length_mismatches": [],
+ "overload_cells_u_p": [
+  [
+   "D-OQ",
+   65536,
+   65536,
+   16384,
+   32768
+  ],
+  [
+   "F-OQ",
+   65536,
+   16384,
+   16384,
+   65536
+  ],
+  [
+   "F-OQ",
+   65536,
+   65536,
+   16384,
+   32768
+  ],
+  [
+   "H8",
+   65536,
+   16384,
+   16384,
+   65536
+  ],
+  [
+   "H8",
+   65536,
+   65536,
+   16384,
+   32768
+  ],
+  [
+   "R2",
+   65536,
+   65536,
+   16384,
+   16384
+  ],
+  [
+   "T-OQ",
+   65536,
+   16384,
+   16384,
+   65536
+  ],
+  [
+   "T-OQ",
+   65536,
+   65536,
+   16384,
+   32768
+  ]
+ ],
+ "calibration": {
+  "runs": 46,
+  "with_overload": 50,
+  "by_item": {
+   

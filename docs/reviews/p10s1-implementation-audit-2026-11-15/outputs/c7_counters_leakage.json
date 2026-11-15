@@ -1,0 +1,204 @@
+{
+ "counters": {
+  "F-OQ|4096": {
+   "flop_K": 4096.0,
+   "selected_V": 8,
+   "counter_K": 4096.0,
+   "counter_V": 8.0,
+   "table_K": 4096,
+   "table_V": 8,
+   "own_W": 66816.0,
+   "counter_W": 66816.0,
+   "ok": true
+  },
+  "T-OQ|4096": {
+   "flop_K": 528.0,
+   "selected_V": 8,
+   "counter_K": 528.0,
+   "counter_V": 8.0,
+   "table_K": 528,
+   "table_V": 8,
+   "own_W": 9728.0,
+   "counter_W": 9728.0,
+   "ok": true
+  },
+  "H8|4096": {
+   "flop_K": 0.0,
+   "selected_V": 8,
+   "counter_K": 0.0,
+   "counter_V": 8.0,
+   "table_K": 0,
+   "table_V": 8,
+   "own_W": 1280.0,
+   "counter_W": 1280.0,
+   "ok": true
+  },
+  "R2|4096": {
+   "flop_K": 0.0,
+   "selected_V": 1,
+   "counter_K": 0.0,
+   "counter_V": 1.0,
+   "table_K": 0,
+   "table_V": 1,
+   "own_W": 1056.0,
+   "counter_W": 1056.0,
+   "ok": true
+  },
+  "D-OQ|4096": {
+   "flop_W_per_query": 193584.0,
+   "counter_W": 193584.0,
+   "table_W": 193584,
+   "ok": true
+  },
+  "F-OQ|16384": {
+   "flop_K": 16384.0,
+   "selected_V": 8,
+   "counter_K": 16384.0,
+   "counter_V": 8.0,
+   "table_K": 16384,
+   "table_V": 8,
+   "own_W": 263424.0,
+   "counter_W": 263424.0,
+   "ok": true
+  },
+  "T-OQ|16384": {
+   "flop_K": 576.0,
+   "selected_V": 8,
+   "counter_K": 576.0,
+   "counter_V": 8.0,
+   "table_K": 576,
+   "table_V": 8,
+   "own_W": 10496.0,
+   "counter_W": 10496.0,
+   "ok": true
+  },
+  "H8|16384": {
+   "flop_K": 0.0,
+   "selected_V": 8,
+   "counter_K": 0.0,
+   "counter_V": 8.0,
+   "table_K": 0,
+   "table_V": 8,
+   "own_W": 1280.0,
+   "counter_W": 1280.0,
+   "ok": true
+  },
+  "R2|16384": {
+   "flop_K": 0.0,
+   "selected_V": 1,
+   "counter_K": 0.0,
+   "counter_V": 1.0,
+   "table_K": 0,
+   "table_V": 1,
+   "own_W": 1056.0,
+   "counter_W": 1056.0,
+   "ok": true
+  },
+  "D-OQ|16384": {
+   "flop_W_per_query": 771408.0,
+   "counter_W": 771408.0,
+   "table_W": 771408,
+   "ok": true
+  },
+  "F-OQ|65536": {
+   "flop_K": 65536.0,
+   "selected_V": 8,
+   "counter_K": 65536.0,
+   "counter_V": 8.0,
+   "table_K": 65536,
+   "table_V": 8,
+   "own_W": 1049856.0,
+   "counter_W": 1049856.0,
+   "ok": true
+  },
+  "T-OQ|65536": {
+   "flop_K": 768.0,
+   "selected_V": 8,
+   "counter_K": 768.0,
+   "counter_V": 8.0,
+   "table_K": 768,
+   "table_V": 8,
+   "own_W": 13568.0,
+   "counter_W": 13568.0,
+   "ok": true
+  },
+  "H8|65536": {
+   "flop_K": 0.0,
+   "selected_V": 8,
+   "counter_K": 0.0,
+   "counter_V": 8.0,
+   "table_K": 0,
+   "table_V": 8,
+   "own_W": 1280.0,
+   "counter_W": 1280.0,
+   "ok": true
+  },
+  "R2|65536": {
+   "flop_K": 0.0,
+   "selected_V": 1,
+   "counter_K": 0.0,
+   "counter_V": 1.0,
+   "table_K": 0,
+   "table_V": 1,
+   "own_W": 1056.0,
+   "counter_W": 1056.0,
+   "ok": true
+  },
+  "D-OQ|65536": {
+   "flop_W_per_query": 3082512.0,
+   "counter_W": 3082512.0,
+   "table_W": 3082512,
+   "ok": true
+  }
+ },
+ "counters_all_ok": true,
+ "ivf": {
+  "4096": {
+   "lists": 16,
+   "candidate_rule_mismatches": 0,
+   "mean_candidates": 711.41796875,
+   "min_candidates": 518,
+   "top8_equal": true,
+   "K_mean_measured": 727.41796875,
+   "K_expected": 727.41796875,
+   "recall": 0.6728515625
+  },
+  "16384": {
+   "lists": 64,
+   "candidate_rule_mismatches": 0,
+   "mean_candidates": 733.1171875,
+   "min_candidates": 513,
+   "top8_equal": true,
+   "K_mean_measured": 797.1171875,
+   "K_expected": 797.1171875,
+   "recall": 0.57470703125
+  }
+ },
+ "swap": {
+  "pi_fixed_points": 0,
+  "pi_same_answer": 0,
+  "pi_is_permutation": true,
+  "only_identifier_bytes_change": true,
+  "untrained_records_changed_bytes": 0,
+  "swapped_identifier_is_pi_f": true,
+  "doq_code_is_pi_f": true
+ },
+ "disjoint": {
+  "training_contexts": 786432,
+  "distinct_training_contexts": 786431,
+  "updates_per_epoch": 8,
+  "panel_a_contexts": 136,
+  "panel_a_in_training": 0,
+  "panel_b_contexts": 136,
+  "panel_b_in_training": 0,
+  "h1_contexts": 128,
+  "h1_in_training": 0,
+  "h2_contexts": 128,
+  "h2_in_training": 0,
+  "calibration_contexts": 256,
+  "calibration_in_training": 0,
+  "panel_a_vs_panel_b": 0,
+  "panel_a_vs_h1": 0,
+  "h1_vs_h2": 0
+ }
+}

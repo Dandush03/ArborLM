@@ -1,0 +1,169 @@
+{
+ "chance_intervals_own": {
+  "2048": [
+   34,
+   100
+  ],
+  "8192": [
+   192,
+   325
+  ],
+  "32768": [
+   894,
+   1159
+  ],
+  "65536": [
+   1863,
+   2238
+  ]
+ },
+ "chance_intervals_impl": {
+  "2048": [
+   34,
+   100
+  ],
+  "8192": [
+   192,
+   325
+  ],
+  "32768": [
+   894,
+   1159
+  ],
+  "65536": [
+   1863,
+   2238
+  ]
+ },
+ "fano_checkpoints_own": {
+  "0.5": 1.523,
+  "0.758": 3.003,
+  "0.8": 3.287,
+  "0.896": 4.003,
+  "0.9": 4.036,
+  "0.95": 4.466,
+  "0.954": 4.503,
+  "0.958": 4.541,
+  "0.974": 4.697
+ },
+ "bits_mismatch_count": 0,
+ "capacity_panel": {
+  "trials": 60000,
+  "mismatches": 0,
+  "first_mismatches": [],
+  "coverage": {
+   "DEPENDENCE_FAILED": 23229,
+   "UNRESOLVED": 7230,
+   "REVERSED": 10309,
+   "CAPACITY": 5753,
+   "GAIN WITHIN BUDGET ONLY": 7112,
+   "BEHIND WITHIN BUDGET": 1527,
+   "NOT_EVALUATED": 2884,
+   "NULL": 1597,
+   "CEILING": 321,
+   "FLAT, NOT LOADED": 38
+  }
+ },
+ "step_class": {
+  "multisets": 3003,
+  "mismatches": 0,
+  "coverage": {
+   "NOT_EVALUATED": 286,
+   "DEPENDENCE_FAILED": 275,
+   "NOT REPLICATED": 264,
+   "MIXED": 2070,
+   "NOT LOADED": 51,
+   "REVERSED": 11,
+   "NO GAIN": 40,
+   "CAPACITY STEP": 1,
+   "GAIN WITHIN BUDGET": 5
+  }
+ },
+ "arm_class": {
+  "cases": 13122,
+  "mismatches": 0,
+  "coverage": {
+   "NOT_EVALUATED": 322,
+   "DEPENDENCE_FAILED": 4862,
+   "INTERMEDIATE": 3266,
+   "CAPACITY_ONE_TRANSITION": 3161,
+   "NOT_TESTED_BY_LOAD": 190,
+   "CAPACITY_SUPPORTED": 169,
+   "CAPACITY_NOT_SUPPORTED": 1152
+  }
+ },
+ "outcome": {
+  "cases": 65856,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "CAPACITY-INCONCLUSIVE": 15375,
+   "S1-ENGINEERING-FAILURE": 21952,
+   "S1-INCOMPLETE": 21952,
+   "CAPACITY-NEGATIVE": 2201,
+   "CAPACITY-POSITIVE": 4376
+  },
+  "negative_on_unevaluated": 0
+ },
+ "efficiency": {
+  "trials": 40000,
+  "u_t_mismatches": 0,
+  "verdict_mismatches": 0,
+  "first": [],
+  "coverage_random": {
+   "SLOWER": 1790,
+   "NOT_ASSESSED": 31384,
+   "NOT_EVALUATED": 1171,
+   "DEPENDENCE_FAILED": 2434,
+   "FASTER IN UPDATES ONLY": 1767,
+   "REACHED ONLY BY THE LARGER": 1173,
+   "SAME": 249,
+   "FASTER": 32
+  },
+  "grid_cases": 2646,
+  "grid_mismatches": 0,
+  "grid_first": [],
+  "grid_coverage": {
+   "SAME": 120,
+   "SLOWER": 552,
+   "NOT_ASSESSED": 1404,
+   "FASTER": 432,
+   "FASTER IN UPDATES ONLY": 56,
+   "REACHED ONLY BY THE LARGER": 82
+  }
+ },
+ "efficiency_classes": {
+  "step_class_mismatches": 0,
+  "arm_class_mismatches": 0,
+  "arm_coverage": {
+   "NOT_EVALUATED": 496,
+   "DEPENDENCE_FAILED": 1575,
+   "EFFICIENCY_SUPPORTED": 121,
+   "EFFICIENCY_ONE_TRANSITION": 880,
+   "INTERMEDIATE": 624,
+   "EFFICIENCY_NOT_SUPPORTED": 400
+  },
+  "outcome_mismatches": 0,
+  "outcome_coverage": {
+   "EFFICIENCY-INCONCLUSIVE": 216,
+   "EFFICIENCY-NEGATIVE": 40,
+   "EFFICIENCY-POSITIVE": 68
+  }
+ },
+ "dense_label": {
+  "trials": 20000,
+  "mismatches_vs_both_panels_reading": 0,
+  "cases_where_other_panel_readings_differ": {
+   "either vs both: DENSE MATCHES -> DENSE AHEAD": 15419,
+   "per-panel vs both: DENSE MATCHES -> DENSE AHEAD": 14462
+  }
+ },
+ "study_b_ratio": {
+  "a_use_everywhere": 0.99,
+  "i": 4.8696649010002195,
+  "I_use_ratio_per_diagonal_step": 4.0,
+  "auditor": "KNOWLEDGE SCALES WITH MEMORY",
+  "implementation": "NOT ESTABLISHED",
+  "max_i_ratio_reachable_with_floor_0_85": 1.3709784835887278
+ }
+}

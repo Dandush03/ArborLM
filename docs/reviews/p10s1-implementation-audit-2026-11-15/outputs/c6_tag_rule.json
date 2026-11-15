@@ -1,0 +1,26 @@
+{
+ "dense_label_built": "BEATS DENSE (DENSE AT CHANCE AT A2)",
+ "report_show_then_emit": "REFUSED: positive label(s) without STORE ONLY; ORACLE-ADDRESSED: ['BEATS DENSE']",
+ "report_show_text": "BEATS DENSE (DENSE AT CHANCE AT A2) [STORE ONLY; ORACLE-ADDRESSED]",
+ "printable": "REFUSED: positive label(s) without STORE ONLY; ORACLE-ADDRESSED: ['BEATS DENSE']",
+ "variants": {
+  "CAPACITY STEPS were found": "accepted",
+  "two CAPACITY STEPs": "accepted",
+  "Capacity-Positive": "accepted",
+  "CAPACITY POSITIVE": "accepted",
+  "CAPACITY‑POSITIVE (non-breaking hyphen)": "accepted",
+  "BEATS-DENSE": "accepted",
+  "TREE AHEAD": "accepted",
+  "Storage half supported": "accepted",
+  "storage half supported, as a necessary condition": "accepted",
+  "EFFICIENCY POSITIVE": "accepted",
+  "verdict FASTER in 5 of 5": "accepted",
+  "REACHED ONLY BY THE LARGER": "accepted",
+  "CAPACITY in all five replicates": "accepted",
+  "KNOWLEDGE SCALES": "accepted",
+  "CAPACITY_SUPPORTED[STORE ONLY; ORACLE-ADDRESSED]": "accepted",
+  "CAPACITY-POSITIVE [not STORE ONLY; ORACLE-ADDRESSED]": "accepted"
+ },
+ "bracket_in_detail": "REFUSED: positive label(s) without STORE ONLY; ORACLE-ADDRESSED: ['BEATS DENSE']",
+ "store_only_tag": "STORE ONLY; ORACLE-ADDRESSED"
+}
