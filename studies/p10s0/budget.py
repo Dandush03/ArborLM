@@ -234,7 +234,7 @@ def post_q1_decision(charged_seconds: float, wx_seconds: float, probe_seconds: f
 
 
 def multiple_thresholds(table_hours: Mapping[str, float], other_hours: float = core.PROJECTED_OTHER_HOURS, cap_hours: float | None = None) -> dict[str, float]:
-    """Context only: the multiple m of the slowest P9-I rates up to which each plan fits, (16 - 2 x other) / (2 x the block's six-worker hours) (section 10.4 bullets)."""
+    """Context only: the multiple m of the slowest P9-I rates up to which each plan fits, (the cap in the config - 2 x other) / (2 x the block's six-worker hours) (section 10.4 bullets)."""
     return {k: ((core.cap_hours() if cap_hours is None else cap_hours) - core.HEADROOM * other_hours) / (core.HEADROOM * v) for k, v in table_hours.items() if v > 0}
 
 
