@@ -68,3 +68,11 @@ The lead described the proposed rule to the human lead: for each of the two answ
 > agree with your proposed rule
 
 Recorded by the lead: the rule as described is approved by the human lead in substance. Its exact text is still subject to the independent check in progress; anything the check changes beyond wording is reported to the human lead before the addendum is adopted. The two stated assumptions were not objected to and stand.
+
+### The human lead's confirmation of the two tightenings (2026-11-15 UTC)
+
+After the independent check (Opus 5.5) of the combined-tasks addendum, the lead put two tightenings of the strengthened rule to the human lead, recommending both: (1) the rule is read only if the teacher's gap on the combined-evaluation sentences is at least 0.30 and the arm's single-task gap closed on them is at least 0.50, otherwise NOT_EVALUATED; (2) the floor subtracted in the numerator is the larger of the untrained student's combined and single-task scores for that answer. The lead asked: "Do you confirm the two tightenings? If you'd rather keep the rule exactly as you agreed it, I'll strike them." The human lead answered, verbatim:
+
+> I agree with your recommendation
+
+Recorded by the lead: both tightenings are confirmed. The thresholds the human lead agreed earlier (0.80 to pass; below 0.50 for DOES NOT COMPOSE) are unchanged. The lead's own design choices reported in the same message (C1 alternates the order of the two languages; the adapter baseline on C2 switches adapters per answer) were not objected to and stand as the lead's choices.
