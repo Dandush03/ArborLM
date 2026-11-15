@@ -19,6 +19,9 @@ from . import classes as C
 Pattern = Callable[[int, int], str]
 
 
+ACCEPTED = {"accepted": True, "source": "docs/decisions/ADR-0019-robust-sparse-address-learning.md section 16", "quote": "yes I do, yes we can raise to 16 and I approve the package", "source_sha256": None}
+
+
 def always(kind: str) -> Pattern:
     return lambda d, j: kind
 
@@ -32,12 +35,12 @@ def failing_draws(draws: set[int], kind: str = "bad") -> Pattern:
     return lambda d, j: kind if d in draws else "ok"
 
 
-def observation(kind: str, *, stability: float = 0.95, lm_rise: float = 0.12, nan: bool = False, acc: float = 0.97) -> C.SObservation:
+def observation(kind: str, *, stability: float = 0.95, lm_rise: float = 0.12, nan: bool = False, acc: float = 0.97, bits: float = 3.0, auc: float = 0.8) -> C.SObservation:
     """One cell's observation: 'ok', 'dep' (condition 6 only), 'bad' (conditions 1 and 3)."""
     if kind == "ok":
-        o = C.SObservation(acc, acc, True, True, acc, acc, False, 256, 0.01, 256, lm_rise, stability, math.nan, acc, acc, acc)
+        o = C.SObservation(acc, acc, True, True, acc, acc, False, 256, 0.01, 256, lm_rise, stability, math.nan, acc, acc, acc, bits, bits, auc)
     elif kind == "dep":
-        o = C.SObservation(acc, acc, True, True, acc, acc, False, 256, 0.01, 256, lm_rise, stability, math.nan, acc, acc, 0.4 * acc)
+        o = C.SObservation(acc, acc, True, True, acc, acc, False, 256, 0.01, 256, lm_rise, stability, math.nan, acc, acc, 0.4 * acc, bits, bits, auc)
     elif kind == "bad":
         o = C.SObservation(0.05, 0.05, True, True, 0.05, 0.05, False, 3, 0.9, 256, lm_rise, stability, math.nan, 0.05, 0.0, 0.0)
     else:
@@ -122,6 +125,7 @@ def make_run(
     failed_tasks: list[str] | None = None,
     frozen_mismatch: list[str] | None = None,
     unit: int = core.UPDATES,
+    acceptance: Mapping[str, Any] | None = None,
 ) -> analysis.RunData:
     """The whole registry, in memory. ``patterns[(arm, celltype)]`` gives the kind ('ok', 'dep', 'bad') of each (draw, j); ``default`` for the others. ``a6_bad[celltype]``: draws whose A6 is below its floor.
     ``candidate``: also build the WX (``wx_pattern``) and probe cells of that arm. ``missing``: labels left out; ``nan_cells``: labels with non-finite values."""
@@ -155,7 +159,7 @@ def make_run(
                 kind = probe_kind(c.draw, 0) if callable(probe_kind) else probe_kind
                 cells[c.label] = _cell_data(c.label, c.celltype, kind, learned=True, unit=unit, stability=0.95, lm_rise=0.12, collapsed=False, nan=False)
     return analysis.RunData(
-        cells, selection or selection_record(), list(failed_tasks or []), gates if gates is not None else passing_gates(), draw_plan, cut3, dict(block_status or {}), candidate, list(frozen_mismatch or []), unit,
+        cells, selection or selection_record(), list(failed_tasks or []), gates if gates is not None else passing_gates(), draw_plan, cut3, dict(block_status or {}), candidate, list(frozen_mismatch or []), unit, acceptance if acceptance is not None else ACCEPTED,
     )  # fmt: skip
 
 

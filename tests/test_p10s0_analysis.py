@@ -321,7 +321,7 @@ def test_the_report_makes_no_claim_beyond_the_records() -> None:
         assert forbidden not in low, forbidden
     assert not re.search(r"\bproves?\b|\bproven\b(?! research)", low)
     assert "Astra review: NOT_PERFORMED" in md and "A Claude review is neither Astra validation nor a human approval" in md and "What may not be said" in md
-    assert "The human lead has not accepted the P9-II outcome" in md
+    assert "The human lead accepted the P9-II outcome as registered (docs/decisions/ADR-0019-robust-sparse-address-learning.md section 16" in md
 
 
 def test_write_report_to_disk_and_never_over_an_existing_file(tmp_path: Path) -> None:

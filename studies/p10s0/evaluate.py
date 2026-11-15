@@ -124,6 +124,46 @@ def read_swap(model: Any, data: StudyData, facts: int, panel: str, perm: "Tensor
     }  # fmt: skip
 
 
+def check_swap_accuracy(record: dict[str, Any]) -> None:
+    """Condition 6 compares a_use with the panel accuracy of a separate evaluation pass: the read swap's own accuracy must equal it on both panels (a defect otherwise; the audit's m7)."""
+    for p in core.PANELS:
+        if abs(float(record["read_swap"][p]["accuracy"]) - float(record["panels"][p]["accuracy"])) > 1e-9:
+            raise ValueError(f"read-swap accuracy differs from the panel accuracy on Panel {p}: the two evaluation passes disagree")
+
+
+@torch.no_grad()
+def answer_site_auc(model: Any, data: StudyData, facts: int, max_contexts: int = 512, chunk: int = 16) -> dict[str, Any]:
+    """Descriptive only (ADR-0020 section 5.2, last bullet; no training, no rule): the area under the ROC curve of max_s a_s (the largest cosine between the position's unit query and any key) for separating
+    the answer sites (8 per context) from the other 55 positions, on the first ``max_contexts`` Panel A contexts, with the WX query evaluated at every position. Ties count one half."""
+    stream = stream_for(data, facts, core.PANEL_STREAM["A"])
+    keep = (stream.fact_ids < facts).all(dim=1)
+    tokens = stream.tokens[keep][:max_contexts, : core.INPUT_LENGTH].contiguous()
+    positions = torch.arange(core.INPUT_LENGTH)
+    is_site = torch.zeros(core.INPUT_LENGTH, dtype=torch.bool)
+    is_site[SITES] = True
+    was = model.training
+    model.eval()
+    sites: list[Tensor] = []
+    others: list[Tensor] = []
+    try:
+        keys = torch.nn.functional.normalize(model.addition.keys, dim=-1)
+        for start in range(0, tokens.shape[0], chunk):
+            tok = tokens[start : start + chunk]
+            h = model.embed_block0(tok)
+            q = torch.nn.functional.normalize(model.addition.window_z(h, positions), dim=-1).reshape(-1, core.KEY_WIDTH)
+            top = (q @ keys.T).max(dim=-1).values.reshape(tok.shape[0], -1)
+            sites.append(top[:, is_site].reshape(-1))
+            others.append(top[:, ~is_site].reshape(-1))
+    finally:
+        model.train(was)
+    pos, neg = torch.cat(sites), torch.cat(others)
+    order = neg.sort().values
+    lt = torch.searchsorted(order, pos, right=False).double()
+    le = torch.searchsorted(order, pos, right=True).double()
+    auc = float(((lt + le) / 2).sum() / (pos.numel() * neg.numel()))
+    return {"auc": auc, "answer_sites": int(pos.numel()), "other_positions": int(neg.numel()), "contexts": int(tokens.shape[0]), "note": "descriptive only: the memory is told the answer position; no label says an interface finds where to read"}
+
+
 def evaluate_readout(cell: core.Cell, model: Any, data: StudyData, facts: int, update: int, *, frozen_backbone: "Backbone", rows: "Tensor", target_seed: int, swap_seed: int, frozen_loss: float | None = None, chunked: bool = True) -> dict[str, Any]:
     """The eval record of one cell at one readout (``model`` already holds the snapshot): ``studies.p9ii``'s record with S0's envelope, plus the read swap of both panels for a
     cell with a memory read."""
@@ -135,7 +175,10 @@ def evaluate_readout(cell: core.Cell, model: Any, data: StudyData, facts: int, u
         perm = swap_permutation(data, facts, swap_seed)
         with p9iieval.eval_chunking(model, p9iieval.EVAL_CHUNK_ELEMENTS if chunked else 1 << 40):  # the swap's memory is bounded as the evaluation's is (audit M2: the 65,536-slot evaluation peak)
             record["read_swap"] = {p: read_swap(model, data, facts, p, perm) for p in core.PANELS}
+        check_swap_accuracy(record)
         record["read_swap"]["note"] = "a_use = facts answered correctly whose swapped prediction is not their answer, over all facts; condition 6 compares it with 0.95 x accuracy (ADR-0020 section 8.2)"
+    if core.is_wx(cell.arm):
+        record["answer_site_auc"] = answer_site_auc(model, data, facts)
     return record
 
 

@@ -414,3 +414,32 @@ def test_replication_hypotheses_not_read_when_not_comparable() -> None:
     r = res["hypotheses"]
     assert r["H20-R (A2, 8K/16K)"]["reading"] == "not read" and r["H20-R (A0, 2K/4K)"]["reading"] in ("supported", "not supported")
     assert itertools.chain  # keep the import used
+
+
+def test_h20_a_is_the_adr_s_sentence_for_every_pair_of_a0_classes() -> None:
+    """Supported if A0 is UNRELIABLE or FAILS at 2K/4K or at 8K/16K; not supported if RELIABLE at both; not read otherwise (the lead's ruling on m4)."""
+    mk = {"R": C.arm_class(dict.fromkeys(keys20(), OK), keys20(), "20"), "U": C.arm_class({k: (OK if i < 6 else FAILED) for i, k in enumerate(keys20())}, keys20(), "20"), "F": C.arm_class(dict.fromkeys(keys20(), FAILED), keys20(), "20"), "N": C.arm_class({k: NE for k in keys20()}, keys20(), "20")}
+    expect = {}
+    for a, b in itertools.product("RUFN", repeat=2):
+        expect[(a, b)] = "supported" if ("U" in (a, b) or "F" in (a, b)) else "not supported" if (a, b) == ("R", "R") else "not read"
+    for (a, b), reading in expect.items():
+        out = C.hypothesis_readings(classes={"A0": {"2K/4K": mk[a], "8K/16K": mk[b]}}, paired_s0={}, replication_labels={}, outcome=C.Outcome(6, "x", "x"), candidate=None, overload="x", record_length="x", probe=None, probe_a6_evaluated=False, a0_failed_cells_8k16k=None)
+        assert out["H20-A"]["reading"] == reading, (a, b)
+
+
+def test_h20_o_readings_and_the_descriptive_class() -> None:
+    def read(label: str) -> dict:
+        return C.hypothesis_readings(classes={}, paired_s0={}, replication_labels={}, outcome=C.Outcome(4, "x", "x", "A5-D"), candidate="A5-D", overload=label, record_length="x", probe=None, probe_a6_evaluated=False, a0_failed_cells_8k16k=None, a5d_8k4k_label="UNRELIABLE")["H20-O"]
+
+    assert read("OVERLOAD NOT_EVALUATED")["reading"] == "not read" and read("OVERLOAD NOT QUALIFIED")["reading"] == "not supported" and read("OVERLOAD-QUALIFIED")["reading"] == "supported"
+    assert read("OVERLOAD NOT RUN — NO TARGET INJECTION")["reading"] == "not tested" and read("OVERLOAD NOT RUN — NO CANDIDATE")["reading"] == "not tested"
+    assert read("OVERLOAD NOT_EVALUATED")["descriptive_a5d_8k_4k_class"] == "UNRELIABLE"
+
+
+def test_address_stable_counts_a_non_finite_stability_as_zero() -> None:
+    obs = {(d, 0): syn.observation("ok", stability=0.9 if d > 11 else math.nan) for d in range(1, 21)}
+    ver = dict.fromkeys(obs, OK)
+    r = C.address_stable(obs, ver)
+    assert r["non_finite"] == 11 and r["cells"] == 20 and r["label"] is None and r["median"] == 0.0  # 11 of 20 cells at 0 and 9 at 0.9: not ADDRESS STABLE
+    ok = C.address_stable({(d, 0): syn.observation("ok", stability=0.9) for d in range(1, 21)}, dict.fromkeys(obs, OK))
+    assert ok["label"] == "ADDRESS STABLE" and ok["non_finite"] == 0

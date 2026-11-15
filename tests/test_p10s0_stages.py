@@ -136,12 +136,12 @@ def test_projection_and_caps_procedure(dry: dict[str, Any], tmp_path: Path) -> N
     assert stages.main(["projection", "--rehearsal-alone", str(folder), "--rehearsal-busy", str(folder), "--arm-selection", str(selection), "--out", str(out), "--dry", "--repo", str(ROOT)]) == 0
     p = core.read_record(out, "projection")
     assert p["missing_items"] == [] and p["candidates"] == ["A5-D", "A1"] and set(p["table"]) == {"q1:full", "q1:cut3", "wx:A5-D", "wx:A1", "probe:A5-D", "probe:A1"} and p["arm_selection_sha256"] == file_sha256(selection)
-    assert set(p["memory"]) == set(p["table"]) and p["freeze_information"]["kind"] == "information, not a start condition" and p["cost_differences"]
+    assert p["guard_seconds_per_task"] > 0 and stages.measure_guard_seconds(ROOT) > 0 and set(p["memory"]) == set(p["table"]) and p["freeze_information"]["kind"] == "information, not a start condition" and p["cost_differences"]
     assert stages.main(["projection", "--rehearsal-alone", str(folder), "--rehearsal-busy", str(folder), "--arm-selection", str(selection), "--out", str(out), "--dry"]) == 2  # never over an existing file
     caps_out = tmp_path / "stage_caps.json"
-    assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--gates-wall-seconds", "100", "--analysis-wall-seconds", "5", "--report-wall-seconds", "5", "--generate-wall-seconds", "60", "--dry"]) == 0
+    assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--gates-wall-seconds", "100", "--gates-per-draw-seconds", "1", "--analysis-wall-seconds", "5", "--report-wall-seconds", "5", "--generate-wall-seconds", "60", "--dry"]) == 0
     caps = json.loads(caps_out.read_text())
-    assert set(caps["q1"]) == {"full", "cut3"} and caps["gates"] == 200 and caps["generate"] == 120 and caps["analysis"] == 60.0
+    assert set(caps["q1"]) == {"full", "cut3"} and caps["gates"] == 2 * (100 + 12 * 1) and caps["generate"] == 120 and caps["analysis"] == 60.0 and caps["measured"]["reserve_analysis_report"] == 10
     assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--dry"]) == 2
     rates = stages.rates_of(p)
     assert len(rates) == 24 and budget.block_projection(core.wx_cells("A1"), rates).cells == 20
@@ -190,7 +190,7 @@ def init_repo(path: Path) -> Path:
 
     path.mkdir(parents=True, exist_ok=True)
     git("init", "-q")
-    for rel, text in (("studies/p10s0/a.py", "x = 1\n"), (str(core.DEFAULT_CONFIG), "a = 1\n"), (core.SPEC, "adr\n"), ("tests/test_p10s0_x.py", "def test_x(): pass\n")):
+    for rel, text in (("studies/p10s0/a.py", "x = 1\n"), (str(core.DEFAULT_CONFIG), "a = 1\n"), (core.SPEC, "adr\n"), ("tests/test_p10s0_x.py", "def test_x(): pass\n"), (str(stages.FREEZE_PLAN), "{}")):
         (path / rel).parent.mkdir(parents=True, exist_ok=True)
         (path / rel).write_text(text)
     git("add", "-A")
@@ -210,7 +210,7 @@ def test_preconditions_in_a_throw_away_repository(tmp_path: Path) -> None:
     assert stages.check_preconditions("check", repo, None) is None and stages.check_preconditions("dry", repo, None) is None and stages.check_preconditions("rehearsal", repo, None) is None
     assert "requires --freeze-commit" in refusal(repo, None)
     assert "is not a commit" in refusal(repo, "deadbeef" * 5)
-    assert "frozen inputs do not verify" in refusal(repo, head)  # a clean tree at the freeze commit passes every earlier guard; this repository has no src/arborlm
+    assert "frozen inputs do not verify" in refusal(repo, head)  # a clean tree at the freeze commit (which added the plan) passes every earlier guard; this repository has no src/arborlm
     (repo / "untracked.txt").write_text("x")
     assert "not clean" in refusal(repo, head)
     (repo / "untracked.txt").unlink()
@@ -222,14 +222,13 @@ def test_preconditions_in_a_throw_away_repository(tmp_path: Path) -> None:
 
     commit("studies/p10s0/a.py", "x = 2\n")
     assert "studies at HEAD differs from the freeze commit" in refusal(repo, head)
-    head2 = subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip()
     commit(core.SPEC, "adr changed\n")
-    assert f"{core.SPEC} at HEAD differs" in refusal(repo, head2)
-    head3 = subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip()
+    assert f"{core.SPEC} at HEAD differs" in refusal(repo, head)
     commit("tests/test_p10s0_x.py", "def test_x(): assert True\n")
-    assert "tests/test_p10s0_x.py differs from the freeze commit" in refusal(repo, head3)
+    assert "tests/test_p10s0_x.py differs from the freeze commit" in refusal(repo, head)
     commit(str(core.DEFAULT_CONFIG), "a = 2\n")
-    assert f"{core.DEFAULT_CONFIG} at HEAD differs" in refusal(repo, head3)
+    assert f"{core.DEFAULT_CONFIG} at HEAD differs" in refusal(repo, head)
+    assert "not the commit that added" in refusal(repo, subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip())
 
 
 def test_the_driver_refuses_a_wrong_caps_path_and_a_missing_plan(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -259,7 +258,7 @@ def make_plan(tmp_path: Path) -> tuple[dict[str, Any], Path, Path]:
         (run / "draws" / name).mkdir(parents=True)
         (run / "draws" / name / "data_manifest.json").write_text(name)
         manifests[name] = file_sha256(run / "draws" / name / "data_manifest.json")
-    plan = {"arm_selection": {"path": "studies/p10s0/freeze/arm_selection.json", "sha256": file_sha256(sel)}, "projection": {"path": "projection.json", "sha256": file_sha256(proj)}, "stage_caps_sha256": file_sha256(caps), "run_dir": str(run), "draw_plan": {"sha256": file_sha256(run / "draw_plan.json")}, "data_manifests": manifests}
+    plan = {"generation": {"cap_seconds": 60.0, "provisional": False}, "arm_selection": {"path": "studies/p10s0/freeze/arm_selection.json", "sha256": file_sha256(sel)}, "projection": {"path": "projection.json", "sha256": file_sha256(proj)}, "stage_caps_sha256": file_sha256(caps), "run_dir": str(run), "draw_plan": {"sha256": file_sha256(run / "draw_plan.json")}, "data_manifests": manifests}
     return plan, repo, run
 
 
@@ -291,7 +290,7 @@ def test_verify_plan_checks_every_frozen_identity(tmp_path: Path) -> None:
 
 
 def test_block_cap_refuses_a_missing_configuration() -> None:
-    caps = budget.caps_table(syn_rates(), gates_wall_seconds=1, analysis_wall_seconds=1, report_wall_seconds=1, generate_wall_seconds=1)
+    caps = budget.caps_table(syn_rates(), gates_wall_seconds=1, gates_per_draw_seconds=1, analysis_wall_seconds=1, report_wall_seconds=1, generate_wall_seconds=1)
     assert stages.block_cap("q1", caps, "full")["train"] > 0
     for stage, key in (("q1", "other"), ("wx", "A0"), ("nonsense", "")):
         with pytest.raises(pool.StageRefused):
@@ -385,15 +384,20 @@ def test_q1_cut3_reads_the_start_record(tmp_path: Path) -> None:
 
 # --- the freeze plan is written by a command, from files ---------------------------------------------------------------------------------------------------
 def make_run_dir_with_plan(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
-    """A repository stand-in (selection record, cap table), a run directory with a good draw plan and all fifteen manifests, and a projection record measured for the selection."""
+    """A repository stand-in (selection record, config with a set generation cap, cap table with its measured block, the auditor's script and sibling), a run directory with a good draw plan and all fifteen
+    manifests, and a projection record measured for the selection."""
     repo, run = tmp_path / "repo", tmp_path / "run"
     (repo / "studies/p10s0/freeze").mkdir(parents=True)
+    (repo / "configs").mkdir()
+    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(core.set_generation_cap(30.0)))
+    auditor = repo / "docs/reviews/p10-design-2026-11-15/adr-0020-review"
+    auditor.mkdir(parents=True)
+    (auditor / "c5_rev2_mapping_and_consistency.py").write_text("def part1():\n    pass\n")
+    (auditor / "c2_mapping_enumeration.py").write_text("X = 1\n")
     sel = repo / "studies/p10s0/freeze/arm_selection.json"
     sel.write_text("{}")
-    (repo / stages.CAPS_FILE).write_text(json.dumps({"gates": 400.0}))
-    seed_set_of = {}
-    for k, name in enumerate(core.DRAW_NAMES, start=1):
-        seed_set_of[str(k)] = name
+    (repo / stages.CAPS_FILE).write_text(json.dumps({"gates": 800.0, "measured": {"gates": 400.0, "reserve_analysis_report": 2.0}}))
+    seed_set_of = {str(k): name for k, name in enumerate(core.DRAW_NAMES, start=1)}
     for name in core.SET_NAMES:
         (run / "draws" / name).mkdir(parents=True)
         core.write_record(run / "draws" / name / "data_manifest.json", {**core.envelope("data_manifest"), "g1_passed": True})
@@ -410,7 +414,7 @@ def test_freeze_plan_command_writes_a_plan_that_verify_plan_accepts(tmp_path: Pa
     assert stages.main(argv) == 0
     plan = json.loads(out.read_text())
     assert plan["study"] == "P10S0" and plan["kind"] == "freeze_plan" and plan["arm_selection"]["path"] == "studies/p10s0/freeze/arm_selection.json" and plan["projection"]["path"] == str(proj.resolve())
-    assert set(plan["data_manifests"]) == set(core.SET_NAMES) and plan["before_q1_projected_seconds"] == {"gates": 200.0} and plan["stage_caps_sha256"] == file_sha256(repo / stages.CAPS_FILE)
+    assert set(plan["data_manifests"]) == set(core.SET_NAMES) and plan["before_q1_projected_seconds"] == {"gates": 400.0} and plan["reserve_analysis_report_seconds"] == 2.0 and plan["profile"] == "registered" and set(plan["pinned_auditor_scripts"]) == {"c5_rev2_mapping_and_consistency.py", "c2_mapping_enumeration.py"} and plan["generation"]["provisional"] is False and plan["stage_caps_sha256"] == file_sha256(repo / stages.CAPS_FILE)
     stages.verify_plan(plan, repo, run)
     assert stages.load_plan(repo)["draw_plan"] == plan["draw_plan"]
     assert stages.main(argv) == 2  # never over an existing plan
@@ -453,14 +457,14 @@ def test_launch_scripts_parse_and_name_the_registered_stage_and_the_frozen_caps(
     assert not {k for k, v in vars(ns).items() if v not in (None, False) and k not in ("command", "name", "caps", "freeze_commit", "run_dir", "workers", "draw", "restore_split", "busy_processes", "mode", "block", "arm_selection", "projection")}, vars(ns)
 
 
-def test_generate_script_passes_the_stage_cap_to_every_call_and_the_driver_refuses_without_one(tmp_path: Path) -> None:
+def test_generate_script_passes_the_generation_cap_flag_to_every_call_and_the_driver_refuses_without_it(tmp_path: Path) -> None:
     calls = script_argv("generate")
     assert len(calls) == 3  # the draw loop, the reserve loop and draw-plan
     for argv in calls[:2]:
         ns = stages.build_parser().parse_args(argv)
-        assert ns.command == "generate" and ns.mode == "registered" and ns.stage_cap_seconds is not None and ns.i_understand_freeze_time and ns.run_dir == "/tmp/x-run"
+        assert ns.command == "generate" and ns.mode == "registered" and ns.generation_cap_from_config and ns.stage_cap_seconds is None and ns.i_understand_freeze_time and ns.run_dir == "/tmp/x-run"
     assert stages.build_parser().parse_args(calls[2]).command == "draw-plan"
-    # the P9-II attempt-1 failure: a script that omits the stage cap is refused before anything is generated (nothing is built here; no registered seed is read)
+    # the P9-II attempt-1 failure: a script that omits what the driver requires is refused before anything is generated (nothing is built here; no registered seed is read)
     run = tmp_path / "run"
     code = stages.main(["generate", "--mode", "registered", "--draw", "1", "--run-dir", str(run), "--i-understand-freeze-time", "--experiments-root", str(tmp_path), "--ledger-root", str(tmp_path)])
     assert code == 2 and not (run / "draws").exists()

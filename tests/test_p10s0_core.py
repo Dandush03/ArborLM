@@ -151,7 +151,7 @@ def test_g9_refuses_an_overlap_in_every_direction() -> None:
 
 def test_p1_to_p8_config_seeds_do_not_touch_s0() -> None:
     configs = core.config_seed_values(ROOT)
-    assert configs and "p10s0_addressing.toml" not in configs
+    assert configs and "p10s0_qualification.toml" not in configs
     own = frozenset().union(*core.seed_namespaces().values())
     for name, values in configs.items():
         assert not (own & values), name
@@ -195,7 +195,8 @@ def test_draw_plan_substitutes_reserves_in_order() -> None:
 
 # --- config -------------------------------------------------------------------------------------------------------------------------------------------
 def test_config_file_is_the_rendered_constants_and_resources_are_read_from_it() -> None:
-    assert (ROOT / core.DEFAULT_CONFIG).read_text(encoding="utf-8") == core.render_config_toml()
+    assert (ROOT / core.DEFAULT_CONFIG).read_text(encoding="utf-8") == core.render_config_toml(core.generation_block())  # the generation block is the one the rehearsal sets
+    assert core.validate_config(core.load_config())
     lim = core.resource_limits()
     assert lim["rss_worker_bytes"] == 3 * 1024**3 and lim["rss_aggregate_bytes"] == 18 * 1024**3 and lim["workers"] == 6 and lim["cap_hours"] == 16.0 and lim["headroom"] == 2.0 and lim["rehearsal_peak_limit_bytes"] == int(1.5 * 1024**3)
     cfg = core.load_config()
@@ -206,9 +207,9 @@ def test_config_file_is_the_rendered_constants_and_resources_are_read_from_it() 
         core.validate_config(__import__("copy").deepcopy(cfg) | {"resources": bad["resources"] | {"cap_hours": 1.0}})
 
 
-def test_the_config_name_is_the_briefs_not_the_adrs() -> None:
-    assert core.DEFAULT_CONFIG == Path("configs/p10s0_addressing.toml")
-    assert "configs/p10s0_qualification.toml" in ADR  # recorded as an ambiguity in the report; the brief's name is used
+def test_the_config_name_is_the_adr_s() -> None:
+    assert core.DEFAULT_CONFIG == Path("configs/p10s0_qualification.toml") and "configs/p10s0_qualification.toml" in ADR  # the lead's ruling on item 1
+    assert not (ROOT / "configs/p10s0_addressing.toml").exists()
 
 
 # --- identity, run names, ledger ----------------------------------------------------------------------------------------------------------------------
@@ -290,7 +291,7 @@ def test_every_launch_script_passes_its_stage_cap_file_and_its_stage_name(name: 
 def test_generate_script_passes_the_stage_cap_to_every_call() -> None:
     text = (ROOT / "studies/p10s0/launch/generate.sh").read_text(encoding="utf-8")
     calls = [line for line in text.splitlines() if "studies.p10s0.stages generate" in line]
-    assert len(calls) == 2 and all("--stage-cap-seconds" in c and "--i-understand-freeze-time" in c and "--mode registered" in c for c in calls)
+    assert len(calls) == 2 and all("--generation-cap-from-config" in c and "--stage-cap-seconds" not in c and "--i-understand-freeze-time" in c and "--mode registered" in c for c in calls)
     assert "for k in 1 2 3 4 5 6 7 8 9 10 11 12 13" in text and "for r in 1 2" in text and "draw-plan" in text
 
 
@@ -301,9 +302,10 @@ def test_launch_scripts_refuse_wrong_argument_counts(name: str) -> None:
         assert r.returncode == 2 and b"usage" in r.stderr
 
 
-def test_the_freeze_directory_holds_no_plan_or_caps_yet() -> None:
+def test_the_freeze_files_exist_both_or_neither() -> None:
+    """Before the freeze neither file exists; the freeze commit adds both. This test passes before and after it (the audit's M4; P9-II's fix 2bc8038 does the same)."""
     assert (ROOT / "studies/p10s0/freeze/README.md").is_file()
-    assert not (ROOT / "studies/p10s0/freeze/plan.json").exists() and not (ROOT / "studies/p10s0/freeze/stage_caps.json").exists()
+    assert (ROOT / "studies/p10s0/freeze/plan.json").exists() == (ROOT / "studies/p10s0/freeze/stage_caps.json").exists()
 
 
 def test_g9_reads_p9ii_s_test_seeds_from_its_committed_code_and_tests() -> None:

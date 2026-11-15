@@ -405,6 +405,13 @@ def g9_check(repo: Path | None = None) -> dict[str, Any]:
         core.assert_namespaces_disjoint(extra=extra)
     except ValueError as exc:
         problems.append(str(exc))
+    if (p9iicore.TEST_SEED_BASE, p9iicore.TEST_SEED_TOP) != (910001, 919999):  # P9-II's test-seed constants, asserted directly (the lead's ruling on item 8)
+        problems.append(f"P9-II's test-seed constants are {p9iicore.TEST_SEED_BASE}-{p9iicore.TEST_SEED_TOP}, not 910001-919999")
+    if not all(910001 <= v <= 919999 for v in p9iicore.seed_namespaces()["test"]):
+        problems.append("P9-II's seed_namespaces()['test'] is not inside 910001-919999")
+    test_profile = frozenset().union(*(core.registered_set(k, "test").values() for k in range(1, core.N_DRAWS + 1)), *(core.reserve_set(r, "test").values() for r in (1, 2)))
+    if not all(core.TEST_SEED_BASE <= v <= core.TEST_SEED_TOP for v in test_profile):
+        problems.append("a test-profile seed lies outside 920001-920999")
     p9ii_tests = core.p9ii_test_seed_values() | scan_p9ii_code_for_test_seeds(base)
     outside = sorted(v for v in p9ii_tests if not 910001 <= v <= 919999)
     if outside:
@@ -425,8 +432,9 @@ def adr_text(repo: Path) -> str:
 
 
 def independent_evaluation(repo: Path) -> dict[str, Any]:
-    """The auditor's reading, written again from ADR-0020 sections 3.2, 3.3 and 3.5 and not through ``arm_selection``'s functions: the table cell of section 3.3 that P9-II's committed outcome falls
-    in, the fourth arm it gives, and the arms that can still be the candidate by section 8.5 (b) from P9-II's draw counts."""
+    """The IMPLEMENTER'S second reading (not the auditor's: the auditor's recomputation is the audit's own file, whose path and sha256 the freeze record names), written again from ADR-0020 sections 3.2, 3.3
+    and 3.5 and not through ``arm_selection``'s functions: the table cell of section 3.3 that P9-II's committed outcome falls in, the fourth arm it gives, and the arms that can still be the candidate by
+    section 8.5 (b) from P9-II's draw counts."""
     res = read_json(repo / core.P9II_RECORDS["results"])["result"]
     calibration_exists = (repo / core.P9II_RECORDS["calibration"]).is_file()
     outcome, carried = str(res["outcome"]["outcome"]), (res.get("carried_forward") or {}).get("arm")
@@ -493,13 +501,14 @@ def run_auditor_part1(script: Path) -> dict[str, Any]:
         sys.path.remove(str(script.parent))
     text = buffer.getvalue()
     match = re.search(r"rule-vs-table disagreements: (.*)", text)
-    return {"script": str(script), "script_sha256": file_sha256(script), "output": text, "disagreements": match.group(1).strip() if match else None, "no_disagreements": bool(match and match.group(1).strip() == "none")}
+    sibling = script.parent / "c2_mapping_enumeration.py"
+    return {"script": str(script), "script_sha256": file_sha256(script), "sibling_sha256": file_sha256(sibling) if sibling.is_file() else None, "output": text, "disagreements": match.group(1).strip() if match else None, "no_disagreements": bool(match and match.group(1).strip() == "none")}
 
 
 AUDITOR_SCRIPT = Path("docs/reviews/p10-design-2026-11-15/adr-0020-review/c5_rev2_mapping_and_consistency.py")
 
 
-def g10_check(record: Mapping[str, Any], repo: Path | None = None, *, run_script: bool = False, script: Path | None = None) -> dict[str, Any]:
+def g10_check(record: Mapping[str, Any], repo: Path | None = None, *, run_script: bool = False, script: Path | None = None, pinned: Mapping[str, str] | None = None) -> dict[str, Any]:
     """Gate G10 (section 10.2): the mapping part of the arm-selection record equals the independent evaluation of section 3.2 on P9-II's committed records (whose hashes the record holds and which are
     re-hashed here); the table cell matching P9-II's committed outcome is cited; the override part equals section 3.4 character for character (read from the ADR file); the list of arms that can still
     be the candidate equals the independent evaluation of section 8.5 (b). With ``run_script``, Part 1 of the auditor's enumeration script is re-run."""
@@ -536,7 +545,15 @@ def g10_check(record: Mapping[str, Any], repo: Path | None = None, *, run_script
         problems.append("calibrated values differ from lambda = 1.0, U_pre = 2,048, mu = 1.0 or from P9-II's calibration record")
     script_result: dict[str, Any] | None = None
     if run_script:
-        script_result = run_auditor_part1(script or base / AUDITOR_SCRIPT)
+        path = script or base / AUDITOR_SCRIPT
+        if pinned is not None:  # the freeze plan pins the hash of the script this gate executes and of its sibling; nothing unhashed is run (the audit's m3)
+            for f in (path, path.parent / "c2_mapping_enumeration.py"):
+                if not f.is_file() or file_sha256(f) != pinned.get(f.name):
+                    problems.append(f"{f.name} does not hash to the value the freeze plan pinned: it is not run")
+        if not problems or pinned is None:
+            script_result = run_auditor_part1(path)
+        else:
+            return {"passed": False, "problems": problems, "independent": ind, "table_cell_cited": None, "table_row": ind["table_row"], "auditor_script": None, "auditor_script_run": False}
         if not script_result["no_disagreements"]:
             problems.append("Part 1 of the auditor's script reports disagreements")
     row = ind["table_row"]

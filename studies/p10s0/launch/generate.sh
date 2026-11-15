@@ -4,8 +4,8 @@
 # Takes exactly two arguments, the run directory and the commit the generating code is at (it must equal HEAD, with a clean tree, so the identity written into every data manifest is the
 # code that will be frozen). Generates and G1-checks the thirteen registered draws and the two reserve draws (each holding all three fact sets), then writes the draw plan (the reserve
 # substitution of ADR-0019 section 9). A draw that fails G1 keeps its failed record and the next draw is still generated.
-# Every call passes its stage cap (the P9-II attempt-1 lesson: a launch script that omits a required flag is refused before anything is generated). The cap, 1800 s per draw (three fact
-# sets), is an engineering value that has no source in the ADR and is not a measurement: PENDING LEAD REVIEW before this script is used.
+# Every call passes --generation-cap-from-config: the driver takes the stage cap from the config's [generation] block (2 x the rehearsal draw's measured generation time, floor 60 s per draw; set by the
+# rehearsal before the freeze) and refuses a typed cap, a provisional cap, a missing run decision (results/p10s0-freeze-*/DECISION.md) and a tree without the recorded acceptance of the P9-II outcome.
 set -eu
 if [ "$#" -ne 2 ]; then
     echo "usage: $0 <run-dir> <code-commit>" >&2
@@ -26,9 +26,9 @@ if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
     exit 2
 fi
 for k in 1 2 3 4 5 6 7 8 9 10 11 12 13; do
-    uv run --locked python -m studies.p10s0.stages generate --mode registered --draw "$k" --run-dir "$RUN_DIR" --stage-cap-seconds 1800 --i-understand-freeze-time || echo "draw $k: generation or G1 failed; the record is kept and the draw plan decides" >&2
+    uv run --locked python -m studies.p10s0.stages generate --mode registered --draw "$k" --run-dir "$RUN_DIR" --generation-cap-from-config --i-understand-freeze-time || echo "draw $k: generation or G1 failed; the record is kept and the draw plan decides" >&2
 done
 for r in 1 2; do
-    uv run --locked python -m studies.p10s0.stages generate --mode registered --reserve "$r" --run-dir "$RUN_DIR" --stage-cap-seconds 1800 --i-understand-freeze-time || echo "reserve $r: generation or G1 failed; the record is kept and the draw plan decides" >&2
+    uv run --locked python -m studies.p10s0.stages generate --mode registered --reserve "$r" --run-dir "$RUN_DIR" --generation-cap-from-config --i-understand-freeze-time || echo "reserve $r: generation or G1 failed; the record is kept and the draw plan decides" >&2
 done
 exec uv run --locked python -m studies.p10s0.stages draw-plan --run-dir "$RUN_DIR"

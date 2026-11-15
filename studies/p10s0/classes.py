@@ -60,6 +60,9 @@ class SObservation(Observation):
 
     a_use_a: float = math.nan
     a_use_b: float = math.nan
+    bits_a: float = math.nan  # i = 5 - h2(e) - e log2 31 bits per fact on each panel (section 8.1; reported, enters no rule)
+    bits_b: float = math.nan
+    auc: float = math.nan  # WX only: area under the ROC curve of max_s a_s for answer sites against the other 55 positions (section 5.2; descriptive)
 
 
 def observation_from_eval(record: Mapping[str, Any]) -> SObservation:
@@ -67,7 +70,10 @@ def observation_from_eval(record: Mapping[str, Any]) -> SObservation:
     swap = record.get("read_swap") or {}
     a = core.number((swap.get("A") or {}).get("a_use", math.nan))
     b = core.number((swap.get("B") or {}).get("a_use", math.nan))
-    return SObservation(**{k: getattr(base, k) for k in Observation.__dataclass_fields__}, a_use_a=a, a_use_b=b)
+    bits_a = core.number((swap.get("A") or {}).get("information_bits", math.nan))
+    bits_b = core.number((swap.get("B") or {}).get("information_bits", math.nan))
+    auc = core.number((record.get("answer_site_auc") or {}).get("auc", math.nan))
+    return SObservation(**{k: getattr(base, k) for k in Observation.__dataclass_fields__}, a_use_a=a, a_use_b=b, bits_a=bits_a, bits_b=bits_b, auc=auc)
 
 
 class A6Ref(p9c.A6Reference):
@@ -213,10 +219,12 @@ def replication(s0_p9ii_criteria_class: str, p9ii: Mapping[str, Any] | None) -> 
 
 
 def address_stable(observations: Mapping[CellKey, SObservation], verdicts: Mapping[CellKey, CellVerdict]) -> dict[str, Any]:
-    """ADDRESS STABLE: the median over the evaluated cells of the address stability >= 0.80 (printed, in no class; with the class it is the 'meets the criteria' rule of section 8.5)."""
+    """ADDRESS STABLE: the median over the evaluated cells of the address stability >= 0.80 (printed, in no class; with the class it is the 'meets the criteria' rule of section 8.5). A non-finite stability counts as
+    0 (never dropped silently) and is counted in ``non_finite``."""
     values = [o.address_stability for k, o in observations.items() if k in verdicts and verdicts[k].status != CELL_NOT_EVALUATED]
-    m = p9c.median(values)
-    return {"median": m, "label": ADDRESS_STABLE if math.isfinite(m) and m >= core.STABLE_THRESHOLD else None, "cells": len(values)}
+    bad = sum(1 for v in values if not math.isfinite(v))
+    m = p9c.median([v if math.isfinite(v) else 0.0 for v in values])
+    return {"median": m, "label": ADDRESS_STABLE if math.isfinite(m) and m >= core.STABLE_THRESHOLD else None, "cells": len(values), "non_finite": bad}
 
 
 def meets_criteria(s0: SClass, stable: Mapping[str, Any]) -> bool:
@@ -412,14 +420,18 @@ def hypothesis_readings(
     probe: Mapping[str, Any] | None,
     probe_a6_evaluated: bool,
     a0_failed_cells_8k16k: int | None,
+    a5d_8k4k_label: str | None = None,
 ) -> dict[str, dict[str, Any]]:
     """H20-A..H20-S as fixed in section 8.7. Every reading is a statement about S0's draws, never a success of the science."""
     out: dict[str, dict[str, Any]] = {}
     a0 = classes.get("A0", {})
-    if any(a0.get(ct) is None or a0[ct].cls == NOT_EVALUATED for ct in core.CORE_CELLTYPES):
-        out["H20-A"] = {"reading": NOT_READ, "why": "A0 NOT_EVALUATED at a core size"}
+    a0_cls = [a0[ct].cls for ct in core.CORE_CELLTYPES if a0.get(ct) is not None]
+    if any(c in (UNRELIABLE, FAILS) for c in a0_cls):  # supported if A0 is UNRELIABLE or FAILS at 2K/4K or at 8K/16K
+        out["H20-A"] = {"reading": SUPPORTED}
+    elif len(a0_cls) == len(core.CORE_CELLTYPES) and all(c == RELIABLE for c in a0_cls):
+        out["H20-A"] = {"reading": NOT_SUPPORTED}
     else:
-        out["H20-A"] = {"reading": SUPPORTED if any(a0[ct].cls != RELIABLE for ct in core.CORE_CELLTYPES) else NOT_SUPPORTED}
+        out["H20-A"] = {"reading": NOT_READ, "why": "A0 NOT_EVALUATED or missing at a size and not UNRELIABLE or FAILS at the other"}
     for h, arm in (("H20-B", "A1"), ("H20-C", "A2"), ("H20-D", "A5-D")):
         cl, pr = classes.get(arm, {}), paired_s0.get(arm, {})
         if any(cl.get(ct) is None or pr.get(ct) is None for ct in core.CORE_CELLTYPES):
@@ -435,7 +447,10 @@ def hypothesis_readings(
         for ct, label in per.items():
             out[f"H20-R ({arm}, {ct})"] = {"reading": SUPPORTED if label == REPLICATES else NOT_SUPPORTED if label == NOT_REPLICATE else NOT_READ, "label": label}
     out["H20-Q"] = {"reading": SUPPORTED if outcome.row == 4 else NOT_SUPPORTED if outcome.row in (5, 6) else NOT_READ}
-    out["H20-O"] = {"reading": NOT_TESTED if overload in (OVERLOAD_NOT_RUN, OVERLOAD_NO_CANDIDATE) else SUPPORTED if overload == OVERLOAD_QUALIFIED else NOT_SUPPORTED, "label": overload}
+    out["H20-O"] = {
+        "reading": NOT_TESTED if overload in (OVERLOAD_NOT_RUN, OVERLOAD_NO_CANDIDATE) else SUPPORTED if overload == OVERLOAD_QUALIFIED else NOT_READ if overload == OVERLOAD_NOT_EVALUATED else NOT_SUPPORTED,
+        "label": overload, "descriptive_a5d_8k_4k_class": a5d_8k4k_label,
+    }  # fmt: skip
     if candidate is None or outcome.row != 4:
         out["H20-L"] = {"reading": NOT_TESTED, "label": record_length}
         out["H20-S"] = {"reading": NOT_TESTED}

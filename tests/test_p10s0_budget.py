@@ -217,18 +217,18 @@ def test_memory_rule_is_per_block_configuration_and_a_missing_item_fails() -> No
 # --- caps ----------------------------------------------------------------------------------------------------------------------------------
 def test_cap_table_has_one_entry_per_block_configuration_and_is_twice_the_projection() -> None:
     r = rates_at(SLOWEST, evaluation=2.0, overhead=1.0)
-    caps = budget.caps_table(r, gates_wall_seconds=100, analysis_wall_seconds=10, report_wall_seconds=5, generate_wall_seconds=400)
+    caps = budget.caps_table(r, gates_wall_seconds=100, gates_per_draw_seconds=5, analysis_wall_seconds=10, report_wall_seconds=5, generate_wall_seconds=400)
     assert set(caps["q1"]) == {"full", "cut3"} and set(caps["wx"]) == set(caps["probe"]) == {"A5-D", "A1"}
     p = budget.block_projection(core.q1_cells(), r)
     assert caps["q1"]["full"] == {"train": 2 * p.training_seconds, "evaluate": 2 * p.evaluation_seconds}
-    assert caps["gates"] == 200 and caps["generate"] == 800 and caps["analysis"] == 60.0 and caps["report"] == 60.0  # the floor
-    assert budget.cap_for(caps, "q1", "cut3") == caps["q1"]["cut3"] and budget.cap_for(caps, "gates") == 200
+    assert caps["gates"] == 2 * (100 + 12 * 5) and caps["generate"] == 800 and caps["analysis"] == 60.0 and caps["report"] == 60.0  # the floor
+    assert budget.cap_for(caps, "q1", "cut3") == caps["q1"]["cut3"] and budget.cap_for(caps, "gates") == 2 * (100 + 12 * 5)
     json.dumps(caps)
 
 
 @pytest.mark.parametrize("stage,key", [("q1", None), ("q1", "other"), ("wx", "A0"), ("probe", None), ("nonsense", None)])
 def test_a_missing_cap_entry_refuses(stage: str, key: str | None) -> None:
-    caps = budget.caps_table(rates_at(SLOWEST), gates_wall_seconds=1, analysis_wall_seconds=1, report_wall_seconds=1, generate_wall_seconds=1)
+    caps = budget.caps_table(rates_at(SLOWEST), gates_wall_seconds=1, gates_per_draw_seconds=1, analysis_wall_seconds=1, report_wall_seconds=1, generate_wall_seconds=1)
     with pytest.raises(budget.CapMissing):
         budget.cap_for(caps, stage, key)
 

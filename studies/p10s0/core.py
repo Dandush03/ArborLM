@@ -37,7 +37,7 @@ SPEC = "docs/decisions/ADR-0020-p10-s0-addressing-qualification.md"
 STUDY = "P10S0"
 FAMILY = "P10S0_ADDRESSING_QUALIFICATION"
 SCHEMA = 1
-DEFAULT_CONFIG = Path("configs/p10s0_addressing.toml")  # the brief's name; the ADR header says configs/p10s0_qualification.toml (reported)
+DEFAULT_CONFIG = Path("configs/p10s0_qualification.toml")  # the ADR header's name (the lead's ruling on item 1 of the implementation audit)
 LAUNCH_DIR = Path("studies/p10s0/launch")
 FREEZE_DIR = Path("studies/p10s0/freeze")
 P9II_RECORDS = {
@@ -76,6 +76,8 @@ CALIBRATED = {"lambda": 1.0, "u_pre": 2048.0, "mu": 1.0, "k0_fraction": 0.125}  
 Hyper = p9iicore.Hyper
 exposures_per_fact = p9iicore.exposures_per_fact
 ANSWER_SITES_PER_CONTEXT = p9iicore.ANSWER_SITES_PER_CONTEXT
+GENERATION_FLOOR_SECONDS = 60.0  # per draw (the lead's ruling on item 2)
+GENERATION_PROVISIONAL_CAP_SECONDS = 1800.0  # a placeholder: the rehearsal sets the cap (2 x the measured generation time of the rehearsal draw, floor 60 s); the freeze refuses while provisional
 HYPER = Hyper(lambda_=CALIBRATED["lambda"], u_pre=CALIBRATED["u_pre"], k0_fraction=CALIBRATED["k0_fraction"], mu=CALIBRATED["mu"])
 
 
@@ -170,6 +172,67 @@ MAPPING_NONE_TEMPLATE = "FOURTH ARM: NONE — P9-II CARRIED {arm} (ALREADY IN S0
 MAPPING_NONE_STATUS_TEMPLATE = "FOURTH ARM: NONE — P9-II {status}"
 FIXED_SENTENCES = "W7 is told the record length. The memory is told the answer position. Synthetic fixed-length records; one frozen 27,392-parameter backbone."
 NOT_STARTED = "NOT STARTED — NO P9-II CALIBRATION RECORD"
+
+
+CUT3_LABEL = "one initialization seed per draw at 16,384"  # ADR-0020 section 10.4, cut 3: "the label states ..."
+PRODUCT_KINDS = ("analysis", "q1_gate")  # records that carry classes, labels or candidates; ``write_record`` stamps them
+A5D = "A5-D"
+
+
+def a5d_fields() -> dict[str, str]:
+    """The three fixed strings of section 3.4 as fields of a machine product."""
+    return {"fourth_arm_string": FOURTH_ARM_STRING, "f1_annotation": F1_ANNOTATION, "provenance_sentence": PROVENANCE_SENTENCE}
+
+
+def mentions_a5d(text: str) -> bool:
+    stripped = text.replace(FOURTH_ARM_STRING, "").replace(F1_ANNOTATION, "").replace(PROVENANCE_SENTENCE, "")
+    return A5D in stripped
+
+
+def has_provenance(text: str) -> bool:
+    return FOURTH_ARM_STRING in text and F1_ANNOTATION in text and PROVENANCE_SENTENCE in text
+
+
+def assert_provenance(text: str, what: str = "output") -> None:
+    """Section 8.7: an output that prints a class, label, annotation or reading of A5-D carries the three strings and may not shorten them away."""
+    if mentions_a5d(text) and not has_provenance(text):
+        raise ValueError(f"{what} names A5-D without the fourth-arm string, P9-II's F1 annotation and the fixed provenance sentence (ADR-0020 section 8.7)")
+
+
+def stamp(obj: Any) -> Any:
+    """A copy of ``obj`` in which every dict that is an A5-D entry (a key containing 'A5-D' whose value is a leaf dict, or a dict whose 'arm', 'candidate' or 'c4' is 'A5-D') carries ``a5d_provenance`` (the
+    three strings), and the top level carries it once if A5-D is named anywhere. This is the one place a machine product gets them; ``write_record`` and ``emit_stdout`` call it."""
+    import copy
+
+    out = copy.deepcopy(obj)
+
+    def walk(node: Any) -> None:
+        if isinstance(node, dict):
+            if any(node.get(k) == A5D for k in ("arm", "candidate", "c4")):
+                node["a5d_provenance"] = a5d_fields()
+            for k, v in list(node.items()):
+                if isinstance(k, str) and A5D in k and isinstance(v, dict) and not any(isinstance(x, dict) for x in v.values()):
+                    v["a5d_provenance"] = a5d_fields()  # a leaf entry keyed by A5-D; containers keyed by A5-D (per-cell-type maps) are covered by their entries' ``arm`` and by the top level
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk(out)
+    if isinstance(out, dict) and mentions_a5d(json.dumps(jsonable(out), default=str)):
+        out["a5d_provenance"] = a5d_fields()
+    return out
+
+
+def emit_stdout(obj: Mapping[str, Any]) -> None:
+    """Print a JSON line (stage summaries) through the stamp: a summary that names A5-D carries the three strings."""
+    text = json.dumps(jsonable(stamp(dict(obj))), sort_keys=True, ensure_ascii=False)
+    assert_provenance(text, "stdout")
+    print(text)
+
+
+def csv_header_lines() -> list[str]:
+    return [f"# {FOURTH_ARM_STRING}", f"# {F1_ANNOTATION}", f"# {PROVENANCE_SENTENCE}"]
 
 
 def a5d_block() -> str:
@@ -409,11 +472,16 @@ class SeedSetSpec:
         return frozenset(out)
 
 
-def registered_set(draw: int) -> SeedSetSpec:
+def registered_set(draw: int, profile: str = "registered") -> SeedSetSpec:
+    if profile == "test":
+        draw_base(draw)  # range check
+        return SeedSetSpec(f"p10s0-test-draw-{draw}", TEST_SEED_BASE + TEST_PROFILE_STRIDE * (draw - 1))
     return SeedSetSpec(f"p10s0-draw-{draw}", draw_base(draw))
 
 
-def reserve_set(reserve: int) -> SeedSetSpec:
+def reserve_set(reserve: int, profile: str = "registered") -> SeedSetSpec:
+    if profile == "test":
+        return SeedSetSpec(f"p10s0-test-reserve-{reserve}", TEST_SEED_BASE + TEST_PROFILE_STRIDE * (N_DRAWS + reserve - 1))
     return SeedSetSpec(f"p10s0-reserve-{reserve}", RESERVE_BASES[reserve])
 
 
@@ -430,6 +498,9 @@ def test_set(offset: int = 0) -> SeedSetSpec:
 
 
 def set_of_name(name: str) -> SeedSetSpec:
+    t = re.fullmatch(r"p10s0-test-(draw|reserve)-(\d+)", name)
+    if t is not None:
+        return registered_set(int(t[2]), "test") if t[1] == "draw" else reserve_set(int(t[2]), "test")
     m = re.fullmatch(r"p10s0-(draw|reserve|test)-(\d+)", name)
     if m is not None:
         index = int(m[2])
@@ -439,6 +510,28 @@ def set_of_name(name: str) -> SeedSetSpec:
     if name == REHEARSAL_SET.name:
         return REHEARSAL_SET
     raise ValueError(f"not a P10S0 seed set name: {name!r}")
+
+
+TEST_PROFILE_MARKER = "TEST_PROFILE"
+TEST_PROFILE_STRIDE = 4  # test-profile sets overlap each other (they are never used for a result) and stay inside 920001-920999
+
+
+def profile_of(run_dir: Path | str | None) -> str:
+    """'test' when the run directory holds the marker file ``TEST_PROFILE`` (the end-to-end exercise of the registered sequence on test seeds; ``studies.p10s0.e2e``), else 'registered'. The marker only
+    selects seed sets named ``p10s0-test-draw-k`` / ``p10s0-test-reserve-k`` (test seeds 920001+), tiny sizes and a synthetic backbone; no registered seed is ever read under it."""
+    return "test" if run_dir is not None and (Path(run_dir) / TEST_PROFILE_MARKER).is_file() else "registered"
+
+
+def draw_names(profile: str = "registered") -> tuple[str, ...]:
+    return DRAW_NAMES if profile == "registered" else tuple(f"p10s0-test-draw-{k}" for k in range(1, N_DRAWS + 1))
+
+
+def reserve_names(profile: str = "registered") -> tuple[str, ...]:
+    return RESERVE_NAMES if profile == "registered" else ("p10s0-test-reserve-1", "p10s0-test-reserve-2")
+
+
+def set_names(profile: str = "registered") -> tuple[str, ...]:
+    return (*draw_names(profile), *reserve_names(profile))
 
 
 def replacement_label(reserve_name: str) -> str:
@@ -451,7 +544,7 @@ def check_seed_set(mode: str, name: str) -> None:
     if mode not in MODES:
         raise ValueError(f"unknown mode {mode!r}")
     if mode == "registered":
-        ok = bool(re.fullmatch(r"p10s0-(draw|reserve)-\d+", name))
+        ok = bool(re.fullmatch(r"p10s0-(test-)?(draw|reserve)-\d+", name))  # the test-profile names hold test seeds only
     elif mode == "check":
         ok = name == CHECK_SET.name
     elif mode == "rehearsal":
@@ -469,15 +562,16 @@ class DrawPlan(NamedTuple):
     reason: str | None
 
 
-def plan_draws(g1_passed: Mapping[str, bool]) -> DrawPlan:
+def plan_draws(g1_passed: Mapping[str, bool], profile: str = "registered") -> DrawPlan:
     """As ADR-0019 section 9: a draw that fails G1 (any of its three fact sets) is replaced by the next unused reserve; a reserve that fails G1 when needed, or more than two failed draws,
     stops everything. A draw or reserve with no G1 result counts as failed."""
-    failed = [k for k in range(1, N_DRAWS + 1) if g1_passed.get(DRAW_NAMES[k - 1]) is not True]
-    seed_set_of = {k: DRAW_NAMES[k - 1] for k in range(1, N_DRAWS + 1)}
+    draws, reserves = draw_names(profile), reserve_names(profile)
+    failed = [k for k in range(1, N_DRAWS + 1) if g1_passed.get(draws[k - 1]) is not True]
+    seed_set_of = {k: draws[k - 1] for k in range(1, N_DRAWS + 1)}
     if len(failed) > MAX_REPLACEMENTS:
         return DrawPlan(False, seed_set_of, {}, f"{len(failed)} draws failed G1 (at most {MAX_REPLACEMENTS} may be replaced)")
     replacements: dict[int, str] = {}
-    for slot, reserve in zip(failed, RESERVE_NAMES, strict=False):
+    for slot, reserve in zip(failed, reserves, strict=False):
         if g1_passed.get(reserve) is not True:
             return DrawPlan(False, seed_set_of, replacements, f"reserve {reserve} failed G1 or has no G1 result")
         replacements[slot] = reserve
@@ -615,7 +709,7 @@ def sha256_text(text: str) -> str:
 
 # --- config ----------------------------------------------------------------------------------------------------------------------
 def registered_config() -> dict[str, Any]:
-    """The configuration mirrored in ``configs/p10s0_addressing.toml`` (derived from the constants)."""
+    """The configuration mirrored in ``configs/p10s0_qualification.toml`` (derived from the constants)."""
     return {
         "schema_version": SCHEMA,
         "experiment_family": FAMILY,
@@ -639,6 +733,7 @@ def registered_config() -> dict[str, Any]:
             "stable_threshold": STABLE_THRESHOLD, "lm_margin": LM_MARGIN, "paired_threshold": PAIRED_THRESHOLD, "consistency_max_failed_draws": CONSISTENCY_MAX_FAILED_DRAWS,
             "max_not_evaluated_draws": MAX_NOT_EVALUATED_DRAWS, "max_failed_reliable": MAX_FAILED_RELIABLE, "min_successes_20": MIN_SUCCESSES["20"], "min_successes_10": MIN_SUCCESSES["10"],
         },
+        "generation": {"cap_seconds": GENERATION_PROVISIONAL_CAP_SECONDS, "provisional": True, "measured_seconds": 0.0, "floor_seconds": GENERATION_FLOOR_SECONDS},
         "resources": {
             "rss_worker_bytes": RSS_WORKER_BYTES, "rss_aggregate_bytes": RSS_AGGREGATE_BYTES, "rehearsal_peak_limit_bytes": REHEARSAL_PEAK_LIMIT_BYTES, "workers": WORKERS, "cap_hours": CAP_HOURS,
             "headroom": HEADROOM, "rehearsal_updates": REHEARSAL_UPDATES, "rehearsal_busy_processes": REHEARSAL_BUSY_PROCESSES,
@@ -647,7 +742,18 @@ def registered_config() -> dict[str, Any]:
 
 
 def validate_config(data: dict[str, Any]) -> dict[str, Any]:
-    _validate(data, registered_config(), "P10S0 config")
+    """Everything but the ``generation`` block must equal the constants; the generation block (set by the rehearsal, before the freeze) is checked for form: cap at least the floor and not provisional
+    unless it is the placeholder."""
+    expected = registered_config()
+    expected.pop("generation")
+    _validate({k: v for k, v in data.items() if k != "generation"}, expected, "P10S0 config")
+    g = data.get("generation")
+    if not isinstance(g, dict) or set(g) != {"cap_seconds", "provisional", "measured_seconds", "floor_seconds"}:
+        raise ValueError("P10S0 config needs a [generation] block")
+    if g["floor_seconds"] != GENERATION_FLOOR_SECONDS or float(g["cap_seconds"]) < GENERATION_FLOOR_SECONDS or not isinstance(g["provisional"], bool):
+        raise ValueError("P10S0 config: the generation cap is below the floor of 60 s or malformed")
+    if not g["provisional"] and float(g["cap_seconds"]) != max(GENERATION_FLOOR_SECONDS, 2.0 * float(g["measured_seconds"])):
+        raise ValueError("P10S0 config: a set generation cap must be max(60 s, 2 x the measured generation time of the rehearsal draw)")
     return data
 
 
@@ -660,16 +766,31 @@ def load_config(path: Path | None = None) -> dict[str, Any]:
         return validate_config(tomllib.load(stream))
 
 
-def render_config_toml() -> str:
-    """The canonical text of ``configs/p10s0_addressing.toml`` (a test requires byte equality)."""
+def render_config_toml(generation: Mapping[str, Any] | None = None) -> str:
+    """The canonical text of ``configs/p10s0_qualification.toml`` (a test requires byte equality with the constants; ``generation`` is the block the rehearsal sets, provisional by default)."""
     from studies.p9i.core import _toml_lines
 
     header = [
         "# ADR-0020 revision 4 (P10S0) registered constants. Generated by studies.p10s0.core.render_config_toml",
-        "# and validated against studies.p10s0.core; any difference is refused.",
+        "# and validated against studies.p10s0.core; any difference is refused. The [generation] block is set by the",
+        "# rehearsal (stages set-generation-cap) before the freeze; the freeze refuses while it is provisional.",
         "",
     ]
-    return "\n".join([*header, *_toml_lines(registered_config(), "")]) + "\n"
+    cfg = registered_config()
+    if generation is not None:
+        cfg["generation"] = dict(generation)
+    return "\n".join([*header, *_toml_lines(cfg, "")]) + "\n"
+
+
+def generation_block(config: Path | None = None) -> dict[str, Any]:
+    return dict(load_config(config)["generation"])
+
+
+def set_generation_cap(measured_seconds: float) -> dict[str, Any]:
+    """The generation block the rehearsal sets: cap = max(60 s, 2 x the measured generation time of the rehearsal draw (all three fact sets)); no longer provisional."""
+    if not math.isfinite(measured_seconds) or measured_seconds <= 0:
+        raise ValueError("the measured generation time must be a positive finite number")
+    return {"cap_seconds": max(GENERATION_FLOOR_SECONDS, 2.0 * measured_seconds), "provisional": False, "measured_seconds": float(measured_seconds), "floor_seconds": GENERATION_FLOOR_SECONDS}
 
 
 def resource_limits(config: Path | None = None) -> dict[str, Any]:
@@ -770,7 +891,11 @@ def write_record(path: Path, record: Mapping[str, Any]) -> None:
     if record.get("study") != STUDY or record.get("schema") != SCHEMA or record.get("kind") not in RECORD_KINDS:
         raise ValueError("P10S0 record needs study, schema and a registered kind")
     path.parent.mkdir(parents=True, exist_ok=True)
-    write_json(path, dict(record))
+    out = dict(record)
+    if record["kind"] in PRODUCT_KINDS:
+        out = stamp(jsonable(out))
+        assert_provenance(json.dumps(out, default=str, ensure_ascii=False), f"{record['kind']} record")
+    write_json(path, out)
 
 
 def read_record(path: Path, kind: str | None = None) -> dict[str, Any]:
@@ -795,8 +920,8 @@ def eval_path(run_dir: Path, label: str, update: int) -> Path:
     return cell_dir(run_dir, label) / "eval" / snapshot_stem(update) / "eval.json"
 
 
-def default_experiments_root() -> Path:
-    return p9core.default_experiments_root()
+def default_experiments_root(repo: Path | None = None) -> Path:
+    return p9core.default_experiments_root(repo)
 
 
 # --- the one charged-time ledger (16 hours, section 10.4) -------------------------------------------------------------------------------------
@@ -849,6 +974,18 @@ def analytical_cost(arm: str, slots: int, updates: int) -> dict[str, Any]:
     out = p9iicore.analytical_cost(base_arm(arm), slots, updates)
     out["query_projection_columns"] = WX_FEATURES if is_wx(arm) else (WINDOW * HIDDEN_WIDTH if arm not in ("A6", "A7") else 0)
     return out
+
+
+P9II_ACCEPTANCE_QUOTE = "yes I do, yes we can raise to 16 and I approve the package"
+P9II_ACCEPTANCE_SOURCE = "docs/decisions/ADR-0019-robust-sparse-address-learning.md"
+
+
+def p9ii_acceptance(repo: Path | None = None) -> dict[str, Any]:
+    """Whether the human lead's acceptance of the P9-II outcome is recorded (ADR-0019 section 16, verbatim) in this tree: read from the file, never assumed."""
+    base = repo or repo_root()
+    path = base / P9II_ACCEPTANCE_SOURCE
+    text = path.read_text(encoding="utf-8") if path.is_file() else ""
+    return {"accepted": P9II_ACCEPTANCE_QUOTE in text, "source": f"{P9II_ACCEPTANCE_SOURCE} section 16", "quote": P9II_ACCEPTANCE_QUOTE if P9II_ACCEPTANCE_QUOTE in text else None, "source_sha256": file_sha256(path) if path.is_file() else None}
 
 
 def hours(seconds: float) -> float:

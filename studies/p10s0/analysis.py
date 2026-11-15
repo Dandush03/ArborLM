@@ -9,6 +9,7 @@ and the hypothesis readings. Missing cells, failed tasks, failed gates, a replac
 ENGINEERING_FAIL / INCOMPLETE with no scientific label and no reduced denominator (outcome row 2); a missing or failed WX or probe cell makes that block INCOMPLETE and leaves Q1's outcome standing.
 """
 
+import json
 import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
@@ -46,6 +47,7 @@ class RunData:
     candidate_run: str | None = None  # the candidate the WX and probe blocks were run for (recorded by the Q1 gate)
     frozen_mismatch: list[str] = field(default_factory=list)
     unit: int = core.UPDATES
+    acceptance: Mapping[str, Any] | None = None  # the recorded fact of the human lead's acceptance of the P9-II outcome (``core.p9ii_acceptance``), read when the analysis runs
 
 
 # --- expected cells and references -------------------------------------------------------------------------------------------------------------------
@@ -137,10 +139,13 @@ def eval_arm(run: RunData, arm: str, ct: str, *, block: str = "Q1", draws: Seque
         out["pooled"] = {"available": False, "text": "NOT AVAILABLE (S0 NOT_EVALUATED)"}
     else:
         out["consistency"] = C.consistency(p9, p9_cls.draws_evaluated, p9_draws_failed) if core_q1 else None
-        out["pooled"] = C.pooled_line(p9, p9_cls, p9_draws_failed, arm) if core_q1 else {"available": False, "text": "NOT AVAILABLE (S0's protocol at this cell type is not P9-II's)"}
+        same_protocol = core_q1 and not (run.cut3 and ct == "8K/16K")  # under cut 3 the protocol at 8K/16K is no longer P9-II's (section 6.3)
+        out["pooled"] = C.pooled_line(p9, p9_cls, p9_draws_failed, arm) if same_protocol else {"available": False, "text": "NOT AVAILABLE (S0's protocol at this cell type is not P9-II's)"}
     summaries = {k: run.cells[label_of(block, arm, ct, *k)].summary for k in s0_v if run.cells[label_of(block, arm, ct, *k)].summary is not None}
     never = sum(1 for s in summaries.values() if s is not None and s.category.onset is None)
     out["collapse_free"] = {"k": never, "n": len(summaries), "label": f"{C.COLLAPSE_FREE}: {never} of {len(summaries)} counted cells never had a collapse onset"}
+    bits = [min(o.bits_a, o.bits_b) for o in obs.values()]
+    out["information_bits"] = {"median_of_the_smaller_panel": p9c.median(bits), "cells": len(bits), "unit": "bits per fact (i = 5 - h2(e) - e log2 31; 0 at or below the chance interval); reported, enters no rule"}
     out["categories"] = p9c.category_counts({k: s for k, s in summaries.items() if s is not None})
     with_first = [s for s in summaries.values() if s is not None and s.first_success is not None]
     out["sustained_success"] = {"cells_with_first_success": len(with_first), "sustained": sum(1 for s in with_first if s.sustained), "label": f"sustained success: {sum(1 for s in with_first if s.sustained)} of {len(with_first)} cells with a first success (descriptive)"}
@@ -227,7 +232,7 @@ def wx_block(run: RunData, candidate: str | None, selection_row: int) -> dict[st
         cls = C.arm_class(v, keys, "10")
         obs = {k: run.cells[label_of("WX", arm, ct, *k)].obs[decisive] for k in v}
         stable = C.address_stable(obs, v)
-        out["celltypes"][ct] = {"class": cls, "stable": stable, "meets": C.meets_criteria(cls, stable), "failed_conditions": {f"{d}/{j}": list(x.failed_conditions) for (d, j), x in sorted(v.items()) if x.status == C.FAILED}, "verdicts": v}
+        out["celltypes"][ct] = {"auc_median": p9c.median([o.auc for o in obs.values()]), "bits_median": p9c.median([min(o.bits_a, o.bits_b) for o in obs.values()]), "class": cls, "stable": stable, "meets": C.meets_criteria(cls, stable), "failed_conditions": {f"{d}/{j}": list(x.failed_conditions) for (d, j), x in sorted(v.items()) if x.status == C.FAILED}, "verdicts": v}
     if status == C.COMPLETE and any(c["class"].cls == C.NOT_EVALUATED for c in out["celltypes"].values()):
         out["status"] = "NOT_EVALUATED"
     return out
@@ -274,7 +279,18 @@ def _q2_status(block: str, candidate: str | None, selection_row: int, run: RunDa
 
 # --- the whole study ---------------------------------------------------------------------------------------------------------------------------------------
 def analyze(run: RunData) -> dict[str, Any]:
-    """Every rule of section 8 over the registry."""
+    """Every rule of section 8 over the registry. The result leaves through ``core.stamp``: every A5-D class, label, candidate and reading carries the fourth-arm string, P9-II's F1 annotation and the fixed
+    provenance sentence (section 8.7)."""
+    out = _analyze(run)
+    out["p9ii_acceptance"] = dict(run.acceptance) if run.acceptance is not None else None
+    out["cut3_label"] = core.CUT3_LABEL if run.cut3 else None
+    stamped: dict[str, Any] = core.stamp(out)
+    core.assert_provenance(json.dumps(core.jsonable(stamped), default=str, ensure_ascii=False), "analysis result")
+    return stamped
+
+
+def _analyze(run: RunData) -> dict[str, Any]:
+    """The rules themselves (see ``analyze``)."""
     sel = run.arm_selection
     expected = expected_q1(run.cut3)
     assessment = assess(run, expected)
@@ -319,14 +335,15 @@ def analyze(run: RunData) -> dict[str, Any]:
         classes={a: {ct: e["s0"] for ct, e in per.items()} for a, per in evals.items()}, paired_s0=paired_s0, replication_labels=replication, outcome=outcome, candidate=candidate, overload=overload,
         record_length=record_length, probe=probe if probe["status"] in (C.COMPLETE, "NOT_EVALUATED") and "successes" in probe else None,
         probe_a6_evaluated=bool(probe.get("a6_evaluated") and all(probe["a6_evaluated"].values())), a0_failed_cells_8k16k=a0_failed,
+        a5d_8k4k_label=evals["A5-D"]["8K/4K"]["s0"].label if "A5-D" in evals and "8K/4K" in evals["A5-D"] else None,
     )  # fmt: skip
     out["a6"] = {ct: {str(d): {"accuracy_a": r.acc_a, "accuracy_b": r.acc_b, "lm_relative_rise": r.lm_rise, "evaluated": a6ok[ct][d]} for d, r in sorted(a6_references(run, ct).items())} for ct in a6ok}
     out["arms"] = {a: {ct: serialize_eval(e) for ct, e in per.items()} for a, per in evals.items()}
     out["paired"] = {a: {ct: {"s0": _paired_dict(paired_s0[a][ct]), "p9ii": _paired_dict(paired_p9[a][ct])} for ct in core.CORE_CELLTYPES} for a in paired_s0}
     out["selection"] = {k: v for k, v in selection.items()}
-    out["outcome"] = {"row": outcome.row, "outcome": outcome.outcome, "label": outcome.label, "arm": outcome.arm, "scope": outcome.scope, "detail": outcome.detail}
+    out["outcome"] = {"row": outcome.row, "outcome": outcome.outcome, "label": outcome.label + (f" [{core.CUT3_LABEL}]" if run.cut3 else ""), "arm": outcome.arm, "scope": outcome.scope, "detail": outcome.detail}
     out["overload"] = overload
-    out["record_length"] = {"label": record_length, "status": wx["status"], "celltypes": {ct: {"class": _sclass_dict(v["class"]), "stable": v["stable"], "meets": v["meets"], "failed_conditions": v["failed_conditions"]} for ct, v in wx["celltypes"].items()}}
+    out["record_length"] = {"label": record_length, "status": wx["status"], "celltypes": {ct: {"class": _sclass_dict(v["class"]), "stable": v["stable"], "meets": v["meets"], "failed_conditions": v["failed_conditions"], "auc_median": v["auc_median"], "bits_median": v["bits_median"]} for ct, v in wx["celltypes"].items()}}
     out["probe"] = {k: v for k, v in probe.items() if k != "verdicts"}
     out["q2_status"] = {"wx": wx["status"], "probe": probe["status"]}
     out["p9ii_negative_control"] = sel["p9ii_negative_control"]
@@ -346,7 +363,7 @@ def _point(record: Mapping[str, Any], update: int) -> ProbePoint:
     return ProbePoint(update, int(core.number(p.get("distinct_top1", 0))), core.number(p.get("largest_top1_share", 1.0)), int(core.number(p.get("probe_facts", 0))), core.number(p.get("mean_cosine_different", math.nan)), core.number(p.get("probe_accuracy", math.nan)), core.number(p.get("target_top8_recall", math.nan)))
 
 
-def load_run(run_dir: Path, arm_selection: Mapping[str, Any], *, cut3: bool = False, unit: int = core.UPDATES, failed_tasks: Sequence[str] = (), gates: Mapping[str, Any] | None = None, draw_plan: Mapping[str, Any] | None = None, block_status: Mapping[str, str] | None = None, candidate_run: str | None = None, frozen_mismatch: Sequence[str] = ()) -> RunData:
+def load_run(run_dir: Path, arm_selection: Mapping[str, Any], *, cut3: bool = False, unit: int = core.UPDATES, failed_tasks: Sequence[str] = (), gates: Mapping[str, Any] | None = None, draw_plan: Mapping[str, Any] | None = None, block_status: Mapping[str, str] | None = None, candidate_run: str | None = None, frozen_mismatch: Sequence[str] = (), acceptance: Mapping[str, Any] | None = None) -> RunData:
     """Read the eval records (every readout), training records and logs of every registered cell present in ``run_dir``; a cell with a missing or failed record is left out (it is then missing and
     the study INCOMPLETE; nothing is imputed). Cells of the WX and probe blocks are read for every candidate that has them."""
     cells: dict[str, core.Cell] = {c.label: c for c in core.q1_cells(False)}
@@ -377,4 +394,4 @@ def load_run(run_dir: Path, arm_selection: Mapping[str, Any], *, cut3: bool = Fa
         train_rec = core.read_record(folder / "train.json", "train")
         rec_dec = core.read_record(core.eval_path(run_dir, label, decisive), "eval")
         cd.summary = p9c.summarize_training(c.base, lines_of(folder / "updates.jsonl"), lines_of(folder / "diagnostics.jsonl"), _point(rec_dec, decisive), line, u_pre=train_rec["schedule"]["u_pre"], succeeded=True, stage_updates=int(train_rec["matched_updates"]))
-    return RunData(data, arm_selection, list(failed_tasks), gates, draw_plan, cut3, dict(block_status or {}), candidate_run, list(frozen_mismatch), unit)
+    return RunData(data, arm_selection, list(failed_tasks), gates, draw_plan, cut3, dict(block_status or {}), candidate_run, list(frozen_mismatch), unit, acceptance)

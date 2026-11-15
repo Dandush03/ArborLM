@@ -202,15 +202,16 @@ class PreQ1Decision(NamedTuple):
     cut: int | None
 
 
-def pre_q1_decision(charged_seconds: float, before_q1_seconds: float, q1_full_seconds: float, q1_cut3_seconds: float, cap_seconds: float | None = None) -> PreQ1Decision:
+def pre_q1_decision(charged_seconds: float, before_q1_seconds: float, q1_full_seconds: float, q1_cut3_seconds: float, cap_seconds: float | None = None, reserve_seconds: float = 0.0) -> PreQ1Decision:
     """Before Q1 the rule is evaluated on Q1 and on the stages before Q1 that have not yet run (stages already run count once, as hours already charged). If it does not hold, cut 3 (the second seed at
-    8K/16K dropped) is applied; if it still does not hold, item 4: nothing registered is run and the matter returns to the human lead."""
-    full = holds(charged_seconds, [before_q1_seconds, q1_full_seconds], cap_seconds)
+    8K/16K dropped) is applied; if it still does not hold, item 4: nothing registered is run and the matter returns to the human lead. ``reserve_seconds`` is the rehearsed time of the analysis and report
+    stages (the lead's ruling on M6): it counts, doubled like every other remaining stage, as part of what is still to run, so that a block is not started if it would leave less than that."""
+    full = holds(charged_seconds, [before_q1_seconds, q1_full_seconds, reserve_seconds], cap_seconds)
     if full:
-        return PreQ1Decision("full", None, charged_seconds, core.HEADROOM * (before_q1_seconds + q1_full_seconds), None)
-    if holds(charged_seconds, [before_q1_seconds, q1_cut3_seconds], cap_seconds):
-        return PreQ1Decision("cut3", None, charged_seconds, core.HEADROOM * (before_q1_seconds + q1_cut3_seconds), 3)
-    return PreQ1Decision("stop", NOT_RUN_BUDGET, charged_seconds, core.HEADROOM * (before_q1_seconds + q1_cut3_seconds), None)
+        return PreQ1Decision("full", None, charged_seconds, core.HEADROOM * (before_q1_seconds + q1_full_seconds + reserve_seconds), None)
+    if holds(charged_seconds, [before_q1_seconds, q1_cut3_seconds, reserve_seconds], cap_seconds):
+        return PreQ1Decision("cut3", None, charged_seconds, core.HEADROOM * (before_q1_seconds + q1_cut3_seconds + reserve_seconds), 3)
+    return PreQ1Decision("stop", NOT_RUN_BUDGET, charged_seconds, core.HEADROOM * (before_q1_seconds + q1_cut3_seconds + reserve_seconds), None)
 
 
 class PostQ1Decision(NamedTuple):
@@ -222,12 +223,12 @@ class PostQ1Decision(NamedTuple):
     charged_seconds: float
 
 
-def post_q1_decision(charged_seconds: float, wx_seconds: float, probe_seconds: float, cap_seconds: float | None = None) -> PostQ1Decision:
+def post_q1_decision(charged_seconds: float, wx_seconds: float, probe_seconds: float, cap_seconds: float | None = None, reserve_seconds: float = 0.0) -> PostQ1Decision:
     """After the Q1 gate the rule is evaluated on WX and the probe with the actual candidate's rehearsed rates and the hours charged; cut 1 (drop the probe) and then cut 2 (drop WX) are applied as
     needed. Both dropped blocks print NOT RUN — BUDGET."""
-    if holds(charged_seconds, [wx_seconds, probe_seconds], cap_seconds):
+    if holds(charged_seconds, [wx_seconds, probe_seconds, reserve_seconds], cap_seconds):
         return PostQ1Decision(True, True, None, None, (), charged_seconds)
-    if holds(charged_seconds, [wx_seconds], cap_seconds):
+    if holds(charged_seconds, [wx_seconds, reserve_seconds], cap_seconds):
         return PostQ1Decision(True, False, None, NOT_RUN_BUDGET, (1,), charged_seconds)
     return PostQ1Decision(False, False, NOT_RUN_BUDGET, NOT_RUN_BUDGET, (1, 2), charged_seconds)
 
@@ -257,10 +258,21 @@ def memory_table(rates: Rates, limit_bytes: int = core.REHEARSAL_PEAK_LIMIT_BYTE
 
 
 # --- caps (one table, written by the freeze procedure) ---------------------------------------------------------------------------------------------
-def caps_table(rates: Rates, *, gates_wall_seconds: float, analysis_wall_seconds: float, report_wall_seconds: float, generate_wall_seconds: float, hyper: core.Hyper = core.HYPER, unit: int = core.UPDATES, floor_seconds: float = CAP_FLOOR_SECONDS) -> dict[str, Any]:
+GATES_EXTRA_DRAWS = core.N_DRAWS - 1  # the rehearsal-draw gates cover one draw; the registered gates verify and run G2 on thirteen
+
+
+def gates_measured_seconds(gates_wall_seconds: float, gates_per_draw_seconds: float) -> float:
+    """The registered gates' measured time: the rehearsal-draw gates (which include one draw's rebuild, hash check and G2) plus twelve more such draws (the lead's ruling on M8)."""
+    return gates_wall_seconds + GATES_EXTRA_DRAWS * gates_per_draw_seconds
+
+
+def caps_table(rates: Rates, *, gates_wall_seconds: float, gates_per_draw_seconds: float, analysis_wall_seconds: float, report_wall_seconds: float, generate_wall_seconds: float, hyper: core.Hyper = core.HYPER, unit: int = core.UPDATES, floor_seconds: float = CAP_FLOOR_SECONDS) -> dict[str, Any]:
     """The frozen cap table (``studies/p10s0/freeze/stage_caps.json``): each block cap is twice the rehearsed projection (task start-up included) of what it bounds, one entry per block configuration
     (Q1 full and under cut 3; WX and the probe for each arm that can still be the candidate), so a block's cap is that of the configuration its gate selects. Gates, generation, analysis and report are not
     rehearsed at real size: twice a measured time with the stated floor."""
+    if gates_per_draw_seconds <= 0:
+        raise ValueError("the gates cap needs the rehearsal draw's measured per-draw time (13 draws x 3 fact sets in the registered gates)")
+    gates_measured = gates_measured_seconds(gates_wall_seconds, gates_per_draw_seconds)
     table = projection_table(rates, hyper, unit)
 
     def entry(p: Mapping[str, Any]) -> dict[str, float]:
@@ -269,7 +281,8 @@ def caps_table(rates: Rates, *, gates_wall_seconds: float, analysis_wall_seconds
     return {
         "rule": "each block cap = 2 x the rehearsed projection (task start-up included) of its configuration; gates, generation, analysis and report: 2 x a measured time with the stated floor",
         "floor_seconds": floor_seconds,
-        "generate": max(floor_seconds, core.HEADROOM * generate_wall_seconds), "gates": max(floor_seconds, core.HEADROOM * gates_wall_seconds),
+        "generate": max(floor_seconds, core.HEADROOM * generate_wall_seconds), "gates": max(floor_seconds, core.HEADROOM * gates_measured),
+        "measured": {"gates": gates_measured, "gates_rehearsal_draw": gates_wall_seconds, "gates_per_draw": gates_per_draw_seconds, "analysis": analysis_wall_seconds, "report": report_wall_seconds, "generate": generate_wall_seconds, "reserve_analysis_report": analysis_wall_seconds + report_wall_seconds},
         "q1": {k.split(":")[1]: entry(v) for k, v in table.items() if k.startswith("q1:")},
         "wx": {k.split(":")[1]: entry(v) for k, v in table.items() if k.startswith("wx:")},
         "probe": {k.split(":")[1]: entry(v) for k, v in table.items() if k.startswith("probe:")},
