@@ -48,3 +48,15 @@ Recorded by the lead:
   3. Stages whose measurement is the time itself (S1's throughput and cost timing; any timing benchmark) run alone, as their ADRs say.
   4. Charged hours are counted per study as before; running side by side does not merge budgets.
   5. Reviews and audits are split by dimension into parallel reviewer contexts where the parts are independent.
+
+## S2's composition rule is strengthened (2026-11-15 UTC)
+
+The lead reported that ADR-0022's registered COMPOSES rule (§11.4) compares raw scores, so an arm that adds nothing could satisfy it, and that the lead had left the rule unchanged and printed the untrained student's score beside it. The human lead answered, verbatim:
+
+> let's strenght the registerd rule, the ost is aceptable
+
+Recorded by the lead:
+
+- **The COMPOSES rule of ADR-0022 §11.4 is strengthened by the human lead's decision**, before any S2 calibration, rehearsal or registered record exists. The new rule measures each answer's gain over the untrained student inside the combined task against its gain in the single task, on the same sentences, and requires both answers to pass; its exact text is fixed in the combined-tasks addendum after an independent check.
+- "The cost is acceptable" is read as covering the added scoring time of the combined tasks (projected by the drafter at about 3 to 12 hours of charged time for four replicates, unchecked), within the hour-cap delegation already recorded.
+- The composition lines stay descriptive: they enter no gate, class or TRANSFER label.
