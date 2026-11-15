@@ -1,0 +1,23 @@
+ADR replicate bases: [220001, 220101, 220201, 220301]
+ADR offsets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ADR partition seed: 220901; streams named in the text: [220902, 220903, 220904, 220905]; further listed: [220906, 220907, 220908, 220909, 220910]
+registered-run set equal to ADR: True (44 seeds)
+registered-data set equal to ADR 220901-220910: True
+calibration set equal to 221001+100i+offset: True; inside 221001-221999: True
+rehearsal set equal to 222001+100i+offset: True; inside 222001-222999: True
+test set is 229001-229999: True
+partition-side names match the ADR uses: True
+every listed registered seed in 220001-228999: True
+no listed registered seed in calibration/rehearsal/test ranges: True
+modes disjoint: reg&cal=False reg&reh=False reg&test=False cal&reh=False data&reg=False
+test-mode stand-ins for partition seeds [229951, 229952, 229953, 229954, 229955, 229956, 229957, 229958, 229959, 229960] inside test range: True
+S2 seeds (all modes) inside a listed foreign range: []
+P1-P8 (and S0/S1/P9) config seeds read: 51; intersect S2 sets: []
+foreign small seeds f with f + 1000k equal to an S2 seed (k shown; informational): [(1701, 220), (1701, 221), (1701, 228), (1702, 220), (1702, 221), (1702, 228), (1791, 228), (1792, 228), (1801, 220), (1801, 221), (1801, 228), (1802, 220)] ... total 63; min k = 218
+G9 probe vacuity: seed_gate(no records, no planned) ok = True  (expected by the ADR: cannot pass vacuously)
+G9 probe mode confusion: a 'test' use recorded in a registered process passes: ok = True
+G9 probe unlisted use of 220910 for the injection vector: ok = True
+partition seed refused in registered-run mode: as required
+calibration seed refused in registered-run mode: as required
+the +10 oracle-code seed is never recorded (the hash seeds no generator); G9 cannot see it; a manual record of 220311 passes: True
+G9 source check on the pinned package: ok = True; problems = []

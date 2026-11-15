@@ -1,0 +1,57 @@
+{
+ "freeze": {
+  "decision": "rung 1",
+  "R1_hours": 15.5,
+  "P_at_freeze": 3.5,
+  "frozen_train_cap_s": 90520.46564025535
+ },
+ "B2a_train_without_gates": {
+  "exit": 0,
+  "calls": [
+   {
+    "stage": "train",
+    "deadline_cap_s": 90520.46564025535,
+    "gates_json_exists": false
+   }
+  ]
+ },
+ "B2b_typed_caps_override": {
+  "exit": 0,
+  "frozen_train_cap_s": 90520.46564025535,
+  "deadline_used_s": 36000.0
+ },
+ "B2c_ledger": {
+  "registered_ledger_total_h": 8.158555525975924e-08,
+  "prefreeze_ledger_total_h": 3.5,
+  "plan_charged_hours_at_freeze": 3.5,
+  "train_with_33h_cap_started": true
+ },
+ "B2d_repo_override": {
+  "code_running_from": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/pin-p10s2-8ad26b5",
+  "tree_checked": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-audit-B/b2tmp/repo",
+  "same": false
+ },
+ "B2e_registered_entries_in_run_ledger": 3,
+ "B2e_raise_and_refreeze_after_registered_observation": {
+  "proposal": {
+   "old_cap_hours": 36.0,
+   "new_cap_hours": 54.0,
+   "charged_hours": 3.5,
+   "rung1_total_hours": 53.1,
+   "ceiling_hit": false,
+   "projections_hours": {
+    "n4-U2000": 24.8,
+    "n3-U2000": 18.65354862936538,
+    "n4-U1000": 14.742170484416071,
+    "n3-U1000": 11.110176492677432
+   }
+  },
+  "record_raise": true,
+  "second_freeze": {
+   "accepted": true,
+   "decision": "rung 1",
+   "cap": 54.0
+  }
+ },
+ "B2e_with_run_ledger": "refused: refused: a registered seed has been observed before the freeze"
+}

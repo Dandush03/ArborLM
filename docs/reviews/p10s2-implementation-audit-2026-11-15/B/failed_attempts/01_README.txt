@@ -1,0 +1,1 @@
+Attempt 01 (auditor's own error): the 'adr' variant dropped the per-process overhead AND changed E-table/recompute at once, so its 1,074 mismatches conflate three effects (mostly overhead, which the ADR does not define). Superseded by scripts/b1_rung_rule_recompute.py v2 which varies one factor at a time.

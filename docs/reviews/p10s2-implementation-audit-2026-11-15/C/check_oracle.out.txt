@@ -1,0 +1,27 @@
+ORACLE_LINE equals the ADR's fixed line: True
+LEAD_RULE quoted exactly in ADR header, 11.3 and 18: 4 occurrences; core.LEAD_RULE = 'S1 and S2 must not claim autonomous learned-memory success from oracle-assisted results.'
+A1 emit cost line FEWER VALUE ROWS ACTIVE: PRINTED WITH the line: 'oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary senten'
+A2 emit cost line 'value rows active not fewer': PRINTED WITHOUT the line: 'value rows active not fewer (analytical count: ratio 2.0668; key products per read 8192, a flat scan, not redu'
+A3 emit stored-size cost line: PRINTED WITHOUT the line: 'stored parameters (arithmetic, not a comparison): student plus a 8192-row store 139,364,674 against the two te'
+A4 emit teacher inference cost line: PRINTED WITHOUT the line: 'teacher inference cost per accepted training item: 0.4 s'
+A5 emit router accuracy line: PRINTED WITHOUT the line: "replicate 0, router AB: route accuracy {'A': 1.0, 'B': 1.0, 'general': 1.0}"
+A6 emit GEN line: PRINTED WITHOUT the line: 'r0/MAF/AB GEN loss increase 0.001: gate passes; the keyword router stayed silent'
+A7 emit_plain lower-case label: PRINTED WITHOUT the line: 'label: transfer-positive (append-frozen)'
+A8 emit_plain mixed-case class: PRINTED WITHOUT the line: 'M-append-frozen: Acquires-And-Retains in both orders'
+A9 emit_plain rehearsal rung outcome NOT STARTED: BUDGET (stages.cmd_rehearse:388): refused (emit_plain refuses a guarded line: 'rehearsal record written)
+A10 emit class line: PRINTED WITH the line: 'oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary senten'
+R1 record with router_table only: ACCEPTED without the line
+R2 record with gen only: ACCEPTED without the line
+R3 record with cost_lines: refused
+R4 record with 'Class' (capitalized key): ACCEPTED without the line
+R5 record with label inside a list of strings: ACCEPTED without the line
+terminal summary:
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+label: TRANSFER-POSITIVE (append-frozen + consolidation) (3 replicates, U = 2000)
+M-append-frozen: AB ACQUIRES-AND-RETAINS, BA ACQUIRES-AND-RETAINS
+M-ii: AB ACQUIRES-AND-RETAINS, BA ACQUIRES-AND-RETAINS
+M-seq: AB FORGETS, BA FORGETS
+L-seq: AB FORGETS, BA FORGETS
+
+report mentions M-ii GEN result: False | bootstrap interval printed: False | single-reference scores printed: False | changed-row share printed: False
+report contains LEAD_RULE sentence: False

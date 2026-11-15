@@ -1,0 +1,14 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a91c79a181109bb9c/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/pin-p10s2-8ad26b5/studies/p10s2/memory.py:439: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  return {"weight_on_new_rows": float((w * new).sum(dim=1).mean()), "reads_touching_new_rows": float(new.any(dim=1).float().mean())}
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+label: TRANSFER-NEGATIVE: NO-ACQUISITION (2 replicates, U = 4)
+L-seq: AB NOT_EVALUATED, BA NOT_EVALUATED
+M-append-frozen: AB NOT_EVALUATED, BA NOT_EVALUATED
+M-ii: AB NOT_EVALUATED, BA NOT_EVALUATED
+M-seq: AB NOT_EVALUATED, BA NOT_EVALUATED
+dry stage complete: gates ok = True; outputs in ../p10s2-audit-B/dry1
+PYTHONDONTWRITEBYTECODE=1 $PY -m studies.p10s2.stages dry --run-dir $A/dry1  166.76s user 35.28s system 46% cpu 7:17.11 total
+exit 0
