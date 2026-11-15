@@ -769,3 +769,26 @@ The re-check (Opus 5.5, `docs/reviews/p10s0-implementation-audit-2026-11-15/rech
 - **The per-task guard term** (`guard_seconds_per_task`) that the implementer added to the projection is accepted as an engineering correction: it only increases projections, it is measured and pinned by the freeze like the rates, and it is listed in the freeze record as an implementer addition not in §10.3.
 - N1–N3, N6–N9 are implementation defects, fixed as the re-check states.
 
+## Addendum — the rehearsal's measured projection and the hour cap raised from 16 to 22 before the freeze (2026-11-15 UTC)
+
+Made by the lead (Claude Fable 5.2) under the human lead's delegation ("you can extend the hour cap if needed across all p10", recorded in the addendum above and in `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`). **No registered draw has been generated and no registered seed observed; the rehearsal wrote only time, memory, shapes, counts and identity.** Not yet independently recomputed at the time of writing; the pre-freeze audit recomputes it.
+
+**What was measured** (code commit `9cca808`; rehearsal draw only; six single-thread workers):
+
+- Pipeline check, rehearsal-draw generation (33.4 s), gates on the rehearsal draw (G1, G2, G4, G5, G6, G9, G10 passed; 3.19 s per draw), rehearsal alone (24 items) and rehearsal with 12 other busy processes (24 items). Both rehearsals ran while P10-S1's calibration was using six cores, as the registered run will share the machine. Charged so far: 486 s.
+- Projection (`experiments/P10S0J-projection-20261115/projection.json`, sha256 `d6f6e6be…3e53aa7`, the larger of the alone and busy rates, task start-up and the per-task guard included):
+
+| Block | Cells | Projected hours |
+|---|---|---|
+| Q1, full | 230 | 8.41 |
+| Q1 under cut 3 | 190 | 5.84 |
+| WX, candidate A5-D / A1 | 20 | 0.84 / 1.09 |
+| 65,536 probe, candidate A5-D / A1 | 6 | 3.28 / 5.51 |
+
+- Memory: the largest rehearsed peak is 1.04 GiB per worker (the probe at 65,536 slots), under the 1.5 GiB rehearsal limit in every block.
+- These rates are about 2.2 times the slowest rates the ADR's projection assumed (Q1 3.89 h). The design-time projection was wrong on the slow side of the machine under load; this is recorded, not explained away.
+
+**What the 16-hour cap would have done.** Before Q1 the rule needs charged + 2 × Q1 + the reserve ≈ 0.3 + 16.8 = 17.2 hours > 16, so cut 3 would apply (one initialization seed per draw at 16,384: 40 registered cells dropped), and after Q1 the probe, and possibly WX, would be cut.
+
+**The raise.** The cap is raised to **22 hours**: the smallest whole number of hours at which, on this projection, the rule holds before Q1 with no cut (17.2) and would hold after a Q1 that runs at its projection with WX and the probe for the more expensive candidate, A1 (0.3 + 8.41 + 2 × (1.09 + 5.51) + reserve ≈ 21.9). What it protects: the 40 cells of the second initialization seed at 16,384, WX, and the 65,536 probe. It adds no cell, arm, update or replicate, and changes no threshold, cut or order: if the registered stages run slower than projected, the registered cuts still apply against 22 hours. The memory limits are unchanged. After the freeze the cap is fixed.
+
