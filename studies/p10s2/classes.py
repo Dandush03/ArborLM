@@ -42,45 +42,53 @@ class Lexical:
     g_marker_only: float | None
 
 
-def acq1(g: float | None, lex: Lexical | None) -> Verdict:
-    """ACQ1 (ST1): G_first >= 0.50; G - max(G_value-perm, G_code-perm) >= 0.30; G_marker-only <= 0.25. A LoRA first stage has no keys or codes to permute, so only the first clause applies (reading)."""
-    return _acq(g, lex, None, ratio=False)
+def acq1(g: float | None, lex: Lexical | None, *, lexical_applies: bool = True) -> Verdict:
+    """ACQ1 (ST1): G_first >= 0.50; G - max(G_value-perm, G_code-perm) >= 0.30; G_marker-only <= 0.25. A LoRA first stage has no keys or codes to permute, so only the first clause applies (reading;
+    ``lexical_applies=False``). For an arm that has them, a missing control record (``lex`` None) is NOT_EVALUATED, never "not applicable" (the lead's ruling on C-M1)."""
+    return _acq(g, lex, None, ratio=False, lexical_applies=lexical_applies)
 
 
-def acq2(g: float | None, g_single: float | None, lex: Lexical | None) -> Verdict:
+def acq2(g: float | None, g_single: float | None, lex: Lexical | None, *, lexical_applies: bool = True) -> Verdict:
     """ACQ2 (stage-2 arm): G_second >= 0.50 and >= 0.80 x the single-teacher student's G on that capability in the same replicate; the same lexical margin and marker-only limit."""
-    return _acq(g, lex, g_single, ratio=True)
+    return _acq(g, lex, g_single, ratio=True, lexical_applies=lexical_applies)
 
 
-def _acq(g: float | None, lex: Lexical | None, g_single: float | None, *, ratio: bool) -> Verdict:
+def _acq(g: float | None, lex: Lexical | None, g_single: float | None, *, ratio: bool, lexical_applies: bool = True) -> Verdict:
+    """An undefined gap (a gap, the single-teacher gap, a lexical gap, or a missing control record) gives NOT_EVALUATED before any other clause is read (section 11.2 row 1 puts it first; C-M4); the other
+    failing clauses are listed with it, so that no failed clause hides it."""
     if not finite_all(g):
         return Verdict(None, ("undefined gap",))
     assert g is not None
     reasons: list[str] = []
-    undefined = False
+    undefined: list[str] = []
     if g < G["acq_gap_min"]:
         reasons.append("acquisition below 0.50")
     if ratio:
         if not finite_all(g_single):
-            undefined = True
+            undefined.append("undefined gap")
         else:
             assert g_single is not None
             if g < G["acq2_ratio_min"] * g_single:
                 reasons.append("below 0.80 of the single-teacher student")
-    if lex is not None:
-        vals = (lex.g_sub, lex.g_value_perm, lex.g_code_perm, lex.g_marker_only)
-        if not finite_all(*vals):
-            undefined = True
+    if lexical_applies:
+        if lex is None:
+            undefined.append("control record missing")
         else:
-            assert lex.g_sub is not None and lex.g_value_perm is not None and lex.g_code_perm is not None and lex.g_marker_only is not None
-            if lex.g_sub - max(lex.g_value_perm, lex.g_code_perm) < G["acq_margin_min"]:
-                reasons.append("lexical margin below 0.30")
-            if lex.g_marker_only > G["acq_marker_only_max"]:
-                reasons.append("marker-only above 0.25")
+            vals = (lex.g_sub, lex.g_value_perm, lex.g_code_perm, lex.g_marker_only)
+            if not finite_all(*vals):
+                undefined.append("undefined gap")
+            if finite_all(lex.g_sub, lex.g_value_perm, lex.g_code_perm):  # the clauses that are defined are still read and listed beside the undefined one
+                assert lex.g_sub is not None and lex.g_value_perm is not None and lex.g_code_perm is not None
+                if lex.g_sub - max(lex.g_value_perm, lex.g_code_perm) < G["acq_margin_min"]:
+                    reasons.append("lexical margin below 0.30")
+            if finite_all(lex.g_marker_only):
+                assert lex.g_marker_only is not None
+                if lex.g_marker_only > G["acq_marker_only_max"]:
+                    reasons.append("marker-only above 0.25")
+    if undefined:
+        return Verdict(None, (*dict.fromkeys(undefined), *reasons))
     if reasons:
         return Verdict(False, tuple(reasons))
-    if undefined:
-        return Verdict(None, ("undefined gap",))
     return Verdict(True)
 
 
@@ -105,9 +113,18 @@ def negative_retention(g_first_after: float | None, g_first_v1: float | None) ->
     return None if not finite_all(g_first_after, g_first_v1) else bool(g_first_after < G["negative_retention_ratio"] * g_first_v1)
 
 
-def gen_gate(loss_increase: float | None) -> bool | None:
-    """GEN (keyword router): loss <= the unmodified student's + 0.02 nats per token on the 200-window panel."""
-    return None if not finite_all(loss_increase) else bool(loss_increase <= G["gen_loss_margin"])
+def gen_gate(*loss_increases: float | None) -> bool | None:
+    """GEN (keyword router): loss <= the unmodified student's + 0.02 nats per token on the 200-window panel. With the lead's ruling on C-M6 the threshold must hold under BOTH decisions for the marker
+    stratum (the registered decision at token 64, and the decision at the last token of the first marker-like string in tokens 1-64), so the caller passes both increases: a measured failure under either
+    gives False, otherwise a missing or non-finite value gives None (NOT_EVALUATED), otherwise True. No value at all is None."""
+    if not loss_increases:
+        return None
+    measured = [bool(v <= G["gen_loss_margin"]) for v in loss_increases if v is not None and finite_all(v)]
+    if not all(measured):
+        return False
+    if len(measured) != len(loss_increases):
+        return None
+    return True
 
 
 # --- mechanism class (section 11.2) ------------------------------------------------------------------------------------------------------------------
@@ -175,10 +192,13 @@ class LabelInputs:
     prefreeze_stop: str | None = None  # TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED / DATA-INSUFFICIENT
     st1_negative_everywhere: bool = False  # ST1's G in the negative zone in every replicate, both capabilities
     control_failed: bool = False
+    control_not_evaluated: bool = False  # a registered permutation or marker control is missing or not finite in some cell: no positive row can apply (the lead's ruling on C-M1)
     classes: dict[str, dict[str, ClassResult]] = field(default_factory=dict)  # mechanism -> order -> class
     gen_maf_fails: bool = False  # M-append-frozen's GEN fails in any replicate of either order
     gen_mii_holds: bool = False  # M-ii's GEN holds in every replicate of both orders
     gen_maf_holds: bool = False
+    gen_maf_not_evaluated: bool = False  # a GEN value is missing or not finite and none is a measured failure: rows 6-8 do not apply (reading 4)
+    gen_mii_not_evaluated: bool = False  # reported with row 8; not read as a failure of M-ii
     teacher_only: bool = True
     not_evaluated_reasons: list[str] = field(default_factory=list)
 
@@ -202,11 +222,12 @@ def study_label(i: LabelInputs) -> tuple[int, str]:
         return len(d) == 2 and all(c.name == name for c in d.values())
 
     ar = "ACQUIRES-AND-RETAINS"
-    if both(maf, ar) and i.teacher_only and i.gen_maf_fails:
-        return 6, "TRANSFER-POSITIVE WITHHELD — GENERAL QUALITY NOT PRESERVED UNDER A LEARNED ROUTE"
-    if both(maf, ar) and both(mii, ar) and i.teacher_only and i.gen_maf_holds and i.gen_mii_holds:
+    positive_possible = not i.control_not_evaluated and i.teacher_only  # a missing control is never read as passed
+    if both(maf, ar) and positive_possible and i.gen_maf_fails:
+        return 6, "TRANSFER-POSITIVE WITHHELD — GENERAL QUALITY NOT PRESERVED UNDER A LEARNED ROUTE"  # a measured failure only; a missing or non-finite GEN value is NOT_EVALUATED and falls through
+    if both(maf, ar) and both(mii, ar) and positive_possible and i.gen_maf_holds and i.gen_mii_holds:
         return 7, "TRANSFER-POSITIVE (append-frozen + consolidation)"
-    if both(maf, ar) and i.teacher_only and i.gen_maf_holds:
+    if both(maf, ar) and positive_possible and i.gen_maf_holds:
         return 8, "TRANSFER-POSITIVE (append-frozen)"
     if both(maf, "FORGETS"):
         return 9, "TRANSFER-NEGATIVE: FORGETTING"

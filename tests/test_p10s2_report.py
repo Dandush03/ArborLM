@@ -132,8 +132,8 @@ def test_no_positive_wording_can_be_emitted_without_the_line(word: str, capsys: 
     if word == "COMPOSES":
         with pytest.raises(output.OracleLineMissing, match="second fixed line"):
             output.check_text(f"{LINE}\n{line}")
-    with pytest.raises(output.OracleLineMissing):
-        output.emit_plain(line)  # the plain printer refuses a guarded line
+    output.emit_plain(line)  # the plain printer never prints a guarded line bare: it goes through emit and is printed under the line
+    assert capsys.readouterr().out.splitlines()[0] == LINE
     output.emit([line])
     out = capsys.readouterr().out
     assert out.splitlines()[0] == LINE and line in out and (out.splitlines()[1] == core.COMBINED_LINE) == (word == "COMPOSES")  # a terminal or log summary is printed only under the line(s)
@@ -234,6 +234,6 @@ def test_gen_table_and_router_diagnostic_are_printed_beside_the_classes() -> Non
     text = report.render_report(out)
     i = text.index("Table 3. General quality under the keyword router")
     assert text[text.rfind("\n\n", 0, i) + 2 :].startswith(LINE)  # the table and its diagnostic lines sit under the oracle-assisted line
-    assert "| r1/MAF/BA | 0.500 | False | 3 / 1 |" in text and "keyword router stayed silent" in text and "0.250 (1 of 4 windows)" in text and "enters no rule" in text
+    assert "| r1/MAF/BA | 0.500 | 0.001 | False | 3 / 1 |" in text and "keyword router stayed silent" in text and "0.250 (1 of 4 windows)" in text and "enters no rule" in text
     rec = report.render_json(out)
     assert rec["outcome"]["router_table"][0]["diagnostic_first_marker"]["rate"] == 0.25

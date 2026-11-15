@@ -49,7 +49,7 @@ def r_exact(train: Sequence[TrainItem], panel: Sequence[Item], capability: str) 
     hits = [normalize(i.en) in table for i in panel]
     outs = [table.get(normalize(i.en), "") for i in panel]
     scores = [chrf_item(o, i.refs[capability]) for o, i in zip(outs, panel, strict=True)]
-    return {"hits": sum(hits), "n": len(panel), "mean": mean(scores)}
+    return {"hits": sum(hits), "n": len(panel), "mean": mean(scores), "items": scores}
 
 
 def r_nn(train: Sequence[TrainItem], panel: Sequence[Item], capability: str, index: TfidfIndex | None = None) -> dict[str, Any]:

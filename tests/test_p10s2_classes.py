@@ -56,7 +56,7 @@ def cell_record(r: int, group: str, variant: str, ea: float, eb: float) -> dict[
     if group in MEMORY:
         snap["ablations"] = {p: {"subsample_indices": [0, 1], "unablated": panel(m), "off": panel(0.1), "value_perm": panel(0.1), "code_perm": panel(0.1), "marker_only": panel(0.15), "words_only": panel(0.12)} for p, m in (("E_A", ea), ("E_B", eb))}
     if group in GEN_GROUPS:
-        snap["gen"] = {"loss_increase": 0.001, "false_trigger_count": {"marker": 0, "ordinary": 0}, "stratum_sizes": {"marker": 4, "ordinary": 4}, "passes": True}
+        snap["gen"] = {"loss_increase": 0.001, "loss_increase_first_marker": 0.001, "false_trigger_count": {"marker": 0, "ordinary": 0}, "stratum_sizes": {"marker": 4, "ordinary": 4}, "passes": True}
         snap["gen_by_construction"] = {"bit_identical_to_student": True, "label": "BY CONSTRUCTION"}
         if group in ("MAF", "LSEQ"):
             snap["gen"]["always_on_loss_increase"] = 0.2
@@ -156,7 +156,7 @@ def test_row_6_when_general_quality_is_not_preserved_under_the_learned_route() -
         cell(s, 0, "ST1", "AB")["scores"]["r0/ST1/AB"]["gen"]["loss_increase"] = 0.5
     assert analysis.analyze(study(tweak=st1_fail))["label_row"] == 6  # GEN is measured for every ST1 and stage-2 snapshot
     nonfinite = analysis.analyze(study(tweak=lambda s: cell(s, 0, "MAF", "AB")["scores"]["r0/MAF/AB"]["gen"].update(loss_increase="nan")))
-    assert nonfinite["label_row"] == 6  # a non-finite value is not a hold
+    assert nonfinite["label_row"] == 12 and nonfinite["gen"]["status"]["M-append-frozen"]["AB"] == "not_evaluated"  # a non-finite value is not a hold, and not a measured failure either: row 6 asserts a failure
     not_teacher_only = analysis.analyze(study(tweak=lambda s: s["prefreeze"].update(teacher_only=False)))
     assert not_teacher_only["label_row"] == 12  # no positive row without teacher-only training material
 
@@ -266,8 +266,9 @@ def test_row_1_engineering_failure_outranks_everything() -> None:
     for g in ("G1", "G4", "G5", "G6", "G7", "G8", "G9"):
         out = analysis.analyze(study(tweak=lambda s, g=g: s["gates"][g].update(ok=False, problems=["x"])))
         assert out["label_row"] == 1 and out["label"] == "ENGINEERING-FAILURE", g
-    for g in ("G2", "G3"):
-        assert analysis.analyze(study(tweak=lambda s, g=g: s["gates"].update({g: {"ok": False}})))["label_row"] == 7  # G2 gives NOT_EVALUATED cells, G3 stops before the freeze: neither is an engineering defect
+    g2 = analysis.analyze(study(tweak=lambda s: s["gates"].update({"G2": {"ok": False}})))
+    assert g2["label_row"] == 1 and any("gate G2 failed" in x for x in g2["engineering"])  # a failed G2 (scored differently twice) is an engineering defect
+    assert analysis.analyze(study(tweak=lambda s: s["gates"].update({"G3": {"ok": False}})))["label_row"] == 7  # G3 stops before the freeze: not read here
     ens = analysis.analyze(study(tweak=lambda s: s["replicates"][0]["ensemble"].update(oracle={"A": 0.8, "B": 0.9})))
     assert ens["label_row"] == 1 and any("ensemble" in x for x in ens["engineering"])
     both = analysis.analyze(study(tweak=lambda s: (s["gates"]["G4"].update(ok=False), s["incomplete"].append("x"))))

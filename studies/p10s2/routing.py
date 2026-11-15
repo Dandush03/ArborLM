@@ -7,7 +7,7 @@ section 5.4): AdamW, learning rate 0.001, 500 updates of batch 64; every batch h
 the "none" prefixes are consecutive non-overlapping 64-token pieces of the tokenized train file, 8,000 of them sampled with seed +3; the first 4,000 sampled keep their 64 tokens, each of
 the other 4,000 keeps its first tokens up to a length drawn, with replacement, from the token lengths of the task prompts of that router's streams; the loss is cross-entropy over the cosine
 scores divided by the read temperature 0.2; the projection and then the router keys are drawn from N(0, 0.02) by one generator seeded +3 and every router is trained from that initialization
-(never continued from an earlier stage). The +3 generator draws, in order: initialization, the prefixes, their lengths, the batch order.
+(never continued from an earlier stage). The initialization comes from one +3 generator; a fresh +3 generator then draws the prefixes, their lengths and the batch order (section 9).
 The router depends on the replicate and on the set of tasks, not on the arm. It is a keyword-level classifier; a pass says nothing about fine-grained addressing.
 """
 
@@ -79,6 +79,7 @@ class RouterSpec:
     none_prefixes: int
     full_length: int
     prefix_tokens: int
+    general_prefix_count: int = 200  # route accuracy on general prefixes is read on this many train-file pieces the router never saw (as many as the GEN panel has windows); a reading, see ``train_router``
 
     @staticmethod
     def registered() -> "RouterSpec":
@@ -108,12 +109,15 @@ def train_router(
 ) -> tuple[Router, dict[str, Any]]:
     """Train one router from the +3 generator. ``task_prompts[t]`` are the stored prompts of the router's stream for task t (prompts only, no teacher is run; never D_cal, D_con or an evaluation
     panel). Returns the router and a record of what was drawn."""
-    gen = plan.gen(3, "router")
-    router = Router(tasks, student.cfg.width, gen)  # the projection, then the keys, from one generator
+    init_gen = plan.gen(3, "router initialization")
+    router = Router(tasks, student.cfg.width, init_gen)  # the projection, then the keys, from one generator
+    gen = plan.gen(3, "router sampling")  # section 9: a fresh +3 generator, after the initialization, draws the prefixes, then their lengths, then the batch order (A-M5)
     pieces = none_pieces(wiki_train_ids, spec.prefix_tokens)
     if len(pieces) < spec.none_prefixes:
         raise ValueError(f"the train file has {len(pieces)} pieces of {spec.prefix_tokens} tokens, fewer than {spec.none_prefixes}")
-    pick = torch.randperm(len(pieces), generator=gen).tolist()[: spec.none_prefixes]
+    perm = torch.randperm(len(pieces), generator=gen).tolist()
+    pick = perm[: spec.none_prefixes]
+    held_out = perm[spec.none_prefixes : spec.none_prefixes + spec.general_prefix_count]  # pieces of the train file the router never saw: the "general prefixes" of the route accuracy (C-m7: not the GEN windows)
     lengths = [len(e.prompt_ids) for t in tasks for e in task_prompts[t]]
     n_cut = spec.none_prefixes - spec.full_length
     cut_idx = torch.randint(0, len(lengths), (n_cut,), generator=gen).tolist()
@@ -139,13 +143,14 @@ def train_router(
         loss.backward()  # type: ignore[no-untyped-call]
         opt.step()
         losses.append(float(loss.item()))
-    record = {"tasks": list(tasks), "prefixes": len(prefixes), "full_length_prefixes": spec.full_length, "cut_length_min": min((len(p) for p in prefixes[spec.full_length :]), default=0), "updates": spec.updates, "final_loss": losses[-1] if losses else float("nan"), "state_hash": router.state_hash(), "class_counts": counts}
+    record = {"tasks": list(tasks), "prefixes": len(prefixes), "full_length_prefixes": spec.full_length, "cut_length_min": min((len(p) for p in prefixes[spec.full_length :]), default=0), "updates": spec.updates, "final_loss": losses[-1] if losses else float("nan"), "state_hash": router.state_hash(), "class_counts": counts, "held_out_piece_indices": held_out}
     return router, record
 
 
 @torch.no_grad()
 def route_accuracy(router: Router, student: Student, layer: int, panels: dict[str, Sequence[Example]], general_prefixes: Sequence[Sequence[int]]) -> dict[str, float]:
-    """Route accuracy on the task panels (their stored prompts, decided at the last prompt token) and on general prefixes (the first 64 tokens of general windows, decided at their last token)."""
+    """Route accuracy on the task panels (their stored prompts, decided at the last prompt token) and on general prefixes (64-token pieces of the WikiText-2 train file that the router was not trained on, decided at
+    their last token; never the GEN windows, which section 6.4 says are used for nothing else). With no general prefix there is no "general" entry, which the analysis reads as NOT_EVALUATED."""
     out: dict[str, float] = {}
     for task, exs in panels.items():
         if not exs:
