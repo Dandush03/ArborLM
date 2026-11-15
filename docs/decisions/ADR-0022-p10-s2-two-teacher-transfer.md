@@ -548,7 +548,20 @@ Recorded by the lead:
 - **Reserved items 3, 4 and 5 have no answer** (complementary capabilities; the precision filter as suitable verification; training on MPS). The lead does not decide them.
 - No download has been made at the time of this record. By §16 the downloads come after implementation on synthetic stand-ins.
 
-Lead's approval: PENDING the human lead's answers on reserved items 3, 4 and 5.
+**Human lead's answers on reserved items 3, 4 and 5 — 2026-11-15 (UTC), verbatim:**
+
+> "s2.1 yes s2.2 yes, s2.3 yes"
+
+The three questions as the lead put them, in this order: "1. Do two translation directions (English→German, English→French) count as "complementary capabilities"? Yes, or the study needs a different second capability. 2. Is a filter with measured precision of at least 0.90 "suitable verification" of the teacher's outputs? Yes or no. 3. May S2 train on the Mac's GPU, with scores recomputed on CPU? Yes or no."
+
+Recorded by the lead:
+
+- **Item 3: yes.** Two translation directions are accepted as the two capabilities of this study. They remain two capabilities of one kind, and §17 still limits what a result can mean.
+- **Item 4: yes.** The filter of §5.3 with measured precision ≥ 0.90 is accepted as the verification of the teachers' outputs.
+- **Item 5: yes, as asked:** training on MPS with every score recomputed on CPU. The question did not name "packages outside the lock"; the lead reads them as covered only for the data-generation wheels already recorded above, and nothing else is installed outside the lock without a further answer.
+- All five reserved items now have an answer. No reserved item is decided by the lead.
+
+Lead's approval: PENDING the re-check of revision 4's reworded passages.
 
 ## 19. Map of the review of revision 1 to this revision
 
