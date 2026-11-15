@@ -107,3 +107,11 @@ Recorded by the lead:
 
 - The work in this repository is original to this project: no experiment was started from another study's comments. `CITATION.cff` describes this repository as the work to cite.
 - Prior work that was read and that saved effort is to be cited. The lead compiles the list from what the repository itself records as read (`docs/LITERATURE_CHECK.md`, the ADRs and reviews) and from the artefacts the studies use (models, datasets, metrics and libraries, whose licences in some cases require attribution). Every entry is checked against its source before it is written; nothing is cited from memory alone, and nothing is listed as read that the records do not show was read.
+
+### P10-S1: the capacity grid is shifted down (2026-11-15 UTC)
+
+After the independent check of the drafted load-search extension (`docs/reviews/p10s1-load-search-2026-11-15/` on `claude/p10-s1`), the lead offered (A) the extension as drafted or (B) a capacity line at 1,024 → 4,096 → 16,384 slots at eight facts per slot, recommended B, and said B changes registered rows after calibration data was seen (no registered seed observed) and so needs the human lead. The human lead, verbatim:
+
+> im ok with b
+
+Recorded by the lead: option B is approved. ADR-0021 §24 carries the record; revision 5 of ADR-0021 is drafted and independently reviewed before any code change or run. The lead also extends the dense control's learning-rate grid upward in revision 5 under the P10 delegation (no separate question was put to the human lead on it).
