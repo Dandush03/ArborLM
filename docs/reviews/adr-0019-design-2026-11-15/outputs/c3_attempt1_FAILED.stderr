@@ -1,0 +1,18 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"64": {"mean_cos": 0.9966964721679688, "distinct_top1": 3, "largest_top1_share": 0.943359375, "centred_mean_cos": 0.00015996230649761856, "participation_rank_centred": 1.1463328108353157, "common_share_E|z|^2": 0.9702813029289246, "template_x_record_share_of_centred_variance": 0.7283984931604188, "groups": 120}}
+{"128": {"mean_cos": 0.9981259703636169, "distinct_top1": 3, "largest_top1_share": 0.560546875, "centred_mean_cos": -0.0008392411982640624, "participation_rank_centred": 1.0953551223352125, "common_share_E|z|^2": 0.9697182178497314, "template_x_record_share_of_centred_variance": 0.7250489701437487, "groups": 120}}
+{"256": {"mean_cos": 0.9557461738586426, "distinct_top1": 4, "largest_top1_share": 0.384765625, "centred_mean_cos": 0.001957964850589633, "participation_rank_centred": 1.560650349225433, "common_share_E|z|^2": 0.9241577982902527, "template_x_record_share_of_centred_variance": 0.7409063856873965, "groups": 120}}
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/adr-0019-review/c3_collapsed_state.py", line 218, in <module>
+    ref = bbm(rows)
+          ^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 399, in _forward_unimplemented
+    raise NotImplementedError(
+NotImplementedError: Module [Backbone] is missing the required "forward" function
