@@ -1,0 +1,280 @@
+# ruff: noqa: E501
+"""P10S1 budgets and projections (ADR-0021 section 10): the rehearsal matrix (every configuration of the plan at real size), the rates a rehearsal measures (task start-up time
+included), the projection of every stage, the headroom rule (charged so far plus twice the projected remaining time within the cap; twice the measured peak within the memory
+caps, evaluation peaks included), the cuts in their fixed order, and the frozen cap table with one entry per possible configuration.
+
+Everything here is a pure function of its inputs. Every number it returns is analytical (a projection from measured rates), never a measurement of a result, and none is an
+efficiency claim. The cap is an argument (the config value ``resources.cap_hours``); this module holds no number of hours.
+"""
+
+import math
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass, field
+from typing import Any, NamedTuple
+
+from . import core
+from . import frozen as fz
+
+Item = tuple[str, int, int]  # (arm, facts, slots)
+CAP_FLOOR_SECONDS = 60.0  # the floor of the caps of the stages not rehearsed at real size (gates, timing, simulate, analysis, report); stated, not measured
+NOT_RUN_MEMORY = "NOT RUN — BUDGET (MEMORY)"
+
+
+class CapMissing(ValueError):
+    """The frozen cap table has no entry for a stage or a configuration: the stage refuses."""
+
+
+def rehearsal_items(plan: core.Plan | None = None) -> list[Item]:
+    """Every configuration of the plan with its D-OQ cells (the rehearsal runs them all, before the cuts): 30, and 8 more with the overload row."""
+    plan = plan or core.Plan()
+    items: list[Item] = []
+    full = core.Plan(plan.overload_u_p, plan.seed_block_draws, (), False)
+    for arm in core.ARMS:
+        for facts, slots in core.arm_cells(full, arm):
+            items.append((arm, facts, slots))
+    return items
+
+
+def item_label(item: Item) -> str:
+    arm, facts, slots = item
+    return f"REH-{arm}-f{facts}-n{slots}"
+
+
+def parse_item_label(label: str) -> Item:
+    body = label.removeprefix("REH-")
+    arm, rest = body.split("-f", 1)
+    facts, slots = rest.split("-n")
+    return arm, int(facts), int(slots)
+
+
+def baseline_label(facts: int) -> str:
+    return f"REH-baseline-f{facts}"
+
+
+@dataclass(frozen=True)
+class Rate:
+    """Measured rehearsal rates of one configuration (six single-thread workers running): seconds per update (wall, 64 updates), seconds of one full evaluation (all panels and
+    ablations, deep measures, robustness and the index build), the pool task's start-up overhead (task seconds minus the timed training and evaluation, paid again by every
+    registered task), and the peaks (training, sampled, evaluation, pool task)."""
+
+    seconds_per_update: float
+    evaluation_seconds: float
+    task_overhead_seconds: float = 0.0
+    peak_rss_bytes: int = 0
+    sampled_rss_bytes: int = 0
+    evaluation_peak_rss_bytes: int = 0
+    task_peak_rss_bytes: int = 0
+
+
+Rates = dict[Item, Rate]
+
+
+def rates_from_records(train: Sequence[Mapping[str, Any]], evaluation: Sequence[Mapping[str, Any]], tasks: Mapping[str, Mapping[str, float]] | None = None) -> Rates:
+    """Rates from the rehearsal's whitelisted records: ``train`` the ``rehearsal.json`` records, ``evaluation`` the ``rehearsal_evaluate.json`` records (matched by ``item``),
+    ``tasks`` the pool's per-task ``{label: {"seconds", "peak_rss_bytes"}}`` of the rehearse stage manifest keyed by item label. The task overhead is the task's seconds minus
+    the training and evaluation seconds; never negative."""
+    eval_by_item = {str(r["item"]): r for r in evaluation}
+    out: Rates = {}
+    for r in train:
+        item = (str(r["arm"]), int(r["facts"]), int(r["slots"]))
+        label = item_label(item)
+        e = eval_by_item.get(label)
+        e_seconds = float(e["evaluation_wall_seconds"]) if e is not None else math.nan
+        task = (tasks or {}).get(label)
+        overhead = max(0.0, float(task["seconds"]) - float(r["wall_seconds"]) - e_seconds) if task is not None and math.isfinite(e_seconds) else 0.0
+        out[item] = Rate(
+            float(r["seconds_per_update"]), e_seconds, overhead, int(r["peak_rss_bytes"]), int(r["sampled_rss_bytes"]),
+            int(e["peak_rss_bytes"]) if e is not None else 0, int(task["peak_rss_bytes"]) if task is not None else 0,
+        )  # fmt: skip
+    return out
+
+
+def missing_items(rates: Rates, plan: core.Plan | None = None) -> list[Item]:
+    return [i for i in rehearsal_items(plan) if i not in rates or not math.isfinite(rates[i].evaluation_seconds)]
+
+
+def cell_training_seconds(cell: core.Cell, rates: Rates) -> float:
+    """Measured seconds per update x the cell's planned updates plus the task start-up overhead."""
+    r = rates[(cell.arm, cell.facts, cell.slots)]
+    return cell.run_updates * r.seconds_per_update + r.task_overhead_seconds
+
+
+def cell_evaluation_seconds(cell: core.Cell, rates: Rates, snapshots: int) -> float:
+    """One measured full evaluation per snapshot, plus the task overhead of the evaluation process."""
+    r = rates[(cell.arm, cell.facts, cell.slots)]
+    return snapshots * r.evaluation_seconds + r.task_overhead_seconds
+
+
+def makespan(seconds: Sequence[float], workers: int = core.WORKERS) -> float:
+    """Longest-processing-time list scheduling on ``workers`` single-thread workers (each job to the least loaded worker, longest first): the stage's wall time."""
+    loads = [0.0] * max(1, workers)
+    for s in sorted(seconds, reverse=True):
+        loads[loads.index(min(loads))] += s
+    return float(max(loads))
+
+
+class Projection(NamedTuple):
+    cells: int
+    training_seconds: float
+    evaluation_seconds: float
+    baseline_seconds: float
+    total_seconds: float
+
+
+@dataclass(frozen=True)
+class Fixed:
+    """Wall seconds of the stages that are not scheduled over cells: the gates (rehearsed at real size on the rehearsal draw), the isolated timing and throughput stage, the
+    simulation, the analysis and the report (measured on the synthetic registry). The caps of these stages are twice these figures with a stated floor."""
+
+    gates: float = 0.0
+    timing: float = 0.0
+    simulate: float = 0.0
+    analysis: float = 0.0
+    report: float = 0.0
+
+    @property
+    def total(self) -> float:
+        return self.gates + self.timing + self.simulate + self.analysis + self.report
+
+
+def stage_projection(plan: core.Plan, rates: Rates, fro: fz.Frozen, *, baseline_seconds: Mapping[int, float] | None = None, workers: int = core.WORKERS) -> Projection:
+    """Training makespan, evaluation makespan (every snapshot of every cell, the baselines of every draw and fact count included) of the plan's registered cells, in analytical
+    seconds from measured rates (task overhead included)."""
+    cells = core.registered_cells(plan, dense_rates=fro.dense_rates)
+    cells = [c for c in cells if c.kind != "LN"]
+    train = makespan([cell_training_seconds(c, rates) for c in cells], workers)
+    ev_jobs = [cell_evaluation_seconds(c, rates, len(fro.snapshots(c))) for c in cells]
+    base = dict(baseline_seconds or {})
+    facts_sets = sorted({f for f, _ in core.grid_cells(plan)})
+    base_jobs = [base.get(f, 0.0) for _ in range(core.REPLICATES) for f in facts_sets]
+    ev = makespan(ev_jobs + base_jobs, workers)
+    return Projection(len(cells), train, ev, sum(base_jobs), train + ev)
+
+
+def peak_of(rate: Rate) -> int:
+    return max(rate.peak_rss_bytes, rate.sampled_rss_bytes, rate.evaluation_peak_rss_bytes, rate.task_peak_rss_bytes)
+
+
+def memory_headroom(rates: Rates) -> dict[str, Any]:
+    """Twice the largest peak resident size (training peak, sampled peak, evaluation peak and the pool task's peak, every configuration) within the per-worker cap (3 GiB), and six
+    workers at twice that within the aggregate cap (18 GiB), i.e. a peak of at most 1.5 GiB per worker. ``status`` is NOT RUN — BUDGET (MEMORY) when the rule fails."""
+    peak = max((peak_of(r) for r in rates.values()), default=0)
+    per_worker = core.HEADROOM * peak <= core.RSS_WORKER_BYTES
+    aggregate = core.HEADROOM * peak * core.WORKERS <= core.RSS_AGGREGATE_BYTES
+    worst = max(rates, key=lambda i: peak_of(rates[i])) if rates else None
+    ok = bool(per_worker and aggregate)
+    return {"peak_rss_bytes": peak, "worst_item": None if worst is None else item_label(worst), "per_worker_ok": per_worker, "aggregate_ok": aggregate, "ok": ok, "status": None if ok else NOT_RUN_MEMORY, "rule": "twice the largest peak (training, sampled, evaluation, pool task) within 3 GiB per worker and 18 GiB aggregate (six workers)"}
+
+
+class Headroom(NamedTuple):
+    ok: bool
+    charged_seconds: float
+    projected_remaining_seconds: float
+    required_seconds: float  # charged + 2 x remaining
+    cap_seconds: float
+    shortfall_seconds: float
+
+
+def headroom_rule(charged_seconds: float, remaining_seconds: float, cap_seconds: float) -> Headroom:
+    """Section 10.3: after the rehearsal, charged-so-far plus twice the projected remaining time must be at most the cap."""
+    required = charged_seconds + core.HEADROOM * remaining_seconds
+    return Headroom(math.isfinite(required) and required <= cap_seconds, charged_seconds, remaining_seconds, required, cap_seconds, max(0.0, required - cap_seconds))
+
+
+def cut_sequence(eligible_doq: Mapping[str, bool], overload_u_p: int | None = None, unit: int = core.U_P) -> list[tuple[core.Plan, list[str]]]:
+    """The plans of section 10.3 in the fixed order of its cuts: no cut (seed block on draws 1 and 2); cut 1 (draw 2's seed block); cut 2 (draw 1's); cut 3, 8K/64K first and then
+    32K/16K, each only where the load calibration predicted the step's smaller cell not loaded. Nothing else may be cut. Cut 4: if none holds the work returns to the human lead."""
+    seq: list[tuple[core.Plan, list[str]]] = [
+        (core.Plan(overload_u_p, (1, 2), (), False, unit), []),
+        (core.Plan(overload_u_p, (1,), (), False, unit), ["cut 1: the seed block on draw 2"]),
+        (core.Plan(overload_u_p, (), (), False, unit), ["cut 1: the seed block on draw 2", "cut 2: the seed block on draw 1"]),
+    ]
+    applied = list(seq[-1][1])
+    cuts: list[str] = []
+    for cell in core.DOQ_CUTTABLE:
+        if eligible_doq.get(cell):
+            cuts.append(cell)
+            applied = [*applied, f"cut 3: D-OQ at {cell}"]
+            seq.append((core.Plan(overload_u_p, (), tuple(cuts), False, unit), list(applied)))
+    return seq
+
+
+@dataclass
+class CutResult:
+    ok: bool
+    plan: core.Plan | None
+    applied_cuts: list[str]
+    headroom: Headroom | None
+    projection: Projection | None
+    memory: dict[str, Any]
+    tried: list[dict[str, Any]] = field(default_factory=list)
+    returns_to_lead: str | None = None
+
+
+def choose_plan(
+    rates: Rates,
+    fixed: Fixed,
+    cpu_per_update: dict[tuple[str, int], float],
+    *,
+    charged_seconds: float,
+    cap_seconds: float,
+    eligible_doq: Mapping[str, bool],
+    overload_u_p: int | None = None,
+    baseline_seconds: Mapping[int, float] | None = None,
+    frozen_kwargs: Mapping[str, Any] | None = None,
+    unit: int = core.U_P,
+) -> CutResult:
+    """Apply the cuts of section 10.3 in order until the headroom rule holds. Memory is judged first: a failed memory rule is NOT RUN — BUDGET (MEMORY) and no cut helps (the
+    evaluation batch is reduced and the rehearsal repeated). If no plan holds, cut 4: the work returns to the human lead with the measured shortfall and the options (raise the
+    cap, or shorten the run lengths, which changes the registered design and needs a re-review); the lead of the study does not choose between them."""
+    memory = memory_headroom(rates)
+    tried: list[dict[str, Any]] = []
+    if not memory["ok"]:
+        return CutResult(False, None, [], None, None, memory, tried, "memory: twice the measured peak exceeds the memory caps; reduce the evaluation batch and repeat the rehearsal")
+    last: tuple[Headroom, Projection] | None = None
+    for plan, cuts in cut_sequence(eligible_doq, overload_u_p, unit):
+        fro = fz.Frozen.build(plan, cpu_per_update, **dict(frozen_kwargs or {}))
+        proj = stage_projection(plan, rates, fro, baseline_seconds=baseline_seconds)
+        remaining = proj.total_seconds + fixed.total
+        hr = headroom_rule(charged_seconds, remaining, cap_seconds)
+        tried.append({"plan": plan.as_json(), "cuts": cuts, "remaining_seconds": remaining, "required_seconds": hr.required_seconds, "ok": hr.ok})
+        last = (hr, proj)
+        if hr.ok:
+            return CutResult(True, plan, cuts, hr, proj, memory, tried)
+    assert last is not None
+    return CutResult(False, None, tried[-1]["cuts"], last[0], last[1], memory, tried, f"headroom does not hold after the allowed cuts: shortfall {last[0].shortfall_seconds:.0f} s; options for the human lead: raise the cap, or shorten the run lengths (a new design revision)")
+
+
+# --- caps -------------------------------------------------------------------------------------------------------------------------------------------------
+def caps_table(rates: Rates, fixed: Fixed, cpu_per_update: dict[tuple[str, int], float], *, overload_u_p: int | None = None, unit: int = core.U_P, baseline_seconds: Mapping[int, float] | None = None, frozen_kwargs: Mapping[str, Any] | None = None, floor_seconds: float = CAP_FLOOR_SECONDS) -> dict[str, Any]:
+    """The frozen cap table (``studies/p10s1/freeze/stage_caps.json``): one source of truth. Each cap is twice the rehearsed projection (task start-up included) of what it
+    bounds. Training and evaluation have an entry per possible configuration (the plan's key: seed-block draws, D-OQ cuts, overload row); gates, timing, simulate, analysis and
+    report are twice a measured time with a stated floor. A stage whose configuration has no entry refuses."""
+    configs: dict[str, Any] = {}
+    for plan in core.plan_configurations(overload_u_p, unit):
+        fro = fz.Frozen.build(plan, cpu_per_update, **dict(frozen_kwargs or {}))
+        p = stage_projection(plan, rates, fro, baseline_seconds=baseline_seconds)
+        configs[plan.key()] = {"cells": p.cells, "train": core.HEADROOM * p.training_seconds, "evaluate": core.HEADROOM * p.evaluation_seconds, "projection": p._asdict()}
+    return {
+        "rule": "each cap = 2 x the rehearsed projection (task start-up included); gates, timing, simulate, analysis and report: 2 x a measured time with the stated floor", "floor_seconds": floor_seconds,
+        "gates": max(floor_seconds, core.HEADROOM * fixed.gates), "timing": max(floor_seconds, core.HEADROOM * fixed.timing), "simulate": max(floor_seconds, core.HEADROOM * fixed.simulate),
+        "analysis": max(floor_seconds, core.HEADROOM * fixed.analysis), "report": max(floor_seconds, core.HEADROOM * fixed.report), "configurations": configs,
+    }  # fmt: skip
+
+
+def cap_for(table: Mapping[str, Any], stage: str, plan: core.Plan) -> float:
+    """The cap in seconds of ``stage`` (``gates``, ``train``, ``evaluate``, ``timing``, ``simulate``, ``analysis``, ``report``) for the plan's configuration; a stage or configuration
+    with no entry raises ``CapMissing`` (the stage refuses)."""
+    if stage in ("train", "evaluate"):
+        entry = table.get("configurations", {}).get(plan.key())
+        if entry is None or stage not in entry:
+            raise CapMissing(f"the frozen cap table has no entry for {stage} at configuration {plan.key()}")
+        return float(entry[stage])
+    if stage not in table or not isinstance(table[stage], int | float):
+        raise CapMissing(f"the frozen cap table has no entry for {stage!r}")
+    return float(table[stage])
+
+
+def exceeds_remaining(cap_seconds: float, remaining_seconds: float) -> bool:
+    """A stage refuses to start if the remaining cap is below its stage cap (the ledger's rule, as a pure function)."""
+    return remaining_seconds < cap_seconds
