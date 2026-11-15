@@ -1,0 +1,7 @@
+[NFC] same normalized key: True; same prompt ids: False; reads equal: False (ADR: raw NFC text is tokenized; the bank tokenizes the raw text as stored)
+[reads] 'the café is open now': implementation [(2, 0), (4, 1), (6, 2), (8, 3), (10, 4)]; mine [(2, 0), (4, 1), (6, 2), (8, 3), (10, 4)]; equal: True
+[reads] "Tom can't swim.": implementation [(4, 5), (10, 6), (16, 7)]; mine [(4, 5), (10, 6), (16, 7)]; equal: True
+[reads] 'the  cafe,is open now!': implementation [(2, 0), (9, 3), (12, 4)]; mine [(2, 0), (9, 3), (12, 4)]; equal: True
+[test a] prompts, segment ids vs whole-string ids on the stand-in: {'n': 3, 'mismatches': [], 'mismatch_rate': 0.0}
+[parse] sentences with U+2028 / U+0085 inside the text: {1: 'first part', 2: 'plain', 3: 'x'} (split('\n') would keep 'first part\u2028second part')
+[router] plan.gen(3, ...) calls in train_router: 1; the same generator object passed to Router(...), randperm (prefixes), randint (lengths) and randint (batches): 4

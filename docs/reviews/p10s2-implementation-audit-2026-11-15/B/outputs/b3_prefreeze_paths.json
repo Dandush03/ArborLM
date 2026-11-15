@@ -1,0 +1,29 @@
+{
+ "B3a_rehearse_sh_tail": "rehearse --run-dir \"$RUN_DIR\" --code-commit \"$CODE_COMMIT\" --stage-cap-seconds 11520 --data-dir \"$RUN_DIR/data/bundle\" --updates 200 --full-updates 2000",
+ "B3a_rehearse": {
+  "exception": "TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'",
+  "where": [
+   "    world = build_world(bundle, \"rehearsal\", 1, RunConfig.registered(int(args.layer), int(args.updates), core.CFG[\"training\"][\"store_learning_rate\"], core.CFG[\"training\"][\"lora_learning_rates\"][0], args.device))",
+   "                                                                     ^^^^^^^^^^^^^^^",
+   "TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'"
+  ]
+ },
+ "B3a_ledger_entries_written": false,
+ "B3b_snapshot_device": "mps:0",
+ "B3b_final_arm_device": "cpu",
+ "B3b_score_snapshot": {
+  "ok": false,
+  "exception": "RuntimeError: Tensor for argument #1 'mat1' is on CPU, but expected it to be on GPU (while checking arguments for mm)"
+ },
+ "B3c_index_put_accumulate_cpu_det_off_vs_on_trials_differing": {
+  "trials": 200,
+  "differing": 200,
+  "threads": 6
+ },
+ "B3c_matmul_bit_identical_1_thread_vs_default": {
+  "default_threads": 6,
+  "equal": true,
+  "max_abs_diff": 0.0
+ },
+ "B3d_auto_without_mps": "cpu"
+}
