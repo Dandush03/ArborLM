@@ -792,3 +792,16 @@ Made by the lead (Claude Fable 5.2) under the human lead's delegation ("you can 
 
 **The raise.** The cap is raised to **22 hours**: the smallest whole number of hours at which, on this projection, the rule holds before Q1 with no cut (17.2) and would hold after a Q1 that runs at its projection with WX and the probe for the more expensive candidate, A1 (0.3 + 8.41 + 2 × (1.09 + 5.51) + reserve ≈ 21.9). What it protects: the 40 cells of the second initialization seed at 16,384, WX, and the 65,536 probe. It adds no cell, arm, update or replicate, and changes no threshold, cut or order: if the registered stages run slower than projected, the registered cuts still apply against 22 hours. The memory limits are unchanged. After the freeze the cap is fixed.
 
+## Addendum — the pre-freeze audit and the lead's rulings (2026-11-15 UTC)
+
+The pre-freeze audit (Opus 5.5, `docs/reviews/p10s0-implementation-audit-2026-11-15/prefreeze/PREFREEZE.md`) found the re-check's findings fixed, the rehearsal-draw gates passed, both rehearsals complete with only whitelisted fields written, and recomputed the projection independently to the second (Q1 8.413 h; cut 3 5.840 h; WX 0.843 / 1.089 h; probe 3.285 / 5.505 h; largest peak 1.043 GiB). It confirmed that 22 hours is the smallest whole number of hours with the stated property and that the raise complies with the lead's limits. Verdict: READY AFTER LISTED FIXES; none requires repeating the rehearsal.
+
+Corrections to the previous addendum, from the audit: at 16 hours with cut 3, a candidate A5-D would have kept both WX and the probe and a candidate A1 would have lost only the probe (the addendum said "and possibly WX"). At 22 hours the margin for a candidate A1 after a Q1 at its projection is 249 seconds: A1 loses the probe if Q1 runs more than 0.8% slower than projected; A5-D keeps WX and the probe up to a Q1 1.59 times slower. The projection's two informational booleans were computed at 16 hours with the design's 0.8-hour guess; at 22 hours with the measured charges they read true and true.
+
+Rulings by the lead, before any registered draw exists:
+
+- **The cap stays 22 hours.** It is the smallest whole number at which the projection keeps every registered cell; the lead does not add slack beyond the rule it stated. The thin margin for a candidate A1 is recorded; the rehearsal rates were measured with twelve extra busy processes on top of another study's six workers, which is heavier than the load planned for the registered run.
+- **F7:** registered generation and the registered gates stage are launched with no other study's compute stage running, so that their caps (twice a measurement taken at moderate load) are not exceeded by machine load. A generation that reaches its cap is still treated as the code treats it; the lead avoids the case by the launch condition and does not change the reserve rule.
+- F1–F3, F6 and F9 are implementation defects fixed as the audit states; the analysis and report times are measured on synthetic full-registry records before the cap table is written (README step 8).
+- The watchdog defect in `src/arborlm/watchdog.py` (F12) does not affect S0, whose stages use `studies/p9/pool.py`; changing `src/` needs an approved amendment and is listed for the post-P10 clean-up.
+
