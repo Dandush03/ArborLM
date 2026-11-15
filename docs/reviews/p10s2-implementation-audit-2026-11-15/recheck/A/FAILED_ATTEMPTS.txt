@@ -1,0 +1,17 @@
+Failed or superseded checker attempts of re-check A (kept; Claude Opus 5.5)
+
+1. r_seeds.py, attempt 1 (FAILED_r_seeds_attempt1.out.txt): printed "220906 analysis-only ruling: False". My bug: I searched the ADR for
+   "220906 is drawn in the analysis stage and nothing else"; the ADR says "... and nowhere else". Fixed the string; every other line of the
+   attempt is unchanged in r_seeds.out.txt.
+2. r_fetch.py, attempt 1 (FAILED_r_fetch_attempt1.out.txt): the 30 GB probe seeded the ledger at 29,999,000,000 B, but the synthetic session
+   declares only 1,447 B, so the session was (correctly) allowed to start and the "refusal" printed came from my own fake downloader returning
+   0 bytes. My probe design, not an implementation defect. Re-run with the ledger 1,000 B below 30 GB: refused before any download call.
+   The same attempt showed the tampered config.json refused by its SIZE; a same-size tamper was added to show the digest refusal itself.
+3. predecessor_rerun/check_seeds.py (console in check_seeds.console.txt): KeyError 'bootstrap'. The predecessor's script assumes 220906 is a
+   data-step seed; by the lead's bootstrap ruling it is drawn in the analysis stage only (mode registered-analysis), so the key is absent from
+   partition_seeds("registered-data") by design. Not an implementation defect; r_seeds.py replaces it.
+4. predecessor_rerun/check_partitions.py: its own reimplementation follows the OLD rules (verbatim contraction lookup, per-key draws), so its
+   "identical" lines are now False by design; its useful lines are the implementation-side ones (contraction pairs split: 26 -> 0; G1 on panels
+   ok = True). r_partitions.py is the reimplementation under the new rules.
+5. predecessor_rerun/check_tokenization.py: its "mine" read positions put the read on a trailing punctuation token (pre-ruling C-M5), so two
+   lines are now False by design. r_reads.py recomputes positions under C-M5 from token bytes: all equal.

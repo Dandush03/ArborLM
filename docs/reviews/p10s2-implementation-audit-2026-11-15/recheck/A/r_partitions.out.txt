@@ -1,0 +1,28 @@
+[list] my copy of the contraction list equals text.CONTRACTIONS: True
+synthetic corpus: 2378 English, 1383 German, 1477 French, 1383 + 1477 links
+[groups] mine 1471, implementation 1471; key->group map identical: True; sizes identical: True
+[contractions] 59 contraction variant pairs (mid-sentence, 'can't.', curly 'can’t,', quoted ''it's''); split by me: 0; split by the implementation: 0
+[assignment] large groups [60]; eval pairs 561/2800 = 0.2004; identical: True
+[vocabulary] identical: True
+[panels] Q_fit: mine 40, implementation 40, identical: True
+[panels] Q_check: mine 40, implementation 40, identical: True
+[panels] D_cal: mine 20, implementation 20, identical: True
+[panels] D_con: mine 15, implementation 15, identical: True
+[panels] E_A: mine 40, implementation 40, identical: True
+[panels] E_B: mine 40, implementation 40, identical: True
+[panels] E_C: mine 20, implementation 20, identical: True
+[panels] E_open: mine 10, implementation 10, identical: True
+[groups per panel] identity groups repeated inside a panel: {'Q_fit': 0, 'Q_check': 0, 'D_cal': 0, 'D_con': 0, 'E_A': 0, 'E_B': 0, 'E_C': 0, 'E_open': 0}; panel pairs sharing a group: []
+[multi-key] identity groups with more than one both-reference training key (the case of audit M1): 42
+[G1, panels only] implementation: ok = True, problems = []
+[sources A] mine 905, implementation 905, identical: True; in an evaluation string: 0
+[gold pool A] mine 787, implementation 787, identical: True
+[sources A] no-gold sources whose identity group is also a group of Q, D_cal or D_con: 21 (e.g. ['tom buys music there 4 too', 'tom eats a car there 2 again'])
+[sources B] mine 807, implementation 807, identical: True; in an evaluation string: 0
+[gold pool B] mine 864, implementation 864, identical: True
+[sources B] no-gold sources whose identity group is also a group of Q, D_cal or D_con: 0 (e.g. [])
+[sufficiency] implementation available {'A': 597, 'B': 499}, shared units 616; mine available {'A': 597, 'B': 499}, shared units 616; needed 50
+[draw r0] identical to mine: True; T_A/T_B share units: 0, groups: 0; streams share eval groups: 0; stream groups shared with Q/D_cal/D_con {'A': 0, 'B': 0}; implementation G1 ok = True
+[draw r1] identical to mine: True; T_A/T_B share units: 0, groups: 0; streams share eval groups: 0; stream groups shared with Q/D_cal/D_con {'A': 4, 'B': 0}; implementation G1 ok = True
+[draw r2] identical to mine: True; T_A/T_B share units: 0, groups: 0; streams share eval groups: 0; stream groups shared with Q/D_cal/D_con {'A': 1, 'B': 0}; implementation G1 ok = True
+[draw r3] identical to mine: True; T_A/T_B share units: 0, groups: 0; streams share eval groups: 0; stream groups shared with Q/D_cal/D_con {'A': 0, 'B': 0}; implementation G1 ok = True

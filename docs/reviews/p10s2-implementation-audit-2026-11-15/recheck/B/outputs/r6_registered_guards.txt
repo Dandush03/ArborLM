@@ -1,0 +1,46 @@
+freeze commit 037f7918df7ba3a1f75a3dcf24214a69376b9dd1; decision commit 573e0456881e156eeabefcc8e3259bb0514ed5e3
+--- P1 report.sh with the study ledger moved aside (fresh ledger, P = 0, cap 36 = plan cap)
+M-append-frozen: AB NOT_EVALUATED, BA NOT_EVALUATED (2 replicates, U = 4)
+M-ii: AB NOT_EVALUATED, BA NOT_EVALUATED (2 replicates, U = 4)
+M-seq: AB NOT_EVALUATED, BA NOT_EVALUATED (2 replicates, U = 4)
+exit 0
+--- P2 report.sh with 35.99 h already charged
+refused: stage report (its cap plus the reserved analysis and report caps) projects 0.017 h on 36.039 h already charged, over the cap of 36.0 h
+exit 2
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a91c79a181109bb9c/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+--- P3 report.sh after a hand-appended cap-raise entry (54 h)
+refused: the study ledger's cap (54.0 h) differs from the cap the freeze recorded (36.0 h): a raise after the freeze is not allowed
+exit 2
+--- P4a raise-cap after the registered run
+refused: a registered seed has been observed; the cap is raised at the rehearsal's headroom check only, never after (section 13.3)
+exit 2
+--- P4b freeze again after the registered run
+refused: a registered seed has been observed before the freeze
+exit 2
+--- P4c raise-cap with a fresh ledger (plan committed in history)
+refused: a registered seed has been observed; the cap is raised at the rehearsal's headroom check only, never after (section 13.3)
+exit 2
+--- P4d freeze with a fresh ledger
+refused: a registered seed has been observed before the freeze
+exit 2
+--- P5 analysis.sh without a recompute completion record
+refused: stage analysis requires the completion record of recompute (/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-recheck-B/e2e/p10s2-e2e-xxf8y7o5/registered-run/stages/recompute.json), which does not exist
+exit 2
+--- P6a report.sh with the decision commit as --freeze-commit
+refused: 573e0456881e156eeabefcc8e3259bb0514ed5e3 is not the freeze commit: the commit that added studies/p10s2/freeze/plan.json is 037f7918df7ba3a1f75a3dcf24214a69376b9dd1
+exit 2
+--- P6b registered report with --caps ./studies/p10s2/freeze/stage_caps.json (same file, typed differently)
+                                                 {studies/p10s2/freeze/stage_caps.json}
+                                                 {gates,train,evaluate,timing,recompute,analysis,report}
+python -m studies.p10s2.stages registered: error: argument --caps: invalid choice: './studies/p10s2/freeze/stage_caps.json' (choose from studies/p10s2/freeze/stage_caps.json)
+exit 2
+--- P6c registered report with --device cpu
+                                      {dry,registered,calibrate,prefreeze-gates,rehearse,raise-cap,freeze}
+                                      ...
+python -m studies.p10s2.stages: error: unrecognized arguments: --device cpu
+exit 2
+--- P7 train.sh with gates.json G4 ok = false
+refused: the second gates stage did not pass (G4): a failed gate stops the run
+exit 2
+restored: 0 differences in the run directory; ledger identical: yes

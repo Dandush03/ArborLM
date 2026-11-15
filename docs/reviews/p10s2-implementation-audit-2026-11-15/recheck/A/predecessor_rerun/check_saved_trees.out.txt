@@ -1,0 +1,37 @@
+== teacher_a Helsinki-NLP/opus-mt-en-de: saved rev record sha = 6183067f769a302e3861815543b9f312c71b0ca4; pinned 6183067f769a302e3861815543b9f312c71b0ca4; equal: True
+   pytorch_model.bin: tree lfs sha256 da068344b1b0c20e6d4a8f77f48e06646b90d679029006b18579e68977206bdd size 297928209; pinned ('da068344b1b0c20e6d4a8f77f48e06646b90d679029006b18579e68977206bdd', 297928209); equal: True
+   config.json: git-blob sha1 0a49d3f4024d5ea51560d51f29d75722d794fb16 size 1335
+   generation_config.json: git-blob sha1 3d05a5bad924f2121cf5a006b36dfda02970289b size 293
+   source.spm: git-blob sha1 e73d58f99c702eb1746e3dc55bc76255d7aa4a94 size 768489
+   target.spm: git-blob sha1 9dd0d88081be8d75fbc029762329cc11bfad07b9 size 796845
+   vocab.json: git-blob sha1 0da41bcf74fa9a6af4855c7350e27819796d9ca9 size 1273232
+   tokenizer_config.json: git-blob sha1 c1fe32f77a961c887ae8266fbd92f4f583fe309a size 42
+   saved config.json blob 0a49d3f4024d5ea51560d51f29d75722d794fb16; equals tree's: True; contains '_attn_implementation': False
+== teacher_b Helsinki-NLP/opus-mt-en-fr: saved rev record sha = dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18; pinned dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18; equal: True
+   pytorch_model.bin: tree lfs sha256 cc1de10b49342ad2f33e06bc4474ddd6eaca278474903c4a8636ce15680d64de size 300827685; pinned ('cc1de10b49342ad2f33e06bc4474ddd6eaca278474903c4a8636ce15680d64de', 300827685); equal: True
+   config.json: git-blob sha1 1ca77a4a9305ea071d96dd12dbe7c69c3a224f8e size 1416
+   generation_config.json: git-blob sha1 a76623f9e228ce241586c6dc0ede54b9674940a6 size 293
+   source.spm: git-blob sha1 5b989d2ad3cc6596bef819b2ad755f3e06377476 size 778395
+   target.spm: git-blob sha1 e95b99a0e1a115d0f27eb051c7afc5a2859f1630 size 802397
+   vocab.json: git-blob sha1 f12d2f5f9cddfc4b05dee175269d98cab8274c12 size 1339166
+   tokenizer_config.json: git-blob sha1 599f1c74f7e68d1351c801ef3557a03fd846d171 size 42
+   saved config.json blob 1ca77a4a9305ea071d96dd12dbe7c69c3a224f8e; equals tree's: True; contains '_attn_implementation': False
+== student HuggingFaceTB/SmolLM2-135M: saved rev record sha = 93efa2f097d58c2a74874c7e644dbc9b0cee75a2; pinned 93efa2f097d58c2a74874c7e644dbc9b0cee75a2; equal: True
+   model.safetensors: tree lfs sha256 80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1 size 269060552; pinned ('80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1', 269060552); equal: True
+   config.json: git-blob sha1 ccf3dac2f33905d152adbdf3886b5e38a4eb7579 size 704
+   generation_config.json: git-blob sha1 0fce861c328ff24830f3037d91ce773254447bf7 size 111
+   tokenizer.json: git-blob sha1 f922b1797f0c88e71addc8393787831f2477a4bd size 2104556
+   tokenizer_config.json: git-blob sha1 d45192775d58298087a1fedf5967fe5b63b091ab size 3658
+   vocab.json: git-blob sha1 0ad5ecc2035b7031b88afb544ee95e2d49baa484 size 800662
+   merges.txt: git-blob sha1 69503b13f727ba3812b6803e97442a6de05ef5eb size 466391
+   special_tokens_map.json: git-blob sha1 f6652f246cb895ca1edfb16d10b57917b266e335 size 831
+   saved config.json blob ccf3dac2f33905d152adbdf3886b5e38a4eb7579; equals tree's: True; contains '_attn_implementation': False
+== fallback Helsinki-NLP/opus-mt-en-es: saved rev record sha = 5bc4493d463cf000c1f0b50f8d56886a392ed4ab; pinned 5bc4493d463cf000c1f0b50f8d56886a392ed4ab; equal: True
+   pytorch_model.bin: tree lfs sha256 befce0f620e8e63f83bbb7f0818eb51d541cba28057a7cc14b00466d85c4994c size 312087523; pinned ('befce0f620e8e63f83bbb7f0818eb51d541cba28057a7cc14b00466d85c4994c', 312087523); equal: True
+   config.json: git-blob sha1 c40dc3af1603bdbca3388970914022f4abb81f7f size 1473
+   generation_config.json: git-blob sha1 f07859fcab98712b231d115475990a962eebc851 size 293
+   source.spm: git-blob sha1 6dc92ba66940f622779f82c376066c2c46bbad12 size 801636
+   target.spm: git-blob sha1 2dfb31564bc31c8fbc65c8bfa8cc201fbbf45e44 size 825924
+   vocab.json: git-blob sha1 d2c5a0f1ab2bb3a752894b854150c358f8c682f9 size 1590040
+   tokenizer_config.json: git-blob sha1 159d739c93118ec73b1a90a6045b636928fcce95 size 44
+   saved config.json blob c40dc3af1603bdbca3388970914022f4abb81f7f; equals tree's: True; contains '_attn_implementation': False
