@@ -1,6 +1,6 @@
 # ADR-0017 — Parallel useful-capacity, anti-collapse and locality diagnostics (P9)
 
-- **Status: REVISION 4. Lanes A–D (§1–§14): CALIBRATION BLOCKED (human lead, 2026-11-14, §15.2), not scientifically failed, no run authorized. Part I (§18, the query-interface prerequisite): APPROVED on 2026-11-14 for implementation, calibration and rehearsal, with decision 2 delegated to the lead within the limits of §15.3. SPEC: PENDING ASTRA REVIEW. Nothing of Part I has run.**
+- **Status: REVISION 4. Lanes A–D (§1–§14): CALIBRATION BLOCKED (human lead, 2026-11-14, §15.2), not scientifically failed, no run authorized. Part I (§18, the query-interface prerequisite): calibrated on rehearsal seeds, audited, FROZEN (§15.5); its single registered run is approved by the lead under the human lead's delegation (§15.6). SPEC: PENDING ASTRA REVIEW. The outcome of Part I is recorded in `results/` and the research log, not in this text.**
 - **Date:** 2026-11-14
 - **Revision history.**
   - Revision 0: the human lead's draft, unchanged at `docs/reviews/adr-0017-design-2026-11-14/ADR-0017-draft-rev0-human.md`.
@@ -506,6 +506,39 @@ Recorded by the lead:
 6. A BB class of MODEL_STORES_FACTS has dense comparison NOT COMPARED.
 7. BB's next-byte loss is measured with nothing added, on the 2,048 corpus rows the backbone was trained on, before and after.
 8. Rehearsal uses draw 2 by default; draw 1 is refused outside calibration.
+
+### 15.5 Part I freeze record — 2026-11-14
+
+- **Code:** commit `dd8b205` (`studies/p9i/`, `configs/p9i_interface.toml`, `tests/test_p9i_*.py`). 1,731 tests passing, 4 skipped; ruff and mypy clean. The freeze commit is the commit that adds this record; the registered stages run with `--freeze-commit` set to it.
+- **Calibration:** `results/p9i-calibration-2026-11-14/calibration.json`, sha256 `087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44`. **U = 8,192 updates; no failed size.** Confirmed by the auditor from the raw records and snapshots (`docs/reviews/p9i-prefreeze-audit-2026-11-14/AUDIT.md`).
+- **Registered data:** generated at freeze time from the registered data seeds (182001 upward) into `experiments/P9IP-20261114T235955649302Z-8756ef5f9d1541bd9e0efaece6f7c27b`; `data_manifest.json` sha256 `8d73e555e8dd0d0b2f2d91880152f4c6a5371ca94c0dec65b26c1a5c16d8c308`; gate G1 passed with no failed check. No model has been run on these data and no label statistic beyond G1's generator checks has been read.
+- **Audits:** design review and confirmation (`docs/reviews/adr-0018-design-2026-11-14/`); pre-freeze audit and re-check (`docs/reviews/p9i-prefreeze-audit-2026-11-14/AUDIT.md`, `RECHECK.md`): calibration CONFIRMED, implementation READY TO FREEZE. All by Opus 5.5. Implementation by Sonnet 5.5. Astra review: NOT_PERFORMED.
+- **Rehearsal:** `results/p9i-rehearsal-2026-11-14/` (time and memory only).
+- **Charged so far:** 930.3 s (calibration, rehearsal) + 11.3 s (generation) of 14,400 s.
+- **The run, once, in this order** (RUN = the directory above; FREEZE = the freeze commit; every command is `uv run --locked python -m studies.p9i.stages <stage> --mode registered --freeze-commit FREEZE --run-dir RUN --calibration results/p9i-calibration-2026-11-14/calibration.json --workers 6 --stage-cap-seconds <cap>`):
+
+  | Stage | Cap (s) |
+  |---|---|
+  | gates | 600 |
+  | train | 3,600 |
+  | evaluate | 900 |
+  | analyze | 300 |
+  | report | 300 |
+
+- Before anything is interpreted, `calibration_binding.json` in RUN must hold the calibration hash above, U = 8,192 and no failed sizes, and the auditor recomputes classes, annotations and the selection from the raw records, and checks the data manifest hash.
+- No stage is re-run with changed settings. A failed gate stops the run before training. A failed or missing cell makes the outcome NOT_INTERPRETED (INCOMPLETE).
+
+### 15.6 Decision 2 for the Part I run — taken by the lead under delegation, 2026-11-14
+
+The human lead delegated this decision ("you can approved it after the freeze if you se fit", §15.3). The lead set five conditions on its own use of the delegation. Checked now:
+
+1. *Calibration selected a U with no size failed.* **Holds:** U = 8,192, no failed size.
+2. *Both audits end with no open blocker or major.* **Holds:** the pre-freeze audit found no blocker and three majors (M1, M2 in the analysis and run plumbing; M3 a process conflict). M1 and M2 were fixed and re-checked; M3 is resolved by recording this decision inside the freeze commit. The re-check's verdict is READY TO FREEZE with four freeze-record items (F1–F4), which §15.5 and this section contain.
+3. *Nothing changed after calibration except U.* **Holds for the specification and for everything that computes a number; does not hold literally for the code.** After the calibration the code changed once, in commit `dd8b205`, only as the auditor required: no interpretation with missing cells or failed gates, the calibration binding, registered-mode refusals, report columns, and recording the loss with `.item()`. `model.py`, `core.py`, `data.py` and the config are unchanged; the auditor reproduced rehearsal snapshots and optimizer states bit for bit and the forward and class checks identically at `dd8b205` (RECHECK.md). No threshold, arm, seed, size, rule or U was changed, and no interface arm had been observed when the fixes were made. The condition was the lead's own, written to exclude tuning after observation; the lead judges that it is met in that sense and states the literal exception here so the human lead can overrule it.
+4. *The rehearsal shows the run fits the remaining cap and the memory limits.* **Holds:** projected about 1,400–2,400 s against 13,458 s remaining; stage caps sum to 5,700 s; peak worker memory 1.49 GiB against 3 GiB.
+5. *No registered seed has been observed.* **Holds, with this definition:** the registered data were generated at freeze time and checked by G1 (generator properties only); no model has been trained or evaluated on them.
+
+**Decision: the lead approves the single registered run of Part I as frozen in §15.5.** This is the lead acting under the human lead's delegation, not a separate human approval. It covers nothing else: not Lanes A–D, a re-run, a merge, a push of weights, publication, ADR-0012 or any other study. Whatever the outcome, it is reported as registered, including a negative or uninterpreted one. Astra review: NOT_PERFORMED.
 
 ### Decision 2 (Lanes A–D)
 
