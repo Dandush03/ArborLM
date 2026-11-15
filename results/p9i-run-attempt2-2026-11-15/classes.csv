@@ -1,0 +1,15 @@
+arm,slots,class,raw,b102_present,b102_demoted,dense_comparison,language_modelling
+A4,16384,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",True,False,NOT COMPARED,
+A4,4096,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+A4,65536,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+A4E,16384,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+BB,16384,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",True,False,NOT COMPARED,LANGUAGE MODELLING DEGRADED
+BB,4096,INTERFACE_PARTIAL,"{""1801/A"": ""PARTIAL"", ""1801/B"": ""PARTIAL"", ""1802/A"": ""PARTIAL"", ""1802/B"": ""PARTIAL""}",False,False,,LANGUAGE MODELLING DEGRADED
+BB,65536,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,LANGUAGE MODELLING DEGRADED
+E7,16384,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+N,16384,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+N,4096,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+N,65536,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
+W7,16384,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",True,False,NOT COMPARED,
+W7,4096,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,,
+W7,65536,INTERFACE_FAILS,"{""1801/A"": ""FAILS"", ""1801/B"": ""FAILS"", ""1802/A"": ""FAILS"", ""1802/B"": ""FAILS""}",False,False,NOT COMPARED,
