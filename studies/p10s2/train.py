@@ -4,10 +4,16 @@ the target tokens (prompt positions masked). The student is never trained: only 
 
 Batch order is a fresh +2 generator per use (section 9): concatenated epoch permutations of the stream, cut into batches. A replayed row stream (M-ii) uses its own fresh +2 generator.
 Training on MPS is not bit-reproducible; snapshots are the object and every score is recomputed on CPU (sections 13.3, 15).
+
+Failures (audit B M10): any exception inside the update loop (an unsupported MPS operation, a device error, an out-of-memory, a stage stop) ends the cell with a ``failed`` record carrying the error text,
+never an exception out of ``train_arm``; the arm and the student are moved back to CPU in a ``finally``. ``STOP`` is the stage guard's request to end the running work (a reached stage cap or memory
+limit): every cell started after it, and the cell running when it is set, ends ``failed`` with the reason, so a replicate's other records survive.
 """
 
 import math
 import os
+import resource
+import sys
 import time
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
@@ -21,6 +27,50 @@ from . import core
 from .memory import Arm, Read, run_student
 from .model import Student
 from .tokenization import Example
+
+
+class StopRequest:
+    """The stage guard's request to stop running work (a stage cap or memory limit reached). ``reason`` is None while nothing is requested; hooks (a ``Deadline``) are asked on every read, so a stage cap
+    stops the cell running at the next update without a helper thread."""
+
+    def __init__(self) -> None:
+        self._reason: str | None = None
+        self.hooks: list[Callable[[], str | None]] = []
+
+    @property
+    def reason(self) -> str | None:
+        if self._reason is not None:
+            return self._reason
+        for h in self.hooks:
+            r = h()
+            if r is not None:
+                return r
+        return None
+
+    def set(self, reason: str) -> None:
+        if self._reason is None:
+            self._reason = reason
+
+    def clear(self) -> None:
+        self._reason = None
+        self.hooks.clear()
+
+
+STOP = StopRequest()
+MPS_IN_USE = False  # set once a cell has been trained on MPS: only then is the MPS driver asked for its memory (asking initializes the device)
+
+
+def process_memory_bytes() -> dict[str, int]:
+    """Peak resident set of this process, and the MPS driver's and the allocator's current memory when MPS was used. ``max`` is the figure the memory rule reads: ``ru_maxrss`` does not see MPS memory (a
+    2 GiB MPS tensor raised it by 0.024 GiB in audit B4), so the driver's number counts as well."""
+    r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    rss = int(r if sys.platform == "darwin" else r * 1024)
+    out = {"rss_peak": rss, "mps_driver": 0, "mps_allocated": 0}
+    if MPS_IN_USE and torch.backends.mps.is_available():
+        out["mps_driver"] = int(torch.mps.driver_allocated_memory())
+        out["mps_allocated"] = int(torch.mps.current_allocated_memory())
+    out["max"] = max(out["rss_peak"], out["mps_driver"], out["mps_allocated"])
+    return out
 
 
 class NonFiniteLoss(RuntimeError):
@@ -122,39 +172,64 @@ def train_arm(
 ) -> TrainRecord:
     """Train the arm's trainable parameters for ``updates`` updates. ``replay`` rows (M-ii) are added to every batch: ``replay_rows`` of them, ordered by ``replay_generator``. A non-finite loss stops
     the cell and returns a failed record (kept, never retried with changed settings)."""
+    global MPS_IN_USE
     dev = device if device is not None else torch.device("cpu")
     params = arm.trainable()
     if not params:
         raise ValueError("the arm has no trainable parameter")
     clip_norm = clip if clip is not None else core.CFG["training"]["clip_norm"]
     wd = core.CFG["training"]["weight_decay"]
-    student.to(dev)
-    arm.to(dev)
-    opt = torch.optim.AdamW(params, lr=lr, weight_decay=wd)  # a fresh optimizer state
-    plan = batch_plan(len(examples), updates, batch, order_generator)
-    rplan = batch_plan(len(replay), updates, replay_rows, replay_generator) if replay is not None and replay_rows and replay_generator is not None else None
+    previous_deterministic = torch.are_deterministic_algorithms_enabled()
+    if dev.type == "mps":
+        MPS_IN_USE = True
+        if previous_deterministic:
+            torch.use_deterministic_algorithms(False)  # MPS training is not bit-reproducible by design (snapshots are the object); a deterministic-mode error must not end a cell
     losses: list[float] = []
-    t0 = time.perf_counter()
     status, err = "completed", ""
-    for u in range(updates):
-        rows = [examples[i] for i in plan[u]]
-        if rplan is not None and replay is not None:
-            rows += [replay[i] for i in rplan[u]]
-        loss = loss_of(student, arm, rows, marker_index, dev)
-        if not torch.isfinite(loss):
-            status, err = "failed", f"non-finite loss at update {u}"
-            losses.append(float("nan"))
-            break
-        opt.zero_grad(set_to_none=True)
-        loss.backward()  # type: ignore[no-untyped-call]
-        torch.nn.utils.clip_grad_norm_(params, clip_norm)
-        opt.step()
-        losses.append(float(loss.item()))
-        if on_update is not None:
-            on_update(u + 1)
-    wall = time.perf_counter() - t0
-    arm.to(torch.device("cpu"))  # snapshots and every score live on CPU
-    student.to(torch.device("cpu"))
+    plan: list[list[int]] = []
+    rplan: list[list[int]] | None = None
+    t0 = time.perf_counter()
+    try:
+        student.to(dev)
+        arm.to(dev)
+        opt = torch.optim.AdamW(params, lr=lr, weight_decay=wd)  # a fresh optimizer state
+        plan = batch_plan(len(examples), updates, batch, order_generator)
+        rplan = batch_plan(len(replay), updates, replay_rows, replay_generator) if replay is not None and replay_rows and replay_generator is not None else None
+        t0 = time.perf_counter()
+        for u in range(updates):
+            if STOP.reason is not None:
+                status, err = "failed", f"stopped before update {u}: {STOP.reason}"
+                break
+            rows = [examples[i] for i in plan[u]]
+            if rplan is not None and replay is not None:
+                rows += [replay[i] for i in rplan[u]]
+            loss = loss_of(student, arm, rows, marker_index, dev)
+            if not torch.isfinite(loss):
+                status, err = "failed", f"non-finite loss at update {u}"
+                losses.append(float("nan"))
+                break
+            opt.zero_grad(set_to_none=True)
+            loss.backward()  # type: ignore[no-untyped-call]
+            torch.nn.utils.clip_grad_norm_(params, clip_norm)
+            opt.step()
+            losses.append(float(loss.item()))
+            if on_update is not None:
+                on_update(u + 1)
+    except KeyboardInterrupt:
+        if STOP.reason is None:
+            raise
+        status, err = "failed", f"stopped at update {len(losses)}: {STOP.reason}"
+    except Exception as e:  # noqa: BLE001 (any device or operation error ends the cell as a kept failed record, audit B M10)
+        status, err = "failed", f"{type(e).__name__}: {e} (at update {len(losses)})"
+    finally:
+        wall = time.perf_counter() - t0
+        if previous_deterministic and not torch.are_deterministic_algorithms_enabled():
+            torch.use_deterministic_algorithms(True)
+        try:
+            arm.to(torch.device("cpu"))  # snapshots and every score live on CPU
+            student.to(torch.device("cpu"))
+        except Exception as e:  # noqa: BLE001
+            status, err = "failed", (err + "; " if err else "") + f"could not move back to CPU: {type(e).__name__}: {e}"
     done = len(losses)
     return TrainRecord(
         status, done, batch, replay_rows if rplan is not None else 0, batch + (replay_rows if rplan is not None else 0), str(dev), wall, wall / max(1, done), sum(p.numel() for p in params),

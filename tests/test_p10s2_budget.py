@@ -18,7 +18,7 @@ from studies.p10s2 import budget, core  # noqa: E402
 from studies.p10s2.ledger import Ledger, LedgerRefused, sum_charged  # noqa: E402
 
 GIB = 2**30
-STORE = ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "MAGOLD")
+STORE = ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "MAGOLD", "ETABLE")  # E-table is store-type: measured at both read layers (the lead's ruling of 2026-11-15)
 
 
 def rates(scale: float = 1.0, *, slow12: float = 1.0, overhead: float = 0.0, **peaks: int) -> budget.Rates:
@@ -26,14 +26,16 @@ def rates(scale: float = 1.0, *, slow12: float = 1.0, overhead: float = 0.0, **p
     for g in STORE:
         us[f"{g}@L4"] = 0.5 * scale
         us[f"{g}@L12"] = 0.5 * scale * slow12
-    for g in ("ETABLE", "LORA1", "LSEQ", "LJOINT"):
+    for g in ("LORA1", "LSEQ", "LJOINT"):
         us[g] = 0.6 * scale
-    return budget.Rates(us, 4, 100.0 * scale, 600.0 * scale, 300.0 * scale, 120.0 * scale, 200.0 * scale, overhead, **{"train_peak_bytes": 2 * GIB, "eval_peak_bytes": 3 * GIB, "recompute_peak_bytes": 3 * GIB, "task_peak_bytes": 4 * GIB, **peaks})
+    us["ETABLE@L4"] = 0.6 * scale
+    us["ETABLE@L12"] = 0.6 * scale * slow12
+    return budget.Rates(us, 4, 100.0 * scale, 600.0 * scale, 300.0 * scale, 120.0 * scale, 200.0 * scale, overhead, analysis_seconds=400.0 * scale, report_seconds=200.0 * scale, **{"train_peak_bytes": 2 * GIB, "eval_peak_bytes": 3 * GIB, "recompute_peak_bytes": 3 * GIB, "task_peak_bytes": 4 * GIB, **peaks})
 
 
 def uniform(rate: float = 1.0, overhead: float = 0.0) -> budget.Rates:
     us = {f"{g}@L{ly}": rate for g in STORE for ly in (4, 12)}
-    us.update({g: rate for g in ("ETABLE", "LORA1", "LSEQ", "LJOINT")})
+    us.update({g: rate for g in ("LORA1", "LSEQ", "LJOINT")})
     return budget.Rates(us, 4, 10.0, 20.0, 30.0, 5.0, 7.0, overhead)
 
 
@@ -60,11 +62,12 @@ def test_an_entry_is_written_when_the_process_fails_and_a_stage_over_the_cap_is_
     with pytest.raises(RuntimeError):
         with led.charge("train", workers=2, process="fails"):
             raise RuntimeError("boom")
-    e = led.entries()[0]
-    assert e["status"] == "failed" and e["workers"] == 2 and e["charged_hours"] >= 0.0
+    done = [e for e in led.entries() if e["status"] != "started"]
+    assert len(done) == 1 and done[0]["status"] == "failed" and done[0]["workers"] == 2 and done[0]["charged_hours"] >= 0.0
+    assert led.entries()[0]["status"] == "started" and led.entries()[0]["run_id"] == done[0]["run_id"]  # a start marker is written first
     with led.charge("report"):
         pass
-    assert len(led.entries()) == 2
+    assert len([e for e in led.entries() if e["status"] != "started"]) == 2
     led.record("train", 35 * 3600.0)
     led.refuse_if_over(0.5, 36.0, "ok")
     with pytest.raises(LedgerRefused):
@@ -84,9 +87,10 @@ def test_scoring_second_gates_and_recomputation_include_start_up() -> None:
     r0, r1 = uniform(1.0, 0.0), uniform(1.0, overhead=10.0)
     assert budget.scoring_seconds(1, r0) == 18 * 10.0 + 20.0 + 30.0 + 5.0
     assert budget.scoring_seconds(1, r1) - budget.scoring_seconds(1, r0) == 18 * 10.0  # one start-up per scoring process
-    assert budget.recompute_seconds(2, r1) == budget.scoring_seconds(2, r1) - 5.0  # one repetition of the scoring rows; the timing benchmark is not repeated
+    assert budget.recompute_seconds(2, r1) == budget.scoring_seconds(2, r1)  # one repetition of the scoring rows, the timing row included (the lead's ruling of 2026-11-15)
     parts = budget.registered_run_seconds(2, 100, r1)
-    assert parts["second_gates_stage"] == 7.0 + 10.0 and parts["total"] == pytest.approx(parts["training"] + parts["scoring"] + parts["second_gates_stage"] + parts["recomputation"])
+    assert parts["second_gates_stage"] == 7.0 + 10.0 and parts["total"] == pytest.approx(parts["training"] + parts["scoring"] + parts["second_gates_stage"] + parts["recomputation"] + parts["analysis_and_report"])
+    assert parts["analysis_and_report"] == budget.CAP_FLOOR_SECONDS  # never below the reserved floor: analysis and report are always inside R
     assert parts["recomputation"] > 0 and parts["second_gates_stage"] > 0  # both are inside R (charged)
 
 
@@ -184,7 +188,7 @@ def test_no_raise_when_rung_1_fits_and_the_raise_is_the_smallest_whole_number_of
     assert exact is not None and exact.new_cap_hours == pytest.approx(50.0, abs=1.0)
 
 
-def test_record_raise_once_before_any_registered_seed_and_refuses_otherwise(tmp_path: Path) -> None:
+def test_record_raise_once_recomputed_from_the_rehearsal_record(tmp_path: Path) -> None:
     core.reset_seed_record()
     led = Ledger(tmp_path / "ledger.jsonl")
     led.record("rehearsal", 3.5 * 3600)
@@ -192,32 +196,34 @@ def test_record_raise_once_before_any_registered_seed_and_refuses_otherwise(tmp_
     prop = budget.propose_raise(led.total_hours(), r)
     assert prop is not None
     path = tmp_path / "cap_raise.json"
-    assert budget.effective_cap(path) == 36.0
-    rec = budget.record_raise(prop, path, led)
-    assert rec["new_cap_hours"] == prop.new_cap_hours and rec["recorded_at_stage"] == "rehearsal headroom check" and budget.effective_cap(path) == prop.new_cap_hours
+    assert budget.effective_cap(path) == 36.0 and led.cap_hours() == 36.0
+    rec = budget.record_raise(r, path, led)  # nothing is typed: the amount is recomputed from the rates and P
+    assert rec["new_cap_hours"] == prop.new_cap_hours and rec["recorded_at_stage"] == "rehearsal headroom check" and budget.effective_cap(path) == prop.new_cap_hours == led.cap_hours()
     saved = json.loads(path.read_text())
     assert saved["old_cap_hours"] == 36.0 and saved["rung1_total_hours"] == pytest.approx(prop.rung1_total_hours) and "projections_hours" in saved  # the raise, the measured projection, the old and the new cap
     with pytest.raises(budget.CapRefused, match="once already"):
-        budget.record_raise(prop, path, led)  # raised once
-    assert budget.rehearsal_rule(led.total_hours(), r, budget.effective_cap(path)).outcome == "rung 1"  # the rung rule then runs against the raised cap
+        budget.record_raise(r, path, led)  # raised once
+    path.unlink()
+    with pytest.raises(budget.CapRefused, match="once already"):
+        budget.record_raise(r, path, led)  # deleting the file does not allow a second raise: the ledger holds it
+    assert budget.rehearsal_rule(led.total_hours(), r, led.cap_hours()).outcome == "rung 1"  # the rung rule then runs against the raised cap
 
 
 def test_record_raise_refuses_after_a_registered_seed_has_been_observed(tmp_path: Path) -> None:
     r = rates(scale_for(20.28, 4, 2000))
     led = Ledger(tmp_path / "ledger.jsonl")
     led.record("rehearsal", 3.5 * 3600)
-    prop = budget.propose_raise(led.total_hours(), r)
-    assert prop is not None
-    # (1) a registered process in the ledger
-    led.record("train", 10.0, registered=True)
+    # (1) a registered process in the study ledger (its start marker is enough: a killed process has still drawn its seeds)
+    with led.measure("train", registered=True):
+        pass
     with pytest.raises(budget.CapRefused, match="registered seed has been observed"):
-        budget.record_raise(prop, tmp_path / "a.json", led)
+        budget.record_raise(r, tmp_path / "a.json", led)
     assert not (tmp_path / "a.json").exists()
     # (2) a registered replicate seed in the seed record
     core.reset_seed_record()
     core.seeded_generator(220001, "stage-1 store", "registered-run")
     with pytest.raises(budget.CapRefused, match="registered seed has been observed"):
-        budget.record_raise(prop, tmp_path / "b.json", Ledger(tmp_path / "fresh.jsonl"))
+        budget.record_raise(r, tmp_path / "b.json", Ledger(tmp_path / "fresh.jsonl"))
     core.reset_seed_record()
     # the partition-side seeds are drawn before the rehearsal and are not replicate seeds
     core.seeded_generator(220901, "partition", "registered-data")
@@ -225,21 +231,25 @@ def test_record_raise_refuses_after_a_registered_seed_has_been_observed(tmp_path
     core.reset_seed_record()
 
 
-def test_record_raise_refuses_wrong_values(tmp_path: Path) -> None:
+def test_record_raise_refuses_when_rung_1_fits_and_verify_raise_recomputes(tmp_path: Path) -> None:
     core.reset_seed_record()
     led = Ledger(tmp_path / "l.jsonl")
-    r = rates(scale_for(20.28, 4, 2000))
-    prop = budget.propose_raise(3.5, r)
-    assert prop is not None
-    for bad, why in (
-        (replace(prop, new_cap_hours=prop.new_cap_hours + 1), "smallest whole number"),
-        (replace(prop, new_cap_hours=73.0), "above the ceiling"),
-        (replace(prop, old_cap_hours=40.0), "smallest whole number"),
-        (replace(prop, rung1_total_hours=30.0, new_cap_hours=30.0), "fits the 36-hour cap"),
-    ):
-        with pytest.raises(budget.CapRefused, match=why):
-            budget.record_raise(bad, tmp_path / "x.json", led)
+    fits = rates(scale_for(10.0, 4, 2000))
+    with pytest.raises(budget.CapRefused, match="fits the 36-hour cap"):
+        budget.record_raise(fits, tmp_path / "x.json", led)
     assert not (tmp_path / "x.json").exists()
+    led.record("rehearsal", 3.5 * 3600)
+    r = rates(scale_for(20.28, 4, 2000))
+    path = tmp_path / "cap_raise.json"
+    assert budget.verify_raise(path, led.total_hours(), fits, led) == 36.0
+    budget.record_raise(r, path, led)
+    cap = budget.verify_raise(path, led.total_hours(), r, led)
+    assert cap > 36.0
+    with pytest.raises(budget.CapRefused, match="recomputed from the rehearsal record"):
+        budget.verify_raise(path, led.total_hours(), rates(scale_for(30.0, 4, 2000)), led)  # other rates: the recorded cap is not the recomputed one
+    path.write_text(json.dumps({**json.loads(path.read_text()), "new_cap_hours": 71.0}))
+    with pytest.raises(budget.CapRefused, match="disagree"):
+        budget.verify_raise(path, led.total_hours(), r, led)  # an edited raise file against the ledger
     (tmp_path / "bad.json").write_text(json.dumps({"new_cap_hours": 100.0}))
     with pytest.raises(budget.CapRefused):
         budget.effective_cap(tmp_path / "bad.json")
@@ -252,7 +262,7 @@ def test_headroom_check_returns_the_proposal_and_the_decision(tmp_path: Path) ->
     r = rates(scale_for(20.28, 4, 2000))
     h = budget.headroom_check(led.total_hours(), r, led, tmp_path / "cap_raise.json")
     assert h["proposal"] is not None and h["cap_in_force_hours"] == 36.0 and h["decision"]["outcome"] in ("rung 2", "rung 3", "rung 4", "NOT STARTED: BUDGET")
-    budget.record_raise(budget.propose_raise(led.total_hours(), r), tmp_path / "cap_raise.json", led)  # type: ignore[arg-type]
+    budget.record_raise(r, tmp_path / "cap_raise.json", led)
     h2 = budget.headroom_check(led.total_hours(), r, led, tmp_path / "cap_raise.json")
     assert h2["cap_in_force_hours"] > 36.0 and h2["decision"]["outcome"] == "rung 1"
 

@@ -16,6 +16,8 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
 
+import torch
+
 from . import core, evaluate
 from .memory import MemoryArm, NullArm, SparseStore, new_lora_arm
 from .text import chrf_item, gap_closed, mean
@@ -35,6 +37,18 @@ class CalCell:
     @property
     def label(self) -> str:
         return f"cal/{self.kind}/{self.setting:g}/{self.capability}"
+
+
+class CalibrationFailed(RuntimeError):
+    """A calibration cell did not complete (a device error, a non-finite loss or a stage stop): the calibration is not interpretable and nothing is selected."""
+
+
+def cpu_snapshot(arm: Any) -> Any:
+    """A copy of the arm taken mid-training, on CPU. The arm is on the training device (MPS in the registered path) when the snapshot is taken, and scoring runs on CPU: a copy left on the training device
+    raised ``RuntimeError: mat1 is on CPU, expected GPU`` at the first 1,000-update snapshot (audit B1)."""
+    snap = copy.deepcopy(arm)
+    snap.to(torch.device("cpu"))
+    return snap
 
 
 def calibration_cells() -> list[CalCell]:
@@ -104,16 +118,18 @@ def run_calibration(world: World, replicate: int, *, updates: int, snapshot_upda
 
         def on_update(u: int, arm: Any = arm, holder: dict[str, Any] = holder) -> None:
             if u == snap_at:
-                holder["snap"] = copy.deepcopy(arm)
+                holder["snap"] = cpu_snapshot(arm)
 
-        train_arm(w.student, arm, w.train_examples(replicate, cell.capability), updates, w.batch, lr, plan.gen(2, "batch order (calibration)"), w.marker_index, device=w.device, on_update=on_update)
+        trec = train_arm(w.student, arm, w.train_examples(replicate, cell.capability), updates, w.batch, lr, plan.gen(2, "batch order (calibration)"), w.marker_index, device=w.device, on_update=on_update)
+        if trec.status != "completed":
+            raise CalibrationFailed(f"{cell.label}: {trec.error}")
         panel = w.d_cal[cell.capability]
         final[cell.label] = evaluate.score_panel(ctx, arm, panel).mean
         snap[cell.label] = evaluate.score_panel(ctx, holder["snap"], panel).mean if "snap" in holder else float("nan")
     sel = select(final)
     pilot_scores = {c: final[CalCell("store", float(sel.read_layer), c).label] for c in core.TASKS}
     g = {c: gap_closed(pilot_scores[c], s0[c], teacher[c]) for c in core.TASKS}
-    out: dict[str, Any] = {"scores": final, "snapshot_scores": snap, "selection": dataclasses.asdict(sel), "pilot": pilot_gate(g), "stage0_d_cal": s0, "teacher_d_cal": teacher, "note": "calibration scores are never reported as results"}
+    out: dict[str, Any] = {"scores": final, "snapshot_scores": snap, "selection": dataclasses.asdict(sel), "pilot": pilot_gate(g), "stage0_d_cal": s0, "teacher_d_cal": teacher, "device": str(world.device), "updates": updates, "snapshot_updates": snap_at, "note": "calibration scores are never reported as results"}
     if all(v == v for v in snap.values()):
         sel_s = select(snap)
         out["selection_at_snapshot"] = dataclasses.asdict(sel_s)

@@ -10,7 +10,12 @@ row, gate or student parameter receives a gradient; in every memory arm no stude
 G5: (a) on route "none" logits equal the frozen student's bit for bit on the general panel; (b) a new store with gate 0 on an empty base changes nothing; (c) gate isolation of appended rows.
 G6: the address function and the router take the prompt only; permuting references changes no address and no route.
 G7: frozen bytes: every model file equals its pinned SHA-256 (large files) or git-blob SHA-1 (small files); every other recorded file equals the SHA-256 recorded at first download or creation.
-G8: student equivalence (``equivalence``). G9: seeds (``core.seed_gate`` and the source check below).
+G8: student equivalence (``equivalence``). G9: seeds (``core.seed_gate``, the stricter checks and the source check below).
+
+Revision after the audits (2026-11-15): G4 is never "not applicable" in a registered run (``require_mps``: a registered process whose world is not on MPS fails it); G7 reads the digests of a manifest
+written at creation, never of one computed from the same files; G9 cannot pass on an empty record, reads each recorded use by its seed value and by the mode of the running stage (a mode label cannot
+stand in), plans every replicate and the +10 code seed, lists 220901-220912 and allows 220906 in the analysis stage only. Before the freeze the gates run on rehearsal seeds with the rehearsal world
+(``rehearsal.rehearsal_world``: D_cal in place of the evaluation panels, so no evaluation panel is scored and no gap on one is computed).
 """
 
 import ast
@@ -61,8 +66,9 @@ def environment_record() -> dict[str, Any]:
     return {"platform": platform.platform(), "machine": platform.machine(), "python": platform.python_version(), "torch": torch.__version__, "mps_built": bool(mps and mps.is_built()), "mps_available": bool(mps and mps.is_available()), "mac_ver": platform.mac_ver()[0], "mps_fallback_env": bool(__import__("os").environ.get("PYTORCH_ENABLE_MPS_FALLBACK")), "threads": torch.get_num_threads()}
 
 
-def g4(world: World, plan: core.SeedPlan, updates: int | None = None) -> dict[str, Any]:
-    """Determinism, snapshot restoration, gradient reach, repeated updates, and the MPS comparison when training runs on MPS."""
+def g4(world: World, plan: core.SeedPlan, updates: int | None = None, *, require_mps: bool = False) -> dict[str, Any]:
+    """Determinism, snapshot restoration, gradient reach, repeated updates, and the MPS comparison when training runs on MPS. ``require_mps`` (every registered process) makes the comparison mandatory:
+    a world not on MPS fails G4, it is never "not applicable"."""
     ctx = world.ctx
     ctx.seed_plan = plan
     hashes_before = world.student.tensor_hashes()
@@ -111,7 +117,7 @@ def g4(world: World, plan: core.SeedPlan, updates: int | None = None) -> dict[st
 
     la, ha = run()
     lb, hb = run()
-    res["repeated_updates_bit_identical"] = bool(la == lb and ha == hb)
+    res["repeated_updates_bit_identical"] = bool(la == lb and ha == hb and len(la) == n and len(lb) == n)
     res["repeated_updates"] = n
 
     # (5) MPS against CPU
@@ -120,9 +126,14 @@ def g4(world: World, plan: core.SeedPlan, updates: int | None = None) -> dict[st
         a_mps = MemoryArm(SparseStore.new(world.cfg.width, world.rows_per_stage, plan.gen(0, "stage-1 store (gates)")), world.layer, codes)
         rc = train.train_arm(world.student, a_cpu, ex, n, world.batch, world.store_lr, plan.gen(2, "batch order (gates)"), world.marker_index, device=torch.device("cpu"))
         rm = train.train_arm(world.student, a_mps, ex, n, world.batch, world.store_lr, plan.gen(2, "batch order (gates)"), world.marker_index, device=torch.device("mps"))
-        res["mps_agreement"] = train.update_agreement(rc.losses, rm.losses, a_cpu.trainable(), a_mps.trainable())
+        if rc.status != "completed" or rm.status != "completed" or len(rc.losses) != len(rm.losses):
+            res["mps_agreement"] = {"ok": False, "status": f"an update failed: cpu {rc.error!r}, mps {rm.error!r}"}
+        else:
+            res["mps_agreement"] = train.update_agreement(rc.losses, rm.losses, a_cpu.trainable(), a_mps.trainable())
+    elif require_mps:
+        res["mps_agreement"] = {"ok": False, "status": f"the MPS comparison is mandatory in a registered run and this process is on {world.device.type}: no silent fallback"}
     else:
-        res["mps_agreement"] = {"ok": True, "status": "not applicable: training device is not MPS in this run"}
+        res["mps_agreement"] = {"ok": True, "status": "not applicable: not a registered run and the training device is not MPS (dry stage and tests only)"}
     res["mps_fallback_unset"] = not res["environment"]["mps_fallback_env"]
     res["student_hashes_unchanged"] = world.student.tensor_hashes() == hashes_before
     res["ok"] = bool(res["tie_rule"]["ok"] and res["two_scorings_bit_identical"] and res["snapshot_restore_bit_identical"] and res["gradient_reach"]["ok"] and res["repeated_updates_bit_identical"] and res["mps_agreement"]["ok"] and res["mps_fallback_unset"] and res["student_hashes_unchanged"])
@@ -265,17 +276,68 @@ def source_check(package_dir: Path | None = None) -> dict[str, Any]:
     return {"ok": not problems, "problems": problems}
 
 
-def g9(planned: Sequence[int] = (), planned_mode: str = "registered-run") -> dict[str, Any]:
-    gate = core.seed_gate(core.seed_record(), planned, planned_mode=planned_mode, extra_foreign=core.config_seeds())
+LISTED_PARTITION_SEEDS = tuple(range(220901, 220913))  # 220901-220912 (the lead's ruling: the equivalence injection vector has its own listed seed 220912)
+BOOTSTRAP_SEED = 220906  # drawn in the analysis stage and nowhere else (the lead's ruling on the bootstrap seed)
+ANALYSIS_STAGE = "analysis"
+
+
+def record_code_seeds(replicates: int, mode: str) -> None:
+    """The +10 oracle-code seed seeds no generator (the hash takes it as an input), so nothing records its use by itself: the gates stage records it for every replicate, so that G9 sees it."""
+    for r in range(replicates):
+        core.seeded_generator(core.SeedPlan(mode, r).code_seed(), "oracle-code hash seed (recorded for G9; no generator is drawn from it)", mode)
+
+
+def g9(planned: Sequence[int] = (), planned_mode: str = "registered-run", *, stage: str = "gates", records: Sequence[core.SeedUse] | None = None, replicates: int | None = None) -> dict[str, Any]:
+    """Gate G9, strict. ``planned`` are the seeds planned for the registry (every replicate's base + 0..10); ``records`` the seeds actually recorded in this process. Refused: an empty record or no planned
+    seeds; any recorded use whose mode label is not the running stage's mode (a label cannot stand in for the mode); a recorded seed outside the planned set of the stage's mode; a replicate whose training
+    draw (+1), gold draw (+5) or +10 code seed is not recorded; any partition-side seed 220901-220912 in a registered-run process. 220906 is allowed in the analysis stage only (``analysis_seed_check``)."""
+    recs = core.seed_record() if records is None else list(records)
+    gate = core.seed_gate(recs, planned, planned_mode=planned_mode, extra_foreign=core.config_seeds())
+    problems = list(gate["problems"])
+    planned_set = set(planned)
+    if not planned_set:
+        problems.append("no seed was planned: G9 cannot pass without a planned registry")
+    if not recs:
+        problems.append("no seed was recorded: G9 cannot pass on an empty seed record")
+    for use in recs:
+        if use.mode != planned_mode:
+            problems.append(f"recorded use of {use.seed} ({use.purpose}) carries mode {use.mode!r}, but this stage runs in mode {planned_mode!r}")
+        if planned_set and use.seed not in planned_set and planned_mode == "registered-run":
+            problems.append(f"recorded seed {use.seed} ({use.purpose}) is not among the seeds planned for the registry")
+        if planned_mode == "registered-run" and use.seed in LISTED_PARTITION_SEEDS:
+            problems.append(f"recorded seed {use.seed} ({use.purpose}) is a partition-side seed used in a registered-run process (220906 is drawn in the analysis stage only)")
+    if replicates is not None:
+        have = {u.seed for u in recs}
+        base = [core.SeedPlan(planned_mode, r) for r in range(replicates)]
+        for r, p in enumerate(base):
+            for off, what in ((1, "training draw"), (5, "gold draw"), (10, "code seed")):
+                if p.seed(off) not in have:
+                    problems.append(f"replicate {r}: the +{off} seed {p.seed(off)} ({what}) is not recorded")
     src = source_check()
-    return {"ok": bool(gate["ok"] and src["ok"]), "seeds": gate, "source": src}
+    return {"ok": bool(not problems and src["ok"]), "seeds": {"ok": not problems, "problems": problems, "recorded": gate["recorded"], "planned": sorted(planned_set)}, "source": src, "listed_partition_seeds": list(LISTED_PARTITION_SEEDS), "bootstrap_seed": {"seed": BOOTSTRAP_SEED, "allowed_in_stage": ANALYSIS_STAGE}, "stage": stage}
+
+
+def analysis_seed_check(records: Sequence[core.SeedUse]) -> dict[str, Any]:
+    """The analysis stage draws 220906 and no other seed (a fresh generator per printed interval, in the registry's order). Any other recorded seed is refused; an empty record is allowed (no interval printed)."""
+    problems = [f"analysis stage drew seed {u.seed} ({u.purpose}); only {BOOTSTRAP_SEED} may be drawn in it" for u in records if u.seed != BOOTSTRAP_SEED]
+    return {"ok": not problems, "problems": problems, "recorded": [{"seed": u.seed, "purpose": u.purpose, "mode": u.mode} for u in records], "stage": ANALYSIS_STAGE}
 
 
 # --- the gates stage -----------------------------------------------------------------------------------------------------------------------------
-def run_gates(world: World, plan: core.SeedPlan, *, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]] | None = None, root: Path | None = None, updates: int | None = None, planned: Sequence[int] = ()) -> dict[str, Any]:
-    """All gates for one stage run. ``g1`` and ``g3`` come from the data and qualification steps."""
-    out: dict[str, Any] = {"G1": dict(g1), "G2": g2(world), "G3": dict(g3), "G4": g4(world, plan, updates), "G5": g5(world, plan), "G6": g6(world, plan), "G7": g7(file_manifest or {}, root or Path(".")), "G8": g8(world, equivalence_record)}
-    out["G9"] = g9(planned or plan.planned(), plan.mode)
+def planned_all(mode: str, replicates: int) -> list[int]:
+    """Every replicate's base + 0..10."""
+    return sorted(s for r in range(replicates) for s in core.SeedPlan(mode, r).planned())
+
+
+def run_gates(world: World, plan: core.SeedPlan, *, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]] | None = None, root: Path | None = None, updates: int | None = None, planned: Sequence[int] = (), require_mps: bool = False) -> dict[str, Any]:
+    """All gates for one stage run. ``g1`` and ``g3`` come from the data and qualification steps; ``file_manifest`` must be a manifest written at creation (never one computed from the files it is compared
+    with). G9 plans every replicate of the world and requires the +10 code seeds to be recorded."""
+    record_code_seeds(world.replicates, plan.mode)
+    out: dict[str, Any] = {"G1": dict(g1), "G2": g2(world), "G3": dict(g3), "G4": g4(world, plan, updates, require_mps=require_mps), "G5": g5(world, plan), "G6": g6(world, plan), "G7": g7(file_manifest or {}, root or Path(".")), "G8": g8(world, equivalence_record)}
+    out["G9"] = g9(planned or planned_all(plan.mode, world.replicates), plan.mode, replicates=world.replicates)
+    out["G7"]["manifest_empty"] = not file_manifest
+    if not file_manifest:
+        out["G7"] = {**out["G7"], "ok": False, "problems": [*out["G7"].get("problems", []), "no file manifest: G7 compares files with digests recorded at creation and cannot pass on none"]}
     out["ok"] = all(bool(out[k].get("ok")) for k in ("G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9"))
     return out
 
