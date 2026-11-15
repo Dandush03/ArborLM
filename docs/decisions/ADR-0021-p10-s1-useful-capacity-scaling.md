@@ -1,26 +1,31 @@
 # ADR-0021 — P10-S1: Useful-capacity scaling under controlled addressing
 
-- **Status: DESIGN REVISION 4 — REVISION 3 RE-CHECKED BY THE AUDITOR: READY SUBJECT TO R1, R2 AND m1–m11 (`docs/reviews/p10-design-2026-11-15/adr-0021-review/RECHECK_REV3.md`), WHICH THIS REVISION APPLIES (§21). SPEC: PENDING ASTRA REVIEW. Nothing is implemented or run.**
+- **Status: DESIGN REVISION 5 — DRAFT. NOT REVIEWED, NOT APPROVED, NOT IMPLEMENTED, NOTHING RUN UNDER IT.** It redesigns the capacity line after revision 4's calibration returned to the human lead (§23) and the human lead chose to shift the grid down (§24). §25 maps every change to its reason and lists what had been seen before the redesign. The lead's approval in §15 covered revision 4 and does not cover this revision. The code in `studies/p10s1/` and `configs/p10s1_capacity.toml` implements revision 4 and is not valid for revision 5. **SPEC: PENDING ASTRA REVIEW.** No registered seed has been observed.
 - **Date:** 2026-11-15
 - **Study code:** P10S1. Package `studies/p10s1/`. Config `configs/p10s1_capacity.toml`. Tests `tests/test_p10s1_*.py`.
 - **Revision history.**
   - Revision 1: `ADR-0021-p10-s1-useful-capacity-scaling.md` (unchanged). Reviewed by Opus 5.5: **NOT READY**, 4 blockers, 11 majors, 17 minors — `adr-0021-review/REVIEW.md`, scripts and outputs beside it.
   - Revision 2: `ADR-0021-p10-s1-useful-capacity-scaling.rev2.md` (unchanged). It applied the review under the lead's rulings. Confirmation review by Opus 5.5: **READY AFTER LISTED TEXT EDITS**, K1–K7 — `adr-0021-review/CONFIRM.md`.
   - Revision 3 (this text) applies K1–K7 with the auditor's text and the auditor's bracketed values, and the lead's final rulings. §17 maps every finding to its change. §18 lists the lead's choices. §19 records how each conflict of revision 2 was closed. §20 lists what differs from the auditor's text.
+  - Revision 4 applied the re-check of revision 3 (§21) and was implemented. Its calibration ran (46 runs, calibration draws only) and returned to the human lead (§23). Revision 4 with §22–§24 is kept unchanged as `docs/reviews/p10s1-revision5-2026-11-15/ADR-0021-rev4-with-s22-s24.md`.
+  - **Revision 5 (the current text)** applies the human lead's choice of §24. §25 is its record; the arithmetic is in `docs/reviews/p10s1-revision5-2026-11-15/DESIGN_NOTES.md`. §15, §17–§24, the Addendum and every verbatim quotation are unchanged. Sections 17–21 describe revisions 2–4 and still name the old cells.
 - **Origin.** The human lead's P10 milestone direction: three parallel, independent experiments (S0 addressing qualification, ADR-0020; S1 capacity, this ADR; S2 two-teacher transfer, ADR-0022).
 - **Milestone question 1 (verbatim).** "Can increasing ArborLM's learned-memory capacity produce measurable gains in retained knowledge and useful capability without proportional increases in active inference work?"
 - **Roles (study-specific).** Lead: Claude Fable 5.2. Specification review, implementation audit and recomputation from raw records: Opus 5.5, in a context separate from the implementation. Implementation: Sonnet 5.5. Inventory: Haiku 5.5. The model that actually ran each delegated task is recorded from session metadata. ADR-0012 stays not approved. **Astra review: NOT_PERFORMED.**
 - **Relation to other work.** S1 does not wait for S0 and does not depend on S2. ADR-0017 Lanes A–D stay calibration blocked. P1–P9-I code, configs, records and ADRs are not edited.
 - **Marking.** *(lead's choice)* marks a number or rule the lead chose; §18 collects them.
 
-## 0. What S1 is a study of (decided before calibration)
+## 0. What S1 is a study of (lines 1 and 3 decided before any calibration; line 2 added in revision 5, after revision 4's calibration)
 
-S1 registers **two separate result lines**. Neither implies the other.
+S1 registers **three separate result lines** (two until revision 5). None implies another.
 
-1. **CAPACITY.** A smaller memory that is loaded (§8.2), and a larger memory that holds more useful information at matched updates and at matched compute. Labels: CAPACITY-POSITIVE, CAPACITY-NEGATIVE, CAPACITY-INCONCLUSIVE, and **CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET**, which is not a negative.
-2. **LEARNING EFFICIENCY.** A larger memory that reaches a fixed level of useful information in fewer updates and less compute. Labels: EFFICIENCY-POSITIVE, EFFICIENCY-NEGATIVE, EFFICIENCY-INCONCLUSIVE. Every efficiency verdict is printed with the row-movement ratio of §7.3.
+1. **CAPACITY.** A smaller memory that is loaded (§8.2), and a larger memory that holds more useful information at matched updates and at matched compute. Labels: CAPACITY-POSITIVE, CAPACITY-NEGATIVE, CAPACITY-INCONCLUSIVE, and **CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET**, which is not a negative. Under oracle addressing, a positive step is close to foregone once the smaller cell is full (§25.4). The line is kept, with its thresholds unchanged, as a check of a necessary condition.
+2. **SATURATION (new in revision 5, §8.10).** What a full store holds per slot at each registered size, and whether that amount keeps pace with the number of slots. Labels: SATURATION-PROPORTIONAL, SATURATION-SUBPROPORTIONAL, SATURATION-INCONCLUSIVE, SATURATION NOT MEASURED. The dense control is read on the same full cells (§8.5).
+3. **LEARNING EFFICIENCY.** A larger memory that reaches a fixed level of useful information in fewer updates and less compute. Labels: EFFICIENCY-POSITIVE, EFFICIENCY-NEGATIVE, EFFICIENCY-INCONCLUSIVE. Every efficiency verdict is printed with the row-movement ratio of §7.3.
 
-The reading for milestone question 1 uses the capacity line only.
+The reading for milestone question 1 uses the capacity line, the saturation line and the dense labels (§8.7). It never uses the efficiency line.
+
+**The registered memory sizes are 1,024, 4,096 and 16,384 slots. Capacity from 16,384 to 65,536 slots is not tested in S1.** That question goes to the proposed P10-I, which needs the human lead's review.
 
 ## 1. What is known, with sources
 
@@ -50,9 +55,32 @@ Diagnostic, from the review of revision 1 (a **synthetic stand-in** of the store
 
 Facts 11 and 12 are not results. They are why revision 2 measures load before the freeze (§10.1) and rebuilds the dense control (§5.3).
 
+Calibration of revision 4 and its independent check (calibration draws, initialization seed 2191; **calibration, never results**; `results/p10s1-calibration-2026-11-15/`; `docs/reviews/p10s1-load-search-2026-11-15/CHECK_LOAD_SEARCH.md` and the `audit_*.out` files beside it):
+
+13. F-OQ, useful bits per fact (ceiling 5.0), range over two draws and two panels:
+
+    | Slots | Facts | Load | At 8,192 updates | At 16,384 | At 65,536 | Last doubling (32,768 → 65,536) |
+    |---|---|---|---|---|---|---|
+    | 4,096 | 8,192 | 2 | 4.37–4.54 | 4.81–4.85 | 4.96 | +0.03–0.04 |
+    | 4,096 | 16,384 | 4 | 1.66–2.15 | 3.13–3.28 | 4.06–4.12 | +0.21–0.26 |
+    | 4,096 | 32,768 | 8 | 0.30–0.42 | 0.96–1.14 | 1.89–1.94 | +0.29–0.33 |
+    | 4,096 | 65,536 | 16 | 0.03–0.06 | 0.19–0.25 | 0.72–0.75 | +0.20–0.25 |
+    | 16,384 | 8,192 | 0.5 | 4.99–5.00 | 5.00 | 5.00 | 0.00 |
+    | 16,384 | 32,768 | 2 | 1.96–2.61 | 4.12–4.23 | 4.85–4.87 | +0.15–0.16 |
+    | 16,384 | 65,536 | 4 | 0.23–0.37 | 1.44–1.71 | 3.49–3.54 | +0.64–0.71 |
+    | 16,384 | 131,072 | 8 | 0.01–0.02 | 0.20–0.28 | 1.46–1.52 | +0.54–0.62 |
+
+14. No cell was loaded within revision 4's run lengths: every cell was at its ceiling or still improving. By the letter of §8.2 as revision 4 wrote it, every cell was "plateaued and loaded" at 1,024–8,192 updates, before it had learned anything (the check, §1). Revision 5 closes that (§8.2).
+15. **Extrapolations by the check, not measurements.** Over six curve families, 4,096 slots at eight facts per slot first meets the plateau rule between 131,072 and 393,216 updates, at about 1.9–2.3 bits per fact; with two consecutive passes required, most likely at 262,144–393,216 (range 196,608–524,288). The loads 4 and 8 at 4,096 slots converge to about 17–18 bits per slot under the constant-ratio family. In a hold-out test that family and the power law were pessimistic (they predicted slower saturation than was then seen) and the saturating exponential was the most accurate one step ahead.
+16. Dense control, minimum Panel A accuracy at U_P over two draws, at rates 0.001 / 0.003 / 0.01: 0.091 / 0.443 / 0.998 at 8K/16K; 0.044 / 0.062 / 0.294 at 32K/64K (0.969 at 16,384 updates at 0.01). The best rate was the top of the grid at both sizes, so a higher rate was never tried.
+17. Measured seconds per update (training wall; the task figure with the calibration's evaluations is in brackets): F-OQ 0.0093 (0.0099–0.0109) at 4,096 slots, 0.0153–0.0187 (0.0158–0.0259) at 16,384; H8 0.0075 (0.0082) and 0.0101 (0.0110); D-OQ 0.0235 (0.0245) at 16,384 and 0.071–0.077 (0.089–0.091) at 65,536; R2 0.0091–0.0188.
+18. **Never run in S1:** anything at 1,024 slots; T-OQ at any size (it has not been timed either; the rehearsal has not run); D-OQ at 1,024 or 4,096 slots, at more than half a fact per slot, or at a rate above 0.01; any run beyond 65,536 updates.
+
+Facts 13–18 are the basis of revision 5 and are declared in §25.3 as seen before the redesign.
+
 ## 2. Question, scope and hypotheses
 
-**Question.** With addressing controlled, does a larger learned memory retain more useful information about a fixed set of facts, and about a larger set, than a smaller one, under matched budgets and against a dense map of equal parameters; and does it learn the same facts sooner?
+**Question.** With addressing controlled, does a larger learned memory retain more useful information about a fixed set of facts than a smaller one, under matched budgets and against a dense map of equal parameters; does what a full store holds keep pace with its number of slots; and does a larger memory learn the same facts sooner?
 
 **Scope.** Every memory arm is given the identity of the queried fact by an oracle (§3). S1 measures the store, not the interface.
 
@@ -60,14 +88,21 @@ Hypotheses. Each can fail.
 
 - **H21-1 (capacity under load).** For the flat oracle-query memory, at a fixed fact set, a step to four times the slots is a capacity step (§8.2) when the smaller memory is loaded.
 - **H21-2 (saturation).** When the smaller memory is not loaded, four times the slots does not change what is retained.
-- **H21-3 (knowledge with memory).** Along the proportional track, retained information grows at least 3.0 times per fourfold step under matched updates and under matched compute, with accuracy at least 0.85 at every cell.
-- **H21-4 (not parameters alone; restated after review M1).** A dense map with the same parameter count, input and compute does not retain more than the memory (DENSE AHEAD, §8.5).
+- **H21-3 (saturation in proportion; restated in revision 5).** At eight facts per slot, the useful information a full store holds grows at least 3.0 times per fourfold step in slots; that is, the store keeps at least three quarters of its bits per slot (§8.10). Revision 4 stated H21-3 on a diagonal at half a fact per slot up to 65,536 slots, which no longer exists; the factor 3.0 is unchanged.
+- **H21-4 (not parameters alone; restated after review M1, extended in revision 5).** A dense map with the same parameter count and input does not retain more than the memory: not at the larger cell of a capacity step at matched updates or compute (DENSE AHEAD), and not at a loaded cell when both have run its full length (DENSE HOLDS MORE AT SATURATION), §8.5.
 - **H21-5 (dependence).** The retained information disappears when values are shuffled or addresses are swapped.
 - **H21-6 (counted work).** The tree and the flat memory read through a conventional index show capacity steps while their counted work per query at most doubles per fourfold step; the tree retains at least 0.97 of what the indexed flat memory retains.
 - **H21-7 (key learning).** The hashed exact-address memory shows the same step pattern as the flat oracle-query memory.
 - **H21-8 (learning efficiency).** At fixed facts, a memory with four times the slots reaches 3.0 bits per fact in at most half the updates and at most 0.8 of the compute.
 
-**The lead's expectation, written after seeing facts 11–12 and before any S1 observation.** The capacity line is most likely to print NOT TESTED or INCONCLUSIVE at loads up to 2, and the registered cell 32K/4K (load 8) is the most likely loaded cell. For H21-8 fact 5 suggests the opposite direction (larger memories learn more slowly); Study A separates slots from facts for the first time. Either line may be negative. A negative is recorded and kept.
+**The lead's expectation for revisions 2–4, written after seeing facts 11–12 and before any S1 observation (kept as written; its cells are revision 4's).** The capacity line is most likely to print NOT TESTED or INCONCLUSIVE at loads up to 2, and the registered cell 32K/4K (load 8) is the most likely loaded cell. For H21-8 fact 5 suggests the opposite direction (larger memories learn more slowly); Study A separates slots from facts for the first time. Either line may be negative. A negative is recorded and kept.
+
+**The lead's expectation for revision 5, written after seeing facts 13–18 and before any run under revision 5.**
+
+1. *Capacity steps C1 and C2 (§5.1).* For F-OQ a CAPACITY verdict is expected wherever the smaller cell's plateau holds; the larger cells are already 1.9–2.4 bits per fact above what the smaller ones are extrapolated to hold. The check said so (its M4) and it is true of both loaded steps. Whether the plateau holds in all five replicates, and for T-OQ, is not known.
+2. *Saturation in proportion (H21-3).* Nothing has been run at 1,024 slots, and no cell has been run to a plateau at any size. The lead has no confident expectation of the ratio.
+3. *Dense control (H21-4).* If a slot holds 17–18 bits when full (an extrapolation), the store holds about 0.36 bits per trainable parameter. A dense map of equal size would need 0.83 bits per parameter to hold the whole fact set of a loaded cell. D-OQ reached 0.998 at 8K/16K at U_P where F-OQ at 8K/4K reached 4.37–4.54 bits. The lead considers DENSE AHEAD at U_P and DENSE HOLDS MORE AT SATURATION both live, and CAPACITY-NEGATIVE by clause (b) of §8.7 a real possibility. D-OQ has not been run at any cell where this is decided.
+4. *Efficiency (H21-8).* The earlier expectation, that larger memories learn the same facts more slowly, is contradicted by fact 13 at 8,192 facts: the lead's reading of those curves on Panel A puts the 3.0-bit level at about 4,100–5,600 updates at 4,096 slots and 2,600–3,000 at 16,384, a ratio of 0.54–0.64. That is above the 0.5 the rule requires, and the larger cell costs about 1.6 times as much per update, so the expected verdict of step N2 is SAME or FASTER IN UPDATES ONLY. Step N1 has never been run.
 
 ## 3. Controlled addressing: what it is in each arm
 
@@ -83,9 +118,10 @@ Hypotheses. Each can fail.
 1. In F-OQ and T-OQ the query is controlled and the address is learned. In H8 and R2 both are controlled and only the content is learned.
 2. The oracle is not causal and not available to a real system. The frozen backbone exposes about 0.4 bits of the 20-bit identifier at the answer site (ADR-0017 §I.1).
 3. **Why a capacity effect under oracle addressing is still informative.** Whether gradient descent through a sparse top-8 read can write more facts into more slots, and how interference grows with facts per slot, are properties of the store and its optimizer. They are a **necessary condition** of ArborLM's storage claim, whatever forms the query.
-4. **What it cannot support.** That a learned memory works autonomously; that the language model can address or use this capacity; that learned addressing would reach the same capacity (R1 is a reference, not a ceiling or a floor); useful capability beyond recall of the trained facts; anything about natural language. **Every positive label of S1 carries STORE ONLY; ORACLE-ADDRESSED and may not be printed without it.** This covers the outcome labels and every intermediate or descriptive positive: CAPACITY STEP, CAPACITY_SUPPORTED, CAPACITY-POSITIVE, EFFICIENCY_SUPPORTED, EFFICIENCY-POSITIVE, BEATS DENSE, KNOWLEDGE SCALES WITH MEMORY, TREE_AHEAD and the "storage half supported" reading.
+4. **What it cannot support.** That a learned memory works autonomously; that the language model can address or use this capacity; that learned addressing would reach the same capacity (R1 is a reference, not a ceiling or a floor); useful capability beyond recall of the trained facts; anything about natural language. **Every positive label of S1 carries STORE ONLY; ORACLE-ADDRESSED and may not be printed without it.** This covers the outcome labels and every intermediate or descriptive positive: CAPACITY STEP, CAPACITY_SUPPORTED, CAPACITY-POSITIVE, EFFICIENCY_SUPPORTED, EFFICIENCY-POSITIVE, BEATS DENSE, KNOWLEDGE SCALES WITH MEMORY, TREE_AHEAD and the "storage half supported" reading; and, from revision 5, PROPORTIONAL STEP, SATURATION_SCALES, SATURATION-PROPORTIONAL and STORE HOLDS MORE AT SATURATION.
 5. D-OQ receives the same code tensor as F-OQ, so the dense comparison is at equal information.
 6. D7 (the dense window of P9-I) is not run. It entered no rule. S1 therefore has no learned arm that addresses facts by itself unless lane L runs (§5.6); KNN-W (§5.5) is the non-oracle baseline.
+7. **At 1,024 slots (revision 5)** T-OQ has four branches and reads two of them, 512 of the 1,024 keys, and F-OQ-IVF has four centroids. Both are defined by the same formulas. The tree is shallow there; the hierarchy label is not read at 1,024 slots (§8.5).
 
 ## 4. System common to all arms
 
@@ -97,33 +133,37 @@ Hypotheses. Each can fail.
 
 ## 5. Design
 
-### 5.1 The grid of facts and slots
+### 5.1 The grid of facts and slots (revision 5)
 
-Seven cells. "8K/4K" means 8,192 facts in 4,096 slots. Load is facts per slot.
+Seven cells. "8K/1K" means 8,192 facts in 1,024 slots. Load is facts per slot. The memory sizes are 1,024, 4,096 and 16,384 slots (the human lead's choice, §24). **No memory cell has 65,536 slots.**
 
-| Facts \ Slots | 4,096 | 16,384 | 65,536 |
+| Facts \ Slots | 1,024 | 4,096 | 16,384 |
 |---|---|---|---|
-| 2,048 | **2K/4K** (0.5) | — | — |
-| 8,192 | **8K/4K** (2) | **8K/16K** (0.5) | **8K/64K** (0.125) |
-| 32,768 | **32K/4K** (8) | **32K/16K** (2) | **32K/64K** (0.5) |
+| 2,048 | **2K/1K** (2) | **2K/4K** (0.5) | — |
+| 8,192 | **8K/1K** (8) | **8K/4K** (2) | **8K/16K** (0.5) |
+| 32,768 | — | **32K/4K** (8) | **32K/16K** (2) |
+| 131,072 (block S3 only) | — | — | *128K/16K* (8) |
 
-- **Study A — fixed knowledge, expanding memory:** the row of 8,192 facts *(lead's choice)*.
-- **Study B — expanding knowledge, expanding memory:** the diagonal 2K/4K → 8K/16K → 32K/64K, with the row of 32,768 facts as its off-diagonal cells.
-- Every claim about memory size compares cells of one row, so facts and slots are not confounded.
-- The load calibration (§10.1 item 0) may add one overload row by a fixed rule. The lead adds no row otherwise.
+- **Loaded cells:** 8K/1K and 32K/4K, the two cells with eight facts per slot. Each runs to its own length U_L, found by §10.1 item 0b. They are the smaller cells of the two loaded steps and the cells of the saturation line (§8.10).
+- **Why two fact counts.** At a fixed 8,192 facts the 4,096-slot cell has two facts per slot and reached the ceiling in revision 4's calibration (§1 fact 13). It cannot be the loaded smaller cell of the second transition. The second transition therefore has its own row, 32,768 facts, where 4,096 slots again hold eight facts each.
+- Every claim about memory size compares cells of one row, so facts and slots are not confounded. The saturation line compares rows on purpose and says so (§8.10).
+- **Block S3** is the cell 128K/16K (131,072 facts), for F-OQ only. It is the third cell of the saturation line. It is not in the registered matrix unless §10.3 admits it; on the projection it is not admitted under a ceiling of about 32 hours.
+- No rule adds a row, changes a load or changes a size. The overload-row rule of revision 4 is withdrawn.
 
 **Steps (same facts, four times the slots):**
 
-| Step | Cells | Load | Transition |
-|---|---|---|---|
-| A1 | 8K/4K → 8K/16K | 2 → 0.5 | 4K→16K |
-| A2 | 8K/16K → 8K/64K | 0.5 → 0.125 | 16K→64K |
-| B1 | 32K/4K → 32K/16K | 8 → 2 | 4K→16K |
-| B2 | 32K/16K → 32K/64K | 2 → 0.5 | 16K→64K |
+| Step | Cells | Load | Transition | Kind |
+|---|---|---|---|---|
+| C1 | 8K/1K → 8K/4K | 8 → 2 | 1K→4K | loaded step |
+| N1 | 2K/1K → 2K/4K | 2 → 0.5 | 1K→4K | control step |
+| C2 | 32K/4K → 32K/16K | 8 → 2 | 4K→16K | loaded step |
+| N2 | 8K/4K → 8K/16K | 2 → 0.5 | 4K→16K | control step |
 
-A1 is the off-diagonal test for the lower diagonal step and B2 for the upper one.
+- A **loaded step** tests H21-1: its smaller cell is meant to be full. A **control step** tests H21-2 at two facts per slot, where the smaller cell is expected to reach the ceiling, and carries the efficiency line (§8.8).
+- N2 is revision 4's step A1, unchanged. C2 is revision 4's step B1 with a new run length for its smaller cell and a row U_P set by rule (§5.4). C1 and N1 are new, and so is everything at 1,024 slots.
+- Every verdict rule of §8.2 is applied to all four steps. The names "Study A" and "Study B" of earlier revisions are no longer used: the rows of 2,048 and 8,192 facts are the fixed-fact comparisons, and the saturation line replaces Study B.
 
-### 5.2 What more slots can buy when the facts are fixed (Study A)
+### 5.2 What more slots can buy when the facts are fixed
 
 1. **Less interference** → the capacity line (§8.2–§8.7).
 2. **Faster or slower learning** → the efficiency line (§8.8).
@@ -136,27 +176,27 @@ Generalization across facts is not among them (§7.2).
 
 1. **No iso-parameter memory cell is run.** In this read path a slot's contribution is W_o·v_s, a vector of width 32. Value widths above 32 add only redundant parameters; widths below 32 restrict the rank. Neither is "the same parameters in fewer slots". A slot has 48 expressive parameters, and "more slots" cannot be separated from "more store parameters" inside the memory. (Review M1; revision 1's wide-value cells are withdrawn.)
 2. **Total trainable parameters are controlled by D-OQ at equal parameter count.** D-OQ: the oracle code (the same tensor as F-OQ's) → `w1 [h, 16]` with bias `b1 [h]` → exact GELU → `w2 [32, h]` → sigmoid(gate) (gate initialized at −2), added at the answer site. Initialization is the conventional one for a fan-in layer: `w1`, `b1` ~ U(−1/4, 1/4), `w2` ~ U(−1/√h, 1/√h), from seeded generators. h is set so that 49h + 1 equals F-OQ's parameter count within 0.1%. Same loss, optimizer, clip and updates. Its learning rate is chosen in calibration (§10.1 item 3).
-3. D-OQ is run at 2K/4K, 8K/16K, 8K/64K, 32K/16K and 32K/64K: the larger cell of every step, and every diagonal cell.
+3. D-OQ is run at the larger cell of every step (2K/4K, 8K/4K, 8K/16K, 32K/16K) and at both loaded cells (8K/1K, 32K/4K), where it runs the cell's full length U_L (§8.5, dense at saturation). Six cells.
 
-### 5.4 Budget regimes and run lengths
+### 5.4 Budget regimes and run lengths (revision 5)
 
 Every cell is trained once, at a constant learning rate, and read at snapshots. A snapshot is a valid shorter run (gate G4).
 
-- **U_P = 8,192** updates *(lead's choice of value; the P9-I audited value)*. It is not tuned. §10.1 item 1 checks it; if the check fails the work returns to the human lead. An overload row, if the rule of §10.1 creates one, has its own U_P by that rule.
-- **Run lengths U_run:** cells at 4,096 slots run 6·U_P; at 16,384, 4·U_P; at 65,536, 2·U_P; R2 runs U_P *(lead's choice, review B4)*.
-- **Snapshots:** U_P × {1/16, 1/8, 1/4, 1/2, 1, 2, 4} up to the run length, U_run/2, U_run, and every matched-compute snapshot.
+- **U_P is set per row, by rule** (§10.1 item 1): the smallest of {8,192, 16,384, 32,768} at which, on both calibration draws and both panels, F-OQ reaches a_use ≥ 0.90 at the row's larger step cell and R2 reaches a_use ≥ 0.95 at the row's reference cell. It is not tuned in any other way. Revision 4 fixed U_P = 8,192 for its own rows and wrote this rule for an added row only. At 8,192 updates the cell 32K/16K was at 1.96–2.61 bits on the calibration draws (§1 fact 13), about what 32K/4K is extrapolated to hold when full, so step C2 could not be read there (§25.6).
+- **Run lengths U_run.** A loaded cell runs U_L, for every arm trained at it, D-OQ included. Every other memory or dense cell runs 6·U_P of its row, at every slot count *(lead's choice; revision 4 ran 6 / 4 / 2·U_P by size; 6 at every size lets the dense matched-compute readout exist for every arm, §25.7)*. R2 runs U_P of its row.
+- **Snapshots:** U_P × {1/16, 1/8, 1/4, 1/2, 1, 2, 4} up to the run length, U_run/2, U_run, and every matched-compute snapshot. A loaded cell also has a snapshot at 32,768, at 49,152 and at every candidate of §10.1 item 0b up to U_L.
 - **MU — matched updates:** both cells at U_P.
-- **ME — matched exposures per fact.** Within a row MU and ME are the same readout. Across rows ME is read at 128·U_P/32,768 exposures per fact: cells with 8,192 facts at U_P/4, with 2,048 facts at U_P/16.
-- **MC — matched training compute.** The costlier cell is read at U_P; the cheaper at the smallest snapshot of {1, 1.25, 1.5, 2, 2.5, 3, 4, 6}·U_P whose cumulative cost is at least the costlier cell's. Cost is measured two ways: single-thread process CPU-seconds per update from the isolated timing part of the rehearsal (§10.2), and analytic multiply-adds per update. **The larger of the two multipliers is used**, and both are fixed in the freeze record. If the required snapshot exceeds the cheaper cell's run length the comparison is **MC-SHORT** and counts as not established.
+- **ME — matched exposures per fact.** Within a row MU and ME are the same readout. No rule compares rows at matched exposures.
+- **MC — matched training compute.** The costlier cell is read at U_P; the cheaper at the smallest snapshot of {1, 1.25, 1.5, 2, 2.5, 3, 4, 6}·U_P whose cumulative cost is at least the costlier cell's. Cost is measured two ways: single-thread process CPU-seconds per update from the isolated timing part of the rehearsal (§10.2), and analytic multiply-adds per update (§22 M6). **The larger of the two multipliers is used**, and both are fixed in the freeze record. If the required snapshot exceeds the cheaper cell's run length the comparison is **MC-SHORT** and counts as not established. If the two measures disagree on which cell is costlier it is **MC-AMBIGUOUS** and counts as not established (§22 (i)).
 - **SAT — saturation:** the smaller cell at the best of its snapshots up to U_run, with the plateau rule of §8.2.
-- The registered run records process CPU-seconds per snapshot. The ratio between two readouts compared under MC is reported; above 1.25 it is flagged **MC-MISMATCH**. It changes no class: the registered run has six workers contending, and a 65,536-slot cell slows more under contention than a small one.
+- The registered run records process CPU-seconds per snapshot. The ratio between two readouts compared under MC is reported; above 1.25 it is flagged **MC-MISMATCH**. It changes no class: the registered run has six workers contending, and a larger cell slows more under contention than a small one.
 
 **Which regimes a claim needs, and why.**
 
-1. Every class compares cells of one row. Updates and exposures per fact are then equal by construction.
+1. Every capacity and efficiency class compares cells of one row. Updates and exposures per fact are then equal by construction.
 2. A capacity step needs **MU (= ME), MC and SAT, all three.** MU alone gives the larger memory more compute. MC removes that. SAT removes "the smaller memory is only slower".
 3. The efficiency line uses updates and compute only, and never the word capacity.
-4. Along the diagonal the three regimes are reported separately. MU and MC are binding; ME is not: at the ME readout the smaller cells have had 4 and 16 times fewer updates of their shared parameters, and fact 4 of §1 says that is what limits them. An ME readout matched to the small cell's exposures would need 16·U_P updates at 65,536 slots and is not run.
+4. The saturation line (§8.10) matches no budget. It compares cells that have each stopped improving by the plateau rule, each at its own U_L. A cell that has not stopped is NOT FULL and gives no ratio. Updates, exposures per fact and compute to U_L are printed beside every value.
 5. A difference that appears under MU and not under MC is reported as a training-budget difference, not as memory scaling.
 
 ### 5.5 Conventional retrieval and other baselines without training
@@ -174,7 +214,7 @@ Every cell is trained once, at a constant learning rate, and read at snapshots. 
 3. **A qualification recorded after S1's freeze changes nothing in S1** (ADR-0020 §9.2).
 4. If it runs: arm F-LA, the candidate exactly as S0 froze it (S0's code hash; P9-II's calibrated value from the arm-selection record; no tuning), at 2K/4K, 8K/4K and 8K/16K, five replicates, each cell run for 4·F updates (8,192 at 2K/4K; 32,768 at 8K/4K and 8K/16K), with F-OQ read at the same update count. S0's cell-success rule is applied at all three cells. No 65,536-slot cell. 15 cells.
 5. **Lane L gives no step verdict.** It reports, per cell, the ratio of F-LA's I_use to F-OQ's at the same update count, and the difference in bits per fact between F-LA at 8K/16K and at 8K/4K with the words "not a step verdict". S0's full annotation list is printed with every lane result.
-6. Lane L changes no S1 class or outcome. It is considered only after the cuts of §10.3 are settled and is added only if the headroom rule then holds with it; no cut is made to admit it.
+6. Lane L changes no S1 class or outcome. It is considered only after the cuts of §10.3 are settled and is added only if C_need with it is then at most C_max (§10.3); no cut is made to admit it.
 7. In the expected timeline (ADR-0020 §9.2) S1 freezes before S0's Q1 is recomputed, so the lane is expected to be omitted; 'learned addressing evaluated separately if qualified' is then met only by a later study that needs the human lead's review.
 
 ## 6. Matrix, replicates and seeds
@@ -186,14 +226,18 @@ Every cell is trained once, at a constant learning rate, and read at snapshots. 
 | F-OQ | all seven | 7 |
 | T-OQ | all seven | 7 |
 | H8 | all seven | 7 |
-| D-OQ | 2K/4K, 8K/16K, 8K/64K, 32K/16K, 32K/64K | 5 |
-| R2 | 2K/4K, 8K/16K, 8K/64K, 32K/64K | 4 |
+| D-OQ | 2K/4K, 8K/4K, 8K/16K, 32K/16K (the larger cell of each step); 8K/1K, 32K/4K (the loaded cells) | 6 |
+| R2 | 2K/4K, 8K/16K, 32K/32K | 3 |
 | **Per replicate** | | **30** |
 | **Registered total, 5 replicates** | | **150** |
 | Seed block (§6.2), draw 1 (unless cut 2 of §10.3 removes it) | F-OQ × 7 cells × 2 extra seeds | +14 |
-| Seed block, draw 2 (only if the rehearsal rule admits it) | as above | +14 |
+| Seed block, draw 2 (only if the cap rule admits it) | as above | +14 |
+| Block S3 (only if §10.3 admits it) | F-OQ at 128K/16K × 5; R2 at 128K/128K × 5 | +10 |
 | Lane L (only if qualified and it fits) | F-LA × 3 cells × 5 | +15 |
-| Calibration (§10.1) | load 16, U_P check 12, H8 reported 6, dense rate 12 | 46 runs (+4 if the rule of §10.1 adds the 65,536-fact row) |
+| Calibration of revision 5 (§10.1) | load search 8, row U_P 12, H8 reported 8, dense rate 40 | 68 runs, and the timing preview (+4 with S3) |
+
+- **R2 at 32K/32K** is a table of 32,768 dedicated rows, one per fact. It is the reference rung of the row of 32,768 facts (revision 4 used 32K/64K). It is not a memory size of the study and enters no step. *(lead's choice; §25.8 question 6)*
+- The count of 30 configurations and 150 cells equals revision 4's by coincidence; the cells differ.
 
 Evaluation only, no training: F-OQ-IVF, KNN-W, KNN-W-IVF, DICT, no-memory, unseen-fact control. No cell depends on another.
 
@@ -201,9 +245,9 @@ Evaluation only, no training: F-OQ-IVF, KNN-W, KNN-W-IVF, DICT, no-memory, unsee
 
 - **Five replicates; never reduced.** Replicate r is data draw r with initialization seed 2100 + r. Each draw is a complete independent data set: a fact table of 32,768 facts whose first 8,192 and first 2,048 are the smaller sets, a training stream per fact count, Panels A and B, held-out template panels H1 and H2, the unseen-fact control.
 - **Pairing.** Within a replicate and row, every slot count and arm sees the same facts and the same training contexts in the same order. Only the output projection and the gate share an initialization across slot counts; key and value tables are drawn per size.
-- **Seed block (descriptive, enters no rule).** On draw 1, F-OQ is also trained at initialization seeds 2111 and 2121 on all seven cells, unless cut 2 of §10.3 removes the block. If the rehearsal shows that the cap holds with twofold headroom with it, the same is done on draw 2 at seeds 2112 and 2122; the decision is made by that rule and recorded before the freeze. The report gives, per cell and readout, the spread of i over the three seeds of a draw against the spread over the five draws, and states which dominates.
+- **Seed block (descriptive, enters no rule).** On draw 1, F-OQ is also trained at initialization seeds 2111 and 2121 on all seven cells, unless cut 2 of §10.3 removes the block. If C_need with it is at most C_max (§10.3), the same is done on draw 2 at seeds 2112 and 2122; the decision is made by that rule and recorded before the freeze. The report gives, per cell and readout, the spread of i over the three seeds of a draw against the spread over the five draws, and states which dominates.
 - **Statistical meaning.** If a paired condition held with probability at most 1/2 in each replicate, "all five" has probability at most 1/32 = 0.031 and "at least 4 of 5" at most 6/32 = 0.19. "All five" is required for every positive step. 'At least 4 of 5' is used for negatives, ceilings and DENSE AHEAD. Every positive condition of a capacity or efficiency verdict, class or outcome, BEATS DENSE included, needs all 5. The hierarchy labels of §8.5 are descriptive and use at least 4 of 5.
-- **At the level of the outcome** the bound is weaker. Three arms can each reach CAPACITY_SUPPORTED through A1 or B1 in the first transition, so by the union bound the chance of some positive step class under that null is at most 6/32 = 0.19 (crude: the arms share data and a second transition is also required). Replicates protect against noise, not against systematic confounds.
+- **At the level of the outcome** the bound is weaker. Three arms can each reach CAPACITY_SUPPORTED through a step of the first transition (C1 or N1), so by the union bound the chance of some positive step class under that null is at most 6/32 = 0.19 (crude: the arms share data and a second transition is also required). Replicates protect against noise, not against systematic confounds.
 - Sampling error within a cell is small beside the thresholds: with 8,192 facts the standard error of an accuracy is at most 0.006, about 0.03 bits per fact.
 - One backbone (B101/O301).
 
@@ -211,6 +255,7 @@ Evaluation only, no training: F-OQ-IVF, KNN-W, KNN-W-IVF, DICT, no-memory, unsee
 
 - Registered data seed sets `p10s1-draw-1` … `p10s1-draw-5`, bases 210001, 210101, 210201, 210301, 210401; each set uses base + i as the P9 generator does (14 names; null seeds at +20 and +30). H8 hash seed base + 40. Derangement and mask seeds base + 50 … 59. Index seed base + 60. Initialization seeds 2101–2105; seed block 2111, 2121, 2112, 2122.
 - Calibration draws: bases 219001 and 219101, initialization seed 2191. Rehearsal draw: base 219201, initialization seed 2192. Unit tests: **921001–921999**.
+- **Revision 5's calibration** uses the same two calibration draws, with initialization seed 2191 on draw 1 and **2193** on draw 2 *(lead's choice)*. The two runs of a calibration cell then differ in initialization as well as in data; revision 4's calibration used one initialization seed for both draws, and the check noted that this under-samples what the registered replicates vary (its §7 item 2). 2193 is added to the seeds gate G9 declares. With block S3 the fact table of a draw has 131,072 facts, whose first 32,768, 8,192 and 2,048 are the smaller sets.
 - **Gate G9** asserts that S1's declared seeds and the seeds the generators derive from them (initialization seed + 1000·k, as `_matrix` uses) are disjoint from each other and from: P9 (170001–171343, 179001–179933, 1701–1702); P9-I (182001–182020, 180101–181900, 1791–1792, 1801–1802, 900001–900233); the review diagnostics (500001–500004) and the review stand-in (941001); P9-II (190001–191599, 1891–1892, 1901–1902, tests 910001–919999); S0 (200001–209999, 2001–2002, 2091–2092, tests 920001–920999); S2 (220001–228999, tests 229001–229999); the seeds of P1–P8 read from their configs. The review's scan found no use of S1's ranges in the worktree or in `experiments/` (`adr-0021-review/outputs/s9c_seed_keys.txt`).
 - Within a draw: training contexts, Panel A, Panel B, H1 and H2 are disjoint (verified by hash); H1 and H2 use byte sets never used in training; no fact's record precedes its own answer site. No registered panel is used in calibration or rehearsal.
 
@@ -247,9 +292,9 @@ Counted by instrumented counters in the forward. Gate G7 requires the counters t
 
 | Arm | Key scores K (each 16 wide) | Value rows V | W = 16·K + 32·V + 1,024 (output projection) |
 |---|---|---|---|
-| F-OQ | N | 8 | 66,816 / 263,424 / 1,049,856 |
+| F-OQ | N | 8 | 17,664 / 66,816 / 263,424 (at 1,024 / 4,096 / 16,384 slots) |
 | F-OQ-IVF | N/256 + candidates (at least 512) | 8 | measured per query; about the T-OQ figure |
-| T-OQ | N/256 + 512 | 8 | 9,728 / 10,496 / 13,568 |
+| T-OQ | N/256 + 512 | 8 | 9,536 / 9,728 / 10,496 |
 | H8 | 0 | 8 | 1,280 |
 | R2 | 0 | 1 | 1,056 |
 | D-OQ | h ≈ N | h | 48·h, plus h bias additions |
@@ -273,7 +318,7 @@ Counted by instrumented counters in the forward. Gate G7 requires the counters t
 
 ## 8. Gates, rules and classes
 
-After the calibration outputs are written, only these may change before the freeze: the rows by the rule of §10.1 item 0; D-OQ's learning rate; the MC snapshots from the timing rule; the seed block on draw 2; the cuts of §10.3; lane L by §5.6. Anything else is a new revision.
+After the outputs of revision 5's calibration are written, only these may change before the freeze: U_L of each loaded cell and U_P of each row, by the rules of §10.1; D-OQ's learning rates; the MC snapshots from the timing rule; the seed block on draw 2; block S3 by its admission rule; the cuts of §10.3; the cap by the rule of §10.3; lane L by §5.6. Anything else is a new revision.
 
 ### 8.1 Gates
 
@@ -289,7 +334,7 @@ After the calibration outputs are written, only these may change before the free
 
 **Scientific gates (a failure is a recorded result):**
 
-- **REF**, per replicate and row: R2 a_use ≥ 0.95 on both panels at U_P, at 8K/16K for the row of 8,192 facts, at 32K/64K for the row of 32,768, and at 2K/4K for the diagonal. If it fails, the replicate is NOT_EVALUATED for the row. R2 at 8K/64K enters no rule.
+- **REF**, per replicate and row: R2 a_use ≥ 0.95 on both panels at the row's U_P, at 2K/4K for the row of 2,048 facts, at 8K/16K for the row of 8,192, at 32K/32K for the row of 32,768 (and at 128K/128K for block S3). If it fails, the replicate is NOT_EVALUATED for the row.
 - **DEP**, per memory cell with a_use ≥ 0.25, **at every snapshot a rule reads**: memory disabled gives chance; value shuffle gives chance; a_use ≥ 0.95 × raw accuracy; unseen facts at chance (else LEAKAGE). H1 and H2 are not part of DEP (§7.2).
 
 ### 8.2 Capacity line: step verdict in one replicate
@@ -298,8 +343,8 @@ For an arm and a step N → 4N at fixed facts, on Panels A and B separately.
 
 - Δ_MU = i(4N; U_P) − i(N; U_P). Δ_MC = i(4N; U_P) − i(N; U_MC).
 - **Δ_SAT = i(4N; U_P) − i\*(N; U_run).**
-- **Plateaued:** i\*(c; U_run) − i\*(c; U_run/2) ≤ 0.10 bits per fact *(lead's choice)*, for either cell on its own snapshots.
-- **Loaded** (a smaller cell): plateaued and i\*(N; U_run) ≤ 4.0 bits per fact (a_use ≤ about 0.896) *(lead's choice)*. This one threshold is used for CAPACITY (row 4), NULL (row 8), FLAT, NOT LOADED (row 9) and the load calibration (§10.1 item 0).
+- **Plateaued:** i\*(c; U_run) − i\*(c; U_run/2) ≤ 0.10 bits per fact *(lead's choice)*, **and i\*(c; U_run/2) ≥ 0.473 bits per fact** (a_use ≥ 0.25), for either cell on its own snapshots. The second condition is new in revision 5. An a_use of 0.25 is the floor below which DEP is not evaluated (§8.1): a cell under it has stored nothing that has been checked, and cannot be called flat. Without the condition every calibration cell met the rule at 1,024–8,192 updates, before it had learned (§1 fact 14). It introduces no new number, and it changes the plateau status of no calibration cell read at a run length revision 4 registered.
+- **Loaded** (a smaller cell): plateaued and i\*(N; U_run) ≤ 4.0 bits per fact (a_use ≤ about 0.896) *(lead's choice)*. This one threshold is used for CAPACITY (row 4), NULL (row 8), FLAT, NOT LOADED (row 9) the load search (§10.1 item 0b) and the saturation line (§8.10).
 - Δ_FULL = i\*(4N; U_run(4N)) − i\*(N; U_run(N)).
 
 If the panels give different verdicts the verdict is PANEL-DISAGREE. First match wins.
@@ -337,13 +382,13 @@ If the panels give different verdicts the verdict is PANEL-DISAGREE. First match
 
 The denominator is always 5.
 
-### 8.4 Capacity line: arm class (F-OQ, F-OQ-IVF, T-OQ, H8; steps A1, A2, B1, B2, or the rows the rule of §10.1 fixes; first match wins)
+### 8.4 Capacity line: arm class (F-OQ, F-OQ-IVF, T-OQ, H8; steps C1 and N1 in the transition 1K→4K, C2 and N2 in the transition 4K→16K; first match wins)
 
 | Order | Arm class | Rule |
 |---|---|---|
 | 1 | NOT_EVALUATED | every step of one transition is NOT_EVALUATED |
 | 2 | DEPENDENCE_FAILED | any step is DEPENDENCE_FAILED |
-| 3 | CAPACITY_SUPPORTED | a CAPACITY STEP in each transition; no step REVERSED; a_use ≥ 0.80 at 32K/64K at U_P in all 5 replicates *(lead's choice)* |
+| 3 | CAPACITY_SUPPORTED | a CAPACITY STEP in each transition; no step REVERSED; a_use ≥ 0.80 at 32K/16K at its row's U_P in all 5 replicates *(lead's choice of 0.80, unchanged; revision 4 read it at 32K/64K, which no longer exists; §25.8 question 5)* |
 | 4 | CAPACITY_ONE_TRANSITION | at least one CAPACITY STEP, not row 3 |
 | 5 | NOT_TESTED_BY_LOAD | in some transition every step is NOT LOADED |
 | 6 | CAPACITY_NOT_SUPPORTED | at least one step per transition is NO GAIN or REVERSED, and no step is a CAPACITY STEP |
@@ -366,18 +411,33 @@ Every dense label is printed with D-OQ's a_use at each such cell in each reading
 - **DENSE AHEAD blocks every arm.** Counted work never offsets a dense lead. DOMINATED BY DENSE is withdrawn.
 - BEATS DENSE cannot be reached where the dense control's i exceeds 4.545 bits (a_use above about 0.958).
 - A CAPACITY STEP whose larger cell has no D-OQ cell (only after cut 3 of §10.3) is printed DENSE NOT READ and cannot by itself support CAPACITY_SUPPORTED.
+- **Matched compute on the new sizes (revision 5; the ruling of §22 M5 stands).** The analytic multipliers of D-OQ over an arm are at most 2.5 for F-OQ, 5.1 for T-OQ and 5.4 for H8 at 16,384 slots (`rev5_arithmetic.out` §2), so the matching snapshot is at most 6·U_P and every arm's cell now runs that long (§5.4). The matched-compute reading is therefore expected to be established for every arm on the analytic measure. The CPU-time measure is decided by the rehearsal. Where it gives MC-SHORT or MC-AMBIGUOUS the label of §22 M5 is printed as before, and the "storage half supported" reading is not available to that arm.
+
+**Dense at saturation (new in revision 5), at each loaded cell (8K/1K, 32K/4K), the arm and D-OQ both read at the cell's run length U_L.** d_sat = i\*(arm; U_L) − i\*(D-OQ; U_L) and r_sat = F·i\*(arm; U_L) / F·i\*(D-OQ; U_L), per panel and replicate. First match wins:
+
+| Order | Label | Rule |
+|---|---|---|
+| 1 | **DENSE HOLDS MORE AT SATURATION** | d_sat ≤ −0.25 in at least 4 replicates (a replicate counts if either panel satisfies it, §22 (h)), at any loaded cell |
+| 2 | **STORE HOLDS MORE AT SATURATION** | r_sat ≥ 1.10 in **all 5** replicates on both panels at every loaded cell; D-OQ is plateaued (§8.2) at each of those cells in all 5; and D-OQ's cost per update is at least the arm's in both cost measures of §5.4 |
+| 3 | **SAME AT SATURATION** | otherwise. When row 2 fails only because D-OQ is not plateaued, the label is printed with DENSE STILL RISING; when it fails only on the cost condition, with DENSE NOT ESTABLISHED AT MATCHED COMPUTE |
+
+- The numbers are those of DENSE AHEAD and BEATS DENSE (−0.25 bits per fact; a ratio of 1.10), unchanged. No new number is introduced.
+- **Why equal updates suffice.** Where D-OQ costs at least as much per update as the arm, D-OQ at U_L has had at least the arm's compute. i\* never falls as updates grow, so a store that is ahead at equal updates is ahead at matched compute as well. A dense lead at equal updates might shrink at matched compute; it blocks all the same, as any single reading does in the rule above.
+- **DENSE HOLDS MORE AT SATURATION counts as DENSE AHEAD** for the arm in rows 3 and 4 of §8.7 and in the milestone reading. This makes CAPACITY-POSITIVE harder to reach and CAPACITY-NEGATIVE by clause (b) easier. It is stated here so that it can be weighed (§25.5).
+- D-OQ's rate at a loaded cell is chosen on that cell at 65,536 updates (§10.1 item 3), not at U_L. STORE HOLDS MORE AT SATURATION is therefore a statement about one dense family with a rate chosen early in the run (§12).
+- STORE HOLDS MORE AT SATURATION carries STORE ONLY; ORACLE-ADDRESSED.
 
 **Active work, per CAPACITY STEP:** SUBLINEAR (analytic; measured for F-OQ-IVF, §7.4 rule 4) or LINEAR KEY SCORING (§7.4).
 
-**Hierarchy:** T-OQ against **F-OQ-IVF** at equal candidate count, on I_use at 8K/16K and 32K/64K at U_P. TREE_AHEAD if the ratio is ≥ 1.03 in at least 4 replicates at both cells; TREE_COMPETITIVE if ≥ 0.97 in at least 4 replicates at both cells; otherwise TREE_BEHIND. T-OQ against exhaustive F-OQ is printed beside it.
+**Hierarchy:** T-OQ against **F-OQ-IVF** at equal candidate count, on I_use at 8K/4K and 32K/16K at the row's U_P (the larger cells of the loaded steps; revision 4 read 8K/16K and 32K/64K). TREE_AHEAD if the ratio is ≥ 1.03 in at least 4 replicates at both cells; TREE_COMPETITIVE if ≥ 0.97 in at least 4 replicates at both cells; otherwise TREE_BEHIND. T-OQ against exhaustive F-OQ is printed beside it.
 
-**Conventional retrieval:** CONVENTIONAL RETRIEVAL SUFFICES if KNN-W's or KNN-W-IVF's i is within 0.25 of the arm's, or above it, on both panels in at least 4 replicates at 32K/64K (each evaluated and printed). DICT DOMINATES ON THIS TASK is always printed.
+**Conventional retrieval:** CONVENTIONAL RETRIEVAL SUFFICES if KNN-W's or KNN-W-IVF's i is within 0.25 of the arm's, or above it, on both panels in at least 4 replicates at 32K/16K (each evaluated and printed; KNN-W depends on the facts, not on the slots). DICT DOMINATES ON THIS TASK is always printed.
 
 **Key learning:** KEY-LEARNING-LIMITED if H8 is CAPACITY_SUPPORTED and F-OQ is not.
 
 ### 8.6 Descriptive labels (enter no class)
 
-- **STUDY B (knowledge with memory), per arm among F-OQ, F-OQ-IVF, T-OQ.** **KNOWLEDGE SCALES WITH MEMORY** if, in all 5 replicates and on both panels, under MU and under MC separately: a_use ≥ 0.85 *(lead's choice)* at every diagonal cell; I_use grows ≥ 3.0 times at both diagonal steps; both diagonal steps are MEMORY-ATTRIBUTED; and the arm's counted work is SUBLINEAR. **KNOWLEDGE DOES NOT SCALE** if a_use < 0.5 at the largest diagonal cell in at least 4 replicates. **NOT ESTABLISHED** otherwise. A ratio is computed only when both cells have a_use ≥ 0.5; otherwise NOT ASSESSED. A diagonal step is **MEMORY-ATTRIBUTED** only if its off-diagonal step (A1 for the lower, B2 for the upper) is a CAPACITY STEP. The ME line is printed with the sentence of §5.4 rule 4. This line is printed beside the outcome.
+- **Study B is replaced by the saturation line (§8.10), which is a registered line and not a descriptive label.** Revision 4's label KNOWLEDGE SCALES WITH MEMORY was read on a diagonal at half a fact per slot up to 65,536 slots, which no longer exists. Its growth factor of 3.0 per fourfold step is kept as the saturation line's threshold. Its accuracy floor of 0.85 cannot apply to a full cell (about 0.6 is expected there) and is not used; MEMORY-ATTRIBUTED is not used.
 - **Robustness,** per step, cells with a_use ≥ 0.5: RISES WITH SLOTS if accuracy retained under 20% slot dropout rises by ≥ 0.05 in all 5; FALLS if it drops by ≥ 0.05 in at least 4; otherwise UNCHANGED.
 - **HELD-OUT FRAGILE** (§7.2).
 - **Seed block** (§6.2).
@@ -390,21 +450,24 @@ Every dense label is printed with D-OQ's a_use at each such cell in each reading
 | 2 | **S1-INCOMPLETE** (status) | any registered cell lacks a record. No outcome on either line; the denominator is never reduced. |
 | 3 | **CAPACITY-POSITIVE** | F-OQ, T-OQ or F-OQ-IVF is CAPACITY_SUPPORTED and is not DENSE AHEAD |
 | 4 | **CAPACITY-NEGATIVE** | (a) F-OQ and T-OQ are both CAPACITY_NOT_SUPPORTED; or (b) at least one of F-OQ, T-OQ, F-OQ-IVF is CAPACITY_SUPPORTED, and every arm among them that is CAPACITY_SUPPORTED is DENSE AHEAD. An empty set never satisfies (b). |
-| 5 | **CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET** | for F-OQ and for T-OQ, every step is NOT LOADED; or the human lead directed, after the load calibration, that the study run with no loaded row (§10.1 item 0), in which case the label is fixed in the freeze record |
+| 5 | **CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET** | for F-OQ and for T-OQ, every step is NOT LOADED; or the human lead directed, after the load calibration, that the study run with a transition that has no loaded cell (§10.1 item 0b), in which case the label is fixed in the freeze record for that transition (§22 m13) |
 | 6 | **CAPACITY-INCONCLUSIVE** | otherwise; the reason is printed: NOT_EVALUATED, DEPENDENCE_FAILED, NOT_TESTED_BY_LOAD (which transition), ONE TRANSITION ONLY (which), INTERMEDIATE |
 
-- **Printed label:** CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED; WITHIN REGISTERED RUN LENGTHS; arm(s); BEATS DENSE or DENSE MATCHES, with D-OQ's a_use; active-work label; hierarchy label; conventional-retrieval label; S0 status (K7(c)); learned-address lane status].
+- **Printed label:** CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED; WITHIN REGISTERED RUN LENGTHS; 1,024 TO 16,384 SLOTS, 16,384→65,536 NOT TESTED; arm(s); BEATS DENSE or DENSE MATCHES, with D-OQ's a_use; the dense-at-saturation label; the saturation outcome with bits per slot at each size; active-work label; hierarchy label; conventional-retrieval label; S0 status (K7(c)); learned-address lane status]. Every capacity outcome, positive or not, is printed with "16,384→65,536 NOT TESTED".
 - H8 alone cannot give CAPACITY-POSITIVE: the label requires learned keys *(lead's choice)*. Its class is printed beside the outcome.
 - Row 5 is not a negative and not a positive. It says the registered sizes and run lengths could not load the store.
 - **Reading for milestone question 1, fixed now.** S1 tests the storage half of question 1 under oracle addressing, on the capacity line only.
-  - **"Storage half supported, as a necessary condition"** only if the capacity outcome is CAPACITY-POSITIVE for an arm whose counted work is SUBLINEAR (T-OQ, or F-OQ-IVF by §7.4 rule 4), that arm is not DENSE AHEAD, and the hierarchy label comparing T-OQ with F-OQ-IVF (§8.5) is printed with it. It means: given the identity of the fact, this store retained more trained random facts as it grew, within the registered run lengths, at bounded counted work, with no dense lead of 0.25 bits per fact or more in 4 of 5 replicates over a dense map of equal size, input and compute (BEATS DENSE or DENSE MATCHES, printed). It says nothing about addressing by the model, about use of the store by a language model, or about useful capability beyond recall of the trained facts.
+  - **"Storage half supported, as a necessary condition, from 1,024 to 16,384 slots"** only if all of the following hold for one arm whose counted work is SUBLINEAR (T-OQ, or F-OQ-IVF by §7.4 rule 4): the capacity outcome is CAPACITY-POSITIVE for that arm; the arm is not DENSE AHEAD, the dense-at-saturation label of §8.5 included; its dense matched-compute reading is established (§22 M5); its saturation class is SATURATION_SCALES (§8.10); and the hierarchy label comparing T-OQ with F-OQ-IVF (§8.5) is printed with it. It means: given the identity of the fact, this store retained more trained random facts as it grew, within the registered run lengths, at bounded counted work; when full it kept at least three quarters of its bits per slot per fourfold step over the sizes measured, which the label names; and a dense map of equal size and input was not ahead by 0.25 bits per fact or more in 4 of 5 replicates, at matched updates, at matched compute or when both had run the full length. It says nothing about addressing by the model, about use of the store by a language model, about useful capability beyond recall of the trained facts, or about any size above 16,384 slots. (Revision 5 adds the saturation and dense-at-saturation conditions and the size range to the wording the confirmation review supplied; §25.2.)
+  - **"Capacity steps shown; proportional saturation not shown"** if CAPACITY-POSITIVE holds for such an arm, it is not DENSE AHEAD, and its saturation class is not SATURATION_SCALES. The class is printed.
   - **"Capacity shown; sublinear active work not shown"** if CAPACITY-POSITIVE holds only for exhaustive F-OQ.
   - **"Storage half not supported for this store, backbone, task and budget"** if CAPACITY-NEGATIVE.
   - **"Not tested"** or **"not established"** for CAPACITY NOT TESTED or CAPACITY-INCONCLUSIVE.
   - Every reading is printed with S0's status line of K7(c).
-- **Independence.** Neither line uses, implies or depends on TRANSFER-POSITIVE or SYSTEM-POSITIVE. S1's contribution to SYSTEM-POSITIVE is descriptive input only: both outcomes with their annotations, the Study B line, the cost table, and the sentence "addressing was supplied by an oracle".
+- **Independence.** No line of S1 uses, implies or depends on TRANSFER-POSITIVE or SYSTEM-POSITIVE. S1's contribution to SYSTEM-POSITIVE is descriptive input only: the three outcomes with their annotations, the cost table, and the sentence "addressing was supplied by an oracle".
 
 ### 8.8 Efficiency line
+
+**Steps (revision 5; the line is kept and adapted).** The efficiency line reads the control steps only: N1 (2K/1K → 2K/4K) in the transition 1K→4K and N2 (8K/4K → 8K/16K) in the transition 4K→16K. The loaded steps C1 and C2 are not read on this line. Their smaller cells are expected (an extrapolation, §1 fact 15) to stop near 2.0–2.3 bits per fact, below i_T = 3.0, so the only verdicts they could give are REACHED ONLY BY THE LARGER and NOT_ASSESSED, and the first would report a capacity difference under the name of efficiency. Every rule and threshold below is unchanged. U_run in this section is 6·U_P of the row. N2 was run on the calibration draws as revision 4's step A1; what was seen is in §2 and §25.3.
 
 **Level.** i_T = 3.0 bits per fact (a_use about 0.758) *(lead's choice)*. At each snapshot s of a cell, the snapshot **qualifies** if i ≥ i_T on both panels and DEP passes. s_hit is the first qualifying snapshot within the cell's run, s_prev the snapshot before it. **u_T** is found by linear interpolation of the minimum of the two panels' i against log₂(updates) between s_prev and s_hit; if s_hit is the first snapshot, u_T is **left-censored** in (0, s_hit]; if no snapshot qualifies, u_T is **right-censored** above the cell's run length U_run. c_T is u_T times the cell's cost per update, in each of the two cost measures of §5.4 (bounds carry over).
 
@@ -448,16 +511,54 @@ EFFICIENCY-POSITIVE says that a larger store reached a fixed level of useful inf
 5. CAPACITY-NEGATIVE by DENSE AHEAD → the dense map is the better use of these parameters on this task.
 6. CAPACITY NOT TESTED → return to the human lead with the cost of the smallest loaded row.
 7. EFFICIENCY-NEGATIVE with SLOWER steps → larger memories cost more updates at equal facts; any scaling plan must budget for it.
-8. Inconclusive on either line → no decision on that line.
+8. Inconclusive on any line → no decision on that line.
+9. SATURATION-SUBPROPORTIONAL → what a slot holds falls as the store grows; any scaling plan must budget for it, and the cause (the shared output projection, interference between keys) is the next question.
+10. SATURATION-PROPORTIONAL with 16,384 NOT MEASURED → the same measurement at 16,384 slots and above is the next question, for P10-I.
+11. DENSE HOLDS MORE AT SATURATION → per parameter, the dense map is the better store on this task; whatever the memory offers is then in its counted work and its sparse updates, and a scaling plan must say so.
+12. Whatever the outcome, capacity from 16,384 to 65,536 slots stays untested and is proposed for P10-I.
+
+### 8.10 Saturation line (new in revision 5)
+
+**What is read.** The saturation cell of a size N is the registered cell with eight facts per slot: 8K/1K at 1,024 slots, 32K/4K at 4,096 and, only if block S3 is admitted (§10.3), 128K/16K at 16,384. For an arm, replicate and panel, S(N) = F · i\*(cell; U_L) bits and b(N) = S(N)/N bits per slot. A saturation cell is **full** on a panel if it is loaded there by §8.2: plateaued, and i\* ≤ 4.0. b(N) is printed for every arm, size, replicate and panel, with the last doubling's gain and whether the cell is full.
+
+**Pair verdict in one replicate, for the sizes N and 4N.** ρ = S(4N) / S(N). First match wins.
+
+| Order | Verdict | Rule |
+|---|---|---|
+| 1 | NOT_EVALUATED | REF fails for either row, or LEAKAGE in either cell |
+| 2 | DEPENDENCE_FAILED | either cell fails DEP at a snapshot up to its run length |
+| 3 | NOT FULL | either cell is not full on either panel |
+| 4 | PROPORTIONAL | ρ ≥ 3.0 on both panels |
+| 5 | SUBPROPORTIONAL | otherwise: ρ < 3.0 on at least one panel |
+
+**Pair class over the five replicates (first match wins; the denominator is always 5):** NOT_EVALUATED (at least 2 replicates); DEPENDENCE_FAILED (at least 2); NOT FULL (at least 2); PROPORTIONAL STEP (PROPORTIONAL in all 5); SUBPROPORTIONAL STEP (SUBPROPORTIONAL in at least 4); MIXED otherwise.
+
+**Registered pairs.** 1,024 → 4,096 for F-OQ, F-OQ-IVF, T-OQ and H8. 4,096 → 16,384 only with block S3, and then only for F-OQ and F-OQ-IVF.
+
+**Arm class (first match wins):** SATURATION_NOT_MEASURED (every registered pair of the arm is NOT FULL or NOT_EVALUATED); SATURATION_DOES_NOT_SCALE (some registered pair is a SUBPROPORTIONAL STEP); SATURATION_SCALES (every registered pair is a PROPORTIONAL STEP); INTERMEDIATE otherwise.
+
+**Saturation outcome (first match wins; rows 1–2 of §8.7 apply first):**
+
+| Order | Outcome | Rule |
+|---|---|---|
+| 3 | **SATURATION-PROPORTIONAL** | F-OQ, T-OQ or F-OQ-IVF is SATURATION_SCALES. Printed as SATURATION-PROPORTIONAL [STORE ONLY; ORACLE-ADDRESSED; arm(s); the pairs measured, with "16,384 NOT MEASURED" when S3 is absent or its cell is not full; b(N) per size with its range over replicates; the dense-at-saturation label; S0 status (K7(c))] |
+| 4 | **SATURATION-SUBPROPORTIONAL** | F-OQ and T-OQ are both SATURATION_DOES_NOT_SCALE |
+| 5 | **SATURATION NOT MEASURED** | F-OQ and T-OQ are both SATURATION_NOT_MEASURED |
+| 6 | **SATURATION-INCONCLUSIVE** | otherwise, with the reason |
+
+- **The threshold and its reason.** 3.0 is the growth factor H21-3 has carried since revision 1, fixed before any S1 record of any kind existed. ρ ≥ 3.0 is the same as b(4N) ≥ 0.75 · b(N). No number is introduced for this line. The negative uses the same 3.0 with "at least 4 of 5", as every negative in this ADR does.
+- **It can return a negative.** If a full store of 4,096 slots holds less than three times what a full store of 1,024 holds, in 4 of 5 replicates for both F-OQ and T-OQ, the outcome is SATURATION-SUBPROPORTIONAL. Nothing seen so far decides it: nothing has been run at 1,024 slots, and no cell has been run to a plateau (§25.3).
+- **Precision.** With 8,192 facts the standard error of i near 2 bits is about 0.03 bits, about 1.5% of S; ρ is then known to about ±0.07 in a replicate. "Full" allows up to 0.10 bits of gain over the last doubling, about 5% of S, in either cell, so ρ can be off by a few percent in either direction for that reason alone. Both cells' last-doubling gains are printed with ρ.
+- **What it does not say.** It compares two rows, so facts and slots change together; that is the definition of the line, not a confound to be removed. "Full" means the plateau rule within the registered run length, not an asymptote. It holds for eight facts per slot only. H8 alone cannot give SATURATION-PROPORTIONAL, as it cannot give CAPACITY-POSITIVE. With S3 absent the line covers one fourfold step and says nothing about 16,384 slots. It is never summarised as "ArborLM's capacity scales".
 
 ## 9. How S1 avoids the earlier traps
 
 | Trap | Source | What S1 does |
 |---|---|---|
 | Learned interface collapses | P9-I | no class depends on a learned interface |
-| Oracle rung needs more updates as memory grows (seen only where facts grew with slots) | calibration | Study A fixes the facts; the efficiency line measures it; SAT and the plateau rule keep it out of the capacity line |
+| Oracle rung needs more updates as memory grows (seen only where facts grew with slots) | calibration | every step compares cells of one row of fixed facts; the efficiency line measures it; SAT and the plateau rule keep it out of the capacity line |
 | Readout learns by updates of shared parameters | ADR-0017 §I.1 | cells compared in a class have equal updates; ME is not binding across rows |
-| Sixteenfold exposure difference | P9-I | arises only on the diagonal, which enters no class |
+| Sixteenfold exposure difference | P9-I | cannot arise inside a row; the saturation line compares rows only when each cell has stopped improving, and matches no budget |
 | Calibration blocked | ADR-0017 §15.2 | U_P is fixed, not tuned; the load is measured before the freeze and mapped to rows by a fixed rule; anything outside the rule returns to the human lead |
 | Task validity unmeasured before the single run | ADR-0017 review B3; review B4 here | the load calibration |
 | Classes passed or failed by budget | ADR-0017 Lane A | a capacity step needs MU, MC and SAT; a negative needs both cells plateaued, a loaded smaller cell, and the difference at the full run lengths; a slower larger memory gives BEHIND WITHIN BUDGET, never NO GAIN |
@@ -467,40 +568,67 @@ EFFICIENCY-POSITIVE says that a larger store reached a fixed level of useful inf
 | Hierarchy credited with a property of any index | P7-B; review M4 | the tree is compared with the flat store read through a standard index |
 | Gate harness first run at registration; mistyped launch commands | P9-I attempts 1 and 2 | gates at real size on the rehearsal draw for all 30 configurations; fixed launch scripts for every registered stage, part of the freeze |
 | One data draw | ADR-0017 §0 item 12 | five draws, never reduced; a seed block |
+| No cell full within the run lengths | revision 4's calibration (§23) | two loaded cells at eight facts per slot, each run to a length found by a fixed search (§10.1 item 0b); the human lead's choice of sizes (§24) |
+| A positive that is close to foregone under oracle addressing | the check, M4 | the capacity step is kept as a necessary condition; the milestone reading also needs the saturation line and the dense labels at saturation and at matched compute, none of which has been seen |
+| A plateau rule met before the cell has learned | the check, §1 | a plateau needs i\* ≥ 0.473 bits at half the run length (§8.2) |
+| A run length fitted to a threshold crossing on two calibration views | the check, §7 | two consecutive candidates must pass; the two calibration runs differ in initialization |
+| Loadedness predicted for one arm only | the check, M6 | T-OQ is in the load search; H8 is declared unpredicted |
+| A control whose best rate is the edge of its grid | revision 4's calibration | grid extended to 0.1; a best rate at the top returns to the human lead |
+| A cap computed from a projection that the measurements overran | the check, M3 | the cap is computed from the rehearsal's rates by a rule, against a ceiling the human lead sets |
 
 ## 10. Calibration, rehearsal, resources
 
-### 10.1 Calibration (two calibration draws, one initialization seed, before the freeze)
+### 10.1 Calibration (revision 5; replaces revision 4's for the new cells)
 
-**0. Load calibration.** F-OQ only, on both calibration draws, at 4,096 slots with 8,192 / 16,384 / 32,768 / 65,536 facts (loads 2, 4, 8, 16), and at 16,384 slots with 8,192 / 32,768 / 65,536 / 131,072 facts (loads 0.5, 2, 4, 8; load 0.5 is the registered cell 8K/16K and is measured only so that cut 3 of §10.3 has a defined input), run to 65,536 updates with snapshots on the doubling grid and at the registered U_run/2 and U_run of the slot count (24,576 and 49,152 at 4,096 slots; 16,384 and 32,768 at 16,384 slots). 16 runs, about 3.5 CPU-hours. A load is **loaded at a slot count** if, on both draws and both calibration panels, the cell is loaded by the definition of §8.2 **read at the registered U_run of that slot count** (not at 65,536 updates). The 65,536-update snapshots are reported for information and enter no rule. A load is judged on its own cell; loadedness is not assumed to carry from one load to another.
+Revision 4's calibration is kept as a record (§1 facts 13–17). Revision 5 takes no run length, row U_P or dense rate from it; each is set again by the rules below. The new calibration runs on the two calibration draws, initialization seed 2191 on draw 1 and 2193 on draw 2 (§6.3). Every run starts from initialization, under revision 5's code, in a new run directory; nothing is continued from revision 4's checkpoints. Order: 0a; then 0b together with 1; then 2 and 3. Calibration accuracies are never results. No step verdict, class, label or outcome is computed on calibration draws. The calibration is audited before the freeze. 68 training runs.
 
-**Rule fixed now** (registered smaller cells: 8K/4K and 32K/4K at 4,096 slots; 8K/16K and 32K/16K at 16,384 slots):
+**0a. Timing preview (time and memory only).** On the rehearsal draw, through the whitelist validator of §10.2, so that no loss or accuracy is written or displayed: seconds per update and peak memory for F-OQ, T-OQ, H8 and D-OQ at 1,024, 4,096 and 16,384 slots and for R2 at its three cells (median of three runs of 256 updates after 32 warm-up updates, one process, nothing else of the project running). Its outputs are the projected wall time of every item below and each item's cap, which is twice its projection. T-OQ and everything at 1,024 slots have never been timed (§1 fact 18); no item below is started on an assumed cost.
+
+**0b. Load search.** F-OQ and T-OQ at 8K/1K and at 32K/4K, on both draws: 8 runs. Each runs once, from initialization to its ceiling: **262,144 updates at 8K/1K and 524,288 at 32K/4K** *(lead's choice; §25.5)*. Candidates: {65,536, 98,304, 131,072, 196,608, 262,144} at 8K/1K and {131,072, 196,608, 262,144, 393,216, 524,288} at 32K/4K. Snapshots at every candidate, at half of every candidate, and on the doubling grid from 512. The rule is applied to the finished record. Nothing is decided, stopped or extended while the runs are in progress.
+
+- **Pass at U.** An arm passes at candidate U if each of its four views (two draws × two panels) is loaded by §8.2 read with U in place of U_run: i\*(U) − i\*(U/2) ≤ 0.10, i\*(U/2) ≥ 0.473, and i\*(U) ≤ 4.0.
+- **U_L of an arm** is the smallest candidate U_k such that the arm passes at U_{k−1} and at U_k. Two consecutive candidates must pass, so the first candidate cannot be U_L. This is the margin against choosing a length at the first noisy crossing of the threshold (the check, §3 and §7).
+- An arm has **no U_L** if no such candidate exists. That covers a view above 4.0 bits, a run that ends `failed` (kept and never re-run), and a run not started or stopped by its item cap.
+- H8 and D-OQ are not searched. They run the cell's U_L in the registered run and are judged on their own snapshots; nothing predicts whether H8 is loaded there.
+
+**Fixed outcomes of 0b, per loaded cell:**
 
 | Measured | Consequence |
 |---|---|
-| At 4,096 slots, load 2 or load 8 is loaded | the 4K→16K transition is tested by the registered rows; no change |
-| At 4,096 slots, neither load 2 nor load 8 is loaded | no registered 4,096-slot cell is predicted loaded: the work returns to the human lead before the freeze |
-| At 16,384 slots, load 2 is loaded | the row of 32,768 facts tests the 16K→64K transition; the grid of §5.1 stands |
-| At 16,384 slots, load 2 is not loaded and load 4 is loaded | the row that tests the 16K→64K transition becomes 65,536 facts at 16,384 and 65,536 slots, for F-OQ, T-OQ, H8 and R2 at both cells and D-OQ at its larger cell only, as in every other row (R2 at 65,536 slots, one fact per slot, is its REF cell). The 65,536-fact table of a draw contains that draw's 32,768-fact table as its first 32,768 facts *(lead's choice)*; its seeds are inside 210001–219999. Load 4 was judged at 32,768 updates while this row's smaller cell runs 4·U_P; that is a prediction only, and the run judges the cell on its own snapshots. Its U_P is the smallest of {8,192, 16,384, 32,768} *(lead's choice)* at which F-OQ ≥ 0.90 and R2 ≥ 0.95 at its larger cell on both draws and panels, read in a calibration of that cell (2 arms × 2 draws, added to the calibration count); its run lengths are 4·U_P and 2·U_P of that U_P. If none of the three values qualifies, the work returns to the human lead before the freeze. The row of 32,768 facts keeps its cells and only its 4K→16K step. If the headroom rule of §10.3 does not hold with this row after the allowed cuts, the work returns to the human lead with the row's cost |
-| At 16,384 slots, only load 8 is loaded, or none | the 16K→64K transition cannot be loaded with an R2 reference within the budget (131,072 facts exceed 65,536 slots): the work returns to the human lead before the freeze. The lead never runs a row without R2 |
+| F-OQ and T-OQ both have a U_L | The cell's U_L is the larger of the two. The rows of §5.1 stand |
+| F-OQ has a U_L, T-OQ has none | The cell's U_L is F-OQ's. The freeze record states T-OQ PREDICTED NOT LOADED AT that cell. Nothing else changes; the run judges T-OQ on its own snapshots |
+| F-OQ has no U_L | The cell is NOT LOADED WITHIN ITS CEILING. The record (curves, the candidate and condition that failed on each view) returns to the human lead before the freeze, and nothing registered is generated. The lead adds no row, changes no load, raises no ceiling and substitutes no arm. The human lead may stop S1, or direct that it run with that transition fixed in the freeze record as CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET; then no arm can be CAPACITY_SUPPORTED (§22 m13), and the saturation pair that uses the cell is fixed as NOT FULL |
 
-The lead does not improvise a row. When the work returns, the human lead may stop, fund a row, or direct that S1 run as it is, with the capacity line fixed in the freeze record as CAPACITY NOT TESTED — NO LOADED CELL WITHIN BUDGET for the transition concerned; the efficiency line is unaffected. A prediction of loadedness from calibration does not make a registered cell loaded: the run judges every cell on its own snapshots.
+A U_L from calibration is a prediction. The registered run judges every cell, in every replicate, on its own snapshots.
 
-**1. U_P check.** R2 and F-OQ on the three diagonal cells to U_P = 8,192, 12 runs. U_P stands if R2 ≥ 0.95 and F-OQ ≥ 0.90 at every diagonal cell on both draws and both panels. If not, the work stops and returns to the human lead; no larger U_P is substituted by rule.
+**1. U_P of each row.** F-OQ at the row's larger step cell and R2 at the row's reference cell, both draws, run to 32,768 updates: F-OQ at 2K/4K, 8K/4K and 32K/16K; R2 at 2K/4K, 8K/16K and 32K/32K. 12 runs. A row's U_P is the smallest of {8,192, 16,384, 32,768} *(lead's choice, as in revision 4)* at which F-OQ's a_use ≥ 0.90 and R2's a_use ≥ 0.95 on both draws and both panels (a_use, §22 (j)). If no value qualifies for a row, the work returns to the human lead before the freeze; no other value is substituted. From §1 fact 13 the lead expects 8,192 for the rows of 2,048 and 8,192 facts and 16,384 for the row of 32,768. That is an expectation; the rule decides.
 
-**2. H8, reported only.** H8 on the diagonal cells to U_P, 6 runs. If H8 is below 0.90 at a cell, its classes there carry UNDERTRAINED-AT-U_P. H8 gates nothing.
+**2. H8, reported only.** H8 at 2K/4K, 8K/4K, 8K/16K and 32K/16K to the row's U_P, both draws. 8 runs. Where H8's a_use is below 0.90, its classes at that cell carry UNDERTRAINED-AT-U_P. H8 gates nothing.
 
-**3. Dense learning rate.** D-OQ at 8K/16K and at 32K/64K, at learning rates {0.001, 0.003, 0.01} *(lead's choice)*, on both draws, to the run length of its slot count. 12 runs. The rate with the higher minimum Panel A accuracy at U_P is chosen separately for 16,384 and 65,536 slots (the 16,384 choice is also used at 4,096); a difference below 0.02 goes to the faster of the two. The memory arms keep 0.003 untuned.
+**3. Dense learning rate.** Rates **{0.001, 0.003, 0.01, 0.03, 0.1}** *(lead's choice; revision 4's three and two above them)*, on both draws, in four units. 40 runs.
 
-**4.** No T-OQ cell and no registered step is run in calibration. Calibration accuracies are never results. The calibration is audited before the freeze.
+| Unit | Selection cell | Run to | Readout | Used for D-OQ at |
+|---|---|---|---|---|
+| 4,096 slots | 8K/4K | the row's U_P | minimum Panel A a_use over the two draws at U_P | 2K/4K, 8K/4K |
+| 16,384 slots | 32K/16K | the row's U_P | the same | 8K/16K, 32K/16K |
+| loaded cell 8K/1K | 8K/1K | 65,536 | the same at 65,536 | 8K/1K |
+| loaded cell 32K/4K | 32K/4K | 65,536 | the same at 65,536 | 32K/4K |
+
+- The rate with the highest readout is chosen in each unit. Rates within 0.02 of the best are separated by the walk of §22 M7 and §22.1, down the doubling grid from the readout to one sixteenth of it; if several remain, the smallest is taken.
+- **A diverged rate** is one whose run ends `failed` (the trainer's non-finite refusal included) or whose readout is inside the chance interval. It is recorded, left out of the selection, and is not an engineering stop.
+- **If the chosen rate of any unit is 0.1, the top of the grid, or every rate of a unit diverged, the work returns to the human lead before the freeze.** No further rate is tried by rule.
+- The memory arms keep 0.003, untuned. A stronger dense control makes DENSE AHEAD, DENSE HOLDS MORE AT SATURATION and DENSE FASTER easier to reach, and so makes CAPACITY-NEGATIVE by clause (b) and EFFICIENCY-NEGATIVE by its second clause easier (the check, §6). That is the purpose of a control and is stated here.
+- At a loaded cell the rate is chosen at 65,536 updates although the cell runs to U_L. Choosing at U_L would cost about 2 to 3.5 more charged hours of calibration (`rev5_arithmetic.out` §9), and is not done *(lead's choice; §12 states the limit)*.
+
+**4. Block S3, only if the human lead has funded it before this calibration starts (§25.8 question 2).** F-OQ at 128K/16K on both draws, once, to 1,048,576 updates, with candidates {262,144, 393,216, 524,288, 786,432, 1,048,576} and the rule of 0b for F-OQ alone; R2 at 128K/128K to 32,768 updates for the row's U_P by the rule of item 1 with R2 alone. If F-OQ has no U_L, S3 is omitted and the saturation line is printed with 16,384 NOT MEASURED — NOT FULL WITHIN CEILING. That is a fixed outcome and does not return to the human lead.
 
 ### 10.2 Rehearsal (rehearsal draw; time, memory and correctness only)
 
-- All 30 configurations, and any row added by §10.1, at real size for 64 updates and one full evaluation each, including the index build, six single-thread workers, through the whitelist validator of P9-I (no loss or accuracy is written or displayed).
+- All 30 configurations, and block S3 if it is admitted, at real size for 64 updates and one full evaluation each, including the index build, six single-thread workers, through the whitelist validator of P9-I (no loss or accuracy is written or displayed).
 - The gates stage at real size.
-- **Isolated timing part,** one process: CPU-seconds per update for every arm and slot count, including the new D-OQ (median of three runs of 256 updates after 32 warm-up updates).
+- **Isolated timing part,** one process: CPU-seconds per update for every arm at 1,024, 4,096 and 16,384 slots and for R2 at its cells, D-OQ and T-OQ included (median of three runs of 256 updates after 32 warm-up updates).
 - Analysis and report exercised on **synthetic records of the full registry**: missing cells, failed gates, non-finite values, every verdict, class, label and outcome of §8 on both lines. This includes records in which no arm is CAPACITY_SUPPORTED and every arm is in turn NOT_EVALUATED, DEPENDENCE_FAILED, NOT_TESTED_BY_LOAD, CAPACITY_ONE_TRANSITION and INTERMEDIATE; each must give CAPACITY-INCONCLUSIVE (or NOT TESTED) with the right reason, never CAPACITY-NEGATIVE.
-- Outputs: the MC snapshots; the projection; stage caps (twice the measured stage time); the headroom proof; the seed-block decisions.
+- Outputs: the MC snapshots; the projection; stage caps (twice the measured stage time); C_need and the cap by the rule of §10.3; the seed-block and S3 decisions.
 
 ### 10.3 Resources
 
@@ -509,43 +637,65 @@ The lead does not improvise a row. When the work returns, the human lead may sto
 
 **Caps (the human lead's figures, §15):** **16 charged hours** (raised from 12 by the human lead on 2026-11-15, §15) for calibration, rehearsal and the registered stages together; **3 GiB per worker; 18 GiB aggregate.**
 
-**Projection (not a measurement).** Per-update costs from the P9-I rehearsal, as tabulated in `adr-0021-review/outputs/c4b_matrix_budget_final.txt`; T-OQ assumed at twice F-OQ; the new D-OQ and the index build are unmeasured; the evaluation figure is the lead's estimate.
+**The hour cap for the registered run is set by a rule (revision 5). No figure is chosen here.**
 
-| Item | CPU-hours | Charged hours (six workers) |
+- Until the freeze the cap in force is the 16 hours above. Revision 5's calibration and rehearsal run under it; on the projection they bring the ledger to about 4.7–5.7 hours.
+- After the rehearsal, **C_need = charged so far + 2 × the projected remaining time of the registered stages**, computed from the rehearsal's measured rates for the matrix to be frozen. The registered cap is C_need rounded up to the next whole hour. This is the twofold headroom rule of earlier revisions, read as the definition of the cap instead of as a test against a figure fixed in advance.
+- The lead records that cap under the Addendum's delegation only if it is at most **C_max**, the human lead's ceiling for this study; only before any registered seed is observed; and only for the cells this revision registers. **No C_max is recorded (§25.8 question 1). Until one is, the lead raises nothing and the study does not freeze.**
+- If C_need exceeds C_max, the cuts below apply in order and C_need is recomputed after each. If it still exceeds C_max after the last cut, the work returns to the human lead with the measured figure.
+- Twice the measured peak memory must be at most the memory caps (peak at most 1.5 GiB per worker; otherwise the evaluation batch is reduced and the rehearsal repeated). The memory caps are not changed.
+
+**Projection (not a measurement; `docs/reviews/p10s1-revision5-2026-11-15/rev5_arithmetic.out`).** Rates are those of revision 4's calibration (§1 fact 17). The low end of each range uses training wall seconds and T-OQ at F-OQ's rate; the high end uses task seconds and T-OQ at twice F-OQ's rate. **Unmeasured and assumed:** T-OQ at any size; everything at 1,024 slots (set to the 4,096-slot rate); D-OQ at 4,096 and 1,024 slots; R2 at 32,768 rows; the evaluation, which is the lead's estimate from the calibration's evaluation seconds. **Every U_L is an extrapolation.** The central row takes U_L = 131,072 at 8K/1K and 393,216 at 32K/4K.
+
+| Item | Charged hours (six workers) |
+|---|---|
+| Charged so far (revision 4's calibration; measured) | 1.57 |
+| Revision 5's calibration, every load-search run to its ceiling | 2.6–3.6 |
+| Rehearsal with isolated timing | about 0.5 |
+| **Charged before the cap rule** | **about 4.7–5.7** |
+| Training, 150 cells (per replicate 34,450–47,040 s: F-OQ 8,550–9,530; T-OQ 8,550–19,060; H8 6,510–7,130; D-OQ 10,450–10,880; R2 about 400) | 8.0–10.9 |
+| Seed block, draw 1 (14 cells) | 0.8–0.9 |
+| Evaluation, with index builds and DEP at every snapshot (estimate) | 1.5–2.5 |
+| Gates, timing stage, simulation, analysis, report | about 0.5 |
+| **Remaining** | **10.8–14.8** |
+| **C_need** | **26.2–35.2** |
+
+C_need by where the loaded cells stop:
+
+| U_L at 8K/1K | U_L at 32K/4K | C_need (hours) |
 |---|---|---|
-| Calibration: load 2.9, U_P check and H8 0.5, dense rate 2.1 | 5.5 | about 0.9 |
-| Rehearsal with isolated timing | — | about 0.45 |
-| **Charged before the headroom rule** | | **about 1.4** |
-| Training, 150 cells (per replicate 15,440 s: F-OQ 3,540, T-OQ 7,060, H8 1,540, D-OQ 3,000, R2 290) | 21.4 | 3.6 |
-| Seed block, draw 1 (14 cells) | 2.0 | 0.3 |
-| Seed block, draw 2 (14 cells) | 2.0 | 0.3 |
-| Evaluation, with index builds and the ablations at every rule snapshot | — | about 1.0 |
-| Gates, timing stage, simulation, analysis, report | — | about 0.4 |
-| **Remaining, seed block on draw 1 only** | | **about 5.3** |
-| **Remaining, seed block on draws 1 and 2** | | **about 5.6** |
+| 98,304 | 196,608 | 21.8–29.2 |
+| 131,072 | 262,144 | 23.7–31.7 |
+| 131,072 | 393,216 | 26.2–35.2 |
+| 196,608 | 393,216 | 27.4–36.8 |
+| 262,144 | 524,288 (both ceilings) | 31.1–41.8 |
 
-- **Headroom rule:** after the rehearsal, charged-so-far plus twice the projected remaining time must be at most the cap (16 hours since the human lead's decision of 2026-11-15; 12 before), and twice the measured peak memory at most the memory caps (peak at most 1.5 GiB per worker; otherwise the evaluation batch is reduced and the rehearsal repeated).
-- On this projection the draw-1 seed block needs 1.4 + 2 × 5.3 = **12.0 hours: zero slack.** The projection rests on unmeasured items: T-OQ at twice F-OQ (the largest item; at 2.5× the twofold rule needs about 0.8 hours more), the new D-OQ, the index builds and the evaluation hour (each 20% over adds about 0.4 hours under the twofold rule). **It is likely that the rehearsal measures more than the projection.** The cuts of this section then apply in order: the draw-1 seed block saves about 0.7 hours under the twofold rule, the D-OQ cut, where cut 3 permits it, about 0.37 hours (8K/64K) and 0.22 hours (32K/16K) under the twofold rule. Revision 4 adds two load-calibration runs (about 0.09 charged hours before the rule), so on this projection the draw-1 seed block exceeds a 12-hour cap by about that amount and cut 2 applies unless the rehearsal measures less. Beyond that the work returns to the human lead, with the measured shortfall and the options: raise the cap, or shorten the run lengths (which changes the registered design and needs a re-review). The lead does not choose between them.
+- **The long cell.** 32K/4K by itself (F-OQ, T-OQ, H8 and D-OQ, five replicates) is 1.7–2.4 charged hours at U_L = 196,608, 3.5–4.8 at 393,216 and 4.6–6.5 at 524,288. The cap rule counts it twice.
+- **Plain statement.** On this projection the study fits under 32 hours only if T-OQ's measured cost is near F-OQ's, or the loaded cells stop by about 262,144 updates. At the central extrapolation with T-OQ at twice F-OQ it needs about 31–35 hours; at both ceilings, 37–42. The largest unknown is T-OQ's cost, which moves C_need by 4.6–5.2 hours between the two assumptions. The timing preview of §10.1 measures it before anything long runs.
+- **Block S3** adds a search of 5.5–7.5 charged hours and five registered runs of 2.7–7.5 hours each. With it C_need is about 36–54 hours. It does not fit under 32 hours on any assumption.
+- **What each removable item is worth in C_need, at the central row** (for the human lead's choice, §25.8; none of this is a rule): the draw-1 seed block 1.6–1.7 hours; D-OQ at 8K/16K 0.5–0.6; the row of 2,048 facts (step N1, and with it the efficiency line's first transition) 1.9–2.0; H8 at the two loaded cells 1.8–2.0; D-OQ at the two loaded cells (the dense-at-saturation label) 2.7–2.8, and 4.0–4.1 at both ceilings; a ceiling of 393,216 in place of 524,288 at 32K/4K takes 0.2–0.4 off the calibration and bounds the worst case at about 28–38 in place of 31–42.
 
-**Cuts, fixed now, in this order, until the headroom rule holds; nothing else may be cut:**
+**Block S3 is admitted** only if the human lead funded its search (§10.1 item 4), F-OQ has a U_L there, and C_need with S3 and the draw-1 seed block is at most C_max. Otherwise it is omitted, the saturation line prints 16,384 NOT MEASURED with the reason, and nothing else changes. Omitting S3 is not a cut.
 
-1. The seed block on draw 2 (added only if it fits in the first place).
+**Cuts, fixed now, in this order, until C_need is at most C_max; nothing else may be cut:**
+
+1. The seed block on draw 2 (added only if C_need with it is at most C_max in the first place).
 2. The seed block on draw 1 *(lead's choice of order; it is descriptive and enters no rule)*.
-3. D-OQ at a larger cell (among 8K/64K and 32K/16K) **only if the load calibration predicted that step's smaller cell not loaded** (8K/16K for A2, read from its own load-0.5 calibration cell; 32K/4K for B1). If both cells are eligible and one suffices, 8K/64K is cut first, then 32K/16K *(lead's choice)*. A D-OQ cell at the larger cell of a step whose smaller cell was predicted loaded is never cut. A step whose D-OQ cell is cut prints DENSE NOT READ and cannot support CAPACITY_SUPPORTED.
-4. If the rule still does not hold, the work stops and returns to the human lead.
+3. D-OQ at 8K/16K, the larger cell of control step N2, whose smaller cell 8K/4K was measured at the ceiling in revision 4's calibration (§1 fact 13). N2 then prints DENSE NOT READ on both lines. No other D-OQ cell is ever cut.
+4. If C_need still exceeds C_max, the work stops and returns to the human lead.
 
-The five replicates, U_P, the run lengths and every threshold are never changed to make the study fit. Each cut is written in the freeze record with the rules it changes.
+The five replicates, the rule-set values of U_P and U_L, the run lengths and every threshold are never changed to make the study fit. Each cut is written in the freeze record with the rules it changes.
 
 ## 11. Order of work and stop rules
 
-1. Confirmation review of this revision by the auditor; revise until confirmed.
-2. **Decision 1** (implementation, calibration, rehearsal): taken by the lead under the human lead's delegation quoted in §15, after the confirmation review, and recorded in §15.
-3. Implementation with tests (every gate; every verdict, class, label and outcome on synthetic records; registered-mode refusals; fixed launch scripts).
-4. Calibration (§10.1) in the order 0, 1, 2, 3; audited. Any return to the human lead named in §10.1 happens here.
-5. Rehearsal (§10.2); implementation audit ending READY TO FREEZE.
+1. Review of revision 5 by the human lead and, independently, by the auditor; revise until confirmed. The human lead's answers to §25.8 are recorded verbatim in §25.9.
+2. **Decision 1 for revision 5** (the code changes, the calibration of §10.1 and the rehearsal): taken by the lead under the human lead's delegation quoted in §15, only after item 1, and recorded in §25.9. The decision recorded in §15 was for revision 4 and does not carry over.
+3. Implementation of the changes with tests (every gate; every verdict, class, label and outcome on synthetic records, the saturation line and the dense-at-saturation label included; registered-mode refusals; fixed launch scripts), and an independent implementation audit of them. The audit of revision 4's code does not cover them.
+4. Calibration (§10.1) in the order 0a; 0b together with 1; then 2 and 3; audited. Any return to the human lead named in §10.1 happens here.
+5. Rehearsal (§10.2); C_need and the cap by the rule of §10.3; implementation audit ending READY TO FREEZE.
 6. Lane L status by §5.6, recorded.
-7. Registered data generated and hashed; G1. Freeze of specification, code, config, launch scripts, seeds, thresholds, calibration records, rows, MC snapshots, D-OQ rates, cuts, seed-block decision and data identities.
-8. **Decision 2** (the single registered run): taken by the lead under the same delegation, only if the audits end with no open blocker or major, nothing changed after calibration except what §8 allows, the headroom rule holds, and no registered seed has been observed. Otherwise it returns to the human lead. Recorded in §15 before anything registered runs.
+7. Registered data generated and hashed; G1. Freeze of specification, code, config, launch scripts, seeds, thresholds, calibration records, U_L of each loaded cell, U_P of each row, MC snapshots, D-OQ rates, the cap, cuts, seed-block and S3 decisions and data identities.
+8. **Decision 2** (the single registered run): taken by the lead under the same delegation, only if the audits end with no open blocker or major, nothing changed after calibration except what §8 allows, the cap was set by the rule of §10.3 at or below C_max, and no registered seed has been observed. Otherwise it returns to the human lead. Recorded in §15 before anything registered runs.
 9. The registered run, once.
 10. Independent recomputation of every verdict, class, label and both outcomes from raw records and snapshots by the auditor; outcome report with deviations, failed attempts and negative results kept.
 
@@ -557,7 +707,7 @@ The five replicates, U_P, the run lengths and every threshold are never changed 
 - A failed cell is kept and not re-run; the study is S1-INCOMPLETE.
 - No stage is re-run with changed settings. A second attempt after an engineering stop is the human lead's decision.
 - No registered seed is observed before decision 2, apart from G1.
-- The caps are the human lead's. The lead does not raise them.
+- The caps are the human lead's. The lead raises the hour cap only under the Addendum's delegation, by the rule of §10.3, and never above C_max. The memory caps are not raised.
 
 ## 12. What S1 cannot establish
 
@@ -566,18 +716,23 @@ The five replicates, U_P, the run lengths and every threshold are never changed 
 - **Useful capability beyond recall of the trained facts; any improvement of a language model's behaviour.**
 - Efficiency, speed, latency or I/O. Counted work is logical. Simulated traffic is not a storage measurement. Throughput is an in-RAM CPU figure for a 27,392-parameter backbone.
 - Capacity where no cell is loaded; anything beyond the registered slots, facts and run lengths.
+- **Capacity from 16,384 to 65,536 slots, or at any size above 16,384.** Revision 5 does not test it. It is proposed for P10-I.
+- What a full store of 16,384 slots holds, unless block S3 is admitted and its cell is full. Without S3 the saturation line covers one fourfold step, 1,024 → 4,096.
+- A capacity "per slot" in general. b(N) is for eight facts per slot, this read path, this optimizer and these run lengths; "full" is the plateau rule, not an asymptote.
+- That the store holds more than a dense map when full, beyond one dense family whose rate was chosen on calibration draws at 65,536 updates.
+- That a capacity step under oracle addressing is a discovery. Once the smaller cell is full it is close to foregone (§25.4).
 - Anything about natural-language knowledge, composition, reasoning, skewed fact frequency, another backbone, or a trainable backbone.
 - That DENSE AHEAD or CONVENTIONAL RETRIEVAL SUFFICES means memory is not needed in general, or that BEATS DENSE holds off this task.
 - That a hierarchy helps locality, or that sublinear counted work is a finding about the tree.
 - That "more slots" differs from "more store parameters": this read path cannot separate them (§5.3).
 - Generalization across facts.
-- That a dense architecture other than D-OQ would not do as well: one dense family is run, with a three-rate grid.
+- That a dense architecture other than D-OQ would not do as well: one dense family is run, with a five-rate grid.
 - After D7 was dropped there is one dense family in S1, and no learned arm that addresses facts without the oracle.
 - TRANSFER-POSITIVE, SYSTEM-POSITIVE, a failure of the ArborLM concept, Astra validation, or a human approval that is not recorded.
 
 ## 13. Decisions reserved for the human lead
 
-1. Every return named in §10.1 and §10.3 (no registered cell predicted loaded, a row that would need 131,072 facts, an overload row that does not fit, a failed U_P check, headroom that does not hold after the allowed cuts; in the last case the choice between raising the cap and shortening the run lengths).
+1. Every return named in §10.1 and §10.3 (a loaded cell NOT LOADED WITHIN ITS CEILING, a row with no qualifying U_P, a dense rate chosen at the top of its grid or a unit whose rates all diverged, C_need above C_max after the allowed cuts). C_max itself, the funding of block S3, and the other questions of §25.8.
 2. The caps; whether S0, S1 and S2 training stages may overlap on the machine.
 3. Any second attempt; any change after the freeze.
 4. P10-I and any integrated study; the use of S1's outcomes in SYSTEM-POSITIVE; merge; publication; weight release; ADR-0012.
@@ -590,9 +745,9 @@ The five replicates, U_P, the run lengths and every threshold are never changed 
 | Requirement of the human lead | Where |
 |---|---|
 | Oracle or controlled addressing; no claim of autonomous success | §3, §8.7, §12 |
-| Study A: fixed facts, 4K / 16K / 64K; recall, learning efficiency, robustness, generalization | §5.1, §5.2, §8.2–§8.8, §7.2 |
+| Study A: fixed facts, 4K / 16K / 64K; recall, learning efficiency, robustness, generalization | §5.1, §5.2, §8.2–§8.8, §7.2. The sizes are 1K / 4K / 16K by the human lead's choice of §24; 16K→64K is not tested |
 | Control for total trainable parameters; strong dense alternatives | §5.3, §8.5, §10.1 item 3 |
-| Study B: more facts with more memory; flat, hierarchical, conventional sparse retrieval, exact-address references, dense controls | §5.1, §3, §5.5, §8.6 |
+| Study B: more facts with more memory; flat, hierarchical, conventional sparse retrieval, exact-address references, dense controls | §5.1, §3, §5.5, §8.5, §8.10 (the saturation line) |
 | Matched updates, exposures and compute analysed separately | §5.4, §8.2, §8.6 |
 | Useful memory dependence, not slots selected | §7.1, §7.3, gate DEP |
 | Ablations, value shuffling, held-out queries, utilization, separability, routing costs, throughput, estimated traffic | §7.2–§7.5 |
@@ -646,7 +801,7 @@ Recorded by the lead:
 
 ## 16. Open questions
 
-None are left for the lead. One question is pending with the human lead (§13 item 5).
+Revision 5 has open questions for the human lead: §25.8. One earlier question is still pending with the human lead (§13 item 5).
 
 ## 17. Finding-by-finding map
 
@@ -839,3 +994,143 @@ Recorded by the lead:
 - The dense control's learning-rate grid: the lead extends it upward in revision 5 (the selected rate was the top of the grid, which weakens the control). This strengthens a control before any registered seed and is the lead's decision under the P10 delegation; the human lead was not asked a separate question on it.
 - The hour cap is set again from the new calibration's measured rates under the recorded delegation, before any registered seed is observed.
 - No registered seed of S1 has been observed. Nothing in S1 has run since the calibration.
+
+
+## 25. Revision 5: the shifted capacity grid (2026-11-15 UTC) — DRAFT, not reviewed, not approved
+
+Drafted by the lead (Claude Fable 5.2) after the human lead's choice recorded in §24. Nothing has been implemented or run under it. It is not a human approval, not an independent review and not an Astra review. **Astra review: NOT_PERFORMED.** The arithmetic behind every figure is in `docs/reviews/p10s1-revision5-2026-11-15/DESIGN_NOTES.md` and `rev5_arithmetic.py` / `.out` beside it.
+
+### 25.1 What revision 5 is
+
+- The memory sizes are 1,024, 4,096 and 16,384 slots. No cell has 65,536 slots. **Capacity from 16,384 to 65,536 slots is not tested and goes to the proposed P10-I.**
+- Each transition has a loaded step, whose smaller cell holds eight facts per slot, and a control step at two facts per slot. The second transition has its own fact count, 32,768.
+- The capacity line and its thresholds are kept. A third line, saturation, asks whether a full store's content keeps pace with its slots. The dense control is also read on the full cells, and its matched-compute reading can now be established for every arm.
+- The calibration is replaced by a rule-bound procedure with fixed outcomes. The hour cap is computed by a rule against a ceiling the human lead sets.
+
+### 25.2 Every change and its reason
+
+| Where | Change | Reason |
+|---|---|---|
+| Header, §0 | Status; three result lines; the sizes; 16K→64K not tested | §24; the lead's brief for this revision |
+| §1 facts 13–18 | Revision 4's calibration and the check, as known facts | They were seen before the redesign and are its basis (§25.3) |
+| §2 | H21-3 restated on full cells; H21-4 extended to full cells; a new expectation paragraph | The diagonal H21-3 was written for no longer exists; the check's M4 (§25.4) |
+| §3 | Four positive labels added to the list that must carry the tag; T-OQ and F-OQ-IVF at 1,024 slots | New labels; a new size |
+| §5.1 | Grid of seven cells at 1,024 / 4,096 / 16,384; steps C1, N1, C2, N2; block S3; the overload-row rule withdrawn | §24. At a fixed 8,192 facts the 4,096-slot cell is not loaded, so the second transition needs 32,768 facts. Control steps keep H21-2 testable in each transition |
+| §5.3 | D-OQ at six cells: the larger cell of each step and both loaded cells | Dense at saturation (§8.5) |
+| §5.4 | U_P per row by rule; run lengths U_L and 6·U_P; snapshots; no cross-row ME; MC-AMBIGUOUS named | C2 cannot be read at 8,192 updates (§25.6); 6·U_P makes the dense matched-compute snapshot exist for every arm (§25.7) |
+| §6.1, §6.3 | The matrix; R2 at 32K/32K; calibration seed 2193 | No 65,536-slot table; the check's §7 item 2 |
+| §7.4 | Counted work at the new sizes | Arithmetic |
+| §8 opening | What may change after the new calibration | New rule outputs (U_L, U_P, the cap, S3) |
+| §8.1 | REF cells | The row of 32,768 facts needs a reference without 65,536 slots |
+| §8.2 | A plateau needs i\* ≥ 0.473 bits at half the run length | The artefact the check found (§1 fact 14) |
+| §8.4 | Steps and transitions renamed; the 0.80 floor read at 32K/16K | 32K/64K no longer exists; the value is unchanged (§25.8 question 5) |
+| §8.5 | Matched compute on the new sizes; dense at saturation; hierarchy and conventional-retrieval cells | The lead's brief; §22 M5 revisited (§25.7); the old cells no longer exist |
+| §8.6 | Study B replaced by the saturation line | Its diagonal no longer exists |
+| §8.7 | Printed label; the milestone reading needs the saturation class and the dense-at-saturation label, and names the size range | §25.4. This edits wording the confirmation review supplied (K2), in the direction of a harder positive |
+| §8.8 | The efficiency line reads the control steps only | Loaded steps could only report a capacity difference under the name of efficiency |
+| §8.9, §8.10 | Decision map; the saturation line | §25.4 |
+| §9 | Seven rows | The traps the calibration and the check found |
+| §10.1 | New calibration: timing preview, load search with two consecutive passes and fixed outcomes, row U_P, H8, a five-rate dense grid in four units, block S3 | The lead's brief; the check's E1, E9, M6 |
+| §10.2 | S3 and the new sizes in the rehearsal; C_need among its outputs | Consistency |
+| §10.3 | The cap by rule against C_max; projection from measured rates; S3's admission; three cuts | The check's M3; the lead's brief |
+| §11, §12, §13, §14, §16 | Order of work for revision 5; limits; returns; pointers | Consistency |
+
+Withdrawn with their sections: every 65,536-slot cell; the overload row and its U_P rule as a special case; revision 4's load table and its rule table; cut 3 as it applied to 8K/64K and 32K/16K; the label KNOWLEDGE SCALES WITH MEMORY. The draft extension of `docs/reviews/p10s1-load-search-2026-11-15/` was not adopted (§24) and nothing of it is in force, although revision 5 takes several of the check's edits to it (two consecutive passes, the failed-run rule, the diverged-rate rule).
+
+### 25.3 What had been seen before the redesign
+
+Everything below was known to the lead when this revision was drafted. All of it is from calibration draws; no registered seed has been generated or observed.
+
+1. Revision 4's calibration, 46 runs (§1 facts 13–17): F-OQ's curves to 65,536 updates at 4,096 slots with 8,192 / 16,384 / 32,768 / 65,536 facts and at 16,384 slots with 8,192 / 32,768 / 65,536 / 131,072 facts; R2, F-OQ and H8 at 2K/4K, 8K/16K and 32K/64K to 8,192 updates; D-OQ at 8K/16K and 32K/64K at three rates; the time of every run.
+2. The check's recomputation of those curves, its six extrapolation families and their hold-out test, its cost tables, and its findings M1–M6 (§1 fact 15).
+3. The lead's own reading of step N2 from the same curves (§2, expectation 4).
+4. Of the cells of revision 5, these were run in that calibration, on the same two draws: 8K/4K, 8K/16K, 32K/4K and 32K/16K for F-OQ to 65,536 updates; 2K/4K for F-OQ, R2 and H8 to 8,192; 8K/16K for D-OQ. **Not run by anyone:** anything at 1,024 slots (2K/1K, 8K/1K); T-OQ anywhere; D-OQ at 2K/4K, 8K/4K, 32K/16K, 8K/1K or 32K/4K; R2 at 32K/32K; any run beyond 65,536 updates; any rate above 0.01.
+5. From P9-I and the review stand-in: §1 facts 1–12.
+
+### 25.4 The check's point that the capacity step is close to foregone
+
+The check found (M4) that a loaded 4K→16K row "can only yield a positive": at matched updates the larger store is about 3 bits per fact ahead, so NO GAIN, REVERSED and NOT LOADED are out of reach. The same holds for both loaded steps of revision 5. Once F-OQ's smaller cell is full at about 2 bits per fact and the larger cell holds the same facts at two per slot, "a larger memory holds more once the smaller is full" follows almost by construction when an oracle supplies the address. The lead accepts this and answers it in the design, not in the wording:
+
+1. **The capacity line is kept, unchanged, as a check of a necessary condition.** It can still fail to be positive: if a plateau does not hold in all five replicates, if dependence fails, if T-OQ or the indexed read does not show what exhaustive F-OQ shows, or if the dense control is ahead. It cannot return NO GAIN for F-OQ on a loaded step, and this ADR says so.
+2. **The saturation line (§8.10) is the measurement whose answer is not known.** It asks whether a full store keeps its bits per slot as it grows. It has a negative, SATURATION-SUBPROPORTIONAL, fixed with a threshold that predates every S1 record.
+3. **The dense control is read where it is informative.** At the larger cell of a step, both the store and the dense map are near the ceiling. At a loaded cell the store is full, and the question "does a dense map of the same parameter count hold more?" has a real answer. DENSE HOLDS MORE AT SATURATION blocks the positive and can make the outcome CAPACITY-NEGATIVE.
+4. **Matched compute against the dense map is now affordable** and is expected to be established for every arm (§25.7).
+5. **The milestone reading needs all of them** (§8.7). A capacity step alone gives "capacity steps shown; proportional saturation not shown".
+
+### 25.5 Thresholds
+
+**Unchanged, every value in the config's `[thresholds]` table:** the reference floor 0.95; the DEP floor 0.25 and ratio 0.95; the gain 0.5 and the null band 0.25; the plateau 0.10; the loaded limit 4.0; the ceiling 4.5; the a_use floors 0.5 and 0.80; DENSE AHEAD at −0.25; BEATS DENSE at 1.10; the tree ratios 1.03 and 0.97; conventional retrieval within 0.25; the growth factor 3.0; SUBLINEAR at 2.0; held-out 0.90; the efficiency level 3.0 bits with factors 0.5 and 0.8; OPTIMIZER-ASSISTED at 1.5; DENSE FASTER at 0.8; MC-MISMATCH at 1.25; robustness 0.05; "all 5" and "at least 4". The lead found none of them ill-defined on the new grid.
+
+**Read at a different cell, value unchanged (forced by the grid):** the 0.80 floor of §8.4 (32K/16K in place of 32K/64K); REF for the row of 32,768 facts (32K/32K in place of 32K/64K); the hierarchy label (8K/4K and 32K/16K); the conventional-retrieval label (32K/16K).
+
+**No longer used:** the Study B accuracy floor 0.85 and its 0.5 ratio floor. A full cell at eight facts per slot is expected near 0.6, so the floor would make the line unreachable by construction.
+
+**New rules, each built from a number that already existed:**
+
+| Rule | Number | Why this number | Can it return a negative? |
+|---|---|---|---|
+| A plateau needs the cell to have learned (§8.2) | a_use 0.25, as 0.473 bits | It is the floor below which DEP is not evaluated; below it nothing stored has been checked | It only removes a false "loaded" |
+| Saturation in proportion (§8.10) | 3.0 per fourfold step | H21-3's factor since revision 1, before any S1 record | Yes: SATURATION-SUBPROPORTIONAL |
+| Dense at saturation (§8.5) | −0.25 bits; ratio 1.10 | The numbers of DENSE AHEAD and BEATS DENSE | Yes: DENSE HOLDS MORE AT SATURATION, which blocks the positive and can give CAPACITY-NEGATIVE (b) |
+| U_L needs two consecutive candidates to pass (§10.1) | the plateau rule itself, twice | The check's margin against a noisy first crossing | If no candidate qualifies, the cell is NOT LOADED and the work returns |
+
+**New choices of the lead that are not thresholds of a verdict.** Each was made after seeing §25.3, and each is marked *(lead's choice)* where it stands:
+
+- The ceilings and candidate lists of the load search: 262,144 at 8K/1K, 524,288 at 32K/4K, 1,048,576 at 128K/16K. 524,288 is the top of the check's range for 32K/4K. 262,144 and 1,048,576 follow from a time shift of about 2.4 per fourfold step read off the calibration curves, which is an extrapolation. They bound cost. A cell that needs more is NOT LOADED and returns to the human lead; a ceiling is never raised by the lead.
+- Run length 6·U_P at every size for cells that are not loaded: the smallest uniform value at which every arm's dense matched-compute snapshot exists (§25.7).
+- The dense rates 0.03 and 0.1, added above the three of revision 4. The check judged 0.03 a reasonable next point and 0.1–0.3 likely to be unstable; 0.1 is kept as the bracket, and a best rate at 0.1 returns to the human lead.
+- The dense rate at a loaded cell is chosen at 65,536 updates.
+- Calibration seed 2193 on the second draw; every calibration run from initialization.
+- R2 at 32K/32K; the efficiency line on the control steps only; three cuts.
+
+### 25.6 Each changed row, and why it is not chosen for its predicted answer
+
+| Row | What is predicted, and from what | Why the choice does not rest on that prediction |
+|---|---|---|
+| The sizes 1,024 / 4,096 / 16,384 and eight facts per slot | Loaded cells that plateau near 2 bits per fact (extrapolation from 4,096 slots only) | The human lead's choice (§24), made so that the test has a full smaller cell at all. A full smaller cell is the condition of the test, not its answer |
+| C1: 8K/1K → 8K/4K | CAPACITY for F-OQ, if the plateau holds. 8K/4K was seen at 4.37–4.54 bits at 8,192 updates; 8K/1K was never run | The lead states plainly that this prediction is positive and that the step cannot return NO GAIN for F-OQ (§25.4). The row is there because the first transition must have a loaded step; the milestone reading does not rest on it alone |
+| C2: 32K/4K → 32K/16K | CAPACITY for F-OQ, if the plateau holds. Both cells were seen to 65,536 updates | The same. It is revision 4's step B1; revision 5 changes how long its smaller cell runs, by a search fixed before it runs, and its U_P, by a rule (next row) |
+| U_P of the row of 32,768 facts, by rule (expected 16,384) | At 8,192 updates 32K/16K holds about what 32K/4K holds when full, so C2 would be GAIN WITHIN BUDGET ONLY (a gain at matched updates, none against saturation); at 16,384 it holds 4.12–4.23 bits and C2 can be CAPACITY | **This choice does change what C2 can show, in the direction of a positive, and it is made after seeing the curves.** The check said so (its §7 item 4). The rule is the one revision 4 wrote for any added row, before any S1 record; its inputs are a_use floors on the larger cell and on R2, not the step's verdict; and it is applied to every row alike. The human lead is asked to confirm it (§25.8 question 8) |
+| N1: 2K/1K → 2K/4K | CEILING or FLAT, NOT LOADED, if a slot holds 17–18 bits (extrapolation); nothing at 1,024 slots was run | A control: it tests H21-2 and can contradict the capacity story if the larger memory gains where the smaller is not loaded |
+| N2: 8K/4K → 8K/16K | CEILING on one calibration draw and GAIN WITHIN BUDGET ONLY on the other, read from §1 fact 13; efficiency SAME or FASTER IN UPDATES ONLY | Revision 4's step A1, unchanged in cells, U_P and thresholds. Its predicted answers favour neither positive outcome |
+| Saturation pair 1,024 → 4,096 | Nothing: no cell has reached a plateau and nothing was run at 1,024 slots | The threshold predates every S1 record. The lead has no expectation of the ratio |
+| D-OQ at the loaded cells | Possibly DENSE HOLDS MORE (per-parameter arithmetic, §2 expectation 3); never run | A control added where it can block. If the prediction is right the capacity outcome is negative |
+| D-OQ at 8K/4K and 32K/16K, with higher rates | Possibly DENSE AHEAD at U_P; never run at these cells | A stronger control; it can only make the store's positives harder |
+| Block S3 | Nothing reliable: 128K/16K was at 1.46–1.52 bits and rising fast at 65,536 updates | Fixed outcome if it is not full; it enters only the saturation line |
+| Rows removed: everything at 65,536 slots | 8K/64K and 32K/64K were at or near the ceiling at 8,192 updates | Removed by the human lead's choice of sizes. What they would have shown is not claimed: 16K→64K is NOT TESTED |
+
+### 25.7 The rulings of §22 and §22.1 on the new grid
+
+- **M5 (dense matched compute).** The ruling and its label stand. Its plain statement was that S1 could not establish the dense comparison at matched compute at 65,536 slots, and nowhere for T-OQ and H8. On the new grid the analytic multipliers of D-OQ over an arm are 1.2 / 1.7 / 2.5 for F-OQ, 1.2 / 2.0 / 5.1 for T-OQ and 1.3 / 2.1 / 5.4 for H8 at 1,024 / 4,096 / 16,384 slots. The matching snapshots are at most 6·U_P, and every arm's cell now runs 6·U_P. On the analytic measure the reading is established for every arm at every size. The only measured CPU-time multiplier is F-OQ's at 16,384 (1.40–1.55); the others are measured by the rehearsal. If T-OQ's or H8's measured CPU cost per update exceeds D-OQ's while the analytic count says the opposite, that pair is MC-AMBIGUOUS and the ruling's label applies to it (§25.8 question 11).
+- **M6, M7, (g), (h), (i), (j), (k), (m), (n)** stand unchanged. M7's walk is applied in each of the four dense-rate units. (h) is applied to the two new labels as written in §8.5 and §8.10.
+- **(b) lane L** stands; its three cells (2K/4K, 8K/4K, 8K/16K) are cells of the new grid.
+- **m2** the seed block is the seven grid cells. **m13** stands and is cited in §10.1.
+- **M4** Decision 2 is recorded outside the hashed specification, as ruled.
+- Revision 4's implementation, its audit and its fixes do not cover revision 5. The changes revision 5 implies are listed in `DESIGN_NOTES.md` §7.
+
+### 25.8 Open questions for the human lead
+
+1. **C_max.** What is the most the lead may set the registered cap to under the delegation? On the projection C_need is 26–35 hours at the central extrapolation, 22–29 if the loaded cells stop early, and 31–42 at both ceilings. No figure is proposed; the rule of §10.3 computes the cap, and C_max bounds it.
+2. **Block S3** (bits per slot at 16,384 slots). It needs C_need of about 36–54 hours and does not fit under 32. Fund it, or accept that the saturation line covers 1,024 → 4,096 only? A cheaper third size exists but lies outside the sizes of §24: a cell of 2,048 facts in 256 slots (F-OQ and H8 only; T-OQ is not defined there), which would give 256 → 1,024 → 4,096 for well under an hour. It is not in this revision.
+3. **If C_need exceeds C_max after the three cuts,** which of the items priced in §10.3 should go: H8 at the loaded cells, the row of 2,048 facts, D-OQ at the loaded cells, or a lower ceiling at 32K/4K? The lead's order of preference is the one just written; the lead would not give up D-OQ at the loaded cells.
+4. **Dense at saturation enters the outcome** (it counts as DENSE AHEAD). Confirm, or make it descriptive. The lead's reason for making it binding is §25.4 item 3.
+5. **The 0.80 floor of §8.4** is now read at 32K/16K at its row's U_P. The value is unchanged; the cell is forced. Confirm.
+6. **R2 for the row of 32,768 facts** is a table of 32,768 rows. The alternative is to keep revision 4's 65,536-row table as a reference only. Either costs a few minutes.
+7. **The plateau guard** reuses the DEP floor (a_use 0.25). Confirm that this is the fix wanted for the artefact.
+8. **U_P per row by rule**, expected to give 16,384 for the row of 32,768 facts. This is what lets step C2 be read (§25.6). Confirm.
+9. **A loaded cell that is NOT LOADED WITHIN ITS CEILING** returns to you with two options (stop; or run with that transition fixed as NOT TESTED). If you would rather it be fixed as NOT TESTED automatically, say so.
+10. **The efficiency line** is kept on the two control steps. The row of 2,048 facts exists for it and for control step N1, and is worth about 2 hours of C_need.
+11. **T-OQ against the dense map at matched compute** may be MC-AMBIGUOUS if T-OQ's measured CPU cost exceeds D-OQ's. The "storage half supported" reading would then be reachable through F-OQ-IVF only. No rule change is proposed; you would be told at the freeze.
+12. **The saturation line uses one number, 3.0,** for the positive (all 5) and the negative (at least 4 below it). A band between the two would need a second number chosen now, after the calibration was seen; the lead did not introduce one.
+
+### 25.9 Approval record for revision 5
+
+Nothing is recorded as approved.
+
+- The human lead's review of revision 5: PENDING.
+- Independent review (Opus 5.5): PENDING.
+- C_max: NOT RECORDED.
+- Decision 1 for revision 5 (code changes, calibration, rehearsal): NOT TAKEN.
+- Decision 2 (the registered run): NOT TAKEN.
+- Astra review: NOT_PERFORMED. Claude review is not Astra review.
+- No registered seed of S1 has been observed. Nothing in S1 has run since revision 4's calibration.
