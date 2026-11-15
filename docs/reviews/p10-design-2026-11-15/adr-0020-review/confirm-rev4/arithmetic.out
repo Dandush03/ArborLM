@@ -1,0 +1,29 @@
+cells: 2K/4K 100, 8K/16K 100, 8K/4K 30; Q1 230; with Q2 256; +3 check
+cut 3: 8K/16K 60, Q1 190; three-arm Q1 180
+summed CPU-h Q1 15.84 / 17.74 / 23.36 | WX 1.37 / 1.51 / 2.03 | probe 7.65 / 11.60 / 13.52 | Q1 cut3 11.10 / 12.61 / 16.26
+six-worker  Q1 2.64 / 2.96 / 3.89 | WX 0.23 / 0.25 / 0.34 | probe 1.27 / 1.93 / 2.25 | Q1 cut3 1.85 / 2.10 / 2.71
+whole plan 4.94 / 5.94 / 7.28 doubled 9.88 / 11.88 / 14.57 left 1.43 h (8.9%)
+three-arm whole 4.37 / 5.29 / 6.44
+rev3-style multiples (16-1.6)/(2*block): uncut 1.110, no probe 1.702, Q1 1.850, Q1 cut3 2.657, 3-arm uncut 1.277
+R2 bullets: pre-Q1 2*(0.8+Q1) = 9.39; post-Q1 4.69 + 2*(WX+probe) = 9.88; Q1 at cap 13.77
+reading A thresholds (x slowest): Q1 uncut up to 1.850; cut 3 up to 2.657; probe kept up to 1.675; WX kept up to 1.850 (limited by Q1 at 1.850)
+example m=1.2: post-Q1 total 11.69 h -> probe kept
+CP 10/10 = 0.741
+CP 9/10 = 0.606
+CP 9/9 = 0.717
+CP 8/9 = 0.571
+CP 8/10 = 0.493
+CP 3/3 = 0.368
+CP 16/18 = 0.690
+CP 12/14 = 0.615
+CP 18/18 = 0.847
+CP 17/18 = 0.762
+CP 14/14 = 0.807
+CP 13/14 = 0.703
+P9-II-rate Q1 (median wall s incl. evaluation): summed 19.14 h, six workers 3.19 h
+  P9-II A5-D@4096: 0.0093 s/update
+  P9-II A1@4096: 0.0110 s/update
+  P9-II A5-D@16384: 0.0141 s/update
+  P9-II A1@16384: 0.0203 s/update
+  P9-II A0@65536: 0.0398 s/update
+  probe at P9-II A0@65536 rate: one round 1.45 h
