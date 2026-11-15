@@ -1,0 +1,22 @@
+{
+ "b101": {
+  "record_mean": 0.273948609828949,
+  "ceiling_weighted_mean": 0.2684969519059516,
+  "record_fraction_ge_0.95": 0.03564453125,
+  "share_of_answer_at_sign": 0.03564453125,
+  "record_sigma_mean": 0.42049139738082886,
+  "ceiling_sigma_weighted_mean": 0.5471019278908626,
+  "logloss_gain_ceiling_bits_per_fact": 4.032765126848577,
+  "min_margin_logits": 0.9478120813328751
+ },
+ "b102": {
+  "record_mean": 0.2529868185520172,
+  "ceiling_weighted_mean": 0.24748018527690308,
+  "record_fraction_ge_0.95": 0.03564453125,
+  "share_of_answer_at_sign": 0.03564453125,
+  "record_sigma_mean": 0.4003891944885254,
+  "ceiling_sigma_weighted_mean": 0.518561034840542,
+  "logloss_gain_ceiling_bits_per_fact": 3.9467814787939233,
+  "min_margin_logits": 1.0187885342616063
+ }
+}

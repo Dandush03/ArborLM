@@ -1,0 +1,26 @@
+{'pi_out': 0.0, 'u0': 'first_batch', 't': 1, 'H_u': 6.96, 'lnM': 9.011, 'hinge_active': True}
+{'pi_out': 0.0, 'u0': 'first_batch', 't': 32, 'H_u': 8.462, 'lnM': 9.011, 'hinge_active': True}
+{'pi_out': 0.0, 'u0': 'first_batch', 't': 57, 'H_u': 9.015, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'first_batch', 't': 64, 'H_u': 9.117, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'first_batch', 't': 128, 'H_u': 9.543, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'first_batch', 't': 256, 'H_u': 9.638, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'first_batch', 'first_update_hinge_off': 57, 'of_U_at_E32': 2048}
+{'pi_out': 0.0, 'u0': 'uniform', 't': 1, 'H_u': 9.702, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'uniform', 't': 32, 'H_u': 9.666, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'uniform', 't': 64, 'H_u': 9.65, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'uniform', 't': 128, 'H_u': 9.643, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'uniform', 't': 256, 'H_u': 9.641, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.0, 'u0': 'uniform', 'first_update_hinge_off': 1, 'of_U_at_E32': 2048}
+{'pi_out': 0.1, 'u0': 'first_batch', 't': 1, 'H_u': 8.246, 'lnM': 9.011, 'hinge_active': True}
+{'pi_out': 0.1, 'u0': 'first_batch', 't': 27, 'H_u': 9.025, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'first_batch', 't': 32, 'H_u': 9.109, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'first_batch', 't': 64, 'H_u': 9.441, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'first_batch', 't': 128, 'H_u': 9.64, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'first_batch', 't': 256, 'H_u': 9.68, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'first_batch', 'first_update_hinge_off': 27, 'of_U_at_E32': 2048}
+{'pi_out': 0.1, 'u0': 'uniform', 't': 1, 'H_u': 9.703, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'uniform', 't': 32, 'H_u': 9.69, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'uniform', 't': 64, 'H_u': 9.684, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'uniform', 't': 128, 'H_u': 9.682, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'uniform', 't': 256, 'H_u': 9.681, 'lnM': 9.011, 'hinge_active': False}
+{'pi_out': 0.1, 'u0': 'uniform', 'first_update_hinge_off': 1, 'of_U_at_E32': 2048}

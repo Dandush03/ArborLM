@@ -1,0 +1,46 @@
+committed data_manifest.json: sha256 8d73e555e8dd0d0b2f2d91880152f4c6a5371ca94c0dec65b26c1a5c16d8c308; kept run copy identical: True
+committed g1.json: sha256 ab324b8546a377acb954606dc7205a4fba7228f4e2cb8a51fed8032ce0445143; kept run copy identical: True
+committed gates.json: sha256 1aadb38766e1b1229b81f63da0f427b47d946e97ea1e0d50b19fd5e722f64389; kept run copy identical: True
+data_manifest sha256s block (14 entries expected): 14 canonical sha256 3f9c8ea0aaf76396599ac9d4953755ad85019e5bc13e7a0d0403469108caf520
+  facts                  6dca28bed787c04feff79e0517aa223822e832e547650371f16951b312a954da
+  lane_d                 fdead3fd9f6283e877c902fb5c8dc02e7816c44087f8712b83c1eaf4d56961b8
+  pool                   7d9b9cd935c8cc75beb63e5c5ab2c6923ad997e72c7f9d5f60e4d1ded821eb91
+  stream:calibration     fa9103c02f6f42e6ee68d388d366b12a4edaa148f711acd53c4f04da35e9d40b
+  stream:h1              1cd778a263888c6fb01a4460234920aaef6f5146ae3c4fbb7988f91dabf03278
+  stream:h2              f3f7efa72b7beb5c2d6c0c2b35df8327f7e83706d07a0bc2508ce62317f9f51a
+  stream:lane_d_a_A      7789b97d3c7de9995611e95be5213617d99c08307da586faa4b0faab90fbf2da
+  stream:lane_d_a_B      56032a36835095f87c8573c3584272cf38a74c590a77ad96233a8474512e2d86
+  stream:lane_d_b_A      3a5f769ecb7509bb2a5c3ba06cd7f98be74fc2c334869f550caad520184a03f4
+  stream:lane_d_b_B      1d6e5a8127efeee88b33e330be213d30652d20016ab7da59d0f642d6f8ff215a
+  stream:mixed           a5d7d0ba4698fccf97bab933610479ab596aff723ce75a977e06f03920ab17ab
+  stream:panel_a         b115c320fd8120aa1b0bb70243c78d77accab338d309b370772206eb3ad2a855
+  stream:panel_b         d95d4ba11b0e1f0e0aa7e9c9c9460ba172e9c25cc226eb861bd548d7cda2a49e
+  templates              a7a15632e8c8b415411171c6d10094f7741434666aa15c60256b00ef6f664063
+data_manifest non-identity fields, canonical sha256: 1f678f9d8e1771b0450b0f12e7cb4fb78eae64eb9516087c4763136a21c06922
+  seed_set p9i-registered | seeds canonical sha256 2c104d9856c099ff0fc339796ba509f25b9d5dca6265ebc49c891ef8366dfc03 | g1_passed True | g1_failed_checks []
+gates.json block digests (canonical JSON sha256):
+  g2           4ae2fe6cba458f9d2fd4121272746d8b1fcdefc3d56ce08109bbcbf448900906
+  controls     a0b71a5a518d7f91bd8b228bdbb4ccb9e313855d500136b5e080488ee405147c
+  restoration  19698d0221e2ae2322abf9b67b6bc0c332c08bdf22393f0b1343cd93c61b7fb7
+  G2 primary (B101): [('A/2048', 70, [36, 96]), ('A/8192', 259, [198, 318]), ('A/32768', 1077, [905, 1147]), ('A/unseen', 60, [36, 96]), ('B/2048', 62, [36, 96]), ('B/8192', 256, [198, 318]), ('B/32768', 1005, [905, 1147]), ('B/unseen', 66, [36, 96])]
+  no-memory replicate (B102): {'A': {'2048': 64, '8192': 262, '32768': 1019, 'unseen': 61}, 'B': {'2048': 79, '8192': 291, '32768': 1037, 'unseen': 80}}
+  exact_accuracy: {'2048': 1.0, '32768': 1.0, '8192': 1.0}
+  restoration: {"BB": {"identical": true, "mismatches": [], "resumed_from_update": 16, "split_update": 16, "tensors_compared": 67, "updates": 32}, "N": {"identical": true, "mismatches": [], "resumed_from_update": 16, "split_update": 16, "tensors_compared": 55, "updates": 32}}
+  gradient_reach trainable counts: {'A4': 8, 'A4E': 8, 'BB': 9, 'BB-0': 4, 'BB-D': 7, 'D': 3, 'D7': 3, 'E7': 5, 'N': 5, 'R1': 4, 'R2': 3, 'W7': 5}
+  N-vs-R0a / initial identities all True on both parents: True
+  g4_defects: ['gradient reach failed for R2']
+restoration snapshot files (u0000016 of the 'first' leg):
+  g4_restore/BB/restore_check/first/snapshots/u0000016/model.pt  cbbc998dd8aa45c934d25f72b01380f23613078fcc2f6ef7e791be2ae0eda04c
+  g4_restore/BB/restore_check/first/snapshots/u0000016/movement.pt  4162925549127fc4f533cf02bf97a74306c983893c40b2c99e4a136943b5bbf5
+  g4_restore/BB/restore_check/first/snapshots/u0000016/optimizer.pt  97340cb76cc5b4a75c2f6fdec256e4f20bbaf301b9544bdfd30a9fd53b5cc269
+  g4_restore/BB/restore_check/first/snapshots/u0000016/snapshot.json  8e2cc5da2d823eb7b324445ed4959eb7cb777832d1ccda90222040fdf3e8233b
+  g4_restore/N/restore_check/first/snapshots/u0000016/model.pt  36aef8850ec5818eb3e30ae65dffddbb95db48be890f0532d04708878f666104
+  g4_restore/N/restore_check/first/snapshots/u0000016/movement.pt  f0d4652901cf4851999d183d1b8ebc3516f681735b6d0f44931eb899053ceb54
+  g4_restore/N/restore_check/first/snapshots/u0000016/optimizer.pt  8b0527bd80fd6333689ba483d6225460a24f61ba5ac1648459ef85571a2c0320
+  g4_restore/N/restore_check/first/snapshots/u0000016/snapshot.json  54005d6da2d672a8fc6840718c10787169c869d2ceb986b542c0306cc78bfbdd
+  g4_restore/BB/restore_check/first/train.json: snapshot_sha256 {'16': 'cbbc998dd8aa45c934d25f72b01380f23613078fcc2f6ef7e791be2ae0eda04c'}, run_updates 16, status completed
+  g4_restore/BB/restore_check/resumed/train.json: snapshot_sha256 {}, run_updates 32, status completed
+  g4_restore/BB/restore_check/straight/train.json: snapshot_sha256 {}, run_updates 32, status completed
+  g4_restore/N/restore_check/first/train.json: snapshot_sha256 {'16': '36aef8850ec5818eb3e30ae65dffddbb95db48be890f0532d04708878f666104'}, run_updates 16, status completed
+  g4_restore/N/restore_check/resumed/train.json: snapshot_sha256 {}, run_updates 32, status completed
+  g4_restore/N/restore_check/straight/train.json: snapshot_sha256 {}, run_updates 32, status completed

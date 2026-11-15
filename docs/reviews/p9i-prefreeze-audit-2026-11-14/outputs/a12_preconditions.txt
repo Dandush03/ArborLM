@@ -1,0 +1,7 @@
+clean clone, freeze=HEAD ACCEPTED {'commit': 'e626280b1909e10b6997b15f827c1c844d8c550a', 'tree': '053d74341c1d6b88b98755fb7ebc30f1c9a87838'}
+clean clone, freeze=HEAD~1 ACCEPTED {'commit': 'a7b9f02c3302c2bf162c23bfbb9c58de321735cb', 'tree': 'b7e0d15bfa408a6114f33a5d69856b0b38c17bb9'}
+freeze=939b4bf (calibration code) ACCEPTED {'commit': '939b4bf97ecdb0e5eed0cbb737864b05c71deed2', 'tree': '769cfefa6b673dd3b1e6152a70c025b38d0bdd96'}
+no freeze commit REFUSED: refused: a registered stage requires --freeze-commit
+approval recorded in the ADR after freeze, freeze=HEAD~1 REFUSED: refused: docs/decisions/ADR-0017-parallel-capacity-and-locality-diagnostics.md at HEAD differs from the freeze commit
+untracked file present REFUSED: refused: the working tree is not clean:
+?? results/p9i-x/README.md

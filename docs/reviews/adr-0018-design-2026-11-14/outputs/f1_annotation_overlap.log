@@ -1,0 +1,7 @@
+{"pairs_with_both_annotations": 698, "examples": [{"arm": 0.5, "d7": 0.45, "acc_ratio": 0.9, "I_ratio": 1.188}, {"arm": 0.59, "d7": 0.545, "acc_ratio": 0.924, "I_ratio": 1.137}, {"arm": 0.67, "d7": 0.62, "acc_ratio": 0.925, "I_ratio": 1.135}, {"arm": 0.74, "d7": 0.69, "acc_ratio": 0.932, "I_ratio": 1.122}, {"arm": 0.805, "d7": 0.735, "acc_ratio": 0.913, "I_ratio": 1.164}, {"arm": 0.86, "d7": 0.805, "acc_ratio": 0.936, "I_ratio": 1.12}, {"arm": 0.915, "d7": 0.835, "acc_ratio": 0.913, "I_ratio": 1.176}, {"arm": 0.96, "d7": 0.895, "acc_ratio": 0.932, "I_ratio": 1.141}, {"arm": 1.0, "d7": 0.95, "acc_ratio": 0.95, "I_ratio": 1.12}]}
+{"accuracy": 0.5, "fano_bits_per_fact": 1.523, "accuracy_at_eta_0.90_if_R1_is_this": 0.45, "bits_at_that_accuracy": 1.282}
+{"accuracy": 0.6, "fano_bits_per_fact": 2.047, "accuracy_at_eta_0.90_if_R1_is_this": 0.54, "bits_at_that_accuracy": 1.726}
+{"accuracy": 0.75, "fano_bits_per_fact": 2.95, "accuracy_at_eta_0.90_if_R1_is_this": 0.675, "bits_at_that_accuracy": 2.48}
+{"accuracy": 0.9, "fano_bits_per_fact": 4.036, "accuracy_at_eta_0.90_if_R1_is_this": 0.81, "bits_at_that_accuracy": 3.357}
+{"accuracy": 0.95, "fano_bits_per_fact": 4.466, "accuracy_at_eta_0.90_if_R1_is_this": 0.855, "bits_at_that_accuracy": 3.684}
+{"accuracy": 1.0, "fano_bits_per_fact": 5.0, "accuracy_at_eta_0.90_if_R1_is_this": 0.9, "bits_at_that_accuracy": 4.036}

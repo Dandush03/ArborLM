@@ -1,0 +1,152 @@
+G2 intervals (own exact binomial, alpha = 0.001/8 two-sided): {2048: (36, 96), 8192: (198, 318), 32768: (905, 1147)}
+cells in run directory: 57
+expected cells (section I.7): 57
+matrix: the 57 registered cells, no more, no fewer
+distinct code identities across train and eval records: 1
+    {"config_sha256": "7cc2079174a8d0514000ab9d1137f995d54fdbd268be566a3e69980b96f48639", "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507", "source_sha256": "6407936e9b5faf933cf605306a9c12bf488e62cf7c022fd33403947e93c11b56", "spec_sha256": "db64b68a2e8620f84e17fe00dc82283f78f3d04e31b53bc984e7e473e980f9d9"}
+integrity checks done for 57 cells
+calibration_binding.json: {'calibration_failed_sizes': {}, 'calibration_selected_updates': 8192, 'calibration_sha256': '087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44'}
+calibration.json sha256: 087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44 == binding: True
+data_manifest sha256 attempt 2: e1bec1e37328ebf3b7d5d93874a2a4293ff12fa718ff7bd4815667d41593ad68 (ADR 15.8 states e1bec1e3...)
+data_manifest sha256 attempt 1: 8d73e555e8dd0d0b2f2d91880152f4c6a5371ca94c0dec65b26c1a5c16d8c308 (ADR 15.5 states 8d73e555...)
+number of stream/data hashes: 14 identical to attempt 1: True
+non-identity manifest fields identical to attempt 1: True
+g1.json identical to attempt 1: True
+data seeds: {"branch_hash": 182013, "calibration_stream": 182005, "clusters": 182003, "facts": 182001, "held_out": 182008, "lane_d_a": 182010, "lane_d_b": 182011, "mixed_cluster": 182009, "name": "p9i-registered", "null_seeds_a": [182015, 182016, 182017], "null_seeds_b": [182018, 182019, 182020], "panel_a": 182006, "panel_b": 182007, "permutation_tests": 182014, "r1_codes": 182012, "templates": 182002, "train
+G2 A/2048: 70/2048 inside (36, 96): True
+G2 A/8192: 259/8192 inside (198, 318): True
+G2 A/32768: 1077/32768 inside (905, 1147): True
+G2 A/unseen: 60/2048 inside (36, 96): True
+G2 B/2048: 62/2048 inside (36, 96): True
+G2 B/8192: 256/8192 inside (198, 318): True
+G2 B/32768: 1005/32768 inside (905, 1147): True
+G2 B/unseen: 66/2048 inside (36, 96): True
+G2 recomputed: True | record: True | G1: True | G4: True []
+   (B102 no-memory, reported, not a G2 test) A/2048: 64/2048 inside: True
+   (B102 no-memory, reported, not a G2 test) A/8192: 262/8192 inside: True
+   (B102 no-memory, reported, not a G2 test) A/32768: 1019/32768 inside: True
+   (B102 no-memory, reported, not a G2 test) A/unseen: 61/2048 inside: True
+   (B102 no-memory, reported, not a G2 test) B/2048: 79/2048 inside: True
+   (B102 no-memory, reported, not a G2 test) B/8192: 291/8192 inside: True
+   (B102 no-memory, reported, not a G2 test) B/32768: 1037/32768 inside: True
+   (B102 no-memory, reported, not a G2 test) B/unseen: 80/2048 inside: True
+
+cell                           A corr   A acc B corr   B acc unseenA unseenB leakage(own)
+A4-n16384-b101-o301-s1801         230  0.0281    230  0.0281      61      61 False
+A4-n16384-b101-o301-s1802         230  0.0281    230  0.0281      61      61 False
+A4-n16384-b102-o302-s1801         265  0.0323    281  0.0343      69      73 False
+A4-n4096-b101-o301-s1801           88  0.0430     81  0.0396      77      83 False
+A4-n4096-b101-o301-s1802           87  0.0425     82  0.0400      76      83 False
+A4-n65536-b101-o301-s1801         990  0.0302    990  0.0302      61      61 False
+A4-n65536-b101-o301-s1802         990  0.0302    990  0.0302      61      61 False
+A4E-n16384-b101-o301-s1801        230  0.0281    230  0.0281      61      61 False
+A4E-n16384-b101-o301-s1802        230  0.0281    230  0.0281      61      61 False
+BB-0-n16384-b101-o301-s1801       361  0.0441    365  0.0446      72      73 False
+BB-0-n16384-b101-o301-s1802       361  0.0441    365  0.0446      72      73 False
+BB-0-n4096-b101-o301-s1801        182  0.0889    171  0.0835      63      75 False
+BB-0-n4096-b101-o301-s1802        182  0.0889    171  0.0835      63      75 False
+BB-0-n65536-b101-o301-s1801      1106  0.0338   1090  0.0333      55      64 False
+BB-0-n65536-b101-o301-s1802      1106  0.0338   1090  0.0333      55      64 False
+BB-D-n16384-b101-o301-s1801       329  0.0402    328  0.0400      57      67 False
+BB-D-n16384-b101-o301-s1802       361  0.0441    360  0.0439      68      61 False
+BB-D-n65536-b101-o301-s1801       990  0.0302    990  0.0302      61      61 False
+BB-D-n65536-b101-o301-s1802       990  0.0302    990  0.0302      61      61 False
+BB-n16384-b101-o301-s1801         366  0.0447    374  0.0457      76      71 False
+BB-n16384-b101-o301-s1802         367  0.0448    361  0.0441      76      72 False
+BB-n16384-b102-o302-s1801         416  0.0508    398  0.0486      62      71 False
+BB-n4096-b101-o301-s1801         1140  0.5566   1113  0.5435      66      59 False
+BB-n4096-b101-o301-s1802         1329  0.6489   1330  0.6494      65      71 False
+BB-n65536-b101-o301-s1801        1097  0.0335   1120  0.0342      57      52 False
+BB-n65536-b101-o301-s1802        1099  0.0335   1124  0.0343      59      54 False
+D-n16384-b101-o301-s1801          292  0.0356    292  0.0356      75      75 False
+D-n16384-b101-o301-s1802          292  0.0356    292  0.0356      75      75 False
+D7-n16384-b101-o301-s1801        6445  0.7867   6413  0.7828      53      61 False
+D7-n16384-b101-o301-s1802        6534  0.7976   6571  0.8021      52      70 False
+D7-n16384-b102-o302-s1801        3599  0.4393   3614  0.4412      76      71 False
+D7-n65536-b101-o301-s1801        4279  0.1306   4259  0.1300      59      54 False
+D7-n65536-b101-o301-s1802        4165  0.1271   4188  0.1278      54      58 False
+E7-n16384-b101-o301-s1801         230  0.0281    230  0.0281      61      61 False
+E7-n16384-b101-o301-s1802         230  0.0281    230  0.0281      61      61 False
+N-n16384-b101-o301-s1801          229  0.0280    230  0.0281      61      61 False
+N-n16384-b101-o301-s1802          242  0.0295    228  0.0278      59      60 False
+N-n4096-b101-o301-s1801            85  0.0415     79  0.0386      70      81 False
+N-n4096-b101-o301-s1802            90  0.0439     83  0.0405      69      61 False
+N-n65536-b101-o301-s1801          990  0.0302    990  0.0302      61      61 False
+N-n65536-b101-o301-s1802         1018  0.0311    986  0.0301      64      62 False
+R1-n16384-b101-o301-s1801        8188  0.9995   8189  0.9996      52      51 False
+R1-n16384-b101-o301-s1802        8186  0.9993   8189  0.9996      50      54 False
+R1-n16384-b102-o302-s1801        8190  0.9998   8190  0.9998      53      55 False
+R1-n4096-b101-o301-s1801         2048  1.0000   2048  1.0000      66      64 False
+R1-n4096-b101-o301-s1802         2048  1.0000   2048  1.0000      69      73 False
+R1-n65536-b101-o301-s1801       31701  0.9674  31710  0.9677      72      70 False
+R1-n65536-b101-o301-s1802       31830  0.9714  31852  0.9720      70      63 False
+R2-n16384-b101-o301-s1801        8192  1.0000   8192  1.0000      60      66 False
+R2-n16384-b101-o301-s1802        8192  1.0000   8192  1.0000      60      66 False
+W7-n16384-b101-o301-s1801         230  0.0281    230  0.0281      61      61 False
+W7-n16384-b101-o301-s1802         230  0.0281    230  0.0281      61      61 False
+W7-n16384-b102-o302-s1801         265  0.0323    280  0.0342      69      75 False
+W7-n4096-b101-o301-s1801           84  0.0410     81  0.0396      80      81 False
+W7-n4096-b101-o301-s1802           84  0.0410     76  0.0371      80      81 False
+W7-n65536-b101-o301-s1801         990  0.0302    990  0.0302      61      61 False
+W7-n65536-b101-o301-s1802         990  0.0302    990  0.0302      61      61 False
+
+N      4096 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.0415, '1801/B': 0.03857, '1802/A': 0.04395, '1802/B': 0.04053}
+N     16384 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.02797, '1801/B': 0.02809, '1802/A': 0.02956, '1802/B': 0.02784}
+N     65536 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.03123, '1801/B': 0.03122, '1802/A': 0.03198, '1802/B': 0.03096}
+W7     4096 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.04102, '1801/B': 0.03955, '1802/A': 0.04102, '1802/B': 0.03711}
+W7    16384 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw {'A': 'FAILS', 'B': 'FAILS'} demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.02809, '1801/B': 0.02809, '1802/A': 0.0281, '1802/B': 0.02809}
+W7    65536 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.03123, '1801/B': 0.03122, '1802/A': 0.0311, '1802/B': 0.03108}
+E7    16384 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.02809, '1801/B': 0.02809, '1802/A': 0.0281, '1802/B': 0.02809}
+A4     4096 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.04297, '1801/B': 0.03955, '1802/A': 0.04248, '1802/B': 0.04004}
+A4    16384 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw {'A': 'FAILS', 'B': 'FAILS'} demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.02809, '1801/B': 0.02809, '1802/A': 0.0281, '1802/B': 0.02809}
+A4    65536 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.03123, '1801/B': 0.03122, '1802/A': 0.0311, '1802/B': 0.03108}
+A4E   16384 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 None -> INTERFACE_FAILS
+      eta: {'1801/A': 0.02809, '1801/B': 0.02809, '1802/A': 0.0281, '1802/B': 0.02809}
+BB     4096 raw {'1801/A': 'PARTIAL', '1801/B': 'PARTIAL', '1802/A': 'PARTIAL', '1802/B': 'PARTIAL'} B102 raw None demoted False BB-0 above G2 True -> INTERFACE_PARTIAL
+      eta: {'1801/A': 0.55664, '1801/B': 0.54346, '1802/A': 0.64893, '1802/B': 0.64941}
+BB    16384 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw {'A': 'FAILS', 'B': 'FAILS'} demoted False BB-0 above G2 True -> INTERFACE_FAILS
+      eta: {'1801/A': 0.0447, '1801/B': 0.04567, '1802/A': 0.04483, '1802/B': 0.04408}
+BB    65536 raw {'1801/A': 'FAILS', '1801/B': 'FAILS', '1802/A': 'FAILS', '1802/B': 'FAILS'} B102 raw None demoted False BB-0 above G2 False -> INTERFACE_FAILS
+      eta: {'1801/A': 0.0346, '1801/B': 0.03532, '1802/A': 0.03453, '1802/B': 0.03529}
+classes compared with classes.csv: 14 arm-size pairs
+
+dense comparison W7/D7 at 4096: no dense cell -> no annotation
+dense comparison W7/D7 at 16384: class INTERFACE_FAILS -> NOT COMPARED; ratios (descriptive) [0.0357, 0.0359, 0.0352, 0.035]
+dense comparison W7/D7 at 65536: class INTERFACE_FAILS -> NOT COMPARED; ratios (descriptive) [0.2314, 0.2324, 0.2377, 0.2364]
+dense comparison BB/BB-D at 4096: no dense cell -> no annotation
+dense comparison BB/BB-D at 16384: class INTERFACE_FAILS -> NOT COMPARED; ratios (descriptive) [1.1125, 1.1402, 1.0166, 1.0028]
+dense comparison BB/BB-D at 65536: class INTERFACE_FAILS -> NOT COMPARED; ratios (descriptive) [1.1081, 1.1313, 1.1101, 1.1354]
+backbone contrast E7/W7: not printed (both INTERFACE_FAILS); ratios (descriptive) [1.0, 1.0, 1.0, 1.0]
+backbone contrast A4E/A4: not printed (both INTERFACE_FAILS); ratios (descriptive) [1.0, 1.0, 1.0, 1.0]
+LM BB     4096: (before, after, rise) {1801: (2.3494, 4.2141, 0.7937), 1802: (2.3494, 4.4653, 0.9006)} -> LANGUAGE MODELLING DEGRADED
+LM BB    16384: (before, after, rise) {1801: (2.3494, 4.183, 0.7805), 1802: (2.3494, 4.188, 0.7825)} -> LANGUAGE MODELLING DEGRADED
+LM BB    65536: (before, after, rise) {1801: (2.3494, 4.3978, 0.8719), 1802: (2.3494, 4.4046, 0.8748)} -> LANGUAGE MODELLING DEGRADED
+LM BB-D  16384: (before, after, rise) {1801: (2.3494, 4.0632, 0.7294), 1802: (2.3494, 4.3798, 0.8642)} -> LANGUAGE MODELLING DEGRADED
+LM BB-D  65536: (before, after, rise) {1801: (2.3494, 3.9249, 0.6706), 1802: (2.3494, 4.011, 0.7073)} -> LANGUAGE MODELLING DEGRADED
+LM BB-0   4096: (before, after, rise) {1801: (2.3494, 4.6944, 0.9981), 1802: (2.3494, 4.6944, 0.9981)} -> LANGUAGE MODELLING DEGRADED
+LM BB-0  16384: (before, after, rise) {1801: (2.3494, 4.1838, 0.7808), 1802: (2.3494, 4.1838, 0.7808)} -> LANGUAGE MODELLING DEGRADED
+LM BB-0  65536: (before, after, rise) {1801: (2.3494, 4.5252, 0.9261), 1802: (2.3494, 4.5252, 0.9261)} -> LANGUAGE MODELLING DEGRADED
+LM BB B102 replicate (reported only): {'after_nats': 4.000984042882919, 'before_nats': 2.370128720998764, 'degraded': True, 'relative_rise': 0.6880872365433884}
+
+selection (own): NO_INTERFACE_SELECTED (step 4)
+selection (record): {"inconclusive_sizes": {}, "outcome": "NO_INTERFACE_SELECTED", "scope": ["no tested interface reached INTERFACE_WORKS at all three sizes within U updates; ADR-0017 stays blocked on this backbone"], "step": 4}
+
+ledger: 12 entries, total charged 2691.0 s of cap 14400 s; attempt-2 entries [('generate', 11.9), ('gates', 5.9), ('train', 1609.1), ('evaluate', 97.9), ('analyze', 0.6), ('report', 0.6)]
+attempt-2 stages charged once each: True
+manifest gates: status COMPLETE tasks 1 started 2026-11-15T02:04:00.558351+00:00 finished 2026-11-15T02:04:06.506954+00:00 cap 600.0 workers 1 mode registered
+manifest train: status COMPLETE tasks 57 started 2026-11-15T02:04:10.060690+00:00 finished 2026-11-15T02:30:59.143460+00:00 cap 3600.0 workers 6 mode registered
+manifest evaluate: status COMPLETE tasks 57 started 2026-11-15T02:31:09.471099+00:00 finished 2026-11-15T02:32:47.335458+00:00 cap 900.0 workers 6 mode registered
+manifest analyze: status COMPLETE tasks 1 started 2026-11-15T02:32:48.279747+00:00 finished 2026-11-15T02:32:48.860657+00:00 cap 300.0 workers 1 mode registered
+manifest report: status COMPLETE tasks 1 started 2026-11-15T02:32:49.749201+00:00 finished 2026-11-15T02:32:50.336911+00:00 cap 300.0 workers 1 mode registered
+
+TOTAL DIFFERENCES: 0

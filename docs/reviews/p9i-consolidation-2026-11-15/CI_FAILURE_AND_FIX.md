@@ -1,0 +1,11 @@
+# PR #6 first CI run failed on two platform-dependent P9 tests — record and fix (2026-11-15 UTC)
+
+- **What failed** (CI run 43677006179 on `413d747`, Linux x86-64; pytest 2 failed, 1,735 passed, 12 skipped; ruff, mypy and the smoke test passed):
+  1. `tests/test_p9_model.py::test_chunked_equals_unchunked[flat]` — the memory scores computed in row blocks were not bit-identical to the unblocked computation. The selected slots and candidate ids were identical.
+  2. `tests/test_p9_sim.py::test_65536_slot_smoke_time_and_memory` — peak resident memory 1,138,970,624 bytes against a 1 GiB bound (6.1% over).
+- Both pass on macOS arm64, where every P9 and P9-I calibration, rehearsal and registered run was made. CI had never run on a P9 commit before this pull request. The integration owner (Opus 5.5) stopped and did not re-run or merge.
+- **Lead's reading.** Both assertions state properties of the platform of record, not of the method: bit equality between two orders of floating-point products depends on the BLAS build, and peak resident memory depends on the allocator. Neither is a registered threshold. The cause of the rounding difference was not proven beyond that.
+- **Fix (this commit, tests only):** on macOS the two assertions are unchanged (bit for bit; 1 GiB). On other platforms the first asserts identical selections and candidates and scores, candidate scores, logits and loss equal within 1e-6 / 1e-5 absolute; the second uses a 1.25 GiB bound, with the measured Linux figure in a comment. No file under `studies/`, `src/`, `configs/` or `results/` changed; no record changed; the frozen code identities of P9-I cover `studies/p9i/*.py` and the imported `studies/p9/*.py`, not the tests.
+- **What this means for the records.** Registered P9-I numbers were produced and independently recomputed on macOS arm64. Re-running them on another platform may differ at rounding level in the memory scores; bit-identical reproduction is claimed for the platform of record only. This limitation is stated in the pull request.
+- The README line added in `413d747` said "no learned query interface addressed the memory", which is broader than the registered result (the attention-trained arm was partial at 4,096 slots). It now uses the registered wording.
+- Astra review: NOT_PERFORMED.

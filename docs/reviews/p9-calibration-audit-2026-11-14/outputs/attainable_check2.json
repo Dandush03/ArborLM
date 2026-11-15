@@ -1,0 +1,21 @@
+{
+ "queries": 4096,
+ "b101": {
+  "record_mean": 0.273948609828949,
+  "sphere_ceiling_mean": 0.2750532089668926,
+  "ball_ceiling_mean": 0.2747617833989443,
+  "record_fraction_ge_0.95": 0.03564453125,
+  "share_answer_at_sign": 0.03564453125,
+  "record_sigma_mean": 0.42049139738082886,
+  "sigma_ceiling_mean": 0.5504835131506358
+ },
+ "b102": {
+  "record_mean": 0.2529868185520172,
+  "sphere_ceiling_mean": 0.2539256542444243,
+  "ball_ceiling_mean": 0.2536567456362072,
+  "record_fraction_ge_0.95": 0.03564453125,
+  "share_answer_at_sign": 0.03564453125,
+  "record_sigma_mean": 0.4003891944885254,
+  "sigma_ceiling_mean": 0.5238315108803822
+ }
+}

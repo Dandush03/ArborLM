@@ -1,0 +1,22 @@
+{
+ "lane_d_a_A": {
+  "mine": 139,
+  "facts": 4096,
+  "recorded": 139
+ },
+ "lane_d_a_B": {
+  "mine": 132,
+  "facts": 4096,
+  "recorded": 132
+ },
+ "lane_d_b_A": {
+  "mine": 142,
+  "facts": 4096,
+  "recorded": 142
+ },
+ "lane_d_b_B": {
+  "mine": 128,
+  "facts": 4096,
+  "recorded": 128
+ }
+}

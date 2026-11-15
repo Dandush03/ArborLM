@@ -1,0 +1,10 @@
+== pool run 1 00:45:39
+36 passed, 1 warning in 10.34s
+== pool run 2 00:45:52
+36 passed, 1 warning in 10.31s
+== pool run 3 00:46:04
+36 passed, 1 warning in 10.59s
+== pool run 4 00:46:15
+36 passed, 1 warning in 10.47s
+== pool run 5 00:46:26
+36 passed, 1 warning in 10.26s

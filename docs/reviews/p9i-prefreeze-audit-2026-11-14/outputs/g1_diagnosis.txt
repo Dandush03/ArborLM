@@ -1,0 +1,44 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+draw 0 (rehearsal-0): trained 32768, size 34816
+  [real size] Panel A rows 4352; rows with >=1 fact < 2048: 256 (0.0588); rows with all 8 < 2048: 256; first row holding such a fact: 15; median within-row id spread 14
+  [real size] first 8 rows: ids min 4000 max 28845; facts < 2048: 0 of 64
+  OLD harness: LUT hits 0 of 64; R2 reach (mine) {'addition.values': False, 'addition.wo': False, 'addition.gate': False} stray []; implementer gradient_reach agrees: True
+  NEW harness: ids min 273 max 1775; LUT hits 64 of 64; LUT slot == fact id for all 64: True
+    N     new: all reached True (5 trainable) stray [] | old: all reached True
+    W7    new: all reached True (5 trainable) stray [] | old: all reached True
+    E7    new: all reached True (5 trainable) stray [] | old: all reached True
+    A4    new: all reached True (8 trainable) stray [] | old: all reached True
+    A4E   new: all reached True (8 trainable) stray [] | old: all reached True
+    R1    new: all reached True (4 trainable) stray [] | old: all reached True
+    R2    new: all reached True (3 trainable) stray [] | old: all reached False
+    D     new: all reached True (3 trainable) stray [] | old: all reached True
+    D7    new: all reached True (3 trainable) stray [] | old: all reached True
+    BB    new: all reached True (9 trainable) stray [] | old: all reached True
+    BB-D  new: all reached True (7 trainable) stray [] | old: all reached True
+    BB-0  new: all reached True (4 trainable) stray [] | old: all reached True
+draw 2 (rehearsal-2): trained 32768, size 34816
+  [real size] Panel A rows 4352; rows with >=1 fact < 2048: 256 (0.0588); rows with all 8 < 2048: 256; first row holding such a fact: 15; median within-row id spread 14
+  [real size] first 8 rows: ids min 2224 max 32349; facts < 2048: 0 of 64
+  OLD harness: LUT hits 0 of 64; R2 reach (mine) {'addition.values': False, 'addition.wo': False, 'addition.gate': False} stray []; implementer gradient_reach agrees: True
+  NEW harness: ids min 371 max 1167; LUT hits 64 of 64; LUT slot == fact id for all 64: True
+    N     new: all reached True (5 trainable) stray [] | old: all reached True
+    W7    new: all reached True (5 trainable) stray [] | old: all reached True
+    E7    new: all reached True (5 trainable) stray [] | old: all reached True
+    A4    new: all reached True (8 trainable) stray [] | old: all reached True
+    A4E   new: all reached True (8 trainable) stray [] | old: all reached True
+    R1    new: all reached True (4 trainable) stray [] | old: all reached True
+    R2    new: all reached True (3 trainable) stray [] | old: all reached False
+    D     new: all reached True (3 trainable) stray [] | old: all reached True
+    D7    new: all reached True (3 trainable) stray [] | old: all reached True
+    BB    new: all reached True (9 trainable) stray [] | old: all reached True
+    BB-D  new: all reached True (7 trainable) stray [] | old: all reached True
+    BB-0  new: all reached True (4 trainable) stray [] | old: all reached True
+DRY profile at dd8b205 (512 trained): trained 512, cell facts 128 (0.2500 of trained; registered 4,096-slot proportion 0.0625)
+  [at dd8b205 (512 trained)] Panel A rows 72; rows with >=1 fact < 128: 16 (0.2222); rows with all 8 < 128: 16; first row holding such a fact: 3; median within-row id spread 14
+  [at dd8b205 (512 trained)] first 8 rows: ids min 16 max 510; facts < 128: 24 of 64
+  OLD harness on this profile: R2 all reached True
+DRY profile at 0e0fbfb (2,048 trained): trained 2048, cell facts 128 (0.0625 of trained; registered 4,096-slot proportion 0.0625)
+  [at 0e0fbfb (2,048 trained)] Panel A rows 264; rows with >=1 fact < 128: 16 (0.0606); rows with all 8 < 128: 16; first row holding such a fact: 5; median within-row id spread 14
+  [at 0e0fbfb (2,048 trained)] first 8 rows: ids min 32 max 1822; facts < 128: 8 of 64
+  OLD harness on this profile: R2 all reached True

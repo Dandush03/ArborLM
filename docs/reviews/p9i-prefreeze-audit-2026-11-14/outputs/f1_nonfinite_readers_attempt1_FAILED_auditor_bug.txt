@@ -1,0 +1,276 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+== chance intervals (mine vs implementer vs attempt-1 record)
+  [ok] interval n=2048: mine (36, 96), implementer (36, 96), level 0.999875
+  [ok] interval n=8192: mine (198, 318), implementer (198, 318), level 0.999875
+  [ok] interval n=32768: mine (905, 1147), implementer (905, 1147), level 0.999875
+  [ok] attempt-1 G2 A/2048: correct 70 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 A/8192: correct 259 of 8192, interval [198, 318]
+  [ok] attempt-1 G2 A/32768: correct 1077 of 32768, interval [905, 1147]
+  [ok] attempt-1 G2 A/unseen: correct 60 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 B/2048: correct 62 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 B/8192: correct 256 of 8192, interval [198, 318]
+  [ok] attempt-1 G2 B/32768: correct 1005 of 32768, interval [905, 1147]
+  [ok] attempt-1 G2 B/unseen: correct 66 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 family passed and 8 tests
+registry: 57 cells; facts per size {4096: 2048, 16384: 8192, 65536: 32768}; U 8192; calibration /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-calibration-2026-11-14/calibration.json sha256 087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44
+== scenario S1_bb_works
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S1_bb_works: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome BB step 1, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_WORKS", "4096": "INTERFACE_WORKS", "65536": "INTERFACE_WORKS"}, "E7": {"16384": "INTERFACE_FAILS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}}
+  [ok] S1_bb_works: outcome: got 'BB', expected 'BB'
+  [ok] S1_bb_works: step: got 1, expected 1
+  [ok] S1_bb_works: status: got 'COMPLETE', expected 'COMPLETE'
+  [ok] S1_bb_works: interpretable: got True, expected True
+  [ok] S1_bb_works: cells_read: got 57, expected 57
+  [ok] S1_bb_works: class:BB:4096: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S1_bb_works: class:BB:16384: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S1_bb_works: class:BB:65536: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S1_bb_works: class:W7:16384: got 'INTERFACE_FAILS', expected 'INTERFACE_FAILS'
+  [ok] S1_bb_works: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S1_bb_works: NOT INTERPRETED banner iff not interpretable
+  [ok] S1_bb_works: outcome printed
+  [ok] S1: BB dense comparison BEATS DENSE, LM preserved: {"dense_comparison": "BEATS DENSE", "language_modelling": "LANGUAGE MODELLING PRESERVED"}
+  [ok] S1: backbone contrasts not printed (both arms fail)
+== scenario S2_only_w7_works
+{"status": "COMPLETE", "outcome": "W7"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S2_only_w7_works: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome W7 step 3, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "E7": {"16384": "INTERFACE_WORKS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_WORKS", "4096": "INTERFACE_WORKS", "65536": "INTERFACE_WORKS"}}
+  [ok] S2_only_w7_works: outcome: got 'W7', expected 'W7'
+  [ok] S2_only_w7_works: step: got 3, expected 3
+  [ok] S2_only_w7_works: status: got 'COMPLETE', expected 'COMPLETE'
+  [ok] S2_only_w7_works: interpretable: got True, expected True
+  [ok] S2_only_w7_works: class:W7:4096: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S2_only_w7_works: class:W7:65536: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S2_only_w7_works: class:BB:16384: got 'INTERFACE_FAILS', expected 'INTERFACE_FAILS'
+  [ok] S2_only_w7_works: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S2_only_w7_works: NOT INTERPRETED banner iff not interpretable
+  [ok] S2_only_w7_works: outcome printed
+  [ok] S2: contrast E7/W7 ADDS NOTHING
+  [ok] S2: scope
+  [ok] S2: W7 dense comparison vs D7 BEATS DENSE
+== scenario S3_none
+{"status": "COMPLETE", "outcome": "NO_INTERFACE_SELECTED"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S3_none: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome NO_INTERFACE_SELECTED step 4, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "E7": {"16384": "INTERFACE_FAILS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}}
+  [ok] S3_none: outcome: got 'NO_INTERFACE_SELECTED', expected 'NO_INTERFACE_SELECTED'
+  [ok] S3_none: step: got 4, expected 4
+  [ok] S3_none: status: got 'COMPLETE', expected 'COMPLETE'
+  [ok] S3_none: interpretable: got True, expected True
+  [ok] S3_none: class:A4:4096: got 'INTERFACE_FAILS', expected 'INTERFACE_FAILS'
+  [ok] S3_none: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S3_none: NOT INTERPRETED banner iff not interpretable
+  [ok] S3_none: outcome printed
+== scenario S4_65536_not_evaluated
+{"status": "COMPLETE", "outcome": "INCONCLUSIVE"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S4_65536_not_evaluated: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome INCONCLUSIVE step 0, inconclusive {'65536': 'NOT_EVALUATED'}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "NOT_EVALUATED"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_WORKS", "4096": "INTERFACE_WORKS", "65536": "NOT_EVALUATED"}, "E7": {"16384": "INTERFACE_FAILS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "NOT_EVALUATED"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "NOT_EVALUATED"}}
+  [ok] S4_65536_not_evaluated: outcome: got 'INCONCLUSIVE', expected 'INCONCLUSIVE'
+  [ok] S4_65536_not_evaluated: step: got 0, expected 0
+  [ok] S4_65536_not_evaluated: inconclusive: got {'65536': 'NOT_EVALUATED'}, expected {'65536': 'NOT_EVALUATED'}
+  [ok] S4_65536_not_evaluated: class:BB:65536: got 'NOT_EVALUATED', expected 'NOT_EVALUATED'
+  [ok] S4_65536_not_evaluated: class:BB:16384: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S4_65536_not_evaluated: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S4_65536_not_evaluated: NOT INTERPRETED banner iff not interpretable
+  [ok] S4_65536_not_evaluated: outcome printed
+== scenario S5_missing_cell
+{"status": "INCOMPLETE", "outcome": "NOT_INTERPRETED (INCOMPLETE)"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S5_missing_cell: analyze exit 0 and report exit 0: analyze 0, report 0
+  status INCOMPLETE, interpretable False, outcome NOT_INTERPRETED (INCOMPLETE) step None, inconclusive {}, missing 1, cells read 56, updates 8192
+  classes {}
+  [ok] S5_missing_cell: outcome: got 'NOT_INTERPRETED (INCOMPLETE)', expected 'NOT_INTERPRETED (INCOMPLETE)'
+  [ok] S5_missing_cell: status: got 'INCOMPLETE', expected 'INCOMPLETE'
+  [ok] S5_missing_cell: interpretable: got False, expected False
+  [ok] S5_missing_cell: missing: got ['BB-0-n65536-b101-o301-s1802'], expected ['BB-0-n65536-b101-o301-s1802']
+  [ok] S5_missing_cell: cells_read: got 56, expected 56
+  [ok] S5_missing_cell: report rows: cells.csv rows 56, classes.csv rows 0
+  [ok] S5_missing_cell: NOT INTERPRETED banner iff not interpretable
+  [ok] S5_missing_cell: outcome printed
+== scenario S6_b102_demotes_bb_a4_works
+{"status": "COMPLETE", "outcome": "A4"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S6_b102_demotes_bb_a4_works: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome A4 step 2, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_WORKS", "4096": "INTERFACE_WORKS", "65536": "INTERFACE_WORKS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERMEDIATE", "4096": "INTERFACE_WORKS", "65536": "INTERFACE_WORKS"}, "E7": {"16384": "INTERFACE_FAILS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}}
+  [ok] S6_b102_demotes_bb_a4_works: outcome: got 'A4', expected 'A4'
+  [ok] S6_b102_demotes_bb_a4_works: step: got 2, expected 2
+  [ok] S6_b102_demotes_bb_a4_works: class:BB:16384: got 'INTERMEDIATE', expected 'INTERMEDIATE'
+  [ok] S6_b102_demotes_bb_a4_works: class:BB:4096: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S6_b102_demotes_bb_a4_works: class:A4:16384: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S6_b102_demotes_bb_a4_works: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S6_b102_demotes_bb_a4_works: NOT INTERPRETED banner iff not interpretable
+  [ok] S6_b102_demotes_bb_a4_works: outcome printed
+== scenario S7_model_stores_facts
+{"status": "COMPLETE", "outcome": "NO_INTERFACE_SELECTED"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S7_model_stores_facts: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome NO_INTERFACE_SELECTED step 4, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_WORKS", "4096": "INTERFACE_WORKS", "65536": "MODEL_STORES_FACTS"}, "E7": {"16384": "INTERFACE_FAILS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}}
+  [ok] S7_model_stores_facts: outcome: got 'NO_INTERFACE_SELECTED', expected 'NO_INTERFACE_SELECTED'
+  [ok] S7_model_stores_facts: class:BB:65536: got 'MODEL_STORES_FACTS', expected 'MODEL_STORES_FACTS'
+  [ok] S7_model_stores_facts: class:BB:4096: got 'INTERFACE_WORKS', expected 'INTERFACE_WORKS'
+  [ok] S7_model_stores_facts: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S7_model_stores_facts: NOT INTERPRETED banner iff not interpretable
+  [ok] S7_model_stores_facts: outcome printed
+  [ok] S7: MODEL_STORES_FACTS -> NOT COMPARED; LM DEGRADED: {"dense_comparison": "NOT COMPARED", "language_modelling": "LANGUAGE MODELLING DEGRADED"}
+== scenario S8_g2_failed_leakage
+{"status": "COMPLETE", "outcome": "NOT_INTERPRETED"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S8_g2_failed_leakage: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable False, outcome NOT_INTERPRETED step None, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_WORKS", "4096": "INTERFACE_WORKS", "65536": "INTERFACE_WORKS"}, "E7": {"16384": "INTERFACE_FAILS"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}}
+  [ok] S8_g2_failed_leakage: outcome: got 'NOT_INTERPRETED', expected 'NOT_INTERPRETED'
+  [ok] S8_g2_failed_leakage: status: got 'COMPLETE', expected 'COMPLETE'
+  [ok] S8_g2_failed_leakage: interpretable: got False, expected False
+  [ok] S8_g2_failed_leakage: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S8_g2_failed_leakage: NOT INTERPRETED banner iff not interpretable
+  [ok] S8_g2_failed_leakage: outcome printed
+  [ok] S8: reasons: ['G2 failed', 'LEAKAGE: W7-n4096-b101-o301-s1801/A']
+== scenario S9_zero_denominator
+{"status": "COMPLETE", "outcome": "NO_INTERFACE_SELECTED"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] S9_zero_denominator: analyze exit 0 and report exit 0: analyze 0, report 0
+  status COMPLETE, interpretable True, outcome NO_INTERFACE_SELECTED step 4, inconclusive {}, missing 0, cells read 57, updates 8192
+  classes {"A4": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "A4E": {"16384": "INTERFACE_FAILS"}, "BB": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "E7": {"16384": "INTERFACE_PARTIAL"}, "N": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_FAILS"}, "W7": {"16384": "INTERFACE_FAILS", "4096": "INTERFACE_FAILS", "65536": "INTERFACE_PARTIAL"}}
+  [ok] S9_zero_denominator: outcome: got 'NO_INTERFACE_SELECTED', expected 'NO_INTERFACE_SELECTED'
+  [ok] S9_zero_denominator: class:W7:65536: got 'INTERFACE_PARTIAL', expected 'INTERFACE_PARTIAL'
+  [ok] S9_zero_denominator: report rows: cells.csv rows 57, classes.csv rows 14
+  [ok] S9_zero_denominator: NOT INTERPRETED banner iff not interpretable
+  [ok] S9_zero_denominator: outcome printed
+== S10 pool path (cmd_analyze, cmd_report) on S1-like inputs
+{"stage": "analyze", "status": "COMPLETE", "tasks": 1, "manifest": "$SCRATCH/f/f1run/g3_import_side_effect/S10_pool/analyze/manifest.json", "charged_seconds": 0.6}
+{"stage": "report", "status": "COMPLETE", "tasks": 1, "manifest": "$SCRATCH/f/f1run/g3_import_side_effect/S10_pool/report/manifest.json", "charged_seconds": 0.6}
+  [ok] S10: cmd_analyze 0, cmd_report 0, outcome BB, analyze manifest COMPLETE: analyze 0, report 0
+  [ok] S10: failed_tasks empty although the analyze/report manifests are now in the run directory: []
+
+FAILED CHECKS: 0 []
+
+######## f1 (above: g3 re-executed on import, ignore)
+
+== L_pinf: BB 16,384 s1801 relative_rise = '+inf'; expected DEGRADED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_pinf: analyze 0, report 0
+  [ok] L_pinf: label at 16384: got LANGUAGE MODELLING DEGRADED
+  [ok] L_pinf: 4096 / 65536 preserved
+  [ok] L_pinf: stored rise: stored '+inf'
+  [ok] L_pinf: selection BB step 1
+  [ok] L_pinf: classes equal the first case
+  [ok] L_pinf: every JSON file strict (no NaN/Infinity)
+  [ok] L_pinf: classes.csv BB 16384 column: WORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING DEGRADED
+  [ok] L_pinf: cells.csv lm_relative_rise: '+inf'
+  [ok] L_pinf: RESULTS.md BB 16384 row
+== L_minf: BB 16,384 s1801 relative_rise = '-inf'; expected DEGRADED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_minf: analyze 0, report 0
+  [ok] L_minf: label at 16384: got LANGUAGE MODELLING DEGRADED
+  [ok] L_minf: 4096 / 65536 preserved
+  [ok] L_minf: stored rise: stored '-inf'
+  [ok] L_minf: selection BB step 1
+  [ok] L_minf: classes equal the first case
+  [ok] L_minf: every JSON file strict (no NaN/Infinity)
+  [ok] L_minf: classes.csv BB 16384 column: WORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING DEGRADED
+  [ok] L_minf: cells.csv lm_relative_rise: '-inf'
+  [ok] L_minf: RESULTS.md BB 16384 row
+== L_nan: BB 16,384 s1801 relative_rise = 'nan'; expected DEGRADED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_nan: analyze 0, report 0
+  [ok] L_nan: label at 16384: got LANGUAGE MODELLING DEGRADED
+  [ok] L_nan: 4096 / 65536 preserved
+  [ok] L_nan: stored rise: stored 'nan'
+  [ok] L_nan: selection BB step 1
+  [ok] L_nan: classes equal the first case
+  [ok] L_nan: every JSON file strict (no NaN/Infinity)
+  [ok] L_nan: classes.csv BB 16384 column: WORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING DEGRADED
+  [ok] L_nan: cells.csv lm_relative_rise: 'nan'
+  [ok] L_nan: RESULTS.md BB 16384 row
+== L_None: BB 16,384 s1801 relative_rise = None; expected DEGRADED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_None: analyze 0, report 0
+  [ok] L_None: label at 16384: got LANGUAGE MODELLING DEGRADED
+  [ok] L_None: 4096 / 65536 preserved
+  [ok] L_None: stored rise: stored 'nan'
+  [ok] L_None: selection BB step 1
+  [ok] L_None: classes equal the first case
+  [ok] L_None: every JSON file strict (no NaN/Infinity)
+  [ok] L_None: classes.csv BB 16384 column: WORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING DEGRADED
+  [ok] L_None: cells.csv lm_relative_rise: ''
+  [ok] L_None: RESULTS.md BB 16384 row
+== L_0.05: BB 16,384 s1801 relative_rise = 0.05; expected PRESERVED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_0.05: analyze 0, report 0
+  [ok] L_0.05: label at 16384: got LANGUAGE MODELLING PRESERVED
+  [ok] L_0.05: 4096 / 65536 preserved
+  [ok] L_0.05: stored rise: stored 0.05
+  [ok] L_0.05: selection BB step 1
+  [ok] L_0.05: classes equal the first case
+  [ok] L_0.05: every JSON file strict (no NaN/Infinity)
+  [ok] L_0.05: classes.csv BB 16384 column: ORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING PRESERVED
+  [ok] L_0.05: cells.csv lm_relative_rise: '0.05'
+  [ok] L_0.05: RESULTS.md BB 16384 row
+== L_0.05000000000000001: BB 16,384 s1801 relative_rise = 0.05000000000000001; expected DEGRADED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_0.05000000000000001: analyze 0, report 0
+  [ok] L_0.05000000000000001: label at 16384: got LANGUAGE MODELLING DEGRADED
+  [ok] L_0.05000000000000001: 4096 / 65536 preserved
+  [ok] L_0.05000000000000001: stored rise: stored 0.05000000000000001
+  [ok] L_0.05000000000000001: selection BB step 1
+  [ok] L_0.05000000000000001: classes equal the first case
+  [ok] L_0.05000000000000001: every JSON file strict (no NaN/Infinity)
+  [ok] L_0.05000000000000001: classes.csv BB 16384 column: WORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING DEGRADED
+  [ok] L_0.05000000000000001: cells.csv lm_relative_rise: '0.05000000000000001'
+  [ok] L_0.05000000000000001: RESULTS.md BB 16384 row
+== L_0.0: BB 16,384 s1801 relative_rise = 0.0; expected PRESERVED
+{"status": "COMPLETE", "outcome": "BB"}
+{"written": ["classes.csv", "cells.csv", "RESULTS.md", "results.json"]}
+  [ok] L_0.0: analyze 0, report 0
+  [ok] L_0.0: label at 16384: got LANGUAGE MODELLING PRESERVED
+  [ok] L_0.0: 4096 / 65536 preserved
+  [ok] L_0.0: stored rise: stored 0.0
+  [ok] L_0.0: selection BB step 1
+  [ok] L_0.0: classes equal the first case
+  [ok] L_0.0: every JSON file strict (no NaN/Infinity)
+  [ok] L_0.0: classes.csv BB 16384 column: ORKS""}",True,False,BEATS DENSE,LANGUAGE MODELLING PRESERVED
+  [ok] L_0.0: cells.csv lm_relative_rise: '0.0'
+  [ok] L_0.0: RESULTS.md BB 16384 row
+== E: evaluate.language_modelling + evaluate._finite on chosen losses
+  [ok] E (2.0, inf): {"before_nats": 2.0, "after_nats": "+inf", "relative_rise": "+inf", "degraded": true}
+  [ok] E (2.0, nan): {"before_nats": 2.0, "after_nats": "nan", "relative_rise": "nan", "degraded": true}
+  [ok] E (inf, inf): {"before_nats": "+inf", "after_nats": "+inf", "relative_rise": "nan", "degraded": true}
+  [ok] E (nan, 2.0): {"before_nats": "nan", "after_nats": 2.0, "relative_rise": "nan", "degraded": true}
+  [ok] E (2.0, -inf): {"before_nats": 2.0, "after_nats": "-inf", "relative_rise": "-inf", "degraded": true}
+  [ok] E (2.0, 2.1): {"before_nats": 2.0, "after_nats": 2.1, "relative_rise": 0.050000000000000044, "degraded": true}
+  [ok] E (2.0, 2.0): {"before_nats": 2.0, "after_nats": 2.0, "relative_rise": 0.0, "degraded": false}
+  [ok] E (2.0, 1.0): {"before_nats": 2.0, "after_nats": 1.0, "relative_rise": -0.5, "degraded": false}
+  [ok] E (1.7, 1.785): {"before_nats": 1.7, "after_nats": 1.785, "relative_rise": 0.04999999999999998, "degraded": false}
+  [ok] E (1.7, 1.7850001): {"before_nats": 1.7, "after_nats": 1.7850001, "relative_rise": 0.050000058823529425, "degraded": true}
+== Q: finite equivalence HEAD vs dd8b205 (workers on identical inputs)
+  [ok] Q S1_bb_works: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S2_only_w7_works: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S3_none: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S4_65536_not_evaluated: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S5_missing_cell: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S6_b102_demotes_bb_a4_works: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S7_model_stores_facts: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+  [ok] Q S8_g2_failed_leakage: dd8b205 exit [0, 0]; analysis / RESULTS.md / classes.csv / cells.csv / results.json equal: [True, True, True, True, True]
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/f1_nonfinite_readers.py", line 131, in <module>
+    shutil.copytree(src, old, ignore=shutil.ignore_patterns("analysis.json", "results"))
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/shutil.py", line 598, in copytree
+    with os.scandir(src) as itr:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '$SCRATCH/f/f1run/L_0.05'

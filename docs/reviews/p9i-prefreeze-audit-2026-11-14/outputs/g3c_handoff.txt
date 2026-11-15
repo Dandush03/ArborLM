@@ -1,0 +1,66 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+P9I stage REFUSED: refused: the calibration record differs (hash, selected U or failed sizes) from the one the train stage recorded
+{"stage": "generate", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3c_run1/run/generate/manifest.json", "charged_seconds": 11.9}
+[ok] generate: exit 0, seed set p9i-test-0
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3c_run1/run/gates/manifest.json", "charged_seconds": 6.1}
+[ok] gates (fixed harness, real proportion, synthetic backbone): exit 0, defects []
+{"stage": "train", "status": "COMPLETE", "tasks": 2, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3c_run1/run/train/manifest.json", "charged_seconds": 76.5}
+[ok] train exit: exit 0
+[ok] calibration_binding.json: {"calibration_failed_sizes": {}, "calibration_selected_updates": 8192, "calibration_sha256": "087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44"}
+[ok] updates.json
+[ok] train manifest: exactly the two cells, completed: [('N-n4096-b101-o301-s1801', 'completed'), ('BB-n4096-b101-o301-s1801', 'completed')]
+[ok] N-n4096-b101-o301-s1801: snapshot dir name
+[ok] N-n4096-b101-o301-s1801: train.json U, facts, mode, snapshot hash: facts 2048, keys ['8192'], unique facts 2048
+[ok] N-n4096-b101-o301-s1801: train.json carries the binding
+[ok] N-n4096-b101-o301-s1801: updates.jsonl lines
+[ok] BB-n4096-b101-o301-s1801: snapshot dir name
+[ok] BB-n4096-b101-o301-s1801: train.json U, facts, mode, snapshot hash: facts 2048, keys ['8192'], unique facts 2048
+[ok] BB-n4096-b101-o301-s1801: train.json carries the binding
+[ok] BB-n4096-b101-o301-s1801: updates.jsonl lines
+{"stage": "evaluate", "status": "COMPLETE", "tasks": 2, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3c_run1/run/evaluate/manifest.json", "charged_seconds": 2.3}
+[ok] evaluate exit: exit 0
+[ok] N-n4096-b101-o301-s1801: eval path and record: cells/N-n4096-b101-o301-s1801/eval/u0008192/eval.json
+[ok] N-n4096-b101-o301-s1801: panel fact counts
+[ok] N-n4096-b101-o301-s1801: language-modelling record iff BB
+[ok] BB-n4096-b101-o301-s1801: eval path and record: cells/BB-n4096-b101-o301-s1801/eval/u0008192/eval.json
+[ok] BB-n4096-b101-o301-s1801: panel fact counts
+[ok] BB-n4096-b101-o301-s1801: language-modelling record iff BB
+[ok] evaluate with a different calibration file is REFUSED: exit 2
+{"stage": "evaluate", "status": "INCOMPLETE", "tasks": 2, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3c_run1/run_tampered/evaluate/manifest.json", "charged_seconds": 1.0}
+[ok] evaluate against a tampered data manifest: every task fails, no eval written: exit 1
+
+FAILED CHECKS: 0 []
+ledger (private): [
+{
+"run": "run",
+"seconds": 11.944532790977973,
+"stage": "generate",
+"utc": "2026-11-15T00:40:48.404189+00:00"
+},
+{
+"run": "run",
+"seconds": 6.062902749981731,
+"stage": "gates",
+"utc": "2026-11-15T00:40:54.477774+00:00"
+},
+{
+"run": "run",
+"seconds": 76.47356537502492,
+"stage": "train",
+"utc": "2026-11-15T00:42:10.964488+00:00"
+},
+{
+"run": "run",
+"seconds": 2.2548394160112366,
+"stage": "evaluate",
+"utc": "2026-11-15T00:42:13.235578+00:00"
+},
+{
+"run": "run_tampered",
+"seconds": 0.9660437920247205,
+"stage": "evaluate",
+"utc": "2026-11-15T00:42:14.230237+00:00"
+}
+]
+PYTHONPATH=. uv run --locked python $D/g3c_handoff.py $S  166.19s user 8.78s system 177% cpu 1:38.34 total

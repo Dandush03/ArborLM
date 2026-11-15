@@ -1,0 +1,7 @@
+CAL-R2-n4096-b101-o301-s1791 updates.jsonl lines: 16384 | first/last update: 1 16384
+  snapshot 1024 -> update 1025: auditor 32-way 1.2098699 vs recorded 1.2098697 (diff 1.2e-07); 256-way 4.370259 vs 4.370259; clip norm 0.095
+  snapshot 8192 -> update 8193: auditor 32-way 0.6751066 vs recorded 0.6751066 (diff 0.0e+00); 256-way 2.800752 vs 2.800752; clip norm 0.004
+CAL-R1-n4096-b102-o302-s1791 updates.jsonl lines: 16384 | first/last update: 1 16384
+  snapshot 2048 -> update 2049: auditor 32-way 0.9882945 vs recorded 0.9882945 (diff 0.0e+00); 256-way 3.479286 vs 3.479286; clip norm 0.064
+CAL-R1-n16384-b101-o301-s1792 updates.jsonl lines: 16384 | first/last update: 1 16384
+  snapshot 4096 -> update 4097: auditor 32-way 0.9193992 vs recorded 0.9193992 (diff 0.0e+00); 256-way 3.516525 vs 3.516525; clip norm 0.079

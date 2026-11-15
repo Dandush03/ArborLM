@@ -1,0 +1,10 @@
+arm   max|logit diff| trainable bb-train extra hidden reach stray causal-ok nonsite-delta=0
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/a4_arm_forward.py", line 108, in <module>
+    ref, _, _ = reference(arm, sd, tokens)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/a4_arm_forward.py", line 80, in reference
+    idx = sc.argsort(-1, descending=True, stable=True)[..., :8]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argsort() takes from 1 to 0 positional arguments but 1 were given
+auditor bug: Tensor.argsort(-1, ...) positional dim with stable=True; fixed to dim=-1 in attempt 2

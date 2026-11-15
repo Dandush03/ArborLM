@@ -1,0 +1,22 @@
+{"listed_total": 108, "listed_ok": true}
+{"cells_by_size": {"4096": 12, "16384": 76, "65536": 20}, "sum": 108}
+{"serial_training_hours_by_size_auditor": {"4096": 0.24, "16384": 2.74, "65536": 5.27}, "total": 8.25, "budget_says": {"65536": 5.25, "16384": 3.5, "4096": 0.4}}
+{"A9_family2_updates_specified": false, "A9_thresholds_specified": false}
+{"slots": 4096, "key_width": 16, "flat_params": 198145, "tree_params": 198401, "dense_hidden_width_to_match_flat": 3096.0, "dense_MACs_per_token": 198144, "flat_key_MACs_per_token": 65536, "tree_key_MACs_per_token": 8448}
+{"slots": 4096, "key_width": 32, "flat_params": 264193, "tree_params": 264705, "dense_hidden_width_to_match_flat": 4128.0, "dense_MACs_per_token": 264192, "flat_key_MACs_per_token": 131072, "tree_key_MACs_per_token": 16896}
+{"slots": 16384, "key_width": 16, "flat_params": 787969, "tree_params": 788993, "dense_hidden_width_to_match_flat": 12312.0, "dense_MACs_per_token": 787968, "flat_key_MACs_per_token": 262144, "tree_key_MACs_per_token": 9216}
+{"slots": 16384, "key_width": 32, "flat_params": 1050625, "tree_params": 1052673, "dense_hidden_width_to_match_flat": 16416.0, "dense_MACs_per_token": 1050624, "flat_key_MACs_per_token": 524288, "tree_key_MACs_per_token": 18432}
+{"slots": 65536, "key_width": 16, "flat_params": 3147265, "tree_params": 3151361, "dense_hidden_width_to_match_flat": 49176.0, "dense_MACs_per_token": 3147264, "flat_key_MACs_per_token": 1048576, "tree_key_MACs_per_token": 12288}
+{"slots": 65536, "key_width": 32, "flat_params": 4196353, "tree_params": 4204545, "dense_hidden_width_to_match_flat": 65568.0, "dense_MACs_per_token": 4196352, "flat_key_MACs_per_token": 2097152, "tree_key_MACs_per_token": 24576}
+{"slots": 4096, "kind": "flat", "positions": 1024, "threads": 6, "s_per_update": 0.0042, "maxrss_mb": 311.8, "approx_flat_score_flops_fwd_bwd": 402653184, "approx_GFLOP_per_s": 95.9}
+{"slots": 4096, "kind": "tree", "positions": 1024, "threads": 6, "s_per_update": 0.0333, "maxrss_mb": 503.0, "approx_flat_score_flops_fwd_bwd": null, "approx_GFLOP_per_s": null}
+{"slots": 16384, "kind": "flat", "positions": 1024, "threads": 6, "s_per_update": 0.0131, "maxrss_mb": 469.2, "approx_flat_score_flops_fwd_bwd": 1610612736, "approx_GFLOP_per_s": 122.9}
+{"slots": 16384, "kind": "tree", "positions": 1024, "threads": 6, "s_per_update": 0.0318, "maxrss_mb": 506.7, "approx_flat_score_flops_fwd_bwd": null, "approx_GFLOP_per_s": null}
+{"slots": 65536, "kind": "flat", "positions": 1024, "threads": 6, "s_per_update": 0.0425, "maxrss_mb": 1113.4, "approx_flat_score_flops_fwd_bwd": 6442450944, "approx_GFLOP_per_s": 151.6}
+{"slots": 65536, "kind": "tree", "positions": 1024, "threads": 6, "s_per_update": 0.0315, "maxrss_mb": 571.4, "approx_flat_score_flops_fwd_bwd": null, "approx_GFLOP_per_s": null}
+{"slots": 65536, "kind": "flat", "positions": 1024, "threads": 3, "s_per_update": 0.0581, "maxrss_mb": 1112.1, "approx_flat_score_flops_fwd_bwd": 6442450944, "approx_GFLOP_per_s": 110.9}
+{"eval_positions_per_panel_64K": 262144, "score_GFLOP_per_full_panel_forward": 549.8, "seconds_per_full_forward_at_75_GFLOPs": 7.3, "full_forwards_per_snapshot_if_uncached": 138, "minutes_per_snapshot_uncached": 16.9, "snapshots_64K_matched_cells": 54, "hours_64K_eval_uncached": 15.2, "budget_eval_allowance_hours_total": 2.7}
+{"distinct_slots_n": 4096, "pair_affinity_dense_int32_GiB": 0.06, "int16_layout_serialization_ok": true}
+{"distinct_slots_n": 16384, "pair_affinity_dense_int32_GiB": 1.0, "int16_layout_serialization_ok": true}
+{"distinct_slots_n": 65536, "pair_affinity_dense_int32_GiB": 16.0, "int16_layout_serialization_ok": false}
+{"python": "3.12.14"}

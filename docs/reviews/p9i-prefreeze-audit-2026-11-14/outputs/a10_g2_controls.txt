@@ -1,0 +1,20 @@
+seed set: rehearsal-1 | unseen controls: 2048
+no_memory           A   2048: auditor 68/2048 interval [36, 96] inside=True | run 68/2048
+no_memory           A   8192: auditor 262/8192 interval [198, 318] inside=True | run 262/8192
+no_memory           A  32768: auditor 1030/32768 interval [905, 1147] inside=True | run 1030/32768
+no_memory           A unseen: auditor 53/2048 interval [36, 96] inside=True | run 53/2048
+  exact retrieval (fact-table answers equal the answer bytes in panel A): True
+no_memory           B   2048: auditor 74/2048 interval [36, 96] inside=True | run 74/2048
+no_memory           B   8192: auditor 286/8192 interval [198, 318] inside=True | run 286/8192
+no_memory           B  32768: auditor 1074/32768 interval [905, 1147] inside=True | run 1074/32768
+no_memory           B unseen: auditor 58/2048 interval [36, 96] inside=True | run 58/2048
+  exact retrieval (fact-table answers equal the answer bytes in panel B): True
+no_memory_replicate A   2048: auditor 60/2048 interval [36, 96] inside=True | run 60/2048
+no_memory_replicate A   8192: auditor 237/8192 interval [198, 318] inside=True | run 237/8192
+no_memory_replicate A  32768: auditor 1025/32768 interval [905, 1147] inside=True | run 1025/32768
+no_memory_replicate A unseen: auditor 49/2048 interval [36, 96] inside=True | run 49/2048
+no_memory_replicate B   2048: auditor 66/2048 interval [36, 96] inside=True | run 66/2048
+no_memory_replicate B   8192: auditor 258/8192 interval [198, 318] inside=True | run 258/8192
+no_memory_replicate B  32768: auditor 1067/32768 interval [905, 1147] inside=True | run 1067/32768
+no_memory_replicate B unseen: auditor 57/2048 interval [36, 96] inside=True | run 57/2048
+run's G2 intervals: [('A/2048', [36, 96]), ('A/8192', [198, 318]), ('A/32768', [905, 1147]), ('A/unseen', [36, 96]), ('B/2048', [36, 96]), ('B/8192', [198, 318]), ('B/32768', [905, 1147]), ('B/unseen', [36, 96])] passed: True level 0.999875

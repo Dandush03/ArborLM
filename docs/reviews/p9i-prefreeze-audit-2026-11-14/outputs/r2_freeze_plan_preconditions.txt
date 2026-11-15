@@ -1,0 +1,5 @@
+files changed between the code commit and the simulated freeze commit: ['docs/decisions/ADR-0017-parallel-capacity-and-locality-diagnostics.md']
+HEAD = freeze commit, --freeze-commit = freeze: ACCEPTED {'commit': '3d0626d534b0b3e19f292f1f88d92c659ef707b0', 'tree': '024dbb3f82235038d4d71f55d6e67353cd0e08bf'}
+HEAD = freeze + results commit, --freeze-commit = freeze: ACCEPTED {'commit': '3d0626d534b0b3e19f292f1f88d92c659ef707b0', 'tree': '024dbb3f82235038d4d71f55d6e67353cd0e08bf'}
+--freeze-commit = dd8b205 (code commit, ADR differs): REFUSED: refused: docs/decisions/ADR-0017-parallel-capacity-and-locality-diagnostics.md at HEAD differs from the freeze commit
+ADR edited after the freeze, --freeze-commit = freeze: REFUSED: refused: docs/decisions/ADR-0017-parallel-capacity-and-locality-diagnostics.md at HEAD differs from the freeze commit

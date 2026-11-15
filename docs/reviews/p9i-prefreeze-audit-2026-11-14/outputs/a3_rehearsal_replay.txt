@@ -1,0 +1,28 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  return func(*args, **kwargs)
+seed set rehearsal-2
+N-n4096-b101-o301-s1801 init_seed 179201
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 5
+  backbone tensors that differ from the frozen backbone: [] (block-0 attention numel 4224)
+BB-n4096-b101-o301-s1802 init_seed 179202
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 9
+  backbone tensors that differ from the frozen backbone: ['blocks.0.attn_out.bias', 'blocks.0.attn_out.weight', 'blocks.0.qkv.bias', 'blocks.0.qkv.weight'] (block-0 attention numel 4224)
+A4E-n16384-b101-o301-s1801 init_seed 179201
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 8
+  backbone tensors that differ from the frozen backbone: [] (block-0 attention numel 4224)
+BB-D-n16384-b101-o301-s1801 init_seed 179201
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 7
+  backbone tensors that differ from the frozen backbone: ['blocks.0.attn_out.bias', 'blocks.0.attn_out.weight', 'blocks.0.qkv.bias', 'blocks.0.qkv.weight'] (block-0 attention numel 4224)
+BB-0-n4096-b101-o301-s1801 init_seed 179201
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 4
+  backbone tensors that differ from the frozen backbone: ['blocks.0.attn_out.bias', 'blocks.0.attn_out.weight', 'blocks.0.qkv.bias', 'blocks.0.qkv.weight'] (block-0 attention numel 4224)
+D7-n16384-b101-o301-s1802 init_seed 179202
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 3
+  backbone tensors that differ from the frozen backbone: [] (block-0 attention numel 4224)
+W7-n4096-b101-o301-s1801 init_seed 179201
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 5
+  backbone tensors that differ from the frozen backbone: [] (block-0 attention numel 4224)
+E7-n16384-b101-o301-s1802 init_seed 179202
+  replay model identical: True; optimizer identical: True; optimizers: 1; groups: 1; lr 0.003 wd 0; params in the group: 5
+  backbone tensors that differ from the frozen backbone: [] (block-0 attention numel 4224)

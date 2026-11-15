@@ -1,0 +1,48 @@
+[
+ {
+  "parent": "b101",
+  "facts": 32768,
+  "variant": "A4-16",
+  "final_loss": 3.1444,
+  "accuracy": 0.3447,
+  "own_first": 0.478,
+  "own_in_top8": 0.8393,
+  "median_w_self": 0.1457,
+  "train_contexts_accuracy": 0.4583,
+  "mean_cos_between_facts": 0.0069,
+  "attention_on_identifier": 0.7479,
+  "attention_profile_last7": [
+   0.011,
+   0.116,
+   0.129,
+   0.139,
+   0.173,
+   0.191,
+   0.02
+  ],
+  "sec": 539.3
+ },
+ {
+  "parent": "b101",
+  "facts": 32768,
+  "variant": "A4E-16",
+  "final_loss": 0.3407,
+  "accuracy": 0.8515,
+  "own_first": 0.9956,
+  "own_in_top8": 0.9998,
+  "median_w_self": 0.2391,
+  "train_contexts_accuracy": 0.8658,
+  "mean_cos_between_facts": 0.0004,
+  "attention_on_identifier": 0.9167,
+  "attention_profile_last7": [
+   0.002,
+   0.134,
+   0.168,
+   0.133,
+   0.199,
+   0.282,
+   0.007
+  ],
+  "sec": 544.9
+ }
+]

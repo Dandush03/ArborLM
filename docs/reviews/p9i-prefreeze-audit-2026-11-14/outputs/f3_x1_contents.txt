@@ -1,0 +1,17 @@
+== g3b_S9a_dense_zero: W7 65536 class INTERFACE_PARTIAL; dense comparison {"label": "BEATS DENSE", "ratios": {"1801/A": "+inf", "1801/B": "+inf", "1802/A": "+inf", "1802/B": "+inf"}, "reason": null, "smallest": "+inf"}
+  [ok] g3b_S9a_dense_zero: dense label BEATS DENSE (min ratio +inf >= 1.10)
+  [ok] g3b_S9a_dense_zero: ratios written as '+inf': ['+inf', '+inf', '+inf', '+inf']
+  [ok] g3b_S9a_dense_zero: every JSON strict
+  [ok] g3b_S9a_dense_zero: results written
+== g3b_S12_pool: W7 65536 class INTERFACE_PARTIAL; dense comparison {"label": "BEATS DENSE", "ratios": {"1801/A": "+inf", "1801/B": "+inf", "1802/A": "+inf", "1802/B": "+inf"}, "reason": null, "smallest": "+inf"}
+  [ok] g3b_S12_pool: dense label BEATS DENSE (min ratio +inf >= 1.10)
+  [ok] g3b_S12_pool: ratios written as '+inf': ['+inf', '+inf', '+inf', '+inf']
+  [ok] g3b_S12_pool: every JSON strict
+  [ok] g3b_S12_pool: results written
+== g3b_S9b_contrast_zero: E7 {'16384': 'INTERFACE_PARTIAL'}, W7 16384 INTERFACE_FAILS; contrast {"label": "BACKBONE HURTS ADDRESSING", "pair": ["E7", "W7"], "ratios": {"1801/A": "+inf", "1801/B": "+inf", "1802/A": "+inf", "1802/B": "+inf"}}
+  [ok] S9b: contrast label HURTS ADDRESSING (all ratios +inf >= 1.03)
+  [ok] S9b: ratios '+inf': ['+inf', '+inf', '+inf', '+inf']
+  [ok] S9b: every JSON strict
+  [ok] S9b: RESULTS.md prints the contrast label
+
+FAILED CHECKS: 0 []

@@ -1,0 +1,57 @@
+== (a) assess on synthetic tables ==
+status=COMPLETE interpretable=True outcome=BB reasons=[] classes=yes
+ok   complete, gates pass -> BB selected step 1, interpretable
+ok   control: BB-0 above chance present -> MODEL_STORES_FACTS, selection A4
+status=INCOMPLETE interpretable=False outcome=NOT_INTERPRETED (INCOMPLETE) reasons=[] classes=none
+ok   missing BB-0 cell -> INCOMPLETE, NOT_INTERPRETED (INCOMPLETE), no class, no BB selection
+status=INCOMPLETE interpretable=False outcome=NOT_INTERPRETED (INCOMPLETE) reasons=[] classes=none
+ok   missing BB seed at 65536 -> NOT_INTERPRETED (INCOMPLETE), not A4
+status=INCOMPLETE interpretable=False outcome=NOT_INTERPRETED (INCOMPLETE) reasons=[] classes=none
+ok   missing B102 replicate -> NOT_INTERPRETED (INCOMPLETE)
+status=COMPLETE interpretable=False outcome=NOT_INTERPRETED reasons=['G2 failed'] classes=yes
+ok   failed G2 -> status COMPLETE (not ENGINEERING_FAIL), NOT_INTERPRETED, reason 'G2 failed', classes kept descriptive
+status=COMPLETE interpretable=False outcome=NOT_INTERPRETED reasons=['G1 failed'] classes=yes
+ok   failed G1 -> status COMPLETE (not ENGINEERING_FAIL), NOT_INTERPRETED
+status=COMPLETE interpretable=False outcome=NOT_INTERPRETED reasons=['G1 not recorded'] classes=yes
+ok   G1 not recorded -> NOT_INTERPRETED (fail closed)
+status=COMPLETE interpretable=False outcome=NOT_INTERPRETED reasons=['LEAKAGE: W7-n4096-x/A'] classes=yes
+ok   LEAKAGE flag -> NOT_INTERPRETED with the cell named
+status=ENGINEERING_FAIL interpretable=False outcome=NOT_INTERPRETED reasons=['G4 failed: checkpoint restoration is not bit-identical for BB'] classes=yes
+ok   G4 defect -> ENGINEERING_FAIL and NOT_INTERPRETED
+status=INCOMPLETE interpretable=False outcome=NOT_INTERPRETED (INCOMPLETE) reasons=[] classes=none
+ok   no gates record -> INCOMPLETE, NOT_INTERPRETED (INCOMPLETE)
+status=INCOMPLETE interpretable=False outcome=NOT_INTERPRETED (INCOMPLETE) reasons=['G2 failed', 'LEAKAGE: Y/B'] classes=none
+ok   failed task + G2 + LEAKAGE -> INCOMPLETE outcome, both reasons listed
+status=COMPLETE interpretable=True outcome=INCONCLUSIVE reasons=[] classes=yes
+ok   R1 < 0.5 everywhere, gates pass -> INCONCLUSIVE (step 0 unchanged)
+
+== (b) report rendering ==
+G2 failed -> ['# ADR-0017 Part I (P9I) results', '**NOT INTERPRETED** (classes below, if any, are descriptive only):', '- G2 failed', "Study status: **COMPLETE** (measured: derived from the run's manifests, gates and records)."]
+ok   report (G2 failed) shows NOT INTERPRETED before the selection
+missing cell -> ['# ADR-0017 Part I (P9I) results', '**NOT INTERPRETED** (classes below, if any, are descriptive only):', '- missing or failed: TEST-BB-0-n4096-b101-o301-s1801', "Study status: **INCOMPLETE** (measured: derived from the run's manifests, gates and records)."]
+ok   report (missing cell) shows NOT INTERPRETED before the selection
+
+== (c) registered-mode refusals (function level, temporary directories) ==
+updates_for(registered, audited calibration) = 8192
+ok   registered U from the audited record is 8192
+ok   registered without --calibration refused  [refused: a registered stage needs --calibration]
+ok   registered with --updates refused  [refused: a registered stage takes U from the calibration record, not from --updates]
+ok   calibration file not hashing to the launch hash refused  [refused: results/p9i-calibration-2026-11-14/calibration.json does not hash to the calibration record the stage was started with]
+binding: {"calibration_sha256": "087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44", "calibration_selected_updates": 8192, "calibration_failed_sizes": {}}
+ok   binding hash = audited 087bf0b5..., U 8192, no failed sizes
+ok   train: no gates record -> refused  [refused: no gates record at /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/tmp1tv_6rgx/gates.json: run the gates stage first]
+ok   train: gates {'g2_passed': False} -> refused  [refused: gate(s) G2 did not pass; nothing is trained]
+ok   train: gates {'g1_passed': None} -> refused  [refused: gate(s) G1 did not pass; nothing is trained]
+ok   train: gates {'g4_passed': False, 'g4_defects': ['x']} -> refused  [refused: gate(s) G4 did not pass; nothing is trained]
+ok   train: all gates passed -> accepted
+ok   evaluate/analyze before train recorded the binding -> refused  [refused: no /var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/tmp1tv_6rgx/calibration_binding.json: the train stage has not recorded the calibration]
+ok   binding differs -> refused  [refused: the calibration record differs (hash, selected U or failed sizes) from the one the train stage recorded]
+ok   binding equal -> accepted
+ok   registered evaluate without --calibration -> refused  [refused: a registered stage needs --calibration]
+ok   a different calibration file (same content + 1 byte) -> refused  [refused: the calibration record differs (hash, selected U or failed sizes) from the one the train stage recorded]
+
+== (d) calibration snapshots: model.pt hash vs train.json (what evaluate_cell now verifies) ==
+snapshots checked 90, mismatches 0
+ok   every calibration snapshot hash matches its train.json  [90 snapshots]
+
+checks failed: 0

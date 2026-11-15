@@ -1,0 +1,7 @@
+corpus rows: (2048, 65)
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/a8_next_byte.py", line 25, in <module>
+    block, ln = ns["block"], ns["ln"]
+                ~~^^^^^^^^^
+KeyError: 'block'
+KeyError 'block': auditor's source slicing of a4 kept the text before the definitions; attempt 2 slices between 'frozen_copy' and 'def attention4'

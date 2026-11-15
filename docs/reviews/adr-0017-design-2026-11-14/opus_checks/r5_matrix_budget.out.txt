@@ -1,0 +1,38 @@
+{"cells_total": 100, "by_size": {"4096": 14, "16384": 64, "65536": 22}}
+{"key32_cost_factor": 1.0, "E": 32, "cells": 100, "serial_training_h": 9.13, "workers": 2, "projected_wall_h": 5.32, "twice_projection_h": 10.63, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 1.0, "E": 32, "cells": 100, "serial_training_h": 9.13, "workers": 3, "projected_wall_h": 3.79, "twice_projection_h": 7.59, "fits_8h_with_2x_headroom": true}
+{"key32_cost_factor": 1.0, "E": 64, "cells": 100, "serial_training_h": 18.26, "workers": 2, "projected_wall_h": 9.88, "twice_projection_h": 19.76, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 1.0, "E": 64, "cells": 100, "serial_training_h": 18.26, "workers": 3, "projected_wall_h": 6.84, "twice_projection_h": 13.67, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 1.0, "E": 128, "cells": 100, "serial_training_h": 36.52, "workers": 2, "projected_wall_h": 19.01, "twice_projection_h": 38.02, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 1.0, "E": 128, "cells": 100, "serial_training_h": 36.52, "workers": 3, "projected_wall_h": 12.92, "twice_projection_h": 25.85, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 2.0, "E": 32, "cells": 100, "serial_training_h": 10.4, "workers": 2, "projected_wall_h": 5.95, "twice_projection_h": 11.9, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 2.0, "E": 32, "cells": 100, "serial_training_h": 10.4, "workers": 3, "projected_wall_h": 4.22, "twice_projection_h": 8.44, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 2.0, "E": 64, "cells": 100, "serial_training_h": 20.81, "workers": 2, "projected_wall_h": 11.15, "twice_projection_h": 22.31, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 2.0, "E": 64, "cells": 100, "serial_training_h": 20.81, "workers": 3, "projected_wall_h": 7.69, "twice_projection_h": 15.37, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 2.0, "E": 128, "cells": 100, "serial_training_h": 41.62, "workers": 2, "projected_wall_h": 21.56, "twice_projection_h": 43.12, "fits_8h_with_2x_headroom": false}
+{"key32_cost_factor": 2.0, "E": 128, "cells": 100, "serial_training_h": 41.62, "workers": 3, "projected_wall_h": 14.62, "twice_projection_h": 29.25, "fits_8h_with_2x_headroom": false}
+{"after_reductions_up_to": "1 drop B102 64K", "E": 32, "cells": 98, "serial_training_h": 8.61, "workers": 2, "projected_wall_h": 5.05, "fits_8h_2x": false}
+{"after_reductions_up_to": "1 drop B102 64K", "E": 32, "cells": 98, "serial_training_h": 8.61, "workers": 3, "projected_wall_h": 3.62, "fits_8h_2x": true}
+{"after_reductions_up_to": "1 drop B102 64K", "E": 64, "cells": 98, "serial_training_h": 17.21, "workers": 2, "projected_wall_h": 9.36, "fits_8h_2x": false}
+{"after_reductions_up_to": "1 drop B102 64K", "E": 64, "cells": 98, "serial_training_h": 17.21, "workers": 3, "projected_wall_h": 6.49, "fits_8h_2x": false}
+{"after_reductions_up_to": "1 drop B102 64K", "E": 128, "cells": 98, "serial_training_h": 34.43, "workers": 2, "projected_wall_h": 17.96, "fits_8h_2x": false}
+{"after_reductions_up_to": "1 drop B102 64K", "E": 128, "cells": 98, "serial_training_h": 34.43, "workers": 3, "projected_wall_h": 12.23, "fits_8h_2x": false}
+{"after_reductions_up_to": "2 drop A7 64K", "E": 32, "cells": 94, "serial_training_h": 7.42, "workers": 2, "projected_wall_h": 4.46, "fits_8h_2x": false}
+{"after_reductions_up_to": "2 drop A7 64K", "E": 32, "cells": 94, "serial_training_h": 7.42, "workers": 3, "projected_wall_h": 3.22, "fits_8h_2x": true}
+{"after_reductions_up_to": "2 drop A7 64K", "E": 64, "cells": 94, "serial_training_h": 14.85, "workers": 2, "projected_wall_h": 8.17, "fits_8h_2x": false}
+{"after_reductions_up_to": "2 drop A7 64K", "E": 64, "cells": 94, "serial_training_h": 14.85, "workers": 3, "projected_wall_h": 5.7, "fits_8h_2x": false}
+{"after_reductions_up_to": "2 drop A7 64K", "E": 128, "cells": 94, "serial_training_h": 29.69, "workers": 2, "projected_wall_h": 15.6, "fits_8h_2x": false}
+{"after_reductions_up_to": "2 drop A7 64K", "E": 128, "cells": 94, "serial_training_h": 29.69, "workers": 3, "projected_wall_h": 10.65, "fits_8h_2x": false}
+{"after_reductions_up_to": "3 drop dense seed 64K", "E": 32, "cells": 93, "serial_training_h": 6.54, "workers": 2, "projected_wall_h": 4.02, "fits_8h_2x": false}
+{"after_reductions_up_to": "3 drop dense seed 64K", "E": 32, "cells": 93, "serial_training_h": 6.54, "workers": 3, "projected_wall_h": 2.93, "fits_8h_2x": true}
+{"after_reductions_up_to": "3 drop dense seed 64K", "E": 64, "cells": 93, "serial_training_h": 13.07, "workers": 2, "projected_wall_h": 7.29, "fits_8h_2x": false}
+{"after_reductions_up_to": "3 drop dense seed 64K", "E": 64, "cells": 93, "serial_training_h": 13.07, "workers": 3, "projected_wall_h": 5.11, "fits_8h_2x": false}
+{"after_reductions_up_to": "3 drop dense seed 64K", "E": 128, "cells": 93, "serial_training_h": 26.14, "workers": 2, "projected_wall_h": 13.82, "fits_8h_2x": false}
+{"after_reductions_up_to": "3 drop dense seed 64K", "E": 128, "cells": 93, "serial_training_h": 26.14, "workers": 3, "projected_wall_h": 9.46, "fits_8h_2x": false}
+{"after_reductions_1_to_4": true, "E": 128, "cells": 85, "serial_training_h": 18.45, "workers": 2, "projected_wall_h": 9.98, "fits_8h_2x": false}
+{"after_reductions_1_to_4": true, "E": 128, "cells": 85, "serial_training_h": 18.45, "workers": 3, "projected_wall_h": 6.9, "fits_8h_2x": false}
+{"permutations": 10000, "bonferroni_tests_k": 8, "min_attainable_p": 0.0001, "threshold_0.001/k": 0.000125, "test_can_ever_reject": true, "permutations_needed_for_rejection_possible": 8000}
+{"permutations": 10000, "bonferroni_tests_k": 10, "min_attainable_p": 0.0001, "threshold_0.001/k": 0.0001, "test_can_ever_reject": true, "permutations_needed_for_rejection_possible": 10000}
+{"permutations": 10000, "bonferroni_tests_k": 40, "min_attainable_p": 0.0001, "threshold_0.001/k": 2.5e-05, "test_can_ever_reject": false, "permutations_needed_for_rejection_possible": 40000}
+{"permutations": 10000, "bonferroni_tests_k": 80, "min_attainable_p": 0.0001, "threshold_0.001/k": 1.25e-05, "test_can_ever_reject": false, "permutations_needed_for_rejection_possible": 80000}
+{"size_track_combos_distinct": 5, "x_panels": 2, "x_controls(no-memory, unseen)": 2, "tests": 20, "if_4K_fixed_counted_separately": 24, "rev2_states": 16}

@@ -1,0 +1,10 @@
+dd8b205 P9-I pre-freeze fixes: no interpretation with missing cells or failed gates, calibration binding, registered refusals, report columns; 1731 tests passing
+{"stage": "generate", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3d2/run/generate/manifest.json", "charged_seconds": 11.9}
+generate exit 0
+{"stage": "gates", "status": "INCOMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3d2/run/gates/manifest.json", "charged_seconds": 4.9}
+gates exit 1
+--- gates.log (last 3 lines)
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3d2/clone/studies/p9i/core.py", line 754, in check_seed_set
+    raise ValueError(f"mode {mode!r} cannot use the {seed_set_name!r} seed set")
+ValueError: mode 'calibration' cannot use the 'rehearsal-2' seed set
+--- gates.json written: no
