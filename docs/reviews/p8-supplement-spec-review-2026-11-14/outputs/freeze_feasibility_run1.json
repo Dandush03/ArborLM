@@ -1,0 +1,12 @@
+{
+ "copy_digest_unchanged": true,
+ "copy_digest_with_new_file_equals_frozen": false,
+ "copy_digest_with_one_new_p8s_file": "e6ccfe12968a8e4a3b2bae93e0076704dbb6fbb5da5c57267691ca5fdcc13fb1",
+ "label": "read-only feasibility check; not Astra validation",
+ "source_digest_now": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+ "source_digest_now_equals_frozen": true,
+ "spec_sha256_now": "d4bdd771dbdfee654598cc35a0261e70178e82fb29872366e50445e8a096cbf4",
+ "spec_sha256_now_equals_frozen": false,
+ "verify_freeze_378aeac": "REFUSED: docs/decisions/ADR-0015-p8-locality-aware-memory-training.md differs from the freeze commit",
+ "verify_freeze_80f46ae": "REFUSED: docs/decisions/ADR-0015-p8-locality-aware-memory-training.md differs from the freeze commit"
+}

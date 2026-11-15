@@ -1,0 +1,476 @@
+{
+ "checks": {
+  "exactly_one_P8SUP_directory_main_experiments": {
+   "ok": true,
+   "detail": [
+    "P8SUP-20261114T144104227089Z-fbfb3d18513749b081f9cdd93f22ad81"
+   ]
+  },
+  "no_experiments_dir_in_worktree": {
+   "ok": true,
+   "detail": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/experiments"
+  },
+  "no_failed_records_in_run": {
+   "ok": true,
+   "detail": [
+    "cells/b101-o301-s601-C04/job.json",
+    "cells/b101-o301-s601-C04/layouts.int16.bin",
+    "cells/b101-o301-s601-C04/sim.json",
+    "cells/b101-o301-s601-C04/worker.log",
+    "cells/b101-o301-s601-C05/job.json",
+    "cells/b101-o301-s601-C05/layouts.int16.bin",
+    "cells/b101-o301-s601-C05/sim.json",
+    "cells/b101-o301-s601-C05/worker.log",
+    "cells/b101-o301-s602-C04/job.json",
+    "cells/b101-o301-s602-C04/layouts.int16.bin",
+    "cells/b101-o301-s602-C04/sim.json",
+    "cells/b101-o301-s602-C04/worker.log",
+    "cells/b101-o301-s602-C05/job.json",
+    "cells/b101-o301-s602-C05/layouts.int16.bin",
+    "cells/b101-o301-s602-C05/sim.json",
+    "cells/b101-o301-s602-C05/worker.log",
+    "cells/b102-o302-s601-C05/job.json",
+    "cells/b102-o302-s601-C05/layouts.int16.bin",
+    "cells/b102-o302-s601-C05/sim.json",
+    "cells/b102-o302-s601-C05/worker.log",
+    "manifest.json"
+   ]
+  },
+  "manifest_5_of_5_completed": {
+   "ok": true,
+   "detail": null
+  },
+  "worker_log_only_numpy_warning:b101-o301-s601-C04": {
+   "ok": true,
+   "detail": "mPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+  },
+  "worker_log_only_numpy_warning:b101-o301-s601-C05": {
+   "ok": true,
+   "detail": "mPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+  },
+  "worker_log_only_numpy_warning:b101-o301-s602-C04": {
+   "ok": true,
+   "detail": "mPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+  },
+  "worker_log_only_numpy_warning:b101-o301-s602-C05": {
+   "ok": true,
+   "detail": "mPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+  },
+  "worker_log_only_numpy_warning:b102-o302-s601-C05": {
+   "ok": true,
+   "detail": "mPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+  },
+  "limits": {
+   "ok": true,
+   "detail": {
+    "workers": 1,
+    "peak_worker_rss_bytes": 242270208,
+    "max_ru_maxrss": 243417088,
+    "stage_wall": 11.196843250014354,
+    "analysis_wall": 0.312268125009723,
+    "cap_seconds": 1800.0
+   }
+  },
+  "freeze_commit_tree": {
+   "ok": true,
+   "detail": {
+    "git": [
+     "3018126db5f8bed740813bc6722fe2319e31024c",
+     "671c184a19f183812588c5da491fa6733a1c88a3",
+     "20c6eaefec05caacb2881bcbf3be51ffd68ad34f"
+    ],
+    "record": {
+     "commit": "3018126db5f8bed740813bc6722fe2319e31024c",
+     "supplements_tree": "20c6eaefec05caacb2881bcbf3be51ffd68ad34f",
+     "tree": "671c184a19f183812588c5da491fa6733a1c88a3"
+    }
+   }
+  },
+  "freeze_tree_prefix_671c184a": {
+   "ok": true,
+   "detail": "671c184a19f183812588c5da491fa6733a1c88a3"
+  },
+  "freeze_is_ancestor_of_HEAD": {
+   "ok": true,
+   "detail": null
+  },
+  "freeze_commit_before_run_start": {
+   "ok": true,
+   "detail": {
+    "freeze_commit_time": "2026-11-14T09:40:56-05:00",
+    "run_started_utc": "2026-11-14T14:41:04.228639+00:00",
+    "run_finished_utc": "2026-11-14T14:41:15.432049+00:00"
+   }
+  },
+  "HEAD_changes_since_freeze_only_results_p8_supplement": {
+   "ok": true,
+   "detail": [
+    "results/p8-supplement-2026-11-14/analysis/P8SUPA-20261114T144120084661Z-f008b8673e97484fa528ccf36beba4e9/SUPPLEMENTARY_ANALYSIS.md",
+    "results/p8-supplement-2026-11-14/analysis/P8SUPA-20261114T144120084661Z-f008b8673e97484fa528ccf36beba4e9/cells.csv",
+    "results/p8-supplement-2026-11-14/analysis/P8SUPA-20261114T144120084661Z-f008b8673e97484fa528ccf36beba4e9/manifest.json",
+    "results/p8-supplement-2026-11-14/analysis/P8SUPA-20261114T144120084661Z-f008b8673e97484fa528ccf36beba4e9/pairs.csv",
+    "results/p8-supplement-2026-11-14/analysis/P8SUPA-20261114T144120084661Z-f008b8673e97484fa528ccf36beba4e9/scorecard.csv",
+    "... 25 files"
+   ]
+  },
+  "supplement_source_sha256_at_freeze": {
+   "ok": true,
+   "detail": [
+    "88b86f48b1bfe8fce106b243a679335b9d1ca78cf85fa288047120ed07245377",
+    9
+   ]
+  },
+  "supplement_source_sha256_on_disk": {
+   "ok": true,
+   "detail": [
+    "88b86f48b1bfe8fce106b243a679335b9d1ca78cf85fa288047120ed07245377",
+    9
+   ]
+  },
+  "supplement_spec_sha256": {
+   "ok": true,
+   "detail": [
+    "22d25195851360f6a260062de1f641f9d6a394d92f0121d383fe1371b6a64458",
+    "22d25195851360f6a260062de1f641f9d6a394d92f0121d383fe1371b6a64458"
+   ]
+  },
+  "frozen_digest_at_P8_freeze": {
+   "ok": true,
+   "detail": [
+    "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    85
+   ]
+  },
+  "frozen_digest_on_disk": {
+   "ok": true,
+   "detail": [
+    "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    85
+   ]
+  },
+  "P8_freeze_tree": {
+   "ok": true,
+   "detail": null
+  },
+  "results_commit_tree": {
+   "ok": true,
+   "detail": null
+  },
+  "frozen_files_unchanged_since_P8_freeze": {
+   "ok": true,
+   "detail": []
+  },
+  "results_p8_unchanged_since_b8302c2_except_known": {
+   "ok": true,
+   "detail": [
+    "results/p8-2026-11-14/SUMMARY.md",
+    "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/analysis.json",
+    "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/cells.csv",
+    "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/manifest.json",
+    "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/pairs.csv",
+    "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/scorecard.csv",
+    "results/p8-2026-11-14/report/analysis.json",
+    "results/p8-2026-11-14/report/cells.csv",
+    "results/p8-2026-11-14/report/fig01_scorecard.png",
+    "results/p8-2026-11-14/report/fig02_quality_vs_locality.png",
+    "results/p8-2026-11-14/report/fig03_utilization.png",
+    "results/p8-2026-11-14/report/fig04_null_vs_actual.png",
+    "results/p8-2026-11-14/report/fig05_flat_vs_tree_pairs.png",
+    "results/p8-2026-11-14/report/fig06_temporal_branch.png",
+    "results/p8-2026-11-14/report/fig07_heatmaps.png",
+    "results/p8-2026-11-14/report/fig08_training_resources.png",
+    "results/p8-2026-11-14/report/fig09_layout_controls.png",
+    "results/p8-2026-11-14/report/figures_index.md",
+    "results/p8-2026-11-14/report/make_report.py",
+    "results/p8-2026-11-14/report/p8_results_compact.json",
+    "results/p8-2026-11-14/report/pairs.csv",
+    "results/p8-2026-11-14/report/report.html",
+    "results/p8-2026-11-14/report/scorecard.csv"
+   ]
+  },
+  "nothing_outside_results_supplement_changed_by_run_commit": {
+   "ok": true,
+   "detail": []
+  },
+  "ADRs_unchanged_since_freeze": {
+   "ok": true,
+   "detail": []
+  },
+  "p7b_citation": {
+   "ok": true,
+   "detail": [
+    "86608f87de87cd87b0656a35bbe0e178e9a37609e8fcd69375b1990db9d5f9a8",
+    "86608f87de87cd87b0656a35bbe0e178e9a37609e8fcd69375b1990db9d5f9a8",
+    "86608f87de87cd87b0656a35bbe0e178e9a37609e8fcd69375b1990db9d5f9a8"
+   ]
+  },
+  "eval_manifest_sha256": {
+   "ok": true,
+   "detail": null
+  },
+  "identity:b101-o301-s601-C04": {
+   "ok": true,
+   "detail": {
+    "top_level_keys": [
+     "calibration_files",
+     "case",
+     "cell",
+     "cell_index",
+     "determinism",
+     "dry_run",
+     "eval_json_sha256",
+     "frozen_inputs",
+     "label",
+     "layouts",
+     "outcome",
+     "panels",
+     "peak_rss_bytes_ru_maxrss",
+     "schema",
+     "seconds",
+     "settings",
+     "source_sha256",
+     "supplement",
+     "supplement_freeze_commit",
+     "supplement_label",
+     "supplement_null_preconditions",
+     "supplement_source_sha256",
+     "supplement_spec_sha256",
+     "ties",
+     "variant",
+     "worker_seconds"
+    ]
+   }
+  },
+  "identity:b101-o301-s601-C05": {
+   "ok": true,
+   "detail": {
+    "top_level_keys": [
+     "calibration_files",
+     "case",
+     "cell",
+     "cell_index",
+     "determinism",
+     "dry_run",
+     "eval_json_sha256",
+     "frozen_inputs",
+     "label",
+     "layouts",
+     "outcome",
+     "panels",
+     "peak_rss_bytes_ru_maxrss",
+     "schema",
+     "seconds",
+     "settings",
+     "source_sha256",
+     "supplement",
+     "supplement_freeze_commit",
+     "supplement_label",
+     "supplement_null_preconditions",
+     "supplement_source_sha256",
+     "supplement_spec_sha256",
+     "ties",
+     "variant",
+     "worker_seconds"
+    ]
+   }
+  },
+  "identity:b101-o301-s602-C04": {
+   "ok": true,
+   "detail": {
+    "top_level_keys": [
+     "calibration_files",
+     "case",
+     "cell",
+     "cell_index",
+     "determinism",
+     "dry_run",
+     "eval_json_sha256",
+     "frozen_inputs",
+     "label",
+     "layouts",
+     "outcome",
+     "panels",
+     "peak_rss_bytes_ru_maxrss",
+     "schema",
+     "seconds",
+     "settings",
+     "source_sha256",
+     "supplement",
+     "supplement_freeze_commit",
+     "supplement_label",
+     "supplement_null_preconditions",
+     "supplement_source_sha256",
+     "supplement_spec_sha256",
+     "ties",
+     "variant",
+     "worker_seconds"
+    ]
+   }
+  },
+  "identity:b101-o301-s602-C05": {
+   "ok": true,
+   "detail": {
+    "top_level_keys": [
+     "calibration_files",
+     "case",
+     "cell",
+     "cell_index",
+     "determinism",
+     "dry_run",
+     "eval_json_sha256",
+     "frozen_inputs",
+     "label",
+     "layouts",
+     "outcome",
+     "panels",
+     "peak_rss_bytes_ru_maxrss",
+     "schema",
+     "seconds",
+     "settings",
+     "source_sha256",
+     "supplement",
+     "supplement_freeze_commit",
+     "supplement_label",
+     "supplement_null_preconditions",
+     "supplement_source_sha256",
+     "supplement_spec_sha256",
+     "ties",
+     "variant",
+     "worker_seconds"
+    ]
+   }
+  },
+  "identity:b102-o302-s601-C05": {
+   "ok": true,
+   "detail": {
+    "top_level_keys": [
+     "calibration_files",
+     "case",
+     "cell",
+     "cell_index",
+     "determinism",
+     "dry_run",
+     "eval_json_sha256",
+     "frozen_inputs",
+     "label",
+     "layouts",
+     "outcome",
+     "panels",
+     "peak_rss_bytes_ru_maxrss",
+     "schema",
+     "seconds",
+     "settings",
+     "source_sha256",
+     "supplement",
+     "supplement_freeze_commit",
+     "supplement_label",
+     "supplement_null_preconditions",
+     "supplement_source_sha256",
+     "supplement_spec_sha256",
+     "ties",
+     "variant",
+     "worker_seconds"
+    ]
+   }
+  },
+  "committed_copies_equal_run_dir": {
+   "ok": true,
+   "detail": {
+    "committed": 16,
+    "local": 21,
+    "differ": [],
+    "local_only": [
+     "cells/b101-o301-s601-C04/layouts.int16.bin",
+     "cells/b101-o301-s601-C05/layouts.int16.bin",
+     "cells/b101-o301-s602-C04/layouts.int16.bin",
+     "cells/b101-o301-s602-C05/layouts.int16.bin",
+     "cells/b102-o302-s601-C05/layouts.int16.bin"
+    ]
+   }
+  },
+  "failed_record_untouched:b101-o301-s601-C04": {
+   "ok": true,
+   "detail": [
+    "job.json",
+    "layouts.int16.bin",
+    "sim.failed.json",
+    "worker.log"
+   ]
+  },
+  "failed_record_untouched:b101-o301-s601-C05": {
+   "ok": true,
+   "detail": [
+    "job.json",
+    "layouts.int16.bin",
+    "sim.failed.json",
+    "worker.log"
+   ]
+  },
+  "failed_record_untouched:b101-o301-s602-C04": {
+   "ok": true,
+   "detail": [
+    "job.json",
+    "layouts.int16.bin",
+    "sim.failed.json",
+    "worker.log"
+   ]
+  },
+  "failed_record_untouched:b101-o301-s602-C05": {
+   "ok": true,
+   "detail": [
+    "job.json",
+    "layouts.int16.bin",
+    "sim.failed.json",
+    "worker.log"
+   ]
+  },
+  "failed_record_untouched:b102-o302-s601-C05": {
+   "ok": true,
+   "detail": [
+    "job.json",
+    "layouts.int16.bin",
+    "sim.failed.json",
+    "worker.log"
+   ]
+  },
+  "results_p8_working_tree_equals_HEAD": {
+   "ok": true,
+   "detail": {
+    "tracked": 669,
+    "differ": [],
+    "untracked": []
+   }
+  },
+  "registered_P8S_P8E_dirs_no_file_modified_within_1h_before_or_after_supplement_start": {
+   "ok": true,
+   "detail": []
+  }
+ },
+ "problems": [],
+ "worktree_status_at_audit_start_excluding_this_folder": [],
+ "results_p8_changes_since_b8302c2": [
+  "results/p8-2026-11-14/SUMMARY.md",
+  "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/analysis.json",
+  "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/cells.csv",
+  "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/manifest.json",
+  "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/pairs.csv",
+  "results/p8-2026-11-14/analysis/P8A-20261114T044147896561Z-4a9976ed3c7d493c8a92293786f2572c/scorecard.csv",
+  "results/p8-2026-11-14/report/analysis.json",
+  "results/p8-2026-11-14/report/cells.csv",
+  "results/p8-2026-11-14/report/fig01_scorecard.png",
+  "results/p8-2026-11-14/report/fig02_quality_vs_locality.png",
+  "results/p8-2026-11-14/report/fig03_utilization.png",
+  "results/p8-2026-11-14/report/fig04_null_vs_actual.png",
+  "results/p8-2026-11-14/report/fig05_flat_vs_tree_pairs.png",
+  "results/p8-2026-11-14/report/fig06_temporal_branch.png",
+  "results/p8-2026-11-14/report/fig07_heatmaps.png",
+  "results/p8-2026-11-14/report/fig08_training_resources.png",
+  "results/p8-2026-11-14/report/fig09_layout_controls.png",
+  "results/p8-2026-11-14/report/figures_index.md",
+  "results/p8-2026-11-14/report/make_report.py",
+  "results/p8-2026-11-14/report/p8_results_compact.json",
+  "results/p8-2026-11-14/report/pairs.csv",
+  "results/p8-2026-11-14/report/report.html",
+  "results/p8-2026-11-14/report/scorecard.csv"
+ ]
+}

@@ -1,0 +1,12 @@
+== 1. uv run --locked pytest, plain import (expected: ModuleNotFoundError)
+E   ModuleNotFoundError: No module named 'supplements'
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 warning, 1 error in 0.02s
+== 2. uv run --locked pytest, sys.path insertion (expected: pass)
+1 passed, 1 warning in 0.00s
+== 3. ruff E402 on the sys.path test file (expected: no E402)
+All checks passed!
+== 4. mypy supplements/p8s alone (expected: import-untyped, arborlm has no py.typed)
+supplements/p8s/mod.py:1: error: Skipping analyzing "arborlm": module is installed, but missing library stubs or py.typed marker  [import-untyped]
+== 5. mypy src/arborlm supplements/p8s (expected: success)
+Success: no issues found in 87 source files

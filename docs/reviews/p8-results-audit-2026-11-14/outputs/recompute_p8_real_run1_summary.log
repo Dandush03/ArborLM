@@ -1,0 +1,52 @@
+{
+ "study_status": "INCOMPLETE",
+ "cells": "55/60",
+ "classes": {
+  "C04": "INCOMPLETE",
+  "C05": "INCOMPLETE",
+  "C06": "COLLAPSED",
+  "C07": "CONCENTRATION-ONLY",
+  "C08": "QUALITY-FAILED",
+  "C09": "NOT REPLICATED ACROSS PANELS",
+  "C10": "QUALITY-FAILED"
+ },
+ "per_panel": {
+  "C04": [
+   "INCOMPLETE",
+   "INCOMPLETE"
+  ],
+  "C05": [
+   "INCOMPLETE",
+   "INCOMPLETE"
+  ],
+  "C06": [
+   "COLLAPSED",
+   "COLLAPSED"
+  ],
+  "C07": [
+   "CONCENTRATION-ONLY",
+   "CONCENTRATION-ONLY"
+  ],
+  "C08": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ],
+  "C09": [
+   "QUALITY-FAILED",
+   "COLLAPSED"
+  ],
+  "C10": [
+   "QUALITY-FAILED",
+   "QUALITY-FAILED"
+  ]
+ },
+ "bind": false,
+ "decision": "none",
+ "comparison": {
+  "compared_values": 1232,
+  "max_abs_difference": 0.0,
+  "mismatch_count": 0
+ },
+ "first_mismatches": []
+}
+uv run --locked python -I $T --eval-run  --sim-run  --out  --analysis   0.06s user 0.01s system 96% cpu 0.069 total

@@ -1,0 +1,63 @@
+{
+ "fresh_dry_run": {
+  "passed": true,
+  "cells": {
+   "b101-o301-s601-C01": true,
+   "b101-o301-s601-C02": true,
+   "b101-o301-s601-C03": true,
+   "b101-o301-s601-C04": true,
+   "b101-o301-s601-C05": true,
+   "b101-o301-s601-C06": true,
+   "b101-o301-s601-C07": true,
+   "b101-o301-s601-C08": true,
+   "b101-o301-s601-C09": true,
+   "b101-o301-s601-C10": true
+  }
+ },
+ "tampered_copy_C03_removed_C05_digest_altered": {
+  "passed": false,
+  "cells": {
+   "b101-o301-s601-C01": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C02": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C03": [
+    false,
+    "worker exited with code 1"
+   ],
+   "b101-o301-s601-C04": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C05": [
+    false,
+    "worker exited with code 1"
+   ],
+   "b101-o301-s601-C06": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C07": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C08": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C09": [
+    true,
+    null
+   ],
+   "b101-o301-s601-C10": [
+    true,
+    null
+   ]
+  }
+ },
+ "rerun_on_existing": "refused: restore_gate.json already exists"
+}

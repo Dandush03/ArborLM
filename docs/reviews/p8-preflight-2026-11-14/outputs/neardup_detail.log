@@ -1,0 +1,8 @@
+validation articles (heuristic): 60
+panel A rank 3214 row 3079 off 0 payload b' Pacifism as Pathology : Reflections on the Role of Armed Struggl'
+   train occurrences (row, byte): [] aligned: []
+   validation occurrences: [{'row': 3026, 'byte': 283, 'aligned': False, 'in_validation_rank': 7538}, {'row': 3079, 'byte': 0, 'aligned': True, 'in_validation_rank': 3214}]
+panel B rank 3715 row 3148 off 325 payload b"tween Oxford 's Isis boat and Cambridge 's Goldie boat has been h"
+   train occurrences (row, byte): [(22071, 328)] aligned: [False]
+   validation occurrences: [{'row': 3148, 'byte': 325, 'aligned': True, 'in_validation_rank': 3715}]
+   train row 22071: overlapping train chunk ranks [52035, 89335]; any in pool [0,4096): False; any in calibration [2048,2560): False

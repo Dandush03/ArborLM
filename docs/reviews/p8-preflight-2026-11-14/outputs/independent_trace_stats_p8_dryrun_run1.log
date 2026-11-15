@@ -1,0 +1,11 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+hand-constructed checks: PASS
+{
+ "labels": 60,
+ "compared": 2076,
+ "max_abs_diff": 0.0,
+ "mismatches": [],
+ "mismatch_count": 0
+}
+uv run --locked --extra pilot python  --eval-run $E --sim-run $SM  33.70s user 0.16s system 99% cpu 33.880 total

@@ -1,0 +1,19 @@
+cmd: uv run --locked python docs/reviews/p8-preflight-2026-11-14/independent_trace_stats_p8.py --eval-run /Users/daniellaloush/dandush03/ArborLM/experiments/P8E-... --sim-run /Users/daniellaloush/dandush03/ArborLM/experiments/P8S-... --labels b101-o301-s601-C04 b101-o301-s601-C05 b101-o301-s602-C04 b101-o301-s602-C05 b102-o302-s601-C05 b102-o302-s601-C01 b103-o303-s602-C02 b101-o301-s601-C03 b103-o303-s602-C04 b103-o303-s601-C05 b101-o301-s601-C06 b101-o301-s602-C07 b103-o303-s601-C08 b102-o302-s602-C09 b101-o301-s602-C10
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+hand-constructed checks: PASS
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p8-preflight-2026-11-14/independent_trace_stats_p8.py", line 181, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p8-preflight-2026-11-14/independent_trace_stats_p8.py", line 137, in main
+    ev = json.loads((cdir / "eval.json").read_text())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 63] File name too long: '/Users/daniellaloush/dandush03/ArborLM/experiments/P8E-20261114T043753008527Z-ab07648862054617b63d9e4d83e5407f/cells/b101-o301-s601-C04 b101-o301-s601-C05 b101-o301-s602-C04 b101-o301-s602-C05 b102-o302-s601-C05 b102-o302-s601-C01 b103-o303-s602-C02 b101-o301-s601-C03 b103-o303-s602-C04 b103-o303-s601-C05 b101-o301-s601-C06 b101-o301-s602-C07 b103-o303-s601-C08 b102-o302-s602-C09 b101-o301-s602-C10/eval.json'
+exit=1

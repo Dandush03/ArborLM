@@ -1,0 +1,22 @@
+OK  only the allowed keys differ: expected ALLOW, got ALLOW
+OK  int 3 written as float 3.0 in C06: expected ALLOW, got ALLOW
+OK  bool True written as 1 in C06: expected STOP, got STOP
+OK  C06 float changes in the last bit: expected STOP, got STOP
+OK  extra key under C06: expected STOP, got STOP
+OK  C06 list grows: expected STOP, got STOP
+OK  C10 refers to C04: expected STOP, got STOP
+OK  open_questions gains C04: expected STOP, got STOP
+OK  decision_inputs.open_questions changes: expected STOP, got STOP
+OK  decision_inputs.architecture_advantage_cases changes: expected STOP, got STOP
+OK  concentration_controls_bind flips: expected STOP, got STOP
+OK  new top-level key: expected STOP, got STOP
+OK  schema changes: expected STOP, got STOP
+OK  new key under C05: expected ALLOW, got ALLOW
+OK  C04 removed entirely: expected ALLOW, got ALLOW
+OK  decision_inputs.section_8_reason removed: expected ALLOW, got ALLOW
+OK  NaN in C06 on both sides (not JSON-representable in the registered file): expected STOP, got STOP
+OK  CSV allowed edits only: ok=True
+OK  CSV registered cells reordered: ok=False
+OK  CSV non-C04/C05 scorecard value changes: ok=False
+OK  CSV header renamed: ok=False
+ALL AS EXPECTED

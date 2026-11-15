@@ -1,0 +1,5 @@
+# Failed attempts are kept byte-identical; lint findings in them are not fixed.
+extend = "../ruff.toml"
+
+[lint]
+extend-ignore = ["F401"]

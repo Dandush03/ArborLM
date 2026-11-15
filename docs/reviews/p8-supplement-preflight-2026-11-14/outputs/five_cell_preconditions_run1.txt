@@ -1,0 +1,288 @@
+{
+ "b101-o301-s601-C04 calibration": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   733,
+   776,
+   795,
+   828,
+   1889,
+   2166,
+   2371,
+   2878
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s601-C04 A": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   733,
+   776,
+   795,
+   828,
+   1889,
+   2166,
+   2371,
+   2878
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s601-C04 B": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   733,
+   776,
+   795,
+   828,
+   1889,
+   2166,
+   2371,
+   2878
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s601-C05 calibration": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   1799,
+   1818,
+   1881,
+   1889,
+   1916,
+   1952,
+   1961,
+   1992
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s601-C05 A": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   1799,
+   1818,
+   1881,
+   1889,
+   1916,
+   1952,
+   1961,
+   1992
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s601-C05 B": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   1799,
+   1818,
+   1881,
+   1889,
+   1916,
+   1952,
+   1961,
+   1992
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s602-C04 calibration": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   585,
+   851,
+   882,
+   1862,
+   2753,
+   3432,
+   3472,
+   3597
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s602-C04 A": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   585,
+   851,
+   882,
+   1862,
+   2753,
+   3432,
+   3472,
+   3597
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s602-C04 B": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   585,
+   851,
+   882,
+   1862,
+   2753,
+   3432,
+   3472,
+   3597
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s602-C05 calibration": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   275,
+   334,
+   401,
+   480,
+   1372,
+   1493,
+   1496,
+   1528
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s602-C05 A": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   275,
+   334,
+   401,
+   480,
+   1372,
+   1493,
+   1496,
+   1528
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b101-o301-s602-C05 B": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   275,
+   334,
+   401,
+   480,
+   1372,
+   1493,
+   1496,
+   1528
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b102-o302-s601-C05 calibration": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   1357,
+   1359,
+   1378,
+   1383,
+   1384,
+   1390,
+   1524,
+   1535
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b102-o302-s601-C05 A": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   1357,
+   1359,
+   1378,
+   1383,
+   1384,
+   1390,
+   1524,
+   1535
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ },
+ "b102-o302-s601-C05 B": {
+  "queries": 32768,
+  "nonzero_slots": 8,
+  "distinct_row_sets": 1,
+  "slots": [
+   1357,
+   1359,
+   1378,
+   1383,
+   1384,
+   1390,
+   1524,
+   1535
+  ],
+  "auditor_predicate": true,
+  "detector_holds": true,
+  "detector_slots_equal": true,
+  "dtype": "torch.int64"
+ }
+}
+ALL TEN PANEL TRACES MEET THE PRECONDITION

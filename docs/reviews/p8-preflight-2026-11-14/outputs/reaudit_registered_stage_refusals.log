@@ -1,0 +1,22 @@
+== train stage, no dry-run, --continue-after-failure
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+refused: --continue-after-failure is allowed only with --dry-run
+exit=2
+== train stage, no dry-run, no freeze
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+refused: --freeze-commit is required for a registered stage
+exit=2
+== train stage, freeze HEAD (p8 files untracked)
+FreezeError: src/arborlm differs: src/arborlm/p8_analysis.py, src/arborlm/p8_checkpoint.py, src/arborlm/p8_core.py, src/arborlm/p8_eval.py, src/arborlm/p8_objective.py, src/arborlm/p8_panel.py, src/arborlm/p8_pool.py, src/arborlm/p8_sim.py, src/arborlm/p8_train.py; configs/p8_locality_training.toml is missing at the freeze commit; docs/decisions/ADR-0015-p8-locality-aware-memory-training.md differs from the freeze commit
+exit=0
+== eval registered, no freeze
+fatal: path 'configs/p8_locality_training.toml' exists on disk, but not in '74851bd30546ae1cafacaf6e330e191016721f3a'
+fatal: path 'configs/p8_locality_training.toml' exists on disk, but not in '74851bd30546ae1cafacaf6e330e191016721f3a'
+GateError refused: a registered stage requires --freeze-commit
+GateError refused: freeze verification failed: src/arborlm differs: src/arborlm/p8_analysis.py, src/arborlm/p8_checkpoint.py, src/arborlm/p8_core.py, src/arborlm/p8_eval.py, src/arborlm/p8_objective.py, src/arborlm/p8_panel.py, src/arborlm/p8_pool.py, src/arborlm/p8_sim.py, src/arborlm/p8_train.py; configs/p8
+GateError refused: a registered stage requires --freeze-commit
+GateError refused: a registered stage requires --freeze-commit
+GateError refused: freeze verification failed: src/arborlm differs: src/arborlm/p8_analysis.py, src/arborlm/p8_checkpoint.py, src/arborlm/p8_core.py, src/arborlm/p8_eval.py, src/arborlm/p8_objective.py, src/arb
+refusals.log

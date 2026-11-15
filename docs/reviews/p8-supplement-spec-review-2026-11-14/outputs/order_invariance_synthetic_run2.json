@@ -1,0 +1,335 @@
+{
+ "label": "synthetic only; not Astra validation",
+ "single_set": [
+  {
+   "actual_equals_identity_null": true,
+   "layout_seed": 0,
+   "m_actual": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "m_identity": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "reuse_actual": 1.0,
+   "reuse_identity": 1.0
+  },
+  {
+   "actual_equals_identity_null": true,
+   "layout_seed": 1,
+   "m_actual": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "m_identity": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "reuse_actual": 1.0,
+   "reuse_identity": 1.0
+  },
+  {
+   "actual_equals_identity_null": true,
+   "layout_seed": 2,
+   "m_actual": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "m_identity": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "reuse_actual": 1.0,
+   "reuse_identity": 1.0
+  },
+  {
+   "actual_equals_identity_null": true,
+   "layout_seed": 3,
+   "m_actual": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "m_identity": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "reuse_actual": 1.0,
+   "reuse_identity": 1.0
+  },
+  {
+   "actual_equals_identity_null": true,
+   "layout_seed": 4,
+   "m_actual": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "m_identity": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 0,
+    "R8|desc": 0
+   },
+   "reuse_actual": 1.0,
+   "reuse_identity": 1.0
+  }
+ ],
+ "verdict": {
+  "all_invariant_and_predictions_hold": true,
+  "hash_order_dependent": true
+ },
+ "within_row_order_invariance": [
+  {
+   "layout_seed": 0,
+   "m": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 1379,
+    "R8|desc": 1379
+   },
+   "pool": 12,
+   "reuse": 0.9919394841269841,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 1,
+   "m": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 1056,
+    "R8|desc": 1066
+   },
+   "pool": 12,
+   "reuse": 0.9919394841269841,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 2,
+   "m": {
+    "R2|asc": 0,
+    "R2|desc": 0,
+    "R8|asc": 1379,
+    "R8|desc": 1379
+   },
+   "pool": 12,
+   "reuse": 0.9919394841269841,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 0,
+   "m": {
+    "R2|asc": 839,
+    "R2|desc": 830,
+    "R8|asc": 3174,
+    "R8|desc": 3174
+   },
+   "pool": 40,
+   "reuse": 0.7978670634920635,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 1,
+   "m": {
+    "R2|asc": 832,
+    "R2|desc": 840,
+    "R8|asc": 3167,
+    "R8|desc": 3166
+   },
+   "pool": 40,
+   "reuse": 0.7978670634920635,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 2,
+   "m": {
+    "R2|asc": 832,
+    "R2|desc": 837,
+    "R8|asc": 3277,
+    "R8|desc": 3277
+   },
+   "pool": 40,
+   "reuse": 0.7978670634920635,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 0,
+   "m": {
+    "R2|asc": 2644,
+    "R2|desc": 2642,
+    "R8|asc": 3636,
+    "R8|desc": 3636
+   },
+   "pool": 90,
+   "reuse": 0.49603174603174605,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 1,
+   "m": {
+    "R2|asc": 2670,
+    "R2|desc": 2662,
+    "R8|asc": 3685,
+    "R8|desc": 3685
+   },
+   "pool": 90,
+   "reuse": 0.49603174603174605,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 2,
+   "m": {
+    "R2|asc": 2605,
+    "R2|desc": 2587,
+    "R8|asc": 3695,
+    "R8|desc": 3696
+   },
+   "pool": 90,
+   "reuse": 0.49603174603174605,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 0,
+   "m": {
+    "R2|asc": 3397,
+    "R2|desc": 3408,
+    "R8|asc": 3865,
+    "R8|desc": 3866
+   },
+   "pool": 200,
+   "reuse": 0.26103670634920634,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 1,
+   "m": {
+    "R2|asc": 3419,
+    "R2|desc": 3415,
+    "R8|asc": 3869,
+    "R8|desc": 3869
+   },
+   "pool": 200,
+   "reuse": 0.26103670634920634,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 2,
+   "m": {
+    "R2|asc": 3426,
+    "R2|desc": 3430,
+    "R8|asc": 3878,
+    "R8|desc": 3878
+   },
+   "pool": 200,
+   "reuse": 0.26103670634920634,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 0,
+   "m": {
+    "R2|asc": 3869,
+    "R2|desc": 3865,
+    "R8|asc": 3978,
+    "R8|desc": 3977
+   },
+   "pool": 600,
+   "reuse": 0.09412202380952381,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 1,
+   "m": {
+    "R2|asc": 3884,
+    "R2|desc": 3883,
+    "R8|asc": 3978,
+    "R8|desc": 3978
+   },
+   "pool": 600,
+   "reuse": 0.09412202380952381,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 2,
+   "m": {
+    "R2|asc": 3867,
+    "R2|desc": 3865,
+    "R8|asc": 3973,
+    "R8|desc": 3973
+   },
+   "pool": 600,
+   "reuse": 0.09412202380952381,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 0,
+   "m": {
+    "R2|asc": 3870,
+    "R2|desc": 3869,
+    "R8|asc": 3986,
+    "R8|desc": 3987
+   },
+   "pool": 2000,
+   "reuse": 0.031125992063492064,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 1,
+   "m": {
+    "R2|asc": 3876,
+    "R2|desc": 3875,
+    "R8|asc": 3987,
+    "R8|desc": 3987
+   },
+   "pool": 2000,
+   "reuse": 0.031125992063492064,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  },
+  {
+   "layout_seed": 2,
+   "m": {
+    "R2|asc": 3881,
+    "R2|desc": 3881,
+    "R8|asc": 3967,
+    "R8|desc": 3967
+   },
+   "pool": 2000,
+   "reuse": 0.031125992063492064,
+   "sim_and_reuse_equal": true,
+   "stream_hash_equal": false
+  }
+ ]
+}

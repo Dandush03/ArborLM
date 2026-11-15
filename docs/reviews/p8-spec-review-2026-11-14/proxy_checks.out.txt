@@ -1,0 +1,66 @@
+
+=== E1 gradcheck vs finite differences (S=40, rows=2, positions=5) ===
+R_co gradcheck True
+R_temp gradcheck True
+R_conc gradcheck True
+
+=== E2 count of pi > 1/2 with an exact tie at the 8th/9th score ===
+scores [9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 2.0, 1.0, 0.0, -1.0]
+pi [1.0, 1.0, 1.0, 1.0, 1.0, 0.9997, 0.982, 0.5, 0.5, 0.018, 0.0003, 0.0] count>0.5 = 7
+float32 same tie: count>0.5 = 7
+
+=== E3 R_co for 8 selected slots forming one group, all with inclusion p (no tail) ===
+p=0.51: R_co = 0.2443
+p=0.6: R_co = 0.2082
+p=0.75: R_co = 0.1667
+p=0.9: R_co = 0.1389
+p=0.99: R_co = 0.1263
+p=0.999999: R_co = 0.1250
+
+=== E4 sharpening one already-selected slot (top-8 set and tau unchanged) ===
+bump slot0 +0.0: tau unchanged=True R_co=0.88211
+bump slot0 +1.0: tau unchanged=True R_co=0.87219
+bump slot0 +2.0: tau unchanged=True R_co=0.87199
+bump slot0 +3.0: tau unchanged=True R_co=0.87199
+R_temp, bump reused slot0 +0.0: 0.86564
+R_temp, bump reused slot0 +2.0: 0.85540
+R_conc, bump hot slot0 +0.0: 0.75655
+R_conc, bump hot slot0 +2.0: 0.75456
+
+=== E5 init-like geometry (unit keys/router/queries, 16-d, 4096 slots), 8 rows x 64 positions ===
+flat: mean sum(pi)=19.72 (min 12.61, max 31.15); mass outside hard top-8 = 14.29; R_co=0.9842 hard groups/8=0.9956; R_temp=0.9647; R_conc=0.9921; median gap s8-s9=0.0237
+tree: mean sum(pi)=11.75 (min 7.87, max 17.03); mass outside hard top-8 = 5.85; R_co=0.9030 hard groups/8=0.9341; R_temp=0.9615; R_conc=0.9340; median gap s8-s9=0.0371
+tree: share of hard top-8 in top branch = 0.750; median route gap = 0.449
+
+=== E6 Adam(lr .003) on R alone, keys+wq(+router) trainable, fixed synthetic h, 300 steps ===
+flat R_co 0 {'R': 0.9838, 'sum_pi': 19.52, 'gap89': 0.034, 'hard_groups': 7.943, 'distinct_slots': 2073, 'hard_reuse': 0.03}
+flat R_co 100 {'R': 0.1306, 'sum_pi': 8.01, 'gap89': 2.858, 'hard_groups': 1.037, 'distinct_slots': 116, 'hard_reuse': 0.934}
+flat R_co 300 {'R': 0.13, 'sum_pi': 8.02, 'gap89': 2.982, 'hard_groups': 1.037, 'distinct_slots': 106, 'hard_reuse': 0.935}
+flat R_temp 0 {'R': 0.9497, 'sum_pi': 19.52, 'gap89': 0.034, 'hard_groups': 7.943, 'distinct_slots': 2073, 'hard_reuse': 0.03}
+flat R_temp 100 {'R': 0.0698, 'sum_pi': 10.76, 'gap89': 0.018, 'hard_groups': 8.0, 'distinct_slots': 31, 'hard_reuse': 0.946}
+flat R_temp 300 {'R': 0.0669, 'sum_pi': 10.94, 'gap89': 0.024, 'hard_groups': 8.0, 'distinct_slots': 31, 'hard_reuse': 0.948}
+flat R_conc 0 {'R': 0.9677, 'sum_pi': 19.52, 'gap89': 0.034, 'hard_groups': 7.943, 'distinct_slots': 2073, 'hard_reuse': 0.03}
+flat R_conc 100 {'R': 0.3461, 'sum_pi': 7.87, 'gap89': 2.522, 'hard_groups': 8.0, 'distinct_slots': 38, 'hard_reuse': 0.95}
+flat R_conc 300 {'R': 0.3389, 'sum_pi': 7.93, 'gap89': 2.634, 'hard_groups': 8.0, 'distinct_slots': 36, 'hard_reuse': 0.97}
+tree R_co 0 {'R': 0.9055, 'sum_pi': 11.84, 'gap89': 0.05, 'hard_groups': 7.51, 'distinct_slots': 1630, 'hard_reuse': 0.051}
+tree R_co 100 {'R': 0.2294, 'sum_pi': 9.48, 'gap89': 0.484, 'hard_groups': 2.018, 'distinct_slots': 979, 'hard_reuse': 0.174}
+tree R_co 300 {'R': 0.2164, 'sum_pi': 9.71, 'gap89': 0.525, 'hard_groups': 1.965, 'distinct_slots': 993, 'hard_reuse': 0.171}
+tree R_temp 0 {'R': 0.9421, 'sum_pi': 11.84, 'gap89': 0.05, 'hard_groups': 7.51, 'distinct_slots': 1630, 'hard_reuse': 0.051}
+tree R_temp 100 {'R': 0.0468, 'sum_pi': 8.35, 'gap89': 0.29, 'hard_groups': 7.26, 'distinct_slots': 29, 'hard_reuse': 0.946}
+tree R_temp 300 {'R': 0.0416, 'sum_pi': 8.3, 'gap89': 0.416, 'hard_groups': 7.234, 'distinct_slots': 21, 'hard_reuse': 0.954}
+tree R_conc 0 {'R': 0.909, 'sum_pi': 11.84, 'gap89': 0.05, 'hard_groups': 7.51, 'distinct_slots': 1630, 'hard_reuse': 0.051}
+tree R_conc 100 {'R': 0.3485, 'sum_pi': 7.89, 'gap89': 5.145, 'hard_groups': 7.523, 'distinct_slots': 64, 'hard_reuse': 0.94}
+tree R_conc 300 {'R': 0.3476, 'sum_pi': 7.88, 'gap89': 5.307, 'hard_groups': 7.523, 'distinct_slots': 64, 'hard_reuse': 0.94}
+
+=== E7 gradient path through arborlm.pilot_model.Memory parameters ===
+flat {'keys': 0.32300305227910475, 'values': None, 'wq': 0.4283423834174468, 'wo': None, 'gate': None}
+learned_tree {'keys': 0.7226764880123099, 'values': None, 'wq': 1.248863032428487, 'wo': None, 'gate': None, 'router': 1.2399803300542585}
+
+=== E8 first Adam step: rows with only g_R move by ~lr regardless of lambda ===
+lambda=1: |update| row0(L+R)=3.00e-03  rows1-3 (R only)=3.00e-03
+lambda=0.1: |update| row0(L+R)=3.00e-03  rows1-3 (R only)=3.00e-03
+lambda=0.01: |update| row0(L+R)=3.00e-03  rows1-3 (R only)=2.97e-03
+lambda=0.0001: |update| row0(L+R)=3.00e-03  rows1-3 (R only)=1.50e-03
+key rows hard-selected in batch: 2163 of 4096
+key coordinates with |lambda g_R| > Adam eps 1e-8: 65465 of 65536; rows with any such coordinate: 4096; among unselected rows: 1933
+rows with any |g_R| > 1e-12 (ADR gradient-reach metric): 4096

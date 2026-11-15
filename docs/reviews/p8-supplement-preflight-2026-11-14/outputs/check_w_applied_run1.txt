@@ -1,0 +1,17 @@
+W1: VERBATIM: - **No frozen file is edited and none is added under `src/arborlm/`.** The frozen source d
+W2: VERBATIM: - **Frozen functions called unchanged** (none reads the source digest, the spec hash or th
+W3: VERBATIM: - **Verification of frozen material instead:** every file under `src/arborlm/`, `configs/p
+W4: VERBATIM: `supplement_freeze_commit` is recorded together with its tree hash, because the single-lin
+W5: VERBATIM: - The comparison is between `jsonable(analyse(...))` and the registered `analysis.json`, e
+W6: NOT FOUND: - replay through the new wrappers with the registered null provider (precondition evaluate
+W6: NOT FOUND: - for each of the five cells, the rebuilt layout file and hash table equal the `layouts.in
+W6: NOT FOUND: - checks that need local data (replay, layout equality, blob and trace verification) run a
+W6: NOT FOUND: - the synthetic 60-cell run uses single-set C04/C05 cells (m = 0 everywhere) and completes
+W7: VERBATIM: 6. For every stream, layout, setting and tie rule: `misses_warm = first_touch_warm = 0` an
+W7: VERBATIM: 7. The three null `stream_sha256` values of a panel are identical.
+W7: VERBATIM: 8. `concentration_controls_bind` is false and `open_questions` is `[C09]`, unchanged.
+W7: VERBATIM: 9. The supplementary mechanical decision letter is `c` (not a registered decision).
+W8: NOT FOUND: and `stream_sha256 = sha256(p7a_core._pack(stream, "h"))` (little-endian int16, C order), 
+W9: NOT FOUND: - Line 3 → `- **Status: revision 2 — HUMAN-APPROVED for execution on 2026-11-14 (§9), incl
+W9: VERBATIM: - Line 5, replace "Revision 2 has not been re-reviewed." with "Revision 2 was re-checked b
+W9: VERBATIM: - §9.1: list W1–W9 with the date and state that they change no hypothesis, threshold, null

@@ -1,0 +1,1555 @@
+{
+ "blobs": {
+  "adr0015_blob_at_2d10338": "add0a37659e228ba3f6e9a1cd414ec271d88c7c8",
+  "adr0015_working_blob": "add0a37659e228ba3f6e9a1cd414ec271d88c7c8",
+  "eval_json_equal": 60,
+  "extra_files": 13,
+  "files_compared": 98,
+  "files_differing": [],
+  "freeze_tree": "b13a9f9c09083a9b486adb9b691089f00409059f",
+  "results_problems": [],
+  "results_tree": "290d15dedc5cdaf57ea8bbbe3097575b1d582d14",
+  "sim_json_equal": 55,
+  "source_digest": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+  "src_files_at_freeze": 85,
+  "working_src_not_in_freeze": []
+ },
+ "identity_hash": {
+  "equal": true,
+  "expected": "ee4d4b9e4ee25bd6577b08d9db0e479674c1331ba81df40ebcbdec5016a6fd36"
+ },
+ "layouts_five": {
+  "b101-o301-s601-C04": {
+   "bytes": 114688,
+   "equal": true,
+   "sha256": "8cbf9cae08f660be57443a27e59f53746b382fb0432c6a96b3078bb655691126"
+  },
+  "b101-o301-s601-C05": {
+   "bytes": 131072,
+   "equal": true,
+   "sha256": "71948b5323f2cc32922891e6b8294f9f41a36fd6faa2c36a6360b00984fa2325"
+  },
+  "b101-o301-s602-C04": {
+   "bytes": 114688,
+   "equal": true,
+   "sha256": "349aa03a6ca2ed8c1381c7b22ca42eb6226110638397c3bd1c03ac827ed1cf90"
+  },
+  "b101-o301-s602-C05": {
+   "bytes": 131072,
+   "equal": true,
+   "sha256": "d38f11c1cc4edfa74185ec4bbcdc20672230f111f3849626059aada11d2a4d3b"
+  },
+  "b102-o302-s601-C05": {
+   "bytes": 131072,
+   "equal": true,
+   "sha256": "adb06e5186e9f81bc2f9de2f77f8baa21fd403a5d045cf0b52bb9c23be31f598"
+  }
+ },
+ "replay": {
+  "b101-o301-s601-C01": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 337,
+   "variant": "flat"
+  },
+  "b101-o301-s601-C02": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 319,
+   "variant": "fixed_tree"
+  },
+  "b101-o301-s601-C03": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 268,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s601-C06": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 56,
+   "variant": "flat"
+  },
+  "b101-o301-s601-C07": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 85,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s601-C08": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 27,
+   "variant": "flat"
+  },
+  "b101-o301-s601-C09": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 24,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s601-C10": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 20,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s602-C01": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 329,
+   "variant": "flat"
+  },
+  "b101-o301-s602-C02": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 491,
+   "variant": "fixed_tree"
+  },
+  "b101-o301-s602-C03": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 327,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s602-C06": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 91,
+   "variant": "flat"
+  },
+  "b101-o301-s602-C07": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 52,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s602-C08": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 24,
+   "variant": "flat"
+  },
+  "b101-o301-s602-C09": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 27,
+   "variant": "learned_tree"
+  },
+  "b101-o301-s602-C10": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 25,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s601-C01": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 391,
+   "variant": "flat"
+  },
+  "b102-o302-s601-C02": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 351,
+   "variant": "fixed_tree"
+  },
+  "b102-o302-s601-C03": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 292,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s601-C04": {
+   "frozen_keys_missing_vs_registered": [
+    "determinism",
+    "dry_run"
+   ],
+   "frozen_simulate_cell_diffs_vs_registered": [],
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 17,
+   "variant": "flat"
+  },
+  "b102-o302-s601-C06": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 143,
+   "variant": "flat"
+  },
+  "b102-o302-s601-C07": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 102,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s601-C08": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 25,
+   "variant": "flat"
+  },
+  "b102-o302-s601-C09": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 30,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s601-C10": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 17,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s602-C01": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 415,
+   "variant": "flat"
+  },
+  "b102-o302-s602-C02": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 432,
+   "variant": "fixed_tree"
+  },
+  "b102-o302-s602-C03": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 326,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s602-C04": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 17,
+   "variant": "flat"
+  },
+  "b102-o302-s602-C05": {
+   "frozen_keys_missing_vs_registered": [
+    "determinism",
+    "dry_run"
+   ],
+   "frozen_simulate_cell_diffs_vs_registered": [],
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 16,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s602-C06": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 91,
+   "variant": "flat"
+  },
+  "b102-o302-s602-C07": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 126,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s602-C08": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 24,
+   "variant": "flat"
+  },
+  "b102-o302-s602-C09": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 26,
+   "variant": "learned_tree"
+  },
+  "b102-o302-s602-C10": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 24,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s601-C01": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 449,
+   "variant": "flat"
+  },
+  "b103-o303-s601-C02": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 402,
+   "variant": "fixed_tree"
+  },
+  "b103-o303-s601-C03": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 353,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s601-C04": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 29,
+   "variant": "flat"
+  },
+  "b103-o303-s601-C05": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 46,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s601-C06": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 134,
+   "variant": "flat"
+  },
+  "b103-o303-s601-C07": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 88,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s601-C08": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 47,
+   "variant": "flat"
+  },
+  "b103-o303-s601-C09": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 38,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s601-C10": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 34,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s602-C01": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 441,
+   "variant": "flat"
+  },
+  "b103-o303-s602-C02": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 364,
+   "variant": "fixed_tree"
+  },
+  "b103-o303-s602-C03": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 285,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s602-C04": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 38,
+   "variant": "flat"
+  },
+  "b103-o303-s602-C05": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 32,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s602-C06": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 101,
+   "variant": "flat"
+  },
+  "b103-o303-s602-C07": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 96,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s602-C08": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 45,
+   "variant": "flat"
+  },
+  "b103-o303-s602-C09": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 75,
+   "variant": "learned_tree"
+  },
+  "b103-o303-s602-C10": {
+   "preconditions": {
+    "A": false,
+    "B": false
+   },
+   "removed_from_supplement_record": [
+    "frozen_inputs",
+    "panels.A.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.A.null_streams[].precondition=False",
+    "panels.B.null_streams[].method='exact count-preserving (ADR-0013 section 14 item 8)'",
+    "panels.B.null_streams[].precondition=False",
+    "peak_rss_bytes_ru_maxrss",
+    "seconds",
+    "source_sha256",
+    "supplement (NOT literally supplement_*)",
+    "supplement_freeze_commit",
+    "supplement_label",
+    "supplement_null_preconditions",
+    "supplement_source_sha256",
+    "supplement_spec_sha256",
+    "worker_seconds"
+   ],
+   "supplement_layout_file_equal": true,
+   "supplement_wrapper_diffs": [],
+   "unique_selected_slots": 40,
+   "variant": "learned_tree"
+  }
+ },
+ "summary": {
+  "eval_json_equal": 60,
+  "files_compared": 98,
+  "files_differing": 0,
+  "identity_hash_equal": true,
+  "layouts_five_equal": 5,
+  "replay_failures": [],
+  "replayed": 55,
+  "sim_json_equal": 55
+ }
+}

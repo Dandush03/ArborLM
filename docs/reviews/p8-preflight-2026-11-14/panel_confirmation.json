@@ -1,0 +1,262 @@
+{
+ "all_six_earlier_reproduced": true,
+ "at_least_4096_eligible": true,
+ "computational_checks_pass": true,
+ "counts": {
+  "train": {
+   "duplicates_after_cross_split": 67,
+   "eligible_unique_chunks": 156611,
+   "excluded_cross_split": 0,
+   "full_chunks": 156678,
+   "remainder_bytes": 730775,
+   "rows": 36718
+  },
+  "validation": {
+   "duplicates_after_cross_split": 3,
+   "eligible_unique_chunks": 16407,
+   "excluded_cross_split": 15,
+   "full_chunks": 16425,
+   "remainder_bytes": 76623,
+   "rows": 3760
+  }
+ },
+ "descriptive_caveats_not_gates": {
+  "note": "Rows are WikiText lines; articles inferred from ' = Title = ' heading rows (heuristic). Shared rows or articles mean the same source text contributes different 65-byte chunks to different panels; the recipe deduplicates exact chunk contents only (pilot_data limitation text).",
+  "panel_A": {
+   "chunks_whose_65_bytes_occur_anywhere_in_train_text_any_offset": 0,
+   "chunks_whose_65_bytes_occur_more_than_once_in_validation_text": 1,
+   "distinct_source_articles": 58,
+   "distinct_source_rows": 422,
+   "panel_article_titles_also_train_article_titles": 0,
+   "source_articles_shared_with_earlier_ranks_0_3071": 58,
+   "source_articles_shared_with_other_new_panel": 57,
+   "source_rows_shared_with_earlier_ranks_0_3071": 353,
+   "source_rows_shared_with_other_new_panel": 122
+  },
+  "panel_B": {
+   "chunks_whose_65_bytes_occur_anywhere_in_train_text_any_offset": 1,
+   "chunks_whose_65_bytes_occur_more_than_once_in_validation_text": 0,
+   "distinct_source_articles": 58,
+   "distinct_source_rows": 430,
+   "panel_article_titles_also_train_article_titles": 0,
+   "source_articles_shared_with_earlier_ranks_0_3071": 58,
+   "source_articles_shared_with_other_new_panel": 57,
+   "source_rows_shared_with_earlier_ranks_0_3071": 372,
+   "source_rows_shared_with_other_new_panel": 122
+  }
+ },
+ "earlier_panels": {
+  "P1": {
+   "ranks": [
+    0,
+    512
+   ],
+   "recorded_in": "src/arborlm/p2_data.py P1_VALIDATION_SHA256",
+   "recorded_sha256": "2e6b71b9472abf50f9c4705f2f8f13a69465a9f1b8360119ce5882872b772200",
+   "reproduced": true,
+   "sha256": "2e6b71b9472abf50f9c4705f2f8f13a69465a9f1b8360119ce5882872b772200"
+  },
+  "P2": {
+   "ranks": [
+    512,
+    1024
+   ],
+   "recorded_in": "src/arborlm/p3_data.py P2_VALIDATION_SHA256",
+   "recorded_sha256": "8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2",
+   "reproduced": true,
+   "sha256": "8cd4ab927f9ff17f12bba56b011cf11a94d66e1b77f5f4eba97dd100fb455cd2"
+  },
+  "P3": {
+   "ranks": [
+    1024,
+    1536
+   ],
+   "recorded_in": "src/arborlm/p4_data.py P3_VALIDATION_SHA256",
+   "recorded_sha256": "a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0",
+   "reproduced": true,
+   "sha256": "a2d63d4ed5300c74f49374c0e0c5bd6e70d4361bc0b2933a8d5ad33a08d724b0"
+  },
+  "P4": {
+   "ranks": [
+    1536,
+    2048
+   ],
+   "recorded_in": "src/arborlm/p4_data.py P4_VALIDATION_SHA256",
+   "recorded_sha256": "4c6fb3f3a8f22d2e5b14c6703d3d8e02b40681482d5b93ba491e2df0583dc28f",
+   "reproduced": true,
+   "sha256": "4c6fb3f3a8f22d2e5b14c6703d3d8e02b40681482d5b93ba491e2df0583dc28f"
+  },
+  "P5": {
+   "ranks": [
+    2048,
+    2560
+   ],
+   "recorded_in": "src/arborlm/p5_data.py P5_VALIDATION_SHA256",
+   "recorded_sha256": "d50cbe4c303791148c922bfe9201fe00b192c44deef855077860ffc98cc72b98",
+   "reproduced": true,
+   "sha256": "d50cbe4c303791148c922bfe9201fe00b192c44deef855077860ffc98cc72b98"
+  },
+  "P7B_streamB": {
+   "ranks": [
+    2560,
+    3072
+   ],
+   "recorded_in": "results/p7b-2026-11-13/panel/P7BP-20261114T013656010347Z-9433b10446e5458885b6cb83f8d1a915/panel_record.json panel_sha256",
+   "recorded_sha256": "4e2c9d971ee5a1e689cba50db79fd2de500f8098de239411e5b12b9ebd240731",
+   "reproduced": true,
+   "sha256": "4e2c9d971ee5a1e689cba50db79fd2de500f8098de239411e5b12b9ebd240731"
+  }
+ },
+ "identity_crosschecks": {
+  "P5_manifest_sha256": "481dba62b283fc7b732bcf3692f38f37c2891b9d2200f9e1fc304c0f5721e848",
+  "P7B_panel_record_sha256": "00ca362c56936b48e819aa1f38a222e2f2a3a070f60d393404375c98d7ed076f",
+  "P7B_streamB_row_sha256_list_equal": true,
+  "P7B_streamB_rows_detail_equal": true,
+  "train_counts_equal_P5_manifest": true,
+  "train_pool_bytes_equals_P1_train_bytes": true,
+  "train_selection_equals_P5_train.selected.json": true,
+  "validation_counts_equal_P5_manifest": true,
+  "validation_first_2560_selection_equals_P5": true
+ },
+ "inputs": {
+  "manifest.json": {
+   "path": "/Users/daniellaloush/dandush03/ArborLM/data/wikitext2/manifest.json",
+   "sha256": "5bd36b25b695976325729ef66ef24c8eec5cfbe5b9b47c6a8221b442c00c49a3"
+  },
+  "train-00000-of-00001.parquet": {
+   "bytes": 6357543,
+   "matches_pinned": true,
+   "path": "/Users/daniellaloush/dandush03/ArborLM/data/wikitext2/train-00000-of-00001.parquet",
+   "sha256": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7"
+  },
+  "validation-00000-of-00001.parquet": {
+   "bytes": 657209,
+   "matches_pinned": true,
+   "path": "/Users/daniellaloush/dandush03/ArborLM/data/wikitext2/validation-00000-of-00001.parquet",
+   "sha256": "204929b7ff9d6184953f867dedb860e40aa69c078fc1e54b3baaa8fb28511c4c"
+  }
+ },
+ "label": "independent engineering evidence; not Astra validation; not human approval",
+ "new_panels": {
+  "panel_A": {
+   "bytes": 33280,
+   "duplicates_within_panel": 0,
+   "first_rows_detail": [
+    {
+     "byte_offset": 65,
+     "chunk_sha256": "5117ecb8db08a4562d3f833acb05bdceaa7d6d1c6bf5dd784540be4164c82a5f",
+     "rank": 3072,
+     "rank_sha256": "2f04e7af1e6874781ef5bdfbf2265bff79d717cf6c1c18c18e0d5310cdc2830c",
+     "row": 1050
+    },
+    {
+     "byte_offset": 715,
+     "chunk_sha256": "9e50dfc3f73f0b9f1cbf1287f8e3352a34c5e1c41cfbcbd8528e343810570bb1",
+     "rank": 3073,
+     "rank_sha256": "2f0d042b12b9282cf7143bafc7ec3b8933ea843331423dd0569b1ffcda706767",
+     "row": 3565
+    },
+    {
+     "byte_offset": 195,
+     "chunk_sha256": "0e7021608fba65d9c2fa87537768bd6edb73961fd737d5226144520e2f13ea71",
+     "rank": 3074,
+     "rank_sha256": "2f165f8587c33efd1fadd4cab7a09dc5640a0b0b77671a3bb6ae8239101030b0",
+     "row": 1997
+    }
+   ],
+   "overlap": {
+    "calibration_stream_train_ranks_2048_2559": 0,
+    "earlier_P1_ranks_0_511": 0,
+    "earlier_P2_ranks_512_1023": 0,
+    "earlier_P3_ranks_1024_1535": 0,
+    "earlier_P4_ranks_1536_2047": 0,
+    "earlier_P5_ranks_2048_2559": 0,
+    "earlier_P7B_streamB_ranks_2560_3071": 0,
+    "earlier_validation_ranks_0_3071": 0,
+    "every_train_chunk_in_file": 0,
+    "other_new_panel": 0,
+    "training_candidate_pool_train_ranks_0_4095": 0
+   },
+   "panel_sha256": "448017f93b994167d898460b236ac1324e2b7cfcba5cb6df1380840bc7b97342",
+   "ranks": [
+    3072,
+    3584
+   ],
+   "ranks_inclusive": [
+    3072,
+    3583
+   ],
+   "row_sha256_list_sha256": "4f4cc6ba21435fc26e0987a94d086c0f980eead90b283eb4e34c3b27b8680ab3",
+   "rows": 512,
+   "selection_sha256_global_rank": "4ddd461a92238209f37f5ae8f37d71a22caeb735792a3e14b8d980aabb8b4866",
+   "selection_sha256_local_rank": "c3915a41b73bae1a2cc85264816f7e93f139a092aee4b49200d86d1e5e920d7b"
+  },
+  "panel_B": {
+   "bytes": 33280,
+   "duplicates_within_panel": 0,
+   "first_rows_detail": [
+    {
+     "byte_offset": 0,
+     "chunk_sha256": "a3916777116d652734cc8cc24eeeccb5fc0534b243c83b70a3192cfff54d105d",
+     "rank": 3584,
+     "rank_sha256": "3747a84b1ead135447f3385512ab41b501462680cf6508b0d84ef7e4d8651b7f",
+     "row": 1503
+    },
+    {
+     "byte_offset": 195,
+     "chunk_sha256": "47e1131e9fd3c4d518ed42fa2acc1544c2f8510efbd9e39cdb0921bb9b204e04",
+     "rank": 3585,
+     "rank_sha256": "374a6191178b7b9823e392edc58b2946ff192806991a0e138ad08a936c4b5c0b",
+     "row": 2045
+    },
+    {
+     "byte_offset": 65,
+     "chunk_sha256": "bb5e4aa0d3c598dec105a39084e2516d10704ac787845a17d5c1a40d0a7c9a77",
+     "rank": 3586,
+     "rank_sha256": "374c1f0ed02e0a332dc698bf7ae4b5d390a3187793912540781625618223af72",
+     "row": 189
+    }
+   ],
+   "overlap": {
+    "calibration_stream_train_ranks_2048_2559": 0,
+    "earlier_P1_ranks_0_511": 0,
+    "earlier_P2_ranks_512_1023": 0,
+    "earlier_P3_ranks_1024_1535": 0,
+    "earlier_P4_ranks_1536_2047": 0,
+    "earlier_P5_ranks_2048_2559": 0,
+    "earlier_P7B_streamB_ranks_2560_3071": 0,
+    "earlier_validation_ranks_0_3071": 0,
+    "every_train_chunk_in_file": 0,
+    "other_new_panel": 0,
+    "training_candidate_pool_train_ranks_0_4095": 0
+   },
+   "panel_sha256": "1bd4b984c3f7a92882ba5f8b8383314fd2899f69539a3ef2e85e5b25d323607e",
+   "ranks": [
+    3584,
+    4096
+   ],
+   "ranks_inclusive": [
+    3584,
+    4095
+   ],
+   "row_sha256_list_sha256": "af0902f4339a8a210fffdfa023854d3b14b2b7f3a3acc8e5181c669588a6ce68",
+   "rows": 512,
+   "selection_sha256_global_rank": "197f497ec04f8abff1c8909e6e89794511cb408b91229de7c1fc4f4111611552",
+   "selection_sha256_local_rank": "971b994fd75572d53a6060377f35e3b6652ae8059c95e531800c47ba4fe88403"
+  }
+ },
+ "platform": "macOS-27.2.1-arm64-arm-64bit",
+ "python": "3.12.14",
+ "ranking_sanity": {
+  "all_payloads_65_bytes": true,
+  "no_validation_candidate_equals_any_train_chunk": true,
+  "strictly_increasing_keys": true,
+  "unique_contents": true
+ },
+ "schema": "p8-panel-confirmation-v1",
+ "tool": "independent_panel_p8.py (auditor role, claude-opus-5-5) v1",
+ "tool_sha256": "a18b24e94ec1677581d5be466e7a810e61e1f73c796471817e982ad62300a81d",
+ "validation_eligible_candidates": 16407,
+ "verdict_scope": "ELIGIBLE and DISJOINT are decided here; UNUSED additionally depends on the repository search recorded in outputs/repo_search.log and PANEL_PROOF.md",
+ "zero_exact_overlap": true
+}
