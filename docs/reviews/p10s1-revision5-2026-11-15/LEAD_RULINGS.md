@@ -14,3 +14,17 @@ Written by the scientific lead before the independent review of the draft and be
 10. **Efficiency line:** kept on the two control steps.
 11. **T-OQ against D-OQ possibly MC-AMBIGUOUS:** no rule change.
 12. **One number (3.0) on both sides of the saturation line:** accepted provisionally; the review is asked whether the negative side is reachable.
+
+---
+
+## Rulings on the independent review (`review/REVIEW.md`: READY AFTER M1–M7), 2026-11-15 UTC
+
+- **M1 accepted; ruling 9 above is withdrawn.** A loaded cell that is not loaded within its search ceiling returns to the human lead, as drafted. Proceeding automatically would contradict the human lead's direction of §23 and could only print NOT TESTED.
+- **M2 accepted.** The text states that 32K/4K was already seen at 15.1–15.5 bits per slot at 65,536 updates, that PROPORTIONAL is therefore the likelier reading of the saturation line, and what a negative requires (the reviewer's text).
+- **M3 accepted.** The crowding of the fixed-width oracle codes as the fact set grows is stated as a confound of the saturation line with the reviewer's measured shares, and a SUBPROPORTIONAL reading carries that label; it is not attributed to the store.
+- **M4 accepted.** The declaration of the per-row U_P rule also names its effect on the 0.80 floor at 32K/16K.
+- **M5 accepted.** The cap is computed from six-worker rates measured in the rehearsal under the load that will hold in the registered run. S1's timing preview, isolated timing, rehearsal and registered run do not overlap P10-S0's registered run: they start after S0's last training stage has finished. This costs no science and needs no new decision from the human lead (their recorded permission for concurrent studies is not used here). Overlap with P10-S2 follows the conditions already recorded and is rehearsed under that load or not used.
+- **M6 accepted** with the reviewer's text: the 256-slot cell is F-OQ only, 31 configurations per replicate, 155 cells, 70 calibration runs.
+- **M7 accepted.** The reviewer's tie rule for the matched-compute reading is adopted and the claim that the reading is "established for every arm" is removed.
+- **Minors:** all applied as the reviewer wrote them unless the drafting context finds one wrong, in which case it is listed for the lead and not silently skipped.
+- Rulings 1, 3, 4, 6 and 10 stand; 2, 5, 7, 8, 11 and 12 stand with the reviewer's required text. C_max stays 36 hours.
