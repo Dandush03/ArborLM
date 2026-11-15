@@ -28,6 +28,7 @@ imported and called on ``P9IModel`` (a subclass of ``P9Model``). Definitions fix
   averaged over all 64 targets of each row.
 """
 
+import math
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -274,13 +275,19 @@ def corpus_rows(corpus: bytes) -> "Tensor":
     return raw.reshape(-1, p9core.CORPUS_ROW_BYTES)
 
 
-def language_modelling(model: P9IModel, frozen: "Backbone", rows: "Tensor") -> dict[str, float | bool]:
+def _number_or_marker(value: float) -> float | str:
+    return value if math.isfinite(value) else core.nonfinite_str(value)
+
+
+def language_modelling(model: P9IModel, frozen: "Backbone", rows: "Tensor") -> dict[str, float | bool | str]:
     """Next-byte loss before (the frozen backbone) and after (the model's own backbone), and the section
-    I.8.2 flag input: the relative rise."""
+    I.8.2 flag input: the relative rise. A non-finite loss or rise keeps its raw value as the string
+    ``"+inf"`` / ``"-inf"`` / ``"nan"`` and counts as a rise above 5% (``degraded`` True)."""
     before = next_byte_loss(frozen, rows)
     after = next_byte_loss(model.backbone, rows)
     rise = (after - before) / before
-    return {"before_nats": before, "after_nats": after, "relative_rise": rise, "degraded": bool(rise > core.LM_DEGRADED_RELATIVE)}
+    degraded = (not math.isfinite(rise)) or rise > core.LM_DEGRADED_RELATIVE
+    return {"before_nats": _number_or_marker(before), "after_nats": _number_or_marker(after), "relative_rise": _number_or_marker(rise), "degraded": bool(degraded)}
 
 
 # --- one snapshot ---------------------------------------------------------------------------------------------------------------

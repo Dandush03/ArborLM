@@ -810,7 +810,7 @@ def work_analyze(args: argparse.Namespace) -> int:
     sizes = DRY_SLOTS if args.dry else core.SLOTS_BY_SIZE
     table = classes.measures_from_eval(records)
     lm = {
-        (r["arm"], int(r["slots"]), int(r["seed"])): float(r["language_modelling"]["relative_rise"])
+        (r["arm"], int(r["slots"]), int(r["seed"])): core.number(r["language_modelling"]["relative_rise"])
         for r in records.values()
         if "language_modelling" in r and tuple(r["parent"]) == core.PRIMARY_PARENT
     }
@@ -823,7 +823,7 @@ def work_analyze(args: argparse.Namespace) -> int:
     result, status = verdict["analysis"], verdict["status"]
     write_json(
         target,
-        {
+        core.jsonable({
             **core.envelope("analysis"),
             "dry": bool(args.dry),
             "status": status,
@@ -841,7 +841,7 @@ def work_analyze(args: argparse.Namespace) -> int:
             "cells_read": sorted(records),
             "calibration": calibration_binding(args),
             "identity": dict(core.code_identity()),
-        },
+        }),
     )
     print(json.dumps({"status": status, "outcome": result["selection"]["outcome"]}))
     return 0

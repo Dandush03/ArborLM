@@ -267,8 +267,8 @@ def backbone_contrast(table: Mapping[Key, Measure], embedding_arm: str, state_ar
 
 def language_modelling_annotation(relative_rises: Mapping[int, float]) -> dict[str, Any]:
     """LANGUAGE MODELLING DEGRADED if the next-byte loss rises by more than 5% relative on either B101 seed
-    (``relative_rises[seed]``); otherwise not degraded. Carried with BB; never blocks selection."""
-    degraded = any(r > core.LM_DEGRADED_RELATIVE for r in relative_rises.values())
+    (``relative_rises[seed]``); a non-finite rise (a non-finite next-byte loss) counts as above 5%; otherwise not degraded. Carried with BB; never blocks selection."""
+    degraded = any((not math.isfinite(r)) or r > core.LM_DEGRADED_RELATIVE for r in relative_rises.values())
     return {"label": LM_DEGRADED if degraded else "LANGUAGE MODELLING PRESERVED", "degraded": degraded, "relative_rises": {str(k): v for k, v in relative_rises.items()}}
 
 

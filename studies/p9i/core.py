@@ -759,3 +759,38 @@ def make_cell(arm: str, slots: int, parent: tuple[int, int] = PRIMARY_PARENT, se
     registered or calibration label is never made this way)."""
     block = "BB" if arm in BB_ARMS else "core"
     return Cell(block, "test", arm, slots, parent, seed, make_label(arm, slots, parent, seed, "TEST-"))
+
+
+# --- non-finite numbers in records -------------------------------------------------------------------------------
+NONFINITE = {"+inf": math.inf, "-inf": -math.inf, "nan": math.nan}
+
+
+def nonfinite_str(value: float) -> str:
+    """``"+inf"``, ``"-inf"`` or ``"nan"`` for a non-finite float."""
+    if math.isnan(value):
+        return "nan"
+    return "+inf" if value > 0 else "-inf"
+
+
+def jsonable(value: Any) -> Any:
+    """Records are JSON without NaN or infinity: every non-finite float becomes its string form
+    (``"+inf"``, ``"-inf"``, ``"nan"``); tuples become lists. Nothing else changes."""
+    if isinstance(value, float):
+        return value if math.isfinite(value) else nonfinite_str(value)
+    if isinstance(value, dict):
+        return {k: jsonable(v) for k, v in value.items()}
+    if isinstance(value, list | tuple):
+        return [jsonable(v) for v in value]
+    return value
+
+
+def number(value: Any) -> float:
+    """Reader side of ``jsonable``: a number or one of its string forms as a float; None (a legacy
+    non-finite value) reads as NaN."""
+    if value is None:
+        return math.nan
+    if isinstance(value, str):
+        if value not in NONFINITE:
+            raise ValueError(f"not a number or a non-finite marker: {value!r}")
+        return NONFINITE[value]
+    return float(value)

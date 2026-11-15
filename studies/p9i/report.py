@@ -163,8 +163,9 @@ def write_report(run_dir: Path, out_dir: Path, *, banner: str | None = None) -> 
     for p in paths:
         if p.exists():
             raise FileExistsError(p)
+    class_rows, cell_rows = core.jsonable(class_rows), core.jsonable(cell_rows)  # non-finite values as strings
     _write_csv(paths[0], class_rows)
     _write_csv(paths[1], cell_rows)
     paths[2].write_text(render_markdown(analysis, class_rows, cell_rows, banner), encoding="utf-8")
-    write_json(paths[3], {**core.envelope("analysis"), "banner": banner, "status": analysis["status"], "selection": analysis["analysis"]["selection"], "interpretable": analysis.get("interpretable"), "gate_reasons": analysis.get("gate_reasons"), "classes": class_rows, "cells": cell_rows, "not_claimed": list(NOT_CLAIMED), "classes_module": classes.OUTCOMES})
+    write_json(paths[3], core.jsonable({**core.envelope("analysis"), "banner": banner, "status": analysis["status"], "selection": analysis["analysis"]["selection"], "interpretable": analysis.get("interpretable"), "gate_reasons": analysis.get("gate_reasons"), "classes": class_rows, "cells": cell_rows, "not_claimed": list(NOT_CLAIMED), "classes_module": classes.OUTCOMES}))
     return paths
