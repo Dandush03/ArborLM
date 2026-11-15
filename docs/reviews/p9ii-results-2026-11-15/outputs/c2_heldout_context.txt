@@ -1,0 +1,48 @@
+S1 A0: cells 16, with Panel A > 0.5: 11; fact-independent share (un-centred) median 0.006; min(H1/A, H2/A) per cell with A > 0.5: [0.703, 0.807, 0.816, 0.849, 0.85, 0.87, 0.887, 0.958, 0.965, 0.982, 0.982]
+    d01-j0: A 0.0776 H1/A 0.987 H2/A 0.962 fact-indep 0.352
+    d01-j1: A 0.0356 H1/A 0.959 H2/A 0.959 fact-indep 0.927
+    d02-j0: A 0.9263 H1/A 0.893 H2/A 0.849 fact-indep 0.004
+    d02-j1: A 0.0420 H1/A 0.953 H2/A 0.919 fact-indep 0.929
+    d03-j0: A 0.9409 H1/A 0.949 H2/A 0.850 fact-indep 0.005
+    d03-j1: A 0.6011 H1/A 0.906 H2/A 0.703 fact-indep 0.006
+    d04-j0: A 0.8467 H1/A 0.893 H2/A 0.887 fact-indep 0.002
+    d04-j1: A 0.9243 H1/A 0.915 H2/A 0.870 fact-indep 0.006
+    d05-j0: A 0.8774 H1/A 0.807 H2/A 0.877 fact-indep 0.004
+    d05-j1: A 0.9141 H1/A 0.816 H2/A 0.879 fact-indep 0.007
+    d06-j0: A 0.2070 H1/A 0.950 H2/A 0.875 fact-indep 0.099
+    d06-j1: A 0.4834 H1/A 0.913 H2/A 0.916 fact-indep 0.010
+    d07-j0: A 0.9854 H1/A 0.982 H2/A 0.999 fact-indep 0.006
+    d07-j1: A 0.9888 H1/A 0.982 H2/A 0.994 fact-indep 0.004
+    d08-j0: A 0.9653 H1/A 0.965 H2/A 0.969 fact-indep 0.006
+    d08-j1: A 0.9668 H1/A 0.958 H2/A 0.967 fact-indep 0.007
+S1 A1: cells 16, with Panel A > 0.5: 16; fact-independent share (un-centred) median 0.033; min(H1/A, H2/A) per cell with A > 0.5: [0.955, 0.956, 0.958, 0.962, 0.968, 0.97, 0.973, 0.976, 0.978, 0.978, 0.986, 0.987, 0.991, 0.991, 0.991, 0.994]
+S1 A4: cells 16, with Panel A > 0.5: 9; fact-independent share (un-centred) median 0.006; min(H1/A, H2/A) per cell with A > 0.5: [0.719, 0.733, 0.786, 0.787, 0.824, 0.832, 0.838, 0.856, 0.932]
+S1 A5-C: cells 16, with Panel A > 0.5: 16; fact-independent share (un-centred) median 0.938; min(H1/A, H2/A) per cell with A > 0.5: [0.698, 0.735, 0.764, 0.785, 0.874, 0.876, 0.883, 0.908, 0.911, 0.917, 0.945, 0.952, 0.954, 0.964, 0.964, 0.972]
+    d01-j0: A 0.9907 H1/A 0.987 H2/A 0.972 fact-indep 0.940 centred mean cos 0.0007
+    d01-j1: A 0.9717 H1/A 0.991 H2/A 0.964 fact-indep 0.937 centred mean cos -0.0001
+    d02-j0: A 0.9893 H1/A 0.985 H2/A 0.698 fact-indep 0.953 centred mean cos -0.0001
+    d02-j1: A 0.9946 H1/A 0.980 H2/A 0.735 fact-indep 0.950 centred mean cos 0.0006
+    d03-j0: A 0.9927 H1/A 0.874 H2/A 0.764 fact-indep 0.944 centred mean cos 0.0009
+    d03-j1: A 0.9971 H1/A 0.901 H2/A 0.785 fact-indep 0.944 centred mean cos -0.0014
+    d04-j0: A 0.9951 H1/A 0.964 H2/A 0.965 fact-indep 0.936 centred mean cos 0.0001
+    d04-j1: A 0.9951 H1/A 0.973 H2/A 0.954 fact-indep 0.943 centred mean cos -0.0006
+    d05-j0: A 0.9946 H1/A 0.917 H2/A 0.972 fact-indep 0.919 centred mean cos 0.0008
+    d05-j1: A 0.9888 H1/A 0.883 H2/A 0.946 fact-indep 0.938 centred mean cos 0.0016
+    d06-j0: A 0.9873 H1/A 0.911 H2/A 0.964 fact-indep 0.933 centred mean cos 0.0013
+    d06-j1: A 0.9902 H1/A 0.908 H2/A 0.948 fact-indep 0.940 centred mean cos 0.0002
+    d07-j0: A 0.9980 H1/A 0.952 H2/A 0.996 fact-indep 0.918 centred mean cos -0.0007
+    d07-j1: A 0.9956 H1/A 0.945 H2/A 1.000 fact-indep 0.919 centred mean cos -0.0008
+    d08-j0: A 0.9985 H1/A 0.874 H2/A 0.988 fact-indep 0.938 centred mean cos -0.0024
+    d08-j1: A 0.9980 H1/A 0.876 H2/A 0.988 fact-indep 0.908 centred mean cos -0.0010
+S1 A5-D: cells 16, with Panel A > 0.5: 16; fact-independent share (un-centred) median 0.005; min(H1/A, H2/A) per cell with A > 0.5: [0.964, 0.966, 0.969, 0.969, 0.97, 0.977, 0.978, 0.979, 0.98, 0.981, 0.988, 0.993, 0.994, 0.995, 0.995, 0.996]
+S2 A0: cells 8, with Panel A > 0.5: 8; fact-independent share (un-centred) median 0.007; min(H1/A, H2/A) per cell with A > 0.5: [0.912, 0.942, 0.946, 0.955, 0.963, 0.974, 0.977, 0.984]
+    d09-j0: A 0.9951 H1/A 0.984 H2/A 0.942 fact-indep 0.007
+    d09-j1: A 0.9976 H1/A 0.988 H2/A 0.946 fact-indep 0.006
+    d10-j0: A 0.9955 H1/A 0.967 H2/A 0.963 fact-indep 0.005
+    d10-j1: A 0.9937 H1/A 0.955 H2/A 0.964 fact-indep 0.007
+    d11-j0: A 0.9951 H1/A 0.912 H2/A 0.964 fact-indep 0.004
+    d11-j1: A 0.9967 H1/A 0.974 H2/A 0.985 fact-indep 0.007
+    d12-j0: A 0.9955 H1/A 0.984 H2/A 0.987 fact-indep 0.008
+    d12-j1: A 0.9967 H1/A 0.980 H2/A 0.977 fact-indep 0.009
+S2 A1: cells 8, with Panel A > 0.5: 8; fact-independent share (un-centred) median 0.036; min(H1/A, H2/A) per cell with A > 0.5: [0.89, 0.9, 0.906, 0.911, 0.911, 0.924, 0.938, 0.957]
+S2 A5-D: cells 8, with Panel A > 0.5: 8; fact-independent share (un-centred) median 0.005; min(H1/A, H2/A) per cell with A > 0.5: [0.957, 0.968, 0.972, 0.975, 0.979, 0.98, 0.99, 0.99]

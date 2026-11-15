@@ -411,6 +411,13 @@ The lead's five conditions, checked at the freeze:
 
 **Decision: the lead approves the single registered run of P9-II as frozen here**, under the human lead's delegation quoted above. It covers no re-run, no second attempt after an engineering stop, no change of budget, and nothing outside this study. The outcome is reported as registered whatever it is. This is not Astra validation and not a separate human approval. Astra review: NOT_PERFORMED.
 
+### Record of the registered run — 2026-11-15 (UTC)
+
+- The single registered run was executed once at freeze commit `d2746d3` (run directory `experiments/P9IIP-registered-20261115b`). Every stage ended COMPLETE; 174 of 174 cells; no cell was re-run.
+- Registered outcome as printed and as recomputed by Opus 5.5 from raw records (171 comparisons, 0 disagreements): **ADDRESSING-RELIABLE: A5-D (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0; at 16,384: NOT DISTINGUISHED FROM A0**; interface carried forward by the order of §8.6: A0; Stage 3: SCALE PROBE UNINFORMATIVE.
+- Records: `results/p9ii-run-2026-11-15/` (`OUTCOME.md` holds the lead's rulings on the audit's findings; no rule, threshold or reading was changed after observation). Review: `docs/reviews/p9ii-results-2026-11-15/REVIEW.md`.
+- **The outcome has not been accepted by the human lead.** This entry is a record, not an approval. Astra review: NOT_PERFORMED.
+
 ## 17. How revisions 2, 3 and 4 answer the reviews
 
 Review: `docs/reviews/adr-0019-design-2026-11-15/REVIEW.md` (Opus 5.5), verdict NOT READY. Numbers marked *(lead's choice)* in the text are the review's suggested values or the lead's rulings; all are fixed before calibration.
