@@ -2,7 +2,7 @@
 
 - **Status: REVISION 4 — CONFIRMED BY THE AUDITOR SUBJECT TO R1–R7, WHICH THIS REVISION APPLIES; APPROVED BY THE LEAD UNDER THE HUMAN LEAD'S DELEGATION FOR IMPLEMENTATION, CALIBRATION AND REHEARSAL (§16). SPEC: PENDING ASTRA REVIEW. No registered run is approved yet; nothing has run.**
 - **Date:** 2026-11-15 (UTC)
-- **Revision history.** Revision 1 (2026-11-15): first draft, reviewed by Opus 5.5 with verdict NOT READY (3 blockers, 9 majors, 17 minors). Revision 2: applied that review under the lead's rulings and listed ten open points. Revision 3: applied the lead's rulings on those open points (§18); confirmation review by Opus 5.5 (`adr-0019-review/CONFIRM.md`) with verdict READY AFTER the text edits R1–R7 (two majors, five minors, no blocker). Revision 4 (this text): applies R1–R7 with the values the auditor suggested, which the lead took; §17 maps every finding to its change. The auditor stated that with R1–R7 applied verbatim no further review round is needed, and that any changed passage needs a re-check.
+- **Revision history.** Revision 1 (2026-11-15): first draft, reviewed by Opus 5.5 with verdict NOT READY (3 blockers, 9 majors, 17 minors). Revision 2: applied that review under the lead's rulings and listed ten open points. Revision 3: applied the lead's rulings on those open points (§18); confirmation review by Opus 5.5 (`docs/reviews/adr-0019-design-2026-11-15/CONFIRM.md`) with verdict READY AFTER the text edits R1–R7 (two majors, five minors, no blocker). Revision 4 (this text): applies R1–R7 with the values the auditor suggested, which the lead took; §17 maps every finding to its change. The auditor stated that with R1–R7 applied verbatim no further review round is needed, and that any changed passage needs a re-check.
 - **Origin.** The human lead's mission "ArborLM — Research Consolidation and P9-II Authorization" (2026-11-15) and the later directions recorded in §16.
 - **Evidence it rests on.** P9-I (ADR-0017 Part I): registered outcome COMPLETE — NO_INTERFACE_SELECTED, `results/p9i-run-attempt2-2026-11-15/`; independent review `docs/reviews/p9i-results-2026-11-15/REVIEW.md` (Opus 5.5). The diagnostic runs of that review and of the revision-1 specification review are exploratory and are not registered evidence.
 - **Roles (study-specific).** Lead: Claude Fable 5.2. Specification review, implementation audit and recomputation: Opus 5.5, in contexts separate from the integration work. Implementation: Sonnet 5.5. Inventory: Haiku 5.5. ADR-0012 stays not approved. **Astra review: NOT_PERFORMED.** The specification review is neither Astra validation nor a human approval.
@@ -386,7 +386,7 @@ The consolidation of P8 and P9-I into `main` must be complete before implementat
 
 ## 17. How revisions 2, 3 and 4 answer the reviews
 
-Review: `adr-0019-review/REVIEW.md` (Opus 5.5), verdict NOT READY. Numbers marked *(lead's choice)* in the text are the review's suggested values or the lead's rulings; all are fixed before calibration.
+Review: `docs/reviews/adr-0019-design-2026-11-15/REVIEW.md` (Opus 5.5), verdict NOT READY. Numbers marked *(lead's choice)* in the text are the review's suggested values or the lead's rulings; all are fixed before calibration.
 
 | Finding | Change in revision 2 |
 |---|---|
@@ -420,7 +420,7 @@ Review: `adr-0019-review/REVIEW.md` (Opus 5.5), verdict NOT READY. Numbers marke
 | Minor 16 §13 additions | Adopted, §13. |
 | Minor 17 bookkeeping | Adopted: A1-S target-stream seed (§7), A5-D batch definition (§4). |
 
-**Confirmation review of revision 3** (`adr-0019-review/CONFIRM.md`, Opus 5.5): READY AFTER R1–R7. All seven are applied with the auditor's text and suggested values.
+**Confirmation review of revision 3** (`docs/reviews/adr-0019-design-2026-11-15/CONFIRM.md`, Opus 5.5): READY AFTER R1–R7. All seven are applied with the auditor's text and suggested values.
 
 | Finding | Change in revision 4 |
 |---|---|
