@@ -175,7 +175,7 @@ NOT_STARTED = "NOT STARTED — NO P9-II CALIBRATION RECORD"
 
 
 CUT3_LABEL = "one initialization seed per draw at 16,384"  # ADR-0020 section 10.4, cut 3: "the label states ..."
-PRODUCT_KINDS = ("analysis", "q1_gate")  # records that carry classes, labels or candidates; ``write_record`` stamps them
+UNSTAMPED_KINDS = ("rehearsal",)  # the whitelisted rehearsal record has a fixed set of fields; every other record ``write_record`` writes that names A5-D carries the three strings (the re-check's informational item)
 A5D = "A5-D"
 
 
@@ -246,7 +246,7 @@ RSS_WORKER_BYTES = 3 * GIB
 RSS_AGGREGATE_BYTES = 18 * GIB  # S0 18 GiB (section 10.4)
 REHEARSAL_PEAK_LIMIT_BYTES = int(1.5 * GIB)  # a block whose rehearsal peak per worker exceeds this is NOT RUN — MEMORY
 WORKERS = 6
-CAP_HOURS = 16.0
+DEFAULT_CAP_HOURS = 16.0  # only the value the config template renders for a new file; every reader takes the cap from the config (cap_hours), the one place a pre-freeze raise is made
 HEADROOM = 2.0
 REHEARSAL_UPDATES = 256
 REHEARSAL_BUSY_PROCESSES = 12
@@ -735,7 +735,7 @@ def registered_config() -> dict[str, Any]:
         },
         "generation": {"cap_seconds": GENERATION_PROVISIONAL_CAP_SECONDS, "provisional": True, "measured_seconds": 0.0, "floor_seconds": GENERATION_FLOOR_SECONDS},
         "resources": {
-            "rss_worker_bytes": RSS_WORKER_BYTES, "rss_aggregate_bytes": RSS_AGGREGATE_BYTES, "rehearsal_peak_limit_bytes": REHEARSAL_PEAK_LIMIT_BYTES, "workers": WORKERS, "cap_hours": CAP_HOURS,
+            "rss_worker_bytes": RSS_WORKER_BYTES, "rss_aggregate_bytes": RSS_AGGREGATE_BYTES, "rehearsal_peak_limit_bytes": REHEARSAL_PEAK_LIMIT_BYTES, "workers": WORKERS, "cap_hours": DEFAULT_CAP_HOURS,
             "headroom": HEADROOM, "rehearsal_updates": REHEARSAL_UPDATES, "rehearsal_busy_processes": REHEARSAL_BUSY_PROCESSES,
         },
     }
@@ -746,7 +746,14 @@ def validate_config(data: dict[str, Any]) -> dict[str, Any]:
     unless it is the placeholder."""
     expected = registered_config()
     expected.pop("generation")
-    _validate({k: v for k, v in data.items() if k != "generation"}, expected, "P10S0 config")
+    expected["resources"] = {k: v for k, v in expected["resources"].items() if k != "cap_hours"}
+    resources = data.get("resources")
+    if not isinstance(resources, dict) or "cap_hours" not in resources:
+        raise ValueError("P10S0 config needs resources.cap_hours")
+    hours_value = resources["cap_hours"]
+    if isinstance(hours_value, bool) or not isinstance(hours_value, int | float) or not math.isfinite(float(hours_value)) or float(hours_value) <= 0:
+        raise ValueError("P10S0 config: resources.cap_hours must be a positive finite number (it is the one place the hour cap is set)")
+    _validate({k: ({kk: vv for kk, vv in v.items() if kk != "cap_hours"} if k == "resources" else v) for k, v in data.items() if k != "generation"}, expected, "P10S0 config")
     g = data.get("generation")
     if not isinstance(g, dict) or set(g) != {"cap_seconds", "provisional", "measured_seconds", "floor_seconds"}:
         raise ValueError("P10S0 config needs a [generation] block")
@@ -766,7 +773,7 @@ def load_config(path: Path | None = None) -> dict[str, Any]:
         return validate_config(tomllib.load(stream))
 
 
-def render_config_toml(generation: Mapping[str, Any] | None = None) -> str:
+def render_config_toml(generation: Mapping[str, Any] | None = None, cap_hours_value: float | None = None) -> str:
     """The canonical text of ``configs/p10s0_qualification.toml`` (a test requires byte equality with the constants; ``generation`` is the block the rehearsal sets, provisional by default)."""
     from studies.p9i.core import _toml_lines
 
@@ -779,6 +786,8 @@ def render_config_toml(generation: Mapping[str, Any] | None = None) -> str:
     cfg = registered_config()
     if generation is not None:
         cfg["generation"] = dict(generation)
+    if cap_hours_value is not None:
+        cfg["resources"]["cap_hours"] = float(cap_hours_value)
     return "\n".join([*header, *_toml_lines(cfg, "")]) + "\n"
 
 
@@ -791,6 +800,11 @@ def set_generation_cap(measured_seconds: float) -> dict[str, Any]:
     if not math.isfinite(measured_seconds) or measured_seconds <= 0:
         raise ValueError("the measured generation time must be a positive finite number")
     return {"cap_seconds": max(GENERATION_FLOOR_SECONDS, 2.0 * measured_seconds), "provisional": False, "measured_seconds": float(measured_seconds), "floor_seconds": GENERATION_FLOOR_SECONDS}
+
+
+def cap_hours(config: Path | None = None) -> float:
+    """The hour cap of the one budget, read from the config (the only place it is set; the freeze hashes the config)."""
+    return float(load_config(config)["resources"]["cap_hours"])
 
 
 def resource_limits(config: Path | None = None) -> dict[str, Any]:
@@ -892,7 +906,7 @@ def write_record(path: Path, record: Mapping[str, Any]) -> None:
         raise ValueError("P10S0 record needs study, schema and a registered kind")
     path.parent.mkdir(parents=True, exist_ok=True)
     out = dict(record)
-    if record["kind"] in PRODUCT_KINDS:
+    if record["kind"] not in UNSTAMPED_KINDS:
         out = stamp(jsonable(out))
         assert_provenance(json.dumps(out, default=str, ensure_ascii=False), f"{record['kind']} record")
     write_json(path, out)
@@ -934,7 +948,7 @@ class Ledger:
 
     def __init__(self, path: Path, cap_seconds: float | None = None) -> None:
         self.path = path
-        self.cap_seconds = cap_seconds if cap_seconds is not None else CAP_HOURS * 3600.0
+        self.cap_seconds = cap_seconds if cap_seconds is not None else cap_hours() * 3600.0
 
     def entries(self) -> list[dict[str, Any]]:
         if not self.path.is_file():
@@ -963,8 +977,8 @@ class Ledger:
         write_json(self.path, {"study": STUDY, "schema": SCHEMA, "kind": "ledger", "cap_seconds": self.cap_seconds, "entries": entries})
 
 
-def ledger_for(root: Path) -> Ledger:
-    return Ledger(root / f"{STUDY}-ledger.json")
+def ledger_for(root: Path, config: Path | None = None) -> Ledger:
+    return Ledger(root / f"{STUDY}-ledger.json", cap_hours(config) * 3600.0)
 
 
 # --- analytical cost counts (labelled analytical; no efficiency claim) -----------------------------------------------------------------------------

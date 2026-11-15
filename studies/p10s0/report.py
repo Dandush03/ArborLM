@@ -278,9 +278,14 @@ def _a6_section(res: Mapping[str, Any]) -> str:
     return _section("Oracle-query reference A6 per draw", lines)
 
 
-def render_markdown(result: Mapping[str, Any], *, banner: str | None = None) -> str:
+TEST_PROFILE_BANNER = "TEST PROFILE — test seeds, tiny sizes, synthetic backbone; not a result"
+
+
+def render_markdown(result: Mapping[str, Any], *, banner: str | None = None, profile: str = "registered") -> str:
     """RESULTS.md. Rows 1 to 3 print only their status (no class is derived); rows 4 to 6 print every section."""
     out = ["# P10-S0 — addressing qualification (ADR-0020 design revision 4)\n", f"{banner_text(result)}\n", f"{NUMBER_LABELS}\n"]
+    if profile == "test":
+        out.insert(1, f"**{TEST_PROFILE_BANNER}**\n")
     if banner:
         out.append(f"**{banner}**\n")
     out.append(_arm_selection(result))
@@ -321,12 +326,13 @@ def write_report(run_dir: Path, out_dir: Path, *, banner: str | None = None) -> 
     for p in paths:
         if p.exists():
             raise FileExistsError(p)
-    md = render_markdown(result, banner=banner)
+    profile = str(analysis.get("profile") or "registered")
+    md = render_markdown(result, banner=banner, profile=profile)
     problems = check_a5d_provenance(md)
     if problems:
         raise ValueError(f"the A5-D provenance block is missing from sections {problems}")
     paths[0].write_text(md, encoding="utf-8")
-    product = core.stamp(core.jsonable({**core.envelope("analysis"), "banner": banner, "result": result, "not_claimed": list(NOT_CLAIMED), "identity": analysis.get("identity"), "environment": analysis.get("environment")}))
+    product = core.stamp(core.jsonable({**core.envelope("analysis"), "banner": banner, "profile": profile, "dry": bool(analysis.get("dry")), "profile_banner": TEST_PROFILE_BANNER if profile == "test" else None, "result": result, "not_claimed": list(NOT_CLAIMED), "identity": analysis.get("identity"), "environment": analysis.get("environment")}))
     text = json.dumps(product, default=str, ensure_ascii=False)
     core.assert_provenance(text, "results.json")
     csv_text = classes_csv(result)

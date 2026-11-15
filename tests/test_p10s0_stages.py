@@ -141,7 +141,7 @@ def test_projection_and_caps_procedure(dry: dict[str, Any], tmp_path: Path) -> N
     caps_out = tmp_path / "stage_caps.json"
     assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--gates-wall-seconds", "100", "--gates-per-draw-seconds", "1", "--analysis-wall-seconds", "5", "--report-wall-seconds", "5", "--generate-wall-seconds", "60", "--dry"]) == 0
     caps = json.loads(caps_out.read_text())
-    assert set(caps["q1"]) == {"full", "cut3"} and caps["gates"] == 2 * (100 + 12 * 1) and caps["generate"] == 120 and caps["analysis"] == 60.0 and caps["measured"]["reserve_analysis_report"] == 10
+    assert set(caps["q1"]) == {"full", "cut3"} and caps["gates"] == 2 * (100 + 12 * 1) and caps["generate"] == 120 and caps["analysis"] == 60.0 and caps["measured"]["reserve_analysis_report"] == 60.0
     assert stages.main(["caps", "--projection", str(out), "--out", str(caps_out), "--dry"]) == 2
     rates = stages.rates_of(p)
     assert len(rates) == 24 and budget.block_projection(core.wx_cells("A1"), rates).cells == 20
@@ -396,7 +396,7 @@ def make_run_dir_with_plan(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     (auditor / "c2_mapping_enumeration.py").write_text("X = 1\n")
     sel = repo / "studies/p10s0/freeze/arm_selection.json"
     sel.write_text("{}")
-    (repo / stages.CAPS_FILE).write_text(json.dumps({"gates": 800.0, "measured": {"gates": 400.0, "reserve_analysis_report": 2.0}}))
+    (repo / stages.CAPS_FILE).write_text(json.dumps({"gates": 800.0, "generate": 60.0, "analysis": 60.0, "report": 60.0, "measured": {"gates": 400.0}}))
     seed_set_of = {str(k): name for k, name in enumerate(core.DRAW_NAMES, start=1)}
     for name in core.SET_NAMES:
         (run / "draws" / name).mkdir(parents=True)
@@ -414,7 +414,7 @@ def test_freeze_plan_command_writes_a_plan_that_verify_plan_accepts(tmp_path: Pa
     assert stages.main(argv) == 0
     plan = json.loads(out.read_text())
     assert plan["study"] == "P10S0" and plan["kind"] == "freeze_plan" and plan["arm_selection"]["path"] == "studies/p10s0/freeze/arm_selection.json" and plan["projection"]["path"] == str(proj.resolve())
-    assert set(plan["data_manifests"]) == set(core.SET_NAMES) and plan["before_q1_projected_seconds"] == {"gates": 400.0} and plan["reserve_analysis_report_seconds"] == 2.0 and plan["profile"] == "registered" and set(plan["pinned_auditor_scripts"]) == {"c5_rev2_mapping_and_consistency.py", "c2_mapping_enumeration.py"} and plan["generation"]["provisional"] is False and plan["stage_caps_sha256"] == file_sha256(repo / stages.CAPS_FILE)
+    assert set(plan["data_manifests"]) == set(core.SET_NAMES) and plan["before_q1_projected_seconds"] == {"gates": 400.0} and plan["reserve_analysis_report_seconds"] == 60.0 and plan["profile"] == "registered" and set(plan["pinned_auditor_scripts"]) == {"c5_rev2_mapping_and_consistency.py", "c2_mapping_enumeration.py"} and plan["generation"]["provisional"] is False and plan["stage_caps_sha256"] == file_sha256(repo / stages.CAPS_FILE)
     stages.verify_plan(plan, repo, run)
     assert stages.load_plan(repo)["draw_plan"] == plan["draw_plan"]
     assert stages.main(argv) == 2  # never over an existing plan

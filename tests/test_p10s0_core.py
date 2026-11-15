@@ -195,10 +195,10 @@ def test_draw_plan_substitutes_reserves_in_order() -> None:
 
 # --- config -------------------------------------------------------------------------------------------------------------------------------------------
 def test_config_file_is_the_rendered_constants_and_resources_are_read_from_it() -> None:
-    assert (ROOT / core.DEFAULT_CONFIG).read_text(encoding="utf-8") == core.render_config_toml(core.generation_block())  # the generation block is the one the rehearsal sets
+    assert (ROOT / core.DEFAULT_CONFIG).read_text(encoding="utf-8") == core.render_config_toml(core.generation_block(), core.cap_hours())  # the generation block is the one the rehearsal sets
     assert core.validate_config(core.load_config())
     lim = core.resource_limits()
-    assert lim["rss_worker_bytes"] == 3 * 1024**3 and lim["rss_aggregate_bytes"] == 18 * 1024**3 and lim["workers"] == 6 and lim["cap_hours"] == 16.0 and lim["headroom"] == 2.0 and lim["rehearsal_peak_limit_bytes"] == int(1.5 * 1024**3)
+    assert lim["rss_worker_bytes"] == 3 * 1024**3 and lim["rss_aggregate_bytes"] == 18 * 1024**3 and lim["workers"] == 6 and lim["cap_hours"] == core.cap_hours() and lim["headroom"] == 2.0 and lim["rehearsal_peak_limit_bytes"] == int(1.5 * 1024**3)
     cfg = core.load_config()
     assert cfg["arms"]["candidate_arms"] == ["A5-D", "A1"] and cfg["calibrated"]["mu"] == 1.0 and cfg["seeds"]["registered_base"] == 200001
     bad = core.registered_config()
@@ -246,7 +246,7 @@ def test_s0_imports_only_hashed_study_modules() -> None:
 
 def test_ledger_is_one_budget_of_sixteen_hours(tmp_path: Path) -> None:
     ledger = core.Ledger(tmp_path / "ledger.json")
-    assert ledger.cap_seconds == 16 * 3600 and ledger.charged() == 0 and ledger.remaining() == 16 * 3600
+    assert ledger.cap_seconds == core.cap_hours() * 3600 == 16 * 3600 and ledger.charged() == 0 and ledger.remaining() == 16 * 3600
     ledger.require_room("q1", 3600)
     ledger.charge("gates", "run", 100.0)
     ledger.charge("q1", "run", 5000.0)

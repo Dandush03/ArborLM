@@ -190,7 +190,7 @@ def most_expensive(table: Mapping[str, Mapping[str, Any]], block: str, candidate
 # --- the headroom rule and the cuts (section 10.4, reading A) -------------------------------------------------------------------------------------------
 def holds(charged_seconds: float, projected_seconds: Sequence[float], cap_seconds: float | None = None) -> bool:
     """(hours already charged) + 2 x (rehearsed projection of the stages evaluated) <= 16 hours."""
-    cap = core.CAP_HOURS * 3600.0 if cap_seconds is None else cap_seconds
+    cap = core.cap_hours() * 3600.0 if cap_seconds is None else cap_seconds
     return all(math.isfinite(p) for p in projected_seconds) and charged_seconds + core.HEADROOM * float(sum(projected_seconds)) <= cap
 
 
@@ -235,7 +235,7 @@ def post_q1_decision(charged_seconds: float, wx_seconds: float, probe_seconds: f
 
 def multiple_thresholds(table_hours: Mapping[str, float], other_hours: float = core.PROJECTED_OTHER_HOURS) -> dict[str, float]:
     """Context only: the multiple m of the slowest P9-I rates up to which each plan fits, (16 - 2 x other) / (2 x the block's six-worker hours) (section 10.4 bullets)."""
-    return {k: (core.CAP_HOURS - core.HEADROOM * other_hours) / (core.HEADROOM * v) for k, v in table_hours.items() if v > 0}
+    return {k: (core.cap_hours() - core.HEADROOM * other_hours) / (core.HEADROOM * v) for k, v in table_hours.items() if v > 0}
 
 
 # --- memory (section 10.4) ----------------------------------------------------------------------------------------------------------------------------
@@ -278,15 +278,18 @@ def caps_table(rates: Rates, *, gates_wall_seconds: float, gates_per_draw_second
     def entry(p: Mapping[str, Any]) -> dict[str, float]:
         return {"train": core.HEADROOM * float(p["training_seconds"]), "evaluate": core.HEADROOM * float(p["evaluation_seconds"])}
 
+    analysis_cap, report_cap = max(floor_seconds, core.HEADROOM * analysis_wall_seconds), max(floor_seconds, core.HEADROOM * report_wall_seconds)
+    reserve_seconds = (analysis_cap + report_cap) / core.HEADROOM
     return {
         "rule": "each block cap = 2 x the rehearsed projection (task start-up included) of its configuration; gates, generation, analysis and report: 2 x a measured time with the stated floor",
         "floor_seconds": floor_seconds,
         "generate": max(floor_seconds, core.HEADROOM * generate_wall_seconds), "gates": max(floor_seconds, core.HEADROOM * gates_measured),
-        "measured": {"gates": gates_measured, "gates_rehearsal_draw": gates_wall_seconds, "gates_per_draw": gates_per_draw_seconds, "analysis": analysis_wall_seconds, "report": report_wall_seconds, "generate": generate_wall_seconds, "reserve_analysis_report": analysis_wall_seconds + report_wall_seconds},
+        "measured": {"gates": gates_measured, "gates_rehearsal_draw": gates_wall_seconds, "gates_per_draw": gates_per_draw_seconds, "analysis": analysis_wall_seconds, "report": report_wall_seconds, "generate": generate_wall_seconds, "reserve_analysis_report": reserve_seconds},
+        "reserve_rule": "the headroom rule doubles every projected term, so the reserve is (analysis cap + report cap) / 2: doubled it is the sum of the frozen analysis and report stage caps (each with its floor), the lead's ruling on the re-check (N4)",
         "q1": {k.split(":")[1]: entry(v) for k, v in table.items() if k.startswith("q1:")},
         "wx": {k.split(":")[1]: entry(v) for k, v in table.items() if k.startswith("wx:")},
         "probe": {k.split(":")[1]: entry(v) for k, v in table.items() if k.startswith("probe:")},
-        "analysis": max(floor_seconds, core.HEADROOM * analysis_wall_seconds), "report": max(floor_seconds, core.HEADROOM * report_wall_seconds),
+        "analysis": analysis_cap, "report": report_cap,
     }  # fmt: skip
 
 

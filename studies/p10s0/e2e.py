@@ -2,7 +2,8 @@
 """P10S0 end-to-end exercise of the whole registered sequence through the real launch scripts, on test seeds (the audit's M7; ADR-0020 addendum: "the whole registered sequence is exercised end to end on
 test seeds through the real launch scripts before the freeze").
 
-One command: ``uv run --locked python -m studies.p10s0.e2e [--out <dir>]``. It copies the working tree (tracked and untracked, not ignored) into a throwaway git repository, marks a run directory with the
+One command: ``uv run --locked python -m studies.p10s0.e2e [--variant memory|probe] [--out <dir>]``. Variant ``memory`` (the default) is the sequence below. Variant ``probe`` leaves the rehearsal as
+measured (no cut, no raised peak), so the 65,536-slot probe is NOT refused for memory and runs: it also checks that the probe stage is refused until WX has run, then runs WX and the probe. It copies the working tree (tracked and untracked, not ignored) into a throwaway git repository, marks a run directory with the
 ``TEST_PROFILE`` marker (which selects seed sets ``p10s0-test-draw-k`` / ``p10s0-test-reserve-k``, tiny sizes and a synthetic backbone: test seeds 920001+ only, never a registered or rehearsal seed), and runs, in the
 clone and through the real scripts and commands (the clone is source files only: a ``uv`` shim on PATH runs the current interpreter, so no environment is built; the clone and its outputs are deleted at the end, success or failure; only e2e.log and summary.json stay):
 
@@ -65,7 +66,7 @@ def commit(clone: Path, message: str, log: Path) -> str:
 def clone_env(clone: Path, shim: Path) -> dict[str, str]:
     """The environment of every command in the clone: the clone's sources first on the path, and a ``uv`` shim first on PATH. The launch scripts call ``uv run --locked python -m ...``; the shim runs the
     current interpreter instead, so the clone is source files only and no virtual environment is ever built (the lead's constraint on disk use)."""
-    return {"PYTHONPATH": str(clone), "PATH": f"{shim}{os.pathsep}{os.environ.get('PATH', '')}", "UV_OFFLINE": "1"}
+    return {"PYTHONPATH": str(clone), "PATH": f"{shim}{os.pathsep}{os.environ.get('PATH', '')}", "UV_OFFLINE": "1", "P10S0_E2E_CLONE": "1"}
 
 
 def write_uv_shim(shim: Path) -> Path:
@@ -102,13 +103,13 @@ def solve_factor(projection: dict[str, Any]) -> float:
     return (SCALED_Q1_FULL_HOURS * 3600.0 - (t1 - rate_part)) / rate_part
 
 
-def scale_rehearsal(src: Path, dst: Path, factor: float) -> None:
+def scale_rehearsal(src: Path, dst: Path, factor: float, *, raise_probe_peak: bool = True) -> None:
     """A copy of the rehearsal records with every seconds-per-update multiplied by ``factor`` and the 32K/64K items' peak raised above the memory limit (test data only; the whitelist is unchanged)."""
     shutil.copytree(src, dst)
     for path in dst.glob("rehearsal/*/rehearsal.json"):
         rec = json.loads(path.read_text())
         rec["seconds_per_update"] = float(rec["seconds_per_update"]) * factor
-        if rec["celltype"] == "32K/64K":
+        if raise_probe_peak and rec["celltype"] == "32K/64K":
             rec["peak_rss_bytes"] = OVER_LIMIT_BYTES
             rec["sampled_rss_bytes"] = OVER_LIMIT_BYTES
         path.write_text(json.dumps(rec, sort_keys=True))
@@ -129,7 +130,7 @@ def diagnose(work: Path, log: Path) -> None:
             stream.write(f"DIAGNOSIS {failed.name}: {failed.read_text()[:500]}\n")
 
 
-def run_e2e(out: Path, source: Path | None = None) -> dict[str, Any]:
+def run_e2e(out: Path, source: Path | None = None, variant: str = "memory") -> dict[str, Any]:
     """The exercise. ``out`` keeps only ``e2e.log`` and ``summary.json``: the clone, its run directories and the uv shim live in ``out/work`` and are deleted when it ends, on success and on failure."""
     source = source or core.repo_root()
     out.mkdir(parents=True, exist_ok=True)
@@ -138,7 +139,7 @@ def run_e2e(out: Path, source: Path | None = None) -> dict[str, Any]:
         raise E2EError(f"{work} exists")
     work.mkdir()
     try:
-        return _run_e2e(out, work, source)
+        return _run_e2e(out, work, source, variant)
     except E2EError:
         diagnose(work, out / "e2e.log")
         raise
@@ -146,11 +147,13 @@ def run_e2e(out: Path, source: Path | None = None) -> dict[str, Any]:
         shutil.rmtree(work, ignore_errors=True)
 
 
-def _run_e2e(out: Path, work: Path, source: Path) -> dict[str, Any]:
+def _run_e2e(out: Path, work: Path, source: Path, variant: str = "memory") -> dict[str, Any]:
+    if variant not in ("memory", "probe"):
+        raise E2EError(f"unknown variant {variant!r}")
     log = out / "e2e.log"
     clone = work / "clone"
     write_uv_shim(work / "shim")
-    summary: dict[str, Any] = {"out": str(out), "steps": {}}
+    summary: dict[str, Any] = {"out": str(out), "variant": variant, "steps": {}}
     clone.mkdir()
     copy_working_tree(source, clone)
     run(["git", "init", "-q"], clone, log)
@@ -176,9 +179,9 @@ def _run_e2e(out: Path, work: Path, source: Path) -> dict[str, Any]:
     # --- projection, scaled so that cut 3 applies and the probe is over the memory limit; caps ---
     probe_json = exp / "E2E-projection-unscaled.json"
     stages(clone, log, "projection", "--dry", "--rehearsal-alone", str(reh), "--rehearsal-busy", str(reh), "--arm-selection", str(arm), "--out", str(probe_json))
-    factor = solve_factor(json.loads(probe_json.read_text()))
+    factor = solve_factor(json.loads(probe_json.read_text())) if variant == "memory" else 1.0
     scaled = exp / "E2E-rehearsal-scaled"
-    scale_rehearsal(reh, scaled, factor)
+    scale_rehearsal(reh, scaled, factor, raise_probe_peak=variant == "memory")
     projection = exp / "E2E-projection.json"
     stages(clone, log, "projection", "--dry", "--rehearsal-alone", str(scaled), "--rehearsal-busy", str(scaled), "--arm-selection", str(arm), "--out", str(projection))
     summary["steps"]["scale_factor"] = factor
@@ -200,7 +203,10 @@ def _run_e2e(out: Path, work: Path, source: Path) -> dict[str, Any]:
     freeze = commit(clone, "e2e freeze", log)
     summary["freeze_commit"] = freeze
     # --- the registered sequence, through the scripts ---
-    order = [("gates", 0), ("q1", 0), ("q1_gate", 0), ("wx", 0), ("probe", 2), ("analysis", 0), ("report", 0), ("q1", 2)]
+    if variant == "memory":
+        order = [("gates", 0), ("q1", 0), ("q1_gate", 0), ("wx", 0), ("probe", 2), ("analysis", 0), ("report", 0), ("q1", 2)]
+    else:  # the probe before WX is refused by the driver; after WX it runs
+        order = [("gates", 0), ("q1", 0), ("q1_gate", 0), ("probe", 2), ("wx", 0), ("probe", 0), ("analysis", 0), ("report", 0), ("q1", 2)]
     codes: list[tuple[str, int]] = []
     for name, expect in order:
         codes.append((name, script(clone, log, name, run_dir, freeze, expect=expect)))
@@ -212,23 +218,35 @@ def _run_e2e(out: Path, work: Path, source: Path) -> dict[str, Any]:
         cut3=start["cut3"], cut_label=start["label"], candidate=gate["candidate"], blocks=gate["blocks"], outcome_row=analysis["outcome"]["row"], outcome_label=analysis["outcome"]["label"],
         results_markdown_bytes=len((run_dir / "results" / "RESULTS.md").read_bytes()), ledger_entries=len(json.loads((exp / "P10S0-ledger.json").read_text())["entries"]),
     )  # fmt: skip
-    if not (start["cut3"] and start["label"] == core.CUT3_LABEL):
-        raise E2EError("the Q1 start record does not carry cut 3 and its label")
-    if gate["blocks"]["probe"]["status"] != "NOT RUN — MEMORY" or not gate["blocks"]["wx"]["run"]:
-        raise E2EError(f"unexpected block decisions: {gate['blocks']}")
-    if core.CUT3_LABEL not in analysis["outcome"]["label"] or not (run_dir / "results/RESULTS.md").is_file():
-        raise E2EError("the analysis does not print the cut-3 label or the report is missing")
+    results_json = json.loads((run_dir / "results" / "results.json").read_text())
+    if gate.get("profile") != "test" or results_json.get("profile") != "test" or "TEST PROFILE" not in (run_dir / "results/RESULTS.md").read_text(encoding="utf-8"):
+        raise E2EError("the gate, the results record or the report does not carry the test profile")
+    if variant == "memory":
+        if not (start["cut3"] and start["label"] == core.CUT3_LABEL):
+            raise E2EError("the Q1 start record does not carry cut 3 and its label")
+        if gate["blocks"]["probe"]["status"] != "NOT RUN — MEMORY" or not gate["blocks"]["wx"]["run"]:
+            raise E2EError(f"unexpected block decisions: {gate['blocks']}")
+        if core.CUT3_LABEL not in analysis["outcome"]["label"] or not (run_dir / "results/RESULTS.md").is_file():
+            raise E2EError("the analysis does not print the cut-3 label or the report is missing")
+    else:
+        if start["cut3"] or not (gate["blocks"]["probe"]["run"] and gate["blocks"]["wx"]["run"]):
+            raise E2EError(f"the probe variant expected full Q1 with WX and the probe to run: {gate['blocks']}, cut3 {start['cut3']}")
+        probe_manifest = json.loads((run_dir / "evaluate-probe" / "manifest.json").read_text())
+        summary["steps"]["evaluate_probe"] = {"status": probe_manifest["status"], "tasks": len(probe_manifest["tasks"]), "cap_seconds": probe_manifest["caps"]["stage_seconds"]}
+        if len(probe_manifest["tasks"]) != 6:
+            raise E2EError("the probe's evaluation did not have its six cells")
     (out / "summary.json").write_text(json.dumps(summary, indent=1, sort_keys=True, default=str))
     return summary
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m studies.p10s0.e2e", description=__doc__)
+    parser.add_argument("--variant", choices=("memory", "probe"), default="memory", help="memory: cut 3 and the probe refused for memory; probe: no cut, the probe runs after WX")
     parser.add_argument("--out", default=None, help="a new directory for the throwaway clone and the logs (default: a temporary directory)")
     args = parser.parse_args(argv)
     out = Path(args.out) if args.out else Path(tempfile.mkdtemp(prefix="p10s0-e2e-"))
     try:
-        summary = run_e2e(out)
+        summary = run_e2e(out, variant=args.variant)
     except E2EError as exc:
         print(f"E2E FAILED: {exc}", file=sys.stderr)
         return 1

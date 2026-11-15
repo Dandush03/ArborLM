@@ -3,6 +3,7 @@
 added the plan, the A5-D strings in every output through one emit path, the post-freeze records, the reserve in the headroom rule, the gates cap on thirteen draws, the cut-3 label, the acceptance banner read
 from the record, the generation cap set by the rehearsal, the busy-process rehearsal, WX's AUC and i. Test seeds 920001-920999 only. Self-check only: not independent review, not Astra validation, not human approval."""
 
+import argparse
 import json
 import os
 import subprocess
@@ -107,22 +108,100 @@ def test_only_generation_and_the_driver_accept_registered_mode_before_the_freeze
     assert not any(tmp_path.iterdir())
 
 
-def test_registered_generation_needs_the_recorded_acceptance_the_run_decision_and_a_set_generation_cap(tmp_path: Path) -> None:
-    repo = tmp_path / "repo"
+class Reached(Exception):
+    """Raised by the stand-ins for everything a registered path would start: reaching one means every guard before it passed."""
+
+
+def throwaway_repo(root: Path, *, acceptance: bool, decision: bool, cap: bool) -> Path:
+    """A repository in a temporary directory with or without the recorded acceptance, the run decision and a set generation cap (the real tree is never read by the tests that use it)."""
+    repo = root / "repo"
     (repo / "docs/decisions").mkdir(parents=True)
     (repo / "configs").mkdir()
-    (repo / "docs/decisions/ADR-0019-robust-sparse-address-learning.md").write_text("no acceptance here\n")
-    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml())
+    (repo / core.P9II_ACCEPTANCE_SOURCE).write_text(("accepted: " + core.P9II_ACCEPTANCE_QUOTE if acceptance else "no acceptance here") + "\n")
+    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(core.set_generation_cap(30.0) if cap else None))
+    if decision:
+        (repo / "results/p10s0-freeze-test").mkdir(parents=True)
+        (repo / "results/p10s0-freeze-test/DECISION.md").write_text("decision\n")
+    return repo
 
-    def attempt() -> str:
-        ns = stages.build_parser().parse_args(["generate", "--mode", "registered", "--run-dir", str(tmp_path / "run"), "--i-understand-freeze-time", "--generation-cap-from-config", "--repo", str(repo)])
-        ns.repo = None  # the repository override is refused for registered generation; the guards under test read the repository the code is in
-        return ns
 
-    # the real tree has the acceptance and no DECISION file: the decision file is what is missing
-    with pytest.raises(pool.StageRefused, match="DECISION.md|accepted|acceptance|provisional"):
-        stages.cmd_generate(attempt())
-    assert core.p9ii_acceptance(repo)["accepted"] is False and core.p9ii_acceptance(ROOT)["accepted"] is True
+def block_everything_started(monkeypatch: pytest.MonkeyPatch, repo: Path | None = None) -> None:
+    """Stand-ins that raise ``Reached`` for the repository lookup (when ``repo`` is None), the run directory, the stage runner and the pool, so a test of a registered path cannot start anything or touch the real tree."""
+
+    def reached(*_a: Any, **_k: Any) -> Any:
+        raise Reached
+
+    if repo is not None:
+        monkeypatch.setattr(stages, "repo_of", lambda _args: repo)
+    monkeypatch.setattr(stages, "new_run_dir", reached)
+    monkeypatch.setattr(stages, "run_stage_tasks", reached)
+    monkeypatch.setattr(stages, "single", reached)
+    monkeypatch.setattr(pool, "run_stage", reached)
+
+
+def test_registered_generation_needs_the_recorded_acceptance_the_run_decision_and_a_set_generation_cap(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """On throwaway repositories only (the re-check's N1): once the real tree has its decision file and its cap set, this test must still start nothing in it."""
+
+    def attempt(repo: Path) -> argparse.Namespace:
+        monkeypatch.undo()
+        block_everything_started(monkeypatch, repo)
+        return stages.build_parser().parse_args(["generate", "--mode", "registered", "--run-dir", str(tmp_path / "run"), "--i-understand-freeze-time", "--generation-cap-from-config"])
+
+    with pytest.raises(pool.StageRefused, match="acceptance"):
+        stages.cmd_generate(attempt(throwaway_repo(tmp_path / "a", acceptance=False, decision=True, cap=True)))
+    with pytest.raises(pool.StageRefused, match="DECISION.md"):
+        stages.cmd_generate(attempt(throwaway_repo(tmp_path / "b", acceptance=True, decision=False, cap=True)))
+    with pytest.raises(pool.StageRefused, match="provisional"):
+        stages.cmd_generate(attempt(throwaway_repo(tmp_path / "c", acceptance=True, decision=True, cap=False)))
+    with pytest.raises(Reached):  # every guard passed: the stand-in for the run directory was reached
+        stages.cmd_generate(attempt(throwaway_repo(tmp_path / "d", acceptance=True, decision=True, cap=True)))
+    assert core.p9ii_acceptance(throwaway_repo(tmp_path / "e", acceptance=False, decision=False, cap=False))["accepted"] is False
+    assert not (tmp_path / "run").exists()
+
+
+def test_a_registered_path_run_from_a_test_refuses_unless_the_repository_and_run_root_are_temporary(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Independent of where the checkout lives (a clone in a temporary directory is a temporary repository): the stand-in paths below are fixed non-temporary and temporary locations."""
+    assert os.environ.get("PYTEST_CURRENT_TEST")
+    not_temporary = Path("/usr/local/p10s0-never-created")
+    assert stages.is_temporary(tmp_path) and not stages.is_temporary(not_temporary)
+    ns = stages.build_parser().parse_args(["generate", "--mode", "registered", "--run-dir", str(tmp_path / "run"), "--i-understand-freeze-time", "--generation-cap-from-config"])
+    monkeypatch.setattr(stages, "repo_of", lambda _a: not_temporary)
+    with pytest.raises(pool.StageRefused, match="temporary repository"):
+        stages.cmd_generate(ns)
+    monkeypatch.setattr(stages, "repo_of", lambda _a: tmp_path)
+    ns_run = stages.build_parser().parse_args(["generate", "--mode", "registered", "--run-dir", str(not_temporary / "run"), "--i-understand-freeze-time", "--generation-cap-from-config"])
+    with pytest.raises(pool.StageRefused, match="temporary run root"):
+        stages.cmd_generate(ns_run)
+    reg = stages.build_parser().parse_args(["registered", "q1", "--run-dir", str(tmp_path), "--freeze-commit", "abc", "--caps", CAPS])
+    reg.mode = stages.REGISTERED
+    monkeypatch.setattr(stages, "repo_of", lambda _a: not_temporary)
+    with pytest.raises(pool.StageRefused, match="temporary repository"):
+        stages.cmd_registered(reg)  # refused before the freeze commit, the plan or the ledger is looked at
+    assert not not_temporary.exists() and not (tmp_path / "run").exists()
+
+
+def registered_test_functions() -> list[tuple[str, str, list[str]]]:
+    """(file, name, argument names) of every test function of the S0 suite whose source starts a registered path."""
+    import ast
+
+    out = []
+    markers = ("stages.main(", "cmd_generate", "cmd_registered", "registered_state", "registered_worker_guard", "run_stage_tasks", "work_generate", "work_train", "work_evaluate", "work_gates", "work_analyze", "work_report")
+    for path in sorted((ROOT / "tests").glob("test_p10s0_*.py")):
+        source = path.read_text(encoding="utf-8")
+        for node in ast.walk(ast.parse(source)):
+            if isinstance(node, ast.FunctionDef) and node.name.startswith("test_"):
+                text = ast.get_source_segment(source, node) or ""
+                if ('"registered"' in text or "REGISTERED" in text or "registered" in text.split("def ", 1)[0]) and any(m in text for m in markers):
+                    out.append((path.name, node.name, [a.arg for a in node.args.args]))
+    return out
+
+
+def test_every_s0_test_that_invokes_a_registered_path_does_so_under_a_temporary_root() -> None:
+    """Suite-wide guard (the re-check's N1): such a test takes ``tmp_path`` (the run root and any repository are then temporary), and the code refuses under pytest otherwise (the test above)."""
+    found = registered_test_functions()
+    assert found, "the scan found no registered-path test: it would pass vacuously"
+    loose = [(f, n) for f, n, args in found if "tmp_path" not in args and "tmp_path_factory" not in args]
+    assert loose == [], f"registered-path tests without a temporary root: {loose}"
 
 
 # --- the commit that added the plan (M1) ---------------------------------------------------------------------------------------------------------------
@@ -262,7 +341,7 @@ def test_the_gates_cap_is_measured_on_thirteen_draws() -> None:
     assert budget.gates_measured_seconds(100.0, 5.0) == 100.0 + 12 * 5.0
     rates = {item: budget.Rate(0.01, 1, 1, 1.0) for item in budget.rehearsal_items()}
     caps = budget.caps_table(rates, gates_wall_seconds=100, gates_per_draw_seconds=5, analysis_wall_seconds=3, report_wall_seconds=2, generate_wall_seconds=10)
-    assert caps["gates"] == 2 * 160 and caps["measured"]["gates"] == 160 and caps["measured"]["reserve_analysis_report"] == 5 and caps["measured"]["gates_per_draw"] == 5
+    assert caps["gates"] == 2 * 160 and caps["measured"]["gates"] == 160 and caps["measured"]["reserve_analysis_report"] == 60.0 and caps["analysis"] == caps["report"] == 60.0 and caps["measured"]["gates_per_draw"] == 5
     with pytest.raises(ValueError, match="per-draw"):
         budget.caps_table(rates, gates_wall_seconds=100, gates_per_draw_seconds=0, analysis_wall_seconds=3, report_wall_seconds=2, generate_wall_seconds=10)
 
@@ -308,7 +387,10 @@ def test_the_generation_cap_is_set_by_the_rehearsal_and_validated(tmp_path: Path
             core.set_generation_cap(bad)
     cfg = tmp_path / "c.toml"
     cfg.write_text(core.render_config_toml(g))
-    assert core.load_config(cfg)["generation"]["cap_seconds"] == 60.0 and core.generation_block(ROOT / core.DEFAULT_CONFIG)["provisional"] is True
+    assert core.load_config(cfg)["generation"]["cap_seconds"] == 60.0
+    cfg.write_text(core.render_config_toml())
+    assert core.generation_block(cfg)["provisional"] is True  # the placeholder is asserted on a temporary config only: the real one is set before the freeze
+    cfg.write_text(core.render_config_toml(g))
     cfg.write_text(core.render_config_toml({**g, "cap_seconds": 59.0}))
     with pytest.raises(ValueError, match="below the floor"):
         core.load_config(cfg)
@@ -325,7 +407,7 @@ def test_set_generation_cap_command_rewrites_the_config_from_a_generation_manife
     (repo / "configs").mkdir(parents=True)
     (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml())
     manifest = tmp_path / "manifest.json"
-    core.write_record(manifest, {**core.envelope("stage_manifest"), "stage": "generate-p10s0-rehearsal", "status": "COMPLETE", "tasks": [{"seconds": 40.0}]})
+    core.write_record(manifest, {**core.envelope("stage_manifest"), "stage": "generate-p10s0-rehearsal", "status": "COMPLETE", "mode": "rehearsal", "tasks": [{"seconds": 40.0}]})
     assert stages.main(["set-generation-cap", "--repo", str(repo), "--generate-manifest", str(manifest)]) == 0
     g = core.generation_block(repo / core.DEFAULT_CONFIG)
     assert g == {"cap_seconds": 80.0, "provisional": False, "measured_seconds": 40.0, "floor_seconds": 60.0}
