@@ -1,0 +1,38 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+== chance intervals (mine vs implementer vs attempt-1 record)
+  [ok] interval n=2048: mine (36, 96), implementer (36, 96), level 0.999875
+  [ok] interval n=8192: mine (198, 318), implementer (198, 318), level 0.999875
+  [ok] interval n=32768: mine (905, 1147), implementer (905, 1147), level 0.999875
+  [ok] attempt-1 G2 A/2048: correct 70 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 A/8192: correct 259 of 8192, interval [198, 318]
+  [ok] attempt-1 G2 A/32768: correct 1077 of 32768, interval [905, 1147]
+  [ok] attempt-1 G2 A/unseen: correct 60 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 B/2048: correct 62 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 B/8192: correct 256 of 8192, interval [198, 318]
+  [ok] attempt-1 G2 B/32768: correct 1005 of 32768, interval [905, 1147]
+  [ok] attempt-1 G2 B/unseen: correct 66 of 2048, interval [36, 96]
+  [ok] attempt-1 G2 family passed and 8 tests
+registry: 57 cells; facts per size {4096: 2048, 16384: 8192, 65536: 32768}; U 8192; calibration /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-calibration-2026-11-14/calibration.json sha256 087bf0b5885859a78781e32cb0e0ce8d3b154dfcc471965cf82f06718c509f44
+== scenario S1_bb_works
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/g3_analyze_report.py", line 186, in <module>
+    an = scenario("S1_bb_works", lambda c: base(c, ("BB",)), {"outcome": "BB", "step": 1, "status": "COMPLETE", "interpretable": True, "cells_read": 57, "class:BB:4096": "INTERFACE_WORKS", "class:BB:16384": "INTERFACE_WORKS", "class:BB:65536": "INTERFACE_WORKS", "class:W7:16384": "INTERFACE_FAILS"})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/g3_analyze_report.py", line 156, in scenario
+    run = build(name, acc, **kw)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/p9i-prefreeze-audit-2026-11-14/g3_analyze_report.py", line 113, in build
+    write_json(d / "train.json", train_record(cell))
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/io.py", line 46, in write_json
+    atomic_write(path, canonical_json(obj))
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/src/arborlm/io.py", line 33, in atomic_write
+    fd, temporary = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/tempfile.py", line 357, in mkstemp
+    return _mkstemp_inner(dir, prefix, suffix, flags, output_type)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/tempfile.py", line 256, in _mkstemp_inner
+    fd = _os.open(file, flags, 0o600)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/g3_run1/S1_bb_works/cells/N-n16384-b101-o301-s1801/.train.json.ws47jyrb'
