@@ -1,0 +1,38 @@
+20000 random tables; disagreements: 0
+examples: []
+outcomes exercised:
+  classes   INTERFACE_FAILS              61619
+  classes   INTERFACE_PARTIAL            44707
+  classes   INTERFACE_WORKS              16245
+  classes   INTERMEDIATE                 7427
+  classes   MODEL_STORES_FACTS           3894
+  classes   NOT REPLICATED               109892
+  classes   NOT_EVALUATED                36216
+  contrast  BACKBONE ADDS NOTHING        2594
+  contrast  BACKBONE CONTRAST MIXED      12688
+  contrast  BACKBONE CONTRIBUTES         11213
+  contrast  BACKBONE HURTS ADDRESSING    11263
+  contrast  None                         2242
+  dense     BEATS DENSE                  6084
+  dense     DENSE SUFFICES               9673
+  dense     NOT COMPARED                 224243
+  selection ('A4', 2)                    189
+  selection ('BB', 1)                    6
+  selection ('INCONCLUSIVE', 0)          4449
+  selection ('NO_INTERFACE_SELECTED', 4) 15197
+  selection ('W7', 3)                    159
+
+all interfaces work, dense 0.5, BB-0 at chance: ('BB', 1) ('BB', 1)
+BB-0 above chance at 4096 on one seed/panel -> BB MODEL_STORES_FACTS selection ('A4', 2)
+BB B102 FAILS on panel A -> INTERMEDIATE ('A4', 2)
+A4 B102 PARTIAL (not FAILS) -> INTERFACE_WORKS
+R1 0.4999 at 65536 -> ('INCONCLUSIVE', 0) NOT_EVALUATED
+B102 R1 at 0.2 (B102 not NOT_EVALUATED per 15.4.5): W7 B102 eta = 4.75 -> INTERFACE_WORKS
+BB-0 above chance present -> MODEL_STORES_FACTS | same cell missing -> INTERFACE_WORKS ('BB', 1)
+one BB seed missing at 65536 -> ('A4', 2)
+A4 B102 FAILS -> INTERMEDIATE | A4 B102 missing -> INTERFACE_WORKS
+E7 = W7 = 0 on one pair: {'E7/W7': 'BACKBONE ADDS NOTHING', 'A4E/A4': 'BACKBONE ADDS NOTHING'}
+eta exactly 0.9 (0.9 / 1.0) -> INTERFACE_WORKS
+eta = 0.45/0.5 with acc 0.45 -> INTERFACE_PARTIAL (acc < 0.5 so PARTIAL expected)
+0.45/0.5 >= 0.9 in floating point: True | 0.54/0.6: 0.9000000000000001 True
+exit 0

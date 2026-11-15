@@ -1,0 +1,9 @@
+ studies/p9i/classes.py          |   4 +-
+ studies/p9i/core.py             |  35 +++++++++
+ studies/p9i/evaluate.py         |  13 ++-
+ studies/p9i/report.py           |   3 +-
+ studies/p9i/stages.py           |  55 +++++++++++--
+ tests/test_p9i_gates_harness.py | 130 ++++++++++++++++++++++++++++++
+ tests/test_p9i_nonfinite.py     | 170 ++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 396 insertions(+), 14 deletions(-)
+@@ -761,0 +762,35 @@ def make_cell(arm: str, slots: int, parent: tuple[int, int] = PRIMARY_PARENT, se
