@@ -76,3 +76,11 @@ After the independent check (Opus 5.5) of the combined-tasks addendum, the lead 
 > I agree with your recommendation
 
 Recorded by the lead: both tightenings are confirmed. The thresholds the human lead agreed earlier (0.80 to pass; below 0.50 for DOES NOT COMPOSE) are unchanged. The lead's own design choices reported in the same message (C1 alternates the order of the two languages; the adapter baseline on C2 switches adapters per answer) were not objected to and stand as the lead's choices.
+
+### The human lead's approval of the combined-tasks addendum (2026-11-15 UTC)
+
+Verbatim:
+
+> I've read P10-S2 cobined task done please continue with simulations, consider it as approved
+
+Recorded by the lead: the combined-tasks addendum to ADR-0022 (tasks C1 and C2 and the strengthened COMPOSES rule with its two tightenings) is approved by the human lead. The lead adopts the final text into ADR-0022 once the drafting context has removed the "pending confirmation" marks, without a further question. "Continue with simulations" is read as the direction to proceed with the P10 calibrations, rehearsals and registered runs under the delegations already recorded; it waives no audit, freeze or headroom rule.
