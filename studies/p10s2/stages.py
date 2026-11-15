@@ -215,9 +215,9 @@ def gate_inputs(world: World, prefreeze: Mapping[str, Any]) -> tuple[dict[str, A
     return g1, {"ok": bool(q.get("ok", False)), "outcome": q.get("outcome"), "failed": q.get("failed", [])}
 
 
-def stage_gates(world: World, run_dir: Path, plan: core.SeedPlan, *, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]] | None = None, root: Path | None = None, updates: int | None = None, require_mps: bool = False) -> dict[str, Any]:
+def stage_gates(world: World, run_dir: Path, plan: core.SeedPlan, *, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]] | None = None, root: Path | None = None, updates: int | None = None, require_mps: bool = False, cpu_by_freeze: bool = False) -> dict[str, Any]:
     with scoring_environment():
-        out = gates.run_gates(world, plan, g1=g1, g3=g3, equivalence_record=equivalence_record, file_manifest=file_manifest, root=root, updates=updates, require_mps=require_mps)
+        out = gates.run_gates(world, plan, g1=g1, g3=g3, equivalence_record=equivalence_record, file_manifest=file_manifest, root=root, updates=updates, require_mps=require_mps, cpu_by_freeze=cpu_by_freeze)
     from .data import replicate_overlap
 
     out["replicate_overlap"] = replicate_overlap(world.streams)  # the share of training items common to each pair of replicates (section 5.2); no part of any gate
@@ -349,6 +349,18 @@ def evaluate_mean_teacher(world: World, cap: str) -> float | None:
     return scores[cap]
 
 
+def _timing_indices(world: World, name: str, panel: Any, n_items: int) -> list[int]:
+    """The item indices of the timing benchmark: the 220908 draw stored by the data step (``World.timing_items``, E_A and E_B). A world without them (the dry stage's stand-ins build them too) falls back to the
+    first items only when no stored draw exists for that panel at all; a registered stage refuses an empty ``timing_items``."""
+    if world.timing_items:
+        if name not in world.timing_items:
+            raise StageRefused(f"refused: the stored timing items (seed 220908) have no entry for panel {name}")
+        return [int(i) for i in world.timing_items[name][:n_items]]
+    if world.mode == "registered-run":
+        raise StageRefused("refused: the world has no stored timing items (the 220908 draw of the data step)")
+    return list(range(min(n_items, len(panel.examples))))
+
+
 def stage_timing(world: World, run_dir: Path, items: int | None = None, deadline: Deadline | None = None) -> dict[str, Any]:
     """The timing benchmark, separate from training: after all training, one process, CPU, six threads, median of the registered repetitions on a fixed subset of each panel. Descriptive only; no
     latency, throughput, storage or efficiency claim. The thread count of the process is restored afterwards (a leaked setting would change the bit-level behaviour of everything that runs later)."""
@@ -366,10 +378,11 @@ def stage_timing(world: World, run_dir: Path, items: int | None = None, deadline
             if not (snap_dir / (label.replace("/", "__") + ".pt")).exists():
                 continue
             arm = load_arm(world, 0, snap_dir, label)
-            for name, p in ctx.panels.items():
+            for name in cells.gap_panels(ctx):  # the timing benchmark is E_A and E_B (E_open is descriptive and not timed)
+                p = ctx.panels[name]
                 if deadline is not None:
                     deadline.check(f"timing {label} on {name}")
-                idx = list(range(min(n_items, len(p.examples))))
+                idx = _timing_indices(world, name, p, n_items)
                 out[f"{label}/{name}"] = evaluate.timing_benchmark(lambda arm=arm, p=p, idx=idx: evaluate.score_panel(ctx, arm, p, indices=idx))  # type: ignore[misc]
     finally:
         torch.set_num_threads(previous)
@@ -384,13 +397,6 @@ def stage_recompute(world: World, run_dir: Path, deadline: Deadline | None = Non
 
 
 # --- assembling the study record and the outcome ------------------------------------------------------------------------------------------------
-def gates_problems(gates_record: Mapping[str, Any]) -> list[str]:
-    """A missing gates record, or a gate with no record, is never "all passed" (audit B M2)."""
-    if not gates_record:
-        return ["the gates record is missing: the gates cannot be read as passed"]
-    return [f"gate {g} has no record in the gates record" for g in GATE_NAMES if g not in gates_record]
-
-
 def assemble_study(run_dir: Path, design: Mapping[str, Any], prefreeze: Mapping[str, Any], gates_record: Mapping[str, Any] | None, *, subdir: str = "evaluate", extra_incomplete: Sequence[str] = (), extra_engineering: Sequence[str] = ()) -> dict[str, Any]:
     n = int(design["replicates"])
     reps = []
@@ -414,23 +420,23 @@ def _memory_exceeded(run_dir: Path, stage: str) -> bool:
     return bool(read_json(p).get("memory_exceeded")) if p.exists() else False
 
 
-def stage_analysis(run_dir: Path, design: Mapping[str, Any], prefreeze: Mapping[str, Any], mode: str = "frozen-code") -> dict[str, Any]:
-    """Classes, label, annotations and the recomputation rule over every recomputed quantity. Write-once. The only seed this stage may draw is the bootstrap seed 220906 (G9, the lead's ruling); the record of
-    what it drew is written beside the outcome."""
+def stage_analysis(run_dir: Path, design: Mapping[str, Any], prefreeze: Mapping[str, Any], mode: str = "frozen-code", *, seed_mode: str = "registered-analysis", resamples: int | None = None) -> dict[str, Any]:
+    """Classes, label, annotations and the recomputation rule over every recomputed quantity. Write-once. The only seed this stage may draw is the bootstrap seed 220906, in seed mode
+    ``registered-analysis`` (``test`` in tests and the dry stage): the intervals of the printed outcome are drawn here and nowhere else, and gate G9 for this stage (``gates.g9_analysis``) is read from
+    what the stage drew. ``resamples`` is for tests only (the registered count is in the config)."""
     out_path = run_dir / "outcome.json"
     if out_path.exists():
         raise FileExistsError(f"{out_path} exists: the outcome is write-once")
     seeds_before = len(core.seed_record())  # a registered analysis process starts with an empty record; the dry stage's process does not
     gp = run_dir / "gates.json"
     gates_record = read_json(gp) if gp.exists() else {}
-    problems = gates_problems(gates_record)
-    reg = assemble_study(run_dir, design, prefreeze, gates_record, extra_engineering=problems)
+    reg = assemble_study(run_dir, design, prefreeze, gates_record)  # a missing gates record or gate is read by the analysis itself (INCOMPLETE), never as passed
     n = int(design["replicates"])
     rec_study = None
     if (run_dir / "recompute" / "baseline.json").exists() and all((run_dir / "recompute" / f"r{r}.json").exists() for r in range(n)):
-        rec_study = assemble_study(run_dir, design, prefreeze, gates_record, subdir="recompute", extra_engineering=problems)
-    outcome = recompute.outcome_under_recomputation(reg, rec_study, mode, memory_exceeded=_memory_exceeded(run_dir, "recompute"))
-    seeds = gates.analysis_seed_check(core.seed_record()[seeds_before:])
+        rec_study = assemble_study(run_dir, design, prefreeze, gates_record, subdir="recompute")
+    outcome = recompute.outcome_under_recomputation(reg, rec_study, mode, memory_exceeded=_memory_exceeded(run_dir, "recompute"), bootstrap_mode=seed_mode, bootstrap_resamples=resamples)
+    seeds = gates.g9_analysis(core.seed_record()[seeds_before:], seed_mode)
     record(run_dir / "seeds" / "analysis.json", seeds)
     if not seeds["ok"]:
         raise RuntimeError("G9 in the analysis stage: " + "; ".join(seeds["problems"]))
@@ -469,6 +475,7 @@ def dry(run_dir: Path, replicates: int = 2, updates: int | None = None, gates_up
         data_dir = run_dir / "data"
         write_bundle(bundle, data_dir)
         bundle = read_bundle(data_dir)  # hash-checked load
+        core.reset_seed_record()  # the data step's draws are over: the gates stage is read, as in a registered process, on the draws of the stage itself
         world = build_world(bundle, "test", replicates, RunConfig.dry(updates))
     plan0 = core.SeedPlan("test", 0)
     streams_g1, g3 = gate_inputs(world, pre)
@@ -485,7 +492,7 @@ def dry(run_dir: Path, replicates: int = 2, updates: int | None = None, gates_up
     design = {"replicates": replicates, "updates": world.updates, "synthetic": True}
     prefreeze = prefreeze_summary(pre)
     with ledger.measure("analysis", process="dry: analysis"):
-        outcome = stage_analysis(run_dir, design, prefreeze)
+        outcome = stage_analysis(run_dir, design, prefreeze, seed_mode="test", resamples=200)
     with ledger.measure("report", process="dry: report"):
         stage_report(run_dir)
     core_record = {"seeds": core.seed_gate(core.seed_record(), planned_mode="test"), "ledger": ledger.summary()}
@@ -562,6 +569,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     name = args.name
     repo = core.ROOT
     run_dir = Path(args.run_dir).resolve()
+    core.refuse_under_pytest(repo, run_dir, what=f"registered stage {name}")
     ledger = Ledger()
     try:
         if name not in REGISTERED_STAGES:
@@ -610,7 +618,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
                     if file_sha256(data_dir / "manifest.json") != plan["data_manifest_sha256"]:
                         raise StageRefused("the data manifest differs from the frozen one")
                 fns: dict[str, Callable[[], Any]] = {
-                    "gates": lambda: stage_gates(world, run_dir, core.SeedPlan("registered-run", 0), g1=gate_inputs(world, pre_record)[0], g3=gate_inputs(world, pre_record)[1], equivalence_record=bundle.extra.get("equivalence"), file_manifest=manifest, root=data_dir, require_mps=device_name == "mps"),
+                    "gates": lambda: stage_gates(world, run_dir, core.SeedPlan("registered-run", 0), g1=gate_inputs(world, pre_record)[0], g3=gate_inputs(world, pre_record)[1], equivalence_record=gates.equivalence_layers(bundle.extra), file_manifest=manifest, root=data_dir, require_mps=device_name == "mps", cpu_by_freeze=device_name == "cpu"),
                     "train": lambda: stage_train(world, run_dir, deadline),
                     "evaluate": lambda: stage_evaluate(world, run_dir, deadline),
                     "timing": lambda: stage_timing(world, run_dir, deadline=deadline),
@@ -644,12 +652,9 @@ def _write_seed_record(run_dir: Path, name: str, n: int) -> None:
     """The seeds actually used by this registered process, with the G9 reading (audit B m7: nothing wrote the seed record of the train and evaluate processes). The gates stage's own record is inside
     ``gates.json``; this file is written for every world-building stage. A seed outside the planned set, or a label other than ``registered-run``, fails the stage."""
     recs = core.seed_record()
-    planned = gates.planned_all("registered-run", n)
-    gate = core.seed_gate(recs, planned, planned_mode="registered-run", extra_foreign=core.config_seeds())
+    planned = core.planned_seeds("registered-run", n)
+    gate = core.seed_gate(recs, planned, planned_mode="registered-run", extra_foreign=core.config_seeds(), stage_mode="registered-run", allow_partial=True)  # strict G9 (a stage draws part of the planned set)
     problems = list(gate["problems"])
-    for u in recs:
-        if u.mode != "registered-run" or u.seed not in planned:
-            problems.append(f"{u.seed} ({u.purpose}) mode {u.mode!r}: not a planned registered-run seed")
     record(run_dir / "seeds" / f"{name}.json", {"stage": name, "ok": not problems, "problems": problems, "recorded": gate["recorded"], "planned": planned})
     if problems:
         raise RuntimeError("G9: " + "; ".join(problems[:4]))
@@ -659,8 +664,9 @@ def _write_seed_record(run_dir: Path, name: str, n: int) -> None:
 def _prefreeze_start(args: argparse.Namespace, ledger: Ledger, what: str, outputs: Sequence[str]) -> Path | None:
     """The shared start of a pre-freeze stage: a clean HEAD, the stage cap against the study ledger's room, write-once outputs. Returns the run directory, or None after printing the refusal."""
     try:
-        freeze.check_code_commit(core.ROOT, args.code_commit)
         run_dir = Path(args.run_dir).resolve()
+        core.refuse_under_pytest(run_dir, what=f"{what}")
+        freeze.check_code_commit(core.ROOT, args.code_commit)
         for o in outputs:
             if (run_dir / o).exists():
                 raise StageRefused(f"refused: {run_dir / o} exists: {what} is run once and its record is write-once")
@@ -725,6 +731,8 @@ def cmd_prefreeze_gates(args: argparse.Namespace) -> int:
         return 2
     try:
         cal = _read_calibration(run_dir)
+        if _device(args) != "mps" and not args.device_reason:
+            raise StageRefused(f"refused: the training device is {_device(args)!r}: a non-MPS gates stage needs --device-reason (G4's MPS comparison is not applicable only where the freeze records CPU)")
         train.select_device(_device(args))
     except (StageRefused, RuntimeError) as e:
         say(str(e), sys.stderr)
@@ -740,7 +748,7 @@ def cmd_prefreeze_gates(args: argparse.Namespace) -> int:
             world = build_world(bundle, "rehearsal", n, RunConfig.registered(layer, int(core.CFG["rehearsal"]["short_updates"]), core.CFG["training"]["store_learning_rate"], float(cal["selection"]["lora_lr"]), _device(args)))
             g1, g3 = gate_inputs(world, pre)
             with scoring_environment():
-                rec = rehearsal.time_prefreeze_gates(world, run_dir, g1, g3, bundle.extra.get("equivalence"), manifest_gates(data_dir), data_dir, require_mps=_device(args) == "mps")
+                rec = rehearsal.time_prefreeze_gates(world, run_dir, g1, g3, gates.equivalence_layers(bundle.extra), manifest_gates(data_dir), data_dir, require_mps=_device(args) == "mps", cpu_by_freeze=_device(args) == "cpu")
     record(run_dir / "prefreeze_gates.json", rec)
     say(f"pre-freeze gates record written to {run_dir / 'prefreeze_gates.json'}: ok = {rec['ok']}")
     return 0 if rec["ok"] else 3
@@ -792,6 +800,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
 
 def cmd_raise_cap(args: argparse.Namespace) -> int:
     """Record the cap raise (the lead's act at the headroom check): the amount is recomputed from the rehearsal record and the study ledger, never typed; refused after any registered seed."""
+    core.refuse_under_pytest(core.ROOT, Path(args.run_dir).resolve(), what="the cap raise")
     try:
         rates = budget.Rates.from_json(read_json(Path(args.run_dir) / "rates.json"))
         rec = budget.record_raise(rates, core.ROOT / core.RAISE_FILE, Ledger(), repo=core.ROOT)
@@ -805,6 +814,7 @@ def cmd_raise_cap(args: argparse.Namespace) -> int:
 def cmd_freeze(args: argparse.Namespace) -> int:
     repo = core.ROOT
     pre = Path(args.pre_run_dir)
+    core.refuse_under_pytest(repo, pre.resolve(), what="the freeze")  # the freeze writes into the repository's frozen folder
     ledger = Ledger()
     try:
         rates = budget.Rates.from_json(read_json(pre / "rates.json"))
@@ -849,7 +859,8 @@ def build_parser() -> argparse.ArgumentParser:
         c.add_argument("--updates", type=int, default=None, help="default: from the configuration")
         if name == "rehearse":
             c.add_argument("--full-updates", type=int, default=None, help="default: from the configuration ([rehearsal] full_updates)")
-            c.add_argument("--device-reason", default=None, help="required if the training device is not MPS")
+        if name in ("rehearse", "prefreeze-gates"):
+            c.add_argument("--device-reason", default=None, help="required if the training device is not MPS (the rehearsal itself cannot run on MPS: the freeze may then record CPU)")
         c.add_argument("--device", default=None, choices=["mps", "cpu"], help="default: the configured training device (MPS); there is no automatic choice")
         c.set_defaults(func=fn)
     rc = sub.add_parser("raise-cap", help="record the cap raise at the rehearsal's headroom check; the amount is recomputed from the rehearsal record and the study ledger")

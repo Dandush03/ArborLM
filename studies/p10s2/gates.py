@@ -40,7 +40,7 @@ from .world import World, load_arm, save_arm
 def g2(world: World) -> dict[str, Any]:
     a, b = cells.stage0_scores(world), cells.stage0_scores(world)
     undefined = []
-    for name in world.ctx.panels:
+    for name in cells.gap_panels(world.ctx):
         s0 = a["student"][name]["panel"]["mean"]
         t = a["teacher"].get(name, {}).get("mean")
         if t is None or not (t - s0 >= core.GAP_MIN):
@@ -49,6 +49,9 @@ def g2(world: World) -> dict[str, Any]:
 
 
 # --- G4 -----------------------------------------------------------------------------------------------------------------------------------------
+NOT_APPLICABLE_CPU = "NOT APPLICABLE — TRAINING ON CPU BY THE FREEZE"
+
+
 def tie_rule_check() -> dict[str, Any]:
     """The lowest-index tie rule: with identical keys every row ties and the selected rows are the lowest indices."""
     s = SparseStore(4)
@@ -66,9 +69,10 @@ def environment_record() -> dict[str, Any]:
     return {"platform": platform.platform(), "machine": platform.machine(), "python": platform.python_version(), "torch": torch.__version__, "mps_built": bool(mps and mps.is_built()), "mps_available": bool(mps and mps.is_available()), "mac_ver": platform.mac_ver()[0], "mps_fallback_env": bool(__import__("os").environ.get("PYTORCH_ENABLE_MPS_FALLBACK")), "threads": torch.get_num_threads()}
 
 
-def g4(world: World, plan: core.SeedPlan, updates: int | None = None, *, require_mps: bool = False) -> dict[str, Any]:
+def g4(world: World, plan: core.SeedPlan, updates: int | None = None, *, require_mps: bool = False, cpu_by_freeze: bool = False) -> dict[str, Any]:
     """Determinism, snapshot restoration, gradient reach, repeated updates, and the MPS comparison when training runs on MPS. ``require_mps`` (every registered process) makes the comparison mandatory:
-    a world not on MPS fails G4, it is never "not applicable"."""
+    a world not on MPS fails G4, it is never "not applicable". The one exception is ``cpu_by_freeze``: the freeze recorded CPU as the training device (the rehearsal itself could not run on MPS, section
+    13.3's fallback, every rate rehearsed on CPU), and the MPS comparison prints NOT APPLICABLE — TRAINING ON CPU BY THE FREEZE; every other check of G4 still runs and must pass."""
     ctx = world.ctx
     ctx.seed_plan = plan
     hashes_before = world.student.tensor_hashes()
@@ -130,6 +134,8 @@ def g4(world: World, plan: core.SeedPlan, updates: int | None = None, *, require
             res["mps_agreement"] = {"ok": False, "status": f"an update failed: cpu {rc.error!r}, mps {rm.error!r}"}
         else:
             res["mps_agreement"] = train.update_agreement(rc.losses, rm.losses, a_cpu.trainable(), a_mps.trainable())
+    elif cpu_by_freeze and world.device.type == "cpu":
+        res["mps_agreement"] = {"ok": True, "status": NOT_APPLICABLE_CPU}
     elif require_mps:
         res["mps_agreement"] = {"ok": False, "status": f"the MPS comparison is mandatory in a registered run and this process is on {world.device.type}: no silent fallback"}
     else:
@@ -226,14 +232,29 @@ def g7(manifest: Mapping[str, Mapping[str, str]], root: Path) -> dict[str, Any]:
 
 
 # --- G8 -----------------------------------------------------------------------------------------------------------------------------------------
-def g8(world: World, record: dict[str, Any] | None) -> dict[str, Any]:
-    if record is None:
+def equivalence_layers(extra: Mapping[str, Any]) -> dict[str, dict[str, Any]] | None:
+    """The equivalence records the data-generation step stored, one per read layer (``bundle.extra["equivalence_layers"]``; a single ``bundle.extra["equivalence"]`` is accepted as one layer)."""
+    layers = extra.get("equivalence_layers")
+    if layers:
+        return {str(k): v for k, v in layers.items()}
+    one = extra.get("equivalence")
+    return {str(one.get("layer", "?")): one} if one else None
+
+
+def g8(world: World, record: Mapping[str, Any] | None) -> dict[str, Any]:
+    """Gate G8 over every read layer the data-generation step recorded (``equivalence.verify_all``). ``record`` is the layers mapping (layer -> record) or one record."""
+    layers = None if record is None else (dict(record) if "at_creation" not in record else {str(record.get("layer", "?")): dict(record)})
+    if not layers:
         return {"ok": False, "problems": ["the result recorded by the data-generation step is absent"]}
-    created = record.get("at_creation", {})
-    if not (created.get("logits", {}).get("ok") and created.get("injection", {}).get("ok")):
-        return {"ok": False, "problems": ["the data-generation step's own comparison was not within tolerance"], "at_creation": created}
-    v = equivalence.verify_record(world.student, record)
-    return {**v, "problems": [] if v["ok"] else ["the registered path's student does not reproduce the stored reference"]}
+    problems = [f"layer {k}: the data-generation step's own comparison was not within tolerance" for k, r in sorted(layers.items()) if not (r.get("at_creation", {}).get("logits", {}).get("ok") and r.get("at_creation", {}).get("injection", {}).get("ok"))]
+    if problems:
+        return {"ok": False, "problems": problems, "at_creation": {k: r.get("at_creation", {}) for k, r in layers.items()}}
+    read_layer = world.student.read_layer
+    try:
+        v = equivalence.verify_all(world.student, layers)
+    finally:
+        world.student.read_layer = read_layer  # the verification moves the injection layer; the world keeps the layer it was built with
+    return {**v, "problems": [] if v["ok"] else ["the registered path's student does not reproduce the stored reference at every recorded layer"]}
 
 
 # --- G9 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -276,64 +297,53 @@ def source_check(package_dir: Path | None = None) -> dict[str, Any]:
     return {"ok": not problems, "problems": problems}
 
 
-LISTED_PARTITION_SEEDS = tuple(range(220901, 220913))  # 220901-220912 (the lead's ruling: the equivalence injection vector has its own listed seed 220912)
-BOOTSTRAP_SEED = 220906  # drawn in the analysis stage and nowhere else (the lead's ruling on the bootstrap seed)
+BOOTSTRAP_SEED = core.PARTITION_STREAMS["bootstrap"]  # 220906: drawn in the analysis stage and nowhere else (the lead's ruling on the bootstrap seed)
 ANALYSIS_STAGE = "analysis"
 
 
-def record_code_seeds(replicates: int, mode: str) -> None:
-    """The +10 oracle-code seed seeds no generator (the hash takes it as an input), so nothing records its use by itself: the gates stage records it for every replicate, so that G9 sees it."""
-    for r in range(replicates):
-        core.seeded_generator(core.SeedPlan(mode, r).code_seed(), "oracle-code hash seed (recorded for G9; no generator is drawn from it)", mode)
-
-
-def g9(planned: Sequence[int] = (), planned_mode: str = "registered-run", *, stage: str = "gates", records: Sequence[core.SeedUse] | None = None, replicates: int | None = None) -> dict[str, Any]:
-    """Gate G9, strict. ``planned`` are the seeds planned for the registry (every replicate's base + 0..10); ``records`` the seeds actually recorded in this process. Refused: an empty record or no planned
-    seeds; any recorded use whose mode label is not the running stage's mode (a label cannot stand in for the mode); a recorded seed outside the planned set of the stage's mode; a replicate whose training
-    draw (+1), gold draw (+5) or +10 code seed is not recorded; any partition-side seed 220901-220912 in a registered-run process. 220906 is allowed in the analysis stage only (``analysis_seed_check``)."""
+def g9(planned: Sequence[int] = (), planned_mode: str = "registered-run", *, stage: str = "gates", records: Sequence[core.SeedUse] | None = None, replicates: int | None = None, allow_partial: bool = True) -> dict[str, Any]:
+    """Gate G9, strict: ``core.seed_gate(records, planned, planned_mode=mode, extra_foreign=core.config_seeds(), stage_mode=mode)``. Refused: an empty record or no planned seeds; any recorded use whose mode is
+    not the running stage's mode; a recorded seed outside the planned set (every replicate planned, the +10 code seed included); a partition-side seed 220901-220912 in a registered-run process; a seed of
+    another study. ``planned_mode="registered-analysis"`` is the analysis stage (220906 only). The record of a stage that draws only part of its planned set passes with ``allow_partial`` (the default; a stage
+    that must draw all of it passes ``allow_partial=False``); with ``replicates`` the +1 training draw, +5 gold draw and +10 code seed of every replicate must be recorded."""
     recs = core.seed_record() if records is None else list(records)
-    gate = core.seed_gate(recs, planned, planned_mode=planned_mode, extra_foreign=core.config_seeds())
+    gate = core.seed_gate(recs, planned, planned_mode=planned_mode, extra_foreign=core.config_seeds(), stage_mode=planned_mode, allow_partial=allow_partial)
     problems = list(gate["problems"])
-    planned_set = set(planned)
-    if not planned_set:
-        problems.append("no seed was planned: G9 cannot pass without a planned registry")
-    if not recs:
-        problems.append("no seed was recorded: G9 cannot pass on an empty seed record")
-    for use in recs:
-        if use.mode != planned_mode:
-            problems.append(f"recorded use of {use.seed} ({use.purpose}) carries mode {use.mode!r}, but this stage runs in mode {planned_mode!r}")
-        if planned_set and use.seed not in planned_set and planned_mode == "registered-run":
-            problems.append(f"recorded seed {use.seed} ({use.purpose}) is not among the seeds planned for the registry")
-        if planned_mode == "registered-run" and use.seed in LISTED_PARTITION_SEEDS:
-            problems.append(f"recorded seed {use.seed} ({use.purpose}) is a partition-side seed used in a registered-run process (220906 is drawn in the analysis stage only)")
     if replicates is not None:
         have = {u.seed for u in recs}
-        base = [core.SeedPlan(planned_mode, r) for r in range(replicates)]
-        for r, p in enumerate(base):
+        for r in range(replicates):
+            p = core.SeedPlan(planned_mode, r)
             for off, what in ((1, "training draw"), (5, "gold draw"), (10, "code seed")):
                 if p.seed(off) not in have:
                     problems.append(f"replicate {r}: the +{off} seed {p.seed(off)} ({what}) is not recorded")
     src = source_check()
-    return {"ok": bool(not problems and src["ok"]), "seeds": {"ok": not problems, "problems": problems, "recorded": gate["recorded"], "planned": sorted(planned_set)}, "source": src, "listed_partition_seeds": list(LISTED_PARTITION_SEEDS), "bootstrap_seed": {"seed": BOOTSTRAP_SEED, "allowed_in_stage": ANALYSIS_STAGE}, "stage": stage}
+    return {"ok": bool(not problems and src["ok"]), "seeds": {"ok": not problems, "problems": problems, "recorded": gate["recorded"], "planned": sorted(set(planned))}, "source": src, "listed_partition_seeds": sorted(core.listed_partition_seeds().values()), "bootstrap_seed": {"seed": BOOTSTRAP_SEED, "allowed_in_stage": ANALYSIS_STAGE}, "stage": stage, "stage_mode": planned_mode}
 
 
-def analysis_seed_check(records: Sequence[core.SeedUse]) -> dict[str, Any]:
-    """The analysis stage draws 220906 and no other seed (a fresh generator per printed interval, in the registry's order). Any other recorded seed is refused; an empty record is allowed (no interval printed)."""
-    problems = [f"analysis stage drew seed {u.seed} ({u.purpose}); only {BOOTSTRAP_SEED} may be drawn in it" for u in records if u.seed != BOOTSTRAP_SEED]
-    return {"ok": not problems, "problems": problems, "recorded": [{"seed": u.seed, "purpose": u.purpose, "mode": u.mode} for u in records], "stage": ANALYSIS_STAGE}
+def g9_analysis(records: Sequence[core.SeedUse], seed_mode: str = "registered-analysis") -> dict[str, Any]:
+    """G9 for the analysis stage: the strict ``core.seed_gate`` with ``stage_mode`` = the analysis seed mode (``registered-analysis``; ``test`` in tests and the dry stage) and the planned set {220906} (its
+    test stand-in in test mode). The stage draws 220906 and nothing else: any other seed is refused. A stage that printed no interval drew nothing and passes with that said (strict G9 refuses an empty
+    record only where the stage must draw)."""
+    planned = [core.partition_seeds(seed_mode)["bootstrap"]]
+    recs = list(records)
+    if not recs:
+        return {"ok": True, "problems": [], "recorded": [], "planned": planned, "stage_mode": seed_mode, "note": "no interval was printed, so no seed was drawn"}
+    gate = core.seed_gate(recs, planned, planned_mode=seed_mode, extra_foreign=core.config_seeds(), stage_mode=seed_mode, allow_partial=True)
+    return {"ok": gate["ok"], "problems": gate["problems"], "recorded": gate["recorded"], "planned": planned, "stage_mode": seed_mode}
 
 
 # --- the gates stage -----------------------------------------------------------------------------------------------------------------------------
 def planned_all(mode: str, replicates: int) -> list[int]:
-    """Every replicate's base + 0..10."""
-    return sorted(s for r in range(replicates) for s in core.SeedPlan(mode, r).planned())
+    """Every replicate's base + 0..10 (``core.planned_seeds``)."""
+    return core.planned_seeds(mode, replicates)
 
 
-def run_gates(world: World, plan: core.SeedPlan, *, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]] | None = None, root: Path | None = None, updates: int | None = None, planned: Sequence[int] = (), require_mps: bool = False) -> dict[str, Any]:
+def run_gates(world: World, plan: core.SeedPlan, *, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]] | None = None, root: Path | None = None, updates: int | None = None, planned: Sequence[int] = (), require_mps: bool = False, cpu_by_freeze: bool = False) -> dict[str, Any]:
     """All gates for one stage run. ``g1`` and ``g3`` come from the data and qualification steps; ``file_manifest`` must be a manifest written at creation (never one computed from the files it is compared
     with). G9 plans every replicate of the world and requires the +10 code seeds to be recorded."""
-    record_code_seeds(world.replicates, plan.mode)
-    out: dict[str, Any] = {"G1": dict(g1), "G2": g2(world), "G3": dict(g3), "G4": g4(world, plan, updates, require_mps=require_mps), "G5": g5(world, plan), "G6": g6(world, plan), "G7": g7(file_manifest or {}, root or Path(".")), "G8": g8(world, equivalence_record)}
+    for r in range(world.replicates):
+        world.plan(r).code_seed()  # the +10 code seed is a recorded use, so that G9 sees it for every replicate
+    out: dict[str, Any] = {"G1": dict(g1), "G2": g2(world), "G3": dict(g3), "G4": g4(world, plan, updates, require_mps=require_mps, cpu_by_freeze=cpu_by_freeze), "G5": g5(world, plan), "G6": g6(world, plan), "G7": g7(file_manifest or {}, root or Path(".")), "G8": g8(world, equivalence_record)}
     out["G9"] = g9(planned or planned_all(plan.mode, world.replicates), plan.mode, replicates=world.replicates)
     out["G7"]["manifest_empty"] = not file_manifest
     if not file_manifest:

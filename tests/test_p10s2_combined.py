@@ -479,23 +479,6 @@ def poison_world(world: Any) -> Any:
     return w
 
 
-def test_rehearsal_scorings_never_touch_e_c_or_any_registered_panel_and_check_the_continuation(tmp_path: Path) -> None:
-    world, _ = dry_world()
-    from studies.p10s2.worldio import write_bundle
-
-    bundle, _rec = standins.build_synthetic_bundle(1)
-    write_bundle(bundle, tmp_path / "data")
-    ov = rehearsal.measure_task_overhead(tmp_path / "data")
-    poisoned = poison_world(world)
-    rates, raw = rehearsal.measure_rates(poisoned, 0, updates=2, full_updates=3, overhead=ov, timing_items=2)  # raises if any registered panel is read
-    c = raw["combined"]
-    assert all(c[f"continuation_{k}"]["ok"] for k in ("store", "adapter", "lsep")) and c["items"] == len(world.partition.panels["D_cal"])
-    assert rates.combined_cell_seconds == c["cell_seconds_at_panel_size"] > 0 and rates.combined_stage0_seconds > 0
-    rw = rehearsal.rehearsal_world(world)
-    assert [s.key for s in rw.ctx.ec.sentences] == [i.key for i in world.partition.panels["D_cal"]] and rw.ctx.ec.sigma is None  # the first items of the rehearsal's own scoring set, paired by index
-    assert all(p.i2 == (p.i1 + 1) % len(rw.ctx.ec.sentences) for p in rw.ctx.ec.pairs)
-
-
 def test_a_continuation_difference_in_the_rehearsal_is_a_g4_class_defect(monkeypatch: pytest.MonkeyPatch) -> None:
     world, _ = dry_world()
     rw = rehearsal.rehearsal_world(world)

@@ -46,7 +46,7 @@ def test_config_values_equal_the_adr() -> None:
     assert (b["cap_hours"], b["cap_ceiling_hours"], b["headroom"], b["memory_per_worker_gib"], b["memory_aggregate_gib"], b["rungs"]) == (36.0, 72.0, 2.0, 8.0, 24.0, [[4, 2000], [3, 2000], [4, 1000], [3, 1000]])
     assert (b["timing_threads"], b["timing_items"], b["timing_repetitions"]) == (6, 200, 3)
     s = c["seeds"]
-    assert (s["replicate_bases"], s["offsets"], s["partition"], s["partition_streams"]) == ([220001, 220101, 220201, 220301], list(range(11)), 220901, list(range(220902, 220912)))
+    assert (s["replicate_bases"], s["offsets"], s["partition"], s["partition_streams"]) == ([220001, 220101, 220201, 220301], list(range(11)), 220901, list(range(220902, 220913)))
     assert "pending" not in c  # the combined-tasks addendum settled the open item; no stop remains
     assert c["student"]["parameters"] == 134515008 and c["teachers"]["parameters"] == [73944309, 74669178]
 

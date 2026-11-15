@@ -200,7 +200,7 @@ def test_seeds_of_the_training_uses_follow_the_table() -> None:
     base = core.SeedPlan("test", 0).base
     offs = [u.seed - base for u in core.seed_record()]
     assert offs.count(0) == 4 and offs.count(6) == 2 and offs.count(7) == 1 and offs.count(8) == 3 and offs.count(9) == 2  # +0: ST1 x2, MA-gold x2; +6: both orders; +7 M-joint; +8: LoRA-1 x2 and L-joint; +9: E-table x2
-    assert set(offs) <= {0, 2, 6, 7, 8, 9} and offs.count(2) == 18 + 2  # one fresh batch-order generator per cell, plus M-ii's replay order
+    assert set(offs) <= {0, 2, 6, 7, 8, 9, 10} and offs.count(10) == 1 and offs.count(2) == 18 + 2  # the +10 oracle-code seed is a recorded use (G9 sees it)  # one fresh batch-order generator per cell, plus M-ii's replay order
     core.reset_seed_record()
 
 

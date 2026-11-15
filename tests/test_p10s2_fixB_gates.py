@@ -34,7 +34,7 @@ def test_g9_passes_on_a_complete_registered_record_and_lists_the_partition_seeds
 
 def test_g9_cannot_pass_on_an_empty_record_or_an_empty_plan() -> None:
     g = gates.g9(reg_planned(), "registered-run", records=[], replicates=2)
-    assert not g["ok"] and any("empty seed record" in p for p in g["seeds"]["problems"])
+    assert not g["ok"] and any("seed record is empty" in p for p in g["seeds"]["problems"])
     assert not gates.g9([], "registered-run", records=good_records())["ok"]
 
 
@@ -64,8 +64,8 @@ def test_g9_requires_every_replicates_draws_and_the_code_seed_and_refuses_partit
 
 def test_the_analysis_stage_is_the_only_place_for_220906() -> None:
     assert gates.BOOTSTRAP_SEED == 220906 and gates.ANALYSIS_STAGE == "analysis"
-    assert gates.analysis_seed_check([core.SeedUse(220906, "interval", "registered-data")])["ok"]
-    assert not gates.analysis_seed_check([core.SeedUse(220001, "stage-1 store", "registered-run")])["ok"]
+    assert gates.g9_analysis([core.SeedUse(220906, "interval", "registered-analysis")])["ok"]
+    assert not gates.g9_analysis([core.SeedUse(220001, "stage-1 store", "registered-run")])["ok"]
 
 
 def test_g7_reads_digests_recorded_at_creation_and_the_stage_never_computes_them_from_the_same_files(tmp_path: Path) -> None:
@@ -101,8 +101,42 @@ def test_g4_compares_mps_with_cpu_where_the_frozen_device_is_mps() -> None:
     assert all(p.device.type == "cpu" for p in world.student.parameters())  # the student is back on CPU: every score is computed on CPU
 
 
-def test_record_code_seeds_records_the_plus_10_seed_of_every_replicate() -> None:
+def test_the_plus_10_code_seed_is_a_recorded_use_of_every_replicate() -> None:
     core.reset_seed_record()
-    gates.record_code_seeds(3, "test")
-    assert [u.seed for u in core.seed_record()] == [core.SeedPlan("test", r).seed(10) for r in range(3)]
+    for r in range(3):
+        core.SeedPlan("test", r).code_seed()  # World.codes(r) goes through it
+    assert [(u.seed, u.kind) for u in core.seed_record()] == [(core.SeedPlan("test", r).seed(10), "code-hash") for r in range(3)]
     core.reset_seed_record()
+
+
+def test_g8_runs_over_every_recorded_layer_and_restores_the_read_layer() -> None:
+    from studies.p10s2 import equivalence
+
+    world, _ = dry_world()
+    assert not gates.g8(world, None)["ok"] and not gates.g8(world, {})["ok"]  # an absent record is not a passed gate
+    seen: list[dict[str, object]] = []
+
+    class Spy:
+        @staticmethod
+        def verify_all(student: object, records: dict[str, object]) -> dict[str, object]:
+            seen.append(records)
+            return {"ok": True, "layers": {}, "tolerance": {}}
+
+    layers = {"4": {"at_creation": {"logits": {"ok": True}, "injection": {"ok": True}}}, "12": {"at_creation": {"logits": {"ok": True}, "injection": {"ok": True}}}}
+    original = gates.equivalence
+    gates.equivalence = Spy  # type: ignore[assignment]
+    try:
+        before = world.student.read_layer
+        assert gates.g8(world, layers)["ok"] and list(seen[0]) == ["4", "12"] and world.student.read_layer == before
+    finally:
+        gates.equivalence = original
+    bad = {"4": {"at_creation": {"logits": {"ok": True}, "injection": {"ok": False}}}}
+    assert not gates.g8(world, bad)["ok"] and callable(equivalence.verify_all)
+    assert gates.equivalence_layers({"equivalence_layers": layers}) == layers and gates.equivalence_layers({}) is None
+
+
+def test_g4_prints_not_applicable_only_where_the_plan_recorded_cpu() -> None:
+    world, _ = dry_world()
+    g = gates.g4(world, core.SeedPlan("test", 0), 3, require_mps=False, cpu_by_freeze=True)
+    assert g["mps_agreement"] == {"ok": True, "status": "NOT APPLICABLE — TRAINING ON CPU BY THE FREEZE"} and g["ok"]
+    assert not gates.g4(world, core.SeedPlan("test", 0), 3, require_mps=True)["mps_agreement"]["ok"]  # a registered MPS run never falls back to CPU

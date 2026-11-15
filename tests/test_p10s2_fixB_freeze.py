@@ -59,7 +59,7 @@ class Setup:
         self.pre = tmp / "pre"
         self.pre.mkdir()
         (self.pre / "calibration.json").write_text(json.dumps(calibration_record(**cal)))
-        (self.pre / "prefreeze.json").write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}}))
+        (self.pre / "prefreeze.json").write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}}))
         (self.pre / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 1.0}))
         (self.pre / "rehearsal.json").write_text(json.dumps({"raw": {"device": device}}))
 
@@ -86,18 +86,18 @@ def test_the_freeze_takes_layer_learning_rates_pilot_cap_and_device_from_the_rec
 
 
 def test_for_u_1000_the_selection_and_the_pilot_come_from_the_1000_update_snapshots(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    s = Setup(tmp_path, monkeypatch, scale_hours=16.3, n=3, u=2000)
-    s.rates = replace(s.rates, update_seconds=s.rates.update_seconds)  # rung 3 or 4: U = 1,000
-    d = budget.rehearsal_rule(s.led.total_hours(), s.rates, 36.0)
+    s = Setup(tmp_path, monkeypatch, scale_hours=40.0, n=3, u=2000)  # rung 1 does not fit even at the 72-hour ceiling, a U = 1,000 rung does
+    d = budget.rehearsal_rule(s.led.total_hours(), s.rates, 72.0)
     assert d.updates == 1000, d.outcome
-    s.freeze()
+    s.freeze()  # the cap is the computed one (72: rung 1 needs more than the ceiling) and the freeze records it
     plan = freeze.load_plan(s.repo)
+    assert plan["cap_hours"] == 72.0 and s.led.cap_hours() == 72.0
     assert plan["design"]["updates"] == 1000 and plan["design"]["layer"] == 12 and plan["design"]["lora_lr"] == 0.0003  # selection_at_snapshot, not the U = 2,000 selection (layer 4, 0.001)
 
 
 def test_u_1000_refuses_without_the_snapshot_selection_or_with_a_failed_snapshot_pilot(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     for kw, why in (({"snapshot": False}, "no 'selection_at_snapshot'"), ({"snap_pilot": False}, "STUDENT CANNOT USE THE MEMORY")):
-        s = Setup(tmp_path / why[:6], monkeypatch, scale_hours=16.3, n=3, u=2000, **kw)
+        s = Setup(tmp_path / why[:6], monkeypatch, scale_hours=40.0, n=3, u=2000, **kw)
         with pytest.raises(freeze.FreezeRefused, match=why):
             s.freeze()
         assert s.frozen_dir_files() == set() and not (s.repo / core.PLAN_FILE).exists()  # both or neither: no plan
@@ -131,7 +131,7 @@ def test_refusals_leave_no_file_in_the_frozen_folder_and_the_record_goes_outside
 
 
 def test_the_study_stops_before_the_freeze_when_teachers_or_data_do_not_qualify_and_the_record_goes_outside_the_frozen_folder(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
+    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
     s = Setup(tmp_path, monkeypatch)
     (s.pre / "prefreeze.json").write_text(json.dumps({**ok, "combined_whole_string": {"ok": False}}))
     with pytest.raises(freeze.FreezeRefused, match="whole-string check"):
@@ -157,6 +157,46 @@ def test_the_freeze_refuses_a_device_other_than_mps_and_a_layer_that_is_not_the_
         s2.freeze()
 
 
+def test_the_freeze_refuses_when_tokenization_test_a_is_absent_or_has_a_mismatch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    for i, tok in enumerate((None, {"required_ok": False})):
+        s = Setup(tmp_path / str(i), monkeypatch)
+        rec = json.loads((s.pre / "prefreeze.json").read_text())
+        rec.pop("tokenization")
+        if tok is not None:
+            rec["tokenization"] = tok
+        (s.pre / "prefreeze.json").write_text(json.dumps(rec))
+        with pytest.raises(freeze.FreezeRefused, match="test .a. of section 14.2 step 4"):
+            s.freeze()
+        assert s.frozen_dir_files() == set()
+
+
+def test_the_freeze_may_record_cpu_only_with_the_rehearsals_reason_and_nothing_changes_after_it(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    s = Setup(tmp_path, monkeypatch, device="cpu")
+    s.rates = replace(s.rates, train_device_reason="an MPS operation the update needs is unsupported (the rehearsal itself cannot run on MPS)")
+    s.freeze()  # the lead's ruling: MPS unless the rehearsal cannot run on it; then CPU with every rate rehearsed on CPU
+    plan = freeze.load_plan(s.repo)
+    assert plan["design"]["device"] == "cpu" and plan["design"]["scoring_device"] == "cpu"
+    s2 = Setup(tmp_path / "b", monkeypatch, device="cuda")
+    s2.rates = replace(s2.rates, train_device_reason="because")
+    with pytest.raises(freeze.FreezeRefused, match="without a recorded reason"):
+        s2.freeze()  # only CPU is an allowed alternative
+
+
+def test_the_freeze_records_the_computed_cap_itself_and_refuses_any_other(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    fits = Setup(tmp_path / "a", monkeypatch)  # rung 1 fits 36 hours: the cap is 36 and nothing is raised
+    fits.freeze()
+    assert freeze.load_plan(fits.repo)["cap_hours"] == 36.0 and not (fits.repo / core.RAISE_FILE).exists()
+    need = Setup(tmp_path / "b", monkeypatch, scale_hours=20.3)  # rung 1 needs more: the smallest whole number of hours that admits it, recorded by the freeze (never a 36-hour cap against the rule)
+    need.freeze()
+    plan = freeze.load_plan(need.repo)
+    assert plan["cap_hours"] == need.led.cap_hours() == budget.effective_cap(need.repo / core.RAISE_FILE) > 36.0 and plan["cap_hours"] == float(int(plan["cap_hours"])) and plan["design"]["rung"] == "rung 1"
+    assert need.led.cap_raise_entry() is not None
+    over = Setup(tmp_path / "c", monkeypatch, scale_hours=200.0)  # no rung fits even at 72: NOT STARTED: BUDGET, and the raise is not recorded by a freeze that refuses
+    with pytest.raises(freeze.FreezeRefused, match="NOT STARTED: BUDGET"):
+        over.freeze()
+    assert over.led.cap_raise_entry() is None and not (over.repo / core.RAISE_FILE).exists()
+
+
 def test_the_freeze_refuses_after_a_registered_seed_and_checks_the_cap_raise_against_the_recomputation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     s = Setup(tmp_path, monkeypatch)
     with s.led.measure("train", registered=True):
@@ -168,7 +208,7 @@ def test_the_freeze_refuses_after_a_registered_seed_and_checks_the_cap_raise_aga
     s2.led.append_cap_raise(60.0, {})
     (s2.repo / core.FREEZE_DIR).mkdir(parents=True, exist_ok=True)
     (s2.repo / core.RAISE_FILE).write_text(json.dumps({"new_cap_hours": 60.0}))
-    with pytest.raises(freeze.FreezeRefused, match="recomputed from the rehearsal record"):
+    with pytest.raises(freeze.FreezeRefused, match="computed by the rule"):
         s2.freeze()
     (s2.repo / core.RAISE_FILE).unlink()
     with pytest.raises(freeze.FreezeRefused, match="disagree"):

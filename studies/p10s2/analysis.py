@@ -8,14 +8,11 @@ silently dropped: a missing or failed registered cell gives INCOMPLETE and no cl
 Nothing here prints. ``outcome_record`` attaches the oracle-assisted line to every mapping that carries a class, label, annotation or cost field.
 """
 
-import copy
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-import torch
-
 from . import classes as C
-from . import combined, core, recompute
+from . import combined, core
 from .classes import CellEval, ClassResult, LabelInputs, Lexical
 from .registry import registry
 from .text import bootstrap_interval, gap_closed
@@ -200,8 +197,8 @@ def control_not_evaluated(st: Study) -> list[str]:
 
 
 # --- gates and the ensemble check (section 11.3 rows 1 and 2) ---------------------------------------------------------------------------------------------
-REQUIRED_GATES = ("G1", "G4", "G5", "G6", "G7", "G8", "G9")  # every one must be present and passed for any row other than ENGINEERING-FAILURE and INCOMPLETE
-CHECKED_GATES = ("G1", "G2", *REQUIRED_GATES[1:])  # G2 (scored identically twice) failing is an engineering defect too; G3 stops before the freeze and is not read here
+REQUIRED_GATES = ("G1", "G2", "G4", "G5", "G6", "G7", "G8", "G9")  # every one must be present and passed for any row other than ENGINEERING-FAILURE and INCOMPLETE (G2 included: the lead's ruling of 2026-11-15)
+CHECKED_GATES = REQUIRED_GATES  # a failed G2 (scored identically twice) is an engineering defect too; G3 (qualification) stops before the freeze: its failure is not read here, its absence is
 
 
 def gate_verdicts(gates: Mapping[str, Any]) -> dict[str, bool | None]:
@@ -214,18 +211,20 @@ def gate_verdicts(gates: Mapping[str, Any]) -> dict[str, bool | None]:
 
 
 def gate_findings(gates: Mapping[str, Any]) -> tuple[list[str], list[str]]:
-    """(engineering defects, incomplete): a present gate that did not pass (G2 included) is a defect found by the gates (row 1); a missing gates record, or a missing required gate, is a missing registered
-    quantity (row 2). Neither is ever read as passed. A missing G2 is not required here (the brief lists G1 and G4-G9)."""
+    """(engineering defects, incomplete): a present gate that did not pass (G2 included) is a defect found by the gates (row 1); a missing gates record, or a missing gate (G2 and G3 included), is a missing
+    registered quantity (row 2: INCOMPLETE). Neither is ever read as passed."""
     eng: list[str] = []
     inc: list[str] = []
     if not gates:
-        inc.append("the gates record is missing: gates G1 and G4-G9 are not evaluated")
+        inc.append("the gates record is missing: the gates are not evaluated")
         return eng, inc
     for name, v in gate_verdicts(gates).items():
         if v is False:
             eng.append(f"gate {name} failed: {(gates.get(name) or {}).get('problems', '')}")
         elif v is None and name in REQUIRED_GATES:
             inc.append(f"gate {name} has no record: not evaluated, never read as passed")
+    if not isinstance(gates.get("G3"), Mapping):
+        inc.append("gate G3 has no record: not evaluated, never read as passed")
     return eng, inc
 
 
@@ -542,13 +541,6 @@ def router_rows(st: Study) -> list[dict[str, Any]]:
 
 
 # --- bootstrap intervals (the lead's ruling: 220906 is drawn in the analysis stage and nowhere else) -------------------------------------------------------
-def bootstrap_generator(mode: str, name: str) -> torch.Generator:
-    """A fresh generator for one printed interval, seeded with the listed seed 220906 (its test-range stand-in in test mode). Used in the analysis stage only."""
-    if mode == "test":
-        return core.seeded_generator(core.partition_seeds("test")["bootstrap"], f"bootstrap interval: {name}", "test")
-    return core.seeded_generator(core.PARTITION_STREAMS["bootstrap"], f"bootstrap interval: {name}", "registered-data")
-
-
 def _items(node: Any) -> list[float] | None:
     if not isinstance(node, Mapping) or not isinstance(node.get("items"), list):
         return None
@@ -640,7 +632,7 @@ def bootstrap_intervals(st: Study, mode: str, resamples: int | None = None) -> l
         if items is None:
             lo = hi = None
         else:
-            lo, hi = bootstrap_interval(items, bootstrap_generator(mode, t["name"]), resamples)
+            lo, hi = bootstrap_interval(items, core.bootstrap_generator(mode, t["name"]), resamples)
         res.append({"name": t["name"], "n": None if items is None else len(items), "mean": t["mean"], "lo": lo, "hi": hi, "single_reference": t["single_reference"], "reference_counts": t["reference_counts"]})
     return res
 
@@ -800,54 +792,6 @@ def verdicts(study: Mapping[str, Any]) -> dict[str, Any]:
 def verdict_changes(a: Mapping[str, Any], b: Mapping[str, Any]) -> list[str]:
     """The verdict paths that differ between two verdict mappings (or two outcomes' verdicts)."""
     return [k for k in sorted({*a, *b}) if a.get(k, "<absent>") != b.get(k, "<absent>")]
-
-
-def analyze_with_recomputation(
-    registered: Mapping[str, Any], recomputed_cells: Mapping[str, Mapping[str, Any]] | None, mode: str, *, memory_exceeded: bool = False, recomputed_study: Mapping[str, Any] | None = None,
-    bootstrap_mode: str | None = None, bootstrap_resamples: int | None = None,
-) -> dict[str, Any]:
-    """The study outcome under the recomputation rule: no result without a completed recomputation (INCOMPLETE); ENGINEERING-FAILURE if a listed difference changes a verdict (a gate, control, class,
-    annotation or label: compared as verdicts, not as numbers); otherwise the cells with a difference beyond tolerance are NOT_EVALUATED, the recomputed values reported, and their mechanisms get the
-    class NOT_EVALUATED. ``recomputed_study``, if given, is the full recomputed record (baseline, assembled arms, retrieval, routers, ensemble): the recomputed analysis then uses its recomputed parts instead
-    of the registered ones."""
-    reg_cells = {lab: rec for rep in registered["replicates"] for lab, rec in rep["cells"].items()}
-    kw: dict[str, Any] = {"bootstrap_mode": bootstrap_mode, "bootstrap_resamples": bootstrap_resamples}
-    if recomputed_cells is None:
-        out = analyze({**registered, "incomplete": [*registered.get("incomplete", []), "the independent recomputation has not completed"]}, **kw)
-        out["recomputation"] = recompute.recomputation_status(None, [])
-        return strip_classes_if_incomplete(out)
-    res = recompute.compare_cells(reg_cells, recomputed_cells, mode, memory_exceeded=memory_exceeded)
-    if not res.complete:
-        out = analyze({**registered, "incomplete": [*registered.get("incomplete", []), "the recomputation could not be completed" + (" within the memory limits" if memory_exceeded else "")]}, **kw)
-        out["recomputation"] = recompute.recomputation_status(res, [])
-        out["recomputation"]["differences"] = [d.to_json() for d in res.differences]
-        return strip_classes_if_incomplete(out)
-    rep_study = copy.deepcopy(dict(registered))
-    reported = recompute.reported_cells(reg_cells, recomputed_cells, res)
-    for rep in rep_study["replicates"]:
-        rep["cells"] = {lab: reported[lab] for lab in rep["cells"]}
-    rec_study = copy.deepcopy(dict(registered))
-    if recomputed_study is not None:
-        if recomputed_study.get("baseline"):
-            rec_study["baseline"] = copy.deepcopy(dict(recomputed_study["baseline"]))
-        for r, rep in enumerate(rec_study["replicates"]):
-            other = recomputed_study["replicates"][r] if r < len(recomputed_study.get("replicates", [])) else {}
-            for k in ("assembled", "retrieval", "routers", "ensemble"):
-                if k in other:
-                    rep[k] = copy.deepcopy(other[k])
-    for rep in rec_study["replicates"]:
-        rep["cells"] = {lab: {**rec, "scores": recomputed_cells.get(lab, rec).get("scores"), "extras": recomputed_cells.get(lab, rec).get("extras")} for lab, rec in rep["cells"].items()}
-    v_reg, v_rec = verdicts(registered), verdicts(rec_study)
-    changed = verdict_changes(v_reg, v_rec)
-    if changed:
-        out = analyze({**registered, "engineering": [*registered.get("engineering", []), f"a recomputation difference changes {len(changed)} verdict entries (gate, control, class, annotation or label)"]}, **kw)
-        out["recomputation"] = recompute.recomputation_status(res, changed)
-        out["recomputation"]["differences"] = [d.to_json() for d in res.differences]
-        return out
-    out = analyze(rep_study, set(res.not_evaluated_cells), **kw)
-    out["recomputation"] = recompute.recomputation_status(res, [])
-    out["recomputation"]["differences"] = [d.to_json() for d in res.differences]
-    return out
 
 
 def strip_classes_if_incomplete(out: dict[str, Any]) -> dict[str, Any]:

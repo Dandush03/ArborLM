@@ -70,7 +70,7 @@ def test_configuration(base: dict[str, Any], *, training_device: str, relax_pilo
         sub[f"{table}.{key}"] = {"real": cfg[table].get(key), "exercise": value}
         cfg[table][key] = value
 
-    for key, value in (("replicate_bases", [229001, 229101, 229201, 229301]), ("registered_low", 229001), ("registered_high", 229399), ("calibration_low", 229401), ("calibration_high", 229599), ("calibration_base", 229401), ("rehearsal_low", 229601), ("rehearsal_high", 229799), ("rehearsal_base", 229601), ("draw_count", 2), ("test_low", 229900), ("test_high", 229999)):
+    for key, value in (("replicate_bases", [229001, 229101, 229201, 229301]), ("registered_low", 229001), ("registered_high", 229399), ("calibration_low", 229401), ("calibration_high", 229599), ("calibration_base", 229401), ("rehearsal_low", 229601), ("rehearsal_high", 229799), ("rehearsal_base", 229601), ("draw_count", 2), ("test_low", 229900), ("test_high", 229999), ("partition", 229381), ("partition_streams", list(range(229382, 229393)))):
         put("seeds", key, value)
     put("memory", "read_layers", [0, 1])
     put("memory", "rows_per_stage", dry["rows_per_stage"])

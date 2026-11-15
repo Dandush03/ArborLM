@@ -6,6 +6,7 @@ review, not Astra validation, not human approval."""
 import bz2
 import hashlib
 import sys
+import time
 import types
 import zlib
 from pathlib import Path
@@ -17,8 +18,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import pytest  # noqa: E402
 import torch  # noqa: E402
 
-from studies.p10s2 import core, datagen, equivalence, standins, tokenization  # noqa: E402
+from studies.p10s2 import core, datagen, equivalence, ledger, standins, tokenization  # noqa: E402
 from studies.p10s2 import fetch_guard as g  # noqa: E402
+from studies.p10s2.ledger import Ledger  # noqa: E402
 from studies.p10s2.prefreeze import (  # noqa: E402
     tokenization_checks,
     tokenization_required_ok,
@@ -354,3 +356,36 @@ def test_equivalence_is_verified_at_every_read_layer() -> None:
     world, _ = dry_world()
     assert equivalence.verify_all(world.student, {})["ok"] is False  # nothing recorded: not a pass
     assert core.READ_LAYERS == (4, 12)  # the layers calibration may choose: the record is made for both
+
+
+# --- the data-generation step goes through the study ledger's measure and a guard ---------------------------------------------------------------------------
+def test_datagen_is_measured_on_the_study_ledger_with_a_start_marker_and_an_end_entry_even_on_failure(tmp_path: Path) -> None:
+    led = Ledger(tmp_path / "ledger.jsonl")
+    with datagen.charged_stage(led, 3600.0) as sc:
+        assert [e["status"] for e in led.entries()] == ["started"] and led.entries()[0]["kind"] == "datagen"  # the start marker is written before the step does anything
+        sc.tick("x")
+    assert [e["status"] for e in led.entries()] == ["started", "completed"]
+    with pytest.raises(RuntimeError, match="boom"), datagen.charged_stage(led, 3600.0):
+        raise RuntimeError("boom")
+    assert [e["status"] for e in led.entries()][-1] == "failed" and led.unfinished() == []
+    with pytest.raises(datagen.StageCapExceeded, match="less than the stage cap"):
+        with datagen.charged_stage(Ledger(tmp_path / "small.jsonl"), 37 * 3600.0):
+            pass
+
+
+def test_the_datagen_guard_stops_the_step_at_its_wall_clock_cap_and_the_ledger_is_still_charged(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    led = Ledger(tmp_path / "ledger.jsonl")
+    monkeypatch.setitem(core.CFG["budget"], "watchdog_interval_seconds", 0.02)
+    t0 = time.perf_counter()
+    with pytest.raises(datagen.StageCapExceeded, match="guard stopped"):
+        with datagen.charged_stage(led, 0.3, guard=True):
+            while True:
+                time.sleep(0.01)
+    assert time.perf_counter() - t0 < 10 and [e["status"] for e in led.entries()][-1] == "failed"
+    assert led.total_hours() > 0 and led.unfinished() == []
+
+
+def test_the_fetch_step_and_the_datagen_main_charge_the_one_study_ledger() -> None:
+    src_fetch = (Path(ledger.__file__).parent / "fetch.py").read_text()
+    src_gen = (Path(ledger.__file__).parent / "datagen.py").read_text()
+    assert 'Ledger().measure("fetch"' in src_fetch and "from .ledger import Ledger" in src_gen and "led = Ledger()" in src_gen and "importlib.import_module(f\"{__package__}.ledger\")" not in src_gen

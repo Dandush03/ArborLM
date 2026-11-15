@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import pytest  # noqa: E402
-from test_p10s2_classes import cell, cells_of, panel, set_panels, study  # noqa: E402
+from test_p10s2_classes import cell, cells_of, panel, rec_outcome, set_panels, study  # noqa: E402
 
 from studies.p10s2 import analysis, core, recompute, report  # noqa: E402
 from studies.p10s2 import classes as C  # noqa: E402
@@ -89,7 +89,7 @@ def test_a_partial_ablation_record_does_not_crash_and_is_not_evaluated() -> None
 
 
 # --- C-M2: every gate G1 and G4-G9 present and passed ------------------------------------------------------------------------------------------------
-@pytest.mark.parametrize("missing", ["G1", "G4", "G5", "G6", "G7", "G8", "G9"])
+@pytest.mark.parametrize("missing", ["G1", "G2", "G4", "G5", "G6", "G7", "G8", "G9"])
 def test_a_missing_gate_is_never_passed(missing: str) -> None:
     out = analysis.analyze(study(tweak=lambda s: s["gates"].pop(missing)))
     assert not positive(out) and out["label_row"] == 2 and out["label"] == "INCOMPLETE" and any(f"gate {missing} has no record" in x for x in out["incomplete"])
@@ -298,7 +298,7 @@ def test_a_recomputation_difference_within_tolerance_in_a_cost_input_is_not_an_e
     rec = copy.deepcopy(cells_of(s))
     rec["r0/MAF/AB"]["scores"]["r0/MAF/AB@append"]["panels"]["E_A"]["mean"] += 4e-7  # feeds APPEND COST; own-code tolerance 1e-6
     rec["r0/MAF/AB"]["scores"]["r0/MAF/AB@append"]["panels"]["E_A"]["items"][0] += 4e-7
-    out = analysis.analyze_with_recomputation(s, rec, recompute.OWN)
+    out = rec_outcome(s, rec, recompute.OWN)
     assert out["label_row"] == 7 and out["engineering"] == [] and out["recomputation"]["differences"] == []
 
 
@@ -306,7 +306,7 @@ def test_a_recomputed_gen_flip_is_an_engineering_failure() -> None:  # C-M3 (b),
     s = study()
     rec = copy.deepcopy(cells_of(s))
     rec["r0/MSEQ/AB"]["scores"]["r0/MSEQ/AB"]["gen"]["loss_increase"] = 0.5
-    out = analysis.analyze_with_recomputation(s, rec, recompute.FROZEN)
+    out = rec_outcome(s, rec, recompute.FROZEN)
     assert out["label_row"] == 1 and any("gen/r0/MSEQ/AB/registered" in x for x in out["recomputation"]["changes"])
 
 
@@ -316,13 +316,13 @@ def test_the_recomputed_study_uses_the_recomputed_baseline_and_parts() -> None:
     rs = copy.deepcopy(s)
     for p in ("E_A", "E_B"):
         rs["baseline"]["teacher"][p] = {"mean": 0.3, "subsample_mean": 0.3, "exact_rate": 0.9}  # every gap undefined in the recomputed baseline
-    out = analysis.analyze_with_recomputation(s, rec_cells, recompute.FROZEN, recomputed_study=rs)
+    out = rec_outcome(s, rec_cells, recompute.FROZEN, recomputed_study=rs)
     assert out["label_row"] == 1 and out["recomputation"]["changes"]  # the verdicts differ: the recomputed Stage 0/teacher scores are used
-    same = analysis.analyze_with_recomputation(s, copy.deepcopy(rec_cells), recompute.FROZEN, recomputed_study=copy.deepcopy(s))
+    same = rec_outcome(s, copy.deepcopy(rec_cells), recompute.FROZEN, recomputed_study=copy.deepcopy(s))
     assert same["label_row"] == 7
     rs2 = copy.deepcopy(s)
     rs2["replicates"][0]["routers"]["AB"]["accuracy"]["general"] = 0.5
-    ch = analysis.analyze_with_recomputation(s, copy.deepcopy(rec_cells), recompute.FROZEN, recomputed_study=rs2)
+    ch = rec_outcome(s, copy.deepcopy(rec_cells), recompute.FROZEN, recomputed_study=rs2)
     assert ch["label_row"] == 1  # a recomputed router record changes ROUTER QUALIFIED
 
 

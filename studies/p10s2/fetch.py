@@ -53,8 +53,11 @@ def _download(url: str, dest: Path, limit: int) -> int:  # pragma: no cover - th
 
 
 def run(manifest_path: Path, dest_dir: Path) -> dict[str, object]:  # pragma: no cover - network
+    from .ledger import Ledger
+
     manifest = json.loads(manifest_path.read_text())
-    return g.fetch_session(manifest, dest_dir, download=_download, ledger_path=ROOT / g.DOWNLOAD_LEDGER)
+    with Ledger().measure("fetch", process="fetch of the approved downloads"):  # the one study ledger: a start marker first, an end entry even on failure
+        return g.fetch_session(manifest, dest_dir, download=_download, ledger_path=ROOT / g.DOWNLOAD_LEDGER)
 
 
 def main(argv: Sequence[str] | None = None) -> int:

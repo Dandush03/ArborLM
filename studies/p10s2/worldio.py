@@ -112,7 +112,7 @@ class RunConfig:
     device: str = "cpu"
 
     @staticmethod
-    def registered(layer: int, updates: int, store_lr: float, lora_lr: float, device: str = "auto") -> "RunConfig":
+    def registered(layer: int, updates: int, store_lr: float, lora_lr: float, device: str) -> "RunConfig":
         t, d = core.CFG["training"], core.CFG["data"]
         return RunConfig(layer, updates, t["batch"], t["replay_rows"], core.ROWS_PER_STAGE, store_lr, lora_lr, t["lora_rank_single"], t["lora_rank_joint"], RouterSpec.registered(), d["router_decision_token"], d["general_window_tokens"], device)
 
@@ -149,7 +149,12 @@ def build_world(b: DataBundle, mode: str, replicates: int, run: RunConfig) -> Wo
     ec = combined_set(sentences, sigma)
     if pairs_digest(ec.pairs) != b.extra["c1_pairing"]["pairs_sha256"]:
         raise ValueError("the C1 pair list does not match its hash in the data manifest")
-    ctx = EvalContext(student, decoder, nv, b.max_new, run.layer, b.newline_ids, {"E_A": pa, "E_B": pb}, sub, list(b.windows), decision_index=run.decision_token - 1, first_nll_index=run.decision_token, vocabulary=nv, ec=ec)
+    panels_all = {"E_A": pa, "E_B": pb}
+    for c in core.TASKS:  # E_open (section 6.1, 10): items with at least one out-of-vocabulary word; one panel per capability, the items that carry a reference in that language; descriptive only, oracle route only
+        idx = tuple(i for i, it in enumerate(b.panels.get("E_open", [])) if it.refs.get(c))
+        if idx:
+            panels_all["E_open_" + c] = PanelData("E_open_" + c, c, [bank.prompt(c, b.panels["E_open"][i].en) for i in idx], [list(b.panels["E_open"][i].refs[c]) for i in idx], idx)
+    ctx = EvalContext(student, decoder, nv, b.max_new, run.layer, b.newline_ids, panels_all, sub, list(b.windows), decision_index=run.decision_token - 1, first_nll_index=run.decision_token, vocabulary=nv, ec=ec)
     d_con = {c: PanelData("D_con_" + c, c, [bank.prompt(c, i.en) for i in b.panels["D_con"]], [list(i.refs[c]) for i in b.panels["D_con"]]) for c in core.TASKS}
     n_seen = core.CFG["data"]["seen_items"] if mode != "test" else core.CFG["dry"]["seen_items"]
     seen = []

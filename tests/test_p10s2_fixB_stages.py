@@ -94,15 +94,21 @@ def test_stage_outputs_are_write_once(tmp_path: Path) -> None:
     assert json.loads(p.read_text()) == {"a": 3}
 
 
-def test_analysis_reads_a_missing_gates_record_as_an_engineering_failure_and_the_outcome_is_write_once(tmp_path: Path) -> None:
-    assert stages.gates_problems({}) and "missing" in stages.gates_problems({})[0]
-    assert stages.gates_problems({k: v for k, v in GATES_OK.items() if k not in ("G3", "ok")}) == ["gate G3 has no record in the gates record"]
-    assert stages.gates_problems(GATES_OK) == []
-    out = stages.stage_analysis(tmp_path, {"replicates": 1, "updates": 4}, {"teacher_only": True})
-    assert out["label"] == "ENGINEERING-FAILURE" and any("gates record is missing" in e for e in out["engineering"])
+def test_analysis_reads_a_missing_gates_record_or_gate_as_incomplete_and_the_outcome_is_write_once(tmp_path: Path) -> None:
+    from studies.p10s2 import analysis
+
+    assert analysis.gate_findings({}) == ([], ["the gates record is missing: the gates are not evaluated"])
+    for gone in ("G2", "G3", "G9"):  # a missing gate (G2 and G3 included) is a missing registered quantity: INCOMPLETE, never passed
+        eng, inc = analysis.gate_findings({k: v for k, v in GATES_OK.items() if k not in (gone, "ok")})
+        assert eng == [] and inc == [f"gate {gone} has no record: not evaluated, never read as passed"]
+    assert analysis.gate_findings(GATES_OK) == ([], [])
+    eng, inc = analysis.gate_findings({**GATES_OK, "G2": {"ok": False, "problems": ["x"]}})
+    assert len(eng) == 1 and "gate G2 failed" in eng[0] and inc == []  # a failed gate is ENGINEERING-FAILURE
+    out = stages.stage_analysis(tmp_path, {"replicates": 1, "updates": 4}, {"teacher_only": True}, seed_mode="test")
+    assert out["label"] == "INCOMPLETE" and any("gates record is missing" in e for e in out["incomplete"])
     assert (tmp_path / "outcome.json").exists() and (tmp_path / "seeds" / "analysis.json").exists()
     with pytest.raises(FileExistsError, match="write-once"):
-        stages.stage_analysis(tmp_path, {"replicates": 1, "updates": 4}, {"teacher_only": True})  # a rerun never replaces a written outcome
+        stages.stage_analysis(tmp_path, {"replicates": 1, "updates": 4}, {"teacher_only": True}, seed_mode="test")  # a rerun never replaces a written outcome
     (tmp_path / "REPORT.md").write_text("x")
     with pytest.raises(FileExistsError, match="write-once"):
         stages.stage_report(tmp_path)
@@ -111,10 +117,12 @@ def test_analysis_reads_a_missing_gates_record_as_an_engineering_failure_and_the
 def test_the_analysis_stage_may_draw_the_bootstrap_seed_only(tmp_path: Path) -> None:
     from studies.p10s2 import gates
 
-    assert gates.analysis_seed_check([])["ok"]
-    assert gates.analysis_seed_check([core.SeedUse(220906, "interval", "registered-data")])["ok"]
-    bad = gates.analysis_seed_check([core.SeedUse(220906, "interval", "registered-data"), core.SeedUse(220907, "seen items", "registered-data")])
-    assert not bad["ok"] and "220907" in bad["problems"][0]
+    assert gates.g9_analysis([])["ok"]  # no interval printed: nothing drawn
+    assert gates.g9_analysis([core.SeedUse(220906, "interval", "registered-analysis")])["ok"]
+    bad = gates.g9_analysis([core.SeedUse(220906, "interval", "registered-analysis"), core.SeedUse(220907, "seen items", "registered-analysis")])
+    assert not bad["ok"] and any("220907" in p for p in bad["problems"])
+    assert not gates.g9_analysis([core.SeedUse(220906, "interval", "registered-data")])["ok"]  # a label other than the analysis stage's cannot stand in
+    assert gates.g9_analysis([core.SeedUse(core.partition_seeds("test")["bootstrap"], "interval", "test")], "test")["ok"]
 
 
 # --- M4: reserved analysis and report time; M6: the watchdog -------------------------------------------------------------------------------------

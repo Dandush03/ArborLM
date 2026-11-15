@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import pytest  # noqa: E402
-from test_p10s2_classes import cell, cells_of, set_panels, study  # noqa: E402
+from test_p10s2_classes import cell, cells_of, rec_outcome, set_panels, study  # noqa: E402
 
 from studies.p10s2 import analysis, core, output, recompute, report  # noqa: E402
 
@@ -194,12 +194,12 @@ def test_report_after_a_recomputation_carries_the_line_on_its_state_line() -> No
 
     r2 = copy.deepcopy(rec)
     r2["r0/ETABLE/A"]["scores"]["r0/ETABLE/A"]["panels"]["E_A"]["mean"] = 0.779
-    out = analysis.analyze_with_recomputation(s, r2, recompute.FROZEN)
+    out = rec_outcome(s, r2, recompute.FROZEN)
     text = report.render_report(out)
     assert "Independent recomputation: state complete" in text and "r0/ETABLE/A" in text
     i = text.index("Independent recomputation")
     assert text[text.rfind("\n\n", 0, i) + 2 :].startswith(LINE)
-    out2 = analysis.analyze_with_recomputation(s, None, recompute.FROZEN)
+    out2 = rec_outcome(s, None, recompute.FROZEN)
     text2 = report.render_report(out2)
     assert "NO CLASS (INCOMPLETE)" in text2 and "INCOMPLETE" in text2.split("\n\n")[2] and not output.positive_wording_without_line(text2)
     assert "ACQUIRES-AND-RETAINS" not in text2 and "TRANSFER-POSITIVE" not in text2  # no class is printed when the recomputation did not complete

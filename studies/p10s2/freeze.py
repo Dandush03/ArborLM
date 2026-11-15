@@ -223,7 +223,9 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
         if not needed.is_file():
             raise FreezeRefused(f"refused: {needed} does not exist")
     try:
-        cap = budget.verify_raise(repo / core.RAISE_FILE, p_hours, rates, ledger)
+        computed = budget.computed_cap(p_hours, rates)  # the cap is a rule, not a discretion (the lead's ruling of 2026-11-15)
+        raise_recorded = ledger.cap_raise_entry() is not None or (repo / core.RAISE_FILE).exists()
+        cap = budget.verify_raise(repo / core.RAISE_FILE, p_hours, rates, ledger) if raise_recorded else computed  # a recorded raise must equal the computed one; none yet is recorded below, once everything else is accepted
     except budget.CapRefused as e:
         raise FreezeRefused(str(e)) from e
     decision = budget.rehearsal_rule(p_hours, rates, cap)
@@ -233,8 +235,9 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
         raise _refuse("rehearsal_outcome.json", outcome, f"{budget.NOT_STARTED_BUDGET}: recorded in {refusal_dir() / 'rehearsal_outcome.json'}; the work returns to the human lead ({decision.reason})")
     assert decision.replicates is not None and decision.updates is not None
     frozen_device = str(core.CFG["budget"]["training_device"])
-    if rates.train_device != frozen_device:
-        raise _refuse("device.json", {"train_device": rates.train_device, "reason": rates.train_device_reason, "frozen_device": frozen_device}, f"refused: the rehearsal trained on {rates.train_device!r}; the frozen device is {frozen_device.upper()} for training and a process that cannot use it stops. PENDING LEAD REVIEW: the ADR's CPU fallback (section 13.3) and gate G4's MPS comparison")
+    if rates.train_device != frozen_device and not (rates.train_device == "cpu" and rates.train_device_reason.strip()):
+        # the lead's ruling of 2026-11-15: the frozen device is MPS unless the rehearsal itself cannot run on MPS, in which case the freeze may record CPU (section 13.3's fallback) with the reason and every rate rehearsed on CPU
+        raise _refuse("device.json", {"train_device": rates.train_device, "reason": rates.train_device_reason, "frozen_device": frozen_device}, f"refused: the rehearsal trained on {rates.train_device!r} without a recorded reason; the frozen device is {frozen_device.upper()} unless the rehearsal itself cannot run on it (the reason is recorded with --device-reason) and no device changes after the freeze")
     pg = json.loads(prefreeze_gates.read_text())
     if not pg.get("ok"):
         raise _refuse("prefreeze_gates.json", pg, "refused: the pre-freeze gates stage on rehearsal seeds failed (a failed gate stops the run, section 12.3)")
@@ -242,14 +245,19 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
     layer, store_lr, lora_lr = selection_from_calibration(cal, decision.updates)
     if int(cal["selection"]["read_layer"]) != rates.calibrated_layer:
         raise FreezeRefused(f"refused: the rehearsal's calibrated layer {rates.calibrated_layer} differs from the calibration record's selection {cal['selection']['read_layer']}")
-    from .prefreeze import prefreeze_summary
+    from .prefreeze import prefreeze_summary, tokenization_required_ok
 
-    summary = prefreeze_summary(json.loads(prefreeze.read_text()))
+    pre_record = json.loads(prefreeze.read_text())
+    summary = prefreeze_summary(pre_record)
     if not summary["combined_whole_string_ok"]:
         raise FreezeRefused("refused: the combined-task whole-string check (addendum section 4.4) is absent or has a required mismatch: the same consequence as a prompt mismatch in test (a)")
     if summary["stop"]:
         raise _refuse("prefreeze_stop.json", {"label": summary["stop"], "summary": summary}, f"{summary['stop']}: the study stops before the freeze (recorded in {refusal_dir() / 'prefreeze_stop.json'})")
-    # everything is accepted: now (and only now) the frozen folder is written
+    if not tokenization_required_ok(pre_record):
+        raise FreezeRefused("refused: test (a) of section 14.2 step 4 is absent or has a mismatch on a prompt or an R-icl prompt (0 required)")
+    # everything is accepted: now (and only now) the computed raise is recorded (if the rule needs one) and the frozen folder is written
+    if cap > budget.base_cap() and not raise_recorded:
+        budget.record_raise(rates, repo / core.RAISE_FILE, ledger, repo=repo, recorded_by="freeze (computed rule)")
     records: dict[str, dict[str, str]] = {}
     for key, src in (("calibration", calibration), ("prefreeze_record", prefreeze), ("prefreeze_gates", prefreeze_gates), ("rehearsal", rehearsal)):
         dst = freeze_dir / "records" / f"{key}.json"

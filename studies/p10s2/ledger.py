@@ -48,6 +48,7 @@ class Ledger:
 
     def __init__(self, path: Path | None = None) -> None:
         self.path = path if path is not None else study_ledger_path()
+        core.refuse_under_pytest(self.path.parent, what="a ledger")  # under pytest only a ledger in a temporary directory: never the real study ledger
         self.path.parent.mkdir(parents=True, exist_ok=True)
 
     # --- reading ---------------------------------------------------------------------------------------------------------------------------------

@@ -20,11 +20,13 @@ Steps, in order, each of which stops the step on its stop condition and each of 
    scores (length penalty 1, the end-of-sequence token counted) and asserted equal to the library's on the first batch; the step stops if they differ;
 6. the chrF cross-check against ``sacrebleu`` on the 1,000 pairs of Q (stop if the difference exceeds 0.001).
 
-The step is charged to the study ledger and honours its stage cap (``charged_stage``). The study ledger is ``studies/p10s2/ledger.py``; this module calls ``ledger.charge(stage, seconds)`` and
-``ledger.remaining()`` (hours), which lane B provides.
+The step is charged to the study ledger and honours its stage cap (``charged_stage``). The study ledger is ``studies/p10s2/ledger.py``: ``main`` passes ``Ledger()`` and the step runs under
+``Ledger.measure("datagen")`` (a start marker first, so a killed step is still charged) and a ``stages.StageGuard`` (the wall-clock cap enforced by a watchdog, not only between steps). A ledger-like object
+that has only ``charge(stage, seconds)`` and ``remaining()`` (hours) is accepted for tests.
 """
 
 import argparse
+import contextlib
 import importlib
 import json
 import os
@@ -95,17 +97,32 @@ class StageClock:
 
 
 @contextmanager
-def charged_stage(led: LedgerLike, stage_cap_seconds: float, *, stage: str = "datagen", clock: Callable[[], float] = time.monotonic) -> Iterator[StageClock]:
-    """Charge the wall time of the enclosed block to the study ledger, whether it completes or fails, and refuse to start if the ledger has less than the stage cap remaining."""
+def charged_stage(led: LedgerLike, stage_cap_seconds: float, *, stage: str = "datagen", clock: Callable[[], float] = time.monotonic, guard: bool = False) -> Iterator[StageClock]:
+    """Charge the wall time of the enclosed block to the study ledger, whether it completes or fails, and refuse to start if the ledger has less than the stage cap remaining.
+
+    A ledger with ``measure`` (the study ledger) is used through it: the start marker is written before the step does anything, the end entry whether it completes or raises. With ``guard`` the block also
+    runs under ``stages.StageGuard`` and a cap reached by the watchdog is raised as ``StageCapExceeded``."""
     if stage_cap_seconds <= 0:
         raise StageCapExceeded("a positive stage cap is required")
     if led.remaining() * 3600.0 < stage_cap_seconds:
         raise StageCapExceeded(f"refused: the study ledger has {led.remaining():.3f} h remaining, less than the stage cap of {stage_cap_seconds / 3600.0:.3f} h")
     sc = StageClock(stage_cap_seconds, clock, clock())
-    try:
-        yield sc
-    finally:
-        led.charge(stage, sc.elapsed())
+    measure = getattr(led, "measure", None)
+    with contextlib.ExitStack() as stack:
+        if callable(measure):
+            stack.enter_context(measure(stage, process="data generation"))
+        else:
+            stack.callback(lambda: led.charge(stage, sc.elapsed()))
+        if guard:
+            from .stages import CapReached, MemoryLimitExceeded, StageGuard
+
+            try:
+                with StageGuard(stage, cap_seconds=stage_cap_seconds, memory_limit_bytes=int(float(core.CFG["budget"]["memory_per_worker_gib"]) * 2**30)):
+                    yield sc
+            except (CapReached, MemoryLimitExceeded) as e:
+                raise StageCapExceeded(f"the guard stopped the step: {e}") from e
+        else:
+            yield sc
 
 
 # --- the requirements file -------------------------------------------------------------------------------------------------------------------
@@ -409,13 +426,16 @@ def run(downloads: Path, out: Path, *, led: LedgerLike, stage_cap_seconds: float
     record: dict[str, Any] = {"steps": {}, "environment": package_versions()}
     out.mkdir(parents=True, exist_ok=True)
     core.reset_seed_record()
-    with charged_stage(led, stage_cap_seconds) as clock:
-        try:
+    started = False
+    try:
+        with charged_stage(led, stage_cap_seconds, guard=True) as clock:
+            started = True
             return _run(downloads, out, clock, record, wikitext_dir or core.ROOT / "data" / "wikitext2", requirements or core.ROOT / REQUIREMENTS, tatoeba_record or core.ROOT / fetch_guard.TATOEBA_RECORD)
-        except DatagenStop as e:
+    except DatagenStop as e:
+        if started:  # a refusal to start leaves no record; a stop after the start (the guard's cap included) keeps one
             record["stopped"] = f"{type(e).__name__}: {e}"
             write_json(out / "prefreeze_record.json", core.jsonable(record))
-            raise
+        raise
 
 
 def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], wikitext_dir: Path, requirements: Path, tatoeba_record: Path) -> dict[str, Any]:  # pragma: no cover
@@ -489,9 +509,9 @@ def main(argv: Sequence[str] | None = None) -> int:  # pragma: no cover
     from . import freeze
 
     freeze.check_code_commit(core.ROOT, a.code_commit)
-    led: Any = importlib.import_module(f"{__package__}.ledger")
-    if not (callable(getattr(led, "charge", None)) and callable(getattr(led, "remaining", None))):
-        raise DatagenStop("the study ledger (studies/p10s2/ledger.py) does not provide charge(stage, seconds) and remaining()")
+    from .ledger import Ledger
+
+    led = Ledger()  # the one study ledger (experiments/P10S2/ledger.jsonl under the repository)
     run(Path(a.downloads), Path(a.out), led=led, stage_cap_seconds=a.stage_cap_seconds, wikitext_dir=Path(a.wikitext_dir) if a.wikitext_dir else None)
     return 0
 

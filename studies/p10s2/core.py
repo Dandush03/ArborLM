@@ -7,6 +7,8 @@ purpose, and never derives one seed from another beyond the listed offsets (sect
 """
 
 import math
+import os
+import tempfile
 import tomllib
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
@@ -45,6 +47,33 @@ GUARDED_WORDS = (
     "LEXICON-EQUIVALENT", "TEACHER-EQUIVALENT-TO-GOLD", "BELOW JOINT BOUND", "BELOW ADAPTER JOINT", "TASK-CODED SPARSE RETENTION", "APPEND COST",
     "EXACT-MATCH WEAK", "DOES NOT COMPOSE", "COMPOSITION INCONCLUSIVE", "composition (replaced)", "ROUTER (keyword-level)", "CONSOLIDATION-REJECTED", "NOT STARTED", "NO PERMUTATION CONTROL (ADAPTER)",
 )  # fmt: skip
+
+
+class TestGuardRefused(RuntimeError):
+    """Registered or study-state code was asked to run under pytest against a directory that is not a temporary directory."""
+
+
+# Directories a test may use as a run root: the temporary directory of the process and the usual system ones. The real repository (under the user's home) is never one of them; a throwaway clone made
+# in a temporary directory (the end-to-end exercise) is.
+_TEMP_ROOTS = ("/tmp", "/private/tmp", "/var/folders", "/private/var/folders", "/var/tmp", "/private/var/tmp")
+REAL_ROOT = Path(__file__).resolve().parents[2]
+
+
+def is_temporary(path: Path) -> bool:
+    """True if ``path`` lies under a temporary directory."""
+    p = Path(path).resolve()
+    roots = [Path(tempfile.gettempdir()).resolve(), *(Path(r).resolve() for r in _TEMP_ROOTS)]
+    return any(p.is_relative_to(r) for r in roots)
+
+
+def refuse_under_pytest(*roots: Path, what: str = "a registered stage") -> None:
+    """Under pytest (``PYTEST_CURRENT_TEST`` is set) registered code, the study ledger and the freeze files may only be used on a temporary directory: a test can never start a registered stage, write the real ledger or
+    touch the real ``experiments/`` directory or the real repository."""
+    if "PYTEST_CURRENT_TEST" not in os.environ:
+        return
+    for r in roots:
+        if not is_temporary(r):
+            raise TestGuardRefused(f"refused under pytest: {what} was pointed at {r}, which is not a temporary directory")
 
 
 class PendingLeadReview(RuntimeError):
@@ -86,7 +115,9 @@ SEEDS = CFG["seeds"]
 OFFSETS: tuple[int, ...] = tuple(SEEDS["offsets"])
 OFFSET_NAMES = {0: "stage-1 store", 1: "training draw", 2: "batch order", 3: "router", 4: "permutation controls", 5: "gold draw", 6: "stage-2 appended rows", 7: "M-joint store", 8: "LoRA initialization", 9: "E-table initialization", 10: "oracle-code hash"}
 PARTITION_SEED: int = SEEDS["partition"]
-PARTITION_STREAMS: dict[str, int] = {"q_split": 220902, "source_sample": 220903, "ablation_subsample": 220904, "gen_windows": 220905, "bootstrap": 220906, "seen_items": 220907, "timing_items": 220908, "tokenizer_record": 220909, "random_id_sequences": 220910, "c1_pairing": 220911, "equivalence_injection": 220912}
+_STREAM_NAMES = ("q_split", "source_sample", "ablation_subsample", "gen_windows", "bootstrap", "seen_items", "timing_items", "tokenizer_record", "random_id_sequences", "c1_pairing", "equivalence_injection")
+# 220902-220912 in this order, from the configuration (the end-to-end exercise's throwaway clone substitutes test-range seeds there; the real configuration lists the real ones and a test compares them)
+PARTITION_STREAMS: dict[str, int] = dict(zip(_STREAM_NAMES, SEEDS["partition_streams"], strict=True))
 # The listed use of each partition-side seed (section 9 and the rulings of the three implementation audits: 220912 is the equivalence injection vector's own seed; 220906 is drawn in the analysis stage only).
 PARTITION_USES: dict[str, str] = {
     "partition": "assignment of identity groups, then Q, D_cal, D_con, E_A, E_B, E_C, E_open",

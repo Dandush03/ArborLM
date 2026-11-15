@@ -140,7 +140,7 @@ def test_intervals_are_drawn_only_when_asked_and_with_one_fresh_generator_each()
     drawn = [e for e in out["intervals"] if e["n"] is not None]  # a score with no per-item values (or a non-finite one) has no interval and draws nothing
     assert len(out["intervals"]) > 100 and len(uses) == len(drawn) > 50
     assert {u.seed for u in uses} == {core.partition_seeds("test")["bootstrap"]}  # the test-range stand-in of 220906
-    assert [u.purpose for u in uses] == [f"bootstrap interval: {e['name']}" for e in drawn]  # registry order, one generator per printed interval
+    assert [u.purpose for u in uses] == [f"bootstrap interval {e['name']}" for e in drawn]  # registry order, one generator per printed interval
     again = analysis.analyze(study(), bootstrap_mode="test", bootstrap_resamples=50)
     assert again["intervals"] == out["intervals"]  # deterministic
     core.reset_seed_record()
@@ -148,8 +148,12 @@ def test_intervals_are_drawn_only_when_asked_and_with_one_fresh_generator_each()
 
 def test_the_registered_seed_is_220906() -> None:
     core.reset_seed_record()
-    g1, g2 = analysis.bootstrap_generator("registered-run", "a"), analysis.bootstrap_generator("registered-run", "b")
-    assert [u.seed for u in core.seed_record()] == [220906, 220906] and core.PARTITION_STREAMS["bootstrap"] == 220906
+    g1, g2 = core.bootstrap_generator("registered-analysis", "a"), core.bootstrap_generator("registered-analysis", "b")  # the analysis stage's own seed mode
+    assert [(u.seed, u.mode) for u in core.seed_record()] == [(220906, "registered-analysis")] * 2 and core.PARTITION_STREAMS["bootstrap"] == 220906
+    with pytest.raises(core.SeedRefused):
+        core.bootstrap_generator("registered-data", "c")  # 220906 is not a data-step seed
+    with pytest.raises(ValueError):
+        core.bootstrap_generator("registered-run", "c")  # a registered replicate process has no partition-side seeds
     import torch
 
     assert torch.equal(torch.randint(0, 100, (5,), generator=g1), torch.randint(0, 100, (5,), generator=g2))  # each is fresh: the same stream from its start

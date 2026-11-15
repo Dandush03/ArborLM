@@ -78,6 +78,27 @@ def rates_from_records(records: Mapping[str, Mapping[str, Any]], layer: int) -> 
     return out
 
 
+def full_length_rates(short: Mapping[str, float], full: Mapping[str, float], layer: int) -> tuple[dict[str, float], dict[str, dict[str, Any]]]:
+    """The per-update rates of the registered projection: the short-run rates, replaced by the full-length cells' where they were run. The full-length store cell is the ST1 type itself and the full-length M-ii
+    cell the M-ii type itself. Where a full-length cell of one type stands in for another (ST1 for M-append-frozen, M-seq and MA-gold; the LoRA cell for L-seq), the record says so and the projection uses the
+    LARGER of that rate and the type's own short-run rate (the lead's rule of 2026-11-15). Returns the rates and the stand-in record."""
+    rates_u = dict(short)
+    stand_in: dict[str, dict[str, Any]] = {}
+
+    def stands_in(key: str, source: str) -> None:
+        own = float(short.get(key, 0.0))
+        rates_u[key] = max(float(full[source]), own)
+        stand_in[key] = {"full_length_cell": source, "full_length_rate": float(full[source]), "own_short_run_rate": own, "used": rates_u[key], "rule": "the larger of the full-length stand-in rate and the type's own short-run rate"}
+
+    rates_u[f"ST1@L{layer}"] = float(full["ST1"])
+    for g in ("MAF", "MSEQ", "MAGOLD"):
+        stands_in(f"{g}@L{layer}", "ST1")
+    rates_u[f"MII@L{layer}"] = float(full["MII"])
+    rates_u["LORA1"] = float(full["LORA1"])
+    stands_in("LSEQ", "LORA1")
+    return rates_u, stand_in
+
+
 def measure_full_length(world: World, replicate: int, full_updates: int) -> dict[str, float]:
     """The ADR's rehearsal content: one store cell, one M-ii cell and one LoRA cell for the full U, at the calibrated read layer and learning rates, each in its registered configuration (M-ii continues an
     appended 2N-row store, as registered). Their per-update rates (and the peak after them) replace the short-run rates of the same cell types at the calibrated layer."""
@@ -123,7 +144,7 @@ def rehearsal_world(world: World) -> World:
     ctx = dataclasses.replace(world.ctx, panels=panels, subsample={"E_A": list(range(n_sub)), "E_B": list(range(n_sub))}, ec=ec)
     part = dataclasses.replace(world.partition, panels={**world.partition.panels, "E_A": items, "E_B": items, "E_C": items})
     outs = {c: {"E_" + c: world.teacher_outputs[c]["D_cal"], "E_C": world.teacher_outputs[c]["D_cal"]} for c in core.TASKS}
-    return dataclasses.replace(world, ctx=ctx, partition=part, teacher_outputs=outs)
+    return dataclasses.replace(world, ctx=ctx, partition=part, teacher_outputs=outs, timing_items={})  # the stored timing draw indexes E_A and E_B, not D_cal: the rehearsal times the first items
 
 
 def measure_combined(rw: World, replicate: int, store_arm: MemoryArm, items_for_check: int = 20) -> dict[str, Any]:
@@ -255,14 +276,14 @@ def measure_task_overhead(data_dir: Path, repo: Path | None = None, *, layer: in
     return {"seconds": float(r["wall_seconds"]), "peak_bytes": float(r["peak_bytes"])}
 
 
-def time_prefreeze_gates(world: World, run_dir: Path, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]], root: Path, *, updates: int | None = None, require_mps: bool = True) -> dict[str, Any]:
+def time_prefreeze_gates(world: World, run_dir: Path, g1: Mapping[str, Any], g3: Mapping[str, Any], equivalence_record: dict[str, Any] | None, file_manifest: Mapping[str, Mapping[str, str]], root: Path, *, updates: int | None = None, require_mps: bool = True, cpu_by_freeze: bool = False) -> dict[str, Any]:
     """The pre-freeze gates stage at real size on rehearsal seeds, on the rehearsal world (no evaluation panel scored, no gap on one computed). Its wall time scaled by the registered item counts is the
     second gates stage's time in R: the scoring-bearing parts (G2's two Stage 0 scorings and the three panel scorings of G4) are multiplied by ``scale_factor``, the rest (20-update runs, hash checks) is not."""
     rw = rehearsal_world(world)
     plan = core.SeedPlan("rehearsal", 0)
     s = scale_factor(world)
     t0 = time.perf_counter()
-    out = gates.run_gates(rw, plan, g1=g1, g3=g3, equivalence_record=equivalence_record, file_manifest=file_manifest, root=root, updates=updates, require_mps=require_mps)
+    out = gates.run_gates(rw, plan, g1=g1, g3=g3, equivalence_record=equivalence_record, file_manifest=file_manifest, root=root, updates=updates, require_mps=require_mps, cpu_by_freeze=cpu_by_freeze)
     total = time.perf_counter() - t0
     first = next(iter(rw.ctx.panels.values()))
     t_g2 = timed(lambda: gates.g2(rw))
@@ -293,12 +314,9 @@ def measure_rates(world: World, replicate: int, *, updates: int, full_updates: i
     full = measure_full_length(world, replicate, full_updates)
     rec["full_length"] = full
     train_peak = max(train_peak, int(full["peak_bytes"]))
-    rates_u = dict(short)
     ly = world.layer
-    for g in ("ST1", "MAF", "MSEQ", "MAGOLD"):
-        rates_u[f"{g}@L{ly}"] = full["ST1"]  # the same cell type as the full-length store cell
-    rates_u[f"MII@L{ly}"] = full["MII"]
-    rates_u["LORA1"] = rates_u["LSEQ"] = full["LORA1"]
+    rates_u, stand_in = full_length_rates(short, full, ly)
+    rec["stand_in_rates"] = stand_in
     rec["update_seconds"] = rates_u
     s = scale_factor(world)
     probe = _run_child(["probe", "--data-dir", str(data_dir), "--scratch", str(scratch / f"train-L{ly}"), "--layer", str(ly), "--lora-lr", str(world.lora_lr), "--updates", str(updates)], repo)

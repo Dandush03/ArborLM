@@ -89,7 +89,7 @@ def study(n: int = 2, tweak: Callable[[dict[str, Any]], None] | None = None) -> 
             "combined": {"stage0": comb_rec(S0, S0, (S0, S0), (S0, S0)), "ensemble": comb_rec(TEACHER, TEACHER, (TEACHER, TEACHER), (TEACHER, TEACHER))}}  # fmt: skip
     for p in base["student"].values():
         p["panel"]["exact_rate"] = 0.0
-    s: dict[str, Any] = {"design": {"replicates": n, "updates": 2000}, "prefreeze": {"teacher_only": True, "stop": None}, "gates": {g: {"ok": True} for g in ("G1", "G4", "G5", "G6", "G7", "G8", "G9")}, "baseline": base, "replicates": reps, "incomplete": [], "engineering": []}
+    s: dict[str, Any] = {"design": {"replicates": n, "updates": 2000}, "prefreeze": {"teacher_only": True, "stop": None}, "gates": {g: {"ok": True} for g in ("G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9")}, "baseline": base, "replicates": reps, "incomplete": [], "engineering": []}
     if tweak:
         tweak(s)
     return s
@@ -358,9 +358,25 @@ def cells_of(s: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {lab: rec for rep in s["replicates"] for lab, rec in rep["cells"].items()}
 
 
+def rec_outcome(s: dict[str, Any], rec_cells: dict[str, dict[str, Any]] | None, mode: str, *, memory_exceeded: bool = False, recomputed_study: dict[str, Any] | None = None) -> dict[str, Any]:
+    """The outcome under the recomputation rule (``recompute.outcome_under_recomputation``, which superseded ``analysis.analyze_with_recomputation``): the recomputed study is the registered one (or
+    ``recomputed_study``) with its cells replaced by ``rec_cells``; ``None`` is a recomputation that has not run."""
+    if rec_cells is None:
+        return recompute.outcome_under_recomputation(s, None, mode, memory_exceeded=memory_exceeded)
+    rs = copy.deepcopy(recomputed_study if recomputed_study is not None else s)
+    for rep in rs["replicates"]:
+        rep["cells"] = {lab: copy.deepcopy(rec_cells[lab]) for lab in rep["cells"] if lab in rec_cells}
+    return recompute.outcome_under_recomputation(s, rs, mode, memory_exceeded=memory_exceeded)
+
+
+def verdict_paths_changed(a: dict[str, Any], b: dict[str, Any]) -> list[str]:
+    """The verdict paths that differ between two outcomes (``analysis.verdicts_of_outcome`` and ``analysis.verdict_changes``)."""
+    return analysis.verdict_changes(analysis.verdicts_of_outcome(a), analysis.verdicts_of_outcome(b))
+
+
 def test_bit_identical_recomputation_changes_nothing() -> None:
     s = study()
-    out = analysis.analyze_with_recomputation(s, copy.deepcopy(cells_of(s)), recompute.FROZEN)
+    out = rec_outcome(s, copy.deepcopy(cells_of(s)), recompute.FROZEN)
     assert out["label_row"] == 7 and out["recomputation"]["state"] == "complete" and out["recomputation"]["not_evaluated_cells"] == [] and out["recomputation"]["differences"] == []
 
 
@@ -368,15 +384,15 @@ def test_own_code_tolerance_and_frozen_code_exactness() -> None:
     s = study()
     rec = copy.deepcopy(cells_of(s))
     rec["r0/MAF/AB"]["scores"]["r0/MAF/AB"]["panels"]["E_A"]["items"][0] += 5e-7
-    own = analysis.analyze_with_recomputation(s, rec, recompute.OWN)
+    own = rec_outcome(s, rec, recompute.OWN)
     assert own["label_row"] == 7 and own["recomputation"]["differences"] == [] and own["recomputation"]["not_evaluated_cells"] == []  # within 1e-6 under the auditor's own code
-    frozen = analysis.analyze_with_recomputation(s, rec, recompute.FROZEN)
+    frozen = rec_outcome(s, rec, recompute.FROZEN)
     assert frozen["recomputation"]["not_evaluated_cells"] == ["r0/MAF/AB"] and len(frozen["recomputation"]["differences"]) == 1  # bit-identical is required for the frozen code
     assert classes_of(frozen, "M-append-frozen")[0] == "NOT_EVALUATED" and any("recomputation difference" in r for r in frozen["classes"]["M-append-frozen"]["AB"]["reasons"])
     assert frozen["label_row"] == 11  # no gate, class, annotation or label differs between the registered and the recomputed scores: the cell is NOT_EVALUATED and the label follows from the classes
     rec2 = copy.deepcopy(cells_of(s))
     rec2["r0/MAF/AB"]["scores"]["r0/MAF/AB"]["panels"]["E_A"]["items"][0] += 2e-6
-    assert analysis.analyze_with_recomputation(s, rec2, recompute.OWN)["recomputation"]["not_evaluated_cells"] == ["r0/MAF/AB"]
+    assert rec_outcome(s, rec2, recompute.OWN)["recomputation"]["not_evaluated_cells"] == ["r0/MAF/AB"]
 
 
 def test_a_greedy_sequence_difference_is_a_difference_under_both_cases() -> None:
@@ -396,22 +412,22 @@ def test_a_difference_that_changes_a_class_or_label_is_an_engineering_failure() 
             c = rec[f"r{r}/MAF/{o}"]["scores"][f"r{r}/MAF/{o}"]
             first, second = ("E_A", "E_B") if o == "AB" else ("E_B", "E_A")
             c["panels"][second]["mean"] = 0.1  # the recomputed second capability collapses: the class and the label would change
-    out = analysis.analyze_with_recomputation(s, rec, recompute.FROZEN)
+    out = rec_outcome(s, rec, recompute.FROZEN)
     assert out["label_row"] == 1 and out["label"] == "ENGINEERING-FAILURE" and out["recomputation"]["engineering_failure"] is True and out["recomputation"]["changes"]
-    changes = recompute.outcome_changes(analysis.analyze(s), analysis.analyze(study(tweak=lambda t: [set_panels(t, None, "MAF", "AB", 0.8, 0.1)])))
-    assert any(x.startswith("classes") for x in changes) and any(x.startswith("label") for x in changes)
+    changes = verdict_paths_changed(analysis.analyze(s), analysis.analyze(study(tweak=lambda t: [set_panels(t, None, "MAF", "AB", 0.8, 0.1)])))
+    assert any(x.startswith("class/") for x in changes) and "label" in changes
 
 
 def test_incomplete_recomputation_and_memory_limits() -> None:
     s = study()
     missing = copy.deepcopy(cells_of(s))
     del missing["r0/LJOINT/-"]
-    out = analysis.analyze_with_recomputation(s, missing, recompute.FROZEN)
+    out = rec_outcome(s, missing, recompute.FROZEN)
     assert out["label"] == "INCOMPLETE" and out["recomputation"]["state"] == "incomplete" and out["recomputation"]["incomplete"] is True
     assert all(c["class"] == "NO CLASS (INCOMPLETE)" for by in out["classes"].values() for c in by.values())  # no class is printed
-    mem = analysis.analyze_with_recomputation(s, copy.deepcopy(cells_of(s)), recompute.FROZEN, memory_exceeded=True)
+    mem = rec_outcome(s, copy.deepcopy(cells_of(s)), recompute.FROZEN, memory_exceeded=True)
     assert mem["label"] == "INCOMPLETE" and mem["recomputation"]["state"] == "memory" and mem["annotations"] == {}
-    none = analysis.analyze_with_recomputation(s, None, recompute.FROZEN)  # no result is reported before the recomputation completes
+    none = rec_outcome(s, None, recompute.FROZEN)  # no result is reported before the recomputation completes
     assert none["label"] == "INCOMPLETE" and none["recomputation"]["state"] == "not_run"
     with pytest.raises(ValueError):
         recompute.compare_cells({}, {}, "other")
@@ -425,5 +441,5 @@ def test_recomputed_value_is_the_one_reported_for_a_difference_beyond_tolerance(
     reported = recompute.reported_cells(cells_of(s), rec, res)
     assert reported["r0/ETABLE/A"]["scores"]["r0/ETABLE/A"]["panels"]["E_A"]["mean"] == 0.779 and reported["r0/ETABLE/A"]["recomputed_replaced"] is True
     assert reported["r0/MAF/AB"] == cells_of(s)["r0/MAF/AB"]
-    out = analysis.analyze_with_recomputation(s, rec, recompute.FROZEN)
+    out = rec_outcome(s, rec, recompute.FROZEN)
     assert out["recomputation"]["not_evaluated_cells"] == ["r0/ETABLE/A"] and out["label_row"] == 7

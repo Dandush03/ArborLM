@@ -239,8 +239,13 @@ def stage0_scores(world: World, with_combined: bool = True) -> dict[str, Any]:
     res: dict[str, Any] = {"student": {}, "teacher": {}}
     for name, p in ctx.panels.items():
         sc = score_panel(ctx, arm, p, route="none")
-        if name not in ctx.subsample:  # E_open: descriptive only, no subsample and no gap
+        if name not in ctx.subsample:  # E_open: descriptive only, no subsample and no gap; the teacher of the panel's capability is scored on the items that carry a reference in its language
             res["student"][name] = {"panel": sc.to_json()}
+            oo = world.teacher_outputs.get(p.task, {}).get("E_open")
+            if oo is not None and p.source_index is not None:
+                outs_o = [oo[i] for i in p.source_index]
+                items_o = [chrf_item(o, rf) for o, rf in zip(outs_o, p.refs, strict=True)]
+                res["teacher"][name] = {"mean": mean(items_o), "items": items_o, "exact_rate": mean([float(normalize(o) in {normalize(x) for x in rf}) for o, rf in zip(outs_o, p.refs, strict=True)])}
             continue
         sub = score_panel(ctx, arm, p, route="none", indices=ctx.subsample[name])
         res["student"][name] = {"panel": sc.to_json(), "subsample": sub.to_json()}

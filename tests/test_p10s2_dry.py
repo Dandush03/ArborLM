@@ -42,7 +42,7 @@ def test_dry_stage_end_to_end(tmp_path: Path, capsys: pytest.CaptureFixture[str]
         assert (run / rel).exists(), rel
     gates = json.loads((run / "gates.json").read_text())
     assert all(gates[g]["ok"] for g in ("G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9")) and gates["ok"] is True
-    assert gates["G8"]["ok"] and gates["G8"]["greedy_matches_reference"] and gates["G7"]["checked"] >= 8  # the stand-in student reproduces an independently written reference; the data files are hash-checked
+    assert gates["G8"]["ok"] and gates["G8"]["layers"] and all(v["greedy_matches_reference"] for v in gates["G8"]["layers"].values()) and gates["G7"]["checked"] >= 8  # the stand-in student reproduces an independently written reference; the data files are hash-checked
     assert gates["G9"]["source"]["ok"] and gates["G9"]["seeds"]["ok"]
     assert gates["G4"]["two_scorings_bit_identical"] and gates["G4"]["repeated_updates_bit_identical"] and gates["G4"]["snapshot_restore_bit_identical"] and gates["G5"]["c_gate_isolation"]
     # every one of the 18 cells has a record, every snapshot a manifest
@@ -57,6 +57,13 @@ def test_dry_stage_end_to_end(tmp_path: Path, capsys: pytest.CaptureFixture[str]
     o = outcome["outcome"]
     assert o["recomputation"]["state"] == "complete" and o["recomputation"]["differences"] == [] and o["recomputation"]["not_evaluated_cells"] == []
     assert o["design"]["synthetic"] is True and "(1 replicates, U = 4)" in o["label_with_design"]
+    # the analysis stage drew the bootstrap intervals (its seed mode is the test stand-in of 220906) and gate G9 for that stage passed on what it drew
+    assert o["intervals_computed"] is True and o["intervals"] and "Table 5. Scores with bootstrap intervals: NOT_EVALUATED" not in (run / "REPORT.md").read_text()
+    sa = json.loads((run / "seeds" / "analysis.json").read_text())
+    assert sa["ok"] and sa["stage_mode"] == "test" and {u["seed"] for u in sa["recorded"]} == {core.partition_seeds("test")["bootstrap"]} and all(u["mode"] == "test" for u in sa["recorded"])
+    assert gates["G4"]["mps_agreement"]["ok"] and gates["G4"]["mps_agreement"]["status"].startswith("not applicable")  # the dry stage is not a registered run
+    t0 = json.loads((run / "timing.json").read_text())
+    assert any(k.endswith("/E_A") for k in t0) and not any("E_open" in k for k in t0)  # the timing benchmark is E_A and E_B
     assert outcome["oracle_line"] == LINE and o["oracle_line"] == LINE and all(c["oracle_line"] == LINE for by in o["classes"].values() for c in by.values())
     text = (run / "REPORT.md").read_text()
     output.check_text(text)
@@ -158,9 +165,14 @@ def test_rehearsal_measures_the_registered_stage_functions_on_d_cal_and_feeds_th
     rates, raw = rehearsal.measure_rates(world, 0, updates=2, full_updates=5, overhead=ov, gates2_seconds=1.5, scratch=tmp_path / "scratch", data_dir=tmp_path / "data")
     assert not scored & {"E_A", "E_B", "E_C", "E_open"} and {"D_cal_A", "D_cal_B"} <= scored  # no evaluation panel is scored before the freeze (the lead's ruling A-M3): the rehearsal scores calibration items
     assert raw["full_length"]["updates"] == 5.0 and set(raw["full_length"]) >= {"ST1", "MII", "LORA1", "peak_bytes"}  # the full-U store, M-ii (from an appended 2N store) and LoRA cells ran
-    for g in ("ST1", "MAF", "MSEQ", "MAGOLD"):
-        assert raw["update_seconds"][f"{g}@L{world.layer}"] == raw["full_length"]["ST1"]  # the rate comes from the full-length run, not the short one
-    assert raw["update_seconds"][f"MII@L{world.layer}"] == raw["full_length"]["MII"] and raw["update_seconds"]["LORA1"] == raw["update_seconds"]["LSEQ"] == raw["full_length"]["LORA1"]
+    ly = world.layer
+    assert raw["update_seconds"][f"ST1@L{ly}"] == raw["full_length"]["ST1"]  # the ST1 type is the full-length store cell itself
+    for g in ("MAF", "MSEQ", "MAGOLD"):  # a full-length cell of one type stands in for another: the larger of that rate and the type's own short-run rate, and the record says so
+        own = raw["short_run_update_seconds"][f"{g}@L{ly}"]
+        assert raw["update_seconds"][f"{g}@L{ly}"] == max(raw["full_length"]["ST1"], own) and raw["stand_in_rates"][f"{g}@L{ly}"]["used"] == raw["update_seconds"][f"{g}@L{ly}"]
+        assert raw["stand_in_rates"][f"{g}@L{ly}"]["full_length_cell"] == "ST1" and raw["stand_in_rates"][f"{g}@L{ly}"]["own_short_run_rate"] == own
+    assert raw["update_seconds"][f"MII@L{ly}"] == raw["full_length"]["MII"] and raw["update_seconds"]["LORA1"] == raw["full_length"]["LORA1"]
+    assert raw["update_seconds"]["LSEQ"] == max(raw["full_length"]["LORA1"], raw["short_run_update_seconds"]["LSEQ"]) and raw["stand_in_rates"]["LSEQ"]["full_length_cell"] == "LORA1"
     assert raw["update_seconds"]["ETABLE@L0"] == raw["short_run_update_seconds"]["ETABLE@L0"] > 0 and raw["update_seconds"]["ETABLE@L1"] > 0  # E-table is measured at both read layers
     assert raw["other_layer_seconds"] > 0 and raw["gates2_seconds"] == 1.5 and raw["scale"] >= 1.0
     comb = raw["probe"]["combined_check"]

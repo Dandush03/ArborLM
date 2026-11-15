@@ -62,8 +62,8 @@ def test_a_difference_within_tolerance_is_not_a_difference_and_changes_no_verdic
     assert out["label_row"] == 7 and out["recomputation"]["differences"] == []
     # verdicts are compared as verdicts: numbers never enter the comparison
     a, b = analysis.analyze(s), analysis.analyze(rec)
-    assert recompute.outcome_changes(a, b) == []
-    assert recompute.verdict_view({"x": 0.5, "ok": True, "name": "COMPOSES", "reasons": ["0.5"], "cost_lines": ["a 0.5"], "n": 3}) == {"ok": True, "name": "COMPOSES"}
+    va, vb = analysis.verdicts_of_outcome(a), analysis.verdicts_of_outcome(b)
+    assert analysis.verdict_changes(va, vb) == [] and not any(isinstance(v, float) for v in va.values())  # a verdict map holds booleans, None and words: no number
 
 
 def test_a_changed_baseline_changes_the_gap_and_a_verdict_is_an_engineering_failure() -> None:
@@ -75,7 +75,7 @@ def test_a_changed_baseline_changes_the_gap_and_a_verdict_is_an_engineering_fail
     out = recompute.outcome_under_recomputation(s, rec, recompute.FROZEN)
     assert out["label"] == "ENGINEERING-FAILURE" and out["recomputation"]["engineering_failure"] is True and any("baseline" in d["cell"] for d in out["recomputation"]["differences"])
     # the recomputed study is analyzed with ITS OWN baseline (it does not reuse the registered one)
-    assert recompute.outcome_changes(analysis.analyze(s), analysis.analyze({**s, "baseline": rec["baseline"]}))
+    assert analysis.verdict_changes(analysis.verdicts(s), analysis.verdicts({**s, "baseline": rec["baseline"]}))
 
 
 def test_a_flipped_gen_verdict_is_an_engineering_failure_even_when_the_class_would_not_show_it() -> None:

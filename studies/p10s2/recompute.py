@@ -126,44 +126,6 @@ def reported_cells(registered: Mapping[str, Mapping[str, Any]], recomputed: Mapp
     return out
 
 
-NON_VERDICT_KEYS = frozenset({"design", "recomputation", "cost_lines", "not_evaluated_reasons", "reasons", "oracle_line", "combined_line", "label_with_design", "by_construction"})
-COUNT_ONLY_KEYS = frozenset({"engineering", "incomplete"})
-KEEP_STRING_KEYS = frozenset({"control_failed", "cell", "replicate", "router_tasks"})  # strings that name a cell or a router: kept whole although they carry numerals
-
-
-def verdict_view(obj: Any, key: str = "") -> Any:
-    """What a verdict comparison reads: booleans, verdict words and their placement, and nothing numeric. Numbers are dropped (a difference within the recomputation's tolerance is a difference in a
-    number, and it never changes a verdict by itself); strings that carry a numeral (formatted numbers, cell paths in free text) are dropped; the lists of engineering and incomplete reasons are compared
-    by their length. GEN, CONTROL-FAILED, the gates, classes, annotations, composition and the label are all read through this view (the lead's ruling of 2026-11-15)."""
-    if key in NON_VERDICT_KEYS:
-        return None
-    if isinstance(obj, Mapping):
-        out: dict[str, Any] = {}
-        for k in sorted(obj, key=str):
-            v = verdict_view(obj[k], str(k))
-            if v is not None:
-                out[str(k)] = v
-        return out
-    if isinstance(obj, list | tuple):
-        if key in COUNT_ONLY_KEYS:
-            return len(obj)
-        return [verdict_view(v, key) for v in obj]
-    if isinstance(obj, bool) or obj is None:
-        return obj
-    if isinstance(obj, int | float):
-        return None
-    if isinstance(obj, str):
-        return obj if key in KEEP_STRING_KEYS or not any(ch.isdecimal() for ch in obj) else None
-    return None
-
-
-def outcome_changes(registered_outcome: Mapping[str, Any], recomputed_outcome: Mapping[str, Any]) -> list[str]:
-    """Every verdict of the outcome (gates, classes, annotations, composition, GEN, CONTROL-FAILED, label and the rest read through ``verdict_view``) compared between the registered scores and the
-    recomputed ones; the paths that differ."""
-    a, b = flatten(verdict_view(registered_outcome)), flatten(verdict_view(recomputed_outcome))
-    return [path.lstrip("/") for path in sorted(set(a) | set(b)) if a.get(path, "<absent>") != b.get(path, "<absent>")]
-
-
 # --- the whole study: every recomputed quantity ---------------------------------------------------------------------------------------------------
 REP_SECTIONS = ("assembled", "retrieval", "routers", "ensemble")
 
@@ -229,31 +191,35 @@ def reported_study(registered: Mapping[str, Any], recomputed: Mapping[str, Any],
     return out
 
 
-def outcome_under_recomputation(registered: Mapping[str, Any], recomputed: Mapping[str, Any] | None, mode: str, *, memory_exceeded: bool = False) -> dict[str, Any]:
+def outcome_under_recomputation(registered: Mapping[str, Any], recomputed: Mapping[str, Any] | None, mode: str, *, memory_exceeded: bool = False, bootstrap_mode: str | None = None, bootstrap_resamples: int | None = None) -> dict[str, Any]:
     """The study outcome under the recomputation rule, over every recomputed quantity (audits B-M9 and C-M3): INCOMPLETE without a completed recomputation (no class is printed); ENGINEERING-FAILURE if
-    any verdict (gate, class, annotation, composition, GEN, CONTROL-FAILED, label) differs between the registered study and the recomputed one; otherwise the cells and sections with a difference beyond
-    tolerance carry the recomputed value, their mechanisms the class NOT_EVALUATED. The recomputed study is analyzed with its own recomputed baseline (it reuses nothing from the registered record)."""
+    any verdict (``analysis.verdicts``: gates, GEN under both decisions, controls, classes, annotations, composition, label; no number enters it) differs between the registered study and the recomputed one;
+    otherwise the cells and sections with a difference beyond tolerance carry the recomputed value, their mechanisms the class NOT_EVALUATED. The recomputed study is analyzed as recomputed (cells,
+    baseline, assembled arms, retrieval, routers, ensemble); it reuses nothing from the registered record but the records that were not recomputed (pre-freeze, gates, design).
+
+    ``bootstrap_mode`` ("registered-analysis" in the registered analysis stage, "test" in tests and the dry stage) switches on the descriptive bootstrap intervals of the PRINTED outcome only (the listed seed
+    220906 is drawn in the analysis stage and nowhere else); the analyses that are only compared never draw it."""
     from . import analysis
 
+    kw: dict[str, Any] = {"bootstrap_mode": bootstrap_mode, "bootstrap_resamples": bootstrap_resamples}
     if recomputed is None:
-        out = analysis.analyze({**registered, "incomplete": [*registered.get("incomplete", []), "the independent recomputation has not completed"]})
+        out = analysis.analyze({**registered, "incomplete": [*registered.get("incomplete", []), "the independent recomputation has not completed"]}, **kw)
         out["recomputation"] = recomputation_status(None, [])
         return analysis.strip_classes_if_incomplete(out)
     res = compare_study(registered, recomputed, mode, memory_exceeded=memory_exceeded)
     if not res.complete:
         why = " within the memory limits" if memory_exceeded else ""
-        out = analysis.analyze({**registered, "incomplete": [*registered.get("incomplete", []), f"the recomputation could not be completed{why}" + (f" (missing: {', '.join(res.missing[:5])})" if res.missing else "")]})
+        out = analysis.analyze({**registered, "incomplete": [*registered.get("incomplete", []), f"the recomputation could not be completed{why}" + (f" (missing: {', '.join(res.missing[:5])})" if res.missing else "")]}, **kw)
         out["recomputation"] = {**recomputation_status(res, []), "differences": [d.to_json() for d in res.differences], "missing": res.missing, "study_level": res.study_level}
         return analysis.strip_classes_if_incomplete(out)
-    # the recomputed study is analyzed as recomputed (cells, baseline, assembled arms, retrieval, routers, ensemble); the records that were not recomputed (pre-freeze, gates, design) are the registered ones
     rec_for_verdicts = {**copy.deepcopy(dict(registered)), "baseline": copy.deepcopy(recomputed.get("baseline", {})), "replicates": copy.deepcopy(list(recomputed.get("replicates", [])))}
-    changed = outcome_changes(analysis.analyze(registered), analysis.analyze(rec_for_verdicts))
+    changed = analysis.verdict_changes(analysis.verdicts(registered), analysis.verdicts(rec_for_verdicts))
     if changed:
         note = f"a recomputation difference changes {len(changed)} verdict entries ({', '.join(changed[:6])})"
-        out = analysis.analyze({**registered, "engineering": [*registered.get("engineering", []), note]})
+        out = analysis.analyze({**registered, "engineering": [*registered.get("engineering", []), note]}, **kw)
         out["recomputation"] = {**recomputation_status(res, changed), "differences": [d.to_json() for d in res.differences], "study_level": res.study_level}
         return out
-    out = analysis.analyze(reported_study(registered, recomputed, res), set(res.not_evaluated_cells))
+    out = analysis.analyze(reported_study(registered, recomputed, res), set(res.not_evaluated_cells), **kw)
     out["recomputation"] = {**recomputation_status(res, []), "differences": [d.to_json() for d in res.differences], "study_level": res.study_level}
     return out
 

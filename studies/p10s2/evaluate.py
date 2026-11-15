@@ -33,6 +33,7 @@ class PanelData:
     task: str
     examples: list[Example]
     refs: list[list[str]]
+    source_index: tuple[int, ...] | None = None  # for a panel that is a subset of a stored panel (E_open_A, E_open_B): the positions of its items in that panel, so stored teacher outputs line up
 
 
 @dataclass(frozen=True)

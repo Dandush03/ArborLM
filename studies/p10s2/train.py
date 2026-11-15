@@ -78,7 +78,7 @@ class NonFiniteLoss(RuntimeError):
 
 
 def select_device(name: str) -> torch.device:
-    """``cpu``, ``mps`` or ``auto`` (mps when available, else cpu). An unavailable device is an error; ``PYTORCH_ENABLE_MPS_FALLBACK`` must be unset so any fallback is an error (G4)."""
+    """``cpu`` or ``mps``: the frozen device, never chosen by availability. An unavailable device is an error (no silent fallback); ``PYTORCH_ENABLE_MPS_FALLBACK`` must be unset so any fallback is an error (G4)."""
     if name == "cpu":
         return torch.device("cpu")
     if os.environ.get("PYTORCH_ENABLE_MPS_FALLBACK"):
@@ -88,8 +88,6 @@ def select_device(name: str) -> torch.device:
         if not avail:
             raise RuntimeError("device mps requested but unavailable")
         return torch.device("mps")
-    if name == "auto":
-        return torch.device("mps" if avail else "cpu")
     raise ValueError(f"unknown device {name!r}")
 
 

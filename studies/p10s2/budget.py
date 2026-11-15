@@ -217,6 +217,13 @@ def propose_raise(p_hours: float, rates: Rates) -> CapRaise | None:
     return CapRaise(base_cap(), new, p_hours, need, whole > ceiling(), proj)
 
 
+def computed_cap(p_hours: float, rates: Rates) -> float:
+    """The cap by the rule (the lead's ruling of 2026-11-15): 36 hours if rung 1 satisfies P + 2R <= 36; otherwise the smallest whole number of hours up to 72 at which rung 1 satisfies it; otherwise 72 (the
+    rung order is then applied against 72, and NOT STARTED: BUDGET follows if no rung fits). Any other recorded cap is refused at the freeze."""
+    proposal = propose_raise(p_hours, rates)
+    return base_cap() if proposal is None else proposal.new_cap_hours
+
+
 def plan_in_history(repo: Path | None) -> bool:
     """True if a freeze plan has ever been committed in the repository's history (any branch): a registered stage can have run after it, so the cap is never raised again."""
     if repo is None:
@@ -264,17 +271,15 @@ def effective_cap(path: Path) -> float:
 
 
 def verify_raise(path: Path, p_hours: float, rates: Rates, ledger: Ledger) -> float:
-    """The cap in force at the freeze: the raise file and the ledger's raise entry must agree, and a recorded raise must equal the amount recomputed now from P and the rates; returns the cap. Refuses on any
-    difference (a raise that was typed, edited, deleted or made twice). No recorded raise is the base cap (the lead may decline the raise)."""
+    """The cap in force at the freeze: the raise file and the ledger's raise entry must agree, and the recorded cap must equal the cap computed now from P and the rates (``computed_cap``); returns the cap.
+    Refuses on any difference (a raise that was typed, edited, deleted or made twice, or a raise declined where the rule requires it)."""
     in_file = effective_cap(path)
     in_ledger = ledger.cap_hours()
     if in_file != in_ledger:
         raise CapRefused(f"refused: the raise file ({in_file} h) and the study ledger ({in_ledger} h) disagree")
-    if in_file == base_cap():
-        return in_file  # no raise was recorded (the lead may decline it: the rung rule then runs against the base cap)
-    proposal = propose_raise(p_hours, rates)
-    if proposal is None or in_file != proposal.new_cap_hours:
-        raise CapRefused(f"refused: the recorded cap {in_file} h differs from the cap recomputed from the rehearsal record and P ({'no raise' if proposal is None else str(proposal.new_cap_hours) + ' h'})")
+    computed = computed_cap(p_hours, rates)
+    if in_file != computed:  # the cap is a computed rule: a base cap where a raise is required, a raise that is not the computed amount, or any other number is refused
+        raise CapRefused(f"refused: the recorded cap {in_file} h differs from the cap computed by the rule from the rehearsal record and P ({computed} h)")
     return in_file
 
 

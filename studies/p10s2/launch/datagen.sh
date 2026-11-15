@@ -15,4 +15,4 @@ case "$1" in
 esac
 CODE_COMMIT=$2
 cd "$(dirname "$0")/../../.."
-exec uv run --locked --with-requirements studies/p10s2/requirements-datagen.txt python -m studies.p10s2.datagen --downloads "$RUN_DIR/downloads" --out "$RUN_DIR/data" --code-commit "$CODE_COMMIT" --stage-cap-seconds 6480
+exec uv run --locked --extra pilot --with-requirements studies/p10s2/requirements-datagen.txt python -m studies.p10s2.datagen --downloads "$RUN_DIR/downloads" --out "$RUN_DIR/data" --code-commit "$CODE_COMMIT" --stage-cap-seconds 6480

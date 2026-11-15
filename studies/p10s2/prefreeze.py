@@ -80,6 +80,9 @@ Tick = Callable[[str], None]
 Crosscheck = Callable[[Sequence[tuple[str, Sequence[str]]]], dict[str, Any]]
 
 
+TEACHER_PANELS = ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con")  # the panels both teachers generate on (section 6.1: "scored on every panel")
+
+
 def build_bundle(
     corpus: CorpusLike, tok: ReferenceTokenizer, student: Student, teachers: Mapping[str, Teacher], text_val: str, text_train: str, sizes: Sizes, spec: WindowSpec, mode: str, replicates: int,
     *, crosscheck: Crosscheck | None = None, tick: Tick | None = None, provenance: Mapping[str, Any] | None = None,
@@ -146,7 +149,7 @@ def build_bundle(
         for x in [*accepted[c], *gold_items[c]]:
             bank.build_from_tokenizer(tok, vocab_index, c, x.en, x.target)
             bank.build_from_tokenizer(tok, vocab_index, c, x.en, None)
-    for n in ("E_A", "E_B", "E_C", "D_cal", "D_con", "Q_fit", "Q_check"):
+    for n in ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con", "Q_fit", "Q_check"):
         for it in part.panels[n]:
             for c in core.TASKS:
                 if c in it.refs:
@@ -166,9 +169,9 @@ def build_bundle(
     rec["dropped_eval_equal"] = dropped
     stamp("filter, qualification")
     teacher_outputs = {
-        c: {name: [o.text for o in run_teacher(teachers[c], [i.en for i in part.panels[pn]])] for name, pn in (("E_" + c, "E_" + c), ("D_cal", "D_cal"), ("E_C", "E_C"))}
+        c: {name: [o.text for o in run_teacher(teachers[c], [i.en for i in part.panels[name]])] for name in TEACHER_PANELS}
         for c in core.TASKS
-    }  # fmt: skip  (both teachers generate on every E_C sentence: the combined-tasks addendum)
+    }  # fmt: skip  (both teachers generate on every panel section 6.1 names, D_con and E_open included: the ruling of 2026-11-15; the combined-tasks addendum needs both on every E_C sentence)
     n_c = len(part.panels["E_C"])
     sigma = draw_sigma(n_c, mode)  # the listed seed 220911, drawn once, here, after E_C is built
     pairs = pair_list(n_c, sigma)

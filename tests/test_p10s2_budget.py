@@ -245,7 +245,7 @@ def test_record_raise_refuses_when_rung_1_fits_and_verify_raise_recomputes(tmp_p
     budget.record_raise(r, path, led)
     cap = budget.verify_raise(path, led.total_hours(), r, led)
     assert cap > 36.0
-    with pytest.raises(budget.CapRefused, match="recomputed from the rehearsal record"):
+    with pytest.raises(budget.CapRefused, match="computed by the rule"):
         budget.verify_raise(path, led.total_hours(), rates(scale_for(30.0, 4, 2000)), led)  # other rates: the recorded cap is not the recomputed one
     path.write_text(json.dumps({**json.loads(path.read_text()), "new_cap_hours": 71.0}))
     with pytest.raises(budget.CapRefused, match="disagree"):
