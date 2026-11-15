@@ -619,7 +619,7 @@ Recorded by the lead:
 - S1's caps are 12 charged hours, 3 GiB per worker and 18 GiB aggregate. The delegation does not name the caps; the budget sentence does. The lead does not raise them.
 - Independent review of revision 1 (Opus 5.5): NOT READY. Confirmation review of revision 2 (Opus 5.5): READY AFTER LISTED TEXT EDITS, K1–K7. Revision 3 applies them.
 - Pending with the human lead: ADR-0020 §17 item 0 (§13 item 5). No answer is recorded.
-- **Lead's approval: PENDING.**
+- **Lead's approval:** given for implementation, calibration and rehearsal only (record below); the registered run is PENDING.
 - Astra review: NOT_PERFORMED. Claude review is not Astra review.
 
 ### Lead's approval for implementation, calibration and rehearsal — 2026-11-15 (UTC)
