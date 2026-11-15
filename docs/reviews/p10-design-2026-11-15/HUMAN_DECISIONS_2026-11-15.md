@@ -96,3 +96,14 @@ Recorded by the lead as a task for after the three P10 studies (S0, S1, S2) are 
 - **Clean-up.** Candidates seen at the repository root on `main` at the time of this record: `ArborLM-Codex-Research-Starter.zip`, `ArborLM-Research-Handoff.md`, `OVERNIGHT_REPORT.md`, and `docs/ArborLM_Claude_Handoff_P5_to_P6.md`. `docs/RESEARCH_HANDOFF.md` is named by `AGENTS.md`/`CLAUDE.md` as required reading and is not a candidate without the human lead saying so. The lead lists every candidate with what refers to it and gets the human lead's yes on the list before deleting anything; removal is by an ordinary commit (history is not rewritten).
 - **Reproduction requirements, one list per study** (P1–P9-II and P10-S0, S1, S2): the Python version and locked packages, extra packages outside the lock with pinned versions and hashes, input files with hashes and where they come from, models with pinned revisions, hashes and licences, hardware and platform of record, the commands, expected run time, and which results are bit-reproducible on which platform.
 - **A global `CITATION.cff`** at the repository root. The lead asks the human lead for the author list, title, licence and preferred citation before writing it; no name or affiliation is invented.
+
+### Authorship and citations (2026-11-15 UTC)
+
+The human lead, verbatim, on the `CITATION.cff` and what is cited:
+
+> the true is that everything done was done here, I didn't cite anyone nor did I start any expirement based on comments of other studies, but we did reduce the work by reading throught existing studies that you can cite
+
+Recorded by the lead:
+
+- The work in this repository is original to this project: no experiment was started from another study's comments. `CITATION.cff` describes this repository as the work to cite.
+- Prior work that was read and that saved effort is to be cited. The lead compiles the list from what the repository itself records as read (`docs/LITERATURE_CHECK.md`, the ADRs and reviews) and from the artefacts the studies use (models, datasets, metrics and libraries, whose licences in some cases require attribution). Every entry is checked against its source before it is written; nothing is cited from memory alone, and nothing is listed as read that the records do not show was read.
