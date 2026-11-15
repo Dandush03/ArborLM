@@ -565,6 +565,16 @@ Recorded by the lead: **attempt 2 is approved by the human lead**; the attempt-1
 - Before interpretation: `calibration_binding.json` holds the calibration hash, U = 8,192 and no failed sizes; the auditor recomputes classes, annotations and selection from the raw records. No stage is re-run with changed settings.
 - Astra review: NOT_PERFORMED.
 
+### 15.9 Human acceptance of the Part I result — 2026-11-15 (UTC)
+
+Shown the outcome (`results/p9i-run-attempt2-2026-11-15/OUTCOME.md`) and the independent review (`docs/reviews/p9i-results-2026-11-15/REVIEW.md`), the human lead wrote in chat (verbatim, from the mission "ArborLM — Research Consolidation and P9-II Authorization"):
+
+> We have completed P9-I (ADR-0017 Part I), attempt 2, at commit "326ab0d" on branch "claude/adr-0017-design".
+> The registered result is COMPLETE — NO_INTERFACE_SELECTED.
+> I accept this as a registered negative result. Preserve that classification, all original data, audits, deviations, and exploratory findings.
+
+Recorded by the lead: Part I stands as **COMPLETE — NO_INTERFACE_SELECTED**, a registered negative result accepted by the human lead. The diagnostic findings of the review (address collapse; draw sensitivity of W7 at 4,096 slots) remain exploratory and are not registered evidence. Lanes A–D stay calibration blocked. The same mission directs consolidation into `main` first (an Opus-owned integration) and then the design of a new study of address learning (ADR-0019), with no development of that study before the consolidation is complete. Astra review: NOT_PERFORMED.
+
 ### Decision 2 (Lanes A–D)
 
 None. Not reachable (calibration blocked).
