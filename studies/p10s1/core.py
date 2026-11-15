@@ -415,7 +415,7 @@ def registered_cells(plan: Plan | None = None, *, dense_rates: Mapping[int, floa
                 out.append(make_cell("P", arm, facts, slots, r, init_seed_of(r), u_p=u_p_of(plan, facts), lr=lr))
     for draw in plan.seed_block_draws:
         for k in range(1, SEED_BLOCK_EXTRA + 1):
-            for facts, slots in grid_cells(plan):
+            for facts, slots in GRID_CELLS:  # the seed block is seven cells (section 6.1; ruling m2), also with the overload row
                 out.append(make_cell("SB", "F-OQ", facts, slots, draw, SEED_BLOCK_INITS[(k, draw)], u_p=u_p_of(plan, facts)))
     if plan.lane_l:
         out.extend(lane_cells())
@@ -781,7 +781,10 @@ def seed_check(root: Path | None = None, namespaces: Mapping[str, frozenset[int]
         outside = sorted(v for v in ns[name] if not SEED_RANGE[0] <= v <= SEED_RANGE[1])
         if outside:
             overlaps.append(f"{name} has seeds outside {SEED_RANGE}: {outside[:5]}")
-    return {"passed": not overlaps, "overlaps": overlaps, "namespaces": {k: len(v) for k, v in ns.items()}, "legacy_config_seeds": len(legacy)}
+    return {
+        "passed": not overlaps, "overlaps": overlaps, "namespaces": {k: len(v) for k, v in ns.items()}, "legacy_config_seeds": len(legacy),
+        "scope_note": "P1-P8 seeds are read from configs only; seeds written in code (for example src/arborlm/p7a_core.py) are not scanned here (the audit's literal scan found no overlap)",
+    }
 
 
 def assert_namespaces_disjoint() -> None:
@@ -795,13 +798,23 @@ assert_namespaces_disjoint()
 SEED_MODES = ("registered", "calibration", "rehearsal")
 
 
+TEST_SWITCH_ENV = "P10S1_TEST_SEEDS"
+
+
+def test_switch() -> bool:
+    """The test-only switch (environment variable ``P10S1_TEST_SEEDS=1``, ADR-0021 section 22 M8): the registered driver then runs ONLY on the unit-test seed sets ``p10s1-test-0`` to
+    ``-4`` (never on a registered draw), with the synthetic backbone and the DRY sizes, so that the whole registered sequence can be exercised end to end before the freeze. With
+    the switch off, only ``p10s1-draw-1..5`` are accepted in registered mode; the two sets of seeds are never mixed."""
+    return os.environ.get(TEST_SWITCH_ENV) == "1"
+
+
 def check_seed_set(mode: str, seed_set_name: str) -> None:
     """``registered``: only ``p10s1-draw-1..5``; ``calibration``: only ``p10s1-cal-1`` and ``-2``; ``rehearsal``: only ``p10s1-rehearsal``; unit tests and the DRY
     stage use ``p10s1-test-k`` in the calibration or rehearsal modes. Anything else is refused. No registered panel is ever used in calibration or rehearsal."""
     if mode not in SEED_MODES:
         raise ValueError(f"unknown mode {mode!r}")
     if mode == "registered":
-        ok = bool(re.fullmatch(r"p10s1-draw-[1-5]", seed_set_name))
+        ok = bool(re.fullmatch(r"p10s1-test-[0-4]" if test_switch() else r"p10s1-draw-[1-5]", seed_set_name))
     elif mode == "calibration":
         ok = bool(re.fullmatch(r"p10s1-cal-[12]", seed_set_name)) or seed_set_name.startswith("p10s1-test-")
     else:
@@ -811,6 +824,17 @@ def check_seed_set(mode: str, seed_set_name: str) -> None:
 
 
 DRAW_NAMES = tuple(f"p10s1-draw-{r}" for r in range(1, REPLICATES + 1))
+TEST_DRAW_NAMES = tuple(f"p10s1-test-{r}" for r in range(REPLICATES))
+
+
+def draw_names() -> tuple[str, ...]:
+    """The five registered draws' seed-set names (under the test switch: the five test sets)."""
+    return TEST_DRAW_NAMES if test_switch() else DRAW_NAMES
+
+
+def draw_seeds(replicate: int) -> p9core.SeedSet:
+    """The seeds of registered draw ``replicate`` (under the test switch: ``test_seeds(replicate - 1)``)."""
+    return test_seeds(replicate - 1) if test_switch() else registered_draw_seeds(replicate)
 
 
 def seeds_of_name(name: str) -> p9core.SeedSet:
@@ -821,7 +845,18 @@ def seeds_of_name(name: str) -> p9core.SeedSet:
 
 
 # --- config ---------------------------------------------------------------------------------------------------------------------------------------------
-def registered_config(cap_hours: float = CAP_HOURS_DEFAULT) -> dict[str, Any]:
+MADDS_FORMULA = (
+    "B = 16 contexts, T = 63 positions, Q = 8 B = 128 answer-site queries; one whole training update in multiply-adds. "
+    "backbone forward: B (2 (T 32 96 + 4 T T 8 + 4 T T 8 + T 32 32 + 2 T 32 64) + T 32 256). "
+    "backbone backward (weights frozen: input gradients through block 1 and the output head only, the two attention products twice): "
+    "B (T 32 96 + T 32 32 + 2 T 32 64 + 4 (4 T T 8) + T 32 256). "
+    "arm: F-OQ 2 Q N 16 + 3 Q 32 32; T-OQ 2 Q (N/256 16 + 512 16) + 3 Q 32 32; H8 and R2 3 Q 32 32; D-OQ 2 Q 16 h + 3 Q h 32. "
+    "plus 4 x trainable parameters for the AdamW update (elementwise). The matmul terms equal torch's FLOP counter / 2 (a test)"
+)
+GENERATION_DEFAULT = {"cap_seconds": 1800.0, "provisional": True, "table_facts": FACT_TABLE}
+
+
+def registered_config(cap_hours: float = CAP_HOURS_DEFAULT, generation: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The configuration mirrored in ``configs/p10s1_capacity.toml``. ``resources.cap_hours`` is the one value the human lead may change; it is read from the config."""
     return {
         "schema_version": SCHEMA,
@@ -842,6 +877,8 @@ def registered_config(cap_hours: float = CAP_HOURS_DEFAULT) -> dict[str, Any]:
         },
         "robustness": {"dropout": list(ROBUSTNESS_DROPOUT), "noise": list(ROBUSTNESS_NOISE), "masks": ROBUSTNESS_MASKS},
         "timing": {"warmup_updates": TIMING_WARMUP_UPDATES, "updates": TIMING_UPDATES, "repeats": TIMING_REPEATS, "load_average_max": LOAD_AVERAGE_MAX, "retries": TIMING_RETRIES, "throughput_batches": list(THROUGHPUT_BATCHES), "throughput_repeats": THROUGHPUT_REPEATS, "throughput_cv_max": THROUGHPUT_CV_MAX, "rehearsal_updates": REHEARSAL_UPDATES},
+        "cost": {"madds_formula": MADDS_FORMULA},
+        "generation": dict(generation or GENERATION_DEFAULT),
         "resources": {"cap_hours": float(cap_hours), "rss_worker_bytes": RSS_WORKER_BYTES, "rss_aggregate_bytes": RSS_AGGREGATE_BYTES, "workers": WORKERS, "headroom": HEADROOM},
     }  # fmt: skip
 
@@ -851,8 +888,18 @@ def validate_config(data: dict[str, Any]) -> dict[str, Any]:
     cap = data.get("resources", {}).get("cap_hours")
     if not isinstance(cap, float) or isinstance(cap, bool) or not math.isfinite(cap) or cap <= 0:
         raise ValueError("P10S1 config: resources.cap_hours must be a positive float")
-    _validate(data, registered_config(cap), "P10S1 config")
+    gen = data.get("generation")
+    if not isinstance(gen, dict) or set(gen) != set(GENERATION_DEFAULT):
+        raise ValueError("P10S1 config: [generation] needs cap_seconds, provisional and table_facts")
+    if not isinstance(gen["cap_seconds"], float) or not math.isfinite(gen["cap_seconds"]) or gen["cap_seconds"] <= 0 or not isinstance(gen["provisional"], bool) or gen["table_facts"] not in (FACT_TABLE, OVERLOAD_FACTS):
+        raise ValueError("P10S1 config: generation.cap_seconds a positive float, provisional a boolean, table_facts 32768 or 65536")
+    _validate(data, registered_config(cap, gen), "P10S1 config")
     return data
+
+
+def generation_settings(path: Path | None = None) -> dict[str, Any]:
+    """The registered generation's cap per draw, whether it is still provisional (set by the rehearsal's measured G1 time: ``stages set-generation-cap``), and the fact table's size."""
+    return dict(load_config(path)["generation"])
 
 
 def load_config(path: Path | None = None) -> dict[str, Any]:
@@ -865,16 +912,16 @@ def cap_seconds(path: Path | None = None) -> float:
     return float(load_config(path)["resources"]["cap_hours"]) * 3600.0
 
 
-def render_config_toml(cap_hours: float = CAP_HOURS_DEFAULT) -> str:
+def render_config_toml(cap_hours: float = CAP_HOURS_DEFAULT, generation: Mapping[str, Any] | None = None) -> str:
     """The canonical text of ``configs/p10s1_capacity.toml`` (a test requires byte equality up to the cap)."""
     from studies.p9i.core import _toml_lines
 
     header = [
         "# ADR-0021 revision 4 (P10S1) registered constants. Generated by studies.p10s1.core.render_config_toml",
-        "# and validated against studies.p10s1.core; any difference is refused, except resources.cap_hours (the human lead's figure).",
+        "# and validated against studies.p10s1.core; any difference is refused, except resources.cap_hours (the human lead's figure) and [generation] (set by the rehearsal and the freeze).",
         "",
     ]
-    return "\n".join([*header, *_toml_lines(registered_config(cap_hours), "")]) + "\n"
+    return "\n".join([*header, *_toml_lines(registered_config(cap_hours, generation), "")]) + "\n"
 
 
 # --- identity hashes ----------------------------------------------------------------------------------------------------------------------------------

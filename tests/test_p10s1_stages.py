@@ -8,6 +8,7 @@ import json
 import shutil
 import subprocess
 import sys
+from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 
@@ -85,9 +86,10 @@ def test_seed_sets_follow_the_mode() -> None:
     assert stages.seeds_for(parse("train", "--mode", "calibration", "--draw", "1")).name == "p10s1-cal-1"
 
 
-def test_registered_mode_refuses_without_freeze_plan_or_commit(tmp_path: Path) -> None:
-    assert stages.main(["registered", "train", "--run-dir", str(tmp_path), "--repo", str(tmp_path)]) == 2  # no freeze commit
-    assert stages.main(["registered", "train", "--run-dir", str(tmp_path), "--repo", str(tmp_path), "--freeze-commit", "deadbeef"]) == 2  # not a commit
+def test_registered_mode_refuses_without_freeze_plan_or_commit(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(core, "repo_root", lambda: tmp_path)  # the driver takes no --repo (section 22 M3): the tests move the repository instead
+    assert stages.main(["registered", "train", "--run-dir", str(tmp_path)]) == 2  # no freeze commit
+    assert stages.main(["registered", "train", "--run-dir", str(tmp_path), "--freeze-commit", "deadbeef"]) == 2  # not a commit
     with pytest.raises(SystemExit):
         stages.main(["registered", "stage1", "--run-dir", str(tmp_path)])
     with pytest.raises(pool.StageRefused, match="no freeze plan"):
@@ -280,8 +282,17 @@ def projection_in(tmp: Path, name: str, **over: Any) -> dict[str, Path]:
     return fake_projection(folder, **over)
 
 
+def config_repo(folder: Path) -> Path:
+    """A directory holding the config with a generation cap the rehearsal has set (the freeze refuses a provisional one)."""
+    repo = folder / "config-repo"
+    if not repo.exists():
+        (repo / "configs").mkdir(parents=True)
+        (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation={"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE}))
+    return repo
+
+
 def freeze_argv(paths: dict[str, Path], run: Path, out: Path, *extra: str) -> list[str]:
-    return ["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(out), *extra]
+    return ["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(out), "--repo", str(config_repo(out.parent)), *extra]
 
 
 def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
@@ -297,9 +308,11 @@ def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
     assert fro.lane_status == fz.LANE_OMITTED_NO_INTERFACE and fro.cuts == ["cut 1", "cut 2", "cut 3: D-OQ at 8K/64K"] and plan["frozen_sha256"] == sha256(canonical_json(plan["frozen"]))
     assert plan["identity"] == core.code_identity() and plan["lane_l"] == fz.LANE_OMITTED_NO_INTERFACE
     assert stages.main(freeze_argv(paths, run, tmp_path / "f1")) == 2  # a freeze is written once
-    again = stages.main(freeze_argv(paths, run, tmp_path / "f3", "--s0-status", "S0 ADDRESSING-NOT-QUALIFIED", "--no-loaded-transitions", "16K→64K"))
+    s0 = tmp_path / "s0.json"
+    s0.write_text(json.dumps({"outcome": "ADDRESSING-NOT-QUALIFIED"}))
+    again = stages.main(freeze_argv(paths, run, tmp_path / "f3", "--s0-record", str(s0), "--no-loaded-transitions", "16K→64K"))
     plan3 = json.loads((tmp_path / "f3" / "plan.json").read_text())
-    assert again == 0 and plan3["frozen"]["s0_status"] == "S0 ADDRESSING-NOT-QUALIFIED" and plan3["frozen"]["no_loaded_transitions"] == ["16K→64K"]
+    assert again == 0 and plan3["frozen"]["s0_status"] == "S0 ADDRESSING-NOT-QUALIFIED" and plan3["frozen"]["no_loaded_transitions"] == ["16K→64K"] and plan3["s0_record"]["sha256"] == file_sha256(s0)
 
 
 def test_freeze_refusals(tmp_path: Path) -> None:
@@ -346,11 +359,12 @@ def test_generate_and_stage_codes_use_the_experiments_root(tmp_path: Path) -> No
 
 # --- the DRY stage, end to end -----------------------------------------------------------------------------------------------------------------------
 @pytest.fixture(scope="module")
-def dry(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Any]:
+def dry(tmp_path_factory: pytest.TempPathFactory) -> Iterator[dict[str, Any]]:
     root = tmp_path_factory.mktemp("dry")
     code = stages.main(["dry", "--workers", "6", "--out-root", str(root)])
     summary = json.loads((root / "DRY_SUMMARY.json").read_text())
-    return {"root": root, "code": code, "summary": summary, "run": Path(summary["run_dir"]), "reh": root / "P10S1DRY-rehearsal", "cal": root / "P10S1DRY-calibration", "freeze": root / "freeze"}
+    yield {"root": root, "code": code, "summary": summary, "run": Path(summary["run_dir"]), "reh": root / "P10S1DRY-rehearsal", "cal": root / "P10S1DRY-calibration", "freeze": root / "freeze"}
+    shutil.rmtree(root, ignore_errors=True)  # the DRY stage's outputs are removed when the module's tests end
 
 
 def test_dry_runs_every_stage_in_order(dry: dict[str, Any]) -> None:

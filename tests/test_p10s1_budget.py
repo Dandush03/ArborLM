@@ -184,7 +184,7 @@ def test_caps_table_has_one_entry_per_configuration() -> None:
 # --- frozen tables: costs, the MC plan, snapshots ---------------------------------------------------------------------------------------------
 def test_cost_tables_and_matched_compute_plan() -> None:
     assert fz.trainable_parameters("F-OQ", 4096) == core.foq_trainable_parameters(4096) and fz.trainable_parameters("D-OQ", 4096) == core.doq_trainable_parameters(core.doq_hidden(4096))
-    assert fz.analytic_madds_per_update("F-OQ", 4096) == 3 * 128 * 66816 + 4 * 197633
+    assert fz.analytic_madds_per_update("F-OQ", 4096) == 32_901_120 + 24_643_584 + 2 * 128 * 4096 * 16 + 3 * 128 * 32 * 32 + 4 * 197633  # whole update: backbone forward and backward, the arm, AdamW (section 22 M6)
     fro = fz.Frozen.build(core.Plan(seed_block_draws=()), CPU)
     keys = set(fro.mc)
     for arm in ("F-OQ", "T-OQ", "H8"):
@@ -281,7 +281,7 @@ def test_calibration_snapshots() -> None:
     over = [c for c in core.overload_u_p_cells()]
     assert all(calibrate.calibration_snapshots(c) == (8192, 16384, 32768) for c in over)
     dense = next(c for c in core.dense_rate_cells() if c.slots == 16384)
-    assert calibrate.calibration_snapshots(dense) == (8192, 32768)
+    assert calibrate.calibration_snapshots(dense) == core.snapshot_updates(dense.u_p, dense.run_updates) and {8192, 32768} <= set(calibrate.calibration_snapshots(dense))  # the doubling snapshots serve the tie rule
 
 
 def test_lane_l_status_labels_and_it_is_never_enabled_by_default() -> None:

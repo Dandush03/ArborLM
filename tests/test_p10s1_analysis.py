@@ -66,7 +66,8 @@ def test_default_scenario_end_to_end(tmp_path: Path) -> None:
     assert out["label"] == C.CAPACITY_POSITIVE and out["row"] == 3 and out["printed"].startswith("CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED; WITHIN REGISTERED RUN LENGTHS;")
     assert "S0 NOT YET DECIDED" in out["printed"] and "learned-address lane: OMITTED" in out["printed"] and "hierarchy:" in out["printed"] and "active work:" in out["printed"] and core.ORACLE_SENTENCE in out["printed"]
     assert "H8" not in out["printed"].split("arm(s)")[1].split(";")[0]  # H8 alone cannot give the outcome: the label requires learned keys
-    assert out["reading"].startswith("Storage half supported, as a necessary condition [STORE ONLY; ORACLE-ADDRESSED;")
+    assert out["reading"].startswith("Storage-half reading not available: the dense comparison is not established at matched compute")  # every dense pair of the default cost table is MC-SHORT (section 22)
+    assert "Storage half supported" not in out["reading"] and "DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE" in out["printed"]
     text = rendered(d)
     assert "CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED" in text and "EFFICIENCY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED" in text and "What S1 cannot establish" in text
     assert "NOT_PERFORMED" in text and "Decision map" in text and "Row movement" in text and "Cost table" in text and "Seed block" in text and "Study B" in text

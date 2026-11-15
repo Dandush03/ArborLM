@@ -242,8 +242,12 @@ def test_source_hashes_cover_every_imported_module_and_script() -> None:
 
 def test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched() -> None:
     status = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"], capture_output=True, text=True, check=True).stdout.splitlines()
-    allowed = ("?? studies/p10s1/", "?? configs/p10s1_capacity.toml", "?? tests/test_p10s1_")
-    assert all(line.startswith(allowed) for line in status), [line for line in status if not line.startswith(allowed)]
+    protected = ("src/", "uv.lock", "pyproject.toml", "studies/p9", "supplements/", "docs/decisions/", "experiments/")
+    own = ("studies/p10s1/", "configs/p10s1_capacity.toml", "tests/test_p10s1_", "docs/decisions/ADR-0021")
+    touched = [line for line in status if line[3:].startswith(protected) and not line[3:].startswith(own)]
+    assert not touched, touched  # only the paths P1-P9 own are checked: an unrelated untracked file (a review folder, results) does not fail the test (audit m5)
+    other_configs = [line for line in status if line[3:].startswith("configs/") and not line[3:].startswith(own)]
+    assert not other_configs, other_configs
     text = " ".join(p.read_text() for p in (ROOT / "studies" / "p10s1").glob("*.py"))
     assert "monkeypatch" not in text.replace("no monkeypatching", "") and "setattr(p9" not in text and "mock.patch" not in text
 
@@ -274,7 +278,7 @@ def test_launch_scripts_are_fixed_and_complete() -> None:
         assert "eval " not in text and "$@" not in text and "$*" not in text
         assert re.search(r'exec uv run --locked python -m studies\.p10s1\.stages registered \w+ --run-dir "\$RUN_DIR" --freeze-commit "\$FREEZE_COMMIT" --caps \S+$', text.strip().splitlines()[-1])
     gen = (launch / "generate.sh").read_text()
-    assert "--mode registered" in gen and "--i-understand-freeze-time" in gen and "--stage-cap-seconds" in gen and "for k in 1 2 3 4 5" in gen and 'HEAD' in gen and "git status --porcelain" in gen
+    assert "--mode registered" in gen and "--i-understand-freeze-time" in gen and "--stage-cap-seconds" not in gen and "for k in 1 2 3 4 5" in gen and 'HEAD' in gen and "git status --porcelain" in gen
     from studies.p10s1 import stages
 
     assert set(STAGES) == set(stages.REGISTERED_STAGES) and stages.CAPS_FILE == "studies/p10s1/freeze/stage_caps.json"

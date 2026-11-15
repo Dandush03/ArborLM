@@ -62,9 +62,12 @@ MC_SHORT, MC_AMBIGUOUS = "MC-SHORT", "MC-AMBIGUOUS"
 POSITIVE_LABELS = (
     "CAPACITY STEP", "CAPACITY_SUPPORTED", "CAPACITY-POSITIVE", "EFFICIENCY_SUPPORTED", "EFFICIENCY-POSITIVE", "BEATS DENSE", "KNOWLEDGE SCALES WITH MEMORY", "TREE_AHEAD",
     "Storage half supported, as a necessary condition", "Capacity shown; sublinear active work not shown", "CAPACITY_ONE_TRANSITION", "EFFICIENCY_ONE_TRANSITION", "FASTER STEP",
+    "FASTER IN UPDATES ONLY", "REACHED ONLY BY THE LARGER", "FASTER",
 )  # fmt: skip
-_TAG_AFTER = re.compile(r"\s*\[[^\]]*" + re.escape(core.STORE_ONLY_TAG))
-_POSITIVE_RE = re.compile(r"(?<![\w-])(" + "|".join(re.escape(p) for p in sorted(POSITIVE_LABELS, key=len, reverse=True)) + r")(?![\w-])")
+# a label may be followed by ONE parenthetical group (``BEATS DENSE (DENSE AT CHANCE AT 8K/16K)``) before its tag, and may be plural (``CAPACITY STEPS``); ``DENSE FASTER`` and
+# ``DENSE NOT FASTER`` are blocking labels, not positive ones
+_TAG_AFTER = re.compile(r"(?:\s*\([^)]*\))?\s*\[[^\]]*" + re.escape(core.STORE_ONLY_TAG))
+_POSITIVE_RE = re.compile(r"(?<![\w-])(?<!DENSE )(?<!NOT )(" + "|".join(re.escape(p) for p in sorted(POSITIVE_LABELS, key=len, reverse=True)) + r")(?:s|S)?(?![\w-])")
 
 
 class UntaggedPositiveLabel(ValueError):
@@ -117,20 +120,19 @@ def printable(label: str, *details: str) -> str:
 
 
 READINGS = {
-    "panels": "READING: a condition that the ADR states 'in a replicate' holds for the replicate only if it holds on Panel A and on Panel B; PANEL-DISAGREE is the verdict when the panels give different verdicts",
-    "dep_reads": "READING: the snapshots a capacity verdict reads for DEP are U_P of both cells, the smaller cell's U_MC readout and the snapshots at which i*(N; U_run) and i*(N; U_run/2) and the larger cell's i* are attained",
-    "mc_direction": "READING: the costlier cell of a pair is read at U_P and the cheaper at the smallest snapshot of the MC grid whose cumulative cost is at least that; the two cost measures giving different costlier cells is MC-AMBIGUOUS (not established)",
+    "panels": "RULED (ADR-0021 section 22 (h)): for a label that favours the store (TREE_AHEAD, TREE_COMPETITIVE and every positive condition) a replicate counts only if both panels satisfy it; for a label that blocks (DENSE AHEAD, DENSE FASTER) a replicate counts if either panel satisfies it; PANEL-DISAGREE is the verdict when the panels give different verdicts",
+    "dep_reads": "RULED (section 22 (g)): DEP is read at every snapshot up to the run length, of both cells",
+    "mc_direction": "RULED (section 22 (i)): the costlier cell of a pair is read at U_P and the cheaper at the smallest snapshot of the MC grid whose cumulative cost is at least that; the two cost measures giving different costlier cells is MC-AMBIGUOUS (not established)",
     "movement": "READING: the row-movement ratio printed with a verdict is the larger cell's total value-row movement over the smaller's at U_P, with the without-gradient share ratio beside it; OPTIMIZER-ASSISTED tests the share ratio; efficiency verdicts also print both at each cell's hit snapshot",
-    "dense_ahead_panels": "READING: a replicate counts toward DENSE AHEAD (d at most -0.25) only if it holds on both panels",
-    "dense_not_read_efficiency": "READING: a FASTER STEP whose larger cell has no D-OQ cell is printed DENSE NOT READ on the efficiency line and is not blocked (the ADR defines the block only for DENSE FASTER)",
-    "analytic_madds": "READING: analytic multiply-adds per update = 3 x 128 x W (forward and backward) + 4 x trainable parameters (AdamW), W as section 7.4",
+    "dense_not_established": "RULED (section 22 M5): where the dense matched-compute pair is MC-SHORT or MC-AMBIGUOUS the label is DENSE NOT ESTABLISHED AT MATCHED COMPUTE (<status>), never DENSE MATCHES; the matched-updates comparison with D-OQ is printed beside it, descriptively; as designed S1 cannot show that the store beats or matches a dense map at matched compute at 65,536 slots",
+    "dense_efficiency": "RULED (section 22 (k), m3): a FASTER STEP with no D-OQ cell prints DENSE NOT READ, one whose dense-speed comparison is undecided from the bounds prints DENSE SPEED UNDECIDED; neither blocks",
+    "analytic_madds": "RULED (section 22 M6): analytic multiply-adds are those of one whole training update including the frozen backbone's forward and backward pass (formula in the config, checked against a FLOP count by a test) plus 4 x trainable parameters for AdamW",
     "knn_information": "READING: i of KNN-W, KNN-W-IVF and DICT is computed from raw accuracy (there is no memory to swap)",
-    "robustness": "READING: robustness is read on Panel A only, accuracy retained = mean raw accuracy over three seeded masks",
-    "seed_block_readouts": "READING: the seed block's spread is reported at the MU readout (U_P) and at U_run",
-    "dense_rate_tie": "PENDING LEAD REVIEW: section 10.1 item 3 says a difference below 0.02 'goes to the faster of the two'; the rule is not defined, so a tie within 0.02 is not resolved by code",
+    "robustness": "RULED (section 22 (n)): robustness is read on Panel A and printed for both panels, accuracy retained = mean raw accuracy over three seeded masks; descriptive",
+    "seed_block_readouts": "RULED (section 22 (m)): the seed block's spread is reported at U_P and U_run; descriptive",
+    "dense_rate_tie": "RULED (section 22 M7): among dense rates within 0.02 at the selection readout, the faster learner (a_use at U_P/2, U_P/4, down to U_P/16; the first difference of at least 0.02 decides), else the smaller learning rate",
     "mc_snapshot_grid": "READING: a multiplier above 6 has no snapshot on the MC grid and is MC-SHORT",
-    "simulation_setting": "PENDING LEAD REVIEW: section 7.5 asks for page misses 'at one setting'; the setting (8 rows per page, rho = 1/4, tie rule asc) is the implementer's pick and is printed",
-    "analysis_costs": "PENDING LEAD REVIEW: the ADR does not define 'analytic multiply-adds'; see analytic_madds",
+    "simulation_setting": "RATIFIED (section 22 (c)): page misses at 8 rows per page, rho = 1/4, ascending tie rule; descriptive, enters no rule",
 }
 
 
@@ -262,14 +264,8 @@ class StepResult(NamedTuple):
 
 
 def _reads(small: View, large: View, mc: McEntry) -> tuple[set[int], set[int]]:
-    u_p = small.u_p
-    s_run, s_half = small.i_star(small.run)[1], small.i_star(small.run // 2)[1]
-    l_run, l_half = large.i_star(large.run)[1], large.i_star(large.run // 2)[1]
-    rs, rl = {u_p, s_run, s_half}, {u_p, l_run, l_half}
-    if mc.ok():
-        rs.add(int(mc.small_update))  # type: ignore[arg-type]
-        rl.add(int(mc.large_update))  # type: ignore[arg-type]
-    return rs, rl
+    """DEP is read at every snapshot up to the run length of both cells (ADR-0021 section 22 (g)); the MC readouts are snapshots of the series."""
+    return set(small.updates), set(large.updates)
 
 
 def capacity_panel(small: View, large: View, mc: McEntry, *, ref_ok: bool, leakage: bool = False) -> StepResult:
@@ -370,12 +366,23 @@ def capacity_arm_class(step_classes: Mapping[str, str], transitions: Mapping[str
 
 
 # --- control and cost labels (section 8.5) --------------------------------------------------------------------------------------------------
+DENSE_NOT_ESTABLISHED = "DENSE NOT ESTABLISHED AT MATCHED COMPUTE"
+DENSE_SPEED_UNDECIDED = "DENSE SPEED UNDECIDED"
+DENSE_MATCHES_SENTENCE = "a dense map with the same parameters, input and compute retained as much; the memory did it with {w_arm} / {w_dense} of the counted work"
+
+
+def dense_not_established(label: str) -> bool:
+    return label.startswith(DENSE_NOT_ESTABLISHED)
+
+
 class DenseCell(NamedTuple):
-    """One CAPACITY STEP's larger cell against D-OQ, per replicate: for each of the three readings and each panel, (d, r, dense_a_use) where d = i(arm) - i(D-OQ) and
-    r = I_use ratio (None when the denominator is zero; r with a zero denominator counts as at least 1.10)."""
+    """One CAPACITY STEP's larger cell against D-OQ, per replicate: for each reading (MU, MC where established, D-BEST) and each panel, (d, r, dense_a_use) where d = i(arm) - i(D-OQ)
+    and r = I_use ratio (None when the denominator is zero; r with a zero denominator counts as at least 1.10). ``mc_status`` is "OK" or the status (MC-SHORT, MC-AMBIGUOUS) of the
+    dense matched-compute pair; the MC reading is absent from ``replicates`` unless it is "OK"."""
 
     step: str
     replicates: list[dict[str, dict[str, tuple[float, float | None, float]]]]  # replicate -> reading -> panel -> (d, r, dense a_use)
+    mc_status: str = "OK"
 
 
 def dense_reading(i_arm: float, i_dense: float, n: int) -> tuple[float, float | None]:
@@ -385,37 +392,61 @@ def dense_reading(i_arm: float, i_dense: float, n: int) -> tuple[float, float | 
     return d, r
 
 
+def _range(values: Sequence[float]) -> str:
+    finite = [v for v in values if math.isfinite(v)]
+    return "n/a" if not finite else (f"{min(finite):+.2f}" if min(finite) == max(finite) else f"{min(finite):+.2f} to {max(finite):+.2f}")
+
+
+def matched_updates_text(cell: DenseCell) -> str:
+    """The matched-updates (MU) comparison with D-OQ, descriptive, with its sign and size (D-OQ then has at least the arm's compute): d in bits per fact and r over the replicates and panels."""
+    d = [rep["MU"][p][0] for rep in cell.replicates for p in core.PANELS]
+    r = [x for rep in cell.replicates for p in core.PANELS if (x := rep["MU"][p][1]) is not None]
+    return f"{cell.step} matched updates (descriptive; D-OQ has at least the arm's compute): d = {_range(d)} bits per fact, r = {'n/a' if not r else f'{min(r):.2f} to {max(r):.2f}'}"
+
+
 def dense_label(cells: Sequence[DenseCell], missing_dense: Sequence[str] = ()) -> dict[str, Any]:
-    """Dense label of an arm over the larger cells of its CAPACITY STEPs (section 8.5): DENSE AHEAD (d at most -0.25 in at least 4 replicates, in any one reading, at any such
-    cell) takes precedence; BEATS DENSE (r at least 1.10 in all 5, under MU and under MC, on both panels, at every such cell); DENSE MATCHES otherwise. A cell with no D-OQ
-    read is DENSE NOT READ. Returns the label, the reason and D-OQ's a_use at each cell in each reading."""
+    """Dense label of an arm over the larger cells of its CAPACITY STEPs (section 8.5, with the lead's rulings of section 22). DENSE AHEAD (d at most -0.25 in at least 4 replicates, in any
+    one established reading, at any such cell; a blocking label: a replicate counts if EITHER panel satisfies it) takes precedence. Where a cell's dense matched-compute pair is not
+    established (MC-SHORT, MC-AMBIGUOUS) the label is DENSE NOT ESTABLISHED AT MATCHED COMPUTE (<status>), never DENSE MATCHES or BEATS DENSE, with the matched-updates comparison printed
+    beside it. BEATS DENSE (r at least 1.10 in all 5, under MU and under MC, on both panels, at every such cell) and DENSE MATCHES need every cell established. A cell with no D-OQ read is
+    DENSE NOT READ. Returns the label, the reason, D-OQ's a_use at each cell in each reading and the matched-updates text."""
     detail: dict[str, Any] = {"cells": {}}
     if not cells:
-        return {"label": DENSE_NOT_READ, "detail": detail, "missing": list(missing_dense)}
+        return {"label": DENSE_NOT_READ, "detail": detail, "missing": list(missing_dense), "mu_text": []}
     ahead_any = False
     beats_all = True
     dense_at_chance_cells: list[str] = []
+    statuses: list[str] = []
     for cell in cells:
         info: dict[str, Any] = {}
-        for reading in ("MU", "MC", "D-BEST"):
-            n_ahead = sum(1 for rep in cell.replicates if all(le(rep[reading][p][0], core.DENSE_AHEAD_BITS) for p in core.PANELS))
+        readings = ("MU", "MC", "D-BEST") if cell.mc_status == "OK" else ("MU", "D-BEST")
+        if cell.mc_status != "OK":
+            statuses.append(cell.mc_status)
+        for reading in readings:
+            n_ahead = sum(1 for rep in cell.replicates if any(le(rep[reading][p][0], core.DENSE_AHEAD_BITS) for p in core.PANELS))
             info[reading] = {"replicates_ahead": n_ahead, "dense_a_use": [[rep[reading][p][2] for p in core.PANELS] for rep in cell.replicates]}
             ahead_any = ahead_any or n_ahead >= core.PAIRED_MOST
         for reading in ("MU", "MC"):
+            if reading not in readings:
+                beats_all = False
+                continue
             for rep in cell.replicates:
                 for p in core.PANELS:
-                    _, r, dense_a = rep[reading][p]
+                    _, r, _dense_a = rep[reading][p]
                     if r is not None and not ge(r, core.BEATS_DENSE_RATIO):
                         beats_all = False
                     if r is None and cell.step not in dense_at_chance_cells:
                         dense_at_chance_cells.append(cell.step)
         detail["cells"][cell.step] = info
+    out = {"detail": detail, "missing": list(missing_dense), "mu_text": [matched_updates_text(c) for c in cells], "mc_statuses": statuses}
     if ahead_any:
-        return {"label": DENSE_AHEAD, "detail": detail, "missing": list(missing_dense)}
+        return {"label": DENSE_AHEAD, **out}
+    if statuses:
+        return {"label": f"{DENSE_NOT_ESTABLISHED} ({', '.join(dict.fromkeys(statuses))})", **out}
     if beats_all:
         label = BEATS_DENSE if not dense_at_chance_cells else f"{BEATS_DENSE} (DENSE AT CHANCE AT {', '.join(dense_at_chance_cells)})"
-        return {"label": label, "detail": detail, "missing": list(missing_dense)}
-    return {"label": DENSE_MATCHES, "detail": detail, "missing": list(missing_dense)}
+        return {"label": label, **out}
+    return {"label": DENSE_MATCHES, **out}
 
 
 def active_work_label(w_small: float, w_large: float) -> str:
@@ -455,7 +486,7 @@ def key_learning_limited(h8_class: str, foq_class: str) -> bool:
 # --- descriptive labels (section 8.6) ---------------------------------------------------------------------------------------------------------
 def study_b_label(per_replicate: Sequence[Mapping[str, Mapping[str, Sequence[tuple[float, float, float, float] | None]]]], work_sublinear: bool, memory_attributed: Sequence[bool]) -> dict[str, Any]:
     """Study B per arm (section 8.6). ``per_replicate[r][reading][panel]`` holds, for the two diagonal steps (2K/4K to 8K/16K, 8K/16K to 32K/64K), the tuple
-    ``(a_use small, a_use large, i small, i large)`` read at the reading (MU: both cells at U_P; MC: the pair's matched readouts) or None where the reading is not established
+    ``(a_use small, a_use large, I_use small, I_use large)`` (I_use = facts x i: the ratio of I_use, not of i, is tested; the facts grow fourfold along the diagonal) read at the reading (MU: both cells at U_P; MC: the pair's matched readouts) or None where the reading is not established
     (MC-SHORT). KNOWLEDGE SCALES WITH MEMORY needs, in all 5 replicates, on both panels, under MU and under MC separately: a_use at least 0.85 at every diagonal cell, I_use growing
     at least 3.0 times at both diagonal steps, both steps MEMORY-ATTRIBUTED (the off-diagonal step A1, B2 is a CAPACITY STEP) and sublinear counted work. KNOWLEDGE DOES NOT SCALE if
     a_use < 0.5 at the largest diagonal cell in at least 4 replicates. A ratio is computed only when both cells have a_use >= 0.5 (else NOT ASSESSED)."""
@@ -533,7 +564,7 @@ def capacity_outcome(
     *,
     engineering_failed: bool,
     incomplete: bool,
-    no_loaded_directed: bool = False,
+    directed_transitions: Sequence[str] = (),
     every_step_not_loaded: bool = False,
     reasons_extra: Sequence[str] = (),
     printed_details: Sequence[str] = (),
@@ -552,14 +583,17 @@ def capacity_outcome(
     if positive:
         names = ", ".join(a.arm for a in positive)
         details = [f"arm(s) {names}", *[f"{a.arm}: {a.dense}" + (f" ({a.dense_text})" if a.dense_text else "") for a in positive], *printed_details]
+        if any(dense_not_established(a.dense) for a in positive):
+            details.append("DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE")
         return Outcome(3, CAPACITY_POSITIVE, [], emit(tagged(CAPACITY_POSITIVE, "WITHIN REGISTERED RUN LENGTHS", *details)))
     foq, toq = arms.get("F-OQ"), arms.get("T-OQ")
     if foq is not None and toq is not None and foq.cls == CAPACITY_NOT_SUPPORTED and toq.cls == CAPACITY_NOT_SUPPORTED:
         return Outcome(4, CAPACITY_NEGATIVE, ["(a) F-OQ and T-OQ are both CAPACITY_NOT_SUPPORTED"], f"{CAPACITY_NEGATIVE} (a)")
     if supported and all(_is_ahead(a) for a in supported):
         return Outcome(4, CAPACITY_NEGATIVE, ["(b) every CAPACITY_SUPPORTED arm is DENSE AHEAD"], f"{CAPACITY_NEGATIVE} (b: DENSE AHEAD)")
-    if no_loaded_directed or every_step_not_loaded:
-        return Outcome(5, CAPACITY_NOT_TESTED, ["no loaded cell within budget"], CAPACITY_NOT_TESTED)
+    if directed_transitions or every_step_not_loaded:
+        named = f" ({', '.join(directed_transitions)})" if directed_transitions else ""
+        return Outcome(5, CAPACITY_NOT_TESTED, ["no loaded cell within budget" + named], CAPACITY_NOT_TESTED + named)
     reasons = list(reasons_extra) or [f"{a.arm}: {a.cls}" for a in learned]
     if any(a.cls == CAPACITY_SUPPORTED and a.dense == DENSE_NOT_READ for a in learned):
         reasons.append("a CAPACITY_SUPPORTED arm has no D-OQ read at its CAPACITY STEP (DENSE NOT READ)")
@@ -570,7 +604,10 @@ def milestone_reading(outcome: Outcome, arms: Mapping[str, ArmCapacity], work: M
     """The reading for milestone question 1 on the capacity line only (section 8.7), always printed with S0's status line."""
     suffix = f" | {s0_status} | {core.ORACLE_SENTENCE}"
     if outcome.label == CAPACITY_POSITIVE:
-        sub = [a for a in ("T-OQ", "F-OQ-IVF") if a in arms and arms[a].cls == CAPACITY_SUPPORTED and arms[a].dense not in (DENSE_AHEAD, DENSE_NOT_READ) and work.get(a) == SUBLINEAR]
+        sublinear = [a for a in ("T-OQ", "F-OQ-IVF") if a in arms and arms[a].cls == CAPACITY_SUPPORTED and arms[a].dense not in (DENSE_AHEAD, DENSE_NOT_READ) and work.get(a) == SUBLINEAR]
+        sub = [a for a in sublinear if not dense_not_established(arms[a].dense)]
+        if sublinear and not sub:
+            return "Storage-half reading not available: the dense comparison is not established at matched compute (capacity shown under oracle addressing only)" + suffix
         if sub:
             return emit(tagged("Storage half supported, as a necessary condition", f"arm {sub[0]}", f"hierarchy label {hierarchy}", "says nothing about addressing by the model, use of the store by a language model, or capability beyond recall of the trained facts")) + suffix
         return emit(tagged("Capacity shown; sublinear active work not shown")) + suffix
@@ -714,13 +751,26 @@ def efficiency_arm_class(step_classes: Mapping[str, str], transitions: Mapping[s
     return INTERMEDIATE
 
 
-def dense_faster(arm_ut: Sequence[UT], dense_ut: Sequence[UT | None], cost_arm: Mapping[str, float], cost_dense: Mapping[str, float]) -> str:
-    """At the larger cell of a FASTER STEP: DENSE FASTER if D-OQ's c_T is at most 0.8 of the arm's, in both cost measures, in at least 4 replicates (for every value the bounds allow);
-    DENSE NOT READ if there is no D-OQ cell; otherwise DENSE NOT FASTER."""
+def dense_faster(arm_ut: Sequence[Sequence[UT]], dense_ut: Sequence[Sequence[UT] | None], cost_arm: Mapping[str, float], cost_dense: Mapping[str, float]) -> str:
+    """At the larger cell of a FASTER STEP (``arm_ut[replicate][panel]``, one u_T per panel): DENSE FASTER, a blocking label, if D-OQ's c_T is at most 0.8 of the arm's in both cost measures
+    for every value the bounds allow, in at least 4 replicates, a replicate counting if EITHER panel satisfies it (section 22 (h)); DENSE SPEED UNDECIDED if it does not hold for every
+    value but could hold for some value in at least 4 replicates (section 22 m3); DENSE NOT READ if there is no D-OQ cell; otherwise DENSE NOT FASTER."""
     if any(d is None for d in dense_ut):
         return DENSE_NOT_READ
-    n = sum(1 for a, d in zip(arm_ut, dense_ut, strict=True) if d is not None and all(le(d.hi * cost_dense[m], core.DENSE_FASTER_COST * a.lo * cost_arm[m]) for m in ("cpu", "madds")))
-    return "DENSE FASTER" if n >= core.PAIRED_MOST else "DENSE NOT FASTER"
+    f = core.DENSE_FASTER_COST
+
+    def sure(a: UT, d: UT) -> bool:
+        return all(le(d.hi * cost_dense[m], f * a.lo * cost_arm[m]) for m in ("cpu", "madds"))
+
+    def possible(a: UT, d: UT) -> bool:
+        return all(le(d.lo * cost_dense[m], f * a.hi * cost_arm[m]) for m in ("cpu", "madds"))
+
+    pairs = [list(zip(a, d, strict=True)) for a, d in zip(arm_ut, dense_ut, strict=True) if d is not None]
+    if sum(1 for rep in pairs if any(sure(a, d) for a, d in rep)) >= core.PAIRED_MOST:
+        return "DENSE FASTER"
+    if sum(1 for rep in pairs if any(possible(a, d) for a, d in rep)) >= core.PAIRED_MOST:
+        return DENSE_SPEED_UNDECIDED
+    return "DENSE NOT FASTER"
 
 
 def efficiency_outcome(arm_classes: Mapping[str, str], dense: Mapping[str, str], *, engineering_failed: bool, incomplete: bool, details: Sequence[str] = ()) -> Outcome:

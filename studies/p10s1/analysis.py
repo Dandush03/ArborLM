@@ -63,7 +63,7 @@ class CellData:
     views: dict[str, C.View]
     meta: dict[int, dict[str, Any]]
     secondary: dict[int, dict[str, tuple[int, int]]]
-    robust: dict[str, float]
+    robust: dict[str, dict[str, float]]  # panel -> condition -> accuracy retained (both panels, section 22 (n))
     work: dict[int, dict[str, float]]
     ivf_measured: dict[int, dict[str, float]]
     deep: dict[str, Any]
@@ -128,11 +128,13 @@ def read_cell(run_dir: Path, cell: core.Cell, fro: fz.Frozen) -> list[CellData]:
         views = _views(panels, cell.run_updates, cell.u_p, memory)
         leak = any(o.leakage for v in views.values() for o in v.obs.values())
         secondary = {u: {k: (int(v["correct"]), int(v["n"])) for k, v in e["reads"][read]["secondary"].items()} for u, e in evals.items()}
-        robust: dict[str, float] = {}
+        robust: dict[str, dict[str, float]] = {}
         a_u = evals.get(cell.u_p)
-        if a_u is not None and "robustness_correct" in a_u["reads"][read]["panels"]["A"]:
-            pa = a_u["reads"][read]["panels"]["A"]
-            robust = {k: v / pa["n"] for k, v in pa["robustness_correct"].items()}
+        if a_u is not None:
+            for pn in PANEL_LIST:
+                pa = a_u["reads"][read]["panels"][pn]
+                if "robustness_correct" in pa:
+                    robust[pn] = {k: v / pa["n"] for k, v in pa["robustness_correct"].items()}
         deep = a_u["reads"][read].get("deep", {}) if a_u is not None else {}
         out.append(CellData(
             label=cell.label, arm=arm, facts=cell.facts, slots=cell.slots, draw=cell.draw, u_p=cell.u_p, run=cell.run_updates, memory=memory, views=views, meta=meta, secondary=secondary,
@@ -269,7 +271,9 @@ def _dense_cells(study: Study, fro: fz.Frozen, arm: str, steps: Sequence[core.St
         e = fro.entry(f"dense|{'F-OQ' if arm == 'F-OQ-IVF' else arm}|{core.cell_name(*key)}")
         for r in range(1, core.REPLICATES + 1):
             a, dn = study.get(r, arm, *key), study.get(r, "D-OQ", *key)
-            per: dict[str, dict[str, tuple[float, float | None, float]]] = {"MU": {}, "MC": {}, "D-BEST": {}}
+            per: dict[str, dict[str, tuple[float, float | None, float]]] = {"MU": {}, "D-BEST": {}}
+            if e.ok():
+                per["MC"] = {}
             for p in PANEL_LIST:
                 u_p = a.u_p
                 d_mu, r_mu = C.dense_reading(a.views[p].i(u_p), dn.views[p].i(u_p), a.views[p].obs[u_p].n)
@@ -278,14 +282,11 @@ def _dense_cells(study: Study, fro: fz.Frozen, arm: str, steps: Sequence[core.St
                     ia, idn = a.views[p].i(int(e.small_update)), dn.views[p].i(int(e.large_update))  # type: ignore[arg-type]
                     d_mc, r_mc = C.dense_reading(ia, idn, a.views[p].obs[u_p].n)
                     per["MC"][p] = (d_mc, r_mc, dn.views[p].a_use(int(e.large_update)))  # type: ignore[arg-type]
-                else:
-                    per["MC"][p] = (math.inf, 1.0, float("nan"))  # not established: it can neither lead nor beat
                 best, at = dn.views[p].i_star(dn.run)
                 d_b, r_b = C.dense_reading(a.views[p].i(u_p), best, a.views[p].obs[u_p].n)
                 per["D-BEST"][p] = (d_b, r_b, dn.views[p].a_use(at))
             reps.append(per)
-        mc_ok = e.ok()
-        cells.append(C.DenseCell(step.name + ("" if mc_ok else " (MC not established)"), reps))
+        cells.append(C.DenseCell(step.name, reps, "OK" if e.ok() else e.status))
     return cells, missing
 
 
@@ -311,7 +312,10 @@ def capacity_arms(study: Study, fro: fz.Frozen, steps: Mapping[str, dict[str, An
     arms: dict[str, dict[str, Any]] = {}
     for arm in CAPACITY_REPLICATE_ARMS:
         classes = {s: steps[arm][s]["class"] for s in steps[arm]}
-        cls = C.capacity_arm_class(classes, trans, largest_cell_a_use(study, arm))
+        directed = [t for t in fro.no_loaded_transitions if t in trans]
+        # a transition the human lead directed to run with no loaded row is CAPACITY NOT TESTED: its steps count as NOT LOADED, so no arm is CAPACITY_SUPPORTED (section 22 m13)
+        effective = {s: (C.NOT_LOADED if any(st.name == s and st.transition == t for st in fro.plan.steps for t in directed) else c) for s, c in classes.items()}
+        cls = C.capacity_arm_class(effective, trans, largest_cell_a_use(study, arm))
         cap_steps = [s for s in fro.plan.steps if classes[s.name] == C.CAPACITY_STEP]
         dense_cells, missing = _dense_cells(study, fro, arm, cap_steps)
         # a CAPACITY STEP with no D-OQ read cannot by itself support CAPACITY_SUPPORTED: every transition needs one with a read
@@ -319,10 +323,20 @@ def capacity_arms(study: Study, fro: fz.Frozen, steps: Mapping[str, dict[str, An
         works = {s.name: work_label_for(study, arm, s) for s in cap_steps}
         read_transitions = {t: any(s.transition == t and classes[s.name] == C.CAPACITY_STEP and core.cell_name(s.facts, s.large) not in missing for s in fro.plan.steps) for t in trans}
         dense_label = dense["label"]
-        if cls == C.CAPACITY_SUPPORTED and not all(read_transitions.values()):
+        if cls == C.CAPACITY_SUPPORTED and not all(read_transitions.values()) and dense_label != C.DENSE_AHEAD:  # DENSE AHEAD takes precedence over every other label (m1)
             dense_label = C.DENSE_NOT_READ
+        matches = None
+        if dense_label == C.DENSE_MATCHES:
+            parts = []
+            for s in cap_steps:
+                if core.cell_name(s.facts, s.large) in missing:
+                    continue
+                w_arm = works[s.name].get("w_large") if arm != "F-OQ-IVF" else max(study.get(r, arm, s.facts, s.large).ivf_measured[study.get(r, arm, s.facts, s.large).u_p]["W_mean"] for r in range(1, core.REPLICATES + 1))
+                w_dense = core.work_formula("D-OQ", s.large)["W"]
+                parts.append(f"{s.name}: " + C.DENSE_MATCHES_SENTENCE.format(w_arm=f"{w_arm:g}", w_dense=f"{w_dense:g}"))
+            matches = "; ".join(parts)
         arms[arm] = {
-            "class": cls, "dense": dense_label, "dense_detail": dense, "capacity_steps": [s.name for s in cap_steps], "work": works,
+            "class": cls, "dense": dense_label, "dense_detail": dense, "dense_matches_sentence": matches, "effective_step_classes": effective, "capacity_steps": [s.name for s in cap_steps], "work": works,
             "work_label": C.SUBLINEAR if works and all(w["label"] == C.SUBLINEAR for w in works.values()) else (C.LINEAR_KEY_SCORING if works else None),
             "undertrained_h8": [c for c in fro.h8_undertrained] if arm == "H8" and fro.h8_undertrained else [],
         }  # fmt: skip
@@ -401,11 +415,11 @@ def study_b(study: Study, fro: fz.Frozen, steps: Mapping[str, dict[str, Any]]) -
                 mc_steps: list[tuple[float, float, float, float] | None] = []
                 for k, (lo, hi) in enumerate(diag):
                     a, b = study.get(r, arm, *lo), study.get(r, arm, *hi)
-                    mu.append((a.views[p].a_use(a.u_p), b.views[p].a_use(b.u_p), a.views[p].i(a.u_p), b.views[p].i(b.u_p)))
+                    mu.append((a.views[p].a_use(a.u_p), b.views[p].a_use(b.u_p), a.facts * a.views[p].i(a.u_p), b.facts * b.views[p].i(b.u_p)))  # I_use = facts x i (M1)
                     e = fro.entry(f"diag|{'F-OQ' if arm == 'F-OQ-IVF' else arm}|{k}")
                     if e.ok():
                         ua, ub = int(e.small_update), int(e.large_update)  # type: ignore[arg-type]
-                        mc_steps.append((a.views[p].a_use(ua), b.views[p].a_use(ub), a.views[p].i(ua), b.views[p].i(ub)))
+                        mc_steps.append((a.views[p].a_use(ua), b.views[p].a_use(ub), a.facts * a.views[p].i(ua), b.facts * b.views[p].i(ub)))
                     else:
                         mc_steps.append(None)
                 rep["MU"][p], rep["MC"][p] = mu, mc_steps
@@ -419,31 +433,45 @@ def study_b(study: Study, fro: fz.Frozen, steps: Mapping[str, dict[str, Any]]) -
         else:
             sublinear = C.le(work[1], core.SUBLINEAR_FACTOR * work[0]) and C.le(work[2], core.SUBLINEAR_FACTOR * work[1])
         label = C.study_b_label(reps, sublinear, attributed)
-        label.update(memory_attributed=attributed, sublinear=sublinear, me_note="ME is not binding along the diagonal: at the ME readout the smaller cells have had 4 and 16 times fewer updates of their shared parameters (section 5.4 rule 4)")
+        me: dict[str, Any] = {}
+        for lo_hi in diag:
+            for f, n in lo_hi:
+                u = core.me_updates(f, fro.plan.unit)
+                key = core.cell_name(f, n)
+                if key in me:
+                    continue
+                vals = [study.get(r, arm, f, n) for r in range(1, core.REPLICATES + 1)]
+                if all(u in c.views["A"].obs for c in vals):
+                    me[key] = {"update": u, "a_use": {p: [c.views[p].a_use(u) for c in vals] for p in PANEL_LIST}, "I_use_bits": {p: [f * c.views[p].i(u) for c in vals] for p in PANEL_LIST}}
+        label.update(me_readout=me, memory_attributed=attributed, sublinear=sublinear, me_note="ME is not binding along the diagonal: at the ME readout the smaller cells have had 4 and 16 times fewer updates of their shared parameters (section 5.4 rule 4)")
         out[arm] = label
     return out
 
 
 def robustness(study: Study, fro: fz.Frozen) -> dict[str, Any]:
-    """RISES WITH SLOTS, FALLS or UNCHANGED per arm and step (cells with a_use at least 0.5), by accuracy retained under 20% slot dropout at U_P (Panel A, mean of three masks)."""
+    """RISES WITH SLOTS, FALLS or UNCHANGED per arm and step (cells with a_use at least 0.5), by accuracy retained under 20% slot dropout at U_P (mean of three masks), read on Panel A and
+    printed for both panels (section 22 (n)); descriptive."""
     out: dict[str, Any] = {}
     for arm in ("F-OQ", "T-OQ", "H8"):
         out[arm] = {}
         for step in fro.plan.steps:
-            rises: list[float] = []
-            assessed = True
-            for r in range(1, core.REPLICATES + 1):
-                s, large = study.get(r, arm, step.facts, step.small), study.get(r, arm, step.facts, step.large)
-                if not (C.ge(s.views["A"].a_use(s.u_p), core.A_USE_FLOOR_CAPACITY) and C.ge(large.views["A"].a_use(large.u_p), core.A_USE_FLOOR_CAPACITY)):
-                    assessed = False
-                    break
+            per_panel: dict[str, Any] = {}
+            for panel in PANEL_LIST:
+                rises: list[float] = []
+                assessed = True
+                for r in range(1, core.REPLICATES + 1):
+                    s_c, large = study.get(r, arm, step.facts, step.small), study.get(r, arm, step.facts, step.large)
+                    if not (panel in s_c.robust and panel in large.robust and C.ge(s_c.views[panel].a_use(s_c.u_p), core.A_USE_FLOOR_CAPACITY) and C.ge(large.views[panel].a_use(large.u_p), core.A_USE_FLOOR_CAPACITY)):
+                        assessed = False
+                        break
 
-                def kept(c: CellData) -> float:
-                    vals = [v for k, v in c.robust.items() if k.startswith("drop20_")]
-                    return sum(vals) / len(vals)
+                    def kept(c: CellData, panel: str = panel) -> float:
+                        vals = [v for k, v in c.robust[panel].items() if k.startswith("drop20_")]
+                        return sum(vals) / len(vals)
 
-                rises.append(kept(large) - kept(s))
-            out[arm][step.name] = {"label": C.robustness_label(rises) if assessed else "NOT ASSESSED (a_use below 0.5)", "rises": rises}
+                    rises.append(kept(large) - kept(s_c))
+                per_panel[panel] = {"label": C.robustness_label(rises) if assessed else "NOT ASSESSED (a_use below 0.5)", "rises": rises}
+            out[arm][step.name] = {**per_panel["A"], "panel_B": per_panel["B"]}
     return out
 
 
@@ -476,7 +504,7 @@ def seed_block(study: Study, fro: fz.Frozen) -> dict[str, Any]:
     """Per cell and readout (U_P and U_run), the spread of i over the three initialization seeds of a seed-block draw against the spread over the five draws (section 6.2)."""
     out: dict[str, Any] = {"draws": list(fro.plan.seed_block_draws), "cells": {}}
     for draw in fro.plan.seed_block_draws:
-        for f, n in core.grid_cells(fro.plan):
+        for f, n in core.GRID_CELLS:
             main = study.cells.get((draw, "F-OQ", f, n))
             extras = [c for (d, _i, ff, nn), c in sorted(study.seedblock.items()) if d == draw and ff == f and nn == n]
             if main is None or not extras:
@@ -536,10 +564,17 @@ def efficiency_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
             if key not in dense_cells:
                 labels.append(C.DENSE_NOT_READ)
                 continue
-            arm_ut = [C.u_t(list(study.get(r, arm, *key).views.values())).ut for r in range(1, core.REPLICATES + 1)]
-            d_ut = [C.u_t(list(study.get(r, "D-OQ", *key).views.values())).ut for r in range(1, core.REPLICATES + 1)]
+            arm_ut = [[C.u_t([v]).ut for v in study.get(r, arm, *key).views.values()] for r in range(1, core.REPLICATES + 1)]  # one u_T per panel: a blocking label counts either panel
+            d_ut = [[C.u_t([v]).ut for v in study.get(r, "D-OQ", *key).views.values()] for r in range(1, core.REPLICATES + 1)]
             labels.append(C.dense_faster(arm_ut, d_ut, fz.costs_of(fro.cost, arm, step.large), fz.costs_of(fro.cost, "D-OQ", step.large)))
-        dense[arm] = "DENSE FASTER" if "DENSE FASTER" in labels else (C.DENSE_NOT_READ if labels and all(x == C.DENSE_NOT_READ for x in labels) else "DENSE NOT FASTER")
+        if "DENSE FASTER" in labels:
+            dense[arm] = "DENSE FASTER"
+        elif C.DENSE_SPEED_UNDECIDED in labels:
+            dense[arm] = C.DENSE_SPEED_UNDECIDED
+        elif labels and all(x == C.DENSE_NOT_READ for x in labels):
+            dense[arm] = C.DENSE_NOT_READ
+        else:
+            dense[arm] = "DENSE NOT FASTER"
         dense_detail[arm] = labels
     details = [_movement_text(steps, arm_classes), fro.s0_status, core.ORACLE_SENTENCE]
     outcome = C.efficiency_outcome(arm_classes, dense, engineering_failed=False, incomplete=False, details=details)
@@ -645,15 +680,15 @@ def analyze_study(
         return result
     steps = capacity_steps(study, fro)
     arms = capacity_arms(study, fro, steps)
-    arm_cap = {a: C.ArmCapacity(a, arms[a]["class"], arms[a]["dense"], arms[a]["capacity_steps"], dense_text=_dense_text(arms[a]["dense_detail"])) for a in DECISION_ARMS}
+    arm_cap = {a: C.ArmCapacity(a, arms[a]["class"], arms[a]["dense"], arms[a]["capacity_steps"], dense_text="; ".join(t for t in (_dense_text(arms[a]["dense_detail"]), *arms[a]["dense_detail"].get("mu_text", [])) if t)) for a in DECISION_ARMS}
     hier = hierarchy(study, fro)
     conv = conventional(study)
     every_not_loaded = all(
         all(steps[a][s.name]["class"] in (C.NOT_LOADED,) for s in fro.plan.steps) for a in ("F-OQ", "T-OQ")
     )
-    no_loaded = bool(fro.no_loaded_transitions) and set(fro.no_loaded_transitions) >= set(transitions_of(fro.plan))
+    directed = [t for t in fro.no_loaded_transitions if t in transitions_of(fro.plan)]
     work = {a: arms[a]["work_label"] for a in DECISION_ARMS}
-    cap_out = C.capacity_outcome(arm_cap, engineering_failed=False, incomplete=False, no_loaded_directed=no_loaded, every_step_not_loaded=every_not_loaded, reasons_extra=_inconclusive_reasons(arms, steps, fro.plan), printed_details=_printed_details(arms, hier, conv, work, fro))
+    cap_out = C.capacity_outcome(arm_cap, engineering_failed=False, incomplete=False, directed_transitions=directed, every_step_not_loaded=every_not_loaded, reasons_extra=_inconclusive_reasons(arms, steps, fro.plan), printed_details=_printed_details(arms, hier, conv, work, fro))
     klim = C.key_learning_limited(arms["H8"]["class"], arms["F-OQ"]["class"])
     reading = C.milestone_reading(cap_out, arm_cap, work, hier["label"], fro.s0_status)
     eff = efficiency_line(study, fro)

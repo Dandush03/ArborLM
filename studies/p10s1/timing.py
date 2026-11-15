@@ -31,7 +31,7 @@ THROUGHPUT_NOT_MEASURED = "THROUGHPUT NOT MEASURED"
 UNSTABLE = "UNSTABLE"
 
 
-def wait_for_quiet(load_fn: Callable[[], float] = lambda: os.getloadavg()[0], sleep: Callable[[float], None] = time.sleep, retries: int = core.TIMING_RETRIES, pause: float = 30.0) -> dict[str, Any]:
+def wait_for_quiet(load_fn: Callable[[], float] = lambda: os.getloadavg()[0], sleep: Callable[[float], None] = time.sleep, retries: int = core.TIMING_RETRIES, pause: float = 120.0) -> dict[str, Any]:
     """Section 7.5: refuse to start if the load average exceeds 1.0; retry until quiet up to three times; ``quiet`` False means NOT MEASURED."""
     loads: list[float] = []
     for attempt in range(retries + 1):

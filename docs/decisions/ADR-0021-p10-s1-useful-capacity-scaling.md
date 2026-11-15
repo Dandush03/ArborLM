@@ -798,3 +798,13 @@ The independent implementation audit (Opus 5.5, `docs/reviews/p10s1-implementati
 
 Readings (e), (f), (l) and (o) were found correct and stand.
 
+### 22.1 Five further points the implementer raised on §22 (ruled 2026-11-15 UTC, before any S1 record exists)
+
+| Point | Ruling |
+|---|---|
+| §10.2 ("every arm in turn" gives INCONCLUSIVE, never NEGATIVE) against §8.7 row 4(a) | §8.7 governs outcomes. §10.2's requirement applies to the arms row 4(a) reads, F-OQ and T-OQ: a NOT_EVALUATED or DEPENDENCE_FAILED F-OQ or T-OQ can never yield CAPACITY-NEGATIVE. H8's status does not enter row 4(a); the synthetic scenario with H8 DEPENDENCE_FAILED and both read arms NOT_SUPPORTED is NEGATIVE by the rule and is recorded as such |
+| M7 with more than two rates tied | At each snapshot of the walk, keep the rates within 0.02 of the best at that snapshot and continue; if more than one remains at U_P/16, the smallest learning rate is taken |
+| (j) and the overload row | The overload row's U_P check uses a_use, like calibration items 1 and 2 |
+| M6 terms beyond the matrix products | The count is the multiply-adds of every matrix product and gather-weighted sum in the forward and backward pass of the whole update, plus 4 per trainable parameter for AdamW. Elementwise activations, normalizations and the loss are not counted. The formula is in the config |
+| (h) for DENSE FASTER | Per replicate: a replicate counts if either panel satisfies the blocking condition |
+

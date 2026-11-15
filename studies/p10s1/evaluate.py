@@ -308,12 +308,12 @@ def _read_record(model: P10S1Model, data: StudyData, facts: int, seeds: p9core.S
         if isinstance(model.addition, index.IVFMemory):
             model.addition.reset_measures()
         extra = dict(tables)
-        if robustness and panel == "A" and table is not None:
+        if robustness and table is not None:  # both panels (ADR-0021 section 22 (n))
             extra.update(robustness_tables(model, seeds))
         counts = panel_counts(model, data, facts, stream, pi=pi, tables=extra)
         tc = counts.pop("tables_correct", {})
         counts["shuffled_correct"] = tc.pop("shuffle", None)
-        if robustness and panel == "A" and table is not None:
+        if robustness and table is not None:
             counts["robustness_correct"] = tc
         rec["panels"][panel] = counts
         if panel == "A":

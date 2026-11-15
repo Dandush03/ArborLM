@@ -84,9 +84,8 @@ def _read(scn: Scenario, cell: core.Cell, arm: str, rep: int, u: int, bad: bool,
             c["shuffled_correct"] = None
         panels[p] = c
     if u == cell.u_p and cell.arm != "D-OQ":
-        n = cell.facts
-        panels["A"]["robustness_correct"] = {f"{k}_{m}": int(round(panels["A"]["correct"] * (1.0 - 0.1 * f))) for m in range(3) for k, f in (("drop5", 0.5), ("drop20", 1.0), ("noise0.1", 0.3), ("noise0.5", 0.8))}
-        del n
+        for pn in ("A", "B"):  # both panels (ADR-0021 section 22 (n))
+            panels[pn]["robustness_correct"] = {f"{k}_{m}": int(round(panels[pn]["correct"] * (1.0 - 0.1 * f))) for m in range(3) for k, f in (("drop5", 0.5), ("drop20", 1.0), ("noise0.1", 0.3), ("noise0.5", 0.8))}
     acc = panels["A"]["correct"] / cell.facts if not bad else 0.0
     sec = {h: {"n": cell.facts, "correct": int(round(cell.facts * acc * (0.9 if h == "H2" else 0.95)))} for h in ("H1", "H2")}
     base = "F-OQ" if arm == "F-OQ-IVF" else arm

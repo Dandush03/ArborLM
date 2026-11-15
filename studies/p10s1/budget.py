@@ -131,10 +131,11 @@ class Fixed:
     simulate: float = 0.0
     analysis: float = 0.0
     report: float = 0.0
+    generate: float = 0.0  # the registered generation and G1 of the five draws (5 x the G1 time measured on the rehearsal draw; charged before the freeze)
 
     @property
     def total(self) -> float:
-        return self.gates + self.timing + self.simulate + self.analysis + self.report
+        return self.gates + self.timing + self.simulate + self.analysis + self.report + self.generate
 
 
 def stage_projection(plan: core.Plan, rates: Rates, fro: fz.Frozen, *, baseline_seconds: Mapping[int, float] | None = None, workers: int = core.WORKERS) -> Projection:

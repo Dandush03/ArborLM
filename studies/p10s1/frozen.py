@@ -3,10 +3,11 @@
 analytic multiply-adds), the matched-compute (MC) plan (every pair of cells compared under MC, its multiplier, the cheaper cell's snapshot or MC-SHORT) and the snapshots each
 cell therefore needs. All pure functions of the plan and the cost tables; the freeze procedure writes their result into ``plan.json`` and the analysis reads it back.
 
-Analytic multiply-adds per update (READING: the ADR names the measure without a formula): 3 x 128 x W (forward and backward over the batch's 128 queries, W of section 7.4) plus
-4 x trainable parameters (AdamW updates every parameter every step). W is the counted work per query of ``core.work_formula``.
+Analytic multiply-adds per update (the lead's ruling, ADR-0021 section 22 M6): one whole training update including the frozen backbone's forward and backward; the formula is in the
+config (``core.MADDS_FORMULA``).
 """
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -33,10 +34,47 @@ def trainable_parameters(arm: str, slots: int) -> int:
     raise ValueError(f"unknown arm {arm!r}")
 
 
+BATCH_CONTEXTS = core.BATCH_CONTEXTS
+POSITIONS = core.INPUT_LENGTH
+WIDTH_, FFN_, VOCAB_ = 32, 64, 256
+
+
+def backbone_madds(batch: int = BATCH_CONTEXTS, t: int = POSITIONS) -> dict[str, int]:
+    """The frozen backbone's multiply-adds in one training update (``core.MADDS_FORMULA``): forward over both blocks and the output head; backward through block 1 and the head only (no weight
+    gradients: the weights are frozen), with the two attention products' operands both needing gradients."""
+    attn = 4 * t * t * 8  # one attention product over 4 heads of width 8
+    block_forward = t * WIDTH_ * 96 + attn + attn + t * WIDTH_ * WIDTH_ + 2 * t * WIDTH_ * FFN_
+    forward = batch * (2 * block_forward + t * WIDTH_ * VOCAB_)
+    backward = batch * (t * WIDTH_ * 96 + t * WIDTH_ * WIDTH_ + 2 * t * WIDTH_ * FFN_ + 4 * attn + t * WIDTH_ * VOCAB_)
+    return {"forward": forward, "backward": backward, "total": forward + backward}
+
+
+def memory_madds(arm: str, slots: int, batch: int = BATCH_CONTEXTS) -> int:
+    """The arm's matrix-product multiply-adds in one update (queries Q = 8 x batch): scoring forward and its gradient wrt the keys, the output projection forward and both gradients."""
+    q = core.ANSWER_SITES_PER_CONTEXT * batch
+    kw, w = core.KEY_WIDTH, core.HIDDEN_WIDTH
+    wo = 3 * q * w * w
+    if arm == "F-OQ":
+        return 2 * q * slots * kw + wo
+    if arm == "T-OQ":
+        return 2 * q * ((slots // core.BRANCH_SIZE) * kw + core.TREE_CANDIDATES * kw) + wo
+    if arm in ("H8", "R2"):
+        return wo
+    if arm == "D-OQ":
+        h = core.doq_hidden(slots)
+        return 2 * q * kw * h + 3 * q * h * w
+    raise ValueError(f"unknown arm {arm!r}")
+
+
+def matmul_madds_per_update(arm: str, slots: int, batch: int = BATCH_CONTEXTS) -> int:
+    """Backbone plus arm matrix products: what torch's FLOP counter sees (divided by two); a test compares them at tiny size."""
+    return backbone_madds(batch)["total"] + memory_madds(arm, slots, batch)
+
+
 def analytic_madds_per_update(arm: str, slots: int) -> float:
-    """3 x 128 x W + 4 x trainable parameters (see the module docstring)."""
-    w = core.work_formula(arm, slots)["W"]
-    return float(3 * core.ANSWER_SITES_PER_BATCH * w + ANALYTIC_OPTIMIZER_MADDS * trainable_parameters(arm, slots))
+    """The whole-update multiply-add count of section 5.4 as the lead ruled it (ADR-0021 section 22, M6): the frozen backbone's forward and backward every arm pays, the arm's matrix
+    products, and 4 x trainable parameters for AdamW. Written out in the config (``core.MADDS_FORMULA``)."""
+    return float(matmul_madds_per_update(arm, slots) + ANALYTIC_OPTIMIZER_MADDS * trainable_parameters(arm, slots))
 
 
 def cost_table(cpu_per_update: dict[tuple[str, int], float]) -> dict[str, dict[str, dict[str, float]]]:
@@ -189,3 +227,14 @@ def lane_l_status(s0_outcome: str | None, candidate: str | None = None, overload
             return "OMITTED — NOT OVERLOAD-QUALIFIED"
         return LANE_WOULD_RUN
     return LANE_OMITTED_NO_INTERFACE
+
+
+def s0_status_and_lane(record: Mapping[str, Any] | None) -> tuple[str, str, bool]:
+    """From S0's recorded outcome at the freeze (``{"outcome": ..., "candidate": ..., "overload_qualified": bool}``; None when S0 has no outcome): S0's status line (K7(c)), lane L's status, and
+    whether the question returns to the lead (ADR-0021 section 22 (b): S0 qualified an interface before the freeze and the lane would run; nothing is printed OMITTED in that case)."""
+    if record is None:
+        return S0_NOT_DECIDED, LANE_OMITTED_NO_INTERFACE, False
+    outcome = record.get("outcome")
+    status = f"S0 {outcome}" if outcome else S0_NOT_DECIDED
+    lane = lane_l_status(outcome, record.get("candidate"), bool(record.get("overload_qualified")))
+    return status, lane, lane == LANE_WOULD_RUN

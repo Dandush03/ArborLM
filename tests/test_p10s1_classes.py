@@ -557,14 +557,15 @@ def test_efficiency_arm_class_and_outcome() -> None:
 
 
 def test_dense_faster_and_optimizer_assisted() -> None:
-    arm = [C.UT("exact", 2000.0, 2000.0)] * 5
-    fast = [C.UT("exact", 1000.0, 1000.0)] * 5
+    both = lambda ut: [ut, ut]  # noqa: E731  (u_T per panel)
+    arm = [both(C.UT("exact", 2000.0, 2000.0))] * 5
+    fast = [both(C.UT("exact", 1000.0, 1000.0))] * 5
     c = {"cpu": 1.0, "madds": 1.0}
     assert C.dense_faster(arm, fast, c, c) == "DENSE FASTER"
-    assert C.dense_faster(arm, [C.UT("exact", 1900.0, 1900.0)] * 5, c, c) == "DENSE NOT FASTER"
-    assert C.dense_faster(arm, [C.UT("right", 1.0, math.inf)] * 5, c, c) == "DENSE NOT FASTER"
+    assert C.dense_faster(arm, [both(C.UT("exact", 1900.0, 1900.0))] * 5, c, c) == "DENSE NOT FASTER"
+    assert C.dense_faster(arm, [both(C.UT("right", 8193.0, math.inf))] * 5, c, c) == "DENSE NOT FASTER"  # D-OQ never reached the level within its run: it cannot be faster
     assert C.dense_faster(arm, [None] * 5, c, c) == C.DENSE_NOT_READ
-    assert C.dense_faster(arm, fast[:4] + [C.UT("exact", 9000.0, 9000.0)], c, c) == "DENSE FASTER"  # 4 of 5
+    assert C.dense_faster(arm, fast[:4] + [both(C.UT("exact", 9000.0, 9000.0))], c, c) == "DENSE FASTER"  # 4 of 5
     assert C.optimizer_assisted(0.2, 0.31) and not C.optimizer_assisted(0.2, 0.30) and not C.optimizer_assisted(0.0, 0.5)
     m = C.movement_ratios({"total": 10.0, "without_own_gradient": 4.0, "share_without": 0.4}, {"total": 30.0, "without_own_gradient": 18.0, "share_without": 0.6})
     assert m == {"total": 3.0, "without_own_gradient": 4.5, "share_without": pytest.approx(1.5)}

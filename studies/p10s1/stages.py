@@ -20,14 +20,16 @@ Not run by this module's author: the calibration, the rehearsal and every regist
 
 import argparse
 import dataclasses
+import fnmatch
 import functools
 import json
+import math
 import os
 import subprocess
 import sys
 import tempfile
 import time
-from collections.abc import Sequence
+from collections.abc import Callable, Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
@@ -43,6 +45,7 @@ from . import (
     analysis,
     budget,
     calibrate,
+    classes,
     core,
     evaluate,
     gates,
@@ -99,12 +102,17 @@ def registered_guard(cell: core.Cell, fro: fz.Frozen) -> None:
         raise RegisteredRefused(f"{cell.label} is not a cell of the frozen registry (plan {fro.plan.key()})")
 
 
+def tiny(args: argparse.Namespace) -> bool:
+    """The tiny synthetic profile: the DRY stage, or a registered command run under the test-only switch (``P10S1_TEST_SEEDS=1``, test seed sets only; ADR-0021 section 22 M8)."""
+    return bool(args.dry or (args.mode == REGISTERED and core.test_switch()))
+
+
 def is_synthetic(args: argparse.Namespace) -> bool:
-    return bool(args.dry or args.synthetic_backbone)
+    return bool(tiny(args) or args.synthetic_backbone)
 
 
 def unit_of(args: argparse.Namespace) -> int:
-    return DRY_UNIT if args.dry else core.U_P
+    return DRY_UNIT if tiny(args) else core.U_P
 
 
 def experiments_root(args: argparse.Namespace) -> Path:
@@ -120,13 +128,13 @@ def ledger_root(args: argparse.Namespace) -> Path:
 
 
 def facts_for(args: argparse.Namespace, facts: int) -> int:
-    return DRY_FACTS[facts] if args.dry else facts
+    return DRY_FACTS[facts] if tiny(args) else facts
 
 
 def worker_cell(args: argparse.Namespace, label: str) -> core.Cell:
     """The cell of ``label`` as a worker builds it: the DRY profile shrinks the facts (labels and slots stay the registered ones)."""
     cell = core.parse_label(label)
-    return dataclasses.replace(cell, facts=facts_for(args, cell.facts)) if args.dry else cell
+    return dataclasses.replace(cell, facts=facts_for(args, cell.facts)) if tiny(args) else cell
 
 
 # --- the plan of a command -------------------------------------------------------------------------------------------------------------
@@ -156,12 +164,14 @@ def cpu_table_of(args: argparse.Namespace) -> dict[tuple[str, int], float]:
 def seeds_for(args: argparse.Namespace, draw: int | None = None) -> p9core.SeedSet:
     """The data seeds a command may use in its mode (``core.check_seed_set`` is applied again by every training job)."""
     k = args.draw if draw is None else draw
+    if args.mode == REGISTERED and core.test_switch():
+        return core.draw_seeds(k)  # the test-only switch: test seed sets, never a registered draw
     if is_synthetic(args):
         if args.mode == REGISTERED:
             raise pool.StageRefused("refused: registered seeds with the DRY profile or a synthetic backbone")
         return core.test_seeds(0)
     if args.mode == REGISTERED:
-        return core.registered_draw_seeds(k)
+        return core.draw_seeds(k)
     if args.mode == CALIBRATION:
         return core.calibration_seeds(k)
     return core.rehearsal_seeds()
@@ -173,8 +183,10 @@ def corpus_bytes(args: argparse.Namespace) -> bytes:
 
 def table_facts(args: argparse.Namespace, plan: core.Plan) -> int:
     """Facts of the draw's table: the plan's (32,768, or 65,536 with the overload row); the calibration's 131,072; the DRY profile's 1,024."""
-    if args.dry:
+    if tiny(args):
         return DRY_SIZES.main_trained
+    if args.mode == REGISTERED:
+        return int(core.generation_settings(repo_of(args) / core.DEFAULT_CONFIG)["table_facts"])  # a config value the freeze checks against the plan
     return core.CALIBRATION_TABLE_FACTS if args.mode == CALIBRATION else plan.table_facts
 
 
@@ -185,8 +197,8 @@ def _build_data(seeds: p9core.SeedSet, corpus: bytes, main_trained: int, unseen:
 
 def study_data(args: argparse.Namespace, seeds: p9core.SeedSet, plan: core.Plan) -> data_mod.StudyData:
     core.check_seed_set(args.mode, seeds.name)
-    study = _build_data(seeds, corpus_bytes(args), table_facts(args, plan), DRY_SIZES.unseen if args.dry else core.UNSEEN_FACTS)
-    if args.mode == REGISTERED and study.pool != p9core.TEMPLATE_POOL:
+    study = _build_data(seeds, corpus_bytes(args), table_facts(args, plan), DRY_SIZES.unseen if tiny(args) else core.UNSEEN_FACTS)
+    if args.mode == REGISTERED and not tiny(args) and study.pool != p9core.TEMPLATE_POOL:
         raise StageError("template pool differs from the registered pool (studies.p9.core.TEMPLATE_POOL)")
     return study
 
@@ -282,6 +294,8 @@ def common_args(args: argparse.Namespace) -> list[str]:
         out.append("--dry")
     if args.synthetic_backbone:
         out.append("--synthetic-backbone")
+    if args.freeze_plan:
+        out += ["--freeze-plan-sha256", file_sha256(Path(args.freeze_plan))]  # a registered worker checks the plan file against the digest the driver verified
     for flag, value in (("--calibration", args.calibration), ("--freeze-plan", args.freeze_plan), ("--timing", args.timing), ("--overload-u-p", args.overload_u_p), ("--updates", args.updates), ("--item", None)):
         if value is not None:
             out += [flag, str(value)]
@@ -348,7 +362,7 @@ def labels_of_args(args: argparse.Namespace) -> list[str]:
 
 def cell_task_label(args: argparse.Namespace, c: core.Cell) -> str:
     """One task per cell; the DRY stage groups the cells of a draw and slot count into one task to keep its process count small."""
-    return f"g-d{c.draw}-n{c.slots}-k{c.kind}" if args.dry else c.label
+    return f"g-d{c.draw}-n{c.slots}-k{c.kind}" if tiny(args) else c.label
 
 
 def cell_tasks(name: str, worker: str, args: argparse.Namespace, cells: Sequence[core.Cell], run_dir: Path, result_for: Any, *, previous: str | None = None, extra: Sequence[str] = ()) -> tuple[list[pool.Task], list[str]]:
@@ -407,15 +421,15 @@ def work_generate(args: argparse.Namespace) -> int:
     study = study_data(args, seeds, fro.plan)
     g1: dict[str, Any] | None = None
     g1_extra: dict[str, Any] | None = None
-    if args.mode != CALIBRATION or args.dry:
-        g1 = dict(data_mod.run_g1(study, permutations=DRY_G1_PERMUTATIONS if args.dry else None, train_epochs=None))
-        g1_extra = gates.g1_s1(study, fro.plan, [facts_for(args, f) for f in sorted({f for f, _ in core.grid_cells(fro.plan)})] if args.dry else None)
+    if args.mode != CALIBRATION or tiny(args):
+        g1 = dict(data_mod.run_g1(study, permutations=DRY_G1_PERMUTATIONS if tiny(args) else None, train_epochs=None))
+        g1_extra = gates.g1_s1(study, fro.plan, [facts_for(args, f) for f in sorted({f for f, _ in core.grid_cells(fro.plan)})] if tiny(args) else None)
     folder.mkdir(parents=True, exist_ok=True)
     passed: bool | None = None if g1 is None else bool(g1["passed"]) and bool(g1_extra and g1_extra["passed"])
     if g1 is not None:
         write_json(folder / "g1.json", {"p9_g1": g1, "s1_g1": g1_extra})
     core.write_record(target, {
-        **core.envelope("data_manifest"), "seed_set": seeds.name, "seeds": dataclasses.asdict(seeds), "dry": bool(args.dry), "mode": args.mode, "main_trained": table_facts(args, fro.plan), "sha256s": study.sha256s(),
+        **core.envelope("data_manifest"), "seed_set": seeds.name, "seeds": dataclasses.asdict(seeds), "dry": bool(tiny(args)), "mode": args.mode, "main_trained": table_facts(args, fro.plan), "sha256s": study.sha256s(),
         "template_pool": list(study.pool), "g1_passed": passed, "g1_failed_checks": [] if g1 is None else [c["name"] for c in g1["checks"] if not c["passed"]], "g1_file": None if g1 is None else "g1.json",
         "identity": core.code_identity(), "environment": core.environment(),
     })  # fmt: skip
@@ -428,10 +442,10 @@ def g2_for(args: argparse.Namespace, run_dir: Path, plan: core.Plan, backbone: A
     counts = [facts_for(args, f) for f in sorted({f for f, _ in core.grid_cells(plan)})]
     by_draw: dict[str, Any] = {}
     g1: dict[str, bool | None] = {}
-    if args.mode == REGISTERED and not is_synthetic(args):
-        require_draws(run_dir)
+    if args.mode == REGISTERED and (not is_synthetic(args) or core.test_switch()):
+        require_draws(run_dir, core.draw_names())
         for r in range(1, core.REPLICATES + 1):
-            seeds = core.registered_draw_seeds(r)
+            seeds = core.draw_seeds(r)
             study = verified_data(args, seeds, plan, require_manifest=True)
             by_draw[str(r)] = gates.no_memory_counts(backbone, study, counts)
             g1[str(r)] = True
@@ -461,12 +475,12 @@ def work_gates(args: argparse.Namespace) -> int:
     g1_all = all(v is True for v in g1_by_draw.values()) if g1_by_draw else False
     init = seeds.facts if is_synthetic(args) else (core.INIT_SEEDS[0] if args.mode == REGISTERED else core.REHEARSAL_INIT_SEED)
     cfgs = [(a, facts_for(args, f), n) for a in core.ARMS for f, n in core.arm_cells(core.Plan(fro.plan.overload_u_p, unit=fro.plan.unit), a)]
-    result = gates.run_gates(study, backbone, mode=args.mode, plan=fro.plan, out_dir=run_dir / "gate_runs", init_seed=init, rows=rows, restore_split=4 if args.dry else args.restore_split, configurations=cfgs, small_facts=facts_for(args, 2048))
+    result = gates.run_gates(study, backbone, mode=args.mode, plan=fro.plan, out_dir=run_dir / "gate_runs", init_seed=init, rows=rows, restore_split=4 if tiny(args) else args.restore_split, configurations=cfgs, small_facts=facts_for(args, 2048))
     passed = {n: bool(result.get(f"{n}_passed")) for n in ("g4", "g5", "g6", "g7", "g8", "g9")}
     record = core.jsonable({
         **core.envelope("gates"), "seed_set": seeds.name, "g1_passed": g1_all, "g1_by_draw": g1_by_draw, "g2": g2, "g2_passed": bool(g2["passed"]), **{f"{n}_passed": v for n, v in passed.items()},
-        "g4_defects": result["g4_defects"], "harness_errors": result["harness_errors"], "configurations_checked": result["configurations_checked"], "checks": result["checks"], "dry": bool(args.dry), "mode": args.mode,
-        "wall_seconds": time.monotonic() - started, "environment": core.environment(), "identity": core.code_identity(),
+        "g4_defects": result["g4_defects"], "harness_errors": result["harness_errors"], "configurations_checked": result["configurations_checked"], "checks": result["checks"], "dry": bool(tiny(args)), "mode": args.mode,
+        "wall_seconds": time.monotonic() - started, "environment": core.environment(), "identity": core.code_identity(), "source_hashes": core.source_hashes(),
     })  # fmt: skip
     core.write_record(target, record)
     ok = all(passed.values()) and g1_all and bool(g2["passed"])
@@ -490,7 +504,7 @@ def work_train(args: argparse.Namespace) -> int:
     fro = frozen_of(args)
     if args.mode == REGISTERED:
         require_gates_passed(run_dir)
-        require_draws(run_dir)
+        require_draws(run_dir, core.draw_names())
     for label in labels_of_args(args):
         cell = worker_cell(args, label)
         registered_guard(core.parse_label(label), fro)
@@ -636,14 +650,14 @@ def work_cpu_timing(args: argparse.Namespace) -> int:
     target = run_dir / "timing.json"
     if target.exists():
         raise FileExistsError(target)
-    quiet = dry_quiet() if args.dry else timing.wait_for_quiet()
+    quiet = dry_quiet() if tiny(args) else timing.wait_for_quiet()
     fro = frozen_of(args)
     seeds = seeds_for(args)
     study = study_data(args, seeds, fro.plan)
     cpu: dict[str, float] = {}
     runs: dict[str, Any] = {}
     status = "MEASURED" if quiet["quiet"] else timing.NOT_MEASURED
-    warm, n, reps = (2, 4, core.TIMING_REPEATS) if args.dry else (core.TIMING_WARMUP_UPDATES, core.TIMING_UPDATES, core.TIMING_REPEATS)
+    warm, n, reps = (2, 4, core.TIMING_REPEATS) if tiny(args) else (core.TIMING_WARMUP_UPDATES, core.TIMING_UPDATES, core.TIMING_REPEATS)
     if quiet["quiet"]:
         for arm in core.ARMS:
             for facts, slots in sorted(c for c in core.arm_cells(core.Plan(unit=fro.plan.unit), arm) if c in core.DIAGONAL):
@@ -653,7 +667,7 @@ def work_cpu_timing(args: argparse.Namespace) -> int:
                 r = timing.cpu_seconds_per_update(job, warmup=warm, updates=n, repeats=reps)
                 cpu[f"{arm}|{slots}"] = r["cpu_seconds_per_update"]
                 runs[f"{arm}|{slots}"] = r
-    core.write_record(target, core.jsonable({**core.envelope("timing"), "status": status, "cpu_per_update": cpu, "runs": runs, "quiet": quiet, "load_average_max": core.LOAD_AVERAGE_MAX, "dry": bool(args.dry), "environment": core.environment(), "identity": core.code_identity(), "seed_set": study.seeds.name}))
+    core.write_record(target, core.jsonable({**core.envelope("timing"), "status": status, "cpu_per_update": cpu, "runs": runs, "quiet": quiet, "load_average_max": core.LOAD_AVERAGE_MAX, "dry": bool(tiny(args)), "environment": core.environment(), "identity": core.code_identity(), "source_hashes": core.source_hashes(), "seed_set": study.seeds.name}))
     print(json.dumps({"status": status, "configurations": len(cpu)}))
     return 0 if status == "MEASURED" else 1
 
@@ -665,7 +679,7 @@ def work_throughput(args: argparse.Namespace) -> int:
     target = run_dir / "throughput.json"
     if target.exists():
         raise FileExistsError(target)
-    quiet = dry_quiet() if args.dry else timing.wait_for_quiet()
+    quiet = dry_quiet() if tiny(args) else timing.wait_for_quiet()
     fro = frozen_of(args)
     out: dict[str, Any] = {}
     status = "MEASURED" if quiet["quiet"] else timing.THROUGHPUT_NOT_MEASURED
@@ -676,12 +690,12 @@ def work_throughput(args: argparse.Namespace) -> int:
             base = "F-OQ" if arm == "F-OQ-IVF" else arm
             for facts, slots in core.DIAGONAL:
                 registered = next(c for c in core.registered_cells(fro.plan, dense_rates=fro.dense_rates) if c.kind == "P" and c.arm == base and c.draw == 1 and (c.facts, c.slots) == (facts, slots))
-                cell = dataclasses.replace(registered, facts=facts_for(args, facts)) if args.dry else registered
+                cell = dataclasses.replace(registered, facts=facts_for(args, facts)) if tiny(args) else registered
                 job = build_job(args, cell, study, core.cell_dir(run_dir, registered.label), fro)
                 model = train.job_model(job, seed_rng=False)
                 train.load_model_state(core.cell_dir(run_dir, registered.label) / "snapshots" / core.snapshot_stem(registered.u_p), model)
                 out[f"{arm}|{slots}"] = timing.throughput_record(model, study, cell.facts, seeds, arm)
-    core.write_record(target, core.jsonable({**core.envelope("throughput"), "status": status, "results": out, "quiet": quiet, "scope": "read path only, RAM, CPU, one process: not storage I/O, not latency of a language model", "dry": bool(args.dry), "environment": core.environment()}))
+    core.write_record(target, core.jsonable({**core.envelope("throughput"), "status": status, "results": out, "quiet": quiet, "scope": "read path only, RAM, CPU, one process: not storage I/O, not latency of a language model", "dry": bool(tiny(args)), "environment": core.environment()}))
     print(json.dumps({"status": status, "configurations": len(out)}))
     return 0
 
@@ -738,8 +752,8 @@ def work_analyze(args: argparse.Namespace) -> int:
     side = aggregate_side_records(run_dir, Path(plan_rec["timing"]["path"]) if plan_rec else None)
     expected = plan_rec.get("identity") if plan_rec else None
     result = analysis.analyze_study(study, fro, gates=gates_rec, failed_tasks=failed, expected_identity=expected, timing=side["timing"], throughput=side["throughput"], simulation=side["simulation"])
-    core.write_record(target, core.jsonable({**core.envelope("analysis"), "dry": bool(args.dry), "result": result, "freeze_plan_sha256": file_sha256(Path(args.freeze_plan)) if args.freeze_plan else None, "identity": core.code_identity(), "environment": core.environment()}))
-    print(json.dumps({"status": result["assessment"]["status"], "capacity": result["outcome"]["capacity"]["label"], "efficiency": result["outcome"]["efficiency"]["label"]}))
+    core.write_record(target, core.jsonable({**core.envelope("analysis"), "store_only_tag": core.STORE_ONLY_TAG, "dry": bool(tiny(args)), "result": result, "freeze_plan_sha256": file_sha256(Path(args.freeze_plan)) if args.freeze_plan else None, "identity": core.code_identity(), "environment": core.environment()}))
+    print(json.dumps({"status": result["assessment"]["status"], "capacity": classes.printable(result["outcome"]["capacity"]["label"]), "efficiency": classes.printable(result["outcome"]["efficiency"]["label"])}))
     return 0
 
 
@@ -748,9 +762,39 @@ def work_report(args: argparse.Namespace) -> int:
     out = Path(args.results_dir) if args.results_dir else run_dir / "results"
     if (out / "results.json").exists():
         raise FileExistsError(out / "results.json")
-    paths = report.write_report(run_dir, out, banner=DRY_BANNER if args.dry else None)
+    paths = report.write_report(run_dir, out, banner=DRY_BANNER if tiny(args) else None)
     print(json.dumps({"written": [p.name for p in paths]}))
     return 0
+
+
+def section_10_2_scenarios() -> dict[str, synthetic.Scenario]:
+    """The records of section 10.2 in which no arm is CAPACITY_SUPPORTED and one arm is in turn DEPENDENCE_FAILED (the rest evaluated and not supported), the reference R2 failing (every
+    arm NOT_EVALUATED), and a study in which no cell is loaded (NOT_TESTED_BY_LOAD). Each of them in ``NEVER_NEGATIVE`` must give CAPACITY-INCONCLUSIVE or CAPACITY-NOT-TESTED, never
+    CAPACITY-NEGATIVE; the stage records what each produced (audit m14). The class-level enumeration (every arm in turn NOT_EVALUATED, CAPACITY_ONE_TRANSITION and INTERMEDIATE) is the unit
+    test of ``classes.capacity_outcome``; the generator cannot set one arm's class alone for those three."""
+
+    def only(target: str) -> Callable[[str, int, int, int], bool]:
+        return lambda arm, facts, slots, rep: arm == target
+
+    def a_flat(v: float) -> Callable[[str, int, int, int], float]:
+        return lambda arm, facts, slots, rep: 0.15 if arm == "D-OQ" else (1.0 if arm == "R2" else v)
+
+    def r2_low(arm: str, facts: int, slots: int, rep: int) -> float:
+        return 0.5 if arm == "R2" else (0.15 if arm == "D-OQ" else min(1.0, 0.7 * slots / facts))
+
+    out = {f"dependence failed {arm}, no other arm supported": synthetic.Scenario(a_max=a_flat(0.5), dep_fail=only(arm)) for arm in ("F-OQ", "T-OQ", "H8")}  # a_use 0.5 is above the 0.25 floor at which DEP applies
+    out["reference not evaluated"] = synthetic.Scenario(a_max=r2_low)
+    out["no cell loaded"] = synthetic.Scenario(a_max=lambda arm, facts, slots, rep: 0.15 if arm == "D-OQ" else 1.0, tau=lambda arm, facts, slots: 200.0)
+    out["no arm supported, every arm evaluated"] = synthetic.Scenario(a_max=a_flat(0.5))
+    return out
+
+
+# H8 is not read by outcome row 4 (a) (F-OQ and T-OQ only), so its DEPENDENCE_FAILED scenario with F-OQ and T-OQ both CAPACITY_NOT_SUPPORTED is recorded, not asserted against CAPACITY-NEGATIVE
+NEVER_NEGATIVE = ("dependence failed F-OQ, no other arm supported", "dependence failed T-OQ, no other arm supported", "reference not evaluated", "no cell loaded")
+
+
+def tiny_label_negative(result: Mapping[str, Any] | None) -> bool:
+    return bool(result) and bool(result and str(result["capacity"]).startswith(classes.CAPACITY_NEGATIVE))
 
 
 def work_synthetic(args: argparse.Namespace) -> int:
@@ -763,6 +807,7 @@ def work_synthetic(args: argparse.Namespace) -> int:
     fro = frozen_of(args)
     first_cell = core.registered_cells(fro.plan, dense_rates=fro.dense_rates)[0].label
     scenarios = {"default": synthetic.Scenario(), "missing cell": synthetic.Scenario(missing={first_cell}), "failed cell": synthetic.Scenario(fail={first_cell}), "non-finite cell": synthetic.Scenario(nonfinite={first_cell}), "failed gate": synthetic.Scenario(gates_ok=False)}
+    scenarios.update(section_10_2_scenarios())
     results: dict[str, Any] = {}
     analyze_seconds = report_seconds = 0.0
     with tempfile.TemporaryDirectory(prefix="p10s1-synthetic-") as tmp:
@@ -777,10 +822,11 @@ def work_synthetic(args: argparse.Namespace) -> int:
             t1 = time.monotonic()
             report.write_report(d, d / "results", banner="synthetic")
             report_seconds = max(report_seconds, time.monotonic() - t1)
-            results[name] = {"status": res["assessment"]["status"], "capacity": res["outcome"]["capacity"]["label"], "efficiency": res["outcome"]["efficiency"]["label"]}
-    core.write_record(target, {**core.envelope("rehearsal"), "synthetic": True, "analysis_wall_seconds": analyze_seconds, "report_wall_seconds": report_seconds, "scenarios": results, "note": "synthetic records; not a measurement of a model or a seed"})
-    print(json.dumps({"analysis_seconds": round(analyze_seconds, 2), "report_seconds": round(report_seconds, 2), "scenarios": results}))
-    return 0
+            results[name] = {"status": res["assessment"]["status"], "capacity": classes.printable(res["outcome"]["capacity"]["label"]), "efficiency": classes.printable(res["outcome"]["efficiency"]["label"]), "arm_classes": {a: (v["class"] if v else None) for a, v in (res["capacity"] or {}).get("arms", {}).items()}}
+    violations = [n for n in NEVER_NEGATIVE if tiny_label_negative(results.get(n))]
+    core.write_record(target, {**core.envelope("rehearsal"), "synthetic": True, "analysis_wall_seconds": analyze_seconds, "report_wall_seconds": report_seconds, "scenarios": results, "never_negative_violations": violations, "note": "synthetic records; not a measurement of a model or a seed"})
+    print(json.dumps({"analysis_seconds": round(analyze_seconds, 2), "report_seconds": round(report_seconds, 2), "scenarios": results, "never_negative_violations": violations}))
+    return 1 if violations else 0
 
 
 WORKERS: dict[str, Any] = {
@@ -804,6 +850,13 @@ def single(stage: str, worker: str, args: argparse.Namespace, run_dir: Path, res
 def cmd_generate(args: argparse.Namespace) -> int:
     if args.mode == REGISTERED and not args.i_understand_freeze_time:
         raise pool.StageRefused("refused: registered-seed generation is used at freeze time; add --i-understand-freeze-time")
+    if args.mode == REGISTERED:
+        # the cap and the table size are config values (set from the rehearsal's measured G1 time before the freeze); nothing is typed, and a provisional cap stops the generation
+        refuse_overrides(args, allowed=("run_dir", "draw", "i_understand_freeze_time", "mode"))
+        settings = core.generation_settings(repo_of(args) / core.DEFAULT_CONFIG)
+        if settings["provisional"]:
+            raise pool.StageRefused("refused: the generation cap in the config is provisional; run `set-generation-cap` from the rehearsal's measured G1 time and commit it before generating")
+        args.stage_cap_seconds = float(settings["cap_seconds"])
     run_dir = new_run_dir(args, "generate")
     seeds = seeds_for(args)
     if (manifest_dir(run_dir, seeds.name) / "data_manifest.json").exists():
@@ -878,7 +931,7 @@ def run_train(args: argparse.Namespace, fro: fz.Frozen, cap: float | None) -> in
     run_dir = Path(args.run_dir)
     if args.mode == REGISTERED:
         require_gates_passed(run_dir)
-        require_draws(run_dir)
+        require_draws(run_dir, core.draw_names())
     cells = registered_cell_list(fro)
     if args.only:
         cells = [c for c in cells if c.label in set(args.only)]
@@ -962,6 +1015,36 @@ def read_rehearsal(run_dir: Path, plan: core.Plan) -> tuple[budget.Rates, dict[i
     return rates, baselines
 
 
+def rehearsal_generate_seconds(run_dir: Path) -> float | None:
+    """Wall seconds of the rehearsal draw's generation and G1 (the generate stage manifest of the rehearsal directory), None when it is not recorded."""
+    for path in sorted(run_dir.glob("generate-*/manifest.json")):
+        record = core.read_record(path, "stage_manifest")
+        seconds = [float(t["seconds"]) for t in record["tasks"] if t["status"] == "completed"]
+        if seconds:
+            return sum(seconds)
+    return None
+
+
+def cmd_set_generation_cap(args: argparse.Namespace) -> int:
+    """The lead's step after the rehearsal: write twice the rehearsal draw's measured generation and G1 time (rounded up to 10 s) into ``[generation]`` of the config, clear the provisional
+    flag, and (optionally) set the registered table size; commit the result before ``generate.sh`` (the config is part of the freeze identity). Nothing is invented: without a measured time
+    and without ``--seconds`` it refuses."""
+    config = repo_of(args) / core.DEFAULT_CONFIG
+    current = core.load_config(config)
+    if args.generation_seconds is not None:
+        cap = float(args.generation_seconds)
+    else:
+        measured = rehearsal_generate_seconds(Path(args.run_dir)) if args.run_dir else None
+        if measured is None:
+            raise pool.StageRefused("refused: no measured generation time (give the rehearsal directory with --run-dir, or --generation-seconds)")
+        cap = float(math.ceil(2.0 * measured / 10.0) * 10)
+    facts = int(args.generation_table_facts or current["generation"]["table_facts"])
+    config.write_text(core.render_config_toml(float(current["resources"]["cap_hours"]), {"cap_seconds": cap, "provisional": False, "table_facts": facts}), encoding="utf-8")
+    core.load_config(config)
+    print(json.dumps({"config": str(config), "generation_cap_seconds": cap, "table_facts": facts, "provisional": False}))
+    return 0
+
+
 def cmd_project(args: argparse.Namespace) -> int:
     """The projection: rates from the rehearsal, the cost tables of the isolated timing, the memory rule (evaluation peaks included), the headroom rule and the cuts in their fixed order
     (``budget.choose_plan``), the cap table of every configuration, all bound to the calibration record, the timing record, the rehearsal gates and the synthetic-registry record by hash. A
@@ -992,6 +1075,9 @@ def cmd_project(args: argparse.Namespace) -> int:
         if not args.dry:
             returns.append(str(exc))
         dense_rates = {4096: core.LEARNING_RATE, 16384: core.LEARNING_RATE, 65536: core.LEARNING_RATE}
+    gen_seconds = rehearsal_generate_seconds(run_dir)
+    if gen_seconds is None and not args.dry:
+        returns.append("the rehearsal draw's generation and G1 time is not recorded (no generate stage manifest in the rehearsal directory): the registered generation cannot be projected")
     plan0 = core.Plan(overload, (1, 2), (), False, unit)
     rates, baselines = read_rehearsal(run_dir, plan0)
     missing = budget.missing_items(rates, plan0)
@@ -1003,13 +1089,14 @@ def cmd_project(args: argparse.Namespace) -> int:
         "rehearsal_gates": {"path": str(Path(args.gates).resolve()), "sha256": file_sha256(Path(args.gates))}, "synthetic": {"path": str(Path(args.synthetic).resolve()), "sha256": file_sha256(Path(args.synthetic))},
         "calibration_sha256": file_sha256(Path(args.calibration)), "dry": bool(args.dry), "rates": {budget.item_label(i): dataclasses.asdict(r) for i, r in rates.items()}, "missing_items": [budget.item_label(i) for i in missing],
         "memory": budget.memory_headroom(rates), "baseline_seconds": {str(k): v for k, v in baselines.items()}, "returns_to_lead": returns, "overload_u_p": overload, "dense_rates": {str(k): v for k, v in dense_rates.items()},
+        "generation": {"rehearsal_g1_seconds": gen_seconds, "five_draws_seconds": None if gen_seconds is None else core.REPLICATES * gen_seconds, "note": "five times the generation and G1 time measured on the rehearsal draw, charged before the freeze"},
         "h8_undertrained": cal["h8"]["undertrained_cells"], "eligible_doq_cuts": cal["cut3_eligible"], "cap_seconds": core.cap_seconds(repo_of(args) / core.DEFAULT_CONFIG if args.repo else None),
         "environment": core.environment(),
     }  # fmt: skip
     ledger = core.Ledger.from_config(ledger_root(args), repo_of(args) / core.DEFAULT_CONFIG if args.repo else None)
     record["charged_seconds"] = ledger.charged()
     if not returns and cpu:
-        fixed = budget.Fixed(gates=float(gts["wall_seconds"]), timing=sum(float(v["cpu_seconds_per_update"]) * (core.TIMING_WARMUP_UPDATES + core.TIMING_REPEATS * core.TIMING_UPDATES) for v in tim["runs"].values()) + 120.0, simulate=60.0, analysis=float(syn["analysis_wall_seconds"]), report=float(syn["report_wall_seconds"]))
+        fixed = budget.Fixed(gates=float(gts["wall_seconds"]), timing=sum(float(v["cpu_seconds_per_update"]) * (core.TIMING_WARMUP_UPDATES + core.TIMING_REPEATS * core.TIMING_UPDATES) for v in tim["runs"].values()) + 120.0, simulate=60.0, analysis=float(syn["analysis_wall_seconds"]), report=float(syn["report_wall_seconds"]), generate=core.REPLICATES * (gen_seconds or 0.0))
         kw = {"dense_rates": {int(k): v for k, v in dense_rates.items()}, "h8_undertrained": list(cal["h8"]["undertrained_cells"])}
         chosen = budget.choose_plan(rates, fixed, cpu, charged_seconds=ledger.charged(), cap_seconds=record["cap_seconds"], eligible_doq=cal["cut3_eligible"], overload_u_p=overload, baseline_seconds=baselines, frozen_kwargs=kw, unit=unit)
         record["fixed"] = dataclasses.asdict(fixed)
@@ -1039,6 +1126,13 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise pool.StageRefused(f"refused: {out_dir} already holds a freeze; a freeze is written once")
     if args.lane_l:
         raise pool.StageRefused("refused: lane L is not implemented (F-LA is S0's frozen candidate, whose code is not in this tree); it stays OMITTED and changes nothing in S1")
+    s0_record = read_json(Path(args.s0_record)) if args.s0_record else None
+    s0_status, lane_status, lane_returns = fz.s0_status_and_lane(s0_record)
+    if lane_returns:
+        raise pool.StageRefused("refused: S0 has qualified an interface before the freeze, so lane L would run: this returns to the human lead (ADR-0021 section 22 (b)); nothing is frozen")
+    generation = core.generation_settings(repo_of(args) / core.DEFAULT_CONFIG)
+    if generation["provisional"] and not args.dry:
+        raise pool.StageRefused("refused: the generation cap in the config is still provisional: the registered generation ran under a value the rehearsal never set")
     run_dir = Path(args.run_dir)
     proj_dir = Path(args.projection).parent
     proj = core.read_record(Path(args.projection), "projection")
@@ -1059,10 +1153,12 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         manifests[name] = file_sha256(p)
     cal = core.read_record(Path(args.calibration), "calibration")
     plan = core.Plan.from_json(proj["chosen"]["plan"])
+    if int(generation["table_facts"]) != plan.table_facts and not args.dry:
+        raise pool.StageRefused(f"refused: the registered draws were generated with {generation['table_facts']} facts (config) but the plan needs {plan.table_facts}")
     cpu = {(k.split("|")[0], int(k.split("|")[1])): float(v) for k, v in proj["cpu_per_update"].items()}
     directed = [t for t in args.no_loaded_transitions.split(",") if t]
     fro = fz.Frozen.build(
-        plan, cpu, dense_rates={int(k): float(v) for k, v in proj["dense_rates"].items()}, h8_undertrained=list(proj["h8_undertrained"]), s0_status=args.s0_status, lane_status=args.lane_status,
+        plan, cpu, dense_rates={int(k): float(v) for k, v in proj["dense_rates"].items()}, h8_undertrained=list(proj["h8_undertrained"]), s0_status=s0_status, lane_status=lane_status,
         no_loaded_transitions=directed, cuts=list(proj["chosen"]["applied_cuts"]),
     )  # fmt: skip
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -1072,12 +1168,31 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         **core.envelope("freeze_plan"), "calibration": proj["calibration"], "projection": {"path": str(Path(args.projection).resolve()), "sha256": file_sha256(Path(args.projection))}, "timing": proj["timing"],
         "rehearsal_gates": proj["rehearsal_gates"], "synthetic": proj["synthetic"], "stage_caps_sha256": file_sha256(caps_path), "run_dir": str(run_dir.resolve()), "data_manifests": manifests,
         "frozen": fro.as_json(), "frozen_sha256": sha256(canonical_json(fro.as_json())), "cap_seconds": proj["cap_seconds"], "headroom": proj["chosen"]["headroom"], "cuts": proj["chosen"]["applied_cuts"],
-        "identity": identity, "dense_rates": proj["dense_rates"], "load_decision": cal["load_decision"], "lane_l": args.lane_status, "s0_status": args.s0_status, "no_loaded_transitions": directed,
+        "identity": identity, "dense_rates": proj["dense_rates"], "load_decision": cal["load_decision"], "lane_l": lane_status, "s0_status": s0_status, "no_loaded_transitions": directed,
+        "s0_record": None if not args.s0_record else {"path": str(Path(args.s0_record).resolve()), "sha256": file_sha256(Path(args.s0_record))}, "generation": generation, "decision_2": {"file_glob": DECISION_2_GLOB, "note": "Decision 2 is recorded in a committed file outside the hashed specification and names the freeze commit (ADR-0021 section 22 M4)"},
+        "identity_drift": identity_drift(core.repo_root(), {"calibration": cal, "projection": proj, "timing": core.read_record(Path(args.timing), "timing"), "rehearsal_gates": core.read_record(Path(args.gates), "gates")}),
         "projection_dir": str(proj_dir.resolve()), "note": "the freeze record: nothing registered runs without it; every hash is checked by every registered stage",
     }  # fmt: skip
     write_json(plan_path, core.jsonable(record))
     print(json.dumps({"plan": str(plan_path), "sha256": file_sha256(plan_path), "caps": str(caps_path), "caps_sha256": file_sha256(caps_path)}))
     return 0
+
+
+def identity_drift(repo: Path, records: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    """For each record the freeze binds (calibration, projection, timing, rehearsal gates): whether the code identity it carries equals the identity now frozen, which identity parts differ,
+    and the source files whose hash differs (from the record's ``source_hashes``, when it carries them). Recorded, never hidden (audit m15); whether a change matters is the lead's."""
+    now = core.code_identity(repo)
+    hashes = core.source_hashes(repo)
+    out: dict[str, Any] = {}
+    for name, record in records.items():
+        identity = record.get("identity")
+        if identity is None:
+            out[name] = {"identity": "NOT RECORDED"}
+            continue
+        parts = sorted(k for k in now if identity.get(k) != now[k])
+        files = sorted(f for f in set(hashes) | set(record.get("source_hashes") or {}) if (record.get("source_hashes") or {}).get(f) != hashes.get(f)) if record.get("source_hashes") else None
+        out[name] = {"equal": not parts, "parts_differing": parts, "files_changed": files if parts else []}
+    return out
 
 
 # --- the registered driver (called by the fixed launch scripts) ---------------------------------------------------------------------------------------
@@ -1091,7 +1206,7 @@ def load_plan(repo: Path) -> dict[str, Any]:
 
 
 def manifest_names(args: argparse.Namespace | None = None) -> tuple[str, ...]:
-    return ("p10s1-test-0",) if args is not None and args.dry else core.DRAW_NAMES
+    return ("p10s1-test-0",) if args is not None and args.dry else core.draw_names()
 
 
 def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
@@ -1108,7 +1223,7 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
     check(repo / CAPS_FILE, plan["stage_caps_sha256"], "stage-cap table")
     if Path(plan["run_dir"]).resolve() != run_dir.resolve():
         raise pool.StageRefused(f"refused: the freeze names the run directory {plan['run_dir']}, not {run_dir}")
-    if set(plan["data_manifests"]) != set(core.DRAW_NAMES):
+    if set(plan["data_manifests"]) != set(core.draw_names()):
         raise pool.StageRefused("refused: the freeze must name the data manifest of all five registered draws")
     for name, digest in plan["data_manifests"].items():
         check(manifest_dir(run_dir, name) / "data_manifest.json", digest, f"data manifest of {name}")
@@ -1136,11 +1251,37 @@ def require_manifest(run_dir: Path, stage: str) -> None:
         raise pool.StageRefused(f"refused: the {stage} stage has no manifest in {run_dir}: stages run in order")
 
 
+def refuse_overrides(args: argparse.Namespace, *, allowed: Sequence[str]) -> None:
+    """A registered command takes no free value: every common option other than ``allowed`` must be at its parser default (``--stage-cap-seconds``, ``--ledger-root``,
+    ``--experiments-root``, ``--rss-*-bytes``, ``--only``, ``--repo``, ``--workers``, and every other). ADR-0021 section 22 M3."""
+    defaults = vars(build_parser().parse_args(["report"]))
+    skip = set(allowed) | {"command", "name", "worker", "freeze_commit", "caps"}
+    changed = sorted(f"--{k.replace('_', '-')}" for k, v in vars(args).items() if k in defaults and k not in skip and v != defaults[k])
+    if changed:
+        raise pool.StageRefused(f"refused: a registered command takes no override; typed: {', '.join(changed)}")
+
+
+DECISION_2_GLOB = "results/p10s1-freeze-*/DECISION_2.md"
+
+
+def require_decision_2(repo: Path, freeze_commit: str) -> str:
+    """Decision 2 (the single registered run, ADR-0021 section 11 item 8) is recorded in a committed file outside the hashed specification, ``results/p10s1-freeze-<date>/DECISION_2.md``
+    (section 22 M4), that names the freeze commit. Without it no registered stage starts."""
+    full = git(repo, "rev-parse", "--verify", "--quiet", f"{freeze_commit}^{{commit}}").stdout.decode().strip()
+    tracked = [p for p in git(repo, "ls-tree", "-r", "--name-only", "HEAD", "--", "results").stdout.decode().split("\n") if fnmatch.fnmatch(p, DECISION_2_GLOB)]
+    for name in tracked:
+        text = git(repo, "show", f"HEAD:{name}").stdout.decode("utf-8", "replace")  # the committed content, not the working file
+        if full and full in text:
+            return name
+    raise pool.StageRefused(f"refused: no committed {DECISION_2_GLOB} names the freeze commit {full or freeze_commit}: Decision 2 is recorded there before anything registered runs")
+
+
 def cmd_registered(args: argparse.Namespace) -> int:
     """One registered stage by name (``REGISTERED_STAGES``), with everything else (caps, plan, seeds) from the frozen plan and the frozen cap table. The only free arguments are the run
-    directory and the freeze commit; the launch scripts pass nothing else."""
+    directory and the freeze commit (and ``--caps``, which must name the frozen table); the launch scripts pass nothing else, and any other option is refused."""
     if args.name not in REGISTERED_STAGES:
         raise pool.StageRefused(f"refused: unknown registered stage {args.name!r}")
+    refuse_overrides(args, allowed=("run_dir", "mode"))
     args.mode = REGISTERED
     repo = repo_of(args)
     run_dir = Path(args.run_dir)
@@ -1149,6 +1290,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
         raise pool.StageRefused(f"refused: the cap table is {CAPS_FILE}")
     plan_rec = load_plan(repo)
     verify_plan(plan_rec, repo, run_dir)
+    require_decision_2(repo, args.freeze_commit)
     caps = read_json(repo / CAPS_FILE)
     args.freeze_plan = str(repo / FREEZE_PLAN)
     args.workers = core.WORKERS
@@ -1221,8 +1363,8 @@ def cmd_dry(args: argparse.Namespace) -> int:
     if analysis_path.is_file():
         data = core.read_record(analysis_path, "analysis")
         summary["status"] = data["result"]["assessment"]["status"]
-        summary["capacity"] = data["result"]["outcome"]["capacity"]["label"]
-        summary["efficiency"] = data["result"]["outcome"]["efficiency"]["label"]
+        summary["capacity"] = classes.printable(data["result"]["outcome"]["capacity"]["label"])
+        summary["efficiency"] = classes.printable(data["result"]["outcome"]["efficiency"]["label"])
     summary["report"] = str(run_dir / "results" / "RESULTS.md") if (run_dir / "results" / "results.json").is_file() else None
     summary["charged_seconds"] = core.Ledger.from_config(root).charged()
     write_json(root / "DRY_SUMMARY.json", summary)
@@ -1249,6 +1391,7 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--synthetic", default=None, help="project: the synthetic-registry record")
     p.add_argument("--projection", default=None, help="freeze: the projection record")
     p.add_argument("--freeze-plan", default=None, help="the frozen plan (set by the registered driver)")
+    p.add_argument("--freeze-plan-sha256", default=None, help="worker commands: the digest of the frozen plan the driver verified")
     p.add_argument("--freeze-dir", default=None, help="freeze: where plan.json and stage_caps.json are written")
     p.add_argument("--workers", type=int, default=core.WORKERS)
     p.add_argument("--stage-cap-seconds", type=float, default=None)
@@ -1264,8 +1407,9 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--seed-block", default="1", help="draws that carry the seed block, comma-separated (the plan decides in registered mode)")
     p.add_argument("--with-overload", action="store_true", help="calibrate: add the overload row's U_P calibration (4 runs)")
     p.add_argument("--throughput", action="store_true", help="timing: the throughput stage instead of the isolated CPU timing")
-    p.add_argument("--s0-status", default=fz.S0_NOT_DECIDED, help="freeze: S0's status line (K7(c))")
-    p.add_argument("--lane-status", default=fz.LANE_OMITTED_NO_INTERFACE, help="freeze: lane L's status")
+    p.add_argument("--s0-record", default=None, help="freeze: S0's recorded outcome (JSON: outcome, candidate, overload_qualified); S0's status line and lane L's status are derived from it")
+    p.add_argument("--generation-seconds", type=float, default=None, help="set-generation-cap: the cap in seconds (default: twice the rehearsal draw's measured time)")
+    p.add_argument("--generation-table-facts", type=int, default=None, help="set-generation-cap: the registered table size (32768 or 65536)")
     p.add_argument("--no-loaded-transitions", default="", help="freeze: transitions the human lead directed to run with no loaded row (comma-separated)")
     p.add_argument("--lane-l", action="store_true", help="freeze: enable lane L (refused: not implemented)")
     return p
@@ -1277,7 +1421,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
     gen = sub.add_parser("generate", parents=[common])
     gen.add_argument("--i-understand-freeze-time", action="store_true")
-    for name in ("calibrate", "rehearse", "gates", "timing", "synthetic", "project", "freeze", "train", "evaluate", "simulate", "analyze", "report"):
+    for name in ("calibrate", "rehearse", "gates", "timing", "synthetic", "project", "freeze", "set-generation-cap", "train", "evaluate", "simulate", "analyze", "report"):
         sub.add_parser(name, parents=[common])
     reg = sub.add_parser("registered", parents=[common])
     reg.add_argument("name", choices=REGISTERED_STAGES)
@@ -1291,10 +1435,18 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 COMMANDS: dict[str, Any] = {
-    "generate": cmd_generate, "calibrate": cmd_calibrate, "rehearse": cmd_rehearse, "gates": cmd_gates, "timing": cmd_timing, "synthetic": cmd_synthetic, "project": cmd_project, "freeze": cmd_freeze,
+    "generate": cmd_generate, "calibrate": cmd_calibrate, "rehearse": cmd_rehearse, "gates": cmd_gates, "timing": cmd_timing, "synthetic": cmd_synthetic, "project": cmd_project, "freeze": cmd_freeze, "set-generation-cap": cmd_set_generation_cap,
     "train": cmd_train, "evaluate": cmd_evaluate, "simulate": cmd_simulate, "analyze": cmd_analyze, "report": cmd_report, "registered": cmd_registered, "dry": cmd_dry,
 }  # fmt: skip
-DEFAULT_MODE = {"generate": CALIBRATION, "calibrate": CALIBRATION, "rehearse": REHEARSAL, "timing": REHEARSAL, "synthetic": REHEARSAL, "project": REHEARSAL, "freeze": REHEARSAL}
+DEFAULT_MODE = {"generate": CALIBRATION, "calibrate": CALIBRATION, "rehearse": REHEARSAL, "timing": REHEARSAL, "synthetic": REHEARSAL, "project": REHEARSAL, "freeze": REHEARSAL, "set-generation-cap": REHEARSAL}
+
+
+def verify_worker_plan(args: argparse.Namespace) -> None:
+    """A registered worker (other than the generator) runs only against the frozen plan the driver verified: ``--freeze-plan`` must hash to ``--freeze-plan-sha256``."""
+    if args.worker == "generate":
+        return
+    if not args.freeze_plan or not args.freeze_plan_sha256 or not Path(args.freeze_plan).is_file() or file_sha256(Path(args.freeze_plan)) != args.freeze_plan_sha256:
+        raise pool.StageRefused("refused: a registered worker needs the frozen plan and the digest the driver verified (--freeze-plan, --freeze-plan-sha256)")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1307,13 +1459,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.dry and args.mode == REGISTERED:
         print("refused: --dry cannot be combined with --mode registered", file=sys.stderr)
         return 2
+    if args.mode == REGISTERED and args.command not in ("registered", "work", "generate", "dry"):
+        print(f"P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `{args.command}`", file=sys.stderr)
+        return 2
     try:
         if args.command == "work":
+            if args.mode == REGISTERED:
+                verify_worker_plan(args)
             configure()
             return int(WORKERS[args.worker](args))
         if args.command == "dry":
             args.dry, args.mode = True, CALIBRATION
-        elif args.run_dir is None and args.command not in ("calibrate", "rehearse", "generate", "timing", "synthetic"):
+        elif args.run_dir is None and args.command not in ("calibrate", "rehearse", "generate", "timing", "synthetic", "set-generation-cap"):
             raise StageError("--run-dir is required")
         return int(COMMANDS[args.command](args))
     except (pool.StageRefused, core.LedgerRefused) as exc:

@@ -141,7 +141,7 @@ def _valid_plain(v: object) -> bool:
 
 
 def _valid_work(v: object) -> bool:
-    return isinstance(v, dict) and all(isinstance(k, str) and _is_number(x) for k, x in v.items())
+    return isinstance(v, dict) and all(_clean_name(k) and _is_number(x) for k, x in v.items())
 
 
 _REHEARSAL_VALIDATORS: dict[str, Callable[[Any], bool]] = {

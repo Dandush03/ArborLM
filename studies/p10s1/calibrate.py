@@ -6,7 +6,8 @@ Nothing here chooses a value by itself where the ADR leaves the choice to the hu
 a tie in the dense-rate choice (a difference below 0.02, which the ADR sends 'to the faster of the two' without defining it) raises ``TieNeedsLead``. Calibration accuracies are
 calibration, never results; they are read only from the calibration draws and panels.
 
-READINGS (printed with the record): the U_P check, H8's UNDERTRAINED flag and the overload row's U_P read raw accuracy (the ADR says 'accuracy'); loadedness reads i (section 8.2).
+Rulings (ADR-0021 section 22): the U_P check and H8's UNDERTRAINED flag read a_use ((j)); the overload row's U_P (item 0, row 4) reads a_use too (section 22.1); loadedness reads
+i (section 8.2); the dense rate's tie is the faster learner (M7).
 """
 
 from collections.abc import Mapping
@@ -35,8 +36,8 @@ def calibration_snapshots(cell: core.Cell) -> tuple[int, ...]:
         return core.load_snapshots(cell.slots, cell.run_updates, unit)
     if cell.facts == core.OVERLOAD_FACTS and cell.slots == 65536:
         return tuple(sorted(u for u in core.overload_candidates(unit) if u <= cell.run_updates))
-    if cell.arm == "D-OQ":
-        return tuple(sorted({unit, cell.run_updates}))
+    if cell.arm == "D-OQ":  # the doubling snapshots U_P/16 ... U_P (evaluation only, no added training) serve the faster-learner tie rule (ADR-0021 section 22 M7)
+        return core.snapshot_updates(unit, cell.run_updates)
     return (cell.run_updates,)
 
 
@@ -99,15 +100,36 @@ def h8_report(acc: Mapping[tuple[str, int, str], float]) -> dict[str, Any]:
     return {"undertrained_cells": sorted(low), "min_accuracy_of_undertrained": low}
 
 
-def select_dense_rate(min_accuracy: Mapping[float, float]) -> dict[str, Any]:
-    """Item 3: the rate with the higher minimum Panel A accuracy at U_P (minimum over the two draws). A difference below 0.02 between the best and another rate is a tie the ADR sends
-    to 'the faster of the two' without defining it: ``TieNeedsLead`` (the lead decides)."""
+def tie_snapshots(unit: int) -> tuple[int, ...]:
+    """U_P/2, U_P/4, U_P/8, U_P/16: the doubling grid the tie rule walks down (a snapshot below 1 update does not exist)."""
+    return tuple(unit // d for d in (2, 4, 8, 16) if unit % d == 0 and unit // d >= 1)
+
+
+def select_dense_rate(min_accuracy: Mapping[float, float], a_use: Mapping[float, Mapping[int, float]] | None = None, unit: int = core.U_P) -> dict[str, Any]:
+    """Item 3 with the lead's ruling (ADR-0021 section 22 M7): the rate with the higher minimum Panel A accuracy at U_P (minimum over the two draws). Among the rates within 0.02 of
+    the best, 'the faster' is the faster learner: compare a_use (``a_use[rate][update]``, minimum over the two draws, Panel A) at U_P/2, then U_P/4, down the doubling grid to
+    U_P/16; at the first snapshot where the contenders differ by at least 0.02 the higher wins (with more than two, those within 0.02 of the best there stay and the walk goes on);
+    if they differ nowhere, the smaller learning rate is taken. Missing trajectories for a tie raise ``TieNeedsLead`` (nothing is guessed)."""
     ordered = sorted(min_accuracy.items(), key=lambda kv: (-kv[1], kv[0]))
     best_rate, best = ordered[0]
-    contenders = [r for r, a in ordered if best - a < core.DENSE_TIE_DIFFERENCE - C.EPS]
-    if len(contenders) > 1:
-        raise TieNeedsLead(f"rates {sorted(contenders)} are within {core.DENSE_TIE_DIFFERENCE} in minimum Panel A accuracy at U_P: {C.READINGS['dense_rate_tie']}")
-    return {"rate": best_rate, "min_accuracy": dict(min_accuracy)}
+    contenders = sorted(r for r, a in ordered if best - a < core.DENSE_TIE_DIFFERENCE - C.EPS)
+    base = {"min_accuracy": {str(k): v for k, v in min_accuracy.items()}, "contenders": list(contenders)}
+    if len(contenders) == 1:
+        return {"rate": best_rate, "decided_by": "minimum Panel A accuracy at U_P", **base}
+    if a_use is None or any(r not in a_use for r in contenders):
+        raise TieNeedsLead(f"rates {contenders} are within {core.DENSE_TIE_DIFFERENCE} at U_P and the doubling-snapshot a_use records the tie rule needs are missing")
+    walked: list[dict[str, Any]] = []
+    for u in tie_snapshots(unit):
+        if any(u not in a_use[r] for r in contenders):
+            raise TieNeedsLead(f"the doubling snapshot {u} is missing for a tied rate")
+        vals = {r: a_use[r][u] for r in contenders}
+        walked.append({"update": u, "a_use": {str(r): v for r, v in vals.items()}})
+        top = max(vals.values())
+        if top - min(vals.values()) >= core.DENSE_TIE_DIFFERENCE - C.EPS:
+            contenders = sorted(r for r, v in vals.items() if top - v < core.DENSE_TIE_DIFFERENCE - C.EPS)
+            if len(contenders) == 1:
+                return {"rate": contenders[0], "decided_by": f"faster learner: a_use at {u}", "walk": walked, **base}
+    return {"rate": min(contenders), "decided_by": "smaller learning rate (no snapshot separates the tied rates by 0.02)", "walk": walked, **base}
 
 
 def overload_u_p(acc_foq: Mapping[tuple[int, int, str], float], acc_r2: Mapping[tuple[int, int, str], float], unit: int = core.U_P) -> dict[str, Any]:
@@ -150,22 +172,26 @@ def finalize(run_dir: Path, *, include_overload: bool = False, unit: int = core.
     for cell in core.u_p_check_cells(unit):
         obs = read_obs(run_dir, cell)
         for p in core.PANELS:
-            acc[(cell.arm, cell.name, cell.draw, p)] = obs[unit][p].accuracy
+            acc[(cell.arm, cell.name, cell.draw, p)] = obs[unit][p].a_use  # a_use, as REF uses (ADR-0021 section 22 (j))
     h8: dict[tuple[str, int, str], float] = {}
     for cell in core.h8_report_cells(unit):
         obs = read_obs(run_dir, cell)
         for p in core.PANELS:
-            h8[(cell.name, cell.draw, p)] = obs[unit][p].accuracy
+            h8[(cell.name, cell.draw, p)] = obs[unit][p].a_use
     dense_min: dict[int, dict[float, float]] = {}
+    dense_use: dict[int, dict[float, dict[int, float]]] = {}
     for cell in core.dense_rate_cells(unit):
         obs = read_obs(run_dir, cell)
         a = obs[unit]["A"].accuracy
         dense_min.setdefault(cell.slots, {})[cell.lr] = min(a, dense_min.get(cell.slots, {}).get(cell.lr, 1.0))
+        traj = dense_use.setdefault(cell.slots, {}).setdefault(cell.lr, {})
+        for u, per in obs.items():
+            traj[u] = min(per["A"].a_use, traj.get(u, 1.0))
     dense: dict[str, Any] = {}
     tie: str | None = None
     for slots, m in sorted(dense_min.items()):
         try:
-            dense[str(slots)] = select_dense_rate(m)
+            dense[str(slots)] = select_dense_rate(m, dense_use.get(slots), unit)
         except TieNeedsLead as exc:
             dense[str(slots)] = {"rate": None, "min_accuracy": {str(k): v for k, v in m.items()}, "tie": str(exc)}
             tie = str(exc)
@@ -177,12 +203,12 @@ def finalize(run_dir: Path, *, include_overload: bool = False, unit: int = core.
             obs = read_obs(run_dir, cell)
             for u, per in obs.items():
                 for p in core.PANELS:
-                    (f if cell.arm == "F-OQ" else r2)[(u, cell.draw, p)] = per[p].accuracy
+                    (f if cell.arm == "F-OQ" else r2)[(u, cell.draw, p)] = per[p].a_use  # a_use, as REF uses (section 22.1)
         overload = overload_u_p(f, r2, unit)
     out: dict[str, Any] = core.jsonable({
         **core.envelope("calibration"), "load": table, "load_decision": decision._asdict(), "cut3_eligible": cut3_eligibility(loaded), "u_p_check": u_p_check(acc), "h8": h8_report(h8),
         "dense_rates": {k: v for k, v in dense.items()}, "dense_tie_needs_lead": tie, "overload": overload, "readings": C.READINGS, "calibration_accuracy_note": "calibration accuracies are reported as calibration, never as results",
-        "returns_to_lead": _returns(decision, acc, overload, tie), "identity": core.code_identity(), "environment": core.environment(),
+        "returns_to_lead": _returns(decision, acc, overload, tie), "identity": core.code_identity(), "source_hashes": core.source_hashes(), "environment": core.environment(),
     })  # fmt: skip
     return out
 

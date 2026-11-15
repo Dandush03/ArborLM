@@ -156,6 +156,6 @@ def write_report(run_dir: Path, out_dir: Path, *, banner: str | None = None) -> 
     for p in paths:
         if p.exists():
             raise FileExistsError(p)
-    write_json(paths[0], {"study": core.STUDY, "kind": "results", "analysis": result, "banner": banner, "identity": record.get("identity"), "environment": record.get("environment")})
+    write_json(paths[0], {"study": core.STUDY, "kind": "results", "store_only_tag": core.STORE_ONLY_TAG, "tag_note": f"every class, label and outcome name in this file is {core.STORE_ONLY_TAG}; the structured fields hold the bare names, RESULTS.md prints each with its tag", "analysis": result, "banner": banner, "identity": record.get("identity"), "environment": record.get("environment")})
     paths[1].write_text(text, encoding="utf-8")
     return paths
