@@ -1,0 +1,10 @@
+Part 1: 2462636 P9-II records enumerated
+  rule-vs-table disagreements: none
+  C4 present, by P9-II outcome:
+       87680 ('ADDRESSING-RELIABLE', 'A4')
+      101680 ('ADDRESSING-RELIABLE', 'A5-C')
+       96680 ('ADDRESSING-RELIABLE', 'A5-D')
+       21920 ('ANSWER-ONLY RELIABLE', 'A4')
+       25420 ('ANSWER-ONLY RELIABLE', 'A5-C')
+       24170 ('ANSWER-ONLY RELIABLE', 'A5-D')
+  carried arm under 'ADDRESSING-RELIABLE AT 4,096 ONLY' (table says 'nothing is carried'): {'A0': 237544, None: 1187720}

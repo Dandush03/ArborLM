@@ -1,0 +1,32 @@
+{
+ "A": {
+  "impl": {
+   "facts": 128,
+   "correct": 108,
+   "a_use_count": 98,
+   "a_use": 0.765625,
+   "accuracy": 0.84375,
+   "information_bits": 3.0532999474995295
+  },
+  "auditor": {
+   "facts": 128,
+   "correct": 108,
+   "a_use_count": 98
+  }
+ },
+ "B": {
+  "impl": {
+   "facts": 128,
+   "correct": 108,
+   "a_use_count": 98,
+   "a_use": 0.765625,
+   "accuracy": 0.84375,
+   "information_bits": 3.0532999474995295
+  },
+  "auditor": {
+   "facts": 128,
+   "correct": 108,
+   "a_use_count": 98
+  }
+ }
+}
