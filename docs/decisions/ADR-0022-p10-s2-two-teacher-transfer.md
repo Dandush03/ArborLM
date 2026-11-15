@@ -930,3 +930,16 @@ Numbers and settings chosen in drafting and standing unless the lead changes the
 - Every throughput figure of §13.3; none is measured.
 - That enough in-vocabulary no-gold sources and gold-bearing identity groups exist; unknown until the files are read.
 - The six items listed under "Not applied verbatim" in §19.
+
+## Addendum to §18 — the human lead's standing permission for downloads (2026-11-15 UTC)
+
+Verbatim, in answer to the lead's request to confirm the package wheels with their sizes:
+
+> you don't have to ask for permission to download if the overall is less than 30gb
+
+The pending confirmation of the package wheels (§14.2, §16 order item 1, §18) is closed: the eight named packages and their resolver dependencies may be fetched, as may the files of §14.1 including the link files, within a running total below 30 GB kept in `docs/reviews/p10-design-2026-11-15/DOWNLOAD_LEDGER.md`. The lead's limits on its use of this permission are in `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`. The fallback teacher and data are still fetched only if the fallback is invoked, which stays a reserved decision. No download has been made at the time of this record; by §16 they follow the implementation on synthetic stand-ins and its audit.
+
+## Addendum by reference — combined tasks C1 and C2 and the strengthened COMPOSES rule (2026-11-15 UTC)
+
+`docs/decisions/ADR-0022-addendum-combined-tasks.md` defines the combined tasks C1 and C2 (which §6.4 named without a layout) and replaces the COMPOSES rule of §11.4 by a stronger one, by the human lead's decisions of 2026-11-15, approved by the human lead and adopted by the lead. It is part of this specification and governs where the two differ on those points. It adds the listed seed 220911 (gate G9) and scoring time charged inside R.
+

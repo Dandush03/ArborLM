@@ -1,0 +1,26 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ test_generate_script_and_freeze_readme ____________________
+
+>       assert not (ROOT / "studies" / "p9ii" / "freeze" / "plan.json").exists() and not (ROOT / "studies" / "p9ii" / "freeze" / "stage_caps.json").exists()
+E       AssertionError: assert (not True)
+E        +  where True = exists()
+E        +    where exists = ((((PosixPath('/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc') / 'studies') / 'p9ii') / 'freeze') / 'plan.json').exists
+
+tests/test_p9ii_prefreeze.py:466: AssertionError
+_______________ test_local_parquet_reader_preserves_text_exactly _______________
+
+tmp_path = PosixPath('/private/var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/pytest-of-daniellaloush/pytest-388/test_local_parquet_reader_pres0')
+
+>       import pyarrow
+E       ModuleNotFoundError: No module named 'pyarrow'
+
+tests/test_pilot.py:70: ModuleNotFoundError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_p9ii_prefreeze.py::test_generate_script_and_freeze_readme
+FAILED tests/test_pilot.py::test_local_parquet_reader_preserves_text_exactly
+2 failed, 1 warning in 0.37s

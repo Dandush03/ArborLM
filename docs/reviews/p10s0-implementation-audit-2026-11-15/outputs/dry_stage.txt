@@ -1,0 +1,37 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "generate-p10s0-test-0", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/generate-p10s0-test-0/manifest.json", "charged_seconds": 18.7}
+{"stage": "train-check", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-check/train-check/manifest.json", "charged_seconds": 3.0}
+{"stage": "evaluate-check", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-check/evaluate-check/manifest.json", "charged_seconds": 1.7}
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/gates/manifest.json", "charged_seconds": 12.1}
+{"stage": "rehearse", "status": "COMPLETE", "tasks": 24, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-rehearsal/rehearse/manifest.json", "charged_seconds": 16.2}
+{"stage": "train-q1", "status": "COMPLETE", "tasks": 10, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/train-q1/manifest.json", "charged_seconds": 57.8}
+{"stage": "evaluate-q1", "status": "COMPLETE", "tasks": 10, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/evaluate-q1/manifest.json", "charged_seconds": 24.7}
+{"candidate": null, "row": 3, "blocks": {"wx": {"run": false, "status": "NOT RUN \u2014 NO CANDIDATE"}, "probe": {"run": false, "status": "NOT RUN \u2014 NO CANDIDATE"}}}
+{"stage": "train-wx", "status": "COMPLETE", "tasks": 10, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/train-wx/manifest.json", "charged_seconds": 11.4}
+{"stage": "evaluate-wx", "status": "COMPLETE", "tasks": 10, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/evaluate-wx/manifest.json", "charged_seconds": 5.4}
+{"stage": "train-probe", "status": "COMPLETE", "tasks": 3, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/train-probe/manifest.json", "charged_seconds": 26.4}
+{"stage": "evaluate-probe", "status": "COMPLETE", "tasks": 3, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/evaluate-probe/manifest.json", "charged_seconds": 2.9}
+{"stage": "analyze", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/analyze/manifest.json", "charged_seconds": 1.4}
+{"stage": "report", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/report/manifest.json", "charged_seconds": 1.3}
+{
+ "run_dir": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run",
+ "banner": "DRY: tiny synthetic sizes, random synthetic backbone, test seeds; not a measurement of anything",
+ "stages": {
+  "generate": 0,
+  "check": 0,
+  "gates": 0,
+  "rehearse": 0,
+  "q1": 0,
+  "q1_gate": 0,
+  "wx": 0,
+  "probe": 0,
+  "analyze": 0,
+  "report": 0
+ },
+ "outcome": "INCONCLUSIVE",
+ "row": 3,
+ "report": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-implementation-audit/DRY-opus-auditor/root/P10S0DRY-run/results/RESULTS.md",
+ "charged_seconds": 183.00708208209835
+}
+uv run --locked --offline python -m studies.p10s0.stages dry --out-root   A5-  631.72s user 78.61s system 384% cpu 3:04.64 total

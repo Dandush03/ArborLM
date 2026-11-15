@@ -1,0 +1,66 @@
+{
+ "rows": [
+  {
+   "update": 1,
+   "loss_equal": true,
+   "max_param_diff": 3.725290298461914e-08
+  },
+  {
+   "update": 2,
+   "loss_equal": true,
+   "max_param_diff": 3.725290298461914e-08
+  },
+  {
+   "update": 3,
+   "loss_equal": true,
+   "max_param_diff": 3.725290298461914e-08
+  },
+  {
+   "update": 4,
+   "loss_equal": true,
+   "max_param_diff": 7.450580596923828e-08
+  },
+  {
+   "update": 5,
+   "loss_equal": true,
+   "max_param_diff": 1.126900315284729e-07
+  },
+  {
+   "update": 6,
+   "loss_equal": true,
+   "max_param_diff": 1.5273690223693848e-07
+  },
+  {
+   "update": 7,
+   "loss_equal": true,
+   "max_param_diff": 2.1047890186309814e-07
+  },
+  {
+   "update": 8,
+   "loss_equal": true,
+   "max_param_diff": 2.598389983177185e-07
+  },
+  {
+   "update": 9,
+   "loss_equal": true,
+   "max_param_diff": 3.026798367500305e-07
+  },
+  {
+   "update": 10,
+   "loss_equal": false,
+   "max_param_diff": 3.390014171600342e-07
+  },
+  {
+   "update": 11,
+   "loss_equal": true,
+   "max_param_diff": 3.7159770727157593e-07
+  },
+  {
+   "update": 12,
+   "loss_equal": true,
+   "max_param_diff": 4.637986421585083e-07
+  }
+ ],
+ "final_model_param_diff": 4.637986421585083e-07,
+ "trainer_params_not_the_model_params": []
+}

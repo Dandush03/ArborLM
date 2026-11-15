@@ -18,3 +18,69 @@ Recorded by the lead, with the limits the lead puts on its own use of this:
 - A cap is raised only **before that study's registered seeds are observed** (at the rehearsal's headroom check, or at a stage gate that reads time and memory only). It is never raised in response to a result, and never to add cells, arms, updates or replicates beyond what the specification registers.
 - Each raise is recorded in the study's ADR with the measured projection that required it, the old and new cap, and what it protects. Memory caps (3 GiB per worker, 18 GiB aggregate, and S2's own) are not hour caps and are not changed.
 - The human lead's words do not extend to downloads, cloud or paid services, models, data, thresholds or designs.
+
+## Downloads — standing permission (2026-11-15 UTC)
+
+The lead asked the human lead to confirm the S2 package wheels "at about 23 to 32 MB for the eight named packages, plus the dependencies the resolver pulls in". The human lead answered, verbatim:
+
+> you don't have to ask for permission to download if the overall is less than 30gb
+
+Recorded by the lead, with the limits the lead puts on its own use of this:
+
+- The lead may download what a specified P10 study needs without asking each time, while the **running total of all downloads made under this permission stays below 30 GB**. The total is kept in a download ledger in the repository (`docs/reviews/p10-design-2026-11-15/DOWNLOAD_LEDGER.md`: date, study, source, pinned revision or hash, licence, bytes, running total), written before a fetch is started and completed after it.
+- The S2 package wheels and their resolver dependencies are therefore approved; the pending confirmation is closed.
+- Unchanged: every file is named in a specification or its freeze requirements first; revisions are pinned and hashes and licences recorded; `pyproject.toml` and `uv.lock` do not change; no account, login, cloud or paid service; no model above the size limits of the study's ADR; nothing is executed from a download other than pinned packages and weights loaded by the specified loaders. A download that would take the total to 30 GB or more returns to the human lead.
+- The permission is about downloading. It approves no training, no run, no design change and no publication.
+
+## Running the P10 studies at the same time (2026-11-15 UTC)
+
+Looking at the task list, the human lead wrote, verbatim:
+
+> can you keep nextime which p is running like the last Opus audit of S0 should say P10-S0 so i can follow them and also i would expect to see more process running in parallel since each P10-S have many divergent to cover on each case, make sure to maximize the time by using the m5 capabilities
+
+Recorded by the lead:
+
+- **Naming.** Every delegated task and background job carries its study code first ("P10-S0: …").
+- **Concurrency.** This answers the question ADR-0020 §17 item 4 reserved ("whether S0's blocks may overlap S1's and S2's training on the machine"): they may. It replaces item 3 of the order in `EXECUTION_PLAN.md` ("registered stages do not overlap").
+- **The lead's conditions for overlapping compute stages** (the lead's, so that a faster schedule changes no result):
+  1. A study's rehearsal is measured under the load it will run under: if its registered stages are to share the machine, the rehearsal runs with the other studies' worker counts busy (ADR-0020 §10.3 already rehearses "under 12 busy processes"), and the twofold headroom rule is applied to those loaded rates.
+  2. The machine has 18 cores and 48 GiB. CPU studies keep their registered six single-thread workers each (S0 and S1 side by side use 12 cores); S2 trains on the GPU. The sum over concurrently running studies of twice their rehearsed peak memory must stay within 40 GiB; each study's own per-worker and aggregate limits are unchanged.
+  3. Stages whose measurement is the time itself (S1's throughput and cost timing; any timing benchmark) run alone, as their ADRs say.
+  4. Charged hours are counted per study as before; running side by side does not merge budgets.
+  5. Reviews and audits are split by dimension into parallel reviewer contexts where the parts are independent.
+
+## S2's composition rule is strengthened (2026-11-15 UTC)
+
+The lead reported that ADR-0022's registered COMPOSES rule (§11.4) compares raw scores, so an arm that adds nothing could satisfy it, and that the lead had left the rule unchanged and printed the untrained student's score beside it. The human lead answered, verbatim:
+
+> let's strenght the registerd rule, the ost is aceptable
+
+Recorded by the lead:
+
+- **The COMPOSES rule of ADR-0022 §11.4 is strengthened by the human lead's decision**, before any S2 calibration, rehearsal or registered record exists. The new rule measures each answer's gain over the untrained student inside the combined task against its gain in the single task, on the same sentences, and requires both answers to pass; its exact text is fixed in the combined-tasks addendum after an independent check.
+- "The cost is acceptable" is read as covering the added scoring time of the combined tasks (projected by the drafter at about 3 to 12 hours of charged time for four replicates, unchecked), within the hour-cap delegation already recorded.
+- The composition lines stay descriptive: they enter no gate, class or TRANSFER label.
+
+### The human lead's agreement with the proposed rule (2026-11-15 UTC)
+
+The lead described the proposed rule to the human lead: for each of the two answers, the arm's gain over the untrained student inside the combined task as a fraction of its gain on the same sentences in the single task; each answer must keep at least 0.80 of its single-task gain; COMPOSES only if every training order and replicate passes; DOES NOT COMPOSE if some answer keeps less than half its gain in every replicate of an order; otherwise inconclusive; the replaced rule still printed beside it. The lead also stated two assumptions: the line stays descriptive and does not feed the transfer label; "the cost is acceptable" covers the added scoring time. The human lead answered, verbatim:
+
+> agree with your proposed rule
+
+Recorded by the lead: the rule as described is approved by the human lead in substance. Its exact text is still subject to the independent check in progress; anything the check changes beyond wording is reported to the human lead before the addendum is adopted. The two stated assumptions were not objected to and stand.
+
+### The human lead's confirmation of the two tightenings (2026-11-15 UTC)
+
+After the independent check (Opus 5.5) of the combined-tasks addendum, the lead put two tightenings of the strengthened rule to the human lead, recommending both: (1) the rule is read only if the teacher's gap on the combined-evaluation sentences is at least 0.30 and the arm's single-task gap closed on them is at least 0.50, otherwise NOT_EVALUATED; (2) the floor subtracted in the numerator is the larger of the untrained student's combined and single-task scores for that answer. The lead asked: "Do you confirm the two tightenings? If you'd rather keep the rule exactly as you agreed it, I'll strike them." The human lead answered, verbatim:
+
+> I agree with your recommendation
+
+Recorded by the lead: both tightenings are confirmed. The thresholds the human lead agreed earlier (0.80 to pass; below 0.50 for DOES NOT COMPOSE) are unchanged. The lead's own design choices reported in the same message (C1 alternates the order of the two languages; the adapter baseline on C2 switches adapters per answer) were not objected to and stand as the lead's choices.
+
+### The human lead's approval of the combined-tasks addendum (2026-11-15 UTC)
+
+Verbatim:
+
+> I've read P10-S2 cobined task done please continue with simulations, consider it as approved
+
+Recorded by the lead: the combined-tasks addendum to ADR-0022 (tasks C1 and C2 and the strengthened COMPOSES rule with its two tightenings) is approved by the human lead. The lead adopts the final text into ADR-0022 once the drafting context has removed the "pending confirmation" marks, without a further question. "Continue with simulations" is read as the direction to proceed with the P10 calibrations, rehearsals and registered runs under the delegations already recorded; it waives no audit, freeze or headroom rule.

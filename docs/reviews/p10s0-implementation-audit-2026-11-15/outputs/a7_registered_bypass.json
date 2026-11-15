@@ -1,0 +1,25 @@
+{
+ "registered_q1_parses_with_overrides": true,
+ "stage_cap_given_frozen_100s": 1000000000.0,
+ "limits": {
+  "rss_worker_bytes": 1000000000000,
+  "rss_aggregate_bytes": 10000000000000,
+  "workers": 6
+ },
+ "synthetic_backbone_in_registered_mode": true,
+ "ledger_root": "/var/folders/2b/_2nc4jtn7y112_djncqgg_xw0000gn/T/tmpo3sz82v7/fresh-ledger",
+ "typed_train_mode": "registered",
+ "typed_train_reached_pool": {
+  "tasks": 190,
+  "stage_cap_seconds": 50000.0,
+  "rss_worker_bytes": 1000000000000,
+  "workers": {
+   "train": 6,
+   "evaluate": 6,
+   "analyze": 1
+  },
+  "first_argv_has_synthetic": true
+ },
+ "typed_train_called_load_plan": 0,
+ "typed_train_wrote_q1_start": false
+}
