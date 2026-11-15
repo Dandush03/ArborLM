@@ -242,12 +242,17 @@ def test_source_hashes_cover_every_imported_module_and_script() -> None:
 
 def test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched() -> None:
     status = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"], capture_output=True, text=True, check=True).stdout.splitlines()
-    protected = ("src/", "uv.lock", "pyproject.toml", "studies/p9", "supplements/", "docs/decisions/", "experiments/")
-    own = ("studies/p10s1/", "configs/p10s1_capacity.toml", "tests/test_p10s1_", "docs/decisions/ADR-0021")
-    touched = [line for line in status if line[3:].startswith(protected) and not line[3:].startswith(own)]
-    assert not touched, touched  # only the paths P1-P9 own are checked: an unrelated untracked file (a review folder, results) does not fail the test (audit m5)
-    other_configs = [line for line in status if line[3:].startswith("configs/") and not line[3:].startswith(own)]
-    assert not other_configs, other_configs
+    own = ("studies/p10s1/", "configs/p10s1_capacity.toml", "tests/test_p10s1_", "docs/decisions/ADR-0021", "docs/reviews/p10s1-")
+    protected = ("src/", "uv.lock", "pyproject.toml", "studies/", "supplements/", "docs/", "experiments/", "results/", "tests/", "configs/", "AGENTS.md", "CLAUDE.md")
+
+    def path_of(line: str) -> str:
+        return line[3:].strip().strip('"').split(" -> ")[-1]
+
+    # every tracked change (modified, deleted, renamed, added) outside the study's own paths fails, wherever it is; an untracked file fails only under a protected prefix, and the study's own
+    # paths, its review folder and ADR-0021 are exempt (an untracked review folder elsewhere under docs/ is not an edit of an existing file; audit m5 and re-check N5)
+    edited = [line for line in status if not line.startswith("??") and not path_of(line).startswith(own)]
+    added = [line for line in status if line.startswith("??") and path_of(line).startswith(protected) and not path_of(line).startswith((*own, "docs/reviews/"))]
+    assert not edited and not added, (edited, added)
     text = " ".join(p.read_text() for p in (ROOT / "studies" / "p10s1").glob("*.py"))
     assert "monkeypatch" not in text.replace("no monkeypatching", "") and "setattr(p9" not in text and "mock.patch" not in text
 

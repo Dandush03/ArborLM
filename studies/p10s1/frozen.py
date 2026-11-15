@@ -71,10 +71,20 @@ def matmul_madds_per_update(arm: str, slots: int, batch: int = BATCH_CONTEXTS) -
     return backbone_madds(batch)["total"] + memory_madds(arm, slots, batch)
 
 
+def gather_madds(arm: str, slots: int, batch: int = BATCH_CONTEXTS) -> int:
+    """The gather-weighted sum of the value read, ``(weights[..., None] * table[chosen]).sum(-2)``, which torch's FLOP counter does not see (ADR-0021 section 22.1): per query and value
+    width, 3 x 8 reads for F-OQ and T-OQ (forward and both gradients), 2 x 8 for H8, 2 x 1 for R2, none for D-OQ."""
+    q = core.ANSWER_SITES_PER_CONTEXT * batch
+    reads = {"F-OQ": 3 * 8, "T-OQ": 3 * 8, "H8": 2 * 8, "R2": 2 * 1, "D-OQ": 0}
+    if arm not in reads:
+        raise ValueError(f"unknown arm {arm!r}")
+    return q * reads[arm] * core.HIDDEN_WIDTH
+
+
 def analytic_madds_per_update(arm: str, slots: int) -> float:
     """The whole-update multiply-add count of section 5.4 as the lead ruled it (ADR-0021 section 22, M6): the frozen backbone's forward and backward every arm pays, the arm's matrix
-    products, and 4 x trainable parameters for AdamW. Written out in the config (``core.MADDS_FORMULA``)."""
-    return float(matmul_madds_per_update(arm, slots) + ANALYTIC_OPTIMIZER_MADDS * trainable_parameters(arm, slots))
+    products, the gather-weighted sum of the value read (``gather_madds``), and 4 x trainable parameters for AdamW. Written out in the config (``core.MADDS_FORMULA``)."""
+    return float(matmul_madds_per_update(arm, slots) + gather_madds(arm, slots) + ANALYTIC_OPTIMIZER_MADDS * trainable_parameters(arm, slots))
 
 
 def cost_table(cpu_per_update: dict[tuple[str, int], float]) -> dict[str, dict[str, dict[str, float]]]:
@@ -231,10 +241,10 @@ def lane_l_status(s0_outcome: str | None, candidate: str | None = None, overload
 
 def s0_status_and_lane(record: Mapping[str, Any] | None) -> tuple[str, str, bool]:
     """From S0's recorded outcome at the freeze (``{"outcome": ..., "candidate": ..., "overload_qualified": bool}``; None when S0 has no outcome): S0's status line (K7(c)), lane L's status, and
-    whether the question returns to the lead (ADR-0021 section 22 (b): S0 qualified an interface before the freeze and the lane would run; nothing is printed OMITTED in that case)."""
+    whether the question returns to the lead (ADR-0021 section 22 (b) and the lead's ruling P1: S0 qualified ANY interface before the freeze, whether or not the lane would run; nothing is printed OMITTED in that case)."""
     if record is None:
         return S0_NOT_DECIDED, LANE_OMITTED_NO_INTERFACE, False
     outcome = record.get("outcome")
     status = f"S0 {outcome}" if outcome else S0_NOT_DECIDED
     lane = lane_l_status(outcome, record.get("candidate"), bool(record.get("overload_qualified")))
-    return status, lane, lane == LANE_WOULD_RUN
+    return status, lane, outcome in (LANE_QUALIFIED_BOTH, LANE_QUALIFIED_4096)  # any qualified interface before the freeze returns to the lead, whether or not the lane would run (lead's ruling P1)

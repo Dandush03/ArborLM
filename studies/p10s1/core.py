@@ -851,9 +851,11 @@ MADDS_FORMULA = (
     "backbone backward (weights frozen: input gradients through block 1 and the output head only, the two attention products twice): "
     "B (T 32 96 + T 32 32 + 2 T 32 64 + 4 (4 T T 8) + T 32 256). "
     "arm: F-OQ 2 Q N 16 + 3 Q 32 32; T-OQ 2 Q (N/256 16 + 512 16) + 3 Q 32 32; H8 and R2 3 Q 32 32; D-OQ 2 Q 16 h + 3 Q h 32. "
+    "plus the gather-weighted sum of the value read, Q 32 x (3 x 8 for F-OQ and T-OQ, 2 x 8 for H8, 2 x 1 for R2, 0 for D-OQ), which torch's counter does not see; "
     "plus 4 x trainable parameters for the AdamW update (elementwise). The matmul terms equal torch's FLOP counter / 2 (a test)"
 )
-GENERATION_DEFAULT = {"cap_seconds": 1800.0, "provisional": True, "table_facts": FACT_TABLE}
+GENERATION_SOURCES = ("provisional", "measured", "typed")
+GENERATION_DEFAULT: dict[str, Any] = {"cap_seconds": 1800.0, "provisional": True, "table_facts": FACT_TABLE, "source": "provisional", "measured_seconds": 0.0, "manifest_sha256": ""}
 
 
 def registered_config(cap_hours: float = CAP_HOURS_DEFAULT, generation: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -878,7 +880,7 @@ def registered_config(cap_hours: float = CAP_HOURS_DEFAULT, generation: Mapping[
         "robustness": {"dropout": list(ROBUSTNESS_DROPOUT), "noise": list(ROBUSTNESS_NOISE), "masks": ROBUSTNESS_MASKS},
         "timing": {"warmup_updates": TIMING_WARMUP_UPDATES, "updates": TIMING_UPDATES, "repeats": TIMING_REPEATS, "load_average_max": LOAD_AVERAGE_MAX, "retries": TIMING_RETRIES, "throughput_batches": list(THROUGHPUT_BATCHES), "throughput_repeats": THROUGHPUT_REPEATS, "throughput_cv_max": THROUGHPUT_CV_MAX, "rehearsal_updates": REHEARSAL_UPDATES},
         "cost": {"madds_formula": MADDS_FORMULA},
-        "generation": dict(generation or GENERATION_DEFAULT),
+        "generation": {**GENERATION_DEFAULT, **dict(generation or {})},
         "resources": {"cap_hours": float(cap_hours), "rss_worker_bytes": RSS_WORKER_BYTES, "rss_aggregate_bytes": RSS_AGGREGATE_BYTES, "workers": WORKERS, "headroom": HEADROOM},
     }  # fmt: skip
 
@@ -890,7 +892,9 @@ def validate_config(data: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("P10S1 config: resources.cap_hours must be a positive float")
     gen = data.get("generation")
     if not isinstance(gen, dict) or set(gen) != set(GENERATION_DEFAULT):
-        raise ValueError("P10S1 config: [generation] needs cap_seconds, provisional and table_facts")
+        raise ValueError(f"P10S1 config: [generation] needs {', '.join(GENERATION_DEFAULT)}")
+    if gen["source"] not in GENERATION_SOURCES or not isinstance(gen["measured_seconds"], float) or not isinstance(gen["manifest_sha256"], str):
+        raise ValueError("P10S1 config: generation.source is provisional, measured or typed; measured_seconds a float; manifest_sha256 a string")
     if not isinstance(gen["cap_seconds"], float) or not math.isfinite(gen["cap_seconds"]) or gen["cap_seconds"] <= 0 or not isinstance(gen["provisional"], bool) or gen["table_facts"] not in (FACT_TABLE, OVERLOAD_FACTS):
         raise ValueError("P10S1 config: generation.cap_seconds a positive float, provisional a boolean, table_facts 32768 or 65536")
     _validate(data, registered_config(cap, gen), "P10S1 config")

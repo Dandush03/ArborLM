@@ -208,7 +208,7 @@ def finalize(run_dir: Path, *, include_overload: bool = False, unit: int = core.
     out: dict[str, Any] = core.jsonable({
         **core.envelope("calibration"), "load": table, "load_decision": decision._asdict(), "cut3_eligible": cut3_eligibility(loaded), "u_p_check": u_p_check(acc), "h8": h8_report(h8),
         "dense_rates": {k: v for k, v in dense.items()}, "dense_tie_needs_lead": tie, "overload": overload, "readings": C.READINGS, "calibration_accuracy_note": "calibration accuracies are reported as calibration, never as results",
-        "returns_to_lead": _returns(decision, acc, overload, tie), "identity": core.code_identity(), "source_hashes": core.source_hashes(), "environment": core.environment(),
+        "returns_to_lead": _returns(decision, acc, overload, tie), "dry": unit != core.U_P, "identity": core.code_identity(), "source_hashes": core.source_hashes(), "environment": core.environment(),
     })  # fmt: skip
     return out
 

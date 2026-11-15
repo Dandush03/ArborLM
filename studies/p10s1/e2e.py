@@ -131,7 +131,7 @@ def run_e2e(workdir: Path, source: Path | None = None) -> dict[str, Any]:
         r.run("probe: gates.sh before Decision 2", ["sh", "studies/p10s1/launch/gates.sh", str(run_dir), freeze], expect=2)
         decision = clone / "results" / "p10s1-freeze-e2e" / "DECISION_2.md"
         decision.parent.mkdir(parents=True, exist_ok=True)
-        decision.write_text(f"# Decision 2 (end-to-end exercise on test seeds)\n\nFreeze commit: {freeze}\n\nThis file stands in for the lead's recorded decision in the exercise; it decides nothing.\n", encoding="utf-8")
+        decision.write_text(f"# Decision 2 (end-to-end exercise on test seeds)\n\nFreeze commit: {freeze}\n\nDECISION: RUN\n\nThis file stands in for the lead's recorded decision in the exercise; it decides nothing.\n", encoding="utf-8")
         r.git("add decision 2", "add", "-A")
         r.git("commit decision 2", "commit", "--quiet", "-m", "e2e: decision 2 record")
         r.run("probe: typed stage cap", stages("registered", "gates", "--run-dir", str(run_dir), "--freeze-commit", freeze, "--stage-cap-seconds", "999999"), expect=2)

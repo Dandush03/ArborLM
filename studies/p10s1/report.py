@@ -55,7 +55,12 @@ def _capacity_table(cap: dict[str, Any]) -> list[str]:
     for arm, info in cap["arms"].items():
         cells = [f"{show(cap['steps'][arm][s]['class'])}; " + ", ".join(show(v) for v in cap["steps"][arm][s]["verdicts"]) for s in steps]
         extra = " UNDERTRAINED-AT-U_P" if arm == "H8" and info.get("undertrained_h8") else ""
-        lines.append(_row(arm, show(info["class"]) + extra, show(info["dense"]), info.get("work_label") or "n/a", *cells))
+        dense = show(info["dense"])
+        if "NOT ESTABLISHED AT MATCHED COMPUTE" in info["dense"]:  # the matched-updates comparison is printed beside the label (ADR-0021 section 22 M5)
+            dense += " — " + (" ".join(info["dense_detail"].get("mu_text") or []) or "no matched-updates comparison available").replace("|", "/")
+        if info.get("dense_matches_sentence"):  # the DENSE MATCHES sentence, verbatim, wherever that reading is established
+            dense += " — " + str(info["dense_matches_sentence"]).replace("|", "/")
+        lines.append(_row(arm, show(info["class"]) + extra, dense, info.get("work_label") or "n/a", *cells))
     return lines
 
 

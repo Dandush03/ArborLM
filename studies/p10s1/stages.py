@@ -294,6 +294,8 @@ def common_args(args: argparse.Namespace) -> list[str]:
         out.append("--dry")
     if args.synthetic_backbone:
         out.append("--synthetic-backbone")
+    if args.freeze_commit:
+        out += ["--freeze-commit", args.freeze_commit]  # a registered worker re-checks the freeze commit, the plan and Decision 2 itself
     if args.freeze_plan:
         out += ["--freeze-plan-sha256", file_sha256(Path(args.freeze_plan))]  # a registered worker checks the plan file against the digest the driver verified
     for flag, value in (("--calibration", args.calibration), ("--freeze-plan", args.freeze_plan), ("--timing", args.timing), ("--overload-u-p", args.overload_u_p), ("--updates", args.updates), ("--item", None)):
@@ -1015,6 +1017,14 @@ def read_rehearsal(run_dir: Path, plan: core.Plan) -> tuple[budget.Rates, dict[i
     return rates, baselines
 
 
+def rehearsal_generate_manifest(run_dir: Path) -> Path | None:
+    """The stage manifest the rehearsal draw's generation time is read from."""
+    for path in sorted(run_dir.glob("generate-*/manifest.json")):
+        if any(t["status"] == "completed" for t in core.read_record(path, "stage_manifest")["tasks"]):
+            return path
+    return None
+
+
 def rehearsal_generate_seconds(run_dir: Path) -> float | None:
     """Wall seconds of the rehearsal draw's generation and G1 (the generate stage manifest of the rehearsal directory), None when it is not recorded."""
     for path in sorted(run_dir.glob("generate-*/manifest.json")):
@@ -1031,17 +1041,21 @@ def cmd_set_generation_cap(args: argparse.Namespace) -> int:
     and without ``--seconds`` it refuses."""
     config = repo_of(args) / core.DEFAULT_CONFIG
     current = core.load_config(config)
+    provenance: dict[str, Any]
     if args.generation_seconds is not None:
         cap = float(args.generation_seconds)
+        provenance = {"source": "typed", "measured_seconds": 0.0, "manifest_sha256": ""}  # recorded as typed: the freeze refuses it (outside the test switch)
     else:
+        manifest = rehearsal_generate_manifest(Path(args.run_dir)) if args.run_dir else None
         measured = rehearsal_generate_seconds(Path(args.run_dir)) if args.run_dir else None
-        if measured is None:
+        if measured is None or manifest is None:
             raise pool.StageRefused("refused: no measured generation time (give the rehearsal directory with --run-dir, or --generation-seconds)")
         cap = float(math.ceil(2.0 * measured / 10.0) * 10)
+        provenance = {"source": "measured", "measured_seconds": float(measured), "manifest_sha256": file_sha256(manifest)}
     facts = int(args.generation_table_facts or current["generation"]["table_facts"])
-    config.write_text(core.render_config_toml(float(current["resources"]["cap_hours"]), {"cap_seconds": cap, "provisional": False, "table_facts": facts}), encoding="utf-8")
+    config.write_text(core.render_config_toml(float(current["resources"]["cap_hours"]), {"cap_seconds": cap, "provisional": False, "table_facts": facts, **provenance}), encoding="utf-8")
     core.load_config(config)
-    print(json.dumps({"config": str(config), "generation_cap_seconds": cap, "table_facts": facts, "provisional": False}))
+    print(json.dumps({"config": str(config), "generation_cap_seconds": cap, "table_facts": facts, "provisional": False, **provenance}))
     return 0
 
 
@@ -1091,7 +1105,7 @@ def cmd_project(args: argparse.Namespace) -> int:
         "memory": budget.memory_headroom(rates), "baseline_seconds": {str(k): v for k, v in baselines.items()}, "returns_to_lead": returns, "overload_u_p": overload, "dense_rates": {str(k): v for k, v in dense_rates.items()},
         "generation": {"rehearsal_g1_seconds": gen_seconds, "five_draws_seconds": None if gen_seconds is None else core.REPLICATES * gen_seconds, "note": "five times the generation and G1 time measured on the rehearsal draw, charged before the freeze"},
         "h8_undertrained": cal["h8"]["undertrained_cells"], "eligible_doq_cuts": cal["cut3_eligible"], "cap_seconds": core.cap_seconds(repo_of(args) / core.DEFAULT_CONFIG if args.repo else None),
-        "environment": core.environment(),
+        "environment": core.environment(), "identity": core.code_identity(), "source_hashes": core.source_hashes(),
     }  # fmt: skip
     ledger = core.Ledger.from_config(ledger_root(args), repo_of(args) / core.DEFAULT_CONFIG if args.repo else None)
     record["charged_seconds"] = ledger.charged()
@@ -1129,10 +1143,12 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     s0_record = read_json(Path(args.s0_record)) if args.s0_record else None
     s0_status, lane_status, lane_returns = fz.s0_status_and_lane(s0_record)
     if lane_returns:
-        raise pool.StageRefused("refused: S0 has qualified an interface before the freeze, so lane L would run: this returns to the human lead (ADR-0021 section 22 (b)); nothing is frozen")
+        raise pool.StageRefused("refused: S0 has qualified an interface before the freeze: this returns to the human lead whether or not lane L would run (ADR-0021 section 22 (b), ruling P1); nothing is frozen")
     generation = core.generation_settings(repo_of(args) / core.DEFAULT_CONFIG)
     if generation["provisional"] and not args.dry:
         raise pool.StageRefused("refused: the generation cap in the config is still provisional: the registered generation ran under a value the rehearsal never set")
+    if generation["source"] == "typed" and not (args.dry or core.test_switch()):
+        raise pool.StageRefused("refused: the generation cap in the config was typed, not measured from the rehearsal draw's generate manifest (set-generation-cap --run-dir)")
     run_dir = Path(args.run_dir)
     proj_dir = Path(args.projection).parent
     proj = core.read_record(Path(args.projection), "projection")
@@ -1153,6 +1169,14 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         manifests[name] = file_sha256(p)
     cal = core.read_record(Path(args.calibration), "calibration")
     plan = core.Plan.from_json(proj["chosen"]["plan"])
+    if not (args.dry or core.test_switch()):  # a registered freeze rests on real-size, non-DRY records with no open return to the lead (re-check N2)
+        marked = [name for name, rec in (("projection", proj), ("calibration", cal), ("timing", core.read_record(Path(args.timing), "timing")), ("rehearsal gates", core.read_record(Path(args.gates), "gates"))) if rec.get("dry") is True]
+        if marked:
+            raise pool.StageRefused(f"refused: DRY record(s) cannot be frozen for the registered run: {', '.join(marked)}")
+        if plan.unit != core.U_P:
+            raise pool.StageRefused(f"refused: the plan's unit is {plan.unit}, not U_P = {core.U_P}")
+        if cal.get("returns_to_lead", ["the record names none"]):
+            raise pool.StageRefused(f"refused: the calibration has open returns to the human lead: {cal.get('returns_to_lead', 'no returns_to_lead field')}")
     if int(generation["table_facts"]) != plan.table_facts and not args.dry:
         raise pool.StageRefused(f"refused: the registered draws were generated with {generation['table_facts']} facts (config) but the plan needs {plan.table_facts}")
     cpu = {(k.split("|")[0], int(k.split("|")[1])): float(v) for k, v in proj["cpu_per_update"].items()}
@@ -1191,6 +1215,8 @@ def identity_drift(repo: Path, records: Mapping[str, Mapping[str, Any]]) -> dict
             continue
         parts = sorted(k for k in now if identity.get(k) != now[k])
         files = sorted(f for f in set(hashes) | set(record.get("source_hashes") or {}) if (record.get("source_hashes") or {}).get(f) != hashes.get(f)) if record.get("source_hashes") else None
+        named = {"config_sha256": str(core.DEFAULT_CONFIG), "spec_sha256": core.SPEC, "frozen_source_sha256": "src/arborlm (the P8 frozen source digest)"}
+        files = None if files is None and not parts else [*(files or []), *(named[k] for k in parts if k in named)]
         out[name] = {"equal": not parts, "parts_differing": parts, "files_changed": files if parts else []}
     return out
 
@@ -1221,6 +1247,12 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
     for key in ("calibration", "projection", "timing", "rehearsal_gates", "synthetic"):
         check(Path(plan[key]["path"]), plan[key]["sha256"], f"{key} record")
     check(repo / CAPS_FILE, plan["stage_caps_sha256"], "stage-cap table")
+    if not core.test_switch():  # outside the test switch the plan is a real-size plan on non-DRY records (re-check N2)
+        for key in ("calibration", "projection", "timing", "rehearsal_gates"):
+            if read_json(Path(plan[key]["path"])).get("dry") is True:
+                raise pool.StageRefused(f"refused: the frozen {key} record is marked DRY")
+        if fz.Frozen.from_json(plan["frozen"]).plan.unit != core.U_P:
+            raise pool.StageRefused(f"refused: the frozen plan's unit is not U_P = {core.U_P}")
     if Path(plan["run_dir"]).resolve() != run_dir.resolve():
         raise pool.StageRefused(f"refused: the freeze names the run directory {plan['run_dir']}, not {run_dir}")
     if set(plan["data_manifests"]) != set(core.draw_names()):
@@ -1262,6 +1294,8 @@ def refuse_overrides(args: argparse.Namespace, *, allowed: Sequence[str]) -> Non
 
 
 DECISION_2_GLOB = "results/p10s1-freeze-*/DECISION_2.md"
+DECISION_RUN_LINE = "DECISION: RUN"
+DECISION_NO_RUN_LINE = "DECISION: DO NOT RUN"
 
 
 def require_decision_2(repo: Path, freeze_commit: str) -> str:
@@ -1271,9 +1305,10 @@ def require_decision_2(repo: Path, freeze_commit: str) -> str:
     tracked = [p for p in git(repo, "ls-tree", "-r", "--name-only", "HEAD", "--", "results").stdout.decode().split("\n") if fnmatch.fnmatch(p, DECISION_2_GLOB)]
     for name in tracked:
         text = git(repo, "show", f"HEAD:{name}").stdout.decode("utf-8", "replace")  # the committed content, not the working file
-        if full and full in text:
+        lines = {line.strip() for line in text.splitlines()}
+        if full and full in text and DECISION_RUN_LINE in lines and DECISION_NO_RUN_LINE not in lines:
             return name
-    raise pool.StageRefused(f"refused: no committed {DECISION_2_GLOB} names the freeze commit {full or freeze_commit}: Decision 2 is recorded there before anything registered runs")
+    raise pool.StageRefused(f"refused: no committed {DECISION_2_GLOB} contains the line '{DECISION_RUN_LINE}' (and not '{DECISION_NO_RUN_LINE}') and the full freeze commit {full or freeze_commit}: Decision 2 is recorded there before anything registered runs")
 
 
 def cmd_registered(args: argparse.Namespace) -> int:
@@ -1441,12 +1476,26 @@ COMMANDS: dict[str, Any] = {
 DEFAULT_MODE = {"generate": CALIBRATION, "calibrate": CALIBRATION, "rehearse": REHEARSAL, "timing": REHEARSAL, "synthetic": REHEARSAL, "project": REHEARSAL, "freeze": REHEARSAL, "set-generation-cap": REHEARSAL}
 
 
+WORKER_GENERATE_ALLOWED = ("run_dir", "mode", "draw", "experiments_root", "seed_block", "labels", "item", "worker")
+
+
 def verify_worker_plan(args: argparse.Namespace) -> None:
-    """A registered worker (other than the generator) runs only against the frozen plan the driver verified: ``--freeze-plan`` must hash to ``--freeze-plan-sha256``."""
+    """Every registered worker re-checks what the driver checked, so none can be started by hand (ADR-0021 section 22 M3, re-check N1 and N8). A worker other than the generator needs the
+    frozen plan at ``studies/p10s1/freeze/plan.json`` (not a typed file), a freeze commit, a clean tree that equals that commit, a plan that verifies and a Decision 2 that names the commit
+    (``check_preconditions``, ``verify_plan``, ``require_decision_2``). The generator precedes the freeze: it refuses a provisional generation cap and any override."""
+    repo = core.repo_root()
     if args.worker == "generate":
+        refuse_overrides(args, allowed=WORKER_GENERATE_ALLOWED)
+        if core.generation_settings(repo / core.DEFAULT_CONFIG)["provisional"]:
+            raise pool.StageRefused("refused: the generation cap in the config is provisional; the registered generation does not run under it")
         return
-    if not args.freeze_plan or not args.freeze_plan_sha256 or not Path(args.freeze_plan).is_file() or file_sha256(Path(args.freeze_plan)) != args.freeze_plan_sha256:
-        raise pool.StageRefused("refused: a registered worker needs the frozen plan and the digest the driver verified (--freeze-plan, --freeze-plan-sha256)")
+    if not args.freeze_plan or Path(args.freeze_plan).resolve() != (repo / FREEZE_PLAN).resolve():
+        raise pool.StageRefused(f"refused: a registered worker runs only against {FREEZE_PLAN}, not a typed plan")
+    if not args.freeze_plan_sha256 or file_sha256(Path(args.freeze_plan)) != args.freeze_plan_sha256:
+        raise pool.StageRefused("refused: the frozen plan does not hash to the digest the driver verified (--freeze-plan-sha256)")
+    check_preconditions(REGISTERED, repo, args.freeze_commit)
+    verify_plan(load_plan(repo), repo, Path(args.run_dir))
+    require_decision_2(repo, args.freeze_commit)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1466,7 +1515,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "work":
             if args.mode == REGISTERED:
                 verify_worker_plan(args)
-            configure()
+            if argv is None:  # the worker subprocess: configuring the process (threads, deterministic algorithms, default device, seeds) ends with the worker. An in-process call (tests, with an
+                configure()  # explicit argv) never does: the inter-op thread count cannot be restored, and nothing may leak into the caller (re-check N9)
             return int(WORKERS[args.worker](args))
         if args.command == "dry":
             args.dry, args.mode = True, CALIBRATION

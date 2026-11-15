@@ -33,14 +33,15 @@ All commands are `uv run --locked python -m studies.p10s1.stages <command> ...` 
    (charged so far + 2 x remaining <= cap), and the cap table of every configuration. If the headroom rule does not hold after the allowed cuts, or the memory rule fails, the record
    carries the return to the human lead (raise the cap, or shorten the run lengths: a new design revision) and nothing is chosen.
 9a. `set-generation-cap --run-dir <rehearsal-dir>` writes twice the rehearsal draw's measured generation and G1 time (rounded up to 10 s) into `[generation]` of
-   `configs/p10s1_capacity.toml`, clears its `provisional` flag and may set the registered table size (`--generation-table-facts`); commit the result. The registered generation refuses
+   `configs/p10s1_capacity.toml`, clears its `provisional` flag, records whether the figure was measured (with the manifest's sha256) or typed (`--generation-seconds`: recorded as typed, and the freeze refuses it outside the test switch) and may set the registered table size (`--generation-table-facts`); commit the result. The registered generation refuses
    while the cap is provisional and takes no cap from the command line; the freeze refuses while it is provisional or the table size differs from the plan's.
 9. Registered generation and G1 (allowed before the freeze commit by the explicit `--i-understand-freeze-time` that the fixed script passes; the code commit must equal a clean
    HEAD): `sh studies/p10s1/launch/generate.sh <registered-run-dir> <code-commit>`. It generates the five draws `p10s1-draw-1 .. 5` and writes no plan (there are no reserve draws).
 10. Lane L status (section 5.6) is derived from S0's recorded outcome, not typed: pass `--s0-record <json>` (`outcome`, `candidate`, `overload_qualified`) to the freeze, which prints S0's
     status line (K7(c), section 13 item 5; default `S0 NOT YET DECIDED` without a record) and lane L's status. **Lane L is not implemented**: F-LA is S0's frozen candidate and S0's code is
     not in this tree, so `freeze --lane-l` is refused. If S0 qualified an interface before the freeze so that the lane would run, the freeze refuses and the question returns to the
-    lead (ADR-0021 section 22 (b)); nothing is printed OMITTED in that case.
+    lead (ADR-0021 section 22 (b)); nothing is printed OMITTED in that case. Under the lead's ruling P1 this applies to ANY qualified interface (at 4,096 only, or at both sizes), whether or not the lane would run.
+    Outside the test switch (and `--dry`) the freeze also refuses records marked DRY, a plan whose unit is not U_P = 8,192, and a calibration with open returns to the lead; `verify_plan` repeats the DRY and unit checks for every registered stage.
 11. Write the freeze files: `freeze --run-dir <registered-run-dir> --projection <projection.json> --calibration <calibration.json> --timing <timing.json> --gates <gates.json>
     [--s0-record <json>] [--no-loaded-transitions "<transition>,..."]`. It refuses unless the projection has no return to the lead, every binding hash holds, the
     cap in the config equals the cap of the projection, the memory rule holds and the five draws have a passed G1 record; it writes `plan.json` and `stage_caps.json` here,
@@ -49,7 +50,7 @@ All commands are `uv run --locked python -m studies.p10s1.stages <command> ...` 
     and `stage_caps.json`. Nothing may be edited after it: every registered stage compares `studies/`, the config, the ADR and `tests/test_p10s1_*` with that commit.
 13. Decision 2 (the single registered run) is the lead's, **recorded in a committed file outside the hashed specification, `results/p10s1-freeze-<date>/DECISION_2.md`, that names
     the freeze commit** (ADR-0021 section 22 M4: the ADR is hashed into the freeze identity and `check_preconditions` compares it with the freeze commit, so it cannot be edited after the
-    freeze; it is amended with Decision 2 after the registered run). Every registered stage refuses unless such a file is committed and names the freeze commit; `results/` is not among the
+    freeze; it is amended with Decision 2 after the registered run). The file must contain the exact line `DECISION: RUN` and the full freeze commit hash; a file without that line, or with `DECISION: DO NOT RUN`, is refused, and the committed content decides. Every registered stage and every registered worker refuses unless such a file is committed; `results/` is not among the
     paths compared with the freeze commit. Before anything registered runs, only if the audits end with no open blocker or major, nothing
     changed after calibration except what section 8 allows, the headroom rule holds and no registered seed has been observed.
 14. Launch, in this order, each with `sh studies/p10s1/launch/<stage>.sh <registered-run-dir> <freeze-commit>`:
@@ -65,7 +66,7 @@ The scripts are covered by the source digest. No registered stage is launched by
 
 **Overrides are refused.** The driver (`registered <stage>`) accepts only `--run-dir`, `--freeze-commit` and `--caps` (which must name the frozen table); `--stage-cap-seconds`,
 `--ledger-root`, `--experiments-root`, `--rss-worker-bytes`, `--rss-aggregate-bytes`, `--only`, `--repo`, `--workers` and every other option are refused (exit 2). `--mode registered` is
-reached only through `registered <stage>`, the worker entry point and `generate`; a registered worker needs the frozen plan and the digest the driver verified (`--freeze-plan-sha256`).
+reached only through `registered <stage>`, the worker entry point and `generate`; every registered worker (including `work generate`, which refuses a provisional generation cap and any override) re-checks for itself: the plan must be `studies/p10s1/freeze/plan.json` (not a typed file), and `check_preconditions`, `verify_plan` and `require_decision_2` run against the freeze commit passed through.
 
 **Run the registered stages from a worktree pinned to the freeze commit.** `check_preconditions` requires the whole `studies/` tree, the config, the ADR and `tests/test_p10s1_*` to equal
 their content at the freeze commit, so code merged into `studies/` afterwards (S0 or S2 work, for example) would stop every registered stage. Make a worktree at the freeze commit (plus the

@@ -184,7 +184,7 @@ def test_caps_table_has_one_entry_per_configuration() -> None:
 # --- frozen tables: costs, the MC plan, snapshots ---------------------------------------------------------------------------------------------
 def test_cost_tables_and_matched_compute_plan() -> None:
     assert fz.trainable_parameters("F-OQ", 4096) == core.foq_trainable_parameters(4096) and fz.trainable_parameters("D-OQ", 4096) == core.doq_trainable_parameters(core.doq_hidden(4096))
-    assert fz.analytic_madds_per_update("F-OQ", 4096) == 32_901_120 + 24_643_584 + 2 * 128 * 4096 * 16 + 3 * 128 * 32 * 32 + 4 * 197633  # whole update: backbone forward and backward, the arm, AdamW (section 22 M6)
+    assert fz.analytic_madds_per_update("F-OQ", 4096) == 32_901_120 + 24_643_584 + 2 * 128 * 4096 * 16 + 3 * 128 * 32 * 32 + 3 * 128 * 8 * 32 + 4 * 197633  # whole update: backbone forward and backward, the arm, AdamW (section 22 M6)
     fro = fz.Frozen.build(core.Plan(seed_block_draws=()), CPU)
     keys = set(fro.mc)
     for arm in ("F-OQ", "T-OQ", "H8"):

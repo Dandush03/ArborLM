@@ -247,7 +247,8 @@ def fake_projection(tmp: Path, **over: Any) -> dict[str, Path]:
     """A projection record whose bindings hold, with the files it binds."""
     paths: dict[str, Path] = {}
     bound = {}
-    for name, rec in (("calibration", {**core.envelope("calibration"), "load_decision": {"action": "GRID_STANDS"}}), ("timing", {**core.envelope("timing"), "status": "MEASURED"}), ("gates", {**core.envelope("gates"), "wall_seconds": 1.0}), ("synthetic", {**core.envelope("rehearsal")})):
+    over = dict(over)
+    for name, rec in (("calibration", {**core.envelope("calibration"), "load_decision": {"action": "GRID_STANDS"}, "returns_to_lead": [], **over.pop("cal_extra", {})}), ("timing", {**core.envelope("timing"), "status": "MEASURED"}), ("gates", {**core.envelope("gates"), "wall_seconds": 1.0}), ("synthetic", {**core.envelope("rehearsal")})):
         p = tmp / f"{name}.json"
         core.write_record(p, rec)
         paths[name] = p
@@ -287,7 +288,7 @@ def config_repo(folder: Path) -> Path:
     repo = folder / "config-repo"
     if not repo.exists():
         (repo / "configs").mkdir(parents=True)
-        (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation={"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE}))
+        (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation={"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE, "source": "measured", "measured_seconds": 300.0, "manifest_sha256": "0" * 64}))
     return repo
 
 

@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
 
-from arborlm.io import file_sha256  # noqa: E402
+from arborlm.io import canonical_json, file_sha256, sha256  # noqa: E402
 from studies.p9 import pool  # noqa: E402
 from studies.p10s1 import analysis, calibrate, core, stages  # noqa: E402
 from studies.p10s1 import classes as C  # noqa: E402
@@ -215,7 +215,8 @@ def test_madds_formula_is_in_the_config_and_equals_the_flop_counter() -> None:
             torch.autograd.grad(loss, params, allow_unused=True)
         assert counter.get_total_flops() // 2 == fz.matmul_madds_per_update(arm, slots), (arm, slots)
     # the whole-update count adds the frozen backbone's forward and backward and 4 x trainable for AdamW
-    assert fz.analytic_madds_per_update("F-OQ", 4096) == fz.matmul_madds_per_update("F-OQ", 4096) + 4 * fz.trainable_parameters("F-OQ", 4096)
+    assert fz.analytic_madds_per_update("F-OQ", 4096) == fz.matmul_madds_per_update("F-OQ", 4096) + fz.gather_madds("F-OQ", 4096) + 4 * fz.trainable_parameters("F-OQ", 4096)
+    assert [fz.gather_madds(a, 4096) for a in ("F-OQ", "T-OQ", "H8", "R2", "D-OQ")] == [98_304, 98_304, 65_536, 8_192, 0]  # the gather-weighted sum (section 22.1; N4)
     assert fz.backbone_madds(16)["total"] == 32_901_120 + 24_643_584
     assert fz.analytic_madds_per_update("H8", 4096) > fz.backbone_madds(16)["total"]  # every arm pays the backbone: the cost never falls below it
 
@@ -260,12 +261,15 @@ def test_dense_rate_cells_are_evaluated_on_the_doubling_snapshots() -> None:
 
 
 # --- (b), m12: lane L's status comes from S0's record, and a qualified interface returns to the lead -------------------------------
-def test_lane_status_is_derived_from_s0_and_a_qualified_interface_returns_to_the_lead() -> None:
+def test_lane_status_is_derived_from_s0_and_any_qualified_interface_returns_to_the_lead() -> None:
     assert fz.s0_status_and_lane(None) == (fz.S0_NOT_DECIDED, fz.LANE_OMITTED_NO_INTERFACE, False)
     assert fz.s0_status_and_lane({"outcome": "ADDRESSING-NOT-QUALIFIED"})[2] is False
     status, lane, returns = fz.s0_status_and_lane({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A5-C", "overload_qualified": True})
     assert returns is True and lane == fz.LANE_WOULD_RUN and status == f"S0 {fz.LANE_QUALIFIED_BOTH}"
-    assert fz.s0_status_and_lane({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A1", "overload_qualified": True})[2] is False  # OMITTED: no 8K/4K cell
+    # lead's ruling P1: ANY qualified interface returns to the lead, whether or not the lane would run
+    assert fz.s0_status_and_lane({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A1", "overload_qualified": True})[2] is True
+    assert fz.s0_status_and_lane({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A5-C", "overload_qualified": False})[2] is True
+    assert fz.s0_status_and_lane({"outcome": fz.LANE_QUALIFIED_4096})[2] is True
 
 
 # --- M3: the registered driver ------------------------------------------------------------------------------------------------------------
@@ -301,26 +305,69 @@ def test_registered_mode_is_reached_only_through_the_fixed_path(command: str, tm
     assert "only through" in capsys.readouterr().err and not list(tmp_path.rglob("*"))
 
 
-def test_a_registered_worker_needs_the_frozen_plan_the_driver_verified(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    base = ["work", "train", "--mode", "registered", "--run-dir", str(tmp_path), "--labels", "x"]
-    assert stages.main(base) == 2  # no plan, no digest
+def test_a_registered_worker_refuses_a_hand_made_plan_a_wrong_commit_and_a_missing_decision_2(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+    """Re-check N1: a worker started by hand with a self-made plan and its digest, a commit that is not the freeze commit, or no Decision 2 is refused before it does anything."""
+    base = ["work", "train", "--mode", "registered", "--run-dir", str(tmp_path / "run"), "--labels", "x"]
+    assert stages.main(base) == 2  # no plan
     plan = tmp_path / "plan.json"
     plan.write_text("{}")
-    assert stages.main([*base, "--freeze-plan", str(plan)]) == 2  # no digest
-    assert stages.main([*base, "--freeze-plan", str(plan), "--freeze-plan-sha256", "0" * 64]) == 2  # a digest the file does not have
-    assert "frozen plan and the digest" in capsys.readouterr().err
-    args = stages.build_parser().parse_args(["work", "train", "--mode", "registered", "--freeze-plan", str(plan), "--freeze-plan-sha256", file_sha256(plan)])
-    stages.verify_worker_plan(args)  # the right digest passes this guard
-    gen = stages.build_parser().parse_args(["work", "generate", "--mode", "registered"])
-    stages.verify_worker_plan(gen)  # generation precedes the freeze: no plan
+    assert stages.main([*base, "--freeze-plan", str(plan), "--freeze-plan-sha256", file_sha256(plan)]) == 2  # a typed plan with its own digest
+    assert "not a typed plan" in capsys.readouterr().err
+    repo = tmp_path / "repo"
+    (repo / "studies" / "p10s1" / "freeze").mkdir(parents=True)
+    real = repo / stages.FREEZE_PLAN
+    real.write_text("{}")
+    monkeypatch.setattr(core, "repo_root", lambda: repo)
+    argv = [*base, "--freeze-plan", str(real), "--freeze-plan-sha256", file_sha256(real)]
+    assert stages.main(argv) == 2 and "requires --freeze-commit" in capsys.readouterr().err  # the right file but no freeze commit
+    assert stages.main([*argv, "--freeze-commit", "deadbeef"]) == 2 and "not a commit" in capsys.readouterr().err  # not a freeze commit
+    assert stages.main([*argv[:-1], "0" * 64]) == 2 and "does not hash" in capsys.readouterr().err
+    assert not (tmp_path / "run").exists()
+    # the guards run in order: preconditions, then verify_plan, then Decision 2
+    calls: list[str] = []
+    monkeypatch.setattr(stages, "check_preconditions", lambda *a, **k: calls.append("preconditions"))
+    monkeypatch.setattr(stages, "load_plan", lambda r: {})
+    monkeypatch.setattr(stages, "verify_plan", lambda *a, **k: calls.append("verify_plan"))
+    monkeypatch.setattr(stages, "require_decision_2", lambda *a, **k: (_ for _ in ()).throw(pool.StageRefused("refused: no Decision 2")))
+    assert stages.main([*argv, "--freeze-commit", "abc"]) == 2 and calls == ["preconditions", "verify_plan"] and "no Decision 2" in capsys.readouterr().err
 
 
-def test_worker_common_args_carry_the_plan_digest(tmp_path: Path) -> None:
+def test_a_registered_generation_worker_refuses_a_provisional_cap_and_overrides(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+    """Re-check N8: ``work generate --mode registered`` applies the refusals of ``generate``."""
+    repo = tmp_path / "repo"
+    (repo / "configs").mkdir(parents=True)
+    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml())  # provisional
+    monkeypatch.setattr(core, "repo_root", lambda: repo)
+    base = ["work", "generate", "--mode", "registered", "--run-dir", str(tmp_path / "run")]
+    assert stages.main(base) == 2 and "provisional" in capsys.readouterr().err
+    assert stages.main([*base, "--stage-cap-seconds", "5"]) == 2 and "takes no override" in capsys.readouterr().err
+    assert stages.main([*base, "--rss-worker-bytes", "1"]) == 2 and "--rss-worker-bytes" in capsys.readouterr().err
+    assert not (tmp_path / "run").exists()
+
+
+def test_no_in_process_work_command_leaks_process_state(tmp_path: Path) -> None:
+    """Re-check N9: an in-process ``work`` call (which is refused here) changes no torch thread count, no deterministic flag, no default device and no RNG state."""
+    import random
+
+    import torch
+
+    def state() -> tuple[Any, ...]:
+        return (torch.get_num_threads(), torch.get_num_interop_threads(), torch.are_deterministic_algorithms_enabled(), str(torch.get_default_device()), torch.get_rng_state().tolist(), random.getstate())
+
+    before = state()
+    cell = core.make_cell("P", "F-OQ", 2048, 4096, 1, 2101, u_p=8192).label
+    for argv in (["work", "calibrate-cell", "--mode", "calibration", "--labels", cell, "--run-dir", str(tmp_path)], ["work", "train", "--mode", "registered", "--run-dir", str(tmp_path), "--labels", "x"], ["work", "generate", "--mode", "registered", "--run-dir", str(tmp_path)]):
+        stages.main(argv)
+    assert state() == before
+
+
+def test_worker_common_args_carry_the_plan_digest_and_the_freeze_commit(tmp_path: Path) -> None:
     plan = tmp_path / "plan.json"
     plan.write_text("{}")
-    args = stages.build_parser().parse_args(["train", "--run-dir", str(tmp_path), "--freeze-plan", str(plan)])
+    args = stages.build_parser().parse_args(["train", "--run-dir", str(tmp_path), "--freeze-plan", str(plan), "--freeze-commit", "abc123"])
     out = stages.common_args(args)
     assert "--freeze-plan-sha256" in out and out[out.index("--freeze-plan-sha256") + 1] == file_sha256(plan)
+    assert out[out.index("--freeze-commit") + 1] == "abc123"
 
 
 # --- m4: the generation cap is a config value the rehearsal sets; the registered generation takes no typed cap --------------------------------------
@@ -350,7 +397,11 @@ def test_set_generation_cap_writes_the_config_from_a_measurement(tmp_path: Path,
     core.write_record(manifest, {**core.envelope("stage_manifest"), "tasks": [{"status": "completed", "seconds": 41.3}]})
     assert stages.main(["set-generation-cap", "--run-dir", str(rehearsal)]) == 0
     got = core.generation_settings(config)
-    assert got == {"cap_seconds": 90.0, "provisional": False, "table_facts": core.FACT_TABLE}  # twice 41.3 s, rounded up to 10 s
+    assert got["cap_seconds"] == 90.0 and got["provisional"] is False and got["table_facts"] == core.FACT_TABLE  # twice 41.3 s, rounded up to 10 s
+    assert got["source"] == "measured" and got["measured_seconds"] == 41.3 and got["manifest_sha256"] == file_sha256(manifest)  # the record says where the figure came from (N6)
+    assert stages.main(["set-generation-cap", "--generation-seconds", "600"]) == 0
+    typed = core.generation_settings(config)
+    assert typed["source"] == "typed" and typed["cap_seconds"] == 600.0 and typed["manifest_sha256"] == ""
     assert core.load_config(config)["resources"]["cap_hours"] == core.load_config(ROOT / core.DEFAULT_CONFIG)["resources"]["cap_hours"]
     assert stages.rehearsal_generate_seconds(rehearsal) == 41.3
     assert capsys.readouterr().out
@@ -368,13 +419,18 @@ def test_the_projection_charges_five_generations() -> None:
 
 
 # --- M4: Decision 2 outside the hashed specification ------------------------------------------------------------------------------------------
-def test_decision_2_is_a_committed_file_that_names_the_freeze_commit(tmp_path: Path) -> None:
+def test_decision_2_is_a_committed_file_with_the_run_line_and_the_freeze_commit(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()
     env = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@t", "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@t", "PATH": "/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin"}
 
     def git(*argv: str) -> str:
         return subprocess.run(["git", "-C", str(repo), *argv], capture_output=True, text=True, check=True, env=env).stdout.strip()
+
+    def commit(text: str, message: str) -> None:
+        (folder / "DECISION_2.md").write_text(text)
+        git("add", "-A")
+        git("commit", "-q", "-m", message)
 
     git("init", "-q")
     (repo / "a.txt").write_text("x")
@@ -385,19 +441,26 @@ def test_decision_2_is_a_committed_file_that_names_the_freeze_commit(tmp_path: P
         stages.require_decision_2(repo, freeze)
     folder = repo / "results" / "p10s1-freeze-2026-11-16"
     folder.mkdir(parents=True)
-    (folder / "DECISION_2.md").write_text("Decision 2 for a different commit 0000\n")
-    git("add", "-A")
-    git("commit", "-q", "-m", "decision 2")
-    with pytest.raises(pool.StageRefused, match="names the freeze commit"):
-        stages.require_decision_2(repo, freeze)  # committed, but it does not name this freeze commit
-    (folder / "DECISION_2.md").write_text(f"Decision 2. Freeze commit {freeze}\n")
+    commit("Decision 2 for a different commit 0000\nDECISION: RUN\n", "decision 2")
+    with pytest.raises(pool.StageRefused, match="full freeze commit"):
+        stages.require_decision_2(repo, freeze)  # committed with the line, but it does not name this freeze commit
+    commit(f"Decision 2. Freeze commit {freeze}\n", "no line")
+    with pytest.raises(pool.StageRefused, match="DECISION: RUN"):
+        stages.require_decision_2(repo, freeze)  # the commit is named but there is no DECISION: RUN line
+    commit(f"Freeze commit {freeze}\nDECISION: DO NOT RUN\n", "do not run")
     with pytest.raises(pool.StageRefused):
-        stages.require_decision_2(repo, freeze)  # written but not committed
-    git("add", "-A")
-    git("commit", "-q", "-m", "decision 2 names the freeze")
-    assert stages.require_decision_2(repo, freeze).endswith("DECISION_2.md")
+        stages.require_decision_2(repo, freeze)
+    commit(f"Freeze commit {freeze}\nDECISION: RUN and more\n", "not the exact line")
+    with pytest.raises(pool.StageRefused):
+        stages.require_decision_2(repo, freeze)  # the line must be exactly DECISION: RUN
+    commit(f"Freeze commit {freeze}\nDECISION: DO NOT RUN\nDECISION: RUN\n", "contradictory")
+    with pytest.raises(pool.StageRefused):
+        stages.require_decision_2(repo, freeze)
+    commit(f"Freeze commit {freeze}\nDECISION: RUN\n", "run")
+    (folder / "DECISION_2.md").write_text(f"Freeze commit {freeze}\nDECISION: DO NOT RUN\n")
+    assert stages.require_decision_2(repo, freeze).endswith("DECISION_2.md")  # the committed content decides, not a working-tree edit
     readme = (ROOT / "studies" / "p10s1" / "freeze" / "README.md").read_text()
-    assert "DECISION_2.md" in readme and "outside the hashed" in readme
+    assert "DECISION_2.md" in readme and "outside the hashed" in readme and "DECISION: RUN" in readme
 
 
 def test_freeze_refuses_a_provisional_generation_cap_and_a_qualified_interface(tmp_path: Path) -> None:
@@ -413,13 +476,17 @@ def test_freeze_refuses_a_provisional_generation_cap_and_a_qualified_interface(t
     (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml())  # provisional
     base = ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo)]
     assert stages.main([*base, "--freeze-dir", str(tmp_path / "f1")]) == 2 and not (tmp_path / "f1").exists()  # the cap was never set by a rehearsal
-    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation={"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE}))
+    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation={"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE, "source": "typed"}))
+    assert stages.main([*base, "--freeze-dir", str(tmp_path / "ft")]) == 2 and not (tmp_path / "ft").exists()  # a typed figure is refused (N6)
+    measured = {"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE, "source": "measured", "measured_seconds": 300.0, "manifest_sha256": "a" * 64}
+    (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation=measured))
     s0 = tmp_path / "s0.json"
-    s0.write_text(json.dumps({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A5-C", "overload_qualified": True}))
-    assert stages.main([*base, "--freeze-dir", str(tmp_path / "f2"), "--s0-record", str(s0)]) == 2 and not (tmp_path / "f2").exists()  # returns to the lead
+    for k, record in enumerate(({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A5-C", "overload_qualified": True}, {"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A1", "overload_qualified": True}, {"outcome": fz.LANE_QUALIFIED_4096})):
+        s0.write_text(json.dumps(record))
+        assert stages.main([*base, "--freeze-dir", str(tmp_path / f"f2{k}"), "--s0-record", str(s0)]) == 2 and not (tmp_path / f"f2{k}").exists()  # any qualified interface returns to the lead (P1)
     assert stages.main([*base, "--freeze-dir", str(tmp_path / "f3")]) == 0
     plan = json.loads((tmp_path / "f3" / "plan.json").read_text())
-    assert plan["generation"] == {"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE} and "identity_drift" in plan and "DECISION_2.md" in plan["decision_2"]["file_glob"]
+    assert plan["generation"] == {**core.GENERATION_DEFAULT, **measured} and "identity_drift" in plan and "DECISION_2.md" in plan["decision_2"]["file_glob"]
     assert set(plan["identity_drift"]) == {"calibration", "projection", "timing", "rehearsal_gates"}
 
 
@@ -482,3 +549,99 @@ def test_readme_documents_the_pinned_worktree_and_the_generation_cap() -> None:
     readme = (ROOT / "studies" / "p10s1" / "freeze" / "README.md").read_text()
     assert "pinned to the freeze commit" in readme and "set-generation-cap" in readme and "--s0-record" in readme and "studies.p10s1.e2e" in readme
     assert "the ADR copy in this worktree still says 12" not in readme  # m10
+
+
+# --- re-check N2: a registered freeze and driver refuse DRY records, a DRY-size plan and an open calibration -----------------------------------------
+def _freeze_args(paths: dict[str, Path], run_dir: Path, out: Path, repo: Path) -> list[str]:
+    return ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo), "--freeze-dir", str(out)]
+
+
+def test_a_registered_freeze_refuses_dry_records_a_dry_plan_and_an_open_calibration(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    from test_p10s1_stages import config_repo, fake_projection, run_dir_with_draws
+
+    run_dir = run_dir_with_draws(tmp_path)
+    repo = config_repo(tmp_path)
+    cases = {
+        "projection": {"dry": True},
+        "calibration": {"cal_extra": {"dry": True}},
+        "open calibration": {"cal_extra": {"returns_to_lead": ["the U_P check failed"]}},
+        "unit": {"chosen": {"ok": True, "plan": core.Plan(None, (1,), ("8K/64K",), False, 8).as_json(), "applied_cuts": [], "headroom": {"ok": True}}},
+    }
+    for name, over in cases.items():
+        folder = tmp_path / name.replace(" ", "_")
+        folder.mkdir()
+        paths = fake_projection(folder, **over)
+        assert stages.main(_freeze_args(paths, run_dir, folder / "out", repo)) == 2 and not (folder / "out").exists(), name
+        err = capsys.readouterr().err
+        assert {"projection": "DRY record", "calibration": "DRY record", "open calibration": "open returns", "unit": "unit"}[name] in err, (name, err)
+    for rec_name, key in (("timing", "timing"), ("gates", "gates")):
+        folder = tmp_path / f"dry_{rec_name}"
+        folder.mkdir()
+        paths = fake_projection(folder)
+        core.write_record(paths[rec_name], {**core.read_record(paths[rec_name], key), "dry": True})
+        # the bound hash now differs from the projection's: rebuild the projection around the DRY record
+        folder2 = tmp_path / f"dry2_{rec_name}"
+        folder2.mkdir()
+        paths2 = fake_projection(folder2)
+        rec = {**core.read_record(paths2[rec_name], key), "dry": True}
+        core.write_record(paths2[rec_name], rec)
+        proj = core.read_record(paths2["projection"], "projection")
+        proj["timing" if rec_name == "timing" else "rehearsal_gates"]["sha256"] = file_sha256(paths2[rec_name])
+        core.write_record(paths2["projection"], proj)
+        assert stages.main(_freeze_args(paths2, run_dir, folder2 / "out", repo)) == 2 and "DRY record" in capsys.readouterr().err
+    ok = tmp_path / "ok"
+    ok.mkdir()
+    assert stages.main(_freeze_args(fake_projection(ok), run_dir, ok / "out", repo)) == 0  # the same records, not DRY, at U_P, with no open return, freeze
+
+
+def test_verify_plan_refuses_dry_records_and_a_dry_unit_outside_the_test_switch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from test_p10s1_stages import config_repo, fake_projection, run_dir_with_draws
+
+    run_dir = run_dir_with_draws(tmp_path)
+    paths = fake_projection(tmp_path)
+    out = tmp_path / "out"
+    assert stages.main(_freeze_args(paths, run_dir, out, config_repo(tmp_path))) == 0
+    plan = json.loads((out / "plan.json").read_text())
+    repo = tmp_path / "repo"
+    (repo / "studies" / "p10s1" / "freeze").mkdir(parents=True)
+    (repo / stages.CAPS_FILE).write_text((out / "stage_caps.json").read_text())
+    plan["stage_caps_sha256"] = file_sha256(repo / stages.CAPS_FILE)
+    # a DRY unit in the frozen plan
+    dry_plan = json.loads(json.dumps(plan))
+    dry_plan["frozen"]["plan"]["unit"] = 8
+    dry_plan["frozen_sha256"] = sha256(canonical_json(dry_plan["frozen"]))
+    with pytest.raises(pool.StageRefused, match="unit"):
+        stages.verify_plan(dry_plan, repo, run_dir)
+    # a DRY bound record
+    core.write_record(paths["timing"], {**core.read_record(paths["timing"], "timing"), "dry": True})
+    dry_rec = json.loads(json.dumps(plan))
+    dry_rec["timing"]["sha256"] = file_sha256(paths["timing"])
+    with pytest.raises(pool.StageRefused, match="DRY"):
+        stages.verify_plan(dry_rec, repo, run_dir)
+    monkeypatch.setenv(core.TEST_SWITCH_ENV, "1")  # under the switch the same plan passes these two guards and meets the next check instead
+    with pytest.raises(pool.StageRefused) as caught:
+        stages.verify_plan(dry_plan, repo, run_dir)
+    assert "unit" not in str(caught.value) and "DRY" not in str(caught.value)
+
+
+# --- re-check N3, N5, N7 ---------------------------------------------------------------------------------------------------------------------
+def test_the_matched_updates_text_and_the_dense_matches_sentence_are_printed_beside_the_label(tmp_path: Path) -> None:
+    from studies.p10s1 import report
+
+    arms = {
+        "F-OQ": {"class": C.CAPACITY_ONE_TRANSITION, "dense": "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)", "dense_detail": {"mu_text": ["A1 matched updates (descriptive): d = +4.7 bits per fact, r = 27.2"]}, "work_label": None},
+        "T-OQ": {"class": C.INTERMEDIATE, "dense": C.DENSE_MATCHES, "dense_detail": {}, "dense_matches_sentence": "A1: the sentence of section 8.5 | with a bar", "work_label": None},
+    }
+    steps = {a: {"A1": {"class": C.NO_GAIN, "verdicts": ["NULL"]}} for a in arms}
+    text = "\n".join(report._capacity_table({"arms": arms, "steps": steps}))
+    assert "MC-SHORT) — A1 matched updates (descriptive): d = +4.7 bits per fact, r = 27.2" in text
+    assert "DENSE MATCHES — A1: the sentence of section 8.5 / with a bar" in text
+
+
+def test_identity_drift_names_the_config_and_the_projection_carries_an_identity(tmp_path: Path) -> None:
+    now = core.code_identity()
+    changed = {**now, "config_sha256": "0" * 64}
+    drift = stages.identity_drift(ROOT, {"calibration": {"identity": changed, "source_hashes": core.source_hashes()}, "projection": {"identity": now, "source_hashes": core.source_hashes()}, "timing": {}})
+    assert drift["calibration"]["files_changed"] == [str(core.DEFAULT_CONFIG)] and drift["calibration"]["parts_differing"] == ["config_sha256"]
+    assert drift["projection"] == {"equal": True, "parts_differing": [], "files_changed": []} and drift["timing"] == {"identity": "NOT RECORDED"}
+    assert '"identity": core.code_identity(), "source_hashes": core.source_hashes()' in (ROOT / "studies" / "p10s1" / "stages.py").read_text()  # the projection record carries both
