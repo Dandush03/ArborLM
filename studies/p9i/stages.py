@@ -36,16 +36,19 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
+import torch
+
 from arborlm.io import file_sha256, read_json, write_json
 from studies.p9 import controls, pool
 from studies.p9 import core as p9core
 from studies.p9 import data as data_mod
+from studies.p9 import model as p9model
 
 from . import classes, core, evaluate, model, report, train
 
 REGISTERED, CALIBRATION, REHEARSAL = "registered", "calibration", "rehearsal"
 DRY_BANNER = "DRY: tiny synthetic sizes, random synthetic backbone, test seeds; not a measurement of anything"
-DRY_SIZES = data_mod.DataSizes(main_trained=512, unseen=64, lane_d_per_set=128)
+DRY_SIZES = data_mod.DataSizes(main_trained=2048, unseen=64, lane_d_per_set=128)  # 128 of 2,048 facts: the registered 2,048 / 32,768 proportion of the smallest size
 DRY_FACTS = {4096: 128, 16384: 256, 65536: 512}
 DRY_UPDATES = 8
 DRY_CAL_SNAPSHOTS = (2, 4, 6, 8)
@@ -63,6 +66,11 @@ def _utc() -> str:
 
 class CalibrationRefused(RuntimeError):
     """The calibration was asked to build or train something other than R1, R2 or the controls."""
+
+
+class HarnessError(RuntimeError):
+    """The gates harness chose inputs that do not belong to the cell it checks. Distinct from a gradient,
+    identity or restoration defect (those are recorded as G4 defects): nothing was learnt about the model."""
 
 
 class StageError(RuntimeError):
@@ -479,6 +487,32 @@ def fact_counts_of(args: argparse.Namespace) -> list[int]:
     return sorted({facts_for(args, c) for c in (dry_cells() if args.dry else core.cells())})
 
 
+def gate_contexts(study: data_mod.StudyData, facts: int, count: int = 8) -> tuple[torch.Tensor, torch.Tensor]:
+    """``count`` contexts for the gates of a cell with ``facts`` trained facts: rows of Panel A restricted to
+    those facts by ``evaluate.stream_for`` (the function the evaluate path uses), keeping the rows in which
+    every record's fact is one the cell covers (the restricted stream also holds unseen-control contexts).
+    Returns ``(tokens [count, 64], fact_ids [count, 8])``; raises ``HarnessError`` when there are too few."""
+    stream = evaluate.stream_for(study, facts, "panel_a")
+    rows = (stream.fact_ids < facts).all(dim=1).nonzero().squeeze(1)[:count]
+    if rows.numel() < count:
+        raise HarnessError(f"only {rows.numel()} Panel A contexts hold {facts} facts or fewer; {count} are needed")
+    return stream.tokens[rows], stream.fact_ids[rows]
+
+
+def assert_covered(tokens: torch.Tensor, fact_ids: torch.Tensor, facts: int, lut: torch.Tensor | None = None) -> None:
+    """Every answer site of the chosen contexts must refer to a fact covered by the cell (id below
+    ``facts``) and, for R2, by its lookup table (the table must map the record's identifier to that fact's
+    slot). Raises ``HarnessError`` otherwise, so that a bad choice of inputs is never read as a gradient
+    defect."""
+    if bool((fact_ids >= facts).any()) or bool((fact_ids < 0).any()):
+        bad = sorted({int(i) for i in fact_ids.reshape(-1) if not 0 <= int(i) < facts})
+        raise HarnessError(f"gate inputs refer to facts the cell does not cover (ids {bad[:5]} outside 0..{facts - 1})")
+    if lut is not None:
+        slots = lut[p9model.identifier_codes(tokens[:, : core.INPUT_LENGTH])]
+        if not torch.equal(slots, fact_ids):
+            raise HarnessError("the R2 lookup table does not map the chosen contexts' identifiers to their facts' slots")
+
+
 def work_gates(args: argparse.Namespace) -> int:
     """G2 (no-memory baseline, exact retrieval, unseen set) and G4 (arm N against P9's R0a, the initial
     identities of block BB, checkpoint restoration for N and BB)."""
@@ -490,7 +524,10 @@ def work_gates(args: argparse.Namespace) -> int:
     defects: list[str] = []
     backbones = {p: backbone_for(args, p) for p in (core.PRIMARY_PARENT, core.REPLICATE_PARENT)}
     controls_rec = evaluate.controls_record(study, backbones, fact_counts_of(args))
-    tokens = study.streams["panel_a"].tokens[:8, : core.INPUT_LENGTH]
+    cell_facts = facts_for(args, core.make_cell("N", 4096))
+    gate_tokens, gate_ids = gate_contexts(study, cell_facts)
+    assert_covered(gate_tokens, gate_ids, cell_facts)
+    tokens = gate_tokens[:, : core.INPUT_LENGTH]
     identity: list[dict[str, Any]] = []
     for parent, bb in backbones.items():
         n_r0a = model.n_against_p9_r0a(bb, 4096, core.INIT_SEEDS[0], tokens)
@@ -503,14 +540,16 @@ def work_gates(args: argparse.Namespace) -> int:
     restoration: dict[str, Any] = {}
     for arm in ("N", "BB"):
         cell = core.make_cell(arm, 4096)
-        job = build_job(args, cell, study, run_dir / "g4_restore" / arm, 2 * split, snapshots=(), mode=CALIBRATION if args.mode != REGISTERED else REGISTERED)
+        job = build_job(args, cell, study, run_dir / "g4_restore" / arm, 2 * split, snapshots=(), mode=args.mode)
         restoration[arm] = train.checkpoint_restoration_check(job, split)
         if not restoration[arm]["identical"]:
             defects.append(f"checkpoint restoration is not bit-identical for {arm}")
     reach: dict[str, Any] = {}
     for arm in core.ARMS:
-        net = model.build_model(arm, 4096, core.INIT_SEEDS[0], backbones[core.PRIMARY_PARENT], fact_lut=train.fact_lut_for(study, DRY_FACTS[4096] if args.dry else 2048) if arm == "R2" else None, r1_seed=study.seeds.r1_codes)
-        r = train.gradient_reach(net, study.streams["panel_a"].tokens[:8])
+        lut = train.fact_lut_for(study, cell_facts) if arm == "R2" else None
+        assert_covered(gate_tokens, gate_ids, cell_facts, lut)  # a harness error, never a gradient defect
+        net = model.build_model(arm, 4096, core.INIT_SEEDS[0], backbones[core.PRIMARY_PARENT], fact_lut=lut, r1_seed=study.seeds.r1_codes)
+        r = train.gradient_reach(net, gate_tokens)
         reach[arm] = {"all_reached": all(r["reached"].values()), "stray": r["stray"], "trainable": len(r["trainable"])}
         if not reach[arm]["all_reached"] or r["stray"]:
             defects.append(f"gradient reach failed for {arm}")
