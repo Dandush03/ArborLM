@@ -514,6 +514,11 @@ def check_seed_set(mode: str, seed_set_name: str) -> None:
 
 
 # --- draws, G1 and reserve substitution (section 9) ---------------------------------------------------------------------------------------
+def replacement_label(reserve_name: str) -> str:
+    """The ADR's wording for a draw replaced by a reserve (section 9): ``REPLACED BY RESERVE k``."""
+    return "REPLACED BY RESERVE " + reserve_name.rsplit("-", 1)[-1]
+
+
 DRAW_NAMES = tuple(f"p9ii-draw-{k}" for k in range(1, 15))
 RESERVE_NAMES = ("p9ii-reserve-1", "p9ii-reserve-2")
 MAX_REPLACEMENTS = 2
@@ -554,7 +559,7 @@ def seeds_of_name(name: str) -> p9core.SeedSet:
 
 
 # --- the calibration rule (section 6) -------------------------------------------------------------------------------------------------------
-def select_value(values: Sequence[float], min_accuracy: Mapping[float, float], median_first_success: Mapping[float, float]) -> float:
+def select_value(values: Sequence[float], min_accuracy: Mapping[float, float], median_first_success: Mapping[float, Any]) -> float:
     """The value with the higher minimum accuracy over the two calibration draws. A tie, or a difference below 0.02,
     goes to the secondary criterion: the earlier median over the two draws of the time to first success (a cell that never
     succeeds counts as later than any that does; ``math.inf``). If that is also tied, the first value listed."""
@@ -564,6 +569,15 @@ def select_value(values: Sequence[float], min_accuracy: Mapping[float, float], m
         return contenders[0]
     earliest = min(median_first_success[v] for v in contenders)
     return next(v for v in contenders if median_first_success[v] == earliest)
+
+
+def first_success_key(times: Sequence[float]) -> tuple[int, float]:
+    """Sort key of one value's times to first success over the calibration draws (smaller = earlier): the number of draws on which it never succeeded (``math.inf``),
+    then the median of the finite times. So {finite, finite} is earlier than {finite, inf}, which is earlier than {inf, inf} (audit m14; the plain median of
+    {finite, inf} is inf and would tie with {inf, inf})."""
+    never = sum(1 for t in times if math.isinf(t))
+    finite = [t for t in times if not math.isinf(t)]
+    return never, (median(finite) if finite else 0.0)
 
 
 def median(values: Sequence[float]) -> float:
@@ -854,3 +868,26 @@ def derive_seed(seed: int, *tags: object) -> int:
 
 def json_line(record: Mapping[str, Any]) -> str:
     return json.dumps(jsonable(dict(record)), allow_nan=False, sort_keys=True)
+
+
+# --- analytical cost counts (section 8.2: labelled analytical; no efficiency claim) --------------------------------------------------------------------------
+def analytical_cost(arm: str, slots: int, updates: int, mean_read_k: float = float(STANDARD_K)) -> dict[str, Any]:
+    """Active retrieval work and the work of the auxiliary terms, by counting. ANALYTICAL, not measured: key scores computed per query (every cosine score against
+    every key: N for every memory arm, in the forward; N more for L_addr's N-way softmax), value rows read per query (8; A4: its mean k(t) over the run), and
+    approximate floating-point operations per update of L_addr (all-key scores, forward and backward taken as three forward passes), of L_div (128 x 128 pairs) and of
+    A4's wide read. Measured CPU seconds are recorded separately (``cpu_seconds`` of the train record and the rehearsal's per-mechanism rate differences)."""
+    batch, kw = ANSWER_SITES_PER_BATCH, KEY_WIDTH
+    memory = arm != "A7"
+    return {
+        "label": "analytical counts, not measurements",
+        "key_scores_per_query_forward": slots if memory else 0,
+        "key_scores_per_query_address_loss": slots if arm in TARGET_ARMS_COST else 0,
+        "value_rows_read_per_query": mean_read_k if memory else 0,
+        "address_loss_flops_per_update": 3 * 2 * batch * slots * kw if arm in TARGET_ARMS_COST else 0,
+        "diversity_loss_flops_per_update": 3 * 2 * batch * batch * kw if arm == "A5-D" else 0,
+        "wide_read_flops_per_update": 2 * batch * mean_read_k * HIDDEN_WIDTH if arm == "A4" else 0,
+        "updates": updates,
+    }
+
+
+TARGET_ARMS_COST = ("A1", "A2", "A1-S")

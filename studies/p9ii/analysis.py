@@ -105,7 +105,12 @@ def analyze_stage(sd: StageData) -> StageResult:
     paired = {a: C.paired_against_a0(a, verdicts.get(a, {}), a0) for a in arms if a != "A0"}
     nc = C.negative_control_failed(classes.get("A1-S"), paired.get("A1-S"))
     size = C.SizeAnalysis(sd.stage, classes, paired, nc)
-    details: dict[str, Any] = {"negative_control_failed": nc, "arms": {}}
+    refs = a6_references(sd, sd.decisive)
+    details: dict[str, Any] = {
+        "negative_control_failed": nc,
+        "a6": {str(d): {"accuracy_a": r.acc_a, "accuracy_b": r.acc_b, "lm_relative_rise": r.lm_rise, "usable": r.usable} for d, r in sorted(refs.items())},
+        "arms": {},
+    }
     dense = _draw_accuracy(sd, "A7")
     for arm in arms:
         cells = {k: sd.cells[(arm, *k)] for k in sd.expected[arm] if (arm, *k) in sd.cells}
@@ -117,7 +122,7 @@ def analyze_stage(sd: StageData) -> StageResult:
             "counts": {"evaluated": classes[arm].evaluated, "successes": classes[arm].successes, "failures": classes[arm].failures, "lm_flagged_cells": classes[arm].lm_flagged_cells, "missing": classes[arm].missing},
             "lm_capability": {"reduced": classes[arm].lm_reduced, "relative_rises": {f"{d}/{j}": o.lm_rise for (d, j), o in sorted(obs.items())}, "absolute_rise_percent": {f"{d}/{j}": 100.0 * o.lm_rise for (d, j), o in sorted(obs.items())}},
             "categories": C.category_counts(summaries),
-            "median_escape_update": C.median([float(s.category.escape) for s in summaries.values() if s.category.escape is not None]),
+            "median_escape_update_escaped_cells_only": C.median([float(s.category.escape) for s in summaries.values() if s.category.escape is not None]),
             "cosine_onset_escape": {f"{d}/{j}": [s.category.cosine_onset, s.category.cosine_escape] for (d, j), s in sorted(summaries.items())},
             "address": C.address_labels(obs, arm),
             "draw_sensitivity": C.draw_sensitivity(arm, verdicts.get(arm, {}), summaries, sd.decisive),
@@ -126,7 +131,7 @@ def analyze_stage(sd: StageData) -> StageResult:
             p = paired[arm]
             entry["paired_against_a0"] = {"label": p.label, "d": p.d, "x_only": p.x_only, "a0_only": p.a0_only, "pairs": p.pairs, "p_value": p.p_value, "note": "the arm at its better calibrated setting against an untuned A0"}
         if arm == "A2":
-            sup = C.supervision_dependent(summaries)
+            sup = C.supervision_dependent(summaries, {k for k, v in verdicts.get("A2", {}).items() if v.status != C.CELL_NOT_EVALUATED})
             size.supervision_dependent["A2"] = sup["label"] is not None
             entry["supervision_dependent"] = sup
             entry["addresses_remapped_cells"] = sum(1 for k, s in summaries.items() if s.remapped and verdicts.get("A2", {}).get(k, C.CellVerdict(C.FAILED)).status == C.SUCCEEDED)
@@ -180,9 +185,10 @@ def scale_probe_of(sd: StageData, selected: str) -> dict[str, Any]:
 
 
 # --- the whole study -------------------------------------------------------------------------------------------------------------
-def assess(*, missing: list[str], failed_tasks: list[str], gates: Mapping[str, Any] | None) -> dict[str, Any]:
-    """Status and interpretability (pure). ENGINEERING_FAIL for a G4, G5 or G6 defect; else INCOMPLETE for a missing or failed Stage 1 cell, a failed task or an
-    absent gates record; else COMPLETE. A failed or unrecorded G1 or G2 makes the study not interpreted."""
+def assess(*, missing: list[str], failed_tasks: list[str], gates: Mapping[str, Any] | None, draw_plan: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Status and interpretability (pure). ENGINEERING_FAIL for a G4, G5 or G6 defect; else INCOMPLETE for a missing or failed Stage 1 cell, a failed task, an absent
+    gates record or an exhausted reserve list (a draw plan that is not ``ok``); else COMPLETE. A failed or unrecorded G1 or G2 (G2 on any registered draw) makes the study
+    not interpreted. A reserve substitution that section 9 allows is none of these: the replaced draw is recorded in the draw plan as REPLACED BY RESERVE k (audit M5)."""
     defects = [] if gates is None else list(gates.get("g4_defects", []))
     reasons: list[str] = []
     if gates is not None:
@@ -190,12 +196,21 @@ def assess(*, missing: list[str], failed_tasks: list[str], gates: Mapping[str, A
             value = gates.get(f"{name}_passed")
             if value is not True:
                 reasons.append(f"{name.upper()} failed" if value is False else f"{name.upper()} not recorded")
+        for draw, ok in sorted((gates.get("g2_by_draw") or {}).items()):
+            if ok is not True:
+                reasons.append(f"G2 failed on draw {draw}")
         engineering = bool(defects) or gates.get("g4_passed") is False or gates.get("g5_passed") is False or gates.get("g6_passed") is False
     else:
         engineering = False
-    incomplete = bool(missing or failed_tasks or gates is None)
+    exhausted = draw_plan is not None and draw_plan.get("ok") is False
+    incomplete = bool(missing or failed_tasks or gates is None or exhausted)
     status = "ENGINEERING_FAIL" if engineering else ("INCOMPLETE" if incomplete else "COMPLETE")
-    return {"status": status, "incomplete": incomplete, "gate_reasons": reasons, "interpretable": not incomplete and not reasons and not engineering, "defects": defects, "missing": [*missing, *failed_tasks, *(["gates record"] if gates is None else [])]}
+    replaced = {} if draw_plan is None else {str(k): f"REPLACED BY RESERVE {str(v).rsplit('-', 1)[-1]}" for k, v in (draw_plan.get("replacements") or {}).items()}
+    return {
+        "status": status, "incomplete": incomplete, "gate_reasons": reasons, "interpretable": not incomplete and not reasons and not engineering, "defects": defects,
+        "missing": [*missing, *failed_tasks, *(["gates record"] if gates is None else []), *(["draw plan: the reserve list is exhausted"] if exhausted else [])],
+        "replaced_draws": replaced,
+    }  # fmt: skip
 
 
 def stage_status(sd: StageData | None, not_run: str | None, result: StageResult | None) -> str:
@@ -219,11 +234,14 @@ def analyze_study(
     stage3_selected: str | None = None,
     gates: Mapping[str, Any] | None = None,
     failed_tasks: Sequence[str] = (),
+    draw_plan: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Every rule of section 8 over the three stages. ``stage2`` / ``stage3`` are None when the stage did not run (``*_not_run`` names why)."""
+    """Every rule of section 8 over the three stages. ``stage2`` / ``stage3`` are None when the stage did not run (``*_not_run`` names why). When Stage 2 did not
+    run, Stage 3 did not run for the same reason (NOT RUN — BUDGET stays NOT RUN — BUDGET; audit m5). Hypotheses B to G are read at 16,384 in the row that says so (row 3);
+    without a COMPLETE Stage 2 they print NOT TESTED AT 16,384, never CONTRADICTED, and no interface is carried forward from a Stage 2 that is not COMPLETE (M6)."""
     missing = stage1.missing()
-    verdict = assess(missing=missing, failed_tasks=[t for t in failed_tasks if not t.startswith(("train2", "evaluate2", "train3", "evaluate3"))] + stage1.failed_tasks, gates=gates)
-    out: dict[str, Any] = {"assessment": verdict, "stage1": None, "stage2": None, "stage3": None}
+    verdict = assess(missing=missing, failed_tasks=[t for t in failed_tasks if not t.startswith(("train2", "evaluate2", "train3", "evaluate3", "generate-"))] + stage1.failed_tasks, gates=gates, draw_plan=draw_plan)
+    out: dict[str, Any] = {"assessment": verdict, "stage1": None, "stage2": None, "stage3": None, "draw_plan": dict(draw_plan) if draw_plan is not None else None}
     if verdict["status"] == "ENGINEERING_FAIL" or verdict["incomplete"]:
         top = C.ENGINEERING_FAIL if verdict["status"] == "ENGINEERING_FAIL" else C.NOT_INTERPRETED_INCOMPLETE
         out["outcome"] = {"outcome": top, "label": top, "row": 1, "arm": None, "missing": verdict["missing"], "reasons": verdict["gate_reasons"], "defects": verdict["defects"], "scope": ["no class, annotation or selection is derived: registered cells, records or gates are missing or defective"]}
@@ -236,16 +254,20 @@ def analyze_study(
     if stage3 is not None and stage3_selected is not None:
         out["stage3"] = {"status": stage_status(stage3, None, None), **scale_probe_of(stage3, stage3_selected)}
     else:
-        out["stage3"] = {"status": stage3_not_run or C.NOT_RUN_NO_ARM}
+        reason = stage3_not_run or C.NOT_RUN_NO_ARM
+        if stage2 is None and stage2_not_run in (C.NOT_RUN_BUDGET, C.INCOMPLETE) and reason == C.NOT_RUN_NO_ARM:
+            reason = stage2_not_run
+        out["stage3"] = {"status": reason}
     s1status = "NOT_EVALUATED" if r1.classes.get("A0") is not None and r1.classes["A0"].cls == C.NOT_EVALUATED else C.COMPLETE
     outcome = C.study_outcome(r1.size, r2.size if r2 else None, s2status, stage1_status=s1status)
-    readings = C.hypothesis_readings(r1.size, r1.details["h19a_inputs"], reading_stage=r2.size if (outcome.row == 3 and r2 is not None) else None)
-    carried = C.carry_forward(r2.size) if r2 else None
+    s2_complete = r2 is not None and s2status == C.COMPLETE
+    readings = C.hypothesis_readings(r1.size, r1.details["h19a_inputs"], reading_stage=r2.size if (outcome.row == 3 and s2_complete and r2 is not None) else None, not_tested_status=s2status if (outcome.row == 3 and not s2_complete) else None)
+    carried = C.carry_forward(r2.size) if s2_complete and r2 is not None else None
     out["outcome"] = {"outcome": outcome.outcome, "label": outcome.label, "row": outcome.row, "arm": outcome.arm, "stage2_status": s2status, "stage3_status": out["stage3"]["status"], "detail": outcome.detail}
     if not verdict["interpretable"]:
         out["outcome"] = {**out["outcome"], "outcome": C.NOT_INTERPRETED, "label": "NOT_INTERPRETED (" + "; ".join(verdict["gate_reasons"]) + ")", "descriptive_outcome": outcome.label, "row": 1}
     out["hypotheses"] = readings
-    out["carried_forward"] = {"arm": carried, "supervision": core.SUPERVISION_LABEL.get(carried or "", None), "recommendation": C.CHANGE_ARCHITECTURE if outcome.row in (7, 8) else None}
+    out["carried_forward"] = {"arm": carried, "supervision": core.SUPERVISION_LABEL.get(carried or "", None), "recommendation": C.CHANGE_ARCHITECTURE if outcome.row in (7, 8) else None, "stage2_status": s2status}
     return out
 
 

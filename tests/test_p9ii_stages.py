@@ -47,8 +47,10 @@ def test_calibrate_worker_refuses_other_cells_before_building_anything(tmp_path:
 
 
 def test_seed_sets_follow_the_mode() -> None:
-    assert stages.seeds_named(parse("train", "--mode", "registered", "--draw", "3")).facts == 190201
+    assert stages.seeds_named(parse("train", "--mode", "registered", "--draw", "3"), planned=False).facts == 190201  # generation only: the plan does not exist yet
     assert stages.seeds_named(parse("train", "--mode", "registered", "--reserve", "2")).facts == 191501
+    with pytest.raises(pool.StageRefused):
+        stages.seeds_named(parse("train", "--mode", "registered", "--draw", "3"))  # anything that reads data needs the draw plan
     assert stages.seeds_named(parse("train", "--mode", "calibration", "--draw", "3")).facts == 179301
     assert stages.seeds_named(parse("train", "--mode", "calibration", "--draw", "4")).facts == 179401
     assert stages.seeds_named(parse("train", "--mode", "rehearsal")).facts == 179501
@@ -59,7 +61,7 @@ def test_seed_sets_follow_the_mode() -> None:
     with pytest.raises(ValueError):
         stages.seeds_named(parse("train", "--mode", "calibration", "--draw", "5"))
     with pytest.raises(ValueError):
-        stages.seeds_named(parse("train", "--mode", "registered", "--draw", "15"))
+        stages.seeds_named(parse("train", "--mode", "registered", "--draw", "15"), planned=False)
     with pytest.raises(ValueError):
         core.check_seed_set("rehearsal", stages.seeds_named(parse("train", "--mode", "calibration", "--draw", "3")).name)
     ns = core.seed_namespaces()

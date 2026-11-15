@@ -334,4 +334,4 @@ def test_launch_scripts_exist_and_call_the_driver_with_the_frozen_caps() -> None
         assert subprocess.run(["sh", "-n", str(path)], check=False).returncode == 0
         refused = subprocess.run(["sh", str(path), "only-one"], capture_output=True, check=False)
         assert refused.returncode == 2 and b"usage" in refused.stderr
-    assert {p.stem for p in (ROOT / core.LAUNCH_DIR).glob("*.sh")} == set(LAUNCH)  # one per registered stage, no others
+    assert {p.stem for p in (ROOT / core.LAUNCH_DIR).glob("*.sh")} == {*LAUNCH, "generate"}  # one per registered stage, plus the fixed generation script, no others

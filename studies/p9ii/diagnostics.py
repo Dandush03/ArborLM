@@ -66,12 +66,16 @@ def build_probe(data: StudyData, facts: int, n_facts: int = core.PROBE_FACTS) ->
     first: list[int] = []
     seen: set[int] = set()
     for value in flat.tolist():
+        if value >= facts:
+            continue  # an unseen-control fact (or one the cell does not train) is never a probe fact (audit m13)
         if value not in seen:
             seen.add(value)
             first.append(value)
             if len(first) == min(n_facts, facts):
                 break
     chosen = torch.tensor(first, dtype=torch.int64)
+    if bool((chosen >= facts).any()) or len(set(first)) != len(first):
+        raise AssertionError("the probe holds a fact the cell does not train, or a fact twice")
     where = torch.isin(flat, chosen).nonzero().squeeze(1)
     rows, rec = where // core.RECORDS_PER_CONTEXT, where % core.RECORDS_PER_CONTEXT
     contexts, ctx = torch.unique(rows, return_inverse=True)

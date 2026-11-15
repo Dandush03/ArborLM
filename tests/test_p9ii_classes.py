@@ -306,7 +306,7 @@ def test_anova_and_draw_sensitivity_table() -> None:
     sums = {k: summary(category=C.Category(C.COLLAPSED_RECOVERED, 64, 640 if k[0] % 2 else None, None, None)) for k in vs}
     ds = C.draw_sensitivity("A0", vs, sums, 8192)
     assert ds["draw_counts"] == {"2/2": 3, "1/2": 1, "0/2": 4} and ds["discordance_rate"] == 1 / 8 and ds["failure_rate"] == 5 / 8
-    assert ds["escape_censored_cells"] == 8 and ds["median_escape_update"] > 0
+    assert ds["escape_censored_cells"] == 8 and ds["median_escape_update_censored_at_readout"] > 0
     assert ds["sustained_success_frequency"] == 1.0 and ds["first_success_cells"] == 16
     assert ds["table"]["4"] == {"0": C.SUCCEEDED, "1": C.FAILED}
 

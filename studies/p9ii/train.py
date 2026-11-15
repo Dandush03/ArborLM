@@ -377,6 +377,8 @@ class Trainer:
             parts["addr"] = address_loss(cast("Tensor", q), cast(IIMemory, iimemory).keys, cast("Tensor", targets))
         elif self.arm == "A5-D":
             parts["div"] = diversity_loss(cast("Tensor", cast(IIMemory, iimemory).last_query))
+        if iimemory is not None:
+            iimemory.last_query = None  # the loss holds the graph it needs; the memory keeps no batch graph between updates (audit m3; numbers unchanged)
         if self.arm in ("A1", "A1-S"):
             total = answer + self.hyper.lambda_ * parts["addr"]
         elif self.arm == "A2":
@@ -561,6 +563,7 @@ def run_job(job: TrainJob) -> Executed:
     cell, mode = job.cell, job.mode
     rehearsal = mode == "rehearsal"
     started = time.monotonic()
+    cpu_started = time.process_time()
     model = build_model(cell.arm, cell.slots, job.init_seed, job.backbone, r1_seed=job.r1_seed)
     facts = int(job.stream.facts.shape[0])
     probe = build_probe(job.data, facts)
@@ -606,7 +609,7 @@ def run_job(job: TrainJob) -> Executed:
     except Exception as exc:
         status, reason = "failed", type(exc).__name__ + ": " + str(exc)
         if not rehearsal:
-            _write_train_record(job, trainer, report, started, contexts, sampled_rss, marks, snapshot_hashes, status, reason, last, start)
+            _write_train_record(job, trainer, report, started, contexts, sampled_rss, marks, snapshot_hashes, status, reason, last, start, cpu_started)
         raise
     finally:
         for log in (update_log, diag_log):
@@ -614,12 +617,14 @@ def run_job(job: TrainJob) -> Executed:
                 log.flush()
                 os.fsync(log.fileno())
                 log.close()
-    record_out = _write_train_record(job, trainer, report, started, contexts, sampled_rss, marks, snapshot_hashes, status, reason, last, start)
+    record_out = _write_train_record(job, trainer, report, started, contexts, sampled_rss, marks, snapshot_hashes, status, reason, last, start, cpu_started)
     return Executed(record_out, model, trainer, kept, kept_diag)
 
 
-def _write_train_record(job: TrainJob, trainer: Trainer, report: dict[str, Any], started: float, contexts: int, sampled_rss: int, marks: list[int], snapshot_hashes: dict[str, str], status: str, reason: str | None, last: int, start: int) -> dict[str, Any]:
+def _write_train_record(job: TrainJob, trainer: Trainer, report: dict[str, Any], started: float, contexts: int, sampled_rss: int, marks: list[int], snapshot_hashes: dict[str, str], status: str, reason: str | None, last: int, start: int, cpu_started: float = 0.0) -> dict[str, Any]:
     cell = job.cell
+    by_phase = {"1": _a2_count(trainer, 1), "2": _a2_count(trainer, 2)} if cell.arm == "A2" else {"1": report["trainable"]}
+    mean_k = float(sum(core.k_schedule(t, int(trainer.schedule.k0 or 0), int(trainer.schedule.t_anneal or 1)) for t in range(trainer.update)) / max(1, trainer.update)) if cell.arm == "A4" else float(core.STANDARD_K)
     wall = time.monotonic() - started
     done = trainer.update - start
     exposures = job.stream.exposures(trainer.update)
@@ -651,11 +656,15 @@ def _write_train_record(job: TrainJob, trainer: Trainer, report: dict[str, Any],
         "exposure_per_fact_max": int(exposures.max()),
         "exposure_per_fact_mean": float(exposures.float().mean()),
         "exposure_per_fact_analytical": core.exposures_per_fact(trainer.update, int(job.stream.facts.shape[0])),
-        "trainable_parameters": report["trainable"],
-        "trainable_parameters_by_phase": {"1": report["trainable"]} if cell.arm != "A2" else {"1": _a2_count(trainer, 1), "2": _a2_count(trainer, 2)},
+        "trainable_parameters": max(by_phase.values()),
+        "trainable_parameters_label": "the largest trainable set over the phases (A2: phase 2, everything in the addition); the count of each phase is in trainable_parameters_by_phase",
+        "trainable_parameters_by_phase": by_phase,
         "trainable_backbone_parameters": report["trainable_backbone"],
         "stored_parameters": report["stored"],
         "parameters_by_group": dict(report["by_group"]),
+        "parameters_by_group_label": "at the start of the run (A2: phase 1: keys and query projection only)" if cell.arm == "A2" else "trainable parameters by group",
+        "cpu_seconds": time.process_time() - cpu_started,
+        "cost": {"cpu_seconds_label": "measured process CPU seconds of this run (descriptive; no efficiency claim)", **core.analytical_cost(cell.arm, cell.slots, trainer.update, mean_k)},
         "optimizer_state_bytes": optimizer_state_bytes(trainer.optimizers),
         "wall_seconds": wall,
         "peak_rss_bytes": peak_rss(),

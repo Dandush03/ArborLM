@@ -15,6 +15,8 @@ value as ``"+inf"``, ``"-inf"`` or ``"nan"`` and counts as a rise above any A6 +
 """
 
 import math
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -33,7 +35,14 @@ from studies.p9i.evaluate import (
 
 from . import core
 from .diagnostics import build_probe, probe_measures, probe_reads
-from .model import P9IIModel, build_model, g5_check, target_injection
+from .model import (
+    P9IIModel,
+    backbone_hashes,
+    build_model,
+    g5_check,
+    no_memory_logits,
+    target_injection,
+)
 from .train import load_model_state
 
 if TYPE_CHECKING:
@@ -44,6 +53,43 @@ if TYPE_CHECKING:
 __all__ = ["controls_record", "corpus_rows"]
 SECONDARY = {"H1": "h1", "H2": "h2"}
 NEXT_BYTE_BATCH = 128
+EVAL_CHUNK_ELEMENTS = 1 << 20  # score elements of one block of queries during evaluation (P9's default is 1 << 24): bounds the evaluation's peak memory at 65,536 slots
+G5_CHUNK_ROWS = 128  # corpus rows per block of the G5 check
+
+
+@contextmanager
+def eval_chunking(model: P9IIModel, chunk_elements: int = EVAL_CHUNK_ELEMENTS) -> Iterator[None]:
+    """Evaluate the memory in smaller blocks of queries. P9's selection already works in row blocks (``ScalableMemory.chunk_elements``); this only makes them smaller
+    for the duration of an evaluation (audit M2). The result is the same: tests compare the whole eval record with and without it at 4,096 and 16,384 slots."""
+    memory = model.addition
+    old = getattr(memory, "chunk_elements", None)
+    if old is not None:
+        memory.chunk_elements = min(int(old), chunk_elements)
+    try:
+        yield
+    finally:
+        if old is not None:
+            memory.chunk_elements = old
+
+
+@torch.no_grad()
+def g5_check_chunked(model: P9IIModel, frozen: "Backbone", tokens: "Tensor", rows: int = G5_CHUNK_ROWS) -> dict[str, Any]:
+    """``model.g5_check`` in blocks of ``rows`` corpus rows (the whole-corpus forward is the evaluation's memory peak at 65,536 slots): the same backbone hashes and the
+    same bit-for-bit comparison of the memory-disabled logits with the frozen backbone's, block by block."""
+    was = model.training
+    model.eval()
+    try:
+        before, after = backbone_hashes(frozen), backbone_hashes(model.backbone)
+        identical = True
+        for start in range(0, tokens.shape[0], rows):
+            chunk = tokens[start : start + rows].contiguous()
+            h_pre = model.embed_block0(chunk)
+            off = model.finish(h_pre, model.memory_delta(h_pre, None, disabled=True))
+            identical = identical and bool(torch.equal(off, no_memory_logits(frozen, chunk)))
+    finally:
+        model.train(was)
+    mismatched = sorted(n for n in before if before[n] != after.get(n))
+    return {"passed": not mismatched and identical, "hash_mismatches": mismatched, "tensors": len(before), "disabled_logits_identical": identical}
 
 
 def _marker(value: float) -> float | str:
@@ -77,8 +123,8 @@ def language_modelling(model: P9IIModel, frozen: "Backbone", rows: "Tensor", fro
 
 
 def lm_flagged(rise: float, a6_rise: float) -> bool:
-    """Section 8.4 (b): a cell is flagged if r > r(A6, same draw and size) + 0.05. A non-finite r is flagged; a non-finite A6 rise flags
-    nothing it cannot measure against (the comparison is then NOT_INTERPRETED by the analysis, not decided here)."""
+    """Section 8.4 (b): a cell is flagged if r > r(A6, same draw and size) + 0.05. A non-finite r is flagged; a non-finite A6 rise flags nothing (there is nothing
+    finite to measure against; ``classes.lm_flagged`` is the one the analysis uses and says the same)."""
     if not math.isfinite(rise):
         return True
     if not math.isfinite(a6_rise):
@@ -148,41 +194,49 @@ def evaluate_readout(
     rows: "Tensor",
     target_seed: int,
     frozen_loss: float | None = None,
+    chunked: bool = True,
 ) -> dict[str, Any]:
-    """The eval record of one cell at one readout (``model`` already holds the snapshot)."""
+    """The eval record of one cell at one readout (``model`` already holds the snapshot). ``chunked`` evaluates in smaller blocks of queries and corpus rows (M2);
+    the record is the same either way."""
     was = model.training
     model.eval()
     try:
-        record: dict[str, Any] = {
-            **core.envelope("eval"),
-            "label": cell.label,
-            "arm": cell.arm,
-            "stage": cell.stage,
-            "slots": cell.slots,
-            "draw": cell.draw,
-            "seed_index": cell.seed_index,
-            "update": update,
-            "facts": facts,
-            "identity": core.code_identity(),
-            "environment": core.environment(),
-            "panels": {},
-            "secondary": {},
-        }
-        for panel in core.PANELS:
-            record["panels"][panel] = evaluate_stream(model, data, facts, core.PANEL_STREAM[panel], primary=True, supports=False)
-        for name, stream in SECONDARY.items():
-            record["secondary"][name] = evaluate_stream(model, data, facts, stream, primary=False)
-        injection = target_injection(facts, cell.slots, target_seed) if cell.arm in core.TARGET_ARMS else None
-        reads = {p: panel_reads(model, data, facts, core.PANEL_STREAM[p]) for p in core.PANELS}
-        record["panel_statistics"] = panel_statistics(reads["A"], reads["B"], injection)
-        probe = build_probe(data, facts)
-        keys = getattr(model.addition, "keys", None)
-        targets = None if injection is None else injection[probe.fact]
-        record["probe"] = probe_measures(probe_reads(model, probe), probe, keys=None if keys is None else keys.detach(), targets=targets, centred_arm=cell.arm == "A5-C")
-        record["language_modelling"] = language_modelling(model, frozen_backbone, rows, frozen_loss)
-        record["g5"] = g5_check(model, frozen_backbone, rows[:, : core.CONTEXT_BYTES].contiguous())
+        with eval_chunking(model, EVAL_CHUNK_ELEMENTS if chunked else 1 << 40):
+            return _readout_record(cell, model, data, facts, update, frozen_backbone, rows, target_seed, frozen_loss, chunked)
     finally:
         model.train(was)
+
+
+def _readout_record(cell: core.Cell, model: P9IIModel, data: StudyData, facts: int, update: int, frozen_backbone: "Backbone", rows: "Tensor", target_seed: int, frozen_loss: float | None, chunked: bool) -> dict[str, Any]:
+    record: dict[str, Any] = {
+        **core.envelope("eval"),
+        "label": cell.label,
+        "arm": cell.arm,
+        "stage": cell.stage,
+        "slots": cell.slots,
+        "draw": cell.draw,
+        "seed_index": cell.seed_index,
+        "update": update,
+        "facts": facts,
+        "identity": core.code_identity(),
+        "environment": core.environment(),
+        "panels": {},
+        "secondary": {},
+    }
+    for panel in core.PANELS:
+        record["panels"][panel] = evaluate_stream(model, data, facts, core.PANEL_STREAM[panel], primary=True, supports=False)
+    for name, stream in SECONDARY.items():
+        record["secondary"][name] = evaluate_stream(model, data, facts, stream, primary=False)
+    injection = target_injection(facts, cell.slots, target_seed) if cell.arm in core.TARGET_ARMS else None
+    reads = {p: panel_reads(model, data, facts, core.PANEL_STREAM[p]) for p in core.PANELS}
+    record["panel_statistics"] = panel_statistics(reads["A"], reads["B"], injection)
+    probe = build_probe(data, facts)
+    keys = getattr(model.addition, "keys", None)
+    targets = None if injection is None else injection[probe.fact]
+    record["probe"] = probe_measures(probe_reads(model, probe), probe, keys=None if keys is None else keys.detach(), targets=targets, centred_arm=cell.arm == "A5-C")
+    record["language_modelling"] = language_modelling(model, frozen_backbone, rows, frozen_loss)
+    corpus = rows[:, : core.CONTEXT_BYTES].contiguous()
+    record["g5"] = g5_check_chunked(model, frozen_backbone, corpus) if chunked else g5_check(model, frozen_backbone, corpus)
     return record
 
 

@@ -92,8 +92,25 @@ def repo_of(args: argparse.Namespace) -> Path:
     return Path(args.repo) if args.repo else core.repo_root()
 
 
-def seeds_named(args: argparse.Namespace, draw: int | None = None, reserve: int | None = None) -> p9core.SeedSet:
-    """The data seeds a command may use in its mode; ``core.check_seed_set`` is applied again by every training job."""
+def require_draw_plan(run_dir: Path) -> dict[str, Any]:
+    """A registered stage that reads data needs the draw plan (section 9): ``draw_plan.json`` present with ``ok`` true, and every seed set it names has a data manifest
+    whose G1 passed (audit M4). Returns the plan record."""
+    path = run_dir / "draw_plan.json"
+    if not path.is_file():
+        raise pool.StageRefused(f"refused: no draw plan at {path}: generate the draws and run draw-plan first")
+    plan = core.read_record(path, "draw_plan")
+    if plan.get("ok") is not True:
+        raise pool.StageRefused(f"refused: the draw plan is not ok ({plan.get('reason')}); the matter returns to the human lead")
+    for slot, name in sorted(plan["seed_set_of"].items(), key=lambda kv: int(kv[0])):
+        manifest = manifest_dir(run_dir, name) / "data_manifest.json"
+        if not manifest.is_file() or core.read_record(manifest, "data_manifest").get("g1_passed") is not True:
+            raise pool.StageRefused(f"refused: draw {slot} ({name}) has no passed G1 record")
+    return plan
+
+
+def seeds_named(args: argparse.Namespace, draw: int | None = None, reserve: int | None = None, *, planned: bool = True) -> p9core.SeedSet:
+    """The data seeds a command may use in its mode; ``core.check_seed_set`` is applied again by every training job. A registered command reads the draw plan
+    (``planned``; only generation does not): it refuses without one, with one that is not ok, or when a draw it uses did not pass G1."""
     reserve = args.reserve if reserve is None else reserve
     if is_synthetic(args):
         if args.mode == REGISTERED:
@@ -102,11 +119,12 @@ def seeds_named(args: argparse.Namespace, draw: int | None = None, reserve: int 
     if args.mode == REGISTERED:
         if reserve is not None:
             return core.reserve_seeds(reserve)
-        plan = Path(args.run_dir) / "draw_plan.json" if args.run_dir else None
         k = args.draw if draw is None else draw
-        if plan is not None and plan.is_file():
-            return core.seeds_of_name(core.read_record(plan, "draw_plan")["seed_set_of"][str(k)])
-        return core.registered_draw_seeds(k)
+        if not planned:
+            return core.registered_draw_seeds(k)
+        if not args.run_dir:
+            raise pool.StageRefused("refused: a registered command needs --run-dir (the draw plan lives there)")
+        return core.seeds_of_name(require_draw_plan(Path(args.run_dir))["seed_set_of"][str(k)])
     if args.mode == CALIBRATION:
         return core.calibration_seeds(args.draw if draw is None else draw)
     return core.rehearsal_seeds()
@@ -431,7 +449,7 @@ def labels_of_args(args: argparse.Namespace) -> list[str]:
 # --- workers ---------------------------------------------------------------------------------------------------------------------------------
 def work_generate(args: argparse.Namespace) -> int:
     """One draw: generate, hash and G1-check it (not an observation of a seed by a model)."""
-    seeds = seeds_named(args, reserve=args.reserve)
+    seeds = seeds_named(args, reserve=args.reserve, planned=False)
     folder = manifest_dir(Path(args.run_dir), seeds.name)
     target = folder / "data_manifest.json"
     if target.exists():
@@ -445,8 +463,13 @@ def work_generate(args: argparse.Namespace) -> int:
     return 0 if g1["passed"] else 1
 
 
+def draw_stage(slot: int) -> int:
+    return next(st for st, draws in core.STAGE_DRAWS.items() if slot in draws)
+
+
 def work_gates(args: argparse.Namespace) -> int:
-    """G1 (read from the draw's record), G2 (no-memory baseline at chance), G4, G5 and G6 at real size on the seed set of the mode."""
+    """G1 (read from the draws' records), G2 (no-memory baseline at chance) for every registered draw at the size it is used at, G4, G5 and G6 at real size on the
+    seed set of the mode (the registered draw 1 in a registered run). A failed G1 or G2 on any draw is a failed gate (audit M4)."""
     run_dir = Path(args.run_dir)
     target = run_dir / "gates.json"
     if target.exists():
@@ -457,14 +480,29 @@ def work_gates(args: argparse.Namespace) -> int:
     rows = evaluate.corpus_rows(corpus_bytes(args))
     counts = sorted({DRY_FACTS[s] if args.dry else core.FACTS_PROPORTIONAL[s] for s in core.SLOTS_BY_SIZE})
     controls_rec = evaluate.controls_record(study, {PARENT: backbone}, counts)
+    g1_by_draw: dict[str, bool | None] = {}
+    g2_by_draw: dict[str, bool] = {str(args.draw): bool(controls_rec["g2"]["passed"])}
+    if args.mode == REGISTERED and not is_synthetic(args):
+        plan = require_draw_plan(run_dir)
+        g2_by_draw = {}
+        for slot in range(1, 15):
+            name = plan["seed_set_of"][str(slot)]
+            g1_by_draw[str(slot)] = bool(core.read_record(manifest_dir(run_dir, name) / "data_manifest.json", "data_manifest")["g1_passed"])
+            study_k = verified_data(args, core.seeds_of_name(name), require_manifest=True)
+            rec = evaluate.controls_record(study_k, {PARENT: backbone}, [core.FACTS_PROPORTIONAL[core.STAGE_SLOTS[draw_stage(slot)]]])
+            g2_by_draw[str(slot)] = bool(rec["g2"]["passed"])
+        g1: bool | None = all(g1_by_draw.values())
+    else:
+        manifest_path = manifest_dir(run_dir, seeds.name) / "data_manifest.json"
+        g1 = bool(core.read_record(manifest_path, "data_manifest")["g1_passed"]) if manifest_path.is_file() else None
+        g1_by_draw = {str(args.draw): g1}
+    g2_all = bool(controls_rec["g2"]["passed"]) and all(g2_by_draw.values())
     facts = DRY_FACTS[4096] if args.dry else core.FACTS_PROPORTIONAL[4096]
     split = 4 if args.dry else args.restore_split
     init = seeds.facts if is_synthetic(args) or args.mode != REGISTERED else core.INIT_SEEDS[0]
     result = gates.run_g4_g5_g6(study, backbone, mode=args.mode, facts=facts, restore_split=split, out_dir=run_dir / "gate_runs", init_seed=init, rows=rows, unit=unit_of(args))
-    manifest_path = manifest_dir(run_dir, seeds.name) / "data_manifest.json"
-    g1 = bool(core.read_record(manifest_path, "data_manifest")["g1_passed"]) if manifest_path.is_file() else None
-    core.write_record(target, core.jsonable({**core.envelope("gates"), "seed_set": seeds.name, "g1_passed": g1, "g2": controls_rec["g2"], "g2_passed": bool(controls_rec["g2"]["passed"]), "controls": controls_rec, **result, "dry": bool(args.dry), "environment": core.environment(), "identity": core.code_identity()}))
-    print(json.dumps({"g4_passed": result["g4_passed"], "g5_passed": result["g5_passed"], "g6_passed": result["g6_passed"], "g2_passed": bool(controls_rec["g2"]["passed"]), "defects": len(result["g4_defects"])}))
+    core.write_record(target, core.jsonable({**core.envelope("gates"), "seed_set": seeds.name, "g1_passed": g1, "g1_by_draw": g1_by_draw, "g2": controls_rec["g2"], "g2_by_draw": g2_by_draw, "g2_passed": g2_all, "controls": controls_rec, **result, "dry": bool(args.dry), "environment": core.environment(), "identity": core.code_identity()}))
+    print(json.dumps({"g4_passed": result["g4_passed"], "g5_passed": result["g5_passed"], "g6_passed": result["g6_passed"], "g2_passed": g2_all, "defects": len(result["g4_defects"])}))
     return 0 if result["g4_passed"] and result["g5_passed"] and result["g6_passed"] else 1
 
 
@@ -556,13 +594,16 @@ def finalize_calibration(args: argparse.Namespace, run_dir: Path, cells: Sequenc
     for arm, (name, values) in core.GRID.items():
         per_value_min: dict[float, float] = {}
         per_value_median: dict[float, float] = {}
+        per_value_key: dict[float, tuple[int, float]] = {}
         for v in values:
             labels = [c.label for c in cells if c.arm == arm and c.value == v]
             accs = [acc[lab] for lab in labels if lab in acc]
             per_value_min[v] = min(accs) if len(accs) == len(labels) and accs else -math.inf
-            per_value_median[v] = core.median([first.get(lab, math.inf) for lab in labels])
-        selected[arm] = core.select_value(values, per_value_min, per_value_median)
-        table[arm] = {"hyperparameter": name, "min_accuracy": {str(v): per_value_min[v] for v in values}, "median_first_success": {str(v): per_value_median[v] for v in values}, "selected": selected[arm]}
+            times = [first.get(lab, math.inf) for lab in labels]
+            per_value_median[v] = core.median(times)
+            per_value_key[v] = core.first_success_key(times)  # {finite, inf} is later than {finite, finite} and earlier than {inf, inf} (audit m14)
+        selected[arm] = core.select_value(values, per_value_min, per_value_key)
+        table[arm] = {"hyperparameter": name, "min_accuracy": {str(v): per_value_min[v] for v in values}, "median_first_success": {str(v): per_value_median[v] for v in values}, "first_success_key": {str(v): list(per_value_key[v]) for v in values}, "selected": selected[arm]}
     hyper = core.Hyper(selected["A1"], selected["A2"], selected["A4"], selected["A5-D"])
     path = run_dir / "calibration.json"
     if path.exists():
@@ -610,11 +651,26 @@ def finalize_rehearsal(args: argparse.Namespace, run_dir: Path) -> Path:
             e = core.read_record(folder / "rehearsal_evaluate.json", "rehearsal")
             e["label"] = trains[-1]["label"] if trains else e["label"]
             evals.append(e)
-    rates = budget.rates_from_records(trains, evals)
+    manifest_path = run_dir / "rehearse" / "manifest.json"
+    tasks: dict[str, dict[str, float]] = {}
+    if manifest_path.is_file():  # per-task process overhead: the pool's task seconds minus the timed training and evaluation (audit B1)
+        tasks = {t["label"]: {"seconds": float(t["seconds"]), "peak_rss_bytes": float(t["peak_rss_bytes"])} for t in core.read_record(manifest_path, "stage_manifest")["tasks"]}
+    rates = budget.rates_from_records(trains, evals, tasks)
     hyper = hyper_of(args)
     unit = unit_of(args)
     missing = budget.missing_items(rates)
-    record: dict[str, Any] = {**core.envelope("projection"), "rates": {budget.item_label(i): dataclasses.asdict(r) for i, r in rates.items()}, "missing_items": [budget.item_label(i) for i in missing], "memory": budget.memory_headroom(rates), "hyper": hyper.as_json(), "note": "analytical projections from measured rehearsal rates; no efficiency claim"}
+    record: dict[str, Any] = {
+        **core.envelope("projection"),
+        "rates": {budget.item_label(i): dataclasses.asdict(r) for i, r in rates.items()},
+        "missing_items": [budget.item_label(i) for i in missing],
+        "memory": budget.memory_headroom(rates),
+        "memory_by_stage": budget.memory_by_stage(rates),
+        "cost_differences": budget.cost_differences(rates),
+        "hyper": hyper.as_json(),
+        "calibration_sha256": file_sha256(Path(args.calibration)) if args.calibration else None,
+        "environment": core.environment(),
+        "note": "analytical projections from measured rehearsal rates (task overhead included); no efficiency claim",
+    }  # fmt: skip
     if not missing:
         remaining = core.Ledger(ledger_root(args) / "P9II-ledger-A.json", "A").remaining()
         p1, d1 = budget.stage1_budget(rates, hyper, remaining, unit)
@@ -635,7 +691,8 @@ def work_analyze(args: argparse.Namespace) -> int:
         raise FileExistsError(target)
     unit = unit_of(args)
     manifests = [read_json(p) for p in sorted(run_dir.glob("*/manifest.json"))]
-    failed = sorted(f"{m['stage']}:{t['label']}" for m in manifests for t in m["tasks"] if t["status"] != "completed")
+    # a failed generation task is a G1 failure, governed by the draw plan (a reserve substitution is not a failed cell; audit M5)
+    failed = sorted(f"{m['stage']}:{t['label']}" for m in manifests for t in m["tasks"] if t["status"] != "completed" and not str(m["stage"]).startswith("generate-"))
     gates_path = run_dir / "gates.json"
     gates_rec = core.read_record(gates_path, "gates") if gates_path.is_file() else None
     sd1 = analysis.load_stage(run_dir, 1, stage_cells(args, 1), unit, [f for f in failed if f.startswith(("train1", "evaluate1"))])
@@ -648,8 +705,8 @@ def work_analyze(args: argparse.Namespace) -> int:
         rec = core.read_record(advancing_path, "stage_gate")
         if rec["run"] and (run_dir / "train2" / "manifest.json").is_file():
             stage2 = analysis.load_stage(run_dir, 2, core.stage2_cells(rec["advancing"]), unit, [f for f in failed if f.startswith(("train2", "evaluate2"))])
-        elif not rec["run"] or not (run_dir / "train2" / "manifest.json").is_file():
-            s2_not_run = rec["status"] if not rec["run"] else C.NOT_RUN_BUDGET
+        else:
+            s2_not_run = rec["status"] if not rec["run"] else C.INCOMPLETE  # due but no record of it: the reason is not known, so it is not guessed to be budget
     g3 = run_dir / "stage_gate_3.json"
     if args.dry and args.dry_selected:
         selected = args.dry_selected
@@ -660,10 +717,11 @@ def work_analyze(args: argparse.Namespace) -> int:
             selected = rec3["selected"]
             stage3 = analysis.load_stage(run_dir, 3, core.stage3_cells(selected), unit, [f for f in failed if f.startswith(("train3", "evaluate3"))])
         else:
-            s3_not_run = rec3["status"]
-    result = analysis.analyze_study(sd1, stage2, stage3, stage2_not_run=s2_not_run, stage3_not_run=s3_not_run, stage3_selected=selected, gates=gates_rec, failed_tasks=failed)
+            s3_not_run = rec3["status"] if not rec3["run"] else C.INCOMPLETE
     plan_path = run_dir / "draw_plan.json"
-    core.write_record(target, core.jsonable({**core.envelope("analysis"), "dry": bool(args.dry), "unit_updates": unit, "result": result, "draw_plan": core.read_record(plan_path, "draw_plan") if plan_path.is_file() else None, "calibration": calibration_binding(args), "identity": core.code_identity(), "environment": core.environment()}))
+    plan_rec = core.read_record(plan_path, "draw_plan") if plan_path.is_file() else None
+    result = analysis.analyze_study(sd1, stage2, stage3, stage2_not_run=s2_not_run, stage3_not_run=s3_not_run, stage3_selected=selected, gates=gates_rec, failed_tasks=failed, draw_plan=plan_rec)
+    core.write_record(target, core.jsonable({**core.envelope("analysis"), "dry": bool(args.dry), "unit_updates": unit, "result": result, "draw_plan": plan_rec, "calibration": calibration_binding(args), "identity": core.code_identity(), "environment": core.environment()}))
     print(json.dumps({"status": result["assessment"]["status"], "outcome": result["outcome"]["outcome"]}))
     return 0
 
@@ -700,7 +758,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
     if args.mode == REGISTERED and not args.i_understand_freeze_time:
         raise pool.StageRefused("refused: registered-seed generation is used at freeze time; add --i-understand-freeze-time")
     run_dir = new_run_dir(args, "generate")
-    seeds = seeds_named(args, reserve=args.reserve)
+    seeds = seeds_named(args, reserve=args.reserve, planned=False)
     if (manifest_dir(run_dir, seeds.name) / "data_manifest.json").exists():
         raise pool.StageRefused(f"refused: {seeds.name} is already generated in {run_dir}")
     name = f"generate-{seeds.name}"
@@ -717,7 +775,7 @@ def cmd_draw_plan(args: argparse.Namespace) -> int:
         if p.is_file():
             g1[name] = bool(core.read_record(p, "data_manifest")["g1_passed"])
     plan = core.plan_draws(g1)
-    core.write_record(run_dir / "draw_plan.json", {**core.envelope("draw_plan"), "ok": plan.ok, "seed_set_of": {str(k): v for k, v in plan.seed_set_of.items()}, "replacements": {str(k): v for k, v in plan.replacements.items()}, "reason": plan.reason, "g1": g1})
+    core.write_record(run_dir / "draw_plan.json", {**core.envelope("draw_plan"), "ok": plan.ok, "seed_set_of": {str(k): v for k, v in plan.seed_set_of.items()}, "replacements": {str(k): v for k, v in plan.replacements.items()}, "labels": {str(k): core.replacement_label(v) for k, v in plan.replacements.items()}, "reason": plan.reason, "g1": g1})
     print(json.dumps({"ok": plan.ok, "replacements": plan.replacements, "reason": plan.reason}))
     return 0 if plan.ok else 1
 
@@ -743,6 +801,8 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
+    if not is_synthetic(args) and not args.calibration:
+        raise pool.StageRefused("refused: the rehearsal measures every arm's phases at the calibrated values: give --calibration (its sha256 is bound into the projection)")
     args.mode = REHEARSAL
     run_dir = new_run_dir(args, "rehearse")
     identity = core.code_identity()
@@ -760,6 +820,7 @@ def run_cells_stage(args: argparse.Namespace, stage: int, *, cap_train: float | 
     run_dir = Path(args.run_dir)
     if args.mode == REGISTERED:
         require_gates_passed(run_dir)
+        require_draw_plan(run_dir)
     cells = stage_cells(args, stage)
     ledger_stage = f"stage{stage}"
     tasks, _ = cell_tasks(f"train{stage}", "train", args, cells, run_dir, lambda c: core.cell_dir(run_dir, c.label) / "train.json")
@@ -787,7 +848,7 @@ def cmd_stagegate(args: argparse.Namespace) -> int:
     sd = analysis.load_stage(run_dir, after, core.stage1_cells() if after == 1 else core.stage2_cells(_advancing_of(run_dir, args)), unit)
     record: dict[str, Any] = {**core.envelope("stage_gate"), "after_stage": after, "environment": core.environment()}
     if sd.missing() or sd.failed_tasks:
-        record.update(run=False, status="NOT RUN — STAGE NOT INTERPRETABLE", advancing=[], arms=[], reason=f"cells missing or failed: {sd.missing()[:5]}")
+        record.update(run=False, status=C.INCOMPLETE, advancing=[], arms=[], selected=None, reason=f"cells missing or failed: {sd.missing()[:5]}")
     elif after == 1:
         r = analysis.analyze_stage(sd)
         gate = C.stage1_gate(r.classes, r.size.negative_control_failed)
@@ -795,8 +856,11 @@ def cmd_stagegate(args: argparse.Namespace) -> int:
         if gate.run and projection is not None:
             decision = budget.stage2_decision(gate.advancing, projection["stage2_table"], remaining_b)
             record["budget"] = decision._asdict()
+            record["memory"] = projection.get("memory_by_stage", {}).get("stage2")
             if not decision.run:
                 record.update(run=False, status=budget.NOT_RUN_BUDGET)
+            elif record["memory"] is not None and not record["memory"]["ok"]:
+                record.update(run=False, status=budget.NOT_RUN_MEMORY)
     else:
         r = analysis.analyze_stage(sd)
         selected, action, status = C.stage3_gate(r.classes, r.size.negative_control_failed, C.COMPLETE)
@@ -804,8 +868,11 @@ def cmd_stagegate(args: argparse.Namespace) -> int:
         if action == "run" and selected is not None and projection is not None:
             decision = budget.stage3_decision(selected, projection["stage3_table"], remaining_b)
             record["budget"] = decision._asdict()
+            record["memory"] = projection.get("memory_by_stage", {}).get("stage3")
             if not decision.run:
                 record.update(run=False, status=budget.NOT_RUN_BUDGET)
+            elif record["memory"] is not None and not record["memory"]["ok"]:
+                record.update(run=False, status=budget.NOT_RUN_MEMORY)
     core.write_record(target, core.jsonable(record))
     print(json.dumps({"gate": after, "run": record["run"], "status": record["status"]}))
     return 0
@@ -838,7 +905,8 @@ def cmd_report(args: argparse.Namespace) -> int:
 
 # --- the registered driver (called by the fixed launch scripts) ---------------------------------------------------------------------------------
 def load_plan(repo: Path) -> dict[str, Any]:
-    """The frozen plan: stage caps, the calibration record and the projection record with their sha256. Absent before the freeze: nothing registered then runs."""
+    """The frozen plan (``studies/p9ii/freeze/plan.json``): the calibration and projection records, the stage-cap table, the draw plan and the data manifests, each with its
+    sha256, and the registered run directory. Absent before the freeze: nothing registered then runs."""
     path = repo / FREEZE_PLAN
     if not path.is_file():
         raise pool.StageRefused(f"refused: no freeze plan at {path}: nothing registered runs before the freeze")
@@ -848,26 +916,65 @@ def load_plan(repo: Path) -> dict[str, Any]:
     return plan
 
 
+def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
+    """Every identity the freeze recorded must hold now (audit M7, m12): the calibration and projection records, the stage-cap table (the one source of the caps), the draw
+    plan and the data manifest of every draw, and the run directory. The projection must have been measured at the calibrated values (M1)."""
+    def check(path: Path, expected: str, what: str) -> None:
+        if not path.is_file() or file_sha256(path) != expected:
+            raise pool.StageRefused(f"refused: {path} does not hash to the frozen {what}")
+
+    for key in ("calibration", "projection"):
+        check(Path(plan[key]["path"]), plan[key]["sha256"], f"{key} record")
+    check(repo / CAPS_FILE, plan["stage_caps_sha256"], "stage-cap table")
+    if plan.get("run_dir") is not None and Path(plan["run_dir"]).resolve() != run_dir.resolve():
+        raise pool.StageRefused(f"refused: the freeze names the run directory {plan['run_dir']}, not {run_dir}")
+    check(run_dir / "draw_plan.json", plan["draw_plan"]["sha256"], "draw plan")
+    for name, digest in plan["data_manifests"].items():
+        check(manifest_dir(run_dir, name) / "data_manifest.json", digest, f"data manifest of {name}")
+    if set(plan["data_manifests"]) != {*core.DRAW_NAMES, *core.RESERVE_NAMES}:
+        raise pool.StageRefused("refused: the freeze must name the data manifest of all fourteen draws and both reserves")
+    calibration = core.read_record(Path(plan["calibration"]["path"]), "calibration")
+    projection = core.read_record(Path(plan["projection"]["path"]), "projection")
+    if projection["hyper"] != calibration["hyper"] or projection.get("calibration_sha256") != plan["calibration"]["sha256"]:
+        raise pool.StageRefused("refused: the projection was not measured at the calibrated values of the frozen calibration record")
+
+
+def stage_caps_for(name: str, caps: dict[str, Any], run_dir: Path) -> Any:
+    """The cap of a registered stage from the frozen table. Stage 2 and Stage 3 read the configuration (the arms) their gate record selected; a configuration with no
+    entry refuses (audit M3)."""
+    try:
+        if name == "stage2":
+            gate = core.read_record(run_dir / "stage_gate_1.json", "stage_gate")
+            return budget.cap_for(caps, "stage2", budget.config_key(gate["advancing"]))
+        if name == "stage3":
+            gate = core.read_record(run_dir / "stage_gate_3.json", "stage_gate")
+            return budget.cap_for(caps, "stage3", gate["selected"])
+        return budget.cap_for(caps, name)
+    except budget.CapMissing as exc:
+        raise pool.StageRefused(f"refused: {exc}") from exc
+
+
 def cmd_registered(args: argparse.Namespace) -> int:
-    """One registered stage by name (``REGISTERED_STAGES``), with everything else (caps, calibration, projection, seeds) from the frozen plan. The only free
-    arguments are the run directory and the freeze commit; the launch scripts pass nothing else."""
+    """One registered stage by name (``REGISTERED_STAGES``), with everything else (caps, calibration, projection, seeds) from the frozen plan and the frozen cap table. The
+    only free arguments are the run directory and the freeze commit; the launch scripts pass nothing else."""
     if args.name not in REGISTERED_STAGES:
         raise pool.StageRefused(f"refused: unknown registered stage {args.name!r}")
     args.mode = REGISTERED
     repo = repo_of(args)
+    run_dir = Path(args.run_dir)
     check_preconditions(REGISTERED, repo, args.freeze_commit)
+    if args.caps and Path(args.caps) != Path(CAPS_FILE):
+        raise pool.StageRefused(f"refused: the cap table is {CAPS_FILE}")
     plan = load_plan(repo)
-    caps = read_json(repo / args.caps) if args.caps else plan["caps"]
-    for key in ("calibration", "projection"):
-        entry = plan[key]
-        if file_sha256(Path(entry["path"])) != entry["sha256"]:
-            raise pool.StageRefused(f"refused: {entry['path']} does not hash to the frozen {key} record")
+    verify_plan(plan, repo, run_dir)
+    caps = read_json(repo / CAPS_FILE)
     args.calibration = plan["calibration"]["path"]
     args.projection = plan["projection"]["path"]
     args.workers = core.WORKERS
     name = args.name
+    projection = core.read_record(Path(args.projection), "projection")
     if name == "gates":
-        args.stage_cap_seconds = caps["gates"]
+        args.stage_cap_seconds = float(stage_caps_for("gates", caps, run_dir))
         return cmd_gates(args)
     if name == "stage1_gate":
         args.after = 1
@@ -877,18 +984,40 @@ def cmd_registered(args: argparse.Namespace) -> int:
         return cmd_stagegate(args)
     if name in ("stage1", "stage2", "stage3"):
         stage = int(name[-1])
+        cap = stage_caps_for(name, caps, run_dir)
+        memory = projection["memory_by_stage"][name]
+        if not memory["ok"]:
+            raise pool.StageRefused(f"refused: {budget.NOT_RUN_MEMORY}: twice the largest measured peak ({memory['peak_rss_bytes']} bytes) exceeds the per-worker or aggregate cap; nothing is run")
         if stage == 1:
             _, decision = budget.stage1_budget(rates_of(args), hyper_of(args), core.Ledger(ledger_root(args) / "P9II-ledger-A.json", "A").remaining())
             if not decision.run:
                 raise pool.StageRefused(f"refused: {budget.NOT_RUN_BUDGET}: twice the Stage 1 projection ({decision.required_seconds:.0f} s) exceeds what remains ({decision.remaining_seconds:.0f} s); nothing registered is run")
-        return run_cells_stage(args, stage, cap_train=float(caps[name]["train"]), cap_eval=float(caps[name]["evaluate"]))
-    args.stage_cap_seconds = caps[name]
+        return run_cells_stage(args, stage, cap_train=float(cap["train"]), cap_eval=float(cap["evaluate"]))
+    args.stage_cap_seconds = float(stage_caps_for(name, caps, run_dir))
     return cmd_analyze(args) if name == "analysis" else cmd_report(args)
 
 
 def rates_of(args: argparse.Namespace) -> budget.Rates:
     projection = core.read_record(Path(args.projection), "projection")
-    return {_parse_item(k): budget.Rate(float(v["seconds_per_update"]), int(v["peak_rss_bytes"]), int(v["sampled_rss_bytes"]), float(v["evaluation_seconds"])) for k, v in projection["rates"].items()}
+    return {_parse_item(k): budget.Rate(**{f: v[f] for f in budget.Rate.__dataclass_fields__ if f in v}) for k, v in projection["rates"].items()}
+
+
+def cmd_caps(args: argparse.Namespace) -> int:
+    """Write the cap table of the freeze from a projection record (a pure function, ``budget.caps_table``): twice the rehearsed projection of every stage and of every
+    possible Stage 2 configuration and Stage 3 selected arm, and twice the measured time of the gates, the analysis and the report with the stated floor."""
+    out = Path(args.out)
+    if out.exists():
+        raise pool.StageRefused(f"refused: {out} exists")
+    projection = core.read_record(Path(args.projection), "projection")
+    table = budget.caps_table(
+        rates_of(args), core.Hyper.from_json(projection["hyper"]),
+        gates_wall_seconds=float(args.gates_wall_seconds), analysis_wall_seconds=float(args.analysis_wall_seconds), report_wall_seconds=float(args.report_wall_seconds),
+        unit=unit_of(args),
+    )  # fmt: skip
+    out.parent.mkdir(parents=True, exist_ok=True)
+    write_json(out, core.jsonable(table))
+    print(json.dumps({"caps": str(out), "sha256": file_sha256(out)}))
+    return 0
 
 
 def _parse_item(label: str) -> budget.Item:
@@ -970,6 +1099,10 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--item", default=None, help="rehearse-cell: arm,slots,phase")
     p.add_argument("--restore-split", type=int, default=16)
     p.add_argument("--results-dir", default=None)
+    p.add_argument("--out", default=None, help="caps: where to write the cap table")
+    p.add_argument("--gates-wall-seconds", type=float, default=0.0)
+    p.add_argument("--analysis-wall-seconds", type=float, default=0.0)
+    p.add_argument("--report-wall-seconds", type=float, default=0.0)
     p.add_argument("--dry-advancing", default=None, help="DRY only: arms of Stage 2 (comma-separated)")
     p.add_argument("--dry-selected", default=None, help="DRY only: the selected arm of Stage 3")
     return p
@@ -981,7 +1114,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
     gen = sub.add_parser("generate", parents=[common])
     gen.add_argument("--i-understand-freeze-time", action="store_true")
-    for name in ("draw-plan", "calibrate", "rehearse", "gates", "train", "stagegate", "analyze", "report"):
+    for name in ("draw-plan", "caps", "calibrate", "rehearse", "gates", "train", "stagegate", "analyze", "report"):
         sub.add_parser(name, parents=[common])
     reg = sub.add_parser("registered", parents=[common])
     reg.add_argument("name", choices=REGISTERED_STAGES)
@@ -996,7 +1129,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 COMMANDS: dict[str, Any] = {
     "generate": cmd_generate, "draw-plan": cmd_draw_plan, "calibrate": cmd_calibrate, "rehearse": cmd_rehearse, "gates": cmd_gates, "train": cmd_train,
-    "stagegate": cmd_stagegate, "analyze": cmd_analyze, "report": cmd_report, "registered": cmd_registered, "dry": cmd_dry,
+    "stagegate": cmd_stagegate, "caps": cmd_caps, "analyze": cmd_analyze, "report": cmd_report, "registered": cmd_registered, "dry": cmd_dry,
 }  # fmt: skip
 DEFAULT_MODE = {"generate": CALIBRATION, "calibrate": CALIBRATION, "rehearse": REHEARSAL}
 
@@ -1017,7 +1150,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             return int(WORKERS[args.worker](args))
         if args.command == "dry":
             args.dry, args.mode = True, CALIBRATION
-        elif args.run_dir is None and args.command not in ("calibrate", "rehearse", "generate"):
+        elif args.run_dir is None and args.command not in ("calibrate", "rehearse", "generate", "caps"):
             raise StageError("--run-dir is required")
         return int(COMMANDS[args.command](args))
     except (pool.StageRefused, core.LedgerRefused) as exc:

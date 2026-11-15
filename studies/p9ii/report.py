@@ -11,6 +11,7 @@ from typing import Any
 
 from arborlm.io import write_json
 
+from . import classes as C
 from . import core
 
 NOT_CLAIMED = (
@@ -45,7 +46,7 @@ def class_rows(result: dict[str, Any]) -> list[dict[str, Any]]:
     for stage_key, size in (("stage1", 4096), ("stage2", 16384)):
         for arm, d in (result.get(stage_key) or {}).get("arms", {}).items():
             paired = d.get("paired_against_a0") or {}
-            rows.append({"stage": stage_key, "slots": size, "arm": arm, "supervision": core.SUPERVISION_LABEL.get(arm, ""), "class": d["class"], "evaluated": d["counts"]["evaluated"], "successes": d["counts"]["successes"], "failures": d["counts"]["failures"], "lm_flagged_cells": d["counts"]["lm_flagged_cells"], "paired_label": paired.get("label", ""), "paired_d": paired.get("d", ""), "paired_p_value": paired.get("p_value", ""), "median_escape_update": d["median_escape_update"], "dense_comparison": (d.get("dense_comparison") or {}).get("label", "")})
+            rows.append({"stage": stage_key, "slots": size, "arm": arm, "supervision": core.SUPERVISION_LABEL.get(arm, ""), "class": d["class"], "evaluated": d["counts"]["evaluated"], "successes": d["counts"]["successes"], "failures": d["counts"]["failures"], "lm_flagged_cells": d["counts"]["lm_flagged_cells"], "paired_label": paired.get("label", ""), "paired_d": paired.get("d", ""), "paired_p_value": paired.get("p_value", ""), "median_escape_update_escaped_cells_only": d["median_escape_update_escaped_cells_only"], "median_escape_update_censored_at_readout": d["draw_sensitivity"]["median_escape_update_censored_at_readout"], "dense_comparison": (d.get("dense_comparison") or {}).get("label", "")})
     return rows
 
 
@@ -78,6 +79,46 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def annotation_lines(result: dict[str, Any]) -> list[str]:
+    """Every label sections 8.4 and 8.5 say are printed: NEGATIVE CONTROL FAILED, SUPERVISION-DEPENDENT, ADDRESS RECALL and ADDRESS STABLE, the four category counts, the
+    MID-SCHEDULE / ALSO AT MATCHED UPDATES readout, d(A2 against A1), the LM-capability numbers (A6's r beside each arm's), the dense comparison and the SCALE PROBE."""
+    lines: list[str] = []
+    for key, size in (("stage1", "4,096"), ("stage2", "16,384")):
+        stage = result.get(key)
+        if not stage or "arms" not in stage:
+            continue
+        lines += [f"## Annotations at {size} slots", ""]
+        lines.append(f"- {C.NEGATIVE_CONTROL_FAILED}: {'printed' if stage['negative_control_failed'] else 'not printed'}" + (" (A1 and A2 are printed but not interpreted as fact-specific supervision)" if stage["negative_control_failed"] else ""))
+        a6 = stage.get("a6", {})
+        lines.append("- A6 (oracle reference) relative next-byte loss rise r by draw (measured): " + ", ".join(f"d{d}: {v['lm_relative_rise']}" for d, v in a6.items()))
+        for arm, d in stage["arms"].items():
+            lm = d["lm_capability"]
+            parts = [f"class {d['class']}", "categories " + "; ".join(f"{k}: {v}" for k, v in d["categories"].items()), f"r by cell {lm['relative_rises']}", f"absolute rise (percent) {lm['absolute_rise_percent']}"]
+            if lm["reduced"]:
+                parts.append(C.LM_REDUCED)
+            addr = d["address"]
+            if "recall" in addr:
+                parts.append(f"{C.ADDRESS_RECALL} median {addr['recall']['median']} -> {addr['recall']['label'] or 'not printed'}")
+            parts.append(f"{C.ADDRESS_STABLE} median {addr['stable']['median']} -> {addr['stable']['label'] or 'not printed'}")
+            if "supervision_dependent" in d:
+                sd = d["supervision_dependent"]
+                parts.append(f"{C.SUPERVISION_DEPENDENT}: {sd['label'] or 'not printed'} ({sd['cells']} of {sd['of']} evaluated cells; {C.ADDRESSES_REMAPPED}: {d['addresses_remapped_cells']} cells, descriptive)")
+                parts.append("d(A2 against A1) " + (str(d["paired_against_a1"]["d"]) if "paired_against_a1" in d else "not available") + " (descriptive)")
+            if "readout_u" in d:
+                parts.append(f"readout at U: {d['readout_u']['label'] or 'not RELIABLE at U'}")
+            if "dense_comparison" in d:
+                parts.append(f"dense comparison {d['dense_comparison']['label']}")
+            lines.append(f"- {arm} {core.SUPERVISION_LABEL.get(arm, '')}: " + "; ".join(parts))
+        lines.append("")
+    stage3 = result.get("stage3")
+    if stage3 and "label" in stage3:
+        lines += ["## Stage 3 (probe)", "", f"- {stage3['label']}: {stage3['successes']} of {stage3['cells']} cells succeed ({stage3['selected']}); {stage3['note']}", ""]
+    plan = result.get("draw_plan")
+    if plan and plan.get("replacements"):
+        lines += ["## Draw plan", "", *[f"- draw {k}: {plan['labels'][k] if plan.get('labels') else v} ({v})" for k, v in plan["replacements"].items()], ""]
+    return lines
+
+
 def render_markdown(analysis: dict[str, Any], classes: list[dict[str, Any]], banner: str | None) -> str:
     result = analysis["result"]
     out = result["outcome"]
@@ -100,10 +141,11 @@ def render_markdown(analysis: dict[str, Any], classes: list[dict[str, Any]], ban
     carried = result.get("carried_forward")
     if carried:
         lines += [f"Interface carried forward: {carried['arm']} {carried['supervision'] or ''}" + (f"; {carried['recommendation']}" if carried["recommendation"] else ""), ""]
-    lines += ["## Classes (measured counts, rules of section 8.4)", "", "| stage | slots | arm | supervision | class | evaluated | successes | paired against A0 | d | median escape update | dense |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+    lines += ["## Classes (measured counts, rules of section 8.4)", "", "| stage | slots | arm | supervision | class | evaluated | successes | paired against A0 | d | median escape update (escaped cells only) | median escape update (censored at the readout) | dense |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for r in classes:
-        lines.append(f"| {r['stage']} | {r['slots']} | {r['arm']} | {r['supervision']} | {r['class']} | {r['evaluated']} | {r['successes']} | {r['paired_label']} | {r['paired_d']} | {r['median_escape_update']} | {r['dense_comparison']} |")
+        lines.append(f"| {r['stage']} | {r['slots']} | {r['arm']} | {r['supervision']} | {r['class']} | {r['evaluated']} | {r['successes']} | {r['paired_label']} | {r['paired_d']} | {r['median_escape_update_escaped_cells_only']} | {r['median_escape_update_censored_at_readout']} | {r['dense_comparison']} |")
     lines += ["", "Every contrast against A0 compares an arm at its better of two calibrated settings with an untuned baseline.", ""]
+    lines += annotation_lines(result)
     if result.get("hypotheses"):
         lines += ["## Hypothesis readings (section 8.6)", ""] + [f"- {k}: {v['reading']}" for k, v in result["hypotheses"].items()] + [""]
     lines += ["## What must not be claimed (section 13)", "", *[f"- {s}" for s in NOT_CLAIMED], ""]

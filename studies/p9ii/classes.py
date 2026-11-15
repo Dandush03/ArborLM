@@ -21,7 +21,7 @@ Readings fixed here where the ADR is silent on a formula (all reported, none cha
 """
 
 import math
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass, field
 from typing import Any, NamedTuple
 
@@ -479,7 +479,9 @@ def category_counts(summaries: Mapping[CellKey, TrainingSummary]) -> dict[str, i
     return out
 
 
-def supervision_dependent(summaries: Mapping[CellKey, TrainingSummary]) -> dict[str, Any]:
+def supervision_dependent(summaries: Mapping[CellKey, TrainingSummary], evaluated: Collection[CellKey] | None = None) -> dict[str, Any]:
+    """SUPERVISION-DEPENDENT: more than half of the cells. The denominator is the evaluated cells: cells on NOT_EVALUATED draws are left out (audit m9)."""
+    summaries = {k: s for k, s in summaries.items() if evaluated is None or k in evaluated}
     flagged = [k for k, s in summaries.items() if s.supervision_acc_drop or s.supervision_collapse]
     return {"label": SUPERVISION_DEPENDENT if len(flagged) * 2 > len(summaries) else None, "cells": len(flagged), "of": len(summaries), "collapse_clause_cells": sum(1 for s in summaries.values() if s.supervision_collapse), "accuracy_clause_cells": sum(1 for s in summaries.values() if s.supervision_acc_drop)}
 
@@ -615,7 +617,7 @@ def draw_sensitivity(arm: str, verdicts: Mapping[CellKey, CellVerdict], summarie
         "per_draw_success_lower_bound_95_one_sided": clopper_pearson_lower(both, n) if n else None,
         "escape_updates": {f"{d}/{j}": v for (d, j), v in sorted(censored_value.items())},
         "escape_censored_cells": sum(1 for v in escapes.values() if v is None),
-        "median_escape_update": median([float(v) for v in censored_value.values()]),
+        "median_escape_update_censored_at_readout": median([float(v) for v in censored_value.values()]),
         "anova_log_escape": anova_log_escape({d: [escapes.get((d, j)) for j in (0, 1)] for d in draws}),
         "time_to_first_success": {f"{d}/{j}": v for (d, j), v in sorted(((k, s.first_success) for k, s in summaries.items()))},
         "first_success_cells": sum(1 for f in firsts if f is not None),
@@ -646,7 +648,10 @@ class SizeAnalysis:
         return "is the reference of every pairing" if arm == "A0" else (p.label if p else "no paired reading")
 
 
-def hypothesis_readings(s1: SizeAnalysis, h19a_inputs: Mapping[str, Any], *, reading_stage: SizeAnalysis | None = None) -> dict[str, dict[str, Any]]:
+NOT_TESTED_16K = "NOT TESTED AT 16,384"
+
+
+def hypothesis_readings(s1: SizeAnalysis, h19a_inputs: Mapping[str, Any], *, reading_stage: SizeAnalysis | None = None, not_tested_status: str | None = None) -> dict[str, dict[str, Any]]:
     """The readings of section 8.6, fixed in advance. ``h19a_inputs`` holds A0's per-cell ``onset_within_256`` and ``gradient_ratio_le`` counts (of 16).
     H19-B, C, D, F, G are read at 4,096 (Stage 1); ``reading_stage`` replaces it (16,384 at 4U) in the case of the ANSWER-ONLY RELIABLE row."""
     s = reading_stage or s1
@@ -667,6 +672,9 @@ def hypothesis_readings(s1: SizeAnalysis, h19a_inputs: Mapping[str, Any], *, rea
         "H19-F": read("A5-C"),
         "H19-G": read("A5-D"),
     }
+    if not_tested_status is not None:  # the row that reads them at 16,384 (row 3) has no complete Stage 2: they are not read, and never CONTRADICTED
+        for key in ("H19-B", "H19-C", "H19-D", "H19-F", "H19-G"):
+            out[key] = {"arm": out[key]["arm"], "reading": NOT_TESTED_16K, "stage2_status": not_tested_status}
     for arm in core.LEARNED_ARMS:
         c = s1.classes.get(arm)
         out[f"H19-E ({arm})"] = {"reading": "supported" if c is not None and c.cls == RELIABLE else "not supported"}

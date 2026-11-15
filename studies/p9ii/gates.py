@@ -235,6 +235,38 @@ def reach_checks(job: train.TrainJob, tokens: "Tensor", fact_ids: "Tensor") -> d
     return out
 
 
+@torch.no_grad()
+def _logits(m: model.P9IIModel, tokens: "Tensor") -> "Tensor":
+    m.eval()
+    logits: Tensor = m(tokens)[0]
+    return logits
+
+
+def g6_after_training(make_job: Any, tokens: "Tensor", updates: int = 4) -> dict[str, Any]:
+    """G6 strengthened (audit m4): train every learned arm for a few updates, then replace the trainer's target-slot injection and scramble the fact-to-answer table; the
+    logits on the fixed tokens must not change, a model rebuilt from its ``state_dict`` alone must give identical logits, and the model must hold no tensor outside its
+    parameters and buffers (a fact table would show up there)."""
+    out: dict[str, Any] = {"arms": {}}
+    for arm in core.LEARNED_ARMS:
+        run = train.run_job(make_job(arm, f"g6_{arm}", updates))
+        before = _logits(run.model, tokens)
+        if run.trainer.injection is not None:
+            run.trainer.injection = model.target_injection(int(run.trainer.injection.shape[0]), run.model.slots, 12345)
+        run.trainer.job.data.facts.answer = run.trainer.job.data.facts.answer.flip(0).clone()
+        try:
+            after = _logits(run.model, tokens)
+        finally:
+            run.trainer.job.data.facts.answer = run.trainer.job.data.facts.answer.flip(0).clone()  # restore the shared draw
+        rebuilt = model.build_model(arm, run.model.slots, run.trainer.job.init_seed, run.trainer.job.backbone, seed_rng=False)
+        rebuilt.load_state_dict(run.model.state_dict())
+        stray = [n for n, v in vars(run.model.addition).items() if isinstance(v, torch.Tensor) and n not in ("last_query", "_pending_z")]
+        stray += [n for n, v in vars(run.model).items() if isinstance(v, torch.Tensor)]
+        ok = bool(torch.equal(before, after) and torch.equal(before, _logits(rebuilt, tokens)) and not stray)
+        out["arms"][arm] = {"unchanged_by_injection_and_fact_table": bool(torch.equal(before, after)), "rebuilt_from_state_dict_identical": bool(torch.equal(before, _logits(rebuilt, tokens))), "stray_tensor_attributes": stray, "passed": ok}
+    out["passed"] = all(v["passed"] for v in out["arms"].values())
+    return out
+
+
 def run_g4_g5_g6(
     data: StudyData,
     backbone: "Backbone",
@@ -296,6 +328,8 @@ def run_g4_g5_g6(
         run = train.run_job(job(arm, f"g5_{arm}", 4))
         g5[arm] = model.g5_check(run.model, backbone, sample)
     g6 = model.g6_check(backbone, 4096, init_seed, tokens_all[:, : core.INPUT_LENGTH], torch.arange(10), torch.arange(10).flip(0))
+    g6["trained"] = g6_after_training(job, tokens_all[:, : core.INPUT_LENGTH])
+    g6["passed"] = bool(g6["passed"] and g6["trained"]["passed"])
     return {
         "g4_defects": defects,
         "g4_passed": not defects,
