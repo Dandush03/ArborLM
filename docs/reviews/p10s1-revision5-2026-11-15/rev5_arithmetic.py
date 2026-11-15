@@ -1,4 +1,4 @@
-"""ADR-0021 revision 5: design arithmetic. Standard library only; reads nothing; runs no study code.
+"""ADR-0021 revision 5: design arithmetic (final cell list after the independent review: 2K/256 added for F-OQ, 31 configurations, C_max 36 h). Standard library only; reads nothing; runs no study code.
 
 Every rate below is copied from docs/reviews/p10s1-load-search-2026-11-15/audit_curves.out (Part D) and audit_costs.out
 (calibration draws, commit 3ad821a). MAN = manifest task seconds per update (training plus the calibration's evaluations and
@@ -109,18 +109,22 @@ ASSUMED = "ASSUMED (unmeasured): everything at 1,024 slots (set to the 4,096-slo
 def rate(rs, arm, facts, slots):
     r = RATES[rs]
     if arm in ("F-OQ", "T-OQ"):
-        if slots == 1024:
+        if slots <= 1024:  # 256 and 1,024 slots: never measured, set to the 4,096-slot rate
             return r[("F-OQ", 1024)]
         size = "x" if facts >= 131072 else ("l" if facts >= 32768 else "s")
         return r[("F-OQ", slots, size)]
     return r[(arm, slots)]
 
 
-def matrix(ul1, ul2, up=(8192, 8192, 16384)):
+UL0 = 98304  # 2K/256 (F-OQ only): central guess, the earliest value the two-pass rule allows; an extrapolation with no data
+
+
+def matrix(ul1, ul2, up=(8192, 8192, 16384), ul0=UL0):
     """(arm, facts, slots, updates) of one replicate. Rows 2K, 8K, 32K with their U_P; loaded cells run U_L, others 6 x U_P, R2 U_P."""
     u2, u8, u32 = up
     cells = [(2048, 1024, 6 * u2), (2048, 4096, 6 * u2), (8192, 1024, ul1), (8192, 4096, 6 * u8), (8192, 16384, 6 * u8), (32768, 4096, ul2), (32768, 16384, 6 * u32)]
     out = [(arm, f, n, u) for arm in ("F-OQ", "T-OQ", "H8") for f, n, u in cells]
+    out += [("F-OQ", 2048, 256, ul0)]  # saturation-only cell (review M6)
     out += [("D-OQ", 2048, 4096, 6 * u2), ("D-OQ", 8192, 4096, 6 * u8), ("D-OQ", 8192, 16384, 6 * u8), ("D-OQ", 32768, 16384, 6 * u32), ("D-OQ", 8192, 1024, ul1), ("D-OQ", 32768, 4096, ul2)]
     out += [("R2", 2048, 4096, u2), ("R2", 8192, 16384, u8), ("R2", 32768, 32768, u32)]
     return out
@@ -143,8 +147,8 @@ EVAL = {"low": 1.5, "high": 2.5}  # lead's estimate: calibration evaluation seco
 OTHER = 0.5  # gates at real size, timing stage, simulation, analysis, report (section 10.3 allowed 0.4)
 REHEARSAL = 0.5
 
-print("\n## 4. Registered training per replicate (seconds), 30 configurations; " + ASSUMED)
-assert len(matrix(1, 1)) == 30
+print("\n## 4. Registered training per replicate (seconds), 31 configurations; " + ASSUMED)
+assert len(matrix(1, 1)) == 31
 for rs in ("MAN", "TRN"):
     for toq in (1.0, 2.0):
         for ul1, ul2 in ((98304, 196608), (131072, 262144), (131072, 393216), (196608, 393216), (262144, 524288)):
@@ -173,7 +177,7 @@ print("\n## 7. New calibration (two calibration draws; every load-search run goe
 
 
 def calib(rs, toq, ul1max, ul2max, s3max):
-    load = [ul1max * rate(rs, "F-OQ", 8192, 1024) * m for m in (1, 1, toq, toq)] + [ul2max * rate(rs, "F-OQ", 32768, 4096) * m for m in (1, 1, toq, toq)]
+    load = [ul1max * rate(rs, "F-OQ", 8192, 1024) * m for m in (1, 1, toq, toq)] + [ul2max * rate(rs, "F-OQ", 32768, 4096) * m for m in (1, 1, toq, toq)] + [262144 * rate(rs, "F-OQ", 2048, 256)] * 2  # 2K/256, F-OQ alone, to the 8K/1K ceiling
     s3 = [s3max * rate(rs, "F-OQ", 131072, 16384)] * 2 if s3max else []
     up = [32768 * rate(rs, "F-OQ", f, n) for f, n in ((2048, 4096), (8192, 4096), (32768, 16384))] * 2 + [32768 * rate(rs, "R2", 0, n) for n in (4096, 16384, 32768)] * 2
     h8 = [32768 * rate(rs, "H8", 0, n) for n in (4096, 4096, 16384)] * 2
@@ -192,10 +196,14 @@ print("\n## 8. Cap needed = charged so far + new calibration + rehearsal + 2 x (
 print(f"  charged so far {CHARGED:.2f} h; rehearsal {REHEARSAL} h; evaluation {EVAL['low']}-{EVAL['high']} h (UNMEASURED estimate); other {OTHER} h")
 
 
-def need(rs, toq, ul1, ul2, ev, ul3=0, seed=True):
-    by = seconds(rs, toq, matrix(ul1, ul2))
+C_MAX = 36.0  # the lead's ruling 1 (LEAD_RULINGS.md), recorded in ADR section 10.3
+
+
+def need(rs, toq, ul1, ul2, ev, ul3=0, seed=True, drop=()):
+    by = seconds(rs, toq, [x for x in matrix(ul1, ul2) if (x[0], x[1], x[2]) not in drop])
     train = sum(by.values()) * 5 / 6
-    block = by["F-OQ"] * 2 / 6 if seed else 0.0
+    seven = sum(u * rate(rs, a, f, n) for a, f, n, u in matrix(ul1, ul2) if a == "F-OQ" and n != 256)  # the seed block is the seven grid cells, not 2K/256
+    block = seven * 2 / 6 if seed else 0.0
     cal, _ = calib(rs, toq, 262144, 524288, 1048576 if ul3 else 0)  # the calibration always runs to its ceilings
     s3 = 0.0
     if ul3:
@@ -238,3 +246,13 @@ for rs, toq, ev in (("TRN", 1.0, "low"), ("MAN", 2.0, "high")):
     d = 49152 * rate(rs, "D-OQ", 0, 16384) * 5 / 6 * 2
     h = (131072 * rate(rs, "H8", 0, 1024) + 393216 * rate(rs, "H8", 0, 4096)) * 5 / 6 * 2
     print(f"  {rs} D-OQ at 8K/16K is worth {hours(d):.2f} h of C_need; H8 at the two loaded cells {hours(h):.2f} h (central U_L)")
+
+print("\n## 10. Against C_max = 36 h, with the fixed cuts in order (cut 2: no seed block; cut 3: also no D-OQ at 8K/16K). Packing here is total/6; the review used longest-first and got 0.5-3 h less")
+for rs, toq, ev in (("TRN", 1.0, "low"), ("TRN", 2.0, "low"), ("MAN", 1.0, "high"), ("MAN", 2.0, "high")):
+    for ul1, ul2 in ((98304, 196608), (131072, 393216), (262144, 524288)):
+        a = need(rs, toq, ul1, ul2, EVAL[ev])[0]
+        b = need(rs, toq, ul1, ul2, EVAL[ev], seed=False)[0]
+        c = need(rs, toq, ul1, ul2, EVAL[ev], seed=False, drop=(("D-OQ", 8192, 16384),))[0]
+        verdict = "fits" if a <= C_MAX else ("fits after cut 2" if b <= C_MAX else ("fits after cut 3" if c <= C_MAX else "RETURNS: NOT STARTED, BUDGET"))
+        print(f"  {rs} T-OQ={toq:.0f}x eval {ev:4s} U_L {ul1:7d}/{ul2:7d}: {a:5.1f} / {b:5.1f} / {c:5.1f} -> {verdict}")
+print("  the 2K/256 cell: registered " + ", ".join(f"{rs} {hours(UL0 * rate(rs, 'F-OQ', 2048, 256) * 5 / 6):.2f} h" for rs in ("TRN", "MAN")) + " (doubled in C_need); its search two runs of " + ", ".join(f"{rs} {hours(262144 * rate(rs, 'F-OQ', 2048, 256)):.2f} h" for rs in ("TRN", "MAN")))

@@ -46,27 +46,27 @@ backbone forward+backward: 57.5 M
   measured for comparison (calibration, 65,536 updates, not saturated): 32K/4K 1.89-1.94 = 15.1-15.5 bits/slot; 16K/4K 4.06-4.12 = 16.3-16.5; 131K/16K 1.46-1.52 = 11.7-12.1; 64K/16K 3.49-3.54 = 14.0-14.2
   bits per trainable parameter at 17.5 bits per slot: 17.5/48 = 0.36; a D-OQ of equal size would need 5 F / (48 N) = 0.83 bits per parameter to hold a load-8 fact set
 
-## 4. Registered training per replicate (seconds), 30 configurations; ASSUMED (unmeasured): everything at 1,024 slots (set to the 4,096-slot rate, an upper bound if the backbone dominates); D-OQ at 4,096 (half its 16,384 rate) and at 1,024; R2 at 32,768 rows (interpolated); T-OQ (a multiple of F-OQ).
-  MAN T-OQ=1x  U_L1=  98304 U_L2= 196608: F-OQ   7065 T-OQ   7065 H8   5245 D-OQ   8159 R2    437 | total  27972 s -> 5 replicates / 6 workers =  6.47 h (longest single run 0.67 h)
-  MAN T-OQ=1x  U_L1= 131072 U_L2= 262144: F-OQ   8103 T-OQ   8103 H8   6051 D-OQ   9273 R2    437 | total  31967 s -> 5 replicates / 6 workers =  7.40 h (longest single run 0.89 h)
-  MAN T-OQ=1x  U_L1= 131072 U_L2= 393216: F-OQ   9531 T-OQ   9531 H8   7126 D-OQ  10879 R2    437 | total  37504 s -> 5 replicates / 6 workers =  8.68 h (longest single run 1.34 h)
-  MAN T-OQ=1x  U_L1= 196608 U_L2= 393216: F-OQ  10177 T-OQ  10177 H8   7663 D-OQ  11502 R2    437 | total  39957 s -> 5 replicates / 6 workers =  9.25 h (longest single run 1.34 h)
-  MAN T-OQ=1x  U_L1= 262144 U_L2= 524288: F-OQ  12252 T-OQ  12252 H8   9275 D-OQ  13730 R2    437 | total  47947 s -> 5 replicates / 6 workers = 11.10 h (longest single run 1.78 h)
-  MAN T-OQ=2x  U_L1=  98304 U_L2= 196608: F-OQ   7065 T-OQ  14130 H8   5245 D-OQ   8159 R2    437 | total  35037 s -> 5 replicates / 6 workers =  8.11 h (longest single run 1.19 h)
-  MAN T-OQ=2x  U_L1= 131072 U_L2= 262144: F-OQ   8103 T-OQ  16205 H8   6051 D-OQ   9273 R2    437 | total  40069 s -> 5 replicates / 6 workers =  9.28 h (longest single run 1.59 h)
-  MAN T-OQ=2x  U_L1= 131072 U_L2= 393216: F-OQ   9531 T-OQ  19062 H8   7126 D-OQ  10879 R2    437 | total  47036 s -> 5 replicates / 6 workers = 10.89 h (longest single run 2.38 h)
-  MAN T-OQ=2x  U_L1= 196608 U_L2= 393216: F-OQ  10177 T-OQ  20355 H8   7663 D-OQ  11502 R2    437 | total  50134 s -> 5 replicates / 6 workers = 11.61 h (longest single run 2.38 h)
-  MAN T-OQ=2x  U_L1= 262144 U_L2= 524288: F-OQ  12252 T-OQ  24505 H8   9275 D-OQ  13730 R2    437 | total  60199 s -> 5 replicates / 6 workers = 13.93 h (longest single run 3.17 h)
-  TRN T-OQ=1x  U_L1=  98304 U_L2= 196608: F-OQ   6409 T-OQ   6409 H8   4794 D-OQ   7835 R2    396 | total  25843 s -> 5 replicates / 6 workers =  5.98 h (longest single run 0.64 h)
-  TRN T-OQ=1x  U_L1= 131072 U_L2= 262144: F-OQ   7328 T-OQ   7328 H8   5527 D-OQ   8905 R2    396 | total  29484 s -> 5 replicates / 6 workers =  6.83 h (longest single run 0.86 h)
-  TRN T-OQ=1x  U_L1= 131072 U_L2= 393216: F-OQ   8551 T-OQ   8551 H8   6505 D-OQ  10448 R2    396 | total  34450 s -> 5 replicates / 6 workers =  7.97 h (longest single run 1.29 h)
-  TRN T-OQ=1x  U_L1= 196608 U_L2= 393216: F-OQ   9166 T-OQ   9166 H8   6994 D-OQ  11044 R2    396 | total  36766 s -> 5 replicates / 6 workers =  8.51 h (longest single run 1.29 h)
-  TRN T-OQ=1x  U_L1= 262144 U_L2= 524288: F-OQ  11005 T-OQ  11005 H8   8461 D-OQ  13183 R2    396 | total  44049 s -> 5 replicates / 6 workers = 10.20 h (longest single run 1.71 h)
-  TRN T-OQ=2x  U_L1=  98304 U_L2= 196608: F-OQ   6409 T-OQ  12818 H8   4794 D-OQ   7835 R2    396 | total  32252 s -> 5 replicates / 6 workers =  7.47 h (longest single run 1.02 h)
-  TRN T-OQ=2x  U_L1= 131072 U_L2= 262144: F-OQ   7328 T-OQ  14656 H8   5527 D-OQ   8905 R2    396 | total  36812 s -> 5 replicates / 6 workers =  8.52 h (longest single run 1.36 h)
-  TRN T-OQ=2x  U_L1= 131072 U_L2= 393216: F-OQ   8551 T-OQ  17102 H8   6505 D-OQ  10448 R2    396 | total  43001 s -> 5 replicates / 6 workers =  9.95 h (longest single run 2.04 h)
-  TRN T-OQ=2x  U_L1= 196608 U_L2= 393216: F-OQ   9166 T-OQ  18333 H8   6994 D-OQ  11044 R2    396 | total  45933 s -> 5 replicates / 6 workers = 10.63 h (longest single run 2.04 h)
-  TRN T-OQ=2x  U_L1= 262144 U_L2= 524288: F-OQ  11005 T-OQ  22009 H8   8461 D-OQ  13183 R2    396 | total  55053 s -> 5 replicates / 6 workers = 12.74 h (longest single run 2.72 h)
+## 4. Registered training per replicate (seconds), 31 configurations; ASSUMED (unmeasured): everything at 1,024 slots (set to the 4,096-slot rate, an upper bound if the backbone dominates); D-OQ at 4,096 (half its 16,384 rate) and at 1,024; R2 at 32,768 rows (interpolated); T-OQ (a multiple of F-OQ).
+  MAN T-OQ=1x  U_L1=  98304 U_L2= 196608: F-OQ   8034 T-OQ   7065 H8   5245 D-OQ   8159 R2    437 | total  28941 s -> 5 replicates / 6 workers =  6.70 h (longest single run 0.67 h)
+  MAN T-OQ=1x  U_L1= 131072 U_L2= 262144: F-OQ   9072 T-OQ   8103 H8   6051 D-OQ   9273 R2    437 | total  32936 s -> 5 replicates / 6 workers =  7.62 h (longest single run 0.89 h)
+  MAN T-OQ=1x  U_L1= 131072 U_L2= 393216: F-OQ  10501 T-OQ   9531 H8   7126 D-OQ  10879 R2    437 | total  38474 s -> 5 replicates / 6 workers =  8.91 h (longest single run 1.34 h)
+  MAN T-OQ=1x  U_L1= 196608 U_L2= 393216: F-OQ  11147 T-OQ  10177 H8   7663 D-OQ  11502 R2    437 | total  40926 s -> 5 replicates / 6 workers =  9.47 h (longest single run 1.34 h)
+  MAN T-OQ=1x  U_L1= 262144 U_L2= 524288: F-OQ  13222 T-OQ  12252 H8   9275 D-OQ  13730 R2    437 | total  48916 s -> 5 replicates / 6 workers = 11.32 h (longest single run 1.78 h)
+  MAN T-OQ=2x  U_L1=  98304 U_L2= 196608: F-OQ   8034 T-OQ  14130 H8   5245 D-OQ   8159 R2    437 | total  36006 s -> 5 replicates / 6 workers =  8.33 h (longest single run 1.19 h)
+  MAN T-OQ=2x  U_L1= 131072 U_L2= 262144: F-OQ   9072 T-OQ  16205 H8   6051 D-OQ   9273 R2    437 | total  41038 s -> 5 replicates / 6 workers =  9.50 h (longest single run 1.59 h)
+  MAN T-OQ=2x  U_L1= 131072 U_L2= 393216: F-OQ  10501 T-OQ  19062 H8   7126 D-OQ  10879 R2    437 | total  48005 s -> 5 replicates / 6 workers = 11.11 h (longest single run 2.38 h)
+  MAN T-OQ=2x  U_L1= 196608 U_L2= 393216: F-OQ  11147 T-OQ  20355 H8   7663 D-OQ  11502 R2    437 | total  51103 s -> 5 replicates / 6 workers = 11.83 h (longest single run 2.38 h)
+  MAN T-OQ=2x  U_L1= 262144 U_L2= 524288: F-OQ  13222 T-OQ  24505 H8   9275 D-OQ  13730 R2    437 | total  61168 s -> 5 replicates / 6 workers = 14.16 h (longest single run 3.17 h)
+  TRN T-OQ=1x  U_L1=  98304 U_L2= 196608: F-OQ   7332 T-OQ   6409 H8   4794 D-OQ   7835 R2    396 | total  26766 s -> 5 replicates / 6 workers =  6.20 h (longest single run 0.64 h)
+  TRN T-OQ=1x  U_L1= 131072 U_L2= 262144: F-OQ   8251 T-OQ   7328 H8   5527 D-OQ   8905 R2    396 | total  30407 s -> 5 replicates / 6 workers =  7.04 h (longest single run 0.86 h)
+  TRN T-OQ=1x  U_L1= 131072 U_L2= 393216: F-OQ   9474 T-OQ   8551 H8   6505 D-OQ  10448 R2    396 | total  35373 s -> 5 replicates / 6 workers =  8.19 h (longest single run 1.29 h)
+  TRN T-OQ=1x  U_L1= 196608 U_L2= 393216: F-OQ  10089 T-OQ   9166 H8   6994 D-OQ  11044 R2    396 | total  37690 s -> 5 replicates / 6 workers =  8.72 h (longest single run 1.29 h)
+  TRN T-OQ=1x  U_L1= 262144 U_L2= 524288: F-OQ  11928 T-OQ  11005 H8   8461 D-OQ  13183 R2    396 | total  44972 s -> 5 replicates / 6 workers = 10.41 h (longest single run 1.71 h)
+  TRN T-OQ=2x  U_L1=  98304 U_L2= 196608: F-OQ   7332 T-OQ  12818 H8   4794 D-OQ   7835 R2    396 | total  33175 s -> 5 replicates / 6 workers =  7.68 h (longest single run 1.02 h)
+  TRN T-OQ=2x  U_L1= 131072 U_L2= 262144: F-OQ   8251 T-OQ  14656 H8   5527 D-OQ   8905 R2    396 | total  37735 s -> 5 replicates / 6 workers =  8.74 h (longest single run 1.36 h)
+  TRN T-OQ=2x  U_L1= 131072 U_L2= 393216: F-OQ   9474 T-OQ  17102 H8   6505 D-OQ  10448 R2    396 | total  43924 s -> 5 replicates / 6 workers = 10.17 h (longest single run 2.04 h)
+  TRN T-OQ=2x  U_L1= 196608 U_L2= 393216: F-OQ  10089 T-OQ  18333 H8   6994 D-OQ  11044 R2    396 | total  46856 s -> 5 replicates / 6 workers = 10.85 h (longest single run 2.04 h)
+  TRN T-OQ=2x  U_L1= 262144 U_L2= 524288: F-OQ  11928 T-OQ  22009 H8   8461 D-OQ  13183 R2    396 | total  55977 s -> 5 replicates / 6 workers = 12.96 h (longest single run 2.72 h)
 
 ## 5. What the long cell 32K/4K costs by itself (5 replicates, charged hours at six workers), by U_L2
   MAN U_L2= 196608: F-OQ  2143 s, T-OQ  2143- 4286, H8  1612, D-OQ  2408 per replicate -> 1.92-2.42 h
@@ -91,71 +91,86 @@ backbone forward+backward: 57.5 M
   TRN U_L3= 1572864:  29460 s = 8.18 h per run; 5 runs on 5 workers: wall >= 8.18 h, worker-hours  40.9
 
 ## 7. New calibration (two calibration draws; every load-search run goes once to its ceiling: 262,144 at 8K/1K, 524,288 at 32K/4K), charged wall hours at six workers
-  MAN T-OQ=1x to the ceilings, no S3            : wall 2.74 h (+0.1 timing preview), worker-hours  16.4
-  MAN T-OQ=1x to the ceilings, S3 to 1,048,576  : wall 7.54 h (+0.1 timing preview), worker-hours  31.5
-  MAN T-OQ=2x to the ceilings, no S3            : wall 3.51 h (+0.1 timing preview), worker-hours  21.0
-  MAN T-OQ=2x to the ceilings, S3 to 1,048,576  : wall 7.54 h (+0.1 timing preview), worker-hours  36.1
-  TRN T-OQ=1x to the ceilings, no S3            : wall 2.50 h (+0.1 timing preview), worker-hours  15.0
-  TRN T-OQ=1x to the ceilings, S3 to 1,048,576  : wall 5.46 h (+0.1 timing preview), worker-hours  25.9
-  TRN T-OQ=2x to the ceilings, no S3            : wall 3.18 h (+0.1 timing preview), worker-hours  19.1
-  TRN T-OQ=2x to the ceilings, S3 to 1,048,576  : wall 5.46 h (+0.1 timing preview), worker-hours  30.0
+  MAN T-OQ=1x to the ceilings, no S3            : wall 2.98 h (+0.1 timing preview), worker-hours  17.9
+  MAN T-OQ=1x to the ceilings, S3 to 1,048,576  : wall 7.54 h (+0.1 timing preview), worker-hours  33.0
+  MAN T-OQ=2x to the ceilings, no S3            : wall 3.75 h (+0.1 timing preview), worker-hours  22.5
+  MAN T-OQ=2x to the ceilings, S3 to 1,048,576  : wall 7.54 h (+0.1 timing preview), worker-hours  37.6
+  TRN T-OQ=1x to the ceilings, no S3            : wall 2.73 h (+0.1 timing preview), worker-hours  16.4
+  TRN T-OQ=1x to the ceilings, S3 to 1,048,576  : wall 5.46 h (+0.1 timing preview), worker-hours  27.3
+  TRN T-OQ=2x to the ceilings, no S3            : wall 3.41 h (+0.1 timing preview), worker-hours  20.5
+  TRN T-OQ=2x to the ceilings, S3 to 1,048,576  : wall 5.46 h (+0.1 timing preview), worker-hours  31.4
 
 ## 8. Cap needed = charged so far + new calibration + rehearsal + 2 x (training + evaluation + other + seed block on draw 1)
   charged so far 1.57 h; rehearsal 0.5 h; evaluation 1.5-2.5 h (UNMEASURED estimate); other 0.5 h
   (a) registered matrix without S3:
-    TRN T-OQ=1x eval low  U_L1=  98304 U_L2= 196608: calibration 2.60 h, remaining  8.58 h -> cap  21.8 h (rounded up 22); without the seed block  20.6 h
-    TRN T-OQ=1x eval low  U_L1= 131072 U_L2= 262144: calibration 2.60 h, remaining  9.50 h -> cap  23.7 h (rounded up 24); without the seed block  22.3 h
-    TRN T-OQ=1x eval low  U_L1= 131072 U_L2= 393216: calibration 2.60 h, remaining 10.77 h -> cap  26.2 h (rounded up 27); without the seed block  24.6 h
-    TRN T-OQ=1x eval low  U_L1= 196608 U_L2= 393216: calibration 2.60 h, remaining 11.36 h -> cap  27.4 h (rounded up 28); without the seed block  25.7 h
-    TRN T-OQ=1x eval low  U_L1= 262144 U_L2= 524288: calibration 2.60 h, remaining 13.22 h -> cap  31.1 h (rounded up 32); without the seed block  29.1 h
-    TRN T-OQ=2x eval low  U_L1=  98304 U_L2= 196608: calibration 3.28 h, remaining 10.06 h -> cap  25.5 h (rounded up 26); without the seed block  24.3 h
-    TRN T-OQ=2x eval low  U_L1= 131072 U_L2= 262144: calibration 3.28 h, remaining 11.20 h -> cap  27.8 h (rounded up 28); without the seed block  26.4 h
-    TRN T-OQ=2x eval low  U_L1= 131072 U_L2= 393216: calibration 3.28 h, remaining 12.75 h -> cap  30.8 h (rounded up 31); without the seed block  29.3 h
-    TRN T-OQ=2x eval low  U_L1= 196608 U_L2= 393216: calibration 3.28 h, remaining 13.48 h -> cap  32.3 h (rounded up 33); without the seed block  30.6 h
-    TRN T-OQ=2x eval low  U_L1= 262144 U_L2= 524288: calibration 3.28 h, remaining 15.76 h -> cap  36.9 h (rounded up 37); without the seed block  34.8 h
-    MAN T-OQ=1x eval high U_L1=  98304 U_L2= 196608: calibration 2.84 h, remaining 10.13 h -> cap  25.2 h (rounded up 26); without the seed block  23.9 h
-    MAN T-OQ=1x eval high U_L1= 131072 U_L2= 262144: calibration 2.84 h, remaining 11.15 h -> cap  27.2 h (rounded up 28); without the seed block  25.7 h
-    MAN T-OQ=1x eval high U_L1= 131072 U_L2= 393216: calibration 2.84 h, remaining 12.56 h -> cap  30.0 h (rounded up 31); without the seed block  28.3 h
-    MAN T-OQ=1x eval high U_L1= 196608 U_L2= 393216: calibration 2.84 h, remaining 13.19 h -> cap  31.3 h (rounded up 32); without the seed block  29.4 h
-    MAN T-OQ=1x eval high U_L1= 262144 U_L2= 524288: calibration 2.84 h, remaining 15.23 h -> cap  35.4 h (rounded up 36); without the seed block  33.1 h
-    MAN T-OQ=2x eval high U_L1=  98304 U_L2= 196608: calibration 3.61 h, remaining 11.76 h -> cap  29.2 h (rounded up 30); without the seed block  27.9 h
-    MAN T-OQ=2x eval high U_L1= 131072 U_L2= 262144: calibration 3.61 h, remaining 13.03 h -> cap  31.7 h (rounded up 32); without the seed block  30.2 h
-    MAN T-OQ=2x eval high U_L1= 131072 U_L2= 393216: calibration 3.61 h, remaining 14.77 h -> cap  35.2 h (rounded up 36); without the seed block  33.5 h
-    MAN T-OQ=2x eval high U_L1= 196608 U_L2= 393216: calibration 3.61 h, remaining 15.55 h -> cap  36.8 h (rounded up 37); without the seed block  34.9 h
-    MAN T-OQ=2x eval high U_L1= 262144 U_L2= 524288: calibration 3.61 h, remaining 18.07 h -> cap  41.8 h (rounded up 42); without the seed block  39.6 h
+    TRN T-OQ=1x eval low  U_L1=  98304 U_L2= 196608: calibration 2.83 h, remaining  8.79 h -> cap  22.5 h (rounded up 23); without the seed block  21.3 h
+    TRN T-OQ=1x eval low  U_L1= 131072 U_L2= 262144: calibration 2.83 h, remaining  9.72 h -> cap  24.3 h (rounded up 25); without the seed block  23.0 h
+    TRN T-OQ=1x eval low  U_L1= 131072 U_L2= 393216: calibration 2.83 h, remaining 10.98 h -> cap  26.9 h (rounded up 27); without the seed block  25.3 h
+    TRN T-OQ=1x eval low  U_L1= 196608 U_L2= 393216: calibration 2.83 h, remaining 11.57 h -> cap  28.0 h (rounded up 29); without the seed block  26.4 h
+    TRN T-OQ=1x eval low  U_L1= 262144 U_L2= 524288: calibration 2.83 h, remaining 13.43 h -> cap  31.8 h (rounded up 32); without the seed block  29.7 h
+    TRN T-OQ=2x eval low  U_L1=  98304 U_L2= 196608: calibration 3.51 h, remaining 10.27 h -> cap  26.1 h (rounded up 27); without the seed block  24.9 h
+    TRN T-OQ=2x eval low  U_L1= 131072 U_L2= 262144: calibration 3.51 h, remaining 11.41 h -> cap  28.4 h (rounded up 29); without the seed block  27.1 h
+    TRN T-OQ=2x eval low  U_L1= 131072 U_L2= 393216: calibration 3.51 h, remaining 12.96 h -> cap  31.5 h (rounded up 32); without the seed block  29.9 h
+    TRN T-OQ=2x eval low  U_L1= 196608 U_L2= 393216: calibration 3.51 h, remaining 13.70 h -> cap  33.0 h (rounded up 33); without the seed block  31.3 h
+    TRN T-OQ=2x eval low  U_L1= 262144 U_L2= 524288: calibration 3.51 h, remaining 15.98 h -> cap  37.5 h (rounded up 38); without the seed block  35.5 h
+    MAN T-OQ=1x eval high U_L1=  98304 U_L2= 196608: calibration 3.08 h, remaining 10.35 h -> cap  25.9 h (rounded up 26); without the seed block  24.5 h
+    MAN T-OQ=1x eval high U_L1= 131072 U_L2= 262144: calibration 3.08 h, remaining 11.37 h -> cap  27.9 h (rounded up 28); without the seed block  26.4 h
+    MAN T-OQ=1x eval high U_L1= 131072 U_L2= 393216: calibration 3.08 h, remaining 12.79 h -> cap  30.7 h (rounded up 31); without the seed block  29.0 h
+    MAN T-OQ=1x eval high U_L1= 196608 U_L2= 393216: calibration 3.08 h, remaining 13.42 h -> cap  32.0 h (rounded up 32); without the seed block  30.1 h
+    MAN T-OQ=1x eval high U_L1= 262144 U_L2= 524288: calibration 3.08 h, remaining 15.46 h -> cap  36.1 h (rounded up 37); without the seed block  33.8 h
+    MAN T-OQ=2x eval high U_L1=  98304 U_L2= 196608: calibration 3.85 h, remaining 11.99 h -> cap  29.9 h (rounded up 30); without the seed block  28.6 h
+    MAN T-OQ=2x eval high U_L1= 131072 U_L2= 262144: calibration 3.85 h, remaining 13.25 h -> cap  32.4 h (rounded up 33); without the seed block  30.9 h
+    MAN T-OQ=2x eval high U_L1= 131072 U_L2= 393216: calibration 3.85 h, remaining 14.99 h -> cap  35.9 h (rounded up 36); without the seed block  34.1 h
+    MAN T-OQ=2x eval high U_L1= 196608 U_L2= 393216: calibration 3.85 h, remaining 15.77 h -> cap  37.5 h (rounded up 38); without the seed block  35.6 h
+    MAN T-OQ=2x eval high U_L1= 262144 U_L2= 524288: calibration 3.85 h, remaining 18.29 h -> cap  42.5 h (rounded up 43); without the seed block  40.2 h
   (b) with block S3 (F-OQ only at 128K/16K = 131,072 facts), U_L1=131,072, U_L2=393,216:
-    TRN T-OQ=1x eval low  U_L3=  524288: calibration 5.56 h, remaining 14.04 h -> cap  35.7 h
-    TRN T-OQ=1x eval low  U_L3=  786432: calibration 5.56 h, remaining 15.18 h -> cap  38.0 h
-    TRN T-OQ=1x eval low  U_L3= 1048576: calibration 5.56 h, remaining 16.31 h -> cap  40.3 h
-    TRN T-OQ=2x eval low  U_L3=  524288: calibration 5.56 h, remaining 16.02 h -> cap  39.7 h
-    TRN T-OQ=2x eval low  U_L3=  786432: calibration 5.56 h, remaining 17.16 h -> cap  41.9 h
-    TRN T-OQ=2x eval low  U_L3= 1048576: calibration 5.56 h, remaining 18.29 h -> cap  44.2 h
-    MAN T-OQ=1x eval high U_L3=  524288: calibration 7.64 h, remaining 16.71 h -> cap  43.1 h
-    MAN T-OQ=1x eval high U_L3=  786432: calibration 7.64 h, remaining 18.28 h -> cap  46.3 h
-    MAN T-OQ=1x eval high U_L3= 1048576: calibration 7.64 h, remaining 19.85 h -> cap  49.4 h
-    MAN T-OQ=2x eval high U_L3=  524288: calibration 7.64 h, remaining 18.91 h -> cap  47.5 h
-    MAN T-OQ=2x eval high U_L3=  786432: calibration 7.64 h, remaining 20.49 h -> cap  50.7 h
-    MAN T-OQ=2x eval high U_L3= 1048576: calibration 7.64 h, remaining 22.06 h -> cap  53.8 h
+    TRN T-OQ=1x eval low  U_L3=  524288: calibration 5.56 h, remaining 14.25 h -> cap  36.1 h
+    TRN T-OQ=1x eval low  U_L3=  786432: calibration 5.56 h, remaining 15.39 h -> cap  38.4 h
+    TRN T-OQ=1x eval low  U_L3= 1048576: calibration 5.56 h, remaining 16.53 h -> cap  40.7 h
+    TRN T-OQ=2x eval low  U_L3=  524288: calibration 5.56 h, remaining 16.23 h -> cap  40.1 h
+    TRN T-OQ=2x eval low  U_L3=  786432: calibration 5.56 h, remaining 17.37 h -> cap  42.4 h
+    TRN T-OQ=2x eval low  U_L3= 1048576: calibration 5.56 h, remaining 18.51 h -> cap  44.6 h
+    MAN T-OQ=1x eval high U_L3=  524288: calibration 7.64 h, remaining 16.93 h -> cap  43.6 h
+    MAN T-OQ=1x eval high U_L3=  786432: calibration 7.64 h, remaining 18.50 h -> cap  46.7 h
+    MAN T-OQ=1x eval high U_L3= 1048576: calibration 7.64 h, remaining 20.08 h -> cap  49.9 h
+    MAN T-OQ=2x eval high U_L3=  524288: calibration 7.64 h, remaining 19.14 h -> cap  48.0 h
+    MAN T-OQ=2x eval high U_L3=  786432: calibration 7.64 h, remaining 20.71 h -> cap  51.1 h
+    MAN T-OQ=2x eval high U_L3= 1048576: calibration 7.64 h, remaining 22.28 h -> cap  54.3 h
   (c) cheapest alternatives if (a) does not fit: drop row 2K (2K/1K, 2K/4K: 8 configurations) or D-OQ at the two loaded cells:
-    TRN T-OQ=2x U_L1=131072 U_L2=393216 full                          : training  9.95 h -> cap changes by +0.00 h
-    TRN T-OQ=2x U_L1=131072 U_L2=393216 without row 2K                : training  8.99 h -> cap changes by -1.92 h
-    TRN T-OQ=2x U_L1=131072 U_L2=393216 without D-OQ at loaded cells  : training  8.61 h -> cap changes by -2.69 h
-    TRN T-OQ=2x U_L1=262144 U_L2=524288 full                          : training 12.74 h -> cap changes by +0.00 h
-    TRN T-OQ=2x U_L1=262144 U_L2=524288 without row 2K                : training 11.78 h -> cap changes by -1.92 h
-    TRN T-OQ=2x U_L1=262144 U_L2=524288 without D-OQ at loaded cells  : training 10.76 h -> cap changes by -3.96 h
-    MAN T-OQ=2x U_L1=131072 U_L2=393216 full                          : training 10.89 h -> cap changes by +0.00 h
-    MAN T-OQ=2x U_L1=131072 U_L2=393216 without row 2K                : training  9.87 h -> cap changes by -2.04 h
-    MAN T-OQ=2x U_L1=131072 U_L2=393216 without D-OQ at loaded cells  : training  9.48 h -> cap changes by -2.81 h
-    MAN T-OQ=2x U_L1=262144 U_L2=524288 full                          : training 13.93 h -> cap changes by +0.00 h
-    MAN T-OQ=2x U_L1=262144 U_L2=524288 without row 2K                : training 12.92 h -> cap changes by -2.04 h
-    MAN T-OQ=2x U_L1=262144 U_L2=524288 without D-OQ at loaded cells  : training 11.87 h -> cap changes by -4.13 h
+    TRN T-OQ=2x U_L1=131072 U_L2=393216 full                          : training 10.17 h -> cap changes by +0.00 h
+    TRN T-OQ=2x U_L1=131072 U_L2=393216 without row 2K                : training  8.99 h -> cap changes by -2.35 h
+    TRN T-OQ=2x U_L1=131072 U_L2=393216 without D-OQ at loaded cells  : training  8.82 h -> cap changes by -2.69 h
+    TRN T-OQ=2x U_L1=262144 U_L2=524288 full                          : training 12.96 h -> cap changes by +0.00 h
+    TRN T-OQ=2x U_L1=262144 U_L2=524288 without row 2K                : training 11.78 h -> cap changes by -2.35 h
+    TRN T-OQ=2x U_L1=262144 U_L2=524288 without D-OQ at loaded cells  : training 10.98 h -> cap changes by -3.96 h
+    MAN T-OQ=2x U_L1=131072 U_L2=393216 full                          : training 11.11 h -> cap changes by +0.00 h
+    MAN T-OQ=2x U_L1=131072 U_L2=393216 without row 2K                : training  9.87 h -> cap changes by -2.49 h
+    MAN T-OQ=2x U_L1=131072 U_L2=393216 without D-OQ at loaded cells  : training  9.71 h -> cap changes by -2.81 h
+    MAN T-OQ=2x U_L1=262144 U_L2=524288 full                          : training 14.16 h -> cap changes by +0.00 h
+    MAN T-OQ=2x U_L1=262144 U_L2=524288 without row 2K                : training 12.92 h -> cap changes by -2.49 h
+    MAN T-OQ=2x U_L1=262144 U_L2=524288 without D-OQ at loaded cells  : training 12.10 h -> cap changes by -4.13 h
 
 ## 9. Two side figures quoted in the ADR
   TRN choosing the dense rate of a loaded cell at U_L instead of at 65,536, at the central U_L: +2.06 h of calibration
   TRN choosing the dense rate of a loaded cell at U_L instead of at 65,536, at the ceilings (U_L is not known before the search ends): +3.33 h of calibration
   MAN choosing the dense rate of a loaded cell at U_L instead of at 65,536, at the central U_L: +2.15 h of calibration
   MAN choosing the dense rate of a loaded cell at U_L instead of at 65,536, at the ceilings (U_L is not known before the search ends): +3.47 h of calibration
-  TRN T-OQ=1x a ceiling of 393,216 at 32K/4K: calibration shorter by 0.23 h; worst case (U_L 262,144 and 393,216) C_need 28.4 h
+  TRN T-OQ=1x a ceiling of 393,216 at 32K/4K: calibration shorter by 0.23 h; worst case (U_L 262,144 and 393,216) C_need 29.0 h
   TRN D-OQ at 8K/16K is worth 0.54 h of C_need; H8 at the two loaded cells 1.81 h (central U_L)
-  MAN T-OQ=2x a ceiling of 393,216 at 32K/4K: calibration shorter by 0.40 h; worst case (U_L 262,144 and 393,216) C_need 37.9 h
+  MAN T-OQ=2x a ceiling of 393,216 at 32K/4K: calibration shorter by 0.40 h; worst case (U_L 262,144 and 393,216) C_need 38.6 h
   MAN D-OQ at 8K/16K is worth 0.56 h of C_need; H8 at the two loaded cells 1.99 h (central U_L)
+
+## 10. Against C_max = 36 h, with the fixed cuts in order (cut 2: no seed block; cut 3: also no D-OQ at 8K/16K). Packing here is total/6; the review used longest-first and got 0.5-3 h less
+  TRN T-OQ=1x eval low  U_L   98304/ 196608:  22.5 /  21.3 /  20.8 -> fits
+  TRN T-OQ=1x eval low  U_L  131072/ 393216:  26.9 /  25.3 /  24.7 -> fits
+  TRN T-OQ=1x eval low  U_L  262144/ 524288:  31.8 /  29.7 /  29.2 -> fits
+  TRN T-OQ=2x eval low  U_L   98304/ 196608:  26.1 /  24.9 /  24.4 -> fits
+  TRN T-OQ=2x eval low  U_L  131072/ 393216:  31.5 /  29.9 /  29.4 -> fits
+  TRN T-OQ=2x eval low  U_L  262144/ 524288:  37.5 /  35.5 /  35.0 -> fits after cut 2
+  MAN T-OQ=1x eval high U_L   98304/ 196608:  25.9 /  24.5 /  24.0 -> fits
+  MAN T-OQ=1x eval high U_L  131072/ 393216:  30.7 /  29.0 /  28.4 -> fits
+  MAN T-OQ=1x eval high U_L  262144/ 524288:  36.1 /  33.8 /  33.2 -> fits after cut 2
+  MAN T-OQ=2x eval high U_L   98304/ 196608:  29.9 /  28.6 /  28.0 -> fits
+  MAN T-OQ=2x eval high U_L  131072/ 393216:  35.9 /  34.1 /  33.6 -> fits
+  MAN T-OQ=2x eval high U_L  262144/ 524288:  42.5 /  40.2 /  39.7 -> RETURNS: NOT STARTED, BUDGET
+  the 2K/256 cell: registered TRN 0.21 h, MAN 0.22 h (doubled in C_need); its search two runs of TRN 0.68 h, MAN 0.72 h
