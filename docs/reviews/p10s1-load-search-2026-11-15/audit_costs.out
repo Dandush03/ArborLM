@@ -1,0 +1,78 @@
+
+######## rate set MAN (manifest, draft's basis)
+  F-OQ s/upd: 2048/4096=0.00986, 8192/4096=0.00986, 24576/4096=0.01052, 32768/4096=0.01090, 8192/16384=0.01582, 32768/16384=0.01751, 24576/16384=0.01667, 65536/16384=0.02255, 8192/65536=0.05509, 32768/65536=0.05509, 65536/65536=0.05509, 24576/65536=0.05509
+  H8/D-OQ/R2: H8@4096=0.00820, H8@16384=0.01097, H8@65536=0.02218, R2@4096=0.01009, D-OQ@16384=0.02450, D-OQ@65536=0.09102, D-OQ@4096=0.01225, R2@16384=0.01126, R2@65536=0.02093
+  extension stages (wall per run; stage wall = max):
+    to  131072: X8    714  X6   1379  Y4   1478  stage   1478 s  cumulative 0.41 h
+    to  196608: X8    714  X6    690  Y4   1478  stage   1478 s  cumulative 0.82 h
+    to  262144: X8    714  X6    690  Y4   1478  stage   1478 s  cumulative 1.23 h
+    to  393216: X8   1429  X6   1379  Y4      0  stage   1429 s  cumulative 1.63 h
+    to  524288: X8   1429  X6   1379  Y4      0  stage   1429 s  cumulative 2.03 h
+    worker-seconds of all six runs to ceiling: 29900 (8.3 h)
+  unchanged registered training per replicate: 21570 s  -> 5 replicates / 6 workers = 4.99 h; seed block per draw 0.41 h
+    (ADR s10.3 projection: 15,440 s per replicate, 3.6 h; remaining total incl. eval 1.0 h, gates etc 0.4 h, both seed blocks: 5.6 h)
+    remaining with the s10.3 eval/gates allowances and both seed blocks: 7.21 h (draft uses 5.6)
+  row L smaller cell per update per replicate (F-OQ+T-OQ+H8): 0.0409 s; 1 x 131,072 updates x 5 / 6 = 1.24 h
+    U_L= 131072: added h  F*=32K  1.44 | F*=24K U_P'=16K  2.54 | F*=24K U_P'=32K  3.84
+    U_L= 196608: added h  F*=32K  2.06 | F*=24K U_P'=16K  3.15 | F*=24K U_P'=32K  4.44
+    U_L= 262144: added h  F*=32K  2.68 | F*=24K U_P'=16K  3.75 | F*=24K U_P'=32K  5.05
+    U_L= 393216: added h  F*=32K  3.92 | F*=24K U_P'=16K  4.96 | F*=24K U_P'=32K  6.25
+    U_L= 524288: added h  F*=32K  5.17 | F*=24K U_P'=16K  6.16 | F*=24K U_P'=32K  7.46
+    16K row, U_P'=16384, U_L=131072: added  4.58 h
+    16K row, U_P'=16384, U_L=196608: added  5.77 h
+    16K row, U_P'=16384, U_L=262144: added  6.96 h
+    16K row, U_P'=32768, U_L=131072: added  6.77 h
+    16K row, U_P'=32768, U_L=196608: added  7.96 h
+    16K row, U_P'=32768, U_L=262144: added  9.15 h
+  cap needed (twofold rule) = charged so far 1.57 + extension (actual) + rehearsal 0.45 + 2 x (remaining + added rows)
+    ext 2.3            L(F*=32K) U_L= 196608:  22.9 h   [with draft's 5.6 remaining:  19.6]
+    ext 2.3            L(F*=32K) U_L= 262144:  24.1 h   [with draft's 5.6 remaining:  20.9]
+    ext 2.3            L(F*=32K) U_L= 393216:  26.6 h   [with draft's 5.6 remaining:  23.4]
+    ext 2.3            L(F*=32K) U_L= 524288:  29.1 h   [with draft's 5.6 remaining:  25.9]
+    ext 3.8            L(F*=32K) U_L= 196608:  24.4 h   [with draft's 5.6 remaining:  21.1]
+    ext 3.8            L(F*=32K) U_L= 262144:  25.6 h   [with draft's 5.6 remaining:  22.4]
+    ext 3.8            L(F*=32K) U_L= 393216:  28.1 h   [with draft's 5.6 remaining:  24.9]
+    ext 3.8            L(F*=32K) U_L= 524288:  30.6 h   [with draft's 5.6 remaining:  27.4]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 196608:  28.1 h   [with draft's 5.6 remaining:  24.8]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 262144:  29.3 h   [with draft's 5.6 remaining:  26.1]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 393216:  31.8 h   [with draft's 5.6 remaining:  28.6]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 524288:  34.3 h   [with draft's 5.6 remaining:  31.1]
+
+######## rate set TRN (training wall only)
+  F-OQ s/upd: 2048/4096=0.00939, 8192/4096=0.00939, 24576/4096=0.00933, 32768/4096=0.00933, 8192/16384=0.01526, 32768/16384=0.01543, 24576/16384=0.01534, 65536/16384=0.01864, 8192/65536=0.04975, 32768/65536=0.04975, 65536/65536=0.04975, 24576/65536=0.04975
+  H8/D-OQ/R2: H8@4096=0.00746, H8@16384=0.01013, H8@65536=0.02077, R2@4096=0.00909, D-OQ@16384=0.02353, D-OQ@65536=0.07259, D-OQ@4096=0.01177, R2@16384=0.01024, R2@65536=0.01883
+  extension stages (wall per run; stage wall = max):
+    to  131072: X8    611  X6   1223  Y4   1222  stage   1223 s  cumulative 0.34 h
+    to  196608: X8    611  X6    611  Y4   1222  stage   1222 s  cumulative 0.68 h
+    to  262144: X8    611  X6    611  Y4   1222  stage   1222 s  cumulative 1.02 h
+    to  393216: X8   1223  X6   1223  Y4      0  stage   1223 s  cumulative 1.36 h
+    to  524288: X8   1223  X6   1223  Y4      0  stage   1223 s  cumulative 1.70 h
+    worker-seconds of all six runs to ceiling: 25673 (7.1 h)
+  unchanged registered training per replicate: 19463 s  -> 5 replicates / 6 workers = 4.51 h; seed block per draw 0.37 h
+    (ADR s10.3 projection: 15,440 s per replicate, 3.6 h; remaining total incl. eval 1.0 h, gates etc 0.4 h, both seed blocks: 5.6 h)
+    remaining with the s10.3 eval/gates allowances and both seed blocks: 6.65 h (draft uses 5.6)
+  row L smaller cell per update per replicate (F-OQ+T-OQ+H8): 0.0354 s; 1 x 131,072 updates x 5 / 6 = 1.08 h
+    U_L= 131072: added h  F*=32K  1.28 | F*=24K U_P'=16K  2.32 | F*=24K U_P'=32K  3.53
+    U_L= 196608: added h  F*=32K  1.82 | F*=24K U_P'=16K  2.86 | F*=24K U_P'=32K  4.07
+    U_L= 262144: added h  F*=32K  2.35 | F*=24K U_P'=16K  3.40 | F*=24K U_P'=32K  4.60
+    U_L= 393216: added h  F*=32K  3.43 | F*=24K U_P'=16K  4.47 | F*=24K U_P'=32K  5.68
+    U_L= 524288: added h  F*=32K  4.51 | F*=24K U_P'=16K  5.55 | F*=24K U_P'=32K  6.76
+    16K row, U_P'=16384, U_L=131072: added  3.92 h
+    16K row, U_P'=16384, U_L=196608: added  4.92 h
+    16K row, U_P'=16384, U_L=262144: added  5.92 h
+    16K row, U_P'=32768, U_L=131072: added  5.83 h
+    16K row, U_P'=32768, U_L=196608: added  6.83 h
+    16K row, U_P'=32768, U_L=262144: added  7.83 h
+  cap needed (twofold rule) = charged so far 1.57 + extension (actual) + rehearsal 0.45 + 2 x (remaining + added rows)
+    ext 2.3            L(F*=32K) U_L= 196608:  21.3 h   [with draft's 5.6 remaining:  19.2]
+    ext 2.3            L(F*=32K) U_L= 262144:  22.3 h   [with draft's 5.6 remaining:  20.2]
+    ext 2.3            L(F*=32K) U_L= 393216:  24.5 h   [with draft's 5.6 remaining:  22.4]
+    ext 2.3            L(F*=32K) U_L= 524288:  26.6 h   [with draft's 5.6 remaining:  24.5]
+    ext 3.8            L(F*=32K) U_L= 196608:  22.8 h   [with draft's 5.6 remaining:  20.7]
+    ext 3.8            L(F*=32K) U_L= 262144:  23.8 h   [with draft's 5.6 remaining:  21.7]
+    ext 3.8            L(F*=32K) U_L= 393216:  26.0 h   [with draft's 5.6 remaining:  23.9]
+    ext 3.8            L(F*=32K) U_L= 524288:  28.1 h   [with draft's 5.6 remaining:  26.0]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 196608:  26.5 h   [with draft's 5.6 remaining:  24.4]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 262144:  27.5 h   [with draft's 5.6 remaining:  25.4]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 393216:  29.7 h   [with draft's 5.6 remaining:  27.6]
+    ext 7.5 (ceiling)  L(F*=32K) U_L= 524288:  31.8 h   [with draft's 5.6 remaining:  29.7]
