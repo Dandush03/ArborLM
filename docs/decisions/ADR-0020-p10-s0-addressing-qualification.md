@@ -760,3 +760,12 @@ The independent implementation audit (Opus 5.5, `docs/reviews/p10s0-implementati
 
 Items 3, 4, 5, 8 (with P9-II's test-seed constants also asserted directly), 9, 11 and the rest of item 10 were found correct and stand.
 
+## Addendum — rulings on the re-check of the audit fixes (2026-11-15 UTC)
+
+The re-check (Opus 5.5, `docs/reviews/p10s0-implementation-audit-2026-11-15/recheck/RECHECK.md`) found the first audit's majors fixed, every evaluated quantity bit-identical before and after the fix commit, and the rehearsal free to proceed; it lists two new majors (N1, N2) and seven minors to fix before the generation cap is committed and before the freeze. The lead's rulings, made before any S0 rehearsal record or registered draw exists:
+
+- **N4:** the reserve for the analysis and report in the headroom rule is the sum of their frozen stage caps (which have a 60-second floor), not twice their measured time. A block is not started if it would leave less than that.
+- **N5:** the hour cap is read from the config in one place; a raise before the freeze is a change of that one value, recorded in this ADR.
+- **The per-task guard term** (`guard_seconds_per_task`) that the implementer added to the projection is accepted as an engineering correction: it only increases projections, it is measured and pinned by the freeze like the rates, and it is listed in the freeze record as an implementer addition not in §10.3.
+- N1–N3, N6–N9 are implementation defects, fixed as the re-check states.
+

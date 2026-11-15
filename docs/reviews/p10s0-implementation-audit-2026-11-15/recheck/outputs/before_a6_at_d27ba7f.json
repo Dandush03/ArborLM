@@ -1,0 +1,41 @@
+{
+ "outcome": [
+  4,
+  "ADDRESSING-QUALIFIED (4,096 AND 16,384)",
+  "A5-D"
+ ],
+ "RESULTS.md": {
+  "mentions_A5-D": true,
+  "fourth": true,
+  "f1": true,
+  "sentence": true
+ },
+ "results.json": {
+  "mentions_A5-D": true,
+  "fourth": true,
+  "f1": false,
+  "sentence": false
+ },
+ "classes.csv": {
+  "mentions_A5-D": true,
+  "fourth": false,
+  "f1": false,
+  "sentence": false
+ },
+ "classes.csv A5-D rows": [
+  "A5-D,2K/4K,RELIABLE,RELIABLE,REPLICATES P9-II,CONSISTENT ACROSS STUDIES,ADDRESS STABLE,20,20,10,10,0.741,False,True",
+  "A5-D,8K/16K,RELIABLE,RELIABLE,REPLICATES P9-II,CONSISTENT ACROSS STUDIES,ADDRESS STABLE,20,20,10,10,0.741,False,True",
+  "A5-D,8K/4K,RELIABLE,RELIABLE,NOT COMPARABLE,,ADDRESS STABLE,10,10,10,10,0.741,False,True"
+ ],
+ "analysis.json outcome block": {
+  "row": 4,
+  "label": "ADDRESSING-QUALIFIED (4,096 AND 16,384)",
+  "arm": "A5-D"
+ },
+ "q1-gate style record would print candidate A5-D with no strings": true,
+ "address_stable_with_11_of_20_nonfinite": {
+  "median": 0.9,
+  "label": "ADDRESS STABLE",
+  "cells": 20
+ }
+}
