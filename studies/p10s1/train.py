@@ -85,6 +85,11 @@ class TrainJob:
     fact_lut: "Tensor | None" = None
     log_every: int = LOG_EVERY
     extra: dict[str, Any] = field(default_factory=dict)
+    deadline_epoch: float | None = None  # a calibration item's cap (section 10.1 item 0a): the run is stopped, kept and marked when the wall clock passes it; never set by a registered stage
+
+
+class ItemCapReached(RuntimeError):
+    """A calibration run was still running when its item's cap was reached (ADR-0021 section 10.1 item 0a): it is stopped and kept, and has no U_L."""
 
 
 def job_model(job: TrainJob, *, seed_rng: bool = True) -> P10S1Model:
@@ -152,7 +157,7 @@ _REHEARSAL_VALIDATORS: dict[str, Callable[[Any], bool]] = {
     "mode": lambda v: v == "rehearsal",
     "stage": lambda v: isinstance(v, str),
     "arm": lambda v: v in core.ARMS,
-    "slots": lambda v: v in core.SLOT_COUNTS,
+    "slots": lambda v: v in core.SLOT_COUNTS or v == core.R2_SLOTS_MAX,
     "facts": _is_int,
     "identity": _valid_identity,
     "environment": _valid_plain,
@@ -392,6 +397,8 @@ def run_job(job: TrainJob) -> Executed:
     process = psutil.Process()
     try:
         for update in range(start + 1, last + 1):
+            if job.deadline_epoch is not None and time.time() >= job.deadline_epoch:
+                raise ItemCapReached(f"stopped at update {update - 1} of {last}: the item's cap was reached")
             batch = job.stream.batch(update)
             record = trainer.step(batch)
             contexts += int(batch.tokens.shape[0])

@@ -47,7 +47,8 @@ def test_the_registered_sequence_runs_end_to_end_on_test_seeds_through_the_launc
         assert expected in names
     probes = [s for s in summary["steps"] if s["step"].startswith("probe")]
     assert len(probes) == 3 and all(s["exit"] == 2 for s in probes)
-    assert summary["analysis"]["status"] == "COMPLETE" and summary["report_bytes"] > 0
+    assert summary["analysis"]["status"] == "COMPLETE" and summary["report_bytes"] > 0 and summary["analysis"]["saturation"]
+    assert "set-cap (the computed cap of the projection)" in names
     assert summary["draws"] == list(core.TEST_DRAW_NAMES)  # only the five test sets: never a registered draw
     assert set(summary["plan"]["data_manifests"]) == set(core.TEST_DRAW_NAMES) and summary["plan"]["generation"]["provisional"] is False
     assert sorted(p.name for p in work.iterdir()) == ["E2E_SUMMARY.json", "logs"]  # the clone and the outputs are gone

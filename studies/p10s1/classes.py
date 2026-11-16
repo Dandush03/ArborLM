@@ -4,6 +4,7 @@
 * capacity line: the step verdict of one replicate (8.2), the step class over five replicates (8.3), the arm class (8.4), the control and cost labels (8.5), the descriptive
   labels (8.6) and the capacity outcome (8.7);
 * efficiency line: u_T with its censoring, the step verdict (8.8), the step class, the arm class, the dense label and the efficiency outcome;
+* the saturation line (revision 5, section 8.10): the pair verdict, the pair class, the arm class and the outcome, and the dense label at saturation (section 8.5);
 * the tag ``STORE ONLY; ORACLE-ADDRESSED`` that every positive label carries (section 3 item 4); ``emit`` refuses text with a positive label and no tag.
 
 Readings of the ADR that its text leaves open are marked READING and listed in ``READINGS`` (they are printed in the report and need the lead's review); none changes a
@@ -57,12 +58,29 @@ SUBLINEAR, LINEAR_KEY_SCORING = "SUBLINEAR", "LINEAR KEY SCORING"
 TREE_AHEAD, TREE_COMPETITIVE, TREE_BEHIND = "TREE_AHEAD", "TREE_COMPETITIVE", "TREE_BEHIND"
 SCALES, DOES_NOT_SCALE, NOT_ESTABLISHED = "KNOWLEDGE SCALES WITH MEMORY", "KNOWLEDGE DOES NOT SCALE", "NOT ESTABLISHED"
 MC_SHORT, MC_AMBIGUOUS = "MC-SHORT", "MC-AMBIGUOUS"
+# saturation line (section 8.10)
+NOT_FULL, PROPORTIONAL, SUBPROPORTIONAL = "NOT FULL", "PROPORTIONAL", "SUBPROPORTIONAL"
+PROPORTIONAL_STEP, SUBPROPORTIONAL_STEP = "PROPORTIONAL STEP", "SUBPROPORTIONAL STEP"
+SAT_NOT_MEASURED, SAT_DOES_NOT_SCALE, SAT_PROPORTIONAL_ALL_PAIRS = "SATURATION_NOT_MEASURED", "SATURATION_DOES_NOT_SCALE", "SATURATION_PROPORTIONAL_ALL_PAIRS"
+SAT_PROPORTIONAL, SAT_SUBPROPORTIONAL, SAT_NOT_MEASURED_OUTCOME, SAT_INCONCLUSIVE = "SATURATION-PROPORTIONAL", "SATURATION-SUBPROPORTIONAL", "SATURATION NOT MEASURED", "SATURATION-INCONCLUSIVE"
+DENSE_HOLDS_MORE, STORE_HOLDS_MORE, SAME_AT_SATURATION = "DENSE HOLDS MORE AT SATURATION", "STORE HOLDS MORE AT SATURATION", "SAME AT SATURATION"
+DENSE_STILL_RISING, DENSE_NOT_LEARNED = "DENSE STILL RISING", "DENSE NOT LEARNED"
+FLAT_BELOW_FLOOR, RISING, PLATEAUED = "FLAT BELOW THE DEP FLOOR", "STILL RISING", "PLATEAUED"
+NOT_TESTED_16K_65K = "16,384→65,536 NOT TESTED"
+NOT_FUNDED_16K = "16,384 NOT MEASURED — NOT FUNDED"
+NOT_MEASURED_256 = "256 NOT MEASURED — NOT FULL WITHIN CEILING"
+SIZES_EFFICIENCY = "SIZES 1,024–16,384"
+SIZES_CAPACITY = "1,024 TO 16,384 SLOTS"
+SAT_FIXED_PHRASES = ("EIGHT FACTS PER SLOT", "FULL = PLATEAU RULE WITHIN REGISTERED RUN LENGTHS")
+H8_NOT_CALIBRATED = "H8 NOT CALIBRATED AT"
+UNDERTRAINED = "UNDERTRAINED-AT-U_P"
 
 # --- the tag and the positive labels (section 3 item 4) -------------------------------------------------------------------------------
 POSITIVE_LABELS = (
     "CAPACITY STEP", "CAPACITY_SUPPORTED", "CAPACITY-POSITIVE", "EFFICIENCY_SUPPORTED", "EFFICIENCY-POSITIVE", "BEATS DENSE", "KNOWLEDGE SCALES WITH MEMORY", "TREE_AHEAD",
-    "Storage half supported, as a necessary condition", "Capacity shown; sublinear active work not shown", "CAPACITY_ONE_TRANSITION", "EFFICIENCY_ONE_TRANSITION", "FASTER STEP",
-    "FASTER IN UPDATES ONLY", "REACHED ONLY BY THE LARGER", "FASTER",
+    "Storage half supported, as a necessary condition, from 1,024 to 16,384 slots", "Storage half supported, as a necessary condition", "Capacity shown; sublinear active work not shown", "CAPACITY_ONE_TRANSITION", "EFFICIENCY_ONE_TRANSITION", "FASTER STEP",
+    "FASTER IN UPDATES ONLY", "REACHED ONLY BY THE LARGER", "FASTER", "PROPORTIONAL STEP", "SATURATION_PROPORTIONAL_ALL_PAIRS", "SATURATION-PROPORTIONAL", "STORE HOLDS MORE AT SATURATION",
+    "Capacity steps shown; proportional saturation not shown",
 )  # fmt: skip
 # a label may be followed by ONE parenthetical group (``BEATS DENSE (DENSE AT CHANCE AT 8K/16K)``) before its tag, and may be plural (``CAPACITY STEPS``); ``DENSE FASTER`` and
 # ``DENSE NOT FASTER`` are blocking labels, not positive ones
@@ -206,9 +224,23 @@ class View:
         best = max(eligible, key=lambda u: (self.obs[u].i, -u))
         return self.obs[best].i, best
 
-    def plateaued(self) -> bool:
+    def gain_flat(self) -> bool:
         """i*(c; U_run) - i*(c; U_run/2) at most 0.10 bits per fact."""
         return le(self.i_star(self.run)[0] - self.i_star(self.run // 2)[0], core.PLATEAU_MAX)
+
+    def above_floor(self) -> bool:
+        """i*(c; U_run/2) at least 0.473 bits per fact (a_use 0.25, the floor below which DEP is not evaluated); new in revision 5 (section 8.2)."""
+        return ge(self.i_star(self.run // 2)[0], core.PLATEAU_FLOOR_I)
+
+    def plateaued(self) -> bool:
+        """The gain over the last doubling is at most 0.10 bits per fact AND i*(c; U_run/2) is at least the DEP floor (section 8.2, revision 5)."""
+        return self.gain_flat() and self.above_floor()
+
+    def plateau_status(self) -> str:
+        """PLATEAUED; FLAT BELOW THE DEP FLOOR (the gain condition holds, the floor does not: not 'still improving'); STILL RISING (the gain condition fails)."""
+        if not self.gain_flat():
+            return RISING
+        return PLATEAUED if self.above_floor() else FLAT_BELOW_FLOOR
 
     def loaded(self) -> bool:
         """Plateaued and i*(c; U_run) at most 4.0 bits per fact (section 8.2)."""
@@ -217,14 +249,16 @@ class View:
 
 # --- matched compute (section 5.4) --------------------------------------------------------------------------------------------------------
 class McEntry(NamedTuple):
-    """The MC readout of a pair of cells: the update of each cell's readout, or the status (MC-SHORT when the matching snapshot exceeds the cheaper cell's run length or the
-    multiplier is above the grid; MC-AMBIGUOUS when the two cost measures disagree on the costlier cell)."""
+    """The MC readout of a pair of cells: the update of each cell's readout, or the status (MC-SHORT when the matching snapshot exceeds the other cell's run length or the multiplier is above the
+    grid). ``annotation`` is MC-AMBIGUOUS when the two cost measures disagreed on the costlier cell and the pair was read in the comparator's favour (section 5.4, revision 5): the status is
+    then "OK" and the pair counts as established."""
 
-    status: str  # "OK", MC_SHORT or MC_AMBIGUOUS
+    status: str  # "OK" or MC_SHORT
     small_update: int | None
     large_update: int | None
     multiplier: float
-    cheaper: str | None  # "small" or "large"
+    cheaper: str | None  # "small" or "large": the cell read at its matched snapshot
+    annotation: str | None = None  # MC_AMBIGUOUS
 
     def ok(self) -> bool:
         return self.status == "OK"
@@ -243,18 +277,30 @@ def match_snapshot(ratios: Sequence[float], u_p: int, cheaper_run: int) -> tuple
     return MC_SHORT, None, mult
 
 
-def mc_pair(costs_small: Mapping[str, float], costs_large: Mapping[str, float], u_p: int, run_small: int, run_large: int) -> McEntry:
+def mc_pair(costs_small: Mapping[str, float], costs_large: Mapping[str, float], u_p: int, run_small: int, run_large: int, claim: str = "large") -> McEntry:
     """The MC readouts of a (smaller, larger) pair from the two frozen cost measures per update (``cpu`` seconds and ``madds``). The costlier cell is read at U_P, the cheaper at the
-    smallest grid snapshot whose cumulative cost is at least the costlier cell's; the larger of the two multipliers is used."""
+    smallest grid snapshot whose cumulative cost is at least the costlier cell's; the larger of the two multipliers is used. Equal costs (|r - 1| <= EPS in both measures) are not a disagreement.
+
+    If the two measures disagree on which cell costs more, the pair is read in the comparator's favour (ADR-0021 section 5.4, revision 5; review M7): ``claim`` names the cell whose advantage
+    would be claimed ("large" on the capacity line, "small" for the memory arm in the dense labels, where role small is the arm and role large is D-OQ). That cell is read at U_P and the other
+    at the smallest grid snapshot whose multiplier is at least the largest of r and 1/r over both measures; the entry is "OK" with the annotation MC-AMBIGUOUS, or MC-SHORT if that snapshot
+    exceeds the other cell's run length."""
+    if claim not in ("small", "large"):
+        raise ValueError("claim is 'small' or 'large'")
     ratios = {m: costs_large[m] / costs_small[m] for m in ("cpu", "madds")}
     large_costlier = [r >= 1.0 - EPS for r in ratios.values()]
     if all(large_costlier):
         status, update, mult = match_snapshot(list(ratios.values()), u_p, run_small)
         return McEntry(status, update, u_p if status == "OK" else None, mult, "small")
-    if not any(large_costlier) or all(abs(r - 1.0) <= EPS for r in ratios.values()):
+    if not any(r >= 1.0 + EPS for r in ratios.values()):
         status, update, mult = match_snapshot([1.0 / r for r in ratios.values()], u_p, run_large)
         return McEntry(status, u_p if status == "OK" else None, update, mult, "large")
-    return McEntry(MC_AMBIGUOUS, None, None, max(max(ratios.values()), 1.0 / min(ratios.values())), None)
+    mult = max(max(r, 1.0 / r) for r in ratios.values())
+    if claim == "large":  # the larger cell is read at U_P; the smaller at the later snapshot
+        status, update, mult = match_snapshot([mult], u_p, run_small)
+        return McEntry(status, update, u_p if status == "OK" else None, mult, "small", MC_AMBIGUOUS)
+    status, update, mult = match_snapshot([mult], u_p, run_large)
+    return McEntry(status, u_p if status == "OK" else None, update, mult, "large", MC_AMBIGUOUS)
 
 
 # --- capacity line: step verdict of one replicate (section 8.2) ------------------------------------------------------------------------------
@@ -291,7 +337,9 @@ def capacity_panel(small: View, large: View, mc: McEntry, *, ref_ok: bool, leaka
     if d["dep_failed_small"] or d["dep_failed_large"]:
         return StepResult(DEPENDENCE_FAILED, d)
     loaded, p_small, p_large = small.loaded(), small.plateaued(), large.plateaued()
-    d.update(smaller_loaded=loaded, smaller_plateaued=p_small, larger_plateaued=p_large, a_use_large_up=large.a_use(u_p))
+    d.update(smaller_loaded=loaded, smaller_plateaued=p_small, larger_plateaued=p_large, a_use_large_up=large.a_use(u_p), smaller_plateau_status=small.plateau_status(), larger_plateau_status=large.plateau_status())
+    if FLAT_BELOW_FLOOR in (small.plateau_status(), large.plateau_status()):
+        d["note"] = f"{FLAT_BELOW_FLOOR}: the gain over the last doubling is within 0.10 bits per fact but i* at half the run length is below {core.PLATEAU_FLOOR_I:.3f} bits per fact; not 'still improving'"
     if ge(i_s_up, core.CEILING_I):
         return StepResult(CEILING, d)
     row4 = (
@@ -383,6 +431,7 @@ class DenseCell(NamedTuple):
     step: str
     replicates: list[dict[str, dict[str, tuple[float, float | None, float]]]]  # replicate -> reading -> panel -> (d, r, dense a_use)
     mc_status: str = "OK"
+    mc_annotation: str | None = None  # MC-AMBIGUOUS: the cost measures disagreed and the pair was read in the comparator's favour (section 5.4)
 
 
 def dense_reading(i_arm: float, i_dense: float, n: int) -> tuple[float, float | None]:
@@ -438,7 +487,7 @@ def dense_label(cells: Sequence[DenseCell], missing_dense: Sequence[str] = ()) -
                     if r is None and cell.step not in dense_at_chance_cells:
                         dense_at_chance_cells.append(cell.step)
         detail["cells"][cell.step] = info
-    out = {"detail": detail, "missing": list(missing_dense), "mu_text": [matched_updates_text(c) for c in cells], "mc_statuses": statuses}
+    out = {"detail": detail, "missing": list(missing_dense), "mu_text": [matched_updates_text(c) for c in cells], "mc_statuses": statuses, "mc_ambiguous": [c.step for c in cells if c.mc_annotation]}
     if ahead_any:
         return {"label": DENSE_AHEAD, **out}
     if statuses:
@@ -483,46 +532,7 @@ def key_learning_limited(h8_class: str, foq_class: str) -> bool:
     return h8_class == CAPACITY_SUPPORTED and foq_class != CAPACITY_SUPPORTED
 
 
-# --- descriptive labels (section 8.6) ---------------------------------------------------------------------------------------------------------
-def study_b_label(per_replicate: Sequence[Mapping[str, Mapping[str, Sequence[tuple[float, float, float, float] | None]]]], work_sublinear: bool, memory_attributed: Sequence[bool]) -> dict[str, Any]:
-    """Study B per arm (section 8.6). ``per_replicate[r][reading][panel]`` holds, for the two diagonal steps (2K/4K to 8K/16K, 8K/16K to 32K/64K), the tuple
-    ``(a_use small, a_use large, I_use small, I_use large)`` (I_use = facts x i: the ratio of I_use, not of i, is tested; the facts grow fourfold along the diagonal) read at the reading (MU: both cells at U_P; MC: the pair's matched readouts) or None where the reading is not established
-    (MC-SHORT). KNOWLEDGE SCALES WITH MEMORY needs, in all 5 replicates, on both panels, under MU and under MC separately: a_use at least 0.85 at every diagonal cell, I_use growing
-    at least 3.0 times at both diagonal steps, both steps MEMORY-ATTRIBUTED (the off-diagonal step A1, B2 is a CAPACITY STEP) and sublinear counted work. KNOWLEDGE DOES NOT SCALE if
-    a_use < 0.5 at the largest diagonal cell in at least 4 replicates. A ratio is computed only when both cells have a_use >= 0.5 (else NOT ASSESSED)."""
-    scale_all = work_sublinear and all(memory_attributed) and len(per_replicate) == core.REPLICATES
-    not_assessed = False
-    for rep in per_replicate:
-        for reading in ("MU", "MC"):
-            for p in core.PANELS:
-                steps = rep[reading][p]
-                for step in steps:
-                    if step is None:
-                        scale_all = False
-                        continue
-                    a_s, a_l, i_s, i_l = step
-                    if not (ge(a_s, core.STUDY_B_A_USE) and ge(a_l, core.STUDY_B_A_USE)):
-                        scale_all = False
-                    if lt(a_s, core.NOT_ASSESSED_A_USE) or lt(a_l, core.NOT_ASSESSED_A_USE):
-                        not_assessed = True
-                        scale_all = False
-                    elif not (i_s > 0 and ge(i_l / i_s, core.STUDY_B_RATIO)):
-                        scale_all = False
-
-    def below(rep: Mapping[str, Mapping[str, Sequence[tuple[float, float, float, float] | None]]]) -> bool:
-        vals = [steps[1][1] for reading in ("MU", "MC") for steps in rep[reading].values() if steps[1] is not None]
-        return bool(vals) and all(lt(a_use, core.NOT_ASSESSED_A_USE) for a_use in vals)
-
-    n_below = sum(1 for rep in per_replicate if below(rep))
-    if scale_all:
-        label = SCALES
-    elif n_below >= core.PAIRED_MOST:
-        label = DOES_NOT_SCALE
-    else:
-        label = NOT_ESTABLISHED
-    return {"label": label, "ratio_not_assessed": not_assessed, "replicates_below_0_5_at_largest": n_below}
-
-
+# --- descriptive labels (section 8.6); Study B's label is retired: the saturation line (section 8.10) replaces it ---------------------------------------
 def robustness_label(rises: Sequence[float]) -> str:
     """Per step, cells with a_use >= 0.5, accuracy retained under 20% slot dropout: ``rises`` (larger minus smaller, one per replicate). RISES WITH SLOTS if >= 0.05 in all 5, FALLS
     if it drops by >= 0.05 in at least 4, UNCHANGED otherwise."""
@@ -538,6 +548,170 @@ def held_out_fragile(arm_ratio: float, r2_ratio: float) -> bool:
     return lt(arm_ratio, core.HELDOUT_FRAGILE * r2_ratio)
 
 
+# --- dense at saturation (section 8.5, revision 5) ----------------------------------------------------------------------------------------------
+class SatDenseCell(NamedTuple):
+    """One loaded cell (8K/1K or 32K/4K), the arm and D-OQ both read at the cell's run length U_L. ``replicates[r][panel]`` = (d_sat, r_sat) with d_sat = i*(arm; U_L) - i*(D-OQ; U_L) and
+    r_sat = F i*(arm) / F i*(D-OQ) (None when D-OQ's i* is zero); ``dense_status[r][panel]`` is D-OQ's plateau status at U_L (``View.plateau_status``); ``cost_ok`` is True when D-OQ's cost per
+    update is at least the arm's in both cost measures (section 5.4)."""
+
+    cell: str
+    replicates: list[dict[str, tuple[float, float | None]]]
+    dense_status: list[dict[str, str]]
+    cost_ok: bool
+
+
+def dense_at_saturation(cells: Sequence[SatDenseCell]) -> dict[str, Any]:
+    """The dense label at saturation (section 8.5; first match wins). DENSE HOLDS MORE AT SATURATION: d_sat at most -0.25 in at least 4 replicates (a replicate counts if EITHER panel satisfies it,
+    section 22 (h)), at any loaded cell. STORE HOLDS MORE AT SATURATION: r_sat at least 1.10 in all 5 replicates on both panels at every loaded cell, D-OQ plateaued (section 8.2) at each in all 5,
+    and D-OQ's cost per update at least the arm's in both measures. SAME AT SATURATION otherwise; where row 2 fails only because D-OQ is not plateaued the sub-label is DENSE STILL RISING (some view
+    still gains), or DENSE NOT LEARNED (every failing view is flat below the DEP floor); where it fails only on the cost condition, DENSE NOT ESTABLISHED AT MATCHED COMPUTE. Where two of the
+    three conditions fail, no sub-label is chosen between them: the labels of every failing condition that would have been the only one are not printed, and the failing conditions are listed."""
+    if not cells:
+        return {"label": SAME_AT_SATURATION, "sublabels": [], "failing": ["no loaded cell read"], "detail": {}}
+    ahead = any(sum(1 for rep in c.replicates if any(le(d, core.DENSE_AHEAD_BITS) for d, _r in rep.values())) >= core.PAIRED_MOST for c in cells)
+    detail: dict[str, Any] = {c.cell: {"d_sat": [{p: v[0] for p, v in rep.items()} for rep in c.replicates], "r_sat": [{p: v[1] for p, v in rep.items()} for rep in c.replicates], "dense_status": c.dense_status, "cost_ok": c.cost_ok} for c in cells}
+    if ahead:
+        return {"label": DENSE_HOLDS_MORE, "sublabels": [], "failing": [], "detail": detail}
+    ratio_ok = all(len(c.replicates) == core.REPLICATES and all(r is None or ge(r, core.BEATS_DENSE_RATIO) for rep in c.replicates for _d, r in rep.values()) for c in cells)
+    statuses = [st for c in cells for rep in c.dense_status for st in rep.values()]
+    plateau_ok = all(st == PLATEAUED for st in statuses) and all(len(c.dense_status) == core.REPLICATES for c in cells)
+    cost_ok = all(c.cost_ok for c in cells)
+    if ratio_ok and plateau_ok and cost_ok:
+        return {"label": STORE_HOLDS_MORE, "sublabels": [], "failing": [], "detail": detail}
+    failing = [name for name, ok in (("ratio", ratio_ok), ("dense plateau", plateau_ok), ("cost", cost_ok)) if not ok]
+    sub: list[str] = []
+    if failing == ["dense plateau"]:
+        sub = [DENSE_STILL_RISING if RISING in statuses else DENSE_NOT_LEARNED]
+    elif failing == ["cost"]:
+        sub = [DENSE_NOT_ESTABLISHED]
+    elif ratio_ok:  # the ratio holds and both of the other conditions fail: both sub-labels apply (the conservative reading)
+        sub = [DENSE_STILL_RISING if RISING in statuses else DENSE_NOT_LEARNED, DENSE_NOT_ESTABLISHED]
+    return {"label": SAME_AT_SATURATION, "sublabels": sub, "failing": failing, "detail": detail}
+
+
+# --- saturation line (section 8.10, revision 5) ---------------------------------------------------------------------------------------------------
+class SatSide(NamedTuple):
+    """The saturation cell of one size in one replicate: ``views`` by panel read at the cell's run length U_L, the cell's facts and slots."""
+
+    views: Mapping[str, View]
+    facts: int
+    slots: int
+
+
+def saturation_bits(side: SatSide, panel: str) -> float:
+    """S(N) = F x i*(cell; U_L) bits."""
+    return side.facts * side.views[panel].i_star(side.views[panel].run)[0]
+
+
+def saturation_pair(small: SatSide, large: SatSide, *, ref_ok: bool, leakage: bool = False) -> StepResult:
+    """Pair verdict in one replicate for the sizes N and 4N (section 8.10, first match wins): NOT_EVALUATED (REF fails for either row, or LEAKAGE), DEPENDENCE_FAILED (either cell fails DEP at a
+    snapshot up to its run length), NOT FULL (either cell is not full on either panel: plateaued and i* at most 4.0), PROPORTIONAL (rho = S(4N)/S(N) at least 3.0 on both panels),
+    SUBPROPORTIONAL (otherwise). Details: b(N) per panel, rho, the last doubling's gain and whether the cell is full."""
+    d: dict[str, Any] = {}
+    for tag, side in (("small", small), ("large", large)):
+        d[tag] = {
+            "slots": side.slots, "facts": side.facts,
+            "b_bits_per_slot": {p: saturation_bits(side, p) / side.slots for p in core.PANELS},
+            "last_doubling_gain": {p: side.views[p].i_star(side.views[p].run)[0] - side.views[p].i_star(side.views[p].run // 2)[0] for p in core.PANELS},
+            "full": {p: side.views[p].loaded() for p in core.PANELS}, "plateau_status": {p: side.views[p].plateau_status() for p in core.PANELS},
+        }  # fmt: skip
+    if not ref_ok or leakage:
+        return StepResult(NOT_EVALUATED, {**d, "reason": "REF failed" if not ref_ok else "LEAKAGE"})
+    for side in (small, large):
+        if any(v.dep(u) is False for v in side.views.values() for u in v.updates):
+            return StepResult(DEPENDENCE_FAILED, d)
+    if not all(d[t]["full"][p] for t in ("small", "large") for p in core.PANELS):
+        return StepResult(NOT_FULL, d)
+    rho = {p: saturation_bits(large, p) / saturation_bits(small, p) for p in core.PANELS}
+    d["rho"] = rho
+    if all(ge(r, core.SATURATION_RATIO) for r in rho.values()):
+        return StepResult(PROPORTIONAL, d)
+    return StepResult(SUBPROPORTIONAL, d)
+
+
+def saturation_pair_class(verdicts: Sequence[str]) -> str:
+    """Pair class over the five replicates (section 8.10, first match wins; the denominator is always 5): NOT_EVALUATED (at least 2), DEPENDENCE_FAILED (at least 2), NOT FULL (at least 2),
+    PROPORTIONAL STEP (all 5), SUBPROPORTIONAL STEP (at least 4), MIXED."""
+    if len(verdicts) != core.REPLICATES:
+        raise ValueError("a pair class needs one verdict per replicate")
+    c = Counter(verdicts)
+    if c[NOT_EVALUATED] >= 2:
+        return NOT_EVALUATED
+    if c[DEPENDENCE_FAILED] >= 2:
+        return DEPENDENCE_FAILED
+    if c[NOT_FULL] >= 2:
+        return NOT_FULL
+    if c[PROPORTIONAL] == len(verdicts):
+        return PROPORTIONAL_STEP
+    if c[SUBPROPORTIONAL] >= core.PAIRED_MOST:
+        return SUBPROPORTIONAL_STEP
+    return MIXED
+
+
+def saturation_arm_class(pair_classes: Sequence[str]) -> str:
+    """Arm class over the pairs the arm reads (section 8.10, first match wins): SATURATION_NOT_MEASURED (every registered pair NOT FULL or NOT_EVALUATED), DEPENDENCE_FAILED (some registered pair),
+    SATURATION_DOES_NOT_SCALE (some registered pair is a SUBPROPORTIONAL STEP), SATURATION_PROPORTIONAL_ALL_PAIRS (every registered pair is a PROPORTIONAL STEP), INTERMEDIATE otherwise. A pair fixed
+    as '256 NOT MEASURED' (no 2K/256) is passed as NOT FULL, so it is never a PROPORTIONAL STEP (the lead's ruling 6: F-OQ is then INTERMEDIATE where 1,024 to 4,096 is proportional)."""
+    if not pair_classes:
+        raise ValueError("an arm reads at least one pair")
+    if all(c in (NOT_FULL, NOT_EVALUATED) for c in pair_classes):
+        return SAT_NOT_MEASURED
+    if any(c == DEPENDENCE_FAILED for c in pair_classes):
+        return DEPENDENCE_FAILED
+    if any(c == SUBPROPORTIONAL_STEP for c in pair_classes):
+        return SAT_DOES_NOT_SCALE
+    if all(c == PROPORTIONAL_STEP for c in pair_classes):
+        return SAT_PROPORTIONAL_ALL_PAIRS
+    return INTERMEDIATE
+
+
+def saturation_outcome(
+    arm_classes: Mapping[str, str],
+    *,
+    engineering_failed: bool,
+    incomplete: bool,
+    pairs_read: Mapping[str, Sequence[str]] | None = None,
+    sat256_absent: bool = False,
+    details: Sequence[str] = (),
+) -> "Outcome":
+    """The saturation outcome (section 8.10; rows 1 and 2 of section 8.7 apply first). SATURATION-PROPORTIONAL: F-OQ, T-OQ or F-OQ-IVF is SATURATION_PROPORTIONAL_ALL_PAIRS. SATURATION-SUBPROPORTIONAL:
+    F-OQ and T-OQ are both SATURATION_DOES_NOT_SCALE. SATURATION NOT MEASURED: F-OQ and T-OQ are both SATURATION_NOT_MEASURED. SATURATION-INCONCLUSIVE otherwise, with the reason (an arm class of
+    DEPENDENCE_FAILED gives the reason DEPENDENCE_FAILED). H8 never gives SATURATION-PROPORTIONAL. Every printed outcome names '16,384 NOT MEASURED — NOT FUNDED'."""
+    if engineering_failed:
+        return Outcome(1, S1_ENGINEERING_FAILURE, ["an engineering gate failed or frozen and running identities differ"], S1_ENGINEERING_FAILURE + " (no scientific label on either line)")
+    if incomplete:
+        return Outcome(2, S1_INCOMPLETE, ["a registered cell lacks a record"], S1_INCOMPLETE + " (status; no outcome on either line)")
+    pairs_read = pairs_read or {}
+    notes = [NOT_FUNDED_16K, *([NOT_MEASURED_256] if sat256_absent else [])]
+    proportional = [a for a in ("F-OQ", "T-OQ", "F-OQ-IVF") if arm_classes.get(a) == SAT_PROPORTIONAL_ALL_PAIRS]
+    if proportional:
+        named = [f"{a}: pairs {', '.join(pairs_read.get(a, ()))}" if pairs_read.get(a) else a for a in proportional]
+        return Outcome(3, SAT_PROPORTIONAL, [], emit(tagged(SAT_PROPORTIONAL, *SAT_FIXED_PHRASES, *named, *notes, *details)))
+    foq, toq = arm_classes.get("F-OQ"), arm_classes.get("T-OQ")
+    if foq == SAT_DOES_NOT_SCALE and toq == SAT_DOES_NOT_SCALE:
+        return Outcome(4, SAT_SUBPROPORTIONAL, ["F-OQ and T-OQ are both SATURATION_DOES_NOT_SCALE"], f"{SAT_SUBPROPORTIONAL} [{'; '.join([*SAT_FIXED_PHRASES, *notes, *details])}]")
+    if foq == SAT_NOT_MEASURED and toq == SAT_NOT_MEASURED:
+        return Outcome(5, SAT_NOT_MEASURED_OUTCOME, ["F-OQ and T-OQ are both SATURATION_NOT_MEASURED"], f"{SAT_NOT_MEASURED_OUTCOME} [{'; '.join(notes)}]")
+    reasons = [f"{a}: {arm_classes.get(a, 'none')}" for a in ("F-OQ", "T-OQ")]
+    if any(arm_classes.get(a) == DEPENDENCE_FAILED for a in ("F-OQ", "T-OQ", "F-OQ-IVF", "H8")):
+        reasons.append("DEPENDENCE_FAILED")
+    return Outcome(6, SAT_INCONCLUSIVE, reasons, tag_positives(f"{SAT_INCONCLUSIVE}: " + "; ".join(reasons) + f" [{'; '.join(notes)}]"))
+
+
+def h8_annotations(undertrained_cells: Sequence[str]) -> dict[str, str]:
+    """H8's annotations by grid cell (section 8.4): UNDERTRAINED-AT-U_P at a calibrated cell whose calibration a_use was below 0.90; H8 NOT CALIBRATED AT <cell> at 2K/1K, 8K/1K and 32K/4K, where
+    H8 was not calibrated; nothing at a calibrated cell that reached 0.90."""
+    calibrated = {core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS}
+    out: dict[str, str] = {}
+    for f, n in core.GRID_CELLS:
+        name = core.cell_name(f, n)
+        if name not in calibrated:
+            out[name] = f"{H8_NOT_CALIBRATED} {name}"
+        elif name in undertrained_cells:
+            out[name] = UNDERTRAINED
+    return out
+
+
 # --- capacity outcome (section 8.7) --------------------------------------------------------------------------------------------------------------
 @dataclass
 class ArmCapacity:
@@ -546,6 +720,9 @@ class ArmCapacity:
     dense: str  # the dense label (DENSE_AHEAD, BEATS_DENSE..., DENSE_MATCHES, DENSE_NOT_READ)
     capacity_steps: list[str] = field(default_factory=list)
     dense_text: str = ""
+    dense_sat: str = ""  # the dense label at saturation (DENSE_HOLDS_MORE, STORE_HOLDS_MORE, SAME_AT_SATURATION); "" where it was not read
+    dense_sat_sublabels: list[str] = field(default_factory=list)
+    sat_class: str = ""  # the saturation arm class
 
 
 class Outcome(NamedTuple):
@@ -556,7 +733,8 @@ class Outcome(NamedTuple):
 
 
 def _is_ahead(a: ArmCapacity) -> bool:
-    return a.dense == DENSE_AHEAD
+    """DENSE AHEAD, or DENSE HOLDS MORE AT SATURATION, which counts as DENSE AHEAD for the arm in rows 3 and 4 of section 8.7 and in the milestone reading (section 8.5)."""
+    return a.dense == DENSE_AHEAD or a.dense_sat == DENSE_HOLDS_MORE
 
 
 def capacity_outcome(
@@ -569,47 +747,58 @@ def capacity_outcome(
     reasons_extra: Sequence[str] = (),
     printed_details: Sequence[str] = (),
 ) -> Outcome:
-    """The capacity outcome (section 8.7, first match wins). CAPACITY-POSITIVE: F-OQ, T-OQ or F-OQ-IVF is CAPACITY_SUPPORTED and is not DENSE AHEAD; an arm whose CAPACITY STEP
-    has no D-OQ read cannot by itself support CAPACITY_SUPPORTED (DENSE NOT READ). CAPACITY-NEGATIVE: (a) F-OQ and T-OQ are both CAPACITY_NOT_SUPPORTED; or (b) at least one of
-    F-OQ, T-OQ, F-OQ-IVF is CAPACITY_SUPPORTED and every such arm is DENSE AHEAD (an empty set never satisfies (b)). NOT TESTED: for F-OQ and T-OQ every step is NOT LOADED, or the
-    human lead directed it in the freeze record. Otherwise CAPACITY-INCONCLUSIVE with the reasons."""
+    """The capacity outcome (section 8.7, first match wins). CAPACITY-POSITIVE: F-OQ, T-OQ or F-OQ-IVF is CAPACITY_SUPPORTED and is not DENSE AHEAD (DENSE HOLDS MORE AT SATURATION counts as DENSE AHEAD);
+    an arm whose CAPACITY STEP has no D-OQ read cannot by itself support CAPACITY_SUPPORTED (DENSE NOT READ). CAPACITY-NEGATIVE: (a) F-OQ and T-OQ are both CAPACITY_NOT_SUPPORTED; or (b) at least
+    one of F-OQ, T-OQ, F-OQ-IVF is CAPACITY_SUPPORTED and every such arm is DENSE AHEAD (an empty set never satisfies (b)). NOT TESTED: for F-OQ and T-OQ every step is NOT LOADED, or the human lead
+    directed it in the freeze record. Otherwise CAPACITY-INCONCLUSIVE with the reasons. Every outcome with a label prints '16,384→65,536 NOT TESTED'."""
     if engineering_failed:
         return Outcome(1, S1_ENGINEERING_FAILURE, ["an engineering gate failed or frozen and running identities differ"], S1_ENGINEERING_FAILURE + " (no scientific label on either line)")
     if incomplete:
         return Outcome(2, S1_INCOMPLETE, ["a registered cell lacks a record"], S1_INCOMPLETE + " (status; no outcome on either line)")
     learned = [arms[a] for a in core.LEARNED_KEY_ARMS if a in arms]
     supported = [a for a in learned if a.cls == CAPACITY_SUPPORTED]
-    positive = [a for a in supported if a.dense not in (DENSE_AHEAD, DENSE_NOT_READ)]
+    positive = [a for a in supported if a.dense not in (DENSE_AHEAD, DENSE_NOT_READ) and not _is_ahead(a)]
     if positive:
         names = ", ".join(a.arm for a in positive)
-        details = [f"arm(s) {names}", *[f"{a.arm}: {a.dense}" + (f" ({a.dense_text})" if a.dense_text else "") for a in positive], *printed_details]
+        details = [f"arm(s) {names}", *[f"{a.arm}: {a.dense}" + (f" ({a.dense_text})" if a.dense_text else "") + (f"; dense at saturation: {a.dense_sat}" if a.dense_sat else "") for a in positive], *printed_details]
         if any(dense_not_established(a.dense) for a in positive):
             details.append("DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE")
-        return Outcome(3, CAPACITY_POSITIVE, [], emit(tagged(CAPACITY_POSITIVE, "WITHIN REGISTERED RUN LENGTHS", *details)))
+        return Outcome(3, CAPACITY_POSITIVE, [], emit(tagged(CAPACITY_POSITIVE, "WITHIN REGISTERED RUN LENGTHS", SIZES_CAPACITY, NOT_TESTED_16K_65K, *details)))
     foq, toq = arms.get("F-OQ"), arms.get("T-OQ")
     if foq is not None and toq is not None and foq.cls == CAPACITY_NOT_SUPPORTED and toq.cls == CAPACITY_NOT_SUPPORTED:
-        return Outcome(4, CAPACITY_NEGATIVE, ["(a) F-OQ and T-OQ are both CAPACITY_NOT_SUPPORTED"], f"{CAPACITY_NEGATIVE} (a)")
+        return Outcome(4, CAPACITY_NEGATIVE, ["(a) F-OQ and T-OQ are both CAPACITY_NOT_SUPPORTED"], f"{CAPACITY_NEGATIVE} (a) [{NOT_TESTED_16K_65K}]")
     if supported and all(_is_ahead(a) for a in supported):
-        return Outcome(4, CAPACITY_NEGATIVE, ["(b) every CAPACITY_SUPPORTED arm is DENSE AHEAD"], f"{CAPACITY_NEGATIVE} (b: DENSE AHEAD)")
+        why = "; ".join(f"{a.arm}: {DENSE_AHEAD if a.dense == DENSE_AHEAD else DENSE_HOLDS_MORE}" for a in supported)
+        return Outcome(4, CAPACITY_NEGATIVE, ["(b) every CAPACITY_SUPPORTED arm is DENSE AHEAD"], f"{CAPACITY_NEGATIVE} (b: DENSE AHEAD) [{why}; {NOT_TESTED_16K_65K}]")
     if directed_transitions or every_step_not_loaded:
         named = f" ({', '.join(directed_transitions)})" if directed_transitions else ""
-        return Outcome(5, CAPACITY_NOT_TESTED, ["no loaded cell within budget" + named], CAPACITY_NOT_TESTED + named)
+        return Outcome(5, CAPACITY_NOT_TESTED, ["no loaded cell within budget" + named], f"{CAPACITY_NOT_TESTED}{named} [{NOT_TESTED_16K_65K}]")
     reasons = list(reasons_extra) or [f"{a.arm}: {a.cls}" for a in learned]
     if any(a.cls == CAPACITY_SUPPORTED and a.dense == DENSE_NOT_READ for a in learned):
         reasons.append("a CAPACITY_SUPPORTED arm has no D-OQ read at its CAPACITY STEP (DENSE NOT READ)")
-    return Outcome(6, CAPACITY_INCONCLUSIVE, reasons, tag_positives(f"{CAPACITY_INCONCLUSIVE}: " + "; ".join(reasons)))
+    return Outcome(6, CAPACITY_INCONCLUSIVE, reasons, tag_positives(f"{CAPACITY_INCONCLUSIVE}: " + "; ".join(reasons) + f" [{NOT_TESTED_16K_65K}]"))
 
 
 def milestone_reading(outcome: Outcome, arms: Mapping[str, ArmCapacity], work: Mapping[str, str], hierarchy: str, s0_status: str) -> str:
-    """The reading for milestone question 1 on the capacity line only (section 8.7), always printed with S0's status line."""
+    """The reading for milestone question 1 on the capacity line with the saturation line and the dense labels (section 8.7), always printed with S0's status line. 'Storage half supported, as a
+    necessary condition, from 1,024 to 16,384 slots' needs, for one SUBLINEAR arm (T-OQ, or F-OQ-IVF): CAPACITY-POSITIVE for that arm; not DENSE AHEAD, DENSE HOLDS MORE AT SATURATION included; its dense
+    matched-compute reading established; its saturation class SATURATION_PROPORTIONAL_ALL_PAIRS; and the hierarchy label printed. If the arm is CAPACITY-POSITIVE and not DENSE AHEAD but its
+    saturation class is not SATURATION_PROPORTIONAL_ALL_PAIRS: 'Capacity steps shown; proportional saturation not shown'."""
     suffix = f" | {s0_status} | {core.ORACLE_SENTENCE}"
     if outcome.label == CAPACITY_POSITIVE:
-        sublinear = [a for a in ("T-OQ", "F-OQ-IVF") if a in arms and arms[a].cls == CAPACITY_SUPPORTED and arms[a].dense not in (DENSE_AHEAD, DENSE_NOT_READ) and work.get(a) == SUBLINEAR]
-        sub = [a for a in sublinear if not dense_not_established(arms[a].dense)]
+        sublinear = [a for a in ("T-OQ", "F-OQ-IVF") if a in arms and arms[a].cls == CAPACITY_SUPPORTED and arms[a].dense not in (DENSE_AHEAD, DENSE_NOT_READ) and not _is_ahead(arms[a]) and work.get(a) == SUBLINEAR]
+
+        def established(a: str) -> bool:  # the capacity dense label and, read the conservative way, the sub-label at saturation
+            return not dense_not_established(arms[a].dense) and DENSE_NOT_ESTABLISHED not in arms[a].dense_sat_sublabels
+
+        sub = [a for a in sublinear if established(a)]
         if sublinear and not sub:
             return "Storage-half reading not available: the dense comparison is not established at matched compute (capacity shown under oracle addressing only)" + suffix
+        full = [a for a in sub if arms[a].sat_class == SAT_PROPORTIONAL_ALL_PAIRS]
+        if full:
+            return emit(tagged("Storage half supported, as a necessary condition, from 1,024 to 16,384 slots", f"arm {full[0]}", f"hierarchy label {hierarchy}", f"saturation class {SAT_PROPORTIONAL_ALL_PAIRS}", NOT_TESTED_16K_65K, "says nothing about addressing by the model, use of the store by a language model, capability beyond recall of the trained facts, or any size above 16,384 slots")) + suffix
         if sub:
-            return emit(tagged("Storage half supported, as a necessary condition", f"arm {sub[0]}", f"hierarchy label {hierarchy}", "says nothing about addressing by the model, use of the store by a language model, or capability beyond recall of the trained facts")) + suffix
+            return emit(tagged("Capacity steps shown; proportional saturation not shown", f"arm {sub[0]}", f"saturation class {arms[sub[0]].sat_class or 'not read'}", f"hierarchy label {hierarchy}", NOT_TESTED_16K_65K)) + suffix
         return emit(tagged("Capacity shown; sublinear active work not shown")) + suffix
     if outcome.label == CAPACITY_NEGATIVE:
         return "Storage half not supported for this store, backbone, task and budget" + suffix
@@ -784,13 +973,13 @@ def efficiency_outcome(arm_classes: Mapping[str, str], dense: Mapping[str, str],
     supported = [a for a in core.EFFICIENCY_ARMS if arm_classes.get(a) == "EFFICIENCY_SUPPORTED"]
     ok = [a for a in supported if dense.get(a) != "DENSE FASTER"]
     if ok:
-        return Outcome(3, EFFICIENCY_POSITIVE, [], emit(tagged(EFFICIENCY_POSITIVE, f"arm(s) {', '.join(ok)}", *[f"{a}: {dense.get(a, DENSE_NOT_READ)}" for a in ok], *details)))
+        return Outcome(3, EFFICIENCY_POSITIVE, [], emit(tagged(EFFICIENCY_POSITIVE, SIZES_EFFICIENCY, f"arm(s) {', '.join(ok)}", *[f"{a}: {dense.get(a, DENSE_NOT_READ)}" for a in ok], *details)))
     if all(arm_classes.get(a) == "EFFICIENCY_NOT_SUPPORTED" for a in core.EFFICIENCY_ARMS):
-        return Outcome(4, EFFICIENCY_NEGATIVE, ["F-OQ and T-OQ are both EFFICIENCY_NOT_SUPPORTED"], EFFICIENCY_NEGATIVE)
+        return Outcome(4, EFFICIENCY_NEGATIVE, ["F-OQ and T-OQ are both EFFICIENCY_NOT_SUPPORTED"], f"{EFFICIENCY_NEGATIVE} [{SIZES_EFFICIENCY}]")
     if supported and all(dense.get(a) == "DENSE FASTER" for a in supported):
-        return Outcome(4, EFFICIENCY_NEGATIVE, ["every EFFICIENCY_SUPPORTED arm is DENSE FASTER"], EFFICIENCY_NEGATIVE + " (DENSE FASTER)")
+        return Outcome(4, EFFICIENCY_NEGATIVE, ["every EFFICIENCY_SUPPORTED arm is DENSE FASTER"], f"{EFFICIENCY_NEGATIVE} (DENSE FASTER) [{SIZES_EFFICIENCY}]")
     reasons = [f"{a}: {arm_classes.get(a, 'none')}" for a in core.EFFICIENCY_ARMS]
-    return Outcome(5, EFFICIENCY_INCONCLUSIVE, reasons, tag_positives(f"{EFFICIENCY_INCONCLUSIVE}: " + "; ".join(reasons)))
+    return Outcome(5, EFFICIENCY_INCONCLUSIVE, reasons, tag_positives(f"{EFFICIENCY_INCONCLUSIVE}: " + "; ".join(reasons) + f" [{SIZES_EFFICIENCY}]"))
 
 
 def optimizer_assisted(share_small: float, share_large: float) -> bool:

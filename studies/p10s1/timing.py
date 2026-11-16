@@ -9,7 +9,9 @@ retried up to three times within the cap; if never quiet the status is NOT MEASU
 """
 
 import os
+import re
 import statistics
+import subprocess
 import time
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Any
@@ -21,12 +23,38 @@ from studies.p9.data import StudyData, encode_identifiers
 
 from . import core, index
 from .model import DOQDense, H8Memory, P10S1Model
-from .train import Trainer, TrainJob, job_model
+from .train import Trainer, TrainJob, job_model, peak_rss
 
 if TYPE_CHECKING:
     from torch import Tensor
 
 NOT_MEASURED = "NOT MEASURED"
+OTHER_STUDY_PATTERN = re.compile(r"(?<![\w.])studies\.p10s[02](?![\w])")  # a live process of studies.p10s0 or studies.p10s2 (their stages are run as ``python -m studies.p10s0.stages ...``)
+CONCURRENCY_STATEMENT = "no process of studies.p10s0 or studies.p10s2 stages was alive when this stage started (ADR-0021 section 25.12 item 4)"
+
+
+class OtherStudyRunning(RuntimeError):
+    """A study of the project (P10-S0 or P10-S2) has a live stage process: the timing preview, the isolated timing, the rehearsal and the registered stages refuse to start (section 25.12 item 4)."""
+
+
+def running_commands() -> list[str]:
+    """The command lines of every live process (``ps -axo command=``). Tests inject their own list instead of calling this."""
+    out = subprocess.run(["ps", "-axo", "command="], capture_output=True, check=False, text=True).stdout  # noqa: S603, S607
+    return [line.strip() for line in out.splitlines() if line.strip()]
+
+
+def other_study_processes(commands: "list[str] | None" = None) -> list[str]:
+    """The live command lines that belong to ``studies.p10s0`` or ``studies.p10s2`` (the list may be injected)."""
+    return [c for c in (running_commands() if commands is None else commands) if OTHER_STUDY_PATTERN.search(c)]
+
+
+def concurrency_check(commands: "list[str] | None" = None) -> dict[str, Any]:
+    """Refuse (``OtherStudyRunning``) while a process of ``studies.p10s0`` or ``studies.p10s2`` is alive; else the record that goes into the stage manifest."""
+    alive = other_study_processes(commands)
+    if alive:
+        raise OtherStudyRunning(f"refused: {len(alive)} live process(es) of studies.p10s0 / studies.p10s2: {alive[:3]}; this stage starts after their stages have finished")
+    return {"checked": True, "other_study_processes": [], "statement": CONCURRENCY_STATEMENT, "source": "injected" if commands is not None else "ps"}
+
 THROUGHPUT_NOT_MEASURED = "THROUGHPUT NOT MEASURED"
 UNSTABLE = "UNSTABLE"
 
@@ -52,14 +80,15 @@ def cpu_seconds_per_update(job: TrainJob, *, warmup: int = core.TIMING_WARMUP_UP
     for _ in range(warmup):
         u += 1
         trainer.step(job.stream.batch(u))
-    runs = []
+    runs, walls = [], []
     for _ in range(repeats):
-        started = time.process_time()
+        started, wall0 = time.process_time(), time.monotonic()
         for _ in range(updates):
             u += 1
             trainer.step(job.stream.batch(u))
         runs.append((time.process_time() - started) / updates)
-    return {"cpu_seconds_per_update": statistics.median(runs), "runs": runs, "warmup_updates": warmup, "updates_per_run": updates}
+        walls.append((time.monotonic() - wall0) / updates)
+    return {"cpu_seconds_per_update": statistics.median(runs), "wall_seconds_per_update": statistics.median(walls), "runs": runs, "wall_runs": walls, "peak_rss_bytes": peak_rss(), "warmup_updates": warmup, "updates_per_run": updates}
 
 
 # --- throughput ---------------------------------------------------------------------------------------------------------------------

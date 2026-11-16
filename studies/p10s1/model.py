@@ -333,7 +333,9 @@ def build_model(
     seed_rng: bool = True,
 ) -> P10S1Model:
     """Model of ``arm`` at ``slots`` with initialization seed ``seed`` on a verified (or synthetic) frozen backbone. ``seed_rng`` seeds Python's and torch's global
-    generators with the init seed as P9 does (no parameter initialization depends on them)."""
+    generators with the init seed as P9 does (no parameter initialization depends on them). 256 slots is F-OQ's saturation cell: T-OQ, H8, D-OQ and R2 are refused there (ADR-0021 section 5.1)."""
+    if slots == core.SATURATION_ONLY_CELL[1] and arm != "F-OQ":
+        raise ValueError(f"{arm} is not defined at 256 slots: the saturation cell is F-OQ's alone (ADR-0021 section 5.1)")
     if seed_rng:
         import random
 

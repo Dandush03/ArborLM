@@ -37,18 +37,6 @@ def run(tmp: Path, scn: syn.Scenario, fro: fz.Frozen = FRO) -> tuple[dict[str, A
 
 
 # --- M1: Study B tests the ratio of I_use, not of i ----------------------------------------------------------------------------------
-def test_study_b_can_print_scales_with_memory(tmp_path: Path) -> None:
-    """Along the diagonal the facts grow fourfold; with a_use near-constant i is near-constant and I_use = facts x i grows about fourfold. Before the fix the ratio was taken on i and
-    KNOWLEDGE SCALES WITH MEMORY could never be printed (audit M1)."""
-    r, _ = run(tmp_path, syn.Scenario())
-    sb = r["capacity"]["study_b"]
-    assert sb["T-OQ"]["label"] == C.SCALES and sb["F-OQ-IVF"]["label"] == C.SCALES
-    assert sb["F-OQ"]["label"] == C.NOT_ESTABLISHED and sb["F-OQ"]["sublinear"] is False  # linear key scoring: the work condition fails, not the I_use ratio
-    assert sb["T-OQ"]["me_readout"], "the ME readout of the diagonal is printed (audit m11)"
-    cell = next(iter(sb["T-OQ"]["me_readout"].values()))
-    assert set(cell["I_use_bits"]) == {"A", "B"} and set(cell["a_use"]) == {"A", "B"}
-
-
 # --- M2: every label form is tagged and printable ------------------------------------------------------------------------------------
 def test_every_adr_label_form_passes_the_tag_check() -> None:
     forms = (
@@ -90,21 +78,6 @@ def test_dense_matches_is_printed_only_where_the_matched_compute_reading_is_esta
     far_behind = C.dense_label([_cell(1.0, 1.05, dense_a=0.05, status="MC-SHORT")])  # D-OQ far behind in an MC-SHORT pair: still not DENSE MATCHES
     assert far_behind["label"] != C.DENSE_MATCHES and "NOT ESTABLISHED" in far_behind["label"]
     assert far_behind["mu_text"]  # the matched-updates comparison is printed descriptively
-
-
-def test_mc_short_dense_pairs_with_doq_far_behind_never_print_dense_matches(tmp_path: Path) -> None:
-    """Registry level: T-OQ and H8 have MC-SHORT dense pairs under the default cost table, and D-OQ (a_use 0.15) is far behind every cell. No arm prints DENSE MATCHES, the outcome carries
-    the bracketed 'DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE', and the storage-half reading is unavailable (audit M5, section 22)."""
-    r, d = run(tmp_path, syn.Scenario())
-    arms = r["capacity"]["arms"]
-    assert all(a["dense"] != C.DENSE_MATCHES for a in arms.values())
-    assert all(C.dense_not_established(a["dense"]) and "MC-SHORT" in a["dense"] for a in arms.values())
-    assert all(a.get("dense_matches_sentence") is None for a in arms.values())
-    cap = r["outcome"]["capacity"]
-    assert cap["label"] == C.CAPACITY_POSITIVE and "DENSE COMPARISON NOT ESTABLISHED AT MATCHED COMPUTE" in cap["printed"] and core.STORE_ONLY_TAG in cap["printed"]
-    assert cap["reading"].startswith("Storage-half reading not available") and "Storage half supported" not in cap["reading"]
-    text = _rendered(d, r)
-    assert "| DENSE MATCHES |" not in text and "DENSE NOT ESTABLISHED AT MATCHED COMPUTE (MC-SHORT)" in text  # no table cell prints it (the ruling's own sentence names it)
 
 
 def _rendered(d: Path, result: dict[str, Any]) -> str:
@@ -257,7 +230,7 @@ def test_dense_rate_tie_rule_walks_the_doubling_grid_then_takes_the_smaller_rate
 def test_dense_rate_cells_are_evaluated_on_the_doubling_snapshots() -> None:
     for cell in core.dense_rate_cells():
         snaps = calibrate.calibration_snapshots(cell)
-        assert set(calibrate.tie_snapshots(cell.u_p)) <= set(snaps) and cell.u_p in snaps and cell.run_updates in snaps
+        assert set(calibrate.tie_snapshots(cell.run_updates)) <= set(snaps) and cell.run_updates in snaps  # readout / 2, /4, /8, /16 and the readout itself
 
 
 # --- (b), m12: lane L's status comes from S0's record, and a qualified interface returns to the lead -------------------------------
@@ -275,7 +248,7 @@ def test_lane_status_is_derived_from_s0_and_any_qualified_interface_returns_to_t
 # --- M3: the registered driver ------------------------------------------------------------------------------------------------------------
 OVERRIDES = (
     ("--stage-cap-seconds", "5"), ("--ledger-root", "/nonexistent"), ("--experiments-root", "/nonexistent"), ("--rss-worker-bytes", "1"), ("--rss-aggregate-bytes", "1"), ("--only", "x"),
-    ("--repo", "/nonexistent"), ("--workers", "2"), ("--draw", "2"), ("--seed-block", "2"), ("--overload-u-p", "8192"), ("--timing", "/nonexistent"), ("--calibration", "/nonexistent"),
+    ("--repo", "/nonexistent"), ("--workers", "2"), ("--draw", "2"), ("--seed-block", "2"), ("--items", "load,row-up"), ("--finalize-items", "load,row-up"), ("--item-cap-seconds", "5"), ("--stage-start-epoch", "1"), ("--timing", "/nonexistent"), ("--calibration", "/nonexistent"),
     ("--freeze-plan", "/nonexistent"), ("--updates", "8"), ("--labels", "x"), ("--item", "x"), ("--restore-split", "4"), ("--results-dir", "/nonexistent"), ("--no-loaded-transitions", "x"),
     ("--s0-record", "/nonexistent"), ("--freeze-dir", "/nonexistent"), ("--projection", "/nonexistent"), ("--gates", "/nonexistent"), ("--synthetic", "/nonexistent"),
 )  # fmt: skip
@@ -518,11 +491,10 @@ def test_results_json_and_printed_labels_carry_the_tag(tmp_path: Path) -> None:
 
 
 # --- m2, m16: the seed block and the seed scan ------------------------------------------------------------------------------------------------------
-def test_seed_block_is_seven_cells_also_with_the_overload_row() -> None:
-    for plan in (core.Plan(seed_block_draws=(1,)), core.Plan(overload_u_p=8192, seed_block_draws=(1,))):
-        cells = [c for c in core.registered_cells(plan) if c.kind == "SB"]
-        assert len(cells) == core.SEED_BLOCK_EXTRA * len(core.GRID_CELLS) == 14
-    assert "scope_note" in core.seed_check() and "p7a_core" in core.seed_check()["scope_note"]
+def test_seed_block_is_the_seven_grid_cells_whatever_the_plan() -> None:
+    for plan in (core.Plan(seed_block_draws=(1,)), core.Plan(seed_block_draws=(1,), sat256=False), core.Plan(seed_block_draws=(1,), row_u_p=(8192, 16384, 32768))):
+        sb = [c for c in core.registered_cells(plan) if c.kind == "SB"]
+        assert len(sb) == 14 and {(c.facts, c.slots) for c in sb} == set(core.GRID_CELLS) and all(c.arm == "F-OQ" for c in sb)
 
 
 # --- the test-only switch -----------------------------------------------------------------------------------------------------------------------
@@ -565,7 +537,7 @@ def test_a_registered_freeze_refuses_dry_records_a_dry_plan_and_an_open_calibrat
         "projection": {"dry": True},
         "calibration": {"cal_extra": {"dry": True}},
         "open calibration": {"cal_extra": {"returns_to_lead": ["the U_P check failed"]}},
-        "unit": {"chosen": {"ok": True, "plan": core.Plan(None, (1,), ("8K/64K",), False, 8).as_json(), "applied_cuts": [], "headroom": {"ok": True}}},
+        "unit": {"chosen": {"ok": True, "plan": core.Plan((1,), ("8K/16K",), False, 8).as_json(), "applied_cuts": [], "headroom": {"ok": True}}},
     }
     for name, over in cases.items():
         folder = tmp_path / name.replace(" ", "_")
@@ -608,7 +580,7 @@ def test_verify_plan_refuses_dry_records_and_a_dry_unit_outside_the_test_switch(
     plan["stage_caps_sha256"] = file_sha256(repo / stages.CAPS_FILE)
     # a DRY unit in the frozen plan
     dry_plan = json.loads(json.dumps(plan))
-    dry_plan["frozen"]["plan"]["unit"] = 8
+    dry_plan["frozen"]["plan"].update(unit=8, row_u_p=[8, 8, 16], u_l=[core.scaled(131072, 8), core.scaled(393216, 8)], u_l_256=core.scaled(98304, 8))
     dry_plan["frozen_sha256"] = sha256(canonical_json(dry_plan["frozen"]))
     with pytest.raises(pool.StageRefused, match="unit"):
         stages.verify_plan(dry_plan, repo, run_dir)

@@ -16,7 +16,6 @@ from . import core
 
 ANALYTIC_OPTIMIZER_MADDS = 4
 FOQ_FAMILY = ("F-OQ", "T-OQ", "H8")
-STUDY_B_ARMS = ("F-OQ", "T-OQ")  # F-OQ-IVF's cells are F-OQ's cells
 
 
 def trainable_parameters(arm: str, slots: int) -> int:
@@ -84,6 +83,8 @@ def gather_madds(arm: str, slots: int, batch: int = BATCH_CONTEXTS) -> int:
 def analytic_madds_per_update(arm: str, slots: int) -> float:
     """The whole-update multiply-add count of section 5.4 as the lead ruled it (ADR-0021 section 22, M6): the frozen backbone's forward and backward every arm pays, the arm's matrix
     products, the gather-weighted sum of the value read (``gather_madds``), and 4 x trainable parameters for AdamW. Written out in the config (``core.MADDS_FORMULA``)."""
+    if slots == core.SATURATION_ONLY_CELL[1] and arm != "F-OQ":
+        raise ValueError(f"{arm} is not defined at 256 slots: the saturation cell is F-OQ's alone (ADR-0021 section 5.1)")
     return float(matmul_madds_per_update(arm, slots) + gather_madds(arm, slots) + ANALYTIC_OPTIMIZER_MADDS * trainable_parameters(arm, slots))
 
 
@@ -107,32 +108,34 @@ class McPair:
     small: tuple[str, int, int]  # (arm, facts, slots) of the role "small"
     large: tuple[str, int, int]
     u_p: int
+    claim: str = "large"  # the cell whose advantage would be claimed (section 5.4): the larger cell on the capacity line, the memory arm (role small) in the dense labels
 
 
 def mc_pairs(plan: core.Plan) -> list[McPair]:
-    """Every pair of cells compared under MC: the capacity steps of F-OQ, T-OQ and H8 (small and large slots of one row), the memory-arm cell against D-OQ at the larger cell of
-    every step with a D-OQ cell (role small: the arm, role large: D-OQ), and the two diagonal steps of F-OQ and T-OQ."""
+    """Every pair of cells compared under MC: the four steps of F-OQ, T-OQ and H8 (small and large slots of one row; claim: the larger cell), and the memory-arm cell against D-OQ at the larger
+    cell of every step with a D-OQ cell (role small: the arm, role large: D-OQ; claim: the arm)."""
     out: list[McPair] = []
     dense_cells = set(core.arm_cells(plan, "D-OQ"))
     for arm in FOQ_FAMILY:
         for step in plan.steps:
             u_p = core.u_p_of(plan, step.facts)
-            out.append(McPair(f"cap|{arm}|{step.name}", arm, (arm, step.facts, step.small), (arm, step.facts, step.large), u_p))
+            out.append(McPair(f"cap|{arm}|{step.name}", arm, (arm, step.facts, step.small), (arm, step.facts, step.large), u_p, "large"))
             if (step.facts, step.large) in dense_cells:
-                out.append(McPair(f"dense|{arm}|{core.cell_name(step.facts, step.large)}", arm, (arm, step.facts, step.large), ("D-OQ", step.facts, step.large), u_p))
-    for arm in STUDY_B_ARMS:
-        for k, ((f0, n0), (f1, n1)) in enumerate((((2048, 4096), (8192, 16384)), ((8192, 16384), (32768, 65536)))):
-            out.append(McPair(f"diag|{arm}|{k}", arm, (arm, f0, n0), (arm, f1, n1), plan.unit))
+                out.append(McPair(f"dense|{arm}|{core.cell_name(step.facts, step.large)}", arm, (arm, step.facts, step.large), ("D-OQ", step.facts, step.large), u_p, "small"))
     return out
 
 
+def run_of(plan: core.Plan, cell: tuple[str, int, int]) -> int:
+    return core.run_updates_of(plan, cell[0], cell[1], cell[2])
+
+
 def build_mc(plan: core.Plan, cost: dict[str, dict[str, dict[str, float]]]) -> dict[str, C.McEntry]:
-    """The MC entry of every pair (``classes.mc_pair``): costlier cell at U_P, cheaper at the smallest grid snapshot whose cumulative cost is at least that; MC-SHORT when the
-    snapshot exceeds the cheaper cell's run length."""
+    """The MC entry of every pair (``classes.mc_pair``): costlier cell at U_P, cheaper at the smallest grid snapshot whose cumulative cost is at least that; MC-SHORT when the snapshot exceeds the
+    other cell's run length; where the measures disagree the pair is read in the comparator's favour (MC-AMBIGUOUS annotation)."""
     out: dict[str, C.McEntry] = {}
     for p in mc_pairs(plan):
         a, b = p.small, p.large
-        out[p.key] = C.mc_pair(costs_of(cost, a[0], a[2]), costs_of(cost, b[0], b[2]), p.u_p, core.run_length(a[0], a[2], p.u_p), core.run_length(b[0], b[2], p.u_p))
+        out[p.key] = C.mc_pair(costs_of(cost, a[0], a[2]), costs_of(cost, b[0], b[2]), p.u_p, run_of(plan, a), run_of(plan, b), p.claim)
     return out
 
 
@@ -151,15 +154,15 @@ def required_snapshots(plan: core.Plan, mc: dict[str, C.McEntry]) -> dict[tuple[
 def snapshots_for(cell: core.Cell, plan: core.Plan, mc: dict[str, C.McEntry]) -> tuple[int, ...]:
     """The snapshots of a registered cell: the grid of section 5.4 plus its matched-compute snapshots. F-OQ's snapshots serve F-OQ-IVF (same training)."""
     extra = required_snapshots(plan, mc).get((cell.arm, cell.facts, cell.slots), set())
-    return core.snapshot_updates(cell.u_p, cell.run_updates, extra)
+    return core.cell_snapshot_updates(cell, plan.unit, extra)
 
 
 def mc_to_json(mc: dict[str, C.McEntry]) -> dict[str, Any]:
-    return {k: {"status": e.status, "small_update": e.small_update, "large_update": e.large_update, "multiplier": e.multiplier, "cheaper": e.cheaper} for k, e in sorted(mc.items())}
+    return {k: {"status": e.status, "small_update": e.small_update, "large_update": e.large_update, "multiplier": e.multiplier, "cheaper": e.cheaper, "annotation": e.annotation} for k, e in sorted(mc.items())}
 
 
 def mc_from_json(data: dict[str, Any]) -> dict[str, C.McEntry]:
-    return {k: C.McEntry(v["status"], v["small_update"], v["large_update"], float(v["multiplier"]), v["cheaper"]) for k, v in data.items()}
+    return {k: C.McEntry(v["status"], v["small_update"], v["large_update"], float(v["multiplier"]), v["cheaper"], v.get("annotation")) for k, v in data.items()}
 
 
 # --- everything the analysis reads from the freeze -----------------------------------------------------------------------------------------
@@ -175,7 +178,7 @@ class Frozen:
     plan: core.Plan = field(default_factory=core.Plan)
     cost: dict[str, dict[str, dict[str, float]]] = field(default_factory=dict)
     mc: dict[str, C.McEntry] = field(default_factory=dict)
-    dense_rates: dict[int, float] = field(default_factory=dict)
+    dense_rates: dict[str, float] = field(default_factory=dict)  # D-OQ unit (core.dense_unit_of) -> calibrated learning rate
     h8_undertrained: list[str] = field(default_factory=list)
     s0_status: str = S0_NOT_DECIDED
     lane_status: str = LANE_OMITTED_NO_INTERFACE
@@ -198,7 +201,7 @@ class Frozen:
     @classmethod
     def from_json(cls, data: dict[str, Any]) -> "Frozen":
         return cls(
-            plan=core.Plan.from_json(data["plan"]), cost=data["cost"], mc=mc_from_json(data["mc"]), dense_rates={int(k): float(v) for k, v in data["dense_rates"].items()},
+            plan=core.Plan.from_json(data["plan"]), cost=data["cost"], mc=mc_from_json(data["mc"]), dense_rates={str(k): float(v) for k, v in data["dense_rates"].items()},
             h8_undertrained=list(data["h8_undertrained"]), s0_status=data["s0_status"], lane_status=data["lane_status"], no_loaded_transitions=list(data["no_loaded_transitions"]), cuts=list(data.get("cuts", [])),
         )  # fmt: skip
 
@@ -211,8 +214,8 @@ class Frozen:
 def default_cpu_table() -> dict[tuple[str, int], float]:
     """A deterministic placeholder cost table (seconds per update; synthetic records and unit tests only, never a measurement): cost grows with the work per query."""
     out: dict[tuple[str, int], float] = {}
-    for arm in (*core.ARMS,):
-        for n in core.SLOT_COUNTS:
+    for arm, slot_counts in core.arm_slot_counts().items():
+        for n in slot_counts:
             w = core.work_formula(arm, n)["W"]
             out[(arm, n)] = 1e-3 + 1e-7 * w
     return out

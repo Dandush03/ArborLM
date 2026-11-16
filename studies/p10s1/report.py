@@ -93,7 +93,7 @@ def render_markdown(analysis: dict[str, Any], banner: str | None = None) -> str:
     """RESULTS.md. ``analysis`` is the ``result`` of an ``analysis`` record."""
     a = analysis["assessment"]
     out = analysis["outcome"]
-    lines: list[str] = ["# P10S1 results (ADR-0021, revision 4)", ""]
+    lines: list[str] = ["# P10S1 results (ADR-0021, revision 5)", ""]
     if banner:
         lines += [f"**{banner}**", ""]
     lines += [
@@ -114,10 +114,10 @@ def render_markdown(analysis: dict[str, Any], banner: str | None = None) -> str:
     if a["missing_cells"] or a["failed_cells"]:
         lines += ["## Cells without a record (the denominator is never reduced)", ""]
         lines += [f"- missing: {c} ({a['reasons'].get(c, '')})" for c in a["missing_cells"][:50]] + [f"- failed: {c} ({a['reasons'].get(c, '')})" for c in a["failed_cells"][:50]] + [""]
-    lines += ["## Outcomes", "", f"- **Capacity line:** {out['capacity']['printed']}", f"- **Efficiency line:** {out['efficiency']['printed']}"]
+    lines += ["## Outcomes", "", f"- **Capacity line:** {out['capacity']['printed']}", f"- **Saturation line:** {out['saturation']['printed']}", f"- **Efficiency line:** {out['efficiency']['printed']}"]
     if out["capacity"].get("reading"):
         lines += [f"- **Reading for milestone question 1 (capacity line only):** {out['capacity']['reading']}"]
-    lines += ["- The two lines are separate; neither implies the other. The reading for milestone question 1 uses the capacity line only.", ""]
+    lines += ["- The three lines are separate; none implies another. The reading for milestone question 1 uses the capacity line, the saturation line and the dense labels, never the efficiency line.", ""]
     cap, eff = analysis.get("capacity"), analysis.get("efficiency")
     if cap is not None and eff is not None:
         lines += ["## Capacity line: arms and steps", "", *_capacity_table(cap), ""]
@@ -126,9 +126,19 @@ def render_markdown(analysis: dict[str, Any], banner: str | None = None) -> str:
         lines += [f"- {cap['conventional']['dict_dominates_on_this_task']}", ""]
         lines += ["## Efficiency line: arms and steps", "", *_efficiency_table(eff), ""]
         lines += ["## Row movement (section 7.3; printed with every budget and efficiency verdict; no class depends on it)", "", *_movement_lines(cap, eff), ""]
-        lines += ["## Study B (knowledge with memory; descriptive, beside the outcome)", ""]
-        for arm, sb in cap["study_b"].items():
-            lines.append(f"- {arm}: {show(sb['label'])} (MEMORY-ATTRIBUTED steps {sb['memory_attributed']}; sublinear {sb['sublinear']}; ratio not assessed {sb['ratio_not_assessed']}). {sb['me_note']}")
+        sat = analysis["saturation"]
+        lines += ["## Saturation line (section 8.10; eight facts per slot; full = plateau rule within registered run lengths)", ""]
+        for arm, v in sat["arms"].items():
+            lines.append(f"- {arm}: {show(v['class'])}; pairs read: {', '.join(v['pairs_read'])}; " + "; ".join(f"{k} {show(p['class'])}" + (f" ({p['note']})" if p.get("note") else "") for k, p in v["pairs"].items()))
+            for k, p in v["pairs"].items():
+                for rep in p["replicates"]:
+                    det = rep["detail"]
+                    if "rho" in det:
+                        lines.append(f"  - {arm} {k} replicate {rep['replicate']}: {rep['verdict']}, rho A/B = {_fmt(det['rho']['A'], 2)} / {_fmt(det['rho']['B'], 2)}; b(N) {_fmt(det['small']['b_bits_per_slot']['A'], 2)} -> {_fmt(det['large']['b_bits_per_slot']['A'], 2)} bits per slot (panel A); last doubling gains {_fmt(det['small']['last_doubling_gain']['A'], 3)} / {_fmt(det['large']['last_doubling_gain']['A'], 3)}")
+        lines += [f"- {C.NOT_FUNDED_16K}", f"- Separability at the saturation cells (printed beside every rho): {json.dumps(sat['separability'], sort_keys=True)[:1500]}", "- Dense at saturation (section 8.5): " + "; ".join(f"{a}: {show(d['label'])}" + (f" ({', '.join(d['sublabels'])})" if d["sublabels"] else "") for a, d in sat["dense_at_saturation"].items())]
+        lines += [f"- H8 annotations: {json.dumps(cap['h8_annotations'], sort_keys=True)}"]
+        lines += [f"- {C.MC_AMBIGUOUS} pairs (the two cost measures disagreed on the costlier cell; the pair counts as established and was read in the comparator's favour): " + (", ".join(f"{k} (small at {v['small_update']}, large at {v['large_update']}, multiplier {_fmt(v['multiplier'], 2)}, {v['status']})" for k, v in cap["mc_ambiguous_pairs"].items()) or "none")]
+        lines += ["- Pairs read per arm: " + "; ".join(f"{a} {', '.join(v['pairs_read'])}" for a, v in sat["arms"].items())]
         lines += ["", "## Robustness (descriptive)", ""]
         for arm, steps in cap["robustness"].items():
             lines.append(f"- {arm}: " + "; ".join(f"{s}: {v['label']}" for s, v in steps.items()))

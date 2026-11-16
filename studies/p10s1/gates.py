@@ -15,6 +15,7 @@ G7  the work counters equal the formulas of section 7.4.   G8  D-OQ's parameter 
 A harness error (inputs that do not belong to the cell) raises ``HarnessError`` and is never recorded as a defect (the P9-I attempt-1 lesson).
 """
 
+import dataclasses
 import inspect
 from collections.abc import Sequence
 from pathlib import Path
@@ -207,7 +208,8 @@ def work_counters(data: StudyData, backbone: "Backbone", slots: int, facts: int,
     inp = tokens[:, : core.INPUT_LENGTH].contiguous()
     lut = train.fact_lut_for(data, facts)
     out: dict[str, Any] = {}
-    for arm in core.ARMS:
+    registered_arms = [a for a, ns in core.arm_slot_counts().items() if slots in ns]  # 256 slots is F-OQ's alone; R2 exists at 4,096 / 16,384 / 32,768
+    for arm in registered_arms:
         m = build_model(arm, slots, init_seed, backbone, fact_lut=lut if arm == "R2" else None, r1_seed=data.seeds.r1_codes, hash_seed=core.h8_seed(data.seeds), seed_rng=False)
         m.eval()
         m.counters.reset()
@@ -219,23 +221,24 @@ def work_counters(data: StudyData, backbone: "Backbone", slots: int, facts: int,
         if arm == "D-OQ":
             ok = ok and got["hidden"] == want["hidden"]
         out[arm] = {"counted": got, "formula": want, "passed": bool(ok)}
-    foq = build_model("F-OQ", slots, init_seed, backbone, r1_seed=data.seeds.r1_codes, seed_rng=False)
-    idx = index.build_index(foq.addition.keys.detach(), core.index_seed(data.seeds))
-    ivf = index.IVFMemory(foq.addition, idx)
-    q = foq.addition._oracle_codes(inp)[:, :, :].reshape(-1, core.KEY_WIDTH)
-    ivf.counters.reset()
-    ivf._top_flat(q)
-    measured = ivf.measured()
-    per_query = ivf.counters.key_scores / q.shape[0]
-    out["F-OQ-IVF"] = {"counted_key_scores_per_query": per_query, "measured_K_mean": measured["K_mean"], "passed": abs(per_query - measured["K_mean"]) < 1e-6}
+    if slots in core.SLOT_COUNTS and slots != core.SATURATION_ONLY_CELL[1]:  # the index read is not defined at 256 slots
+        foq = build_model("F-OQ", slots, init_seed, backbone, r1_seed=data.seeds.r1_codes, seed_rng=False)
+        idx = index.build_index(foq.addition.keys.detach(), core.index_seed(data.seeds))
+        ivf = index.IVFMemory(foq.addition, idx)
+        q = foq.addition._oracle_codes(inp)[:, :, :].reshape(-1, core.KEY_WIDTH)
+        ivf.counters.reset()
+        ivf._top_flat(q)
+        measured = ivf.measured()
+        per_query = ivf.counters.key_scores / q.shape[0]
+        out["F-OQ-IVF"] = {"counted_key_scores_per_query": per_query, "measured_K_mean": measured["K_mean"], "passed": abs(per_query - measured["K_mean"]) < 1e-6}
     out["passed"] = all(v["passed"] for v in out.values())
     return out
 
 
 def parameter_match(backbone: "Backbone", data: StudyData, slots_list: Sequence[int], *, init_seed: int) -> dict[str, Any]:
-    """G8: D-OQ's trainable parameter count within 0.1% of F-OQ's at every slot count (counted from built models)."""
+    """G8: D-OQ's trainable parameter count within 0.1% of F-OQ's at every slot count D-OQ has a cell at (1,024, 4,096, 16,384; counted from built models)."""
     out: dict[str, Any] = {}
-    for n in slots_list:
+    for n in (n for n in slots_list if n in core.arm_slot_counts()["D-OQ"]):
         f = parameter_report(build_model("F-OQ", n, init_seed, backbone, r1_seed=data.seeds.r1_codes, seed_rng=False)).trainable
         d = parameter_report(build_model("D-OQ", n, init_seed, backbone, r1_seed=data.seeds.r1_codes, seed_rng=False)).trainable
         out[str(n)] = {"foq": f, "doq": d, "relative_difference": abs(d - f) / f, "passed": abs(d - f) / f <= core.DOQ_PARAMETER_TOLERANCE}
@@ -255,7 +258,7 @@ def run_gates(
     rows: "Tensor",
     restore_split: int = 16,
     configurations: Sequence[tuple[str, int, int]] | None = None,
-    slot_counts: Sequence[int] = core.SLOT_COUNTS,
+    slot_counts: Sequence[int] = (*core.SLOT_COUNTS, core.R2_SLOTS_MAX),
     small_facts: int = 2048,
 ) -> dict[str, Any]:
     """G4 to G9 at real size on ``data`` (the rehearsal draw before the freeze; a registered draw before training). ``configurations`` (default: every configuration of the plan,
@@ -305,7 +308,7 @@ def run_gates(
     record["backbone_identity"] = g5_models
     before = backbone_hashes(backbone)
     record["backbone_hashes_unchanged"] = before == backbone_hashes(backbone)
-    cfgs = list(configurations if configurations is not None else [(a, f, n) for a in core.ARMS for f, n in core.arm_cells(core.Plan(plan.overload_u_p), a)])
+    cfgs = list(configurations if configurations is not None else [(a, f, n) for a in core.ARMS for f, n in core.arm_cells(dataclasses.replace(plan, dense_cut=(), seed_block_draws=(), lane_l=False), a)])
     reach: dict[str, Any] = {}
     for arm, facts, slots in cfgs:
         try:
@@ -341,7 +344,7 @@ def g1_s1(data: StudyData, plan: core.Plan, fact_counts: Sequence[int] | None = 
     for facts in counts:
         facts = min(facts, data.facts.trained)
         sched = train.training_stream_for(data, facts)
-        longest = max(core.run_length("F-OQ", n, plan.unit) for n in core.SLOT_COUNTS)
+        longest = max([core.run_updates_of(plan, "F-OQ", f, n) for f, n in core.arm_cells(plan, "F-OQ") if f == facts] or [core.run_length("F-OQ", 4096, plan.unit)])
         epochs = max(1, -(-longest // sched.updates_per_epoch))
         expo = sched.exposures(epochs * sched.updates_per_epoch)
         keys = sched.keys(epochs)

@@ -135,7 +135,7 @@ def test_doq_construction() -> None:
     assert float(delta[:, off_sites].abs().max()) == 0.0 and float(delta[:, sites].abs().max()) > 0.0
     foq = M.build_model("F-OQ", 4096, 2101, backbone(), r1_seed=7, seed_rng=False)
     assert M.tensor_sha256(foq.oracle_codes(tokens)) == M.tensor_sha256(m.oracle_codes(tokens))  # D-OQ's input is F-OQ's code tensor
-    for n in core.SLOT_COUNTS:
+    for n in (1024, 4096, 16384):
         assert abs(core.doq_trainable_parameters(core.doq_hidden(n)) - core.foq_trainable_parameters(n)) / core.foq_trainable_parameters(n) <= 0.001
     assert gates.parameter_match(backbone(), data(), core.SLOT_COUNTS, init_seed=2101)["passed"]
 

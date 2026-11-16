@@ -252,23 +252,11 @@ def test_active_work_hierarchy_and_conventional_labels() -> None:
     assert C.key_learning_limited(C.CAPACITY_SUPPORTED, C.INTERMEDIATE) and not C.key_learning_limited(C.CAPACITY_SUPPORTED, C.CAPACITY_SUPPORTED)
 
 
-def test_study_b_and_robustness_labels() -> None:
-    def rep(a: float, i: tuple[float, float, float]) -> dict:
-        step = [(a, a, i[0], i[1]), (a, a, i[1], i[2])]
-        return {r: dict.fromkeys(core.PANELS, step) for r in ("MU", "MC")}
-
-    good = [rep(0.9, (1.5, 4.5, 14.0))] * 5
-    assert C.study_b_label(good, True, [True, True])["label"] == C.SCALES
-    assert C.study_b_label(good, False, [True, True])["label"] == C.NOT_ESTABLISHED  # work not sublinear
-    assert C.study_b_label(good, True, [True, False])["label"] == C.NOT_ESTABLISHED  # a diagonal step is not memory-attributed
-    assert C.study_b_label([rep(0.9, (1.5, 3.0, 14.0))] * 5, True, [True, True])["label"] == C.NOT_ESTABLISHED  # growth below 3.0x
-    bad = [rep(0.4, (0.1, 0.1, 0.1))] * 5
-    assert C.study_b_label(bad, True, [True, True])["label"] == C.DOES_NOT_SCALE
-    mc_short = [{"MU": good[0]["MU"], "MC": {p: [None, None] for p in core.PANELS}}] * 5
-    assert C.study_b_label(mc_short, True, [True, True])["label"] == C.NOT_ESTABLISHED
+def test_robustness_and_held_out_labels_and_study_b_is_retired() -> None:
     assert C.robustness_label([0.06] * 5) == "RISES WITH SLOTS" and C.robustness_label([0.06] * 4 + [0.0]) == "UNCHANGED"
     assert C.robustness_label([-0.06] * 4 + [0.1]) == "FALLS" and C.robustness_label([0.0] * 5) == "UNCHANGED"
     assert C.held_out_fragile(0.80, 0.95) and not C.held_out_fragile(0.90, 0.95)
+    assert not hasattr(C, "study_b_label")  # retired in revision 5: the saturation line (section 8.10) replaces it
 
 
 # --- capacity outcome: an unevaluated or untested study is never a negative ---------------------------------------------------------------------
@@ -330,22 +318,39 @@ def test_engineering_failure_and_incomplete_come_first() -> None:
 
 
 def test_milestone_reading() -> None:
-    arms = arms_of((C.CAPACITY_SUPPORTED, C.CAPACITY_SUPPORTED, C.CAPACITY_SUPPORTED))
+    def full(classes: tuple[str, str, str], dense: tuple[str, str, str] = (C.DENSE_MATCHES,) * 3, sat: str = C.SAT_PROPORTIONAL_ALL_PAIRS, dense_sat: str = C.SAME_AT_SATURATION) -> dict[str, C.ArmCapacity]:
+        return {a: C.ArmCapacity(a, c, d, sat_class=sat, dense_sat=dense_sat) for a, c, d in zip(core.LEARNED_KEY_ARMS, classes, dense, strict=True)}
+
+    work = {"F-OQ": C.LINEAR_KEY_SCORING, "T-OQ": C.SUBLINEAR, "F-OQ-IVF": C.SUBLINEAR}
+    arms = full((C.CAPACITY_SUPPORTED,) * 3)
     out = C.capacity_outcome(arms, engineering_failed=False, incomplete=False)
-    sub = C.milestone_reading(out, arms, {"F-OQ": C.LINEAR_KEY_SCORING, "T-OQ": C.SUBLINEAR, "F-OQ-IVF": C.SUBLINEAR}, C.TREE_AHEAD, "S0 NOT YET DECIDED")
-    assert "Storage half supported, as a necessary condition" in sub and core.STORE_ONLY_TAG in sub and "S0 NOT YET DECIDED" in sub and core.ORACLE_SENTENCE in sub
+    assert "16,384→65,536 NOT TESTED" in out.printed and "1,024 TO 16,384 SLOTS" in out.printed
+    sub = C.milestone_reading(out, arms, work, C.TREE_AHEAD, "S0 NOT YET DECIDED")
+    assert "Storage half supported, as a necessary condition, from 1,024 to 16,384 slots [" in sub and core.STORE_ONLY_TAG in sub and "S0 NOT YET DECIDED" in sub and core.ORACLE_SENTENCE in sub
+    # refused without the saturation class, with DENSE HOLDS MORE AT SATURATION, and with an unestablished matched-compute reading (either dense label)
+    no_sat = C.milestone_reading(out, full((C.CAPACITY_SUPPORTED,) * 3, sat=C.INTERMEDIATE), work, C.TREE_AHEAD, "S0 X")
+    assert "Storage half supported" not in no_sat and no_sat.startswith("Capacity steps shown; proportional saturation not shown") and core.STORE_ONLY_TAG in no_sat and "INTERMEDIATE" in no_sat
+    holds = full((C.CAPACITY_SUPPORTED,) * 3, dense_sat=C.DENSE_HOLDS_MORE)
+    out_h = C.capacity_outcome(holds, engineering_failed=False, incomplete=False)
+    assert out_h.label == C.CAPACITY_NEGATIVE and "(b: DENSE AHEAD)" in out_h.printed and "16,384→65,536 NOT TESTED" in out_h.printed  # DENSE HOLDS MORE counts as DENSE AHEAD
+    assert C.milestone_reading(out_h, holds, work, C.TREE_AHEAD, "S0 X").startswith("Storage half not supported")
+    notest = full((C.CAPACITY_SUPPORTED,) * 3, (C.DENSE_MATCHES, f"{C.DENSE_NOT_ESTABLISHED} (MC-SHORT)", f"{C.DENSE_NOT_ESTABLISHED} (MC-SHORT)"))
+    r_no = C.milestone_reading(C.capacity_outcome(notest, engineering_failed=False, incomplete=False), notest, work, C.TREE_AHEAD, "S0 X")
+    assert r_no.startswith("Storage-half reading not available") and "Storage half supported" not in r_no
+    sub_not = full((C.CAPACITY_SUPPORTED,) * 3)
+    for a in sub_not.values():
+        a.dense_sat_sublabels = [C.DENSE_NOT_ESTABLISHED]  # the matched-compute reading at saturation is not established either: the conservative reading refuses
+    assert C.milestone_reading(out, sub_not, work, C.TREE_AHEAD, "S0 X").startswith("Storage-half reading not available")
     only = C.milestone_reading(out, arms, {"F-OQ": C.LINEAR_KEY_SCORING, "T-OQ": C.LINEAR_KEY_SCORING, "F-OQ-IVF": C.LINEAR_KEY_SCORING}, C.TREE_BEHIND, "S0 NOT YET DECIDED")
     assert only.startswith("Capacity shown; sublinear active work not shown") and core.STORE_ONLY_TAG in only
     neg = C.capacity_outcome(arms_of((C.CAPACITY_NOT_SUPPORTED,) * 3), engineering_failed=False, incomplete=False)
     assert C.milestone_reading(neg, arms, {}, C.TREE_BEHIND, "S0 X").startswith("Storage half not supported for this store, backbone, task and budget")
     inc = C.capacity_outcome(arms_of((C.INTERMEDIATE,) * 3), engineering_failed=False, incomplete=False)
     assert C.milestone_reading(inc, arms, {}, C.TREE_BEHIND, "S0 X").startswith("Not established")
-    # DENSE AHEAD for the sublinear arm: the storage half is not supported by it
-    ahead = arms_of((C.CAPACITY_SUPPORTED,) * 3, (C.BEATS_DENSE, C.DENSE_AHEAD, C.DENSE_AHEAD))
+    ahead = full((C.CAPACITY_SUPPORTED,) * 3, (C.BEATS_DENSE, C.DENSE_AHEAD, C.DENSE_AHEAD))
     out2 = C.capacity_outcome(ahead, engineering_failed=False, incomplete=False)
     assert out2.label == C.CAPACITY_POSITIVE
-    r = C.milestone_reading(out2, ahead, {"F-OQ": C.LINEAR_KEY_SCORING, "T-OQ": C.SUBLINEAR, "F-OQ-IVF": C.SUBLINEAR}, C.TREE_AHEAD, "S0 X")
-    assert "Capacity shown; sublinear active work not shown" in r
+    assert "Capacity shown; sublinear active work not shown" in C.milestone_reading(out2, ahead, work, C.TREE_AHEAD, "S0 X")
 
 
 # --- the tag ------------------------------------------------------------------------------------------------------------------------------------
@@ -385,9 +390,9 @@ def test_no_outcome_can_carry_a_positive_label_without_the_tag() -> None:
 # --- matched compute ---------------------------------------------------------------------------------------------------------------------------------
 def test_matched_compute_snapshot_rule() -> None:
     cheap = {"cpu": 1.0, "madds": 1.0}
-    assert C.mc_pair(cheap, {"cpu": 1.0, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE) == C.McEntry("OK", U_P, U_P, 1.0, "small")
+    assert C.mc_pair(cheap, {"cpu": 1.0, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE) == C.McEntry("OK", U_P, U_P, 1.0, "small")  # equal costs: not a disagreement
     e = C.mc_pair(cheap, {"cpu": 2.2, "madds": 3.9}, U_P, RUN_SMALL, RUN_LARGE)  # the larger multiplier (3.9) is used: grid value 4
-    assert (e.status, e.small_update, e.large_update, e.cheaper) == ("OK", 4 * U_P, U_P, "small") and e.multiplier == pytest.approx(3.9)
+    assert (e.status, e.small_update, e.large_update, e.cheaper, e.annotation) == ("OK", 4 * U_P, U_P, "small", None) and e.multiplier == pytest.approx(3.9)
     assert C.mc_pair(cheap, {"cpu": 1.1, "madds": 1.1}, U_P, RUN_SMALL, RUN_LARGE).small_update == int(1.25 * U_P)
     assert C.mc_pair(cheap, {"cpu": 6.0, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE).small_update == 6 * U_P
     short = C.mc_pair(cheap, {"cpu": 5.0, "madds": 1.0}, U_P, 4 * U_P, RUN_LARGE)  # 5x needs the grid value 6 > the cheaper cell's 4 U_P
@@ -395,8 +400,23 @@ def test_matched_compute_snapshot_rule() -> None:
     assert C.mc_pair(cheap, {"cpu": 7.0, "madds": 1.0}, U_P, 8 * U_P, RUN_LARGE).status == C.MC_SHORT  # beyond the grid
     flip = C.mc_pair({"cpu": 2.0, "madds": 2.0}, {"cpu": 1.0, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE)  # the smaller cell is costlier: the larger is the cheaper one
     assert flip.cheaper == "large" and flip.small_update == U_P and flip.large_update == 2 * U_P
-    ambiguous = C.mc_pair({"cpu": 1.0, "madds": 2.0}, {"cpu": 2.0, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE)
-    assert ambiguous.status == C.MC_AMBIGUOUS
+
+
+def test_a_disagreement_of_the_cost_measures_is_read_in_the_comparators_favour() -> None:
+    # section 5.4 (revision 5): the cell whose advantage would be claimed is read at U_P, the other at the smallest grid snapshot with multiplier >= max(r, 1/r) over both measures; no fixture sets the
+    # 1,024-slot cost equal to the 4,096-slot cost (review m10)
+    small, large = {"cpu": 1.0, "madds": 2.0}, {"cpu": 2.0, "madds": 1.0}  # cpu: large costs 2x; madds: small costs 2x
+    cap = C.mc_pair(small, large, U_P, RUN_SMALL, RUN_LARGE, "large")  # capacity line: the larger cell's advantage is claimed
+    assert (cap.status, cap.annotation, cap.large_update, cap.small_update, cap.cheaper) == ("OK", C.MC_AMBIGUOUS, U_P, 2 * U_P, "small") and cap.ok()
+    dense = C.mc_pair({"cpu": 1.0, "madds": 2.0}, {"cpu": 2.0, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE, "small")  # dense labels: role small is the memory arm, role large is D-OQ
+    assert (dense.status, dense.annotation, dense.small_update, dense.large_update, dense.cheaper) == ("OK", C.MC_AMBIGUOUS, U_P, 2 * U_P, "large")
+    wide = C.mc_pair({"cpu": 1.0, "madds": 3.0}, {"cpu": 1.2, "madds": 1.0}, U_P, RUN_SMALL, RUN_LARGE, "large")  # max(r, 1/r) = 3 -> the grid value 3
+    assert wide.small_update == 3 * U_P and wide.large_update == U_P and wide.annotation == C.MC_AMBIGUOUS
+    assert C.mc_pair({"cpu": 1.0, "madds": 6.5}, {"cpu": 1.2, "madds": 1.0}, U_P, 8 * U_P, RUN_LARGE, "large").status == C.MC_SHORT  # beyond the grid
+    assert C.mc_pair({"cpu": 1.0, "madds": 5.0}, {"cpu": 1.2, "madds": 1.0}, U_P, 4 * U_P, RUN_LARGE, "large").status == C.MC_SHORT  # the snapshot exceeds the other cell's run length
+    assert C.mc_pair(small, large, U_P, RUN_SMALL, RUN_LARGE, "small").large_update == 2 * U_P  # the claimed cell differs: the other cell is the one read late
+    near = C.mc_pair({"cpu": 1.0, "madds": 1.0}, {"cpu": 1.0 + 1e-14, "madds": 1.0 - 1e-14}, U_P, RUN_SMALL, RUN_LARGE)
+    assert near.annotation is None and near.ok()  # equal cost within EPS in both measures is not a disagreement
 
 
 # --- efficiency line ---------------------------------------------------------------------------------------------------------------------------------

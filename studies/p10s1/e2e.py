@@ -114,8 +114,9 @@ def run_e2e(workdir: Path, source: Path | None = None) -> dict[str, Any]:
         head = r.git("rev-parse", "rev-parse", "HEAD")
         r.run("probe: gates.sh before the freeze", ["sh", "studies/p10s1/launch/gates.sh", str(run_dir), head], expect=2)
         # the prerequisites: calibration, rehearsal, timing, synthetic registry and projection, all DRY (the projection and the other records the freeze binds)
-        r.run("dry prerequisites", stages("dry", "--out-root", str(dry_root)))
+        r.run("dry prerequisites", stages("dry", "--out-root", str(dry_root), "--workers", "3"))
         reh, cal = dry_root / "P10S1DRY-rehearsal", dry_root / "P10S1DRY-calibration"
+        r.run("set-cap (the computed cap of the projection)", stages("set-cap", "--projection", str(reh / "projection.json")))
         r.run("set-generation-cap", stages("set-generation-cap", "--generation-seconds", GENERATION_SECONDS))
         r.git("add generation cap", "add", "-A")
         r.git("commit generation cap", "commit", "--quiet", "-m", "e2e: generation cap set")
@@ -143,7 +144,7 @@ def run_e2e(workdir: Path, source: Path | None = None) -> dict[str, Any]:
             data = core.read_record(analysis_path, "analysis")["result"]
             from . import classes
 
-            summary["analysis"] = {"status": data["assessment"]["status"], "capacity": classes.printable(data["outcome"]["capacity"]["label"]), "efficiency": classes.printable(data["outcome"]["efficiency"]["label"])}
+            summary["analysis"] = {"status": data["assessment"]["status"], "capacity": classes.printable(data["outcome"]["capacity"]["label"]), "efficiency": classes.printable(data["outcome"]["efficiency"]["label"]), "saturation": classes.printable(data["outcome"]["saturation"]["label"])}
         summary["freeze_commit"] = freeze
         summary["report"] = "RESULTS.md written (the run directory is removed at the end)" if (run_dir / "results" / "results.json").is_file() else None
         ledger = clone / "experiments" / f"{core.STUDY}-ledger.json"

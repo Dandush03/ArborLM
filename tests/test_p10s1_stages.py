@@ -31,18 +31,22 @@ def parse(*argv: str) -> Any:
 
 # --- guards -------------------------------------------------------------------------------------------------------------------------
 def test_calibration_guard_allows_only_the_calibration_cells() -> None:
-    for cell in core.calibration_cells(True):
+    for cell in core.calibration_cells():
         stages.calibration_guard(cell)
-    for cell in core.calibration_cells(True, 8):
+    for cell in core.calibration_cells(unit=8):
         stages.calibration_guard(cell, 8)
+    rows = {2048: 16384, 8192: 8192, 32768: 32768}  # items 2 and 3 run at the row U_P that item 1 fixes: any candidate is allowed
+    for cell in [*core.h8_report_cells(rows), *core.dense_rate_cells(rows)]:
+        stages.calibration_guard(cell)
     for cell in core.registered_cells(core.Plan(seed_block_draws=(1, 2))):
         with pytest.raises(stages.CalibrationRefused):
             stages.calibration_guard(cell)
     bad = (
         core.make_cell("CAL", "F-OQ", 8192, 4096, 3, 2191, run_updates=65536),  # a draw that is not a calibration draw
-        core.make_cell("CAL", "T-OQ", 8192, 4096, 1, 2191, run_updates=65536),  # T-OQ is never run in calibration
-        core.make_cell("CAL", "F-OQ", 8192, 4096, 1, 2101, run_updates=65536),  # not the calibration initialization seed
-        core.make_cell("CAL", "F-OQ", 8192, 4096, 1, 2191, run_updates=100),  # not a registered calibration run length
+        core.make_cell("CAL", "T-OQ", 8192, 4096, 1, 2191, run_updates=65536),  # T-OQ is run in calibration only at the loaded cells
+        core.make_cell("CAL", "F-OQ", 8192, 1024, 1, 2101, run_updates=262144),  # not a calibration initialization seed
+        core.make_cell("CAL", "F-OQ", 8192, 1024, 2, 2191, run_updates=262144),  # draw 2 runs with initialization seed 2193
+        core.make_cell("CAL", "F-OQ", 8192, 1024, 1, 2191, run_updates=100),  # not a calibration run length
         core.make_cell("P", "F-OQ", 8192, 4096, 1, 2191),
     )
     for cell in bad:
@@ -52,18 +56,18 @@ def test_calibration_guard_allows_only_the_calibration_cells() -> None:
 
 def test_calibrate_worker_refuses_other_cells_before_building_anything(tmp_path: Path) -> None:
     registered = core.registered_cells(core.Plan())[0].label
-    for label in (registered, "TEST_P_F-OQ_f128_n4096_d1_i2101_y8", "CAL_F-OQ_f8192_n4096_d3_i2191_y65536", "nonsense"):
+    for label in (registered, "TEST_P_F-OQ_f128_n4096_d1_i2101_y8", "CAL_F-OQ_f8192_n1024_d3_i2191_y262144", "nonsense"):
         code = stages.main(["work", "calibrate-cell", "--labels", label, "--run-dir", str(tmp_path), "--mode", "calibration", "--dry"])
         assert code == 2
     assert not list(tmp_path.rglob("*"))
 
 
 def test_registered_guard_allows_only_the_frozen_registry() -> None:
-    fro = fz.Frozen.build(core.Plan(seed_block_draws=(1,), dense_cut=("8K/64K",)), fz.default_cpu_table())
+    fro = fz.Frozen.build(core.Plan(seed_block_draws=(1,), dense_cut=("8K/16K",)), fz.default_cpu_table())
     for cell in core.registered_cells(fro.plan, dense_rates=fro.dense_rates):
         if cell.kind != "LN":
             stages.registered_guard(cell, fro)
-    cut = core.make_cell("P", "D-OQ", 8192, 65536, 1, 2101)
+    cut = core.make_cell("P", "D-OQ", 8192, 16384, 1, 2101)
     for refused in (cut, core.calibration_cells()[0], core.make_cell("SB", "F-OQ", 8192, 4096, 2, 2112), core.make_cell("P", "F-OQ", 8192, 4096, 1, 2999), core.lane_cells()[0]):
         with pytest.raises(stages.RegisteredRefused):
             stages.registered_guard(refused, fro)
@@ -248,19 +252,19 @@ def fake_projection(tmp: Path, **over: Any) -> dict[str, Path]:
     paths: dict[str, Path] = {}
     bound = {}
     over = dict(over)
-    for name, rec in (("calibration", {**core.envelope("calibration"), "load_decision": {"action": "GRID_STANDS"}, "returns_to_lead": [], **over.pop("cal_extra", {})}), ("timing", {**core.envelope("timing"), "status": "MEASURED"}), ("gates", {**core.envelope("gates"), "wall_seconds": 1.0}), ("synthetic", {**core.envelope("rehearsal")})):
+    for name, rec in (("calibration", {**core.envelope("calibration"), "returns_to_lead": [], "u_l": {"8K/1K": 131072, "32K/4K": 393216}, "u_l_256": 98304, "row_u_p": {"2048": {"u_p": 8192}, "8192": {"u_p": 8192}, "32768": {"u_p": 16384}}, "toq_predicted_not_loaded": [], "h8_undertrained_cells": ["8K/16K"], "dense_rates": {}, **over.pop("cal_extra", {})}), ("timing", {**core.envelope("timing"), "status": "MEASURED"}), ("gates", {**core.envelope("gates"), "wall_seconds": 1.0}), ("synthetic", {**core.envelope("rehearsal")})):
         p = tmp / f"{name}.json"
         core.write_record(p, rec)
         paths[name] = p
         bound[name] = {"path": str(p.resolve()), "sha256": file_sha256(p)}
-    plan = core.Plan(None, (1,), ("8K/64K",))
+    plan = core.Plan((1,), ("8K/16K",), row_u_p=(8192, 8192, 16384), u_l=(131072, 393216), u_l_256=98304)
     cpu = {f"{a}|{n}": v for (a, n), v in fz.default_cpu_table().items()}
     fro = fz.Frozen.build(plan, fz.default_cpu_table())
-    caps = budget.caps_table({i: budget.Rate(0.01, 5.0, 2.0, 10**9, 0, 0, 0) for i in budget.rehearsal_items()}, budget.Fixed(), fz.default_cpu_table())
+    caps = budget.caps_table({i: budget.Rate(0.01, 5.0, 2.0, 10**9, 0, 0, 0) for i in budget.rehearsal_items()}, budget.Fixed(), fz.default_cpu_table(), base=plan)
     record = {
         **core.envelope("projection"), "calibration": bound["calibration"], "timing": bound["timing"], "rehearsal_gates": bound["gates"], "synthetic": bound["synthetic"], "calibration_sha256": bound["calibration"]["sha256"],
-        "returns_to_lead": [], "memory": {"ok": True}, "cap_seconds": core.cap_seconds(), "chosen": {"ok": True, "plan": plan.as_json(), "applied_cuts": ["cut 1", "cut 2", "cut 3: D-OQ at 8K/64K"], "headroom": {"ok": True}},
-        "caps": caps, "cpu_per_update": cpu, "dense_rates": {"4096": 0.003, "16384": 0.01, "65536": 0.001}, "h8_undertrained": ["8K/16K"], **over,
+        "returns_to_lead": [], "memory": {"ok": True}, "cap_seconds": core.cap_seconds(), "computed_cap_hours": core.cap_seconds() / 3600.0, "cap_max_seconds": 36 * 3600.0, "c_need_seconds": 1.0, "contention": {"c": 1.0}, "chosen": {"ok": True, "plan": plan.as_json(), "applied_cuts": ["cut 1", "cut 2", "cut 3: D-OQ at 8K/16K"], "headroom": {"ok": True}},
+        "caps": caps, "cpu_per_update": cpu, "dense_rates": {"4096": 0.003, "16384": 0.01, "8K/1K": 0.003, "32K/4K": 0.001}, "h8_undertrained": ["8K/16K"], **over,
     }  # fmt: skip
     p = tmp / "projection.json"
     core.write_record(p, record)
@@ -305,8 +309,8 @@ def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
     plan = json.loads((tmp_path / "f1" / "plan.json").read_text())
     assert plan["stage_caps_sha256"] == file_sha256(tmp_path / "f1" / "stage_caps.json") and set(plan["data_manifests"]) == set(core.DRAW_NAMES) and plan["cap_seconds"] == core.cap_seconds()
     fro = fz.Frozen.from_json(plan["frozen"])
-    assert fro.plan == core.Plan(None, (1,), ("8K/64K",)) and fro.dense_rates == {4096: 0.003, 16384: 0.01, 65536: 0.001} and fro.h8_undertrained == ["8K/16K"] and fro.s0_status == fz.S0_NOT_DECIDED
-    assert fro.lane_status == fz.LANE_OMITTED_NO_INTERFACE and fro.cuts == ["cut 1", "cut 2", "cut 3: D-OQ at 8K/64K"] and plan["frozen_sha256"] == sha256(canonical_json(plan["frozen"]))
+    assert fro.plan == core.Plan((1,), ("8K/16K",), row_u_p=(8192, 8192, 16384), u_l=(131072, 393216), u_l_256=98304) and fro.dense_rates == {"4096": 0.003, "16384": 0.01, "8K/1K": 0.003, "32K/4K": 0.001} and fro.h8_undertrained == ["8K/16K"] and fro.s0_status == fz.S0_NOT_DECIDED
+    assert fro.lane_status == fz.LANE_OMITTED_NO_INTERFACE and fro.cuts == ["cut 1", "cut 2", "cut 3: D-OQ at 8K/16K"] and plan["frozen_sha256"] == sha256(canonical_json(plan["frozen"]))
     assert plan["identity"] == core.code_identity() and plan["lane_l"] == fz.LANE_OMITTED_NO_INTERFACE
     assert stages.main(freeze_argv(paths, run, tmp_path / "f1")) == 2  # a freeze is written once
     s0 = tmp_path / "s0.json"
@@ -326,10 +330,10 @@ def test_freeze_refusals(tmp_path: Path) -> None:
     assert stages.main(freeze_argv(no_plan, run, tmp_path / "f_np")) == 2
     bad_mem = projection_in(tmp_path, "bm", memory={"ok": False})
     assert stages.main(freeze_argv(bad_mem, run, tmp_path / "f_bm")) == 2
-    cap_moved = projection_in(tmp_path, "cm", cap_seconds=core.cap_seconds() + 3600.0)
-    assert stages.main(freeze_argv(cap_moved, run, tmp_path / "f_cm")) == 2  # the cap changed after the projection
+    cap_moved = projection_in(tmp_path, "cm", computed_cap_hours=core.cap_seconds() / 3600.0 + 1.0)
+    assert stages.main(freeze_argv(cap_moved, run, tmp_path / "f_cm")) == 2  # the cap in the config is not the cap the projection computed
     other = tmp_path / "other_cal.json"
-    other.write_text(paths["calibration"].read_text().replace("GRID_STANDS", "OVERLOAD_ROW"))
+    other.write_text(paths["calibration"].read_text().replace("98304", "65536"))
     assert stages.main(["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(other), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(tmp_path / "f_h")]) == 2
     missing = tmp_path / "run_missing"
     for name in core.DRAW_NAMES[:4]:
@@ -371,9 +375,9 @@ def dry(tmp_path_factory: pytest.TempPathFactory) -> Iterator[dict[str, Any]]:
 def test_dry_runs_every_stage_in_order(dry: dict[str, Any]) -> None:
     s = dry["summary"]
     assert dry["code"] == 0 and s["status"] == "COMPLETE" and s["report"] and Path(s["report"]).is_file()
-    assert sorted(s["stages"]) == sorted(["generate", "generate-rehearsal", "calibrate", "gates", "rehearse", "timing", "synthetic", "project", "freeze", "gates-run", "train", "evaluate", "throughput", "simulate", "analyze", "report"])
-    assert all(code == 0 for name, code in s["stages"].items() if name != "calibrate")
-    assert s["stages"]["calibrate"] in (0, 1)  # tiny numbers: the calibration's returns to the human lead are listed, not acted on
+    assert sorted(s["stages"]) == sorted(["generate", "generate-rehearsal", "timing-preview", "calibrate-load-row-up", "calibrate-finalize-items", "calibrate-h8-dense", "calibrate", "gates", "rehearse", "timing", "synthetic", "project", "freeze", "gates-run", "train", "evaluate", "throughput", "simulate", "analyze", "report"])
+    assert all(code == 0 for code in s["stages"].values())  # the DRY profile proceeds on placeholders where a rule gives nothing (the calibration record says so)
+    assert s["saturation"]
     assert "DRY" in s["banner"] and s["capacity"] in (C.CAPACITY_INCONCLUSIVE, C.CAPACITY_NOT_TESTED, C.CAPACITY_NEGATIVE, C.CAPACITY_POSITIVE)
 
 
@@ -381,7 +385,7 @@ def test_dry_charges_one_ledger_below_the_config_cap(dry: dict[str, Any]) -> Non
     ledger = core.Ledger.from_config(dry["root"])
     stages_charged = [e["stage"] for e in ledger.entries()]
     assert 0 < ledger.charged() < ledger.cap_seconds and ledger.cap_seconds == core.cap_seconds()
-    for stage in ("calibrate", "gates", "rehearse", "timing", "synthetic", "train", "evaluate", "simulate", "analyze", "report"):
+    for stage in ("calibrate-load-row-up", "calibrate-h8-dense", "gates", "rehearse", "timing", "synthetic", "train", "evaluate", "simulate", "analyze", "report"):
         assert stage in stages_charged
     assert abs(dry["summary"]["charged_seconds"] - ledger.charged()) < 1e-6
 
@@ -393,35 +397,42 @@ def test_dry_every_run_manifest_records_environment_and_cap(dry: dict[str, Any])
         m = core.read_record(p, "stage_manifest")
         env = m["environment"]
         assert env["platform"] and env["python"] and env["torch"] and "threads" in env and env["threads"]["torch_num_threads"] >= 1 and m["cap_seconds"] == core.cap_seconds() and m["identity"] and m["caps"]["stage_seconds"] > 0
+        assert "concurrency_check" in m  # the check of section 25.12 item 4 is recorded (not performed in the DRY profile: it says so)
         assert m["study"] == "P10S1" and m["status"] == "COMPLETE" and all(t["status"] == "completed" for t in m["tasks"])
         assert m["caps"]["rss_worker_bytes"] == 3 * 1024**3 and m["caps"]["rss_aggregate_bytes"] == 18 * 1024**3 and 1 <= m["workers"] <= 6
 
 
 def test_dry_gates_cover_every_configuration_and_every_gate(dry: dict[str, Any]) -> None:
     g = core.read_record(dry["reh"] / "gates.json", "gates")
-    assert g["configurations_checked"] == 30 and all(g[f"{n}_passed"] is True for n in stages.GATE_NAMES) and g["harness_errors"] == [] and g["g4_defects"] == []
+    assert g["configurations_checked"] == 31 and all(g[f"{n}_passed"] is True for n in stages.GATE_NAMES) and g["harness_errors"] == [] and g["g4_defects"] == []
     assert g["g2"]["tests"] >= 6 and g["g2"]["level_tests"] == 40 and g["checks"]["g9"]["passed"] and g["checks"]["g8"]["passed"] and g["checks"]["g7"]["4096"]["passed"] and g["checks"]["g6"]["passed"]
     assert set(g["checks"]["restoration"]) == set(core.ARMS) and all(v["identical"] for v in g["checks"]["restoration"].values()) and g["checks"]["index_rebuild"]["identical"]
     assert g["checks"]["identity_F-OQ"]["passed"] and g["checks"]["identity_R2"]["passed"] and g["checks"]["backbone_hashes_unchanged"]
     run_gates = core.read_record(dry["run"] / "gates.json", "gates")
-    assert all(run_gates[f"{n}_passed"] is True for n in stages.GATE_NAMES) and run_gates["configurations_checked"] == 30  # the gates again before training, in the run directory
+    assert all(run_gates[f"{n}_passed"] is True for n in stages.GATE_NAMES) and run_gates["configurations_checked"] == 31  # the gates again before training, in the run directory
 
 
 def test_dry_calibration_covers_all_its_cells_and_leaves_decisions_to_the_lead(dry: dict[str, Any]) -> None:
-    cells = core.calibration_cells(False, 8)
+    items = core.read_record(dry["cal"] / stages.ITEMS_FILE, "calibration")
+    row_map = {int(k): int(v["u_p"]) for k, v in items["row_u_p"].items()}
+    cells = core.calibration_cells(row_map, 8)
+    assert len(cells) == 70
     for c in cells:
         assert (core.cell_dir(dry["cal"], c.label) / "train.json").is_file()
     cal = core.read_record(dry["cal"] / "calibration.json", "calibration")
-    assert cal["load_decision"]["action"] in ("GRID_STANDS", "OVERLOAD_ROW", "RETURN_TO_LEAD") and set(cal["cut3_eligible"]) == {"8K/64K", "32K/16K"} and cal["calibration_accuracy_note"].startswith("calibration accuracies")
-    assert set(cal["dense_rates"]) == {"16384", "65536"} and "readings" in cal and len(cal["load"]) == 8
-    assert all(e["rate"] is None for e in cal["dense_rates"].values() if "tie" in e)  # a tie is not resolved by code
+    assert cal["dry"] is True and cal["dry_substituted"] and cal["calibration_accuracy_note"].startswith("calibration accuracies") and "readings" in cal  # tiny numbers: placeholders are named
+    assert set(cal["dense_rates"]) == set(core.DENSE_UNITS) and set(cal["u_l"]) == {"8K/1K", "32K/4K"} and set(cal["row_u_p"]) == {"2048", "8192", "32768"} and cal["u_l_256"] is not None
+    assert cal["training_wall_seconds_per_update"] and cal["charged_seconds"] > 0 and cal["returns_to_lead"] == []
+    preview = core.read_record(dry["cal"] / "timing_preview.json", "timing")
+    assert preview["preview"] is True and preview["status"] == "MEASURED" and set(preview["item_caps"]) == {"load", "row-up", "h8", "dense"} and len(preview["wall_per_update"]) == 16
+    assert len(list((dry["cal"] / "preview").glob("*.json"))) == 16  # every measured configuration went through the whitelist validator
 
 
 def test_dry_rehearsal_writes_only_whitelisted_records_and_binds_the_calibration(dry: dict[str, Any]) -> None:
     from studies.p10s1 import train
 
     records = sorted((dry["reh"] / "rehearsal").glob("REH-*/rehearsal*.json"))
-    assert len(records) == 30 * 2 + 3  # 30 configurations (record and evaluation) and 3 baselines
+    assert len(records) == 31 * 2 + 3  # 31 configurations (record and evaluation) and 3 baselines
     for p in records:
         rec = core.read_record(p, "rehearsal")
         train.validate_rehearsal_record(rec)
@@ -434,7 +445,7 @@ def test_dry_rehearsal_writes_only_whitelisted_records_and_binds_the_calibration
     assert len(proj["caps"]["configurations"]) == 12 and proj["chosen"]["ok"] and proj["charged_seconds"] > 0 and proj["cap_seconds"] == core.cap_seconds()
     assert proj["chosen"]["headroom"]["required_seconds"] <= proj["cap_seconds"] and proj["fixed"]["gates"] > 0 and proj["fixed"]["analysis"] > 0
     timing = core.read_record(dry["reh"] / "timing.json", "timing")
-    assert timing["status"] == "MEASURED" and len(timing["cpu_per_update"]) == 15 and all(v > 0 for v in timing["cpu_per_update"].values()) and timing["quiet"]["quiet"]
+    assert timing["status"] == "MEASURED" and len(timing["cpu_per_update"]) == 16 and len(timing["wall_per_update"]) == 16 and all(v > 0 for v in timing["cpu_per_update"].values()) and timing["quiet"]["quiet"]
 
 
 def test_dry_freeze_is_a_pure_function_of_its_inputs(dry: dict[str, Any], tmp_path: Path) -> None:
@@ -451,7 +462,7 @@ def test_dry_freeze_is_a_pure_function_of_its_inputs(dry: dict[str, Any], tmp_pa
 def test_dry_trains_and_evaluates_the_whole_frozen_registry(dry: dict[str, Any]) -> None:
     fro = fz.Frozen.from_json(json.loads((dry["freeze"] / "plan.json").read_text())["frozen"])
     cells = [c for c in core.registered_cells(fro.plan, dense_rates=fro.dense_rates) if c.kind != "LN"]
-    assert len(cells) == 150 + 14 + 14 and fro.plan.unit == 8
+    assert len(cells) == 155 + 14 + 14 and fro.plan.unit == 8
     for c in cells:
         folder = core.cell_dir(dry["run"], c.label)
         tr = core.read_record(folder / "train.json", "train")
@@ -461,16 +472,16 @@ def test_dry_trains_and_evaluates_the_whole_frozen_registry(dry: dict[str, Any])
     for r in range(1, 6):
         for facts in (2048, 8192, 32768):
             assert (dry["run"] / "baselines" / f"d{r}_f{facts}.json").is_file()
-    assert len(list((dry["run"] / "simulation").glob("*.json"))) == 21 and (dry["run"] / "throughput.json").is_file()
+    assert len(list((dry["run"] / "simulation").glob("*.json"))) == 22 and (dry["run"] / "throughput.json").is_file()
     thr = core.read_record(dry["run"] / "throughput.json", "throughput")
-    assert thr["status"] == "MEASURED" and set(thr["results"]) == {f"{a}|{n}" for a in ("F-OQ", "F-OQ-IVF", "T-OQ", "H8", "D-OQ") for n in core.SLOT_COUNTS} and "not storage I/O" in thr["scope"]
+    assert thr["status"] == "MEASURED" and set(thr["results"]) == {f"{a}|{n}" for a in ("F-OQ", "F-OQ-IVF", "T-OQ", "H8", "D-OQ") for n in core.SLOT_COUNTS if not (n == 256 and a != "F-OQ")} - {"F-OQ-IVF|256"} and "not storage I/O" in thr["scope"]
 
 
 def test_dry_analysis_and_report(dry: dict[str, Any]) -> None:
     analysis_rec = core.read_record(dry["run"] / "analysis.json", "analysis")
     result = analysis_rec["result"]
     assert result["assessment"]["status"] == "COMPLETE" and result["assessment"]["missing_cells"] == [] and result["assessment"]["failed_cells"] == [] and result["assessment"]["engineering"]["failed"] is False
-    assert result["timing"]["status"] == "MEASURED" and result["throughput"]["status"] == "MEASURED" and len(result["simulation"]) == 21
+    assert result["timing"]["status"] == "MEASURED" and result["throughput"]["status"] == "MEASURED" and len(result["simulation"]) == 22
     text = (dry["run"] / "results" / "RESULTS.md").read_text()
     assert text.splitlines()[2].startswith("**DRY:") and C.untagged_positive_labels(text) == [] and core.ORACLE_SENTENCE in text and "Astra review: NOT_PERFORMED" in text
     results = json.loads((dry["run"] / "results" / "results.json").read_text())

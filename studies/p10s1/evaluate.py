@@ -286,6 +286,8 @@ def ivf_model(model: P10S1Model, seeds: p9core.SeedSet) -> "tuple[P10S1Model, in
     (seed base + 60) and is identical on a rebuild (gate G4)."""
     if model.arm != "F-OQ":
         raise ValueError("F-OQ-IVF is F-OQ's cells read through the index")
+    if model.slots == core.SATURATION_ONLY_CELL[1]:
+        raise ValueError("the index read is not defined at 256 slots: one list would read every key (ADR-0021 section 5.1)")
     idx = index.build_index(model.addition.keys.detach(), core.index_seed(seeds))
     clone = copy.deepcopy(model)
     clone.addition = index.IVFMemory(model.addition, idx)
@@ -354,7 +356,7 @@ def evaluate_readout(
         }  # fmt: skip
         with eval_chunking(model):
             record["reads"]["main"] = _read_record(model, data, facts, seeds, deep=deep, robustness=robustness)
-            if cell.arm == "F-OQ" and with_ivf:
+            if cell.arm == "F-OQ" and with_ivf and cell.slots != core.SATURATION_ONLY_CELL[1]:
                 ivf, idx = ivf_model(model, seeds)
                 ivf.eval()
                 with eval_chunking(ivf):

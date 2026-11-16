@@ -18,8 +18,9 @@ AMaxFn = Callable[[str, int, int, int], float]  # (arm read, facts, slots, repli
 TauFn = Callable[[str, int, int], float]  # (arm read, facts, slots) -> time constant in updates
 
 
-def default_a_max(c: float = 0.7) -> AMaxFn:
-    """The store holds ``c`` facts per slot at ceiling accuracy: a_use at most min(1, c x slots / facts); R2 and D-OQ at 1.0 (D-OQ at 0.15 so that it does not lead)."""
+def default_a_max(c: float = 4.8) -> AMaxFn:
+    """The store holds ``c`` facts per slot at ceiling accuracy: a_use at most min(1, c x slots / facts) (c = 4.8 puts the cells of eight facts per slot at a_use 0.6, loaded and full, and every
+    other cell at ceiling); R2 at 1.0; D-OQ at 0.15 so that it does not lead (below the DEP floor: the dense label at saturation reads DENSE NOT LEARNED)."""
 
     def f(arm: str, facts: int, slots: int, rep: int) -> float:
         if arm == "R2":
@@ -120,7 +121,7 @@ def write_cell(run_dir: Path, cell: core.Cell, fro: fz.Frozen, scn: Scenario) ->
     for u in updates:
         bad = cell.label in scn.nonfinite and u == cell.u_p
         reads = {"main": _read(scn, cell, cell.arm, rep, u, bad, cell.label in scn.leak_labels)}
-        if cell.arm == "F-OQ":
+        if cell.arm == "F-OQ" and cell.slots != core.SATURATION_ONLY_CELL[1]:  # the index read is not defined at 256 slots
             reads["ivf"] = _read(scn, cell, "F-OQ-IVF", rep, u, bad, False)
         rec = {**core.envelope("eval"), "label": cell.label, "arm": cell.arm, "facts": cell.facts, "slots": cell.slots, "draw": cell.draw, "update": u, "reads": reads}
         core.write_record(core.eval_path(run_dir, cell.label, u), core.jsonable(rec))
@@ -159,3 +160,31 @@ def write_run(run_dir: Path, fro: fz.Frozen, scn: Scenario) -> None:
         write_cell(run_dir, cell, fro, scn)
     write_baselines(run_dir, fro, scn)
     core.write_record(run_dir / "gates.json", gates_record(scn))
+
+
+def at_load_8(arm_filter: Callable[[str], bool], value: Callable[[int, int], float], other: AMaxFn | None = None) -> AMaxFn:
+    """An ``a_max`` that differs from ``other`` (default: ``default_a_max()``) only for the arms of ``arm_filter`` at the cells of eight facts per slot (the saturation cells)."""
+    base = other or default_a_max()
+
+    def f(arm: str, facts: int, slots: int, rep: int) -> float:
+        if arm_filter(arm) and facts == 8 * slots:
+            return value(facts, slots)
+        return base(arm, facts, slots, rep)
+
+    return f
+
+
+def scenario_catalogue() -> dict[str, Scenario]:
+    """Named scenarios of the whole registry that reach the labels of the saturation line and the dense label at saturation (rehearsal and tests; nothing here is a measurement): the default
+    (capacity steps, PROPORTIONAL saturation, D-OQ not learned), a dense map that holds more at saturation, a store that holds more, a dense map that is still rising, a store whose slot holds
+    less as the store grows (SUBPROPORTIONAL), and a store that is not full."""
+    only_foq_family = lambda a: a in ("F-OQ", "T-OQ", "H8")  # noqa: E731
+    dense_only = lambda a: a == "D-OQ"  # noqa: E731
+    return {
+        "default": Scenario(),
+        "dense holds more at saturation": Scenario(a_max=at_load_8(dense_only, lambda f, n: 1.0)),
+        "store holds more at saturation": Scenario(a_max=at_load_8(dense_only, lambda f, n: 0.3)),
+        "dense still rising": Scenario(a_max=at_load_8(dense_only, lambda f, n: 0.3), tau=lambda arm, facts, slots: 60000.0 if arm == "D-OQ" and facts == 8 * slots else 1500.0),
+        "saturation subproportional": Scenario(a_max=at_load_8(only_foq_family, lambda f, n: 0.6 if n <= 1024 else 0.3)),
+        "saturation not full": Scenario(a_max=at_load_8(only_foq_family, lambda f, n: 1.0)),
+    }

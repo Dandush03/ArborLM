@@ -19,7 +19,7 @@ from . import core
 from . import frozen as fz
 
 PANEL_LIST = core.PANELS
-REF_CELL = {2048: (2048, 4096), 8192: (8192, 16384), 32768: (32768, 65536), core.OVERLOAD_FACTS: (core.OVERLOAD_FACTS, 65536)}
+REF_CELL = {2048: (2048, 4096), 8192: (8192, 16384), 32768: (32768, 32768)}  # R2's reference cell of each row (2K/256 uses the row of 2,048 facts)
 ARM_READS = ("F-OQ", "F-OQ-IVF", "T-OQ", "H8")
 CAPACITY_REPLICATE_ARMS = ("F-OQ", "F-OQ-IVF", "T-OQ", "H8")
 DECISION_ARMS = ("F-OQ", "F-OQ-IVF", "T-OQ")
@@ -223,6 +223,14 @@ def _row_facts(plan: core.Plan) -> list[int]:
     return sorted({s.facts for s in plan.steps})
 
 
+# transitions of the capacity line (C1 and N1 in 1K->4K, C2 and N2 in 4K->16K) and of the efficiency line (the control steps only, section 8.8)
+def efficiency_transitions() -> dict[str, list[str]]:
+    t: dict[str, list[str]] = {}
+    for step in core.EFFICIENCY_STEPS:
+        t.setdefault(step.transition, []).append(step.name)
+    return t
+
+
 # --- capacity line ------------------------------------------------------------------------------------------------------------------------------------
 def capacity_steps(study: Study, fro: fz.Frozen) -> dict[str, dict[str, Any]]:
     """For every classified arm and every step of the plan: the verdict of each replicate (both panels), the step class and the movement ratios at U_P."""
@@ -251,9 +259,9 @@ def transitions_of(plan: core.Plan) -> dict[str, list[str]]:
 
 
 def largest_cell_a_use(study: Study, arm: str) -> bool:
-    """a_use at least 0.80 at 32K/64K at U_P in all 5 replicates (both panels)."""
+    """a_use at least 0.80 at 32K/16K at its row's U_P in all 5 replicates (both panels; section 8.4 row 3, revision 5: the largest registered cell)."""
     return all(
-        all(C.ge(study.get(r, arm, 32768, 65536).views[p].a_use(study.get(r, arm, 32768, 65536).u_p), core.ARM_A_USE_AT_LARGEST) for p in PANEL_LIST) for r in range(1, core.REPLICATES + 1)
+        all(C.ge(study.get(r, arm, 32768, 16384).views[p].a_use(study.get(r, arm, 32768, 16384).u_p), core.ARM_A_USE_AT_LARGEST) for p in PANEL_LIST) for r in range(1, core.REPLICATES + 1)
     )
 
 
@@ -286,7 +294,7 @@ def _dense_cells(study: Study, fro: fz.Frozen, arm: str, steps: Sequence[core.St
                 d_b, r_b = C.dense_reading(a.views[p].i(u_p), best, a.views[p].obs[u_p].n)
                 per["D-BEST"][p] = (d_b, r_b, dn.views[p].a_use(at))
             reps.append(per)
-        cells.append(C.DenseCell(step.name, reps, "OK" if e.ok() else e.status))
+        cells.append(C.DenseCell(step.name, reps, "OK" if e.ok() else e.status, e.annotation))
     return cells, missing
 
 
@@ -346,8 +354,8 @@ def capacity_arms(study: Study, fro: fz.Frozen, steps: Mapping[str, dict[str, An
 
 
 def hierarchy(study: Study, fro: fz.Frozen) -> dict[str, Any]:
-    """T-OQ against F-OQ-IVF on I_use at 8K/16K and 32K/64K at U_P; T-OQ against exhaustive F-OQ beside it."""
-    cells = ((8192, 16384), (32768, 65536))
+    """T-OQ against F-OQ-IVF on I_use at 8K/4K and 32K/16K (the larger cells of the loaded steps) at the row's U_P; T-OQ against exhaustive F-OQ beside it."""
+    cells = ((8192, 4096), (32768, 16384))
     ratios: list[dict[str, dict[str, float]]] = []
     exhaustive: list[dict[str, dict[str, float]]] = []
     for r in range(1, core.REPLICATES + 1):
@@ -378,13 +386,13 @@ def baseline_i(study: Study, r: int, facts: int, which: str, panel: str) -> floa
 
 
 def conventional(study: Study) -> dict[str, Any]:
-    """CONVENTIONAL RETRIEVAL SUFFICES per arm (KNN-W or KNN-W-IVF within 0.25 of the arm or above it, both panels, at least 4 replicates, 32K/64K), and the baselines' i."""
+    """CONVENTIONAL RETRIEVAL SUFFICES per arm (KNN-W or KNN-W-IVF within 0.25 of the arm or above it, both panels, at least 4 replicates, 32K/16K), and the baselines' i."""
     out: dict[str, Any] = {"dict_dominates_on_this_task": "DICT DOMINATES ON THIS TASK", "arms": {}, "baselines_32768": {}}
     for arm in DECISION_ARMS:
         i_arm, i_knn, i_ivf = [], [], []
         ok = True
         for r in range(1, core.REPLICATES + 1):
-            c = study.get(r, arm, 32768, 65536)
+            c = study.get(r, arm, 32768, 16384)
             a = {p: c.views[p].i(c.u_p) for p in PANEL_LIST}
             k = {p: baseline_i(study, r, 32768, "KNN-W", p) for p in PANEL_LIST}
             v = {p: baseline_i(study, r, 32768, "KNN-W-IVF", p) for p in PANEL_LIST}
@@ -402,50 +410,75 @@ def conventional(study: Study) -> dict[str, Any]:
     return out
 
 
-def study_b(study: Study, fro: fz.Frozen, steps: Mapping[str, dict[str, Any]]) -> dict[str, Any]:
-    """KNOWLEDGE SCALES WITH MEMORY, DOES NOT SCALE or NOT ESTABLISHED per arm among F-OQ, F-OQ-IVF and T-OQ (section 8.6), beside the outcome."""
-    diag = (((2048, 4096), (8192, 16384)), ((8192, 16384), (32768, 65536)))
-    out: dict[str, Any] = {}
-    for arm in DECISION_ARMS:
-        reps = []
-        for r in range(1, core.REPLICATES + 1):
-            rep: dict[str, dict[str, list[tuple[float, float, float, float] | None]]] = {"MU": {}, "MC": {}}
-            for p in PANEL_LIST:
-                mu: list[tuple[float, float, float, float] | None] = []
-                mc_steps: list[tuple[float, float, float, float] | None] = []
-                for k, (lo, hi) in enumerate(diag):
-                    a, b = study.get(r, arm, *lo), study.get(r, arm, *hi)
-                    mu.append((a.views[p].a_use(a.u_p), b.views[p].a_use(b.u_p), a.facts * a.views[p].i(a.u_p), b.facts * b.views[p].i(b.u_p)))  # I_use = facts x i (M1)
-                    e = fro.entry(f"diag|{'F-OQ' if arm == 'F-OQ-IVF' else arm}|{k}")
-                    if e.ok():
-                        ua, ub = int(e.small_update), int(e.large_update)  # type: ignore[arg-type]
-                        mc_steps.append((a.views[p].a_use(ua), b.views[p].a_use(ub), a.facts * a.views[p].i(ua), b.facts * b.views[p].i(ub)))
-                    else:
-                        mc_steps.append(None)
-                rep["MU"][p], rep["MC"][p] = mu, mc_steps
-            reps.append(rep)
-        a1, b2 = steps[arm].get("A1"), steps[arm].get("B2")
-        attributed = [bool(a1 and a1["class"] == C.CAPACITY_STEP), bool(b2 and b2["class"] == C.CAPACITY_STEP)]
-        work = [core.work_formula("T-OQ" if arm == "T-OQ" else "F-OQ", n)["W"] for n in (4096, 16384, 65536)] if arm != "F-OQ-IVF" else []
-        if arm == "F-OQ-IVF":
-            w = [study.get(r, arm, f, n).ivf_measured[study.get(r, arm, f, n).u_p]["W_mean"] for r in range(1, core.REPLICATES + 1) for f, n in ((2048, 4096), (8192, 16384), (32768, 65536))]
-            sublinear = all(C.le(w[3 * r + k + 1], core.SUBLINEAR_FACTOR * w[3 * r + k]) for r in range(core.REPLICATES) for k in (0, 1))
-        else:
-            sublinear = C.le(work[1], core.SUBLINEAR_FACTOR * work[0]) and C.le(work[2], core.SUBLINEAR_FACTOR * work[1])
-        label = C.study_b_label(reps, sublinear, attributed)
-        me: dict[str, Any] = {}
-        for lo_hi in diag:
-            for f, n in lo_hi:
-                u = core.me_updates(f, fro.plan.unit)
-                key = core.cell_name(f, n)
-                if key in me:
+def _sat_side(study: Study, r: int, arm: str, size: int) -> C.SatSide | None:
+    f, n = core.SATURATION_CELLS[size]
+    if not study.has(r, arm, f, n):
+        return None
+    c = study.get(r, arm, f, n)
+    return C.SatSide(c.views, f, n)  # views are read at the cell's run length U_L
+
+
+def saturation_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
+    """The saturation line (section 8.10): per arm and registered pair the verdict of each replicate (rho, b(N), the last doubling's gain and full / not full per panel and size), the pair class,
+    the arm class and the outcome; the separability figures of section 7.3 at each saturation cell beside every rho. A pair that uses 2K/256 when the plan does not run it is NOT FULL
+    ('256 NOT MEASURED — NOT FULL WITHIN CEILING')."""
+    arms: dict[str, Any] = {}
+    for arm in core.SATURATION_ARMS:
+        pairs: dict[str, Any] = {}
+        classes_: list[str] = []
+        for n, m in core.SATURATION_PAIRS[arm]:
+            key = f"{n}→{m}"
+            if n == core.SATURATION_ONLY_CELL[1] and not fro.plan.sat256:
+                pairs[key] = {"class": C.NOT_FULL, "verdicts": None, "note": C.NOT_MEASURED_256, "replicates": []}
+                classes_.append(C.NOT_FULL)
+                continue
+            reps = []
+            for r in range(1, core.REPLICATES + 1):
+                small, large = _sat_side(study, r, arm, n), _sat_side(study, r, arm, m)
+                if small is None or large is None:
+                    reps.append({"replicate": r, "verdict": C.NOT_EVALUATED, "detail": {"reason": "cell missing"}})
                     continue
-                vals = [study.get(r, arm, f, n) for r in range(1, core.REPLICATES + 1)]
-                if all(u in c.views["A"].obs for c in vals):
-                    me[key] = {"update": u, "a_use": {p: [c.views[p].a_use(u) for c in vals] for p in PANEL_LIST}, "I_use_bits": {p: [f * c.views[p].i(u) for c in vals] for p in PANEL_LIST}}
-        label.update(me_readout=me, memory_attributed=attributed, sublinear=sublinear, me_note="ME is not binding along the diagonal: at the ME readout the smaller cells have had 4 and 16 times fewer updates of their shared parameters (section 5.4 rule 4)")
-        out[arm] = label
-    return out
+                ok = ref_ok(study, r, small.facts) and ref_ok(study, r, large.facts)
+                cs, cl = study.get(r, arm, small.facts, small.slots), study.get(r, arm, large.facts, large.slots)
+                res = C.saturation_pair(small, large, ref_ok=ok, leakage=cs.leakage or cl.leakage)
+                reps.append({"replicate": r, "verdict": res.verdict, "detail": res.detail})
+            cls = C.saturation_pair_class([str(x["verdict"]) for x in reps])
+            pairs[key] = {"class": cls, "verdicts": [x["verdict"] for x in reps], "replicates": reps}
+            classes_.append(cls)
+        arms[arm] = {"pairs": pairs, "class": C.saturation_arm_class(classes_), "pairs_read": [f"{n}→{m}" for n, m in core.SATURATION_PAIRS[arm]]}
+    separability: dict[str, Any] = {}
+    for size, (f, n) in core.SATURATION_CELLS.items():
+        if size == core.SATURATION_ONLY_CELL[1] and not fro.plan.sat256:
+            continue
+        for r in range(1, core.REPLICATES + 1):
+            if study.has(r, "F-OQ", f, n):
+                separability[f"{core.cell_name(f, n)} replicate {r}"] = study.get(r, "F-OQ", f, n).deep.get("separability")
+    outcome = C.saturation_outcome({a: v["class"] for a, v in arms.items()}, engineering_failed=False, incomplete=False, pairs_read={a: v["pairs_read"] for a, v in arms.items()}, sat256_absent=not fro.plan.sat256, details=[fro.s0_status, core.ORACLE_SENTENCE])
+    return {"arms": arms, "separability": separability, "outcome": outcome._asdict()}
+
+
+def dense_saturation(study: Study, fro: fz.Frozen, arm: str) -> dict[str, Any]:
+    """The dense label at saturation for ``arm`` at the two loaded cells (section 8.5): the arm and D-OQ both read at U_L; D-OQ's plateau status at U_L; D-OQ's cost per update at least the arm's in
+    both cost measures (the frozen cost tables)."""
+    cells: list[C.SatDenseCell] = []
+    for f, n in core.LOADED_CELLS:
+        base = "F-OQ" if arm == "F-OQ-IVF" else arm
+        reps: list[dict[str, tuple[float, float | None]]] = []
+        status: list[dict[str, str]] = []
+        for r in range(1, core.REPLICATES + 1):
+            a, dn = study.get(r, arm, f, n), study.get(r, "D-OQ", f, n)
+            per: dict[str, tuple[float, float | None]] = {}
+            st: dict[str, str] = {}
+            for p in PANEL_LIST:
+                ia, idn = a.views[p].i_star(a.run)[0], dn.views[p].i_star(dn.run)[0]
+                d, ratio = C.dense_reading(ia, idn, a.views[p].obs[a.u_p].n)
+                per[p] = (d, ratio)
+                st[p] = dn.views[p].plateau_status()
+            reps.append(per)
+            status.append(st)
+        ca, cd = fz.costs_of(fro.cost, base, n), fz.costs_of(fro.cost, "D-OQ", n)
+        cells.append(C.SatDenseCell(core.cell_name(f, n), reps, status, all(cd[m] >= ca[m] - C.EPS for m in ("cpu", "madds"))))
+    return C.dense_at_saturation(cells)
 
 
 def robustness(study: Study, fro: fz.Frozen) -> dict[str, Any]:
@@ -533,11 +566,11 @@ def _movement_text(steps: Mapping[str, Mapping[str, Any]], arm_classes: Mapping[
 
 def efficiency_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
     """u_T for every F-OQ and T-OQ cell, the step verdict of each replicate, the step and arm classes, the dense label at the larger cell of each FASTER STEP, the outcome."""
-    trans = transitions_of(fro.plan)
+    trans = efficiency_transitions()
     steps: dict[str, dict[str, Any]] = {}
     for arm in core.EFFICIENCY_ARMS:
         steps[arm] = {}
-        for step in fro.plan.steps:
+        for step in core.EFFICIENCY_STEPS:
             reps = []
             for r in range(1, core.REPLICATES + 1):
                 small, large = study.get(r, arm, step.facts, step.small), study.get(r, arm, step.facts, step.large)
@@ -555,7 +588,7 @@ def efficiency_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
     dense_detail: dict[str, Any] = {}
     dense_cells = set(core.arm_cells(fro.plan, "D-OQ"))
     for arm in core.EFFICIENCY_ARMS:
-        faster = [s for s in fro.plan.steps if steps[arm][s.name]["class"] == "FASTER STEP"]
+        faster = [s for s in core.EFFICIENCY_STEPS if steps[arm][s.name]["class"] == "FASTER STEP"]
         if arm_classes[arm] != "EFFICIENCY_SUPPORTED" and not faster:
             continue
         labels = []
@@ -626,7 +659,7 @@ def mc_mismatch(study: Study, fro: fz.Frozen) -> list[dict[str, Any]]:
 
 
 # --- decision map (section 8.9; recommendations only) --------------------------------------------------------------------------------------------------------
-def decision_map(cap: C.Outcome, eff: C.Outcome, arms: Mapping[str, Mapping[str, Any]], klimited: bool, eff_steps: Mapping[str, Mapping[str, Any]]) -> list[str]:
+def decision_map(cap: C.Outcome, eff: C.Outcome, arms: Mapping[str, Mapping[str, Any]], klimited: bool, eff_steps: Mapping[str, Mapping[str, Any]], sat: C.Outcome | None = None, dense_sat: Mapping[str, str] | None = None) -> list[str]:
     out: list[str] = []
     sub = any(arms.get(a, {}).get("class") == C.CAPACITY_SUPPORTED and arms[a].get("work_label") == C.SUBLINEAR for a in ("T-OQ", "F-OQ-IVF"))
     if cap.label == C.CAPACITY_POSITIVE and sub:
@@ -646,7 +679,14 @@ def decision_map(cap: C.Outcome, eff: C.Outcome, arms: Mapping[str, Mapping[str,
     for name, o in (("capacity", cap), ("efficiency", eff)):
         if o.label in (C.CAPACITY_INCONCLUSIVE, C.EFFICIENCY_INCONCLUSIVE):
             out.append(f"8. {name.capitalize()} line inconclusive: no decision on that line.")
-    return out or ["No recommendation: nothing is authorized by this record."]
+    if sat is not None and sat.label == C.SAT_SUBPROPORTIONAL:
+        out.append("9. SATURATION-SUBPROPORTIONAL: what a slot holds falls as the store grows; any scaling plan must budget for it, and the cause (the shared output projection, interference between keys, or crowding of the fixed width-16 oracle codes) is the next question.")
+    if sat is not None and sat.label == C.SAT_PROPORTIONAL:
+        out.append("10. SATURATION-PROPORTIONAL: the same measurement at 16,384 slots and above, which S1 does not fund, is the next question, for P10-I.")
+    if dense_sat and C.DENSE_HOLDS_MORE in dense_sat.values():
+        out.append("11. DENSE HOLDS MORE AT SATURATION: per parameter, the dense map is the better store on this task; whatever the memory offers is then in its counted work and its sparse updates, and a scaling plan must say so.")
+    out.append("12. Whatever the outcome, capacity from 16,384 to 65,536 slots stays untested and is proposed for P10-I.")
+    return out if len(out) > 1 else ["No recommendation: nothing is authorized by this record.", out[-1]]
 
 
 # --- the whole study ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -676,11 +716,18 @@ def analyze_study(
     if eng["failed"] or incomplete:
         out_c = C.capacity_outcome({}, engineering_failed=eng["failed"], incomplete=incomplete)
         out_e = C.efficiency_outcome({}, {}, engineering_failed=eng["failed"], incomplete=incomplete)
-        result.update(capacity=None, efficiency=None, outcome={"capacity": out_c._asdict(), "efficiency": out_e._asdict()}, decision_map=["No recommendation: no scientific label on either line."])
+        out_s = C.saturation_outcome({}, engineering_failed=eng["failed"], incomplete=incomplete)
+        result.update(capacity=None, efficiency=None, saturation=None, outcome={"capacity": out_c._asdict(), "efficiency": out_e._asdict(), "saturation": out_s._asdict()}, decision_map=["No recommendation: no scientific label on either line."])
         return result
     steps = capacity_steps(study, fro)
     arms = capacity_arms(study, fro, steps)
-    arm_cap = {a: C.ArmCapacity(a, arms[a]["class"], arms[a]["dense"], arms[a]["capacity_steps"], dense_text="; ".join(t for t in (_dense_text(arms[a]["dense_detail"]), *arms[a]["dense_detail"].get("mu_text", [])) if t)) for a in DECISION_ARMS}
+    sat = saturation_line(study, fro)
+    dsat = {a: dense_saturation(study, fro, a) for a in DECISION_ARMS}
+    arm_cap = {
+        a: C.ArmCapacity(a, arms[a]["class"], arms[a]["dense"], arms[a]["capacity_steps"], dense_text="; ".join(t for t in (_dense_text(arms[a]["dense_detail"]), *arms[a]["dense_detail"].get("mu_text", [])) if t),
+                         dense_sat=dsat[a]["label"], dense_sat_sublabels=list(dsat[a]["sublabels"]), sat_class=sat["arms"][a]["class"])
+        for a in DECISION_ARMS
+    }  # fmt: skip
     hier = hierarchy(study, fro)
     conv = conventional(study)
     every_not_loaded = all(
@@ -693,13 +740,13 @@ def analyze_study(
     reading = C.milestone_reading(cap_out, arm_cap, work, hier["label"], fro.s0_status)
     eff = efficiency_line(study, fro)
     eff_out = C.Outcome(**eff["outcome"])
-    sb = study_b(study, fro, steps)
     result.update(
-        capacity={"steps": steps, "arms": arms, "hierarchy": hier, "conventional": conv, "key_learning_limited": klim, "study_b": sb, "robustness": robustness(study, fro), "held_out": held_out(study, fro), "seed_block": seed_block(study, fro), "mc_mismatch": mc_mismatch(study, fro), "h8_undertrained": list(fro.h8_undertrained)},
+        saturation={**sat, "dense_at_saturation": dsat},
+        capacity={"steps": steps, "arms": arms, "hierarchy": hier, "conventional": conv, "key_learning_limited": klim, "h8_annotations": C.h8_annotations(fro.h8_undertrained), "mc_ambiguous_pairs": {k: {"status": e.status, "small_update": e.small_update, "large_update": e.large_update, "multiplier": e.multiplier, "reading": "read in the comparator's favour (section 5.4): the cell whose advantage would be claimed at U_P, the other at the smallest grid snapshot with multiplier at least the larger of r and 1/r"} for k, e in sorted(fro.mc.items()) if e.annotation == C.MC_AMBIGUOUS}, "robustness": robustness(study, fro), "held_out": held_out(study, fro), "seed_block": seed_block(study, fro), "mc_mismatch": mc_mismatch(study, fro), "h8_undertrained": list(fro.h8_undertrained)},
         efficiency=eff,
-        outcome={"capacity": {**cap_out._asdict(), "reading": reading}, "efficiency": eff_out._asdict()},
+        outcome={"capacity": {**cap_out._asdict(), "reading": reading}, "efficiency": eff_out._asdict(), "saturation": sat["outcome"]},
         cost_table=cost_rows(study, fro),
-        decision_map=decision_map(cap_out, eff_out, arms, klim, eff["steps"]),
+        decision_map=decision_map(cap_out, eff_out, arms, klim, eff["steps"], C.Outcome(**sat["outcome"]), {a: dsat[a]["label"] for a in DECISION_ARMS}),
     )  # fmt: skip
     return result
 
