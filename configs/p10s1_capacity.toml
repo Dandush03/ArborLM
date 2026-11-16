@@ -135,8 +135,8 @@ manifest_sha256 = ""
 
 [resources]
 cap_hours = 16.0
-cap_max_hours = 36.0
-cap_max_source = "set by the lead under the Addendum's delegation on 2026-11-15, before any registered seed was observed; reported to the human lead"
+cap_max_hours = 50.0
+cap_max_source = "raised from 36 to 50 hours by the human lead on 2026-11-16 (ADR-0021 section 25.16), after the projection returned NOT STARTED: BUDGET and before any registered seed was observed"
 cap_headroom = 2.0
 cap_packing = "longest first on six workers"
 cap_contention_min = 1.0

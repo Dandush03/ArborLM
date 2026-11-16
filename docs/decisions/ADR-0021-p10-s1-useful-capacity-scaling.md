@@ -1254,3 +1254,31 @@ No two consecutive candidates pass, so F-OQ has no U_L in either cell. i* of F-O
 5. Items `row-up` stands as recorded. Items `h8` and `dense` run after the extended search is finalized.
 
 This is a ceiling raised after calibration data was seen, on the human lead's direction; it is reported as such wherever S1's capacity result is stated. `Astra review: NOT_PERFORMED`.
+
+### 25.16 The projection returns NOT STARTED: BUDGET; the human lead raises C_max to 50 hours (2026-11-16 UTC)
+
+**The record that returned.** Pre-freeze steps 3, 4, 5 and 7 ran complete on the rehearsal draw in `experiments/P10S1R5-rehearsal-20261116` (gates passed, no harness error; rehearsal 33 tasks), and the isolated timing was MEASURED on its second load reading (1.34, then 0.73; limit 1.0). The projection (`projection.json`) with the calibration record of §25.15 (U_L 393,216 and 786,432):
+
+| Item | Value |
+|---|---|
+| Charged before the freeze | 25,741 s (7.15 h) |
+| Contention ratio c | 1.946 (rehearsal, worst D-OQ at 1,024 slots; the calibration's descriptive ratio is 2.20, worst D-OQ at 16,384) |
+| Projected remaining after cuts 1, 2 and 3 | 60,598 s (16.83 h) |
+| C_need = charged + 2 × remaining | 146,937 s (40.82 h) |
+| C_max | 129,600 s (36 h) |
+| Outcome | **NOT STARTED: BUDGET** (shortfall 17,337 s); memory rule holds (peak 1.33 GiB per worker) |
+
+The rehearsal ran while the desktop was under unrelated load (load average about 5.4), which the lead reported as a likely cause of the high ratio; it is not re-measured.
+
+**The choice put to the human lead.** (1) raise the ceiling to 41 hours, (2) repeat the rehearsal on a quiet machine first, (3) accept NOT STARTED: BUDGET. The lead recommended (1). The human lead, verbatim:
+
+> im ok with making the cap 50h if needed as long as I can use the mac
+
+**What is fixed by this direction, before any registered draw is generated:**
+
+1. C_max is **50 hours** (`resources.cap_max_hours`, `core.CAP_MAX_HOURS`). Nothing else in the budget rule changes: C_need = charged + 2 × remaining, c from the rehearsal as measured (never below 1.0), the three cuts in their fixed order, the cap = C_need rounded up to the hour. The rule, not the lead, decides which cuts apply under the new ceiling; a cut that the rule no longer needs is not applied.
+2. No rehearsal, timing or calibration figure is re-measured. No `[thresholds]` entry changes.
+3. The human lead uses the machine during the registered run. The contention ratio and the factor 2 are the margin for that; a stage that reaches its cap is STOPPED BY CAP and reported as such, not rerun.
+4. If C_need exceeded 50 hours after the three cuts the record would again say NOT STARTED: BUDGET and return to the human lead.
+
+`Astra review: NOT_PERFORMED`.
