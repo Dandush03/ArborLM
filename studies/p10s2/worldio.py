@@ -56,6 +56,46 @@ def _item_from(d: Mapping[str, Any]) -> Item:
     return Item(str(d["key"]), str(d["en"]), {c: tuple(v) for c, v in d["refs"].items()}, int(d["group"]))
 
 
+TENSOR_KEYS = ("reference_logits", "reference_injection_logits")
+TENSOR_PREFIX = "@tensor:"
+
+
+def _strip_equivalence_tensors(extra: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, torch.Tensor]]:
+    """Move the stored reference logits of the equivalence records out of ``extra`` into tensors (keyed by layer, so the record of the first layer that appears twice is stored once); the records keep a
+    ``@tensor:`` reference in their place. The caller's mapping is not changed."""
+    tensors: dict[str, torch.Tensor] = {}
+
+    def strip(rec: Mapping[str, Any]) -> dict[str, Any]:
+        out = dict(rec)
+        for k in TENSOR_KEYS:
+            v = out.get(k)
+            if v is not None and not (isinstance(v, str) and v.startswith(TENSOR_PREFIX)):
+                name = f"L{out['layer']}/{k}"
+                tensors[name] = torch.as_tensor(v, dtype=torch.float32).clone()
+                out[k] = TENSOR_PREFIX + name
+        return out
+
+    new = dict(extra)
+    if isinstance(new.get("equivalence"), Mapping):
+        new["equivalence"] = strip(new["equivalence"])
+    if isinstance(new.get("equivalence_layers"), Mapping):
+        new["equivalence_layers"] = {k: strip(v) for k, v in new["equivalence_layers"].items()}
+    return new, tensors
+
+
+def _restore_equivalence_tensors(extra: dict[str, Any], tensors: Mapping[str, torch.Tensor]) -> None:
+    def fix(rec: dict[str, Any]) -> None:
+        for k in TENSOR_KEYS:
+            v = rec.get(k)
+            if isinstance(v, str) and v.startswith(TENSOR_PREFIX):
+                rec[k] = tensors[v[len(TENSOR_PREFIX) :]]
+
+    if isinstance(extra.get("equivalence"), dict):
+        fix(extra["equivalence"])
+    for rec in (extra.get("equivalence_layers") or {}).values():
+        fix(rec)
+
+
 def write_bundle(b: DataBundle, directory: Path) -> dict[str, Any]:
     """Write the bundle as plain files and a manifest of SHA-256 values (frozen at creation)."""
     directory.mkdir(parents=True, exist_ok=True)
@@ -66,7 +106,10 @@ def write_bundle(b: DataBundle, directory: Path) -> dict[str, Any]:
     write_json(directory / "accepted.json", {c: [x.__dict__ for x in v] for c, v in b.accepted.items()})
     write_json(directory / "windows.json", {"windows": [{"ids": list(w.ids), "reads": [list(r) for r in w.reads], "stratum": w.stratum, "marker_end": w.marker_end} for w in b.windows], "wiki_train_ids": b.wiki_train_ids})
     write_json(directory / "teacher_outputs.json", b.teacher_outputs)
-    write_json(directory / "extra.json", {"max_new": b.max_new, **b.extra})
+    extra, tensors = _strip_equivalence_tensors(b.extra)
+    if tensors:
+        torch.save(tensors, directory / "equivalence_tensors.pt")  # 256 x 49,152 logits per layer: as float32 tensors in a hashed file, never as JSON lists (a gigabyte of text, read again by every registered stage)
+    write_json(directory / "extra.json", {"max_new": b.max_new, **extra})
     files = sorted(p.name for p in directory.iterdir() if p.is_file() and p.name != "manifest.json")
     manifest = {"schema": core.SCHEMA, "files": {n: {"algo": "sha256", "digest": file_sha256(directory / n)} for n in files}}
     write_json(directory / "manifest.json", manifest)
@@ -84,6 +127,8 @@ def read_bundle(directory: Path) -> DataBundle:
     part = json.loads((directory / "partition.json").read_text())
     win = json.loads((directory / "windows.json").read_text())
     extra = json.loads((directory / "extra.json").read_text())
+    if (directory / "equivalence_tensors.pt").exists():
+        _restore_equivalence_tensors(extra, torch.load(directory / "equivalence_tensors.pt", weights_only=True))
     return DataBundle(
         StudentConfig(**st["cfg"]), st["state"], [bytes.fromhex(h) for h in tt["token_bytes_hex"]], tuple(tt["newline_ids"]), Sizes(**part["sizes"]), part["vocab"],
         {k: [_item_from(i) for i in v] for k, v in part["panels"].items()}, {k: [_item_from(i) for i in v] for k, v in part["gold_pool"].items()},

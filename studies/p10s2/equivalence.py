@@ -46,7 +46,7 @@ def build_record(student: Student, reference: ReferenceModel, ids: torch.Tensor,
     student.read_layer = layer
     mine_inj = student(ids, add=add)
     return {
-        "rms_norm_eps": student.cfg.rms_norm_eps, "ids": ids.tolist(), "layer": layer, "vec": vec.tolist(), "reference_logits": ref.tolist(), "reference_injection_logits": ref_inj.tolist(),
+        "rms_norm_eps": student.cfg.rms_norm_eps, "ids": ids.tolist(), "layer": layer, "vec": vec.tolist(), "reference_logits": ref.clone(), "reference_injection_logits": ref_inj.clone(),
         "prompts": [list(p) for p in prompts], "reference_greedy": seqs, "max_new": max_new,
         "at_creation": {"logits": compare_logits(student(ids), ref), "injection": compare_logits(mine_inj, ref_inj)},
     }  # fmt: skip
@@ -60,11 +60,11 @@ def verify_record(student: Student, rec: dict[str, Any]) -> dict[str, Any]:
     ids = torch.tensor(rec["ids"])
     layer = int(rec["layer"])
     vec = torch.tensor(rec["vec"])
-    logits = compare_logits(student(ids), torch.tensor(rec["reference_logits"]))
+    logits = compare_logits(student(ids), torch.as_tensor(rec["reference_logits"], dtype=torch.float32))
     add = torch.zeros(ids.shape[0], ids.shape[1], vec.shape[-1])
     add[:] = vec
     student.read_layer = layer
-    inj = compare_logits(student(ids, add=add), torch.tensor(rec["reference_injection_logits"]))
+    inj = compare_logits(student(ids, add=add), torch.as_tensor(rec["reference_injection_logits"], dtype=torch.float32))
     greedy_ok = True
     cache_ok = True
     for p, ref_seq in zip(rec["prompts"], rec["reference_greedy"], strict=True):

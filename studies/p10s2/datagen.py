@@ -364,8 +364,27 @@ class HFReference:  # pragma: no cover - needs transformers
 
     @torch.no_grad()
     def generate(self, ids: torch.Tensor, max_new: int) -> list[int]:
-        out = self.model.generate(ids, max_new_tokens=max_new, do_sample=False, num_beams=1, min_new_tokens=max_new)
+        eos = self.model.config.eos_token_id
+        out = self.model.generate(ids, attention_mask=torch.ones_like(ids), pad_token_id=eos if isinstance(eos, int) else 0, max_new_tokens=max_new, do_sample=False, num_beams=1, min_new_tokens=max_new)  # one unpadded prompt: an all-ones mask and an explicit pad id say so (no padding, no ambiguity)
         return [int(x) for x in out[0, ids.shape[1] :].tolist()]
+
+
+MARIAN_TIED_KEYS = frozenset({"lm_head.weight"})  # the output projection is tied to the shared embedding and is not stored in the checkpoint
+
+
+def build_marian(tf: Any, config: dict[str, Any], state: dict[str, torch.Tensor]) -> tuple[Any, dict[str, Any]]:
+    """The teacher model from the verified config bytes and the safely loaded state (``from_pretrained`` refuses a state dict together with a model name): ``MarianMTModel(config)``, ``load_state_dict`` with
+    ``strict=False`` whose result is checked explicitly (the only key that may be missing is the tied ``lm_head.weight``, nothing may be unexpected), then ``tie_weights``; the tied output projection must share
+    the embedding's storage. Returns the model and the record of what was missing and tied."""
+    model = tf.MarianMTModel(tf.MarianConfig.from_dict(config))
+    missing, unexpected = model.load_state_dict(state, strict=False)
+    if unexpected or set(missing) - MARIAN_TIED_KEYS:
+        raise DatagenStop(f"the teacher's state does not match the model: missing {sorted(missing)[:5]}, unexpected {sorted(unexpected)[:5]}")
+    model.tie_weights()
+    tied = model.lm_head.weight.data_ptr() == model.get_input_embeddings().weight.data_ptr()
+    if not tied:
+        raise DatagenStop("the teacher's output projection is not tied to its embedding after tie_weights")
+    return model, {"missing_keys_tied_explicitly": sorted(missing), "unexpected_keys": [], "lm_head_shares_embedding_storage": tied, "parameters": int(sum(p.numel() for p in model.parameters()))}
 
 
 class MarianTeacher:  # pragma: no cover - needs transformers
@@ -384,12 +403,13 @@ class MarianTeacher:  # pragma: no cover - needs transformers
         self.generation_config = json.loads(fetch_guard.read_verified_bytes(downloads, f"{label}/generation_config.json"))
         state = fetch_guard.load_pickle_weights(directory / "pytorch_model.bin", fetch_guard.LARGE[f"{label}/pytorch_model.bin"][0])
         self.tokenizer = tf.MarianTokenizer.from_pretrained(str(directory), local_files_only=True)
-        self.model = tf.MarianMTModel.from_pretrained(str(directory), state_dict=state, local_files_only=True).eval()
+        self.model, self.load_record = build_marian(tf, json.loads(fetch_guard.read_verified_bytes(downloads, f"{label}/config.json")), state)
+        self.model.eval()
         self.pad_id = int(self.model.config.pad_token_id)
         self.batches = 0
         self.score_record: dict[str, Any] = {
             "length_penalty_used": 1.0, "num_beams": core.CFG["data"]["generation_beam"], "generation_config": {k: self.generation_config.get(k) for k in ("length_penalty", "num_beams", "bad_words_ids", "max_length")},
-            "first_batch": None, "max_abs_difference_all_batches": 0.0, "batches": 0,
+            "first_batch": None, "max_abs_difference_all_batches": 0.0, "batches": 0, "load": self.load_record,
         }  # fmt: skip
 
     @torch.no_grad()
@@ -610,6 +630,13 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
 
 
 def main(argv: Sequence[str] | None = None) -> int:  # pragma: no cover
+    import sys as _sys
+
+    args_in = list(_sys.argv[1:] if argv is None else argv)
+    if "--smoke" in args_in:  # the real-library smoke exercise: uncharged engineering on fixed literal sentences, writes nothing under the data folder
+        from .datagen_smoke import smoke_main
+
+        return smoke_main([a for a in args_in if a != "--smoke"])
     p = argparse.ArgumentParser(prog="python -m studies.p10s2.datagen")
     p.add_argument("--downloads", required=True)
     p.add_argument("--out", required=True)
