@@ -243,11 +243,46 @@ def lane_l_status(s0_outcome: str | None, candidate: str | None = None, overload
     return LANE_OMITTED_NO_INTERFACE
 
 
+# S0's registered outcome labels (ADR-0020 section 8.7's outcome table: rows 1 to 6; the NOT STARTED row's label is "NOT STARTED — NO P9-II CALIBRATION RECORD"; ENGINEERING_FAIL and INCOMPLETE are
+# row 2's two labels). An --s0-record whose outcome is none of these is refused, never read as "no interface qualified".
+S0_OUTCOMES = (
+    LANE_QUALIFIED_BOTH, LANE_QUALIFIED_4096, "ADDRESSING-NOT-QUALIFIED", "INCONCLUSIVE", "ENGINEERING_FAIL", "INCOMPLETE", "NOT STARTED", "NOT STARTED — NO P9-II CALIBRATION RECORD",
+)  # fmt: skip
+OMITTED_LANE_LABELS = ("OMITTED — QUALIFIED AT 4,096 ONLY", "OMITTED — SUPERVISED ARM HAS NO 8K/4K CELL", "OMITTED — NOT OVERLOAD-QUALIFIED", LANE_OMITTED_NO_INTERFACE)
+RULING_KEYS = ("ruled_by", "date", "adr_section", "s0_outcome", "s0_candidate", "s0_overload_qualified", "lane_status", "s0_commit", "s0_record_sha256")
+
+
+def validate_s0_record(record: Mapping[str, Any]) -> None:
+    """Refuse (``ValueError``) an S0 record whose outcome is not one of S0's registered outcome labels."""
+    outcome = record.get("outcome")
+    if outcome not in S0_OUTCOMES:
+        raise ValueError(f"S0 record outcome {outcome!r} is not one of S0's registered outcome labels {list(S0_OUTCOMES)}")
+
+
+def check_lane_ruling(ruling: Mapping[str, Any], record: Mapping[str, Any], lane: str) -> None:
+    """The lead's lane ruling (ADR-0021 section 25.17 point 4) against S0's record and the label the code derives from it (``ValueError`` when any holds): the ruling states every field; its S0 outcome,
+    candidate and overload flag equal the record's; the label the code derives equals the ruling's; and that label is one of the OMITTED labels (the 'would run' label is never accepted: the lane
+    cannot run in this tree)."""
+    missing = [k for k in RULING_KEYS if k not in ruling]
+    if missing:
+        raise ValueError(f"the lane ruling lacks {missing}")
+    hashes = ruling["s0_record_sha256"]
+    if not isinstance(hashes, dict) or len(hashes) < 1 or not all(isinstance(v, str) and len(v) == 64 for v in hashes.values()):
+        raise ValueError("the lane ruling's s0_record_sha256 must map S0's record paths to sha256 digests")
+    if (ruling["s0_outcome"], ruling["s0_candidate"], bool(ruling["s0_overload_qualified"])) != (record.get("outcome"), record.get("candidate"), bool(record.get("overload_qualified"))):
+        raise ValueError("the lane ruling's S0 outcome, candidate or overload flag differs from S0's record")
+    if lane not in OMITTED_LANE_LABELS:
+        raise ValueError(f"the label derived from S0's record is {lane!r}, not an OMITTED label: the lane cannot run in this tree and no ruling covers it")
+    if lane != ruling["lane_status"]:
+        raise ValueError(f"the label derived from S0's record ({lane!r}) differs from the ruled label ({ruling['lane_status']!r})")
+
+
 def s0_status_and_lane(record: Mapping[str, Any] | None) -> tuple[str, str, bool]:
     """From S0's recorded outcome at the freeze (``{"outcome": ..., "candidate": ..., "overload_qualified": bool}``; None when S0 has no outcome): S0's status line (K7(c)), lane L's status, and
     whether the question returns to the lead (ADR-0021 section 22 (b) and the lead's ruling P1: S0 qualified ANY interface before the freeze, whether or not the lane would run; nothing is printed OMITTED in that case)."""
     if record is None:
         return S0_NOT_DECIDED, LANE_OMITTED_NO_INTERFACE, False
+    validate_s0_record(record)
     outcome = record.get("outcome")
     status = f"S0 {outcome}" if outcome else S0_NOT_DECIDED
     lane = lane_l_status(outcome, record.get("candidate"), bool(record.get("overload_qualified")))

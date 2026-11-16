@@ -1487,10 +1487,21 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise pool.StageRefused(f"refused: {out_dir} already holds a freeze; a freeze is written once")
     if args.lane_l:
         raise pool.StageRefused("refused: lane L is not implemented (F-LA is S0's frozen candidate, whose code is not in this tree); it stays OMITTED and changes nothing in S1")
+    real = not (args.dry or core.test_switch())
+    if real and not args.s0_record:
+        raise pool.StageRefused("refused: a registered freeze needs --s0-record (P10-S0's accepted outcome; ADR-0021 section 25.17): the default 'S0 NOT YET DECIDED' is no longer true")
+    if args.lane_ruling and not args.s0_record:
+        raise pool.StageRefused("refused: --lane-ruling goes with --s0-record")
     s0_record = read_json(Path(args.s0_record)) if args.s0_record else None
-    s0_status, lane_status, lane_returns = fz.s0_status_and_lane(s0_record)
-    if lane_returns:
-        raise pool.StageRefused("refused: S0 has qualified an interface before the freeze: this returns to the human lead whether or not lane L would run (ADR-0021 section 22 (b), ruling P1); nothing is frozen")
+    try:
+        s0_status, lane_status, lane_returns = fz.s0_status_and_lane(s0_record)
+    except ValueError as exc:
+        raise pool.StageRefused(f"refused: {exc}") from exc
+    ruling_record: dict[str, Any] | None = None
+    if args.lane_ruling:
+        ruling_record = read_lane_ruling(args, repo_of(args), s0_record or {}, lane_status)
+    if lane_returns and ruling_record is None:
+        raise pool.StageRefused("refused: S0 has qualified an interface before the freeze: this returns to the human lead whether or not lane L would run (ADR-0021 section 22 (b), ruling P1); a committed lane ruling (--lane-ruling, section 25.17) answers it; nothing is frozen")
     generation = core.generation_settings(repo_of(args) / core.DEFAULT_CONFIG)
     if generation["provisional"] and not args.dry:
         raise pool.StageRefused("refused: the generation cap in the config is still provisional: the registered generation ran under a value the rehearsal never set")
@@ -1551,7 +1562,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         "frozen": fro.as_json(), "frozen_sha256": sha256(canonical_json(fro.as_json())), "cap_seconds": cap_now, "headroom": proj["chosen"]["headroom"], "cuts": proj["chosen"]["applied_cuts"],
         "identity": identity, "dense_rates": proj["dense_rates"], "calibration_summary": {k: cal.get(k) for k in ("u_l", "u_l_256", "row_u_p", "toq_predicted_not_loaded", "h8_undertrained_cells")}, "dense_edges": {u: e.get("edge") for u, e in (cal.get("dense_rates") or {}).items()},
         "h8_annotations": classes.h8_annotations(list(proj["h8_undertrained"]), list(proj.get("h8_calibrated", [core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS]))), "toq_predicted_not_loaded": list(plan.toq_not_loaded), "contention": proj["contention"], "c_need_seconds": proj.get("c_need_seconds"), "computed_cap_hours": proj.get("computed_cap_hours"), "sat256_runs": plan.sat256,
-        "concurrency": concurrency, "direction_record": direction_record, "lane_l": lane_status, "s0_status": s0_status, "no_loaded_transitions": directed,
+        "concurrency": concurrency, "direction_record": direction_record, "lane_l": lane_status, "s0_status": s0_status, "lane_ruling": ruling_record, "no_loaded_transitions": directed,
         "s0_record": None if not args.s0_record else {"path": str(Path(args.s0_record).resolve()), "sha256": file_sha256(Path(args.s0_record))}, "generation": generation, "decision_2": {"file_glob": DECISION_2_GLOB, "note": "Decision 2 is recorded in a committed file outside the hashed specification and names the freeze commit (ADR-0021 section 22 M4)"},
         "identity_drift": identity_drift(core.repo_root(), {"calibration": cal, "projection": proj, "timing": core.read_record(Path(args.timing), "timing"), "rehearsal_gates": core.read_record(Path(args.gates), "gates")}),
         "projection_dir": str(proj_dir.resolve()), "note": "the freeze record: nothing registered runs without it; every hash is checked by every registered stage",
@@ -1559,6 +1570,28 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     write_json(plan_path, core.jsonable(record))
     print(json.dumps({"plan": str(plan_path), "sha256": file_sha256(plan_path), "caps": str(caps_path), "caps_sha256": file_sha256(caps_path)}))
     return 0
+
+
+def read_lane_ruling(args: argparse.Namespace, repo: Path, s0_record: Mapping[str, Any], lane: str) -> dict[str, Any]:
+    """The lead's lane ruling (ADR-0021 section 25.17 point 4): refused unless the file is tracked by git and equal to its content at HEAD, and unless it matches S0's record and the derived lane
+    label (``frozen.check_lane_ruling``). Returns the ruling's path, sha256 and content for the freeze record."""
+    path = Path(args.lane_ruling).resolve()
+    try:
+        rel = str(path.relative_to(repo.resolve()))
+    except ValueError as exc:
+        raise pool.StageRefused(f"refused: the lane ruling {path} is not inside the repository {repo}") from exc
+    if not path.is_file() or git(repo, "cat-file", "-e", f"HEAD:{rel}").returncode != 0 or git(repo, "ls-files", "--error-unmatch", rel).returncode != 0:
+        raise pool.StageRefused(f"refused: the lane ruling {rel} is not tracked by git at HEAD: commit it first")
+    if git(repo, "diff", "--quiet", "HEAD", "--", rel).returncode != 0:
+        raise pool.StageRefused(f"refused: the lane ruling {rel} differs from its content at HEAD")
+    ruling = read_json(path)
+    if not isinstance(ruling, dict):
+        raise pool.StageRefused(f"refused: the lane ruling {rel} is not a JSON object")
+    try:
+        fz.check_lane_ruling(ruling, s0_record, lane)
+    except ValueError as exc:
+        raise pool.StageRefused(f"refused: {exc}") from exc
+    return {"path": rel, "sha256": file_sha256(path), "content": ruling}
 
 
 def freeze_concurrency(args: argparse.Namespace) -> dict[str, Any]:
@@ -1830,6 +1863,7 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--stage-start-epoch", type=float, default=None, help="calibrate worker: the wall-clock start of the stage the item cap is counted from")
     p.add_argument("--seed-block", default="1", help="draws that carry the seed block, comma-separated (the plan decides in registered mode)")
     p.add_argument("--throughput", action="store_true", help="timing: the throughput stage instead of the isolated CPU timing")
+    p.add_argument("--lane-ruling", default=None, help="freeze: the lead's committed lane ruling (studies/p10s1/freeze/lane_ruling.json; ADR-0021 section 25.17): required with a qualified S0 outcome")
     p.add_argument("--s0-record", default=None, help="freeze: S0's recorded outcome (JSON: outcome, candidate, overload_qualified: S0's own field); S0's status line and lane L's status are derived from it")
     p.add_argument("--generation-seconds", type=float, default=None, help="set-generation-cap: the cap in seconds (default: twice the rehearsal draw's measured time)")
     p.add_argument("--generation-table-facts", type=int, default=None, help="set-generation-cap: the registered table size (32768)")

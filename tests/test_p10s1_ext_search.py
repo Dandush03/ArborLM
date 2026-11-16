@@ -405,3 +405,137 @@ def test_finalize_waits_for_the_extended_items_record_and_copies_the_first_searc
         write_cell(run, c, lambda cell, u: 0.2 + cell.lr)
     rec = calibrate.finalize(run, unit=unit, charged_seconds=1.0, extended=True, extended_items=ext)
     assert rec["row_u_p"] == ext["row_u_p"] and rec["saturation_256"] == ext["saturation_256"] and rec["first_items_record_sha256"] == file_sha256(first_path)
+
+
+# --- ADR-0021 section 25.17 point 4: S0's accepted outcome and the lead's lane ruling at the freeze ---------------------------------------------------
+import json  # noqa: E402
+import subprocess  # noqa: E402
+
+from test_p10s1_stages import (  # noqa: E402
+    config_repo,
+    fake_projection,
+    freeze_argv,
+    run_dir_with_draws,
+)
+
+A5D = {"outcome": "ADDRESSING-QUALIFIED (4,096 AND 16,384)", "candidate": "A5-D", "overload_qualified": False}
+SHIPPED_RULING = Path(__file__).resolve().parents[1] / "studies" / "p10s1" / "freeze" / "lane_ruling.json"
+
+
+def git_repo_with_ruling(repo: Path, ruling: dict[str, object] | None = None, commit: bool = True) -> Path:
+    path = repo / "studies" / "p10s1" / "freeze" / "lane_ruling.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(ruling if ruling is not None else json.loads(SHIPPED_RULING.read_text())))
+    if not (repo / ".git").exists():
+        subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+    if commit:
+        subprocess.run(["git", "-C", str(repo), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(repo), "-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "ruling"], check=True)
+    return path
+
+
+def freeze_try(tmp_path: Path, name: str, s0: dict[str, object] | None, ruling: Path | None, ruling_extra: bool = True) -> tuple[int, Path]:
+    folder = tmp_path / name
+    folder.mkdir()
+    paths = fake_projection(folder)
+    run = run_dir_with_draws(folder)
+    extra: list[str] = []
+    if s0 is not None:
+        (folder / "s0.json").write_text(json.dumps(s0))
+        extra += ["--s0-record", str(folder / "s0.json")]
+    if ruling is not None:
+        extra += ["--lane-ruling", str(ruling)]
+    argv = freeze_argv(paths, run, folder / "out", *extra)
+    if s0 is None:
+        argv = argv[:-2]  # drop the default record that the helper adds
+    return stages.main(argv), folder / "out"
+
+
+def test_shipped_ruling_matches_the_a5_d_record_and_the_vocabulary_is_validated() -> None:
+    ruling = json.loads(SHIPPED_RULING.read_text())
+    status, lane, returns = fz.s0_status_and_lane(A5D)
+    assert status == "S0 ADDRESSING-QUALIFIED (4,096 AND 16,384)" and lane == "OMITTED — NOT OVERLOAD-QUALIFIED" and returns is True
+    fz.check_lane_ruling(ruling, A5D, lane)
+    assert ruling["s0_commit"] == "b4feb4e504a9685b544cf4451b1832b87db7c3d0" and len(ruling["s0_record_sha256"]) == 4
+    for label in fz.S0_OUTCOMES:
+        assert fz.s0_status_and_lane({"outcome": label})[0] == f"S0 {label}"
+    for bad in ({"outcome": "ADDRESSING-QUALIFIED"}, {"outcome": "qualified"}, {}, {"outcome": None}):
+        with pytest.raises(ValueError, match="registered outcome labels"):
+            fz.s0_status_and_lane(bad)
+
+
+def test_ruling_checks_each_condition() -> None:
+    ruling = json.loads(SHIPPED_RULING.read_text())
+    lane = "OMITTED — NOT OVERLOAD-QUALIFIED"
+    for key, value in (("s0_outcome", fz.LANE_QUALIFIED_4096), ("s0_candidate", "A5-C"), ("s0_overload_qualified", True), ("lane_status", "OMITTED — QUALIFIED AT 4,096 ONLY")):
+        with pytest.raises(ValueError):
+            fz.check_lane_ruling({**ruling, key: value}, A5D, lane)
+    with pytest.raises(ValueError, match="lacks"):
+        fz.check_lane_ruling({k: v for k, v in ruling.items() if k != "date"}, A5D, lane)
+    with pytest.raises(ValueError, match="not an OMITTED label"):  # the would-run case is refused even with a matching ruling
+        fz.check_lane_ruling({**ruling, "s0_overload_qualified": True, "lane_status": fz.LANE_WOULD_RUN}, {**A5D, "overload_qualified": True}, fz.LANE_WOULD_RUN)
+    with pytest.raises(ValueError, match="sha256"):
+        fz.check_lane_ruling({**ruling, "s0_record_sha256": {"x": "short"}}, A5D, lane)
+
+
+def test_the_freeze_accepts_a_qualified_outcome_only_with_a_committed_matching_ruling(tmp_path: Path) -> None:
+    # no ruling: the existing refusal stands
+    code, out = freeze_try(tmp_path, "norule", A5D, None)
+    assert code == 2 and not out.exists()
+    # no S0 record at all in a real freeze
+    code, out = freeze_try(tmp_path, "norecord", None, None)
+    assert code == 2 and not out.exists()
+    # an unregistered outcome label
+    code, out = freeze_try(tmp_path, "badlabel", {"outcome": "ADDRESSING-QUALIFIED"}, None)
+    assert code == 2 and not out.exists()
+    # accepted: ruling tracked and clean at HEAD in the repo the freeze reads
+    folder = tmp_path / "ok"
+    folder.mkdir()
+    repo = config_repo(folder)
+    ruling = git_repo_with_ruling(repo)
+    paths = fake_projection(folder)
+    run = run_dir_with_draws(folder)
+    (folder / "s0.json").write_text(json.dumps(A5D))
+    argv = freeze_argv(paths, run, folder / "out", "--s0-record", str(folder / "s0.json"), "--lane-ruling", str(ruling))
+    assert stages.main(argv) == 0
+    plan = json.loads((folder / "out" / "plan.json").read_text())
+    assert plan["s0_status"] == "S0 ADDRESSING-QUALIFIED (4,096 AND 16,384)" and plan["lane_l"] == "OMITTED — NOT OVERLOAD-QUALIFIED"
+    assert plan["frozen"]["s0_status"] == plan["s0_status"] and plan["frozen"]["lane_status"] == plan["lane_l"]
+    assert plan["lane_ruling"]["sha256"] == file_sha256(ruling) and plan["lane_ruling"]["content"] == json.loads(ruling.read_text()) and plan["lane_ruling"]["path"].endswith("lane_ruling.json")
+    # refusals, each in its own repo copy of the same state
+    cases: dict[str, tuple[dict[str, object], dict[str, object] | None, bool]] = {
+        "mismatched candidate": ({**A5D, "candidate": "A5-C"}, None, True),
+        "mismatched outcome": ({"outcome": fz.LANE_QUALIFIED_4096}, None, True),
+        "would run": ({**A5D, "overload_qualified": True}, None, True),
+        "not qualified record": ({"outcome": "ADDRESSING-NOT-QUALIFIED"}, None, True),
+        "wrong ruled label": (A5D, {**json.loads(SHIPPED_RULING.read_text()), "lane_status": "OMITTED — QUALIFIED AT 4,096 ONLY"}, True),
+        "untracked ruling": (A5D, None, False),
+    }
+    for name, (record, over, committed) in cases.items():
+        f = tmp_path / name.replace(" ", "_")
+        f.mkdir()
+        r = config_repo(f)
+        rp = git_repo_with_ruling(r, over, commit=committed)
+        if not committed:
+            subprocess.run(["git", "-C", str(r), "-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false", "commit", "-q", "--allow-empty", "-m", "empty"], check=True)
+        (f / "s0.json").write_text(json.dumps(record))
+        a = freeze_argv(fake_projection(f), run_dir_with_draws(f), f / "out", "--s0-record", str(f / "s0.json"), "--lane-ruling", str(rp))
+        assert stages.main(a) == 2 and not (f / "out").exists(), name
+    # modified at HEAD
+    f = tmp_path / "modified"
+    f.mkdir()
+    r = config_repo(f)
+    rp = git_repo_with_ruling(r)
+    rp.write_text(rp.read_text().replace("2026-11-16", "2026-11-17"))
+    (f / "s0.json").write_text(json.dumps(A5D))
+    assert stages.main(freeze_argv(fake_projection(f), run_dir_with_draws(f), f / "out", "--s0-record", str(f / "s0.json"), "--lane-ruling", str(rp))) == 2 and not (f / "out").exists()
+    # a ruling outside the repository, and a ruling without a record
+    outside = tmp_path / "outside.json"
+    outside.write_text(SHIPPED_RULING.read_text())
+    f = tmp_path / "outside_case"
+    f.mkdir()
+    config_repo(f)
+    (f / "s0.json").write_text(json.dumps(A5D))
+    assert stages.main(freeze_argv(fake_projection(f), run_dir_with_draws(f), f / "out", "--s0-record", str(f / "s0.json"), "--lane-ruling", str(outside))) == 2 and not (f / "out").exists()
+    code, out = freeze_try(tmp_path, "ruling_no_record", None, outside)
+    assert code == 2 and not out.exists()

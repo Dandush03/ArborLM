@@ -8,7 +8,7 @@ import json
 import shutil
 import subprocess
 import sys
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -313,8 +313,17 @@ def no_other_study_running(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(timing, "running_commands", lambda: [])  # tests never read the real process list
 
 
+def default_s0_record(folder: Path, extra: Sequence[str]) -> list[str]:
+    """A real freeze needs S0's record (ADR-0021 section 25.17); the tests give a not-qualified outcome unless they pass their own."""
+    if "--s0-record" in extra:
+        return []
+    path = folder / "s0_default.json"
+    path.write_text(json.dumps({"outcome": "ADDRESSING-NOT-QUALIFIED"}))
+    return ["--s0-record", str(path)]
+
+
 def freeze_argv(paths: dict[str, Path], run: Path, out: Path, *extra: str) -> list[str]:
-    return ["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(out), "--repo", str(config_repo(out.parent)), "--s0-training-manifest", s0_manifest(paths), *extra]
+    return ["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(out), "--repo", str(config_repo(out.parent)), "--s0-training-manifest", s0_manifest(paths), *extra, *default_s0_record(out.parent, extra)]
 
 
 def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
@@ -326,7 +335,7 @@ def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
     plan = json.loads((tmp_path / "f1" / "plan.json").read_text())
     assert plan["stage_caps_sha256"] == file_sha256(tmp_path / "f1" / "stage_caps.json") and set(plan["data_manifests"]) == set(core.DRAW_NAMES) and plan["cap_seconds"] == core.CAP_HOURS_DEFAULT * 3600.0
     fro = fz.Frozen.from_json(plan["frozen"])
-    assert fro.plan == core.Plan((1,), ("8K/16K",), row_u_p=(8192, 8192, 16384), u_l=(131072, 393216), u_l_256=98304) and fro.dense_rates == {"4096": 0.003, "16384": 0.01, "8K/1K": 0.003, "32K/4K": 0.001} and fro.h8_undertrained == ["8K/16K"] and fro.s0_status == fz.S0_NOT_DECIDED
+    assert fro.plan == core.Plan((1,), ("8K/16K",), row_u_p=(8192, 8192, 16384), u_l=(131072, 393216), u_l_256=98304) and fro.dense_rates == {"4096": 0.003, "16384": 0.01, "8K/1K": 0.003, "32K/4K": 0.001} and fro.h8_undertrained == ["8K/16K"] and fro.s0_status == "S0 ADDRESSING-NOT-QUALIFIED"
     assert fro.lane_status == fz.LANE_OMITTED_NO_INTERFACE and fro.cuts == ["cut 1", "cut 2", "cut 3: D-OQ at 8K/16K"] and plan["frozen_sha256"] == sha256(canonical_json(plan["frozen"]))
     assert plan["identity"] == core.code_identity() and plan["lane_l"] == fz.LANE_OMITTED_NO_INTERFACE
     assert stages.main(freeze_argv(paths, run, tmp_path / "f1")) == 2  # a freeze is written once

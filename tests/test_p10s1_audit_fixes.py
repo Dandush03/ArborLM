@@ -469,7 +469,9 @@ def test_freeze_refuses_a_provisional_generation_cap_and_a_qualified_interface(t
     for k, record in enumerate(({"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A5-C", "overload_qualified": True}, {"outcome": fz.LANE_QUALIFIED_BOTH, "candidate": "A1", "overload_qualified": True}, {"outcome": fz.LANE_QUALIFIED_4096})):
         s0.write_text(json.dumps(record))
         assert stages.main([*base, "--freeze-dir", str(tmp_path / f"f2{k}"), "--s0-record", str(s0)]) == 2 and not (tmp_path / f"f2{k}").exists()  # any qualified interface returns to the lead (P1)
-    assert stages.main([*base, "--freeze-dir", str(tmp_path / "f3")]) == 0
+    assert stages.main([*base, "--freeze-dir", str(tmp_path / "f3")]) == 2 and not (tmp_path / "f3").exists()  # a real freeze needs S0's record (section 25.17)
+    s0.write_text(json.dumps({"outcome": "ADDRESSING-NOT-QUALIFIED"}))
+    assert stages.main([*base, "--freeze-dir", str(tmp_path / "f3"), "--s0-record", str(s0)]) == 0
     plan = json.loads((tmp_path / "f3" / "plan.json").read_text())
     assert plan["generation"] == {**core.GENERATION_DEFAULT, **measured} and "identity_drift" in plan and "DECISION_2.md" in plan["decision_2"]["file_glob"]
     assert set(plan["identity_drift"]) == {"calibration", "projection", "timing", "rehearsal_gates"}
@@ -543,7 +545,13 @@ from test_p10s1_stages import (  # noqa: E402,F401  (the autouse fixture keeps t
 
 
 def _freeze_args(paths: dict[str, Path], run_dir: Path, out: Path, repo: Path) -> list[str]:
-    return ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo), "--freeze-dir", str(out), "--s0-training-manifest", s0_manifest(paths)]
+    return ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo), "--freeze-dir", str(out), "--s0-training-manifest", s0_manifest(paths), "--s0-record", _s0_record(out.parent)]
+
+
+def _s0_record(folder: Path) -> str:
+    path = folder / "s0_not_qualified.json"
+    path.write_text(json.dumps({"outcome": "ADDRESSING-NOT-QUALIFIED"}))
+    return str(path)
 
 
 def test_a_registered_freeze_refuses_dry_records_a_dry_plan_and_an_open_calibration(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:

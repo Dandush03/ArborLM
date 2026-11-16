@@ -1282,3 +1282,25 @@ The rehearsal ran while the desktop was under unrelated load (load average about
 4. If C_need exceeded 50 hours after the three cuts the record would again say NOT STARTED: BUDGET and return to the human lead.
 
 `Astra review: NOT_PERFORMED`.
+
+### 25.17 The pre-freeze audit, and the lead's ruling on lane L now that S0 has an accepted outcome (2026-11-16 UTC)
+
+The pre-freeze audit (Opus 5.5; written up in `docs/reviews/p10s1-prefreeze-2026-11-16/PREFREEZE.md`) found the tree READY AFTER FIXES with one blocker: the freeze cannot record S0's accepted outcome truthfully. With S0's record the freeze refuses (the question returns to the lead under §22 (b) and ruling P1); without it the freeze would write "S0 NOT YET DECIDED" and "OMITTED — no interface qualified before the freeze", both now false.
+
+**The facts.** P10-S0's registered outcome, accepted by the human lead (ADR-0020, last addendum, on `claude/p10-s0` at commit `b4feb4e504a9685b544cf4451b1832b87db7c3d0`): ADDRESSING-QUALIFIED (4,096 AND 16,384), candidate A5-D, **OVERLOAD NOT QUALIFIED** (A5-D at 8K facts on 4K slots passed 1 of 10 cells). Q1 was recomputed by the auditor (1,065 comparisons, 0 disagreements). SHA-256 of the records on that commit: `results/p10s0-run-2026-11-16/OUTCOME.md` `999f2246aa8019f5c593465e301851a3bbf3565f9c92357cab6248921bcceec4`; `results/p10s0-run-2026-11-16/results.json` `c4ffbb16025f202725116528de3ed563fbee390ff0c5ad2cab55f2346f0d1fa9`; `docs/reviews/p10s0-results-2026-11-16/REVIEW.md` `ef100ade200722e275e83f09ea020fcd153130d1d45cb134085654c731c4f30b`; `docs/decisions/ADR-0020-p10-s0-addressing-qualification.md` `2e5a66f5d78d0dc34e9633e6fe3ab839d9964d3ca4261ae51fa7d8823e33c36e`.
+
+**The ruling (the lead's, under §22 (b); no registered seed of S1 has been observed).**
+
+1. S0's status line at the freeze is its accepted outcome: `S0 ADDRESSING-QUALIFIED (4,096 AND 16,384)`.
+2. Lane L is **OMITTED — NOT OVERLOAD-QUALIFIED**, the label §5.6 item 2 fixes for exactly this case: lane L would run the candidate at eight facts per slot, and S0 did not qualify it at two. The lane would not run even if its code existed; that F-LA is not implemented in this tree changes nothing here.
+3. S1 proceeds as an oracle-addressed study (§5.6: S1 does not wait for S0). Learned addressing in the loaded regime is deferred to a later study (§5.6 item 7); nothing in S1's result may be described as autonomous learned memory.
+4. The freeze accepts S0's record only together with this ruling, as a committed file that states the S0 outcome, the lane label and the hashes above; it refuses if the label the code derives from S0's record differs from the ruled label, if the derived label is the "would run" label, or if the outcome string is not one of S0's registered outcome labels. The freeze record carries the ruling.
+
+**Other findings of the audit and what is done with them.**
+
+- **Contention ratio.** The code follows the registered rule (§25.12 item 2, §25.13, §25.16 item 1: c from the rehearsal as measured, 1.9457). The freeze README step 8 and one bullet of §10.3 still describe the rejected "larger of" reading; the README is corrected before the freeze, and this section is the correction of the §10.3 bullet. For information only, with the calibration's descriptive 2.2015 the need would be 53.76 h and cut 1 would apply; that reading was rejected before any projection existed.
+- **The registered `timing` stage** measures throughput and requires a load average of at most 1.0 (three retries). The human lead uses the machine during the run, so the expected record is THROUGHPUT NOT MEASURED, or STOPPED BY CAP if the machine turns quiet on a late retry (its cap is twice a projection of the CPU timing, not a measured throughput time). Neither blocks the analysis or the report. The lead does not change the cap rule; the throughput line is reported as recorded.
+- **C_max.** Confirmed as the only change of the budget rule; C_need recomputed independently to 174,764.451 s; the plan is 178 cells (150 per-replicate cells and 28 seed-block cells) with no cut.
+- **Generation.** The five registered draws completed in 26.6–26.9 s each against the 40 s cap, G1 passed.
+
+`Astra review: NOT_PERFORMED`.
