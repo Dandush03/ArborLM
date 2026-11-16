@@ -126,15 +126,15 @@ rehearsal_updates = 64
 madds_formula = "B = 16 contexts, T = 63 positions, Q = 8 B = 128 answer-site queries; one whole training update in multiply-adds. backbone forward: B (2 (T 32 96 + 4 T T 8 + 4 T T 8 + T 32 32 + 2 T 32 64) + T 32 256). backbone backward (weights frozen: input gradients through block 1 and the output head only, the two attention products twice): B (T 32 96 + T 32 32 + 2 T 32 64 + 4 (4 T T 8) + T 32 256). arm: F-OQ 2 Q N 16 + 3 Q 32 32; T-OQ 2 Q (N/256 16 + 512 16) + 3 Q 32 32; H8 and R2 3 Q 32 32; D-OQ 2 Q 16 h + 3 Q h 32. plus the gather-weighted sum of the value read, Q 32 x (3 x 8 for F-OQ and T-OQ, 2 x 8 for H8, 2 x 1 for R2, 0 for D-OQ), which torch's counter does not see; plus 4 x trainable parameters for the AdamW update (elementwise). The matmul terms equal torch's FLOP counter / 2 (a test)"
 
 [generation]
-cap_seconds = 1800.0
-provisional = true
+cap_seconds = 40.0
+provisional = false
 table_facts = 32768
-source = "provisional"
-measured_seconds = 0.0
-manifest_sha256 = ""
+source = "measured"
+measured_seconds = 17.71133199997712
+manifest_sha256 = "21544fa50ef511e7c26641b992603ecaa6a73a15031bdf989b6f0dd054091c49"
 
 [resources]
-cap_hours = 16.0
+cap_hours = 49.0
 cap_max_hours = 50.0
 cap_max_source = "raised from 36 to 50 hours by the human lead on 2026-11-16 (ADR-0021 section 25.16), after the projection returned NOT STARTED: BUDGET and before any registered seed was observed"
 cap_headroom = 2.0

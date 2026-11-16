@@ -1444,7 +1444,11 @@ def cmd_project(args: argparse.Namespace) -> int:
             record["computed_cap_hours"] = chosen.headroom.cap_hours
             record["caps"] = budget.caps_table(rates, fixed, cpu, base=chosen.plan, baseline_seconds=baselines, frozen_kwargs=kw, isolated=isolated, c=c)
             record["cpu_per_update"] = {f"{a}|{n}": v for (a, n), v in sorted(cpu.items())}
-    path = run_dir / "projection.json"
+    # a projection is never overwritten: a second projection of the same run directory (after a recorded change of C_max, ADR-0021 section 25.16) is written under its own name
+    name = getattr(args, "projection_name", None) or "projection.json"
+    if "/" in name or not name.endswith(".json"):
+        raise SystemExit(f"refused: --projection-name must be a plain .json file name, got {name!r}")
+    path = run_dir / name
     if path.exists():
         raise FileExistsError(path)
     core.write_record(path, core.jsonable(record))
@@ -1799,6 +1803,7 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--timing", default=None, help="isolated timing record (the cost tables)")
     p.add_argument("--gates", default=None, help="project: the rehearsal gates record")
     p.add_argument("--synthetic", default=None, help="project: the synthetic-registry record")
+    p.add_argument("--projection-name", default=None, help="project: the file name of the projection in the run directory (default projection.json; an existing file is never overwritten)")
     p.add_argument("--projection", default=None, help="freeze: the projection record")
     p.add_argument("--freeze-plan", default=None, help="the frozen plan (set by the registered driver)")
     p.add_argument("--freeze-plan-sha256", default=None, help="worker commands: the digest of the frozen plan the driver verified")
