@@ -27,6 +27,7 @@ that has only ``charge(stage, seconds)`` and ``remaining()`` (hours) is accepted
 
 import argparse
 import contextlib
+import gc
 import importlib
 import json
 import os
@@ -629,10 +630,12 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     load_plain_state(student, plain)
     torch.save({"cfg": cfg.__dict__, "state": plain}, out / PLAIN_STUDENT)
     record["steps"]["student_plain_sha256"] = fetch_guard.sha256_file(out / PLAIN_STUDENT)
+    del plain  # the converted state is in the student and on disk: a third 540 MB copy is not held through the rest of the step
     # (3)-(4) tokenizer, equivalence at each read layer, tests (c), (d), (e)
     tok = HFTokenizer(downloads)
     record["steps"]["tokenizer_conventions"] = tok.conventions
     ref = HFReference(json.loads(fetch_guard.read_verified_bytes(downloads, "student/config.json")), hf_state)
+    del hf_state  # the reference model holds its own copy of the weights
     train_ids = tok.encode(texts["train"])
     ids = torch.tensor([train_ids[:256]])  # the fixed 256-token text of WikiText-2 train (step 3)
     vec = torch.randn(cfg.width, generator=core.partition_gen(mode, "equivalence_injection", "equivalence injection vector (own listed seed)"))
@@ -641,6 +644,8 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     record["steps"]["equivalence"] = {k: v["at_creation"] for k, v in layers.items()}
     if not all(v["at_creation"]["logits"]["ok"] and v["at_creation"]["injection"]["ok"] for v in layers.values()):
         raise RegisteredTestStop("the student equivalence test failed at a read layer (step 3 or 4 (d))")
+    del ref, ids, vec, prompts, train_ids  # the reference model (540 MB), its logits inputs and the 2.4 million train ids are needed only to build the equivalence records, which are complete
+    gc.collect()
     clock.tick("equivalence")
     dec = ByteDecoder(tok.token_bytes())
     gen = core.partition_gen(mode, "random_id_sequences", "test (c) random id sequences")

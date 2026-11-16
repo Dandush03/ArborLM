@@ -201,3 +201,18 @@ def test_the_gen_report_says_kl_and_top1_are_plain_means_over_all_144_windows() 
     text = "\n".join(report.gen_lines([], []))
     assert "plain per-window means over all 144 windows" in text and "enter no rule" in text
     assert "200 general-language" not in (ROOT / "studies/p10s2/core.py").read_text()
+
+
+def test_the_step_frees_the_copies_it_no_longer_needs_before_the_corpus_and_the_teachers_are_loaded() -> None:
+    """Attempt 6 stopped on the 8 GiB memory guard (8.09 GiB sampled). Measured on the real inputs, the step held the student three times over (converted state, Hugging Face state, reference model) through the
+    corpus and the teachers; the peak up to the first teacher generation fell from 7,929 MB to 6,560 MB when they were freed, with every digest of the step identical (partition, sources, windows, equivalence
+    records, tokenizer records)."""
+    src = (ROOT / "studies/p10s2/datagen.py").read_text()
+    body = src[src.index("def _run(") :]
+    for stmt in ("del plain", "del hf_state", "del ref, ids, vec, prompts, train_ids"):
+        assert stmt in body
+    order = [body.index(x) for x in ("HFReference(", "del hf_state", "build_record(student, ref", "del ref, ids, vec, prompts, train_ids", "gc.collect()", "load_corpus(downloads", "MarianTeacher(downloads")]
+    assert order == sorted(order)  # each copy is freed after its last use and before the corpus and the teachers
+    after_free = body[body.index("del ref, ids, vec, prompts, train_ids") :]
+    for name in ("hf_state", "plain", "ref", "train_ids"):
+        assert not __import__("re").search(rf"\b{name}\b", after_free.replace("del ref, ids, vec, prompts, train_ids", "")), name  # none of them is used again
