@@ -131,3 +131,15 @@ The first load search returned both loaded cells (8K/1K, 32K/4K) as NOT LOADED W
 > Extend search once
 
 Recorded by the lead: ADR-0021 §25.15 on `claude/p10-s1` fixes the two new candidates (393,216 and 786,432), that nothing else changes, and that the extension is made once.
+
+### P10-S2: the outcome is accepted as registered; P10-I is drafted in three parts (2026-11-16 UTC)
+
+The lead reported that P10-S2's data step completed and its teacher qualification gate failed on the accepted counts (78 and 22 accepted on Q_check against 150; pools of 7,804 and 2,341 against 8,000), giving TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED before the freeze, with the independent recomputation agreeing. The human lead, verbatim:
+
+> we should accept it as it is, and start working on P10-I on all of the simulation meaning
+>
+> P10-I-S0, P10-I-S1, P10-I-S2
+>
+> because each have their own correction that needed to be done, and now we have more data including the result of P9-II
+
+Recorded by the lead: the P10-S2 outcome is accepted unchanged (ADR-0022, last addendum, on `claude/p10-s2`). P10-I is drafted as three parts, P10-I-S0, P10-I-S1 and P10-I-S2, on the branch `claude/p10-i-design`. The lead reads "start working" as drafting the specifications: nothing under P10-I is implemented or run before the human lead's review and recorded approval. P10-S1 continues under ADR-0021 as approved; its result, when it exists, is an input to P10-I-S1.
