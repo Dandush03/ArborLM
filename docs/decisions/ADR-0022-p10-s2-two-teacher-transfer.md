@@ -1006,3 +1006,19 @@ Three parallel independent re-checks (Opus 5.5) of commit `fc08681` are in `docs
 - *m10 (stated, not changed).* Because chrF weights recall, a second answer that repeats the first answer and then gives the correct one can pass the composition rule. The exact-match pass rate is printed beside every composition line with the sentence that a high H with a low pass rate is contamination, not composition. The rule the human lead approved is not altered.
 - N-M1, m1–m6 and m8 are implementation defects fixed as the re-check states; the human lead's sentence is printed in the report.
 
+
+## Addendum — the marker-like stratum of the GEN panel has 44 windows, not 100; the lead's ruling (2026-11-16 UTC)
+
+**What happened.** Data-generation attempt 4 (code `f3fd77d`; `data/p10s2-pre-20261115/data/datagen_attempts/attempt-004.json`, stop kind `registered-test`) stopped by its own rule: on the fixed grid of §6.4 (WikiText-2 validation, consecutive non-overlapping windows of 256 tokens) the marker-like stratum holds **44** windows, and §6.4 asks for 100. No bundle was written. No model was trained, no registered model seed was used, and no loss of any window under any student was computed: the count is a property of the text and the grid, not an outcome. Attempts 1–3 were engineering stops (two set-up errors of the lead's launch, one loader defect fixed in `f3fd77d`); all four records are kept and charged.
+
+**Why not the alternatives.** A finer or overlapping grid would manufacture correlated windows from the same 44 places. WikiText-2 train cannot supply them: its prefixes train the router's "none" class (§5), so the panel would no longer be held out from the router. The 100 was the lead's choice in revision 4 and was never checked against the text.
+
+**Ruling (the scientific lead, under the human lead's delegation that P10 studies may be self-approved; reported to the human lead).**
+
+1. **The marker-like stratum is every window of that stratum on the fixed grid: 44 windows.** Nothing is sampled for it, so no choice enters. The ordinary stratum stays 100 windows sampled with the GEN-window seed, as registered. The panel is 144 windows.
+2. **The weighting of the registered panel is kept.** The panel loss of every GEN reading is the equal-weight mean of the two stratum means (one half marker-like, one half ordinary), which is what a 100/100 panel computes. The marker-like windows are not diluted to 44/144. The threshold stays **0.02 nats** and holds under both decisions of the marker-like stratum (token 64, and the first marker-like string extended through a following colon), exactly as before.
+3. **Stated limit.** The marker-like half of every GEN reading rests on 44 windows. Every GEN line prints the two stratum counts (44 and 100) and both stratum means. H22-G's sentence "a panel half of whose windows contain marker-like strings" is read as "half of whose weight".
+4. **Fail-fast order.** Data generation checks every count the specification requires of the fixed inputs (the window strata, and the Tatoeba and corpus sizes of §4) before the long teacher generation, so that a shortfall stops in seconds. The order of checks changes; no draw, seed or sample changes, and a test shows the bundle's sampled items do not depend on that order.
+5. If a count other than this one falls short, the work returns to the lead again; nothing else is relaxed by this addendum.
+
+Attempt 4 is released by `lead_release.json` naming attempt 4 and this addendum. Astra review: NOT_PERFORMED.
