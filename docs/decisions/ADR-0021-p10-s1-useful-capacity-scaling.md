@@ -1210,3 +1210,13 @@ Taken by the scientific lead under the human lead's recorded delegation that P10
 - **Decision 1: implement revision 5, audit it independently, then calibrate and rehearse on calibration and rehearsal draws only.** No registered seed is generated or observed before the freeze and Decision 2.
 - **Still to be acknowledged by the human lead** (reported, no answer recorded): C_max = 36 hours; the cell 2K/256.
 
+
+### 25.13 The lead's rulings on the implementation audit of revision 5 (2026-11-15 UTC)
+
+The audit is `docs/reviews/p10s1-implementation-audit-2026-11-15/rev5/AUDIT_REV5.md` (Opus 5.5: READY AFTER B1, M1 and a ruling on M3; one blocker, five majors, twelve minors; a Claude review). Ruled before the timing preview and before any run under revision 5, so before any cost direction on the new grid is seen:
+
+- **B1, M1, M2, M5 and the minors:** fixed as the auditor wrote them. The implementer's readings 1 (contention ratio), 2 (item caps as implemented) and 4 (the milestone refusal) are rejected; the other five stand.
+- **M3.** The text of §8 as adopted stands: the milestone reading reads only whether the capacity dense label is established; the saturation cost sub-labels are descriptive and refuse nothing; a sub-label is printed only when exactly one condition fails. No new rule is added.
+- **M4.** The freeze refuses while a `studies.p10s0` or `studies.p10s2` stage process is alive. The statement that P10-S0's training has finished is bound by hash to evidence: the manifest of S0's last registered training stage that was due (the probe's training manifest, or, if the probe was refused or not run, the WX training manifest together with S0's record of that refusal).
+- **m2.** A 0.1 rate ahead by 0.02 or more returns to the human lead (the boundary is on the returning side).
+- **m11.** The calibration does not overlap P10-S0's registered run either: the timing preview, the calibration, the isolated timing, the rehearsal and the registered run all start after S0's last training stage has finished. Overlap with P10-S2 is not used for S1's calibration.

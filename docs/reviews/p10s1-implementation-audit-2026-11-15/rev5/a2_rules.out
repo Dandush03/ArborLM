@@ -1,0 +1,89 @@
+OK   chance intervals [34,100] [192,325] [894,1159] (mine): {2048: (34, 100), 8192: (192, 325), 32768: (894, 1159)}
+OK   code chance interval n=2048: (34, 100)
+OK   code chance interval n=8192: (192, 325)
+OK   code chance interval n=32768: (894, 1159)
+OK   plateau floor = i(0.25) = 0.4731 (ADR 0.473): 0.4730746427507113
+OK   i(0.5) = 1.523 (ADR 1.523)
+OK   i(0.8) = 3.287 (ADR 3.287)
+OK   i(0.9) = 4.036 (ADR 4.036)
+OK   i(0.95) = 4.466 (ADR 4.466)
+     revision-4 F-OQ curves: 224 (cell, draw, panel, run) views read
+     'loaded' by the revision-4 rule (no floor) at run <= 8,192: 82 views, e.g. [('131072/16384', '1', 'A', 1024, 0.0, 0.0, True, False), ('131072/16384', '1', 'A', 2048, 0.0, 0.0, True, False), ('131072/16384', '1', 'A', 4096, 0.0, 0.0, True, False)]
+OK   with the floor, no revision-4 view is loaded at run lengths 1,024-8,192 (ADR 8.2 / fact 14): []
+OK   code View.loaded equals my rule on every revision-4 view: 0
+OK   the floor changes no view's status at 65,536 (where revision 4's runs ended): []
+OK   U_L [passes at the first two candidates] mine=98304 code=98304
+OK   U_L [first pass alone (rises after the first candidate)] mine=None code=None
+OK   U_L [two consecutive passes from the first] mine=98304 code=98304
+OK   U_L [pass-fail-pass-pass] mine=262144 code=262144
+OK   U_L [above 4.0 bits (a 0.92) everywhere late] mine=None code=None
+OK   U_L [flat below the DEP floor] mine=None code=None
+OK   U_L [never flat] mine=None code=None
+OK   pass-fail-pass-pass gives the later candidate of the consecutive pair (196,608 and 262,144 -> 262,144): 262144
+OK   a first pass alone gives no U_L
+OK   a failed / missing run (three views) gives no U_L
+OK   F-OQ none -> NOT LOADED WITHIN ITS CEILING, RETURN_TO_LEAD (even with a T-OQ U_L)
+OK   F-OQ only -> F-OQ's, T-OQ PREDICTED NOT LOADED
+OK   both -> the larger
+OK   2K/256 none -> not run, no return
+OK   plan_values refuses an open return (nothing proceeds as NOT TESTED automatically)
+OK   row U_P 8,192
+OK   row U_P 16,384 (R2 short at 8,192)
+OK   row U_P 32,768
+OK   row U_P none -> return
+OK   dense [plain maximum 0.03] mine=('OK', 0.03) code=('OK', 0.03) edge=None
+OK   dense [tie 0.01/0.03 separated at U/2] mine=('OK', 0.03) code=('OK', 0.03) edge=None
+OK   dense [tie never separated -> smaller] mine=('OK', 0.01) code=('OK', 0.01) edge=None
+OK   dense [0.1 best by > 0.02 -> return] mine=('RETURN', None) code=('RETURN', None) edge=TOP OF GRID
+OK   dense [0.1 tied, wins the walk -> EDGE] mine=('OK', 0.1) code=('OK', 0.1) edge=EDGE BY TIE-WALK
+OK   dense [0.1 diverged, 0.03 best] mine=('OK', 0.03) code=('OK', 0.03) edge=None
+OK   dense [every rate diverged] mine=('RETURN', None) code=('RETURN', None) edge=None
+OK   dense [0.1 ahead by exactly 0.02 (boundary)] mine=('OK', 0.1) code=('OK', 0.1) edge=None
+     boundary: 0.1 at 0.95 vs 0.03 at 0.93 -> code action GRID_STANDS, rate 0.1, edge None, decided_by readout a_use
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 1.6, 'madds': 1.7} claim=large: mine=('OK', 'small', 16384) code=('OK', 'small', 16384) annot=None
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 0.9, 'madds': 1.2} claim=large: mine=('OK', 'small', 10240) code=('OK', 'small', 10240) annot=MC-AMBIGUOUS
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 0.9, 'madds': 1.2} claim=small: mine=('OK', 'large', 10240) code=('OK', 'large', 10240) annot=MC-AMBIGUOUS
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 0.5, 'madds': 5.1} claim=small: mine=('OK', 'large', 49152) code=('OK', 'large', 49152) annot=MC-AMBIGUOUS
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 1.0, 'madds': 1.0} claim=large: mine=('OK', 'small', 8192) code=('OK', 'small', 8192) annot=None
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 1.0, 'madds': 0.8} claim=large: mine=('OK', 'large', 10240) code=('OK', 'large', 10240) annot=None
+OK   MC {'cpu': 1, 'madds': 1}->{'cpu': 7.0, 'madds': 7.0} claim=large: mine=('MC-SHORT', 'small') code=('MC-SHORT', 'small') annot=None
+OK   comparator reading beyond the other cell's run -> MC-SHORT: McEntry(status='MC-SHORT', small_update=None, large_update=None, multiplier=5.1, cheaper='large', annotation='MC-AMBIGUOUS')
+OK   dense at saturation [DENSE HOLDS MORE] -> DENSE HOLDS MORE AT SATURATION []
+OK   dense at saturation [STORE HOLDS MORE] -> STORE HOLDS MORE AT SATURATION []
+OK   dense at saturation [SAME (ratio short)] -> SAME AT SATURATION []
+OK   dense at saturation [SAME + DENSE STILL RISING] -> SAME AT SATURATION ['DENSE STILL RISING']
+OK   dense at saturation [SAME + DENSE NOT LEARNED] -> SAME AT SATURATION ['DENSE NOT LEARNED']
+OK   dense at saturation [SAME + NOT ESTABLISHED (cost)] -> SAME AT SATURATION ['DENSE NOT ESTABLISHED AT MATCHED COMPUTE']
+     two conditions fail (plateau, cost; ratio holds): sublabels ['DENSE STILL RISING', 'DENSE NOT ESTABLISHED AT MATCHED COMPUTE'] (ADR prints a sub-label only when row 2 fails ONLY because of one condition)
+     ratio fails AND cost fails: label SAME AT SATURATION, sublabels []
+OK   pair PROPORTIONAL
+OK   pair SUBPROPORTIONAL
+OK   pair NOT FULL (smaller still rising)
+OK   pair NOT_EVALUATED
+OK   pair DEPENDENCE_FAILED
+OK   rho >= 3.0 uses >= (a ratio of exactly 3.0 is PROPORTIONAL)
+OK   pair classes
+OK   arm classes (F-OQ two pairs)
+OK   outcome SATURATION-PROPORTIONAL via T-OQ when F-OQ is INTERMEDIATE (2K/256 absent; ruling 6), tagged: SATURATION-PROPORTIONAL [STORE ONLY; ORACLE-ADDRESSED; EIGHT FACTS PER SLOT; FULL = PLATEAU RULE WITHIN REGISTERED RUN LENGTHS; T-OQ; 16,384 NOT MEASURED — NOT FUNDED; 256 NOT MEASURED — NOT FULL WITHIN CEILING]
+OK   outcome SATURATION-SUBPROPORTIONAL: SATURATION-SUBPROPORTIONAL [EIGHT FACTS PER SLOT; FULL = PLATEAU RULE WITHIN REGISTERED RUN LENGTHS; 16,384 NOT MEASURED — NOT FUNDED]
+FAIL SUBPROPORTIONAL printed with a crowding / 'not a property of the store alone' caveat (ADR 8.10, 12): SATURATION-SUBPROPORTIONAL [EIGHT FACTS PER SLOT; FULL = PLATEAU RULE WITHIN REGISTERED RUN LENGTHS; 16,384 NOT MEASURED — NOT FUNDED]
+OK   outcome SATURATION NOT MEASURED
+OK   outcome INCONCLUSIVE with reason DEPENDENCE_FAILED
+OK   H8 alone never gives SATURATION-PROPORTIONAL
+OK   CAPACITY-POSITIVE tagged, with 16,384->65,536 NOT TESTED and the size range
+FAIL CAPACITY-POSITIVE printed label carries the saturation outcome with bits per slot (ADR 8.7 printed label): CAPACITY-POSITIVE [STORE ONLY; ORACLE-ADDRESSED; WITHIN REGISTERED RUN LENGTHS; 1,024 TO 16,384 SLOTS; 16,384→65,536 NOT TESTED; arm(s) F-OQ, T-OQ; F-OQ: DENSE MATCHES; dense at saturation: SAME AT SATURATION; T-OQ: DENSE MATCHES; dense at saturation: SAME AT SATURATION]
+OK   CAPACITY-NEGATIVE (a)
+OK   DENSE HOLDS MORE AT SATURATION -> CAPACITY-NEGATIVE (b)
+OK   CAPACITY NOT TESTED
+OK   F-OQ DEPENDENCE_FAILED + T-OQ NOT_SUPPORTED -> INCONCLUSIVE, never NEGATIVE
+OK   NULL x4 -> NO GAIN -> CAPACITY_NOT_SUPPORTED (null reachable): ('NO GAIN', 'CAPACITY_NOT_SUPPORTED')
+OK   storage half supported (all conditions): Storage half supported, as a necessary condition, from 1,024 to 16,384 slots [STORE ONLY; ORACLE-ADDRESSED; arm T-OQ; hi
+OK   refused without the saturation class -> 'Capacity steps shown; proportional saturation not shown': Capacity steps shown; proportional saturation not shown [STORE ONLY; ORACLE-ADDR
+OK   refused with DENSE HOLDS MORE AT SATURATION: Capacity shown; sublinear active work not shown [STORE ONLY; ORACLE-ADDRESSED] |
+OK   refused with the dense matched-compute reading not established: Storage-half reading not available: the dense comparison is not established at m
+     milestone, saturation cost condition failing with the ratio holding (sub-label printed): 'Storage-half reading not available: the dense comparison is not establ'
+     milestone, saturation cost condition failing with the ratio also failing (no sub-label):  'Storage half supported, as a necessary condition, from 1,024 to 16,384'
+FAIL milestone reading is monotone in the store's saturation ratio (a store that holds MORE is not refused where one that holds the SAME is admitted)
+OK   capacity panel: 4,000 random series, my rows 1-10 vs code (verdicts reached {'BEHIND WITHIN BUDGET': 242, 'CAPACITY': 394, 'CEILING': 185, 'DEPENDENCE_FAILED': 1212, 'FLAT, NOT LOADED': 5, 'GAIN WITHIN BUDGET ONLY': 748, 'NOT_EVALUATED': 185, 'NULL': 36, 'REVERSED': 453, 'UNRESOLVED': 540}): 0
+
+3 FAIL: ["SUBPROPORTIONAL printed with a crowding / 'not a property of the store alone' caveat (ADR 8.10, 12)", 'CAPACITY-POSITIVE printed label carries the saturation outcome with bits per slot (ADR 8.7 printed label)', "milestone reading is monotone in the store's saturation ratio (a store that holds MORE is not refused where one that holds the SAME is admitted)"]
