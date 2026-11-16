@@ -144,3 +144,60 @@ def test_the_smoke_command_reads_first_rows_reports_every_failure_and_writes_not
     assert '"--smoke" in args_in' in main_src and "smoke_main" in main_src
     for literal in datagen_smoke.SENTENCES:
         assert isinstance(literal, str) and literal.isascii()  # fixed literal English sentences written into the code
+
+
+PINNED = {"bad_words_ids": [[3]], "bos_token_id": 0, "decoder_start_token_id": 3, "eos_token_id": 0, "forced_eos_token_id": 0, "max_length": 512, "num_beams": 4, "pad_token_id": 3, "renormalize_logits": True, "transformers_version": "4.32.0.dev0"}
+
+
+def gen_tf() -> Any:
+    class GC(SimpleNamespace):
+        @staticmethod
+        def from_dict(d: dict[str, Any]) -> "GC":
+            return GC(**{k: v for k, v in d.items() if k != "transformers_version"})
+
+        def to_dict(self) -> dict[str, Any]:
+            return dict(self.__dict__)
+
+    return SimpleNamespace(GenerationConfig=GC)
+
+
+def test_the_pinned_generation_config_is_applied_to_the_model_and_every_key_is_checked() -> None:
+    model = SimpleNamespace(generation_config=SimpleNamespace(renormalize_logits=False, num_beams=4))  # what building from config.json alone leaves
+    applied = datagen.apply_generation_config(gen_tf(), model, PINNED)
+    assert model.generation_config.renormalize_logits is True and applied["renormalize_logits"] is True and applied["bad_words_ids"] == [[3]] and applied["forced_eos_token_id"] == 0
+    assert set(applied) >= {k for k in PINNED if k != "transformers_version"}  # the full applied configuration, not four keys
+    datagen.check_generation_config(model.generation_config, PINNED)
+    for key, bad in (("renormalize_logits", False), ("num_beams", 5), ("bad_words_ids", [[4]])):
+        setattr(model.generation_config, key, bad)
+        with pytest.raises(datagen.DatagenStop, match=key):
+            datagen.check_generation_config(model.generation_config, PINNED)  # a difference at generate time stops the step
+        setattr(model.generation_config, key, PINNED[key])
+    del model.generation_config.pad_token_id
+    with pytest.raises(datagen.DatagenStop, match="pad_token_id"):
+        datagen.check_generation_config(model.generation_config, PINNED)  # a key that is absent on the model is a difference too
+
+
+def test_the_teacher_checks_the_pinned_config_before_every_generate_call_and_records_the_applied_one() -> None:
+    src = (ROOT / "studies/p10s2/datagen.py").read_text()
+    assert "apply_generation_config(tf, self.model, self.generation_config)" in src and '"generation_config_applied": self.applied_generation_config' in src
+    assert src.index("check_generation_config(self.model.generation_config, self.generation_config)") < src.index("enc = self.tokenizer(batch")  # before the batch is generated
+
+
+def test_the_embedding_copies_of_the_checkpoint_must_be_equal() -> None:
+    e = torch.randn(5, 3)
+    ok = {"model.shared.weight": e, "model.encoder.embed_tokens.weight": e.clone(), "model.decoder.embed_tokens.weight": e.clone(), "other": torch.zeros(1)}
+    assert datagen.check_embedding_copies(ok) == list(datagen.EMBEDDING_COPIES)
+    bad = {**ok, "model.decoder.embed_tokens.weight": e + 1e-3}
+    with pytest.raises(datagen.DatagenStop, match="embedding copies differ"):
+        datagen.check_embedding_copies(bad)
+    with pytest.raises(datagen.DatagenStop, match="embedding copies differ"):
+        datagen.build_marian(fake_tf(), {}, {**good_state(), "model.shared.weight": e, "model.encoder.embed_tokens.weight": e + 1})
+    assert datagen.check_embedding_copies({"layer.weight": e}) == []  # a checkpoint without copies has nothing to compare
+
+
+def test_the_gen_report_says_kl_and_top1_are_plain_means_over_all_144_windows() -> None:
+    from studies.p10s2 import report
+
+    text = "\n".join(report.gen_lines([], []))
+    assert "plain per-window means over all 144 windows" in text and "enter no rule" in text
+    assert "200 general-language" not in (ROOT / "studies/p10s2/core.py").read_text()

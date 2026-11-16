@@ -372,10 +372,46 @@ class HFReference:  # pragma: no cover - needs transformers
 MARIAN_TIED_KEYS = frozenset({"lm_head.weight"})  # the output projection is tied to the shared embedding and is not stored in the checkpoint
 
 
+GENERATION_CONFIG_SKIP = frozenset({"transformers_version", "_from_model_config"})  # bookkeeping keys of the file, not generation settings
+EMBEDDING_COPIES = ("model.shared.weight", "model.encoder.embed_tokens.weight", "model.decoder.embed_tokens.weight")
+
+
+def check_embedding_copies(state: dict[str, torch.Tensor]) -> list[str]:
+    """Audit minor 2: the checkpoint stores the shared, encoder and decoder embeddings as separate copies, and loading ties them to one tensor. The copies that the checkpoint holds must be equal, or tying would
+    silently replace two of them; a difference stops the step. Returns the names compared."""
+    present = [k for k in EMBEDDING_COPIES if k in state]
+    for k in present[1:]:
+        if not torch.equal(state[present[0]], state[k]):
+            raise DatagenStop(f"the checkpoint's embedding copies differ ({present[0]} and {k}): loading would tie them to one tensor and silently drop one")
+    return present
+
+
+def apply_generation_config(tf: Any, model: Any, pinned: dict[str, Any]) -> dict[str, Any]:
+    """The registered teacher is the pinned model WITH its pinned generation settings: ``model.generation_config`` is built from the hash-verified ``generation_config.json`` bytes (``from_pretrained`` did this
+    from the file; building from the config alone did not, and ``renormalize_logits`` was lost). Returns the applied configuration."""
+    model.generation_config = tf.GenerationConfig.from_dict(dict(pinned))
+    check_generation_config(model.generation_config, pinned)
+    return dict(model.generation_config.to_dict())
+
+
+def check_generation_config(applied: Any, pinned: dict[str, Any]) -> None:
+    """Every key of the pinned file (but its bookkeeping keys) must equal the value on the model's generation config; a difference stops the step. Run when the config is applied and before every generate call."""
+    bad = {}
+    for k, v in pinned.items():
+        if k in GENERATION_CONFIG_SKIP:
+            continue
+        got = getattr(applied, k, "<absent>")
+        if got != v:
+            bad[k] = {"pinned": v, "on_model": got}
+    if bad:
+        raise DatagenStop(f"the model's generation config differs from the pinned generation_config.json: {bad}")
+
+
 def build_marian(tf: Any, config: dict[str, Any], state: dict[str, torch.Tensor]) -> tuple[Any, dict[str, Any]]:
     """The teacher model from the verified config bytes and the safely loaded state (``from_pretrained`` refuses a state dict together with a model name): ``MarianMTModel(config)``, ``load_state_dict`` with
     ``strict=False`` whose result is checked explicitly (the only key that may be missing is the tied ``lm_head.weight``, nothing may be unexpected), then ``tie_weights``; the tied output projection must share
     the embedding's storage. Returns the model and the record of what was missing and tied."""
+    compared = check_embedding_copies(state)
     model = tf.MarianMTModel(tf.MarianConfig.from_dict(config))
     missing, unexpected = model.load_state_dict(state, strict=False)
     if unexpected or set(missing) - MARIAN_TIED_KEYS:
@@ -384,7 +420,7 @@ def build_marian(tf: Any, config: dict[str, Any], state: dict[str, torch.Tensor]
     tied = model.lm_head.weight.data_ptr() == model.get_input_embeddings().weight.data_ptr()
     if not tied:
         raise DatagenStop("the teacher's output projection is not tied to its embedding after tie_weights")
-    return model, {"missing_keys_tied_explicitly": sorted(missing), "unexpected_keys": [], "lm_head_shares_embedding_storage": tied, "parameters": int(sum(p.numel() for p in model.parameters()))}
+    return model, {"missing_keys_tied_explicitly": sorted(missing), "unexpected_keys": [], "lm_head_shares_embedding_storage": tied, "embedding_copies_equal": compared, "parameters": int(sum(p.numel() for p in model.parameters()))}
 
 
 class MarianTeacher:  # pragma: no cover - needs transformers
@@ -405,10 +441,13 @@ class MarianTeacher:  # pragma: no cover - needs transformers
         self.tokenizer = tf.MarianTokenizer.from_pretrained(str(directory), local_files_only=True)
         self.model, self.load_record = build_marian(tf, json.loads(fetch_guard.read_verified_bytes(downloads, f"{label}/config.json")), state)
         self.model.eval()
+        self.applied_generation_config = apply_generation_config(tf, self.model, self.generation_config)
+        if int(self.generation_config.get("num_beams", core.CFG["data"]["generation_beam"])) != int(core.CFG["data"]["generation_beam"]):
+            raise DatagenStop("the pinned generation_config.json's num_beams differs from the registered beam")
         self.pad_id = int(self.model.config.pad_token_id)
         self.batches = 0
         self.score_record: dict[str, Any] = {
-            "length_penalty_used": 1.0, "num_beams": core.CFG["data"]["generation_beam"], "generation_config": {k: self.generation_config.get(k) for k in ("length_penalty", "num_beams", "bad_words_ids", "max_length")},
+            "length_penalty_used": 1.0, "num_beams": core.CFG["data"]["generation_beam"], "generation_config": self.generation_config, "generation_config_applied": self.applied_generation_config,
             "first_batch": None, "max_abs_difference_all_batches": 0.0, "batches": 0, "load": self.load_record,
         }  # fmt: skip
 
@@ -417,6 +456,7 @@ class MarianTeacher:  # pragma: no cover - needs transformers
         out: list[tuple[str, float]] = []
         for i in range(0, len(sources), 32):
             self.tick("teacher batch")
+            check_generation_config(self.model.generation_config, self.generation_config)  # at generate time, every pinned key is what the model will use
             batch = list(sources[i : i + 32])
             enc = self.tokenizer(batch, return_tensors="pt", padding=True)
             gen = self.model.generate(

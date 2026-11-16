@@ -132,7 +132,7 @@ PARTITION_USES: dict[str, str] = {
     "q_split": "the split of Q into Q_fit and Q_check, by identity group",
     "source_sample": "the sample of at most 60,000 no-gold sources per capability (A, then B)",
     "ablation_subsample": "the 300-item ablation subsample of E_A and E_B",
-    "gen_windows": "the selection of the 200 general-language (GEN) windows",
+    "gen_windows": "the selection of the 100 ordinary general-language (GEN) windows (the 44 marker-like windows of the fixed grid are all taken)",
     "bootstrap": "the bootstrap resampling of every printed interval: drawn in the ANALYSIS STAGE ONLY, a fresh generator per printed interval, in the order of the registry (ruling of 2026-11-15)",
     "seen_items": "the 300 seen-item training items (one permutation of each capability's accepted pool, A then B)",
     "timing_items": "the 200 items per panel of the timing benchmark (E_A, then E_B)",
