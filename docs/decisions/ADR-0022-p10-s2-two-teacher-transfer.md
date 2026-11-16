@@ -1022,3 +1022,22 @@ Three parallel independent re-checks (Opus 5.5) of commit `fc08681` are in `docs
 5. If a count other than this one falls short, the work returns to the lead again; nothing else is relaxed by this addendum.
 
 Attempt 4 is released by `lead_release.json` naming attempt 4 and this addendum. Astra review: NOT_PERFORMED.
+
+## Addendum — the data step's outcome and the human lead's acceptance (2026-11-16 UTC)
+
+**The outcome.** The pre-freeze data-generation step ran complete on its eighth attempt (code `b3c17e6`; record `results/p10s2-datagen-2026-11-16/`). The teacher qualification gate of §4.3 fails for both primary teachers on condition 3 only: accepted items on Q_check 78 (A) and 22 (B) against the minimum of 150 (§5.3), and accepted pools 7,804 (A) and 2,341 (B) against 8,000. Conditions 1 and 2 pass (own scores 0.7675 and 0.7754; margins 0.6214 and 0.6425) and point precision on Q_check is 0.9231 and 0.9545. Both primary teachers fail, so the fallback of §4.2 does not apply. By the outcome table (row 3) the study stops before the freeze: **TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED**. No student was trained. The independent recomputation (Opus 5.5, `docs/reviews/p10s2-qualification-2026-11-16/REVIEW.md`) agrees, with the noted defect that the gate's per-item inputs on Q were not stored.
+
+**The human lead, verbatim**, on being asked whether the outcome is accepted as registered:
+
+> we should accept it as it is, and start working on P10-I on all of the simulation meaning
+>
+> P10-I-S0, P10-I-S1, P10-I-S2
+>
+> because each have their own correction that needed to be done, and now we have more data including the result of P9-II
+
+Recorded by the lead:
+
+- **The P10-S2 outcome is accepted as registered and unchanged.** No threshold, count or class is altered. S2's question (two-teacher transfer into the frozen student under oracle addressing) is not tested; nothing here supports or contradicts it. P10-S2 is complete with this outcome and nothing further runs under ADR-0022.
+- The shortfall is one of the registered design's sizing against its own acceptance filter (a 500-item Q_check against a 150-item minimum at acceptance rates of 8–21%; 60,000 generation sources against an 8,000-item pool). It is recorded, not repaired, under this ADR. The repair belongs to P10-I-S2.
+- P10-I is drafted as three parts, P10-I-S0, P10-I-S1 and P10-I-S2, each carrying the corrections its P10 study showed to be needed and using the P10 and P9-II records. Each is a proposal; none is implemented or run before the human lead's review and recorded approval (the P10 delegation does not cover P10-I).
+- `Astra review: NOT_PERFORMED`.
