@@ -151,3 +151,11 @@ The human lead, verbatim: "once you finish the draft please push it so i can rev
 > Yes, fix then merge
 
 Recorded by the lead: the edit of `tests/test_p9ii_replay.py` (a completed study's test) and of the CI time limit is approved for this purpose (`docs/reviews/p10-consolidation-2026-11-16/CI_FAILURE_AND_FIX.md`). PRs 7 (P9-II), 8 (P10 design), 9 (P10-S0) and 10 (P10-S2) are merged as merge commits after an independent review of the integration diff. P10-S1 is not finished and is not merged now; its pull request is opened when its run is recorded.
+
+### P10-I waits for P10-S1's result (2026-11-16 UTC)
+
+After the lead had started three drafters for P10-I-S0, P10-I-S1 and P10-I-S2, the human lead, verbatim:
+
+> ok, but we must way to analize the result of S1 before planing any of the P10-I
+
+Recorded by the lead: the three drafters were stopped before any draft was written to the repository; nothing of P10-I is committed or pushed. No part of P10-I is planned or drafted until P10-S1's registered run is recorded, independently recomputed, and analysed with the human lead. The earlier request to push the drafts for review applies when they are written after that.
