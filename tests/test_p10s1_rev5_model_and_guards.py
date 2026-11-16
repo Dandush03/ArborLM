@@ -113,7 +113,12 @@ def test_the_stages_that_must_not_overlap_refuse_and_calibration_may(monkeypatch
     with pytest.raises(timing.OtherStudyRunning):
         stages.concurrency_guard("train", reg)  # every registered stage
     cal = stages.build_parser().parse_args(["calibrate", "--mode", "calibration", "--run-dir", str(tmp_path)])
-    assert stages.concurrency_guard("calibrate-load-row-up", cal) is None  # calibration training may overlap another study's training
+    with pytest.raises(timing.OtherStudyRunning):
+        stages.concurrency_guard("calibrate-load-row-up", cal)  # the calibration does not overlap P10-S0's registered run either (section 25.13 m11)
+    reh = stages.build_parser().parse_args(["gates", "--mode", "rehearsal", "--run-dir", str(tmp_path)])
+    for name in ("gates", "generate-p10s1-rehearsal"):
+        with pytest.raises(timing.OtherStudyRunning):
+            stages.concurrency_guard(name, reh)  # the rehearsal's gates and generation too (m9)
     dry = stages.build_parser().parse_args(["timing", "--mode", "rehearsal", "--dry", "--run-dir", str(tmp_path)])
     assert stages.concurrency_guard("timing", dry)["checked"] is False  # the DRY profile measures nothing
     monkeypatch.setattr(timing, "running_commands", lambda: [])

@@ -77,7 +77,7 @@ def test_memory_rule_includes_evaluation_and_pool_peaks() -> None:
 
 
 # --- the headroom rule and the cuts -----------------------------------------------------------------------------------------------------------
-def test_headroom_rule() -> None:
+    cap = core.load_config()["resources"]["cap_max_hours"] * 3600.0  # C_max from the config: independent of the cap in force (16 h before the freeze, the computed cap after it)
     cap = core.cap_seconds()  # the cap is the config value, never a literal
     zero = budget.headroom_rule(1.4 * 3600, 5.3 * 3600, cap)  # the ADR's projection arithmetic: 1.4 h + 2 x 5.3 h = 12.0 h
     assert zero.required_seconds == pytest.approx(12.0 * 3600) and zero.ok is (12.0 * 3600 <= cap)

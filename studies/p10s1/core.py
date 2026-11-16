@@ -273,6 +273,7 @@ class Plan:
     u_l_256: int = 0
     sat256: bool = True
     toq_not_loaded: tuple[str, ...] = ()
+    placeholder: bool = False  # True when U_L was left at its default: a pre-calibration plan that no registered stage, projection or freeze may carry (audit m1)
 
     def __post_init__(self) -> None:
         if self.unit != U_P and (self.unit <= 0 or self.unit % 4):
@@ -281,6 +282,7 @@ class Plan:
             object.__setattr__(self, "row_u_p", (self.unit, self.unit, self.unit))
         if self.u_l == (0, 0):
             object.__setattr__(self, "u_l", tuple(load_candidates(cell_name(*c), self.unit)[0] for c in LOADED_CELLS))
+            object.__setattr__(self, "placeholder", True)
         if not self.sat256:
             object.__setattr__(self, "u_l_256", 0)
         elif self.u_l_256 == 0:
@@ -320,14 +322,14 @@ class Plan:
     def as_json(self) -> dict[str, Any]:
         return {
             "seed_block_draws": list(self.seed_block_draws), "dense_cut": list(self.dense_cut), "lane_l": self.lane_l, "unit": self.unit, "row_u_p": list(self.row_u_p), "u_l": list(self.u_l),
-            "u_l_256": self.u_l_256, "sat256": self.sat256, "toq_not_loaded": list(self.toq_not_loaded),
+            "u_l_256": self.u_l_256, "sat256": self.sat256, "toq_not_loaded": list(self.toq_not_loaded), "placeholder": self.placeholder,
         }  # fmt: skip
 
     @classmethod
     def from_json(cls, data: Mapping[str, Any]) -> "Plan":
         return cls(
             tuple(int(d) for d in data["seed_block_draws"]), tuple(data["dense_cut"]), bool(data["lane_l"]), int(data.get("unit", U_P)), tuple(int(x) for x in data["row_u_p"]),  # type: ignore[arg-type]
-            tuple(int(x) for x in data["u_l"]), int(data["u_l_256"]), bool(data["sat256"]), tuple(data.get("toq_not_loaded", ())),  # type: ignore[arg-type]
+            tuple(int(x) for x in data["u_l"]), int(data["u_l_256"]), bool(data["sat256"]), tuple(data.get("toq_not_loaded", ())), bool(data.get("placeholder", False)),  # type: ignore[arg-type]
         )  # fmt: skip
 
 

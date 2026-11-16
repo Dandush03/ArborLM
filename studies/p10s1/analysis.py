@@ -428,6 +428,11 @@ def saturation_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
         classes_: list[str] = []
         for n, m in core.SATURATION_PAIRS[arm]:
             key = f"{n}→{m}"
+            unloaded = {size for t, size in (("1K→4K", 1024), ("4K→16K", 4096)) if t in fro.no_loaded_transitions}  # a transition fixed as not tested: its loaded cell is NOT LOADED WITHIN ITS CEILING, so every pair that uses it is NOT FULL (section 10.1 item 0b; audit m5)
+            if n in unloaded or m in unloaded:
+                pairs[key] = {"class": C.NOT_FULL, "verdicts": None, "note": "the loaded cell of this size is fixed as not loaded (transition fixed as not tested)", "replicates": []}
+                classes_.append(C.NOT_FULL)
+                continue
             if n == core.SATURATION_ONLY_CELL[1] and not fro.plan.sat256:
                 pairs[key] = {"class": C.NOT_FULL, "verdicts": None, "note": C.NOT_MEASURED_256, "replicates": []}
                 classes_.append(C.NOT_FULL)
@@ -742,7 +747,7 @@ def analyze_study(
     eff_out = C.Outcome(**eff["outcome"])
     result.update(
         saturation={**sat, "dense_at_saturation": dsat},
-        capacity={"steps": steps, "arms": arms, "hierarchy": hier, "conventional": conv, "key_learning_limited": klim, "h8_annotations": C.h8_annotations(fro.h8_undertrained), "mc_ambiguous_pairs": {k: {"status": e.status, "small_update": e.small_update, "large_update": e.large_update, "multiplier": e.multiplier, "reading": "read in the comparator's favour (section 5.4): the cell whose advantage would be claimed at U_P, the other at the smallest grid snapshot with multiplier at least the larger of r and 1/r"} for k, e in sorted(fro.mc.items()) if e.annotation == C.MC_AMBIGUOUS}, "robustness": robustness(study, fro), "held_out": held_out(study, fro), "seed_block": seed_block(study, fro), "mc_mismatch": mc_mismatch(study, fro), "h8_undertrained": list(fro.h8_undertrained)},
+        capacity={"steps": steps, "arms": arms, "hierarchy": hier, "conventional": conv, "key_learning_limited": klim, "h8_annotations": C.h8_annotations(fro.h8_undertrained, fro.h8_calibrated), "mc_ambiguous_pairs": {k: {"status": e.status, "small_update": e.small_update, "large_update": e.large_update, "multiplier": e.multiplier, "reading": "read in the comparator's favour (section 5.4): the cell whose advantage would be claimed at U_P, the other at the smallest grid snapshot with multiplier at least the larger of r and 1/r"} for k, e in sorted(fro.mc.items()) if e.annotation == C.MC_AMBIGUOUS}, "robustness": robustness(study, fro), "held_out": held_out(study, fro), "seed_block": seed_block(study, fro), "mc_mismatch": mc_mismatch(study, fro), "h8_undertrained": list(fro.h8_undertrained)},
         efficiency=eff,
         outcome={"capacity": {**cap_out._asdict(), "reading": reading}, "efficiency": eff_out._asdict(), "saturation": sat["outcome"]},
         cost_table=cost_rows(study, fro),

@@ -382,7 +382,8 @@ def test_set_generation_cap_writes_the_config_from_a_measurement(tmp_path: Path,
 
 def test_the_repository_config_is_the_canonical_rendering_with_a_provisional_generation_cap() -> None:
     assert (ROOT / core.DEFAULT_CONFIG).read_text() == core.render_config_toml(core.load_config()["resources"]["cap_hours"], core.generation_settings())
-    assert core.generation_settings()["provisional"] is True  # set by `set-generation-cap` from the rehearsal; the freeze refuses while it is provisional
+    g = core.generation_settings()  # provisional until `set-generation-cap` writes the rehearsal's measured figure; the freeze refuses while it is provisional or typed
+    assert g["provisional"] is True or (g["source"] == "measured" and len(g["manifest_sha256"]) == 64 and g["measured_seconds"] > 0)
 
 
 def test_the_projection_charges_five_generations() -> None:
@@ -447,7 +448,7 @@ def test_freeze_refuses_a_provisional_generation_cap_and_a_qualified_interface(t
     repo = tmp_path / "repo"
     (repo / "configs").mkdir(parents=True)
     (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml())  # provisional
-    base = ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo)]
+    base = ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo), "--s0-training-manifest", s0_manifest(paths)]
     assert stages.main([*base, "--freeze-dir", str(tmp_path / "f1")]) == 2 and not (tmp_path / "f1").exists()  # the cap was never set by a rehearsal
     (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml(generation={"cap_seconds": 600.0, "provisional": False, "table_facts": core.FACT_TABLE, "source": "typed"}))
     assert stages.main([*base, "--freeze-dir", str(tmp_path / "ft")]) == 2 and not (tmp_path / "ft").exists()  # a typed figure is refused (N6)
@@ -524,8 +525,14 @@ def test_readme_documents_the_pinned_worktree_and_the_generation_cap() -> None:
 
 
 # --- re-check N2: a registered freeze and driver refuse DRY records, a DRY-size plan and an open calibration -----------------------------------------
+from test_p10s1_stages import (  # noqa: E402,F401  (the autouse fixture keeps the real process list out of every test of this file)
+    no_other_study_running,
+    s0_manifest,
+)
+
+
 def _freeze_args(paths: dict[str, Path], run_dir: Path, out: Path, repo: Path) -> list[str]:
-    return ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo), "--freeze-dir", str(out)]
+    return ["freeze", "--run-dir", str(run_dir), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--repo", str(repo), "--freeze-dir", str(out), "--s0-training-manifest", s0_manifest(paths)]
 
 
 def test_a_registered_freeze_refuses_dry_records_a_dry_plan_and_an_open_calibration(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:

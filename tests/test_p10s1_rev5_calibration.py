@@ -158,6 +158,8 @@ def test_dense_rate_plain_maximum_ties_the_walk_diverged_rates_and_the_returns()
     assert only_rate_walk["rate"] == 0.1 and only_rate_walk["edge"] == calibrate.EDGE_BY_TIE_WALK  # 0.1 taken only by the walk is recorded
     lead = calibrate.select_dense_rate({0.01: 0.90, 0.03: 0.9, 0.1: 0.95}, None, 8192)
     assert lead["action"] == calibrate.RETURN_TO_LEAD and lead["rate"] is None and lead["edge"] == "TOP OF GRID"  # 0.1 ahead by more than 0.02
+    exact = calibrate.select_dense_rate({0.01: 0.50, 0.1: 0.52}, None, 8192)
+    assert exact["action"] == calibrate.RETURN_TO_LEAD and exact["edge"] == "TOP OF GRID"  # ahead by exactly 0.02: the boundary is on the returning side (m2)
     edge_ok = calibrate.select_dense_rate({0.01: 0.5, 0.1: 0.5 + 0.015}, {0.01: dict.fromkeys((4096, 2048, 1024, 512), 0.1), 0.1: dict.fromkeys((4096, 2048, 1024, 512), 0.1)}, 8192)
     assert edge_ok["rate"] == 0.01 and edge_ok["edge"] is None  # within 0.02 and nothing separates them: the smaller rate
     div = calibrate.select_dense_rate({0.001: 0.1, 0.003: 0.5, 0.01: 0.9, 0.03: 0.0, 0.1: 0.0}, None, 8192, diverged=[0.03, 0.1])

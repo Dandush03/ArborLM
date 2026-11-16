@@ -78,8 +78,9 @@ def concurrency_guard(stage: str, args: argparse.Namespace) -> dict[str, Any] | 
     (ADR-0021 section 25.12 item 4); the check is recorded in the stage manifest. Calibration training may overlap another study's training. The DRY profile measures nothing and is not checked."""
     if tiny(args):
         return {"checked": False, "reason": "DRY profile (tiny synthetic sizes, nothing measured)"}
-    if stage.split("-")[0] in ("timing", "rehearse") or args.mode == REGISTERED:
-        return timing.concurrency_check()
+    head = stage.split("-")[0]
+    if head in ("timing", "rehearse", "calibrate") or args.mode == REGISTERED or (args.mode == REHEARSAL and head in ("gates", "generate")):
+        return timing.concurrency_check()  # the calibration does not overlap P10-S0's registered run either (section 25.13, m11); P10-S2: not used
     return None
 
 
@@ -173,8 +174,13 @@ def frozen_of(args: argparse.Namespace) -> fz.Frozen:
         return fz.Frozen.from_json(load_plan_file(Path(args.freeze_plan))["frozen"])
     seed_block = tuple(int(d) for d in args.seed_block.split(",") if d)
     plan = core.Plan(seed_block, (), False, unit_of(args))
-    if args.calibration and Path(args.calibration).is_file():  # a rehearsal or projection bound to a finished calibration carries its U_P, U_L and 2K/256 decision
-        plan = core.Plan(seed_block, (), False, unit_of(args), **calibrate.plan_values(core.read_record(Path(args.calibration), "calibration")))
+    if args.calibration:  # a rehearsal or projection bound to a finished calibration carries its U_P, U_L and 2K/256 decision
+        if not Path(args.calibration).is_file():
+            raise pool.StageRefused(f"refused: no calibration record at {args.calibration}")
+        try:
+            plan = core.Plan(seed_block, (), False, unit_of(args), **calibrate.plan_values(core.read_record(Path(args.calibration), "calibration")))
+        except calibrate.TieNeedsLead as exc:
+            raise pool.StageRefused(f"refused: {exc}") from exc
     return fz.Frozen.build(plan, cpu_table_of(args))
 
 
@@ -934,14 +940,14 @@ ITEMS_FILE = "calibration_items_load_row_up.json"
 ITEM_GROUPS = (("load", "row-up"), ("h8", "dense"))
 
 
-def calibration_tasks(args: argparse.Namespace, stage: str, cells_by_item: Mapping[str, Sequence[core.Cell]], run_dir: Path, caps: Mapping[str, float | None], start: float) -> list[pool.Task]:
-    """One task per calibration cell (the DRY profile groups the cells of an item, draw, slot count and arm); every task of an item carries the item's cap (never in the DRY profile)."""
+def calibration_tasks(args: argparse.Namespace, stage: str, items: Sequence[str], run_dir: Path, caps: Mapping[str, float | None], start: float, row_map: Mapping[int, int] | None, unit: int) -> list[pool.Task]:
+    """One task per calibration cell, in the order the pool is to start them (``budget.dispatch_order``: the short row-U_P runs first, the longest run first within an item); the DRY profile
+    groups the cells of an item, draw, slot count and arm. Every task of an item carries the item's cap, a deadline counted from the stage start (never in the DRY profile)."""
     identity = core.code_identity()
     groups: dict[str, tuple[str, list[core.Cell]]] = {}
-    for item, cells in cells_by_item.items():
-        for c in cells:
-            label = f"cal-{item}-d{c.draw}-n{c.slots}-{c.arm}" if tiny(args) else c.label
-            groups.setdefault(label, (item, []))[1].append(c)
+    for item, c in budget.dispatch_order(items, unit, row_map):
+        label = f"cal-{item}-d{c.draw}-n{c.slots}-{c.arm}" if tiny(args) else c.label
+        groups.setdefault(label, (item, []))[1].append(c)
     tasks = []
     for label, (item, members) in groups.items():
         cap = caps.get(item)
@@ -971,7 +977,12 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         path = run_dir / ITEMS_FILE
         if path.exists():
             raise pool.StageRefused(f"refused: {path} exists; the rules are applied once")
+        try:
+            complete = calibrate.require_stage_complete(run_dir, "calibrate-load-row-up", core.calibration_cells_of(ITEM_GROUPS[0], None, unit))
+        except calibrate.NotComplete as exc:
+            raise pool.StageRefused(f"refused: {exc}") from exc
         rec = calibrate.finalize_load_and_row_up(run_dir, unit=unit, dry=bool(tiny(args)))
+        rec["stage_complete"] = complete
         core.write_record(path, core.jsonable({**core.envelope("calibration"), **rec, "items": list(ITEM_GROUPS[0]), "dry": bool(tiny(args)), "identity": core.code_identity(), "environment": core.environment()}))
         print(json.dumps({"items_record": str(path), "returns_to_lead": rec["returns_to_lead"], "dry_substituted": rec["dry_substituted"]}))
         return 0 if not rec["returns_to_lead"] else 1
@@ -979,7 +990,18 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         path = run_dir / "calibration.json"
         if path.exists():
             raise pool.StageRefused(f"refused: {path} exists")
+        items_path = run_dir / ITEMS_FILE
+        if not items_path.is_file():
+            raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}: finalize items load,row-up first")
+        items_rec = core.read_record(items_path, "calibration")
+        complete = [items_rec.get("stage_complete")]
+        if not items_rec["returns_to_lead"]:
+            try:
+                complete.append(calibrate.require_stage_complete(run_dir, "calibrate-h8-dense", core.calibration_cells_of(ITEM_GROUPS[1], calibrate.row_u_p_map(items_rec), unit)))
+            except calibrate.NotComplete as exc:
+                raise pool.StageRefused(f"refused: {exc}") from exc
         record = calibrate.finalize(run_dir, unit=unit, charged_seconds=charged_for_calibration(args, run_dir))
+        record["stage_complete"] = complete
         core.write_record(path, record)
         print(json.dumps({"calibration": str(path), "returns_to_lead": record["returns_to_lead"], "charged_seconds": record["charged_seconds"]}))
         return 0 if not record["returns_to_lead"] else 1
@@ -1015,7 +1037,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         raise pool.StageRefused(f"refused: the timing preview has no rate for {[proj[i]['missing_rates'] for i in items]}: no item is started on an assumed cost")
     stage = "calibrate-" + "-".join(items)
     start = time.time()
-    tasks = calibration_tasks(args, stage, cells_by_item, run_dir, caps, start)
+    tasks = calibration_tasks(args, stage, items, run_dir, caps, start, row_map, unit)
     cap = 3600.0 if tiny(args) else float(sum(float(v) for v in caps.values() if v is not None))  # the pool's outer bound is the sum of the item caps; each item's own cap stops its runs
     manifest = run_stage_tasks(stage, args, tasks, run_dir, cap=cap)
     return 0 if manifest["status"] == "COMPLETE" else 1
@@ -1191,6 +1213,13 @@ def cmd_set_generation_cap(args: argparse.Namespace) -> int:
     return 0
 
 
+def contention_from(six_rehearsal: Mapping[tuple[str, int], float], six_calibration: Mapping[tuple[str, int], float], isolated: Mapping[tuple[str, int], float]) -> tuple[float, dict[str, Any], dict[str, Any]]:
+    """c from the rehearsal's six-worker rates over the isolated rates only (ADR-0021 section 25.12 item 2; audit M2). The calibration's ratio (it may have overlapped another study's training) is returned
+    for the record and enters nothing."""
+    rehearsal = budget.contention_ratio(six_rehearsal, isolated)
+    return float(rehearsal["c"]), rehearsal, budget.contention_ratio(six_calibration, isolated)
+
+
 def cmd_project(args: argparse.Namespace) -> int:
     """The projection: rates from the rehearsal, the isolated wall and CPU seconds per update, the contention ratio c (the larger of the ratios over the rehearsal's six-worker rates and over the
     calibration's six-worker rates, each against the isolated rate of the same arm and slot count, never below 1.0), the memory rule (evaluation peaks included), C_need (charged so far plus twice the
@@ -1238,8 +1267,8 @@ def cmd_project(args: argparse.Namespace) -> int:
     for (arm, _f, n), r in rates.items():
         six_rehearsal[(arm, n)] = max(six_rehearsal.get((arm, n), 0.0), r.seconds_per_update)
     six_calibration = {(k.split("|")[0], int(k.split("|")[1])): float(v) for k, v in (cal.get("training_wall_seconds_per_update") or {}).items()}
-    c_rehearsal, c_calibration = budget.contention_ratio(six_rehearsal, isolated), budget.contention_ratio(six_calibration, isolated)
-    c = max(float(c_rehearsal["c"]), float(c_calibration["c"]), core.CAP_CONTENTION_MIN)
+    c, c_rehearsal, c_calibration = contention_from(six_rehearsal, six_calibration, isolated)
+    h8_calibrated = list((cal.get("h8") or {}).get("calibrated_cells", [core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS]))
     cap_max_seconds = float(core.load_config(repo_of(args) / core.DEFAULT_CONFIG if args.repo else None)["resources"]["cap_max_hours"]) * 3600.0
     record: dict[str, Any] = {
         **core.envelope("projection"), "calibration": {"path": str(Path(args.calibration).resolve()), "sha256": file_sha256(Path(args.calibration))}, "timing": {"path": str(Path(args.timing).resolve()), "sha256": file_sha256(Path(args.timing))},
@@ -1247,14 +1276,14 @@ def cmd_project(args: argparse.Namespace) -> int:
         "calibration_sha256": file_sha256(Path(args.calibration)), "dry": bool(args.dry), "rates": {budget.item_label(i): dataclasses.asdict(r) for i, r in rates.items()}, "missing_items": [budget.item_label(i) for i in missing],
         "memory": budget.memory_headroom(rates), "baseline_seconds": {str(k): v for k, v in baselines.items()}, "returns_to_lead": returns, "dense_rates": dict(dense_rates), "plan_values": None if plan_kw is None else {k: (list(v) if isinstance(v, tuple) else v) for k, v in plan_kw.items()},
         "generation": {"rehearsal_g1_seconds": gen_seconds, "five_draws_seconds": None if gen_seconds is None else core.REPLICATES * gen_seconds, "note": "five times the generation and G1 time measured on the rehearsal draw, charged before the freeze"},
-        "h8_undertrained": cal["h8_undertrained_cells"], "contention": {"c": c, "rule": "the largest ratio of six-worker training wall seconds per update to the isolated wall seconds per update of the same arm and slot count, over the rehearsal's configurations and over the calibration's configurations (the larger of the two), never below 1.0", "rehearsal": c_rehearsal, "calibration": c_calibration},
+        "h8_undertrained": cal["h8_undertrained_cells"], "h8_calibrated": h8_calibrated, "contention": {"c": c, "rule": "the largest ratio of the rehearsal's six-worker training wall seconds per update to the isolated wall seconds per update of the same arm and slot count, never below 1.0 (section 25.12 item 2); the calibration's ratio is descriptive and changes nothing", "rehearsal": c_rehearsal, "calibration_descriptive": c_calibration},
         "cap_max_seconds": cap_max_seconds, "cap_seconds": core.cap_seconds(repo_of(args) / core.DEFAULT_CONFIG if args.repo else None), "environment": core.environment(), "identity": core.code_identity(), "source_hashes": core.source_hashes(),
     }  # fmt: skip
     ledger = core.Ledger.from_config(ledger_root(args), repo_of(args) / core.DEFAULT_CONFIG if args.repo else None)
     record["charged_seconds"] = ledger.charged()
     if not returns and cpu and isolated:
         fixed = budget.Fixed(gates=float(gts["wall_seconds"]), timing=sum(float(v["cpu_seconds_per_update"]) * (core.TIMING_WARMUP_UPDATES + core.TIMING_REPEATS * core.TIMING_UPDATES) for v in tim["runs"].values()) + 120.0, simulate=60.0, analysis=float(syn["analysis_wall_seconds"]), report=float(syn["report_wall_seconds"]), generate=core.REPLICATES * (gen_seconds or 0.0))
-        kw = {"dense_rates": dict(dense_rates), "h8_undertrained": list(cal["h8_undertrained_cells"])}
+        kw = {"dense_rates": dict(dense_rates), "h8_undertrained": list(cal["h8_undertrained_cells"]), "h8_calibrated": h8_calibrated}
         chosen = budget.choose_plan(rates, fixed, cpu, charged_seconds=ledger.charged(), cap_max_seconds=cap_max_seconds, base=base, baseline_seconds=baselines, frozen_kwargs=kw, isolated=isolated, c=c)
         record["fixed"] = dataclasses.asdict(fixed)
         record["chosen"] = {"ok": chosen.ok, "plan": None if chosen.plan is None else chosen.plan.as_json(), "applied_cuts": chosen.applied_cuts, "headroom": None if chosen.headroom is None else chosen.headroom._asdict(), "projection": None if chosen.projection is None else chosen.projection._asdict(), "tried": chosen.tried}
@@ -1348,8 +1377,19 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise pool.StageRefused(f"refused: the registered draws were generated with {generation['table_facts']} facts (config) but the plan needs {plan.table_facts}")
     cpu = {(k.split("|")[0], int(k.split("|")[1])): float(v) for k, v in proj["cpu_per_update"].items()}
     directed = [t for t in args.no_loaded_transitions.split(",") if t]
+    direction_record = None
+    if directed:
+        if any(t not in core.TRANSITIONS for t in directed):
+            raise pool.StageRefused(f"refused: --no-loaded-transitions takes {core.TRANSITIONS}")
+        if not args.dry and not core.test_switch():
+            if not args.direction_record or not Path(args.direction_record).is_file():
+                raise pool.StageRefused("refused: a transition fixed as not tested needs --direction-record, the human lead's recorded direction (bound by hash)")
+            direction_record = {"path": str(Path(args.direction_record).resolve()), "sha256": file_sha256(Path(args.direction_record))}
+    concurrency = freeze_concurrency(args)
+    if plan.placeholder and not (args.dry or core.test_switch()):
+        raise pool.StageRefused("refused: the plan carries placeholder U_L values (no calibration record fixed them)")
     fro = fz.Frozen.build(
-        plan, cpu, dense_rates={str(k): float(v) for k, v in proj["dense_rates"].items()}, h8_undertrained=list(proj["h8_undertrained"]), s0_status=s0_status, lane_status=lane_status,
+        plan, cpu, dense_rates={str(k): float(v) for k, v in proj["dense_rates"].items()}, h8_undertrained=list(proj["h8_undertrained"]), h8_calibrated=list(proj.get("h8_calibrated", [core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS])), s0_status=s0_status, lane_status=lane_status,
         no_loaded_transitions=directed, cuts=list(proj["chosen"]["applied_cuts"]),
     )  # fmt: skip
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -1360,8 +1400,8 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         "rehearsal_gates": proj["rehearsal_gates"], "synthetic": proj["synthetic"], "stage_caps_sha256": file_sha256(caps_path), "run_dir": str(run_dir.resolve()), "data_manifests": manifests,
         "frozen": fro.as_json(), "frozen_sha256": sha256(canonical_json(fro.as_json())), "cap_seconds": cap_now, "headroom": proj["chosen"]["headroom"], "cuts": proj["chosen"]["applied_cuts"],
         "identity": identity, "dense_rates": proj["dense_rates"], "calibration_summary": {k: cal.get(k) for k in ("u_l", "u_l_256", "row_u_p", "toq_predicted_not_loaded", "h8_undertrained_cells")}, "dense_edges": {u: e.get("edge") for u, e in (cal.get("dense_rates") or {}).items()},
-        "h8_annotations": classes.h8_annotations(list(proj["h8_undertrained"])), "toq_predicted_not_loaded": list(plan.toq_not_loaded), "contention": proj["contention"], "c_need_seconds": proj.get("c_need_seconds"), "computed_cap_hours": proj.get("computed_cap_hours"), "sat256_runs": plan.sat256,
-        "concurrency": {"checked": not (args.dry or core.test_switch()), "other_study_processes_alive_at_freeze": [] if (args.dry or core.test_switch()) else timing.other_study_processes(), "statement": "P10-S0's last training stage has finished" + ("" if (args.dry or core.test_switch()) else " if and only if the list above is empty; the lead confirms it before Decision 2")}, "lane_l": lane_status, "s0_status": s0_status, "no_loaded_transitions": directed,
+        "h8_annotations": classes.h8_annotations(list(proj["h8_undertrained"]), list(proj.get("h8_calibrated", [core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS]))), "toq_predicted_not_loaded": list(plan.toq_not_loaded), "contention": proj["contention"], "c_need_seconds": proj.get("c_need_seconds"), "computed_cap_hours": proj.get("computed_cap_hours"), "sat256_runs": plan.sat256,
+        "concurrency": concurrency, "direction_record": direction_record, "lane_l": lane_status, "s0_status": s0_status, "no_loaded_transitions": directed,
         "s0_record": None if not args.s0_record else {"path": str(Path(args.s0_record).resolve()), "sha256": file_sha256(Path(args.s0_record))}, "generation": generation, "decision_2": {"file_glob": DECISION_2_GLOB, "note": "Decision 2 is recorded in a committed file outside the hashed specification and names the freeze commit (ADR-0021 section 22 M4)"},
         "identity_drift": identity_drift(core.repo_root(), {"calibration": cal, "projection": proj, "timing": core.read_record(Path(args.timing), "timing"), "rehearsal_gates": core.read_record(Path(args.gates), "gates")}),
         "projection_dir": str(proj_dir.resolve()), "note": "the freeze record: nothing registered runs without it; every hash is checked by every registered stage",
@@ -1369,6 +1409,23 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     write_json(plan_path, core.jsonable(record))
     print(json.dumps({"plan": str(plan_path), "sha256": file_sha256(plan_path), "caps": str(caps_path), "caps_sha256": file_sha256(caps_path)}))
     return 0
+
+
+def freeze_concurrency(args: argparse.Namespace) -> dict[str, Any]:
+    """ADR-0021 section 25.12 item 4 and 25.13 (M4): the freeze refuses while a ``studies.p10s0`` or ``studies.p10s2`` stage process is alive, and states that P10-S0's last training stage has finished
+    only with evidence bound by hash: the manifest of S0's last registered training stage that was due (the probe's training manifest or, if the probe was refused or not run, the WX training
+    manifest together with S0's record of that refusal). Not checked in the DRY profile or under the test switch (the record says so)."""
+    if args.dry or core.test_switch():
+        return {"checked": False, "reason": "DRY profile or test switch", "statement": "not stated: nothing here is S0's"}
+    timing.concurrency_check()  # raises OtherStudyRunning
+    if not args.s0_training_manifest or not Path(args.s0_training_manifest).is_file():
+        raise pool.StageRefused("refused: --s0-training-manifest (S0's manifest of its last due registered training stage) is required: the freeze states that P10-S0's training has finished only with evidence")
+    evidence = {"s0_training_manifest": {"path": str(Path(args.s0_training_manifest).resolve()), "sha256": file_sha256(Path(args.s0_training_manifest))}}
+    if args.s0_refusal_record:
+        if not Path(args.s0_refusal_record).is_file():
+            raise pool.StageRefused(f"refused: no S0 refusal record at {args.s0_refusal_record}")
+        evidence["s0_refusal_record"] = {"path": str(Path(args.s0_refusal_record).resolve()), "sha256": file_sha256(Path(args.s0_refusal_record))}
+    return {"checked": True, "other_study_processes_alive_at_freeze": [], **evidence, "statement": "P10-S0's last training stage has finished: evidence bound by hash above"}
 
 
 def identity_drift(repo: Path, records: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
@@ -1420,6 +1477,8 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path) -> None:
         for key in ("calibration", "projection", "timing", "rehearsal_gates"):
             if read_json(Path(plan[key]["path"])).get("dry") is True:
                 raise pool.StageRefused(f"refused: the frozen {key} record is marked DRY")
+        if fz.Frozen.from_json(plan["frozen"]).plan.placeholder:
+            raise pool.StageRefused("refused: the frozen plan carries placeholder U_L values")
         if fz.Frozen.from_json(plan["frozen"]).plan.unit != core.U_P:
             raise pool.StageRefused(f"refused: the frozen plan's unit is not U_P = {core.U_P}")
     if Path(plan["run_dir"]).resolve() != run_dir.resolve():
@@ -1623,6 +1682,9 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--s0-record", default=None, help="freeze: S0's recorded outcome (JSON: outcome, candidate, overload_qualified: S0's own field); S0's status line and lane L's status are derived from it")
     p.add_argument("--generation-seconds", type=float, default=None, help="set-generation-cap: the cap in seconds (default: twice the rehearsal draw's measured time)")
     p.add_argument("--generation-table-facts", type=int, default=None, help="set-generation-cap: the registered table size (32768)")
+    p.add_argument("--s0-training-manifest", default=None, help="freeze: the manifest of P10-S0's last due registered training stage (the probe's, or the WX training manifest with --s0-refusal-record)")
+    p.add_argument("--s0-refusal-record", default=None, help="freeze: S0's record of the probe's refusal (with the WX training manifest)")
+    p.add_argument("--direction-record", default=None, help="freeze: the human lead's recorded direction for --no-loaded-transitions")
     p.add_argument("--no-loaded-transitions", default="", help="freeze: transitions the human lead directed to run with no loaded row (comma-separated)")
     p.add_argument("--lane-l", action="store_true", help="freeze: enable lane L (refused: not implemented)")
     return p

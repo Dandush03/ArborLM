@@ -180,6 +180,7 @@ class Frozen:
     mc: dict[str, C.McEntry] = field(default_factory=dict)
     dense_rates: dict[str, float] = field(default_factory=dict)  # D-OQ unit (core.dense_unit_of) -> calibrated learning rate
     h8_undertrained: list[str] = field(default_factory=list)
+    h8_calibrated: list[str] = field(default_factory=lambda: [core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS])  # the cells whose H8 calibration has all four views (audit m7)
     s0_status: str = S0_NOT_DECIDED
     lane_status: str = LANE_OMITTED_NO_INTERFACE
     no_loaded_transitions: list[str] = field(default_factory=list)
@@ -195,14 +196,14 @@ class Frozen:
     def as_json(self) -> dict[str, Any]:
         return {
             "plan": self.plan.as_json(), "cost": self.cost, "mc": mc_to_json(self.mc), "dense_rates": {str(k): v for k, v in sorted(self.dense_rates.items())},
-            "h8_undertrained": list(self.h8_undertrained), "s0_status": self.s0_status, "lane_status": self.lane_status, "no_loaded_transitions": list(self.no_loaded_transitions), "cuts": list(self.cuts),
+            "h8_undertrained": list(self.h8_undertrained), "h8_calibrated": list(self.h8_calibrated), "s0_status": self.s0_status, "lane_status": self.lane_status, "no_loaded_transitions": list(self.no_loaded_transitions), "cuts": list(self.cuts),
         }  # fmt: skip
 
     @classmethod
     def from_json(cls, data: dict[str, Any]) -> "Frozen":
         return cls(
             plan=core.Plan.from_json(data["plan"]), cost=data["cost"], mc=mc_from_json(data["mc"]), dense_rates={str(k): float(v) for k, v in data["dense_rates"].items()},
-            h8_undertrained=list(data["h8_undertrained"]), s0_status=data["s0_status"], lane_status=data["lane_status"], no_loaded_transitions=list(data["no_loaded_transitions"]), cuts=list(data.get("cuts", [])),
+            h8_undertrained=list(data["h8_undertrained"]), h8_calibrated=list(data.get("h8_calibrated", [core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS])), s0_status=data["s0_status"], lane_status=data["lane_status"], no_loaded_transitions=list(data["no_loaded_transitions"]), cuts=list(data.get("cuts", [])),
         )  # fmt: skip
 
     @classmethod

@@ -28,6 +28,10 @@ CANNOT = (
     "That a hierarchy helps locality, or that sublinear counted work is a finding about the tree.",
     "That 'more slots' differs from 'more store parameters': this read path cannot separate them.",
     "Generalization across facts. That a dense architecture other than D-OQ would not do as well.",
+    "Capacity from 16,384 to 65,536 slots (16,384→65,536 NOT TESTED); bits per slot at 16,384 slots (not funded) and the 256-slot figure b(256), which is F-OQ's alone.",
+    "That what a slot holds when full is a property of 'slots in general': it is one measurement at eight facts per slot, and a SATURATION-SUBPROPORTIONAL reading may come from crowding of the fixed width-16 oracle codes as the fact set grows, never from the store alone.",
+    "That the dense control at saturation is more than one dense family with a rate chosen early in the run (at 65,536 updates at the loaded cells).",
+    "That a capacity step is more than a necessary condition: under oracle addressing a positive step is close to foregone once the smaller cell is full.",
     "TRANSFER-POSITIVE, SYSTEM-POSITIVE, a failure of the ArborLM concept, Astra validation, or a human approval that is not recorded. No S1 outcome is ever summarised as 'ArborLM's capacity scales'.",
 )
 
@@ -116,7 +120,7 @@ def render_markdown(analysis: dict[str, Any], banner: str | None = None) -> str:
         lines += [f"- missing: {c} ({a['reasons'].get(c, '')})" for c in a["missing_cells"][:50]] + [f"- failed: {c} ({a['reasons'].get(c, '')})" for c in a["failed_cells"][:50]] + [""]
     lines += ["## Outcomes", "", f"- **Capacity line:** {out['capacity']['printed']}", f"- **Saturation line:** {out['saturation']['printed']}", f"- **Efficiency line:** {out['efficiency']['printed']}"]
     if out["capacity"].get("reading"):
-        lines += [f"- **Reading for milestone question 1 (capacity line only):** {out['capacity']['reading']}"]
+        lines += [f"- **Reading for milestone question 1 (capacity line with the saturation line and the dense labels, never the efficiency line):** {out['capacity']['reading']}"]
     lines += ["- The three lines are separate; none implies another. The reading for milestone question 1 uses the capacity line, the saturation line and the dense labels, never the efficiency line.", ""]
     cap, eff = analysis.get("capacity"), analysis.get("efficiency")
     if cap is not None and eff is not None:
@@ -135,7 +139,7 @@ def render_markdown(analysis: dict[str, Any], banner: str | None = None) -> str:
                     det = rep["detail"]
                     if "rho" in det:
                         lines.append(f"  - {arm} {k} replicate {rep['replicate']}: {rep['verdict']}, rho A/B = {_fmt(det['rho']['A'], 2)} / {_fmt(det['rho']['B'], 2)}; b(N) {_fmt(det['small']['b_bits_per_slot']['A'], 2)} -> {_fmt(det['large']['b_bits_per_slot']['A'], 2)} bits per slot (panel A); last doubling gains {_fmt(det['small']['last_doubling_gain']['A'], 3)} / {_fmt(det['large']['last_doubling_gain']['A'], 3)}")
-        lines += [f"- {C.NOT_FUNDED_16K}", f"- Separability at the saturation cells (printed beside every rho): {json.dumps(sat['separability'], sort_keys=True)[:1500]}", "- Dense at saturation (section 8.5): " + "; ".join(f"{a}: {show(d['label'])}" + (f" ({', '.join(d['sublabels'])})" if d["sublabels"] else "") for a, d in sat["dense_at_saturation"].items())]
+        lines += ["- SATURATION-SUBPROPORTIONAL, where printed, is never read as a property of the store alone: the oracle codes' crowding grows with the fact set (section 8.10).", f"- {C.NOT_FUNDED_16K}", "- Separability at the saturation cells (printed beside every rho): " + "; ".join(f"{k}: " + (", ".join(f"{m} {_fmt(float(x), 3)}" for m, x in v.items() if isinstance(x, int | float)) if isinstance(v, dict) else "n/a") for k, v in sorted(sat["separability"].items())), "- Dense at saturation (section 8.5): " + "; ".join(f"{a}: {show(d['label'])}" + (f" ({', '.join(d['sublabels'])})" if d["sublabels"] else "") for a, d in sat["dense_at_saturation"].items())]
         lines += [f"- H8 annotations: {json.dumps(cap['h8_annotations'], sort_keys=True)}"]
         lines += [f"- {C.MC_AMBIGUOUS} pairs (the two cost measures disagreed on the costlier cell; the pair counts as established and was read in the comparator's favour): " + (", ".join(f"{k} (small at {v['small_update']}, large at {v['large_update']}, multiplier {_fmt(v['multiplier'], 2)}, {v['status']})" for k, v in cap["mc_ambiguous_pairs"].items()) or "none")]
         lines += ["- Pairs read per arm: " + "; ".join(f"{a} {', '.join(v['pairs_read'])}" for a, v in sat["arms"].items())]

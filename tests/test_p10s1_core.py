@@ -172,7 +172,7 @@ def test_seed_set_modes() -> None:
 def test_config_matches_constants_and_the_cap_is_a_config_value(tmp_path: Path) -> None:
     text = (ROOT / core.DEFAULT_CONFIG).read_text()
     cap = tomllib.loads(text)["resources"]["cap_hours"]
-    assert text == core.render_config_toml(cap) and core.render_config_toml() == core.render_config_toml(core.CAP_HOURS_DEFAULT) and cap == 16.0
+    assert text == core.render_config_toml(cap) and core.render_config_toml() == core.render_config_toml(core.CAP_HOURS_DEFAULT) and 0 < cap <= core.load_config()["resources"]["cap_max_hours"]  # the rule, not the pre-freeze value: 16.0 until the freeze writes the computed cap, then that cap
     assert core.load_config()["resources"]["rss_aggregate_bytes"] == 18 * 1024**3 and core.load_config()["resources"]["workers"] == 6 and core.load_config()["resources"]["rss_worker_bytes"] == 3 * 1024**3
     assert core.cap_seconds() == cap * 3600.0
     other = tmp_path / "cap20.toml"
@@ -360,7 +360,7 @@ def test_the_generated_config_has_the_revision_5_registry_and_the_cap_rule() -> 
     assert cfg["training"]["dense_rates"] == [0.001, 0.003, 0.01, 0.03, 0.1] and cfg["training"]["u_p_candidates"] == [8192, 16384, 32768] and cfg["training"]["run_multiplier"] == [6, 6, 6]
     assert cfg["replicates"]["configurations_per_replicate"] == 31 and cfg["replicates"]["registered_cells"] == 155 and cfg["calibration"]["runs"] == 70
     r = cfg["resources"]
-    assert r["cap_max_hours"] == 36.0 and r["cap_hours"] == 16.0 and r["cap_headroom"] == 2.0 and r["cap_contention_min"] == 1.0 and r["cap_packing"] == "longest first on six workers"
+    assert r["cap_max_hours"] == 36.0 and 0 < r["cap_hours"] <= r["cap_max_hours"] and r["cap_headroom"] == 2.0 and r["cap_contention_min"] == 1.0 and r["cap_packing"] == "longest first on six workers"
     assert r["cap_max_source"] == "set by the lead under the Addendum's delegation on 2026-11-15, before any registered seed was observed; reported to the human lead"
     assert cfg["calibration"]["init_seed_draw_2"] == 2193 and cfg["seeds"]["calibration_init_draw_2"] == 2193
-    assert core.render_config_toml() == (ROOT / core.DEFAULT_CONFIG).read_text()
+    assert core.render_config_toml(r["cap_hours"], cfg["generation"]) == (ROOT / core.DEFAULT_CONFIG).read_text()

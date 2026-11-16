@@ -118,7 +118,7 @@ def test_item_projections_and_caps_of_the_timing_preview() -> None:
     longest = max(262144 * wall[("T-OQ", 1024)], 524288 * wall[("F-OQ", 4096)], 524288 * wall[("T-OQ", 4096)])
     assert proj["load"]["projected_wall_seconds"] >= longest  # no item is shorter than its longest run
     partial = budget.item_projection({k: v for k, v in wall.items() if k != ("T-OQ", 1024)})
-    assert partial["load"]["cap_seconds"] is None and partial["load"]["missing_rates"] == ["T-OQ|1024"] and partial["row-up"]["cap_seconds"] is not None  # nothing starts on an assumed cost
+    assert partial["load"]["cap_seconds"] is None and partial["load"]["missing_rates"] == ["T-OQ|1024"] and partial["row-up"]["cap_seconds"] is None and partial["h8"]["cap_seconds"] is not None  # nothing in the pooled stage starts on an assumed cost
     rows = {2048: 8192, 8192: 8192, 32768: 8192}
     assert budget.item_projection(wall, row_u_p=rows)["dense"]["projected_wall_seconds"] <= proj["dense"]["projected_wall_seconds"]  # items 2 and 3 are projected at the largest candidate before item 1 fixes the rows
 

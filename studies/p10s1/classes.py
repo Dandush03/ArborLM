@@ -140,7 +140,7 @@ def printable(label: str, *details: str) -> str:
 READINGS = {
     "panels": "RULED (ADR-0021 section 22 (h)): for a label that favours the store (TREE_AHEAD, TREE_COMPETITIVE and every positive condition) a replicate counts only if both panels satisfy it; for a label that blocks (DENSE AHEAD, DENSE FASTER) a replicate counts if either panel satisfies it; PANEL-DISAGREE is the verdict when the panels give different verdicts",
     "dep_reads": "RULED (section 22 (g)): DEP is read at every snapshot up to the run length, of both cells",
-    "mc_direction": "RULED (section 22 (i)): the costlier cell of a pair is read at U_P and the cheaper at the smallest snapshot of the MC grid whose cumulative cost is at least that; the two cost measures giving different costlier cells is MC-AMBIGUOUS (not established)",
+    "mc_direction": "the costlier cell of a pair is read at U_P and the cheaper at the smallest snapshot of the MC grid whose cumulative cost is at least that; where the two cost measures give different costlier cells (MC-AMBIGUOUS, revision 5, section 5.4) the cell whose advantage would be claimed is read at U_P and the other at the smallest grid snapshot with multiplier at least the larger of r and 1/r: the pair counts as established, with the annotation, or is MC-SHORT",
     "movement": "READING: the row-movement ratio printed with a verdict is the larger cell's total value-row movement over the smaller's at U_P, with the without-gradient share ratio beside it; OPTIMIZER-ASSISTED tests the share ratio; efficiency verdicts also print both at each cell's hit snapshot",
     "dense_not_established": "RULED (section 22 M5): where the dense matched-compute pair is MC-SHORT or MC-AMBIGUOUS the label is DENSE NOT ESTABLISHED AT MATCHED COMPUTE (<status>), never DENSE MATCHES; the matched-updates comparison with D-OQ is printed beside it, descriptively; as designed S1 cannot show that the store beats or matches a dense map at matched compute at 65,536 slots",
     "dense_efficiency": "RULED (section 22 (k), m3): a FASTER STEP with no D-OQ cell prints DENSE NOT READ, one whose dense-speed comparison is undecided from the bounds prints DENSE SPEED UNDECIDED; neither blocks",
@@ -395,7 +395,7 @@ def capacity_step_class(verdicts: Sequence[str]) -> str:
 
 def capacity_arm_class(step_classes: Mapping[str, str], transitions: Mapping[str, Sequence[str]], a_use_largest_all5: bool) -> str:
     """Arm class (section 8.4, first match wins). ``step_classes`` maps a step name to its step class, ``transitions`` a transition name to its step names,
-    ``a_use_largest_all5`` is a_use >= 0.80 at 32K/64K at U_P in all five replicates (both panels)."""
+    ``a_use_largest_all5`` is a_use >= 0.80 at 32K/16K at U_P in all five replicates (both panels)."""
     per = {t: [step_classes[s] for s in steps] for t, steps in transitions.items()}
     if any(all(c == NOT_EVALUATED for c in cs) for cs in per.values()):
         return NOT_EVALUATED
@@ -504,7 +504,7 @@ def active_work_label(w_small: float, w_large: float) -> str:
 
 
 def hierarchy_label(ratios: Sequence[Mapping[str, Mapping[str, float]]]) -> str:
-    """T-OQ against F-OQ-IVF on I_use at 8K/16K and 32K/64K at U_P (section 8.5): ``ratios[replicate][cell][panel]`` = I_use(T-OQ) / I_use(F-OQ-IVF). TREE_AHEAD if the ratio is
+    """T-OQ against F-OQ-IVF on I_use at 8K/4K and 32K/16K at U_P (section 8.5): ``ratios[replicate][cell][panel]`` = I_use(T-OQ) / I_use(F-OQ-IVF). TREE_AHEAD if the ratio is
     at least 1.03 in at least 4 replicates at both cells; TREE_COMPETITIVE if at least 0.97 in at least 4 at both cells; otherwise TREE_BEHIND."""
     cells = sorted({c for rep in ratios for c in rep})
 
@@ -519,7 +519,7 @@ def hierarchy_label(ratios: Sequence[Mapping[str, Mapping[str, float]]]) -> str:
 
 
 def conventional_suffices(i_arm: Sequence[Mapping[str, float]], i_knn: Sequence[Mapping[str, float]], i_knn_ivf: Sequence[Mapping[str, float]]) -> bool:
-    """CONVENTIONAL RETRIEVAL SUFFICES if KNN-W's or KNN-W-IVF's i is within 0.25 of the arm's, or above it, on both panels in at least 4 replicates at 32K/64K. Each argument is
+    """CONVENTIONAL RETRIEVAL SUFFICES if KNN-W's or KNN-W-IVF's i is within 0.25 of the arm's, or above it, on both panels in at least 4 replicates at 32K/16K. Each argument is
     per replicate: panel -> i."""
     count = 0
     for arm, k, kv in zip(i_arm, i_knn, i_knn_ivf, strict=True):
@@ -564,8 +564,8 @@ def dense_at_saturation(cells: Sequence[SatDenseCell]) -> dict[str, Any]:
     """The dense label at saturation (section 8.5; first match wins). DENSE HOLDS MORE AT SATURATION: d_sat at most -0.25 in at least 4 replicates (a replicate counts if EITHER panel satisfies it,
     section 22 (h)), at any loaded cell. STORE HOLDS MORE AT SATURATION: r_sat at least 1.10 in all 5 replicates on both panels at every loaded cell, D-OQ plateaued (section 8.2) at each in all 5,
     and D-OQ's cost per update at least the arm's in both measures. SAME AT SATURATION otherwise; where row 2 fails only because D-OQ is not plateaued the sub-label is DENSE STILL RISING (some view
-    still gains), or DENSE NOT LEARNED (every failing view is flat below the DEP floor); where it fails only on the cost condition, DENSE NOT ESTABLISHED AT MATCHED COMPUTE. Where two of the
-    three conditions fail, no sub-label is chosen between them: the labels of every failing condition that would have been the only one are not printed, and the failing conditions are listed."""
+    still gains), or DENSE NOT LEARNED (every failing view is flat below the DEP floor); where it fails only on the cost condition, DENSE NOT ESTABLISHED AT MATCHED COMPUTE. A sub-label is printed
+    only when exactly one condition fails (section 8.5); where more fail none is, and the failing conditions are listed. The sub-labels are descriptive: they refuse nothing (audit M3)."""
     if not cells:
         return {"label": SAME_AT_SATURATION, "sublabels": [], "failing": ["no loaded cell read"], "detail": {}}
     ahead = any(sum(1 for rep in c.replicates if any(le(d, core.DENSE_AHEAD_BITS) for d, _r in rep.values())) >= core.PAIRED_MOST for c in cells)
@@ -584,8 +584,6 @@ def dense_at_saturation(cells: Sequence[SatDenseCell]) -> dict[str, Any]:
         sub = [DENSE_STILL_RISING if RISING in statuses else DENSE_NOT_LEARNED]
     elif failing == ["cost"]:
         sub = [DENSE_NOT_ESTABLISHED]
-    elif ratio_ok:  # the ratio holds and both of the other conditions fail: both sub-labels apply (the conservative reading)
-        sub = [DENSE_STILL_RISING if RISING in statuses else DENSE_NOT_LEARNED, DENSE_NOT_ESTABLISHED]
     return {"label": SAME_AT_SATURATION, "sublabels": sub, "failing": failing, "detail": detail}
 
 
@@ -698,10 +696,10 @@ def saturation_outcome(
     return Outcome(6, SAT_INCONCLUSIVE, reasons, tag_positives(f"{SAT_INCONCLUSIVE}: " + "; ".join(reasons) + f" [{'; '.join(notes)}]"))
 
 
-def h8_annotations(undertrained_cells: Sequence[str]) -> dict[str, str]:
+def h8_annotations(undertrained_cells: Sequence[str], calibrated_cells: Sequence[str] | None = None) -> dict[str, str]:
     """H8's annotations by grid cell (section 8.4): UNDERTRAINED-AT-U_P at a calibrated cell whose calibration a_use was below 0.90; H8 NOT CALIBRATED AT <cell> at 2K/1K, 8K/1K and 32K/4K, where
     H8 was not calibrated; nothing at a calibrated cell that reached 0.90."""
-    calibrated = {core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS}
+    calibrated = set(calibrated_cells) if calibrated_cells is not None else {core.cell_name(f, n) for f, n in core.H8_REPORT_CELLS}
     out: dict[str, str] = {}
     for f, n in core.GRID_CELLS:
         name = core.cell_name(f, n)
@@ -788,8 +786,8 @@ def milestone_reading(outcome: Outcome, arms: Mapping[str, ArmCapacity], work: M
     if outcome.label == CAPACITY_POSITIVE:
         sublinear = [a for a in ("T-OQ", "F-OQ-IVF") if a in arms and arms[a].cls == CAPACITY_SUPPORTED and arms[a].dense not in (DENSE_AHEAD, DENSE_NOT_READ) and not _is_ahead(arms[a]) and work.get(a) == SUBLINEAR]
 
-        def established(a: str) -> bool:  # the capacity dense label and, read the conservative way, the sub-label at saturation
-            return not dense_not_established(arms[a].dense) and DENSE_NOT_ESTABLISHED not in arms[a].dense_sat_sublabels
+        def established(a: str) -> bool:  # the capacity-line dense label only (section 8.7, 22 M5); the saturation sub-labels are descriptive and refuse nothing (section 25.13 M3)
+            return not dense_not_established(arms[a].dense)
 
         sub = [a for a in sublinear if established(a)]
         if sublinear and not sub:

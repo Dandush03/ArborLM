@@ -159,7 +159,7 @@ def test_check_preconditions_refusals(tmp_path: Path) -> None:
 # --- ledger ----------------------------------------------------------------------------------------------------------------------------------
 def test_a_stage_refuses_to_start_below_its_cap_and_charges_what_it_used(tmp_path: Path) -> None:
     ledger = core.Ledger.from_config(tmp_path)
-    assert ledger.cap_seconds == core.cap_seconds() == 16 * 3600.0
+    assert ledger.cap_seconds == core.cap_seconds()
     code = stages.main(["synthetic", "--dry", "--mode", "rehearsal", "--run-dir", str(tmp_path / "r"), "--ledger-root", str(tmp_path), "--stage-cap-seconds", str(core.cap_seconds() + 3600.0)])
     assert code == 2 and not (tmp_path / "r").exists() and ledger.charged() == 0.0  # the stage cap exceeds the whole cap: refused before anything runs
     ledger.charge("earlier", "run", core.cap_seconds() - 400.0)
@@ -177,7 +177,7 @@ def make_freeze(tmp: Path) -> tuple[Path, Path, dict[str, Any]]:
     shutil.copy(ROOT / core.DEFAULT_CONFIG, repo / core.DEFAULT_CONFIG)
     (repo / core.SPEC).parent.mkdir(parents=True)
     shutil.copy(ROOT / core.SPEC, repo / core.SPEC)
-    plan = core.Plan(seed_block_draws=(1,))
+    plan = core.Plan(seed_block_draws=(1,), u_l=(65536, 131072))  # a calibrated plan: a placeholder plan is never frozen
     fro = fz.Frozen.build(plan, fz.default_cpu_table())
     files = {}
     for name, body in (("calibration", {"hyper": 1}), ("timing", {"cpu_per_update": 1}), ("rehearsal_gates", {"g": 1}), ("synthetic", {"s": 1})):
@@ -263,7 +263,7 @@ def fake_projection(tmp: Path, **over: Any) -> dict[str, Path]:
     caps = budget.caps_table({i: budget.Rate(0.01, 5.0, 2.0, 10**9, 0, 0, 0) for i in budget.rehearsal_items()}, budget.Fixed(), fz.default_cpu_table(), base=plan)
     record = {
         **core.envelope("projection"), "calibration": bound["calibration"], "timing": bound["timing"], "rehearsal_gates": bound["gates"], "synthetic": bound["synthetic"], "calibration_sha256": bound["calibration"]["sha256"],
-        "returns_to_lead": [], "memory": {"ok": True}, "cap_seconds": core.cap_seconds(), "computed_cap_hours": core.cap_seconds() / 3600.0, "cap_max_seconds": 36 * 3600.0, "c_need_seconds": 1.0, "contention": {"c": 1.0}, "chosen": {"ok": True, "plan": plan.as_json(), "applied_cuts": ["cut 1", "cut 2", "cut 3: D-OQ at 8K/16K"], "headroom": {"ok": True}},
+        "returns_to_lead": [], "memory": {"ok": True}, "cap_seconds": core.CAP_HOURS_DEFAULT * 3600.0, "computed_cap_hours": core.CAP_HOURS_DEFAULT, "cap_max_seconds": 36 * 3600.0, "c_need_seconds": 1.0, "contention": {"c": 1.0}, "chosen": {"ok": True, "plan": plan.as_json(), "applied_cuts": ["cut 1", "cut 2", "cut 3: D-OQ at 8K/16K"], "headroom": {"ok": True}},
         "caps": caps, "cpu_per_update": cpu, "dense_rates": {"4096": 0.003, "16384": 0.01, "8K/1K": 0.003, "32K/4K": 0.001}, "h8_undertrained": ["8K/16K"], **over,
     }  # fmt: skip
     p = tmp / "projection.json"
@@ -296,8 +296,22 @@ def config_repo(folder: Path) -> Path:
     return repo
 
 
+def s0_manifest(paths: dict[str, Path]) -> str:
+    """A stand-in for the manifest of S0's last due registered training stage (evidence the freeze binds by hash)."""
+    f = paths["projection"].parent / "s0_train_manifest.json"
+    f.write_text('{"stage": "train", "status": "COMPLETE"}')
+    return str(f)
+
+
+@pytest.fixture(autouse=True)
+def no_other_study_running(monkeypatch: pytest.MonkeyPatch) -> None:
+    from studies.p10s1 import timing
+
+    monkeypatch.setattr(timing, "running_commands", lambda: [])  # tests never read the real process list
+
+
 def freeze_argv(paths: dict[str, Path], run: Path, out: Path, *extra: str) -> list[str]:
-    return ["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(out), "--repo", str(config_repo(out.parent)), *extra]
+    return ["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(paths["calibration"]), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(out), "--repo", str(config_repo(out.parent)), "--s0-training-manifest", s0_manifest(paths), *extra]
 
 
 def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
@@ -307,7 +321,7 @@ def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
     for name in ("plan.json", "stage_caps.json"):
         assert (tmp_path / "f1" / name).read_bytes() == (tmp_path / "f2" / name).read_bytes()  # a pure function of its inputs
     plan = json.loads((tmp_path / "f1" / "plan.json").read_text())
-    assert plan["stage_caps_sha256"] == file_sha256(tmp_path / "f1" / "stage_caps.json") and set(plan["data_manifests"]) == set(core.DRAW_NAMES) and plan["cap_seconds"] == core.cap_seconds()
+    assert plan["stage_caps_sha256"] == file_sha256(tmp_path / "f1" / "stage_caps.json") and set(plan["data_manifests"]) == set(core.DRAW_NAMES) and plan["cap_seconds"] == core.CAP_HOURS_DEFAULT * 3600.0
     fro = fz.Frozen.from_json(plan["frozen"])
     assert fro.plan == core.Plan((1,), ("8K/16K",), row_u_p=(8192, 8192, 16384), u_l=(131072, 393216), u_l_256=98304) and fro.dense_rates == {"4096": 0.003, "16384": 0.01, "8K/1K": 0.003, "32K/4K": 0.001} and fro.h8_undertrained == ["8K/16K"] and fro.s0_status == fz.S0_NOT_DECIDED
     assert fro.lane_status == fz.LANE_OMITTED_NO_INTERFACE and fro.cuts == ["cut 1", "cut 2", "cut 3: D-OQ at 8K/16K"] and plan["frozen_sha256"] == sha256(canonical_json(plan["frozen"]))
@@ -315,9 +329,9 @@ def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
     assert stages.main(freeze_argv(paths, run, tmp_path / "f1")) == 2  # a freeze is written once
     s0 = tmp_path / "s0.json"
     s0.write_text(json.dumps({"outcome": "ADDRESSING-NOT-QUALIFIED"}))
-    again = stages.main(freeze_argv(paths, run, tmp_path / "f3", "--s0-record", str(s0), "--no-loaded-transitions", "16K→64K"))
+    again = stages.main(freeze_argv(paths, run, tmp_path / "f3", "--s0-record", str(s0), "--no-loaded-transitions", "4K→16K", "--direction-record", str(s0)))  # the human lead's recorded direction (any file: bound by hash)
     plan3 = json.loads((tmp_path / "f3" / "plan.json").read_text())
-    assert again == 0 and plan3["frozen"]["s0_status"] == "S0 ADDRESSING-NOT-QUALIFIED" and plan3["frozen"]["no_loaded_transitions"] == ["16K→64K"] and plan3["s0_record"]["sha256"] == file_sha256(s0)
+    assert again == 0 and plan3["frozen"]["s0_status"] == "S0 ADDRESSING-NOT-QUALIFIED" and plan3["frozen"]["no_loaded_transitions"] == ["4K→16K"] and plan3["s0_record"]["sha256"] == file_sha256(s0)
 
 
 def test_freeze_refusals(tmp_path: Path) -> None:
@@ -330,11 +344,11 @@ def test_freeze_refusals(tmp_path: Path) -> None:
     assert stages.main(freeze_argv(no_plan, run, tmp_path / "f_np")) == 2
     bad_mem = projection_in(tmp_path, "bm", memory={"ok": False})
     assert stages.main(freeze_argv(bad_mem, run, tmp_path / "f_bm")) == 2
-    cap_moved = projection_in(tmp_path, "cm", computed_cap_hours=core.cap_seconds() / 3600.0 + 1.0)
+    cap_moved = projection_in(tmp_path, "cm", computed_cap_hours=core.CAP_HOURS_DEFAULT + 1.0)
     assert stages.main(freeze_argv(cap_moved, run, tmp_path / "f_cm")) == 2  # the cap in the config is not the cap the projection computed
     other = tmp_path / "other_cal.json"
     other.write_text(paths["calibration"].read_text().replace("98304", "65536"))
-    assert stages.main(["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(other), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(tmp_path / "f_h")]) == 2
+    assert stages.main(["freeze", "--run-dir", str(run), "--projection", str(paths["projection"]), "--calibration", str(other), "--timing", str(paths["timing"]), "--gates", str(paths["gates"]), "--freeze-dir", str(tmp_path / "f_h"), "--s0-training-manifest", s0_manifest(paths)]) == 2
     missing = tmp_path / "run_missing"
     for name in core.DRAW_NAMES[:4]:
         core.write_record(stages.manifest_dir(missing, name) / "data_manifest.json", {**core.envelope("data_manifest"), "g1_passed": True})

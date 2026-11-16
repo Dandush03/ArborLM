@@ -67,7 +67,7 @@ def test_dense_at_saturation_labels_and_sub_labels() -> None:
     ratio = C.dense_at_saturation([sat_cell("8K/1K", 0.2, 1.05), sat_cell("32K/4K", 1.0, 1.5)])
     assert ratio["label"] == C.SAME_AT_SATURATION and ratio["sublabels"] == [] and ratio["failing"] == ["ratio"]  # r_sat below 1.10 at one cell: no sub-label
     both = C.dense_at_saturation(cells(status=C.RISING, cost_ok=False))
-    assert both["sublabels"] == [C.DENSE_STILL_RISING, C.DENSE_NOT_ESTABLISHED]  # two failing conditions with the ratio met: both are printed (the conservative reading)
+    assert both["sublabels"] == [] and both["failing"] == ["dense plateau", "cost"]  # a sub-label only when exactly one condition fails (section 8.5)
     assert C.dense_at_saturation([sat_cell("8K/1K", 1.0, None), sat_cell("32K/4K", 1.0, 1.5)])["label"] == C.STORE_HOLDS_MORE  # D-OQ's i* zero gives r with a zero denominator
     assert C.is_positive(C.STORE_HOLDS_MORE) and not C.is_positive(C.DENSE_HOLDS_MORE) and not C.is_positive(C.SAME_AT_SATURATION)
     with pytest.raises(C.UntaggedPositiveLabel):

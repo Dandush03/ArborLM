@@ -30,6 +30,28 @@ TOQ_PREDICTED_NOT_LOADED = "T-OQ PREDICTED NOT LOADED AT"
 NOT_MEASURED_256 = "256 NOT MEASURED — NOT FULL WITHIN CEILING"
 
 
+class NotComplete(RuntimeError):
+    """A finalize command was asked while its stage is not complete (audit M1): the once-only record is never written from runs that may still be in progress."""
+
+
+def require_stage_complete(run_dir: Path, stage: str, cells: Sequence[core.Cell]) -> dict[str, Any]:
+    """The stage's manifest exists (the pool has finished) and every cell of its items has a ``train.json`` (completed, failed, or stopped at its item cap), or a manifest task of its label that did not
+    complete (not started, killed, skipped). Returns the cells without a record, which the finalize record lists; raises ``NotComplete`` otherwise."""
+    path = run_dir / stage / "manifest.json"
+    if not path.is_file():
+        raise NotComplete(f"no {stage}/manifest.json in {run_dir}: the stage has not finished; nothing is finalized while runs may be in progress")
+    tasks = {t["label"]: t["status"] for t in core.read_record(path, "stage_manifest")["tasks"]}
+    no_record: list[str] = []
+    for c in cells:
+        if (core.cell_dir(run_dir, c.label) / "train.json").is_file():
+            continue
+        status = tasks.get(c.label)
+        if status is None or status == "completed":
+            raise NotComplete(f"{c.label} has no train record and the {stage} manifest does not list it as a task that did not run: the stage is not complete")
+        no_record.append(f"{c.label}: {status}")
+    return {"stage": stage, "cells": len(cells), "no_record": no_record}
+
+
 class TieNeedsLead(RuntimeError):
     """Section 10.1 item 3: the dense rates' readouts differ by less than 0.02 and the doubling-snapshot a_use the tie walk needs are missing; the lead decides."""
 
@@ -114,11 +136,15 @@ def h8_report(acc: Mapping[tuple[str, int, str], float]) -> dict[str, Any]:
     """Item 2: H8 below 0.90 at a cell at its row's U_P -> its classes there carry UNDERTRAINED-AT-U_P (key: cell, draw, panel -> a_use). H8 gates nothing. At 2K/1K, 8K/1K and 32K/4K, where H8
     was not calibrated, its classes carry H8 NOT CALIBRATED AT <cell> (``classes.h8_annotations``)."""
     low: dict[str, float] = {}
+    count: dict[str, int] = {}
+    for (cell, _draw, _panel), _a in acc.items():
+        count[cell] = count.get(cell, 0) + 1
+    calibrated = sorted(c for c, n in count.items() if n == len(core.CALIBRATION_DRAWS) * len(core.PANELS))  # a cell with a failed or missing run is not calibrated (audit m7)
     for (cell, _draw, _panel), a in acc.items():
         if a < UNDERTRAINED_BELOW - C.EPS:
             low[cell] = min(low.get(cell, 1.0), a)
     undertrained = sorted(low)
-    return {"undertrained_cells": undertrained, "min_a_use_of_undertrained": low, "annotations": C.h8_annotations(undertrained)}
+    return {"undertrained_cells": undertrained, "min_a_use_of_undertrained": low, "annotations": C.h8_annotations(undertrained, calibrated), "calibrated_cells": calibrated}
 
 
 # --- D-OQ's learning rate (item 3) ------------------------------------------------------------------------------------------------------------------
@@ -132,7 +158,7 @@ def select_dense_rate(readout_a_use: Mapping[float, float], a_use: Mapping[float
     ``a_use[rate][update]`` the same at the walk's snapshots; ``diverged`` the rates left out (run failed, or raw Panel A count inside the chance interval on either draw).
 
     * every rate diverged -> RETURN_TO_LEAD;
-    * the highest readout among the rest is the top rate (0.1) by more than 0.02 over the next one (or alone) -> RETURN_TO_LEAD (the best rate is at the edge of the grid; no further rate is tried);
+    * the highest readout among the rest is the top rate (0.1) by 0.02 or more over the next one (or alone) -> RETURN_TO_LEAD (the boundary is on the returning side, ruling m2) (the best rate is at the edge of the grid; no further rate is tried);
     * else the rates within 0.02 of the best are separated by the walk of section 22 M7 and 22.1 (a_use at readout/2, /4, down to /16; at each snapshot keep those within 0.02 of the best there;
       if one remains it wins); if several remain at readout/16 the smallest rate is taken;
     * a 0.1 chosen only by the walk (it was one of several contenders) is recorded EDGE BY TIE-WALK."""
@@ -144,8 +170,8 @@ def select_dense_rate(readout_a_use: Mapping[float, float], a_use: Mapping[float
     ordered = sorted(live.items(), key=lambda kv: (-kv[1], kv[0]))
     best_rate, best = ordered[0]
     second = ordered[1][1] if len(ordered) > 1 else None
-    if best_rate == top_rate and (second is None or best - second > core.DENSE_TIE_DIFFERENCE + C.EPS):
-        reason = f"the top rate {top_rate} has the highest readout ({best:.3f}) " + ("and no other rate is left" if second is None else f"by more than {core.DENSE_TIE_DIFFERENCE} over the next ({second:.3f})")
+    if best_rate == top_rate and (second is None or best - second >= core.DENSE_TIE_DIFFERENCE - C.EPS):
+        reason = f"the top rate {top_rate} has the highest readout ({best:.3f}) " + ("and no other rate is left" if second is None else f"by {core.DENSE_TIE_DIFFERENCE} or more over the next ({second:.3f})")
         return {"rate": None, "action": RETURN_TO_LEAD, "reason": reason, "edge": "TOP OF GRID", **base}
     contenders = sorted(r for r, a in ordered if best - a < core.DENSE_TIE_DIFFERENCE - C.EPS or r == best_rate)
     base["contenders"] = list(contenders)
@@ -316,10 +342,15 @@ def finalize_h8_dense(run_dir: Path, row_map: Mapping[int, int], *, unit: int = 
         traj: dict[float, dict[int, float]] = {}
         diverged: set[float] = set()
         notes: dict[str, str] = {}
+        no_record: list[str] = []
         for lr in core.DENSE_RATES:
             cells = [c for c in core.dense_rate_cells(row_map, unit) if c.lr == lr and core.dense_unit_of(c.facts, c.slots) == name]
             for c in cells:
                 obs, why = _read_or_none(run_dir, c)
+                if obs is None and read_train(run_dir, c) is None:  # a run without a record is not a diverged rate (section 25.12 item 3): the unit returns
+                    no_record.append(c.label)
+                    notes[f"{lr:g}:d{c.draw}"] = why
+                    continue
                 if obs is None:
                     diverged.add(lr)
                     notes[f"{lr:g}:d{c.draw}"] = why
@@ -334,7 +365,10 @@ def finalize_h8_dense(run_dir: Path, row_map: Mapping[int, int], *, unit: int = 
         for lr in core.DENSE_RATES:
             readout_a.setdefault(lr, 0.0)
         try:
-            entry = select_dense_rate(readout_a, traj, readout, sorted(diverged))
+            if no_record:
+                entry = {"rate": None, "action": RETURN_TO_LEAD, "reason": f"runs without a record (not started or killed): {no_record}", "edge": None, "diverged": sorted(diverged)}
+            else:
+                entry = select_dense_rate(readout_a, traj, readout, sorted(diverged))
         except TieNeedsLead as exc:
             entry = {"rate": None, "action": RETURN_TO_LEAD, "reason": str(exc), "edge": None, "diverged": sorted(diverged)}
         entry["diverged_notes"] = notes

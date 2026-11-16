@@ -340,7 +340,7 @@ def test_milestone_reading() -> None:
     sub_not = full((C.CAPACITY_SUPPORTED,) * 3)
     for a in sub_not.values():
         a.dense_sat_sublabels = [C.DENSE_NOT_ESTABLISHED]  # the matched-compute reading at saturation is not established either: the conservative reading refuses
-    assert C.milestone_reading(out, sub_not, work, C.TREE_AHEAD, "S0 X").startswith("Storage-half reading not available")
+    assert C.milestone_reading(out, sub_not, work, C.TREE_AHEAD, "S0 X").startswith("Storage half supported")  # the saturation sub-labels are descriptive and refuse nothing (section 25.13 M3)
     only = C.milestone_reading(out, arms, {"F-OQ": C.LINEAR_KEY_SCORING, "T-OQ": C.LINEAR_KEY_SCORING, "F-OQ-IVF": C.LINEAR_KEY_SCORING}, C.TREE_BEHIND, "S0 NOT YET DECIDED")
     assert only.startswith("Capacity shown; sublinear active work not shown") and core.STORE_ONLY_TAG in only
     neg = C.capacity_outcome(arms_of((C.CAPACITY_NOT_SUPPORTED,) * 3), engineering_failed=False, incomplete=False)

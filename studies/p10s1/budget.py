@@ -294,26 +294,57 @@ def exceeds_remaining(cap_seconds: float, remaining_seconds: float) -> bool:
     return remaining_seconds < cap_seconds
 
 
-# --- the calibration's items: projections and caps (section 10.1 item 0a) -----------------------------------------------------------------------
-def item_runs(unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None) -> dict[str, list[tuple[str, int, int]]]:
-    """The training jobs of each calibration item as (arm, slots, updates), at the cells of ``core.calibration_cells``. Before item 1 has fixed the rows, items h8 and dense are projected at the
-    largest candidate U_P of every row (the conservative reading: a longer run, a larger cap)."""
+# --- the calibration's items: projections and caps (section 10.1 item 0a; audit B1) ----------------------------------------------------------
+ITEM_GROUPS = (("row-up", "load"), ("h8", "dense"))  # the items of one pooled stage, in the order the pool is given their tasks: the short row-U_P runs first, so that no run waits for the long load-search runs
+
+
+def dispatch_order(items: Sequence[str], unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None) -> list[tuple[str, core.Cell]]:
+    """The calibration cells of ``items`` in the exact order their tasks are handed to the pool (which starts pending tasks in list order, each on the first free worker): the items in the order of
+    ``ITEM_GROUPS``, within an item the longest run first (then the label)."""
     rows = row_u_p or {f: max(core.row_u_p_candidates(unit)) for f in core.ROW_FACTS}
-    groups = {
-        "load": core.load_search_cells(unit), "row-up": core.row_u_p_cells(unit), "h8": core.h8_report_cells(rows, unit), "dense": core.dense_rate_cells(rows, unit),
-    }
-    return {item: [(c.arm, c.slots, c.run_updates) for c in cells] for item, cells in groups.items()}
+    order = [i for g in ITEM_GROUPS for i in g if i in items]
+    out: list[tuple[str, core.Cell]] = []
+    for item in order:
+        cells = core.calibration_cells_of([item], rows, unit)
+        out += [(item, c) for c in sorted(cells, key=lambda c: (-c.run_updates, c.label))]
+    return out
+
+
+def simulate_dispatch(durations: Sequence[float], workers: int = core.WORKERS) -> list[tuple[float, float]]:
+    """(start, end) seconds from the stage start of each task, the tasks taken in list order and each started on the first free worker (the pool's dispatch)."""
+    free = [0.0] * max(1, workers)
+    out: list[tuple[float, float]] = []
+    for d in durations:
+        k = free.index(min(free))
+        out.append((free[k], free[k] + d))
+        free[k] += d
+    return out
+
+
+def item_runs(unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None) -> dict[str, list[tuple[str, int, int]]]:
+    """The training jobs of each calibration item as (arm, slots, updates). Before item 1 has fixed the rows, items h8 and dense are projected at the largest candidate U_P of every row (the conservative
+    reading: a longer run, a larger cap)."""
+    out: dict[str, list[tuple[str, int, int]]] = {}
+    for item, c in dispatch_order([i for g in ITEM_GROUPS for i in g], unit, row_u_p):
+        out.setdefault(item, []).append((c.arm, c.slots, c.run_updates))
+    return out
 
 
 def item_projection(wall_per_update: Mapping[tuple[str, int], float], unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None, workers: int = core.WORKERS) -> dict[str, Any]:
-    """Item 0a: the projected wall time of every calibration item at six workers (training only, longest first, from the preview's isolated wall seconds per update) and each item's cap, twice that
-    (``core.HEADROOM``). A configuration the preview did not time is listed and the item has no projection (it is not started on an assumed cost)."""
+    """Item 0a: for every calibration item, the projected completion time of its last run from the stage start (training only, from the preview's isolated wall seconds per update) **under the exact
+    pooled dispatch order** (``dispatch_order`` and ``simulate_dispatch``, one pooled stage per ``ITEM_GROUPS`` entry), and the item's cap, twice that (``core.HEADROOM``). The cap is a deadline counted
+    from the stage start. A configuration the preview did not time is listed and the item has no projection (it is not started on an assumed cost). Start-up and evaluation are not in the cap (the
+    preview measures neither); that allowance is the lead's."""
     out: dict[str, Any] = {}
-    for item, runs in item_runs(unit, row_u_p).items():
-        missing = sorted({f"{a}|{n}" for a, n, _u in runs if (a, n) not in wall_per_update})
-        if missing:
-            out[item] = {"runs": len(runs), "projected_wall_seconds": None, "cap_seconds": None, "missing_rates": missing}
+    for group in ITEM_GROUPS:
+        ordered = dispatch_order(group, unit, row_u_p)
+        missing = {item: sorted({f"{c.arm}|{c.slots}" for i, c in ordered if i == item and (c.arm, c.slots) not in wall_per_update}) for item in group}
+        if any(missing.values()):
+            for item in group:
+                out[item] = {"runs": sum(1 for i, _c in ordered if i == item), "projected_wall_seconds": None, "cap_seconds": None, "missing_rates": sorted(set().union(*missing.values()))}
             continue
-        wall = makespan([u * wall_per_update[(a, n)] for a, n, u in runs], workers)
-        out[item] = {"runs": len(runs), "projected_wall_seconds": wall, "cap_seconds": core.HEADROOM * wall, "missing_rates": []}
+        times = simulate_dispatch([c.run_updates * wall_per_update[(c.arm, c.slots)] for _i, c in ordered], workers)
+        for item in group:
+            ends = [end for (i, _c), (_s, end) in zip(ordered, times, strict=True) if i == item]
+            out[item] = {"runs": len(ends), "projected_wall_seconds": max(ends), "cap_seconds": core.HEADROOM * max(ends), "missing_rates": []}
     return out
