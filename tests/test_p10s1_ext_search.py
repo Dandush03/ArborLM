@@ -338,3 +338,70 @@ def test_dry_runs_the_extension_and_the_later_steps_read_its_record(dry: dict[st
     final = core.read_record(cal / "calibration.json", "calibration")
     assert final["load_search"].startswith("extended")
     assert len(list((cal / "cells").glob("CAL_*_y*"))) >= 8
+
+
+# --- audit fixes: a refused launch leaves nothing behind; the calibration record carries the first record; ordering; messages -----------------------------
+def real_size_launch(tmp_path: Path, run: Path, *extra: str) -> list[str]:
+    preview = tmp_path / "timing_preview.json"
+    if not preview.exists():
+        wall = {f"{a}|{n}": 0.001 for a, ns in core.arm_slot_counts().items() for n in ns}
+        ev = {f"{c.arm}|{c.facts}|{c.slots}": 1.0 for c in core.calibration_cells()}
+        core.write_record(preview, {**core.envelope("timing"), "preview": True, "status": "MEASURED", "wall_per_update": wall, "startup_seconds": 1.0, "evaluation_seconds": ev})
+    return ["calibrate", "--items", "load-ext", "--timing", str(preview), "--run-dir", str(run), "--experiments-root", str(tmp_path), "--ledger-root", str(tmp_path), *extra]
+
+
+def test_a_refused_launch_leaves_nothing_behind_and_a_started_one_blocks_a_second(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    run = tmp_path / "cal"
+    run.mkdir()
+    core.write_record(run / stages.ITEMS_FILE, {**core.envelope("calibration"), "returns_to_lead": []})
+    manifest = tmp_path / "s0.json"
+    # (a) no --s0-training-manifest: refused by the evidence check, which runs after the cap is computed
+    assert stages.main(real_size_launch(tmp_path, run)) == 2
+    assert not (run / stages.EXT_CAP_FILE).exists() and not (run / "cells").exists()
+    # (b) refused by the concurrency guard
+    def busy(*_a: object, **_k: object) -> dict[str, Any]:
+        raise stages.timing.OtherStudyRunning("a process of studies.p10s0 is alive")
+
+    monkeypatch.setattr(stages.timing, "concurrency_check", busy)
+    manifest.write_text("{}")
+    assert stages.main(real_size_launch(tmp_path, run, "--s0-training-manifest", str(manifest))) == 2
+    assert not (run / stages.EXT_CAP_FILE).exists() and not (run / "calibrate-load-ext").exists()
+    # (c) a later launch is accepted: it gets as far as the pool, which is stubbed to stop; the cap file is written then, and a second launch is refused
+    monkeypatch.setattr(stages.timing, "concurrency_check", lambda *a, **k: {"checked": True})
+    monkeypatch.setattr(stages.timing, "validate_s0_evidence", lambda *a, **k: {"s0": "ok"})
+
+    def stop(*_a: object, **_k: object) -> None:
+        raise RuntimeError("pool reached")
+
+    monkeypatch.setattr(stages.pool, "run_stage", stop)
+    with pytest.raises(RuntimeError, match="pool reached"):
+        stages.main(real_size_launch(tmp_path, run, "--s0-training-manifest", str(manifest)))
+    assert (run / stages.EXT_CAP_FILE).is_file()
+    assert stages.main(real_size_launch(tmp_path, run, "--s0-training-manifest", str(manifest))) == 2  # the extension is made once
+
+
+def test_the_extension_refuses_without_the_first_items_record_and_names_the_file_read(tmp_path: Path) -> None:
+    run = tmp_path / "cal"
+    run.mkdir()
+    assert stages.main(real_size_launch(tmp_path, run)) == 2 and not (run / stages.EXT_CAP_FILE).exists()
+
+
+def test_finalize_waits_for_the_extended_items_record_and_copies_the_first_search_blocks(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    unit = stages.DRY_UNIT
+    run, first_path = first_search_record(tmp_path, unit)
+    common = ["--dry", "--run-dir", str(run), "--experiments-root", str(tmp_path), "--ledger-root", str(tmp_path)]
+    flat = curve({0: 0.0, 2: 0.5, 4: 1.0, 8: 1.5, 16: 1.9, 4096: 2.0})
+    for c in core.load_extension_cells(unit):
+        write_cell(run, c, flat)
+    assert stages.main(["calibrate", "--finalize", *common]) == 2 and not (run / "calibration.json").exists()  # extension runs exist, extended record does not
+    assert stages.EXT_ITEMS_FILE in capsys.readouterr().err
+    core.write_record(run / "calibrate-load-ext" / "manifest.json", {**core.envelope("stage_manifest"), "tasks": [{"label": c.label, "status": "completed"} for c in core.load_extension_cells(unit)]})
+    stages.main(["calibrate", "--finalize-items", "load-ext,row-up", *common])
+    ext = core.read_record(run / stages.EXT_ITEMS_FILE, "calibration")
+    rows = dict.fromkeys(core.ROW_FACTS, unit)
+    for c in core.h8_report_cells(rows, unit):
+        write_cell(run, c, lambda cell, u: 0.95)
+    for c in core.dense_rate_cells(rows, unit):
+        write_cell(run, c, lambda cell, u: 0.2 + cell.lr)
+    rec = calibrate.finalize(run, unit=unit, charged_seconds=1.0, extended=True, extended_items=ext)
+    assert rec["row_u_p"] == ext["row_u_p"] and rec["saturation_256"] == ext["saturation_256"] and rec["first_items_record_sha256"] == file_sha256(first_path)

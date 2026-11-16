@@ -508,7 +508,7 @@ def seconds_per_update(run_dir: Path, cells: Sequence[core.Cell]) -> dict[str, A
     return {"training_wall_seconds_per_update": dict(sorted(per.items())), "training_wall_seconds_total": total}
 
 
-def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | None = None, extended: bool = False) -> dict[str, Any]:
+def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | None = None, extended: bool = False, extended_items: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The calibration record (kind ``calibration``): U_L per loaded cell and for 2K/256, U_P per row, H8's annotations, D-OQ's rate per unit, the list of returns, the measured six-worker training seconds
     per update of every calibration configuration and the charged seconds. Recomputed from the raw records; refuses (``TieNeedsLead``) while items 2 and 3 cannot be read because a row has no U_P."""
     dry = unit != core.U_P
@@ -520,6 +520,8 @@ def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | No
                 if entry["u_l"] is None:
                     entry.update(u_l=core.load_candidates(name, unit)[0], action=GRID_STANDS)
             load_returns = []
+        if extended_items is not None:  # section 25.15 point 5: row-up and 2K/256 stand as recorded: copied from the extended items record, not re-derived
+            first = {**first, "row_u_p": extended_items["row_u_p"], "saturation_256": extended_items["saturation_256"], "returns_to_lead": [r for r in extended_items["returns_to_lead"] if r.split(":")[0] not in ("8K/1K", "32K/4K")]}
         first = {**first, "load": load, "returns_to_lead": [*load_returns, *[r for r in first["returns_to_lead"] if r.split(":")[0] not in ("8K/1K", "32K/4K")]]}
     returns = list(first["returns_to_lead"])
     second: dict[str, Any] = {"h8": None, "dense_rates": None, "returns_to_lead": []}
@@ -535,6 +537,7 @@ def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | No
         **core.envelope("calibration"), "load": first["load"], "u_l": u_l, "saturation_256": first["saturation_256"], "u_l_256": first["saturation_256"]["u_l"], "row_u_p": first["row_u_p"],
         "toq_predicted_not_loaded": sorted(n for n, v in first["load"].items() if v["toq_predicted_not_loaded"]), "h8": second["h8"], "dense_rates": second["dense_rates"],
         "h8_undertrained_cells": [] if second["h8"] is None else second["h8"]["undertrained_cells"], "returns_to_lead": returns, "readings": C.READINGS, "load_search": "extended once (ADR-0021 section 25.15)" if extended else "first search",
+        "first_items_record_sha256": (extended_items or {}).get("carried_over", {}).get("sha256"),
         "calibration_accuracy_note": "calibration accuracies are reported as calibration, never as results", **cost,
         "charged_seconds": cost["training_wall_seconds_total"] if charged_seconds is None else charged_seconds, "dry": dry, "dry_substituted": first.get("dry_substituted", []),
         "identity": core.code_identity(), "source_hashes": core.source_hashes(), "environment": core.environment(),

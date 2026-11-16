@@ -355,7 +355,7 @@ def make_task(stage: str, label: str, argv: Sequence[str], run_dir: Path, identi
     )  # fmt: skip
 
 
-def run_stage_tasks(stage: str, args: argparse.Namespace, tasks: Sequence[pool.Task], run_dir: Path, *, cap: float, completed_ids: Sequence[str] = (), workers: int | None = None, skip_preconditions: bool = False) -> dict[str, Any]:
+def run_stage_tasks(stage: str, args: argparse.Namespace, tasks: Sequence[pool.Task], run_dir: Path, *, cap: float, completed_ids: Sequence[str] = (), workers: int | None = None, skip_preconditions: bool = False, on_start: Callable[[], None] | None = None) -> dict[str, Any]:
     """Ledger check, preconditions, the pool, the ledger charge, and the stage manifest (written once, with the environment)."""
     target = run_dir / stage / "manifest.json"
     if target.exists():
@@ -369,6 +369,8 @@ def run_stage_tasks(stage: str, args: argparse.Namespace, tasks: Sequence[pool.T
     if args.mode == REGISTERED and not 1 <= count <= core.WORKERS:
         raise pool.StageRefused(f"refused: {count} workers; P10S1 uses at most {core.WORKERS}")
     identity = core.code_identity()
+    if on_start is not None:  # every check above has passed and the pool is about to start: only now are once-only records written
+        on_start()
     started = _utc()
     result = pool.run_stage(
         tasks, workers={"train": count, "evaluate": count, "analyze": 1}, stage_cap_seconds=cap, rss_worker_bytes=args.rss_worker_bytes, rss_aggregate_bytes=args.rss_aggregate_bytes,
@@ -1011,7 +1013,7 @@ def close_stage(args: argparse.Namespace, run_dir: Path, unit: int) -> int:
     if stage.endswith("h8-dense"):
         items_path = items_file_of(run_dir)
         if not items_path.is_file():
-            raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}")
+            raise pool.StageRefused(f"refused: no {items_path.name} in {run_dir}")
         row_map = calibrate.row_u_p_map(core.read_record(items_path, "calibration"))
     cells = core.calibration_cells_of(STAGE_ITEMS[stage], row_map, unit)
     tasks, begun, ended = [], [], []
@@ -1094,8 +1096,10 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
             raise pool.StageRefused(f"refused: {path} exists")
         items_path = items_file_of(run_dir)
         if not items_path.is_file():
-            raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}: finalize items load,row-up first")
+            raise pool.StageRefused(f"refused: no {items_path.name} in {run_dir}: finalize items load,row-up first")
         extended = items_path.name == EXT_ITEMS_FILE
+        if not extended and ((run_dir / "calibrate-load-ext").exists() or any(core.cell_dir(run_dir, c.label).exists() for c in core.load_extension_cells(unit))):
+            raise pool.StageRefused(f"refused: the extension's runs exist but {EXT_ITEMS_FILE} does not: run `calibrate --finalize-items load-ext,row-up` first (the calibration record is written once)")
         items_rec = core.read_record(items_path, "calibration")
         complete = [items_rec.get("stage_complete")]
         if not items_rec["returns_to_lead"]:
@@ -1103,7 +1107,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
                 complete.append(calibrate.require_stage_complete(run_dir, "calibrate-h8-dense", core.calibration_cells_of(ITEM_GROUPS[1], calibrate.row_u_p_map(items_rec), unit)))
             except calibrate.NotComplete as exc:
                 raise pool.StageRefused(f"refused: {exc}") from exc
-        record = calibrate.finalize(run_dir, unit=unit, charged_seconds=charged_for_calibration(args, run_dir), extended=extended)
+        record = calibrate.finalize(run_dir, unit=unit, charged_seconds=charged_for_calibration(args, run_dir), extended=extended, extended_items=items_rec if extended else None)
         record["stage_complete"] = complete
         core.write_record(path, record)
         print(json.dumps({"calibration": str(path), "returns_to_lead": record["returns_to_lead"], "charged_seconds": record["charged_seconds"]}))
@@ -1113,6 +1117,8 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         raise pool.StageRefused("refused: --items is load,row-up (items 0b and 1), load-ext (the one extension of the load search, section 25.15) or h8,dense (items 2 and 3), in that order; or --finalize-items / --finalize")
     if items == ITEM_GROUPS[2] and not args.run_dir:
         raise pool.StageRefused("refused: --run-dir (the calibration directory) is required for load-ext")
+    if items == ITEM_GROUPS[2] and not (Path(args.run_dir) / ITEMS_FILE).is_file():
+        raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {args.run_dir}: the extension follows the first search's finalized record")
     if not args.timing:
         raise pool.StageRefused("refused: --timing (the timing preview record of item 0a) is required: no item is started on an assumed cost")
     if not Path(args.timing).is_file():
@@ -1124,7 +1130,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     if "h8" in items:
         items_path = items_file_of(run_dir)
         if not items_path.is_file():
-            raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}: finalize items load,row-up first")
+            raise pool.StageRefused(f"refused: no {items_path.name} in {run_dir}: finalize items load,row-up first")
         items_rec = core.read_record(items_path, "calibration")
         if items_rec["returns_to_lead"]:
             raise pool.StageRefused(f"refused: a return to the human lead is open ({items_rec['returns_to_lead']}); items 2 and 3 do not start")
@@ -1156,11 +1162,12 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     caps = {i: proj[i]["cap_seconds"] for i in items}
     if not tiny(args) and any(v is None for v in caps.values()):
         raise pool.StageRefused(f"refused: the timing preview has no rate for {[proj[i]['missing_rates'] for i in items]}: no item is started on an assumed cost")
+    on_start: Callable[[], None] | None = None
     if items == ITEM_GROUPS[2] and only is None:  # the cap is computed here from the preview's measured rates and written to a NEW file; the preview is never edited
         cap_path = run_dir / EXT_CAP_FILE
         if cap_path.exists():
             raise pool.StageRefused(f"refused: {cap_path} exists: the extension is made once")
-        write_json(cap_path, {
+        on_start = functools.partial(write_json, cap_path, {
             **core.envelope("calibration_item_cap"), "item": "load-ext", "stage": stage, "cap_seconds": caps["load-ext"], "projection": proj["load-ext"], "workers": core.WORKERS, "headroom": core.HEADROOM, "unit": unit,
             "timing_preview": str(Path(args.timing)), "timing_preview_sha256": file_sha256(Path(args.timing)), "rule": "twice the projected completion time of the item's last run under the pooled dispatch order, start-up + training + evaluation (the rule of `budget.item_projection`)",
             "utc": _utc(), "note": "ADR-0021 section 25.15 point 3",
@@ -1180,7 +1187,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         stage = f"{stage}-relaunch"
     tasks = calibration_tasks(args, stage, items, run_dir, caps, start, row_map, unit, only)
     cap = 3600.0 if tiny(args) else float(sum(float(v) for v in caps.values() if v is not None))  # the pool's outer bound is the sum of the item caps; each item's own cap stops its runs
-    manifest = run_stage_tasks(stage, args, tasks, run_dir, cap=cap)
+    manifest = run_stage_tasks(stage, args, tasks, run_dir, cap=cap, on_start=on_start)
     return 0 if manifest["status"] == "COMPLETE" else 1
 
 
