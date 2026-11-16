@@ -159,3 +159,9 @@ After the lead had started three drafters for P10-I-S0, P10-I-S1 and P10-I-S2, t
 > ok, but we must way to analize the result of S1 before planing any of the P10-I
 
 Recorded by the lead: the three drafters were stopped before any draft was written to the repository; nothing of P10-I is committed or pushed. No part of P10-I is planned or drafted until P10-S1's registered run is recorded, independently recomputed, and analysed with the human lead. The earlier request to push the drafts for review applies when they are written after that.
+
+### The order after P10-S1 (2026-11-16 UTC)
+
+The human lead, verbatim: "right, once p10-S1 finished with the review, we also merge it, then we start planning the P10-I-S0..2 taking into consideration the complete changelog and what went wrong on each simulation".
+
+Recorded by the lead: P10-S1's pull request is merged after its registered run is recorded and independently reviewed. Planning of P10-I-S0, P10-I-S1 and P10-I-S2 starts only after that, from the complete changelog and a per-study account of what went wrong, not only from the outcomes.
