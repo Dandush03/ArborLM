@@ -1,0 +1,45 @@
+== 1. Wilson / precision / margin arithmetic from the record's counts
+A filter_fit: n=104 k=100 prec=0.9615 (rec 0.9615) wilson=[0.9053,0.9849] (rec [0.9053,0.9849]) share=0.2080
+A filter_check: n=78 k=72 prec=0.9231 (rec 0.9231) wilson=[0.8422,0.9643] (rec [0.8422,0.9643]) share=0.1560
+A own=0.7675 other=0.1203 student=0.1461 margin=0.6214 (rec 0.6214) cond1=True cond2=True check_prec>=0.90=True check_n>=150=False pool>=8000=False
+B filter_fit: n=41 k=41 prec=1.0000 (rec 1.0000) wilson=[0.9143,1.0000] (rec [0.9143,1.0000]) share=0.0820
+B filter_check: n=22 k=21 prec=0.9545 (rec 0.9545) wilson=[0.7820,0.9919] (rec [0.7820,0.9919]) share=0.0440
+B own=0.7754 other=0.1249 student=0.1329 margin=0.6425 (rec 0.6425) cond1=True cond2=True check_prec>=0.90=True check_n>=150=False pool>=8000=False
+smallest n with all correct and Wilson LB>=0.90: 35
+
+== Q split checks
+D_cal 500 unique keys 500
+D_con 300 unique keys 300
+E_A 1000 unique keys 1000
+E_B 1000 unique keys 1000
+E_C 500 unique keys 500
+E_open 500 unique keys 500
+Q_check 500 unique keys 500
+Q_fit 500 unique keys 500
+Q_fit/Q_check key overlap 0 group overlap 0
+Q items with both refs: 1000
+key==norm(en) for all Q: True
+A ref top words [('ich', 412), ('nicht', 204), ('sie', 198), ('du', 178), ('ist', 165), ('das', 144), ('er', 134), ('tom', 116)] de-hits 1465 fr-hits 0
+B ref top words [('je', 293), ('pas', 234), ('de', 219), ('la', 165), ('que', 164), ('le', 160), ('ne', 149), ('il', 138)] de-hits 24 fr-hits 1386
+
+== teacher_outputs.json panels stored: {'A': ['D_cal', 'D_con', 'E_A', 'E_B', 'E_C', 'E_open'], 'B': ['D_cal', 'D_con', 'E_A', 'E_B', 'E_C', 'E_open']}
+(descriptive, NOT the gate panel) own-language chrF on stored panels:
+  teacher A on D_cal vs A refs: n=500 mean=0.7811
+  teacher A on D_cal vs B refs: n=500 mean=0.1280
+  teacher A on D_con vs A refs: n=300 mean=0.7585
+  teacher A on D_con vs B refs: n=300 mean=0.1282
+  teacher B on D_cal vs A refs: n=500 mean=0.1238
+  teacher B on D_cal vs B refs: n=500 mean=0.7713
+  teacher B on D_con vs A refs: n=300 mean=0.1224
+  teacher B on D_con vs B refs: n=300 mean=0.7584
+
+== 3. accepted pools
+A n 7804 unique keys 7804 ratio in range 7804 min/max ratio 0.5 1.8 differs from source 7804 target==eval ref 0 key in any panel 0 key==norm(en) 7804 newline 0
+B n 2341 unique keys 2341 ratio in range 2341 min/max ratio 0.6 1.6 differs from source 2341 target==eval ref 0 key in any panel 0 key==norm(en) 2341 newline 0
+A accepted key in own gold pool (should be 0 for no-gold sources): 0
+B accepted key in own gold pool (should be 0 for no-gold sources): 0
+shared keys A&B 78 half 39 excl+half A 7765 B 2302 | record {'A': 7763, 'B': 2300} shared 79
+dropped_eval_equal {'A': 5, 'B': 1} -> passed filter before drop {'A': 7809, 'B': 2342}
+
+== bank.json stream: any record carrying a target for a Q source?
+bank records 656578 with target 324266 with target and Q source 0

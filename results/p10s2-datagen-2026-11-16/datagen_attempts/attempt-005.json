@@ -1,0 +1,12 @@
+{
+ "attempt": 5,
+ "stopped": "stopped by the scientific lead (Claude Fable 5.2) on 2026-11-16, by SIGTERM about 15 minutes into the run: the teacher's pinned generation_config.json was not applied since f3fd77d (renormalize_logits true was lost), found by the Opus audit of f3fd77d",
+ "stop_kind": "engineering",
+ "stopped_by": "the scientific lead (Claude Fable 5.2)",
+ "stopped_on": "2026-11-16",
+ "cause": "pinned generation_config.json not applied since f3fd77d (build_marian built the model from config.json only); found by audit; fixed in the commit that follows 6c22377",
+ "code_commit": "6c22377",
+ "outputs_kept": false,
+ "bundle_written": false,
+ "note": "no attempt record was written by the process (it was killed); this record is written by hand by the implementer at the lead's instruction; the 15 minutes are charged as an orphan start marker in the study ledger, closed by `stages close-orphans`"
+}
