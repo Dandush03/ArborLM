@@ -31,6 +31,7 @@ import gc
 import importlib
 import json
 import os
+import sys
 import time
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
@@ -42,7 +43,7 @@ import torch
 
 from arborlm.io import write_json
 
-from . import core, equivalence, fetch_guard
+from . import core, equivalence, fetch_guard, output
 from .data import (
     Sizes,
     check_link_resolution,
@@ -265,6 +266,60 @@ def recompute_sequence_scores(transition: torch.Tensor, generated: torch.Tensor,
     return [float(x) for x in (sums / counts).tolist()]
 
 
+PROGRESS_EVERY = 100  # a progress line (elapsed time, resident set, peak) every this many teacher batches
+
+
+def streaming_transition_scores(sequences: torch.Tensor, scores: Sequence[torch.Tensor], beam_indices: torch.Tensor, vocab_size: int) -> torch.Tensor:
+    """``compute_transition_scores(sequences, scores, beam_indices, normalize_logits=False)`` of transformers 4.57.1, one generation step at a time: the library stacks every step's (beams x vocab) score
+    tensor into one copy (a 48-step batch of 32 sources at beam 4 and a 58,101-token vocabulary: 1.4 GB beside the 1.4 GB the steps already hold) and gathers from it; here each step is gathered where it is.
+    The values are the same floats (a gather copies), so the explicit sequence score is unchanged bit for bit (tested against the library's own function)."""
+    mask = beam_indices < 0
+    max_len = int((1 - mask.long()).sum(-1).max())
+    idx = beam_indices.clone()[:, :max_len]
+    mask = mask[:, :max_len]
+    idx[mask] = 0
+    idx = sequences[:, sequences.shape[-1] - max_len :] + idx * vocab_size
+    out = torch.empty(idx.shape, dtype=scores[0].dtype, device=scores[0].device)
+    for j in range(max_len):
+        out[:, j] = scores[j].reshape(-1).gather(0, idx[:, j])
+    out[mask] = 0
+    return out
+
+
+def current_rss_mib() -> float:
+    """The resident set of this process now (``ru_maxrss`` is only the high-water mark); 0.0 where ``ps`` is unavailable."""
+    import subprocess
+
+    try:
+        return int(subprocess.run(["ps", "-o", "rss=", "-p", str(os.getpid())], capture_output=True, text=True, check=True).stdout.strip()) / 1024.0
+    except (OSError, ValueError, subprocess.CalledProcessError):
+        return 0.0
+
+
+def peak_rss_mib() -> float:
+    import resource
+
+    r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return (r if sys.platform == "darwin" else r * 1024) / 2**20
+
+
+def release_freed_memory() -> None:
+    """Give the allocator's free pages back to the operating system (macOS ``malloc_zone_pressure_relief``; a no-op elsewhere). A freed Python or torch object returns its memory to the allocator, not to the
+    system, so the resident set the guard reads stays at the high-water mark of the earlier steps; this lowers the resident set, it changes no value."""
+    if sys.platform != "darwin":
+        return
+    import ctypes
+
+    try:
+        fn = ctypes.CDLL(None).malloc_zone_pressure_relief
+        fn.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
+        fn.restype = ctypes.c_size_t
+        fn(None, 0)
+    except (OSError, AttributeError):
+        pass
+
+
+
 def compare_scores(recomputed: Sequence[float], library: Sequence[float], tolerance: float = SCORE_TOLERANCE) -> dict[str, Any]:
     diffs = [abs(a - b) for a, b in zip(recomputed, library, strict=True)]
     worst = max(diffs, default=0.0)
@@ -447,6 +502,7 @@ class MarianTeacher:  # pragma: no cover - needs transformers
             raise DatagenStop("the pinned generation_config.json's num_beams differs from the registered beam")
         self.pad_id = int(self.model.config.pad_token_id)
         self.batches = 0
+        self.progress: list[str] = []
         self.score_record: dict[str, Any] = {
             "length_penalty_used": 1.0, "num_beams": core.CFG["data"]["generation_beam"], "generation_config": self.generation_config, "generation_config_applied": self.applied_generation_config,
             "first_batch": None, "max_abs_difference_all_batches": 0.0, "batches": 0, "load": self.load_record,
@@ -455,15 +511,23 @@ class MarianTeacher:  # pragma: no cover - needs transformers
     @torch.no_grad()
     def translate(self, sources: Sequence[str]) -> list[tuple[str, float]]:
         out: list[tuple[str, float]] = []
+        started = time.monotonic()
+        n_batches = (len(sources) + 31) // 32
         for i in range(0, len(sources), 32):
             self.tick("teacher batch")
+            if (i // 32) % PROGRESS_EVERY == 0:
+                release_freed_memory()  # the freed score tensors of the batches before go back to the system, so the resident set the guard reads follows the live data
+                line = f"[progress] teacher {self.name} batch {i // 32} of {n_batches}: elapsed {time.monotonic() - started:.0f} s, resident {current_rss_mib():.0f} MiB, peak {peak_rss_mib():.0f} MiB"
+                self.progress.append(line)
+                output.emit_plain(line)  # the one module that prints
+                sys.stdout.flush()
             check_generation_config(self.model.generation_config, self.generation_config)  # at generate time, every pinned key is what the model will use
             batch = list(sources[i : i + 32])
             enc = self.tokenizer(batch, return_tensors="pt", padding=True)
             gen = self.model.generate(
                 **enc, num_beams=core.CFG["data"]["generation_beam"], max_new_tokens=core.CFG["data"]["generation_new_tokens"], length_penalty=1.0, return_dict_in_generate=True, output_scores=True,
             )  # fmt: skip
-            trans = self.model.compute_transition_scores(gen.sequences, gen.scores, gen.beam_indices, normalize_logits=False)
+            trans = streaming_transition_scores(gen.sequences, gen.scores, gen.beam_indices, int(self.model.config.get_text_config().vocab_size))
             mine = recompute_sequence_scores(trans, gen.sequences[:, -trans.shape[1] :], self.pad_id)
             cmp = compare_scores(mine, [float(x) for x in gen.sequences_scores.tolist()])
             if self.batches == 0:
@@ -475,6 +539,7 @@ class MarianTeacher:  # pragma: no cover - needs transformers
             self.score_record["max_abs_difference_all_batches"] = max(self.score_record["max_abs_difference_all_batches"], cmp["max_abs_difference"])
             texts = self.tokenizer.batch_decode(gen.sequences, skip_special_tokens=True)
             out += list(zip(texts, mine, strict=True))  # the filter uses the explicit score
+            del gen, trans, enc  # the per-step score tensors (up to 1.4 GB in a batch that runs to 48 tokens) are not held across the next batch; only the text and the score are kept
         return out
 
     def tokenizer_record(self, sentences: Sequence[str]) -> list[dict[str, Any]]:
@@ -646,6 +711,7 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
         raise RegisteredTestStop("the student equivalence test failed at a read layer (step 3 or 4 (d))")
     del ref, ids, vec, prompts, train_ids  # the reference model (540 MB), its logits inputs and the 2.4 million train ids are needed only to build the equivalence records, which are complete
     gc.collect()
+    release_freed_memory()  # and the allocator hands its free pages back: the guard reads the resident set, which a freed object does not lower
     clock.tick("equivalence")
     dec = ByteDecoder(tok.token_bytes())
     gen = core.partition_gen(mode, "random_id_sequences", "test (c) random id sequences")
