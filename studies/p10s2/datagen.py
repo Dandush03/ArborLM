@@ -115,7 +115,7 @@ def charged_stage(led: LedgerLike, stage_cap_seconds: float, *, stage: str = "da
     measure = getattr(led, "measure", None)
     with contextlib.ExitStack() as stack:
         if callable(measure):
-            stack.enter_context(measure(stage, process="data generation"))
+            stack.enter_context(measure(stage, process="data generation", cap_seconds=stage_cap_seconds))  # a killed step is charged at most its cap (F4)
         else:
             stack.callback(lambda: led.charge(stage, sc.elapsed()))
         if guard:
@@ -456,11 +456,40 @@ def check_installed_pins(versions: dict[str, str]) -> None:
         raise DatagenStop(f"refused: installed versions differ from the eight pins (found, pinned): {bad}")
 
 
-def run(downloads: Path, out: Path, *, led: LedgerLike, stage_cap_seconds: float, wikitext_dir: Path | None = None, requirements: Path | None = None, tatoeba_record: Path | None = None) -> dict[str, Any]:  # pragma: no cover - the registered data-generation step
+MODULES = ("transformers", "tokenizers", "safetensors", "huggingface_hub", "sentencepiece", "numpy", "sacremoses", "sacrebleu")  # the importable names of the eight pinned packages
+PACKAGES_DIR = Path("data/datagen-packages")
+
+
+def check_provenance(directory: Path, locate: Callable[[str], Any] | None = None) -> dict[str, str]:
+    """F6: each of the eight packages must be imported from the hash-installed directory, not from wherever ``uv run --with ...`` or another path put a copy (the versions alone cannot tell). ``locate`` is
+    ``importlib.util.find_spec`` by default and is injected in tests. Returns module -> location; a module found elsewhere or not found stops the step."""
+    import importlib.util
+
+    find = locate or importlib.util.find_spec
+    root = directory.resolve()
+    found: dict[str, str] = {}
+    for m in MODULES:
+        spec = find(m)
+        loc = None if spec is None else (spec.origin if spec.origin not in (None, "namespace") else next(iter(spec.submodule_search_locations or []), None))
+        if loc is None or not Path(loc).resolve().is_relative_to(root):
+            raise DatagenStop(f"refused: {m} is imported from {loc!r}, not from {root}: the packages come from the hash-installed directory only")
+        found[m] = str(loc)
+    return found
+
+
+def run_identity(code_commit: str | None, requirements: Path) -> dict[str, Any]:
+    """F3: what the data record says about itself: the code commit, the configuration SHA-256, the requirements file's SHA-256 and where transformers was loaded from."""
+    import importlib.util
+
+    spec = importlib.util.find_spec("transformers")
+    return {"code_commit": code_commit, "config_sha256": fetch_guard.sha256_file(core.ROOT / core.DEFAULT_CONFIG), "requirements_sha256": fetch_guard.sha256_file(requirements) if requirements.is_file() else None, "transformers_file": None if spec is None else str(spec.origin)}
+
+
+def run(downloads: Path, out: Path, *, led: LedgerLike, stage_cap_seconds: float, wikitext_dir: Path | None = None, requirements: Path | None = None, tatoeba_record: Path | None = None, code_commit: str | None = None) -> dict[str, Any]:  # pragma: no cover - the registered data-generation step
     """Orchestrate the steps with the real objects. Not executed in this implementation step. The record is written even when a stop condition fires; the bundle only when none does."""
     os.environ["HF_HUB_OFFLINE"] = "1"  # assigned, never setdefault: a pre-set "0" must not survive (re-check A, R4)
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
-    record: dict[str, Any] = {"steps": {}, "environment": package_versions()}
+    record: dict[str, Any] = {"steps": {}, "environment": package_versions(), **run_identity(code_commit, requirements or core.ROOT / REQUIREMENTS)}
     out.mkdir(parents=True, exist_ok=True)
     core.reset_seed_record()
     attempts = out / "datagen_attempts"
@@ -506,8 +535,15 @@ def datagen_rerun_gate(out: Path) -> str | None:
     d = out / "datagen_attempts"
     if d.is_dir():
         last = sorted(d.glob("attempt-*.json"))
-        if last and json.loads(last[-1].read_text()).get("stop_kind") == "registered-test" and not (d / "lead_release.json").exists():
-            return f"refused: the last attempt stopped on a registered test of the step ({last[-1].name}): it returns to the lead; a re-run needs {d / 'lead_release.json'}"
+        if last and json.loads(last[-1].read_text()).get("stop_kind") == "registered-test":
+            n = int(last[-1].stem.split("-")[1])
+            rel = d / "lead_release.json"
+            try:
+                r = json.loads(rel.read_text()) if rel.exists() else {}
+            except ValueError:
+                r = {}
+            if not (r.get("releases_attempt") == n and str(r.get("cause", "")).strip() and str(r.get("released_by", "")).strip()):  # F2: a release names the attempt it releases, its cause and who released it
+                return f"refused: the last attempt stopped on a registered test of the step ({last[-1].name}): it returns to the lead; a re-run needs {rel} with releases_attempt = {n}, a cause and released_by"
     return None
 
 
@@ -515,6 +551,7 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     mode = "registered-data"
     check_requirements_hashed(requirements)
     check_installed_pins(package_versions())
+    record["steps"]["provenance"] = check_provenance(core.ROOT / PACKAGES_DIR)
     # (1) hashes
     record["steps"]["hashes"] = verify_downloads(downloads, tatoeba_record)
     texts, wiki_prov = read_wikitext(wikitext_dir)
@@ -586,7 +623,7 @@ def main(argv: Sequence[str] | None = None) -> int:  # pragma: no cover
     from .ledger import Ledger
 
     led = Ledger()  # the one study ledger (experiments/P10S2/ledger.jsonl under the repository)
-    run(Path(a.downloads), Path(a.out), led=led, stage_cap_seconds=a.stage_cap_seconds, wikitext_dir=Path(a.wikitext_dir) if a.wikitext_dir else None)
+    run(Path(a.downloads), Path(a.out), led=led, stage_cap_seconds=a.stage_cap_seconds, wikitext_dir=Path(a.wikitext_dir) if a.wikitext_dir else None, code_commit=a.code_commit)
     return 0
 
 

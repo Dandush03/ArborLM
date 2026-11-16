@@ -223,6 +223,12 @@ def check_identities(repo: Path, data_dir: str, cal: dict[str, Any], gates_rec: 
                 raise FreezeRefused(f"refused: the {name} record ran {ident.get('update_counts', {}).get(k)} {k}, the configuration says {v} (a typed count)")
         if ident.get("device") != rates.train_device:
             raise FreezeRefused(f"refused: the {name} record ran on {ident.get('device')!r}, the rehearsal's rates on {rates.train_device!r}")
+    for key, want in (("code_commit", None), ("config_sha256", config), ("requirements_sha256", None), ("transformers_file", None)):  # F3: the data record names the code, the configuration, the requirements file and the transformers it ran with
+        if not pre_record.get(key) or (want is not None and pre_record[key] != want):
+            raise FreezeRefused(f"refused: the data-generation record lacks {key} or names another: it cannot be tied to this code and configuration")
+    req = repo / "studies" / "p10s2" / "requirements-datagen.txt"
+    if req.is_file() and pre_record["requirements_sha256"] != file_sha256(req):
+        raise FreezeRefused("refused: the data-generation record was made with another requirements file than the one being frozen")
     if pre_record.get("bundle_manifest_sha256") != manifest:
         raise FreezeRefused("refused: the data-generation record names no bundle manifest, or another one, than the bundle being frozen")
     if pre_record.get("seed_mode") != "registered-data" and not core.is_test_configuration():
@@ -231,6 +237,49 @@ def check_identities(repo: Path, data_dir: str, cal: dict[str, Any], gates_rec: 
         att = reh.get("mps_attempt") or {}
         if att.get("ok") is not False or not str(att.get("error", "")).strip():
             raise FreezeRefused("refused: CPU is frozen without the rehearsal's own recorded failed MPS attempt (a typed reason is not one)")
+
+
+# N3, the commit of pre-freeze records (the lead's ruling on the confirmation): each record's commit must be an ancestor of the freeze commit; the paths that differ between it and the freeze commit under
+# studies/p10s2, src/arborlm and the configuration are listed in the plan; the freeze refuses if one of them is executed by the record's own computation (the named constants below), otherwise it proceeds with the
+# list printed for the lead's approval.
+CONFIG_PATH = "configs/p10s2_transfer.toml"
+_TRAIN = ("core.py", "model.py", "memory.py", "train.py", "cells.py", "evaluate.py", "routing.py", "retrieval.py", "registry.py", "world.py", "worldio.py", "text.py", "tokenization.py", "combined.py", "windows.py", "ledger.py", "stages.py")
+RECORD_EXECUTES: dict[str, tuple[str, ...]] = {
+    "data": ("core.py", "data.py", "datagen.py", "prefreeze.py", "filtering.py", "fetch_guard.py", "tokenization.py", "windows.py", "text.py", "model.py", "equivalence.py", "combined.py", "install_datagen.py", "worldio.py", "world.py", "ledger.py", "stages.py", "reference_standin.py"),
+    "calibration": (*_TRAIN, "calibration.py"),
+    "prefreeze_gates": (*_TRAIN, "gates.py", "rehearsal.py", "equivalence.py"),
+    "rehearsal": (*_TRAIN, "gates.py", "rehearsal.py", "budget.py", "analysis.py", "classes.py", "report.py", "output.py", "recompute.py"),
+}
+
+
+def executed_by(kind: str, path: str) -> bool:
+    """True if the record kind's own computation executes ``path`` (a named module of the kind, the configuration, or anything under ``src/arborlm``)."""
+    if path == CONFIG_PATH or path.startswith("src/arborlm/"):
+        return True
+    parts = path.split("/")
+    return len(parts) == 3 and parts[:2] == ["studies", "p10s2"] and parts[2] in RECORD_EXECUTES[kind]
+
+
+def _git(repo: Path, *args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=False)  # noqa: S603, S607
+
+
+def record_commit_diffs(repo: Path, commits: dict[str, str]) -> dict[str, dict[str, Any]]:
+    """Per record kind: its commit, the paths that differ from HEAD (the freeze commit is made from it) under the three trees. Refuses a commit that is not an ancestor of HEAD, and a differing path that the
+    record's own computation executes."""
+    out: dict[str, dict[str, Any]] = {}
+    for kind, commit in commits.items():
+        if _git(repo, "rev-parse", "--verify", f"{commit}^{{commit}}").returncode != 0:
+            raise FreezeRefused(f"refused: the {kind} record's code commit {commit!r} is not a commit of this repository")
+        if _git(repo, "merge-base", "--is-ancestor", commit, "HEAD").returncode != 0:
+            raise FreezeRefused(f"refused: the {kind} record's code commit {commit} is not an ancestor of the freeze commit")
+        diff = _git(repo, "diff", "--name-only", commit, "HEAD", "--", "studies/p10s2", "src/arborlm", CONFIG_PATH)
+        paths = sorted(p for p in diff.stdout.splitlines() if p)
+        hit = [p for p in paths if executed_by(kind, p)]
+        if hit:
+            raise FreezeRefused(f"refused: the {kind} record was made at {commit}; since then {hit[:5]} changed and the record's own computation executes it")
+        out[kind] = {"commit": commit, "differing_paths": paths}
+    return out
 
 
 def prefreeze_caps_from_ledger(ledger: Ledger) -> dict[str, Any]:
@@ -304,9 +353,9 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
         raise _refuse("rehearsal_outcome.json", outcome, f"{budget.NOT_STARTED_BUDGET}: recorded in {refusal_dir() / 'rehearsal_outcome.json'}; the work returns to the human lead ({decision.reason})")
     assert decision.replicates is not None and decision.updates is not None
     frozen_device = str(core.CFG["budget"]["training_device"])
-    if rates.train_device != frozen_device and not (rates.train_device == "cpu" and rates.train_device_reason.strip()):
-        # the lead's ruling of 2026-11-15: the frozen device is MPS unless the rehearsal itself cannot run on MPS, in which case the freeze may record CPU (section 13.3's fallback) with the reason and every rate rehearsed on CPU
-        raise _refuse("device.json", {"train_device": rates.train_device, "reason": rates.train_device_reason, "frozen_device": frozen_device}, f"refused: the rehearsal trained on {rates.train_device!r} without a recorded reason; the frozen device is {frozen_device.upper()} unless the rehearsal itself cannot run on it (the reason is recorded with --device-reason) and no device changes after the freeze")
+    if rates.train_device != frozen_device:
+        # the lead's ruling on the confirmation (F5): the device is the configured one (MPS for training, CPU for scoring); an MPS failure in the rehearsal returns to the lead and nothing is frozen: the CPU route is unreachable
+        raise _refuse("device.json", {"train_device": rates.train_device, "reason": rates.train_device_reason, "frozen_device": frozen_device}, f"refused: the rehearsal trained on {rates.train_device!r}; the frozen device is {frozen_device.upper()} and an MPS failure in the rehearsal returns to the lead (nothing is frozen on another device)")
     pg = json.loads(prefreeze_gates.read_text())
     if not pg.get("ok"):
         raise _refuse("prefreeze_gates.json", pg, "refused: the pre-freeze gates stage on rehearsal seeds failed (a failed gate stops the run, section 12.3)")
@@ -324,7 +373,9 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
         raise _refuse("prefreeze_stop.json", {"label": summary["stop"], "summary": summary}, f"{summary['stop']}: the study stops before the freeze (recorded in {refusal_dir() / 'prefreeze_stop.json'})")
     if not tokenization_required_ok(pre_record):
         raise FreezeRefused("refused: test (a) of section 14.2 step 4 is absent or has a mismatch on a prompt or an R-icl prompt (0 required)")
-    check_identities(repo, data_dir, json.loads(calibration.read_text()), json.loads(prefreeze_gates.read_text()), reh, json.loads(prefreeze.read_text()), rates)
+    cal_rec, pg_rec, pre_rec = json.loads(calibration.read_text()), json.loads(prefreeze_gates.read_text()), json.loads(prefreeze.read_text())
+    check_identities(repo, data_dir, cal_rec, pg_rec, reh, pre_rec, rates)
+    commit_diffs = record_commit_diffs(repo, {"data": pre_rec["code_commit"], "calibration": cal_rec["identity"]["code_commit"], "prefreeze_gates": pg_rec["identity"]["code_commit"], "rehearsal": reh["identity"]["code_commit"]})
     # everything is accepted: now (and only now) the computed raise is recorded (if the rule needs one) and the frozen folder is written
     if cap > budget.base_cap() and not raise_recorded:
         budget.record_raise(rates, repo / core.RAISE_FILE, ledger, repo=repo, recorded_by="freeze (computed rule)")
@@ -344,7 +395,7 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
     plan = {
         "config_sha256": file_sha256(repo / core.DEFAULT_CONFIG), "stage_caps_sha256": file_sha256(freeze_dir / "stage_caps.json"),
         "design": {"replicates": decision.replicates, "updates": decision.updates, "layer": layer, "store_lr": store_lr, "lora_lr": lora_lr, "rung": decision.outcome, "device": rates.train_device, "scoring_device": "cpu"},
-        "cap_hours": cap, "cap_raise_sha256": file_sha256(raise_path) if raise_path.exists() else None, "charged_hours_at_freeze": p_hours, "ledger": ledger_snap,
+        "cap_hours": cap, "cap_raise_sha256": file_sha256(raise_path) if raise_path.exists() else None, "charged_hours_at_freeze": p_hours, "ledger": ledger_snap, "record_commit_diffs": commit_diffs,
         "data_dir": data_dir, "data_manifest_sha256": file_sha256(repo / data_dir / "manifest.json"),
         "projection": {"path": str((freeze_dir / "projection.json").relative_to(repo)), "sha256": file_sha256(freeze_dir / "projection.json")},
         **records,

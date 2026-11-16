@@ -79,6 +79,18 @@ class Ledger:
         cap = e.get("cap_seconds")
         return elapsed if cap is None else min(elapsed, float(cap))
 
+    def close_orphans(self, written_by: str, *, now: float | None = None) -> list[dict[str, Any]]:
+        """Close every start marker with no end entry (a killed process) by a recorded end entry charged at min(elapsed, stage cap) (the lead's ruling F4). The entry has the status ``orphan-closed`` and
+        says that it closes an orphan and who wrote it; the marker stays in the ledger, so nothing is deleted or rewritten."""
+        t = time.time() if now is None else now
+        out = []
+        for e in self._unfinished(self.entries()):
+            if not e.get("run_id"):
+                continue
+            seconds = self._orphan_seconds(e, t)
+            out.append(self.record(e["kind"], seconds, workers=int(e["workers"]), process=str(e.get("process", "")), registered=bool(e.get("registered")), status="orphan-closed", note=f"closes an orphan start marker (a killed process) at min(elapsed, cap); written by {written_by}", run_id=e["run_id"], t_start=float(e["t_start"])))
+        return out
+
     def by_kind(self) -> dict[str, float]:
         out: dict[str, float] = {}
         for e in self.entries():

@@ -40,7 +40,7 @@ def run_script(name: str, args: list[str], tmp: Path) -> tuple[subprocess.Comple
 
 
 def test_every_launch_script_exists_is_executable_and_parses_as_shell() -> None:
-    assert {p.stem for p in LAUNCH.glob("*.sh")} == set(REGISTERED) | set(PREFREEZE)  # the pre-freeze gates stage has its own script
+    assert {p.stem for p in LAUNCH.glob("*.sh")} == set(REGISTERED) | set(PREFREEZE) | {"install_datagen"}  # the pre-freeze gates stage has its own script
     for p in LAUNCH.glob("*.sh"):
         assert p.stat().st_mode & stat.S_IEXEC, p.name
         assert subprocess.run(["sh", "-n", str(p)], capture_output=True, check=False).returncode == 0, p.name  # noqa: S603, S607
@@ -106,12 +106,23 @@ def prefreeze_argv(run: Path, name: str = "rehearse") -> list[str]:
     return lines[lines.index("-m") + 2 : -1]
 
 
+def write_data_record(run: Path) -> None:
+    """A completed data-generation record that names the manifest of ``<run>/data/bundle`` (re-check confirmation F9: the pre-freeze stages run only on the bundle the data step completed)."""
+    import hashlib
+
+    (run / "data" / "bundle").mkdir(parents=True, exist_ok=True)
+    manifest = run / "data" / "bundle" / "manifest.json"
+    manifest.write_text("{}")
+    (run / "data" / "prefreeze_record.json").write_text(json.dumps({"bundle_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest()}))
+
+
 @pytest.fixture()
 def pre_env(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setattr(freeze, "check_code_commit", lambda repo, commit: commit or "")
     monkeypatch.setattr(ledger, "study_ledger_path", lambda: tmp_path / "ledger.jsonl")
     run = tmp_path / "run"
     run.mkdir()
+    write_data_record(run)
     return run
 
 
@@ -130,8 +141,6 @@ def test_rehearse_executes_with_the_layer_and_the_lora_learning_rate_of_the_cali
     (pre_env / "calibration.json").write_text(json.dumps({"selection": {"read_layer": 12, "lora_lr": 0.001}, "pilot": {"ok": True}}))  # the second value listed: not lora_learning_rates[0]
     (pre_env / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 12.5}))
     seen: dict[str, Any] = {}
-    (pre_env / "data" / "bundle").mkdir(parents=True)
-    (pre_env / "data" / "bundle" / "manifest.json").write_text("{}")  # the identity of the record names the bundle's manifest digest
     monkeypatch.setattr(stages.train, "mps_attempt", lambda: {"ok": True, "error": ""})
     monkeypatch.setattr(stages, "read_bundle", lambda d: "bundle")
     monkeypatch.setattr(stages, "build_world", lambda b, mode, n, run: seen.update(mode=mode, layer=run.layer, lora_lr=run.lora_lr, store_lr=run.store_lr, device=run.device, n=n) or "world")
@@ -171,7 +180,19 @@ def test_rehearse_refuses_a_non_mps_device_without_a_reason_and_calibrate_refuse
     assert stages.main([*prefreeze_argv(pre_env), "--device", "cpu"]) == 2 and "not typed outside tests" in capsys.readouterr().err  # re-check B, N3 (b): a typed device is refused outside tests
     monkeypatch.setenv("PYTEST_CURRENT_TEST", "x")
     monkeypatch.setattr(stages.train, "select_device", lambda name: (_ for _ in ()).throw(RuntimeError("device mps requested but unavailable")))
+    write_data_record(pre_env.parent / "run2")
     assert stages.main(prefreeze_argv(pre_env.parent / "run2", "calibrate")) == 2 and "no fallback" in capsys.readouterr().err
+
+
+def test_rehearse_returns_to_the_lead_when_mps_cannot_be_used_and_never_falls_back_to_cpu(pre_env: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+    (pre_env / "calibration.json").write_text(json.dumps({"selection": {"read_layer": 4, "lora_lr": 0.0003}, "pilot": {"ok": True}}))
+    (pre_env / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 1.0}))
+    monkeypatch.setattr(stages.train, "mps_attempt", lambda: {"ok": False, "error": "RuntimeError: device mps requested but unavailable"})
+    monkeypatch.setattr(rehearsal, "measure_task_overhead", lambda *a, **k: pytest.fail("the rehearsal must not start"))
+    assert stages.main(prefreeze_argv(pre_env)) == 2
+    err = capsys.readouterr().err
+    assert "CPU route through the freeze is unreachable" in err and "returns to the lead" in err  # F5
+    assert not (pre_env / "rates.json").exists() and not (pre_env / "rehearsal.json").exists()
 
 
 def test_a_prefreeze_stage_refuses_when_the_study_ledger_has_no_room_for_its_cap(pre_env: Path, capsys: pytest.CaptureFixture[str]) -> None:

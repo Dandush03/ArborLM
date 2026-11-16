@@ -313,10 +313,15 @@ def test_no_test_imports_the_fetch_step_or_the_data_generation_step() -> None:
                 assert not any(a.name in ("studies.p10s2.fetch", "studies.p10s2.datagen") for a in node.names), path.name
 
 
-def test_the_requirements_file_lists_only_the_eight_named_packages_unfetched() -> None:
+def test_the_requirements_file_is_the_resolved_hashed_set_of_the_eight_pins() -> None:
     text = (ROOT / "studies/p10s2/requirements-datagen.txt").read_text()
-    pins = [ln for ln in text.splitlines() if ln and not ln.startswith("#")]
-    assert pins == ["transformers==4.57.1", "tokenizers==0.22.1", "safetensors==0.6.2", "huggingface-hub==0.35.3", "sentencepiece==0.2.1", "numpy==2.3.3", "sacremoses==0.1.1", "sacrebleu==2.5.1"]
-    assert "NOT INSTALLED, NOT FETCHED" in text and "RESOLUTION WITH HASHES PENDING" in text and "30gb" in text  # the standing permission, not the earlier pending confirmation
+    head = [ln for ln in text.splitlines() if ln.startswith("#")]
+    body = "\n".join(ln for ln in text.splitlines() if not ln.startswith("#"))
+    pins = re.findall(r"^([A-Za-z0-9_.\-]+)==([^\s\\]+)", body, flags=re.MULTILINE)
+    assert len(pins) == 28 and not {"torch", "pyarrow"} & {n.lower() for n, _ in pins}  # 28 packages, none of the lock's heavy ones
+    assert dict(pins)["transformers"] == "4.57.1" and dict(pins)["numpy"] == "2.3.3" and dict(pins)["sacrebleu"] == "2.5.1"
+    assert body.count("--hash=sha256:") >= 28 and "--with-requirements" not in text and "PENDING" not in text and "NOT INSTALLED" not in text
+    joined = "\n".join(head)
+    assert "--generate-hashes --python-version 3.12 --exclude-newer 2026-11-01T00:00:00Z" in joined and "2026-11-15" in joined and "Nothing is installed by this file alone" in joined and "30 GB" not in joined
     with tempfile.TemporaryDirectory() as d:
         assert not any(Path(d).iterdir())

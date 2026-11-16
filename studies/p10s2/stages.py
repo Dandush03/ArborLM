@@ -21,7 +21,6 @@ import contextlib
 import ctypes
 import json
 import os
-import shutil
 import sys
 import threading
 import time
@@ -60,6 +59,10 @@ GATE_NAMES = tuple(f"G{i}" for i in range(1, 10))
 
 class StageRefused(RuntimeError):
     """A registered stage refuses to start (the P9-II convention): nothing is started and nothing is re-run with changed settings."""
+
+
+class GatesFailed(StageRefused):
+    """The second gates stage did not pass: a failed gate is ENGINEERING-FAILURE (section 11.3), recorded as a stop record, and nothing after it runs but the analysis."""
 
 
 class CapReached(RuntimeError):
@@ -545,7 +548,8 @@ def require_order(run_dir: Path, name: str) -> None:
     if own.exists():
         raise StageRefused(f"refused: stage {name} already has a record ({own}; status {read_json(own).get('status')}): a stage is run once and never re-run with changed settings")
     i = REGISTERED_STAGES.index(name)
-    stopped_early = (run_dir / "stop_record.json").exists() and any(stage_record_path(run_dir, s).exists() and read_json(stage_record_path(run_dir, s)).get("status") == "failed" for s in REGISTERED_STAGES[:i])
+    stop_path = run_dir / "stop_record.json"
+    stopped_early = stop_path.exists() and read_json(stop_path).get("status") in ("failed", "refused")  # a failed stage, or an in-sequence refusal after the freeze (a failed gate, no room): the analysis writes the outcome
     if name == "analysis" and stopped_early:
         return  # the analysis stage reads what exists and writes the outcome (INCOMPLETE or ENGINEERING-FAILURE); the stages between are not run after a stop (re-check B, m12)
     if i > 0:
@@ -565,13 +569,20 @@ def require_order(run_dir: Path, name: str) -> None:
             raise StageRefused("refused: gates.json does not hash to the digest recorded in the gates stage record (an edited gates record is never read)")
         bad = [k for k in GATE_NAMES if k not in g or not g[k].get("ok")]
         if bad or not g.get("ok"):
-            raise StageRefused(f"refused: the second gates stage did not pass ({', '.join(bad) or 'ok is not true'}): a failed gate stops the run")
+            raise GatesFailed(f"refused: the second gates stage did not pass ({', '.join(bad) or 'ok is not true'}): a failed gate stops the run")
 
 
 def reserved_seconds(caps: Mapping[str, Mapping[str, float]], name: str, n: int, u: int) -> float:
     """The analysis and report caps are reserved while an earlier stage runs, so that an overrun cannot lock them out (audit B M4)."""
     later = {"analysis": ("report",), "report": ()}.get(name, ("analysis", "report"))
     return sum(budget.cap_for(caps, s, n, u) for s in later)
+
+
+def _refusal_stop(run_dir: Path, name: str, exc: BaseException, outcome: str) -> None:
+    """Write ``stop_record.json`` for a refusal that happens in the registered sequence (a failed gate: ENGINEERING-FAILURE; no room under the cap: INCOMPLETE), once, so that the analysis stage can read it."""
+    p = run_dir / "stop_record.json"
+    if not p.exists():
+        record(p, {"stage": name, "status": "refused", "error": str(exc), "outcome": outcome, "at": _utc()})
 
 
 def cmd_registered(args: argparse.Namespace) -> int:
@@ -595,9 +606,17 @@ def cmd_registered(args: argparse.Namespace) -> int:
         caps = json.loads((repo / core.CAPS_FILE).read_text())
         n, u = int(plan["design"]["replicates"]), int(plan["design"]["updates"])
         cap_seconds = budget.cap_for(caps, name, n, u)
-        require_order(run_dir, name)
+        try:
+            require_order(run_dir, name)
+        except GatesFailed as e:
+            _refusal_stop(run_dir, name, e, "ENGINEERING-FAILURE")  # re-check confirmation F10: an in-sequence refusal after the freeze leaves a stop record
+            raise
         reserve = reserved_seconds(caps, name, n, u)
-        ledger.refuse_if_over((cap_seconds + reserve) / 3600.0, float(plan["cap_hours"]), f"stage {name} (its cap plus the reserved analysis and report caps)")
+        try:
+            ledger.refuse_if_over((cap_seconds + reserve) / 3600.0, float(plan["cap_hours"]), f"stage {name} (its cap plus the reserved analysis and report caps)")
+        except LedgerRefused as e:
+            _refusal_stop(run_dir, name, e, "INCOMPLETE")
+            raise
         device_name = str(plan["design"]["device"]) if name in ("gates", "train") else str(plan["design"].get("scoring_device", "cpu"))
         try:
             train.select_device(device_name)
@@ -688,10 +707,24 @@ def _prefreeze_start(args: argparse.Namespace, ledger: Ledger, what: str, output
             if (run_dir / o).exists():
                 raise StageRefused(f"refused: {run_dir / o} exists: {what} is run once and its record is write-once")
         ledger.refuse_if_over(float(args.stage_cap_seconds) / 3600.0, None, what)
+        _require_data_record(run_dir, Path(args.data_dir), what)
         return run_dir
     except (freeze.FreezeRefused, LedgerRefused, StageRefused) as e:
         say(str(e), sys.stderr)
         return None
+
+
+def _require_data_record(run_dir: Path, data_dir: Path, what: str) -> None:
+    """F9: a write-once pre-freeze stage runs only on the bundle the data-generation step completed: ``<run-dir>/data/prefreeze_record.json`` must exist, hold no stop, and name the manifest digest of ``data_dir``."""
+    p = run_dir / "data" / "prefreeze_record.json"
+    if not p.is_file():
+        raise StageRefused(f"refused: {p} does not exist: {what} needs the completed data-generation record of this bundle")
+    rec = json.loads(p.read_text())
+    if rec.get("stopped"):
+        raise StageRefused(f"refused: the data-generation record {p} is a stop record ({rec['stopped']}): {what} does not run on it")
+    mf = data_dir / "manifest.json"
+    if not mf.is_file() or rec.get("bundle_manifest_sha256") != file_sha256(mf):
+        raise StageRefused(f"refused: the data-generation record does not name the manifest of {data_dir}: {what} would run on another bundle")
 
 
 def _typed_overrides(args: argparse.Namespace) -> list[str]:
@@ -701,7 +734,7 @@ def _typed_overrides(args: argparse.Namespace) -> list[str]:
 def _refuse_typed(args: argparse.Namespace) -> None:
     """N3 (b): update counts and the device come from the configuration; a typed ``--updates``, ``--full-updates`` or ``--device`` is refused outside tests (a record made with one cannot be told from the real one)."""
     typed = _typed_overrides(args)
-    if typed and "PYTEST_CURRENT_TEST" not in os.environ:
+    if typed and not ("PYTEST_CURRENT_TEST" in os.environ and "pytest" in sys.modules):  # both: setting the variable by hand is not enough (re-check confirmation F11)
         raise StageRefused(f"refused: {', '.join(typed)} typed: update counts and the device come from the configuration; they are not typed outside tests")
 
 
@@ -854,7 +887,10 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     if configured == "cpu" and attempt["ok"]:
         say("refused: the training device is CPU but MPS works on this machine: CPU is frozen only if the rehearsal itself cannot run on MPS", sys.stderr)
         return 2
-    dev = "mps" if configured == "mps" and attempt["ok"] else "cpu"
+    if configured == "mps" and not attempt["ok"]:
+        say(f"refused: the training device is MPS and MPS cannot be used here ({attempt['error']}): the CPU route through the freeze is unreachable; the work returns to the lead and nothing is frozen", sys.stderr)
+        return 2
+    dev = configured
     layer, lora_lr = int(cal["selection"]["read_layer"]), float(cal["selection"]["lora_lr"])
     short = int(args.updates) if args.updates else int(core.CFG["rehearsal"]["short_updates"])
     full = int(args.full_updates) if args.full_updates else int(core.CFG["rehearsal"]["full_updates"])
@@ -867,20 +903,9 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         with ledger.measure("rehearsal", process="rehearsal", cap_seconds=float(args.stage_cap_seconds)):
             with StageGuard("rehearsal", cap_seconds=float(args.stage_cap_seconds)):
                 overhead = rehearsal.measure_task_overhead(data_dir, core.ROOT, layer=layer, lora_lr=lora_lr)
-                while True:
-                    core.reset_seed_record()
-                    try:
-                        world = build_world(read_bundle(data_dir), "rehearsal", n_world, RunConfig.registered(layer, short, core.CFG["training"]["store_learning_rate"], lora_lr, dev))
-                        rates, raw = rehearsal.measure_rates(world, 0, updates=short, full_updates=full, overhead=overhead, gates2_seconds=float(pg["seconds_scaled_to_registered_panels"]), scratch=scratch, data_dir=data_dir, repo=core.ROOT, device_reason=str(mps_attempt.get("error", "")) if dev == "cpu" else "", gates_peak_bytes=int(pg.get("peak_bytes", 0)))
-                        break
-                    except (CapReached, MemoryLimitExceeded):
-                        raise
-                    except Exception as e:  # noqa: BLE001
-                        if dev != "mps" or configured != "mps":
-                            raise
-                        mps_attempt = {"ok": False, "error": f"the rehearsal on MPS failed: {type(e).__name__}: {e}"}  # the rehearsal itself cannot run on MPS: CPU, with this failure recorded
-                        dev = "cpu"
-                        shutil.rmtree(scratch, ignore_errors=True)
+                core.reset_seed_record()
+                world = build_world(read_bundle(data_dir), "rehearsal", n_world, RunConfig.registered(layer, short, core.CFG["training"]["store_learning_rate"], lora_lr, dev))
+                rates, raw = rehearsal.measure_rates(world, 0, updates=short, full_updates=full, overhead=overhead, gates2_seconds=float(pg["seconds_scaled_to_registered_panels"]), scratch=scratch, data_dir=data_dir, repo=core.ROOT, device_reason=str(mps_attempt.get("error", "")) if dev == "cpu" else "", gates_peak_bytes=int(pg.get("peak_bytes", 0)))  # a failure on MPS (an exception here) stops the rehearsal with its record and returns to the lead: there is no fallback to CPU
     except (CapReached, MemoryLimitExceeded) as e:
         _stop_record(run_dir / "rehearsal_stopped.json", e)
         say(f"the rehearsal stopped: {e}", sys.stderr)
@@ -894,6 +919,14 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     check = budget.headroom_check(p_hours, rates, ledger, core.ROOT / core.RAISE_FILE)
     record(run_dir / "rehearsal.json", {"raw": raw, "charged_hours_at_end_of_rehearsal": p_hours, "headroom_check": check, "memory_check": budget.memory_check(rates), "mps_attempt": mps_attempt, "identity": _identity(args, seed_mode="rehearsal", update_counts={"updates": short, "full_updates": full}, device=dev)})
     say(f"rehearsal record written to {run_dir / 'rehearsal.json'}; rung rule outcome: {check['decision']['outcome']}")
+    return 0
+
+
+def cmd_close_orphans(args: argparse.Namespace) -> int:
+    """Close the start markers of killed processes in the study ledger at min(elapsed, stage cap) (the lead's ruling F4); the entries say who wrote them."""
+    core.refuse_under_pytest(core.ROOT, what="the study ledger")
+    closed = Ledger().close_orphans(str(args.written_by))
+    say(f"closed {len(closed)} orphan start marker(s): " + ", ".join(f"{e['kind']} {e['charged_hours']:.4f} h" for e in closed))
     return 0
 
 
@@ -960,6 +993,9 @@ def build_parser() -> argparse.ArgumentParser:
             c.add_argument("--full-updates", type=int, default=None, help="default: from the configuration ([rehearsal] full_updates)")
         c.add_argument("--device", default=None, choices=["mps", "cpu"], help="default: the configured training device (MPS); there is no automatic choice")
         c.set_defaults(func=fn)
+    oc = sub.add_parser("close-orphans", help="close the start markers of killed processes in the study ledger, charged at min(elapsed, stage cap)")
+    oc.add_argument("--written-by", required=True, help="who closes them (recorded in each entry)")
+    oc.set_defaults(func=cmd_close_orphans)
     rc = sub.add_parser("raise-cap", help="record the cap raise at the rehearsal's headroom check; the amount is recomputed from the rehearsal record and the study ledger")
     rc.add_argument("--run-dir", required=True, help="the pre-freeze run directory (holds rates.json)")
     rc.set_defaults(func=cmd_raise_cap)

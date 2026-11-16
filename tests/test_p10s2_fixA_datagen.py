@@ -98,7 +98,7 @@ def test_requirements_without_hashes_are_refused_and_hashed_ones_pass(tmp_path: 
     with pytest.raises(datagen.DatagenStop, match=r"numpy==2\.3\.3"):
         datagen.check_requirements_hashed(p)
     real = datagen.unhashed_requirements((ROOT / datagen.REQUIREMENTS).read_text())
-    assert real == ["transformers==4.57.1", "tokenizers==0.22.1", "safetensors==0.6.2", "huggingface-hub==0.35.3", "sentencepiece==0.2.1", "numpy==2.3.3", "sacremoses==0.1.1", "sacrebleu==2.5.1"]  # the committed file is not yet resolved with hashes: datagen refuses to run on it
+    assert real == [] and datagen.check_requirements_hashed(ROOT / datagen.REQUIREMENTS) >= 28  # the committed file is the resolved, hashed set (28 packages)
 
 
 # --- A-B3: the local WikiText parquet files ------------------------------------------------------------------------------------------------------------

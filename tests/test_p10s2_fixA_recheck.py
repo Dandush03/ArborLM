@@ -110,7 +110,7 @@ def test_r3_r16_every_exception_after_the_start_leaves_a_stop_record_each_attemp
     assert json.loads((out / "datagen_attempts" / "attempt-004.json").read_text())["stop_kind"] == "registered-test"
     with pytest.raises(datagen.DatagenStop, match="returns to the lead"):
         datagen.run(tmp_path / "dl", out, led=Fake(), stage_cap_seconds=3600.0)  # a stop on a registered test is not re-run
-    (out / "datagen_attempts" / "lead_release.json").write_text("{}")
+    (out / "datagen_attempts" / "lead_release.json").write_text(json.dumps({"releases_attempt": 4, "cause": "the score comparison was read by the lead", "released_by": "lead"}))
     assert datagen.datagen_rerun_gate(out) is None
     assert datagen.stop_kind(datagen.RegisteredTestStop("x")) == "registered-test" and datagen.stop_kind(RuntimeError("x")) == "engineering"
     assert all(e["status"] in ("started", "completed", "failed") for e in Fake().led.entries())

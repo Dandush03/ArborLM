@@ -110,6 +110,17 @@ def source_files(root: Path) -> list[str]:
     return [f for f in out if f.startswith(SOURCE_PREFIXES) and (root / f).is_file()]
 
 
+def stamp_data_record(clone: Path, pre: Path) -> None:
+    """The exercise's stand-in data step is not ``datagen``; it stamps its record with what datagen records (re-check confirmation F3): the code commit, the configuration and requirements SHA-256 and where transformers
+    was loaded from (here: nowhere). Called again after the clone's configuration is committed, so that the record names the configuration that is frozen."""
+    from arborlm.io import file_sha256
+
+    path = pre / "data" / "prefreeze_record.json"
+    rec = json.loads(path.read_text())
+    rec.update(code_commit=head(clone), config_sha256=file_sha256(clone / core.DEFAULT_CONFIG), requirements_sha256=file_sha256(clone / "studies" / "p10s2" / "requirements-datagen.txt"), transformers_file="stand-in (the exercise's data step is not datagen: no transformers)")
+    path.write_text(json.dumps(rec, sort_keys=True, indent=1))
+
+
 def relax_pilot_threshold(clone: Path, base: dict[str, Any], *, training_device: str) -> dict[str, Any]:
     """Replace the pilot threshold in the clone's configuration (see ``test_configuration``) and commit it; returns the substitution record."""
     cfg, subs = test_configuration(base, training_device=training_device, relax_pilot=True)
@@ -206,11 +217,13 @@ def exercise(workdir: Path | None = None, *, keep: bool = False) -> dict[str, An
 
         prerec["bundle_manifest_sha256"] = file_sha256(pre / "data" / "bundle" / "manifest.json")  # what datagen records at the end of its step (re-check B, N3)
         (pre / "data" / "prefreeze_record.json").write_text(json.dumps(core.jsonable(prerec), sort_keys=True, indent=1))
+        stamp_data_record(clone, pre)
         shutil.copytree(pre / "data" / "bundle", clone / "data" / "p10s2-bundle")
         led = Ledger(clone / "experiments" / "P10S2" / "ledger.jsonl")
         led.charge("datagen", time.perf_counter() - t0, process="e2e: stand-in data generation (datagen.sh is not run: it needs downloads)")
         code = head(clone)
         # --- calibration stopped by its stage cap (one cap stop, exit 4), in a run directory of its own ---
+        shutil.copytree(pre / "data", parent / "capstop-run" / "data")  # the stage needs the completed data record of its bundle (confirmation F9)
         p = stages_cmd(clone, env, "calibrate", "--run-dir", str(parent / "capstop-run"), "--code-commit", code, "--stage-cap-seconds", "0.3", "--data-dir", str(pre / "data" / "bundle"))
         expect("calibrate with a stage cap of 0.3 s stops (cap stop)", p, 4, results, in_output="calibration stopped")
         assert (parent / "capstop-run" / "calibration_stopped.json").exists()
@@ -222,6 +235,7 @@ def exercise(workdir: Path | None = None, *, keep: bool = False) -> dict[str, An
         with (core.ROOT / core.DEFAULT_CONFIG).open("rb") as fh:
             record["substitutions"]["gates.pilot_gap_min"] = relax_pilot_threshold(clone, tomllib.load(fh), training_device=device)
         code = head(clone)
+        stamp_data_record(clone, pre)
         # --- the pre-freeze stages through their launch scripts ---
         p = script(clone, env, "calibrate", str(pre), code)
         results.append({"step": "calibrate.sh", "exit": p.returncode, "ok": p.returncode == 0, "tail": (p.stdout + p.stderr)[-400:]})

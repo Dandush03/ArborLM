@@ -53,6 +53,11 @@ class Setup:
         for kind, h in (("datagen", 1.0), ("calibration", 1.0), ("rehearsal", 1.5)):
             self.led.record(kind, h * 3600)
         self.rates = replace(rates(scale_for(scale_hours, n, u) if (n, u) != (4, 2000) else scale_hours / hours(1.0, 4, 2000)), train_device=device)
+        (self.repo / "studies/p10s2/requirements-datagen.txt").write_text("# requirements\n")
+        subprocess.run(["git", "-C", str(self.repo), "init", "-q", "-b", "main"], check=True)  # noqa: S603, S607
+        git(self.repo, "add", "-A")
+        git(self.repo, "-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "code")
+        self.code = git(self.repo, "rev-parse", "HEAD").strip()
         data = self.repo / "data"
         data.mkdir(exist_ok=True)
         (data / "manifest.json").write_text('{"files": {}}')
@@ -64,12 +69,12 @@ class Setup:
         c = core.CFG
 
         def ident(mode: str, **counts: int) -> dict[str, Any]:
-            return {"bundle_manifest_sha256": man, "code_commit": "c0ffee", "config_sha256": cfg_sha, "seed_mode": mode, "update_counts": counts, "device": device}
+            return {"bundle_manifest_sha256": man, "code_commit": self.code, "config_sha256": cfg_sha, "seed_mode": mode, "update_counts": counts, "device": device}
 
         cal_rec = calibration_record(**cal)
         cal_rec["identity"] = ident("calibration", updates=int(c["calibration"]["updates"]))
         (self.pre / "calibration.json").write_text(json.dumps(cal_rec))
-        (self.pre / "prefreeze.json").write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "bundle_manifest_sha256": man, "seed_mode": "registered-data"}))
+        (self.pre / "prefreeze.json").write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "bundle_manifest_sha256": man, "seed_mode": "registered-data", "code_commit": self.code, "config_sha256": cfg_sha, "requirements_sha256": file_sha256(self.repo / "studies/p10s2/requirements-datagen.txt"), "transformers_file": "/x/data/datagen-packages/transformers/__init__.py"}))
         (self.pre / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 1.0, "identity": ident("rehearsal", updates=int(c["rehearsal"]["short_updates"]))}))
         reh: dict[str, Any] = {"raw": {"device": device}, "charged_hours_at_end_of_rehearsal": self.led.total_hours(), "identity": ident("rehearsal", updates=int(c["rehearsal"]["short_updates"]), full_updates=int(c["rehearsal"]["full_updates"]))}
         if device == "cpu":
@@ -147,7 +152,7 @@ def test_the_study_stops_before_the_freeze_when_teachers_or_data_do_not_qualify_
     s = Setup(tmp_path, monkeypatch)
     from arborlm.io import file_sha256
 
-    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "bundle_manifest_sha256": file_sha256(s.repo / "data" / "manifest.json"), "seed_mode": "registered-data", "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
+    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "bundle_manifest_sha256": file_sha256(s.repo / "data" / "manifest.json"), "seed_mode": "registered-data", "code_commit": s.code, "config_sha256": file_sha256(s.repo / core.DEFAULT_CONFIG), "requirements_sha256": file_sha256(s.repo / "studies/p10s2/requirements-datagen.txt"), "transformers_file": "t", "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
     (s.pre / "prefreeze.json").write_text(json.dumps({**ok, "combined_whole_string": {"ok": False}}))
     with pytest.raises(freeze.FreezeRefused, match="whole-string check"):
         s.freeze()  # the same consequence as a prompt mismatch in test (a)
@@ -163,7 +168,7 @@ def test_the_study_stops_before_the_freeze_when_teachers_or_data_do_not_qualify_
 
 def test_the_freeze_refuses_a_device_other_than_mps_and_a_layer_that_is_not_the_calibrated_one(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     s = Setup(tmp_path, monkeypatch, device="cpu")
-    with pytest.raises(freeze.FreezeRefused, match="frozen device is MPS"):
+    with pytest.raises(freeze.FreezeRefused, match="the frozen device is MPS"):
         s.freeze()
     assert s.frozen_dir_files() == set()
     s2 = Setup(tmp_path / "b", monkeypatch)
@@ -185,16 +190,23 @@ def test_the_freeze_refuses_when_tokenization_test_a_is_absent_or_has_a_mismatch
         assert s.frozen_dir_files() == set()
 
 
-def test_the_freeze_may_record_cpu_only_with_the_rehearsals_reason_and_nothing_changes_after_it(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_the_cpu_route_through_the_freeze_is_unreachable_under_the_real_configuration(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     s = Setup(tmp_path, monkeypatch, device="cpu")
-    s.rates = replace(s.rates, train_device_reason="an MPS operation the update needs is unsupported (the rehearsal itself cannot run on MPS)")
-    s.freeze()  # the lead's ruling: MPS unless the rehearsal cannot run on it; then CPU with every rate rehearsed on CPU
-    plan = freeze.load_plan(s.repo)
-    assert plan["design"]["device"] == "cpu" and plan["design"]["scoring_device"] == "cpu"
-    s2 = Setup(tmp_path / "b", monkeypatch, device="cuda")
-    s2.rates = replace(s2.rates, train_device_reason="because")
-    with pytest.raises(freeze.FreezeRefused, match="without a recorded reason"):
-        s2.freeze()  # only CPU is an allowed alternative
+    s.rates = replace(s.rates, train_device_reason="an MPS operation the update needs is unsupported")
+    with pytest.raises(freeze.FreezeRefused, match="returns to the lead"):
+        s.freeze()  # the lead's ruling F5: an MPS failure in the rehearsal returns to the lead and nothing is frozen
+    assert s.frozen_dir_files() == set()
+    # only a test configuration that sets the training device to CPU freezes CPU, and then only with the rehearsal's own failed MPS attempt
+    monkeypatch.setitem(core.CFG["budget"], "training_device", "cpu")
+    s2 = Setup(tmp_path / "b", monkeypatch, device="cpu")
+    s2.freeze()
+    assert freeze.load_plan(s2.repo)["design"]["device"] == "cpu"
+    s3 = Setup(tmp_path / "c", monkeypatch, device="cpu")
+    reh = json.loads((s3.pre / "rehearsal.json").read_text())
+    reh["mps_attempt"] = {"ok": True, "error": ""}
+    (s3.pre / "rehearsal.json").write_text(json.dumps(reh))
+    with pytest.raises(freeze.FreezeRefused, match="failed MPS attempt"):
+        s3.freeze()
 
 
 def test_the_freeze_records_the_computed_cap_itself_and_refuses_any_other(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

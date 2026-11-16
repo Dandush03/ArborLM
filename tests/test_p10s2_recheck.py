@@ -291,7 +291,7 @@ def test_n3_the_freeze_checks_every_identity(tmp_path: Path, monkeypatch: pytest
     cal = {"identity": identity(bundle_manifest_sha256=man, config_sha256=cfg, seed_mode="calibration", update_counts={"updates": c["calibration"]["updates"]})}
     pg = {"identity": identity(bundle_manifest_sha256=man, config_sha256=cfg, update_counts={"updates": c["rehearsal"]["short_updates"]})}
     reh = {"identity": identity(bundle_manifest_sha256=man, config_sha256=cfg, update_counts={"updates": c["rehearsal"]["short_updates"], "full_updates": c["rehearsal"]["full_updates"]})}
-    pre = {"bundle_manifest_sha256": man, "seed_mode": "registered-data"}
+    pre = {"bundle_manifest_sha256": man, "seed_mode": "registered-data", "code_commit": "c", "config_sha256": cfg, "requirements_sha256": "r", "transformers_file": "t"}
     r = rates()
     import dataclasses
 
@@ -317,7 +317,7 @@ def test_n3_the_freeze_checks_every_identity(tmp_path: Path, monkeypatch: pytest
     r3["identity"]["update_counts"]["full_updates"] = 1
     refused("typed count", reh=r3)
     refused("stand-in bundle cannot be frozen", pre={**pre, "seed_mode": "test"})
-    refused("names no bundle manifest", pre={"seed_mode": "registered-data"})
+    refused("lacks code_commit", pre={"seed_mode": "registered-data", "bundle_manifest_sha256": man})  # F3: a data record without the code commit and configuration is refused
     cpu = dataclasses.replace(r, train_device="cpu")
     cal_c, pg_c, reh_c = (copy.deepcopy(x) for x in (cal, pg, reh))
     for x in (cal_c, pg_c, reh_c):

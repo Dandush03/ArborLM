@@ -68,12 +68,25 @@ def block(lines: Iterable[str], *, composition: bool = False) -> str:
     return "\n".join([*head, *ls])
 
 
+AUTONOMOUS_RE = re.compile(r"autonom", re.IGNORECASE)
+
+
+def _autonomous_allowed(line: str) -> bool:
+    """The only lines that may say "autonomous": the fixed oracle line, the human lead's sentence and the first NOT_ESTABLISHED item (each as a whole phrase inside the line)."""
+    from .report import NOT_ESTABLISHED
+
+    return any(p in line for p in (ORACLE_LINE, core.LEAD_RULE, NOT_ESTABLISHED[0]))
+
+
 def check_text(text: str) -> None:
     """Every block (separated by a blank line) that contains a guarded line must begin with the oracle-assisted line. A line outside any block is a block of its own."""
     for blk in text.split("\n\n"):
         lines = [ln for ln in blk.split("\n") if ln.strip()]
         if not lines:
             continue
+        for ln in lines:
+            if AUTONOMOUS_RE.search(ln) and not _autonomous_allowed(ln):  # re-check C, F12: no free-text line may speak of autonomy (the lead's rule: no autonomous learned-memory success from oracle-assisted results)
+                raise OracleLineMissing(f"a line speaks of autonomy outside the three fixed phrases: {ln[:120]!r}")
         if any(is_guarded(ln) for ln in lines) and lines[0] != ORACLE_LINE:
             bad = next(ln for ln in lines if is_guarded(ln))
             raise OracleLineMissing(f"guarded line without the oracle-assisted line directly above its block: {bad[:120]!r}")
