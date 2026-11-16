@@ -31,7 +31,7 @@ def test_config_values_equal_the_adr() -> None:
     assert (d["vocabulary"], d["min_words"], d["max_words"], d["large_group_pairs"], d["evaluation_fraction"]) == (2000, 3, 10, 50, 0.20)
     assert (d["panel_eval"], d["panel_combined"], d["panel_open"], d["panel_q_fit"], d["panel_q_check"], d["panel_d_cal"], d["panel_d_con"]) == (1000, 500, 500, 500, 500, 500, 300)
     assert (d["accepted_per_replicate"], d["gold_per_replicate"], d["sufficiency_factor"], d["generation_sources_max"], d["generation_beam"], d["generation_new_tokens"]) == (8000, 8000, 1.25, 60000, 4, 48)
-    assert (d["ablation_subsample"], d["seen_items"], d["general_windows"], d["general_windows_marker_like"], d["general_window_tokens"], d["router_decision_token"]) == (300, 300, 200, 100, 256, 64)
+    assert (d["ablation_subsample"], d["seen_items"], d["general_windows"], d["general_windows_marker_like"], d["general_window_tokens"], d["router_decision_token"]) == (300, 300, 144, 44, 256, 64)
     f = c["filter"]
     assert f["tau_grid"] == [-0.05 * k for k in range(1, 13)] or [round(x, 2) for x in f["tau_grid"]] == [round(-0.05 * k, 2) for k in range(1, 13)]
     assert (f["ratio_ranges"], f["chrf_correct"], f["wilson_lower_bound"], f["check_precision"], f["check_min_accepted"]) == ([[0.5, 2.0], [0.6, 1.6]], 0.60, 0.90, 0.90, 150)

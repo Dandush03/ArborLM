@@ -5,7 +5,7 @@ Data-generation side (it needs the reference tokenizer's offsets): the validatio
 ``window`` tokens (256); a trailing remainder is dropped. A window is in the *marker-like* stratum if one of the strings lies wholly within the text of its tokens 1-64 (``decision`` tokens), and in the
 *ordinary* stratum if it contains none of the strings anywhere. A window whose only such strings lie after token 64 is in neither stratum and is not used. Strings are matched case-sensitively as
 substrings of the raw text; "a line ending in ':'" means a ':' immediately followed by a newline, both within the span in question. The second GEN decision is taken at the last token of the first marker-like
-string EXTENDED THROUGH a colon that immediately follows it (never beyond token 64), so it can land on the colon every task prompt ends on. 100 windows of each stratum are sampled with the GEN-window seed.
+string EXTENDED THROUGH a colon that immediately follows it (never beyond token 64), so it can land on the colon every task prompt ends on. Every window of the marker-like stratum is taken (44 on the registered grid, stated in the configuration) and 100 ordinary windows are sampled with the GEN-window seed (ruling of 2026-11-16).
 If either stratum has fewer than the wanted count on this grid, neither the grid nor the rule is changed: ``WindowsInsufficient`` is raised and the work returns to the lead before the freeze.
 """
 
@@ -68,14 +68,25 @@ def cut_windows(tok: ReferenceTokenizer, text: str, vocab_index: Mapping[str, in
     return out
 
 
-def select_windows(windows: Sequence[GeneralWindow], per_stratum: Mapping[str, int], generator: torch.Generator) -> list[GeneralWindow]:
-    """Sample the wanted number of windows of each stratum with the GEN-window seed (marker-like first, then ordinary). Fewer than wanted in either stratum raises ``WindowsInsufficient``."""
+def select_windows(windows: Sequence[GeneralWindow], per_stratum: Mapping[str, int], generator: torch.Generator, *, take_all: Sequence[str] = (), exact: Mapping[str, int] | None = None) -> list[GeneralWindow]:
+    """The GEN panel: for a stratum in ``take_all`` every window of the stratum on the fixed grid (nothing is sampled; ``exact`` states the count the rule must find, and any other count raises
+    ``WindowsInsufficient``: the lead's ruling of 2026-11-16 for the marker-like stratum, 44); any other stratum is sampled to ``per_stratum`` with the GEN-window seed. The generator is advanced by one
+    permutation of the pool for EVERY stratum, taken or sampled, in the order marker-like then ordinary, so the ordinary sample is the one the earlier code drew (it drew the marker-like permutation first).
+    Fewer windows than wanted in a sampled stratum raises ``WindowsInsufficient``."""
     out: list[GeneralWindow] = []
     for stratum in ("marker", "ordinary"):
         pool = [w for w in windows if w.stratum == stratum]
+        order = torch.randperm(len(pool), generator=generator).tolist()  # drawn for every stratum: the generator state before the ordinary draw is what it always was
+        if stratum in take_all:
+            want = (exact or {}).get(stratum)
+            if want is not None and len(pool) != want:
+                raise WindowsInsufficient(f"stratum {stratum!r} has {len(pool)} windows on the fixed grid, the configuration states {want}: the work returns to the lead (nothing is relaxed)")
+            if not pool:
+                raise WindowsInsufficient(f"stratum {stratum!r} has no window on the fixed grid")
+            out += pool
+            continue
         want = per_stratum[stratum]
         if len(pool) < want:
             raise WindowsInsufficient(f"stratum {stratum!r} has {len(pool)} windows on the fixed grid, fewer than {want}")
-        order = torch.randperm(len(pool), generator=generator).tolist()[:want]
-        out += [pool[i] for i in sorted(order)]
+        out += [pool[i] for i in sorted(order[:want])]
     return out

@@ -156,11 +156,30 @@ def _window_logits(ctx: EvalContext, arm: Arm, w: GeneralWindow, tasks: Sequence
     return run_student(ctx.student, arm, ids, [reads])[0]
 
 
+PANEL_WEIGHTING = "equal-weight mean of the two stratum means (one half marker-like, one half ordinary), whatever the stratum counts"
+
+
+def panel_mean(values: Sequence[float], strata: Sequence[str]) -> float:
+    """The panel loss of a GEN reading: the equal-weight mean of the marker-like stratum's mean and the ordinary stratum's mean (the lead's ruling of 2026-11-16). With equal stratum counts this is the plain mean
+    over all windows, which is how the panel was read before; with 44 marker-like and 100 ordinary windows it is not (the marker-like windows are not diluted to 44/144). A stratum with no window is left out."""
+    means = [mean([v for v, s in zip(values, strata, strict=True) if s == name]) for name in ("marker", "ordinary") if any(s == name for s in strata)]
+    return float(sum(means) / len(means)) if means else float("nan")
+
+
+def stratum_means(name: str, strata: Sequence[str], base: Sequence[float], a: Sequence[float], m: Sequence[float]) -> dict[str, Any]:
+    """The count and the mean of one stratum, printed on every GEN line: the unmodified student's loss, the router reading's loss under each decision and the two loss increases."""
+    idx = [i for i, s in enumerate(strata) if s == name]
+    if not idx:
+        return {"windows": 0}
+    mb, ma, mm = (mean([x[i] for i in idx]) for x in (base, a, m))
+    return {"windows": len(idx), "nll_base": mb, "nll_router": ma, "nll_router_first_marker": mm, "loss_increase": ma - mb, "loss_increase_first_marker": mm - mb}
+
+
 @torch.no_grad()
 def general_quality(ctx: EvalContext, arm: Arm, router: Router | None, *, always_on_task: str | None = None) -> dict[str, Any]:
     """Condition (a), the registered GEN measurement: for each window the learned router of the snapshot reads the student's hidden state at token 64 of a memory-free pass; if it returns a task
     the store is read with that task's codes at every in-vocabulary word of the whole window, if "none" nothing is read. The loss is the mean next-token negative log-likelihood over tokens 65 onwards
-    of all windows, against the unmodified student's on the same positions; the router's false-trigger count per stratum is printed beside it. Condition (b), the always-on diagnostic, reads with
+    of the panel (the equal-weight mean of the two stratum means), against the unmodified student's on the same positions; the router's false-trigger count per stratum is printed beside it. Condition (b), the always-on diagnostic, reads with
     ``always_on_task``'s codes at every in-vocabulary word (an adapter is always applied); it enters no rule. Also: mean KL to the Stage 0 student and the share of unchanged top-1 tokens.
 
     The lead's ruling on C-M6: GEN is measured twice for the marker stratum, with the decision at token 64 as registered (``loss_increase``) and with the decision at the last token of the first
@@ -172,6 +191,7 @@ def general_quality(ctx: EvalContext, arm: Arm, router: Router | None, *, always
     nll_a: list[float] = []
     nll_m: list[float] = []
     nll_b: list[float] = []
+    strata: list[str] = [w.stratum for w in ctx.windows]
     kl_a: list[float] = []
     same_a: list[float] = []
     triggers = {"marker": 0, "ordinary": 0}
@@ -211,11 +231,17 @@ def general_quality(ctx: EvalContext, arm: Arm, router: Router | None, *, always
             b = _window_logits(ctx, arm, w, [always_on_task])[ctx.first_nll_index - 1 : -1]
             nll_b.append(float(-F.log_softmax(b, dim=-1).gather(1, tgt[:, None]).mean()))
     margin = core.CFG["gates"]["gen_loss_margin"]
-    inc_a, inc_m = mean(nll_a) - mean(nll_base), mean(nll_m) - mean(nll_base)
-    res.update({"nll_base": mean(nll_base), "nll_router": mean(nll_a), "loss_increase": inc_a, "nll_router_first_marker": mean(nll_m), "loss_increase_first_marker": inc_m, "false_trigger_count": triggers,
+
+    def panel(values: Sequence[float]) -> float:
+        return panel_mean(values, strata)
+
+    inc_a, inc_m = panel(nll_a) - panel(nll_base), panel(nll_m) - panel(nll_base)
+    res["panel_weighting"] = PANEL_WEIGHTING
+    res["stratum_means"] = {s: stratum_means(s, strata, nll_base, nll_a, nll_m) for s in ("marker", "ordinary")}
+    res.update({"nll_base": panel(nll_base), "nll_router": panel(nll_a), "loss_increase": inc_a, "nll_router_first_marker": panel(nll_m), "loss_increase_first_marker": inc_m, "false_trigger_count": triggers,
                 "false_trigger_count_first_marker": triggers_m, "stratum_sizes": counts, "mean_kl_to_stage0": mean(kl_a), "top1_unchanged": mean(same_a)})  # fmt: skip
     if always_on_task is not None:
-        res["always_on_loss_increase"] = mean(nll_b) - mean(nll_base)
+        res["always_on_loss_increase"] = panel(nll_b) - panel(nll_base)
     res["gate_margin"] = margin
     res["passes_registered_decision"] = bool(inc_a <= margin)
     res["passes_first_marker_decision"] = bool(inc_m <= margin)

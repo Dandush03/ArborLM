@@ -130,13 +130,19 @@ def composition_lines(comp: Mapping[str, Any], design: str) -> list[str]:
     return out
 
 
+def _stratum_cols(r: Mapping[str, Any]) -> str:
+    sm = r.get("stratum_means") or {}
+    mk, od = sm.get("marker") or {}, sm.get("ordinary") or {}
+    return f"{mk.get('windows', '-')} / {od.get('windows', '-')} | {_fmt(mk.get('loss_increase'))} / {_fmt(od.get('loss_increase'))} | {_fmt(mk.get('loss_increase_first_marker'))} / {_fmt(od.get('loss_increase_first_marker'))}"
+
+
 def gen_lines(rows: Sequence[Mapping[str, Any]], routers: Sequence[Mapping[str, Any]]) -> list[str]:
-    out = ["Table 3. General quality under the keyword router (GEN) per snapshot, measured twice for the marker stratum (the decision at token 64 as registered, and the decision at the last token of the first marker-like string in tokens 1-64); the existing threshold of 0.02 nats must hold under both. With the router's false-trigger count per stratum, the always-on diagnostic and the router diagnostic; the oracle-assisted line above applies to the whole table and to this caption. A pass is described as the keyword router stayed silent, not as the memory preserving general language.",
-           "| snapshot | loss increase, decision at token 64 (nats per token) | loss increase, decision at first marker string | GEN gate (both decisions) | false triggers at token 64 (marker-like / ordinary) | false triggers at first marker string (marker-like / ordinary) | always-on loss increase |", "|---|---|---|---|---|---|---|"]
+    out = ["Table 3. General quality under the keyword router (GEN) per snapshot, measured twice for the marker stratum (the decision at token 64 as registered, and the decision at the last token of the first marker-like string in tokens 1-64); the existing threshold of 0.02 nats must hold under both. The panel loss is the equal-weight mean of the two stratum means (the marker-like half of its weight rests on the marker-like windows of the fixed grid, 44, against 100 ordinary windows: a stated limit). Each line prints both stratum counts and both stratum means. With the router's false-trigger count per stratum, the always-on diagnostic and the router diagnostic; the oracle-assisted line above applies to the whole table and to this caption. A pass is described as the keyword router stayed silent, not as the memory preserving general language.",
+           "| snapshot | loss increase, decision at token 64 (nats per token) | loss increase, decision at first marker string | GEN gate (both decisions) | false triggers at token 64 (marker-like / ordinary) | false triggers at first marker string (marker-like / ordinary) | always-on loss increase | windows (marker-like / ordinary) | stratum mean loss increase at token 64 (marker-like / ordinary) | stratum mean loss increase at first marker string (marker-like / ordinary) |", "|---|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
         ft = r.get("false_triggers") or {}
         fm = r.get("false_triggers_first_marker") or {}
-        out.append(f"| {r['cell']} | {_fmt(r['loss_increase'])} | {_fmt(r.get('loss_increase_first_marker'))} | {_fmt(r['gen_gate'])} | {ft.get('marker', '-')} / {ft.get('ordinary', '-')} | {fm.get('marker', '-')} / {fm.get('ordinary', '-')} | {_fmt(r.get('always_on_loss_increase'))} |")
+        out.append(f"| {r['cell']} | {_fmt(r['loss_increase'])} | {_fmt(r.get('loss_increase_first_marker'))} | {_fmt(r['gen_gate'])} | {ft.get('marker', '-')} / {ft.get('ordinary', '-')} | {fm.get('marker', '-')} / {fm.get('ordinary', '-')} | {_fmt(r.get('always_on_loss_increase'))} | {_stratum_cols(r)} |")
     out += ["Router diagnostic (it enters no rule): false-trigger rate on the marker-like windows when the decision is taken at the last token of the first marker-like string within tokens 1-64:"]
     for r in routers:
         d = r.get("diagnostic_first_marker") or {}

@@ -559,7 +559,7 @@ def gen_rows(st: Study) -> list[dict[str, Any]]:
                 rows.append({
                     "cell": c["label"], "loss_increase": g.get("loss_increase"), "loss_increase_first_marker": g.get("loss_increase_first_marker"),
                     "gate_registered_decision": C.gen_gate(a), "gate_first_marker_decision": C.gen_gate(m), "gen_gate": C.gen_gate(a, m),
-                    "false_triggers": g.get("false_trigger_count"), "false_triggers_first_marker": g.get("false_trigger_count_first_marker"), "stratum_sizes": g.get("stratum_sizes"),
+                    "false_triggers": g.get("false_trigger_count"), "false_triggers_first_marker": g.get("false_trigger_count_first_marker"), "stratum_sizes": g.get("stratum_sizes"), "stratum_means": g.get("stratum_means"),
                     "always_on_loss_increase": g.get("always_on_loss_increase"), "mean_kl_to_stage0": g.get("mean_kl_to_stage0"), "top1_unchanged": g.get("top1_unchanged"),
                 })  # fmt: skip
     return rows

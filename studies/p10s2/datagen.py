@@ -534,13 +534,15 @@ def run(downloads: Path, out: Path, *, led: LedgerLike, stage_cap_seconds: float
 
 def stop_kind(e: BaseException) -> str:
     """``registered-test`` for a stop on a registered test of the step (it returns to the lead), ``engineering`` for everything else (a cap, a guard, a read or format error, an unexpected exception)."""
-    return "registered-test" if isinstance(e, RegisteredTestStop) or type(e).__name__ in ("WindowsInsufficient", "PendingLeadReview") else "engineering"
+    return "registered-test" if isinstance(e, RegisteredTestStop) or type(e).__name__ in ("WindowsInsufficient", "InputsInsufficient", "PendingLeadReview") else "engineering"
 
 
 def write_stop_record(out: Path, record: dict[str, Any], e: BaseException, attempt: int) -> None:
     """Keep the stop record of this attempt (``datagen_attempts/attempt-NNN.json``, never overwritten) and leave it as ``prefreeze_record.json`` (a later successful attempt replaces that file only). Each attempt
     is charged on the study ledger by ``charged_stage``."""
     rec = {**record, "stopped": f"{type(e).__name__}: {e}", "stop_kind": stop_kind(e), "attempt": attempt, "bundle_written": False}
+    if getattr(e, "counts", None) is not None:
+        rec["fixed_input_counts"] = e.counts  # type: ignore[attr-defined]
     d = out / "datagen_attempts"
     d.mkdir(parents=True, exist_ok=True)
     write_json(d / f"attempt-{attempt:03d}.json", core.jsonable(rec))

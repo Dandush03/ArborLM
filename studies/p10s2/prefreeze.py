@@ -6,6 +6,7 @@ The inputs are interfaces: a ``Corpus``, a ``ReferenceTokenizer``, the study's s
 step (``datagen``, unexecuted here) fill them differently and call the same code, so the real-data steps add no scientific code.
 """
 
+import math
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
@@ -64,16 +65,57 @@ class WindowSpec:
     marker_like: int
     ablation_subsample: int
     default_max_new: int
+    take_all_marker: bool = False  # registered: the marker-like stratum is every window of it, and ``marker_like`` is the count the rule must find
 
     @staticmethod
     def registered() -> "WindowSpec":
         d = core.CFG["data"]
-        return WindowSpec(d["general_window_tokens"], d["router_decision_token"], d["general_windows"], d["general_windows_marker_like"], d["ablation_subsample"], d["generation_new_tokens"])
+        if d["general_windows"] != d["general_windows_marker_like"] + d["general_windows_ordinary"]:
+            raise ValueError("the configuration's GEN panel size is not its marker-like count plus its ordinary count")
+        return WindowSpec(d["general_window_tokens"], d["router_decision_token"], d["general_windows"], d["general_windows_marker_like"], d["ablation_subsample"], d["generation_new_tokens"], True)
 
     @staticmethod
     def dry() -> "WindowSpec":
         d = core.CFG["dry"]
         return WindowSpec(d["window_tokens"], d["router_decision_token"], d["general_windows"], d["general_windows_marker_like"], d["ablation_subsample"], d["max_new_tokens"])
+
+
+class InputsInsufficient(RuntimeError):
+    """A count the specification requires of the fixed inputs falls short, found before any teacher generation (the lead's ruling of 2026-11-16, point 4): not an engineering error, it returns to the lead. ``counts``
+    is the whole table of counts against requirements, kept in the stop record."""
+
+    def __init__(self, message: str, counts: dict[str, Any]) -> None:
+        super().__init__(message)
+        self.counts = counts
+
+
+def fixed_input_counts(part: Any, gen_sources: Mapping[str, Sequence[Any]], windows: Sequence[Any], sizes: Any, spec: "WindowSpec") -> dict[str, Any]:
+    """Every count the specification requires of the fixed inputs that is known before the teachers run, each against its requirement: the GEN window strata on the fixed grid (the marker-like count must be
+    exactly the configured one in the registered spec), the evaluation panels (500, 500, 250), the no-gold source pools before filtering (at least the accepted pool needed, 8,000 x 1.25, which the accepted
+    pool after filtering cannot exceed), the gold pools (8,000 per capability), and the other panels reported against their nominal sizes. Nothing is drawn here."""
+    checks: list[dict[str, Any]] = []
+
+    def add(name: str, count: int, requirement: str, ok: bool) -> None:
+        checks.append({"name": name, "count": int(count), "requirement": requirement, "ok": bool(ok)})
+
+    n_marker = sum(1 for w in windows if w.stratum == "marker")
+    n_ordinary = sum(1 for w in windows if w.stratum == "ordinary")
+    want_ord = spec.windows - spec.marker_like
+    if spec.take_all_marker:
+        add("GEN windows, marker-like stratum (every window of the fixed grid)", n_marker, f"exactly {spec.marker_like} (the configuration states the count the rule finds)", n_marker == spec.marker_like)
+    else:
+        add("GEN windows, marker-like stratum", n_marker, f">= {spec.marker_like} (sampled)", n_marker >= spec.marker_like)
+    add("GEN windows, ordinary stratum", n_ordinary, f">= {want_ord} (sampled with the GEN-window seed)", n_ordinary >= want_ord)
+    s = sizes
+    for name, need in (("E_A", s.panel_eval_min), ("E_B", s.panel_eval_min), ("E_C", s.panel_combined_min)):
+        add(f"panel {name}", len(part.panels[name]), f">= {need}", len(part.panels[name]) >= need)
+    need_pool = math.ceil(s.accepted_per_replicate * s.sufficiency_factor)
+    for c in core.TASKS:
+        add(f"capability {c}: no-gold sources before filtering", len(part.source_pool[c]), f">= {need_pool} ({s.accepted_per_replicate} x {s.sufficiency_factor})", len(part.source_pool[c]) >= need_pool)
+        add(f"capability {c}: gold pairs outside Q, D_cal, D_con", len(part.gold_pool[c]), f">= {s.gold_per_replicate}", len(part.gold_pool[c]) >= s.gold_per_replicate)
+    for name, nominal in (("Q_fit", s.panel_q_fit), ("Q_check", s.panel_q_check), ("D_cal", s.panel_d_cal), ("D_con", s.panel_d_con), ("E_open", s.panel_open)):
+        add(f"panel {name} (reported against its nominal size)", len(part.panels[name]), f"nominal {nominal}; no stop is specified", True)
+    return {"checks": checks, "ok": all(c["ok"] for c in checks), "generation_sources": {c: len(gen_sources[c]) for c in core.TASKS}}
 
 
 Tick = Callable[[str], None]
@@ -101,6 +143,15 @@ def build_bundle(
     bank = ExampleBank()
     nl = tuple(tokenize_segment(tok, "\n").ids)
     gen_sources = plan_generation(part, mode)
+    # Every count the specification requires of the fixed inputs is checked HERE, before the hour of teacher generation (the lead's ruling of 2026-11-16, point 4): the GEN window strata on the fixed grid,
+    # the panel and pool sizes of section 4 and the gold pools. The only draw here is the GEN-window selection from its own seed (220905), so the order of the checks changes no sample.
+    wl = cut_windows(tok, text_val, vocab_index, spec.window_tokens, spec.decision_token)
+    counts = fixed_input_counts(part, gen_sources, wl, sizes, spec)
+    rec["fixed_input_counts"] = counts
+    short = [c for c in counts["checks"] if not c["ok"]]
+    if mode == "registered-data" and short:
+        raise InputsInsufficient("a count of the fixed inputs falls short before any teacher generation: " + "; ".join(f"{c['name']}: {c['count']} (needs {c['requirement']})" for c in short), counts)
+    windows = select_windows(wl, {"marker": spec.marker_like, "ordinary": spec.windows - spec.marker_like}, core.partition_gen(mode, "gen_windows", "GEN window selection"), take_all=("marker",) if spec.take_all_marker else (), exact={"marker": spec.marker_like} if spec.take_all_marker else None)
     # the listed seeds drawn once, here: 220909 (the sentences of each teacher's tokenizer record) and 220908 (the timing benchmark's items); neither is drawn by a later stage (audit M8)
     record_sentences = tokenizer_record_sentences(gen_sources, core.CFG["data"]["tokenizer_record_sentences"], mode)
     timing = timing_indices({n: len(part.panels[n]) for n in ("E_A", "E_B")}, core.CFG["budget"]["timing_items"], mode)
@@ -154,8 +205,6 @@ def build_bundle(
             for c in core.TASKS:
                 if c in it.refs:
                     bank.build_from_tokenizer(tok, vocab_index, c, it.en, None)
-    wl = cut_windows(tok, text_val, vocab_index, spec.window_tokens, spec.decision_token)
-    windows = select_windows(wl, {"marker": spec.marker_like, "ordinary": spec.windows - spec.marker_like}, core.partition_gen(mode, "gen_windows", "GEN window selection"))
     ablation_keys = {name: [i.key for i in fixed_subsample(part.panels[name], spec.ablation_subsample, mode, "ablation_subsample")] for name in ("E_A", "E_B")}
     # the new-token limit: the 99.5th percentile of the gold references of D_cal, German and French pooled (reading, PENDING LEAD REVIEW: one limit for both languages, or one per language)
     max_new = max(truncation_percentile([len(tok.encode(" " + r)) + len(nl) for it in part.panels["D_cal"] for c in core.TASKS for r in it.refs.get(c, ())] or [spec.default_max_new]), 4)

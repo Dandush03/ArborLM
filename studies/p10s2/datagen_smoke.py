@@ -198,8 +198,30 @@ def run_smoke(downloads: Path, wikitext_dir: Path) -> Smoke:
     return s
 
 
+def run_counts(downloads: Path, wikitext_dir: Path) -> dict[str, Any]:
+    """``--counts``: exactly the full-size count checks of the data-generation step on the real inputs, before any teacher generation: the Tatoeba exports are parsed in full (their link resolution and symmetry
+    checks run), the partition is built with the step's own (partition-side) seeds, the generation sources are planned, the validation text is tokenized and cut on the fixed grid, and every count is set against
+    its requirement (``prefreeze.fixed_input_counts``). No teacher runs, nothing is sampled for a registered item that is written anywhere, and nothing is written."""
+    from .data import Sizes, build_partition, plan_generation
+    from .prefreeze import WindowSpec, fixed_input_counts
+
+    t0 = time.perf_counter()
+    mode = "registered-data"
+    hashes = datagen.verify_downloads(downloads, core.ROOT / fetch_guard.TATOEBA_RECORD)
+    texts, _prov = datagen.read_wikitext(wikitext_dir)
+    corpus, corpus_rec = datagen.load_corpus(downloads, hashes["tatoeba"])
+    tok = datagen.HFTokenizer(downloads)
+    sizes, spec = Sizes.registered(), WindowSpec.registered()
+    part = build_partition(corpus, mode, sizes)
+    gen_sources = plan_generation(part, mode)
+    wl = cut_windows(tok, texts["validation"], part.vocab_index, spec.window_tokens, spec.decision_token)
+    counts = fixed_input_counts(part, gen_sources, wl, sizes, spec)
+    return {"ok": counts["ok"], "seconds": round(time.perf_counter() - t0, 1), "counts": counts["checks"], "generation_sources": counts["generation_sources"], "tatoeba": {k: corpus_rec["link_resolution"][k] for k in corpus_rec["link_resolution"]}, "link_symmetry": corpus_rec["link_symmetry"], "panel_sizes": part.counts.get("panel_sizes"), "vocabulary": len(part.vocab)}
+
+
 def smoke_main(argv: Sequence[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m studies.p10s2.datagen --smoke")
+    p.add_argument("--counts", action="store_true", help="only the full-size count checks of the fixed inputs (no generation); fails if any count falls short")
     p.add_argument("--downloads", default=str(core.ROOT / "data" / "p10s2-pre-20261115" / "downloads"))
     p.add_argument("--wikitext-dir", default=str(core.ROOT / "data" / "wikitext2"))
     a = p.parse_args(argv)
@@ -208,6 +230,10 @@ def smoke_main(argv: Sequence[str] | None = None) -> int:
     os.environ["HF_HUB_OFFLINE"] = "1"  # as datagen.run sets them: offline, never setdefault
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
     torch.set_num_threads(2)
+    if a.counts:
+        res = run_counts(Path(a.downloads), Path(a.wikitext_dir))
+        sys.stdout.write(json.dumps(core.jsonable(res), indent=1, default=str) + "\n")
+        return 0 if res["ok"] else 1
     s = run_smoke(Path(a.downloads), Path(a.wikitext_dir))
     sys.stdout.write(json.dumps(core.jsonable({"ok": not s.failures, "failures": s.failures, "steps": s.results}), indent=1, default=str) + "\n")
     return 0 if not s.failures else 1
