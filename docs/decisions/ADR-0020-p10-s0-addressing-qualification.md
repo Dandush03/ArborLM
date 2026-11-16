@@ -805,3 +805,16 @@ Rulings by the lead, before any registered draw exists:
 - F1–F3, F6 and F9 are implementation defects fixed as the audit states; the analysis and report times are measured on synthetic full-registry records before the cap table is written (README step 8).
 - The watchdog defect in `src/arborlm/watchdog.py` (F12) does not affect S0, whose stages use `studies/p9/pool.py`; changing `src/` needs an approved amendment and is listed for the post-P10 clean-up.
 
+
+## Addendum — the human lead's acceptance of the P10-S0 outcome (2026-11-16 UTC)
+
+The lead put the outcome statement (`results/p10s0-run-2026-11-16/OUTCOME.md`) and the independent recomputation (`docs/reviews/p10s0-results-2026-11-16/REVIEW.md`: 1,065 comparisons, 0 disagreements, presentation defects noted) to the human lead and asked whether the outcome is accepted as registered, with its caveats. The human lead, verbatim:
+
+> register it as it is, same as the other we commit push and the propose a P10-I to adress each better
+
+Recorded by the lead:
+
+- **The P10-S0 outcome is accepted as registered and unchanged:** row 4, ADDRESSING-QUALIFIED (4,096 AND 16,384), arm A5-D. No class, threshold or number is altered by this acceptance, and the files under `results/p10s0-run-2026-11-16/` stay as written (their "not accepted" wording was true when written; this addendum is the acceptance).
+- **The caveats are part of what is accepted:** A5-D is distinguished from A0 at 4,096 slots only (NOT DISTINGUISHED at 16,384; H20-D not supported); OVERLOAD NOT QUALIFIED (A5-D at 8K facts on 4K slots passed 1 of 10 cells, failing on held-out templates only); the record-length-free variant DOES NOT PASS; the 65,536 probe is 3 of 3 on three draws only; condition 6 decided no class; A1 is UNRELIABLE and HARMS at 16,384 (H20-B contradicted); A2 fails at both sizes (H20-C contradicted). The recomputation's presentation defects in the report are recorded and not corrected in the registered record.
+- **"Address each better" is taken as direction for P10-I:** each shortfall above is a candidate item for the integrated fourth study's proposal. The lead reads "same as the other" as: handled like the earlier accepted studies (recorded, committed, pushed). It is not read as a decision on any other open question (the P10-S1 and P10-S2 lead rulings reported to the human lead stay as reported, under the P10 delegation).
+- P10-I is proposed, not run, and needs the human lead's review (the standing delegation does not cover it). `Astra review: NOT_PERFORMED`.
