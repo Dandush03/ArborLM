@@ -296,10 +296,13 @@ def config_repo(folder: Path) -> Path:
     return repo
 
 
+S0_TRAIN_MANIFEST = {"kind": "stage_manifest", "schema": 1, "study": "P10S0", "mode": "registered", "stage": "train-q1", "status": "COMPLETE", "run_id": "P10S0-registered-test", "finished_utc": "2026-11-16T00:00:00+00:00", "tasks": []}  # the shape of P10-S0's registered stage manifests
+
+
 def s0_manifest(paths: dict[str, Path]) -> str:
     """A stand-in for the manifest of S0's last due registered training stage (evidence the freeze binds by hash)."""
     f = paths["projection"].parent / "s0_train_manifest.json"
-    f.write_text('{"stage": "train", "status": "COMPLETE"}')
+    f.write_text(json.dumps(S0_TRAIN_MANIFEST))
     return str(f)
 
 
@@ -329,9 +332,10 @@ def test_freeze_writes_plan_and_caps_deterministically(tmp_path: Path) -> None:
     assert stages.main(freeze_argv(paths, run, tmp_path / "f1")) == 2  # a freeze is written once
     s0 = tmp_path / "s0.json"
     s0.write_text(json.dumps({"outcome": "ADDRESSING-NOT-QUALIFIED"}))
-    again = stages.main(freeze_argv(paths, run, tmp_path / "f3", "--s0-record", str(s0), "--no-loaded-transitions", "4K→16K", "--direction-record", str(s0)))  # the human lead's recorded direction (any file: bound by hash)
+    assert stages.main(freeze_argv(paths, run, tmp_path / "fd", "--no-loaded-transitions", "4K→16K", "--direction-record", str(s0))) == 2 and not (tmp_path / "fd").exists()  # no run length exists for an unloaded cell: it returns to the lead
+    again = stages.main(freeze_argv(paths, run, tmp_path / "f3", "--s0-record", str(s0)))
     plan3 = json.loads((tmp_path / "f3" / "plan.json").read_text())
-    assert again == 0 and plan3["frozen"]["s0_status"] == "S0 ADDRESSING-NOT-QUALIFIED" and plan3["frozen"]["no_loaded_transitions"] == ["4K→16K"] and plan3["s0_record"]["sha256"] == file_sha256(s0)
+    assert again == 0 and plan3["frozen"]["s0_status"] == "S0 ADDRESSING-NOT-QUALIFIED" and plan3["frozen"]["no_loaded_transitions"] == [] and plan3["s0_record"]["sha256"] == file_sha256(s0)
 
 
 def test_freeze_refusals(tmp_path: Path) -> None:
@@ -439,7 +443,7 @@ def test_dry_calibration_covers_all_its_cells_and_leaves_decisions_to_the_lead(d
     assert cal["training_wall_seconds_per_update"] and cal["charged_seconds"] > 0 and cal["returns_to_lead"] == []
     preview = core.read_record(dry["cal"] / "timing_preview.json", "timing")
     assert preview["preview"] is True and preview["status"] == "MEASURED" and set(preview["item_caps"]) == {"load", "row-up", "h8", "dense"} and len(preview["wall_per_update"]) == 16
-    assert len(list((dry["cal"] / "preview").glob("*.json"))) == 16  # every measured configuration went through the whitelist validator
+    assert len(list((dry["cal"] / "preview").glob("*.json"))) == 16 + len(preview["evaluation_seconds"]) and preview["startup_seconds"] > 0  # every measured configuration went through the whitelist validator
 
 
 def test_dry_rehearsal_writes_only_whitelisted_records_and_binds_the_calibration(dry: dict[str, Any]) -> None:

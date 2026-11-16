@@ -121,7 +121,7 @@ def run_e2e(workdir: Path, source: Path | None = None) -> dict[str, Any]:
         r.git("add generation cap", "add", "-A")
         r.git("commit generation cap", "commit", "--quiet", "-m", "e2e: generation cap set")
         code = r.git("rev-parse", "rev-parse", "HEAD")
-        r.run("generate.sh (five test draws)", ["sh", "studies/p10s1/launch/generate.sh", str(run_dir), code])
+        r.run("generate.sh (five test draws)", ["sh", "studies/p10s1/launch/generate.sh", str(run_dir), code, str(cal / "calibration.json")])
         r.run(
             "freeze",
             stages("freeze", "--run-dir", str(run_dir), "--projection", str(reh / "projection.json"), "--calibration", str(cal / "calibration.json"), "--timing", str(reh / "timing.json"), "--gates", str(reh / "gates.json")),

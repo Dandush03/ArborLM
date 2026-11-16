@@ -172,7 +172,7 @@ def test_seed_set_modes() -> None:
 def test_config_matches_constants_and_the_cap_is_a_config_value(tmp_path: Path) -> None:
     text = (ROOT / core.DEFAULT_CONFIG).read_text()
     cap = tomllib.loads(text)["resources"]["cap_hours"]
-    assert text == core.render_config_toml(cap) and core.render_config_toml() == core.render_config_toml(core.CAP_HOURS_DEFAULT) and 0 < cap <= core.load_config()["resources"]["cap_max_hours"]  # the rule, not the pre-freeze value: 16.0 until the freeze writes the computed cap, then that cap
+    assert text == core.render_config_toml(cap, core.load_config()["generation"]) and core.render_config_toml() == core.render_config_toml(core.CAP_HOURS_DEFAULT) and 0 < cap <= core.load_config()["resources"]["cap_max_hours"]  # the rule, not the pre-freeze value: 16.0 until the freeze writes the computed cap, then that cap
     assert core.load_config()["resources"]["rss_aggregate_bytes"] == 18 * 1024**3 and core.load_config()["resources"]["workers"] == 6 and core.load_config()["resources"]["rss_worker_bytes"] == 3 * 1024**3
     assert core.cap_seconds() == cap * 3600.0
     other = tmp_path / "cap20.toml"
@@ -323,13 +323,13 @@ def test_launch_scripts_are_fixed_and_complete() -> None:
 
 def test_launch_scripts_refuse_a_wrong_number_of_arguments_and_unfrozen_runs(tmp_path: Path) -> None:
     for s in (*STAGES, "generate"):
-        for argv in ([], ["only-one"], ["a", "b", "c"]):
+        for argv in ([], ["only-one"], ["a", "b", "c", "d"]) if s == "generate" else ([], ["only-one"], ["a", "b", "c"]):
             r = subprocess.run(["sh", str(ROOT / "studies" / "p10s1" / "launch" / f"{s}.sh"), *argv], capture_output=True, text=True, check=False)
             assert r.returncode == 2 and "usage:" in r.stderr, (s, argv, r.stderr)
     # two arguments: the driver itself refuses (no plan, no clean freeze commit): exit 2, nothing runs, no run directory is created
     r = subprocess.run(["sh", str(ROOT / "studies" / "p10s1" / "launch" / "train.sh"), str(tmp_path / "run"), "deadbeef"], capture_output=True, text=True, check=False, cwd=ROOT)
     assert r.returncode == 2 and "REFUSED" in r.stderr and not (tmp_path / "run").exists()
-    r = subprocess.run(["sh", str(ROOT / "studies" / "p10s1" / "launch" / "generate.sh"), str(tmp_path / "run"), "deadbeef"], capture_output=True, text=True, check=False, cwd=ROOT)
+    r = subprocess.run(["sh", str(ROOT / "studies" / "p10s1" / "launch" / "generate.sh"), str(tmp_path / "run"), "deadbeef", str(tmp_path / "cal.json")], capture_output=True, text=True, check=False, cwd=ROOT)
     assert r.returncode == 2 and not (tmp_path / "run").exists()
 
 

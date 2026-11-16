@@ -35,6 +35,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
+import psutil
 import torch
 
 from arborlm.io import canonical_json, file_sha256, read_json, sha256, write_json
@@ -80,7 +81,10 @@ def concurrency_guard(stage: str, args: argparse.Namespace) -> dict[str, Any] | 
         return {"checked": False, "reason": "DRY profile (tiny synthetic sizes, nothing measured)"}
     head = stage.split("-")[0]
     if head in ("timing", "rehearse", "calibrate") or args.mode == REGISTERED or (args.mode == REHEARSAL and head in ("gates", "generate")):
-        return timing.concurrency_check()  # the calibration does not overlap P10-S0's registered run either (section 25.13, m11); P10-S2: not used
+        check = timing.concurrency_check()  # the calibration does not overlap P10-S0's registered run either (section 25.13, m11); P10-S2: not used
+        if head in ("timing", "rehearse", "calibrate") and args.mode != REGISTERED:  # the preview, the calibration, the isolated timing and the rehearsal also need the evidence that S0's training has finished (section 25.14 item 3)
+            check = {**check, **timing.validate_s0_evidence(args.s0_training_manifest, args.s0_refusal_record)}
+        return check
     return None
 
 
@@ -708,8 +712,10 @@ def work_cpu_timing(args: argparse.Namespace) -> int:
     fro = frozen_of(args)
     seeds = seeds_for(args)
     study = study_data(args, seeds, fro.plan)
+    startup = max(0.0, time.time() - psutil.Process().create_time())  # the process's age once the draw is built: what every calibration task pays before its first update
     cpu: dict[str, float] = {}
     wall: dict[str, float] = {}
+    evaluation: dict[str, float] = {}
     runs: dict[str, Any] = {}
     status = "MEASURED" if quiet["quiet"] else timing.NOT_MEASURED
     warm, n, reps = (2, 4, core.TIMING_REPEATS) if tiny(args) else (core.TIMING_WARMUP_UPDATES, core.TIMING_UPDATES, core.TIMING_REPEATS)
@@ -727,9 +733,22 @@ def work_cpu_timing(args: argparse.Namespace) -> int:
                     "updates": warm + reps * n, "seconds_per_update": r["wall_seconds_per_update"], "cpu_seconds_per_update": r["cpu_seconds_per_update"], "peak_rss_bytes": int(r["peak_rss_bytes"]),
                     "load_average": [float(x) for x in quiet["load_averages"]], "seed_set": study.seeds.name, "item": f"{arm}|{slots}",
                 })  # fmt: skip
-    record: dict[str, Any] = {**core.envelope("timing"), "status": status, "cpu_per_update": cpu, "wall_per_update": wall, "runs": runs, "quiet": quiet, "load_average_max": core.LOAD_AVERAGE_MAX, "dry": bool(tiny(args)), "environment": core.environment(), "identity": core.code_identity(), "source_hashes": core.source_hashes(), "seed_set": study.seeds.name}
+    if args.preview and quiet["quiet"]:  # one calibration-style evaluation (no ablation depth, no index) of a 2-update model of every configuration the calibration trains: time only, the counts are discarded
+        for arm, facts, slots in sorted({(c.arm, c.facts, c.slots) for c in core.calibration_cells(None, unit_of(args))}):
+            cell = core.make_cell("P", arm, facts_for(args, facts), slots, 1, core.REHEARSAL_INIT_SEED, u_p=unit_of(args), run_updates=10**6)
+            job = build_job(args, cell, study, run_dir / "timing_runs" / f"eval-{arm}-{facts}-{slots}", fro, mode=REHEARSAL, snapshots=(), max_updates=2)
+            run = train.run_job(job)
+            t0 = time.monotonic()
+            evaluate.evaluate_readout(cell, run.model, study, 2, frozen_backbone=job.backbone, rows=None, deep=False, robustness=False, with_ivf=False)  # discarded
+            seconds = time.monotonic() - t0
+            evaluation[f"{arm}|{facts}|{slots}"] = seconds
+            train.write_rehearsal_record(run_dir / "preview" / f"eval-{arm}-{facts}-{slots}.json", {
+                **core.envelope("rehearsal"), "label": f"PREVIEW-EVAL-{arm}-f{facts}-n{slots}", "mode": "rehearsal", "stage": "timing-preview-evaluation", "arm": arm, "slots": slots, "facts": facts, "identity": core.code_identity(),
+                "updates": 0, "evaluation_wall_seconds": seconds, "evaluation_snapshots": 1, "peak_rss_bytes": int(train.peak_rss()), "seed_set": study.seeds.name, "item": f"eval|{arm}|{facts}|{slots}",
+            })  # fmt: skip
+    record: dict[str, Any] = {**core.envelope("timing"), "status": status, "cpu_per_update": cpu, "wall_per_update": wall, "startup_seconds": startup, "evaluation_seconds": evaluation, "runs": runs, "quiet": quiet, "load_average_max": core.LOAD_AVERAGE_MAX, "dry": bool(tiny(args)), "environment": core.environment(), "identity": core.code_identity(), "source_hashes": core.source_hashes(), "seed_set": study.seeds.name}
     if args.preview:
-        proj = budget.item_projection({(k.split("|")[0], int(k.split("|")[1])): v for k, v in wall.items()}, unit_of(args)) if quiet["quiet"] else {}
+        proj = budget.item_projection({(k.split("|")[0], int(k.split("|")[1])): v for k, v in wall.items()}, unit_of(args), startup_seconds=startup, evaluation_seconds={(k.split("|")[0], int(k.split("|")[1]), int(k.split("|")[2])): v for k, v in evaluation.items()}) if quiet["quiet"] else {}
         record.update(preview=True, item_projection=proj, item_caps={i: v["cap_seconds"] for i, v in proj.items()}, concurrency=getattr(args, "concurrency", None), note="time and memory only; no loss or accuracy is written or displayed; items h8 and dense are projected at the largest candidate U_P of every row (the conservative reading); the caps bound training wall seconds")
     core.write_record(target, core.jsonable(record))
     print(json.dumps({"status": status, "configurations": len(cpu), "preview": bool(args.preview)}))
@@ -917,10 +936,11 @@ def cmd_generate(args: argparse.Namespace) -> int:
         raise pool.StageRefused("refused: registered-seed generation is used at freeze time; add --i-understand-freeze-time")
     if args.mode == REGISTERED:
         # the cap and the table size are config values (set from the rehearsal's measured G1 time before the freeze); nothing is typed, and a provisional cap stops the generation
-        refuse_overrides(args, allowed=("run_dir", "draw", "i_understand_freeze_time", "mode"))
+        refuse_overrides(args, allowed=("run_dir", "draw", "i_understand_freeze_time", "mode", "calibration"))
         settings = core.generation_settings(repo_of(args) / core.DEFAULT_CONFIG)
         if settings["provisional"]:
             raise pool.StageRefused("refused: the generation cap in the config is provisional; run `set-generation-cap` from the rehearsal's measured G1 time and commit it before generating")
+        require_closed_calibration(args)
         args.stage_cap_seconds = float(settings["cap_seconds"])
     run_dir = new_run_dir(args, "generate")
     seeds = seeds_for(args)
@@ -940,12 +960,14 @@ ITEMS_FILE = "calibration_items_load_row_up.json"
 ITEM_GROUPS = (("load", "row-up"), ("h8", "dense"))
 
 
-def calibration_tasks(args: argparse.Namespace, stage: str, items: Sequence[str], run_dir: Path, caps: Mapping[str, float | None], start: float, row_map: Mapping[int, int] | None, unit: int) -> list[pool.Task]:
+def calibration_tasks(args: argparse.Namespace, stage: str, items: Sequence[str], run_dir: Path, caps: Mapping[str, float | None], start: float, row_map: Mapping[int, int] | None, unit: int, only: set[str] | None = None) -> list[pool.Task]:
     """One task per calibration cell, in the order the pool is to start them (``budget.dispatch_order``: the short row-U_P runs first, the longest run first within an item); the DRY profile
     groups the cells of an item, draw, slot count and arm. Every task of an item carries the item's cap, a deadline counted from the stage start (never in the DRY profile)."""
     identity = core.code_identity()
     groups: dict[str, tuple[str, list[core.Cell]]] = {}
     for item, c in budget.dispatch_order(items, unit, row_map):
+        if only is not None and c.label not in only:
+            continue
         label = f"cal-{item}-d{c.draw}-n{c.slots}-{c.arm}" if tiny(args) else c.label
         groups.setdefault(label, (item, []))[1].append(c)
     tasks = []
@@ -961,16 +983,60 @@ def charged_for_calibration(args: argparse.Namespace, run_dir: Path) -> float:
     return float(sum(float(e["seconds"]) for e in ledger.entries() if e["run"] == run_dir.name and str(e["stage"]).split("-")[0] in ("calibrate", "timing")))
 
 
+def close_stage(args: argparse.Namespace, run_dir: Path, unit: int) -> int:
+    """``calibrate --close-stage <stage>`` (ADR-0021 section 25.14 item 2): when the driver of a calibration stage died before writing its manifest, write the manifest from the records that exist.
+    Every run with a ``train.json`` keeps its status; every run without one is marked NOT RUN — DRIVER STOPPED. The manifest names who closed the stage and why, and the wall time the records show is
+    charged to the ledger (estimated from the records' times). Refused while a driver of this run directory is alive, if the manifest exists, or without ``--closed-by`` and ``--reason``."""
+    stage = args.close_stage
+    if stage not in ("calibrate-load-row-up", "calibrate-h8-dense"):
+        raise pool.StageRefused("refused: --close-stage takes calibrate-load-row-up or calibrate-h8-dense")
+    path = run_dir / stage / "manifest.json"
+    if path.exists():
+        raise pool.StageRefused(f"refused: {path} exists: the driver finished; nothing to close")
+    if not args.closed_by or not args.reason:
+        raise pool.StageRefused("refused: --closed-by and --reason are required: the manifest names who closed the stage and why")
+    if [c for c in timing.running_commands() if "studies.p10s1.stages" in c and str(run_dir) in c and "--close-stage" not in c]:
+        raise pool.StageRefused("refused: a process of this run directory is alive: the stage is not closed while its driver or a worker runs")
+    row_map = None
+    if stage.endswith("h8-dense"):
+        items_path = run_dir / ITEMS_FILE
+        if not items_path.is_file():
+            raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}")
+        row_map = calibrate.row_u_p_map(core.read_record(items_path, "calibration"))
+    cells = core.calibration_cells_of(ITEM_GROUPS[0] if stage.endswith("row-up") else ITEM_GROUPS[1], row_map, unit)
+    tasks, begun, ended = [], [], []
+    for c in cells:
+        f = core.cell_dir(run_dir, c.label) / "train.json"
+        if f.is_file():
+            rec = core.read_record(f, "train")
+            tasks.append({"label": c.label, "status": "completed" if rec.get("status") == "completed" else "failed", "note": str(rec.get("reason") or "")})
+            ended.append(f.stat().st_mtime)
+            begun.append(f.stat().st_mtime - float(rec.get("wall_seconds") or 0.0))
+        else:
+            tasks.append({"label": c.label, "status": calibrate.NOT_RUN_DRIVER, "note": f"closed by {args.closed_by}: {args.reason}"})
+    seconds = (max(ended) - min(begun)) if ended else 0.0
+    ledger = core.Ledger.from_config(ledger_root(args), repo_of(args) / core.DEFAULT_CONFIG if args.repo else None)
+    ledger.charge(f"{stage}-closed", run_dir.name, seconds)
+    core.write_record(path, {
+        **core.envelope("stage_manifest"), "stage": stage, "status": "INCOMPLETE", "driver_stopped": True, "tasks": tasks, "closed": {"by": args.closed_by, "reason": args.reason, "utc": _utc(), "charged_seconds_estimated_from_record_times": seconds},
+        "identity": core.code_identity(), "environment": core.environment(), "note": "written from the records that exist; runs without a record are NOT RUN — DRIVER STOPPED and may be relaunched once (`--items ... --relaunch`)",
+    })  # fmt: skip
+    print(json.dumps({"closed": str(path), "not_run": sum(1 for t in tasks if t["status"] == calibrate.NOT_RUN_DRIVER), "charged_seconds": round(seconds, 1)}))
+    return 0
+
+
 def cmd_calibrate(args: argparse.Namespace) -> int:
     """The calibration of ADR-0021 revision 5 section 10.1 in its fixed order: ``--items load,row-up`` (0b and 1 together on six workers), ``--finalize-items load,row-up`` (the rules applied to the
     finished record: U_L, row U_P, annotations, returns), then ``--items h8,dense`` (2 and 3, at the row U_P just fixed; refused while a return is open), then ``--finalize``. Each run starts once
     from initialization; a failed run or a run stopped at its item cap is kept, never re-run, and is an input to the rules; nothing is decided, stopped or extended from an observed curve while
     runs are in progress. Refuses registered seeds (the mode is calibration), a missing or unmeasured timing preview (nothing starts on an assumed cost) and any cell that is not a calibration cell."""
     args.mode = CALIBRATION
-    if (args.finalize_items or args.finalize or (args.items and "h8" in args.items)) and not args.run_dir:
+    if (args.finalize_items or args.finalize or args.close_stage or (args.items and "h8" in args.items)) and not args.run_dir:
         raise pool.StageRefused("refused: --run-dir (the calibration directory) is required")
     run_dir = new_run_dir(args, "calibrate")
     unit = unit_of(args)
+    if args.close_stage:
+        return close_stage(args, run_dir, unit)
     if args.finalize_items:
         if tuple(x for x in args.finalize_items.split(",") if x) != ITEM_GROUPS[0]:
             raise pool.StageRefused("refused: --finalize-items takes load,row-up")
@@ -1025,19 +1091,46 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
             raise pool.StageRefused(f"refused: a return to the human lead is open ({items_rec['returns_to_lead']}); items 2 and 3 do not start")
         row_map = calibrate.row_u_p_map(items_rec)
     cells_by_item = {i: core.calibration_cells_of([i], row_map, unit) for i in items}
+    stage = "calibrate-" + "-".join(items)
+    only: set[str] | None = None
+    if args.relaunch:  # section 25.14 item 2: the runs `close-stage` marked NOT RUN — DRIVER STOPPED, once, on the same draws and seeds
+        closed = run_dir / stage / "manifest.json"
+        if not closed.is_file() or not core.read_record(closed, "stage_manifest").get("driver_stopped"):
+            raise pool.StageRefused(f"refused: no closed stage {stage} (run `calibrate --close-stage {stage}` first): only runs marked {calibrate.NOT_RUN_DRIVER} are relaunched")
+        if (run_dir / f"{stage}-relaunch" / "manifest.json").exists() or (run_dir / "relaunch" / f"{stage}.json").exists():
+            raise pool.StageRefused(f"refused: {stage} was relaunched once already: a second failure returns to the human lead")
+        only = {t["label"] for t in core.read_record(closed, "stage_manifest")["tasks"] if t["status"] == calibrate.NOT_RUN_DRIVER}
+        if not only:
+            raise pool.StageRefused("refused: the closed stage has no run marked NOT RUN — DRIVER STOPPED")
     for cells in cells_by_item.values():
         for c in cells:
             calibration_guard(c, unit)
-            if core.cell_dir(run_dir, c.label).exists():
+            if only is None and core.cell_dir(run_dir, c.label).exists():
                 raise pool.StageRefused(f"refused: {c.label} already has a record in {run_dir}: a calibration run is never re-run")
+            if only is not None and c.label in only and (core.cell_dir(run_dir, c.label) / "train.json").exists():
+                raise pool.StageRefused(f"refused: {c.label} has a record: it is not a run to relaunch")
     wall = {(k.split("|")[0], int(k.split("|")[1])): float(v) for k, v in preview["wall_per_update"].items()}
-    proj = budget.item_projection(wall, unit, row_map)
+    evaluation = {(k.split("|")[0], int(k.split("|")[1]), int(k.split("|")[2])): float(v) for k, v in (preview.get("evaluation_seconds") or {}).items()}
+    if not tiny(args) and (not evaluation or "startup_seconds" not in preview):
+        raise pool.StageRefused("refused: the timing preview has no start-up and evaluation seconds: item caps cover start-up, training and evaluation (ADR-0021 section 25.14 item 1)")
+    proj = budget.item_projection(wall, unit, row_map, startup_seconds=float(preview.get("startup_seconds", 0.0)), evaluation_seconds=evaluation or None)
     caps = {i: proj[i]["cap_seconds"] for i in items}
     if not tiny(args) and any(v is None for v in caps.values()):
         raise pool.StageRefused(f"refused: the timing preview has no rate for {[proj[i]['missing_rates'] for i in items]}: no item is started on an assumed cost")
-    stage = "calibrate-" + "-".join(items)
     start = time.time()
-    tasks = calibration_tasks(args, stage, items, run_dir, caps, start, row_map, unit)
+    if only is not None:
+        moved = []
+        for label in sorted(only):  # a killed run leaves a partial folder: it is kept, outside the cells, and the run starts again from initialization on the same draw and seed
+            folder = core.cell_dir(run_dir, label)
+            if folder.exists():
+                target = run_dir / "driver_stopped" / label
+                target.parent.mkdir(parents=True, exist_ok=True)
+                folder.rename(target)
+                moved.append(label)
+        (run_dir / "relaunch").mkdir(parents=True, exist_ok=True)
+        write_json(run_dir / "relaunch" / f"{stage}.json", {"stage": stage, "relaunched": sorted(only), "partial_folders_kept": moved, "utc": _utc(), "by": args.closed_by, "note": f"relaunched once on the same calibration draws and seeds; charged to the ledger as stage {stage}-relaunch"})
+        stage = f"{stage}-relaunch"
+    tasks = calibration_tasks(args, stage, items, run_dir, caps, start, row_map, unit, only)
     cap = 3600.0 if tiny(args) else float(sum(float(v) for v in caps.values() if v is not None))  # the pool's outer bound is the sum of the item caps; each item's own cap stops its runs
     manifest = run_stage_tasks(stage, args, tasks, run_dir, cap=cap)
     return 0 if manifest["status"] == "COMPLETE" else 1
@@ -1221,8 +1314,8 @@ def contention_from(six_rehearsal: Mapping[tuple[str, int], float], six_calibrat
 
 
 def cmd_project(args: argparse.Namespace) -> int:
-    """The projection: rates from the rehearsal, the isolated wall and CPU seconds per update, the contention ratio c (the larger of the ratios over the rehearsal's six-worker rates and over the
-    calibration's six-worker rates, each against the isolated rate of the same arm and slot count, never below 1.0), the memory rule (evaluation peaks included), C_need (charged so far plus twice the
+    """The projection: rates from the rehearsal, the isolated wall and CPU seconds per update, the contention ratio c (the rehearsal's six-worker rates over the isolated rates of the same
+    arm and slot count, never below 1.0; the calibration's ratio is descriptive), the memory rule (evaluation peaks included), C_need (charged so far plus twice the
     projected remaining time, longest first on six workers), the cuts in their fixed order and the cap (C_need rounded up to the hour if at most C_max, the config's ``cap_max_hours``;
     otherwise NOT STARTED: BUDGET), the cap table of every configuration, all bound to the calibration record, the timing record, the rehearsal gates and the synthetic-registry record by hash.
     A return to the human lead named in section 10.1 or 10.3 is written into the record and the command exits 1; nothing is chosen on the lead's behalf."""
@@ -1382,9 +1475,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         if any(t not in core.TRANSITIONS for t in directed):
             raise pool.StageRefused(f"refused: --no-loaded-transitions takes {core.TRANSITIONS}")
         if not args.dry and not core.test_switch():
-            if not args.direction_record or not Path(args.direction_record).is_file():
-                raise pool.StageRefused("refused: a transition fixed as not tested needs --direction-record, the human lead's recorded direction (bound by hash)")
-            direction_record = {"path": str(Path(args.direction_record).resolve()), "sha256": file_sha256(Path(args.direction_record))}
+            raise pool.StageRefused("refused: a transition fixed as not tested has no run length for its unloaded cell in this implementation: it returns to the human lead (ADR-0021 section 10.1 item 0b)")
     concurrency = freeze_concurrency(args)
     if plan.placeholder and not (args.dry or core.test_switch()):
         raise pool.StageRefused("refused: the plan carries placeholder U_L values (no calibration record fixed them)")
@@ -1418,13 +1509,7 @@ def freeze_concurrency(args: argparse.Namespace) -> dict[str, Any]:
     if args.dry or core.test_switch():
         return {"checked": False, "reason": "DRY profile or test switch", "statement": "not stated: nothing here is S0's"}
     timing.concurrency_check()  # raises OtherStudyRunning
-    if not args.s0_training_manifest or not Path(args.s0_training_manifest).is_file():
-        raise pool.StageRefused("refused: --s0-training-manifest (S0's manifest of its last due registered training stage) is required: the freeze states that P10-S0's training has finished only with evidence")
-    evidence = {"s0_training_manifest": {"path": str(Path(args.s0_training_manifest).resolve()), "sha256": file_sha256(Path(args.s0_training_manifest))}}
-    if args.s0_refusal_record:
-        if not Path(args.s0_refusal_record).is_file():
-            raise pool.StageRefused(f"refused: no S0 refusal record at {args.s0_refusal_record}")
-        evidence["s0_refusal_record"] = {"path": str(Path(args.s0_refusal_record).resolve()), "sha256": file_sha256(Path(args.s0_refusal_record))}
+    evidence = timing.validate_s0_evidence(args.s0_training_manifest, args.s0_refusal_record)  # raises S0EvidenceRefused for an empty, incomplete or foreign file
     return {"checked": True, "other_study_processes_alive_at_freeze": [], **evidence, "statement": "P10-S0's last training stage has finished: evidence bound by hash above"}
 
 
@@ -1673,6 +1758,10 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--updates", type=int, default=None, help="rehearsal updates")
     p.add_argument("--items", default=None, help="calibrate: load,row-up (items 0b and 1) or h8,dense (items 2 and 3)")
     p.add_argument("--finalize-items", default=None, help="calibrate: load,row-up: apply the rules of items 0b and 1 to the finished record")
+    p.add_argument("--close-stage", default=None, help="calibrate: write the manifest of a stage whose driver died, from the records that exist (needs --closed-by and --reason)")
+    p.add_argument("--closed-by", default=None, help="calibrate --close-stage / --relaunch: who")
+    p.add_argument("--reason", default=None, help="calibrate --close-stage: why")
+    p.add_argument("--relaunch", action="store_true", help="calibrate --items ...: relaunch once the runs marked NOT RUN — DRIVER STOPPED, on the same draws and seeds")
     p.add_argument("--finalize", action="store_true", help="calibrate: write the calibration record from the finished runs of all four items")
     p.add_argument("--preview", action="store_true", help="timing: the timing preview of item 0a (time and memory only; projections and item caps)")
     p.add_argument("--item-cap-seconds", type=float, default=None, help="calibrate worker: the cap of the cell's item (set by the calibrate command from the timing preview)")
@@ -1716,7 +1805,21 @@ COMMANDS: dict[str, Any] = {
 DEFAULT_MODE = {"generate": CALIBRATION, "calibrate": CALIBRATION, "rehearse": REHEARSAL, "timing": REHEARSAL, "synthetic": REHEARSAL, "project": REHEARSAL, "freeze": REHEARSAL, "set-generation-cap": REHEARSAL, "set-cap": REHEARSAL}
 
 
-WORKER_GENERATE_ALLOWED = ("run_dir", "mode", "draw", "experiments_root", "seed_block", "labels", "item", "worker")
+WORKER_GENERATE_ALLOWED = ("run_dir", "mode", "draw", "experiments_root", "seed_block", "labels", "item", "worker", "calibration")
+
+
+def require_closed_calibration(args: argparse.Namespace) -> None:
+    """Nothing registered is generated while a return to the human lead is open (ADR-0021 section 10.1 item 0b; audit m8): registered generation needs ``--calibration``, a finished calibration record with
+    no open return from which a plan can be built."""
+    if not args.calibration or not Path(args.calibration).is_file():
+        raise pool.StageRefused("refused: registered generation needs --calibration, the finished calibration record (no registered draw is generated while a return to the human lead is open)")
+    record = core.read_record(Path(args.calibration), "calibration")
+    if record.get("dry") is True and not core.test_switch():
+        raise pool.StageRefused("refused: the calibration record is marked DRY")
+    try:
+        calibrate.plan_values(record)
+    except calibrate.TieNeedsLead as exc:
+        raise pool.StageRefused(f"refused: {exc}") from exc
 
 
 def verify_worker_plan(args: argparse.Namespace) -> None:
@@ -1728,6 +1831,7 @@ def verify_worker_plan(args: argparse.Namespace) -> None:
         refuse_overrides(args, allowed=WORKER_GENERATE_ALLOWED)
         if core.generation_settings(repo / core.DEFAULT_CONFIG)["provisional"]:
             raise pool.StageRefused("refused: the generation cap in the config is provisional; the registered generation does not run under it")
+        require_closed_calibration(args)
         return
     if not args.freeze_plan or Path(args.freeze_plan).resolve() != (repo / FREEZE_PLAN).resolve():
         raise pool.StageRefused(f"refused: a registered worker runs only against {FREEZE_PLAN}, not a typed plan")
@@ -1753,6 +1857,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
     try:
         if args.command == "work":
+            if args.mode == REGISTERED and argv is not None and not core.test_switch():  # a registered worker is a subprocess of the driver: an in-process call (a test) never starts one, whatever the config says
+                raise pool.StageRefused("refused: a registered work command is never run in-process")
             if args.mode == REGISTERED:
                 verify_worker_plan(args)
             if argv is None:  # the worker subprocess: configuring the process (threads, deterministic algorithms, default device, seeds) ends with the worker. An in-process call (tests, with an
@@ -1763,7 +1869,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.run_dir is None and args.command not in ("calibrate", "rehearse", "generate", "timing", "synthetic", "set-generation-cap", "set-cap"):
             raise StageError("--run-dir is required")
         return int(COMMANDS[args.command](args))
-    except (pool.StageRefused, core.LedgerRefused, timing.OtherStudyRunning) as exc:
+    except (pool.StageRefused, core.LedgerRefused, timing.OtherStudyRunning, timing.S0EvidenceRefused, calibrate.NotComplete) as exc:
         print(f"P10S1 stage REFUSED: {exc}", file=sys.stderr)
         return 2
     except CalibrationRefused as exc:

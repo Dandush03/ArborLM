@@ -27,6 +27,8 @@ U_P_R2_MIN = 0.95
 EDGE_BY_TIE_WALK = "EDGE BY TIE-WALK"
 NOT_LOADED_WITHIN_CEILING = "NOT LOADED WITHIN ITS CEILING"
 TOQ_PREDICTED_NOT_LOADED = "T-OQ PREDICTED NOT LOADED AT"
+STOPPED_BY_CAP = "STOPPED BY CAP"  # a run stopped by its item cap: never diverged, never not loaded; its unit or cell returns to the lead (ADR-0021 section 25.14 item 1)
+NOT_RUN_DRIVER = "NOT RUN — DRIVER STOPPED"  # a run without a record after `close-stage` (section 25.14 item 2)
 NOT_MEASURED_256 = "256 NOT MEASURED — NOT FULL WITHIN CEILING"
 
 
@@ -41,11 +43,14 @@ def require_stage_complete(run_dir: Path, stage: str, cells: Sequence[core.Cell]
     if not path.is_file():
         raise NotComplete(f"no {stage}/manifest.json in {run_dir}: the stage has not finished; nothing is finalized while runs may be in progress")
     tasks = {t["label"]: t["status"] for t in core.read_record(path, "stage_manifest")["tasks"]}
+    relaunch = run_dir / f"{stage}-relaunch" / "manifest.json"
+    relaunched = {t["label"]: t["status"] for t in core.read_record(relaunch, "stage_manifest")["tasks"]} if relaunch.is_file() else {}
+    grouped = [s for lab, s in tasks.items() if lab.startswith("cal-")]  # the DRY profile's grouped tasks
     no_record: list[str] = []
     for c in cells:
         if (core.cell_dir(run_dir, c.label) / "train.json").is_file():
             continue
-        status = tasks.get(c.label)
+        status = relaunched.get(c.label) or tasks.get(c.label) or (("failed" if any(g != "completed" for g in grouped) else None) if grouped else None)
         if status is None or status == "completed":
             raise NotComplete(f"{c.label} has no train record and the {stage} manifest does not list it as a task that did not run: the stage is not complete")
         no_record.append(f"{c.label}: {status}")
@@ -213,10 +218,10 @@ def _read_or_none(run_dir: Path, cell: core.Cell) -> tuple[dict[int, dict[str, C
     """The observations of a cell, or None with the reason (no train record, a failed run, a run stopped at its item cap, missing evaluation records)."""
     train = read_train(run_dir, cell)
     if train is None:
-        return None, "no train record (not run, or stopped at its item cap)"
+        return None, "no train record (not run)"
     if train.get("status") != "completed":
         reason = str(train.get("reason") or "")
-        return None, ("stopped at its item cap" if "ItemCapReached" in reason else f"run ended {train.get('status')!r}")
+        return None, (f"{STOPPED_BY_CAP}: stopped at its item cap" if "ItemCapReached" in reason else f"run ended {train.get('status')!r}")
     try:
         return read_obs(run_dir, cell), ""
     except FileNotFoundError as exc:
@@ -235,6 +240,15 @@ def _views_of_arm(run_dir: Path, arm: str, facts: int, slots: int, unit: int) ->
         for p in core.PANELS:
             views[(c.draw, p)] = C.View({u: o[p] for u, o in obs.items()}, c.run_updates, unit)
     return (views if len(views) == 4 else None), notes
+
+
+def run_flag(why: str) -> str | None:
+    """STOPPED BY CAP or NOT RUN — DRIVER STOPPED for the reason a cell could not be read; None for an ordinary failed run."""
+    if STOPPED_BY_CAP in why:
+        return STOPPED_BY_CAP
+    if why.startswith("no train record"):
+        return NOT_RUN_DRIVER
+    return None
 
 
 def _failing_candidates(views: Mapping[tuple[int, str], C.View] | None, candidates: Sequence[int]) -> list[dict[str, Any]]:
@@ -268,12 +282,23 @@ def finalize_load_and_row_up(run_dir: Path, *, unit: int = core.U_P, dry: bool =
             u_l[arm] = arm_u_l(views, cands)
             per_arm[arm] = {"u_l": u_l[arm], "run_notes": notes, "candidates": list(cands), "failed_conditions": [] if u_l[arm] is not None else _failing_candidates(views, cands)}
         out = cell_outcome(u_l["F-OQ"], u_l["T-OQ"])
+        flags = {arm: sorted({f for w in per_arm[arm]["run_notes"].values() if (f := run_flag(w))}) for arm in per_arm}
+        if any(flags.values()):  # a run stopped by its cap or never run is not 'not loaded': the cell returns to the lead with that label
+            label = "; ".join(f"{arm}: {', '.join(v)}" for arm, v in flags.items() if v)
+            out = {"action": RETURN_TO_LEAD, "u_l": None, "toq_predicted_not_loaded": False, "status": label, "note": "a run was stopped by its item cap or never run: the cell returns to the human lead and is neither loaded nor not loaded"}
+            load[name] = {**out, "arms": per_arm}
+            returns.append(f"{name}: {label}; the cell returns to the human lead")
+            continue
         load[name] = {**out, "arms": per_arm}
         if out["action"] == RETURN_TO_LEAD:
             returns.append(f"{name}: {NOT_LOADED_WITHIN_CEILING} (F-OQ has no U_L); the record returns to the human lead before the freeze")
     sat_views, sat_notes = _views_of_arm(run_dir, "F-OQ", *core.SATURATION_ONLY_CELL, unit)
     sat_cands = core.load_candidates(core.SATURATION_CELL_NAME, unit)
     sat = saturation_cell_outcome(arm_u_l(sat_views, sat_cands))
+    sat_flags = sorted({f for w in sat_notes.values() if (f := run_flag(w))})
+    if sat_flags:
+        sat = {"action": RETURN_TO_LEAD, "u_l": None, "runs": False, "status": ", ".join(sat_flags), "note": "a run was stopped by its item cap or never run: 2K/256 returns to the human lead"}
+        returns.append(f"2K/256: {', '.join(sat_flags)}; the cell returns to the human lead")
     sat["run_notes"] = sat_notes
     sat["failed_conditions"] = [] if sat["u_l"] is not None else _failing_candidates(sat_views, sat_cands)
     rows: dict[str, Any] = {}
@@ -281,15 +306,20 @@ def finalize_load_and_row_up(run_dir: Path, *, unit: int = core.U_P, dry: bool =
     for facts in core.ROW_FACTS:
         foq_acc: dict[tuple[int, int, str], float] = {}
         r2_acc: dict[tuple[int, int, str], float] = {}
+        row_flags: set[str] = set()
         for cell in (c for c in row_cells if c.facts == facts):
-            obs, _why = _read_or_none(run_dir, cell)
+            obs, why = _read_or_none(run_dir, cell)
             if obs is None:
+                if (f := run_flag(why)) is not None:
+                    row_flags.add(f)
                 continue
             acc = foq_acc if cell.arm == "F-OQ" else r2_acc
             for u, per in obs.items():
                 for p in core.PANELS:
                     acc[(u, cell.draw, p)] = per[p].a_use  # a_use, as REF uses (section 22 (j))
         rows[str(facts)] = row_u_p(foq_acc, r2_acc, core.row_u_p_candidates(unit))
+        if row_flags:
+            rows[str(facts)] = {"u_p": None, "action": RETURN_TO_LEAD, "reason": ", ".join(sorted(row_flags)) + ": a run of this row was stopped by its item cap or never run"}
         if rows[str(facts)]["action"] == RETURN_TO_LEAD:
             returns.append(f"row of {facts} facts: {rows[str(facts)]['reason']}; the work returns to the human lead before the freeze")
     substituted: list[str] = []
@@ -328,9 +358,12 @@ def _chance_diverged(obs: Mapping[int, Mapping[str, C.PanelObs]], readout: int) 
 def finalize_h8_dense(run_dir: Path, row_map: Mapping[int, int], *, unit: int = core.U_P, dry: bool = False) -> dict[str, Any]:
     """Items 2 and 3 applied to the finished records: H8's UNDERTRAINED-AT-U_P cells and annotations, and D-OQ's rate per unit with diverged rates left out."""
     h8: dict[tuple[str, int, str], float] = {}
+    h8_returns: list[str] = []
     for cell in core.h8_report_cells(row_map, unit):
-        obs, _why = _read_or_none(run_dir, cell)
+        obs, why = _read_or_none(run_dir, cell)
         if obs is None:
+            if (f := run_flag(why)) is not None:
+                h8_returns.append(f"H8 {cell.name} draw {cell.draw}: {f}")
             continue
         for p in core.PANELS:
             h8[(cell.name, cell.draw, p)] = obs[cell.run_updates][p].a_use
@@ -343,12 +376,17 @@ def finalize_h8_dense(run_dir: Path, row_map: Mapping[int, int], *, unit: int = 
         diverged: set[float] = set()
         notes: dict[str, str] = {}
         no_record: list[str] = []
+        capped: list[str] = []
         for lr in core.DENSE_RATES:
             cells = [c for c in core.dense_rate_cells(row_map, unit) if c.lr == lr and core.dense_unit_of(c.facts, c.slots) == name]
             for c in cells:
                 obs, why = _read_or_none(run_dir, c)
                 if obs is None and read_train(run_dir, c) is None:  # a run without a record is not a diverged rate (section 25.12 item 3): the unit returns
                     no_record.append(c.label)
+                    notes[f"{lr:g}:d{c.draw}"] = why
+                    continue
+                if obs is None and run_flag(why) == STOPPED_BY_CAP:  # never read as diverged
+                    capped.append(c.label)
                     notes[f"{lr:g}:d{c.draw}"] = why
                     continue
                 if obs is None:
@@ -365,7 +403,9 @@ def finalize_h8_dense(run_dir: Path, row_map: Mapping[int, int], *, unit: int = 
         for lr in core.DENSE_RATES:
             readout_a.setdefault(lr, 0.0)
         try:
-            if no_record:
+            if capped:
+                entry = {"rate": None, "action": RETURN_TO_LEAD, "reason": f"{STOPPED_BY_CAP}: runs stopped by their item cap (never read as diverged): {capped}", "edge": None, "diverged": sorted(diverged)}
+            elif no_record:
                 entry = {"rate": None, "action": RETURN_TO_LEAD, "reason": f"runs without a record (not started or killed): {no_record}", "edge": None, "diverged": sorted(diverged)}
             else:
                 entry = select_dense_rate(readout_a, traj, readout, sorted(diverged))
@@ -377,7 +417,7 @@ def finalize_h8_dense(run_dir: Path, row_map: Mapping[int, int], *, unit: int = 
         dense[name] = entry
         if entry["action"] == RETURN_TO_LEAD:
             returns.append(f"D-OQ's rate, unit {name}: {entry['reason']}")
-    return core.jsonable({"h8": h8_report(h8), "dense_rates": dense, "returns_to_lead": returns})
+    return core.jsonable({"h8": h8_report(h8), "dense_rates": dense, "returns_to_lead": [*h8_returns, *returns]})
 
 
 def seconds_per_update(run_dir: Path, cells: Sequence[core.Cell]) -> dict[str, Any]:

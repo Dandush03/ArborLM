@@ -197,7 +197,7 @@ def test_finalize_applies_the_rules_to_the_finished_record_and_failed_and_capped
     run = tmp_path / "cal"
     for c in cells:
         if c.label in cap_hit:
-            write_cell(run, c, fn, "failed", "ItemCapReached: stopped at update 5 of 512")
+            write_cell(run, c, fn, "failed", "RuntimeError: killed")  # an ordinary failed run (a run stopped by its cap returns its cell: see test_p10s1_rev5_recheck)
         elif c.label in failed:
             write_cell(run, c, fn, "failed", "RuntimeError: x")
         else:
@@ -206,7 +206,7 @@ def test_finalize_applies_the_rules_to_the_finished_record_and_failed_and_capped
         write_cell(run, c, lambda cell, u: 4.9)
     rec = calibrate.finalize_load_and_row_up(run, unit=unit)
     assert rec["load"]["8K/1K"]["u_l"] == core.scaled(98304, unit) and rec["load"]["8K/1K"]["toq_predicted_not_loaded"] and calibrate.TOQ_PREDICTED_NOT_LOADED in rec["load"]["8K/1K"]["note"]  # T-OQ's draw-1 run failed: no U_L for T-OQ
-    assert rec["load"]["32K/4K"]["u_l"] is not None and rec["load"]["32K/4K"]["arms"]["T-OQ"]["u_l"] is None and "item cap" in str(rec["load"]["32K/4K"]["arms"]["T-OQ"]["run_notes"])
+    assert rec["load"]["32K/4K"]["u_l"] is not None and rec["load"]["32K/4K"]["arms"]["T-OQ"]["u_l"] is None and "run ended" in str(rec["load"]["32K/4K"]["arms"]["T-OQ"]["run_notes"])
     assert rec["saturation_256"]["runs"] and rec["saturation_256"]["u_l"] is not None
     assert {k: v["u_p"] for k, v in rec["row_u_p"].items()} == {"2048": 8 * 2, "8192": 8 * 2, "32768": 8 * 2} or all(v["u_p"] == 16 for v in rec["row_u_p"].values())
     assert rec["returns_to_lead"] == []

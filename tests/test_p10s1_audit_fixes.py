@@ -278,13 +278,24 @@ def test_registered_mode_is_reached_only_through_the_fixed_path(command: str, tm
     assert "only through" in capsys.readouterr().err and not list(tmp_path.rglob("*"))
 
 
+def verify_worker(argv: list[str]) -> int:
+    """The refusals of a registered worker (``verify_worker_plan``) without starting one: an in-process ``work`` command is never run, whatever the config says."""
+    args = stages.build_parser().parse_args(argv)
+    try:
+        stages.verify_worker_plan(args)
+    except pool.StageRefused as exc:
+        print(f"P10S1 stage REFUSED: {exc}", file=sys.stderr)
+        return 2
+    return 0
+
+
 def test_a_registered_worker_refuses_a_hand_made_plan_a_wrong_commit_and_a_missing_decision_2(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
     """Re-check N1: a worker started by hand with a self-made plan and its digest, a commit that is not the freeze commit, or no Decision 2 is refused before it does anything."""
     base = ["work", "train", "--mode", "registered", "--run-dir", str(tmp_path / "run"), "--labels", "x"]
-    assert stages.main(base) == 2  # no plan
+    assert verify_worker(base) == 2  # no plan
     plan = tmp_path / "plan.json"
     plan.write_text("{}")
-    assert stages.main([*base, "--freeze-plan", str(plan), "--freeze-plan-sha256", file_sha256(plan)]) == 2  # a typed plan with its own digest
+    assert verify_worker([*base, "--freeze-plan", str(plan), "--freeze-plan-sha256", file_sha256(plan)]) == 2  # a typed plan with its own digest
     assert "not a typed plan" in capsys.readouterr().err
     repo = tmp_path / "repo"
     (repo / "studies" / "p10s1" / "freeze").mkdir(parents=True)
@@ -292,9 +303,9 @@ def test_a_registered_worker_refuses_a_hand_made_plan_a_wrong_commit_and_a_missi
     real.write_text("{}")
     monkeypatch.setattr(core, "repo_root", lambda: repo)
     argv = [*base, "--freeze-plan", str(real), "--freeze-plan-sha256", file_sha256(real)]
-    assert stages.main(argv) == 2 and "requires --freeze-commit" in capsys.readouterr().err  # the right file but no freeze commit
-    assert stages.main([*argv, "--freeze-commit", "deadbeef"]) == 2 and "not a commit" in capsys.readouterr().err  # not a freeze commit
-    assert stages.main([*argv[:-1], "0" * 64]) == 2 and "does not hash" in capsys.readouterr().err
+    assert verify_worker(argv) == 2 and "requires --freeze-commit" in capsys.readouterr().err  # the right file but no freeze commit
+    assert verify_worker([*argv, "--freeze-commit", "deadbeef"]) == 2 and "not a commit" in capsys.readouterr().err  # not a freeze commit
+    assert verify_worker([*argv[:-1], "0" * 64]) == 2 and "does not hash" in capsys.readouterr().err
     assert not (tmp_path / "run").exists()
     # the guards run in order: preconditions, then verify_plan, then Decision 2
     calls: list[str] = []
@@ -302,7 +313,7 @@ def test_a_registered_worker_refuses_a_hand_made_plan_a_wrong_commit_and_a_missi
     monkeypatch.setattr(stages, "load_plan", lambda r: {})
     monkeypatch.setattr(stages, "verify_plan", lambda *a, **k: calls.append("verify_plan"))
     monkeypatch.setattr(stages, "require_decision_2", lambda *a, **k: (_ for _ in ()).throw(pool.StageRefused("refused: no Decision 2")))
-    assert stages.main([*argv, "--freeze-commit", "abc"]) == 2 and calls == ["preconditions", "verify_plan"] and "no Decision 2" in capsys.readouterr().err
+    assert verify_worker([*argv, "--freeze-commit", "abc"]) == 2 and calls == ["preconditions", "verify_plan"] and "no Decision 2" in capsys.readouterr().err
 
 
 def test_a_registered_generation_worker_refuses_a_provisional_cap_and_overrides(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
@@ -312,9 +323,9 @@ def test_a_registered_generation_worker_refuses_a_provisional_cap_and_overrides(
     (repo / core.DEFAULT_CONFIG).write_text(core.render_config_toml())  # provisional
     monkeypatch.setattr(core, "repo_root", lambda: repo)
     base = ["work", "generate", "--mode", "registered", "--run-dir", str(tmp_path / "run")]
-    assert stages.main(base) == 2 and "provisional" in capsys.readouterr().err
-    assert stages.main([*base, "--stage-cap-seconds", "5"]) == 2 and "takes no override" in capsys.readouterr().err
-    assert stages.main([*base, "--rss-worker-bytes", "1"]) == 2 and "--rss-worker-bytes" in capsys.readouterr().err
+    assert verify_worker(base) == 2 and "provisional" in capsys.readouterr().err
+    assert verify_worker([*base, "--stage-cap-seconds", "5"]) == 2 and "takes no override" in capsys.readouterr().err
+    assert verify_worker([*base, "--rss-worker-bytes", "1"]) == 2 and "--rss-worker-bytes" in capsys.readouterr().err
     assert not (tmp_path / "run").exists()
 
 
@@ -375,7 +386,7 @@ def test_set_generation_cap_writes_the_config_from_a_measurement(tmp_path: Path,
     assert stages.main(["set-generation-cap", "--generation-seconds", "600"]) == 0
     typed = core.generation_settings(config)
     assert typed["source"] == "typed" and typed["cap_seconds"] == 600.0 and typed["manifest_sha256"] == ""
-    assert core.load_config(config)["resources"]["cap_hours"] == core.load_config(ROOT / core.DEFAULT_CONFIG)["resources"]["cap_hours"]
+    assert core.load_config(config)["resources"]["cap_hours"] == core.CAP_HOURS_DEFAULT  # the temporary config was rendered at the default cap, whatever the repository cap
     assert stages.rehearsal_generate_seconds(rehearsal) == 41.3
     assert capsys.readouterr().out
 

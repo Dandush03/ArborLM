@@ -103,7 +103,7 @@ def test_the_concurrency_check_refuses_while_a_p10s0_or_p10s2_stage_process_is_a
     assert timing.other_study_processes(["python -m studies.p10s0x.stages", "python -m studies.p10s10.stages"]) == []  # only the two studies' own modules
 
 
-def test_the_stages_that_must_not_overlap_refuse_and_calibration_may(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_the_stages_that_must_not_overlap_refuse_calibration_included(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setattr(timing, "running_commands", lambda: [S0_LINE])
     args = stages.build_parser().parse_args(["timing", "--mode", "rehearsal", "--run-dir", str(tmp_path)])
     for name in ("timing", "rehearse", "timing-preview"):
@@ -122,7 +122,12 @@ def test_the_stages_that_must_not_overlap_refuse_and_calibration_may(monkeypatch
     dry = stages.build_parser().parse_args(["timing", "--mode", "rehearsal", "--dry", "--run-dir", str(tmp_path)])
     assert stages.concurrency_guard("timing", dry)["checked"] is False  # the DRY profile measures nothing
     monkeypatch.setattr(timing, "running_commands", lambda: [])
-    assert stages.concurrency_guard("timing", args)["checked"] is True
+    with pytest.raises(timing.S0EvidenceRefused):
+        stages.concurrency_guard("timing", args)  # no live process, but no evidence that S0's training has finished either
+    good = tmp_path / "s0.json"
+    good.write_text(json.dumps({"kind": "stage_manifest", "study": "P10S0", "mode": "registered", "stage": "train-q1", "status": "COMPLETE"}))
+    args_ok = stages.build_parser().parse_args(["timing", "--mode", "rehearsal", "--run-dir", str(tmp_path), "--s0-training-manifest", str(good)])
+    assert stages.concurrency_guard("timing", args_ok)["checked"] is True and stages.concurrency_guard("timing", args_ok)["s0_training_manifest"]["stage"] == "train-q1"
 
 
 def test_the_timing_preview_the_isolated_timing_and_the_rehearsal_exit_2_while_another_study_runs(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:

@@ -418,7 +418,26 @@ def _sat_side(study: Study, r: int, arm: str, size: int) -> C.SatSide | None:
     return C.SatSide(c.views, f, n)  # views are read at the cell's run length U_L
 
 
-def saturation_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
+def b_ranges(arms: Mapping[str, Any]) -> dict[str, dict[str, tuple[float, float]]]:
+    """b(N), bits per slot of the saturation cell of each size, as the range over replicates and panels of every pair read, per arm (section 8.10)."""
+    out: dict[str, dict[str, tuple[float, float]]] = {}
+    for arm, v in arms.items():
+        vals: dict[int, list[float]] = {}
+        for p in v["pairs"].values():
+            for rep in p["replicates"]:
+                for side in ("small", "large"):
+                    det = rep["detail"].get(side)
+                    if det:
+                        vals.setdefault(int(det["slots"]), []).extend(float(x) for x in det["b_bits_per_slot"].values())
+        out[arm] = {str(n): (min(x), max(x)) for n, x in sorted(vals.items())}
+    return out
+
+
+def b_text(ranges: Mapping[str, Mapping[str, tuple[float, float]]]) -> str:
+    return "b(N) bits per slot: " + "; ".join(f"{arm} " + ", ".join(f"{n} slots {lo:.2f}-{hi:.2f}" for n, (lo, hi) in r.items()) for arm, r in ranges.items() if r)
+
+
+def saturation_line(study: Study, fro: fz.Frozen, dense_labels: Mapping[str, str] | None = None) -> dict[str, Any]:
     """The saturation line (section 8.10): per arm and registered pair the verdict of each replicate (rho, b(N), the last doubling's gain and full / not full per panel and size), the pair class,
     the arm class and the outcome; the separability figures of section 7.3 at each saturation cell beside every rho. A pair that uses 2K/256 when the plan does not run it is NOT FULL
     ('256 NOT MEASURED — NOT FULL WITHIN CEILING')."""
@@ -458,8 +477,12 @@ def saturation_line(study: Study, fro: fz.Frozen) -> dict[str, Any]:
         for r in range(1, core.REPLICATES + 1):
             if study.has(r, "F-OQ", f, n):
                 separability[f"{core.cell_name(f, n)} replicate {r}"] = study.get(r, "F-OQ", f, n).deep.get("separability")
-    outcome = C.saturation_outcome({a: v["class"] for a, v in arms.items()}, engineering_failed=False, incomplete=False, pairs_read={a: v["pairs_read"] for a, v in arms.items()}, sat256_absent=not fro.plan.sat256, details=[fro.s0_status, core.ORACLE_SENTENCE])
-    return {"arms": arms, "separability": separability, "outcome": outcome._asdict()}
+    ranges = b_ranges(arms)
+    first_sep = next(iter(sorted(separability.items())), None)
+    sep_text = "separability " + (f"{first_sep[0]}: " + ", ".join(f"{k} {x:.3f}" for k, x in first_sep[1].items() if isinstance(x, int | float)) if first_sep and isinstance(first_sep[1], dict) else "see RESULTS.md")
+    dense_text = "dense at saturation: " + ", ".join(f"{a} {lab}" for a, lab in (dense_labels or {}).items())
+    outcome = C.saturation_outcome({a: v["class"] for a, v in arms.items()}, engineering_failed=False, incomplete=False, pairs_read={a: v["pairs_read"] for a, v in arms.items()}, sat256_absent=not fro.plan.sat256, details=[b_text(ranges), sep_text, dense_text, fro.s0_status, core.ORACLE_SENTENCE])
+    return {"arms": arms, "separability": separability, "b_ranges": {a: {n: list(r) for n, r in v.items()} for a, v in ranges.items()}, "outcome": outcome._asdict()}
 
 
 def dense_saturation(study: Study, fro: fz.Frozen, arm: str) -> dict[str, Any]:
@@ -726,8 +749,8 @@ def analyze_study(
         return result
     steps = capacity_steps(study, fro)
     arms = capacity_arms(study, fro, steps)
-    sat = saturation_line(study, fro)
     dsat = {a: dense_saturation(study, fro, a) for a in DECISION_ARMS}
+    sat = saturation_line(study, fro, {a: dsat[a]["label"] for a in DECISION_ARMS})
     arm_cap = {
         a: C.ArmCapacity(a, arms[a]["class"], arms[a]["dense"], arms[a]["capacity_steps"], dense_text="; ".join(t for t in (_dense_text(arms[a]["dense_detail"]), *arms[a]["dense_detail"].get("mu_text", [])) if t),
                          dense_sat=dsat[a]["label"], dense_sat_sublabels=list(dsat[a]["sublabels"]), sat_class=sat["arms"][a]["class"])
@@ -740,7 +763,7 @@ def analyze_study(
     )
     directed = [t for t in fro.no_loaded_transitions if t in transitions_of(fro.plan)]
     work = {a: arms[a]["work_label"] for a in DECISION_ARMS}
-    cap_out = C.capacity_outcome(arm_cap, engineering_failed=False, incomplete=False, directed_transitions=directed, every_step_not_loaded=every_not_loaded, reasons_extra=_inconclusive_reasons(arms, steps, fro.plan), printed_details=_printed_details(arms, hier, conv, work, fro))
+    cap_out = C.capacity_outcome(arm_cap, engineering_failed=False, incomplete=False, directed_transitions=directed, every_step_not_loaded=every_not_loaded, reasons_extra=_inconclusive_reasons(arms, steps, fro.plan), printed_details=_printed_details(arms, hier, conv, work, fro, sat))
     klim = C.key_learning_limited(arms["H8"]["class"], arms["F-OQ"]["class"])
     reading = C.milestone_reading(cap_out, arm_cap, work, hier["label"], fro.s0_status)
     eff = efficiency_line(study, fro)
@@ -785,10 +808,10 @@ def _inconclusive_reasons(arms: Mapping[str, Mapping[str, Any]], steps: Mapping[
     return reasons
 
 
-def _printed_details(arms: Mapping[str, Mapping[str, Any]], hier: Mapping[str, Any], conv: Mapping[str, Any], work: Mapping[str, Any], fro: fz.Frozen) -> list[str]:
+def _printed_details(arms: Mapping[str, Mapping[str, Any]], hier: Mapping[str, Any], conv: Mapping[str, Any], work: Mapping[str, Any], fro: fz.Frozen, sat: Mapping[str, Any]) -> list[str]:
     sufficient = [a for a in DECISION_ARMS if conv["arms"][a]["suffices"]]
     return [
-        "active work: " + ", ".join(f"{a} {work[a]}" for a in DECISION_ARMS if work.get(a)), f"hierarchy: {hier['label']}",
+        f"saturation outcome {sat['outcome']['label']} ({b_text({a: {n: tuple(r) for n, r in v.items()} for a, v in sat['b_ranges'].items()})})", "active work: " + ", ".join(f"{a} {work[a]}" for a in DECISION_ARMS if work.get(a)), f"hierarchy: {hier['label']}",
         "conventional retrieval: " + ("CONVENTIONAL RETRIEVAL SUFFICES for " + ", ".join(sufficient) if sufficient else "not sufficient") + "; DICT DOMINATES ON THIS TASK",
         fro.s0_status, f"learned-address lane: {fro.lane_status}", core.ORACLE_SENTENCE,
     ]  # fmt: skip

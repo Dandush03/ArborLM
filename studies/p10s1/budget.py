@@ -330,21 +330,36 @@ def item_runs(unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None) ->
     return out
 
 
-def item_projection(wall_per_update: Mapping[tuple[str, int], float], unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None, workers: int = core.WORKERS) -> dict[str, Any]:
-    """Item 0a: for every calibration item, the projected completion time of its last run from the stage start (training only, from the preview's isolated wall seconds per update) **under the exact
-    pooled dispatch order** (``dispatch_order`` and ``simulate_dispatch``, one pooled stage per ``ITEM_GROUPS`` entry), and the item's cap, twice that (``core.HEADROOM``). The cap is a deadline counted
-    from the stage start. A configuration the preview did not time is listed and the item has no projection (it is not started on an assumed cost). Start-up and evaluation are not in the cap (the
-    preview measures neither); that allowance is the lead's."""
+def item_projection(
+    wall_per_update: Mapping[tuple[str, int], float],
+    unit: int = core.U_P,
+    row_u_p: Mapping[int, int] | None = None,
+    workers: int = core.WORKERS,
+    startup_seconds: float = 0.0,
+    evaluation_seconds: Mapping[tuple[str, int, int], float] | None = None,
+) -> dict[str, Any]:
+    """Item 0a (ADR-0021 section 25.14 item 1): for every calibration item, the projected completion time of its last run from the stage start **under the exact pooled dispatch order**
+    (``dispatch_order`` and ``simulate_dispatch``, one pooled stage per ``ITEM_GROUPS`` entry), where a run takes its start-up (``startup_seconds``, measured by the preview), its training (isolated
+    wall seconds per update, from the preview) and its evaluation (the preview's seconds per evaluated snapshot of the run's arm, facts and slots, times its number of snapshots); and the item's
+    cap, twice that (``core.HEADROOM``), a deadline counted from the stage start. A configuration the preview did not time is listed and the item has no projection (it is not started on an assumed
+    cost). Without ``evaluation_seconds`` the evaluation is not included (unit tests only; the calibration command requires them)."""
+    from .calibrate import calibration_snapshots
+
     out: dict[str, Any] = {}
     for group in ITEM_GROUPS:
         ordered = dispatch_order(group, unit, row_u_p)
-        missing = {item: sorted({f"{c.arm}|{c.slots}" for i, c in ordered if i == item and (c.arm, c.slots) not in wall_per_update}) for item in group}
+        missing = {item: sorted({f"{c.arm}|{c.slots}" for i, c in ordered if i == item and (c.arm, c.slots) not in wall_per_update} | ({f"{c.arm}|{c.facts}|{c.slots}" for i, c in ordered if i == item and evaluation_seconds is not None and (c.arm, c.facts, c.slots) not in evaluation_seconds})) for item in group}
         if any(missing.values()):
             for item in group:
                 out[item] = {"runs": sum(1 for i, _c in ordered if i == item), "projected_wall_seconds": None, "cap_seconds": None, "missing_rates": sorted(set().union(*missing.values()))}
             continue
-        times = simulate_dispatch([c.run_updates * wall_per_update[(c.arm, c.slots)] for _i, c in ordered], workers)
+
+        def duration(c: core.Cell) -> float:
+            ev = 0.0 if evaluation_seconds is None else evaluation_seconds[(c.arm, c.facts, c.slots)] * len(calibration_snapshots(c))
+            return startup_seconds + c.run_updates * wall_per_update[(c.arm, c.slots)] + ev
+
+        times = simulate_dispatch([duration(c) for _i, c in ordered], workers)
         for item in group:
             ends = [end for (i, _c), (_s, end) in zip(ordered, times, strict=True) if i == item]
-            out[item] = {"runs": len(ends), "projected_wall_seconds": max(ends), "cap_seconds": core.HEADROOM * max(ends), "missing_rates": []}
+            out[item] = {"runs": len(ends), "projected_wall_seconds": max(ends), "cap_seconds": core.HEADROOM * max(ends), "missing_rates": [], "startup_seconds": startup_seconds, "evaluation_included": evaluation_seconds is not None}
     return out

@@ -14,6 +14,7 @@ import statistics
 import subprocess
 import time
 from collections.abc import Callable
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import torch
@@ -46,6 +47,49 @@ def running_commands() -> list[str]:
 def other_study_processes(commands: "list[str] | None" = None) -> list[str]:
     """The live command lines that belong to ``studies.p10s0`` or ``studies.p10s2`` (the list may be injected)."""
     return [c for c in (running_commands() if commands is None else commands) if OTHER_STUDY_PATTERN.search(c)]
+
+
+class S0EvidenceRefused(RuntimeError):
+    """The file named as the evidence that P10-S0's training has finished is not P10S0's registered stage manifest (ADR-0021 section 25.14 item 3)."""
+
+
+def validate_s0_evidence(manifest: str | Path | None, refusal_record: str | Path | None = None) -> dict[str, Any]:
+    """Validate ``--s0-training-manifest`` as the manifest of one of P10-S0's registered training stages (kind ``stage_manifest``, study ``P10S0``, mode ``registered``, a stage named ``train...``,
+    status ``COMPLETE``) and bind it by hash. Where the manifest is the WX stage's (``train-wx``), S0's record of the probe's refusal is required too (a non-empty JSON object). An empty,
+    incomplete or foreign file is refused. Returns the record that goes into the stage manifest."""
+    import json
+
+    from arborlm.io import file_sha256
+
+    if not manifest or not Path(manifest).is_file():
+        raise S0EvidenceRefused("refused: --s0-training-manifest (the manifest of P10-S0's last due registered training stage) is required: nothing here states that S0's training has finished without it")
+    try:
+        data = json.loads(Path(manifest).read_text())
+    except (OSError, ValueError) as exc:
+        raise S0EvidenceRefused(f"refused: {manifest} is not a JSON manifest ({exc})") from exc
+    if not isinstance(data, dict) or data.get("kind") != "stage_manifest" or data.get("study") != "P10S0" or data.get("mode") != "registered":
+        raise S0EvidenceRefused(f"refused: {manifest} is not a registered stage manifest of study P10S0")
+    stage = str(data.get("stage", ""))
+    if not stage.startswith("train"):
+        raise S0EvidenceRefused(f"refused: {manifest} is the manifest of stage {stage!r}, not a training stage")
+    if data.get("status") != "COMPLETE":
+        raise S0EvidenceRefused(f"refused: the S0 stage {stage!r} has status {data.get('status')!r}, not COMPLETE")
+    out: dict[str, Any] = {"s0_training_manifest": {"path": str(Path(manifest).resolve()), "sha256": file_sha256(Path(manifest)), "stage": stage, "run_id": data.get("run_id"), "finished_utc": data.get("finished_utc")}}
+    if stage.endswith("wx") or "wx" in stage.split("-")[1:]:
+        if not refusal_record or not Path(refusal_record).is_file():
+            raise S0EvidenceRefused("refused: the WX training manifest needs S0's record of the probe's refusal (--s0-refusal-record)")
+        try:
+            rec = json.loads(Path(refusal_record).read_text())
+        except (OSError, ValueError) as exc:
+            raise S0EvidenceRefused(f"refused: the refusal record is not JSON ({exc})") from exc
+        if not isinstance(rec, dict) or not rec:
+            raise S0EvidenceRefused("refused: the refusal record is empty")
+        out["s0_refusal_record"] = {"path": str(Path(refusal_record).resolve()), "sha256": file_sha256(Path(refusal_record))}
+    elif refusal_record:
+        if not Path(refusal_record).is_file():
+            raise S0EvidenceRefused(f"refused: no S0 refusal record at {refusal_record}")
+        out["s0_refusal_record"] = {"path": str(Path(refusal_record).resolve()), "sha256": file_sha256(Path(refusal_record))}
+    return out
 
 
 def concurrency_check(commands: "list[str] | None" = None) -> dict[str, Any]:
