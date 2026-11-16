@@ -123,3 +123,11 @@ The lead reported the registered run's outcome (row 4, ADDRESSING-QUALIFIED at 4
 > register it as it is, same as the other we commit push and the propose a P10-I to adress each better
 
 Recorded by the lead: the outcome is accepted unchanged, with its caveats (ADR-0020, last addendum, on `claude/p10-s0`). Each shortfall is a candidate item for the P10-I proposal, which is proposed and not run and needs the human lead's review. The lead does not read this message as a decision on any other open question.
+
+### P10-S1: the load search is extended once (2026-11-16 UTC)
+
+The first load search returned both loaded cells (8K/1K, 32K/4K) as NOT LOADED WITHIN ITS CEILING: F-OQ passes at the ceiling and at one earlier candidate in each cell but never at two consecutive candidates (misses of 0.003 to 0.024 bits against the 0.10 limit). The lead offered (1) one more candidate per cell with every rule unchanged, (2) both transitions fixed as CAPACITY NOT TESTED, (3) stopping S1, and recommended (1). The human lead, verbatim:
+
+> Extend search once
+
+Recorded by the lead: ADR-0021 §25.15 on `claude/p10-s1` fixes the two new candidates (393,216 and 786,432), that nothing else changes, and that the extension is made once.
