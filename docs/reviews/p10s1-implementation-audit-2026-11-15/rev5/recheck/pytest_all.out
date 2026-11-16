@@ -1,0 +1,33 @@
+........................................................................ [ 28%]
+........................................................................ [ 56%]
+........................................................................ [ 85%]
+.....................................                                    [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+tests/test_p10s1_model.py::test_doq_construction
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= slowest 15 durations =============================
+832.23s call     tests/test_p10s1_e2e.py::test_the_registered_sequence_runs_end_to_end_on_test_seeds_through_the_launch_scripts
+249.72s setup    tests/test_p10s1_stages.py::test_dry_runs_every_stage_in_order
+17.38s setup    tests/test_p10s1_model.py::test_memorized_store_is_usefully_retained_and_ablations_remove_it[F-OQ]
+11.01s call     tests/test_p10s1_e2e.py::test_the_clone_is_source_files_only
+8.97s call     tests/test_p10s1_model.py::test_throughput_stability_rule_and_cpu_timing
+5.57s call     tests/test_p10s1_audit_fixes.py::test_section_10_2_scenarios_never_give_a_negative
+5.20s call     tests/test_p10s1_rev5_lines.py::test_scenarios_that_reach_the_dense_labels_and_the_saturation_verdicts
+3.44s call     tests/test_p10s1_rev5_lines.py::test_capacity_negative_clause_a_and_the_inconclusive_scenarios_never_give_a_negative
+2.84s call     tests/test_p10s1_stages.py::test_check_preconditions_refusals
+2.47s call     tests/test_p10s1_rev5_lines.py::test_a_missing_cell_a_failed_gate_and_the_256_cell_when_the_plan_does_not_run_it
+1.66s call     tests/test_p10s1_core.py::test_launch_scripts_refuse_a_wrong_number_of_arguments_and_unfrozen_runs
+1.30s call     tests/test_p10s1_analysis.py::test_a_failed_engineering_gate_gives_no_scientific_label[g1]
+1.05s teardown tests/test_p10s1_stages.py::test_dry_analysis_and_report
+0.98s call     tests/test_p10s1_rev5_lines.py::test_default_scenario_gives_the_capacity_saturation_and_efficiency_lines_on_the_four_steps
+0.98s call     tests/test_p10s1_analysis.py::test_a_failed_engineering_gate_gives_no_scientific_label[g2]
+253 passed, 2 warnings in 1167.72s (0:19:27)
+P10S1_E2E=1 OMP_NUM_THREADS=1 UV_NO_SYNC=1 nice uv run --locked pytest  -q -p  2534.89s user 520.45s system 261% cpu 19:29.62 total

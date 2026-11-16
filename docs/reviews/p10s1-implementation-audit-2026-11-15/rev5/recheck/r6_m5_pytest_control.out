@@ -1,0 +1,8 @@
+E       AssertionError: assert ('experiments' == 'experiments'
+E         
+E           experiments and 'm5control' == 'ArborLM'
+E         
+E         - ArborLM
+E         + m5control)
+FAILED tests/test_p10s1_stages.py::test_generate_and_stage_codes_use_the_experiments_root
+1 failed, 127 passed, 1 warning in 284.73s (0:04:44)
