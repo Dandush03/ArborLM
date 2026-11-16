@@ -430,6 +430,11 @@ def fetch_session(
         raise FetchRefused(f"refused: {dest_dir} is not under the git-ignored {droot}")
     if dest_dir.exists() and any(dest_dir.iterdir()):
         raise FetchRefused(f"refused: {dest_dir} is not a fresh folder")
+    if any(f["name"].startswith("tatoeba") for f in files):  # re-check A, R7: one Tatoeba session only; a later weekly export is never downloaded once the digests are frozen or a Tatoeba row is completed
+        if ((root or ROOT) / TATOEBA_RECORD).exists():
+            raise FetchRefused(f"refused: the Tatoeba session record {TATOEBA_RECORD} exists: the Tatoeba files are fetched in one session only")
+        if ledger_path.exists() and any("tatoeba" in ln.lower() and "completed" in ln.lower() for ln in ledger_path.read_text().splitlines()):
+            raise FetchRefused("refused: the download ledger already holds completed Tatoeba rows: the Tatoeba files are fetched in one session only")
     declared = sum(int(by[f["name"]].size or 0) for f in files)
     free = free_bytes if free_bytes is not None else shutil.disk_usage(dest_dir.parent if dest_dir.parent.exists() else droot.parent).free
     if free < declared:

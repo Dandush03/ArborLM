@@ -298,8 +298,8 @@ def annotations(st: Study, classes: Mapping[str, Mapping[str, ClassResult]]) -> 
     A["LEXICON-EQUIVALENT"], v2, m2 = retr(("R-gloss",))
     D["LEXICON-EQUIVALENT"] = detail("any replicate or order", v2, m2)
 
-    # TEACHER-EQUIVALENT-TO-GOLD: MA-gold's G within 0.03 of ST1's or above on both capabilities, in any replicate
-    tg = {f"r{r}": C.all_or_none([C.within(st.g_panel(r, "MAGOLD", c, "E_" + c), st.g_panel(r, "ST1", c + core.other_task(c), "E_" + c)) for c in core.TASKS]) for r in range(n)}
+    # TEACHER-EQUIVALENT-TO-GOLD: MA-gold's G within 0.03 of ST1's or above on EITHER capability (the lead's ruling m7), in any replicate
+    tg = {f"r{r}": any_rule([C.within(st.g_panel(r, "MAGOLD", c, "E_" + c), st.g_panel(r, "ST1", c + core.other_task(c), "E_" + c)) for c in core.TASKS]) for r in range(n)}
     A["TEACHER-EQUIVALENT-TO-GOLD"] = any_rule(list(tg.values()))
     gold_means = {f"MA-gold G {c}": mean_of([st.g_panel(r, "MAGOLD", c, "E_" + c) for r in range(n)]) for c in core.TASKS}
     D["TEACHER-EQUIVALENT-TO-GOLD"] = detail("any replicate", tg, {**gold_means, **{f"ST1 G {c}": mean_of([st.g_panel(r, "ST1", c + core.other_task(c), "E_" + c) for r in range(n)]) for c in core.TASKS}})
@@ -381,6 +381,7 @@ def annotations(st: Study, classes: Mapping[str, Mapping[str, ClassResult]]) -> 
     return A, D
 
 
+ADAPTER_ARMS = ("L-seq", "L-joint", "L-sep")  # every arm whose route applies one adapter at every position (addendum sections 5.2 and 7)
 COMP_ARMS = {"M-append-frozen": ("MAF", core.ORDERS), "M-ii": ("MII", core.ORDERS), "L-seq": ("LSEQ", core.ORDERS), "M-joint": ("MJOINT", ("-",)), "L-joint": ("LJOINT", ("-",)), "M-i-separate": ("M-i-separate", ("-",)), "L-sep": ("L-sep", ("-",))}  # fmt: skip
 
 
@@ -391,7 +392,30 @@ def _comb_rec(st: Study, arm: str, r: int, variant: str) -> Mapping[str, Any] | 
     else:
         sn = st.snap(r, group, variant)
         rec = None if sn is None else sn.get("combined")
-    return rec if isinstance(rec, Mapping) and all(k in rec for k in ("C1", "C2", "single")) else None  # a partial combined record is a missing registered score
+    return rec if valid_combined(rec, (st.base.get("combined") or {}).get("stage0")) else None  # a partial or malformed combined record is a missing registered score
+
+
+def valid_combined(rec: Any, s0: Mapping[str, Any] | None) -> bool:
+    """The integrity conditions of the combined-tasks addendum section 8 for one record: both kinds with their tested sentences and per-language means, the single-task scores of both languages with n entries, and
+    the same n and pair hash as Stage 0's record. A record that fails any of them is a missing registered score (INCOMPLETE), never a crash."""
+    try:
+        if not isinstance(rec, Mapping) or not all(k in rec for k in ("C1", "C2", "single", "n")):
+            return False
+        n = rec["n"]
+        if not isinstance(n, int) or n <= 0:
+            return False
+        for kind in ("C1", "C2"):
+            k = rec[kind]
+            if not isinstance(k, Mapping) or not all(isinstance(k["tested_sentences"][a], list) and a in k["tested_by_language"] for a in core.TASKS) or k.get("n", n) != n:
+                return False
+        sc = rec["single"]["scores"]
+        if not all(isinstance(sc[a], list) and len(sc[a]) == n for a in core.TASKS):
+            return False
+        if isinstance(s0, Mapping) and (s0.get("n") != n or s0.get("pairs_sha256") != rec.get("pairs_sha256")):
+            return False
+        return True
+    except (KeyError, TypeError, IndexError):
+        return False
 
 
 def _t_single(ens: Mapping[str, Any] | None, rec: Mapping[str, Any], kind: str, lang: str) -> float | None:
@@ -433,6 +457,9 @@ def composition(st: Study) -> dict[str, Any]:
                     rec = _comb_rec(st, arm, r, o)
                     if arm == "M-ii" and ((st.cell(r, "MII", o) or {}).get("extras", {}).get("consolidation", {}).get("rejected", False)):
                         rejected = True
+                        orders[o].append(None)
+                        detail[o].append({"replicate": r, "NOT_EVALUATED": "CONSOLIDATION-REJECTED: no M-ii combined score exists (addendum section 7)"})
+                        continue
                     if rec is None:
                         orders[o].append(None)
                         detail[o].append(None)
@@ -447,7 +474,9 @@ def composition(st: Study) -> dict[str, Any]:
                     if cm is not None and all(x is not None for x in sa):
                         c_means.setdefault(o, []).append(cm)
                         s_means.setdefault(o, []).append(sum(x for x in sa if x is not None) / 2)
-                    detail[o].append({"replicate": r, "H": dict(cell.h), "single_task_G": dict(cell.g), "passes": cell.passes, "reasons": list(cell.reasons), "pass_rate": pr,
+                    n_items = rec.get("n")
+                    per_answer = {a: len(rec[kind]["tested_sentences"][a]) for a in core.TASKS}
+                    detail[o].append({"replicate": r, "n_items": n_items, "items_per_answer": per_answer, "H": dict(cell.h), "single_task_G": dict(cell.g), "passes": cell.passes, "reasons": list(cell.reasons), "pass_rate": pr,
                                       "s_combined": {a: combined.tested_mean(rec, kind, a) for a in core.TASKS}, "s_single": {a: combined.single_mean_on(rec, kind, a) for a in core.TASKS}})  # fmt: skip
             name, reasons = C.composition_class(orders, rejected=rejected)
             ratios: dict[str, float | None] = {}
@@ -456,6 +485,12 @@ def composition(st: Study) -> dict[str, Any]:
                 ratios[o] = cbar / (C.G["composes_ratio_min"] * sbar) if cbar is not None and sbar else None
             out["arms"][kind][arm] = {"composition": name, "reasons": list(reasons), "orders": detail, "mean_pass_rate": mean_of(pass_rates), "revision5_ratio_replaced": ratios,
                                       "label": "revision 5's raw-score rule, replaced by the human lead"}  # fmt: skip
+            if kind == "C2" and arm in ADAPTER_ARMS:  # the lead's ruling N-M2: an adapter's first answer on C2 is its single-task answer by construction
+                out["arms"][kind][arm]["by_construction_answers"] = {"A": "BY CONSTRUCTION: the German answer of C2 is the arm's single-task answer, so its H is 1 for an adapter arm"}
+                out["arms"][kind][arm]["rests_on"] = "the French answer alone"
+            first = next((c for cells in detail.values() for c in cells if c and c.get("n_items") is not None), None)
+            out["arms"][kind][arm]["n_items"] = None if first is None else first["n_items"]
+            out["arms"][kind][arm]["items_per_answer"] = None if first is None else first["items_per_answer"]
         out["arms"][kind]["_stage0"] = _floor(st, kind, s0, ens)
         out["arms"][kind]["_ensemble"] = _ensemble_h(kind, s0, ens)
     return out
@@ -663,7 +698,8 @@ def analyze(study: Mapping[str, Any], recompute_ne: set[str] | None = None, *, b
         for r in range(st.n):
             for arm, (group, variants) in COMP_ARMS.items():
                 for o in variants:
-                    if _comb_rec(st, arm, r, o) is None and not (arm in ("M-i-separate", "L-sep") and not st.reps[r].get("assembled")):
+                    rejected_m_ii = arm == "M-ii" and bool(((st.cell(r, "MII", o) or {}).get("extras", {}).get("consolidation", {}) or {}).get("rejected", False))
+                    if _comb_rec(st, arm, r, o) is None and not rejected_m_ii:  # a CONSOLIDATION-REJECTED M-ii has no combined score (addendum section 7): its line is NOT_EVALUATED, the study is not INCOMPLETE
                         incomplete.append(f"r{r} {arm} {o}: the combined-task scores are missing (a registered score)")
     classes: dict[str, dict[str, ClassResult]] = {}
     gates: dict[str, Any] = {}
@@ -812,7 +848,7 @@ def stamp(obj: Any) -> Any:
         d = {k: stamp(v) for k, v in obj.items()}
         if needs_line(d):
             d = {"oracle_line": core.ORACLE_LINE, **{k: v for k, v in d.items() if k != "oracle_line"}}
-        if any("compos" in str(k).lower() for k in d):
+        if any("compos" in str(k).lower() or str(k).lower() == "h_by_answer" for k in d):
             d = {**d, "combined_line": core.COMBINED_LINE}
         return d
     if isinstance(obj, list | tuple):

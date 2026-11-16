@@ -60,7 +60,7 @@ def test_prefreeze_scripts_pass_the_stage_cap_and_every_required_flag(name: str,
     p, lines = run_script(name, [str(tmp_path / "run"), "deadbeef"], tmp_path)
     assert p.returncode == 0, p.stderr
     if name == "datagen":  # the locked pyarrow comes from an extra of the lock, so the launch script may add "--extra pilot" before the requirements
-        assert lines[:2] == ["run", "--locked"] and lines[lines.index("--with-requirements") + 1] == "studies/p10s2/requirements-datagen.txt" and lines.index("--with-requirements") < lines.index("python")
+        assert lines[:5] == ["run", "--locked", "--extra", "pilot", "python"] and "--with-requirements" not in lines  # re-check A, R2: the packages are installed by install_datagen and put on the datagen process's path only
     else:
         assert lines[:3] == ["run", "--locked", "python"]
     mod = "studies.p10s2.datagen" if name == "datagen" else "studies.p10s2.stages"

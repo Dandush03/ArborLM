@@ -4,7 +4,8 @@
 Data-generation side (it needs the reference tokenizer's offsets): the validation file is tokenized once as a whole and cut from its first token into consecutive, non-overlapping windows of
 ``window`` tokens (256); a trailing remainder is dropped. A window is in the *marker-like* stratum if one of the strings lies wholly within the text of its tokens 1-64 (``decision`` tokens), and in the
 *ordinary* stratum if it contains none of the strings anywhere. A window whose only such strings lie after token 64 is in neither stratum and is not used. Strings are matched case-sensitively as
-substrings of the raw text; "a line ending in ':'" means a ':' immediately followed by a newline, both within the span in question. 100 windows of each stratum are sampled with the GEN-window seed.
+substrings of the raw text; "a line ending in ':'" means a ':' immediately followed by a newline, both within the span in question. The second GEN decision is taken at the last token of the first marker-like
+string EXTENDED THROUGH a colon that immediately follows it (never beyond token 64), so it can land on the colon every task prompt ends on. 100 windows of each stratum are sampled with the GEN-window seed.
 If either stratum has fewer than the wanted count on this grid, neither the grid nor the rule is changed: ``WindowsInsufficient`` is raised and the work returns to the lead before the freeze.
 """
 
@@ -58,6 +59,8 @@ def cut_windows(tok: ReferenceTokenizer, text: str, vocab_index: Mapping[str, in
         reads = tuple((k - w0, j) for k, j in word_last if w0 <= k < w0 + window)
         if fm is not None:
             end_char = offs[w0][0] + fm[1]
+            if text[end_char : end_char + 1] == ":":  # the lead's ruling m9: extended through a colon that immediately follows the string, so the decision can land on the position every task prompt ends on
+                end_char += 1
             last = max(k for k in range(w0, w0 + decision) if offs[k][0] < end_char) - w0
             out.append(GeneralWindow(tuple(ids[w0 : w0 + window]), reads, "marker", last))
         elif first_marker(span_all) is None:

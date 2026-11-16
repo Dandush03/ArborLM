@@ -184,4 +184,4 @@ def test_a_descriptive_panel_is_never_in_a_gap_an_ablation_or_a_learned_route() 
     world, _ = dry_world()
     ctx = SimpleNamespace(panels={"E_A": 1, "E_B": 2, "E_open": 3})
     assert cells.gap_panels(ctx) == ["E_A", "E_B"]
-    assert cells.gap_panels(world.ctx) == list(world.ctx.panels)
+    assert cells.gap_panels(world.ctx) == ["E_A", "E_B"] and {"E_open_A", "E_open_B"} <= set(world.ctx.panels)  # the stand-in bundle has E_open items: they are panels, never gap panels

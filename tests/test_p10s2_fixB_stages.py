@@ -57,6 +57,15 @@ def write_stage(run: Path, name: str, status: str = "completed") -> None:
     p.write_text(json.dumps({"stage": name, "status": status}))
 
 
+def put_gates(run: Path, obj: dict[str, Any]) -> None:
+    """Write gates.json and bind it to its stage record by hash (re-check B, m13), as the gates stage does."""
+    from arborlm.io import file_sha256
+
+    (run / "gates.json").write_text(json.dumps(obj))
+    p = stages.stage_record_path(run, "gates")
+    p.write_text(json.dumps({**json.loads(p.read_text()), "gates_sha256": file_sha256(run / "gates.json")}))
+
+
 def test_stage_order_gates_first_and_each_stage_needs_its_predecessor(tmp_path: Path) -> None:
     run = tmp_path / "run"
     stages.require_order(run, "gates")  # the first stage needs nothing
@@ -68,13 +77,13 @@ def test_stage_order_gates_first_and_each_stage_needs_its_predecessor(tmp_path: 
         stages.require_order(run, "gates")  # a stage is run once and never re-run with changed settings
     with pytest.raises(stages.StageRefused, match="no gates record"):
         stages.require_order(run, "train")  # a missing gates record is never read as all gates passed
-    (run / "gates.json").write_text(json.dumps({**GATES_OK, "G5": {"ok": False}, "ok": False}))
+    put_gates(run, {**GATES_OK, "G5": {"ok": False}, "ok": False})
     with pytest.raises(stages.StageRefused, match="did not pass"):
         stages.require_order(run, "train")  # a failed gate stops the run
-    (run / "gates.json").write_text(json.dumps({k: v for k, v in GATES_OK.items() if k != "G9"}))
+    put_gates(run, {k: v for k, v in GATES_OK.items() if k != "G9"})
     with pytest.raises(stages.StageRefused, match="did not pass"):
         stages.require_order(run, "train")  # a gate with no record is not a passed gate
-    (run / "gates.json").write_text(json.dumps(GATES_OK))
+    put_gates(run, GATES_OK)
     stages.require_order(run, "train")
     write_stage(run, "train", "failed")
     with pytest.raises(stages.StageRefused, match="ended with status 'failed'"):

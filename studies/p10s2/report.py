@@ -104,7 +104,7 @@ def composition_lines(comp: Mapping[str, Any], design: str) -> list[str]:
     """The composition lines of the combined-tasks addendum section 8: n, every H_a per cell, the single-task G_a^C, Stage 0's per-answer combined and single scores (the floor), the pass rate, and
     revision 5's ratio labelled as replaced. The ensemble's and Stage 0's values carry no composition word."""
     n = comp.get("n_replicates", "?")
-    out = [f"Table 4. Composition on E_C (the strengthened per-answer rule, addendum section 8) {design}; both fixed lines above apply to the whole table and to this caption. Descriptive; n replicates = {n}."]
+    out = [f"Table 4. Composition on E_C (the strengthened per-answer rule, addendum section 8) {design}; both fixed lines above apply to the whole table and to this caption. Descriptive; n replicates = {n}. A high H with a low exact-match pass rate is contamination, not composition."]
     for kind, arms in comp.get("arms", {}).items():
         for arm, rec in arms.items():
             if arm == "_stage0":
@@ -113,10 +113,20 @@ def composition_lines(comp: Mapping[str, Any], design: str) -> list[str]:
             elif arm == "_ensemble":
                 out.append(f"- {kind} ensemble (BY CONSTRUCTION, no composition word): H per answer {rec.get('H')}")
             else:
-                out.append(f"- {kind} {arm}: {rec['composition']} (n replicates = {n}); pass rate {_fmt(rec['mean_pass_rate'])}; reasons: {'; '.join(rec['reasons']) or 'none'}; revision 5's ratio C/(0.80 S), {rec['label']}: {rec['revision5_ratio_replaced']}")
+                items = f"n items {rec.get('n_items', '-')}; items per answer {rec.get('items_per_answer') or '-'}"
+                tail = ""
+                if rec.get("rests_on"):
+                    tail = f"; this COMPOSES line rests on {rec['rests_on']}" if rec["composition"] == "COMPOSES" else f"; its German answer is BY CONSTRUCTION (the line rests on {rec['rests_on']})"
+                out.append(f"- {kind} {arm}: {rec['composition']} {design} ({items}; n replicates = {n}); exact-match pass rate {_fmt(rec['mean_pass_rate'])} (a high H with a low pass rate is contamination, not composition){tail}; reasons: {'; '.join(rec['reasons']) or 'none'}; revision 5's ratio C/(0.80 S), {rec['label']}: {rec['revision5_ratio_replaced']}")
                 for o, cells in rec["orders"].items():
                     for c in cells:
-                        out.append("  - order " + o + (f", replicate {c['replicate']}: H {c['H']}, single-task G {c['single_task_G']}, s combined {c['s_combined']}, s single {c['s_single']}" if c else ": no record"))
+                        if c and "NOT_EVALUATED" in c:
+                            out.append(f"  - order {o}, replicate {c['replicate']}: NOT_EVALUATED, {c['NOT_EVALUATED']}")
+                            continue
+                        h = dict(c["H"]) if c else {}
+                        if c and rec.get("by_construction_answers"):
+                            h["A"] = f"BY CONSTRUCTION ({h.get('A')})"
+                        out.append("  - order " + o + (f", replicate {c['replicate']} (n items {c.get('n_items')}; per answer {c.get('items_per_answer')}): H {h}, single-task G {c['single_task_G']}, s combined {c['s_combined']}, s single {c['s_single']}" if c else ": no record"))
     return out
 
 
@@ -197,7 +207,7 @@ def render_report(outcome: Mapping[str, Any], *, title: str = "P10-S2 outcome re
     if outcome.get("annotations"):
         parts += ["", block(annotation_lines(outcome["annotations"], outcome.get("annotation_detail")))]
     if outcome.get("composition"):
-        parts += ["", block(composition_lines(outcome["composition"], design))]
+        parts += ["", block(composition_lines(outcome["composition"], design), composition=True)]
     if outcome.get("cost_lines"):
         parts += ["", block(["Cost and active-memory lines (registered rules, descriptive standing; none is an efficiency result):", *[f"- {c}" for c in outcome["cost_lines"]]])]
     if "intervals_computed" in outcome:
@@ -213,7 +223,7 @@ def render_report(outcome: Mapping[str, Any], *, title: str = "P10-S2 outcome re
         parts += ["", block(lines)]
     if extra:
         parts += ["", *extra]
-    parts += ["", "## Notes", "", block([f"- {x}" for x in NOTES]), "", "## What S2 cannot establish", "", block([f"- {x}" for x in NOT_ESTABLISHED])]
+    parts += ["", "## Notes", "", block([f"- {x}" for x in NOTES]), "", "## What S2 cannot establish", "", block([f"- {core.LEAD_RULE}", *[f"- {x}" for x in NOT_ESTABLISHED]])]
     text = "\n".join(parts) + "\n"
     check_text(text)
     return text

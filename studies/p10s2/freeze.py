@@ -19,6 +19,7 @@ A registered stage refuses unless: the working tree is clean; the freeze commit 
 raise, code digest, run directory); the study ledger's cap equals the plan's; the design is one of the registered rungs; and a committed run decision exists. No registered stage is launched by a typed command.
 """
 
+import hashlib
 import json
 import re
 import subprocess
@@ -158,6 +159,8 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path, *, ledger: Ledg
         raise FreezeRefused("refused: a cap-raise record exists that the freeze plan does not name")
     if budget.effective_cap(raise_path) != float(plan["cap_hours"]):
         raise FreezeRefused("refused: the cap in force differs from the cap the freeze recorded")
+    if ledger is not None:
+        verify_ledger_snapshot(plan, ledger)
     if ledger is not None and ledger.cap_hours() != float(plan["cap_hours"]):
         raise FreezeRefused(f"refused: the study ledger's cap ({ledger.cap_hours()} h) differs from the cap the freeze recorded ({plan['cap_hours']} h): a raise after the freeze is not allowed")
     design = (int(plan["design"]["replicates"]), int(plan["design"]["updates"]))
@@ -168,6 +171,66 @@ def verify_plan(plan: dict[str, Any], repo: Path, run_dir: Path, *, ledger: Ledg
     if "code" in plan and plan["code"] != code_digest(repo):
         changed = sorted(set(plan["code"]) ^ set(code_digest(repo)) | {k for k, v in plan["code"].items() if code_digest(repo).get(k) != v})
         raise FreezeRefused("refused: the code differs from the frozen digest: " + ", ".join(changed[:6]))
+
+
+def ledger_snapshot(ledger: Ledger) -> dict[str, Any]:
+    """The study ledger's length and the SHA-256 of its lines now (recorded in the plan at the freeze; every registered stage checks that the ledger still begins with exactly these lines)."""
+    raw = ledger.path.read_bytes() if ledger.path.exists() else b""
+    lines = raw.splitlines(keepends=True)
+    return {"lines": len(lines), "sha256": hashlib.sha256(b"".join(lines)).hexdigest()}
+
+
+def verify_ledger_snapshot(plan: dict[str, Any], ledger: Ledger) -> None:
+    """N2: a registered stage runs only against the study ledger that held P at the freeze: it begins with the recorded lines, byte for byte, and its charged total is not below the plan's. A fresh or edited
+    ledger (it is git-ignored and per checkout) is refused."""
+    snap = plan.get("ledger")
+    if snap is None:
+        raise FreezeRefused("refused: the plan records no study-ledger snapshot")
+    raw = ledger.path.read_bytes() if ledger.path.exists() else b""
+    lines = raw.splitlines(keepends=True)
+    n = int(snap["lines"])
+    if len(lines) < n or hashlib.sha256(b"".join(lines[:n])).hexdigest() != snap["sha256"]:
+        raise FreezeRefused(f"refused: the study ledger does not begin with the {n} lines recorded at the freeze (a fresh, edited or other ledger): P is not what the freeze charged")
+    if ledger.total_hours() + 1e-9 < float(plan["charged_hours_at_freeze"]):
+        raise FreezeRefused("refused: the study ledger charges fewer hours than the plan recorded at the freeze")
+
+
+def check_identities(repo: Path, data_dir: str, cal: dict[str, Any], gates_rec: dict[str, Any], reh: dict[str, Any], pre_record: dict[str, Any], rates: budget.Rates) -> None:
+    """N3: every pre-freeze record carries the identity of what produced it (``identity``: bundle manifest SHA-256, code commit, configuration SHA-256, seed mode, update counts, device); the freeze refuses a
+    record without one, one that names another bundle, configuration or seed mode, the wrong update counts, a stand-in or dry record (in the real configuration), and a CPU device without the rehearsal's own
+    recorded failed MPS attempt."""
+    manifest = file_sha256(repo / data_dir / "manifest.json")
+    config = file_sha256(repo / core.DEFAULT_CONFIG)
+    cfg = core.CFG
+    expected = {"calibration": ("calibration", {"updates": int(cfg["calibration"]["updates"])}), "prefreeze_gates": ("rehearsal", {"updates": int(cfg["rehearsal"]["short_updates"])}), "rehearsal": ("rehearsal", {"updates": int(cfg["rehearsal"]["short_updates"]), "full_updates": int(cfg["rehearsal"]["full_updates"])})}
+    for name, rec in (("calibration", cal), ("prefreeze_gates", gates_rec), ("rehearsal", reh)):
+        ident = rec.get("identity")
+        if not isinstance(ident, dict):
+            raise FreezeRefused(f"refused: the {name} record carries no identity (bundle manifest, code commit, configuration, seed mode, update counts, device): a record written without one cannot be checked")
+        if rec.get("synthetic") or rec.get("dry"):
+            raise FreezeRefused(f"refused: the {name} record is marked synthetic or dry")
+        if ident.get("bundle_manifest_sha256") != manifest:
+            raise FreezeRefused(f"refused: the {name} record was made on another data bundle than the one being frozen")
+        if ident.get("config_sha256") != config:
+            raise FreezeRefused(f"refused: the {name} record was made under another configuration than the one being frozen")
+        if not ident.get("code_commit"):
+            raise FreezeRefused(f"refused: the {name} record names no code commit")
+        mode, counts = expected[name]
+        if ident.get("seed_mode") != mode:
+            raise FreezeRefused(f"refused: the {name} record's seed mode is {ident.get('seed_mode')!r}, not {mode!r}")
+        for k, v in counts.items():
+            if ident.get("update_counts", {}).get(k) != v:
+                raise FreezeRefused(f"refused: the {name} record ran {ident.get('update_counts', {}).get(k)} {k}, the configuration says {v} (a typed count)")
+        if ident.get("device") != rates.train_device:
+            raise FreezeRefused(f"refused: the {name} record ran on {ident.get('device')!r}, the rehearsal's rates on {rates.train_device!r}")
+    if pre_record.get("bundle_manifest_sha256") != manifest:
+        raise FreezeRefused("refused: the data-generation record names no bundle manifest, or another one, than the bundle being frozen")
+    if pre_record.get("seed_mode") != "registered-data" and not core.is_test_configuration():
+        raise FreezeRefused(f"refused: the data-generation record's seed mode is {pre_record.get('seed_mode')!r}: a stand-in bundle cannot be frozen under the real configuration")
+    if rates.train_device == "cpu":
+        att = reh.get("mps_attempt") or {}
+        if att.get("ok") is not False or not str(att.get("error", "")).strip():
+            raise FreezeRefused("refused: CPU is frozen without the rehearsal's own recorded failed MPS attempt (a typed reason is not one)")
 
 
 def prefreeze_caps_from_ledger(ledger: Ledger) -> dict[str, Any]:
@@ -215,13 +278,19 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
         raise FreezeRefused("refused: a registered seed has been observed before the freeze")
     if ledger.unfinished():
         raise FreezeRefused("refused: the study ledger has a start marker with no end (a killed process): its time is charged but the record is unresolved")
-    p_hours = ledger.total_hours()
+    p_ledger = ledger.total_hours()
     measured = prefreeze_caps_from_ledger(ledger)
     if measured["provisional"]:
         raise _refuse("prefreeze_caps.json", measured, "refused: the pre-freeze stage caps are still provisional (" + ", ".join(measured["missing"]) + " not measured): the rehearsal replaces them with twice the measured wall time")
     for needed in (calibration, prefreeze, prefreeze_gates, rehearsal, repo / data_dir / "manifest.json"):
         if not needed.is_file():
             raise FreezeRefused(f"refused: {needed} does not exist")
+    reh = json.loads(rehearsal.read_text())
+    if "charged_hours_at_end_of_rehearsal" not in reh:
+        raise FreezeRefused("refused: the rehearsal record does not name the charged hours at its end (P of the rung rule)")
+    p_hours = float(reh["charged_hours_at_end_of_rehearsal"])  # the ADR's P: the hours charged when the rehearsal ended (the lead's ruling m7)
+    if p_ledger > p_hours + 1e-6:
+        raise FreezeRefused(f"refused: the study ledger holds {p_ledger:.6f} h, more than the {p_hours:.6f} h at the end of the rehearsal: something was charged after it")
     try:
         computed = budget.computed_cap(p_hours, rates)  # the cap is a rule, not a discretion (the lead's ruling of 2026-11-15)
         raise_recorded = ledger.cap_raise_entry() is not None or (repo / core.RAISE_FILE).exists()
@@ -255,6 +324,7 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
         raise _refuse("prefreeze_stop.json", {"label": summary["stop"], "summary": summary}, f"{summary['stop']}: the study stops before the freeze (recorded in {refusal_dir() / 'prefreeze_stop.json'})")
     if not tokenization_required_ok(pre_record):
         raise FreezeRefused("refused: test (a) of section 14.2 step 4 is absent or has a mismatch on a prompt or an R-icl prompt (0 required)")
+    check_identities(repo, data_dir, json.loads(calibration.read_text()), json.loads(prefreeze_gates.read_text()), reh, json.loads(prefreeze.read_text()), rates)
     # everything is accepted: now (and only now) the computed raise is recorded (if the rule needs one) and the frozen folder is written
     if cap > budget.base_cap() and not raise_recorded:
         budget.record_raise(rates, repo / core.RAISE_FILE, ledger, repo=repo, recorded_by="freeze (computed rule)")
@@ -270,10 +340,11 @@ def write_freeze(repo: Path, *, rates: budget.Rates, ledger: Ledger, run_dir: Pa
     caps = budget.stage_caps(rates)
     write_json_file(freeze_dir / "stage_caps.json", caps)
     raise_path = repo / core.RAISE_FILE
+    ledger_snap = ledger_snapshot(ledger)  # after the raise entry: every later stage checks the ledger still begins with these lines
     plan = {
         "config_sha256": file_sha256(repo / core.DEFAULT_CONFIG), "stage_caps_sha256": file_sha256(freeze_dir / "stage_caps.json"),
         "design": {"replicates": decision.replicates, "updates": decision.updates, "layer": layer, "store_lr": store_lr, "lora_lr": lora_lr, "rung": decision.outcome, "device": rates.train_device, "scoring_device": "cpu"},
-        "cap_hours": cap, "cap_raise_sha256": file_sha256(raise_path) if raise_path.exists() else None, "charged_hours_at_freeze": p_hours,
+        "cap_hours": cap, "cap_raise_sha256": file_sha256(raise_path) if raise_path.exists() else None, "charged_hours_at_freeze": p_hours, "ledger": ledger_snap,
         "data_dir": data_dir, "data_manifest_sha256": file_sha256(repo / data_dir / "manifest.json"),
         "projection": {"path": str((freeze_dir / "projection.json").relative_to(repo)), "sha256": file_sha256(freeze_dir / "projection.json")},
         **records,

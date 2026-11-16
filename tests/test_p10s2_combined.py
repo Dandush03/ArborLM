@@ -346,7 +346,7 @@ def test_every_composition_line_is_under_both_fixed_lines_and_the_ensemble_and_s
         if "ensemble (BY CONSTRUCTION" in ln or "Stage 0 (the floor" in ln:
             assert not output.is_composition(ln)  # no composition word for the ensemble or Stage 0
     assert any("revision 5's raw-score rule, replaced by the human lead" in ln for ln in blk) and any("H {'A'" in ln for ln in blk) and any("single-task G" in ln for ln in blk) and any("pass rate" in ln for ln in blk)
-    assert "(2 replicates, U = 2000)" in blk[2] and any(ln.startswith("- C1 M-append-frozen: COMPOSES (n replicates = 2)") for ln in blk)
+    assert "(2 replicates, U = 2000)" in blk[2] and any(ln.startswith("- C1 M-append-frozen: COMPOSES (2 replicates, U = 2000)") and "n items" in ln for ln in blk)
     # refusal without them
     stripped_second = text.replace(SECOND + "\n", "")
     with pytest.raises(output.OracleLineMissing, match="second fixed line"):

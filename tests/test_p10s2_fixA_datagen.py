@@ -86,11 +86,14 @@ def test_the_stage_cap_stops_the_step_and_a_ledger_without_room_refuses_to_start
 
 # --- the requirements file ---------------------------------------------------------------------------------------------------------------------------
 def test_requirements_without_hashes_are_refused_and_hashed_ones_pass(tmp_path: Path) -> None:
-    good = "# c\ntransformers==4.57.1 \\\n    --hash=sha256:" + "a" * 64 + " \\\n    --hash=sha256:" + "b" * 64 + "\ntokenizers==0.22.1 --hash=sha256:" + "c" * 64 + "\n--index-url https://pypi.org/simple\n"
+    good = "# c\ntransformers==4.57.1 \\\n    --hash=sha256:" + "a" * 64 + " \\\n    --hash=sha256:" + "b" * 64 + "\ntokenizers==0.22.1 --hash=sha256:" + "c" * 64 + "\n"
     assert datagen.unhashed_requirements(good) == []
     p = tmp_path / "r.txt"
     p.write_text(good)
     assert datagen.check_requirements_hashed(p) == 2
+    p.write_text(good + "--index-url https://pypi.org/simple\n")
+    with pytest.raises(datagen.DatagenStop, match="option lines"):
+        datagen.check_requirements_hashed(p)  # re-check A, R2: an option line other than --hash is refused
     p.write_text(good + "numpy==2.3.3\n")
     with pytest.raises(datagen.DatagenStop, match=r"numpy==2\.3\.3"):
         datagen.check_requirements_hashed(p)
@@ -232,7 +235,7 @@ def write_tatoeba(d: Path, *, swapped: bool = False) -> dict[str, Any]:
 def test_the_corpus_is_read_from_the_verified_bytes_with_counts_resolution_and_symmetry(tmp_path: Path) -> None:
     rec = write_tatoeba(tmp_path)
     corpus, info = datagen.load_corpus(tmp_path, rec)
-    assert corpus.eng[1] == "Hello." and corpus.links_de == [(1, 10), (2, 11)] and info["parse"]["eng_sentences"] == {"lines": 4, "kept": 3, "malformed": 1}
+    assert corpus.eng[1] == "Hello." and corpus.links_de == [(1, 10), (2, 11)] and info["parse"]["eng_sentences"] == {"lines": 4, "kept": 3, "malformed": 1, "extra_tabs": 0}
     assert info["link_resolution"]["eng_deu"]["share_resolved"] == 1.0 and info["link_resolution"]["deu_eng"]["ok"]
     assert info["link_symmetry"]["eng_deu"] == {"english_ids_forward": 2, "english_ids_backward": 3, "only_forward": 0, "only_backward": 1}  # English id 3 has a link in one direction only
     assert info["link_symmetry"]["eng_fra"] == {"english_ids_forward": 3, "english_ids_backward": 2, "only_forward": 1, "only_backward": 0}

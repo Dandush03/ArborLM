@@ -58,10 +58,23 @@ class Setup:
         (data / "manifest.json").write_text('{"files": {}}')
         self.pre = tmp / "pre"
         self.pre.mkdir()
-        (self.pre / "calibration.json").write_text(json.dumps(calibration_record(**cal)))
-        (self.pre / "prefreeze.json").write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}}))
-        (self.pre / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 1.0}))
-        (self.pre / "rehearsal.json").write_text(json.dumps({"raw": {"device": device}}))
+        from arborlm.io import file_sha256
+
+        man, cfg_sha = file_sha256(data / "manifest.json"), file_sha256(self.repo / core.DEFAULT_CONFIG)
+        c = core.CFG
+
+        def ident(mode: str, **counts: int) -> dict[str, Any]:
+            return {"bundle_manifest_sha256": man, "code_commit": "c0ffee", "config_sha256": cfg_sha, "seed_mode": mode, "update_counts": counts, "device": device}
+
+        cal_rec = calibration_record(**cal)
+        cal_rec["identity"] = ident("calibration", updates=int(c["calibration"]["updates"]))
+        (self.pre / "calibration.json").write_text(json.dumps(cal_rec))
+        (self.pre / "prefreeze.json").write_text(json.dumps({"teacher_only": True, "stop": None, "g1": {"ok": True}, "g3": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "bundle_manifest_sha256": man, "seed_mode": "registered-data"}))
+        (self.pre / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 1.0, "identity": ident("rehearsal", updates=int(c["rehearsal"]["short_updates"]))}))
+        reh: dict[str, Any] = {"raw": {"device": device}, "charged_hours_at_end_of_rehearsal": self.led.total_hours(), "identity": ident("rehearsal", updates=int(c["rehearsal"]["short_updates"]), full_updates=int(c["rehearsal"]["full_updates"]))}
+        if device == "cpu":
+            reh["mps_attempt"] = {"ok": False, "error": "RuntimeError: the rehearsal on MPS failed"}
+        (self.pre / "rehearsal.json").write_text(json.dumps(reh))
 
     def freeze(self, run_dir: Path | None = None) -> dict[str, Any]:
         return freeze.write_freeze(self.repo, rates=self.rates, ledger=self.led, run_dir=run_dir or self.tmp / "registered-run", data_dir="data", calibration=self.pre / "calibration.json", prefreeze=self.pre / "prefreeze.json", prefreeze_gates=self.pre / "prefreeze_gates.json", rehearsal=self.pre / "rehearsal.json")
@@ -78,7 +91,7 @@ def test_the_freeze_takes_layer_learning_rates_pilot_cap_and_device_from_the_rec
     assert plan["design"] == {"replicates": 4, "updates": 2000, "layer": 4, "store_lr": 0.003, "lora_lr": 0.001, "rung": "rung 1", "device": "mps", "scoring_device": "cpu"}
     assert plan["cap_hours"] == 36.0 and plan["charged_hours_at_freeze"] == pytest.approx(3.5) and len(plan["planned_seeds"]) == 44
     assert {Path(x).name for x in rec["written"]} >= set(FROZEN_FILES) | {"calibration.json", "prefreeze_record.json", "prefreeze_gates.json", "rehearsal.json", "rates.json"}
-    assert json.loads((s.repo / plan["calibration"]["path"]).read_text()) == calibration_record()  # the record the numbers came from is in the freeze commit
+    assert {k: v for k, v in json.loads((s.repo / plan["calibration"]["path"]).read_text()).items() if k != "identity"} == calibration_record()  # the record the numbers came from is in the freeze commit
     assert budget.Rates.from_json(json.loads((s.repo / plan["rates"]["path"]).read_text())) == s.rates
     run_dir = s.tmp / "registered-run"
     freeze.verify_plan(plan, s.repo, run_dir, ledger=s.led)
@@ -131,8 +144,10 @@ def test_refusals_leave_no_file_in_the_frozen_folder_and_the_record_goes_outside
 
 
 def test_the_study_stops_before_the_freeze_when_teachers_or_data_do_not_qualify_and_the_record_goes_outside_the_frozen_folder(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
     s = Setup(tmp_path, monkeypatch)
+    from arborlm.io import file_sha256
+
+    ok = {"g1": {"ok": True}, "combined_whole_string": {"ok": True}, "tokenization": {"required_ok": True}, "bundle_manifest_sha256": file_sha256(s.repo / "data" / "manifest.json"), "seed_mode": "registered-data", "qualification": {"ok": True, "outcome": None}, "sufficiency_pools": {"outcome": None}, "sufficiency_after_filter": {"outcome": None}}
     (s.pre / "prefreeze.json").write_text(json.dumps({**ok, "combined_whole_string": {"ok": False}}))
     with pytest.raises(freeze.FreezeRefused, match="whole-string check"):
         s.freeze()  # the same consequence as a prompt mismatch in test (a)

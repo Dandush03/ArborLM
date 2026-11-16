@@ -43,15 +43,28 @@ def is_composition(line: str) -> bool:
     return any(w.lower() in low for w in COMPOSITION_WORDS) or bool(COMPOSITION_RE.search(line))
 
 
+H_LINE_RE = re.compile(r"\bH_a\b|\bH_?a? per answer\b|\bH \{|\bsingle-task G\b|Table 4\. Composition", re.IGNORECASE)
+
+
+def is_h_line(line: str) -> bool:
+    """A per-answer composition measure (H_a, H per answer, single-task G) or the composition table caption: it needs the second fixed line even where it carries no composition word."""
+    return bool(H_LINE_RE.search(line))
+
+
+def is_composition_key(key: Any) -> bool:
+    return "compos" in str(key).lower() or str(key).lower() in ("h_by_answer",)
+
+
 def is_guarded(line: str) -> bool:
     low = line.lower()
-    return any(w.lower() in low for w in GUARDED_WORDS) or bool(MARKERS.search(line))
+    return any(w.lower() in low for w in GUARDED_WORDS) or bool(MARKERS.search(line)) or bool(H_LINE_RE.search(line))
 
 
-def block(lines: Iterable[str]) -> str:
-    """A block of lines headed by the oracle-assisted line. A markdown table passed here keeps the line directly above its header row."""
+def block(lines: Iterable[str], *, composition: bool = False) -> str:
+    """A block of lines headed by the oracle-assisted line. A markdown table passed here keeps the line directly above its header row. A composition block (``composition=True``, or any line with a composition
+    word or an H per answer) is headed by both fixed lines, whatever its verdicts say (a table whose every line is NOT_EVALUATED still carries the second line)."""
     ls = list(lines)
-    head = [ORACLE_LINE, COMBINED_LINE] if any(is_composition(ln) for ln in ls) else [ORACLE_LINE]  # a composition line carries the second fixed line as well
+    head = [ORACLE_LINE, COMBINED_LINE] if composition or any(is_composition(ln) or is_h_line(ln) for ln in ls) else [ORACLE_LINE]  # a composition line carries the second fixed line as well
     return "\n".join([*head, *ls])
 
 
@@ -64,8 +77,8 @@ def check_text(text: str) -> None:
         if any(is_guarded(ln) for ln in lines) and lines[0] != ORACLE_LINE:
             bad = next(ln for ln in lines if is_guarded(ln))
             raise OracleLineMissing(f"guarded line without the oracle-assisted line directly above its block: {bad[:120]!r}")
-        if any(is_composition(ln) for ln in lines) and (len(lines) < 2 or lines[1] != COMBINED_LINE):
-            bad = next(ln for ln in lines if is_composition(ln))
+        if any(is_composition(ln) or is_h_line(ln) for ln in lines) and (len(lines) < 2 or lines[1] != COMBINED_LINE):
+            bad = next(ln for ln in lines if is_composition(ln) or is_h_line(ln))
             raise OracleLineMissing(f"composition line without the second fixed line (combined tasks) directly under the oracle-assisted line: {bad[:120]!r}")
 
 
@@ -97,7 +110,7 @@ def check_record(obj: Any, path: str = "$") -> None:
     if isinstance(obj, Mapping):
         if needs_line(obj) and obj.get("oracle_line") != ORACLE_LINE:
             raise OracleLineMissing(f"record at {path} carries a guarded field without the oracle-assisted line")
-        if any("compos" in str(k).lower() for k in obj) and obj.get("combined_line") != COMBINED_LINE:
+        if any(is_composition_key(k) for k in obj) and obj.get("combined_line") != COMBINED_LINE:
             raise OracleLineMissing(f"record at {path} carries a composition field without the second fixed line (combined tasks)")
         for k, v in obj.items():
             check_record(v, f"{path}.{k}")

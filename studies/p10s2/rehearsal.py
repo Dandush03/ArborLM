@@ -54,10 +54,11 @@ def timed(fn: Callable[[], Any]) -> float:
 
 
 def scale_factor(world: World) -> float:
-    """The registered scoring work over the rehearsal's: (items of E_A and E_B) / (items of D_cal for both capabilities), at least 1 (a smaller registered panel is not scaled down: the rule counts the
-    larger). Scoring time is proportional to the items scored, so the rehearsal's seconds on D_cal items are multiplied by this factor (a projection from item counts, not a measurement of E)."""
-    reg = sum(len(world.ctx.panels[n].examples) for n in ("E_A", "E_B"))
-    cal = sum(len(world.d_cal[c].examples) for c in core.TASKS)
+    """The registered scoring work over the rehearsal's: every item of every registered panel (E_A, E_B and, where built, E_open_A and E_open_B: re-check B, N1) over the calibration items the rehearsal world
+    scores in their place (each panel is replaced by the D_cal panel of its capability), at least 1 (a smaller registered panel is not scaled down: the rule counts the larger). Scoring time is proportional to
+    the items scored, so the rehearsal's seconds on D_cal items are multiplied by this factor (a projection from item counts, not a measurement of E)."""
+    reg = sum(len(p.examples) for p in world.ctx.panels.values())
+    cal = sum(len(world.d_cal[p.task].examples) for p in world.ctx.panels.values())
     return max(1.0, reg / max(1, cal))
 
 
@@ -96,6 +97,9 @@ def full_length_rates(short: Mapping[str, float], full: Mapping[str, float], lay
     rates_u[f"MII@L{layer}"] = float(full["MII"])
     rates_u["LORA1"] = float(full["LORA1"])
     stands_in("LSEQ", "LORA1")
+    for g in ("MJOINT", "ETABLE"):  # rehearsed at 200 updates; the larger of that rate and the full-length rate of the nearest type (a store cell), at the calibrated layer (re-check B, m2; the lead's ruling)
+        stands_in(f"{g}@L{layer}", "ST1")
+    stands_in("LJOINT", "LORA1")
     return rates_u, stand_in
 
 
@@ -130,6 +134,55 @@ def measure_full_length(world: World, replicate: int, full_updates: int) -> dict
     return out
 
 
+class _Replay:
+    """A tokenizer stand-in for text that is already tokenized: it returns the stored ids and character offsets (``windows.cut_windows`` needs only ``encode_offsets``)."""
+
+    def __init__(self, ids: list[int], offs: list[tuple[int, int]]) -> None:
+        self.ids, self.offs = ids, offs
+
+    def encode_offsets(self, text: str) -> tuple[list[int], list[tuple[int, int]]]:
+        return list(self.ids), list(self.offs)
+
+
+def train_windows(world: World) -> list[evaluate.GeneralWindow]:
+    """The GEN windows of the rehearsal (re-check A, R14; the lead's ruling): the stored WikiText-2 TRAIN token ids, decoded with the study's byte decoder, cut by ``windows.cut_windows`` (the same rule as the
+    registered windows: consecutive non-overlapping windows, the marker-like and ordinary strata) and sampled to the registered stratum counts. The registered windows (WikiText-2 validation, "used for nothing
+    else") are never used here. A stratum with too few windows repeats its own windows (timing only); an empty stratum borrows the other one's."""
+    import codecs
+
+    from .windows import cut_windows
+
+    registered = world.ctx.windows
+    window = len(registered[0].ids)
+    decision = world.ctx.decision_index + 1
+    want = {s: sum(1 for w in registered if w.stratum == s) for s in ("marker", "ordinary")}
+    ids_all = list(world.wiki_train_ids)
+    found: list[evaluate.GeneralWindow] = []
+    for limit in (window * 600, len(ids_all)):
+        ids = ids_all[:limit]
+        dec = codecs.getincrementaldecoder("utf-8")(errors="replace")
+        parts: list[str] = []
+        offs: list[tuple[int, int]] = []
+        pos = 0
+        for i in ids:
+            s = dec.decode(world.decoder.table[i])
+            offs.append((pos, pos + len(s)))
+            pos += len(s)
+            parts.append(s)
+        parts.append(dec.decode(b"", final=True))
+        found = cut_windows(_Replay(ids, offs), "".join(parts), world.partition.vocab_index, window, decision)  # type: ignore[arg-type]
+        if sum(w.stratum == "marker" for w in found) >= want["marker"] and sum(w.stratum == "ordinary" for w in found) >= want["ordinary"]:
+            break
+    pools = {s: [w for w in found if w.stratum == s] for s in ("marker", "ordinary")}
+    if not pools["marker"] and not pools["ordinary"]:
+        raise RehearsalFailed("the WikiText-2 train text yields no GEN window by the registered rule: the rehearsal cannot time the GEN measurement")
+    out: list[evaluate.GeneralWindow] = []
+    for s in ("marker", "ordinary"):
+        pool = pools[s] or pools["ordinary" if s == "marker" else "marker"]
+        out += [pool[k % len(pool)] for k in range(want[s])]
+    return out
+
+
 def rehearsal_world(world: World) -> World:
     """The world as the rehearsal scores it: the single-task panels, the combined set and the teacher outputs are D_cal (the rehearsal's own scoring set), the replacement keeping every name the scoring
     code reads. E_A, E_B, E_C and E_open are not touched. Combined scorings reuse the first items of that set (item i paired with i + 1 mod m in stored order, the same alternation, no seed); an answer
@@ -138,12 +191,16 @@ def rehearsal_world(world: World) -> World:
     cap = len(world.d_cal["A"].examples)
     n_sub = min(len(world.ctx.subsample["E_A"]), cap)  # the same size of subsample, taken from the first D_cal items
     panels = {"E_A": world.d_cal["A"], "E_B": world.d_cal["B"]}
+    for name, p in world.ctx.panels.items():  # E_open_A and E_open_B are timed on calibration stand-ins, oracle route only (re-check B, N1); every registered panel name has its stand-in
+        if name.startswith("E_open"):
+            dc = world.d_cal[p.task]
+            panels[name] = dataclasses.replace(dc, source_index=tuple(range(len(dc.examples))))
     items = world.partition.panels["D_cal"]
     sentences = [Sentence(it.key, {c: world.bank.prompt(c, it.en) for c in core.TASKS if c in it.refs}, {c: tuple(it.refs.get(c, ())) for c in core.TASKS}) for it in items]
     ec = combined_set(sentences, None)
-    ctx = dataclasses.replace(world.ctx, panels=panels, subsample={"E_A": list(range(n_sub)), "E_B": list(range(n_sub))}, ec=ec)
-    part = dataclasses.replace(world.partition, panels={**world.partition.panels, "E_A": items, "E_B": items, "E_C": items})
-    outs = {c: {"E_" + c: world.teacher_outputs[c]["D_cal"], "E_C": world.teacher_outputs[c]["D_cal"]} for c in core.TASKS}
+    ctx = dataclasses.replace(world.ctx, panels=panels, subsample={"E_A": list(range(n_sub)), "E_B": list(range(n_sub))}, ec=ec, windows=train_windows(world))
+    part = dataclasses.replace(world.partition, panels={**world.partition.panels, "E_A": items, "E_B": items, "E_C": items, **({"E_open": items} if any(n.startswith("E_open") for n in panels) else {})})
+    outs = {c: {"E_" + c: world.teacher_outputs[c]["D_cal"], "E_C": world.teacher_outputs[c]["D_cal"], **({"E_open": world.teacher_outputs[c]["D_cal"]} if "E_open_" + c in panels else {})} for c in core.TASKS}
     return dataclasses.replace(world, ctx=ctx, partition=part, teacher_outputs=outs, timing_items={})  # the stored timing draw indexes E_A and E_B, not D_cal: the rehearsal times the first items
 
 
@@ -179,7 +236,7 @@ def _child_world(data_dir: Path, layer: int, lora_lr: float) -> World:
     """The world of a fresh child: the REAL registered entry (``build_world`` with ``RunConfig.registered`` on rehearsal seeds, scoring device CPU), never a test-mode stand-in path (audit B m2)."""
     from .worldio import RunConfig, build_world, read_bundle
 
-    return build_world(read_bundle(data_dir), "rehearsal", 1, RunConfig.registered(layer, 1, float(core.CFG["training"]["store_learning_rate"]), lora_lr, "cpu"))
+    return build_world(read_bundle(data_dir), "rehearsal", max(a for a, _b in budget.rungs()), RunConfig.registered(layer, 1, float(core.CFG["training"]["store_learning_rate"]), lora_lr, "cpu"))
 
 
 def _startup(data_dir: Path, layer: int, lora_lr: float) -> dict[str, Any]:
@@ -252,7 +309,7 @@ def _probe(data_dir: Path, scratch: Path, layer: int, lora_lr: float, updates: i
     with contextlib.redirect_stdout(io.StringIO()):
         out["analysis_seconds"] = timed(lambda: stages.stage_analysis(synth, meta["design"], meta["prefreeze"]))
         out["report_seconds"] = timed(lambda: stages.stage_report(synth))
-    out["synthetic_registry"] = {"injected": meta["injected"], "note": "synthetic records of the whole registry: a mechanics and timing check; the label printed is not a result"}
+    out["synthetic_registry"] = {"injected": meta["injected"], "note": "synthetic records of the whole registry: a mechanics and timing check; the label printed is not a result", "omission": "a missing cell is injected, so the analysis computes no bootstrap intervals here: analysis_seconds excludes them (about 5 s at registered size, inside the 60 s floor; re-check B, m10)"}
     out["probe_peak_bytes"] = process_memory_bytes()["max"]
     return out
 
@@ -292,7 +349,7 @@ def time_prefreeze_gates(world: World, run_dir: Path, g1: Mapping[str, Any], g3:
     return {"gates": out, "ok": bool(out["ok"]), "seconds_measured": total, "scale": s, "seconds_scaled_to_registered_panels": scaled, "scaled_parts": {"g2_seconds": t_g2, "g4_panel_scorings_seconds": 3.0 * t_panel}, "method": "wall seconds of the gates stage on D_cal items; G2's two Stage 0 scorings and G4's three panel scorings multiplied by (registered items) / (D_cal items); the rest unscaled", "type": "measured on rehearsal seeds and D_cal items, scaled by item counts (a projection, not a measurement of E)"}
 
 
-def measure_rates(world: World, replicate: int, *, updates: int, full_updates: int, overhead: dict[str, float], gates2_seconds: float, scratch: Path, data_dir: Path, repo: Path | None = None, device_reason: str = "") -> tuple[budget.Rates, dict[str, Any]]:
+def measure_rates(world: World, replicate: int, *, updates: int, full_updates: int, overhead: dict[str, float], gates2_seconds: float, scratch: Path, data_dir: Path, repo: Path | None = None, device_reason: str = "", gates_peak_bytes: int = 0) -> tuple[budget.Rates, dict[str, Any]]:
     """The rates of section 13.3, measured by the registered stage functions (see the module docstring). ``world`` is a rehearsal-mode world on the frozen training device at the calibrated layer;
     ``scratch`` receives the rehearsal's snapshots and records; ``gates2_seconds`` is the scaled time of the pre-freeze gates stage."""
     from . import stages
@@ -336,7 +393,7 @@ def measure_rates(world: World, replicate: int, *, updates: int, full_updates: i
                 "method": "stage functions run on the rehearsal world (D_cal items); scoring seconds multiplied by (registered E_A + E_B items) / (D_cal items); the combined scoring is timed on the D_cal set and scaled to |E_C|, and is subtracted from the replicate's measured scoring so that it is counted once"})
     rates = budget.Rates(
         update_seconds=rates_u, calibrated_layer=world.layer, panel_seconds=panel, replicate_extra_seconds=extra, fixed_seconds=base, timing_seconds=timing, gates2_seconds=gates2_seconds,
-        task_overhead_seconds=float(overhead["seconds"]), train_peak_bytes=train_peak, eval_peak_bytes=int(probe["eval_peak_bytes"]), recompute_peak_bytes=int(probe["recompute_peak_bytes"]), task_peak_bytes=int(max(overhead["peak_bytes"], probe["start_peak_bytes"])),
+        task_overhead_seconds=float(overhead["seconds"]), train_peak_bytes=train_peak, eval_peak_bytes=int(probe["eval_peak_bytes"]), recompute_peak_bytes=int(probe["recompute_peak_bytes"]), task_peak_bytes=int(max(overhead["peak_bytes"], probe["start_peak_bytes"], gates_peak_bytes)),
         other_layer_seconds=rec["other_layer_seconds"], combined_cell_seconds=combined_cell, combined_stage0_seconds=combined_stage0, analysis_seconds=float(probe["analysis_seconds"]), report_seconds=float(probe["report_seconds"]),
         train_device=world.device.type, train_device_reason=device_reason,
     )  # fmt: skip

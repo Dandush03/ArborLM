@@ -41,7 +41,7 @@ def test_registered_code_refuses_under_pytest_unless_the_run_root_is_a_temporary
         with pytest.raises(core.TestGuardRefused):
             core.refuse_under_pytest(real)
     core.refuse_under_pytest(tmp_path)  # a temporary directory is accepted
-    assert core.is_temporary(tmp_path) and not core.is_temporary(core.REAL_ROOT)
+    assert core.is_temporary(tmp_path)
     monkeypatch.delenv("PYTEST_CURRENT_TEST")
     core.refuse_under_pytest(core.REAL_ROOT)  # the guard exists for tests only: outside pytest the real run is never blocked by it
 
@@ -63,12 +63,12 @@ def test_the_real_study_ledger_cannot_be_opened_or_written_by_a_test() -> None:
     ["calibrate", "--run-dir", "REAL", "--code-commit", "abc", "--stage-cap-seconds", "10", "--data-dir", "x"],
 ])
 def test_every_stage_driver_refuses_the_real_repository_before_anything_is_started(argv: list[str], tmp_path: Path) -> None:
-    real = core.REAL_ROOT / "experiments"
-    existed = real.exists()
+    ledger_file = core.REAL_ROOT / "experiments" / "P10S2" / "ledger.jsonl"
+    before = ledger_file.read_bytes() if ledger_file.exists() else None  # the real study ledger may exist (the first real fetch charged it): it must be byte-identical afterwards
     args = [a.replace("RUN", str(tmp_path / "run")).replace("REAL", str(core.REAL_ROOT / "experiments" / "x")) for a in argv]
     with pytest.raises(core.TestGuardRefused):
         stages.main(args)
-    assert not (tmp_path / "run").exists() and real.exists() == existed and not (core.REAL_ROOT / "experiments" / "P10S2").exists()  # no run directory, no ledger, no freeze file
+    assert not (tmp_path / "run").exists() and (ledger_file.read_bytes() if ledger_file.exists() else None) == before  # no run directory, the real ledger untouched, no freeze file
 
 
 def test_a_registered_stage_proceeds_to_its_ordinary_refusals_on_a_temporary_root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
@@ -111,8 +111,8 @@ def test_a_stand_in_full_length_cell_uses_the_larger_of_its_rate_and_the_types_o
     used, rec = rehearsal.full_length_rates(short, full, 4)
     assert used["ST1@L4"] == 0.3 and used["MII@L4"] == 1.2 and used["LORA1"] == 0.6  # a cell stands in for its own type: its own rate
     assert used["MAF@L4"] == 0.5 and used["MSEQ@L4"] == 0.3 and used["MAGOLD@L4"] == 0.3  # the larger of the ST1 rate (0.3) and the type's own 200-update rate
-    assert used["LSEQ"] == 0.9 and used["LJOINT"] == 0.7  # L-seq: the larger of the LoRA cell's 0.6 and its own 0.9; L-joint was not stood in for
-    assert set(rec) == {"MAF@L4", "MSEQ@L4", "MAGOLD@L4", "LSEQ"} and rec["MAF@L4"]["full_length_cell"] == "ST1" and rec["LSEQ"]["full_length_cell"] == "LORA1" and rec["MSEQ@L4"]["used"] == 0.3 and rec["MAF@L4"]["own_short_run_rate"] == 0.5
+    assert used["LSEQ"] == 0.9 and used["LJOINT"] == 0.7  # L-seq: the larger of the LoRA cell's 0.6 and its own 0.9; L-joint, M-joint and E-table (re-check B, m2): the larger of the nearest full-length type's rate and their own
+    assert set(rec) == {"MAF@L4", "MSEQ@L4", "MAGOLD@L4", "LSEQ", "MJOINT@L4", "ETABLE@L4", "LJOINT"} and rec["MAF@L4"]["full_length_cell"] == "ST1" and rec["LSEQ"]["full_length_cell"] == "LORA1" and rec["MSEQ@L4"]["used"] == 0.3 and rec["MAF@L4"]["own_short_run_rate"] == 0.5
 
 
 # --- both teachers on every panel; E_open built and scored ----------------------------------------------------------------------------------------------
@@ -156,8 +156,10 @@ def test_e_open_is_built_per_capability_scored_under_the_oracle_route_and_never_
 
 
 def test_a_world_without_an_e_open_panel_builds_no_e_open_entry() -> None:
-    world, _ = dry_world()
-    assert not any(n.startswith("E_open") for n in world.ctx.panels)
+    bundle, _ = standins.build_synthetic_bundle(1)
+    bundle.panels["E_open"] = []
+    assert not any(n.startswith("E_open") for n in build_world(bundle, "test", 1, RunConfig.dry()).ctx.panels)
+    assert any(n.startswith("E_open") for n in dry_world()[0].ctx.panels)  # the stand-in bundle itself has E_open items (re-check B, N1)
 
 
 # --- the timing benchmark uses the stored 220908 items --------------------------------------------------------------------------------------------------

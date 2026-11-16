@@ -86,7 +86,7 @@ def test_training_projection_counts_updates_times_measured_rate_plus_task_start_
 def test_scoring_second_gates_and_recomputation_include_start_up() -> None:
     r0, r1 = uniform(1.0, 0.0), uniform(1.0, overhead=10.0)
     assert budget.scoring_seconds(1, r0) == 18 * 10.0 + 20.0 + 30.0 + 5.0
-    assert budget.scoring_seconds(1, r1) - budget.scoring_seconds(1, r0) == 18 * 10.0  # one start-up per scoring process
+    assert budget.scoring_seconds(1, r1) - budget.scoring_seconds(1, r0) == 18 * 10.0 + 10.0  # one start-up per scoring process and one for the timing benchmark (re-check B, m5)
     assert budget.recompute_seconds(2, r1) == budget.scoring_seconds(2, r1)  # one repetition of the scoring rows, the timing row included (the lead's ruling of 2026-11-15)
     parts = budget.registered_run_seconds(2, 100, r1)
     assert parts["second_gates_stage"] == 7.0 + 10.0 and parts["total"] == pytest.approx(parts["training"] + parts["scoring"] + parts["second_gates_stage"] + parts["recomputation"] + parts["analysis_and_report"])

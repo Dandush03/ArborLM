@@ -17,7 +17,13 @@ import pytest  # noqa: E402
 from studies.p10s2 import fetch_guard as g  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-LEDGER_TEXT = (ROOT / g.DOWNLOAD_LEDGER).read_text()  # the real ledger's table format, read here and never written
+_HEAD, _ROWS, _TAIL = g._read_ledger(ROOT / g.DOWNLOAD_LEDGER)  # the real ledger's table format, read here and never written; its rows (the first real download's) are not copied into a test ledger
+
+
+@pytest.fixture(autouse=True)
+def no_real_tatoeba_record(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The first real download froze ``studies/p10s2/records/tatoeba_session.json``; a test session (a tmp ledger, synthetic bytes) is not that session, so the one-session rule (re-check A, R7) must not read it."""
+    monkeypatch.setattr(g, "TATOEBA_RECORD", Path("studies/p10s2/records/absent-in-tests.json"))
 
 
 def blob(data: bytes) -> str:
@@ -160,7 +166,7 @@ def test_tls_verification_is_on_and_certificates_are_required() -> None:
 # --- the download ledger -----------------------------------------------------------------------------------------------------------------------------
 def fresh_ledger(tmp_path: Path) -> Path:
     p = tmp_path / "ledger.md"
-    p.write_text(LEDGER_TEXT)
+    g._write_ledger(p, _HEAD, [], _TAIL)
     return p
 
 
@@ -174,7 +180,7 @@ def test_the_ledger_row_is_written_before_and_completed_after_with_a_running_tot
     g.ledger_complete(led, j, actual_bytes=50, status="completed")
     lines = [ln for ln in led.read_text().split("\n") if ln.startswith("| 2026-11-16")]
     assert [ln.split("|")[7].strip() for ln in lines] == ["90", "50"] and [ln.split("|")[8].strip() for ln in lines] == ["90", "140"] and all(ln.split("|")[9].strip() == "completed" for ln in lines)
-    assert led.read_text().startswith(LEDGER_TEXT.split("| Date")[0])  # the text around the table is untouched
+    assert led.read_text().startswith("\n".join(_HEAD))  # the text around the table is untouched
     assert g.ledger_total_bytes(led) == 140
 
 
@@ -315,7 +321,7 @@ def test_a_session_refuses_when_the_ledger_or_the_disk_cannot_hold_it(tmp_path: 
     with pytest.raises(g.FetchRefused, match="30 GB"):
         g.fetch_session(g.build_manifest(), data_root / "a", download=fake_download(payload), ledger_path=led, data_root=data_root, free_bytes=10**9)
     led2 = tmp_path / "l2.md"
-    led2.write_text(LEDGER_TEXT)
+    g._write_ledger(led2, _HEAD, [], _TAIL)
     with pytest.raises(g.FetchRefused, match="free bytes"):
         g.fetch_session(g.build_manifest(), data_root / "b", download=fake_download(payload), ledger_path=led2, data_root=data_root, free_bytes=10)
     monkeypatch.setattr(g, "DOWNLOAD_CAP_BYTES", 100)  # a session cap that is cumulative: the declared total is over it

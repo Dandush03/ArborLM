@@ -69,7 +69,12 @@ class StageCapExceeded(DatagenStop):
     """The stage cap (seconds) of the step was reached, or the study ledger has less remaining than the cap."""
 
 
-class ScoreMismatch(DatagenStop):
+class RegisteredTestStop(DatagenStop):
+    """A stop on a registered test of the step (a tokenization test, the student equivalence test, the filter-score assertion, the chrF cross-check, G9 of the data step, too few GEN windows): not an engineering
+    error. It returns to the lead; the step is not re-run until the lead has released it (re-check A, R16)."""
+
+
+class ScoreMismatch(RegisteredTestStop):
     """The recomputed beam score differs from the library's sequence score on the first batch (ruling on A-M7)."""
 
 
@@ -143,7 +148,25 @@ def unhashed_requirements(text: str) -> list[str]:
     return [ln.split()[0] for ln in logical if not ln.startswith("-") and "--hash=sha256:" not in ln]
 
 
+def option_lines(text: str) -> list[str]:
+    """Logical lines that are options (``--hash`` continuations belong to their pin): ``-e``, ``-r``, an index URL ... (re-check A, R2: refused)."""
+    logical: list[str] = []
+    cur = ""
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        cur += " " + line.rstrip("\\").strip()
+        if not line.endswith("\\"):
+            logical.append(cur.strip())
+            cur = ""
+    return [ln for ln in logical if ln.startswith("-")]
+
+
 def check_requirements_hashed(path: Path) -> int:
+    opts = option_lines(path.read_text())
+    if opts:
+        raise DatagenStop(f"refused: {path} has option lines other than --hash: {opts[:3]}")
     bad = unhashed_requirements(path.read_text())
     if bad:
         raise DatagenStop(f"refused: {path} pins without a hash: {bad}; resolve it once with hashes (uv pip compile --generate-hashes, Python 3.12, torch 2.8.0) and install with hashes required")
@@ -315,7 +338,9 @@ class HFReference:  # pragma: no cover - needs transformers
     def __init__(self, config: dict[str, Any], state: dict[str, torch.Tensor]) -> None:
         tf = importlib.import_module("transformers")  # outside the lock: imported only here
         self.model = tf.LlamaForCausalLM(tf.LlamaConfig.from_dict(config)).to(torch.float32).eval()
-        self.model.load_state_dict(state, strict=False)
+        missing, unexpected = self.model.load_state_dict(state, strict=False)
+        if unexpected or set(missing) - {"lm_head.weight"}:  # re-check A, R11: strict=False must not hide a key mismatch
+            raise DatagenStop(f"the reference model's state does not match: missing {sorted(missing)[:5]}, unexpected {sorted(unexpected)[:5]}")
         self.model.tie_weights()
 
     @torch.no_grad()
@@ -353,6 +378,9 @@ class MarianTeacher:  # pragma: no cover - needs transformers
         files = [f"{label}/{f}" for f in ("pytorch_model.bin", *fetch_guard.MARIAN_FILES)]
         fetch_guard.verify_tree(downloads, files)  # re-hash from disk immediately before use
         directory = downloads / label
+        extra = sorted(set(os.listdir(directory)) - {"pytorch_model.bin", *fetch_guard.MARIAN_FILES})
+        if extra:  # re-check A, R5: from_pretrained looks for other weight and tokenizer files; nothing but the verified ones may be in the folder
+            raise DatagenStop(f"refused: {directory} holds files beyond the verified ones: {extra}")
         self.generation_config = json.loads(fetch_guard.read_verified_bytes(downloads, f"{label}/generation_config.json"))
         state = fetch_guard.load_pickle_weights(directory / "pytorch_model.bin", fetch_guard.LARGE[f"{label}/pytorch_model.bin"][0])
         self.tokenizer = tf.MarianTokenizer.from_pretrained(str(directory), local_files_only=True)
@@ -419,28 +447,74 @@ def package_versions() -> dict[str, str]:  # pragma: no cover
     return out
 
 
+def check_installed_pins(versions: dict[str, str]) -> None:
+    """The installed versions of the eight named packages must equal the ADR's pins (re-check A, R2): a differing or missing package stops the step before anything is read."""
+    from .install_datagen import EXPECTED_PINS
+
+    bad = {n: (versions.get(n), v) for n, v in EXPECTED_PINS.items() if versions.get(n) != v}
+    if bad:
+        raise DatagenStop(f"refused: installed versions differ from the eight pins (found, pinned): {bad}")
+
+
 def run(downloads: Path, out: Path, *, led: LedgerLike, stage_cap_seconds: float, wikitext_dir: Path | None = None, requirements: Path | None = None, tatoeba_record: Path | None = None) -> dict[str, Any]:  # pragma: no cover - the registered data-generation step
     """Orchestrate the steps with the real objects. Not executed in this implementation step. The record is written even when a stop condition fires; the bundle only when none does."""
-    os.environ.setdefault("HF_HUB_OFFLINE", "1")
-    os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+    os.environ["HF_HUB_OFFLINE"] = "1"  # assigned, never setdefault: a pre-set "0" must not survive (re-check A, R4)
+    os.environ["TRANSFORMERS_OFFLINE"] = "1"
     record: dict[str, Any] = {"steps": {}, "environment": package_versions()}
     out.mkdir(parents=True, exist_ok=True)
     core.reset_seed_record()
+    attempts = out / "datagen_attempts"
+    n_before = len(list(attempts.glob("attempt-*.json"))) if attempts.is_dir() else 0
+    gate = datagen_rerun_gate(out)
+    if gate:
+        raise DatagenStop(gate)
     started = False
     try:
         with charged_stage(led, stage_cap_seconds, guard=True) as clock:
             started = True
-            return _run(downloads, out, clock, record, wikitext_dir or core.ROOT / "data" / "wikitext2", requirements or core.ROOT / REQUIREMENTS, tatoeba_record or core.ROOT / fetch_guard.TATOEBA_RECORD)
-    except DatagenStop as e:
-        if started:  # a refusal to start leaves no record; a stop after the start (the guard's cap included) keeps one
-            record["stopped"] = f"{type(e).__name__}: {e}"
-            write_json(out / "prefreeze_record.json", core.jsonable(record))
+            res = _run(downloads, out, clock, record, wikitext_dir or core.ROOT / "data" / "wikitext2", requirements or core.ROOT / REQUIREMENTS, tatoeba_record or core.ROOT / fetch_guard.TATOEBA_RECORD)
+            res["bundle_manifest_sha256"] = fetch_guard.sha256_file(out / "bundle" / "manifest.json")  # the identity every pre-freeze record and the freeze check (re-check B, N3)
+            res["attempt"] = n_before + 1
+            write_json(out / "prefreeze_record.json", core.jsonable(res))
+            return res
+    except BaseException as e:  # noqa: BLE001 (every exception after the start leaves a stop record, then re-raises: re-check A, R3)
+        if started:
+            write_stop_record(out, record, e, n_before + 1)
         raise
+
+
+def stop_kind(e: BaseException) -> str:
+    """``registered-test`` for a stop on a registered test of the step (it returns to the lead), ``engineering`` for everything else (a cap, a guard, a read or format error, an unexpected exception)."""
+    return "registered-test" if isinstance(e, RegisteredTestStop) or type(e).__name__ in ("WindowsInsufficient", "PendingLeadReview") else "engineering"
+
+
+def write_stop_record(out: Path, record: dict[str, Any], e: BaseException, attempt: int) -> None:
+    """Keep the stop record of this attempt (``datagen_attempts/attempt-NNN.json``, never overwritten) and leave it as ``prefreeze_record.json`` (a later successful attempt replaces that file only). Each attempt
+    is charged on the study ledger by ``charged_stage``."""
+    rec = {**record, "stopped": f"{type(e).__name__}: {e}", "stop_kind": stop_kind(e), "attempt": attempt, "bundle_written": False}
+    d = out / "datagen_attempts"
+    d.mkdir(parents=True, exist_ok=True)
+    write_json(d / f"attempt-{attempt:03d}.json", core.jsonable(rec))
+    write_json(out / "prefreeze_record.json", core.jsonable(rec))
+
+
+def datagen_rerun_gate(out: Path) -> str | None:
+    """R16: a step that stopped on its cap or an engineering error may be re-run after the cause is recorded (it reads no outcome of the study). A stop on a registered test returns to the lead: no re-run until
+    ``datagen_attempts/lead_release.json`` exists. A completed step (a bundle) is never re-run."""
+    if (out / "bundle" / "manifest.json").exists():
+        return f"refused: {out} already holds a completed bundle: the data-generation step is not re-run"
+    d = out / "datagen_attempts"
+    if d.is_dir():
+        last = sorted(d.glob("attempt-*.json"))
+        if last and json.loads(last[-1].read_text()).get("stop_kind") == "registered-test" and not (d / "lead_release.json").exists():
+            return f"refused: the last attempt stopped on a registered test of the step ({last[-1].name}): it returns to the lead; a re-run needs {d / 'lead_release.json'}"
+    return None
 
 
 def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], wikitext_dir: Path, requirements: Path, tatoeba_record: Path) -> dict[str, Any]:  # pragma: no cover
     mode = "registered-data"
     check_requirements_hashed(requirements)
+    check_installed_pins(package_versions())
     # (1) hashes
     record["steps"]["hashes"] = verify_downloads(downloads, tatoeba_record)
     texts, wiki_prov = read_wikitext(wikitext_dir)
@@ -467,7 +541,7 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     layers = {str(layer): equivalence.build_record(student, ref, ids, vec, layer, prompts, 8) for layer in core.READ_LAYERS}
     record["steps"]["equivalence"] = {k: v["at_creation"] for k, v in layers.items()}
     if not all(v["at_creation"]["logits"]["ok"] and v["at_creation"]["injection"]["ok"] for v in layers.values()):
-        raise DatagenStop("the student equivalence test failed at a read layer (step 3 or 4 (d))")
+        raise RegisteredTestStop("the student equivalence test failed at a read layer (step 3 or 4 (d))")
     clock.tick("equivalence")
     dec = ByteDecoder(tok.token_bytes())
     gen = core.partition_gen(mode, "random_id_sequences", "test (c) random id sequences")
@@ -492,7 +566,7 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     if not rec["g9_data_step"]["ok"]:
         stops.append(f"gate G9 on the data step: {rec['g9_data_step']['problems']}")
     if stops:
-        raise DatagenStop("; ".join(stops))
+        raise RegisteredTestStop("; ".join(stops))
     write_bundle(bundle, out / "bundle")
     write_json(out / "prefreeze_record.json", core.jsonable(record))
     return record

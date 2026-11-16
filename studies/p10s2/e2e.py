@@ -144,7 +144,7 @@ def make_clone(parent: Path, *, source: Path | None = None, training_device: str
         'shift; [ "${1:-}" = "--locked" ] && shift\n[ "${1:-}" = "--with-requirements" ] && shift 2\n[ "${1:-}" = "python" ] && shift\nexec "$E2E_PYTHON" "$@"\n'
     )
     stub.chmod(stub.stat().st_mode | stat.S_IEXEC)
-    env = {k: v for k, v in os.environ.items() if k != "PYTORCH_ENABLE_MPS_FALLBACK"}
+    env = {k: v for k, v in os.environ.items() if k not in ("PYTORCH_ENABLE_MPS_FALLBACK", "PYTEST_CURRENT_TEST")}  # the clone is the exercise's own throwaway root: the test guard (which protects the real checkout) is not inherited
     env.update({"PATH": f"{bindir}:{os.environ['PATH']}", "E2E_PYTHON": sys.executable, "PYTHONPATH": str(clone / "src"), "PYTHONDONTWRITEBYTECODE": "1"})
     return clone, subs, env
 
@@ -202,6 +202,9 @@ def exercise(workdir: Path | None = None, *, keep: bool = False) -> dict[str, An
         bundle, prerec = standins.build_synthetic_bundle(4)
         bundle.extra["equivalence"] = _dry_equivalence(bundle, 1)
         write_bundle(bundle, pre / "data" / "bundle")
+        from arborlm.io import file_sha256
+
+        prerec["bundle_manifest_sha256"] = file_sha256(pre / "data" / "bundle" / "manifest.json")  # what datagen records at the end of its step (re-check B, N3)
         (pre / "data" / "prefreeze_record.json").write_text(json.dumps(core.jsonable(prerec), sort_keys=True, indent=1))
         shutil.copytree(pre / "data" / "bundle", clone / "data" / "p10s2-bundle")
         led = Ledger(clone / "experiments" / "P10S2" / "ledger.jsonl")

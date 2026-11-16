@@ -61,16 +61,27 @@ MPS_IN_USE = False  # set once a cell has been trained on MPS: only then is the 
 
 
 def process_memory_bytes() -> dict[str, int]:
-    """Peak resident set of this process, and the MPS driver's and the allocator's current memory when MPS was used. ``max`` is the figure the memory rule reads: ``ru_maxrss`` does not see MPS memory (a
-    2 GiB MPS tensor raised it by 0.024 GiB in audit B4), so the driver's number counts as well."""
+    """Peak resident set of this process, and the MPS driver's and the allocator's current memory when MPS was used. ``max`` is the figure the memory rule reads: the SUM of the resident set and the MPS
+    memory (``ru_maxrss`` does not see MPS memory: a 2 GiB MPS tensor raised it by 0.024 GiB in audit B4)."""
     r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     rss = int(r if sys.platform == "darwin" else r * 1024)
     out = {"rss_peak": rss, "mps_driver": 0, "mps_allocated": 0}
     if MPS_IN_USE and torch.backends.mps.is_available():
         out["mps_driver"] = int(torch.mps.driver_allocated_memory())
         out["mps_allocated"] = int(torch.mps.current_allocated_memory())
-    out["max"] = max(out["rss_peak"], out["mps_driver"], out["mps_allocated"])
+    out["max"] = out["rss_peak"] + max(out["mps_driver"], out["mps_allocated"])  # the SUM of the resident set and MPS memory (the lead's ruling m1: MPS memory is not in the resident set)
     return out
+
+
+def mps_attempt() -> dict[str, Any]:
+    """The rehearsal's own attempt to use MPS (re-check B, N3): select it and run one small operation on it. ``{"ok": False, "error": ...}`` is what the freeze needs to accept CPU as the training device."""
+    try:
+        dev = select_device("mps")
+        x = torch.ones(8, 8, device=dev)
+        float((x @ x).sum().item())
+        return {"ok": True, "error": ""}
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "error": f"{type(e).__name__}: {e}"}
 
 
 class NonFiniteLoss(RuntimeError):
@@ -178,6 +189,7 @@ def train_arm(
     clip_norm = clip if clip is not None else core.CFG["training"]["clip_norm"]
     wd = core.CFG["training"]["weight_decay"]
     previous_deterministic = torch.are_deterministic_algorithms_enabled()
+    previous_warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
     if dev.type == "mps":
         MPS_IN_USE = True
         if previous_deterministic:
@@ -221,8 +233,8 @@ def train_arm(
         status, err = "failed", f"{type(e).__name__}: {e} (at update {len(losses)})"
     finally:
         wall = time.perf_counter() - t0
-        if previous_deterministic and not torch.are_deterministic_algorithms_enabled():
-            torch.use_deterministic_algorithms(True)
+        if previous_deterministic and (not torch.are_deterministic_algorithms_enabled() or torch.is_deterministic_algorithms_warn_only_enabled() != previous_warn_only):
+            torch.use_deterministic_algorithms(True, warn_only=previous_warn_only)
         try:
             arm.to(torch.device("cpu"))  # snapshots and every score live on CPU
             student.to(torch.device("cpu"))

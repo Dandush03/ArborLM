@@ -20,6 +20,8 @@ import argparse
 import contextlib
 import ctypes
 import json
+import os
+import shutil
 import sys
 import threading
 import time
@@ -430,7 +432,9 @@ def stage_analysis(run_dir: Path, design: Mapping[str, Any], prefreeze: Mapping[
     seeds_before = len(core.seed_record())  # a registered analysis process starts with an empty record; the dry stage's process does not
     gp = run_dir / "gates.json"
     gates_record = read_json(gp) if gp.exists() else {}
-    reg = assemble_study(run_dir, design, prefreeze, gates_record)  # a missing gates record or gate is read by the analysis itself (INCOMPLETE), never as passed
+    stop = read_json(run_dir / "stop_record.json") if (run_dir / "stop_record.json").exists() else None
+    stop_note = [f"stage {stop['stage']} {stop['status']}: {stop['error']}"] if stop else []
+    reg = assemble_study(run_dir, design, prefreeze, gates_record, extra_engineering=stop_note if stop and stop["outcome"] == "ENGINEERING-FAILURE" else (), extra_incomplete=stop_note if stop and stop["outcome"] == "INCOMPLETE" else ())  # a missing gates record or gate is read by the analysis itself (INCOMPLETE), never as passed
     n = int(design["replicates"])
     rec_study = None
     if (run_dir / "recompute" / "baseline.json").exists() and all((run_dir / "recompute" / f"r{r}.json").exists() for r in range(n)):
@@ -541,6 +545,9 @@ def require_order(run_dir: Path, name: str) -> None:
     if own.exists():
         raise StageRefused(f"refused: stage {name} already has a record ({own}; status {read_json(own).get('status')}): a stage is run once and never re-run with changed settings")
     i = REGISTERED_STAGES.index(name)
+    stopped_early = (run_dir / "stop_record.json").exists() and any(stage_record_path(run_dir, s).exists() and read_json(stage_record_path(run_dir, s)).get("status") == "failed" for s in REGISTERED_STAGES[:i])
+    if name == "analysis" and stopped_early:
+        return  # the analysis stage reads what exists and writes the outcome (INCOMPLETE or ENGINEERING-FAILURE); the stages between are not run after a stop (re-check B, m12)
     if i > 0:
         prev = REGISTERED_STAGES[i - 1]
         pr = stage_record_path(run_dir, prev)
@@ -553,6 +560,9 @@ def require_order(run_dir: Path, name: str) -> None:
         if not gp.exists():
             raise StageRefused("refused: no gates record: a missing gates record is never read as all gates passed")
         g = read_json(gp)
+        gstage = stage_record_path(run_dir, "gates")
+        if not gstage.exists() or read_json(gstage).get("gates_sha256") != file_sha256(gp):
+            raise StageRefused("refused: gates.json does not hash to the digest recorded in the gates stage record (an edited gates record is never read)")
         bad = [k for k in GATE_NAMES if k not in g or not g[k].get("ok")]
         if bad or not g.get("ok"):
             raise StageRefused(f"refused: the second gates stage did not pass ({', '.join(bad) or 'ok is not true'}): a failed gate stops the run")
@@ -605,7 +615,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     core.reset_seed_record()
     status, error, stopped = "completed", "", []
     t0 = time.perf_counter()
-    with ledger.measure(kind, process=f"registered {name}", registered=needs_world) as rid:
+    with ledger.measure(kind, process=f"registered {name}", registered=needs_world, cap_seconds=cap_seconds) as rid:
         guard = StageGuard(name, cap_seconds=cap_seconds, memory_limit_bytes=int(float(core.CFG["budget"]["memory_per_worker_gib"]) * GIB))
         deadline = Deadline(cap_seconds)
         try:
@@ -639,7 +649,14 @@ def cmd_registered(args: argparse.Namespace) -> int:
             status, error = "failed", f"{type(e).__name__}: {e}"
         mem = guard.record()
     record(run_dir / "memory" / f"{name}.json", mem)
-    record(stage_record_path(run_dir, name), {"stage": name, "status": status, "error": error, "stopped": stopped, "seconds": time.perf_counter() - t0, "run_id": rid, "memory_exceeded": mem["memory_exceeded"], "at": _utc(), "design": design, "device": device_name, "scoring_environment": {"threads": int(core.CFG["budget"]["timing_threads"]), "deterministic_algorithms": True}})
+    extra_fields: dict[str, Any] = {}
+    if name == "gates" and (run_dir / "gates.json").exists():
+        extra_fields["gates_sha256"] = file_sha256(run_dir / "gates.json")  # the gates record is bound to its stage record: an edited gates.json is refused by the stages after it (re-check B, m13)
+    if status != "completed" and name not in ("analysis", "report"):
+        stop_path = run_dir / "stop_record.json"  # a stage that failed or was stopped mid-sequence: the outcome is then ENGINEERING-FAILURE (failed) or INCOMPLETE (stopped), by section 11 (re-check B, m12)
+        if not stop_path.exists():
+            record(stop_path, {"stage": name, "status": status, "error": error or "; ".join(stopped), "outcome": "ENGINEERING-FAILURE" if status == "failed" else "INCOMPLETE", "at": _utc()})
+    record(stage_record_path(run_dir, name), {**extra_fields, "stage": name, "status": status, "error": error, "stopped": stopped, "seconds": time.perf_counter() - t0, "run_id": rid, "memory_exceeded": mem["memory_exceeded"], "at": _utc(), "design": design, "device": device_name, "scoring_environment": {"threads": int(core.CFG["budget"]["timing_threads"]), "deterministic_algorithms": True}})
     if status == "failed":
         say(f"stage {name} failed: {error}", sys.stderr)
         return 1
@@ -677,8 +694,28 @@ def _prefreeze_start(args: argparse.Namespace, ledger: Ledger, what: str, output
         return None
 
 
+def _typed_overrides(args: argparse.Namespace) -> list[str]:
+    return [f"--{k.replace('_', '-')}" for k in ("updates", "full_updates", "device") if getattr(args, k, None) not in (None, "")]
+
+
+def _refuse_typed(args: argparse.Namespace) -> None:
+    """N3 (b): update counts and the device come from the configuration; a typed ``--updates``, ``--full-updates`` or ``--device`` is refused outside tests (a record made with one cannot be told from the real one)."""
+    typed = _typed_overrides(args)
+    if typed and "PYTEST_CURRENT_TEST" not in os.environ:
+        raise StageRefused(f"refused: {', '.join(typed)} typed: update counts and the device come from the configuration; they are not typed outside tests")
+
+
 def _device(args: argparse.Namespace) -> str:
-    return str(args.device) if args.device else str(core.CFG["budget"]["training_device"])
+    return str(args.device) if getattr(args, "device", None) else str(core.CFG["budget"]["training_device"])
+
+
+def _identity(args: argparse.Namespace, *, seed_mode: str, update_counts: Mapping[str, int], device: str) -> dict[str, Any]:
+    """What a pre-freeze record says about itself (re-check B, N3): the bundle manifest SHA-256, the code commit, the configuration SHA-256, the seed mode, the update counts and the device. The freeze checks every one."""
+    return {"bundle_manifest_sha256": file_sha256(Path(args.data_dir) / "manifest.json"), "code_commit": args.code_commit, "config_sha256": file_sha256(core.ROOT / core.DEFAULT_CONFIG), "seed_mode": seed_mode, "update_counts": dict(update_counts), "device": device}
+
+
+def _stop_record(path: Path, exc: BaseException) -> None:
+    record(path, {"stopped": f"{type(exc).__name__}: {exc}", "at": _utc()})
 
 
 def cmd_calibrate(args: argparse.Namespace) -> int:
@@ -686,6 +723,11 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     from . import calibration
 
     ledger = Ledger()
+    try:
+        _refuse_typed(args)
+    except StageRefused as e:
+        say(str(e), sys.stderr)
+        return 2
     run_dir = _prefreeze_start(args, ledger, "calibration", ["calibration.json", "calibration_stopped.json"])
     if run_dir is None:
         return 2
@@ -697,17 +739,21 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         return 2
     core.reset_seed_record()
     code = 0
-    with ledger.measure("calibration", process="calibration and pilot"):
+    with ledger.measure("calibration", process="calibration and pilot", cap_seconds=float(args.stage_cap_seconds)):
         try:
             with StageGuard("calibration", cap_seconds=float(args.stage_cap_seconds)):
                 world = build_world(read_bundle(Path(args.data_dir)), "calibration", 1, RunConfig.registered(core.READ_LAYERS[0], updates, core.CFG["training"]["store_learning_rate"], core.CFG["training"]["lora_learning_rates"][0], _device(args)))
                 rec = calibration.run_calibration(world, 0, updates=updates)
         except (CapReached, MemoryLimitExceeded, calibration.CalibrationFailed) as e:
-            record(run_dir / "calibration_stopped.json", {"stopped": str(e), "at": _utc()})
+            _stop_record(run_dir / "calibration_stopped.json", e)
             say(f"calibration stopped: {e}", sys.stderr)
             code = 4
+        except Exception as e:  # noqa: BLE001 (every failure after the start leaves a stop record and is charged; re-check B, m6)
+            _stop_record(run_dir / "calibration_stopped.json", e)
+            raise
     if code:
         return code
+    rec["identity"] = _identity(args, seed_mode="calibration", update_counts={"updates": updates}, device=_device(args))
     record(run_dir / "calibration.json", rec)
     say(f"calibration record written to {run_dir / 'calibration.json'}")
     return 0 if rec["pilot"]["ok"] else 3
@@ -726,13 +772,18 @@ def cmd_prefreeze_gates(args: argparse.Namespace) -> int:
     from . import rehearsal
 
     ledger = Ledger()
-    run_dir = _prefreeze_start(args, ledger, "the pre-freeze gates stage", ["prefreeze_gates.json"])
+    try:
+        _refuse_typed(args)
+    except StageRefused as e:
+        say(str(e), sys.stderr)
+        return 2
+    run_dir = _prefreeze_start(args, ledger, "the pre-freeze gates stage", ["prefreeze_gates.json", "prefreeze_gates_stopped.json"])
     if run_dir is None:
         return 2
     try:
         cal = _read_calibration(run_dir)
-        if _device(args) != "mps" and not args.device_reason:
-            raise StageRefused(f"refused: the training device is {_device(args)!r}: a non-MPS gates stage needs --device-reason (G4's MPS comparison is not applicable only where the freeze records CPU)")
+        if not cal["pilot"]["ok"]:
+            raise StageRefused(f"{cal['pilot'].get('outcome')}: the pre-freeze gates stage does not run after a failed pilot (section 12.2)")
         train.select_device(_device(args))
     except (StageRefused, RuntimeError) as e:
         say(str(e), sys.stderr)
@@ -742,24 +793,47 @@ def cmd_prefreeze_gates(args: argparse.Namespace) -> int:
     core.reset_seed_record()
     data_dir = Path(args.data_dir)
     pre = json.loads((run_dir / "data" / "prefreeze_record.json").read_text())
-    with ledger.measure("gates-rehearsal", process="pre-freeze gates on rehearsal seeds"):
-        with StageGuard("prefreeze-gates", cap_seconds=float(args.stage_cap_seconds)):
-            bundle = read_bundle(data_dir)
-            world = build_world(bundle, "rehearsal", n, RunConfig.registered(layer, int(core.CFG["rehearsal"]["short_updates"]), core.CFG["training"]["store_learning_rate"], float(cal["selection"]["lora_lr"]), _device(args)))
-            g1, g3 = gate_inputs(world, pre)
-            with scoring_environment():
-                rec = rehearsal.time_prefreeze_gates(world, run_dir, g1, g3, gates.equivalence_layers(bundle.extra), manifest_gates(data_dir), data_dir, require_mps=_device(args) == "mps", cpu_by_freeze=_device(args) == "cpu")
+    short = int(core.CFG["rehearsal"]["short_updates"])
+    cpu_ok = _device(args) == "cpu" and bool((cal.get("identity") or {}).get("device") == "cpu")  # G4's MPS comparison is not applicable only where training is on CPU by the freeze (calibration itself ran there)
+    peak = 0
+    try:
+        with ledger.measure("gates-rehearsal", process="pre-freeze gates on rehearsal seeds", cap_seconds=float(args.stage_cap_seconds)):
+            guard = StageGuard("prefreeze-gates", cap_seconds=float(args.stage_cap_seconds))
+            try:
+                with guard:
+                    bundle = read_bundle(data_dir)
+                    world = build_world(bundle, "rehearsal", n, RunConfig.registered(layer, short, core.CFG["training"]["store_learning_rate"], float(cal["selection"]["lora_lr"]), _device(args)))
+                    g1, g3 = gate_inputs(world, pre)
+                    with scoring_environment():
+                        rec = rehearsal.time_prefreeze_gates(world, run_dir, g1, g3, gates.equivalence_layers(bundle.extra), manifest_gates(data_dir), data_dir, require_mps=_device(args) == "mps", cpu_by_freeze=cpu_ok)
+            finally:
+                peak = guard.peak
+    except (CapReached, MemoryLimitExceeded) as e:
+        _stop_record(run_dir / "prefreeze_gates_stopped.json", e)
+        say(f"the pre-freeze gates stage stopped: {e}", sys.stderr)
+        return 4
+    except Exception as e:  # noqa: BLE001
+        _stop_record(run_dir / "prefreeze_gates_stopped.json", e)
+        raise
+    rec["peak_bytes"] = int(peak)  # the sampled peak of the four-replicate world (feeds the whole-task peak of the rehearsal)
+    rec["identity"] = _identity(args, seed_mode="rehearsal", update_counts={"updates": short}, device=_device(args))
     record(run_dir / "prefreeze_gates.json", rec)
     say(f"pre-freeze gates record written to {run_dir / 'prefreeze_gates.json'}: ok = {rec['ok']}")
     return 0 if rec["ok"] else 3
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
-    """The rehearsal (section 13.3): the rates measured by the registered stage functions, the headroom check and the rung rule's decision."""
+    """The rehearsal (section 13.3): the rates measured by the registered stage functions, the headroom check and the rung rule's decision. The training device is the configured one (MPS); only if the
+    rehearsal itself cannot run on MPS does it run on CPU, and then its own failed MPS attempt is recorded (the freeze accepts CPU on nothing else)."""
     from . import rehearsal
 
     ledger = Ledger()
-    run_dir = _prefreeze_start(args, ledger, "the rehearsal", ["rates.json", "rehearsal.json"])
+    try:
+        _refuse_typed(args)
+    except StageRefused as e:
+        say(str(e), sys.stderr)
+        return 2
+    run_dir = _prefreeze_start(args, ledger, "the rehearsal", ["rates.json", "rehearsal.json", "rehearsal_stopped.json"])
     if run_dir is None:
         return 2
     try:
@@ -772,28 +846,53 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         pg = read_json(pg_path)
         if not pg.get("ok"):
             raise StageRefused("refused: the pre-freeze gates stage failed (a failed gate stops the run)")
-        dev = _device(args)
-        if dev != "mps" and not args.device_reason:
-            raise StageRefused(f"refused: the training device is {dev!r}: a non-MPS rehearsal needs --device-reason (the ADR's rule: unsupported MPS operations move training to CPU, recorded before the freeze)")
-        train.select_device(dev)
     except (StageRefused, RuntimeError) as e:
         say(str(e), sys.stderr)
         return 2
+    configured = _device(args)
+    attempt = train.mps_attempt()
+    if configured == "cpu" and attempt["ok"]:
+        say("refused: the training device is CPU but MPS works on this machine: CPU is frozen only if the rehearsal itself cannot run on MPS", sys.stderr)
+        return 2
+    dev = "mps" if configured == "mps" and attempt["ok"] else "cpu"
     layer, lora_lr = int(cal["selection"]["read_layer"]), float(cal["selection"]["lora_lr"])
     short = int(args.updates) if args.updates else int(core.CFG["rehearsal"]["short_updates"])
     full = int(args.full_updates) if args.full_updates else int(core.CFG["rehearsal"]["full_updates"])
-    core.reset_seed_record()
+    n_world = max(a for a, _b in budget.rungs())
     data_dir = Path(args.data_dir)
     scratch = run_dir / "rehearsal-scratch"
-    with ledger.measure("rehearsal", process="rehearsal"):
-        with StageGuard("rehearsal", cap_seconds=float(args.stage_cap_seconds)):
-            overhead = rehearsal.measure_task_overhead(data_dir, core.ROOT, layer=layer, lora_lr=lora_lr)
-            world = build_world(read_bundle(data_dir), "rehearsal", 1, RunConfig.registered(layer, short, core.CFG["training"]["store_learning_rate"], lora_lr, dev))
-            rates, raw = rehearsal.measure_rates(world, 0, updates=short, full_updates=full, overhead=overhead, gates2_seconds=float(pg["seconds_scaled_to_registered_panels"]), scratch=scratch, data_dir=data_dir, repo=core.ROOT, device_reason=str(args.device_reason or ""))
+    mps_attempt = dict(attempt)
+    rates = raw = None
+    try:
+        with ledger.measure("rehearsal", process="rehearsal", cap_seconds=float(args.stage_cap_seconds)):
+            with StageGuard("rehearsal", cap_seconds=float(args.stage_cap_seconds)):
+                overhead = rehearsal.measure_task_overhead(data_dir, core.ROOT, layer=layer, lora_lr=lora_lr)
+                while True:
+                    core.reset_seed_record()
+                    try:
+                        world = build_world(read_bundle(data_dir), "rehearsal", n_world, RunConfig.registered(layer, short, core.CFG["training"]["store_learning_rate"], lora_lr, dev))
+                        rates, raw = rehearsal.measure_rates(world, 0, updates=short, full_updates=full, overhead=overhead, gates2_seconds=float(pg["seconds_scaled_to_registered_panels"]), scratch=scratch, data_dir=data_dir, repo=core.ROOT, device_reason=str(mps_attempt.get("error", "")) if dev == "cpu" else "", gates_peak_bytes=int(pg.get("peak_bytes", 0)))
+                        break
+                    except (CapReached, MemoryLimitExceeded):
+                        raise
+                    except Exception as e:  # noqa: BLE001
+                        if dev != "mps" or configured != "mps":
+                            raise
+                        mps_attempt = {"ok": False, "error": f"the rehearsal on MPS failed: {type(e).__name__}: {e}"}  # the rehearsal itself cannot run on MPS: CPU, with this failure recorded
+                        dev = "cpu"
+                        shutil.rmtree(scratch, ignore_errors=True)
+    except (CapReached, MemoryLimitExceeded) as e:
+        _stop_record(run_dir / "rehearsal_stopped.json", e)
+        say(f"the rehearsal stopped: {e}", sys.stderr)
+        return 4
+    except Exception as e:  # noqa: BLE001
+        _stop_record(run_dir / "rehearsal_stopped.json", e)
+        raise
+    assert rates is not None and raw is not None
     record(run_dir / "rates.json", rates.to_json())
     p_hours = ledger.total_hours()
     check = budget.headroom_check(p_hours, rates, ledger, core.ROOT / core.RAISE_FILE)
-    record(run_dir / "rehearsal.json", {"raw": raw, "charged_hours_at_end_of_rehearsal": p_hours, "headroom_check": check, "memory_check": budget.memory_check(rates)})
+    record(run_dir / "rehearsal.json", {"raw": raw, "charged_hours_at_end_of_rehearsal": p_hours, "headroom_check": check, "memory_check": budget.memory_check(rates), "mps_attempt": mps_attempt, "identity": _identity(args, seed_mode="rehearsal", update_counts={"updates": short, "full_updates": full}, device=dev)})
     say(f"rehearsal record written to {run_dir / 'rehearsal.json'}; rung rule outcome: {check['decision']['outcome']}")
     return 0
 
@@ -856,11 +955,9 @@ def build_parser() -> argparse.ArgumentParser:
         c.add_argument("--code-commit", required=True, help="must equal a clean HEAD")
         c.add_argument("--stage-cap-seconds", type=float, required=True, help="the stage cap (seconds); every launch script passes it; it is enforced as a deadline and checked against the study ledger's room")
         c.add_argument("--data-dir", required=True)
-        c.add_argument("--updates", type=int, default=None, help="default: from the configuration")
+        c.add_argument("--updates", type=int, default=None, help="default: from the configuration (typed values are refused outside tests)")
         if name == "rehearse":
             c.add_argument("--full-updates", type=int, default=None, help="default: from the configuration ([rehearsal] full_updates)")
-        if name in ("rehearse", "prefreeze-gates"):
-            c.add_argument("--device-reason", default=None, help="required if the training device is not MPS (the rehearsal itself cannot run on MPS: the freeze may then record CPU)")
         c.add_argument("--device", default=None, choices=["mps", "cpu"], help="default: the configured training device (MPS); there is no automatic choice")
         c.set_defaults(func=fn)
     rc = sub.add_parser("raise-cap", help="record the cap raise at the rehearsal's headroom check; the amount is recomputed from the rehearsal record and the study ledger")

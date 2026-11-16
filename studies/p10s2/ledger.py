@@ -25,7 +25,7 @@ from typing import Any
 from . import core
 
 STAGE_KINDS = (
-    "fetch", "datagen", "calibration", "pilot", "gates-rehearsal", "rehearsal", "gates-registered", "train", "evaluate", "timing", "recompute", "analysis", "report", "freeze", "audit-other",
+    "fetch", "install", "datagen", "calibration", "pilot", "gates-rehearsal", "rehearsal", "gates-registered", "train", "evaluate", "timing", "recompute", "analysis", "report", "freeze", "audit-other",
 )  # fmt: skip
 STUDY_LEDGER = Path("experiments/P10S2/ledger.jsonl")
 
@@ -69,8 +69,15 @@ class Ledger:
         es = self.entries()
         done = sum(float(e["charged_hours"]) for e in es if e["status"] != "started")
         now = time.time()
-        orphan = sum(int(e["workers"]) * max(0.0, now - float(e["t_start"])) / 3600.0 for e in self._unfinished(es) if e.get("run_id") != exclude_run)
+        orphan = sum(int(e["workers"]) * self._orphan_seconds(e, now) / 3600.0 for e in self._unfinished(es) if e.get("run_id") != exclude_run)
         return done + orphan
+
+    @staticmethod
+    def _orphan_seconds(e: dict[str, Any], now: float) -> float:
+        """A killed process is charged the wall time since its start, up to its stage cap when the start marker recorded one (the lead's ruling m8: the charge is bounded by what the stage could have run)."""
+        elapsed = max(0.0, now - float(e["t_start"]))
+        cap = e.get("cap_seconds")
+        return elapsed if cap is None else min(elapsed, float(cap))
 
     def by_kind(self) -> dict[str, float]:
         out: dict[str, float] = {}
@@ -111,7 +118,7 @@ class Ledger:
         finally:
             os.close(fd)
 
-    def record(self, kind: str, wall_seconds: float, *, workers: int = 1, process: str = "", registered: bool = False, status: str = "completed", note: str = "", run_id: str | None = None, t_start: float = 0.0) -> dict[str, Any]:
+    def record(self, kind: str, wall_seconds: float, *, workers: int = 1, process: str = "", registered: bool = False, status: str = "completed", note: str = "", run_id: str | None = None, t_start: float = 0.0, cap_seconds: float | None = None) -> dict[str, Any]:
         """One process's charge: ``workers`` x ``wall_seconds`` / 3600 hours."""
         if kind not in STAGE_KINDS:
             raise ValueError(f"unknown ledger kind {kind!r}")
@@ -119,6 +126,8 @@ class Ledger:
             raise ValueError("workers >= 1 and wall_seconds >= 0 are required")
         charged = 0.0 if status == "started" else workers * wall_seconds / 3600.0
         entry = {"kind": kind, "process": process, "workers": workers, "wall_seconds": wall_seconds, "charged_hours": charged, "registered": registered, "status": status, "note": note, "at": _utc(), "run_id": run_id, "t_start": t_start}
+        if cap_seconds is not None:
+            entry["cap_seconds"] = float(cap_seconds)
         self._append(entry)
         return entry
 
@@ -129,11 +138,11 @@ class Ledger:
         return self.record(stage, seconds, **kw)
 
     @contextmanager
-    def measure(self, kind: str, *, workers: int = 1, process: str = "", registered: bool = False) -> Iterator[str]:
+    def measure(self, kind: str, *, workers: int = 1, process: str = "", registered: bool = False, cap_seconds: float | None = None) -> Iterator[str]:
         """Charge the wall time of the enclosed block; a start marker is written first and the end entry whether the block completes or raises. Yields the run id."""
         rid = uuid.uuid4().hex
         t0, w0 = time.perf_counter(), time.time()
-        self.record(kind, 0.0, workers=workers, process=process, registered=registered, status="started", run_id=rid, t_start=w0)
+        self.record(kind, 0.0, workers=workers, process=process, registered=registered, status="started", run_id=rid, t_start=w0, cap_seconds=cap_seconds)
         status = "completed"
         try:
             yield rid

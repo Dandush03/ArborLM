@@ -44,8 +44,8 @@ def test_both_rehearsed_layers_give_the_slower_rate_for_u_1000_including_e_table
 def test_the_scale_factor_is_the_registered_item_count_over_the_rehearsal_item_count_and_never_below_one() -> None:
     world, _ = dry_world()
     s = rehearsal.scale_factor(world)
-    reg = sum(len(world.ctx.panels[n].examples) for n in ("E_A", "E_B"))
-    cal = sum(len(world.d_cal[c].examples) for c in core.TASKS)
+    reg = sum(len(p.examples) for p in world.ctx.panels.values())  # E_A, E_B and E_open_A, E_open_B (re-check B, N1)
+    cal = sum(len(world.d_cal[p.task].examples) for p in world.ctx.panels.values())
     assert s == max(1.0, reg / cal) and s >= 1.0
 
 

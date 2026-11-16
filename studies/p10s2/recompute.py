@@ -212,8 +212,8 @@ def outcome_under_recomputation(registered: Mapping[str, Any], recomputed: Mappi
         out = analysis.analyze({**registered, "incomplete": [*registered.get("incomplete", []), f"the recomputation could not be completed{why}" + (f" (missing: {', '.join(res.missing[:5])})" if res.missing else "")]}, **kw)
         out["recomputation"] = {**recomputation_status(res, []), "differences": [d.to_json() for d in res.differences], "missing": res.missing, "study_level": res.study_level}
         return analysis.strip_classes_if_incomplete(out)
-    rec_for_verdicts = {**copy.deepcopy(dict(registered)), "baseline": copy.deepcopy(recomputed.get("baseline", {})), "replicates": copy.deepcopy(list(recomputed.get("replicates", [])))}
-    changed = analysis.verdict_changes(analysis.verdicts(registered), analysis.verdicts(rec_for_verdicts))
+    # the recomputed verdicts are computed on the study AS REPORTED (a difference within tolerance leaves the registered value, so it can never flip a verdict by itself: the lead's ruling, re-check C m6)
+    changed = analysis.verdict_changes(analysis.verdicts(registered), analysis.verdicts(reported_study(registered, recomputed, res)))
     if changed:
         note = f"a recomputation difference changes {len(changed)} verdict entries ({', '.join(changed[:6])})"
         out = analysis.analyze({**registered, "engineering": [*registered.get("engineering", []), note]}, **kw)

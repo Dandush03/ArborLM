@@ -81,9 +81,10 @@ class ParseReport:
     lines: int
     kept: int
     malformed: int
+    extra_tabs: int = 0  # kept rows whose text itself contains a tab (kept whole, re-check A, R10)
 
     def to_json(self) -> dict[str, int]:
-        return {"lines": self.lines, "kept": self.kept, "malformed": self.malformed}
+        return {"lines": self.lines, "kept": self.kept, "malformed": self.malformed, "extra_tabs": self.extra_tabs}
 
 
 def _text_lines(data: bytes, compressed: bool) -> list[str]:
@@ -102,13 +103,15 @@ def parse_sentences_report(data: bytes, compressed: bool = True) -> tuple[dict[i
     out: dict[int, str] = {}
     lines = _text_lines(data, compressed)
     bad = 0
+    tabs = 0
     for line in lines:
-        parts = line.split("\t")
+        parts = line.split("\t", 2)  # the text is everything after the second tab: a sentence with a tab is not truncated
         if len(parts) >= 3 and _is_id(parts[0]):
             out[int(parts[0])] = parts[2]
+            tabs += "\t" in parts[2]
         else:
             bad += 1
-    return out, ParseReport(len(lines), len(out), bad)
+    return out, ParseReport(len(lines), len(out), bad, tabs)
 
 
 def parse_sentences(data: bytes, compressed: bool = True) -> dict[int, str]:
@@ -332,8 +335,9 @@ def build_partition(corpus: CorpusLike, mode: str, sizes: Sizes) -> Partition:
     open_c = [k for k in eval_keys if k in group_of_key and ok_len(k) and not in_vocab(k) and any(k in refs[c] for c in core.TASKS)]
     panels["E_open"] = draw_plain(open_c, sizes.panel_open)
     # pools
-    gold_pool = {c: [item(k) for k in train_keys if k in group_of_key and side[group_of_key[k]] == "train" and k in refs[c] and ok_len(k) and in_vocab(k) and group_of_key[k] not in {i.group for p in ("Q_fit", "Q_check", "D_cal", "D_con") for i in panels[p]}] for c in core.TASKS}
-    source_pool = {c: [item(k) for k in train_keys if ok_len(k) and in_vocab(k) and k not in has_ref_key[c] and expand_key(rep[k]) not in has_ref_key[c]] for c in core.TASKS}
+    blocked_groups = {i.group for p in ("Q_fit", "Q_check", "D_cal", "D_con") for i in panels[p] if i.group >= 0}  # the training-side panels' identity groups
+    gold_pool = {c: [item(k) for k in train_keys if k in group_of_key and side[group_of_key[k]] == "train" and k in refs[c] and ok_len(k) and in_vocab(k) and group_of_key[k] not in blocked_groups] for c in core.TASKS}
+    source_pool = {c: [item(k) for k in train_keys if ok_len(k) and in_vocab(k) and k not in has_ref_key[c] and expand_key(rep[k]) not in has_ref_key[c] and group_of_key.get(k, -1) not in blocked_groups] for c in core.TASKS}  # re-check A, R1: no no-gold source shares a group with Q, D_cal or D_con
     counts = {
         "pairs": len(pairs), "groups": len(ordered), "group_size_distribution": dict(sorted(Counter(group_sizes.values()).items())), "large_groups": len(large),
         "eval_pairs": eval_pairs, "remaining_pairs": remaining, "vocabulary": len(vocab), "panel_sizes": {k: len(v) for k, v in panels.items()},
@@ -509,6 +513,7 @@ def gate_g1(p: Partition, streams: Sequence[Streams], accepted_outputs: Mapping[
             if groups[a] & groups[b]:
                 problems.append(f"panels {a} and {b} share identity groups")
     eval_groups = set().union(*(groups[n] for n in eval_names))
+    all_panel_groups = set().union(*groups.values())  # re-check A, R1: stream groups are checked against EVERY panel (Q_fit, Q_check, D_cal and D_con included)
     eval_keys = {i.key for n in eval_names for i in p.panels[n]}
     eval_refs = set(eval_ref_norms) if eval_ref_norms is not None else {normalize(r) for n in eval_names for it in p.panels[n] for refs in it.refs.values() for r in refs}
     for r, s in enumerate(streams):
@@ -518,8 +523,8 @@ def gate_g1(p: Partition, streams: Sequence[Streams], accepted_outputs: Mapping[
                 if keys & eval_keys:
                     problems.append(f"replicate {r} stream {stream_name}_{c} shares English with an evaluation panel")
                 gs = {x.group for x in items if x.group >= 0}
-                if gs & eval_groups:
-                    problems.append(f"replicate {r} stream {stream_name}_{c} shares identity groups with an evaluation panel")
+                if gs & all_panel_groups:
+                    problems.append(f"replicate {r} stream {stream_name}_{c} shares identity groups with a panel" + (" (an evaluation panel)" if gs & eval_groups else ""))
                 for x in items:
                     if normalize(x.target) in eval_refs:
                         problems.append(f"replicate {r} stream {stream_name}_{c} has a target equal to an evaluation reference")

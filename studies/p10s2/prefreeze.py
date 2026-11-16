@@ -166,6 +166,7 @@ def build_bundle(
     qual = qualify(t_scores, s0, fits, checks, {c: len(accepted[c]) for c in core.TASKS}, sizes.accepted_per_replicate)
     rec["qualification"] = {"ok": qual["ok"], "failed": qual["failed"], "detail": qual["detail"], "outcome": qual["outcome"]}
     rec["filter"] = {c: fits[c].to_json() for c in core.TASKS}
+    rec["seed_mode"] = mode  # "registered-data" for the real step, "test" for every stand-in (the freeze refuses a stand-in record under the real configuration)
     rec["dropped_eval_equal"] = dropped
     stamp("filter, qualification")
     teacher_outputs = {
@@ -265,7 +266,10 @@ def check_combined_whole_string(tok: ReferenceTokenizer, items: Sequence[Any], p
             return None
         d = next((k for k, (a, b) in enumerate(zip(wids, cat, strict=False)) if a != b), min(len(wids), len(cat)) - 1)
         start = offs[min(d, len(offs) - 1)][0]
-        return "reference" if ref_span[0] <= start < ref_span[1] else "required"
+        e = next((k for k, (a, b) in enumerate(zip(reversed(wids), reversed(cat), strict=False)) if a != b), 0)  # the last differing token, aligned from the end (re-check A, R9)
+        end_start = offs[min(max(len(wids) - 1 - e, 0), len(offs) - 1)][0]
+        inside = ref_span[0] <= start < ref_span[1] and ref_span[0] <= end_start < ref_span[1]  # a mismatch inside the reference must not mask a later boundary mismatch
+        return "reference" if inside else "required"
 
     required: list[str] = []
     listed = 0

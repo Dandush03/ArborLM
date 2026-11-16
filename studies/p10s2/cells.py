@@ -226,6 +226,31 @@ def score_snapshot(
     return out
 
 
+TEACHER_MATRIX_PANELS = ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con")
+
+
+def teacher_matrix(world: World) -> dict[str, Any]:
+    """Every teacher's score on every panel section 6.1 names, by section 4.3 item 2's definition (re-check A, R13; the lead's ruling): the teacher's stored output against THIS capability's references of the
+    items that carry them, for each teacher t and capability c (t = c is the teacher's own score, t != c the other teacher's). Descriptive; nothing here enters a gap, gate or class."""
+    out: dict[str, Any] = {}
+    for name in TEACHER_MATRIX_PANELS:
+        items = world.partition.panels.get(name)
+        if not items:
+            continue
+        row: dict[str, Any] = {}
+        for t in TWO:
+            outs = world.teacher_outputs.get(t, {}).get(name)
+            if outs is None or len(outs) != len(items):
+                continue
+            for c in TWO:
+                pairs = [(o, list(it.refs[c])) for o, it in zip(outs, items, strict=True) if it.refs.get(c)]
+                if pairs:
+                    sc = [chrf_item(o, rf) for o, rf in pairs]
+                    row[f"teacher_{t}_on_{c}"] = {"mean": mean(sc), "items": len(pairs), "definition": "section 4.3 item 2" if t != c else "own capability"}
+        out[name] = row
+    return out
+
+
 def stage0_scores_without_combined(world: World) -> dict[str, Any]:
     """Stage 0 and the stored teacher scores on the single-task panels (the rehearsal times its combined scoring separately)."""
     res = stage0_scores(world, with_combined=False)
@@ -254,6 +279,7 @@ def stage0_scores(world: World, with_combined: bool = True) -> dict[str, Any]:
             items = [chrf_item(o, rf) for o, rf in zip(outs, p.refs, strict=True)]
             exact = [normalize(o) in {normalize(x) for x in rf} for o, rf in zip(outs, p.refs, strict=True)]
             res["teacher"][name] = {"mean": mean(items), "items": items, "subsample_mean": mean([items[i] for i in ctx.subsample[name]]), "exact_rate": mean([float(e) for e in exact])}
+    res["teacher_matrix"] = teacher_matrix(world)
     if not with_combined:
         return res
     # the combined tasks (addendum section 7): Stage 0 on the layouts with no read (the floor of the rule), and the ensemble from the stored teacher outputs on E_C (both teachers generate on every E_C sentence)

@@ -165,7 +165,7 @@ def test_all_eighteen_cells_trained_and_scored_with_the_right_sections() -> None
     for label, rec in sc.items():
         g = label.split("/")[1]
         s = rec["scores"][label]
-        assert set(s["panels"]) == {"E_A", "E_B"}
+        assert set(s["panels"]) == {"E_A", "E_B", "E_open_A", "E_open_B"}  # E_open is a panel of every snapshot (descriptive, oracle route)
         assert ("ablations" in s) == (g in ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "MAGOLD"))  # the five ablations on the 11 memory cells; E-table has none
         assert ("gen" in s) == (g in ("ST1", "MAF", "MII", "MSEQ", "MJOINT", "LSEQ"))  # GEN for every ST1 and stage-2 snapshot, and L-seq for comparison
         assert ("combined" in s) == (g in ("MAF", "MII", "MJOINT", "LSEQ", "LJOINT"))

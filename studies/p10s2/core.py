@@ -66,12 +66,20 @@ def is_temporary(path: Path) -> bool:
     return any(p.is_relative_to(r) for r in roots)
 
 
+def is_test_configuration() -> bool:
+    """True if every registered replicate base of the loaded configuration lies in the ADR's test namespace 229001-229999 (the end-to-end exercise's throwaway clone writes such a configuration; the real one never does)."""
+    return all(229001 <= b <= 229999 for b in SEEDS["replicate_bases"])  # the ADR's test namespace
+
+
 def refuse_under_pytest(*roots: Path, what: str = "a registered stage") -> None:
     """Under pytest (``PYTEST_CURRENT_TEST`` is set) registered code, the study ledger and the freeze files may only be used on a temporary directory: a test can never start a registered stage, write the real ledger or
     touch the real ``experiments/`` directory or the real repository."""
     if "PYTEST_CURRENT_TEST" not in os.environ:
         return
     for r in roots:
+        p = Path(r).resolve()
+        if p == REAL_ROOT or p.is_relative_to(REAL_ROOT):  # the checkout the code runs from (the repository, or an audit pin under /tmp): never a test's run root, whatever its location
+            raise TestGuardRefused(f"refused under pytest: {what} was pointed at {r}, which is inside the checkout the code runs from ({REAL_ROOT})")
         if not is_temporary(r):
             raise TestGuardRefused(f"refused under pytest: {what} was pointed at {r}, which is not a temporary directory")
 

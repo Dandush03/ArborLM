@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import pytest  # noqa: E402
 
-from studies.p10s2 import core, freeze, ledger, rehearsal, stages  # noqa: E402
+from studies.p10s2 import budget, core, freeze, ledger, rehearsal, stages  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 LAUNCH = ROOT / "studies" / "p10s2" / "launch"
@@ -130,6 +130,9 @@ def test_rehearse_executes_with_the_layer_and_the_lora_learning_rate_of_the_cali
     (pre_env / "calibration.json").write_text(json.dumps({"selection": {"read_layer": 12, "lora_lr": 0.001}, "pilot": {"ok": True}}))  # the second value listed: not lora_learning_rates[0]
     (pre_env / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 12.5}))
     seen: dict[str, Any] = {}
+    (pre_env / "data" / "bundle").mkdir(parents=True)
+    (pre_env / "data" / "bundle" / "manifest.json").write_text("{}")  # the identity of the record names the bundle's manifest digest
+    monkeypatch.setattr(stages.train, "mps_attempt", lambda: {"ok": True, "error": ""})
     monkeypatch.setattr(stages, "read_bundle", lambda d: "bundle")
     monkeypatch.setattr(stages, "build_world", lambda b, mode, n, run: seen.update(mode=mode, layer=run.layer, lora_lr=run.lora_lr, store_lr=run.store_lr, device=run.device, n=n) or "world")
     monkeypatch.setattr(stages.train, "select_device", lambda name: seen.update(selected=name))
@@ -143,11 +146,14 @@ def test_rehearse_executes_with_the_layer_and_the_lora_learning_rate_of_the_cali
 
     monkeypatch.setattr(rehearsal, "measure_rates", fake_rates)
     assert stages.main(prefreeze_argv(pre_env)) == 0
-    assert seen["layer"] == 12 and seen["overhead_layer"] == 12 and seen["lora_lr"] == 0.001 == seen["overhead_lr"] and seen["mode"] == "rehearsal" and seen["n"] == 1  # the calibrated layer and LoRA rate, on rehearsal seeds
-    assert seen["store_lr"] == core.CFG["training"]["store_learning_rate"] and seen["device"] == "mps" == seen["selected"]  # no automatic device
+    assert seen["layer"] == 12 and seen["overhead_layer"] == 12 and seen["lora_lr"] == 0.001 == seen["overhead_lr"] and seen["mode"] == "rehearsal" and seen["n"] == max(a for a, _b in budget.rungs())  # the calibrated layer and LoRA rate, on rehearsal seeds, in a world of the largest rung's replicates (re-check B, m1)
+    assert seen["store_lr"] == core.CFG["training"]["store_learning_rate"] and seen["device"] == "mps"  # no automatic device
     assert seen["gates2"] == 12.5 and seen["updates"] == core.CFG["rehearsal"]["short_updates"] == 200 and seen["full"] == core.CFG["rehearsal"]["full_updates"] == 2000
     rec = json.loads((pre_env / "rehearsal.json").read_text())
     assert (pre_env / "rates.json").exists() and rec["headroom_check"]["decision"]["outcome"] and rec["charged_hours_at_end_of_rehearsal"] >= 0
+    ident = rec["identity"]  # re-check B, N3: the record says what produced it
+    assert ident["seed_mode"] == "rehearsal" and ident["device"] == "mps" and ident["update_counts"] == {"updates": 200, "full_updates": 2000} and ident["code_commit"] == "deadbeef" and len(ident["bundle_manifest_sha256"]) == 64 and ident["config_sha256"]
+    assert rec["mps_attempt"] == {"ok": True, "error": ""}
     assert "rung rule outcome" in capsys.readouterr().out
     led = ledger.Ledger(pre_env.parent / "ledger.jsonl")
     assert [e["kind"] for e in led.entries() if e["status"] != "started"] == ["rehearsal"]  # charged to the one study ledger, not to the run directory
@@ -159,7 +165,11 @@ def test_rehearse_executes_with_the_layer_and_the_lora_learning_rate_of_the_cali
 def test_rehearse_refuses_a_non_mps_device_without_a_reason_and_calibrate_refuses_an_unusable_device(pre_env: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
     (pre_env / "calibration.json").write_text(json.dumps({"selection": {"read_layer": 4, "lora_lr": 0.0003}, "pilot": {"ok": True}}))
     (pre_env / "prefreeze_gates.json").write_text(json.dumps({"ok": True, "seconds_scaled_to_registered_panels": 1.0}))
-    assert stages.main([*prefreeze_argv(pre_env), "--device", "cpu"]) == 2 and "--device-reason" in capsys.readouterr().err
+    monkeypatch.setattr(stages.train, "mps_attempt", lambda: {"ok": True, "error": ""})
+    assert stages.main([*prefreeze_argv(pre_env), "--device", "cpu"]) == 2 and "CPU is frozen only if the rehearsal itself cannot run on MPS" in capsys.readouterr().err  # a typed CPU while MPS works is refused
+    monkeypatch.delenv("PYTEST_CURRENT_TEST")
+    assert stages.main([*prefreeze_argv(pre_env), "--device", "cpu"]) == 2 and "not typed outside tests" in capsys.readouterr().err  # re-check B, N3 (b): a typed device is refused outside tests
+    monkeypatch.setenv("PYTEST_CURRENT_TEST", "x")
     monkeypatch.setattr(stages.train, "select_device", lambda name: (_ for _ in ()).throw(RuntimeError("device mps requested but unavailable")))
     assert stages.main(prefreeze_argv(pre_env.parent / "run2", "calibrate")) == 2 and "no fallback" in capsys.readouterr().err
 

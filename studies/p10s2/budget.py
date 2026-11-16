@@ -120,7 +120,7 @@ def training_seconds(n: int, u: int, rates: Rates, *, slower: bool) -> float:
 def scoring_seconds(n: int, rates: Rates) -> float:
     """Every scoring of the registered run: per replicate 18 cell scorings (each its own process) and the extras; once, the fixed rows and the timing benchmark."""
     per_rep = 18 * (rates.panel_seconds + rates.task_overhead_seconds) + rates.replicate_extra_seconds + COMBINED_CELLS * rates.combined_cell_seconds
-    return n * per_rep + rates.fixed_seconds + rates.combined_stage0_seconds + rates.timing_seconds
+    return n * per_rep + rates.fixed_seconds + rates.combined_stage0_seconds + rates.timing_seconds + rates.task_overhead_seconds  # the timing benchmark is its own process: its start-up is in R as in its cap (m5)
 
 
 def recompute_seconds(n: int, rates: Rates) -> float:
@@ -211,7 +211,7 @@ def propose_raise(p_hours: float, rates: Rates) -> CapRaise | None:
     need = p_hours + B["headroom"] * r1
     if need <= base_cap():
         return None
-    whole = math.ceil(need - 1e-12)
+    whole = math.ceil(need)  # no tolerance: a rounding edge may only give the LARGER cap, never a cap at which rung 1 does not fit (the lead's ruling m4)
     new = float(min(ceiling(), whole))
     proj = {config_key(a, b): registered_run_seconds(a, b, rates)["total"] / 3600.0 for a, b in rungs()}
     return CapRaise(base_cap(), new, p_hours, need, whole > ceiling(), proj)

@@ -27,6 +27,10 @@ from .core import ROOT
 from .output import emit_plain
 
 
+def _host(url: str) -> str:
+    return url.split("/")[2].split(":")[0].lower() if "://" in url else ""
+
+
 def _download(url: str, dest: Path, limit: int) -> int:  # pragma: no cover - the only function that touches the network
     """Fetch ``url`` into ``dest`` with certificate verification on and HTTPS-only redirects; refuse past ``limit`` bytes (a cumulative limit computed by the session). Returns the bytes written."""
     import urllib.request
@@ -35,6 +39,8 @@ def _download(url: str, dest: Path, limit: int) -> int:  # pragma: no cover - th
         def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[no-untyped-def]
             if not newurl.lower().startswith("https://"):
                 raise g.FetchRefused(f"refused: redirect to a non-HTTPS address {newurl!r}")
+            if _host(req.full_url) == "downloads.tatoeba.org" and _host(newurl) != "downloads.tatoeba.org":  # re-check A, R6: a Tatoeba file stays on its own host
+                raise g.FetchRefused(f"refused: redirect of a Tatoeba download to another host {newurl!r}")
             return super().redirect_request(req, fp, code, msg, headers, newurl)
 
     opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=g.make_ssl_context()), HttpsOnly())

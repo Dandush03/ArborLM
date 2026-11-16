@@ -210,8 +210,9 @@ def test_the_report_makes_no_claim_of_success_and_names_what_it_cannot_establish
     for phrase in ("Autonomous learned memory: addresses and routes are supplied by rule.", "A failure of the ArborLM concept, whatever the outcome.", "That MPS-trained snapshots would be reproduced by re-running."):
         assert phrase in text
     assert "Astra review: NOT_PERFORMED" in text and "not human approval" in text
+    assert f"- {core.LEAD_RULE}" in text  # re-check C, m1: the human lead's sentence is printed, exactly (the one place the phrase may appear)
     for forbidden in ("autonomous learned-memory success", "validated by Astra", "ASTRA VALIDATED"):
-        assert forbidden not in text
+        assert forbidden not in text.replace(core.LEAD_RULE, "")
     assert len(report.NOT_ESTABLISHED) == 10
 
 

@@ -134,7 +134,7 @@ def test_parse_sentences_does_not_split_inside_a_sentence_and_counts_malformed_l
         payload = bz2.compress(raw.encode()) if comp else raw.encode()
         out, rep = data.parse_sentences_report(payload, comp)
         assert out == {1: "first part second part", 2: "line\x0bwith vt", 4: "ok", 5: "trailing unicode\u0085next"}  # the characters that str.splitlines() splits on are kept
-        assert rep.lines == 6 and rep.kept == 4 and rep.malformed == 2 and rep.to_json() == {"lines": 6, "kept": 4, "malformed": 2}
+        assert rep.lines == 6 and rep.kept == 4 and rep.malformed == 2 and rep.to_json() == {"lines": 6, "kept": 4, "malformed": 2, "extra_tabs": 0}
     assert data.parse_sentences(raw.encode(), False) == out
     links, rep = data.parse_links_report("1\t2\r\n3\t4\nx\t5\n6\n7\t\u00b2\n".encode(), False)
     assert links == [(1, 2), (3, 4)] and rep.malformed == 3 and data.parse_links(b"1\t2\n", False) == [(1, 2)]
