@@ -121,7 +121,7 @@ def test_calibration_cells() -> None:
     rows = {2048: 8192, 8192: 16384, 32768: 32768}
     assert {(c.facts, c.slots, c.run_updates) for c in core.dense_rate_cells(rows)} == {(8192, 4096, 16384), (32768, 16384, 32768), (8192, 1024, 65536), (32768, 4096, 65536)}
     assert {(c.facts, c.slots, c.run_updates) for c in core.h8_report_cells(rows)} == {(2048, 4096, 8192), (8192, 4096, 16384), (8192, 16384, 16384), (32768, 16384, 32768)}
-    assert core.load_candidates("32K/4K") == (131072, 196608, 262144, 393216, 524288) and core.load_ceiling("2K/256") == 262144 and core.load_candidates("8K/1K", 16) == (128, 192, 256, 384, 512)
+    assert core.load_candidates("32K/4K") == (131072, 196608, 262144, 393216, 524288, 786432) and core.load_ceiling("2K/256") == 262144 and core.load_candidates("8K/1K", 16) == (128, 192, 256, 384, 512, 768)  # section 25.15
     assert core.cell_snapshot_updates(core.make_cell("P", "F-OQ", 8192, 1024, 1, 2101, run_updates=131072), 8192) == (512, 1024, 2048, 4096, 8192, 16384, 32768, 49152, 65536, 98304, 131072)
     scaled = core.calibration_cells(unit=16)
     assert len(scaled) == 70 and all(c.u_p == 16 for c in scaled if c.arm != "H8")

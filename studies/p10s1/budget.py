@@ -295,7 +295,7 @@ def exceeds_remaining(cap_seconds: float, remaining_seconds: float) -> bool:
 
 
 # --- the calibration's items: projections and caps (section 10.1 item 0a; audit B1) ----------------------------------------------------------
-ITEM_GROUPS = (("row-up", "load"), ("h8", "dense"))  # the items of one pooled stage, in the order the pool is given their tasks: the short row-U_P runs first, so that no run waits for the long load-search runs
+ITEM_GROUPS = (("row-up", "load"), ("h8", "dense"), ("load-ext",))  # the last group is the one-time extension of the load search (section 25.15), its own pooled stage; # the items of one pooled stage, in the order the pool is given their tasks: the short row-U_P runs first, so that no run waits for the long load-search runs
 
 
 def dispatch_order(items: Sequence[str], unit: int = core.U_P, row_u_p: Mapping[int, int] | None = None) -> list[tuple[str, core.Cell]]:

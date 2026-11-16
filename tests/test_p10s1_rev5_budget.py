@@ -112,7 +112,7 @@ def test_choose_plan_applies_the_cuts_in_order_and_not_started_budget_above_the_
 def test_item_projections_and_caps_of_the_timing_preview() -> None:
     wall = {(a, n): 0.01 * (1 + n / 4096) for a, ns in core.arm_slot_counts().items() for n in ns}
     proj = budget.item_projection(wall)
-    assert set(proj) == {"load", "row-up", "h8", "dense"} and [proj[i]["runs"] for i in ("load", "row-up", "h8", "dense")] == [10, 12, 8, 40]
+    assert set(proj) == {"load", "row-up", "h8", "dense", "load-ext"} and [proj[i]["runs"] for i in ("load", "row-up", "h8", "dense", "load-ext")] == [10, 12, 8, 40, 8]
     for item, p in proj.items():
         assert p["cap_seconds"] == pytest.approx(2.0 * p["projected_wall_seconds"]) and p["missing_rates"] == []  # twice the projected wall time at six workers
     longest = max(262144 * wall[("T-OQ", 1024)], 524288 * wall[("F-OQ", 4096)], 524288 * wall[("T-OQ", 4096)])
@@ -144,7 +144,8 @@ def test_frozen_round_trip_the_caps_table_and_the_calibration_snapshots() -> Non
     with pytest.raises(budget.CapMissing):
         budget.cap_for(table, "train", core.Plan(seed_block_draws=(), unit=16))
     cal_cell = next(c for c in core.load_search_cells() if c.arm == "F-OQ" and c.slots == 1024 and c.draw == 1)
-    assert calibrate.calibration_snapshots(cal_cell) == tuple(sorted({512 * 2**k for k in range(0, 10)} | set(core.load_candidates("8K/1K")) | {c // 2 for c in core.load_candidates("8K/1K")}))
+    first = core.first_search_candidates("8K/1K")  # the first search's cell (ceiling 262,144) is read at its own five candidates (section 25.15)
+    assert calibrate.calibration_snapshots(cal_cell) == tuple(sorted({512 * 2**k for k in range(0, 10)} | set(first) | {c // 2 for c in first}))
     dense = next(c for c in core.dense_rate_cells({2048: 8192, 8192: 8192, 32768: 8192}) if c.slots == 1024 and c.lr == 0.1 and c.draw == 1)
     assert calibrate.calibration_snapshots(dense) == (4096, 8192, 16384, 32768, 65536)  # readout / 2^k for the tie walk
     assert calibrate.calibration_snapshots(next(c for c in core.row_u_p_cells() if c.arm == "R2" and c.draw == 1 and c.facts == 2048)) == (8192, 16384, 32768)

@@ -72,6 +72,7 @@ def calibration_snapshots(cell: core.Cell, unit: int | None = None) -> tuple[int
         name = core.cell_name(*key)
         grid = {base // 16 * 2**k for k in range(0, 12) if base // 16 >= 1}
         cands = core.load_candidates(name, core.U_P if base == core.U_P else base)
+        cands = tuple(c for c in cands if c <= top)  # a first-search run (ceiling 262,144 / 524,288) is read at its own candidates only; an extension run (section 25.15) at all six
         marks = {*grid, *cands, *(c // 2 for c in cands)}
         return tuple(sorted(m for m in marks if 1 <= m <= top))
     if cell.arm in ("F-OQ", "R2"):
@@ -228,8 +229,10 @@ def _read_or_none(run_dir: Path, cell: core.Cell) -> tuple[dict[int, dict[str, C
         return None, f"no evaluation record: {exc}"
 
 
-def _views_of_arm(run_dir: Path, arm: str, facts: int, slots: int, unit: int) -> tuple[dict[tuple[int, str], C.View] | None, dict[int, str]]:
-    cells = [c for c in core.load_search_cells(unit) if c.arm == arm and (c.facts, c.slots) == (facts, slots)]
+def _views_of_arm(run_dir: Path, arm: str, facts: int, slots: int, unit: int, *, extension: bool = False) -> tuple[dict[tuple[int, str], C.View] | None, dict[int, str]]:
+    """The four views (two draws x two panels) of an arm's load-search runs at a cell: the first search's (default) or the extension's (section 25.15)."""
+    source = core.load_extension_cells(unit) if extension else core.load_search_cells(unit)
+    cells = [c for c in source if c.arm == arm and (c.facts, c.slots) == (facts, slots)]
     views: dict[tuple[int, str], C.View] = {}
     notes: dict[int, str] = {}
     for c in cells:
@@ -267,18 +270,18 @@ def _failing_candidates(views: Mapping[tuple[int, str], C.View] | None, candidat
     return out
 
 
-def finalize_load_and_row_up(run_dir: Path, *, unit: int = core.U_P, dry: bool = False) -> dict[str, Any]:
-    """Items 0b and 1 applied to the finished records: U_L per loaded cell (with the fixed outcomes), U_L of 2K/256 or its absence, U_P per row, and the list of returns. A run that is missing,
-    failed or stopped at its item cap is an input (no U_L). Nothing is decided while runs are in progress: this reads the finished record."""
+def _load_block(run_dir: Path, unit: int, *, extension: bool) -> tuple[dict[str, Any], list[str]]:
+    """U_L of each loaded cell (with the fixed outcomes of item 0b) from the first search's runs over its five candidates (``extension`` False) or from the extension's runs alone over the whole
+    six-candidate ladder (``extension`` True, section 25.15 point 3), and the returns. A run that is missing, failed or stopped at its item cap is an input (no U_L)."""
     load: dict[str, Any] = {}
     returns: list[str] = []
     for facts, slots in core.LOADED_CELLS:
         name = core.cell_name(facts, slots)
-        cands = core.load_candidates(name, unit)
+        cands = core.load_candidates(name, unit) if extension else core.first_search_candidates(name, unit)
         per_arm: dict[str, Any] = {}
         u_l: dict[str, int | None] = {}
         for arm in ("F-OQ", "T-OQ"):
-            views, notes = _views_of_arm(run_dir, arm, facts, slots, unit)
+            views, notes = _views_of_arm(run_dir, arm, facts, slots, unit, extension=extension)
             u_l[arm] = arm_u_l(views, cands)
             per_arm[arm] = {"u_l": u_l[arm], "run_notes": notes, "candidates": list(cands), "failed_conditions": [] if u_l[arm] is not None else _failing_candidates(views, cands)}
         out = cell_outcome(u_l["F-OQ"], u_l["T-OQ"])
@@ -292,6 +295,13 @@ def finalize_load_and_row_up(run_dir: Path, *, unit: int = core.U_P, dry: bool =
         load[name] = {**out, "arms": per_arm}
         if out["action"] == RETURN_TO_LEAD:
             returns.append(f"{name}: {NOT_LOADED_WITHIN_CEILING} (F-OQ has no U_L); the record returns to the human lead before the freeze")
+    return load, returns
+
+
+def finalize_load_and_row_up(run_dir: Path, *, unit: int = core.U_P, dry: bool = False) -> dict[str, Any]:
+    """Items 0b and 1 applied to the finished records (the FIRST load search): U_L per loaded cell (with the fixed outcomes), U_L of 2K/256 or its absence, U_P per row, and the list of returns. A run
+    that is missing, failed or stopped at its item cap is an input (no U_L). Nothing is decided while runs are in progress: this reads the finished record."""
+    load, returns = _load_block(run_dir, unit, extension=False)
     sat_views, sat_notes = _views_of_arm(run_dir, "F-OQ", *core.SATURATION_ONLY_CELL, unit)
     sat_cands = core.load_candidates(core.SATURATION_CELL_NAME, unit)
     sat = saturation_cell_outcome(arm_u_l(sat_views, sat_cands))
@@ -337,6 +347,67 @@ def finalize_load_and_row_up(run_dir: Path, *, unit: int = core.U_P, dry: bool =
                 substituted.append(f"u_p row {row_name}")
         returns = []
     return core.jsonable({"load": load, "saturation_256": sat, "row_u_p": rows, "returns_to_lead": returns, "unit": unit, "dry_substituted": substituted})
+
+
+def compare_with_first_search(run_dir: Path, unit: int = core.U_P) -> dict[str, Any]:
+    """Section 25.15 point 3: for every arm, loaded cell, draw and panel and every snapshot that the first search's run and the extension's run share, the first run's i (bits per fact at that
+    snapshot, ``PanelObs.i``), the new run's i and the absolute difference, and the largest difference overall. The runs are expected to be identical at the shared snapshots; any difference is
+    reported, never smoothed. A run that cannot be read is listed and its views are left out."""
+    first = {(c.arm, c.facts, c.slots, c.draw): c for c in core.load_search_cells(unit)}
+    out: dict[str, Any] = {}
+    unreadable: list[str] = []
+    biggest: float | None = None
+    for facts, slots in core.LOADED_CELLS:
+        name = core.cell_name(facts, slots)
+        out[name] = {}
+        for arm in ("F-OQ", "T-OQ"):
+            entry: dict[str, Any] = {}
+            for new in (c for c in core.load_extension_cells(unit) if c.arm == arm and (c.facts, c.slots) == (facts, slots)):
+                old = first[(arm, facts, slots, new.draw)]
+                o_first, why_first = _read_or_none(run_dir, old)
+                o_new, why_new = _read_or_none(run_dir, new)
+                if o_first is None or o_new is None:
+                    unreadable += [f"{c.label}: {w}" for c, o, w in ((old, o_first, why_first), (new, o_new, why_new)) if o is None]
+                    continue
+                for panel in core.PANELS:
+                    snaps: dict[str, Any] = {}
+                    for u in sorted(set(o_first) & set(o_new)):
+                        a, b = o_first[u][panel].i, o_new[u][panel].i
+                        snaps[str(u)] = {"first_i": a, "new_i": b, "abs_difference": abs(a - b)}
+                    top = max((v["abs_difference"] for v in snaps.values()), default=None)
+                    entry[f"d{new.draw}{panel}"] = {"shared_snapshots": len(snaps), "snapshots": snaps, "max_abs_difference": top, "first_run": old.label, "new_run": new.label}
+                    if top is not None and (biggest is None or top > biggest):
+                        biggest = top
+            out[name][arm] = entry
+    return {
+        "i": "bits per fact at the snapshot (the panel's useful count, as in section 8.2), read from each run's own evaluation record", "cells": out, "max_abs_difference_overall": biggest, "unreadable": unreadable,
+        "note": "the runs have the same draws and initialization seeds and differ only in run length; any difference at a shared snapshot is reported as measured",
+    }
+
+
+def finalize_load_extension(run_dir: Path, first_record: Mapping[str, Any], first_record_name: str, first_record_sha256: str, *, unit: int = core.U_P, dry: bool = False) -> dict[str, Any]:
+    """The items record of the extended search (ADR-0021 section 25.15 point 3): U_L per loaded cell from the NEW runs alone over the whole six-candidate ladder with the unchanged rule and cell
+    outcomes of item 0b; ``row_u_p`` and ``saturation_256`` carried over verbatim from the first record (named, with its sha256); the comparison with the first search; and the note that the ceiling was
+    raised once on the human lead's direction. If F-OQ again has no U_L in a cell, the cell returns to the human lead as before; no further candidate is proposed."""
+    load, returns = _load_block(run_dir, unit, extension=True)
+    substituted: list[str] = []
+    if dry:  # the DRY profile's placeholders, as in ``finalize_load_and_row_up``
+        for name, entry in load.items():
+            if entry["u_l"] is None:
+                entry.update(u_l=core.load_candidates(name, unit)[0], action=GRID_STANDS)
+                substituted.append(f"u_l {name}")
+        returns = []
+    rows, sat = first_record["row_u_p"], first_record["saturation_256"]
+    carried = [f"row of {f} facts: {rows[str(f)]['reason']}; the work returns to the human lead before the freeze" for f in core.ROW_FACTS if rows[str(f)].get("action") == RETURN_TO_LEAD]
+    if sat.get("action") == RETURN_TO_LEAD:
+        carried.append(f"2K/256: {sat.get('status')}; the cell returns to the human lead")
+    return core.jsonable({
+        "load": load, "saturation_256": sat, "row_u_p": rows, "returns_to_lead": [*returns, *([] if dry else carried)], "unit": unit, "dry_substituted": [*first_record.get("dry_substituted", []), *substituted],
+        "carried_over": {"blocks": ["row_u_p", "saturation_256"], "from": first_record_name, "sha256": first_record_sha256, "note": "copied verbatim from the first items record; item row-up stands as recorded (section 25.15 point 5)"},
+        "comparison_with_first_search": compare_with_first_search(run_dir, unit),
+        "extension_note": "the load search's ceilings were raised once, after calibration curves were seen (no registered seed observed), on the human lead's direction (ADR-0021 section 25.15): 393,216 at 8K/1K and 786,432 at 32K/4K. "
+        "U_L is read from the 8 new runs alone. A cell whose F-OQ has no U_L is NOT LOADED WITHIN ITS CEILING and returns to the human lead; no further candidate is proposed. Report this wherever S1's capacity result is stated.",
+    })  # fmt: skip
 
 
 def row_u_p_map(items_record: Mapping[str, Any]) -> dict[int, int]:
@@ -437,11 +508,19 @@ def seconds_per_update(run_dir: Path, cells: Sequence[core.Cell]) -> dict[str, A
     return {"training_wall_seconds_per_update": dict(sorted(per.items())), "training_wall_seconds_total": total}
 
 
-def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | None = None) -> dict[str, Any]:
+def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | None = None, extended: bool = False) -> dict[str, Any]:
     """The calibration record (kind ``calibration``): U_L per loaded cell and for 2K/256, U_P per row, H8's annotations, D-OQ's rate per unit, the list of returns, the measured six-worker training seconds
     per update of every calibration configuration and the charged seconds. Recomputed from the raw records; refuses (``TieNeedsLead``) while items 2 and 3 cannot be read because a row has no U_P."""
     dry = unit != core.U_P
     first = finalize_load_and_row_up(run_dir, unit=unit, dry=dry)
+    if extended:  # section 25.15: the load block is the extension's (the first search's row U_P and 2K/256 outcome stand)
+        load, load_returns = _load_block(run_dir, unit, extension=True)
+        if dry:
+            for name, entry in load.items():
+                if entry["u_l"] is None:
+                    entry.update(u_l=core.load_candidates(name, unit)[0], action=GRID_STANDS)
+            load_returns = []
+        first = {**first, "load": load, "returns_to_lead": [*load_returns, *[r for r in first["returns_to_lead"] if r.split(":")[0] not in ("8K/1K", "32K/4K")]]}
     returns = list(first["returns_to_lead"])
     second: dict[str, Any] = {"h8": None, "dense_rates": None, "returns_to_lead": []}
     row_map: dict[int, int] | None = None
@@ -455,7 +534,7 @@ def finalize(run_dir: Path, *, unit: int = core.U_P, charged_seconds: float | No
     return core.jsonable({
         **core.envelope("calibration"), "load": first["load"], "u_l": u_l, "saturation_256": first["saturation_256"], "u_l_256": first["saturation_256"]["u_l"], "row_u_p": first["row_u_p"],
         "toq_predicted_not_loaded": sorted(n for n, v in first["load"].items() if v["toq_predicted_not_loaded"]), "h8": second["h8"], "dense_rates": second["dense_rates"],
-        "h8_undertrained_cells": [] if second["h8"] is None else second["h8"]["undertrained_cells"], "returns_to_lead": returns, "readings": C.READINGS,
+        "h8_undertrained_cells": [] if second["h8"] is None else second["h8"]["undertrained_cells"], "returns_to_lead": returns, "readings": C.READINGS, "load_search": "extended once (ADR-0021 section 25.15)" if extended else "first search",
         "calibration_accuracy_note": "calibration accuracies are reported as calibration, never as results", **cost,
         "charged_seconds": cost["training_wall_seconds_total"] if charged_seconds is None else charged_seconds, "dry": dry, "dry_substituted": first.get("dry_substituted", []),
         "identity": core.code_identity(), "source_hashes": core.source_hashes(), "environment": core.environment(),

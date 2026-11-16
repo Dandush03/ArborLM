@@ -118,6 +118,7 @@ def calibration_label_universe(unit: int) -> frozenset[str]:
     out: set[str] = set()
     for combo in itertools.product(cands, repeat=3):
         out.update(core.labels_of(core.calibration_cells(dict(zip(core.ROW_FACTS, combo, strict=True)), unit)))
+    out.update(core.labels_of(core.load_extension_cells(unit)))  # section 25.15
     return frozenset(out)
 
 
@@ -957,7 +958,16 @@ def cmd_gates(args: argparse.Namespace) -> int:
 
 
 ITEMS_FILE = "calibration_items_load_row_up.json"
-ITEM_GROUPS = (("load", "row-up"), ("h8", "dense"))
+EXT_ITEMS_FILE = "calibration_items_load_ext_row_up.json"  # the items record of the extended search (section 25.15): a NEW file; ITEMS_FILE is kept unchanged
+EXT_CAP_FILE = "calibrate-load-ext-item-cap.json"  # the item cap computed at launch from the timing preview's measured rates (the preview itself is never edited)
+ITEM_GROUPS = (("load", "row-up"), ("h8", "dense"), ("load-ext",))
+EXT_FINALIZE_ITEMS = ("load-ext", "row-up")
+STAGE_ITEMS = {"calibrate-load-row-up": ITEM_GROUPS[0], "calibrate-h8-dense": ITEM_GROUPS[1], "calibrate-load-ext": ITEM_GROUPS[2]}
+
+
+def items_file_of(run_dir: Path) -> Path:
+    """The items record the later steps read: the extended search's when it exists (section 25.15), else the first (U_P of each row is carried over verbatim, so both carry the rows)."""
+    return run_dir / EXT_ITEMS_FILE if (run_dir / EXT_ITEMS_FILE).is_file() else run_dir / ITEMS_FILE
 
 
 def calibration_tasks(args: argparse.Namespace, stage: str, items: Sequence[str], run_dir: Path, caps: Mapping[str, float | None], start: float, row_map: Mapping[int, int] | None, unit: int, only: set[str] | None = None) -> list[pool.Task]:
@@ -988,8 +998,8 @@ def close_stage(args: argparse.Namespace, run_dir: Path, unit: int) -> int:
     Every run with a ``train.json`` keeps its status; every run without one is marked NOT RUN — DRIVER STOPPED. The manifest names who closed the stage and why, and the wall time the records show is
     charged to the ledger (estimated from the records' times). Refused while a driver of this run directory is alive, if the manifest exists, or without ``--closed-by`` and ``--reason``."""
     stage = args.close_stage
-    if stage not in ("calibrate-load-row-up", "calibrate-h8-dense"):
-        raise pool.StageRefused("refused: --close-stage takes calibrate-load-row-up or calibrate-h8-dense")
+    if stage not in STAGE_ITEMS:
+        raise pool.StageRefused(f"refused: --close-stage takes one of {sorted(STAGE_ITEMS)}")
     path = run_dir / stage / "manifest.json"
     if path.exists():
         raise pool.StageRefused(f"refused: {path} exists: the driver finished; nothing to close")
@@ -999,11 +1009,11 @@ def close_stage(args: argparse.Namespace, run_dir: Path, unit: int) -> int:
         raise pool.StageRefused("refused: a process of this run directory is alive: the stage is not closed while its driver or a worker runs")
     row_map = None
     if stage.endswith("h8-dense"):
-        items_path = run_dir / ITEMS_FILE
+        items_path = items_file_of(run_dir)
         if not items_path.is_file():
             raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}")
         row_map = calibrate.row_u_p_map(core.read_record(items_path, "calibration"))
-    cells = core.calibration_cells_of(ITEM_GROUPS[0] if stage.endswith("row-up") else ITEM_GROUPS[1], row_map, unit)
+    cells = core.calibration_cells_of(STAGE_ITEMS[stage], row_map, unit)
     tasks, begun, ended = [], [], []
     for c in cells:
         f = core.cell_dir(run_dir, c.label) / "train.json"
@@ -1025,21 +1035,47 @@ def close_stage(args: argparse.Namespace, run_dir: Path, unit: int) -> int:
     return 0
 
 
+def finalize_extension_items(args: argparse.Namespace, run_dir: Path, unit: int) -> int:
+    """``calibrate --finalize-items load-ext,row-up`` (ADR-0021 section 25.15 point 3): a NEW items record (the first one is kept, never overwritten) with U_L from the extension's 8 runs alone, ``row_u_p`` and
+    ``saturation_256`` carried over verbatim from the first record (pointer and sha256), the comparison with the first search and the note on the raised ceiling. Refused while the extension's stage is
+    incomplete, if the first items record is missing, or if the new record exists."""
+    path = run_dir / EXT_ITEMS_FILE
+    if path.exists():
+        raise pool.StageRefused(f"refused: {path} exists; the rules are applied once")
+    first_path = run_dir / ITEMS_FILE
+    if not first_path.is_file():
+        raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}: the first search is finalized first")
+    try:
+        complete = calibrate.require_stage_complete(run_dir, "calibrate-load-ext", core.calibration_cells_of(("load-ext",), None, unit))
+    except calibrate.NotComplete as exc:
+        raise pool.StageRefused(f"refused: {exc}") from exc
+    first = core.read_record(first_path, "calibration")
+    sha = file_sha256(first_path)
+    rec = calibrate.finalize_load_extension(run_dir, first, first_path.name, sha, unit=unit, dry=bool(tiny(args)))
+    rec["stage_complete"] = {"extension": complete, "first_search": first.get("stage_complete")}
+    core.write_record(path, core.jsonable({**core.envelope("calibration"), **rec, "items": list(EXT_FINALIZE_ITEMS), "dry": bool(tiny(args)), "identity": core.code_identity(), "environment": core.environment()}))
+    print(json.dumps({"items_record": str(path), "returns_to_lead": rec["returns_to_lead"], "u_l": {n: v["u_l"] for n, v in rec["load"].items()}, "max_abs_difference_overall": rec["comparison_with_first_search"]["max_abs_difference_overall"]}))
+    return 0 if not rec["returns_to_lead"] else 1
+
+
 def cmd_calibrate(args: argparse.Namespace) -> int:
     """The calibration of ADR-0021 revision 5 section 10.1 in its fixed order: ``--items load,row-up`` (0b and 1 together on six workers), ``--finalize-items load,row-up`` (the rules applied to the
     finished record: U_L, row U_P, annotations, returns), then ``--items h8,dense`` (2 and 3, at the row U_P just fixed; refused while a return is open), then ``--finalize``. Each run starts once
     from initialization; a failed run or a run stopped at its item cap is kept, never re-run, and is an input to the rules; nothing is decided, stopped or extended from an observed curve while
     runs are in progress. Refuses registered seeds (the mode is calibration), a missing or unmeasured timing preview (nothing starts on an assumed cost) and any cell that is not a calibration cell."""
     args.mode = CALIBRATION
-    if (args.finalize_items or args.finalize or args.close_stage or (args.items and "h8" in args.items)) and not args.run_dir:
+    if (args.finalize_items or args.finalize or args.close_stage or (args.items and ("h8" in args.items or "load-ext" in args.items))) and not args.run_dir:
         raise pool.StageRefused("refused: --run-dir (the calibration directory) is required")
     run_dir = new_run_dir(args, "calibrate")
     unit = unit_of(args)
     if args.close_stage:
         return close_stage(args, run_dir, unit)
     if args.finalize_items:
-        if tuple(x for x in args.finalize_items.split(",") if x) != ITEM_GROUPS[0]:
-            raise pool.StageRefused("refused: --finalize-items takes load,row-up")
+        which = tuple(x for x in args.finalize_items.split(",") if x)
+        if which == EXT_FINALIZE_ITEMS:
+            return finalize_extension_items(args, run_dir, unit)
+        if which != ITEM_GROUPS[0]:
+            raise pool.StageRefused("refused: --finalize-items takes load,row-up or load-ext,row-up")
         path = run_dir / ITEMS_FILE
         if path.exists():
             raise pool.StageRefused(f"refused: {path} exists; the rules are applied once")
@@ -1056,9 +1092,10 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         path = run_dir / "calibration.json"
         if path.exists():
             raise pool.StageRefused(f"refused: {path} exists")
-        items_path = run_dir / ITEMS_FILE
+        items_path = items_file_of(run_dir)
         if not items_path.is_file():
             raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}: finalize items load,row-up first")
+        extended = items_path.name == EXT_ITEMS_FILE
         items_rec = core.read_record(items_path, "calibration")
         complete = [items_rec.get("stage_complete")]
         if not items_rec["returns_to_lead"]:
@@ -1066,14 +1103,16 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
                 complete.append(calibrate.require_stage_complete(run_dir, "calibrate-h8-dense", core.calibration_cells_of(ITEM_GROUPS[1], calibrate.row_u_p_map(items_rec), unit)))
             except calibrate.NotComplete as exc:
                 raise pool.StageRefused(f"refused: {exc}") from exc
-        record = calibrate.finalize(run_dir, unit=unit, charged_seconds=charged_for_calibration(args, run_dir))
+        record = calibrate.finalize(run_dir, unit=unit, charged_seconds=charged_for_calibration(args, run_dir), extended=extended)
         record["stage_complete"] = complete
         core.write_record(path, record)
         print(json.dumps({"calibration": str(path), "returns_to_lead": record["returns_to_lead"], "charged_seconds": record["charged_seconds"]}))
         return 0 if not record["returns_to_lead"] else 1
     items = tuple(x for x in (args.items or "").split(",") if x)
     if items not in ITEM_GROUPS:
-        raise pool.StageRefused("refused: --items is load,row-up (items 0b and 1) or h8,dense (items 2 and 3), in that order; or --finalize-items / --finalize")
+        raise pool.StageRefused("refused: --items is load,row-up (items 0b and 1), load-ext (the one extension of the load search, section 25.15) or h8,dense (items 2 and 3), in that order; or --finalize-items / --finalize")
+    if items == ITEM_GROUPS[2] and not args.run_dir:
+        raise pool.StageRefused("refused: --run-dir (the calibration directory) is required for load-ext")
     if not args.timing:
         raise pool.StageRefused("refused: --timing (the timing preview record of item 0a) is required: no item is started on an assumed cost")
     if not Path(args.timing).is_file():
@@ -1083,7 +1122,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         raise pool.StageRefused("refused: --timing is not a measured timing preview (item 0a)")
     row_map: dict[int, int] | None = None
     if "h8" in items:
-        items_path = run_dir / ITEMS_FILE
+        items_path = items_file_of(run_dir)
         if not items_path.is_file():
             raise pool.StageRefused(f"refused: no {ITEMS_FILE} in {run_dir}: finalize items load,row-up first")
         items_rec = core.read_record(items_path, "calibration")
@@ -1117,6 +1156,15 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     caps = {i: proj[i]["cap_seconds"] for i in items}
     if not tiny(args) and any(v is None for v in caps.values()):
         raise pool.StageRefused(f"refused: the timing preview has no rate for {[proj[i]['missing_rates'] for i in items]}: no item is started on an assumed cost")
+    if items == ITEM_GROUPS[2] and only is None:  # the cap is computed here from the preview's measured rates and written to a NEW file; the preview is never edited
+        cap_path = run_dir / EXT_CAP_FILE
+        if cap_path.exists():
+            raise pool.StageRefused(f"refused: {cap_path} exists: the extension is made once")
+        write_json(cap_path, {
+            **core.envelope("calibration_item_cap"), "item": "load-ext", "stage": stage, "cap_seconds": caps["load-ext"], "projection": proj["load-ext"], "workers": core.WORKERS, "headroom": core.HEADROOM, "unit": unit,
+            "timing_preview": str(Path(args.timing)), "timing_preview_sha256": file_sha256(Path(args.timing)), "rule": "twice the projected completion time of the item's last run under the pooled dispatch order, start-up + training + evaluation (the rule of `budget.item_projection`)",
+            "utc": _utc(), "note": "ADR-0021 section 25.15 point 3",
+        })  # fmt: skip
     start = time.time()
     if only is not None:
         moved = []
@@ -1690,6 +1738,8 @@ def cmd_dry(args: argparse.Namespace) -> int:
         ("timing-preview", ["timing", *shared, "--mode", REHEARSAL, "--run-dir", str(cal), "--preview"]),
         ("calibrate-load-row-up", ["calibrate", *shared, "--run-dir", str(cal), "--items", "load,row-up", "--timing", str(cal / "timing_preview.json")]),
         ("calibrate-finalize-items", ["calibrate", *shared, "--run-dir", str(cal), "--finalize-items", "load,row-up"]),
+        ("calibrate-load-ext", ["calibrate", *shared, "--run-dir", str(cal), "--items", "load-ext", "--timing", str(cal / "timing_preview.json")]),
+        ("calibrate-finalize-ext", ["calibrate", *shared, "--run-dir", str(cal), "--finalize-items", "load-ext,row-up"]),
         ("calibrate-h8-dense", ["calibrate", *shared, "--run-dir", str(cal), "--items", "h8,dense", "--timing", str(cal / "timing_preview.json")]),
         ("calibrate", ["calibrate", *shared, "--run-dir", str(cal), "--finalize"]),
         ("gates", ["gates", *shared, "--mode", REHEARSAL, "--run-dir", str(reh)]),
@@ -1709,7 +1759,7 @@ def cmd_dry(args: argparse.Namespace) -> int:
     for name, argv in steps:
         code = main(argv)
         summary["stages"][name] = code
-        if name in ("generate", "generate-rehearsal", "timing-preview", "calibrate-finalize-items", "calibrate", "gates", "project", "freeze") and code != 0:
+        if name in ("generate", "generate-rehearsal", "timing-preview", "calibrate-finalize-items", "calibrate-finalize-ext", "calibrate", "gates", "project", "freeze") and code != 0:
             break
     analysis_path = run_dir / "analysis.json"
     if analysis_path.is_file():
@@ -1756,8 +1806,8 @@ def _common_parser() -> argparse.ArgumentParser:
     p.add_argument("--restore-split", type=int, default=16)
     p.add_argument("--results-dir", default=None)
     p.add_argument("--updates", type=int, default=None, help="rehearsal updates")
-    p.add_argument("--items", default=None, help="calibrate: load,row-up (items 0b and 1) or h8,dense (items 2 and 3)")
-    p.add_argument("--finalize-items", default=None, help="calibrate: load,row-up: apply the rules of items 0b and 1 to the finished record")
+    p.add_argument("--items", default=None, help="calibrate: load,row-up (items 0b and 1), load-ext (the one extension of the load search, section 25.15) or h8,dense (items 2 and 3)")
+    p.add_argument("--finalize-items", default=None, help="calibrate: load,row-up (the first search) or load-ext,row-up (the extension; writes a new record): apply the rules of items 0b and 1 to the finished record")
     p.add_argument("--close-stage", default=None, help="calibrate: write the manifest of a stage whose driver died, from the records that exist (needs --closed-by and --reason)")
     p.add_argument("--closed-by", default=None, help="calibrate --close-stage / --relaunch: who")
     p.add_argument("--reason", default=None, help="calibrate --close-stage: why")

@@ -210,8 +210,13 @@ TRANSITIONS = ("1K→4K", "4K→16K")
 SATURATION_CELLS: dict[int, tuple[int, int]] = {256: SATURATION_ONLY_CELL, 1024: LOADED_CELLS[0], 4096: LOADED_CELLS[1]}
 SATURATION_ARMS = ("F-OQ", "F-OQ-IVF", "T-OQ", "H8")
 SATURATION_PAIRS: dict[str, tuple[tuple[int, int], ...]] = {"F-OQ": ((256, 1024), (1024, 4096)), "F-OQ-IVF": ((1024, 4096),), "T-OQ": ((1024, 4096),), "H8": ((1024, 4096),)}
-# section 10.1 item 0b: candidates of the load search by cell name (the last is the ceiling); 2K/256 uses 8K/1K's
+# section 10.1 item 0b, with section 25.15: candidates of the load search by cell name (the last is the ceiling). 8K/1K and 32K/4K gained one candidate each (the human lead's one-time extension,
+# 393,216 and 786,432); 2K/256 keeps its own five candidates and its ceiling (it is not rerun) and takes nothing from 8K/1K's.
 LOAD_CANDIDATES: dict[str, tuple[int, ...]] = {
+    "8K/1K": (65536, 98304, 131072, 196608, 262144, 393216), "32K/4K": (131072, 196608, 262144, 393216, 524288, 786432), "2K/256": (65536, 98304, 131072, 196608, 262144),
+}  # fmt: skip
+# the first load search (section 10.1 item 0b as first written; its 22-cell stage ran in the calibration directory under these ceilings: 262,144 at 8K/1K, 524,288 at 32K/4K); kept to read and compare it
+FIRST_SEARCH_CANDIDATES: dict[str, tuple[int, ...]] = {
     "8K/1K": (65536, 98304, 131072, 196608, 262144), "32K/4K": (131072, 196608, 262144, 393216, 524288), "2K/256": (65536, 98304, 131072, 196608, 262144),
 }  # fmt: skip
 LOADED_SNAPSHOT_MARKS = (32768, 49152)  # section 5.4: a loaded cell also has snapshots here and at every candidate up to U_L (and every candidate's half)
@@ -232,6 +237,15 @@ def load_candidates(name: str, unit: int = U_P) -> tuple[int, ...]:
 
 def load_ceiling(name: str, unit: int = U_P) -> int:
     return max(load_candidates(name, unit))
+
+
+def first_search_candidates(name: str, unit: int = U_P) -> tuple[int, ...]:
+    """The candidates of the first load search (section 25.15 point 1 leaves 2K/256's as they are)."""
+    return tuple(scaled(c, unit) for c in FIRST_SEARCH_CANDIDATES[name])
+
+
+def first_search_ceiling(name: str, unit: int = U_P) -> int:
+    return max(first_search_candidates(name, unit))
 
 
 def loaded_marks(name: str, run: int, unit: int = U_P) -> tuple[int, ...]:
@@ -565,7 +579,7 @@ DENSE_WALK_STEPS = 4  # the tie-walk looks at readout/2, /4, /8, /16
 DENSE_UNITS: dict[str, tuple[tuple[int, int], int | None]] = {
     "4096": ((8192, 4096), 8192), "16384": ((32768, 16384), 32768), "8K/1K": ((8192, 1024), None), "32K/4K": ((32768, 4096), None),
 }  # fmt: skip
-CALIBRATION_ITEMS = ("load", "row-up", "h8", "dense")
+CALIBRATION_ITEMS = ("load", "row-up", "h8", "dense", "load-ext")  # load-ext: the one-time extension of the load search (section 25.15)
 
 
 def row_u_p_candidates(unit: int = U_P) -> tuple[int, ...]:
@@ -577,16 +591,25 @@ def _row_map(row_u_p: Mapping[int, int] | None, unit: int) -> dict[int, int]:
 
 
 def load_search_cells(unit: int = U_P) -> list[Cell]:
-    """Item 0b: F-OQ and T-OQ at 8K/1K and 32K/4K, and F-OQ alone at 2K/256, on both calibration draws, each once to its ceiling (262,144 at 8K/1K and 2K/256, 524,288 at 32K/4K): 10 runs.
-    Initialization seed 2191 on draw 1 and 2193 on draw 2."""
+    """Item 0b, the FIRST search: F-OQ and T-OQ at 8K/1K and 32K/4K, and F-OQ alone at 2K/256, on both calibration draws, each once to its ceiling (262,144 at 8K/1K and 2K/256, 524,288 at 32K/4K):
+    10 runs. Initialization seed 2191 on draw 1 and 2193 on draw 2. These are the cells that ran in the calibration directory; their ceilings are ``FIRST_SEARCH_CANDIDATES``'."""
     out = []
     for d in CALIBRATION_DRAWS:
         init = CALIBRATION_INIT_SEEDS_BY_DRAW[d]
         for f, n in LOADED_CELLS:
             for arm in ("F-OQ", "T-OQ"):
-                out.append(make_cell("CAL", arm, f, n, d, init, u_p=unit, run_updates=load_ceiling(cell_name(f, n), unit)))
+                out.append(make_cell("CAL", arm, f, n, d, init, u_p=unit, run_updates=first_search_ceiling(cell_name(f, n), unit)))
         out.append(make_cell("CAL", "F-OQ", *SATURATION_ONLY_CELL, d, init, u_p=unit, run_updates=load_ceiling(SATURATION_CELL_NAME, unit)))
     return out
+
+
+def load_extension_cells(unit: int = U_P) -> list[Cell]:
+    """Section 25.15 point 3: F-OQ and T-OQ at 8K/1K and 32K/4K on both calibration draws, each once from initialization to the extended ceiling (393,216 at 8K/1K, 786,432 at 32K/4K): 8 runs on the
+    same draws and initialization seeds as the first search. The run length is part of the label (``y``), so no label equals one of the first search's. 2K/256 is not rerun."""
+    return [
+        make_cell("CAL", arm, f, n, d, CALIBRATION_INIT_SEEDS_BY_DRAW[d], u_p=unit, run_updates=load_ceiling(cell_name(f, n), unit))
+        for d in CALIBRATION_DRAWS for f, n in LOADED_CELLS for arm in ("F-OQ", "T-OQ")
+    ]  # fmt: skip
 
 
 def row_u_p_cells(unit: int = U_P) -> list[Cell]:
@@ -641,6 +664,8 @@ def calibration_cells_of(items: Iterable[str], row_u_p: Mapping[int, int] | None
         out += load_search_cells(unit)
     if "row-up" in names:
         out += row_u_p_cells(unit)
+    if "load-ext" in names:
+        out += load_extension_cells(unit)
     if "h8" in names:
         out += h8_report_cells(row_u_p, unit)
     if "dense" in names:
@@ -654,9 +679,9 @@ CALIBRATION_RUNS = 70
 def _check_calibration_counts() -> None:
     if len(calibration_cells()) != CALIBRATION_RUNS or len(load_search_cells()) != 10 or len(row_u_p_cells()) != 12 or len(h8_report_cells()) != 8 or len(dense_rate_cells()) != 40:
         raise ImportError("P10S1 calibration counts differ from section 10.1 (70 runs: 10 + 12 + 8 + 40)")
-    labels = labels_of(calibration_cells())
-    if len(set(labels)) != len(labels):
-        raise ImportError("P10S1 calibration labels are not unique")
+    labels = labels_of([*calibration_cells(), *load_extension_cells()])
+    if len(load_extension_cells()) != 8 or len(set(labels)) != len(labels):
+        raise ImportError("P10S1 calibration labels are not unique, or the load-search extension is not 8 runs (section 25.15)")
 
 
 _check_calibration_counts()
@@ -1179,7 +1204,7 @@ STAGE_CODES: dict[str, str] = {
 }  # fmt: skip
 RECORD_KINDS = (
     "train", "snapshot", "eval", "baseline", "stage_manifest", "calibration", "rehearsal", "analysis", "data_manifest", "gates", "draw_plan", "projection", "ledger",
-    "timing", "throughput", "simulation", "freeze_plan", "stage_caps", "mc_plan",
+    "timing", "throughput", "simulation", "freeze_plan", "stage_caps", "mc_plan", "calibration_item_cap",
 )  # fmt: skip
 PANELS = ("A", "B")
 PANEL_STREAM = {"A": "panel_a", "B": "panel_b"}

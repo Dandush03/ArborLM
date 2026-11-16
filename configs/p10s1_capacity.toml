@@ -37,11 +37,11 @@ r2_cells = [[2048, 4096], [8192, 16384], [32768, 32768]]
 row_facts = [2048, 8192, 32768]
 
 [calibration]
-load_candidates_8k_1k = [65536, 98304, 131072, 196608, 262144]
-load_candidates_32k_4k = [131072, 196608, 262144, 393216, 524288]
+load_candidates_8k_1k = [65536, 98304, 131072, 196608, 262144, 393216]
+load_candidates_32k_4k = [131072, 196608, 262144, 393216, 524288, 786432]
 load_candidates_2k_256 = [65536, 98304, 131072, 196608, 262144]
-load_ceiling_8k_1k = 262144
-load_ceiling_32k_4k = 524288
+load_ceiling_8k_1k = 393216
+load_ceiling_32k_4k = 786432
 load_ceiling_2k_256 = 262144
 pass_rule = "a view passes at U if i*(U) - i*(U/2) <= plateau_max, i*(U/2) >= plateau_floor_i and i*(U) <= loaded_i_max; U_L is the smallest candidate that passes at its predecessor and at itself (two consecutive candidates)"
 row_up_run = 32768

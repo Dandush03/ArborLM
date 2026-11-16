@@ -393,7 +393,7 @@ def dry(tmp_path_factory: pytest.TempPathFactory) -> Iterator[dict[str, Any]]:
 def test_dry_runs_every_stage_in_order(dry: dict[str, Any]) -> None:
     s = dry["summary"]
     assert dry["code"] == 0 and s["status"] == "COMPLETE" and s["report"] and Path(s["report"]).is_file()
-    assert sorted(s["stages"]) == sorted(["generate", "generate-rehearsal", "timing-preview", "calibrate-load-row-up", "calibrate-finalize-items", "calibrate-h8-dense", "calibrate", "gates", "rehearse", "timing", "synthetic", "project", "freeze", "gates-run", "train", "evaluate", "throughput", "simulate", "analyze", "report"])
+    assert sorted(s["stages"]) == sorted(["generate", "generate-rehearsal", "timing-preview", "calibrate-load-row-up", "calibrate-finalize-items", "calibrate-load-ext", "calibrate-finalize-ext", "calibrate-h8-dense", "calibrate", "gates", "rehearse", "timing", "synthetic", "project", "freeze", "gates-run", "train", "evaluate", "throughput", "simulate", "analyze", "report"])
     assert all(code == 0 for code in s["stages"].values())  # the DRY profile proceeds on placeholders where a rule gives nothing (the calibration record says so)
     assert s["saturation"]
     assert "DRY" in s["banner"] and s["capacity"] in (C.CAPACITY_INCONCLUSIVE, C.CAPACITY_NOT_TESTED, C.CAPACITY_NEGATIVE, C.CAPACITY_POSITIVE)
@@ -442,7 +442,7 @@ def test_dry_calibration_covers_all_its_cells_and_leaves_decisions_to_the_lead(d
     assert set(cal["dense_rates"]) == set(core.DENSE_UNITS) and set(cal["u_l"]) == {"8K/1K", "32K/4K"} and set(cal["row_u_p"]) == {"2048", "8192", "32768"} and cal["u_l_256"] is not None
     assert cal["training_wall_seconds_per_update"] and cal["charged_seconds"] > 0 and cal["returns_to_lead"] == []
     preview = core.read_record(dry["cal"] / "timing_preview.json", "timing")
-    assert preview["preview"] is True and preview["status"] == "MEASURED" and set(preview["item_caps"]) == {"load", "row-up", "h8", "dense"} and len(preview["wall_per_update"]) == 16
+    assert preview["preview"] is True and preview["status"] == "MEASURED" and set(preview["item_caps"]) == {"load", "row-up", "h8", "dense", "load-ext"} and len(preview["wall_per_update"]) == 16
     assert len(list((dry["cal"] / "preview").glob("*.json"))) == 16 + len(preview["evaluation_seconds"]) and preview["startup_seconds"] > 0  # every measured configuration went through the whitelist validator
 
 
