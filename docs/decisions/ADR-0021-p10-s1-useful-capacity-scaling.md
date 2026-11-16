@@ -1229,3 +1229,28 @@ The re-check is `docs/reviews/p10s1-implementation-audit-2026-11-15/rev5/recheck
 2. **A driver that dies before writing its stage manifest.** A `close-stage` command writes the manifest from the records that exist, marks every run without a record as NOT RUN — DRIVER STOPPED, and names who closed it and why. The runs so marked may be launched once more on the same calibration draws and seeds (calibration draws are not registered seeds); the relaunch is recorded and charged. A second failure returns to the lead.
 3. **Evidence that P10-S0's training has finished.** The timing preview, the calibration, the isolated timing, the rehearsal and the freeze each require the manifest of S0's last due registered training stage, validated as P10S0's registered stage manifest with status COMPLETE (and S0's record of the probe's refusal where the WX manifest is given). An empty, incomplete or foreign file is refused. The live-process check stays as well.
 - **Before the freeze:** M5 (no test may fail, or generate a registered seed, with the config as it stands at the freeze), m8, m4, the remainder of m3 and m5, and the two stale-text minors are closed. m10 and m12 stand.
+
+### 25.15 The first load search returns to the human lead; the human lead extends the search once (2026-11-16 UTC)
+
+**The record that returned.** Calibration items `load` and `row-up` ran complete in `experiments/P10S1C5c-calibration-20261116` (22 cells, 6,688 s charged; timing preview MEASURED on its third load reading, 0.99). `calibration_items_load_row_up.json` returns both loaded cells as NOT LOADED WITHIN ITS CEILING (§10.1 item 0b):
+
+| Cell | F-OQ passes on all four views at | F-OQ fails at | What fails |
+|---|---|---|---|
+| 8K/1K | 131,072 and 262,144 (the ceiling) | 65,536, 98,304, 196,608 | at 196,608 the gain over the last doubling is 0.093 / 0.108 / 0.124 / 0.103 bits per fact (limit 0.10) |
+| 32K/4K | 262,144 and 524,288 (the ceiling) | 131,072, 196,608, 393,216 | at 393,216 the gain is 0.115 / 0.104 on draw 1 (draw 2 passes) |
+
+No two consecutive candidates pass, so F-OQ has no U_L in either cell. i* of F-OQ at the ceiling is 2.33–2.35 bits per fact at 8K/1K and 2.22–2.26 at 32K/4K; no view is above 4.0 and every view is above the floor. T-OQ has U_L = 262,144 at 32K/4K and none at 8K/1K. No run failed or was stopped by a cap. Also from the same record, by their own fixed rules and with no return: U_P = 8,192 / 8,192 / 16,384 for the rows of 2,048 / 8,192 / 32,768 facts; 2K/256 is `256 NOT MEASURED — NOT FULL WITHIN CEILING` (the cell is not run; 30 configurations, 150 cells).
+
+**The choice put to the human lead.** (1) one more candidate per cell with every rule unchanged, (2) run with both transitions fixed as CAPACITY NOT TESTED, (3) stop S1. The lead recommended (1) and said that it raises a ceiling after calibration curves were seen (no registered seed observed), that it may fail again, and that a U_L of 786,432 lengthens the registered run and may bring the fixed cuts under C_max. The human lead, verbatim:
+
+> Extend search once
+
+**What is fixed by this direction, before any extended run exists:**
+
+1. The candidates become 8K/1K: 65,536, 98,304, 131,072, 196,608, 262,144, **393,216**; 32K/4K: 131,072, 196,608, 262,144, 393,216, 524,288, **786,432**. Each new candidate continues the existing ladder (×1.5 of the last). The ceilings are 393,216 and 786,432. 2K/256 keeps its candidates and its recorded outcome; it is not rerun.
+2. Nothing else changes: the plateau limit 0.10, the floor 0.4731, the 4.0-bit limit, two consecutive passing candidates on all four views, the cell outcomes of item 0b, every `[thresholds]` entry, C_max = 36 hours and the three fixed cuts.
+3. Both arms (F-OQ, T-OQ) of both cells run again on both calibration draws, each once from its initialization to the new ceiling with snapshots at every candidate and every candidate's half: 8 runs, under an item cap computed from the measured preview rates by the rule already used. The first search's runs and record are kept unchanged. U_L is read from the new runs alone over the whole ladder; for each shared snapshot the new run's i is compared with the first run's and any difference is reported (the runs are expected to be identical there).
+4. The extension is made **once**. If F-OQ again has no U_L in a cell, that cell is NOT LOADED WITHIN ITS CEILING and returns to the human lead; the lead does not propose a further candidate.
+5. Items `row-up` stands as recorded. Items `h8` and `dense` run after the extended search is finalized.
+
+This is a ceiling raised after calibration data was seen, on the human lead's direction; it is reported as such wherever S1's capacity result is stated. `Astra review: NOT_PERFORMED`.
