@@ -1,0 +1,19 @@
+1 read vs definition: max abs diff 2.94e-09 selection identical True tied query selection [3, 7, 32, 28]
+2 init: keys std 0.01997 mean 1.97e-04 values std 0.01999 gate 0.0 stage params 2424833 ADR 2,424,833: True
+2 init order keys-then-values reproduced: True
+3 MAF: first-stage keys/values/gate bit-identical after 8 AdamW updates: True | appended rows changed: [True, True, True] | trainable params 1153 = 1153
+3 MAF one store, one top-8 over all rows: stages 2 rows 48
+3 M-ii: first-stage params changed: [True, True, True] rows/update 8 replay 4
+3 M-seq: rows 24 (no growth)
+3 student tensors unchanged after all training: True | any student param requires_grad: False
+4 G5c gate isolation bit-identical: True
+4 G5c with a non-finite appended value (outside 'arbitrary finite'): isolated
+5 LoRA rank 42 params 2419200
+5 LoRA rank 84 params 4838400
+5 store per stage 2424833 | LoRA-42 rel diff -0.2323% | LoRA-84 vs 2 stages (M-joint 2N rows + 1 gate) -0.2323%
+5 LoRA A bound 1/sqrt(576) = 0.041667 max|A| 0.041667 | B nonzeros 0 | scale 1.0 | A shapes (42, 576) (42, 576) | B shapes (576, 42) (192, 42) | params 2419200
+5 untrained LoRA changes nothing (bit): True
+5 LoRA on route none (no reads): bit-identical to student: True
+6 E-table params 1152577 (2,001 x 576 + 1) | std 0.02000 | gate 0.0 | vs store stage 0.475x
+7 code_perm keeps marker and first task: [(1, 'A', 3), (2, 'B', 9), (3, 'B', 10)] perm [6, 0, 8, 9, 2, 4, 1, 5, 3, 7]
+7 value_perm stages permuted: [1] | marker_only: [(3, 'B', 10)]

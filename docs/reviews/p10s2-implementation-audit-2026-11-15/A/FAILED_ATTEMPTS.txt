@@ -1,0 +1,5 @@
+Failed checker attempts (kept; auditor's own mistakes)
+
+1. check_seeds.py, first run: KeyError 220901 at the "partition-side names" line. Cause: my comprehension
+   indexed core.partition_seeds() (name -> seed) by seed instead of by name. Auditor's bug, not the implementation's.
+   Fixed by comparing names[name] == seed. The lines printed before the error (seed sets equal to the ADR) stand.

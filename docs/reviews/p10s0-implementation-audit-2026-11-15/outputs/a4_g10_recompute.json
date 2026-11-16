@@ -1,0 +1,115 @@
+{
+ "hashes": {
+  "results.json": "9b2ca547af3b288e41524d2b79d3612f9f60fcbf5284080b32b7298aa1531b48",
+  "OUTCOME.md": "66946b873c53af22ff8435e1b37c0c185310434a4bc4c19cbef195ab5fcca1c6",
+  "calibration.json": "ad5d7ee29ccd3f0be8b9875afdd957f35901e0d80f4babca6917916d0cf552cf"
+ },
+ "calibration_prefix_matches_adr": true,
+ "record_hashes_match": {
+  "results.json": true,
+  "OUTCOME.md": true,
+  "calibration.json": true
+ },
+ "steps": [
+  [
+   "1 calibration",
+   "exists; lambda=1.0 u_pre=2048.0 k0/N=0.125 mu=1.0"
+  ],
+  [
+   "2 outcome row",
+   "ADDRESSING-RELIABLE (row 4)"
+  ],
+  [
+   "3 Stage 2",
+   "COMPLETE"
+  ],
+  [
+   "4 carried",
+   "A0 -> c4=None"
+  ]
+ ],
+ "mapping_c4": null,
+ "mapping_printed": "FOURTH ARM: NONE — P9-II CARRIED A0 (ALREADY IN S0)",
+ "table_row_text": "ADDRESSING-RELIABLE, carried arm A0 (RELIABLE at 16,384, not at 4,096) — none (already in S0)",
+ "record_mapping_equal": true,
+ "p9ii_table": {
+  "A0 4096": {
+   "class": "UNRELIABLE",
+   "failed": 6,
+   "evaluated": 8,
+   "cells": "4/16",
+   "lm": false
+  },
+  "A1 4096": {
+   "class": "RELIABLE",
+   "failed": 0,
+   "evaluated": 8,
+   "cells": "16/16",
+   "lm": false
+  },
+  "A2 4096": {
+   "class": "FAILS",
+   "failed": 8,
+   "evaluated": 8,
+   "cells": "0/16",
+   "lm": false
+  },
+  "A5-D 4096": {
+   "class": "RELIABLE",
+   "failed": 0,
+   "evaluated": 8,
+   "cells": "16/16",
+   "lm": false
+  },
+  "A0 16384": {
+   "class": "RELIABLE",
+   "failed": 0,
+   "evaluated": 4,
+   "cells": "8/8",
+   "lm": false
+  },
+  "A1 16384": {
+   "class": "UNRELIABLE",
+   "failed": 2,
+   "evaluated": 4,
+   "cells": "6/8",
+   "lm": false
+  },
+  "A2 16384": null,
+  "A5-D 16384": {
+   "class": "RELIABLE",
+   "failed": 0,
+   "evaluated": 4,
+   "cells": "8/8",
+   "lm": false
+  }
+ },
+ "section_3_5_table_reproduced": true,
+ "candidates": [
+  "A5-D",
+  "A1"
+ ],
+ "record_candidates_equal": true,
+ "record_p9ii_classes_equal": {
+  "A0 4096": true,
+  "A0 16384": true,
+  "A1 4096": true,
+  "A1 16384": true,
+  "A2 4096": true,
+  "A2 16384": true,
+  "A5-D 4096": true,
+  "A5-D 16384": true
+ },
+ "strings": {
+  "fourth_arm_string_record==adr": true,
+  "f1_record==adr": true,
+  "f1_adr==OUTCOME.md": true,
+  "fixed_sentence_record==adr": true,
+  "human_lead_words_record==adr": true,
+  "mu": true,
+  "c4": true,
+  "date": true,
+  "calibrated": true
+ },
+ "adr_fourth_arm_string": "FOURTH ARM: A5-D — ADDED BY THE HUMAN LEAD'S DECISION OF 2026-11-15; THE REGISTERED MAPPING GAVE NONE (P9-II CARRIED A0)"
+}

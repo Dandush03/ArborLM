@@ -1,0 +1,152 @@
+{
+ "samples": 4000,
+ "impl_outcomes": {
+  "rung 1": 934,
+  "rung 4": 321,
+  "NOT STARTED: BUDGET": 2437,
+  "rung 2": 308
+ },
+ "mismatches": {
+  "impl": 0,
+  "adr_etable": 20,
+  "adr_recomp": 377
+ },
+ "examples": {
+  "impl": [],
+  "adr_etable": [
+   {
+    "P": 6.373,
+    "own": [
+     "NOT STARTED: BUDGET",
+     72.0
+    ],
+    "impl": [
+     "rung 4",
+     72.0
+    ],
+    "etable_ratio": 2.824,
+    "cal": 12
+   },
+   {
+    "P": 7.189,
+    "own": [
+     "NOT STARTED: BUDGET",
+     72.0
+    ],
+    "impl": [
+     "rung 4",
+     72.0
+    ],
+    "etable_ratio": 2.295,
+    "cal": 4
+   },
+   {
+    "P": 5.209,
+    "own": [
+     "NOT STARTED: BUDGET",
+     72.0
+    ],
+    "impl": [
+     "rung 4",
+     72.0
+    ],
+    "etable_ratio": 1.749,
+    "cal": 4
+   },
+   {
+    "P": 11.035,
+    "own": [
+     "NOT STARTED: BUDGET",
+     72.0
+    ],
+    "impl": [
+     "rung 4",
+     72.0
+    ],
+    "etable_ratio": 1.894,
+    "cal": 12
+   },
+   {
+    "P": 6.511,
+    "own": [
+     "NOT STARTED: BUDGET",
+     72.0
+    ],
+    "impl": [
+     "rung 4",
+     72.0
+    ],
+    "etable_ratio": 2.805,
+    "cal": 12
+   }
+  ],
+  "adr_recomp": [
+   {
+    "P": 6.881,
+    "own": [
+     "rung 1",
+     57.0
+    ],
+    "impl": [
+     "rung 1",
+     56.0
+    ],
+    "etable_ratio": 2.441,
+    "cal": 12
+   },
+   {
+    "P": 13.485,
+    "own": [
+     "rung 1",
+     44.0
+    ],
+    "impl": [
+     "rung 1",
+     43.0
+    ],
+    "etable_ratio": 2.175,
+    "cal": 4
+   },
+   {
+    "P": 4.063,
+    "own": [
+     "rung 1",
+     45.0
+    ],
+    "impl": [
+     "rung 1",
+     44.0
+    ],
+    "etable_ratio": 1.463,
+    "cal": 4
+   },
+   {
+    "P": 13.28,
+    "own": [
+     "rung 1",
+     56.0
+    ],
+    "impl": [
+     "rung 1",
+     55.0
+    ],
+    "etable_ratio": 2.569,
+    "cal": 12
+   },
+   {
+    "P": 11.094,
+    "own": [
+     "rung 1",
+     50.0
+    ],
+    "impl": [
+     "rung 1",
+     49.0
+    ],
+    "etable_ratio": 1.088,
+    "cal": 12
+   }
+  ]
+ },
+ "max_relative_R_increase_from_etable_rule": 0.055121729748909214
+}

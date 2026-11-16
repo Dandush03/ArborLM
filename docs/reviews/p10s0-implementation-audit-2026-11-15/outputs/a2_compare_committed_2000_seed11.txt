@@ -1,0 +1,113 @@
+{
+ "cases": 2000,
+ "seed": 11,
+ "disagreements": 144,
+ "by_kind": {
+  "hypothesis H20-A": 144
+ },
+ "coverage": {
+  "H20-A not supported": 357,
+  "H20-A supported": 1284,
+  "H20-B CONTRADICTED": 675,
+  "H20-B not supported": 931,
+  "H20-B supported": 35,
+  "H20-C CONTRADICTED": 659,
+  "H20-C not supported": 940,
+  "H20-C supported": 42,
+  "H20-D CONTRADICTED": 689,
+  "H20-D not supported": 920,
+  "H20-D supported": 32,
+  "H20-L not supported": 202,
+  "H20-L supported": 382,
+  "H20-O not supported": 145,
+  "H20-O not tested": 1289,
+  "H20-O supported": 207,
+  "H20-Q not supported": 1057,
+  "H20-Q supported": 584,
+  "H20-R not read": 2073,
+  "H20-R not supported": 5515,
+  "H20-R supported": 5540,
+  "H20-S CONTRADICTED": 35,
+  "H20-S not supported": 482,
+  "H20-S supported": 67,
+  "candidate A1": 232,
+  "candidate A5-D": 352,
+  "class FAILS": 1407,
+  "class NOT_EVALUATED": 840,
+  "class RELIABLE": 8271,
+  "class UNRELIABLE": 5892,
+  "committed-P9II row 4 cand A1 q4096 None": 232,
+  "committed-P9II row 4 cand A5-D q4096 None": 352,
+  "committed-P9II row 5 cand None q4096 A1": 262,
+  "committed-P9II row 5 cand None q4096 A5-D": 374,
+  "committed-P9II row 6 cand None q4096 None": 421,
+  "consistency CONSISTENT": 5182,
+  "consistency INCONSISTENT": 6305,
+  "consistency NOT DEFINED (S0 NE)": 576,
+  "consistency SINGLE": 1641,
+  "paired HARMS": 4373,
+  "paired IMPROVES": 4639,
+  "paired ND": 10680,
+  "probe ('COMPLETE', 0)": 35,
+  "probe ('COMPLETE', 1)": 29,
+  "probe ('COMPLETE', 2)": 28,
+  "probe ('COMPLETE', 3)": 67,
+  "probe ('NOT_EVALUATED', None)": 425,
+  "q4096 A1 why FAILS": 32,
+  "q4096 A1 why INCONSISTENT": 34,
+  "q4096 A1 why NOT_EVALUATED": 35,
+  "q4096 A1 why UNRELIABLE": 161,
+  "q4096 A5-D why FAILS": 47,
+  "q4096 A5-D why NOT_EVALUATED": 80,
+  "q4096 A5-D why UNRELIABLE": 247,
+  "row 2": 204,
+  "row 3": 155,
+  "row 4": 584,
+  "row 5": 636,
+  "row 6": 421,
+  "wx DOES NOT PASS": 164,
+  "wx PASSES": 382,
+  "wx PASSES AT 4,096 ONLY": 38
+ }
+}
+first disagreements:
+{"case": 29, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 38, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 40, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 48, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 66, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 71, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 96, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 100, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 109, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 110, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 135, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 140, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 147, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 154, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 230, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 241, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 244, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 263, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 291, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 312, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 331, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 351, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 364, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 385, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 387, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 395, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 399, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 413, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 443, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 448, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 449, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 450, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 460, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 474, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 505, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 517, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 523, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 530, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 564, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 580, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}

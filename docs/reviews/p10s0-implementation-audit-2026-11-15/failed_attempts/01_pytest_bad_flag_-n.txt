@@ -1,0 +1,7 @@
+ERROR: usage: pytest [options] [file_or_dir] [file_or_dir] [...]
+pytest: error: unrecognized arguments: -n 0
+  inifile: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/pyproject.toml
+  rootdir: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc
+
+uv run --locked --offline pytest tests/test_p10s0_*.py -q -p no:cacheprovider  1.03s user 0.15s system 82% cpu 1.430 total
+tail -15  0.00s user 0.00s system 0% cpu 1.430 total

@@ -1,0 +1,273 @@
+{
+ "grid_points": 7680,
+ "mismatches": {
+  "impl": 0,
+  "adr_etable": 0,
+  "adr_recomp": 117,
+  "adr_noovh": 1011
+ },
+ "examples": {
+  "impl": [],
+  "adr_etable": [],
+  "adr_recomp": [
+   {
+    "s": 0.6892,
+    "P": 7.0,
+    "cal": 12,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     37.0
+    ],
+    "impl": [
+     "rung 1",
+     36.0
+    ]
+   },
+   {
+    "s": 0.6892,
+    "P": 7.0,
+    "cal": 12,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     37.0
+    ],
+    "impl": [
+     "rung 1",
+     36.0
+    ]
+   },
+   {
+    "s": 0.6892,
+    "P": 7.0,
+    "cal": 12,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.4,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     37.0
+    ],
+    "impl": [
+     "rung 1",
+     36.0
+    ]
+   },
+   {
+    "s": 0.6892,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     42.0
+    ],
+    "impl": [
+     "rung 1",
+     41.0
+    ]
+   },
+   {
+    "s": 0.6892,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     42.0
+    ],
+    "impl": [
+     "rung 1",
+     41.0
+    ]
+   },
+   {
+    "s": 0.6892,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.4,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     42.0
+    ],
+    "impl": [
+     "rung 1",
+     41.0
+    ]
+   },
+   {
+    "s": 0.834,
+    "P": 0.5,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 0.6,
+    "ovh": 0.0,
+    "own": [
+     "rung 1",
+     38.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.834,
+    "P": 0.5,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 1.0,
+    "ovh": 0.0,
+    "own": [
+     "rung 1",
+     38.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   }
+  ],
+  "adr_noovh": [
+   {
+    "s": 0.4708,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.4708,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.4708,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 1.4,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.4,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.8,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.8,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   }
+  ]
+ }
+}
