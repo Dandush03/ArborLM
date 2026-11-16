@@ -101,7 +101,11 @@ def write_bundle(b: DataBundle, directory: Path) -> dict[str, Any]:
     directory.mkdir(parents=True, exist_ok=True)
     torch.save({"cfg": b.cfg.__dict__, "state": b.student_state}, directory / "student.pt")
     write_json(directory / "tokenizer_table.json", {"token_bytes_hex": [t.hex() for t in b.token_bytes], "newline_ids": list(b.newline_ids)})
-    write_json(directory / "bank.json", b.bank_records)
+    stream = getattr(b.bank_records, "write_canonical_json", None)
+    if callable(stream):  # a spilled bank: the same bytes as ``write_json`` on the list, record by record (spill.py)
+        stream(directory / "bank.json")
+    else:
+        write_json(directory / "bank.json", b.bank_records)
     write_json(directory / "partition.json", {"sizes": b.sizes.__dict__, "vocab": b.vocab, "panels": {k: [_item_json(i) for i in v] for k, v in b.panels.items()}, "gold_pool": {k: [_item_json(i) for i in v] for k, v in b.gold_pool.items()}, "ablation_keys": b.ablation_keys, "seen_order": b.seen_order})
     write_json(directory / "accepted.json", {c: [x.__dict__ for x in v] for c, v in b.accepted.items()})
     write_json(directory / "windows.json", {"windows": [{"ids": list(w.ids), "reads": [list(r) for r in w.reads], "stratum": w.stratum, "marker_end": w.marker_end} for w in b.windows], "wiki_train_ids": b.wiki_train_ids})

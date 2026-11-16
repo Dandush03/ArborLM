@@ -35,7 +35,7 @@ import sys
 import time
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -93,12 +93,19 @@ class StageClock:
     cap_seconds: float
     clock: Callable[[], float]
     started: float
+    phases: list[dict[str, Any]] = field(default_factory=list)  # one row per phase boundary: the step's elapsed time, the resident set now and the peak (measured), kept in the attempt's record
 
     def elapsed(self) -> float:
         return self.clock() - self.started
 
     def tick(self, what: str = "") -> None:
-        """Called between the long steps (and between teacher batches): past the cap, the step stops."""
+        """Called between the long steps (and between teacher batches): past the cap, the step stops. At every phase boundary (every call but the per-batch one) the step's elapsed time, the resident set now and
+        the peak are printed and kept in ``phases``: a stopped attempt shows where it was and how much it held."""
+        if what != "teacher batch":
+            row = {"phase": what, "elapsed_s": round(self.elapsed(), 1), "resident_mib": round(current_rss_mib()), "peak_mib": round(peak_rss_mib())}
+            self.phases.append(row)
+            output.emit_plain(f"[phase] {what}: elapsed {row['elapsed_s']:.0f} s, resident {row['resident_mib']} MiB, peak {row['peak_mib']} MiB")
+            sys.stdout.flush()
         if self.elapsed() > self.cap_seconds:
             raise StageCapExceeded(f"the stage cap of {self.cap_seconds:.0f} s was reached after {self.elapsed():.0f} s ({what})")
 
@@ -508,6 +515,13 @@ class MarianTeacher:  # pragma: no cover - needs transformers
             "first_batch": None, "max_abs_difference_all_batches": 0.0, "batches": 0, "load": self.load_record,
         }  # fmt: skip
 
+    def release(self) -> None:
+        """Nothing will be translated again: drop the model and the tokenizer (about 0.5 GB each teacher with its tokenizer tables) and give the pages back."""
+        self.model = None
+        self.tokenizer = None
+        gc.collect()
+        release_freed_memory()
+
     @torch.no_grad()
     def translate(self, sources: Sequence[str]) -> list[tuple[str, float]]:
         out: list[tuple[str, float]] = []
@@ -680,6 +694,7 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     check_requirements_hashed(requirements)
     check_installed_pins(package_versions())
     record["steps"]["provenance"] = check_provenance(core.ROOT / PACKAGES_DIR)
+    record["steps"]["memory_by_phase"] = clock.phases  # the same list object: a stopped attempt's record carries the rows up to the stop
     # (1) hashes
     record["steps"]["hashes"] = verify_downloads(downloads, tatoeba_record)
     texts, wiki_prov = read_wikitext(wikitext_dir)
@@ -695,10 +710,12 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     load_plain_state(student, plain)
     torch.save({"cfg": cfg.__dict__, "state": plain}, out / PLAIN_STUDENT)
     record["steps"]["student_plain_sha256"] = fetch_guard.sha256_file(out / PLAIN_STUDENT)
+    clock.tick("student converted")
     del plain  # the converted state is in the student and on disk: a third 540 MB copy is not held through the rest of the step
     # (3)-(4) tokenizer, equivalence at each read layer, tests (c), (d), (e)
     tok = HFTokenizer(downloads)
     record["steps"]["tokenizer_conventions"] = tok.conventions
+    clock.tick("tokenizer loaded")
     ref = HFReference(json.loads(fetch_guard.read_verified_bytes(downloads, "student/config.json")), hf_state)
     del hf_state  # the reference model holds its own copy of the weights
     train_ids = tok.encode(texts["train"])
@@ -716,12 +733,27 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     dec = ByteDecoder(tok.token_bytes())
     gen = core.partition_gen(mode, "random_id_sequences", "test (c) random id sequences")
     record["steps"]["check_c"] = check_decoder(dec, tok, random_id_sequences(tok.vocab_size, core.CFG["data"]["random_id_sequences"], gen))
+    clock.tick("decoder check")
     # (5) data and teachers
     corpus, corpus_rec = load_corpus(downloads, record["steps"]["hashes"]["tatoeba"])
     record["steps"]["corpus"] = corpus_rec
+    clock.tick("corpus loaded")
     teachers = {c: MarianTeacher(downloads, folder, name, revn, clock.tick) for c, (name, revn, folder) in {"A": ("opus-mt-en-de", fetch_guard.TEACHER_A[1], "teacher_a"), "B": ("opus-mt-en-fr", fetch_guard.TEACHER_B[1], "teacher_b")}.items()}
+    clock.tick("teachers loaded")
     provenance = {"wikitext": wiki_prov, "tatoeba": record["steps"]["hashes"]["tatoeba"], "corpus": corpus_rec, "tokenizer_conventions": tok.conventions, "student_plain_sha256": record["steps"]["student_plain_sha256"], "environment": record["environment"]}
-    bundle, rec = build_bundle(corpus, tok, student, teachers, texts["validation"], texts["train"], Sizes.registered(), WindowSpec.registered(), mode, 0, crosscheck=crosscheck_chrf, tick=clock.tick, provenance=provenance)
+    spill = out / "bank_spill.tmp"  # the example bank's pool records, written and read back inside this attempt (spill.py), removed at its end
+    corpus_box = [corpus]
+    del corpus  # build_bundle takes the tables from the box and drops them once the partition is drawn: no name here keeps them alive
+    try:
+        bundle, rec = build_bundle(corpus_box.pop(), tok, student, teachers, texts["validation"], texts["train"], Sizes.registered(), WindowSpec.registered(), mode, 0, crosscheck=crosscheck_chrf, tick=clock.tick, provenance=provenance, spill_path=spill)
+        return _finish(bundle, rec, teachers, layers, record, out, clock)
+    finally:
+        spill.unlink(missing_ok=True)
+
+
+def _finish(bundle: Any, rec: dict[str, Any], teachers: dict[str, Any], layers: dict[str, Any], record: dict[str, Any], out: Path, clock: StageClock) -> dict[str, Any]:  # pragma: no cover
+    mode = "registered-data"
+    clock.tick("bundle assembled")
     bundle.extra["equivalence"] = layers[str(core.READ_LAYERS[0])]  # inside the hash-checked data files (gate G8 reads it from there)
     bundle.extra["equivalence_layers"] = layers
     rec["generation_config"] = {c: t.score_record for c, t in teachers.items()}
@@ -738,6 +770,7 @@ def _run(downloads: Path, out: Path, clock: StageClock, record: dict[str, Any], 
     if stops:
         raise RegisteredTestStop("; ".join(stops))
     write_bundle(bundle, out / "bundle")
+    clock.tick("bundle written")
     write_json(out / "prefreeze_record.json", core.jsonable(record))
     return record
 

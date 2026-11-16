@@ -9,6 +9,7 @@ step (``datagen``, unexecuted here) fill them differently and call the same code
 import math
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 import torch
@@ -44,12 +45,12 @@ from .filtering import (
 )
 from .model import Student
 from .retrieval import TfidfIndex, r_icl_prompt_items
+from .spill import SpillBank, check_segments_stream, iter_examples
 from .text import chrf_item, normalize
 from .tokenization import (
     ByteDecoder,
     ReferenceTokenizer,
     check_roundtrip,
-    check_segments_vs_whole,
     tokenize_segment,
 )
 from .windows import cut_windows, select_windows
@@ -127,7 +128,7 @@ TEACHER_PANELS = ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con")  # the panels
 
 def build_bundle(
     corpus: CorpusLike, tok: ReferenceTokenizer, student: Student, teachers: Mapping[str, Teacher], text_val: str, text_train: str, sizes: Sizes, spec: WindowSpec, mode: str, replicates: int,
-    *, crosscheck: Crosscheck | None = None, tick: Tick | None = None, provenance: Mapping[str, Any] | None = None,
+    *, crosscheck: Crosscheck | None = None, tick: Tick | None = None, provenance: Mapping[str, Any] | None = None, spill_path: Path | None = None,
 ) -> tuple[DataBundle, dict[str, Any]]:  # fmt: skip
     """Run the pre-freeze steps. ``mode`` is ``registered-data`` for the real step and ``test`` for the stand-ins (the seed function refuses anything else). Returns the bundle and the step record
     (partition counts, panel hashes, sufficiency, filter fits and checks, qualification, G1, replicate overlap, the tokenization checks, the timing items, the teachers' tokenizer records).
@@ -137,10 +138,12 @@ def build_bundle(
     train text; both are the local parquet files joined in file order (audit A-B3)."""
     stamp: Tick = tick if tick is not None else (lambda _what: None)
     part = build_partition(corpus, mode, sizes)
+    del corpus  # the 2 million-sentence tables are needed only to draw the partition (the caller hands them over and keeps no name for them)
+    stamp("partition built")
     vocab_index = part.vocab_index
     rec: dict[str, Any] = {"partition": part.counts, "panel_hashes": part.panel_hashes(), "sufficiency_pools": panel_sufficiency(part)}
     decoder = ByteDecoder(tok.token_bytes())
-    bank = ExampleBank()
+    bank = SpillBank(vocab_index, spill_path) if spill_path is not None else ExampleBank()  # with a path the pool examples go to a temporary file of this attempt (spill.py)
     nl = tuple(tokenize_segment(tok, "\n").ids)
     gen_sources = plan_generation(part, mode)
     # Every count the specification requires of the fixed inputs is checked HERE, before the hour of teacher generation (the lead's ruling of 2026-11-16, point 4): the GEN window strata on the fixed grid,
@@ -164,6 +167,13 @@ def build_bundle(
     q_fit_out = {t: run_teacher(teachers[t], [i.en for i in part.panels["Q_fit"]]) for t in core.TASKS}
     q_chk_out = {t: run_teacher(teachers[t], [i.en for i in part.panels["Q_check"]]) for t in core.TASKS}
     stamp("teachers on Q")
+    teacher_outputs = {
+        c: {name: [o.text for o in run_teacher(teachers[c], [i.en for i in part.panels[name]])] for name in TEACHER_PANELS}
+        for c in core.TASKS
+    }  # fmt: skip  (both teachers generate on every panel section 6.1 names, D_con and E_open included: the ruling of 2026-11-15; the combined-tasks addendum needs both on every E_C sentence)
+    stamp("teacher outputs on the stored panels")
+    release_teachers(teachers)  # the last translate call is made: the two models and their tokenizers (about 1 GB) are dead from here on
+    stamp("teachers released")
     rec["outputs_with_newline"] = {c: sum("\n" in o.text for o in [*outs[c], *q_fit_out[c], *q_chk_out[c]]) for c in core.TASKS}  # never accepted (``filtering.accepts``); counted
     rec["score_checks"] = {c: getattr(teachers[c], "score_record", None) for c in core.TASKS}  # the explicit score against the library's (audit M7), filled by the real teachers
     fits: dict[str, FilterFit] = {}
@@ -187,6 +197,7 @@ def build_bundle(
     for c in core.TASKS:
         for it in q_items:
             bank.build_from_tokenizer(tok, vocab_index, c, it.en, None)
+    stamp("bank: Q prompts")
     suff = sufficiency_after_filter(accepted, part.gold_pool, sizes)
     rec["sufficiency_after_filter"] = suff
     # pool-level G1 (a registered replicate seed is not observed in the data step; the stream-level G1 and the replicate overlap are computed by the gates stage and the registered run)
@@ -196,15 +207,21 @@ def build_bundle(
     rec["g1"]["level"] = "pools (accepted outputs and gold pool); streams are checked at the gates stage"
     streams = [draw_streams(core.SeedPlan("test", r), accepted, part.gold_pool, sizes) for r in range(replicates)] if (mode == "test" and suff["ok"]) else []
     rec["overlap"] = replicate_overlap(streams) if streams else {}
+    if isinstance(bank, SpillBank):
+        bank.spilling = True
     for c in core.TASKS:  # every item any replicate may draw: the bank holds the segment ids of the whole accepted pool and the whole gold pool
         for x in [*accepted[c], *gold_items[c]]:
             bank.build_from_tokenizer(tok, vocab_index, c, x.en, x.target)
             bank.build_from_tokenizer(tok, vocab_index, c, x.en, None)
+        stamp(f"bank: pools of {c}")
+    if isinstance(bank, SpillBank):
+        bank.spilling = False
     for n in ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con", "Q_fit", "Q_check"):
         for it in part.panels[n]:
             for c in core.TASKS:
                 if c in it.refs:
                     bank.build_from_tokenizer(tok, vocab_index, c, it.en, None)
+    stamp("bank: panels")
     ablation_keys = {name: [i.key for i in fixed_subsample(part.panels[name], spec.ablation_subsample, mode, "ablation_subsample")] for name in ("E_A", "E_B")}
     # the new-token limit: the 99.5th percentile of the gold references of D_cal, German and French pooled (reading, PENDING LEAD REVIEW: one limit for both languages, or one per language)
     max_new = max(truncation_percentile([len(tok.encode(" " + r)) + len(nl) for it in part.panels["D_cal"] for c in core.TASKS for r in it.refs.get(c, ())] or [spec.default_max_new]), 4)
@@ -212,35 +229,39 @@ def build_bundle(
         c: sum(chrf_item(decoder.answer_text(student.greedy(torch.tensor([list(bank.prompt(c, it.en).prompt_ids)]), add=None, adapter=None, max_new=max_new, stop_bytes=decoder.table)), list(it.refs[c])) for it in q_items) / max(1, len(q_items))
         for c in core.TASKS
     }  # fmt: skip
+    stamp("student greedy on Q")
     qual = qualify(t_scores, s0, fits, checks, {c: len(accepted[c]) for c in core.TASKS}, sizes.accepted_per_replicate)
     rec["qualification"] = {"ok": qual["ok"], "failed": qual["failed"], "detail": qual["detail"], "outcome": qual["outcome"]}
     rec["filter"] = {c: fits[c].to_json() for c in core.TASKS}
     rec["seed_mode"] = mode  # "registered-data" for the real step, "test" for every stand-in (the freeze refuses a stand-in record under the real configuration)
     rec["dropped_eval_equal"] = dropped
     stamp("filter, qualification")
-    teacher_outputs = {
-        c: {name: [o.text for o in run_teacher(teachers[c], [i.en for i in part.panels[name]])] for name in TEACHER_PANELS}
-        for c in core.TASKS
-    }  # fmt: skip  (both teachers generate on every panel section 6.1 names, D_con and E_open included: the ruling of 2026-11-15; the combined-tasks addendum needs both on every E_C sentence)
     n_c = len(part.panels["E_C"])
     sigma = draw_sigma(n_c, mode)  # the listed seed 220911, drawn once, here, after E_C is built
     pairs = pair_list(n_c, sigma)
     rec["c1_pairing"] = {"n": n_c, "pairs_sha256": pairs_digest(pairs), "duplicate_normalized_english": duplicate_normalized([i.key for i in part.panels["E_C"]])}
     rec["combined_whole_string"] = check_combined_whole_string(tok, part.panels["E_C"], pairs)
-    stamp("teacher outputs on the stored panels")
     if crosscheck is not None:  # the chrF cross-check against sacrebleu on the 1,000 pairs of Q: teacher A's outputs against the German references (audit B2, step 6)
         rec["chrf_crosscheck"] = crosscheck([(o.text, list(i.refs["A"])) for o, i in zip([*q_fit_out["A"], *q_chk_out["A"]], q_items, strict=True)])
     rec["tokenization"] = tokenization_checks(tok, decoder, bank, accepted, gold_items, part, teacher_outputs)
     stamp("tokenization checks")
     bundle = DataBundle(
         student.cfg, {k: v.detach().clone() for k, v in student.state_dict().items()}, tok.token_bytes(), nl, sizes, part.vocab, part.panels, part.gold_pool, accepted, seen_order(accepted, mode), ablation_keys,
-        bank.to_records(), windows, tok.encode(text_train), teacher_outputs, max_new, {
+        bank.records_stream() if isinstance(bank, SpillBank) else bank.to_records(), windows, tok.encode(text_train), teacher_outputs, max_new, {
             "conventions": {"bos": tok.bos_id, "segment": "label, source with leading space, newline, task marker; NFC text"}, "c1_pairing": {"sigma": sigma, "pairs_sha256": pairs_digest(pairs), "seed_name": "c1_pairing (220911)"},
             "timing_items": timing, "tokenizer_record": rec["tokenizer_record"], "seed_table": core.seed_table(), "provenance": dict(provenance or {}),
         },
     )  # fmt: skip
     return bundle, rec
 
+
+
+def release_teachers(teachers: Mapping[str, Any]) -> None:
+    """Free what a teacher holds once nothing will be translated again (a teacher without ``release``, a stand-in, holds nothing)."""
+    for t in teachers.values():
+        fn = getattr(t, "release", None)
+        if callable(fn):
+            fn()
 
 
 def tokenizer_records(teachers: Mapping[str, Teacher], sentences: Mapping[str, Sequence[str]]) -> dict[str, Any]:
@@ -279,8 +300,8 @@ def tokenization_checks(
     0 mismatches are required on prompts and R-icl prompts, target mismatches are listed.
     (b) ``decode(encode(x)) == x`` for every reference and every accepted teacher output, and for every stored teacher output.
     ``required_ok`` is the stop condition of the data-generation step."""
-    train_inputs = [bank.train(c, x).segments for c in core.TASKS for x in [*accepted[c], *gold_items[c]]]
-    prompts = [ex.segments for ex in bank.examples.values() if ex.target_len == 0]
+    train_inputs = (bank.train(c, x).segments for c in core.TASKS for x in [*accepted[c], *gold_items[c]])  # one input at a time: a spilled bank is read back, never held whole
+    prompts = (ex.segments for ex in iter_examples(bank) if ex.target_len == 0)
     icl: list[Any] = []
     for c in core.TASKS:
         pool = list(accepted[c])
@@ -290,7 +311,7 @@ def tokenization_checks(
         for it in part.panels["E_" + c]:
             demos = r_icl_prompt_items(pool, it.en, 4, idx)
             icl.append([seg for d in demos for seg in bank.train(c, d).segments] + list(bank.prompt(c, it.en).segments))
-    a_train, a_prompts, a_icl = (check_segments_vs_whole(x, tok) for x in (train_inputs, prompts, icl))
+    a_train, a_prompts, a_icl = (check_segments_stream(x, tok) for x in (train_inputs, prompts, icl))
     refs = [r for items in [*part.panels.values(), *part.gold_pool.values()] for it in items for rs in it.refs.values() for r in rs]
     texts = [*refs, *[x.target for c in core.TASKS for x in accepted[c]], *[t for per in teacher_outputs.values() for outs in per.values() for t in outs]]
     b = check_roundtrip(texts, tok, decoder)
