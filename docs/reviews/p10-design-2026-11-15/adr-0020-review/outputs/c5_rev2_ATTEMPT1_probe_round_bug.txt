@@ -1,0 +1,160 @@
+cmd: cd R && python3 -I c5_rev2_mapping_and_consistency.py
+Part 1: 2462636 P9-II records enumerated
+  rule-vs-table disagreements: none
+  C4 present, by P9-II outcome:
+       87680 ('ADDRESSING-RELIABLE', 'A4')
+      101680 ('ADDRESSING-RELIABLE', 'A5-C')
+       96680 ('ADDRESSING-RELIABLE', 'A5-D')
+       21920 ('ANSWER-ONLY RELIABLE', 'A4')
+       25420 ('ANSWER-ONLY RELIABLE', 'A5-C')
+       24170 ('ANSWER-ONLY RELIABLE', 'A5-D')
+  carried arm under 'ADDRESSING-RELIABLE AT 4,096 ONLY' (table says 'nothing is carried'): {'A0': 237544, None: 1187720}
+
+Part 2: cross-study consistency (S0 RELIABLE assumed; S0 has 10 draws x 2 seeds)
+  size 4096: P9-II class / evaluated draws / failed draws | S0 evaluated / failed | pooled ok/n | lead's rule | ambiguous | auditor's rule (pooled failed draws <= 2)
+    P9-II F 7d 6f | S0 9d 0f | 10/16 (bound 0.391) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 6f | S0 9d 1f | 9/16 (bound 0.333) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 6f | S0 10d 0f | 11/17 (bound 0.420) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 6f | S0 10d 1f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 7f | S0 9d 0f | 9/16 (bound 0.333) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 7f | S0 9d 1f | 8/16 (bound 0.279) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 7f | S0 10d 0f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II F 7d 7f | S0 10d 1f | 9/17 (bound 0.311) | - | ? | -  <-- lead's rule undefined
+    P9-II F 8d 7f | S0 9d 0f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II F 8d 7f | S0 9d 1f | 9/17 (bound 0.311) | - | ? | -  <-- lead's rule undefined
+    P9-II F 8d 7f | S0 10d 0f | 11/18 (bound 0.392) | - |   | -
+    P9-II F 8d 7f | S0 10d 1f | 10/18 (bound 0.341) | - |   | -
+    P9-II F 8d 8f | S0 9d 0f | 9/17 (bound 0.311) | - | ? | -  <-- lead's rule undefined
+    P9-II F 8d 8f | S0 9d 1f | 8/17 (bound 0.260) | - | ? | -  <-- lead's rule undefined
+    P9-II F 8d 8f | S0 10d 0f | 10/18 (bound 0.341) | - |   | -
+    P9-II F 8d 8f | S0 10d 1f | 9/18 (bound 0.291) | - |   | -
+    P9-II R 7d 0f | S0 9d 0f | 16/16 (bound 0.829) | Q |   | Q
+    P9-II R 7d 0f | S0 9d 1f | 15/16 (bound 0.736) | Q |   | Q
+    P9-II R 7d 0f | S0 10d 0f | 17/17 (bound 0.838) | Q |   | Q
+    P9-II R 7d 0f | S0 10d 1f | 16/17 (bound 0.750) | Q |   | Q
+    P9-II R 7d 1f | S0 9d 0f | 15/16 (bound 0.736) | Q |   | Q
+    P9-II R 7d 1f | S0 9d 1f | 14/16 (bound 0.656) | Q |   | Q
+    P9-II R 7d 1f | S0 10d 0f | 16/17 (bound 0.750) | Q |   | Q
+    P9-II R 7d 1f | S0 10d 1f | 15/17 (bound 0.674) | Q |   | Q
+    P9-II R 8d 0f | S0 9d 0f | 17/17 (bound 0.838) | Q |   | Q
+    P9-II R 8d 0f | S0 9d 1f | 16/17 (bound 0.750) | Q |   | Q
+    P9-II R 8d 0f | S0 10d 0f | 18/18 (bound 0.847) | Q |   | Q
+    P9-II R 8d 0f | S0 10d 1f | 17/18 (bound 0.762) | Q |   | Q
+    P9-II R 8d 1f | S0 9d 0f | 16/17 (bound 0.750) | Q |   | Q
+    P9-II R 8d 1f | S0 9d 1f | 15/17 (bound 0.674) | Q |   | Q
+    P9-II R 8d 1f | S0 10d 0f | 17/18 (bound 0.762) | Q |   | Q
+    P9-II R 8d 1f | S0 10d 1f | 16/18 (bound 0.690) | Q |   | Q
+    P9-II U 7d 1f | S0 9d 0f | 15/16 (bound 0.736) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 7d 1f | S0 9d 1f | 14/16 (bound 0.656) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 7d 1f | S0 10d 0f | 16/17 (bound 0.750) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 7d 1f | S0 10d 1f | 15/17 (bound 0.674) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 7d 2f | S0 9d 0f | 14/16 (bound 0.656) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 7d 2f | S0 9d 1f | 13/16 (bound 0.583) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 2f | S0 10d 0f | 15/17 (bound 0.674) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 7d 2f | S0 10d 1f | 14/17 (bound 0.604) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 3f | S0 9d 0f | 13/16 (bound 0.583) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 3f | S0 9d 1f | 12/16 (bound 0.516) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 3f | S0 10d 0f | 14/17 (bound 0.604) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 3f | S0 10d 1f | 13/17 (bound 0.539) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 4f | S0 9d 0f | 12/16 (bound 0.516) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 4f | S0 9d 1f | 11/16 (bound 0.452) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 4f | S0 10d 0f | 13/17 (bound 0.539) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 4f | S0 10d 1f | 12/17 (bound 0.478) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 5f | S0 9d 0f | 11/16 (bound 0.452) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 5f | S0 9d 1f | 10/16 (bound 0.391) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 5f | S0 10d 0f | 12/17 (bound 0.478) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 5f | S0 10d 1f | 11/17 (bound 0.420) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 6f | S0 9d 0f | 10/16 (bound 0.391) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 6f | S0 9d 1f | 9/16 (bound 0.333) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 6f | S0 10d 0f | 11/17 (bound 0.420) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 6f | S0 10d 1f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 7f | S0 9d 0f | 9/16 (bound 0.333) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 7f | S0 9d 1f | 8/16 (bound 0.279) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 7f | S0 10d 0f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II U 7d 7f | S0 10d 1f | 9/17 (bound 0.311) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 1f | S0 9d 0f | 16/17 (bound 0.750) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 8d 1f | S0 9d 1f | 15/17 (bound 0.674) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 8d 1f | S0 10d 0f | 17/18 (bound 0.762) | Q |   | Q
+    P9-II U 8d 1f | S0 10d 1f | 16/18 (bound 0.690) | Q |   | Q
+    P9-II U 8d 2f | S0 9d 0f | 15/17 (bound 0.674) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 8d 2f | S0 9d 1f | 14/17 (bound 0.604) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 2f | S0 10d 0f | 16/18 (bound 0.690) | Q |   | Q
+    P9-II U 8d 2f | S0 10d 1f | 15/18 (bound 0.623) | - |   | -
+    P9-II U 8d 3f | S0 9d 0f | 14/17 (bound 0.604) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 3f | S0 9d 1f | 13/17 (bound 0.539) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 3f | S0 10d 0f | 15/18 (bound 0.623) | - |   | -
+    P9-II U 8d 3f | S0 10d 1f | 14/18 (bound 0.561) | - |   | -
+    P9-II U 8d 4f | S0 9d 0f | 13/17 (bound 0.539) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 4f | S0 9d 1f | 12/17 (bound 0.478) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 4f | S0 10d 0f | 14/18 (bound 0.561) | - |   | -
+    P9-II U 8d 4f | S0 10d 1f | 13/18 (bound 0.502) | - |   | -
+    P9-II U 8d 5f | S0 9d 0f | 12/17 (bound 0.478) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 5f | S0 9d 1f | 11/17 (bound 0.420) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 5f | S0 10d 0f | 13/18 (bound 0.502) | - |   | -
+    P9-II U 8d 5f | S0 10d 1f | 12/18 (bound 0.446) | - |   | -
+    P9-II U 8d 6f | S0 9d 0f | 11/17 (bound 0.420) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 6f | S0 9d 1f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 6f | S0 10d 0f | 12/18 (bound 0.446) | - |   | -
+    P9-II U 8d 6f | S0 10d 1f | 11/18 (bound 0.392) | - |   | -
+    P9-II U 8d 7f | S0 9d 0f | 10/17 (bound 0.364) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 7f | S0 9d 1f | 9/17 (bound 0.311) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 7f | S0 10d 0f | 11/18 (bound 0.392) | - |   | -
+    P9-II U 8d 7f | S0 10d 1f | 10/18 (bound 0.341) | - |   | -
+    P9-II U 8d 8f | S0 9d 0f | 9/17 (bound 0.311) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 8f | S0 9d 1f | 8/17 (bound 0.260) | - | ? | -  <-- lead's rule undefined
+    P9-II U 8d 8f | S0 10d 0f | 10/18 (bound 0.341) | - |   | -
+    P9-II U 8d 8f | S0 10d 1f | 9/18 (bound 0.291) | - |   | -
+  size 16384: P9-II class / evaluated draws / failed draws | S0 evaluated / failed | pooled ok/n | lead's rule | ambiguous | auditor's rule (pooled failed draws <= 2)
+    P9-II F 4d 4f | S0 9d 0f | 9/13 (bound 0.427) | - | ? | -  <-- lead's rule undefined
+    P9-II F 4d 4f | S0 9d 1f | 8/13 (bound 0.355) | - | ? | -  <-- lead's rule undefined
+    P9-II F 4d 4f | S0 10d 0f | 10/14 (bound 0.460) | - | ? | -  <-- lead's rule undefined
+    P9-II F 4d 4f | S0 10d 1f | 9/14 (bound 0.390) | - | ? | -  <-- lead's rule undefined
+    P9-II R 4d 0f | S0 9d 0f | 13/13 (bound 0.794) | Q |   | Q
+    P9-II R 4d 0f | S0 9d 1f | 12/13 (bound 0.684) | Q |   | Q
+    P9-II R 4d 0f | S0 10d 0f | 14/14 (bound 0.807) | Q |   | Q
+    P9-II R 4d 0f | S0 10d 1f | 13/14 (bound 0.703) | Q |   | Q
+    P9-II R 4d 1f | S0 9d 0f | 12/13 (bound 0.684) | Q |   | Q
+    P9-II R 4d 1f | S0 9d 1f | 11/13 (bound 0.590) | Q |   | Q
+    P9-II R 4d 1f | S0 10d 0f | 13/14 (bound 0.703) | Q |   | Q
+    P9-II R 4d 1f | S0 10d 1f | 12/14 (bound 0.615) | Q |   | Q
+    P9-II U 4d 1f | S0 9d 0f | 12/13 (bound 0.684) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 4d 1f | S0 9d 1f | 11/13 (bound 0.590) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 4d 1f | S0 10d 0f | 13/14 (bound 0.703) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 4d 1f | S0 10d 1f | 12/14 (bound 0.615) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 4d 2f | S0 9d 0f | 11/13 (bound 0.590) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 4d 2f | S0 9d 1f | 10/13 (bound 0.505) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 2f | S0 10d 0f | 12/14 (bound 0.615) | - | ? | Q  <-- lead's rule undefined
+    P9-II U 4d 2f | S0 10d 1f | 11/14 (bound 0.534) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 3f | S0 9d 0f | 10/13 (bound 0.505) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 3f | S0 9d 1f | 9/13 (bound 0.427) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 3f | S0 10d 0f | 11/14 (bound 0.534) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 3f | S0 10d 1f | 10/14 (bound 0.460) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 4f | S0 9d 0f | 9/13 (bound 0.427) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 4f | S0 9d 1f | 8/13 (bound 0.355) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 4f | S0 10d 0f | 10/14 (bound 0.460) | - | ? | -  <-- lead's rule undefined
+    P9-II U 4d 4f | S0 10d 1f | 9/14 (bound 0.390) | - | ? | -  <-- lead's rule undefined
+
+  Note: at 16,384 the lead's ruling reads only P9-II's class at 4,096, so an arm that P9-II classed
+  FAILS at 16,384 (e.g. 0 of 4 draws) qualifies if it was RELIABLE at 4,096 in P9-II and RELIABLE in S0.
+  Example pooled 10/14 at 16,384: bound 0.460; 12/14: 0.615; 16/18: 0.690; 15/17: 0.674; 11/13: 0.590
+
+Part 3: bounds and projections of revision 2
+  10/10: 0.741
+  9/10: 0.606
+  9/9: 0.717
+  8/9: 0.571
+  8/10: 0.493
+  3/3: 0.368
+  18/18: 0.847
+  17/18: 0.762
+  14/14: 0.807
+  13/14: 0.703
+  cells: Q1 four arms 230, three arms 180, WX 20, probe 6, check 3
+  fastest  Q1(4) 15.84  Q1(3) 12.38  WX 1.37  probe  7.65 | six workers 11.31 h, doubled 22.63 h, left of 16 h -6.63 h (-41% of the cap)
+  W7       Q1(4) 17.74  Q1(3) 13.84  WX 1.51  probe 11.60 | six workers 15.61 h, doubled 31.22 h, left of 16 h -15.22 h (-95% of the cap)
+  slowest  Q1(4) 23.36  Q1(3) 18.28  WX 2.03  probe 13.52 | six workers 18.55 h, doubled 37.11 h, left of 16 h -21.11 h (-132% of the cap)
+  fastest  after cuts 1+2+3: Q1(4) six workers 2.65 h, doubled  5.30 h
+  W7       after cuts 1+2+3: Q1(4) six workers 2.90 h, doubled  5.80 h
+  slowest  after cuts 1+2+3: Q1(4) six workers 3.51 h, doubled  7.02 h
+  slowest rates: training share of the six-worker time 17.75 h; 2x(base*m + 0.8) <= 16 holds for m <= 0.406
+  without the probe (cut 2 applied): m <= 1.702; Q1(4) alone: m <= 1.850

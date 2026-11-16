@@ -1,0 +1,45 @@
+cmd: python3 -I s2_seed_context_search.py $W/{studies,configs,src,tests,results,supplements,docs,templates,prompts}
+Python 3.15.1
+files scanned: 9083
+
+[S0 registered+reserve data 200001-201499] distinct values in seed context: 0
+
+[S0 rest of 200001-209999 (pipeline 209001+, rehearsal 209101+)] distinct values in seed context: 0
+
+[S0 init 2001-2002] distinct values in seed context: 2
+   2001: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   2002: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+
+[S0 pipeline/rehearsal init 2091-2092] distinct values in seed context: 2
+   2091: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   2092: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+
+[S0 tests 920001-920999] distinct values in seed context: 0
+
+[S1 data 210001-219999] distinct values in seed context: 0
+
+[S1 init 2101-2105, 2191-2192] distinct values in seed context: 4
+   2101: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   2102: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   2103: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   2105: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+
+[S1 cal/reh init 2191-2192] distinct values in seed context: 2
+   2191: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   2192: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+
+[S1 tests 921001+ (to 929999)] distinct values in seed context: 0
+
+[S2 220001-229999] distinct values in seed context: 0
+
+[P9-II 190001-191599] distinct values in seed context: 0
+
+[P9-II init 1891,1901,1902] distinct values in seed context: 1
+   1891: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+
+[P9-II init 1901-1902] distinct values in seed context: 2
+   1901: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+   1902: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p5-2026-11-13/audit/independent-arithmetic-attempt-04.stdout:1
+
+[P9-II tests 910001-919999] distinct values in seed context: 0
+python3 -I s2_seed_context_search.py $W/studies $W/configs $W/src $W/tests     6.22s user 0.39s system 99% cpu 6.626 total

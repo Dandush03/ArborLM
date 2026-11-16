@@ -1,0 +1,131 @@
+{
+ "registries": 400,
+ "differences_by_output": {
+  "supervision_dependent": 87,
+  "carried_forward": 75,
+  "hypotheses": 113,
+  "stage3_status": 91,
+  "hypotheses_UNINTENDED": 1
+ },
+ "unintended": {
+  "hypotheses_UNINTENDED": 1
+ },
+ "examples": {
+  "supervision_dependent": {
+   "old": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096 ONLY",
+    "label": "ADDRESSING-RELIABLE AT 4,096 ONLY: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0",
+    "row": "5",
+    "arm": "A5-C",
+    "stage2_status": "COMPLETE",
+    "stage3_status": "COMPLETE",
+    "detail": "{}"
+   },
+   "new": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096 ONLY",
+    "label": "ADDRESSING-RELIABLE AT 4,096 ONLY: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0",
+    "row": "5",
+    "arm": "A5-C",
+    "stage2_status": "COMPLETE",
+    "stage3_status": "COMPLETE",
+    "detail": "{}"
+   },
+   "s2": "COMPLETE",
+   "ne1": [
+    6
+   ]
+  },
+  "carried_forward": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status INCOMPLETE; A0's Stage 2 class RELIABLE",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE', 'a0_stage2_class': 'RELIABLE'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status INCOMPLETE; A0's Stage 2 class RELIABLE",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE', 'a0_stage2_class': 'RELIABLE'}"
+   },
+   "s2": "INCOMPLETE",
+   "ne1": []
+  },
+  "hypotheses": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status INCOMPLETE; A0's Stage 2 class RELIABLE",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE', 'a0_stage2_class': 'RELIABLE'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status INCOMPLETE; A0's Stage 2 class RELIABLE",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE', 'a0_stage2_class': 'RELIABLE'}"
+   },
+   "s2": "INCOMPLETE",
+   "ne1": []
+  },
+  "stage3_status": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 BUDGET; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 BUDGET",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 BUDGET', 'a0_stage2_class': 'not run'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 BUDGET; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 BUDGET",
+    "stage3_status": "NOT RUN \u2014 BUDGET",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 BUDGET', 'a0_stage2_class': 'not run'}"
+   },
+   "s2": "NOT RUN \u2014 BUDGET",
+   "ne1": [
+    8
+   ]
+  },
+  "hypotheses_UNINTENDED": {
+   "old": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096; 16,384",
+    "label": "ADDRESSING-RELIABLE AT 4,096; 16,384 INCOMPLETE: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)",
+    "row": "6",
+    "arm": "A5-C",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE'}"
+   },
+   "new": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096; 16,384",
+    "label": "ADDRESSING-RELIABLE AT 4,096; 16,384 INCOMPLETE: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)",
+    "row": "6",
+    "arm": "A5-C",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE'}"
+   },
+   "s2": "INCOMPLETE",
+   "ne1": [
+    8
+   ]
+  }
+ }
+}

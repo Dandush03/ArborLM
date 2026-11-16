@@ -1,0 +1,10 @@
+A0 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03125, 'probe_distinct': 2}
+A1 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.0302734375, 'probe_distinct': 156}
+A2 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.0302734375, 'probe_distinct': 157}
+A4 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03173828125, 'probe_distinct': 1}
+A5-C 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03173828125, 'probe_distinct': 4}
+A5-D 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03125, 'probe_distinct': 361}
+A1-S 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03125, 'probe_distinct': 12}
+A6 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03271484375, 'probe_distinct': 243}
+A7 4096 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.03759765625, 'probe_distinct': None}
+ALL IDENTICAL

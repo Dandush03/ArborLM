@@ -1,0 +1,23 @@
+configurations per replicate 30; registered cells x5 = 150
+per replicate s: F 3,544, T 7,063, H8 1,543, D 3,000, R2 289; total 15,439
+training 150 cells 21.44 CPU-h -> 3.57 charged h; seed block per draw (14 cells) 1.97 CPU-h -> 0.33 h
+calibration runs 14+12+6+12 = 44; CPU-h load 2.95, U_P+H8 0.49, dense 2.11, total 5.54 -> 0.92 charged h
+
+== cap 12 h; charged before rule 1.4
+  draw-1 block: remaining 5.30 h; charged + 2x = 12.00 h; slack -0.00 h; tolerable overrun of remaining -0.00 h (-0%)
+  draws 1+2 blocks: remaining 5.63 h; charged + 2x = 12.66 h; slack -0.66 h; tolerable overrun of remaining -0.33 h (-6%)
+  no seed block: remaining 4.97 h; charged + 2x = 11.35 h; slack +0.65 h; tolerable overrun of remaining +0.33 h (+7%)
+
+== cap 16 h; charged before rule 1.4
+  draw-1 block: remaining 5.30 h; charged + 2x = 12.00 h; slack +4.00 h; tolerable overrun of remaining +2.00 h (+38%)
+  draws 1+2 blocks: remaining 5.63 h; charged + 2x = 12.66 h; slack +3.34 h; tolerable overrun of remaining +1.67 h (+30%)
+  no seed block: remaining 4.97 h; charged + 2x = 11.35 h; slack +4.65 h; tolerable overrun of remaining +2.33 h (+47%)
+
+cut 2 (draw-1 block) saves 0.33 h (0.66 doubled)
+cut 3 D-OQ 8K/64K (A2) saves 0.18 h (0.37 doubled); D-OQ 32K/16K (B1) saves 0.11 h (0.22 doubled); both 0.59 doubled
+sensitivity, doubled: T-OQ 2.5x instead of 2x +0.82 h; D-OQ +20% +0.28 h; evaluation +20% +0.40 h
+
+== overload row, per its U_P' (training only; evaluation and its 4 calibration runs not included)
+  U_P'=  8192: charged 1.04-1.15 h (D-OQ at larger cell only / at both cells); doubled 2.09-2.30 h
+  U_P'= 16384: charged 2.09-2.30 h (D-OQ at larger cell only / at both cells); doubled 4.17-4.61 h
+  U_P'= 32768: charged 4.17-4.61 h (D-OQ at larger cell only / at both cells); doubled 8.35-9.22 h

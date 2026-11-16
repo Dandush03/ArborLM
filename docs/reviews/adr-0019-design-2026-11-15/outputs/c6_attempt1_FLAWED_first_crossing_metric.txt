@@ -1,0 +1,13 @@
+fresh-optimizer mean |step| (answer loss only) = 0.000569
+ratio    5.5 A2 U_pre=1024         : mean step after removal / fresh = 0.716; updates after removal until step >= 0.5 x fresh: 0 (of 7168)
+ratio    5.5 A2 U_pre=2048         : mean step after removal / fresh = 0.642; updates after removal until step >= 0.5 x fresh: 0 (of 6144)
+ratio    5.5 A3 linear to 0 at U/2 : mean step after removal / fresh = 0.842; updates after removal until step >= 0.5 x fresh: 12 (of 4096)
+ratio   28.5 A2 U_pre=1024         : mean step after removal / fresh = 0.336; updates after removal until step >= 0.5 x fresh: 0 (of 7168)
+ratio   28.5 A2 U_pre=2048         : mean step after removal / fresh = 0.236; updates after removal until step >= 0.5 x fresh: 0 (of 6144)
+ratio   28.5 A3 linear to 0 at U/2 : mean step after removal / fresh = 0.345; updates after removal until step >= 0.5 x fresh: 331 (of 4096)
+ratio   55.0 A2 U_pre=1024         : mean step after removal / fresh = 0.205; updates after removal until step >= 0.5 x fresh: 0 (of 7168)
+ratio   55.0 A2 U_pre=2048         : mean step after removal / fresh = 0.133; updates after removal until step >= 0.5 x fresh: 0 (of 6144)
+ratio   55.0 A3 linear to 0 at U/2 : mean step after removal / fresh = 0.194; updates after removal until step >= 0.5 x fresh: 2185 (of 4096)
+ratio  285.0 A2 U_pre=1024         : mean step after removal / fresh = 0.044; updates after removal until step >= 0.5 x fresh: 0 (of 7168)
+ratio  285.0 A2 U_pre=2048         : mean step after removal / fresh = 0.030; updates after removal until step >= 0.5 x fresh: 0 (of 6144)
+ratio  285.0 A3 linear to 0 at U/2 : mean step after removal / fresh = 0.039; updates after removal until step >= 0.5 x fresh: > 4096 (of 4096)

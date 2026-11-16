@@ -1,0 +1,109 @@
+== 1. A5-C at 4,096: per cell (Panel A, B, H1, H2, H1/A, H2/A, success)
+S1-A5-C-n4096-d01-j0: A 0.9907 B 0.9941 H1 0.9775 H2 0.9634 H1/A 0.987 H2/A 0.972 line 0.8917 probe distinct 275 largest 0.0078 fact-indep share (uncentred) 0.940 -> SUCCESS
+S1-A5-C-n4096-d01-j1: A 0.9717 B 0.9810 H1 0.9634 H2 0.9370 H1/A 0.991 H2/A 0.964 line 0.8745 probe distinct 281 largest 0.0078 fact-indep share (uncentred) 0.937 -> SUCCESS
+S1-A5-C-n4096-d02-j0: A 0.9893 B 0.9858 H1 0.9741 H2 0.6904 H1/A 0.985 H2/A 0.698 line 0.8903 probe distinct 283 largest 0.0078 fact-indep share (uncentred) 0.953 -> FAIL
+S1-A5-C-n4096-d02-j1: A 0.9946 B 0.9946 H1 0.9751 H2 0.7310 H1/A 0.980 H2/A 0.735 line 0.8952 probe distinct 277 largest 0.0059 fact-indep share (uncentred) 0.950 -> FAIL
+S1-A5-C-n4096-d03-j0: A 0.9927 B 0.9917 H1 0.8677 H2 0.7583 H1/A 0.874 H2/A 0.764 line 0.8934 probe distinct 276 largest 0.0078 fact-indep share (uncentred) 0.944 -> FAIL
+S1-A5-C-n4096-d03-j1: A 0.9971 B 0.9961 H1 0.8984 H2 0.7822 H1/A 0.901 H2/A 0.785 line 0.8974 probe distinct 275 largest 0.0078 fact-indep share (uncentred) 0.944 -> FAIL
+S1-A5-C-n4096-d04-j0: A 0.9951 B 0.9951 H1 0.9590 H2 0.9600 H1/A 0.964 H2/A 0.965 line 0.8956 probe distinct 279 largest 0.0078 fact-indep share (uncentred) 0.936 -> SUCCESS
+S1-A5-C-n4096-d04-j1: A 0.9951 B 0.9941 H1 0.9683 H2 0.9492 H1/A 0.973 H2/A 0.954 line 0.8956 probe distinct 281 largest 0.0078 fact-indep share (uncentred) 0.943 -> SUCCESS
+S1-A5-C-n4096-d05-j0: A 0.9946 B 0.9966 H1 0.9116 H2 0.9663 H1/A 0.917 H2/A 0.972 line 0.8952 probe distinct 273 largest 0.0078 fact-indep share (uncentred) 0.919 -> SUCCESS
+S1-A5-C-n4096-d05-j1: A 0.9888 B 0.9922 H1 0.8735 H2 0.9355 H1/A 0.883 H2/A 0.946 line 0.8899 probe distinct 275 largest 0.0078 fact-indep share (uncentred) 0.938 -> FAIL
+S1-A5-C-n4096-d06-j0: A 0.9873 B 0.9888 H1 0.8994 H2 0.9521 H1/A 0.911 H2/A 0.964 line 0.8886 probe distinct 276 largest 0.0078 fact-indep share (uncentred) 0.933 -> SUCCESS
+S1-A5-C-n4096-d06-j1: A 0.9902 B 0.9873 H1 0.8994 H2 0.9385 H1/A 0.908 H2/A 0.948 line 0.8912 probe distinct 284 largest 0.0078 fact-indep share (uncentred) 0.940 -> SUCCESS
+S1-A5-C-n4096-d07-j0: A 0.9980 B 0.9966 H1 0.9502 H2 0.9941 H1/A 0.952 H2/A 0.996 line 0.8982 probe distinct 289 largest 0.0039 fact-indep share (uncentred) 0.918 -> SUCCESS
+S1-A5-C-n4096-d07-j1: A 0.9956 B 0.9966 H1 0.9404 H2 0.9951 H1/A 0.945 H2/A 1.000 line 0.8960 probe distinct 282 largest 0.0078 fact-indep share (uncentred) 0.919 -> SUCCESS
+S1-A5-C-n4096-d08-j0: A 0.9985 B 0.9956 H1 0.8730 H2 0.9868 H1/A 0.874 H2/A 0.988 line 0.8987 probe distinct 275 largest 0.0078 fact-indep share (uncentred) 0.938 -> FAIL
+S1-A5-C-n4096-d08-j1: A 0.9980 B 0.9966 H1 0.8740 H2 0.9863 H1/A 0.876 H2/A 0.988 line 0.8982 probe distinct 287 largest 0.0078 fact-indep share (uncentred) 0.908 -> FAIL
+H1/A and H2/A for the other arms at 4,096 (min over cells):
+  A0: cells with A > 0.5: 11; min H1/A 0.807; min H2/A 0.703; median H1/A 0.915; median H2/A 0.879
+  A1: cells with A > 0.5: 16; min H1/A 0.956; min H2/A 0.955; median H1/A 0.981; median H2/A 0.990
+  A5-D: cells with A > 0.5: 16; min H1/A 0.966; min H2/A 0.964; median H1/A 0.992; median H2/A 0.986
+  A6 stage 1 at 8192: (A, B, H1, H2) [(1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (0.9995, 0.9995, 0.9995, 0.9995)]
+  A7 stage 1 at 8192: (A, B, H1, H2) [(0.9971, 0.9976, 0.9951, 0.9902), (0.9976, 0.9985, 0.9751, 0.9453), (0.9976, 0.9966, 0.9761, 0.8975), (0.999, 0.9976, 0.939, 0.915), (0.9995, 0.9995, 0.9517, 0.9468), (0.9985, 0.998, 0.9849, 0.9834), (0.998, 0.9985, 0.9834, 0.9917), (0.998, 0.9985, 0.9395, 0.978)]
+  A6 stage 2 at 32768: (A, B, H1, H2) [(1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0), (1.0, 1.0, 1.0, 1.0)]
+  A7 stage 2 at 32768: (A, B, H1, H2) [(0.9757, 0.9767, 0.8788, 0.8021), (0.9821, 0.9811, 0.8676, 0.8434), (0.9756, 0.9758, 0.8762, 0.8883), (0.9736, 0.9727, 0.8829, 0.8584)]
+  A6 stage 3 at 8192: (A, B, H1, H2) [(0.9726, 0.972, 0.967, 0.9705), (0.9709, 0.9714, 0.9623, 0.968)]
+  A7 stage 3 at 8192: (A, B, H1, H2) [(0.1321, 0.1333, 0.1219, 0.1238), (0.1226, 0.1224, 0.1157, 0.1237)]
+
+== 2. A1 at 16,384 (4U and U): conditions per cell
+S2-A1-n16384-d09-j0 @32768: A 0.98474 B 0.98206 H1 0.95264 (7804/8192) H2 0.91003 (7455/8192) line 0.9*A 0.88627 -> H1 margin +0.06637 (+543.70 facts), H2 margin +0.02377 (+194.70 facts)
+S2-A1-n16384-d09-j0 @8192: A 0.92041 B 0.91882 H1 0.85413 (6997/8192) H2 0.82739 (6778/8192) line 0.9*A 0.82837 -> H1 margin +0.02576 (+211.00 facts), H2 margin -0.00098 (-8.00 facts)
+S2-A1-n16384-d09-j1 @32768: A 0.98523 B 0.98376 H1 0.92664 (7591/8192) H2 0.87646 (7180/8192) line 0.9*A 0.88671 -> H1 margin +0.03993 (+327.10 facts), H2 margin -0.01024 (-83.90 facts)
+S2-A1-n16384-d09-j1 @8192: A 0.91687 B 0.92090 H1 0.83020 (6801/8192) H2 0.78320 (6416/8192) line 0.9*A 0.82518 -> H1 margin +0.00502 (+41.10 facts), H2 margin -0.04198 (-343.90 facts)
+S2-A1-n16384-d10-j0 @32768: A 0.98450 B 0.98730 H1 0.91492 (7495/8192) H2 0.89233 (7310/8192) line 0.9*A 0.88605 -> H1 margin +0.02887 (+236.50 facts), H2 margin +0.00629 (+51.50 facts)
+S2-A1-n16384-d10-j0 @8192: A 0.90833 B 0.91467 H1 0.81274 (6658/8192) H2 0.81519 (6678/8192) line 0.9*A 0.81749 -> H1 margin -0.00475 (-38.90 facts), H2 margin -0.00231 (-18.90 facts)
+S2-A1-n16384-d10-j1 @32768: A 0.98608 B 0.98547 H1 0.90942 (7450/8192) H2 0.89856 (7361/8192) line 0.9*A 0.88748 -> H1 margin +0.02195 (+179.80 facts), H2 margin +0.01108 (+90.80 facts)
+S2-A1-n16384-d10-j1 @8192: A 0.91260 B 0.91028 H1 0.80798 (6619/8192) H2 0.81323 (6662/8192) line 0.9*A 0.82134 -> H1 margin -0.01335 (-109.40 facts), H2 margin -0.00811 (-66.40 facts)
+S2-A1-n16384-d11-j0 @32768: A 0.98413 B 0.98193 H1 0.89612 (7341/8192) H2 0.92053 (7541/8192) line 0.9*A 0.88572 -> H1 margin +0.01040 (+85.20 facts), H2 margin +0.03481 (+285.20 facts)
+S2-A1-n16384-d11-j0 @8192: A 0.91956 B 0.91736 H1 0.80212 (6571/8192) H2 0.82397 (6750/8192) line 0.9*A 0.82760 -> H1 margin -0.02548 (-208.70 facts), H2 margin -0.00363 (-29.70 facts)
+S2-A1-n16384-d11-j1 @32768: A 0.98694 B 0.98560 H1 0.88818 (7276/8192) H2 0.93628 (7670/8192) line 0.9*A 0.88824 -> H1 margin -0.00006 (-0.50 facts), H2 margin +0.04803 (+393.50 facts)
+S2-A1-n16384-d11-j1 @8192: A 0.92285 B 0.92761 H1 0.77332 (6335/8192) H2 0.84521 (6924/8192) line 0.9*A 0.83057 -> H1 margin -0.05725 (-469.00 facts), H2 margin +0.01465 (+120.00 facts)
+S2-A1-n16384-d12-j0 @32768: A 0.98621 B 0.98657 H1 0.93237 (7638/8192) H2 0.92468 (7575/8192) line 0.9*A 0.88759 -> H1 margin +0.04479 (+366.90 facts), H2 margin +0.03710 (+303.90 facts)
+S2-A1-n16384-d12-j0 @8192: A 0.91150 B 0.92017 H1 0.84180 (6896/8192) H2 0.80945 (6631/8192) line 0.9*A 0.82035 -> H1 margin +0.02145 (+175.70 facts), H2 margin -0.01090 (-89.30 facts)
+S2-A1-n16384-d12-j1 @32768: A 0.98279 B 0.98279 H1 0.94641 (7753/8192) H2 0.94092 (7708/8192) line 0.9*A 0.88451 -> H1 margin +0.06190 (+507.10 facts), H2 margin +0.05641 (+462.10 facts)
+S2-A1-n16384-d12-j1 @8192: A 0.91992 B 0.91980 H1 0.84778 (6945/8192) H2 0.85107 (6972/8192) line 0.9*A 0.82793 -> H1 margin +0.01985 (+162.60 facts), H2 margin +0.02314 (+189.60 facts)
+
+== 3. A0 and A5-D at 16,384: readouts at U and 4U; trajectory from the 64-update probe records
+S2-A0-n16384-d09-j0: U A 0.0360 B 0.0355 probe distinct 19 largest 0.736 | 4U A 0.9951 B 0.9963 | onset 64 escape 11904 first probe acc>=0.5 13504 time-to-first-success 17024 | diag@U distinct 19 (eval 19)
+S2-A0-n16384-d09-j1: U A 0.0372 B 0.0383 probe distinct 27 largest 0.551 | 4U A 0.9976 B 0.9967 | onset 64 escape 10944 first probe acc>=0.5 12864 time-to-first-success 15808 | diag@U distinct 27 (eval 27)
+S2-A0-n16384-d10-j0: U A 0.0298 B 0.0295 probe distinct 4 largest 0.584 | 4U A 0.9955 B 0.9934 | onset 64 escape 16448 first probe acc>=0.5 18048 time-to-first-success 21248 | diag@U distinct 4 (eval 4)
+S2-A0-n16384-d10-j1: U A 0.0297 B 0.0297 probe distinct 4 largest 0.381 | 4U A 0.9937 B 0.9948 | onset 64 escape 17152 first probe acc>=0.5 18816 time-to-first-success 21760 | diag@U distinct 4 (eval 4)
+S2-A0-n16384-d11-j0: U A 0.0333 B 0.0364 probe distinct 5 largest 0.930 | 4U A 0.9951 B 0.9930 | onset 64 escape 18752 first probe acc>=0.5 20352 time-to-first-success 22848 | diag@U distinct 5 (eval 5)
+S2-A0-n16384-d11-j1: U A 0.0344 B 0.0356 probe distinct 5 largest 0.730 | 4U A 0.9967 B 0.9967 | onset 64 escape 14400 first probe acc>=0.5 16192 time-to-first-success 18624 | diag@U distinct 5 (eval 5)
+S2-A0-n16384-d12-j0: U A 0.0322 B 0.0332 probe distinct 13 largest 0.570 | 4U A 0.9955 B 0.9962 | onset 64 escape 14016 first probe acc>=0.5 16000 time-to-first-success 18688 | diag@U distinct 13 (eval 13)
+S2-A0-n16384-d12-j1: U A 0.0332 B 0.0331 probe distinct 9 largest 0.307 | 4U A 0.9967 B 0.9960 | onset 64 escape 16384 first probe acc>=0.5 17856 time-to-first-success 20416 | diag@U distinct 9 (eval 9)
+S2-A5-D-n16384-d09-j0: U A 0.9819 B 0.9830 probe distinct 288 largest 0.004 | 4U A 0.9991 B 0.9990 | onset None escape None first probe acc>=0.5 2880 time-to-first-success 4480 | diag@U distinct 288 (eval 288)
+S2-A5-D-n16384-d09-j1: U A 0.9847 B 0.9851 probe distinct 291 largest 0.004 | 4U A 0.9987 B 0.9982 | onset None escape None first probe acc>=0.5 3072 time-to-first-success 4544 | diag@U distinct 291 (eval 291)
+S2-A5-D-n16384-d10-j0: U A 0.9833 B 0.9816 probe distinct 295 largest 0.004 | 4U A 0.9988 B 0.9987 | onset None escape None first probe acc>=0.5 3392 time-to-first-success 5248 | diag@U distinct 295 (eval 295)
+S2-A5-D-n16384-d10-j1: U A 0.9835 B 0.9838 probe distinct 291 largest 0.008 | 4U A 0.9985 B 0.9990 | onset None escape None first probe acc>=0.5 3264 time-to-first-success 5312 | diag@U distinct 291 (eval 291)
+S2-A5-D-n16384-d11-j0: U A 0.9883 B 0.9852 probe distinct 288 largest 0.004 | 4U A 0.9989 B 0.9993 | onset None escape None first probe acc>=0.5 3200 time-to-first-success 4928 | diag@U distinct 288 (eval 288)
+S2-A5-D-n16384-d11-j1: U A 0.9841 B 0.9867 probe distinct 294 largest 0.004 | 4U A 0.9994 B 0.9995 | onset None escape None first probe acc>=0.5 3200 time-to-first-success 4672 | diag@U distinct 294 (eval 294)
+S2-A5-D-n16384-d12-j0: U A 0.9857 B 0.9861 probe distinct 277 largest 0.004 | 4U A 0.9990 B 0.9993 | onset None escape None first probe acc>=0.5 3392 time-to-first-success 4992 | diag@U distinct 277 (eval 277)
+S2-A5-D-n16384-d12-j1: U A 0.9830 B 0.9818 probe distinct 286 largest 0.006 | 4U A 0.9994 B 0.9984 | onset None escape None first probe acc>=0.5 3392 time-to-first-success 4864 | diag@U distinct 286 (eval 286)
+S2-A1-n16384-d09-j0: U A 0.9204 B 0.9188 probe distinct 257 largest 0.004 | 4U A 0.9847 B 0.9821 | onset 64 escape 448 first probe acc>=0.5 3008 time-to-first-success 6912 | diag@U distinct 257 (eval 257)
+S2-A1-n16384-d09-j1: U A 0.9169 B 0.9209 probe distinct 256 largest 0.004 | 4U A 0.9852 B 0.9838 | onset 64 escape 448 first probe acc>=0.5 3008 time-to-first-success 7296 | diag@U distinct 256 (eval 256)
+S2-A1-n16384-d10-j0: U A 0.9083 B 0.9147 probe distinct 256 largest 0.004 | 4U A 0.9845 B 0.9873 | onset 64 escape 448 first probe acc>=0.5 3200 time-to-first-success 7360 | diag@U distinct 256 (eval 256)
+S2-A1-n16384-d10-j1: U A 0.9126 B 0.9103 probe distinct 256 largest 0.004 | 4U A 0.9861 B 0.9855 | onset 64 escape 448 first probe acc>=0.5 3264 time-to-first-success 7040 | diag@U distinct 256 (eval 256)
+S2-A1-n16384-d11-j0: U A 0.9196 B 0.9174 probe distinct 257 largest 0.004 | 4U A 0.9841 B 0.9819 | onset 64 escape 448 first probe acc>=0.5 3136 time-to-first-success 6528 | diag@U distinct 257 (eval 257)
+S2-A1-n16384-d11-j1: U A 0.9229 B 0.9276 probe distinct 258 largest 0.004 | 4U A 0.9869 B 0.9856 | onset 64 escape 512 first probe acc>=0.5 3136 time-to-first-success 7104 | diag@U distinct 258 (eval 258)
+S2-A1-n16384-d12-j0: U A 0.9115 B 0.9202 probe distinct 256 largest 0.004 | 4U A 0.9862 B 0.9866 | onset 64 escape 448 first probe acc>=0.5 3264 time-to-first-success 6976 | diag@U distinct 256 (eval 256)
+S2-A1-n16384-d12-j1: U A 0.9199 B 0.9198 probe distinct 256 largest 0.004 | 4U A 0.9828 B 0.9828 | onset 64 escape 512 first probe acc>=0.5 3392 time-to-first-success 7488 | diag@U distinct 256 (eval 256)
+
+== 4. last diagnostics record vs the readout's probe (same model, same probe set)
+readouts compared 196; slot statistics differing 0
+
+== 5. leakage flags, unseen-fact control, permuted/disabled accuracy
+leakage flags: []; unseen-fact accuracy range 0.0205..0.0405 over 428 panel readouts
+
+== 6. A1 vs A1-S (Stage 1): address loss, clip factor and query-projection gradient, updates 1-8192
+  A1: medians over cells of the per-cell median over updates 1025-8192: address_loss 3.749 (range 3.745..3.752), clip_factor 1 (range 1..1), wq 0.6068 (range 0.5676..0.6417), keys 0.267 (range 0.2633..0.2745)
+  A1-S: medians over cells of the per-cell median over updates 1025-8192: address_loss 8.342 (range 8.341..8.345), clip_factor 1 (range 1..1), wq 0.05858 (range 0.04482..0.07362), keys 0.519 (range 0.4983..0.5606)
+
+== 7. smallest margins of the deciding conditions among successful cells, and LM margins
+  stage1 A0: successes 4; min margins {'c1_A': 0.0658, 'c1_B': 0.0648, 'c4_H1': 0.0557, 'c4_H2': 0.0649}; min probe distinct 273, max largest share 0.0078; min LM margin (all cells) 0.0192
+  stage1 A1: successes 16; min margins {'c1_A': 0.0932, 'c1_B': 0.0932, 'c4_H1': 0.0561, 'c4_H2': 0.0547}; min probe distinct 256, max largest share 0.0039; min LM margin (all cells) 0.0367
+  stage1 A2: no success; min LM margin 0.0603
+  stage1 A4: no success; min LM margin 0.0364
+  stage1 A5-C: successes 9; min margins {'c1_A': 0.0717, 'c1_B': 0.081, 'c4_H1': 0.0082, 'c4_H2': 0.0473}; min probe distinct 273, max largest share 0.0078; min LM margin (all cells) 0.0155
+  stage1 A5-D: successes 16; min margins {'c1_A': 0.0985, 'c1_B': 0.0976, 'c4_H1': 0.0663, 'c4_H2': 0.0643}; min probe distinct 268, max largest share 0.0078; min LM margin (all cells) 0.0433
+  stage1 A1-S: no success; min LM margin 0.1014
+  stage2 A0: successes 8; min margins {'c1_A': 0.0937, 'c1_B': 0.093, 'c4_H1': 0.0122, 'c4_H2': 0.0415}; min probe distinct 280, max largest share 0.0078; min LM margin (all cells) 0.0468
+  stage2 A5-D: successes 8; min margins {'c1_A': 0.0985, 'c1_B': 0.0982, 'c4_H1': 0.0753, 'c4_H2': 0.0568}; min probe distinct 282, max largest share 0.0039; min LM margin (all cells) 0.0503
+  stage2 A1: successes 6; min margins {'c1_A': 0.0828, 'c1_B': 0.0819, 'c4_H1': 0.0104, 'c4_H2': 0.0063}; min probe distinct 256, max largest share 0.0039; min LM margin (all cells) 0.0445
+  stage2 A1-S: no success; min LM margin 0.0957
+
+== 8. A2 around the switch (U_pre = 2048) and A4 read_k schedule
+  S1-A2-n4096-d01-j0: u1984: distinct 256 top8 recall 1.0 phase 1; u2048: distinct 256 top8 recall 1.0 phase 1; u2112: distinct 4 top8 recall 0.060546875 phase 2; u2560: distinct 1 top8 recall 0.029296875 phase 2; u4096: distinct 1 top8 recall 0.017578125 phase 2; u8192: distinct 6 top8 recall 0.005859375 phase 2
+  S1-A2-n4096-d01-j1: u1984: distinct 256 top8 recall 1.0 phase 1; u2048: distinct 256 top8 recall 1.0 phase 1; u2112: distinct 3 top8 recall 0.068359375 phase 2; u2560: distinct 2 top8 recall 0.0 phase 2; u4096: distinct 3 top8 recall 0.009765625 phase 2; u8192: distinct 5 top8 recall 0.0 phase 2
+  S1-A2-n4096-d02-j0: u1984: distinct 256 top8 recall 1.0 phase 1; u2048: distinct 256 top8 recall 1.0 phase 1; u2112: distinct 4 top8 recall 0.04296875 phase 2; u2560: distinct 1 top8 recall 0.001953125 phase 2; u4096: distinct 1 top8 recall 0.005859375 phase 2; u8192: distinct 19 top8 recall 0.0 phase 2
+  S1-A2-n4096-d02-j1: u1984: distinct 256 top8 recall 1.0 phase 1; u2048: distinct 256 top8 recall 1.0 phase 1; u2112: distinct 2 top8 recall 0.041015625 phase 2; u2560: distinct 1 top8 recall 0.00390625 phase 2; u4096: distinct 3 top8 recall 0.0078125 phase 2; u8192: distinct 20 top8 recall 0.01171875 phase 2
+  S1-A4-n4096-d01-j0: read_k at updates 1, 2, 2048, 4095, 4096, 4097, 8192: [512, 511, 64, 8, 8, 8, 8]
+
+== 9. ranges quoted in the lead's README
+A0 S2 Panel A at U: 0.0297..0.0372 distinct top1 at U: 4.0000..27.0000 Panel A at 4U: 0.9937..0.9976
+A5-D S2 Panel A at U: 0.9819..0.9883 at 4U: 0.9985..0.9994
+A5-C failing cells Panel A: 0.9888..0.9985
+A7 S1 Panel A: 0.9971..0.9995 A7 S2 4U Panel A: 0.9736..0.9821 A7 S2 4U H1: 0.8676..0.8829 H2: 0.8021..0.8883
+largest task peak RSS (GiB): [(0.881, 'evaluate3', 'S3-A7-n65536-d14-j0'), (0.87, 'evaluate3', 'S3-A7-n65536-d13-j0'), (0.793, 'evaluate3', 'S3-A6-n65536-d13-j0')]
+largest training-record peak RSS (GiB): 0.702

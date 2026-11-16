@@ -1,0 +1,42 @@
+{
+ "tables": 20000,
+ "seed": 20261115,
+ "mismatches": {
+  "class": 0,
+  "paired": 0,
+  "nc": 0,
+  "gate1": 0,
+  "gate3": 0,
+  "outcome": 0,
+  "readings": 0,
+  "carry": 0,
+  "label_lm": 0
+ },
+ "examples": {},
+ "coverage": {
+  "rows": {
+   "2": 5919,
+   "5": 3203,
+   "3": 4335,
+   "4": 1500,
+   "7": 2010,
+   "6": 3025,
+   "8": 8
+  },
+  "gate1_run": 12063,
+  "gate3_run": 2823,
+  "gate3_sched": 382,
+  "nc1": 7810
+ },
+ "cell_verdict_mismatches_of_20000": 0,
+ "estimators": {
+  "cp_lower_8_of_8": 0.6876560219336321,
+  "cp_lower_7_of_8": 0.5293205913988683,
+  "cp_lower_4_of_4": 0.4728708045015879,
+  "cp_lower_16_of_16_cells": 0.829250277017519,
+  "direct_8_of_8": 0.6876560219336321,
+  "direct_4_of_4": 0.4728708045015879
+ },
+ "permutation_test_mismatches_of_300": 0,
+ "sign_test_mismatches": 0
+}

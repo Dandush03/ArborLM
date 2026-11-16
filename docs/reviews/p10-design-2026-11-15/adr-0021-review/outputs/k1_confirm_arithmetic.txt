@@ -1,0 +1,11 @@
+i = 3.000 bits <-> a_use = 0.7576
+i = 4.000 bits <-> a_use = 0.8956
+i = 4.500 bits <-> a_use = 0.9537
+i = 4.545 bits <-> a_use = 0.9585
+CAPACITY reachable with a loaded smaller cell: smaller i* <= 4.0, slope <= 0.10 -> larger needs i >= 4.0 + 0.5 + 2*0.10 = 4.70 (a_use 0.974) < 5
+Study B: a_use 0.85 at the top with ceiling below gives ratio 2.918
+remaining (draw-1 block) 5.30 h; charged + 2x = 12.00 h
+slack in measured remaining time before the 12 h rule fails: -0.00 h
+  T-OQ at 2.5x F-OQ instead of 2x: +0.41 h remaining -> 2x adds 0.82 h
+  evaluation +20%: +0.20 h remaining -> 2x adds 0.40 h
+cut D-OQ 8K/64K + 32K/16K saves 0.29 h remaining (0.59 under 2x); cutting the draw-1 seed block saves 0.33 (0.67)

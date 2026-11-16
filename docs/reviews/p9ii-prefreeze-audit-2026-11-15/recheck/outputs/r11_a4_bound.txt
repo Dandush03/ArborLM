@@ -1,0 +1,5 @@
+A4      : registered rule  5780.5 s (doubled 11561.0, fits False) | half-at-k0, half-at-mid bound  3806.2 s (doubled  7612.3, fits True)
+A5-C+A4 : registered rule  6529.4 s (doubled 13058.9, fits False) | half-at-k0, half-at-mid bound  4555.1 s (doubled  9110.2, fits True)
+A5-D+A4 : registered rule  6547.6 s (doubled 13095.3, fits False) | half-at-k0, half-at-mid bound  4573.3 s (doubled  9146.6, fits True)
+A4+A2   : registered rule  7227.0 s (doubled 14454.0, fits False) | half-at-k0, half-at-mid bound  5252.7 s (doubled 10505.3, fits True)
+A4+A1   : registered rule  7330.0 s (doubled 14660.1, fits False) | half-at-k0, half-at-mid bound  5355.7 s (doubled 10711.4, fits True)

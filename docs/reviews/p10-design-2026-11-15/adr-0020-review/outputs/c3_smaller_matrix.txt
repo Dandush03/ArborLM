@@ -1,0 +1,29 @@
+cmd: python3 -I c3_smaller_matrix.py
+MIN (gate only): 2K/4K A0,C x12 + A6,A7 x6; 8K/4K A0,C,A6 x6; 8K/16K A0,C x6 + A6,A7 x6
+   fastest          78 cells  summed   4.81 CPU-h   /6 =  0.80 h
+   W7 registered    78 cells  summed   5.49 CPU-h   /6 =  0.91 h
+   slowest          78 cells  summed   7.01 CPU-h   /6 =  1.17 h
+MIN, C = A0
+   fastest          54 cells  summed   3.44 CPU-h   /6 =  0.57 h
+   W7 registered    54 cells  summed   3.92 CPU-h   /6 =  0.65 h
+   slowest          54 cells  summed   5.03 CPU-h   /6 =  0.84 h
+REC = MIN + second init seed at 8K/16K for A0 and C (+12)
+   fastest          90 cells  summed   6.23 CPU-h   /6 =  1.04 h
+   W7 registered    90 cells  summed   7.03 CPU-h   /6 =  1.17 h
+   slowest          90 cells  summed   9.14 CPU-h   /6 =  1.52 h
+optional WX(C) at 2K/4K x12 and 8K/16K x6 (+18)
+   fastest          18 cells  summed   0.93 CPU-h   /6 =  0.15 h
+   W7 registered    18 cells  summed   1.04 CPU-h   /6 =  0.17 h
+   slowest          18 cells  summed   1.37 CPU-h   /6 =  0.23 h
+optional X2 at 2K/4K x12, 8K/4K x6, 8K/16K x6 (+24)
+   fastest          24 cells  summed   1.37 CPU-h   /6 =  0.23 h
+   W7 registered    24 cells  summed   1.57 CPU-h   /6 =  0.26 h
+   slowest          24 cells  summed   1.98 CPU-h   /6 =  0.33 h
+optional 65,536 annotation probe: C and A6 x 3 draws at 131,072 updates (6 cells, one round)
+   fastest           6 cells  summed   7.65 CPU-h   /6 =  1.27 h
+   W7 registered     6 cells  summed  11.60 CPU-h   /6 =  1.93 h
+   slowest           6 cells  summed  13.52 CPU-h   /6 =  2.25 h
+draft largest Q1+Q2+Q3 (126 + 12 + 24 jobs), for comparison
+   fastest         162 cells  summed  24.72 CPU-h   /6 =  4.12 h
+   W7 registered   162 cells  summed  33.89 CPU-h   /6 =  5.65 h
+   slowest         162 cells  summed  40.86 CPU-h   /6 =  6.81 h

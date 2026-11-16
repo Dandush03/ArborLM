@@ -1,0 +1,45 @@
+--- generate.sh refusals (exit before any generation)
+usage: studies/p9ii/launch/generate.sh <run-dir> <code-commit>
+refused: HEAD is not deadbeef
+refused: the working tree is not clean
+--- fabricated data manifests (stand-ins), then the draw plan (pure function of the manifests)
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"ok": true, "replacements": {"5": "p9ii-reserve-1"}, "reason": null}
+--- caps (pure function of the rehearsal-2 projection; analysis/report walls from r4)
+{"caps": "studies/p9ii/freeze/stage_caps.json", "sha256": "fdc9db79dcf1a3f6a19716828f2e9bfb08591d49cd5003b891e0d4ea286fc88b"}
+plan.json written; 16 data manifests; {'5': 'p9ii-reserve-1'}
+freeze commit in the clone: 668123e55a17aa036b61028d5a8667b6659c3592
+--- ACCEPT: registered stage1_gate (no Stage 1 records -> INCOMPLETE, nothing trained)
+{"gate": 1, "run": false, "status": "INCOMPLETE"}
+--- ACCEPT: registered analysis and report (no records -> NOT_INTERPRETED)
+{"stage": "analyze", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/registered-run/analyze/manifest.json", "charged_seconds": 0.7}
+{"stage": "report", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/registered-run/report/manifest.json", "charged_seconds": 0.7}
+analysis outcome: NOT_INTERPRETED (INCOMPLETE) | replaced draws: {'5': 'REPLACED BY RESERVE 1'}
+--- cap lookup of stage2/stage3 from a gate record, then refusal at the gates record (no data built)
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+P9II stage REFUSED: refused: no gates record at /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/registered-run/gates.json: run the gates stage first
+P9II stage REFUSED: refused: no gates record at /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/registered-run/gates.json: run the gates stage first
+stage2 cap for A5-C+A2: {'evaluate': 130.34758366190363, 'train': 6554.055917984457}
+stage3 cap for A1: {'evaluate': 69.37728374998551, 'train': 1371.8560703982366}
+draw plan ok accepted
+--- REFUSALS
+P9II stage REFUSED: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/registered-run/draws/p9ii-draw-7/data_manifest.json does not hash to the frozen data manifest of p9ii-draw-7
+P9II stage REFUSED: refused: the freeze names the run directory /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/registered-run, not /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/r7/other-run
+P9II stage REFUSED: refused: the cap table is studies/p9ii/freeze/stage_caps.json
+draw plan with ok false: refused: refused: the draw plan is not ok (None); the matter returns to the human lead
+reserve used with failed G1: refused: refused: draw 5 (p9ii-reserve-1) has no passed G1 record
+P9II stage REFUSED: refused: /Users/daniellaloush/dandush03/ArborLM/experiments/P9IIH-20261115T082413529266Z-cafbe1b47e1d478ba3c2882732830ffa/projection.json does not hash to the frozen projection record
+P9II stage REFUSED: refused: docs/decisions/ADR-0019-robust-sparse-address-learning.md at HEAD differs from the freeze commit
+--- launch script argument check
+usage: studies/p9ii/launch/stage2.sh <run-dir> <freeze-commit>
+analysis --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+exec uv run --locked python -m studies.p9ii.stages draw-plan --run-dir "$RUN_DIR"
+gates --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+report --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+stage1 --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+stage1_gate --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+stage2 --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+stage3 --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json
+stage3_gate --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" --caps studies/p9ii/freeze/stage_caps.json

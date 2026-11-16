@@ -1,0 +1,38 @@
+{
+ "A0": {
+  "old_equals_new_chunked": true,
+  "new_unchunked_equals_chunked": true,
+  "acc_A": 0.0318603515625,
+  "probe_distinct": 3
+ },
+ "A1": {
+  "old_equals_new_chunked": true,
+  "new_unchunked_equals_chunked": true,
+  "acc_A": 0.031402587890625,
+  "probe_distinct": 2
+ },
+ "A5-C": {
+  "old_equals_new_chunked": true,
+  "new_unchunked_equals_chunked": true,
+  "acc_A": 0.031829833984375,
+  "probe_distinct": 3
+ },
+ "A5-D": {
+  "old_equals_new_chunked": true,
+  "new_unchunked_equals_chunked": true,
+  "acc_A": 0.031036376953125,
+  "probe_distinct": 470
+ },
+ "A6": {
+  "old_equals_new_chunked": true,
+  "new_unchunked_equals_chunked": true,
+  "acc_A": 0.031036376953125,
+  "probe_distinct": 256
+ },
+ "A7": {
+  "old_equals_new_chunked": true,
+  "new_unchunked_equals_chunked": true,
+  "acc_A": 0.035369873046875,
+  "probe_distinct": null
+ }
+}

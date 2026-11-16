@@ -1,0 +1,6 @@
+sacrebleu not available in this interpreter: ModuleNotFoundError
+hand1 0.6363636363636362 0.6363636363636364
+hand2 1.0 0.0 0.0 0.0
+hand3 0.7812499999999999 0.78125
+hand4 1.0
+random 20000 pairs: max |impl - auditor definition| = 8.326672684688674e-17

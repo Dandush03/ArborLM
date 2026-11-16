@@ -1,0 +1,68 @@
+== 1. Fano bits per fact i(a)
+  a_use=0.050  i=0.007
+  a_use=0.100  i=0.072
+  a_use=0.250  i=0.473
+  a_use=0.500  i=1.523
+  a_use=0.800  i=3.287
+  a_use=0.850  i=3.647
+  a_use=0.900  i=4.036
+  a_use=0.950  i=4.466
+  a_use=0.954  i=4.503
+  a_use=0.970  i=4.657
+  a_use=0.990  i=4.870
+  a_use=1.000  i=5.000
+  i = 4.5 is reached at a_use = 0.9537 (draft: 'a_use about 0.95'; i(0.95) = 4.466 < 4.5)
+  accuracy points per 0.5 bits at several levels:
+    from a=0.30: +0.5 bit needs a=0.421 (+0.121)
+    from a=0.50: +0.5 bit needs a=0.596 (+0.096)
+    from a=0.70: +0.5 bit needs a=0.777 (+0.077)
+    from a=0.80: +0.5 bit needs a=0.869 (+0.069)
+    from a=0.90: +0.5 bit needs a=0.957 (+0.057)
+  di/da at a=0.5: 4.95 bits per unit accuracy; SE(acc) at F=8192, p=0.5: 0.0055 -> 0.027 bits
+  max SE of accuracy at F=2048: 0.0110
+  max SE of accuracy at F=8192: 0.0055
+  max SE of accuracy at F=32768: 0.0028
+
+== 2. Diagonal ratio I_use(4N,4F)/I_use(N,F) = 4 i'/i
+  a 1.000 -> 0.970: ratio 3.73
+  a 1.000 -> 0.900: ratio 3.23
+  a 1.000 -> 0.860: ratio 2.98
+  a 1.000 -> 0.800: ratio 2.63
+  a 0.999 -> 0.800: ratio 2.64
+  i(0.80) = 3.287: a_use 0.80 at 32K/64K with 8K/16K at ceiling gives ratio 2.63 < 3.0
+
+== 3. Replicate probabilities under 'P(pass) <= 1/2 independently per replicate'
+  n=5: at least 5 of 5: 0.0312
+  n=5: at least 4 of 5: 0.1875
+  n=4: at least 4 of 4: 0.0625
+  n=4: at least 3 of 4: 0.3125
+  n=3: at least 3 of 3: 0.1250
+  n=3: at least 2 of 3: 0.5000
+  if the per-replicate pass probability under the null is q, P(all 5) = q^5:
+    q=0.5: all5=0.031 all4=0.062
+    q=0.6: all5=0.078 all4=0.130
+    q=0.7: all5=0.168 all4=0.240
+    q=0.8: all5=0.328 all4=0.410
+
+== 4. G2 central interval at level 1 - 0.001/40 around 1/32 (count, accuracy, Fano bits at upper end)
+  F=2048: [34, 100] = [0.0166, 0.0488]  i just above upper end = 0.0066 bits
+  F=8192: [192, 325] = [0.0234, 0.0397]  i just above upper end = 0.0016 bits
+  F=32768: [894, 1159] = [0.0273, 0.0354]  i just above upper end = 0.0004 bits
+  family-wise false-fail (40 independent tests, each exact level <= alpha): <= 0.00100
+
+== 5. Parameter counts (key 16)
+  F-OQ N=4096: 197,633; D-OQ h=4117: 197,617 (-0.008%); H8 N=4096: 132,097
+  F-OQ N=16384: 787,457; D-OQ h=16405: 787,441 (-0.002%); H8 N=16384: 525,313
+  F-OQ N=65536: 3,146,753; D-OQ h=65557: 3,146,737 (-0.001%); H8 N=65536: 2,098,177
+  F-OQ-wide 4096 x 175: 787,937 vs F-OQ 16384: 787,457 (+0.061%)
+  H8 4096 x 127: 524,257 vs 525,313 (-0.201%)
+  H8 4096 x 128: 528,385 vs 525,313 (+0.585%)
+  H8 65536 x 8: 524,545 vs 525,313 (-0.146%)
+  Key width that makes a 4,096-slot F-OQ iso-parameter with 16,384 slots at d_v = 32: k with 4096(k+32)+1025 = 787,457 -> k = 160.0
+
+== 6. Counted work W = 16 K + d_v V (+ wo, which the draft omits)
+  N=4096: F-OQ 65,792; T-OQ 8,704; D-OQ ~197,616; wo adds 1,024 to each memory arm
+  N=16384: F-OQ 262,400; T-OQ 9,472; D-OQ ~787,440; wo adds 1,024 to each memory arm
+  N=65536: F-OQ 1,048,832; T-OQ 12,544; D-OQ ~3,146,736; wo adds 1,024 to each memory arm
+  T-OQ step ratios: 1.088, 1.324; F-OQ: 3.988, 3.997
+  F-OQ-wide 8K/4K: 16*4096 + 8*175 = 66,936 (+ wo 32x175 = 5,600)

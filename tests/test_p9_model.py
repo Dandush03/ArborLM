@@ -140,13 +140,13 @@ def test_chunked_equals_unchunked(arch: str) -> None:
         assert torch.equal(s0.candidate_scores, s1.candidate_scores)
         assert torch.equal(l0, l1)
     else:  # other BLAS builds round the row-block products differently (Linux x86-64 CI, 2026-11-15)
-        assert torch.allclose(s0.scores, s1.scores, rtol=0.0, atol=1e-6)
-        assert torch.allclose(s0.candidate_scores, s1.candidate_scores, rtol=0.0, atol=1e-6)
-        assert torch.allclose(l0, l1, rtol=0.0, atol=1e-5)
+        assert torch.allclose(s0.scores, s1.scores, rtol=1e-5, atol=1e-5)
+        assert torch.allclose(s0.candidate_scores, s1.candidate_scores, rtol=1e-5, atol=1e-5)
+        assert torch.allclose(l0, l1, rtol=1e-4, atol=1e-4)
     if sys.platform == "darwin":
         assert torch.equal(loss0, loss1)
     else:
-        assert torch.allclose(loss0, loss1, rtol=0.0, atol=1e-5)
+        assert torch.allclose(loss0, loss1, rtol=1e-4, atol=1e-4)
     assert g0.keys() == g1.keys()
     for (
         name

@@ -1,0 +1,7 @@
+A0 65536 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.0318603515625, 'probe_distinct': 3}
+A1 65536 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.031402587890625, 'probe_distinct': 2}
+A5-C 65536 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.031829833984375, 'probe_distinct': 3}
+A5-D 65536 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.031036376953125, 'probe_distinct': 470}
+A6 65536 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.031036376953125, 'probe_distinct': 256}
+A7 65536 {'old_equals_new_chunked': True, 'new_unchunked_equals_chunked': True, 'acc_A': 0.035369873046875, 'probe_distinct': None}
+ALL IDENTICAL

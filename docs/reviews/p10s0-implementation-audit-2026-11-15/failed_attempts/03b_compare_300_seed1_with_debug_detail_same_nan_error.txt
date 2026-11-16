@@ -1,0 +1,124 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "cases": 300,
+ "seed": 1,
+ "disagreements": 37,
+ "by_kind": {
+  "hypothesis H20-A": 21,
+  "stable A5-D": 6,
+  "outcome row": 1,
+  "stable A0": 3,
+  "stable A1": 2,
+  "meets A0": 1,
+  "meets A5-D": 2,
+  "meets A1": 1
+ },
+ "coverage": {
+  "H20-A not supported": 60,
+  "H20-A supported": 196,
+  "H20-B CONTRADICTED": 105,
+  "H20-B not supported": 146,
+  "H20-B supported": 5,
+  "H20-C CONTRADICTED": 109,
+  "H20-C not supported": 144,
+  "H20-C supported": 3,
+  "H20-D CONTRADICTED": 105,
+  "H20-D not supported": 147,
+  "H20-D supported": 4,
+  "H20-L not supported": 31,
+  "H20-L supported": 40,
+  "H20-O not supported": 17,
+  "H20-O not tested": 199,
+  "H20-O supported": 40,
+  "H20-Q not supported": 149,
+  "H20-Q supported": 107,
+  "H20-R not read": 547,
+  "H20-R not supported": 715,
+  "H20-R supported": 786,
+  "H20-S CONTRADICTED": 4,
+  "H20-S not supported": 56,
+  "H20-S supported": 11,
+  "candidate A0": 21,
+  "candidate A1": 35,
+  "candidate A2": 15,
+  "candidate A5-D": 36,
+  "class FAILS": 217,
+  "class NOT_EVALUATED": 118,
+  "class RELIABLE": 1298,
+  "class UNRELIABLE": 927,
+  "consistency CONSISTENT": 693,
+  "consistency INCONSISTENT": 860,
+  "consistency NOT DEFINED (S0 NE)": 84,
+  "consistency SINGLE": 495,
+  "paired HARMS": 684,
+  "paired IMPROVES": 694,
+  "paired ND": 1694,
+  "probe ('COMPLETE', 0)": 4,
+  "probe ('COMPLETE', 1)": 8,
+  "probe ('COMPLETE', 2)": 4,
+  "probe ('COMPLETE', 3)": 11,
+  "probe ('NOT_EVALUATED', None)": 44,
+  "q4096 A0 why FAILS": 4,
+  "q4096 A0 why INCONSISTENT": 6,
+  "q4096 A0 why NOT_EVALUATED": 5,
+  "q4096 A0 why UNRELIABLE": 14,
+  "q4096 A1 why FAILS": 3,
+  "q4096 A1 why INCONSISTENT": 1,
+  "q4096 A1 why NOT_EVALUATED": 4,
+  "q4096 A1 why UNRELIABLE": 16,
+  "q4096 A2 why INCONSISTENT": 1,
+  "q4096 A2 why NOT_EVALUATED": 3,
+  "q4096 A2 why UNRELIABLE": 6,
+  "q4096 A5-D why FAILS": 4,
+  "q4096 A5-D why INCONSISTENT": 5,
+  "q4096 A5-D why NOT_EVALUATED": 7,
+  "q4096 A5-D why UNRELIABLE": 22,
+  "row 2": 27,
+  "row 3": 16,
+  "row 4": 107,
+  "row 5": 102,
+  "row 6": 48,
+  "wx DOES NOT PASS": 27,
+  "wx PASSES": 40,
+  "wx PASSES AT 4,096 ONLY": 4
+ }
+}
+first disagreements:
+{"case": 7, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 10, "what": "stable A5-D 8K/4K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 10}}
+{"case": 13, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 18, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 47, "what": "outcome row", "auditor": 5, "implementation": 4}
+{"case": 62, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 64, "what": "stable A5-D 8K/16K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 20}}
+{"case": 84, "what": "stable A0 8K/16K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 8}}
+{"case": 84, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 109, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 119, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 130, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 140, "what": "stable A1 8K/16K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 20}}
+{"case": 147, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 149, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 153, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 165, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 166, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 171, "what": "stable A0 8K/4K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 8}}
+{"case": 180, "what": "stable A5-D 8K/16K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 20}}
+{"case": 197, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 204, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 221, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 227, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 246, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 253, "what": "stable A5-D 8K/16K", "auditor": false, "implementation": {"median": 0.85, "label": "ADDRESS STABLE", "cells": 8}}
+{"case": 253, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 260, "what": "stable A0 8K/4K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 10}}
+{"case": 260, "what": "meets A0 8K/4K", "auditor": false, "implementation": true}
+{"case": 266, "what": "stable A5-D 8K/4K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 10}}
+{"case": 266, "what": "meets A5-D 8K/4K", "auditor": false, "implementation": true}
+{"case": 275, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 277, "what": "stable A1 8K/16K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 10}}
+{"case": 277, "what": "meets A1 8K/16K", "auditor": false, "implementation": true}
+{"case": 280, "what": "hypothesis H20-A", "auditor": "supported", "implementation": "not read"}
+{"case": 296, "what": "stable A5-D 8K/4K", "auditor": false, "implementation": {"median": 0.9, "label": "ADDRESS STABLE", "cells": 10}}
+{"case": 296, "what": "meets A5-D 8K/4K", "auditor": false, "implementation": true}

@@ -1,0 +1,6 @@
+noise 0.0 seed 1: own-slot mass A-only 0.5894, after append 0.5548; mean L1 change of weights on A slots 0.2247
+noise 0.0 seed 2: own-slot mass A-only 0.5887, after append 0.5539; mean L1 change of weights on A slots 0.2220
+noise 0.0 seed 3: own-slot mass A-only 0.5886, after append 0.5545; mean L1 change of weights on A slots 0.2221
+noise 0.1 seed 1: own-slot mass A-only 0.5025, after append 0.4677; mean L1 change of weights on A slots 0.2651
+noise 0.1 seed 2: own-slot mass A-only 0.5041, after append 0.4691; mean L1 change of weights on A slots 0.2659
+noise 0.1 seed 3: own-slot mass A-only 0.5030, after append 0.4684; mean L1 change of weights on A slots 0.2646

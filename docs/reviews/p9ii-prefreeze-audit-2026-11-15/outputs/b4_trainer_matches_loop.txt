@@ -1,0 +1,17 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+my loop target seed = facts + 40 = 910541 ; theirs 910541
+update 1 phase 1: mine 8.8216057 theirs 8.8216057 diff 0.00e+00
+update 2 phase 1: mine 9.0812807 theirs 9.0812807 diff 0.00e+00
+update 3 phase 1: mine 9.0944281 theirs 9.0944281 diff 0.00e+00
+update 1023 phase 1: mine 3.7646680 theirs 3.7646680 diff 0.00e+00
+update 1024 phase 1: mine 3.7643421 theirs 3.7643421 diff 0.00e+00
+update 1025 phase 2: mine 4.7428169 theirs 4.7428169 diff 0.00e+00
+update 1026 phase 2: mine 4.4322391 theirs 4.4322391 diff 0.00e+00
+update 1027 phase 2: mine 4.5224500 theirs 4.5224500 diff 0.00e+00
+960 theirs: acc 0.0332 distinct 256 top1 1.0 top8 1.0 | mine: 0.0332 256 1.0 1.0
+1024 theirs: acc 0.0332 distinct 256 top1 1.0 top8 1.0 | mine: 0.0332 256 1.0 1.0
+1088 theirs: acc 0.0391 distinct 2 top1 0.0 top8 0.0449 | mine: 0.0391 2 0.0 0.0449
+1152 theirs: acc 0.0293 distinct 1 top1 0.0 top8 0.0098 | mine: 0.0293 1 0.0 0.0098
+1280 theirs: acc 0.0352 distinct 2 top1 0.0 top8 0.0 | mine: 0.0352 2 0.0 0.0
+1536 theirs: acc 0.041 distinct 2 top1 0.0 top8 0.0059 | mine: 0.041 2 0.0 0.0059

@@ -1,0 +1,45 @@
+cmd: cd review; python3 s3_positive_control.py <worktree>/{studies,tests,results} /Users/daniellaloush/dandush03/ArborLM/experiments
+files scanned: 22314
+
+[P9 170001-171343] distinct values in seed context: 8
+   170001: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9_data.py:430
+   170061: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9_core.py:429
+   171331: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:147
+   171332: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:147
+   171333: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:147
+   171341: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:148
+   171342: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:148
+   171343: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:148
+
+[P9-I 182001-182020] distinct values in seed context: 20
+   182001: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/core.py:95
+   182002: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/templates
+   182003: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/clusters
+   182004: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/training_order
+   182005: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/calibration_stream
+   182006: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/panel_a
+   182007: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/panel_b
+   182008: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/held_out
+   182009: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/mixed_cluster
+   182010: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/lane_d_a
+   182011: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/lane_d_b
+   182012: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/results/p9i-run-attempt2-2026-11-15/data_manifest.json/seeds/r1_codes
+
+[P9-I 180101-181900] distinct values in seed context: 0
+
+[P9-I init 1801-1802] distinct values in seed context: 2
+   1801: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/core.py:94
+   1802: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/core.py:94
+
+[P9 init 1701-1702] distinct values in seed context: 2
+   1701: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:149
+   1702: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9/core.py:149
+
+[P9-I tests 900001-900233] distinct values in seed context: 7
+   900001: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/studies/p9i/core.py:96
+   900011: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9i_model.py:20
+   900031: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9i_model.py:43
+   900041: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9i_train.py:51
+   900051: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9i_evaluate.py:53
+   900061: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9i_nonfinite.py:50
+   900062: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/tests/test_p9i_nonfinite.py:73

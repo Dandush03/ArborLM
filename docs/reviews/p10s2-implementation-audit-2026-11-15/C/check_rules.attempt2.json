@@ -1,0 +1,3287 @@
+{
+ "strict": [
+  {
+   "trial": 60,
+   "impl_row": 5,
+   "auditor_row": 5,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 120,
+   "impl_row": 8,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "INTERMEDIATE",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "INTERMEDIATE",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 129,
+   "impl_row": 7,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 166,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 277,
+   "impl_row": 5,
+   "auditor_row": 5,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 303,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 325,
+   "impl_row": 8,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 526,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 529,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 571,
+   "impl_row": 8,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT REPLICATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT REPLICATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 578,
+   "impl_row": 5,
+   "auditor_row": 5,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 625,
+   "impl_row": 8,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 664,
+   "impl_row": 7,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 733,
+   "impl_row": 7,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 738,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 745,
+   "impl_row": 7,
+   "auditor_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 809,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 872,
+   "impl_row": 8,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT REPLICATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 881,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 906,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "INTERMEDIATE"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "INTERMEDIATE"
+    }
+   }
+  },
+  {
+   "trial": 928,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 935,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 976,
+   "impl_row": 8,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "RETENTION BY INERTIA"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "RETENTION BY INERTIA"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 992,
+   "impl_row": 7,
+   "auditor_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 998,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1054,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1061,
+   "impl_row": 7,
+   "auditor_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1065,
+   "impl_row": 7,
+   "auditor_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1118,
+   "impl_row": 11,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1140,
+   "impl_row": 8,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT REPLICATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1153,
+   "impl_row": 11,
+   "auditor_row": 12,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "NOT REPLICATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT REPLICATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1195,
+   "impl_row": 11,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1285,
+   "impl_row": 8,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1313,
+   "impl_row": 8,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT REPLICATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1371,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1416,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1446,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1450,
+   "impl_row": 7,
+   "auditor_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1531,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1635,
+   "impl_row": 7,
+   "auditor_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  }
+ ],
+ "loose": [
+  {
+   "trial": 60,
+   "impl_row": 5,
+   "auditor_loose_row": 5,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 120,
+   "impl_row": 8,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "INTERMEDIATE",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "INTERMEDIATE",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 129,
+   "impl_row": 7,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 166,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 277,
+   "impl_row": 5,
+   "auditor_loose_row": 5,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 303,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 325,
+   "impl_row": 8,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 526,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 529,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 571,
+   "impl_row": 8,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT REPLICATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT REPLICATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 578,
+   "impl_row": 5,
+   "auditor_loose_row": 5,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "INTERMEDIATE"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 625,
+   "impl_row": 8,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 664,
+   "impl_row": 7,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 733,
+   "impl_row": 7,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 738,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 745,
+   "impl_row": 7,
+   "auditor_loose_row": 8,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 809,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 872,
+   "impl_row": 8,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT REPLICATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 881,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 906,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "INTERMEDIATE"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "INTERMEDIATE"
+    }
+   }
+  },
+  {
+   "trial": 928,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 935,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 976,
+   "impl_row": 8,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "RETENTION BY INERTIA"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "RETENTION BY INERTIA"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 992,
+   "impl_row": 7,
+   "auditor_loose_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 998,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1054,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1061,
+   "impl_row": 7,
+   "auditor_loose_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1065,
+   "impl_row": 7,
+   "auditor_loose_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1118,
+   "impl_row": 11,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1140,
+   "impl_row": 8,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT REPLICATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1153,
+   "impl_row": 11,
+   "auditor_loose_row": 12,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "NOT REPLICATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT REPLICATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1195,
+   "impl_row": 11,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1285,
+   "impl_row": 8,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "RETENTION BY INERTIA",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1313,
+   "impl_row": 8,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT REPLICATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1371,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1416,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "NOT_EVALUATED",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1446,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1450,
+   "impl_row": 7,
+   "auditor_loose_row": 7,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "NOT_EVALUATED",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1531,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  },
+  {
+   "trial": 1635,
+   "impl_row": 7,
+   "auditor_loose_row": 11,
+   "impl_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "ACQUIRES-AND-RETAINS"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   },
+   "auditor_loose_classes": {
+    "M-append-frozen": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-ii": {
+     "AB": "ACQUIRES-AND-RETAINS",
+     "BA": "NOT_EVALUATED"
+    },
+    "M-seq": {
+     "AB": "FORGETS",
+     "BA": "NOT_EVALUATED"
+    },
+    "L-seq": {
+     "AB": "FORGETS",
+     "BA": "FORGETS"
+    }
+   }
+  }
+ ],
+ "crashes": []
+}

@@ -1,0 +1,65 @@
+cmd: python3 -I c1_bounds_projection.py
+== per-draw one-sided 95% lower bounds
+   6/6  -> 0.6070  (draft 0.61)
+   5/6  -> 0.4182  (draft 0.42)
+   4/4  -> 0.4729  (draft 0.47)
+   3/3  -> 0.3684  (draft 0.37)
+  10/10 -> 0.7411  (draft 0.74)
+  14/14 -> 0.8074  (draft 0.81)
+   8/8  -> 0.6877  (draft 0.69)
+   7/8  -> 0.5293  (draft 0.53)
+   5/5  -> 0.5493
+   4/5  -> 0.3426
+   2/3  -> 0.1354
+   9/9  -> 0.7169
+  13/14 -> 0.7033
+   9/10 -> 0.6058
+  15/15 -> 0.8190
+
+== what RELIABLE guarantees at 2K/4K (12 cells, 6 draws x 2 seeds, at most one failed cell)
+  worst case: one draw with 1 of 2 failed -> 5 of 6 draws with both cells -> 0.4182
+  if a draw counts as a success when at least one cell succeeds: 6 of 6 -> 0.6070
+
+== cell counts (ADR-0020 §6.1)
+  X2=True  C=A0=False SMALL=False -> 126
+  X2=True  C=A0=False SMALL=True  -> 90
+  X2=True  C=A0=True  SMALL=False -> 102
+  X2=True  C=A0=True  SMALL=True  -> 72
+  X2=False C=A0=False SMALL=False -> 102
+  X2=False C=A0=False SMALL=True  -> 72
+  X2=False C=A0=True  SMALL=False -> 78
+  X2=False C=A0=True  SMALL=True  -> 54
+  draft: 126 / 102 (no X2) / 102 / 78 (C=A0) / 90 / 72 (SMALL)
+
+== Q1 projection (summed CPU-hours; makespan = /6, perfect packing)
+  fastest (0.008/0.013)            126 cells  7.54 h, makespan 1.26 h | 102 cells  6.17 h, 1.03 h
+  W7 registered (0.0098/0.0141)    126 cells  8.63 h, makespan 1.44 h | 102 cells  7.06 h, 1.18 h
+  slowest (0.0112/0.0195)          126 cells 10.98 h, makespan 1.83 h | 102 cells  8.99 h, 1.50 h
+
+== Q2 projection: 131,072 updates per cell at 65,536 slots
+  rate 0.0350 s -> 1.274 h per cell; 12 cells summed 15.29 h; 2 rounds 2.55 h; 6 cells 1 round 1.27 h
+  rate 0.0531 s -> 1.933 h per cell; 12 cells summed 23.20 h; 2 rounds 3.87 h; 6 cells 1 round 1.93 h
+  rate 0.0530 s -> 1.930 h per cell; 12 cells summed 23.16 h; 2 rounds 3.86 h; 6 cells 1 round 1.93 h
+  rate 0.0619 s -> 2.254 h per cell; 12 cells summed 27.04 h; 2 rounds 4.51 h; 6 cells 1 round 2.25 h
+  draft: 1.27 / 1.93 / 2.25 h per cell; 15.3 / 23.2 / 27.0; 2.5 / 3.9 / 4.5; cut 1 1.3 / 1.9 / 2.3
+
+== Q3 projection: 16 x 16,384 + 8 x 32,768 updates at 16,384 slots
+  rate 0.013: summed 1.89 h; /6 0.32 h; sequential critical path per (draw, arm) 0.18 h
+  rate 0.0141: summed 2.05 h; /6 0.34 h; sequential critical path per (draw, arm) 0.19 h
+  rate 0.0195: summed 2.84 h; /6 0.47 h; sequential critical path per (draw, arm) 0.27 h
+  draft: 1.9 / 2.0 / 2.8 summed; 0.3 / 0.3 / 0.5 makespan
+
+== Budget B at the slowest rates: 2 x (Q3 + Q2)
+  rates 0.0141/0.0531: Q3 makespan (max of /6 and critical path) 0.34 h; Q2 3.87 h; 2x sum  8.42 h vs 10 h
+  rates 0.0195/0.0619: Q3 makespan (max of /6 and critical path) 0.47 h; Q2 4.51 h; 2x sum  9.96 h vs 10 h
+
+== A4 soft read over k slots at 65,536 if implemented by gather (values width 32, float32)
+  k= 65536: gathered value tensor [128, k, 32] = 1.000 GiB (forward only; autograd keeps it)
+  k=  8192: gathered value tensor [128, k, 32] = 0.125 GiB (forward only; autograd keeps it)
+  k=     8: gathered value tensor [128, k, 32] = 0.000 GiB (forward only; autograd keeps it)
+
+== seed layout (ADR-0020 §7)
+  registered+reserve: 15 sets, bases 200001..201401; used 200001..201472; within 200001-201499: True
+  P9-II rev4 maximum: base 191501 + 60 + 1 = 191562 (A1-S stream seed, reserve 2, j=1) -> ADR-0021's 190001-190733 is wrong
+  P9-I test_seeds(offset) = 900001 + 100*offset (studies/p9i/core.py:351): offset 200 would reach 920001
+  'P9-II tests 910001 upward' with the same convention reaches 920001 at offset 100

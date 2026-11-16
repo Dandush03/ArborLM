@@ -1,0 +1,150 @@
+{
+ "registries": 1000,
+ "differences_by_output": {
+  "hypotheses": 269,
+  "hypotheses_row3_not_tested": 265,
+  "stage3_status": 230,
+  "carried_forward": 198,
+  "supervision_dependent": 240,
+  "hypotheses_H19C_follows_supervision_dependent": 4
+ },
+ "unintended": {},
+ "examples": {
+  "hypotheses": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 NO ARM PASSED; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 NO ARM PASSED",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 NO ARM PASSED', 'a0_stage2_class': 'not run'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 NO ARM PASSED; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 NO ARM PASSED",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 NO ARM PASSED', 'a0_stage2_class': 'not run'}"
+   },
+   "s2": "NOT RUN \u2014 NO ARM PASSED",
+   "ne1": []
+  },
+  "hypotheses_row3_not_tested": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 NO ARM PASSED; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 NO ARM PASSED",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 NO ARM PASSED', 'a0_stage2_class': 'not run'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 NO ARM PASSED; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 NO ARM PASSED",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 NO ARM PASSED', 'a0_stage2_class': 'not run'}"
+   },
+   "s2": "NOT RUN \u2014 NO ARM PASSED",
+   "ne1": []
+  },
+  "stage3_status": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 BUDGET; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 BUDGET",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 BUDGET', 'a0_stage2_class': 'not run'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 BUDGET; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 BUDGET",
+    "stage3_status": "NOT RUN \u2014 BUDGET",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 BUDGET', 'a0_stage2_class': 'not run'}"
+   },
+   "s2": "NOT RUN \u2014 BUDGET",
+   "ne1": []
+  },
+  "carried_forward": {
+   "old": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096; 16,384",
+    "label": "ADDRESSING-RELIABLE AT 4,096; 16,384 INCOMPLETE: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)",
+    "row": "6",
+    "arm": "A5-C",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE'}"
+   },
+   "new": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096; 16,384",
+    "label": "ADDRESSING-RELIABLE AT 4,096; 16,384 INCOMPLETE: A5-C (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)",
+    "row": "6",
+    "arm": "A5-C",
+    "stage2_status": "INCOMPLETE",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'INCOMPLETE'}"
+   },
+   "s2": "INCOMPLETE",
+   "ne1": []
+  },
+  "supervision_dependent": {
+   "old": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 BUDGET; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 BUDGET",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 BUDGET', 'a0_stage2_class': 'not run'}"
+   },
+   "new": {
+    "outcome": "ANSWER-ONLY RELIABLE",
+    "label": "ANSWER-ONLY RELIABLE: A0 (LABEL-FREE), the reference of every pairing; Stage 2 status NOT RUN \u2014 BUDGET; A0's Stage 2 class not run",
+    "row": "3",
+    "arm": "A0",
+    "stage2_status": "NOT RUN \u2014 BUDGET",
+    "stage3_status": "NOT RUN \u2014 BUDGET",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 BUDGET', 'a0_stage2_class': 'not run'}"
+   },
+   "s2": "NOT RUN \u2014 BUDGET",
+   "ne1": [
+    2
+   ]
+  },
+  "hypotheses_H19C_follows_supervision_dependent": {
+   "old": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096; 16,384",
+    "label": "ADDRESSING-RELIABLE AT 4,096; 16,384 NOT RUN \u2014 NO ARM PASSED: A5-D (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)",
+    "row": "6",
+    "arm": "A5-D",
+    "stage2_status": "NOT RUN \u2014 NO ARM PASSED",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 NO ARM PASSED'}"
+   },
+   "new": {
+    "outcome": "ADDRESSING-RELIABLE AT 4,096; 16,384",
+    "label": "ADDRESSING-RELIABLE AT 4,096; 16,384 NOT RUN \u2014 NO ARM PASSED: A5-D (LABEL-FREE), paired against A0 at 4,096: IMPROVES ON A0 (not read as a failure to scale)",
+    "row": "6",
+    "arm": "A5-D",
+    "stage2_status": "NOT RUN \u2014 NO ARM PASSED",
+    "stage3_status": "NOT RUN \u2014 NO ARM PASSED",
+    "detail": "{'stage2_status': 'NOT RUN \u2014 NO ARM PASSED'}"
+   },
+   "s2": "NOT RUN \u2014 NO ARM PASSED",
+   "ne1": [
+    2
+   ]
+  }
+ }
+}

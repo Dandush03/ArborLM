@@ -1,0 +1,57 @@
+items: 30 peak RSS over train+evaluation records: 1.529 GiB
+Budget A charged so far 429.8 s; remaining 13970.2 s
+
+=== rehearsed (worst-case grid values): {'lambda': 1.0, 'u_pre': 1024.0, 'k0_fraction': 1.0, 'mu': 1.0}
+Stage 1: training 1979.3 s + evaluation 49.9 s = 2029.2 s; doubled 4058.4 s; fits Budget A remainder: True
+   projection.json Stage 1 total: 2029.2
+Stage 2 A0-only    16 cells:   1133.7 s, doubled   2267.4 s, fits 10,800 s: True   (projection.json 1133.7)
+Stage 2 A5-C       24 cells:   1652.0 s, doubled   3304.1 s, fits 10,800 s: True   (projection.json 1652.0)
+Stage 2 A5-D       24 cells:   1663.5 s, doubled   3327.0 s, fits 10,800 s: True   (projection.json 1663.5)
+Stage 2 A4         24 cells:   5718.2 s, doubled  11436.3 s, fits 10,800 s: False   (projection.json 5718.2)
+Stage 2 A2         32 cells:   2810.9 s, doubled   5621.9 s, fits 10,800 s: True   (projection.json 2810.9)
+Stage 2 A1         32 cells:   2937.8 s, doubled   5875.5 s, fits 10,800 s: True   (projection.json 2937.8)
+Stage 2 A5-C+A5-D  32 cells:   2380.3 s, doubled   4760.6 s, fits 10,800 s: True   (projection.json 2380.3)
+Stage 2 A5-C+A4    32 cells:   6435.0 s, doubled  12869.9 s, fits 10,800 s: False   (projection.json 6435.0)
+Stage 2 A5-C+A2    40 cells:   3228.8 s, doubled   6457.6 s, fits 10,800 s: True   (projection.json 3228.8)
+Stage 2 A5-C+A1    40 cells:   3355.6 s, doubled   6711.3 s, fits 10,800 s: True   (projection.json 3355.6)
+Stage 2 A5-D+A4    32 cells:   6441.6 s, doubled  12883.2 s, fits 10,800 s: False   (projection.json 6441.6)
+Stage 2 A5-D+A2    40 cells:   3237.1 s, doubled   6474.2 s, fits 10,800 s: True   (projection.json 3237.1)
+Stage 2 A5-D+A1    40 cells:   3364.0 s, doubled   6728.0 s, fits 10,800 s: True   (projection.json 3364.0)
+Stage 2 A4+A2      40 cells:   7120.8 s, doubled  14241.7 s, fits 10,800 s: False   (projection.json 7120.8)
+Stage 2 A4+A1      40 cells:   7228.6 s, doubled  14457.2 s, fits 10,800 s: False   (projection.json 7228.6)
+Stage 2 A2+A1      40 cells:   3446.2 s, doubled   6892.4 s, fits 10,800 s: True   (projection.json 3446.2)
+Stage 3 A0    6 cells:   308.6 s, doubled   617.2 s
+Stage 3 A1    8 cells:   705.0 s, doubled  1410.0 s
+Stage 3 A5-C  8 cells:   499.5 s, doubled   999.1 s
+Stage 3 A5-D  8 cells:   499.1 s, doubled   998.1 s
+
+=== calibrated values, A4 annealing at the measured k0 = N rate (UPPER BOUND: k0 = N/8 never rehearsed): {'k0_fraction': 0.125, 'lambda': 1.0, 'mu': 1.0, 'u_pre': 2048.0}
+Stage 1: training 1975.2 s + evaluation 49.9 s = 2025.1 s; doubled 4050.2 s; fits Budget A remainder: True
+Stage 2 A0-only    16 cells:   1133.7 s, doubled   2267.4 s, fits 10,800 s: True
+Stage 2 A5-C       24 cells:   1652.0 s, doubled   3304.1 s, fits 10,800 s: True
+Stage 2 A5-D       24 cells:   1663.5 s, doubled   3327.0 s, fits 10,800 s: True
+Stage 2 A4         24 cells:   5718.2 s, doubled  11436.3 s, fits 10,800 s: False
+Stage 2 A2         32 cells:   2807.5 s, doubled   5615.0 s, fits 10,800 s: True
+Stage 2 A1         32 cells:   2937.8 s, doubled   5875.5 s, fits 10,800 s: True
+Stage 2 A5-C+A5-D  32 cells:   2380.3 s, doubled   4760.6 s, fits 10,800 s: True
+Stage 2 A5-C+A4    32 cells:   6435.0 s, doubled  12869.9 s, fits 10,800 s: False
+Stage 2 A5-C+A2    40 cells:   3225.4 s, doubled   6450.8 s, fits 10,800 s: True
+Stage 2 A5-C+A1    40 cells:   3355.6 s, doubled   6711.3 s, fits 10,800 s: True
+Stage 2 A5-D+A4    32 cells:   6441.6 s, doubled  12883.2 s, fits 10,800 s: False
+Stage 2 A5-D+A2    40 cells:   3233.7 s, doubled   6467.4 s, fits 10,800 s: True
+Stage 2 A5-D+A1    40 cells:   3364.0 s, doubled   6728.0 s, fits 10,800 s: True
+Stage 2 A4+A2      40 cells:   7117.4 s, doubled  14234.8 s, fits 10,800 s: False
+Stage 2 A4+A1      40 cells:   7228.6 s, doubled  14457.2 s, fits 10,800 s: False
+Stage 2 A2+A1      40 cells:   3442.8 s, doubled   6885.6 s, fits 10,800 s: True
+Stage 3 A0    6 cells:   308.6 s, doubled   617.2 s
+Stage 3 A1    8 cells:   705.0 s, doubled  1410.0 s
+Stage 3 A5-C  8 cells:   499.5 s, doubled   999.1 s
+Stage 3 A5-D  8 cells:   499.1 s, doubled   998.1 s
+
+A4 rates measured (s/update):  {('A4', 16384, 'k0'): 0.13702, ('A4', 16384, 'k8'): 0.01186, ('A4', 16384, 'mid'): 0.06016, ('A4', 4096, 'k0'): 0.03169, ('A4', 4096, 'k8'): 0.00938, ('A4', 4096, 'mid'): 0.01497}
+A4 read widths of the REHEARSED phases at 16,384: k0 = 16384  mid = 362 | of the CALIBRATED matrix: k0 = 2048  mid = 128
+A4 read widths at 4,096: rehearsed k0 = 4096, mid = 181 | calibrated k0 = 512, mid = 64
+largest A4 annealing rate (s/update at 16,384) with which Stage 2 A4 fits 2x in 10,800 s: 0.1273
+largest A4 annealing rate (s/update at 16,384) with which Stage 2 A5-C+A4 fits 2x in 10,800 s: 0.1054
+largest A4 annealing rate (s/update at 16,384) with which Stage 2 A4+A2 fits 2x in 10,800 s: 0.0846
+largest A4 annealing rate (s/update at 16,384) with which Stage 2 A4+A1 fits 2x in 10,800 s: 0.0812

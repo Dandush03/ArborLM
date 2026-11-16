@@ -1,0 +1,8 @@
+SmolLM2-135M params (tied emb): 134515008 | Hub safetensors total 134515008 -> True
+memory params N=4096: 2424833 | LoRA q,v params per rank: 57600
+  LoRA rank for one memory: 42 -> 2419200 (-0.23%)
+  LoRA rank for two memories (M-joint 2N): 84 -> 4838400 (-0.23%)
+opus-mt-en-de: params 73944309 (+524288 sinusoidal position buffers = 74468597)
+opus-mt-en-fr: params 74669178 (+524288 sinusoidal position buffers = 75193466)
+opus-mt-en-es: params 77484009 (+524288 sinusoidal position buffers = 78008297)
+two primary teachers: 148613487 | student + two memories: 139364674 | ratio 0.9378

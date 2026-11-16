@@ -1,0 +1,5 @@
+spec RouterSpec(updates=500, batch=64, lr=0.001, none_prefixes=8000, full_length=4000, prefix_tokens=64) class counts ST1 / AB: [32, 32] [21, 21, 22]
+final loss 0.4753785729408264 cut_length_min 9
+GEN decision at token 64 (index 63): triggers 0 of 200 -> loss increase would be exactly 0 and GEN passes
+diagnostic at first marker-like string (positions 5..62): rate 0.48
+position-only router: task-prompt accuracy 1.0

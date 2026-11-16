@@ -1,0 +1,3 @@
+files parsed: 22404; unreadable/unparsable: 2
+hits in ADR-0021 ranges (210001-219999, 921001-929999, init 2101-2105, 2191, 2192): 0
+uv run --project  --locked python -I s9c_seed_keys.py    17.01s user 2.34s system 87% cpu 22.055 total

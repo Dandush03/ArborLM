@@ -1,0 +1,7 @@
+cmd: cd <worktree> && PYTHONPATH=<worktree> uv run --locked python <review>/c4_q3_split.py
+clusters: 512 of 16
+set A: updates/epoch 32; all facts in set True; one cluster per context True; clusters 0..255
+   exposures after 16,384 updates: min 512 max 512
+set B: updates/epoch 32; all facts in set True; one cluster per context True; clusters 256..511
+   exposures after 16,384 updates: min 512 max 512
+octet boundary: 256 % 8 = 0 -> mixed-cluster octets do not straddle A/B

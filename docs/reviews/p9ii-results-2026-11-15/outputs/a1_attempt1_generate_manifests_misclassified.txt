@@ -1,0 +1,67 @@
+== 1. code identity
+d2746d3 {'source_sha256': '8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c', 'spec_sha256': '47b14090073fdb996720676855de88036fadaa6d1aa1071025c8a7eb39fb580b', 'config_sha256': 'd5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9', 'frozen_source_sha256': '8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507'}
+a1685d0 {'source_sha256': '8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c', 'spec_sha256': 'dfd43ce7378e3b02e5832071554fef181a2c48371f63a1bab896ab576c2ba9be', 'config_sha256': 'd5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9', 'frozen_source_sha256': '8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507'}
+51c00b2 {'source_sha256': '41b5e2a99d57feed75981189eed1476638cd3b5dabb9c31f240df1ac84da99ed', 'spec_sha256': 'dfd43ce7378e3b02e5832071554fef181a2c48371f63a1bab896ab576c2ba9be', 'config_sha256': 'd5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9', 'frozen_source_sha256': '8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507'}
+source digest freeze == generation commit: True
+source digest generation commit != pre-fix commit (generate.sh flag): True
+diff freeze..HEAD in studies/configs/tests/src/docs/decisions: ''
+run records carrying an identity: 414; equal to the freeze commit's re-derived identity: 398
+PROBLEM: identity mismatch in 16 records, e.g. ['generate-p9ii-draw-1/manifest.json', 'generate-p9ii-draw-10/manifest.json', 'generate-p9ii-draw-11/manifest.json']
+data manifests: 16; equal to the generation commit a1685d0's identity: 16
+stage manifests in raw run dir: ['analyze', 'evaluate1', 'evaluate2', 'evaluate3', 'gates', 'generate-p9ii-draw-1', 'generate-p9ii-draw-10', 'generate-p9ii-draw-11', 'generate-p9ii-draw-12', 'generate-p9ii-draw-13', 'generate-p9ii-draw-14', 'generate-p9ii-draw-2', 'generate-p9ii-draw-3', 'generate-p9ii-draw-4', 'generate-p9ii-draw-5', 'generate-p9ii-draw-6', 'generate-p9ii-draw-7', 'generate-p9ii-draw-8', 'generate-p9ii-draw-9', 'generate-p9ii-reserve-1', 'generate-p9ii-reserve-2', 'report', 'train1', 'train2', 'train3']
+== 2. committed copies vs raw records
+SHA256SUMS entries: 412; committed files (excluding SHA256SUMS): 412; not listed: []; failing: []
+committed files with a raw counterpart: 408; byte-identical: 408; differing: []
+committed files with no raw counterpart (written by the lead): ['README.md', 'launch_log.txt', 'p9ii_run_a.sh', 'p9ii_run_b.sh']
+raw cells 174, committed cells 174, same set: True; raw eval records 214, committed 214, same set: True
+manifest task result_sha256 mismatches against the raw files: []
+== 3. frozen plan
+plan checks: 22 of 22 hold
+draw plan ok: True replacements: {} all G1: True 16
+== 4. census
+Stage 2 arms by the gate record: ['A0', 'A5-D', 'A1', 'A1-S']; Stage 3 arms: ['A0', 'A6', 'A7']; expected cells 174
+missing: [] unexpected: []
+train1: status COMPLETE, tasks 128, unique 128, non-completed [], skipped_for_dependency [], workers 6, started 2026-11-15T08:47:54.117400+00:00, finished 2026-11-15T09:16:33.103774+00:00
+train2: status COMPLETE, tasks 40, unique 40, non-completed [], skipped_for_dependency [], workers 6, started 2026-11-15T09:18:23.276278+00:00, finished 2026-11-15T10:19:21.176792+00:00
+train3: status COMPLETE, tasks 6, unique 6, non-completed [], skipped_for_dependency [], workers 6, started 2026-11-15T10:20:33.024590+00:00, finished 2026-11-15T10:26:13.832134+00:00
+evaluate1: status COMPLETE, tasks 128, unique 128, non-completed [], skipped_for_dependency [], workers 6, started 2026-11-15T09:16:34.576741+00:00, finished 2026-11-15T09:18:02.974683+00:00
+evaluate2: status COMPLETE, tasks 40, unique 40, non-completed [], skipped_for_dependency [], workers 6, started 2026-11-15T10:19:21.873027+00:00, finished 2026-11-15T10:20:26.131029+00:00
+evaluate3: status COMPLETE, tasks 6, unique 6, non-completed [], skipped_for_dependency [], workers 6, started 2026-11-15T10:26:14.254296+00:00, finished 2026-11-15T10:26:40.660896+00:00
+each cell trained exactly once across stage manifests: True
+train log files per stage: {'train1': 128, 'train2': 40, 'train3': 6}
+cells with wrong status/update count: []
+cells with wrong readouts: []
+== 5. seeds
+cells whose seeds differ from section 7: []
+data seed sets violating the base+0..19 layout: []
+P9IIC-20261115T071159540788Z-1a93c3ded92e40628c2abb9bd4235188: data/target/stream seeds 4 (range 179341..179461), init seeds [1891], overlap with registered []
+P9IIG-rehearsal-gates-20261115T071128Z: data/target/stream seeds 20 (range 179501..179533), init seeds [], overlap with registered []
+P9IIG-rehearsal-gates2-20261115T082352Z: data/target/stream seeds 20 (range 179501..179533), init seeds [], overlap with registered []
+P9IIH-20261115T071753736302Z-733bbf7ebca44117a5bdf2792f90940b: data/target/stream seeds 0 (range None..None), init seeds [], overlap with registered []
+P9IIH-20261115T082413529266Z-cafbe1b47e1d478ba3c2882732830ffa: data/target/stream seeds 0 (range None..None), init seeds [], overlap with registered []
+P9IIP-registered-20261115: data/target/stream seeds 0 (range None..None), init seeds [], overlap with registered []
+== 6. ledgers and caps
+Budget A charged 2554.2 s of 14400.0 (entries 28); Budget B charged 4089.3 s of 10800.0 (entries 4)
+Budget A registered-run entries: [('generate-p9ii-draw-1', 11.6), ('generate-p9ii-draw-2', 11.5), ('generate-p9ii-draw-3', 11.6), ('generate-p9ii-draw-4', 11.7), ('generate-p9ii-draw-5', 11.6), ('generate-p9ii-draw-6', 11.6), ('generate-p9ii-draw-7', 11.5), ('generate-p9ii-draw-8', 11.7), ('generate-p9ii-draw-9', 11.5), ('generate-p9ii-draw-10', 11.6), ('generate-p9ii-draw-11', 11.6), ('generate-p9ii-draw-12', 11.6), ('generate-p9ii-draw-13', 11.6), ('generate-p9ii-draw-14', 11.6), ('generate-p9ii-reserve-1', 11.6), ('generate-p9ii-reserve-2', 11.5), ('gates', 17.7), ('train1', 1719.0), ('evaluate1', 88.4), ('analyze', 9.4), ('report', 0.6)]
+Budget A charged before Stage 1: 736.8 s; Stage 1 doubled projection (cap) 4143.3 s; fits in remaining 13663.2 s: True
+Stage 2 configuration ['A5-D', 'A1'] -> cap-table key A5-D+A1: doubled projection 6927.0 s; gate record required 6927.0 s; within 10,800 s: True
+Stage 2 charged 3722.1 s; Budget B remaining 7077.9 s (gate record 7077.9); Stage 3 (A0) doubled projection 631.2 s; fits: True
+train1: charged [1718.9775500829564] s, cap 3964.9 s (manifest cap 3964.9), within: True; max task peak RSS 0.460 GiB (cap 3); workers 6; workers x max peak 2.76 GiB (cap 24)
+evaluate1: charged [88.39650475000963] s, cap 178.5 s (manifest cap 178.5), within: True; max task peak RSS 0.447 GiB (cap 3); workers 6; workers x max peak 2.68 GiB (cap 24)
+train2: charged [3657.8789195420104] s, cap 6796.9 s (manifest cap 6796.9), within: True; max task peak RSS 0.542 GiB (cap 3); workers 6; workers x max peak 3.25 GiB (cap 24)
+evaluate2: charged [64.25667624996277] s, cap 130.1 s (manifest cap 130.1), within: True; max task peak RSS 0.468 GiB (cap 3); workers 6; workers x max peak 2.81 GiB (cap 24)
+train3: charged [340.8048524169717] s, cap 580.2 s (manifest cap 580.2), within: True; max task peak RSS 0.702 GiB (cap 3); workers 6; workers x max peak 4.21 GiB (cap 24)
+evaluate3: charged [26.40557570901001] s, cap 50.9 s (manifest cap 50.9), within: True; max task peak RSS 0.881 GiB (cap 3); workers 6; workers x max peak 5.28 GiB (cap 24)
+gates: charged [17.72174233297119] s, cap 60.0 s (manifest cap 60.0), within: True; max task peak RSS 0.811 GiB (cap 3); workers 1; workers x max peak 0.81 GiB (cap 24)
+analyze: charged [9.374412917008158] s, cap 60.0 s (manifest cap 60.0), within: True; max task peak RSS 0.437 GiB (cap 3); workers 1; workers x max peak 0.44 GiB (cap 24)
+report: charged [0.5815838749986142] s, cap 60.0 s (manifest cap 60.0), within: True; max task peak RSS 0.184 GiB (cap 3); workers 1; workers x max peak 0.18 GiB (cap 24)
+largest per-cell training peak RSS 0.702 GiB; largest task peak 0.881 GiB
+== 7. gates
+{'g1_passed': True, 'g2_passed': True, 'g4_passed': True, 'g4_defects': [], 'g5_passed': True, 'g6_passed': True, 'dry': False}
+G1 by draw all: True G2 by draw all: True
+G2 results: [('A/2048', 71, [36, 96], True), ('A/8192', 277, [198, 318], True), ('A/32768', 1092, [905, 1147], True), ('A/unseen', 73, [36, 96], True), ('B/2048', 68, [36, 96], True), ('B/8192', 262, [198, 318], True), ('B/32768', 1009, [905, 1147], True), ('B/unseen', 63, [36, 96], True)]
+eval records with G5 not passed: []
+gate-record mode dry: False ; G4 a2 schedule u_pre in gate test: 16
+
+== SUMMARY: problems found: 1
+ - identity mismatch in 16 records, e.g. ['generate-p9ii-draw-1/manifest.json', 'generate-p9ii-draw-10/manifest.json', 'generate-p9ii-draw-11/manifest.json']

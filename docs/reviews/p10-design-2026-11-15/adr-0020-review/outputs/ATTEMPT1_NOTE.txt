@@ -1,0 +1,1 @@
+ATTEMPT 1 FAILED: bare-number regex matched digits inside hex hashes and timing values (e.g. sha256 'c204929b...'); not usable as evidence. Superseded by s2_seed_context_search.py.

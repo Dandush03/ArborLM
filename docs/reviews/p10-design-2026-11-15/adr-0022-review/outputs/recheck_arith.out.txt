@@ -1,0 +1,63 @@
+== Task 2: registry ==
+cells/rep 18 store units 16 LoRA units 6 x4 72 x3 54
+memory cells for ablations 11
+== Task 2: hours per rung (from 13.3 per-unit ranges) ==
+rung 1 n=4 U=2000: 14.353-35.507 h; P+2R at P=3.5: 32.21-74.51; at P=7: 35.71-78.01
+rung 2 n=3 U=2000: 10.840-26.780 h; P+2R at P=3.5: 25.18-57.06; at P=7: 28.68-60.56
+rung 3 n=4 U=1000: 10.087-27.173 h; P+2R at P=3.5: 23.67-57.85; at P=7: 27.17-61.35
+rung 4 n=3 U=1000: 7.640-20.530 h; P+2R at P=3.5: 18.78-44.56; at P=7: 22.28-48.06
+P=3.5: max R = 16.25 h
+P=7.0: max R = 14.50 h
+per-replicate change rev3->rev4 (end 0 ) 0.073 h
+per-replicate change rev3->rev4 (end 1 ) 0.08 h
+== Section 9 probabilities ==
+0.0625 0.125 0.4096000000000001 0.5120000000000001
+== Wilson 95% at p=0.90 ==
+150 [0.8416, 0.9385]
+300 [0.8608, 0.9291]
+500 [0.8706, 0.9233]
+Wilson LB>=0.90 needs >= 143/150 = 0.953
+Wilson LB>=0.90 needs >= 235/250 = 0.940
+Wilson LB>=0.90 needs >= 281/300 = 0.937
+Wilson LB>=0.90 needs >= 372/400 = 0.930
+Wilson LB>=0.90 needs >= 464/500 = 0.928
+== Parameters ==
+per stage 2424833
+LoRA per rank 57600 r42 2419200 r84 4838400
+r42 vs stage -0.23230465768158126 %; r84 vs M-joint (2N rows, one gate) -0.23228408560178604 %
+student+2N store (2 gates) 139364674 teachers 148613487 ratio 0.9378
+== Downloads (MB) ==
+tatoeba 53.13 spa 8.14 symmetry files 6.23
+primary 930.0 +spa 938.2 +fallback teacher 1253.5 +symmetry files 944.4 1259.7
+== Seeds ==
+declared singletons in a range: []
+P9 ScalableMemory convention seed+1000..5000 (keys, values, wq, wo, router):
+  220001 rep220001 init -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220002 rep220001 draw -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220003 rep220001 batch -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220004 rep220001 router -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220005 rep220001 perm -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220006 rep220001 gold -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220101 rep220101 init -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220102 rep220101 draw -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220103 rep220101 batch -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220104 rep220101 router -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220105 rep220101 perm -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220106 rep220101 gold -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220201 rep220201 init -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220202 rep220201 draw -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220203 rep220201 batch -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220204 rep220201 router -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220205 rep220201 perm -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220206 rep220201 gold -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220301 rep220301 init -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220302 rep220301 draw -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220303 rep220301 batch -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220304 rep220301 router -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220305 rep220301 perm -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220306 rep220301 gold -> {1000: ['calibration'], 2000: ['rehearsal']}
+  220901 partition -> {1000: ['calibration'], 2000: ['rehearsal']}
+ calibration 221001+1000 -> ['rehearsal'] ; rehearsal 222001+1000 -> []
+P7-B/P8/P9-sim convention seed*1000+index: 220001*1000 = 220001000 (outside every listed namespace)
+S2 namespace overlaps: []
+sibling init+1000k (k<=9) landing in S2: []

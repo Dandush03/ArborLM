@@ -1,0 +1,10 @@
+A0 identical: True tensors: 53 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, None, None, None)
+A1 identical: True tensors: 53 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, None, None, None)
+A2 identical: True tensors: 53 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, 96, None, None)
+A4 identical: True tensors: 53 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, None, 128, 512)
+A5-C identical: True tensors: 55 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, None, None, None)
+A5-D identical: True tensors: 53 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, None, None, None)
+A1-S identical: True tensors: 53 mismatches: [] | diagnostics after the split identical (except timing): True | schedule: (256, None, None, None)
+A5-C two identical runs bit-identical (parameters and buffers): True
+A1-S two identical runs bit-identical (parameters and buffers): True
+A4 two identical runs bit-identical (parameters and buffers): True
