@@ -165,3 +165,11 @@ Recorded by the lead: the three drafters were stopped before any draft was writt
 The human lead, verbatim: "right, once p10-S1 finished with the review, we also merge it, then we start planning the P10-I-S0..2 taking into consideration the complete changelog and what went wrong on each simulation".
 
 Recorded by the lead: P10-S1's pull request is merged after its registered run is recorded and independently reviewed. Planning of P10-I-S0, P10-I-S1 and P10-I-S2 starts only after that, from the complete changelog and a per-study account of what went wrong, not only from the outcomes.
+
+### P10-S1: the cap ceiling is raised to 50 hours (2026-11-16 UTC)
+
+The projection returned NOT STARTED: BUDGET (C_need 40.82 h against C_max 36 h after the three fixed cuts; projected remaining run 16.83 h; 7.15 h already charged). The lead offered (1) a ceiling of 41 hours, (2) repeating the rehearsal on a quiet machine first, (3) accepting NOT STARTED: BUDGET, and recommended (1). The human lead, verbatim:
+
+> im ok with making the cap 50h if needed as long as I can use the mac
+
+Recorded by the lead: C_max is 50 hours (ADR-0021 §25.16 on `claude/p10-s1`); nothing else in the budget rule changes and nothing is re-measured. Under the new ceiling the rule applies no cut: C_need 48.55 h, computed cap 49 h, projected remaining run 20.7 h. The human lead uses the machine during the run.
