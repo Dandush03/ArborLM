@@ -115,3 +115,11 @@ After the independent check of the drafted load-search extension (`docs/reviews/
 > im ok with b
 
 Recorded by the lead: option B is approved. ADR-0021 §24 carries the record; revision 5 of ADR-0021 is drafted and independently reviewed before any code change or run. The lead also extends the dense control's learning-rate grid upward in revision 5 under the P10 delegation (no separate question was put to the human lead on it).
+
+### P10-S0: the outcome is accepted as registered (2026-11-16 UTC)
+
+The lead reported the registered run's outcome (row 4, ADDRESSING-QUALIFIED at 4,096 and 16,384 slots, arm A5-D), its caveats and the independent recomputation (1,065 comparisons, 0 disagreements), and asked whether the outcome is accepted as registered. The human lead, verbatim:
+
+> register it as it is, same as the other we commit push and the propose a P10-I to adress each better
+
+Recorded by the lead: the outcome is accepted unchanged, with its caveats (ADR-0020, last addendum, on `claude/p10-s0`). Each shortfall is a candidate item for the P10-I proposal, which is proposed and not run and needs the human lead's review. The lead does not read this message as a decision on any other open question.
