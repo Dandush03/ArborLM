@@ -1,0 +1,26 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/docs/reviews/p10s0-implementation-audit-2026-11-15/scripts/a7_registered_bypass.py", line 43, in <module>
+    stages.cmd_train(t)
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/stages.py", line 763, in cmd_train
+    return run_block(args, args.block)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/stages.py", line 749, in run_block
+    m1 = run_stage_tasks(f"train-{block}", args, tasks, run_dir, cap=stage_cap(args, cap_train))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/stages.py", line 382, in run_stage_tasks
+    registered_state(args)
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/stages.py", line 306, in registered_state
+    plan = load_plan(repo)
+           ^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/docs/reviews/p10s0-implementation-audit-2026-11-15/scripts/a7_registered_bypass.py", line 31, in lp
+    return orig_load(repo)
+           ^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/stages.py", line 1046, in load_plan
+    raise pool.StageRefused(f"refused: no freeze plan at {path}: nothing registered runs before the freeze")
+studies.p9.pool.StageRefused: refused: no freeze plan at /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/freeze/plan.json: nothing registered runs before the freeze

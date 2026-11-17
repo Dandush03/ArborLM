@@ -1,0 +1,148 @@
+{
+ "expected_identity": {
+  "source_sha256": "41e6bac72f2b21a98fd68d04f7a825150f712a467c46c64de451cd09a902bc80",
+  "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+  "spec_sha256": "3b3ccc7677021a87a003fafc0e002e57c7dccb21247d16e527599029089d1baa",
+  "config_sha256": "0d8b1f3449c1a54c699d5de49bee10f84d11e7c980d41689e8e58ee3609ca599"
+ },
+ "identity_blocks_checked": 784,
+ "distinct_identities": [
+  {
+   "config_sha256": "0d8b1f3449c1a54c699d5de49bee10f84d11e7c980d41689e8e58ee3609ca599",
+   "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+   "source_sha256": "41e6bac72f2b21a98fd68d04f7a825150f712a467c46c64de451cd09a902bc80",
+   "spec_sha256": "3b3ccc7677021a87a003fafc0e002e57c7dccb21247d16e527599029089d1baa",
+   "count": 778
+  },
+  {
+   "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9",
+   "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+   "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+   "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+   "count": 6
+  }
+ ],
+ "identity_mismatches": [
+  [
+   "gate_runs/identity_A0/theirs/rehearsal.json",
+   {
+    "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+    "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+    "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9"
+   }
+  ],
+  [
+   "gate_runs/identity_A1/theirs/rehearsal.json",
+   {
+    "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+    "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+    "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9"
+   }
+  ],
+  [
+   "gate_runs/identity_A2/theirs/rehearsal.json",
+   {
+    "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+    "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+    "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9"
+   }
+  ],
+  [
+   "gate_runs/identity_A5-D/theirs/rehearsal.json",
+   {
+    "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+    "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+    "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9"
+   }
+  ],
+  [
+   "gate_runs/identity_A6/theirs/rehearsal.json",
+   {
+    "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+    "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+    "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9"
+   }
+  ],
+  [
+   "gate_runs/identity_A7/theirs/rehearsal.json",
+   {
+    "source_sha256": "8da53fc82bd2c6f5644086a7b07a979f2618f9abcff4856a23c2b84116d6329c",
+    "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507",
+    "spec_sha256": "893b605d22b099f7b6f88129103e3da82658dfc416d965b4bf7665c7037fe9e1",
+    "config_sha256": "d5c9fe0bcca427a4aa30366611d441fb95960df15e5a0dad4ef5aa49502f0fc9"
+   }
+  ]
+ ],
+ "identity_mismatch_count": 6,
+ "byte_identity": {
+  "RESULTS.md": [
+   "P10S0-registered-20261115/results/RESULTS.md"
+  ],
+  "analysis.json": [
+   "P10S0-registered-20261115/analysis.json"
+  ],
+  "classes.csv": [
+   "P10S0-registered-20261115/results/classes.csv"
+  ],
+  "draw_plan.json": [
+   "P10S0-registered-20261115/draw_plan.json"
+  ],
+  "gates.json": [
+   "P10S0-registered-20261115/gates.json"
+  ],
+  "ledger_after_run.json": [
+   "P10S0-ledger.json"
+  ],
+  "manifests/analyze.json": [
+   "P10S0-registered-20261115/analyze/manifest.json"
+  ],
+  "manifests/evaluate-probe.json": [
+   "P10S0-registered-20261115/evaluate-probe/manifest.json"
+  ],
+  "manifests/evaluate-q1.json": [
+   "P10S0-registered-20261115/evaluate-q1/manifest.json"
+  ],
+  "manifests/evaluate-wx.json": [
+   "P10S0-registered-20261115/evaluate-wx/manifest.json"
+  ],
+  "manifests/gates.json": [
+   "P10S0-registered-20261115/gates/manifest.json"
+  ],
+  "manifests/report.json": [
+   "P10S0-registered-20261115/report/manifest.json"
+  ],
+  "manifests/train-probe.json": [
+   "P10S0-registered-20261115/train-probe/manifest.json"
+  ],
+  "manifests/train-q1.json": [
+   "P10S0-registered-20261115/train-q1/manifest.json"
+  ],
+  "manifests/train-wx.json": [
+   "P10S0-registered-20261115/train-wx/manifest.json"
+  ],
+  "q1_gate.json": [
+   "P10S0-registered-20261115/q1_gate.json"
+  ],
+  "q1_start.json": [
+   "P10S0-registered-20261115/q1_start.json"
+  ],
+  "results.json": [
+   "P10S0-registered-20261115/results/results.json"
+  ]
+ },
+ "cells_total": 256,
+ "cells_by_block": {
+  "PR": 6,
+  "Q1": 230,
+  "WX": 20
+ },
+ "train_status": {
+  "('completed', None)": 256
+ },
+ "cells_without_eval": []
+}

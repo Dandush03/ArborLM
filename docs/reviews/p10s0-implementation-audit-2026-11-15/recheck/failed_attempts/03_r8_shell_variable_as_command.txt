@@ -1,0 +1,1 @@
+my shell error: a variable holding "git -c ..." was invoked as a command (zsh does not word-split)

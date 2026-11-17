@@ -1,0 +1,479 @@
+{
+ "C0_charged_now_s": 486.2583528730902,
+ "gen_15_at_measured_s": 501.7332587551209,
+ "gen_15_at_cap_s": 1003.4665175102418,
+ "gates_measured_G_plus_12P_s": 78.08704096596921,
+ "gates_with_I1_ratio_s": 103.00267132114386,
+ "reserve_s": 60.0,
+ "Q1_full_h": 8.412721093431706,
+ "Q1_cut3_h": 5.839994184975981,
+ "WX_h": {
+  "A5-D": 0.8426511770061915,
+  "A1": 1.089185069511748
+ },
+ "PR_h": {
+  "A5-D": 3.284676759999485,
+  "A1": 5.505168470592406
+ },
+ "scenarios": {
+  "nominal (gen and gates at measured)": {
+   "charged_at_Q1_start_h": 0.2961,
+   "cap 16 h": {
+    "pre_full_need_h": 17.1549,
+    "pre_decision": "cut3",
+    "pre_cut3_need_h": 12.0095,
+    "post s=1.0 A5-D": {
+     "need_both_h": 14.4241,
+     "margin_both_s": 5673.2,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 19.3582,
+     "margin_both_s": -12089.4,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 15.0081,
+     "margin_both_s": 3570.8,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 19.9422,
+     "margin_both_s": -14191.8,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 15.8841,
+     "margin_both_s": 417.2,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 20.8182,
+     "margin_both_s": -17345.4,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 17.3441,
+     "margin_both_s": -4838.8,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 22.2782,
+     "margin_both_s": -22601.4,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.2698,
+    "max Q1 slowdown keeping WX A5-D": 2.3947,
+    "max Q1 slowdown keeping WX+probe A1": 0.425,
+    "max Q1 slowdown keeping WX A1": 2.3103
+   },
+   "cap 21 h": {
+    "pre_full_need_h": 17.1549,
+    "pre_decision": "full",
+    "pre_cut3_need_h": 12.0095,
+    "post s=1.0 A5-D": {
+     "need_both_h": 16.9968,
+     "margin_both_s": 14411.4,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 21.9309,
+     "margin_both_s": -3351.2,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 17.8381,
+     "margin_both_s": 11382.8,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 22.7722,
+     "margin_both_s": -6379.8,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 19.1,
+     "margin_both_s": 6839.9,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 24.0341,
+     "margin_both_s": -10922.7,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 21.2032,
+     "margin_both_s": -731.5,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 26.1373,
+     "margin_both_s": -18494.1,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.4758,
+    "max Q1 slowdown keeping WX A5-D": 2.2567,
+    "max Q1 slowdown keeping WX+probe A1": 0.8893,
+    "max Q1 slowdown keeping WX A1": 2.1981
+   },
+   "cap 22 h": {
+    "pre_full_need_h": 17.1549,
+    "pre_decision": "full",
+    "pre_cut3_need_h": 12.0095,
+    "post s=1.0 A5-D": {
+     "need_both_h": 16.9968,
+     "margin_both_s": 18011.4,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 21.9309,
+     "margin_both_s": 248.8,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 17.8381,
+     "margin_both_s": 14982.8,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 22.7722,
+     "margin_both_s": -2779.8,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 19.1,
+     "margin_both_s": 10439.9,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 24.0341,
+     "margin_both_s": -7322.7,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 21.2032,
+     "margin_both_s": 2868.5,
+     "decision": "WX+probe"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 26.1373,
+     "margin_both_s": -14894.1,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.5947,
+    "max Q1 slowdown keeping WX A5-D": 2.3756,
+    "max Q1 slowdown keeping WX+probe A1": 1.0082,
+    "max Q1 slowdown keeping WX A1": 2.317
+   },
+   "smallest cap (h, real) for WX+probe A5-D after Q1 full at projection": 16.9968,
+   "smallest cap (h, real) for WX+probe A1 after Q1 full at projection": 21.9309,
+   "smallest cap (h, real) for Q1 full before Q1": 17.1549
+  },
+  "gen at measured, gates with I1 x1.6 per draw": {
+   "charged_at_Q1_start_h": 0.3031,
+   "cap 16 h": {
+    "pre_full_need_h": 17.1618,
+    "pre_decision": "cut3",
+    "pre_cut3_need_h": 12.0164,
+    "post s=1.0 A5-D": {
+     "need_both_h": 14.431,
+     "margin_both_s": 5648.3,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 19.3651,
+     "margin_both_s": -12114.3,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 15.015,
+     "margin_both_s": 3545.9,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 19.9491,
+     "margin_both_s": -14216.7,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 15.891,
+     "margin_both_s": 392.3,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 20.8251,
+     "margin_both_s": -17370.3,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 17.351,
+     "margin_both_s": -4863.7,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 22.2851,
+     "margin_both_s": -22626.3,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.2687,
+    "max Q1 slowdown keeping WX A5-D": 2.3935,
+    "max Q1 slowdown keeping WX+probe A1": 0.4238,
+    "max Q1 slowdown keeping WX A1": 2.3091
+   },
+   "cap 21 h": {
+    "pre_full_need_h": 17.1618,
+    "pre_decision": "full",
+    "pre_cut3_need_h": 12.0164,
+    "post s=1.0 A5-D": {
+     "need_both_h": 17.0038,
+     "margin_both_s": 14386.4,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 21.9378,
+     "margin_both_s": -3376.1,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 17.845,
+     "margin_both_s": 11357.9,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 22.7791,
+     "margin_both_s": -6404.7,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 19.1069,
+     "margin_both_s": 6815.0,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 24.041,
+     "margin_both_s": -10947.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 21.2101,
+     "margin_both_s": -756.4,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 26.1442,
+     "margin_both_s": -18519.0,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.475,
+    "max Q1 slowdown keeping WX A5-D": 2.2559,
+    "max Q1 slowdown keeping WX+probe A1": 0.8885,
+    "max Q1 slowdown keeping WX A1": 2.1973
+   },
+   "cap 22 h": {
+    "pre_full_need_h": 17.1618,
+    "pre_decision": "full",
+    "pre_cut3_need_h": 12.0164,
+    "post s=1.0 A5-D": {
+     "need_both_h": 17.0038,
+     "margin_both_s": 17986.4,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 21.9378,
+     "margin_both_s": 223.9,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 17.845,
+     "margin_both_s": 14957.9,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 22.7791,
+     "margin_both_s": -2804.7,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 19.1069,
+     "margin_both_s": 10415.0,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 24.041,
+     "margin_both_s": -7347.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 21.2101,
+     "margin_both_s": 2843.6,
+     "decision": "WX+probe"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 26.1442,
+     "margin_both_s": -14919.0,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.5939,
+    "max Q1 slowdown keeping WX A5-D": 2.3748,
+    "max Q1 slowdown keeping WX+probe A1": 1.0074,
+    "max Q1 slowdown keeping WX A1": 2.3162
+   },
+   "smallest cap (h, real) for WX+probe A5-D after Q1 full at projection": 17.0038,
+   "smallest cap (h, real) for WX+probe A1 after Q1 full at projection": 21.9378,
+   "smallest cap (h, real) for Q1 full before Q1": 17.1618
+  },
+  "gen at its cap (66.9 s x 15), gates at its cap": {
+   "charged_at_Q1_start_h": 0.4572,
+   "cap 16 h": {
+    "pre_full_need_h": 17.316,
+    "pre_decision": "cut3",
+    "pre_cut3_need_h": 12.1705,
+    "post s=1.0 A5-D": {
+     "need_both_h": 14.5852,
+     "margin_both_s": 5093.4,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 19.5192,
+     "margin_both_s": -12669.2,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 15.1692,
+     "margin_both_s": 2991.0,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 20.1032,
+     "margin_both_s": -14771.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 16.0452,
+     "margin_both_s": -162.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 20.9792,
+     "margin_both_s": -17925.2,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 17.5052,
+     "margin_both_s": -5418.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 22.4392,
+     "margin_both_s": -23181.2,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.2423,
+    "max Q1 slowdown keeping WX A5-D": 2.3672,
+    "max Q1 slowdown keeping WX+probe A1": 0.3974,
+    "max Q1 slowdown keeping WX A1": 2.2827
+   },
+   "cap 21 h": {
+    "pre_full_need_h": 17.316,
+    "pre_decision": "full",
+    "pre_cut3_need_h": 12.1705,
+    "post s=1.0 A5-D": {
+     "need_both_h": 17.1579,
+     "margin_both_s": 13831.5,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 22.092,
+     "margin_both_s": -3931.0,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 17.9992,
+     "margin_both_s": 10803.0,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 22.9332,
+     "margin_both_s": -6959.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 19.2611,
+     "margin_both_s": 6260.1,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 24.1951,
+     "margin_both_s": -11502.5,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 21.3643,
+     "margin_both_s": -1311.4,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 26.2983,
+     "margin_both_s": -19073.9,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.4567,
+    "max Q1 slowdown keeping WX A5-D": 2.2376,
+    "max Q1 slowdown keeping WX+probe A1": 0.8702,
+    "max Q1 slowdown keeping WX A1": 2.179
+   },
+   "cap 22 h": {
+    "pre_full_need_h": 17.316,
+    "pre_decision": "full",
+    "pre_cut3_need_h": 12.1705,
+    "post s=1.0 A5-D": {
+     "need_both_h": 17.1579,
+     "margin_both_s": 17431.5,
+     "decision": "WX+probe"
+    },
+    "post s=1.0 A1": {
+     "need_both_h": 22.092,
+     "margin_both_s": -331.0,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.1 A5-D": {
+     "need_both_h": 17.9992,
+     "margin_both_s": 14403.0,
+     "decision": "WX+probe"
+    },
+    "post s=1.1 A1": {
+     "need_both_h": 22.9332,
+     "margin_both_s": -3359.6,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.25 A5-D": {
+     "need_both_h": 19.2611,
+     "margin_both_s": 9860.1,
+     "decision": "WX+probe"
+    },
+    "post s=1.25 A1": {
+     "need_both_h": 24.1951,
+     "margin_both_s": -7902.5,
+     "decision": "WX only (cut 1)"
+    },
+    "post s=1.5 A5-D": {
+     "need_both_h": 21.3643,
+     "margin_both_s": 2288.6,
+     "decision": "WX+probe"
+    },
+    "post s=1.5 A1": {
+     "need_both_h": 26.2983,
+     "margin_both_s": -15473.9,
+     "decision": "WX only (cut 1)"
+    },
+    "max Q1 slowdown keeping WX+probe A5-D": 1.5756,
+    "max Q1 slowdown keeping WX A5-D": 2.3565,
+    "max Q1 slowdown keeping WX+probe A1": 0.9891,
+    "max Q1 slowdown keeping WX A1": 2.2978
+   },
+   "smallest cap (h, real) for WX+probe A5-D after Q1 full at projection": 17.1579,
+   "smallest cap (h, real) for WX+probe A1 after Q1 full at projection": 22.092,
+   "smallest cap (h, real) for Q1 full before Q1": 17.316
+  }
+ }
+}

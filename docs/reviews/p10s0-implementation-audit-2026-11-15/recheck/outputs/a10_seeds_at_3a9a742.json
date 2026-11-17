@@ -1,0 +1,16 @@
+{
+ "inside_200001_209999": true,
+ "max": 209180,
+ "pairwise_overlaps": [],
+ "impl_differs": {},
+ "other_range_hits": {
+  "P9": [],
+  "P9-I": [],
+  "review": [],
+  "P9-II": [],
+  "S1": [],
+  "S2": []
+ },
+ "config_collisions": {},
+ "count": 1173
+}

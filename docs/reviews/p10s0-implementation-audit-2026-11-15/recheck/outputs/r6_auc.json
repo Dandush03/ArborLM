@@ -1,0 +1,26 @@
+{
+ "WX-A5-D": {
+  "implementation": 0.7152876420454546,
+  "auditor_bruteforce": 0.7152876420454546,
+  "abs_diff": 0.0,
+  "answer_sites": 128,
+  "others": 880,
+  "others_per_context": 55,
+  "impl_counts": [
+   128,
+   880
+  ]
+ },
+ "WX-A1": {
+  "implementation": 0.654296875,
+  "auditor_bruteforce": 0.654296875,
+  "abs_diff": 0.0,
+  "answer_sites": 128,
+  "others": 880,
+  "others_per_context": 55,
+  "impl_counts": [
+   128,
+   880
+  ]
+ }
+}

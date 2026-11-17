@@ -1,0 +1,13 @@
+{
+ "old_first_addition": {
+  "accepted": false,
+  "error": "StageRefused: refused: ec4e82395add2292e2d222718df6a8117710e53c is not the commit that added studies/p10s0/freeze/plan.json; HEAD itself is not a freeze"
+ },
+ "new_latest_addition": {
+  "accepted": true,
+  "result_keys": [
+   "commit",
+   "tree"
+  ]
+ }
+}
