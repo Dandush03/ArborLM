@@ -2,7 +2,7 @@
 
 **Status: DRAFT — NOT APPROVED. Nothing under this ADR is implemented, calibrated, frozen or run.**
 
-This file is a ledger, not a specification and not an ADR. It is the ledger asked for in `DIRECTION.md` section 6. It maps each open issue of the programme to one disposition. It revises no result, threshold, seed or outcome, reopens no study, and authorizes nothing. Every disposition is a proposal of the lead (Claude Fable 5.2) for the human lead to approve. ADR-0023 to ADR-0028 are proposed numbers; none of those ADRs is approved. ArborLM is unproven research; no row below is a success claim. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+This file is a ledger, not a specification and not an ADR. It is the ledger asked for in `DIRECTION.md` section 6. It maps each open issue of the programme to one disposition. It revises no result, threshold, seed or outcome, reopens no study, and authorizes nothing. Every disposition is a proposal of the lead (Claude Fable 5.2) for the human lead to approve. ADR-0023 to ADR-0029 are proposed numbers; none of those ADRs is approved. ArborLM is unproven research; no row below is a success claim. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 
 ## 1. How to read it
 
@@ -13,7 +13,7 @@ This file is a ledger, not a specification and not an ADR. It is the ledger aske
 | CARRIED INTO \<P10-I study\> | The unanswered part is proposed for that study's specification. The original status stands. "Candidate" means `DIRECTION.md` does not bind the study to it; the drafter of that ADR accepts or declines it in writing. |
 | RESERVED FOR THE HUMAN LEAD | No study can settle it. No ruling is proposed here. |
 
-Proposed studies: P10-I-S0 (ADR-0023, addressing and overload), S1 (ADR-0024, capacity scaling, with the frozen-checkpoint routing diagnosis lane), S2 (ADR-0025, sequential teacher transfer), S3 (ADR-0026, longer training), S4 (ADR-0027, quality against cost, conditional), S5 (ADR-0028, physical SSD, conditional).
+Proposed studies: P10-I-S0 (ADR-0023, addressing and overload), S1 (ADR-0024, capacity scaling), R (ADR-0029, frozen-checkpoint routing diagnosis; split out of ADR-0024 on the reviewer's and the lead's recommendation, pending the human lead's ruling), S2 (ADR-0025, sequential teacher transfer), S3 (ADR-0026, longer training), S4 (ADR-0027, quality against cost, conditional), S5 (ADR-0028, physical SSD, conditional).
 
 Labels in the second column are copied from the record named in the third. Paths are relative to the repository root.
 
@@ -25,7 +25,7 @@ Labels in the second column are copied from the record named in the third. Paths
 | P4: dense adapter against memory | "dense had lower loss in all 27 matched comparisons"; "Dense tolerance, the secondary advantage flag, and the composite criterion failed" | `results/p4-2026-11-12/`; ADR-0009 | CARRIED INTO | P10-I-S3 | `DIRECTION.md` section 4. S3's 512-update point is a new measurement; P4 is not revised. |
 | P4: capacity and slot association | "meeting the registered capacity and slot-association criteria" (C and P positive in 27 of 27) | `results/p4-2026-11-12/` | CLOSED AS RECORDED | — | Bounded finding at 512 updates and 198,401 trainable parameters. |
 | P5: dense-reference criteria | "All dense-reference criteria and the full learned-hierarchy criterion failed" | `results/p5-2026-11-13/README.md`; ADR-0010 | CARRIED INTO | P10-I-S3 | Competitiveness against the dense adapter only. The composite stays FAILED. |
-| P5: learned routing and latency | "**R failed**"; "both L criteria failed" | `results/p5-2026-11-13/README.md` | CLOSED AS RECORDED | — | The P5 review notes the router's limited gradient path (`docs/reviews/p5-claude-review-2026-11-13/README.md`). Routing on P10 checkpoints is a new question in P10-I-S1. |
+| P5: learned routing and latency | "**R failed**"; "both L criteria failed" | `results/p5-2026-11-13/README.md` | CLOSED AS RECORDED | — | The P5 review notes the router's limited gradient path (`docs/reviews/p5-claude-review-2026-11-13/README.md`). Routing on P10 checkpoints is a new question in P10-I-R (ADR-0029). |
 | P6-E timing | SP, PAR and PR "**INCONCLUSIVE**" | `docs/reviews/p6-results-2026-11-13/README.md`; ADR-0011 | CLOSED AS RECORDED | — | Not re-timed. No efficiency claim follows. |
 | P6-Q routing fidelity | "all four flags FAIL for both tree kinds" | same | CLOSED AS RECORDED | — | Applies to the P5 checkpoints only. |
 | P7-A | "CONCENTRATION-ONLY for both tree kinds" | `docs/reviews/p7a-results-2026-11-13/README.md`; ADR-0013 | CLOSED AS RECORDED | — | Simulation of page misses, not a storage measurement. |
@@ -55,7 +55,7 @@ Labels in the second column are copied from the record named in the third. Paths
 | Lane A, capacity (H17-CAP) | "CALIBRATION BLOCKED … not scientifically failed" | ADR-0017 status line and section 15.2 | SUPERSEDED BY | P10-S1 (ADR-0021) | P10-S1 asked the capacity question on an oracle-addressed store. Its open parts are in section 6. H17-CAP was not tested. |
 | Lane B, optimization and collapse (H17-UTIL) | same | same | SUPERSEDED BY | P9-II (ADR-0019) | P9-II studied collapse of learned addressing. The usage term of H17-UTIL was not tested by any study. |
 | Lane C, locality (H17-LOC) | same | same | CLOSED AS RECORDED | — | Unresolved. Stays calibration blocked. No P10-I study tests simulated page locality; P10-I-S5 has its own entry criteria. |
-| Lane D, incremental (H17-INC) | same | same | CARRIED INTO | P10-I-S2 (candidate) | Depends on ADR-0025 containing a retention measure for the first set. If it does not, the lane stays calibration blocked and closed as recorded. |
+| Lane D, incremental (H17-INC) | same | same | CARRIED INTO | P10-I-S2 (candidate) | Depends on ADR-0025 containing a retention measure for the first set. If it does not, the lane stays calibration blocked and closed as recorded. Draft ADR-0025 declines it with reasons (its section 13 item 7); the choice is item 3 of the reserved list. |
 | P9 testbed calibration | "TASK_CEILING_FAIL at 4,096"; frozen-hidden probes near chance | `results/p9-calibration-2026-11-14/README.md`; `docs/reviews/p9-calibration-audit-2026-11-14/AUDIT.md` | CLOSED AS RECORDED | — | A measurement about that testbed. |
 | P9-I outcome | "COMPLETE — NO_INTERFACE_SELECTED" | `results/p9i-run-attempt2-2026-11-15/OUTCOME.md`; ADR-0017 section 15.9 | CLOSED AS RECORDED | — | For the tested interfaces, within 8,192 updates. Accepted as a registered negative result. |
 | P9-I attempt 1 | "stopped at the gates stage before any training" | `results/p9i-run-attempt1-2026-11-14/` | CLOSED AS RECORDED | — | |
@@ -79,13 +79,13 @@ Accepted by the human lead as registered and unchanged on 2026-11-16 (ADR-0020, 
 | Overload | "OVERLOAD NOT QUALIFIED" (1 of 10 cells at 8K facts on 4K slots; failures on held-out templates only) | same | CARRIED INTO | P10-I-S0 | Binding (`DIRECTION.md` section 4): several loads; convergence-based training length; the 0.90 threshold is not lowered. |
 | One load, one training length | Design limit | same; `DIRECTION.md` section 5 | CARRIED INTO | P10-I-S0 | Design ceiling under the policy on limits. |
 | A5-D against A0 at 16,384 | "NOT DISTINGUISHED FROM A0 at 16,384 slots (d = +1); H20-D reads not supported" | same | CARRIED INTO | P10-I-S0 (candidate) | Accepted caveat. |
-| Record-length-free variant | "RECORD-LENGTH-FREE VARIANT: DOES NOT PASS" (2 of 10 and 0 of 10) | same | CARRIED INTO | P10-I-S0 (candidate) | Accepted caveat. "not evidence that the record length is required". |
-| 65,536 slots | "a probe only (3 of 3 draws, one initialization seed, per-draw bound 0.368); not a qualification" | same | CARRIED INTO | P10-I-S0 (candidate) | Addressing at 65,536 is not qualified by any study. |
+| Record-length-free variant | "RECORD-LENGTH-FREE VARIANT: DOES NOT PASS" (2 of 10 and 0 of 10) | same | CLOSED AS RECORDED | — | Accepted caveat. "not evidence that the record length is required". Unresolved: draft ADR-0023 declines it with reasons (its section 16) and the confirmation review judged that sound. |
+| 65,536 slots | "a probe only (3 of 3 draws, one initialization seed, per-draw bound 0.368); not a qualification" | same | CLOSED AS RECORDED | — | Unresolved: addressing at 65,536 is not qualified by any study. Draft ADR-0023 declines it with reasons, and no P10-I draft has a lane for it. |
 | A1 and A2 | A1 "UNRELIABLE at 16,384 (H20-B CONTRADICTED)"; A2 "FAILS at both (H20-C CONTRADICTED)" | same | CLOSED AS RECORDED | — | |
 | Condition 6 decided no class | Observation "for the design of later studies" | same | CARRIED INTO | P10-I-S0 | A design note; it changes nothing in P10-S0. |
 | Presentation defects of `RESULTS.md` | Recorded, not corrected | same; `docs/reviews/p10s0-results-2026-11-16/REVIEW.md` | CLOSED AS RECORDED | — | "qualifies at 16,384 ONLY" for A0 does not stand as a qualification. |
-| Sequential addition of facts | "moved to the integrated study or P10-I" | ADR-0020 section 12.2 | CARRIED INTO | P10-I-S2 (candidate) | Same question as Lane D; section 12.2 lists the design conditions. |
-| Learned addressing in the loaded regime | "OMITTED — NOT OVERLOAD-QUALIFIED" (lane L of P10-S1) | ADR-0021 section 25.17 | CARRIED INTO | P10-I-S0 | A learned-address lane in a capacity study depends on S0's overload result. |
+| Sequential addition of facts | "moved to the integrated study or P10-I" | ADR-0020 section 12.2 | CARRIED INTO | P10-I-S2 (candidate) | Same question as Lane D; section 12.2 lists the design conditions. Draft ADR-0025 declines it with reasons; the choice is item 3 of the reserved list. |
+| Learned addressing in the loaded regime | "OMITTED — NOT OVERLOAD-QUALIFIED" (lane L of P10-S1) | ADR-0021 section 25.17 | CARRIED INTO | P10-I-S0 (the licence) and P10-I-S1 (lane L) | A learned-address lane in a capacity study depends on S0's overload result. In draft ADR-0024 lane L is "to be specified in a revision" and is not approved with that draft. |
 | Hour cap | 6.09 h charged of 22 h; every planned cell ran | `OUTCOME.md` | CLOSED AS RECORDED | — | P10-S0 was not stopped by a cap. |
 
 ## 6. P10-S1 (ADR-0021)
@@ -103,8 +103,8 @@ Accepted by the human lead as recorded on 2026-11-17 (`results/p10s1-run-2026-11
 | Supplementary throughput | Descriptive; "not the registered stage and enters no outcome line" | `results/p10s1-run-2026-11-17/supplement/`; `ACCEPTANCE.md` ruling 4 | CLOSED AS RECORDED | — | It does not repair the failed stage. Not measured efficiency of a system. |
 | Seed-block section defect | 28 lines compare the wrong reads | `ERRATUM_SEED_BLOCK.md`; `OUTCOME.md` finding 3 | CARRIED INTO | P10-I-S1 | `RESULTS.md` kept as written. The analysis is tested on a synthetic registry, descriptive sections included. |
 | Dense comparisons and matched compute at 32K/16K | "F-OQ and H8 DENSE AHEAD"; "DENSE HOLDS MORE AT SATURATION" | `OUTCOME.md` section 2 and finding 4; `ACCEPTANCE.md` | CARRIED INTO | P10-I-S1 | At matched compute F-OQ is ahead of D-OQ by 0.24–0.33 bits in 5 of 5 replicates; the labels come from matched updates and D-OQ's best snapshot. |
-| Flat against tree quality gap | "hierarchy TREE_BEHIND" (read at U_P) | `OUTCOME.md` section 2; `LITERATURE_AND_ROUTING_NOTE.md` section 5 | CARRIED INTO | P10-I-S1 (routing diagnosis lane) | Own outcome line. The label is not changed by the run-length figures. |
-| Post-hoc index over the flat memory | F-OQ-IVF "DEPENDENCE_FAILED"; "conventional retrieval not sufficient for the three memory arms" | `OUTCOME.md` section 2; `audit/AUDIT.md` | CARRIED INTO | P10-I-S1 (routing diagnosis lane) | Candidate recall reported beside accuracy, at more than one candidate count. |
+| Flat against tree quality gap | "hierarchy TREE_BEHIND" (read at U_P) | `OUTCOME.md` section 2; `LITERATURE_AND_ROUTING_NOTE.md` section 5 | CARRIED INTO | P10-I-R (ADR-0029) | Own outcome line. The label is not changed by the run-length figures. |
+| Post-hoc index over the flat memory | F-OQ-IVF "DEPENDENCE_FAILED"; "conventional retrieval not sufficient for the three memory arms" | `OUTCOME.md` section 2; `audit/AUDIT.md` | CARRIED INTO | P10-I-R (ADR-0029) | Candidate recall reported beside accuracy, at more than one candidate count. |
 | Dictionary baseline | "DICT DOMINATES ON THIS TASK" | `OUTCOME.md` section 2; `ACCEPTANCE.md` | CARRIED INTO | P10-I-S1 | The baseline is kept. Value a plain lookup cannot provide is unresolved; a later study has to show it. |
 | Untuned memory learning rate | Memory arms 0.003 "untuned by design"; D-OQ calibrated | `OUTCOME.md` section 4 | CARRIED INTO | P10-I-S1 (candidate) | Not in the acceptance's list; the lead's proposal. |
 | Smaller report defects | Finding 5 (dropped replicates, "185 cells read", unlabelled rehearsal timing, two cap figures) | `OUTCOME.md` finding 5 | CARRIED INTO | P10-I-S1 | Reporting requirements only. |
@@ -170,3 +170,7 @@ Each appended entry ends with `Astra review: NOT_PERFORMED`, as the existing ent
 9. Entry decisions for P10-I-S4 and P10-I-S5 (`DIRECTION.md` section 8). This ledger carries items towards them and authorizes neither.
 
 `Astra review: NOT_PERFORMED`.
+
+## Revision note (2026-11-17 UTC)
+
+After the independent reviews of the drafts, the lead aligned this ledger with them: the routing diagnosis is P10-I-R (draft ADR-0029, split out of ADR-0024, pending the human lead's ruling); the record-length-free variant and the 65,536-slot item of P10-S0 are closed as recorded (unresolved) because draft ADR-0023 declines them; lane L is split between P10-I-S0 (the licence) and P10-I-S1 (the lane, not yet specified); Lane D and the sequential addition of facts are declined by draft ADR-0025 and stay with the human lead. No original status changed.

@@ -280,7 +280,7 @@ The P4 setting has a tree with a sparse read, so the interaction the human lead 
 
 Reading rule for G_train at each c: TREE BEHIND if mean ≥ +0.005 and G_train > 0 in ≥ 22/27 cells; TREE AHEAD if mean ≤ −0.005 and G_train < 0 in ≥ 22/27; otherwise WITHIN RESOLUTION. The same rule is applied to G_read (RESTRICTION COSTS / WITHIN RESOLUTION / RESTRICTION HELPS). G_prior is printed without a label. Trend: "GAP CHANGES WITH DURATION" if the label at 512 differs from the label at U\*, otherwise "NO CHANGE AT THIS RESOLUTION". Because a label can change on a small move across the threshold, ΔG = G(U\*) − G(512) is printed with its mean and sign count beside every trend label. Distinct selected slots and branch-use entropy are printed too.
 
-**This section is descriptive and is not a third outcome line.** Reasons: (1) the routing-quality outcome line belongs to ADR-0024, and a second registered routing line on a different task could be read as standing in for it; (2) in P5 the tree-versus-flat difference at 512 updates was 0.0014, inside the resolution; (3) the interaction is a statement about several checkpoints, and the direction makes every checkpoint before U\* descriptive. The reading rule is written in full and its code is tested like the registered rules (section 11). Whether a descriptive section satisfies "tested in ADR-0026" is open choice 6.
+**This section is descriptive and is not a third outcome line.** Reasons: (1) the routing-quality outcome line belongs to ADR-0029 (P10-I-R), and a second registered routing line on a different task could be read as standing in for it; (2) in P5 the tree-versus-flat difference at 512 updates was 0.0014, inside the resolution; (3) the interaction is a statement about several checkpoints, and the direction makes every checkpoint before U\* descriptive. The reading rule is written in full and its code is tested like the registered rules (section 11). Whether a descriptive section satisfies "tested in ADR-0026" is open choice 6.
 
 ### 6.7 Other descriptive output
 
@@ -416,7 +416,7 @@ Both clauses must hold, for M-TREE. Whether a qualifying label still qualifies w
 | NOT COMPETITIVE, both arms CONVERGED | S3 supplies no entry evidence. The P4 pattern holds at 16,384 updates in this setting. | Not a statement about larger stores, where a dense alternative must grow with the store, and not a revision of P10-S1, which remains the other route the direction names (its registered label is DENSE AHEAD; the matched-compute observation at 32K/16K is an audit disclosure). |
 | NOT COMPETITIVE "(MEMORY STILL IMPROVING)", or INCONCLUSIVE | No entry evidence, and no evidence against. | Not a reason to extend this study. |
 
-COMPETITIVENESS[FLAT] is shown beside the headline in every case. A flat memory that is competitive where the tree is not points to the routing work of ADR-0024, not to S4.
+COMPETITIVENESS[FLAT] is shown beside the headline in every case. A flat memory that is competitive where the tree is not points to the routing work of ADR-0029 (P10-I-R), not to S4.
 
 ## 13. Open choices reserved for the human lead
 
