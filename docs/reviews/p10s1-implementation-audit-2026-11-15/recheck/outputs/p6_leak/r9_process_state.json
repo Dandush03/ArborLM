@@ -1,0 +1,27 @@
+{
+ "before": {
+  "threads": 6,
+  "interop": 18,
+  "deterministic": false,
+  "dtype": "torch.float32",
+  "torch_rng_sha": 328110,
+  "py_rng": [
+   2147483648,
+   1529999443
+  ],
+  "env_P10S1": {}
+ },
+ "exit": 2,
+ "after_work_calibrate_cell_refused": {
+  "threads": 1,
+  "interop": 1,
+  "deterministic": true,
+  "dtype": "torch.float32",
+  "torch_rng_sha": 316607,
+  "py_rng": [
+   2147483648,
+   3564348608
+  ],
+  "env_P10S1": {}
+ }
+}

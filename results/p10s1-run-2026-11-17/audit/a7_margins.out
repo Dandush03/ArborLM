@@ -1,0 +1,15 @@
+F-OQ C1 r1 A verdict CAPACITY: gain_s=0.0867 within 0.02 of 0.1
+F-OQ C1 r1 B verdict CAPACITY: gain_s=0.0867 within 0.02 of 0.1
+F-OQ-IVF N1 r1 A verdict UNRESOLVED: gain_s=0.109 within 0.02 of 0.1
+F-OQ-IVF N1 r3 A verdict DEPENDENCE_FAILED: d_mc=0.4897 within 0.02 of 0.5
+F-OQ-IVF N1 r3 B verdict DEPENDENCE_FAILED: gain_s=0.0801 within 0.02 of 0.1
+F-OQ-IVF C2 r3 B verdict GAIN WITHIN BUDGET ONLY: a_l_up=0.481 within 0.02 of 0.5
+F-OQ-IVF C2 r4 A verdict CAPACITY: a_l_up=0.5043 within 0.02 of 0.5
+F-OQ-IVF C2 r4 B verdict CAPACITY: a_l_up=0.5029 within 0.02 of 0.5
+F-OQ-IVF N2 r2 A verdict DEPENDENCE_FAILED: gain_s=0.106 within 0.02 of 0.1
+F-OQ-IVF N2 r2 B verdict DEPENDENCE_FAILED: gain_s=0.0901 within 0.02 of 0.1
+T-OQ C1 r1 A verdict GAIN WITHIN BUDGET ONLY: gain_s=0.1059 within 0.02 of 0.1
+T-OQ C1 r1 B verdict GAIN WITHIN BUDGET ONLY: gain_s=0.0882 within 0.02 of 0.1
+T-OQ N1 r3 B verdict GAIN WITHIN BUDGET ONLY: d_sat=0.4957 within 0.02 of 0.5
+T-OQ N1 r5 B verdict GAIN WITHIN BUDGET ONLY: d_sat=0.4957 within 0.02 of 0.5
+H8 N2 r2 A verdict CAPACITY: gain_s=0.0831 within 0.02 of 0.1

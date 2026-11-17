@@ -1,0 +1,9 @@
+P10S1 stage REFUSED: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/a4run/calibration_items_load_row_up.json exists; the rules are applied once
+runs still in progress (no train record): ['CAL_T-OQ_f32768_n4096_d1_i2191_y524288', 'CAL_T-OQ_f32768_n4096_d2_i2193_y524288']
+stage manifest present: False
+{"items_record": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/a4run/calibration_items_load_row_up.json", "returns_to_lead": [], "dry_substituted": []}
+exit code: 0 | once-only items record written: True
+  32K/4K: action GRID_STANDS, U_L 196608, status F-OQ ONLY, T-OQ notes {'1': 'no train record (not run, or stopped at its item cap)', '2': 'no train record (not run, or stopped at its item cap)'}
+  8K/1K: action GRID_STANDS, U_L 98304, status BOTH ARMS, T-OQ notes {}
+  row U_P: {'2048': 8192, '32768': 8192, '8192': 8192} | returns: []
+second application after the runs finish would be refused (exit 2 expected): 2

@@ -1,0 +1,61 @@
+{
+ "u_t": {
+  "impl": {
+   "kind": "exact",
+   "lo": 2895.3744971787078,
+   "hi": 2895.3744971787078
+  },
+  "hand": 2895.3744971787078,
+  "m_prev": 2.500284199691493,
+  "m_hit": 3.5006476432047524,
+  "equal": true
+ },
+ "left": {
+  "kind": "left",
+  "lo": 0.0,
+  "hi": 1024.0
+ },
+ "right": {
+  "kind": "right",
+  "lo": 2048.0,
+  "hi": Infinity
+ },
+ "plateau": {
+  "i_star_run": 3.8809546309771057,
+  "i_star_half": 3.800358155540943,
+  "plateaued": true,
+  "loaded": true,
+  "hand": "plateaued True, loaded True"
+ },
+ "not_plateaued": {
+  "plateaued": false,
+  "hand": "0.15 > 0.10 -> False"
+ },
+ "mc": {
+  "impl": {
+   "status": "OK",
+   "small_update": 32768,
+   "large_update": 8192,
+   "multiplier": 3.94,
+   "cheaper": "small"
+  },
+  "hand": "OK, small at 32768, large at 8192, multiplier 3.94"
+ },
+ "mc_short": {
+  "impl": {
+   "status": "MC-SHORT",
+   "small_update": null,
+   "large_update": null,
+   "multiplier": 4.285714285714286,
+   "cheaper": "small"
+  },
+  "hand": "ratio 4.29 -> grid 6.0 -> 49152 > 32768 -> MC-SHORT"
+ },
+ "capacity_by_hand": {
+  "verdict": "CAPACITY",
+  "delta_mu": 1.2496181384891578,
+  "delta_sat": 0.8693111507168045,
+  "delta_mc": 0.9102615135149024,
+  "hand": "CAPACITY (1.25, 0.87, 0.91)"
+ }
+}

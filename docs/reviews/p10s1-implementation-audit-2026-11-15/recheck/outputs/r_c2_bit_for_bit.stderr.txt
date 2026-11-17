@@ -1,0 +1,8 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+F-OQ 4096 True
+F-OQ 16384 True
+F-OQ 65536 True
+R2 4096 True
+R2 65536 True
+PYTHONPATH=. uv run --locked python $P/$s.py > $P/recheck/outputs/r_$s.json 2  4.21s user 0.46s system 84% cpu 5.542 total

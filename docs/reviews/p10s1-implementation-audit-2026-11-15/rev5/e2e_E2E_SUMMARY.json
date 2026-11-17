@@ -1,0 +1,431 @@
+{
+ "source": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1",
+ "clone": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/clone",
+ "workdir": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e",
+ "switch": "P10S1_TEST_SEEDS=1 (test seed sets only; DRY sizes; synthetic backbone)",
+ "note": "tiny synthetic sizes: nothing here measures anything",
+ "analysis": {
+  "status": "COMPLETE",
+  "capacity": "CAPACITY-INCONCLUSIVE",
+  "efficiency": "EFFICIENCY-INCONCLUSIVE",
+  "saturation": "SATURATION NOT MEASURED"
+ },
+ "freeze_commit": "465fbdd6b09189b29ceb738dc48f02baf750b97e",
+ "report": "RESULTS.md written (the run directory is removed at the end)",
+ "ledger_entries": 12,
+ "draws": [
+  "p10s1-test-0",
+  "p10s1-test-1",
+  "p10s1-test-2",
+  "p10s1-test-3",
+  "p10s1-test-4"
+ ],
+ "plan": {
+  "data_manifests": [
+   "p10s1-test-0",
+   "p10s1-test-1",
+   "p10s1-test-2",
+   "p10s1-test-3",
+   "p10s1-test-4"
+  ],
+  "generation": {
+   "cap_seconds": 600.0,
+   "manifest_sha256": "",
+   "measured_seconds": 0.0,
+   "provisional": false,
+   "source": "typed",
+   "table_facts": 32768
+  }
+ },
+ "report_bytes": 43541,
+ "steps": [
+  {
+   "step": "git add code",
+   "argv": [
+    "git",
+    "add",
+    "-A"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git commit code",
+   "argv": [
+    "git",
+    "commit",
+    "--quiet",
+    "--allow-empty",
+    "-m",
+    "e2e: code under test"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git rev-parse",
+   "argv": [
+    "git",
+    "rev-parse",
+    "HEAD"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "probe: gates.sh before the freeze",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/gates.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "95a10fe0eee83e39d08c2b6f03ce713160cd381d"
+   ],
+   "exit": 2,
+   "expected": 2,
+   "ok": true,
+   "seconds": 3.3,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/03-probe: gates.sh before the freeze.log"
+  },
+  {
+   "step": "dry prerequisites",
+   "argv": [
+    "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python",
+    "-m",
+    "studies.p10s1.stages",
+    "dry",
+    "--out-root",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/dry",
+    "--workers",
+    "3"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 746.2,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/04-dry prerequisites.log"
+  },
+  {
+   "step": "set-cap (the computed cap of the projection)",
+   "argv": [
+    "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python",
+    "-m",
+    "studies.p10s1.stages",
+    "set-cap",
+    "--projection",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/dry/P10S1DRY-rehearsal/projection.json"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 1.4,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/05-set-cap (the computed cap of the projection).log"
+  },
+  {
+   "step": "set-generation-cap",
+   "argv": [
+    "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python",
+    "-m",
+    "studies.p10s1.stages",
+    "set-generation-cap",
+    "--generation-seconds",
+    "600"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 1.5,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/06-set-generation-cap.log"
+  },
+  {
+   "step": "git add generation cap",
+   "argv": [
+    "git",
+    "add",
+    "-A"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git commit generation cap",
+   "argv": [
+    "git",
+    "commit",
+    "--quiet",
+    "-m",
+    "e2e: generation cap set"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git rev-parse",
+   "argv": [
+    "git",
+    "rev-parse",
+    "HEAD"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "generate.sh (five test draws)",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/generate.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "0b1391491ac91a249189825bf3f35f8a6241fa81"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 100.9,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/10-generate.sh (five test draws).log"
+  },
+  {
+   "step": "freeze",
+   "argv": [
+    "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python",
+    "-m",
+    "studies.p10s1.stages",
+    "freeze",
+    "--run-dir",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "--projection",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/dry/P10S1DRY-rehearsal/projection.json",
+    "--calibration",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/dry/P10S1DRY-calibration/calibration.json",
+    "--timing",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/dry/P10S1DRY-rehearsal/timing.json",
+    "--gates",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/dry/P10S1DRY-rehearsal/gates.json"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 2.1,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/11-freeze.log"
+  },
+  {
+   "step": "git add freeze",
+   "argv": [
+    "git",
+    "add",
+    "-A"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git commit freeze",
+   "argv": [
+    "git",
+    "commit",
+    "--quiet",
+    "-m",
+    "e2e: freeze"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git rev-parse",
+   "argv": [
+    "git",
+    "rev-parse",
+    "HEAD"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "probe: gates.sh before Decision 2",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/gates.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 2,
+   "expected": 2,
+   "ok": true,
+   "seconds": 3.6,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/15-probe: gates.sh before Decision 2.log"
+  },
+  {
+   "step": "git add decision 2",
+   "argv": [
+    "git",
+    "add",
+    "-A"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "git commit decision 2",
+   "argv": [
+    "git",
+    "commit",
+    "--quiet",
+    "-m",
+    "e2e: decision 2 record"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 0.0,
+   "log": null
+  },
+  {
+   "step": "probe: typed stage cap",
+   "argv": [
+    "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python",
+    "-m",
+    "studies.p10s1.stages",
+    "registered",
+    "gates",
+    "--run-dir",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "--freeze-commit",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e",
+    "--stage-cap-seconds",
+    "999999"
+   ],
+   "exit": 2,
+   "expected": 2,
+   "ok": true,
+   "seconds": 1.2,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/18-probe: typed stage cap.log"
+  },
+  {
+   "step": "gates.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/gates.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 15.3,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/19-gates.sh.log"
+  },
+  {
+   "step": "train.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/train.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 143.0,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/20-train.sh.log"
+  },
+  {
+   "step": "evaluate.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/evaluate.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 267.2,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/21-evaluate.sh.log"
+  },
+  {
+   "step": "timing.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/timing.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 50.3,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/22-timing.sh.log"
+  },
+  {
+   "step": "simulate.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/simulate.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 10.5,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/23-simulate.sh.log"
+  },
+  {
+   "step": "analysis.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/analysis.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 8.4,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/24-analysis.sh.log"
+  },
+  {
+   "step": "report.sh",
+   "argv": [
+    "sh",
+    "studies/p10s1/launch/report.sh",
+    "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/registered-run",
+    "465fbdd6b09189b29ceb738dc48f02baf750b97e"
+   ],
+   "exit": 0,
+   "expected": 0,
+   "ok": true,
+   "seconds": 6.7,
+   "log": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1audit/bt2/test_the_registered_sequence_r0/e2e/logs/25-report.sh.log"
+  }
+ ],
+ "ok": true
+}

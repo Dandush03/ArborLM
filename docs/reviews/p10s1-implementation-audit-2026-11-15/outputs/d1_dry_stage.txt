@@ -1,0 +1,47 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{"stage": "generate-p10s1-test-0", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/generate-p10s1-test-0/manifest.json", "charged_seconds": 6.2}
+{"stage": "generate-p10s1-test-0", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-rehearsal/generate-p10s1-test-0/manifest.json", "charged_seconds": 6.0}
+{"stage": "calibrate", "status": "COMPLETE", "tasks": 6, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-calibration/calibrate/manifest.json", "charged_seconds": 20.4}
+{"calibration": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-calibration/calibration.json", "returns_to_lead": ["at 4,096 slots neither load 2 nor load 8 is loaded: no registered 4,096-slot cell is predicted loaded", "the U_P check failed: the work returns to the human lead; no larger U_P is substituted by rule", "D-OQ's learning rate: rates [0.001, 0.003, 0.01] are within 0.02 in minimum Panel A accuracy at U_P: PENDING LEAD REVIEW: section 10.1 item 3 says a difference below 0.02 'goes to the faster of the two'; the rule is not defined, so a tie within 0.02 is not resolved by code"]}
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-rehearsal/gates/manifest.json", "charged_seconds": 4.6}
+{"stage": "rehearse", "status": "COMPLETE", "tasks": 33, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-rehearsal/rehearse/manifest.json", "charged_seconds": 24.5}
+{"stage": "timing", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-rehearsal/timing/manifest.json", "charged_seconds": 6.2}
+{"stage": "synthetic", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-rehearsal/synthetic/manifest.json", "charged_seconds": 5.4}
+{"projection": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-rehearsal/projection.json", "returns_to_lead": [], "chosen": []}
+{"plan": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/freeze/plan.json", "sha256": "d508ca64fac6d58564da7537645887f6ffdd86f20cf536e46c1508fd6e55027a", "caps": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/freeze/stage_caps.json", "caps_sha256": "06c062f69702231f921898b4c56f88d10bcc2076d2dfbdc6f6f7021cbf3ed3fc"}
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/gates/manifest.json", "charged_seconds": 7.1}
+{"stage": "train", "status": "COMPLETE", "tasks": 21, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/train/manifest.json", "charged_seconds": 43.0}
+{"stage": "evaluate", "status": "COMPLETE", "tasks": 36, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/evaluate/manifest.json", "charged_seconds": 146.0}
+{"stage": "timing", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/timing/manifest.json", "charged_seconds": 28.3}
+{"stage": "simulate", "status": "COMPLETE", "tasks": 3, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/simulate/manifest.json", "charged_seconds": 1.6}
+{"stage": "analyze", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/analyze/manifest.json", "charged_seconds": 0.9}
+{"stage": "report", "status": "COMPLETE", "tasks": 1, "manifest": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/report/manifest.json", "charged_seconds": 0.8}
+{
+ "run_dir": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run",
+ "banner": "DRY: tiny synthetic sizes, random synthetic backbone, test seeds; not a measurement of anything",
+ "stages": {
+  "generate": 0,
+  "generate-rehearsal": 0,
+  "calibrate": 1,
+  "gates": 0,
+  "rehearse": 0,
+  "timing": 0,
+  "synthetic": 0,
+  "project": 0,
+  "freeze": 0,
+  "gates-run": 0,
+  "train": 0,
+  "evaluate": 0,
+  "throughput": 0,
+  "simulate": 0,
+  "analyze": 0,
+  "report": 0
+ },
+ "status": "COMPLETE",
+ "capacity": "CAPACITY-INCONCLUSIVE",
+ "efficiency": "EFFICIENCY-INCONCLUSIVE",
+ "report": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/dry1/root/P10S1DRY-run/results/RESULTS.md",
+ "charged_seconds": 301.1408782918588
+}
+PYTHONPATH=. uv run --locked python -m studies.p10s1.stages dry --out-root     848.00s user 130.58s system 323% cpu 5:02.31 total

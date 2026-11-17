@@ -1,0 +1,157 @@
+{
+ "raw passes, a_use fails (R2 0.97/0.93, H8 0.95/0.85, overload F-OQ 0.95/0.85 at every candidate)": {
+  "u_p_check_stands": false,
+  "u_p_failures": 12,
+  "h8_undertrained": [
+   "2K/4K",
+   "32K/64K",
+   "8K/16K"
+  ],
+  "overload": {
+   "u_p": null,
+   "action": "RETURN_TO_LEAD",
+   "reason": "none of 8,192, 16,384, 32,768 qualifies"
+  },
+  "dense_rates": {
+   "16384": {
+    "rate": 0.003,
+    "decided_by": "faster learner: a_use at 2048",
+    "walk": [
+     {
+      "update": 4096,
+      "a_use": {
+       "0.001": 0.39990234375,
+       "0.003": 0.39990234375
+      }
+     },
+     {
+      "update": 2048,
+      "a_use": {
+       "0.001": 0.199951171875,
+       "0.003": 0.25
+      }
+     }
+    ],
+    "min_accuracy": {
+     "0.001": 0.6201171875,
+     "0.003": 0.6298828125,
+     "0.01": 0.320068359375
+    },
+    "contenders": [
+     0.001,
+     0.003
+    ]
+   },
+   "65536": {
+    "rate": 0.003,
+    "decided_by": "faster learner: a_use at 2048",
+    "walk": [
+     {
+      "update": 4096,
+      "a_use": {
+       "0.001": 0.39990234375,
+       "0.003": 0.39990234375
+      }
+     },
+     {
+      "update": 2048,
+      "a_use": {
+       "0.001": 0.199951171875,
+       "0.003": 0.25
+      }
+     }
+    ],
+    "min_accuracy": {
+     "0.001": 0.6201171875,
+     "0.003": 0.6298828125,
+     "0.01": 0.320068359375
+    },
+    "contenders": [
+     0.001,
+     0.003
+    ]
+   }
+  },
+  "returns_to_lead": [
+   "at 4,096 slots neither load 2 nor load 8 is loaded: no registered 4,096-slot cell is predicted loaded",
+   "the U_P check failed: the work returns to the human lead; no larger U_P is substituted by rule",
+   "no U_P of the overload row qualifies"
+  ]
+ },
+ "a_use passes only from 16,384 updates on the overload row": {
+  "u_p_check_stands": true,
+  "u_p_failures": 0,
+  "h8_undertrained": [],
+  "overload": {
+   "u_p": 16384,
+   "action": "GRID_STANDS"
+  },
+  "dense_rates": {
+   "16384": {
+    "rate": 0.003,
+    "decided_by": "faster learner: a_use at 2048",
+    "walk": [
+     {
+      "update": 4096,
+      "a_use": {
+       "0.001": 0.39990234375,
+       "0.003": 0.39990234375
+      }
+     },
+     {
+      "update": 2048,
+      "a_use": {
+       "0.001": 0.199951171875,
+       "0.003": 0.25
+      }
+     }
+    ],
+    "min_accuracy": {
+     "0.001": 0.6201171875,
+     "0.003": 0.6298828125,
+     "0.01": 0.320068359375
+    },
+    "contenders": [
+     0.001,
+     0.003
+    ]
+   },
+   "65536": {
+    "rate": 0.003,
+    "decided_by": "faster learner: a_use at 2048",
+    "walk": [
+     {
+      "update": 4096,
+      "a_use": {
+       "0.001": 0.39990234375,
+       "0.003": 0.39990234375
+      }
+     },
+     {
+      "update": 2048,
+      "a_use": {
+       "0.001": 0.199951171875,
+       "0.003": 0.25
+      }
+     }
+    ],
+    "min_accuracy": {
+     "0.001": 0.6201171875,
+     "0.003": 0.6298828125,
+     "0.01": 0.320068359375
+    },
+    "contenders": [
+     0.001,
+     0.003
+    ]
+   }
+  },
+  "returns_to_lead": [
+   "at 4,096 slots neither load 2 nor load 8 is loaded: no registered 4,096-slot cell is predicted loaded"
+  ]
+ },
+ "expected": {
+  "scenario 1": "U_P check fails (R2 a_use 0.93 < 0.95), every H8 cell UNDERTRAINED (a_use 0.85 < 0.90), overload RETURN_TO_LEAD (F-OQ a_use 0.85 < 0.90 at 8,192, 16,384, 32,768); dense rate 0.003 decided at U_P/4",
+  "scenario 2": "overload U_P = 16,384 (raw accuracy would have given 8,192)"
+ }
+}

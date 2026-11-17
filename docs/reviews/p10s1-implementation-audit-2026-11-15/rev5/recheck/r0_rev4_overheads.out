@@ -1,0 +1,13 @@
+tasks 46; overhead min 5.9 s, median 35.3 s, max 471.6 s; snapshots min 1 max 10
+fit: overhead = 15.88 s + 16.77 s * snapshots
+  ('D-OQ', 16384): overhead per snapshot median 4.64 s over 6 tasks
+  ('D-OQ', 65536): overhead per snapshot median 51.22 s over 6 tasks
+  ('F-OQ', 4096): overhead per snapshot median 7.60 s over 10 tasks
+  ('F-OQ', 16384): overhead per snapshot median 17.10 s over 10 tasks
+  ('F-OQ', 65536): overhead per snapshot median 46.28 s over 2 tasks
+  ('H8', 4096): overhead per snapshot median 6.31 s over 2 tasks
+  ('H8', 16384): overhead per snapshot median 7.18 s over 2 tasks
+  ('H8', 65536): overhead per snapshot median 12.24 s over 2 tasks
+  ('R2', 4096): overhead per snapshot median 8.53 s over 2 tasks
+  ('R2', 16384): overhead per snapshot median 8.55 s over 2 tasks
+  ('R2', 65536): overhead per snapshot median 17.38 s over 2 tasks

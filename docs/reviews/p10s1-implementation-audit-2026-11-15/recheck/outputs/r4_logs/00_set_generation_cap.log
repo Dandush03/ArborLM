@@ -1,0 +1,5 @@
+$ /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python -m studies.p10s1.stages set-generation-cap --generation-seconds 600
+--- stdout
+{"config": "<scratch>/r4/clone/configs/p10s1_capacity.toml", "generation_cap_seconds": 600.0, "table_facts": 32768, "provisional": false}
+
+--- stderr

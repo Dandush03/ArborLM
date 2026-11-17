@@ -1,0 +1,2 @@
+# Review scripts of the re-check; style-only rules are not enforced for them (same set as the parent folder plus the ones these scripts trip).
+extend = "../ruff.toml"

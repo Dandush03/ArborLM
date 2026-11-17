@@ -1,0 +1,49 @@
+$ /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/bin/python -m studies.p10s1.stages dry --out-root <scratch>/e2e/dry
+
+--- stdout
+{"stage": "generate-p10s1-test-0", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/generate-p10s1-test-0/manifest.json", "charged_seconds": 7.5}
+{"stage": "generate-p10s1-test-0", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-rehearsal/generate-p10s1-test-0/manifest.json", "charged_seconds": 10.7}
+{"stage": "calibrate", "status": "COMPLETE", "tasks": 6, "manifest": "<scratch>/e2e/dry/P10S1DRY-calibration/calibrate/manifest.json", "charged_seconds": 23.1}
+{"calibration": "<scratch>/e2e/dry/P10S1DRY-calibration/calibration.json", "returns_to_lead": ["at 4,096 slots neither load 2 nor load 8 is loaded: no registered 4,096-slot cell is predicted loaded", "the U_P check failed: the work returns to the human lead; no larger U_P is substituted by rule"]}
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-rehearsal/gates/manifest.json", "charged_seconds": 7.3}
+{"stage": "rehearse", "status": "COMPLETE", "tasks": 33, "manifest": "<scratch>/e2e/dry/P10S1DRY-rehearsal/rehearse/manifest.json", "charged_seconds": 23.4}
+{"stage": "timing", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-rehearsal/timing/manifest.json", "charged_seconds": 7.6}
+{"stage": "synthetic", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-rehearsal/synthetic/manifest.json", "charged_seconds": 30.2}
+{"projection": "<scratch>/e2e/dry/P10S1DRY-rehearsal/projection.json", "returns_to_lead": [], "chosen": []}
+{"plan": "<scratch>/e2e/dry/freeze/plan.json", "sha256": "785c6061b04f0801e12d7c368abb165b7058344b0baccbbde4f5edaedd3fd6a1", "caps": "<scratch>/e2e/dry/freeze/stage_caps.json", "caps_sha256": "c73ce4568c8d370922e22e9f597453905907a5737eb813d3602f61c46a5a3487"}
+{"stage": "gates", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/gates/manifest.json", "charged_seconds": 7.6}
+{"stage": "train", "status": "COMPLETE", "tasks": 21, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/train/manifest.json", "charged_seconds": 37.7}
+{"stage": "evaluate", "status": "COMPLETE", "tasks": 36, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/evaluate/manifest.json", "charged_seconds": 169.7}
+{"stage": "timing", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/timing/manifest.json", "charged_seconds": 31.0}
+{"stage": "simulate", "status": "COMPLETE", "tasks": 3, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/simulate/manifest.json", "charged_seconds": 2.6}
+{"stage": "analyze", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/analyze/manifest.json", "charged_seconds": 1.8}
+{"stage": "report", "status": "COMPLETE", "tasks": 1, "manifest": "<scratch>/e2e/dry/P10S1DRY-run/report/manifest.json", "charged_seconds": 1.3}
+{
+ "run_dir": "<scratch>/e2e/dry/P10S1DRY-run",
+ "banner": "DRY: tiny synthetic sizes, random synthetic backbone, test seeds; not a measurement of anything",
+ "stages": {
+  "generate": 0,
+  "generate-rehearsal": 0,
+  "calibrate": 1,
+  "gates": 0,
+  "rehearse": 0,
+  "timing": 0,
+  "synthetic": 0,
+  "project": 0,
+  "freeze": 0,
+  "gates-run": 0,
+  "train": 0,
+  "evaluate": 0,
+  "throughput": 0,
+  "simulate": 0,
+  "analyze": 0,
+  "report": 0
+ },
+ "status": "COMPLETE",
+ "capacity": "CAPACITY-INCONCLUSIVE",
+ "efficiency": "EFFICIENCY-INCONCLUSIVE",
+ "report": "<scratch>/e2e/dry/P10S1DRY-run/results/RESULTS.md",
+ "charged_seconds": 361.60740670509404
+}
+
+--- stderr

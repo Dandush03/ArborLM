@@ -1,0 +1,21 @@
+>           raise RuntimeError(f"git {' '.join(args)} failed: {done.stderr.decode().strip()}")
+E           RuntimeError: git rev-parse --path-format=absolute --git-common-dir failed: fatal: not a git repository (or any of the parent directories): .git
+E        +  where 1 = CompletedProcess(args=['sh', '/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm... not a git repository (or any of the parent directories): .git\ndraw 5: generation or G1 failed; the record is kept\n').returncode
+>           raise RuntimeError(f"git {' '.join(args)} failed: {done.stderr.decode().strip()}")
+E           RuntimeError: git rev-parse --path-format=absolute --git-common-dir failed: fatal: not a git repository (or any of the parent directories): .git
+>           raise RuntimeError(f"git {' '.join(args)} failed: {done.stderr.decode().strip()}")
+E           RuntimeError: git rev-parse --path-format=absolute --git-common-dir failed: fatal: not a git repository (or any of the parent directories): .git
+>           raise RuntimeError(f"git {' '.join(args)} failed: {done.stderr.decode().strip()}")
+E           RuntimeError: git rev-parse --path-format=absolute --git-common-dir failed: fatal: not a git repository (or any of the parent directories): .git
+>           raise RuntimeError(f"git {' '.join(args)} failed: {done.stderr.decode().strip()}")
+E           RuntimeError: git rev-parse --path-format=absolute --git-common-dir failed: fatal: not a git repository (or any of the parent directories): .git
+FAILED tests/test_p10s1_core.py::test_config_matches_constants_and_the_cap_is_a_config_value
+FAILED tests/test_p10s1_core.py::test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched
+FAILED tests/test_p10s1_core.py::test_stage_codes_and_run_names - RuntimeErro...
+FAILED tests/test_p10s1_core.py::test_launch_scripts_refuse_a_wrong_number_of_arguments_and_unfrozen_runs
+FAILED tests/test_p10s1_stages.py::test_a_stage_refuses_to_start_below_its_cap_and_charges_what_it_used
+FAILED tests/test_p10s1_stages.py::test_generate_and_stage_codes_use_the_experiments_root
+FAILED tests/test_p10s1_audit_fixes.py::test_no_in_process_work_command_leaks_process_state
+FAILED tests/test_p10s1_audit_fixes.py::test_worker_common_args_carry_the_plan_digest_and_the_freeze_commit
+FAILED tests/test_p10s1_audit_fixes.py::test_set_generation_cap_writes_the_config_from_a_measurement
+9 failed, 119 passed, 1 warning in 345.61s (0:05:45)

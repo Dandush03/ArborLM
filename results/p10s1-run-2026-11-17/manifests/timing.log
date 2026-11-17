@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "studies/p10s1/stages.py", line 1980, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "studies/p10s1/stages.py", line 1962, in main
+    return int(WORKERS[args.worker](args))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "studies/p10s1/stages.py", line 778, in work_throughput
+    registered = next(c for c in core.registered_cells(fro.plan, dense_rates=fro.dense_rates) if c.kind == "P" and c.arm == base and c.draw == 1 and (c.facts, c.slots) == (facts, slots))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration

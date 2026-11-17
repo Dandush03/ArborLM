@@ -1,0 +1,28 @@
+MAN ext=2.3: unchanged study only 18.7 h
+   4K row U_L=196608: 22.9
+   4K row U_L=262144: 24.1
+   4K row U_L=393216: 26.6
+   4K row U_L=524288: 29.1
+   16K row U_P'=16384 U_L=262144: 32.7;  with 4K row U_L=196608/393216: 36.8 / 40.5
+   16K row U_P'=32768 U_L=262144: 37.0;  with 4K row U_L=196608/393216: 41.2 / 44.9
+MAN ext=3.8: unchanged study only 20.2 h
+   4K row U_L=196608: 24.4
+   4K row U_L=262144: 25.6
+   4K row U_L=393216: 28.1
+   4K row U_L=524288: 30.6
+   16K row U_P'=16384 U_L=262144: 34.2;  with 4K row U_L=196608/393216: 38.3 / 42.0
+   16K row U_P'=32768 U_L=262144: 38.5;  with 4K row U_L=196608/393216: 42.7 / 46.4
+TRN ext=2.3: unchanged study only 17.6 h
+   4K row U_L=196608: 21.3
+   4K row U_L=262144: 22.3
+   4K row U_L=393216: 24.5
+   4K row U_L=524288: 26.6
+   16K row U_P'=16384 U_L=262144: 29.5;  with 4K row U_L=196608/393216: 33.1 / 36.3
+   16K row U_P'=32768 U_L=262144: 33.3;  with 4K row U_L=196608/393216: 36.9 / 40.1
+TRN ext=3.8: unchanged study only 19.1 h
+   4K row U_L=196608: 22.8
+   4K row U_L=262144: 23.8
+   4K row U_L=393216: 26.0
+   4K row U_L=524288: 28.1
+   16K row U_P'=16384 U_L=262144: 31.0;  with 4K row U_L=196608/393216: 34.6 / 37.8
+   16K row U_P'=32768 U_L=262144: 34.8;  with 4K row U_L=196608/393216: 38.4 / 41.6

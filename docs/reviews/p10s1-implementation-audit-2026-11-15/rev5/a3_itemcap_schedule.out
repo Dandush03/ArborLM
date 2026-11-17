@@ -1,0 +1,74 @@
+Audit script a3 (Claude Opus 5.5 auditor; P10-S1 revision 5 implementation audit; not Astra review).
+
+Question: when `stages calibrate --items load,row-up` runs items 0b and 1 together on six workers, does any run reach its
+item's deadline because of the dispatch order rather than its own cost?
+
+order=code          T-OQ x1.0 eval    0 s/snapshot contention 1.0: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+   load    CAL_F-OQ_f8192_n1024_d1_i2191_y262144      start      0 s  train   2438 s  deadline  14628 s  completed
+   load    CAL_T-OQ_f8192_n1024_d1_i2191_y262144      start      0 s  train   2438 s  deadline  14628 s  completed
+   load    CAL_F-OQ_f32768_n4096_d1_i2191_y524288     start      0 s  train   4876 s  deadline  14628 s  completed
+   load    CAL_T-OQ_f32768_n4096_d1_i2191_y524288     start      0 s  train   4876 s  deadline  14628 s  completed
+   load    CAL_F-OQ_f2048_n256_d1_i2191_y262144       start      0 s  train   2438 s  deadline  14628 s  completed
+   load    CAL_F-OQ_f8192_n1024_d2_i2193_y262144      start      0 s  train   2438 s  deadline  14628 s  completed
+   load    CAL_T-OQ_f8192_n1024_d2_i2193_y262144      start   2438 s  train   2438 s  deadline  14628 s  completed
+   load    CAL_F-OQ_f32768_n4096_d2_i2193_y524288     start   2438 s  train   4876 s  deadline  14628 s  completed
+   load    CAL_T-OQ_f32768_n4096_d2_i2193_y524288     start   2438 s  train   4876 s  deadline  14628 s  completed
+   load    CAL_F-OQ_f2048_n256_d2_i2193_y262144       start   2438 s  train   2438 s  deadline  14628 s  completed
+   row-up  CAL_F-OQ_f2048_n4096_d1_i2191_y32768       start   4876 s  train    305 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_F-OQ_f2048_n4096_d2_i2193_y32768       start   4876 s  train    305 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_F-OQ_f8192_n4096_d1_i2191_y32768       start   4876 s  train    305 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_F-OQ_f8192_n4096_d2_i2193_y32768       start   4876 s  train    305 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_F-OQ_f32768_n16384_d1_i2191_y32768     start   4876 s  train    501 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_F-OQ_f32768_n16384_d2_i2193_y32768     start   4876 s  train    501 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_R2_f2048_n4096_d1_i2191_y32768         start   4876 s  train    298 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_R2_f2048_n4096_d2_i2193_y32768         start   4876 s  train    298 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_R2_f8192_n16384_d1_i2191_y32768        start   4876 s  train    459 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_R2_f8192_n16384_d2_i2193_y32768        start   4876 s  train    459 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_R2_f32768_n32768_d1_i2191_y32768       start   4876 s  train    616 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+   row-up  CAL_R2_f32768_n32768_d2_i2193_y32768       start   4876 s  train    616 s  deadline   1828 s  STOPPED AT UPDATE 0 (started after its item's deadline)
+
+order=code          T-OQ x1.0 eval    0 s/snapshot contention 1.25: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=code          T-OQ x1.0 eval   20 s/snapshot contention 1.0: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=code          T-OQ x1.0 eval   20 s/snapshot contention 1.25: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=code          T-OQ x2.0 eval    0 s/snapshot contention 1.0: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=code          T-OQ x2.0 eval    0 s/snapshot contention 1.25: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=code          T-OQ x2.0 eval   20 s/snapshot contention 1.0: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=code          T-OQ x2.0 eval   20 s/snapshot contention 1.25: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 12}
+
+order=row-up first  T-OQ x1.0 eval    0 s/snapshot contention 1.0: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x1.0 eval    0 s/snapshot contention 1.25: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x1.0 eval   20 s/snapshot contention 1.0: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x1.0 eval   20 s/snapshot contention 1.25: item caps (s) {'load': 14628, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x2.0 eval    0 s/snapshot contention 1.0: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x2.0 eval    0 s/snapshot contention 1.25: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x2.0 eval   20 s/snapshot contention 1.0: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=row-up first  T-OQ x2.0 eval   20 s/snapshot contention 1.25: item caps (s) {'load': 19504, 'row-up': 1828}; runs stopped by their item cap: {'load': 0, 'row-up': 0}
+
+order=code          T-OQ x1.0 eval    0 s/snapshot contention 1.0: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x1.0 eval    0 s/snapshot contention 1.25: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x1.0 eval   20 s/snapshot contention 1.0: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x1.0 eval   20 s/snapshot contention 1.25: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x2.0 eval    0 s/snapshot contention 1.0: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x2.0 eval    0 s/snapshot contention 1.25: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x2.0 eval   20 s/snapshot contention 1.0: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}
+
+order=code          T-OQ x2.0 eval   20 s/snapshot contention 1.25: item caps (s) {'h8': 331, 'dense': 5583}; runs stopped by their item cap: {'h8': 0, 'dense': 0}

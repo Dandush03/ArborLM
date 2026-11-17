@@ -1,0 +1,23 @@
+E       AssertionError: assert ('# ADR-0021 r...droom = 2.0\n' == '# ADR-0021 r...droom = 2.0\n'
+E         
+E         Skipping 4506 identical leading characters in diff, use -v to show
+E         - seconds = 1800.0
+E         ?           ^^^
+E         + seconds = 420.0
+E         ?           ^^
+E         - provisional = true...
+E         
+E         ...Full output truncated (23 lines hidden), use '-vv' to show)
+E       AssertionError: assert ('experiments' == 'experiments'
+E         
+E           experiments and 'm5post' == 'ArborLM'
+E         
+E         - ArborLM
+E         + m5post)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1recheck/m5post/experiments/P5HIER-20261113T125206040109Z-8a40c493791641028f8eb8dfa26f71be/quality/P5QUALITY-20261113T125206040450Z-aa1f203f012e4112bf137cd09944bb92/frozen-data/train.bytes'
+E       assert 16.0 == 23.0
+FAILED tests/test_p10s1_core.py::test_config_matches_constants_and_the_cap_is_a_config_value
+FAILED tests/test_p10s1_stages.py::test_generate_and_stage_codes_use_the_experiments_root
+FAILED tests/test_p10s1_audit_fixes.py::test_no_in_process_work_command_leaks_process_state
+FAILED tests/test_p10s1_audit_fixes.py::test_set_generation_cap_writes_the_config_from_a_measurement
+4 failed, 124 passed, 1 warning in 279.89s (0:04:39)

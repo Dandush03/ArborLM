@@ -1,0 +1,5085 @@
+{
+ "steps": {
+  "F-OQ": {
+   "C1": {
+    "class": "MIXED",
+    "verdicts": [
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "DEPENDENCE_FAILED",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9886,
+        "i_l_up": 4.4375,
+        "i_s_run": 2.3946,
+        "i_s_half": 2.3079,
+        "i_l_run": 4.9438,
+        "d_mu": 3.4489,
+        "d_mc": 2.8143,
+        "d_sat": 2.0429,
+        "d_full": 2.5492,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9469,
+        "gain_s": 0.0867
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0027,
+        "i_l_up": 4.4242,
+        "i_s_run": 2.3946,
+        "i_s_half": 2.3079,
+        "i_l_run": 4.9501,
+        "d_mu": 3.4215,
+        "d_mc": 2.8299,
+        "d_sat": 2.0296,
+        "d_full": 2.5556,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9454,
+        "gain_s": 0.0867
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9002,
+        "i_l_up": 4.3693,
+        "i_s_run": 2.3428,
+        "i_s_half": 2.3193,
+        "i_l_run": 4.955,
+        "d_mu": 3.4691,
+        "d_mc": 2.7941,
+        "d_sat": 2.0265,
+        "d_full": 2.6122,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9393,
+        "gain_s": 0.0236
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.8946,
+        "i_l_up": 4.3498,
+        "i_s_run": 2.335,
+        "i_s_half": 2.3257,
+        "i_l_run": 4.9665,
+        "d_mu": 3.4552,
+        "d_mc": 2.7789,
+        "d_sat": 2.0149,
+        "d_full": 2.6316,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9371,
+        "gain_s": 0.0093
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0364,
+        "i_l_up": 4.4442,
+        "i_s_run": 2.3686,
+        "i_s_half": 2.3029,
+        "i_l_run": 4.9375,
+        "d_mu": 3.4078,
+        "d_mc": 2.7743,
+        "d_sat": 2.0756,
+        "d_full": 2.5689,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9476,
+        "gain_s": 0.0657
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0227,
+        "i_l_up": 4.4542,
+        "i_s_run": 2.3636,
+        "i_s_half": 2.2909,
+        "i_l_run": 4.9375,
+        "d_mu": 3.4315,
+        "d_mc": 2.78,
+        "d_sat": 2.0906,
+        "d_full": 2.5739,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9487,
+        "gain_s": 0.0727
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.1502,
+        "i_l_up": 4.6074,
+        "i_s_run": 2.3328,
+        "i_s_half": 2.2732,
+        "i_l_run": 4.9454,
+        "d_mu": 3.4571,
+        "d_mc": 2.8764,
+        "d_sat": 2.2746,
+        "d_full": 2.6125,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.965,
+        "gain_s": 0.0596,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2356/8192=0.2876 < 0.95 x raw 2493/8192=0.3043 (ratio 0.9450)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.1878,
+        "i_l_up": 4.592,
+        "i_s_run": 2.33,
+        "i_s_half": 2.2795,
+        "i_l_run": 4.9438,
+        "d_mu": 3.4042,
+        "d_mc": 2.8819,
+        "d_sat": 2.262,
+        "d_full": 2.6138,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9634,
+        "gain_s": 0.0504,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2387/8192=0.2914 < 0.95 x raw 2524/8192=0.3081 (ratio 0.9457)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9792,
+        "i_l_up": 4.4131,
+        "i_s_run": 2.345,
+        "i_s_half": 2.3207,
+        "i_l_run": 4.9375,
+        "d_mu": 3.4339,
+        "d_mc": 2.809,
+        "d_sat": 2.0682,
+        "d_full": 2.5925,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9442,
+        "gain_s": 0.0243
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.973,
+        "i_l_up": 4.4242,
+        "i_s_run": 2.3335,
+        "i_s_half": 2.3257,
+        "i_l_run": 4.9391,
+        "d_mu": 3.4512,
+        "d_mc": 2.8164,
+        "d_sat": 2.0907,
+        "d_full": 2.6055,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9454,
+        "gain_s": 0.0078
+       }
+      }
+     }
+    ]
+   },
+   "N1": {
+    "class": "NOT LOADED",
+    "verdicts": [
+     "CEILING",
+     "CEILING",
+     "DEPENDENCE_FAILED",
+     "CEILING",
+     "CEILING"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CEILING",
+      "panels": {
+       "A": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8896,
+        "i_l_up": 5.0,
+        "i_s_run": 5.0,
+        "i_s_half": 4.9768,
+        "i_l_run": 5.0,
+        "d_mu": 0.1104,
+        "d_mc": 0.0232,
+        "d_sat": 0.0,
+        "d_full": 0.0,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0232
+       },
+       "B": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8555,
+        "i_l_up": 5.0,
+        "i_s_run": 4.9915,
+        "i_s_half": 4.984,
+        "i_l_run": 5.0,
+        "d_mu": 0.1445,
+        "d_mc": 0.016,
+        "d_sat": 0.0085,
+        "d_full": 0.0085,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0075
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CEILING",
+      "panels": {
+       "A": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8611,
+        "i_l_up": 4.9915,
+        "i_s_run": 4.9915,
+        "i_s_half": 4.9915,
+        "i_l_run": 5.0,
+        "d_mu": 0.1304,
+        "d_mc": 0.0147,
+        "d_sat": 0.0,
+        "d_full": 0.0085,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9995,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8444,
+        "i_l_up": 5.0,
+        "i_s_run": 4.9915,
+        "i_s_half": 4.984,
+        "i_l_run": 5.0,
+        "d_mu": 0.1556,
+        "d_mc": 0.0301,
+        "d_sat": 0.0085,
+        "d_full": 0.0085,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0075
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8954,
+        "i_l_up": 5.0,
+        "i_s_run": 4.984,
+        "i_s_half": 4.9632,
+        "i_l_run": 5.0,
+        "d_mu": 0.1046,
+        "d_mc": 0.0368,
+        "d_sat": 0.016,
+        "d_full": 0.016,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0208,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 643/2048=0.3140 < 0.95 x raw 680/2048=0.3320 (ratio 0.9456)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8954,
+        "i_l_up": 5.0,
+        "i_s_run": 4.9915,
+        "i_s_half": 4.9699,
+        "i_l_run": 5.0,
+        "d_mu": 0.1046,
+        "d_mc": 0.0301,
+        "d_sat": 0.0085,
+        "d_full": 0.0085,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0216,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 620/2048=0.3027 < 0.95 x raw 659/2048=0.3218 (ratio 0.9408)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CEILING",
+      "panels": {
+       "A": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.9012,
+        "i_l_up": 5.0,
+        "i_s_run": 4.984,
+        "i_s_half": 4.9632,
+        "i_l_run": 5.0,
+        "d_mu": 0.0988,
+        "d_mc": 0.0562,
+        "d_sat": 0.016,
+        "d_full": 0.016,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0208
+       },
+       "B": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.9012,
+        "i_l_up": 5.0,
+        "i_s_run": 4.9915,
+        "i_s_half": 4.9632,
+        "i_l_run": 5.0,
+        "d_mu": 0.0988,
+        "d_mc": 0.0562,
+        "d_sat": 0.0085,
+        "d_full": 0.0085,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0283
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CEILING",
+      "panels": {
+       "A": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8838,
+        "i_l_up": 5.0,
+        "i_s_run": 4.9768,
+        "i_s_half": 4.9768,
+        "i_l_run": 5.0,
+        "d_mu": 0.1162,
+        "d_mc": 0.0368,
+        "d_sat": 0.0232,
+        "d_full": 0.0232,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CEILING",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.8724,
+        "i_l_up": 5.0,
+        "i_s_run": 4.984,
+        "i_s_half": 4.9768,
+        "i_l_run": 5.0,
+        "d_mu": 0.1276,
+        "d_mc": 0.0434,
+        "d_sat": 0.016,
+        "d_full": 0.016,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0071
+       }
+      }
+     }
+    ]
+   },
+   "C2": {
+    "class": "CAPACITY STEP",
+    "verdicts": [
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9563,
+        "i_l_up": 4.1304,
+        "i_s_run": 2.2658,
+        "i_s_half": 2.2123,
+        "i_l_run": 4.8928,
+        "d_mu": 3.1741,
+        "d_mc": 2.564,
+        "d_sat": 1.8646,
+        "d_full": 2.6271,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9115,
+        "gain_s": 0.0535
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9621,
+        "i_l_up": 4.1413,
+        "i_s_run": 2.2652,
+        "i_s_half": 2.2149,
+        "i_l_run": 4.8863,
+        "d_mu": 3.1792,
+        "d_mc": 2.5635,
+        "d_sat": 1.876,
+        "d_full": 2.6211,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9128,
+        "gain_s": 0.0503
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9464,
+        "i_l_up": 4.1106,
+        "i_s_run": 2.2529,
+        "i_s_half": 2.1919,
+        "i_l_run": 4.8914,
+        "d_mu": 3.1642,
+        "d_mc": 2.5505,
+        "d_sat": 1.8577,
+        "d_full": 2.6385,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9091,
+        "gain_s": 0.061
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9487,
+        "i_l_up": 4.1076,
+        "i_s_run": 2.2531,
+        "i_s_half": 2.193,
+        "i_l_run": 4.8881,
+        "d_mu": 3.1589,
+        "d_mc": 2.5491,
+        "d_sat": 1.8545,
+        "d_full": 2.635,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9088,
+        "gain_s": 0.0601
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0255,
+        "i_l_up": 4.1489,
+        "i_s_run": 2.2594,
+        "i_s_half": 2.2175,
+        "i_l_run": 4.8928,
+        "d_mu": 3.1235,
+        "d_mc": 2.5545,
+        "d_sat": 1.8895,
+        "d_full": 2.6334,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9138,
+        "gain_s": 0.0419
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0178,
+        "i_l_up": 4.1431,
+        "i_s_run": 2.2601,
+        "i_s_half": 2.2235,
+        "i_l_run": 4.8907,
+        "d_mu": 3.1253,
+        "d_mc": 2.5434,
+        "d_sat": 1.8829,
+        "d_full": 2.6305,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9131,
+        "gain_s": 0.0367
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.1839,
+        "i_l_up": 4.3013,
+        "i_s_run": 2.2601,
+        "i_s_half": 2.2312,
+        "i_l_run": 4.8878,
+        "d_mu": 3.1174,
+        "d_mc": 2.6181,
+        "d_sat": 2.0412,
+        "d_full": 2.6276,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9316,
+        "gain_s": 0.029
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.1876,
+        "i_l_up": 4.3024,
+        "i_s_run": 2.2638,
+        "i_s_half": 2.2263,
+        "i_l_run": 4.886,
+        "d_mu": 3.1147,
+        "d_mc": 2.6309,
+        "d_sat": 2.0385,
+        "d_full": 2.6221,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9317,
+        "gain_s": 0.0376
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.99,
+        "i_l_up": 4.1344,
+        "i_s_run": 2.2399,
+        "i_s_half": 2.2233,
+        "i_l_run": 4.8824,
+        "d_mu": 3.1444,
+        "d_mc": 2.5319,
+        "d_sat": 1.8945,
+        "d_full": 2.6424,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.912,
+        "gain_s": 0.0166
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.9933,
+        "i_l_up": 4.1357,
+        "i_s_run": 2.2396,
+        "i_s_half": 2.2236,
+        "i_l_run": 4.8802,
+        "d_mu": 3.1424,
+        "d_mc": 2.5473,
+        "d_sat": 1.8961,
+        "d_full": 2.6406,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9122,
+        "gain_s": 0.0159
+       }
+      }
+     }
+    ]
+   },
+   "N2": {
+    "class": "DEPENDENCE_FAILED",
+    "verdicts": [
+     "GAIN WITHIN BUDGET ONLY",
+     "DEPENDENCE_FAILED",
+     "GAIN WITHIN BUDGET ONLY",
+     "DEPENDENCE_FAILED",
+     "GAIN WITHIN BUDGET ONLY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.4375,
+        "i_l_up": 4.9804,
+        "i_s_run": 4.9438,
+        "i_s_half": 4.8998,
+        "i_l_run": 5.0,
+        "d_mu": 0.5429,
+        "d_mc": 0.1263,
+        "d_sat": 0.0366,
+        "d_full": 0.0562,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9988,
+        "gain_s": 0.044
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.4242,
+        "i_l_up": 4.9858,
+        "i_s_run": 4.9501,
+        "i_s_half": 4.9027,
+        "i_l_run": 5.0,
+        "d_mu": 0.5616,
+        "d_mc": 0.1483,
+        "d_sat": 0.0357,
+        "d_full": 0.0499,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9991,
+        "gain_s": 0.0474
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.3693,
+        "i_l_up": 4.9877,
+        "i_s_run": 4.955,
+        "i_s_half": 4.9012,
+        "i_l_run": 5.0,
+        "d_mu": 0.6183,
+        "d_mc": 0.1865,
+        "d_sat": 0.0327,
+        "d_full": 0.045,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9993,
+        "gain_s": 0.0537,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2646/8192=0.3230 < 0.95 x raw 2803/8192=0.3422 (ratio 0.9440)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.3498,
+        "i_l_up": 4.9896,
+        "i_s_run": 4.9665,
+        "i_s_half": 4.9086,
+        "i_l_run": 5.0,
+        "d_mu": 0.6397,
+        "d_mc": 0.1804,
+        "d_sat": 0.023,
+        "d_full": 0.0335,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9994,
+        "gain_s": 0.0579,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2700/8192=0.3296 < 0.95 x raw 2851/8192=0.3480 (ratio 0.9470)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.4442,
+        "i_l_up": 4.9935,
+        "i_s_run": 4.9375,
+        "i_s_half": 4.9086,
+        "i_l_run": 5.0,
+        "d_mu": 0.5493,
+        "d_mc": 0.1587,
+        "d_sat": 0.056,
+        "d_full": 0.0625,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9996,
+        "gain_s": 0.0289
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.4542,
+        "i_l_up": 4.9877,
+        "i_s_run": 4.9375,
+        "i_s_half": 4.8983,
+        "i_l_run": 5.0,
+        "d_mu": 0.5335,
+        "d_mc": 0.1597,
+        "d_sat": 0.0502,
+        "d_full": 0.0625,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9993,
+        "gain_s": 0.0392
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.6074,
+        "i_l_up": 4.9877,
+        "i_s_run": 4.9454,
+        "i_s_half": 4.9236,
+        "i_l_run": 5.0,
+        "d_mu": 0.3803,
+        "d_mc": 0.121,
+        "d_sat": 0.0423,
+        "d_full": 0.0546,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9993,
+        "gain_s": 0.0217,
+        "dep_fail_small": [
+         [
+          2048,
+          [
+           "a_use 2356/8192=0.2876 < 0.95 x raw 2493/8192=0.3043 (ratio 0.9450)"
+          ]
+         ]
+        ],
+        "dep_fail_large": []
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.592,
+        "i_l_up": 4.9955,
+        "i_s_run": 4.9438,
+        "i_s_half": 4.9282,
+        "i_l_run": 5.0,
+        "d_mu": 0.4035,
+        "d_mc": 0.1344,
+        "d_sat": 0.0517,
+        "d_full": 0.0562,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9998,
+        "gain_s": 0.0156,
+        "dep_fail_small": [
+         [
+          2048,
+          [
+           "a_use 2387/8192=0.2914 < 0.95 x raw 2524/8192=0.3081 (ratio 0.9457)"
+          ]
+         ]
+        ],
+        "dep_fail_large": []
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.4131,
+        "i_l_up": 4.9915,
+        "i_s_run": 4.9375,
+        "i_s_half": 4.9101,
+        "i_l_run": 5.0,
+        "d_mu": 0.5784,
+        "d_mc": 0.1689,
+        "d_sat": 0.054,
+        "d_full": 0.0625,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9995,
+        "gain_s": 0.0274
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.4242,
+        "i_l_up": 4.9858,
+        "i_s_run": 4.9391,
+        "i_s_half": 4.9146,
+        "i_l_run": 5.0,
+        "d_mu": 0.5616,
+        "d_mc": 0.1646,
+        "d_sat": 0.0468,
+        "d_full": 0.0609,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9991,
+        "gain_s": 0.0245
+       }
+      }
+     }
+    ]
+   }
+  },
+  "F-OQ-IVF": {
+   "C1": {
+    "class": "MIXED",
+    "verdicts": [
+     "PANEL-DISAGREE",
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "PANEL-DISAGREE",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6117,
+        "i_l_up": 2.1276,
+        "i_s_run": 1.56,
+        "i_s_half": 1.5144,
+        "i_l_run": 2.692,
+        "d_mu": 1.5159,
+        "d_mc": 1.0281,
+        "d_sat": 0.5677,
+        "d_full": 1.1321,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6144,
+        "gain_s": 0.0455
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6337,
+        "i_l_up": 2.1676,
+        "i_s_run": 1.5642,
+        "i_s_half": 1.5205,
+        "i_l_run": 2.6958,
+        "d_mu": 1.5339,
+        "d_mc": 1.0831,
+        "d_sat": 0.6034,
+        "d_full": 1.1316,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6215,
+        "gain_s": 0.0437
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6104,
+        "i_l_up": 2.1393,
+        "i_s_run": 1.5308,
+        "i_s_half": 1.5181,
+        "i_l_run": 2.7088,
+        "d_mu": 1.529,
+        "d_mc": 1.1024,
+        "d_sat": 0.6086,
+        "d_full": 1.1781,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.6165,
+        "gain_s": 0.0127
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6059,
+        "i_l_up": 2.1256,
+        "i_s_run": 1.5296,
+        "i_s_half": 1.491,
+        "i_l_run": 2.7027,
+        "d_mu": 1.5197,
+        "d_mc": 1.0939,
+        "d_sat": 0.596,
+        "d_full": 1.1732,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.614,
+        "gain_s": 0.0386
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6896,
+        "i_l_up": 2.2535,
+        "i_s_run": 1.5132,
+        "i_s_half": 1.5132,
+        "i_l_run": 2.6457,
+        "d_mu": 1.5639,
+        "d_mc": 1.1174,
+        "d_sat": 0.7402,
+        "d_full": 1.1325,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6365,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6762,
+        "i_l_up": 2.264,
+        "i_s_run": 1.5,
+        "i_s_half": 1.4994,
+        "i_l_run": 2.6518,
+        "d_mu": 1.5878,
+        "d_mc": 1.1253,
+        "d_sat": 0.764,
+        "d_full": 1.1518,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6383,
+        "gain_s": 0.0006
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.781,
+        "i_l_up": 2.4841,
+        "i_s_run": 1.4736,
+        "i_s_half": 1.4539,
+        "i_l_run": 2.6837,
+        "d_mu": 1.7031,
+        "d_mc": 1.3525,
+        "d_sat": 1.0105,
+        "d_full": 1.2101,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6757,
+        "gain_s": 0.0197
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.798,
+        "i_l_up": 2.4373,
+        "i_s_run": 1.4754,
+        "i_s_half": 1.4444,
+        "i_l_run": 2.6745,
+        "d_mu": 1.6394,
+        "d_mc": 1.3161,
+        "d_sat": 0.9619,
+        "d_full": 1.1991,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6678,
+        "gain_s": 0.031
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.6817,
+        "i_l_up": 2.1009,
+        "i_s_run": 1.5344,
+        "i_s_half": 1.5344,
+        "i_l_run": 2.6936,
+        "d_mu": 1.4192,
+        "d_mc": 1.0357,
+        "d_sat": 0.5665,
+        "d_full": 1.1591,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6096,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.661,
+        "i_l_up": 2.1146,
+        "i_s_run": 1.5411,
+        "i_s_half": 1.5411,
+        "i_l_run": 2.7073,
+        "d_mu": 1.4536,
+        "d_mc": 1.0548,
+        "d_sat": 0.5735,
+        "d_full": 1.1662,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.6121,
+        "gain_s": 0.0
+       }
+      }
+     }
+    ]
+   },
+   "N1": {
+    "class": "MIXED",
+    "verdicts": [
+     "UNRESOLVED",
+     "UNRESOLVED",
+     "DEPENDENCE_FAILED",
+     "PANEL-DISAGREE",
+     "UNRESOLVED"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "UNRESOLVED",
+      "panels": {
+       "A": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1638,
+        "i_l_up": 4.5268,
+        "i_s_run": 4.3016,
+        "i_s_half": 4.1926,
+        "i_l_run": 4.6397,
+        "d_mu": 0.363,
+        "d_mc": 0.3342,
+        "d_sat": 0.2252,
+        "d_full": 0.3382,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9565,
+        "gain_s": 0.109
+       },
+       "B": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1638,
+        "i_l_up": 4.5314,
+        "i_s_run": 4.2973,
+        "i_s_half": 4.2216,
+        "i_l_run": 4.6301,
+        "d_mu": 0.3676,
+        "d_mc": 0.3098,
+        "d_sat": 0.2341,
+        "d_full": 0.3328,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.957,
+        "gain_s": 0.0757
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "UNRESOLVED",
+      "panels": {
+       "A": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1926,
+        "i_l_up": 4.4767,
+        "i_s_run": 4.2719,
+        "i_s_half": 4.2341,
+        "i_l_run": 4.5685,
+        "d_mu": 0.2841,
+        "d_mc": 0.2426,
+        "d_sat": 0.2048,
+        "d_full": 0.2966,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9512,
+        "gain_s": 0.0378
+       },
+       "B": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1802,
+        "i_l_up": 4.4993,
+        "i_s_run": 4.2761,
+        "i_s_half": 4.2341,
+        "i_l_run": 4.5638,
+        "d_mu": 0.3192,
+        "d_mc": 0.2653,
+        "d_sat": 0.2232,
+        "d_full": 0.2877,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9536,
+        "gain_s": 0.042
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1068,
+        "i_l_up": 4.4498,
+        "i_s_run": 4.3101,
+        "i_s_half": 4.2424,
+        "i_l_run": 4.611,
+        "d_mu": 0.3429,
+        "d_mc": 0.4897,
+        "d_sat": 0.1397,
+        "d_full": 0.3009,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9482,
+        "gain_s": 0.0676,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 546/2048=0.2666 < 0.95 x raw 582/2048=0.2842 (ratio 0.9381)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.0787,
+        "i_l_up": 4.4542,
+        "i_s_run": 4.3058,
+        "i_s_half": 4.2257,
+        "i_l_run": 4.6015,
+        "d_mu": 0.3756,
+        "d_mc": 0.4746,
+        "d_sat": 0.1484,
+        "d_full": 0.2956,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9487,
+        "gain_s": 0.0801,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 549/2048=0.2681 < 0.95 x raw 581/2048=0.2837 (ratio 0.9449)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "PANEL-DISAGREE",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.2216,
+        "i_l_up": 4.513,
+        "i_s_run": 4.3016,
+        "i_s_half": 4.2888,
+        "i_l_run": 4.6543,
+        "d_mu": 0.2915,
+        "d_mc": 0.3697,
+        "d_sat": 0.2115,
+        "d_full": 0.3527,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9551,
+        "gain_s": 0.0128,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 847/2048=0.4136 < 0.95 x raw 893/2048=0.4360 (ratio 0.9485)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.2091,
+        "i_l_up": 4.5176,
+        "i_s_run": 4.3016,
+        "i_s_half": 4.2973,
+        "i_l_run": 4.664,
+        "d_mu": 0.3085,
+        "d_mc": 0.3905,
+        "d_sat": 0.216,
+        "d_full": 0.3624,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9556,
+        "gain_s": 0.0043
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "UNRESOLVED",
+      "panels": {
+       "A": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1802,
+        "i_l_up": 4.4767,
+        "i_s_run": 4.2677,
+        "i_s_half": 4.2677,
+        "i_l_run": 4.6157,
+        "d_mu": 0.2965,
+        "d_mc": 0.2759,
+        "d_sat": 0.209,
+        "d_full": 0.3481,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9512,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "UNRESOLVED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 4.1679,
+        "i_l_up": 4.4812,
+        "i_s_run": 4.2761,
+        "i_s_half": 4.2634,
+        "i_l_run": 4.6157,
+        "d_mu": 0.3134,
+        "d_mc": 0.2887,
+        "d_sat": 0.2051,
+        "d_full": 0.3396,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9517,
+        "gain_s": 0.0127
+       }
+      }
+     }
+    ]
+   },
+   "C2": {
+    "class": "GAIN WITHIN BUDGET",
+    "verdicts": [
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "CAPACITY",
+     "GAIN WITHIN BUDGET ONLY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3092,
+        "i_l_up": 1.3988,
+        "i_s_run": 0.5532,
+        "i_s_half": 0.5532,
+        "i_l_run": 1.7251,
+        "d_mu": 1.0896,
+        "d_mc": 0.9709,
+        "d_sat": 0.8456,
+        "d_full": 1.1719,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.4746,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3059,
+        "i_l_up": 1.406,
+        "i_s_run": 0.5505,
+        "i_s_half": 0.5505,
+        "i_l_run": 1.7276,
+        "d_mu": 1.1002,
+        "d_mc": 0.9741,
+        "d_sat": 0.8555,
+        "d_full": 1.1771,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.4761,
+        "gain_s": 0.0
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3036,
+        "i_l_up": 1.4097,
+        "i_s_run": 0.543,
+        "i_s_half": 0.524,
+        "i_l_run": 1.7387,
+        "d_mu": 1.1061,
+        "d_mc": 0.9562,
+        "d_sat": 0.8667,
+        "d_full": 1.1957,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.4768,
+        "gain_s": 0.019
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3011,
+        "i_l_up": 1.425,
+        "i_s_run": 0.5432,
+        "i_s_half": 0.5258,
+        "i_l_run": 1.7364,
+        "d_mu": 1.1239,
+        "d_mc": 0.9718,
+        "d_sat": 0.8818,
+        "d_full": 1.1931,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.48,
+        "gain_s": 0.0174
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3135,
+        "i_l_up": 1.424,
+        "i_s_run": 0.5511,
+        "i_s_half": 0.5359,
+        "i_l_run": 1.7054,
+        "d_mu": 1.1105,
+        "d_mc": 0.9763,
+        "d_sat": 0.8729,
+        "d_full": 1.1543,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.4798,
+        "gain_s": 0.0152
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3143,
+        "i_l_up": 1.4298,
+        "i_s_run": 0.5513,
+        "i_s_half": 0.5396,
+        "i_l_run": 1.7076,
+        "d_mu": 1.1155,
+        "d_mc": 0.9819,
+        "d_sat": 0.8785,
+        "d_full": 1.1563,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.481,
+        "gain_s": 0.0117
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.355,
+        "i_l_up": 1.5443,
+        "i_s_run": 0.5523,
+        "i_s_half": 0.5523,
+        "i_l_run": 1.7402,
+        "d_mu": 1.1892,
+        "d_mc": 1.0648,
+        "d_sat": 0.992,
+        "d_full": 1.1879,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.5043,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3567,
+        "i_l_up": 1.5373,
+        "i_s_run": 0.5509,
+        "i_s_half": 0.5509,
+        "i_l_run": 1.7432,
+        "d_mu": 1.1806,
+        "d_mc": 1.0574,
+        "d_sat": 0.9864,
+        "d_full": 1.1923,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.5029,
+        "gain_s": 0.0
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3157,
+        "i_l_up": 1.409,
+        "i_s_run": 0.5491,
+        "i_s_half": 0.5309,
+        "i_l_run": 1.7261,
+        "d_mu": 1.0932,
+        "d_mc": 0.9556,
+        "d_sat": 0.8598,
+        "d_full": 1.1769,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.4767,
+        "gain_s": 0.0182
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3114,
+        "i_l_up": 1.4065,
+        "i_s_run": 0.5508,
+        "i_s_half": 0.5304,
+        "i_l_run": 1.7262,
+        "d_mu": 1.095,
+        "d_mc": 0.9565,
+        "d_sat": 0.8557,
+        "d_full": 1.1754,
+        "mc": [
+         32768,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.4762,
+        "gain_s": 0.0204
+       }
+      }
+     }
+    ]
+   },
+   "N2": {
+    "class": "DEPENDENCE_FAILED",
+    "verdicts": [
+     "CAPACITY",
+     "DEPENDENCE_FAILED",
+     "CAPACITY",
+     "CAPACITY",
+     "DEPENDENCE_FAILED"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.1276,
+        "i_l_up": 4.1403,
+        "i_s_run": 2.692,
+        "i_s_half": 2.6495,
+        "i_l_run": 4.2571,
+        "d_mu": 2.0126,
+        "d_mc": 1.5629,
+        "d_sat": 1.4482,
+        "d_full": 1.5651,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9127,
+        "gain_s": 0.0425
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.1676,
+        "i_l_up": 4.1423,
+        "i_s_run": 2.6958,
+        "i_s_half": 2.6669,
+        "i_l_run": 4.2592,
+        "d_mu": 1.9747,
+        "d_mc": 1.5597,
+        "d_sat": 1.4465,
+        "d_full": 1.5634,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.913,
+        "gain_s": 0.0289
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.1393,
+        "i_l_up": 4.1038,
+        "i_s_run": 2.7088,
+        "i_s_half": 2.6028,
+        "i_l_run": 4.275,
+        "d_mu": 1.9645,
+        "d_mc": 1.501,
+        "d_sat": 1.395,
+        "d_full": 1.5662,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9083,
+        "gain_s": 0.106,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2173/8192=0.2653 < 0.95 x raw 2295/8192=0.2802 (ratio 0.9468)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.1256,
+        "i_l_up": 4.1008,
+        "i_s_run": 2.7027,
+        "i_s_half": 2.6126,
+        "i_l_run": 4.2645,
+        "d_mu": 1.9752,
+        "d_mc": 1.4882,
+        "d_sat": 1.3981,
+        "d_full": 1.5618,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.908,
+        "gain_s": 0.0901,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2177/8192=0.2657 < 0.95 x raw 2306/8192=0.2815 (ratio 0.9441)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.2535,
+        "i_l_up": 4.1311,
+        "i_s_run": 2.6457,
+        "i_s_half": 2.6321,
+        "i_l_run": 4.233,
+        "d_mu": 1.8777,
+        "d_mc": 1.5403,
+        "d_sat": 1.4854,
+        "d_full": 1.5873,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9116,
+        "gain_s": 0.0136
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.264,
+        "i_l_up": 4.1331,
+        "i_s_run": 2.6518,
+        "i_s_half": 2.6246,
+        "i_l_run": 4.2393,
+        "d_mu": 1.8691,
+        "d_mc": 1.5498,
+        "d_sat": 1.4814,
+        "d_full": 1.5875,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9119,
+        "gain_s": 0.0272
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.4841,
+        "i_l_up": 4.1413,
+        "i_s_run": 2.6837,
+        "i_s_half": 2.6457,
+        "i_l_run": 4.2019,
+        "d_mu": 1.6572,
+        "d_mc": 1.4956,
+        "d_sat": 1.4576,
+        "d_full": 1.5182,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9128,
+        "gain_s": 0.0379
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.4373,
+        "i_l_up": 4.1413,
+        "i_s_run": 2.6745,
+        "i_s_half": 2.6367,
+        "i_l_run": 4.205,
+        "d_mu": 1.704,
+        "d_mc": 1.5046,
+        "d_sat": 1.4668,
+        "d_full": 1.5304,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9128,
+        "gain_s": 0.0379
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.1009,
+        "i_l_up": 4.1281,
+        "i_s_run": 2.6936,
+        "i_s_half": 2.6768,
+        "i_l_run": 4.205,
+        "d_mu": 2.0271,
+        "d_mc": 1.529,
+        "d_sat": 1.4345,
+        "d_full": 1.5114,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9113,
+        "gain_s": 0.0167,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2130/8192=0.2600 < 0.95 x raw 2260/8192=0.2759 (ratio 0.9425)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.1146,
+        "i_l_up": 4.12,
+        "i_s_run": 2.7073,
+        "i_s_half": 2.6723,
+        "i_l_run": 4.207,
+        "d_mu": 2.0053,
+        "d_mc": 1.5089,
+        "d_sat": 1.4127,
+        "d_full": 1.4997,
+        "mc": [
+         16384,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9103,
+        "gain_s": 0.035,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2095/8192=0.2557 < 0.95 x raw 2212/8192=0.2700 (ratio 0.9471)"
+          ]
+         ]
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "T-OQ": {
+   "C1": {
+    "class": "GAIN WITHIN BUDGET",
+    "verdicts": [
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2147,
+        "i_l_up": 1.3303,
+        "i_s_run": 1.0566,
+        "i_s_half": 0.9507,
+        "i_l_run": 3.1891,
+        "d_mu": 1.1157,
+        "d_mc": 1.0233,
+        "d_sat": 0.2737,
+        "d_full": 2.1325,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": false,
+        "a_l_up": 0.4602,
+        "gain_s": 0.1059
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2131,
+        "i_l_up": 1.3367,
+        "i_s_run": 1.0513,
+        "i_s_half": 0.9631,
+        "i_l_run": 3.2109,
+        "d_mu": 1.1236,
+        "d_mc": 1.0393,
+        "d_sat": 0.2854,
+        "d_full": 2.1596,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4615,
+        "gain_s": 0.0882
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1726,
+        "i_l_up": 1.0931,
+        "i_s_run": 1.0518,
+        "i_s_half": 1.0011,
+        "i_l_run": 2.7804,
+        "d_mu": 0.9205,
+        "d_mc": 0.8153,
+        "d_sat": 0.0413,
+        "d_full": 1.7285,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4083,
+        "gain_s": 0.0507
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1819,
+        "i_l_up": 1.0931,
+        "i_s_run": 1.054,
+        "i_s_half": 1.0043,
+        "i_l_run": 2.7626,
+        "d_mu": 0.9113,
+        "d_mc": 0.8212,
+        "d_sat": 0.0391,
+        "d_full": 1.7086,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4083,
+        "gain_s": 0.0497
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2526,
+        "i_l_up": 1.3855,
+        "i_s_run": 1.1922,
+        "i_s_half": 1.1137,
+        "i_l_run": 2.9774,
+        "d_mu": 1.1329,
+        "d_mc": 1.0461,
+        "d_sat": 0.1933,
+        "d_full": 1.7852,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4718,
+        "gain_s": 0.0785
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2516,
+        "i_l_up": 1.4072,
+        "i_s_run": 1.1811,
+        "i_s_half": 1.1137,
+        "i_l_run": 2.9694,
+        "d_mu": 1.1556,
+        "d_mc": 1.0689,
+        "d_sat": 0.2261,
+        "d_full": 1.7883,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4763,
+        "gain_s": 0.0674
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3955,
+        "i_l_up": 1.7973,
+        "i_s_run": 1.2392,
+        "i_s_half": 1.18,
+        "i_l_run": 3.3594,
+        "d_mu": 1.4018,
+        "d_mc": 1.3052,
+        "d_sat": 0.5582,
+        "d_full": 2.1202,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.5537,
+        "gain_s": 0.0592
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3812,
+        "i_l_up": 1.7967,
+        "i_s_run": 1.2414,
+        "i_s_half": 1.1828,
+        "i_l_run": 3.3619,
+        "d_mu": 1.4155,
+        "d_mc": 1.3116,
+        "d_sat": 0.5553,
+        "d_full": 2.1205,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.5536,
+        "gain_s": 0.0586
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2175,
+        "i_l_up": 1.2919,
+        "i_s_run": 1.1023,
+        "i_s_half": 0.9704,
+        "i_l_run": 3.059,
+        "d_mu": 1.0744,
+        "d_mc": 1.0096,
+        "d_sat": 0.1896,
+        "d_full": 1.9567,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": false,
+        "a_l_up": 0.452,
+        "gain_s": 0.1319
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2102,
+        "i_l_up": 1.2742,
+        "i_s_run": 1.1007,
+        "i_s_half": 0.9719,
+        "i_l_run": 3.0933,
+        "d_mu": 1.064,
+        "d_mc": 0.9814,
+        "d_sat": 0.1736,
+        "d_full": 1.9926,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": false,
+        "a_l_up": 0.4482,
+        "gain_s": 0.1287
+       }
+      }
+     }
+    ]
+   },
+   "N1": {
+    "class": "MIXED",
+    "verdicts": [
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "PANEL-DISAGREE",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.8741,
+        "i_l_up": 4.85,
+        "i_s_run": 3.9213,
+        "i_s_half": 3.7064,
+        "i_l_run": 5.0,
+        "d_mu": 1.9759,
+        "d_mc": 1.8259,
+        "d_sat": 0.9286,
+        "d_full": 1.0787,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9883,
+        "gain_s": 0.2149
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.8835,
+        "i_l_up": 4.8611,
+        "i_s_run": 3.9213,
+        "i_s_half": 3.7285,
+        "i_l_run": 5.0,
+        "d_mu": 1.9776,
+        "d_mc": 1.7948,
+        "d_sat": 0.9398,
+        "d_full": 1.0787,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9893,
+        "gain_s": 0.1928
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0338,
+        "i_l_up": 4.8335,
+        "i_s_run": 4.2888,
+        "i_s_half": 4.0706,
+        "i_l_run": 4.9915,
+        "d_mu": 1.7996,
+        "d_mc": 1.4998,
+        "d_sat": 0.5446,
+        "d_full": 0.7027,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9868,
+        "gain_s": 0.2182
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0047,
+        "i_l_up": 4.7906,
+        "i_s_run": 4.3229,
+        "i_s_half": 4.0507,
+        "i_l_run": 4.9915,
+        "d_mu": 1.7858,
+        "d_mc": 1.4706,
+        "d_sat": 0.4676,
+        "d_full": 0.6686,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9829,
+        "gain_s": 0.2722
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "PANEL-DISAGREE",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.2419,
+        "i_l_up": 4.8781,
+        "i_s_run": 4.3574,
+        "i_s_half": 4.1311,
+        "i_l_run": 4.984,
+        "d_mu": 1.6362,
+        "d_mc": 1.479,
+        "d_sat": 0.5207,
+        "d_full": 0.6266,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9907,
+        "gain_s": 0.2263,
+        "dep_fail_small": [
+         [
+          2048,
+          [
+           "a_use 552/2048=0.2695 < 0.95 x raw 586/2048=0.2861 (ratio 0.9420)"
+          ]
+         ]
+        ],
+        "dep_fail_large": []
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.2084,
+        "i_l_up": 4.8444,
+        "i_s_run": 4.3487,
+        "i_s_half": 4.0987,
+        "i_l_run": 4.9768,
+        "d_mu": 1.6361,
+        "d_mc": 1.4349,
+        "d_sat": 0.4957,
+        "d_full": 0.6281,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9878,
+        "gain_s": 0.25
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.699,
+        "i_l_up": 4.9131,
+        "i_s_run": 4.5545,
+        "i_s_half": 4.3879,
+        "i_l_run": 4.9915,
+        "d_mu": 1.2141,
+        "d_mc": 0.906,
+        "d_sat": 0.3586,
+        "d_full": 0.437,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9937,
+        "gain_s": 0.1666
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.7397,
+        "i_l_up": 4.9131,
+        "i_s_run": 4.5314,
+        "i_s_half": 4.401,
+        "i_l_run": 5.0,
+        "d_mu": 1.1734,
+        "d_mc": 0.8783,
+        "d_sat": 0.3817,
+        "d_full": 0.4686,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9937,
+        "gain_s": 0.1304
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.185,
+        "i_l_up": 4.85,
+        "i_s_run": 4.3879,
+        "i_s_half": 4.0987,
+        "i_l_run": 5.0,
+        "d_mu": 1.665,
+        "d_mc": 1.374,
+        "d_sat": 0.4621,
+        "d_full": 0.6121,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9883,
+        "gain_s": 0.2891
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.1916,
+        "i_l_up": 4.8444,
+        "i_s_run": 4.3487,
+        "i_s_half": 4.1352,
+        "i_l_run": 5.0,
+        "d_mu": 1.6528,
+        "d_mc": 1.3296,
+        "d_sat": 0.4957,
+        "d_full": 0.6513,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9878,
+        "gain_s": 0.2136
+       }
+      }
+     }
+    ]
+   },
+   "C2": {
+    "class": "GAIN WITHIN BUDGET",
+    "verdicts": [
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1627,
+        "i_l_up": 0.9935,
+        "i_s_run": 0.772,
+        "i_s_half": 0.7628,
+        "i_l_run": 2.5834,
+        "d_mu": 0.8308,
+        "d_mc": 0.7654,
+        "d_sat": 0.2216,
+        "d_full": 1.8114,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3854,
+        "gain_s": 0.0091
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1672,
+        "i_l_up": 1.0035,
+        "i_s_run": 0.7718,
+        "i_s_half": 0.7652,
+        "i_l_run": 2.5826,
+        "d_mu": 0.8363,
+        "d_mc": 0.7729,
+        "d_sat": 0.2317,
+        "d_full": 1.8108,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3878,
+        "gain_s": 0.0066
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1449,
+        "i_l_up": 0.9288,
+        "i_s_run": 0.6966,
+        "i_s_half": 0.6345,
+        "i_l_run": 2.5156,
+        "d_mu": 0.7839,
+        "d_mc": 0.7261,
+        "d_sat": 0.2322,
+        "d_full": 1.819,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3701,
+        "gain_s": 0.062
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.144,
+        "i_l_up": 0.9266,
+        "i_s_run": 0.6955,
+        "i_s_half": 0.6352,
+        "i_l_run": 2.5056,
+        "d_mu": 0.7826,
+        "d_mc": 0.7221,
+        "d_sat": 0.2311,
+        "d_full": 1.8101,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3696,
+        "gain_s": 0.0603
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1812,
+        "i_l_up": 1.0098,
+        "i_s_run": 0.7574,
+        "i_s_half": 0.7354,
+        "i_l_run": 2.5222,
+        "d_mu": 0.8286,
+        "d_mc": 0.7736,
+        "d_sat": 0.2523,
+        "d_full": 1.7648,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3892,
+        "gain_s": 0.022
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1837,
+        "i_l_up": 1.0166,
+        "i_s_run": 0.7612,
+        "i_s_half": 0.729,
+        "i_l_run": 2.5193,
+        "d_mu": 0.833,
+        "d_mc": 0.7808,
+        "d_sat": 0.2555,
+        "d_full": 1.7581,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3908,
+        "gain_s": 0.0321
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2655,
+        "i_l_up": 1.3854,
+        "i_s_run": 0.7402,
+        "i_s_half": 0.7117,
+        "i_l_run": 2.8599,
+        "d_mu": 1.1198,
+        "d_mc": 1.0572,
+        "d_sat": 0.6452,
+        "d_full": 2.1197,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4718,
+        "gain_s": 0.0284
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2571,
+        "i_l_up": 1.3854,
+        "i_s_run": 0.739,
+        "i_s_half": 0.7143,
+        "i_l_run": 2.8648,
+        "d_mu": 1.1282,
+        "d_mc": 1.0589,
+        "d_sat": 0.6464,
+        "d_full": 2.1258,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.4718,
+        "gain_s": 0.0247
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.164,
+        "i_l_up": 0.9921,
+        "i_s_run": 0.734,
+        "i_s_half": 0.7093,
+        "i_l_run": 2.6004,
+        "d_mu": 0.8281,
+        "d_mc": 0.761,
+        "d_sat": 0.2581,
+        "d_full": 1.8664,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3851,
+        "gain_s": 0.0247
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.1641,
+        "i_l_up": 1.0009,
+        "i_s_run": 0.7322,
+        "i_s_half": 0.7059,
+        "i_l_run": 2.5974,
+        "d_mu": 0.8368,
+        "d_mc": 0.7734,
+        "d_sat": 0.2686,
+        "d_full": 1.8652,
+        "mc": [
+         20480,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": false,
+        "a_l_up": 0.3871,
+        "gain_s": 0.0263
+       }
+      }
+     }
+    ]
+   },
+   "N2": {
+    "class": "GAIN WITHIN BUDGET",
+    "verdicts": [
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY",
+     "GAIN WITHIN BUDGET ONLY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.3303,
+        "i_l_up": 4.1342,
+        "i_s_run": 3.1891,
+        "i_s_half": 2.7203,
+        "i_l_run": 4.9422,
+        "d_mu": 2.8038,
+        "d_mc": 2.4266,
+        "d_sat": 0.945,
+        "d_full": 1.753,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.912,
+        "gain_s": 0.4688
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.3367,
+        "i_l_up": 4.1189,
+        "i_s_run": 3.2109,
+        "i_s_half": 2.7142,
+        "i_l_run": 4.9391,
+        "d_mu": 2.7823,
+        "d_mc": 2.4114,
+        "d_sat": 0.9081,
+        "d_full": 1.7282,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9102,
+        "gain_s": 0.4967
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0931,
+        "i_l_up": 4.0857,
+        "i_s_run": 2.7804,
+        "i_s_half": 2.3686,
+        "i_l_run": 4.9406,
+        "d_mu": 2.9926,
+        "d_mc": 2.6908,
+        "d_sat": 1.3053,
+        "d_full": 2.1603,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9061,
+        "gain_s": 0.4117
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.0931,
+        "i_l_up": 4.0726,
+        "i_s_run": 2.7626,
+        "i_s_half": 2.3708,
+        "i_l_run": 4.9485,
+        "d_mu": 2.9795,
+        "d_mc": 2.6401,
+        "d_sat": 1.3101,
+        "d_full": 2.186,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9045,
+        "gain_s": 0.3918
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.3855,
+        "i_l_up": 4.1546,
+        "i_s_run": 2.9774,
+        "i_s_half": 2.5573,
+        "i_l_run": 4.9485,
+        "d_mu": 2.7691,
+        "d_mc": 2.4822,
+        "d_sat": 1.1772,
+        "d_full": 1.9712,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9144,
+        "gain_s": 0.4201
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.4072,
+        "i_l_up": 4.1679,
+        "i_s_run": 2.9694,
+        "i_s_half": 2.5513,
+        "i_l_run": 4.9517,
+        "d_mu": 2.7607,
+        "d_mc": 2.4854,
+        "d_sat": 1.1985,
+        "d_full": 1.9824,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.916,
+        "gain_s": 0.418
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.7973,
+        "i_l_up": 4.4677,
+        "i_s_run": 3.3594,
+        "i_s_half": 3.0688,
+        "i_l_run": 4.9649,
+        "d_mu": 2.6704,
+        "d_mc": 2.307,
+        "d_sat": 1.1083,
+        "d_full": 1.6055,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9502,
+        "gain_s": 0.2906
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.7967,
+        "i_l_up": 4.4812,
+        "i_s_run": 3.3619,
+        "i_s_half": 3.0533,
+        "i_l_run": 4.9665,
+        "d_mu": 2.6845,
+        "d_mc": 2.3143,
+        "d_sat": 1.1193,
+        "d_full": 1.6046,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9517,
+        "gain_s": 0.3086
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "GAIN WITHIN BUDGET ONLY",
+      "panels": {
+       "A": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.2919,
+        "i_l_up": 4.1864,
+        "i_s_run": 3.059,
+        "i_s_half": 2.6723,
+        "i_l_run": 4.9298,
+        "d_mu": 2.8945,
+        "d_mc": 2.5127,
+        "d_sat": 1.1274,
+        "d_full": 1.8708,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9182,
+        "gain_s": 0.3867
+       },
+       "B": {
+        "v": "GAIN WITHIN BUDGET ONLY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 1.2742,
+        "i_l_up": 4.1998,
+        "i_s_run": 3.0933,
+        "i_s_half": 2.6647,
+        "i_l_run": 4.9359,
+        "d_mu": 2.9256,
+        "d_mc": 2.5349,
+        "d_sat": 1.1065,
+        "d_full": 1.8426,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": false,
+        "p_s": false,
+        "p_l": true,
+        "a_l_up": 0.9198,
+        "gain_s": 0.4286
+       }
+      }
+     }
+    ]
+   }
+  },
+  "H8": {
+   "C1": {
+    "class": "MIXED",
+    "verdicts": [
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "DEPENDENCE_FAILED",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3171,
+        "i_l_up": 3.0517,
+        "i_s_run": 0.8077,
+        "i_s_half": 0.7936,
+        "i_l_run": 3.8685,
+        "d_mu": 2.7346,
+        "d_mc": 2.6608,
+        "d_sat": 2.244,
+        "d_full": 3.0608,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7654,
+        "gain_s": 0.0141
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3233,
+        "i_l_up": 3.0387,
+        "i_s_run": 0.8116,
+        "i_s_half": 0.7985,
+        "i_l_run": 3.8666,
+        "d_mu": 2.7154,
+        "d_mc": 2.644,
+        "d_sat": 2.2271,
+        "d_full": 3.055,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7634,
+        "gain_s": 0.0132
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.2904,
+        "i_l_up": 2.9558,
+        "i_s_run": 0.8288,
+        "i_s_half": 0.8288,
+        "i_l_run": 3.8647,
+        "d_mu": 2.6654,
+        "d_mc": 2.5552,
+        "d_sat": 2.127,
+        "d_full": 3.0359,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7509,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3027,
+        "i_l_up": 2.9798,
+        "i_s_run": 0.8293,
+        "i_s_half": 0.8273,
+        "i_l_run": 3.8542,
+        "d_mu": 2.677,
+        "d_mc": 2.5745,
+        "d_sat": 2.1505,
+        "d_full": 3.0249,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7545,
+        "gain_s": 0.002
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3262,
+        "i_l_up": 3.0794,
+        "i_s_run": 0.8106,
+        "i_s_half": 0.8067,
+        "i_l_run": 3.9184,
+        "d_mu": 2.7532,
+        "d_mc": 2.6544,
+        "d_sat": 2.2687,
+        "d_full": 3.1078,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7695,
+        "gain_s": 0.0039
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3476,
+        "i_l_up": 3.0712,
+        "i_s_run": 0.8087,
+        "i_s_half": 0.8077,
+        "i_l_run": 3.9136,
+        "d_mu": 2.7237,
+        "d_mc": 2.6546,
+        "d_sat": 2.2625,
+        "d_full": 3.1049,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7683,
+        "gain_s": 0.001
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.417,
+        "i_l_up": 3.2816,
+        "i_s_run": 0.8131,
+        "i_s_half": 0.8038,
+        "i_l_run": 3.8504,
+        "d_mu": 2.8646,
+        "d_mc": 2.8015,
+        "d_sat": 2.4685,
+        "d_full": 3.0374,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7992,
+        "gain_s": 0.0093,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2119/8192=0.2587 < 0.95 x raw 2239/8192=0.2733 (ratio 0.9464)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4155,
+        "i_l_up": 3.3071,
+        "i_s_run": 0.8259,
+        "i_s_half": 0.8126,
+        "i_l_run": 3.8619,
+        "d_mu": 2.8917,
+        "d_mc": 2.8246,
+        "d_sat": 2.4813,
+        "d_full": 3.036,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8029,
+        "gain_s": 0.0132,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          2048,
+          [
+           "a_use 2122/8192=0.2590 < 0.95 x raw 2237/8192=0.2731 (ratio 0.9486)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3361,
+        "i_l_up": 3.0452,
+        "i_s_run": 0.8377,
+        "i_s_half": 0.8229,
+        "i_l_run": 3.8457,
+        "d_mu": 2.7091,
+        "d_mc": 2.6202,
+        "d_sat": 2.2075,
+        "d_full": 3.008,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7644,
+        "gain_s": 0.0148
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.3453,
+        "i_l_up": 3.0509,
+        "i_s_run": 0.8407,
+        "i_s_half": 0.8402,
+        "i_l_run": 3.8447,
+        "d_mu": 2.7055,
+        "d_mc": 2.6397,
+        "d_sat": 2.2102,
+        "d_full": 3.0041,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.7653,
+        "gain_s": 0.0005
+       }
+      }
+     }
+    ]
+   },
+   "N1": {
+    "class": "NOT REPLICATED",
+    "verdicts": [
+     "PANEL-DISAGREE",
+     "CAPACITY",
+     "PANEL-DISAGREE",
+     "CAPACITY",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "PANEL-DISAGREE",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.4619,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8905,
+        "i_s_half": 3.8752,
+        "i_l_run": 5.0,
+        "d_mu": 1.5381,
+        "d_mc": 1.421,
+        "d_sat": 1.1095,
+        "d_full": 1.1095,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0153
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.4795,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8944,
+        "i_s_half": 3.8638,
+        "i_l_run": 5.0,
+        "d_mu": 1.5205,
+        "d_mc": 1.3595,
+        "d_sat": 1.1056,
+        "d_full": 1.1056,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0306,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 532/2048=0.2598 < 0.95 x raw 570/2048=0.2783 (ratio 0.9333)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.4026,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8638,
+        "i_s_half": 3.8638,
+        "i_l_run": 5.0,
+        "d_mu": 1.5974,
+        "d_mc": 1.4138,
+        "d_sat": 1.1362,
+        "d_full": 1.1362,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.4514,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8829,
+        "i_s_half": 3.8829,
+        "i_l_run": 5.0,
+        "d_mu": 1.5486,
+        "d_mc": 1.3267,
+        "d_sat": 1.1171,
+        "d_full": 1.1171,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "PANEL-DISAGREE",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.3783,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8258,
+        "i_s_half": 3.8258,
+        "i_l_run": 5.0,
+        "d_mu": 1.6217,
+        "d_mc": 1.4532,
+        "d_sat": 1.1742,
+        "d_full": 1.1742,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.3714,
+        "i_l_up": 5.0,
+        "i_s_run": 3.841,
+        "i_s_half": 3.7957,
+        "i_l_run": 5.0,
+        "d_mu": 1.6286,
+        "d_mc": 1.446,
+        "d_sat": 1.159,
+        "d_full": 1.159,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0453,
+        "dep_fail_small": [],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 735/2048=0.3589 < 0.95 x raw 778/2048=0.3799 (ratio 0.9447)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.688,
+        "i_l_up": 5.0,
+        "i_s_run": 3.9523,
+        "i_s_half": 3.9097,
+        "i_l_run": 5.0,
+        "d_mu": 1.312,
+        "d_mc": 1.2118,
+        "d_sat": 1.0477,
+        "d_full": 1.0477,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0426
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.6806,
+        "i_l_up": 5.0,
+        "i_s_run": 3.9407,
+        "i_s_half": 3.929,
+        "i_l_run": 5.0,
+        "d_mu": 1.3194,
+        "d_mc": 1.2043,
+        "d_sat": 1.0593,
+        "d_full": 1.0593,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0116
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.483,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8638,
+        "i_s_half": 3.841,
+        "i_l_run": 5.0,
+        "d_mu": 1.517,
+        "d_mc": 1.3994,
+        "d_sat": 1.1362,
+        "d_full": 1.1362,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0228
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.4971,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8829,
+        "i_s_half": 3.8334,
+        "i_l_run": 5.0,
+        "d_mu": 1.5029,
+        "d_mc": 1.3303,
+        "d_sat": 1.1171,
+        "d_full": 1.1171,
+        "mc": [
+         10240,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0495
+       }
+      }
+     }
+    ]
+   },
+   "C2": {
+    "class": "CAPACITY STEP",
+    "verdicts": [
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4215,
+        "i_l_up": 3.3133,
+        "i_s_run": 0.8342,
+        "i_s_half": 0.8342,
+        "i_l_run": 3.8614,
+        "d_mu": 2.8918,
+        "d_mc": 2.7455,
+        "d_sat": 2.4791,
+        "d_full": 3.0272,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8037,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4269,
+        "i_l_up": 3.3159,
+        "i_s_run": 0.8408,
+        "i_s_half": 0.8408,
+        "i_l_run": 3.8633,
+        "d_mu": 2.8889,
+        "d_mc": 2.7471,
+        "d_sat": 2.4751,
+        "d_full": 3.0225,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8041,
+        "gain_s": 0.0
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4031,
+        "i_l_up": 3.3248,
+        "i_s_run": 0.8284,
+        "i_s_half": 0.8271,
+        "i_l_run": 3.8877,
+        "d_mu": 2.9218,
+        "d_mc": 2.7782,
+        "d_sat": 2.4964,
+        "d_full": 3.0592,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8054,
+        "gain_s": 0.0014
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.408,
+        "i_l_up": 3.318,
+        "i_s_run": 0.8307,
+        "i_s_half": 0.8289,
+        "i_l_run": 3.8908,
+        "d_mu": 2.91,
+        "d_mc": 2.773,
+        "d_sat": 2.4874,
+        "d_full": 3.0601,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8044,
+        "gain_s": 0.0017
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.46,
+        "i_l_up": 3.354,
+        "i_s_run": 0.8255,
+        "i_s_half": 0.8255,
+        "i_l_run": 3.8826,
+        "d_mu": 2.894,
+        "d_mc": 2.77,
+        "d_sat": 2.5285,
+        "d_full": 3.0571,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8095,
+        "gain_s": 0.0
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4546,
+        "i_l_up": 3.3437,
+        "i_s_run": 0.8252,
+        "i_s_half": 0.8251,
+        "i_l_run": 3.8774,
+        "d_mu": 2.8891,
+        "d_mc": 2.7607,
+        "d_sat": 2.5184,
+        "d_full": 3.0521,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8081,
+        "gain_s": 0.0001
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.5171,
+        "i_l_up": 3.5073,
+        "i_s_run": 0.8324,
+        "i_s_half": 0.8291,
+        "i_l_run": 3.8604,
+        "d_mu": 2.9902,
+        "d_mc": 2.8809,
+        "d_sat": 2.6749,
+        "d_full": 3.0281,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.831,
+        "gain_s": 0.0033
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.5145,
+        "i_l_up": 3.494,
+        "i_s_run": 0.8361,
+        "i_s_half": 0.8361,
+        "i_l_run": 3.8561,
+        "d_mu": 2.9796,
+        "d_mc": 2.8613,
+        "d_sat": 2.6579,
+        "d_full": 3.0201,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8292,
+        "gain_s": 0.0
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4621,
+        "i_l_up": 3.3663,
+        "i_s_run": 0.8278,
+        "i_s_half": 0.8249,
+        "i_l_run": 3.8654,
+        "d_mu": 2.9041,
+        "d_mc": 2.7745,
+        "d_sat": 2.5384,
+        "d_full": 3.0376,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8113,
+        "gain_s": 0.003
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 0.4457,
+        "i_l_up": 3.3691,
+        "i_s_run": 0.8303,
+        "i_s_half": 0.8225,
+        "i_l_run": 3.8695,
+        "d_mu": 2.9234,
+        "d_mc": 2.7865,
+        "d_sat": 2.5388,
+        "d_full": 3.0392,
+        "mc": [
+         24576,
+         16384
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.8117,
+        "gain_s": 0.0077
+       }
+      }
+     }
+    ]
+   },
+   "N2": {
+    "class": "MIXED",
+    "verdicts": [
+     "CAPACITY",
+     "CAPACITY",
+     "CAPACITY",
+     "DEPENDENCE_FAILED",
+     "CAPACITY"
+    ],
+    "reps": [
+     {
+      "rep": 1,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0517,
+        "i_l_up": 4.9955,
+        "i_s_run": 3.8685,
+        "i_s_half": 3.8164,
+        "i_l_run": 5.0,
+        "d_mu": 1.9438,
+        "d_mc": 1.5143,
+        "d_sat": 1.127,
+        "d_full": 1.1315,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9998,
+        "gain_s": 0.0522
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0387,
+        "i_l_up": 4.9976,
+        "i_s_run": 3.8666,
+        "i_s_half": 3.7947,
+        "i_l_run": 5.0,
+        "d_mu": 1.959,
+        "d_mc": 1.5305,
+        "d_sat": 1.131,
+        "d_full": 1.1334,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 0.9999,
+        "gain_s": 0.0719
+       }
+      }
+     },
+     {
+      "rep": 2,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.9558,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8647,
+        "i_s_half": 3.7816,
+        "i_l_run": 5.0,
+        "d_mu": 2.0442,
+        "d_mc": 1.5844,
+        "d_sat": 1.1353,
+        "d_full": 1.1353,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0831
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 2.9798,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8542,
+        "i_s_half": 3.7872,
+        "i_l_run": 5.0,
+        "d_mu": 2.0202,
+        "d_mc": 1.5722,
+        "d_sat": 1.1458,
+        "d_full": 1.1458,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.067
+       }
+      }
+     },
+     {
+      "rep": 3,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0794,
+        "i_l_up": 5.0,
+        "i_s_run": 3.9184,
+        "i_s_half": 3.8542,
+        "i_l_run": 5.0,
+        "d_mu": 1.9206,
+        "d_mc": 1.4754,
+        "d_sat": 1.0816,
+        "d_full": 1.0816,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0642
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0712,
+        "i_l_up": 5.0,
+        "i_s_run": 3.9136,
+        "i_s_half": 3.8476,
+        "i_l_run": 5.0,
+        "d_mu": 1.9288,
+        "d_mc": 1.4594,
+        "d_sat": 1.0864,
+        "d_full": 1.0864,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.066
+       }
+      }
+     },
+     {
+      "rep": 4,
+      "verdict": "DEPENDENCE_FAILED",
+      "panels": {
+       "A": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.2816,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8504,
+        "i_s_half": 3.8098,
+        "i_l_run": 5.0,
+        "d_mu": 1.7184,
+        "d_mc": 1.3966,
+        "d_sat": 1.1496,
+        "d_full": 1.1496,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0407,
+        "dep_fail_small": [
+         [
+          2048,
+          [
+           "a_use 2119/8192=0.2587 < 0.95 x raw 2239/8192=0.2733 (ratio 0.9464)"
+          ]
+         ]
+        ],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 2195/8192=0.2679 < 0.95 x raw 2355/8192=0.2875 (ratio 0.9321)"
+          ]
+         ]
+        ]
+       },
+       "B": {
+        "v": "DEPENDENCE_FAILED",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.3071,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8619,
+        "i_s_half": 3.8022,
+        "i_l_run": 5.0,
+        "d_mu": 1.6929,
+        "d_mc": 1.3858,
+        "d_sat": 1.1381,
+        "d_full": 1.1381,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0596,
+        "dep_fail_small": [
+         [
+          2048,
+          [
+           "a_use 2122/8192=0.2590 < 0.95 x raw 2237/8192=0.2731 (ratio 0.9486)"
+          ]
+         ]
+        ],
+        "dep_fail_large": [
+         [
+          1024,
+          [
+           "a_use 2170/8192=0.2649 < 0.95 x raw 2343/8192=0.2860 (ratio 0.9262)"
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     {
+      "rep": 5,
+      "verdict": "CAPACITY",
+      "panels": {
+       "A": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0452,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8457,
+        "i_s_half": 3.7957,
+        "i_l_run": 5.0,
+        "d_mu": 1.9548,
+        "d_mc": 1.5144,
+        "d_sat": 1.1543,
+        "d_full": 1.1543,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.05
+       },
+       "B": {
+        "v": "CAPACITY",
+        "ref": [
+         1.0,
+         1.0
+        ],
+        "i_s_up": 3.0509,
+        "i_l_up": 5.0,
+        "i_s_run": 3.8447,
+        "i_s_half": 3.8041,
+        "i_l_run": 5.0,
+        "d_mu": 1.9491,
+        "d_mc": 1.5126,
+        "d_sat": 1.1553,
+        "d_full": 1.1553,
+        "mc": [
+         12288,
+         8192
+        ],
+        "loaded": true,
+        "p_s": true,
+        "p_l": true,
+        "a_l_up": 1.0,
+        "gain_s": 0.0406
+       }
+      }
+     }
+    ]
+   }
+  }
+ },
+ "arms": {
+  "F-OQ": "DEPENDENCE_FAILED",
+  "F-OQ-IVF": "DEPENDENCE_FAILED",
+  "T-OQ": "INTERMEDIATE",
+  "H8": "CAPACITY_ONE_TRANSITION"
+ },
+ "dep_detail": [],
+ "mc_check": {
+  "cap|F-OQ|C1": {
+   "mine": [
+    16384,
+    8192,
+    1.689107379563836,
+    null
+   ],
+   "frozen": [
+    16384,
+    8192,
+    1.689107379563836,
+    null
+   ],
+   "same": true
+  },
+  "cap|F-OQ|N1": {
+   "mine": [
+    16384,
+    8192,
+    1.689107379563836,
+    null
+   ],
+   "frozen": [
+    16384,
+    8192,
+    1.689107379563836,
+    null
+   ],
+   "same": true
+  },
+  "cap|F-OQ|C2": {
+   "mine": [
+    32768,
+    16384,
+    1.6969335420631075,
+    null
+   ],
+   "frozen": [
+    32768,
+    16384,
+    1.6969335420631075,
+    null
+   ],
+   "same": true
+  },
+  "cap|F-OQ|N2": {
+   "mine": [
+    16384,
+    8192,
+    1.6969335420631075,
+    null
+   ],
+   "frozen": [
+    16384,
+    8192,
+    1.6969335420631075,
+    null
+   ],
+   "same": true
+  },
+  "cap|T-OQ|C1": {
+   "mine": [
+    10240,
+    8192,
+    1.06327635884309,
+    null
+   ],
+   "frozen": [
+    10240,
+    8192,
+    1.06327635884309,
+    null
+   ],
+   "same": true
+  },
+  "cap|T-OQ|N1": {
+   "mine": [
+    10240,
+    8192,
+    1.06327635884309,
+    null
+   ],
+   "frozen": [
+    10240,
+    8192,
+    1.06327635884309,
+    null
+   ],
+   "same": true
+  },
+  "cap|T-OQ|C2": {
+   "mine": [
+    20480,
+    16384,
+    1.190037392249482,
+    null
+   ],
+   "frozen": [
+    20480,
+    16384,
+    1.190037392249482,
+    null
+   ],
+   "same": true
+  },
+  "cap|T-OQ|N2": {
+   "mine": [
+    10240,
+    8192,
+    1.190037392249482,
+    null
+   ],
+   "frozen": [
+    10240,
+    8192,
+    1.190037392249482,
+    null
+   ],
+   "same": true
+  },
+  "cap|H8|C1": {
+   "mine": [
+    10240,
+    8192,
+    1.1134074096448074,
+    null
+   ],
+   "frozen": [
+    10240,
+    8192,
+    1.1134074096448074,
+    null
+   ],
+   "same": true
+  },
+  "cap|H8|N1": {
+   "mine": [
+    10240,
+    8192,
+    1.1134074096448074,
+    null
+   ],
+   "frozen": [
+    10240,
+    8192,
+    1.1134074096448074,
+    null
+   ],
+   "same": true
+  },
+  "cap|H8|C2": {
+   "mine": [
+    24576,
+    16384,
+    1.3853905827041744,
+    null
+   ],
+   "frozen": [
+    24576,
+    16384,
+    1.3853905827041744,
+    null
+   ],
+   "same": true
+  },
+  "cap|H8|N2": {
+   "mine": [
+    12288,
+    8192,
+    1.3853905827041744,
+    null
+   ],
+   "frozen": [
+    12288,
+    8192,
+    1.3853905827041744,
+    null
+   ],
+   "same": true
+  }
+ }
+}

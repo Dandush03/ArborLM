@@ -1,0 +1,185 @@
+MC check (frozen vs mine): True {}
+
+== F-OQ: ARM CLASS DEPENDENCE_FAILED
+  C1: MIXED                  ['CAPACITY', 'CAPACITY', 'CAPACITY', 'DEPENDENCE_FAILED', 'CAPACITY']
+     r1 A: CAPACITY                 i_s(UP)=0.9886 i_l(UP)=4.4375 dMU=3.4489 dMC=2.8143 dSAT=2.0429 dFULL=2.5492 i*s(run)=2.3946 i*s(half)=2.3079 gain_s=0.0867 loaded=True pS=True pL=True aL(UP)=0.9469
+     r1 B: CAPACITY                 i_s(UP)=1.0027 i_l(UP)=4.4242 dMU=3.4215 dMC=2.8299 dSAT=2.0296 dFULL=2.5556 i*s(run)=2.3946 i*s(half)=2.3079 gain_s=0.0867 loaded=True pS=True pL=True aL(UP)=0.9454
+     r2 A: CAPACITY                 i_s(UP)=0.9002 i_l(UP)=4.3693 dMU=3.4691 dMC=2.7941 dSAT=2.0265 dFULL=2.6122 i*s(run)=2.3428 i*s(half)=2.3193 gain_s=0.0236 loaded=True pS=True pL=True aL(UP)=0.9393
+     r2 B: CAPACITY                 i_s(UP)=0.8946 i_l(UP)=4.3498 dMU=3.4552 dMC=2.7789 dSAT=2.0149 dFULL=2.6316 i*s(run)=2.335 i*s(half)=2.3257 gain_s=0.0093 loaded=True pS=True pL=True aL(UP)=0.9371
+     r3 A: CAPACITY                 i_s(UP)=1.0364 i_l(UP)=4.4442 dMU=3.4078 dMC=2.7743 dSAT=2.0756 dFULL=2.5689 i*s(run)=2.3686 i*s(half)=2.3029 gain_s=0.0657 loaded=True pS=True pL=True aL(UP)=0.9476
+     r3 B: CAPACITY                 i_s(UP)=1.0227 i_l(UP)=4.4542 dMU=3.4315 dMC=2.78 dSAT=2.0906 dFULL=2.5739 i*s(run)=2.3636 i*s(half)=2.2909 gain_s=0.0727 loaded=True pS=True pL=True aL(UP)=0.9487
+     r4 A: DEPENDENCE_FAILED        i_s(UP)=1.1502 i_l(UP)=4.6074 dMU=3.4571 dMC=2.8764 dSAT=2.2746 dFULL=2.6125 i*s(run)=2.3328 i*s(half)=2.2732 gain_s=0.0596 loaded=True pS=True pL=True aL(UP)=0.965 depfail small=[] large=[(2048, ['a_use 2356/8192=0.2876 < 0.95 x raw 2493/8192=0.3043 (ratio 0.9450)'])]
+     r4 B: DEPENDENCE_FAILED        i_s(UP)=1.1878 i_l(UP)=4.592 dMU=3.4042 dMC=2.8819 dSAT=2.262 dFULL=2.6138 i*s(run)=2.33 i*s(half)=2.2795 gain_s=0.0504 loaded=True pS=True pL=True aL(UP)=0.9634 depfail small=[] large=[(2048, ['a_use 2387/8192=0.2914 < 0.95 x raw 2524/8192=0.3081 (ratio 0.9457)'])]
+     r5 A: CAPACITY                 i_s(UP)=0.9792 i_l(UP)=4.4131 dMU=3.4339 dMC=2.809 dSAT=2.0682 dFULL=2.5925 i*s(run)=2.345 i*s(half)=2.3207 gain_s=0.0243 loaded=True pS=True pL=True aL(UP)=0.9442
+     r5 B: CAPACITY                 i_s(UP)=0.973 i_l(UP)=4.4242 dMU=3.4512 dMC=2.8164 dSAT=2.0907 dFULL=2.6055 i*s(run)=2.3335 i*s(half)=2.3257 gain_s=0.0078 loaded=True pS=True pL=True aL(UP)=0.9454
+  N1: NOT LOADED             ['CEILING', 'CEILING', 'DEPENDENCE_FAILED', 'CEILING', 'CEILING']
+     r1 A: CEILING                  i_s(UP)=4.8896 i_l(UP)=5.0 dMU=0.1104 dMC=0.0232 dSAT=0.0 dFULL=0.0 i*s(run)=5.0 i*s(half)=4.9768 gain_s=0.0232 loaded=False pS=True pL=True aL(UP)=1.0
+     r1 B: CEILING                  i_s(UP)=4.8555 i_l(UP)=5.0 dMU=0.1445 dMC=0.016 dSAT=0.0085 dFULL=0.0085 i*s(run)=4.9915 i*s(half)=4.984 gain_s=0.0075 loaded=False pS=True pL=True aL(UP)=1.0
+     r2 A: CEILING                  i_s(UP)=4.8611 i_l(UP)=4.9915 dMU=0.1304 dMC=0.0147 dSAT=0.0 dFULL=0.0085 i*s(run)=4.9915 i*s(half)=4.9915 gain_s=0.0 loaded=False pS=True pL=True aL(UP)=0.9995
+     r2 B: CEILING                  i_s(UP)=4.8444 i_l(UP)=5.0 dMU=0.1556 dMC=0.0301 dSAT=0.0085 dFULL=0.0085 i*s(run)=4.9915 i*s(half)=4.984 gain_s=0.0075 loaded=False pS=True pL=True aL(UP)=1.0
+     r3 A: DEPENDENCE_FAILED        i_s(UP)=4.8954 i_l(UP)=5.0 dMU=0.1046 dMC=0.0368 dSAT=0.016 dFULL=0.016 i*s(run)=4.984 i*s(half)=4.9632 gain_s=0.0208 loaded=False pS=True pL=True aL(UP)=1.0 depfail small=[] large=[(1024, ['a_use 643/2048=0.3140 < 0.95 x raw 680/2048=0.3320 (ratio 0.9456)'])]
+     r3 B: DEPENDENCE_FAILED        i_s(UP)=4.8954 i_l(UP)=5.0 dMU=0.1046 dMC=0.0301 dSAT=0.0085 dFULL=0.0085 i*s(run)=4.9915 i*s(half)=4.9699 gain_s=0.0216 loaded=False pS=True pL=True aL(UP)=1.0 depfail small=[] large=[(1024, ['a_use 620/2048=0.3027 < 0.95 x raw 659/2048=0.3218 (ratio 0.9408)'])]
+     r4 A: CEILING                  i_s(UP)=4.9012 i_l(UP)=5.0 dMU=0.0988 dMC=0.0562 dSAT=0.016 dFULL=0.016 i*s(run)=4.984 i*s(half)=4.9632 gain_s=0.0208 loaded=False pS=True pL=True aL(UP)=1.0
+     r4 B: CEILING                  i_s(UP)=4.9012 i_l(UP)=5.0 dMU=0.0988 dMC=0.0562 dSAT=0.0085 dFULL=0.0085 i*s(run)=4.9915 i*s(half)=4.9632 gain_s=0.0283 loaded=False pS=True pL=True aL(UP)=1.0
+     r5 A: CEILING                  i_s(UP)=4.8838 i_l(UP)=5.0 dMU=0.1162 dMC=0.0368 dSAT=0.0232 dFULL=0.0232 i*s(run)=4.9768 i*s(half)=4.9768 gain_s=0.0 loaded=False pS=True pL=True aL(UP)=1.0
+     r5 B: CEILING                  i_s(UP)=4.8724 i_l(UP)=5.0 dMU=0.1276 dMC=0.0434 dSAT=0.016 dFULL=0.016 i*s(run)=4.984 i*s(half)=4.9768 gain_s=0.0071 loaded=False pS=True pL=True aL(UP)=1.0
+  C2: CAPACITY STEP          ['CAPACITY', 'CAPACITY', 'CAPACITY', 'CAPACITY', 'CAPACITY']
+     r1 A: CAPACITY                 i_s(UP)=0.9563 i_l(UP)=4.1304 dMU=3.1741 dMC=2.564 dSAT=1.8646 dFULL=2.6271 i*s(run)=2.2658 i*s(half)=2.2123 gain_s=0.0535 loaded=True pS=True pL=True aL(UP)=0.9115
+     r1 B: CAPACITY                 i_s(UP)=0.9621 i_l(UP)=4.1413 dMU=3.1792 dMC=2.5635 dSAT=1.876 dFULL=2.6211 i*s(run)=2.2652 i*s(half)=2.2149 gain_s=0.0503 loaded=True pS=True pL=True aL(UP)=0.9128
+     r2 A: CAPACITY                 i_s(UP)=0.9464 i_l(UP)=4.1106 dMU=3.1642 dMC=2.5505 dSAT=1.8577 dFULL=2.6385 i*s(run)=2.2529 i*s(half)=2.1919 gain_s=0.061 loaded=True pS=True pL=True aL(UP)=0.9091
+     r2 B: CAPACITY                 i_s(UP)=0.9487 i_l(UP)=4.1076 dMU=3.1589 dMC=2.5491 dSAT=1.8545 dFULL=2.635 i*s(run)=2.2531 i*s(half)=2.193 gain_s=0.0601 loaded=True pS=True pL=True aL(UP)=0.9088
+     r3 A: CAPACITY                 i_s(UP)=1.0255 i_l(UP)=4.1489 dMU=3.1235 dMC=2.5545 dSAT=1.8895 dFULL=2.6334 i*s(run)=2.2594 i*s(half)=2.2175 gain_s=0.0419 loaded=True pS=True pL=True aL(UP)=0.9138
+     r3 B: CAPACITY                 i_s(UP)=1.0178 i_l(UP)=4.1431 dMU=3.1253 dMC=2.5434 dSAT=1.8829 dFULL=2.6305 i*s(run)=2.2601 i*s(half)=2.2235 gain_s=0.0367 loaded=True pS=True pL=True aL(UP)=0.9131
+     r4 A: CAPACITY                 i_s(UP)=1.1839 i_l(UP)=4.3013 dMU=3.1174 dMC=2.6181 dSAT=2.0412 dFULL=2.6276 i*s(run)=2.2601 i*s(half)=2.2312 gain_s=0.029 loaded=True pS=True pL=True aL(UP)=0.9316
+     r4 B: CAPACITY                 i_s(UP)=1.1876 i_l(UP)=4.3024 dMU=3.1147 dMC=2.6309 dSAT=2.0385 dFULL=2.6221 i*s(run)=2.2638 i*s(half)=2.2263 gain_s=0.0376 loaded=True pS=True pL=True aL(UP)=0.9317
+     r5 A: CAPACITY                 i_s(UP)=0.99 i_l(UP)=4.1344 dMU=3.1444 dMC=2.5319 dSAT=1.8945 dFULL=2.6424 i*s(run)=2.2399 i*s(half)=2.2233 gain_s=0.0166 loaded=True pS=True pL=True aL(UP)=0.912
+     r5 B: CAPACITY                 i_s(UP)=0.9933 i_l(UP)=4.1357 dMU=3.1424 dMC=2.5473 dSAT=1.8961 dFULL=2.6406 i*s(run)=2.2396 i*s(half)=2.2236 gain_s=0.0159 loaded=True pS=True pL=True aL(UP)=0.9122
+  N2: DEPENDENCE_FAILED      ['GAIN WITHIN BUDGET ONLY', 'DEPENDENCE_FAILED', 'GAIN WITHIN BUDGET ONLY', 'DEPENDENCE_FAILED', 'GAIN WITHIN BUDGET ONLY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=4.4375 i_l(UP)=4.9804 dMU=0.5429 dMC=0.1263 dSAT=0.0366 dFULL=0.0562 i*s(run)=4.9438 i*s(half)=4.8998 gain_s=0.044 loaded=False pS=True pL=True aL(UP)=0.9988
+     r1 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=4.4242 i_l(UP)=4.9858 dMU=0.5616 dMC=0.1483 dSAT=0.0357 dFULL=0.0499 i*s(run)=4.9501 i*s(half)=4.9027 gain_s=0.0474 loaded=False pS=True pL=True aL(UP)=0.9991
+     r2 A: DEPENDENCE_FAILED        i_s(UP)=4.3693 i_l(UP)=4.9877 dMU=0.6183 dMC=0.1865 dSAT=0.0327 dFULL=0.045 i*s(run)=4.955 i*s(half)=4.9012 gain_s=0.0537 loaded=False pS=True pL=True aL(UP)=0.9993 depfail small=[] large=[(2048, ['a_use 2646/8192=0.3230 < 0.95 x raw 2803/8192=0.3422 (ratio 0.9440)'])]
+     r2 B: DEPENDENCE_FAILED        i_s(UP)=4.3498 i_l(UP)=4.9896 dMU=0.6397 dMC=0.1804 dSAT=0.023 dFULL=0.0335 i*s(run)=4.9665 i*s(half)=4.9086 gain_s=0.0579 loaded=False pS=True pL=True aL(UP)=0.9994 depfail small=[] large=[(2048, ['a_use 2700/8192=0.3296 < 0.95 x raw 2851/8192=0.3480 (ratio 0.9470)'])]
+     r3 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=4.4442 i_l(UP)=4.9935 dMU=0.5493 dMC=0.1587 dSAT=0.056 dFULL=0.0625 i*s(run)=4.9375 i*s(half)=4.9086 gain_s=0.0289 loaded=False pS=True pL=True aL(UP)=0.9996
+     r3 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=4.4542 i_l(UP)=4.9877 dMU=0.5335 dMC=0.1597 dSAT=0.0502 dFULL=0.0625 i*s(run)=4.9375 i*s(half)=4.8983 gain_s=0.0392 loaded=False pS=True pL=True aL(UP)=0.9993
+     r4 A: DEPENDENCE_FAILED        i_s(UP)=4.6074 i_l(UP)=4.9877 dMU=0.3803 dMC=0.121 dSAT=0.0423 dFULL=0.0546 i*s(run)=4.9454 i*s(half)=4.9236 gain_s=0.0217 loaded=False pS=True pL=True aL(UP)=0.9993 depfail small=[(2048, ['a_use 2356/8192=0.2876 < 0.95 x raw 2493/8192=0.3043 (ratio 0.9450)'])] large=[]
+     r4 B: DEPENDENCE_FAILED        i_s(UP)=4.592 i_l(UP)=4.9955 dMU=0.4035 dMC=0.1344 dSAT=0.0517 dFULL=0.0562 i*s(run)=4.9438 i*s(half)=4.9282 gain_s=0.0156 loaded=False pS=True pL=True aL(UP)=0.9998 depfail small=[(2048, ['a_use 2387/8192=0.2914 < 0.95 x raw 2524/8192=0.3081 (ratio 0.9457)'])] large=[]
+     r5 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=4.4131 i_l(UP)=4.9915 dMU=0.5784 dMC=0.1689 dSAT=0.054 dFULL=0.0625 i*s(run)=4.9375 i*s(half)=4.9101 gain_s=0.0274 loaded=False pS=True pL=True aL(UP)=0.9995
+     r5 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=4.4242 i_l(UP)=4.9858 dMU=0.5616 dMC=0.1646 dSAT=0.0468 dFULL=0.0609 i*s(run)=4.9391 i*s(half)=4.9146 gain_s=0.0245 loaded=False pS=True pL=True aL(UP)=0.9991
+
+== F-OQ-IVF: ARM CLASS DEPENDENCE_FAILED
+  C1: MIXED                  ['PANEL-DISAGREE', 'CAPACITY', 'CAPACITY', 'CAPACITY', 'CAPACITY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.6117 i_l(UP)=2.1276 dMU=1.5159 dMC=1.0281 dSAT=0.5677 dFULL=1.1321 i*s(run)=1.56 i*s(half)=1.5144 gain_s=0.0455 loaded=True pS=True pL=True aL(UP)=0.6144
+     r1 B: CAPACITY                 i_s(UP)=0.6337 i_l(UP)=2.1676 dMU=1.5339 dMC=1.0831 dSAT=0.6034 dFULL=1.1316 i*s(run)=1.5642 i*s(half)=1.5205 gain_s=0.0437 loaded=True pS=True pL=True aL(UP)=0.6215
+     r2 A: CAPACITY                 i_s(UP)=0.6104 i_l(UP)=2.1393 dMU=1.529 dMC=1.1024 dSAT=0.6086 dFULL=1.1781 i*s(run)=1.5308 i*s(half)=1.5181 gain_s=0.0127 loaded=True pS=True pL=False aL(UP)=0.6165
+     r2 B: CAPACITY                 i_s(UP)=0.6059 i_l(UP)=2.1256 dMU=1.5197 dMC=1.0939 dSAT=0.596 dFULL=1.1732 i*s(run)=1.5296 i*s(half)=1.491 gain_s=0.0386 loaded=True pS=True pL=True aL(UP)=0.614
+     r3 A: CAPACITY                 i_s(UP)=0.6896 i_l(UP)=2.2535 dMU=1.5639 dMC=1.1174 dSAT=0.7402 dFULL=1.1325 i*s(run)=1.5132 i*s(half)=1.5132 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.6365
+     r3 B: CAPACITY                 i_s(UP)=0.6762 i_l(UP)=2.264 dMU=1.5878 dMC=1.1253 dSAT=0.764 dFULL=1.1518 i*s(run)=1.5 i*s(half)=1.4994 gain_s=0.0006 loaded=True pS=True pL=True aL(UP)=0.6383
+     r4 A: CAPACITY                 i_s(UP)=0.781 i_l(UP)=2.4841 dMU=1.7031 dMC=1.3525 dSAT=1.0105 dFULL=1.2101 i*s(run)=1.4736 i*s(half)=1.4539 gain_s=0.0197 loaded=True pS=True pL=True aL(UP)=0.6757
+     r4 B: CAPACITY                 i_s(UP)=0.798 i_l(UP)=2.4373 dMU=1.6394 dMC=1.3161 dSAT=0.9619 dFULL=1.1991 i*s(run)=1.4754 i*s(half)=1.4444 gain_s=0.031 loaded=True pS=True pL=True aL(UP)=0.6678
+     r5 A: CAPACITY                 i_s(UP)=0.6817 i_l(UP)=2.1009 dMU=1.4192 dMC=1.0357 dSAT=0.5665 dFULL=1.1591 i*s(run)=1.5344 i*s(half)=1.5344 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.6096
+     r5 B: CAPACITY                 i_s(UP)=0.661 i_l(UP)=2.1146 dMU=1.4536 dMC=1.0548 dSAT=0.5735 dFULL=1.1662 i*s(run)=1.5411 i*s(half)=1.5411 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.6121
+  N1: MIXED                  ['UNRESOLVED', 'UNRESOLVED', 'DEPENDENCE_FAILED', 'PANEL-DISAGREE', 'UNRESOLVED']
+     r1 A: UNRESOLVED               i_s(UP)=4.1638 i_l(UP)=4.5268 dMU=0.363 dMC=0.3342 dSAT=0.2252 dFULL=0.3382 i*s(run)=4.3016 i*s(half)=4.1926 gain_s=0.109 loaded=False pS=False pL=True aL(UP)=0.9565
+     r1 B: UNRESOLVED               i_s(UP)=4.1638 i_l(UP)=4.5314 dMU=0.3676 dMC=0.3098 dSAT=0.2341 dFULL=0.3328 i*s(run)=4.2973 i*s(half)=4.2216 gain_s=0.0757 loaded=False pS=True pL=True aL(UP)=0.957
+     r2 A: UNRESOLVED               i_s(UP)=4.1926 i_l(UP)=4.4767 dMU=0.2841 dMC=0.2426 dSAT=0.2048 dFULL=0.2966 i*s(run)=4.2719 i*s(half)=4.2341 gain_s=0.0378 loaded=False pS=True pL=True aL(UP)=0.9512
+     r2 B: UNRESOLVED               i_s(UP)=4.1802 i_l(UP)=4.4993 dMU=0.3192 dMC=0.2653 dSAT=0.2232 dFULL=0.2877 i*s(run)=4.2761 i*s(half)=4.2341 gain_s=0.042 loaded=False pS=True pL=True aL(UP)=0.9536
+     r3 A: DEPENDENCE_FAILED        i_s(UP)=4.1068 i_l(UP)=4.4498 dMU=0.3429 dMC=0.4897 dSAT=0.1397 dFULL=0.3009 i*s(run)=4.3101 i*s(half)=4.2424 gain_s=0.0676 loaded=False pS=True pL=True aL(UP)=0.9482 depfail small=[] large=[(1024, ['a_use 546/2048=0.2666 < 0.95 x raw 582/2048=0.2842 (ratio 0.9381)'])]
+     r3 B: DEPENDENCE_FAILED        i_s(UP)=4.0787 i_l(UP)=4.4542 dMU=0.3756 dMC=0.4746 dSAT=0.1484 dFULL=0.2956 i*s(run)=4.3058 i*s(half)=4.2257 gain_s=0.0801 loaded=False pS=True pL=True aL(UP)=0.9487 depfail small=[] large=[(1024, ['a_use 549/2048=0.2681 < 0.95 x raw 581/2048=0.2837 (ratio 0.9449)'])]
+     r4 A: DEPENDENCE_FAILED        i_s(UP)=4.2216 i_l(UP)=4.513 dMU=0.2915 dMC=0.3697 dSAT=0.2115 dFULL=0.3527 i*s(run)=4.3016 i*s(half)=4.2888 gain_s=0.0128 loaded=False pS=True pL=True aL(UP)=0.9551 depfail small=[] large=[(1024, ['a_use 847/2048=0.4136 < 0.95 x raw 893/2048=0.4360 (ratio 0.9485)'])]
+     r4 B: UNRESOLVED               i_s(UP)=4.2091 i_l(UP)=4.5176 dMU=0.3085 dMC=0.3905 dSAT=0.216 dFULL=0.3624 i*s(run)=4.3016 i*s(half)=4.2973 gain_s=0.0043 loaded=False pS=True pL=True aL(UP)=0.9556
+     r5 A: UNRESOLVED               i_s(UP)=4.1802 i_l(UP)=4.4767 dMU=0.2965 dMC=0.2759 dSAT=0.209 dFULL=0.3481 i*s(run)=4.2677 i*s(half)=4.2677 gain_s=0.0 loaded=False pS=True pL=True aL(UP)=0.9512
+     r5 B: UNRESOLVED               i_s(UP)=4.1679 i_l(UP)=4.4812 dMU=0.3134 dMC=0.2887 dSAT=0.2051 dFULL=0.3396 i*s(run)=4.2761 i*s(half)=4.2634 gain_s=0.0127 loaded=False pS=True pL=True aL(UP)=0.9517
+  C2: GAIN WITHIN BUDGET     ['GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'CAPACITY', 'GAIN WITHIN BUDGET ONLY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3092 i_l(UP)=1.3988 dMU=1.0896 dMC=0.9709 dSAT=0.8456 dFULL=1.1719 i*s(run)=0.5532 i*s(half)=0.5532 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.4746
+     r1 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3059 i_l(UP)=1.406 dMU=1.1002 dMC=0.9741 dSAT=0.8555 dFULL=1.1771 i*s(run)=0.5505 i*s(half)=0.5505 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.4761
+     r2 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3036 i_l(UP)=1.4097 dMU=1.1061 dMC=0.9562 dSAT=0.8667 dFULL=1.1957 i*s(run)=0.543 i*s(half)=0.524 gain_s=0.019 loaded=True pS=True pL=True aL(UP)=0.4768
+     r2 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3011 i_l(UP)=1.425 dMU=1.1239 dMC=0.9718 dSAT=0.8818 dFULL=1.1931 i*s(run)=0.5432 i*s(half)=0.5258 gain_s=0.0174 loaded=True pS=True pL=True aL(UP)=0.48
+     r3 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3135 i_l(UP)=1.424 dMU=1.1105 dMC=0.9763 dSAT=0.8729 dFULL=1.1543 i*s(run)=0.5511 i*s(half)=0.5359 gain_s=0.0152 loaded=True pS=True pL=True aL(UP)=0.4798
+     r3 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3143 i_l(UP)=1.4298 dMU=1.1155 dMC=0.9819 dSAT=0.8785 dFULL=1.1563 i*s(run)=0.5513 i*s(half)=0.5396 gain_s=0.0117 loaded=True pS=True pL=True aL(UP)=0.481
+     r4 A: CAPACITY                 i_s(UP)=0.355 i_l(UP)=1.5443 dMU=1.1892 dMC=1.0648 dSAT=0.992 dFULL=1.1879 i*s(run)=0.5523 i*s(half)=0.5523 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.5043
+     r4 B: CAPACITY                 i_s(UP)=0.3567 i_l(UP)=1.5373 dMU=1.1806 dMC=1.0574 dSAT=0.9864 dFULL=1.1923 i*s(run)=0.5509 i*s(half)=0.5509 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.5029
+     r5 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3157 i_l(UP)=1.409 dMU=1.0932 dMC=0.9556 dSAT=0.8598 dFULL=1.1769 i*s(run)=0.5491 i*s(half)=0.5309 gain_s=0.0182 loaded=True pS=True pL=True aL(UP)=0.4767
+     r5 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3114 i_l(UP)=1.4065 dMU=1.095 dMC=0.9565 dSAT=0.8557 dFULL=1.1754 i*s(run)=0.5508 i*s(half)=0.5304 gain_s=0.0204 loaded=True pS=True pL=True aL(UP)=0.4762
+  N2: DEPENDENCE_FAILED      ['CAPACITY', 'DEPENDENCE_FAILED', 'CAPACITY', 'CAPACITY', 'DEPENDENCE_FAILED']
+     r1 A: CAPACITY                 i_s(UP)=2.1276 i_l(UP)=4.1403 dMU=2.0126 dMC=1.5629 dSAT=1.4482 dFULL=1.5651 i*s(run)=2.692 i*s(half)=2.6495 gain_s=0.0425 loaded=True pS=True pL=True aL(UP)=0.9127
+     r1 B: CAPACITY                 i_s(UP)=2.1676 i_l(UP)=4.1423 dMU=1.9747 dMC=1.5597 dSAT=1.4465 dFULL=1.5634 i*s(run)=2.6958 i*s(half)=2.6669 gain_s=0.0289 loaded=True pS=True pL=True aL(UP)=0.913
+     r2 A: DEPENDENCE_FAILED        i_s(UP)=2.1393 i_l(UP)=4.1038 dMU=1.9645 dMC=1.501 dSAT=1.395 dFULL=1.5662 i*s(run)=2.7088 i*s(half)=2.6028 gain_s=0.106 loaded=False pS=False pL=True aL(UP)=0.9083 depfail small=[] large=[(2048, ['a_use 2173/8192=0.2653 < 0.95 x raw 2295/8192=0.2802 (ratio 0.9468)'])]
+     r2 B: DEPENDENCE_FAILED        i_s(UP)=2.1256 i_l(UP)=4.1008 dMU=1.9752 dMC=1.4882 dSAT=1.3981 dFULL=1.5618 i*s(run)=2.7027 i*s(half)=2.6126 gain_s=0.0901 loaded=True pS=True pL=True aL(UP)=0.908 depfail small=[] large=[(2048, ['a_use 2177/8192=0.2657 < 0.95 x raw 2306/8192=0.2815 (ratio 0.9441)'])]
+     r3 A: CAPACITY                 i_s(UP)=2.2535 i_l(UP)=4.1311 dMU=1.8777 dMC=1.5403 dSAT=1.4854 dFULL=1.5873 i*s(run)=2.6457 i*s(half)=2.6321 gain_s=0.0136 loaded=True pS=True pL=True aL(UP)=0.9116
+     r3 B: CAPACITY                 i_s(UP)=2.264 i_l(UP)=4.1331 dMU=1.8691 dMC=1.5498 dSAT=1.4814 dFULL=1.5875 i*s(run)=2.6518 i*s(half)=2.6246 gain_s=0.0272 loaded=True pS=True pL=True aL(UP)=0.9119
+     r4 A: CAPACITY                 i_s(UP)=2.4841 i_l(UP)=4.1413 dMU=1.6572 dMC=1.4956 dSAT=1.4576 dFULL=1.5182 i*s(run)=2.6837 i*s(half)=2.6457 gain_s=0.0379 loaded=True pS=True pL=True aL(UP)=0.9128
+     r4 B: CAPACITY                 i_s(UP)=2.4373 i_l(UP)=4.1413 dMU=1.704 dMC=1.5046 dSAT=1.4668 dFULL=1.5304 i*s(run)=2.6745 i*s(half)=2.6367 gain_s=0.0379 loaded=True pS=True pL=True aL(UP)=0.9128
+     r5 A: DEPENDENCE_FAILED        i_s(UP)=2.1009 i_l(UP)=4.1281 dMU=2.0271 dMC=1.529 dSAT=1.4345 dFULL=1.5114 i*s(run)=2.6936 i*s(half)=2.6768 gain_s=0.0167 loaded=True pS=True pL=True aL(UP)=0.9113 depfail small=[] large=[(2048, ['a_use 2130/8192=0.2600 < 0.95 x raw 2260/8192=0.2759 (ratio 0.9425)'])]
+     r5 B: DEPENDENCE_FAILED        i_s(UP)=2.1146 i_l(UP)=4.12 dMU=2.0053 dMC=1.5089 dSAT=1.4127 dFULL=1.4997 i*s(run)=2.7073 i*s(half)=2.6723 gain_s=0.035 loaded=True pS=True pL=True aL(UP)=0.9103 depfail small=[] large=[(2048, ['a_use 2095/8192=0.2557 < 0.95 x raw 2212/8192=0.2700 (ratio 0.9471)'])]
+
+== T-OQ: ARM CLASS INTERMEDIATE
+  C1: GAIN WITHIN BUDGET     ['GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2147 i_l(UP)=1.3303 dMU=1.1157 dMC=1.0233 dSAT=0.2737 dFULL=2.1325 i*s(run)=1.0566 i*s(half)=0.9507 gain_s=0.1059 loaded=False pS=False pL=False aL(UP)=0.4602
+     r1 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2131 i_l(UP)=1.3367 dMU=1.1236 dMC=1.0393 dSAT=0.2854 dFULL=2.1596 i*s(run)=1.0513 i*s(half)=0.9631 gain_s=0.0882 loaded=True pS=True pL=False aL(UP)=0.4615
+     r2 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1726 i_l(UP)=1.0931 dMU=0.9205 dMC=0.8153 dSAT=0.0413 dFULL=1.7285 i*s(run)=1.0518 i*s(half)=1.0011 gain_s=0.0507 loaded=True pS=True pL=False aL(UP)=0.4083
+     r2 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1819 i_l(UP)=1.0931 dMU=0.9113 dMC=0.8212 dSAT=0.0391 dFULL=1.7086 i*s(run)=1.054 i*s(half)=1.0043 gain_s=0.0497 loaded=True pS=True pL=False aL(UP)=0.4083
+     r3 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2526 i_l(UP)=1.3855 dMU=1.1329 dMC=1.0461 dSAT=0.1933 dFULL=1.7852 i*s(run)=1.1922 i*s(half)=1.1137 gain_s=0.0785 loaded=True pS=True pL=False aL(UP)=0.4718
+     r3 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2516 i_l(UP)=1.4072 dMU=1.1556 dMC=1.0689 dSAT=0.2261 dFULL=1.7883 i*s(run)=1.1811 i*s(half)=1.1137 gain_s=0.0674 loaded=True pS=True pL=False aL(UP)=0.4763
+     r4 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3955 i_l(UP)=1.7973 dMU=1.4018 dMC=1.3052 dSAT=0.5582 dFULL=2.1202 i*s(run)=1.2392 i*s(half)=1.18 gain_s=0.0592 loaded=True pS=True pL=False aL(UP)=0.5537
+     r4 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.3812 i_l(UP)=1.7967 dMU=1.4155 dMC=1.3116 dSAT=0.5553 dFULL=2.1205 i*s(run)=1.2414 i*s(half)=1.1828 gain_s=0.0586 loaded=True pS=True pL=False aL(UP)=0.5536
+     r5 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2175 i_l(UP)=1.2919 dMU=1.0744 dMC=1.0096 dSAT=0.1896 dFULL=1.9567 i*s(run)=1.1023 i*s(half)=0.9704 gain_s=0.1319 loaded=False pS=False pL=False aL(UP)=0.452
+     r5 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2102 i_l(UP)=1.2742 dMU=1.064 dMC=0.9814 dSAT=0.1736 dFULL=1.9926 i*s(run)=1.1007 i*s(half)=0.9719 gain_s=0.1287 loaded=False pS=False pL=False aL(UP)=0.4482
+  N1: MIXED                  ['GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'PANEL-DISAGREE', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=2.8741 i_l(UP)=4.85 dMU=1.9759 dMC=1.8259 dSAT=0.9286 dFULL=1.0787 i*s(run)=3.9213 i*s(half)=3.7064 gain_s=0.2149 loaded=False pS=False pL=True aL(UP)=0.9883
+     r1 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=2.8835 i_l(UP)=4.8611 dMU=1.9776 dMC=1.7948 dSAT=0.9398 dFULL=1.0787 i*s(run)=3.9213 i*s(half)=3.7285 gain_s=0.1928 loaded=False pS=False pL=True aL(UP)=0.9893
+     r2 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.0338 i_l(UP)=4.8335 dMU=1.7996 dMC=1.4998 dSAT=0.5446 dFULL=0.7027 i*s(run)=4.2888 i*s(half)=4.0706 gain_s=0.2182 loaded=False pS=False pL=True aL(UP)=0.9868
+     r2 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.0047 i_l(UP)=4.7906 dMU=1.7858 dMC=1.4706 dSAT=0.4676 dFULL=0.6686 i*s(run)=4.3229 i*s(half)=4.0507 gain_s=0.2722 loaded=False pS=False pL=True aL(UP)=0.9829
+     r3 A: DEPENDENCE_FAILED        i_s(UP)=3.2419 i_l(UP)=4.8781 dMU=1.6362 dMC=1.479 dSAT=0.5207 dFULL=0.6266 i*s(run)=4.3574 i*s(half)=4.1311 gain_s=0.2263 loaded=False pS=False pL=True aL(UP)=0.9907 depfail small=[(2048, ['a_use 552/2048=0.2695 < 0.95 x raw 586/2048=0.2861 (ratio 0.9420)'])] large=[]
+     r3 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.2084 i_l(UP)=4.8444 dMU=1.6361 dMC=1.4349 dSAT=0.4957 dFULL=0.6281 i*s(run)=4.3487 i*s(half)=4.0987 gain_s=0.25 loaded=False pS=False pL=True aL(UP)=0.9878
+     r4 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.699 i_l(UP)=4.9131 dMU=1.2141 dMC=0.906 dSAT=0.3586 dFULL=0.437 i*s(run)=4.5545 i*s(half)=4.3879 gain_s=0.1666 loaded=False pS=False pL=True aL(UP)=0.9937
+     r4 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.7397 i_l(UP)=4.9131 dMU=1.1734 dMC=0.8783 dSAT=0.3817 dFULL=0.4686 i*s(run)=4.5314 i*s(half)=4.401 gain_s=0.1304 loaded=False pS=False pL=True aL(UP)=0.9937
+     r5 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.185 i_l(UP)=4.85 dMU=1.665 dMC=1.374 dSAT=0.4621 dFULL=0.6121 i*s(run)=4.3879 i*s(half)=4.0987 gain_s=0.2891 loaded=False pS=False pL=True aL(UP)=0.9883
+     r5 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=3.1916 i_l(UP)=4.8444 dMU=1.6528 dMC=1.3296 dSAT=0.4957 dFULL=0.6513 i*s(run)=4.3487 i*s(half)=4.1352 gain_s=0.2136 loaded=False pS=False pL=True aL(UP)=0.9878
+  C2: GAIN WITHIN BUDGET     ['GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1627 i_l(UP)=0.9935 dMU=0.8308 dMC=0.7654 dSAT=0.2216 dFULL=1.8114 i*s(run)=0.772 i*s(half)=0.7628 gain_s=0.0091 loaded=True pS=True pL=False aL(UP)=0.3854
+     r1 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1672 i_l(UP)=1.0035 dMU=0.8363 dMC=0.7729 dSAT=0.2317 dFULL=1.8108 i*s(run)=0.7718 i*s(half)=0.7652 gain_s=0.0066 loaded=True pS=True pL=False aL(UP)=0.3878
+     r2 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1449 i_l(UP)=0.9288 dMU=0.7839 dMC=0.7261 dSAT=0.2322 dFULL=1.819 i*s(run)=0.6966 i*s(half)=0.6345 gain_s=0.062 loaded=True pS=True pL=False aL(UP)=0.3701
+     r2 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.144 i_l(UP)=0.9266 dMU=0.7826 dMC=0.7221 dSAT=0.2311 dFULL=1.8101 i*s(run)=0.6955 i*s(half)=0.6352 gain_s=0.0603 loaded=True pS=True pL=False aL(UP)=0.3696
+     r3 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1812 i_l(UP)=1.0098 dMU=0.8286 dMC=0.7736 dSAT=0.2523 dFULL=1.7648 i*s(run)=0.7574 i*s(half)=0.7354 gain_s=0.022 loaded=True pS=True pL=False aL(UP)=0.3892
+     r3 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1837 i_l(UP)=1.0166 dMU=0.833 dMC=0.7808 dSAT=0.2555 dFULL=1.7581 i*s(run)=0.7612 i*s(half)=0.729 gain_s=0.0321 loaded=True pS=True pL=False aL(UP)=0.3908
+     r4 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2655 i_l(UP)=1.3854 dMU=1.1198 dMC=1.0572 dSAT=0.6452 dFULL=2.1197 i*s(run)=0.7402 i*s(half)=0.7117 gain_s=0.0284 loaded=True pS=True pL=False aL(UP)=0.4718
+     r4 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.2571 i_l(UP)=1.3854 dMU=1.1282 dMC=1.0589 dSAT=0.6464 dFULL=2.1258 i*s(run)=0.739 i*s(half)=0.7143 gain_s=0.0247 loaded=True pS=True pL=False aL(UP)=0.4718
+     r5 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.164 i_l(UP)=0.9921 dMU=0.8281 dMC=0.761 dSAT=0.2581 dFULL=1.8664 i*s(run)=0.734 i*s(half)=0.7093 gain_s=0.0247 loaded=True pS=True pL=False aL(UP)=0.3851
+     r5 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=0.1641 i_l(UP)=1.0009 dMU=0.8368 dMC=0.7734 dSAT=0.2686 dFULL=1.8652 i*s(run)=0.7322 i*s(half)=0.7059 gain_s=0.0263 loaded=True pS=True pL=False aL(UP)=0.3871
+  N2: GAIN WITHIN BUDGET     ['GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY', 'GAIN WITHIN BUDGET ONLY']
+     r1 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.3303 i_l(UP)=4.1342 dMU=2.8038 dMC=2.4266 dSAT=0.945 dFULL=1.753 i*s(run)=3.1891 i*s(half)=2.7203 gain_s=0.4688 loaded=False pS=False pL=True aL(UP)=0.912
+     r1 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.3367 i_l(UP)=4.1189 dMU=2.7823 dMC=2.4114 dSAT=0.9081 dFULL=1.7282 i*s(run)=3.2109 i*s(half)=2.7142 gain_s=0.4967 loaded=False pS=False pL=True aL(UP)=0.9102
+     r2 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.0931 i_l(UP)=4.0857 dMU=2.9926 dMC=2.6908 dSAT=1.3053 dFULL=2.1603 i*s(run)=2.7804 i*s(half)=2.3686 gain_s=0.4117 loaded=False pS=False pL=True aL(UP)=0.9061
+     r2 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.0931 i_l(UP)=4.0726 dMU=2.9795 dMC=2.6401 dSAT=1.3101 dFULL=2.186 i*s(run)=2.7626 i*s(half)=2.3708 gain_s=0.3918 loaded=False pS=False pL=True aL(UP)=0.9045
+     r3 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.3855 i_l(UP)=4.1546 dMU=2.7691 dMC=2.4822 dSAT=1.1772 dFULL=1.9712 i*s(run)=2.9774 i*s(half)=2.5573 gain_s=0.4201 loaded=False pS=False pL=True aL(UP)=0.9144
+     r3 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.4072 i_l(UP)=4.1679 dMU=2.7607 dMC=2.4854 dSAT=1.1985 dFULL=1.9824 i*s(run)=2.9694 i*s(half)=2.5513 gain_s=0.418 loaded=False pS=False pL=True aL(UP)=0.916
+     r4 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.7973 i_l(UP)=4.4677 dMU=2.6704 dMC=2.307 dSAT=1.1083 dFULL=1.6055 i*s(run)=3.3594 i*s(half)=3.0688 gain_s=0.2906 loaded=False pS=False pL=True aL(UP)=0.9502
+     r4 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.7967 i_l(UP)=4.4812 dMU=2.6845 dMC=2.3143 dSAT=1.1193 dFULL=1.6046 i*s(run)=3.3619 i*s(half)=3.0533 gain_s=0.3086 loaded=False pS=False pL=True aL(UP)=0.9517
+     r5 A: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.2919 i_l(UP)=4.1864 dMU=2.8945 dMC=2.5127 dSAT=1.1274 dFULL=1.8708 i*s(run)=3.059 i*s(half)=2.6723 gain_s=0.3867 loaded=False pS=False pL=True aL(UP)=0.9182
+     r5 B: GAIN WITHIN BUDGET ONLY  i_s(UP)=1.2742 i_l(UP)=4.1998 dMU=2.9256 dMC=2.5349 dSAT=1.1065 dFULL=1.8426 i*s(run)=3.0933 i*s(half)=2.6647 gain_s=0.4286 loaded=False pS=False pL=True aL(UP)=0.9198
+
+== H8: ARM CLASS CAPACITY_ONE_TRANSITION
+  C1: MIXED                  ['CAPACITY', 'CAPACITY', 'CAPACITY', 'DEPENDENCE_FAILED', 'CAPACITY']
+     r1 A: CAPACITY                 i_s(UP)=0.3171 i_l(UP)=3.0517 dMU=2.7346 dMC=2.6608 dSAT=2.244 dFULL=3.0608 i*s(run)=0.8077 i*s(half)=0.7936 gain_s=0.0141 loaded=True pS=True pL=True aL(UP)=0.7654
+     r1 B: CAPACITY                 i_s(UP)=0.3233 i_l(UP)=3.0387 dMU=2.7154 dMC=2.644 dSAT=2.2271 dFULL=3.055 i*s(run)=0.8116 i*s(half)=0.7985 gain_s=0.0132 loaded=True pS=True pL=True aL(UP)=0.7634
+     r2 A: CAPACITY                 i_s(UP)=0.2904 i_l(UP)=2.9558 dMU=2.6654 dMC=2.5552 dSAT=2.127 dFULL=3.0359 i*s(run)=0.8288 i*s(half)=0.8288 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.7509
+     r2 B: CAPACITY                 i_s(UP)=0.3027 i_l(UP)=2.9798 dMU=2.677 dMC=2.5745 dSAT=2.1505 dFULL=3.0249 i*s(run)=0.8293 i*s(half)=0.8273 gain_s=0.002 loaded=True pS=True pL=True aL(UP)=0.7545
+     r3 A: CAPACITY                 i_s(UP)=0.3262 i_l(UP)=3.0794 dMU=2.7532 dMC=2.6544 dSAT=2.2687 dFULL=3.1078 i*s(run)=0.8106 i*s(half)=0.8067 gain_s=0.0039 loaded=True pS=True pL=True aL(UP)=0.7695
+     r3 B: CAPACITY                 i_s(UP)=0.3476 i_l(UP)=3.0712 dMU=2.7237 dMC=2.6546 dSAT=2.2625 dFULL=3.1049 i*s(run)=0.8087 i*s(half)=0.8077 gain_s=0.001 loaded=True pS=True pL=True aL(UP)=0.7683
+     r4 A: DEPENDENCE_FAILED        i_s(UP)=0.417 i_l(UP)=3.2816 dMU=2.8646 dMC=2.8015 dSAT=2.4685 dFULL=3.0374 i*s(run)=0.8131 i*s(half)=0.8038 gain_s=0.0093 loaded=True pS=True pL=True aL(UP)=0.7992 depfail small=[] large=[(2048, ['a_use 2119/8192=0.2587 < 0.95 x raw 2239/8192=0.2733 (ratio 0.9464)'])]
+     r4 B: DEPENDENCE_FAILED        i_s(UP)=0.4155 i_l(UP)=3.3071 dMU=2.8917 dMC=2.8246 dSAT=2.4813 dFULL=3.036 i*s(run)=0.8259 i*s(half)=0.8126 gain_s=0.0132 loaded=True pS=True pL=True aL(UP)=0.8029 depfail small=[] large=[(2048, ['a_use 2122/8192=0.2590 < 0.95 x raw 2237/8192=0.2731 (ratio 0.9486)'])]
+     r5 A: CAPACITY                 i_s(UP)=0.3361 i_l(UP)=3.0452 dMU=2.7091 dMC=2.6202 dSAT=2.2075 dFULL=3.008 i*s(run)=0.8377 i*s(half)=0.8229 gain_s=0.0148 loaded=True pS=True pL=True aL(UP)=0.7644
+     r5 B: CAPACITY                 i_s(UP)=0.3453 i_l(UP)=3.0509 dMU=2.7055 dMC=2.6397 dSAT=2.2102 dFULL=3.0041 i*s(run)=0.8407 i*s(half)=0.8402 gain_s=0.0005 loaded=True pS=True pL=True aL(UP)=0.7653
+  N1: NOT REPLICATED         ['PANEL-DISAGREE', 'CAPACITY', 'PANEL-DISAGREE', 'CAPACITY', 'CAPACITY']
+     r1 A: CAPACITY                 i_s(UP)=3.4619 i_l(UP)=5.0 dMU=1.5381 dMC=1.421 dSAT=1.1095 dFULL=1.1095 i*s(run)=3.8905 i*s(half)=3.8752 gain_s=0.0153 loaded=True pS=True pL=True aL(UP)=1.0
+     r1 B: DEPENDENCE_FAILED        i_s(UP)=3.4795 i_l(UP)=5.0 dMU=1.5205 dMC=1.3595 dSAT=1.1056 dFULL=1.1056 i*s(run)=3.8944 i*s(half)=3.8638 gain_s=0.0306 loaded=True pS=True pL=True aL(UP)=1.0 depfail small=[] large=[(1024, ['a_use 532/2048=0.2598 < 0.95 x raw 570/2048=0.2783 (ratio 0.9333)'])]
+     r2 A: CAPACITY                 i_s(UP)=3.4026 i_l(UP)=5.0 dMU=1.5974 dMC=1.4138 dSAT=1.1362 dFULL=1.1362 i*s(run)=3.8638 i*s(half)=3.8638 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=1.0
+     r2 B: CAPACITY                 i_s(UP)=3.4514 i_l(UP)=5.0 dMU=1.5486 dMC=1.3267 dSAT=1.1171 dFULL=1.1171 i*s(run)=3.8829 i*s(half)=3.8829 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=1.0
+     r3 A: CAPACITY                 i_s(UP)=3.3783 i_l(UP)=5.0 dMU=1.6217 dMC=1.4532 dSAT=1.1742 dFULL=1.1742 i*s(run)=3.8258 i*s(half)=3.8258 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=1.0
+     r3 B: DEPENDENCE_FAILED        i_s(UP)=3.3714 i_l(UP)=5.0 dMU=1.6286 dMC=1.446 dSAT=1.159 dFULL=1.159 i*s(run)=3.841 i*s(half)=3.7957 gain_s=0.0453 loaded=True pS=True pL=True aL(UP)=1.0 depfail small=[] large=[(1024, ['a_use 735/2048=0.3589 < 0.95 x raw 778/2048=0.3799 (ratio 0.9447)'])]
+     r4 A: CAPACITY                 i_s(UP)=3.688 i_l(UP)=5.0 dMU=1.312 dMC=1.2118 dSAT=1.0477 dFULL=1.0477 i*s(run)=3.9523 i*s(half)=3.9097 gain_s=0.0426 loaded=True pS=True pL=True aL(UP)=1.0
+     r4 B: CAPACITY                 i_s(UP)=3.6806 i_l(UP)=5.0 dMU=1.3194 dMC=1.2043 dSAT=1.0593 dFULL=1.0593 i*s(run)=3.9407 i*s(half)=3.929 gain_s=0.0116 loaded=True pS=True pL=True aL(UP)=1.0
+     r5 A: CAPACITY                 i_s(UP)=3.483 i_l(UP)=5.0 dMU=1.517 dMC=1.3994 dSAT=1.1362 dFULL=1.1362 i*s(run)=3.8638 i*s(half)=3.841 gain_s=0.0228 loaded=True pS=True pL=True aL(UP)=1.0
+     r5 B: CAPACITY                 i_s(UP)=3.4971 i_l(UP)=5.0 dMU=1.5029 dMC=1.3303 dSAT=1.1171 dFULL=1.1171 i*s(run)=3.8829 i*s(half)=3.8334 gain_s=0.0495 loaded=True pS=True pL=True aL(UP)=1.0
+  C2: CAPACITY STEP          ['CAPACITY', 'CAPACITY', 'CAPACITY', 'CAPACITY', 'CAPACITY']
+     r1 A: CAPACITY                 i_s(UP)=0.4215 i_l(UP)=3.3133 dMU=2.8918 dMC=2.7455 dSAT=2.4791 dFULL=3.0272 i*s(run)=0.8342 i*s(half)=0.8342 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.8037
+     r1 B: CAPACITY                 i_s(UP)=0.4269 i_l(UP)=3.3159 dMU=2.8889 dMC=2.7471 dSAT=2.4751 dFULL=3.0225 i*s(run)=0.8408 i*s(half)=0.8408 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.8041
+     r2 A: CAPACITY                 i_s(UP)=0.4031 i_l(UP)=3.3248 dMU=2.9218 dMC=2.7782 dSAT=2.4964 dFULL=3.0592 i*s(run)=0.8284 i*s(half)=0.8271 gain_s=0.0014 loaded=True pS=True pL=True aL(UP)=0.8054
+     r2 B: CAPACITY                 i_s(UP)=0.408 i_l(UP)=3.318 dMU=2.91 dMC=2.773 dSAT=2.4874 dFULL=3.0601 i*s(run)=0.8307 i*s(half)=0.8289 gain_s=0.0017 loaded=True pS=True pL=True aL(UP)=0.8044
+     r3 A: CAPACITY                 i_s(UP)=0.46 i_l(UP)=3.354 dMU=2.894 dMC=2.77 dSAT=2.5285 dFULL=3.0571 i*s(run)=0.8255 i*s(half)=0.8255 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.8095
+     r3 B: CAPACITY                 i_s(UP)=0.4546 i_l(UP)=3.3437 dMU=2.8891 dMC=2.7607 dSAT=2.5184 dFULL=3.0521 i*s(run)=0.8252 i*s(half)=0.8251 gain_s=0.0001 loaded=True pS=True pL=True aL(UP)=0.8081
+     r4 A: CAPACITY                 i_s(UP)=0.5171 i_l(UP)=3.5073 dMU=2.9902 dMC=2.8809 dSAT=2.6749 dFULL=3.0281 i*s(run)=0.8324 i*s(half)=0.8291 gain_s=0.0033 loaded=True pS=True pL=True aL(UP)=0.831
+     r4 B: CAPACITY                 i_s(UP)=0.5145 i_l(UP)=3.494 dMU=2.9796 dMC=2.8613 dSAT=2.6579 dFULL=3.0201 i*s(run)=0.8361 i*s(half)=0.8361 gain_s=0.0 loaded=True pS=True pL=True aL(UP)=0.8292
+     r5 A: CAPACITY                 i_s(UP)=0.4621 i_l(UP)=3.3663 dMU=2.9041 dMC=2.7745 dSAT=2.5384 dFULL=3.0376 i*s(run)=0.8278 i*s(half)=0.8249 gain_s=0.003 loaded=True pS=True pL=True aL(UP)=0.8113
+     r5 B: CAPACITY                 i_s(UP)=0.4457 i_l(UP)=3.3691 dMU=2.9234 dMC=2.7865 dSAT=2.5388 dFULL=3.0392 i*s(run)=0.8303 i*s(half)=0.8225 gain_s=0.0077 loaded=True pS=True pL=True aL(UP)=0.8117
+  N2: MIXED                  ['CAPACITY', 'CAPACITY', 'CAPACITY', 'DEPENDENCE_FAILED', 'CAPACITY']
+     r1 A: CAPACITY                 i_s(UP)=3.0517 i_l(UP)=4.9955 dMU=1.9438 dMC=1.5143 dSAT=1.127 dFULL=1.1315 i*s(run)=3.8685 i*s(half)=3.8164 gain_s=0.0522 loaded=True pS=True pL=True aL(UP)=0.9998
+     r1 B: CAPACITY                 i_s(UP)=3.0387 i_l(UP)=4.9976 dMU=1.959 dMC=1.5305 dSAT=1.131 dFULL=1.1334 i*s(run)=3.8666 i*s(half)=3.7947 gain_s=0.0719 loaded=True pS=True pL=True aL(UP)=0.9999
+     r2 A: CAPACITY                 i_s(UP)=2.9558 i_l(UP)=5.0 dMU=2.0442 dMC=1.5844 dSAT=1.1353 dFULL=1.1353 i*s(run)=3.8647 i*s(half)=3.7816 gain_s=0.0831 loaded=True pS=True pL=True aL(UP)=1.0
+     r2 B: CAPACITY                 i_s(UP)=2.9798 i_l(UP)=5.0 dMU=2.0202 dMC=1.5722 dSAT=1.1458 dFULL=1.1458 i*s(run)=3.8542 i*s(half)=3.7872 gain_s=0.067 loaded=True pS=True pL=True aL(UP)=1.0
+     r3 A: CAPACITY                 i_s(UP)=3.0794 i_l(UP)=5.0 dMU=1.9206 dMC=1.4754 dSAT=1.0816 dFULL=1.0816 i*s(run)=3.9184 i*s(half)=3.8542 gain_s=0.0642 loaded=True pS=True pL=True aL(UP)=1.0
+     r3 B: CAPACITY                 i_s(UP)=3.0712 i_l(UP)=5.0 dMU=1.9288 dMC=1.4594 dSAT=1.0864 dFULL=1.0864 i*s(run)=3.9136 i*s(half)=3.8476 gain_s=0.066 loaded=True pS=True pL=True aL(UP)=1.0
+     r4 A: DEPENDENCE_FAILED        i_s(UP)=3.2816 i_l(UP)=5.0 dMU=1.7184 dMC=1.3966 dSAT=1.1496 dFULL=1.1496 i*s(run)=3.8504 i*s(half)=3.8098 gain_s=0.0407 loaded=True pS=True pL=True aL(UP)=1.0 depfail small=[(2048, ['a_use 2119/8192=0.2587 < 0.95 x raw 2239/8192=0.2733 (ratio 0.9464)'])] large=[(1024, ['a_use 2195/8192=0.2679 < 0.95 x raw 2355/8192=0.2875 (ratio 0.9321)'])]
+     r4 B: DEPENDENCE_FAILED        i_s(UP)=3.3071 i_l(UP)=5.0 dMU=1.6929 dMC=1.3858 dSAT=1.1381 dFULL=1.1381 i*s(run)=3.8619 i*s(half)=3.8022 gain_s=0.0596 loaded=True pS=True pL=True aL(UP)=1.0 depfail small=[(2048, ['a_use 2122/8192=0.2590 < 0.95 x raw 2237/8192=0.2731 (ratio 0.9486)'])] large=[(1024, ['a_use 2170/8192=0.2649 < 0.95 x raw 2343/8192=0.2860 (ratio 0.9262)'])]
+     r5 A: CAPACITY                 i_s(UP)=3.0452 i_l(UP)=5.0 dMU=1.9548 dMC=1.5144 dSAT=1.1543 dFULL=1.1543 i*s(run)=3.8457 i*s(half)=3.7957 gain_s=0.05 loaded=True pS=True pL=True aL(UP)=1.0
+     r5 B: CAPACITY                 i_s(UP)=3.0509 i_l(UP)=5.0 dMU=1.9491 dMC=1.5126 dSAT=1.1553 dFULL=1.1553 i*s(run)=3.8447 i*s(half)=3.8041 gain_s=0.0406 loaded=True pS=True pL=True aL(UP)=1.0

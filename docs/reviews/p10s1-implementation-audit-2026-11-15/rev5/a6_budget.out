@@ -1,0 +1,59 @@
+OK   LPT makespan: (9.0, 9.0)
+OK   c never below 1.0 (all ratios < 1): {'c': 1.0, 'ratios': {'F-OQ|4096': 0.8999999999999999, 'T-OQ|4096': 0.9090909090909092}, 'worst': 'T-OQ|4096', 'unmatched': []}
+OK   c = the largest ratio: {'c': 1.2, 'ratios': {'F-OQ|4096': 1.2, 'T-OQ|4096': 1.0}, 'worst': 'F-OQ|4096', 'unmatched': []}
+OK   headroom charged 1.57 h + 2 x 10.0 h = 21.5700 h -> ok True, cap 22: (True, 22)
+OK   headroom charged 5.9 h + 2 x 15.0 h = 35.9000 h -> ok True, cap 36: (True, 36)
+OK   headroom charged 6.0 h + 2 x 15.0 h = 36.0000 h -> ok True, cap 36: (True, 36)
+OK   headroom charged 6.0 h + 2 x 15.0001 h = 36.0002 h -> ok False, cap None: (False, None)
+OK   headroom charged 0.0 h + 2 x 18.0 h = 36.0000 h -> ok True, cap 36: (True, 36)
+OK   cut order: none (draws 1+2) -> cut 1 -> cut 2 -> cut 3 (D-OQ 8K/16K)
+OK   the cuts never remove 2K/256, a replicate, H8 or another D-OQ cell
+     rate scale   1: ok=True cuts=none tried=[('none', 17.31)] 
+OK   scale 1: the plan chosen is the first that fits
+     rate scale   3: ok=True cuts=cut 2: the seed block on draw 1 tried=[('none', 40.0), ('cut 1: the seed block on draw 2', 37.17), ('cut 2: the seed block on draw 1', 34.34)] 
+OK   scale 3: a cut is tried only after the previous plan failed
+OK   scale 3: a cut is tried only after the previous plan failed
+OK   scale 3: the plan chosen is the first that fits
+     rate scale   5: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 62.69), ('cut 1: the seed block on draw 2', 57.97), ('cut 2: the seed block on draw 1', 53.26), ('cut 3: D-OQ at 8K/16K', 44.26)] -> NOT STARTED: BUDGET: C_need 44.26 h exceeds C_max 36.00 h af
+OK   scale 5: a cut is tried only after the previous plan failed
+OK   scale 5: a cut is tried only after the previous plan failed
+OK   scale 5: a cut is tried only after the previous plan failed
+OK   scale 5: NOT STARTED: BUDGET after the last cut
+     rate scale   6: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 74.03), ('cut 1: the seed block on draw 2', 68.37), ('cut 2: the seed block on draw 1', 62.72), ('cut 3: D-OQ at 8K/16K', 51.91)] -> NOT STARTED: BUDGET: C_need 51.91 h exceeds C_max 36.00 h af
+OK   scale 6: a cut is tried only after the previous plan failed
+OK   scale 6: a cut is tried only after the previous plan failed
+OK   scale 6: a cut is tried only after the previous plan failed
+OK   scale 6: NOT STARTED: BUDGET after the last cut
+     rate scale   7: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 85.38), ('cut 1: the seed block on draw 2', 78.77), ('cut 2: the seed block on draw 1', 72.18), ('cut 3: D-OQ at 8K/16K', 59.57)] -> NOT STARTED: BUDGET: C_need 59.57 h exceeds C_max 36.00 h af
+OK   scale 7: a cut is tried only after the previous plan failed
+OK   scale 7: a cut is tried only after the previous plan failed
+OK   scale 7: a cut is tried only after the previous plan failed
+OK   scale 7: NOT STARTED: BUDGET after the last cut
+     rate scale   8: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 96.72), ('cut 1: the seed block on draw 2', 89.17), ('cut 2: the seed block on draw 1', 81.64), ('cut 3: D-OQ at 8K/16K', 67.23)] -> NOT STARTED: BUDGET: C_need 67.23 h exceeds C_max 36.00 h af
+OK   scale 8: a cut is tried only after the previous plan failed
+OK   scale 8: a cut is tried only after the previous plan failed
+OK   scale 8: a cut is tried only after the previous plan failed
+OK   scale 8: NOT STARTED: BUDGET after the last cut
+     rate scale   9: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 108.06), ('cut 1: the seed block on draw 2', 99.57), ('cut 2: the seed block on draw 1', 91.1), ('cut 3: D-OQ at 8K/16K', 74.89)] -> NOT STARTED: BUDGET: C_need 74.89 h exceeds C_max 36.00 h af
+OK   scale 9: a cut is tried only after the previous plan failed
+OK   scale 9: a cut is tried only after the previous plan failed
+OK   scale 9: a cut is tried only after the previous plan failed
+OK   scale 9: NOT STARTED: BUDGET after the last cut
+     rate scale  10: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 119.41), ('cut 1: the seed block on draw 2', 109.97), ('cut 2: the seed block on draw 1', 100.56), ('cut 3: D-OQ at 8K/16K', 82.55)] -> NOT STARTED: BUDGET: C_need 82.55 h exceeds C_max 36.00 h af
+OK   scale 10: a cut is tried only after the previous plan failed
+OK   scale 10: a cut is tried only after the previous plan failed
+OK   scale 10: a cut is tried only after the previous plan failed
+OK   scale 10: NOT STARTED: BUDGET after the last cut
+     rate scale  12: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 142.1), ('cut 1: the seed block on draw 2', 130.78), ('cut 2: the seed block on draw 1', 119.47), ('cut 3: D-OQ at 8K/16K', 97.87)] -> NOT STARTED: BUDGET: C_need 97.87 h exceeds C_max 36.00 h af
+OK   scale 12: a cut is tried only after the previous plan failed
+OK   scale 12: a cut is tried only after the previous plan failed
+OK   scale 12: a cut is tried only after the previous plan failed
+OK   scale 12: NOT STARTED: BUDGET after the last cut
+     rate scale  20: ok=False cuts=cut 3: D-OQ at 8K/16K tried=[('none', 232.85), ('cut 1: the seed block on draw 2', 213.98), ('cut 2: the seed block on draw 1', 195.15), ('cut 3: D-OQ at 8K/16K', 159.14)] -> NOT STARTED: BUDGET: C_need 159.14 h exceeds C_max 36.00 h a
+OK   scale 20: a cut is tried only after the previous plan failed
+OK   scale 20: a cut is tried only after the previous plan failed
+OK   scale 20: a cut is tried only after the previous plan failed
+OK   scale 20: NOT STARTED: BUDGET after the last cut
+OK   every region reached on synthetic rates (none, cut 1, cut 2, cut 3, NOT STARTED): {'NOT STARTED', 'none', 'cut 2: the seed block on draw 1'}
+
+0 FAIL: []

@@ -1,0 +1,19 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+P10S1 stage REFUSED: refused: no calibrate-load-row-up/manifest.json in /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1recheck/r4run/A: the stage has not finished; nothing is finalized while runs may be in progress
+P10S1 stage REFUSED: refused: CAL_T-OQ_f32768_n4096_d1_i2191_y524288 has no train record and the calibrate-load-row-up manifest does not list it as a task that did not run: the stage is not complete
+P10S1 stage REFUSED: refused: no calibrate-load-row-up/manifest.json in /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1recheck/r4run/D: the stage has not finished; nothing is finalized while runs may be in progress
+P10S1 stage REFUSED: refused: no timing preview at /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1recheck/r4run/D/nope.json
+A held: ['CAL_T-OQ_f32768_n4096_d1_i2191_y524288', 'CAL_T-OQ_f32768_n4096_d2_i2193_y524288']
+[A no manifest, 2 runs in progress] exit 2; items record written: False
+[B manifest says completed, no train.json] exit 2; items record written: False
+{"items_record": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1recheck/r4run/C/calibration_items_load_row_up.json", "returns_to_lead": [], "dry_substituted": []}
+[C manifest killed_cap] exit 0; items record written: True
+     32K/4K: action GRID_STANDS, U_L 196608, status F-OQ ONLY; T-OQ notes {'1': 'no train record (not run, or stopped at its item cap)', '2': 'no train record (not run, or stopped at its item cap)'}
+     stage_complete: {'cells': 22, 'no_record': ['CAL_T-OQ_f32768_n4096_d1_i2191_y524288: killed_cap', 'CAL_T-OQ_f32768_n4096_d2_i2193_y524288: killed_cap'], 'stage': 'calibrate-load-row-up'}; returns: []
+[D all runs done, driver died before the manifest] exit 2; items record written: False
+     re-launch of items load,row-up into the same dir (expected refusal): exit 2
+{"items_record": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1recheck/r4run/E/calibration_items_load_row_up.json", "returns_to_lead": [], "dry_substituted": []}
+[E T-OQ 32K/4K stopped at its item cap] exit 0; items record written: True
+     32K/4K: action GRID_STANDS, U_L 196608, status F-OQ ONLY; T-OQ notes {'1': 'stopped at its item cap', '2': 'stopped at its item cap'}
+     stage_complete: {'cells': 22, 'no_record': [], 'stage': 'calibrate-load-row-up'}; returns: []
