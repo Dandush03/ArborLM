@@ -52,6 +52,8 @@ The seven drafts list 72 open choices between them (each ADR's section "Open cho
 | 11 | Teacher study: restored descriptive lines kept or cut for cost; packages outside the lock; a durable home for the P10-S2 data (now git-ignored in an agent worktree) | ADR-0025 §13 items 3, 6 | Keep the lines; approve the packages for Part Q only; copy the data before any clean-up |
 | 12 | The closure ledger's proposals: P9 lanes A and B superseded; ADR-0012; Lane D and sequential addition of facts; appending P10 to the research log | `CLOSURE_LEDGER.md`, reserved list | As listed there; ADR-0012 has no proposal |
 
+**Downloads.** On 2026-11-17 the human lead wrote: "proceed with the download as long as it's lower of 50gb you dont have to ask permissions". Downloads for P10-I need no per-item approval while the total stays under 50 GB; each is recorded in the download ledger. No download has been made under P10-I: no specification is approved, and the only downloads the drafts foresee are the fallback teacher and its data for ADR-0025 (about 323 MB, only if one teacher fails qualification), a larger corpus for a successor of ADR-0026, and a larger backbone as a precondition of ADR-0027.
+
 Also the human lead's, and not urgent: the conditional studies' entry decisions (ADR-0027, ADR-0028), the SSD write budget, anything needing administrator access, and every hour cap.
 
 ## 4. Known weak points the lead wants seen
