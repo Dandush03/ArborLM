@@ -1,0 +1,25 @@
+cells whose success depends on the condition-4 reading: [('Q1-A1-8K16K-d09-j0', 8192)]
+cells loaded 256 missing 0 extra 0 plan issues 0
+g2 {2048: [36, 96], 8192: [198, 318], 32768: [905, 1147]} record mismatches 0 flag mismatches 0
+p9ii arm-selection check mismatches []
+A0    2K/4K   S0 UNRELIABLE   9/20 draws 3/10 b=0.087 | P9crit UNRELIABLE   9 draws 3 | REPLICATES P9-II | INCONSISTENT ACROSS STUDIES | pooled (5, 18, 0.11642559165289151) | stable 0.876 | CF 0 | i 3.470/3.470 | LMflag 0
+A0    8K/16K  S0 RELIABLE    19/20 draws 9/10 b=0.606 | P9crit RELIABLE    19 draws 9 | REPLICATES P9-II | CONSISTENT ACROSS STUDIES | pooled (13, 14, 0.7032657610511253) | stable 0.896 | CF 0 | i 4.934/4.934 | LMflag 0
+A0    8K/4K   S0 FAILS        0/10 draws 0/10 b=0.000 | P9crit FAILS        0 draws 0 | None | None | pooled None | stable 0.833 | CF 0 | i 3.976/3.976 | LMflag 0
+A1    2K/4K   S0 RELIABLE    20/20 draws 10/10 b=0.741 | P9crit RELIABLE    20 draws 10 | REPLICATES P9-II | CONSISTENT ACROSS STUDIES | pooled (18, 18, 0.8466824460427218) | stable 1.000 | CF 3 | i 4.919/4.919 | LMflag 0
+A1    8K/16K  S0 UNRELIABLE  15/20 draws 5/10 b=0.222 | P9crit UNRELIABLE  15 draws 5 | REPLICATES P9-II | INCONSISTENT ACROSS STUDIES | pooled (7, 14, 0.26358492378234966) | stable 0.999 | CF 0 | i 4.803/4.803 | LMflag 0
+A2    2K/4K   S0 FAILS        0/20 draws 0/10 b=0.000 | P9crit FAILS        0 draws 0 | REPLICATES P9-II | INCONSISTENT ACROSS STUDIES | pooled (0, 18, 0.0) | stable 0.809 | CF 0 | i 0.012/0.033 | LMflag 0
+A2    8K/16K  S0 FAILS        2/20 draws 0/10 b=0.000 | P9crit FAILS        2 draws 0 | NOT COMPARABLE | SINGLE-STUDY EVIDENCE | pooled None | stable 0.842 | CF 0 | i 4.142/4.142 | LMflag 0
+A5-D  2K/4K   S0 RELIABLE    20/20 draws 10/10 b=0.741 | P9crit RELIABLE    20 draws 10 | REPLICATES P9-II | CONSISTENT ACROSS STUDIES | pooled (18, 18, None) | stable 0.916 | CF 20 | i 4.984/4.984 | LMflag 0
+A5-D  8K/16K  S0 RELIABLE    20/20 draws 10/10 b=0.741 | P9crit RELIABLE    20 draws 10 | REPLICATES P9-II | CONSISTENT ACROSS STUDIES | pooled (14, 14, None) | stable 0.871 | CF 20 | i 4.979/4.979 | LMflag 0
+A5-D  8K/4K   S0 FAILS        1/10 draws 1/10 b=0.005 | P9crit FAILS        1 draws 1 | None | None | pooled None | stable 0.863 | CF 10 | i 4.448/4.448 | LMflag 0
+('A1', '2K/4K') 11 IMPROVES ON A0 0.001 | p9 11 IMPROVES ON A0
+('A1', '8K/16K') -4 HARMS 0.2188 | p9 -4 HARMS
+('A2', '2K/4K') -9 HARMS 0.0039 | p9 -9 HARMS
+('A2', '8K/16K') -17 HARMS 0.0 | p9 -17 HARMS
+('A5-D', '2K/4K') 11 IMPROVES ON A0 0.001 | p9 11 IMPROVES ON A0
+('A5-D', '8K/16K') 1 NOT DISTINGUISHED FROM A0 1.0 | p9 1 NOT DISTINGUISHED FROM A0
+A2 vs A1 {'2K/4K': (-20, 1.9073486328125e-06), '8K/16K': (-13, 0.000244140625)}
+candidate A5-D q4096 None also ['A1 (4,096 ONLY)'] outcome (4, 'ADDRESSING-QUALIFIED (4,096 AND 16,384)') overload OVERLOAD NOT QUALIFIED record length DOES NOT PASS
+wx {'2K/4K': ('FAILS', 2, 0.839599609375, 0.9292144601995295, 3.22019517477352), '8K/16K': ('FAILS', 0, 0.32745361328125, 0.8433757305145264, 1.7075786729479199)}
+probe {'k': 3, 'k_p9': 3, 'n': 3, 'a6_evaluated': [True, True, True], 'bound': 0.3684031498640387}
+hyp {'H20-A': 'supported', 'H20-B': 'CONTRADICTED', 'H20-C': 'CONTRADICTED', 'H20-D': 'not supported', 'H20-Q': 'supported', 'H20-O': 'not supported', 'H20-L': 'not supported', 'H20-S': 'supported', 'H20-R (A0, 2K/4K)': 'supported', 'H20-R (A0, 8K/16K)': 'supported', 'H20-R (A1, 2K/4K)': 'supported', 'H20-R (A1, 8K/16K)': 'supported', 'H20-R (A2, 2K/4K)': 'supported', 'H20-R (A2, 8K/16K)': 'not read', 'H20-R (A5-D, 2K/4K)': 'supported', 'H20-R (A5-D, 8K/16K)': 'supported'}

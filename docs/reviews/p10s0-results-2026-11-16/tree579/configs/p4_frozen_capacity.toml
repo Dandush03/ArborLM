@@ -1,0 +1,52 @@
+schema_version = 1
+experiment_family = "P4_FROZEN_CAPACITY"
+spec_reference = "docs/decisions/ADR-0009-frozen-backbone-capacity.md"
+parent_spec_reference = "docs/decisions/ADR-0008-bounded-longer-training.md"
+parent_suite = "P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d"
+parent_freeze = "861c137a7fcccf27e3371ca2217fd7d956753ca9"
+parent_archive = "7be7aaccde57383961e530b64bdc6902df3f3b690af2857f68db0c5f96ad75a0"
+backbones = [101, 102, 103]
+orders = [301, 302, 303]
+addition_seeds = [401, 402, 403]
+baseline_seed = 0
+
+[model]
+backbone_parameters = 27392
+addition_parameters = 198401
+dense_width = 3100
+memory = "unchanged-adr0005-learned-tree"
+gate = -2.0
+init_std = 0.02
+component_seed_offsets = [1000, 2000, 3000, 4000, 5000]
+
+[data]
+train_ranks = [0, 2048]
+validation_ranks = [1536, 2048]
+order = "exact-parent-two-cycles"
+
+[training]
+steps = 512
+batch = 8
+context = 64
+optimizer = "fresh-adr0005-AdamW-only-addition"
+checkpoint_steps = [0, 256, 512]
+evaluation_steps = [0, 512]
+
+[intervention]
+value_seed_offset = 40000
+joint_seed_offset = 50000
+joint_absolute_tolerance = 0.000001
+joint_relative_tolerance = 0.0
+
+[analysis]
+effect_threshold = 0.005
+dense_tolerance = -0.005
+min_cells = 22
+min_parents = 8
+identity_absolute_tolerance = 0.000000000001
+
+[limits]
+cell_seconds = 300
+suite_seconds = 1800
+rss_bytes = 2147483648
+poll_seconds = 0.1

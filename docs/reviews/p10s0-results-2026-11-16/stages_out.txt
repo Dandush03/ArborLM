@@ -1,0 +1,63 @@
+stage                started_utc                       finished_utc                      status    tasks  failed  skipped  hash_mismatch
+gates                2026-11-15T22:37:12.890479+00:00 2026-11-15T22:38:01.738835+00:00 COMPLETE      1      0       0      0
+train-q1             2026-11-15T22:38:10.243404+00:00 2026-11-16T02:21:45.630987+00:00 COMPLETE    230      0       0      0
+   cap 58841.26144080132; max task seconds 960.1; peak rss max 0.731 GiB
+evaluate-q1          2026-11-16T02:21:48.499605+00:00 2026-11-16T02:28:34.884545+00:00 COMPLETE    230      0       0      0
+   cap 1711.249519363977; max task seconds 16.8; peak rss max 0.477 GiB
+train-wx             2026-11-16T02:29:08.325031+00:00 2026-11-16T02:48:42.641325+00:00 COMPLETE     20      0       0      0
+   cap 5873.366193445399; max task seconds 527.5; peak rss max 0.508 GiB
+evaluate-wx          2026-11-16T02:48:43.317398+00:00 2026-11-16T02:49:27.044487+00:00 COMPLETE     20      0       0      0
+   cap 191.7652643281035; max task seconds 17.4; peak rss max 0.536 GiB
+train-probe          2026-11-16T02:49:29.216512+00:00 2026-11-16T04:29:28.792356+00:00 COMPLETE      6      0       0      0
+   cap 23497.037549580447; max task seconds 5999.5; peak rss max 0.710 GiB
+evaluate-probe       2026-11-16T04:29:29.353306+00:00 2026-11-16T04:30:13.148377+00:00 COMPLETE      6      0       0      0
+   cap 152.14586824807338; max task seconds 43.8; peak rss max 0.841 GiB
+analyze              2026-11-16T04:30:14.521215+00:00 2026-11-16T04:30:36.766646+00:00 COMPLETE      1      0       0      0
+report               2026-11-16T04:30:38.076861+00:00 2026-11-16T04:30:38.980500+00:00 COMPLETE      1      0       0      0
+q1_start.json mtime UTC 2026-11-15T22:38:07.878377+00:00
+q1_gate.json mtime UTC 2026-11-16T02:28:54.418118+00:00
+ledger cap 79200.0 = hours 22.0
+ledger total seconds 21940.986 hours 6.0947
+pre-registered seconds 486.258
+  generate-p10s0-draw-1            19.758
+  generate-p10s0-draw-2            19.723
+  generate-p10s0-draw-3            19.781
+  generate-p10s0-draw-4            19.952
+  generate-p10s0-draw-5            19.854
+  generate-p10s0-draw-6            19.909
+  generate-p10s0-draw-7            20.097
+  generate-p10s0-draw-8            20.034
+  generate-p10s0-draw-9            20.032
+  generate-p10s0-draw-10           19.924
+  generate-p10s0-draw-11           20.051
+  generate-p10s0-draw-12           20.135
+  generate-p10s0-draw-13           20.137
+  generate-p10s0-reserve-1         20.317
+  generate-p10s0-reserve-2         19.974
+  gates                            48.847
+  train-q1                      13415.314
+  evaluate-q1                     406.381
+  train-wx                       1174.308
+  evaluate-wx                      43.726
+  train-probe                    5999.536
+  evaluate-probe                   43.794
+  analyze                          22.244
+  report                            0.902
+ledger entries chronological: True
+projection sha256 f7e13716bf670b3861cd36f041d3a16202bb33f018083ec27007a55909097c9a
+charged before Q1 (mine) 834.7819167071721 record 834.7819167071721
+charged at Q1 gate (mine) 14656.477299415157 record 14656.477299415157
+projection top-level keys ['a5d_provenance', 'arm_selection_sha256', 'candidates', 'cost_differences', 'environment', 'freeze_information', 'guard_seconds_per_task', 'kind', 'memory', 'missing_items', 'note', 'rates', 'rates_alone', 'rates_busy', 'schema', 'study', 'table', 'unit_updates']
+{"q1_full_train_cap/2": 29420.63072040066, "q1_full_eval_cap/2": 855.6247596819885, "wx_A5D": 3032.5657288867515, "probe_A5D": 11824.59170891426}
+before Q1: charged 834.8 + 2*(Q1 30276.3 + reserve 60.0) = 61507.3 <= 79200.0: True; record required_seconds 60672.510960165295
+Q1 gate: charged 14656.5 + 2*(wx 3032.6 + probe 11824.6 + reserve 60.0) = 44490.8 <= 79200.0: True; margin 34709.2
+wx proj from caps/2 3032.5657288867515 probe 11824.59170891426
+  train-q1         charged    13415.3 cap    58841.3 ratio 0.228 vs projection(cap/2) 0.456
+  evaluate-q1      charged      406.4 cap     1711.2 ratio 0.237 vs projection(cap/2) 0.475
+  train-wx         charged     1174.3 cap     5873.4 ratio 0.200 vs projection(cap/2) 0.400
+  evaluate-wx      charged       43.7 cap      191.8 ratio 0.228 vs projection(cap/2) 0.456
+  train-probe      charged     5999.5 cap    23497.0 ratio 0.255 vs projection(cap/2) 0.511
+  evaluate-probe   charged       43.8 cap      152.1 ratio 0.288 vs projection(cap/2) 0.576
+  gates            charged       48.8 cap      156.2 ratio 0.313 vs projection(cap/2) 0.626
+  analyze          charged       22.2 cap       60.0 ratio 0.371 vs projection(cap/2) 0.741
+  report           charged        0.9 cap       60.0 ratio 0.015 vs projection(cap/2) 0.030

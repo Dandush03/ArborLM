@@ -1,0 +1,399 @@
+{
+ "freeze_commit_of_clone": "ec4e82395add2292e2d222718df6a8117710e53c",
+ "a_typed_train_worker_no_token": {
+  "argv": [
+   "work",
+   "train",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--labels",
+   "WX-WX-A1-2K4K-d01-j0"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: a registered worker runs only inside a running stage of the driver (no P10S0_STAGE_TOKEN)"
+  ],
+  "stdout_tail": []
+ },
+ "b1_label_not_in_stage": {
+  "argv": [
+   "work",
+   "train",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--labels",
+   "WX-WX-A1-2K4K-d01-j0"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: cell WX-WX-A1-2K4K-d01-j0 is not among the tasks of the running stage 'train-q1'"
+  ],
+  "stdout_tail": []
+ },
+ "b2_label_in_stage_not_in_matrix": {
+  "argv": [
+   "work",
+   "train",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--labels",
+   "Q1-A0-2K4K-d99-j0"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: cell Q1-A0-2K4K-d99-j0 is not in the frozen matrix"
+  ],
+  "stdout_tail": []
+ },
+ "b3_token_wrong_kind": {
+  "argv": [
+   "work",
+   "evaluate",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--labels",
+   "Q1-A0-2K4K-d01-j0"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: the stage token is for stage 'train-q1', not for a evaluate worker"
+  ],
+  "stdout_tail": []
+ },
+ "b4_wrong_nonce": {
+  "argv": [
+   "work",
+   "train",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--labels",
+   "Q1-A0-2K4K-d01-j0"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: the stage token does not match the running stage"
+  ],
+  "stdout_tail": []
+ },
+ "b5_valid_forged_token_in_matrix_reaches_registered_state": {
+  "argv": [
+   "work",
+   "train",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--labels",
+   "Q1-A0-2K4K-d01-j0"
+  ],
+  "rc": 1,
+  "stderr_tail": [
+   "    check(_path(repo, plan[key][\"path\"]), plan[key][\"sha256\"], f\"{key} record\")",
+   "                      ~~~~^^^^^",
+   "KeyError: 'arm_selection'"
+  ],
+  "stdout_tail": []
+ },
+ "b6_generate_worker_no_token": {
+  "argv": [
+   "work",
+   "generate",
+   "--mode",
+   "registered",
+   "--draw",
+   "1",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: a registered worker runs only inside a running stage of the driver (no P10S0_STAGE_TOKEN)"
+  ],
+  "stdout_tail": []
+ },
+ "f1_generate_typed_cap": {
+  "argv": [
+   "generate",
+   "--mode",
+   "registered",
+   "--draw",
+   "1",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/g",
+   "--generation-cap-from-config",
+   "--i-understand-freeze-time",
+   "--stage-cap-seconds",
+   "5"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: registered generation accepts no override of the frozen values; remove --stage-cap-seconds"
+  ],
+  "stdout_tail": []
+ },
+ "f2_registered_q1_typed_cap": {
+  "argv": [
+   "registered",
+   "q1",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--freeze-commit",
+   "ec4e82395add2292e2d222718df6a8117710e53c",
+   "--caps",
+   "studies/p10s0/freeze/stage_caps.json",
+   "--stage-cap-seconds",
+   "5"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --stage-cap-seconds"
+  ],
+  "stdout_tail": []
+ },
+ "f3_train_mode_registered": {
+  "argv": [
+   "train",
+   "--block",
+   "q1",
+   "--mode",
+   "registered",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: `train --mode registered` is not a registered stage: use `registered <stage>` (the launch scripts), which verifies the frozen plan"
+  ],
+  "stdout_tail": []
+ },
+ "d_set_generation_cap_dry": {
+  "argv": [
+   "set-generation-cap",
+   "--repo",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/repo",
+   "--generate-manifest",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/m_dry.json"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: --generate-manifest is of mode 'dry'; the cap is set from a rehearsal-mode generation (the check draw's and a DRY manifest are refused)"
+  ],
+  "stdout_tail": []
+ },
+ "d_set_generation_cap_check_mode": {
+  "argv": [
+   "set-generation-cap",
+   "--repo",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/repo",
+   "--generate-manifest",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/m_check_mode.json"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: --generate-manifest is of mode 'check'; the cap is set from a rehearsal-mode generation (the check draw's and a DRY manifest are refused)"
+  ],
+  "stdout_tail": []
+ },
+ "d_set_generation_cap_rehearsal_mode_wrong_stage": {
+  "argv": [
+   "set-generation-cap",
+   "--repo",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/repo",
+   "--generate-manifest",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/m_rehearsal_mode_wrong_stage.json"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: --generate-manifest must be the stage generate-p10s0-rehearsal, not 'generate-p10s0-check'"
+  ],
+  "stdout_tail": []
+ },
+ "d_set_generation_cap_ok_rehearsal": {
+  "argv": [
+   "set-generation-cap",
+   "--repo",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/repo",
+   "--generate-manifest",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/m_ok_rehearsal.json"
+  ],
+  "rc": 0,
+  "stderr_tail": [],
+  "stdout_tail": [
+   "{\"config\": \"/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/repo/configs/p10s0_qualification.toml\", \"before\": {\"cap_seconds\": 66.89776783401612, \"provisional\": false, \"measured_seconds\": 33.44888391700806, \"floor_seconds\": 60.0}, \"after\": {\"cap_seconds\": 80.0, \"provisional\": false, \"measured_seconds\": 40.0, \"floor_seconds\": 60.0}}"
+  ]
+ },
+ "d_config_after_ok": [
+  "block is set by the",
+  "# rehearsal (stages set-generation-cap) before the freeze; the freeze refuses while it is provisional.",
+  "",
+  "schema_version = 1",
+  "experiment_family = \"P10S0_ADDRESSING_QUALIFICATION\"",
+  "spec_reference = \"docs/decisions/ADR-0020-p10-s0-addressing-qualification.md\"",
+  "",
+  "[memory]",
+  "key_width = 16",
+  "top = 8",
+  "temperature = 0.2",
+  "window = 7",
+  "wx_window = 64",
+  "",
+  "[training]",
+  "learning_rate = 0.003",
+  "clip_norm = 1.0",
+  "batch_contexts = 16",
+  "updates = 8192",
+  "diag_every = 64",
+  "probe_facts = 256",
+  "",
+  "[arms]",
+  "core_learned = [\"A0\", \"A1\", \"A2\", \"A5-D\"]",
+  "reference = [\"A6\", \"A7\"]",
+  "wx = [\"WX-A5-D\", \"WX-A1\"]",
+  "preference_order = [\"A0\", \"A5-D\", \"A2\", \"A1\"]",
+  "candidate_arms = [\"A5-D\", \"A1\"]",
+  "",
+  "[calibrated]",
+  "lambda = 1.0",
+  "u_pre = 2048.0",
+  "mu = 1.0",
+  "k0_fraction = 0.125",
+  "",
+  "[cell_types]",
+  "",
+  "[cell_types.2K4K]",
+  "cell_type = \"2K/4K\"",
+  "facts = 2048",
+  "slots = 4096",
+  "update_multiplier = 1",
+  "readout_multipliers = [1]",
+  "",
+  "[cell_types.8K16K]",
+  "cell_type = \"8K/16K\"",
+  "facts = 8192",
+  "slots = 16384",
+  "update_multiplier = 4",
+  "readout_multipliers = [1, 4]",
+  "",
+  "[cell_types.8K4K]",
+  "cell_type = \"8K/4K\"",
+  "facts = 8192",
+  "slots = 4096",
+  "update_multiplier = 4",
+  "readout_multipliers = [1, 4]",
+  "",
+  "[cell_types.32K64K]",
+  "cell_type = \"32K/64K\"",
+  "facts = 32768",
+  "slots = 65536",
+  "update_multiplier = 16",
+  "readout_multipliers = [16]",
+  "",
+  "[matrix]",
+  "q1_draws_first = 1",
+  "q1_draws_last = 10",
+  "probe_draws = [11, 12, 13]",
+  "q1_cells = 230",
+  "q1_cells_cut3 = 190",
+  "wx_cells = 20",
+  "probe_cells = 6",
+  "check_cells = 3",
+  "",
+  "[seeds]",
+  "registered_base = 200001",
+  "draw_stride = 100",
+  "reserve_bases = [201301, 201401]",
+  "init = [2001, 2002]",
+  "check_base = 209001",
+  "rehearsal_base = 209101",
+  "check_init = 2091",
+  "rehearsal_init = 2092",
+  "test_base = 920001",
+  "test_top = 920999",
+  "range_low = 200001",
+  "range_high = 209999",
+  "fact_set_offsets = [0, 20, 60]",
+  "target_offsets = [40, 44, 48]",
+  "swap_offsets = [50, 51, 52]",
+  "",
+  "[thresholds]",
+  "success_fraction_of_a6 = 0.9",
+  "a6_min_accuracy = 0.9",
+  "a6_min_accuracy_overload = 0.5",
+  "dependence_fraction = 0.95",
+  "stable_threshold = 0.8",
+  "lm_margin = 0.05",
+  "paired_threshold = 4",
+  "consistency_max_failed_draws = 2",
+  "max_not_evaluated_draws = 1",
+  "max_failed_reliable = 1",
+  "min_successes_20 = 5",
+  "min_successes_10 = 3"
+ ],
+ "d_cap_hours_after_ok": [
+  "cap_hours = 22.0"
+ ],
+ "h_freeze_plan_test_profile_without_e2e_env": {
+  "argv": [
+   "freeze-plan",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/run",
+   "--arm-selection",
+   "studies/p10s0/freeze/arm_selection.json",
+   "--projection",
+   "/nonexistent.json",
+   "--out",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/plan.json",
+   "--test-profile"
+  ],
+  "rc": 2,
+  "stderr_tail": [
+   "P10S0 stage REFUSED: refused: --test-profile is for the end-to-end exercise only (P10S0_E2E_CLONE is set by it)"
+  ],
+  "stdout_tail": []
+ },
+ "g_rehearse_cell_mode_registered_test_profile": {
+  "argv": [
+   "work",
+   "rehearse-cell",
+   "--mode",
+   "registered",
+   "--draw",
+   "1",
+   "--run-dir",
+   "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d/trun",
+   "--item",
+   "A0,2K/4K,main"
+  ],
+  "rc": 1,
+  "stderr_tail": [
+   "  File \"/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/frozen_clone/studies/p10s0/core.py\", line 555, in check_seed_set",
+   "    raise ValueError(f\"mode {mode!r} cannot use the {name!r} seed set\")",
+   "ValueError: mode 'rehearsal' cannot use the 'p10s0-test-draw-1' seed set"
+  ],
+  "stdout_tail": []
+ },
+ "g_written": [],
+ "tmpdir": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/p10s0-demo-of0dwr3d"
+}

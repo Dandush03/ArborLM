@@ -1,0 +1,5 @@
+A(test freeze)=af37c227cbc61f24a38147ddb81bca091a5fd424 C(real freeze)=cb14e6fd72448fa1b323a5838441faf2e6c619c9
+added list (newest first):
+cb14e6fd72448fa1b323a5838441faf2e6c619c9
+af37c227cbc61f24a38147ddb81bca091a5fd424
+added[-1] == A -> check_preconditions refuses C

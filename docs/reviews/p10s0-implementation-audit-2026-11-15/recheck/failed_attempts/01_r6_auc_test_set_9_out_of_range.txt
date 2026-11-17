@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-recheck/scripts/r6_auc.py", line 18, in <module>
+    SPEC = core.test_set(9)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/studies/p10s0/core.py", line 496, in test_set
+    raise ValueError("test seed offset out of range")
+ValueError: test seed offset out of range

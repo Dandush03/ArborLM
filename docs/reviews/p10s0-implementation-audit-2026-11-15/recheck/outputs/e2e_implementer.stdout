@@ -1,0 +1,67 @@
+{
+ "base_commit": "cb62f158617891e8cc68851d127d2e74615d4436",
+ "freeze_commit": "14e8a4c002dc789b3244c624e7b026a814d08823",
+ "out": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-recheck/e2e_implementer",
+ "steps": {
+  "blocks": {
+   "probe": {
+    "run": false,
+    "status": "NOT RUN \u2014 MEMORY"
+   },
+   "wx": {
+    "run": true,
+    "status": null
+   }
+  },
+  "candidate": "A5-D",
+  "cut3": true,
+  "cut_label": "one initialization seed per draw at 16,384",
+  "generate.sh": 0,
+  "generation_cap": {
+   "cap_seconds": 60.0,
+   "floor_seconds": 60.0,
+   "measured_seconds": 17.824542958987877,
+   "provisional": false
+  },
+  "ledger_entries": 25,
+  "outcome_label": "INCONCLUSIVE [one initialization seed per draw at 16,384]",
+  "outcome_row": 3,
+  "results_markdown_bytes": 19019,
+  "scale_factor": 89.853298944253,
+  "scripts": [
+   [
+    "gates",
+    0
+   ],
+   [
+    "q1",
+    0
+   ],
+   [
+    "q1_gate",
+    0
+   ],
+   [
+    "wx",
+    0
+   ],
+   [
+    "probe",
+    2
+   ],
+   [
+    "analysis",
+    0
+   ],
+   [
+    "report",
+    0
+   ],
+   [
+    "q1",
+    2
+   ]
+  ]
+ }
+}
+exit 0

@@ -1,0 +1,54 @@
+{
+ "generate": 66.89776783401612,
+ "gates": 156.17408193193842,
+ "analysis": 60,
+ "report": 60,
+ "q1": {
+  "full": {
+   "train": 58850.801897072815,
+   "evaluate": 1720.7899756354745,
+   "train_over_2x_busy": 1.0,
+   "evaluate_over_2x_busy": 1.0
+  },
+  "cut3": {
+   "train": 40780.04604085267,
+   "evaluate": 1267.9120909743942,
+   "train_over_2x_busy": 1.0,
+   "evaluate_over_2x_busy": 1.0
+  }
+ },
+ "wx": {
+  "A5-D": {
+   "train": 5874.344701780938,
+   "evaluate": 192.74377266364172,
+   "train_over_2x_busy": 1.0,
+   "evaluate_over_2x_busy": 1.0
+  },
+  "A1": {
+   "train": 7653.064192824764,
+   "evaluate": 189.06830765982158,
+   "train_over_2x_busy": 1.0,
+   "evaluate_over_2x_busy": 1.0
+  }
+ },
+ "probe": {
+  "A5-D": {
+   "train": 23497.282176664332,
+   "evaluate": 152.39049533195794,
+   "train_over_2x_busy": 1.0,
+   "evaluate_over_2x_busy": 1.0
+  },
+  "A1": {
+   "train": 39461.783293349436,
+   "evaluate": 175.42969491588883,
+   "train_over_2x_busy": 1.0,
+   "evaluate_over_2x_busy": 1.0
+  }
+ },
+ "reserve_s": 60.0,
+ "probe_eval_per_cell_s": {
+  "A1": 83.21379279205576,
+  "A6": 51.14554183400469,
+  "A5-D": 71.55571683298331
+ }
+}

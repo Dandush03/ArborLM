@@ -1,0 +1,1065 @@
+arms/A0|2K/4K/s0/cls	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A0|2K/4K/s0/evaluated	20	20	AGREE
+arms/A0|2K/4K/s0/successes	9	9	AGREE
+arms/A0|2K/4K/s0/failures	11	11	AGREE
+arms/A0|2K/4K/s0/draws_evaluated	10	10	AGREE
+arms/A0|2K/4K/s0/draws_succeeded	3	3	AGREE
+arms/A0|2K/4K/s0/draws_failed	7	7	AGREE
+arms/A0|2K/4K/s0/draws_not_evaluated	0	0	AGREE
+arms/A0|2K/4K/s0/per_draw_bound	0.08726443391415031	0.08726443391415031	AGREE
+arms/A0|2K/4K/s0/lm_flagged_cells	0	0	AGREE
+arms/A0|2K/4K/s0/lm_reduced	false	false	AGREE
+arms/A0|2K/4K/p9ii_criteria/cls	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A0|2K/4K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A0|2K/4K/p9ii_criteria/successes	9	9	AGREE
+arms/A0|2K/4K/p9ii_criteria/failures	11	11	AGREE
+arms/A0|2K/4K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A0|2K/4K/p9ii_criteria/draws_succeeded	3	3	AGREE
+arms/A0|2K/4K/p9ii_criteria/draws_failed	7	7	AGREE
+arms/A0|2K/4K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A0|2K/4K/p9ii_criteria/per_draw_bound	0.08726443391415031	0.08726443391415031	AGREE
+arms/A0|2K/4K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A0|2K/4K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A0|2K/4K/stable/median	0.876220703125	0.876220703125	AGREE
+arms/A0|2K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A0|2K/4K/collapse_free/k	0	0	AGREE
+arms/A0|2K/4K/collapse_free/n	20	20	AGREE
+arms/A0|2K/4K/categories/never collapsed and separated	0	0	AGREE
+arms/A0|2K/4K/categories/never collapsed, not separated	0	0	AGREE
+arms/A0|2K/4K/categories/collapsed and recovered	13	13	AGREE
+arms/A0|2K/4K/categories/collapsed and not recovered	7	7	AGREE
+arms/A0|2K/4K/information_bits/median	3.4700068223976994	3.4700068223976994	AGREE
+arms/A0|2K/4K/failed_conditions	{"2/0": [1], "2/1": [1, 3, 6], "4/0": [1, 3, 6], "4/1": [1, 4], "6/0": [1, 3, 4, 6], "6/1": [1, 3, 6], "7/0": [4], "8/0": [1, 4], "9/0": [1, 3, 6], "9/1": [1, 3, 6], "10/1": [1, 3, 6]}	{"10/1": [1, 3, 6], "2/0": [1], "2/1": [1, 3, 6], "4/0": [1, 3, 6], "4/1": [1, 4], "6/0": [1, 3, 4, 6], "6/1": [1, 3, 6], "7/0": [4], "8/0": [1, 4], "9/0": [1, 3, 6], "9/1": [1, 3, 6]}	AGREE
+arms/A0|2K/4K/sustained/cells_with_first_success	10	10	AGREE
+arms/A0|2K/4K/sustained/sustained	10	10	AGREE
+arms/A0|2K/4K/lm/flagged	0	0	AGREE
+arms/A0|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A0|2K/4K/consistency/label	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+arms/A0|2K/4K/meets	false	false	AGREE
+arms/A0|2K/4K/p9ii_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A0|2K/4K/pooled/successes	5	5	AGREE
+arms/A0|2K/4K/pooled/draws	18	18	AGREE
+arms/A0|2K/4K/pooled/bound	0.11642559165289151	0.11642559165289151	AGREE
+arms/A0|2K/4K/consistency/pooled_failed	13	13	AGREE
+arms/A0|2K/4K/consistency/pooled_n	18	18	AGREE
+arms/A0|2K/4K/dense/absent	null	null	AGREE
+arms/A0|8K/16K/s0/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A0|8K/16K/s0/evaluated	20	20	AGREE
+arms/A0|8K/16K/s0/successes	19	19	AGREE
+arms/A0|8K/16K/s0/failures	1	1	AGREE
+arms/A0|8K/16K/s0/draws_evaluated	10	10	AGREE
+arms/A0|8K/16K/s0/draws_succeeded	9	9	AGREE
+arms/A0|8K/16K/s0/draws_failed	1	1	AGREE
+arms/A0|8K/16K/s0/draws_not_evaluated	0	0	AGREE
+arms/A0|8K/16K/s0/per_draw_bound	0.6058366975634952	0.6058366975634952	AGREE
+arms/A0|8K/16K/s0/lm_flagged_cells	0	0	AGREE
+arms/A0|8K/16K/s0/lm_reduced	false	false	AGREE
+arms/A0|8K/16K/p9ii_criteria/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A0|8K/16K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A0|8K/16K/p9ii_criteria/successes	19	19	AGREE
+arms/A0|8K/16K/p9ii_criteria/failures	1	1	AGREE
+arms/A0|8K/16K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A0|8K/16K/p9ii_criteria/draws_succeeded	9	9	AGREE
+arms/A0|8K/16K/p9ii_criteria/draws_failed	1	1	AGREE
+arms/A0|8K/16K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A0|8K/16K/p9ii_criteria/per_draw_bound	0.6058366975634952	0.6058366975634952	AGREE
+arms/A0|8K/16K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A0|8K/16K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A0|8K/16K/stable/median	0.89593505859375	0.89593505859375	AGREE
+arms/A0|8K/16K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A0|8K/16K/collapse_free/k	0	0	AGREE
+arms/A0|8K/16K/collapse_free/n	20	20	AGREE
+arms/A0|8K/16K/categories/never collapsed and separated	0	0	AGREE
+arms/A0|8K/16K/categories/never collapsed, not separated	0	0	AGREE
+arms/A0|8K/16K/categories/collapsed and recovered	20	20	AGREE
+arms/A0|8K/16K/categories/collapsed and not recovered	0	0	AGREE
+arms/A0|8K/16K/information_bits/median	4.9343854731811945	4.9343854731811945	AGREE
+arms/A0|8K/16K/failed_conditions	{"3/1": [4]}	{"3/1": [4]}	AGREE
+arms/A0|8K/16K/sustained/cells_with_first_success	20	20	AGREE
+arms/A0|8K/16K/sustained/sustained	20	20	AGREE
+arms/A0|8K/16K/lm/flagged	0	0	AGREE
+arms/A0|8K/16K/class_at_u	"FAILS"	"FAILS"	AGREE
+arms/A0|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A0|8K/16K/consistency/label	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+arms/A0|8K/16K/meets	true	true	AGREE
+arms/A0|8K/16K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+arms/A0|8K/16K/pooled/successes	13	13	AGREE
+arms/A0|8K/16K/pooled/draws	14	14	AGREE
+arms/A0|8K/16K/pooled/bound	0.7032657610511253	0.7032657610511253	AGREE
+arms/A0|8K/16K/consistency/pooled_failed	1	1	AGREE
+arms/A0|8K/16K/consistency/pooled_n	14	14	AGREE
+arms/A0|8K/16K/dense/label	"DENSE AT CEILING"	"DENSE AT CEILING"	AGREE
+arms/A0|8K/16K/dense/median_ratio	1.020480153247357	1.020480153247357	AGREE
+arms/A0|8K/16K/dense/median_dense_accuracy	0.9747314453125	0.9747314453125	AGREE
+arms/A0|8K/16K/dense/draws_arm_higher	9	9	AGREE
+arms/A0|8K/16K/dense/differences/1	-0.00860595703125	-0.00860595703125	AGREE
+arms/A0|8K/16K/dense/differences/2	0.018707275390625	0.018707275390625	AGREE
+arms/A0|8K/16K/dense/differences/3	0.01947021484375	0.01947021484375	AGREE
+arms/A0|8K/16K/dense/differences/4	0.027984619140625	0.027984619140625	AGREE
+arms/A0|8K/16K/dense/differences/5	0.022705078125	0.022705078125	AGREE
+arms/A0|8K/16K/dense/differences/6	0.023529052734375	0.023529052734375	AGREE
+arms/A0|8K/16K/dense/differences/7	0.020416259765625	0.020416259765625	AGREE
+arms/A0|8K/16K/dense/differences/8	0.022796630859375	0.022796630859375	AGREE
+arms/A0|8K/16K/dense/differences/9	0.019134521484375	0.019134521484375	AGREE
+arms/A0|8K/16K/dense/differences/10	0.018341064453125	0.018341064453125	AGREE
+arms/A0|8K/4K/s0/cls	"FAILS"	"FAILS"	AGREE
+arms/A0|8K/4K/s0/evaluated	10	10	AGREE
+arms/A0|8K/4K/s0/successes	0	0	AGREE
+arms/A0|8K/4K/s0/failures	10	10	AGREE
+arms/A0|8K/4K/s0/draws_evaluated	10	10	AGREE
+arms/A0|8K/4K/s0/draws_succeeded	0	0	AGREE
+arms/A0|8K/4K/s0/draws_failed	10	10	AGREE
+arms/A0|8K/4K/s0/draws_not_evaluated	0	0	AGREE
+arms/A0|8K/4K/s0/per_draw_bound	0.0	0.0	AGREE
+arms/A0|8K/4K/s0/lm_flagged_cells	0	0	AGREE
+arms/A0|8K/4K/s0/lm_reduced	false	false	AGREE
+arms/A0|8K/4K/p9ii_criteria/cls	"FAILS"	"FAILS"	AGREE
+arms/A0|8K/4K/p9ii_criteria/evaluated	10	10	AGREE
+arms/A0|8K/4K/p9ii_criteria/successes	0	0	AGREE
+arms/A0|8K/4K/p9ii_criteria/failures	10	10	AGREE
+arms/A0|8K/4K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A0|8K/4K/p9ii_criteria/draws_succeeded	0	0	AGREE
+arms/A0|8K/4K/p9ii_criteria/draws_failed	10	10	AGREE
+arms/A0|8K/4K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A0|8K/4K/p9ii_criteria/per_draw_bound	0.0	0.0	AGREE
+arms/A0|8K/4K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A0|8K/4K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A0|8K/4K/stable/median	0.83343505859375	0.83343505859375	AGREE
+arms/A0|8K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A0|8K/4K/collapse_free/k	0	0	AGREE
+arms/A0|8K/4K/collapse_free/n	10	10	AGREE
+arms/A0|8K/4K/categories/never collapsed and separated	0	0	AGREE
+arms/A0|8K/4K/categories/never collapsed, not separated	0	0	AGREE
+arms/A0|8K/4K/categories/collapsed and recovered	9	9	AGREE
+arms/A0|8K/4K/categories/collapsed and not recovered	1	1	AGREE
+arms/A0|8K/4K/information_bits/median	3.976307178413687	3.976307178413687	AGREE
+arms/A0|8K/4K/failed_conditions	{"1/0": [4], "2/1": [4], "3/0": [1, 4], "4/1": [4], "5/0": [1, 4], "6/1": [4], "7/0": [1, 4], "8/1": [4], "9/0": [1, 3, 4, 6], "10/1": [1, 4]}	{"1/0": [4], "10/1": [1, 4], "2/1": [4], "3/0": [1, 4], "4/1": [4], "5/0": [1, 4], "6/1": [4], "7/0": [1, 4], "8/1": [4], "9/0": [1, 3, 4, 6]}	AGREE
+arms/A0|8K/4K/sustained/cells_with_first_success	7	7	AGREE
+arms/A0|8K/4K/sustained/sustained	7	7	AGREE
+arms/A0|8K/4K/lm/flagged	0	0	AGREE
+arms/A0|8K/4K/class_at_u	"FAILS"	"FAILS"	AGREE
+arms/A0|8K/4K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+arms/A0|8K/4K/pooled/available	false	false	AGREE
+arms/A0|8K/4K/dense/absent	null	null	AGREE
+arms/A1|2K/4K/s0/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A1|2K/4K/s0/evaluated	20	20	AGREE
+arms/A1|2K/4K/s0/successes	20	20	AGREE
+arms/A1|2K/4K/s0/failures	0	0	AGREE
+arms/A1|2K/4K/s0/draws_evaluated	10	10	AGREE
+arms/A1|2K/4K/s0/draws_succeeded	10	10	AGREE
+arms/A1|2K/4K/s0/draws_failed	0	0	AGREE
+arms/A1|2K/4K/s0/draws_not_evaluated	0	0	AGREE
+arms/A1|2K/4K/s0/per_draw_bound	0.7411344491069477	0.7411344491069478	AGREE
+arms/A1|2K/4K/s0/lm_flagged_cells	0	0	AGREE
+arms/A1|2K/4K/s0/lm_reduced	false	false	AGREE
+arms/A1|2K/4K/p9ii_criteria/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A1|2K/4K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A1|2K/4K/p9ii_criteria/successes	20	20	AGREE
+arms/A1|2K/4K/p9ii_criteria/failures	0	0	AGREE
+arms/A1|2K/4K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A1|2K/4K/p9ii_criteria/draws_succeeded	10	10	AGREE
+arms/A1|2K/4K/p9ii_criteria/draws_failed	0	0	AGREE
+arms/A1|2K/4K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A1|2K/4K/p9ii_criteria/per_draw_bound	0.7411344491069477	0.7411344491069478	AGREE
+arms/A1|2K/4K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A1|2K/4K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A1|2K/4K/stable/median	1.0	1.0	AGREE
+arms/A1|2K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A1|2K/4K/collapse_free/k	3	3	AGREE
+arms/A1|2K/4K/collapse_free/n	20	20	AGREE
+arms/A1|2K/4K/categories/never collapsed and separated	3	3	AGREE
+arms/A1|2K/4K/categories/never collapsed, not separated	0	0	AGREE
+arms/A1|2K/4K/categories/collapsed and recovered	17	17	AGREE
+arms/A1|2K/4K/categories/collapsed and not recovered	0	0	AGREE
+arms/A1|2K/4K/information_bits/median	4.919095543405335	4.919095543405335	AGREE
+arms/A1|2K/4K/failed_conditions	{}	{}	AGREE
+arms/A1|2K/4K/sustained/cells_with_first_success	20	20	AGREE
+arms/A1|2K/4K/sustained/sustained	20	20	AGREE
+arms/A1|2K/4K/lm/flagged	0	0	AGREE
+arms/A1|2K/4K/address_recall/median	1.0	1.0	AGREE
+arms/A1|2K/4K/address_recall/label	"ADDRESS RECALL"	"ADDRESS RECALL"	AGREE
+arms/A1|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A1|2K/4K/consistency/label	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+arms/A1|2K/4K/meets	true	true	AGREE
+arms/A1|2K/4K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+arms/A1|2K/4K/pooled/successes	18	18	AGREE
+arms/A1|2K/4K/pooled/draws	18	18	AGREE
+arms/A1|2K/4K/pooled/bound	0.8466824460427218	0.8466824460427218	AGREE
+arms/A1|2K/4K/consistency/pooled_failed	0	0	AGREE
+arms/A1|2K/4K/consistency/pooled_n	18	18	AGREE
+arms/A1|2K/4K/dense/label	"DENSE AT CEILING"	"DENSE AT CEILING"	AGREE
+arms/A1|2K/4K/dense/median_ratio	0.9979819429966102	0.9979819429966102	AGREE
+arms/A1|2K/4K/dense/median_dense_accuracy	0.9974365234375	0.9974365234375	AGREE
+arms/A1|2K/4K/dense/draws_arm_higher	0	0	AGREE
+arms/A1|2K/4K/dense/differences/1	-0.00341796875	-0.00341796875	AGREE
+arms/A1|2K/4K/dense/differences/2	-0.0023193359375	-0.0023193359375	AGREE
+arms/A1|2K/4K/dense/differences/3	-0.0008544921875	-0.0008544921875	AGREE
+arms/A1|2K/4K/dense/differences/4	-0.00146484375	-0.00146484375	AGREE
+arms/A1|2K/4K/dense/differences/5	-0.00439453125	-0.00439453125	AGREE
+arms/A1|2K/4K/dense/differences/6	-0.000732421875	-0.000732421875	AGREE
+arms/A1|2K/4K/dense/differences/7	-0.00048828125	-0.00048828125	AGREE
+arms/A1|2K/4K/dense/differences/8	-0.0018310546875	-0.0018310546875	AGREE
+arms/A1|2K/4K/dense/differences/9	-0.002197265625	-0.002197265625	AGREE
+arms/A1|2K/4K/dense/differences/10	-0.00390625	-0.00390625	AGREE
+arms/A1|8K/16K/s0/cls	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A1|8K/16K/s0/evaluated	20	20	AGREE
+arms/A1|8K/16K/s0/successes	15	15	AGREE
+arms/A1|8K/16K/s0/failures	5	5	AGREE
+arms/A1|8K/16K/s0/draws_evaluated	10	10	AGREE
+arms/A1|8K/16K/s0/draws_succeeded	5	5	AGREE
+arms/A1|8K/16K/s0/draws_failed	5	5	AGREE
+arms/A1|8K/16K/s0/draws_not_evaluated	0	0	AGREE
+arms/A1|8K/16K/s0/per_draw_bound	0.22244110100812908	0.22244110100812908	AGREE
+arms/A1|8K/16K/s0/lm_flagged_cells	0	0	AGREE
+arms/A1|8K/16K/s0/lm_reduced	false	false	AGREE
+arms/A1|8K/16K/p9ii_criteria/cls	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A1|8K/16K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A1|8K/16K/p9ii_criteria/successes	15	15	AGREE
+arms/A1|8K/16K/p9ii_criteria/failures	5	5	AGREE
+arms/A1|8K/16K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A1|8K/16K/p9ii_criteria/draws_succeeded	5	5	AGREE
+arms/A1|8K/16K/p9ii_criteria/draws_failed	5	5	AGREE
+arms/A1|8K/16K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A1|8K/16K/p9ii_criteria/per_draw_bound	0.22244110100812908	0.22244110100812908	AGREE
+arms/A1|8K/16K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A1|8K/16K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A1|8K/16K/stable/median	0.999267578125	0.999267578125	AGREE
+arms/A1|8K/16K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A1|8K/16K/collapse_free/k	0	0	AGREE
+arms/A1|8K/16K/collapse_free/n	20	20	AGREE
+arms/A1|8K/16K/categories/never collapsed and separated	0	0	AGREE
+arms/A1|8K/16K/categories/never collapsed, not separated	0	0	AGREE
+arms/A1|8K/16K/categories/collapsed and recovered	20	20	AGREE
+arms/A1|8K/16K/categories/collapsed and not recovered	0	0	AGREE
+arms/A1|8K/16K/information_bits/median	4.803144097063288	4.803144097063288	AGREE
+arms/A1|8K/16K/failed_conditions	{"2/0": [4], "3/0": [4], "4/1": [4], "6/0": [4], "10/0": [4]}	{"10/0": [4], "2/0": [4], "3/0": [4], "4/1": [4], "6/0": [4]}	AGREE
+arms/A1|8K/16K/sustained/cells_with_first_success	20	20	AGREE
+arms/A1|8K/16K/sustained/sustained	20	20	AGREE
+arms/A1|8K/16K/lm/flagged	0	0	AGREE
+arms/A1|8K/16K/class_at_u	"FAILS"	"FAILS"	AGREE
+arms/A1|8K/16K/address_recall/median	1.0	1.0	AGREE
+arms/A1|8K/16K/address_recall/label	"ADDRESS RECALL"	"ADDRESS RECALL"	AGREE
+arms/A1|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A1|8K/16K/consistency/label	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+arms/A1|8K/16K/meets	false	false	AGREE
+arms/A1|8K/16K/p9ii_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A1|8K/16K/pooled/successes	7	7	AGREE
+arms/A1|8K/16K/pooled/draws	14	14	AGREE
+arms/A1|8K/16K/pooled/bound	0.26358492378234966	0.26358492378234966	AGREE
+arms/A1|8K/16K/consistency/pooled_failed	7	7	AGREE
+arms/A1|8K/16K/consistency/pooled_n	14	14	AGREE
+arms/A1|8K/16K/dense/absent	null	null	AGREE
+arms/A2|2K/4K/s0/cls	"FAILS"	"FAILS"	AGREE
+arms/A2|2K/4K/s0/evaluated	20	20	AGREE
+arms/A2|2K/4K/s0/successes	0	0	AGREE
+arms/A2|2K/4K/s0/failures	20	20	AGREE
+arms/A2|2K/4K/s0/draws_evaluated	10	10	AGREE
+arms/A2|2K/4K/s0/draws_succeeded	0	0	AGREE
+arms/A2|2K/4K/s0/draws_failed	10	10	AGREE
+arms/A2|2K/4K/s0/draws_not_evaluated	0	0	AGREE
+arms/A2|2K/4K/s0/per_draw_bound	0.0	0.0	AGREE
+arms/A2|2K/4K/s0/lm_flagged_cells	0	0	AGREE
+arms/A2|2K/4K/s0/lm_reduced	false	false	AGREE
+arms/A2|2K/4K/p9ii_criteria/cls	"FAILS"	"FAILS"	AGREE
+arms/A2|2K/4K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A2|2K/4K/p9ii_criteria/successes	0	0	AGREE
+arms/A2|2K/4K/p9ii_criteria/failures	20	20	AGREE
+arms/A2|2K/4K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A2|2K/4K/p9ii_criteria/draws_succeeded	0	0	AGREE
+arms/A2|2K/4K/p9ii_criteria/draws_failed	10	10	AGREE
+arms/A2|2K/4K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A2|2K/4K/p9ii_criteria/per_draw_bound	0.0	0.0	AGREE
+arms/A2|2K/4K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A2|2K/4K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A2|2K/4K/stable/median	0.808837890625	0.808837890625	AGREE
+arms/A2|2K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A2|2K/4K/collapse_free/k	0	0	AGREE
+arms/A2|2K/4K/collapse_free/n	20	20	AGREE
+arms/A2|2K/4K/categories/never collapsed and separated	0	0	AGREE
+arms/A2|2K/4K/categories/never collapsed, not separated	0	0	AGREE
+arms/A2|2K/4K/categories/collapsed and recovered	4	4	AGREE
+arms/A2|2K/4K/categories/collapsed and not recovered	16	16	AGREE
+arms/A2|2K/4K/information_bits/median	0.012368537442299488	0.012368537442299488	AGREE
+arms/A2|2K/4K/failed_conditions	{"1/0": [1, 4], "1/1": [1, 4], "2/0": [1, 3, 6], "2/1": [1, 3, 6], "3/0": [1, 4], "3/1": [1, 4], "4/0": [1, 3, 6], "4/1": [1, 3, 6], "5/0": [1, 3, 6], "5/1": [1, 3, 6], "6/0": [1, 3, 4, 6], "6/1": [1, 3, 6], "7/0": [1, 3, 4], "7/1": [1, 3, 6], "8/0": [1, 3, 4, 6], "8/1": [1, 3, 6], "9/0": [1, 3, 6], "9/1": [1, 3, 6], "10/0": [1, 3, 4, 6], "10/1": [1, 3, 6]}	{"1/0": [1, 4], "1/1": [1, 4], "10/0": [1, 3, 4, 6], "10/1": [1, 3, 6], "2/0": [1, 3, 6], "2/1": [1, 3, 6], "3/0": [1, 4], "3/1": [1, 4], "4/0": [1, 3, 6], "4/1": [1, 3, 6], "5/0": [1, 3, 6], "5/1": [1, 3, 6], "6/0": [1, 3, 4, 6], "6/1": [1, 3, 6], "7/0": [1, 3, 4], "7/1": [1, 3, 6], "8/0": [1, 3, 4, 6], "8/1": [1, 3, 6], "9/0": [1, 3, 6], "9/1": [1, 3, 6]}	AGREE
+arms/A2|2K/4K/sustained/cells_with_first_success	0	0	AGREE
+arms/A2|2K/4K/sustained/sustained	0	0	AGREE
+arms/A2|2K/4K/lm/flagged	0	0	AGREE
+arms/A2|2K/4K/address_recall/median	0.004150390625	0.004150390625	AGREE
+arms/A2|2K/4K/address_recall/label	null	null	AGREE
+arms/A2|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A2|2K/4K/consistency/label	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+arms/A2|2K/4K/meets	false	false	AGREE
+arms/A2|2K/4K/p9ii_class	"FAILS"	"FAILS"	AGREE
+arms/A2|2K/4K/pooled/successes	0	0	AGREE
+arms/A2|2K/4K/pooled/draws	18	18	AGREE
+arms/A2|2K/4K/pooled/bound	0.0	0.0	AGREE
+arms/A2|2K/4K/consistency/pooled_failed	18	18	AGREE
+arms/A2|2K/4K/consistency/pooled_n	18	18	AGREE
+arms/A2|2K/4K/dense/absent	null	null	AGREE
+arms/A2|8K/16K/s0/cls	"FAILS"	"FAILS"	AGREE
+arms/A2|8K/16K/s0/evaluated	20	20	AGREE
+arms/A2|8K/16K/s0/successes	2	2	AGREE
+arms/A2|8K/16K/s0/failures	18	18	AGREE
+arms/A2|8K/16K/s0/draws_evaluated	10	10	AGREE
+arms/A2|8K/16K/s0/draws_succeeded	0	0	AGREE
+arms/A2|8K/16K/s0/draws_failed	10	10	AGREE
+arms/A2|8K/16K/s0/draws_not_evaluated	0	0	AGREE
+arms/A2|8K/16K/s0/per_draw_bound	0.0	0.0	AGREE
+arms/A2|8K/16K/s0/lm_flagged_cells	0	0	AGREE
+arms/A2|8K/16K/s0/lm_reduced	false	false	AGREE
+arms/A2|8K/16K/p9ii_criteria/cls	"FAILS"	"FAILS"	AGREE
+arms/A2|8K/16K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A2|8K/16K/p9ii_criteria/successes	2	2	AGREE
+arms/A2|8K/16K/p9ii_criteria/failures	18	18	AGREE
+arms/A2|8K/16K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A2|8K/16K/p9ii_criteria/draws_succeeded	0	0	AGREE
+arms/A2|8K/16K/p9ii_criteria/draws_failed	10	10	AGREE
+arms/A2|8K/16K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A2|8K/16K/p9ii_criteria/per_draw_bound	0.0	0.0	AGREE
+arms/A2|8K/16K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A2|8K/16K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A2|8K/16K/stable/median	0.8419189453125	0.8419189453125	AGREE
+arms/A2|8K/16K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A2|8K/16K/collapse_free/k	0	0	AGREE
+arms/A2|8K/16K/collapse_free/n	20	20	AGREE
+arms/A2|8K/16K/categories/never collapsed and separated	0	0	AGREE
+arms/A2|8K/16K/categories/never collapsed, not separated	0	0	AGREE
+arms/A2|8K/16K/categories/collapsed and recovered	20	20	AGREE
+arms/A2|8K/16K/categories/collapsed and not recovered	0	0	AGREE
+arms/A2|8K/16K/information_bits/median	4.1421334460333075	4.1421334460333075	AGREE
+arms/A2|8K/16K/failed_conditions	{"1/0": [1, 4], "1/1": [1, 4], "2/0": [4], "2/1": [4], "3/0": [1, 4], "3/1": [1, 4], "4/1": [4], "5/1": [4], "6/0": [1, 4], "6/1": [4], "7/0": [1, 4], "7/1": [4], "8/0": [1, 4], "8/1": [4], "9/0": [1, 4], "9/1": [4], "10/0": [4], "10/1": [4]}	{"1/0": [1, 4], "1/1": [1, 4], "10/0": [4], "10/1": [4], "2/0": [4], "2/1": [4], "3/0": [1, 4], "3/1": [1, 4], "4/1": [4], "5/1": [4], "6/0": [1, 4], "6/1": [4], "7/0": [1, 4], "7/1": [4], "8/0": [1, 4], "8/1": [4], "9/0": [1, 4], "9/1": [4]}	AGREE
+arms/A2|8K/16K/sustained/cells_with_first_success	10	10	AGREE
+arms/A2|8K/16K/sustained/sustained	10	10	AGREE
+arms/A2|8K/16K/lm/flagged	0	0	AGREE
+arms/A2|8K/16K/class_at_u	"FAILS"	"FAILS"	AGREE
+arms/A2|8K/16K/address_recall/median	0.00286865234375	0.00286865234375	AGREE
+arms/A2|8K/16K/address_recall/label	null	null	AGREE
+arms/A2|8K/16K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+arms/A2|8K/16K/consistency/label	"SINGLE-STUDY EVIDENCE"	"SINGLE-STUDY EVIDENCE"	AGREE
+arms/A2|8K/16K/meets	false	false	AGREE
+arms/A2|8K/16K/p9ii_class	null	null	AGREE
+arms/A2|8K/16K/pooled/available	false	false	AGREE
+arms/A2|8K/16K/dense/absent	null	null	AGREE
+arms/A5-D|2K/4K/s0/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A5-D|2K/4K/s0/evaluated	20	20	AGREE
+arms/A5-D|2K/4K/s0/successes	20	20	AGREE
+arms/A5-D|2K/4K/s0/failures	0	0	AGREE
+arms/A5-D|2K/4K/s0/draws_evaluated	10	10	AGREE
+arms/A5-D|2K/4K/s0/draws_succeeded	10	10	AGREE
+arms/A5-D|2K/4K/s0/draws_failed	0	0	AGREE
+arms/A5-D|2K/4K/s0/draws_not_evaluated	0	0	AGREE
+arms/A5-D|2K/4K/s0/per_draw_bound	0.7411344491069477	0.7411344491069478	AGREE
+arms/A5-D|2K/4K/s0/lm_flagged_cells	0	0	AGREE
+arms/A5-D|2K/4K/s0/lm_reduced	false	false	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/successes	20	20	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/failures	0	0	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/draws_succeeded	10	10	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/draws_failed	0	0	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/per_draw_bound	0.7411344491069477	0.7411344491069478	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A5-D|2K/4K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A5-D|2K/4K/stable/median	0.915771484375	0.915771484375	AGREE
+arms/A5-D|2K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A5-D|2K/4K/collapse_free/k	20	20	AGREE
+arms/A5-D|2K/4K/collapse_free/n	20	20	AGREE
+arms/A5-D|2K/4K/categories/never collapsed and separated	20	20	AGREE
+arms/A5-D|2K/4K/categories/never collapsed, not separated	0	0	AGREE
+arms/A5-D|2K/4K/categories/collapsed and recovered	0	0	AGREE
+arms/A5-D|2K/4K/categories/collapsed and not recovered	0	0	AGREE
+arms/A5-D|2K/4K/information_bits/median	4.983988098944419	4.983988098944419	AGREE
+arms/A5-D|2K/4K/failed_conditions	{}	{}	AGREE
+arms/A5-D|2K/4K/sustained/cells_with_first_success	20	20	AGREE
+arms/A5-D|2K/4K/sustained/sustained	20	20	AGREE
+arms/A5-D|2K/4K/lm/flagged	0	0	AGREE
+arms/A5-D|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A5-D|2K/4K/consistency/label	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+arms/A5-D|2K/4K/meets	true	true	AGREE
+arms/A5-D|2K/4K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+arms/A5-D|2K/4K/pooled/successes	18	18	AGREE
+arms/A5-D|2K/4K/pooled/draws	18	18	AGREE
+arms/A5-D|2K/4K/pooled/bound	null	null	AGREE
+arms/A5-D|2K/4K/consistency/pooled_failed	0	0	AGREE
+arms/A5-D|2K/4K/consistency/pooled_n	18	18	AGREE
+arms/A5-D|2K/4K/dense/label	"DENSE AT CEILING"	"DENSE AT CEILING"	AGREE
+arms/A5-D|2K/4K/dense/median_ratio	1.001651893149222	1.001651893149222	AGREE
+arms/A5-D|2K/4K/dense/median_dense_accuracy	0.9974365234375	0.9974365234375	AGREE
+arms/A5-D|2K/4K/dense/draws_arm_higher	10	10	AGREE
+arms/A5-D|2K/4K/dense/differences/1	0.0008544921875	0.0008544921875	AGREE
+arms/A5-D|2K/4K/dense/differences/2	0.000244140625	0.000244140625	AGREE
+arms/A5-D|2K/4K/dense/differences/3	0.003662109375	0.003662109375	AGREE
+arms/A5-D|2K/4K/dense/differences/4	0.00244140625	0.00244140625	AGREE
+arms/A5-D|2K/4K/dense/differences/5	0.000732421875	0.000732421875	AGREE
+arms/A5-D|2K/4K/dense/differences/6	0.0018310546875	0.0018310546875	AGREE
+arms/A5-D|2K/4K/dense/differences/7	0.0028076171875	0.0028076171875	AGREE
+arms/A5-D|2K/4K/dense/differences/8	0.001953125	0.001953125	AGREE
+arms/A5-D|2K/4K/dense/differences/9	0.00146484375	0.00146484375	AGREE
+arms/A5-D|2K/4K/dense/differences/10	0.0003662109375	0.0003662109375	AGREE
+arms/A5-D|8K/16K/s0/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A5-D|8K/16K/s0/evaluated	20	20	AGREE
+arms/A5-D|8K/16K/s0/successes	20	20	AGREE
+arms/A5-D|8K/16K/s0/failures	0	0	AGREE
+arms/A5-D|8K/16K/s0/draws_evaluated	10	10	AGREE
+arms/A5-D|8K/16K/s0/draws_succeeded	10	10	AGREE
+arms/A5-D|8K/16K/s0/draws_failed	0	0	AGREE
+arms/A5-D|8K/16K/s0/draws_not_evaluated	0	0	AGREE
+arms/A5-D|8K/16K/s0/per_draw_bound	0.7411344491069477	0.7411344491069478	AGREE
+arms/A5-D|8K/16K/s0/lm_flagged_cells	0	0	AGREE
+arms/A5-D|8K/16K/s0/lm_reduced	false	false	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/cls	"RELIABLE"	"RELIABLE"	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/evaluated	20	20	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/successes	20	20	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/failures	0	0	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/draws_succeeded	10	10	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/draws_failed	0	0	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/per_draw_bound	0.7411344491069477	0.7411344491069478	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A5-D|8K/16K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A5-D|8K/16K/stable/median	0.87066650390625	0.87066650390625	AGREE
+arms/A5-D|8K/16K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A5-D|8K/16K/collapse_free/k	20	20	AGREE
+arms/A5-D|8K/16K/collapse_free/n	20	20	AGREE
+arms/A5-D|8K/16K/categories/never collapsed and separated	20	20	AGREE
+arms/A5-D|8K/16K/categories/never collapsed, not separated	0	0	AGREE
+arms/A5-D|8K/16K/categories/collapsed and recovered	0	0	AGREE
+arms/A5-D|8K/16K/categories/collapsed and not recovered	0	0	AGREE
+arms/A5-D|8K/16K/information_bits/median	4.979489610529498	4.979489610529498	AGREE
+arms/A5-D|8K/16K/failed_conditions	{}	{}	AGREE
+arms/A5-D|8K/16K/sustained/cells_with_first_success	20	20	AGREE
+arms/A5-D|8K/16K/sustained/sustained	20	20	AGREE
+arms/A5-D|8K/16K/lm/flagged	0	0	AGREE
+arms/A5-D|8K/16K/class_at_u	"UNRELIABLE"	"UNRELIABLE"	AGREE
+arms/A5-D|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+arms/A5-D|8K/16K/consistency/label	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+arms/A5-D|8K/16K/meets	true	true	AGREE
+arms/A5-D|8K/16K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+arms/A5-D|8K/16K/pooled/successes	14	14	AGREE
+arms/A5-D|8K/16K/pooled/draws	14	14	AGREE
+arms/A5-D|8K/16K/pooled/bound	null	null	AGREE
+arms/A5-D|8K/16K/consistency/pooled_failed	0	0	AGREE
+arms/A5-D|8K/16K/consistency/pooled_n	14	14	AGREE
+arms/A5-D|8K/16K/dense/label	"DENSE AT CEILING"	"DENSE AT CEILING"	AGREE
+arms/A5-D|8K/16K/dense/median_ratio	1.0247182372414154	1.0247182372414154	AGREE
+arms/A5-D|8K/16K/dense/median_dense_accuracy	0.9747314453125	0.9747314453125	AGREE
+arms/A5-D|8K/16K/dense/draws_arm_higher	10	10	AGREE
+arms/A5-D|8K/16K/dense/differences/1	0.021240234375	0.021240234375	AGREE
+arms/A5-D|8K/16K/dense/differences/2	0.021209716796875	0.021209716796875	AGREE
+arms/A5-D|8K/16K/dense/differences/3	0.0263671875	0.0263671875	AGREE
+arms/A5-D|8K/16K/dense/differences/4	0.029998779296875	0.029998779296875	AGREE
+arms/A5-D|8K/16K/dense/differences/5	0.024169921875	0.024169921875	AGREE
+arms/A5-D|8K/16K/dense/differences/6	0.026153564453125	0.026153564453125	AGREE
+arms/A5-D|8K/16K/dense/differences/7	0.023895263671875	0.023895263671875	AGREE
+arms/A5-D|8K/16K/dense/differences/8	0.025054931640625	0.025054931640625	AGREE
+arms/A5-D|8K/16K/dense/differences/9	0.023040771484375	0.023040771484375	AGREE
+arms/A5-D|8K/16K/dense/differences/10	0.024017333984375	0.024017333984375	AGREE
+arms/A5-D|8K/4K/s0/cls	"FAILS"	"FAILS"	AGREE
+arms/A5-D|8K/4K/s0/evaluated	10	10	AGREE
+arms/A5-D|8K/4K/s0/successes	1	1	AGREE
+arms/A5-D|8K/4K/s0/failures	9	9	AGREE
+arms/A5-D|8K/4K/s0/draws_evaluated	10	10	AGREE
+arms/A5-D|8K/4K/s0/draws_succeeded	1	1	AGREE
+arms/A5-D|8K/4K/s0/draws_failed	9	9	AGREE
+arms/A5-D|8K/4K/s0/draws_not_evaluated	0	0	AGREE
+arms/A5-D|8K/4K/s0/per_draw_bound	0.005116196891823703	0.005116196891823703	AGREE
+arms/A5-D|8K/4K/s0/lm_flagged_cells	0	0	AGREE
+arms/A5-D|8K/4K/s0/lm_reduced	false	false	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/cls	"FAILS"	"FAILS"	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/evaluated	10	10	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/successes	1	1	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/failures	9	9	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/draws_evaluated	10	10	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/draws_succeeded	1	1	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/draws_failed	9	9	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/draws_not_evaluated	0	0	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/per_draw_bound	0.005116196891823703	0.005116196891823703	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/lm_flagged_cells	0	0	AGREE
+arms/A5-D|8K/4K/p9ii_criteria/lm_reduced	false	false	AGREE
+arms/A5-D|8K/4K/stable/median	0.86346435546875	0.86346435546875	AGREE
+arms/A5-D|8K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+arms/A5-D|8K/4K/collapse_free/k	10	10	AGREE
+arms/A5-D|8K/4K/collapse_free/n	10	10	AGREE
+arms/A5-D|8K/4K/categories/never collapsed and separated	10	10	AGREE
+arms/A5-D|8K/4K/categories/never collapsed, not separated	0	0	AGREE
+arms/A5-D|8K/4K/categories/collapsed and recovered	0	0	AGREE
+arms/A5-D|8K/4K/categories/collapsed and not recovered	0	0	AGREE
+arms/A5-D|8K/4K/information_bits/median	4.448089672192844	4.448089672192844	AGREE
+arms/A5-D|8K/4K/failed_conditions	{"1/0": [4], "2/1": [4], "3/0": [4], "4/1": [4], "5/0": [4], "6/1": [4], "8/1": [4], "9/0": [4], "10/1": [4]}	{"1/0": [4], "10/1": [4], "2/1": [4], "3/0": [4], "4/1": [4], "5/0": [4], "6/1": [4], "8/1": [4], "9/0": [4]}	AGREE
+arms/A5-D|8K/4K/sustained/cells_with_first_success	10	10	AGREE
+arms/A5-D|8K/4K/sustained/sustained	10	10	AGREE
+arms/A5-D|8K/4K/lm/flagged	0	0	AGREE
+arms/A5-D|8K/4K/class_at_u	"FAILS"	"FAILS"	AGREE
+arms/A5-D|8K/4K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+arms/A5-D|8K/4K/pooled/available	false	false	AGREE
+arms/A5-D|8K/4K/dense/absent	null	null	AGREE
+paired/A1|2K/4K/s0/d	11	11	AGREE
+paired/A1|2K/4K/s0/x_only	11	11	AGREE
+paired/A1|2K/4K/s0/a0_only	0	0	AGREE
+paired/A1|2K/4K/s0/x_successes	20	20	AGREE
+paired/A1|2K/4K/s0/a0_successes	9	9	AGREE
+paired/A1|2K/4K/s0/p_value	0.0009765625	0.0009765625	AGREE
+paired/A1|2K/4K/s0/label	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+paired/A1|2K/4K/p9ii/d	11	11	AGREE
+paired/A1|2K/4K/p9ii/x_only	11	11	AGREE
+paired/A1|2K/4K/p9ii/a0_only	0	0	AGREE
+paired/A1|2K/4K/p9ii/x_successes	20	20	AGREE
+paired/A1|2K/4K/p9ii/a0_successes	9	9	AGREE
+paired/A1|2K/4K/p9ii/p_value	0.0009765625	0.0009765625	AGREE
+paired/A1|2K/4K/p9ii/label	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+paired/A1|8K/16K/s0/d	-4	-4	AGREE
+paired/A1|8K/16K/s0/x_only	1	1	AGREE
+paired/A1|8K/16K/s0/a0_only	5	5	AGREE
+paired/A1|8K/16K/s0/x_successes	15	15	AGREE
+paired/A1|8K/16K/s0/a0_successes	19	19	AGREE
+paired/A1|8K/16K/s0/p_value	0.21875	0.21875	AGREE
+paired/A1|8K/16K/s0/label	"HARMS"	"HARMS"	AGREE
+paired/A1|8K/16K/p9ii/d	-4	-4	AGREE
+paired/A1|8K/16K/p9ii/x_only	1	1	AGREE
+paired/A1|8K/16K/p9ii/a0_only	5	5	AGREE
+paired/A1|8K/16K/p9ii/x_successes	15	15	AGREE
+paired/A1|8K/16K/p9ii/a0_successes	19	19	AGREE
+paired/A1|8K/16K/p9ii/p_value	0.21875	0.21875	AGREE
+paired/A1|8K/16K/p9ii/label	"HARMS"	"HARMS"	AGREE
+paired/A2|2K/4K/s0/d	-9	-9	AGREE
+paired/A2|2K/4K/s0/x_only	0	0	AGREE
+paired/A2|2K/4K/s0/a0_only	9	9	AGREE
+paired/A2|2K/4K/s0/x_successes	0	0	AGREE
+paired/A2|2K/4K/s0/a0_successes	9	9	AGREE
+paired/A2|2K/4K/s0/p_value	0.00390625	0.00390625	AGREE
+paired/A2|2K/4K/s0/label	"HARMS"	"HARMS"	AGREE
+paired/A2|2K/4K/p9ii/d	-9	-9	AGREE
+paired/A2|2K/4K/p9ii/x_only	0	0	AGREE
+paired/A2|2K/4K/p9ii/a0_only	9	9	AGREE
+paired/A2|2K/4K/p9ii/x_successes	0	0	AGREE
+paired/A2|2K/4K/p9ii/a0_successes	9	9	AGREE
+paired/A2|2K/4K/p9ii/p_value	0.00390625	0.00390625	AGREE
+paired/A2|2K/4K/p9ii/label	"HARMS"	"HARMS"	AGREE
+paired/A2|8K/16K/s0/d	-17	-17	AGREE
+paired/A2|8K/16K/s0/x_only	0	0	AGREE
+paired/A2|8K/16K/s0/a0_only	17	17	AGREE
+paired/A2|8K/16K/s0/x_successes	2	2	AGREE
+paired/A2|8K/16K/s0/a0_successes	19	19	AGREE
+paired/A2|8K/16K/s0/p_value	1.52587890625e-05	1.52587890625e-05	AGREE
+paired/A2|8K/16K/s0/label	"HARMS"	"HARMS"	AGREE
+paired/A2|8K/16K/p9ii/d	-17	-17	AGREE
+paired/A2|8K/16K/p9ii/x_only	0	0	AGREE
+paired/A2|8K/16K/p9ii/a0_only	17	17	AGREE
+paired/A2|8K/16K/p9ii/x_successes	2	2	AGREE
+paired/A2|8K/16K/p9ii/a0_successes	19	19	AGREE
+paired/A2|8K/16K/p9ii/p_value	1.52587890625e-05	1.52587890625e-05	AGREE
+paired/A2|8K/16K/p9ii/label	"HARMS"	"HARMS"	AGREE
+paired/A5-D|2K/4K/s0/d	11	11	AGREE
+paired/A5-D|2K/4K/s0/x_only	11	11	AGREE
+paired/A5-D|2K/4K/s0/a0_only	0	0	AGREE
+paired/A5-D|2K/4K/s0/x_successes	20	20	AGREE
+paired/A5-D|2K/4K/s0/a0_successes	9	9	AGREE
+paired/A5-D|2K/4K/s0/p_value	0.0009765625	0.0009765625	AGREE
+paired/A5-D|2K/4K/s0/label	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+paired/A5-D|2K/4K/p9ii/d	11	11	AGREE
+paired/A5-D|2K/4K/p9ii/x_only	11	11	AGREE
+paired/A5-D|2K/4K/p9ii/a0_only	0	0	AGREE
+paired/A5-D|2K/4K/p9ii/x_successes	20	20	AGREE
+paired/A5-D|2K/4K/p9ii/a0_successes	9	9	AGREE
+paired/A5-D|2K/4K/p9ii/p_value	0.0009765625	0.0009765625	AGREE
+paired/A5-D|2K/4K/p9ii/label	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+paired/A5-D|8K/16K/s0/d	1	1	AGREE
+paired/A5-D|8K/16K/s0/x_only	1	1	AGREE
+paired/A5-D|8K/16K/s0/a0_only	0	0	AGREE
+paired/A5-D|8K/16K/s0/x_successes	20	20	AGREE
+paired/A5-D|8K/16K/s0/a0_successes	19	19	AGREE
+paired/A5-D|8K/16K/s0/p_value	1.0	1.0	AGREE
+paired/A5-D|8K/16K/s0/label	"NOT DISTINGUISHED FROM A0"	"NOT DISTINGUISHED FROM A0"	AGREE
+paired/A5-D|8K/16K/p9ii/d	1	1	AGREE
+paired/A5-D|8K/16K/p9ii/x_only	1	1	AGREE
+paired/A5-D|8K/16K/p9ii/a0_only	0	0	AGREE
+paired/A5-D|8K/16K/p9ii/x_successes	20	20	AGREE
+paired/A5-D|8K/16K/p9ii/a0_successes	19	19	AGREE
+paired/A5-D|8K/16K/p9ii/p_value	1.0	1.0	AGREE
+paired/A5-D|8K/16K/p9ii/label	"NOT DISTINGUISHED FROM A0"	"NOT DISTINGUISHED FROM A0"	AGREE
+RESULTS.md/d(A2,A1)/2K/4K/d	-20	-20	AGREE
+RESULTS.md/d(A2,A1)/2K/4K/p(3dp)	"0.000"	"0.000"	AGREE
+RESULTS.md/d(A2,A1)/8K/16K/d	-13	-13	AGREE
+RESULTS.md/d(A2,A1)/8K/16K/p(3dp)	"0.000"	"0.000"	AGREE
+selection/candidate	"A5-D"	"A5-D"	AGREE
+selection/also_qualifies	["ALSO QUALIFIES: A1 (4,096 ONLY)"]	["ALSO QUALIFIES: A1 (4,096 ONLY)"]	AGREE
+selection/qualified_4096_only	null	null	AGREE
+selection/per_arm/A0/qualifies_at	["8K/16K"]	["8K/16K"]	AGREE
+selection/per_arm/A1/qualifies_at	["2K/4K"]	["2K/4K"]	AGREE
+selection/per_arm/A2/qualifies_at	[]	[]	AGREE
+selection/per_arm/A5-D/qualifies_at	["2K/4K", "8K/16K"]	["2K/4K", "8K/16K"]	AGREE
+outcome/row	4	4	AGREE
+outcome/label	"ADDRESSING-QUALIFIED (4,096 AND 16,384)"	"ADDRESSING-QUALIFIED (4,096 AND 16,384)"	AGREE
+outcome/arm	"A5-D"	"A5-D"	AGREE
+overload	"OVERLOAD NOT QUALIFIED"	"OVERLOAD NOT QUALIFIED"	AGREE
+record_length/label	"RECORD-LENGTH-FREE VARIANT: DOES NOT PASS (not evidence that the record length is required)"	"RECORD-LENGTH-FREE VARIANT: DOES NOT PASS (not evidence that the record length is required)"	AGREE
+wx/2K/4K/class/cls	"FAILS"	"FAILS"	AGREE
+wx/2K/4K/class/evaluated	10	10	AGREE
+wx/2K/4K/class/successes	2	2	AGREE
+wx/2K/4K/class/failures	8	8	AGREE
+wx/2K/4K/class/draws_evaluated	10	10	AGREE
+wx/2K/4K/class/draws_succeeded	2	2	AGREE
+wx/2K/4K/class/per_draw_bound	0.03677143788746508	0.03677143788746508	AGREE
+wx/2K/4K/class/lm_flagged_cells	0	0	AGREE
+wx/2K/4K/stable/median	0.839599609375	0.839599609375	AGREE
+wx/2K/4K/stable/label	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+wx/2K/4K/auc_median	0.9292144601995295	0.9292144601995295	AGREE
+wx/2K/4K/bits_median	3.22019517477352	3.22019517477352	AGREE
+wx/2K/4K/meets	false	false	AGREE
+wx/2K/4K/failed_conditions	{"1/0": [1], "2/1": [1], "3/0": [1], "4/1": [1], "5/0": [1], "6/1": [1, 4], "9/0": [1], "10/1": [1, 4]}	{"1/0": [1], "10/1": [1, 4], "2/1": [1], "3/0": [1], "4/1": [1], "5/0": [1], "6/1": [1, 4], "9/0": [1]}	AGREE
+wx/8K/16K/class/cls	"FAILS"	"FAILS"	AGREE
+wx/8K/16K/class/evaluated	10	10	AGREE
+wx/8K/16K/class/successes	0	0	AGREE
+wx/8K/16K/class/failures	10	10	AGREE
+wx/8K/16K/class/draws_evaluated	10	10	AGREE
+wx/8K/16K/class/draws_succeeded	0	0	AGREE
+wx/8K/16K/class/per_draw_bound	0.0	0.0	AGREE
+wx/8K/16K/class/lm_flagged_cells	0	0	AGREE
+wx/8K/16K/stable/median	0.32745361328125	0.32745361328125	AGREE
+wx/8K/16K/stable/label	null	null	AGREE
+wx/8K/16K/auc_median	0.8433757305145264	0.8433757305145264	AGREE
+wx/8K/16K/bits_median	1.7075786729479199	1.7075786729479199	AGREE
+wx/8K/16K/meets	false	false	AGREE
+wx/8K/16K/failed_conditions	{"1/0": [1, 4], "2/1": [1, 4], "3/0": [1, 4], "4/1": [1, 4], "5/0": [1, 4], "6/1": [1, 4], "7/0": [1, 4], "8/1": [1, 4], "9/0": [1, 4], "10/1": [1, 4]}	{"1/0": [1, 4], "10/1": [1, 4], "2/1": [1, 4], "3/0": [1, 4], "4/1": [1, 4], "5/0": [1, 4], "6/1": [1, 4], "7/0": [1, 4], "8/1": [1, 4], "9/0": [1, 4]}	AGREE
+probe/successes	3	3	AGREE
+probe/draws	3	3	AGREE
+probe/bound	0.3684031498640387	0.36840314986403866	AGREE
+probe/a6_evaluated	[true, true, true]	[true, true, true]	AGREE
+hypotheses/H20-A	"supported"	"supported"	AGREE
+hypotheses/H20-B	"CONTRADICTED"	"CONTRADICTED"	AGREE
+hypotheses/H20-C	"CONTRADICTED"	"CONTRADICTED"	AGREE
+hypotheses/H20-D	"not supported"	"not supported"	AGREE
+hypotheses/H20-Q	"supported"	"supported"	AGREE
+hypotheses/H20-O	"not supported"	"not supported"	AGREE
+hypotheses/H20-L	"not supported"	"not supported"	AGREE
+hypotheses/H20-S	"supported"	"supported"	AGREE
+hypotheses/H20-R (A0, 2K/4K)	"supported"	"supported"	AGREE
+hypotheses/H20-R (A0, 8K/16K)	"supported"	"supported"	AGREE
+hypotheses/H20-R (A1, 2K/4K)	"supported"	"supported"	AGREE
+hypotheses/H20-R (A1, 8K/16K)	"supported"	"supported"	AGREE
+hypotheses/H20-R (A2, 2K/4K)	"supported"	"supported"	AGREE
+hypotheses/H20-R (A2, 8K/16K)	"not read"	"not read"	AGREE
+hypotheses/H20-R (A5-D, 2K/4K)	"supported"	"supported"	AGREE
+hypotheses/H20-R (A5-D, 8K/16K)	"supported"	"supported"	AGREE
+a0_failed_cells_8k16k	1	1	AGREE
+cut3	false	false	AGREE
+a6/2K/4K|1/A	0.99951171875	0.99951171875	AGREE
+a6/2K/4K|1/B	1.0	1.0	AGREE
+a6/2K/4K|1/evaluated	true	true	AGREE
+a6/2K/4K|1/lm_r	0.1534891144890687	0.1534891144890687	AGREE
+a6/2K/4K|2/A	1.0	1.0	AGREE
+a6/2K/4K|2/B	1.0	1.0	AGREE
+a6/2K/4K|2/evaluated	true	true	AGREE
+a6/2K/4K|2/lm_r	0.14292577677353863	0.14292577677353863	AGREE
+a6/2K/4K|3/A	1.0	1.0	AGREE
+a6/2K/4K|3/B	1.0	1.0	AGREE
+a6/2K/4K|3/evaluated	true	true	AGREE
+a6/2K/4K|3/lm_r	0.1620890767715382	0.1620890767715382	AGREE
+a6/2K/4K|4/A	1.0	1.0	AGREE
+a6/2K/4K|4/B	1.0	1.0	AGREE
+a6/2K/4K|4/evaluated	true	true	AGREE
+a6/2K/4K|4/lm_r	0.1511061388230154	0.1511061388230154	AGREE
+a6/2K/4K|5/A	1.0	1.0	AGREE
+a6/2K/4K|5/B	1.0	1.0	AGREE
+a6/2K/4K|5/evaluated	true	true	AGREE
+a6/2K/4K|5/lm_r	0.1527166116673258	0.1527166116673258	AGREE
+a6/2K/4K|6/A	1.0	1.0	AGREE
+a6/2K/4K|6/B	1.0	1.0	AGREE
+a6/2K/4K|6/evaluated	true	true	AGREE
+a6/2K/4K|6/lm_r	0.14397355008384838	0.14397355008384838	AGREE
+a6/2K/4K|7/A	1.0	1.0	AGREE
+a6/2K/4K|7/B	1.0	1.0	AGREE
+a6/2K/4K|7/evaluated	true	true	AGREE
+a6/2K/4K|7/lm_r	0.147724728090715	0.147724728090715	AGREE
+a6/2K/4K|8/A	1.0	1.0	AGREE
+a6/2K/4K|8/B	1.0	1.0	AGREE
+a6/2K/4K|8/evaluated	true	true	AGREE
+a6/2K/4K|8/lm_r	0.15222673028219813	0.15222673028219813	AGREE
+a6/2K/4K|9/A	1.0	1.0	AGREE
+a6/2K/4K|9/B	1.0	1.0	AGREE
+a6/2K/4K|9/evaluated	true	true	AGREE
+a6/2K/4K|9/lm_r	0.14832052908965493	0.14832052908965493	AGREE
+a6/2K/4K|10/A	1.0	1.0	AGREE
+a6/2K/4K|10/B	1.0	1.0	AGREE
+a6/2K/4K|10/evaluated	true	true	AGREE
+a6/2K/4K|10/lm_r	0.14877903416762514	0.14877903416762514	AGREE
+a6/8K/16K|1/A	1.0	1.0	AGREE
+a6/8K/16K|1/B	1.0	1.0	AGREE
+a6/8K/16K|1/evaluated	true	true	AGREE
+a6/8K/16K|1/lm_r	0.16007589375001846	0.16007589375001846	AGREE
+a6/8K/16K|2/A	1.0	1.0	AGREE
+a6/8K/16K|2/B	1.0	1.0	AGREE
+a6/8K/16K|2/evaluated	true	true	AGREE
+a6/8K/16K|2/lm_r	0.15768345508613238	0.15768345508613238	AGREE
+a6/8K/16K|3/A	1.0	1.0	AGREE
+a6/8K/16K|3/B	1.0	1.0	AGREE
+a6/8K/16K|3/evaluated	true	true	AGREE
+a6/8K/16K|3/lm_r	0.15683658020501445	0.15683658020501445	AGREE
+a6/8K/16K|4/A	1.0	1.0	AGREE
+a6/8K/16K|4/B	1.0	1.0	AGREE
+a6/8K/16K|4/evaluated	true	true	AGREE
+a6/8K/16K|4/lm_r	0.15917940155519675	0.15917940155519675	AGREE
+a6/8K/16K|5/A	1.0	1.0	AGREE
+a6/8K/16K|5/B	1.0	1.0	AGREE
+a6/8K/16K|5/evaluated	true	true	AGREE
+a6/8K/16K|5/lm_r	0.165125297385172	0.165125297385172	AGREE
+a6/8K/16K|6/A	1.0	1.0	AGREE
+a6/8K/16K|6/B	1.0	1.0	AGREE
+a6/8K/16K|6/evaluated	true	true	AGREE
+a6/8K/16K|6/lm_r	0.15580680688656096	0.15580680688656096	AGREE
+a6/8K/16K|7/A	1.0	1.0	AGREE
+a6/8K/16K|7/B	1.0	1.0	AGREE
+a6/8K/16K|7/evaluated	true	true	AGREE
+a6/8K/16K|7/lm_r	0.15640317870976692	0.15640317870976692	AGREE
+a6/8K/16K|8/A	1.0	1.0	AGREE
+a6/8K/16K|8/B	1.0	1.0	AGREE
+a6/8K/16K|8/evaluated	true	true	AGREE
+a6/8K/16K|8/lm_r	0.15710184858394166	0.15710184858394166	AGREE
+a6/8K/16K|9/A	1.0	1.0	AGREE
+a6/8K/16K|9/B	1.0	1.0	AGREE
+a6/8K/16K|9/evaluated	true	true	AGREE
+a6/8K/16K|9/lm_r	0.15952898067822016	0.15952898067822016	AGREE
+a6/8K/16K|10/A	1.0	1.0	AGREE
+a6/8K/16K|10/B	1.0	1.0	AGREE
+a6/8K/16K|10/evaluated	true	true	AGREE
+a6/8K/16K|10/lm_r	0.1559121493336153	0.1559121493336153	AGREE
+a6/8K/4K|1/A	0.9947509765625	0.9947509765625	AGREE
+a6/8K/4K|1/B	0.9952392578125	0.9952392578125	AGREE
+a6/8K/4K|1/evaluated	true	true	AGREE
+a6/8K/4K|1/lm_r	0.15974111800296142	0.15974111800296142	AGREE
+a6/8K/4K|2/A	0.99462890625	0.99462890625	AGREE
+a6/8K/4K|2/B	0.993896484375	0.993896484375	AGREE
+a6/8K/4K|2/evaluated	true	true	AGREE
+a6/8K/4K|2/lm_r	0.15807622657862053	0.15807622657862053	AGREE
+a6/8K/4K|3/A	0.994384765625	0.994384765625	AGREE
+a6/8K/4K|3/B	0.99462890625	0.99462890625	AGREE
+a6/8K/4K|3/evaluated	true	true	AGREE
+a6/8K/4K|3/lm_r	0.16080164606437156	0.16080164606437156	AGREE
+a6/8K/4K|4/A	0.994873046875	0.994873046875	AGREE
+a6/8K/4K|4/B	0.9954833984375	0.9954833984375	AGREE
+a6/8K/4K|4/evaluated	true	true	AGREE
+a6/8K/4K|4/lm_r	0.15676205592583517	0.15676205592583517	AGREE
+a6/8K/4K|5/A	0.9951171875	0.9951171875	AGREE
+a6/8K/4K|5/B	0.9954833984375	0.9954833984375	AGREE
+a6/8K/4K|5/evaluated	true	true	AGREE
+a6/8K/4K|5/lm_r	0.1653049548091748	0.1653049548091748	AGREE
+a6/8K/4K|6/A	0.99658203125	0.99658203125	AGREE
+a6/8K/4K|6/B	0.99609375	0.99609375	AGREE
+a6/8K/4K|6/evaluated	true	true	AGREE
+a6/8K/4K|6/lm_r	0.16006299312160566	0.16006299312160566	AGREE
+a6/8K/4K|7/A	0.99365234375	0.99365234375	AGREE
+a6/8K/4K|7/B	0.993408203125	0.993408203125	AGREE
+a6/8K/4K|7/evaluated	true	true	AGREE
+a6/8K/4K|7/lm_r	0.15685891211880085	0.15685891211880085	AGREE
+a6/8K/4K|8/A	0.9949951171875	0.9949951171875	AGREE
+a6/8K/4K|8/B	0.9954833984375	0.9954833984375	AGREE
+a6/8K/4K|8/evaluated	true	true	AGREE
+a6/8K/4K|8/lm_r	0.15945436126166318	0.15945436126166318	AGREE
+a6/8K/4K|9/A	0.9959716796875	0.9959716796875	AGREE
+a6/8K/4K|9/B	0.9954833984375	0.9954833984375	AGREE
+a6/8K/4K|9/evaluated	true	true	AGREE
+a6/8K/4K|9/lm_r	0.16000364642541157	0.16000364642541157	AGREE
+a6/8K/4K|10/A	0.994384765625	0.994384765625	AGREE
+a6/8K/4K|10/B	0.9947509765625	0.9947509765625	AGREE
+a6/8K/4K|10/evaluated	true	true	AGREE
+a6/8K/4K|10/lm_r	0.16040316632922286	0.16040316632922286	AGREE
+csv/A0|2K/4K/s0_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+csv/A0|2K/4K/p9_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+csv/A0|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A0|2K/4K/consistency	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+csv/A0|2K/4K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A0|2K/4K/evaluated	20	20	AGREE
+csv/A0|2K/4K/successes	9	9	AGREE
+csv/A0|2K/4K/draws_evaluated	10	10	AGREE
+csv/A0|2K/4K/draws_succeeded	3	3	AGREE
+csv/A0|2K/4K/per_draw_bound	"0.087"	"0.087"	AGREE
+csv/A0|2K/4K/lm_reduced	"False"	"False"	AGREE
+csv/A0|2K/4K/meets	"False"	"False"	AGREE
+csv/A0|8K/16K/s0_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A0|8K/16K/p9_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A0|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A0|8K/16K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+csv/A0|8K/16K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A0|8K/16K/evaluated	20	20	AGREE
+csv/A0|8K/16K/successes	19	19	AGREE
+csv/A0|8K/16K/draws_evaluated	10	10	AGREE
+csv/A0|8K/16K/draws_succeeded	9	9	AGREE
+csv/A0|8K/16K/per_draw_bound	"0.606"	"0.606"	AGREE
+csv/A0|8K/16K/lm_reduced	"False"	"False"	AGREE
+csv/A0|8K/16K/meets	"True"	"True"	AGREE
+csv/A0|8K/4K/s0_class	"FAILS"	"FAILS"	AGREE
+csv/A0|8K/4K/p9_class	"FAILS"	"FAILS"	AGREE
+csv/A0|8K/4K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+csv/A0|8K/4K/consistency	""	""	AGREE
+csv/A0|8K/4K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A0|8K/4K/evaluated	10	10	AGREE
+csv/A0|8K/4K/successes	0	0	AGREE
+csv/A0|8K/4K/draws_evaluated	10	10	AGREE
+csv/A0|8K/4K/draws_succeeded	0	0	AGREE
+csv/A0|8K/4K/per_draw_bound	"0.000"	"0.000"	AGREE
+csv/A0|8K/4K/lm_reduced	"False"	"False"	AGREE
+csv/A0|8K/4K/meets	"False"	"False"	AGREE
+csv/A1|2K/4K/s0_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A1|2K/4K/p9_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A1|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A1|2K/4K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+csv/A1|2K/4K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A1|2K/4K/evaluated	20	20	AGREE
+csv/A1|2K/4K/successes	20	20	AGREE
+csv/A1|2K/4K/draws_evaluated	10	10	AGREE
+csv/A1|2K/4K/draws_succeeded	10	10	AGREE
+csv/A1|2K/4K/per_draw_bound	"0.741"	"0.741"	AGREE
+csv/A1|2K/4K/lm_reduced	"False"	"False"	AGREE
+csv/A1|2K/4K/meets	"True"	"True"	AGREE
+csv/A1|8K/16K/s0_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+csv/A1|8K/16K/p9_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+csv/A1|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A1|8K/16K/consistency	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+csv/A1|8K/16K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A1|8K/16K/evaluated	20	20	AGREE
+csv/A1|8K/16K/successes	15	15	AGREE
+csv/A1|8K/16K/draws_evaluated	10	10	AGREE
+csv/A1|8K/16K/draws_succeeded	5	5	AGREE
+csv/A1|8K/16K/per_draw_bound	"0.222"	"0.222"	AGREE
+csv/A1|8K/16K/lm_reduced	"False"	"False"	AGREE
+csv/A1|8K/16K/meets	"False"	"False"	AGREE
+csv/A2|2K/4K/s0_class	"FAILS"	"FAILS"	AGREE
+csv/A2|2K/4K/p9_class	"FAILS"	"FAILS"	AGREE
+csv/A2|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A2|2K/4K/consistency	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+csv/A2|2K/4K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A2|2K/4K/evaluated	20	20	AGREE
+csv/A2|2K/4K/successes	0	0	AGREE
+csv/A2|2K/4K/draws_evaluated	10	10	AGREE
+csv/A2|2K/4K/draws_succeeded	0	0	AGREE
+csv/A2|2K/4K/per_draw_bound	"0.000"	"0.000"	AGREE
+csv/A2|2K/4K/lm_reduced	"False"	"False"	AGREE
+csv/A2|2K/4K/meets	"False"	"False"	AGREE
+csv/A2|8K/16K/s0_class	"FAILS"	"FAILS"	AGREE
+csv/A2|8K/16K/p9_class	"FAILS"	"FAILS"	AGREE
+csv/A2|8K/16K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+csv/A2|8K/16K/consistency	"SINGLE-STUDY EVIDENCE"	"SINGLE-STUDY EVIDENCE"	AGREE
+csv/A2|8K/16K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A2|8K/16K/evaluated	20	20	AGREE
+csv/A2|8K/16K/successes	2	2	AGREE
+csv/A2|8K/16K/draws_evaluated	10	10	AGREE
+csv/A2|8K/16K/draws_succeeded	0	0	AGREE
+csv/A2|8K/16K/per_draw_bound	"0.000"	"0.000"	AGREE
+csv/A2|8K/16K/lm_reduced	"False"	"False"	AGREE
+csv/A2|8K/16K/meets	"False"	"False"	AGREE
+csv/A5-D|2K/4K/s0_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A5-D|2K/4K/p9_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A5-D|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A5-D|2K/4K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+csv/A5-D|2K/4K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A5-D|2K/4K/evaluated	20	20	AGREE
+csv/A5-D|2K/4K/successes	20	20	AGREE
+csv/A5-D|2K/4K/draws_evaluated	10	10	AGREE
+csv/A5-D|2K/4K/draws_succeeded	10	10	AGREE
+csv/A5-D|2K/4K/per_draw_bound	"0.741"	"0.741"	AGREE
+csv/A5-D|2K/4K/lm_reduced	"False"	"False"	AGREE
+csv/A5-D|2K/4K/meets	"True"	"True"	AGREE
+csv/A5-D|8K/16K/s0_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A5-D|8K/16K/p9_class	"RELIABLE"	"RELIABLE"	AGREE
+csv/A5-D|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+csv/A5-D|8K/16K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+csv/A5-D|8K/16K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A5-D|8K/16K/evaluated	20	20	AGREE
+csv/A5-D|8K/16K/successes	20	20	AGREE
+csv/A5-D|8K/16K/draws_evaluated	10	10	AGREE
+csv/A5-D|8K/16K/draws_succeeded	10	10	AGREE
+csv/A5-D|8K/16K/per_draw_bound	"0.741"	"0.741"	AGREE
+csv/A5-D|8K/16K/lm_reduced	"False"	"False"	AGREE
+csv/A5-D|8K/16K/meets	"True"	"True"	AGREE
+csv/A5-D|8K/4K/s0_class	"FAILS"	"FAILS"	AGREE
+csv/A5-D|8K/4K/p9_class	"FAILS"	"FAILS"	AGREE
+csv/A5-D|8K/4K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+csv/A5-D|8K/4K/consistency	""	""	AGREE
+csv/A5-D|8K/4K/address_stable	"ADDRESS STABLE"	"ADDRESS STABLE"	AGREE
+csv/A5-D|8K/4K/evaluated	10	10	AGREE
+csv/A5-D|8K/4K/successes	1	1	AGREE
+csv/A5-D|8K/4K/draws_evaluated	10	10	AGREE
+csv/A5-D|8K/4K/draws_succeeded	1	1	AGREE
+csv/A5-D|8K/4K/per_draw_bound	"0.005"	"0.005"	AGREE
+csv/A5-D|8K/4K/lm_reduced	"False"	"False"	AGREE
+csv/A5-D|8K/4K/meets	"False"	"False"	AGREE
+md/A0|2K/4K/s0	"UNRELIABLE (9/20 cells; 3/10 draws; per-draw bound 0.087)"	"UNRELIABLE (9/20 cells; 3/10 draws; per-draw bound 0.087)"	AGREE
+md/A0|2K/4K/p9crit	"UNRELIABLE (9/20 cells; 3/10 draws; per-draw bound 0.087)"	"UNRELIABLE (9/20 cells; 3/10 draws; per-draw bound 0.087)"	AGREE
+md/A0|2K/4K/p9ii_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+md/A0|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A0|2K/4K/consistency	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+md/A0|2K/4K/pooled	"5 of 18 draws succeeded (P9-II 2 of 8; S0 3 of 10); pooled per-draw bound 0.116"	"5 of 18 draws succeeded (P9-II 2 of 8; S0 3 of 10); pooled per-draw bound 0.116"	AGREE
+md/A0|2K/4K/stable	"ADDRESS STABLE (0.876)"	"ADDRESS STABLE (0.876)"	AGREE
+md/A0|2K/4K/collapse	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	AGREE
+md/A0|8K/16K/s0	"RELIABLE (19/20 cells; 9/10 draws; per-draw bound 0.606)"	"RELIABLE (19/20 cells; 9/10 draws; per-draw bound 0.606)"	AGREE
+md/A0|8K/16K/p9crit	"RELIABLE (19/20 cells; 9/10 draws; per-draw bound 0.606)"	"RELIABLE (19/20 cells; 9/10 draws; per-draw bound 0.606)"	AGREE
+md/A0|8K/16K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+md/A0|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A0|8K/16K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+md/A0|8K/16K/pooled	"13 of 14 draws succeeded (P9-II 4 of 4; S0 9 of 10); pooled per-draw bound 0.703"	"13 of 14 draws succeeded (P9-II 4 of 4; S0 9 of 10); pooled per-draw bound 0.703"	AGREE
+md/A0|8K/16K/stable	"ADDRESS STABLE (0.896)"	"ADDRESS STABLE (0.896)"	AGREE
+md/A0|8K/16K/collapse	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	AGREE
+md/A0|8K/4K/s0	"FAILS (0/10 cells; 0/10 draws; per-draw bound 0.000)"	"FAILS (0/10 cells; 0/10 draws; per-draw bound 0.000)"	AGREE
+md/A0|8K/4K/p9crit	"FAILS (0/10 cells; 0/10 draws; per-draw bound 0.000)"	"FAILS (0/10 cells; 0/10 draws; per-draw bound 0.000)"	AGREE
+md/A0|8K/4K/p9ii_class	"\u2014"	"\u2014"	AGREE
+md/A0|8K/4K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+md/A0|8K/4K/consistency	"\u2014"	"\u2014"	AGREE
+md/A0|8K/4K/stable	"ADDRESS STABLE (0.833)"	"ADDRESS STABLE (0.833)"	AGREE
+md/A0|8K/4K/collapse	"COLLAPSE-FREE: 0 of 10 counted cells never had a collapse onset"	"COLLAPSE-FREE: 0 of 10 counted cells never had a collapse onset"	AGREE
+md/A1|2K/4K/s0	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	AGREE
+md/A1|2K/4K/p9crit	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	AGREE
+md/A1|2K/4K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+md/A1|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A1|2K/4K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+md/A1|2K/4K/pooled	"18 of 18 draws succeeded (P9-II 8 of 8; S0 10 of 10); pooled per-draw bound 0.847"	"18 of 18 draws succeeded (P9-II 8 of 8; S0 10 of 10); pooled per-draw bound 0.847"	AGREE
+md/A1|2K/4K/stable	"ADDRESS STABLE (1.000)"	"ADDRESS STABLE (1.000)"	AGREE
+md/A1|2K/4K/collapse	"COLLAPSE-FREE: 3 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 3 of 20 counted cells never had a collapse onset"	AGREE
+md/A1|8K/16K/s0	"UNRELIABLE (15/20 cells; 5/10 draws; per-draw bound 0.222)"	"UNRELIABLE (15/20 cells; 5/10 draws; per-draw bound 0.222)"	AGREE
+md/A1|8K/16K/p9crit	"UNRELIABLE (15/20 cells; 5/10 draws; per-draw bound 0.222)"	"UNRELIABLE (15/20 cells; 5/10 draws; per-draw bound 0.222)"	AGREE
+md/A1|8K/16K/p9ii_class	"UNRELIABLE"	"UNRELIABLE"	AGREE
+md/A1|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A1|8K/16K/consistency	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+md/A1|8K/16K/pooled	"7 of 14 draws succeeded (P9-II 2 of 4; S0 5 of 10); pooled per-draw bound 0.264"	"7 of 14 draws succeeded (P9-II 2 of 4; S0 5 of 10); pooled per-draw bound 0.264"	AGREE
+md/A1|8K/16K/stable	"ADDRESS STABLE (0.999)"	"ADDRESS STABLE (0.999)"	AGREE
+md/A1|8K/16K/collapse	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	AGREE
+md/A2|2K/4K/s0	"FAILS (0/20 cells; 0/10 draws; per-draw bound 0.000)"	"FAILS (0/20 cells; 0/10 draws; per-draw bound 0.000)"	AGREE
+md/A2|2K/4K/p9crit	"FAILS (0/20 cells; 0/10 draws; per-draw bound 0.000)"	"FAILS (0/20 cells; 0/10 draws; per-draw bound 0.000)"	AGREE
+md/A2|2K/4K/p9ii_class	"FAILS"	"FAILS"	AGREE
+md/A2|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A2|2K/4K/consistency	"INCONSISTENT ACROSS STUDIES"	"INCONSISTENT ACROSS STUDIES"	AGREE
+md/A2|2K/4K/pooled	"0 of 18 draws succeeded (P9-II 0 of 8; S0 0 of 10); pooled per-draw bound 0.000"	"0 of 18 draws succeeded (P9-II 0 of 8; S0 0 of 10); pooled per-draw bound 0.000"	AGREE
+md/A2|2K/4K/stable	"ADDRESS STABLE (0.809)"	"ADDRESS STABLE (0.809)"	AGREE
+md/A2|2K/4K/collapse	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	AGREE
+md/A2|8K/16K/s0	"FAILS (2/20 cells; 0/10 draws; per-draw bound 0.000)"	"FAILS (2/20 cells; 0/10 draws; per-draw bound 0.000)"	AGREE
+md/A2|8K/16K/p9crit	"FAILS (2/20 cells; 0/10 draws; per-draw bound 0.000)"	"FAILS (2/20 cells; 0/10 draws; per-draw bound 0.000)"	AGREE
+md/A2|8K/16K/p9ii_class	"\u2014"	"\u2014"	AGREE
+md/A2|8K/16K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+md/A2|8K/16K/consistency	"SINGLE-STUDY EVIDENCE"	"SINGLE-STUDY EVIDENCE"	AGREE
+md/A2|8K/16K/stable	"ADDRESS STABLE (0.842)"	"ADDRESS STABLE (0.842)"	AGREE
+md/A2|8K/16K/collapse	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 0 of 20 counted cells never had a collapse onset"	AGREE
+md/A5-D|2K/4K/s0	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	AGREE
+md/A5-D|2K/4K/p9crit	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	AGREE
+md/A5-D|2K/4K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+md/A5-D|2K/4K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A5-D|2K/4K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+md/A5-D|2K/4K/pooled	"18 of 18 draws succeeded (P9-II 8 of 8; S0 10 of 10); no pooled per-draw bound is printed for A5-D"	"18 of 18 draws succeeded (P9-II 8 of 8; S0 10 of 10); no pooled per-draw bound is printed for A5-D"	AGREE
+md/A5-D|2K/4K/stable	"ADDRESS STABLE (0.916)"	"ADDRESS STABLE (0.916)"	AGREE
+md/A5-D|2K/4K/collapse	"COLLAPSE-FREE: 20 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 20 of 20 counted cells never had a collapse onset"	AGREE
+md/A5-D|8K/16K/s0	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	AGREE
+md/A5-D|8K/16K/p9crit	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	"RELIABLE (20/20 cells; 10/10 draws; per-draw bound 0.741)"	AGREE
+md/A5-D|8K/16K/p9ii_class	"RELIABLE"	"RELIABLE"	AGREE
+md/A5-D|8K/16K/replication	"REPLICATES P9-II"	"REPLICATES P9-II"	AGREE
+md/A5-D|8K/16K/consistency	"CONSISTENT ACROSS STUDIES"	"CONSISTENT ACROSS STUDIES"	AGREE
+md/A5-D|8K/16K/pooled	"14 of 14 draws succeeded (P9-II 4 of 4; S0 10 of 10); no pooled per-draw bound is printed for A5-D"	"14 of 14 draws succeeded (P9-II 4 of 4; S0 10 of 10); no pooled per-draw bound is printed for A5-D"	AGREE
+md/A5-D|8K/16K/stable	"ADDRESS STABLE (0.871)"	"ADDRESS STABLE (0.871)"	AGREE
+md/A5-D|8K/16K/collapse	"COLLAPSE-FREE: 20 of 20 counted cells never had a collapse onset"	"COLLAPSE-FREE: 20 of 20 counted cells never had a collapse onset"	AGREE
+md/A5-D|8K/4K/s0	"FAILS (1/10 cells; 1/10 draws; per-draw bound 0.005)"	"FAILS (1/10 cells; 1/10 draws; per-draw bound 0.005)"	AGREE
+md/A5-D|8K/4K/p9crit	"FAILS (1/10 cells; 1/10 draws; per-draw bound 0.005)"	"FAILS (1/10 cells; 1/10 draws; per-draw bound 0.005)"	AGREE
+md/A5-D|8K/4K/p9ii_class	"\u2014"	"\u2014"	AGREE
+md/A5-D|8K/4K/replication	"NOT COMPARABLE"	"NOT COMPARABLE"	AGREE
+md/A5-D|8K/4K/consistency	"\u2014"	"\u2014"	AGREE
+md/A5-D|8K/4K/stable	"ADDRESS STABLE (0.863)"	"ADDRESS STABLE (0.863)"	AGREE
+md/A5-D|8K/4K/collapse	"COLLAPSE-FREE: 10 of 10 counted cells never had a collapse onset"	"COLLAPSE-FREE: 10 of 10 counted cells never had a collapse onset"	AGREE
+md/paired/A1|2K/4K/label	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+md/paired/A1|2K/4K/d	11	11	AGREE
+md/paired/A1|2K/4K/p	"0.001"	"0.001"	AGREE
+md/paired/A1|2K/4K/d_p9	11	11	AGREE
+md/paired/A1|2K/4K/label_p9	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+md/paired/A1|8K/16K/label	"HARMS"	"HARMS"	AGREE
+md/paired/A1|8K/16K/d	-4	-4	AGREE
+md/paired/A1|8K/16K/p	"0.219"	"0.219"	AGREE
+md/paired/A1|8K/16K/d_p9	-4	-4	AGREE
+md/paired/A1|8K/16K/label_p9	"HARMS"	"HARMS"	AGREE
+md/paired/A2|2K/4K/label	"HARMS"	"HARMS"	AGREE
+md/paired/A2|2K/4K/d	-9	-9	AGREE
+md/paired/A2|2K/4K/p	"0.004"	"0.004"	AGREE
+md/paired/A2|2K/4K/d_p9	-9	-9	AGREE
+md/paired/A2|2K/4K/label_p9	"HARMS"	"HARMS"	AGREE
+md/paired/A2|8K/16K/label	"HARMS"	"HARMS"	AGREE
+md/paired/A2|8K/16K/d	-17	-17	AGREE
+md/paired/A2|8K/16K/p	"0.000"	"0.000"	AGREE
+md/paired/A2|8K/16K/d_p9	-17	-17	AGREE
+md/paired/A2|8K/16K/label_p9	"HARMS"	"HARMS"	AGREE
+md/paired/A5-D|2K/4K/label	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+md/paired/A5-D|2K/4K/d	11	11	AGREE
+md/paired/A5-D|2K/4K/p	"0.001"	"0.001"	AGREE
+md/paired/A5-D|2K/4K/d_p9	11	11	AGREE
+md/paired/A5-D|2K/4K/label_p9	"IMPROVES ON A0"	"IMPROVES ON A0"	AGREE
+md/paired/A5-D|8K/16K/label	"NOT DISTINGUISHED FROM A0"	"NOT DISTINGUISHED FROM A0"	AGREE
+md/paired/A5-D|8K/16K/d	1	1	AGREE
+md/paired/A5-D|8K/16K/p	"1.000"	"1.000"	AGREE
+md/paired/A5-D|8K/16K/d_p9	1	1	AGREE
+md/paired/A5-D|8K/16K/label_p9	"NOT DISTINGUISHED FROM A0"	"NOT DISTINGUISHED FROM A0"	AGREE
+md/a6/2K/4K|1	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|10	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|2	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|3	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|4	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|5	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|6	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|7	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|8	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/2K/4K|9	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|1	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|10	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|2	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|3	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|4	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|5	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|6	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|7	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|8	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/16K|9	["1.000", "1.000", "True"]	["1.000", "1.000", "True"]	AGREE
+md/a6/8K/4K|1	["0.995", "0.995", "True"]	["0.995", "0.995", "True"]	AGREE
+md/a6/8K/4K|10	["0.994", "0.995", "True"]	["0.994", "0.995", "True"]	AGREE
+md/a6/8K/4K|2	["0.995", "0.994", "True"]	["0.995", "0.994", "True"]	AGREE
+md/a6/8K/4K|3	["0.994", "0.995", "True"]	["0.994", "0.995", "True"]	AGREE
+md/a6/8K/4K|4	["0.995", "0.995", "True"]	["0.995", "0.995", "True"]	AGREE
+md/a6/8K/4K|5	["0.995", "0.995", "True"]	["0.995", "0.995", "True"]	AGREE
+md/a6/8K/4K|6	["0.997", "0.996", "True"]	["0.997", "0.996", "True"]	AGREE
+md/a6/8K/4K|7	["0.994", "0.993", "True"]	["0.994", "0.993", "True"]	AGREE
+md/a6/8K/4K|8	["0.995", "0.995", "True"]	["0.995", "0.995", "True"]	AGREE
+md/a6/8K/4K|9	["0.996", "0.995", "True"]	["0.996", "0.995", "True"]	AGREE
+md/hyp/H20-A	"supported"	"supported"	AGREE
+md/hyp/H20-B	"CONTRADICTED"	"CONTRADICTED"	AGREE
+md/hyp/H20-C	"CONTRADICTED"	"CONTRADICTED"	AGREE
+md/hyp/H20-D	"not supported"	"not supported"	AGREE
+md/hyp/H20-L	"not supported"	"not supported"	AGREE
+md/hyp/H20-O	"not supported"	"not supported"	AGREE
+md/hyp/H20-Q	"supported"	"supported"	AGREE
+md/hyp/H20-R (A0, 2K/4K)	"supported"	"supported"	AGREE
+md/hyp/H20-R (A0, 8K/16K)	"supported"	"supported"	AGREE
+md/hyp/H20-R (A1, 2K/4K)	"supported"	"supported"	AGREE
+md/hyp/H20-R (A1, 8K/16K)	"supported"	"supported"	AGREE
+md/hyp/H20-R (A2, 2K/4K)	"supported"	"supported"	AGREE
+md/hyp/H20-R (A2, 8K/16K)	"not read"	"not read"	AGREE
+md/hyp/H20-R (A5-D, 2K/4K)	"supported"	"supported"	AGREE
+md/hyp/H20-R (A5-D, 8K/16K)	"supported"	"supported"	AGREE
+md/hyp/H20-S	"supported"	"supported"	AGREE
+md/outcome/2K/4K	["RELIABLE", 20, 20, 10, 10, "0.741"]	["RELIABLE", 20, 20, 10, 10, "0.741"]	AGREE
+md/outcome/2K/4K/stable+cf	["0.916", "20", "20"]	["0.916", "20", "20"]	AGREE
+md/outcome/2K/4K/i	"4.984"	"4.984"	AGREE
+md/outcome/8K/16K	["RELIABLE", 20, 20, 10, 10, "0.741"]	["RELIABLE", 20, 20, 10, 10, "0.741"]	AGREE
+md/outcome/8K/16K/stable+cf	["0.871", "20", "20"]	["0.871", "20", "20"]	AGREE
+md/outcome/8K/16K/i	"4.979"	"4.979"	AGREE
+md/A0|2K/4K/i	"3.470"	"3.470"	AGREE
+md/A0|8K/16K/i	"4.934"	"4.934"	AGREE
+md/A0|8K/16K/class_at_U	"FAILS"	"FAILS"	AGREE
+md/A0|8K/4K/i	"3.976"	"3.976"	AGREE
+md/A0|8K/4K/class_at_U	"FAILS"	"FAILS"	AGREE
+md/A1|2K/4K/i	"4.919"	"4.919"	AGREE
+md/A1|8K/16K/i	"4.803"	"4.803"	AGREE
+md/A1|8K/16K/class_at_U	"FAILS"	"FAILS"	AGREE
+md/A2|2K/4K/i	"0.012"	"0.012"	AGREE
+md/A2|8K/16K/i	"4.142"	"4.142"	AGREE
+md/A2|8K/16K/class_at_U	"FAILS"	"FAILS"	AGREE
+md/A5-D|2K/4K/i	"4.984"	"4.984"	AGREE
+md/A5-D|8K/16K/i	"4.979"	"4.979"	AGREE
+md/A5-D|8K/16K/class_at_U	"UNRELIABLE"	"UNRELIABLE"	AGREE
+md/A5-D|8K/4K/i	"4.448"	"4.448"	AGREE
+md/A5-D|8K/4K/class_at_U	"FAILS"	"FAILS"	AGREE
+md/wx/2K/4K	["FAILS", "2", "0.929", "3.220"]	["FAILS", "2", "0.929", "3.220"]	AGREE
+md/wx/8K/16K	["FAILS", "0", "0.843", "1.708"]	["FAILS", "0", "0.843", "1.708"]	AGREE
