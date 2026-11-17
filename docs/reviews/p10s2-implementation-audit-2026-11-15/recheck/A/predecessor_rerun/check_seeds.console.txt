@@ -1,0 +1,16 @@
+ADR replicate bases: [220001, 220101, 220201, 220301]
+ADR offsets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+ADR partition seed: 220901; streams named in the text: [220902, 220903, 220904, 220905]; further listed: [220906, 220907, 220908, 220909, 220910]
+registered-run set equal to ADR: True (44 seeds)
+registered-data set equal to ADR 220901-220910: False
+calibration set equal to 221001+100i+offset: True; inside 221001-221999: True
+rehearsal set equal to 222001+100i+offset: True; inside 222001-222999: True
+test set is 229001-229999: True
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-recheck-A/predecessor_rerun/check_seeds.py", line 54, in <module>
+    say(f"partition-side names match the ADR uses: {all(names[n] == s for s, n in want_names.items())}")
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-recheck-A/predecessor_rerun/check_seeds.py", line 54, in <genexpr>
+    say(f"partition-side names match the ADR uses: {all(names[n] == s for s, n in want_names.items())}")
+                                                        ~~~~~^^^
+KeyError: 'bootstrap'

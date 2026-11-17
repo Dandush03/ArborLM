@@ -1,0 +1,4 @@
+trials 10000 lines compared 140000
+auditor classes seen: {'NOT_EVALUATED': 111596, 'DOES NOT COMPOSE': 8483, 'COMPOSES': 1378, 'COMPOSITION INCONCLUSIVE': 18543}
+crashes: 0 []
+disagreements: 0 Counter()

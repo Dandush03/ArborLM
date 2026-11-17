@@ -1,0 +1,6 @@
+trials 20000
+rows (impl): {1: 2257, 2: 6765, 5: 119, 6: 139, 7: 7978, 8: 503, 11: 566, 12: 1673}
+rows (auditor): {1: 2257, 2: 6765, 5: 119, 6: 139, 7: 7978, 8: 503, 11: 566, 12: 1673}
+crashes: 0 []
+disagreements (label row or any class): 0
+disagreement (impl_row, auditor_row) counts: {}

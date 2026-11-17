@@ -1,0 +1,12 @@
+# P10-S2 — the lead's rulings on the confirmation of the re-check fixes (`CONFIRM.md`: READY AFTER F1, F2, F3), 2026-11-15 UTC
+
+Written by the scientific lead. No fetch beyond the recorded downloads, no data generation, no calibration and no registered stage has run. The confirmation is a Claude review, not Astra review.
+
+- **F1, F2, F3: fixed before data generation**, as the reviewer wrote them. The install is its own step whose download-ledger change is committed before `datagen.sh` runs; `datagen.sh` only checks the completed install. A release names the attempt it releases. The data record carries the code commit and the configuration hash.
+- **F4.** Data generation and the install are charged against their caps. A killed process's start marker is closed by a recorded end entry charged at min(elapsed, cap); the entry says it closes an orphan and who wrote it.
+- **F5.** The CPU route through the freeze stays unreachable. The device is frozen (MPS for training, CPU for scoring); an MPS failure in the rehearsal returns to the lead and nothing is frozen. The dead path is removed or marked unreachable with a test, and the freeze README says so.
+- **N3 (the commit of pre-freeze records).** Each pre-freeze record's commit must be an ancestor of the freeze commit. The paths that differ between that commit and the freeze commit under `studies/p10s2`, `src/arborlm` and `configs/p10s2_transfer.toml` are listed in the plan. The freeze refuses if any differing path is one that the record's own computation executes (a named constant per record kind: the modules that generate data, train, score or time, and the config), and otherwise proceeds with the list printed for the lead's approval in the freeze record.
+- **F6–F12:** applied as the reviewer wrote them, the optional F11 and F12 included.
+- **The four known gaps:** R6, C m9 and m11 stand as they are. N3 is closed by the ruling above.
+- **The resolved requirements.** `requirements-datagen.resolved.txt` beside this file is the lead's resolution of the eight pins (uv pip compile, hashes generated, Python 3.12, releases after 2026-11-01T00:00:00Z excluded so that nothing published on the day of resolution enters): 28 packages, 775 hashes, the eight pins unchanged, no `torch` or `pyarrow` in the set. It becomes `studies/p10s2/requirements-datagen.txt` with the header comments brought up to date. Nothing has been installed.
+- `tests/test_p8_sim.py::test_p7b_reproduction_gate` failing in this worktree is accepted as harmless (the reviewer's reason); it is not edited.

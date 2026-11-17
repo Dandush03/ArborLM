@@ -1,0 +1,44 @@
+E0 complete good record: row 7 (auditor: 7)
+E1 gates record empty: row 2 (ruling: 2 INCOMPLETE)
+E1b gates record None: row 2 (ruling: 2)
+E2 G1 record absent: row 2 (ruling: 2)
+E2 G2 record absent: row 2 (ruling: 2)
+E2 G3 record absent: row 2 (ruling: 2)
+E2 G5 record absent: row 2 (ruling: 2)
+E2 G9 record absent: row 2 (ruling: 2)
+E2f G1 failed: row 1 (ruling: 1)
+E2f G2 failed: row 1 (ruling: 1)
+E2f G5 failed: row 1 (ruling: 1)
+E2f G9 failed: row 1 (ruling: 1)
+E2s G5 ok is the string 'true': row 1 (auditor: not a pass -> 1)
+E3 ensemble record absent: row 2 (ruling: 2)
+E3b ensemble differs: row 1 (1)
+E4 prefreeze record absent (teacher_only unknown): row 12 (auditor: not a positive row)
+E5 (C-M1) ablations absent r0/ST1/AB and E_A of r1/MAF/BA: row 12 MAF classes {'AB': 'NOT_EVALUATED', 'BA': 'NOT_EVALUATED'} (auditor: no positive row)
+E6 (C-m3) one ablation kind absent: row 11 (auditor: no crash; no positive row)
+E6b MA-gold value_perm absent (cell outside the classes): row 12 (ruling: a NOT_EVALUATED control blocks rows 6-8 -> 12)
+E6c MA-gold marker_only absent (enters no rule): row 7 (observation)
+E6d M-joint ablations absent: row 12 (ruling: 12)
+E7 ACQ1 at G=0.5, margin 0.7-0.4: Verdict(ok=False, reasons=('lexical margin below 0.30',)) (IEEE; observation only)
+C-M4 acq2 with g=0.4 (fails) and g_single undefined: Verdict(ok=None, reasons=('undefined gap', 'acquisition below 0.50'))
+C-M4 acq2 with g=0.4 and marker-only undefined: Verdict(ok=None, reasons=('undefined gap', 'acquisition below 0.50', 'below 0.80 of the single-teacher student'))
+C-m1/GEN both GEN values missing on r0/MAF/AB: row 12 status {'M-append-frozen': {'AB': 'not_evaluated', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+C-m1/GEN first-marker value missing: row 12 status {'M-append-frozen': {'AB': 'not_evaluated', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+C-m1/GEN first-marker non-finite: row 12 status {'M-append-frozen': {'AB': 'not_evaluated', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+C-m1/GEN first-marker measured 0.03 (fails): row 6 status {'M-append-frozen': {'AB': 'fails', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+C-m1/GEN token-64 measured 0.03: row 6 status {'M-append-frozen': {'AB': 'fails', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+C-m1/GEN exactly 0.02 under both (holds): row 7 status {'M-append-frozen': {'AB': 'holds', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+C-m1/GEN measured fail + missing: row 6 status {'M-append-frozen': {'AB': 'fails', 'BA': 'holds'}, 'M-ii': {'AB': 'holds', 'BA': 'holds'}}
+GEN ST1/BA r1 first-marker 0.05: row 6 (auditor: 6)
+GEN MII/BA r1 first-marker 0.05: row 8 (auditor: 8, M-ii alone fails) M-ii alone fails GEN: True
+GEN MII/BA r1 record absent: row 8 (auditor: 8; M-ii GEN NOT_EVALUATED)
+row 9 (MAF forgets everywhere): row 9
+row 10 (MAF no new capability everywhere): row 10
+row 4 (ST1 negative everywhere): row 4
+row 3 (prefreeze stop): (3,)
+M-ii r0/AB CONSOLIDATION-REJECTED with no combined record: row 2 incomplete: ['r0 M-ii AB: the combined-task scores are missing (a registered score)'] (addendum s7: NOT_EVALUATED composition line, auditor expects row 11/12 not INCOMPLETE)
+M-ii r0/AB rejected with a combined record: row 8 composition M-ii C1: NOT_EVALUATED ['CONSOLIDATION-REJECTED cell']
+assembled record of r0 empty: row 7 incomplete [] NO ADVANTAGE: None
+assembled L-sep r0 without combined: row 2 incomplete ['r0 L-sep -: the combined-task scores are missing (a registered score)']
+L-joint r2 without combined: row 2 (addendum s8: row 2)
+Stage 0 and ensemble combined records absent: row 7 composition MAF C1: NOT_EVALUATED ['order AB, replicate 0: a combined or single-task E_C score is undefined (A)']

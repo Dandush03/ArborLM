@@ -1,0 +1,154 @@
+........................................................................ [ 17%]
+....................FFFFF............................................... [ 35%]
+.......................................F................................ [ 52%]
+........................................F..................s............ [ 70%]
+.....................F.......s.........F................................ [ 87%]
+...................................................                      [100%]
+=================================== FAILURES ===================================
+________________________ test_the_adr_s_worked_examples ________________________
+
+    def test_the_adr_s_worked_examples() -> None:
+        other, q1, wx, probe = 0.8 * H, 3.89 * H, 0.34 * H, 2.25 * H
+        assert budget.holds(0.0, [other, q1])  # 2 x (0.8 + 3.89) = 9.38 h
+        assert budget.holds(other + q1, [wx, probe])  # 4.69 + 2 x (0.34 + 2.25) = 9.87 h
+        assert budget.holds(other + 2 * q1, [wx, probe])  # if Q1 had run up to its own cap: 13.77 h
+>       assert not budget.holds(other + 2 * q1 + 3.0 * H, [wx, probe])
+E       assert not True
+E        +  where True = <function holds at 0x10b44fd80>(((2880.0 + (2 * 14004.0)) + (3.0 * 3600.0)), [1224.0, 8100.0])
+E        +    where <function holds at 0x10b44fd80> = budget.holds
+
+tests/test_p10s0_budget.py:136: AssertionError
+_________ test_pre_q1_rule_counts_unrun_stages_and_charged_hours_once __________
+
+    def test_pre_q1_rule_counts_unrun_stages_and_charged_hours_once() -> None:
+        d = budget.pre_q1_decision(0.0, 0.8 * H, 3.89 * H, 2.71 * H)
+        assert d.action == "full" and d.cut is None and d.status is None and d.required_seconds == pytest.approx(2 * 4.69 * H)
+        d2 = budget.pre_q1_decision(0.8 * H, 0.0, 3.89 * H, 2.71 * H)  # the 0.8 h already charged: counted once, as charged
+        assert d2.action == "full" and d2.required_seconds == pytest.approx(2 * 3.89 * H)
+        heavy = budget.pre_q1_decision(0.0, 0.8 * H, 7.5 * H, 5.0 * H)
+>       assert heavy.action == "cut3" and heavy.cut == 3
+E       AssertionError: assert ('full' == 'cut3'
+E         
+E         - cut3
+E         + full)
+
+tests/test_p10s0_budget.py:147: AssertionError
+______ test_the_multiples_of_the_slowest_rates_at_which_each_cut_applies _______
+
+    def test_the_multiples_of_the_slowest_rates_at_which_each_cut_applies() -> None:
+        def pre(m: float) -> str:
+            r = scaled(m)
+            q1, cut3 = budget.block_projection(core.q1_cells(), r), budget.block_projection(core.q1_cells(True), r)
+            return budget.pre_q1_decision(0.0, 0.8 * H, q1.total_seconds, cut3.total_seconds).action
+    
+>       assert [pre(m) for m in (1.0, 1.8, 1.95, 2.55, 2.8)] == ["full", "full", "cut3", "cut3", "stop"]
+E       AssertionError: assert ['full', 'ful...full', 'cut3'] == ['full', 'ful...cut3', 'stop']
+E         
+E         At index 2 diff: 'full' != 'cut3'
+E         Use -v to get more diff
+
+tests/test_p10s0_budget.py:158: AssertionError
+_______________________ test_cut_order_is_probe_then_wx ________________________
+
+    def test_cut_order_is_probe_then_wx() -> None:
+        both = budget.post_q1_decision(4.0 * H, 0.5 * H, 2.0 * H)
+        assert (both.wx, both.probe, both.cuts) == (True, True, ())
+        no_probe = budget.post_q1_decision(12.0 * H, 0.5 * H, 2.0 * H)
+>       assert (no_probe.wx, no_probe.probe, no_probe.cuts, no_probe.probe_status, no_probe.wx_status) == (True, False, (1,), "NOT RUN — BUDGET", None)
+E       AssertionError: assert (True, True, (), None, None) == (True, False,...BUDGET', None)
+E         
+E         At index 1 diff: True != False
+E         Use -v to get more diff
+
+tests/test_p10s0_budget.py:173: AssertionError
+_____________________ test_the_multiples_context_function ______________________
+
+    def test_the_multiples_context_function() -> None:
+        m = budget.multiple_thresholds({"q1": 3.89, "wx": 0.34, "probe": 2.25, "q1_cut3": 2.71})
+>       assert m["q1"] == pytest.approx(1.85, abs=0.01) and m["q1_cut3"] == pytest.approx(2.66, abs=0.02) and m["probe"] > 3
+E       assert (2.6221079691516707 == 1.85 ± 0.01
+E         
+E         comparison failed
+E         Obtained: 2.6221079691516707
+E         Expected: 1.85 ± 0.01)
+
+tests/test_p10s0_budget.py:180: AssertionError
+__________________ test_ledger_is_one_budget_of_sixteen_hours __________________
+
+tmp_path = PosixPath('/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-expe...b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/pytest_head/test_ledger_is_one_budget_of_s0')
+
+    def test_ledger_is_one_budget_of_sixteen_hours(tmp_path: Path) -> None:
+        ledger = core.Ledger(tmp_path / "ledger.json")
+>       assert ledger.cap_seconds == core.cap_hours() * 3600 == 16 * 3600 and ledger.charged() == 0 and ledger.remaining() == 16 * 3600
+E       assert ((22.0 * 3600) == (16 * 3600))
+E        +  where 22.0 = <function cap_hours at 0x10b0f72e0>()
+E        +    where <function cap_hours at 0x10b0f72e0> = core.cap_hours
+
+tests/test_p10s0_core.py:249: AssertionError
+_ test_both_headroom_evaluations_count_the_rehearsed_analysis_and_report_time_doubled _
+
+    def test_both_headroom_evaluations_count_the_rehearsed_analysis_and_report_time_doubled() -> None:
+        reserve = 0.05 * H
+        pre = budget.pre_q1_decision(0.0, 0.8 * H, 3.89 * H, 2.71 * H, reserve_seconds=reserve)
+        assert pre.action == "full" and pre.required_seconds == pytest.approx(2 * (0.8 + 3.89 + 0.05) * H)
+        edge = (16 * H / 2) - (0.8 * H + reserve)  # a Q1 projection that exactly fills the cap with the reserve counted
+        assert budget.pre_q1_decision(0.0, 0.8 * H, edge, 1.0 * H, reserve_seconds=reserve).action == "full"
+>       assert budget.pre_q1_decision(0.0, 0.8 * H, edge + 1.0, 1.0 * H, reserve_seconds=reserve).action == "cut3"
+E       AssertionError: assert 'full' == 'cut3'
+E         
+E         - cut3
+E         + full
+
+tests/test_p10s0_governance.py:330: AssertionError
+_________________ test_the_hour_cap_is_set_in_the_config_only __________________
+
+tmp_path = PosixPath('/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-expe...b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/pytest_head/test_the_hour_cap_is_set_in_th0')
+
+    def test_the_hour_cap_is_set_in_the_config_only(tmp_path: Path) -> None:
+        assert not hasattr(core, "CAP_HOURS")
+        cfg = tmp_path / "c.toml"
+        cfg.write_text(core.render_config_toml(None, 20.0))
+        assert core.cap_hours(cfg) == 20.0 and core.ledger_for(tmp_path, cfg).cap_seconds == 20.0 * 3600 and core.resource_limits(cfg)["cap_hours"] == 20.0
+>       assert core.cap_hours() == 16.0  # the real config today
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 22.0 == 16.0
+E        +  where 22.0 = <function cap_hours at 0x10b0f72e0>()
+E        +    where <function cap_hours at 0x10b0f72e0> = core.cap_hours
+
+tests/test_p10s0_recheck.py:194: AssertionError
+_____________ test_dry_ledger_is_one_budget_charged_by_every_stage _____________
+
+dry = {'code': 0, 'root': PosixPath('/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborl...ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-prefreeze/tmp/pytest_head/p10s0-dry0/P10S0DRY-run/results/RESULTS.md', ...}}
+
+    def test_dry_ledger_is_one_budget_charged_by_every_stage(dry: dict[str, Any]) -> None:
+        ledger = core.ledger_for(dry["root"])
+        stages_charged = {e["stage"] for e in ledger.entries()}
+        assert {"gates", "train-q1", "evaluate-q1", "rehearse", "train-check", "train-wx", "train-probe", "analyze", "report"} <= stages_charged
+>       assert ledger.cap_seconds == 16 * 3600 and ledger.remaining() < ledger.cap_seconds
+E       assert (79200.0 == (16 * 3600))
+E        +  where 79200.0 = <studies.p10s0.core.Ledger object at 0x10daa1d90>.cap_seconds
+
+tests/test_p10s0_stages.py:111: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+tests/test_p10s0_model.py::test_wx_initializer_is_w7_s_at_fan_in_2048
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_p10s0_budget.py::test_the_adr_s_worked_examples - assert no...
+FAILED tests/test_p10s0_budget.py::test_pre_q1_rule_counts_unrun_stages_and_charged_hours_once
+FAILED tests/test_p10s0_budget.py::test_the_multiples_of_the_slowest_rates_at_which_each_cut_applies
+FAILED tests/test_p10s0_budget.py::test_cut_order_is_probe_then_wx - Assertio...
+FAILED tests/test_p10s0_budget.py::test_the_multiples_context_function - asse...
+FAILED tests/test_p10s0_core.py::test_ledger_is_one_budget_of_sixteen_hours
+FAILED tests/test_p10s0_governance.py::test_both_headroom_evaluations_count_the_rehearsed_analysis_and_report_time_doubled
+FAILED tests/test_p10s0_recheck.py::test_the_hour_cap_is_set_in_the_config_only
+FAILED tests/test_p10s0_stages.py::test_dry_ledger_is_one_budget_charged_by_every_stage
+9 failed, 400 passed, 2 skipped, 2 warnings in 187.99s (0:03:07)
+UV_NO_SYNC=1 nice -n 10 uv run --locked --offline pytest tests/test_p10s0_*.p  550.53s user 66.25s system 326% cpu 3:09.09 total

@@ -1,0 +1,118 @@
+== failure reasons per arm and cell type (S0 criteria, class readout): count of cells failing each condition
+  A0|2K/4K       {1: 10, 3: 7, 4: 4, 6: 7}  patterns {(1,): 1, (1, 3, 6): 6, (1, 4): 2, (1, 3, 4, 6): 1, (4,): 1}
+  A0|8K/16K      {4: 1}  patterns {(4,): 1}
+  A0|8K/4K       {1: 5, 3: 1, 4: 10, 6: 1}  patterns {(4,): 5, (1, 4): 4, (1, 3, 4, 6): 1}
+  A1|2K/4K       {}  patterns {}
+  A1|8K/16K      {4: 5}  patterns {(4,): 5}
+  A2|2K/4K       {1: 20, 3: 16, 4: 8, 6: 15}  patterns {(1, 4): 4, (1, 3, 6): 12, (1, 3, 4, 6): 3, (1, 3, 4): 1}
+  A2|8K/16K      {1: 8, 4: 18}  patterns {(1, 4): 8, (4,): 10}
+  A5-D|2K/4K     {}  patterns {}
+  A5-D|8K/16K    {}  patterns {}
+  A5-D|8K/4K     {4: 9}  patterns {(4,): 9}
+
+== near-threshold SUCCESSFUL cells (S0 criteria): smallest margins per condition, per arm/celltype at the class readout
+  A0|2K/4K       n= 9 c1=0.0204(5/0) c3_distinct=134.0000(8/1) c3_largest=4.0000(3/1) c4=0.0063(10/0) c6=0.0458(10/0)
+  A0|8K/16K      n=19 c1=0.0412(1/1) c3_distinct=147.0000(5/1) c3_largest=6.0000(10/1) c4=0.0056(1/1) c6=0.0473(1/1)
+  A1|2K/4K       n=20 c1=0.0907(3/0) c3_distinct=128.0000(10/0) c3_largest=8.0000(10/0) c4=0.0441(6/0) c6=0.0485(4/0)
+  A1|8K/16K      n=15 c1=0.0830(2/1) c3_distinct=128.0000(1/0) c3_largest=8.0000(10/1) c4=0.0018(4/0) c6=0.0489(1/0)
+  A2|8K/16K      n= 2 c1=0.0714(5/0) c3_distinct=150.0000(4/0) c3_largest=6.0000(5/0) c4=0.0019(5/0) c6=0.0492(5/0)
+  A5-D|2K/4K     n=20 c1=0.0961(2/0) c3_distinct=142.0000(10/1) c3_largest=6.0000(10/0) c4=0.0609(10/1) c6=0.0490(4/0)
+  A5-D|8K/16K    n=20 c1=0.0982(5/1) c3_distinct=149.0000(1/1) c3_largest=6.0000(3/1) c4=0.0246(1/0) c6=0.0499(5/1)
+  A5-D|8K/4K     n= 1 c1=0.0564(7/0) c3_distinct=155.0000(7/0) c3_largest=6.0000(7/0) c4=0.0011(7/0) c6=0.0478(7/0)
+  WX WX-A5-D 2K/4K: n=2 c1=0.0268(7) c3_distinct=155.0000(8) c3_largest=6.0000(7) c4=0.0137(8) c6=0.0474(8)
+  WX WX-A5-D 8K/16K: n=0 
+  PR A5-D 32K/64K: n=3 c1=0.0969(11) c3_distinct=160.0000(13) c3_largest=8.0000(11) c4=0.0707(13) c6=0.0498(11)
+
+== condition-4 margin of every A5-D success at 2K/4K and 8K/16K (H1/H2 over Panel A and B, minus 0.90), sorted, first 6
+  2K/4K: [(0.0609, '10/1'), (0.0726, '2/0'), (0.0741, '6/0'), (0.0751, '10/0'), (0.0751, '6/1'), (0.0785, '9/0')]
+  8K/16K: [(0.0246, '1/0'), (0.0255, '2/0'), (0.0278, '2/1'), (0.0328, '1/1'), (0.0436, '3/0'), (0.0591, '9/1')]
+
+== success at U (8,192) and at 4U (32,768) for 8K cell types (S0 criteria): lost = success at U, failure at 4U
+  A0|8K/16K      (U,4U) counts {(T,T):0, (T,F):0, (F,T):19, (F,F):1} lost: []
+  A0|8K/4K       (U,4U) counts {(T,T):0, (T,F):0, (F,T):0, (F,F):10} lost: []
+  A1|8K/16K      (U,4U) counts {(T,T):3, (T,F):0, (F,T):12, (F,F):5} lost: []
+  A2|8K/16K      (U,4U) counts {(T,T):0, (T,F):0, (F,T):2, (F,F):18} lost: []
+  A5-D|8K/16K    (U,4U) counts {(T,T):16, (T,F):0, (F,T):4, (F,F):0} lost: []
+  A5-D|8K/4K     (U,4U) counts {(T,T):0, (T,F):0, (F,T):1, (F,F):9} lost: []
+
+== collapse onset and escape (slot-based, ADR-0019 8.1) per arm/celltype
+  A0|2K/4K       onsets 20/20 median onset 64.0 max onset 64; escapes 13 median escape 5568 max 7680
+  A0|8K/16K      onsets 20/20 median onset 64.0 max onset 64; escapes 20 median escape 13664.0 max 25600
+  A0|8K/4K       onsets 10/10 median onset 64.0 max onset 64; escapes 9 median escape 15808 max 30656
+  A1|2K/4K       onsets 17/20 median onset 64 max onset 64; escapes 17 median escape 128 max 192
+  A1|8K/16K      onsets 20/20 median onset 64.0 max onset 64; escapes 20 median escape 448.0 max 512
+  A2|2K/4K       onsets 20/20 median onset 2112.0 max onset 2112; escapes 4 median escape 7040.0 max 7616
+  A2|8K/16K      onsets 20/20 median onset 64.0 max onset 64; escapes 20 median escape 24256.0 max 32000
+  A5-D|2K/4K     onsets 0/20 median onset None max onset None; escapes 0 median escape None max None
+  A5-D|8K/16K    onsets 0/20 median onset None max onset None; escapes 0 median escape None max None
+  A5-D|8K/4K     onsets 0/10 median onset None max onset None; escapes 0 median escape None max None
+
+== probe-accuracy trajectory: cells whose probe accuracy reached >= 0.90 and later fell below 0.85 (descriptive)
+
+== A5-D minimum distinct top-1 on the probe over training (how far from the collapse threshold of 32)
+  2K/4K: min over cells 263, median of per-cell minima 267.5
+  8K/16K: min over cells 270, median of per-cell minima 275.0
+  8K/4K: min over cells 267, median of per-cell minima 272.0
+  A0 2K/4K: per-cell minimum distinct top-1: [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3]
+  A0 8K/16K: per-cell minimum distinct top-1: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 6, 7]
+
+== LM relative rise r and margin to the flag (r_A6 + 0.05 - r), minimum per arm/celltype
+  A0|2K/4K       min margin 0.0468 (8/1); median r 0.1262
+  A0|8K/16K      min margin 0.0355 (10/1); median r 0.1573
+  A0|8K/4K       min margin 0.0417 (10/1); median r 0.1553
+  A1|2K/4K       min margin 0.0349 (2/1); median r 0.1527
+  A1|8K/16K      min margin 0.0371 (10/0); median r 0.1592
+  A2|2K/4K       min margin 0.0510 (3/1); median r 0.0679
+  A2|8K/16K      min margin 0.0405 (8/0); median r 0.1552
+  A5-D|2K/4K     min margin 0.0425 (8/0); median r 0.1488
+  A5-D|8K/16K    min margin 0.0401 (7/0); median r 0.1613
+  A5-D|8K/4K     min margin 0.0401 (5/0); median r 0.1629
+
+== A5-D 8K/4K and A0 8K/4K per cell: accuracy A/B vs 0.9*A6, H-ratio, failed conditions
+  A0    d01 accA 0.902 accB 0.900 c1 margin +0.004 c4 margin -0.140 c6 margin +0.046 failed [4]
+  A0    d02 accA 0.919 accB 0.916 c1 margin +0.022 c4 margin -0.057 c6 margin +0.047 failed [4]
+  A0    d03 accA 0.550 accB 0.546 c1 margin -0.352 c4 margin -0.113 c6 margin +0.032 failed [1, 4]
+  A0    d04 accA 0.913 accB 0.911 c1 margin +0.015 c4 margin -0.068 c6 margin +0.047 failed [4]
+  A0    d05 accA 0.898 accB 0.892 c1 margin -0.004 c4 margin -0.065 c6 margin +0.046 failed [1, 4]
+  A0    d06 accA 0.900 accB 0.901 c1 margin +0.003 c4 margin -0.042 c6 margin +0.046 failed [4]
+  A0    d07 accA 0.817 accB 0.826 c1 margin -0.078 c4 margin -0.112 c6 margin +0.045 failed [1, 4]
+  A0    d08 accA 0.903 accB 0.902 c1 margin +0.006 c4 margin -0.083 c6 margin +0.047 failed [4]
+  A0    d09 accA 0.048 accB 0.052 c1 margin -0.852 c4 margin +0.051 c6 margin -0.143 failed [1, 3, 4, 6]
+  A0    d10 accA 0.880 accB 0.882 c1 margin -0.015 c4 margin -0.093 c6 margin +0.045 failed [1, 4]
+  A5-D  d01 accA 0.952 accB 0.948 c1 margin +0.052 c4 margin -0.180 c6 margin +0.048 failed [4]
+  A5-D  d02 accA 0.951 accB 0.950 c1 margin +0.056 c4 margin -0.169 c6 margin +0.048 failed [4]
+  A5-D  d03 accA 0.946 accB 0.947 c1 margin +0.052 c4 margin -0.136 c6 margin +0.048 failed [4]
+  A5-D  d04 accA 0.954 accB 0.953 c1 margin +0.057 c4 margin -0.112 c6 margin +0.048 failed [4]
+  A5-D  d05 accA 0.951 accB 0.952 c1 margin +0.055 c4 margin -0.091 c6 margin +0.049 failed [4]
+  A5-D  d06 accA 0.948 accB 0.949 c1 margin +0.051 c4 margin -0.006 c6 margin +0.048 failed [4]
+  A5-D  d07 accA 0.952 accB 0.950 c1 margin +0.056 c4 margin +0.001 c6 margin +0.048 failed []
+  A5-D  d08 accA 0.949 accB 0.951 c1 margin +0.054 c4 margin -0.054 c6 margin +0.049 failed [4]
+  A5-D  d09 accA 0.949 accB 0.948 c1 margin +0.052 c4 margin -0.039 c6 margin +0.048 failed [4]
+  A5-D  d10 accA 0.956 accB 0.953 c1 margin +0.058 c4 margin -0.087 c6 margin +0.048 failed [4]
+
+== WX per cell (class readout): acc, stability, failed
+  2K/4K   d01 accA 0.500 stab 0.621 auc 0.830 failed [1]
+  2K/4K   d02 accA 0.779 stab 0.838 auc 0.912 failed [1]
+  2K/4K   d03 accA 0.804 stab 0.835 auc 0.933 failed [1]
+  2K/4K   d04 accA 0.757 stab 0.834 auc 0.910 failed [1]
+  2K/4K   d05 accA 0.219 stab 0.292 auc 0.695 failed [1]
+  2K/4K   d06 accA 0.789 stab 0.841 auc 0.926 failed [1, 4]
+  2K/4K   d07 accA 0.927 stab 0.881 auc 0.959 failed []
+  2K/4K   d08 accA 0.934 stab 0.880 auc 0.963 failed []
+  2K/4K   d09 accA 0.900 stab 0.853 auc 0.948 failed [1]
+  2K/4K   d10 accA 0.822 stab 0.848 auc 0.935 failed [1, 4]
+  8K/16K  d01 accA 0.695 stab 0.481 auc 0.885 failed [1, 4]
+  8K/16K  d02 accA 0.562 stab 0.338 auc 0.841 failed [1, 4]
+  8K/16K  d03 accA 0.443 stab 0.283 auc 0.811 failed [1, 4]
+  8K/16K  d04 accA 0.549 stab 0.328 auc 0.846 failed [1, 4]
+  8K/16K  d05 accA 0.506 stab 0.319 auc 0.818 failed [1, 4]
+  8K/16K  d06 accA 0.552 stab 0.326 auc 0.847 failed [1, 4]
+  8K/16K  d07 accA 0.550 stab 0.330 auc 0.846 failed [1, 4]
+  8K/16K  d08 accA 0.441 stab 0.215 auc 0.802 failed [1, 4]
+  8K/16K  d09 accA 0.455 stab 0.267 auc 0.799 failed [1, 4]
+  8K/16K  d10 accA 0.585 stab 0.334 auc 0.853 failed [1, 4]
+
+== probe cells
+  d11 accA 0.9968 accB 0.9971 stab 0.834 margins {c1: 0.0969, c3_distinct: 172.0000, c3_largest: 8.0000, c4: 0.0709, c6: 0.0498} lm r 0.1720 vs A6 0.1620
+  d12 accA 0.9972 accB 0.9969 stab 0.834 margins {c1: 0.0970, c3_distinct: 179.0000, c3_largest: 8.0000, c4: 0.0832, c6: 0.0498} lm r 0.1643 vs A6 0.1591
+  d13 accA 0.9972 accB 0.9970 stab 0.840 margins {c1: 0.0971, c3_distinct: 160.0000, c3_largest: 8.0000, c4: 0.0707, c6: 0.0499} lm r 0.1607 vs A6 0.1635

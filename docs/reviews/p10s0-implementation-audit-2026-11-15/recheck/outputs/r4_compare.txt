@@ -1,0 +1,24 @@
+trees: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s0-recheck/old_d27ba7f | /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc
+A0@2K/4K@chunked=False diffs: 0 new keys: [] has read_swap: True
+A0@2K/4K@chunked=True diffs: 0 new keys: [] has read_swap: True
+A0@8K/4K@chunked=False diffs: 0 new keys: [] has read_swap: True
+A0@8K/4K@chunked=True diffs: 0 new keys: [] has read_swap: True
+A1@2K/4K@chunked=False diffs: 0 new keys: [] has read_swap: True
+A1@2K/4K@chunked=True diffs: 0 new keys: [] has read_swap: True
+A2@2K/4K@chunked=False diffs: 0 new keys: [] has read_swap: True
+A2@2K/4K@chunked=True diffs: 0 new keys: [] has read_swap: True
+A5-D@2K/4K@chunked=False diffs: 0 new keys: [] has read_swap: True
+A5-D@2K/4K@chunked=True diffs: 0 new keys: [] has read_swap: True
+A5-D@8K/4K@chunked=False diffs: 0 new keys: [] has read_swap: True
+A5-D@8K/4K@chunked=True diffs: 0 new keys: [] has read_swap: True
+A6@2K/4K@chunked=False diffs: 0 new keys: [] has read_swap: False
+A6@2K/4K@chunked=True diffs: 0 new keys: [] has read_swap: False
+A6@8K/4K@chunked=False diffs: 0 new keys: [] has read_swap: False
+A6@8K/4K@chunked=True diffs: 0 new keys: [] has read_swap: False
+A7@2K/4K@chunked=False diffs: 0 new keys: [] has read_swap: False
+A7@2K/4K@chunked=True diffs: 0 new keys: [] has read_swap: False
+WX-A1@2K/4K@chunked=False diffs: 0 new keys: ['answer_site_auc'] has read_swap: True
+WX-A1@2K/4K@chunked=True diffs: 0 new keys: ['answer_site_auc'] has read_swap: True
+WX-A5-D@2K/4K@chunked=False diffs: 0 new keys: ['answer_site_auc'] has read_swap: True
+WX-A5-D@2K/4K@chunked=True diffs: 0 new keys: ['answer_site_auc'] has read_swap: True
+ALL IDENTICAL: True

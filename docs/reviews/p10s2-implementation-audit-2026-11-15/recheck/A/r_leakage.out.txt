@@ -1,0 +1,32 @@
+evaluation items 30 ({'E_A': 12, 'E_B': 12, 'E_C': 6, 'E_open': 0}); references 53; teacher outputs on them (both teachers) 60
+teacher outputs stored for panels: {'A': ['D_cal', 'D_con', 'E_A', 'E_B', 'E_C', 'E_open'], 'B': ['D_cal', 'D_con', 'E_A', 'E_B', 'E_C', 'E_open']}
+[accepted pool A] n=374: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[gold pool A] n=568: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[accepted pool B] n=367: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[gold pool B] n=534: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 0 T_A] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 0 Gold_A] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 0 T_B] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 0 Gold_B] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 1 T_A] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 1 Gold_A] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 1 T_B] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[replicate 1 Gold_B] n=24: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[panel Q_fit (filter fit/check, calibration, D_con)] n=80: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[panel Q_check (filter fit/check, calibration, D_con)] n=60: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[panel D_cal (filter fit/check, calibration, D_con)] n=8: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[panel D_con (filter fit/check, calibration, D_con)] n=6: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: 0
+[example bank training rows] n=1843: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[router prompts replicate 0] n=48: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[router prompts replicate 1] n=48: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[tokenizer-record sentences A] n=100: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[seen-item order A] n=374: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[tokenizer-record sentences B] n=100: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[seen-item order B] n=367: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[rehearsal scoring panel E_A] n=8: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[rehearsal scoring panel E_B] n=8: source = an evaluation sentence: 0; target = an evaluation reference: 0; target = a teacher output on an evaluation sentence (string equality, informational): 0; shared eval identity groups: n/a
+[rehearsal combined set] sentences that are evaluation sentences: 0 of 8
+[rehearsal] teacher outputs the rehearsal world carries: {'A': {'E_A': 8, 'E_C': 8}, 'B': {'E_B': 8, 'E_C': 8}} (D_cal only expected)
+[rehearsal] GEN windows still present in the rehearsal world's context: 8 (the registered general-language panel)
+[G1 pool level, implementation] ok = True; problems = []
+[dropped teacher outputs equal to an evaluation reference] {'A': 0, 'B': 0}

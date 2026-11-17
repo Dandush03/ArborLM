@@ -1,0 +1,8 @@
+[reads] 'the café is open now': implementation [(2, 0), (4, 1), (6, 2), (8, 3), (10, 4)]; mine (from bytes) [(2, 0), (4, 1), (6, 2), (8, 3), (10, 4)]; equal: True
+[reads] "Tom can't swim.": implementation [(2, 5), (4, 6), (6, 7)]; mine (from bytes) [(2, 5), (4, 6), (6, 7)]; equal: True
+[reads] 'the  cafe,is open now!': implementation [(2, 0), (9, 3), (11, 4)]; mine (from bytes) [(2, 0), (9, 3), (11, 4)]; equal: True
+[reads] 'swim! swim. (swim)': implementation [(2, 7), (4, 7), (7, 7)]; mine (from bytes) [(2, 7), (4, 7), (7, 7)]; equal: True
+[reads] "n'est-ce pas?": implementation [(2, 8), (4, 9)]; mine (from bytes) [(2, 8), (4, 9)]; equal: True
+[reads] 'the café is open now': implementation [(2, 0), (4, 1), (6, 2), (8, 3), (10, 4)]; mine (from bytes) [(2, 0), (4, 1), (6, 2), (8, 3), (10, 4)]; equal: True
+[NFC] NFD source gives the same prompt ids and reads as its NFC form: True
+[newline] a source with a newline is refused: a source contains a newline: 'two\nlines'

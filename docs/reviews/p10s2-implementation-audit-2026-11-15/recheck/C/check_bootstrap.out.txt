@@ -1,0 +1,10 @@
+intervals printed: 188 | with values: 174
+identical on a re-run: True
+seed uses in run 1: 174 distinct seeds: [229956] == test stand-in of 220906: True
+one fresh generator per interval WITH items (uses == intervals with values): True
+purposes in the fixed order (first 4): ['bootstrap interval Stage 0 student E_A', 'bootstrap interval Stage 0 student E_B', 'bootstrap interval Stage 0 student C1', 'bootstrap interval Stage 0 student C2']
+no seed drawn without bootstrap_mode: True | verdicts identical with and without intervals: True
+same items, two names -> same interval: True (0.3954022988505747, 0.5988505747126437) | my percentile bootstrap (one 2000x30 draw): (0.3954022988505747, 0.5988505747126437)
+registered-data mode refuses 220906: SeedRefused
+registered-run mode refuses 220906: ValueError
+registered-analysis holds exactly: {'bootstrap': 220906}

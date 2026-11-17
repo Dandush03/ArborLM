@@ -760,3 +760,61 @@ The independent implementation audit (Opus 5.5, `docs/reviews/p10s0-implementati
 
 Items 3, 4, 5, 8 (with P9-II's test-seed constants also asserted directly), 9, 11 and the rest of item 10 were found correct and stand.
 
+## Addendum — rulings on the re-check of the audit fixes (2026-11-15 UTC)
+
+The re-check (Opus 5.5, `docs/reviews/p10s0-implementation-audit-2026-11-15/recheck/RECHECK.md`) found the first audit's majors fixed, every evaluated quantity bit-identical before and after the fix commit, and the rehearsal free to proceed; it lists two new majors (N1, N2) and seven minors to fix before the generation cap is committed and before the freeze. The lead's rulings, made before any S0 rehearsal record or registered draw exists:
+
+- **N4:** the reserve for the analysis and report in the headroom rule is the sum of their frozen stage caps (which have a 60-second floor), not twice their measured time. A block is not started if it would leave less than that.
+- **N5:** the hour cap is read from the config in one place; a raise before the freeze is a change of that one value, recorded in this ADR.
+- **The per-task guard term** (`guard_seconds_per_task`) that the implementer added to the projection is accepted as an engineering correction: it only increases projections, it is measured and pinned by the freeze like the rates, and it is listed in the freeze record as an implementer addition not in §10.3.
+- N1–N3, N6–N9 are implementation defects, fixed as the re-check states.
+
+## Addendum — the rehearsal's measured projection and the hour cap raised from 16 to 22 before the freeze (2026-11-15 UTC)
+
+Made by the lead (Claude Fable 5.2) under the human lead's delegation ("you can extend the hour cap if needed across all p10", recorded in the addendum above and in `docs/reviews/p10-design-2026-11-15/HUMAN_DECISIONS_2026-11-15.md`). **No registered draw has been generated and no registered seed observed; the rehearsal wrote only time, memory, shapes, counts and identity.** Not yet independently recomputed at the time of writing; the pre-freeze audit recomputes it.
+
+**What was measured** (code commit `9cca808`; rehearsal draw only; six single-thread workers):
+
+- Pipeline check, rehearsal-draw generation (33.4 s), gates on the rehearsal draw (G1, G2, G4, G5, G6, G9, G10 passed; 3.19 s per draw), rehearsal alone (24 items) and rehearsal with 12 other busy processes (24 items). Both rehearsals ran while P10-S1's calibration was using six cores, as the registered run will share the machine. Charged so far: 486 s.
+- Projection (`experiments/P10S0J-projection-20261115/projection.json`, sha256 `d6f6e6be…3e53aa7`, the larger of the alone and busy rates, task start-up and the per-task guard included):
+
+| Block | Cells | Projected hours |
+|---|---|---|
+| Q1, full | 230 | 8.41 |
+| Q1 under cut 3 | 190 | 5.84 |
+| WX, candidate A5-D / A1 | 20 | 0.84 / 1.09 |
+| 65,536 probe, candidate A5-D / A1 | 6 | 3.28 / 5.51 |
+
+- Memory: the largest rehearsed peak is 1.04 GiB per worker (the probe at 65,536 slots), under the 1.5 GiB rehearsal limit in every block.
+- These rates are about 2.2 times the slowest rates the ADR's projection assumed (Q1 3.89 h). The design-time projection was wrong on the slow side of the machine under load; this is recorded, not explained away.
+
+**What the 16-hour cap would have done.** Before Q1 the rule needs charged + 2 × Q1 + the reserve ≈ 0.3 + 16.8 = 17.2 hours > 16, so cut 3 would apply (one initialization seed per draw at 16,384: 40 registered cells dropped), and after Q1 the probe, and possibly WX, would be cut.
+
+**The raise.** The cap is raised to **22 hours**: the smallest whole number of hours at which, on this projection, the rule holds before Q1 with no cut (17.2) and would hold after a Q1 that runs at its projection with WX and the probe for the more expensive candidate, A1 (0.3 + 8.41 + 2 × (1.09 + 5.51) + reserve ≈ 21.9). What it protects: the 40 cells of the second initialization seed at 16,384, WX, and the 65,536 probe. It adds no cell, arm, update or replicate, and changes no threshold, cut or order: if the registered stages run slower than projected, the registered cuts still apply against 22 hours. The memory limits are unchanged. After the freeze the cap is fixed.
+
+## Addendum — the pre-freeze audit and the lead's rulings (2026-11-15 UTC)
+
+The pre-freeze audit (Opus 5.5, `docs/reviews/p10s0-implementation-audit-2026-11-15/prefreeze/PREFREEZE.md`) found the re-check's findings fixed, the rehearsal-draw gates passed, both rehearsals complete with only whitelisted fields written, and recomputed the projection independently to the second (Q1 8.413 h; cut 3 5.840 h; WX 0.843 / 1.089 h; probe 3.285 / 5.505 h; largest peak 1.043 GiB). It confirmed that 22 hours is the smallest whole number of hours with the stated property and that the raise complies with the lead's limits. Verdict: READY AFTER LISTED FIXES; none requires repeating the rehearsal.
+
+Corrections to the previous addendum, from the audit: at 16 hours with cut 3, a candidate A5-D would have kept both WX and the probe and a candidate A1 would have lost only the probe (the addendum said "and possibly WX"). At 22 hours the margin for a candidate A1 after a Q1 at its projection is 249 seconds: A1 loses the probe if Q1 runs more than 0.8% slower than projected; A5-D keeps WX and the probe up to a Q1 1.59 times slower. The projection's two informational booleans were computed at 16 hours with the design's 0.8-hour guess; at 22 hours with the measured charges they read true and true.
+
+Rulings by the lead, before any registered draw exists:
+
+- **The cap stays 22 hours.** It is the smallest whole number at which the projection keeps every registered cell; the lead does not add slack beyond the rule it stated. The thin margin for a candidate A1 is recorded; the rehearsal rates were measured with twelve extra busy processes on top of another study's six workers, which is heavier than the load planned for the registered run.
+- **F7:** registered generation and the registered gates stage are launched with no other study's compute stage running, so that their caps (twice a measurement taken at moderate load) are not exceeded by machine load. A generation that reaches its cap is still treated as the code treats it; the lead avoids the case by the launch condition and does not change the reserve rule.
+- F1–F3, F6 and F9 are implementation defects fixed as the audit states; the analysis and report times are measured on synthetic full-registry records before the cap table is written (README step 8).
+- The watchdog defect in `src/arborlm/watchdog.py` (F12) does not affect S0, whose stages use `studies/p9/pool.py`; changing `src/` needs an approved amendment and is listed for the post-P10 clean-up.
+
+
+## Addendum — the human lead's acceptance of the P10-S0 outcome (2026-11-16 UTC)
+
+The lead put the outcome statement (`results/p10s0-run-2026-11-16/OUTCOME.md`) and the independent recomputation (`docs/reviews/p10s0-results-2026-11-16/REVIEW.md`: 1,065 comparisons, 0 disagreements, presentation defects noted) to the human lead and asked whether the outcome is accepted as registered, with its caveats. The human lead, verbatim:
+
+> register it as it is, same as the other we commit push and the propose a P10-I to adress each better
+
+Recorded by the lead:
+
+- **The P10-S0 outcome is accepted as registered and unchanged:** row 4, ADDRESSING-QUALIFIED (4,096 AND 16,384), arm A5-D. No class, threshold or number is altered by this acceptance, and the files under `results/p10s0-run-2026-11-16/` stay as written (their "not accepted" wording was true when written; this addendum is the acceptance).
+- **The caveats are part of what is accepted:** A5-D is distinguished from A0 at 4,096 slots only (NOT DISTINGUISHED at 16,384; H20-D not supported); OVERLOAD NOT QUALIFIED (A5-D at 8K facts on 4K slots passed 1 of 10 cells, failing on held-out templates only); the record-length-free variant DOES NOT PASS; the 65,536 probe is 3 of 3 on three draws only; condition 6 decided no class; A1 is UNRELIABLE and HARMS at 16,384 (H20-B contradicted); A2 fails at both sizes (H20-C contradicted). The recomputation's presentation defects in the report are recorded and not corrected in the registered record.
+- **"Address each better" is taken as direction for P10-I:** each shortfall above is a candidate item for the integrated fourth study's proposal. The lead reads "same as the other" as: handled like the earlier accepted studies (recorded, committed, pushed). It is not read as a decision on any other open question (the P10-S1 and P10-S2 lead rulings reported to the human lead stay as reported, under the P10 delegation).
+- P10-I is proposed, not run, and needs the human lead's review (the standing delegation does not cover it). `Astra review: NOT_PERFORMED`.

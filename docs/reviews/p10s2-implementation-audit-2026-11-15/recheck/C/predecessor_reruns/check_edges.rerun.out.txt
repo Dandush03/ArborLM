@@ -1,0 +1,14 @@
+baseline good record: impl row 2 auditor row 7
+E1 gates record empty: impl row 2 (auditor: a registered label needs passed G1, G4-G9 records; expected 1 or 2, not a positive row)
+E2 G5 record absent: impl row 2
+E3 ensemble record absent: impl row 2
+E4 prefreeze record absent (teacher_only unknown): impl row 2
+E5 ablations absent for r0/ST1/AB and E_A of r1/MAF/BA: impl row 2 classes MAF {'AB': {'class': 'NOT_EVALUATED', 'reasons': ['replicate 0: ACQ1 control record missing']}, 'BA': {'class': 'NOT_EVALUATED', 'reasons': ['replicate 1: ACQ2 control record missing']}}
+E6 one ablation kind absent: impl row 2
+E7 ACQ1 at G=0.5, margin 0.7-0.4 (=0.29999999999999993 in binary): Verdict(ok=False, reasons=('lexical margin below 0.30',))
+E7b same margin as exact decimals 0.8-0.5: Verdict(ok=True, reasons=())
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-recheck-C/check_edges.py", line 86, in <module>
+    if got[k] != v:
+       ~~~^^^
+TypeError: tuple indices must be integers or slices, not str

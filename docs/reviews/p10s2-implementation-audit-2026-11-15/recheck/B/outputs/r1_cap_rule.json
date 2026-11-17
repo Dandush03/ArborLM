@@ -1,0 +1,167 @@
+{
+ "boundary": [
+  {
+   "P": 20.25,
+   "agree": true,
+   "impl": [
+    40.0,
+    "rung 1"
+   ],
+   "mine": [
+    40.0,
+    "rung 1"
+   ],
+   "need_as_computed": 40.0,
+   "need_minus_floor": 0.0,
+   "rung1_fits_at_impl_cap": true,
+   "target_need": 40.0
+  },
+  {
+   "P": 20.250000000000497,
+   "agree": false,
+   "impl": [
+    40.0,
+    "rung 2"
+   ],
+   "mine": [
+    41.0,
+    "rung 1"
+   ],
+   "need_as_computed": 40.0000000000005,
+   "need_minus_floor": 4.973799150320701e-13,
+   "rung1_fits_at_impl_cap": false,
+   "target_need": 40.0000000000005
+  },
+  {
+   "P": 20.250000000999997,
+   "agree": true,
+   "impl": [
+    41.0,
+    "rung 1"
+   ],
+   "mine": [
+    41.0,
+    "rung 1"
+   ],
+   "need_as_computed": 40.000000001,
+   "need_minus_floor": 9.999965300266922e-10,
+   "rung1_fits_at_impl_cap": true,
+   "target_need": 40.000000001
+  },
+  {
+   "P": 52.25,
+   "agree": true,
+   "impl": [
+    72.0,
+    "rung 1"
+   ],
+   "mine": [
+    72.0,
+    "rung 1"
+   ],
+   "need_as_computed": 72.0,
+   "need_minus_floor": 0.0,
+   "rung1_fits_at_impl_cap": true,
+   "target_need": 72.0
+  },
+  {
+   "P": 52.2500000000005,
+   "agree": true,
+   "impl": [
+    72.0,
+    "rung 2"
+   ],
+   "mine": [
+    72.0,
+    "rung 2"
+   ],
+   "need_as_computed": 72.0000000000005,
+   "need_minus_floor": 4.973799150320701e-13,
+   "rung1_fits_at_impl_cap": false,
+   "target_need": 72.0000000000005
+  },
+  {
+   "P": 16.250000000000497,
+   "agree": false,
+   "impl": [
+    36.0,
+    "rung 2"
+   ],
+   "mine": [
+    37.0,
+    "rung 1"
+   ],
+   "need_as_computed": 36.0000000000005,
+   "need_minus_floor": 4.973799150320701e-13,
+   "rung1_fits_at_impl_cap": false,
+   "target_need": 36.0000000000005
+  },
+  {
+   "P": 17.250000000000497,
+   "agree": false,
+   "impl": [
+    37.0,
+    "rung 2"
+   ],
+   "mine": [
+    38.0,
+    "rung 1"
+   ],
+   "need_as_computed": 37.0000000000005,
+   "need_minus_floor": 4.973799150320701e-13,
+   "rung1_fits_at_impl_cap": false,
+   "target_need": 37.0000000000005
+  }
+ ],
+ "grid_caps_mine": {
+  "36.0": 404,
+  "37.0": 39,
+  "38.0": 29,
+  "39.0": 41,
+  "40.0": 18,
+  "41.0": 33,
+  "42.0": 25,
+  "43.0": 4,
+  "44.0": 24,
+  "45.0": 10,
+  "46.0": 21,
+  "47.0": 16,
+  "48.0": 31,
+  "49.0": 37,
+  "50.0": 27,
+  "51.0": 59,
+  "52.0": 33,
+  "53.0": 30,
+  "54.0": 45,
+  "55.0": 35,
+  "56.0": 19,
+  "57.0": 27,
+  "58.0": 48,
+  "59.0": 23,
+  "60.0": 37,
+  "61.0": 46,
+  "62.0": 34,
+  "63.0": 38,
+  "64.0": 47,
+  "65.0": 31,
+  "66.0": 23,
+  "67.0": 52,
+  "68.0": 46,
+  "69.0": 25,
+  "70.0": 41,
+  "71.0": 48,
+  "72.0": 3254
+ },
+ "grid_mismatch_examples": [],
+ "grid_mismatches": 0,
+ "grid_outcomes_mine": {
+  "NOT STARTED: BUDGET": 2312,
+  "rung 1": 1576,
+  "rung 2": 530,
+  "rung 4": 382
+ },
+ "grid_points": 4800,
+ "random_mismatch_examples": [],
+ "random_mismatches": 0,
+ "random_points": 6000
+}

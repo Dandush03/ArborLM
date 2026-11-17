@@ -1,0 +1,37 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-afc8a4b295465fecc/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "arch_9cca808": {
+  "identity": {
+   "source_sha256": "6e56d4c7088388d86930167d559c168fdcaba0e6aa267228de079c9d7a96f408",
+   "spec_sha256": "bb3d213e8a44b5e68034ea23f70093d174d5ab4c73420f026a84fdb3db64237b",
+   "config_sha256": "6261db9259444a6f83ffe133bfaa7896f7b9afde654422883179a4093e5c443d",
+   "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507"
+  },
+  "train.py": "453b762cbe2ab8d50dd13d57755dc5a30e332e4dcd181fd4f20e9ca5f4ae280a",
+  "evaluate.py": "8c742bd283c376c637674cc98fac6ee0da1cc79b0e660fba5ba72a8dc8561459",
+  "model.py": "ac558df8292d2c24a71e85b8fd67f486fb7afe9878b621906a5871e1d15bdbe9"
+ },
+ "arch_af18a59": {
+  "identity": {
+   "source_sha256": "6e56d4c7088388d86930167d559c168fdcaba0e6aa267228de079c9d7a96f408",
+   "spec_sha256": "81cf4aa839300633301396e56ef7da715cd3b77534a268ec6e1b0459137e1739",
+   "config_sha256": "0d8b1f3449c1a54c699d5de49bee10f84d11e7c980d41689e8e58ee3609ca599",
+   "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507"
+  },
+  "train.py": "453b762cbe2ab8d50dd13d57755dc5a30e332e4dcd181fd4f20e9ca5f4ae280a",
+  "evaluate.py": "8c742bd283c376c637674cc98fac6ee0da1cc79b0e660fba5ba72a8dc8561459",
+  "model.py": "ac558df8292d2c24a71e85b8fd67f486fb7afe9878b621906a5871e1d15bdbe9"
+ },
+ "arch_3a9a742": {
+  "identity": {
+   "source_sha256": "054099e754fdf501258e74f9178857f026df72e6925e24bc01ae3f450e406d79",
+   "spec_sha256": "5757216ae7deeeb5079f11e20b87552d1643723b9fb3dc121620e314225760b3",
+   "config_sha256": "6261db9259444a6f83ffe133bfaa7896f7b9afde654422883179a4093e5c443d",
+   "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507"
+  },
+  "train.py": "453b762cbe2ab8d50dd13d57755dc5a30e332e4dcd181fd4f20e9ca5f4ae280a",
+  "evaluate.py": "8c742bd283c376c637674cc98fac6ee0da1cc79b0e660fba5ba72a8dc8561459",
+  "model.py": "ac558df8292d2c24a71e85b8fd67f486fb7afe9878b621906a5871e1d15bdbe9"
+ }
+}

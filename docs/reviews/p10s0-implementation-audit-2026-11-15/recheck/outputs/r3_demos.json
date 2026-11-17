@@ -1,0 +1,249 @@
+{
+ "M1_typed": {
+  "train q1 (no mode)": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `train` has no default mode: give --mode check, rehearsal or dry (registered mode is reached only through `registered <stage>`)",
+   "stdout": ""
+  },
+  "train q1 --mode registered": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `train --mode registered` is not a registered stage: use `registered <stage>` (the launch scripts), which verifies the frozen plan",
+   "stdout": ""
+  },
+  "gates --mode registered": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `gates --mode registered` is not a registered stage: use `registered <stage>` (the launch scripts), which verifies the frozen plan",
+   "stdout": ""
+  },
+  "q1-gate (no mode)": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `q1-gate` has no default mode: give --mode check, rehearsal or dry (registered mode is reached only through `registered <stage>`)",
+   "stdout": ""
+  },
+  "q1-gate --mode registered": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `q1-gate --mode registered` is not a registered stage: use `registered <stage>` (the launch scripts), which verifies the frozen plan",
+   "stdout": ""
+  },
+  "analyze --mode registered": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `analyze --mode registered` is not a registered stage: use `registered <stage>` (the launch scripts), which verifies the frozen plan",
+   "stdout": ""
+  },
+  "report --mode registered": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: `report --mode registered` is not a registered stage: use `registered <stage>` (the launch scripts), which verifies the frozen plan",
+   "stdout": ""
+  },
+  "work train --mode registered (no freeze commit)": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage requires --freeze-commit",
+   "stdout": ""
+  },
+  "work train --mode registered --freeze-commit HEAD (no plan in tree)": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: studies/p10s0/freeze/plan.json does not exist at 3a9a74235b49b53cfd72497edc8f081d1a1829d1: the freeze commit is the commit that adds the frozen plan",
+   "stdout": ""
+  },
+  "work gates --mode registered --freeze-commit HEAD": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: studies/p10s0/freeze/plan.json does not exist at 3a9a74235b49b53cfd72497edc8f081d1a1829d1: the freeze commit is the commit that adds the frozen plan",
+   "stdout": ""
+  },
+  "registered q1 (HEAD as freeze commit)": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: studies/p10s0/freeze/plan.json does not exist at 3a9a74235b49b53cfd72497edc8f081d1a1829d1: the freeze commit is the commit that adds the frozen plan",
+   "stdout": ""
+  }
+ },
+ "M1_no_run_dir_created": [],
+ "M2_driver": {
+  "--stage-cap-seconds 1e9": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --stage-cap-seconds",
+   "stdout": ""
+  },
+  "--ledger-root": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --ledger-root",
+   "stdout": ""
+  },
+  "--experiments-root": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --experiments-root",
+   "stdout": ""
+  },
+  "--rss-worker-bytes 1e12": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --rss-worker-bytes",
+   "stdout": ""
+  },
+  "--rss-aggregate-bytes": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --rss-aggregate-bytes",
+   "stdout": ""
+  },
+  "--synthetic-backbone": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --synthetic-backbone",
+   "stdout": ""
+  },
+  "--only": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --only",
+   "stdout": ""
+  },
+  "--cut3": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --cut3",
+   "stdout": ""
+  },
+  "--restore-split 1": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: a registered stage accepts no override of the frozen values; remove --restore-split",
+   "stdout": ""
+  },
+  "--restore-split <default>": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: studies/p10s0/freeze/plan.json does not exist at 3a9a74235b49b53cfd72497edc8f081d1a1829d1: the freeze commit is the commit that adds the frozen plan",
+   "stdout": ""
+  },
+  "--workers 6": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: studies/p10s0/freeze/plan.json does not exist at 3a9a74235b49b53cfd72497edc8f081d1a1829d1: the freeze commit is the commit that adds the frozen plan",
+   "stdout": ""
+  }
+ },
+ "M2_functions_in_registered_mode_even_if_an_override_got_through": {
+  "stage_cap(frozen 100)": 1000000000.0,
+  "ledger_root": "/Users/daniellaloush/dandush03/ArborLM/experiments",
+  "experiments_root": "/Users/daniellaloush/dandush03/ArborLM/experiments",
+  "limits": {
+   "rss_worker_bytes": 3221225472,
+   "rss_aggregate_bytes": 19327352832,
+   "workers": 6
+  }
+ },
+ "M2_note": "stage_cap still returns a typed value first; it is only unreachable because cmd_registered refuses overrides before run_block",
+ "generation_guards": {
+  "typed cap": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: registered generation takes its stage cap from the config: pass --generation-cap-from-config (and no --stage-cap-seconds)",
+   "stdout": ""
+  },
+  "no cap flag": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: registered generation takes its stage cap from the config: pass --generation-cap-from-config (and no --stage-cap-seconds)",
+   "stdout": ""
+  },
+  "flags ok, ledger override": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: registered generation accepts no override of the frozen values; remove --ledger-root",
+   "stdout": ""
+  },
+  "flags ok (this tree: no DECISION.md, provisional cap)": {
+   "rc": 2,
+   "stderr": "P10S0 stage REFUSED: refused: no recorded run decision (results/p10s0-freeze-<date>/DECISION.md): the lead's separate decision of ADR-0020 section 18 is required before registered generation",
+   "stdout": ""
+  }
+ },
+ "generation_block_in_tree": {
+  "cap_seconds": 1800.0,
+  "provisional": true,
+  "measured_seconds": 0.0,
+  "floor_seconds": 60.0
+ },
+ "cap_raise_config_only": "REFUSED: P10S0 config.resources.cap_hours: expected 16.0; got 20.0",
+ "cap_used_by_holds_and_ledger": {
+  "budget.holds default cap": 16.0,
+  "Ledger default cap_seconds": 57600.0
+ },
+ "M6_floor_case": {
+  "measured_analysis_s": 5.0,
+  "measured_report_s": 5.0,
+  "caps": {
+   "analysis": 60.0,
+   "report": 60.0
+  },
+  "pre_q1_action": "full",
+  "remaining_after_q1_at_cap_s": 20.0,
+  "analysis_require_room": "analysis REFUSED: stage analysis: 20 s of the S0 budget (57600 s) remain, less than the stage cap of 60 s; the work stops and returns to the human lead"
+ },
+ "M6_reserve_changes_decision": {
+  "with_reserve": "cut3",
+  "without_reserve": "full"
+ },
+ "M6_post_q1_reserve": {
+  "cuts_when_reserve_tips": [
+   1
+  ]
+ },
+ "M3_outcome": [
+  4,
+  "ADDRESSING-QUALIFIED (4,096 AND 16,384)",
+  "A5-D"
+ ],
+ "M3_products": {
+  "analysis.json": {
+   "mentions_A5-D": true,
+   "fourth": true,
+   "f1": true,
+   "sentence": true
+  },
+  "q1_gate.json": {
+   "mentions_A5-D": true,
+   "fourth": true,
+   "f1": true,
+   "sentence": true
+  },
+  "RESULTS.md": {
+   "mentions_A5-D": true,
+   "fourth": true,
+   "f1": true,
+   "sentence": true
+  },
+  "results.json": {
+   "mentions_A5-D": true,
+   "fourth": true,
+   "f1": true,
+   "sentence": true
+  },
+  "classes.csv": {
+   "mentions_A5-D": true,
+   "fourth": true,
+   "f1": true,
+   "sentence": true
+  },
+  "stdout": {
+   "mentions_A5-D": true,
+   "fourth": true,
+   "f1": true,
+   "sentence": true
+  }
+ },
+ "M3_unstamped_kind_gates_json": {
+  "mentions_A5-D": true,
+  "has_provenance": false
+ },
+ "m1_address_stable_11_of_20_nonfinite": {
+  "median": 0.0,
+  "label": null,
+  "cells": 20,
+  "non_finite": 11
+ },
+ "M9_banner_from_tree": "ArborLM is unproven research. Astra review: NOT_PERFORMED. A Claude review is neither Astra validation nor a human approval. The human lead accepted the P9-II outcome as registered (docs/decisions/ADR-0019-robust-sparse-address-learning.md section 16: \"yes I do, yes we can raise to 16 and I approve the package\").",
+ "M9_banner_missing": "ArborLM is unproven research. Astra review: NOT_PERFORMED. A Claude review is neither Astra validation nor a human approval. The state of the human lead's acceptance of the P9-II outcome was not recorded in this result.",
+ "M10_cut3": {
+  "outcome_label": "ADDRESSING-QUALIFIED (4,096 AND 16,384) [one initialization seed per draw at 16,384]",
+  "row": 4,
+  "label_in_md_count": 4,
+  "item4_line": [
+   "4. **Per size:** (label: one initialization seed per draw at 16,384)"
+  ],
+  "classes_csv_has_label": false,
+  "pooled_8k16k": {
+   "available": false,
+   "text": "NOT AVAILABLE (S0's protocol at this cell type is not P9-II's)"
+  }
+ }
+}

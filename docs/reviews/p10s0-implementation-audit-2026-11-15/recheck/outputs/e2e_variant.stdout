@@ -1,0 +1,86 @@
+{
+ "steps": {
+  "generate.sh": 0,
+  "scripts": [
+   [
+    "gates",
+    0,
+    0
+   ],
+   [
+    "q1",
+    0,
+    0
+   ],
+   [
+    "q1_gate",
+    0,
+    0
+   ],
+   [
+    "probe",
+    2,
+    2
+   ],
+   [
+    "wx",
+    0,
+    0
+   ],
+   [
+    "probe",
+    0,
+    1
+   ],
+   [
+    "analysis",
+    0,
+    0
+   ],
+   [
+    "report",
+    0,
+    0
+   ],
+   [
+    "q1",
+    2,
+    2
+   ]
+  ]
+ },
+ "freeze_commit": "60324c07bed7ee8185960673d623df7836466259",
+ "mismatches": [
+  [
+   "probe",
+   0,
+   1
+  ]
+ ],
+ "q1_start": {
+  "cut": 3,
+  "cut3": true,
+  "decision": {
+   "action": "cut3",
+   "charged_seconds": 382.8816904181149,
+   "cut": 3,
+   "required_seconds": 43421.47222343807,
+   "status": null
+  },
+  "kind": "q1_gate",
+  "label": "one initialization seed per draw at 16,384",
+  "schema": 1,
+  "study": "P10S0"
+ },
+ "q1_gate_blocks": {
+  "probe": {
+   "run": true,
+   "status": null
+  },
+  "wx": {
+   "run": true,
+   "status": null
+  }
+ }
+}
+exit 1

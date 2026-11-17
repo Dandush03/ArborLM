@@ -1,0 +1,37 @@
+{
+ "files": {
+  "tatoeba/deu_eng_links.tsv.bz2": {
+   "bytes": 3552331,
+   "sha256": "183c21ff5d211ad6dda98c745c15e0e0290cba2217a3fab06eb429f4b0480354"
+  },
+  "tatoeba/deu_sentences.tsv.bz2": {
+   "bytes": 12144786,
+   "sha256": "798c9f3d31a0ba58be45347d0441e46c8c838093a112586319da94f046096a06"
+  },
+  "tatoeba/eng_deu_links.tsv.bz2": {
+   "bytes": 3557634,
+   "sha256": "5a97afb288715944ae3ec304d8c5b0f7898dc45d6ece773841dc7ebeeb14e0a2"
+  },
+  "tatoeba/eng_fra_links.tsv.bz2": {
+   "bytes": 2679128,
+   "sha256": "a8d9ebf9010f8993f89a251619d56e30da4f0bffc780f1c7f9aaf52675f7e069"
+  },
+  "tatoeba/eng_sentences.tsv.bz2": {
+   "bytes": 24947715,
+   "sha256": "3b5b3ecfcac5037b09f81ef048fa16fedc4d24838db5b6fbeedca1dfab374cbf"
+  },
+  "tatoeba/fra_eng_links.tsv.bz2": {
+   "bytes": 2678076,
+   "sha256": "2a67fe7ff08ca7e2945d2cd84488d98480ad539dd09bdbdd633f9df117c2d497"
+  },
+  "tatoeba/fra_sentences.tsv.bz2": {
+   "bytes": 9805546,
+   "sha256": "102b245952878f647d101ce4b38fc60ffb9b289df22b0aeb59415c25e6341cc6"
+  }
+ },
+ "finished": "2026-11-15T19:35:44+00:00",
+ "schema": 1,
+ "session_date": "2026-11-15",
+ "started": "2026-11-15T19:34:41+00:00",
+ "what": "Tatoeba exports: SHA-256 and sizes recorded at the first download and frozen (ADR-0022 section 14.1)"
+}

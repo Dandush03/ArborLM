@@ -967,3 +967,77 @@ Three parallel independent audits (Opus 5.5) of the stand-in implementation at c
 | C reading 5 annotations | Warning annotations are printed if they hold in any replicate or order; the mean is printed beside them |
 | **C-M6 the router can pass GEN by position alone** | GEN is measured twice for the marker stratum: with the decision at token 64 as registered, and with the decision at the last token of the first marker-like string in tokens 1–64. **The existing GEN threshold (a loss increase of at most 0.02 nats) must hold under both.** No new threshold is introduced. The false-trigger rate stays a printed diagnostic. This makes GEN harder to pass and is decided before any router exists |
 
+### One further ruling — bootstrap intervals (2026-11-15 UTC)
+
+The implementer stopped on a conflict: the intervals of every printed score use listed seed 220906, but G9 allowed the 2209xx seeds only in the data-generation and partition steps, so an interval computed in the analysis would be refused. Ruling (before any S2 record exists): **220906 is drawn in the analysis stage and nowhere else**; G9 lists it for that stage, with a fresh generator per printed interval in a fixed order (the order of the registry). Intervals are descriptive and enter no rule.
+
+## Addendum — rulings on the points the three fix lanes left open (2026-11-15 UTC)
+
+Made by the lead (Claude Fable 5.2) before any S2 download, data-generation, calibration, rehearsal or registered record exists. Part of the specification. The lanes' own notes are `HANDOFF_A.md`, `HANDOFF_B.md` and `HANDOFF_C.md` at the repository root of the S2 branch.
+
+**Data (lane A).** Accepted as implemented, each marked [lead's choice]: one panel representative per identity group is the first key in sorted order; a source with no gold pair has its contraction-expanded string as identity unit; the 220909 sentences are drawn from the capability's own generation sources; the link-resolution guard at a share of 0.5 is an engineering guard that stops the step and enters no rule; one pooled new-token limit; R-icl demonstrations in tokenization test (a) come from the whole accepted pool; the filter-score assertion covers the first batch; the chrF cross-check pairs teacher A's outputs with the German references; tokenization test (b) records its mismatches and stops the step only where the ADR says a test stops it. **Not accepted:** leaving the teachers' outputs unchanged where §6.1 names a panel. Both teachers are run on every panel §6.1 names, D_con and E_open included; if §6.1 cannot be applied to a panel without a choice, that panel's item is stopped and returned to the lead.
+
+**Stages (lane B).**
+- *Device.* The registered training device is the one frozen. It is MPS unless the rehearsal itself cannot run on MPS, in which case the freeze may record CPU (§13.3's fallback) with every rate rehearsed on CPU; G4's MPS comparison then prints NOT APPLICABLE — TRAINING ON CPU BY THE FREEZE. In every other registered run G4 must run and pass. No device change after the freeze.
+- *The cap raise is a rule, not a discretion.* At the freeze the code computes the cap from the rehearsal record: 36 hours if rung 1 satisfies P + 2R ≤ 36; otherwise the smallest whole number of hours up to 72 at which rung 1 satisfies it; otherwise 72, with the rung order applied against 72; if no rung fits, NOT STARTED: BUDGET. A freeze that records any other cap is refused.
+- *Reserve.* The analysis and report reserve is the sum of their frozen stage caps (floor 60 seconds each), as in ADR-0020.
+- *Rehearsal scaling.* Scoring is timed on calibration items and scaled by registered item counts; combined scoring is counted once; where a full-length cell of one type stands in for another (ST1 for M-append-frozen), the record says so and the registered projection uses the larger of that rate and the type's own 200-update rate.
+- The pre-freeze gates run on rehearsal seeds with the largest rung's replicate count.
+
+**Rules (lane C).** A missing gates record, a missing gate (G2 included), or a missing ensemble record gives INCOMPLETE; a failed gate gives ENGINEERING-FAILURE. A control that is NOT_EVALUATED blocks label rows 6–8 whichever cell it belongs to. Route accuracy on general text is measured on 200 unseen WikiText-2 train pieces [lead's choice, to match the 200 GEN windows], never on the GEN windows. E_open is built and scored as §6.1 and §10 say.
+
+## Addendum — rulings on the three re-checks of the integrated implementation (2026-11-15 UTC)
+
+Three parallel independent re-checks (Opus 5.5) of commit `fc08681` are in `docs/reviews/p10s2-implementation-audit-2026-11-15/recheck/{A,B,C}/`. Each verdict is READY AFTER LISTED FIXES: every blocker and major of the first audits is fixed; seven new majors and the minors listed there remain. The download path was cleared, and the first download (29 files, 936,320,520 bytes, every file verified) has been made. The first independent audit of the combined tasks in code agreed with the addendum everywhere (0 disagreements over 140,000 composition lines) and found no strategy that passes the strengthened rule without producing the correct second answer on most items. The rulings below are the lead's (Claude Fable 5.2), made **before any data-generation, calibration, rehearsal or registered record exists**. Part of the specification. Astra review: NOT_PERFORMED.
+
+**Data (re-check A).**
+- *R1.* G1 covers the training-side panels: no identity group of a no-gold source may be shared with Q, D_cal or D_con, and stream groups are checked against every panel.
+- *R2.* The data-generation packages are installed with hashes required into a dedicated git-ignored directory that is put on the path of the data-generation process only; the requirements file is checked from the locked environment before anything is installed; option lines other than `--hash` are refused; the installed versions must equal the eight pins. Neither lock file changes.
+- *R13 — the lead's earlier acceptance is withdrawn.* A teacher's score on a panel of the other capability is defined as §4.3 item 2 defines it on Q, and is computed on every panel §6.1 names; no new choice is involved.
+- *R14.* The rehearsal never computes the GEN measurement on the registered windows; it times it on windows cut by the same rule from WikiText-2 train text.
+- *R16.* A data-generation step that stops on its cap or on an engineering error may be re-run after the cause is recorded: it reads no outcome of the study. Every attempt is charged and its stop record kept. A stop on a registered test of the step (a tokenization test, the filter-score assertion, the chrF cross-check) is not an engineering error and returns to the lead.
+
+**Stages (re-check B).** N1: the rehearsal times E_open (on calibration stand-in panels, oracle route) and its item counts enter R. N2: the plan records the ledger's length and hash at the freeze and every registered stage verifies them. N3: pre-freeze records carry the bundle manifest hash, code commit, config hash, seed mode, update counts and device; typed update counts and devices are refused; the freeze checks all of them and refuses stand-in records. m1: memory is the sum of resident and MPS memory. m2: M-joint, E-table and L-joint may be rehearsed at 200 updates, and their projected rate is the larger of that rate and the full-length rate of the nearest full-length type. m8: a killed process is charged its elapsed time up to its stage cap. m12: a stage that fails mid-sequence writes a stop record and the outcome is INCOMPLETE or ENGINEERING-FAILURE as §11 defines.
+
+**Rules (re-check C).**
+- *N-M2.* On C2 the German answer of every adapter arm is its single-task answer by construction. Its H for that answer is printed **BY CONSTRUCTION**, and a COMPOSES C2 line of an adapter arm says that it rests on the French answer alone.
+- *m7.* TEACHER-EQUIVALENT-TO-GOLD is printed if it holds for either capability.
+- *m9.* The second GEN decision is taken at the last token of the first marker-like string **extended through a colon that immediately follows it**, so that the decision can land on the position every task prompt ends on. No threshold changes; this makes GEN harder to pass and is decided before any router exists.
+- *m10 (stated, not changed).* Because chrF weights recall, a second answer that repeats the first answer and then gives the correct one can pass the composition rule. The exact-match pass rate is printed beside every composition line with the sentence that a high H with a low pass rate is contamination, not composition. The rule the human lead approved is not altered.
+- N-M1, m1–m6 and m8 are implementation defects fixed as the re-check states; the human lead's sentence is printed in the report.
+
+
+## Addendum — the marker-like stratum of the GEN panel has 44 windows, not 100; the lead's ruling (2026-11-16 UTC)
+
+**What happened.** Data-generation attempt 4 (code `f3fd77d`; `data/p10s2-pre-20261115/data/datagen_attempts/attempt-004.json`, stop kind `registered-test`) stopped by its own rule: on the fixed grid of §6.4 (WikiText-2 validation, consecutive non-overlapping windows of 256 tokens) the marker-like stratum holds **44** windows, and §6.4 asks for 100. No bundle was written. No model was trained, no registered model seed was used, and no loss of any window under any student was computed: the count is a property of the text and the grid, not an outcome. Attempts 1–3 were engineering stops (two set-up errors of the lead's launch, one loader defect fixed in `f3fd77d`); all four records are kept and charged.
+
+**Why not the alternatives.** A finer or overlapping grid would manufacture correlated windows from the same 44 places. WikiText-2 train cannot supply them: its prefixes train the router's "none" class (§5), so the panel would no longer be held out from the router. The 100 was the lead's choice in revision 4 and was never checked against the text.
+
+**Ruling (the scientific lead, under the human lead's delegation that P10 studies may be self-approved; reported to the human lead).**
+
+1. **The marker-like stratum is every window of that stratum on the fixed grid: 44 windows.** Nothing is sampled for it, so no choice enters. The ordinary stratum stays 100 windows sampled with the GEN-window seed, as registered. The panel is 144 windows.
+2. **The weighting of the registered panel is kept.** The panel loss of every GEN reading is the equal-weight mean of the two stratum means (one half marker-like, one half ordinary), which is what a 100/100 panel computes. The marker-like windows are not diluted to 44/144. The threshold stays **0.02 nats** and holds under both decisions of the marker-like stratum (token 64, and the first marker-like string extended through a following colon), exactly as before.
+3. **Stated limit.** The marker-like half of every GEN reading rests on 44 windows. Every GEN line prints the two stratum counts (44 and 100) and both stratum means. H22-G's sentence "a panel half of whose windows contain marker-like strings" is read as "half of whose weight".
+4. **Fail-fast order.** Data generation checks every count the specification requires of the fixed inputs (the window strata, and the Tatoeba and corpus sizes of §4) before the long teacher generation, so that a shortfall stops in seconds. The order of checks changes; no draw, seed or sample changes, and a test shows the bundle's sampled items do not depend on that order.
+5. If a count other than this one falls short, the work returns to the lead again; nothing else is relaxed by this addendum.
+
+Attempt 4 is released by `lead_release.json` naming attempt 4 and this addendum. Astra review: NOT_PERFORMED.
+
+## Addendum — the data step's outcome and the human lead's acceptance (2026-11-16 UTC)
+
+**The outcome.** The pre-freeze data-generation step ran complete on its eighth attempt (code `b3c17e6`; record `results/p10s2-datagen-2026-11-16/`). The teacher qualification gate of §4.3 fails for both primary teachers on condition 3 only: accepted items on Q_check 78 (A) and 22 (B) against the minimum of 150 (§5.3), and accepted pools 7,804 (A) and 2,341 (B) against 8,000. Conditions 1 and 2 pass (own scores 0.7675 and 0.7754; margins 0.6214 and 0.6425) and point precision on Q_check is 0.9231 and 0.9545. Both primary teachers fail, so the fallback of §4.2 does not apply. By the outcome table (row 3) the study stops before the freeze: **TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED**. No student was trained. The independent recomputation (Opus 5.5, `docs/reviews/p10s2-qualification-2026-11-16/REVIEW.md`) agrees, with the noted defect that the gate's per-item inputs on Q were not stored.
+
+**The human lead, verbatim**, on being asked whether the outcome is accepted as registered:
+
+> we should accept it as it is, and start working on P10-I on all of the simulation meaning
+>
+> P10-I-S0, P10-I-S1, P10-I-S2
+>
+> because each have their own correction that needed to be done, and now we have more data including the result of P9-II
+
+Recorded by the lead:
+
+- **The P10-S2 outcome is accepted as registered and unchanged.** No threshold, count or class is altered. S2's question (two-teacher transfer into the frozen student under oracle addressing) is not tested; nothing here supports or contradicts it. P10-S2 is complete with this outcome and nothing further runs under ADR-0022.
+- The shortfall is one of the registered design's sizing against its own acceptance filter (a 500-item Q_check against a 150-item minimum at acceptance rates of 8–21%; 60,000 generation sources against an 8,000-item pool). It is recorded, not repaired, under this ADR. The repair belongs to P10-I-S2.
+- P10-I is drafted as three parts, P10-I-S0, P10-I-S1 and P10-I-S2, each carrying the corrections its P10 study showed to be needed and using the P10 and P9-II records. Each is a proposal; none is implemented or run before the human lead's review and recorded approval (the P10 delegation does not cover P10-I).
+- `Astra review: NOT_PERFORMED`.

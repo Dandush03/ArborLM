@@ -1,0 +1,50 @@
+[
+ {
+  "case": "guard_python_loop",
+  "sigint": "ignore",
+  "result": "CapReached: the stage cap of 1.0 s was reached",
+  "seconds": 1.045
+ },
+ {
+  "case": "guard_python_loop",
+  "sigint": "default",
+  "result": "CapReached: the stage cap of 1.0 s was reached",
+  "seconds": 1.05
+ },
+ {
+  "case": "old_interrupt_main",
+  "sigint": "ignore",
+  "result": "loop ran to its end (no stop)",
+  "seconds": 6.0
+ },
+ {
+  "case": "old_interrupt_main",
+  "sigint": "default",
+  "result": "KeyboardInterrupt: ",
+  "seconds": 1.017
+ },
+ {
+  "case": "guard_sleep",
+  "sigint": "ignore",
+  "result": "CapReached: the stage cap of 0.5 s was reached",
+  "seconds": 2.01
+ },
+ {
+  "case": "guard_sleep",
+  "sigint": "default",
+  "result": "CapReached: the stage cap of 0.5 s was reached",
+  "seconds": 2.01
+ },
+ {
+  "case": "guard_train_arm",
+  "sigint": "ignore",
+  "result": "train_arm returned: status failed, updates 0, error 'stopped at update 0: the stage cap of 1.0 s was reached'",
+  "seconds": 1.018
+ },
+ {
+  "case": "guard_train_arm",
+  "sigint": "default",
+  "result": "train_arm returned: status failed, updates 0, error 'stopped at update 0: the stage cap of 1.0 s was reached'",
+  "seconds": 1.046
+ }
+]

@@ -1,0 +1,21 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a91c79a181109bb9c/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+GAP_MIN=0.3 acq_gap_min=0.5 composes_ratio_min=0.8 composes_negative=0.5 gen_loss_margin=0.02
+composition rule: 30000 random arms, outcome counts {'NOT_EVALUATED': 29702, 'COMPOSITION INCONCLUSIVE': 285, 'DOES NOT COMPOSE': 13}, disagreements 0
+H exactly 0.80 both answers -> passes=True (spec: >= 0.80 passes)
+G exactly 0.50 -> h={'A': 1.0, 'B': 1.0} (spec: defined at >= 0.50)
+teacher gap exactly 0.30 -> h={'A': 1.0, 'B': 1.0} reasons=() (spec: defined at >= 0.30; IEEE: 0.3-0.0 == 0.3)
+gen_gate(0.02,0.02)=True gen_gate(0.02,0.0200001)=False gen_gate(0.03,None)=False gen_gate(0.01,None)=None gen_gate(0.01,nan)=None
+m9 toy: text 'ab German: ...' (char tokens); marker_end=9, char at marker_end=':' (expected ':' at index 9)
+m9 toy: no colon -> marker_end=8 char 'n' (expected 'n' at 8)
+m9 toy: colon just beyond the decision span -> marker_end=38 (expected 38, never beyond the span)
+all-NOT_EVALUATED composition block: line0==ORACLE True, line1==COMBINED True
+C2 L-sep COMPOSES line: - C2 L-sep: COMPOSES (4 replicates, U = 2,000) (n items 500; items per answer {'A': 500, 'B': 500}; n replicates = 4); exact-match pass rate 0.050 (a high H with a low pass rate is contamination, not composition); this COMPOSES line rests on the French answer alone; reasons: none; revision 5's ratio C/(0.80 S), revision 5's raw-score rule, replaced by the human lead: {}
+C2 L-sep cell line:   - order -, replicate 0 (n items 500; per answer {'A': 500, 'B': 500}): H {'A': 'BY CONSTRUCTION (1.0)', 'B': 0.9}, single-task G {'A': 0.7, 'B': 0.8}, s combined {}, s single {}
+refused as required: 'ot autonomous learned memory.\nC1 M-ii r0: COMPOSES'
+refused as required: '.\nC1 M-ii r0: H_a 0.91 / 0.88 on the second answer'
+refused as required: 'M-ii composes C1'
+refused as required: 'M-append-frozen learned the new capability autonomously: TRANSFER-POSITIVE'
+check_text did NOT refuse (no oracle line above): 'The memory learned French on its own: success'
+check_text did NOT refuse (no oracle line above): 'autonomous learned-memory success on French'
+done

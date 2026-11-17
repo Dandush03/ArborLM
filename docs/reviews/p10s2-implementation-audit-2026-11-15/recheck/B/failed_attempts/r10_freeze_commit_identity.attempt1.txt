@@ -1,0 +1,18 @@
+(eval):1: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+(eval):1: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+(eval):1: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+(eval):2: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+(eval):2: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+fatal: not a git repository (or any of the parent directories): .git
+fatal: not a git repository (or any of the parent directories): .git
+(eval):3: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+(eval):3: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+(eval):3: no such file or directory: git -c user.name=r -c user.email=r@example.invalid -c commit.gpgsign=false -c core.hooksPath=/dev/null
+fatal: not a git repository (or any of the parent directories): .git
+A= B=
+log --diff-filter=A (newest first):
+fatal: not a git repository (or any of the parent directories): .git
+(eval):5: bad substitution
+fatal: not a git repository (or any of the parent directories): .git
+tree of plan at A vs HEAD equal: yes
+(eval):6: not enough directory stack entries.

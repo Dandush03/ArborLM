@@ -1,0 +1,7 @@
+attempt stopped: ScoreMismatch: first registered-test stop
+lead_release.json written once (content not read by the gate)
+attempt stopped: RegisteredTestStop: second registered-test stop (e.g. chrF cross-check)
+after the SECOND registered-test stop, rerun gate = None (None means a re-run is allowed without a new lead release)
+attempt records: ['attempt-001.json', 'attempt-002.json', 'lead_release.json']
+datagen start markers carry cap_seconds: [False, False]
+prefreeze_record keys include code_commit: False

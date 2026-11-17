@@ -1,0 +1,10 @@
+A=26d7f57b91741d81d2e913340819b6fc202b1841
+B=b01f36b0b4f3e1addebc98aa0488d362a7936076
+git log --diff-filter=A (newest first):
+b01f36b0b4f3e1addebc98aa0488d362a7936076 re-add B (same content)
+26d7f57b91741d81d2e913340819b6fc202b1841 freeze A
+after merging (strategy ours) a side branch that also added plan.json:
+b01f36b0b4f3e1addebc98aa0488d362a7936076 re-add B (same content)
+26d7f57b91741d81d2e913340819b6fc202b1841 freeze A
+with --all (what plan_in_history uses):
+a8ef9f6b405a41b0c6341bc1fff04f50b3d2fb0f side add S
