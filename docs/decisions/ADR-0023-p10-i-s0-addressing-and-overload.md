@@ -2,7 +2,7 @@
 
 **Status: DRAFT — NOT APPROVED. Nothing under this ADR is implemented, calibrated, frozen or run.**
 
-- **Date:** 2026-11-17 (UTC). Draft 2: draft 1 revised after the independent specification review (`docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0023.md`, verdict NOT READY). Section 18 maps every finding to its disposition.
+- **Date:** 2026-11-17 (UTC). Draft 3: revised after the independent specification review (`docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0023.md`, NOT READY) and the confirmation review (`REVIEW2_ADR-0023.md` beside it, NOT READY, no blocking finding). Section 18 maps every finding of both to its disposition.
 - **Study code:** P10IS0. Proposed package `studies/p10is0/`, config `configs/p10is0_overload.toml`, tests `tests/test_p10is0_*.py`.
 - **Direction it follows:** `docs/reviews/p10-i-direction-2026-11-17/DIRECTION.md` section 4 (P10-I-S0) and section 5 (policy on limits). Its constraints are binding here.
 - **Standing.** ArborLM is unproven research. `Astra review: NOT_PERFORMED`. A Claude review is neither Astra validation nor a human approval. The P10 delegation ("p10 can be self approve but p10-I need my review", ADR-0020 section 18) does not cover this study: every decision gate below is the human lead's.
@@ -61,9 +61,9 @@ Remarks on the records.
 
 - `studies/p10is0/` holds, in new files, its own cell type and cell record (not passing through `p9ii.core.Cell`), its own plan, trainer and evaluator wrappers, and its own rehearsal whitelists. No file of `studies/p9`, `p9i`, `p9ii` or `p10s0` is edited. The model, the losses (including L_div) and the update step are called from `studies.p9ii`, not rewritten.
 - **What the new path must reproduce:** P10-S0's training and evaluation of A5-D, A0 and A6 exactly, at every size where both paths exist.
-- **Identity gate, part (a):** at 4,096 and at 16,384 slots, for A5-D, A0 and A6, the new path's initial model, one forward, one update and one full evaluation record are bit-identical to P10-S0's path on a shared rehearsal seed.
+- **Identity gate, part (a):** at 4,096 and at 16,384 slots, for A5-D, A0 and A6, the new path's initial model, one forward, one update and one full evaluation record are bit-identical to P10-S0's path. **This gate re-uses a P10-S0 seed set by name:** P10-S0's rehearsal set (data base 209101, initialization seed 2092; ADR-0020 section 7), because P10-S0's path accepts only its own sets (`studies/p10s0/core.py`, `check_seed_set`). It is a read-only re-use for an identity check, as P10-S0's G4 re-used P9-II's rehearsal set 5. It must be entered in the seed registry as a declared re-use before the freeze; it enters no class and no rehearsal measurement.
 - **Identity gate, part (b):** at each new slot count (512, 1,024, 2,048, 8,192), the new path's model equals `p9ii.model.build_model(arm, N, seed)` tensor for tensor, and one update equals a direct reference implementation written for the gate (the auditor writes its own).
-- **End-to-end gate at small stores:** the read swap (no fixed point; swapping twice restores the logits), the probe-set slot counts and ADDRESS STABLE run end to end at 512 and 1,024 slots on the rehearsal draw.
+- **End-to-end gate at every new size:** the read swap (no fixed point; swapping twice restores the logits), the probe-set slot counts and ADDRESS STABLE run end to end at 512, 1,024, 2,048 and 8,192 slots on the rehearsal draw.
 
 | Arm | Definition | Runs at | Isolates |
 |---|---|---|---|
@@ -87,9 +87,9 @@ Not run, and why:
 |---|---|
 | Overload; one load, one length; lane L in the loaded regime | Accepted: the subject of this study (sections 4, 5, 15) |
 | A5-D against A0 at 16,384 (candidate) | Accepted as an annotation: the anchor cell type 8K/16K has ten A5-D/A0 pairs at T (section 6.7). It is a new measurement at a longer duration and one seed per draw, not a re-reading of H20-D |
-| Condition 6 decided no class | Accepted as a design note: condition 6 stays in the composite unchanged, and the report prints for every cell type whether it decided any cell. Risk stated: P10-S1's reference failed the same condition at low accuracy (`ACCEPTANCE.md` ruling 1); if A6 fails it at a loaded cell type in Stage R, that cell type is NOT EVALUABLE (section 5.2) |
-| Record-length-free variant WX (candidate) | **Declined.** A different interface question; by ADR-0020 a WX failure can never be read as evidence. The drafter proposes the ledger mark it CLOSED AS RECORDED (unresolved) or name another study |
-| 65,536 slots (candidate) | **Declined.** The question here is load, not size, and a 32,768-fact series at converged durations would cost more than the rest of the study. The drafter proposes the ledger route it to P10-I-S1's 16,384→65,536 item or close it as recorded |
+| Condition 6 decided no class | Accepted as a design note: condition 6 stays in the composite unchanged, and the report prints for every cell type whether it decided any cell. The reference's own risk on condition 6 is estimated as small and on condition 4 as open (section 5.2) |
+| Record-length-free variant WX (candidate) | **Declined.** A second interface change beside load; by the record a WX failure is "not evidence that the record length is required". Proposed ledger disposition: CLOSED AS RECORDED (unresolved; declined here; pending the human lead) |
+| 65,536 slots (candidate) | **Declined.** The question here is load, not size, and a 32,768-fact series at converged durations would cost more than the rest of the study. Proposed ledger disposition: CLOSED AS RECORDED (unresolved). No P10-I study takes it: ADR-0024's 16,384→65,536 item is an oracle-capacity transition and its lane L uses only this study's tested cell types. "Addressing at 65,536 is not qualified by any study" stays visible |
 
 The two declined rows are a difference from the ledger and are reserved for the human lead (section 16 item 9).
 
@@ -114,9 +114,21 @@ Load is varied by changing the slot count at a fixed fact set, so that every loa
 
 - **Registered draws:** 10, each a complete independent data set (2,048-fact and 8,192-fact sets, training stream, calibration stream, Panels A and B, H1, H2, unseen-fact control, as ADR-0020 section 7). **Reserve draws:** 4. Draws are generated until ten pass gate G1, within the four reserves; the number used is recorded and is not a claim.
 - **Calibration draws:** 2 (Stage R only). **Rehearsal draw:** 1. **Pipeline check:** 1 seed set. **Unit tests:** a range of about 1,000.
-- **Initialization seeds needed:** 2 registered (A5-D and A0 use the first on odd draws and the second on even draws; A6 uses the first on every draw); 2 for calibration, one per calibration draw, so that the two calibration runs differ in initialization as well as data; 1 for rehearsal and pipeline check.
+- **Seed values are those of the programme-wide registry**, `docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md` (written by the `arbor-auditor` subagent; its checker `seed_registry_check.py` prints RESULT: PASS in its section 6). This study adopts them exactly:
+
+| Role | Registry values |
+|---|---|
+| Registered and reserve draw sets | 300001–306999: draw d at 300001 + 100·(d − 1), d = 1…10; reserves at 301001, 301101, 301201, 301301; P10-S0's in-set layout |
+| Calibration draw sets | 309001, 309101 |
+| Rehearsal draw set; pipeline-check set | 309201; 309301 |
+| Initialization, registered | 330001 (A5-D and A0 on odd draws; A6 on every draw), 330002 (A5-D and A0 on even draws) |
+| Initialization, calibration | 330091 (calibration draw 1), 330093 (calibration draw 2), so the two calibration runs differ in initialization as well as data |
+| Initialization, rehearsal and pipeline check; test mode | 330092; 330098 and 330099 |
+| Unit tests | 932001–932999 |
+
+- **The registry's rule (its section 4.3, condition 1) binds this study:** no initialization seed is derived arithmetically from a data, calibration, rehearsal or test seed; rehearsal and test modes take the named seeds above. The memory initializers derive generator seeds as seed + 1000·k (`studies/p9/model.py` lines 272–276); the registry keeps 331000–340999 unallocated for that reason. Draft 1's initialization seeds (3001, 3002, 3091, 3092) were P10-S0's derived seeds and are withdrawn.
+- This study's seed gate checks its planned and recorded seeds against the registry with the derivation rules expanded, read from code and configs, and re-runs the checker before the freeze. The one declared re-use is the identity gate's P10-S0 rehearsal set (section 3).
 - One seed per draw because P10-S1's corrected seed-block record shows the data draw dominating the spread in 24 of 28 comparisons (`results/p10s1-run-2026-11-17/ERRATUM_SEED_BLOCK.md`), and the per-draw bound depends on draws.
-- **No seed value is proposed here.** Draft 1's initialization seeds (3001, 3002, 3091, 3092) were wrong: the memory initializers derive generator seeds as seed + 1000·k for k = 1…5 (`studies/p9/model.py` lines 272–276; `studies/p10s1/core.py` `DERIVED_INIT_OFFSETS`), so those values are P10-S0's derived seeds. Data, initialization and test seed ranges for all P10-I studies are assigned in one programme-wide registry that the lead will write, `docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md`. Before any freeze the registry is checked by code against every literal **and derived** seed in the repository (the seed + 1000·k rule included), read from the code and configs and not from an ADR's list. This study's seed gate asserts its assigned ranges, with their derived sets, against that check.
 - All registered and reserve draws are generated, hashed and G1-checked at the freeze, before any model sees them.
 
 ### 4.3 Checkpoints
@@ -132,21 +144,37 @@ Durations are in exposures per fact, e. Updates = e × F / 128 (512 exposures = 
 - **Base ladder:** e ∈ {512, 1,024, 2,048, 4,096, 8,192, 16,384}.
 - **Measures:** m_P = mean accuracy on Panels A and B; m_H = mean accuracy on H1 and H2.
 - **Plateau at e:** |m(2e) − m(e)| ≤ 0.01 **and** |m(4e) − m(2e)| ≤ 0.01, for both measures, for A5-D and A6, on both calibration draws. The rule is two-sided: held-out accuracy can fall with longer training, and a readout on a falling curve is not a converged readout. Two consecutive steps are required because one flat step can precede an escape.
-- **Floor:** a plateau at e counts only if m_P(e) of A5-D and of A6 is at least the cell type's evaluability floor (0.90 at load 0.5; 0.50 at loads of 1 and above) on both calibration draws **[choice]**. Reason: P10-S1 had to add such a floor because without it every calibration cell met its rule before it had learned (ADR-0021 revision 5), and in P10-S0 A0 sat collapsed and then escaped (median 13,664 updates). Stated consequence: an A5-D that settles below the floor never has a plateau, the cell type is NOT SHOWN, and a failure there reads UNRESOLVED.
+- **Floor, on the reference only:** a plateau at e counts only if A6's m_P(e) is at least the cell type's evaluability floor (0.90 at load 0.5; 0.50 at loads of 1 and above) on both calibration draws **[choice]**. Reason: P10-S1 had to add such a floor because without it every calibration cell met its rule before it had learned (ADR-0021 revision 5).
+- **No floor on A5-D.** An A5-D that meets the two-step rule while its m_P(e\*) is below the floor on either calibration draw **counts as a plateau** and is printed **A5-D FLAT BELOW FLOOR** in `durations.json` and in every label of that cell type. A recipe that has converged and fails is a registered NOT QUALIFIED, not UNRESOLVED, and is not run at the maximum length because it fails. The step rule already needs two flat doublings, A5-D did not collapse in P10-S0 (10 of 10), and the longest A0 escape there (30,656 updates) is below the ladder's first step at 8,192 facts.
 - **e\*** is the smallest ladder value with a plateau. **T = 2·e\*.** The rehearsal trains to 4·e\* = 2T. On the base ladder the largest e\* is 4,096 and the largest T is 8,192 exposures (524,288 updates at 8,192 facts; 131,072 at 2,048 facts). For comparison, P10-S1's loaded cells ran 6,144 and 3,072 exposures.
 - **0.01 [choice]:** one tenth of the 0.10 tolerance of conditions 1 and 4.
 - **One T per cell type**, used by every arm there. A0 takes it without a rehearsal of its own; every A0 label says so.
-- **Extension rule (design ceiling, DIRECTION.md section 5).** If a cell type has no plateau on the base ladder, code extends that cell type's ladder by one further doubling (to 32,768; then e\* may be 8,192 and T 16,384 exposures) **[choice: one doubling]**, provided the study's projected total charged hours, computed from measured rates and durations only, stays within the hour budget the human lead sets at Decision 1 (recommended: 80 hours, section 11). Extensions are granted in order of ascending load, series M before S. The rule runs inside Stage R, before the freeze, with no registered seed observed and no person choosing.
-- **At the extended ceiling, NOT SHOWN is the registered outcome.** The cell type runs at T = 16,384 exposures (8,192 if the budget refused the extension) and is marked **CONVERGENCE NOT SHOWN IN REHEARSAL**. Reason for stopping there: at 16,384 exposures one 8,192-fact cell is about 1,048,576 updates (about 3 hours), and one cell type about 15 hours on six workers; a longer duration is a new budget decision for the human lead in a new ADR, not a rule this study applies to itself.
+- **Extension rule (design ceiling, DIRECTION.md section 5).** If a cell type has no plateau on the base ladder, code may extend that cell type's ladder by one further doubling (to 32,768 exposures; then e\* may be 8,192 and T 16,384) **[choice: one doubling]**. The rule, complete:
+  1. *When.* Extensions are decided once, after every cell type's base ladder has finished. No person chooses; no registered seed is observed.
+  2. *Projected total.* P = Stage R hours already charged + the Stage R extension rounds granted so far and the one under decision + the main grid at each cell type's T under the rule + X8 and its calibration at T = 16,384 (if X8 is kept at Decision 1) + the measured times of gates, generation, analysis and report. Training is costed at stage 3's measured seconds per update for each (arm, slot count), with three evaluations per cell at their measured time, summed and divided by six workers. P is charged hours at 1×, not the cap's 2×.
+  3. *Budget.* B is the hour budget the human lead sets at Decision 1 (recommended 80, section 11). An extension is granted if P with it is at most B.
+  4. *Order.* Candidates are taken in order of ascending load, series M before S at equal load. Each is granted if it fits and refused otherwise; after a refusal the next candidate is still tried.
+  5. *Refusal.* A refused cell type runs at T = 8,192 exposures and is marked **CONVERGENCE NOT SHOWN — EXTENSION REFUSED (BUDGET)**. That is its registered status; a failure there reads UNRESOLVED (section 7 step 5). The human lead sees every refusal at Decision 2 and may set a larger B before the freeze, on the cost projection alone; that re-runs steps 1–4 by code.
+  6. *Relation to the cap.* B governs extensions only. The hour cap of section 9 is twice the frozen projection and may exceed B.
+- **At the extended ceiling, NOT SHOWN is the registered outcome.** The cell type runs at T = 16,384 exposures and is marked **CONVERGENCE NOT SHOWN IN REHEARSAL**. Reason for stopping there: at 16,384 exposures one 8,192-fact cell is 1,048,576 updates, about 3 hours at 4,096 slots and about 5.4 at 16,384 on P10-S0's rates, and one calibration run to 32,768 exposures is 5.8–10.9 hours. A longer duration is a new budget decision for the human lead in a new ADR, not a rule this study applies to itself.
+- **Stage R's own cap:** twice the base-ladder worst case (all 32 runs to 16,384 exposures at stage 3's rates, six workers) plus twice the projection of the extension rounds granted. Reaching it is a PAUSE.
+- Whether the 0.01 step can be met under a degraded reference is an empirical question; Stage R answers it by NOT SHOWN.
 
 ### 5.2 The convergence rehearsal (Stage R)
 
 - Arms A5-D and A6, every cell type of series M and S, two calibration draws: 32 runs. **Procedure, by code:** all four runs of a cell type train in doubling rounds, each round resuming from the previous round's snapshot; after each round the plateau rule is evaluated; the cell type stops at the first decision or at its ceiling. A resume-from-snapshot test (bit-identical to an uninterrupted run) is part of stage 1.
 - **No registered seed is involved.** Calibration draws enter no class, no count and no table of the registered result.
-- **Blind output: the mechanism.** (i) Stage R writes accuracies, losses and probe records only to a sealed directory outside the worktree. (ii) Its stdout and logs pass a whitelist validator, as P9-I's and P10-S0's rehearsals did: time, memory, shapes, counts, identities and `durations.json` only. (iii) `durations.json` holds, per cell type, e\*, T, SHOWN or NOT SHOWN, extension granted or refused, and reference-validity flags. (iv) The sha256 of every sealed file is committed at the freeze. (v) Before the registered outcome is recomputed, only the auditor's recomputation script reads the sealed files, and the auditor reports agree or disagree and nothing else. (vi) The plateau, extension and continue decisions are made by code. After the outcome is recomputed the curves are published as calibration records.
-- **What may change after Stage R:** only T per cell type (by the rule), the removal of flagged cell types (below) and the hour cap (on cost). The choices on A0 and X8 (section 16 items 2 and 7) are made at Decision 1, before Stage R, and are not revisited after it.
-- **Reference validity.** In Stage R, A6 is run through conditions 2, 3, 4, 5 and 6 at every cell type, at T. If A6 fails any of them on either calibration draw, the cell type is flagged: **all three lines are NOT EVALUABLE there**, it is removed from the frozen plan by this rule and prints **NOT RUN — REFERENCE FAILS CONDITION n**. No condition is dropped from the composite.
-- **Stop before the freeze:** if either anchor cell type (load 0.5) is flagged or NOT SHOWN, the work returns to the human lead before the freeze. The grid is not run to print NOT EVALUABLE.
+- **Blind output: the mechanism.** (i) Stage R writes accuracies, losses and probe records only to a sealed directory outside the worktree, with file permissions that deny reading to the lead's and the implementer's sessions; only the auditor's recomputation script is given its path. (ii) Its stdout and logs pass a whitelist validator, as P9-I's and P10-S0's rehearsals did: time, memory, shapes, counts, identities and `durations.json` only. (iii) `durations.json` holds, per cell type, e\*, T, SHOWN or NOT SHOWN, A5-D FLAT BELOW FLOOR, extension granted or refused, and the reference-validity flags per condition. (iv) The sha256 of every sealed file is committed at the freeze. (v) Before the registered outcome is recomputed, only the auditor's recomputation script reads the sealed files, and the auditor reports agree or disagree and nothing else. (vi) The plateau, extension and continue decisions are made by code. After the outcome is recomputed the curves are published as calibration records. Limits, stated: a committed hash shows the sealed files were not altered, not that nobody read them; and `durations.json` is itself informative (a NOT SHOWN entry predicts UNRESOLVED, a FLAT BELOW FLOOR entry predicts a failure). Decision 2 sees `durations.json`. A decision at Decision 2 not to run is recorded with what was seen.
+- **What may change after Stage R:** only T per cell type (by the rule), the removal of cell types flagged on conditions 2, 3, 5 or 6 (below), B and the hour cap (on cost). The choices on A0 and X8 (section 16 items 2 and 7) are made at Decision 1, before Stage R, and are not revisited after it.
+- **Reference validity, per condition.** In Stage R, A6 is run through conditions 2, 3, 4, 5 and 6 at every cell type, at T, on both calibration draws. A failure on either draw flags that condition at that cell type.
+
+| A6 fails | Effect at that cell type |
+|---|---|
+| condition 4 only | **Line G is NOT EVALUABLE; Line A is read.** Line Q needs both and is therefore NOT EVALUABLE: the composite is not shortened. The cell type stays in the plan and every arm runs. The label prints **REFERENCE ALSO FAILS CONDITION 4 (A6 H-ratio x on calibration draws)** |
+| any of conditions 2, 3, 5, 6 | all three lines are NOT EVALUABLE; the cell type is removed from the frozen plan by this rule and prints **NOT RUN — REFERENCE FAILS CONDITION n** |
+
+- **What is known about the reference on these conditions.** A6 has never been read on condition 4 in any record: P10-S0 classed no A6 cell, and P10-S1's held-out annotation is relative to another arm, not to the 0.90 ratio. ADR-0021 section 7.2 states that under oracle addressing the held-out panels test the frozen readout, not the memory and not the address. P10-S0's overload failure was on condition 4 alone, so if that failure is partly a readout effect of overload, A6 can fail condition 4 at 8K/4K too. For condition 6 the reviewer's estimate, from P10-S1's audit (`audit/a4_dep_sensitivity.out`: every failure at raw accuracy 0.436 or below) and a chance-survivor model, is that an oracle reference fails it only below an accuracy of about 0.39, which is under the 0.50 floor. That is an estimate, not a measurement of A6 at these loads.
+- **Stop before the freeze.** The work returns to the human lead before the freeze, with `durations.json`, if (a) either anchor cell type (load 0.5) carries any reference flag, is NOT SHOWN, or prints A5-D FLAT BELOW FLOOR; or (b) **any reference flag, on any condition, falls on a load-1 or load-2 cell type in either series.** In case (b) a qualified headline has become impossible, and the grid is not run without that decision. A flag at load 4 (or at X8) alone does not stop the run.
 
 ### 5.3 The check on registered draws (no adaptation)
 
@@ -190,7 +218,8 @@ n_A = evaluated cells failing any A-condition; n_G = evaluated cells passing all
 
 | Line | State | Rule (first match wins) |
 |---|---|---|
-| all | NOT EVALUABLE | the cell type was flagged in Stage R, or its class is NOT_EVALUATED |
+| all | NOT EVALUABLE | the cell type was flagged in Stage R on condition 2, 3, 5 or 6, or its class is NOT_EVALUATED |
+| G, Q | NOT EVALUABLE | the cell type was flagged in Stage R on condition 4 (Line A is still read) |
 | A | HOLDS / FAILS | n_A ≤ 1 / n_A ≥ 2 |
 | G | NOT READ | Line A FAILS |
 | G | HOLDS (GENERALISES) / FAILS (DOES NOT GENERALISE) | n_G ≤ 1 / n_G ≥ 2 |
@@ -220,7 +249,7 @@ Condition 1 is a ratio, at every load, to A6 on the same draw, cell type and T. 
 
 When a line holds in one series only, the label names it ("IN SERIES M ONLY (slots N)").
 
-**Break point.** For each line, L is the largest grid load such that the line HOLDS at it and at every lower grid load ("none" if it does not hold at 0.5). ℓ₁ is the next grid load above L; its state is FAILS or NOT EVALUABLE. A HOLDS above ℓ₁ adds **NON-MONOTONE** and does not raise L. The report prints L_A, L_G, L_Q, each ℓ₁ with its state, and per series the per-condition failure counts at Line Q's ℓ₁.
+**Break point.** For each line, L is the largest grid load such that the line HOLDS at it and at every lower grid load ("none" if it does not hold at 0.5). ℓ₁ is the next grid load above L (0.5 when L is "none"); its state is FAILS or NOT EVALUABLE. When L is the highest load run there is no ℓ₁. A HOLDS above ℓ₁ adds **NON-MONOTONE** and does not raise L. The report prints L_A, L_G, L_Q, each ℓ₁ with its state, and per series the per-condition failure counts at Line Q's ℓ₁.
 
 **Convergence status of a load:** CONFIRMED if every series whose Line Q state there is FAILS is CONVERGENCE CONFIRMED; otherwise NOT CONFIRMED.
 
@@ -237,7 +266,7 @@ At a true per-cell rate of 0.95 the study reports a break at or below 2 about fo
 
 ### 6.7 Annotations (enter no line)
 
-- **Penalty against answer-only**, series M, per load including 0.5: d = (cells where A5-D succeeds and A0 fails) − (the reverse) over the ten pairs. IMPROVES ON A0 if d ≥ 6 **and** the exact two-sided sign-test p < 0.05; HARMS if d ≤ −6 and p < 0.05; otherwise NOT DISTINGUISHED **[choice]**.
+- **Penalty against answer-only**, series M, per load including 0.5: d = (cells where A5-D succeeds and A0 fails) − (the reverse) over the ten pairs. IMPROVES ON A0 if d ≥ 6 **and** the exact two-sided sign-test p < 0.05; HARMS if d ≤ −6 and p < 0.05; otherwise NOT DISTINGUISHED **[choice]**. A pair on a draw that is NOT_EVALUATED at that cell type is excluded from d and from the sign test; the number of pairs used is printed.
 - COLLAPSE-FREE k of n; the 512-exposure readout, labelled "P10-S0's regime on new draws; descriptive; not a replication verdict"; whether condition 6 decided any cell; the descriptive measures of section 6.1.
 
 ## 7. Study outcome: one decision procedure
@@ -257,15 +286,16 @@ Applied in order; exactly one headline results.
 - **Status of ℓ₁ under step 3:** NOT EVALUABLE AT ℓ₁ — REFERENCE; UNRESOLVED AT ℓ₁; NOT QUALIFIED AT ℓ₁; or, when L_Q is the highest load run, NO BREAK FOUND ON THE GRID. If X8 was triggered and is not complete, the main-grid headline stands with **LOAD 8 PAUSED** or **LOAD 8 INCOMPLETE**.
 - **Which line fails at ℓ₁** is printed per series, for each series whose Line Q FAILS: LINE A FAILS; LINE G FAILS (A HOLDS); or NEITHER ALONE (both hold, the composite or ADDRESS STABLE does not).
 - Every headline is printed with the reference regime and convergence status at L_Q and at ℓ₁, both series' counts and bounds, L_A and L_G, and the fixed sentences: "W7 is told the record length. The memory is told the answer position. Synthetic fixed-length records; one frozen 27,392-parameter backbone. A5-D was chosen for P10-S0 after its P9-II result was observed. μ = 1.0 was calibrated at 0.5 facts per slot."
+- Where Line Q is NOT EVALUABLE at ℓ₁ because of a condition-4 flag, Line A's state there is printed beside the headline ("LINE A HOLDS / FAILS AT ℓ₁; LINE G NOT EVALUABLE — REFERENCE").
 - UNRESOLVED and NOT EVALUABLE are registered outcomes. Neither is a basis for a further run on these cells without a new ADR approved by the human lead.
 
-**Hypotheses (each can fail).** H23-A: Line Q HOLDS at load 0.5. H23-O: Line Q HOLDS at load 2. H23-G: at Line Q's ℓ₁, every series whose Line Q FAILS prints LINE G FAILS (A HOLDS); not read if ℓ₁ is NOT EVALUABLE. H23-P: A5-D IMPROVES ON A0 at load 2. A hypothesis reading is not a success of the science.
+**Hypotheses (each can fail).** H23-A: Line Q HOLDS at load 0.5. H23-O: L_Q ≥ 2. H23-G: at Line Q's ℓ₁, every series whose Line Q FAILS prints LINE G FAILS (A HOLDS); not read if ℓ₁ is NOT EVALUABLE or if there is no ℓ₁. H23-P: A5-D IMPROVES ON A0 at load 2. A hypothesis reading is not a success of the science.
 
 ## 8. The conditional block X8
 
-- **Trigger (fixed now):** X8 runs only if L_Q = 4 after the complete main grid, read by the frozen analysis at a gate stage that passes L_Q and nothing else to the launcher. Otherwise it prints **NOT RUN — BREAK LOCATED BELOW 8** (or the result of steps 0–2).
+- **Trigger (fixed now):** X8 runs only if L_Q = 4 after the complete main grid, read by the frozen analysis at a gate stage that passes L_Q and nothing else to the launcher. Otherwise it prints **NOT RUN — L_Q BELOW 4** (or the result of steps 0–2).
 - Reason: the direction asks that a failure locate the break. If the recipe holds at 4, one more load answers where it breaks; if it fails at or below 4, load 8 adds cost and no location.
-- X8's duration comes from the same rule, ladder, floor, extension rule and blind mechanism, on the same two calibration draws, run after the trigger and before any X8 cell. Its ceiling is the same as every cell type's (T at most 8,192 exposures, 16,384 with the extension). Its plan is frozen as an addendum listed in section 14; no main-grid file changes. If its reference is flagged, X8 prints NOT RUN — REFERENCE FAILS CONDITION n and the status of load 8 is NOT EVALUABLE.
+- X8's duration comes from the same rule, ladder, floor, extension rule and blind mechanism, on the same two calibration draws, run after the trigger and before any X8 cell. Its ceiling is the same as every cell type's (T at most 8,192 exposures, 16,384 with the extension). Its plan is frozen as an addendum listed in section 14; no main-grid file changes. Its reference flags follow the table of section 5.2: on a condition-4 flag X8 runs and Line Q at load 8 is NOT EVALUABLE with Line A read; on any other flag X8 prints NOT RUN — REFERENCE FAILS CONDITION n and load 8 is NOT EVALUABLE.
 - **Cost and cap:** X8 is included in the frozen projection and in the hour cap at its extended ceiling (T = 16,384 exposures), because its T is not known at the freeze.
 - No higher load is run under this ADR.
 
@@ -275,13 +305,14 @@ Applied in order; exactly one headline results.
 |---|---|---|
 | Charged-hours cap (set at the freeze: twice the measured projection, X8 at its ceiling included) | Resource cap | May be extended by the human lead on cost projections only, never on outcome values; every planned cell still runs. A stage that reaches it is **PAUSED** and resumes from its registry |
 | Per-stage time caps (twice each stage's projection) | Resource cap | Same |
-| Memory guard, 3 GiB per worker, 18 GiB aggregate | Resource cap | A cell type whose rehearsed peak exceeds 1.5 GiB per worker is PAUSED before it starts and returns to the human lead. The registered run does not share the machine with another study's compute stage unless the human lead allows it and the aggregate of both stays under 36 GiB |
-| Training length T per cell type | Design ceiling | The convergence rule; base ladder to T = 8,192 exposures; the written extension rule to 16,384 within the hour budget; beyond that NOT SHOWN is the registered outcome (section 5.1) |
+| Memory guard, 3 GiB per worker, 18 GiB aggregate | Resource cap | A cell type whose rehearsed peak exceeds 1.5 GiB per worker is PAUSED before it starts and returns to the human lead. The registered run does not share the machine with another study's compute stage unless the human lead allows it and the aggregate of both stays under 36 GiB **[choice]** |
+| Training length T per cell type | Design ceiling | The convergence rule; base ladder to T = 8,192 exposures; the written extension rule to 16,384 within the budget B; a refusal and the extended ceiling each give a registered NOT SHOWN (section 5.1) |
+| Stage R's time cap | Resource cap | Section 5.1; PAUSED, resumable |
 | Number of loads | Design ceiling | Extended only by the X8 trigger |
 | Registered draws that pass G1 | Design ceiling | Generate until ten pass, within four reserves; if fewer pass, return to the human lead before the freeze |
 | Calibration draws (2), registered draws (10), one initialization seed per draw | Design ceiling | Fixed: the class rule and bounds are tied to ten draws |
 | 0.90 × A6; A6 floors 0.90 and 0.50; conditions 2–6; at most one failed cell; ADDRESS STABLE 0.80; the combination rules of section 6.6; d ≥ 6 with p < 0.05 | Scientific threshold | Never relaxed after observation |
-| Plateau step 0.01 (two-sided, two steps); plateau floor; T = 2·e\*; confirmation 0.02 | Scientific threshold | Fixed before Stage R; never changed after it |
+| Plateau step 0.01 (two-sided, two steps); the reference's plateau floor; T = 2·e\*; confirmation 0.02; which reference flags remove a cell type | Scientific threshold | Fixed before Stage R; never changed after it |
 
 No limit is extended because a partial result looks close.
 
@@ -291,8 +322,8 @@ Platform of record: the research machine (Apple M5 Max, 48 GB, macOS arm64, CPU 
 
 | # | Stage | Seeds touched | Quiet machine needed? |
 |---|---|---|---|
-| 1 | Implementation; unit tests; resume-from-snapshot test; analysis and report on synthetic registries with known answers: every state of section 6.4, every combination of section 6.6, every step and ℓ₁ status of section 7 (PAUSED and missing cells, reference below its floor, a flagged cell type at the anchor and above it, Line G NOT READ in one series, NON-MONOTONE, a replaced draw), and every descriptive section | tests | no |
-| 2 | Identity and small-store gates (section 3); pipeline rehearsal end to end through the real launch scripts, on a plan built by the registered plan builder with only the seed set changed (asserted by a diff of the plans) | rehearsal | no |
+| 1 | Implementation; unit tests; resume-from-snapshot test; analysis and report on synthetic registries with known answers: every state of section 6.4, every combination of section 6.6, every step and ℓ₁ status of section 7 (PAUSED and missing cells, reference below its floor, a cell type flagged on condition 4 only at load 2 (Line A read; G and Q NOT EVALUABLE), a flag at load 1, a flag on another condition at load 4, A5-D FLAT BELOW FLOOR, an extension refused, L = "none", Line G NOT READ in one series, NON-MONOTONE, a replaced draw), and every descriptive section | tests | no |
+| 2 | Identity and end-to-end gates (section 3); pipeline rehearsal end to end through the real launch scripts, on a plan built by the registered plan builder with only the seed set changed (asserted by a diff of the plans) | rehearsal | no |
 | 3 | Timing rehearsal: seconds per update and peak memory for every (arm, cell type) | rehearsal | preferred, not required |
 | 4 | Stage R (section 5.2), with the extension rule using stage 3's rates | calibration | no |
 | 5 | Generation and G1 of registered and reserve draws; freeze; enumeration of every stage against the frozen plan itself (every item resolved to its inputs and outputs, no training) | registered, data only | no |
@@ -300,7 +331,7 @@ Platform of record: the research machine (Apple M5 Max, 48 GB, macOS arm64, CPU 
 | 7 | Independent recomputation from raw cell records (auditor); outcome statement to the human lead | — | no |
 
 - **No stage needs a quiet machine for validity.** Every rule is in updates, exposures and accuracies. No wall-time comparison is registered. CPU seconds are descriptive.
-- The load average is measured and recorded at the start of each stage and every ten minutes during it. Timing feeds projections and caps only; a loaded machine can cause a PAUSE, never a label. If the load average during the timing rehearsal exceeds 2.0, that is recorded and the projection is used as measured.
+- The load average is measured and recorded at the start of each stage and every ten minutes during it. Timing feeds projections and caps only; a loaded machine can cause a PAUSE, never a label. If the load average during the timing rehearsal exceeds 2.0 **[choice]**, that is recorded and the projection is used as measured.
 
 ## 11. Cost projection (an estimate, to be replaced by the timing rehearsal)
 
@@ -310,8 +341,8 @@ Rates are P10-S0's registered-run rates (`docs/reviews/p10s0-results-2026-11-16/
 |---|---|---|---|
 | Central guess (T = 1,024 / 2,048 / 2,048 / 4,096 exposures at loads 0.5 / 1 / 2 / 4) | 57.5 / 8.2 / 18.3 | about 15–16 | about 9 at T = 8,192 |
 | Every T one ladder step higher | about 115 / 16 / 37 | about 29–31 | about 18 at T = 16,384 |
-| Every cell type at the base ceiling (T = 8,192) | about 216 / 29 / 71 | about 54 | about 9–18 |
-| Extension granted (per 8,192-fact cell type, T = 16,384) | — | about 15 more per cell type, plus its Stage R rounds | — |
+| Every cell type at the base ceiling (T = 8,192) | about 223 / 29 / 71 | about 54 | about 9–18 |
+| Extension granted (per 8,192-fact cell type, T = 16,384 in place of 8,192) | — | 7.3–12.2 more by slot count (the cell type then totals 14.6–24.4), plus its Stage R round | — |
 
 The order of magnitude is **15 to 55 charged hours without X8 and without extensions**, and up to about 75 with X8 at its ceiling. The recommended hour budget for the extension rule is 80 hours **[choice]**. For scale: P10-S0 charged 6.09 hours and P10-S1 25.39. The longest single Stage R run at the base ceiling is about 5.5 hours. The timing rehearsal measures the rates at every size, the cost of three evaluations per cell and peak memory; Stage R measures the durations; the human lead sees the measured projection at Decision 2.
 
@@ -321,8 +352,8 @@ The order of magnitude is **15 to 55 charged hours without X8 and without extens
 - A resource cap reached: the stage is PAUSED. It resumes from its registry; completed cells are not recomputed. No label is computed while any main-grid cell is missing (section 7 step 0).
 - A failed cell is kept and not re-run. No re-run with changed settings.
 - No registered seed is seen by a model before the freeze. After Stage R nothing changes except what section 5.2 lists.
-- An anchor cell type flagged or NOT SHOWN in Stage R returns the work to the human lead before the freeze.
-- NOT EVALUABLE arises in exactly two ways: a cell type flagged in Stage R, or a class NOT_EVALUATED (more than one draw with A6 below its floor). Section 7 says what each gives at the anchor and above it.
+- The work returns to the human lead before the freeze in the cases of section 5.2 ("Stop before the freeze"): an anchor cell type flagged, NOT SHOWN or A5-D FLAT BELOW FLOOR; or any reference flag at load 1 or 2.
+- NOT EVALUABLE arises in exactly two ways: a reference flag from Stage R (per condition, section 5.2), or a class NOT_EVALUATED (more than one draw with A6 below its floor). Section 7 says what each gives at the anchor and above it.
 - If P10-S0's or P9-II's records are amended after the freeze, the study stops and returns to the human lead.
 
 ## 13. What this study cannot establish
@@ -345,12 +376,12 @@ The order of magnitude is **15 to 55 charged hours without X8 and without extens
 | A stage could not resume | Every stage keeps a per-cell registry; a PAUSED stage continues; completed cells are skipped by record hash |
 | The throughput stage listed a cell the frozen plan did not run | Every stage builds its item list from the frozen plan only; stage 2 rehearses every stage end to end; stage 5 enumerates every stage against the frozen plan itself before Decision 2 |
 | An unstated aggregation rule; a validity check the reference fails; a wrong descriptive section | Sections 6.4, 6.6 and 7 are total. A6 passes through every condition in Stage R (section 5.2). The analysis, descriptive sections included, is tested on synthetic registries; the auditor writes its own |
-| A plateau rule met before anything was learned (ADR-0021 revision 5) | The plateau floor and the two-sided step (section 5.1) |
+| A plateau rule met before anything was learned (ADR-0021 revision 5) | The reference's plateau floor and the two-sided step; a flat failing recipe is labelled, not hidden (section 5.1) |
 | A projection made under one machine load and run under another | Rates are measured in the timing rehearsal with the load average recorded; projections feed caps only (sections 10, 11) |
 | A count gate stopped P10-S2 | Draws: generate until ten pass G1, within four reserves. Durations: train until the plateau rule is met, within the ceiling and its extension rule |
 | One load, one length | Sections 4 and 5 |
 | A macOS/Linux difference in exact ties | Platform of record named; bit-exact assertions on it only |
-| A slot registry that rejects new sizes (found by this review) | New adapter code and the two-part identity gate (section 3) |
+| A slot registry and seed whitelists that reject new sizes and new seeds (found by this ADR's reviews) | New adapter code, the two-part identity gate and its declared seed re-use (section 3) |
 | CI cost | Checks run locally |
 
 ## 15. How the result feeds P10-I-S1's learned-address lane
@@ -361,26 +392,28 @@ P10-S1 omitted lane L because P10-S0 was not OVERLOAD-QUALIFIED. This ADR states
 2. The licence depends on L_Q only: none when the procedure ends at steps 0–2; loads up to L_Q in every other case, whatever the status of ℓ₁.
 3. The lane's label carries the reference regime of each licensed cell type (REFERENCE NEAR CEILING or QUALIFIED RELATIVE TO A DEGRADED REFERENCE) and its convergence status.
 4. Lines A and G license nothing by themselves.
-5. **Timing.** A qualification recorded after P10-I-S1's freeze changes nothing in it (ADR-0020 section 9.2). Either P10-I-S1 freezes after this study's outcome is recomputed and accepted, or its lane is a separately frozen stage that waits. That choice is ADR-0024's and the human lead's.
-6. This study uses a flat memory. A qualification here says nothing about addressing into the tree.
+5. **The denominator.** A lane that applies this study's composite must run A6 as frozen here (R1 codes, learning rate 0.003) on the same draw, cell type and update count. An oracle arm with a searched learning rate is not A6, and condition 1 is not defined against it.
+6. **Timing.** A qualification recorded after P10-I-S1's freeze changes nothing in it (ADR-0020 section 9.2). Either P10-I-S1 freezes after this study's outcome is recomputed and accepted, or its lane is a separately frozen stage that waits. That choice is ADR-0024's and the human lead's.
+7. This study uses a flat memory. A qualification here says nothing about addressing into the tree.
 
 ## 16. Open choices reserved for the human lead
 
 1. **Load grid and slot counts** (section 4.1). Recommended: loads 0.5, 1, 2, 4 at 8,192 and at 2,048 facts.
 2. **X8.** Recommended: conditional on L_Q = 4. Decided at Decision 1, not after Stage R.
-3. **The convergence rule** (section 5): ladder, two-sided 0.01 step, floor, T = 2·e\*, the 0.02 check. Recommended as written.
-4. **The extension rule and its hour budget** (sections 5.1, 11). Recommended: one further doubling, within 80 charged hours for the whole study; beyond it NOT SHOWN is the outcome. The alternative is no extension (cheaper; more UNRESOLVED) or a larger budget.
+3. **The convergence rule** (section 5): ladder, two-sided 0.01 step, the floor on A6 only with A5-D FLAT BELOW FLOOR counted as a plateau, T = 2·e\*, the 0.02 check. Recommended as written.
+4. **The extension rule's hour budget B** (sections 5.1, 11). Recommended: one further doubling, within B = 80 charged hours at 1× for the whole study; a refusal or the extended ceiling gives NOT SHOWN. The alternative is no extension (cheaper; more UNRESOLVED) or a larger budget.
 5. **The meaning of 0.90 under a degraded reference** (section 6.5). Recommended: the ratio at every load with the mandatory regime tag and the 0.50 floor. Alternative: qualify only where A6 ≥ 0.90.
 6. **"Both series" and "every lower load"** (section 6.6), with its false-negative rate. Recommended: keep; it is the conservative reading.
 7. **A0** in series M. Recommended: keep. Decided at Decision 1.
 8. **μ is not re-calibrated; no dense baseline.** Recommended: both as written.
-9. **The closure ledger:** the two declined items (WX; 65,536) and where they go (section 3).
+9. **The closure ledger:** the two declined items (WX; 65,536), both proposed as CLOSED AS RECORDED (unresolved) (section 3).
 10. **Lane licence scope** (section 15 item 1): tested cell types only, or wider.
-11. **Seeds:** the programme-wide registry (section 4.2) before any freeze.
+11. **Seeds:** approval of the programme-wide registry, with the identity gate's declared re-use of P10-S0's rehearsal set added to it (sections 3, 4.2).
 12. **Budget and timing:** the hour cap at Decision 2; when the run may occupy six cores; whether it may share the machine with another study.
-13. Approval of this specification for implementation and rehearsals (Decision 1), and separately of the registered run (Decision 2). Any second attempt; merge; publication.
+13. **Reference flags** (section 5.2): which A6 failures remove a cell type (recommended: conditions 2, 3, 5, 6; condition 4 keeps Line A), and the return before the freeze on any flag at load 1 or 2.
+14. Approval of this specification for implementation and rehearsals (Decision 1), and separately of the registered run (Decision 2). Any second attempt; merge; publication.
 
-Still unsure, for the confirmation review: whether the plateau floor applied to A5-D (not only to A6) is the right choice; whether the 0.01 step can be met under a degraded reference; whether condition 6 holds for A6 at loaded cell types.
+Not choices, and left to measurement: whether A6 passes condition 4 under overload (unmeasured in any record; Stage R's flags answer it), and whether the 0.01 step is attainable under a degraded reference (Stage R answers by NOT SHOWN).
 
 ## 17. Approval record
 
@@ -388,12 +421,14 @@ None. No approval of this specification exists. Nothing is implemented, calibrat
 
 ## 18. Review record
 
-Draft 1 was reviewed by the `arbor-auditor` subagent (Claude Opus 5.5): `docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0023.md`, verdict NOT READY. This revision is by the drafter (Claude Fable 5.2). The drafter re-read `studies/p9ii/core.py` line 252 and `studies/p9/model.py` lines 272–276 and found the reviewer's two factual corrections right. No finding is disputed. A confirmation review of this draft has not been performed. Neither review is Astra validation or a human approval.
+Draft 1 was reviewed by the `arbor-auditor` subagent (Claude Opus 5.5): `docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0023.md`, verdict NOT READY. This revision is by the drafter (Claude Fable 5.2). The drafter re-read `studies/p9ii/core.py` line 252 and `studies/p9/model.py` lines 272–276 and found the reviewer's two factual corrections right. No finding is disputed. Neither review is Astra validation or a human approval.
+
+**First review (draft 1):**
 
 | Finding | Severity | Disposition | Where |
 |---|---|---|---|
 | 1 Outcome function not total (a–f) | BLOCKING | FIXED | 5.2 (flag makes all lines NOT EVALUABLE; stop before freeze), 6.4, 6.6, 7 (steps 0–6, ℓ₁ status), 10 stage 1, 12 |
-| 2 Existing code cannot run the new slot counts | BLOCKING | FIXED | 3 (new adapter code, two-part identity gate, small-store gate), 14 |
+| 2 Existing code cannot run the new slot counts | BLOCKING | FIXED | 3 (new adapter code, two-part identity gate, end-to-end gate), 14 |
 | 3 X8 ceiling unreachable; no X8 cap rule | REQUIRED | FIXED | 5.1, 8, 9 |
 | 4 "Blind" had no mechanism; cuts after Stage R | REQUIRED | FIXED | 5.2; 16 items 2 and 7 |
 | 5 Initialization seeds collide with derived seeds | REQUIRED | FIXED | 4.2 (values removed; programme-wide registry; derived-seed check; distinct calibration seeds) |
@@ -420,6 +455,27 @@ Draft 1 was reviewed by the `arbor-auditor` subagent (Claude Opus 5.5): `docs/re
 | R4 stale P10-S1 seed list | (part of 5) | FIXED | 4.2 (no list copied from an ADR) |
 | R5 A0 rate at 4,096 slots | ADVISORY | FIXED | 11 |
 | R6 a_use treated as accuracy | REQUIRED | FIXED | 2, 6.5 |
+
+**Confirmation review (draft 2):** by the `arbor-auditor` subagent (Claude Opus 5.5), `docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW2_ADR-0023.md`, verdict NOT READY with no blocking finding. It judged the first review's findings fixed except 6 (superseded by N2) and 7 (completed by N3). Draft 3 is by the drafter (Claude Fable 5.2) under the lead's scientific calls on N1–N3. Draft 3 has not been reviewed.
+
+| Finding | Severity | Disposition | Where |
+|---|---|---|---|
+| N1 Reference flag too broad; only the anchor returned | REQUIRED | FIXED | 5.2 (per-condition table; what is known about A6; stop before the freeze on any flag at load 1 or 2), 6.4, 7, 8, 10 stage 1, 12, 16 item 13 |
+| N2 Plateau floor on A5-D | REQUIRED | FIXED | 5.1 (floor on A6 only; A5-D FLAT BELOW FLOOR counts as a plateau), 5.2, 16 item 3 |
+| N3 Extension rule not computable | REQUIRED | FIXED | 5.1 (items 1–6; Stage R's cap), 9 |
+| N4 Extension costs understated | ADVISORY | FIXED | 5.1, 11 |
+| N5 Sealing proves non-alteration only | ADVISORY | FIXED | 5.2 |
+| N6 Untagged numbers | ADVISORY | FIXED | 9, 10 |
+| N7 Definitional gaps (ℓ₁ at "none"; H23-G; H23-O; unevaluated pairs; X8 label) | ADVISORY | FIXED | 6.6, 6.7, 7, 8 |
+| N8 End-to-end gate sizes | ADVISORY | FIXED | 3 |
+| N9 223 CPU-hours | ADVISORY | FIXED | 11 |
+| X1, X2 Registry values and derivation rule | cross-reference | FIXED | 4.2 |
+| X3 Identity gate's seed | cross-reference | FIXED here; the registry entry is the lead's to add | 3, 4.2, 16 item 11 |
+| X4 65,536 disposition; WX wording | cross-reference | FIXED here; the ledger rows are the lead's to edit | 3, 16 item 9 |
+| X5 Ledger row on lane L | cross-reference | not this file; the lead's | — |
+| X6 Lane L's denominator | cross-reference | FIXED here (ADR-0024's text is the lead's) | 15 item 5 |
+| X7 Registry against ADR-0024 on lane L data | cross-reference | not this file | — |
+| X8 Condition-6 risk wording | cross-reference | FIXED | 3, 5.2, 16 |
 
 The coordinator's instruction to remove a statement that the machine idles at load 1.0–1.2: draft 1 did not contain one; section 10 measures the load at each stage.
 
