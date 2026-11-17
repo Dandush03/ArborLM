@@ -377,8 +377,10 @@ ALLOC: list[tuple[str, str, int, int]] = [
     ("P10-I-S0 ADR-0023", "spare", 309401, 309999),
     ("P10-I-S0 ADR-0023", "init sub-row", 330001, 330099),
     ("P10-I-S0 ADR-0023", "test", 932001, 932999),
-    ("P10-I-S1 ADR-0024", "data: registered draw sets (5)", 240001, 246999),
-    ("P10-I-S1 ADR-0024", "lane L data sets (5)", 247001, 247999),
+    ("P10-I-S1 ADR-0024", "data: block M registered draw sets (5)", 240001, 240499),
+    ("P10-I-S1 ADR-0024", "data: block X fresh draw sets (5)", 240501, 240999),
+    ("P10-I-S1 ADR-0024", "data: spare draw sets", 241001, 246999),
+    ("P10-I-S1 ADR-0024", "lane L data sets (PENDING: decided in the lane L revision)", 247001, 247999),
     ("P10-I-S1 ADR-0024", "auxiliary: spare", 248001, 248999),
     ("P10-I-S1 ADR-0024", "calibration draw sets (2)", 249001, 249199),
     ("P10-I-S1 ADR-0024", "rehearsal draw set (1)", 249201, 249299),
@@ -386,9 +388,10 @@ ALLOC: list[tuple[str, str, int, int]] = [
     ("P10-I-S1 ADR-0024", "init sub-row", 330101, 330199),
     ("P10-I-S1 ADR-0024", "test", 933001, 933999),
     ("P10-I-S2 ADR-0025", "data: registered replicate sets (3)", 250001, 250899),
-    ("P10-I-S2 ADR-0025", "partition side and analysis", 250901, 250999),
+    ("P10-I-S2 ADR-0025", "partition side, analysis, disjoint-draw permutations", 250901, 250999),
     ("P10-I-S2 ADR-0025", "calibration", 251001, 251999),
-    ("P10-I-S2 ADR-0025", "rehearsal", 252001, 252999),
+    ("P10-I-S2 ADR-0025", "Part T rehearsal sets (i = 0..8)", 252001, 252899),
+    ("P10-I-S2 ADR-0025", "Part Q rehearsal partition side", 252901, 252999),
     ("P10-I-S2 ADR-0025", "spare", 253001, 259999),
     ("P10-I-S2 ADR-0025", "init sub-row", 330201, 330299),
     ("P10-I-S2 ADR-0025", "test", 934001, 934999),
@@ -399,17 +402,17 @@ ALLOC: list[tuple[str, str, int, int]] = [
     ("P10-I-S3 ADR-0026", "spare", 269301, 269999),
     ("P10-I-S3 ADR-0026", "init sub-row", 330301, 330399),
     ("P10-I-S3 ADR-0026", "test", 935001, 935999),
-    ("P10-I-S4 ADR-0027", "data: registered draw sets (5)", 270001, 276999),
-    ("P10-I-S4 ADR-0027", "auxiliary", 277001, 278999),
-    ("P10-I-S4 ADR-0027", "calibration draw sets (2)", 279001, 279199),
-    ("P10-I-S4 ADR-0027", "rehearsal draw set (1)", 279201, 279299),
+    ("P10-I-S4 ADR-0027", "data: registered draw sets (5) (roles to be stated by the drafts)", 270001, 276999),
+    ("P10-I-S4 ADR-0027", "auxiliary (roles to be stated by the drafts)", 277001, 278999),
+    ("P10-I-S4 ADR-0027", "calibration draw sets (2) (roles to be stated by the drafts)", 279001, 279199),
+    ("P10-I-S4 ADR-0027", "rehearsal draw set (1) (roles to be stated by the drafts)", 279201, 279299),
     ("P10-I-S4 ADR-0027", "spare", 279301, 279999),
     ("P10-I-S4 ADR-0027", "init sub-row", 330401, 330499),
     ("P10-I-S4 ADR-0027", "test", 936001, 936999),
-    ("P10-I-S5 ADR-0028", "data: registered workloads / stores / orders", 280001, 286999),
-    ("P10-I-S5 ADR-0028", "auxiliary", 287001, 288999),
-    ("P10-I-S5 ADR-0028", "calibration (R1)", 289001, 289199),
-    ("P10-I-S5 ADR-0028", "rehearsal", 289201, 289299),
+    ("P10-I-S5 ADR-0028", "data: registered workloads / stores / orders (roles to be stated by the drafts)", 280001, 286999),
+    ("P10-I-S5 ADR-0028", "auxiliary (roles to be stated by the drafts)", 287001, 288999),
+    ("P10-I-S5 ADR-0028", "calibration (R1) (roles to be stated by the drafts)", 289001, 289199),
+    ("P10-I-S5 ADR-0028", "rehearsal (roles to be stated by the drafts)", 289201, 289299),
     ("P10-I-S5 ADR-0028", "spare", 289301, 289999),
     ("P10-I-S5 ADR-0028", "init sub-row", 330501, 330599),
     ("P10-I-S5 ADR-0028", "test", 937001, 937999),
@@ -427,7 +430,8 @@ ALLOC: list[tuple[str, str, int, int]] = [
 # Named seeds inside the init sub-rows (SEED_REGISTRY.md section 4.2); each must lie in its study's sub-row.
 NAMED_INIT = {
     "P10-I-S0 ADR-0023": {"registered": [330001, 330002], "calibration": [330091, 330093], "rehearsal + pipeline check": [330092], "test mode": [330098, 330099]},
-    "P10-I-S1 ADR-0024": {"registered": [330101, 330102, 330103, 330104, 330105], "lane L (if separate)": [330111, 330112, 330113, 330114, 330115],
+    "P10-I-S1 ADR-0024": {"registered": [330101, 330102, 330103, 330104, 330105], "lane L (PENDING)": [330111, 330112, 330113, 330114, 330115],
+                          "block X fresh draws": [330121, 330122, 330123, 330124, 330125],
                           "calibration": [330191, 330193], "rehearsal": [330192], "test mode": [330198, 330199]},
     "P10-I-S2 ADR-0025": {"registered r=0..2 x 8 roles": [330201 + 10 * r + j for r in range(3) for j in range(8)],
                           "calibration i=0,1 x 8 roles": [330231 + 10 * i + j for i in range(2) for j in range(8)],
@@ -437,6 +441,45 @@ NAMED_INIT = {
     "P10-I-S5 ADR-0028": {"registered": [330501, 330502, 330503, 330504, 330505], "calibration": [330591], "rehearsal": [330592], "test mode": [330598, 330599]},
     "P10-I-R ADR-0029": {"bridge": [330601, 330602, 330603, 330604, 330605], "rehearsal": [330692], "test mode": [330698, 330699]},
 }
+
+# Declared re-uses: seeds of a completed study that a P10-I draft reads on purpose (not allocations, not
+# collisions). The checker asserts each value is in the inventory (so it is a re-use of an existing seed, not
+# a new one) and lies in no P10-I allocation, and lists it separately.
+def _p10s0_set_values(base):
+    fso = (0, 20, 60)
+    return [base + f + i for f in fso for i in range(20)] + [base + o + j for o in (40, 44, 48) for j in (0, 1)] + [base + o for o in (50, 51, 52)]
+
+
+def _p10s1_set_values(base):
+    return [base + i for i in range(14)] + [base + 20 + i for i in range(3)] + [base + 30 + i for i in range(3)] + [base + 40] + [base + o for o in range(50, 61)]
+
+
+DECLARED_REUSE: list[tuple[str, str, list, str]] = [
+    ("P10-I-S0 ADR-0023", "identity gate part (a): P10-S0 rehearsal data set (base 209101), read-only, bit-identity at 4,096 and 16,384 slots",
+     _p10s0_set_values(209101), "studies/p10s0/core.py:424 (REHEARSAL_BASE), :489 (REHEARSAL_SET), :541 (check_seed_set)"),
+    ("P10-I-S0 ADR-0023", "identity gate part (a): P10-S0 rehearsal initialization seed 2092 and its +1000k component seeds",
+     [2092] + [2092 + 1000 * k for k in range(1, 6)], "studies/p10s0/core.py:145 (REHEARSAL_INIT); studies/p9/model.py:272-279"),
+    ("P10-I-R ADR-0029", "stage A1 reproduction reads: P10-S1 registered draws 1..5 incl. index seed (base + 60)",
+     [v for r in range(5) for v in _p10s1_set_values(210001 + 100 * r)], "studies/p10s1/core.py:812-877"),
+    ("P10-I-R ADR-0029", "adapter identity gate (section 10): P10-S1 cells F-OQ and T-OQ at 8K/4K, draw 1 (set 210001) with initialization seed 2101 and its component seeds",
+     _p10s1_set_values(210001) + [2101] + [2101 + 1000 * k for k in range(1, 6)], "studies/p10s1/core.py:486 (2100 + r), :812 (REGISTERED_BASE), :820 (SEED_RANGE whitelist)"),
+]
+
+
+def check_reuse(inv_idx: Index):
+    problems, report = [], []
+    alloc_idx = Index([(lo, hi, (st, ro)) for st, ro, lo, hi in ALLOC])
+    for study, purpose, vals, src in DECLARED_REUSE:
+        not_inv = sorted(v for v in vals if not any(INV[n]["primary"] for _, _, (n, _t) in inv_idx.hits(v, v)))
+        in_alloc = sorted(v for v in vals if alloc_idx.hits(v, v))
+        report.append(f"{study}: {purpose}: {len(vals)} values, {fmt(intervals(vals), 4)}; source {src}; "
+                      f"not in inventory: {len(not_inv)}; inside a P10-I allocation: {len(in_alloc)}")
+        if not_inv:
+            problems.append(f"{study}: declared re-use values not found in the inventory: {not_inv[:8]}")
+        if in_alloc:
+            problems.append(f"{study}: declared re-use values inside a P10-I allocation: {in_alloc[:8]}")
+    return report, problems
+
 
 # The drafts' own proposals as read on 2026-11-17 (for the report of collisions; not allocations).
 DRAFTS: list[tuple[str, str, int, int]] = [
@@ -448,6 +491,8 @@ DRAFTS: list[tuple[str, str, int, int]] = [
     ("ADR-0026", "init", 2601, 2699), ("ADR-0026", "data", 260001, 269999), ("ADR-0026", "test", 926001, 926999),
     ("ADR-0027", "init", 2701, 2799), ("ADR-0027", "data", 270001, 279999),
     ("ADR-0028", "data", 280001, 289999),
+    ("ADR-0024 draft 3 (block X)", "data", 240501, 240901), ("ADR-0024 draft 3 (block X)", "init", 330121, 330125),
+    ("ADR-0025 draft 3", "data (disjoint draws)", 250916, 250917), ("ADR-0025 draft 3", "data (Part Q rehearsal)", 252901, 252914),
 ]
 
 
@@ -722,6 +767,14 @@ def main() -> int:
     for m_ in missing:
         print("     MISSING:", m_)
     ok &= not missing
+
+    print("\n[7] declared re-uses (read-only use of a completed study's seeds; not allocations, not collisions)")
+    rreport, rproblems = check_reuse(inv_idx)
+    for r_ in rreport:
+        print("    ", r_)
+    for p_ in rproblems:
+        print("     FAIL:", p_)
+    ok &= not rproblems
 
     print("\nRESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1

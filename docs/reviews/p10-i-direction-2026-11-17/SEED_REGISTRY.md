@@ -1,5 +1,19 @@
 # P10-I programme-wide seed registry
 
+> **Revision 3 — 2026-11-17 (UTC), `arbor-auditor` (Claude Opus 5.5), on the coordinator's request, against the third drafts of ADR-0027 and ADR-0028 on disk (uncommitted working copies on top of `551cf24`).** Changes:
+> 1. **New checker file** `seed_registry_check_r3.py` (SHA-256 `e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594`), as section 4.5 item 5 requires; the Revision 2 checker `seed_registry_check.py` is unchanged (SHA-256 `b078100689211a437d59d898e5a7fb04ee03fbcc2a388288e9f5e83dbe759289`). The new file adds named data values (`NAMED_DATA`) and asserts each lies inside an allocation of its own study, as it already did for initialisation values.
+> 2. **ADR-0027:** Route B's 5 draw sets and 330401–330405 confirmed; Route A's 27 stream seeds confirmed at sets d = 1..9, offsets 0..2 (270001–270803; d = 6..9 lie inside the existing range 270001–276999, nothing moved) with 330401–330403; calibration 279001/279101 with 330491/330492 and rehearsal 279201 with 330495 confirmed for both routes. Shared values between the routes: safe because one entry runs one route; held alternatives for Route A if both are ever entered (section 4.7).
+> 3. **ADR-0028:** engineering-part values confirmed as drafted (280001–280010, 280101–280103, 280201–280205, 280301–280303); R1 (6) and rehearsal (5) values, which the draft gives as counts only, assigned: R1 289001, 289011–289013, 289021, 289031; rehearsal 289201, 289211, 289212, 289221, 289231. Initialisation 3305xx unused unless the scientific part is entered.
+> 4. Checker re-run: **RESULT: PASS** (56 allocations, 0 problems; 117 named initialisation and 97 named data values inside their studies; the drafts' new values show 0 collisions; 4 declared re-uses as in Revision 2). A planted named value outside its study (279999 under ADR-0028) made the new check fail. Nothing was moved away from a draft's proposal.
+
+> **Revision 2 — 2026-11-17 (UTC), `arbor-auditor` (Claude Opus 5.5), on the coordinator's request, against the third drafts of ADR-0023, 0024, 0025, 0026 and 0029 on disk (ADR-0023 and ADR-0025 at `70f0793`; ADR-0024 and ADR-0029 as read on disk, since committed as `551cf24`).** Changes:
+> 1. **Declared re-uses** are now a separate category (section 4.6) and the checker treats them explicitly (new section [7]: each re-used value must be a seed already in the inventory and must lie in no P10-I allocation; it is never counted as a collision). Entered: ADR-0023's identity gate, part (a), re-uses P10-S0's rehearsal set (base 209101, initialisation 2092) read-only; ADR-0029's stage A1 reproduction re-uses P10-S1's five registered draws and index seeds, and its adapter identity gate re-uses P10-S1's draw 1 with initialisation 2101.
+> 2. **ADR-0025:** disjoint-draw permutation seeds 250916 (A's pool) and 250917 (B's pool) and Part Q rehearsal partition-side seeds 252901–252914 are **confirmed** as proposed. The rehearsal range is split so the two cannot meet: Part T rehearsal sets 252001–252899 (i = 0 only is used), Part Q rehearsal partition side 252901–252999.
+> 3. **ADR-0024:** block X now runs on **fresh** draws. Draw sets 240501, 240601, 240701, 240801, 240901 and initialisation 330121–330125 are **confirmed** as proposed; block M keeps 240001–240499. Lane L entries (247001–247999, 330111–330115) are **PENDING**: whether lane L has data of its own is decided in ADR-0024's lane L revision, not here (this resolves the disagreement the reviewers found with revision 1's wording).
+> 4. **ADR-0029:** every role of the third draft is assigned (bridge sets 290001–290401 in block 290001–299999, initialisation 330601–330605, I64 index seeds 298001–298003, rehearsal 299201 with 330692, test mode 330698/330699, tests 938001–938999). P10-S1's code whitelists 210001–219999 (`studies/p10s1/core.py:820`, `SEED_RANGE`), so the bridge runs through new adapter code, as the draft now states.
+> 5. **ADR-0027 and ADR-0028** rows are unchanged; their roles are marked "to be stated by the drafts" (both are being revised).
+> 6. The checker was re-run: **RESULT: PASS** (56 allocations, 0 problems; 4 declared re-uses, all found in the inventory, none inside an allocation). Revision 1's text and its attempt history are kept below; section 6 now shows the Revision 2 output. Nothing was moved away from a draft's proposal in this revision. The checker was edited in place on the coordinator's instruction, against section 4.5 item 5's "not edited after it is cited"; Revision 1's checker is identified by its SHA-256 in section 6, and later revisions should go to a new file.
+
 **Standing.** This registry assigns seed values to the P10-I draft specifications ADR-0023 to ADR-0029, which are **DRAFTS, NOT APPROVED**. It revises no earlier study: no seed, record, code path or outcome of P1 to P10 (P10-S0, P10-S1, P10-S2 included) changes. It is not Astra validation and not human approval. `Astra review: NOT_PERFORMED`.
 
 - **Author:** the `arbor-auditor` subagent, model Claude Opus 5.5 (`claude-opus-5-5`), launched by the lead's workflow on 2026-11-17. The auditor did not write any of the drafts or any earlier study code it inventories.
@@ -139,18 +153,21 @@ Values are inclusive. "Used" counts what the draft needs; the rest of each range
 | | spare | 309401–309999 | — | 0 | 599 |
 | | initialisation | 330001–330099 | registered 330001 (odd draws; A6 on every draw), 330002 (even draws); calibration 330091 (draw 1), 330093 (draw 2); rehearsal and pipeline check 330092; test mode 330098, 330099 | 7 | 92 |
 | | test | 932001–932999 | — | — | 999 |
-| **P10-I-S1 (ADR-0024)** | registered draw sets | 240001–246999 | 240001, 240101, 240201, 240301, 240401 (as drafted); P10-S1 in-set layout; block X extends the same draws to 131,072 facts, no new seed | 5 sets | 65 sets |
-| | lane L data sets (if lane L needs data of its own; PENDING) | 247001–247999 | 247001 + 100(r−1), r = 1..5, ADR-0023's in-set layout, never mixed with P10-S1's layout in one set | ≤ 5 sets | ≥ 5 sets |
+| **P10-I-S1 (ADR-0024)** | block M registered draw sets | 240001–240499 | 240001, 240101, 240201, 240301, 240401 (as drafted); P10-S1 in-set layout | 5 sets | 0 |
+| | block X fresh draw sets (Revision 2) | 240501–240999 | 240501, 240601, 240701, 240801, 240901 (as proposed by draft 3); fact tables of 131,072 facts; P10-S1 in-set layout | 5 sets | 0 |
+| | spare draw sets | 241001–246999 | — | 0 | 60 sets |
+| | lane L data sets — **PENDING** | 247001–247999 | held only. Whether lane L has data of its own (here, in ADR-0023's in-set layout, never mixed with P10-S1's layout in one set) or uses this study's draws is decided in ADR-0024's lane L revision | 0 until decided | 10 sets |
 | | spare (was Lane R's index range in draft 1) | 248001–248999 | — | 0 | 999 |
 | | calibration draw sets | 249001–249199 | 249001, 249101 (as drafted) | 2 sets | 0 |
 | | rehearsal draw set | 249201–249299 | 249201 (as drafted) | 1 set | 0 |
 | | spare | 249301–249999 | — | 0 | 699 |
-| | initialisation | 330101–330199 | replicate r → 330100 + r (330101–330105); lane L, if separate, 330110 + r (330111–330115); calibration 330191 (draw 1), 330193 (draw 2); rehearsal 330192; test mode 330198, 330199 | 15 | 84 |
+| | initialisation | 330101–330199 | block M replicate r → 330100 + r (330101–330105); block X fresh draw r → 330120 + r (330121–330125, as proposed); lane L **PENDING** 330110 + r (330111–330115, held); calibration 330191 (draw 1), 330193 (draw 2); rehearsal 330192; test mode 330198, 330199 | 15 (+5 held) | 79 |
 | | test | 933001–933999 | moved from draft 1's 924001–924999 (section 4.4) | — | 999 |
 | **P10-I-S2 (ADR-0025)** | registered replicate sets | 250001–250899 | bases 250001, 250101, 250201 with the draft's offsets (+1, +2, +4, +10, +13) | 3 sets | 6 sets |
-| | partition side and analysis | 250901–250999 | 250901–250914 partition side, 250915 bootstrap (as drafted) | 15 | 84 |
+| | partition side, analysis, disjoint draws | 250901–250999 | 250901–250914 partition side, 250915 bootstrap; 250916 permutation of A's accepted pool, 250917 of B's (Revision 2, as proposed) | 17 | 82 |
 | | calibration | 251001–251999 | 251001 + 100·i, same offsets (as drafted) | i = 0, 1 | 8 sets |
-| | rehearsal | 252001–252999 | 252001 + 100·i, same offsets (as drafted) | i = 0 | 9 sets |
+| | Part T rehearsal sets | 252001–252899 | 252001 + 100·i, same offsets; the draft uses i = 0 only | 1 set | 8 sets |
+| | Part Q rehearsal partition side (Revision 2) | 252901–252999 | 252901–252914, mirroring 250901–250914 (as proposed) | 14 | 85 |
 | | spare | 253001–259999 | the draft-1 test range 259001–259999 is released | 0 | 6,999 |
 | | initialisation | 330201–330299 | role j = 0 stage-1 store, 1 appended rows, 2 M-joint store, 3 D1, 4 second adapter of D-append, 5 D-joint, 6 E-table, 7 router projection and keys. Registered replicate r (0..2): 330201 + 10r + j (330201–330228). Calibration draw i (0, 1): 330231 + 10i + j (330231–330248). Rehearsal draw 0: 330251 + j (330251–330258). Test mode 330298, 330299 | 50 | 49 (330261–330297 takes four more draws of 8) |
 | | test | 934001–934999 | — | — | 999 |
@@ -161,21 +178,21 @@ Values are inclusive. "Used" counts what the draft needs; the rest of each range
 | | spare | 269301–269999 | — | 0 | 699 |
 | | initialisation | 330301–330399 | registered 330301, 330302, 330303 (seed positions 0, 1, 2); calibration 330391; dry rehearsal 330392; test mode 330398, 330399 | 7 | 92 |
 | | test | 935001–935999 | moved from 926001–926999 (section 4.4) | — | 999 |
-| **P10-I-S4 (ADR-0027, conditional)** | registered draw sets | 270001–276999 | 270001 + 100(d−1), d = 1..5 | 5 sets | 65 sets |
+| **P10-I-S4 (ADR-0027, conditional; Revision 3)** | registered data | 270001–276999 | **Route B:** draw sets 270001 + 100(d−1), d = 1..5 (ADR-0024 layout). **Route A:** 27 stream-permutation seeds 270001 + 100(d−1) + (s−1), set d = parent 1..9, s = 1..3 (270001–270003 … 270801–270803; d = 6..9 confirmed inside this range). One entry runs one route (section 4.7) | 5 sets or 27 seeds | 61 sets |
 | | auxiliary | 277001–278999 | — | 0 | 1,999 |
-| | calibration draw sets | 279001–279199 | 279001, 279101 | 2 sets | 0 |
-| | rehearsal draw set | 279201–279299 | 279201 | 1 set | 0 |
-| | spare | 279301–279999 | — | 0 | 699 |
-| | initialisation | 330401–330499 | registered 330401–330405 (one per draw; the count depends on the entry route, PENDING); calibration 330491, 330492 (the two seeds on both calibration draws); rehearsal 330495; test mode 330498, 330499 | 10 | 89 |
+| | calibration | 279001–279199 | Route B sets 279001, 279101; Route A calibration stream seeds 279001, 279101 (same values; one route per entry) | 2 | 0 |
+| | rehearsal | 279201–279299 | Route B set 279201; Route A rehearsal stream seed 279201 | 1 | 0 |
+| | spare | 279301–279999 | held for Route A only if both routes are ever entered: calibration streams 279301, 279401; rehearsal stream 279501 | 0 | 699 |
+| | initialisation | 330401–330499 | Route B registered 330401–330405 (one per draw); Route A registered 330401–330403 (one per seed position, all parents); calibration 330491, 330492; rehearsal 330495; test mode 330498, 330499 (both routes). Held for Route A only if both routes are ever entered: 330411–330413, 330481, 330482, 330485 | 10 (+6 held) | 83 |
 | | test | 936001–936999 | — | — | 999 |
-| **P10-I-S5 (ADR-0028, conditional)** | registered workloads, store contents, arm orders | 280001–286999 | roles and counts not yet stated by the draft | — | 6,999 |
+| **P10-I-S5 (ADR-0028, conditional; Revision 3)** | registered, engineering part | 280001–286999 | query workloads 280001–280010 (2 patterns × 5 repeats); store contents 280101–280103 (one per store size); arm order 280201–280205 (one per repeat); ANN index build 280301–280303 (one per store size); all as drafted | 21 | 6,978 |
 | | auxiliary | 287001–288999 | — | 0 | 1,999 |
-| | calibration (R1) | 289001–289199 | — | — | 199 |
-| | rehearsal | 289201–289299 | — | — | 99 |
+| | R1 | 289001–289199 | store contents 289001; workloads 289011, 289012 (two patterns), 289013 (positive control); arm order 289021; ANN build 289031 (values assigned by the registry; the draft states counts only) | 6 | 193 |
+| | rehearsal | 289201–289299 | store contents 289201; workloads 289211, 289212; arm order 289221; ANN build 289231 (values assigned by the registry) | 5 | 94 |
 | | spare | 289301–289999 | — | 0 | 699 |
-| | initialisation (only if a memory initialiser is used) | 330501–330599 | registered 330501–330505; calibration 330591; rehearsal 330592; test mode 330598, 330599 | ≤ 9 | ≥ 90 |
+| | initialisation | 330501–330599 | **unused** unless the scientific part is entered (not laid out): held 330501–330505, 330591, 330592; test mode 330598, 330599 | 0 (+9 held) | 90 |
 | | test | 937001–937999 | — | — | 999 |
-| **P10-I-R (ADR-0029)** | bridge draw sets | 290001–296999 | 290001 + 100(d−1), d = 1..5, complete P10-S1-style draws (P10-S1 in-set layout, index seed at base + 60) | 5 sets | 65 sets |
+| **P10-I-R (ADR-0029)** | bridge draw sets | 290001–296999 | 290001 + 100(d−1), d = 1..5, complete P10-S1-style draws (P10-S1 in-set layout, index seed at base + 60), run through **new adapter code** because `studies/p10s1/core.py:820` whitelists 210001–219999 | 5 sets | 65 sets |
 | | spare | 297001–297999 | — | 0 | 999 |
 | | I64 index seeds | 298001–298999 | 298001, 298002, 298003 | 3 | 996 |
 | | calibration (held; the draft needs none) | 299001–299199 | — | 0 | 199 |
@@ -183,7 +200,7 @@ Values are inclusive. "Used" counts what the draft needs; the rest of each range
 | | spare | 299301–299999 | — | 0 | 699 |
 | | initialisation | 330601–330699 | bridge 330601–330605 (draw d → 330600 + d); rehearsal 330692; test mode 330698, 330699 | 8 | 91 |
 | | test | 938001–938999 | — | — | 999 |
-| | declared re-use (not an allocation) | P10-S1's five registered draws (210001–210499) and their index seeds (base + 60) | stage A1 reproduction reads only, as ADR-0029 §5 declares; its gate lists them as re-used | — | — |
+| | declared re-uses (not allocations; section 4.6) | P10-S1's five registered draws (210001–210499) with index seeds (base + 60); P10-S1 draw 1 with initialisation 2101 | stage A1 reproduction reads; adapter identity gate | — | — |
 | **P10-I spare** | initialisation sub-rows for supplements | 330701–330999 | — | 0 | 299 |
 
 The draft data blocks 240001–249999, 250001–259999, 260001–269999, 270001–279999, 280001–289999 and 300001–309999 were clean under R1 to R3 and are kept. ADR-0029 is new and takes the next free block, 290001–299999. Every initialisation seed the drafts proposed (2401–2405, 2491–2493, 2601–2699, 2701–2799, 3001–3092) is replaced by the row.
@@ -193,7 +210,7 @@ The draft data blocks 240001–249999, 250001–259999, 260001–269999, 270001�
 1. **No arithmetic derivation from data, permutation, calibration, rehearsal or test seeds** other than in-set offsets below 100 inside the study's own set. In particular the P9 / P9-I rule "initialisation = rehearsal facts seed + offset" is not used; rehearsal, DRY and test modes take the named test-mode initialisation seeds. (Under W1 the adjacent 10,000-blocks reach each other, because block X + 10,000 is the next block; the condition is what keeps them apart.)
 2. **ADR-0025** keeps P10-S2's rule that every generator is seeded directly by a listed seed; its initialisation seeds are in the row anyway, so a later change to an initialiser that adds 1000·k stays collision-free.
 3. **ADR-0026** must not call P4's or P5's permutation helpers (`src/arborlm/p4_model.py:266-270`, `src/arborlm/p5_model.py:258-262`), which hard-code 40000 + index … 70000 + index; it uses its own P_all, P_used and X seeds above.
-4. **ADR-0024 Lane L and ADR-0029 bridge cells** that run through P10-S1's or P10-S0's code must not use those studies' seed whitelists unchanged where they would refuse the new seeds or, worse, accept the old ones (engineering question, see unknowns).
+4. **ADR-0024 lane L, ADR-0023's new sizes and ADR-0029's bridge cells** cannot run new seeds through P10-S0's or P10-S1's code unedited: those packages whitelist their own namespaces (`studies/p10s0/core.py:541` `check_seed_set`; `studies/p10s1/core.py:820` `SEED_RANGE`, `:991` `check_seed_set`). New seeds go through new adapter code; the old packages see only their own seeds, and only as the declared re-uses of section 4.6.
 5. A study's G9 gate checks its planned and recorded seeds against this allocation **with R2 and R3 expanded**, read from code and configs, and re-runs the checker (or a copy extended with the study's named values) before its freeze.
 
 ### 4.4 Test ranges
@@ -207,6 +224,20 @@ The drafts' 924001–924999 and 926001–926999 pass R1 to R3. They are moved an
 3. **Tests:** the next free 1,000-range at or above 932001 that is not a P10-I range: 939001–939999, then 952001 upward (942001–951001 holds 941001's R2 images).
 4. **Derivations:** only R2 (k ≤ 10) from initialisation seeds, R3 (index < 1,000) from any seed, in-set offsets below 100, and hashing. A study whose code needs k > 10 or an index ≥ 1,000 widens the rule in the checker first.
 5. **Check:** add the new allocation to `ALLOC` in a copy of the checker (new file; this one is not edited after it is cited) and require `RESULT: PASS` and an empty `MISSING` list before the freeze.
+
+### 4.6 Declared re-uses (Revision 2)
+
+A declared re-use is a read-only use of seeds a completed study already used, for a check that must reproduce that study's path. It is not an allocation and not a collision: the values belong to the earlier study, the P10-I study observes nothing new on them that enters any class, count or label, and its gate lists them as re-used. The checker's section [7] asserts that every re-used value is already in the inventory (with R2 images where the value is a component seed) and lies in no P10-I allocation.
+
+| Study | Purpose | Values | Why it is not a new observation | Source |
+|---|---|---|---|---|
+| P10-I-S0 (ADR-0023) | identity gate, part (a): new path bit-identical to P10-S0's path at 4,096 and 16,384 slots for A5-D, A0, A6 (initial model, one forward, one update, one evaluation record) | P10-S0 rehearsal set, base 209101 (69 values: fact-set offsets 0, 20, 60 + 0..19; targets; swaps); initialisation 2092 and its component seeds 3092–7092 | P10-S0's path accepts only its own seed sets; the rehearsal set was never registered data, and the gate compares two code paths on it, not a result. Same pattern as P10-S0's G4 re-using P9-II's rehearsal set 5 | `studies/p10s0/core.py:145` (`REHEARSAL_INIT`), `:424` (`REHEARSAL_BASE`), `:489` (`REHEARSAL_SET`), `:541` (`check_seed_set`); ADR-0023 §3 |
+| P10-I-R (ADR-0029) | stage A1 reproduction reads | P10-S1 registered draws 1..5 (bases 210001–210401) with in-set seeds incl. index seed base + 60 (160 values) | the reads reproduce P10-S1's stored checkpoints and records; no model is trained on them | `studies/p10s1/core.py:812-877`; ADR-0029 §5 |
+| P10-I-R (ADR-0029) | adapter identity gate (§10): the adapter reproduces P10-S1's F-OQ and T-OQ cells at 8K/4K, draw 1, at their first three snapshots | P10-S1 draw 1 set (210001) and initialisation 2101 with component seeds 3101–7101 | reproduction of a stored checkpoint, compared by hash | `studies/p10s1/core.py:486`, `:812`; ADR-0029 §10 |
+
+### 4.7 ADR-0027's two entry routes (Revision 3)
+
+Routes A and B both name 330401–330403 (and 279001, 279101, 279201, 330491, 330492, 330495, and the values 270001 + 100(d−1) + 0..2, which are Route A's stream seeds and Route B's first data seeds of the same sets). **Sharing is safe on one condition: one entry of S4 runs exactly one route.** ADR-0027 section 3 says "ENTRY = A or B. The route fixes the task and the memory arm of S4", so one entry has one task; no value then seeds two purposes in one study. If the human lead ever entered both routes, the shared values would seed Route A's stream permutations and Route B's fact tables and initialisations with the same generators, so for that case Route A takes the held values instead: registered streams 271001 + 100(p−1) + (s−1) (271001–271803), initialisation 330411–330413, calibration streams 279301, 279401 with 330481, 330482, rehearsal stream 279501 with 330485. They pass the checker now and are allocated to nothing else. Whether "one route per entry" is a fixed rule is ADR-0027's to state (**PENDING LEAD REVIEW**).
 
 ## 5. Collisions in the drafts' own proposals
 
@@ -229,27 +260,31 @@ The pattern behind all four: four-digit initialisation seeds of the form `2X0Y` 
 Command (from the worktree root):
 
 ```sh
-uv run --locked python docs/reviews/p10-i-direction-2026-11-17/seed_registry_check.py           # checks
-uv run --locked python docs/reviews/p10-i-direction-2026-11-17/seed_registry_check.py --tables  # also prints the inventory and allocation tables
+uv run --locked python docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py           # Revision 3 checks (current)
+uv run --locked python docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py --tables  # also prints the inventory and allocation tables
+uv run --locked python docs/reviews/p10-i-direction-2026-11-17/seed_registry_check.py              # Revision 2 checker, kept unchanged
 ```
 
-Environment: macOS-27.2.1-arm64 (Apple silicon), uv 0.12.15, Python 3.12.14, torch 2.8.0 from the locked environment (torch is needed only by section [6], which imports the studies' own seed functions; without it [6] prints SKIPPED). Wall time 1.06 s (measured with `/usr/bin/time -p`). Checker SHA-256: `6e1e0ea34fd9fef22f9ef13445460468b4c34e88fef2ed9e27dfe919c8edf30f`. Exit status 0.
+Environment: macOS-27.2.1-arm64 (Apple silicon), uv 0.12.15, Python 3.12.14, torch 2.8.0 from the locked environment (torch is needed only by section [6], which imports the studies' own seed functions; without it [6] prints SKIPPED). Wall time 1.06 s (measured with `/usr/bin/time -p`). Checker SHA-256 (Revision 2): `b078100689211a437d59d898e5a7fb04ee03fbcc2a388288e9f5e83dbe759289`. Exit status 0.
 
 Attempt history (failed attempts kept):
 
 - **Attempt 1: FAIL.** Binding check [1] passed (46 allocations, 0 problems), but cross-check [6] found 4 seeds that P9-II's own `seed_namespaces()` declares and my reconstruction lacked: `MISSING: P9-II p9_rehearsal_other: [179941, 179942, 179961, 179962]`. Cause, my error: P9-II reserves the target (+40, +41) and stream (+60, +61) offsets on **every** P9 rehearsal draw 0..9 (`studies/p9ii/core.py:440-444,469-470`), not only on its own draws 3, 4, 5; the rest of those values were already covered by the range 179001–179933 that P10-S1's G9 lists. Fixed by inventory row 36.
 - **Attempt 2: PASS**, with noisy informational sections (the literal scan read JSON outputs under `docs/reviews`; the W1 grouping mis-parsed role names containing " and "). Reporting fixed; binding logic unchanged.
 - **Attempt 3: PASS** (identical binding result). Then the drafts were found revised at HEAD `fd86a0b` (ADR-0024 split, ADR-0029 added, ADR-0025 asking for initialisation and test seeds). The allocation was updated (53 entries) and the between-draft report was restricted to different ADRs.
-- **Attempt 4 / final: PASS.** Output below, verbatim.
+- **Attempt 4: PASS** (Revision 1's final run; 53 allocations; checker SHA-256 `6e1e0ea34fd9fef22f9ef13445460468b4c34e88fef2ed9e27dfe919c8edf30f`).
+- **Revision 2 run: PASS.** 56 allocations, 0 problems; the draft-3 proposals (240501–240901, 330121–330125, 250916–250917, 252901–252914) show 0 collisions in [2]; section [7] lists 4 declared re-uses, all in the inventory, none inside an allocation. A planted negative test (re-use values 235000 and 240001; an allocation at 2701) made [7] report both faults and [1] report 30 collisions, so the new checks can fail. Its output is reproducible from the unchanged Revision 2 file.
+- **Revision 3 run: PASS** (`seed_registry_check_r3.py`, SHA-256 `e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594`, exit status 0). Output below, verbatim.
 
 ```text
-SEED REGISTRY CHECK (P10-I) — arbor-auditor, standard library only
+SEED REGISTRY CHECK (P10-I) revision 3 — arbor-auditor, standard library only
 root: /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1
 rules: R1 identity; R2 s+1000k, k=1..10, on initialization seeds and on every inventory literal < 100000; R3 s*1000+i, i in [0,999], on every value >= 1000; in-set offsets enumerated per study
 inventory: 62 entries, 51101 identity values (with overlaps)
+named values checked: 117 initialization, 97 data (revision 3)
 
 [1] binding: P10-I allocations (R1-R3 expanded) against the inventory (R1-R3 expanded) and against each other
-    allocations: 53; problems: 0
+    allocations: 56; problems: 0
 
 [2] the drafts' own proposals (as read 2026-11-17) under the same rules, against the inventory only
     (listed: collisions with a seed the code itself uses or derives; 'conservative' counts hits that exist only through
@@ -326,10 +361,17 @@ inventory: 62 entries, 51101 identity values (with overlaps)
        … 6 more
     ADR-0027 data 270001–279999: 0 actual collisions, 0 conservative-only
     ADR-0028 data 280001–289999: 0 actual collisions, 0 conservative-only
+    ADR-0024 draft 3 (block X) data 240501–240901: 0 actual collisions, 0 conservative-only
+    ADR-0024 draft 3 (block X) init 330121–330125: 0 actual collisions, 0 conservative-only
+    ADR-0025 draft 3 data (disjoint draws) 250916–250917: 0 actual collisions, 0 conservative-only
+    ADR-0025 draft 3 data (Part Q rehearsal) 252901–252914: 0 actual collisions, 0 conservative-only
+    ADR-0027 draft 3 Route A data (streams d=6..9) 270501–270803: 0 actual collisions, 0 conservative-only
+    ADR-0027 draft 3 init 330401–330405: 0 actual collisions, 0 conservative-only
+    ADR-0028 draft 3 data (registered) 280001–280303: 0 actual collisions, 0 conservative-only
     between drafts: 0
 
 [3] informational (not binding): worst case, +1000k applied to EVERY value of every role, both sides
-    hits: 3301; 1645 inside one study's own block (not listed); the rest grouped by study pair (roles merged):
+    hits: 3502; 1803 inside one study's own block (not listed); the rest grouped by study pair (roles merged):
            8  P10-I-R ADR-0029  <->  Review diagnostics / unknown role
          280  P10-I-S0 ADR-0023  <->  P10-I-R ADR-0029
           10  P10-I-S0 ADR-0023  <->  P10-I-S1 ADR-0024
@@ -339,13 +381,13 @@ inventory: 62 entries, 51101 identity values (with overlaps)
            6  P10-I-S0 ADR-0023  <->  P10-I-S5 ADR-0028
            2  P10-I-S0 ADR-0023  <->  Review diagnostics / unknown role
            6  P10-I-S1 ADR-0024  <->  P10-I-R ADR-0029
-         385  P10-I-S1 ADR-0024  <->  P10-I-S2 ADR-0025
+         422  P10-I-S1 ADR-0024  <->  P10-I-S2 ADR-0025
            9  P10-I-S1 ADR-0024  <->  P10-I-S3 ADR-0026
            8  P10-I-S1 ADR-0024  <->  P10-I-S4 ADR-0027
            7  P10-I-S1 ADR-0024  <->  P10-I-S5 ADR-0028
            3  P10-I-S1 ADR-0024  <->  Review diagnostics / unknown role
            7  P10-I-S2 ADR-0025  <->  P10-I-R ADR-0029
-          85  P10-I-S2 ADR-0025  <->  P10-I-S3 ADR-0026
+          91  P10-I-S2 ADR-0025  <->  P10-I-S3 ADR-0026
            9  P10-I-S2 ADR-0025  <->  P10-I-S4 ADR-0027
            8  P10-I-S2 ADR-0025  <->  P10-I-S5 ADR-0028
            4  P10-I-S2 ADR-0025  <->  Review diagnostics / unknown role
@@ -368,9 +410,21 @@ inventory: 62 entries, 51101 identity values (with overlaps)
 
 [5] informational: six-digit literals inside a P10-I allocation, in configs/*.toml, src, studies, tests (*.py),
     docs/decisions/*.md (ADR-0023..0028 excluded) and docs/reviews/**/*.py (P10-I review folders excluded); sizes are not seeds
-    hits: 107 occurrences of 2 distinct values
+    hits: 119 occurrences of 14 distinct values
        262144 in P10-I-S3 ADR-0026 / registered streams and permutations: 104 occurrences, first configs/p10s1_capacity.toml:40
        263424 in P10-I-S3 ADR-0026 / registered streams and permutations: 3 occurrences, first tests/test_p10s1_classes.py:243
+       290001 in P10-I-R ADR-0029 / data: bridge draw sets (5): 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:99
+       298001 in P10-I-R ADR-0029 / I64 index seeds (3): 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:101
+       298002 in P10-I-R ADR-0029 / I64 index seeds (3): 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:101
+       298003 in P10-I-R ADR-0029 / I64 index seeds (3): 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:101
+       299201 in P10-I-R ADR-0029 / rehearsal draw set (1): 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:102
+       330601 in P10-I-R ADR-0029 / init sub-row: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:100
+       330605 in P10-I-R ADR-0029 / init sub-row: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:100
+       330692 in P10-I-R ADR-0029 / init sub-row: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:102
+       330698 in P10-I-R ADR-0029 / init sub-row: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:103
+       330699 in P10-I-R ADR-0029 / init sub-row: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:103
+       938001 in P10-I-R ADR-0029 / test: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:103
+       938999 in P10-I-R ADR-0029 / test: 1 occurrences, first docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md:103
 
 [6] cross-check: every seed the studies' own functions declare lies inside the reconstruction
      P10-S0 check: 69 seeds, 0 outside the reconstruction
@@ -413,6 +467,12 @@ inventory: 62 entries, 51101 identity values (with overlaps)
      P9-II reserve: 48 seeds, 0 outside the reconstruction
      P9-II test: 72 seeds, 0 outside the reconstruction
 
+[7] declared re-uses (read-only use of a completed study's seeds; not allocations, not collisions)
+     P10-I-S0 ADR-0023: identity gate part (a): P10-S0 rehearsal data set (base 209101), read-only, bit-identity at 4,096 and 16,384 slots: 69 values, 209101–209142, 209145–209146, 209149–209153, 209161–209180 (69 values); source studies/p10s0/core.py:424 (REHEARSAL_BASE), :489 (REHEARSAL_SET), :541 (check_seed_set); not in inventory: 0; inside a P10-I allocation: 0
+     P10-I-S0 ADR-0023: identity gate part (a): P10-S0 rehearsal initialization seed 2092 and its +1000k component seeds: 6 values, 2092, 3092, …, 6092, 7092 (6 values); source studies/p10s0/core.py:145 (REHEARSAL_INIT); studies/p9/model.py:272-279; not in inventory: 0; inside a P10-I allocation: 0
+     P10-I-R ADR-0029: stage A1 reproduction reads: P10-S1 registered draws 1..5 incl. index seed (base + 60): 160 values, 210001–210014, 210021–210023, …, 210441, 210451–210461 (160 values); source studies/p10s1/core.py:812-877; not in inventory: 0; inside a P10-I allocation: 0
+     P10-I-R ADR-0029: adapter identity gate (section 10): P10-S1 cells F-OQ and T-OQ at 8K/4K, draw 1 (set 210001) with initialization seed 2101 and its component seeds: 38 values, 2101, 3101, …, 210041, 210051–210061 (38 values); source studies/p10s1/core.py:486 (2100 + r), :812 (REGISTERED_BASE), :820 (SEED_RANGE whitelist); not in inventory: 0; inside a P10-I allocation: 0
+
 RESULT: PASS
 ```
 
@@ -423,8 +483,8 @@ RESULT: PASS
 3. **Hash-derived seeds** (62-bit SHA-256 of seed and tags) cannot be enumerated. A chance collision with the ≈ 10⁵ allocated values has probability of the order of 10⁵ / 2⁶² ≈ 2·10⁻¹⁴ per derived seed; not proven absent.
 4. **Literal coverage.** P1 to P8 seeds are taken from configs, named constants and the rules cited; a seed computed at run time from a variable the regex scan does not match could be missed. P1 to P8 seeds all lie below 100,000 (P7/P8 panel seeds 91xxx), and every R2 or R3 image of them is far from the P10-I zones; section [5] found no six-digit literal of `src`, `studies`, `tests`, `configs`, ADR-0010…0022 or review scripts inside a P10-I allocation except 262144 and 263424, which are sizes (2¹⁸ and a work count), not seeds.
 5. **Review scripts** under `docs/reviews/` were not inventoried seed by seed; only the diagnostics listed by the P10 gates (500001–500004, 941001) are included.
-6. **Counts not stated by the drafts:** ADR-0027's registered initialisation count (depends on the entry route); ADR-0028's roles and counts; whether ADR-0024's lane L needs data or initialisation seeds of its own ("the seeds ADR-0023's recipe needs per cell"); ADR-0025's calibration and rehearsal draw counts beyond i = 0, 1 and 0. Sub-ranges with headroom are reserved; **PENDING LEAD REVIEW**.
-7. **Seed whitelists of reused code.** ADR-0029's bridge cells call `studies/p10s1` unedited, and ADR-0023/ADR-0024 adapt P10-S0/P9-II paths; those packages' own gates assert their own namespaces (for example P10-S1's `SEED_RANGE = (210001, 219999)`), so whether the new seeds pass through them unedited is an engineering question for the implementer, not settled here.
+6. **Counts not stated by the drafts:** ADR-0027's Route A calibration parents (fixed in its later revision); ADR-0028's scientific part (not laid out); ADR-0024's lane L seeds (PENDING, decided in its lane L revision); ADR-0025's calibration draws beyond i = 0, 1. Sub-ranges with headroom are reserved; **PENDING LEAD REVIEW**.
+7. **Seed whitelists of reused code** (Revision 2: resolved in the drafts). P10-S0's and P10-S1's packages whitelist their own namespaces, so ADR-0023 and ADR-0029 now use new adapter code and touch the old packages only through the declared re-uses of section 4.6. Whether the adapters reproduce the old paths bit for bit is what their identity gates test.
 8. **The three overlaps among earlier studies** in section 3 (182001/182002; 190001/190002 and 191001/191002; 7001/7002) were derived from code rules; whether the corresponding arms and draws ran was not checked in the records. **PENDING LEAD REVIEW**.
 9. **Test-range choice** (section 4.4) and the choice to keep ADR-0023 at 300001–309999 rather than 230001–239999 (which would order the blocks by study but lies within W1 reach of P10-S2's 220001–229999) are engineering choices; the binding check passes either way.
 
