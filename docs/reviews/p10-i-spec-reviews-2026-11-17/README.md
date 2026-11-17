@@ -9,7 +9,7 @@ Written by the lead (Claude Fable 5.2). Drafts by `arbor-lead` subagents (Fable 
 | Document | Study | Lines | Draft | First review | Confirmation review | State |
 |---|---|---|---|---|---|---|
 | `docs/decisions/ADR-0023-p10-i-s0-addressing-and-overload.md` | P10-I-S0 | 482 | 3 | NOT READY (2 blocking) | NOT READY (no blocking; 3 required) | Third draft applies them; not re-reviewed |
-| `docs/decisions/ADR-0024-p10-i-s1-capacity-scaling-and-routing-diagnosis.md` | P10-I-S1 (capacity only) | 476 | 3 | NOT READY (2 blocking) | NOT READY (lane L not specified) | Third draft; lane L marked "to be specified, not approved"; not re-reviewed |
+| `docs/decisions/ADR-0024-p10-i-s1-capacity-scaling.md` | P10-I-S1 (capacity only) | 476 | 3 | NOT READY (2 blocking) | NOT READY (lane L not specified) | Third draft; lane L marked "to be specified, not approved"; not re-reviewed |
 | `docs/decisions/ADR-0025-p10-i-s2-sequential-teacher-transfer.md` | P10-I-S2 | 515 | 3 | NOT READY (2 blocking) | NOT READY (no blocking; lead's decisions needed) | Third draft applies them; not re-reviewed |
 | `docs/decisions/ADR-0026-p10-i-s3-longer-training.md` | P10-I-S3 | 483 | 3 | NOT READY (1 blocking) | READY AFTER THE LISTED EDITS | Edits applied; not re-reviewed |
 | `docs/decisions/ADR-0027-p10-i-s4-quality-against-cost.md` | P10-I-S4 (conditional) | 279 | 3 | NOT READY (1 blocking) | NOT READY (1 blocking, cross-references) | Third draft against the final siblings; not re-reviewed |
@@ -39,7 +39,7 @@ The seven drafts list 72 open choices between them (each ADR's section "Open cho
 
 | # | Ruling | Where | Lead's recommendation |
 |---|---|---|---|
-| 1 | Routing diagnosis as its own ADR-0029, or back inside ADR-0024 as first directed | ADR-0029 §16 item 1; ADR-0024 §21 item 8 | Own ADR: two freezes on one document repeat the failure of P10-S1 attempt 1 |
+| 1 | Routing diagnosis as its own ADR-0029, or back inside ADR-0024 as first directed | ADR-0029 §16 item 1; ADR-0024 §21 item 8 | **RULED 2026-11-17: "Keep ADR-0029".** ADR-0024's file was renamed to `ADR-0024-p10-i-s1-capacity-scaling.md` |
 | 2 | The departures of ADR-0029 from the next-action table of the note's section 5.2 (side by side in the ADR) | ADR-0029 §16 item 8 | Accept; the reads cannot identify some of the causes the table names |
 | 3 | Order of studies | ADR-0029 §16 item 7 | P10-I-R first: about 4–8 charged hours in the draft's estimate, almost all of it reads of existing checkpoints, and it informs ADR-0024 and ADR-0026 |
 | 4 | Capacity task unchanged although a dictionary solves it, with every label capped at "necessary condition" | ADR-0024 §21 item 1 | Keep, with the cap; a task a lookup cannot solve is a design problem of its own |

@@ -13,7 +13,7 @@ This file is a ledger, not a specification and not an ADR. It is the ledger aske
 | CARRIED INTO \<P10-I study\> | The unanswered part is proposed for that study's specification. The original status stands. "Candidate" means `DIRECTION.md` does not bind the study to it; the drafter of that ADR accepts or declines it in writing. |
 | RESERVED FOR THE HUMAN LEAD | No study can settle it. No ruling is proposed here. |
 
-Proposed studies: P10-I-S0 (ADR-0023, addressing and overload), S1 (ADR-0024, capacity scaling), R (ADR-0029, frozen-checkpoint routing diagnosis; split out of ADR-0024 on the reviewer's and the lead's recommendation, pending the human lead's ruling), S2 (ADR-0025, sequential teacher transfer), S3 (ADR-0026, longer training), S4 (ADR-0027, quality against cost, conditional), S5 (ADR-0028, physical SSD, conditional).
+Proposed studies: P10-I-S0 (ADR-0023, addressing and overload), S1 (ADR-0024, capacity scaling), R (ADR-0029, frozen-checkpoint routing diagnosis; split out of ADR-0024 on the reviewer's and the lead's recommendation; the human lead ruled "Keep ADR-0029" on 2026-11-17), S2 (ADR-0025, sequential teacher transfer), S3 (ADR-0026, longer training), S4 (ADR-0027, quality against cost, conditional), S5 (ADR-0028, physical SSD, conditional).
 
 Labels in the second column are copied from the record named in the third. Paths are relative to the repository root.
 
@@ -173,4 +173,4 @@ Each appended entry ends with `Astra review: NOT_PERFORMED`, as the existing ent
 
 ## Revision note (2026-11-17 UTC)
 
-After the independent reviews of the drafts, the lead aligned this ledger with them: the routing diagnosis is P10-I-R (draft ADR-0029, split out of ADR-0024, pending the human lead's ruling); the record-length-free variant and the 65,536-slot item of P10-S0 are closed as recorded (unresolved) because draft ADR-0023 declines them; lane L is split between P10-I-S0 (the licence) and P10-I-S1 (the lane, not yet specified); Lane D and the sequential addition of facts are declined by draft ADR-0025 and stay with the human lead. No original status changed.
+After the independent reviews of the drafts, the lead aligned this ledger with them: the routing diagnosis is P10-I-R (draft ADR-0029, split out of ADR-0024; ruled by the human lead on 2026-11-17: "Keep ADR-0029"); the record-length-free variant and the 65,536-slot item of P10-S0 are closed as recorded (unresolved) because draft ADR-0023 declines them; lane L is split between P10-I-S0 (the licence) and P10-I-S1 (the lane, not yet specified); Lane D and the sequential addition of facts are declined by draft ADR-0025 and stay with the human lead. No original status changed.

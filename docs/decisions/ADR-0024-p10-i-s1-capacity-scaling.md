@@ -412,7 +412,7 @@ CAPACITY-NEGATIVE (b) → on this task the dense map is the better use of the pa
 5. **H8.** Not run (recommended), or kept at the two loaded cells at about 1 more charged hour at P10-S1's lengths (H8 took 1,619 s and 3,204 s per cell there), or at all seven cells at about 1.5.
 6. **Symmetric split rule (§9.2, §9.5).** Positive and negative each need every cell and both readings (recommended), or a conservative any-cell block.
 7. **DEP-c's floor of 0.01** (§8.1). **PENDING HUMAN LEAD RULING.**
-8. **The split of the routing diagnosis into ADR-0029.** Recommended by the reviewer and the lead. **PENDING HUMAN LEAD RULING.**
+8. **The split of the routing diagnosis into ADR-0029.** Recommended by the reviewer and the lead. **RULED by the human lead on 2026-11-17: "Keep ADR-0029".** The routing diagnosis stays its own ADR; this file was renamed accordingly.
 9. **The calibration ceilings** (§7.2: four times P10-S1's run lengths; U_P at most 65,536). These are rules of the draft, listed here so that they are seen.
 10. **F-OQ-IVF in C-CAPACITY (§9.3).** It enters the outcome as in ADR-0021 but qualifies no arm for another study's entry (recommended). Or it is printed only.
 
@@ -466,7 +466,7 @@ Both reviews are by the `arbor-auditor` subagent (Claude Opus 5.5). Both revisio
 | B-M8 quiet-reading wording | ADVISORY | FIXED | §16 |
 | B-M9 vacuous arm-level dense label | ADVISORY | FIXED: NOT APPLICABLE | §9.2 |
 | B-M10 report defects not named | ADVISORY | FIXED | §18 |
-| B-M11 file name | ADVISORY | ANSWERED: kept until the human lead rules on the split | header |
+| B-M11 file name | ADVISORY | FIXED after the ruling of 2026-11-17: renamed to `ADR-0024-p10-i-s1-capacity-scaling.md` | header |
 | B-M12 stale seed text | REQUIRED | FIXED | §6 |
 | B-M13 arms that may carry an entry label | REQUIRED | FIXED | §9.3, §21 item 10 |
 | §G lane L's measure is not a free choice; worker count is a cost rule | — | FIXED | §13, §17, §21 |
