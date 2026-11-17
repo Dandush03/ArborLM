@@ -5,6 +5,8 @@ Read `OUTCOME.md` first. Nothing here is a success claim. `Astra review: NOT_PER
 | File | What it is |
 |---|---|
 | `OUTCOME.md` | The outcome record: run, registered outcome, throughput, independent recomputation, items waiting for the human lead |
+| `ACCEPTANCE.md` | The human lead's acceptance of the result as recorded, the rulings on the audit's findings, and what is carried into P10-I |
+| `ERRATUM_SEED_BLOCK.md` | The corrected seed-block comparisons (the section in `RESULTS.md` is wrong and is kept as written) |
 | `RESULTS.md`, `results.json` | The registered report, as the frozen report stage wrote it (its seed-block section is wrong: see `OUTCOME.md` section 4, finding 3) |
 | `analysis.json`, `gates.json` | The registered analysis record and the gates record |
 | `manifests/` | Stage manifests of attempt 2; the failed throughput stage's record and log |

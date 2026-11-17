@@ -1387,3 +1387,15 @@ An independent check (Opus 5.5, read-only, no file written) of commit `e6bde29`,
 6. Its wall time is small (the stage cap was 399.5 s) and is reported with the record; it is not written to the registered ledger, which the frozen code owns.
 
 `Astra review: NOT_PERFORMED`.
+
+### 25.22 Registered outcome, independent recomputation and the human lead's acceptance (2026-11-17 UTC)
+
+**Status of P10-S1: COMPLETE, accepted by the human lead as recorded. No line is positive for the store.** Capacity line CAPACITY-INCONCLUSIVE; saturation line SATURATION-INCONCLUSIVE; efficiency line EFFICIENCY-NEGATIVE (DENSE FASTER); milestone question 1 not established. The record is `results/p10s1-run-2026-11-17/` (`OUTCOME.md`, `ACCEPTANCE.md`, `ERRATUM_SEED_BLOCK.md`, `audit/`).
+
+**Independent recomputation.** The `arbor-auditor` subagent (Opus 5.5) reproduced every registered label from the raw cell records with its own code (1,085 comparisons, 0 differences) and reported findings that bear on the reading; they are in `OUTCOME.md` section 4.
+
+**Acceptance.** The human lead wrote on 2026-11-17: "accept P10-S1 as recorded, preserve its original labels, and explicitly disclose the audit findings." The rulings, recorded in `ACCEPTANCE.md`: CAPACITY-INCONCLUSIVE is retained, with the disclosure that the reading at the verdicts' own snapshots would give CAPACITY-NEGATIVE; EFFICIENCY-NEGATIVE is retained, with the disclosure that the any-cell rule for DENSE FASTER was not registered (5 of 5 at 2K/4K, 0 of 5 at 8K/16K) and that the label is not evidence that dense is cheaper under both cost measures at every size; the original report is kept and the corrected seed-block comparisons are published as an erratum; the supplementary throughput (section 25.21) is descriptive engineering evidence only and changes no registered result.
+
+**Carried into P10-I-S1 (proposed ADR-0024):** the early-snapshot dependence condition, a registered rule for combining cells in the dense-speed comparison, the matched-compute observation at 32K/16K, and the seed-block reporting defect. No P10-I experiment is authorized by this acceptance.
+
+`Astra review: NOT_PERFORMED`.
