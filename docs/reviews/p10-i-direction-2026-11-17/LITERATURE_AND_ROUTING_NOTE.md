@@ -54,3 +54,59 @@ These are the lead's, not the human lead's, and are open to the review of each s
 7. **SSD claims stay with P10-I-S5** and its two separate verdicts. The SSD papers support the engineering precedent only.
 
 `Astra review: NOT_PERFORMED`.
+
+## 5. Addendum: correction to consideration 2, and the human lead's direction for the routing work (2026-11-17 UTC)
+
+The human lead brought a second note (prepared outside this workflow) that agrees with section 4 with one correction and adds a structure for the routing work. The lead checked its figures against `results/p10s1-run-2026-11-17/audit/AUDIT.md` (branch `claude/p10-s1`); they match.
+
+### 5.1 Correction: the tree is not behind the clustered index at every checkpoint
+
+Consideration 2 said "the tree is already behind that index". That is true of the registered verdict, which is read at U_P, and not of the end of training. Mean a_use over five replicates and both panels, at U_P → at the run length:
+
+| Cell | F-OQ-IVF | T-OQ | Ahead at U_P | Ahead at the run length |
+|---|---|---|---|---|
+| 2K/1K | 0.916 → 0.927 | 0.787 → 0.931 | index | about equal |
+| 2K/4K | 0.953 → 0.960 | 0.989 → 1.000 | tree | tree |
+| 8K/1K (loaded) | 0.306 → 0.497 | 0.176 → 0.416 | index | index |
+| 8K/4K | 0.631 → 0.706 | 0.469 → 0.769 | index | tree |
+| 8K/16K | 0.911 → 0.919 | 0.920 → 0.996 | about equal | tree |
+| 32K/4K (loaded) | 0.201 → 0.270 | 0.151 → 0.323 | index | tree |
+| 32K/16K | 0.483 → 0.540 | 0.401 → 0.697 | index | tree |
+
+The two cells the human lead's note cites (8K/4K and 32K/16K) reverse between U_P and the run length. The reversal is not general: at 8K/1K the index is still ahead at the run length. Both arms stay far below the exhaustive flat read at the loaded and near-full cells. These figures are descriptive. The registered TREE_BEHIND is not changed by them, and they do not show that longer training closes the gap to the flat memory. They do show that the comparison depends on training duration, so the routing work reads more than one checkpoint.
+
+### 5.2 Structure directed for the routing work
+
+**Stage A — diagnosis without training.** Existing flat and tree checkpoints are frozen. Measured: candidate recall against exact search, recovered attention mass, end-task accuracy, and the effect of the branch priors. Candidate budgets 128, 256, 512, 1,024 and 2,048 where feasible; loaded cells included; more than one checkpoint (5.1).
+
+**Stage B — intervention, only if Stage A justifies it.** Post-hoc indexing, teacher-guided routing, product-key memory and periodic index refresh, each as an individually identifiable change with a fair optimisation and cost budget.
+
+What Stage A must separate: the router selects the wrong candidates; the memory content was poorly learned; the branch priors distort the retrieval weights. Each needs a different fix.
+
+| Stage A result | Next action |
+|---|---|
+| Exact search restores the tree's quality | Improve the router and candidate coverage |
+| Exact search does not restore it | Improve memory training and representation |
+| Removing branch priors restores it | Redesign how routing scores enter the read |
+| Post-hoc indexing approaches the flat memory | Investigate a separately trained sparse index |
+| None | Consider a more fundamental change of the memory |
+
+### 5.3 Conditions
+
+1. A retrieval change and a training change are never mixed in one comparison. A frozen checkpoint read through another index isolates retrieval; retraining memory and router together answers a different question.
+2. Quality retention is defined against a registered reference and on task performance. At 32K/16K, 95% of the flat memory's 0.992 is 0.9424, far above the 0.540 (index) and 0.697 (tree) measured. The improvement retained above the no-memory baseline is also assessed, so that a weak model cannot pass trivially.
+3. The dictionary baseline is kept. Exact retrieval is not general learning: a later study has to show generalisation and updating beyond key-value lookup.
+
+### 5.4 Scope
+
+The frozen-checkpoint diagnosis (Stage A) is a separate lane of ADR-0024 with its own outcome line. If it shows that a substantial new training architecture is needed, that becomes a separate study and is not added to ADR-0024.
+
+### 5.5 Asked of the independent review of ADR-0024
+
+The reviewer (Opus 5.5) checks in particular: the U_P against run-length distinction of 5.1 and how the specification reads it; the planned candidate-recall measurements; and whether ADR-0024 can keep independent outcome lines without becoming unmanageable.
+
+### 5.6 Standing of this addendum
+
+The human lead's note recommends approving section 4's drafting considerations with the correction above. It is recorded as direction for the drafting. It approves no specification and no run; the agreed approval process for each specification is unchanged. The question as the note puts it: can ArborLM keep the flat memory's accuracy while using tree-like sparse retrieval, without losing its ability to keep learning?
+
+`Astra review: NOT_PERFORMED`.
