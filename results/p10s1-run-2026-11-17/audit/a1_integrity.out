@@ -1,0 +1,17 @@
+freeze identity {"config_sha256": "45adad5a523266e5aa909fd80ddb4b27f01e6cd253a22277b76797a7d47f48f7", "frozen_source_sha256": "8b5a03a08fc10a4ac29bdf9c6dd2d21945b9bb3aff459766b58304545d570507", "source_sha256": "11051044f9f7b2299436d075a281f2b3796e86890e1a63e165c5ad28c9cd0803", "spec_sha256": "204bafe823ac8249b54ba9c626835b8eef7f7c640d61e01d5be977fa0713daf3"}
+chance intervals 2048/8192/32768: (34, 100) (192, 325) (894, 1159)  (ADR: [34,100] [192,325] [894,1159])
+stage train     status=COMPLETE   tasks= 178 statuses={'completed': 178} identity==freeze:True started=2026-11-17T03:27:02.159553+00:00 finished=2026-11-17T17:07:53.582070+00:00
+stage evaluate  status=COMPLETE   tasks= 193 statuses={'completed': 193} identity==freeze:True started=2026-11-17T17:08:08.828836+00:00 finished=2026-11-17T17:39:47.891583+00:00
+stage timing    status=INCOMPLETE tasks=   1 statuses={'failed': 1} identity==freeze:True started=2026-11-17T18:19:27.532733+00:00 finished=2026-11-17T18:19:28.908631+00:00
+   NOT COMPLETED: timing failed exit status 1 1 1.372
+stage simulate  status=COMPLETE   tasks=  21 statuses={'completed': 21} identity==freeze:True started=2026-11-17T18:20:13.264382+00:00 finished=2026-11-17T18:20:26.830774+00:00
+stage analyze   status=COMPLETE   tasks=   1 statuses={'completed': 1} identity==freeze:True started=2026-11-17T18:20:28.274716+00:00 finished=2026-11-17T18:20:29.439165+00:00
+stage report    status=COMPLETE   tasks=   1 statuses={'completed': 1} identity==freeze:True started=2026-11-17T18:20:38.615501+00:00 finished=2026-11-17T18:20:39.637634+00:00
+gates passed: {'g1_passed': True, 'g2_passed': True, 'g4_passed': True, 'g5_passed': True, 'g6_passed': True, 'g7_passed': True, 'g8_passed': True, 'g9_passed': True} identity==freeze: True
+cell dirs: 178 kinds: Counter({'P': 150, 'SB': 28}) views incl. F-OQ-IVF (P only): 185
+integrity problems: 0
+draw 1 generate files: ['manifest.json']
+draw 2 generate files: ['manifest.json']
+draw 3 generate files: ['manifest.json']
+draw 4 generate files: ['manifest.json']
+draw 5 generate files: ['manifest.json']
