@@ -1341,3 +1341,28 @@ The run directory (`experiments/P10S1-registered-20261116/`) is local and git-ig
 **§25.18 stays as written.** Its statement that training was "still running" was true of the seven running tasks; the refusals had begun about four minutes after it was committed.
 
 `Astra review: NOT_PERFORMED`.
+
+### 25.20 The independent check before the second freeze, corrections to §25.19, and the procedure (2026-11-17 UTC)
+
+An independent check (Opus 5.5, read-only, no file written) of commit `e6bde29`, the ledger and the new projection returned READY WITH NOTES. Confirmed: the only changes outside this file since the first freeze commit are C_max 50 → 54 hours with its source text, the cap value, and the two matching test assertions; the ledger holds 40,098.6 s, of which attempt 1 is 14,357.8 s (training 14,211.6 s), leaving 136,301 s under the 49-hour cap against a training-stage cap of 142,872 s; the new projection has the same plan (178 cells, no cut), the same c (1.9457), the same projected training (71,435.9 s), evaluation (2,721.9 s) and fixed stages (354.0 s) as the first, and C_need = 40,098.6 + 2 × 74,511.8 = 189,122.3 s (52.53 hours), computed cap 53 hours. The checker could not verify the refusal text (it was told not to open the task logs) or the human lead's words (they are in the session, not in the repository before this record).
+
+**Corrections to §25.19** (that section stays as written; these are the facts):
+
+- The edit was committed at 01:39:47 UTC (commit `a7c00bb`), not at about 01:45.
+- The first refusal came at about 01:49 UTC, roughly nine minutes after that commit, not four.
+
+**Old and new figures.** C_max 50 → 54 hours. Cap in force 49 → 53 hours (176,400 s → 190,800 s). Projection of the second attempt: `experiments/P10S1R5-rehearsal-20261116/projection_cmax54_attempt2.json`, SHA-256 `28e7c6301c5b223a83a400811297f932249b53af4e5344a2c823c31e1e7f9fe0`. Stage caps are unchanged in rule and, the inputs being the same, in value.
+
+**The human lead was told before Decision 2.** The lead reported the change of cap, and that the earlier statement "same freeze commit and caps" was wrong, to the human lead on 2026-11-17 before the second freeze. §25.19 item 3 said the report would come with the launch; it came earlier.
+
+**The reading of "no stage is re-run with changed settings" (§16).** The second attempt is the human lead's decision under the same sentence. Its training settings are attempt 1's; the only changed value is the ceiling of charged time, which changes no computation.
+
+**Procedure of the second freeze.**
+
+1. The freeze refuses while `studies/p10s1/freeze/` holds a plan or a cap table. Attempt 1's `plan.json` and `stage_caps.json` are moved, unchanged, to `results/p10s1-freeze-2026-11-16/attempt1-freeze-files/`; the first freeze record and the first Decision 2 stay in `results/p10s1-freeze-2026-11-16/`.
+2. The second freeze writes its plan and cap table to `studies/p10s1/freeze/` and its record to a new folder, `results/p10s1-freeze-attempt2-2026-11-17/`, with the second Decision 2 committed after the freeze commit, as the stages require.
+3. §25.19 item 5 is corrected: nothing is committed or written in this working tree **after the second Decision 2 is committed** and until the report stage has finished.
+
+**Attempt 1 and the study's outcome.** S1-INCOMPLETE is the recorded status of attempt 1. The study's registered outcome is read from the second attempt alone, by the registered rules. Attempt 1's seven trained cells are not evaluated, not opened and not compared with the second attempt's cells; they are kept as the record of the failed attempt.
+
+`Astra review: NOT_PERFORMED`.
