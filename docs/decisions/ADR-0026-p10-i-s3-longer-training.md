@@ -2,49 +2,50 @@
 
 **Status: DRAFT — NOT APPROVED. Nothing under this ADR is implemented, calibrated, frozen or run.**
 
-- Date: 2026-11-17 UTC. Drafted by the lead (Claude Fable 5.2) for an independent specification review (Opus 5.5) and then the human lead's review.
+- Date: 2026-11-17 UTC. Revision 2, after the independent specification review (section 15). Drafted and revised by the lead (Claude Fable 5.2).
 - `SPEC: PENDING ASTRA REVIEW`. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 - Direction: `docs/reviews/p10-i-direction-2026-11-17/DIRECTION.md` section 4 (P10-I-S3) and section 5 (limits); `LITERATURE_AND_ROUTING_NOTE.md` sections 3 and 5 (duration interaction of the routing gap).
 - ArborLM is unproven research. No outcome of this study is a success claim. P1 to P10 are immutable: no result, threshold, seed or outcome of any earlier study is revised, and none is reopened.
+- Two points wait for the human lead's ruling and are marked **PENDING HUMAN LEAD RULING**: the fixed duration (section 5.2, open choice 1) and the third data regime (section 3.3, open choice 5).
 
 ## 1. Question and outcome lines
 
 P4 trained a 198,401-parameter hierarchical memory on a frozen 27,392-parameter backbone for 512 updates. The memory helped, the help depended on its values, and an equal-size dense adapter did better in every pair. P4 could not say whether 512 updates was the limit. The question here:
 
-**When the same frozen-backbone memory is trained to a duration fixed by a convergence rule, (1) does its contribution still depend on what is stored at which address, and (2) is it competitive with a dense adapter of equal trainable size that is tuned as carefully?**
+**When the same frozen-backbone memory is trained for 16,384 updates, (1) does its contribution depend on which trained value sits at which address and on the query, and (2) is it competitive with a dense adapter of equal trainable size that is tuned as carefully?**
 
 Two outcome lines. Each has its own thresholds. Neither substitutes for the other.
 
 | Line | Positive means | Negative means | Inconclusive means |
 |---|---|---|---|
-| 1. DEPENDENCE | At the primary checkpoint the memory's gain is lost when trained values are reassigned among the slots in use and when reads are addressed by the wrong query. The gain is tied to addressed content. | The memory adds predictive capacity, but most of it survives those interventions (a generic additive effect), or it adds no capacity. | A required cell is missing or failed, or a validity gate failed: NOT EVALUABLE. |
-| 2. COMPETITIVENESS | At the primary checkpoint the memory is within the registered tolerance of the dense adapter, each at its own searched rate. | The dense adapter is ahead by more than the tolerance. | The deciding arm's rate sits at the edge of the searched grid, or a dense cell failed: INCONCLUSIVE or NOT EVALUABLE (section 6.4). |
+| 1. DEPENDENCE | At the primary checkpoint, on unseen single-pass data: at least half of the memory's gain is lost when trained values are reassigned among the slots in use (the gain depends on which trained value sits at which address), and at least half is lost when every position receives the same context-free read (the gain depends on the query). Nothing beyond these two statements. | The memory adds predictive capacity, but most of it survives one of those interventions, or it adds no capacity. | A required cell is missing or failed, or a validity gate failed: NOT EVALUABLE. |
+| 2. COMPETITIVENESS | At the primary checkpoint the memory is within the registered tolerance of the dense adapter, each at its own searched rate. | The dense adapter is ahead by more than the tolerance. | The deciding arm's rate sits at the edge of the searched grid: INCONCLUSIVE. A dense cell failed or the dense adapter adds nothing measurable: NOT EVALUABLE (section 6.4). |
 
 A positive on line 1 with a negative on line 2 is the P4 pattern at a longer duration. It is a registered outcome, not a reason to extend training further.
 
 ## 2. Background: the registered findings this follows from
 
-All figures below were read from the records named. Where a figure is the lead's own computation from raw records it is marked so; such figures are descriptive and change nothing in the study they come from.
+All figures below were read from the records named. Where a figure is the lead's own computation from raw records it is marked so; such figures are descriptive and change nothing in the study they come from. The review recomputed every figure in this table with separate code and found no difference.
 
 | Source | Finding |
 |---|---|
 | `results/p4-2026-11-12/README.md`, `authorized-scientific-review.md`, `docs/decisions/ADR-0009-frozen-backbone-capacity.md` | 63 cells; each addition trained 198,401 parameters for 512 updates (`configs/p4_frozen_capacity.toml`: `steps = 512`; the 256-update snapshot was saved and never evaluated). Capacity gain C: mean 0.021988695 nats/byte, positive in 27 of 27. Value-shuffle effect P: mean 0.022221519, positive in 27 of 27. Q (dense minus memory): mean −0.006182638, negative in 27 of 27; 10 of 27 cells and 2 of 9 parent means within the −0.005 tolerance. Capacity and dependence flags passed; dense tolerance and the composite failed. |
-| `results/p4-2026-11-12/per-run.csv` (recomputed by the lead for this draft) | The three counts reproduce: C > 0 in 27/27, P > 0 in 27/27, Q < 0 in 27/27. Memory gain as a share of dense gain: 0.78 of the means; 0.62 to 0.90 per cell. Across-seed SD of C within a parent: 0.0005 to 0.0027. |
-| `results/p4-2026-11-12/b*-memory-*/result.json` (lead's computation) | At step 512 the memory selected 217 to 421 distinct slots of 4,096 on the panel (mean 323). Shuffled-values NLL minus frozen-baseline NLL: mean +0.00023 (range −0.0026 to +0.0045). So P4's all-slot shuffle mostly replaces trained values by untrained ones and returns the model to about the baseline. It shows that trained values matter. It does not separate "the right value at the right address" from "any trained value". Section 3.4 adds a control for that. |
+| `results/p4-2026-11-12/per-run.csv` (lead's computation) | The three counts reproduce: C > 0 in 27/27, P > 0 in 27/27, Q < 0 in 27/27. Memory gain as a share of dense gain: 0.78 of the means; 0.62 to 0.90 per cell. Across-seed SD of C within a parent: 0.0005 to 0.0027. |
+| `results/p4-2026-11-12/b*-memory-*/result.json` (lead's computation) | At step 512 the memory selected 217 to 421 distinct slots of 4,096 on the panel (mean 323). Shuffled-values NLL minus frozen-baseline NLL: mean +0.00023 (range −0.0026 to +0.0045). So P4's all-slot shuffle mostly swaps in values of slots that are not selected on the panel, and those values have almost no effect: the model returns to about the baseline. (Whether those slots were selected during training is not in the record.) The shuffle shows that the values in use matter. It does not separate "the right value at the right address" from "any trained value". Section 3.4 adds a control for that. |
 | `results/p5-2026-11-13/README.md`, `docs/decisions/ADR-0010-hierarchical-memory-ablation.md` | 512 updates again. Mean gain: flat 0.022938682, fixed tree 0.022133329, learned tree 0.021549867, dense 0.027317625. Learned tree minus flat NLL: +0.001388814, inside the 0.005 resolution. No memory variant passed the dense-reference tolerance (15, 14 and 13 of 27 cells). |
 | `docs/reviews/p6-results-2026-11-13/README.md` | On the P5 checkpoints, exhaustive search under the tree's own rule changed NLL by +0.00044 (fixed) and +0.00002 (learned); removing the branch prior cost about 0.0039. At 512 updates the top-2 restriction was not what limited the tree. |
-| `results/p3-lt-2026-11-12/README.md`, `docs/RESEARCH_LOG.md` (P3-LT entry) | The earlier longer-training study (joint training, 256 → 1,024 updates): dependence rose descriptively and missed its registered thresholds. Different setting (backbone trained jointly); not comparable to this study. |
+| `results/p3-lt-2026-11-12/README.md`, `docs/RESEARCH_LOG.md` (P3-LT entry) | The earlier longer-training study (joint training, 256 → 1,024 updates): dependence rose descriptively and missed its registered thresholds. Different setting; not comparable to this study. |
 | `results/p10s1-run-2026-11-17/OUTCOME.md` section 4, `audit/AUDIT.md` sections 2 and 5, `ACCEPTANCE.md` | A different task (oracle-addressed fact store). Three lessons carried here: (a) the memory arms ran at an untuned rate 0.003 against a dense control at its calibrated rate; (b) every DEPENDENCE_FAILED label came from a ratio condition read at early snapshots, which the by-construction reference R2 also failed 12 times; (c) the dense comparison changed with the yardstick (F-OQ ahead of D-OQ at matched compute in 5 of 5 at 32K/16K, DENSE AHEAD at matched updates). |
 | `LITERATURE_AND_ROUTING_NOTE.md` section 5.1 | In P10-S1 the tree overtook the clustered index between U_P and the run length in several cells (8K/4K: 0.469 → 0.769 against 0.631 → 0.706). The tree-versus-alternative comparison depends on training duration. |
 
-P10-S1's update counts are not used here. Its task, addressing and training conditions differ. Every duration in this study comes from its own rehearsal (section 5).
+P10-S1's update counts are not used here. Its task, addressing and training conditions differ.
 
 ## 3. Design
 
 ### 3.1 Setting (unchanged from P4, read-only reuse)
 
 - Parents: the nine frozen P3 control backbones used by P4 and P5 (B = 101, 102, 103; O = 301, 302, 303), verified by hash. They are read-only inputs, not new draws. All 27,392 backbone parameters stay frozen and bitwise unchanged.
-- Additions act after block 0 and before block 1, as in ADR-0009. Existing classes are imported unmodified from `src/arborlm/` (`pilot_model.Memory`, `p4_model.DenseAdapter`, `p4_model.Backbone`). No file under `src/arborlm/`, `configs/`, `tests/`, `results/` or `experiments/` is edited. New code goes in `studies/p10i_s3/`; the new config is `configs/p10i_s3_longer_training.toml`.
+- Additions act after block 0 and before block 1, as in ADR-0009. Existing classes and functions are imported unmodified from `src/arborlm/` (`pilot_model.Memory`, `pilot_model.tree_candidates`, `p4_model.DenseAdapter`, `p4_model.Backbone`). No file under `src/arborlm/`, `configs/`, `tests/`, `results/` or `experiments/` is edited. New code goes in `studies/p10i_s3/`; the new config is `configs/p10i_s3_longer_training.toml`.
 - Optimizer: fresh AdamW over the addition only, betas (0.9, 0.999), eps 1e-8, weight decay 0, global-norm clip 1.0, constant rate, no schedule, batch 8 × context 64. Only the rate is searched (section 5.1).
 
 ### 3.2 Trainable arms
@@ -52,122 +53,154 @@ P10-S1's update counts are not used here. Its task, addressing and training cond
 | Arm | What it is | Trainable parameters | Role |
 |---|---|---|---|
 | M-TREE | `Memory("learned_tree")`: 4,096 slots, 16 branches of 256, top-2 branches, top-8 of 512 candidates, branch log-prior | 198,401 | The P4 memory. Subject of both outcome lines. |
-| M-FLAT | `Memory("flat")`: same keys, values and fusion, exhaustive top-8 of 4,096 | 198,145 | Flat reference for the routing interaction (section 6.6) and a second competitiveness sub-label. |
+| M-FLAT | `Memory("flat")`: same keys, values and fusion, exhaustive top-8 of 4,096 | 198,145 | Flat reference for the routing interaction (section 6.6) and a second, separate competitiveness sub-label. |
 | D-ADAPT | `DenseAdapter`, width 3,100 | 198,401 | The dense baseline of line 2. |
 | BASE | Frozen backbone, no addition | 0 | Reference loss B for every gain. Nine evaluations. |
 
 ### 3.3 Data regimes
 
-Each trainable arm runs in both regimes. A cell is (parent, init seed); all arms of a cell share the batch stream of their regime.
+A cell is (parent, init seed). All arms of a cell share the batch stream of their regime.
 
-| Regime | Training stream | What it isolates when compared |
+| Regime | Training stream | Arms |
 |---|---|---|
-| REP (repeated) | The 2,048 chunks the backbone was trained on (train ranks 0–2,047), reshuffled each epoch. At U updates the stream has been seen U/256 times. | Along REP checkpoints: duration with no new data. |
-| FRESH | Chunks the backbone has never seen (train ranks ≥ 4,096), each used once. U updates consume 8U unique chunks. | FRESH against REP at the same update count: additional unique data at equal duration. |
+| REP (repeated, seen) | The 2,048 chunks the backbone was trained on (train ranks 0–2,047), reshuffled each epoch. 16,384 updates are 64 passes. | M-TREE, M-FLAT, D-ADAPT |
+| REP-U (repeated, unseen) | The 2,048 chunks at train ranks 2,048–4,095, reshuffled each epoch. No backbone was trained on them: P1 to P3 trained on ranks 0–2,047 only (`configs/p2_optimization_followup.toml`, `p3_longer_training.toml`), and the ranking is a SHA-256 hash, so they come from the same distribution. A gate proves that no study used them for training or evaluation. | M-TREE, D-ADAPT |
+| FRESH (single pass, unseen) | Chunks at train ranks ≥ 4,096, each used once. U updates consume 8U unique chunks. It starts at 4,096 because 2,048–4,095 is REP-U. | M-TREE, M-FLAT, D-ADAPT |
 
-Memory-specific learning is read inside each regime: memory against D-ADAPT on the same stream, and the controls of section 3.4. REP and FRESH also differ in whether the backbone has seen the data; the design does not separate that from the amount of unique data (open choice 5).
+| Contrast | What it isolates |
+|---|---|
+| Checkpoints within one regime | Duration. In REP and REP-U with no new data; in FRESH together with new data. |
+| REP against REP-U, same update count | Data the backbone was fitted to against data it never saw, at equal unique data. |
+| REP-U against FRESH, same update count | Additional unique data, at equal unseen-ness. |
+| Memory against D-ADAPT on the same stream; controls of section 3.4 | Memory-specific learning. |
+
+REP-U is added by the lead's decision for this draft, after the review (F5). **PENDING HUMAN LEAD RULING** (open choice 5): the human lead may drop it and accept that FRESH against REP mixes the two effects.
+
+At 16,384 updates REP and REP-U are 64 passes over 131,072 target bytes with a 198k-parameter addition and no weight decay. Their endpoints largely measure how each arm behaves once it can fit its training set. A competitiveness label on repeated data can come from the dense adapter overfitting faster. The report says so beside every REP and REP-U label.
 
 The 512-update point of this study differs from P4 in seeds, panel, rate selection and epoch reshuffling. It is a new measurement, not a replication of P4 or P5, and it is not compared with their numbers by any rule.
 
 ### 3.4 Controls (evaluation only; no control trains or writes a checkpoint)
 
-| Control | Applied to | Definition | Isolates |
+Evaluation runs in 64 batches of 8 chunks (512 positions each), in panel order, as in P4.
+
+| Control | Applied to | Definition | Shows |
 |---|---|---|---|
 | Memory disabled | all additions | Addition bypassed. Must equal BASE bitwise on the platform of record. | Engineering identity. With a frozen backbone it is the same contrast as C, not independent evidence (ADR-0009). |
-| P_all: all-slot value permutation | M-TREE, M-FLAT | One permutation of all 4,096 value rows (P4's control). | Continuity with P4. Descriptive only (section 2 explains why it is weak). |
-| P_used: used-slot value reassignment | M-TREE, M-FLAT | Let S be the slots selected at least once when the checkpoint reads the panel. Values are moved along a random cyclic order of S, so every slot in S holds another trained value. Mean over 4 seeded draws. | Whether the gain needs the right trained value at the right address. |
-| X: query reassignment | M-TREE, M-FLAT | Within each evaluation batch (512 positions) the normalized queries are moved along a random cyclic order of positions before the lookup; each position receives a read addressed by another position's query. Mean over 4 seeded draws. | Whether the gain needs content-specific addressing, or a context-free read would do. |
-| X_dense | D-ADAPT | The adapter's input is moved across positions the same way. | Descriptive like-for-like figure for X. |
-| Joint key/value permutation within branch | M-TREE | As ADR-0009. NLL must match the reference within 1e-6. | Engineering invariance. |
-| Exhaustive read; prior removed | M-TREE | Same checkpoint read with all 16 branches visited; and with the branch prior off. | Retrieval alone, no training change (routing note 5.3 condition 1). |
-| NEG-REF | built from each rehearsal M-TREE checkpoint | Every value row replaced by the usage-weighted mean value. The read is the same for every address by construction. | Validity reference: P_all, P_used and X must be 0 within 1e-6 and the dependence rule must return "not dependent". |
+| P_all: all-slot value permutation | M-TREE, M-FLAT | One permutation of all 4,096 value rows (P4's control). | Continuity with P4. Descriptive only (section 2). |
+| P_used: used-slot value reassignment | M-TREE, M-FLAT | S = the slots selected at least once when the unmodified checkpoint reads the panel in panel order. S is sorted by slot ID; a seeded permutation σ of S is drawn; slot σ[t] receives the value of slot σ[t+1 mod \|S\|]. Mean over 4 seeded draws. | Whether the gain depends on which trained value sits at which address. A misplaced value can also do harm beyond the loss of the gain; B − H_used is printed per cell with the count of cells pushed above baseline. |
+| X_mean: context-free read | M-TREE, M-FLAT | In each evaluation batch the read (the combined vector before W_o) at every position is replaced by its mean over the 512 positions. | Whether a context-free correction would keep the gain. The gain kept, B − H_mean, lies between 0 and about C, so "half the gain lost" means what it says. |
+| X: query reassignment | M-TREE, M-FLAT | In each evaluation batch a seeded permutation σ of the 512 positions is drawn (64 draws in batch order from one generator per seed); position σ[t] is read with the query of σ[t+1 mod 512]. Mean over 4 seeded draws. | That the read is query-specific. It is a mismatched read, not a context-free one, and it can do harm beyond the loss of the gain. Descriptive only; B − H_x and the count above baseline are printed. |
+| X_dense, X_mean_dense | D-ADAPT | The same two operations on the adapter's input positions and on its output. | Descriptive like-for-like figures. Any input-dependent module shows some such effect. |
+| Joint key/value permutation within branch | M-TREE | As ADR-0009. NLL must match the enabled reference within 1e-6. | Engineering invariance. |
+| Exhaustive read; prior removed | M-TREE | Same checkpoint read through `tree_candidates` with `visit=16`; and with `use_prior=False`. | Retrieval alone, no training change (routing note 5.3 condition 1). |
+| NEG-REF | built from each rehearsal M-TREE checkpoint | Every value row replaced by the usage-weighted mean value. The read is the same for every address by construction. | Validity reference: P_all, P_used, X and X_mean must be 0 within 1e-6 and the rule of section 6.2 must not return DEPENDENT. |
 
-There is no arm in this natural-text setting whose dependence on memory holds by construction (P10-S1 had R2). Three safeguards replace it: line 1 is read at the primary checkpoint only; its conditions are absolute in nats, with a ratio applied only where the gain itself is positive and the mean is above the resolution; and the analysis is tested on a synthetic registry with known answers. This is flagged for the review (open choice 7).
+"Enabled reference" is the evaluation of the restored checkpoint with no intervention; "replay" is a second such evaluation after a fresh restore, and it must equal the reference bitwise on the platform of record.
+
+**Line 1 is a stricter test than P4's flag 2 and is not comparable with it.** P4 used the all-slot shuffle with no ratio. Any statement about how dependence changes with duration compares P_used and X_mean at this study's own 512-update checkpoint with the same controls at U\*. It is descriptive, and it never uses P4's P.
+
+There is no arm in this natural-text setting whose dependence on memory holds by construction (P10-S1 had R2). In its place: a planted-positive unit test of the intervention code (section 11), NEG-REF, reading line 1 at U\* only, and a synthetic-registry test of the analysis (open choice 7).
 
 ## 4. Data, seeds, sizes, checkpoints
 
 **Corpus.** The pinned WikiText-2 acquisition of ADR-0004, byte tokenizer and chunk recipe of ADR-0005. No download, no test split. The recorded pool (`results/p4-2026-11-12/*/dataset_manifest.json`): 156,611 eligible unique train chunks and 16,407 eligible validation chunks.
 
-**FRESH pool.** Train ranks 4,096 to 156,610: 152,515 chunks. A run of U updates needs 8U. 16,384 updates need 131,072 chunks. **The pool supports at most 19,064 fresh updates.** This is a design ceiling of the study (section 7) and it bounds the convergence rule (section 5.2).
+**FRESH pool.** Train ranks 4,096 to 156,610: 152,515 chunks. A cell's FRESH stream is a seeded permutation of the whole pool; update k (from 0) takes entries 8k to 8k+7. 16,384 updates use 131,072 chunks. **The pool supports at most 19,064 fresh updates.** This design ceiling is why the duration is fixed (section 5.2).
 
-**Panels.** Validation ranks 0 to 4,095 are used by earlier panels (P1 0–511, P2 512–1,023, P3 1,024–1,535, P4 1,536–2,047, P5 2,048–2,559, P7-B 2,560–3,071, P8 3,072–4,095). P10-S2 drew 144 windows from WikiText-2 validation on its own grid (`configs/p10s2_transfer.toml`). Rule: the registered panel is the first 512 eligible validation chunks at rank ≥ 8,192 that share no byte with any text evaluated in an earlier study; the calibration panel is the next 512 under the same rule. An inventory (`arbor-clerk`) and an independent reconstruction (`arbor-auditor`) prove both unused before the freeze. The count is met by walking further down the ranking, not by relaxing the rule. Each evaluation covers 32,768 targets, as in P4.
+**Panels.** Rule: a panel is the first 512 eligible validation chunks, walking down the ranking from rank 8,192, whose (row, byte span) overlaps no byte span drawn or designated for any panel or window by any earlier study or any P10-I sibling. Earlier chunk panels (P1 to P8, validation ranks 0–4,095) are excluded by rank. Window panels (P10-S2's 144 GEN windows and any other windows it drew from validation; ADR-0025's windows) are mapped to (row, byte-offset) spans by a documented procedure before the comparison. The registered panel is taken first, then the calibration panel. `arbor-clerk` inventories and `arbor-auditor` reconstructs independently; both must reproduce the recorded panel SHA-256 values of P1 to P8. The two panels are written into a ledger that ADR-0025 and ADR-0027 must exclude; whichever study freezes first writes first. If the walk runs out of eligible chunks, the run stops (engineering stop). Each evaluation covers 32,768 targets, as in P4.
 
-**Seeds.** New namespaces. The lead checked them against `configs/*.toml`: P1–P5 use 42–44, 101–103, 201–203, 301–303, 401–403, 501–503; P8 601–602 and 91xxx; P9 17xx, 18xx and 179xxx; P10-S0 200001–209999 with inits 20xx; P10-S1 210001–219999 with inits 21xx; P10-S2 220001–229999. Sibling drafts seen at drafting time: ADR-0023 uses inits 3001, 3002 and 3091; ADR-0027 proposes 270001–279999 and 2701–2799; ADR-0028 proposes 280001–289999. None overlaps the ranges below. ADR-0024 and ADR-0025 were not available; a gate at the freeze asserts disjointness from every earlier and sibling study.
+**Seeds.** All seeds of this study are new. The lead proposes the block 260001–269999 for streams and permutations, 2601–2699 for initialization, and 926001–926999 for tests; the review found no overlap of these blocks with any earlier study or sibling draft, including the component seeds that the reused classes derive (seed + 1000 … + 5000). **The exact assignment of every seed is made in the programme-wide registry the lead will write, `docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md`, and checked against every literal and derived seed in the repository and in the sibling drafts before any freeze.** A gate asserts disjointness on the fully expanded set. Roles and counts needed:
 
-| Use | Seeds |
-|---|---|
-| Registered init seeds (three per parent) | 2601, 2602, 2603 |
-| Calibration init seed | 2691 |
-| Dry-rehearsal init seed | 2692 |
-| Registered streams and permutations | 260001–268999. Cell index i = 9(B−101) + 3(O−301) + (s−2601). REP stream 260001+i; FRESH stream 260101+i; P_all 260201+i; P_used 260301+10i+j; X 260601+10i+j (j = 0..3). |
-| Calibration and rehearsal streams and permutations | 269001–269999, same offsets |
-| Tests | 926001–926999 |
+| Role | Count | Notes |
+|---|---|---|
+| Registered initialization seeds | 3 | One set per parent; each expands to five component seeds |
+| Calibration initialization seed; dry-rehearsal initialization seed | 1; 1 | Same expansion |
+| Registered stream seeds | 81 | 27 cells × 3 regimes; cell index 0–26 = 9(B−101) + 3(O−301) + seed position 0–2 |
+| Calibration stream seeds; dry-rehearsal stream seeds | 9; 3 | 3 calibration cells (index 0–2) × 3 regimes; 1 dry cell × 3 |
+| P_all seeds | 27 + 3 + 1 | One per registered, calibration and dry cell |
+| P_used seeds | 108 + 12 + 4 | 4 per cell |
+| X seeds | 108 + 12 + 4 | 4 per cell |
+| Test seeds | up to 999 | Never used outside tests |
 
-**Cells.** 9 parents × 3 init seeds = 27 cells per arm and regime. The 27 cells share nine parents and one corpus; they are not 27 independent replications, and no p-value is computed.
+A cell's permutation seeds are reused across arms, regimes and checkpoints. This pairs the arms and is deliberate.
 
-**Checkpoints.** Saved and evaluated at 0, 512, 2,048, 8,192 and U\* updates. U\* is the one primary checkpoint; it is fixed by the rehearsal (section 5.2) and frozen before any registered seed is observed. The checkpoints before U\* are descriptive. No rule of sections 6.2 to 6.5 reads them, and none may replace U\*.
+**Cells.** 9 parents × 3 init seeds = 27 cells per arm and regime. They share nine parents and one corpus; they are not 27 independent replications, and no p-value is computed.
 
-## 5. Rehearsal: rate search and convergence
+**Checkpoints.** Saved and evaluated at 0, 512, 2,048, 8,192 and U\* = 16,384 updates. U\* is the one primary checkpoint. The earlier checkpoints are descriptive. No rule of sections 6.2 to 6.5 reads them, and none may replace U\*.
 
-The rehearsal uses calibration draws only: init seed 2691, calibration streams, the calibration panel, and three parents (B101/O301, B102/O302, B103/O303). No registered seed and no registered-panel evaluation is touched. Every threshold in section 6 is fixed at Decision 1, before the rehearsal.
+## 5. Rehearsal: rate search, convergence tag, sealing
+
+The rehearsal uses init seed, streams and panel that the registered run never uses. Its three cells sit on parents B101/O301, B102/O302 and B103/O303. **These are three of the nine registered parents; no other backbones exist.** Consequences, stated here and in section 12: rates are tuned on a third of the registered parents (the same way for every arm, so it is fair between arms, but estimates on those parents are optimistic for all arms); calibration statistics would predict the registered outcome, which is why they are sealed (section 5.3); and each calibration FRESH stream shares about 86% of its chunks with any registered FRESH stream (131,072 of 152,515), which leaks no panel data. Every threshold in section 6 is fixed at Decision 1, before the rehearsal.
 
 ### 5.1 Rate search (the same for every trainable arm)
 
-P10-S1 compared untuned memory arms with a calibrated dense control. Here M-TREE, M-FLAT and D-ADAPT get the same search, in each regime, at each duration.
+P10-S1 compared untuned memory arms with a calibrated dense control. Here every trainable arm gets the same search, in each regime it runs in, at each duration.
 
-- Grid: 0.0003, 0.001, 0.003, 0.01, 0.03 (half-decade steps around P4's 0.003). One run per (arm, regime, rate, calibration cell) to U_cal = 16,384, with the checkpoints of section 4.
-- Because the rate is constant and there is no schedule, the checkpoint at c updates of a longer run is exactly a c-update run. One run therefore serves every duration.
-- Selected rate r(arm, regime, c) for each c in {512, 2,048, 8,192, 16,384}: the rate with the lowest mean calibration-panel NLL at c over the three calibration cells. A rate with a non-finite loss in any calibration cell is excluded. If two rates are within 0.0005 nats/byte, the smaller rate is taken.
+- Grid: 0.0003, 0.001, 0.003, 0.01, 0.03 (half-decade steps around P4's 0.003). One run per (arm, regime, rate, calibration cell) to 16,384 updates, with the checkpoints of section 4.
+- The rate is constant and there is no schedule, so checkpoint c of a longer run is a c-update run. One run serves every duration. A gate checks this bitwise (section 11).
+- Selected rate r(arm, regime, c) for c in {512, 2,048, 8,192, 16,384}: let m be the lowest mean calibration-panel NLL at c over the three calibration cells among the rates with finite loss in all three; the selected rate is the smallest rate whose mean is within 0.0005 nats/byte of m.
 - Edge rule (design ceiling with a written extension): if a selected rate is the lowest or highest of the grid, the grid is extended by one half-decade step on that side and the search repeated, at most twice per side. A rate still at the edge is used and tagged RATE-AT-EDGE.
-- Output: the rate table, 3 arms × 2 regimes × 4 durations. It is frozen at Decision 2.
+- If no rate is finite in all three cells for some (arm, regime), no rate can be chosen: engineering stop before Decision 2.
+- The selection is made by code. Output: the rate table, 8 arm-regimes × 4 durations, frozen at Decision 2.
 
-### 5.2 Convergence rule and the primary checkpoint
+### 5.2 Duration and the convergence tag
 
-Let M(arm, regime, c) be the mean calibration-panel NLL at c updates of the runs at rate r(arm, regime, 16,384). Let δ(arm, regime) = M(8,192) − M(16,384), the improvement over the last doubling. ε = 0.001 nats/byte.
+**U\* = 16,384 updates, fixed.** It is the direction's proposed minimum, and it is also close to the most the corpus allows: unseen single-pass data ends at 19,064 updates, and the next doubling, 32,768, cannot be reached in FRESH. A duration chosen by a convergence rule is therefore not available on this corpus. The rehearsal does not choose the duration. It measures convergence and attaches a tag.
 
-1. An arm is CONVERGED in a regime if δ < ε. A loss that rises counts as converged (δ < 0).
-2. **If all three arms are CONVERGED in both regimes, U\* = 16,384.**
-3. If any arm is not, U\* is not fixed by the lead. The rehearsal adds one probe: REP only, the three arms at their selected rates, to 32,768 updates, to show whether one more doubling would satisfy rule 1. The lead then stops at the gate. The human lead chooses among: (a) run at U\* = 16,384 with the tag NOT CONVERGED on the affected arms; (b) approve a larger pinned corpus so that FRESH can reach 32,768 (a separate data decision; nothing is downloaded under this ADR); (c) not run. The choice uses rehearsal figures only.
-4. U\* is never below 16,384 and never differs between regimes or arms.
+- Let M(arm, regime, c) be the mean calibration-panel NLL at c of the runs at rate r(arm, regime, 16,384), and δ = M(8,192) − M(16,384). ε = 0.001 nats/byte.
+- Tag, computed by code: CONVERGED if δ < ε (a rising loss counts as converged), otherwise NOT CONVERGED, per arm and regime.
+- **The study runs at 16,384 whatever the tags are.** A NOT CONVERGED tag changes no label; its effect on wording is in section 6.4 and on S4 entry in section 12.
+- The study is not run only for a cost or engineering reason of section 10, recorded before Decision 2. No calibration statistic can be such a reason, and the lead does not see them (section 5.3).
+- A larger corpus is not an option inside this study. If the human lead wants a convergence-chosen duration, that is a successor study with its own data decision and its own rehearsal.
+- The registered run recomputes δ on its own 27 cells and prints its own tags. Where the rehearsal tag and the registered tag differ, both are printed and the registered one is used in section 6.4.
 
-Reason for ε: it is one fifth of the 0.005 resolution on which every line is read. An arm that gains less than 0.001 per doubling, at a non-increasing pace, would move by less than 0.002 over two further doublings (four times the training), less than half of any deciding margin.
+**PENDING HUMAN LEAD RULING** (open choice 1): whether a fixed duration with a convergence tag meets DIRECTION section 4 ("a preregistered convergence-based duration"), or whether a larger corpus must be approved first.
 
-The registered run recomputes δ on its own cells at U\* and prints CONVERGED or NOT CONVERGED per arm and regime as a tag. The tag changes no label except as stated in section 6.4. If the REP loss of an arm at U\* is more than 0.005 above its lowest descriptive checkpoint, the tag PAST BEST CHECKPOINT is printed; no checkpoint is selected because of it.
+Reason for ε: one fifth of the 0.005 resolution. If the gain per doubling does not increase (an assumption), an arm below ε would move by less than 0.002 over two further doublings, less than half of any deciding margin. The lead's expectation, not a measurement: FRESH arms may well be NOT CONVERGED at 16,384.
 
-### 5.3 What else the rehearsal does
+If the REP or REP-U loss of an arm at U\* is more than 0.005 above its lowest descriptive checkpoint, the tag PAST BEST CHECKPOINT is printed; no checkpoint is selected because of it.
 
-- Measures seconds per update and per evaluation for each arm, alone and with k parallel single-thread workers, under ordinary machine load, and the checkpoint storage. These replace the estimates of section 9.
-- Runs NEG-REF through every dependence statistic and through the rule of section 6.2.
-- Prints every statistic of section 6 for the calibration cells at every checkpoint, for information. A condition may be withdrawn before Decision 2 only if NEG-REF or the synthetic registry shows it is defective, and only by the human lead. It is never withdrawn because a memory arm fails it.
-- Runs every registered stage end to end against the frozen plan itself in a DRY profile (section 11).
+### 5.3 Sealing of the calibration statistics
+
+The rehearsal driver prints no loss value. It writes two files.
+
+| File | Content | Who reads it before the registered outcome is recomputed |
+|---|---|---|
+| `rehearsal_public.json` | The rate table; δ and the CONVERGED / NOT CONVERGED tag per arm and regime; RATE-AT-EDGE flags; pass or fail of NEG-REF, of the planted-positive test, of the prefix and read-equality gates and of the synthetic-registry test; seconds per update and per evaluation; storage; the SHA-256 of the sealed file | The lead and the human lead. This list is the whole whitelist. |
+| `rehearsal_sealed` (one archive, hashed) | Every per-run loss curve; C, C_dense, Q, K1–K3, D1–D3, P_used, X, X_mean and the routing quantities for the calibration cells; NEG-REF values | Nobody. The auditor's code recomputes `rehearsal_public.json` from it and reports only "agree" or "disagree". |
+
+The sealed file is opened after the registered outcome has been recomputed by the auditor, and is then published as a calibration record. **No condition of section 6 is withdrawn or changed after any rehearsal output exists.** If a gate shows a condition or its code to be defective, that is an engineering stop: a specification amendment with a recorded reason, a re-freeze and the human lead's approval, made before any sealed file is opened.
+
+The rehearsal also runs every registered stage end to end against the frozen plan in a DRY profile (section 11).
 
 ## 6. Rules that turn measurements into labels
 
-### 6.1 Quantities
+### 6.1 Quantities and conventions
 
-All losses are mean next-byte NLL in nats/byte on the registered panel, at U\*, per cell (parent p, seed s), per regime. Each arm is read from its run at the frozen rate for the duration in question.
+All losses are next-byte NLL in nats/byte on the registered panel, at U\*, per cell (parent p, seed s), per regime, from the run at the frozen rate for U\*. A cell's NLL is the sum of per-target losses divided by 32,768, in float64. "Mean" is the arithmetic mean over the 27 cells of the per-cell quantity; a parent's value is the mean over its three seeds. Every comparison is ≥ or > exactly as written, with no rounding first.
 
 | Symbol | Definition (positive direction) |
 |---|---|
 | C | B − H: baseline minus memory (memory helps) |
 | C_dense | B − A: baseline minus dense adapter |
 | P_used | H_used − H: loss rise under used-slot value reassignment |
-| X | H_x − H: loss rise under query reassignment |
+| X_mean | H_mean − H: loss rise under the context-free read |
 | Q | A − H: dense minus memory (memory ahead) |
 
-Counting rule used throughout: "22 of 27 cells" and "8 of 9 parents", where a parent's value is the mean over its three seeds. These are P4's counts. 22 of 27 allows five exceptions; 8 of 9 stops a few favourable backbones from carrying a pooled mean. They are kept so that the yardstick does not change with duration. 0.005 nats/byte is the resolution used since ADR-0006; it is 2 to 10 times the across-seed SD of C within a parent in P4 (section 2).
+"22 of 27 cells" and "8 of 9 parents" are P4's counts. 22 of 27 allows five exceptions; 8 of 9 stops a few favourable backbones from carrying a pooled mean. 0.005 nats/byte is the resolution used since ADR-0006; it is about 2 to 10 times (1.85 to 9.66) the across-seed SD of C within a parent in P4.
 
-### 6.2 Line 1 — DEPENDENCE (arm M-TREE; read per regime)
+### 6.2 Line 1 — DEPENDENCE (arm M-TREE; computed per regime)
 
 | Condition | Rule |
 |---|---|
 | D1 capacity | mean C ≥ 0.005; C > 0 in ≥ 22/27 cells; parent mean C > 0 in ≥ 8/9 |
 | D2 stored association | mean P_used ≥ 0.005; (C > 0 and P_used ≥ 0.5·C) in ≥ 22/27 cells; parent mean P_used > 0 in ≥ 8/9 |
-| D3 addressing | mean X ≥ 0.005; (C > 0 and X ≥ 0.5·C) in ≥ 22/27 cells; parent mean X > 0 in ≥ 8/9 |
+| D3 query dependence | mean X_mean ≥ 0.005; (C > 0 and X_mean ≥ 0.5·C) in ≥ 22/27 cells; parent mean X_mean > 0 in ≥ 8/9 |
 
-A cell whose used-slot set S has fewer than two slots fails D2 and is listed as COLLAPSED.
+A cell whose used-slot set S has fewer than two slots fails D2 and is listed as COLLAPSED. ADR-0009's flag 1 also required mean final H below mean initial H. D1 leaves this out deliberately: with a frozen backbone the step-0 loss equals B to about 2e-7 (P4: 2.378856566 against 2.378856373), so mean C ≥ 0.005 already implies it. Step-0 losses are printed.
 
-Reason for 0.5: "dependent" is taken to mean that the larger part of the gain is lost when the association or the address is broken. Below one half, most of the gain survives the intervention and is better described as a generic additive effect. The figure is a design choice (open choice 3).
+Reason for 0.5: "dependent" is taken to mean that the larger part of the gain is lost under the intervention. It is a convention and does not favour the memory (open choice 3).
 
 | Regime label | Rule |
 |---|---|
@@ -175,64 +208,66 @@ Reason for 0.5: "dependent" is taken to mean that the larger part of the gain is
 | CAPACITY WITHOUT DEMONSTRATED DEPENDENCE | D1, and not (D2 and D3); the failing conditions are named |
 | NO CAPACITY | not D1 |
 
-### 6.3 Line 2 — COMPETITIVENESS (memory against D-ADAPT; read per regime)
+### 6.3 Line 2 — COMPETITIVENESS (memory against D-ADAPT; computed per regime)
 
 | Condition | Rule |
 |---|---|
 | K1 absolute tolerance | mean Q ≥ −0.005; Q ≥ −0.005 in ≥ 22/27 cells; parent mean Q ≥ −0.005 in ≥ 8/9 |
-| K2 share of the dense gain | mean C ≥ 0.90 × mean C_dense, and mean C_dense ≥ 0.005 |
-| K3 ahead (sub-label only) | mean Q ≥ +0.005; Q > 0 in ≥ 22/27 cells; parent mean Q > 0 in ≥ 8/9 |
+| K2 share of the dense gain | mean C ≥ 0.90 × mean C_dense |
+| K3 ahead | mean Q ≥ +0.005; Q > 0 in ≥ 22/27 cells; parent mean Q > 0 in ≥ 8/9 |
 
-| Regime label | Rule |
-|---|---|
-| MEMORY AHEAD | K3 |
-| COMPETITIVE | K1 and K2, not K3 |
-| NOT COMPETITIVE | not (K1 and K2) |
+The regime label is computed in this order; the first rule that applies decides.
 
-Reasons. K1 is P4's tolerance, unchanged: a memory inside the resolution of the dense adapter is not distinguishable from it in this study. K1 alone is too easy when both gains are small and hard to interpret when both are large, so K2 adds a proportional condition. 0.90 is the proportion this programme already uses for "close to a reference" (P10-S0: 0.90 of the oracle reference's accuracy). It is not met by P4's 512-update figures (0.78), so it is not fitted to pass. If mean C_dense < 0.005 the dense adapter itself adds nothing measurable and the regime is NOT EVALUABLE for line 2.
+| Order | Rule | Label |
+|---|---|---|
+| 1 | A stop or integrity case of section 10 applies to the regime | NOT EVALUABLE |
+| 2 | mean C_dense < 0.005 (the dense adapter adds nothing measurable) | NOT EVALUABLE |
+| 3 | K3 | MEMORY AHEAD |
+| 4 | K1 and K2 | COMPETITIVE |
+| 5 | otherwise | NOT COMPETITIVE |
 
-The line is computed twice, with separate labels that are never merged: COMPETITIVENESS[TREE] for M-TREE (the headline, since M-TREE is the P4 memory) and COMPETITIVENESS[FLAT] for M-FLAT. The better of the two is not selected.
+Reasons. K1 is P4's tolerance, unchanged. K1 alone is easy when both gains are small, so K2 adds a proportional condition; it binds more than K1 only while mean C_dense is below 0.05. The figure 0.90 follows the proportion this programme used for "close to a reference" in P10-S0. That is a convention, not a derivation; it is conservative, and P4's 512-update figures (0.78 of the means; best cell 0.8997) do not meet it.
 
-### 6.4 Tags that qualify a label
+The line is computed twice, with separate labels that are never merged: COMPETITIVENESS[TREE] for M-TREE (the headline) and COMPETITIVENESS[FLAT] for M-FLAT (REP and FRESH only). The better of the two is not selected.
+
+### 6.4 Tags
+
+Applied after section 6.3, in this order. "Losing arm" is the arm with the higher mean NLL at U\* in that regime, whatever the label.
 
 | Situation | Effect |
 |---|---|
-| The memory arm's rate for U\* is RATE-AT-EDGE and the label is NOT COMPETITIVE | INCONCLUSIVE (MEMORY RATE AT EDGE) |
-| D-ADAPT's rate for U\* is RATE-AT-EDGE and the label is COMPETITIVE or MEMORY AHEAD | INCONCLUSIVE (DENSE RATE AT EDGE) |
-| The losing arm is NOT CONVERGED at U\* | Label kept; printed with "(MEMORY STILL IMPROVING)" or "(DENSE STILL IMPROVING)" |
-| A REP arm is PAST BEST CHECKPOINT | Label kept; tag printed |
+| Label NOT COMPETITIVE and the memory arm's rate for U\* is RATE-AT-EDGE | Label becomes INCONCLUSIVE (MEMORY RATE AT EDGE) |
+| Label COMPETITIVE or MEMORY AHEAD and D-ADAPT's rate for U\* is RATE-AT-EDGE | Label becomes INCONCLUSIVE (DENSE RATE AT EDGE) |
+| The losing arm is NOT CONVERGED at U\* | Label kept; "(MEMORY STILL IMPROVING)" or "(DENSE STILL IMPROVING)" is appended |
+| A REP or REP-U arm is PAST BEST CHECKPOINT | Label kept; tag appended |
 
-### 6.5 Combining the two regimes
+Line 1 carries the NOT CONVERGED and PAST BEST tags of M-TREE in the same way; they change no label.
 
-Each line reports both regime labels. The line's registered label follows from the pair by this table; "positive" is DEPENDENT for line 1 and COMPETITIVE or MEMORY AHEAD for line 2.
+### 6.5 The registered label of each line
 
-| FRESH | REP | Registered label of the line |
-|---|---|---|
-| positive | positive | positive, BOTH REGIMES |
-| positive | not positive | positive, FRESH ONLY |
-| not positive | positive | positive, REPEATED DATA ONLY |
-| not positive | not positive | the FRESH label, with the REP label beside it |
-| either regime NOT EVALUABLE or INCONCLUSIVE | — | each regime is printed as it is; the line carries no combined label |
+**The registered label of a line is its FRESH regime label.** FRESH is the only regime whose data is both unseen by the backbone and not repeated. The REP-U and REP regime labels are computed by the same rules and printed beside it, in that order, as regime labels. They are never the line's label and never make a line positive. If the FRESH label is NOT EVALUABLE or INCONCLUSIVE, so is the line, whatever the other regimes show.
 
-"REPEATED DATA ONLY" is weaker evidence than "FRESH ONLY": the repeated stream is the data the backbone was fitted to, and at long duration both additions can fit it. The report says so wherever that label appears.
+A line is "registered positive" only in these cases: line 1 = DEPENDENT in FRESH; line 2 = COMPETITIVENESS[TREE] is COMPETITIVE or MEMORY AHEAD in FRESH.
 
 ### 6.6 Routing and training duration (descriptive, with a fixed reading rule)
 
-The P4 setting has a tree with a sparse read, so the interaction the human lead asked for is measured here. At each checkpoint c in {512, 2,048, 8,192, U\*} and in each regime, per cell:
+The P4 setting has a tree with a sparse read, so the interaction the human lead asked for is measured here. At each checkpoint c in {512, 2,048, 8,192, U\*}, in REP and FRESH, per cell:
 
 | Quantity | Definition | Isolates |
 |---|---|---|
-| G_train(c) | H(M-TREE) − H(M-FLAT), each from its run at its rate for c | Tree against a separately trained flat memory: training and retrieval together |
+| G_train(c) | H(M-TREE) − H(M-FLAT), each from its run at its rate for c | Tree against a separately trained flat memory: training and retrieval together. Across checkpoints it also mixes the per-duration rate with duration; the primary-rate trajectory is printed beside it. |
 | G_read(c) | H(M-TREE) − H(M-TREE read exhaustively), same checkpoint | The top-2 restriction alone |
 | G_prior(c) | H(M-TREE, prior off) − H(M-TREE), same checkpoint | The branch prior alone |
 
-Reading rule for G_train at each c: TREE BEHIND if mean ≥ +0.005 and G_train > 0 in ≥ 22/27 cells; TREE AHEAD if mean ≤ −0.005 and G_train < 0 in ≥ 22/27; otherwise WITHIN RESOLUTION. The same rule is applied to G_read (RESTRICTION COSTS / WITHIN RESOLUTION / RESTRICTION HELPS). Trend: "GAP CHANGES WITH DURATION" if the label at 512 differs from the label at U\*, otherwise "NO CHANGE AT THIS RESOLUTION". Distinct selected slots and branch-use entropy are printed beside each figure.
+Reading rule for G_train at each c: TREE BEHIND if mean ≥ +0.005 and G_train > 0 in ≥ 22/27 cells; TREE AHEAD if mean ≤ −0.005 and G_train < 0 in ≥ 22/27; otherwise WITHIN RESOLUTION. The same rule is applied to G_read (RESTRICTION COSTS / WITHIN RESOLUTION / RESTRICTION HELPS). Trend: "GAP CHANGES WITH DURATION" if the label at 512 differs from the label at U\*, otherwise "NO CHANGE AT THIS RESOLUTION". Because a label can change on a small move across the threshold, ΔG = G(U\*) − G(512) is printed with its mean and sign count beside every trend label. Distinct selected slots and branch-use entropy are printed too.
 
-**This section is descriptive and is not a third outcome line.** Reasons: (1) the routing-quality outcome line belongs to ADR-0024, and a second registered routing line on a different task could be read as standing in for it; (2) in P5 the tree-versus-flat difference at 512 updates was 0.0014, inside the resolution, so a registered label here would mostly certify "within resolution"; (3) the interaction is a statement about several checkpoints, and the direction makes every checkpoint before U\* descriptive. The reading rule is still written here in full, and the code that prints it is tested like the registered rules (section 11), because P10-S1's descriptive sections were where its report went wrong. The alternative is open choice 6.
+**This section is descriptive and is not a third outcome line.** Reasons: (1) the routing-quality outcome line belongs to ADR-0024, and a second registered routing line on a different task could be read as standing in for it; (2) in P5 the tree-versus-flat difference at 512 updates was 0.0014, inside the resolution; (3) the interaction is a statement about several checkpoints, and the direction makes every checkpoint before U\* descriptive. The reading rule is written in full and its code is tested like the registered rules (section 11). Whether a descriptive section satisfies "tested in ADR-0026" is open choice 6.
 
 ### 6.7 Other descriptive output
 
-The full table of every quantity at every checkpoint for every arm and regime, by per-duration rate and along the primary-rate run; the 2 × 2 of (512 against U\*) × (REP against FRESH) for C, C_dense and Q; M-FLAT's D1–D3; P_all; X_dense; the P4-rate anchor (below); means, SDs, ranges, sign counts, per-parent and per-seed values. No best seed, cell or checkpoint is selected.
+Every quantity at every checkpoint for every arm and regime, by per-duration rate and along the primary-rate run; the contrasts of section 3.3 for C, C_dense and Q at 512 and at U\*; P_used and X_mean at 512 against U\* (section 3.4); M-FLAT's D1–D3; P_all, X, X_dense, X_mean_dense; B − H_used, B − H_x and the counts above baseline; means, SDs, ranges, sign counts, per-parent and per-seed values. No best seed, cell or checkpoint is selected.
+
+**Six-parent readout.** Both lines are recomputed on the six parents not used in calibration (18 cells, 6 parents) and printed as plain figures beside the registered labels, so that sensitivity to the tuning parents is visible. It changes no label.
 
 **P4-rate anchor.** If the frozen REP rate of M-TREE or of D-ADAPT for U\* is not 0.003, that arm is also run in REP at 0.003 to U\*. It shows how much of any change from the 512-update picture comes from rate selection and how much from duration. Descriptive only.
 
@@ -240,13 +275,14 @@ The full table of every quantity at every checkpoint for every arm and regime, b
 
 | Limit | Kind | Rule |
 |---|---|---|
-| Hour caps: rehearsal 14 h, registered run 36 h, charged time | Resource cap | May be extended by the human lead on cost projections only, never on outcome values. A stage that reaches a cap is PAUSED and resumed; every planned cell still runs. |
+| Hour caps: rehearsal 25 h, registered run 48 h, charged time | Resource cap | May be extended by the human lead on cost projections only, never on outcome values. A stage that reaches a cap is PAUSED and resumed; every planned cell still runs. |
 | RSS guard 2 GiB per worker, 24 GiB aggregate | Resource cap | Same. |
-| U\* and the update ladder | Design ceiling | Fixed by section 5.2. Extended only by its rule 3. |
-| FRESH pool: 152,515 chunks, at most 19,064 fresh updates | Design ceiling | Extended only by a separately approved corpus (rule 3 b). No chunk is reused in FRESH. |
+| U\* = 16,384 | Design ceiling | Fixed. No extension path in this study (section 5.2). |
+| FRESH pool: 152,515 chunks, at most 19,064 fresh updates | Design ceiling | Not extended in this study. No chunk is reused in FRESH. |
 | Rate grid: five rates | Design ceiling | Extended by the edge rule of section 5.1, at most two steps per side. |
+| Rate tie tolerance 0.0005; PAST BEST margin 0.005 | Design ceiling | Fixed; they decide a rate or a tag, never a label. |
 | Calibration: three parents, one seed | Design ceiling | Not extended. |
-| Panel: 512 chunks | Design ceiling | Met by walking down the ranking (section 4). |
+| Panel: 512 chunks; evaluation batch 512 positions | Design ceiling | The panel is met by walking down the ranking (section 4). |
 | Permutation draws: 4 per control | Design ceiling | Not extended. |
 | 0.005 nats/byte; 22/27; 8/9; 0.5·C; −0.005; 0.90; ε = 0.001 | Scientific threshold | Fixed at Decision 1. Never relaxed after observation. |
 
@@ -254,23 +290,23 @@ No limit is extended because a partial result looks close.
 
 ## 8. Stages and machine load
 
-Training and evaluation are deterministic CPU float32 with one thread per worker. Their results do not depend on machine load. **No wall-time comparison is registered in this study**, so no stage needs a quiet machine for validity.
+Training and evaluation are deterministic CPU float32 with one thread per worker. Their results do not depend on machine load. **No wall-time comparison is registered in this study**, so no stage needs a quiet machine for validity. The load average is measured at the start of each stage and recorded.
 
 | Stage | Content | Load condition | If not met |
 |---|---|---|---|
-| R1 rehearsal: rate search and convergence | 90 calibration runs, more if the grid is extended | None | — |
+| R1 rehearsal: rate search, convergence tags, sealed statistics | 120 calibration runs, up to 216 with grid extensions | None | — |
 | R2 rehearsal: cost measurement | Seconds per update and per evaluation, 1 and k workers | Ordinary load, on purpose; the 1-minute load average is recorded | Projection flagged LOADED if the load average exceeds 4; it is still used, being the conservative figure |
 | R3 rehearsal: DRY run of every registered stage on the frozen plan | Minutes | None | — |
-| G gates | Hashes of parents, data, code, plan; panels proved unused; seed disjointness; disabled = BASE bitwise on all nine parents; NEG-REF; synthetic-registry test | None | A failed gate stops the run before any training |
+| G gates | Hashes of parents, data, code, plan; panels and REP-U ranks proved unused; seed disjointness; BASE and disabled = BASE bitwise on all nine parents; prefix identity; read equality; planted positive; NEG-REF; synthetic registry | None | A failed gate stops the run before any training |
 | T training | All registered runs, resumable per cell | None | — |
 | E evaluation | All checkpoints and controls, resumable per task | None | — |
 | A analysis and report | Once, from the frozen code | None | — |
 
-Seconds per update are reported with the load average at the start of each stage. They are descriptive records of this implementation on this machine. They are not an efficiency result, and logical work counts are not reported as measured efficiency anywhere.
+Seconds per update are descriptive records of this implementation on this machine. They are not an efficiency result, and logical work counts are not reported as measured efficiency anywhere.
 
 ## 9. Cost projection (an estimate; the rehearsal replaces it)
 
-Measured inputs, from `training_seconds_including_logs_and_saves` in each cell's `result.json` (lead's computation; Apple M5 Max, one thread, cells run one at a time):
+Measured inputs, from `training_seconds_including_logs_and_saves` in each cell's `result.json` (lead's computation, confirmed by the review; Apple M5 Max, one thread, cells run one at a time; the figures include logs and saves):
 
 | Arm | Seconds per 512 updates (mean of 27) | ms per update | Source |
 |---|---|---|---|
@@ -280,34 +316,39 @@ Measured inputs, from `training_seconds_including_logs_and_saves` in each cell's
 
 One evaluation of 32,768 targets cost about 0.5 s in P4 (memory cells: 17.686 s supervised wall minus 14.118 s training, for six evaluations and start-up). Scale reference from P10: P10-S0 charged 6.09 h of a 22-hour cap, with stages at 0.40–0.63 of projections rehearsed under load (`results/p10s0-run-2026-11-16/OUTCOME.md`); P10-S1 charged 25.39 h over two attempts of a 53-hour cap (`results/p10s1-run-2026-11-17/OUTCOME.md`).
 
-Per run to 16,384 updates: M-TREE about 452 s, M-FLAT 98 s, D-ADAPT 136 s.
+Per run to 16,384 updates: M-TREE about 452 s, M-FLAT 98 s, D-ADAPT 136 s. There are 8 arm-regimes: three arms in REP and in FRESH, two in REP-U.
 
 | Block | Runs | Single-thread compute |
 |---|---|---|
-| Rehearsal R1: 3 arms × 2 regimes × 5 rates × 3 cells to 16,384 | 90 | 5.7 h (up to about 8 h with grid extensions) |
-| Rehearsal: convergence probe (only under rule 3), R2, R3 | ≤ 9 + small | ≤ 1.5 h |
-| Registered primary: 3 arms × 2 regimes × 27 cells to U\* = 16,384 | 162 | 10.3 h |
-| Registered per-duration runs, where the rate for 512, 2,048 or 8,192 differs from the rate for U\* | 0 to 486 short runs | 0 to 6.8 h |
-| P4-rate anchor (REP; M-TREE and D-ADAPT; only if their rate is not 0.003) | 0 to 54 | 0 to 4.4 h |
-| Evaluation: 5 checkpoints; about 15 evaluations per M-TREE checkpoint, 11 per M-FLAT, 2 per D-ADAPT | — | about 2 h |
-| **Registered total** | 162 to 702 | **about 12 h to 23.5 h** |
+| Rehearsal R1: 8 arm-regimes × 5 rates × 3 cells | 120 | 8.2 h |
+| R1 grid extensions, worst case (4 more rates everywhere) | 0 to 96 | 0 to 6.5 h |
+| Rehearsal evaluations, R2, R3 | — | about 1.5 h |
+| **Rehearsal total** | 120 to 216 | **about 10 h to 16 h** |
+| Registered primary: REP and FRESH, 3 arms × 27 cells | 162 | 10.3 h |
+| Registered primary: REP-U, 2 arms × 27 cells | 54 | 4.4 h |
+| Per-duration runs, where the rate for 512, 2,048 or 8,192 differs from the rate for U\* | 0 to 648 short runs | 0 to 9.6 h |
+| P4-rate anchor (REP; M-TREE and D-ADAPT) | 0 to 54 | 0 to 4.4 h |
+| Evaluation: about 16 evaluations per M-TREE checkpoint, 12 per M-FLAT, 4 per D-ADAPT; about 9,000 evaluations for the primary runs, up to about 18,000 with per-duration and anchor runs; the exhaustive read is slower than 0.5 s | — | about 1.5 h to 3.5 h |
+| **Registered total** | 216 to 918 | **about 16 h to 32 h** |
 
-Order of magnitude for the whole study: 20 to 35 hours of single-thread compute. Parallel workers shorten wall time; the rehearsal measures by how much. Checkpoint storage is of the order of a few GB (about 2.4 MB per snapshot with optimizer state, a few thousand snapshots at most; an estimate from the parameter count, not a measured figure). The proposed caps (14 h and 36 h) are the worst-case rows plus about half again. If the rehearsal projects more than a cap, the lead returns to the human lead before Decision 2 with the projection; the matrix is not cut.
+Order of magnitude for the whole study: 26 to 48 hours of single-thread compute. Parallel workers shorten wall time; the rehearsal measures by how much. The caps (25 h and 48 h) are the worst-case totals times about 1.5. Checkpoint storage: about 2.4 MB per snapshot with optimizer state (arithmetic from the parameter count, not measured), up to about 5,700 snapshots, so up to about 14 GB and more likely 4 to 8 GB. If the rehearsal projects more than a cap, the lead returns to the human lead before Decision 2 with the projection; the matrix is not cut.
 
-The rehearsal measures: seconds per update per arm at each rate and in each regime; seconds per evaluation including the exhaustive read; the parallel slowdown; storage per snapshot; the number of distinct rates in the rate table, which fixes the per-duration and anchor rows.
+The rehearsal measures: seconds per update per arm, rate and regime; seconds per evaluation, including the exhaustive read; the parallel slowdown; storage per snapshot; the number of distinct rates in the rate table, which fixes the per-duration and anchor rows.
 
 ## 10. Stop rules and NOT EVALUABLE
 
 | Event | Consequence |
 |---|---|
-| A gate fails before training | Engineering stop. No registered cell is observed. A fix needs a re-freeze and the human lead's approval of a new attempt. |
+| A gate fails before training (section 8, stage G), including the prefix-identity, read-equality and planted-positive gates | Engineering stop. No registered cell is observed. A fix needs a re-freeze and the human lead's approval of a new attempt. |
+| The panel walk runs out of eligible chunks; or no finite rate exists for some (arm, regime) in calibration | Engineering stop before Decision 2. |
+| The rehearsal's cost projection exceeds a cap and the human lead declines an extension | The study is not run. This is recorded before Decision 2 and is the only "not run" path besides a failed gate. |
 | A stage reaches a resource cap | PAUSED. Resumed after an extension decided on projections only. Completed cells are not recomputed. |
+| BASE is missing or fails its bitwise replay on a parent | Every line is NOT EVALUABLE in every regime. |
 | A registered run of a memory arm has a non-finite loss | The cell is kept as failed and counts as failing every condition of its arm. Nothing is rerun at another rate. |
 | A registered D-ADAPT run for U\* has a non-finite loss | Line 2 is NOT EVALUABLE in that regime. |
 | Any other required cell or evaluation is missing after the run ends | The lines that need it are NOT EVALUABLE in that regime. Denominators are never reduced. |
-| Disabled ≠ BASE, replay ≠ reference, or joint permutation outside 1e-6 on any cell | Integrity failure; the affected arm and regime is NOT EVALUABLE. |
-| mean C_dense < 0.005 | Line 2 is NOT EVALUABLE in that regime (section 6.3). |
-| Convergence fails in the rehearsal | Section 5.2 rule 3: stop at the gate; the human lead decides. |
+| Disabled ≠ BASE, replay ≠ enabled reference, or joint permutation outside 1e-6 on any cell; or S computed in a panel order different from the enabled read | Integrity failure; the affected arm and regime is NOT EVALUABLE. |
+| mean C_dense < 0.005 | Line 2 is NOT EVALUABLE in that regime (section 6.3, order 2). |
 
 The registered run happens once. A negative or inconclusive label is a registered outcome. It is not a reason to add updates, seeds, rates or cells.
 
@@ -315,57 +356,92 @@ The registered run happens once. A negative or inconclusive label is a registere
 
 | P10 failure | Requirement here |
 |---|---|
-| P10-S1 attempt 1 was lost to a commit of a status note into a frozen input (ADR-0021 sections 25.19–25.20) | The frozen-input set is exactly: this ADR at its freeze hash, `configs/p10i_s3_longer_training.toml`, `studies/p10i_s3/`, the imported `src/arborlm/` modules, `uv.lock`, the nine parent checkpoint hashes, the data hashes, the panel identities, the rate table and `plan.json`. No commit is made in the frozen worktree while a registered stage runs. Status goes to chat or to `NOTES.md` in the run directory under `experiments/`, which is git-ignored and outside the set. Every stage is resumable per cell or task. |
+| P10-S1 attempt 1 was lost to a commit of a status note into a frozen input (ADR-0021 sections 25.19–25.20) | The frozen-input set is exactly: every file under `studies/p10i_s3/` (which holds `freeze/plan.json`, `freeze/rate_table.json` and the panel identities), `configs/p10i_s3_longer_training.toml` (which carries every threshold of section 6), the imported `src/arborlm/` files by SHA-256, `uv.lock`, the nine parent checkpoint hashes and the data hashes. Identity is checked by file hash, not by the commit at HEAD. **This ADR and everything under `docs/` and `results/` are not frozen inputs.** No commit is made in the run's worktree while a registered stage runs. Status goes to chat or to `NOTES.md` in the git-ignored run directory. Every stage is resumable per cell or task. |
 | P10-S1's throughput stage asked for a cell the frozen plan did not run (section 25.21) | Every registered stage reads its item list from `plan.json` only, and stage R3 runs each of them end to end on the frozen plan before Decision 2. Tests use that plan, not a separate one. |
-| P10-S1's audit: an unstated aggregation rule, a dependence condition that misfires early, a descriptive section that compared the wrong reads | Every combination rule is in section 6 (cells, parents, regimes, arms). Line 1 is read at U\* only. NEG-REF passes through every dependence statistic in rehearsal. The analysis, including sections 6.6 and 6.7, is tested on a synthetic registry with known answers: one case per label, per tag and per row of the regime table, and a case where two arms' reads are swapped and the test must fail. |
+| P10-S1's audit: an unstated aggregation rule, a dependence condition that misfires early, a descriptive section that compared the wrong reads | Every combination and precedence rule is in section 6. Line 1 is read at U\* only. The analysis, including sections 6.6 and 6.7, is tested on a synthetic registry with known answers: one case per label, per tag and per order row of section 6.3, and a case where two arms' reads are swapped and the test must fail. |
+| No arm with dependence by construction (review F11 a) | **Planted-positive test.** A toy frozen backbone and a memory whose values are set so that each slot gives the exact correction for a disjoint set of queries. On it P_used, X and X_mean must each be ≥ 0.5·C and NEG-REF must give 0. It runs in the test suite and as a gate. |
+| "One run serves every duration" was assumed (F11 b) | **Prefix-identity gate.** On the platform of record, a separate 512-update run is bitwise equal to checkpoint 512 of the 16,384-update run, for each arm and regime on one calibration cell. |
+| The interventions need a re-implemented read (F11 c) | **Read-equality gate.** With no intervention, the study's read equals `Memory.forward` bitwise for both variants; the exhaustive read equals `tree_candidates(visit=16)`, the path P6 used. |
 | P10-S2 stopped on a count gate although quality criteria were met | Counts that are not claims are met by rule: the panels by walking the ranking, the rate grid by the edge rule. |
-| P10-S0 tested one load and one training length | Duration comes from a convergence rule, and four checkpoints are reported. |
+| P10-S0 tested one load and one training length | Three data regimes and four evaluated durations; the duration is fixed for the reason given in section 5.2 and tagged for convergence. |
 | A test passed on macOS and failed on Linux (section 25.23) | Platform of record: macOS arm64, Apple M5 Max, Python and PyTorch as in `uv.lock`. Bitwise assertions are made on it only; elsewhere the same checks use a 1e-6 tolerance. |
 | GitHub CI is costly | `uv run --locked ruff check .`, `mypy` and `pytest` run locally. No CI run is required by this study. `uv.lock` and `pyproject.toml` do not change. |
 
-Roles: `arbor-implementer` writes the code; `arbor-auditor` audits it in a separate context from code and records, not from the lead's conclusions, and recomputes the outcome from raw records; `arbor-clerk` inventories panels and hashes. The model that ran each task is recorded from session metadata.
+Roles: `arbor-implementer` writes the code; `arbor-auditor` audits it in a separate context from code and records, not from the lead's conclusions, verifies the sealed file and recomputes the outcome from raw records; `arbor-clerk` inventories panels and hashes. The model that ran each task is recorded from session metadata.
 
 ## 12. What the study cannot establish, and what it means for P10-I-S4
 
 It cannot establish:
 
 - Anything about hierarchy as such, external scaling, SSD behaviour, active computation or cost. The store is 4,096 slots, all resident.
-- Semantic storage. Dependence on addressed content is not knowledge of facts.
+- Semantic storage. Line 1 shows dependence on value placement and on the query, not knowledge of facts. Any input-dependent module shows some query dependence.
 - A general result. One 27,392-parameter backbone family, one corpus, byte-level text, one addition size, nine correlated parents.
-- That freezing is better or worse than joint training, or that any P4 or P5 number was wrong. Those studies stand as recorded.
-- A fully tuned comparison. One hyperparameter is searched, on three parents shared with the registered run, with a constant rate.
-- A separation of "more unique data" from "data unseen by the backbone" (section 3.3).
-- Equal compute. The arms are matched on trainable parameters and updates. In the P4 records an M-TREE update took about 3.3 times a dense update in wall time (section 9); that is a descriptive record, and line 2 says nothing about it.
+- That freezing is better or worse than joint training, that dependence rose or fell relative to P4 (line 1 is a different, stricter test), or that any P4 or P5 number was wrong. Those studies stand as recorded.
+- A fully tuned comparison. One hyperparameter is searched, with a constant rate, on three of the nine registered parents (section 5).
+- What happens at convergence, if the tags say NOT CONVERGED. The duration is fixed by the corpus, not chosen by convergence.
+- Equal compute. The arms are matched on trainable parameters and updates. In the P4 records an M-TREE cell's training took about 3.3 times a dense cell's wall time, logs and saves included (section 9); that is a descriptive record, and line 2 says nothing about it.
 
-**For P10-I-S4's entry criterion** (DIRECTION.md: "credible evidence from P10-I-S3 or P10-S1 that memory is competitive enough"; the draft ADR-0027 states its Route A as both lines of this study positive at the primary checkpoint):
+**For P10-I-S4's entry (ADR-0027, Route A).** The labels of this study that qualify are named here, so that neither ADR defers to the other:
+
+| Clause | Qualifies | Never qualifies |
+|---|---|---|
+| A1, dependence | Line 1 registered label = DEPENDENT (that is, in FRESH), arm M-TREE | Any REP or REP-U regime label; M-FLAT's descriptive D1–D3; CAPACITY WITHOUT DEMONSTRATED DEPENDENCE |
+| A2, competitiveness | Line 2 registered label COMPETITIVENESS[TREE] = COMPETITIVE or MEMORY AHEAD (in FRESH) | K1 alone ("within the margin") when the label is NOT COMPETITIVE; any INCONCLUSIVE or NOT EVALUABLE; any REP or REP-U regime label; COMPETITIVENESS[FLAT] |
+
+Both clauses must hold, for M-TREE. Whether a qualifying label that carries "(DENSE STILL IMPROVING)" or a NOT CONVERGED tag still qualifies is the human lead's choice (open choice 13). The lead asks that ADR-0027 copy these names and drop the phrase "within S3's own margin".
 
 | Line 2 result | What it would mean | What it would not mean |
 |---|---|---|
-| COMPETITIVE or MEMORY AHEAD in FRESH, CONVERGED, no edge tag | Evidence the human lead may weigh for S4 entry: at matched trainable size and matched updates, with both sides rate-searched, the memory is within tolerance on this task. | Not a cost result. S4's primary comparison is at matched training computation, where the per-update cost counts against the memory. Not evidence at any larger store or model. Not an entry decision; that is the human lead's. |
-| Positive, REPEATED DATA ONLY | Weak evidence; the report states it should not by itself support S4 entry. | Not competitiveness on new data. |
-| NOT COMPETITIVE, CONVERGED | S3 supplies no entry evidence. The P4 pattern holds at long duration in this setting. | Not a statement about larger stores, where a dense alternative must grow with the store, and not a revision of P10-S1, which remains the other route the direction names (its registered label is DENSE AHEAD; the matched-compute observation at 32K/16K is an audit disclosure). |
-| NOT COMPETITIVE with "(MEMORY STILL IMPROVING)", or INCONCLUSIVE | No entry evidence, and no evidence against. | Not a reason to extend this study. |
+| COMPETITIVE or MEMORY AHEAD | Evidence the human lead may weigh for S4 entry: at matched trainable size and matched updates, with both sides rate-searched, the memory is within tolerance on unseen single-pass data of this task. | Not a cost result. S4's primary comparison is at matched training computation, where the per-update cost counts against the memory. Not evidence at any larger store or model. Not an entry decision; that is the human lead's. |
+| NOT COMPETITIVE, both arms CONVERGED | S3 supplies no entry evidence. The P4 pattern holds at 16,384 updates in this setting. | Not a statement about larger stores, where a dense alternative must grow with the store, and not a revision of P10-S1, which remains the other route the direction names (its registered label is DENSE AHEAD; the matched-compute observation at 32K/16K is an audit disclosure). |
+| NOT COMPETITIVE "(MEMORY STILL IMPROVING)", or INCONCLUSIVE | No entry evidence, and no evidence against. | Not a reason to extend this study. |
 
-COMPETITIVENESS[FLAT] is shown beside the headline in every case. A flat memory that is competitive where the tree is not points to the routing work of ADR-0024, not to S4. Which of this study's labels satisfy ADR-0027's Route A is fixed in ADR-0027, by name, before any S3 outcome exists.
+COMPETITIVENESS[FLAT] is shown beside the headline in every case. A flat memory that is competitive where the tree is not points to the routing work of ADR-0024, not to S4.
 
 ## 13. Open choices reserved for the human lead
 
-1. **Convergence rule** (section 5.2): ε = 0.001 per doubling, read on the last doubling, all arms and both regimes; failure stops at the gate. Recommendation: as drafted.
-2. **Rate fairness** (section 5.1): one grid and one selection rule for all three arms, per regime and duration, on three calibration parents. Recommendation: as drafted. Alternative: all nine parents in calibration (three times the rehearsal cost).
-3. **Dependence thresholds** (section 6.2): 0.005 absolute and one half of the gain, on used-slot reassignment and on query reassignment. Recommendation: as drafted. The one-half figure is the least grounded number in this draft; the reviewer is asked to challenge it.
+1. **Fixed duration — PENDING HUMAN LEAD RULING** (section 5.2). Does U\* = 16,384, fixed, with a registered CONVERGED / NOT CONVERGED tag, meet the direction's "convergence-based duration"? Or must a larger corpus be approved first, as a separate data decision and a successor design? Recommendation: accept the fixed duration with the tag for this study.
+2. **Rate fairness** (section 5.1): one grid and one selection rule for every arm, per regime and duration, on three calibration parents that are also registered parents. Recommendation: as drafted, with the six-parent readout.
+3. **Dependence thresholds** (section 6.2): 0.005 absolute and one half of the gain, on used-slot reassignment and on the context-free read. Recommendation: as drafted. One half is a convention.
 4. **Competitiveness thresholds** (section 6.3): P4's −0.005 tolerance and a 0.90 share of the dense gain, both required. Recommendation: both. Alternative: K1 alone, which keeps P4's rule exactly.
-5. **A third regime**: 2,048 chunks unseen by the backbone, repeated, to separate "unseen" from "more unique data". Cost: about half again of the registered run. Recommendation: not in this study; the limit is stated.
-6. **Routing interaction** (section 6.6): descriptive with a fixed reading rule, or a registered third line read at U\* only. Recommendation: descriptive.
-7. **No by-construction positive reference** (section 3.4). Recommendation: accept the three safeguards and NEG-REF. Alternative: build a synthetic keyed-recall reference on the same backbones, at added implementation cost.
-8. **REP order**: reshuffled each epoch with this study's seeds, or P4's fixed order cycled. Recommendation: reshuffled; a fixed order repeated 64 times is a periodic stream.
+5. **Third regime REP-U — PENDING HUMAN LEAD RULING** (section 3.3). Included in this draft; about 4.4 h of registered runs and 2.5 h of rehearsal at the least. Alternative: drop it and accept the mix. The wording would then change everywhere to "additional unique data, confounded with data unseen by the backbone", and FRESH would start at rank 4,096 with no stated use for ranks 2,048–4,095. Recommendation: keep REP-U.
+6. **Routing interaction** (section 6.6): descriptive with a fixed reading rule. Does that satisfy the routing note's "test the interaction in ADR-0026"? The alternative, a registered line across checkpoints, would contradict the direction's rule that intermediate checkpoints are descriptive. Recommendation: descriptive.
+7. **No by-construction positive arm on natural text** (section 3.4). Recommendation: accept the planted-positive test, NEG-REF and the synthetic registry.
+8. **Repeated-data order**: reshuffled each epoch with this study's seeds, or P4's fixed order cycled. Recommendation: reshuffled; a fixed order repeated 64 times is a periodic stream.
 9. **Schedule**: constant rate (one change from P4: duration) or a decaying schedule. Recommendation: constant; it also lets one run serve every duration.
-10. **Corpus ceiling**: if convergence fails at 16,384, FRESH cannot go further on WikiText-2. Recommendation: decide only if rule 3 fires.
-11. **Caps**: 14 h rehearsal, 36 h registered run, 24 GiB aggregate RSS. Recommendation: as drafted, replaced by the rehearsal's projection at Decision 2.
+10. **Registered label = FRESH label** (section 6.5), with REP-U and REP as regime labels beside it. Recommendation: as drafted.
+11. **Caps**: 25 h rehearsal, 48 h registered run, 24 GiB aggregate RSS. Recommendation: as drafted, replaced by the rehearsal's projection at Decision 2.
 12. **P4-rate anchor** (section 6.7): up to 4.4 h. Recommendation: keep; without it, rate selection and duration cannot be told apart in the 512-update comparison.
+13. **Tags and S4 entry** (section 12): does a qualifying label still qualify when D-ADAPT is NOT CONVERGED in FRESH? Recommendation: no; a dense arm that is still improving may overtake.
 
 ## 14. Decisions and approval record
 
 - Decision 1 (human lead): approve this specification for implementation and rehearsal only. **Not given.**
-- Decision 2 (human lead): after the rehearsal, with U\*, the rate table, the cost projection and the freeze record, approve the single registered run. **Not given.**
+- Decision 2 (human lead): after the rehearsal, with `rehearsal_public.json`, the auditor's agree or disagree, the cost projection and the freeze record, approve the single registered run. **Not given.**
 
-No independent specification review has been performed on this draft yet. No approval is recorded. `Astra review: NOT_PERFORMED`.
+No approval is recorded. `Astra review: NOT_PERFORMED`.
+
+## 15. Review record
+
+Revision 1 of this draft was reviewed by the `arbor-auditor` subagent (Claude Opus 5.5): `docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0026.md`, verdict NOT READY (one blocking, ten required, five advisory findings; no quoted number found wrong). Revision 2 is by the lead (Claude Fable 5.2). It has not been re-reviewed. The review is engineering evidence, not Astra validation and not an approval.
+
+| Finding | Severity | Disposition | Where |
+|---|---|---|---|
+| F1 discretionary choice of duration after calibration | BLOCKING | FIXED: duration fixed at 16,384; tag by code; run is automatic; larger corpus is a successor study; probe removed; ruling requested | 5.2, 7, 10, open choice 1 |
+| F2 unsealed calibration statistics; withdrawing a condition | REQUIRED | FIXED: whitelist, sealed hashed file, decisions by code, no withdrawal | 5.3, 14 |
+| F3 what X measures | REQUIRED | FIXED: X_mean added and used in D3; X descriptive; harm printed; wording of line 1 narrowed | 1, 3.4, 6.2, 12 |
+| F4 line 1 stricter than P4 | REQUIRED | FIXED | 3.4, 12 |
+| F5 unique data confounded with unseen data | REQUIRED | FIXED: REP-U added and costed; alternative listed for the human lead | 3.3, 9, open choice 5 |
+| F6 calibration parents are registered parents | REQUIRED | FIXED: stated; six-parent readout added | 5, 6.7, 12 |
+| F7 seed offsets | REQUIRED | FIXED: blocks kept where no overlap was found; assignment moved to the programme registry; roles and counts listed; cell indices defined | 4 |
+| F8 panel rule | REQUIRED | FIXED: byte spans, siblings excluded, ledger, stop case | 4, 10 |
+| F9 precedence and definitions | REQUIRED | FIXED: ordered label rule, losing arm, mean, exact comparisons, rate tie rule, D1 omission explained; the regime table is replaced by "registered label = FRESH label" | 5.1, 6.1–6.5 |
+| F10 labels against ADR-0027 Route A | REQUIRED | FIXED: qualifying labels named; repeated-data labels are no longer called positive | 6.5, 12, open choice 13 |
+| F11 planted positive, prefix identity, read equality | REQUIRED | FIXED: one test and two gates added | 8, 10, 11 |
+| F12 budget worst cases | ADVISORY | FIXED: worst cases recomputed with REP-U; caps derived from them | 7, 9 |
+| F13 routing trend | ADVISORY | FIXED: ΔG printed; rate mixing stated; question put to the human lead | 6.6, open choice 6 |
+| F14 threshold reasons | ADVISORY | FIXED: assumption behind ε stated; K2's reason stated as a convention; repeated-data overfitting caveat | 3.3, 5.2, 6.3 |
+| F15 wording | ADVISORY | FIXED | 2, 3.4, 4, 6.1, 7, 12 |
+| F16 missing stop cases | ADVISORY | FIXED | 5.1, 10 |
+
+No finding was answered instead of fixed. The lead's brief also asked that any statement of the machine's idle load as a recorded fact be removed: revision 1 contained none, and the load is measured at each stage (section 8).
