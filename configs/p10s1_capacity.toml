@@ -134,7 +134,7 @@ measured_seconds = 17.71133199997712
 manifest_sha256 = "21544fa50ef511e7c26641b992603ecaa6a73a15031bdf989b6f0dd054091c49"
 
 [resources]
-cap_hours = 49.0
+cap_hours = 53.0
 cap_max_hours = 54.0
 cap_max_source = "raised from 50 to 54 hours by the lead under the P10 delegation on 2026-11-17 (ADR-0021 section 25.19) so that the second attempt approved by the human lead fits after the time charged to attempt 1; no outcome of a registered seed was read"
 cap_headroom = 2.0
