@@ -1,0 +1,27 @@
+[ADR] repositories and 40-hex revisions found: {'HuggingFaceTB/SmolLM2-135M': '93efa2f097d58c2a74874c7e644dbc9b0cee75a2', 'Helsinki-NLP/opus-mt-en-de': '6183067f769a302e3861815543b9f312c71b0ca4', 'Helsinki-NLP/opus-mt-en-fr': 'dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18', 'Helsinki-NLP/opus-mt-en-es': '5bc4493d463cf000c1f0b50f8d56886a392ed4ab'}
+[rev] TEACHER_A: code Helsinki-NLP/opus-mt-en-de@6183067f769a302e3861815543b9f312c71b0ca4; ADR 6183067f769a302e3861815543b9f312c71b0ca4; equal: True
+[rev] TEACHER_B: code Helsinki-NLP/opus-mt-en-fr@dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18; ADR dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18; equal: True
+[rev] STUDENT: code HuggingFaceTB/SmolLM2-135M@93efa2f097d58c2a74874c7e644dbc9b0cee75a2; ADR 93efa2f097d58c2a74874c7e644dbc9b0cee75a2; equal: True
+[rev] FALLBACK: code Helsinki-NLP/opus-mt-en-es@5bc4493d463cf000c1f0b50f8d56886a392ed4ab; ADR 5bc4493d463cf000c1f0b50f8d56886a392ed4ab; equal: True
+[ADR] weight files with size and SHA-256: 3
+[large] student/model.safetensors: ADR 80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1 269060552; code 80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1 269060552; equal: True
+[large] teacher_a/pytorch_model.bin: ADR da068344b1b0c20e6d4a8f77f48e06646b90d679029006b18579e68977206bdd 297928209; code da068344b1b0c20e6d4a8f77f48e06646b90d679029006b18579e68977206bdd 297928209; equal: True
+[large] teacher_b/pytorch_model.bin: ADR cc1de10b49342ad2f33e06bc4474ddd6eaca278474903c4a8636ce15680d64de 300827685; code cc1de10b49342ad2f33e06bc4474ddd6eaca278474903c4a8636ce15680d64de 300827685; equal: True
+[large] fallback/pytorch_model.bin: ADR befce0f620e8e63f83bbb7f0818eb51d541cba28057a7cc14b00466d85c4994c 312087523; code befce0f620e8e63f83bbb7f0818eb51d541cba28057a7cc14b00466d85c4994c 312087523; equal: True
+[tatoeba] ADR files ['deu/deu-eng_links.tsv.bz2', 'deu/deu_sentences.tsv.bz2', 'eng/eng-deu_links.tsv.bz2', 'eng/eng-fra_links.tsv.bz2', 'eng/eng-spa_links.tsv.bz2', 'eng/eng_sentences.tsv.bz2', 'fra/fra-eng_links.tsv.bz2', 'fra/fra_sentences.tsv.bz2', 'spa/spa_sentences.tsv.bz2']
+[tatoeba] code files equal to ADR files with sizes: True; differences: {}
+[files] Marian files ('config.json', 'generation_config.json', 'source.spm', 'target.spm', 'vocab.json', 'tokenizer_config.json'); student files ('config.json', 'generation_config.json', 'tokenizer.json', 'tokenizer_config.json', 'vocab.json', 'merges.txt', 'special_tokens_map.json')
+[files] row 1 equal: True; row 3 equal: True
+[sizes] large primary weights + Tatoeba incl. link files = 927181662 B (927.2 MB) of the 1.5 GB cap (small files not counted)
+[urls] student URL example: https://huggingface.co/HuggingFaceTB/SmolLM2-135M/resolve/93efa2f097d58c2a74874c7e644dbc9b0cee75a2/model.safetensors
+[manifest] build_manifest() as written (small files carry no digest): refused - refused: 'teacher_a/config.json' has no recorded digest (a model file is fetched only against a pinned SHA-256 or git-blob SHA-1)
+[manifest] small files given an arbitrary git_sha1 string: ACCEPTED (29 files)
+[manifest] large pickle file with sha256 removed and an arbitrary git_sha1: ACCEPTED (29 files)
+[manifest] Tatoeba only, sizes removed (cap total 0): ACCEPTED (7 files)
+[manifest] teacher URL changed: refused - refused: 'teacher_a/pytorch_model.bin' has a URL other than the approved one
+[manifest] unapproved file appended: refused - refused: 'student/pytorch_model.bin' is not an approved download (ADR-0022 section 14.1, 18)
+[manifest] fallback with an arbitrary decision string: ACCEPTED (38 files)
+[manifest] the fallback manifest re-lists the primary Tatoeba files (a later weekly export would overwrite the frozen ones at the same path): ['tatoeba/eng_sentences.tsv.bz2', 'tatoeba/deu_sentences.tsv.bz2', 'tatoeba/fra_sentences.tsv.bz2'] ...
+[manifest] every entry's kind set to 'tatoeba' by the manifest (run() trusts the manifest's kind): ACCEPTED (29 files)
+[pickle] malicious pickle refused by weights_only: UnpicklingError
+[pickle] wrong digest refused before unpickling: refused: /private/tmp/claude-501/-Users-daniellaloush-dandus...

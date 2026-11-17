@@ -1,0 +1,4 @@
+trials 3000 rows seen (impl): {2: 530, 5: 60, 6: 59, 7: 1547, 8: 204, 11: 188, 12: 412}
+crashes: 0 []
+disagreements vs strict reading: 73
+disagreements vs loose reading (undefined masked by a failing clause, as implemented): 73

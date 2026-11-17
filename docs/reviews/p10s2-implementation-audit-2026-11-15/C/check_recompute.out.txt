@@ -1,0 +1,2 @@
+(a) own-code, APPEND COST input differs by 4e-7 (< 1e-6): label 1 ENGINEERING-FAILURE | changes: ['annotations/APPEND COST/change_in_G_first_at_append/r0/AB']
+(b) frozen-code, GEN of r0/MSEQ/AB flips pass->fail in the recomputation: label 7 TRANSFER-POSITIVE (append-frozen + consolidation) | NE cells ['r0/MSEQ/AB'] | changes: []

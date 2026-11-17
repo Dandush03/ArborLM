@@ -1,0 +1,10 @@
+baseline good record: impl row 7 auditor row 7
+E1 gates record empty: impl row 7 (auditor: a registered label needs passed G1, G4-G9 records; expected 1 or 2, not a positive row)
+E2 G5 record absent: impl row 7
+E3 ensemble record absent: impl row 7
+E4 prefreeze record absent (teacher_only unknown): impl row 12
+E5 ablations absent for r0/ST1/AB and E_A of r1/MAF/BA: impl row 7 classes MAF {'AB': {'class': 'ACQUIRES-AND-RETAINS', 'reasons': []}, 'BA': {'class': 'ACQUIRES-AND-RETAINS', 'reasons': []}}
+E6 one ablation kind absent: analysis raises KeyError 'code_perm'
+E7 ACQ1 at G=0.5, margin 0.7-0.4 (=0.29999999999999993 in binary): Verdict(ok=False, reasons=('lexical margin below 0.30',))
+E7b same margin as exact decimals 0.8-0.5: Verdict(ok=True, reasons=())
+E8 annotations EQUIVALENT TO A WORD TABLE / TASK-CODED / BELOW JOINT BOUND: mismatches 0 of 1200

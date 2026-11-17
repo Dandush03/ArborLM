@@ -1,0 +1,9 @@
+{
+ "maxrss_before_bytes": 205602816,
+ "maxrss_after_bytes": 231342080,
+ "mps_current_allocated_bytes": 2147483648,
+ "mps_driver_allocated_bytes": 4314562560,
+ "check": 1073741824.0,
+ "maxrss_increase_GiB": 0.0239715576171875,
+ "mps_allocated_GiB": 2.0
+}

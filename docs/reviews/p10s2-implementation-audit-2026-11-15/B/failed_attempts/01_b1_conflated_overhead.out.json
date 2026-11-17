@@ -1,0 +1,141 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+{
+ "grid_points": 7680,
+ "mismatches": {
+  "impl": 0,
+  "adr": 1074
+ },
+ "examples": {
+  "impl": [],
+  "adr": [
+   {
+    "s": 0.4708,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.4708,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.4708,
+    "P": 12.0,
+    "cal": 12,
+    "l12_ratio": 1.25,
+    "etable_other_ratio": 1.4,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.6,
+    "etable_other_ratio": 1.4,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.8,
+    "etable_other_ratio": 0.6,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   },
+   {
+    "s": 0.5178,
+    "P": 12.0,
+    "cal": 4,
+    "l12_ratio": 0.8,
+    "etable_other_ratio": 1.0,
+    "ovh": 30.0,
+    "own": [
+     "rung 1",
+     36.0
+    ],
+    "impl": [
+     "rung 1",
+     37.0
+    ]
+   }
+  ]
+ }
+}
