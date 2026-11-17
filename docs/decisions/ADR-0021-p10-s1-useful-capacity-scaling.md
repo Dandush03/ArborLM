@@ -1366,3 +1366,24 @@ An independent check (Opus 5.5, read-only, no file written) of commit `e6bde29`,
 **Attempt 1 and the study's outcome.** S1-INCOMPLETE is the recorded status of attempt 1. The study's registered outcome is read from the second attempt alone, by the registered rules. Attempt 1's seven trained cells are not evaluated, not opened and not compared with the second attempt's cells; they are kept as the record of the failed attempt.
 
 `Astra review: NOT_PERFORMED`.
+
+### 25.21 The registered throughput stage failed on a code defect; a supplementary measurement is added in a new file (2026-11-17 UTC)
+
+**What happened.** In the second attempt the training stage (178 of 178 cells, 49,251.2 s charged) and the evaluation stage (193 tasks, 1,866 snapshot evaluations, 1,899.0 s charged) finished COMPLETE with no failed record. The throughput stage (`timing`) started at 18:19 UTC with a one-minute load average of 0.98 and stopped after 1.4 s, before any measurement, with `StopIteration` in `stages.work_throughput`. Its manifest is INCOMPLETE with one failed record (`timing/timing.failed.json`); no `throughput.json` was written. The simulate, analysis and report stages then finished COMPLETE.
+
+**Cause.** `stages.timing_items` lists the configurations from a plan in which the 2K/256 cell runs (`sat256` true), so it includes F-OQ at 2,048 facts and 256 slots. The frozen plan does not run that cell (`sat256` false, fixed at the calibration), so the worker's lookup of the registered replicate-1 cell finds nothing. The other 15 configurations have a registered cell. The stage tests did not catch this because their plan runs the 256-slot cell. This is a defect of the frozen code written under the lead's direction, not a property of the machine or of the data.
+
+**What it does not affect.** The analysis counts only failed training and evaluation tasks towards the study's status (`stages.work_analyze`) and reads throughput as an optional side record. The capacity, saturation and efficiency lines do not use it. The registered report has no measured-throughput section.
+
+**Standing of the registered stage.** The failed record is kept. The registered stage is not re-run: a stage manifest is written once, and the frozen code is not edited. For the registered run, throughput is NOT MEASURED, for an engineering reason.
+
+**Decision.** The human lead asked, on 2026-11-17 after the failure was reported: "want to fix it and retry the throughtouput?" The lead proceeds under the P10 delegation with a supplementary measurement:
+
+1. New file `studies/p10s1/throughput_supplement.py`, with tests in `tests/test_p10s1_throughput_supplement.py`. No existing file under `studies/p10s1/` changes.
+2. It uses the registered measurement unchanged (`timing.throughput_record`: read path, batch 1 and 128, five repeats, replicate-1 snapshots at U_P) and the registered quiet rule unchanged (`timing.wait_for_quiet`: load average at most 1.0, three retries two minutes apart; never quiet means THROUGHPUT NOT MEASURED).
+3. It measures the 15 configurations that have a registered cell and names the one it skips (F-OQ at 2K/256) with the reason. It trains nothing and reads no accuracy or loss.
+4. Its record is written outside the registered run directory and is labelled SUPPLEMENTARY. It is reported apart from the registered result, enters no outcome line, and is never described as the registered throughput stage.
+5. It is run once. If the machine is not quiet, the record says so and the measurement is not repeated without the human lead's word.
+6. Its wall time is small (the stage cap was 399.5 s) and is reported with the record; it is not written to the registered ledger, which the frozen code owns.
+
+`Astra review: NOT_PERFORMED`.
