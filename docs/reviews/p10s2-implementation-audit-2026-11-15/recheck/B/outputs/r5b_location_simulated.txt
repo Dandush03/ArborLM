@@ -1,0 +1,8 @@
+=== with-ledger
+FAILED tests/test_p10s2_integration.py::test_every_stage_driver_refuses_the_real_repository_before_anything_is_started[argv0]
+FAILED tests/test_p10s2_integration.py::test_every_stage_driver_refuses_the_real_repository_before_anything_is_started[argv1]
+FAILED tests/test_p10s2_integration.py::test_every_stage_driver_refuses_the_real_repository_before_anything_is_started[argv2]
+FAILED tests/test_p10s2_integration.py::test_every_stage_driver_refuses_the_real_repository_before_anything_is_started[argv3]
+4 failed, 497 passed, 1 skipped, 3 warnings in 235.55s (0:03:55)
+=== without-experiments
+501 passed, 1 skipped, 3 warnings in 199.96s (0:03:19)

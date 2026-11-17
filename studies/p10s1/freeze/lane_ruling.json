@@ -1,0 +1,16 @@
+{
+  "ruled_by": "the scientific lead (Claude Fable 5.2)",
+  "date": "2026-11-16",
+  "adr_section": "ADR-0021 section 25.17",
+  "s0_outcome": "ADDRESSING-QUALIFIED (4,096 AND 16,384)",
+  "s0_candidate": "A5-D",
+  "s0_overload_qualified": false,
+  "lane_status": "OMITTED — NOT OVERLOAD-QUALIFIED",
+  "s0_commit": "b4feb4e504a9685b544cf4451b1832b87db7c3d0",
+  "s0_record_sha256": {
+    "results/p10s0-run-2026-11-16/OUTCOME.md": "999f2246aa8019f5c593465e301851a3bbf3565f9c92357cab6248921bcceec4",
+    "results/p10s0-run-2026-11-16/results.json": "c4ffbb16025f202725116528de3ed563fbee390ff0c5ad2cab55f2346f0d1fa9",
+    "docs/reviews/p10s0-results-2026-11-16/REVIEW.md": "ef100ade200722e275e83f09ea020fcd153130d1d45cb134085654c731c4f30b",
+    "docs/decisions/ADR-0020-p10-s0-addressing-qualification.md": "2e5a66f5d78d0dc34e9633e6fe3ab839d9964d3ca4261ae51fa7d8823e33c36e"
+  }
+}

@@ -1,0 +1,324 @@
+{
+ "registered_with_override": {
+  "--stage-cap-seconds": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --stage-cap-seconds"
+   ]
+  },
+  "--ledger-root": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --ledger-root"
+   ]
+  },
+  "--experiments-root": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --experiments-root"
+   ]
+  },
+  "--rss-worker-bytes": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --rss-worker-bytes"
+   ]
+  },
+  "--rss-aggregate-bytes": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --rss-aggregate-bytes"
+   ]
+  },
+  "--only": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --only"
+   ]
+  },
+  "--repo": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --repo"
+   ]
+  },
+  "--workers": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --workers"
+   ]
+  },
+  "--freeze-plan": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --freeze-plan"
+   ]
+  },
+  "--freeze-plan-sha256": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --freeze-plan-sha256"
+   ]
+  },
+  "--seed-block": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --seed-block"
+   ]
+  },
+  "--overload-u-p": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --overload-u-p"
+   ]
+  },
+  "--labels": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --labels"
+   ]
+  },
+  "--updates": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --updates"
+   ]
+  },
+  "--draw": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --draw"
+   ]
+  },
+  "--synthetic-backbone": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --synthetic-backbone"
+   ]
+  },
+  "--timing": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --timing"
+   ]
+  },
+  "--calibration": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --calibration"
+   ]
+  },
+  "--results-dir": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --results-dir"
+   ]
+  },
+  "--restore-split": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --restore-split"
+   ]
+  }
+ },
+ "registered_with_dry": {
+  "exit": 2,
+  "stderr": [
+   "refused: --dry cannot be combined with --mode registered"
+  ]
+ },
+ "non_driver_commands_registered_mode": {
+  "train": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `train`"
+    ]
+   },
+   "no --mode (defaults to registered)": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `train`"
+    ]
+   }
+  },
+  "evaluate": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `evaluate`"
+    ]
+   },
+   "no --mode (defaults to registered)": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `evaluate`"
+    ]
+   }
+  },
+  "gates": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `gates`"
+    ]
+   },
+   "no --mode (defaults to registered)": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `gates`"
+    ]
+   }
+  },
+  "timing": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `timing`"
+    ]
+   }
+  },
+  "simulate": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `simulate`"
+    ]
+   },
+   "no --mode (defaults to registered)": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `simulate`"
+    ]
+   }
+  },
+  "analyze": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `analyze`"
+    ]
+   },
+   "no --mode (defaults to registered)": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `analyze`"
+    ]
+   }
+  },
+  "report": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `report`"
+    ]
+   },
+   "no --mode (defaults to registered)": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `report`"
+    ]
+   }
+  },
+  "calibrate": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `calibrate`"
+    ]
+   }
+  },
+  "rehearse": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `rehearse`"
+    ]
+   }
+  },
+  "synthetic": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `synthetic`"
+    ]
+   }
+  },
+  "project": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `project`"
+    ]
+   }
+  },
+  "freeze": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `freeze`"
+    ]
+   }
+  },
+  "set-generation-cap": {
+   "--mode registered": {
+    "exit": 2,
+    "stderr": [
+     "P10S1 stage REFUSED: --mode registered is reached only through `registered <stage>` (the fixed launch scripts), the worker entry point and `generate`, not `set-generation-cap`"
+    ]
+   }
+  }
+ },
+ "generate_registered": {
+  "typed cap": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --stage-cap-seconds"
+   ]
+  },
+  "typed ledger root": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --ledger-root"
+   ]
+  },
+  "typed repo": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: a registered command takes no override; typed: --repo"
+   ]
+  },
+  "no override, provisional cap in this worktree's config": {
+   "exit": 2,
+   "stderr": [
+    "P10S1 stage REFUSED: refused: the generation cap in the config is provisional; run `set-generation-cap` from the rehearsal's measured G1 time and commit it before generating"
+   ]
+  }
+ },
+ "config_generation": {
+  "cap_seconds": 1800.0,
+  "provisional": true,
+  "table_facts": 32768
+ },
+ "run_dir_created_by_any_probe": false,
+ "work_train_registered_without_plan": {
+  "exit": 2,
+  "stderr": [
+   "P10S1 stage REFUSED: refused: a registered worker needs the frozen plan and the digest the driver verified (--freeze-plan, --freeze-plan-sha256)"
+  ]
+ },
+ "verify_worker_plan_on_self_made_plan": "ACCEPTED (the digest is typed on the same command line; nothing binds it to studies/p10s1/freeze/plan.json or a freeze commit)",
+ "frozen_of_self_made_plan_cells": 164,
+ "worker_functions_call_check_preconditions": {
+  "work_train": false,
+  "work_gates": false,
+  "work_evaluate": false,
+  "verify_worker_plan": false
+ },
+ "worker_functions_check_ledger": {
+  "work_train": false,
+  "work_gates": false,
+  "work_evaluate": false,
+  "verify_worker_plan": false
+ }
+}

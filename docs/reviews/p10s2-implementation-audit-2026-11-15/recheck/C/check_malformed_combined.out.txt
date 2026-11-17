@@ -1,0 +1,5 @@
+C1 is an empty mapping: analyze raises KeyError: 'tested_by_language'
+C2 lacks tested_sentences: analyze raises KeyError: 'tested_sentences'
+single lacks scores: analyze raises KeyError: 'scores'
+single scores shorter than n: analyze raises IndexError: list index out of range
+tested_by_language A is None: row 7; MAF C1 composition NOT_EVALUATED

@@ -1,0 +1,98 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+Recheck script r3 = a3 re-run against f1e8ebb (Claude Opus 5.5 auditor; P10-S1 rev-5 fix recheck; not Astra review).
+
+Question 1 (B1): under the NEW dispatch order (budget.dispatch_order, which calibration_tasks now uses) and the NEW caps
+(budget.item_projection: 2 x the item's projected completion from the stage start, training only), is any run stopped?
+Question 2 (the open item 'caps bound training only'): with a start-up before training and evaluation after it (the worker
+is busy for both; the deadline is a wall-clock instant counted from the stage start and only checked inside the training
+loop), and with contention c on the training rate, can a run lose its U_L / row U_P / H8 value / dense rate to start-up? 
+
+items 0b+1                                       order=code             rates x1.0 start-up    0 s c 1.00 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 0} min slack (s) {'load': 5549, 'row-up': 868}
+items 0b+1                                       order=code             rates x1.0 start-up   16 s c 1.00 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 0} min slack (s) {'load': 5501, 'row-up': 836}
+items 0b+1                                       order=old (load first) rates x1.0 start-up    0 s c 1.00 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4870, 'row-up': -1604}
+items 0b+1                                       order=old (load first) rates x1.0 start-up    0 s c 1.00 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4766, 'row-up': -1812}
+items 0b+1                                       order=old (load first) rates x1.0 start-up    0 s c 1.25 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3258, 'row-up': -2413}
+items 0b+1                                       order=old (load first) rates x1.0 start-up    0 s c 1.25 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3154, 'row-up': -2621}
+items 0b+1                                       order=old (load first) rates x1.0 start-up    0 s c 1.50 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1646, 'row-up': -3223}
+items 0b+1                                       order=old (load first) rates x1.0 start-up    0 s c 1.50 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1542, 'row-up': -3431}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   16 s c 1.00 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4838, 'row-up': -1732}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   16 s c 1.00 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4734, 'row-up': -1940}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   16 s c 1.25 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3226, 'row-up': -2541}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   16 s c 1.25 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3122, 'row-up': -2749}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   16 s c 1.50 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1614, 'row-up': -3351}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   16 s c 1.50 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1510, 'row-up': -3559}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   30 s c 1.00 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4810, 'row-up': -1844}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   30 s c 1.00 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4706, 'row-up': -2052}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   30 s c 1.25 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3198, 'row-up': -2653}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   30 s c 1.25 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3094, 'row-up': -2861}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   30 s c 1.50 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1586, 'row-up': -3463}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   30 s c 1.50 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1482, 'row-up': -3671}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   60 s c 1.00 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4750, 'row-up': -2084}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   60 s c 1.00 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 4646, 'row-up': -2292}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   60 s c 1.25 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3138, 'row-up': -2893}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   60 s c 1.25 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3034, 'row-up': -3101}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   60 s c 1.50 eval x1.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1526, 'row-up': -3703}
+items 0b+1                                       order=old (load first) rates x1.0 start-up   60 s c 1.50 eval x2.0: caps {'load': 11423, 'row-up': 1842} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 1422, 'row-up': -3911}
+items 0b+1                                       order=code             rates x2.0 start-up    0 s c 1.00 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 0} min slack (s) {'load': 11261, 'row-up': 1818}
+items 0b+1                                       order=code             rates x2.0 start-up   16 s c 1.00 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 0} min slack (s) {'load': 11213, 'row-up': 1786}
+items 0b+1                                       order=old (load first) rates x2.0 start-up    0 s c 1.00 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9844, 'row-up': -3000}
+items 0b+1                                       order=old (load first) rates x2.0 start-up    0 s c 1.00 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9740, 'row-up': -3208}
+items 0b+1                                       order=old (load first) rates x2.0 start-up    0 s c 1.25 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6620, 'row-up': -4619}
+items 0b+1                                       order=old (load first) rates x2.0 start-up    0 s c 1.25 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6516, 'row-up': -4827}
+items 0b+1                                       order=old (load first) rates x2.0 start-up    0 s c 1.50 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3396, 'row-up': -6237}
+items 0b+1                                       order=old (load first) rates x2.0 start-up    0 s c 1.50 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3292, 'row-up': -6445}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   16 s c 1.00 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9812, 'row-up': -3128}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   16 s c 1.00 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9708, 'row-up': -3336}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   16 s c 1.25 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6588, 'row-up': -4747}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   16 s c 1.25 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6484, 'row-up': -4955}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   16 s c 1.50 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3364, 'row-up': -6365}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   16 s c 1.50 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3260, 'row-up': -6573}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   30 s c 1.00 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9784, 'row-up': -3240}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   30 s c 1.00 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9680, 'row-up': -3448}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   30 s c 1.25 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6560, 'row-up': -4859}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   30 s c 1.25 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6456, 'row-up': -5067}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   30 s c 1.50 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3336, 'row-up': -6477}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   30 s c 1.50 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3232, 'row-up': -6685}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   60 s c 1.00 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9724, 'row-up': -3480}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   60 s c 1.00 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 9620, 'row-up': -3688}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   60 s c 1.25 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6500, 'row-up': -5099}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   60 s c 1.25 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 6396, 'row-up': -5307}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   60 s c 1.50 eval x1.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3276, 'row-up': -6717}
+items 0b+1                                       order=old (load first) rates x2.0 start-up   60 s c 1.50 eval x2.0: caps {'load': 22846, 'row-up': 3683} stopped {'load': 0, 'row-up': 12} min slack (s) {'load': 3172, 'row-up': -6925}
+items 2+3, rows at max candidate (caps and runs) order=code             rates x1.0 start-up    0 s c 1.00 eval x1.0: caps {'h8': 983, 'dense': 9562} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 484, 'dense': 3921}
+items 2+3, rows at max candidate (caps and runs) order=code             rates x1.0 start-up   16 s c 1.00 eval x1.0: caps {'h8': 983, 'dense': 9562} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 452, 'dense': 3761}
+items 2+3, rows at max candidate (caps and runs) order=code             rates x2.0 start-up    0 s c 1.00 eval x1.0: caps {'h8': 1966, 'dense': 19123} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 975, 'dense': 8554}
+items 2+3, rows at max candidate (caps and runs) order=code             rates x2.0 start-up   16 s c 1.00 eval x1.0: caps {'h8': 1966, 'dense': 19123} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 943, 'dense': 8426}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up    0 s c 1.00 eval x1.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 115, 'dense': 1981}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up    0 s c 1.50 eval x2.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 0, 'dense': 8} min slack (s) {'h8': 45, 'dense': -145}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   16 s c 1.00 eval x1.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 83, 'dense': 1853}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   16 s c 1.50 eval x2.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 0, 'dense': 8} min slack (s) {'h8': 13, 'dense': -254}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   30 s c 1.50 eval x1.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -7, 'dense': 318}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   30 s c 1.50 eval x2.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 10} min slack (s) {'h8': -15, 'dense': -265}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   60 s c 1.00 eval x1.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -5, 'dense': 1501}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   60 s c 1.00 eval x2.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -13, 'dense': 654}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   60 s c 1.25 eval x1.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -36, 'dense': 802}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   60 s c 1.25 eval x2.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 4} min slack (s) {'h8': -44, 'dense': -50}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   60 s c 1.50 eval x1.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -67, 'dense': 102}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x1.0 start-up   60 s c 1.50 eval x2.0: caps {'h8': 246, 'dense': 5787} stopped {'h8': 2, 'dense': 12} min slack (s) {'h8': -75, 'dense': -325}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x2.0 start-up    0 s c 1.00 eval x1.0: caps {'h8': 492, 'dense': 11574} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 238, 'dense': 4933}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x2.0 start-up   16 s c 1.00 eval x1.0: caps {'h8': 492, 'dense': 11574} stopped {'h8': 0, 'dense': 0} min slack (s) {'h8': 206, 'dense': 4805}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x2.0 start-up   60 s c 1.50 eval x1.0: caps {'h8': 492, 'dense': 11574} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -5, 'dense': 1646}
+items 2+3, rows at min candidate (caps and runs) order=code             rates x2.0 start-up   60 s c 1.50 eval x2.0: caps {'h8': 492, 'dense': 11574} stopped {'h8': 2, 'dense': 0} min slack (s) {'h8': -13, 'dense': 636}
+
+SUMMARY of settings with any stopped run (code order only matters for the verdict):
+  ('items 0b+1', 'old (load first)', 1.0) -> 24 settings; first: (0.0, 1.0, 1.0, {'load': 0, 'row-up': 12})
+  ('items 0b+1', 'old (load first)', 2.0) -> 24 settings; first: (0.0, 1.0, 1.0, {'load': 0, 'row-up': 12})
+  ('items 2+3, rows at min candidate (caps and runs)', 'code', 1.0) -> 10 settings; first: (0.0, 1.5, 2.0, {'h8': 0, 'dense': 8})
+  ('items 2+3, rows at min candidate (caps and runs)', 'code', 2.0) -> 2 settings; first: (60.0, 1.5, 1.0, {'h8': 2, 'dense': 0})
+
+WORST min slack (deadline minus training end, s) per item over all 48 settings (rates x1/x2, start-up 0/16/30/60 s, c 1/1.25/1.5, eval x1/x2):
+  ('items 0b+1', 'code', 'load') -> 2352 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 0b+1', 'code', 'row-up') -> 192 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 0b+1', 'old (load first)', 'load') -> 1422 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 0b+1', 'old (load first)', 'row-up') -> -6925 s at rates x2.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 2+3, rows at max candidate (caps and runs)', 'code', 'h8') -> 110 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 2+3, rows at max candidate (caps and runs)', 'code', 'dense') -> 163 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 2+3, rows at min candidate (caps and runs)', 'code', 'h8') -> -75 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0
+  ('items 2+3, rows at min candidate (caps and runs)', 'code', 'dense') -> -325 s at rates x1.0 start-up 60.0 c 1.5 eval x2.0

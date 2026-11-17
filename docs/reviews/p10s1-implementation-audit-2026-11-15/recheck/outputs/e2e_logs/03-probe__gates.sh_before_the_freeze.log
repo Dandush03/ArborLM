@@ -1,0 +1,6 @@
+$ sh studies/p10s1/launch/gates.sh <scratch>/e2e/registered-run db58ea64d5d792f759ff7b03c6ecbe2d7c14fd41
+
+--- stdout
+
+--- stderr
+P10S1 stage REFUSED: refused: no freeze plan at <scratch>/e2e/clone/studies/p10s1/freeze/plan.json: nothing registered runs before the freeze

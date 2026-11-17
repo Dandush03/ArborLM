@@ -1,0 +1,53 @@
+constants parsed from source: 29
+revisions in source: {'TEACHER_A': '6183067f769a302e3861815543b9f312c71b0ca4', 'TEACHER_B': 'dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18', 'STUDENT': '93efa2f097d58c2a74874c7e644dbc9b0cee75a2', 'FALLBACK': '5bc4493d463cf000c1f0b50f8d56886a392ed4ab'}
+== teacher_a: saved rev 6183067f769a302e3861815543b9f312c71b0ca4 == source 6183067f769a302e3861815543b9f312c71b0ca4: True; in ADR text: True
+   config.json                git-blob-sha1  tree 0a49d3f4024d5ea51560d51f29d75722d794fb16 1335  const 0a49d3f4024d5ea51560d51f29d75722d794fb16 1335  equal=True  len=40
+   generation_config.json     git-blob-sha1  tree 3d05a5bad924f2121cf5a006b36dfda02970289b 293  const 3d05a5bad924f2121cf5a006b36dfda02970289b 293  equal=True  len=40
+   pytorch_model.bin          lfs-sha256     tree da068344b1b0c20e6d4a8f77f48e06646b90d679029006b18579e68977206bdd 297928209  const da068344b1b0c20e6d4a8f77f48e06646b90d679029006b18579e68977206bdd 297928209  equal=True  len=64
+      large digest and size in ADR text: True
+   source.spm                 git-blob-sha1  tree e73d58f99c702eb1746e3dc55bc76255d7aa4a94 768489  const e73d58f99c702eb1746e3dc55bc76255d7aa4a94 768489  equal=True  len=40
+   target.spm                 git-blob-sha1  tree 9dd0d88081be8d75fbc029762329cc11bfad07b9 796845  const 9dd0d88081be8d75fbc029762329cc11bfad07b9 796845  equal=True  len=40
+   tokenizer_config.json      git-blob-sha1  tree c1fe32f77a961c887ae8266fbd92f4f583fe309a 42  const c1fe32f77a961c887ae8266fbd92f4f583fe309a 42  equal=True  len=40
+   vocab.json                 git-blob-sha1  tree 0da41bcf74fa9a6af4855c7350e27819796d9ca9 1273232  const 0da41bcf74fa9a6af4855c7350e27819796d9ca9 1273232  equal=True  len=40
+== teacher_b: saved rev dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18 == source dd7f6540a7a48a7f4db59e5c0b9c42c8eea67f18: True; in ADR text: True
+   config.json                git-blob-sha1  tree 1ca77a4a9305ea071d96dd12dbe7c69c3a224f8e 1416  const 1ca77a4a9305ea071d96dd12dbe7c69c3a224f8e 1416  equal=True  len=40
+   generation_config.json     git-blob-sha1  tree a76623f9e228ce241586c6dc0ede54b9674940a6 293  const a76623f9e228ce241586c6dc0ede54b9674940a6 293  equal=True  len=40
+   pytorch_model.bin          lfs-sha256     tree cc1de10b49342ad2f33e06bc4474ddd6eaca278474903c4a8636ce15680d64de 300827685  const cc1de10b49342ad2f33e06bc4474ddd6eaca278474903c4a8636ce15680d64de 300827685  equal=True  len=64
+      large digest and size in ADR text: True
+   source.spm                 git-blob-sha1  tree 5b989d2ad3cc6596bef819b2ad755f3e06377476 778395  const 5b989d2ad3cc6596bef819b2ad755f3e06377476 778395  equal=True  len=40
+   target.spm                 git-blob-sha1  tree e95b99a0e1a115d0f27eb051c7afc5a2859f1630 802397  const e95b99a0e1a115d0f27eb051c7afc5a2859f1630 802397  equal=True  len=40
+   tokenizer_config.json      git-blob-sha1  tree 599f1c74f7e68d1351c801ef3557a03fd846d171 42  const 599f1c74f7e68d1351c801ef3557a03fd846d171 42  equal=True  len=40
+   vocab.json                 git-blob-sha1  tree f12d2f5f9cddfc4b05dee175269d98cab8274c12 1339166  const f12d2f5f9cddfc4b05dee175269d98cab8274c12 1339166  equal=True  len=40
+== student: saved rev 93efa2f097d58c2a74874c7e644dbc9b0cee75a2 == source 93efa2f097d58c2a74874c7e644dbc9b0cee75a2: True; in ADR text: True
+   config.json                git-blob-sha1  tree ccf3dac2f33905d152adbdf3886b5e38a4eb7579 704  const ccf3dac2f33905d152adbdf3886b5e38a4eb7579 704  equal=True  len=40
+   generation_config.json     git-blob-sha1  tree 0fce861c328ff24830f3037d91ce773254447bf7 111  const 0fce861c328ff24830f3037d91ce773254447bf7 111  equal=True  len=40
+   merges.txt                 git-blob-sha1  tree 69503b13f727ba3812b6803e97442a6de05ef5eb 466391  const 69503b13f727ba3812b6803e97442a6de05ef5eb 466391  equal=True  len=40
+   model.safetensors          lfs-sha256     tree 80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1 269060552  const 80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1 269060552  equal=True  len=64
+      large digest and size in ADR text: True
+   special_tokens_map.json    git-blob-sha1  tree f6652f246cb895ca1edfb16d10b57917b266e335 831  const f6652f246cb895ca1edfb16d10b57917b266e335 831  equal=True  len=40
+   tokenizer.json             git-blob-sha1  tree f922b1797f0c88e71addc8393787831f2477a4bd 2104556  const f922b1797f0c88e71addc8393787831f2477a4bd 2104556  equal=True  len=40
+   tokenizer_config.json      git-blob-sha1  tree d45192775d58298087a1fedf5967fe5b63b091ab 3658  const d45192775d58298087a1fedf5967fe5b63b091ab 3658  equal=True  len=40
+   vocab.json                 git-blob-sha1  tree 0ad5ecc2035b7031b88afb544ee95e2d49baa484 800662  const 0ad5ecc2035b7031b88afb544ee95e2d49baa484 800662  equal=True  len=40
+== fallback: saved rev 5bc4493d463cf000c1f0b50f8d56886a392ed4ab == source 5bc4493d463cf000c1f0b50f8d56886a392ed4ab: True; in ADR text: True
+   config.json                git-blob-sha1  tree c40dc3af1603bdbca3388970914022f4abb81f7f 1473  const c40dc3af1603bdbca3388970914022f4abb81f7f 1473  equal=True  len=40
+   generation_config.json     git-blob-sha1  tree f07859fcab98712b231d115475990a962eebc851 293  const f07859fcab98712b231d115475990a962eebc851 293  equal=True  len=40
+   pytorch_model.bin          lfs-sha256     tree befce0f620e8e63f83bbb7f0818eb51d541cba28057a7cc14b00466d85c4994c 312087523  const befce0f620e8e63f83bbb7f0818eb51d541cba28057a7cc14b00466d85c4994c 312087523  equal=True  len=64
+      large digest and size in ADR text: True
+   source.spm                 git-blob-sha1  tree 6dc92ba66940f622779f82c376066c2c46bbad12 801636  const 6dc92ba66940f622779f82c376066c2c46bbad12 801636  equal=True  len=40
+   target.spm                 git-blob-sha1  tree 2dfb31564bc31c8fbc65c8bfa8cc201fbbf45e44 825924  const 2dfb31564bc31c8fbc65c8bfa8cc201fbbf45e44 825924  equal=True  len=40
+   tokenizer_config.json      git-blob-sha1  tree 159d739c93118ec73b1a90a6045b636928fcce95 44  const 159d739c93118ec73b1a90a6045b636928fcce95 44  equal=True  len=40
+   vocab.json                 git-blob-sha1  tree d2c5a0f1ab2bb3a752894b854150c358f8c682f9 1590040  const d2c5a0f1ab2bb3a752894b854150c358f8c682f9 1590040  equal=True  len=40
+config teacher_a: blob 0a49d3f4024d5ea51560d51f29d75722d794fb16 == const 0a49d3f4024d5ea51560d51f29d75722d794fb16: True; suspicious keys ['_name_or_path', '_num_labels']
+config teacher_b: blob 1ca77a4a9305ea071d96dd12dbe7c69c3a224f8e == const 1ca77a4a9305ea071d96dd12dbe7c69c3a224f8e: True; suspicious keys ['_name_or_path', '_num_labels']
+config student: blob ccf3dac2f33905d152adbdf3886b5e38a4eb7579 == const ccf3dac2f33905d152adbdf3886b5e38a4eb7579: True; suspicious keys []
+config fallback: blob c40dc3af1603bdbca3388970914022f4abb81f7f == const c40dc3af1603bdbca3388970914022f4abb81f7f: True; suspicious keys ['_name_or_path']
+small totals per repo: {'teacher_a': 2840236, 'teacher_b': 2921709, 'student': 3376913, 'fallback': 3219410} sum primary: 9138858
+large primary: 867816446
+model rows 1-3 total bytes: 876955304
+  teacher_a: 300768445 B = 300.8 MB
+  teacher_b: 303749394 B = 303.7 MB
+  student: 272437465 B = 272.4 MB
+  fallback: 315306933 B = 315.3 MB
+tatoeba sizes in source: [24947715, 12144786, 9805546, 3557634, 2679128, 3552331, 2678076, 6376323, 1762602] sum primary 7: 59365216 row4 5 files: 53134809 links 2: 6230407 fallback: 8138925
+total primary download: 936320520
+DISCREPANCIES: 0

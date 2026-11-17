@@ -1,0 +1,19 @@
+## G2 chance intervals (exact binomial central, level 1-0.001/40): {2048: (34, 100), 8192: (192, 325), 32768: (894, 1159)} (ADR lists [34,100], [192,325], [894,1159])
+i(0.25) = 0.4731  i(0.5) = 1.5229  i(0.8) = 3.2872  i(0.9) = 4.0356  a(4.0) = 0.8956  a(4.5) = 0.9537  a(3.0) = 0.7576
+
+## 1. F-OQ curves recomputed from raw counts (i bits per fact; A/B panels; draws 1,2)
+    8K/ 4K d1A: 512:0.003 1024:0.026 2048:0.533 4096:2.989 8192:4.539 16384:4.853 24576:4.913 32768:4.922 49152:4.957 65536:4.960
+    8K/ 4K d1B: 512:0.002 1024:0.028 2048:0.541 4096:3.010 8192:4.537 16384:4.839 24576:4.915 32768:4.922 49152:4.952 65536:4.957
+    8K/ 4K d2A: 512:0.000 1024:0.003 2048:0.086 4096:1.843 8192:4.373 16384:4.812 24576:4.884 32768:4.921 49152:4.942 65536:4.957
+    8K/ 4K d2B: 512:0.000 1024:0.004 2048:0.088 4096:1.840 8192:4.369 16384:4.824 24576:4.887 32768:4.925 49152:4.945 65536:4.958
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1rev5/a1_calibration.py", line 99, in <module>
+    s, _ = series("F-OQ", f, n, d, p, y=65536 if f != 2048 else 8192)
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1rev5/a1_calibration.py", line 91, in series
+    return {u: i_bits(v[panel][0], v[panel][1]) for u, v in sorted(c["curve"].items())}, {u: v[panel][0] / v[panel][1] for u, v in sorted(c["curve"].items())}
+               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/s1rev5/a1_calibration.py", line 44, in i_bits
+    if useful <= CI[n][1]:
+                 ~~^^^
+KeyError: 16384

@@ -1,0 +1,58 @@
+DEP evaluations (a_use >= 0.25) on registered memory cells, per arm: {'F-OQ': 547, 'F-OQ-IVF': 524, 'H8': 585, 'R2': 139, 'T-OQ': 494}
+DEP failures: 32   all from the 0.95 x raw condition: True
+(arm, facts, slots, draw, panel, update, useful, correct, n, a_use, useful/correct, correct-useful, (n-useful)*disabled_rate)
+   ('F-OQ', 2048, 4096, 3, 'A', 1024, 643, 680, 2048, 0.314, 0.9456, 37, 41.2)
+   ('F-OQ', 2048, 4096, 3, 'B', 1024, 620, 659, 2048, 0.3027, 0.9408, 39, 31.4)
+   ('F-OQ', 8192, 4096, 4, 'A', 2048, 2356, 2493, 8192, 0.2876, 0.945, 137, 176.0)
+   ('F-OQ', 8192, 4096, 4, 'B', 2048, 2387, 2524, 8192, 0.2914, 0.9457, 137, 182.1)
+   ('F-OQ', 8192, 16384, 2, 'A', 2048, 2646, 2803, 8192, 0.323, 0.944, 157, 172.6)
+   ('F-OQ', 8192, 16384, 2, 'B', 2048, 2700, 2851, 8192, 0.3296, 0.947, 151, 185.0)
+   ('F-OQ-IVF', 2048, 4096, 3, 'A', 1024, 546, 582, 2048, 0.2666, 0.9381, 36, 44.0)
+   ('F-OQ-IVF', 2048, 4096, 3, 'B', 1024, 549, 581, 2048, 0.2681, 0.9449, 32, 32.9)
+   ('F-OQ-IVF', 2048, 4096, 4, 'A', 1024, 847, 893, 2048, 0.4136, 0.9485, 46, 45.2)
+   ('F-OQ-IVF', 8192, 16384, 2, 'A', 2048, 2173, 2295, 8192, 0.2653, 0.9468, 122, 187.4)
+   ('F-OQ-IVF', 8192, 16384, 2, 'B', 2048, 2177, 2306, 8192, 0.2657, 0.9441, 129, 202.7)
+   ('F-OQ-IVF', 8192, 16384, 5, 'A', 2048, 2130, 2260, 8192, 0.26, 0.9425, 130, 174.6)
+   ('F-OQ-IVF', 8192, 16384, 5, 'B', 2048, 2095, 2212, 8192, 0.2557, 0.9471, 117, 181.6)
+   ('H8', 2048, 4096, 1, 'B', 1024, 532, 570, 2048, 0.2598, 0.9333, 38, 37.8)
+   ('H8', 2048, 4096, 3, 'B', 1024, 735, 778, 2048, 0.3589, 0.9447, 43, 28.9)
+   ('H8', 8192, 4096, 4, 'A', 2048, 2119, 2239, 8192, 0.2587, 0.9464, 120, 183.1)
+   ('H8', 8192, 4096, 4, 'B', 2048, 2122, 2237, 8192, 0.259, 0.9486, 115, 190.4)
+   ('H8', 8192, 16384, 4, 'A', 1024, 2195, 2355, 8192, 0.2679, 0.9321, 160, 180.8)
+   ('H8', 8192, 16384, 4, 'B', 1024, 2170, 2343, 8192, 0.2649, 0.9262, 173, 188.9)
+   ('R2', 2048, 4096, 1, 'B', 512, 519, 553, 2048, 0.2534, 0.9385, 34, 38.1)
+   ('R2', 2048, 4096, 2, 'A', 512, 551, 593, 2048, 0.269, 0.9292, 42, 48.2)
+   ('R2', 2048, 4096, 2, 'B', 512, 544, 589, 2048, 0.2656, 0.9236, 45, 47.0)
+   ('R2', 2048, 4096, 3, 'A', 512, 777, 822, 2048, 0.3794, 0.9453, 45, 37.2)
+   ('R2', 8192, 16384, 4, 'A', 512, 2448, 2635, 8192, 0.2988, 0.929, 187, 173.2)
+   ('R2', 8192, 16384, 4, 'B', 512, 2415, 2601, 8192, 0.2948, 0.9285, 186, 181.2)
+   ('R2', 32768, 32768, 1, 'A', 1024, 10819, 11470, 32768, 0.3302, 0.9432, 651, 672.5)
+   ('R2', 32768, 32768, 1, 'B', 1024, 10735, 11414, 32768, 0.3276, 0.9405, 679, 665.7)
+   ('R2', 32768, 32768, 2, 'A', 1024, 10989, 11588, 32768, 0.3354, 0.9483, 599, 721.1)
+   ('R2', 32768, 32768, 2, 'B', 1024, 11006, 11629, 32768, 0.3359, 0.9464, 623, 746.5)
+   ('R2', 32768, 32768, 5, 'A', 1024, 10996, 11601, 32768, 0.3356, 0.9478, 605, 670.4)
+   ('R2', 32768, 32768, 5, 'B', 1024, 10911, 11513, 32768, 0.333, 0.9477, 602, 673.0)
+   ('T-OQ', 2048, 1024, 3, 'A', 2048, 552, 586, 2048, 0.2695, 0.942, 34, 43.8)
+updates at which DEP failed: Counter({1024: 15, 2048: 11, 512: 6})  U_P/x: Counter({'16': 12, '4': 11, '8': 9})
+a_use bin (lower edge, width 0.05): [DEP passes, DEP fails]: {0.25: [178, 19], 0.3: [267, 10], 0.35: [84, 2], 0.4: [58, 1]}
+largest a_use at a failure: 0.4136
+
+F-OQ: a_use at 32K/16K at U_P (section 8.4 row 3 floor 0.80): 0.9088
+  DEP mode all : arm class DEPENDENCE_FAILED        {'C1': 'MIXED', 'N1': 'NOT LOADED', 'C2': 'CAPACITY STEP', 'N2': 'DEPENDENCE_FAILED'}
+  DEP mode read: arm class CAPACITY_SUPPORTED       {'C1': 'CAPACITY STEP', 'N1': 'NOT LOADED', 'C2': 'CAPACITY STEP', 'N2': 'MIXED'}
+  DEP mode none: arm class CAPACITY_SUPPORTED       {'C1': 'CAPACITY STEP', 'N1': 'NOT LOADED', 'C2': 'CAPACITY STEP', 'N2': 'MIXED'}
+
+F-OQ-IVF: a_use at 32K/16K at U_P (section 8.4 row 3 floor 0.80): 0.4746
+  DEP mode all : arm class DEPENDENCE_FAILED        {'C1': 'MIXED', 'N1': 'MIXED', 'C2': 'GAIN WITHIN BUDGET', 'N2': 'DEPENDENCE_FAILED'}
+  DEP mode read: arm class INTERMEDIATE             {'C1': 'MIXED', 'N1': 'MIXED', 'C2': 'GAIN WITHIN BUDGET', 'N2': 'MIXED'}
+  DEP mode none: arm class INTERMEDIATE             {'C1': 'MIXED', 'N1': 'MIXED', 'C2': 'GAIN WITHIN BUDGET', 'N2': 'MIXED'}
+
+T-OQ: a_use at 32K/16K at U_P (section 8.4 row 3 floor 0.80): 0.3696
+  DEP mode all : arm class INTERMEDIATE             {'C1': 'GAIN WITHIN BUDGET', 'N1': 'MIXED', 'C2': 'GAIN WITHIN BUDGET', 'N2': 'GAIN WITHIN BUDGET'}
+  DEP mode read: arm class INTERMEDIATE             {'C1': 'GAIN WITHIN BUDGET', 'N1': 'GAIN WITHIN BUDGET', 'C2': 'GAIN WITHIN BUDGET', 'N2': 'GAIN WITHIN BUDGET'}
+  DEP mode none: arm class INTERMEDIATE             {'C1': 'GAIN WITHIN BUDGET', 'N1': 'GAIN WITHIN BUDGET', 'C2': 'GAIN WITHIN BUDGET', 'N2': 'GAIN WITHIN BUDGET'}
+
+H8: a_use at 32K/16K at U_P (section 8.4 row 3 floor 0.80): 0.8037
+  DEP mode all : arm class CAPACITY_ONE_TRANSITION  {'C1': 'MIXED', 'N1': 'NOT REPLICATED', 'C2': 'CAPACITY STEP', 'N2': 'MIXED'}
+  DEP mode read: arm class CAPACITY_SUPPORTED       {'C1': 'CAPACITY STEP', 'N1': 'CAPACITY STEP', 'C2': 'CAPACITY STEP', 'N2': 'CAPACITY STEP'}
+  DEP mode none: arm class CAPACITY_SUPPORTED       {'C1': 'CAPACITY STEP', 'N1': 'CAPACITY STEP', 'C2': 'CAPACITY STEP', 'N2': 'CAPACITY STEP'}

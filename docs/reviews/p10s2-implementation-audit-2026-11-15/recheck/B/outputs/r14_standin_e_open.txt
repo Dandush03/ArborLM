@@ -1,0 +1,2 @@
+E_open items 0 with A ref 0 with B ref 0
+sizes Sizes(vocabulary=24, min_words=3, max_words=10, large_group_pairs=50, evaluation_fraction=0.2, panel_eval=12, panel_eval_min=6, panel_combined=6, panel_combined_min=3, panel_open=4, panel_q_fit=80, panel_q_check=60, panel_d_cal=8, panel_d_con=6, accepted_per_replicate=24, gold_per_replicate=24, sufficiency_factor=1.25, generation_sources_max=400, check_min_accepted=6)

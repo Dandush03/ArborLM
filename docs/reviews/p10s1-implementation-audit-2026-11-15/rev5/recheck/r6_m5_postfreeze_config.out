@@ -1,0 +1,2 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+config rewritten: cap_hours 23.0, generation measured {'cap_seconds': 420.0, 'provisional': False, 'table_facts': 32768, 'source': 'measured', 'measured_seconds': 200.0, 'manifest_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}

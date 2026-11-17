@@ -1,0 +1,9 @@
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+empty file                              : ACCEPTED; statement: "P10-S0's last training stage has finished: evidence bound by hash above"
+JSON {}                                 : ACCEPTED; statement: "P10-S0's last training stage has finished: evidence bound by hash above"
+an S0 manifest that is INCOMPLETE       : ACCEPTED; statement: "P10-S0's last training stage has finished: evidence bound by hash above"
+a P10-S1 calibration manifest           : ACCEPTED; statement: "P10-S0's last training stage has finished: evidence bound by hash above"
+plain text                              : ACCEPTED; statement: "P10-S0's last training stage has finished: evidence bound by hash above"
+WX manifest {} + refusal record plain text: ACCEPTED, keys ['checked', 'other_study_processes_alive_at_freeze', 's0_refusal_record', 's0_training_manifest', 'statement']
+between two S0 stages (wrapper only alive): P10-S0's last training stage has finished: evidence bound by hash above
+live S0 worker: refused (OtherStudyRunning)

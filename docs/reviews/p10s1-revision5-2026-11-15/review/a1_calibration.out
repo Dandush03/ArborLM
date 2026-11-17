@@ -1,0 +1,118 @@
+## G2 chance intervals (exact binomial central, level 1-0.001/40): {2048: (34, 100), 8192: (192, 325), 32768: (894, 1159)} (ADR lists [34,100], [192,325], [894,1159])
+i(0.25) = 0.4731  i(0.5) = 1.5229  i(0.8) = 3.2872  i(0.9) = 4.0356  a(4.0) = 0.8956  a(4.5) = 0.9537  a(3.0) = 0.7576
+
+## 1. F-OQ curves recomputed from raw counts (i bits per fact; A/B panels; draws 1,2)
+    8K/ 4K d1A: 512:0.003 1024:0.026 2048:0.533 4096:2.989 8192:4.539 16384:4.853 24576:4.913 32768:4.922 49152:4.957 65536:4.960
+    8K/ 4K d1B: 512:0.002 1024:0.028 2048:0.541 4096:3.010 8192:4.537 16384:4.839 24576:4.915 32768:4.922 49152:4.952 65536:4.957
+    8K/ 4K d2A: 512:0.000 1024:0.003 2048:0.086 4096:1.843 8192:4.373 16384:4.812 24576:4.884 32768:4.921 49152:4.942 65536:4.957
+    8K/ 4K d2B: 512:0.000 1024:0.004 2048:0.088 4096:1.840 8192:4.369 16384:4.824 24576:4.887 32768:4.925 49152:4.945 65536:4.958
+   16K/ 4K d1A: 512:0.000 1024:0.002 2048:0.050 4096:0.531 8192:2.136 16384:3.274 24576:3.674 32768:3.856 49152:4.032 65536:4.110
+   16K/ 4K d1B: 512:0.000 1024:0.002 2048:0.054 4096:0.529 8192:2.150 16384:3.283 24576:3.692 32768:3.852 49152:4.024 65536:4.116
+   16K/ 4K d2A: 512:0.000 1024:0.000 2048:0.000 4096:0.215 8192:1.664 16384:3.125 24576:3.576 32768:3.850 49152:3.989 65536:4.063
+   16K/ 4K d2B: 512:0.000 1024:0.000 2048:0.000 4096:0.214 8192:1.661 16384:3.131 24576:3.575 32768:3.855 49152:3.995 65536:4.075
+   32K/ 4K d1A: 512:0.000 1024:0.000 2048:0.000 4096:0.051 8192:0.414 16384:1.136 24576:1.456 32768:1.649 49152:1.864 65536:1.943
+   32K/ 4K d1B: 512:0.000 1024:0.000 2048:0.000 4096:0.052 8192:0.415 16384:1.124 24576:1.455 32768:1.649 49152:1.864 65536:1.939
+   32K/ 4K d2A: 512:0.000 1024:0.000 2048:0.000 4096:0.010 8192:0.297 16384:0.960 24576:1.312 32768:1.560 49152:1.780 65536:1.888
+   32K/ 4K d2B: 512:0.000 1024:0.000 2048:0.000 4096:0.010 8192:0.297 16384:0.961 24576:1.314 32768:1.556 49152:1.769 65536:1.887
+   64K/ 4K d1A: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.057 16384:0.249 24576:0.430 32768:0.547 49152:0.681 65536:0.751
+   64K/ 4K d1B: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.057 16384:0.248 24576:0.428 32768:0.545 49152:0.683 65536:0.745
+   64K/ 4K d2A: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.035 16384:0.190 24576:0.360 32768:0.478 49152:0.640 65536:0.728
+   64K/ 4K d2B: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.033 16384:0.191 24576:0.360 32768:0.473 49152:0.637 65536:0.724
+    8K/16K d1A: 512:0.010 1024:0.055 2048:1.979 4096:4.835 8192:4.996 16384:4.998 32768:5.000 65536:5.000
+    8K/16K d1B: 512:0.009 1024:0.054 2048:1.969 4096:4.847 8192:4.993 16384:4.996 32768:5.000 65536:5.000
+    8K/16K d2A: 512:0.000 1024:0.025 2048:0.906 4096:4.679 8192:4.996 16384:5.000 32768:5.000 65536:5.000
+    8K/16K d2B: 512:0.000 1024:0.021 2048:0.882 4096:4.674 8192:4.988 16384:4.998 32768:5.000 65536:5.000
+   32K/16K d1A: 512:0.000 1024:0.000 2048:0.018 4096:0.379 8192:2.607 16384:4.228 32768:4.719 65536:4.864
+   32K/16K d1B: 512:0.000 1024:0.000 2048:0.019 4096:0.381 8192:2.613 16384:4.229 32768:4.713 65536:4.865
+   32K/16K d2A: 512:0.000 1024:0.000 2048:0.000 4096:0.140 8192:1.963 16384:4.117 32768:4.694 65536:4.853
+   32K/16K d2B: 512:0.000 1024:0.000 2048:0.000 4096:0.144 8192:1.969 16384:4.120 32768:4.700 65536:4.856
+   64K/16K d1A: 512:0.000 1024:0.000 2048:0.000 4096:0.017 8192:0.363 16384:1.705 32768:2.893 65536:3.540
+   64K/16K d1B: 512:0.000 1024:0.000 2048:0.000 4096:0.017 8192:0.365 16384:1.697 32768:2.901 65536:3.539
+   64K/16K d2A: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.229 16384:1.448 32768:2.799 65536:3.500
+   64K/16K d2B: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.232 16384:1.441 32768:2.786 65536:3.495
+  128K/16K d1A: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.023 16384:0.278 32768:0.970 65536:1.508
+  128K/16K d1B: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.024 16384:0.275 32768:0.971 65536:1.517
+  128K/16K d2A: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.008 16384:0.205 32768:0.841 65536:1.459
+  128K/16K d2B: 512:0.000 1024:0.000 2048:0.000 4096:0.000 8192:0.007 16384:0.204 32768:0.841 65536:1.460
+    2K/ 4K d1A: 8192:5.000
+    2K/ 4K d1B: 8192:5.000
+    2K/ 4K d2A: 8192:5.000
+    2K/ 4K d2B: 8192:5.000
+
+## 2. Inputs of the per-row U_P rule (F-OQ a_use at the row's larger step cell; R2 a_use at the reference cell), min over draws and panels
+  F-OQ 2K/4K at 8192: a_use min 1.0000 max 1.0000  (>= 0.90: True)
+  F-OQ 8K/4K at 8192: a_use min 0.9393 max 0.9579  (>= 0.90: True)
+  F-OQ 8K/4K at 16384: a_use min 0.9849 max 0.9885  (>= 0.90: True)
+  F-OQ 8K/4K at 32768: a_use min 0.9943 max 0.9946  (>= 0.90: True)
+  F-OQ 32K/16K at 8192: a_use min 0.5846 max 0.6968  (>= 0.90: False)
+  F-OQ 32K/16K at 16384: a_use min 0.9099 max 0.9232  (>= 0.90: True)
+  F-OQ 32K/16K at 32768: a_use min 0.9736 max 0.9761  (>= 0.90: True)
+  R2 2K/4K at 8192: a_use min 1.0000
+  R2 8K/16K at 8192: a_use min 1.0000
+  R2 32K/64K at 8192: a_use min 1.0000
+  (R2 at 32K/32K never run.)
+  0.80 floor at 32K/16K read at 8192: a_use 0.5846-0.6968 -> floor FAILS on calibration draws
+  0.80 floor at 32K/16K read at 16384: a_use 0.9099-0.9232 -> floor passes on calibration draws
+
+## 3. Plateau guard: i*(U) - i*(U/2) <= 0.10 with and without i*(U/2) >= 0.473, every snapshot U of every F-OQ curve (calibration draws)
+    8K/ 4K: 'loaded' on all four views WITHOUT guard at [1024]; WITH guard at []
+   16K/ 4K: 'loaded' on all four views WITHOUT guard at [1024, 2048]; WITH guard at []
+   32K/ 4K: 'loaded' on all four views WITHOUT guard at [1024, 2048, 4096]; WITH guard at []
+   64K/ 4K: 'loaded' on all four views WITHOUT guard at [1024, 2048, 4096, 8192]; WITH guard at []
+    8K/16K: 'loaded' on all four views WITHOUT guard at [1024]; WITH guard at []
+   32K/16K: 'loaded' on all four views WITHOUT guard at [1024, 2048]; WITH guard at []
+   64K/16K: 'loaded' on all four views WITHOUT guard at [1024, 2048, 4096]; WITH guard at []
+  128K/16K: 'loaded' on all four views WITHOUT guard at [1024, 2048, 4096, 8192]; WITH guard at []
+  revision-4 registered run lengths: plateau status with/without guard at U_run (all four views):
+      8K/ 4K at 49152: plateau without guard [True, True, True, True], with guard [True, True, True, True]
+     16K/ 4K at 49152: plateau without guard [False, False, False, False], with guard [False, False, False, False]
+     32K/ 4K at 49152: plateau without guard [False, False, False, False], with guard [False, False, False, False]
+     64K/ 4K at 49152: plateau without guard [False, False, False, False], with guard [False, False, False, False]
+      8K/16K at 32768: plateau without guard [True, True, True, True], with guard [True, True, True, True]
+     32K/16K at 32768: plateau without guard [False, False, False, False], with guard [False, False, False, False]
+     64K/16K at 32768: plateau without guard [False, False, False, False], with guard [False, False, False, False]
+    128K/16K at 32768: plateau without guard [False, False, False, False], with guard [False, False, False, False]
+
+## 4. Saturation pair 1,024 -> 4,096: what the 4,096 side already bounds (i* is non-decreasing; U_L(32K/4K) >= 131,072 > 65,536)
+  i*(32K/4K; 65,536) = 1.8865-1.9433 bits/fact = 15.09-15.55 bits/slot (lower bound on the 4,096 side at any U_L >= 65,536 on these draws)
+  if i*(32K/4K; U_L) = 1.887: SUBPROPORTIONAL (rho < 3.0) needs i*(8K/1K; U_L) > 2.515 bits/fact (a_use > 0.681; 20.1 bits/slot)
+  if i*(32K/4K; U_L) = 2.000: SUBPROPORTIONAL (rho < 3.0) needs i*(8K/1K; U_L) > 2.667 bits/fact (a_use > 0.706; 21.3 bits/slot)
+  if i*(32K/4K; U_L) = 2.120: SUBPROPORTIONAL (rho < 3.0) needs i*(8K/1K; U_L) > 2.827 bits/fact (a_use > 0.731; 22.6 bits/slot)
+  if i*(32K/4K; U_L) = 2.250: SUBPROPORTIONAL (rho < 3.0) needs i*(8K/1K; U_L) > 3.000 bits/fact (a_use > 0.758; 24.0 bits/slot)
+  if i*(32K/4K; U_L) = 2.400: SUBPROPORTIONAL (rho < 3.0) needs i*(8K/1K; U_L) > 3.200 bits/fact (a_use > 0.787; 25.6 bits/slot)
+  bits per slot already held at 4,096 slots, load 4: 16.25-16.47 (65,536 updates; load 2 is at the 5-bit ceiling)
+  bits per slot already held at 4,096 slots, load 2: 9.91-9.92 (65,536 updates; load 2 is at the 5-bit ceiling)
+
+## 5. Efficiency on N2 (8K/4K -> 8K/16K): u_T at i_T = 3.0, log2 interpolation of min over panels, per draw
+  draw 1: u_T(8K/4K) = 4117, u_T(8K/16K) = 2628, ratio 0.638  (lead: 4,116/2,624 and 5,624/3,009 on Panel A only)
+  draw 2: u_T(8K/4K) = 5629, u_T(8K/16K) = 3016, ratio 0.536  (lead: 4,116/2,624 and 5,624/3,009 on Panel A only)
+  N2 draw 1 at U_P=8192: i(8K/4K) A = 4.539; CEILING needs >= 4.5
+  N2 draw 2 at U_P=8192: i(8K/4K) A = 4.373; CEILING needs >= 4.5
+
+## 6. Rates (seconds per update) from raw train.json and the manifest; evaluation seconds per snapshot = (task - train wall) / snapshots
+  D-OQ  N= 16384 F=  8192: wall/upd 0.02339-0.02438  cpu/upd 0.02225-0.02304  task/upd 0.02432-0.02545  eval s/snapshot    4.3-   5.0 (7 snaps)  cpu/wall 0.945-0.951  runs 6
+  D-OQ  N= 65536 F= 32768: wall/upd 0.07123-0.07687  cpu/upd 0.07100-0.07389  task/upd 0.08925-0.09137  eval s/snapshot   33.9-  53.0 (6 snaps)  cpu/wall 0.960-0.997  runs 6
+  F-OQ  N=  4096 F=  2048: wall/upd 0.01236-0.01248  cpu/upd 0.01213-0.01225  task/upd 0.01329-0.01338  eval s/snapshot    7.4-   7.6 (1 snaps)  cpu/wall 0.982-0.982  runs 2
+  F-OQ  N=  4096 F=  8192: wall/upd 0.00936-0.00942  cpu/upd 0.00925-0.00931  task/upd 0.00983-0.00989  eval s/snapshot    3.1-   3.1 (10 snaps)  cpu/wall 0.988-0.988  runs 2
+  F-OQ  N=  4096 F= 16384: wall/upd 0.00932-0.00934  cpu/upd 0.00921-0.00923  task/upd 0.01013-0.01016  eval s/snapshot    5.3-   5.3 (10 snaps)  cpu/wall 0.988-0.988  runs 2
+  F-OQ  N=  4096 F= 32768: wall/upd 0.00932-0.00934  cpu/upd 0.00921-0.00923  task/upd 0.01088-0.01091  eval s/snapshot   10.2-  10.3 (10 snaps)  cpu/wall 0.988-0.988  runs 2
+  F-OQ  N=  4096 F= 65536: wall/upd 0.01103-0.01104  cpu/upd 0.01080-0.01080  task/upd 0.01489-0.01492  eval s/snapshot   25.3-  25.4 (10 snaps)  cpu/wall 0.978-0.979  runs 2
+  F-OQ  N= 16384 F=  8192: wall/upd 0.01524-0.01675  cpu/upd 0.01480-0.01654  task/upd 0.01580-0.01786  eval s/snapshot    4.5-   9.4 (8 snaps)  cpu/wall 0.970-0.988  runs 4
+  F-OQ  N= 16384 F= 32768: wall/upd 0.01541-0.01544  cpu/upd 0.01495-0.01498  task/upd 0.01750-0.01752  eval s/snapshot   17.0-  17.1 (8 snaps)  cpu/wall 0.970-0.970  runs 2
+  F-OQ  N= 16384 F= 65536: wall/upd 0.01862-0.01867  cpu/upd 0.01762-0.01768  task/upd 0.02255-0.02256  eval s/snapshot   31.9-  32.2 (8 snaps)  cpu/wall 0.947-0.947  runs 2
+  F-OQ  N= 16384 F=131072: wall/upd 0.01871-0.01875  cpu/upd 0.01774-0.01779  task/upd 0.02590-0.02594  eval s/snapshot   58.9-  59.0 (8 snaps)  cpu/wall 0.948-0.948  runs 2
+  F-OQ  N= 65536 F= 32768: wall/upd 0.04949-0.05002  cpu/upd 0.04765-0.04803  task/upd 0.05451-0.05567  eval s/snapshot   41.2-  46.3 (1 snaps)  cpu/wall 0.960-0.963  runs 2
+  H8    N=  4096 F=  2048: wall/upd 0.00742-0.00750  cpu/upd 0.00706-0.00716  task/upd 0.00813-0.00827  eval s/snapshot    5.9-   6.3 (1 snaps)  cpu/wall 0.953-0.955  runs 2
+  H8    N= 16384 F=  8192: wall/upd 0.01010-0.01016  cpu/upd 0.00989-0.00995  task/upd 0.01090-0.01104  eval s/snapshot    6.6-   7.2 (1 snaps)  cpu/wall 0.979-0.979  runs 2
+  H8    N= 65536 F= 32768: wall/upd 0.02070-0.02084  cpu/upd 0.01944-0.01958  task/upd 0.02217-0.02219  eval s/snapshot   10.9-  12.2 (1 snaps)  cpu/wall 0.939-0.939  runs 2
+  R2    N=  4096 F=  2048: wall/upd 0.00908-0.00909  cpu/upd 0.00735-0.00736  task/upd 0.01005-0.01012  eval s/snapshot    7.9-   8.5 (1 snaps)  cpu/wall 0.809-0.810  runs 2
+  R2    N= 16384 F=  8192: wall/upd 0.01024-0.01025  cpu/upd 0.00951-0.00951  task/upd 0.01123-0.01129  eval s/snapshot    8.1-   8.6 (1 snaps)  cpu/wall 0.928-0.929  runs 2
+  R2    N= 65536 F= 32768: wall/upd 0.01882-0.01885  cpu/upd 0.01824-0.01826  task/upd 0.02089-0.02097  eval s/snapshot   16.9-  17.4 (1 snaps)  cpu/wall 0.969-0.969  runs 2
+
+## 7. Dense control (D-OQ) at the calibration cells, Panel A a_use by rate (min over draws) at each snapshot
+  8K/16K lr 0.001: 512:0.018 1024:0.028 2048:0.036 4096:0.062 8192:0.087 16384:0.148 32768:0.463
+  8K/16K lr 0.003: 512:0.026 1024:0.040 2048:0.063 4096:0.119 8192:0.432 16384:0.953 32768:0.994
+  8K/16K lr 0.01: 512:0.039 1024:0.067 2048:0.251 4096:0.970 8192:0.998 16384:1.000 32768:1.000
+  32K/64K lr 0.001: 512:0.015 1024:0.006 2048:0.011 4096:0.029 8192:0.039 16384:0.050
+  32K/64K lr 0.003: 512:0.016 1024:0.006 2048:0.013 4096:0.038 8192:0.058 16384:0.138
+  32K/64K lr 0.01: 512:0.021 1024:0.014 2048:0.025 4096:0.059 8192:0.286 16384:0.968

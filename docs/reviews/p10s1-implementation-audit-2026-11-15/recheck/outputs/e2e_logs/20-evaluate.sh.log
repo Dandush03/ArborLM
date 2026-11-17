@@ -1,0 +1,6 @@
+$ sh studies/p10s1/launch/evaluate.sh <scratch>/e2e/registered-run 64606b9e4b55fe53448f1900a43d2fc2bdced6a2
+
+--- stdout
+{"stage": "evaluate", "status": "COMPLETE", "tasks": 36, "manifest": "<scratch>/e2e/registered-run/evaluate/manifest.json", "charged_seconds": 281.9}
+
+--- stderr

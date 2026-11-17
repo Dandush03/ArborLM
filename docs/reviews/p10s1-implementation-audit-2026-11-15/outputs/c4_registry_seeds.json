@@ -1,0 +1,371 @@
+{
+ "registry_default": {
+  "mine": 150,
+  "impl": 150,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 30
+ },
+ "registry_sb1": {
+  "mine": 164,
+  "impl": 164,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 30
+ },
+ "registry_sb12": {
+  "mine": 178,
+  "impl": 178,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 30
+ },
+ "registry_cut_both": {
+  "mine": 140,
+  "impl": 140,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 28
+ },
+ "registry_overload_sb0": {
+  "mine": 190,
+  "impl": 190,
+  "only_mine": [],
+  "only_impl": [],
+  "configs_per_replicate_impl": 38
+ },
+ "registry_overload_sb1": {
+  "mine": 204,
+  "impl": 208,
+  "only_mine": [],
+  "only_impl": [
+   "('SB', 'F-OQ', 65536, 16384, 1, 2111)",
+   "('SB', 'F-OQ', 65536, 16384, 1, 2121)",
+   "('SB', 'F-OQ', 65536, 65536, 1, 2111)",
+   "('SB', 'F-OQ', 65536, 65536, 1, 2121)"
+  ],
+  "configs_per_replicate_impl": 38
+ },
+ "run_length_mismatches": [],
+ "overload_cells_u_p": [
+  [
+   "D-OQ",
+   65536,
+   65536,
+   16384,
+   32768
+  ],
+  [
+   "F-OQ",
+   65536,
+   16384,
+   16384,
+   65536
+  ],
+  [
+   "F-OQ",
+   65536,
+   65536,
+   16384,
+   32768
+  ],
+  [
+   "H8",
+   65536,
+   16384,
+   16384,
+   65536
+  ],
+  [
+   "H8",
+   65536,
+   65536,
+   16384,
+   32768
+  ],
+  [
+   "R2",
+   65536,
+   65536,
+   16384,
+   16384
+  ],
+  [
+   "T-OQ",
+   65536,
+   16384,
+   16384,
+   65536
+  ],
+  [
+   "T-OQ",
+   65536,
+   65536,
+   16384,
+   32768
+  ]
+ ],
+ "calibration": {
+  "runs": 46,
+  "with_overload": 50,
+  "by_item": {
+   "F-OQ|65536": 16,
+   "R2|8192": 6,
+   "F-OQ|8192": 6,
+   "H8|8192": 6,
+   "D-OQ|32768": 6,
+   "D-OQ|16384": 6,
+   "F-OQ|32768": 2,
+   "R2|32768": 2
+  },
+  "load_cells": [
+   [
+    4096,
+    8192
+   ],
+   [
+    4096,
+    16384
+   ],
+   [
+    4096,
+    32768
+   ],
+   [
+    4096,
+    65536
+   ],
+   [
+    16384,
+    8192
+   ],
+   [
+    16384,
+    32768
+   ],
+   [
+    16384,
+    65536
+   ],
+   [
+    16384,
+    131072
+   ]
+  ],
+  "dense_cells": [
+   [
+    8192,
+    16384,
+    0.001,
+    32768
+   ],
+   [
+    8192,
+    16384,
+    0.003,
+    32768
+   ],
+   [
+    8192,
+    16384,
+    0.01,
+    32768
+   ],
+   [
+    32768,
+    65536,
+    0.001,
+    16384
+   ],
+   [
+    32768,
+    65536,
+    0.003,
+    16384
+   ],
+   [
+    32768,
+    65536,
+    0.01,
+    16384
+   ]
+  ]
+ },
+ "load_snapshots": {
+  "4096": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   24576,
+   32768,
+   49152,
+   65536
+  ],
+  "16384": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536
+  ]
+ },
+ "snapshot_mismatches": [],
+ "snapshot_examples": {
+  "P_F-OQ_f2048_n4096_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   24576,
+   32768,
+   49152
+  ],
+  "P_F-OQ_f8192_n4096_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   24576,
+   32768,
+   49152
+  ],
+  "P_F-OQ_f8192_n16384_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   24576,
+   32768
+  ],
+  "P_F-OQ_f8192_n65536_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384
+  ],
+  "P_F-OQ_f32768_n4096_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   24576,
+   32768,
+   49152
+  ],
+  "P_F-OQ_f32768_n16384_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   24576,
+   32768
+  ],
+  "P_F-OQ_f32768_n65536_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384
+  ],
+  "P_R2_f2048_n4096_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192
+  ],
+  "P_R2_f8192_n16384_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192
+  ],
+  "P_R2_f8192_n65536_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192
+  ],
+  "P_R2_f32768_n65536_d1_i2101": [
+   512,
+   1024,
+   2048,
+   4096,
+   8192
+  ]
+ },
+ "me_updates": {
+  "2048": 512,
+  "8192": 2048,
+  "32768": 8192
+ },
+ "g9": {
+  "overlaps_auditor": [],
+  "impl_seed_check_passed": true,
+  "impl_overlaps": [],
+  "namespace_sizes_mine": {
+   "registered": 160,
+   "calibration": 64,
+   "rehearsal": 32,
+   "init": 11,
+   "derived": 55,
+   "test": 999
+  },
+  "namespace_sizes_impl": {
+   "registered": 160,
+   "calibration": 64,
+   "rehearsal": 32,
+   "init": 11,
+   "derived_init": 55,
+   "test": 999
+  },
+  "namespaces_equal": {
+   "registered": true,
+   "calibration": true,
+   "rehearsal": true,
+   "init": true,
+   "derived_init": true,
+   "test": true
+  },
+  "config_files_scanned": [
+   "e0_cpu_smoke.toml",
+   "p1_ram_screen.toml",
+   "p2_optimization_followup.toml",
+   "p3_longer_training.toml",
+   "p4_frozen_capacity.toml",
+   "p5_hierarchy_ablation.toml",
+   "p8_locality_training.toml"
+  ],
+  "seed_key_values": 45
+ },
+ "check_seed_set": {
+  "calibration:p10s1-draw-1": "refused",
+  "rehearsal:p10s1-draw-3": "refused",
+  "rehearsal:p10s1-cal-1": "refused",
+  "calibration:p10s1-rehearsal": "refused",
+  "registered:p10s1-test-0": "refused",
+  "registered:p10s1-cal-2": "refused",
+  "registered:p10s1-draw-6": "refused"
+ }
+}

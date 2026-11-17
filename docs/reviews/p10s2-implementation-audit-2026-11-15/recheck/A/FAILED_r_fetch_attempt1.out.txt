@@ -1,0 +1,40 @@
+[manifest] build_manifest(): 29 files; every model file carries its constant: True
+[validate build_manifest()] ACCEPTED (29)
+[manifest: small file digest missing] refused: FetchRefused: refused: 'teacher_a/config.json' has a git-blob SHA-1 other than the pinned one (or none): the digest is checked against the constant in reviewed code
+[manifest: small file digest wrong] refused: FetchRefused: refused: 'student/tokenizer.json' has a git-blob SHA-1 other than the pinned one (or none): the digest is checked against the constant in reviewed code
+[manifest: large file SHA-256 removed, arbitrary git_sha1] refused: FetchRefused: refused: 'teacher_a/pytorch_model.bin' has a SHA-256 other than the pinned one (or none): the digest is checked against the constant in reviewed code
+[manifest: unapproved file appended] refused: FetchRefused: refused: 'student/pytorch_model.bin' is not an approved download (ADR-0022 section 14.1, 18)
+[manifest: six of the seven Tatoeba files] refused: FetchRefused: refused: the seven Tatoeba files are fetched in one session; missing ['tatoeba/fra_eng_links.tsv.bz2']
+[manifest: teacher A URL with resolve/main] refused: FetchRefused: refused: 'teacher_a/pytorch_model.bin' has a URL other than the approved one
+[manifest: every entry relabelled kind=tatoeba (the session reads kind from the constants, not the manifest)] ACCEPTED (29)
+[urls] every model URL is resolve/<40-hex pinned revision>/<file>: True; every URL https: True
+[session] files fetched 29; ledger row 'started' for the very file before each download call: True (29 calls); rows now 29, all 'completed': True; running total of the last row 1447 == sum of bytes 1447
+[session] Tatoeba digests recorded at first download: 7; fetch_record.json written: True
+[second session into the same (non-fresh) folder] refused: FetchRefused: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scr
+[destination outside data/] refused: FetchRefused: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scr
+[session where teacher_a/config.json arrives with auto_map and _attn_implementation_internal] refused: FetchRefused: refused: teacher_a/config.json has 117 bytes, expected 57
+   after the refusal: tampered file on disk: False; .part left: False; last ledger row: teacher_a/config.json / failed: FetchRefused / bytes 117
+[datagen.verify_downloads after config.json was replaced on disk] refused: FetchRefused: refused: teacher_b/config.json has git-sha1 0ddc369335ca5ac64601ca3eddd2a38eb2dcdaa9, not the constant a27000322567fd8ff68b4638d60cdd2cf3476879 in reviewed code
+[fetch_guard.read_verified_bytes of the replaced config.json] refused: FetchRefused: refused: teacher_b/config.json has git-sha1 0ddc369335ca5ac64601ca3eddd2a38eb2dcdaa9, not the constant a27000322567fd8ff68b4638d60cdd2cf3476879 in reviewed code
+[session with the ledger at 29.999 GB] refused: FetchRefused: refused: teacher_a/pytorch_model.bin has 0 bytes, expected 123
+   download calls made before the refusal: 1; ledger rows after: 2
+[ledger_begin of 1 byte at 29,999,999,999] refused: FetchRefused: refused: 1 bytes on a running total of 29999999999 would reach the 30 GB limit of the standing permission (30000000000); a fetch that would take the total there returns t
+[fallback manifest with a free-text decision] refused: FetchRefused: refused: no human decision invoking the fallback is recorded (it must be an object with exactly the keys 'path' and 'commit' naming a committed record)
+[fallback decision naming an uncommitted record] refused: FetchRefused: refused: docs/decision.md does not exist at commit 0000000000000000000000000000000000000000: the fallback decision does not name a committed record
+[fallback] manifest names: ['fallback/config.json', 'fallback/generation_config.json', 'fallback/pytorch_model.bin', 'fallback/source.spm', 'fallback/target.spm', 'fallback/tokenizer_config.json', 'fallback/vocab.json', 'tatoeba/eng_spa_links.tsv.bz2', 'tatoeba/spa_sentences.tsv.bz2']
+[fallback manifest with a committed decision] ACCEPTED (9)
+[fallback manifest that also lists a primary Tatoeba file] refused: FetchRefused: refused: a fallback manifest lists the fallback rows only; the primary files are frozen and are not listed again
+[fallback session into the primary folder] refused: FetchRefused: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scr
+[fallback] fallback session into a fresh folder: primary Tatoeba files unchanged: True
+[tatoeba record] first use writes it: status 'written: commit it before the freeze'; files 7
+[second use while the record is not committed] refused: FetchRefused: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scr
+[use after commit] ACCEPTED (verified against the committed record)
+[use after one Tatoeba file changed on disk] refused: FetchRefused: refused: tatoeba/eng_sentences.tsv.bz2 differs from the frozen Tatoeba record /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-con
+[tatoeba] a second primary session (a later weekly export) into another fresh folder is ACCEPTED by fetch_session (nothing in the ledger stops it)
+[the committed record against that second folder] refused: FetchRefused: refused: tatoeba/eng_sentences.tsv.bz2 differs from the frozen Tatoeba record /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-con
+[load_pickle_weights(malicious pickle, its own digest)] refused: UnpicklingError: Weights only load failed. In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with
+[load_pickle_weights(malicious pickle, a wrong digest)] refused: FetchRefused: refused: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scr
+[requirements] pinned file at fc08681: unhashed pins = ['transformers==4.57.1', 'tokenizers==0.22.1', 'safetensors==0.6.2', 'huggingface-hub==0.35.3', 'sentencepiece==0.2.1', 'numpy==2.3.3', 'sacremoses==0.1.1', 'sacrebleu==2.5.1']
+[requirements] a uv-compile-style hashed file: unhashed = []
+[requirements] hashed file plus '--extra-index-url http://...', '-e ./local_pkg', '-r other.txt' lines: unhashed = [] (option lines are skipped by the check)
+[tls] make_ssl_context: verify_mode CERT_REQUIRED True, check_hostname True; CA certificates loaded into the default context: {'x509': 123, 'crl': 0, 'x509_ca': 123}; default cafile /private/etc/ssl/cert.pem exists=True; capath /private/etc/ssl/certs; OpenSSL OpenSSL 3.5.8 25 Aug 2026

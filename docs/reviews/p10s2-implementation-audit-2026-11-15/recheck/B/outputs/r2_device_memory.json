@@ -1,0 +1,131 @@
+{
+ "B1 after: calibration.cpu_snapshot": {
+  "score": 0.10850317154793361,
+  "snapshot_device": "cpu",
+  "train_device": "mps",
+  "train_status": "completed"
+ },
+ "B1 before: copy.deepcopy": {
+  "score_error": "RuntimeError: Tensor for argument #1 'mat1' is on CPU, but expected it to be on GPU (while checking arguments for mm)",
+  "snapshot_device": "mps:0",
+  "train_device": "mps",
+  "train_status": "completed"
+ },
+ "B1 run_calibration on MPS (stand-in, layers [0,1], 4 updates, snapshot 2)": {
+  "device": "mps",
+  "has_selection_at_snapshot": true,
+  "ok": true,
+  "seconds": 2.1648595000151545,
+  "snapshot_scores_finite": true
+ },
+ "M6 guard below the sampled memory": {
+  "exception": "MemoryLimitExceeded: memory limit: 1.04 GiB sampled, limit 0.54 GiB",
+  "seconds": 0.11773137497948483,
+  "stopped": true
+ },
+ "M6 process_memory_bytes with a 1 GiB MPS tensor": {
+  "after": {
+   "max": 1114308608,
+   "mps_allocated": 1073741824,
+   "mps_driver": 1114308608,
+   "rss_peak": 594968576
+  },
+  "before": {
+   "max": 594083840,
+   "mps_allocated": 0,
+   "mps_driver": 40566784,
+   "rss_peak": 594083840
+  },
+  "max_rose_gib": 0.4844970703125,
+  "rss_rose_gib": 0.000823974609375
+ },
+ "M8": {
+  "G4 cpu_by_freeze on a CPU world": {
+   "mps_agreement": {
+    "ok": true,
+    "status": "NOT APPLICABLE \u2014 TRAINING ON CPU BY THE FREEZE"
+   },
+   "ok": true
+  },
+  "G4 require_mps on a CPU world": {
+   "mps_agreement": {
+    "ok": false,
+    "status": "the MPS comparison is mandatory in a registered run and this process is on cpu: no silent fallback"
+   },
+   "ok": false
+  },
+  "select_device('auto')": "ValueError: unknown device 'auto'",
+  "select_device('cuda')": "ValueError: unknown device 'cuda'",
+  "select_device('mps') with MPS reported unavailable": "RuntimeError: device mps requested but unavailable",
+  "select_device('mps') with PYTORCH_ENABLE_MPS_FALLBACK=1": "RuntimeError: PYTORCH_ENABLE_MPS_FALLBACK is set: an MPS fallback must be an error (gate G4)"
+ },
+ "f_state_leaks": {
+  "scoring_environment": {
+   "after": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": true,
+    "threads": 3,
+    "warn_only": true
+   },
+   "before": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": true,
+    "threads": 3,
+    "warn_only": true
+   },
+   "inside": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": true,
+    "threads": 6,
+    "warn_only": false
+   },
+   "restored": true
+  },
+  "stage_timing": {
+   "after": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": false,
+    "threads": 3,
+    "warn_only": false
+   },
+   "before": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": false,
+    "threads": 3,
+    "warn_only": false
+   },
+   "restored": true
+  },
+  "train_arm on MPS with deterministic on, warn_only on": {
+   "after": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": true,
+    "threads": 3,
+    "warn_only": false
+   },
+   "before": {
+    "default_device": "cpu",
+    "default_dtype": "torch.float32",
+    "det": true,
+    "threads": 3,
+    "warn_only": true
+   },
+   "restored": false
+  }
+ },
+ "mps_available": true,
+ "seed_record_modes": [
+  "test"
+ ],
+ "seed_record_range": [
+  229001,
+  229961
+ ],
+ "torch": "2.8.0"
+}

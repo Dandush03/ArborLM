@@ -1,0 +1,68 @@
+{
+ "q1:full": {
+  "train_rounds": 29425.400948536408,
+  "train_fifo_pool_order": 29218.2920768006,
+  "train_lpt": 28861.868927089963,
+  "train_sum_over_6": 28833.769326715654,
+  "eval_rounds": 860.3949878177373,
+  "eval_fifo_pool_order": 856.5417484417558,
+  "eval_sum_over_6": 850.7647435960826,
+  "fifo_over_rounds_train": 0.9929615616080124,
+  "fifo_over_rounds_eval": 0.9955215459985945
+ },
+ "q1:cut3": {
+  "train_rounds": 20390.023020426335,
+  "train_fifo_pool_order": 20145.526862828643,
+  "train_lpt": 19911.2522018039,
+  "train_sum_over_6": 19890.690239239775,
+  "eval_rounds": 633.9560454871971,
+  "eval_fifo_pool_order": 624.9481351951836,
+  "eval_sum_over_6": 619.814352071553,
+  "fifo_over_rounds_train": 0.9880090298400958,
+  "fifo_over_rounds_eval": 0.9857909545052277
+ },
+ "wx:A5-D": {
+  "train_rounds": 2937.172350890469,
+  "train_fifo_pool_order": 2937.172350890469,
+  "train_lpt": 2461.4041089960374,
+  "train_sum_over_6": 2447.6436257420573,
+  "eval_rounds": 96.37188633182086,
+  "eval_fifo_pool_order": 96.37188633182086,
+  "eval_sum_over_6": 80.30990527651738,
+  "fifo_over_rounds_train": 1.0,
+  "fifo_over_rounds_eval": 1.0
+ },
+ "wx:A1": {
+  "train_rounds": 3826.532096412382,
+  "train_fifo_pool_order": 3826.532096412382,
+  "train_lpt": 3361.026659080875,
+  "train_sum_over_6": 3188.7767470103186,
+  "eval_rounds": 94.53415382991079,
+  "eval_fifo_pool_order": 94.53415382991079,
+  "eval_sum_over_6": 78.77846152492566,
+  "fifo_over_rounds_train": 1.0,
+  "fifo_over_rounds_eval": 1.0
+ },
+ "probe:A5-D": {
+  "train_rounds": 11748.641088332166,
+  "train_fifo_pool_order": 11748.641088332166,
+  "train_lpt": 11748.641088332166,
+  "train_sum_over_6": 11291.123545996234,
+  "eval_rounds": 76.19524766597897,
+  "eval_fifo_pool_order": 76.19524766597897,
+  "eval_sum_over_6": 65.91295933298534,
+  "fifo_over_rounds_train": 1.0,
+  "fifo_over_rounds_eval": 1.0
+ },
+ "probe:A1": {
+  "train_rounds": 19730.891646674718,
+  "train_fifo_pool_order": 19730.891646674718,
+  "train_lpt": 19730.891646674718,
+  "train_sum_over_6": 15282.24882516751,
+  "eval_rounds": 87.71484745794442,
+  "eval_fifo_pool_order": 87.71484745794442,
+  "eval_sum_over_6": 71.67275922896806,
+  "fifo_over_rounds_train": 1.0,
+  "fifo_over_rounds_eval": 1.0
+ }
+}

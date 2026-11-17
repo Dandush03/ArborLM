@@ -1,0 +1,47 @@
+schema_version = 1
+experiment_family = "P2_OPTIMIZATION_FOLLOWUP"
+spec_reference = "docs/decisions/ADR-0007-controlled-optimization-followup.md"
+parent_spec_reference = "docs/decisions/ADR-0005-ram-pilot-spec.md"
+backbone_seeds = [101, 102, 103]
+memory_seeds = [201, 202, 203]
+order_seeds = [301, 302, 303]
+cell_order = "backbone-order-control-first-memory-ascending"
+
+[data]
+selection = "arborlm-pilot-v1"
+validation_rank_interval = [512, 1024]
+train_rank_interval = [0, 2048]
+train_ranked_chunks = 4096
+batch_order = "torch-cpu-randperm-2048"
+
+[model]
+architecture = "adr0005-small-learned-tree"
+control = "memory-bypassed-and-frozen-throughout"
+control_memory_seed = 201
+
+[train]
+execution = "adr0005-cpu-float32-adamw"
+batch_size = 8
+steps = 256
+checkpoint_steps = [128, 256]
+eval_steps = [0, 256]
+
+[diagnostic]
+conditions = ["enabled", "disabled", "values_permuted", "joint_within_branch"]
+value_seed_offset = 20000
+joint_seed_offset = 30000
+joint_absolute_tolerance = 0.000001
+joint_relative_tolerance = 0.0
+
+[limits]
+cell_seconds = 300
+suite_seconds = 1800
+rss_bytes = 2147483648
+poll_seconds = 0.1
+
+[analysis]
+mean_dependence_threshold = 0.005
+consistent_sign_cells = 22
+heterogeneous_min_cells = 3
+factor_sensitivity_threshold = 0.005
+additive_identity_absolute_tolerance = 0.000000000001

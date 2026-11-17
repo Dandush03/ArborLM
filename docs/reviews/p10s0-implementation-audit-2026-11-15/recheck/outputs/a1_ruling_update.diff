@@ -1,0 +1,18 @@
+174,175c174,182
+<     # H20-A: supported if A0 is not RELIABLE at 2K/4K or at 8K/16K (literal text)
+<     out["H20-A"] = "supported" if any(a0[ct] != "RELIABLE" for ct in CORE) else "not supported"
+---
+>     # H20-A (lead's ruling on m4, ADR-0020 addendum): supported if A0 is UNRELIABLE or FAILS at 2K/4K or at 8K/16K;
+>     # not supported if A0 is RELIABLE at both; not read otherwise  [re-check 2026-11-15: updated for the ruling]
+>     vals = [a0.get(ct) for ct in CORE]
+>     if any(v in ("UNRELIABLE", "FAILS") for v in vals):
+>         out["H20-A"] = "supported"
+>     elif all(v == "RELIABLE" for v in vals):
+>         out["H20-A"] = "not supported"
+>     else:
+>         out["H20-A"] = "not read"
+187c194,195
+<     out["H20-O"] = "supported" if ovl == "QUALIFIED" else ("not tested" if ovl in ("NOT RUN — NO TARGET INJECTION", "NO CANDIDATE") else "not supported")
+---
+>     # H20-O (lead's ruling, item 10): "not read" when OVERLOAD is NOT_EVALUATED; "not supported" when NOT QUALIFIED  [re-check: updated]
+>     out["H20-O"] = "supported" if ovl == "QUALIFIED" else ("not tested" if ovl in ("NOT RUN — NO TARGET INJECTION", "NO CANDIDATE") else "not read" if ovl == "NOT_EVALUATED" else "not supported")

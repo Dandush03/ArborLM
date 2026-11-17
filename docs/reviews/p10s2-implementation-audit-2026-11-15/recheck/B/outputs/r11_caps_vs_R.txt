@@ -1,0 +1,8 @@
+{"rates": "as measured", "config": "n4-U2000", "sum_of_stage_caps_s": 10705.689, "two_R_s": 10704.553, "excess_s": 1.136, "two_x_overhead_s": 1.136}
+{"rates": "as measured", "config": "n3-U2000", "sum_of_stage_caps_s": 8063.361, "two_R_s": 8062.225, "excess_s": 1.136, "two_x_overhead_s": 1.136}
+{"rates": "as measured", "config": "n4-U1000", "sum_of_stage_caps_s": 5741.069, "two_R_s": 5739.933, "excess_s": 1.136, "two_x_overhead_s": 1.136}
+{"rates": "as measured", "config": "n3-U1000", "sum_of_stage_caps_s": 4339.896, "two_R_s": 4338.76, "excess_s": 1.136, "two_x_overhead_s": 1.136}
+{"rates": "start-up 60 s", "config": "n4-U2000", "sum_of_stage_caps_s": 36618.076, "two_R_s": 36498.076, "excess_s": 120.0, "two_x_overhead_s": 120.0}
+{"rates": "start-up 60 s", "config": "n3-U2000", "sum_of_stage_caps_s": 27557.083, "two_R_s": 27437.083, "excess_s": 120.0, "two_x_overhead_s": 120.0}
+{"rates": "start-up 60 s", "config": "n4-U1000", "sum_of_stage_caps_s": 31653.456, "two_R_s": 31533.456, "excess_s": 120.0, "two_x_overhead_s": 120.0}
+{"rates": "start-up 60 s", "config": "n3-U1000", "sum_of_stage_caps_s": 23833.618, "two_R_s": 23713.618, "excess_s": 120.0, "two_x_overhead_s": 120.0}

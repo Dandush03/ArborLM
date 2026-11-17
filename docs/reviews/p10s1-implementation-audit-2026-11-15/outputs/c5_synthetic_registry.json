@@ -1,0 +1,2726 @@
+{
+ "scenarios": [
+  {
+   "scenario": "capacity",
+   "diffs": [],
+   "capacity": "CAPACITY-POSITIVE",
+   "efficiency": "EFFICIENCY-POSITIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_SUPPORTED",
+    "F-OQ-IVF": "CAPACITY_SUPPORTED",
+    "T-OQ": "CAPACITY_SUPPORTED",
+    "H8": "CAPACITY_SUPPORTED"
+   },
+   "dense": {
+    "F-OQ": "DENSE MATCHES",
+    "F-OQ-IVF": "DENSE MATCHES",
+    "T-OQ": "DENSE MATCHES",
+    "H8": "DENSE MATCHES"
+   },
+   "eff_arm": {
+    "F-OQ": "EFFICIENCY_SUPPORTED",
+    "T-OQ": "EFFICIENCY_SUPPORTED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "dense_ahead",
+   "diffs": [],
+   "capacity": "CAPACITY-POSITIVE",
+   "efficiency": "EFFICIENCY-POSITIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_SUPPORTED",
+    "F-OQ-IVF": "CAPACITY_SUPPORTED",
+    "T-OQ": "CAPACITY_SUPPORTED",
+    "H8": "CAPACITY_SUPPORTED"
+   },
+   "dense": {
+    "F-OQ": "DENSE MATCHES",
+    "F-OQ-IVF": "DENSE MATCHES",
+    "T-OQ": "DENSE AHEAD",
+    "H8": "DENSE MATCHES"
+   },
+   "eff_arm": {
+    "F-OQ": "EFFICIENCY_SUPPORTED",
+    "T-OQ": "EFFICIENCY_SUPPORTED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "saturated",
+   "diffs": [],
+   "capacity": "CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET",
+   "efficiency": "EFFICIENCY-NEGATIVE",
+   "arm_classes": {
+    "F-OQ": "NOT_TESTED_BY_LOAD",
+    "F-OQ-IVF": "NOT_TESTED_BY_LOAD",
+    "T-OQ": "NOT_TESTED_BY_LOAD",
+    "H8": "NOT_TESTED_BY_LOAD"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "EFFICIENCY_NOT_SUPPORTED",
+    "T-OQ": "EFFICIENCY_NOT_SUPPORTED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "slow_large",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "CAPACITY_ONE_TRANSITION",
+    "F-OQ-IVF": "CAPACITY_ONE_TRANSITION",
+    "T-OQ": "CAPACITY_ONE_TRANSITION",
+    "H8": "CAPACITY_ONE_TRANSITION"
+   },
+   "dense": {
+    "F-OQ": "DENSE MATCHES",
+    "F-OQ-IVF": "DENSE MATCHES",
+    "T-OQ": "DENSE MATCHES",
+    "H8": "DENSE MATCHES"
+   },
+   "eff_arm": {
+    "F-OQ": "EFFICIENCY_ONE_TRANSITION",
+    "T-OQ": "EFFICIENCY_ONE_TRANSITION"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random0",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random1",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random2",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random3",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random4",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random5",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random6",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random7",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random8",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random9",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random10",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random11",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random12",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random13",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random14",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random15",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random16",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random17",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random18",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random19",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random20",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random21",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random22",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  },
+  {
+   "scenario": "random23",
+   "diffs": [],
+   "capacity": "CAPACITY-INCONCLUSIVE",
+   "efficiency": "EFFICIENCY-INCONCLUSIVE",
+   "arm_classes": {
+    "F-OQ": "INTERMEDIATE",
+    "F-OQ-IVF": "INTERMEDIATE",
+    "T-OQ": "INTERMEDIATE",
+    "H8": "INTERMEDIATE"
+   },
+   "dense": {
+    "F-OQ": "DENSE NOT READ",
+    "F-OQ-IVF": "DENSE NOT READ",
+    "T-OQ": "DENSE NOT READ",
+    "H8": "DENSE NOT READ"
+   },
+   "eff_arm": {
+    "F-OQ": "NOT_EVALUATED",
+    "T-OQ": "NOT_EVALUATED"
+   },
+   "report": "written",
+   "mc_dense": {
+    "dense|F-OQ|8K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|F-OQ|32K/16K": [
+     "OK",
+     32768,
+     8192,
+     3.571
+    ],
+    "dense|F-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     3.81
+    ],
+    "dense|T-OQ|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|T-OQ|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     41.67
+    ],
+    "dense|T-OQ|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     67.155
+    ],
+    "dense|H8|8K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|8K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ],
+    "dense|H8|32K/16K": [
+     "MC-SHORT",
+     null,
+     null,
+     115.464
+    ],
+    "dense|H8|32K/64K": [
+     "MC-SHORT",
+     null,
+     null,
+     134.651
+    ]
+   }
+  }
+ ],
+ "outcome_coverage": {
+  "('CAPACITY-POSITIVE', 'EFFICIENCY-POSITIVE')": 2,
+  "('CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET', 'EFFICIENCY-NEGATIVE')": 1,
+  "('CAPACITY-INCONCLUSIVE', 'EFFICIENCY-INCONCLUSIVE')": 25
+ },
+ "total_diffs": 0
+}

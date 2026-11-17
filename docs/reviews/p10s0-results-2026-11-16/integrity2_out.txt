@@ -1,0 +1,18 @@
+gates.json pass/ok flags: 72 false: []
+gates top-level keys: ['a5d_provenance', 'checks', 'dry', 'environment', 'g10', 'g10_passed', 'g1_by_draw', 'g1_passed', 'g2_by_draw', 'g2_passed', 'g4_defects', 'g4_passed', 'g5', 'g5_passed', 'g6', 'g6_passed', 'g9', 'g9_passed', 'harness_errors', 'identity', 'kind', 'profile', 'schema', 'seed_set', 'study', 'timing']
+evaluations 396 G5 failures 0 snapshot hash mismatches []
+p10s0-draw-1 base 200001 G1 True layout ok
+p10s0-draw-10 base 200901 G1 True layout ok
+p10s0-draw-11 base 201001 G1 True layout ok
+p10s0-draw-12 base 201101 G1 True layout ok
+p10s0-draw-13 base 201201 G1 True layout ok
+p10s0-draw-2 base 200101 G1 True layout ok
+p10s0-draw-3 base 200201 G1 True layout ok
+p10s0-draw-4 base 200301 G1 True layout ok
+p10s0-draw-5 base 200401 G1 True layout ok
+p10s0-draw-6 base 200501 G1 True layout ok
+p10s0-draw-7 base 200601 G1 True layout ok
+p10s0-draw-8 base 200701 G1 True layout ok
+p10s0-draw-9 base 200801 G1 True layout ok
+p10s0-reserve-1 base 201301 G1 True layout ok
+p10s0-reserve-2 base 201401 G1 True layout ok

@@ -1,0 +1,24 @@
+ADR: bases [220001, 220101, 220201, 220301]; offsets [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; 2209xx seeds named in section 9: [220901, 220902, 220903, 220904, 220905, 220906, 220907, 220908, 220909, 220910]; 220911 in the addendum: True; 220912 ruling: True; G9 list ('220901', '220912'); 220906 analysis-only ruling: False
+config partition_streams [220902, 220903, 220904, 220905, 220906, 220907, 220908, 220909, 220910, 220911, 220912] == 220902..220912: True
+stream names in order: [('q_split', 220902), ('source_sample', 220903), ('ablation_subsample', 220904), ('gen_windows', 220905), ('bootstrap', 220906), ('seen_items', 220907), ('timing_items', 220908), ('tokenizer_record', 220909), ('random_id_sequences', 220910), ('c1_pairing', 220911), ('equivalence_injection', 220912)]
+registered-run set == ADR (44): True
+registered-data set == 220901-220912 minus 220906: True
+registered-analysis set == {220906}: True
+planned_seeds('registered-data') == 11 data seeds: True
+planned_seeds('registered-run') covers all 4 replicates incl. +10: True
+listed_registered_seeds == 44 + 220901..220912: True
+S2 seeds (all modes) in a foreign range: []
+220911, 220912 outside calibration/rehearsal/test ranges and in 220001-228999: True
+[G9 empty] seed_gate([], [], stage_mode='registered-run') ok = False; problems = ['the seed record is empty: a stage that drew nothing cannot pass G9', 'no planned seeds were given: the gate needs the planned set of every replicate of the stages run']
+[G9 empty, legacy call without stage_mode] ok = True (the weaker form is kept in core for callers without a stage)
+[G9 wrong mode label] a 'test' use next to a registered one, strict: ok = False; first problem: ["recorded[stand-in inside a registered process]: seed 229001 carries mode 'test', not the stage's 'registered-run'"]
+[G9 220910 for the injection vector] passes as a seed (purpose is not checked against the listed use): ok = True
+[G9 220906 in the data step] ok = False; ["recorded[bootstrap]: 220906 in mode 'registered-data' is drawn in the analysis stage only", 'recorded seeds that are not planned: [220906]']
+[G9 data step, all eleven recorded once each] ok = True
+[G9 data step, one of the eleven missing, allow_partial False as datagen calls it] ok = False; ['planned seeds never recorded: [220912]']
+[+10 code seed] recorded uses after SeedPlan('test',0).code_seed(): [(229011, 'code-hash')]
+[refusal] bootstrap in registered-data refused before any generator is made: partition-side stream 'bootstrap' is not drawn in mode 'registered-data'
+[refusal] 220901 in registered-run: refused
+[refusal] 221001 in registered-run: refused
+[refusal] 220001 in registered-data: refused
+[G9 source check] ok = True; problems = []

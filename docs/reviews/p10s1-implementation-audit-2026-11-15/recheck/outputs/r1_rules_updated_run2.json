@@ -1,0 +1,187 @@
+{
+ "capacity_panel": {
+  "trials": 60000,
+  "mismatches": 0,
+  "first_mismatches": [],
+  "coverage": {
+   "DEPENDENCE_FAILED": 43993,
+   "NOT_EVALUATED": 3039,
+   "CAPACITY": 2026,
+   "UNRESOLVED": 3270,
+   "GAIN WITHIN BUDGET ONLY": 2542,
+   "NULL": 1334,
+   "REVERSED": 3380,
+   "FLAT, NOT LOADED": 5,
+   "BEHIND WITHIN BUDGET": 335,
+   "CEILING": 76
+  },
+  "cases_where_the_ruling_g_changed_the_verdict_vs_old_reads": 20866
+ },
+ "dense_label": {
+  "trials": 30000,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "DENSE AHEAD": 27910,
+   "DENSE NOT ESTABLISHED AT MATCHED COMPUTE": 1534,
+   "DENSE MATCHES": 556
+  },
+  "DENSE_MATCHES_or_BEATS_with_a_not_established_pair": 0
+ },
+ "dense_label_favourable_pass": {
+  "trials": 30000,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "DENSE NOT ESTABLISHED AT MATCHED COMPUTE": 18260,
+   "DENSE MATCHES": 11002,
+   "BEATS DENSE": 119,
+   "DENSE AHEAD": 619
+  },
+  "DENSE_MATCHES_or_BEATS_with_a_not_established_pair": 0
+ },
+ "outcome": {
+  "cases": 296352,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "CAPACITY-INCONCLUSIVE": 49543,
+   "S1-ENGINEERING-FAILURE": 74088,
+   "S1-INCOMPLETE": 74088,
+   "CAPACITY NOT TESTED \u2014 NO LOADED CELL WITHIN BUDGET": 49543,
+   "CAPACITY-NEGATIVE": 10658,
+   "CAPACITY-POSITIVE": 38432
+  },
+  "bracket_missing": 0,
+  "bracket_where_not_needed": 0,
+  "storage_half_printed_without_an_established_eligible_arm": 0,
+  "storage_half_missing_where_eligible": 0,
+  "negative_with_F-OQ_and_T-OQ_unevaluated_and_none_supported": 0,
+  "not_tested_without_naming_the_transition": 0
+ },
+ "dense_faster_and_efficiency_outcome": {
+  "trials": 40000,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "DENSE SPEED UNDECIDED": 17340,
+   "DENSE NOT FASTER": 15016,
+   "DENSE FASTER": 5627,
+   "DENSE NOT READ": 2017
+  },
+  "efficiency_outcome_mismatches": 0,
+  "positive_without_the_label_in_its_bracket": 0
+ },
+ "study_b": {
+  "trials": 20000,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "NOT ESTABLISHED": 15993,
+   "KNOWLEDGE DOES NOT SCALE": 4007
+  },
+  "predecessor_M1_case_a_use_0.99_everywhere": "KNOWLEDGE SCALES WITH MEMORY"
+ },
+ "study_b_favourable_pass": {
+  "trials": 20000,
+  "mismatches": 0,
+  "first": [],
+  "coverage": {
+   "NOT ESTABLISHED": 20000
+  },
+  "predecessor_M1_case_a_use_0.99_everywhere": "KNOWLEDGE SCALES WITH MEMORY"
+ },
+ "tie_walk": {
+  "trials": 50000,
+  "mismatches": 0,
+  "first": [],
+  "decided_at": {
+   "U_P": 16111,
+   "1024": 4244,
+   "smaller rate": 15377,
+   "512": 3632,
+   "2048": 4970,
+   "4096": 5666
+  },
+  "contenders_at_U_P": {
+   "1": 16111,
+   "2": 22131,
+   "3": 11758
+  }
+ },
+ "unchanged": {
+  "step_class": {
+   "multisets": 3003,
+   "mismatches": 0,
+   "coverage": {
+    "NOT_EVALUATED": 286,
+    "DEPENDENCE_FAILED": 275,
+    "NOT REPLICATED": 264,
+    "MIXED": 2070,
+    "NOT LOADED": 51,
+    "REVERSED": 11,
+    "NO GAIN": 40,
+    "CAPACITY STEP": 1,
+    "GAIN WITHIN BUDGET": 5
+   }
+  },
+  "arm_class": {
+   "cases": 13122,
+   "mismatches": 0,
+   "coverage": {
+    "NOT_EVALUATED": 322,
+    "DEPENDENCE_FAILED": 4862,
+    "INTERMEDIATE": 3266,
+    "CAPACITY_ONE_TRANSITION": 3161,
+    "NOT_TESTED_BY_LOAD": 190,
+    "CAPACITY_SUPPORTED": 169,
+    "CAPACITY_NOT_SUPPORTED": 1152
+   }
+  },
+  "efficiency": {
+   "trials": 40000,
+   "u_t_mismatches": 0,
+   "verdict_mismatches": 0,
+   "first": [],
+   "coverage_random": {
+    "SLOWER": 1790,
+    "NOT_ASSESSED": 31384,
+    "NOT_EVALUATED": 1171,
+    "DEPENDENCE_FAILED": 2434,
+    "FASTER IN UPDATES ONLY": 1767,
+    "REACHED ONLY BY THE LARGER": 1173,
+    "SAME": 249,
+    "FASTER": 32
+   },
+   "grid_cases": 2646,
+   "grid_mismatches": 0,
+   "grid_first": [],
+   "grid_coverage": {
+    "SAME": 120,
+    "SLOWER": 552,
+    "NOT_ASSESSED": 1404,
+    "FASTER": 432,
+    "FASTER IN UPDATES ONLY": 56,
+    "REACHED ONLY BY THE LARGER": 82
+   }
+  },
+  "efficiency_classes": {
+   "step_class_mismatches": 0,
+   "arm_class_mismatches": 0,
+   "arm_coverage": {
+    "NOT_EVALUATED": 496,
+    "DEPENDENCE_FAILED": 1575,
+    "EFFICIENCY_SUPPORTED": 121,
+    "EFFICIENCY_ONE_TRANSITION": 880,
+    "INTERMEDIATE": 624,
+    "EFFICIENCY_NOT_SUPPORTED": 400
+   },
+   "outcome_mismatches": 0,
+   "outcome_coverage": {
+    "EFFICIENCY-INCONCLUSIVE": 216,
+    "EFFICIENCY-NEGATIVE": 40,
+    "EFFICIENCY-POSITIVE": 68
+   }
+  }
+ }
+}

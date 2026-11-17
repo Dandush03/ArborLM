@@ -1,0 +1,30 @@
+.............F.......................................................... [ 48%]
+........................................................................ [ 96%]
+......                                                                   [100%]
+=================================== FAILURES ===================================
+___ test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched ____
+
+    def test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched() -> None:
+        status = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"], capture_output=True, text=True, check=True).stdout.splitlines()
+        allowed = ("?? studies/p10s1/", "?? configs/p10s1_capacity.toml", "?? tests/test_p10s1_")
+>       assert all(line.startswith(allowed) for line in status), [line for line in status if not line.startswith(allowed)]
+E       AssertionError: ['?? docs/reviews/p10s1-implementation-audit-2026-11-15/']
+E       assert False
+E        +  where False = all(<generator object test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched.<locals>.<genexpr> at 0x10ecea7a0>)
+
+tests/test_p10s1_core.py:246: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+tests/test_p10s1_model.py::test_doq_construction
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/utils/_device.py:103: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+    return func(*args, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_p10s1_core.py::test_no_existing_file_is_edited_and_p9_modules_are_imported_not_patched
+1 failed, 149 passed, 2 warnings in 205.25s (0:03:25)
+uv run --locked pytest -q tests/test_p10s1_core.py tests/test_p10s1_classes.p  663.44s user 80.49s system 360% cpu 3:26.16 total

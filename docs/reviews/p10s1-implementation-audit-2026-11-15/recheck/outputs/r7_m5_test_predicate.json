@@ -1,0 +1,70 @@
+{
+ "?? docs/reviews/p10s1-implementation-audit-2026-11-15/recheck/": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M docs/decisions/ADR-0021-p10-s1-useful-capacity-scaling.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M docs/decisions/ADR-0020-p10-s0.md": {
+  "old_test_fails": true,
+  "new_test_fails": true
+ },
+ " M results/p5-something/OUTCOME.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " D results/p9i-run-attempt2-2026-11-15/OUTCOME.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M tests/test_p9i_core.py": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M tests/test_p5_gates.py": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M AGENTS.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M CLAUDE.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M docs/reviews/p9i-results-2026-11-15/REVIEW.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M docs/RESEARCH_LOG.md": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M studies/p10s0/core.py": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ " M studies/p9/core.py": {
+  "old_test_fails": true,
+  "new_test_fails": true
+ },
+ " M src/arborlm/p7a_core.py": {
+  "old_test_fails": true,
+  "new_test_fails": true
+ },
+ " M configs/p9i.toml": {
+  "old_test_fails": true,
+  "new_test_fails": true
+ },
+ "?? \"studies/p9/\\303\\251.py\"": {
+  "old_test_fails": true,
+  "new_test_fails": false
+ },
+ "R  studies/p9/a.py -> studies/p10s1/a.py": {
+  "old_test_fails": true,
+  "new_test_fails": true
+ }
+}

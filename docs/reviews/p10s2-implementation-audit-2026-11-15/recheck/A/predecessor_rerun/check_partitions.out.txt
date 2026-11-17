@@ -1,0 +1,32 @@
+synthetic corpus: 1752 English, 1207 German, 1151 French, 1207 + 1151 links
+[groups] my components (implementation's expansion rule): 1328; implementation: 1308; size multisets equal: False
+[groups] key -> group map identical to the implementation's (group ids = order of first pair): False
+[groups] components with the corrected contraction rule: 1308 (implementation's rule: 1328)
+[contractions] sentence pairs differing only by a contraction with punctuation attached ('can't.' / 'can't,'): 26; put in different identity groups by the implementation: 0; of these on opposite sides (one evaluation, one training): 0
+[contractions] mid-sentence contraction pairs ('I don't like ... now.' / 'I do not like ...') share a group: True
+[assignment] large groups (> 50 pairs) to training: [60]; evaluation pairs 460 of remaining 2298 = 0.2002 (target 0.20; the last group may overshoot)
+[assignment] identical to the implementation's: False
+[vocabulary] identical to the implementation's: False
+[panels] Q_fit: mine 40, implementation 40, identical: False
+[panels] Q_check: mine 40, implementation 40, identical: False
+[panels] D_cal: mine 20, implementation 20, identical: False
+[panels] D_con: mine 15, implementation 15, identical: False
+[panels] E_A: mine 40, implementation 40, identical: False
+[panels] E_B: mine 40, implementation 40, identical: False
+[panels] E_C: mine 20, implementation 20, identical: False
+[panels] E_open: mine 10, implementation 10, identical: False
+[disjointness] panel pairs sharing identity groups: [('Q_check', 'Q_fit', 1)]
+[Q] identity groups drawn more than once into Q (before the fit/check split): 1
+[G1 on panels only] ok = True; problems = []
+[eval keys] in-vocabulary evaluation candidates whose identity group is on the training side: 0
+[sources A] mine 507, implementation 498, identical: False; any in an evaluation string: False
+[gold pool A] mine 636, implementation 642, identical: False
+[sources B] mine 509, implementation 510, identical: False; any in an evaluation string: False
+[gold pool B] mine 634, implementation 630, identical: False
+[sufficiency] implementation available {'A': 130, 'B': 121}, needed 100; mine available A = 130, B = 121, needed 100; ok mine = True, implementation = True
+[draw r0] identical to my recomputation: True; T_A and T_B disjoint in English: True; sizes 80/80/30/30
+[draw r1] identical to my recomputation: True; T_A and T_B disjoint in English: True; sizes 80/80/30/30
+[draw r2] identical to my recomputation: True; T_A and T_B disjoint in English: True; sizes 80/80/30/30
+[draw r3] identical to my recomputation: True; T_A and T_B disjoint in English: True; sizes 80/80/30/30
+[overlap] implementation's replicate overlap (share of T common to two replicates): {'r0-r1-A': 0.55, 'r0-r1-B': 0.562}
+[draw odd] shared 59 -> half 29; T_A and T_B disjoint: True

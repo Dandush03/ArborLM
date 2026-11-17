@@ -1,0 +1,70 @@
+section  rev4_chars rev5_chars identical
+header         2325       3267 False
+0               782       1684 False
+1              2627       5577 False
+2              2301       4481 False
+3              2954       3332 False
+4               987        987 True
+5              9246      11392 False
+6              4601       5623 False
+7              6231       6261 False
+8             17786      27395 False
+9              2009       3366 False
+10             9829      14512 False
+11             2054       2687 False
+12             1520       2250 False
+13             1236       1241 False
+14             1121       1236 False
+15             3576       3576 True
+16              109        152 False
+17             4677       4677 True
+18             1193       1193 True
+19             1001       1001 True
+20             1322       1322 True
+21             1524       1524 True
+22             6647       6647 True
+23             1961       1961 True
+24             2338       2340 False
+25                0      19276 False
+Addendum       1251       1251 True
+
+verbatim quotations in rev4: 6 in rev5: 6 all rev4 quotes present in rev5: True
+
+rev5 lines (outside s17-s24 and s25.3/25.6, which are historical) naming revision-4-only cells or sizes:
+  L28 [s0] '65,536 slots': **The registered memory sizes are 1,024, 4,096 and 16,384 slots. Capacity from 16,384 to 65,536 slots is not tested in S1.** That question goes to the
+  L75 [s1] '32K/64K': 16. Dense control, minimum Panel A accuracy at U_P over two draws, at rates 0.001 / 0.003 / 0.01: 0.091 / 0.443 / 0.998 at 8K/16K; 0.044 / 0.062 / 0.2
+  L91 [s2] 'diagonal': - **H21-3 (saturation in proportion; restated in revision 5).** At eight facts per slot, the useful information a full store holds grows at least 3.0 
+  L98 [s2] 'Study A': **The lead's expectation for revisions 2–4, written after seeing facts 11–12 and before any S1 observation (kept as written; its cells are revision 4'
+  L138 [s5] '65,536 slots': Seven cells. "8K/1K" means 8,192 facts in 1,024 slots. Load is facts per slot. The memory sizes are 1,024, 4,096 and 16,384 slots (the human lead's ch
+  L151 [s5] 'overload': - No rule adds a row, changes a load or changes a size. The overload-row rule of revision 4 is withdrawn.
+  L163 [s5] 'A1': - N2 is revision 4's step A1, unchanged. C2 is revision 4's step B1 with a new run length for its smaller cell and a row U_P set by rule (§5.4). C1 an
+  L164 [s5] 'Study A': - Every verdict rule of §8.2 is applied to all four steps. The names "Study A" and "Study B" of earlier revisions are no longer used: the rows of 2,04
+  L213 [s5] 'A1': 2. The lane prints **OMITTED — QUALIFIED AT 4,096 ONLY**; **OMITTED — NOT OVERLOAD-QUALIFIED** (qualified candidate not OVERLOAD-QUALIFIED); **OMITTED
+  L239 [s6] '32K/64K': - **R2 at 32K/32K** is a table of 32,768 dedicated rows, one per fact. It is the reference rung of the row of 32,768 facts (revision 4 used 32K/64K). 
+  L252 [s6] 'B1': - One backbone (B101/O301).
+  L391 [s8] '32K/64K': | 3 | CAPACITY_SUPPORTED | a CAPACITY STEP in each transition; no step REVERSED; a_use ≥ 0.80 at 32K/16K at its row's U_P in all 5 replicates *(lead's
+  L432 [s8] '32K/64K': **Hierarchy:** T-OQ against **F-OQ-IVF** at equal candidate count, on I_use at 8K/4K and 32K/16K at the row's U_P (the larger cells of the loaded step
+  L440 [s8] 'Study B': - **Study B is replaced by the saturation line (§8.10), which is a registered line and not a descriptive label.** Revision 4's label KNOWLEDGE SCALES 
+  L470 [s8] 'A1': **Steps (revision 5; the line is kept and adapted).** The efficiency line reads the control steps only: N1 (2K/1K → 2K/4K) in the transition 1K→4K and
+  L518 [s8] '65,536 slots': 12. Whatever the outcome, capacity from 16,384 to 65,536 slots stays untested and is proposed for P10-I.
+  L563 [s9] 'B3': | Task validity unmeasured before the single run | ADR-0017 review B3; review B4 here | the load calibration |
+  L565 [s9] 'B3': | A control that cannot learn | review B3 | D-OQ rebuilt and its rate chosen in calibration; DENSE AHEAD read in three readings |
+  L638 [s10] '16 charged hours': **Caps (the human lead's figures, §15):** **16 charged hours** (raised from 12 by the human lead on 2026-11-15, §15) for calibration, rehearsal and th
+  L719 [s12] '65,536 slots': - **Capacity from 16,384 to 65,536 slots, or at any size above 16,384.** Revision 5 does not test it. It is proposed for P10-I.
+  L748 [s14] 'Study A': | Study A: fixed facts, 4K / 16K / 64K; recall, learning efficiency, robustness, generalization | §5.1, §5.2, §8.2–§8.8, §7.2. The sizes are 1K / 4K /
+  L750 [s14] 'Study B': | Study B: more facts with more memory; flat, hierarchical, conventional sparse retrieval, exact-address references, dense controls | §5.1, §3, §5.5, 
+  L1005 [s25] '65,536 slots': - The memory sizes are 1,024, 4,096 and 16,384 slots. No cell has 65,536 slots. **Capacity from 16,384 to 65,536 slots is not tested and goes to the p
+  L1014 [s25] '64K': | Header, §0 | Status; three result lines; the sizes; 16K→64K not tested | §24; the lead's brief for this revision |
+  L1016 [s25] 'diagonal': | §2 | H21-3 restated on full cells; H21-4 extended to full cells; a new expectation paragraph | The diagonal H21-3 was written for no longer exists; 
+  L1018 [s25] 'overload': | §5.1 | Grid of seven cells at 1,024 / 4,096 / 16,384; steps C1, N1, C2, N2; block S3; the overload-row rule withdrawn | §24. At a fixed 8,192 facts 
+  L1024 [s25] '65,536 slots': | §8.1 | REF cells | The row of 32,768 facts needs a reference without 65,536 slots |
+  L1026 [s25] '32K/64K': | §8.4 | Steps and transitions renamed; the 0.80 floor read at 32K/16K | 32K/64K no longer exists; the value is unchanged (§25.8 question 5) |
+  L1028 [s25] 'Study B': | §8.6 | Study B replaced by the saturation line | Its diagonal no longer exists |
+  L1038 [s25] 'overload': Withdrawn with their sections: every 65,536-slot cell; the overload row and its U_P rule as a special case; revision 4's load table and its rule table
+  L1044 [s25] '32K/64K': 1. Revision 4's calibration, 46 runs (§1 facts 13–17): F-OQ's curves to 65,536 updates at 4,096 slots with 8,192 / 16,384 / 32,768 / 65,536 facts and 
+  L1064 [s25] '32K/64K': **Read at a different cell, value unchanged (forced by the grid):** the 0.80 floor of §8.4 (32K/16K in place of 32K/64K); REF for the row of 32,768 fa
+  L1066 [s25] 'Study B': **No longer used:** the Study B accuracy floor 0.85 and its 0.5 ratio floor. A full cell at eight facts per slot is expected near 0.6, so the floor wo
+  L1092 [s25] 'B1': | C2: 32K/4K → 32K/16K | CAPACITY for F-OQ, if the plateau holds. Both cells were seen to 65,536 updates | The same. It is revision 4's step B1; revis
+  L1095 [s25] 'A1': | N2: 8K/4K → 8K/16K | CEILING on one calibration draw and GAIN WITHIN BUDGET ONLY on the other, read from §1 fact 13; efficiency SAME or FASTER IN UP
+  L1100 [s25] '65,536 slots': | Rows removed: everything at 65,536 slots | 8K/64K and 32K/64K were at or near the ceiling at 8,192 updates | Removed by the human lead's choice of s
+  L1104 [s25] '65,536 slots': - **M5 (dense matched compute).** The ruling and its label stand. Its plain statement was that S1 could not establish the dense comparison at matched 

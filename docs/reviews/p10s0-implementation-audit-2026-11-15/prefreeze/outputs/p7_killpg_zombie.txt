@@ -1,0 +1,1 @@
+macOS-27.2.1-arm64-arm-64bit {'after_zombie': ['PermissionError: [Errno 1] Operation not permitted', 'PermissionError: [Errno 1] Operation not permitted', 'PermissionError: [Errno 1] Operation not permitted', 'PermissionError: [Errno 1] Operation not permitted', 'PermissionError: [Errno 1] Operation not permitted'], 'immediate': {'no error': 20}}
