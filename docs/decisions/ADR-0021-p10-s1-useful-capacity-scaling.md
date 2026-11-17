@@ -1304,3 +1304,18 @@ The pre-freeze audit (Opus 5.5; written up in `docs/reviews/p10s1-prefreeze-2026
 - **Generation.** The five registered draws completed in 26.6–26.9 s each against the 40 s cap, G1 passed.
 
 `Astra review: NOT_PERFORMED`.
+
+### 25.18 Status: the registered run is in progress; no outcome exists yet (2026-11-17 01:40 UTC)
+
+This section is a status note, not a result. It is written while training runs and states only what has happened.
+
+- **Freeze.** Commit `70d1f83b80973ba3fbd25e968a15f3ad6a405549`: 178 cells (150 per-replicate cells and 28 seed-block cells), no cut, computed cap 49 hours, lane L omitted (§25.17). Record in `results/p10s1-freeze-2026-11-16/`.
+- **Decision 2.** RUN, recorded by the lead under the P10 delegation in `results/p10s1-freeze-2026-11-16/DECISION_2.md` (commit `37ccf04`).
+- **Registered gates.** Run once on 2026-11-16 UTC against the freeze commit. All gates passed on the five registered draws (30 configurations checked, no harness errors, no G4 defects); 11.5 s of wall time. SHA-256 of `gates.json` in the run directory: `58ca4b1e3f7666476b59c329d6357bdca390002a56dec7e5fd9f0a12289d7ea3`.
+- **Training.** Started 2026-11-16 23:02:24 UTC with six workers; still running at the time of this note. Projected 71,436 s (19.8 hours) against a stage cap of 142,872 s. No cell's result has been read by the lead; only that the processes are alive.
+- **Not yet done.** Evaluation, the throughput measurement (which needs a quiet machine; the human lead is told before it starts), simulation, analysis, report, the committed run record under `results/`, the independent recomputation, the outcome statement and the human lead's acceptance.
+- **Order of work after the run (the human lead, 2026-11-16).** S1 is reviewed and merged first; P10-I (P10-I-S0, P10-I-S1, P10-I-S2) is planned only after S1's result has been analysed with the human lead. Nothing of P10-I is drafted.
+
+The run directory (`experiments/P10S1-registered-20261116/`) is local and git-ignored; nothing in it is in the repository until the run record is committed.
+
+`Astra review: NOT_PERFORMED`.
