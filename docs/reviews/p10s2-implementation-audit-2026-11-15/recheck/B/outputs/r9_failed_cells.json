@@ -1,0 +1,57 @@
+{
+ "a_operation_error_in_a_cell": {
+  "cells": 18,
+  "by_status": {
+   "completed": 17,
+   "failed": 1
+  },
+  "not_completed": {
+   "r0/MII/AB": "RuntimeError: injected: an unsupported operation on the device (at update 0)"
+  },
+  "stopped.json": []
+ },
+ "b_exception_outside_a_cell": {
+  "cells": 18,
+  "by_status": {
+   "failed": 13,
+   "completed": 5
+  },
+  "not_completed": {
+   "r0/ETABLE/A": "MemoryError: injected outside a cell's update loop",
+   "r0/ETABLE/B": "MemoryError: injected outside a cell's update loop",
+   "r0/LJOINT/-": "MemoryError: injected outside a cell's update loop",
+   "r0/LORA1/AB": "MemoryError: injected outside a cell's update loop",
+   "r0/LORA1/BA": "MemoryError: injected outside a cell's update loop",
+   "r0/LSEQ/AB": "MemoryError: injected outside a cell's update loop"
+  },
+  "stopped.json": []
+ },
+ "b_note": "cells.train_arm exists",
+ "c_guard_cap_mid_replicate": {
+  "returned": {
+   "stopped": [
+    "replicate 0: the stage cap of 1.5 s was reached (the last failed cell is r0/LJOINT/-)"
+   ]
+  },
+  "cells": 18,
+  "by_status": {
+   "failed": 11,
+   "skipped_dependency": 6,
+   "completed": 1
+  },
+  "not_completed": {
+   "r0/ETABLE/A": "stopped before update 0: the stage cap of 1.5 s was reached",
+   "r0/ETABLE/B": "stopped before update 0: the stage cap of 1.5 s was reached",
+   "r0/LJOINT/-": "stopped before update 0: the stage cap of 1.5 s was reached",
+   "r0/LORA1/AB": "stopped before update 0: the stage cap of 1.5 s was reached",
+   "r0/LORA1/BA": "stopped before update 0: the stage cap of 1.5 s was reached",
+   "r0/LSEQ/AB": ""
+  },
+  "stopped.json": [
+   "replicate 0: the stage cap of 1.5 s was reached (the last failed cell is r0/LJOINT/-)"
+  ]
+ },
+ "seed_modes": [
+  "test"
+ ]
+}

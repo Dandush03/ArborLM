@@ -1,0 +1,7 @@
+tolerances: frozen-code 0.0 own-code 1e-06
+(0) identical recomputation [own-code]: label row 7 TRANSFER-POSITIVE (append-frozen + consolidation) | changes [] | NE cells []
+(a) APPEND COST input differs by 4e-7 [own-code]: label row 7 TRANSFER-POSITIVE (append-frozen + consolidation) | changes [] | NE cells []
+(b) GEN of r0/MSEQ/AB flips pass->fail [frozen-code]: label row 1 ENGINEERING-FAILURE | changes ['gen/r0/MSEQ/AB/both', 'gen/r0/MSEQ/AB/registered'] | NE cells ['r0/MSEQ/AB']
+(b2) first-marker GEN of r0/MAF/AB flips pass->fail [frozen-code]: label row 1 ENGINEERING-FAILURE | changes ['gen/r0/MAF/AB/both', 'gen/r0/MAF/AB/first_marker', 'gen_status/M-append-frozen/AB', 'label'] | NE cells ['r0/MAF/AB']
+(c) GEN exactly 0.02 registered, 0.02+5e-7 recomputed (own-code tolerance): label row 1 ENGINEERING-FAILURE | changes ['gen/r1/MAF/BA/both', 'gen/r1/MAF/BA/registered', 'gen_status/M-append-frozen/BA']
+(d) recomputed M-joint combined scores change its composition class: label row 1 ENGINEERING-FAILURE | changes ['composition/C1/M-joint', 'composition/C2/M-joint']

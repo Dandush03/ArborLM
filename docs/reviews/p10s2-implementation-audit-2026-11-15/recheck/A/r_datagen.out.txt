@@ -1,0 +1,7 @@
+[unhashed requirements (DatagenStop)] stopped with DatagenStop; prefreeze_record.json kept: True; ledger charges: [('datagen', 0.024)]
+[empty downloads folder (FetchRefused, a RuntimeError that is not a DatagenStop)] stopped with FetchRefused; prefreeze_record.json kept: False; ledger charges: [('datagen', 0.0)]
+[offline] HF_HUB_OFFLINE after run() when the caller had set it to '0': '0'; TRANSFORMERS_OFFLINE: '1' (setdefault keeps a pre-set value)
+[cap] 1 h stage on a ledger with 0.5 h remaining: refused before start: refused: the study ledger has 0.500 h remaining, less than the stage cap of 1.000 h
+[cap] tick past the cap: the stage cap of 5 s was reached after 6 s (teacher batch); charged [('datagen', 6.0)]
+[score] recomputed [-1.1666666269302368, -0.25]; by hand [-1.1666666666666667, -0.25] (EOS counted, padding not)
+[score] compare_scores tolerance 1e-05: {'n': 2, 'max_abs_difference': 1.9960263569984704e-05, 'tolerance': 1e-05, 'ok': False}

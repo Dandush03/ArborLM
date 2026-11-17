@@ -1,0 +1,434 @@
+kept: /private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-recheck-B/e2e/p10s2-e2e-xxf8y7o5
+{
+ "calibration_selection": {
+  "lora_lr": 0.0003,
+  "lora_scores": {
+   "0.0003": 0.08590547637792341,
+   "0.001": 0.08260300244026625
+  },
+  "read_layer": 0,
+  "store_scores": {
+   "0.0": 0.08396149163879829,
+   "1.0": 0.08621902467180317
+  }
+ },
+ "clone": "/private/tmp/claude-501/-Users-daniellaloush-dandush03-ArborLM--claude-worktrees-arborlm-consolidation-experiment-2b31c1/cfc0efd5-b7ca-4602-959a-07fe6b8d4e7d/scratchpad/p10s2-recheck-B/e2e/p10s2-e2e-xxf8y7o5/clone",
+ "freeze_commit": "037f7918df7ba3a1f75a3dcf24214a69376b9dd1",
+ "frozen_design": {
+  "device": "mps",
+  "layer": 0,
+  "lora_lr": 0.0003,
+  "replicates": 2,
+  "rung": "rung 1",
+  "scoring_device": "cpu",
+  "store_lr": 0.003,
+  "updates": 4
+ },
+ "interpreter": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a91c79a181109bb9c/.venv/bin/python",
+ "label": "TRANSFER-NEGATIVE: NO-ACQUISITION (2 replicates, U = 4)",
+ "ledger": {
+  "by_kind": {
+   "analysis": 7.337267361840026e-05,
+   "calibration": 0.011454860208323226,
+   "datagen": 0.000932295289175171,
+   "evaluate": 0.010018172442214564,
+   "gates-registered": 0.0010317160300069696,
+   "gates-rehearsal": 0.0014239373380648128,
+   "recompute": 0.01004090055556541,
+   "rehearsal": 0.012318996481383996,
+   "report": 1.724293898506504e-06,
+   "timing": 0.00017607233803977983,
+   "train": 0.0015734958680534165
+  },
+  "cap_hours": 36.0,
+  "charged_hours": 0.04904554351834425,
+  "processes": 13,
+  "remaining_hours": 35.950954456481654,
+  "unfinished": 0
+ },
+ "new_virtual_environment": false,
+ "ok": true,
+ "recomputation_state": "complete",
+ "registered_stage_peaks_bytes": {
+  "evaluate": 317423616,
+  "gates": 493240320,
+  "recompute": 318062592,
+  "timing": 232144896,
+  "train": 1259241472
+ },
+ "rehearsal": {
+  "charged_hours_at_end_of_rehearsal": 0.026130089316947207,
+  "decision": "rung 1",
+  "proposal": null
+ },
+ "steps": [
+  {
+   "exit": 4,
+   "expected_exit": 4,
+   "ok": true,
+   "step": "calibrate with a stage cap of 0.3 s stops (cap stop)",
+   "tail": ""
+  },
+  {
+   "exit": 3,
+   "expected_exit": 3,
+   "ok": true,
+   "step": "calibrate.sh with the real pilot threshold fails the pilot (exit 3)",
+   "tail": ""
+  },
+  {
+   "exit": 2,
+   "expected_exit": 2,
+   "ok": true,
+   "step": "rehearse.sh refuses after a failed pilot",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "ok": true,
+   "step": "calibrate.sh",
+   "tail": "son\n/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a91c79a181109bb9c/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "prefreeze_gates.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "rehearse.sh (reads the layer and the LoRA learning rate from calibration.json)",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "freeze (layer, learning rates, pilot, cap and device from the records)",
+   "tail": ""
+  },
+  {
+   "exit": 2,
+   "expected_exit": 2,
+   "ok": true,
+   "step": "train before gates is refused (no completion record of gates)",
+   "tail": ""
+  },
+  {
+   "exit": 2,
+   "expected_exit": 2,
+   "ok": true,
+   "step": "a typed caps file is refused",
+   "tail": ""
+  },
+  {
+   "exit": 2,
+   "expected_exit": 2,
+   "ok": true,
+   "step": "--repo is refused",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "gates.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "train.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "evaluate.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "timing.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "recompute.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "analysis.sh",
+   "tail": ""
+  },
+  {
+   "exit": 0,
+   "expected_exit": 0,
+   "ok": true,
+   "step": "report.sh",
+   "tail": ""
+  },
+  {
+   "exit": 2,
+   "expected_exit": 2,
+   "ok": true,
+   "step": "a second gates.sh is refused (a stage is run once)",
+   "tail": ""
+  },
+  {
+   "cell": "r0/ETABLE/A",
+   "differences": 1,
+   "label": "TRANSFER-NEGATIVE: NO-ACQUISITION",
+   "ok": true,
+   "step": "a tampered recomputed score is listed and the cell is NOT_EVALUATED (or the label is ENGINEERING-FAILURE)"
+  }
+ ],
+ "substitutions": {
+  "budget.rungs": {
+   "exercise": [
+    [
+     2,
+     4
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "real": [
+    [
+     4,
+     2000
+    ],
+    [
+     3,
+     2000
+    ],
+    [
+     4,
+     1000
+    ],
+    [
+     3,
+     1000
+    ]
+   ]
+  },
+  "budget.timing_items": {
+   "exercise": 3,
+   "real": 200
+  },
+  "budget.training_device": {
+   "exercise": "mps",
+   "real": "mps"
+  },
+  "calibration.read_layers": {
+   "exercise": [
+    0,
+    1
+   ],
+   "real": [
+    4,
+    12
+   ]
+  },
+  "calibration.updates": {
+   "exercise": 150,
+   "real": 2000
+  },
+  "data.general_window_tokens": {
+   "exercise": 24,
+   "real": 256
+  },
+  "data.router_decision_token": {
+   "exercise": 8,
+   "real": 64
+  },
+  "data.seen_items": {
+   "exercise": 6,
+   "real": 300
+  },
+  "data.vocabulary": {
+   "exercise": 24,
+   "real": 2000
+  },
+  "gates.g4_repeat_updates": {
+   "exercise": 5,
+   "real": 20
+  },
+  "gates.pilot_gap_min": {
+   "exercise": -1.0,
+   "real": 0.25
+  },
+  "memory.read_layers": {
+   "exercise": [
+    0,
+    1
+   ],
+   "real": [
+    4,
+    12
+   ]
+  },
+  "memory.rows_per_stage": {
+   "exercise": 16,
+   "real": 4096
+  },
+  "rehearsal.full_updates": {
+   "exercise": 6,
+   "real": 2000
+  },
+  "rehearsal.short_updates": {
+   "exercise": 3,
+   "real": 200
+  },
+  "router.batch": {
+   "exercise": 12,
+   "real": 64
+  },
+  "router.none_prefixes": {
+   "exercise": 48,
+   "real": 8000
+  },
+  "router.none_prefixes_full_length": {
+   "exercise": 24,
+   "real": 4000
+  },
+  "router.prefix_tokens": {
+   "exercise": 8,
+   "real": 64
+  },
+  "router.updates": {
+   "exercise": 12,
+   "real": 500
+  },
+  "seeds.calibration_base": {
+   "exercise": 229401,
+   "real": 221001
+  },
+  "seeds.calibration_high": {
+   "exercise": 229599,
+   "real": 221999
+  },
+  "seeds.calibration_low": {
+   "exercise": 229401,
+   "real": 221001
+  },
+  "seeds.draw_count": {
+   "exercise": 2,
+   "real": 10
+  },
+  "seeds.partition": {
+   "exercise": 229381,
+   "real": 220901
+  },
+  "seeds.partition_streams": {
+   "exercise": [
+    229382,
+    229383,
+    229384,
+    229385,
+    229386,
+    229387,
+    229388,
+    229389,
+    229390,
+    229391,
+    229392
+   ],
+   "real": [
+    220902,
+    220903,
+    220904,
+    220905,
+    220906,
+    220907,
+    220908,
+    220909,
+    220910,
+    220911,
+    220912
+   ]
+  },
+  "seeds.registered_high": {
+   "exercise": 229399,
+   "real": 228999
+  },
+  "seeds.registered_low": {
+   "exercise": 229001,
+   "real": 220001
+  },
+  "seeds.rehearsal_base": {
+   "exercise": 229601,
+   "real": 222001
+  },
+  "seeds.rehearsal_high": {
+   "exercise": 229799,
+   "real": 222999
+  },
+  "seeds.rehearsal_low": {
+   "exercise": 229601,
+   "real": 222001
+  },
+  "seeds.replicate_bases": {
+   "exercise": [
+    229001,
+    229101,
+    229201,
+    229301
+   ],
+   "real": [
+    220001,
+    220101,
+    220201,
+    220301
+   ]
+  },
+  "seeds.test_high": {
+   "exercise": 229999,
+   "real": 229999
+  },
+  "seeds.test_low": {
+   "exercise": 229900,
+   "real": 229001
+  },
+  "training.batch": {
+   "exercise": 4,
+   "real": 32
+  },
+  "training.lora_rank_joint": {
+   "exercise": 4,
+   "real": 84
+  },
+  "training.lora_rank_single": {
+   "exercise": 2,
+   "real": 42
+  },
+  "training.replay_rows": {
+   "exercise": 4,
+   "real": 32
+  }
+ },
+ "training_device": "mps",
+ "wall_seconds": 194.97855395800434
+}

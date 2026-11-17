@@ -1,0 +1,6 @@
+(1) cut_windows vs my reading of s6.4 on 3,000 random texts (window 16, decision 8): mismatching texts 0 ; windows by stratum {'marker': 8308, 'ordinary': 11}
+    raw: {'nll_base': 8.15580676317215, 'nll_router': 8.15580676317215, 'nll_router_first_marker': 8.13525209903717, 'loss_increase': 0.0, 'loss_increase_first_marker': -0.02055466413497875}
+(2) decision positions read by general_quality: call 1 all index 63: True | call 2 = marker_end for the 100 marker windows and 63 for the ordinary ones: True
+(3) position-only router (registered recipe, 500 updates): triggers token-64 decision {'marker': 0, 'ordinary': 0} | first-marker decision {'marker': 48, 'ordinary': 0} | marker windows whose marker_end lies at task-prompt last-token indices 8-24: 27/100
+    loss increase token-64 0.0000, first-marker -0.0206, passes_registered True, passes_first_marker True, passes (both) True
+(4) colon-cue router: the token at the first-marker decision is the last token of 'German'/'French'/'English'/'translation' or the '\n' of ':\n'; it is never a ':' token by construction (see (1): marker_end is the token holding the string's last character). So a router that fires only on a final ':' after a language word (exactly the task prompt's cue) is probed only where token 64 happens to be such a ':'.

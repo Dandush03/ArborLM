@@ -1,0 +1,39 @@
+stand-in world: |E_C| = 6 frozen max_new = 29 BOS segment: 1
+marker is the last prompt token in every E_C prompt: True
+limit 29 | Stage 0 (NullArm)                        | first answers at the limit:  10 | differences (impl cache, impl full, mine): 0 []
+limit 29 | M-append-frozen / M-ii (2-stage store)   | first answers at the limit:  11 | differences (impl cache, impl full, mine): 0 []
+limit 29 | M-joint (one 2N store)                   | first answers at the limit:  11 | differences (impl cache, impl full, mine): 0 []
+limit 29 | M-i-separate (CompositeStoreArm)         | first answers at the limit:   9 | differences (impl cache, impl full, mine): 0 []
+limit 29 | L-joint / L-seq (one LoRA)               | first answers at the limit:  11 | differences (impl cache, impl full, mine): 0 []
+limit 29 | L-sep (AdapterRouteArm)                  | first answers at the limit:   9 | differences (impl cache, impl full, mine): 0 []
+limit  1 | Stage 0 (NullArm)                        | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  1 | M-append-frozen / M-ii (2-stage store)   | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  1 | M-joint (one 2N store)                   | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  1 | M-i-separate (CompositeStoreArm)         | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  1 | L-joint / L-seq (one LoRA)               | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  1 | L-sep (AdapterRouteArm)                  | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  2 | Stage 0 (NullArm)                        | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  2 | M-append-frozen / M-ii (2-stage store)   | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  2 | M-joint (one 2N store)                   | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  2 | M-i-separate (CompositeStoreArm)         | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  2 | L-joint / L-seq (one LoRA)               | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  2 | L-sep (AdapterRouteArm)                  | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  3 | Stage 0 (NullArm)                        | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  3 | M-append-frozen / M-ii (2-stage store)   | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  3 | M-joint (one 2N store)                   | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  3 | M-i-separate (CompositeStoreArm)         | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  3 | L-joint / L-seq (one LoRA)               | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+limit  3 | L-sep (AdapterRouteArm)                  | first answers at the limit:  12 | differences (impl cache, impl full, mine): 0 []
+C1 read positions against the formula (both hit cases, every item): mismatches 0
+Stage 0 (NullArm)                        | C1 first answers == single-task: True | C2 German answers identical to single-task German: 6/6 | summary fields == my recomputation: True | separate single answers 6
+M-append-frozen / M-ii (2-stage store)   | C1 first answers == single-task: True | C2 German answers identical to single-task German: 5/6 | summary fields == my recomputation: True | separate single answers 6
+M-joint (one 2N store)                   | C1 first answers == single-task: True | C2 German answers identical to single-task German: 4/6 | summary fields == my recomputation: True | separate single answers 6
+M-i-separate (CompositeStoreArm)         | C1 first answers == single-task: True | C2 German answers identical to single-task German: 5/6 | summary fields == my recomputation: True | separate single answers 6
+L-joint / L-seq (one LoRA)               | C1 first answers == single-task: True | C2 German answers identical to single-task German: 6/6 | summary fields == my recomputation: True | separate single answers 6
+L-sep (AdapterRouteArm)                  | C1 first answers == single-task: True | C2 German answers identical to single-task German: 6/6 | summary fields == my recomputation: True | separate single answers 6
+Stage 0 (NullArm)                        | single-task answers differing from Stage 0: 0/12
+M-append-frozen / M-ii (2-stage store)   | single-task answers differing from Stage 0: 1/12
+M-joint (one 2N store)                   | single-task answers differing from Stage 0: 2/12
+M-i-separate (CompositeStoreArm)         | single-task answers differing from Stage 0: 4/12
+L-joint / L-seq (one LoRA)               | single-task answers differing from Stage 0: 12/12
+L-sep (AdapterRouteArm)                  | single-task answers differing from Stage 0: 12/12

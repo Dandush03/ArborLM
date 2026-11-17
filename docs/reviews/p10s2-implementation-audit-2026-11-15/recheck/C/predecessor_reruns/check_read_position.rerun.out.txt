@@ -1,0 +1,4 @@
+tokens: [' ', 'T', 'o', 'm', ' ', 'is', ' ', 'here,', ' ', 'the', ' ', 'cat', ' ', 's', 'at.']
+reads (token index, word): [(3, 'tom', 'm'), (5, 'is', 'is'), (7, 'here', 'here,'), (9, 'the', 'the'), (11, 'cat', 'cat'), (14, 'sat', 'at.')]
+pre-split tokens: [' Tom', ' is', ' here', ',', ' the', ' cat', ' sat', '.']
+reads: [(0, 'tom', ' Tom'), (1, 'is', ' is'), (2, 'here', ' here'), (4, 'the', ' the'), (5, 'cat', ' cat'), (6, 'sat', ' sat')] -> 'here' and 'sat' are read at the punctuation token

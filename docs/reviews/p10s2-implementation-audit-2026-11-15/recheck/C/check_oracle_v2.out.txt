@@ -1,0 +1,57 @@
+ORACLE_LINE equals the ADR s11.3 fixed line: True
+COMBINED_LINE equals the addendum s9 second fixed line: True
+LEAD_RULE quoted exactly: ADR 4 times; addendum 2 times
+A1 emit FEWER VALUE ROWS ACTIVE: printed, first line is the oracle line: True; text: 'FEWER VALUE ROWS ACTIVE (analytical count: ratio 0.0021; key products per read 8192, a fla'
+A2 emit 'value rows active not fewer': printed, first line is the oracle line: True; text: 'value rows active not fewer (analytical count: ratio 2.0668; key products per read 8192, a'
+A3 emit stored-size line: printed, first line is the oracle line: True; text: 'stored parameters (arithmetic, not a comparison): student plus a 8192-row store 139,364,67'
+A4 emit teacher inference cost line: printed, first line is the oracle line: True; text: 'teacher inference cost per accepted training item: 0.4 s'
+A5 emit router accuracy line: printed, first line is the oracle line: True; text: "replicate 0, router AB: route accuracy {'A': 1.0}"
+A6 emit GEN line: printed, first line is the oracle line: True; text: 'r0/MAF/AB GEN loss increase 0.001: the keyword router stayed silent'
+A7 emit_plain lower-case label: printed, first line is the oracle line: True; text: 'label: transfer-positive (append-frozen)'
+A8 emit_plain mixed-case class: printed, first line is the oracle line: True; text: 'M-append-frozen: Acquires-And-Retains in both orders'
+A9 emit_plain rung outcome NOT STARTED: BUDGET: printed, first line is the oracle line: True; text: 'rehearsal record written to x; rung rule outcome: NOT STARTED: BUDGET'
+A10 emit class line: printed, first line is the oracle line: True; text: 'M-ii: AB ACQUIRES-AND-RETAINS'
+A11 emit_plain lower-case composition line: printed, first line is the oracle line: True; text: 'C1 M-append-frozen: composes'
+A12 emit_plain 'H_a 0.91 on the second answer' (a composition number, no word): printed, first line is the oracle line: False; text: 'C1 M-ii r0: H_a 0.91 / 0.88 on the second answer'
+R1 router_table only: refused
+R2 gen only: refused
+R3 cost_lines: refused
+R4 'Class' key: refused
+R5 label in a list of strings: refused
+R6 composition field without the second line: refused
+R7 H values under a neutral key: ACCEPTED without the line
+T1 composition block without the second line: refused
+T2 composition line split off by a blank line: refused
+terminal summary (each class line with the design suffix):
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+label: TRANSFER-POSITIVE (append-frozen + consolidation) (3 replicates, U = 2000)
+M-append-frozen: AB ACQUIRES-AND-RETAINS, BA ACQUIRES-AND-RETAINS (3 replicates, U = 2000)
+M-ii: AB ACQUIRES-AND-RETAINS, BA ACQUIRES-AND-RETAINS (3 replicates, U = 2000)
+M-seq: AB FORGETS, BA FORGETS (3 replicates, U = 2000)
+L-seq: AB FORGETS, BA FORGETS (3 replicates, U = 2000)
+
+report renders and passes check_text; JSON passes check_record: True
+report label row: 7 | composition section present: True
+composition lines: 18 | example: - C1 L-seq: NOT_EVALUATED (n replicates = 3); pass rate 0.000; reasons: order AB, replicate 0: teacher gap on E_C below 0.30 (A); order AB, replicate 0: teacher gap on E_C below 0.30 (B); order AB, re
+composition block starts with the oracle line then the second line: False
+item count n (|E_C|) printed on a composition line: False | '(n replicates, U = ...)' on each composition line: False
+report contains the human lead's sentence verbatim: False
+lines in the report with autonomous/learned-memory/success wording:
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    - The combined tasks C1 and C2 follow the ADR-0022 addendum (human-approved 2026-11-15): C1 alternates the order of the two languages by item, C2 is German then French; the composition rule is the str
+    oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material 
+    - Autonomous learned memory: addresses and routes are supplied by rule.
+    - A success probability: three or four replicates on one partition of one corpus.
+[arms keep 0.95 of their gain] classes: ['COMPOSES'] | block header = oracle line: True, second fixed line: True
+[all lines NOT_EVALUATED (arm single gap below 0.50)] classes: ['NOT_EVALUATED'] | block header = oracle line: True, second fixed line: False

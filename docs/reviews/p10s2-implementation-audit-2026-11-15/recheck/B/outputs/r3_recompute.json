@@ -1,0 +1,227 @@
+[
+ {
+  "probe": "identical",
+  "label": "TRANSFER-NEGATIVE: NO-ACQUISITION",
+  "state": "complete",
+  "n_differences": 0,
+  "edited": [],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": []
+ },
+ {
+  "probe": "cell score +1e-15 (one ulp-scale change, MAF/AB E_A)",
+  "label": "TRANSFER-NEGATIVE: NO-ACQUISITION",
+  "state": "complete",
+  "n_differences": 1,
+  "edited": [
+   "r0/MAF/AB /scores/r0/MAF/AB/panels/E_A/mean"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [
+   "r0/MAF/AB"
+  ],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": []
+ },
+ {
+  "probe": "cell score +0.25 (ETABLE/A E_A, the exercise's own probe)",
+  "label": "TRANSFER-NEGATIVE: NO-ACQUISITION",
+  "state": "complete",
+  "n_differences": 1,
+  "edited": [
+   "r0/ETABLE/A /scores/r0/ETABLE/A/panels/E_A/mean"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [
+   "r0/ETABLE/A"
+  ],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": []
+ },
+ {
+  "probe": "Stage 0 student E_A mean +0.05",
+  "label": "ENGINEERING-FAILURE",
+  "state": "complete",
+  "n_differences": 1,
+  "edited": [
+   "baseline /student/E_A/panel/mean"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [
+   "annotation/BELOW JOINT BOUND",
+   "cell/L-seq/AB/0/neg_ret",
+   "cell/L-seq/AB/0/ret",
+   "cell/M-append-frozen/AB/0/neg_ret",
+   "cell/M-append-frozen/AB/0/ret",
+   "cell/M-append-frozen/AB/1/neg_ret",
+   "cell/M-append-frozen/AB/1/ret",
+   "cell/M-ii/AB/0/neg_ret"
+  ],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": [
+   "baseline"
+  ]
+ },
+ {
+  "probe": "teacher E_A mean -0.6 (gap undefined)",
+  "label": "ENGINEERING-FAILURE",
+  "state": "complete",
+  "n_differences": 1,
+  "edited": [
+   "baseline /teacher/E_A/mean"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [
+   "annotation/BELOW JOINT BOUND",
+   "annotation/EQUIVALENT TO A WORD TABLE",
+   "annotation/ROUTER (keyword-level) QUALIFIED",
+   "annotation/TASK-CODED SPARSE RETENTION",
+   "annotation/TEACHER-EQUIVALENT-TO-GOLD",
+   "cell/L-seq/AB/0/acq1",
+   "cell/L-seq/AB/0/neg_ret",
+   "cell/L-seq/AB/0/ret"
+  ],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": [
+   "baseline"
+  ]
+ },
+ {
+  "probe": "GEN loss increase 1.0 nats on every M-append-frozen snapshot",
+  "label": "ENGINEERING-FAILURE",
+  "state": "complete",
+  "n_differences": 4,
+  "edited": [
+   "r0/MAF/AB /scores/r0/MAF/AB/gen/loss_increase",
+   "r0/MAF/BA /scores/r0/MAF/BA/gen/loss_increase",
+   "r1/MAF/AB /scores/r1/MAF/AB/gen/loss_increase",
+   "r1/MAF/BA /scores/r1/MAF/BA/gen/loss_increase"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [
+   "r0/MAF/AB",
+   "r0/MAF/BA",
+   "r1/MAF/AB",
+   "r1/MAF/BA"
+  ],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [
+   "gen/r0/MAF/AB/both",
+   "gen/r0/MAF/AB/registered",
+   "gen/r0/MAF/BA/both",
+   "gen/r0/MAF/BA/registered",
+   "gen/r1/MAF/AB/both",
+   "gen/r1/MAF/AB/registered",
+   "gen/r1/MAF/BA/both",
+   "gen/r1/MAF/BA/registered"
+  ],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": []
+ },
+ {
+  "probe": "permutation ablations of r0/MAF/AB set to 1.0 (control)",
+  "label": "ENGINEERING-FAILURE",
+  "state": "complete",
+  "n_differences": 12,
+  "edited": [
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_A/code_perm/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_A/marker_only/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_A/off/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_A/unablated/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_A/value_perm/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_A/words_only/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_B/code_perm/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_B/marker_only/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_B/off/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_B/unablated/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_B/value_perm/mean",
+   "r0/MAF/AB /scores/r0/MAF/AB/ablations/E_B/words_only/mean"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [
+   "r0/MAF/AB"
+  ],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [
+   "control/r0/MAF/AB/E_B/code_perm",
+   "control/r0/MAF/AB/E_B/value_perm",
+   "control_failed"
+  ],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": []
+ },
+ {
+  "probe": "router r0 AB accuracy on A set to 1.0",
+  "label": "TRANSFER-NEGATIVE: NO-ACQUISITION",
+  "state": "complete",
+  "n_differences": 1,
+  "edited": [
+   "r0/routers /AB/accuracy/A"
+  ],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [],
+  "ef_iff_verdict_change": true,
+  "classes_printed": true,
+  "study_level": [
+   "r0/routers"
+  ]
+ },
+ {
+  "probe": "recomputed r1 ensemble missing",
+  "label": "INCOMPLETE",
+  "state": "incomplete",
+  "n_differences": 0,
+  "edited": [],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [
+   "composition/C1/L-joint",
+   "composition/C1/L-sep",
+   "composition/C1/L-seq",
+   "composition/C1/M-append-frozen",
+   "composition/C1/M-i-separate",
+   "composition/C1/M-ii",
+   "composition/C1/M-joint",
+   "composition/C2/L-joint"
+  ],
+  "ef_iff_verdict_change": null,
+  "classes_printed": false,
+  "study_level": []
+ },
+ {
+  "probe": "memory exceeded in the recomputation",
+  "label": "INCOMPLETE",
+  "state": "memory",
+  "n_differences": 0,
+  "edited": [],
+  "every_edit_listed": true,
+  "not_evaluated_cells": [],
+  "ne_equals_edited_cells": true,
+  "verdict_changes_mine": [],
+  "ef_iff_verdict_change": null,
+  "classes_printed": false,
+  "study_level": []
+ }
+]

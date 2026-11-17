@@ -1,0 +1,124 @@
+{
+ "pre_freeze_commit_of_clone": "56986379b91af3b982f20c63acb20c56df4f640d",
+ "ledger_entries_copied": 11,
+ "bundles_differ": true,
+ "cases": [
+  {
+   "case": "control",
+   "exit": 0,
+   "accepted": true,
+   "design": {
+    "device": "mps",
+    "layer": 0,
+    "lora_lr": 0.0003,
+    "replicates": 2,
+    "rung": "rung 1",
+    "scoring_device": "cpu",
+    "store_lr": 0.003,
+    "updates": 4
+   },
+   "tail": [
+    "freeze files written: studies/p10s2/freeze/plan.json, studies/p10s2/freeze/stage_caps.json, studies/p10s2/freeze/rehearsal_outcome.json, studies/p10s2/freeze/projection.json, studies/p10s2/freeze/records/calibration.json, studies/p10s2/freeze/records/prefreeze_record.json, studies/p10s2/freeze/records/prefreeze_gates.json, studies/p10s2/freeze/records/rehearsal.json, studies/p10s2/freeze/records/rates.json"
+   ]
+  },
+  {
+   "case": "pilot",
+   "exit": 2,
+   "accepted": false,
+   "design": null,
+   "tail": [
+    "NOT STARTED: STUDENT CANNOT USE THE MEMORY ON THIS TASK: the registered run does not start (section 12.2; recorded with the calibration records)"
+   ]
+  },
+  {
+   "case": "bundle",
+   "exit": 0,
+   "accepted": true,
+   "design": {
+    "device": "mps",
+    "layer": 0,
+    "lora_lr": 0.0003,
+    "replicates": 2,
+    "rung": "rung 1",
+    "scoring_device": "cpu",
+    "store_lr": 0.003,
+    "updates": 4
+   },
+   "tail": [
+    "freeze files written: studies/p10s2/freeze/plan.json, studies/p10s2/freeze/stage_caps.json, studies/p10s2/freeze/rehearsal_outcome.json, studies/p10s2/freeze/projection.json, studies/p10s2/freeze/records/calibration.json, studies/p10s2/freeze/records/prefreeze_record.json, studies/p10s2/freeze/records/prefreeze_gates.json, studies/p10s2/freeze/records/rehearsal.json, studies/p10s2/freeze/records/rates.json"
+   ]
+  },
+  {
+   "case": "cal_upd",
+   "exit": 0,
+   "accepted": true,
+   "design": {
+    "device": "mps",
+    "layer": 0,
+    "lora_lr": 0.0003,
+    "replicates": 2,
+    "rung": "rung 1",
+    "scoring_device": "cpu",
+    "store_lr": 0.003,
+    "updates": 4
+   },
+   "tail": [
+    "freeze files written: studies/p10s2/freeze/plan.json, studies/p10s2/freeze/stage_caps.json, studies/p10s2/freeze/rehearsal_outcome.json, studies/p10s2/freeze/projection.json, studies/p10s2/freeze/records/calibration.json, studies/p10s2/freeze/records/prefreeze_record.json, studies/p10s2/freeze/records/prefreeze_gates.json, studies/p10s2/freeze/records/rehearsal.json, studies/p10s2/freeze/records/rates.json"
+   ]
+  },
+  {
+   "case": "full_upd",
+   "exit": 0,
+   "accepted": true,
+   "design": {
+    "device": "mps",
+    "layer": 0,
+    "lora_lr": 0.0003,
+    "replicates": 2,
+    "rung": "rung 1",
+    "scoring_device": "cpu",
+    "store_lr": 0.003,
+    "updates": 4
+   },
+   "tail": [
+    "freeze files written: studies/p10s2/freeze/plan.json, studies/p10s2/freeze/stage_caps.json, studies/p10s2/freeze/rehearsal_outcome.json, studies/p10s2/freeze/projection.json, studies/p10s2/freeze/records/calibration.json, studies/p10s2/freeze/records/prefreeze_record.json, studies/p10s2/freeze/records/prefreeze_gates.json, studies/p10s2/freeze/records/rehearsal.json, studies/p10s2/freeze/records/rates.json"
+   ]
+  },
+  {
+   "case": "device",
+   "exit": 0,
+   "accepted": true,
+   "design": {
+    "device": "cpu",
+    "layer": 0,
+    "lora_lr": 0.0003,
+    "replicates": 2,
+    "rung": "rung 1",
+    "scoring_device": "cpu",
+    "store_lr": 0.003,
+    "updates": 4
+   },
+   "tail": [
+    "freeze files written: studies/p10s2/freeze/plan.json, studies/p10s2/freeze/stage_caps.json, studies/p10s2/freeze/rehearsal_outcome.json, studies/p10s2/freeze/projection.json, studies/p10s2/freeze/records/calibration.json, studies/p10s2/freeze/records/prefreeze_record.json, studies/p10s2/freeze/records/prefreeze_gates.json, studies/p10s2/freeze/records/rehearsal.json, studies/p10s2/freeze/records/rates.json"
+   ]
+  },
+  {
+   "case": "dry_rec",
+   "exit": 0,
+   "accepted": true,
+   "design": {
+    "device": "mps",
+    "layer": 0,
+    "lora_lr": 0.0003,
+    "replicates": 2,
+    "rung": "rung 1",
+    "scoring_device": "cpu",
+    "store_lr": 0.003,
+    "updates": 4
+   },
+   "tail": [
+    "freeze files written: studies/p10s2/freeze/plan.json, studies/p10s2/freeze/stage_caps.json, studies/p10s2/freeze/rehearsal_outcome.json, studies/p10s2/freeze/projection.json, studies/p10s2/freeze/records/calibration.json, studies/p10s2/freeze/records/prefreeze_record.json, studies/p10s2/freeze/records/prefreeze_gates.json, studies/p10s2/freeze/records/rehearsal.json, studies/p10s2/freeze/records/rates.json"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "a_entries": [
+  [
+   "datagen",
+   "started",
+   0.0
+  ],
+  [
+   "datagen",
+   "completed",
+   0.21
+  ]
+ ],
+ "b": "StageCapExceeded after 0.52 s: the guard stopped the step: the stage cap of 0.5 s was reached",
+ "b_entries": [
+  [
+   "datagen",
+   "started",
+   0.0
+  ],
+  [
+   "datagen",
+   "failed",
+   0.52
+  ]
+ ],
+ "c": "refused: refused: the study ledger has 0.100 h remaining, less than the stage cap of 1.800 h",
+ "c_new_entries": 0,
+ "d_prefreeze_caps": {
+  "provisional": true,
+  "missing": [
+   "calibrate",
+   "rehearse"
+  ],
+  "measured_wall_seconds": {
+   "datagen": 0.21450395899591967
+  },
+  "caps_seconds": {
+   "datagen": 0.42900791799183935
+  },
+  "config_provisional_values_seconds": {
+   "datagen": 6480,
+   "calibrate": 7920,
+   "rehearse": 11520
+  },
+  "rule": "2 x measured wall time, replacing the provisional configuration values"
+ }
+}
