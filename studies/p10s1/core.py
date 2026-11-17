@@ -1038,8 +1038,8 @@ GENERATION_SOURCES = ("provisional", "measured", "typed")
 GENERATION_DEFAULT: dict[str, Any] = {"cap_seconds": 1800.0, "provisional": True, "table_facts": FACT_TABLE, "source": "provisional", "measured_seconds": 0.0, "manifest_sha256": ""}
 
 
-CAP_MAX_HOURS = 50.0  # C_max (section 10.3): the ceiling of the computed registered cap
-CAP_MAX_SOURCE = "raised from 36 to 50 hours by the human lead on 2026-11-16 (ADR-0021 section 25.16), after the projection returned NOT STARTED: BUDGET and before any registered seed was observed"
+CAP_MAX_HOURS = 54.0  # C_max (section 10.3): the ceiling of the computed registered cap
+CAP_MAX_SOURCE = "raised from 50 to 54 hours by the lead under the P10 delegation on 2026-11-17 (ADR-0021 section 25.19) so that the second attempt approved by the human lead fits after the time charged to attempt 1; no outcome of a registered seed was read"
 CAP_PACKING = "longest first on six workers"
 CAP_CONTENTION_MIN = 1.0  # c is never below 1.0
 PLATEAU_FLOOR_I = float(p9core.fano_bits_per_fact(DEP_USE_FLOOR))  # i at a_use = 0.25 (0.473 bits per fact): derived from the DEP floor, never typed (section 8.2)
