@@ -320,7 +320,7 @@ The rehearsal measures seconds per read at 16,384 slots and 32,768 facts, and pe
 4. **The retention rule** (0.25 bits and 0.90 of the reference's information) in place of the note's 95% of accuracy (recommended).
 5. **Stage A2.** Fund it with A1 (recommended; about 1.5 hours), and require CONFIRMED before any Stage B specification states a cause. Or run A1 alone.
 6. **May a Stage B study be proposed on A1 alone?** Recommended: proposed yes, with its re-analysis status stated; approved only with R-CONFIRM in hand.
-7. **Order against ADR-0024 and ADR-0026.** Recommended: this study first; it is short and informs both.
+7. **Order against ADR-0024 and ADR-0026.** Recommended: this study first; it is short and informs both. **RULED by the human lead on 2026-11-17:** asked whether this study should be the first P10-I study prepared for approval, the human lead answered "yes it should". This fixes the order of preparation; it does not approve the specification.
 8. **Departures from the next-action table of the note's §5.2.** The note is binding direction; each departure below changes directed content and is **PENDING HUMAN LEAD RULING**. The reasons are in §3 and §8.3.
 
 | Note §5.2: Stage A result → next action | This ADR | What changes |

@@ -41,7 +41,7 @@ The seven drafts list 72 open choices between them (each ADR's section "Open cho
 |---|---|---|---|
 | 1 | Routing diagnosis as its own ADR-0029, or back inside ADR-0024 as first directed | ADR-0029 §16 item 1; ADR-0024 §21 item 8 | **RULED 2026-11-17: "Keep ADR-0029".** ADR-0024's file was renamed to `ADR-0024-p10-i-s1-capacity-scaling.md` |
 | 2 | The departures of ADR-0029 from the next-action table of the note's section 5.2 (side by side in the ADR) | ADR-0029 §16 item 8 | Accept; the reads cannot identify some of the causes the table names |
-| 3 | Order of studies | ADR-0029 §16 item 7 | P10-I-R first: about 4–8 charged hours in the draft's estimate, almost all of it reads of existing checkpoints, and it informs ADR-0024 and ADR-0026 |
+| 3 | Order of studies | ADR-0029 §16 item 7 | P10-I-R first: about 4–8 charged hours in the draft's estimate, almost all of it reads of existing checkpoints, and it informs ADR-0024 and ADR-0026 **RULED 2026-11-17: "yes it should" — P10-I-R is prepared for approval first.** |
 | 4 | Capacity task unchanged although a dictionary solves it, with every label capped at "necessary condition" | ADR-0024 §21 item 1 | Keep, with the cap; a task a lookup cannot solve is a design problem of its own |
 | 5 | The 16,384→65,536 block: in, with a funding figure H_X fixed in advance; or out | ADR-0024 §21 item 2 | In as conditional; H_X = 100 charged hours; cost is unbounded before its rehearsal |
 | 6 | Lane L (capacity under learned addressing): specified in a later revision, block M not waiting for P10-I-S0 | ADR-0024 §21 item 3 | As drafted |
