@@ -1399,3 +1399,13 @@ An independent check (Opus 5.5, read-only, no file written) of commit `e6bde29`,
 **Carried into P10-I-S1 (proposed ADR-0024):** the early-snapshot dependence condition, a registered rule for combining cells in the dense-speed comparison, the matched-compute observation at 32K/16K, and the seed-block reporting defect. No P10-I experiment is authorized by this acceptance.
 
 `Astra review: NOT_PERFORMED`.
+
+### 25.23 One tie assertion is made on the platform of record only; checks run locally (2026-11-17 UTC)
+
+**The test.** `tests/test_p10s1_model.py::test_knn_predictions_match_brute_force_and_ties_are_wrong` asserts that the nearest-neighbour baseline counts an exact tie between two identical keys as wrong. On the Linux x86-64 CI runner (run of 2026-11-17 on commit `87365b0`: 1 failed, 2,176 passed, 16 skipped) the two identical keys received scores that differ in the last place, so there was no exact tie and the assertion failed. On the platform of record (macOS arm64), where the study ran, the test passes. The registered result does not depend on it: the rule only acts on exactly equal scores, and the run was on the platform of record.
+
+**Decision.** The human lead, asked whether to limit the tie check to the platform of record or to leave the test as it was, wrote on 2026-11-17: "Limit it to the Mac". The tie assertion now runs under `sys.platform == "darwin"`, as the bit-for-bit comparisons of P9 and P9-II already do. No other line of the test changes; the brute-force and index comparisons of the same test still run on every platform. No code under `studies/p10s1/` changes.
+
+**Checks.** The human lead asked on 2026-11-17 that the checks be run locally and the GitHub run skipped when they pass, because of its cost. On the combined tree of P10-S0, P10-S2 and P10-S1 (commit `2e0c647`, macOS arm64): `ruff check` clean, `mypy src/arborlm` clean (85 files), `pytest` 3,194 passed and 8 skipped in 1,533 s, and the E0 smoke recorded. A local pass is a pass on the platform of record; it does not show a pass on Linux.
+
+`Astra review: NOT_PERFORMED`.
