@@ -73,8 +73,8 @@ def test_levels_granted_to_whole_cells_in_the_fixed_order_and_closed_cells_get_n
 def test_a_whole_cell_is_costed_as_if_every_replicate_used_the_level() -> None:
     r = 30 * 3600 / BASE_UPDATES
     cs = cells(U0)
-    one = budget.project(cs, {**U0, "8K/1K": 196608}, rates(r))["train_seconds"] - budget.project(cs, U0, rates(r))["train_seconds"]
-    assert abs(one - 4 * 5 * 65536 * r) < 1e-6  # four arms x five replicates x 65,536 further updates
+    one = budget.project(cs, {**U0, "8K/1K": 196608}, rates(r))["ladder_seconds"] - budget.project(cs, U0, rates(r))["ladder_seconds"]
+    assert abs(one - 4 * 5 * 65536 * r) < 1e-6  # four arms x five replicates x 65,536 further updates (one worker: no barrier loss)
 
 
 def test_u0_of_p10s1_form_and_of_the_power_of_two_form() -> None:
@@ -118,7 +118,7 @@ def test_evaluation_and_fixed_stages_enter_the_projection() -> None:
     snaps = sum(sum(1 for u in c["snapshots"] if u <= (U0[core.cell_name(c["facts"], c["slots"])] if c["ladder_cell"] else c["run"])) for c in cs)
     first = [c for c in cs if c["draw"] == 1]  # the counting rehearsal evaluates the snapshots of one replicate
     snaps1 = sum(sum(1 for u in c["snapshots"] if u <= (U0[core.cell_name(c["facts"], c["slots"])] if c["ladder_cell"] else c["run"])) for c in first)
-    assert p["evaluate_seconds"] == 2.0 * snaps and p["fixed_seconds"] == 100.0 and p["counting_rehearsal_seconds"] == 2.0 * snaps1 and p["remaining_seconds"] == 2.0 * snaps + 2.0 * snaps1 + 100.0
+    assert p["evaluate_seconds"] + p["ladder_seconds"] == 2.0 * snaps and p["fixed_seconds"] == 100.0 and p["counting_rehearsal_seconds"] == 2.0 * snaps1 and p["remaining_seconds"] == 2.0 * snaps + 2.0 * snaps1 + 100.0
     assert budget.Rates({}, {}, 1.0, {}, 1).contention == 1.0
     with pytest.raises(ValueError):
         budget.Rates({}, {}, 0.5, {}, 1)  # the contention ratio is at least 1
@@ -149,3 +149,26 @@ def test_caps_from_projection() -> None:
     h_c = 12.0
     rem = budget.budget_hours(h_c) - h_c
     assert budget.caps_from_projection(h_c, {"x": rem})["total_cap_hours"] <= 60.0
+
+
+def test_ladder_round_barriers_are_modelled() -> None:
+    """The ladder stage runs a cell round by round: every round waits for its slowest worker. 8K/1K carries 4 arms x 5 replicates = 20 items per round; on six workers a round of equal items costs ceil(20/6) = 4 items,
+    not 20/6 (the old projection pooled the whole cell into one makespan)."""
+    cs = cells(U0)
+    r = 1e-3
+    w6 = budget.Rates({k: r for k in RATES_ALL}, {k: 0.0 for k in RATES_ALL}, 1.0, {}, 6)
+    p = budget.project(cs, {**U0, "8K/1K": 196608}, w6)
+    p0 = budget.project(cs, U0, w6)
+    assert abs((p["ladder_seconds"] - p0["ladder_seconds"]) - 4 * 65536 * r) < 1e-6  # one extra round of 65,536-update segments: four items on the slowest worker
+    assert abs(p["ladder_seconds"] - 4 * 65536 * r) < 1e-6 and p0["ladder_seconds"] == 0.0  # no evaluation seconds, no segments at U0
+    pooled = 20 * 65536 * r / 6
+    assert (p["ladder_seconds"] - p0["ladder_seconds"]) > pooled * 1.19  # 4 / 3.33 = 1.2 times the pooled figure: the barrier loss the audit found
+    assert set(p["fixed_by_stage"]) <= set(budget.FIXED_STAGES) | set()
+
+
+def test_every_cap_of_the_config_comes_from_the_projection() -> None:
+    sh = {"train": 10.0, "ladder": 2.1, "evaluate": 0.4, "counting_rehearsal": 2.9, "gates": 0.03, "baselines": 0.01, "timing": 0.08, "throughput": 0.12, "analysis": 0.02, "report": 0.0}
+    caps = budget.config_caps(12.0, sh)
+    # by hand: train + ladder 12.1 -> 25; evaluate + baselines 0.41 -> 1; timing 0.16 -> 1; throughput 0.24 -> 1; gates + analysis + report 0.05 -> 1; counting 5.8 -> 6; total 12 + 2 x 15.67 = 43.34 -> 44
+    assert caps == {"train_hours": 25.0, "evaluate_hours": 1.0, "timing_hours": 1.0, "throughput_hours": 1.0, "analysis_hours": 1.0, "rehearsal_hours": 6.0, "total_hours": 44.0}
+    assert budget.caps_from_projection(12.0, sh)["config_caps"] == caps

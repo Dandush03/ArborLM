@@ -20,7 +20,7 @@ from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from . import adapter, calibrate, core, items, runner, sealed
+from . import adapter, calibrate, core, items, quiet, runner, sealed
 from .calibrate import RateRun
 
 CAL_DRAWS = (1, 2)
@@ -37,6 +37,11 @@ class RealEngine:
     def __init__(self, ctx: items.Ctx, cfg: Mapping[str, Any] | None = None, facts_map: Mapping[int, int] | None = None, *, workers: int = 0, ledger: core.Ledger | None = None, env: Mapping[str, str] | None = None) -> None:
         self.ctx, self.cfg = ctx, core.cfg_of(cfg)
         self.workers, self.ledger, self.env = workers, ledger, dict(env or {})
+        mc = self.cfg["memory_check"]
+        guard = int(self.cfg["resources"]["rss_aggregate_bytes"])
+        # the machine-wide memory check of section 16.1 (ruling 26) applies to the calibration pool as to the registered stages: one non-blocking reading before each worker is added; the workers that run stay supervised
+        self.memory_ok: Callable[[], bool] = lambda: quiet.memory_ok_once(guard)
+        self.memory_retry, self.memory_max = float(mc["retry_seconds"]), float(mc["max_hours"]) * 3600.0
         self.facts_map = dict(facts_map or {})
         c = self.cfg
         self.readouts = sorted({*(int(v) for v in c["rates"]["provisional_readout"].values()), *(int(x) for x in c["ladder"]["u_p_candidates"]), int(c["rates"]["loaded_readout"])})
@@ -110,7 +115,7 @@ class RealEngine:
                 tasks.append(runner.Task(safe, tuple(argv), done, jobdir / f"{safe}.failed.json", jobdir / f"{safe}.log"))
             res = self.cfg["resources"]
             left = (self.ledger.remaining() if self.ledger is not None else 1e12)
-            outcomes, secs = runner.run_tasks(tasks, workers=self.workers, cap_seconds=left, rss_worker_bytes=int(res["rss_worker_bytes"]), rss_aggregate_bytes=int(res["rss_aggregate_bytes"]), env=self.env)
+            outcomes, secs = runner.run_tasks(tasks, workers=self.workers, cap_seconds=left, rss_worker_bytes=int(res["rss_worker_bytes"]), rss_aggregate_bytes=int(res["rss_aggregate_bytes"]), env=self.env, memory_ok=self.memory_ok, memory_retry=self.memory_retry, memory_max=self.memory_max)
             bad = {k: v for k, v in outcomes.items() if v["status"] != runner.COMPLETED}
             for sp, to, nd in todo:
                 if f"{sp['label']}@{to}" not in bad:

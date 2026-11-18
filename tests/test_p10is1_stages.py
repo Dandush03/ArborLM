@@ -199,7 +199,7 @@ def projected_candidate(tmp: Path, *, projection: bool = True, over_budget: bool
     if caps:
         proj["caps"] = caps
     text = cfgp.read_text().replace("provisional = true", "provisional = false")
-    want = config_caps or ({"total_hours": caps["total_cap_hours"], "train_hours": caps["stage_cap_hours"]["train"], "evaluate_hours": caps["stage_cap_hours"]["evaluate"]} if caps else {})
+    want = config_caps or (dict(caps["config_caps"]) if caps else {})  # every cap of the config from the projection
     for k, v in want.items():
         text = re.sub(rf"^{k} = .*$", f"{k} = {v}", text, flags=re.M)
     cfgp.write_text(text)

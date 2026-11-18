@@ -159,7 +159,8 @@ def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_lis
         with mp.get_context("spawn").Pool(k) as pool:
             got = pool.map(_concurrent_timing, tasks, chunksize=1)
         ratios = {g["item"]: max(1.0, g["wall"] / wall_iso[g["item"]]) for g in got}
-        by[str(k)] = {"train": dict(cpu), "evaluate": {g["item"]: max(g["evaluate_seconds"], evals[g["item"]]) for g in got}, "contention": max(ratios.values()), "contention_by_item": ratios, "peak_rss_bytes_per_worker": max(g["peak_rss_bytes"] for g in got), "workers": k}
+        worst = max(ratios, key=lambda i: ratios[i])
+        by[str(k)] = {"contention_worst_item": worst, "train": dict(cpu), "evaluate": {g["item"]: max(g["evaluate_seconds"], evals[g["item"]]) for g in got}, "contention": max(ratios.values()), "contention_by_item": ratios, "peak_rss_bytes_per_worker": max(g["peak_rss_bytes"] for g in got), "workers": k}
     fixed = {"gates": gates_s, "baselines": base_s, "timing": sum(float(v) * (warmup + repeats * updates) for v in cpu.values()), "analysis": t2 - t1, "report": t3 - t2, "throughput": 420.0}
     for v in by.values():
         v["fixed"] = fixed
@@ -237,11 +238,14 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         ctx = items.Ctx(view.mode, root, fz.experiments_root(), sizes=dict(view.data.get("sizes") or {}))
         out = measure_rates(view, ctx, view.path or plan_path, [int(w) for w in args.workers.split(",")], candidate=cand)
         Path(args.rates_out).write_text(json.dumps(core.jsonable(out), indent=2, sort_keys=True) + "\n")
-        print(json.dumps({"rates_file": args.rates_out, "contention": {k: v["contention"] for k, v in out["by_workers"].items()}}))
+        print(json.dumps({"rates_file": args.rates_out, "contention_worst_item_used_by_the_rule": {k: v["contention"] for k, v in out["by_workers"].items()}, "contention_by_item": {k: v["contention_by_item"] for k, v in out["by_workers"].items()}}))
+        core.prefreeze_ledger(root).charge("measuring-rehearsal", root.name, out["seconds"])
         return 0
     q = read_json(Path(args.qualification))["table"] if args.qualification else None
+    t_count = time.monotonic()
     res = run_counting(plan_path, root, repo=repo, qualification=q, record_path=Path(args.record_out) if args.record_out else None)
     print(json.dumps({"stages": res["stages"], "candidate": res["candidate"]["status"]}))
+    core.prefreeze_ledger(root).charge("counting-rehearsal", root.name, time.monotonic() - t_count)
     return 0 if res["candidate"]["status"] == "COMPLETE" else 1
 
 
@@ -257,7 +261,9 @@ def cmd_qualify(args: argparse.Namespace) -> int:
     for k, v in cfg["grid"]["r2_reference_cell"].items():
         f, n = int(v[0]), int(v[1])
         rows[int(k)] = (f, n, int(cal["row_u_p"][str(k)]), float(cal["rates"][core.unit_key("R2", f, n, cfg)]))
+    began = time.monotonic()
     out = run_r2_qualification(sd, rows, [("rehearsal", core.REHEARSAL, 1), ("cal1", "calibration", 1), ("cal2", "calibration", 2)], cfg=cfg, experiments_root=fz.experiments_root())
+    core.prefreeze_ledger(Path(args.run_dir)).charge("qualify", Path(args.run_dir).name, time.monotonic() - began)
     Path(args.run_dir).mkdir(parents=True, exist_ok=True)
     (Path(args.run_dir) / "qualification.json").write_text(json.dumps(core.jsonable({"table": out["table"], "failures": out["failures"], "rule": out["rule"]}), indent=2, sort_keys=True) + "\n")
     print(json.dumps({"qualification": str(Path(args.run_dir) / "qualification.json"), "failures": len(out["failures"])}))

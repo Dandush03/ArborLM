@@ -794,6 +794,20 @@ class Ledger:
         write_json(self.path, {"study": STUDY, "kind": "ledger", "schema": SCHEMA, "total_seconds": self.total_seconds, "entries": entries})
 
 
+def read_ledger_seconds(path: Path) -> float:
+    """The charged seconds in a ledger file (any total): what a stage before the freeze spent."""
+    data = read_json(path)
+    if not isinstance(data, dict) or data.get("study") != STUDY or data.get("kind") != "ledger":
+        raise ValueError(f"not a P10IS1 ledger: {path}")
+    return float(sum(float(e["seconds"]) for e in data["entries"]))
+
+
+def prefreeze_ledger(run_dir: Path) -> "Ledger":
+    """The ledger of the stages before the freeze that have none of their own (generation, qualification, the rehearsals): ``<run>/../P10IS1-prefreeze-ledger.json``. The calibration keeps its own, in the sealed directory.
+    ``project --ledger`` adds them up into H_c."""
+    return Ledger(run_dir.parent / "P10IS1-prefreeze-ledger.json", 1e9)
+
+
 def propose_cap_hours(charged_hours: float, projected_remaining_hours: float) -> float:
     """Section 15: a resource cap is set after the rehearsal as charged + 2 x projected remaining, rounded up to the hour."""
     if charged_hours < 0 or projected_remaining_hours < 0:

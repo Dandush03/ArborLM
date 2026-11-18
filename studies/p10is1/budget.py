@@ -62,20 +62,65 @@ def evaluation_items(cells: Sequence[Mapping[str, Any]], lengths: Mapping[str, i
     return [sum(1 for u in c["snapshots"] if u <= lengths[c["label"]]) * rates.snapshot_seconds(c["arm"], c["slots"]) for c in cells]
 
 
+def _stage_seconds(cells: Sequence[Mapping[str, Any]], grants: Mapping[str, int], rates: Rates) -> dict[str, float]:
+    """The training stage (every cell to its base length: a ladder cell to U0), the LADDER stage as the code executes it (cell by cell, round by round: each round is a BARRIER of the training segment then the evaluation
+    of the round's new snapshots, each a makespan on the workers; round 0 evaluates every snapshot up to U0) and the evaluation stage (the cells that are not ladder cells). A ladder cell is costed as if it used every
+    granted level (it may stop earlier; budget is never redistributed)."""
+    base = {c["label"]: (int(c["u0"]) if c["ladder_cell"] else int(c["run"])) for c in cells}
+    train_s = makespan(training_items(cells, base, rates), rates.workers)
+    ladder_s = 0.0
+    for name in dict.fromkeys(core.cell_name(c["facts"], c["slots"]) for c in cells if c["ladder_cell"]):
+        cs = [c for c in cells if c["ladder_cell"] and core.cell_name(c["facts"], c["slots"]) == name and c["arm"] != "R2"]
+        u0 = int(cs[0]["u0"])
+        pts = [u0, *[p for p in core.levels_above(u0) if p <= int(grants[name])]]
+        prev = 0
+        for i, p in enumerate(pts):
+            seg = [] if i == 0 else [(p - prev) * rates.update_seconds(c["arm"], c["slots"]) for c in cs]
+            ev = [sum(1 for u in c["snapshots"] if prev < u <= p) * rates.snapshot_seconds(c["arm"], c["slots"]) for c in cs]
+            ladder_s += makespan(seg, rates.workers) + makespan(ev, rates.workers)
+            prev = p
+    flat = [c for c in cells if not c["ladder_cell"]]
+    eval_s = makespan(evaluation_items(flat, {c["label"]: int(c["run"]) for c in flat}, rates), rates.workers)
+    return {"train": train_s, "ladder": ladder_s, "evaluate": eval_s}
+
+
 def project(cells: Sequence[Mapping[str, Any]], grants: Mapping[str, int], rates: Rates) -> dict[str, Any]:
-    """The projected charged seconds of every stage that depends on the lengths, with a ladder cell at its current grant (``grants``: cell name -> G; U0 for a base plan) and every other cell at its run length:
-    training and evaluation, each a makespan on the worker count, plus the fixed stages."""
+    """The projected charged seconds of every stage that depends on the lengths, with a ladder cell at its current grant (``grants``: cell name -> G; U0 for a base plan): training, the ladder stage with its round
+    barriers, evaluation, the COUNTING REHEARSAL (section 17.1 names it: every stage of ONE replicate on the rehearsal draw at the same lengths) and the fixed stages (gates, baselines, timing, throughput, analysis, report:
+    whatever the measuring rehearsal measured), each by name."""
     lengths = {c["label"]: (int(grants[core.cell_name(c["facts"], c["slots"])]) if c["ladder_cell"] else int(c["run"])) for c in cells}
-    tr, ev = training_items(cells, lengths, rates), evaluation_items(cells, lengths, rates)
-    train_s, eval_s = makespan(tr, rates.workers), makespan(ev, rates.workers)
-    # the COUNTING REHEARSAL (section 17.1 names it): every stage of ONE replicate on the rehearsal draw at the same lengths (a ladder cell at its granted length, as if it never stopped early), training then evaluation
+    st = _stage_seconds(cells, grants, rates)
     first = min((c["draw"] for c in cells), default=0)
-    one = [c for c in cells if c["draw"] == first]
-    count_s = makespan(training_items(one, lengths, rates), rates.workers) + makespan(evaluation_items(one, lengths, rates), rates.workers)
-    fixed = sum(rates.fixed.values())  # gates, baselines, timing, throughput, analysis, report: whatever the measuring rehearsal measured
+    count = _stage_seconds([c for c in cells if c["draw"] == first], grants, rates)
+    count_s = sum(count.values())
+    fixed = sum(rates.fixed.values())
+    tr = training_items(cells, lengths, rates)
     return {
-        "train_seconds": train_s, "evaluate_seconds": eval_s, "counting_rehearsal_seconds": count_s, "fixed_seconds": fixed, "remaining_seconds": train_s + eval_s + count_s + fixed,
-        "longest_training_item_seconds": max(tr) if tr else 0.0, "workers": rates.workers,
+        "train_seconds": st["train"], "ladder_seconds": st["ladder"], "evaluate_seconds": st["evaluate"], "counting_rehearsal_seconds": count_s, "fixed_seconds": fixed, "fixed_by_stage": dict(rates.fixed),
+        "remaining_seconds": st["train"] + st["ladder"] + st["evaluate"] + count_s + fixed, "longest_training_item_seconds": max(tr) if tr else 0.0, "workers": rates.workers,
+    }  # fmt: skip
+
+
+FIXED_STAGES = ("gates", "baselines", "timing", "throughput", "analysis", "report")
+
+
+def stage_hours_of(p: Mapping[str, Any]) -> dict[str, float]:
+    """The projected hours by stage: train, ladder, evaluate, the counting rehearsal and every fixed stage by name (a stage the rates file lacks is 0)."""
+    out = {"train": p["train_seconds"] / 3600.0, "ladder": p["ladder_seconds"] / 3600.0, "evaluate": p["evaluate_seconds"] / 3600.0, "counting_rehearsal": p["counting_rehearsal_seconds"] / 3600.0}
+    out.update({k: float(p["fixed_by_stage"].get(k, 0.0)) / 3600.0 for k in FIXED_STAGES})
+    return out
+
+
+def config_caps(h_charged: float, stage_hours: Mapping[str, float]) -> dict[str, float]:
+    """Every cap of the config from the projection by the rule of section 15 (twice the projected hours of the stage, rounded up to the hour; the total is charged + 2 x projected remaining, rounded up). The stages that
+    share a cap share it: train and ladder (``train_hours``), evaluate and baselines (``evaluate_hours``), gates, analysis and report (``analysis_hours``); ``rehearsal_hours`` is the counting rehearsal."""
+    def up(x: float) -> float:
+        return float(math.ceil(2.0 * x - 1e-9))
+
+    g = stage_hours.get
+    return {
+        "train_hours": up(g("train", 0.0) + g("ladder", 0.0)), "evaluate_hours": up(g("evaluate", 0.0) + g("baselines", 0.0)), "timing_hours": up(g("timing", 0.0)), "throughput_hours": up(g("throughput", 0.0)),
+        "analysis_hours": up(g("gates", 0.0) + g("analysis", 0.0) + g("report", 0.0)), "rehearsal_hours": up(g("counting_rehearsal", 0.0)), "total_hours": core.propose_cap_hours(h_charged, sum(stage_hours.values())),
     }  # fmt: skip
 
 
@@ -114,7 +159,7 @@ def grant_levels(cells: Sequence[Mapping[str, Any]], rates: Rates, h_charged: fl
                 out["closed"].append({"cell": name, "at_level": j})
     p = project(cells, grants, rates)
     total = h_charged + p["remaining_seconds"] / 3600.0
-    out.update(status="WITHIN BUDGET", refused=False, grants=grants, total_hours=total, remaining_hours=p["remaining_seconds"] / 3600.0, longest_item_hours=p["longest_training_item_seconds"] / 3600.0, stage_hours={"train": p["train_seconds"] / 3600.0, "evaluate": p["evaluate_seconds"] / 3600.0, "counting_rehearsal": p["counting_rehearsal_seconds"] / 3600.0, "fixed": p["fixed_seconds"] / 3600.0})
+    out.update(status="WITHIN BUDGET", refused=False, grants=grants, total_hours=total, remaining_hours=p["remaining_seconds"] / 3600.0, longest_item_hours=p["longest_training_item_seconds"] / 3600.0, stage_hours=stage_hours_of(p))
     return out
 
 
@@ -133,4 +178,4 @@ def caps_from_projection(h_charged: float, stage_hours: Mapping[str, float], cfg
     total = core.propose_cap_hours(h_charged, remaining)
     stages = {k: float(math.ceil(2.0 * v - 1e-9)) for k, v in stage_hours.items()}
     limit = float(c["budget"]["total_cap_hours"])
-    return {"total_cap_hours": total, "stage_cap_hours": stages, "sum_of_stage_caps_plus_charged": sum(stages.values()) + h_charged, "total_above_limit": total > limit + 1e-9, "limit_hours": limit}
+    return {"total_cap_hours": total, "config_caps": config_caps(h_charged, stage_hours), "stage_cap_hours": stages, "sum_of_stage_caps_plus_charged": sum(stages.values()) + h_charged, "total_above_limit": total > limit + 1e-9, "limit_hours": limit}

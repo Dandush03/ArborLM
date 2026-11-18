@@ -41,6 +41,14 @@ def cmd_generate(args: argparse.Namespace) -> int:
     cfg = core.load_config()
     run_dir = Path(args.run_dir)
     ctx = items.Ctx(core.REGISTERED, run_dir, experiments_root())
+    began = time.monotonic()
+    try:
+        return _generate(cfg, run_dir, ctx, s1)
+    finally:
+        core.prefreeze_ledger(run_dir).charge("generate", run_dir.name, time.monotonic() - began)  # the hours before the freeze are recorded: they are part of H_c
+
+
+def _generate(cfg: Any, run_dir: Path, ctx: items.Ctx, s1: Any) -> int:
     for d in range(1, int(cfg["seeds"]["registered_draws"]) + 1):
         seeds, init = core.seeds_for(core.REGISTERED, d, cfg)
         path = manifest_path(run_dir, seeds.name)
@@ -127,17 +135,27 @@ def cmd_project(args: argparse.Namespace) -> int:
     cfg = core.load_config(repo / core.CONFIG)
     calibration = read_json(Path(args.calibration))
     rates_in = read_json(Path(args.rates))
+    ledgers = {str(p): core.read_ledger_seconds(Path(p)) / 3600.0 for p in (args.ledger or [])}
+    h_c = float(args.charged_hours or 0.0) + sum(ledgers.values())  # H_c: the hours charged before the freeze: the typed figure plus every ledger named
     cells = core.planned_cells(params_from_calibration(calibration), core.REGISTERED, cfg)
     w = {int(k): v for k, v in rates_in["by_workers"].items()}
     cand = {k: budget.Rates({tuple(x.split("|")[:1]) + (int(x.split("|")[1]),): float(v) for x, v in r["train"].items()}, {tuple(x.split("|")[:1]) + (int(x.split("|")[1]),): float(v) for x, v in r["evaluate"].items()}, float(r["contention"]), r["fixed"], k) for k, r in ((k, w[k]) for k in w)}  # type: ignore[misc]
     base_grants = {k: int(v) for k, v in calibration["u0"].items()}
     chosen = budget.choose_workers(cand, cells, base_grants)
-    out = budget.grant_levels(cells, cand[chosen["chosen_workers"]], float(args.charged_hours), cfg)
+    out = budget.grant_levels(cells, cand[chosen["chosen_workers"]], h_c, cfg)
     out["worker_choice"] = chosen
+    out["h_charged_breakdown"] = {"typed_hours": float(args.charged_hours or 0.0), "ledgers_hours": ledgers}
+    by_item = {k: float(v) for k, v in (w[chosen["chosen_workers"]].get("contention_by_item") or {}).items()}
+    used = float(w[chosen["chosen_workers"]]["contention"])
+    vals = sorted(by_item.values())
+    out["measured_slowdown"] = {
+        "rule_value_used_for_every_item": used, "rule_worst_item": max(by_item, key=lambda k: by_item[k]) if by_item else None, "by_item": by_item, "minimum": vals[0] if vals else None, "median": vals[len(vals) // 2] if vals else None,
+        "note": "the rule multiplies every training item by the single worst item's slowdown; the per-item figures show how conservative that is (P10-S1's measured per-item slowdown was 1.3 to 1.8)",
+    }  # fmt: skip
     if not out["refused"]:
-        out["caps"] = budget.caps_from_projection(float(args.charged_hours), out["stage_hours"], cfg)
+        out["caps"] = budget.caps_from_projection(h_c, out["stage_hours"], cfg)
     Path(args.out).write_text(json.dumps(core.jsonable(out), indent=2, sort_keys=True) + "\n")
-    print(json.dumps({"status": out["status"], "grants": out["grants"], "total_hours": out["total_hours"], "budget_B_hours": out["budget_B_hours"]}))
+    print(json.dumps({"status": out["status"], "grants": out["grants"], "total_hours": out["total_hours"], "budget_B_hours": out["budget_B_hours"], "h_charged_hours": h_c, "slowdown_rule_worst_item": used, "slowdown_by_item": by_item}))
     return 0 if not out["refused"] else 3
 
 
@@ -159,10 +177,14 @@ def require_projection(plan: planmod.Plan, cfg: Any) -> None:
     if caps["total_above_limit"] or float(caps["total_cap_hours"]) > limit + 1e-9:
         raise StageRefused(f"refused: the projection's total cap {caps['total_cap_hours']} h is above the block budget's {limit} h: raising it is the human lead's own decision")
     c = cfg["caps"]
-    want = {"total_hours": float(caps["total_cap_hours"]), "train_hours": float(caps["stage_cap_hours"]["train"]), "evaluate_hours": float(caps["stage_cap_hours"]["evaluate"])}
+    want = {k: float(v) for k, v in (caps.get("config_caps") or {}).items()}  # EVERY cap of the config (train, evaluate, timing, throughput, analysis, rehearsal, total) from the projection's rule
+    if set(want) != {"train_hours", "evaluate_hours", "timing_hours", "throughput_hours", "analysis_hours", "rehearsal_hours", "total_hours"}:
+        raise StageRefused("refused: the projection does not carry a cap for every stage")
     got = {k: float(c[k]) for k in want}
     if got != want:
         raise StageRefused(f"refused: the config's caps {got} are not the caps the projection's rule gives {want} (charged + 2 x projected remaining, rounded up)")
+    if not plan.data["projection"].get("h_charged_hours", 0) > 0:
+        raise StageRefused("refused: the projection does not record the hours charged before the freeze (H_c)")
 
 
 def cmd_freeze(args: argparse.Namespace) -> int:

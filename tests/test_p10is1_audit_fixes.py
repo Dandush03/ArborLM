@@ -297,3 +297,91 @@ def test_f8_label_level_row_4b_over_the_readings_that_exist() -> None:
 
 
 _ = os
+
+
+# --- N1: the calibration pool applies the machine-wide memory check -----------------------------------------------------------------------------------
+def test_n1_the_calibration_pool_applies_the_memory_check_and_pauses_environment(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(ROOT)
+    eng = pool_engine(tmp_path, 2)
+    assert isinstance(eng.memory_ok(), bool) and eng.memory_retry == 600.0 and eng.memory_max == 6 * 3600.0  # the default is the machine-wide vm_stat check of section 16.1, every 10 minutes for at most 6 hours
+    eng.memory_ok = lambda: False  # the machine's memory does not cover the aggregate guard
+    eng.memory_retry, eng.memory_max = 0.05, 0.3
+    t0 = time.monotonic()
+    with pytest.raises(calibrate_engine.CalibrationPaused) as exc:
+        eng.prefetch([("F-OQ|1024", 0.003, 16)])
+    assert set(exc.value.statuses.values()) == {runner.PAUSED_ENVIRONMENT} and time.monotonic() - t0 < 30
+    assert not list((eng.ctx.run_dir / "jobs").glob("*.log")) and not list((eng.ctx.run_dir / "evaluate").rglob("*.json"))  # no worker was started
+    eng.memory_ok = lambda: True  # memory returns: the same engine resumes and finishes the same jobs
+    eng.prefetch([("F-OQ|1024", 0.003, 16)])
+    assert eng.measure("F-OQ|1024", 0.003, 16).readout_a_use >= 0.0
+
+
+# --- N2: H_c is in the registered ledger, every cap is checked against the projection -------------------------------------------------------------------
+def test_n2_the_registered_ledger_carries_h_c_and_the_total_binds_on_the_true_total(tmp_path: Path) -> None:
+    pl = planmod.Plan({**core.envelope("freeze_plan"), "mode": "registered", "cells": [], "params": {}, "projection": {"h_charged_hours": 12.0}, "stage_caps": {"train_hours": 14.0, "evaluate_hours": 1.0, "total_hours": 30.0}})
+    run = tmp_path / "run"
+    led = stages.ledger_of(pl, run)
+    assert led.charged("pre-freeze") == 12.0 * 3600 and led.remaining() == 18.0 * 3600  # the registered stages may spend 30 - 12 h, not 30 h
+    assert stages.stage_cap_seconds(pl, "train", led) == 14.0 * 3600
+    led.charge("train", "r", 14.0 * 3600)
+    assert stages.stage_cap_seconds(pl, "evaluate", led) == 1.0 * 3600 and stages.stage_cap_seconds(pl, "train", led) == 0.0
+    led.charge("evaluate", "r", 1.0 * 3600)
+    led.charge("timing", "r", 2.0 * 3600)
+    assert stages.ledger_of(pl, run).charged() == (12.0 + 14.0 + 1.0 + 2.0) * 3600  # a second call does not charge H_c again
+    big = planmod.Plan({**pl.data, "stage_caps": {"train_hours": 30.0, "evaluate_hours": 1.0, "total_hours": 30.0}})
+    assert stages.stage_cap_seconds(big, "train", stages.ledger_of(big, run)) == 1.0 * 3600  # train's own cap (30 h) is cut to what the total has left (30 - 29 h)
+
+
+def test_n2_the_freeze_checks_every_stage_cap_against_the_projection(tmp_path: Path) -> None:
+    import re
+
+    import test_p10is1_stages as TS
+
+    repo, rpath = TS.projected_candidate(tmp_path)
+    plan = read_json(repo / core.PLAN)
+    caps = plan["projection"]["caps"]["config_caps"]
+    assert set(caps) == {"train_hours", "evaluate_hours", "timing_hours", "throughput_hours", "analysis_hours", "rehearsal_hours", "total_hours"} and plan["projection"]["h_charged_hours"] == 4.0
+    with pytest.raises(core.StageRefused, match="gate G9"):
+        TS.freeze.cmd_freeze(TS.rehearsal_record(rpath, repo))  # consistent: the freeze reaches G9
+    cfgp = repo / core.CONFIG
+    text = cfgp.read_text()
+    for key in ("timing_hours", "throughput_hours", "analysis_hours", "rehearsal_hours"):
+        cfgp.write_text(re.sub(rf"^{key} = .*$", f"{key} = 99.0", text, flags=re.M))
+        with pytest.raises(core.StageRefused, match="are not the caps the projection's rule gives"):
+            TS.freeze.cmd_freeze(TS.rehearsal_record(rpath, repo))
+    cfgp.write_text(text)
+
+
+def test_projection_prints_the_measured_slowdown_per_item_beside_the_rule_figure(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    import test_p10is1_stages as TS
+
+    from studies.p10is1 import freeze
+
+    repo = TS.mini_repo(tmp_path / "m")
+    cal = tmp_path / "cal.json"
+    cal.write_text(json.dumps(TS.CAL))
+    keys = [f"{a}|{n}" for a in core.ARMS for n in (256, 1024, 4096, 16384, 32768)]
+    by_item = {k: 1.3 + 0.01 * i for i, k in enumerate(keys)}
+    by_item["D-OQ|1024"] = 1.95  # the worst item: the rule multiplies EVERY item by it
+    rates = {"by_workers": {"6": {"train": dict.fromkeys(keys, 0.001), "evaluate": dict.fromkeys(keys, 0.01), "contention": 1.95, "contention_by_item": by_item, "contention_worst_item": "D-OQ|1024", "fixed": {"gates": 60.0, "timing": 100.0}}}}
+    rf = tmp_path / "rates.json"
+    rf.write_text(json.dumps(rates))
+    led = core.Ledger(tmp_path / "calib-ledger.json", 1e9)
+    led.charge("calibration", "c", 7200.0)
+    out = tmp_path / "projection.json"
+    rc = freeze.cmd_project(argparse.Namespace(repo=str(repo), calibration=str(cal), rates=str(rf), charged_hours=1.0, ledger=[str(tmp_path / "calib-ledger.json")], out=str(out)))
+    printed = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+    proj = read_json(out)
+    assert rc == 0 and proj["h_charged_hours"] == 3.0 and proj["h_charged_breakdown"]["typed_hours"] == 1.0  # 1 typed + 2 from the calibration ledger
+    sd = proj["measured_slowdown"]
+    assert sd["rule_value_used_for_every_item"] == 1.95 and sd["rule_worst_item"] == "D-OQ|1024" and sd["by_item"] == by_item and sd["minimum"] == 1.3 and sd["median"] > 1.3
+    assert printed["slowdown_rule_worst_item"] == 1.95 and printed["slowdown_by_item"] == by_item and printed["h_charged_hours"] == 3.0
+    assert set(proj["caps"]["config_caps"]) >= {"timing_hours", "throughput_hours", "analysis_hours"}
+
+
+def test_prefreeze_stages_charge_a_ledger(tmp_path: Path) -> None:
+    run = tmp_path / "gen" / "run"
+    led = core.prefreeze_ledger(run)
+    led.charge("generate", "run", 90.0)
+    led.charge("qualify", "run", 30.0)
+    assert core.read_ledger_seconds(run.parent / "P10IS1-prefreeze-ledger.json") == 120.0

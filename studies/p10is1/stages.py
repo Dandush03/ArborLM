@@ -86,7 +86,11 @@ def ledger_of(plan: Plan, run_dir: Path, repo: Path | None = None) -> core.Ledge
     path = run_dir.parent / ("P10IS1-ledger.json" if plan.mode == core.REGISTERED else f"P10IS1-{plan.mode}-{run_dir.name}-ledger.json")
     if repo is not None:
         planmod.require_ignored_path(repo, path)
-    return core.Ledger(path, float(plan.data["stage_caps"]["total_hours"]) * 3600.0)
+    led = core.Ledger(path, float(plan.data["stage_caps"]["total_hours"]) * 3600.0)
+    proj = plan.data.get("projection") or {}
+    if proj.get("h_charged_hours") and not path.is_file():  # H_c, the hours charged before the freeze, is in the registered ledger from its first entry: the block budget on caps binds on the TRUE total
+        led.charge("pre-freeze", "H_c", float(proj["h_charged_hours"]) * 3600.0)
+    return led
 
 
 def stage_cap_seconds(plan: Plan, stage: str, ledger: core.Ledger) -> float:
@@ -541,7 +545,8 @@ def build_parser() -> argparse.ArgumentParser:
     pr = sub.add_parser("project", help="the projection of section 17.1 from the measuring rehearsal's rates")
     pr.add_argument("--calibration", required=True)
     pr.add_argument("--rates", required=True)
-    pr.add_argument("--charged-hours", required=True, type=float)
+    pr.add_argument("--charged-hours", type=float, default=0.0, help="hours charged before the freeze that have no ledger (typed by hand); added to every --ledger")
+    pr.add_argument("--ledger", action="append", help="a ledger file of a stage before the freeze (calibration, generate/qualify/rehearsal pre-freeze ledger); repeatable")
     pr.add_argument("--out", required=True)
     pr.add_argument("--repo")
     f = sub.add_parser("freeze", help="write freeze/freeze_record.json for the committed candidate plan")
