@@ -216,3 +216,26 @@ def test_n3_a_nonfinite_value_at_ustar_is_a_failed_cell_not_an_integrity_case() 
     # a cell that is finite at U* still gets the integrity check at an earlier checkpoint
     reg = synthetic.registry(CFG, {(TREE, FRESH): Spec(gain=0.02, bad_replay=[4], bad_ckpts=[512]), (DENSE, FRESH): Spec(gain=0.03)})
     assert analysis.analyse(reg, synthetic.rate_table(CFG), CFG)["regimes"][FRESH]["line1"]["label"] == "NOT EVALUABLE"
+
+
+# ---------------- the loader never configures the process ----------------
+SUITE = Path("/Users/daniellaloush/dandush03/ArborLM/experiments/P3LT-20261113T033545902673Z-befd369dda744953a2ed6fc3a8108d1d")
+
+
+def test_parent_loader_does_not_call_configure_cpu() -> None:
+    import inspect
+
+    from studies.p10i_s3 import parents
+
+    assert "configure_cpu(" not in inspect.getsource(parents.load_backbone) and "import configure_cpu" not in inspect.getsource(parents.load_backbone)
+
+
+@pytest.mark.skipif(not SUITE.is_dir(), reason="needs the lead's P3 parent suite")
+def test_two_real_parents_load_in_an_already_configured_process() -> None:
+    from studies.p10i_s3 import gates, parents
+
+    gates.configure_process()  # the entry point's one configuration; the old loader configured again and torch refused
+    a, da = parents.load_backbone(ROOT, SUITE, 0)
+    b, db = parents.load_backbone(ROOT, SUITE, 4)
+    assert da != db and len(da) == 64 and sum(p.numel() for p in a.parameters()) == 27392
+    assert parents.recorded_backbone_sha(ROOT, 0) == da and parents.recorded_backbone_sha(ROOT, 4) == db

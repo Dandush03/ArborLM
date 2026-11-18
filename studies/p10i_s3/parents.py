@@ -35,7 +35,6 @@ def consumed_ranks(repo: Path, parent: int) -> list[int]:
 
 def load_backbone(repo: Path, parent_suite: Path, parent: int) -> tuple[Any, str]:
     """Returns (Backbone, backbone digest). Raises if the digest differs from the P4 record."""
-    from arborlm.engine import configure_cpu
     from arborlm.longer_training import _isolated_rng
     from arborlm.optimization_followup import _optimizer
     from arborlm.p2_config import CONTROL, Cell
@@ -48,7 +47,7 @@ def load_backbone(repo: Path, parent_suite: Path, parent: int) -> tuple[Any, str
     cell_dir = parent_suite / "cells" / compact["run_id"]
     identity = read_json(cell_dir / "manifest.json")["checkpoint_identity"]
     cell = Cell(b, 201, o, CONTROL)
-    configure_cpu()
+    # no configuration here: the process is configured once, by ``gates.configure_process`` at the entry point (torch sets the interop threads once per process)
     with _isolated_rng():
         original = FollowupModel(cell)
         opt = _optimizer(original)
