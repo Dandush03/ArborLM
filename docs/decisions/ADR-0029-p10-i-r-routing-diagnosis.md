@@ -1,13 +1,13 @@
 # ADR-0029 — P10-I-R — frozen-checkpoint routing diagnosis (Stage A)
 
-**Status: DRAFT — NOT APPROVED. Nothing under this ADR is implemented, calibrated, frozen or run.**
+**Status: APPROVED FOR IMPLEMENTATION AND REHEARSAL (Decision 1) by the human lead on 2026-11-17 UTC. Not frozen. No registered run is approved: the freeze and the registered run need Decision 2. Nothing under this ADR has been implemented or run at the time of this approval.**
 
 - **Date:** 2026-11-17 (UTC). Draft 3 of this ADR, after the third review. It began as the routing lane of ADR-0024 draft 1, was revised after the independent specification review (`docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0024.md`, NOT READY) and moved to its own ADR, was revised again after the confirmation review (`REVIEW2_ADR-0024_ADR-0029.md` beside it, NOT READY), and now carries the edits of the third review (`REVIEW3_ADR-0029.md` beside it, READY AFTER THE LISTED EDITS; no blocking finding). §17 maps every finding that concerns it. The capacity study is `docs/decisions/ADR-0024-p10-i-s1-capacity-scaling.md`. **SPEC: PENDING ASTRA REVIEW.** `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 - **Study code** P10IR. **Package** `studies/p10ir/` (new code only; no file of `studies/p9` or `studies/p10s1` is edited). **Config** `configs/p10ir_routing.toml`. **Tests** `tests/test_p10ir_*.py`.
 - **Origin.** `docs/reviews/p10-i-direction-2026-11-17/LITERATURE_AND_ROUTING_NOTE.md` sections 4 and 5 (binding direction). The question as the note puts it: can ArborLM keep the flat memory's accuracy while using tree-like sparse retrieval, without losing its ability to keep learning? This study addresses only the first, diagnostic step.
 - **Where it lives.** The human lead's direction (note §5.4) placed this lane inside ADR-0024. Giving it its own ADR was the reviewer's and the lead's recommendation. Reasons: it shares no rule, budget or frozen input with the capacity study; it is a short re-analysis where that is a long training study; and one ADR hashed into two freezes repeats the failure of P10-S1 attempt 1. The content of the lane is unchanged by where it lives. **The human lead ruled on 2026-11-17: "Keep ADR-0029".** The routing diagnosis stays this ADR.
 - **Immutability.** P10-S1's code, records, labels and run directory are not edited or revised. Its registered TREE_BEHIND stands. ArborLM is unproven research; nothing below is a success claim.
-- **Approval.** The human lead alone approves this specification, its budget and each run. Lead's choices open to his ruling are marked **PENDING HUMAN LEAD RULING** and collected in §16.
+- **Approval.** The human lead alone approves this specification, its budget and each run. Decision 1 is recorded in §18: the open choices of §16 are ruled as recommended there.
 - **Scope.** Stage A only. **Stage B (any new router, index training, product-key memory, periodic refresh, or other new architecture) is outside this ADR**; if this study indicates it, it is a separate study with its own specification.
 
 ## 0. What kind of study this is
@@ -415,3 +415,17 @@ Changed in draft 2 and reviewed in the third review: the per-component checkpoin
 | R3-A12 closure on one panel only | ANSWERED: both-panels rule kept; put to the human lead | §16 item 10 |
 
 `Astra review: NOT_PERFORMED`.
+
+## 18. Approval record — Decision 1 (2026-11-17 UTC)
+
+The lead put draft 3 to the human lead with its review state (three independent reviews by the `arbor-auditor` subagent, Opus 5.5; the third: READY AFTER THE LISTED EDITS; the text with those edits applied not reviewed again), what approval would cover (implementation and rehearsal only), the cost estimate (about 4–8 charged hours), the open choices of §16 with the recommended option for each, and the departures from the next-action table of the note's §5.2. Asked "Do you approve ADR-0029 for implementation and rehearsal, with the recommended options?", the human lead answered:
+
+> Approve as recommended
+
+Earlier rulings on the same day, already recorded in §16: "Keep ADR-0029" (item 1) and "yes it should" (item 7).
+
+**What this approves.** Implementation of the study in new files (`studies/p10ir/`, `configs/p10ir_routing.toml`, `tests/test_p10ir_*.py`) and its rehearsal as §13 defines it. Every item of §16 is ruled at its recommended option, including item 8: the departures from the note's §5.2 table are accepted, so where this ADR and that table differ, this ADR governs P10-I-R. Wherever §16 or another section says PENDING HUMAN LEAD RULING, read it as ruled by this record.
+
+**What it does not approve.** The freeze, any read of a sealed value, and the registered stages A1 and A2: these need Decision 2, taken on the rehearsal's record and an independent audit of the code. No Stage B study. No other P10-I specification. No threshold, label or seed changes after this point without a recorded amendment.
+
+`Astra review: NOT_PERFORMED`. Claude review is not Astra review.

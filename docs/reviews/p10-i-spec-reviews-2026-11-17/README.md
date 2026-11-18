@@ -1,6 +1,6 @@
 # P10-I draft specifications — status and review trail (2026-11-17 UTC)
 
-**Nothing here is approved. Nothing under P10-I is implemented, calibrated, frozen or run.** Each specification needs the human lead's approval before any implementation or rehearsal, and a second decision before any registered run. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+**Only ADR-0029 is approved, and only for implementation and rehearsal (2026-11-17). No other draft is approved. No registered run of any P10-I study is approved.** Each specification needs the human lead's approval before any implementation or rehearsal, and a second decision before any registered run. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 
 Written by the lead (Claude Fable 5.2). Drafts by `arbor-lead` subagents (Fable 5.2); reviews, the seed registry and its checker by the `arbor-auditor` subagent (Opus 5.5), as recorded in session metadata.
 
@@ -14,7 +14,7 @@ Written by the lead (Claude Fable 5.2). Drafts by `arbor-lead` subagents (Fable 
 | `docs/decisions/ADR-0026-p10-i-s3-longer-training.md` | P10-I-S3 | 483 | 3 | NOT READY (1 blocking) | READY AFTER THE LISTED EDITS | Edits applied; not re-reviewed |
 | `docs/decisions/ADR-0027-p10-i-s4-quality-against-cost.md` | P10-I-S4 (conditional) | 279 | 3 | NOT READY (1 blocking) | NOT READY (1 blocking, cross-references) | Third draft against the final siblings; not re-reviewed |
 | `docs/decisions/ADR-0028-p10-i-s5-physical-ssd-memory.md` | P10-I-S5 (conditional) | 282 | 3 | NOT READY (1 blocking) | NOT READY (no blocking; 5 required) | Third draft against the final siblings; not re-reviewed |
-| `docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md` | P10-I-R (new) | 387 | 2 | (as part of ADR-0024) | NOT READY (1 blocking) | Second draft applies it; not re-reviewed |
+| `docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md` | P10-I-R (new) | 440 | 3 | (as part of ADR-0024) | NOT READY (1 blocking); third review: READY AFTER THE LISTED EDITS | **APPROVED FOR IMPLEMENTATION AND REHEARSAL by the human lead on 2026-11-17 ("Approve as recommended"); registered run not approved** |
 | `../p10-i-direction-2026-11-17/CLOSURE_LEDGER.md` | P1–P10 | 176 | 1 + alignment | not reviewed as a document | cross-checked by the ADR reviews | Proposal for approval |
 | `../p10-i-direction-2026-11-17/SEED_REGISTRY.md` | all | — | revision 3 | written by the auditor | checker passes | Proposal for approval |
 
