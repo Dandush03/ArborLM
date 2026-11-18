@@ -111,7 +111,7 @@ def test_ledger_marker_windows_must_equal_the_recorded_44(tmp_path: Path) -> Non
     assert absent["ledger"]["state"] == "ABSENT-DECLARED" and "assumptions" in absent and "same 44" in absent["assumptions"][0]
 
 
-def test_window_spans_command_on_a_parquet_fixture_without_a_tokenizer(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+def test_window_spans_command_on_a_parquet_fixture_without_a_tokenizer(tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch) -> None:
     pa = pytest.importorskip("pyarrow")
     from pyarrow import parquet
 
@@ -121,6 +121,10 @@ def test_window_spans_command_on_a_parquet_fixture_without_a_tokenizer(tmp_path:
     src = tmp_path / "wikitext"
     src.mkdir()
     parquet.write_table(pa.table({"text": rows}), src / DOWNLOAD_FILES[1])
+    from studies.p10i_s3 import data
+
+    pin = {n: {"bytes": (src / n).stat().st_size, "sha256": hashlib.sha256((src / n).read_bytes()).hexdigest()} for n in (DOWNLOAD_FILES[1],)}
+    monkeypatch.setattr(data, "pinned_files", lambda: pin)  # the fixture stands in for the pinned parquet
     out = tmp_path / "out" / "excluded.json"
     code = stages.main(["window-spans", "--source", str(src), "--bundle", str(bundle), "--manifest", str(man), "--out", str(out), "--ledger-absent", "--repo", str(ROOT)])
     assert code == 0

@@ -139,7 +139,9 @@ def test_corpus_from_parquet_fixture_matches_corpus_from_texts_and_checks_the_pi
     cs = data.corpus_from_parquet(tmp_path, cfg, pins)
     ref = data.corpus_from_texts(tr, va, n_tr, n_va)
     assert cs.train_rows.tolist() == ref.train_rows.tolist() and cs.val_spans == ref.val_spans and cs.train_spans == ref.train_spans
-    assert data.validation_rows(tmp_path) == va
+    assert data.validation_rows(tmp_path, pins) == va
+    with pytest.raises(core.EngineeringStop, match="pinned acquisition file mismatch"):
+        data.validation_rows(tmp_path, {**pins, DOWNLOAD_FILES[1]: {**pins[DOWNLOAD_FILES[1]], "sha256": "0" * 64}})  # the validation text is pin-checked before it is read
     bad = {**pins, DOWNLOAD_FILES[0]: {**pins[DOWNLOAD_FILES[0]], "sha256": "0" * 64}}
     with pytest.raises(core.EngineeringStop, match="pinned acquisition file mismatch"):
         data.corpus_from_parquet(tmp_path, cfg, bad)

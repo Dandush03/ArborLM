@@ -164,10 +164,11 @@ def test_ledger_reader_validates_and_the_writer_round_trips(tmp_path: Path) -> N
     cfg = {"data": {**CFG_S2["data"], "general_window_tokens": 16, "router_decision_token": 4, "general_windows_marker_like": 6, "general_windows_ordinary": 5}, "seeds": {"partition_streams": [0, 0, 0, 935105]}}
     rec = ws.p10s2_windows(WordTok(), rows, cfg)
     entry = ws.ledger_entry(lay, 100, 250, "ADR-0025 ordinary window")
+    marks = [{**ws.ledger_entry(lay, w["start"], w["end"], "ADR-0025 marker-like"), "stratum": "marker"} for w in rec["windows"] if w["stratum"] == "marker"]
     good = tmp_path / "ledger.json"
-    good.write_text(json.dumps({"format": ws.LEDGER_FORMAT, "windows": [entry]}))
+    good.write_text(json.dumps({"format": ws.LEDGER_FORMAT, "windows": [entry, *marks]}))  # the ledger's marker-like windows must equal the recorded ones
     doc = ws.build_excluded(rows, rec, ledger_path=good, ledger_absent=False)
-    assert doc["ledger"] == {"state": "read", "path": str(good), "windows": 1}
+    assert doc["ledger"] == {"state": "read", "path": str(good), "windows": 1 + len(marks)}
     assert [r for r, _, _ in lay.to_row_spans(100, 250)] and all(list(sp) in doc["spans"] for sp in lay.to_row_spans(100, 250))
     # a malformed entry, a row mismatch and a foreign shape are refused, never guessed
     for body in ({"windows": [{**entry, "end": entry["start"]}]}, {"windows": [{**entry, "first_row": entry["first_row"] + 1}]}, {"windows": [{**entry, "end": lay.total + 1}]}, [1, 2], {"windows": "x"}):

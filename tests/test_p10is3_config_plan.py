@@ -363,6 +363,7 @@ def test_stage_status_rules() -> None:
     assert runner.stage_status({"a": {"status": runner.PAUSED_IDENTITY}}) == "PAUSED"
 
 
+@pytest.mark.skipif(not (ROOT / ".git").exists(), reason="needs a git checkout (a git archive has no .git)")
 def test_ledger_paths_must_be_ignored_or_outside(tmp_path: Path) -> None:
     plan.require_ignored_path(ROOT, tmp_path / "ledger.json")  # outside the repository: fine
     with pytest.raises(plan.StageRefused, match="not git-ignored"):

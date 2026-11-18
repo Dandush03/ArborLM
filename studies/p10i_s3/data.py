@@ -78,12 +78,16 @@ def pinned_files() -> Mapping[str, Mapping[str, Any]]:
     return {name: FILES[name] for name in DOWNLOAD_FILES}
 
 
-def validation_rows(source: Path) -> list[str]:
+def validation_rows(source: Path, pins: Mapping[str, Mapping[str, Any]] | None = None) -> list[str]:
     """The validation parquet's ``text`` column in file order, exactly as stored (ADR-0022 ruling A-B3's text; needs the optional ``pilot`` extra, pyarrow)."""
     from arborlm.fetch_wikitext import DOWNLOAD_FILES
     from arborlm.pilot_data import _rows
 
-    return list(_rows(source / DOWNLOAD_FILES[1]))
+    pins = pins or pinned_files()
+    name = DOWNLOAD_FILES[1]
+    if (source / name).stat().st_size != pins[name]["bytes"] or file_sha256(source / name) != pins[name]["sha256"]:
+        raise EngineeringStop(f"ENGINEERING STOP — pinned acquisition file mismatch: {name}")
+    return list(_rows(source / name))
 
 
 def corpus_from_parquet(source: Path, cfg: Mapping[str, Any], pins: Mapping[str, Mapping[str, Any]] | None = None) -> ChunkSet:
