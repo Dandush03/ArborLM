@@ -108,6 +108,17 @@ def run_registered_stage(stage: str, repo: Path, run_dir: Path, plan: Any) -> di
     return real_stages.run_stage(stage, repo, run_dir, "registered", plan=plan)
 
 
+def run_rehearsal_stage(stage: str, repo: Path, run_dir: Path, plan: Any, *, pause_after_batches: int | None = None) -> dict[str, Any]:
+    """One stage of the COUNTING rehearsal: the registered stage function (``real_stages.run_stage``), in this process, parameters from the candidate plan. The documented rehearsal overrides, and only these:
+    mode ``rehearsal`` (the rehearsal partition and generation seeds 2529xx, the candidate ledger, the sealed layout), the block limits of the config (``caps.rehearsal_generation_blocks`` generation blocks per
+    capability, one Q_check block), ``force_generation`` (every stage runs whatever Q1-Q4 gave), the forced pause, and no Decision 2."""
+    from . import real_stages
+
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    limits = {"force_generation": True, "max_generation_blocks": int(cfg["caps"]["rehearsal_generation_blocks"]), "max_check_blocks": 1}
+    return real_stages.run_stage(stage, repo, run_dir, "rehearsal", plan=plan, limits=limits, pause_after_batches=pause_after_batches)
+
+
 def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace) -> None:
     """The two Part Q rehearsals on the real teachers (section 10): ``measuring`` (steps 1-8, one generation block per capability, one Q_check block, the fixed cap) and ``counting`` (the candidate plan file, two
     generation blocks per capability, one forced pause and resume, one forced PAUSED — IDENTITY and restore). The rehearsal runs generation, regeneration and the outputs WHATEVER Q1-Q4 give (``force_generation``:
@@ -126,14 +137,18 @@ def _run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespac
     from ..common import procs
     from . import real_stages, rehearsal
 
+    if kind == "counting":  # driven through the registered entry point, a fresh process per stage (partq/counting.py)
+        from . import counting
+
+        counting.run_counting_rehearsal(repo, run_dir, charged_ledgers=getattr(args, "charged_ledger", None) or [])
+        return
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     cgates.apply_platform_settings(cfg)
     core.require_ignored_run_dir(repo, run_dir)
     t0 = time.monotonic()
     if not real_stages.ledger_path(cfg, repo, run_dir, "rehearsal").is_file():
         real_stages.command_ledger(repo, run_dir, "rehearsal")  # the candidate ledger of the rehearsal (seed 252907); inputs verifies it
-    cplan = planmod.Plan.load(repo / core.PLAN_Q, "Q") if kind == "counting" else None
-    w = real_stages.build_world(cfg, repo, run_dir, "rehearsal", load_teachers=True, plan=cplan)  # with the candidate plan the world runs the SAME stage-start check of the plan's inputs and package manifest as a registered stage
+    w = real_stages.build_world(cfg, repo, run_dir, "rehearsal", load_teachers=True)  # with the candidate plan the world runs the SAME stage-start check of the plan's inputs and package manifest as a registered stage
     ctx0 = real_stages.make_ctx(w, "rehearsal")
     inputs = real_stages.stage_inputs(w, ctx0, "rehearsal")
     t_inputs = time.monotonic() - t0
@@ -158,11 +173,6 @@ def _run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespac
         rec = rehearsal.run_measuring(factory, cap_seconds=cap, external={"inputs": (t_inputs, 1.0)}, post_stages={"outputs": outputs_stage})
         rec["rates_seconds_per_unit"]["outputs"] = out_info["seconds"] / max(1.0, out_info["units"])
         rec["projection_units"]["outputs"] = out_info["units"]
-    else:
-        plan_file = repo / core.PLAN_Q
-        plan = cplan if cplan is not None else planmod.Plan.load(plan_file, "Q")
-        items = {st: len(v) for st, v in plan.data["items"].items()}
-        rec = rehearsal.run_counting(factory, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), cap_seconds=float(cfg["caps"]["rehearsal_hours"]) * 3600.0, identity_probe=identity_probe(plan, repo, run_dir), post_stages={"outputs": outputs_stage}, plan_stage_items=items)
     rec["inputs_stage"] = {"seconds": t_inputs, "ordinary_windows_left": inputs["ordinary_windows_left"], "marker_like_windows": inputs["marker_like_windows"], "corpus_supply": inputs["corpus_supply"]}
     rec["outputs_stage"] = {"ran": True, "seconds": out_info["seconds"]}
     rec["other_studies_alive"] = procs.other_studies_alive()

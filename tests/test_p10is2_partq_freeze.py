@@ -268,8 +268,7 @@ def test_identity_exit_code_is_75_and_nothing_written(repo: Path, platform_ok: N
 
 
 def test_registered_entry_points_refuse_today_in_the_real_repository(tmp_path: Path) -> None:
-    """Nothing is frozen: no freeze record (a candidate plan may exist), no Decision 2 in this checkout."""
-    assert not (ROOT / core.FREEZE_RECORD_Q).exists()
+    """Whatever the checkout holds (nothing, a candidate plan, or the freeze itself), an entry point asked without a valid freeze commit and a matching Decision 2 refuses: it never runs."""
     for argv in (["registered", "--stage", "qfit", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["work", "--stage", "generation", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["registered", "--stage", "qfit", "--run-dir", str(tmp_path / "r")]):
         assert stages.main(argv) in (stages.EXIT_REFUSED, stages.EXIT_IDENTITY)  # a checkout with uncommitted frozen files (work in progress) is an identity pause, a clean one a plain refusal: never a run
     assert stages.main(["freeze", "--measuring-rehearsal", "m", "--counting-rehearsal", "c"]) == stages.EXIT_REFUSED

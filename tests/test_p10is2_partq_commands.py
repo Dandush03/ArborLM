@@ -161,23 +161,6 @@ def test_the_inputs_file_command_writes_the_block_once(tmp_path: Path, monkeypat
     assert stages.main(["inputs-file", "--out", str(out)]) == 2  # written once
 
 
-# --- the counting rehearsal runs the stage-start check of the plan's inputs (as a registered stage does) ----------------------------------------------
-def test_the_counting_rehearsal_stops_on_an_input_that_differs_before_doing_anything_else(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    from test_p10is2_launch import freeze as freeze_repo
-    from test_p10is2_launch import make_repo
-
-    from studies.p10is2.partq import real_stages
-
-    r = make_repo(tmp_path)
-    freeze_repo(r, "Q")  # its plan names an input file /x that does not exist
-    led = tmp_path / "candidate_ledger.json"
-    led.write_text("{}")
-    monkeypatch.setattr(real_stages, "ledger_path", lambda *a, **k: led)  # FAKE: the candidate ledger of the rehearsal exists (the real one needs the tokenizer)
-    with pytest.raises(core.StageRefused, match="PAUSED — IDENTITY"):
-        real.run_rehearsal("counting", r, r / "runs" / "counting", argparse.Namespace(charged_ledger=[]))
-    assert not (r / "runs/counting/inputs").exists()  # nothing after the check ran
-
-
 # --- a malformed record is a refusal, not a crash ------------------------------------------------------------------------------------------------
 def test_the_freeze_refuses_malformed_rehearsal_records(tmp_path: Path) -> None:
     for name in ("counting", "measuring"):

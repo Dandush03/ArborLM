@@ -41,13 +41,36 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
     return plan
 
 
+def refuse_unless_rehearsal_ready(repo: Path, run_dir: Path, plan_file: str | None, stage: str) -> planmod.Plan:
+    """The preconditions of a COUNTING-REHEARSAL stage: the registered ones except the three the rehearsal cannot have: a freeze commit, a committed Decision 2, and the plan's own run directory (the rehearsal
+    runs in its own; the plan is verified against ITS run directory). The platform of record, the plan's frozen-file hashes, the config and its caps, the manifests (the shared ledger) are checked exactly as for
+    a registered stage, so an altered plan file (``--plan-file``) is PAUSED — IDENTITY (exit 75)."""
+    if stage not in REGISTERED_STAGES:
+        raise StageRefused(f"refused: {stage!r} is not a registered Part Q stage")
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    gates.apply_platform_settings(cfg)
+    bad = gates.platform_problems(cfg)
+    if bad:
+        raise StageRefused("refused: not the platform of record (section 11 item 10): " + "; ".join(bad))
+    plan = planmod.Plan.load(Path(plan_file) if plan_file else repo / core.PLAN_Q, "Q")
+    planmod.verify_plan(plan, repo, Path(plan.data["run_dir"]), candidate=True)
+    core.require_ignored_run_dir(repo, run_dir)
+    return plan
+
+
 def cmd_registered(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     run_dir = Path(args.run_dir)
-    plan = refuse_unless_registered_ready(repo, run_dir, args.freeze_commit, args.stage)
     from . import real
 
-    out = real.run_registered_stage(args.stage, repo, run_dir, plan)
+    if getattr(args, "rehearsal", False):
+        plan = refuse_unless_rehearsal_ready(repo, run_dir, args.plan_file, args.stage)
+        out = real.run_rehearsal_stage(args.stage, repo, run_dir, plan, pause_after_batches=args.pause_after_batches)
+    else:
+        if args.plan_file or args.pause_after_batches is not None:
+            raise StageRefused("refused: --plan-file and --pause-after-batches exist in a rehearsal (--rehearsal) only")
+        plan = refuse_unless_registered_ready(repo, run_dir, args.freeze_commit, args.stage)
+        out = real.run_registered_stage(args.stage, repo, run_dir, plan)
     return 0 if (out or {}).get("status", "COMPLETE") in ("COMPLETE", "NOT RUN BY RULE") else EXIT_INCOMPLETE  # NOT RUN BY RULE is the registered negative-outcome path, not an incomplete stage
 
 
@@ -69,7 +92,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
 def cmd_ledger(args: argparse.Namespace) -> int:
     """THE pre-freeze ledger command (section 4.1): writes this study's 144 GEN windows into the shared panel ledger once (seed 250907). It refuses once a plan or a freeze record exists."""
     repo = repo_of(args)
-    if (repo / core.PLAN_Q).exists() or (repo / core.FREEZE_RECORD_Q).exists():
+    if args.mode == "registered" and ((repo / core.PLAN_Q).exists() or (repo / core.FREEZE_RECORD_Q).exists()):  # the SHARED ledger; a rehearsal's candidate ledger (a file in its run directory) is made after the plan, by the counting rehearsal
         raise StageRefused("refused: the ledger is written before the plan and the freeze, never after")
     from . import real_stages
 
@@ -109,6 +132,9 @@ def build_parser() -> argparse.ArgumentParser:
         r.add_argument("--run-dir", required=True)
         r.add_argument("--freeze-commit")
         r.add_argument("--repo")
+        r.add_argument("--rehearsal", action="store_true", help="the counting rehearsal's stage: the candidate plan, no freeze commit or Decision 2, rehearsal seeds, limited blocks, every stage run whatever Q1-Q4 give")
+        r.add_argument("--plan-file", help="rehearsal only: a plan file other than freeze/partq_plan.json (the forced identity check)")
+        r.add_argument("--pause-after-batches", type=int, help="rehearsal only: the forced pause (the stage stops PAUSED, exit 4, after this many guard checks)")
     lg = sub.add_parser("ledger")
     lg.add_argument("--mode", choices=("registered", "rehearsal"), default="registered")
     lg.add_argument("--run-dir")

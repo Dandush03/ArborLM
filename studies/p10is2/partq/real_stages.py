@@ -84,12 +84,12 @@ def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers
     return w
 
 
-def make_ctx(w: real_world.RealWorld, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, deadline: Callable[[], bool] | None = None) -> pipeline.QContext:
+def make_ctx(w: real_world.RealWorld, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, deadline: Callable[[], bool] | None = None, inputs_stage: bool = False) -> pipeline.QContext:
     """The context. In a registered stage every parameter comes from the plan: the layout (batch size, block size, digest and regeneration batches), the Q_check target and the generation targets of its items,
     and only the teachers its items name."""
     nl = tuple(tokenize_segment(w.tok, "\n").ids) if w.tok is not None and w.student is not None else ()
     inputs = read_json(w.run_dir / "inputs/record.json") if (w.run_dir / "inputs/record.json").is_file() else {}
-    if plan is not None and not inputs:
+    if plan is not None and not inputs and not inputs_stage:  # the inputs stage WRITES this record; every later stage needs it
         raise StageRefused("refused: the inputs record is missing: the fixed-input counts (windows) cannot be skipped")
     scorer = real_world.student_scorer(w.student, w.tok, w.decoder, nl) if w.student is not None else (lambda items, p: {})
     ctx = pipeline.QContext(cfg=w.cfg, mode=mode, corpus=w.corpus, teachers=w.teachers, student_scores=scorer, run_dir=w.run_dir, ordinary_windows_left=inputs.get("ordinary_windows_left"), marker_like_windows=inputs.get("marker_like_windows"), deadline=deadline)
@@ -256,6 +256,23 @@ class Guard:
         return self.reason is not None
 
 
+class PauseGuard:
+    """The counting rehearsal's forced pause: the stage's own guard, which also trips once after ``after`` calls (between batches). The stop is then exactly a cap stop: PAUSED, exit 4, resumable by running the same command."""
+
+    def __init__(self, inner: Callable[[], bool], after: int) -> None:
+        self.inner, self.after, self.calls = inner, after, 0
+        self.reason: str | None = None
+
+    def __call__(self) -> bool:
+        self.calls += 1
+        if self.calls > self.after:
+            self.reason = f"forced pause of the counting rehearsal after {self.after} guard checks"
+            return True
+        stop = self.inner()
+        self.reason = getattr(self.inner, "reason", None)
+        return stop
+
+
 def completion_path(run_dir: Path, stage: str) -> Path:
     return run_dir / "stages" / f"{stage}.complete.json"
 
@@ -267,16 +284,16 @@ def require_prerequisites(run_dir: Path, stage: str) -> None:
         raise StageRefused(f"refused: stage {stage!r} needs {STAGE_ORDER[i - 1]!r} to be complete first (no completion record)")
 
 
-def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, other_alive: Callable[[], list[str]] = procs.other_studies_alive) -> dict[str, Any]:
-    """One stage, in this process. Returns a small record. A cap or memory stop leaves the stage PAUSED (manifest; exit 4 from the command); an error is an item error; a registered test of the data step or a
+def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, other_alive: Callable[[], list[str]] = procs.other_studies_alive, pause_after_batches: int | None = None) -> dict[str, Any]:
+    """One stage, in this process. ``mode`` is registered or rehearsal (the counting rehearsal runs THIS function, in a fresh process per stage, with the candidate plan; its overrides are ``limits`` and ``pause_after_batches``). Returns a small record. A cap or memory stop leaves the stage PAUSED (manifest; exit 4 from the command); an error is an item error; a registered test of the data step or a
     digest mismatch leaves an engineering-failure record and stops (ruling L3)."""
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     gates.apply_platform_settings(cfg)
     if stage not in STAGE_ORDER:
         raise StageRefused(f"refused: {stage!r} is not a Part Q stage")
-    if mode == "registered" and plan is None:
+    if mode in ("registered", "rehearsal") and plan is None:
         raise StageRefused("refused: a registered stage takes its parameters from the frozen plan")
-    if mode == "registered":
+    if mode in ("registered", "rehearsal"):
         require_prerequisites(run_dir, stage)
     total = float(plan.total_cap_seconds()) if plan is not None else 0.0
     led = core.Ledger(run_dir / "charged_ledger.json", "Q", total if total > 0 else 1e12)  # in the run directory, never in the tree
@@ -288,12 +305,16 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
             man = runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": runner.KILLED_CAP, "seconds": 0.0, "reason": "the cumulative hour cap is spent", "peak_rss_bytes": 0}}, 0.0, identity={}, started=core.utc_stamp(), caps={"stage_seconds_left": cap})
             _mark(run_dir, stage, "PAUSED")
             return {"status": "PAUSED", "reason": "the cumulative hour cap is spent", "manifest": man["status"]}
-    if stage in TEACHER_GATED:
+    if stage in TEACHER_GATED and mode != "rehearsal":  # a rehearsal runs every stage whatever Q1-Q4 gave (its outcome is sealed)
         why = gate_outcome(cfg, run_dir, mode, stage)
         if why is not None:  # the negative-outcome path: an explicit, recorded NOT RUN BY RULE (section 4.1 step 7), never a mis-recorded COMPLETE
             _mark(run_dir, stage, "NOT RUN BY RULE", why)
             return {"status": "NOT RUN BY RULE", "reason": why}
-    guard = Guard(cap, float(cfg["caps"]["memory_per_worker_gib"]))
+    guard: Callable[[], bool] = Guard(cap, float(cfg["caps"]["memory_per_worker_gib"]))
+    if pause_after_batches is not None:
+        if mode != "rehearsal":
+            raise StageRefused("refused: a forced pause exists in a rehearsal only")
+        guard = PauseGuard(guard, pause_after_batches)
     holder: dict[str, Any] = {"ctx": None}
 
     def body() -> dict[str, Any]:
@@ -306,7 +327,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
             write_manifest(ctx)
             return {"label": res["label"], "part_t": res["part_t"]} if mode == "registered" else pipeline.summary_for_display(ctx)
         w = build_world(cfg, repo, run_dir, mode, load_teachers=True, plan=plan)
-        ctx = holder["ctx"] = make_ctx(w, mode, plan=plan, limits=limits, deadline=guard)
+        ctx = holder["ctx"] = make_ctx(w, mode, plan=plan, limits=limits, deadline=guard, inputs_stage=stage == "inputs")
         if guard():  # the phases before the first batch are not guarded between batches: check the resident set and the cap once the world stands
             raise StageCapExceeded(guard.reason or "guard")
         if stage == "inputs":

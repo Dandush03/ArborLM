@@ -68,11 +68,12 @@ cd "$REPO" && $Q candidate-plan --run-dir "$EXP/P10IS2-Q-registered-20261118" --
 ## Step 4. Counting rehearsal
 
 ```sh
-cd "$REPO" && sh studies/p10is2/launch/partq_rehearse.sh counting "$EXP/P10IS2-Q-rehearsal-counting-20261118"
+cd "$REPO" && sh studies/p10is2/launch/partq_rehearse.sh counting "$EXP/P10IS2-Q-rehearsal-counting3-20261118"     # a NEW directory name each time
 ```
 
-- Runs every registered stage (inputs, partition, qfit, qcheck, generation with 2 blocks per capability, regeneration, outputs, analysis) against THE candidate plan file, one forced pause and resume, one forced PAUSED — IDENTITY and restore. Output `<run-dir>/rehearsal_counting.json` (names the plan's SHA-256); sealed values go to `<run-dir>/sealed/`.
-- Duration: about 1.5 h (hypothetical: qfit 1,000 s + two generation blocks per capability about 3,600 s + the rest about 700 s); cap 3.0 h. **Needs a quiet machine** (its stages are checked against the computed caps). Its wall time is charged to its own ledger and is NOT in the caps' total (the total was fixed before it ran): PENDING LEAD REVIEW.
+- It drives the SAME entry point as the registered run: for each stage in the registered order it runs `partq_registered.sh <stage> <run-dir> - --rehearsal` in a FRESH process (the `-` stands for the freeze commit it does not have). The same launch script (per-stage environment), `stages work`, `real_stages.run_stage` (stage order, per-stage caps and the cumulative ledger of the plan, the stage-start check of the plan's inputs and package manifest, completion records, manifests), the same stage bodies. Documented overrides, and only these: no freeze commit or Decision 2; the plan is verified against its own run directory; mode `rehearsal` (seeds 2529xx, a candidate ledger made first by `partq_ledger.sh rehearsal`, sealed layout); `caps.rehearsal_generation_blocks` generation blocks per capability and one Q_check block; every stage runs whatever Q1-Q4 gave; ONE forced pause (`generation` with `--pause-after-batches 4` exits 4, the same command resumes it) and ONE forced identity difference (`qfit` with `--plan-file` naming a copy of the plan with one frozen hash altered exits 75 and writes nothing; then the real run).
+- Output `<run-dir>/rehearsal_counting.json` (names the plan's SHA-256; per-stage seconds against the plan's stage caps in `stages.<s>.within_cap`), per-process logs in `<run-dir>/logs/`, sealed values in `<run-dir>/sealed/`. A stage that exits otherwise than expected stops the rehearsal and the record says which (exit 2, record `status: INCOMPLETE`).
+- Duration: about 1.5 h plus a world build per stage process (hypothetical; the rehearsal measures it); the candidate ledger step first. Cap 3.0 h. **Needs a quiet machine**. Check `within_cap` of every stage in the record: the caps came from in-process rates and do not include the per-process world build (UNSURE whether the short stages, partition, regeneration, analysis, stay inside them; this run is the first to measure it). Its charge is in its own ledger, not in the caps' total: PENDING LEAD REVIEW.
 
 ## Step 5. Freeze
 
