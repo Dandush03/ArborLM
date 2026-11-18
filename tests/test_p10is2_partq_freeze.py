@@ -5,6 +5,7 @@ tmp_path; synthetic data; no package outside the lock; nothing registered runs. 
 import argparse
 import ast
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -50,6 +51,8 @@ def repo(tmp_path: Path) -> Path:
         else:
             shutil.copy(src, dst)
     (r / "studies/p10is2/freeze").mkdir(exist_ok=True)
+    cfg_path = r / "configs/p10is2_partq.toml"  # the repository's config may already hold the caps entered before the freeze: these tests start from the unset state
+    cfg_path.write_text(re.sub(r"(?m)^((?:inputs|partition|qfit|qcheck|generation|regeneration|outputs|analysis|total)_hours) = [0-9.]+", r"\1 = 0.0", cfg_path.read_text()).replace("provisional = false", "provisional = true"))
     git(r, "init", "-q")
     (r / ".gitignore").write_text("runs/\n")
     git(r, "add", "-A")
@@ -265,8 +268,8 @@ def test_identity_exit_code_is_75_and_nothing_written(repo: Path, platform_ok: N
 
 
 def test_registered_entry_points_refuse_today_in_the_real_repository(tmp_path: Path) -> None:
-    """Nothing is frozen: no plan, no freeze record, no Decision 2 in this checkout."""
-    assert not (ROOT / core.PLAN_Q).exists() and not (ROOT / core.FREEZE_RECORD_Q).exists()
+    """Nothing is frozen: no freeze record (a candidate plan may exist), no Decision 2 in this checkout."""
+    assert not (ROOT / core.FREEZE_RECORD_Q).exists()
     for argv in (["registered", "--stage", "qfit", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["work", "--stage", "generation", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["registered", "--stage", "qfit", "--run-dir", str(tmp_path / "r")]):
         assert stages.main(argv) in (stages.EXIT_REFUSED, stages.EXIT_IDENTITY)  # a checkout with uncommitted frozen files (work in progress) is an identity pause, a clean one a plain refusal: never a run
     assert stages.main(["freeze", "--measuring-rehearsal", "m", "--counting-rehearsal", "c"]) == stages.EXIT_REFUSED
