@@ -44,6 +44,9 @@ def full_copy(dst: Path) -> Path:
             shutil.copytree(s, d, ignore=IGNORE)
         else:
             shutil.copy(s, d)
+    import test_p10is1_stages as _TS
+
+    _TS.placeholder_config(dst)  # the tests never depend on the repository's own caps or planning state
     return dst
 
 

@@ -37,8 +37,25 @@ def git(repo: Path, *a: str) -> str:
     return subprocess.run(["git", "-C", str(repo), *a], capture_output=True, text=True, check=True).stdout  # noqa: S603, S607
 
 
+PLACEHOLDER_CAPS = {"rehearsal_hours": 2.0, "calibration_hours": 20.0, "train_hours": 30.0, "evaluate_hours": 4.0, "timing_hours": 1.0, "throughput_hours": 1.0, "analysis_hours": 1.0, "total_hours": 60.0}
+
+
+def placeholder_config(repo: Path) -> None:
+    """The copy's config in the state BEFORE the lead enters the caps: ``provisional = true`` and the placeholder caps, whatever the repository's own config says (the tests never depend on the repository's planning state)."""
+    import re
+
+    p = repo / core.CONFIG
+    text = p.read_text()
+    for k, v in PLACEHOLDER_CAPS.items():
+        text, n = re.subn(rf"^{k} = .*$", f"{k} = {v}", text, flags=re.M)
+        assert n == 1, k
+    text, n = re.subn(r"^provisional = .*$", "provisional = true", text, flags=re.M)
+    assert n == 1
+    p.write_text(text)
+
+
 def mini_repo(tmp: Path) -> Path:
-    """A throw-away repository with this study's own files copied in (no imported roots), clean and committed."""
+    """A throw-away repository with this study's own files copied in (no imported roots, no freeze directory), placeholder config, clean and committed."""
     repo = tmp / "repo"
     for rel in ("studies/p10is1", "configs/p10is1_capacity.toml", "docs/decisions/ADR-0024-p10-i-s1-capacity-scaling.md", "uv.lock"):
         src, dst = ROOT / rel, repo / rel
@@ -47,6 +64,7 @@ def mini_repo(tmp: Path) -> Path:
             shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__", "freeze"))
         else:
             shutil.copy(src, dst)
+    placeholder_config(repo)
     git(repo, "init", "-q")
     git(repo, "-c", "user.email=t@t", "-c", "user.name=t", "add", "-A")
     git(repo, "-c", "user.email=t@t", "-c", "user.name=t", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "x")
@@ -55,10 +73,12 @@ def mini_repo(tmp: Path) -> Path:
 
 # --- registered entry points refuse today ------------------------------------------------------------------------------------------------
 @pytest.mark.parametrize("stage", planmod.REGISTERED_STAGES)
-def test_every_registered_stage_refuses_today(stage: str, tmp_path: Path) -> None:
+def test_every_registered_stage_refuses_in_a_repository_with_nothing_planned(stage: str, tmp_path: Path) -> None:
+    """Against a throw-away repository with no plan, no freeze record and no Decision 2 (never against this repository, whose planning state changes: after its freeze the same command would run)."""
+    repo = mini_repo(tmp_path)
     run = tmp_path / "run"
-    rc = stages.main(["registered", stage, "--run-dir", str(run), "--freeze-commit", "HEAD"])
-    assert rc != 0 and not run.exists()  # nothing is frozen: no freeze plan, no freeze record, no Decision 2; and nothing is written
+    rc = stages.main(["registered", stage, "--run-dir", str(run), "--freeze-commit", "HEAD", "--repo", str(repo)])
+    assert rc != 0 and not run.exists()  # nothing is written
 
 
 def test_each_precondition_refuses_by_itself(tmp_path: Path) -> None:
