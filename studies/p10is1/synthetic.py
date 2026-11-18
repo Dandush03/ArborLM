@@ -67,13 +67,14 @@ def build(
     calibration: Mapping[str, Any] | None = None,
     status: Mapping[str, Any] | None = None,
     drop: Callable[[str], bool] | None = None,
+    cells: list[dict[str, Any]] | None = None,
 ) -> Registry:
     """A registry from designed levels. ``override(arm, facts, slots, draw, update, read, panel)`` returns i (bits) or None; ``excess(...)`` extra correct answers (a planted DEP-c failure); ``unseen(arm, facts, slots,
     draw, update)`` the unseen-control correct count (planted LEAKAGE); ``drop(key)`` leaves a read out (a missing record)."""
     c = core.load_config()
     rates = {u: 0.003 for u in core.units(c)}
     p = params or core.PlanParams(ROW_U_P, rates, U0, GRANTED)
-    cells = core.planned_cells(p, core.TEST)
+    cells = cells if cells is not None else core.planned_cells(p, core.TEST)
     lv = dict(levels or positive_levels())
     stops = {name: {"u_run": int((u_run or U0)[name])} for name in p.u0}
     reads: dict[str, dict[str, Any]] = {}

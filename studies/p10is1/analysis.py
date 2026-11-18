@@ -457,9 +457,9 @@ def analyze(reg: Registry) -> dict[str, Any]:
         return {**base, "status": ENGINEERING_FAILURE, "gate_failures": list(st.get("gate_failures", [])), "lines": {k: ENGINEERING_FAILURE for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
     an = Analyzer(reg)
     missing = check_complete(reg, an)
-    if missing or st.get("paused"):
+    if missing or st.get("paused") or st.get("failed_cells"):
         status = PAUSED if st.get("paused") else INCOMPLETE
-        return {**base, "status": status, "missing_reads": missing[:50], "missing_count": len(missing), "paused": list(st.get("paused", [])), "lines": {k: status for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
+        return {**base, "status": status, "missing_reads": missing[:50], "missing_count": len(missing), "paused": list(st.get("paused", [])), "failed_cells": list(st.get("failed_cells", [])), "lines": {k: status for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
     problems = an.ladder_stop_problems()
     if problems:
         return {**base, "status": ENGINEERING_FAILURE, "gate_failures": problems, "lines": {k: ENGINEERING_FAILURE for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
