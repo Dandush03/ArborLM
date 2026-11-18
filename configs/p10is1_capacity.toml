@@ -167,15 +167,15 @@ cap_rule = "charged + 2 x projected remaining, rounded up to the hour"
 
 [caps]
 # section 15: resource caps in charged hours; provisional = true makes the freeze refuse
-provisional = true
-rehearsal_hours = 2.0
+provisional = false
+rehearsal_hours = 13.0
 calibration_hours = 20.0
-train_hours = 30.0
-evaluate_hours = 4.0
+train_hours = 31.0
+evaluate_hours = 1.0
 timing_hours = 1.0
 throughput_hours = 1.0
 analysis_hours = 1.0
-total_hours = 60.0
+total_hours = 51.0
 
 [rehearsal]
 # the tiny synthetic memory of the unit tests and the synthetic rehearsal phase (test seeds, a random backbone)
