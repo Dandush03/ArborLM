@@ -54,7 +54,7 @@ def test_fresh_process_part_q_launch_reaches_its_stage_not_the_platform_refusal(
     out = subprocess.run([sys.executable, "-m", "studies.p10is2.partq.stages", "registered", "--stage", "inputs", "--run-dir", str(r / "runs"), "--freeze-commit", commit, "--repo", str(r)], cwd=ROOT, env=env, capture_output=True, text=True, timeout=300, check=False)  # noqa: S603
     err = out.stderr
     assert "platform of record" not in err and "frozen file" not in err and "not clean" not in err, err[-600:]
-    assert out.returncode == 2 and "PYTHONPATH" in err  # the stage body itself refused: no durable package path in this process (it was reached)
+    assert out.returncode == 75 and "differs from the plan" in err  # the stage body itself ran its first check (the plan inputs, R7) and found the fixture plan's fake input absent: the stage was reached
 
 
 @pytest.mark.skipif(not ON_RECORD, reason="the platform of record")
