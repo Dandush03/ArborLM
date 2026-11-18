@@ -11,23 +11,25 @@ section 14.2, and the construction of the real ``QContext`` (corpus from the dur
 """
 
 import argparse
+import json
 import os
 import re
+import time
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
 from arborlm.io import file_sha256
 
-from ..common.core import PendingLeadReview, StageRefused
+from ..common import core
+from ..common import plan as planmod
+from ..common.core import StageRefused
+from . import pipeline
 
 ADR_0004 = "docs/decisions/ADR-0004-real-data-pilot-prerequisite.md"
 ADR_0004_REVISION = "b08601e04326c79dfdd32d625aee71d232d685c3"
 WIKITEXT_FILES = ("train-00000-of-00001.parquet", "validation-00000-of-00001.parquet")
-NOT_IMPLEMENTED = (
-    "student conversion and equivalence record (gate G8)", "tokenizer record", "GEN-window tokenization and the byte spans of the shared panel ledger", "chrF cross-check against sacrebleu",
-    "token-id bank and the tokenization tests of ADR-0022 section 14.2", "construction of the real QContext (corpus, Marian teachers, student scorer)",
-)  # fmt: skip
+NOT_IMPLEMENTED: tuple[str, ...] = ()  # the real bodies are in real_world / real_bundle / real_stages (not exercised at registered size: see the report)
 
 
 def wikitext_pins(repo: Path) -> dict[str, dict[str, Any]]:
@@ -100,10 +102,57 @@ def durable_inputs_problems(cfg: Mapping[str, Any]) -> list[str]:
 
 
 def run_registered_stage(stage: str, repo: Path, run_dir: Path, args: argparse.Namespace) -> None:
-    raise PendingLeadReview("the real Part Q stage bodies need: " + "; ".join(NOT_IMPLEMENTED) + ". They were not run here (no real teacher, translation or tokenization is allowed in the implementation).")
+    """A registered stage: the real body, in this process (``real_stages.run_stage``). The entry point has already refused unless frozen, committed and Decision 2 recorded."""
+    from . import real_stages
+
+    real_stages.run_stage(stage, repo, run_dir, "registered")
 
 
 def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace) -> None:
-    raise PendingLeadReview(f"the {kind} rehearsal runs the real teachers on the real data; it needs: " + "; ".join(NOT_IMPLEMENTED) + ". The synthetic rehearsal drivers (rehearsal.run_measuring / run_counting) are tested.")
+    """The two Part Q rehearsals on the real teachers (section 10): ``measuring`` (steps 1-8, one generation block per capability, one Q_check block, the fixed cap) and ``counting`` (the candidate plan file, two
+    generation blocks per capability, one forced pause and resume, one forced PAUSED — IDENTITY and restore). Values of Q1-Q4 and every per-item score go to ``<run-dir>/sealed``; the record printed is the
+    whitelist. The rehearsal partition seeds 252901-252914 are used."""
+    from . import real_stages, rehearsal
+
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    core.require_ignored_run_dir(repo, run_dir)
+    t0 = time.monotonic()
+    w = real_stages.build_world(cfg, repo, run_dir, "rehearsal", load_teachers=True)
+    ctx0 = real_stages.make_ctx(w, "rehearsal")
+    inputs = real_stages.stage_inputs(w, ctx0, "rehearsal")
+    t_inputs = time.monotonic() - t0
+    factory = lambda: real_stages.make_ctx(w, "rehearsal")  # noqa: E731
+    cap = float(cfg["caps"]["measuring_rehearsal_hours"]) * 3600.0
+    if kind == "measuring":
+        rec = rehearsal.run_measuring(factory, cap_seconds=cap, external={"inputs": (t_inputs, 1.0)})
+    else:
+        plan_file = repo / core.PLAN_Q
+        plan = planmod.Plan.load(plan_file, "Q")
+        rec = rehearsal.run_counting(factory, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), cap_seconds=float(cfg["caps"]["rehearsal_hours"]) * 3600.0, identity_probe=identity_probe(plan, repo, run_dir))
+    p = pipeline.step_partition(factory())
+    outputs = real_stages.stage_outputs(w, factory(), p, "rehearsal") if (run_dir / pipeline.loc(factory(), "generation/result.json")).is_file() else {"skipped": "generation did not end"}
+    rec["inputs_stage"] = {"seconds": t_inputs, "ordinary_windows_left": inputs["ordinary_windows_left"], "marker_like_windows": inputs["marker_like_windows"]}
+    rec["outputs_stage"] = {k: v for k, v in outputs.items() if k in ("skipped",)} | {"ran": "skipped" not in outputs}
+    core.write_record(run_dir / f"rehearsal_{kind}.json", rec, overwrite=True)
+    print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "yields", "filter_setting") if k in rec}), default=str))
 
 
+def identity_probe(plan: Any, repo: Path, run_dir: Path) -> Any:
+    """The forced PAUSED — IDENTITY of the counting rehearsal: a copy of the plan with ONE frozen file's hash altered must be refused as PAUSED — IDENTITY; then the real plan must verify (the restore); then the probe
+    raises ``StageRefused`` so that the driver records the forced pause. No file is touched."""
+
+    def probe() -> None:
+        data = json.loads(json.dumps(plan.data))
+        victim = sorted(data["frozen_files"])[0]
+        data["frozen_files"][victim] = "0" * 64
+        try:
+            planmod.verify_plan(planmod.Plan(data, "Q"), repo, run_dir, candidate=True)
+        except StageRefused as e:
+            if "PAUSED — IDENTITY" not in str(e):
+                raise
+        else:
+            raise RuntimeError("the forced identity difference was not detected")
+        planmod.verify_plan(plan, repo, run_dir, candidate=True)  # restored: the stage resumes
+        raise StageRefused("PAUSED — IDENTITY forced and restored")
+
+    return probe

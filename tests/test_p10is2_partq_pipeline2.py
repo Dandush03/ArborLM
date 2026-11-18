@@ -205,7 +205,7 @@ def test_q1_failing_teacher_still_has_q3_and_q4_run_and_printed(tmp_path: Path) 
     class Weak(LexTeacher):
         """Translates only the first two words: a poor Q1 score but outputs of one length whose precision the filter can still measure."""
 
-    ctx = ctx_of(tmp_path, student_scores=lambda items: {"A": 0.0, "B": 0.0})
+    ctx = ctx_of(tmp_path, student_scores=lambda items, p=None: {"A": 0.0, "B": 0.0})
     # force Q1 to fail for B only by raising the bar on a copy of the config: the teacher stays the same, the criterion moves
     ctx.cfg = {**ctx.cfg, "quality": {**ctx.cfg["quality"], "q1_own_score_min": 0.999}}  # type: ignore[index]
     res = pipeline.run_all(ctx)
@@ -246,12 +246,12 @@ def test_step_ledger_records_44_plus_100_and_excludes_foreign_spans(tmp_path: Pa
     foreign = [Span(50_000 + i * 1000, 50_000 + i * 1000 + 900, 50 + i, 50 + i, "panel", "P10IS3") for i in range(20)]
     cand = [Span(50_000 + i * 1000, 50_000 + i * 1000 + 900, 50 + i, 50 + i) for i in range(140)]  # the first 20 overlap the foreign panels
     path = tmp_path / "ledger.json"
-    core.write_record(path, {**core.envelope("panel_ledger", "Q"), "spans": [s.to_json() for s in foreign]})
+    core.write_record(path, {**core.envelope("panel_ledger", "Q"), "windows": [s.to_json() for s in foreign]})
     out = step8.step_ledger(ctx, path, markers, cand)
     assert out["ok"] and out["eligible_ordinary"] == 120 and out["counts"] == {"marker": 44, "ordinary": 100}
     led = json.loads(path.read_text())
-    assert led["end_exclusive"] is True and len(led["spans"]) == 20 + 144
-    mine = [s for s in led["spans"] if s["owner"] == "P10IS2-partq" and s["kind"] == "ordinary"]
+    assert led["end_exclusive"] is True and len(led["windows"]) == 20 + 144
+    mine = [s for s in led["windows"] if s["owner"] == "P10IS2-partq" and s["kind"] == "ordinary"]
     assert len(mine) == 100 and all(s["start"] >= 70_000 for s in mine)  # none of the 20 candidates that overlap a foreign span
     with pytest.raises(core.PendingLeadReview):
         step8.step_ledger(ctx, tmp_path / "l2.json", markers[:43], cand)

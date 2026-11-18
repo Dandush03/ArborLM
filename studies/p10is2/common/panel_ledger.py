@@ -4,6 +4,18 @@
 A window is recorded by its start and end byte offsets in the validation text concatenated as ADR-0022's ruling A-B3 defines (rows in file order, nothing between them), with its first and last row. End
 offsets are EXCLUSIVE. Two spans overlap if they share at least one byte of that concatenated text. A window covering several rows has ONE span, from the first byte of its first token to the last byte of
 its last token. The row <-> concatenated-offset map is the cumulative UTF-8 byte length of the rows. This module does arithmetic on integers only: no tokenizer, no text file, no teacher.
+
+THE LEDGER FILE (stable; the longer-training study READS it, so none of this changes without a recorded decision). One JSON object, written by ``write_ledger``::
+
+    {"format": "p10i-panel-ledger/1",
+     "end_exclusive": true,
+     "unit": "byte offsets in the concatenation of the rows of the WikiText-2 validation parquet file, rows in file order, nothing between them (ADR-0022 ruling A-B3)",
+     "windows": [{"start": int, "end": int, "first_row": int, "last_row": int, "kind": "marker" | "ordinary" | <another study's label>, "owner": str,
+                  "per_row": [[row, start_in_row, end_in_row], ...]}, ...],     # per_row only when the writer had the row map; ends exclusive
+     "owner": str, "check": {...}, "ordinary_eligible": int, "row_bytes_sha256": str | null,
+     "kind": "panel_ledger", "schema": 1, "study": "P10IS2", "part": "Q", "oracle_line": "..."}   # the study envelope
+
+Another study that adds its panel spans appends objects with the same four required keys ``start``, ``end``, ``first_row``, ``last_row`` to ``windows`` and its own ``owner``; a reader needs only those four.
 """
 
 from collections.abc import Iterable, Mapping, Sequence
@@ -148,3 +160,26 @@ class PanelLedger:
         foreign = sum(1 for s in mine if s.kind == "ordinary" and any(overlap(s, o) for o in self.spans if o.owner != owner))
         ok = counts == {"marker": marker_like, "ordinary": ordinary} and self_overlaps == 0 and foreign == 0
         return {"ok": ok, "counts": counts, "self_overlaps": self_overlaps, "ordinary_overlapping_other_owners": foreign}
+
+
+LEDGER_FORMAT = "p10i-panel-ledger/1"
+
+
+def write_ledger(path: "Any", led: PanelLedger, owner: str, check: Mapping[str, Any], eligible: int, rows: RowMap | None = None) -> None:
+    """Writes the ledger file in the stable format of this module's docstring (overwrites: the ledger grows as studies add their panels)."""
+    from arborlm.io import canonical_json, sha256
+
+    from . import core
+
+    windows = []
+    for s in led.spans:
+        w = s.to_json()
+        if rows is not None and s.end <= rows.total:
+            w["per_row"] = [list(t) for t in per_row_spans(s, rows)]
+        windows.append(w)
+    rec = {
+        **core.envelope("panel_ledger", "Q"), "format": LEDGER_FORMAT, "end_exclusive": True, "windows": windows, "owner": owner, "check": dict(check), "ordinary_eligible": eligible,
+        "unit": "byte offsets in the concatenation of the rows of the WikiText-2 validation parquet file, rows in file order, nothing between them (ADR-0022 ruling A-B3)",
+        "row_bytes_sha256": None if rows is None else sha256(canonical_json(list(rows.row_bytes))),
+    }  # fmt: skip
+    core.write_record(path, rec, overwrite=True)

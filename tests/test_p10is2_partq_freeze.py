@@ -273,9 +273,9 @@ def test_registered_entry_points_refuse_today_in_the_real_repository(tmp_path: P
     assert not (tmp_path / "r").exists()
 
 
-def test_rehearse_returns_to_the_lead_for_the_real_pieces(tmp_path: Path) -> None:
-    assert stages.main(["rehearse", "--kind", "measuring", "--run-dir", str(tmp_path / "x")]) == stages.EXIT_LEAD
-    assert "student conversion" in " ".join(real.NOT_IMPLEMENTED)
+def test_rehearse_refuses_outside_the_package_environment(tmp_path: Path) -> None:
+    """Without the 28 packages on the durable path, offline, the real rehearsal refuses before reading anything."""
+    assert stages.main(["rehearse", "--kind", "measuring", "--run-dir", str(tmp_path / "x")]) == stages.EXIT_REFUSED
 
 
 # --- freeze refusals ---------------------------------------------------------------------------------------------------------------------------

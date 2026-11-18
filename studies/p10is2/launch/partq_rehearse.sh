@@ -4,6 +4,7 @@
 # Uses the real teachers, so the 28 packages go on the path of this process ONLY from the verified durable copy, by absolute path, offline, never through uv's cache. Values of Q1-Q4 and every per-item
 # score go to <run-dir>/sealed and are not displayed. Not run by the implementation.
 set -eu
+export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 if [ "$#" -ne 2 ]; then
     echo "usage: $0 <measuring|counting> <run-dir>" >&2
     exit 2

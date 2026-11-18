@@ -51,7 +51,7 @@ def lex_teachers(**kw):  # type: ignore[no-untyped-def]
     return {"A": LexTeacher("A", de, **kw), "B": LexTeacher("B", fr, **kw)}
 
 
-def stub_student(items, caps=("A", "B")):  # type: ignore[no-untyped-def]
+def stub_student(items, p=None, caps=("A", "B")):  # type: ignore[no-untyped-def]
     """The untrained student copies the English: low chrF against any reference."""
     return {c: sum(chrf_item(i.en, i.refs[c]) for i in items) / max(1, len(items)) for c in caps}
 

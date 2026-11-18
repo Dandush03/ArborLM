@@ -35,7 +35,7 @@ class QContext:
     mode: str  # "test" | "rehearsal" | "registered"
     corpus: CorpusLike
     teachers: Mapping[str, BatchTeacher]
-    student_scores: Callable[[Sequence[Item]], Mapping[str, float]]  # the untrained student's mean chrF-norm on the Q_fit items, per capability
+    student_scores: Callable[[Sequence[Item], Any], Mapping[str, float]]  # (Q_fit items, the partition): the untrained student's mean chrF-norm on the Q_fit items, per capability
     run_dir: Path
     sizes: Mapping[str, int] | None = None  # panel size overrides (tests only)
     batch_size: int | None = None
@@ -150,7 +150,7 @@ def step_qfit(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
         for c in core.TASKS:
             scores[t][c] = qualify.item_scores(outs[t], [_refs(i, c) for i in items])
     mean = {t: {c: (sum(v) / len(v) if v else 0.0) for c, v in scores[t].items()} for t in core.TASKS}
-    student = dict(ctx.student_scores(items))
+    student = dict(ctx.student_scores(items, p))
     q1 = qualify.q1({c: mean[c][c] for c in core.TASKS}, ctx.cfg)
     q2 = qualify.q2(mean, student, ctx.cfg)
     grids, q3 = {}, {}

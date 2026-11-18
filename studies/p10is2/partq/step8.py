@@ -10,11 +10,12 @@ from arborlm.io import read_json
 from studies.p10s2.data import Item
 
 from ..common import core
-from ..common.panel_ledger import PanelLedger, Span
+from ..common.panel_ledger import LEDGER_FORMAT, PanelLedger, RowMap, Span, write_ledger
 from . import batches as bt
 from . import gloss, partition
 from .pipeline import QContext, _rec, accepted_pool, fail
 
+__all__ = ["LEDGER_FORMAT"]
 PANEL_OUTPUT_PANELS = ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con")
 
 
@@ -30,10 +31,10 @@ def step_outputs(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     return _rec(ctx, "outputs/record.json", "outputs", {"outputs": out, "scored": False})
 
 
-def step_ledger(ctx: QContext, ledger_path: Path, marker_windows: Sequence[Span], ordinary_candidates: Sequence[Span], owner: str = "P10IS2-partq") -> dict[str, Any]:
+def step_ledger(ctx: QContext, ledger_path: Path, marker_windows: Sequence[Span], ordinary_candidates: Sequence[Span], owner: str = "P10IS2-partq", row_map: RowMap | None = None) -> dict[str, Any]:
     """Records the 44 marker-like windows and 100 sampled ordinary windows in the shared panel ledger (byte spans, end exclusive). ``marker_windows`` and ``ordinary_candidates`` are the spans the caller built
     from the tokenized WikiText-2 validation text (the real path) or synthetic spans (tests). The ordinary sample (seed 250907) takes only candidates that overlap no span already in the ledger."""
-    led = PanelLedger(Span.from_json(r) for r in (read_json(ledger_path)["spans"] if ledger_path.is_file() else []))
+    led = PanelLedger(Span.from_json(r) for r in (read_json(ledger_path)["windows"] if ledger_path.is_file() else []))
     pn = dict(ctx.cfg["panels"])
     if ctx.sizes:
         pn.update(ctx.sizes)
@@ -48,7 +49,7 @@ def step_ledger(ctx: QContext, ledger_path: Path, marker_windows: Sequence[Span]
     check = led.check_own_panel(owner, int(pn["gen_marker_like"]), int(pn["gen_ordinary"]))
     if not check["ok"]:
         fail(ctx, f"the panel ledger check failed: {check}")
-    core.write_record(ledger_path, {**core.envelope("panel_ledger", "Q"), "spans": led.to_record(), "end_exclusive": True, "owner": owner, "check": check, "ordinary_eligible": eligible}, overwrite=True)
+    write_ledger(ledger_path, led, owner, check, eligible, row_map)
     return {"eligible_ordinary": eligible, **check}
 
 

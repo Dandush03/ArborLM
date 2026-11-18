@@ -5,6 +5,7 @@
 # The 28 packages outside the lock (126,182,132 bytes) are put on the path of the stages that need them ONLY from the verified durable copy, by its ABSOLUTE path, offline (--offline), and never
 # through uv's cache: the requirements file is never an argument of uv run. Part T never uses them. No word splitting: every expansion is quoted.
 set -eu
+export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 if [ "$#" -ne 3 ]; then
     echo "usage: $0 <stage> <run-dir> <freeze-commit>" >&2
     exit 2
