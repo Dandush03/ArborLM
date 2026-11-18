@@ -30,11 +30,11 @@ def word_types(pool: Sequence[TrainItem]) -> list[str]:
     return sorted({w for x in pool for w in normalize(x.target).split()})
 
 
-def gloss_bank(tok: ReferenceTokenizer, pools: Mapping[str, Sequence[TrainItem]]) -> dict[str, Any]:
-    """The stored token ids: per capability ``{word: ids}`` (the segment ``" " + word``), plus the separator and the newline segments."""
+def gloss_bank(tok: ReferenceTokenizer, pools: Mapping[str, Sequence[TrainItem]], vocab: Sequence[str] = ()) -> dict[str, Any]:
+    """The stored token ids: per capability ``{word: ids}`` (the segment ``" " + word``), the source words of the closed vocabulary the same way (``source_words``: the source word's segment of the template), plus the separator and the newline segments."""
     return {
         "words": {c: {w: list(tokenize_segment(tok, " " + w).ids) for w in word_types(pool)} for c, pool in pools.items()},
-        "separator": list(tokenize_segment(tok, SEPARATOR).ids), "newline": list(tokenize_segment(tok, NEWLINE).ids),
+        "source_words": {w: list(tokenize_segment(tok, " " + w).ids) for w in vocab}, "separator": list(tokenize_segment(tok, SEPARATOR).ids), "newline": list(tokenize_segment(tok, NEWLINE).ids),
     }  # fmt: skip
 
 

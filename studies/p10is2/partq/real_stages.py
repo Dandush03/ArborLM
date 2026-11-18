@@ -151,7 +151,7 @@ def stage_outputs(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any, mode:
             raise RegisteredTestStop(f"tokenization test (a) or the combined whole-string test failed: {json.dumps(rec['tokenization'])[:400]}")
         from . import gloss
 
-        gb = gloss.gloss_bank(w.tok, accepted)
+        gb = gloss.gloss_bank(w.tok, accepted, p.vocab)
         write_bundle(bundle, w.run_dir / "outputs/bundle")
         write_json(w.run_dir / "outputs/gloss_bank.json", gb)
     finally:
