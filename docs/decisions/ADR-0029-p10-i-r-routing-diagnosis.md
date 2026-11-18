@@ -2,10 +2,10 @@
 
 **Status: DRAFT — NOT APPROVED. Nothing under this ADR is implemented, calibrated, frozen or run.**
 
-- **Date:** 2026-11-17 (UTC). Draft 2 of this ADR. It began as the routing lane of ADR-0024 draft 1, was revised after the independent specification review (`docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0024.md`, NOT READY) and moved to its own ADR, and is revised again after the confirmation review (`REVIEW2_ADR-0024_ADR-0029.md` beside it, NOT READY). §17 maps every finding that concerns it. **SPEC: PENDING ASTRA REVIEW.** `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+- **Date:** 2026-11-17 (UTC). Draft 3 of this ADR, after the third review. It began as the routing lane of ADR-0024 draft 1, was revised after the independent specification review (`docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW_ADR-0024.md`, NOT READY) and moved to its own ADR, was revised again after the confirmation review (`REVIEW2_ADR-0024_ADR-0029.md` beside it, NOT READY), and now carries the edits of the third review (`REVIEW3_ADR-0029.md` beside it, READY AFTER THE LISTED EDITS; no blocking finding). §17 maps every finding that concerns it. The capacity study is `docs/decisions/ADR-0024-p10-i-s1-capacity-scaling.md`. **SPEC: PENDING ASTRA REVIEW.** `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 - **Study code** P10IR. **Package** `studies/p10ir/` (new code only; no file of `studies/p9` or `studies/p10s1` is edited). **Config** `configs/p10ir_routing.toml`. **Tests** `tests/test_p10ir_*.py`.
 - **Origin.** `docs/reviews/p10-i-direction-2026-11-17/LITERATURE_AND_ROUTING_NOTE.md` sections 4 and 5 (binding direction). The question as the note puts it: can ArborLM keep the flat memory's accuracy while using tree-like sparse retrieval, without losing its ability to keep learning? This study addresses only the first, diagnostic step.
-- **Where it lives.** The human lead's direction (note §5.4) placed this lane inside ADR-0024. Giving it its own ADR is the reviewer's and the lead's recommendation, **PENDING HUMAN LEAD RULING**. Reasons: it shares no rule, budget or frozen input with the capacity study; it is a short re-analysis where that is a long training study; and one ADR hashed into two freezes repeats the failure of P10-S1 attempt 1. The content of the lane is unchanged by where it lives. **The human lead ruled on 2026-11-17: "Keep ADR-0029".** The routing diagnosis stays this ADR.
+- **Where it lives.** The human lead's direction (note §5.4) placed this lane inside ADR-0024. Giving it its own ADR was the reviewer's and the lead's recommendation. Reasons: it shares no rule, budget or frozen input with the capacity study; it is a short re-analysis where that is a long training study; and one ADR hashed into two freezes repeats the failure of P10-S1 attempt 1. The content of the lane is unchanged by where it lives. **The human lead ruled on 2026-11-17: "Keep ADR-0029".** The routing diagnosis stays this ADR.
 - **Immutability.** P10-S1's code, records, labels and run directory are not edited or revised. Its registered TREE_BEHIND stands. ArborLM is unproven research; nothing below is a success claim.
 - **Approval.** The human lead alone approves this specification, its budget and each run. Lead's choices open to his ruling are marked **PENDING HUMAN LEAD RULING** and collected in §16.
 - **Scope.** Stage A only. **Stage B (any new router, index training, product-key memory, periodic refresh, or other new architecture) is outside this ADR**; if this study indicates it, it is a separate study with its own specification.
@@ -17,7 +17,7 @@
 | Stage | What | Trains? | What it can support |
 |---|---|---|---|
 | **A1** | New reads of P10-S1's existing frozen flat and tree checkpoints | No | Where a Stage B study would look. Not a statement about cause |
-| **A2** (bridge) | The same frozen reads on 20 fresh checkpoints trained exactly as P10-S1 trained them | Yes: P10-S1's arms, rate and lengths; no new architecture | Whether A1's labels hold on cells whose accuracies were not seen when the rules were written. **Any claim about cause needs A2** |
+| **A2** (bridge) | The same frozen reads on 20 fresh cells (40 checkpoints: U_P and the run length) trained exactly as P10-S1 trained them | Yes: P10-S1's arms, rate and lengths; no new architecture | Whether A1's labels hold on cells whose accuracies were not seen when the rules were written. **Any claim about cause needs A2** |
 
 Every label of this study is printed with `REGISTERED RE-ANALYSIS OF OBSERVED CELLS` (A1) or `FRESH CHECKPOINTS` (A2), and with `ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK`.
 
@@ -28,7 +28,7 @@ On the memories P10-S1 trained: is the tree's lower quality, relative to the fla
 - The outcome line **R-DIAGNOSIS** has two components, a tree label and an index label (§9). It is a diagnosis, not a positive or negative for ArborLM.
 - **"Identified"** means: a read-time change, with nothing retrained, restored or mostly closed the gap. **NOT IDENTIFIED** is a registered value; it means the reads cannot tell, and **it recommends nothing, in every combination** (§9).
 - **NOT EVALUABLE** and **CHECKPOINT-DEPENDENT** are registered values. A component that is CHECKPOINT-DEPENDENT carries no recommended action.
-- The second line, **R-CONFIRM**, says whether A2 reproduced A1's labels. Neither line substitutes for the other.
+- The second line, **R-CONFIRM**, says per component (R-CONFIRM-TREE, R-CONFIRM-INDEX) whether A2 reproduced A1's label. Neither line substitutes for the other.
 
 ## 2. Background (quoted from the records)
 
@@ -86,9 +86,9 @@ Consequences for the design: "priors distort the weights" can only mean cross-br
 - (a) `tree_recall_of_exhaustive_top8`, **for T-OQ only, at U_P only** (`studies/p10s1/evaluate.py`, `tree_recall`): over the oracle codes of all trained facts of the cell, the share of the exhaustive top 8 whose branch the router visited. The exhaustive top 8 is taken by `topk` of the cosine against `F.normalize(keys)`, without the slot-id tie rule.
 - (b) `ivf_measured.recall_of_exhaustive_top8`, **for every F-OQ-IVF read, at every snapshot** (`studies/p10s1/index.py`, `IVFMemory.measured`). It is accumulated over **every query the index read receives during the Panel A pass** of `_read_record`: the main read and the address-swap read, all eight records of every context (facts outside the cell and unseen-control facts included), each weighted by how often it occurs. It is **not** recall over the trained facts of the cell.
 
-Neither appears in `analysis.json`, `results.json`, `RESULTS.md` or the audit outputs. Both reviewers read the code and key names only. No one in this workflow reports having opened the values; the drafter has not.
+Neither appears in `analysis.json`, `results.json`, `RESULTS.md` or the audit outputs. All three reviewers read the code and key names only (the third also key paths, as the sealing rule below records). No one in this workflow reports having opened the values; the drafter has not.
 
-**Sealing rule.** No one opens those two keys before this ADR's freeze. The counts the reproduction gate needs sit in the same `eval.json` files, so **every access to an `eval.json` of that run goes through one whitelist extractor** in `studies/p10ir/`, which returns only the keys a gate names and prints equal or not equal for the sealed ones, never their values. No one prints or opens an `eval.json` of that run outside it. The freeze record states, for the lead, the implementer and the auditor, that none has. If the seal is broken, the freeze record says so and the CONTENT label (§8.3), which uses recall, carries RECALL SEEN BEFORE FREEZE.
+**Sealing rule.** No one opens those two keys before this ADR's freeze. The counts the reproduction gate needs sit in the same `eval.json` files, so **every access to an `eval.json` of that run goes through one whitelist extractor** in `studies/p10ir/`, which returns only the keys a gate names and prints equal or not equal for the sealed ones, never their values. From this ADR's approval, no one prints or opens an `eval.json` of that run outside it; before approval, reviewers listed key names only, and the freeze record lists those accesses (REVIEW_ADR-0024, REVIEW2, REVIEW3) and states that no value of the two sealed keys was displayed. In particular, the third reviewer loaded two files in a script that printed key paths only (`P_T-OQ_f8192_n4096_d1_i2101/eval/u0008192/eval.json` and `P_F-OQ_f8192_n4096_d1_i2101/eval/u0016384/eval.json`; `REVIEW3_ADR-0029.md` section A); the freeze record lists that access by file. The freeze record also states, for the lead, the implementer and the auditor, that none has opened the sealed values. If the seal is broken, the freeze record says so and the CONTENT label (§8.3), which uses recall, carries RECALL SEEN BEFORE FREEZE.
 
 ## 5. Seeds
 
@@ -103,7 +103,7 @@ Values are those of `docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md` �
 | Test mode; unit tests | 330698, 330699; 938001–938999 |
 | **Declared re-use, not an allocation** | P10-S1's five registered draws (bases 210001–210401) and their index seeds (base + 60), for the reproduction reads of stage A1; one P10-S1 cell's draw and initialisation seed for the adapter identity gate of §10 |
 
-The registry assigns every role this draft needs. Before the freeze, the seed gate runs a copy of `seed_registry_check.py` extended with these named values, with rules R2 and R3 expanded (registry §4.3 item 5), and requires RESULT: PASS; it lists the re-used P10-S1 seeds as re-used, not as new.
+The registry assigns every role this draft needs. Before the freeze, the seed gate runs a copy of `seed_registry_check_r3.py` (registry revision 3, SHA-256 `e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594`) extended with these named values, with rules R2 and R3 expanded (registry §4.3 item 5), and requires RESULT: PASS; it lists the re-used P10-S1 seeds as re-used, not as new.
 
 ## 6. Reads
 
@@ -136,8 +136,8 @@ Per checkpoint and read:
 
 | Measure | Definition |
 |---|---|
-| End-task | a_use, i, raw accuracy on Panels A and B, with P10-S1's derangement (ADR-0021 §7.1) |
-| Candidate recall CR8, CR1 (**new measurements of this study**) | Over all trained facts of the cell, each once: mean of \|C ∩ E8\| / 8, and the share of facts with E1 ∈ C. C is the set of keys the read scores. E8 and E1 are the top 8 and top 1 by cosine over all keys of **the same checkpoint**, without priors, by `stable_top` (ties to the lower slot id). They are per fact and have no panel |
+| End-task | a_use, i (i by `studies/p10s1/core.py` `bits_per_fact`), raw accuracy on Panels A and B, with P10-S1's derangement (ADR-0021 §7.1) |
+| Candidate recall CR8, CR1 (**new measurements of this study**) | Over all trained facts of the cell, each once: mean of \|C ∩ E8\| / 8, and the share of facts with E1 ∈ C. C is the set of keys the read scores. E8 and E1 are the top 8 and top 1 over all keys of **the same checkpoint** of cos/0.2 against `F.normalize(keys, eps=EPS)` (the scores the flat read computes), without priors, by `stable_top` (ties to the lower slot id). They are per fact and have no panel |
 | Selection overlap SR8 | Mean of \|S ∩ E8\| / 8; S is the 8 slots the read selects |
 | Recovered attention mass AM_C, AM_S | Σ of w_E(s) over s ∈ C, and over s ∈ S; w_E is the softmax at temperature 0.2 over E8's cosines |
 | Prior effect | i(T1) − i(T0), i(T1w) − i(T0), i(T2) − i(T3); the share of facts whose selected set changes between T0 and T1; the share of facts whose eight selected slots span both branches (where reweighting can act); the mean total-variation distance between the two reads' weights, over the union of the two selected sets with weight zero outside each |
@@ -180,7 +180,7 @@ At every primary cell it is stricter than 95% of accuracy; at the loaded cells i
 
 - **Panels.** A condition on i holds in a replicate only if it holds on both panels. **NO GAP** needs the gap below 0.5 on both panels. A replicate with a gap on one panel only is **MIXED-PANEL** and satisfies no condition. R (below) is per fact and has no panel.
 - **Replicates.** The denominator is always 5. A replicate that is NOT EVALUABLE, WEAK REFERENCE or MIXED-PANEL, or whose g is undefined, satisfies no condition. A cell's label at a checkpoint is the row held by at least 4 of 5 replicates; otherwise **MIXED**.
-- **A cell is NOT EVALUABLE at a checkpoint** if at least 2 of its 5 replicates are NOT EVALUABLE there (a gate failure of either arm's checkpoint, §11, or WEAK REFERENCE). This is applied before the 4-of-5 rule.
+- **A cell is NOT EVALUABLE at a checkpoint** if at least 2 of its 5 replicates are NOT EVALUABLE there (a gate failure with the scope §11 gives it, or WEAK REFERENCE), for the label concerned. This is applied before the 4-of-5 rule.
 - **Labels are compared by row name only**, in the 4-of-5 rule, in CELL-DEPENDENT, in CHECKPOINT-DEPENDENT and in R-CONFIRM. The suffix FULLY / PARTLY, the descriptive tags and c\* are printed and do not enter any comparison. A cell's c\* is the median of its replicates' c\* (replicates without one are listed).
 - For I64@c, a replicate's i on a panel is the mean over the three index seeds, taken before the panel test.
 
@@ -190,19 +190,20 @@ Reference F0 at the same cell, update count and replicate. Define, per replicate
 
 | Order | Replicate label | Rule | What it claims, and no more | Next action |
 |---|---|---|---|---|
-| 1 | NOT EVALUABLE | a gate of §11 fails for the T-OQ or the F-OQ checkpoint; or WEAK REFERENCE | — | none |
+| 1 | NOT EVALUABLE | a gate of §11 fails for the T-OQ checkpoint or for F0 of the F-OQ checkpoint (scope as §11 states); or WEAK REFERENCE | — | none |
 | 2 | NO GAP | no gap between T0 and F0 on both panels | Nothing to explain at this cell | none |
+| 2a | MIXED-PANEL | a gap of at least 0.5 bits on one panel only (§8.2) | The panels disagree about whether there is a gap | none |
 | 3 | PRIORS AND CANDIDATES, SEPARATELY | P and C | Either change alone closes most of the gap at read time | Either: how routing scores enter the read, or candidate coverage |
 | 4 | PRIORS | P, not C | Removing the prior, candidates unchanged, closes most of the gap | Redesign how routing scores enter the read |
 | 5 | CANDIDATES | C, not P | Removing the hard restriction, prior kept, closes most of the gap | Improve the router and candidate coverage |
 | 6 | JOINT | J, not P, not C | Only removing both closes most of the gap; neither alone does. The reads do not say whether the two must change together or whether the soft restriction left T3 untestable | none; no single fix is indicated |
 | 7 | EXACT SEARCH HARMS — NOT SEPARABLE AT READ TIME | H, not P, not C | Exact search selects slots that serve the fact worse than the trained read. The content may be sound for the read it was trained under | none |
-| 8 | CONTENT | not P, not C, not J, not H, and R | The router already finds at least 0.90 of what the keys rank first, the prior is not the cause, and quality is still below the flat memory | Improve memory training and representation |
+| 8 | CONTENT | not P, not C, not J, not H, and R | The router already finds at least 0.90 of what the keys rank first; removing the prior, the hard restriction, or both does not close most of the gap at read time; exact search does no harm; quality is still below the flat memory. The reads do not say whether the content is poor or was shaped by sparse training | Improve memory training and representation |
 | 9 | NOT IDENTIFIED | not P, not C, not J, not H, not R | The router misses what the keys rank first, yet scoring all keys does not help. The reads cannot say why | none |
 
-Rows 3–6 are suffixed FULLY (the named read is RESTORED) or PARTLY (closure ≥ 0.5 only). PRIORS also prints, descriptively, **mainly weights** or **mainly selection**, by which of i(T1w) − i(T0) and i(T1) − i(T1w) is larger. Every row is reachable: rows 3–6 cover the seven combinations of P, C, J with at least one true; rows 7–9 split the remaining case by H and R. (J and H cannot both hold where a gap exists, so row 6 never hides a harm.)
+Rows 3–6 are suffixed FULLY (the named read is RESTORED) or PARTLY (closure ≥ 0.5 only). PRIORS also prints, descriptively, **mainly weights** or **mainly selection**, by which of i(T1w) − i(T0) and i(T1) − i(T1w) is larger. Every row is reachable: rows 3–6 cover (where a gap exists on both panels) the seven combinations of P, C, J with at least one true; rows 7–9 split the remaining case by H and R. (J and H cannot both hold where a gap exists, so row 6 never hides a harm.)
 
-- **The figure 0.5 for closure** means "most of the gap". **The figure 0.90 for R** is the same oracle-reference ratio as above: if nine tenths of what exact search would select is already scored, exact search can change at most one slot in ten, so the candidate restriction cannot be the main cause. Both are the lead's choices, **PENDING HUMAN LEAD RULING**; R is fixed without the recall values having been opened (§4).
+- **The figure 0.5 for closure** means "most of the gap". **The figure 0.90 for R** is the same oracle-reference ratio as above: if nine tenths of what exact search would select is already scored, exact search can change at most one slot in ten, so the candidate restriction cannot be the main cause. Both are the lead's choices, **PENDING HUMAN LEAD RULING**; R is fixed without the recall values having been opened (§4). The closure figure 0.5, the figure 0.90 for R, the list size 64 and the budgets of I64 were chosen knowing P10-S1's registered accuracies of T0, F0 and I256@512 (§8.1 disclosure); none was chosen knowing a recall value or any read of §6 other than those three.
 - **Whether C was testable.** With a confident router T3 may equal T0 on nearly every fact; C is then false by construction, and a real effect of the restriction appears only as JOINT. The testability share (§7) is printed with every label so that this can be seen. Whether row 5 should become NOT TESTABLE above some share is **PENDING HUMAN LEAD RULING** (§16 item 9); this draft sets no such threshold.
 - **Printed with every label:** i and a_use of T0, T1, T1w, T2, T3 and F0; g_P, g_C, g_PC; i(F0) − i(T2); the sweep Tv; CR8, CR1, SR8, AM_C, AM_S of T0; the prior-effect and testability measures.
 
@@ -215,20 +216,20 @@ Reference F0. A budget c is **sufficient** in a replicate if I64@c is RESTORED t
 | SPARSE INDEX APPROACHES FLAT | c\* exists and c\* ≤ 512. **512 is the tree's candidate count**, the equal-candidate standard of ADR-0021 §8.5 |
 | INDEX APPROACHES FLAT ONLY ABOVE 512 | c\* exists and c\* > 512 (reachable at 4,096 and 16,384 slots; at 1,024 slots no budget above 512 is read) |
 | INDEX DOES NOT APPROACH FLAT | no sufficient budget |
-| NOT EVALUABLE | a gate of §11 fails for the F-OQ checkpoint; or WEAK REFERENCE |
+| NOT EVALUABLE | a gate of §11 fails for the F-OQ checkpoint (F0, I256@512 or an I64 index); or WEAK REFERENCE |
 
 Printed with it: i, a_use, CR8, CR1, AM_C and the measured mean and 99th-percentile candidate counts at every budget; the cell's median c\*, as a count and as a share of N; and N/8 for comparison. The note's action for the first row is "investigate a separately trained sparse index"; the other rows carry none.
 
 ## 9. R-DIAGNOSIS: cells, checkpoints and combination
 
-- **Primary cells: 8K/4K and 32K/16K.** They are the cells ADR-0021 §8.5 registered for the hierarchy label before any S1 record. 2K/1K, 2K/4K and 8K/16K are printed.
+- **Primary cells: 8K/4K and 32K/16K.** They are the cells ADR-0021 §8.5 registered for the hierarchy label before any registered S1 record. 2K/1K, 2K/4K and 8K/16K are printed.
 - **R-DIAGNOSIS-LOADED (descriptive; printed only).** The loaded cells 8K/1K and 32K/4K get the same labels by the same rules, printed under this name. It has no combination rule and enters nothing. There the flat reference itself holds 0.65 and 0.64: "restored" means restored to a full store.
 - **U_P and the run length are co-primary.** Neither is "the" checkpoint. Draft 1 named the run length primary; the first review showed that the choice was made knowing which way it leans (§8.1 disclosure) and that it would decide what Stage B is pointed at. It is withdrawn.
-- **Plateau check at the run length (existing snapshots; nothing new is trained).** For T-OQ and for F-OQ at each primary cell and replicate, on both panels: i\*(run) − i\*(run/2) ≤ 0.10 bits (the plateau limit of ADR-0021 §8.2; the snapshots at 24,576 and 49,152 exist). If it fails in at least 2 of 5 replicates, the cell's labels at the run length carry the tag **TREE STILL LEARNING** or **FLAT STILL LEARNING**. These i values are in P10-S1's records; the drafter has not computed the check.
+- **Plateau check at the run length (existing snapshots; nothing new is trained).** For T-OQ and for F-OQ at each primary cell and replicate, on both panels: i\*(run) − i\*(run/2) ≤ 0.10 bits and i\*(run/2) ≥ 0.473 bits (both conditions of ADR-0021 §8.2's plateau rule; i\* as `studies/p10s1/classes.py` computes it; run/2 is 24,576 at 8K/4K and 49,152 at 32K/16K, and both snapshots exist). If it fails in at least 2 of 5 replicates, the cell's labels at the run length carry the tag **TREE STILL LEARNING** or **FLAT STILL LEARNING**. These i values are in P10-S1's records; the drafter has not computed the check.
 - **Combination, explicit, in this order.**
-  1. If either primary cell is NOT EVALUABLE (§8.2) at either checkpoint, **R-DIAGNOSIS is NOT EVALUABLE**. Nothing below is applied.
+  1. If, for either component (tree label or index label), either primary cell is NOT EVALUABLE (§8.2) at either checkpoint, **R-DIAGNOSIS is NOT EVALUABLE**, both components are printed with their NOT EVALUABLE cells, and nothing below is applied.
   2. Per component (tree label; index label) and per checkpoint: the component's value is the common row of the two primary cells; if they differ it is **CELL-DEPENDENT**, both printed.
-  3. Per component: if its value is the same at U_P and at the run length, that is the component's value. Otherwise the component is **CHECKPOINT-DEPENDENT**, printed with both values, **and carries no recommended action**; the record says the answer depends on training duration and refers to ADR-0026.
+  3. Per component: if its value is the same at U_P and at the run length, that is the component's value. Otherwise the component is **CHECKPOINT-DEPENDENT**, printed with both values, **and carries no recommended action**; the record says the answer depends on training duration; ADR-0026 studies duration on a different memory and task and does not resolve it for these memories.
   4. **R-DIAGNOSIS is the pair** (tree component, index component). The checkpoint rule is applied to each component separately, so that a tree label that is stable is not lost because the index label moves (confirmation review R-N16; §16 item 2).
 - **Recommended actions.** A component recommends its row's action (§8.3, §8.4) only if it is a single row at both cells and both checkpoints. MIXED, CELL-DEPENDENT, CHECKPOINT-DEPENDENT, NO GAP, JOINT, EXACT SEARCH HARMS and NOT IDENTIFIED recommend nothing.
 - **The note's last row ("none → consider a more fundamental change of the memory") is not issued by this study.** When the tree component is EXACT SEARCH HARMS or NOT IDENTIFIED and the index component is INDEX DOES NOT APPROACH FLAT, the record prints **NO READ-TIME CAUSE IDENTIFIED** and recommends nothing: a failure of read-time reads to identify a cause is not evidence that nothing short of a fundamental change would work. CONTENT keeps its one action whatever the index component is. This is a departure from the directed table (§16 item 8).
@@ -241,10 +242,10 @@ Printed with it: i, a_use, CR8, CR1, AM_C and the measured mean and 99th-percent
 - **Cells.** F-OQ and T-OQ at 8K/4K and 32K/16K, five fresh draws, one initialisation seed each: **20 cells.** Seeds: §5.
 - **Pinned to P10-S1.** Learning rate 0.003; U_P 8,192 and run length 49,152 at 8K/4K; U_P 16,384 and run length 98,304 at 32K/16K; P10-S1's snapshot schedule, loss, optimizer and batch. The only differences from P10-S1's cells are the data draws and initialisation seeds. Nothing is taken from ADR-0024; this stage does not depend on it.
 - **New adapter code is needed; existing code is not edited.** `studies/p10s1/core.py` refuses data seeds outside 210001–219999 (its `SEED_RANGE` and seed check), so the bridge cannot run "through `studies/p10s1` unedited" as the previous draft said. The bridge has its own plan, generation, training and evaluation wrappers in new files under `studies/p10ir/`. They call P10-S1's and P9's model, generator, loss and update functions unedited, and do not pass through P10-S1's seed whitelist; this study's seed gate (§11 item 6) replaces it (registry §4.3 item 4).
-- **Adapter identity gate.** Before any bridge seed is used: the adapter, given one P10-S1 registered cell's draw and initialisation seed (F-OQ and T-OQ at 8K/4K, draw 1), reproduces that cell's stored checkpoint at its first three snapshots (512, 1,024, 2,048 updates) with identical `model_sha256`, on the platform of record. A mismatch stops stage A2 before training. This re-use of P10-S1 seeds is declared in §5.
+- **Adapter identity gate.** Before any bridge seed is used: the adapter, given one P10-S1 registered cell's draw and initialisation seed (F-OQ and T-OQ at 8K/4K, draw 1), reproduces that cell's stored checkpoint at its first three snapshots (512, 1,024, 2,048 updates): every tensor of the state dict is equal (`torch.equal`) to the stored `model.pt`'s, and the snapshot written through P10-S1's `train.save_snapshot` under P10-S1's cell label (`P_F-OQ_f8192_n4096_d1_i2101`, `P_T-OQ_f8192_n4096_d1_i2101`) has an identical `model_sha256`, on the platform of record. The adapter's loop is `train.run_job` without `check_job_seeds`, calling `train.Trainer.step` unedited. A mismatch stops stage A2 before training. This re-use of P10-S1 seeds is declared in §5.
 - **Read.** The frozen A1 code, with no change of read, threshold or rule, at U_P and at the run length. Fresh checkpoints have no recorded recall; gate 3 of §11 does not apply, and gate 2 is replaced by "T0, F0 and I256@512 through the new read code equal the same checkpoints through P10-S1's evaluation functions, called from the adapter".
-- **R-CONFIRM** (labels compared by row name, §8.2): **CONFIRMED** if A2's tree component and index component each equal A1's, where two CHECKPOINT-DEPENDENT components are equal only if their values at U_P and at the run length are equal. **NOT CONFIRMED** otherwise, with both printed, per component. **NOT APPLICABLE** if A1's R-DIAGNOSIS is NOT EVALUABLE. **NOT RUN** if the stage is not funded or not complete. R-CONFIRM does not change R-DIAGNOSIS.
-- **What may be said.** After A1 alone: "the re-analysis points to …". A statement that the tree's gap *is caused by* a named factor at read time requires CONFIRMED for the tree component. Neither supports a statement about training-time causes.
+- **R-CONFIRM** has one value per component, R-CONFIRM-TREE and R-CONFIRM-INDEX (labels compared by row name, §8.2): **CONFIRMED** if A2's component equals A1's, where two CHECKPOINT-DEPENDENT components are equal only if their values at U_P and at the run length are equal; **NOT CONFIRMED** otherwise, with both printed; **NOT APPLICABLE** if A1's R-DIAGNOSIS is NOT EVALUABLE; **NOT EVALUABLE** if A1's is evaluable and A2's is NOT EVALUABLE. **NOT RUN** if the stage is not funded or not complete. R-CONFIRM does not change R-DIAGNOSIS. Gates of stage A2: gate 1 for the bridge draws' manifests; gate 6 with the bridge values; the adapter identity gate; gate 2 as replaced above; gate 4; gate 5. A failure of gate 1, 5, 6 or the identity gate stops the stage before training.
+- **What may be said.** After A1 alone: "the re-analysis points to …". A statement that the tree's gap *is caused by* a named factor at read time requires R-CONFIRM-TREE: CONFIRMED. Neither supports a statement about training-time causes.
 - **Cost.** At P10-S1's measured seconds per update (0.0091 and 0.0129 at 8K/4K; 0.0124 and 0.0147 at 32K/16K): 49,152 × (0.0091 + 0.0129) + 98,304 × (0.0124 + 0.0147) = 3,745 s per replicate, about 18,700 worker-seconds, **0.87 charged hours** on six workers. The confirmation review recomputed it (0.867 h; the 20 matching P10-S1 cells took 0.871 h) and withdrew the first review's "about 7". With generation, the identity gate, gates and evaluation: about 1.5.
 
 ## 11. Gates, stop rules and NOT EVALUABLE outcomes
@@ -252,21 +253,21 @@ Printed with it: i, a_use, CR8, CR1, AM_C and the measured mean and 99th-percent
 Engineering gates of stage A1. A failure of gate 1, 5 or 6 stops the stage before any new read is computed. Gates 2–4 are per checkpoint.
 
 1. **Identities.** Checkpoint and data identities (§4).
-2. **Count reproduction (bit-exact on the platform of record).** T0, F0 and I256@512 reproduce P10-S1's recorded correct and useful counts exactly, for every cell and checkpoint read; I256@512's index hash equals the recorded one. These reads call the same P9 and P10-S1 functions the registered evaluation called, on the same platform, so equality is guaranteed if the code is right.
+2. **Count reproduction (bit-exact on the platform of record).** T0, F0 and I256@512 reproduce P10-S1's recorded correct and useful counts exactly, for every cell and checkpoint read; I256@512's index hash equals the recorded one. F0 and I256@512 call the same P9 and P10-S1 functions the registered evaluation called. T0 is computed through this study's common tree path (§6) at v = 2 with the prior in selection and weights; before its counts are compared, that path's selected slot ids and scores must equal the top 8 of `S1Memory._top_tree` bit for bit on every query of the checkpoint's Panel A and Panel B passes, main and address-swap reads included. Equal counts then validate the path that T1, T1w, T3, T2 and Tv use.
 3. **Recall reproduction (sealed values; the recorded quantities by their own definitions).**
    (a) P10-S1's `tree_recall`, recomputed as P10-S1 defined it (all trained facts' oracle codes; exhaustive top 8 by `topk` of the cosine against `F.normalize(keys)`; integer hit and total counts), equals the recorded `tree_recall_of_exhaustive_top8` at U_P.
    (b) P10-S1's index recall, recomputed as P10-S1 defined it (every query `IVFMemory._top_flat` receives during the Panel A pass of `studies/p10s1/evaluate.py` `_read_record`, the address-swap reads included; top 8 of the masked scores against `stable_top` of the unmasked scores), equals the recorded `ivf_measured.recall_of_exhaustive_top8` at every checkpoint read.
    The gate prints equal or not equal only. **These gate quantities are not CR8 and enter no label.**
 4. **Exactness identities, with the precision each can have.**
-   - Tv with v = 1, priors on against off: mathematically the same read. In floating point, adding the constant can create or remove a tie at the eighth place and can change a weight in the last digits. Required: selections identical except at float ties, which are counted and printed (more than 0.1% of facts fails the gate); weights equal within 1e-6.
-   - T3 and T2 are the common code path at v = N/256, so they are that path by construction. An **independent** flat computation (`q @ keys.T` over all keys, with and without the per-key prior) is run as an extra gate read at every cell: selections identical to T3 / T2 except at float ties (counted, same limit); weights within 1e-6. At 4,096 and 16,384 slots this v = N/256 read is beyond the sweep's largest v = 8 and exists for the gate and for T2 / T3 only.
+   - Tv with v = 1, priors on against off: mathematically the same read. In floating point, adding the constant can create or remove a tie at the eighth place and can change a weight in the last digits. Required: selected sets identical except at float ties, which are counted and printed (more than 0.1% of facts fails the gate); weights equal within 1e-6 absolute, slot by slot. A fact's difference is a float tie if, in either computation, the 8th and 9th largest scores (cos/0.2 plus any prior, float32) differ by at most 1e-5. Reasons: float32 scores below 8 in magnitude carry rounding errors below 1e-6, so a difference above 1e-5 at the selection boundary is not rounding; a weight moves by at most a quarter of the score error; 0.1% of facts is 8 of 8,192 and 32 of 32,768.
+   - T3 and T2 are the common code path at v = N/256, so they are that path by construction. An **independent** flat computation (`q @ keys.T` over all keys, with and without the per-key prior) is run as an extra gate read at every cell: selected sets identical to T3 / T2 except at float ties (the definition and limit above); weights within 1e-6 absolute, slot by slot. At 4,096 and 16,384 slots this v = N/256 read is beyond the sweep's largest v = 8 and exists for the gate and for T2 / T3 only.
    - An index is bit-identical on rebuild with the same seed, on the platform of record.
-5. **Rehearsal.** Every stage has run end to end against the frozen plan file itself.
+5. **Rehearsal.** Every stage has run end to end against the frozen plan file itself. Gates 1 and 2 are also run in the rehearsal on the registered checkpoints themselves: gate 2 compares counts that are already seen, so this observes nothing new, and it catches platform or library drift before Decision 2 instead of after it, when a systematic failure would make A1 NOT EVALUABLE and not repairable. Gate 3 is not run before the freeze; the seal forbids it.
 6. **Seeds** (§5), with the declared re-use.
 
 Consequences and stop rules:
 
-- A checkpoint that fails gate 2, 3 or 4 makes its replicate NOT EVALUABLE at that checkpoint for the labels that use it (a T-OQ checkpoint: the tree label; an F-OQ checkpoint: both labels, since F0 is the reference of both). It is not repaired. The cell-level and study-level consequences are §8.2 and §9 item 1.
+- A checkpoint that fails gate 2, 3 or 4 makes its replicate NOT EVALUABLE at that checkpoint for the labels that use it (a T-OQ checkpoint: the tree label; an F-OQ checkpoint whose F0 fails: both labels, since F0 is the reference of both; an F-OQ checkpoint whose I256@512 or an I64 index fails while F0 passes: the index label only). It is not repaired. The cell-level and study-level consequences are §8.2 and §9 item 1.
 - A stop on a resource cap is PAUSED and resumable; completed cells and reads are not recomputed.
 - Stage A2: a failed cell is kept and not re-run; the stage is INCOMPLETE and R-CONFIRM is NOT RUN; a second attempt is the human lead's decision. No A2 seed is observed before its Decision 2.
 - No read, threshold, cell, checkpoint or rule changes after the freeze. No read is added because a result looks close.
@@ -285,8 +286,8 @@ Consequences and stop rules:
 - **Order.** Independent review of this draft → the human lead's approval → implementation with tests and an independent implementation audit → rehearsal of every stage end to end against the frozen plan itself, on a synthetic memory and on one rehearsal-trained tree and flat cell (rehearsal seeds of §5) → freeze → the human lead's Decision 2 for A1 → A1 once → independent recomputation (the auditor receives the specification, code and records, not the lead's conclusions; it also recomputes CR8 and AM_C of T0 at one primary cell from the checkpoint tensors) → outcome record. A2 has its own Decision 2, before or after A1's result; its reads use the same freeze.
 - **One frozen-input set, and the ADR text is not in it:** `studies/p10ir/**`; the config, which holds every threshold; launch scripts; `freeze/plan.json` (the list of cells, checkpoints and reads; every stage derives its items from this file only); stage caps; the checkpoint digests; P10-S1's data manifests; for A2, the bridge draws' manifests. Identity is by SHA-256 of each listed file. The freeze record stores the ADR's hash for provenance only. A test asserts that every threshold in this ADR equals the config's value. Nothing is written in the frozen files between a Decision 2 and the end of that stage's report; notes go to the human lead directly or to another branch. An identity difference stops a task as PAUSED — IDENTITY; restoring the file bit for bit lets the stage resume.
 - **Machine load.** No stage needs a quiet machine: this study registers no wall-time or CPU-time comparison. Seconds per read are recorded descriptively. The machine is also the human lead's working computer. Memory: P10-S1's evaluation tasks peaked at **1.415 GiB per worker** (`manifests/evaluate.manifest.json`); its training peak was 0.39 GiB. Six workers are within the 18 GiB guard on those figures; the all-keys reads are measured in the rehearsal.
-- **Platform of record:** macOS arm64 (the machine P10-S1 ran on). Bit-exact assertions (gates 1–3, the index rebuild, the adapter identity gate) are made on it only; elsewhere they are skipped, and only the tolerance gates run. Checks (`ruff`, `mypy`, `pytest`) run locally; a GitHub run is not required.
-- **Analysis tests.** The analysis and the report are tested on a synthetic registry with known answers covering every row of §8.3 and §8.4, MIXED-PANEL, MIXED, cell-level NOT EVALUABLE, CELL-DEPENDENT, CHECKPOINT-DEPENDENT per component, NO READ-TIME CAUSE IDENTIFIED, both STILL LEARNING tags, every value of R-CONFIRM and every descriptive section; registry keys carry the read's name so that two reads of one cell cannot share a key (the defect of `studies/p10s1/analysis.py` lines 167–169).
+- **Platform of record:** macOS arm64 (the machine P10-S1 ran on), with the locked torch 2.8.0, `torch.set_num_threads(1)`, one interop thread and deterministic algorithms on, as P10-S1's records state (`environment.threads` of every `train.json`); the OS build is recorded with every gate result. Bit-exact assertions (gates 1–3, the index rebuild, the adapter identity gate) are made on it only; elsewhere they are skipped, and only the tolerance gates run. Checks (`ruff`, `mypy`, `pytest`) run locally; a GitHub run is not required.
+- **Analysis tests.** The analysis and the report are tested on a synthetic registry with known answers covering every row of §8.3 and §8.4, MIXED-PANEL, MIXED, cell-level NOT EVALUABLE, CELL-DEPENDENT, CHECKPOINT-DEPENDENT per component, NO READ-TIME CAUSE IDENTIFIED, both STILL LEARNING tags, every value of R-CONFIRM-TREE and R-CONFIRM-INDEX and every descriptive section; registry keys carry the read's name so that two reads of one cell cannot share a key (the defect of `studies/p10s1/analysis.py` lines 167–169).
 
 ## 14. Cost projection (estimates, to be replaced by the rehearsal)
 
@@ -304,7 +305,7 @@ The rehearsal measures seconds per read at 16,384 slots and 32,768 facts, and pe
 ## 15. What this study cannot establish
 
 - Any cause that acts during training. That a fix would work. Anything about a router or index trained for the purpose, a refreshed index, or product-key memory: those are Stage B.
-- A confirmed read-time cause without R-CONFIRM: CONFIRMED.
+- A confirmed read-time cause without R-CONFIRM-TREE: CONFIRMED.
 - Whether the candidate restriction matters by itself, wherever T3 selects what T0 selects (§8.3).
 - Anything beyond P10-S1's memories: one task that a lookup table solves, oracle addressing, rate 0.003, one tree design (2 of N/256 branches of 256 slots), one index construction, crowded oracle codes.
 - That the tree should be kept or replaced, or that a more fundamental change is or is not needed. That longer training closes the gap to the flat memory (ADR-0026).
@@ -318,25 +319,28 @@ The rehearsal measures seconds per read at 16,384 slots and 32,768 facts, and pe
 2. **Checkpoints.** Co-primary, the rule applied to the tree label and the index label separately, and no recommendation for a component that differs between them (recommended). Or one primary checkpoint named in advance; or the rule applied to the pair as a whole.
 3. **The recall floor R = 0.90 and the closure figure 0.5** (§8.3). **PENDING HUMAN LEAD RULING.**
 4. **The retention rule** (0.25 bits and 0.90 of the reference's information) in place of the note's 95% of accuracy (recommended).
-5. **Stage A2.** Fund it with A1 (recommended; about 1.5 hours), and require CONFIRMED before any Stage B specification states a cause. Or run A1 alone.
+5. **Stage A2.** Fund it with A1 (recommended; about 1.5 hours), and require R-CONFIRM-TREE: CONFIRMED before any Stage B specification states a cause. Or run A1 alone.
 6. **May a Stage B study be proposed on A1 alone?** Recommended: proposed yes, with its re-analysis status stated; approved only with R-CONFIRM in hand.
 7. **Order against ADR-0024 and ADR-0026.** Recommended: this study first; it is short and informs both. **RULED by the human lead on 2026-11-17:** asked whether this study should be the first P10-I study prepared for approval, the human lead answered "yes it should". This fixes the order of preparation; it does not approve the specification.
 8. **Departures from the next-action table of the note's §5.2.** The note is binding direction; each departure below changes directed content and is **PENDING HUMAN LEAD RULING**. The reasons are in §3 and §8.3.
 
 | Note §5.2: Stage A result → next action | This ADR | What changes |
 |---|---|---|
-| Exact search restores the tree's quality → improve the router and candidate coverage | CANDIDATES (T3 closes most of the gap, prior kept) → the same action. JOINT (only T2 does) → no action | "Exact search restores" is split. Where only removing both the restriction and the prior helps, no single fix is named |
-| Exact search does not restore it → improve memory training and representation | CONTENT → the same action, **only if** the router already finds at least 0.90 of what the keys rank first and exact search does no harm. EXACT SEARCH HARMS and NOT IDENTIFIED → no action | "Does not restore" no longer implies poorly learned content by itself |
-| Removing branch priors restores it → redesign how routing scores enter the read | PRIORS → the same action, also when the gap is mostly (≥ 0.5) but not fully closed. PRIORS AND CANDIDATES, SEPARATELY → either action | A partial-priors case is added; a both-work case is added |
+| Exact search restores the tree's quality → improve the router and candidate coverage | CANDIDATES (T3 closes most of the gap, prior kept) → the same action. JOINT (only T2 does) → no action | "Exact search restores" is split. Where only removing both the restriction and the prior helps, no single fix is named. Where removing the prior alone also closes most of the gap, the label is PRIORS (one action), or PRIORS AND CANDIDATES, SEPARATELY if T3 also does; the note would have issued both actions. |
+| Exact search does not restore it → improve memory training and representation | CONTENT → the same action, **only if** the router already finds at least 0.90 of what the keys rank first and exact search does no harm. EXACT SEARCH HARMS and NOT IDENTIFIED → no action | "Does not restore" no longer implies poorly learned content by itself. CONTENT also needs that neither T1 nor T3 closes most of the gap. |
+| Removing branch priors restores it → redesign how routing scores enter the read | PRIORS → the same action, also when the gap is mostly (≥ 0.5) but not fully closed. PRIORS AND CANDIDATES, SEPARATELY → either action | A partial case (closure ≥ 0.5 without RESTORED) is added for PRIORS, CANDIDATES, JOINT and SEPARATELY alike; a both-work case is added |
 | Post-hoc indexing approaches the flat memory → investigate a separately trained sparse index | SPARSE INDEX APPROACHES FLAT → the same action, only at a budget of at most 512 keys that also holds at every larger budget. ONLY ABOVE 512 → no action | "Approaches" is tied to the tree's candidate count |
 | None → consider a more fundamental change of the memory | NO READ-TIME CAUSE IDENTIFIED → no action | **The row is not issued.** Unidentified is not treated as evidence for a fundamental change |
+| Stage A includes loaded cells | Loaded cells are read and labelled as R-DIAGNOSIS-LOADED, printed only | Their labels recommend nothing |
 | (not in the note) | CHECKPOINT-DEPENDENT, CELL-DEPENDENT, MIXED → no action; a retention rule in bits in place of 95% of accuracy; the confirmatory stage A2 | Added |
 
 9. **Testability of the candidate restriction** (§8.3). Print the share and leave row 5 as it is (this draft), or make CANDIDATES "NOT TESTABLE" above a registered share of facts on which T3 selects what T0 selects.
+10. **A closure on one panel only** (third review, R3-A12). P, C and J need closure on both panels; a replicate in which a read closes most of the gap on one panel only is therefore not P, C or J and can reach CONTENT if R holds. The query and the selection are per fact, so panel differences come from the backbone context only and are likely small. This draft keeps the both-panels rule (recommended); the alternative is to label such a replicate MIXED-PANEL as well.
+11. **Scope of NOT EVALUABLE** (third review, R3-4 and R3-A6). This draft voids R-DIAGNOSIS as a whole if either component has a NOT EVALUABLE primary cell (§9 item 1), while an index-only gate failure voids only the index label of its replicate (§11). The alternative is to apply §9 item 1 per component, so that a T-OQ gate failure does not void the index component.
 
 ## 17. Review record
 
-Both reviews are by the `arbor-auditor` subagent (Claude Opus 5.5). Both revisions are by the lead's workflow (Claude Fable 5.2). **This draft has not been re-reviewed.** Neither review is Astra validation or a human approval. Findings that concern only the capacity study are in ADR-0024 §22.
+All three reviews are by the `arbor-auditor` subagent (Claude Opus 5.5). All revisions are by the lead's workflow (Claude Fable 5.2). This draft was reviewed in `REVIEW3_ADR-0029.md`; the edits that review lists are applied in §17.3 and the text with them applied has not been reviewed again. No review is Astra validation or a human approval. Findings that concern only the capacity study are in §22 of `ADR-0024-p10-i-s1-capacity-scaling.md`.
 
 ### 17.1 First review (`REVIEW_ADR-0024.md`, NOT READY)
 
@@ -344,7 +348,7 @@ Both reviews are by the `arbor-auditor` subagent (Claude Opus 5.5). Both revisio
 |---|---|---|---|
 | Point A: run length primary, chosen knowing the data | — | FIXED | §8.1, §9 |
 | Point B: what the 2 × 2 can identify; recall enters no rule | — | FIXED (completed in this draft: §3 corrected, JOINT narrowed, testability printed) | §3, §6, §7, §8.3 |
-| Point C: own ADR | — | FIXED, pending the human lead's ruling | header, §16 item 1 |
+| Point C: own ADR | — | FIXED; ruled by the human lead on 2026-11-17 ("Keep ADR-0029") | header, §16 item 1 |
 | F2 tree label misassigns causes | BLOCKING | FIXED | §6, §8.3 |
 | F3 N/8 | REQUIRED | FIXED | §8.4 |
 | F8 U_P / run length | REQUIRED | FIXED | §9 |
@@ -382,6 +386,32 @@ Both reviews are by the `arbor-auditor` subagent (Claude Opus 5.5). Both revisio
 | R-N16 CHECKPOINT-DEPENDENT likely | ADVISORY | FIXED: the rule is applied per component; left open to the human lead | §9, §16 item 2 |
 | §F stale seed text | REQUIRED | FIXED | §5 |
 
-Changed in this draft and not yet reviewed: the per-component checkpoint rule, the adapter identity gate, the gate tolerances (1e-6; 0.1% of facts at float ties), and the decision not to issue the note's last row.
+Changed in draft 2 and reviewed in the third review: the per-component checkpoint rule, the adapter identity gate, the gate tolerances, and the decision not to issue the note's last row.
+
+### 17.3 Third review (`REVIEW3_ADR-0029.md`, READY AFTER THE LISTED EDITS; no blocking finding)
+
+| Finding | Disposition | Where |
+|---|---|---|
+| R3-1 which path computes T0 in gate 2 | FIXED, as written | §11 gate 2 |
+| R3-2 adapter identity gate compared file hashes | FIXED, as written | §10 |
+| R3-3 MIXED-PANEL not a row | FIXED, as written | §8.3 row 2a and the reachability sentence |
+| R3-4 study-level NOT EVALUABLE per component | FIXED, as written; the per-component option is put to the human lead | §9 item 1, §16 item 11 |
+| R3-5 R-CONFIRM per component; A2 NOT EVALUABLE | FIXED, as written; §1, §13 and §16 item 5 aligned | §1, §10, §13, §15, §16 item 5 |
+| R3-6 float tie and tolerance undefined | FIXED, as written; the second bullet now names the same definition | §11 gate 4 |
+| R3-7 platform settings | FIXED, as written | §13 |
+| R3-8 CONTENT's claim | FIXED, as written | §8.3 row 8 |
+| R3-9 side-by-side table incomplete | FIXED, as written | §16 item 8 |
+| R3-A1 plateau floor; snapshots named | FIXED | §9 |
+| R3-A2 checker file | FIXED | §5 |
+| R3-A3 stale ruling and review text | FIXED; the review-record sentence is adapted to say the applied edits are not re-reviewed | header, §17, §17.1 |
+| R3-A4 cells and checkpoints | FIXED | §0 |
+| R3-A5 function names; E8 on the read's scores | FIXED | §7 |
+| R3-A6 scope of an index-only failure | FIXED: the option is adopted; §8.2, §8.3 row 1 and §8.4 aligned; open to the human lead | §11, §16 item 11 |
+| R3-A7 disclosure beside the rule | FIXED | §8.3, §9 |
+| R3-A8 reference to ADR-0026 | FIXED | §9 item 3 |
+| R3-A9 gates 1 and 2 in the rehearsal | FIXED: adopted | §11 gate 5 |
+| R3-A10 seal wording; reviewers' accesses | FIXED; the third reviewer's two files are named for the freeze record | §4 |
+| R3-A11 A2's gates in one place | FIXED | §10 |
+| R3-A12 closure on one panel only | ANSWERED: both-panels rule kept; put to the human lead | §16 item 10 |
 
 `Astra review: NOT_PERFORMED`.
