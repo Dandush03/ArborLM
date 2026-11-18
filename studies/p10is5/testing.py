@@ -6,7 +6,7 @@ import contextlib
 import os
 import shutil
 import threading
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -91,8 +91,29 @@ class FakeIO:
             return IOSnapshot(self.read, self.written, self.footprint)
 
 
+class RealFileIO:
+    """A fake PHYSICAL counter over REAL file reads (small files in the scratch directory): ``pread`` really reads and counts the bytes it returns, except at ``short_offsets`` (pages 'already cached': they count
+    0). Used to test the build, the verification reads and the cold check on a few MiB without the device's counter."""
+
+    def __init__(self) -> None:
+        self.lock = threading.Lock()
+        self.read = 0
+        self.short_offsets: set[int] = set()
+
+    def pread(self, fd: int, n: int, off: int) -> bytes:
+        b = os.pread(fd, n, off)
+        with self.lock:
+            if off not in self.short_offsets:
+                self.read += len(b)
+        return b
+
+    def counter_read(self) -> IOSnapshot:
+        with self.lock:
+            return IOSnapshot(self.read, 0, 1 << 20)
+
+
 class FakeCounter:
-    def __init__(self, io: FakeIO) -> None:
+    def __init__(self, io: "FakeIO | RealFileIO") -> None:
         self.io = io
 
     def read(self) -> IOSnapshot:
@@ -138,3 +159,72 @@ def thresholds_for(geometry: core.Geometry, m_t: float = 0.10) -> dict[str, Any]
     return {
         "m_t": m_t, "timing_spread": False, "label_min_repeats": 4, "valid_min_repeats": 4, "harness_limited_fraction": 0.25, "sizes": list(geometry.sizes), "depths": list(geometry.depths), "grid": [list(c) for c in geometry.cells()],
     }  # fmt: skip
+
+
+# --- a fake machine for the system tools (canned output as this machine printed it) -------------------------------------------------------------------------
+BATT = "Now drawing from 'AC Power'\n -InternalBattery-0 (id=36307043)\t100%; charged; 0:00 remaining present: true\n"
+PMSET = " powermode            0\n lowpowermode         0\n"
+THERM = "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\n"
+HID = '    | | |   "HIDIdleTime" = 13387188164083\n'
+
+
+def plist_driver(read: int, write: int, rops: int, wops: int) -> bytes:
+    import plistlib
+
+    return plistlib.dumps([
+        {"Statistics": {"Bytes (Read)": 0, "Bytes (Write)": 0, "Operations (Read)": 0, "Operations (Write)": 0}, "IORegistryEntryChildren": [{"BSD Name": "disk9"}]},
+        {"Statistics": {"Bytes (Read)": read, "Bytes (Write)": write, "Operations (Read)": rops, "Operations (Write)": wops}, "IORegistryEntryChildren": [{"BSD Name": "disk0", "IORegistryEntryChildren": [{"BSD Name": "disk0s1"}]}]},
+    ])  # fmt: skip
+
+
+class Clock:
+    """A fake clock: ``sleep`` advances it."""
+
+    def __init__(self) -> None:
+        self.t = 0.0
+
+    def __call__(self) -> float:
+        return self.t
+
+    def sleep(self, s: float) -> None:
+        self.t += s
+
+
+class FakeSystem:
+    """Canned ``run`` and ``run_b``; the disk counters advance by fixed rates per second of fake time; ``other_windows`` lists (from, to) fake-time windows in which another study's process is alive."""
+
+    def __init__(self, clk: Clock, other_windows: "Sequence[tuple[float, float]]" = (), load: float = 2.0) -> None:
+        self.clk, self.other, self.load = clk, other_windows, load
+
+    def run(self, argv: "Sequence[str]") -> tuple[int, str, str]:
+        a = list(argv)
+        if a[:2] == ["sysctl", "-n"] and a[2] == "vm.loadavg":
+            return 0, f"{{ {self.load + (self.clk.t % 7) / 100:.2f} 1.0 1.0 }}", ""
+        if a[:2] == ["sysctl", "-n"]:
+            return 0, "{ sec = 5, usec = 1 }", ""
+        if a[0] == "ps" and "pid,ppid" in a:
+            return 0, "  PID  PPID\n  505   404\n  404     1\n", ""
+        if a[0] == "ps":
+            busy = any(lo <= self.clk.t < hi for lo, hi in self.other)
+            return 0, "  PID COMMAND\n    1 /sbin/launchd\n  404 caffeinate\n" + ("  900 python -m pytest\n" if busy else ""), ""
+        if a[:2] == ["pmset", "-g"] and len(a) == 3 and a[2] == "batt":
+            return 0, BATT, ""
+        if a[:2] == ["pmset", "-g"] and len(a) == 3:
+            return 0, THERM, ""
+        if a[:2] == ["pmset", "-g"]:
+            return 0, PMSET, ""
+        if a[0] == "ioreg":
+            return 0, HID, ""
+        if a[0] == "diskutil":
+            return 0, "   SMART Status:              Verified\n", ""
+        if a[0] == "df":
+            return 0, "Filesystem 1024-blocks Used Available Capacity iused ifree %iused Mounted on\n/dev/disk3s5 3000000000 1000000000 2000000000 33% 1 1 0% /System/Volumes/Data\n", ""
+        if a[0] == "mdutil":
+            return 0, "Indexing disabled.", ""
+        if a[0] in ("tmutil", "mdfind"):
+            return 0, "", ""
+        return 127, "", "unknown"
+
+    def run_b(self, argv: "Sequence[str]") -> tuple[int, bytes]:
+        t = int(self.clk.t)
+        return 0, plist_driver(1000 * t, 2000 * t, 10 * t, 20 * t)
