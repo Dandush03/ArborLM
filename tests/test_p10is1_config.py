@@ -134,7 +134,6 @@ def test_binomial_quantile_is_exact(m: int, num: int, den: int) -> None:
 def test_dep_c_requires_both_parts_and_uses_strict_exceedance() -> None:
     n = 2048
     hi = core.chance_high(n)
-    p = hi / n
     u = 600
     m = n - u
     q = core.dep_c_quantile(n, u, 1e-4)
