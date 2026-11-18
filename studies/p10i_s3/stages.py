@@ -503,6 +503,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     seed = gates.seed_gate(cfg, root=repo)
     if not seed["passed"]:
         raise StageRefused(f"refused: the seed gate did not pass: {seed['problems']}")
+    record_path.parent.mkdir(parents=True, exist_ok=True)
     write_json(record_path, {**core.envelope("freeze_record"), "plan_file_sha256": plan_sha, "rehearsal": {"path": str(Path(args.rehearsal).resolve()), "sha256": file_sha256(Path(args.rehearsal))}, "seed_gate": seed, "rehearsal_gate": reh})
     print(json.dumps({"freeze_record": str(record_path), "plan_file_sha256": plan_sha}))
     return 0
@@ -515,6 +516,7 @@ def cmd_write_rate_table(args: argparse.Namespace) -> int:
     target = repo / core.RATE_TABLE
     if target.exists():
         raise StageRefused(f"refused: {target} exists")
+    target.parent.mkdir(parents=True, exist_ok=True)  # a clean checkout has no freeze directory contents to rely on
     write_json(target, pub["rate_table"])
     print(json.dumps({"rate_table": str(target), "sha256": file_sha256(target)}))
     return 0
@@ -570,7 +572,8 @@ def build_parser() -> argparse.ArgumentParser:
     pd.add_argument("--repo")
     ws = sub.add_parser("window-spans")
     ws.add_argument("--source", required=True)
-    ws.add_argument("--downloads", required=True, help="P10-S2's downloads directory (the pinned student tokenizer)")
+    ws.add_argument("--bundle", required=True, help="P10-S2's recorded bundle directory (windows.json and tokenizer_table.json)")
+    ws.add_argument("--manifest", help="bundle_manifest.json that pins both files (default: results/p10s2-datagen-2026-11-16/bundle_manifest.json)")
     ws.add_argument("--out", required=True)
     ws.add_argument("--ledger", help="the shared panel ledger file (ADR-0025 section 4.1)")
     ws.add_argument("--ledger-absent", action="store_true", help="declare, on the record, that the ledger does not exist yet")
@@ -579,8 +582,7 @@ def build_parser() -> argparse.ArgumentParser:
     rh.add_argument("phase", choices=("r1", "r2", "r3", "synthetic"))
     rh.add_argument("--run-dir", required=True)
     rh.add_argument("--repo")
-    rh.add_argument("--sealed-path")
-    rh.add_argument("--sealed-dir", help="r2/r3: a directory outside the repository for sealed item records")
+    rh.add_argument("--sealed-dir", help="r1/synthetic: the folder for the sealed archive (rehearsal_sealed.json) and the sealed item records (items/, about 1.4-2.6 GB of snapshots); r3: the folder for the DRY item records. Required: it must be outside the repository, the lead's checkout and every git working tree")
     rh.add_argument("--plan")
     rh.add_argument("--data-manifest")
     rh.add_argument("--parent-suite")

@@ -103,6 +103,11 @@ provisional = true
 rehearsal_hours = 25.0
 registered_hours = 48.0
 
+[seal]
+# the sealed archive and the sealed item records (R1: about 1.4-2.6 GB of snapshots) are refused inside any git working tree and anywhere under these roots (symlinks resolved first)
+forbidden_roots = ["/Users/daniellaloush/dandush03/ArborLM"]
+expected_snapshot_gb = [1.4, 2.6]
+
 [platform]
 system = "Darwin"
 machine = "arm64"

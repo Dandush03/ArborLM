@@ -63,6 +63,7 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "seeds": ("init_registered", "init_calibration", "init_dry", "init_test", "stream_base", "p_all_base", "joint_base", "p_used_base", "x_base", "cal_stream_base", "cal_p_all_base", "cal_joint_base", "cal_p_used_base", "cal_x_base", "dry_stream_base", "dry_p_all", "dry_joint", "dry_p_used_base", "dry_x_base", "test_range"),
     "resources": ("workers", "rss_worker_bytes", "rss_aggregate_bytes", "rss_aggregate_alone_bytes", "snapshot_bytes_estimate"),
     "caps": ("provisional", "rehearsal_hours", "registered_hours"),
+    "seal": ("forbidden_roots", "expected_snapshot_gb"),
     "platform": ("system", "machine", "torch", "torch_num_threads", "torch_interop_threads", "deterministic_algorithms"),
     "seed_ranges": ("stream", "calibration", "dry", "init", "test", "checker", "checker_sha256"),
 }  # fmt: skip

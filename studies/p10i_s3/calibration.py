@@ -103,14 +103,24 @@ def sealed_bytes(curves_by: Mapping[tuple[str, str], Curves], extra: Mapping[str
     return json.dumps(core.jsonable(body), sort_keys=True, separators=(",", ":")).encode()
 
 
-def require_outside_repo(path: Path, repo: Path, *, allow_inside_repo: bool = False) -> None:
-    """The sealed archive and the sealed item records are stored outside the repository (section 5.3, B4); the synthetic rehearsal's test device may sit inside."""
-    try:
-        path.resolve().relative_to(repo.resolve())
-    except ValueError:
+def require_outside_repo(path: Path, repo: Path, *, allow_inside_repo: bool = False, forbidden_roots: Sequence[str] | None = None) -> None:
+    """The sealed archive and the sealed item records (about 1.4-2.6 GB of R1 snapshots) are refused (N2): inside this repository; anywhere under a forbidden root (the main checkout and so every worktree of it; config
+    ``[seal]``); inside ANY git working tree (the nearest existing parent answers ``git rev-parse --show-toplevel``). Symlinks are resolved first. The synthetic rehearsal's test device may sit inside."""
+    import subprocess
+
+    if allow_inside_repo:
         return
-    if not allow_inside_repo:
-        raise core.EngineeringStop("refused: the sealed archive and the sealed item records must be stored outside the repository (section 5.3)")
+    p = path.resolve()
+    roots = [Path(r).resolve() for r in (forbidden_roots if forbidden_roots is not None else core.load_config()["seal"]["forbidden_roots"])]
+    for root in [repo.resolve(), *roots]:
+        if p == root or root in p.parents:
+            raise core.EngineeringStop(f"refused: the sealed folder {p} is inside {root}: it must be outside the repository, outside the lead's checkout and worktrees, and outside every git working tree (section 5.3)")
+    probe = p
+    while not probe.exists() and probe != probe.parent:
+        probe = probe.parent
+    top = subprocess.run(["git", "-C", str(probe), "rev-parse", "--show-toplevel"], capture_output=True, text=True, check=False)  # noqa: S603, S607
+    if top.returncode == 0:
+        raise core.EngineeringStop(f"refused: the sealed folder {p} is inside the git working tree {top.stdout.strip()} (section 5.3)")
 
 
 def write_sealed(path: Path, repo: Path, data: bytes, *, allow_inside_repo: bool = False) -> str:

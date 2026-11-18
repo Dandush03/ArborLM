@@ -135,6 +135,61 @@ def p10s2_windows(tok: OffsetTokenizer, rows: Sequence[str], cfg_s2: Mapping[str
     return out
 
 
+# --- P10-S2's recorded windows, no tokenizer (the route the command uses) ----------------------------------------------------------------------
+def verify_bundle_files(bundle_dir: Path, manifest_path: Path) -> dict[str, str]:
+    """``windows.json`` and ``tokenizer_table.json`` must hash to the digests ``bundle_manifest.json`` pins (P10-S2's data-generation record); any difference is a refusal."""
+    import hashlib
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    out = {}
+    for name in ("windows.json", "tokenizer_table.json"):
+        want = manifest["files"][name]
+        if want.get("algo") != "sha256":
+            raise EngineeringStop(f"ENGINEERING STOP — {name} is pinned with {want.get('algo')!r}, not sha256")
+        have = hashlib.sha256((bundle_dir / name).read_bytes()).hexdigest()
+        if have != want["digest"]:
+            raise EngineeringStop(f"ENGINEERING STOP — {name} differs from the digest pinned in {manifest_path.name}")
+        out[name] = have
+    return out
+
+
+def find_once(haystack: bytes, needle: bytes) -> int | None:
+    """The position of ``needle`` in ``haystack`` if it occurs exactly once (overlapping occurrences count), else None."""
+    pos = haystack.find(needle)
+    if pos < 0 or haystack.find(needle, pos + 1) >= 0:
+        return None
+    return pos
+
+
+def p10s2_windows_from_records(rows: Sequence[str], bundle_dir: Path, manifest_path: Path, cfg_s2: Mapping[str, Any]) -> dict[str, Any]:
+    """The byte spans of P10-S2's 144 recorded GEN windows with NO tokenizer and no package outside the lock. ``windows.json`` holds each window's 256 token ids and its stratum; ``tokenizer_table.json`` the raw bytes of
+    every id; both are verified against the digests ``bundle_manifest.json`` pins. A window's bytes are the join of its tokens' bytes; they must occur EXACTLY ONCE in the validation ``text`` column joined in file order
+    (zero or several occurrences refuse, naming the window); the span is [pos, pos + len), end exclusive, then converted to per-row spans by ``RowLayout``.
+
+    A span found this way can be up to the trimmed leading or trailing whitespace byte wider than the offset-based span of ``p10s2_windows`` (the reference tokenizer trims offsets): a wider span only excludes more
+    chunks, so it is the conservative one. The counts expected (44 marker-like, 100 ordinary) come from the P10-S2 configuration; any other count refuses."""
+    digests = verify_bundle_files(bundle_dir, manifest_path)
+    rec = json.loads((bundle_dir / "windows.json").read_text(encoding="utf-8"))["windows"]
+    table = [bytes.fromhex(h) for h in json.loads((bundle_dir / "tokenizer_table.json").read_text(encoding="utf-8"))["token_bytes_hex"]]
+    d = cfg_s2["data"]
+    n_marker = sum(1 for w in rec if w["stratum"] == "marker")
+    n_ord = sum(1 for w in rec if w["stratum"] == "ordinary")
+    if (n_marker, n_ord) != (int(d["general_windows_marker_like"]), int(d["general_windows_ordinary"])) or len(rec) != n_marker + n_ord:
+        raise EngineeringStop(f"ENGINEERING STOP — the recorded windows are {n_marker} marker-like and {n_ord} ordinary, the P10-S2 configuration states {d['general_windows_marker_like']} and {d['general_windows_ordinary']}")
+    layout = RowLayout(rows)
+    text = b"".join(r.encode("utf-8") for r in rows)
+    out: list[dict[str, Any]] = []
+    for k, w in enumerate(rec):
+        b = b"".join(table[i] for i in w["ids"])
+        pos = find_once(text, b)
+        if pos is None:
+            n = text.count(b)
+            raise EngineeringStop(f"ENGINEERING STOP — window {k} ({w['stratum']}) occurs {'0' if n == 0 else 'more than once'} times in the validation text; nothing is guessed")
+        end = pos + len(b)
+        out.append({"source": "P10-S2 GEN and ADR-0025 marker-like" if w["stratum"] == "marker" else "P10-S2 GEN", "stratum": w["stratum"], "record_index": k, "start": pos, "end": end, "first_row": layout.row_of(pos), "last_row": layout.row_of(end - 1)})
+    return {"layout_total_bytes": layout.total, "windows": out, "bundle_digests": digests, "found_exactly_once": len(out), "method": "recorded windows.json and tokenizer_table.json, exact byte match in the validation text (no tokenizer)"}
+
+
 # --- the shared panel ledger (ADR-0025 section 4.1) -----------------------------------------------------------------------------
 def ledger_entry(layout: RowLayout, start: int, end: int, source: str) -> dict[str, Any]:
     return {"source": source, "start": start, "end": end, "first_row": layout.row_of(start), "last_row": layout.row_of(end - 1)}
@@ -170,14 +225,19 @@ def build_excluded(rows: Sequence[str], windows_record: Mapping[str, Any], *, le
     layout = RowLayout(rows)
     wins = list(windows_record["windows"])
     status: dict[str, Any]
+    assumptions = ["ADR-0025's 44 marker-like windows are taken to be the same 44 windows as P10-S2's (same tokenizer, same fixed grid): an assumption, checked against the shared ledger when one is read"]
     if ledger_path is not None:
         led = read_ledger(ledger_path, layout)
+        mine = {(w["start"], w["end"]) for w in windows_record["windows"] if w["stratum"] == "marker"}
+        theirs = {(int(w["start"]), int(w["end"])) for w in led if w.get("stratum") == "marker"}
+        if theirs != mine:
+            raise EngineeringStop(f"ENGINEERING STOP — the ledger's marker-like windows ({len(theirs)}) are not the {len(mine)} marker-like windows of P10-S2's record (assumption of the 44 refuted or the ledger carries no 'stratum' field)")
         wins += [{**w, "source": w.get("source", "shared ledger")} for w in led]
         status = {"state": "read", "path": str(ledger_path), "windows": len(led)}
     else:
         status = {"state": "ABSENT-DECLARED", "note": "ADR-0025's 100 ordinary windows are drawn after this study's panels; its 44 marker-like windows are avoided here (ADR-0026 section 4, correction C7)"}
     spans = excluded_spans(layout, wins)
-    return {"format": "p10i-s3-excluded-spans-v1", "end_offsets": "exclusive", "ledger": status, "windows": wins, "spans": [list(s) for s in spans], "row_layout_total_bytes": layout.total}
+    return {"format": "p10i-s3-excluded-spans-v1", "end_offsets": "exclusive", "assumptions": assumptions, "ledger": status, "windows": wins, "spans": [list(s) for s in spans], "row_layout_total_bytes": layout.total}
 
 
 def shared_ledger_body(rows: Sequence[str], panels: Mapping[str, Sequence[Span]], existing: Sequence[Mapping[str, Any]]) -> dict[str, Any]:

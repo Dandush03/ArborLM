@@ -87,27 +87,26 @@ def cmd_prepare_data(args: argparse.Namespace) -> int:
 
 
 def cmd_window_spans(args: argparse.Namespace) -> int:
-    """Generate the excluded-spans file from the validation text and the P10-S2 reference tokenizer (reads real data: the lead runs it). Exactly one of ``--ledger`` and ``--ledger-absent``."""
+    """Generate the excluded-spans file from P10-S2's RECORDED windows and token bytes and the pinned validation text: no tokenizer, no package outside the lock (needs pyarrow: ``uv run --locked --extra pilot``).
+    Exactly one of ``--ledger`` and ``--ledger-absent``."""
     import tomllib
 
     from . import window_spans as ws
 
     repo = Path(args.repo or core.repo_root())
     rows = data.validation_rows(Path(args.source))
-    cfg_s2 = tomllib.loads((repo / "configs" / "p10s2_transfer.toml").read_text())
-    from studies.p10s2.datagen import (
-        HFTokenizer,  # read-only use of P10-S2's pinned tokenizer loader
-    )
-
-    tok = HFTokenizer(Path(args.downloads))
-    rec = ws.p10s2_windows(tok, rows, cfg_s2)
-    doc = ws.build_excluded(rows, rec, ledger_path=Path(args.ledger) if args.ledger else None, ledger_absent=bool(args.ledger_absent))
-    doc["inputs"] = {"p10s2_config_sha256": file_sha256(repo / "configs" / "p10s2_transfer.toml")}
+    cfg_s2_path = repo / "configs" / "p10s2_transfer.toml"
+    cfg_s2 = tomllib.loads(cfg_s2_path.read_text())
+    manifest = Path(args.manifest) if args.manifest else repo / "results" / "p10s2-datagen-2026-11-16" / "bundle_manifest.json"
     out = Path(args.out)
     if out.exists():
         raise StageRefused(f"refused: {out} exists")
+    rec = ws.p10s2_windows_from_records(rows, Path(args.bundle), manifest, cfg_s2)
+    doc = ws.build_excluded(rows, rec, ledger_path=Path(args.ledger) if args.ledger else None, ledger_absent=bool(args.ledger_absent))
+    doc["inputs"] = {"p10s2_config_sha256": file_sha256(cfg_s2_path), "bundle_digests": rec["bundle_digests"], "bundle_manifest_sha256": file_sha256(manifest), "method": rec["method"]}
+    out.parent.mkdir(parents=True, exist_ok=True)
     write_json(out, doc)
-    print(json.dumps({"excluded_spans": str(out), "sha256": file_sha256(out), "windows": len(doc["windows"]), "spans": len(doc["spans"]), "ledger": doc["ledger"]["state"]}))
+    print(json.dumps({"excluded_spans": str(out), "sha256": file_sha256(out), "windows": len(doc["windows"]), "found_exactly_once": rec["found_exactly_once"], "spans": len(doc["spans"]), "ledger": doc["ledger"]["state"]}))
     return 0
 
 
@@ -412,7 +411,9 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         suite = Path(args.parent_suite).resolve()
         _EXTRA.update({"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_suite": str(suite), "parent_files": parents.checkpoint_files(repo, suite)})
     if args.phase in ("r1", "synthetic"):
-        run_r1(repo, run_dir, over, synthetic=synthetic, sealed_path=Path(args.sealed_path))
+        if not args.sealed_dir:
+            raise StageRefused("refused: r1 needs an explicit --sealed-dir (outside the repository, the lead's checkout and every git working tree; about 1.4-2.6 GB of snapshots)")
+        run_r1(repo, run_dir, over, synthetic=synthetic, sealed_path=Path(args.sealed_dir) / "rehearsal_sealed.json")
         return 0
     if args.phase == "r2":
         run_r2(repo, run_dir, over, synthetic=False)

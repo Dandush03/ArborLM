@@ -153,10 +153,12 @@ class Ctx:
         bad: list[str] = []
         tol = self.th.tolerance_joint
         neq = (lambda x, y: x != y) if self.bitwise else (lambda x, y: abs(x - y) > tol)
+        # Section 6.1 takes precedence (lead's ruling N3): a cell whose registered value at U* is non-finite, or whose run failed, is a FAILED CELL; no integrity check at an earlier checkpoint turns it into NOT EVALUABLE
+        failed = {c for c in self.order if run_failed(self.reg, arm, regime, self.rate(arm, regime), c) or nll(self.reg, arm, regime, self.rate(arm, regime), c, self.u, core.READ_ENABLED) is None}
         for k in self.ckpts:
             for r in sorted({self.rate(arm, regime, k), self.rate(arm, regime)}):
                 for c in self.order:
-                    if run_failed(self.reg, arm, regime, r, c):
+                    if c in failed or run_failed(self.reg, arm, regime, r, c):
                         continue
                     en = nll(self.reg, arm, regime, r, c, k, core.READ_ENABLED)
                     if en is None:
