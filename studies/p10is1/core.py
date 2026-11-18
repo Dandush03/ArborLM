@@ -51,6 +51,13 @@ RECORD_KINDS = (
 )  # fmt: skip
 
 
+IDENTITY_EXIT = 75  # a worker that refuses on an identity or precondition check exits with this code (EX_TEMPFAIL): PAUSED — IDENTITY, not FAILED
+
+
+class StageRefused(RuntimeError):
+    """A registered entry point refuses to run (no plan, no freeze, no Decision 2, a dirty tree, an identity that differs)."""
+
+
 # --- the config ----------------------------------------------------------------------------------------------------------------------
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
