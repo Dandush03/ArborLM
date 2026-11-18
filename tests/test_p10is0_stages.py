@@ -159,7 +159,7 @@ def test_seed_gate_fast_part() -> None:
     assert core.init_seed("CAL", "A5-D", 1, 0, CFG) == 330091 and core.init_seed("CAL", "A5-D", 2, 0, CFG) == 330093 and core.init_seed("REH", "A0", 1, 0, CFG) == 330092
     assert core.registered_set(10, CFG).base == 300901 and core.reserve_set(4, CFG).base == 301301
     r2 = seeds.checker_copy((REPO / CFG["seed_ranges"]["checker"]).read_text(), REPO)
-    assert "p10is0" in r2 and r2.count("p10ir_routing.toml") == 1
+    assert "p10is0" in r2 and r2.count("p10ir_routing.toml") == 1 and "NAMED_SPARE_VALUES" in r2 and "330066" in r2
 
 
 def test_labels_of_cells_are_unique_across_roles_and_attempts() -> None:

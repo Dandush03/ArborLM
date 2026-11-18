@@ -6,6 +6,12 @@ state dict, the logits of one forward, the state dict after one update and after
 from the comparison are listed in the result. Part (b) compares this path at any slot count with a reference written here from the definitions: the model equals ``studies.p9ii.model.build_model`` tensor for tensor, and after one update the loss
 and every parameter equal a direct float32 computation of the alphabet loss, L_div, the clip at 1.0 and the AdamW step within 1e-6 (the forward is the model's own; the memory selection is checked against a brute-force top-8 of the cosine scores).
 The auditor writes an independent reference. Bit-exact assertions are made on the platform of record only.
+
+Recorded for the auditor (implementer's observation, not a result): with L_div written as exp-sum the reference differed from the trainer by 8.4e-6 in ONE element of ``wq`` at 8,192 slots (A5-D). Cause: AdamW's first step is
+lr * g / (|g| + 1e-8), which is about lr * sign(g) for |g| above eps and has slope about lr / (4 eps) = 75,000 per unit of g near |g| = eps, so a float32 difference of 1e-10 in a gradient entry near eps becomes up to 7.5e-6 in the
+parameter. The tolerance stays 1e-6 and the reference reproduces float32 operation order (``torch.logsumexp``, ``F.cross_entropy``), after which the worst difference is 7e-9. The reference uses the model's own forward (an independent
+forward of the memory read is not written here) and checks selection by a brute-force top-8; loss, L_div, clip and AdamW are written from their definitions. P10-S0's own A6 records carry no read swap: this study computes a_use for A6
+(``reference_swap``) because Stage R's reference validity reads condition 6 on A6; the identity gate ignores that key.
 """
 
 import json

@@ -24,7 +24,7 @@ from . import core
 
 R2_OFFSETS = tuple(1000 * k for k in range(1, 11))
 CHECKER_SUBSTITUTIONS: tuple[tuple[str, str], ...] = (
-    ("ROOT = Path(__file__).resolve().parents[3]", "ROOT = Path({root!r})"),
+    ("ROOT = Path(__file__).resolve().parents[3]", "ROOT = Path({root!r})\nNAMED_SPARE_VALUES = {named!r}  # the twelve spare values of a repeated Stage R, named explicitly (ADR-0023 section 4.2)"),
     ('for path in sorted((ROOT / "configs").glob("*.toml")):', 'for path in [q for q in sorted((ROOT / "configs").glob("*.toml")) if q.name not in ("p10is0_overload.toml", "p10ir_routing.toml")]:'),
     ('for path in sorted((ROOT / d).rglob("*.py")):', 'for path in [q for q in sorted((ROOT / d).rglob("*.py")) if not any(x in q.name or x in q.parts for x in ("p10is0", "p10ir"))]:'),
 )
@@ -75,12 +75,13 @@ def allocation_problems(cfg: Mapping[str, Any], rows: Sequence[tuple[str, int, i
     return problems
 
 
-def checker_copy(original: str, root: Path) -> str:
+def checker_copy(original: str, root: Path, named: Mapping[str, Sequence[int]] | None = None) -> str:
+    named_values = {k: list(v) for k, v in (named or named_spare_values()).items()}
     out = original
     for old, new in CHECKER_SUBSTITUTIONS:
         if out.count(old) != 1:
             raise ValueError(f"the checker file does not contain the line to extend exactly once: {old!r}")
-        out = out.replace(old, new.format(root=str(root)))
+        out = out.replace(old, new.format(root=str(root), named=named_values))
     return out
 
 
@@ -91,7 +92,7 @@ def run_checker_copy(path: Path, root: Path, timeout: float) -> dict[str, Any]:
         copy.write_text(text, encoding="utf-8")
         proc = subprocess.run([sys.executable, str(copy)], cwd=root, capture_output=True, text=True, timeout=timeout, check=False)  # noqa: S603
     result = next((line for line in proc.stdout.splitlines() if line.startswith("RESULT:")), None)
-    return {"returncode": proc.returncode, "result_line": result, "copy_sha256": hashlib.sha256(text.encode()).hexdigest(), "substitutions": [old for old, _ in CHECKER_SUBSTITUTIONS]}
+    return {"returncode": proc.returncode, "result_line": result, "copy_sha256": hashlib.sha256(text.encode()).hexdigest(), "substitutions": [{"replaces": old, "with": new} for old, new in CHECKER_SUBSTITUTIONS], "named_values_in_copy": named_spare_values(), "own_files_excluded": ["p10is0", "p10ir"]}
 
 
 def seed_gate(cfg: Mapping[str, Any] | None = None, *, root: Path | None = None, run_checker: bool = True, timeout: float = 600.0) -> dict[str, Any]:

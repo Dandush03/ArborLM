@@ -151,7 +151,6 @@ end_to_end_slots = [512, 1024, 2048, 8192]
 [resources]
 rss_worker_bytes = 3221225472       # 3 GiB
 rss_aggregate_bytes = 19327352832   # 18 GiB
-rss_escalation_bytes = 1610612736   # 1.5 GiB (superseded by the coordinator ruling 3: workers n = min(6, floor(memory_budget_bytes / measured peak)))
 memory_budget_bytes = 9663676416    # 9 GiB: n = min(6, floor(9 GiB / measured peak per worker)); n < 1 is an engineering stop
 combined_aggregate_bytes = 38654705664   # 36 GiB with another study's compute stage
 memory_growth_mib = 64

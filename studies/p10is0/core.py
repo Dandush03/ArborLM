@@ -8,6 +8,7 @@ Status: implementation self-checked only. Not independent review, not Astra vali
 """
 
 import math
+import re
 import tomllib
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
@@ -58,7 +59,7 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "seed_ranges": ("registered", "auxiliary", "calibration", "rehearsal", "check", "spare", "init", "test", "checker", "checker_sha256"),
     "identity": ("tolerance", "long_updates", "p10s0_cadence", "fact_counts_a5d_a6", "fact_counts_a0", "end_to_end_slots"),
     "resources": (
-        "rss_worker_bytes", "rss_aggregate_bytes", "rss_escalation_bytes", "memory_budget_bytes", "combined_aggregate_bytes", "memory_growth_mib", "disk_cap_bytes", "disk_free_min_bytes", "update_record_bytes",
+        "rss_worker_bytes", "rss_aggregate_bytes", "memory_budget_bytes", "combined_aggregate_bytes", "memory_growth_mib", "disk_cap_bytes", "disk_free_min_bytes", "update_record_bytes",
         "disk_bytes_per_update", "eval_chunk_elements",
     ),
     "timing": ("quiet_load_max", "attempts", "attempt_window_hours", "min_updates", "busy_processes", "sample_seconds", "sample_window_seconds", "workers"),
@@ -292,42 +293,65 @@ class SetSpec:
         return frozenset(out)
 
 
-def registered_set(draw: int, cfg: Mapping[str, Any] | None = None) -> SetSpec:
+PROFILES = ("registered", "test")
+
+
+def _profiled(spec: SetSpec, idx: int, cfg: Mapping[str, Any], profile: str) -> SetSpec:
+    """The test profile (stage 2's pipeline rehearsal, the synthetic tiny configuration): the same names on test-range bases (932001 + 4 idx; these sets overlap one another and are never used for a result). Registered values are
+    never read under it."""
+    if profile == "registered":
+        return spec
+    if profile != "test":
+        raise ValueError(f"unknown profile {profile!r}")
+    return SetSpec(spec.name, int(cfg["seeds"]["test_base"]) + 4 * idx)
+
+
+def registered_set(draw: int, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
     c = (cfg or load_config())
     if not 1 <= draw <= int(c["draws"]["registered"]):
         raise ValueError("registered draws are 1..10")
     s = c["seeds"]
-    return SetSpec(f"p10is0-draw-{draw}", int(s["registered_base"]) + int(s["draw_stride"]) * (draw - 1))
+    return _profiled(SetSpec(f"p10is0-draw-{draw}", int(s["registered_base"]) + int(s["draw_stride"]) * (draw - 1)), draw - 1, c, profile)
 
 
-def reserve_set(k: int, cfg: Mapping[str, Any] | None = None) -> SetSpec:
+def reserve_set(k: int, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
     c = cfg or load_config()
     bases = c["seeds"]["reserve_bases"]
     if not 1 <= k <= len(bases):
         raise ValueError("reserve draws are 1..4")
-    return SetSpec(f"p10is0-reserve-{k}", int(bases[k - 1]))
+    return _profiled(SetSpec(f"p10is0-reserve-{k}", int(bases[k - 1])), 10 + k - 1, c, profile)
 
 
-def calibration_set(draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None) -> SetSpec:
+def set_of_name(name: str, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
+    """The seed set a plan names (``p10is0-draw-k`` or ``p10is0-reserve-k``)."""
+    m = re.fullmatch(r"p10is0-(draw|reserve)-(\d+)", name)
+    if m is None:
+        raise ValueError(f"not a draw or reserve set name: {name!r}")
+    return registered_set(int(m[2]), cfg, profile) if m[1] == "draw" else reserve_set(int(m[2]), cfg, profile)
+
+
+def calibration_set(draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
     """Calibration draw 1 or 2 of the original Stage R (attempt 0) or of repeat ``attempt`` = 1..3 (the registry's spare values)."""
     c = cfg or load_config()
     s = c["seeds"]
     if draw not in (1, 2):
         raise ValueError("calibration draws are 1 and 2")
     if attempt == 0:
-        return SetSpec(f"p10is0-cal-{draw}", int(s["calibration_bases"][draw - 1]))
+        return _profiled(SetSpec(f"p10is0-cal-{draw}", int(s["calibration_bases"][draw - 1])), 14 + draw - 1, c, profile)
     if not 1 <= attempt <= int(s["repeat_count"]):
         raise ValueError("a fourth repeat has no allocated values: an engineering stop until the human lead rules")
     first, second = int(s["repeat_cal_first"]), int(s["repeat_cal_second"])
-    return SetSpec(f"p10is0-cal-{draw}-repeat-{attempt}", (first if draw == 1 else second) + int(s["repeat_stride"]) * (attempt - 1))
+    return _profiled(SetSpec(f"p10is0-cal-{draw}-repeat-{attempt}", (first if draw == 1 else second) + int(s["repeat_stride"]) * (attempt - 1)), 14 + 2 * attempt + draw - 1, c, profile)
 
 
-def rehearsal_set(cfg: Mapping[str, Any] | None = None) -> SetSpec:
-    return SetSpec("p10is0-rehearsal", int((cfg or load_config())["seeds"]["rehearsal_base"]))
+def rehearsal_set(cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
+    c = cfg or load_config()
+    return _profiled(SetSpec("p10is0-rehearsal", int(c["seeds"]["rehearsal_base"])), 22, c, profile)
 
 
-def check_set(cfg: Mapping[str, Any] | None = None) -> SetSpec:
-    return SetSpec("p10is0-check", int((cfg or load_config())["seeds"]["check_base"]))
+def check_set(cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
+    c = cfg or load_config()
+    return _profiled(SetSpec("p10is0-check", int(c["seeds"]["check_base"])), 23, c, profile)
 
 
 def test_set(k: int = 0, cfg: Mapping[str, Any] | None = None) -> SetSpec:
@@ -339,11 +363,13 @@ def test_set(k: int = 0, cfg: Mapping[str, Any] | None = None) -> SetSpec:
     return SetSpec(f"p10is0-test-{k}", base)
 
 
-def init_seed(role: str, arm: str, draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None) -> int:
+def init_seed(role: str, arm: str, draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> int:
     """Initialisation seeds by role (section 4.2): registered 330001 (A5-D and A0 on odd draws; A6 on every draw) and 330002 (A5-D and A0 on even draws); calibration 330091 and 330093 (330061 + 2 (k-1) and 330062 + 2 (k-1) in repeats);
     rehearsal and pipeline check 330092; test mode 330098 and 330099."""
     c = cfg or load_config()
     s = c["seeds"]
+    if profile == "test":
+        return int(s["test_init"][draw % 2])  # the test profile takes the named test-mode initialisations only
     if role == "REG":
         return int(s["init_registered"][0]) if (arm == "A6" or draw % 2 == 1) else int(s["init_registered"][1])
     if role == "CAL":
@@ -362,32 +388,32 @@ def init_seed(role: str, arm: str, draw: int, attempt: int = 0, cfg: Mapping[str
     raise ValueError(f"unknown role {role!r}")
 
 
-def set_for(role: str, draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None) -> SetSpec:
+def set_for(role: str, draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> SetSpec:
     if role == "REG":
-        return registered_set(draw, cfg)
+        return registered_set(draw, cfg, profile)
     if role == "CAL":
-        return calibration_set(draw, attempt, cfg)
+        return calibration_set(draw, attempt, cfg, profile)
     if role == "REH":
-        return rehearsal_set(cfg)
+        return rehearsal_set(cfg, profile)
     if role == "CHK":
-        return check_set(cfg)
+        return check_set(cfg, profile)
     if role == "TEST":
         return test_set(draw, cfg)
     raise ValueError(f"unknown role {role!r}")
 
 
-def make_cell(role: str, ct: CellType, arm: str, draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None) -> Cell:
-    return Cell(role, ct.series, arm, ct.facts, ct.slots, draw, init_seed(role, arm, draw, attempt, cfg), attempt)
+def make_cell(role: str, ct: CellType, arm: str, draw: int, attempt: int = 0, cfg: Mapping[str, Any] | None = None, profile: str = "registered") -> Cell:
+    return Cell(role, ct.series, arm, ct.facts, ct.slots, draw, init_seed(role, arm, draw, attempt, cfg, profile), attempt)
 
 
-def registered_cells(cfg: Mapping[str, Any] | None = None, *, include_x8: bool = False) -> list[Cell]:
+def registered_cells(cfg: Mapping[str, Any] | None = None, *, include_x8: bool = False, profile: str = "registered") -> list[Cell]:
     """The main grid: 120 cells of series M, 80 of series S (and 30 of X8 when ``include_x8``)."""
     c = cfg or load_config()
     out: list[Cell] = []
     for ct in cell_types(c, include_x8=include_x8):
         for arm in ct.arms:
             for d in range(1, int(c["draws"]["registered"]) + 1):
-                out.append(make_cell("REG", ct, arm, d, 0, c))
+                out.append(make_cell("REG", ct, arm, d, 0, c, profile))
     return out
 
 
