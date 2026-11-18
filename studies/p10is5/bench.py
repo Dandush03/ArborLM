@@ -139,7 +139,7 @@ def execute_pass(
     seq: int,
     pread: PRead = os.pread,
     cross_check: Callable[[], dict[str, Any]] | None = None,
-    opener: Callable[[Any], int] | None = None,
+    opener: Callable[[Any, bool], int] | None = None,
 ) -> dict[str, Any]:
     """One pass (in production: its own process). Order: derive the requests, assert them against the prediction, hold the expected hashes, run the threaded pass between two counter snapshots, then (after the last
     snapshot) hash every page against the prediction and apply the memory guard. Returns the pass record; a code or environment error propagates (the caller records ENGINEERING STOP)."""
@@ -154,6 +154,16 @@ def execute_pass(
     rec["memory_guard_exceeded"] = res.counter_end.phys_footprint > ctx.memory_guard_bytes
     rec["expected_digest"] = harness.expected_digest(expected)
     return rec
+
+
+def commit_pass(ctx: Context, rec: Mapping[str, Any]) -> None:
+    """Write the pass record FIRST (EQ-A covers every pass that has both counter snapshots, a stopped one included), then raise the engineering stops of section 7 item 6 and section 9: a page hash that differs from the
+    prediction is ENGINEERING STOP (DATA MISMATCH); a footprint above 4 GiB is ENGINEERING STOP (MEMORY GUARD). Neither is ever a label."""
+    write_pass(ctx, rec)
+    if rec.get("parity_ok") is False:
+        raise EngineeringStop("DATA MISMATCH", f"{rec['key']}: {rec.get('parity_bad_pages')} page(s) differ from the expected SHA-256")
+    if rec.get("memory_guard_exceeded"):
+        raise EngineeringStop("MEMORY GUARD", f"{rec['key']}: footprint above {ctx.memory_guard_bytes} B")
 
 
 # --- the block runner and the quiet rule --------------------------------------------------------------------------------------------------------

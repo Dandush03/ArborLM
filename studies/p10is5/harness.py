@@ -77,15 +77,14 @@ def run_pass(
     pread: PRead = os.pread,
     cross_check: Callable[[], dict[str, Any]] | None = None,
     clock: Callable[[], int] = time.perf_counter_ns,
-    opener: Callable[[Any], int] | None = None,
+    opener: Callable[[Any, bool], int] | None = None,
 ) -> PassResult:
     """Run one pass: ``requests`` dealt to ``k`` threads by their ``thread`` field, one closed loop per thread. ``uncached`` False opens the descriptors without ``F_NOCACHE`` (only R1's control file).
     ``cross_check`` is called OUTSIDE the two snapshots (before the first, after the second) for the system-wide ioreg figures, which are printed and never charged."""
     if k < 1 or not requests:
         raise ValueError("a pass needs at least one thread and one request")
     lists = layout.thread_lists(requests, k)
-    open_fd = opener or (open_uncached_read if uncached else open_cached_read)
-    fds = [open_fd(path) for _ in range(k)]
+    fds = [opener(path, uncached) if opener else (open_uncached_read(path) if uncached else open_cached_read(path)) for _ in range(k)]
     n = len(requests)
     t0 = [0] * n
     t1 = [0] * n

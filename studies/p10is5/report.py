@@ -52,8 +52,8 @@ def _eq_b(b: Mapping[str, Any]) -> list[str]:
         lines.append(f"- margin m_t = {fig['m_t']:.3f} (fixed from R1 and M before the candidate plan); repeats on rho(3): cheaper {c['cheaper']}, dearer {c['dearer']}, proportional {c['proportional']} of 5 (valid repeats {c['of']})")
     lines.append("| repeat | c(1) median us | p90 us | p99 us | max us | rho(3) | rho(8) | rho(64) |")
     lines.append("|---|---|---|---|---|---|---|---|")
-    for r, v in sorted(fig["per_repeat"].items()):
-        rho = v["rho"]
+    for r, v in sorted(fig["per_repeat"].items(), key=lambda kv: int(kv[0])):
+        rho = {int(k): x for k, x in v["rho"].items()}  # keys are strings after a JSON round trip
         lines.append(f"| {r} | {us(v['c1']['median'])} | {us(v['c1']['p90'])} | {us(v['c1']['p99'])} | {us(v['c1']['max'])} | " + " | ".join("n/a" if rho.get(s) is None else f"{rho[s]:.3f}" for s in (3, 8, 64)) + " |")
     p = fig.get("pooled_c1")
     if p:

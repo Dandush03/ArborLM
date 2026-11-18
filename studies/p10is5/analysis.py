@@ -206,10 +206,11 @@ def analyse(reg: Mapping[str, Any]) -> dict[str, Any]:
     stops = [s for s in reg.get("stops", []) if not s.get("resolved")]
     if stops:
         raise AnalysisRefused(f"ENGINEERING STOP ({stops[0].get('cause')}) is unresolved: nothing is labelled from this stage until the cause is fixed under a recorded amendment and the stage is run again")
-    bad = [p["key"] for p in passes if p.get("parity_ok") is False]
+    covered = {s.get("key") for s in reg.get("stops", []) if s.get("resolved")}  # a stop resolved by a complete rerun on the spare covers the passes of its block (they stay in EQ-A)
+    bad = [p["key"] for p in passes if p.get("parity_ok") is False and p.get("block") not in covered]
     if bad:
         raise AnalysisRefused(f"ENGINEERING STOP (DATA MISMATCH): the page hashes of {bad[0]} differ from the prediction")
-    if any(p.get("memory_guard_exceeded") for p in passes):
+    if any(p.get("memory_guard_exceeded") and p.get("block") not in covered for p in passes):
         raise AnalysisRefused("ENGINEERING STOP (MEMORY GUARD): a pass passed the 4 GiB footprint guard")
     cells = [(int(k), int(s)) for k, s in th["grid"]]
     sizes = [int(s) for s in th["sizes"]]

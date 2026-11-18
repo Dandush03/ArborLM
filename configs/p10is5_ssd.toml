@@ -67,7 +67,7 @@ hid_idle_min_seconds = 600
 cold_wait_seconds = 600
 extra_sessions = 3
 pass_timeout_seconds = 900
-process_markers = ["studies/", "arborlm", "pytest"]
+process_markers = ["studies/", "arborlm", "pytest", "studies."]  # the ADR names the first three; "studies." (python -m studies.<name>.stages, which has no slash) is a conservative addition, listed as a departure
 
 [fixed_after_r1_and_m]  # section 5.4 and section 8: written from R1's and M's records BEFORE the candidate plan; provisional until then
 provisional = true

@@ -195,11 +195,11 @@ class ScanResult:
     sha256: str
 
 
-def uncached_scan(path: Path, offset: int, nbytes: int, counter: Counter, *, request_bytes: int = MIB, pread: PRead = os.pread, on_block: Callable[[int, bytes], None] | None = None) -> ScanResult:
+def uncached_scan(path: Path, offset: int, nbytes: int, counter: Counter, *, request_bytes: int = MIB, pread: PRead = os.pread, on_block: Callable[[int, bytes], None] | None = None, cached: bool = False) -> ScanResult:
     """Read ``nbytes`` from ``offset`` once, uncached, in ``request_bytes`` requests, and check the counter rule over the whole read. The hash is of the bytes read, in order. Nothing is printed or written inside."""
     if offset % PAGE or nbytes % PAGE or request_bytes % PAGE:
         raise ValueError("whole pages at page offsets only")
-    fd = open_uncached_read(path)
+    fd = open_cached_read(path) if cached else open_uncached_read(path)  # ``cached`` only for R1's control file
     h = hashlib.sha256()
     try:
         a = counter.read()

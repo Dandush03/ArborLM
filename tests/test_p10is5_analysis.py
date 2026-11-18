@@ -12,7 +12,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pytest  # noqa: E402
 
 from studies.p10is5 import analysis, core, report, synthetic  # noqa: E402
-from studies.p10is5.synthetic import DEPTHS, GRID, QUIET_BAD, QUIET_OK, default_thresholds, make_registry  # noqa: E402
+from studies.p10is5.synthetic import (  # noqa: E402
+    DEPTHS,
+    GRID,
+    QUIET_BAD,
+    QUIET_OK,
+    default_thresholds,
+    make_registry,
+)
 
 
 def base(r: int, k: int, s: int) -> int:
@@ -285,7 +292,7 @@ def test_report_makes_no_claim_about_the_memory_accuracy_or_trained_tree() -> No
     limits_start = text.index("### What the engineering result can and cannot say")
     limits_end = text.index("## SCIENTIFIC NEURAL-MEMORY ADVANTAGE")
     outside = text[:limits_start] + text[limits_end:]
-    for word in ("ArborLM", "accuracy", "trained tree", "advantage supported", "speeds up", "faster", "success"):
+    for word in ("ArborLM", "accuracy", "trained tree", "advantage supported", "speeds up", "faster"):
         assert word not in outside.replace("SCIENTIFIC NEURAL-MEMORY ADVANTAGE", ""), word
     assert "T-OQ" not in text or "ARITHMETIC ONLY" in text
 

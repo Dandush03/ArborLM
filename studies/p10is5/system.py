@@ -155,21 +155,22 @@ def other_study_processes(ps: Sequence[tuple[int, str]], own_pids: Iterable[int]
 
 
 def process_family(ps_with_ppid: Sequence[tuple[int, int]], pid: int) -> set[int]:
-    """``pid``, its ancestors and its descendants, from (pid, ppid) pairs."""
+    """``pid``, its ancestors (the launcher; never pid 1 and below) and its descendants (never the descendants of an ancestor), from (pid, ppid) pairs."""
     parent = dict(ps_with_ppid)
     fam = {pid}
     cur = pid
-    while cur in parent and parent[cur] not in fam and parent[cur] > 0:
+    while cur in parent and parent[cur] > 1 and parent[cur] not in fam:
         cur = parent[cur]
         fam.add(cur)
+    down = {pid}
     changed = True
     while changed:
         changed = False
         for p, pp in ps_with_ppid:
-            if pp in fam and p not in fam:
-                fam.add(p)
+            if pp in down and p not in down:
+                down.add(p)
                 changed = True
-    return fam
+    return fam | down
 
 
 def parse_ppids(text: str) -> list[tuple[int, int]]:
@@ -371,7 +372,10 @@ def ec3_record(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes]], wh
     rc, out, _ = run(["diskutil", "info", "disk0"])
     smart = parse_smart_status(out) if rc == 0 else None
     rc2, df, _ = run(["df", "-k", str(where)])
-    free = parse_df_k(df) if rc2 == 0 else None
+    try:
+        free = parse_df_k(df) if rc2 == 0 else None
+    except ValueError:
+        free = None
     drv = read_driver(run_b)
     return {
         **core.envelope("ec3"), "label": label, "utc": core.utc_stamp(), "smart_status": smart or core.NOT_READABLE, "health_ok": smart == "Verified", "free": free or core.NOT_READABLE, "driver_since_boot": drv or core.NOT_READABLE,
