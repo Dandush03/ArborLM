@@ -118,6 +118,7 @@ def resolved_stops(ctx: bench.Context, blocks: Sequence[Mapping[str, Any]]) -> l
     stops = load_stops(ctx)
     by_id = {s["id"]: s for s in stops}
     covered = {stop_repeat(by_id[b["rerun_of"]]["key"]) for b in blocks if b["role"] == "spare" and b.get("complete") and b.get("rerun_of") in by_id}
+    covered.discard(0)  # an unhandled error (repeat 0) is never resolved by a rerun
     return [{**s, "resolved": stop_repeat(s["key"]) in covered} for s in stops]  # every stop whose key falls inside the rerun block (the per-pass one and the per-block one)
 
 
@@ -125,8 +126,8 @@ def spawn_pass_runner(ctx: bench.Context, extra_argv: Sequence[str], timeout: fl
     """One process per pass: ``python -m studies.p10is5.stages work-pass ...`` (it re-checks identity, derives the pass again from the plan or the config and writes the pass record). Exit 75: PAUSED — IDENTITY
     (nothing written); exit 70: ENGINEERING STOP (the worker recorded the cause); anything else non-zero is an ENGINEERING STOP (WORKER FAILED)."""
 
-    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int, attempt: int = 1) -> dict[str, Any]:
-        argv = [sys.executable, "-m", "studies.p10is5.stages", "work-pass", "--stage", ctx.stage, "--run-dir", str(ctx.run_dir), "--repeat", str(repeat), "--k", str(k), "--s", str(s), "--attempt", str(attempt), "--block", block, "--role", role, "--seq", str(seq), *extra_argv]
+    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int, attempt: int = 1, source_repeat: int | None = None) -> dict[str, Any]:
+        argv = [sys.executable, "-m", "studies.p10is5.stages", "work-pass", "--stage", ctx.stage, "--run-dir", str(ctx.run_dir), "--repeat", str(repeat), "--k", str(k), "--s", str(s), "--attempt", str(attempt), "--block", block, "--role", role, "--seq", str(seq), *(["--source-repeat", str(source_repeat)] if source_repeat is not None else []), *extra_argv]
         try:
             p = subprocess.run(argv, capture_output=True, text=True, timeout=timeout, check=False)  # noqa: S603 - argument list, no shell
         except subprocess.TimeoutExpired as e:
@@ -148,8 +149,8 @@ def spawn_pass_runner(ctx: bench.Context, extra_argv: Sequence[str], timeout: fl
 def inprocess_pass_runner(ctx: bench.Context, deps: Deps, prediction: Mapping[str, Any]) -> bench.PassRunner:
     """The same pass, in this process (used by the tests with fakes, and by R1-style passes)."""
 
-    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int, attempt: int = 1) -> dict[str, Any]:
-        rec = bench.execute_pass(ctx, repeat, k, s, attempt, prediction, deps.counter, block=block, role=role, seq=seq, pread=deps.pread, cross_check=deps.cross_check, opener=deps.opener)
+    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int, attempt: int = 1, source_repeat: int | None = None) -> dict[str, Any]:
+        rec = bench.execute_pass(ctx, repeat, k, s, attempt, prediction, deps.counter, block=block, role=role, seq=seq, pread=deps.pread, cross_check=deps.cross_check, opener=deps.opener, source_repeat=source_repeat)
         bench.commit_pass(ctx, rec)
         return rec
 
@@ -221,6 +222,8 @@ def run_stage_blocks(
             state.save()
             raise
         state.data["next_seq"] = block["next_seq"]
+        if block["spare_cells_used"] and not state.data["spare_used"]:
+            state.data["spare_used"] = "pass_level"  # the spare serves one use: these cells took their tiles from the spare repeat
         if hours is not None:
             hours.charge(ctx.stage, block["key"], (deps.clock() - t0) - (deps.slept - s0))
         state.note("block", key=block["key"], complete=block["complete"], aborted=block["aborted"])
@@ -230,7 +233,7 @@ def run_stage_blocks(
     state.data["status"] = "RUNNING"
     state.save()
     if rerun_after_stop:
-        if spare is None or state.data["spare_used"]:
+        if spare is None or state.data["spare_used"] or bench.spare_cells_used(ctx):
             raise core.StageRefused("refused: the spare is not available: it serves one invalid block or one rerun, not both")
         state.data["spare_used"] = f"rerun_after_stop:{rerun_after_stop}"
         state.data["engineering_stop"] = None
@@ -261,7 +264,7 @@ def run_stage_blocks(
                     raise
                 state.data["rebuilds"] += 1
                 state.save()
-    if spare is not None and not state.data["spare_used"] and not bench.block_done(ctx, spare["repeat"]):
+    if spare is not None and not state.data["spare_used"] and not bench.spare_cells_used(ctx) and not bench.block_done(ctx, spare["repeat"]):
         _, _, sel = block_status(ctx)
         if sel["invalid"]:
             state.data["spare_used"] = "invalid_block"

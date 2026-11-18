@@ -206,20 +206,23 @@ def cmd_m(args: argparse.Namespace) -> int:
     deps = make_deps(cfg, data_dir.parent)
     _, hours = ledgers(run_dir, cfg)
     run = blocks.spawn_pass_runner(ctx, worker_extra("m", data_dir, repo, None) + ["--r1-record", str(args.r1_record)], timeout=float(cfg["quiet"]["pass_timeout_seconds"]))
-    with torch.no_grad(), hours.timed("M", "m", deps.clock, lambda: deps.slept):
+    with torch.no_grad():
         try:
-            rehearsal.run_rehearsal_stage(ctx, cfg, deps, hours, lambda r: run, data_dir / "control.bin", r1_rec)
-        finally:
-            summary = rehearsal.m_summary(ctx, cfg, hours.charged() / 3600.0)
-            text = ""
-            if summary["margin"] is not None and bench.load_stage_records(ctx)[0]:
-                m_t, spread = summary["margin"]["m_t"], summary["margin"]["timing_spread"]
-                with contextlib.suppress(analysis.AnalysisRefused):
-                    reg = e2.build_registry(ctx, cfg, r1_rec, m_t=m_t, timing_spread=spread)
-                    reg["thresholds"]["valid_min_repeats"] = 1
-                    text = report.render_report(analysis.analyse(reg), {"write_ledger_bytes": "see the write ledger", "hours": hours.charged() / 3600.0}, ctx.geometry.cells())
-            outcome = "MARGIN DETERMINED" if summary["margin"] is not None else ("ENGINEERING NOT EVALUABLE — MARGIN NOT DETERMINED" if attempt == 2 else "m_t NOT DETERMINED: M may be repeated once")
-            core.write_record(run_dir / "M" / "m.json", {**core.envelope("rehearsal"), "stage": "M", "attempt": attempt, "outcome": outcome, "caps_provisional": core.caps_provisional(cfg), "note": PROVISIONAL_NOTE if core.caps_provisional(cfg) else "", "summary": summary, "report_text": text}, overwrite=True)
+            rehearsal.run_rehearsal_stage(ctx, cfg, deps, hours, lambda r: run, data_dir / "control.bin", r1_rec)  # the blocks, the prediction and the harness figure are charged inside, once
+        except (Paused, core.LedgerRefused, EngineeringStop) as e:
+            # A PAUSED or stopped M writes NO m.json (only its pause record): it resumes, and never consumes the one permitted repeat. Only a COMPLETED M with fewer than five valid medians does.
+            core.write_record(run_dir / "M" / "pause.json", {**core.envelope("stage_manifest"), "stage": "M", "attempt": attempt, "paused": type(e).__name__, "detail": str(e)[:300], "utc": core.utc_stamp()}, overwrite=True)
+            raise
+        summary = rehearsal.m_summary(ctx, cfg, hours.charged("rehearsal") / 3600.0)
+        text = ""
+        if summary["margin"] is not None and bench.load_stage_records(ctx)[0]:
+            m_t, spread = summary["margin"]["m_t"], summary["margin"]["timing_spread"]
+            with contextlib.suppress(analysis.AnalysisRefused):
+                reg = e2.build_registry(ctx, cfg, r1_rec, m_t=m_t, timing_spread=spread)
+                reg["thresholds"]["valid_min_repeats"] = 1
+                text = report.render_report(analysis.analyse(reg), {"write_ledger_bytes": "see the write ledger", "hours": hours.charged() / 3600.0}, ctx.geometry.cells())
+        outcome = "MARGIN DETERMINED" if summary["margin"] is not None else ("ENGINEERING NOT EVALUABLE — MARGIN NOT DETERMINED" if attempt == 2 else "m_t NOT DETERMINED: M may be repeated once")
+        core.write_record(run_dir / "M" / "m.json", {**core.envelope("rehearsal"), "stage": "M", "attempt": attempt, "outcome": outcome, "caps_provisional": core.caps_provisional(cfg), "note": PROVISIONAL_NOTE if core.caps_provisional(cfg) else "", "summary": summary, "report_text": text}, overwrite=True)
     print(json.dumps({"m": str(run_dir / "M" / "m.json"), "cv_r": summary["cv"]["cv_r"], "margin": summary["margin"], "outcome": outcome}))
     return 0 if summary["margin"] is not None else 1
 
@@ -241,7 +244,7 @@ def cmd_k(args: argparse.Namespace) -> int:
     deps = make_deps(cfg, data_dir.parent)
     _, hours = ledgers(run_dir, cfg)
     run = blocks.spawn_pass_runner(ctx, worker_extra("k", data_dir, repo, None) + ["--plan", str(plan_path)], timeout=float(cfg["quiet"]["pass_timeout_seconds"]))
-    with torch.no_grad(), hours.timed("K", "k", deps.clock, lambda: deps.slept):
+    with torch.no_grad():
         rehearsal.run_rehearsal_stage(ctx, cfg, deps, hours, lambda r: run, Path(plan.paths["control_file"]), r1_rec)
         enumeration = rehearsal.enumerate_registered_from_plan(plan)
         analysis_ok = report_ok = False
@@ -427,7 +430,7 @@ def work_pass(args: argparse.Namespace) -> int:
     try:
         with torch.no_grad():
             rec = bench.execute_pass(
-                ctx, args.repeat, args.k, args.s, args.attempt, prediction, device.ProcCounter(), block=args.block, role=args.role, seq=args.seq,
+                ctx, args.repeat, args.k, args.s, args.attempt, prediction, device.ProcCounter(), block=args.block, role=args.role, seq=args.seq, source_repeat=args.source_repeat,
                 cross_check=make_cross_check(run_b, system.run_command, ctx.file_path.parent),
             )  # fmt: skip
             bench.commit_pass(ctx, rec)
@@ -479,12 +482,25 @@ def build_parser() -> argparse.ArgumentParser:
     w.add_argument("--block", required=True)
     w.add_argument("--role", required=True)
     w.add_argument("--seq", type=int, required=True)
+    w.add_argument("--source-repeat", type=int, default=None, help="a pass-level use of the spare: the spare repeat whose tiles and seeds this cell takes")
     w.add_argument("--repo")
     w.add_argument("--freeze-commit")
     w.add_argument("--plan")
     w.add_argument("--r1-record")
     freeze.add_commands(sub)
     return ap
+
+
+STAGE_OF = {"r0": "R0", "r1": "R1", "m": "M", "k": "K", "cleanup": "R1", "work-pass": None}
+
+
+def record_unhandled(run_dir: Path, args: argparse.Namespace, e: BaseException) -> None:
+    """An ordinary error is a recorded ENGINEERING STOP written to ``<run>/<stage>/stops/`` (for the registered stages and workers: ``E2``, where the analysis reads them), with a key the analysis can parse; it is never resolved by a rerun."""
+    stage = getattr(args, "stage", None) if args.command == "work-pass" else STAGE_OF.get(args.command, "E2")
+    stage = stage or "E2"
+    rec = {**core.envelope("engineering_stop"), "id": f"{stage}|{stage}|r0|unhandled|{type(e).__name__}", "stage": stage, "key": f"{stage}|r0|unhandled", "cause": type(e).__name__, "detail": str(e)[:500], "command": args.command, "utc": core.utc_stamp(), "resolved": False}
+    with contextlib.suppress(OSError, ValueError):
+        core.write_record(run_dir / stage / "stops" / f"unhandled_{core.utc_stamp()}.json", rec)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -523,8 +539,7 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as e:  # noqa: BLE001 - an ordinary error is a recorded engineering stop, not a traceback
         rd = getattr(args, "run_dir", None)
         if rd:
-            with contextlib.suppress(OSError, ValueError):
-                core.write_record(Path(rd) / "stops" / f"unhandled_{core.utc_stamp()}.json", {**core.envelope("engineering_stop"), "cause": type(e).__name__, "detail": str(e)[:500], "command": args.command, "utc": core.utc_stamp(), "resolved": False})
+            record_unhandled(Path(rd), args, e)
         print(f"ENGINEERING STOP ({type(e).__name__}): {e}", file=sys.stderr)
         return core.ENGINEERING_STOP_EXIT
 

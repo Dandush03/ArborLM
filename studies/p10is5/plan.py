@@ -249,6 +249,8 @@ def require_ignored_run_dir(repo: Path, run_dir: Path) -> None:
         rel = run_dir.resolve().relative_to(repo.resolve())
     except ValueError:
         return
+    if git(repo, "rev-parse", "--git-dir").returncode != 0:
+        return  # not a git repository (a plain copy): nothing a record could dirty
     if git(repo, "check-ignore", "-q", str(rel) + "/x").returncode != 0:
         raise StageRefused(f"refused: the run directory {run_dir} is inside the repository and is not git-ignored")
 

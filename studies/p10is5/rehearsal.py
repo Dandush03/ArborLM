@@ -75,10 +75,11 @@ def run_rehearsal_stage(
     r1_record: Mapping[str, Any],
 ) -> dict[str, Any]:
     """P (prediction), the harness figure, the five blocks (no spare), the analysis and the report on the stage's own records. Resumable. Raises ``Paused`` or ``EngineeringStop`` after saving the state."""
-    if not ctx.prediction_manifest_path().is_file():
-        bench.write_prediction(ctx)
-    bench.load_prediction(ctx)
-    e2.run_harness(ctx, cfg, deps, control)
+    with hours.timed(ctx.stage, "prediction_and_harness", deps.clock, lambda: deps.slept):  # the blocks charge themselves: nothing is charged twice
+        if not ctx.prediction_manifest_path().is_file():
+            bench.write_prediction(ctx)
+        bench.load_prediction(ctx)
+        e2.run_harness(ctx, cfg, deps, control)
     state = blocks.StageState.load(ctx.stage_dir() / "state.json")
     if state.data["status"] != "COMPLETE":
         blocks.run_stage_blocks(ctx, deps, state, runner_for, hours=hours, recover=None, extra_sessions=int(cfg["quiet"]["extra_sessions"]))

@@ -92,12 +92,14 @@ def stats_of(latencies_ns: Sequence[float]) -> dict[str, float]:
 def eq_a(passes: Sequence[Mapping[str, Any]], selection: Mapping[str, Any], blocks: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     """BYTES CONFIRMED EXACTLY only if every pass of every repeat attempted (spare and any rerun included, valid block or not) has counter bytes equal to predicted bytes. Otherwise BYTES NOT CONFIRMED with the reason of
     the first failing pass and every failing pass printed beside the same cell's pass in the replacing block, if any. There is one rule and no '4 of 5'."""
-    ordered = sorted(passes, key=lambda p: p["seq"])
+    incomplete = sorted((p for p in passes if p.get("incomplete")), key=lambda p: p["seq"])  # interrupted part-way: no end snapshot, so no counter comparison; still counted as attempted and printed
+    ordered = sorted((p for p in passes if not p.get("incomplete")), key=lambda p: p["seq"])
     failing = [p for p in ordered if p["counter_bytes"] != p["predicted_bytes"] or p.get("written_bytes", 0) != 0]
+    inc = [p["key"] for p in incomplete]
     if not ordered:
-        return {"label": "NOT READ (NO PASS WAS RUN)", "passes": 0, "failing": [], "reason": None}
+        return {"label": "NOT READ (NO PASS WAS RUN)", "passes": len(incomplete), "failing": [], "reason": None, "incomplete": inc}
     if not failing:
-        return {"label": core.EQ_A_OK, "passes": len(ordered), "failing": [], "reason": None}
+        return {"label": core.EQ_A_OK, "passes": len(ordered) + len(incomplete), "failing": [], "reason": None, "incomplete": inc}
     spare = next((b for b in blocks if b["key"] == selection.get("spare_block")), None)
     replaced = selection.get("replaced_block")
     by_key = {p["key"]: p for p in passes}
@@ -112,7 +114,7 @@ def eq_a(passes: Sequence[Mapping[str, Any]], selection: Mapping[str, Any], bloc
         rows.append({"key": p["key"], "counter_bytes": p["counter_bytes"], "predicted_bytes": p["predicted_bytes"], "counter_status": p["counter_status"], "replacing_block_pass": beside})
     first = failing[0]
     reason = f"{first['key']}: {first['counter_status']} (counter {first['counter_bytes']} B, predicted {first['predicted_bytes']} B)"
-    return {"label": f"{core.EQ_A_NOT} ({reason})", "passes": len(ordered), "failing": rows, "reason": reason}
+    return {"label": f"{core.EQ_A_NOT} ({reason})", "passes": len(ordered) + len(incomplete), "failing": rows, "reason": reason, "incomplete": inc}
 
 
 # --- EQ-B and EQ-D ---------------------------------------------------------------------------------------------------------------------------------

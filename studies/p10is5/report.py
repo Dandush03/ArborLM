@@ -31,7 +31,9 @@ def pct(x: float | None) -> str:
 def _eq_a(a: Mapping[str, Any]) -> list[str]:
     lines = [f"EQ-A (measured counter against predicted bytes): **{a['label']}**"]
     fig = a.get("figures", a)
-    lines.append(f"- passes counted: {fig['passes']} (every pass with both counter snapshots, every attempt)")
+    lines.append(f"- passes counted: {fig['passes']} (every pass attempted: those with both counter snapshots, every attempt, and the incomplete ones)")
+    if fig.get("incomplete"):
+        lines.append("- INCOMPLETE passes (interrupted part-way; counted as attempted; their cells took the spare repeat's tiles where it was free): " + ", ".join(fig["incomplete"]))
     for f in fig["failing"]:
         beside = f["replacing_block_pass"]
         lines.append(f"- failing pass {f['key']}: counter {f['counter_bytes']} B, predicted {f['predicted_bytes']} B, {f['counter_status']}" + (f"; same cell in the replacing block {beside['key']}: counter {beside['counter_bytes']} B, predicted {beside['predicted_bytes']} B, {beside['counter_status']}" if beside else ""))

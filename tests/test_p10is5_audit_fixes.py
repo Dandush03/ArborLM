@@ -134,8 +134,8 @@ def test_b2_r0_runs_its_probes_when_spotlight_indexes_the_directory(monkeypatch:
         assert rec["hygiene"]["blocks_e1"] is True and set(rec["probes"]) == {"probe_1", "probe_2", "probe_3"}  # recorded, not paused: the pause is before E1
 
 
-# --- B3: a block that stopped halfway is resumed under attempt + 1 keys -----------------------------------------------------------------------------
-def test_b3_resume_of_a_half_run_block_uses_new_keys_and_keeps_the_partial_passes() -> None:
+# --- B3: a block that stopped halfway resumes at the first pass not completed -------------------------------------------------------------------
+def test_b3_resume_after_a_refusal_continues_at_the_first_pass_not_completed() -> None:
     with T.scratch("fix_b3") as d:
         ctx = T.tiny_context(d / "run", repeats=2, spare=True)
         io = T.FakeIO(T.TEST_SEED_CONTENTS)
@@ -149,7 +149,7 @@ def test_b3_resume_of_a_half_run_block_uses_new_keys_and_keeps_the_partial_passe
         def flaky(*a: Any) -> dict[str, Any]:
             n["i"] += 1
             if n["i"] == 4:
-                raise core.Paused(core.PAUSED_IDENTITY, "a worker exited 75 / the machine slept")
+                raise core.Paused(core.PAUSED_IDENTITY, "a worker refused (exit 75) before reading anything")
             return good(*a)
 
         with pytest.raises(core.Paused):
@@ -158,11 +158,161 @@ def test_b3_resume_of_a_half_run_block_uses_new_keys_and_keeps_the_partial_passe
         blocks.run_stage_blocks(ctx, deps, state, lambda r: good)  # earlier code: FileExistsError -> ENGINEERING STOP (WORKER FAILED), spending the spare
         passes, blks = bench.load_stage_records(ctx)
         keys = [p["key"] for p in passes]
-        assert len(keys) == len(set(keys)) == 3 + 8 + 8 and state.data["status"] == "COMPLETE" and state.data["spare_used"] is None and state.data["engineering_stop"] is None
+        assert len(keys) == len(set(keys)) == 16 and all(k.endswith("|a1") for k in keys) and state.data["status"] == "COMPLETE" and state.data["spare_used"] is None and state.data["engineering_stop"] is None
+        assert next(b for b in blks if b["repeat"] == 1)["resumed"] is True and not any(p.get("incomplete") for p in passes)
+
+
+def all_pages(requests: list[tuple[int, int]]) -> list[int]:
+    return [p for off, n in requests for p in range(off // 16384, (off + n - 1) // 16384 + 1)]
+
+
+def interrupted_run(d: Path, interrupt_at: list[tuple[int, int]]) -> tuple[Any, blocks.StageState, list[tuple[int, int]]]:
+    """Run the tiny stage; the n-th pass ordered in ``interrupt_at`` = (repeat, pass index in that block's order) is KILLED after its reads were issued (no record written, the process dies); then resume until complete.
+    Returns the context, the state and every (offset, length) ever requested."""
+    from studies.p10is5 import harness
+
+    ctx = T.tiny_context(d / "run", repeats=2, spare=True)
+    io = T.FakeIO(T.TEST_SEED_CONTENTS)
+    issued: list[tuple[int, int]] = []
+    inner = io.pread
+
+    def rec_pread(fd: int, n: int, off: int) -> bytes:
+        issued.append((off, n))
+        return inner(fd, n, off)
+
+    deps = blocks.Deps(counter=T.FakeCounter(io), gate=T.scripted_gate(lambda: T.quiet_record(True)), pread=rec_pread, opener=T.devnull_opener, sleep=lambda s: None)
+    bench.write_prediction(ctx)
+    pred = bench.load_prediction(ctx)
+    state = blocks.StageState.load(ctx.stage_dir() / "state.json")
+    good = blocks.inprocess_pass_runner(ctx, deps, pred)
+    pending = list(interrupt_at)
+    count: dict[int, int] = {}
+
+    def killer(*a: Any) -> dict[str, Any]:
+        repeat = a[0]
+        idx = count.get(repeat, 0)
+        count[repeat] = idx + 1
+        if (repeat, idx) in pending and (len(a) < 8 or a[7] is None):
+            pending.remove((repeat, idx))
+            reqs = bench.derive_pass(ctx, repeat, a[1], a[2])
+            harness.run_pass(ctx.file_path, reqs, a[1], deps.counter, pread=rec_pread, opener=T.devnull_opener)  # the reads were issued ...
+            raise KeyboardInterrupt  # ... and the process died before it wrote its record
+        return good(*a)
+
+    for _ in range(len(interrupt_at) + 1):
+        try:
+            blocks.run_stage_blocks(ctx, deps, state, lambda r: killer)
+            break
+        except KeyboardInterrupt:
+            count.clear()  # a resumed block starts counting its passes again
+    return ctx, state, issued
+
+
+@pytest.mark.parametrize("which", range(8))
+def test_n3_after_any_single_interruption_no_page_is_requested_twice(which: int) -> None:
+    with T.scratch(f"fix_n3_{which}") as d:
+        ctx, state, issued = interrupted_run(d, [(1, which)])
+        pages = all_pages(issued)
+        assert len(pages) == len(set(pages)), "a page was requested twice"  # enumeration over EVERY request ever issued, the interrupted pass's included
+        passes, blks = bench.load_stage_records(ctx)
+        inc = [p for p in passes if p.get("incomplete")]
+        assert state.data["status"] == "COMPLETE" and len(inc) == 1 and state.data["spare_used"] == "pass_level"
+        cell = (inc[0]["k"], inc[0]["s"])
         b1 = next(b for b in blks if b["repeat"] == 1)
-        assert b1["attempt"] == 2 and all(k.endswith("|a2") for k in b1["pass_keys"]) and sum(k.endswith("|a1") and "|r1|" in k for k in keys) == 3
+        assert b1["spare_cells_used"] == [list(cell)] and b1["complete"] and b1["invalid_cells"] == []
+        spare_pass = next(p for p in passes if p["repeat"] == 1 and (p["k"], p["s"]) == cell and not p.get("incomplete"))
+        assert spare_pass["attempt"] == 2 and spare_pass["source_repeat"] == 3 and spare_pass["key"] in b1["pass_keys"]  # the spare's tiles and seeds, recorded
         reg = {"passes": passes, "blocks": blks, "harness": {}, "r1": {}, "cold_checks": [], "manifest": state.data, "stops": [], "thresholds": {**T.thresholds_for(ctx.geometry), "valid_min_repeats": 1}}
-        assert analysis.analyse(reg)["EQ-A"]["label"] == "BYTES CONFIRMED EXACTLY" and next(a for a in [analysis.analyse(reg)] if a)["EQ-A"]["passes"] == 19  # EQ-A counts every pass attempted
+        res = analysis.analyse(reg)
+        assert res["EQ-A"]["label"] == "BYTES CONFIRMED EXACTLY" and res["EQ-A"]["incomplete"] == [inc[0]["key"]] and res["EQ-A"]["passes"] == len(passes)  # the incomplete pass is counted as attempted
+        assert res["selection"]["spare_block"] is None  # the spare block is not run too: it serves one use
+
+
+def test_n3_when_the_spare_cell_is_already_used_that_cell_of_the_repeat_is_invalid() -> None:
+    with T.scratch("fix_n3_two") as d:
+        probe = T.tiny_context(d / "p", repeats=2, spare=True)
+        order1 = layout_order(probe, 1)
+        order2 = layout_order(probe, 2)
+        same = next(i for i, c in enumerate(order2) if c == order1[0])
+        ctx, state, issued = interrupted_run(d, [(1, 0), (2, same)])  # the same (k, s) cell is interrupted in repeats 1 and 2
+        pages = all_pages(issued)
+        assert len(pages) == len(set(pages))
+        passes, blks = bench.load_stage_records(ctx)
+        b2 = next(b for b in blks if b["repeat"] == 2)
+        assert b2["invalid_cells"] == [list(order1[0])] and b2["complete"] is False  # the spare's tiles for that cell were used: the validity rule decides
+        reg = {"passes": passes, "blocks": blks, "harness": {}, "r1": {}, "cold_checks": [], "manifest": state.data, "stops": [], "thresholds": {**T.thresholds_for(ctx.geometry), "valid_min_repeats": 1}}
+        res = analysis.analyse(reg)
+        assert res["n_valid"] == 1 and "E2|r2|a1" not in res["valid_repeats"] and len([p for p in passes if p.get("incomplete")]) == 2
+
+
+def layout_order(ctx: Any, repeat: int) -> list[tuple[int, int]]:
+    from studies.p10is5 import layout
+
+    return layout.pass_order(int(ctx.block_def(repeat)["pass_order_seed"]), ctx.geometry)
+
+
+# --- N1, N2, N4 ----------------------------------------------------------------------------------------------------------------------------------
+def test_n1_a_paused_m_writes_no_m_json_and_never_consumes_the_repeat(monkeypatch: pytest.MonkeyPatch) -> None:
+    with T.scratch("fix_n1") as d:
+        run = d / "run"
+        (run / "r1").mkdir(parents=True)
+        r1p = run / "r1" / "r1.json"
+        core.write_record(r1p, {**core.envelope("r1"), "passed": True, "idle_figures": {k: 1.0 for k in freeze.FIGURE_KEYS}})
+        monkeypatch.setattr(stages, "make_deps", lambda cfg, where: blocks.Deps(counter=T.FakeCounter(T.FakeIO(1)), gate=T.scripted_gate(lambda: T.quiet_record(True))))
+
+        def paused(*a: Any, **k: Any) -> None:
+            raise core.Paused("PAUSED — MACHINE NOT QUIET", "a quiet session failed")
+
+        monkeypatch.setattr(rehearsal, "run_rehearsal_stage", paused)
+        a = type("A", (), {"run_dir": str(run), "data_dir": str(d / "x.noindex"), "r1_record": str(r1p), "repeat_cause": None})()
+        for _ in range(2):  # a resume after a pause is a plain resume: it asks for no --repeat-cause
+            with pytest.raises(core.Paused):
+                stages.cmd_m(a)  # type: ignore[arg-type]
+            assert not (run / "M" / "m.json").exists() and (run / "M" / "pause.json").is_file() and not (run / "M_attempt1").exists()
+        # a COMPLETED M with too few valid medians is what consumes the repeat
+        monkeypatch.setattr(rehearsal, "run_rehearsal_stage", lambda *x, **k: None)
+        monkeypatch.setattr(rehearsal, "m_summary", lambda ctx, cfg, h: {"cv": {"cv_r": None}, "margin": None, "passes": 0})
+        assert stages.cmd_m(a) == 1  # type: ignore[arg-type]
+        assert core.read_record(run / "M" / "m.json")["outcome"].startswith("m_t NOT DETERMINED")
+        with pytest.raises(core.StageRefused, match="--repeat-cause"):
+            stages.cmd_m(a)  # type: ignore[arg-type]
+
+
+def test_n2_m_and_k_blocks_are_charged_once() -> None:
+    cfg = copy.deepcopy(dict(CFG))
+    cfg["device"] = {**cfg["device"], "control_tiles": 24}
+    with T.scratch("fix_n2") as d:
+        ctx = T.tiny_context(d / "run", repeats=2, spare=False, stage="M")
+        io = T.FakeIO(T.TEST_SEED_CONTENTS)
+        io.model_cache = True
+        clk = T.Clock()
+        fs = T.FakeSystem(clk)
+        deps = blocks.Deps(counter=T.FakeCounter(io), gate=T.scripted_gate(lambda: T.quiet_record(True)), run=fs.run, run_b=fs.run_b, pread=io.pread, opener=io.opener, sleep=clk.sleep, clock=clk)
+        hours = core.hours_ledger_for(d / "run" / "h.json", CFG)
+        good = blocks.inprocess_pass_runner(ctx, deps, {})  # replaced below once the prediction exists
+
+        def slow(*a: Any) -> dict[str, Any]:
+            clk.t += 10.0
+            return runner(*a)
+
+        bench.write_prediction(ctx)
+        runner = blocks.inprocess_pass_runner(ctx, deps, bench.load_prediction(ctx))
+        del good
+        rehearsal.run_rehearsal_stage(ctx, cfg, deps, hours, lambda r: slow, d / "control.bin", {})
+        assert clk.t == 160.0 and hours.charged("rehearsal") == pytest.approx(160.0)  # 16 passes x 10 s of wall time, charged once (320 s before)
+
+
+def test_n4_an_unhandled_error_is_written_where_the_analysis_reads_it_and_makes_it_refuse(capsys: pytest.CaptureFixture[str]) -> None:
+    with T.scratch("fix_n4") as d:
+        ctx = T.tiny_context(d / "run", repeats=2, spare=True)
+        args = type("A", (), {"command": "registered", "run_dir": str(d / "run")})()
+        stages.record_unhandled(d / "run", args, ZeroDivisionError("division"))  # type: ignore[arg-type]
+        assert len(list((d / "run" / "E2" / "stops").glob("unhandled_*.json"))) == 1  # <run>/E2/stops: the directory e2.build_registry reads
+        reg = e2.build_registry(ctx, CFG, {})
+        assert [s["cause"] for s in reg["stops"]] == ["ZeroDivisionError"] and reg["stops"][0]["resolved"] is False
+        with pytest.raises(analysis.AnalysisRefused, match="ZeroDivisionError"):
+            analysis.analyse(reg)
+        assert blocks.resolved_stops(ctx, [{"role": "spare", "complete": True, "rerun_of": reg["stops"][0]["id"]}])[0]["resolved"] is False  # a rerun never resolves it
 
 
 # --- R1 (resolution): every stop inside the rerun block is resolved --------------------------------------------------------------------------------
@@ -363,7 +513,7 @@ def test_adv_ordinary_errors_are_recorded_stops_not_tracebacks(monkeypatch: pyte
         monkeypatch.setattr(stages, "cmd_r1", boom)
         rc = stages.main(["r1", "--run-dir", str(d / "run"), "--data-dir", str(d / "x.noindex")])
         assert rc == core.ENGINEERING_STOP_EXIT == 70 and "ENGINEERING STOP (ZeroDivisionError)" in capsys.readouterr().err
-        rec = json.loads(next((d / "run" / "stops").glob("unhandled_*.json")).read_text())
+        rec = json.loads(next((d / "run" / "R1" / "stops").glob("unhandled_*.json")).read_text())
         assert rec["cause"] == "ZeroDivisionError" and rec["resolved"] is False
 
 
@@ -504,3 +654,5 @@ def test_point7_cv_r_needs_five_valid_medians_and_m_repeats_once() -> None:
     # the candidate plan is refused on a margin that is not determined
     with pytest.raises(core.StageRefused, match="no margin"):
         freeze.figures_from_records({"passed": True, "idle_figures": {k: 1.0 for k in freeze.FIGURE_KEYS}}, {"summary": {"margin": None}})
+
+

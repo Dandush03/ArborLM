@@ -79,8 +79,9 @@ def test_data_dir_must_be_noindex_under_home_outside_worktrees_and_not_synced() 
     home = Path.home()
     with pytest.raises(core.StageRefused, match="noindex"):
         planmod.require_data_dir_outside(ROOT, home / "data")
-    with pytest.raises(core.StageRefused, match="worktree"):
-        planmod.require_data_dir_outside(ROOT, ROOT / "experiments" / "d.noindex")  # inside this worktree (or any worktree the copy sits in)
+    if subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--git-dir"], capture_output=True).returncode == 0:  # skipped cleanly when the copy is outside any git repository
+        with pytest.raises(core.StageRefused, match="worktree"):
+            planmod.require_data_dir_outside(ROOT, ROOT / "experiments" / "d.noindex")  # inside this worktree (or any worktree the copy sits in)
     with pytest.raises(core.StageRefused, match="not under the home folder"):
         planmod.require_data_dir_outside(ROOT, Path("/var/p10is5.noindex"))
     with pytest.raises(core.StageRefused, match="synced folder"):
