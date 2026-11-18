@@ -209,6 +209,7 @@ def identity_part_b(arm: str, slots: int, *, facts: int, backbone: Any, data: An
     ref_model = adapter.build_model(cell, backbone, r1)
     ref_model.train()
     ref = reference_update(ref_model, batch.tokens, arm)
+    out_dir = out_dir / f"partb-{core.utc_stamp()}"  # a gate re-run after an interruption writes to a fresh directory (its logs are opened exclusively)
     seg = adapter.run_segment(adapter.Job(cell, data, stream, backbone, out_dir, r1, last_update=1, identity_gate=True, write_records=True))
     state = dict(seg.model.named_parameters())
     worst = max(float((state[n].detach() - t).abs().max()) for n, t in ref["new_parameters"].items())

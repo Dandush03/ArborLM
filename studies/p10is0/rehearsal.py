@@ -122,7 +122,7 @@ def synthetic(repo: Path, run_dir: Path, workers: int | None = None) -> dict[str
     analysis = read_json(rd / "analysis.json")
     record = {
         **core.envelope("rehearsal"), "phase": "synthetic", "profile": "test", "stages": stages, "candidate": {"status": "COMPLETE", "plan_file_sha256": file_sha256(copy / core.PLAN)}, "caps_provisional": False,
-        "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "sealed_dir": str(sealed_dir), "x8_status": analysis.get("x8", {}).get("status"), "platform": accounting_platform(), "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
+        "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "sealed_dir": str(sealed_dir), "x8_status": analysis.get("x8", {}).get("status"), "platform": accounting_platform(), "wave_size_limit": sealed.WAVE_LIMIT_SENTENCE, "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
     }  # fmt: skip
     write_json(run_dir / "rehearsal.json", core.jsonable(record))
     return record

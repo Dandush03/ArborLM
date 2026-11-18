@@ -131,7 +131,7 @@ class Job:
 class Segment:
     record: dict[str, Any]
     model: Any
-    trainer: Trainer
+    trainer: Any
     diverged: dict[str, Any] | None = None
 
 
@@ -161,10 +161,33 @@ def set_aside_incomplete(out_dir: Path, start: int, marks: list[int]) -> list[Pa
     return moved
 
 
+def snapshot_update(snapshot: Path | None) -> int:
+    return int(snapshot.name[1:]) if snapshot is not None else 0
+
+
+def completed_segment(job: Job) -> "Segment | None":
+    """N1 remainder: a task killed AFTER its segment reached the target (its train record exists) but before the result was written (during the evaluation) resumes by skipping straight to the evaluation: the finished segment's record is
+    returned (``model`` and ``trainer`` are None: the snapshot on disk is the state) and nothing is trained, opened or set aside. The same for a segment with no work to do (the start is already the target), which must not open logs of its own.
+    A diverged record is a finished segment too."""
+    start = snapshot_update(job.init_snapshot)
+    if job.write_records:
+        path = job.out_dir / f"train_{start:08d}.json"
+        if path.is_file():
+            rec = core.read_record(path, "train")
+            if rec.get("diverged") or int(rec["end_update"]) >= job.last_update:
+                return Segment(rec, None, None, rec.get("diverged"))
+    if start >= job.last_update > 0:
+        return Segment({"status": "completed", "start_update": start, "end_update": start, "snapshot_sha256": {}, "diverged": None}, None, None, None)
+    return None
+
+
 def run_segment(job: Job) -> Segment:
     """Train from the job's snapshot (or from initialization) to ``last_update``, writing every per-update record and diagnostic to disk as it is produced. Snapshots at ``job.snapshots``. A divergence is returned in
     ``Segment.diverged`` (the registered scientific outcome of a learned cell, or of Stage R's rehearsal); a code error propagates; an environment error is raised as ``EnvironmentStop``."""
     check_seed_set(job.cell.role, job.data.seeds.name, identity_gate=job.identity_gate)
+    done = completed_segment(job)
+    if done is not None:
+        return done
     started, cpu_started = time.monotonic(), time.process_time()
     model = build_model(job.cell, job.backbone, job.r1_seed)
     facts = int(job.stream.facts.shape[0])

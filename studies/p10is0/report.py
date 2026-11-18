@@ -5,7 +5,7 @@ printed as an efficiency claim. A headline of step 0 prints no scientific label.
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from . import labels
+from . import labels, sealed
 
 
 def _fmt(x: Any) -> str:
@@ -53,4 +53,5 @@ def render(a: Mapping[str, Any], h_ratio: Mapping[str, Sequence[float]] | None =
     out.append("\n## False-negative table (ANALYTICAL, not measured; independent cells)\n")
     for r in a["false_negative_table"]:
         out.append(f"- p = {r['p']}: RELIABLE in one series {r['one_series']:.3f}, in both {r['both_series']:.3f}, Line Q at 0.5, 1 and 2 about {r['l_q_at_least_2']:.2f} ({r['kind']})")
+    out.append("\n" + sealed.WAVE_LIMIT_SENTENCE)
     return "\n".join(out) + "\n\n" + labels.FIXED_SENTENCES + "\n"

@@ -157,7 +157,7 @@ def mode_of(ctx: Ctx) -> str:
     return "registered" if ctx.registered else ctx.profile.name
 
 
-def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: float, *, workers: int | None = None, group: str | None = None) -> dict[str, Any]:
+def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: float, *, workers: int | None = None, group: str | None = None, seal_task_stats: bool = False) -> dict[str, Any]:
     """Run a stage's tasks (resumable), charge the ledger, write the manifest. The stage's cap is CUMULATIVE over its group (R3): an invocation gets what the group's cap has left and what the total cap has left, so a resume cannot
     run beyond either. A stage at its cap is PAUSED; an identity refusal PAUSED — IDENTITY; an environment error or the disk rule PAUSED — ENVIRONMENT; a code change ENGINEERING STOP (never a failed task); an item error FAILED."""
     grp = group or stage
@@ -176,7 +176,13 @@ def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: f
     prior = runner.read_manifest(ctx.run_dir, stage)
     if prior is not None and prior["status"] == "COMPLETE":
         return prior
-    return runner.write_manifest(ctx.run_dir, stage, mode_of(ctx), outcomes, seconds, identity={"profile": ctx.profile.name, "platform": accounting.platform_record()}, started=started, caps={"stage_seconds": cap_seconds, "group": grp})
+    extra: dict[str, Any] | None = None
+    if seal_task_stats and ctx.sealed_base is not None:
+        # N3 remainder: per-task seconds and peak memory split by cell type, so they go to the sealed directory; the public manifest keeps each task's status, and per invocation only the task count, the total seconds and the maximum peak
+        sealed.write_sealed(ctx.sealed_base, f"taskstats-{stage}-{core.utc_stamp()}.json", {"outcomes": outcomes})
+        extra = {"wave": {"tasks": len(outcomes), "total_seconds": float(sum(float(o.get("seconds", 0.0)) for o in outcomes.values())), "max_peak_rss_bytes": peak, "limit": sealed.WAVE_LIMIT_SENTENCE}}
+        outcomes = {k: {"status": o["status"], "seconds": 0.0, "peak_rss_bytes": 0} for k, o in outcomes.items()}
+    return runner.write_manifest(ctx.run_dir, stage, mode_of(ctx), outcomes, seconds, identity={"profile": ctx.profile.name, "platform": accounting.platform_record()}, started=started, caps={"stage_seconds": cap_seconds, "group": grp}, extra=extra)
 
 
 def stage_status(ctx: Ctx, stage: str) -> str | None:
@@ -437,7 +443,7 @@ def run_waves(ctx: Ctx, cts: Sequence[core.CellType], *, phase: str, attempt: in
         mp = f"taskmap-{stage}.json"
         if not (sealed.sealed_dir(sb) / mp).is_file():
             sealed.write_sealed(sb, mp, {"label_to_run": taskmap})  # the label-to-run map lives only in the sealed directory
-        m = run_stage(ctx, stage, tasks, cap_seconds, group=group)
+        m = run_stage(ctx, stage, tasks, cap_seconds, group=group, seal_task_stats=True)
         if m["status"] != "COMPLETE":
             return str(m["status"])
 
