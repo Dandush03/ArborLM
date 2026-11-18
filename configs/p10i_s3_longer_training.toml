@@ -99,7 +99,7 @@ rss_aggregate_alone_bytes = 25769803776
 snapshot_bytes_estimate = 2400000
 
 [caps]
-provisional = true
+provisional = false  # set after R2 (2026-11-18): the registered cap is the one the candidate plan computes from R2 (section 7); 48 h stays the bound above which the lead returns to the human lead
 rehearsal_hours = 25.0
 registered_hours = 48.0
 

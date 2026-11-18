@@ -93,7 +93,7 @@ def test_adamw_settings_and_study_constants() -> None:
     assert CFG["setting"]["adamw_betas"] == [0.9, 0.999] and CFG["setting"]["adamw_eps"] == 1e-8 and CFG["setting"]["weight_decay"] == 0 and CFG["setting"]["grad_clip"] == 1.0
     assert (CFG["setting"]["batch"], CFG["setting"]["context"], CFG["setting"]["positions_per_eval_batch"]) == (8, 64, 512)
     assert CFG["rates"]["extension_up"] == [0.1, 0.3] and CFG["rates"]["extension_down"] == [0.0001, 0.00003]  # half-decade steps (1, 3 per decade): an implementer's reading, listed
-    assert CFG["caps"]["provisional"] is True  # nothing is frozen
+    assert CFG["caps"]["provisional"] is False  # set after R2; the plan carries the computed cap
 
 
 def test_config_validation_refuses_missing_sections_and_nonfinite() -> None:
@@ -142,7 +142,7 @@ def test_seed_problems_empty_and_gate_passes_with_the_extended_checker() -> None
     assert gates.seed_problems() == []
     g = gates.seed_gate(CFG, root=ROOT)
     assert g["passed"] is True, g["problems"]
-    assert g["checker"]["result_line"] == "RESULT: PASS" and len(g["checker"]["copy_sha256"]) == 64 and len(g["checker"]["substitutions"]) == 3
+    assert g["checker"]["result_line"] == "RESULT: PASS" and len(g["checker"]["copy_sha256"]) == 64 and len(g["checker"]["substitutions"]) == (2 if (ROOT / "studies/p10i_s3/freeze/seed_registry_check.py").exists() else 3)  # the frozen copy needs no ROOT substitution
     assert g["roles"]["registered_streams"] == 81 and g["roles"]["registered_p_used"] == 108 and g["roles"]["registered_joint"] == 27
 
 
