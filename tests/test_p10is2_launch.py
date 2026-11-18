@@ -56,7 +56,7 @@ def set_caps(r: Path, part: str) -> None:
     p.write_text(t)
 
 
-def freeze(r: Path, part: str, decision: bool = True, inputs: dict | None = None) -> str:  # type: ignore[type-arg]
+def freeze(r: Path, part: str, decision: bool = True, inputs: dict | None = None, record: bool = True) -> str:  # type: ignore[type-arg]
     set_caps(r, part)
     cfg = core.load_config(part, r / (core.CONFIG_Q if part == "Q" else core.CONFIG_T))
     if part == "Q":
@@ -66,7 +66,8 @@ def freeze(r: Path, part: str, decision: bool = True, inputs: dict | None = None
         rec = partt_plan.build_candidate(r, r / "runs", cfg, CALIB, walk=FAKE_WALK)
         plan_path, rec_path = core.PLAN_T, core.FREEZE_RECORD_T
     write_json(r / plan_path, core.jsonable(rec))
-    write_json(r / rec_path, {"kind": "freeze_record", "plan_file_sha256": file_sha256(r / plan_path)})
+    if record:  # a candidate plan only (before the freeze) when False
+        write_json(r / rec_path, {"kind": "freeze_record", "plan_file_sha256": file_sha256(r / plan_path)})
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "freeze")
     commit = git(r, "rev-parse", "HEAD")

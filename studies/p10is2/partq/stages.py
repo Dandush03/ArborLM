@@ -41,12 +41,16 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
     return plan
 
 
-def refuse_unless_rehearsal_ready(repo: Path, run_dir: Path, plan_file: str | None, stage: str) -> planmod.Plan:
+def refuse_unless_rehearsal_ready(repo: Path, run_dir: Path, plan_file: str | None, stage: str, freeze_commit: str | None = None) -> planmod.Plan:
     """The preconditions of a COUNTING-REHEARSAL stage: the registered ones except the three the rehearsal cannot have: a freeze commit, a committed Decision 2, and the plan's own run directory (the rehearsal
     runs in its own; the plan is verified against ITS run directory). The platform of record, the plan's frozen-file hashes, the config and its caps, the manifests (the shared ledger) are checked exactly as for
     a registered stage, so an altered plan file (``--plan-file``) is PAUSED — IDENTITY (exit 75)."""
     if stage not in REGISTERED_STAGES:
         raise StageRefused(f"refused: {stage!r} is not a registered Part Q stage")
+    if freeze_commit != "-":
+        raise StageRefused("refused: a rehearsal stage takes '-' as its freeze commit; a registered launch never takes --rehearsal")
+    if (repo / core.FREEZE_RECORD_Q).exists():
+        raise StageRefused("refused: a freeze record exists: the counting rehearsal runs BEFORE the freeze, against the candidate plan")
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     gates.apply_platform_settings(cfg)
     bad = gates.platform_problems(cfg)
@@ -54,6 +58,8 @@ def refuse_unless_rehearsal_ready(repo: Path, run_dir: Path, plan_file: str | No
         raise StageRefused("refused: not the platform of record (section 11 item 10): " + "; ".join(bad))
     plan = planmod.Plan.load(Path(plan_file) if plan_file else repo / core.PLAN_Q, "Q")
     planmod.verify_plan(plan, repo, Path(plan.data["run_dir"]), candidate=True)
+    if run_dir.resolve() == Path(plan.data["run_dir"]).resolve():
+        raise StageRefused(f"refused: {run_dir} is the plan's own (registered) run directory: a rehearsal runs in a directory of its own")
     core.require_ignored_run_dir(repo, run_dir)
     return plan
 
@@ -64,13 +70,15 @@ def cmd_registered(args: argparse.Namespace) -> int:
     from . import real
 
     if getattr(args, "rehearsal", False):
-        plan = refuse_unless_rehearsal_ready(repo, run_dir, args.plan_file, args.stage)
+        plan = refuse_unless_rehearsal_ready(repo, run_dir, args.plan_file, args.stage, args.freeze_commit)
         out = real.run_rehearsal_stage(args.stage, repo, run_dir, plan, pause_after_batches=args.pause_after_batches)
     else:
         if args.plan_file or args.pause_after_batches is not None:
             raise StageRefused("refused: --plan-file and --pause-after-batches exist in a rehearsal (--rehearsal) only")
         plan = refuse_unless_registered_ready(repo, run_dir, args.freeze_commit, args.stage)
         out = real.run_registered_stage(args.stage, repo, run_dir, plan)
+    if (out or {}).get("status") == "PAUSED":
+        print(f"PAUSED: {(out or {}).get('reason', '')}", file=sys.stderr)
     return 0 if (out or {}).get("status", "COMPLETE") in ("COMPLETE", "NOT RUN BY RULE") else EXIT_INCOMPLETE  # NOT RUN BY RULE is the registered negative-outcome path, not an incomplete stage
 
 
@@ -92,6 +100,10 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
 def cmd_ledger(args: argparse.Namespace) -> int:
     """THE pre-freeze ledger command (section 4.1): writes this study's 144 GEN windows into the shared panel ledger once (seed 250907). It refuses once a plan or a freeze record exists."""
     repo = repo_of(args)
+    if args.mode == "rehearsal" and args.run_dir and (repo / core.PLAN_Q).is_file():
+        own = json.loads((repo / core.PLAN_Q).read_text()).get("run_dir")
+        if own and Path(own).resolve() == Path(args.run_dir).resolve():
+            raise StageRefused(f"refused: {args.run_dir} is the plan's own (registered) run directory: a rehearsal's candidate ledger goes in a directory of its own")
     if args.mode == "registered" and ((repo / core.PLAN_Q).exists() or (repo / core.FREEZE_RECORD_Q).exists()):  # the SHARED ledger; a rehearsal's candidate ledger (a file in its run directory) is made after the plan, by the counting rehearsal
         raise StageRefused("refused: the ledger is written before the plan and the freeze, never after")
     from . import real_stages

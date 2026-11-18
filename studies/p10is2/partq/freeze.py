@@ -226,6 +226,11 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     reh = gates.rehearsal_gate(counting, qplan.REHEARSAL_STAGES, plan_file_sha256=plan_sha)
     if not reh["passed"]:
         raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")
+    stage_lines = {s: {"seconds": (counting.get("stages", {}).get(s) or {}).get("seconds"), "cap_seconds": plan.cap_seconds(s), "within_cap": (counting.get("stages", {}).get(s) or {}).get("within_cap")} for s in qplan.REHEARSAL_STAGES}
+    over = [s for s, v in stage_lines.items() if v["within_cap"] is not True]
+    print(json.dumps({"counting_rehearsal_stage_seconds_against_caps": stage_lines}))
+    if over:
+        raise StageRefused("refused: the counting rehearsal does not show every stage within its cap (within_cap true required); not within: " + ", ".join(f"{s} {stage_lines[s]['seconds']} s of {stage_lines[s]['cap_seconds']} s" for s in over))
     attest = [x for x in args.attest_sealed_unopened.split(",") if x]
     if not args.seal_broken and set(attest) != {"lead", "implementer", "auditor"}:
         raise StageRefused("refused: the record must state, for the lead, the implementer and the auditor, that none has opened a sealed value (--attest-sealed-unopened lead,implementer,auditor), or declare the seal broken (--seal-broken)")
@@ -244,7 +249,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rec = {
         **core.envelope("freeze_record", "Q"), "plan_file_sha256": plan_sha, "measuring_rehearsal": {"path": str(Path(args.measuring_rehearsal).resolve()), "sha256": file_sha256(Path(args.measuring_rehearsal))},
         "counting_rehearsal": {"path": str(Path(args.counting_rehearsal).resolve()), "sha256": file_sha256(Path(args.counting_rehearsal))}, "attestations": {"sealed_values_unopened_by": attest, "recorded_by": "the freeze command from the flags; not verified by code"},
-        "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
+        "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "counting_stage_seconds_against_caps": stage_lines, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
     }  # fmt: skip
     record.parent.mkdir(parents=True, exist_ok=True)
     write_json(record, core.jsonable(rec))

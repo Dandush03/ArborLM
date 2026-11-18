@@ -43,7 +43,7 @@ def fake_uv(tmp: Path) -> dict[str, str]:
     return env
 
 
-def synthetic_repo(tmp: Path, *, decision: bool = True) -> tuple[Path, str]:
+def synthetic_repo(tmp: Path, *, decision: bool = True, record: bool = True) -> tuple[Path, str]:
     import p10is2_e2e_world as world
 
     r = make_repo(tmp)
@@ -63,7 +63,7 @@ def synthetic_repo(tmp: Path, *, decision: bool = True) -> tuple[Path, str]:
     data = tmp / "in.bin"
     data.write_bytes(b"abc")
     inputs = {"data": {"path": str(data), "sha256": file_sha256(data)}, pkgmanifest.KEY: pkgmanifest.build_manifest(durable, None)}
-    commit = freeze(r, "Q", decision=decision, inputs=inputs)
+    commit = freeze(r, "Q", decision=decision, inputs=inputs, record=record)
     return r, commit
 
 
@@ -86,7 +86,7 @@ def test_every_registered_stage_launches_through_the_launch_script_in_order_and_
 
 
 def test_the_counting_rehearsal_drives_the_same_entry_point_in_a_fresh_process_per_stage(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    r, _commit = synthetic_repo(tmp_path, decision=False)  # no Decision 2 exists: a rehearsal has none
+    r, _commit = synthetic_repo(tmp_path, decision=False, record=False)  # a candidate plan only: the counting rehearsal runs before the freeze and has no Decision 2
     for k, v in fake_uv(tmp_path).items():
         monkeypatch.setenv(k, v)
     rec = counting.run_counting_rehearsal(r, r / "runs" / "counting")
@@ -103,7 +103,12 @@ def test_an_input_that_differs_stops_the_registered_stage_and_the_counting_rehea
     (tmp_path / "in.bin").write_bytes(b"changed")  # the plan's input file now differs from the hash it recorded
     out = launch(r, env, "inputs", commit)
     assert out.returncode == 75 and "PAUSED — IDENTITY" in out.stderr and not real_stages.completion_path(r / "runs", "inputs").exists()
-    for k, v in env.items():
+
+
+def test_the_counting_rehearsal_stops_on_an_input_that_differs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    r, _commit = synthetic_repo(tmp_path, decision=False, record=False)
+    for k, v in fake_uv(tmp_path).items():
         monkeypatch.setenv(k, v)
+    (tmp_path / "in.bin").write_bytes(b"changed")
     with pytest.raises(core.StageRefused, match="inputs: exit 75"):  # the rehearsal runs the same check in the same entry point
         counting.run_counting_rehearsal(r, r / "runs" / "counting")

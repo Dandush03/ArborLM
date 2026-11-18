@@ -87,7 +87,7 @@ def launch_registered(r: Path, commit: str, stage: str) -> subprocess.CompletedP
 def synthetic_records(run: Path, q1_a: bool) -> None:
     (run / "stages").mkdir(parents=True, exist_ok=True)
     for st in ("inputs", "partition", "qfit", "qcheck"):
-        write_json(run / f"stages/{st}.complete.json", {"stage": st, "status": "COMPLETE", "utc": "x"})
+        write_json(run / f"stages/{st}.complete.json", {"stage": st, "status": "COMPLETE", "mode": "registered", "utc": "x"})
     (run / "qfit").mkdir(exist_ok=True)
     fs = {"tau": -0.3, "rho1": 0.5, "rho2": 2.0}
     write_json(run / "qfit/record.json", {"q1": {"A": q1_a, "B": True}, "q2": {"A": True, "B": True}, "q3": {"A": True, "B": True}, "filter_setting": {"A": fs, "B": fs}})
@@ -121,7 +121,7 @@ def test_the_registered_analysis_stage_runs_when_the_teachers_qualify_too(tmp_pa
     commit = freeze(r, "Q", inputs={"data": {"path": str(data), "sha256": file_sha256(data)}})
     synthetic_records(r / "runs", q1_a=True)
     for st in ("generation", "regeneration", "outputs"):  # these would need the world: only the stage order and the plan are exercised here, so mark them complete
-        write_json(r / f"runs/stages/{st}.complete.json", {"stage": st, "status": "COMPLETE", "utc": "x"})
+        write_json(r / f"runs/stages/{st}.complete.json", {"stage": st, "status": "COMPLETE", "mode": "registered", "utc": "x"})
     o = launch_registered(r, commit, "analysis")
     assert "KeyError" not in o.stderr, o.stderr[-800:]  # the stage got its cap from the plan and ran (the label itself depends on records this synthetic run lacks)
 

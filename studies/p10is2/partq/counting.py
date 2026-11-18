@@ -102,7 +102,13 @@ def run_counting_rehearsal(repo: Path, run_dir: Path, *, launch: Launch = subpro
     ctx = real_stages._light_ctx(cfg, run_dir, "rehearsal")
     led = core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12)
     done = {s: real_stages.completion_path(run_dir, s).is_file() and json.loads(real_stages.completion_path(run_dir, s).read_text()).get("status") == "COMPLETE" for s in qplan.REHEARSAL_STAGES}
-    stages = {s: {"status": "COMPLETE" if done[s] else "NOT RUN", "seconds": led.charged(s), "within_cap": (led.charged(s) <= plan.cap_seconds(s)) if plan.cap_seconds(s) > 0 else None} for s in qplan.REHEARSAL_STAGES}
+    def completion(s: str) -> dict[str, Any]:
+        f = real_stages.completion_path(run_dir, s)
+        return json.loads(f.read_text()) if f.is_file() else {}
+
+    # seconds = everything charged to the stage in this directory (the wall time of each of its processes from the start of ``execute``: the world build is inside it, the interpreter start and the preconditions are not);
+    # within_cap needs the charge under the plan's stage cap AND the stage's own completion record not saying otherwise
+    stages = {s: {"status": "COMPLETE" if done[s] else "NOT RUN", "seconds": led.charged(s), "cap_seconds": plan.cap_seconds(s) if plan.cap_seconds(s) > 0 else None, "within_cap": (led.charged(s) <= plan.cap_seconds(s) and completion(s).get("within_cap") is not False) if plan.cap_seconds(s) > 0 else None} for s in qplan.REHEARSAL_STAGES}
     pipeline.write_sealed_summary(ctx)
     summary = pipeline.summary_for_display(ctx)
     sources = sum(float(v) for v in ((summary["counts"] or {}).get("generation_sources") or {}).values())

@@ -18,6 +18,8 @@ records only); never imported by the unit tests.
 """
 
 import json
+import os
+import sys
 import time
 from collections.abc import Callable
 from pathlib import Path
@@ -256,6 +258,75 @@ class Guard:
         return self.reason is not None
 
 
+CAP_SENTENCE = "Caps are frozen: a batch stage whose cap is spent stays PAUSED, and the only way on is a recorded new freeze by the lead; no code path extends a cap."
+
+
+def require_one_mode(run_dir: Path, mode: str, led: core.Ledger) -> None:
+    """A run directory belongs to ONE mode: every stage record (completion, paused, refused, running) and every ledger entry must carry the mode of the stage that now runs. A registered stage therefore refuses a
+    run directory that holds any rehearsal record, a rehearsal stage one that holds a registered record, and a stage refuses a predecessor of another mode (a record without a mode counts as another mode)."""
+    d = run_dir / "stages"
+    for f in sorted(d.glob("*.json")) if d.is_dir() else []:
+        rec = read_json(f)
+        if rec.get("mode") != mode:
+            raise StageRefused(f"refused: {f.name} in {run_dir} is a record of mode {rec.get('mode')!r}, and this stage runs in mode {mode!r}: a run directory holds the records of one mode only")
+    other = sorted({str(e.get("run")) for e in led.entries() if e.get("run") != mode})
+    if other:
+        raise StageRefused(f"refused: the charged ledger of {run_dir} holds entries of mode {other}, and this stage runs in mode {mode!r}: a run directory holds one mode only")
+
+
+def running_path(run_dir: Path, stage: str) -> Path:
+    return run_dir / "stages" / f"{stage}.running.json"
+
+
+def settle_killed(run_dir: Path, stage: str, mode: str, led: core.Ledger) -> float:
+    """A stage process that was killed (SIGKILL, power loss) never reached its charge. Its start marker (written at stage start, its modification time refreshed by a heartbeat every few seconds) is still there: the
+    time from the start to the last heartbeat is charged now, honestly as a LOWER bound within one heartbeat interval of the true time. If the process that wrote the marker is still alive the stage is refused."""
+    path = running_path(run_dir, stage)
+    if not path.is_file():
+        return 0.0
+    rec = read_json(path)
+    pid = int(rec.get("pid", 0))
+    if pid and pid != os.getpid():
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            pass
+        except PermissionError:
+            raise StageRefused(f"refused: process {pid} that started stage {stage!r} may still be running") from None
+        else:
+            raise StageRefused(f"refused: process {pid} that started stage {stage!r} is still running")
+    seconds = max(0.0, path.stat().st_mtime - float(rec["start_epoch"]))
+    led.charge_process(stage, mode, "killed-process-lower-bound", seconds)
+    path.unlink()
+    return seconds
+
+
+class Heartbeat:
+    """Writes the start marker of a stage and refreshes its modification time every ``interval`` seconds until ``stop`` (which removes it)."""
+
+    def __init__(self, path: Path, stage: str, mode: str, interval: float = 10.0) -> None:
+        import threading
+
+        self.path, self.interval = path, interval
+        path.parent.mkdir(parents=True, exist_ok=True)
+        write_json(path, {"stage": stage, "mode": mode, "pid": os.getpid(), "start_utc": core.utc_stamp(), "start_epoch": time.time()})
+        self._stop = threading.Event()
+        self._thread = threading.Thread(target=self._run, daemon=True)
+        self._thread.start()
+
+    def _run(self) -> None:
+        while not self._stop.wait(self.interval):
+            try:
+                os.utime(self.path)
+            except OSError:
+                return
+
+    def stop(self) -> None:
+        self._stop.set()
+        self._thread.join(timeout=self.interval + 1.0)
+        self.path.unlink(missing_ok=True)
+
+
 class PauseGuard:
     """The counting rehearsal's forced pause: the stage's own guard, which also trips once after ``after`` calls (between batches). The stop is then exactly a cap stop: PAUSED, exit 4, resumable by running the same command."""
 
@@ -297,18 +368,24 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
         require_prerequisites(run_dir, stage)
     total = float(plan.total_cap_seconds()) if plan is not None else 0.0
     led = core.Ledger(run_dir / "charged_ledger.json", "Q", total if total > 0 else 1e12)  # in the run directory, never in the tree
+    if mode in ("registered", "rehearsal"):
+        require_one_mode(run_dir, mode, led)
+        settle_killed(run_dir, stage, mode, led)  # the time of a killed earlier process of this stage, charged now (a lower bound)
     cap = 1e12
+    stage_cap_total: float | None = None
     if plan is not None:
         stage_cap = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else 1e12
+        stage_cap_total = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else None
         cap = min(stage_cap - led.charged(stage), led.remaining())
         if cap <= 0:
-            man = runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": runner.KILLED_CAP, "seconds": 0.0, "reason": "the cumulative hour cap is spent", "peak_rss_bytes": 0}}, 0.0, identity={}, started=core.utc_stamp(), caps={"stage_seconds_left": cap})
-            _mark(run_dir, stage, "PAUSED")
-            return {"status": "PAUSED", "reason": "the cumulative hour cap is spent", "manifest": man["status"]}
+            reason = "the cumulative hour cap is spent. " + CAP_SENTENCE
+            man = runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": runner.KILLED_CAP, "seconds": 0.0, "reason": reason, "peak_rss_bytes": 0}}, 0.0, identity={}, started=core.utc_stamp(), caps={"stage_seconds_left": cap})
+            _mark(run_dir, stage, "PAUSED", mode=mode)
+            return {"status": "PAUSED", "reason": reason, "manifest": man["status"]}
     if stage in TEACHER_GATED and mode != "rehearsal":  # a rehearsal runs every stage whatever Q1-Q4 gave (its outcome is sealed)
         why = gate_outcome(cfg, run_dir, mode, stage)
         if why is not None:  # the negative-outcome path: an explicit, recorded NOT RUN BY RULE (section 4.1 step 7), never a mis-recorded COMPLETE
-            _mark(run_dir, stage, "NOT RUN BY RULE", why)
+            _mark(run_dir, stage, "NOT RUN BY RULE", why, mode=mode)
             return {"status": "NOT RUN BY RULE", "reason": why}
     guard: Callable[[], bool] = Guard(cap, float(cfg["caps"]["memory_per_worker_gib"]))
     if pause_after_batches is not None:
@@ -345,26 +422,29 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
             return pipeline.step_regeneration(ctx, p)
         return stage_outputs(w, ctx, p, mode)
 
-    return execute(stage, run_dir, mode, led, guard, cap, body, holder, other_alive)
+    return execute(stage, run_dir, mode, led, guard, cap, body, holder, other_alive, stage_cap_total=stage_cap_total, prior_charged=led.charged(stage))
 
 
-def execute(stage: str, run_dir: Path, mode: str, led: core.Ledger, guard: Callable[[], bool], cap: float, body: Callable[[], dict[str, Any]], holder: dict[str, Any], other_alive: Callable[[], list[str]] = procs.other_studies_alive) -> dict[str, Any]:
+def execute(stage: str, run_dir: Path, mode: str, led: core.Ledger, guard: Callable[[], bool], cap: float, body: Callable[[], dict[str, Any]], holder: dict[str, Any], other_alive: Callable[[], list[str]] = procs.other_studies_alive, *, stage_cap_total: float | None = None, prior_charged: float = 0.0, heartbeat_seconds: float = 10.0) -> dict[str, Any]:
     """Runs a stage body and records how it ended, each ending its own way:
     * COMPLETE: the completion record and a COMPLETE manifest;
     * PAUSED (a cap or memory stop): a PAUSED manifest, no completion record, resumable;
     * a REFUSAL (``StageRefused``: an environment, pin, ledger or precondition refusal): NO completion record and NO COMPLETE manifest: the stage can be run again once the cause is fixed;
     * an engineering failure (digest mismatch, registered test of the data step): ``engineering_failures.json`` and no completion record;
     * any other error: an item error and no completion record.
-    The wall time of this process is charged in every case (ruling L2)."""
+    The wall time of this process is charged in every case (ruling L2); a process that is killed is charged by the next one from its start marker. A COMPLETE record carries ``within_cap``: false (and a warning on
+    stderr) when the stage's whole charge ended above its cap, which the stages without a guard between batches (partition, regeneration, analysis) can do: never silent."""
     t0 = time.monotonic()
     started = core.utc_stamp()
     status, out = "COMPLETE", {}
     reason = None
+    beat = Heartbeat(running_path(run_dir, stage), stage, mode, heartbeat_seconds) if mode in ("registered", "rehearsal") else None
     try:
         out = body()
     except StageCapExceeded:
         status = "PAUSED"
-        out = {"reason": getattr(guard, "reason", None) or "the cap was reached"}
+        why = getattr(guard, "reason", None) or "the cap was reached"
+        out = {"reason": why + (". " + CAP_SENTENCE if why.startswith("cap") else "")}
     except (DigestMismatch, RegisteredTestStop) as e:
         if holder.get("ctx") is not None and not holder["ctx"].engineering_failures:
             pipeline.fail(holder["ctx"], f"{type(e).__name__}: {e}")
@@ -381,13 +461,22 @@ def execute(stage: str, run_dir: Path, mode: str, led: core.Ledger, guard: Calla
     finally:
         seconds = time.monotonic() - t0
         led.charge_process(stage, mode, "main", seconds)  # the wall time of this process (ruling L2), also when it stopped
+        if beat is not None:
+            beat.stop()  # the charge above is written: the start marker is no longer needed
+        extra: dict[str, Any] = {}
+        if status == "COMPLETE":
+            total_seconds = prior_charged + seconds
+            within = None if stage_cap_total is None else total_seconds <= stage_cap_total
+            extra = {"stage_seconds": total_seconds, "stage_cap_seconds": stage_cap_total, "within_cap": within}
+            if within is False:
+                print(f"WARNING: stage {stage} took {total_seconds:.0f} s in all, above its cap of {stage_cap_total:.0f} s: within_cap false is recorded", file=sys.stderr)
         if status != "REFUSED":
             greason = getattr(guard, "reason", None)
             key = runner.COMPLETED if status == "COMPLETE" else (runner.KILLED_RSS if greason and greason.startswith("memory") else (runner.KILLED_CAP if status == "PAUSED" else runner.FAILED))
             runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": key, "seconds": seconds, "reason": greason or status, "peak_rss_bytes": int(procs.rss_gib() * 2**30)}}, seconds, identity={}, started=started, caps={"stage_seconds_left": cap}, extra={"other_studies_alive": other_alive()})
-            _mark(run_dir, stage, status)
+            _mark(run_dir, stage, status, mode=mode, extra=extra)
         else:
-            _mark(run_dir, stage, "REFUSED", reason)
+            _mark(run_dir, stage, "REFUSED", reason, mode=mode)
     return {"status": status, **({"result": out} if status == "COMPLETE" else out)}
 
 
@@ -409,20 +498,20 @@ def gate_outcome(cfg: Any, run_dir: Path, mode: str, stage: str) -> str | None:
     return None
 
 
-def _mark(run_dir: Path, stage: str, status: str, reason: str | None = None) -> None:
+def _mark(run_dir: Path, stage: str, status: str, reason: str | None = None, mode: str = "registered", extra: dict[str, Any] | None = None) -> None:
     """The stage's state for the order check and for ``pipeline.paused_stages``. COMPLETE and NOT RUN BY RULE both complete the stage for the order check (the second says why nothing ran); PAUSED is a state, not
     an outcome; a REFUSED or failed stage leaves NO completion record."""
     d = run_dir / "stages"
     d.mkdir(parents=True, exist_ok=True)
     if status in ("COMPLETE", "NOT RUN BY RULE"):
-        write_json(completion_path(run_dir, stage), {"stage": stage, "status": status, "reason": reason, "utc": core.utc_stamp()})
+        write_json(completion_path(run_dir, stage), {"stage": stage, "status": status, "mode": mode, "reason": reason, "utc": core.utc_stamp(), **(extra or {})})
         (d / f"{stage}.json").unlink(missing_ok=True)
     elif status == "PAUSED":
-        write_json(d / f"{stage}.json", {"stage": stage, "status": "PAUSED", "utc": core.utc_stamp()})
+        write_json(d / f"{stage}.json", {"stage": stage, "status": "PAUSED", "mode": mode, "utc": core.utc_stamp()})
     else:
         (d / f"{stage}.json").unlink(missing_ok=True)
         if status == "REFUSED":
-            write_json(d / f"{stage}.refused.json", {"stage": stage, "status": "REFUSED", "reason": reason, "utc": core.utc_stamp()})  # a record of the refusal; it blocks nothing
+            write_json(d / f"{stage}.refused.json", {"stage": stage, "status": "REFUSED", "mode": mode, "reason": reason, "utc": core.utc_stamp()})  # a record of the refusal; it blocks nothing
 
 
 def _light_ctx(cfg: Any, run_dir: Path, mode: str) -> pipeline.QContext:
