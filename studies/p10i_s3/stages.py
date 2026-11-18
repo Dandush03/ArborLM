@@ -457,8 +457,16 @@ def build_parser() -> argparse.ArgumentParser:
     pd.add_argument("--source", required=True)
     pd.add_argument("--parent-suite", required=True)
     pd.add_argument("--out", required=True)
-    pd.add_argument("--excluded-spans", required=True, help="JSON list of [row, start, end]: the spans of P10-S2's windows and ADR-0025's windows (computed by the clerk and the auditor)")
+    pd.add_argument("--excluded-spans", required=True, help="the output of window-spans (P10-S2's windows, ADR-0025's 44 marker-like windows and the ledger's windows)")
+    pd.add_argument("--shared-ledger", help="required when the excluded-spans file says ABSENT-DECLARED: the path this study writes its own spans to first")
     pd.add_argument("--repo")
+    ws = sub.add_parser("window-spans")
+    ws.add_argument("--source", required=True)
+    ws.add_argument("--downloads", required=True, help="P10-S2's downloads directory (the pinned student tokenizer)")
+    ws.add_argument("--out", required=True)
+    ws.add_argument("--ledger", help="the shared panel ledger file (ADR-0025 section 4.1)")
+    ws.add_argument("--ledger-absent", action="store_true", help="declare, on the record, that the ledger does not exist yet")
+    ws.add_argument("--repo")
     rh = sub.add_parser("rehearse")
     rh.add_argument("phase", choices=("r1", "r2", "r3", "synthetic"))
     rh.add_argument("--run-dir", required=True)
@@ -489,6 +497,8 @@ def main(argv: Sequence[str] | None = None) -> int:
 
         if args.command == "prepare-data":
             return rehearsal.cmd_prepare_data(args)
+        if args.command == "window-spans":
+            return rehearsal.cmd_window_spans(args)
         return rehearsal.cmd_rehearse(args)
     except StageRefused as e:
         print(str(e), file=sys.stderr)

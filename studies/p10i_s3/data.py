@@ -72,14 +72,30 @@ def corpus_from_texts(train_texts: Iterable[str], validation_texts: Iterable[str
     return ChunkSet(_tensor([c.payload for c in train]), [span_of(c.row, c.offset) for c in train], _tensor([c.payload for c in validation]), [span_of(c.row, c.offset) for c in validation], {"train": tc, "validation": vc})
 
 
-def corpus_from_parquet(source: Path, cfg: Mapping[str, Any]) -> ChunkSet:
-    """The pinned WikiText-2 parquet (ADR-0004 / ADR-0005): the pinned files' size and hash are those of ``fetch_wikitext.FILES``. Reads nothing else; the test split is never read."""
+def pinned_files() -> Mapping[str, Mapping[str, Any]]:
     from arborlm.fetch_wikitext import DOWNLOAD_FILES, FILES
+
+    return {name: FILES[name] for name in DOWNLOAD_FILES}
+
+
+def validation_rows(source: Path) -> list[str]:
+    """The validation parquet's ``text`` column in file order, exactly as stored (ADR-0022 ruling A-B3's text; needs the optional ``pilot`` extra, pyarrow)."""
+    from arborlm.fetch_wikitext import DOWNLOAD_FILES
     from arborlm.pilot_data import _rows
 
+    return list(_rows(source / DOWNLOAD_FILES[1]))
+
+
+def corpus_from_parquet(source: Path, cfg: Mapping[str, Any], pins: Mapping[str, Mapping[str, Any]] | None = None) -> ChunkSet:
+    """The pinned WikiText-2 parquet (ADR-0004 / ADR-0005): the pinned files' size and hash are those of ``fetch_wikitext.FILES`` (``pins`` replaces them in tests with a fixture). Reads nothing else; the test split is
+    never read."""
+    from arborlm.fetch_wikitext import DOWNLOAD_FILES
+    from arborlm.pilot_data import _rows
+
+    pins = pins or pinned_files()
     for name in DOWNLOAD_FILES:
         p = source / name
-        if p.stat().st_size != FILES[name]["bytes"] or file_sha256(p) != FILES[name]["sha256"]:
+        if p.stat().st_size != pins[name]["bytes"] or file_sha256(p) != pins[name]["sha256"]:
             raise EngineeringStop(f"ENGINEERING STOP — pinned acquisition file mismatch: {name}")
     return corpus_from_texts(_rows(source / DOWNLOAD_FILES[0]), _rows(source / DOWNLOAD_FILES[1]), int(cfg["data"]["eligible_train"]), int(cfg["data"]["eligible_validation"]))
 

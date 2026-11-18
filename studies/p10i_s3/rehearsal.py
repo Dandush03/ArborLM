@@ -35,30 +35,79 @@ SYNTHETIC_OVERRIDE: dict[str, Any] = {
 }
 
 
-# --- prepare-data ------------------------------------------------------------------------------------------------------------------------
-def cmd_prepare_data(args: argparse.Namespace) -> int:
-    from . import parents
+# --- prepare-data and window-spans ---------------------------------------------------------------------------------------------------------
+def prepare_data(cs: data.ChunkSet, val_rows: Sequence[str], cfg: Mapping[str, Any], repo: Path, consumed: Mapping[str, Sequence[int]], digests: Mapping[str, str], excluded_doc: Mapping[str, Any], out: Path, shared_ledger: Path | None, *, expected_hashes: Mapping[str, str] | None = None) -> dict[str, Any]:
+    """The chunk files, the reproduction, lineage and disjointness gates, the panel walk (excluded spans from ``window-spans``) and the ledger. REFUSES unless ``excluded_doc`` says where the ADR-0025 ledger stands:
+    ``read`` (its file was read) or ``ABSENT-DECLARED`` (an explicit, recorded declaration), in which case this study's own spans are written to ``shared_ledger`` first (ADR-0026 correction C7)."""
+    from . import window_spans as ws
 
-    repo = Path(args.repo or core.repo_root())
-    cfg = core.load_config(repo / core.CONFIG)
-    out = Path(args.out)
-    if (out / "data_manifest.json").exists():
+    state = (excluded_doc.get("ledger") or {}).get("state")
+    if excluded_doc.get("format") != "p10i-s3-excluded-spans-v1" or state not in ("read", "ABSENT-DECLARED"):
+        raise StageRefused("refused: the excluded-spans file is not a window-spans output with a ledger state (a ledger file or an explicit --ledger-absent declaration)")
+    if state == "ABSENT-DECLARED" and (shared_ledger is None or shared_ledger.exists()):
+        raise StageRefused("refused: with the ADR-0025 ledger absent this study writes its own spans to the ledger first: pass --shared-ledger with a path that does not exist")
+    if out.joinpath("data_manifest.json").exists():
         raise StageRefused(f"refused: {out}/data_manifest.json exists")
-    cs = data.corpus_from_parquet(Path(args.source), cfg)
     d = cfg["data"]
-    consumed = {parents.parent_dir(p): parents.consumed_ranks(repo, p) for p in range(9)}
-    g_repro = data.reproduction_gate(cs)
-    g_lineage = data.lineage_gate(cs.train_spans, consumed, list(range(0, 2048)), (int(d["rep_u_ranks"][0]), int(d["rep_u_ranks"][1])), int(d["fresh_start"]))
-    g_disjoint = data.rep_u_fresh_disjoint(cs.train_spans, (int(d["rep_u_ranks"][0]), int(d["rep_u_ranks"][1])), int(d["fresh_start"]), (int(d["rep_ranks"][0]), int(d["rep_ranks"][1])))
-    excluded = [tuple(x) for x in json.loads(Path(args.excluded_spans).read_text())]
+    rep_u = (int(d["rep_u_ranks"][0]), int(d["rep_u_ranks"][1]))
+    g_repro = data.reproduction_gate(cs, expected_hashes)
+    g_lineage = data.lineage_gate(cs.train_spans, consumed, list(range(0, 2048)) if expected_hashes is None else list(range(int(d["rep_ranks"][1]))), rep_u, int(d["fresh_start"]))
+    g_disjoint = data.rep_u_fresh_disjoint(cs.train_spans, rep_u, int(d["fresh_start"]), (int(d["rep_ranks"][0]), int(d["rep_ranks"][1])))
+    excluded = [(int(a), int(b), int(c)) for a, b, c in excluded_doc["spans"]]
     panels = data.walk_panels(cs.val_spans, excluded, int(d["panel_walk_start"]), int(cfg["setting"]["panel_chunks"]))
     ledger = data.ledger({"registered": panels[0], "calibration": panels[1]}, cs.val_spans, excluded)  # type: ignore[arg-type]
     files = data.write_chunk_files(cs, out)
     write_json(out / "panel_ledger.json", ledger)
     files["panel_ledger.json"] = file_sha256(out / "panel_ledger.json")
+    write_json(out / "excluded_spans.json", dict(excluded_doc))
+    files["excluded_spans.json"] = file_sha256(out / "excluded_spans.json")
+    if state == "ABSENT-DECLARED":
+        assert shared_ledger is not None
+        body = ws.shared_ledger_body(val_rows, {"registered": [cs.val_spans[r] for r in panels[0]], "calibration": [cs.val_spans[r] for r in panels[1]]}, [])
+        shared_ledger.parent.mkdir(parents=True, exist_ok=True)
+        write_json(shared_ledger, body)
+    manifest = {"files": files, "panels": {"registered": panels[0], "calibration": panels[1]}, "ledger_sha256": ledger["sha256"], "parents": dict(digests), "gates": {"reproduction": g_repro, "lineage": g_lineage, "disjoint": g_disjoint}, "counts": cs.counts, "adr0025_ledger": excluded_doc["ledger"], "shared_ledger_written": str(shared_ledger) if state == "ABSENT-DECLARED" else None}
+    write_json(out / "data_manifest.json", manifest)
+    return manifest
+
+
+def cmd_prepare_data(args: argparse.Namespace) -> int:
+    from . import parents
+
+    repo = Path(args.repo or core.repo_root())
+    cfg = core.load_config(repo / core.CONFIG)
+    cs = data.corpus_from_parquet(Path(args.source), cfg)
+    val_rows = data.validation_rows(Path(args.source))
+    consumed = {parents.parent_dir(p): parents.consumed_ranks(repo, p) for p in range(9)}
     digests = {parents.parent_dir(p): parents.load_backbone(repo, Path(args.parent_suite), p)[1] for p in range(9)}
-    write_json(out / "data_manifest.json", {"files": files, "panels": {"registered": panels[0], "calibration": panels[1]}, "ledger_sha256": ledger["sha256"], "parents": digests, "gates": {"reproduction": g_repro, "lineage": g_lineage, "disjoint": g_disjoint}, "counts": cs.counts})
-    print(json.dumps({"data_manifest": str(out / "data_manifest.json"), "gates_passed": all(x["passed"] for x in (g_repro, g_lineage, g_disjoint)), "ledger_sha256": ledger["sha256"]}))
+    doc = json.loads(Path(args.excluded_spans).read_text())
+    m = prepare_data(cs, val_rows, cfg, repo, consumed, digests, doc, Path(args.out), Path(args.shared_ledger) if args.shared_ledger else None)
+    print(json.dumps({"data_manifest": str(Path(args.out) / "data_manifest.json"), "gates_passed": all(x["passed"] for x in m["gates"].values()), "ledger_sha256": m["ledger_sha256"]}))
+    return 0
+
+
+def cmd_window_spans(args: argparse.Namespace) -> int:
+    """Generate the excluded-spans file from the validation text and the P10-S2 reference tokenizer (reads real data: the lead runs it). Exactly one of ``--ledger`` and ``--ledger-absent``."""
+    import tomllib
+
+    from . import window_spans as ws
+
+    repo = Path(args.repo or core.repo_root())
+    rows = data.validation_rows(Path(args.source))
+    cfg_s2 = tomllib.loads((repo / "configs" / "p10s2_transfer.toml").read_text())
+    from studies.p10s2.datagen import (
+        HFTokenizer,  # read-only use of P10-S2's pinned tokenizer loader
+    )
+
+    tok = HFTokenizer(Path(args.downloads))
+    rec = ws.p10s2_windows(tok, rows, cfg_s2)
+    doc = ws.build_excluded(rows, rec, ledger_path=Path(args.ledger) if args.ledger else None, ledger_absent=bool(args.ledger_absent))
+    doc["inputs"] = {"p10s2_config_sha256": file_sha256(repo / "configs" / "p10s2_transfer.toml")}
+    out = Path(args.out)
+    if out.exists():
+        raise StageRefused(f"refused: {out} exists")
+    write_json(out, doc)
+    print(json.dumps({"excluded_spans": str(out), "sha256": file_sha256(out), "windows": len(doc["windows"]), "spans": len(doc["spans"]), "ledger": doc["ledger"]["state"]}))
     return 0
 
 
