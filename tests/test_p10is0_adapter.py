@@ -110,8 +110,8 @@ def test_resume_from_snapshot_is_bit_identical(tmp_path: Path) -> None:
     losses = [json.loads(x)["task_loss"] for x in (tmp_path / "straight" / "updates_00000000.jsonl").read_text().splitlines()]
     pieces = [json.loads(x)["task_loss"] for f in ("updates_00000000.jsonl", "updates_00000006.jsonl") for x in (tmp_path / "split" / f).read_text().splitlines()]
     assert losses == pieces and first.record["end_update"] == 6 and resumed.record["start_update"] == 6
-    with pytest.raises(FileExistsError):
-        adapter.run_segment(job(c, tmp_path / "split", 12, snapshots=(), init_snapshot=tmp_path / "split" / "snapshots" / "u0000006"))  # a segment's files are never overwritten
+    again = adapter.run_segment(job(c, tmp_path / "split", 12, snapshots=(), init_snapshot=tmp_path / "split" / "snapshots" / "u0000006"))
+    assert again.model is None and again.record["end_update"] == 12  # a finished segment is not run again and its files are never overwritten: it returns its own record (the resume after a kill during the evaluation)
 
 
 def test_diagnostic_cadence() -> None:
