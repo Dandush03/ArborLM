@@ -135,3 +135,20 @@ unstable_cv = 0.05
 
 [cost]  # section 8.5
 batch = 32
+
+[platform]  # section 11 item 10 (as Part Q)
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 6
+deterministic_algorithms = true
+
+[stage_caps]  # section 10 item 3: computed by code from the Part T measuring rehearsal; 0.0 = not yet set
+gates_hours = 0.0
+calibration_hours = 0.0
+train_hours = 0.0
+evaluate_hours = 0.0
+controls_hours = 0.0
+combined_hours = 0.0
+analysis_hours = 0.0
+total_hours = 0.0

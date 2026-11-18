@@ -7,6 +7,7 @@ its record atomically in the run directory and is skipped when its record exists
 the whitelist (ruling L5).
 """
 
+import time
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -50,6 +51,7 @@ class QContext:
     ordinary_windows_left: int | None = None
     marker_like_windows: int | None = None
     engineering_failures: list[str] = field(default_factory=list)
+    timings: dict[str, float] = field(default_factory=dict)  # seconds spent in this invocation by stage (the measuring rehearsal's rates)
 
     @property
     def seeds(self) -> dict[str, int]:
@@ -78,6 +80,12 @@ def _rec(ctx: QContext, name: str, what: str, body: Mapping[str, Any]) -> dict[s
     if not path.exists():
         core.write_record(path, rec)
     return read_json(path)  # type: ignore[no-any-return]
+
+
+def fail(ctx: QContext, message: str) -> None:
+    """A failure on study-produced data (a gate, a digest or regeneration difference, a tokenization test): kept in memory and in ``engineering_failures.json`` so a resume still sees it."""
+    ctx.engineering_failures.append(message)
+    core.write_record(ctx.d("engineering_failures.json"), {**core.envelope("block_record", "Q"), "what": "engineering_failures", "failures": list(ctx.engineering_failures)}, overwrite=True)
 
 
 def _have(ctx: QContext, name: str) -> dict[str, Any] | None:
@@ -243,7 +251,7 @@ def step_regeneration(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
         rep = bt.regeneration_check(ctx.teachers[c], stored, idx, src_of, score_tolerance=float(ctx.cfg["scoring"]["regeneration_score_tolerance"]), threads=int(ctx.cfg["generation"]["threads"]))
         report[c] = rep.to_json()
         if not rep.ok:
-            ctx.engineering_failures.append(f"regeneration difference, teacher {c}: batch {rep.token_mismatches[0]['batch']} item {rep.token_mismatches[0]['item']}")
+            fail(ctx, f"regeneration difference, teacher {c}: batch {rep.token_mismatches[0]['batch']} item {rep.token_mismatches[0]['item']}")
     return _rec(ctx, "regeneration.json", "regeneration", {"teachers": report, "ok": all(report[c]["ok"] for c in core.TASKS)})
 
 
@@ -260,7 +268,8 @@ def facts_of(ctx: QContext) -> dict[str, Any]:
         }  # fmt: skip
     g = _have(ctx, "generation/result.json")
     reg = _have(ctx, "regeneration.json")
-    failures = list(ctx.engineering_failures)
+    stored = _have(ctx, "engineering_failures.json")
+    failures = list(dict.fromkeys([*(stored["failures"] if stored else []), *ctx.engineering_failures]))
     if reg is not None and not reg["ok"]:
         failures.append("regeneration difference")
     return {
@@ -269,19 +278,28 @@ def facts_of(ctx: QContext) -> dict[str, Any]:
     }  # fmt: skip
 
 
+def timed(ctx: QContext, stage: str, fn: Callable[[], Any]) -> Any:
+    """Runs one step and adds its wall time (also when it stops on a cap) to ``ctx.timings[stage]``."""
+    t0 = time.monotonic()
+    try:
+        return fn()
+    finally:
+        ctx.timings[stage] = ctx.timings.get(stage, 0.0) + (time.monotonic() - t0)
+
+
 def run_all(ctx: QContext) -> dict[str, Any]:
     """Steps 2-7 in order, each complete before the next starts. Returns the label result. A teacher that failed Q1 or Q2 still has Q3 and Q4 run; generation runs only if both pass everything."""
-    p = step_partition(ctx)
+    p = timed(ctx, "partition", lambda: step_partition(ctx))
     if fixed_input_problems_recorded(ctx):
         return labels.part_q_label(facts_of(ctx))
-    qf = step_qfit(ctx, p)
-    step_qcheck(ctx, p, qf)
+    qf = timed(ctx, "qfit", lambda: step_qfit(ctx, p))
+    timed(ctx, "qcheck", lambda: step_qcheck(ctx, p, qf))
     f = facts_of(ctx)
     both = all(not labels.teacher_status(f["teachers"][c])["failed"] and not labels.teacher_status(f["teachers"][c])["reserve_exhausted"] and f["teachers"][c]["q4"] is not None for c in core.TASKS)
     if both:
-        step_generation(ctx, p, qf)
+        timed(ctx, "generation", lambda: step_generation(ctx, p, qf))
         if (_have(ctx, "generation/result.json") or {}).get("draws_label") != split.EXHAUSTED:
-            step_regeneration(ctx, p)
+            timed(ctx, "regeneration", lambda: step_regeneration(ctx, p))
     result = labels.part_q_label(facts_of(ctx))
     core.write_record(ctx.d("qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in result.items() if k != "oracle_line"}}, overwrite=True)
     return result
