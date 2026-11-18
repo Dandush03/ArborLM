@@ -1,0 +1,187 @@
+# P10-I-S0 (ADR-0023) constants. Every threshold of the study lives here and nowhere else; the ADR text is not a frozen input (hashed for provenance only).
+# A test asserts that each value below equals the value of the ADR section named beside it. NOT FROZEN. No registered run is approved.
+# Implementation status: written by the implementer (self-checked only); not independent review, not Astra validation, not human approval.
+schema_version = 1
+experiment_family = "P10IS0_OVERLOAD"
+spec_reference = "docs/decisions/ADR-0023-p10-i-s0-addressing-and-overload.md"
+
+[thresholds]
+# sections 6.2 and 6.3 (unchanged from ADR-0019 section 8.3 and ADR-0020 section 8.2)
+success_fraction_of_a6 = 0.90      # condition 1
+heldout_fraction = 0.90            # condition 4
+dependence_fraction = 0.95         # condition 6
+a6_floor_anchor = 0.90             # evaluability floor at load 0.5
+a6_floor_loaded = 0.50             # evaluability floor at loads of 1 and above
+stable_threshold = 0.80            # ADDRESS STABLE
+max_failed_reliable = 1            # RELIABLE: at most one failed cell among the evaluated cells
+max_not_evaluated_draws = 1        # NOT_EVALUATED: more than one draw
+min_successes = 3                  # UNRELIABLE: at least 3 successes of 10
+line_fail_cells = 2                # a line FAILS with at least two failing cells (n_A >= 2, n_G >= 2)
+# section 5.1 / 5.3
+plateau_step = 0.01                # two-sided, two consecutive doublings
+plateau_steps_required = 2
+confirm_step = 0.02                # section 5.3: |d| <= 0.02
+t_factor = 2                       # T = 2 e*
+# section 6.7
+paired_d = 6
+paired_p = 0.05
+# section 6.5
+reference_near_ceiling = 0.90
+# section 8
+x8_trigger_load = 4.0
+
+[ladder]
+base = [512, 1024, 2048, 4096, 8192, 16384]   # exposures per fact (section 5.1)
+extension_ceiling = 32768                     # one further doubling
+base_ceiling_t = 8192                         # T at the base ceiling (also T of a refused or non-finite cell type)
+extended_ceiling_t = 16384
+extension_doublings = 1
+
+[budget]
+b_hours = 55.0                     # section 5.1 item 3 (Decision 1): charged hours at 1x
+workers = 6
+stage_cap_factor = 2.0             # Stage R's own cap and the hour cap: twice the projection (sections 5.1, 9)
+x8_in_projection = true
+
+[grid]
+# section 4.1. load = facts / slots; series M at 8,192 facts, S at 2,048, X8 conditional.
+[[grid.cell_types]]
+series = "M"
+facts = 8192
+slots = 16384
+arms = ["A5-D", "A0", "A6"]
+[[grid.cell_types]]
+series = "M"
+facts = 8192
+slots = 8192
+arms = ["A5-D", "A0", "A6"]
+[[grid.cell_types]]
+series = "M"
+facts = 8192
+slots = 4096
+arms = ["A5-D", "A0", "A6"]
+[[grid.cell_types]]
+series = "M"
+facts = 8192
+slots = 2048
+arms = ["A5-D", "A0", "A6"]
+[[grid.cell_types]]
+series = "S"
+facts = 2048
+slots = 4096
+arms = ["A5-D", "A6"]
+[[grid.cell_types]]
+series = "S"
+facts = 2048
+slots = 2048
+arms = ["A5-D", "A6"]
+[[grid.cell_types]]
+series = "S"
+facts = 2048
+slots = 1024
+arms = ["A5-D", "A6"]
+[[grid.cell_types]]
+series = "S"
+facts = 2048
+slots = 512
+arms = ["A5-D", "A6"]
+[[grid.cell_types]]
+series = "X"
+facts = 8192
+slots = 1024
+arms = ["A5-D", "A0", "A6"]
+
+[draws]
+registered = 10
+reserve = 4
+calibration = 2
+checkpoint_probe_every = 64          # section 4.3: every 64 updates up to 4,096 ...
+checkpoint_probe_every_late = 1024   # ... and every 1,024 after
+checkpoint_probe_switch = 4096
+first_readout_exposures = 512        # P10-S0's regime, descriptive
+
+[seeds]
+# section 4.2 and the registry (revision 3)
+registered_base = 300001
+draw_stride = 100
+reserve_bases = [301001, 301101, 301201, 301301]
+calibration_bases = [309001, 309101]
+rehearsal_base = 309201
+check_base = 309301
+repeat_cal_first = 309401
+repeat_cal_second = 309501
+repeat_stride = 200
+repeat_count = 3
+init_registered = [330001, 330002]    # A5-D and A0: odd draws then even draws; A6: 330001 on every draw
+init_calibration = [330091, 330093]
+init_rehearsal = 330092
+init_check = 330092
+test_init = [330098, 330099]
+repeat_init_first = 330061
+repeat_init_second = 330062
+repeat_init_stride = 2
+test_base = 932001
+test_top = 932999
+fact_set_offsets = { "2048" = 0, "8192" = 20 }   # ruling 9: the 32,768-fact offset (60) is not generated
+swap_offsets = { "2048" = 50, "8192" = 51 }
+# declared re-use (registry section 4.6): the identity gate's P10-S0 rehearsal set, read-only
+identity_gate_data_base = 209101
+identity_gate_init = 2092
+
+[seed_ranges]
+registered = [300001, 306999]
+auxiliary = [307001, 308999]
+calibration = [309001, 309199]
+rehearsal = [309201, 309299]
+check = [309301, 309399]
+spare = [309401, 309999]
+init = [330001, 330099]
+test = [932001, 932999]
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+
+[identity]
+tolerance = 1e-6                    # section 3 part (b)
+long_updates = 5184                 # part (a): past the cadence change at 4,096 and two later points
+p10s0_cadence = 64
+fact_counts_a5d_a6 = [[2048, 4096], [8192, 16384], [8192, 4096]]
+fact_counts_a0 = [[8192, 4096], [8192, 16384]]
+end_to_end_slots = [512, 1024, 2048, 8192]
+
+[resources]
+rss_worker_bytes = 3221225472       # 3 GiB
+rss_aggregate_bytes = 19327352832   # 18 GiB
+rss_escalation_bytes = 1610612736   # 1.5 GiB (superseded by the coordinator ruling 3: workers n = min(6, floor(memory_budget_bytes / measured peak)))
+memory_budget_bytes = 9663676416    # 9 GiB: n = min(6, floor(9 GiB / measured peak per worker)); n < 1 is an engineering stop
+combined_aggregate_bytes = 38654705664   # 36 GiB with another study's compute stage
+memory_growth_mib = 64
+disk_cap_bytes = 118111600640       # 110 GiB
+disk_free_min_bytes = 53687091200   # 50 GiB
+update_record_bytes = 1144          # in-memory record, section 9 projection
+disk_bytes_per_update = 609         # section 11
+eval_chunk_elements = 4194304
+
+[timing]
+# stage 3 (section 10, ruling 20)
+quiet_load_max = 2.0
+attempts = 3
+attempt_window_hours = 24
+min_updates = 8192
+busy_processes = 12
+sample_seconds = 10                # the 1-minute load average is sampled every 10 s ...
+sample_window_seconds = 60         # ... for 60 s, BEFORE the stage starts its own workers; every sample at most quiet_load_max and no other study process alive
+workers = 6                        # stage 3 then runs with six workers alone (ADR-0020 section 10.3)
+
+[platform]
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 1
+torch_interop_threads = 1
+deterministic_algorithms = true
+
+[caps]
+# set at the freeze from the measured projection (section 9); provisional until then
+provisional = true
+total_hours = 0.0
+stage_r_hours = 0.0
