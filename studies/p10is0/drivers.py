@@ -824,7 +824,7 @@ def cmd_a0_memory(ctx: Ctx) -> dict[str, Any]:
     data = items.data_for(env, spec, ct.facts, ctx.cfg)
     cell = core.Cell("REH", ct.series, "A0", ct.facts, ct.slots, 1, core.init_seed("REH", "A0", 1, 0, ctx.cfg, ctx.profile.name))
     began = time.monotonic()
-    seg = adapter.run_segment(adapter.Job(cell, data, training_stream_for(data, facts), env.backbone, ctx.run_dir / "a0_memory", data.seeds.r1_codes, last_update=core.updates_for(t_exp, facts), snapshots=(), diag_early=(ctx.profile.diag or (64, 1024, 4096))[0], diag_late=(ctx.profile.diag or (64, 1024, 4096))[1], diag_switch=(ctx.profile.diag or (64, 1024, 4096))[2]))
+    seg = adapter.run_segment(adapter.Job(cell, data, training_stream_for(data, facts), env.backbone, sealed.sealed_dir(ctx.need_sealed()) / "a0_memory", data.seeds.r1_codes, last_update=core.updates_for(t_exp, facts), snapshots=(), diag_early=(ctx.profile.diag or (64, 1024, 4096))[0], diag_late=(ctx.profile.diag or (64, 1024, 4096))[1], diag_switch=(ctx.profile.diag or (64, 1024, 4096))[2]))
     peak = int(max(seg.record["sampled_rss_bytes"], seg.record["peak_rss_bytes"]))
     ctx.record_peak("a0_memory", peak)
     rec = {**core.envelope("timing"), "label": "a0-memory", "cell_type": ct.name, "arm": "A0", "updates": core.updates_for(t_exp, facts), "wall_seconds": time.monotonic() - began, "peak_rss_bytes": peak, "status": seg.record["status"]}
