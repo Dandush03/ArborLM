@@ -34,3 +34,19 @@ The human lead delegates to the lead, for the P10-I programme:
 ## 5. Direction noted for the redesign after P10-I (not a specification)
 
 The human lead's view, recorded for the redesign: there is ground in the main idea after what the tree showed; the search needs to be optimised, possibly by treating the store as a tree of weights and approaching it from another angle; memory must be extended onto SSD without losing speed or accuracy; and, most important, the path by which the system learns by itself has to be worked out. "The current stream model is flawed" is recorded as written; the lead has asked what it refers to.
+
+## 6. Addition: 24 hours, including merges and pushes (2026-11-18 UTC)
+
+The human lead then wrote: "I mean 10 hours" (the hour cap of P10-I-R, set at 10 charged hours in total) and, a little later:
+
+> I will allow you to drive it for the next 24hours including autoapprove merge and pushes
+>
+> do you need some special grant for this? because I want to allow you to move faster in order to read the result faster of P10-I so we know how to move foward
+
+**How the lead reads it.** For 24 hours from this message (until about 2026-11-19 04:00 UTC) the delegation of section 2 also covers pushes and merges to `main` of P10-I work, without asking. The lead applies it this way:
+
+- A merge to `main` happens only after the full local checks pass on the commit being merged (lint, type check, all tests, the smoke run), with the GitHub run skipped as the human lead asked on 2026-11-17, and the counts stated in the pull request.
+- A study's records are merged after its outcome is recorded and independently recomputed, not before. Specifications and code may be merged earlier when a later study needs them on `main`.
+- Nothing is committed or written inside a study's tree while one of its registered stages is running.
+- Still outside the delegation: publication, pushing weights, paid services, packages outside the lock, the SSD write budget, administrator access, and any change to a completed study. No threshold is relaxed and no safeguard is skipped.
+- After the 24 hours, merges to `main` go back to the human lead unless the grant is renewed.
