@@ -22,7 +22,7 @@ import torch
 
 from arborlm.io import file_sha256, read_json, write_json
 
-from . import analysis, core, gates, items, report, runner
+from . import analysis, core, cost, gates, items, report, runner
 from . import plan as planmod
 from .plan import Plan, StageRefused
 
@@ -148,12 +148,12 @@ def run_core_gates(plan: Plan, repo: Path, run_dir: Path, res: items.Resources, 
     planmod.verify_identity(plan, repo)
     out["identity"] = gates.gate("identity", True, frozen_files=len(plan.data["frozen_files"]), src_files=len(plan.data["src"]["files"]), named_not_reached=plan.data["src"]["named_not_reached"], reached_not_named=plan.data["src"]["reached_not_named"])
     out["seeds"] = gates.seed_gate(cfg, root=repo, run_checker=plan.mode == planmod.REGISTERED)
-    out["read_equality"] = gates.read_equality_gate(core.test_seed(1), cfg=cfg)
+    out["read_equality"] = gates.read_equality_gate(core.Seeds("dry", cfg).init(0), cfg=cfg)  # the registry's dry-rehearsal value, never a test seed
     out["synthetic_registry"] = gates.synthetic_registry_gate()  # always the registered config: it tests the rules, not a rehearsal's shortened checkpoints
     out["notes"] = {"passed": True, **gates.NOTES}
     from . import planted
 
-    pp = planted.planted_positive(th, core.Seeds("test", cfg))
+    pp = planted.planted_positive(th, core.Seeds("dry", cfg))
     out["planted_positive"] = gates.gate("planted_positive", pp["passed"], detail=pp["arms"])
     from . import model
 
@@ -196,6 +196,7 @@ def work_gates(plan: Plan, repo: Path, run_dir: Path, name: str, state_dir: Path
         rate = float(rt[str(long)])
         import tempfile
 
+        run_dir.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=run_dir) as tmp:
             r = gates.prefix_identity_gate(arm, res.backbone(core.calibration_parent(cell) if profile == "calibration" else cell), res.rows[regime], init_seed=seeds.init(cell), stream_seed=seeds.stream(cell, core.REGIME_INDEX[regime]), fresh=regime == core.FRESH, rate=rate, short=short, long=long, root=Path(tmp), cfg=cfg)
         core.write_record(path, {**core.envelope("gate"), "name": name, "passed": r["passed"] is not False, "results": {"prefix": r}})
@@ -238,24 +239,61 @@ def work_eval(plan: Plan, repo: Path, run_dir: Path, train_id: str, state_dir: P
     if rec.get("status") == "item_error":
         raise RuntimeError("the training item ended in an item error")
     for it in [i for i in plan.items("eval") if i["train"] == train_id]:
-        items.guarded(items.eval_record_path(run_dir, it), it["id"], lambda it=it: items.run_eval(res, it, run_dir, rec))
+        items.guarded(items.eval_record_path(run_dir, it), it["id"], lambda it=it: items.run_eval(res, it, run_dir, rec), "eval")
     core.write_record(task_dir(state_dir, "eval") / f"{safe(train_id)}.done.json", {**core.envelope("eval"), "id": train_id, "complete": True}, overwrite=True)
     return 0
 
 
+def work_r2probe(plan: Plan, repo: Path, arm: str, out: Path) -> int:
+    """One R2 probe (R5): a worker, configured (one thread), trains ``r2_updates`` updates of one arm on the DRY seeds (init 330392, the dry stream), then times the enabled read and a full read set with its replay and
+    writes timings only (no loss value)."""
+    import copy
+    import resource
+    import tempfile
+
+    from . import model
+
+    cfg = cfg_for(plan, repo)
+    res = resources_for(plan, repo, cfg)
+    seeds = core.Seeds("dry", cfg)
+    n = int(plan.data.get("r2_updates", 50))
+    bb = copy.deepcopy(res.backbone(0))
+    m = model.build_model(bb, arm, seeds.init(0))
+    stream = model.Stream(res.rows[core.REP], seeds.stream(0, 0), fresh=False)
+    with tempfile.TemporaryDirectory() as tmp:
+        t0 = time.monotonic()
+        r = model.train_run(m, stream, 0.003, Path(tmp), [n], n, {"r2": arm})
+        spu = (time.monotonic() - t0) / max(1, r["updates_done"])
+    panel = res.panels["calibration"]
+    t0 = time.monotonic()
+    model.evaluate(m, panel, expected_targets=res.expected_targets)
+    enabled = time.monotonic() - t0
+    t0 = time.monotonic()
+    model.evaluate_reads(m, panel, seeds, 0, expected_targets=res.expected_targets)
+    model.evaluate(m, panel, expected_targets=res.expected_targets)  # the replay
+    full = time.monotonic() - t0
+    out.parent.mkdir(parents=True, exist_ok=True)
+    write_json(out, {"arm": arm, "seconds_per_update": spu, "seconds_per_enabled_read": enabled, "seconds_per_full_read_set": full, "bytes_per_snapshot": r["bytes"], "peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "updates": n})
+    return 0
+
+
 def work_main(args: argparse.Namespace) -> int:
+    """B1: the process is configured first. An identity difference anywhere in the worker (code, config, src, data files, parent files) exits 75: PAUSED — IDENTITY, nothing written, resumes on restore (R2)."""
+    gates.configure_process()
     repo, run_dir = Path(args.repo), Path(args.run_dir)
     state_dir = Path(args.state_dir) if args.state_dir else run_dir
     plan = Plan.load(Path(args.plan))
     try:
         worker_precheck(plan, repo, run_dir)
+        return _work_body(args, plan, repo, run_dir, state_dir)
     except StageRefused as e:
         print(f"PAUSED — IDENTITY: {e}", file=sys.stderr)
         return IDENTITY_EXIT
-    torch.set_num_threads(1)
-    from arborlm.engine import configure_cpu
 
-    configure_cpu()
+
+def _work_body(args: argparse.Namespace, plan: Plan, repo: Path, run_dir: Path, state_dir: Path) -> int:
+    if args.kind == "r2probe":
+        return work_r2probe(plan, repo, args.arm, Path(args.out))
     if args.kind == "gates":
         return work_gates(plan, repo, run_dir, args.name, state_dir)
     if plan.mode == planmod.REGISTERED:
@@ -266,32 +304,49 @@ def work_main(args: argparse.Namespace) -> int:
 
 
 # --- the stage driver ---------------------------------------------------------------------------------------------------------------------
+def ledger_of(plan: Plan, repo: Path) -> core.Ledger:
+    """The cumulative ledger of charged seconds, in the public run directory (never where it would dirty a working tree)."""
+    public = Path(plan.data["run_dir"])
+    path = public / "ledger.json"
+    planmod.require_ignored_path(repo, path)
+    return core.Ledger(path, plan.cap_seconds("any"))
+
+
 def run_stage(stage: str, plan: Plan, repo: Path, run_dir: Path, plan_path: Path, *, mode: str, identity: Mapping[str, Any], state_dir: Path | None = None) -> int:
-    """Run (or resume) a pool stage. Prints the status; exit 0 only when COMPLETE."""
+    """Run (or resume) a pool stage. ``run_dir`` is the item root (the sealed directory for calibration and DRY items). The cap is cumulative (R1): the invocation gets the cap minus what every earlier stage and
+    resume charged; with nothing left the stage is PAUSED and nothing starts. Prints the status; exit 0 only when COMPLETE."""
     started = datetime.now(UTC).isoformat()
     state_dir = state_dir or run_dir
     if stage != "gates" and plan.mode == planmod.REGISTERED:
         require_gates_passed(state_dir)
     tasks = make_tasks(stage, plan, run_dir, plan_path, repo, state_dir)
-    cap = plan.cap_seconds(stage)
-    out, seconds = runner.run_tasks(tasks, workers=int(plan.data["workers"]), cap_seconds=cap, rss_worker_bytes=int(plan.data["rss_worker_bytes"]), rss_aggregate_bytes=int(plan.data["rss_aggregate_bytes"]), run_dir=run_dir)
+    ledger = ledger_of(plan, repo)
+    left = ledger.remaining()
+    if left <= 0:
+        out = {t.label: {"status": runner.NOT_STARTED, "seconds": 0.0, "reason": f"the cap of {ledger.total_seconds:.0f} s is spent (cumulative ledger); the stage is PAUSED and the extension is the human lead's", "peak_rss_bytes": 0} for t in tasks if not t.result_path.is_file()}
+        seconds = 0.0
+    else:
+        out, seconds = runner.run_tasks(tasks, workers=int(plan.data["workers"]), cap_seconds=left, rss_worker_bytes=int(plan.data["rss_worker_bytes"]), rss_aggregate_bytes=int(plan.data["rss_aggregate_bytes"]), run_dir=Path(plan.data["run_dir"]))
+        ledger.charge(stage, seconds)
     prior = runner.read_manifest(state_dir, stage)
     if prior is not None and prior["status"] == "COMPLETE":
         print(json.dumps({"stage": stage, "status": "COMPLETE", "note": "already complete"}))
         return 0
-    rec = runner.write_manifest(state_dir, stage, mode, out, seconds, identity=dict(identity), started=started, caps={"stage_cap_seconds": cap})
+    rec = runner.write_manifest(state_dir, stage, mode, out, seconds, identity=dict(identity), started=started, caps={"cap_seconds_total": ledger.total_seconds, "charged_before_seconds": ledger.charged() - seconds})
     print(json.dumps({"stage": stage, "status": rec["status"], "charged_seconds": rec["charged_seconds"]}))
     return 0 if rec["status"] == "COMPLETE" else 1
 
 
-def bases_of(run_dir: Path) -> dict[str, dict[str, float | None]]:
-    p = gate_path(run_dir, "core")
+def bases_of(state_dir: Path) -> dict[str, dict[str, float | None]]:
+    p = gate_path(state_dir, "core")
     return dict(core.read_record(p, "gate")["results"]["base_values"]) if p.is_file() else {}
 
 
-def run_analysis(plan: Plan, repo: Path, run_dir: Path, cfg: Mapping[str, Any]) -> dict[str, Any]:
-    """Section 10: refuses while any item error exists or any planned evaluation is missing; labels nothing then."""
-    reg = items.collect_registry(run_dir, plan.data["items"], bases_of(run_dir))
+def run_analysis(plan: Plan, repo: Path, items_dir: Path, cfg: Mapping[str, Any], *, state_dir: Path | None = None, out_dir: Path | None = None) -> dict[str, Any]:
+    """Section 10: refuses (ENGINEERING STOP — ITEM ERRORS) while any train or evaluation item error exists, and while any planned evaluation is missing; labels nothing then. Written to ``out_dir`` (for a DRY run, the
+    sealed directory)."""
+    state_dir = state_dir or items_dir
+    reg = items.collect_registry(items_dir, plan.data["items"], bases_of(state_dir))
     cells = sorted({i["cell"] for i in plan.items("train")})
     cell_parent = {c: next(i["parent"] for i in plan.items("train") if i["cell"] == c) for c in cells}
     th = core.Thresholds.from_config(cfg) if plan.mode == planmod.REGISTERED else core.Thresholds.from_config(cfg).scaled(len(cells))
@@ -299,8 +354,44 @@ def run_analysis(plan: Plan, repo: Path, run_dir: Path, cfg: Mapping[str, Any]) 
         if core.run_key(it["arm"], it["regime"], it["rate"], it["cell"]) not in reg:
             raise core.EngineeringStop(f"ENGINEERING STOP — a planned run has no record: {it['id']}")
     result = analysis.analyse(reg, plan.rate_table, cfg, cells=cell_parent, th=th, bitwise=gates.on_platform_of_record(cfg))
-    core.write_record(run_dir / "analysis" / "analysis.json", {**core.envelope("analysis"), "result": result, "mode": plan.mode})
+    core.write_record((out_dir or items_dir) / "analysis" / "analysis.json", {**core.envelope("analysis"), "result": result, "mode": plan.mode})
     return result
+
+
+def execute_stage(stage: str, plan: Plan, repo: Path, run_dir: Path, plan_path: Path, *, mode: str, identity: Mapping[str, Any], items_dir: Path | None = None, state_dir: Path | None = None, out_dir: Path | None = None, whitelist_only: bool = False) -> int:
+    """The registered driver's stage dispatch, shared with R3's DRY run (R6): gates, train and eval through ``run_stage``; analysis and report through the same functions. ``whitelist_only`` renders the report from
+    the whitelist alone (DRY runs: ruling 15, the values go into the sealed archive)."""
+    items_dir = items_dir or run_dir
+    state_dir = state_dir or run_dir
+    out_dir = out_dir or run_dir
+    if stage in ("gates", "train", "eval"):
+        if stage == "eval":
+            m = runner.read_manifest(state_dir, "train")
+            if m is None or m["status"] != "COMPLETE":
+                print("refused: the train stage is not COMPLETE", file=sys.stderr)
+                return 2
+        return run_stage(stage, plan, repo, items_dir, plan_path, mode=mode, identity=identity, state_dir=state_dir)
+    cfg = cfg_for(plan, repo)
+    if stage == "analysis":
+        m = runner.read_manifest(state_dir, "eval")
+        if m is None or m["status"] != "COMPLETE":
+            print("refused: the eval stage is not COMPLETE", file=sys.stderr)
+            return 2
+        try:
+            run_analysis(plan, repo, items_dir, cfg, state_dir=state_dir, out_dir=out_dir)
+        except core.EngineeringStop as e:
+            print(str(e), file=sys.stderr)
+            return 3
+        return 0
+    if stage == "report":
+        rec = core.read_record(out_dir / "analysis" / "analysis.json", "analysis")
+        text = report.render_whitelist(rec["result"], plan.mode) if whitelist_only else report.render(rec["result"], plan.mode)
+        target = state_dir / "report.md" if whitelist_only else out_dir / "analysis" / "report.md"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")
+        return 0
+    print(f"unknown stage {stage}", file=sys.stderr)
+    return 2
 
 
 def cmd_registered(args: argparse.Namespace) -> int:
@@ -315,33 +406,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     except StageRefused as e:
         print(str(e), file=sys.stderr)
         return 2
-    plan_path = repo / core.PLAN
-    stage = args.stage
-    if stage in ("gates", "train", "eval"):
-        if stage == "eval":
-            m = runner.read_manifest(run_dir, "train")
-            if m is None or m["status"] != "COMPLETE":
-                print("refused: the train stage is not COMPLETE", file=sys.stderr)
-                return 2
-        return run_stage(stage, plan, repo, run_dir, plan_path, mode=planmod.REGISTERED, identity=identity)
-    cfg = cfg_for(plan, repo)
-    if stage == "analysis":
-        m = runner.read_manifest(run_dir, "eval")
-        if m is None or m["status"] != "COMPLETE":
-            print("refused: the eval stage is not COMPLETE", file=sys.stderr)
-            return 2
-        try:
-            run_analysis(plan, repo, run_dir, cfg)
-        except core.EngineeringStop as e:
-            print(str(e), file=sys.stderr)
-            return 3
-        return 0
-    if stage == "report":
-        rec = core.read_record(run_dir / "analysis" / "analysis.json", "analysis")
-        (run_dir / "analysis" / "report.md").write_text(report.render(rec["result"], plan.mode), encoding="utf-8")
-        return 0
-    print(f"unknown stage {stage}", file=sys.stderr)
-    return 2
+    return execute_stage(args.stage, plan, repo, run_dir, repo / core.PLAN, mode=planmod.REGISTERED, identity=identity)
 
 
 # --- freeze commands -------------------------------------------------------------------------------------------------------------------------------
@@ -349,8 +414,16 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     """Write ``freeze/plan.json`` first and once; ``--supersede`` moves an older file aside (never deletes it). The rate table is ``freeze/rate_table.json`` (written by ``write-rate-table`` from ``rehearsal_public.json``)."""
     repo = Path(args.repo or core.repo_root())
     cfg = core.load_config(repo / core.CONFIG)
-    if args.projected_remaining_hours is not None and 2 * args.projected_remaining_hours > float(cfg["caps"]["registered_hours"]) and not args.over_cap_approved:
-        raise StageRefused(f"refused: the section-7 cap (2 x {args.projected_remaining_hours} h) exceeds 48 charged hours: the lead returns to the human lead with the projection (pass --over-cap-approved once the human lead extends it)")
+    rt0 = read_json(repo / core.RATE_TABLE)
+    projection: dict[str, Any] | None = None
+    projected: float | None = None
+    if args.r2:  # the cap is COMPUTED by code from R2's record and the candidate item list (section 7: charged + 2 x projected remaining); it is never typed
+        r2 = read_json(Path(args.r2))
+        hours = cost.project_hours(items.registered_items(cfg, rt0), r2["unit_costs"], cfg)
+        projected = hours["hours"]
+        projection = {"hours": projected, "detail": hours, "r2_sha256": file_sha256(Path(args.r2)), "unit_costs": r2["unit_costs"]}
+        if 2 * projected > float(cfg["caps"]["registered_hours"]) and not args.over_cap_approved:
+            raise StageRefused(f"refused: the section-7 cap (2 x {projected:.2f} h) exceeds 48 charged hours: the lead returns to the human lead with the projection (pass --over-cap-approved once the human lead extends it)")
     plan_path = repo / core.PLAN
     if plan_path.exists():
         if not args.supersede:
@@ -374,11 +447,14 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
                 target.parent.mkdir(parents=True, exist_ok=True)
                 f.rename(target)
     seed_hashes = gates.write_seed_files(repo, cfg)  # real files, frozen inputs: hashed in plan.json with the rest of studies/p10i_s3
-    extra: dict[str, Any] = {"seed_files": seed_hashes}
+    extra: dict[str, Any] = {"seed_files": seed_hashes, "projection": projection}
     if args.data_manifest:
+        from . import parents
+
         dm = Path(args.data_manifest).resolve()
-        extra = {"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_suite": str(Path(args.parent_suite).resolve())}
-    record = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, run_dir=Path(args.run_dir).resolve(), rate_table=rt, projected_remaining_hours=args.projected_remaining_hours, extra=extra)
+        suite = Path(args.parent_suite).resolve()
+        extra.update({"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_suite": str(suite), "parent_files": parents.checkpoint_files(repo, suite)})
+    record = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, run_dir=Path(args.run_dir).resolve(), rate_table=rt, projected_remaining_hours=projected, extra=extra)
     core.write_record(plan_path, record)
     print(json.dumps({"candidate_plan": str(plan_path), "plan_file_sha256": file_sha256(plan_path), "items": {k: len(v) for k, v in record["items"].items()}, "caps_provisional": record["caps_provisional"]}))
     return 0
@@ -399,13 +475,28 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if sp:
         raise StageRefused("refused: " + "; ".join(sp))
     plan_sha = file_sha256(repo / core.PLAN)
-    extra = {k: plan.data[k] for k in ("data_manifest", "data_dir", "parent_suite", "seed_files") if k in plan.data}
+    extra = {k: plan.data[k] for k in ("data_manifest", "data_dir", "parent_suite", "parent_files", "seed_files", "projection") if k in plan.data}
+    proj = plan.data.get("projection")
+    if proj is not None:  # the cap was computed by code: recompute it from the plan's own items and the recorded unit costs
+        again_h = cost.project_hours(plan.data["items"], proj["unit_costs"], cfg)["hours"]
+        if again_h != proj["hours"] or plan.data["caps"]["registered_hours"] != 2.0 * proj["hours"]:
+            raise StageRefused("refused: the registered cap is not charged + 2 x the projection recomputed from R2's record and the plan's items")
     again = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, run_dir=Path(plan.data["run_dir"]), rate_table=plan.data["rate_table"], projected_remaining_hours=plan.data["caps"]["registered_hours"] / 2.0, extra=extra)
     if planmod.scientific_content(json.loads(json.dumps(again))) != planmod.scientific_content(plan.data):
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and rate table: supersede it and rehearse again")
     rehearsal = core.read_record(Path(args.rehearsal), "rehearsal_public")
     if rehearsal.get("caps_provisional") is not False:
         raise StageRefused("refused: the rehearsal record was made on provisional caps (a measuring rehearsal cannot be frozen on)")
+    # R3: the plan's rate table equals freeze/rate_table.json and R1's public file, and the public file carries the sealed archive's hash
+    on_disk = read_json(repo / core.RATE_TABLE)
+    if not (plan.data["rate_table"] == on_disk == rehearsal.get("rate_table")):
+        raise StageRefused("refused: the plan's rate table, freeze/rate_table.json and rehearsal_public.json's rate table are not the same (the selection is made by code, never typed)")
+    sealed_sha = rehearsal.get("sealed_sha256")
+    if not (isinstance(sealed_sha, str) and len(sealed_sha) == 64):
+        raise StageRefused("refused: rehearsal_public.json carries no sealed-archive SHA-256")
+    # R4: no condition is changed after any rehearsal output exists
+    if rehearsal.get("rule_hashes") != planmod.rule_hashes(repo):
+        raise StageRefused("refused: the rule-bearing configuration sections or labels.py, analysis.py or calibration.py differ from what R1 recorded (an amendment re-runs R1, ruling 18)")
     reh = gates.rehearsal_gate(rehearsal, ("R1", "R2", "R3"), plan_file_sha256=plan_sha)
     if not reh["passed"]:
         raise StageRefused(f"refused: the rehearsal record does not show R1, R2 and R3 COMPLETE with this plan file's SHA-256: {reh}")
@@ -443,7 +534,9 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--freeze-commit", required=True)
     r.add_argument("--repo")
     w = sub.add_parser("work")
-    w.add_argument("kind", choices=("gates", "train", "eval"))
+    w.add_argument("kind", choices=("gates", "train", "eval", "r2probe"))
+    w.add_argument("--arm")
+    w.add_argument("--out")
     w.add_argument("--run-dir", required=True)
     w.add_argument("--state-dir")
     w.add_argument("--plan", required=True)
@@ -455,7 +548,7 @@ def build_parser() -> argparse.ArgumentParser:
     cp.add_argument("--run-dir", required=True)
     cp.add_argument("--data-manifest")
     cp.add_argument("--parent-suite")
-    cp.add_argument("--projected-remaining-hours", type=float)
+    cp.add_argument("--r2", help="R2's record: the registered cap is computed from it and the candidate items (charged + 2 x projected remaining); without it the plan carries the 48-hour bound and is provisional")
     cp.add_argument("--over-cap-approved", action="store_true")
     cp.add_argument("--supersede", action="store_true")
     cp.add_argument("--repo")
@@ -487,6 +580,7 @@ def build_parser() -> argparse.ArgumentParser:
     rh.add_argument("--run-dir", required=True)
     rh.add_argument("--repo")
     rh.add_argument("--sealed-path")
+    rh.add_argument("--sealed-dir", help="r2/r3: a directory outside the repository for sealed item records")
     rh.add_argument("--plan")
     rh.add_argument("--data-manifest")
     rh.add_argument("--parent-suite")
@@ -495,6 +589,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    gates.configure_process()  # B1: before any platform check, in the supervisor as well as in the workers
     try:
         if args.command == "registered":
             return cmd_registered(args)

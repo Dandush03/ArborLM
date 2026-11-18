@@ -25,6 +25,20 @@ from . import core, model
 PASSED, FAILED, SKIPPED = "passed", "failed", "skipped"
 
 
+def configure_process() -> None:
+    """B1: the process (supervisor and workers alike) is configured BEFORE any platform check: one intra-op thread, one interop thread, deterministic algorithms (``engine.configure_cpu``). The interop thread count can be
+    set only before parallel work has started; if the process already ran parallel work the call is tolerated only when the count is already 1, otherwise it is an engineering stop."""
+    from arborlm import engine
+
+    try:
+        engine.configure_cpu()
+    except RuntimeError:  # set_num_interop_threads after parallel work started
+        torch.set_num_threads(1)
+        torch.use_deterministic_algorithms(True, warn_only=False)
+        if torch.get_num_interop_threads() != 1:
+            raise core.EngineeringStop("ENGINEERING STOP — the interop thread count cannot be set to 1 in this process") from None
+
+
 def platform_record() -> dict[str, Any]:
     return {"system": platform.system(), "machine": platform.machine(), "release": platform.release(), "platform": platform.platform(), "torch": torch.__version__, "torch_num_threads": torch.get_num_threads(), "torch_interop_threads": torch.get_num_interop_threads(), "deterministic_algorithms": bool(torch.are_deterministic_algorithms_enabled())}  # fmt: skip
 
@@ -150,8 +164,9 @@ def seed_problems(cfg: Mapping[str, Any] | None = None) -> list[str]:
 
 
 OWN_FILES_SUBSTITUTIONS: tuple[tuple[str, str], ...] = (
-    ('for path in sorted((ROOT / "configs").glob("*.toml")):', 'for path in [q for q in sorted((ROOT / "configs").glob("*.toml")) if not q.name.startswith(("p10i_s", "p10ir_"))]:'),
-    ('for path in sorted((ROOT / d).rglob("*.py")):', 'for path in [q for q in sorted((ROOT / d).rglob("*.py")) if not (set(q.parts) & {"p10i_s0", "p10i_s1", "p10i_s2", "p10i_s3", "p10i_s4", "p10i_s5", "p10ir"} or q.name.startswith(("test_p10is", "test_p10ir_")))]:'),
+    # Only this study's own files and P10-I-R's (the checker's known self-collision) leave the scan; no other study's code is dropped.
+    ('for path in sorted((ROOT / "configs").glob("*.toml")):', 'for path in [q for q in sorted((ROOT / "configs").glob("*.toml")) if not q.name.startswith(("p10i_s3_", "p10ir_"))]:'),
+    ('for path in sorted((ROOT / d).rglob("*.py")):', 'for path in [q for q in sorted((ROOT / d).rglob("*.py")) if not (set(q.parts) & {"p10i_s3", "p10ir"} or q.name.startswith(("test_p10is3_", "test_p10ir_")))]:'),
 )
 ROOT_SUBSTITUTION = ("ROOT = Path(__file__).resolve().parents[3]", "ROOT = Path({root!r})")
 CHECKER_FILE = core.FREEZE_DIR / "seed_registry_check.py"
@@ -301,6 +316,10 @@ def synthetic_registry_gate(cfg: Mapping[str, Any] | None = None) -> dict[str, A
     cases["MEMORY AHEAD"] = run(S(gain=0.03), S(gain=0.02))["line2_tree"]["base_label"] == "MEMORY AHEAD"
     cases["dense adds nothing: NOT EVALUABLE"] = run(S(gain=0.0045), S(gain=0.003))["line2_tree"]["base_label"] == "NOT EVALUABLE"
     cases["integrity: disabled != BASE"] = run(S(gain=0.02, bad_disabled=[2]))["line1"]["label"] == "NOT EVALUABLE"
+    # B3: COMPETITIVE before the tags with D-ADAPT's U* rate at the edge is INCONCLUSIVE, and an INCONCLUSIVE label is never positive
+    reg = synthetic.registry(c, {(tree, core.FRESH): S(gain=0.02), (dense, core.FRESH): S(gain=0.022)})
+    edge = analysis.analyse(reg, synthetic.rate_table(c, edge=[(dense, core.FRESH)]), c)
+    cases["INCONCLUSIVE (DENSE RATE AT EDGE) is never positive"] = edge["line2_tree"]["label"] == "INCONCLUSIVE (DENSE RATE AT EDGE)" and edge["registered_positive"]["line2"] is False
     try:
         reg = synthetic.registry(c, {})
         reg[core.run_key(tree, core.FRESH, 0.003, 0)] = {"status": "item_error"}

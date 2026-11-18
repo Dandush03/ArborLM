@@ -126,7 +126,10 @@ class Ctx:
     def collapsed(self, arm: str, regime: str) -> list[bool]:
         out = []
         for c in self.order:
-            s = self.reg.get(core.stat_key(arm, regime, self.rate(arm, regime), c, self.u, "used_slots"))
+            if run_failed(self.reg, arm, regime, self.rate(arm, regime), c) or nll(self.reg, arm, regime, self.rate(arm, regime), c, self.u, core.READ_ENABLED) is None:
+                out.append(False)  # a failed cell has no used-slot set; it is already counted as failing everything
+                continue
+            s = _need(self.reg, core.stat_key(arm, regime, self.rate(arm, regime), c, self.u, "used_slots"))
             out.append(s is not None and int(s) < 2)
         return out
 
@@ -138,28 +141,37 @@ class Ctx:
             out[k] = labels.mean_of(self.vals(arm, regime, k, core.READ_ENABLED, rate=r))
         return out
 
-    def integrity(self, arm: str, regime: str) -> list[str]:
-        """Section 10: disabled != BASE, replay != enabled (both bitwise on the platform of record, 1e-6 elsewhere), joint outside 1e-6, at U*. A failed cell is not an integrity case."""
-        bad: list[str] = []
+    def step0(self, arm: str, regime: str) -> float | None:
+        """The mean step-0 enabled NLL of the primary run, if every cell has it (a checkpoint: PAST BEST counts it as one)."""
         r = self.rate(arm, regime)
+        keys = [core.nll_key(arm, regime, r, c, 0, core.READ_ENABLED) for c in self.order]
+        return labels.mean_of([self.reg[k] for k in keys]) if all(k in self.reg for k in keys) else None
+
+    def integrity(self, arm: str, regime: str) -> list[str]:
+        """Section 10: disabled != BASE, replay != enabled (both bitwise on the platform of record, 1e-6 elsewhere) and, where the read exists, joint outside 1e-6, at EVERY evaluated checkpoint (512 to U*) of the run at the rate
+        for that checkpoint and of the primary run (ruling: "on any cell" names no checkpoint; the reading under which fewer results count). A failed cell and a non-finite enabled value are not integrity cases."""
+        bad: list[str] = []
         tol = self.th.tolerance_joint
-        for c, p in zip(self.order, [self.cells[c] for c in self.order], strict=True):
-            if run_failed(self.reg, arm, regime, r, c):
-                continue
-            en = nll(self.reg, arm, regime, r, c, self.u, core.READ_ENABLED)
-            if en is None:
-                continue
-            rep, dis = (nll(self.reg, arm, regime, r, c, self.u, x) for x in (core.READ_REPLAY, core.READ_DISABLED))
-            b = base_nll(self.reg, p)
-            neq = (lambda x, y: x != y) if self.bitwise else (lambda x, y: abs(x - y) > tol)
-            if rep is None or neq(rep, en):
-                bad.append(f"{arm}|{regime}|c{c}: replay != enabled")
-            if dis is None or b is None or neq(dis, b):
-                bad.append(f"{arm}|{regime}|c{c}: disabled != BASE")
-            if arm == TREE:
-                j = nll(self.reg, arm, regime, r, c, self.u, core.READ_JOINT)
-                if j is None or abs(j - en) > tol:
-                    bad.append(f"{arm}|{regime}|c{c}: joint permutation outside {tol}")
+        neq = (lambda x, y: x != y) if self.bitwise else (lambda x, y: abs(x - y) > tol)
+        for k in self.ckpts:
+            for r in sorted({self.rate(arm, regime, k), self.rate(arm, regime)}):
+                for c in self.order:
+                    if run_failed(self.reg, arm, regime, r, c):
+                        continue
+                    en = nll(self.reg, arm, regime, r, c, k, core.READ_ENABLED)
+                    if en is None:
+                        continue
+                    rep, dis = (nll(self.reg, arm, regime, r, c, k, x) for x in (core.READ_REPLAY, core.READ_DISABLED))
+                    b = base_nll(self.reg, self.cells[c])
+                    where = f"{arm}|{regime}|c{c}|u{k}|r{core.rate_label(r)}"
+                    if rep is None or neq(rep, en):
+                        bad.append(f"{where}: replay != enabled")
+                    if dis is None or b is None or neq(dis, b):
+                        bad.append(f"{where}: disabled != BASE")
+                    if arm == TREE and core.nll_key(arm, regime, r, c, k, core.READ_JOINT) in self.reg:
+                        j = nll(self.reg, arm, regime, r, c, k, core.READ_JOINT)
+                        if j is None or abs(j - en) > tol:
+                            bad.append(f"{where}: joint permutation outside {tol}")
         return bad
 
 
@@ -173,7 +185,8 @@ def regime_result(ctx: Ctx, regime: str, base_good: bool) -> dict[str, Any]:
         curves[a] = curve
         failed = any(v is None for v in ctx.vals(a, regime, ctx.u, core.READ_ENABLED))
         conv[a] = labels.convergence_tag(curve.get(8192), curve.get(ctx.u), th.epsilon, failed=failed)
-        past[a] = labels.past_best(curve, ctx.u, th.past_best_margin, failed=failed) if regime in (REP, REPU) else {"tag": None, "flag": False}
+        s0 = ctx.step0(a, regime)
+        past[a] = labels.past_best({**({0: s0} if s0 is not None else {}), **curve}, ctx.u, th.past_best_margin, failed=failed) if regime in (REP, REPU) else {"tag": None, "flag": False}
     integ = {a: ctx.integrity(a, regime) for a in arms}
     out: dict[str, Any] = {"regime": regime, "convergence": conv, "past_best": past, "curves": curves, "integrity_problems": integ}
     # line 1 (M-TREE)
@@ -184,6 +197,7 @@ def regime_result(ctx: Ctx, regime: str, base_good: bool) -> dict[str, Any]:
     l1 = labels.line1(c_t, p_t, x_t, th, integrity_stop=stop1, collapsed=ctx.collapsed(TREE, regime))
     out["line1"] = labels.apply_tags_line1(l1, regime=regime, conv=conv[TREE], past=past[TREE], edge=bool(ctx.rt["edge"].get(f"{TREE}|{regime}")))
     out["line1"]["detail"] = l1
+    out["line1"]["collapsed_cells"] = len(l1["collapsed"])  # printed beside the label: one collapsed cell can decide D2
     # line 2, TREE and FLAT
     c_d = ctx.gain(DENSE, regime)
     for mem in (TREE, FLAT):
@@ -298,7 +312,7 @@ def analyse(reg: Registry, rt: RateTable, cfg: Mapping[str, Any], *, cells: Mapp
     l1 = {g: per[g]["line1"] for g in REGIMES}
     l2 = {g: per[g]["line2_tree"] for g in REGIMES}
     reg1, reg2 = labels.registered_line(l1), labels.registered_line(l2)
-    pos = labels.registered_positive(l1[FRESH]["label"], l2[FRESH]["base_label"])
+    pos = labels.registered_positive(l1[FRESH]["label"], l2[FRESH]["label"])  # the FINAL label: an INCONCLUSIVE label is never positive
     route = labels.route_a(l1[FRESH]["label"], (l2[FRESH]["base_label"], l2[FRESH]["label"]), per[FRESH]["convergence"][DENSE])
     return {
         "kind": "analysis", "base_ok": good, "base_bad": bad, "regimes": per, "line1": reg1, "line2_tree": reg2, "line2_flat": labels.registered_line({g: per[g]["line2_flat"] for g in (REP, FRESH)} | {REPU: {"label": None}}),

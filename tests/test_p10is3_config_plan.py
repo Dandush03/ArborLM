@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
 
+from arborlm.io import file_sha256  # noqa: E402
 from studies.p10i_s3 import (  # noqa: E402
     core,
     gates,
@@ -183,12 +184,44 @@ def test_equal_rates_make_one_run_serve_every_duration() -> None:
     rt = rt_single()
     rt["rates"]["M-TREE|REP"] = {"512": 0.003, "2048": 0.003, "8192": 0.01, "16384": 0.01}
     g = items.run_groups(CFG, rt, "M-TREE", "REP", anchor_rate=0.003)
-    assert [(x["role"], x["rate"], x["snapshots"], x["max_update"], x["full"]) for x in g] == [("primary", 0.01, [512, 2048, 8192, 16384], 16384, [8192, 16384]), ("duration", 0.003, [512, 2048], 2048, [512, 2048]), ("anchor", 0.003, [512, 2048, 8192, 16384], 16384, [])]
+    # no anchor item next to the 0.003 duration run: they are one run (prefix identity), recorded with both roles
+    assert [(x["role"], x["rate"], x["snapshots"], x["max_update"], x["full"]) for x in g] == [("primary", 0.01, [512, 2048, 8192, 16384], 16384, [8192, 16384]), ("duration+anchor", 0.003, [512, 2048, 8192, 16384], 16384, [512, 2048])]
+
+
+def test_b2_anchor_at_the_rate_of_a_short_duration_does_not_collide() -> None:
+    """The audit's reproducer E1: 0.003 for the short durations and a lower rate for U* used to raise 'a plan names an item twice'."""
+    rt = rt_single(0.001)
+    rt["rates"]["M-TREE|REP"] = {"512": 0.003, "2048": 0.001, "8192": 0.001, "16384": 0.001}
+    its = items.registered_items(CFG, rt)
+    for lst in its.values():
+        assert len({i["id"] for i in lst}) == len(lst)
+    t = [i for i in its["train"] if i["arm"] == "M-TREE" and i["regime"] == "REP" and i["cell"] == 0]
+    assert sorted((i["role"], i["rate"], i["max_update"]) for i in t) == [("duration+anchor", 0.003, 16384), ("primary", 0.001, 16384)]
+    e = {x["update"]: x["controls"] for x in its["eval"] if x["train"] == items.train_id("M-TREE", "REP", 0.003, 0)}
+    assert e == {512: "full", 2048: "enabled", 8192: "enabled", 16384: "enabled"}  # full controls where the run's rate is the duration's rate, enabled reads elsewhere (the anchor's U* read)
 
 
 def test_registered_items_are_a_pure_function_of_config_and_rate_table() -> None:
     assert items.registered_items(CFG, rt_single()) == items.registered_items(CFG, rt_single())
     assert items.registered_items(CFG, rt_single()) != items.registered_items(CFG, rt_single(0.01))
+
+
+def write_r2(path: Path, spu: float = 0.01, enabled: float = 0.1, full: float = 1.0, workers: int = 6) -> Path:
+    """An R2 record with the same unit cost for every arm (a fixture: real unit costs come from the probes)."""
+    arm = {"seconds_per_update": spu, "seconds_per_enabled_read": enabled, "seconds_per_full_read_set": full}
+    path.write_text(json.dumps({"unit_costs": {"workers": workers, "arms": {a: dict(arm) for a in core.ARMS}, "slowdown": dict.fromkeys(core.ARMS, 1.0)}}))
+    return path
+
+
+def expected_hours(rt: dict[str, Any], spu: float = 0.01, enabled: float = 0.1, full: float = 1.0, workers: int = 6) -> float:
+    """The projection counted by hand from the items (not through cost.project_hours): updates x seconds, plus the reads of every evaluation item, plus the gates, over the workers."""
+    its = items.registered_items(CFG, rt)
+    sec = sum(t["max_update"] * spu for t in its["train"])
+    for e in its["eval"]:
+        sec += full if e["controls"] == "full" else (3 * enabled if e["controls"] == "enabled" else 2 * enabled)
+    arm_regimes = sum(len(core.REGIME_ARMS[g]) for g in core.REGIMES)
+    sec += arm_regimes * ((512 + 16384) * spu + 4 * enabled) + 9 * 3 * enabled
+    return sec / workers / 3600.0
 
 
 # ---------------- the plan, the freeze, the refusals ----------------
@@ -221,20 +254,21 @@ def _args(**kw: Any) -> Any:
 def test_candidate_plan_is_written_first_and_once_and_superseded_aside(tmp_path: Path) -> None:
     repo = _skeleton(tmp_path / "repo")
     (repo / core.RATE_TABLE).write_text(json.dumps(rt_single()))
-    a = _args(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, projected_remaining_hours=None, over_cap_approved=False, supersede=False)
+    a = _args(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, r2=None, over_cap_approved=False, supersede=False)
     assert stages.cmd_candidate_plan(a) == 0
     first = (repo / core.PLAN).read_bytes()
     with pytest.raises(plan.StageRefused, match="--supersede"):
         stages.cmd_candidate_plan(a)
     a.supersede = True
-    a.projected_remaining_hours = 10.0
+    a.r2 = str(write_r2(tmp_path / "r2.json"))
     assert stages.cmd_candidate_plan(a) == 0
     moved = list((repo / "studies/p10i_s3/freeze/superseded").glob("plan-*.json"))
     assert len(moved) == 1 and moved[0].read_bytes() == first  # the old file is moved aside, never deleted
     p = plan.Plan.load(repo / core.PLAN)
-    assert p.data["caps"]["registered_hours"] == 20.0 and p.data["caps_provisional"] is False  # 0 charged + 2 x 10 projected
+    assert p.data["caps"]["registered_hours"] == pytest.approx(2.0 * expected_hours(rt_single())) and p.data["caps_provisional"] is False  # 0 charged + 2 x the projection computed from R2's record
+    assert p.data["projection"]["r2_sha256"] == file_sha256(tmp_path / "r2.json") and p.data["projection"]["hours"] == pytest.approx(expected_hours(rt_single()))
     assert len(p.items("train")) == 216 and p.data["workers"] * p.data["rss_worker_bytes"] <= p.data["rss_aggregate_bytes"] == 12 * 2**30
-    a.projected_remaining_hours = 30.0
+    a.r2 = str(write_r2(tmp_path / "big.json", spu=0.5))
     with pytest.raises(plan.StageRefused, match="exceeds 48"):
         stages.cmd_candidate_plan(a)
 
@@ -268,7 +302,7 @@ def test_plan_identity_detects_a_changed_frozen_file_and_a_changed_src_file(tmp_
 def test_provisional_caps_and_missing_pieces_refuse(tmp_path: Path) -> None:
     repo = _skeleton(tmp_path / "repo")
     (repo / core.RATE_TABLE).write_text(json.dumps(rt_single()))
-    a = _args(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, projected_remaining_hours=None, over_cap_approved=False, supersede=False)
+    a = _args(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, r2=None, over_cap_approved=False, supersede=False)
     assert stages.cmd_candidate_plan(a) == 0
     p = plan.Plan.load(repo / core.PLAN)
     assert p.data["caps_provisional"] is True  # no projection yet: the 48-hour bound and provisional

@@ -21,7 +21,6 @@ from studies.p10i_s3 import (  # noqa: E402
     gates,
     items,
     model,
-    plan,
     planted,
     rehearsal,
     stages,
@@ -153,12 +152,7 @@ def test_synthetic_rehearsal_r1_r3_end_to_end(tmp_path: Path) -> None:
     # the sealed archive holds the statistics of the calibration cell
     body = json.loads(sealed)
     assert "statistics" in body["extra"] and "neg_ref" in body["extra"]
-    # R3 against a candidate plan file with the real checkpoint names (its rate table is the candidate's)
-    rt = synthetic.rate_table(CFG)
-    cand = rehearsal.rehearsal_plan(ROOT, tmp_path / "cand", "candidate", {}, {"train": [], "eval": []}, rt, synthetic=True, gate_profile="dry")
-    rec = rehearsal.run_r3(ROOT, tmp_path / "r3", cand, synthetic=True)
-    assert rec["status"] == "COMPLETE" and rec["plan_file_sha256"] == plan.file_sha256(cand.path) if hasattr(plan, "file_sha256") else rec["status"] == "COMPLETE"
-    assert (tmp_path / "r3" / "r3_report.md").read_text().startswith("# P10-I-S3 report")
+    # R3 through the registered driver on a candidate plan is tested in test_p10is3_audit_fixes.py
 
 
 def test_items_can_be_listed_for_a_synthetic_resource_and_run_end_to_end(tmp_path: Path) -> None:

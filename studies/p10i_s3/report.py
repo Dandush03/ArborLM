@@ -34,11 +34,12 @@ def render(result: Mapping[str, Any], mode: str) -> str:
     out += ["## Regime labels (printed beside the registered label; never the line's label, never positive)", ""]
     for g in ("FRESH", "REP-U", "REP"):
         reg = result["regimes"][g]
-        out += [f"### {g}", "", f"- line 1: {label_text(reg['line1'])}", f"- line 2 [TREE]: {label_text(reg['line2_tree'])}"]
+        n_col = reg["line1"].get("collapsed_cells", 0)
+        out += [f"### {g}", "", f"- line 1: {label_text(reg['line1'])} (COLLAPSED cells: {n_col}" + ("; D2 is false for the regime because of them: a collapsed cell is never averaged away)" if n_col else ")"), f"- line 2 [TREE]: {label_text(reg['line2_tree'])}"]
         if "line2_flat" in reg:
             out.append(f"- line 2 [FLAT]: {label_text(reg['line2_flat'])}")
         for arm, c in reg["convergence"].items():
-            out.append(f"- {arm}: {c['tag']} (delta {fmt(c['delta'])})")
+            out.append(f"- {arm}: {c['tag']} (delta {fmt(c['delta'])})" + (f"; reason: {c['reason']}" if c.get("reason") else ""))
         for arm, p in reg["past_best"].items():
             if p.get("flag"):
                 out.append(f"- {arm}: PAST BEST CHECKPOINT")
@@ -74,3 +75,9 @@ def render(result: Mapping[str, Any], mode: str) -> str:
         out += ["", "## P4-rate anchor (descriptive)", ""] + [f"- {a}: rate for U* {v['rate_for_ustar']}, mean C at 0.003 {fmt(v['C_at_p4_rate']['mean'])}, at the frozen rate {fmt(v['C_at_frozen_rate']['mean'])}" for a, v in result["anchor"].items()]
     out += ["", "## Limits", "", *[f"- {x}" for x in result["limits"]], "- Nine correlated parents, one corpus, byte-level text, one addition size. No p-value is computed. Seconds per update are descriptive records of this implementation and not an efficiency result.", ""]
     return "\n".join(out)
+
+
+def render_whitelist(result: Mapping[str, Any], mode: str) -> str:
+    """The public report of a calibration or DRY run (B4, ruling 15): stage and gate pass/fail and nothing else. No loss, no effect, no mean, no delta, no label of a registered line."""
+    base = "BASE check passed" if result["base_ok"] else "BASE check FAILED"
+    return "\n".join(["# P10-I-S3 rehearsal report (whitelist only)", "", f"Mode: {mode}. This report carries pass or fail only; every value of a calibration or DRY run is in the sealed directory. `Astra review: NOT_PERFORMED`.", "", f"- the analysis ran to the end on the DRY items: yes ({base})", f"- regimes analysed: {', '.join(sorted(result['regimes']))}", ""])

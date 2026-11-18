@@ -16,7 +16,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pytest  # noqa: E402
 
 from arborlm.io import file_sha256  # noqa: E402
-from studies.p10i_s3 import core, data, gates, plan, rehearsal, stages, synthetic  # noqa: E402
+from studies.p10i_s3 import (  # noqa: E402
+    core,
+    data,
+    gates,
+    items,
+    plan,
+    rehearsal,
+    stages,
+    synthetic,
+)
 from studies.p10i_s3 import window_spans as ws  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -140,16 +149,49 @@ def test_corpus_from_parquet_fixture_matches_corpus_from_texts_and_checks_the_pi
 
 
 # --- R2 --------------------------------------------------------------------------------------------------------------------------------------
-def test_run_r2_on_a_tiny_synthetic_resource_set(tmp_path: Path) -> None:
-    rec = rehearsal.run_r2(ROOT, tmp_path / "r2", rehearsal.SYNTHETIC_OVERRIDE, synthetic=True, updates=3) if (tmp_path / "r2").mkdir() is None else {}
-    t = rec["timing"]
+def test_run_r2_measures_k_workers_under_the_dry_seeds_and_the_cap_follows_from_it(tmp_path: Path) -> None:
+    """R5: probes are worker subprocesses (configured), one alone per arm and then k together; unit costs carry the slowdown; the projection is computed by code."""
+    run = tmp_path / "r2run"
+    run.mkdir()
+    rec = rehearsal.run_r2(ROOT, run, rehearsal.SYNTHETIC_OVERRIDE, synthetic=True, updates=3)
+    unit = rec["unit_costs"]
+    assert unit["workers"] == rehearsal.SYNTHETIC_OVERRIDE["resources"]["workers"] == 3 and set(unit["arms"]) == set(core.ARMS)
     for arm in core.ARMS:
-        assert t[f"seconds_per_update_{arm}"] > 0 and t[f"seconds_per_evaluation_{arm}"] > 0 and t[f"bytes_per_snapshot_{arm}"] > 1e6
-    assert t["seconds_per_exhaustive_evaluation_M-TREE"] > 0 and isinstance(t["LOADED"], bool) and "load_average_1min" in t
-    assert (tmp_path / "r2" / "r2.json").is_file() and "not an efficiency result" in rec["note"]
+        a = unit["arms"][arm]
+        assert a["seconds_per_update"] > 0 and a["seconds_per_enabled_read"] > 0 and a["seconds_per_full_read_set"] > a["seconds_per_enabled_read"]
+        assert unit["slowdown"][arm] == pytest.approx(a["seconds_per_update"] / rec["single_worker"][arm]["seconds_per_update"])
+        assert rec["single_worker"][arm]["bytes_per_snapshot"] > 1e6
+    assert "dry-rehearsal" in rec["seeds"] and isinstance(rec["LOADED"], bool) and "not an efficiency result" in rec["note"]
+    assert not any("nll" in k.lower() or "loss" in k.lower() for k in rec)  # timings only
+    assert [e["stage"] for e in core.Ledger(run / "ledger.json", 1e9).entries()] == ["R2"]  # charged to the cumulative ledger
+    from studies.p10i_s3 import cost
+
+    h = cost.project_hours(items.registered_items(CFG, synthetic.rate_table(CFG)), unit, CFG)
+    assert h["hours"] == pytest.approx(h["train_hours"] + h["eval_hours"] + h["gates_hours"]) and h["hours"] > 0
+
+
+def write_r2(path: Path, spu: float = 0.01, enabled: float = 0.1, full: float = 1.0, workers: int = 6) -> Path:
+    """An R2 record with the same unit cost for every arm (a fixture: real unit costs come from the probes)."""
+    arm = {"seconds_per_update": spu, "seconds_per_enabled_read": enabled, "seconds_per_full_read_set": full}
+    path.write_text(json.dumps({"unit_costs": {"workers": workers, "arms": {a: dict(arm) for a in core.ARMS}, "slowdown": dict.fromkeys(core.ARMS, 1.0)}}))
+    return path
+
+
+def expected_hours(rt: dict[str, Any], spu: float = 0.01, enabled: float = 0.1, full: float = 1.0, workers: int = 6) -> float:
+    """The projection counted by hand from the items (not through cost.project_hours): updates x seconds, plus the reads of every evaluation item, plus the gates, over the workers."""
+    its = items.registered_items(CFG, rt)
+    sec = sum(t["max_update"] * spu for t in its["train"])
+    for e in its["eval"]:
+        sec += full if e["controls"] == "full" else (3 * enabled if e["controls"] == "enabled" else 2 * enabled)
+    arm_regimes = sum(len(core.REGIME_ARMS[g]) for g in core.REGIMES)
+    sec += arm_regimes * ((512 + 16384) * spu + 4 * enabled) + 9 * 3 * enabled
+    return sec / workers / 3600.0
 
 
 # --- a successful freeze in a temporary repository -----------------------------------------------------------------------------------------
+_STATE: dict[str, Path] = {}
+
+
 def _skeleton(tmp: Path) -> Path:
     """A temporary repository: a copy of the tree (the seed checker reads files of earlier studies), with this study's freeze directory emptied and the config's ``provisional`` cleared as the human lead does after the rehearsal."""
     for rel in ("studies", "src", "configs", "tests", "docs/decisions", "docs/reviews/p10-i-direction-2026-11-17"):
@@ -165,14 +207,16 @@ def _skeleton(tmp: Path) -> Path:
     return tmp
 
 
-def _candidate(repo: Path, run: Path, projected: float | None = 10.0) -> argparse.Namespace:
-    a = argparse.Namespace(repo=str(repo), run_dir=str(run), data_manifest=None, parent_suite=None, projected_remaining_hours=projected, over_cap_approved=False, supersede=False)
+def _candidate(repo: Path, run: Path, with_r2: bool = True) -> argparse.Namespace:
+    _STATE["repo"] = repo
+    r2 = str(write_r2(run.parent / "r2.json")) if with_r2 else None
+    a = argparse.Namespace(repo=str(repo), run_dir=str(run), data_manifest=None, parent_suite=None, r2=r2, over_cap_approved=False, supersede=False)
     assert stages.cmd_candidate_plan(a) == 0
     return a
 
 
 def _record(path: Path, plan_sha: str, provisional: bool = False, stages_done: tuple[str, ...] = ("R1", "R2", "R3")) -> Path:
-    core.write_record(path, {**core.envelope("rehearsal_public"), "stages": {s: {"status": "COMPLETE"} for s in stages_done}, "caps_provisional": provisional, "candidate": {"status": "COMPLETE", "plan_file_sha256": plan_sha}})
+    core.write_record(path, {**core.envelope("rehearsal_public"), "stages": {s: {"status": "COMPLETE"} for s in stages_done}, "caps_provisional": provisional, "candidate": {"status": "COMPLETE", "plan_file_sha256": plan_sha}, "rate_table": synthetic.rate_table(CFG), "sealed_sha256": "a" * 64, "rule_hashes": plan.rule_hashes(_STATE["repo"])})
     return path
 
 
@@ -252,17 +296,20 @@ def test_registered_cap_is_charged_plus_two_times_projected_remaining(tmp_path: 
         assert plan.Plan(rec).cap_seconds("train") == 2.0 * projected * 3600.0
     assert stages.main(["caps-proposal", "--charged-hours", "3", "--projected-remaining-hours", "10"]) == 0
     assert json.loads(capsys.readouterr().out)["proposed_registered_cap_hours"] == 23.0
-    # a cap above 48 charged hours goes back to the human lead: the candidate plan refuses unless that extension is declared
-    with pytest.raises(plan.StageRefused, match="exceeds 48"):
-        stages.cmd_candidate_plan(argparse.Namespace(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, projected_remaining_hours=24.5, over_cap_approved=False, supersede=False))
-    assert not (repo / core.PLAN).exists()
-    assert stages.cmd_candidate_plan(argparse.Namespace(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, projected_remaining_hours=24.5, over_cap_approved=True, supersede=False)) == 0
-    assert plan.Plan.load(repo / core.PLAN).data["caps"]["registered_hours"] == 49.0
+    # R5: through the candidate plan the cap is COMPUTED from R2's record and the items, never typed
+    ns = lambda r2, ok: argparse.Namespace(repo=str(repo), run_dir=str(tmp_path / "run"), data_manifest=None, parent_suite=None, r2=str(r2), over_cap_approved=ok, supersede=False)  # noqa: E731
+    big = write_r2(tmp_path / "big.json", spu=0.2)
+    with pytest.raises(plan.StageRefused, match="exceeds 48"):  # a cap above 48 charged hours goes back to the human lead
+        stages.cmd_candidate_plan(ns(big, False))
+    assert not (repo / core.PLAN).exists() and not (repo / gates.CHECKER_FILE).exists()  # refused before anything was written
+    assert stages.cmd_candidate_plan(ns(big, True)) == 0
+    want = 2.0 * expected_hours(synthetic.rate_table(CFG), spu=0.2)
+    assert want > 48 and plan.Plan.load(repo / core.PLAN).data["caps"]["registered_hours"] == pytest.approx(want)
 
 
 def test_synthetic_registry_gate_passes_and_fails_when_the_analysis_is_wrong(monkeypatch: pytest.MonkeyPatch) -> None:
     g = gates.synthetic_registry_gate(CFG)
-    assert g["passed"] is True and len(g["cases"]) == 10
+    assert g["passed"] is True and len(g["cases"]) == 11
     from studies.p10i_s3 import labels
 
     orig = labels.line1

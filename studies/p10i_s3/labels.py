@@ -105,9 +105,9 @@ def line2(c: Vals, c_dense: Vals, th: Thresholds, *, integrity_stop: bool = Fals
 def convergence_tag(m_mid: float | None, m_end: float | None, eps: float, *, failed: bool = False) -> dict[str, Any]:
     """Section 5.2: delta = M(8192) - M(16384); CONVERGED if delta < eps (a rising loss counts as converged). NOT DETERMINED (counts as NOT CONVERGED wherever read) with a failed cell."""
     if failed or m_mid is None or m_end is None:
-        return {"tag": NOT_DETERMINED, "delta": None, "counts_as_not_converged": True}
+        return {"tag": NOT_DETERMINED, "delta": None, "counts_as_not_converged": True, "reason": "a cell failed or a value at 8,192 or U* is non-finite (counts as NOT CONVERGED; may close ADR-0027's Route A)"}
     delta = m_mid - m_end
-    return {"tag": CONVERGED if delta < eps else NOT_CONVERGED, "delta": delta, "counts_as_not_converged": not delta < eps}
+    return {"tag": CONVERGED if delta < eps else NOT_CONVERGED, "delta": delta, "counts_as_not_converged": not delta < eps, "reason": None}
 
 
 def past_best(means: dict[int, float | None], u_star: int, margin: float, *, failed: bool = False) -> dict[str, Any]:
@@ -159,8 +159,9 @@ def registered_line(by_regime: dict[str, dict[str, Any]]) -> dict[str, Any]:
     return {"label": fresh["label"], "regime_labels": {"REP-U": by_regime.get("REP-U", {}).get("label"), "REP": by_regime.get("REP", {}).get("label")}}
 
 
-def registered_positive(line1_label: str, line2_tree_base_label: str) -> dict[str, bool]:
-    return {"line1": line1_label == DEPENDENT, "line2": line2_tree_base_label in (COMPETITIVE, MEMORY_AHEAD)}
+def registered_positive(line1_label: str, line2_tree_label: str) -> dict[str, bool]:
+    """Both arguments are the FINAL registered (FRESH) labels, after the tags of section 6.4: an INCONCLUSIVE label is never positive."""
+    return {"line1": line1_label == DEPENDENT, "line2": line2_tree_label in (COMPETITIVE, MEMORY_AHEAD)}
 
 
 def route_a(line1_fresh: str, line2_tree_fresh_base_and_final: tuple[str, str], dense_fresh_conv: dict[str, Any]) -> dict[str, Any]:

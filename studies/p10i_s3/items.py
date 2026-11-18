@@ -35,7 +35,13 @@ def run_groups(cfg: Mapping[str, Any], rt: Mapping[str, Any], arm: str, regime: 
         ds = [d for d in ckpts if rates[d] == r]
         groups.append({"role": "duration", "rate": r, "snapshots": ds, "max_update": max(ds), "full": ds})
     if anchor_rate is not None and regime == REP and arm in (TREE, DENSE) and primary != anchor_rate:
-        groups.append({"role": "anchor", "rate": anchor_rate, "snapshots": ckpts, "max_update": u, "full": []})
+        same = [g for g in groups if g["rate"] == anchor_rate]
+        if same:
+            # one item, by content: the anchor run and a per-duration run at the same rate are the same run (prefix identity). It runs to U* with every checkpoint, full controls at the durations that use the
+            # rate, enabled reads elsewhere, and records both roles
+            same[0].update({"role": "duration+anchor", "snapshots": ckpts, "max_update": u})
+        else:
+            groups.append({"role": "anchor", "rate": anchor_rate, "snapshots": ckpts, "max_update": u, "full": []})
     return groups
 
 
@@ -150,13 +156,13 @@ def run_eval(res: Resources, item: Mapping[str, Any], run_dir: Path, train_rec: 
         model.restore_snapshot(snap_root, m2, update, ident)
         replay = model.evaluate(m2, panel, expected_targets=res.expected_targets)
         reads[f"{core.READ_REPLAY}|0"] = replay if math.isfinite(replay) else None
-        if controls == "enabled":
-            reads = {k: v for k, v in reads.items() if k.startswith(core.READ_ENABLED)}
+        if controls == "enabled":  # the enabled read, its replay and the disabled read (the integrity checks of section 10 read them at every checkpoint)
+            reads = {k: v for k, v in reads.items() if k.split("|")[0] in (core.READ_ENABLED, core.READ_REPLAY, core.READ_DISABLED)}
         elif controls == "step0":
             reads = {k: v for k, v in reads.items() if k.split("|")[0] in (core.READ_ENABLED, core.READ_DISABLED)}
         nonfinite = False
     except FailedCell:
-        reads, stats, nonfinite = ({k: None for k in keys} if controls == "full" else {f"{core.READ_ENABLED}|0": None}), {}, True
+        reads, stats, nonfinite = ({k: None for k in keys} if controls == "full" else {f"{r}|0": None for r in (core.READ_ENABLED, core.READ_REPLAY, core.READ_DISABLED)}), {}, True
     stats = {k: v for k, v in stats.items() if k != "usage"} | ({"usage": stats["usage"]} if item["profile"] != "registered" and "usage" in stats else {})
     rec = {**core.envelope("eval"), "id": item["id"], "reads": reads, "stats": stats, "nonfinite_enabled": nonfinite, "update": update, "controls": controls}
     core.write_record(path, rec)
@@ -168,7 +174,7 @@ def _train_seed(item: Mapping[str, Any], seeds: core.Seeds, which: str) -> int:
     return seeds.init(c) if which == "init" else seeds.stream(c, core.REGIME_INDEX[item["regime"]])
 
 
-def guarded(path: Path, item_id: str, fn: Callable[[], Any]) -> Any:
+def guarded(path: Path, item_id: str, fn: Callable[[], Any], kind: str = "train") -> Any:
     """An exception that is not a failed cell is an ``item_error``: recorded, never a scientific NOT EVALUABLE (section 10). The record keeps the traceback and the exception propagates."""
     try:
         return fn()
@@ -176,7 +182,7 @@ def guarded(path: Path, item_id: str, fn: Callable[[], Any]) -> Any:
         raise
     except Exception as e:
         path.parent.mkdir(parents=True, exist_ok=True)
-        core.write_record(path, {**core.envelope("train"), "id": item_id, "status": "item_error", "reason": f"{type(e).__name__}: {e}", "traceback": traceback.format_exc()[-4000:]}, overwrite=True)
+        core.write_record(path, {**core.envelope(kind), "id": item_id, "status": "item_error", "item_kind": kind, "reason": f"{type(e).__name__}: {e}", "traceback": traceback.format_exc()[-4000:]}, overwrite=True)
         raise
 
 
@@ -184,6 +190,14 @@ def guarded(path: Path, item_id: str, fn: Callable[[], Any]) -> Any:
 def collect_registry(run_dir: Path, plan_items: Mapping[str, Sequence[Mapping[str, Any]]], bases: Mapping[str, Mapping[str, float | None]] | None = None) -> dict[str, Any]:
     """The analysis registry (keys of ``core``) from the train and eval records of the planned items only. A planned item without a record is simply absent (the analysis then refuses: a missing evaluation is an engineering stop)."""
     reg: dict[str, Any] = {}
+    errors = []
+    for kind, path_of in (("train", train_record_path), ("eval", eval_record_path)):
+        for it in plan_items[kind]:
+            p = path_of(run_dir, it)
+            if p.is_file() and core.read_record(p, kind).get("status") == "item_error":
+                errors.append(it["id"])
+    if errors:  # section 10: an item error of any kind (training or evaluation) ends the analysis; nothing is labelled
+        raise core.EngineeringStop(f"ENGINEERING STOP — ITEM ERRORS: {len(errors)} item(s), first {errors[0]}; no line is labelled")
     for it in plan_items["train"]:
         p = train_record_path(run_dir, it)
         if p.is_file():

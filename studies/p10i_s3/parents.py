@@ -61,3 +61,16 @@ def load_backbone(repo: Path, parent_suite: Path, parent: int) -> tuple[Any, str
     if digest != want:
         raise ValueError(f"backbone digest differs from the P4 record for {parent_dir(parent)}")
     return backbone, digest
+
+
+def checkpoint_files(repo: Path, parent_suite: Path) -> dict[str, str]:
+    """SHA-256 of the nine parents' ``checkpoint-1024`` state and index files (frozen inputs, section 11 item 7): checked by every task (PAUSED — IDENTITY on a difference)."""
+    from arborlm.io import file_sha256
+
+    out: dict[str, str] = {}
+    for p in range(9):
+        run_id = read_json(repo / P3_COMPACT / f"{parent_dir(p)}-control" / "manifest.json")["run_id"]
+        for name in ("state.pt", "index.json"):
+            f = parent_suite / "cells" / run_id / "checkpoint-1024" / name
+            out[str(f)] = file_sha256(f)
+    return out

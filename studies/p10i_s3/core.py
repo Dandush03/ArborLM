@@ -307,3 +307,36 @@ class EngineeringStop(RuntimeError):
 
 class FailedCell(ValueError):
     """A non-finite event as section 6.1 defines it (training loss, clipped gradient norm, trainable parameter, or enabled NLL at the registered checkpoint). Applies to calibration and DRY runs too (K1)."""
+
+
+# --- the ledger of charged time (R1: caps are cumulative across stages and resumes) ----------------------------------------------------------
+class Ledger:
+    """Charged wall seconds of every stage invocation of one run (the rehearsal's R1 rounds, R2 and R3 share one; so do the registered stages), appended to one JSON file in the public run directory (never inside a
+    working tree where it would dirty it: ``plan.require_ignored_path``). An invocation gets the cap minus what is charged; nothing left means PAUSED."""
+
+    def __init__(self, path: Path, total_seconds: float) -> None:
+        if not math.isfinite(total_seconds) or total_seconds <= 0:
+            raise ValueError("the cap must be a positive number of seconds")
+        self.path, self.total_seconds = path, float(total_seconds)
+
+    def entries(self) -> list[dict[str, Any]]:
+        if not self.path.is_file():
+            return []
+        data = read_json(self.path)
+        if not isinstance(data, dict) or data.get("study") != STUDY or data.get("kind") != "ledger":
+            raise ValueError(f"not a P10IS3 ledger: {self.path}")
+        return list(data["entries"])
+
+    def charged(self) -> float:
+        return float(sum(float(e["seconds"]) for e in self.entries()))
+
+    def remaining(self) -> float:
+        return max(0.0, self.total_seconds - self.charged())
+
+    def charge(self, stage: str, seconds: float) -> None:
+        from datetime import UTC, datetime
+
+        entries = self.entries()
+        entries.append({"stage": stage, "seconds": max(0.0, float(seconds)), "utc": datetime.now(UTC).isoformat()})
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        write_json(self.path, {"study": STUDY, "kind": "ledger", "schema": SCHEMA, "total_seconds": self.total_seconds, "entries": entries})

@@ -201,6 +201,16 @@ def verify_identity(plan: Plan, repo: Path) -> None:
         p = Path(manifest["path"])
         if not p.is_file() or file_sha256(p) != manifest["sha256"]:
             raise StageRefused(f"refused: {p} does not hash to the frozen data manifest (PAUSED — IDENTITY)")
+        # every data file the manifest lists (chunk files, the ledger, the excluded spans) and every parent checkpoint file: a difference is PAUSED — IDENTITY, never FAILED and never an item error
+        files = read_json(p)["files"]
+        for name, digest in files.items():
+            f = p.parent / name
+            if not f.is_file() or file_sha256(f) != digest:
+                raise StageRefused(f"refused: {f} does not hash to the data manifest (PAUSED — IDENTITY)")
+    for name, digest in (d.get("parent_files") or {}).items():
+        f = Path(name)
+        if not f.is_file() or file_sha256(f) != digest:
+            raise StageRefused(f"refused: parent file {f} does not hash to the plan (PAUSED — IDENTITY)")
 
 
 def verify_plan(plan: Plan, repo: Path, run_dir: Path, *, candidate: bool = False) -> None:
@@ -287,3 +297,14 @@ def load_registered_plan(repo: Path) -> Plan:
     if plan.mode != REGISTERED:
         raise StageRefused("refused: the plan in freeze/ is not a registered plan")
     return plan
+
+
+RULE_CONFIG_SECTIONS = ("setting", "duration", "rates", "thresholds", "controls", "data", "seeds")
+RULE_FILES = ("studies/p10i_s3/labels.py", "studies/p10i_s3/analysis.py", "studies/p10i_s3/calibration.py")
+
+
+def rule_hashes(repo: Path) -> dict[str, Any]:
+    """R4: the hash of the config's rule-bearing sections (the caps and the platform legitimately change) and of the files that turn measurements into labels and rates. R1 records them; the freeze refuses a difference
+    (no condition is changed after any rehearsal output exists; an amendment re-runs R1, ruling 18)."""
+    cfg = core.load_config(repo / core.CONFIG)
+    return {"config_sections": sha256(canonical_json({k: cfg[k] for k in RULE_CONFIG_SECTIONS})), "files": {f: file_sha256(repo / f) for f in RULE_FILES}}

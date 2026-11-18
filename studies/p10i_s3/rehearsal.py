@@ -141,16 +141,16 @@ def state_dir_of(run_dir: Path, plan: Plan) -> Path:
     return run_dir / "stages" / (plan.path.stem if plan.path else "plan")
 
 
-def _run_pool(plan: Plan, repo: Path, run_dir: Path, stages: Sequence[str]) -> None:
-    """Item records are shared in ``run_dir`` (a finished train item is skipped by every later plan); gate results and task marks are per plan, in ``stages/<plan>``."""
+def _run_pool(plan: Plan, repo: Path, items_dir: Path, public_dir: Path, stages: Sequence[str]) -> None:
+    """Item records are shared in ``items_dir`` (the SEALED directory: calibration and DRY values never sit in the public run directory); gate results, task marks and manifests are per plan, in ``<public>/stages/<plan>``."""
     assert plan.path is not None
     for st in stages:
-        code = run_stage(st, plan, repo, run_dir, plan.path, mode=plan.mode, identity={"mode": plan.mode}, state_dir=state_dir_of(run_dir, plan))
+        code = run_stage(st, plan, repo, items_dir, plan.path, mode=plan.mode, identity={"mode": plan.mode}, state_dir=state_dir_of(public_dir, plan))
         if code != 0:
             raise core.EngineeringStop(f"ENGINEERING STOP — stage {st} of {plan.path} is not COMPLETE")
 
 
-def _curves(run_dir: Path, plan_items: Mapping[str, Sequence[Mapping[str, Any]]], arm: str, regime: str, rates: Sequence[float], cells: Sequence[int], ck: Sequence[int]) -> calibration.Curves:
+def _curves(items_dir: Path, plan_items: Mapping[str, Sequence[Mapping[str, Any]]], arm: str, regime: str, rates: Sequence[float], cells: Sequence[int], ck: Sequence[int]) -> calibration.Curves:
     """curves[rate][cell][duration] from the rate-search records: None where the run failed before that checkpoint (a non-finite event, K1) or its NLL is non-finite (ruling 5)."""
     ev = {i["id"]: i for i in plan_items["eval"]}
     out: dict[float, dict[int, dict[int, float | None]]] = {}
@@ -160,7 +160,7 @@ def _curves(run_dir: Path, plan_items: Mapping[str, Sequence[Mapping[str, Any]]]
             out[r][c] = {}
             for u in ck:
                 it = ev[items.eval_id(arm, regime, r, c, u) + "|rs"]
-                p = items.eval_record_path(run_dir, it)
+                p = items.eval_record_path(items_dir, it)
                 if not p.is_file():
                     raise core.EngineeringStop(f"ENGINEERING STOP — missing calibration evaluation {it['id']}")
                 rec = core.read_record(p, "eval")
@@ -168,10 +168,18 @@ def _curves(run_dir: Path, plan_items: Mapping[str, Sequence[Mapping[str, Any]]]
     return out
 
 
+def sealed_dir_for(sealed_path: Path) -> Path:
+    return sealed_path.parent / "items"
+
+
 def run_r1(repo: Path, run_dir: Path, cfg_override: Mapping[str, Any], *, synthetic: bool, sealed_path: Path, cells: Sequence[int] = (0, 1, 2)) -> dict[str, Any]:
-    """The rate search with extensions, the full control set at the selected rates, NEG-REF, the sealed archive and the public whitelist. Prints no loss value."""
+    """The rate search with extensions, the full control set at the selected rates, NEG-REF, the sealed archive and the public whitelist. Prints no loss value. Item records (every calibration NLL) are written under the
+    sealed directory beside the archive, outside the repository (B4); ``run_dir`` holds plans, manifests and gate results only."""
+    sealed_dir = sealed_dir_for(sealed_path)
+    calibration.require_outside_repo(sealed_dir, repo, allow_inside_repo=synthetic)
     cfg = copy.deepcopy(dict(core.load_config(repo / core.CONFIG)))
     deep_update(cfg, cfg_override)
+    rules_before = planmod.rule_hashes(repo)
     ck = [int(x) for x in cfg["duration"]["checkpoints"]]
     u = int(cfg["duration"]["u_star"])
     tol, maxext = float(cfg["rates"]["tie_tolerance"]), int(cfg["rates"]["max_extensions_per_side"])
@@ -179,17 +187,16 @@ def run_r1(repo: Path, run_dir: Path, cfg_override: Mapping[str, Any], *, synthe
     up, down = [float(x) for x in cfg["rates"]["extension_up"]], [float(x) for x in cfg["rates"]["extension_down"]]
     ams = calibration.ARM_REGIMES
     rates: dict[tuple[str, str], list[float]] = {ag: list(base_grid) for ag in ams}
-    gate_profile = "test" if synthetic else "calibration"
     profile = "test" if synthetic else "calibration"
     started = time.monotonic()
     dummy_rt = {"rates": {f"{a}|{g}": {str(d): base_grid[0] for d in ck} for a, g in ams}, "edge": {f"{a}|{g}": False for a, g in ams}}
     for rnd in range(maxext + 1):
         it = calibration_items(cfg, rates, cells, profile=profile)
-        plan = rehearsal_plan(repo, run_dir, f"r1-round{rnd}", cfg_override, it, dummy_rt, synthetic=synthetic, gate_profile=gate_profile)
+        plan = rehearsal_plan(repo, run_dir, f"r1-round{rnd}", cfg_override, it, dummy_rt, synthetic=synthetic, gate_profile=profile)
         if rnd == 0:
-            _run_pool(plan, repo, run_dir, ("gates",))
-        _run_pool(plan, repo, run_dir, ("train", "eval"))
-        curves_by = {ag: _curves(run_dir, it, ag[0], ag[1], rates[ag], cells, ck) for ag in ams}
+            _run_pool(plan, repo, sealed_dir, run_dir, ("gates",))
+        _run_pool(plan, repo, sealed_dir, run_dir, ("train", "eval"))
+        curves_by = {ag: _curves(sealed_dir, it, ag[0], ag[1], rates[ag], cells, ck) for ag in ams}
         grew = False
         for ag in ams:
             nxt = calibration.extension_needed(curves_by[ag], ck, base_grid, up, down, tol, maxext)
@@ -202,32 +209,36 @@ def run_r1(repo: Path, run_dir: Path, cfg_override: Mapping[str, Any], *, synthe
     rt = calibration.rate_table(curves_by, ck, u, tol)
     # the full control set on the selected-rate runs, exactly as the registered plan would run them (calibration cells)
     full_items = items.registered_items(cfg, rt, profile=profile, cells=cells)
-    plan_full = rehearsal_plan(repo, run_dir, "r1-full", cfg_override, full_items, rt, synthetic=synthetic, gate_profile=gate_profile)
-    _run_pool(plan_full, repo, run_dir, ("train", "eval"))
+    plan_full = rehearsal_plan(repo, run_dir, "r1-full", cfg_override, full_items, rt, synthetic=synthetic, gate_profile=profile)
+    _run_pool(plan_full, repo, sealed_dir, run_dir, ("train", "eval"))
     res = resources_for(plan_full, repo, cfg_for(plan_full, repo))
     bases: dict[str, dict[str, float]] = {}
     for p in sorted({core.calibration_parent(c) if profile == "calibration" else core.parent_of(c) for c in cells}):
         e = model.evaluate(model.build_model(copy.deepcopy(res.backbone(p)), core.BASE, 0), res.panels["calibration"], expected_targets=res.expected_targets)
         bases[str(p)] = {"enabled": e, "replay": e}
-    reg = items.collect_registry(run_dir, full_items, bases)
+    reg = items.collect_registry(sealed_dir, full_items, bases)
     cell_parent = {c: (core.calibration_parent(c) if profile == "calibration" else core.parent_of(c)) for c in cells}
     th = core.Thresholds.from_config(cfg).scaled(len(cells))
     stats = analysis.analyse(reg, rt, cfg, cells=cell_parent, th=th, bitwise=False, calibration_parents=())
-    neg = neg_ref_all(cfg, res, full_items, run_dir, rt, profile)
+    neg = neg_ref_all(cfg, res, full_items, sealed_dir, rt, profile)
     sealed = calibration.sealed_bytes(curves_by, {"statistics": stats, "neg_ref": neg, "rate_table": rt})
     sha = calibration.write_sealed(sealed_path, repo, sealed, allow_inside_repo=synthetic)
-    storage = _storage(run_dir)
+    storage = _storage(sealed_dir)
     gates_rec = _gate_summary(run_dir, plan_full, neg)
     public = calibration.public_summary(curves_by, cfg, gates=gates_rec, timing={"r1_wall_seconds": time.monotonic() - started}, storage=storage, sealed_sha256=sha)
     public["rounds_extended"] = {f"{a}|{g}": len(rates[(a, g)]) - len(base_grid) for a, g in ams}
     public["caps_provisional"] = True
     public["stages"] = {"R1": {"status": "COMPLETE"}}
+    rules_after = planmod.rule_hashes(repo)
+    if rules_after != rules_before:
+        raise core.EngineeringStop("ENGINEERING STOP — a rule-bearing file or configuration section changed during R1")
+    public["rule_hashes"] = rules_after  # R4: the freeze refuses if any differs
     core.write_record(run_dir / "rehearsal_public.json", public, overwrite=True)
     print(json.dumps({"rehearsal_public": str(run_dir / "rehearsal_public.json"), "sealed_sha256": sha, "sealed_path": str(sealed_path)}))
     return public
 
 
-def neg_ref_all(cfg: Mapping[str, Any], res: items.Resources, plan_items: Mapping[str, Sequence[Mapping[str, Any]]], run_dir: Path, rt: Mapping[str, Any], profile: str) -> dict[str, Any]:
+def neg_ref_all(cfg: Mapping[str, Any], res: items.Resources, plan_items: Mapping[str, Sequence[Mapping[str, Any]]], items_dir: Path, rt: Mapping[str, Any], profile: str) -> dict[str, Any]:
     """NEG-REF from every rehearsal M-TREE checkpoint of the selected-rate runs: P_all, P_used, X and X_mean must be 0 within 1e-6 and no per-cell D2 or D3 (ruling 9). The values go to the sealed archive; the public file gets pass or fail."""
     th = core.Thresholds.from_config(cfg)
     seeds = core.Seeds(profile, cfg)
@@ -239,15 +250,15 @@ def neg_ref_all(cfg: Mapping[str, Any], res: items.Resources, plan_items: Mappin
         tr = [t for t in plan_items["train"] if t["id"] == it["train"]][0]
         m = items._build(res, it, seeds.init(int(it["cell"])))
         ident = items._identity({**tr})
-        model.restore_snapshot(items._paths(run_dir, it["train"]) / "snapshots", m, int(it["update"]), ident)
+        model.restore_snapshot(items._paths(items_dir, it["train"]) / "snapshots", m, int(it["update"]), ident)
         r = planted.neg_ref_check(m, res.panels["calibration"], seeds, th, cell=int(it["cell"]))
         out[it["id"]] = r
         ok = ok and r["passed"]
     return {"passed": ok, "cells": out}
 
 
-def _storage(run_dir: Path) -> dict[str, Any]:
-    sizes = [p.stat().st_size for p in run_dir.rglob("state.pt")]
+def _storage(items_dir: Path) -> dict[str, Any]:
+    sizes = [p.stat().st_size for p in items_dir.rglob("state.pt")]
     return {"snapshots": len(sizes), "total_bytes": sum(sizes), "bytes_per_snapshot_mean": (sum(sizes) / len(sizes)) if sizes else None}
 
 
@@ -265,39 +276,60 @@ def _gate_summary(run_dir: Path, plan: Plan, neg: Mapping[str, Any]) -> dict[str
     return out
 
 
-# --- R2: cost -----------------------------------------------------------------------------------------------------------------------------
+# --- R2: cost (R5) ------------------------------------------------------------------------------------------------------------------------
 def run_r2(repo: Path, run_dir: Path, cfg_override: Mapping[str, Any], *, synthetic: bool, updates: int = 50) -> dict[str, Any]:
-    """Seconds per update per arm, seconds per evaluation (enabled, the exhaustive read) and bytes per snapshot, at the ordinary load (the 1-minute load average is recorded; LOADED above 4 is a mark on a cost record and decides nothing)."""
+    """R2 measured the way the caps need it (R5): worker subprocesses, each configured (one thread), on the registry's dry-rehearsal seeds; one worker alone per arm, then k = the registered worker count together (arms in
+    turn), so every unit cost carries the parallel slowdown; the time of a full read set with its replay is measured, not only the enabled read. Writes ``r2.json`` with unit costs only (timings: no loss value); the cap is computed
+    from it by ``candidate-plan`` (``cost.project_hours``). The load average is recorded; LOADED above 4 is a mark on a cost record and decides nothing."""
     import os
-    import tempfile
+    import sys
+
+    from . import cost, runner
+    from .stages import safe
 
     cfg = copy.deepcopy(dict(core.load_config(repo / core.CONFIG)))
     deep_update(cfg, cfg_override)
-    plan = rehearsal_plan(repo, run_dir, "r2", cfg_override, {"train": [], "eval": []}, {"rates": {}, "edge": {}}, synthetic=synthetic, gate_profile="test")
-    res = resources_for(plan, repo, cfg_for(plan, repo))
-    timing: dict[str, Any] = {"load_average_1min": os.getloadavg()[0]}
-    timing["LOADED"] = timing["load_average_1min"] > float(cfg["thresholds"]["loaded_load_average"])
-    with tempfile.TemporaryDirectory(dir=run_dir) as tmp:
-        for arm in core.ARMS:
-            m = model.build_model(copy.deepcopy(res.backbone(0)), arm, 330392)
-            stream = model.Stream(res.rows[core.REP], core.test_seed(1), fresh=False)
-            t0 = time.monotonic()
-            r = model.train_run(m, stream, 0.003, Path(tmp) / arm, [updates], updates, {"r2": arm})
-            timing[f"seconds_per_update_{arm}"] = (time.monotonic() - t0) / max(1, r["updates_done"])
-            t0 = time.monotonic()
-            model.evaluate(m, res.panels["calibration"], expected_targets=res.expected_targets)
-            timing[f"seconds_per_evaluation_{arm}"] = time.monotonic() - t0
-            if arm == core.TREE:
-                t0 = time.monotonic()
-                model.evaluate(m, res.panels["calibration"], model.Ctl("exhaustive", visit=16), expected_targets=res.expected_targets)
-                timing["seconds_per_exhaustive_evaluation_M-TREE"] = time.monotonic() - t0
-            timing[f"bytes_per_snapshot_{arm}"] = r["bytes"]
-    rec = {"timing": timing, "note": "descriptive records of this implementation on this machine; not an efficiency result; the parallel slowdown is not measured here"}
-    write_json(run_dir / "r2.json", rec)
+    k = int(cfg["resources"]["workers"])
+    plan = rehearsal_plan(repo, run_dir, "r2", cfg_override, {"train": [], "eval": []}, {"rates": {}, "edge": {}}, synthetic=synthetic, gate_profile="dry", extra={"r2_updates": updates})
+    assert plan.path is not None
+    ledger = core.Ledger(run_dir / "ledger.json", plan.cap_seconds("r2"))
+    planmod.require_ignored_path(repo, ledger.path)
+    out_dir = run_dir / "r2"
+    base = (sys.executable, "-m", "studies.p10i_s3.stages", "work", "r2probe", "--run-dir", str(run_dir), "--plan", str(plan.path), "--repo", str(repo))
+
+    def tasks(names: Sequence[tuple[str, str]]) -> list[runner.Task]:
+        return [runner.Task(label, (*base, "--arm", arm, "--out", str(out_dir / f"{safe(label)}.json")), out_dir / f"{safe(label)}.json", out_dir / f"{safe(label)}.failed", out_dir / f"{safe(label)}.log") for label, arm in names]
+
+    load = os.getloadavg()[0]
+    single: dict[str, dict[str, float]] = {}
+    spent = 0.0
+    for arm in core.ARMS:  # one worker alone
+        t = tasks([(f"single-{arm}", arm)])
+        o, sec = runner.run_tasks(t, workers=1, cap_seconds=max(1.0, ledger.remaining()), rss_worker_bytes=int(plan.data["rss_worker_bytes"]), rss_aggregate_bytes=int(plan.data["rss_aggregate_bytes"]), run_dir=run_dir)
+        spent += sec
+        if o[t[0].label]["status"] != runner.COMPLETED:
+            raise core.EngineeringStop(f"ENGINEERING STOP — R2 probe {t[0].label}: {o[t[0].label]}")
+        single[arm] = read_json_(t[0].result_path)
+    par_names = [(f"parallel-{i}-{core.ARMS[i % 3]}", core.ARMS[i % 3]) for i in range(max(k, 3))]  # k workers at once (at least one probe of every arm)
+    t = tasks(par_names)
+    o, sec = runner.run_tasks(t, workers=k, cap_seconds=max(1.0, ledger.remaining()), rss_worker_bytes=int(plan.data["rss_worker_bytes"]), rss_aggregate_bytes=int(plan.data["rss_aggregate_bytes"]), run_dir=run_dir)
+    spent += sec
+    if any(v["status"] != runner.COMPLETED for v in o.values()):
+        raise core.EngineeringStop(f"ENGINEERING STOP — an R2 probe did not complete: {o}")
+    ledger.charge("R2", spent)
+    unit = cost.unit_costs_from_probes(single, [read_json_(x.result_path) for x in t], k)
+    rec = {**core.envelope("rehearsal_public"), "unit_costs": unit, "single_worker": single, "load_average_1min": load, "LOADED": load > float(cfg["thresholds"]["loaded_load_average"]), "seeds": "the registry's dry-rehearsal values (init 330392, dry stream and permutation seeds)", "probe_updates": updates, "charged_seconds": spent, "note": "descriptive records of this implementation on this machine; not an efficiency result"}
+    core.write_record(run_dir / "r2.json", rec, overwrite=True)
     return rec
 
 
-# --- R3: the counting rehearsal ------------------------------------------------------------------------------------------------------------
+def read_json_(path: Path) -> dict[str, Any]:
+    from arborlm.io import read_json
+
+    return dict(read_json(path))
+
+
+# --- R3: the counting rehearsal through the REGISTERED driver (R6) -----------------------------------------------------------------------------
 DRY_OVERRIDE: dict[str, Any] = {"duration": {"checkpoints": [8, 16, 24, 32], "u_star": 32}, "setting": {"panel_chunks": 8}}
 
 
@@ -308,8 +340,39 @@ def dry_rate_table(rt: Mapping[str, Any], real_ck: Sequence[int], dry_ck: Sequen
     return out
 
 
-def run_r3(repo: Path, run_dir: Path, candidate: Plan, *, synthetic: bool) -> dict[str, Any]:
-    """Every registered stage end to end against the candidate plan's rate table in the DRY profile (one cell: init 330392, streams 269201 + g, DRY permutation seeds; shortened checkpoints), the candidate plan file's SHA-256 recorded."""
+def dry_items(candidate_items: Mapping[str, Sequence[Mapping[str, Any]]], real_ck: Sequence[int], dry_ck: Sequence[int], cfg: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    """The one documented pure function that maps the candidate plan's items to the DRY profile: keep cell 0 only; checkpoints and run lengths mapped by position (real_ck[i] -> dry_ck[i], 0 stays 0); the initialisation
+    seed is the registry's dry-rehearsal value and the stream seed its dry stream of the regime; the profile is ``dry``. Rates, arms, regimes, roles and read sets are the candidate's own."""
+    to_dry = {0: 0, **{int(r): int(d) for r, d in zip(real_ck, dry_ck, strict=True)}}
+    seeds = core.Seeds("dry", cfg)
+    trains, kept = [], set()
+    for t in candidate_items["train"]:
+        if t["cell"] != 0:
+            continue
+        kept.add(t["id"])
+        trains.append({**t, "profile": "dry", "max_update": to_dry[int(t["max_update"])], "snapshots": [to_dry[int(x)] for x in t["snapshots"]], "init_seed": seeds.init(0), "stream_seed": seeds.stream(0, core.REGIME_INDEX[t["regime"]])})
+    evals = []
+    for e in candidate_items["eval"]:
+        if e["train"] in kept:
+            u = to_dry[int(e["update"])]
+            evals.append({**e, "profile": "dry", "update": u, "id": items.eval_id(e["arm"], e["regime"], e["rate"], e["cell"], u)})
+    return {"train": trains, "eval": evals}
+
+
+def run_r3(repo: Path, run_dir: Path, sealed_dir: Path, candidate: Plan, *, synthetic: bool) -> dict[str, Any]:
+    """Every registered stage, through the registered driver's own functions (``stages.execute_stage``: gates, train, eval, analysis, report), against the CANDIDATE plan file: the candidate is loaded and verified
+    (``verify_plan(candidate=True)``: its identities, items and caps), its items are mapped to the DRY profile by ``dry_items``, and the process is configured and the platform checked first, as the registered entry
+    point does (R6: this would have caught B1). Item records and the DRY analysis go to the sealed directory; the public report renders the whitelist only (ruling 15)."""
+    from . import gates
+    from .stages import execute_stage
+
+    calibration.require_outside_repo(sealed_dir, repo, allow_inside_repo=synthetic)
+    gates.configure_process()
+    bad = gates.platform_problems()
+    if bad and not synthetic:
+        raise StageRefused("refused: not the platform of record: " + "; ".join(bad))
+    if candidate.mode == planmod.REGISTERED:
+        planmod.verify_plan(candidate, repo, Path(candidate.data["run_dir"]), candidate=True)
     cfg = core.load_config(repo / core.CONFIG)
     real_ck = [int(x) for x in cfg["duration"]["checkpoints"]]
     over = copy.deepcopy(DRY_OVERRIDE) if not synthetic else deep_update(copy.deepcopy(SYNTHETIC_OVERRIDE), {"duration": {"checkpoints": [2, 4, 6, 8], "u_star": 8}})
@@ -317,25 +380,25 @@ def run_r3(repo: Path, run_dir: Path, candidate: Plan, *, synthetic: bool) -> di
     rt = dry_rate_table(candidate.rate_table, real_ck, dry_ck)
     dcfg = copy.deepcopy(dict(cfg))
     deep_update(dcfg, over)
-    it = items.registered_items(dcfg, rt, profile="dry", cells=[0])
-    plan = rehearsal_plan(repo, run_dir, "r3", over, it, rt, synthetic=synthetic, gate_profile="dry", extra={k: candidate.data[k] for k in ("data_manifest", "data_dir", "parent_suite") if k in candidate.data})
-    _run_pool(plan, repo, run_dir, ("gates", "train", "eval"))
-    full = copy.deepcopy(dict(core.load_config(repo / core.CONFIG)))
-    deep_update(full, over)
-    res = resources_for(plan, repo, cfg_for(plan, repo))
-    base = {"0": {"enabled": e, "replay": e} for e in [model.evaluate(model.build_model(copy.deepcopy(res.backbone(0)), core.BASE, 0), res.panels["calibration"], expected_targets=res.expected_targets)]}
-    reg = items.collect_registry(run_dir, it, base)
-    result = analysis.analyse(reg, rt, dcfg, cells={0: 0}, th=core.Thresholds.from_config(dcfg).scaled(1), bitwise=False)
-    from . import report
-
-    text = report.render(result, "dry")
-    (run_dir / "r3_report.md").write_text(text, encoding="utf-8")
-    rec = {"status": "COMPLETE", "candidate_plan_sha256_of_content": candidate.sha256(), "plan_file_sha256": file_sha256(candidate.path) if candidate.path else None, "stages": ["gates", "train", "eval", "analysis", "report"]}
+    mapped = dry_items(candidate.data["items"], real_ck, dry_ck, dcfg) if candidate.data["items"]["train"] else items.registered_items(dcfg, rt, profile="dry", cells=[0])
+    extra = {k: candidate.data[k] for k in ("data_manifest", "data_dir", "parent_suite", "parent_files") if k in candidate.data}
+    plan = rehearsal_plan(repo, run_dir, "r3", over, mapped, rt, synthetic=synthetic, gate_profile="dry", extra=extra)
+    assert plan.path is not None
+    state = state_dir_of(run_dir, plan)
+    ident = {"mode": "dry", "candidate_plan_file_sha256": file_sha256(candidate.path) if candidate.path else None}
+    for st in ("gates", "train", "eval", "analysis", "report"):
+        code = execute_stage(st, plan, repo, run_dir, plan.path, mode=plan.mode, identity=ident, items_dir=sealed_dir, state_dir=state, out_dir=sealed_dir, whitelist_only=True)
+        if code != 0:
+            raise core.EngineeringStop(f"ENGINEERING STOP — R3 stage {st} did not complete (exit {code})")
+    rec = {"status": "COMPLETE", "plan_file_sha256": file_sha256(candidate.path) if candidate.path else None, "stages": ["gates", "train", "eval", "analysis", "report"], "driver": "stages.execute_stage (the registered driver's functions), DRY profile"}
     write_json(run_dir / "r3.json", rec)
     return rec
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
+    from . import gates
+
+    gates.configure_process()
     repo = Path(args.repo or core.repo_root())
     run_dir = Path(args.run_dir).resolve()
     planmod.require_ignored_run_dir(repo, run_dir)
@@ -343,16 +406,21 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     synthetic = args.phase == "synthetic"
     over = SYNTHETIC_OVERRIDE if synthetic else {}
     if args.data_manifest:
+        from . import parents
+
         dm = Path(args.data_manifest).resolve()
-        _EXTRA.update({"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_suite": str(Path(args.parent_suite).resolve())})
+        suite = Path(args.parent_suite).resolve()
+        _EXTRA.update({"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_suite": str(suite), "parent_files": parents.checkpoint_files(repo, suite)})
     if args.phase in ("r1", "synthetic"):
         run_r1(repo, run_dir, over, synthetic=synthetic, sealed_path=Path(args.sealed_path))
         return 0
     if args.phase == "r2":
         run_r2(repo, run_dir, over, synthetic=False)
         return 0
+    if not args.sealed_dir:
+        raise StageRefused("refused: r3 needs --sealed-dir (outside the repository) for the DRY item records")
     cand = Plan.load(Path(args.plan) if args.plan else repo / core.PLAN)
-    rec = run_r3(repo, run_dir, cand, synthetic=False)
+    rec = run_r3(repo, run_dir, Path(args.sealed_dir).resolve(), cand, synthetic=False)
     pub_path = run_dir / "rehearsal_public.json"
     pub = core.read_record(pub_path, "rehearsal_public") if pub_path.is_file() else {**core.envelope("rehearsal_public"), "stages": {}}
     pub["stages"] = {**pub.get("stages", {}), "R3": {"status": "COMPLETE"}, "R2": {"status": "COMPLETE" if (run_dir / "r2.json").is_file() else "MISSING"}}

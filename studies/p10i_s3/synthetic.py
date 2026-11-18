@@ -27,6 +27,8 @@ class Spec:
     joint_offset: float = 0.0
     bad_disabled: Sequence[int] = ()  # cells whose disabled read != BASE
     bad_replay: Sequence[int] = ()
+    bad_ckpts: Sequence[int] | None = None  # checkpoints at which bad_disabled / bad_replay act (None: every checkpoint)
+    step0: float | None = None  # the step-0 enabled NLL (a checkpoint); None: no step-0 keys
 
 
 def _per_cell(v: Any, i: int) -> Any:
@@ -51,12 +53,14 @@ def registry(cfg: Mapping[str, Any], specs: Mapping[tuple[str, str], Spec], *, r
                     continue
                 reg[core.run_key(a, g, r, c)] = {"status": "ok"}
                 gain_end = float(_per_cell(s.gain, c))
+                if s.step0 is not None:
+                    reg[core.nll_key(a, g, r, c, 0, core.READ_ENABLED)] = s.step0
                 for k in ckpts:
                     h = B - gain_end * float(s.curve[k])
                     put = lambda read, v, d=0, k=k: reg.__setitem__(core.nll_key(a, g, r, c, k, read, d), v)  # noqa: E731
                     put(core.READ_ENABLED, h)
-                    put(core.READ_REPLAY, h + (1e-3 if c in s.bad_replay else 0.0))
-                    put(core.READ_DISABLED, B + (1e-3 if c in s.bad_disabled else 0.0))
+                    put(core.READ_REPLAY, h + (1e-3 if c in s.bad_replay and (s.bad_ckpts is None or k in s.bad_ckpts) else 0.0))
+                    put(core.READ_DISABLED, B + (1e-3 if c in s.bad_disabled and (s.bad_ckpts is None or k in s.bad_ckpts) else 0.0))
                     p, xm = _per_cell(s.p, c), _per_cell(s.xm, c)
                     if a in (TREE, FLAT):
                         put(core.READ_P_ALL, None if p is None else h + p)
