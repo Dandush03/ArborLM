@@ -77,6 +77,20 @@ def c1_pairing(p: Any, ctx: pipeline.QContext, tok: Any) -> dict[str, Any]:
     return {"sigma": sigma, "pairs_sha256": pairs_digest(pairs), "n": n, "whole_string": prefreeze.check_combined_whole_string(tok, p.panels["E_C"], pairs)}
 
 
+class PartView:
+    """What P10-S2's data-step functions read of a partition, and nothing else (each attribute verified by reading the function that uses it):
+    * ``prefreeze.tokenization_checks`` reads ``part.panels`` (``part.panels.values()``; ``part.panels["E_A"]`` and ``["E_B"]``) and ``part.gold_pool`` (``part.gold_pool.values()``, each a list of items with ``refs``);
+    * ``prefreeze.check_combined_whole_string`` takes the E_C item list, not the partition.
+    ``gold_pool`` is EMPTY for every capability: ADR-0025 section 5.2 ("the design is teacher-only"; MA-gold and TEACHER-EQUIVALENT-TO-GOLD removed; the bundle's gold pool is empty) and section 4.1 (the training rows are
+    the teachers' accepted outputs only). The gold references of the panels are in ``panels`` (as references), which is the most conservative reading: they are still checked by test (b). An attribute not listed here
+    raises ``AttributeError`` at once (no ``__getattr__`` fall-through to the partition)."""
+
+    def __init__(self, p: Any) -> None:
+        self.panels = p.panels
+        self.gold_pool: dict[str, list[Item]] = {c: [] for c in core.TASKS}
+        self.vocab = p.vocab
+
+
 def make_bundle(
     ctx: pipeline.QContext, p: Any, tok: Any, student: Any, accepted: Mapping[str, Sequence[TrainItem]], windows: Sequence[GeneralWindow], train_text: str, teacher_outputs: Mapping[str, Mapping[str, list[str]]], max_new: int, spill: Path | None,
     provenance: Mapping[str, Any], extra: Mapping[str, Any] | None = None,
@@ -88,7 +102,7 @@ def make_bundle(
     nl = tuple(tokenize_segment(tok, "\n").ids)
     bank = build_bank(tok, vocab_index, p, accepted, spill)
     gold_items: dict[str, list[TrainItem]] = {c: [] for c in core.TASKS}
-    rec: dict[str, Any] = {"tokenization": prefreeze.tokenization_checks(tok, decoder, bank, accepted, gold_items, p, teacher_outputs)}
+    rec: dict[str, Any] = {"tokenization": prefreeze.tokenization_checks(tok, decoder, bank, accepted, gold_items, PartView(p), teacher_outputs)}
     rec["c1_pairing"] = c1_pairing(p, ctx, tok)
     ctrl = core.seeded_generator(ctx.seeds["control_subsample"], "control subsample", ctx.allowed)
     ablation: dict[str, list[str]] = {}
