@@ -66,7 +66,8 @@ def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers
         return w
     w.record["hashes"] = datagen.verify_downloads(w.downloads, repo / real_world.TATOEBA_RECORD, root=repo)
     tick("hash checks")
-    w.student, hf_state, w.record["student"] = real_world.load_student(w.downloads, run_dir / "inputs")
+    save_to = None if (run_dir / "inputs/student_plain.pt").is_file() else run_dir / "inputs"  # the 538 MB converted state is written ONCE (the inputs stage), never rewritten by later stages
+    w.student, hf_state, w.record["student"] = real_world.load_student(w.downloads, save_to)
     w.tok = datagen.HFTokenizer(w.downloads)
     w.decoder = ByteDecoder(w.tok.token_bytes())
     w.record["tokenizer_conventions"] = w.tok.conventions
@@ -86,6 +87,8 @@ def make_ctx(w: real_world.RealWorld, mode: str, *, plan: planmod.Plan | None = 
     and only the teachers its items name."""
     nl = tuple(tokenize_segment(w.tok, "\n").ids) if w.tok is not None and w.student is not None else ()
     inputs = read_json(w.run_dir / "inputs/record.json") if (w.run_dir / "inputs/record.json").is_file() else {}
+    if plan is not None and not inputs:
+        raise StageRefused("refused: the inputs record is missing: the fixed-input counts (windows) cannot be skipped")
     scorer = real_world.student_scorer(w.student, w.tok, w.decoder, nl) if w.student is not None else (lambda items, p: {})
     ctx = pipeline.QContext(cfg=w.cfg, mode=mode, corpus=w.corpus, teachers=w.teachers, student_scores=scorer, run_dir=w.run_dir, ordinary_windows_left=inputs.get("ordinary_windows_left"), marker_like_windows=inputs.get("marker_like_windows"), deadline=deadline)
     if plan is not None:

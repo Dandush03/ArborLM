@@ -297,8 +297,12 @@ def test_a_registered_stage_takes_its_parameters_from_the_plan_not_the_config(tm
     plan = planmod.Plan(rec, "Q")
     w = real_world.RealWorld(cfg, ROOT, tmp_path / "run", tmp_path)
     w.teachers = {"A": FakeTeacher("A"), "B": FakeTeacher("B")}
+    with pytest.raises(core.StageRefused, match="inputs record is missing"):
+        real_stages.make_ctx(w, "registered", plan=plan)  # the window counts of the inputs stage cannot be skipped
+    (tmp_path / "run" / "inputs").mkdir(parents=True)
+    (tmp_path / "run" / "inputs" / "record.json").write_text(json.dumps({"ordinary_windows_left": 120, "marker_like_windows": 44}))
     ctx = real_stages.make_ctx(w, "registered", plan=plan)
-    assert ctx.batch_size == 16 and cfg["generation"]["batch_size"] == 32 and ctx.digest_batches == 2 and set(ctx.teachers) == {"A"}
+    assert ctx.ordinary_windows_left == 120 and ctx.marker_like_windows == 44 and ctx.batch_size == 16 and cfg["generation"]["batch_size"] == 32 and ctx.digest_batches == 2 and set(ctx.teachers) == {"A"}
     assert ctx.check_target == 150 and ctx.accepted_disjoint == 24000 and ctx.accepted_min == 10000 and ctx.block_sources == 20000
 
 

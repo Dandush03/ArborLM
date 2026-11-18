@@ -54,7 +54,7 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
     planmod.verify_plan(plan, repo, run_dir)
     planmod.require_decision_2(repo, str(freeze_commit), "T")
     core.require_ignored_run_dir(repo, run_dir)
-    problems = [p for p in os.environ.get("PYTHONPATH", "").split(os.pathsep) if p == core.DURABLE_PACKAGES]
+    problems = [p for p in os.environ.get("PYTHONPATH", "").split(os.pathsep) if p and os.path.realpath(p) == os.path.realpath(core.DURABLE_PACKAGES)]  # normalized: a trailing slash or a symlink does not slip through
     if problems:
         raise StageRefused("refused: Part T uses the lock alone (section 13 item 6): the durable package copy is on this process's PYTHONPATH")
     return plan

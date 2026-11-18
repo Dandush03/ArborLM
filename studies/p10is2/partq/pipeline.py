@@ -298,17 +298,18 @@ def step_regeneration(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     if done is not None:
         return done
     require_teachers_passed(ctx)
+    gres = _have(ctx, "generation/result.json") or {}
+    if gres.get("draws_label") == split.EXHAUSTED and not ctx.force_generation:
+        raise core.StageRefused("refused: no regeneration check: a pool ended below the minimum (DATA-EXHAUSTED); generation did not complete")
     report: dict[str, Any] = {}
     n_regen = ctx.regeneration_batches or int(ctx.cfg["generation"]["regeneration_batches"])
     src_of = {it.key: it.en for pool in p.source_pool.values() for it in pool}
     for c in core.TASKS:
-        stored: dict[int, bt.StoredBatch] = {}
-        order: list[tuple[str, int]] = []
+        order: list[tuple[Path, int]] = []  # (block directory, batch index), by file name only: no batch is read yet
         for blockdir in sorted(ctx.d(f"generation/teacher_{c}").glob("block_*")):
-            for i in bt.stored_indices(blockdir):
-                stored[len(order)] = bt.read_batch(blockdir, i)
-                order.append((blockdir.name, i))
-        idx = bt.draw_batch_indices(len(stored), n_regen, ctx.seeds["regeneration_subsample"], ctx.allowed, f"regeneration subsample, teacher {c}")  # a FRESH generator per teacher, same seed
+            order += [(blockdir, i) for i in bt.stored_indices(blockdir)]
+        idx = bt.draw_batch_indices(len(order), n_regen, ctx.seeds["regeneration_subsample"], ctx.allowed, f"regeneration subsample, teacher {c}")  # a FRESH generator per teacher, same seed
+        stored = {i: bt.read_batch(order[i][0], order[i][1]) for i in idx}  # only the drawn batches are read
         rep = bt.regeneration_check(ctx.teachers[c], stored, idx, src_of, score_tolerance=float(ctx.cfg["scoring"]["regeneration_score_tolerance"]), threads=int(ctx.cfg["generation"]["threads"]))
         report[c] = rep.to_json()
         if not rep.ok:

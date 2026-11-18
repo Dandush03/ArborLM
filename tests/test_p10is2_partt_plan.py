@@ -123,7 +123,7 @@ def test_resume_policy_non_finite_is_not_resumed_errors_are_when_the_fix_is_not_
 def test_part_t_entry_points_refuse_today(tmp_path: Path) -> None:
     assert not (ROOT / core.PLAN_T).exists() and not (ROOT / core.FREEZE_RECORD_T).exists()
     for argv in (["registered", "--stage", "train", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["work", "--stage", "evaluate", "--run-dir", str(tmp_path / "r")], ["registered", "--stage", "nonsense", "--run-dir", str(tmp_path / "r")]):
-        assert partt_stages.main(argv) == partt_stages.EXIT_REFUSED
+        assert partt_stages.main(argv) in (partt_stages.EXIT_REFUSED, partt_stages.EXIT_IDENTITY)  # a checkout with uncommitted frozen files is an identity pause, a clean one a refusal: never a run
     assert partt_stages.main(["freeze", "--measuring-rehearsal", "m", "--counting-rehearsal", "c"]) == partt_stages.EXIT_REFUSED
     assert partt_stages.main(["rehearse", "--kind", "counting", "--run-dir", str(tmp_path / "x")]) == partt_stages.EXIT_REFUSED
     assert not (tmp_path / "r").exists()
