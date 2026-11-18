@@ -146,6 +146,12 @@ def parse_ps(text: str) -> list[tuple[int, str]]:
     return out
 
 
+PROCESS_RULE = (
+    "a process is another study's when its command line contains studies/, studies., arborlm or pytest (case-insensitive) and it is not this stage's own process, one of its ancestors (the shell or launcher that started it; "
+    "never pid 1) or one of its descendants; every other matching process, including any other shell or session with ArborLM in its command line, counts"
+)
+
+
 def other_study_processes(ps: Sequence[tuple[int, str]], own_pids: Iterable[int], markers: Sequence[str]) -> list[tuple[int, str]]:
     """Section 8: processes, other than the stage's own, whose command line contains a marker (``studies/``, ``arborlm`` or ``pytest``, case-insensitive: the conservative reading). ``own_pids`` is the stage's own
     process, its ancestors (the launcher) and its descendants."""
@@ -274,7 +280,8 @@ def evaluate_quiet(readings: Mapping[str, Any], thresholds: Mapping[str, float],
 def read_quiet(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes]], cfg: Mapping[str, Any], sleep: Sleep, clock: Clock, boot_time: int | None) -> dict[str, Any]:
     """One reading of the quiet rule: the load average and the other-process list BEFORE the activity window (the window sleeps ``activity_window_seconds``), then idle time, power and boot time."""
     q = cfg["quiet"]
-    readings: dict[str, Any] = {"load": read_loadavg(run), "other_processes": [list(x) for x in read_other_processes(run, q["process_markers"])]}
+    others = read_other_processes(run, q["process_markers"])
+    readings: dict[str, Any] = {"load": read_loadavg(run), "other_processes": [list(x) for x in others], "other_process_count": len(others), "rule": PROCESS_RULE}
     readings["activity"] = sample_activity(run_b, float(q["activity_window_seconds"]), sleep, clock)
     readings["hid_idle_seconds"] = read_hid_idle(run)
     readings["power"] = read_power(run)
@@ -395,7 +402,8 @@ def hygiene_record(run: Run, directory: Path, *, file_exists: bool, add_exclusio
             return {"argv": list(argv), "status": core.NOT_CHECKABLE, "output": text[:500]}
         if rc != 0:
             return {"argv": list(argv), "status": core.NOT_READABLE, "returncode": rc, "output": text[:500]}
-        return {"argv": list(argv), "status": "READ", "output": text[:2000]}
+        # stdout only is the answer: ``mdfind`` always prints a locale line on stderr, which is recorded raw beside it and is never read as a listing
+        return {"argv": list(argv), "status": "READ", "output": so.strip()[:2000], "stderr": se.strip()[:500]}
 
     snaps = [cmd(["tmutil", "listlocalsnapshots", "/"]), cmd(["tmutil", "listlocalsnapshots", "/System/Volumes/Data"])]
     out["local_snapshots"] = snaps
@@ -414,7 +422,8 @@ def hygiene_record(run: Run, directory: Path, *, file_exists: bool, add_exclusio
     out["spotlight_status"] = sp
     mdf = cmd(["mdfind", "-onlyin", str(directory), "."])
     out["spotlight_listing"] = mdf
-    indexed = (sp["status"] == "READ" and "Indexing enabled" in sp["output"]) or (mdf["status"] == "READ" and bool(mdf["output"].strip()))
+    # ``mdutil -s`` printing "unknown indexing state" is NOT indexed (its raw text is recorded); only "Indexing enabled" or a listing of files on stdout counts as indexed
+    indexed = (sp["status"] == "READ" and "Indexing enabled" in (sp["output"] + sp.get("stderr", ""))) or (mdf["status"] == "READ" and bool(mdf["output"].strip()))
     out["spotlight_indexes_directory"] = bool(indexed)
     out["noindex_suffix"] = directory.name.endswith(".noindex")
     out["blocks_e1"] = bool(indexed)

@@ -170,6 +170,19 @@ class WriteLedger:
         return extra
 
 
+def builds_of(ledger: WriteLedger, filename: str) -> int:
+    """How many times the ledger saw the first chunk of ``filename`` reserved: the number of builds of that file (a resume that rewrites chunk 0 counts as a build)."""
+    return sum(1 for e in ledger.entries() if e["label"] == f"{filename}#chunk0" and e["note"] == "reserved before the writes")
+
+
+def guard_rebuild(ledger: WriteLedger, filename: str, nbytes: int, max_builds: int) -> None:
+    """Called BEFORE a file is deleted for a rebuild: the whole file must still fit under the cap and the file must not be built a third time. A refusal is PAUSED and the file is still there."""
+    if builds_of(ledger, filename) >= max_builds:
+        raise Paused("PAUSED — BUILD LIMIT", f"{filename} has been built {builds_of(ledger, filename)} times (at most {max_builds}): the next step is the human lead's")
+    if ledger.remaining() < nbytes:
+        raise WriteBudgetExceeded(f"a rebuild of {filename} needs {nbytes} B and {ledger.remaining()} B are left under the cap: the file is not deleted")
+
+
 def free_space(path: Path) -> int:
     """Free bytes of the volume that holds ``path`` (of its nearest existing ancestor if the directory is not made yet)."""
     p = Path(path)
@@ -244,7 +257,7 @@ def tile_digest(contents_seed: int, first: int, count: int) -> str:
     return h.hexdigest()
 
 
-def build_file(path: Path, tiles: int, contents_seed: int, ledger: WriteLedger, counter: Counter, *, chunk_bytes: int, resume: bool = False, pread: PRead = os.pread, label: str | None = None, min_free: int = 0) -> dict[str, Any]:
+def build_file(path: Path, tiles: int, contents_seed: int, ledger: WriteLedger, counter: Counter, *, chunk_bytes: int, resume: bool = False, pread: PRead = os.pread, label: str | None = None, min_free: int = 0, max_builds: int | None = None) -> dict[str, Any]:
     """Write ``tiles`` tiles to ``path`` on a ``F_NOCACHE`` descriptor in 1 MiB ``pwrite`` calls through ``ledger.write``, closing each chunk after ``F_FULLFSYNC``, then verify the chunk by an uncached read against
     the regenerated SHA-256 and the counter rule. A manifest beside the file lists the verified chunks; with ``resume`` the build continues at the first unverified chunk (rewritten bytes are charged again).
     Without ``resume`` an existing file is refused. A verification read below the counter rule is STORE NOT COLD (PAUSED); a hash difference is ENGINEERING STOP (DATA MISMATCH)."""
@@ -273,6 +286,8 @@ def build_file(path: Path, tiles: int, contents_seed: int, ledger: WriteLedger, 
         cbytes = count * layout.TILE_BYTES
         if min_free:
             require_free_space(path.parent, min_free)
+        if ci == 0 and max_builds is not None and builds_of(ledger, label) >= max_builds:
+            raise Paused("PAUSED — BUILD LIMIT", f"{label} has been built {builds_of(ledger, label)} times (at most {max_builds})")
         ledger.begin(f"{label}#chunk{ci}", cbytes)
         c0 = counter.read()
         h = hashlib.sha256()

@@ -55,6 +55,7 @@ ROOT = core.repo_root()
 def tiny_cfg() -> dict[str, Any]:
     c = copy.deepcopy(dict(CFG))
     c["device"] = {**c["device"], "store_tiles": 24, "control_tiles": 24}
+    c["budget"] = {**c["budget"], "store_file_bytes": 24 << 20}
     return c
 
 
@@ -102,7 +103,7 @@ def test_e2_store_that_cannot_be_held_cold() -> None:
         assert st.data["status"] == "ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD" and built == [1] and bench.load_stage_records(ctx)[0] == []  # one rebuild, no pass read
         reg = e2.build_registry(ctx, cfg, {})
         res = e2.labels_of(reg)
-        assert res["EQ-A"]["label"] == "ENGINEERING NOT EVALUABLE (STORE CANNOT BE HELD COLD)"
+        assert res["EQ-A"]["label"] == "NOT READ (STORE CANNOT BE HELD COLD)" and res["EQ-B"]["label"] == "ENGINEERING NOT EVALUABLE (STORE CANNOT BE HELD COLD)"
 
 
 def test_e2_pollution_recovery_rebuilds_once_within_the_cap() -> None:

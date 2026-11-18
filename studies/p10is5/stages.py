@@ -69,22 +69,24 @@ def make_cross_check(run_b: Any, run: system.Run, where: Path) -> Any:
     return cross
 
 
-def make_gate(cfg: Any, deps_run: system.Run, run_b: Any, boot_time: int | None) -> bench.QuietGate:
+def make_gate(cfg: Any, deps_run: system.Run, run_b: Any, boot_time: int | None, sleep: Any = time.sleep) -> bench.QuietGate:
     q = cfg["quiet"]
 
     def read() -> dict[str, Any]:
-        return system.read_quiet(deps_run, run_b, cfg, time.sleep, time.monotonic, boot_time)
+        return system.read_quiet(deps_run, run_b, cfg, sleep, time.monotonic, boot_time)
 
     def wait(rd: Any) -> Any:
-        return system.wait_for_quiet(rd, retry_interval=float(q["retry_interval_seconds"]), deadline=float(q["retry_deadline_seconds"]), sleep=time.sleep, clock=time.monotonic)
+        return system.wait_for_quiet(rd, retry_interval=float(q["retry_interval_seconds"]), deadline=float(q["retry_deadline_seconds"]), sleep=sleep, clock=time.monotonic)
 
-    return bench.QuietGate(read, wait, lambda: time.sleep(float(q["settle_seconds"])))
+    return bench.QuietGate(read, wait, lambda: sleep(float(q["settle_seconds"])))
 
 
 def make_deps(cfg: Any, where: Path) -> blocks.Deps:
+    """Real dependencies. Every sleep goes through ``deps.snooze`` so that waiting is not charged to the hours cap."""
     boot = system.read_boottime(system.run_command)
-    gate = make_gate(cfg, system.run_command, system.run_bytes, boot)
-    return blocks.Deps(counter=device.ProcCounter(), gate=gate, cross_check=make_cross_check(system.run_bytes, system.run_command, where))
+    deps = blocks.Deps(counter=device.ProcCounter(), gate=None, cross_check=make_cross_check(system.run_bytes, system.run_command, where))  # type: ignore[arg-type]
+    deps.gate = make_gate(cfg, system.run_command, system.run_bytes, boot, deps.snooze)
+    return deps
 
 
 def cfg_with_r1_figures(cfg: Any, r1_record: dict[str, Any]) -> Any:
@@ -106,8 +108,9 @@ def exit_for(e: BaseException) -> int:
     raise e
 
 
-def ledgers(run_dir: Path, cfg: Any, hours_total: float) -> tuple[device.WriteLedger, core.HoursLedger]:
-    return device.WriteLedger(run_dir / "write_ledger.json", int(cfg["budget"]["cap_bytes"])), core.HoursLedger(run_dir / "hours_ledger.json", hours_total * 3600.0)
+def ledgers(run_dir: Path, cfg: Any, hours_total: float | None = None) -> tuple[device.WriteLedger, core.HoursLedger]:
+    """ONE write ledger and ONE hours ledger for the whole study: they live in the study's one run directory, shared by R0, R1, M, K, E1, P, E2 (``candidate-plan`` refuses records from any other run directory)."""
+    return device.WriteLedger(run_dir / "write_ledger.json", int(cfg["budget"]["cap_bytes"])), core.hours_ledger_for(run_dir / "hours_ledger.json", cfg)
 
 
 def guard_run_dir(repo: Path, run_dir: Path) -> None:
@@ -125,7 +128,9 @@ def cmd_r0(args: argparse.Namespace) -> int:
     deps = make_deps(cfg, data_dir.parent)
     ledger, _ = ledgers(run_dir, cfg, float(cfg["caps"]["total_hours"]))
     problems = planmod.platform_problems(cfg)
-    rec = r0.run_r0(cfg, data_dir, run_dir, deps, ledger, problems)
+    _, hours = ledgers(run_dir, cfg)
+    with hours.timed("R0", "r0", deps.clock, lambda: deps.slept):
+        rec = r0.run_r0(cfg, data_dir, run_dir, deps, ledger, problems)
     print(json.dumps({"r0": str(run_dir / "r0" / "r0.json"), "platform_of_record": rec["platform_of_record"], "probe_bytes_written": rec["probe_bytes_written"], "spotlight_indexes_directory": rec["hygiene"]["spotlight_indexes_directory"]}))
     return 0
 
@@ -142,7 +147,8 @@ def cmd_r1(args: argparse.Namespace) -> int:
         raise StageRefused("refused: not the platform of record: " + "; ".join(problems))
     deps = make_deps(cfg, data_dir.parent)
     ledger, _ = ledgers(run_dir, cfg, float(cfg["caps"]["total_hours"]))
-    with torch.no_grad():
+    _, hours = ledgers(run_dir, cfg)
+    with torch.no_grad(), hours.timed("R1", "r1", deps.clock, lambda: deps.slept):
         rec = r1.run_r1(
             cfg, data_dir, run_dir, deps, ledger, now=time.time,
             hygiene=lambda ex: system.hygiene_record(deps.run, data_dir, file_exists=ex),
@@ -160,21 +166,47 @@ def worker_extra(mode: str, data_dir: Path, repo: Path, freeze_commit: str | Non
     return extra
 
 
+def inside(path: Path, run_dir: Path) -> bool:
+    try:
+        path.resolve().relative_to(run_dir.resolve())
+        return True
+    except ValueError:
+        return False
+
+
 def cmd_m(args: argparse.Namespace) -> int:
+    """M, in the study's ONE run directory (R1's record must be inside it). If CV_R cannot be determined (fewer than five valid medians for c(1) or c(3)), m_t is NOT DETERMINED and the candidate plan is refused;
+    M may be repeated ONCE (``--repeat-cause``), in the same run directory under the same ledgers, the first attempt kept as ``M_attempt1`` with its cause; a second failure ends the study as ENGINEERING NOT EVALUABLE —
+    MARGIN NOT DETERMINED."""
     repo = core.repo_root()
     cfg0 = core.load_config()
     configure_process(cfg0)
     run_dir, data_dir = Path(args.run_dir).resolve(), Path(args.data_dir).resolve()
     guard_run_dir(repo, run_dir)
+    if not inside(Path(args.r1_record), run_dir):
+        raise StageRefused("refused: R1's record is not under this run directory: the study has ONE run directory and ONE ledger")
     r1_rec = core.read_record(Path(args.r1_record), "r1")
     if not r1_rec.get("passed"):
         raise StageRefused("refused: M needs a passed R1 record (EC4: every check of section 7 passed in R1)")
+    attempt = 1
+    m_path = run_dir / "M" / "m.json"
+    if m_path.is_file():
+        prior = core.read_record(m_path, "rehearsal")
+        if (run_dir / "M_attempt1").exists():
+            raise StageRefused("refused: M has already been repeated once; a second failure ends the study (ENGINEERING NOT EVALUABLE — MARGIN NOT DETERMINED)")
+        if (prior.get("summary") or {}).get("margin") is not None:
+            raise StageRefused("refused: M determined m_t; it is not repeated")
+        if not args.repeat_cause:
+            raise StageRefused("refused: M did not determine m_t: repeat it once with --repeat-cause naming the cause")
+        (run_dir / "M").rename(run_dir / "M_attempt1")
+        core.write_record(run_dir / "M_attempt1" / "repeat_cause.json", {**core.envelope("amendment"), "cause": args.repeat_cause, "utc": core.utc_stamp()})
+        attempt = 2
     cfg = cfg_with_r1_figures(cfg0, r1_rec)
     ctx = bench.context_m(cfg, data_dir, run_dir)
     deps = make_deps(cfg, data_dir.parent)
-    _, hours = ledgers(run_dir, cfg, float(cfg["caps"]["total_hours"]))
+    _, hours = ledgers(run_dir, cfg)
     run = blocks.spawn_pass_runner(ctx, worker_extra("m", data_dir, repo, None) + ["--r1-record", str(args.r1_record)], timeout=float(cfg["quiet"]["pass_timeout_seconds"]))
-    with torch.no_grad():
+    with torch.no_grad(), hours.timed("M", "m", deps.clock, lambda: deps.slept):
         try:
             rehearsal.run_rehearsal_stage(ctx, cfg, deps, hours, lambda r: run, data_dir / "control.bin", r1_rec)
         finally:
@@ -186,9 +218,10 @@ def cmd_m(args: argparse.Namespace) -> int:
                     reg = e2.build_registry(ctx, cfg, r1_rec, m_t=m_t, timing_spread=spread)
                     reg["thresholds"]["valid_min_repeats"] = 1
                     text = report.render_report(analysis.analyse(reg), {"write_ledger_bytes": "see the write ledger", "hours": hours.charged() / 3600.0}, ctx.geometry.cells())
-            core.write_record(run_dir / "M" / "m.json", {**core.envelope("rehearsal"), "stage": "M", "caps_provisional": core.caps_provisional(cfg), "note": PROVISIONAL_NOTE if core.caps_provisional(cfg) else "", "summary": summary, "report_text": text}, overwrite=True)
-    print(json.dumps({"m": str(run_dir / "M" / "m.json"), "cv_r": summary["cv"]["cv_r"], "margin": summary["margin"]}))
-    return 0
+            outcome = "MARGIN DETERMINED" if summary["margin"] is not None else ("ENGINEERING NOT EVALUABLE — MARGIN NOT DETERMINED" if attempt == 2 else "m_t NOT DETERMINED: M may be repeated once")
+            core.write_record(run_dir / "M" / "m.json", {**core.envelope("rehearsal"), "stage": "M", "attempt": attempt, "outcome": outcome, "caps_provisional": core.caps_provisional(cfg), "note": PROVISIONAL_NOTE if core.caps_provisional(cfg) else "", "summary": summary, "report_text": text}, overwrite=True)
+    print(json.dumps({"m": str(run_dir / "M" / "m.json"), "cv_r": summary["cv"]["cv_r"], "margin": summary["margin"], "outcome": outcome}))
+    return 0 if summary["margin"] is not None else 1
 
 
 def cmd_k(args: argparse.Namespace) -> int:
@@ -206,9 +239,9 @@ def cmd_k(args: argparse.Namespace) -> int:
     r1_rec = core.read_record(Path(plan.data["records"]["r1"]["path"]), "r1")
     ctx = bench.context_from_plan("K", plan, run_dir, cfg)
     deps = make_deps(cfg, data_dir.parent)
-    _, hours = ledgers(run_dir, cfg, plan.total_cap_seconds() / 3600.0)
+    _, hours = ledgers(run_dir, cfg)
     run = blocks.spawn_pass_runner(ctx, worker_extra("k", data_dir, repo, None) + ["--plan", str(plan_path)], timeout=float(cfg["quiet"]["pass_timeout_seconds"]))
-    with torch.no_grad():
+    with torch.no_grad(), hours.timed("K", "k", deps.clock, lambda: deps.slept):
         rehearsal.run_rehearsal_stage(ctx, cfg, deps, hours, lambda r: run, Path(plan.paths["control_file"]), r1_rec)
         enumeration = rehearsal.enumerate_registered_from_plan(plan)
         analysis_ok = report_ok = False
@@ -225,11 +258,18 @@ def cmd_k(args: argparse.Namespace) -> int:
 
 # --- registered stages ----------------------------------------------------------------------------------------------------------------------
 def load_registered(args: argparse.Namespace, stage: str) -> tuple[Path, Path, Any, Any]:
+    """The process is configured FIRST (one thread, one interop thread, deterministic algorithms: the platform of record), then every precondition is checked. A refusal here is an identity refusal (exit 75, nothing written)."""
     repo = Path(args.repo) if getattr(args, "repo", None) else core.repo_root()
     run_dir = Path(args.run_dir).resolve()
-    planmod.stages_refusing_reasons(stage, repo, run_dir, args.freeze_commit)
-    cfg = core.load_config(repo / core.CONFIG)
-    plan = planmod.load_registered_plan(repo)
+    try:
+        cfg = core.load_config(repo / core.CONFIG)
+        configure_process(cfg)
+        planmod.stages_refusing_reasons(stage, repo, run_dir, args.freeze_commit)
+        plan = planmod.load_registered_plan(repo)
+    except core.IdentityRefused:
+        raise
+    except StageRefused as e:
+        raise core.IdentityRefused(str(e)) from e
     return repo, run_dir, cfg, plan
 
 
@@ -238,7 +278,9 @@ def registered_e1(args: argparse.Namespace) -> int:
     configure_process(cfg)
     deps = make_deps(cfg, Path(plan.paths["data_dir"]).parent)
     ledger, _ = ledgers(run_dir, cfg, plan.total_cap_seconds() / 3600.0)
-    rec = e2.run_e1(plan, cfg, deps, ledger, run_dir, now=time.time)
+    _, hours = ledgers(run_dir, cfg)
+    with hours.timed("E1", "e1", deps.clock, lambda: deps.slept):
+        rec = e2.run_e1(plan, cfg, deps, ledger, run_dir, now=time.time)
     print(json.dumps({"e1": rec["status"], "ledger_bytes": rec["ledger_bytes"]}))
     return 0
 
@@ -247,7 +289,8 @@ def registered_p(args: argparse.Namespace) -> int:
     repo, run_dir, cfg, plan = load_registered(args, "p")
     configure_process(cfg)
     ctx = bench.context_from_plan("E2", plan, run_dir, cfg)
-    with torch.no_grad():
+    _, hours = ledgers(run_dir, cfg)
+    with torch.no_grad(), hours.timed("P", "p", time.monotonic, lambda: 0.0):
         man = bench.write_prediction(ctx)
     print(json.dumps({"prediction": man["path"], "sha256": man["sha256"], "passes": man["passes"]}))
     return 0
@@ -262,7 +305,12 @@ def registered_e2(args: argparse.Namespace) -> int:
     ctx = bench.context_from_plan("E2", plan, run_dir, cfg)
     bench.load_prediction(ctx)  # refuses unless the SHA-256 is the one stage P recorded
     deps = make_deps(cfg, Path(plan.paths["data_dir"]).parent)
-    ledger, hours = ledgers(run_dir, cfg, plan.total_cap_seconds() / 3600.0)
+    ledger, hours = ledgers(run_dir, cfg)
+    state0 = blocks.StageState.load(ctx.stage_dir() / "state.json")
+    if args.decline_write_budget:
+        blocks.decline_write_budget(state0)
+        print(json.dumps({"e2": state0.data["status"]}))
+        return 0
     amend = None
     if args.rerun_after_stop:
         if not args.amendment or not Path(args.amendment).is_file():
@@ -283,8 +331,8 @@ def registered_analysis(args: argparse.Namespace) -> int:
     repo, run_dir, cfg, plan = load_registered(args, "analysis")
     ctx = bench.context_from_plan("E2", plan, run_dir, cfg)
     state = read_json(ctx.stage_dir() / "state.json") if (ctx.stage_dir() / "state.json").is_file() else {"status": "NOT STARTED"}
-    if state["status"] not in ("COMPLETE", "ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD"):
-        raise StageRefused(f"refused: E2's manifest says {state['status']}: the analysis reads a COMPLETE stage")
+    if state["status"] not in core.FINAL_STATUSES:
+        raise StageRefused(f"refused: E2's manifest says {state['status']}: the analysis reads a stage with a final status ({'; '.join(core.FINAL_STATUSES)})")
     r1_rec = core.read_record(Path(plan.data["records"]["r1"]["path"]), "r1")
     reg = e2.build_registry(ctx, cfg, r1_rec)
     res = e2.labels_of(reg)
@@ -297,11 +345,13 @@ def registered_report(args: argparse.Namespace) -> int:
     repo, run_dir, cfg, plan = load_registered(args, "report")
     rec = core.read_record(analysis_path(run_dir), "analysis")
     wl = device.WriteLedger(run_dir / "write_ledger.json", int(cfg["budget"]["cap_bytes"]))
-    hl = core.HoursLedger(run_dir / "hours_ledger.json", plan.total_cap_seconds())
+    hl = core.hours_ledger_for(run_dir / "hours_ledger.json", cfg)
+    r1_rec = core.read_record(Path(plan.data["records"]["r1"]["path"]), "r1")
+    record_bytes = sum(p.stat().st_size for p in run_dir.rglob("*.json") if p.is_file())  # measured; NOT charged to the 10 GB ledger
     e1rec = read_json(e2.e1_record_path(run_dir)) if e2.e1_record_path(run_dir).is_file() else {}
     after = (e1rec.get("ec3_after") or {})
     dev = {"smart_status": after.get("smart_status", core.NOT_READABLE), "free_bytes": ((after.get("free") or {}) if isinstance(after.get("free"), dict) else {}).get("free_bytes", core.NOT_READABLE), "driver_write_bytes": ((after.get("driver_since_boot") or {}) if isinstance(after.get("driver_since_boot"), dict) else {}).get("write_bytes", core.NOT_READABLE)}
-    text = report.render_report(rec["result"], {"device": dev, "write_ledger_bytes": wl.total(), "hours": round(hl.charged() / 3600.0, 3)}, [tuple(c) for c in rec["grid"]])
+    text = report.render_report(rec["result"], {"device": dev, "write_ledger_bytes": wl.total(), "hours": round(hl.charged() / 3600.0, 3), "record_bytes": record_bytes, "r1_harness": r1_rec.get("harness"), "r1_idle_figures": r1_rec.get("idle_figures")}, [tuple(c) for c in rec["grid"]])
     out = run_dir / "report" / "REPORT.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text, encoding="utf-8")
@@ -320,6 +370,24 @@ def registered_delete(args: argparse.Namespace) -> int:
     out["hygiene_after"] = system.hygiene_record(deps.run, Path(plan.paths["data_dir"]), file_exists=False)
     out["ec3_after"] = system.ec3_record(deps.run, deps.run_b, Path(plan.paths["data_dir"]), "after deletion")
     core.write_record(run_dir / "delete" / "delete.json", out, overwrite=True)
+    print(json.dumps({"deleted": {k: v["absent"] for k, v in out["deleted"].items()}, "store_retained_by_snapshot": out["hygiene_after"]["store_retained_by_snapshot"]}))
+    return 0
+
+
+def cmd_cleanup(args: argparse.Namespace) -> int:
+    """If the study stops before the freeze, R1's files (the control file and the rehearsal file) are not left on the drive: deleted, absence checked, free space and snapshots recorded. Refused once a freeze record exists
+    (then ``registered delete`` is the way) and refused without ``--confirm-study-stopped``."""
+    repo = core.repo_root()
+    cfg = core.load_config()
+    if (repo / planmod.FREEZE_RECORD).exists():
+        raise StageRefused("refused: a freeze record exists; use registered delete after the independent recomputation")
+    if not args.confirm_study_stopped:
+        raise StageRefused("refused: pass --confirm-study-stopped: this deletes R1's control file and rehearsal file")
+    data_dir, run_dir = Path(args.data_dir).resolve(), Path(args.run_dir).resolve()
+    planmod.require_data_dir_outside(repo, data_dir, str(cfg["device"]["directory_suffix"]))
+    out: dict[str, Any] = {**core.envelope("hygiene"), "utc": core.utc_stamp(), "deleted": {n: device.delete_built_file(data_dir / n) for n in ("control.bin", "rehearsal.bin")}}
+    out["hygiene_after"] = system.hygiene_record(system.run_command, data_dir, file_exists=False)
+    core.write_record(run_dir / "cleanup" / "cleanup.json", out, overwrite=True)
     print(json.dumps({"deleted": {k: v["absent"] for k, v in out["deleted"].items()}, "store_retained_by_snapshot": out["hygiene_after"]["store_retained_by_snapshot"]}))
     return 0
 
@@ -382,6 +450,7 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--run-dir", required=True)
     m.add_argument("--data-dir", required=True)
     m.add_argument("--r1-record", required=True)
+    m.add_argument("--repeat-cause", help="the recorded cause of the one permitted repeat of M")
     k = sub.add_parser("k")
     k.add_argument("--run-dir", required=True)
     k.add_argument("--data-dir", required=True)
@@ -394,6 +463,11 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--rerun-after-stop")
     r.add_argument("--amendment")
     r.add_argument("--independent-recomputation-done", action="store_true")
+    r.add_argument("--decline-write-budget", action="store_true", help="the human lead declines more writes after a PAUSE on the write cap")
+    c = sub.add_parser("cleanup", help="delete R1's files if the study stops before the freeze")
+    c.add_argument("--run-dir", required=True)
+    c.add_argument("--data-dir", required=True)
+    c.add_argument("--confirm-study-stopped", action="store_true")
     w = sub.add_parser("work-pass")
     w.add_argument("--stage", required=True, choices=("E2", "M", "K"))
     w.add_argument("--run-dir", required=True)
@@ -428,7 +502,12 @@ def main(argv: list[str] | None = None) -> int:
             return REGISTERED[args.stage](args)
         if args.command == "work-pass":
             return work_pass(args)
+        if args.command == "cleanup":
+            return cmd_cleanup(args)
         return freeze.dispatch(args)
+    except core.IdentityRefused as e:
+        print(f"{core.PAUSED_IDENTITY}: {e}", file=sys.stderr)
+        return core.IDENTITY_EXIT
     except StageRefused as e:
         print(str(e), file=sys.stderr)
         return core.IDENTITY_EXIT if args.command == "work-pass" else 2
@@ -441,6 +520,13 @@ def main(argv: list[str] | None = None) -> int:
     except analysis.AnalysisRefused as e:
         print(f"ANALYSIS REFUSED: {e}", file=sys.stderr)
         return 2
+    except Exception as e:  # noqa: BLE001 - an ordinary error is a recorded engineering stop, not a traceback
+        rd = getattr(args, "run_dir", None)
+        if rd:
+            with contextlib.suppress(OSError, ValueError):
+                core.write_record(Path(rd) / "stops" / f"unhandled_{core.utc_stamp()}.json", {**core.envelope("engineering_stop"), "cause": type(e).__name__, "detail": str(e)[:500], "command": args.command, "utc": core.utc_stamp(), "resolved": False})
+        print(f"ENGINEERING STOP ({type(e).__name__}): {e}", file=sys.stderr)
+        return core.ENGINEERING_STOP_EXIT
 
 
 if __name__ == "__main__":

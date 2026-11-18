@@ -10,6 +10,7 @@ Valid repeat: the block was quiet at its start and its end and every pass met th
 """
 
 import math
+import re
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -20,6 +21,12 @@ NS_PER_US = 1000.0
 
 class AnalysisRefused(RuntimeError):
     """The analysis REFUSES: an ENGINEERING STOP (cause) exists and nothing is labelled from the stage until it is fixed under a recorded amendment and the stage is run again."""
+
+
+def block_of(key: str) -> str:
+    """The block key a block or a pass key falls in: ``E2|r2|a1`` for ``E2|r2|a1`` and ``E2|r2|k2|s8|a1`` (a pass of attempt n belongs to its block ``a1``)."""
+    parts = key.split("|")
+    return f"{parts[0]}|{parts[1]}|a1"
 
 
 def cell_key(k: int, s: int) -> str:
@@ -68,7 +75,9 @@ def select_valid(blocks: Sequence[Mapping[str, Any]], passes: Sequence[Mapping[s
         spare_used = spare
         if verdicts[spare["key"]][0]:
             valid = valid + [spare]
-            replaced = invalid[0]
+            m = re.search(r"\|r(\d+)\|", str(spare.get("rerun_of") or ""))
+            named = [b for b in invalid if m and b["repeat"] == int(m[1])]
+            replaced = named[0] if named else invalid[0]  # a rerun replaces the block it names, else the first invalid one
     return {
         "valid": valid, "invalid": [b for b in invalid if b is not replaced], "replaced_block": None if replaced is None else replaced["key"], "spare_block": None if spare_used is None else spare_used["key"],
         "verdicts": {k: {"valid": v[0], "why": v[1]} for k, v in verdicts.items()},
@@ -85,6 +94,8 @@ def eq_a(passes: Sequence[Mapping[str, Any]], selection: Mapping[str, Any], bloc
     the first failing pass and every failing pass printed beside the same cell's pass in the replacing block, if any. There is one rule and no '4 of 5'."""
     ordered = sorted(passes, key=lambda p: p["seq"])
     failing = [p for p in ordered if p["counter_bytes"] != p["predicted_bytes"] or p.get("written_bytes", 0) != 0]
+    if not ordered:
+        return {"label": "NOT READ (NO PASS WAS RUN)", "passes": 0, "failing": [], "reason": None}
     if not failing:
         return {"label": core.EQ_A_OK, "passes": len(ordered), "failing": [], "reason": None}
     spare = next((b for b in blocks if b["key"] == selection.get("spare_block")), None)
@@ -206,7 +217,7 @@ def analyse(reg: Mapping[str, Any]) -> dict[str, Any]:
     stops = [s for s in reg.get("stops", []) if not s.get("resolved")]
     if stops:
         raise AnalysisRefused(f"ENGINEERING STOP ({stops[0].get('cause')}) is unresolved: nothing is labelled from this stage until the cause is fixed under a recorded amendment and the stage is run again")
-    covered = {s.get("key") for s in reg.get("stops", []) if s.get("resolved")}  # a stop resolved by a complete rerun on the spare covers the passes of its block (they stay in EQ-A)
+    covered = {block_of(s["key"]) for s in reg.get("stops", []) if s.get("resolved") and s.get("key")}  # a stop resolved by a complete rerun on the spare covers the passes of its block (they stay in EQ-A)
     bad = [p["key"] for p in passes if p.get("parity_ok") is False and p.get("block") not in covered]
     if bad:
         raise AnalysisRefused(f"ENGINEERING STOP (DATA MISMATCH): the page hashes of {bad[0]} differ from the prediction")
@@ -231,9 +242,13 @@ def analyse(reg: Mapping[str, Any]) -> dict[str, Any]:
 
     a_lines = eq_a(passes, selection, reg["blocks"])
     out: dict[str, Any] = {"valid_repeats": [b["key"] for b in selection["valid"]], "n_valid": n_valid, "selection": selection}
+    if manifest.get("write_budget_declined") and "WRITE BUDGET EXHAUSTED" not in general:
+        general.append("WRITE BUDGET EXHAUSTED")
     if general:
         out["EQ-A"] = {**a_lines, **not_evaluable("EQ-A", general)}
         out["EQ-A"]["figures"] = a_lines
+        if ordered_reasons(general)[0] == "STORE CANNOT BE HELD COLD":
+            out["EQ-A"]["label"] = "NOT READ (STORE CANNOT BE HELD COLD)"  # EQ-A is read only on registered passes: it is neither failed nor silently dropped
     else:
         out["EQ-A"] = a_lines
     m_t = float(th["m_t"])

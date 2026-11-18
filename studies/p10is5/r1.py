@@ -22,6 +22,11 @@ from .layout import PAGE, TILE_BYTES, TILE_PAGES, Request
 
 STEPS = ("idle", "ec3_before", "hygiene", "build", "cold", "band", "control", "rereads", "ec3_after")
 ZERO_RESULT = "NO PHYSICAL COUNTER"
+READING = (
+    "This study's reading of ADR-0028 section 7 (the lead's ruling: it stands): a counter that reads zero on an uncached read, or above 16,384 x pages, is NO PHYSICAL COUNTER; a short non-zero count is CACHE NOT DEFEATED; "
+    "a second cached pass that counts bytes is POSITIVE CONTROL FAILED; a store that cannot be held cold is STORE CANNOT BE HELD COLD; a 4 KiB amplification or a harness figure that cannot be shown is ENGINEERING STOP (CHECK NOT SHOWN). "
+    "Each is an engineering outcome, never a scientific label."
+)
 
 
 def step_path(run_dir: Path, name: str) -> Path:
@@ -218,7 +223,7 @@ def run_r1(
     # 1. the idle baseline, taken first
     st = load_step(run_dir, "idle")
     if st is None:
-        idle = system.idle_baseline(deps.run, deps.run_b, cfg, deps.sleep, deps.clock)
+        idle = system.idle_baseline(deps.run, deps.run_b, cfg, deps.snooze, deps.clock)
         if idle["status"] != "MEASURED":
             save_step(run_dir, "idle_paused", idle)
             raise Paused("PAUSED — NO IDLE BASELINE", f"{len(idle['attempts'])} windows discarded over {q['retry_deadline_seconds']} s; the readings are recorded; R1 is rescheduled")
@@ -232,8 +237,7 @@ def run_r1(
     if hygiene and load_step(run_dir, "hygiene") is None:
         h = hygiene(False)
         save_step(run_dir, "hygiene", h)
-        if h.get("blocks_e1"):
-            raise Paused("PAUSED — SPOTLIGHT INDEXES THE DIRECTORY", str(data_dir))
+        # Spotlight indexing of the directory is RECORDED here; it pauses the study before E1 (section 6), not R1.
     # 3. builds (the cap is checked by the ledger before every chunk; free space before the stage)
     bd = load_step(run_dir, "build")
     if bd is None:
@@ -245,13 +249,14 @@ def run_r1(
     cold = load_step(run_dir, "cold")
     if cold is None:
         wait_left = max(0.0, float(bd["built_at"]) + float(q["cold_wait_seconds"]) - now())
-        deps.sleep(wait_left)
+        deps.snooze(wait_left)
 
         def rebuild() -> None:
+            device.guard_rebuild(ledger, rehearsal.name, n_reh * layout.TILE_BYTES, int(b["max_builds_per_file"]))  # the whole file must fit under the cap and the file is built at most twice: BEFORE it is deleted
             device.delete_built_file(rehearsal)
-            builder(rehearsal, n_reh, int(seeds["r1_rehearsal_file_contents"]), ledger, deps.counter, chunk_bytes=chunk, pread=deps.pread, min_free=int(b["free_space_min_bytes"]))
+            builder(rehearsal, n_reh, int(seeds["r1_rehearsal_file_contents"]), ledger, deps.counter, chunk_bytes=chunk, pread=deps.pread, min_free=int(b["free_space_min_bytes"]), max_builds=int(b["max_builds_per_file"]))
 
-        cold = save_step(run_dir, "cold", device.hold_cold(rehearsal, n_reh, int(seeds["r1_rehearsal_file_contents"]), deps.counter, rebuild, lambda: deps.sleep(float(q["cold_wait_seconds"])), pread=deps.pread))
+        cold = save_step(run_dir, "cold", device.hold_cold(rehearsal, n_reh, int(seeds["r1_rehearsal_file_contents"]), deps.counter, rebuild, lambda: deps.snooze(float(q["cold_wait_seconds"])), pread=deps.pread))
     if cold["outcome"] != "COLD":
         reasons.append(core.STORE_CANNOT_BE_HELD_COLD)
     band = ctrl = None
@@ -271,6 +276,8 @@ def run_r1(
     if ec3 and load_step(run_dir, "ec3_after") is None:
         save_step(run_dir, "ec3_after", ec3("R1 after"))
     not_shown = []
+    if not st["own_check_passed"]:
+        not_shown.append("R1's own quiet check on its idle window")
     if ctrl is not None:
         if not ctrl["amplification"]["shown"]:
             not_shown.append("4 KiB amplification")
@@ -278,7 +285,7 @@ def run_r1(
     reasons = [r for r in core.REASONS_ORDER if r in set(reasons)]
     figures = st["figures"]
     rec = {
-        **core.envelope("r1"), "step": "final", "not_evaluable_reasons": reasons, "checks_not_shown": not_shown, "passed": not reasons and not not_shown, "idle_figures": figures, "idle_own_check_passed": st["own_check_passed"], "cold": cold["outcome"],
+        **core.envelope("r1"), "step": "final", "reading_of_adr_section_7": READING, "not_evaluable_reasons": reasons, "checks_not_shown": not_shown, "passed": not reasons and not not_shown, "idle_figures": figures, "idle_own_check_passed": st["own_check_passed"], "cold": cold["outcome"],
         "band_all_exact": None if band is None else band["all_exact"], "positive_control_passed": None if ctrl is None else ctrl["controls"]["positive_control_passed"], "harness": None if ctrl is None else ctrl["harness"],
         "ledger_bytes": ledger.total(), "outcome": "R1 PASSED" if not reasons and not not_shown else (f"{core.ENG_NOT_EVALUABLE} ({reasons[0]})" if reasons else f"ENGINEERING STOP (CHECK NOT SHOWN: {', '.join(not_shown)})"),
         "input_digest": hashlib.sha256(repr(sorted(figures.items())).encode()).hexdigest(),

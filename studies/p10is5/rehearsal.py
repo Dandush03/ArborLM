@@ -18,6 +18,7 @@ from arborlm.io import file_sha256, read_json
 from . import bench, blocks, core, e2, layout, report
 from .plan import Plan
 
+REPEATS_NEEDED = 5
 REHEARSAL_STAGES = ("prediction", "harness_figure", "blocks", "analysis", "report", "registered_enumeration")
 
 
@@ -36,10 +37,11 @@ def cv_r(passes: Sequence[Mapping[str, Any]], blks: Sequence[Mapping[str, Any]])
                 else:
                     left_out.append(p["key"])
         c = core.cv(list(meds.values()))
-        out["cells"][f"c({s})"] = {"medians_ns": {str(r): v for r, v in sorted(meds.items())}, "cv": c, "left_out": left_out}
-        if c is not None:
+        enough = len(meds) >= REPEATS_NEEDED
+        out["cells"][f"c({s})"] = {"medians_ns": {str(r): v for r, v in sorted(meds.items())}, "cv": c if enough else None, "left_out": left_out, "valid_medians": len(meds)}
+        if c is not None and enough:
             cvs.append(c)
-    out["cv_r"] = max(cvs) if len(cvs) == 2 else None
+    out["cv_r"] = max(cvs) if len(cvs) == 2 else None  # NOT DETERMINED unless all five repeats gave a valid median for both c(1) and c(3)
     return out
 
 

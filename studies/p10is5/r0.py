@@ -123,7 +123,7 @@ def run_r0(cfg: Mapping[str, Any], data_dir: Path, run_dir: Path, deps: blocks.D
     counters["disk0_driver"] = system.read_driver(deps.run_b) or core.NOT_READABLE
     if int(b["probe_bytes"]) < PROBE_A_BYTES + PROBE_B_BYTES + PROBE_C_BYTES:
         raise core.EngineeringStop("CONFIG", "the probe budget is below the three probes")
-    probes = {} if hyg["blocks_e1"] or not counters["process"]["readable"] else {"probe_1": probe_a(data_dir, ledger, deps), "probe_2": probe_b(data_dir, ledger, deps), "probe_3": probe_c(data_dir, ledger, deps)}
+    probes = {} if not counters["process"]["readable"] else {"probe_1": probe_a(data_dir, ledger, deps), "probe_2": probe_b(data_dir, ledger, deps), "probe_3": probe_c(data_dir, ledger, deps)}
     ec3_after = system.ec3_record(deps.run, deps.run_b, data_dir, "R0 after")
     rec = {
         **core.envelope("r0"), "utc": core.utc_stamp(), "platform_problems": plat_problems, "platform_of_record": not plat_problems, "fingerprint": fingerprint(deps.run), "ec3_before": ec3_before, "ec3_after": ec3_after, "free_bytes": free, "hygiene": hyg,
@@ -133,6 +133,4 @@ def run_r0(cfg: Mapping[str, Any], data_dir: Path, run_dir: Path, deps: blocks.D
     for e in (ec3_before, ec3_after):
         if not e["health_ok"]:
             raise core.Paused("PAUSED — DRIVE HEALTH", f"SMART status {e['smart_status']}: goes to the human lead")
-    if hyg["blocks_e1"]:
-        raise core.Paused("PAUSED — SPOTLIGHT INDEXES THE DIRECTORY", str(data_dir))
-    return rec
+    return rec  # Spotlight indexing of the directory is RECORDED (hygiene.blocks_e1); it pauses the study before E1 (section 6), not R0

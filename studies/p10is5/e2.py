@@ -14,6 +14,7 @@ from arborlm.io import read_json
 
 from . import analysis, bench, blocks, core, device, r1, system
 from .core import Paused
+from .e2_errors import ColdFinal
 
 
 def e1_record_path(run_dir: Path) -> Path:
@@ -50,7 +51,10 @@ def run_e1(plan: Any, cfg: Mapping[str, Any], deps: blocks.Deps, ledger: device.
     verified = len(read_json(manifest)["verified_chunks"]) if manifest.is_file() else 0
     left = max(0, int(cfg["budget"]["store_file_bytes"]) - verified * int(cfg["device"]["build_chunk_bytes"]))  # the unverified chunks are written (and charged) again
     pre = check_order(cfg, deps, store.parent, run_dir, "E1 before", needed_bytes=left, ledger=ledger, file_exists=store.exists())
-    rep = builder(store, int(files["store_tiles"]), int(sec["file_contents_seed"]), ledger, deps.counter, chunk_bytes=int(cfg["device"]["build_chunk_bytes"]), resume=manifest.is_file() or store.exists(), pread=deps.pread, min_free=int(cfg["budget"]["free_space_min_bytes"]))
+    others = system.read_other_processes(deps.run, cfg["quiet"]["process_markers"])
+    if others:  # section 8: E1 is not run alongside another study's wall-time stage
+        raise Paused("PAUSED — ANOTHER STUDY'S STAGE IS ALIVE", "; ".join(f"{pid}: {cmd[:120]}" for pid, cmd in others[:5]))
+    rep = builder(store, int(files["store_tiles"]), int(sec["file_contents_seed"]), ledger, deps.counter, chunk_bytes=int(cfg["device"]["build_chunk_bytes"]), resume=manifest.is_file() or store.exists(), pread=deps.pread, min_free=int(cfg["budget"]["free_space_min_bytes"]), max_builds=int(cfg["budget"]["max_builds_per_file"]))
     post = system.ec3_record(deps.run, deps.run_b, store.parent, "E1 after")
     rec = {**core.envelope("stage_manifest"), "stage": "E1", "status": "COMPLETE", "built_at": now(), "build": rep, "ec3_before": pre["ec3"], "ec3_after": post, "ledger_bytes": ledger.total()}
     core.write_record(done, rec)
@@ -102,51 +106,62 @@ def run_e2(
     """E2: the checks, the 10-minute wait after E1, the cold check, the harness figure, the blocks. Resumable; raises ``Paused`` or ``EngineeringStop`` after saving the state."""
     q, b = cfg["quiet"], cfg["budget"]
     state = blocks.StageState.load(ctx.stage_dir() / "state.json")
-    if state.data["status"] == "COMPLETE":
+    if state.data["status"] in (core.FINAL_STATUSES[0], core.STATUS_COLD):
         return state
+    blocks.refuse_if_final(state)
     seeds = cfg["seeds"]
     store_tiles = int(cfg["device"]["store_tiles"])
     checks = load_cold_checks(ctx)
     if checks and checks[-1]["outcome"] != "COLD":
-        state.data["status"] = "ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD"
+        state.data["status"] = core.STATUS_COLD
         state.save()
         return state
     if not checks:
         check_order(cfg, deps, ctx.file_path.parent, ctx.run_dir, "E2 before", needed_bytes=0, ledger=None, file_exists=True)
-        deps.sleep(max(0.0, e1_built_at + float(q["cold_wait_seconds"]) - now()))  # no sooner than 10 minutes after E1's last write
+        deps.snooze(max(0.0, e1_built_at + float(q["cold_wait_seconds"]) - now()))  # no sooner than 10 minutes after E1's last write
         try:
             ctx_gate_ok = deps.gate.at_start()  # the quiet check before the cold check
         except Paused as e:
-            state.data["quiet_sessions_failed"] += 1
-            state.data["quiet_exhausted"] = state.data["quiet_sessions_failed"] >= 1 + int(q["extra_sessions"])
-            state.data["status"] = e.reason
-            state.save()
+            blocks.note_quiet_failure(state, e, int(q["extra_sessions"]))
             raise
         state.note("quiet_before_cold_check", ok=ctx_gate_ok["ok"])
+        max_builds = int(b["max_builds_per_file"])
+        store_bytes = int(b["store_file_bytes"])
 
         def rebuild() -> None:
+            device.guard_rebuild(ledger, ctx.file_path.name, store_bytes, max_builds)  # room under the cap for the WHOLE file and the build count, BEFORE the file is deleted
             device.delete_built_file(ctx.file_path)
-            builder(ctx.file_path, store_tiles, int(seeds["store_contents"]), ledger, deps.counter, chunk_bytes=int(cfg["device"]["build_chunk_bytes"]), pread=deps.pread, min_free=int(b["free_space_min_bytes"]))
+            builder(ctx.file_path, store_tiles, int(seeds["store_contents"]), ledger, deps.counter, chunk_bytes=int(cfg["device"]["build_chunk_bytes"]), pread=deps.pread, min_free=int(b["free_space_min_bytes"]), max_builds=max_builds)
             state.data["rebuilds"] += 1
             state.save()
 
-        rec = device.hold_cold(ctx.file_path, store_tiles, int(seeds["store_contents"]), deps.counter, rebuild, lambda: deps.sleep(float(q["cold_wait_seconds"])), pread=deps.pread)
+        try:
+            with hours.timed("E2", "cold_check", deps.clock, lambda: deps.slept):
+                rec = device.hold_cold(ctx.file_path, store_tiles, int(seeds["store_contents"]), deps.counter, rebuild, lambda: deps.snooze(float(q["cold_wait_seconds"])), pread=deps.pread)
+        except (Paused, core.LedgerRefused) as e:
+            state.data["status"] = getattr(e, "reason", "PAUSED — CHARGED HOURS")
+            state.save()
+            raise
         save_cold_checks(ctx, [rec])
         if rec["outcome"] != "COLD":
-            state.data["status"] = "ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD"
+            state.data["status"] = core.STATUS_COLD
             state.save()
             return state
-    run_harness(ctx, cfg, deps, control)
+    with hours.timed("E2", "harness_figure", deps.clock, lambda: deps.slept):
+        run_harness(ctx, cfg, deps, control)
 
     def recover() -> None:
-        """Section 7 item 5: the file is deleted and rebuilt once (charged to the write budget), the cold wait and a cold check follow. A write that would pass the cap is PAUSED (WRITE BUDGET)."""
+        """Section 7 item 5: the whole file must fit under the cap and the build count must allow it BEFORE the file is deleted; then it is deleted and rebuilt once (charged), the cold wait and a cold check follow. A cold check
+        that fails after this one rebuild is ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD (final; EQ-A is printed NOT READ)."""
+        max_builds = int(b["max_builds_per_file"])
+        device.guard_rebuild(ledger, ctx.file_path.name, int(b["store_file_bytes"]), max_builds)
         device.delete_built_file(ctx.file_path)
-        builder(ctx.file_path, store_tiles, int(seeds["store_contents"]), ledger, deps.counter, chunk_bytes=int(cfg["device"]["build_chunk_bytes"]), pread=deps.pread, min_free=int(b["free_space_min_bytes"]))
-        deps.sleep(float(q["cold_wait_seconds"]))
+        builder(ctx.file_path, store_tiles, int(seeds["store_contents"]), ledger, deps.counter, chunk_bytes=int(cfg["device"]["build_chunk_bytes"]), pread=deps.pread, min_free=int(b["free_space_min_bytes"]), max_builds=max_builds)
+        deps.snooze(float(q["cold_wait_seconds"]))
         again = device.cold_check(ctx.file_path, store_tiles, int(seeds["store_contents"]), deps.counter, pread=deps.pread)
         save_cold_checks(ctx, [*load_cold_checks(ctx), {"first": again, "rebuilt": True, "second": None, "outcome": "COLD" if again["cold"] else f"{core.ENG_NOT_EVALUABLE} — {core.STORE_CANNOT_BE_HELD_COLD}"}])
         if not again["cold"]:
-            raise Paused("PAUSED — STORE NOT COLD", "after the recovery rebuild")
+            raise ColdFinal("after the one recovery rebuild")
 
     return blocks.run_stage_blocks(ctx, deps, state, runner_for, hours=hours, recover=recover, rerun_after_stop=rerun_after_stop, extra_sessions=int(q["extra_sessions"]))
 
@@ -171,6 +186,7 @@ def build_registry(ctx: bench.Context, cfg: Mapping[str, Any], r1_record: Mappin
 
 def labels_of(registry: Mapping[str, Any]) -> dict[str, Any]:
     """The analysis, with the stage's own refusals (an engineering stop, no pass at all) kept as refusals."""
-    if not registry["passes"] and not (registry["r1"] or {}).get("not_evaluable_reasons") and not any("STORE CANNOT BE HELD COLD" in str(c.get("outcome")) for c in registry["cold_checks"]):
+    m = registry["manifest"] or {}
+    if not registry["passes"] and not (registry["r1"] or {}).get("not_evaluable_reasons") and not any("STORE CANNOT BE HELD COLD" in str(c.get("outcome")) for c in registry["cold_checks"]) and not m.get("quiet_exhausted") and not m.get("write_budget_declined"):
         raise analysis.AnalysisRefused("no pass record exists: nothing is labelled")
     return analysis.analyse(registry)

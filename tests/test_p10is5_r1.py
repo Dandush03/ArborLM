@@ -112,14 +112,22 @@ def test_idle_baseline_is_taken_first_and_r1_is_paused_without_one() -> None:
         assert (d / "run" / "r1" / "steps" / "idle_paused.json").is_file() and clk.t <= 21600 + 600 + 700
 
 
-def test_spotlight_indexing_pauses_before_the_builds() -> None:
+def test_spotlight_indexing_is_recorded_by_r1_and_pauses_only_before_e1() -> None:
+    """ADR section 6: 'PAUSED before E1'. R1 records the hygiene result and goes on; E1 and E2 pause (``e2.check_order``)."""
     cfg = small_cfg()
     with T.scratch("r1_spot") as d:
         clk, io, deps = machine()
         calls: list[str] = []
+        rec = r1.run_r1(cfg, d / "data", d / "run", deps, device.WriteLedger(d / "l.json", 10**9), now=clk, builder=touching_builder(calls), hygiene=lambda ex: {"blocks_e1": True, "spotlight_indexes_directory": True})
+        assert calls == ["control.bin", "rehearsal.bin"] and rec["passed"]  # R1 was not paused
+        assert core.read_record(d / "run" / "r1" / "steps" / "hygiene.json")["blocks_e1"] is True
+        from studies.p10is5 import e2
+
+        fs = T.FakeSystem(clk)
+        orig = fs.run
+        deps.run = lambda a: (0, "Indexing enabled.", "") if a[0] == "mdutil" else orig(a)
         with pytest.raises(core.Paused, match="SPOTLIGHT"):
-            r1.run_r1(cfg, d / "data", d / "run", deps, device.WriteLedger(d / "l.json", 10**9), now=clk, builder=touching_builder(calls), hygiene=lambda ex: {"blocks_e1": True})
-        assert calls == []
+            e2.check_order({**cfg, "budget": {**cfg["budget"], "free_space_min_bytes": 1}}, deps, d, d, "E1 before", needed_bytes=1, ledger=None, file_exists=False)
 
 
 def test_drive_health_warning_is_paused() -> None:

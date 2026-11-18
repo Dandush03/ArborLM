@@ -225,7 +225,8 @@ def test_each_r1_reason_alone(reason: str) -> None:
 
 def test_store_cannot_be_held_cold_and_write_budget_each_alone() -> None:
     res = analysis.analyse(make_registry(cold_outcomes=["COLD", "ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD"]))
-    assert res["EQ-A"]["label"] == "ENGINEERING NOT EVALUABLE (STORE CANNOT BE HELD COLD)"
+    assert res["EQ-A"]["label"] == "NOT READ (STORE CANNOT BE HELD COLD)" and res["EQ-A"]["reasons"] == ["STORE CANNOT BE HELD COLD"]  # neither failed nor silently dropped
+    assert res["EQ-B"]["label"] == "ENGINEERING NOT EVALUABLE (STORE CANNOT BE HELD COLD)"
     res = analysis.analyse(make_registry(manifest={"write_budget_declined": True}))
     assert res["EQ-B"]["label"] == "ENGINEERING NOT EVALUABLE (WRITE BUDGET EXHAUSTED)"
     res = analysis.analyse(make_registry(cold_outcomes=["COLD"]))

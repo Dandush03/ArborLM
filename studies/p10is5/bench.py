@@ -186,7 +186,18 @@ class QuietGate:
         return self.read()
 
 
-PassRunner = Callable[[int, int, int, str, str, int], dict[str, Any]]  # (repeat, k, s, block key, role, seq) -> pass record
+PassRunner = Callable[[int, int, int, str, str, int, int], dict[str, Any]]  # (repeat, k, s, block key, role, seq, attempt) -> pass record
+
+
+def next_attempt(ctx: Context, repeat: int) -> int:
+    """1 + the highest attempt of any pass record already written for this repeat. A block that stopped halfway (a worker's exit 75, a kill, a sleep) leaves its pass records where they are (EQ-A counts every pass
+    attempted) and is run again under attempt + 1 keys: no key is ever written twice."""
+    d = ctx.stage_dir() / "passes"
+    best = 0
+    if d.is_dir():
+        for p in d.glob(f"{core.safe_name(ctx.stage)}_r{repeat}_k*_s*_a*.json"):
+            best = max(best, core.parse_pass_key(p.stem.replace("_", "|"))[4])
+    return best + 1
 
 
 def run_block(ctx: Context, repeat: int, role: str, reason: str, gate: QuietGate, run_one: PassRunner, seq_start: int, *, rerun_of: str | None = None) -> dict[str, Any]:
@@ -194,13 +205,14 @@ def run_block(ctx: Context, repeat: int, role: str, reason: str, gate: QuietGate
     the settle time). A pass whose counter is below prediction (STORE PAGES CACHED) ends the block at once (it and its block are invalid; the caller handles the recovery of section 7, item 5). The block record is written
     to the run directory. Returns it."""
     bkey = core.block_key(ctx.stage, repeat)
+    attempt = next_attempt(ctx, repeat)
     qs = gate.at_start()
     order = layout.pass_order(int(ctx.block_def(repeat)["pass_order_seed"]), ctx.geometry)
     keys: list[str] = []
     aborted: str | None = None
     seq = seq_start
     for k, s in order:
-        rec = run_one(repeat, k, s, bkey, role, seq)
+        rec = run_one(repeat, k, s, bkey, role, seq, attempt)
         seq += 1
         keys.append(rec["key"])
         if rec["counter_status"] == core.STORE_PAGES_CACHED:
@@ -209,7 +221,7 @@ def run_block(ctx: Context, repeat: int, role: str, reason: str, gate: QuietGate
     qe = gate.at_end()
     block = {
         **core.envelope("block"), "key": bkey, "stage": ctx.stage, "repeat": repeat, "role": role, "reason": reason, "rerun_of": rerun_of, "order": [list(c) for c in order], "pass_keys": keys, "complete": aborted is None and len(keys) == len(order),
-        "aborted": aborted, "quiet_start": qs, "quiet_end": qe, "passes_run": len(keys), "next_seq": seq,
+        "aborted": aborted, "attempt": attempt, "quiet_start": qs, "quiet_end": qe, "passes_run": len(keys), "next_seq": seq,
     }  # fmt: skip
     core.write_record(ctx.block_path(bkey), block)
     return block

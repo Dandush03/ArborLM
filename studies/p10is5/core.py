@@ -5,10 +5,11 @@ derivation, the statistics rules of ruling 10, and the exceptions that carry PAU
 Nothing here touches a device, a file of the study or torch. The ADR text is not a frozen input: ``spec_sha256`` is for provenance only. Seeds are never used here; they are carried as data.
 """
 
+import contextlib
 import hashlib
 import math
 import tomllib
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -62,6 +63,17 @@ PAUSED_EXIT = 76
 
 class StageRefused(RuntimeError):
     """A registered entry point refuses (no plan, no freeze, no Decision 2, a dirty tree, an identity that differs)."""
+
+
+class IdentityRefused(StageRefused):
+    """A registered entry point refused on an identity or precondition check: exit 75, PAUSED — IDENTITY, nothing written."""
+
+
+FINAL_STATUSES = (
+    "COMPLETE", "ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD", "ENGINEERING NOT EVALUABLE — MACHINE NOT QUIET", "ENGINEERING NOT EVALUABLE — WRITE BUDGET EXHAUSTED",
+)  # fmt: skip
+STATUS_MACHINE_NOT_QUIET, STATUS_WRITE_BUDGET, STATUS_COLD = FINAL_STATUSES[2], FINAL_STATUSES[3], FINAL_STATUSES[1]
+STAGE_GROUP = {"R0": "rehearsal", "R1": "rehearsal", "M": "rehearsal", "K": "rehearsal", "E1": "e1", "P": "e1", "E2": "e2", "analysis": "e2"}
 
 
 class Paused(RuntimeError):
@@ -346,12 +358,14 @@ class LedgerRefused(RuntimeError):
 
 
 class HoursLedger:
-    """Charged wall time of the study, in a JSON file under the run directory (never inside the frozen worktree: the tree stays clean). Waiting for a quiet machine is not charged."""
+    """Charged wall time of the study, in ONE JSON file in the study's one run directory (never inside the frozen worktree). Every stage is charged (R0, R1, M, K, E1, P, E2 and its cold checks and harness figure);
+    waiting for a quiet machine or for the cold wait is not charged (``slept`` is subtracted). The total cap and the per-group caps (rehearsal, e1, e2) are cumulative over stages and resumes."""
 
-    def __init__(self, path: Path, total_seconds: float) -> None:
+    def __init__(self, path: Path, total_seconds: float, group_caps: Mapping[str, float] | None = None) -> None:
         if not math.isfinite(total_seconds) or total_seconds <= 0:
             raise ValueError("the cap must be a positive number of seconds")
         self.path, self.total_seconds = path, float(total_seconds)
+        self.group_caps = {k: float(v) for k, v in (group_caps or {}).items()}
 
     def entries(self) -> list[dict[str, Any]]:
         if not self.path.is_file():
@@ -361,15 +375,34 @@ class HoursLedger:
             raise ValueError(f"not a P10IS5 hours ledger: {self.path}")
         return list(data["entries"])
 
-    def charged(self) -> float:
-        return float(sum(float(e["seconds"]) for e in self.entries()))
+    def charged(self, group: str | None = None) -> float:
+        return float(sum(float(e["seconds"]) for e in self.entries() if group is None or STAGE_GROUP.get(e["stage"], e["stage"]) == group))
 
-    def require_room(self) -> None:
-        if self.total_seconds - self.charged() <= 0:
+    def require_room(self, stage: str = "E2", extra: float = 0.0) -> None:
+        """PAUSED when the total or the stage group's cap is spent (``extra`` is the seconds of the stage's own run not yet written)."""
+        if self.total_seconds - self.charged() - extra <= 0:
             raise LedgerRefused(f"the total cap of {self.total_seconds:.0f} s is spent; the stage is PAUSED and the extension is the human lead's")
+        g = STAGE_GROUP.get(stage, stage)
+        if g in self.group_caps and self.group_caps[g] - self.charged(g) - extra <= 0:
+            raise LedgerRefused(f"the cap of group {g} ({self.group_caps[g]:.0f} s) is spent; the stage is PAUSED and the extension is the human lead's")
 
     def charge(self, stage: str, run: str, seconds: float) -> None:
         entries = self.entries()
         entries.append({"stage": stage, "run": run, "seconds": max(0.0, float(seconds)), "utc": datetime.now(UTC).isoformat()})
         self.path.parent.mkdir(parents=True, exist_ok=True)
         write_json(self.path, {**envelope("hours_ledger"), "total_seconds": self.total_seconds, "entries": entries})
+
+    @contextlib.contextmanager
+    def timed(self, stage: str, run: str, clock: Callable[[], float], slept: Callable[[], float]) -> Iterator[None]:
+        """Charge the wall time of the block (the sleeping done inside it is not charged), also when it raises. Refuses to start when the cap is spent."""
+        self.require_room(stage)
+        t0, s0 = clock(), slept()
+        try:
+            yield
+        finally:
+            self.charge(stage, run, (clock() - t0) - (slept() - s0))
+
+
+def hours_ledger_for(path: Path, cfg: Mapping[str, Any]) -> HoursLedger:
+    c = cfg["caps"]
+    return HoursLedger(path, float(c["total_hours"]) * 3600.0, {"rehearsal": float(c["rehearsal_hours"]) * 3600.0, "e1": float(c["e1_hours"]) * 3600.0, "e2": float(c["e2_hours"]) * 3600.0})

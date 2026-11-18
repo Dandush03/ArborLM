@@ -26,6 +26,8 @@ CHECKER_SUBSTITUTIONS: tuple[tuple[str, str], ...] = (
 
 
 OWN_OWNER = "P10-I-S5 ADR-0028"
+# The ONE failure pattern the gate accepts from the cited checker: P10-I-R's own allocation hitting P10-I-R's own files (its config or its code and tests) while they are in the same tree.
+KNOWN_SELF_COLLISION = re.compile(r"^FAIL: P10-I-R ADR-0029 / .* hits inventory: (P10IR / config literal|All code and tests / literal scan)")
 
 
 def planned_seed_values(cfg: Mapping[str, Any]) -> dict[str, frozenset[int]]:
@@ -76,10 +78,12 @@ def run_checker_copy(path: Path, root: Path, timeout: float) -> dict[str, Any]:
     result = next((line for line in proc.stdout.splitlines() if line.startswith("RESULT:")), None)
     fails = [ln.strip() for ln in proc.stdout.splitlines() if ln.strip().startswith("FAIL:")]
     own = [ln for ln in fails if OWN_OWNER in ln]
-    foreign = sorted({ln.split(" / ", 1)[0].removeprefix("FAIL: ") for ln in fails if OWN_OWNER not in ln})
+    known = [ln for ln in fails if OWN_OWNER not in ln and KNOWN_SELF_COLLISION.search(ln)]
+    unknown = [ln for ln in fails if OWN_OWNER not in ln and not KNOWN_SELF_COLLISION.search(ln)]
+    foreign = sorted({ln.split(" / ", 1)[0].removeprefix("FAIL: ") for ln in known})
     return {
         "returncode": proc.returncode, "result_line": result, "copy_sha256": sha256(text.encode()), "substitutions": [old for old, _ in CHECKER_SUBSTITUTIONS], "fail_lines": len(fails), "own_fail_lines": own[:5],
-        "foreign_fail_owners": foreign,
+        "foreign_fail_owners": foreign, "unknown_fail_lines": unknown[:5],
     }  # fmt: skip
 
 
@@ -119,9 +123,9 @@ def seed_gate(cfg: Mapping[str, Any] | None = None, *, root: Path | None = None,
                 checker.update(run_checker_copy(checker_path, base, timeout))
                 # The cited checker prints RESULT: FAIL by construction while a sibling P10-I study's own files are in the same tree (their allocations hit their own inventory; ADR-0029 handles that for itself). This gate
                 # passes iff the checker printed RESULT: PASS, or every FAIL line belongs to another study's allocation (listed in ``foreign_fail_owners``) and none to P10-I-S5's.
-                clean = checker["result_line"] == "RESULT: PASS" or (checker["fail_lines"] > 0 and not checker["own_fail_lines"] and checker["result_line"] == "RESULT: FAIL")
+                clean = checker["result_line"] == "RESULT: PASS" or (checker["fail_lines"] > 0 and not checker["own_fail_lines"] and not checker["unknown_fail_lines"] and checker["result_line"] == "RESULT: FAIL")
                 if not clean:
-                    problems.append(f"the extended registry checker reports a failure of P10-I-S5's own allocation or no result (returncode {checker['returncode']}, {checker['result_line']}, {checker['own_fail_lines']})")
+                    problems.append(f"the extended registry checker reports a failure of P10-I-S5's own allocation, a failure that is not P10-I-R's known self-collision, or no result (returncode {checker['returncode']}, {checker['result_line']}, {checker['own_fail_lines']}, {checker['unknown_fail_lines']})")
     else:
         problems.append(f"the registry checker is not at {ranges['checker']}")
     return {"passed": not problems, "problems": problems, "roles": role_multiplicity(c), "checker": checker}

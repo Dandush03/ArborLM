@@ -253,11 +253,17 @@ def require_ignored_run_dir(repo: Path, run_dir: Path) -> None:
         raise StageRefused(f"refused: the run directory {run_dir} is inside the repository and is not git-ignored")
 
 
-def require_data_dir_outside(repo: Path, data_dir: Path, suffix: str = ".noindex") -> None:
+def require_data_dir_outside(repo: Path, data_dir: Path, suffix: str = ".noindex", home: Path | None = None) -> None:
     """Section 6: the file directory's name ends in ``.noindex`` and lies outside every git worktree (and so inside no synced folder of the repository)."""
     if not data_dir.name.endswith(suffix):
         raise StageRefused(f"refused: the file directory {data_dir} does not end in {suffix}")
     resolved = data_dir.resolve()
+    home = (home or Path.home()).resolve()
+    if home not in (resolved, *resolved.parents):
+        raise StageRefused(f"refused: the file directory {data_dir} is not under the home folder {home}")
+    synced = ("Mobile Documents", "CloudStorage", "iCloud", "Dropbox", "OneDrive", "Google Drive", "Box")
+    if any(part.startswith(synced) for part in resolved.parts) or (resolved.parent.name in ("Desktop", "Documents") and resolved.parent.parent == home and (home / "Library" / "Mobile Documents").exists()):
+        raise StageRefused(f"refused: the file directory {data_dir} is in a synced folder (iCloud or another sync client)")
     for parent in (resolved, *resolved.parents):
         if (parent / ".git").exists():
             raise StageRefused(f"refused: the file directory {data_dir} is inside a git worktree ({parent})")

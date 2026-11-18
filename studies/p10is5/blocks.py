@@ -20,6 +20,7 @@ from arborlm.io import read_json
 from . import analysis, bench, core, system
 from .core import EngineeringStop, Paused
 from .device import Counter, PRead
+from .e2_errors import ColdFinal as device_cold_final
 
 
 @dataclass
@@ -36,6 +37,12 @@ class Deps:
     opener: Callable[[Any, bool], int] | None = None
     cross_check: Callable[[], dict[str, Any]] | None = None
     pass_runner: Callable[[bench.Context, Mapping[str, Any]], bench.PassRunner] | None = None  # None: one process per pass (production)
+    slept: float = 0.0
+
+    def snooze(self, seconds: float) -> None:
+        """Every wait goes through here: the seconds slept are not charged to the hours cap."""
+        self.slept += max(0.0, float(seconds))
+        self.sleep(seconds)
 
 
 @dataclass
@@ -60,6 +67,31 @@ class StageState:
         self.data["history"].append({"event": event, "utc": core.utc_stamp(), **detail})
 
 
+def note_quiet_failure(state: "StageState", e: Paused, extra_sessions: int) -> None:
+    """One failed quiet session (the stage waited, retried every 10 minutes for at most 6 hours, and is PAUSED and rescheduled). After the first session and three further ones the stage ends as ENGINEERING NOT EVALUABLE —
+    MACHINE NOT QUIET (a final status the analysis accepts); no fifth session runs."""
+    state.data["quiet_sessions_failed"] += 1
+    state.data["quiet_exhausted"] = state.data["quiet_sessions_failed"] >= 1 + extra_sessions
+    state.data["status"] = core.STATUS_MACHINE_NOT_QUIET if state.data["quiet_exhausted"] else e.reason
+    state.note("paused", reason=e.reason, detail=e.detail, session=state.data["quiet_sessions_failed"])
+    state.save()
+
+
+def decline_write_budget(state: "StageState") -> None:
+    """The human lead declines more writes after a PAUSE on the write cap: WRITE BUDGET EXHAUSTED, a final status the analysis accepts."""
+    if not str(state.data["status"]).startswith("PAUSED — WRITE BUDGET"):
+        raise core.StageRefused("refused: --decline-write-budget applies only to a stage PAUSED on the write budget")
+    state.data["write_budget_declined"] = True
+    state.data["status"] = core.STATUS_WRITE_BUDGET
+    state.note("write_budget_declined")
+    state.save()
+
+
+def refuse_if_final(state: "StageState") -> None:
+    if state.data["status"] in core.FINAL_STATUSES[1:]:  # a COMPLETE stage is not re-entered either, but its spare rule has its own refusal
+        raise core.StageRefused(f"refused: the stage is final ({state.data['status']}); no further session runs")
+
+
 def stop_path(ctx: bench.Context, stop_id: str) -> Path:
     return ctx.stage_dir() / "stops" / f"{core.safe_name(stop_id)}.json"
 
@@ -76,17 +108,24 @@ def load_stops(ctx: bench.Context) -> list[dict[str, Any]]:
     return [read_json(p) for p in sorted(d.glob("*.json"))] if d.is_dir() else []
 
 
+def stop_repeat(key: str) -> int:
+    """The repeat a stop key falls in: ``E2|r2|a1`` (a block) and ``E2|r2|k2|s8|a1`` (a pass) both give 2."""
+    return int(key.split("|")[1][1:])
+
+
 def resolved_stops(ctx: bench.Context, blocks: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     """A stop is resolved only when a COMPLETE spare block names it (``rerun_of``)."""
-    done = {b.get("rerun_of") for b in blocks if b["role"] == "spare" and b.get("complete")}
-    return [{**s, "resolved": s["id"] in done} for s in load_stops(ctx)]
+    stops = load_stops(ctx)
+    by_id = {s["id"]: s for s in stops}
+    covered = {stop_repeat(by_id[b["rerun_of"]]["key"]) for b in blocks if b["role"] == "spare" and b.get("complete") and b.get("rerun_of") in by_id}
+    return [{**s, "resolved": stop_repeat(s["key"]) in covered} for s in stops]  # every stop whose key falls inside the rerun block (the per-pass one and the per-block one)
 
 
-def spawn_pass_runner(ctx: bench.Context, extra_argv: Sequence[str], attempt: int = 1, timeout: float = 900.0) -> bench.PassRunner:
+def spawn_pass_runner(ctx: bench.Context, extra_argv: Sequence[str], timeout: float = 900.0) -> bench.PassRunner:
     """One process per pass: ``python -m studies.p10is5.stages work-pass ...`` (it re-checks identity, derives the pass again from the plan or the config and writes the pass record). Exit 75: PAUSED — IDENTITY
     (nothing written); exit 70: ENGINEERING STOP (the worker recorded the cause); anything else non-zero is an ENGINEERING STOP (WORKER FAILED)."""
 
-    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int) -> dict[str, Any]:
+    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int, attempt: int = 1) -> dict[str, Any]:
         argv = [sys.executable, "-m", "studies.p10is5.stages", "work-pass", "--stage", ctx.stage, "--run-dir", str(ctx.run_dir), "--repeat", str(repeat), "--k", str(k), "--s", str(s), "--attempt", str(attempt), "--block", block, "--role", role, "--seq", str(seq), *extra_argv]
         try:
             p = subprocess.run(argv, capture_output=True, text=True, timeout=timeout, check=False)  # noqa: S603 - argument list, no shell
@@ -106,10 +145,10 @@ def spawn_pass_runner(ctx: bench.Context, extra_argv: Sequence[str], attempt: in
     return run_one
 
 
-def inprocess_pass_runner(ctx: bench.Context, deps: Deps, prediction: Mapping[str, Any], attempt: int = 1) -> bench.PassRunner:
+def inprocess_pass_runner(ctx: bench.Context, deps: Deps, prediction: Mapping[str, Any]) -> bench.PassRunner:
     """The same pass, in this process (used by the tests with fakes, and by R1-style passes)."""
 
-    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int) -> dict[str, Any]:
+    def run_one(repeat: int, k: int, s: int, block: str, role: str, seq: int, attempt: int = 1) -> dict[str, Any]:
         rec = bench.execute_pass(ctx, repeat, k, s, attempt, prediction, deps.counter, block=block, role=role, seq=seq, pread=deps.pread, cross_check=deps.cross_check, opener=deps.opener)
         bench.commit_pass(ctx, rec)
         return rec
@@ -142,21 +181,38 @@ def run_stage_blocks(
     if state.data["engineering_stop"] and rerun_after_stop != state.data["engineering_stop"]:
         raise Paused("PAUSED — ENGINEERING STOP UNRESOLVED", f"{state.data['engineering_stop']}: a rerun on the spare's tiles and seeds needs --rerun-after-stop with a recorded amendment")
 
+    refuse_if_final(state)
+
     def one(repeat: int, role: str, reason: str, rerun_of: str | None = None) -> dict[str, Any]:
-        t0 = deps.clock()
+        t0, s0 = deps.clock(), deps.slept
         if hours is not None:
-            hours.require_room()
+            hours.require_room(ctx.stage)
+        base = runner_for(repeat)
+
+        def guarded(*a: Any) -> dict[str, Any]:
+            if hours is not None:
+                hours.require_room(ctx.stage, extra=(deps.clock() - t0) - (deps.slept - s0))  # the cap is checked before every pass, cumulatively over stages and resumes
+            return base(*a)
+
         try:
-            block = bench.run_block(ctx, repeat, role, reason, deps.gate, runner_for(repeat), int(state.data["next_seq"]), rerun_of=rerun_of)
-        except Paused as e:
-            if e.reason == "PAUSED — MACHINE NOT QUIET":
-                state.data["quiet_sessions_failed"] += 1
-                state.data["quiet_exhausted"] = state.data["quiet_sessions_failed"] >= 1 + extra_sessions
-            state.data["status"] = f"{e.reason}"
-            state.note("paused", reason=e.reason, detail=e.detail)
-            state.save()
+            block = bench.run_block(ctx, repeat, role, reason, deps.gate, guarded, int(state.data["next_seq"]), rerun_of=rerun_of)
+        except (Paused, core.LedgerRefused) as e:
+            if hours is not None:
+                hours.charge(ctx.stage, f"{ctx.stage}|r{repeat}|paused", (deps.clock() - t0) - (deps.slept - s0))
+            if isinstance(e, core.LedgerRefused):
+                state.data["status"] = "PAUSED — CHARGED HOURS"
+                state.note("paused", reason="charged hours", detail=str(e))
+                state.save()
+            elif e.reason == "PAUSED — MACHINE NOT QUIET":
+                note_quiet_failure(state, e, extra_sessions)
+            else:
+                state.data["status"] = e.reason
+                state.note("paused", reason=e.reason, detail=e.detail)
+                state.save()
             raise
         except EngineeringStop as e:
+            if hours is not None:
+                hours.charge(ctx.stage, f"{ctx.stage}|r{repeat}|stop", (deps.clock() - t0) - (deps.slept - s0))
             stop_id = record_stop(ctx, core.block_key(ctx.stage, repeat), e.cause, e.detail)
             core.write_record(ctx.block_path(core.block_key(ctx.stage, repeat)), {**core.envelope("block"), "key": core.block_key(ctx.stage, repeat), "stage": ctx.stage, "repeat": repeat, "role": role, "reason": reason, "rerun_of": rerun_of, "pass_keys": [], "complete": False, "aborted": f"ENGINEERING STOP ({e.cause})", "quiet_start": None, "quiet_end": None}, overwrite=True)
             state.data["engineering_stop"] = stop_id
@@ -166,7 +222,7 @@ def run_stage_blocks(
             raise
         state.data["next_seq"] = block["next_seq"]
         if hours is not None:
-            hours.charge(ctx.stage, block["key"], deps.clock() - t0)
+            hours.charge(ctx.stage, block["key"], (deps.clock() - t0) - (deps.slept - s0))
         state.note("block", key=block["key"], complete=block["complete"], aborted=block["aborted"])
         state.save()
         return block
@@ -197,8 +253,10 @@ def run_stage_blocks(
                 try:
                     recover()
                 except Paused as e:
-                    if isinstance(e, core.WriteBudgetExceeded):
-                        state.data["status"] = e.reason
+                    state.data["status"] = e.reason
+                    if isinstance(e, device_cold_final):
+                        state.data["status"] = core.STATUS_COLD
+                    state.note("paused", reason=e.reason, detail=e.detail)
                     state.save()
                     raise
                 state.data["rebuilds"] += 1

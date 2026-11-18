@@ -75,6 +75,10 @@ def _eq_d(d: Mapping[str, Any], grid: Sequence[tuple[int, int]]) -> list[str]:
         rng = "n/a" if row["range"] is None else f"{us(row['range'][0])} to {us(row['range'][1])}"
         pps = "n/a" if row["pages_per_second_median"] is None else f"{row['pages_per_second_median']:,.0f}"
         lines.append(f"| {k} | {s} | {us(row['pooled_median'])} | {us(row['median_of_medians'])} | {rng} | {pct(row['cv'])} | {pps} | {us(row['harness_ns'])} | {row['tag'] or ''} |")
+    lines += ["", "Per cell and repeat (measured, us): median, p90, p99, maximum, and pages per second.", "", "| depth k | pages s | repeat | median | p90 | p99 | max | pages/s |", "|---|---|---|---|---|---|---|---|"]
+    for k, s in grid:
+        for r, v in sorted(fig["rows"][cell_key(k, s)]["per_repeat"].items(), key=lambda kv: int(kv[0])):
+            lines.append(f"| {k} | {s} | {r} | {us(v['median'])} | {us(v['p90'])} | {us(v['p99'])} | {us(v['max'])} | {v['pages_per_second']:,.0f} |")
     return lines
 
 
@@ -108,6 +112,12 @@ def render_report(result: Mapping[str, Any], context: Mapping[str, Any], grid: S
     out.append(f"- SMART status: {dev.get('smart_status', core.NOT_READABLE)}; free space: {dev.get('free_bytes', core.NOT_READABLE)}; disk0 driver bytes written since boot: {dev.get('driver_write_bytes', core.NOT_READABLE)}")
     out.append(f"- lifetime bytes written: {core.NOT_READABLE}; percentage used: {core.NOT_READABLE}; temperature: {core.NOT_READABLE} (they cannot be read without administrator access or a tool install; wear is accounted in the study's own bytes written)")
     out.append(f"- the study's own bytes written (measured, from the write ledger): {context.get('write_ledger_bytes', core.NOT_READABLE)}; charged hours (measured): {context.get('hours', core.NOT_READABLE)}")
+    out.append(f"- record files in the run directory (measured; tallied separately and NOT charged to the 10 GB ledger): {context.get('record_bytes', core.NOT_READABLE)} B")
+    h = context.get("r1_harness")
+    if h:
+        out += ["", "### R1's harness figure h(k) (measured on cached pages of the control file; descriptive; E2's own h(k) sets the tag)", "", "| depth k | h(k) median us | status |", "|---|---|---|"]
+        for k, v in sorted(h.items(), key=lambda kv: int(kv[0])):
+            out.append(f"| {k} | {us(v.get('median_ns'))} | {v['status']} |")
     out += ["", "### What the engineering result can and cannot say", ""]
     out += [f"- {x}" for x in LIMITS]
     out += ["", "## SCIENTIFIC NEURAL-MEMORY ADVANTAGE", "", f"**{result['scientific']['label']}**", ""]

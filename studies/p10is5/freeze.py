@@ -44,6 +44,26 @@ def add_commands(sub: Any) -> None:
     sub.add_parser("seed-gate", help="run the seed gate and print its result")
 
 
+def one_run_dir_problems(run_dir: Path, r1_path: Path, m_path: Path) -> list[str]:
+    """R1's and M's records and R0's ledger must be in the plan's run directory: otherwise the 10 GB cap 'over all stages and attempts' could restart at 0 in another directory."""
+    rd = run_dir.resolve()
+    out = []
+    if r1_path.resolve() != rd / "r1" / "r1.json":
+        out.append(f"R1's record {r1_path} is not {rd / 'r1' / 'r1.json'}")
+    if m_path.resolve() != rd / "M" / "m.json":
+        out.append(f"M's record {m_path} is not {rd / 'M' / 'm.json'}")
+    ledger = rd / "write_ledger.json"
+    if not ledger.is_file():
+        out.append(f"there is no write ledger at {ledger}")
+    else:
+        labels = [e["label"] for e in read_json(ledger).get("entries", [])]
+        if not any(x.startswith("probe_") for x in labels):
+            out.append("the ledger holds no R0 probe entry: R0 did not run in this run directory")
+        if not any(x.startswith("rehearsal.bin") for x in labels):
+            out.append("the ledger holds no R1 build of the rehearsal file")
+    return out
+
+
 def figures_from_records(r1_record: dict[str, Any], m_record: dict[str, Any]) -> dict[str, Any]:
     """The figures the config's ``[fixed_after_r1_and_m]`` must hold: R1's idle 95th percentiles and M's margin."""
     fig = r1_record.get("idle_figures")
@@ -102,6 +122,11 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
         raise StageRefused("refused: the config's fixed figures differ from R1's and M's records: " + "; ".join(problems))
     data_dir = Path(args.data_dir)
     planmod.require_data_dir_outside(repo, data_dir, str(cfg["device"]["directory_suffix"]))
+    problems = one_run_dir_problems(Path(args.run_dir), r1_path, m_path)
+    if problems:
+        raise StageRefused("refused: the study has ONE run directory and ONE ledger; " + "; ".join(problems))
+    if (m_rec.get("outcome") or "").startswith("ENGINEERING NOT EVALUABLE"):
+        raise StageRefused(f"refused: M's record says {m_rec['outcome']}")
     plan_path = repo / core.PLAN
     if plan_path.exists():
         if not args.supersede:

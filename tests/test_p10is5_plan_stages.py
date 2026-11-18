@@ -75,28 +75,38 @@ def test_platform_problems() -> None:
     assert len(planmod.platform_problems(CFG, {**rec, "torch_num_threads": 8, "machine": "x86_64"})) == 2
 
 
-def test_data_dir_must_be_noindex_and_outside_a_worktree() -> None:
+def test_data_dir_must_be_noindex_under_home_outside_worktrees_and_not_synced() -> None:
+    home = Path.home()
     with pytest.raises(core.StageRefused, match="noindex"):
-        planmod.require_data_dir_outside(ROOT, Path("/Users/x/data"))
+        planmod.require_data_dir_outside(ROOT, home / "data")
     with pytest.raises(core.StageRefused, match="worktree"):
-        planmod.require_data_dir_outside(ROOT, ROOT / "experiments" / "d.noindex")
+        planmod.require_data_dir_outside(ROOT, ROOT / "experiments" / "d.noindex")  # inside this worktree (or any worktree the copy sits in)
+    with pytest.raises(core.StageRefused, match="not under the home folder"):
+        planmod.require_data_dir_outside(ROOT, Path("/var/p10is5.noindex"))
+    with pytest.raises(core.StageRefused, match="synced folder"):
+        planmod.require_data_dir_outside(ROOT, home / "Library" / "Mobile Documents" / "com~apple~CloudDocs" / "p10is5.noindex")
+    planmod.require_data_dir_outside(ROOT, home / "p10is5_study_never_created.noindex")  # nothing is created or written
 
 
-def test_run_dir_inside_the_repo_must_be_ignored() -> None:
-    planmod.require_ignored_run_dir(ROOT, ROOT / "experiments" / "_scratch" / "x")
-    with pytest.raises(core.StageRefused, match="not git-ignored"):
-        planmod.require_ignored_run_dir(ROOT, ROOT / "studies" / "p10is5" / "run")
+def test_run_dir_inside_a_repository_must_be_ignored() -> None:
+    with T.scratch("plan_ignore") as d:
+        repo = mini_repo(d / "repo")
+        (repo / ".gitignore").write_text("/runs/\n")
+        planmod.require_ignored_run_dir(repo, repo / "runs" / "x")
+        with pytest.raises(core.StageRefused, match="not git-ignored"):
+            planmod.require_ignored_run_dir(repo, repo / "studies" / "run")
+        planmod.require_ignored_run_dir(repo, d / "outside")  # outside the repository: cannot dirty it
 
 
 @pytest.mark.parametrize("stage", sorted(stages.REGISTERED))
 def test_registered_stages_refuse_today_and_write_nothing(stage: str, capsys: pytest.CaptureFixture[str]) -> None:
     run = ROOT / "experiments" / "_scratch" / "p10is5_tests" / "refuse_run"
-    assert stages.main(["registered", stage, "--run-dir", str(run), "--freeze-commit", "HEAD"]) == 2
+    assert stages.main(["registered", stage, "--run-dir", str(run), "--freeze-commit", "HEAD"]) == 75  # an identity refusal: PAUSED — IDENTITY, nothing written
     assert "refused" in capsys.readouterr().err and not run.exists()
 
 
 def test_registered_entry_refuses_without_a_freeze_commit(capsys: pytest.CaptureFixture[str]) -> None:
-    assert stages.main(["registered", "e2", "--run-dir", str(ROOT / "experiments" / "_scratch" / "p10is5_tests" / "r2")]) == 2
+    assert stages.main(["registered", "e2", "--run-dir", str(ROOT / "experiments" / "_scratch" / "p10is5_tests" / "r2")]) == 75
     assert "refused" in capsys.readouterr().err
 
 
@@ -107,7 +117,7 @@ def test_worker_refuses_with_identity_exit_and_writes_nothing() -> None:
 
 
 def test_delete_needs_the_recomputation_flag(capsys: pytest.CaptureFixture[str]) -> None:
-    assert stages.main(["registered", "delete", "--run-dir", str(ROOT / "experiments" / "_scratch" / "p10is5_tests" / "d"), "--freeze-commit", "HEAD"]) == 2
+    assert stages.main(["registered", "delete", "--run-dir", str(ROOT / "experiments" / "_scratch" / "p10is5_tests" / "d"), "--freeze-commit", "HEAD"]) == 75  # the entry refuses on identity before it reads the flag
 
 
 def git(repo: Path, *a: str) -> str:
