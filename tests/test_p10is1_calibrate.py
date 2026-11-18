@@ -181,7 +181,7 @@ class TableEngine:
         final, hit = self.ladder[(name, arm)]
         return views4(final, hit, ceiling)
 
-    def h8_extra(self, unit_rate: Mapping[str, float]) -> Mapping[str, float]:
+    def h8_extra(self, unit_rate: Mapping[str, float], row_u_p: Mapping[int, int]) -> Mapping[str, float]:
         self.calls.append(("h8_extra", "H8", dict(unit_rate)))
         return self.extra
 

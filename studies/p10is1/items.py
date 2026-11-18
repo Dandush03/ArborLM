@@ -105,21 +105,31 @@ def check_counts(read: Mapping[str, Any]) -> None:
                 raise ValueError(f"engineering stop: count {k}={v!r} of panel {p} is not an integer in [0, {n}]")
 
 
-@torch.no_grad()
-def check_logits_finite(model: Any, data: Any, facts: int, contexts: int = 64) -> None:
-    """Every logit of the first ``contexts`` contexts of Panel A is finite (section 14: the check covers every logit at every evaluation; here a bounded sample of the evaluation's own forward pass)."""
-    stream = s1eval.stream_for(data, facts, s1core.PANEL_STREAM["A"])
-    tok = stream.tokens[:contexts, : s1core.INPUT_LENGTH].contiguous()
-    was = model.training
-    model.eval()
-    try:
-        h = model.embed_block0(tok)
-        read = model.select(h, tok)
-        logits = s1eval.site_logits(model, h, model.memory_delta(h, read))
-    finally:
-        model.train(was)
-    if not bool(torch.isfinite(logits).all()):
-        raise ValueError("engineering stop: a non-finite logit at evaluation")
+class LogitWatch:
+    """Every logit of an evaluation is checked, not a sample: the answer-site logits are ``F.linear(final_norm(h), token.weight)`` (``evaluate.site_logits``), so a forward hook on the backbone's ``final_norm`` sees the
+    input of every logit the evaluation computes (the main read, the ablations, the swap, the perturbed tables, the index read); a non-finite value there, or in the frozen output weight, is an engineering stop.
+    P10-S1 itself checked the training loss, the gradient norm and the parameters at every update and the loaded state at every snapshot (``train.Trainer.step``, ``load_model_state``), and no logit at evaluation;
+    this check is added here (ADR-0024 section 14). A hook is PyTorch's own API: nothing in P10-S1 is patched."""
+
+    def __init__(self, model: Any) -> None:
+        self.model, self.bad, self.seen, self.handle = model, 0, 0, None
+
+    def __enter__(self) -> "LogitWatch":
+        def hook(_m: Any, _i: Any, out: Any) -> None:
+            self.seen += 1
+            if not bool(torch.isfinite(out).all()):
+                self.bad += 1
+
+        self.handle = self.model.backbone.final_norm.register_forward_hook(hook)
+        if not bool(torch.isfinite(self.model.backbone.token.weight).all()):
+            self.bad += 1
+        return self
+
+    def __exit__(self, *exc: Any) -> None:
+        if self.handle is not None:
+            self.handle.remove()
+        if exc[0] is None and (self.bad or self.seen == 0):
+            raise ValueError(f"engineering stop: {self.bad} non-finite logit input(s) at evaluation" if self.bad else "engineering stop: the evaluation computed no logits")
 
 
 def evaluate_snapshot(ctx: Ctx, spec: Mapping[str, Any], update: int, *, data: Any = None, seeds: Any = None) -> Path:
@@ -140,8 +150,7 @@ def evaluate_snapshot(ctx: Ctx, spec: Mapping[str, Any], update: int, *, data: A
     lut = fact_lut_for(data, cell.facts) if cell.arm == "R2" else None
     model = build_model(cell.arm, cell.slots, cell.init_seed, backbone, fact_lut=lut, r1_seed=seeds.r1_codes, hash_seed=s1core.h8_seed(seeds), seed_rng=False)
     load_model_state(snap, model)
-    check_logits_finite(model, data, cell.facts)
-    with torch.no_grad():
+    with torch.no_grad(), LogitWatch(model):
         record = s1eval.evaluate_readout(cell, model, data, update, frozen_backbone=backbone, rows=None, deep=False, robustness=False, with_ivf=True, check_backbone=False)
     reads: dict[str, Any] = {}
     for name, read in record["reads"].items():

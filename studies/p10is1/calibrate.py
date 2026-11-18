@@ -193,7 +193,7 @@ class Engine(Protocol):
         """The selected-rate runs of ``arm`` at the ladder cell ``name`` continued from their 65,536 checkpoints up the ladder to ``ceiling`` on both draws: (draw, panel) -> update -> i."""
         ...
 
-    def h8_extra(self, unit_rate: Mapping[str, float]) -> Mapping[str, float]:
+    def h8_extra(self, unit_rate: Mapping[str, float], row_u_p: Mapping[int, int]) -> Mapping[str, float]:
         """H8 at its selected rates to U_P at 2K/4K and 8K/16K on both draws (four runs): cell name -> minimum a_use over draws and panels."""
         ...
 
@@ -286,7 +286,7 @@ def run_calibration(engine: Engine, cfg: Mapping[str, Any] | None = None) -> Cal
         if unit.startswith("H8|"):
             sel = cal.selections[unit][-1]
             min_all[core.cell_name(*core.unit_selection_cell(unit, c))] = float(sel["min_all_at_selected"])
-    min_all.update({k: float(v) for k, v in engine.h8_extra(h8_unit_rates).items()})
+    min_all.update({k: float(v) for k, v in engine.h8_extra(h8_unit_rates, {r: int(u or 0) for r, u in cal.row_u_p.items()}).items()})
     cal.h8 = h8_report(min_all, [core.cell_name(f, n) for f, n in core.arm_cells("H8", c)], c)
     cal.h8["sat256"] = sat256
     return cal

@@ -520,6 +520,9 @@ def build_parser() -> argparse.ArgumentParser:
     c = sub.add_parser("caps-proposal", help="print the cap section 15 proposes: charged + 2 x projected remaining, rounded up")
     c.add_argument("--charged-hours", type=float, required=True)
     c.add_argument("--projected-remaining-hours", type=float, required=True)
+    ca = sub.add_parser("calibrate", help="the calibration on the calibration draws; item records go to the sealed directory")
+    ca.add_argument("--sealed-dir", required=True)
+    ca.add_argument("--run-dir", required=True)
     rh = sub.add_parser("rehearse", help="the synthetic rehearsal (tiny sizes, test seeds) end to end")
     rh.add_argument("--run-dir", required=True)
     rh.add_argument("--repo")
@@ -551,6 +554,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "caps-proposal":
             print(json.dumps({"proposed_cap_hours": core.propose_cap_hours(args.charged_hours, args.projected_remaining_hours), "rule": "section 15: charged + 2 x projected remaining, rounded up to the hour; the caps sum to at most 60 by the construction of B; anything above is the human lead's own decision"}))
             return 0
+        if args.command == "calibrate":
+            from . import calibrate_engine
+
+            return calibrate_engine.cmd_calibrate(args)
         if args.command == "rehearse":
             from . import rehearsal
 

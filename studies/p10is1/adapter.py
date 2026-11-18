@@ -42,7 +42,7 @@ def cell_dir(run_dir: Path, label: str, group: str = "train") -> Path:
 
 def cell_of(spec: Mapping[str, Any], mode: str | None = None) -> s1core.Cell:
     """P10-S1's ``Cell`` of a planned cell; its label must be the plan's."""
-    cell = core.make_cell(mode or str(spec.get("mode", core.REGISTERED)), spec["arm"], spec["facts"], spec["slots"], spec["draw"], spec["init_seed"], u_p=spec["u_p"], run=spec["run"], lr=spec["lr"], kind=spec.get("kind", "P"))
+    cell = core.make_cell(mode or str(spec.get("mode", core.REGISTERED)), spec["arm"], spec["facts"], spec["slots"], spec["draw"], spec["init_seed"], u_p=spec["u_p"], run=spec["run"], lr=spec["lr"], kind=spec.get("kind", "P"), test=spec.get("test_label"))
     if cell.label != spec["label"]:
         raise ValueError(f"the planned cell label {spec['label']} is not the label of its cell {cell.label}")
     return cell
@@ -148,7 +148,7 @@ def train_to(data: Any, seeds: Any, backbone: Any, run_dir: Path, spec: Mapping[
     if (out / FAILED_RECORD).is_file():
         raise RuntimeError(f"{spec['label']} failed before and is kept, not re-run (section 14)")
     assert_seed_allowed(mode, spec, cfg)
-    cell = cell_of(spec, mode if mode != "calibration" else core.REHEARSAL)
+    cell = cell_of(spec, mode)
     have = completed_snapshots(out)
     if to_update in have:
         return read_json(out / TRAIN_RECORD) if (out / TRAIN_RECORD).is_file() else {"trained_to": to_update}

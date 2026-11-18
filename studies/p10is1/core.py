@@ -603,11 +603,11 @@ def seeds_for(mode: str, draw: int, cfg: Mapping[str, Any] | None = None) -> tup
 
 
 # --- cells ---------------------------------------------------------------------------------------------------------------------------
-def make_cell(mode: str, arm: str, facts: int, slots: int, draw: int, init_seed: int, *, u_p: int, run: int, lr: float, kind: str = "P") -> Any:
+def make_cell(mode: str, arm: str, facts: int, slots: int, draw: int, init_seed: int, *, u_p: int, run: int, lr: float, kind: str = "P", test: bool | None = None) -> Any:
     """P10-S1's ``Cell`` (its ``make_cell``; the label format carries the initialisation seed, the row's U_P, the run length when not the default and the rate when not 0.003)."""
     from studies.p10s1 import core as s1
 
-    return s1.make_cell(kind, arm, facts, slots, draw, init_seed, u_p=u_p, run_updates=run, lr=lr, test=mode != REGISTERED)
+    return s1.make_cell(kind, arm, facts, slots, draw, init_seed, u_p=u_p, run_updates=run, lr=lr, test=(mode != REGISTERED) if test is None else test)
 
 
 def r2_run(u_p: int, cfg: Mapping[str, Any] | None = None) -> int:
