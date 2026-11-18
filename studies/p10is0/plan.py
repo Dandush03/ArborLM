@@ -18,6 +18,7 @@ from typing import Any
 from arborlm.io import file_sha256, read_json
 
 from . import core
+from .profile import REGISTERED, Profile
 
 IDENTITY_EXIT = 75
 FREEZE_RESULTS_GLOB = "results/p10is0-freeze-*/DECISION_2.md"
@@ -137,12 +138,16 @@ def items_of(plan: Mapping[str, Any], stage: str) -> list[dict[str, Any]]:
     return list(plan["items"][stage])
 
 
-def build_plan(cfg: Mapping[str, Any], durations: Mapping[str, Mapping[str, Any]], *, caps: Mapping[str, Any] | None = None) -> dict[str, Any]:
-    """The scientific content of the plan: a pure function of the config, the code and ``durations.json``'s cell types. A cell type removed by the reference rule has no cells; X8 is not in it (its plan is the run directory's
-    addendum, section 8)."""
+def build_plan(
+    cfg: Mapping[str, Any], durations: Mapping[str, Mapping[str, Any]], *, caps: Mapping[str, Any] | None = None, profile: Profile = REGISTERED, draw_plan: Mapping[str, Any] | None = None, manifests: Mapping[str, str] | None = None,
+    run_dir: str | None = None,
+) -> dict[str, Any]:
+    """The scientific content of the plan: a pure function of the config, the code, ``durations.json``'s cell types and the draw plan. A cell type removed by the reference rule has no cells; X8 is not in it (its plan is the run
+    directory's addendum, section 8). ``profile`` changes only the seed sets, the initialisations and the sizes (the pipeline rehearsal's plan differs from the registered one in those fields and no other: a test diffs them)."""
     th = core.Thresholds.from_config(cfg)
     cells: list[dict[str, Any]] = []
     types: dict[str, Any] = {}
+    seed_set_of = {int(k): v for k, v in (draw_plan or {}).get("seed_set_of", {}).items()} or {d: f"p10is0-draw-{d}" for d in range(1, int(cfg["draws"]["registered"]) + 1)}
     for ct in core.cell_types(cfg):
         d = durations.get(ct.name)
         if d is None:
@@ -152,19 +157,33 @@ def build_plan(cfg: Mapping[str, Any], durations: Mapping[str, Mapping[str, Any]
             types[ct.name] = {"series": ct.series, "removed": True, "reference_flags": flags}
             continue
         t = int(d["t_exposures"])
+        facts = profile.facts_of(ct.facts)
         types[ct.name] = {
-            "series": ct.series, "facts": ct.facts, "slots": ct.slots, "load": ct.load, "t_exposures": t, "updates": ct.updates(t), "floor": ct.floor(th), "arms": list(ct.arms),
-            "readouts": sorted({core.updates_for(min(512, t), ct.facts), ct.updates(t // 2), ct.updates(t)}), "convergence": d.get("convergence"), "reference_flags": flags,
+            "series": ct.series, "facts": ct.facts, "slots": ct.slots, "load": ct.load, "t_exposures": t, "updates": core.updates_for(t, facts), "floor": ct.floor(th), "arms": list(ct.arms),
+            "readouts": sorted({core.updates_for(min(profile.exp(512), t), facts), core.updates_for(t // 2, facts), core.updates_for(t, facts)}), "convergence": d.get("convergence"), "reference_flags": flags,
+            "flat_below_floor": bool(d.get("flat_below_floor")), "reference_below_floor_at_t": d.get("reference_below_floor_at_t", []), "extension": d.get("extension"), "labels": d.get("labels", []),
         }  # fmt: skip
         for arm in ct.arms:
             for draw in range(1, int(cfg["draws"]["registered"]) + 1):
-                c = core.make_cell("REG", ct, arm, draw, 0, cfg)
-                cells.append({"label": c.label, "cell_type": ct.name, "arm": arm, "draw": draw, "init_seed": c.init_seed, "seed_set": core.registered_set(draw, cfg).name, "swap_seed": core.registered_set(draw, cfg).swap_seed(ct.facts, cfg), "updates": ct.updates(t)})
+                c = core.make_cell("REG", ct, arm, draw, 0, cfg, profile.name)
+                spec = core.set_of_name(seed_set_of[draw], cfg, profile.name)
+                cells.append({"label": c.label, "cell_type": ct.name, "arm": arm, "draw": draw, "init_seed": c.init_seed, "seed_set": spec.name, "swap_seed": spec.swap_seed(ct.facts, cfg), "updates": core.updates_for(t, facts)})
     return {
-        **core.envelope("freeze_plan"), "spec": core.SPEC, "config_sha256": core.config_sha256(), "thresholds": dict(vars(th)), "cell_types": types, "durations_sha256": None,
-        "items": {"main": cells}, "draws": {"registered": [core.registered_set(d, cfg).name for d in range(1, 11)], "reserve": [core.reserve_set(k, cfg).name for k in range(1, 5)]},
+        **core.envelope("freeze_plan"), "spec": core.SPEC, "profile": profile.name, "config_sha256": core.config_sha256(), "thresholds": dict(vars(th)), "cell_types": types, "durations_sha256": None,
+        "items": {"main": cells}, "draws": {"seed_set_of": {str(k): v for k, v in seed_set_of.items()}, "reserve": [f"p10is0-reserve-{k}" for k in range(1, 5)]}, "draw_manifests": dict(manifests or {}), "run_dir": run_dir,
         "caps": dict(caps or {}), "x8": {"conditional": True, "trigger": "L_Q = 4 after the complete main grid", "addendum": "written to the run directory (section 8)"},
     }  # fmt: skip
+
+
+SEED_FIELDS = ("init_seed", "seed_set", "swap_seed", "label")
+
+
+def seed_blind(plan: Mapping[str, Any]) -> dict[str, Any]:
+    """The plan with every seed-bearing field, the sizes and the profile removed: two plans built with different profiles must be equal here (stage 2's diff of the plans)."""
+    out = {k: v for k, v in plan.items() if k not in ("profile", "draws", "config_sha256", "draw_manifests", "run_dir", "durations_sha256", "caps")}
+    out["items"] = {"main": [{k: v for k, v in it.items() if k not in (*SEED_FIELDS, "updates")} for it in plan["items"]["main"]]}
+    out["cell_types"] = {n: {k: v for k, v in ct.items() if k not in ("updates", "readouts")} for n, ct in plan["cell_types"].items()}
+    return out
 
 
 def scientific_content(plan: Mapping[str, Any]) -> dict[str, Any]:

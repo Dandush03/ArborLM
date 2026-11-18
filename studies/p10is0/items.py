@@ -17,19 +17,21 @@ from arborlm.io import read_json
 from . import adapter, analysis, core, ladder, sealed
 from .core import Cell, CellType
 from .labels import Obs
+from .profile import REGISTERED, TEST, Profile
 
 
 class Env:
-    """The inputs a worker needs: the corpus bytes, the backbone, the evaluation rows (tiny for tests)."""
+    """The inputs a worker needs: the corpus bytes, the backbone, the evaluation rows and the profile (tiny for tests)."""
 
-    def __init__(self, corpus: bytes, backbone: Any, tiny: bool = False, facts_override: int | None = None) -> None:
+    def __init__(self, corpus: bytes, backbone: Any, tiny: bool = False, facts_override: int | None = None, profile: Profile | None = None) -> None:
         from studies.p9ii.evaluate import corpus_rows
 
-        self.corpus, self.backbone, self.tiny, self.facts_override = corpus, backbone, tiny, facts_override
+        self.profile = profile or (TEST if tiny else REGISTERED)
+        self.corpus, self.backbone, self.tiny, self.facts_override = corpus, backbone, self.profile.tiny, facts_override
         self.rows = corpus_rows(corpus)
 
     def facts_of(self, real: int) -> int:
-        return self.facts_override or real
+        return self.facts_override or self.profile.facts_of(real)
 
 
 @functools.cache
@@ -64,7 +66,7 @@ def cell_dir(run_dir: Path, label: str) -> Path:
     return run_dir / "cells" / label
 
 
-def run_cell(cell: Cell, ct: CellType, t_exposures: int, run_dir: Path, env: Env, cfg: Mapping[str, Any] | None = None, *, diag: tuple[int, int, int] | None = None, reference_swap: bool = False) -> dict[str, Any]:
+def run_cell(cell: Cell, ct: CellType, t_exposures: int, run_dir: Path, env: Env, cfg: Mapping[str, Any] | None = None, *, spec: core.SetSpec | None = None, diag: tuple[int, int, int] | None = None, reference_swap: bool = False) -> dict[str, Any]:
     """Train one registered cell to T with snapshots at the readouts, evaluate each, and write ``result.json`` (the cell record). A finished cell is not recomputed; a divergence is recorded as ``nonfinite`` with its update;
     a resume restarts from the last snapshot whose hash is recorded."""
     from studies.p9i.train import training_stream_for
@@ -75,13 +77,13 @@ def run_cell(cell: Cell, ct: CellType, t_exposures: int, run_dir: Path, env: Env
     result_path = out / "result.json"
     if result_path.is_file():
         return read_json(result_path)
-    spec = core.set_for(cell.role, cell.draw, cell.attempt, c)
+    spec = spec or core.set_for(cell.role, cell.draw, cell.attempt, c, env.profile.name)
     data = data_for(env, spec, ct.facts, c)
     facts = env.facts_of(ct.facts)
     stream = training_stream_for(data, facts)
-    ru = readout_updates(ct, t_exposures) if not env.tiny else readout_updates_tiny(facts, t_exposures)
+    ru = readout_updates(ct, t_exposures) if not env.tiny else readout_updates_tiny(facts, t_exposures, env.profile)
     marks = sorted(set(ru.values()))
-    early, late, switch = diag or (int(c["draws"]["checkpoint_probe_every"]), int(c["draws"]["checkpoint_probe_every_late"]), int(c["draws"]["checkpoint_probe_switch"]))
+    early, late, switch = diag or env.profile.diag or (int(c["draws"]["checkpoint_probe_every"]), int(c["draws"]["checkpoint_probe_every_late"]), int(c["draws"]["checkpoint_probe_switch"]))
     hashes: dict[str, str] = {}
     resume: Path | None = None
     start = 0
@@ -109,9 +111,9 @@ def run_cell(cell: Cell, ct: CellType, t_exposures: int, run_dir: Path, env: Env
     return _write_result(result_path, cell, "ok", readouts, None)
 
 
-def readout_updates_tiny(facts: int, t: int) -> dict[str, int]:
-    """Tests: updates = exposures x facts / 128 at the tiny fact count."""
-    return {"e512": core.updates_for(min(512, t), facts), "half": core.updates_for(t // 2, facts), "T": core.updates_for(t, facts)}
+def readout_updates_tiny(facts: int, t: int, profile: Profile = TEST) -> dict[str, int]:
+    """Test profile: updates = exposures x facts / 128 at the tiny fact count, the first readout at the profile's 512."""
+    return {"e512": core.updates_for(min(profile.exp(512), t), facts), "half": core.updates_for(t // 2, facts), "T": core.updates_for(t, facts)}
 
 
 def _write_result(path: Path, cell: Cell, status: str, readouts: Mapping[str, Any], nonfinite_update: int | None) -> dict[str, Any]:
@@ -142,46 +144,66 @@ def stage_r_cell_type(
     ct: CellType, run_dir: Path, env: Env, th: core.Thresholds, cfg: Mapping[str, Any] | None = None, *, attempt: int = 0, ladder_values: Sequence[int] | None = None, ceiling: int | None = None, diag: tuple[int, int, int] | None = None
 ) -> dict[str, Any]:
     """The four runs of a cell type (A5-D and A6, calibration draws 1 and 2) train in doubling rounds, each resuming from the previous round's snapshot; after each round (the barrier of ruling 11) the plateau rule is evaluated
-    by code; the cell type stops at the first decision or at its ceiling. Every measurement goes to ``sealed/``; the return value holds only what ``durations.json`` may hold (no accuracy)."""
+    by code; the cell type stops at the first decision or at its ceiling. Every measurement goes to ``sealed/`` and nothing is printed; the return value holds only what ``durations.json`` may hold (no accuracy).
+
+    Resumable and extendable: a (run, round) whose sealed file exists is read back by the code itself (``stage-r-code``; selections are by code) and not trained again, so an interrupted Stage R continues and an extension round
+    (a larger ``ceiling`` and ladder) trains only the new doubling."""
     from studies.p9i.train import training_stream_for
 
     c = cfg or core.load_config()
-    lad = list(ladder_values or c["ladder"]["base"])
+    lad = list(ladder_values or [env.profile.exp(int(e)) for e in c["ladder"]["base"]])
     top = ceiling or max(lad)
-    early, late, switch = diag or (int(c["draws"]["checkpoint_probe_every"]), int(c["draws"]["checkpoint_probe_every_late"]), int(c["draws"]["checkpoint_probe_switch"]))
+    early, late, switch = diag or env.profile.diag or (int(c["draws"]["checkpoint_probe_every"]), int(c["draws"]["checkpoint_probe_every_late"]), int(c["draws"]["checkpoint_probe_switch"]))
     facts = env.facts_of(ct.facts)
+    stem = ct.name.replace("/", "-")
     curves = {k: ladder.Curve(k[0], k[1]) for k in ladder.RUN_KEYS}
-    cells = {k: core.Cell("CAL", ct.series, k[0], facts if env.tiny else ct.facts, ct.slots, k[1], core.init_seed("CAL", k[0], k[1], attempt, c), attempt) for k in ladder.RUN_KEYS}
+    cells = {k: core.Cell("CAL", ct.series, k[0], ct.facts, ct.slots, k[1], core.init_seed("CAL", k[0], k[1], attempt, c, env.profile.name), attempt) for k in ladder.RUN_KEYS}
     last: dict[tuple[str, int], int] = dict.fromkeys(ladder.RUN_KEYS, 0)
     obs_at: dict[tuple[tuple[str, int], int], Obs] = {}
     decision = ladder.Decision(ladder.STATUS_UNDECIDED)
     for e in [x for x in lad if x <= top]:
         for key, cell in cells.items():
-            spec = core.calibration_set(key[1], attempt, c)
-            data = data_for(env, spec, ct.facts, c)
-            stream = training_stream_for(data, facts)
-            u = core.updates_for(e, facts)
-            out = run_dir / "cal" / cell.label
-            snap = out / "snapshots" / f"u{last[key]:07d}" if last[key] else None
-            seg = adapter.run_segment(adapter.Job(cell, data, stream, env.backbone, out, data.seeds.r1_codes, last_update=u, snapshots=(u,), init_snapshot=snap, diag_early=early, diag_late=late, diag_switch=switch))
-            if seg.diverged is not None:
-                curves[key].nonfinite_update = seg.diverged["update"]
-                sealed.write_sealed(run_dir, f"{ct.name.replace('/', '-')}-{key[0]}-c{key[1]}-r{attempt}-nonfinite.json", {"diverged": seg.diverged})
+            if curves[key].nonfinite_update is not None:
                 continue
-            last[key] = u
-            rec = adapter.evaluate_snapshot(cell, out / "snapshots" / f"u{u:07d}", data, facts, u, backbone=env.backbone, rows=env.rows, r1_seed=data.seeds.r1_codes, swap_seed=spec.swap_seed(ct.facts, c), reference_swap=key[0] == "A6")
-            o = adapter.counts_of(rec)["obs"]
+            name = f"{stem}-{key[0]}-c{key[1]}-r{attempt}-e{e}.json"
+            nf_name = f"{stem}-{key[0]}-c{key[1]}-r{attempt}-nonfinite.json"
+            u = core.updates_for(e, facts)
+            if (sealed.sealed_dir(run_dir) / nf_name).is_file():
+                curves[key].nonfinite_update = int(sealed.read_sealed(run_dir, nf_name, reader="stage-r-code", why="resume")["diverged"]["update"])
+                continue
+            if (sealed.sealed_dir(run_dir) / name).is_file():
+                o = obs_from_json(sealed.read_sealed(run_dir, name, reader="stage-r-code", why="resume")["obs"])
+                last[key] = u
+            else:
+                spec = core.calibration_set(key[1], attempt, c, env.profile.name)
+                data = data_for(env, spec, ct.facts, c)
+                stream = training_stream_for(data, facts)
+                out = run_dir / "cal" / cell.label
+                snap = out / "snapshots" / f"u{last[key]:07d}" if last[key] else None
+                seg = adapter.run_segment(adapter.Job(cell, data, stream, env.backbone, out, data.seeds.r1_codes, last_update=u, snapshots=(u,), init_snapshot=snap, diag_early=early, diag_late=late, diag_switch=switch))
+                if seg.diverged is not None:
+                    curves[key].nonfinite_update = seg.diverged["update"]
+                    sealed.write_sealed(run_dir, nf_name, {"diverged": seg.diverged})
+                    continue
+                last[key] = u
+                rec = adapter.evaluate_snapshot(cell, out / "snapshots" / f"u{u:07d}", data, facts, u, backbone=env.backbone, rows=env.rows, r1_seed=data.seeds.r1_codes, swap_seed=spec.swap_seed(ct.facts, c), reference_swap=key[0] == "A6")
+                o = adapter.counts_of(rec)["obs"]
+                sealed.write_sealed(run_dir, name, {"obs": obs_to_json(o), "exposures": e})
             obs_at[(key, e)] = o
             curves[key].points[e] = ladder.Point(o.m_p, o.m_h)
-            sealed.write_sealed(run_dir, f"{ct.name.replace('/', '-')}-{key[0]}-c{key[1]}-r{attempt}-e{e}.json", {"obs": obs_to_json(o), "exposures": e})
-        decision = ladder.decide_cell_type(curves, ct.floor(th), top, th, lad, cfg=c)
+        decision = ladder.decide_cell_type(curves, ct.floor(th), top, th, lad, cfg=c, base_top=lad[min(len(lad), len(c["ladder"]["base"])) - 1], t_values=_t_values(env.profile, c))
         if decision.status != ladder.STATUS_UNDECIDED:
             break
+    labels_flags: dict[str, Any] | None = None
     flags: dict[str, Any] = {}
-    refl = labels_flags = None
     if decision.t is not None:
         t_obs = {d: obs_at.get((("A6", d), decision.t)) for d in (1, 2)}
         refl, info = ladder.reference_flags(t_obs, ct.floor(th), th)
         labels_flags = {"cond4": refl.cond4, "other": list(refl.other)}
         flags = {"reference_below_floor_at_t": info["reference_below_floor_at_t_draws"], "reference_nonfinite": any(curves[("A6", d)].nonfinite_update is not None for d in (1, 2))}
     return {"decision": decision, "reference_flags": labels_flags, **flags, "curves": curves}
+
+
+def _t_values(profile: Profile, c: Mapping[str, Any]) -> tuple[int, int]:
+    """T at the base ceiling and at the extended ceiling in this profile's exposures."""
+    return profile.exp(int(c["ladder"]["base_ceiling_t"])), profile.exp(int(c["ladder"]["extended_ceiling_t"]))

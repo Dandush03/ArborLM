@@ -21,7 +21,7 @@ def render(a: Mapping[str, Any]) -> str:
     out.append("## Lines (MEASURED, from the cell records)\n")
     for line in ("A", "G", "Q"):
         ln = a["lines"][line]
-        states = ", ".join(f"{ld:g}: {s}" for ld, s in sorted(ln["states"].items()))
+        states = ", ".join(f"{float(ld):g}: {s}" for ld, s in sorted(ln["states"].items(), key=lambda kv: float(kv[0])))
         out.append(f"- Line {line}: L_{line} = {_fmt(ln['L'])} ({'none' if ln['L'] is None else 'largest load held with every lower load'}); l1 = {_fmt(ln['l1'])} ({ln['l1_state']}){'; NON-MONOTONE' if ln['non_monotone'] else ''}. States by load: {states}.")
     out.append("\n## Series states by load\n")
     for ld, per in a["states_by_load_series"].items():

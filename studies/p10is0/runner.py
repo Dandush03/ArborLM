@@ -24,7 +24,9 @@ from . import core
 COMPLETED, FAILED, KILLED_CAP, KILLED_RSS, NOT_STARTED = "completed", "failed", "killed_cap", "killed_rss", "not_started"
 PAUSED_IDENTITY = "paused_identity"
 IDENTITY_EXIT = 75  # a worker that refuses on an identity or precondition check (a dirty tree, a frozen file that differs, no Decision 2) exits with this code (EX_TEMPFAIL): PAUSED — IDENTITY, not FAILED
-PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY)
+ENV_EXIT = 76  # an out-of-memory kill, a full disk or a file-system error inside a worker: PAUSED — ENVIRONMENT, never a failed cell (ADR-0023 section 12)
+PAUSED_ENVIRONMENT = "paused_environment"
+PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY, PAUSED_ENVIRONMENT)
 POLL = 0.2
 
 
@@ -97,6 +99,10 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
             code = popen.poll()
             if code == IDENTITY_EXIT:
                 out[label] = {"status": PAUSED_IDENTITY, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED — IDENTITY: the worker refused on an identity or precondition check; restore the file or the state bit for bit and run the stage again (no failed record is kept)"}
+                running.pop(label)
+                continue
+            if code == ENV_EXIT:
+                out[label] = {"status": PAUSED_ENVIRONMENT, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED — ENVIRONMENT: remove the cause and run the stage again; the task resumes from its last snapshot (no failed record is kept)"}
                 running.pop(label)
                 continue
             if code is not None:

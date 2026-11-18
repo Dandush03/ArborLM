@@ -180,7 +180,7 @@ torch_interop_threads = 1
 deterministic_algorithms = true
 
 [caps]
-# set at the freeze from the measured projection (section 9); provisional until then
+# informational only: the caps are set at the freeze from the measured projection in studies/p10is0/freeze/stage_caps.json (section 9), whose own `provisional` flag the freeze reads; this config is a frozen input and never changes after Stage R starts
 provisional = true
 total_hours = 0.0
 stage_r_hours = 0.0

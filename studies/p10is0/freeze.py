@@ -21,7 +21,7 @@ from . import plan as planmod
 from .plan import StageRefused
 
 
-def candidate_plan(repo: Path, *, supersede: bool = False) -> dict[str, Any]:
+def candidate_plan(repo: Path, *, supersede: bool = False, run_dir: Path | None = None) -> dict[str, Any]:
     """Write the candidate ``freeze/plan.json`` from ``freeze/durations.json`` (which Stage R wrote) and the config."""
     cfg = core.load_config(repo / core.CONFIG)
     plan_path = repo / core.PLAN
@@ -44,17 +44,32 @@ def candidate_plan(repo: Path, *, supersede: bool = False) -> dict[str, Any]:
     durations = core.read_record(dur_path, "durations")["cell_types"]
     caps_path = repo / core.STAGE_CAPS
     caps = core.read_record(caps_path, "stage_caps") if caps_path.is_file() else {"provisional": True}
-    record = planmod.build_plan(cfg, durations, caps=caps)
+    from .profile import profile_of
+
+    dp, mf = _draws_of(run_dir)
+    record = planmod.build_plan(cfg, durations, caps=caps, profile=profile_of(run_dir), draw_plan=dp, manifests=mf, run_dir=str(run_dir.resolve()) if run_dir else None)
     record["durations_sha256"] = file_sha256(dur_path)
     core.write_record(plan_path, record)
     return {"candidate_plan": str(plan_path), "plan_file_sha256": file_sha256(plan_path), "cells": len(record["items"]["main"]), "caps_provisional": bool(caps.get("provisional", True))}
+
+
+def _draws_of(run_dir: Path | None) -> tuple[dict[str, Any] | None, dict[str, str] | None]:
+    """The draw plan and the SHA-256 of every draw manifest of the run directory (the plan names the data it runs on)."""
+    if run_dir is None or not (run_dir / "draw_plan.json").is_file():
+        return None, None
+    dp = read_json(run_dir / "draw_plan.json")
+    names = sorted({*dp["seed_set_of"].values()})
+    return dp, {n: file_sha256(run_dir / "draws" / n / "data_manifest.json") for n in names}
 
 
 def counting_rehearsal(repo: Path) -> dict[str, Any]:
     """Resolve every stage's items of the plan file to their inputs and outputs without training, and run the analysis on a synthetic registry keyed by the plan's labels. The record names the plan file's SHA-256."""
     cfg = core.load_config(repo / core.CONFIG)
     plan_path = repo / core.PLAN
+    from .profile import by_name
+
     plan = planmod.load_plan(plan_path)
+    prof = by_name(plan.get("profile", "registered"))
     problems: list[str] = []
     labels_seen: set[str] = set()
     for it in planmod.items_of(plan, "main"):
@@ -62,10 +77,10 @@ def counting_rehearsal(repo: Path) -> dict[str, Any]:
             problems.append(f"duplicate label {it['label']}")
         labels_seen.add(it["label"])
         ct = core.cell_type_by_name(it["cell_type"], cfg)
-        cell = core.make_cell("REG", ct, it["arm"], it["draw"], 0, cfg)
-        if cell.label != it["label"] or cell.init_seed != it["init_seed"] or core.registered_set(it["draw"], cfg).name != it["seed_set"]:
+        cell = core.make_cell("REG", ct, it["arm"], it["draw"], 0, cfg, prof.name)
+        if cell.label != it["label"] or cell.init_seed != it["init_seed"] or core.set_of_name(it["seed_set"], cfg, prof.name).name != it["seed_set"] or it["seed_set"] != plan["draws"]["seed_set_of"][str(it["draw"])]:
             problems.append(f"item {it['label']} does not resolve to its cell, seed or set")
-        if it["updates"] != ct.updates(plan["cell_types"][it["cell_type"]]["t_exposures"]):
+        if it["updates"] != core.updates_for(plan["cell_types"][it["cell_type"]]["t_exposures"], prof.facts_of(ct.facts)):
             problems.append(f"item {it['label']} has the wrong update count")
     expected = sum(10 * len(ct.arms) for ct in core.cell_types(cfg) if not plan["cell_types"][ct.name].get("removed"))
     if len(labels_seen) != expected:
@@ -101,10 +116,13 @@ def freeze(repo: Path, rehearsal_path: Path, *, attest_unopened: Sequence[str], 
         raise StageRefused("refused: no candidate plan: write it first, rehearse against it, then freeze")
     plan = planmod.load_plan(plan_path)
     caps_path = repo / core.STAGE_CAPS
-    if bool(cfg["caps"]["provisional"]) or not caps_path.is_file() or core.read_record(caps_path, "stage_caps").get("provisional", True):
+    if not caps_path.is_file() or core.read_record(caps_path, "stage_caps").get("provisional", True):
         raise StageRefused("refused: the caps are provisional or freeze/stage_caps.json is missing: the caps are set from the measured projection and the plan rewritten and rehearsed again")
     durations = core.read_record(repo / core.DURATIONS, "durations")["cell_types"]
-    rederived = planmod.build_plan(cfg, durations)
+    from .profile import by_name
+
+    dp, mf = _draws_of(Path(plan["run_dir"])) if plan.get("run_dir") else (None, None)
+    rederived = planmod.build_plan(cfg, durations, profile=by_name(plan.get("profile", "registered")), draw_plan=dp, manifests=mf, run_dir=plan.get("run_dir"))
     if json.loads(json.dumps(core.jsonable(planmod.scientific_content(rederived)))) != planmod.scientific_content(plan):
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and durations.json: supersede it and rehearse again")
     reh = core.read_record(rehearsal_path, "rehearsal")

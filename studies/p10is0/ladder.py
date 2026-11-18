@@ -54,7 +54,7 @@ class Decision:
     reason: str = ""
 
 
-def decide_cell_type(curves: Mapping[tuple[str, int], Curve], floor: float, ceiling: int, th: Thresholds, ladder: Sequence[int], *, cfg: Mapping[str, Any] | None = None) -> Decision:
+def decide_cell_type(curves: Mapping[tuple[str, int], Curve], floor: float, ceiling: int, th: Thresholds, ladder: Sequence[int], *, cfg: Mapping[str, Any] | None = None, base_top: int | None = None, t_values: tuple[int, int] | None = None) -> Decision:
     """The ladder's decision for one cell type from the four runs' curves reached so far (the round barrier: every run has the point before it is read, ruling 11).
 
     * any non-finite run: NON_FINITE (T = base ceiling T; not an extension candidate);
@@ -64,7 +64,7 @@ def decide_cell_type(curves: Mapping[tuple[str, int], Curve], floor: float, ceil
     * otherwise UNDECIDED (train the next doubling).
     """
     c = cfg or core.load_config()
-    base_t, ext_t = int(c["ladder"]["base_ceiling_t"]), int(c["ladder"]["extended_ceiling_t"])
+    base_t, ext_t = t_values or (int(c["ladder"]["base_ceiling_t"]), int(c["ladder"]["extended_ceiling_t"]))
     if set(curves) != set(RUN_KEYS):
         raise ValueError("a cell type has exactly four runs (A5-D and A6 on calibration draws 1 and 2)")
     if any(cv.nonfinite_update is not None for cv in curves.values()):
@@ -84,7 +84,7 @@ def decide_cell_type(curves: Mapping[tuple[str, int], Curve], floor: float, ceil
             below = any(curves[("A5-D", d)].points[e].m_p < floor_f for d in (1, 2))
             return Decision(STATUS_SHOWN, e, th.t_factor * e, True, below, labels.FLAT_BELOW_FLOOR if below else None)
     if reached >= ceiling:
-        if ceiling > max(int(x) for x in c["ladder"]["base"]):
+        if ceiling > (base_top if base_top is not None else max(int(x) for x in c["ladder"]["base"])):
             return Decision(STATUS_CEILING, None, ext_t, False, False, labels.NOT_SHOWN_REHEARSAL, "no plateau at the extended ceiling")
         return Decision(STATUS_CANDIDATE, None, base_t, False, False, None, "no plateau on the base ladder: an extension candidate")
     return Decision(STATUS_UNDECIDED)
@@ -150,11 +150,12 @@ def projected_hours(
 ) -> tuple[float, list[Stage]]:
     """P (item 2), in charged hours at 1x: hours already charged + measured gates, generation, analysis and report + the summed worker-seconds of the main grid at each cell type's T, of the extension rounds granted so
     far and the one under decision, and of X8 and its calibration at T = ``x8_t`` (if kept), divided by the workers, + the longest single task of each stage. Every stage is a list entry, so the longest of each is added."""
-    by_name = {ct.name: ct for ct in cts}
+    by_name = {ct.name: ct for ct in [*cts, *([x8] if x8 is not None else [])]}
     stages = [main_grid_stage(cts, t_assumed, rates, draws)]
     stages += [extension_round_stage(by_name[n], rates, ladder_top) for n in granted_rounds]
     if x8 is not None:
-        stages += [calibration_stage(x8, x8_t, rates), main_grid_stage([x8], {x8.name: x8_t}, rates, draws)]
+        xm = main_grid_stage([x8], {x8.name: x8_t}, rates, draws)
+        stages += [calibration_stage(x8, x8_t, rates), Stage("x8", xm.total_seconds, xm.longest_seconds)]
     work = sum(s.total_seconds for s in stages) / workers
     longest = sum(s.longest_seconds for s in stages)
     return charged_hours + other_hours + (work + longest) / 3600.0, stages
@@ -240,14 +241,17 @@ def reference_flags(a6_at_t: Mapping[int, labels.Obs | None], floor: float, th: 
 
 
 # --- durations.json, events, and the memory rule -----------------------------------------------------------------------------------------------------
-def durations_record(entries: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+def durations_record(entries: Mapping[str, Mapping[str, Any]], code_identity: Mapping[str, str] | None = None) -> dict[str, Any]:
     """The ``durations.json`` record: per cell type exactly the whitelisted keys of section 5.2 (iii). Nothing else of Stage R leaves the sealed directory in clear."""
     allowed = {"e_star", "t_exposures", "convergence", "flat_below_floor", "extension", "reference_flags", "reference_below_floor_at_t", "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels"}
     for name, e in entries.items():
         extra = set(e) - allowed
         if extra:
             raise ValueError(f"durations.json entry {name!r} has keys outside the whitelist: {sorted(extra)}")
-    return {**core.envelope("durations"), "cell_types": {k: dict(v) for k, v in entries.items()}}
+    out: dict[str, Any] = {**core.envelope("durations"), "cell_types": {k: dict(v) for k, v in entries.items()}}
+    if code_identity is not None:
+        out["code_identity"] = dict(code_identity)  # the code Stage R ran under: every later stage refuses if the frozen code differs (an engineering stop)
+    return out
 
 
 def events(entries: Mapping[str, Mapping[str, Any]], cts: Sequence[CellType]) -> list[str]:

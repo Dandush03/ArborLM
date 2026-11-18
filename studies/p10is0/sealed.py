@@ -22,14 +22,14 @@ from . import core
 
 SEALED = "sealed"
 ACCESS_LOG = "sealed_access_log.jsonl"
-ALLOWED_READERS = ("auditor-recomputation",)
+ALLOWED_READERS = ("auditor-recomputation", "stage-r-code")  # the code that makes the selections (resume, plateau) reads its own measurements; no person does
 LABEL_SEEN = "CALIBRATION VALUES SEEN BY THE LEAD"
 
 PUBLIC_KEYS = frozenset(
     {
         "kind", "schema", "study", "stage", "round", "cell_type", "label", "arm", "calibration_draw", "slots", "facts", "exposures", "updates", "wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average",
         "shapes", "parameter_counts", "counts", "count", "status", "identity", "environment", "sha256", "path", "decision", "e_star", "t_exposures", "convergence", "flat_below_floor", "extension", "reference_flags", "reference_below_floor_at_t",
-        "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels", "cell_types", "seed_set", "workers", "tasks", "completed", "cells", "items", "run", "stages", "hashes", "ok", "passed", "reason", "files", "cond4", "other",
+        "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels", "cell_types", "seed_set", "workers", "tasks", "completed", "cells", "items", "run", "stages", "hashes", "ok", "passed", "reason", "files", "cond4", "other", "evaluation_wall_seconds", "code_identity", "extension_decisions", "projected_hours", "budget_hours", "granted",
     }
 )  # fmt: skip
 FORBIDDEN_WORDS = ("loss", "acc", "nll", "perplex", "entropy", "margin", "correct", "bits", "m_p", "m_h", "plateau_value", "curve")
@@ -46,11 +46,11 @@ class SealedRefused(PermissionError):
 
 def validate_public(obj: Any, *, path: str = "") -> None:
     """Keys must be in ``PUBLIC_KEYS`` (or the cell-type names of ``durations.json``'s ``cell_types`` map); values must be plain: no float that could be an accuracy or loss unless the key is a time, rate, memory or load key."""
-    numeric_ok = {"wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average", "seconds", "updates", "exposures", "slots", "facts", "t_exposures", "e_star", "round", "calibration_draw", "count", "workers", "schema"}
+    numeric_ok = {"wall_seconds", "evaluation_wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average", "seconds", "updates", "exposures", "slots", "facts", "t_exposures", "e_star", "round", "calibration_draw", "count", "workers", "schema"}
     if isinstance(obj, Mapping):
         for k, v in obj.items():
             key = str(k)
-            in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or path.endswith("hashes") or path.endswith("identity") or path.endswith("environment")
+            in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or path.endswith("hashes") or path.endswith("code_identity") or path.endswith("identity") or path.endswith("environment")
             if not in_cell_types and key not in PUBLIC_KEYS:
                 raise PublicOutputError(f"key not allowed in a public output: {path}/{key}")
             if any(w in key.lower() for w in FORBIDDEN_WORDS) and key not in ("convergence", "labels"):
