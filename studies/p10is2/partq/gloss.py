@@ -15,7 +15,12 @@ from typing import Any
 from studies.p10s2.data import Item, TrainItem
 from studies.p10s2.retrieval import gloss_lexicon
 from studies.p10s2.text import normalize
-from studies.p10s2.tokenization import NEWLINE, ReferenceTokenizer, prompt_segments, tokenize_segment
+from studies.p10s2.tokenization import (
+    NEWLINE,
+    ReferenceTokenizer,
+    prompt_segments,
+    tokenize_segment,
+)
 
 SEPARATOR = " ="
 
