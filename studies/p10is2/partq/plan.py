@@ -17,7 +17,7 @@ from ..common import plan as planmod
 from ..common.core import StageRefused
 
 STAGES = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs")
-REHEARSAL_STAGES = STAGES
+REHEARSAL_STAGES = (*STAGES, "analysis")  # EVERY stage the registered run has (real_stages.STAGE_ORDER): the counting rehearsal runs them all and the freeze gate requires them all
 PANELS_OUT = ("E_A", "E_B", "E_C", "E_open", "D_cal", "D_con")
 FILTER_GRID = "24 settings: tau in {-0.05..-0.60 step 0.05} x length ratio in {[0.5, 2.0], [0.6, 1.6]}"
 

@@ -19,6 +19,7 @@ from arborlm.io import file_sha256, read_json, write_json
 from ..common import core, gates
 from ..common import plan as planmod
 from ..common.core import StageRefused
+from . import pkgmanifest
 from . import plan as qplan
 
 DELEGATION_SECTION_7_MARKER = "## 7"
@@ -99,6 +100,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     wp = planmod.walk_problems(walk, listed, repo)
     if wp:
         raise StageRefused("refused: " + "; ".join(wp))
+    pkgmanifest.require_package_manifest(plan.data["inputs"])  # R7: the plan names the installed-package manifest (names, versions, file hashes, the shadowed lock packages)
     counting = core.read_record(Path(args.counting_rehearsal), "rehearsal")
     reh = gates.rehearsal_gate(counting, qplan.REHEARSAL_STAGES, plan_file_sha256=plan_sha)
     if not reh["passed"]:

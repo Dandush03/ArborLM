@@ -220,8 +220,12 @@ def test_sealed_run_writes_values_under_sealed_and_displays_only_the_whitelist(t
     ctx = ctx_of(tmp_path, seal=True)
     pipeline.run_all(ctx)
     shown = pipeline.summary_for_display(ctx)
-    assert set(shown) == {"filter_setting", "yields", "counts", "batches"}
-    assert "q1" not in json.dumps(shown) and shown["filter_setting"]["A"]["tau"] <= -0.05
+    assert set(shown) == {"counts", "batches"}  # L1: nothing the lead can read depends on Q1-Q4
+    assert "q1" not in json.dumps(shown) and "filter" not in json.dumps(shown) and "yield" not in json.dumps(shown)
+    sealed_path = pipeline.write_sealed_summary(ctx)
+    sealed = json.loads(sealed_path.read_text())
+    assert sealed["filter_setting"]["A"]["tau"] <= -0.05 and "yields" in sealed and (sealed_path.stat().st_mode & 0o777) == 0o600
+    assert (sealed_path.parent.stat().st_mode & 0o777) == 0o700
     assert not ctx.d("qfit/record.json").exists() and ctx.d("sealed/qfit_record.json").is_file() and ctx.d("sealed/qfit_values.json").is_file()
     assert ctx.d("sealed/qcheck_A_values.json").is_file() and ctx.d("sealed/qcheck_A_result.json").is_file()
     assert not any("sealed" in k for k in pipeline.hashes_of(ctx))  # the manifest never lists a sealed file

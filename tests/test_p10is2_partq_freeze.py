@@ -25,7 +25,7 @@ from p10is2_fixtures import (  # noqa: E402
 from arborlm.io import file_sha256, write_json  # noqa: E402
 from studies.p10is2.common import core, gates  # noqa: E402
 from studies.p10is2.common import plan as planmod  # noqa: E402
-from studies.p10is2.partq import freeze, pipeline, real, stages  # noqa: E402
+from studies.p10is2.partq import freeze, pipeline, pkgmanifest, real, stages  # noqa: E402
 from studies.p10is2.partq import plan as qplan  # noqa: E402
 from studies.p10is2.partq import rehearsal as reh  # noqa: E402
 
@@ -68,7 +68,8 @@ def set_caps(repo: Path, hours: dict[str, float], provisional: bool = False) -> 
 
 
 CAP_HOURS = {f"{k}_hours": 1.0 for k in qplan.STAGES} | {"total_hours": 20.0}
-INPUTS = {"downloads": {"path": "/x", "sha256": "0" * 64}}
+_FILES = {"pkg/a.py": "1" * 64, "pkg-1.0.dist-info/METADATA": "2" * 64}
+INPUTS = {"downloads": {"path": "/x", "sha256": "0" * 64}, "package_manifest": {"path": "/durable", "packages": {"pkg": "1.0"}, "file_count": 2, "tree_sha256": pkgmanifest.tree_sha256(_FILES), "files": _FILES, "shadowed_lock_packages": {}}}
 FAKE_WALK = {"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []}
 
 
@@ -465,7 +466,9 @@ def test_measuring_rehearsal_measures_and_seals(tmp_path: Path) -> None:
     shown = json.dumps({k: v for k, v in rec.items() if k != "oracle_line"})  # the fixed line itself says "measured-precision filter"
     for hidden in ("q1", "q2", "q3", "q4", "chrf", "precision", "TEACHERS-QUALIFIED", "QUALIFICATION-"):
         assert hidden not in shown.replace("seconds_per_generated_source", "")  # no quality value or label in what is displayed
-    assert rec["filter_setting"]["A"] is not None  # the chosen filter setting and the yields are visible (section 10)
+    assert "filter_setting" not in rec and "yields" not in rec  # L1: the filter setting and the yields are sealed, not displayed
+    sealed = json.loads((run / "sealed/rehearsal_values.json").read_text())
+    assert sealed["filter_setting"]["A"] is not None and "yields" in sealed
 
 
 def test_whitelist_refuses_sealed_keys() -> None:

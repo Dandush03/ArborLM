@@ -166,13 +166,13 @@ def identity_probe(plan: planmod.Plan, repo: Path, run_dir: Path) -> Any:
         data = json.loads(json.dumps(plan.data))
         data["frozen_files"][sorted(data["frozen_files"])[0]] = "0" * 64
         try:
-            planmod.verify_plan(planmod.Plan(data, "T"), repo, run_dir, candidate=True)
+            planmod.verify_plan(planmod.Plan(data, "T"), repo, Path(plan.data["run_dir"]), candidate=True)
         except StageRefused as e:
             if "PAUSED — IDENTITY" not in str(e):
                 raise
         else:
             raise RuntimeError("the forced identity difference was not detected")
-        planmod.verify_plan(plan, repo, run_dir, candidate=True)
+        planmod.verify_plan(plan, repo, Path(plan.data["run_dir"]), candidate=True)
         raise core.ForcedIdentityPause("PAUSED — IDENTITY forced and restored")
 
     return probe

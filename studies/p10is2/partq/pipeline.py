@@ -26,7 +26,7 @@ from . import labels, partition, qualify, split
 from .teacher import BatchTeacher
 
 # the whitelist of ruling L5: what a sealed (rehearsal) run may show
-WHITELIST = ("timings", "memory", "counts", "yields", "filter_setting", "batches", "sources")
+WHITELIST = ("timings", "memory", "counts", "batches", "sources", "stages", "forced", "generation_items_per_second", "gates")  # nothing here depends on Q1-Q4
 
 
 @dataclass
@@ -96,6 +96,10 @@ def _rec(ctx: QContext, name: str, what: str, body: Mapping[str, Any]) -> dict[s
     path = ctx.d(loc(ctx, name))
     if not path.exists():
         core.write_record(path, rec)
+        if "sealed" in path.relative_to(ctx.run_dir).parts:
+            import os
+
+            os.chmod(path, 0o600)  # sealed files are readable by the owner only
     return read_json(path)  # type: ignore[no-any-return]
 
 
@@ -377,11 +381,33 @@ def _run_all(ctx: QContext) -> dict[str, Any]:
 
 
 def summary_for_display(ctx: QContext) -> dict[str, Any]:
-    """Ruling L5: through a whitelist, the summary a sealed (rehearsal) run may print: filter setting, yields, batches, counts. No value of Q1-Q4 and no per-item score."""
+    """The PUBLIC summary of a sealed (rehearsal) run (ruling L5). NOTHING in it depends on Q1-Q4: not the filter setting used, not a yield, not an accepted count, nor anything derived from them. It holds the
+    partition's counts (panel sizes, reserve, source pools: functions of the corpus and the seeds), the number of sources each teacher generated (a function of the block layout, not of the outcome) and the
+    number of Q_fit batches. The outcome-dependent figures go to the sealed file (``write_sealed_summary``)."""
     qf = _have(ctx, "qfit/record.json") or {}
     g = _have(ctx, "generation/result.json") or {}
     pc = _have(ctx, "partition_counts.json") or {}
-    return {"filter_setting": qf.get("filter_setting"), "yields": {"qfit": qf.get("yields_on_qfit"), "generation": g.get("yields")}, "counts": {"partition": pc.get("counts"), "pools": g.get("counts")}, "batches": qf.get("n_batches")}
+    sources = {c: v["sources_generated"] for c, v in (g.get("per_capability") or {}).items()}
+    return {"counts": {"partition": pc.get("counts"), "generation_sources": sources}, "batches": qf.get("n_batches")}
+
+
+def sealed_summary(ctx: QContext) -> dict[str, Any]:
+    """The outcome-dependent figures of a rehearsal, for the SEALED file only: the filter setting used (the fallback if Q3 gave none), the Q_fit yields, the accepted counts and the yields of generation."""
+    qf = _have(ctx, "qfit/record.json") or {}
+    g = _have(ctx, "generation/result.json") or {}
+    return {"filter_setting": qf.get("filter_setting"), "yields": {"qfit": qf.get("yields_on_qfit"), "generation": g.get("yields")}, "accepted_counts": g.get("counts"), "split": g.get("split"), "accepted_on_qfit": qf.get("accepted_on_qfit")}
+
+
+def write_sealed_summary(ctx: QContext) -> Path:
+    """Writes ``sealed/rehearsal_values.json`` (permissions 0600; the directory 0700): not displayed, not read before Part Q's outcome is registered."""
+    import os
+
+    path = ctx.d("sealed/rehearsal_values.json")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    os.chmod(path.parent, 0o700)
+    core.write_record(path, {**core.envelope("sealed", "Q"), "what": "rehearsal_values", **sealed_summary(ctx)}, overwrite=True)
+    os.chmod(path, 0o600)
+    return path
 
 
 def hashes_of(ctx: QContext) -> dict[str, str]:

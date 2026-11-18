@@ -134,27 +134,35 @@ def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace
         return c
 
     cap = float(cfg["caps"]["measuring_rehearsal_hours"]) * 3600.0
+    out_info: dict[str, Any] = {}
+
+    def outputs_stage() -> None:
+        """Step 8, a stage of the registered run: it runs in EVERY rehearsal, whatever Q1-Q4 gave (whether it ran must not reveal the sealed outcome)."""
+        c = factory()
+        p = pipeline.step_partition(c)
+        t1 = time.monotonic()
+        out = real_stages.stage_outputs(w, c, p, "rehearsal")
+        out_info.update(seconds=time.monotonic() - t1, bundle=out["bundle"], units=float(sum(len(v) for v in p.panels.values())))
+
     if kind == "measuring":
-        rec = rehearsal.run_measuring(factory, cap_seconds=cap, external={"inputs": (t_inputs, 1.0)})
+        rec = rehearsal.run_measuring(factory, cap_seconds=cap, external={"inputs": (t_inputs, 1.0)}, post_stages={"outputs": outputs_stage})
+        rec["rates_seconds_per_unit"]["outputs"] = out_info["seconds"] / max(1.0, out_info["units"])
+        rec["projection_units"]["outputs"] = out_info["units"]
     else:
         plan_file = repo / core.PLAN_Q
         plan = planmod.Plan.load(plan_file, "Q")
-        rec = rehearsal.run_counting(factory, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), cap_seconds=float(cfg["caps"]["rehearsal_hours"]) * 3600.0, identity_probe=identity_probe(plan, repo, run_dir))
-    c = factory()
-    p = pipeline.step_partition(c)
-    t1 = time.monotonic()
-    outputs = real_stages.stage_outputs(w, c, p, "rehearsal")  # always: whether the stage ran must not reveal the sealed outcome
+        items = {st: len(v) for st, v in plan.data["items"].items()}
+        rec = rehearsal.run_counting(factory, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), cap_seconds=float(cfg["caps"]["rehearsal_hours"]) * 3600.0, identity_probe=identity_probe(plan, repo, run_dir), post_stages={"outputs": outputs_stage}, plan_stage_items=items)
     rec["inputs_stage"] = {"seconds": t_inputs, "ordinary_windows_left": inputs["ordinary_windows_left"], "marker_like_windows": inputs["marker_like_windows"], "corpus_supply": inputs["corpus_supply"]}
-    rec["outputs_stage"] = {"ran": True, "seconds": time.monotonic() - t1, "bundle": outputs["bundle"]}
-    if kind == "measuring":
-        rec["rates_seconds_per_unit"]["outputs"] = rec["outputs_stage"]["seconds"] / max(1.0, float(sum(len(v) for v in p.panels.values())))
-        rec["projection_units"]["outputs"] = float(sum(len(v) for v in p.panels.values()))
+    rec["outputs_stage"] = {"ran": True, "seconds": out_info["seconds"]}
     rec["other_studies_alive"] = procs.other_studies_alive()
     total = time.monotonic() - t0
-    core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12).charge_process("rehearsal", kind, "main", total)
+    led = core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12)
+    led.charge_process("rehearsal", kind, "main", total)  # rehearsal time counts in the part's charge (ruling L2)
     rec["charged_seconds"] = total
+    rec["charged_before_freeze_seconds"] = led.charged()  # everything charged in this run directory so far: the caps proposal's pre-freeze charge
     core.write_record(run_dir / f"rehearsal_{kind}.json", rec, overwrite=True)
-    print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "yields", "filter_setting") if k in rec}), default=str))
+    print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "batches", "generation_items_per_second", "stages", "forced") if k in rec}), default=str))
 
 
 def identity_probe(plan: Any, repo: Path, run_dir: Path) -> Any:
@@ -166,13 +174,13 @@ def identity_probe(plan: Any, repo: Path, run_dir: Path) -> Any:
         victim = sorted(data["frozen_files"])[0]
         data["frozen_files"][victim] = "0" * 64
         try:
-            planmod.verify_plan(planmod.Plan(data, "Q"), repo, run_dir, candidate=True)
+            planmod.verify_plan(planmod.Plan(data, "Q"), repo, Path(plan.data["run_dir"]), candidate=True)  # the PLAN's run directory: the rehearsal runs in its own
         except StageRefused as e:
             if "PAUSED — IDENTITY" not in str(e):
                 raise
         else:
             raise RuntimeError("the forced identity difference was not detected")
-        planmod.verify_plan(plan, repo, run_dir, candidate=True)  # restored: the stage resumes
+        planmod.verify_plan(plan, repo, Path(plan.data["run_dir"]), candidate=True)  # restored: the stage resumes
         raise core.ForcedIdentityPause("PAUSED — IDENTITY forced and restored")
 
     return probe

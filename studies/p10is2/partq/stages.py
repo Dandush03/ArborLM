@@ -48,7 +48,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     from . import real
 
     out = real.run_registered_stage(args.stage, repo, run_dir, plan)
-    return 0 if (out or {}).get("status", "COMPLETE") == "COMPLETE" else EXIT_INCOMPLETE
+    return 0 if (out or {}).get("status", "COMPLETE") in ("COMPLETE", "NOT RUN BY RULE") else EXIT_INCOMPLETE  # NOT RUN BY RULE is the registered negative-outcome path, not an incomplete stage
 
 
 def cmd_work(args: argparse.Namespace) -> int:
@@ -75,6 +75,27 @@ def cmd_ledger(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_package_manifest(args: argparse.Namespace) -> int:
+    """Produces the installed-package manifest of the durable copy (R7, A7). With ``--merge-into`` the manifest is added under ``package_manifest`` to an inputs file (for ``candidate-plan --inputs``); otherwise it is
+    written to ``--out``. Reads the copy and the lock environment's site-packages; writes nothing into either."""
+    import sysconfig
+
+    from arborlm.io import write_json
+
+    from . import pkgmanifest
+
+    cfg = core.load_config("Q", repo_of(args) / core.CONFIG_Q)
+    m = pkgmanifest.build_manifest(Path(cfg["paths"]["durable_packages"]), Path(args.lock_site_packages or sysconfig.get_paths()["purelib"]))
+    if args.merge_into:
+        target = Path(args.merge_into)
+        inputs = json.loads(target.read_text()) if target.is_file() else {}
+        write_json(target, {**inputs, pkgmanifest.KEY: m})
+    else:
+        write_json(Path(args.out), {pkgmanifest.KEY: m})
+    print(json.dumps({"file_count": m["file_count"], "tree_sha256": m["tree_sha256"], "packages": len(m["packages"]), "shadowed_lock_packages": sorted(m["shadowed_lock_packages"])}))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="studies.p10is2.partq.stages", description="P10IS2 Part Q (ADR-0025). Registered entry points refuse until a freeze record and a committed Decision 2 exist.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -89,6 +110,11 @@ def build_parser() -> argparse.ArgumentParser:
     lg.add_argument("--mode", choices=("registered", "rehearsal"), default="registered")
     lg.add_argument("--run-dir")
     lg.add_argument("--repo")
+    pm = sub.add_parser("package-manifest")
+    pm.add_argument("--out")
+    pm.add_argument("--merge-into")
+    pm.add_argument("--lock-site-packages")
+    pm.add_argument("--repo")
     h = sub.add_parser("rehearse")
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
@@ -107,6 +133,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             return cmd_work(args)
         if args.command == "ledger":
             return cmd_ledger(args)
+        if args.command == "package-manifest":
+            if bool(args.out) == bool(args.merge_into):
+                raise StageRefused("refused: give exactly one of --out and --merge-into")
+            return cmd_package_manifest(args)
         return cmd_rehearse(args)
     except StageRefused as e:
         print(f"REFUSED: {e}", file=sys.stderr)

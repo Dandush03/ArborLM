@@ -33,7 +33,7 @@ from ..common import plan as planmod
 from ..common.core import StageRefused
 from . import batches as bt
 from . import generation as gen
-from . import labels, partition, pipeline, real, real_bundle, real_world, step8
+from . import labels, partition, pipeline, pkgmanifest, real, real_bundle, real_world, step8
 from .batches import DigestMismatch, StageCapExceeded
 from .teacher import marian_batch_teacher
 
@@ -50,9 +50,11 @@ def ledger_path(cfg: Any, repo: Path, run_dir: Path, mode: str) -> Path:
     return Path(cfg["paths"]["panel_ledger"]) if mode == "registered" else run_dir / "panel_ledger_candidate.json"
 
 
-def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers: bool, light: bool = False, tick: Callable[[str], None] = lambda s: None) -> real_world.RealWorld:
+def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers: bool, light: bool = False, plan: planmod.Plan | None = None, tick: Callable[[str], None] = lambda s: None) -> real_world.RealWorld:
     """The real world. ``light`` loads only the tokenizer and WikiText-2 (the ``ledger`` command); otherwise also the student and the corpus (and the teachers if asked)."""
     gates.apply_platform_settings(cfg)
+    if plan is not None:  # R7: the plan's inputs and the durable package copy are what the freeze recorded, checked at the start of every stage that uses them
+        pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=True)
     real_world.assert_process_environment(cfg)
     w = real_world.RealWorld(cfg, repo, run_dir, downloads_dir(cfg))
     w.record["packages"] = real_world.check_packages(cfg, repo)
@@ -286,71 +288,120 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
             man = runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": runner.KILLED_CAP, "seconds": 0.0, "reason": "the cumulative hour cap is spent", "peak_rss_bytes": 0}}, 0.0, identity={}, started=core.utc_stamp(), caps={"stage_seconds_left": cap})
             _mark(run_dir, stage, "PAUSED")
             return {"status": "PAUSED", "reason": "the cumulative hour cap is spent", "manifest": man["status"]}
+    if stage in TEACHER_GATED:
+        why = gate_outcome(cfg, run_dir, mode, stage)
+        if why is not None:  # the negative-outcome path: an explicit, recorded NOT RUN BY RULE (section 4.1 step 7), never a mis-recorded COMPLETE
+            _mark(run_dir, stage, "NOT RUN BY RULE", why)
+            return {"status": "NOT RUN BY RULE", "reason": why}
     guard = Guard(cap, float(cfg["caps"]["memory_per_worker_gib"]))
-    t0 = time.monotonic()
-    started = core.utc_stamp()
-    status, out, ctx = "COMPLETE", {}, None
-    try:
+    holder: dict[str, Any] = {"ctx": None}
+
+    def body() -> dict[str, Any]:
         if stage == "analysis":
-            ctx = _light_ctx(cfg, run_dir, mode)
+            if plan is not None:
+                pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=False)
+            ctx = holder["ctx"] = _light_ctx(cfg, run_dir, mode)
             res = labels.part_q_label(pipeline.facts_of(ctx))
             core.write_record(run_dir / pipeline.loc(ctx, "qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in res.items() if k != "oracle_line"}}, overwrite=True)
             write_manifest(ctx)
-            out = {"label": res["label"], "part_t": res["part_t"]} if mode == "registered" else pipeline.summary_for_display(ctx)
-        else:
-            w = build_world(cfg, repo, run_dir, mode, load_teachers=True)
-            ctx = make_ctx(w, mode, plan=plan, limits=limits, deadline=guard)
-            if stage == "inputs":
-                out = stage_inputs(w, ctx, mode)
-            else:
-                p = pipeline.step_partition(ctx)
-                if stage == "partition":
-                    out = {"counts": p.counts, "tokenizer_record": bool(tokenizer_record(w, ctx, p))}
-                elif stage == "qfit":
-                    out = pipeline.step_qfit(ctx, p)
-                elif stage == "qcheck":
-                    out = pipeline.step_qcheck(ctx, p, pipeline.step_qfit(ctx, p))
-                elif stage == "generation":
-                    out = pipeline.step_generation(ctx, p, pipeline.step_qfit(ctx, p))
-                elif stage == "regeneration":
-                    out = pipeline.step_regeneration(ctx, p)
-                else:
-                    out = stage_outputs(w, ctx, p, mode)
+            return {"label": res["label"], "part_t": res["part_t"]} if mode == "registered" else pipeline.summary_for_display(ctx)
+        w = build_world(cfg, repo, run_dir, mode, load_teachers=True, plan=plan)
+        ctx = holder["ctx"] = make_ctx(w, mode, plan=plan, limits=limits, deadline=guard)
+        if guard():  # the phases before the first batch are not guarded between batches: check the resident set and the cap once the world stands
+            raise StageCapExceeded(guard.reason or "guard")
+        if stage == "inputs":
+            return stage_inputs(w, ctx, mode)
+        p = pipeline.step_partition(ctx)
+        if stage == "partition":
+            return {"counts": p.counts, "tokenizer_record": bool(tokenizer_record(w, ctx, p))}
+        if stage == "qfit":
+            return pipeline.step_qfit(ctx, p)
+        if stage == "qcheck":
+            return pipeline.step_qcheck(ctx, p, pipeline.step_qfit(ctx, p))
+        if stage == "generation":
+            return pipeline.step_generation(ctx, p, pipeline.step_qfit(ctx, p))
+        if stage == "regeneration":
+            return pipeline.step_regeneration(ctx, p)
+        return stage_outputs(w, ctx, p, mode)
+
+    return execute(stage, run_dir, mode, led, guard, cap, body, holder, other_alive)
+
+
+def execute(stage: str, run_dir: Path, mode: str, led: core.Ledger, guard: Callable[[], bool], cap: float, body: Callable[[], dict[str, Any]], holder: dict[str, Any], other_alive: Callable[[], list[str]] = procs.other_studies_alive) -> dict[str, Any]:
+    """Runs a stage body and records how it ended, each ending its own way:
+    * COMPLETE: the completion record and a COMPLETE manifest;
+    * PAUSED (a cap or memory stop): a PAUSED manifest, no completion record, resumable;
+    * a REFUSAL (``StageRefused``: an environment, pin, ledger or precondition refusal): NO completion record and NO COMPLETE manifest: the stage can be run again once the cause is fixed;
+    * an engineering failure (digest mismatch, registered test of the data step): ``engineering_failures.json`` and no completion record;
+    * any other error: an item error and no completion record.
+    The wall time of this process is charged in every case (ruling L2)."""
+    t0 = time.monotonic()
+    started = core.utc_stamp()
+    status, out = "COMPLETE", {}
+    reason = None
+    try:
+        out = body()
     except StageCapExceeded:
         status = "PAUSED"
-        out = {"reason": guard.reason or "the cap was reached"}
+        out = {"reason": getattr(guard, "reason", None) or "the cap was reached"}
     except (DigestMismatch, RegisteredTestStop) as e:
-        if ctx is not None and not ctx.engineering_failures:
-            pipeline.fail(ctx, f"{type(e).__name__}: {e}")
+        if holder.get("ctx") is not None and not holder["ctx"].engineering_failures:
+            pipeline.fail(holder["ctx"], f"{type(e).__name__}: {e}")
         status = "ENGINEERING-FAILURE"
         raise
-    except StageRefused:
+    except StageRefused as e:
+        status, reason = "REFUSED", str(e)
         raise
     except Exception as e:  # noqa: BLE001 - a code or environment error is an item error, never a scientific label
-        if ctx is not None:
-            pipeline.record_item_error(ctx, stage, f"{type(e).__name__}: {e}")
+        if holder.get("ctx") is not None:
+            pipeline.record_item_error(holder["ctx"], stage, f"{type(e).__name__}: {e}")
         status = "ITEM-ERROR"
         raise
     finally:
         seconds = time.monotonic() - t0
         led.charge_process(stage, mode, "main", seconds)  # the wall time of this process (ruling L2), also when it stopped
-        key = runner.COMPLETED if status == "COMPLETE" else (runner.KILLED_RSS if guard.reason and guard.reason.startswith("memory") else (runner.KILLED_CAP if status == "PAUSED" else runner.FAILED))
-        runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": key, "seconds": seconds, "reason": guard.reason or status, "peak_rss_bytes": int(procs.rss_gib() * 2**30)}}, seconds, identity={}, started=started, caps={"stage_seconds_left": cap}, extra={"other_studies_alive": other_alive()})
-        _mark(run_dir, stage, status)
+        if status != "REFUSED":
+            greason = getattr(guard, "reason", None)
+            key = runner.COMPLETED if status == "COMPLETE" else (runner.KILLED_RSS if greason and greason.startswith("memory") else (runner.KILLED_CAP if status == "PAUSED" else runner.FAILED))
+            runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": key, "seconds": seconds, "reason": greason or status, "peak_rss_bytes": int(procs.rss_gib() * 2**30)}}, seconds, identity={}, started=started, caps={"stage_seconds_left": cap}, extra={"other_studies_alive": other_alive()})
+            _mark(run_dir, stage, status)
+        else:
+            _mark(run_dir, stage, "REFUSED", reason)
     return {"status": status, **({"result": out} if status == "COMPLETE" else out)}
 
 
-def _mark(run_dir: Path, stage: str, status: str) -> None:
-    """The stage's state for the order check and for ``pipeline.paused_stages``: complete, or PAUSED (a state, not an outcome)."""
+def gate_outcome(cfg: Any, run_dir: Path, mode: str, stage: str) -> str | None:
+    """Section 4.1 step 7 and section 4.4: generation, regeneration and the outputs run only if BOTH teachers pass Q1-Q4 (and the regeneration and the outputs only if generation reached a draws label). Returns the
+    reason a stage is NOT RUN BY RULE, or None if it runs. Decided from the records alone (no world is built); it is the registered path to a negative Part Q label."""
+    ctx = _light_ctx(cfg, run_dir, mode)
+    if not completion_path(run_dir, "qcheck").is_file():
+        return None  # the prerequisite check says what is missing
+    f = pipeline.facts_of(ctx)
+    for c in core.TASKS:
+        st = labels.teacher_status(f["teachers"][c])
+        if st["failed"] or st["reserve_exhausted"] or f["teachers"][c]["q4"] is None:
+            return f"teacher {c} did not pass Q1-Q4 or its Q_check did not reach 150 accepted items: generation and what follows do not run (section 4.1 step 7); the Part Q label is derived from the records by the analysis"
+    if stage in ("regeneration", "outputs"):
+        gres = pipeline._have(ctx, "generation/result.json") or {}
+        if gres.get("draws_label") == "DATA-EXHAUSTED":
+            return "a pool ended below 10,000 accepted sources (DATA-EXHAUSTED): no regeneration check and no outputs (section 4.3 rule 6)"
+    return None
+
+
+def _mark(run_dir: Path, stage: str, status: str, reason: str | None = None) -> None:
+    """The stage's state for the order check and for ``pipeline.paused_stages``. COMPLETE and NOT RUN BY RULE both complete the stage for the order check (the second says why nothing ran); PAUSED is a state, not
+    an outcome; a REFUSED or failed stage leaves NO completion record."""
     d = run_dir / "stages"
     d.mkdir(parents=True, exist_ok=True)
-    if status == "COMPLETE":
-        write_json(completion_path(run_dir, stage), {"stage": stage, "status": "COMPLETE", "utc": core.utc_stamp()})
+    if status in ("COMPLETE", "NOT RUN BY RULE"):
+        write_json(completion_path(run_dir, stage), {"stage": stage, "status": status, "reason": reason, "utc": core.utc_stamp()})
         (d / f"{stage}.json").unlink(missing_ok=True)
     elif status == "PAUSED":
         write_json(d / f"{stage}.json", {"stage": stage, "status": "PAUSED", "utc": core.utc_stamp()})
     else:
         (d / f"{stage}.json").unlink(missing_ok=True)
+        if status == "REFUSED":
+            write_json(d / f"{stage}.refused.json", {"stage": stage, "status": "REFUSED", "reason": reason, "utc": core.utc_stamp()})  # a record of the refusal; it blocks nothing
 
 
 def _light_ctx(cfg: Any, run_dir: Path, mode: str) -> pipeline.QContext:
