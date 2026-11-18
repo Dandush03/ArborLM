@@ -658,10 +658,32 @@ def tagged(label: str, *details: str) -> str:
     return f"{label} [{'; '.join([core.STANDING_TAG, *[d for d in details if d]])}]"
 
 
+_QUOTED_SPAN = re.compile(r"`[^`]*`")
+
+
+def _covered(text: str) -> list[tuple[int, int]]:
+    """Spans that need no tag: a bracket headed by the standing tag (it covers what it lists) and a back-quoted span (a label named as a thing that cannot be reached, not claimed)."""
+    return [(m.start(), m.end()) for rx in (_TAGGED_SPAN, _QUOTED_SPAN) for m in rx.finditer(text)]
+
+
 def untagged_positive_labels(text: str) -> list[str]:
-    spans = [(m.start(), m.end()) for m in _TAGGED_SPAN.finditer(text)]
+    spans = _covered(text)
     tag_after = re.compile(r"(?:\s*\([^)]*\))?\s*\[" + re.escape(core.STANDING_TAG))
     return [m.group(1) for m in _POSITIVE_RE.finditer(text) if not tag_after.match(text, m.end()) and not any(a <= m.start() < b for a, b in spans)]
+
+
+def tag_positives(text: str) -> str:
+    """Free text with ``[<standing tag>]`` appended after every positive label that has none (labels in a tagged bracket or between back-quotes are left as they are)."""
+    out: list[str] = []
+    last = 0
+    spans = _covered(text)
+    tag_after = re.compile(r"(?:\s*\([^)]*\))?\s*\[" + re.escape(core.STANDING_TAG))
+    for m in _POSITIVE_RE.finditer(text):
+        if tag_after.match(text, m.end()) or any(a <= m.start() < b for a, b in spans):
+            continue
+        out.append(text[last : m.end()] + f" [{core.STANDING_TAG}]")
+        last = m.end()
+    return "".join(out) + text[last:]
 
 
 def emit(text: str) -> str:
