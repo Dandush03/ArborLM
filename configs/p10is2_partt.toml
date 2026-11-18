@@ -75,6 +75,9 @@ modification_floor = 0.10
 composes_ratio_min = 0.80
 composes_negative = 0.50
 cells_per_arm = 6
+mps_loss_tolerance = 1.0e-3                  # gate G4, MPS against CPU (ADR-0022 section 12.3, carried by ADR-0025 section 7.3)
+mps_parameter_relative_tolerance = 1.0e-4
+g4_repeat_updates = 20
 recompute_item_tolerance = 1.0e-6
 
 [arms]  # section 5.2

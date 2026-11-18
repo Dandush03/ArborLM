@@ -23,6 +23,7 @@ from studies.p10s2.worldio import read_bundle
 from . import annotations, calibration, engine, partt_gates, partt_plan, partt_run, report, scoring
 from . import labels as L
 from .common import core
+from .common.gates import platform_record
 from .quantities import CELLS, Quantities, Registry, Thresholds
 
 
@@ -200,7 +201,7 @@ def measure_rates(world: engine.WorldT, snap_dir: Path, gloss: Mapping[str, Any]
     return {"rates_seconds_per_unit": rates, "projection_units": units, "peak_rss_mib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1024 * 1024)}
 
 
-def counting_rehearsal(world: engine.WorldT, snap_dir: Path, gloss: Mapping[str, Any], *, plan_file_sha256: str, caps_provisional: bool, updates: int, identity_probe: Callable[[], None] | None = None) -> dict[str, Any]:
+def counting_rehearsal(world: engine.WorldT, snap_dir: Path, gloss: Mapping[str, Any], *, plan_file_sha256: str, caps_provisional: bool, updates: int, identity_probe: Callable[[], None] | None = None, require_mps: bool = False) -> dict[str, Any]:
     """Every cell type once (a cell of each trained type at the plan's U), one combined scoring of each arm kind, the analysis and the report on the scored registry, ONE forced pause and resume of a cell
     (checkpoint, then resume) and ONE forced PAUSED — IDENTITY (the probe refuses once and the stage then resumes)."""
     stages: dict[str, dict[str, str]] = {}
@@ -223,12 +224,12 @@ def counting_rehearsal(world: engine.WorldT, snap_dir: Path, gloss: Mapping[str,
     stages["evaluate"] = stages["controls"] = {"status": "COMPLETE"}
     comb = partt_run.combined_all(world, snap_dir / "all")
     stages["combined"] = {"status": "COMPLETE"}
-    gate = partt_gates.run_gates(world, world.cfg_t, snap_dir / "gates", run_checker=False)
+    gate = partt_gates.run_gates(world, world.cfg_t, snap_dir / "gates", run_checker=False, require_mps=require_mps)
     stages["gates"] = {"status": "COMPLETE" if gate["status"] == "PASSED" else "ENGINEERING-FAILURE"}
     out = analyse(reg, side, comb, {"U": updates, "converged": True}, required=partt_plan.required_keys(), thresholds=Thresholds.from_config(world.cfg_t))
     stages["analysis"] = {"status": "COMPLETE"}
     stages["report"] = {"status": "COMPLETE" if out["report"] else "INCOMPLETE"}
-    return {**core.envelope("rehearsal", "T"), "kind_of_rehearsal": "counting", "plan_file_sha256": plan_file_sha256, "caps_provisional": caps_provisional, "stages": stages, "forced": {"pause_resume": bool(paused and ok_resume), "paused_identity_restore": identity_ok}, "sealed": True}
+    return {**core.envelope("rehearsal", "T"), "kind_of_rehearsal": "counting", "plan_file_sha256": plan_file_sha256, "caps_provisional": caps_provisional, "stages": stages, "forced": {"pause_resume": bool(paused and ok_resume), "paused_identity_restore": identity_ok}, "g4_mps": gate["gates"]["G4-MPS"], "platform": platform_record(), "sealed": True}
 
 
 # --- analysis and report -----------------------------------------------------------------------------------------------------------------------------
@@ -273,7 +274,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     snaps = run_dir / "snapshots"
     t0 = time.monotonic()
     if stage == "gates":
-        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo)
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered")
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
     elif stage == "train":
         out = partt_run.train_all(w, snaps, run_dir / "checkpoints", int(calib["U"]))

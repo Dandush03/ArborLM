@@ -64,24 +64,36 @@ def g4_round_trip(world: engine.WorldT, arm: Any, directory: Path, name: str) ->
     return {"passed": again.state_hash() == arm.state_hash() == m["arm_hash"]}
 
 
-def g4_mps(world: engine.WorldT, spec: engine.CellSpec, updates: int = 20) -> dict[str, Any]:
-    """MPS against CPU on the same 20 updates: losses within 1e-3 and parameters within a relative norm of 1e-4 (tolerances of the frozen config). Skipped (None) unless the world's device is MPS."""
+def g4_mps(world: engine.WorldT, spec: engine.CellSpec, cfg: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """MPS against CPU. WHAT IT COMPARES: the same cell (``spec``: the stage-1 store M1, replicate 0, order AB, in the registered gate) built twice from its listed seeds and trained for the same
+    ``g4_repeat_updates`` (20) updates on the same batches, once on CPU and once on the world's MPS device. TOLERANCES (config ``gates``, ADR-0022 section 12.3): (1) EVERY one of the 20 per-update losses
+    within ``mps_loss_tolerance`` = 1e-3 (absolute); (2) EVERY trainable parameter tensor after the 20 updates within a relative L2 norm difference of ``mps_parameter_relative_tolerance`` = 1e-4
+    (||p_mps - p_cpu|| / ||p_cpu||, the largest over tensors). Both must hold. SKIPPED (None) unless the world's device is MPS; a skipped gate is NOT a pass: the Part T freeze requires a record in which it RAN and
+    passed on this machine, and the registered gates stage fails if it did not run."""
+    t = (cfg or core.load_config("T"))["gates"]
+    updates = int(t["g4_repeat_updates"])
     if world.device.type != "mps":
-        return {"passed": None, "skipped": "the training device is not MPS"}
-    out = {}
-    losses = {}
-    params = {}
+        return {"passed": None, "skipped": "the training device is not MPS", "compares": "per-update losses and trained parameters of one cell, CPU against MPS", "updates": updates}
+    runs: dict[str, tuple[list[float], list[torch.Tensor]]] = {}
     for name, dev in (("cpu", torch.device("cpu")), ("mps", world.device)):
         arm, rows, opts = engine.build_cell_arm(world, spec, None)
         keep, world.device = world.device, dev
         try:
-            rec = engine.train_cell(world, spec, arm, rows, opts, updates)
+            rec = engine.train_cell(world, spec, arm, rows, opts, updates, record_losses=updates)
         finally:
             world.device = keep
-        losses[name], params[name] = rec, [p.detach().cpu().clone() for p in arm.trainable()]
-    del out
-    agree = p10train.update_agreement([losses["cpu"]["first_loss"], losses["cpu"]["last_loss"]], [losses["mps"]["first_loss"], losses["mps"]["last_loss"]], params["cpu"], params["mps"])
-    return {"passed": bool(agree["ok"]), "detail": agree}
+        if rec["status"] != "COMPLETE":
+            return {"passed": False, "error": f"{name}: {rec['status']} {rec['error']}", "updates": updates}
+        runs[name] = (rec["losses_head"], [p.detach().cpu().clone() for p in arm.trainable()])
+    return {**compare_runs(runs["cpu"], runs["mps"], t), "updates": updates, "device": str(world.device)}
+
+
+def compare_runs(cpu: tuple[Sequence[float], Sequence[torch.Tensor]], other: tuple[Sequence[float], Sequence[torch.Tensor]], t: Mapping[str, Any]) -> dict[str, Any]:
+    """The comparison of G4's MPS gate, pure: every per-update loss within ``mps_loss_tolerance`` (absolute) and every parameter tensor within ``mps_parameter_relative_tolerance`` (relative L2)."""
+    dl = max(abs(a - b) for a, b in zip(cpu[0], other[0], strict=True))
+    rel = max(float((pm - pc).norm() / pc.norm().clamp_min(1e-30)) for pc, pm in zip(cpu[1], other[1], strict=True))
+    ok = dl <= float(t["mps_loss_tolerance"]) and rel <= float(t["mps_parameter_relative_tolerance"])
+    return {"passed": bool(ok), "max_loss_difference": dl, "loss_tolerance": float(t["mps_loss_tolerance"]), "max_relative_parameter_difference": rel, "parameter_tolerance": float(t["mps_parameter_relative_tolerance"])}
 
 
 def g5(world: engine.WorldT, m_append: MemoryArm) -> dict[str, Any]:
@@ -133,7 +145,7 @@ def g9(cfg: Mapping[str, Any], root: Path | None = None) -> dict[str, Any]:
     return {"passed": r["passed"], "problems": r["problems"], "checker": {k: v for k, v in r["checker"].items() if k != "problems_naming_this_study"}}
 
 
-def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True) -> dict[str, Any]:
+def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False) -> dict[str, Any]:
     """Every gate on the world's data (the registered gates stage). Trains the small cells the gates need on CPU from their seeds; nothing registered is read."""
     spec = engine.CellSpec("M1", "AB", 0)
     arm, rows, opts = engine.build_cell_arm(world, spec, None)
@@ -148,9 +160,9 @@ def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, e
     finally:
         world.device = keep
     out = {
-        "G1": g1(world), "G2": g2(world, ma), "G4": {**g4_determinism(world, spec, 4), "round_trip": g4_round_trip(world, copy.deepcopy(ma), snap_dir, "gate/M-append")}, "G4-MPS": g4_mps(world, spec), "G5": g5(world, ma), "G6": g6(world),
+        "G1": g1(world), "G2": g2(world, ma), "G4": {**g4_determinism(world, spec, 4), "round_trip": g4_round_trip(world, copy.deepcopy(ma), snap_dir, "gate/M-append")}, "G4-MPS": g4_mps(world, spec, cfg), "G5": g5(world, ma), "G6": g6(world),
         "G7": g7(f_before, ma, sh, world.student), "G8": g8(world, equivalence_records), "G9": g9(cfg, root) if run_checker else {"passed": None, "skipped": "checker not run"},
     }  # fmt: skip
     del before
-    failed = [k for k, v in out.items() if v["passed"] is False]
+    failed = [k for k, v in out.items() if v["passed"] is False or (require_mps and k == "G4-MPS" and v["passed"] is not True)]  # with ``require_mps`` a skipped MPS gate is a failure: it must have RUN and passed
     return {"gates": out, "failed": failed, "status": "ENGINEERING-FAILURE" if failed else "PASSED", "skipped": [k for k, v in out.items() if v["passed"] is None]}

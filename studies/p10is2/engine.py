@@ -288,7 +288,7 @@ def build_cell_arm(world: WorldT, spec: CellSpec, parent: Arm | None) -> tuple[A
 
 
 # --- training with checkpoints ----------------------------------------------------------------------------------------------------------------------------
-def train_cell(world: WorldT, spec: CellSpec, arm: Arm, rows: Sequence[Example], opts: Mapping[str, Any], updates: int, *, checkpoint_dir: Path | None = None, checkpoint_every: int = 500, stop_after: int | None = None, snapshots: Sequence[int] = (), on_snapshot: Any = None) -> dict[str, Any]:
+def train_cell(world: WorldT, spec: CellSpec, arm: Arm, rows: Sequence[Example], opts: Mapping[str, Any], updates: int, *, checkpoint_dir: Path | None = None, checkpoint_every: int = 500, stop_after: int | None = None, snapshots: Sequence[int] = (), on_snapshot: Any = None, record_losses: int = 0) -> dict[str, Any]:
     """U updates of batch 32 with AdamW (no weight decay, clip 1.0, constant rate, fresh optimizer state), as P10-S2's ``train_arm``. A checkpoint (trainable parameters and the optimizer's state) every
     ``checkpoint_every`` updates; a call with an existing checkpoint RESUMES from it and the record says so. A non-finite loss ends the cell as ``STOPPED_NONFINITE`` with the last finite checkpoint named
     and the cell is never resumed (the caller reads ``partt_plan.resume_decision``). ``stop_after`` ends the call early, as a cap stop would (the rehearsal's forced pause). Returns the record."""
@@ -358,7 +358,7 @@ def train_cell(world: WorldT, spec: CellSpec, arm: Arm, rows: Sequence[Example],
     return {
         "label": spec.label, "status": status, "updates": updates, "updates_done": done, "resumed": resumed, "device": str(dev), "wall_seconds": wall, "seconds_per_update": wall / max(1, done - (start if resumed else 0)),
         "trainable_parameters": sum(p.numel() for p in params), "first_loss": losses[0] if losses else math.nan, "last_loss": losses[-1] if losses else math.nan, "last_finite_checkpoint": last_ck, "error": err,
-        "cause_recorded": status == "ERROR",
+        "cause_recorded": status == "ERROR", "losses_head": losses[:record_losses],
     }  # fmt: skip
 
 

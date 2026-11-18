@@ -12,7 +12,7 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
-from ..common import core
+from ..common import core, gates
 from ..common import plan as planmod
 from ..common.core import PendingLeadReview, StageRefused
 from . import freeze
@@ -31,6 +31,7 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
     if stage not in REGISTERED_STAGES:
         raise StageRefused(f"refused: {stage!r} is not a registered Part Q stage")
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    gates.apply_platform_settings(cfg)  # the process is configured BEFORE the platform check: six threads, deterministic algorithms (a fresh process has the machine's default thread count)
     planmod.check_preconditions("Q", planmod.REGISTERED, repo, freeze_commit, cfg)
     plan = planmod.load_registered_plan(repo, "Q")
     planmod.verify_plan(plan, repo, run_dir)

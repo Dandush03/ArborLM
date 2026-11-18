@@ -74,3 +74,26 @@ def test_g8_uses_the_equivalence_records_when_given() -> None:
     assert partt_gates.g8(w, {})["passed"] is None
     torch.manual_seed(0)
     assert core.ORACLE_LINE
+
+
+def test_mps_gate_comparison_tolerances_and_skipped_is_not_passed(tmp_path: Path) -> None:
+    t = CFG_T["gates"]
+    assert (t["mps_loss_tolerance"], t["mps_parameter_relative_tolerance"], t["g4_repeat_updates"]) == (1e-3, 1e-4, 20)
+    from studies.p10s2 import core as c2
+
+    assert (c2.CFG["gates"]["mps_loss_tolerance"], c2.CFG["gates"]["mps_parameter_relative_tolerance"], c2.CFG["gates"]["g4_repeat_updates"]) == (1e-3, 1e-4, 20)  # ADR-0022 section 12.3's numbers
+    p = [torch.ones(4, 4)]
+    losses = [1.0] * 20
+    ok = partt_gates.compare_runs((losses, p), ([x + 5e-4 for x in losses], [p[0] * (1 + 5e-5)]), t)
+    assert ok["passed"] and ok["max_loss_difference"] < 1e-3
+    assert not partt_gates.compare_runs((losses, p), ([*losses[:19], 1.0 + 2e-3], p), t)["passed"]  # ONE update's loss off by 2e-3: fails
+    assert not partt_gates.compare_runs((losses, p), (losses, [p[0] * (1 + 2e-4)]), t)["passed"]  # parameters off by 2e-4 relative: fails
+    w = world()
+    r = partt_gates.g4_mps(w, engine.CellSpec("M1", "AB", 0))
+    assert r["passed"] is None and "skipped" in r
+    run = partt_gates.run_gates(w, CFG_T, tmp_path / "g", run_checker=False, require_mps=True)
+    assert "G4-MPS" in run["failed"] and run["status"] == "ENGINEERING-FAILURE"  # skipped is not passed where the gate is required
+    if torch.backends.mps.is_available():
+        w.device = torch.device("mps")
+        res = partt_gates.g4_mps(w, engine.CellSpec("M1", "AB", 0))
+        assert res["passed"] in (True, False) and res["updates"] == 20 and "max_loss_difference" in res  # it RAN; whether it passes on a tiny random model is reported, not assumed

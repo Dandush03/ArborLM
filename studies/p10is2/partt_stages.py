@@ -47,6 +47,7 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
     if stage not in REGISTERED_STAGES:
         raise StageRefused(f"refused: {stage!r} is not a registered Part T stage")
     cfg = core.load_config("T", repo / core.CONFIG_T)
+    gates.apply_platform_settings(cfg)  # configured BEFORE the platform check (see the Part Q entry point)
     planmod.check_preconditions("T", planmod.REGISTERED, repo, freeze_commit, cfg)
     plan = planmod.load_registered_plan(repo, "T")
     planmod.verify_plan(plan, repo, run_dir)
@@ -93,7 +94,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     else:
         plan_file = repo / core.PLAN_T
         plan = planmod.Plan.load(plan_file, "T")
-        out = partt_real.counting_rehearsal(w, run_dir / "snaps", gloss, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), updates=int(calib["U"]), identity_probe=identity_probe(plan, repo, run_dir))
+        out = partt_real.counting_rehearsal(w, run_dir / "snaps", gloss, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), updates=int(calib["U"]), identity_probe=identity_probe(plan, repo, run_dir), require_mps=True)
     core.write_record(run_dir / f"rehearsal_{args.kind}.json", out, overwrite=True)
     print(json.dumps({k: out[k] for k in ("kind_of_rehearsal", "rates_seconds_per_unit", "projection_units", "forced") if k in out}, default=str))
     return 0
@@ -186,6 +187,9 @@ def cmd_freeze(args: argparse.Namespace) -> int:
             raise StageRefused(f"refused: the plan does not list {name} by a hash that holds (Part T reads the Part Q manifest's files only, by hash: ruling L12)")
     counting = core.read_record(Path(args.counting_rehearsal), "rehearsal")
     reh = gates.rehearsal_gate(counting, REHEARSAL_STAGES, plan_file_sha256=plan_sha)
+    mps = counting.get("g4_mps") or {}
+    if mps.get("passed") is not True or (counting.get("platform") or {}).get("machine") != gates.platform_record()["machine"] or (counting.get("platform") or {}).get("system") != gates.platform_record()["system"]:
+        raise StageRefused(f"refused: gate G4 MPS against CPU must have RUN and PASSED on this machine before the freeze (a skipped gate is not a pass); the counting rehearsal's record has: {mps}")
     if not reh["passed"]:
         raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")
     attest = [x for x in args.attest_sealed_unopened.split(",") if x]
