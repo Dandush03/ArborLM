@@ -30,6 +30,8 @@ PLAN_T = FREEZE_DIR / "partt_plan.json"
 FREEZE_RECORD_Q = FREEZE_DIR / "partq_freeze_record.json"
 FREEZE_RECORD_T = FREEZE_DIR / "partt_freeze_record.json"
 LAUNCH_DIR = Path("studies/p10is2/launch")
+# Part T uses the lock alone (section 13 item 6): no process of Part T may have this directory on its path. The value equals configs/p10is2_partq.toml [paths] durable_packages (a test compares them).
+DURABLE_PACKAGES = "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
 PARTS = ("Q", "T")
 MODES = ("registered", "rehearsal", "test")
 TASKS = ("A", "B")  # A: English -> German, B: English -> French
