@@ -14,7 +14,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
 
-from studies.p10is5 import analysis, bench, blocks, core, device, e2, freeze, gates, rehearsal, report, stages, system  # noqa: E402
+from studies.p10is5 import (  # noqa: E402
+    analysis,
+    bench,
+    blocks,
+    core,
+    device,
+    e2,
+    freeze,
+    gates,
+    rehearsal,
+    report,
+    stages,
+    system,
+)
 from studies.p10is5 import plan as planmod  # noqa: E402
 from studies.p10is5 import testing as T  # noqa: E402
 from studies.p10is5.synthetic import QUIET_BAD, QUIET_OK, make_registry  # noqa: E402
