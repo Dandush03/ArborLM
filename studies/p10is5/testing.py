@@ -55,17 +55,19 @@ class FakeIO:
         self.reads = 0
         self.modes: dict[int, bool] = {}
         self.model_cache = False
-        self.cache: set[int] = set()
+        self.cache: set[tuple[str, int]] = set()
+        self.ns: dict[int, str] = {}
 
     def tile(self, t: int) -> bytes:
         if t not in self._tiles:
             self._tiles[t] = layout.tile_bytes(self.seed, t)
         return self._tiles[t]
 
-    def opener(self, _: Any, uncached: bool = True) -> int:
+    def opener(self, path: Any, uncached: bool = True) -> int:
         fd = os.open(os.devnull, os.O_RDONLY)
         with self.lock:
             self.modes[fd] = uncached
+            self.ns[fd] = "control" if "control" in str(path) else "rest"  # two files never share cached pages
         return fd
 
     def pread(self, fd: int, n: int, off: int) -> bytes:
@@ -75,7 +77,8 @@ class FakeIO:
             self.reads += 1
             if self.model_cache:
                 # whole pages are counted; pages already cached count 0 (also for F_NOCACHE: probe 1D); only a descriptor without F_NOCACHE adds pages to the cache
-                pages = range(off // PAGE, (off + n - 1) // PAGE + 1)
+                ns = self.ns.get(fd, "rest")
+                pages = [(ns, p) for p in range(off // PAGE, (off + n - 1) // PAGE + 1)]
                 new = [p for p in pages if p not in self.cache]
                 self.read += PAGE * len(new) + self.extra
                 if not self.modes.get(fd, True):

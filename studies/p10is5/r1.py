@@ -141,7 +141,7 @@ def harness_figure(path: Path, cfg: Mapping[str, Any], deps: blocks.Deps, contro
     seed = int(cfg["seeds"]["r1_control_file_contents"])
 
     def warm() -> device.ScanResult:
-        return device.uncached_scan(path, 0, ctiles * TILE_BYTES, deps.counter, pread=deps.pread, cached=True)
+        return device.uncached_scan(path, 0, ctiles * TILE_BYTES, deps.counter, pread=deps.pread, cached=True, opener=deps.opener)
 
     out: dict[str, Any] = {}
     warm()

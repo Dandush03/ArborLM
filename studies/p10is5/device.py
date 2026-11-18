@@ -171,7 +171,11 @@ class WriteLedger:
 
 
 def free_space(path: Path) -> int:
-    return int(shutil.disk_usage(path).free)
+    """Free bytes of the volume that holds ``path`` (of its nearest existing ancestor if the directory is not made yet)."""
+    p = Path(path)
+    while not p.exists() and p != p.parent:
+        p = p.parent
+    return int(shutil.disk_usage(p).free)
 
 
 def require_free_space(path: Path, minimum: int) -> int:
@@ -195,11 +199,11 @@ class ScanResult:
     sha256: str
 
 
-def uncached_scan(path: Path, offset: int, nbytes: int, counter: Counter, *, request_bytes: int = MIB, pread: PRead = os.pread, on_block: Callable[[int, bytes], None] | None = None, cached: bool = False) -> ScanResult:
+def uncached_scan(path: Path, offset: int, nbytes: int, counter: Counter, *, request_bytes: int = MIB, pread: PRead = os.pread, on_block: Callable[[int, bytes], None] | None = None, cached: bool = False, opener: Callable[[Any, bool], int] | None = None) -> ScanResult:
     """Read ``nbytes`` from ``offset`` once, uncached, in ``request_bytes`` requests, and check the counter rule over the whole read. The hash is of the bytes read, in order. Nothing is printed or written inside."""
     if offset % PAGE or nbytes % PAGE or request_bytes % PAGE:
         raise ValueError("whole pages at page offsets only")
-    fd = open_cached_read(path) if cached else open_uncached_read(path)  # ``cached`` only for R1's control file
+    fd = opener(path, not cached) if opener else (open_cached_read(path) if cached else open_uncached_read(path))  # ``cached`` only for R1's control file
     h = hashlib.sha256()
     try:
         a = counter.read()
