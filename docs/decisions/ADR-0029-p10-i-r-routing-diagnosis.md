@@ -429,3 +429,26 @@ Earlier rulings on the same day, already recorded in §16: "Keep ADR-0029" (item
 **What it does not approve.** The freeze, any read of a sealed value, and the registered stages A1 and A2: these need Decision 2, taken on the rehearsal's record and an independent audit of the code. No Stage B study. No other P10-I specification. No threshold, label or seed changes after this point without a recorded amendment.
 
 `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+
+## 19. Implementation audit and the lead's rulings on ambiguities (2026-11-17 UTC)
+
+**State.** The study was implemented in new files by the `arbor-implementer` subagent (Sonnet 5.5; commit `aeac3fd`) and audited by the `arbor-auditor` subagent (Opus 5.5; `docs/reviews/p10ir-implementation-audit-2026-11-17/AUDIT.md`). Verdict: READY FOR REHEARSAL AFTER THE LISTED FIXES, then a short re-audit. The auditor's own brute-force reads agree with the code on 4,100 tree queries and 528 flat and index queries, and its own rule set agrees with the label code on about 450,000 cases apart from the two readings below. Three blocking defects were found (gradient tracking left on in the fact passes, which would exhaust memory at the registered sizes; a refused worker recorded as FAILED instead of PAUSED — IDENTITY; R-CONFIRM not computable when A2 finishes after A1's analysis). Nothing has been frozen, no sealed value has been read, and no registered checkpoint has been opened.
+
+**Rulings.** The audit found places where this ADR's text was ambiguous or silent. No registered result has been observed. The lead rules as follows; each ruling is put to the human lead for confirmation at Decision 2, and none takes effect in a registered run before that.
+
+| # | Question | Ruling | Why |
+|---|---|---|---|
+| 1 | §9 item 3: are two CELL-DEPENDENT values "the same label"? | Only if they hold the same row at each primary cell. Otherwise the component is CHECKPOINT-DEPENDENT, and R-CONFIRM is NOT CONFIRMED. This replaces the literal reading of §9 item 3 | The stricter reading: it never confirms a pair whose rows differ. Neither reading recommends an action |
+| 2 | A cell with four MIXED-PANEL replicates | MIXED, as §8.2 reads ("satisfies no condition"). The code is changed to the ADR | The ADR's text is clear enough; it recommends nothing either way |
+| 3 | acc₀ in the accuracy version of the retention ratio (§8.1) | The memory-disabled accuracy of the same checkpoint and panel, computed by this study with P10-S1's own function. The ratio is printed beside every RESTORED comparison and decides nothing | The human lead asked that improvement retained above the no-memory baseline be shown (note §5.3 item 2) |
+| 4 | Plateau check for Stage A2 | NOT CHECKED, printed as such. A2 reads U_P and the run length only, and the tag enters no rule | Fresh cells have no recorded snapshot series |
+| 5 | Gate 5 and the order of rehearsal and freeze (§11, §13) | The candidate `plan.json` is written first; every stage is rehearsed against that file (tasks, items, labels, paths and manifests enumerated; analysis and report run on a synthetic registry keyed by its labels); its SHA-256 goes into the rehearsal record; the freeze refuses unless the file it commits has that hash | The freeze cannot precede the rehearsal, and the registered plan's own content must be exercised before the registered run (the P10-S1 throughput failure) |
+| 6 | Gate 6 | The cited checker counts this study's own config and tests as collisions with its own allocation. The gate runs a copy with three recorded substitutions that exclude this study's own files, with the copy's hash in the gate result; the study's own values are checked separately against the registry's allocation rows | The check that matters is kept: the allocation collides with nothing else in the repository |
+| 7 | A failure inside one item (§11) | Caught per gate and recorded with its scope; the replicate is NOT EVALUABLE; the other checkpoints of the cell run; the analysis runs with such items counted as NOT EVALUABLE | §11 already says a checkpoint failing gate 2, 3 or 4 makes its replicate NOT EVALUABLE |
+| 8 | Gate 1 | Checked for all checkpoints in the gates stage, before any read, and a failure stops the stage, as §11 says. It includes the two identity links of §4 that the code missed | The ADR's text; the code is changed to it |
+| 9 | R-CONFIRM when A2 finishes after A1's analysis | A separate registered stage in group A2 computes R-CONFIRM against A1's frozen analysis record and writes its own record and report section. A1's records are never rewritten | §13 allows A2's Decision 2 before or after A1's result |
+| 10 | Where a Decision 2 is recorded | `results/p10ir-freeze-<date>/DECISION_2_A1.md` and `DECISION_2_A2.md`, committed; the ADR named no location | Follows P10-S1's practice |
+
+The advisory findings of the audit are taken where they add a check (the imported P10-S1 code in the freeze comparison; a seed check at the point of training; a guard that the run directory is git-ignored; no sealed-value recomputation outside registered mode; rehearsal index seeds outside the registered values).
+
+`Astra review: NOT_PERFORMED`. Claude review is not Astra review.
