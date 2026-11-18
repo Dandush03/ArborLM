@@ -19,4 +19,4 @@ Registered labels (from `REPORT.md`; every label carries REGISTERED RE-ANALYSIS 
 - R-DIAGNOSIS: EVALUABLE.
 - Tree component: EXACT SEARCH HARMS, at U_P and at the run length, at both primary cells (8K/4K and 32K/16K). Recommended action: none.
 - Index component: INDEX APPROACHES FLAT ONLY ABOVE 512, at both checkpoints and both primary cells. Recommended action: none.
-- R-CONFIRM-TREE: CONFIRMED and R-CONFIRM-INDEX: CONFIRMED on fresh checkpoints (stage group A2; `confirm/REPORT_CONFIRM.md`; recomputation of A2 pending).
+- R-CONFIRM-TREE: CONFIRMED and R-CONFIRM-INDEX: CONFIRMED on fresh checkpoints (stage group A2; `confirm/REPORT_CONFIRM.md`; independently recomputed, `audit_a2/`). See `OUTCOME.md` section 4a for what CONFIRMED does and does not license: the report's line "Allowed here: True" does not apply.

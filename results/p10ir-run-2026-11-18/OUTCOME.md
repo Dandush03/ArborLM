@@ -1,6 +1,6 @@
 # P10-I-R outcome record (ADR-0029, sections 18–20)
 
-**Status: stage group A1 is recorded as registered, independently recomputed, and accepted by the lead under the human lead's delegation. Stage group A2 is recorded as registered; its independent recomputation is in progress and its acceptance waits for it.** Nothing here is a success claim. This study is a diagnosis; it is neither a positive nor a negative result for ArborLM. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+**Status: COMPLETE. Stage groups A1 and A2 are recorded as registered, independently recomputed, and accepted by the lead under the human lead's delegation.** Nothing here is a success claim. This study is a diagnosis; it is neither a positive nor a negative result for ArborLM. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 
 Every label carries: ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK. A1's labels also carry REGISTERED RE-ANALYSIS OF OBSERVED CELLS (the accuracies of these checkpoints were known from P10-S1 before the study was designed); A2's carry FRESH CHECKPOINTS.
 
@@ -12,7 +12,7 @@ Every label carries: ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMI
 | Run directory | `experiments/P10IR-registered-20261118` (not in git) |
 | A1 (reads of P10-S1's checkpoints) | gates COMPLETE; 70 tasks, 280 checkpoints, 0 item errors, 4,003.4 s charged (cap 6 h); analysis and report COMPLETE; 2026-11-18 04:35–05:42 UTC |
 | A2 (20 fresh cells, then the same reads) | gates COMPLETE (43.3 s); training COMPLETE, 20 tasks, 4,871.5 s; reads COMPLETE, 20 tasks, 2,483.6 s; confirm COMPLETE; 0 item errors; 2.06 h charged (cap 3 h); 08:42–10:46 UTC |
-| Charged, registered stages | 11,405.8 s (3.17 h); total cap 10 h. The machine was shared with other studies' work throughout; nothing in this study registers a time |
+| Charged | Registered stages 11,405.8 s (3.17 h): A1 1.113 h of its 6.0 h cap, A2 2.055 h of its 3.0 h cap. With the counting rehearsal (0.386 h of 1.0) the study charged 3.55 h of its 10 h total (3.92 h if the measuring rehearsal is counted). Bridge training took 1.35 h against a projection of 0.87 h. The machine was shared with other studies' work throughout; nothing in this study registers a time |
 
 ## 2. Registered labels (as the frozen code computed them)
 
@@ -62,6 +62,38 @@ By the `arbor-auditor` subagent (Opus 5.5), with its own code; report and script
 - Rulings 1 to 11 (ADR-0029 sections 19 and 20) changed no label against the ADR's literal text: none of the cases they cover occurred.
 - No defect of the frozen code changed a number or a label.
 
+## 4a. Independent recomputation of A2, and what CONFIRMED means
+
+By the `arbor-auditor` subagent (Opus 5.5); report with its scripts in `audit_a2/AUDIT_P10IR_A2.md`.
+
+- Integrity: all four A2 stages COMPLETE with 0 item errors; plan and config hashes match the freeze; the 20 bridge cells use the registry's seeds (data 290001–296999, initialization 330601–330605) and P10-S1's learning rate, U_P, run lengths and snapshot schedule; 185 snapshot hashes match; the adapter identity snapshots equal P10-S1's; gates 1, 2, 4, 5 and 6 passed, none skipped (gate 3 does not apply to A2); A1's analysis record is unchanged.
+- Labels: 4,261 comparisons with `confirm/confirm.json`, 0 differences. Ruling 1 never came into play.
+- Measurements from the bridge checkpoint tensors (32K/16K, two draws, both checkpoints): 624 comparisons, 26 differences, all from floating-point near-ties (one count in 32,768 on four reads of one draw); no label affected.
+- A1 against A2, mean a_use (A1 / A2):
+
+| Read | 8K/4K at U_P | 8K/4K run length | 32K/16K at U_P | 32K/16K run length |
+|---|---|---|---|---|
+| F0 | 0.948 / 0.949 | 0.996 / 0.996 | 0.916 / 0.917 | 0.992 / 0.991 |
+| T0 | 0.469 / 0.493 | 0.769 / 0.773 | 0.401 / 0.411 | 0.697 / 0.703 |
+| T1 | 0.340 / 0.353 | 0.515 / 0.521 | 0.332 / 0.341 | 0.529 / 0.536 |
+| T1w | 0.417 / 0.436 | 0.681 / 0.687 | 0.371 / 0.381 | 0.633 / 0.640 |
+| T3 | 0.384 / 0.402 | 0.589 / 0.598 | 0.293 / 0.298 | 0.408 / 0.409 |
+| T2 | 0.064 / 0.064 | 0.062 / 0.062 | 0.039 / 0.039 | 0.033 / 0.034 |
+| CR8 of T0 | 0.072 / 0.073 | 0.063 / 0.062 | 0.016 / 0.016 | 0.0063 / 0.0063 |
+| c* (keys) | 2,048 / 2,048 | 1,024 / 1,024 | 2,048 / 2,048 | 2,048 / 2,048 |
+
+  Every difference is within 0.024 and about one standard error; the visit sweep peaks at v = 2 in both; the index curves agree to 0.01. Data draws and initialization seeds both changed, so A2 cannot separate the two sources of variation.
+
+**What CONFIRMED licenses.** The A1 labels reproduce by row name on fresh draws and fresh initialization: exact search over the tree's own keys harms; neither removing the prior nor removing the hard candidate restriction closes most of the gap; the post-hoc index needs more than 512 candidates.
+
+**What it does not license, with three corrections to the registered report** (`confirm/REPORT_CONFIRM.md` and `confirm.json` are kept as the frozen code wrote them):
+
+1. The report prints "A statement that the tree's gap is caused by a named factor at read time … Allowed here: True". **That line does not apply to this outcome.** The code behind it checks only for CONFIRMED. ADR-0029 section 10 makes CONFIRMED necessary for such a statement, not sufficient, and the confirmed row, "EXACT SEARCH HARMS — NOT SEPARABLE AT READ TIME", names no factor and recommends nothing. No statement that the gap is caused by a named read-time factor may be made from this study.
+2. Ruling 4 (ADR-0029 section 19) gave as the reason for A2's plateau check being NOT CHECKED that fresh cells have "no recorded snapshot series". That reason is wrong: every bridge cell stores the half-run snapshots; they were not evaluated. The check stays NOT CHECKED for A2 as ruled and as run; the reason is corrected here.
+3. A1's run-length labels carry TREE STILL LEARNING in 5 of 5 replicates at both primary cells, and A2's plateau check was not made. The confirmed run-length labels are therefore labels of a tree that had not plateaued. Nothing here says the labels would hold at a plateau.
+
+Also: `a2/` and `A2/` are one directory on this case-insensitive file system.
+
 ## 5. What the result does and does not show (the auditor's judgement, adopted)
 
 - **Wider search does not help at read time.** v = 2, the trained setting, is best; v = 1 loses 1.8 bits; v = 4 and 8 lose 1.0 and 1.4 bits with priors on and collapse with priors off. This says nothing about training with more branches visited.
@@ -84,7 +116,7 @@ By the `arbor-auditor` subagent (Opus 5.5), with its own code; report and script
 
 **A1.** The lead accepts the A1 outcome as registered, unchanged, with the findings of sections 5 and 6 beside it, under the human lead's delegation of 2026-11-18 (`docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md`: "once its done can you accept the results as they come and continue with the next simulations until you conclude P10-I-*"; "and you have my permission to auto approve everything until you complete P10-I"). This is an acceptance by the lead under that delegation, not the human lead's own. It is the acceptance of a diagnosis with no recommended action; it is not a success claim.
 
-**A2.** Recorded as registered. Its acceptance follows its independent recomputation, which is added to this folder when it returns.
+**A2.** The lead accepts the A2 outcome and R-CONFIRM as registered, unchanged, under the same delegation, with the limits of section 4a beside them.
 
 ## 8. What this study cannot establish
 
