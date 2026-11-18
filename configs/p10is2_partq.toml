@@ -1,0 +1,111 @@
+# ADR-0025 (P10-I-S2) Part Q constants. Every value is quoted from the ADR section named in its comment; none was chosen by the implementer.
+# tests/test_p10is2_config.py compares this file with the ADR's numbers (ruling L6). Not frozen. Self-check only; Astra review: NOT_PERFORMED.
+
+schema_version = 1
+study = "P10IS2"
+part = "Q"
+spec_reference = "docs/decisions/ADR-0025-p10-i-s2-sequential-teacher-transfer.md"
+
+[panels]  # section 4.1
+q_fit = 2000                  # fixed, never extended
+q_check_block = 500
+q_check_blocks_max = 16
+d_cal = 500
+d_con = 300
+e_eval = 1000                 # E_A, E_B
+e_eval_min = 500
+e_combined = 500              # E_C
+e_combined_min = 250
+e_open = 500
+both_reference_min_train = 3300   # Q_fit + D_cal + D_con + one Q_check block
+gen_marker_like = 44
+gen_ordinary = 100
+general_window_tokens = 256
+
+[data]  # as ADR-0022 section 5.2 (carried; ADR-0025 section 3 row 4)
+vocabulary = 2000
+min_words = 3
+max_words = 10
+large_group_pairs = 50
+evaluation_fraction = 0.20
+
+[quality]  # section 4.2
+q1_own_score_min = 0.55
+q2_margin_min = 0.30
+tau_grid = [-0.05, -0.10, -0.15, -0.20, -0.25, -0.30, -0.35, -0.40, -0.45, -0.50, -0.55, -0.60]
+ratio_ranges = [[0.5, 2.0], [0.6, 1.6]]
+chrf_correct = 0.60
+wilson_lower_bound = 0.90
+wilson_z = 1.959963984540054
+q4_precision_min = 0.90
+q4_min_accepted = 150
+
+[scoring]  # chrF-norm as ADR-0022 section 10.1
+chrf_max_order = 6
+chrf_beta = 2.0
+regeneration_score_tolerance = 1.0e-4
+
+[generation]  # section 4.3
+split_share_b = 0.8           # the registered split, 4/5; 0.804 is a rationale only and is not a parameter
+accepted_min = 10000
+accepted_disjoint = 24000
+replicates = 3
+per_replicate = 8000
+generation_block_sources = 20000
+batch_size = 32
+threads = 6
+digest_batches = 4
+regeneration_batches = 32
+generation_beam = 4
+generation_new_tokens = 48
+
+[caps]  # sections 9, 10
+measuring_rehearsal_hours = 3.0
+rehearsal_hours = 3.0
+extension_factor_max = 2.0
+provisional = true            # the stage caps are computed by code from the measuring rehearsal; until then freeze refuses
+memory_per_worker_gib = 12.0
+workers_max = 2
+disk_gib = 10.0
+rehearsal_generation_blocks = 2   # counting rehearsal: per capability
+rehearsal_check_blocks = 1
+
+[seeds]  # section 6 (data seeds, partition side) and SEED_REGISTRY.md section 4.2
+partition = 250901
+q_fit = 250902
+q_check_reserve_order = 250903
+source_split = 250904
+source_block_order = 250905
+control_subsample = 250906
+gen_ordinary_windows = 250907
+teacher_tokenizer_sentences_and_digest = 250908
+tokenization_test_c = 250909
+equivalence_injection = 250910
+c1_pairing = 250911
+seen_items = 250912
+timing_items = 250913
+regeneration_subsample = 250914
+bootstrap = 250915
+disjoint_permutation_a = 250916
+disjoint_permutation_b = 250917
+route_accuracy_pieces = 250918
+rehearsal_partition = 252901
+rehearsal_streams = [252902, 252903, 252904, 252905, 252906, 252907, 252908, 252909, 252910, 252911, 252912, 252913, 252914]
+test_low = 934001
+test_high = 934999
+registry_checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+registry_checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+allocation_low = 250901
+allocation_high = 250999
+rehearsal_low = 252901
+rehearsal_high = 252999
+
+[paths]  # sections 4.1 step 1, 11 item 1, 13 item 6
+durable_downloads = "/Users/daniellaloush/dandush03/ArborLM/data/p10s2-pre-20261115"
+durable_packages = "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
+wikitext_dir = "/Users/daniellaloush/dandush03/ArborLM/data/wikitext2"
+packages_requirements = "studies/p10s2/requirements-datagen.txt"
+packages_requirements_sha256 = "d549380e67b220945d183a159a2cc2a85c2c982947367c70fd411038769e8867"
+panel_ledger = "freeze/panel_ledger.json"
+delegation_record = "docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md"
+decision_2_glob = "results/p10is2-partq-freeze-*/DECISION_2_PARTQ.md"

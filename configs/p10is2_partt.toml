@@ -1,0 +1,137 @@
+# ADR-0025 (P10-I-S2) Part T constants. Every value is quoted from the ADR section named in its comment; none was chosen by the implementer.
+# tests/test_p10is2_config.py compares this file with the ADR's numbers (ruling L6). Not frozen. Self-check only; Astra review: NOT_PERFORMED.
+
+schema_version = 1
+study = "P10IS2"
+part = "T"
+spec_reference = "docs/decisions/ADR-0025-p10-i-s2-sequential-teacher-transfer.md"
+
+[memory]  # section 5.2 (as ADR-0022 section 3)
+rows_per_stage = 4096
+key_width = 16
+top = 8
+temperature = 0.2
+init_std = 0.02
+read_layers = [4, 12]
+lora_rank_single = 42
+lora_rank_joint = 84
+vector_width = 576
+replay_rows = 32
+
+[training]  # section 5.1
+batch = 32
+clip_norm = 1.0
+weight_decay = 0.0
+checkpoint_every = 500
+replicates = 3
+orders = ["AB", "BA"]
+training_device = "mps"
+scoring_device = "cpu"
+threads = 6
+interop_threads = 1
+
+[calibration]  # section 7.1
+store_rates = [0.001, 0.003, 0.01]
+lora_rates = [0.0001, 0.0003, 0.001]
+rate_grid_updates = 2000
+rate_grid_read_layer = 4
+rate_tie_tolerance = 0.01
+ladder_rungs = [1000, 2000, 4000]
+ladder_snapshots = [1000, 2000, 4000, 8000]
+ladder_top = 8000
+convergence_tolerance = 0.01
+repetitions_provided = 1
+
+[pilot]  # section 7.2
+gap_min = 0.25
+
+[data]  # section 5.3
+gap_denominator_min = 0.30
+control_subsample = 300
+eval_panel = 1000
+first_not_acquired_g = 0.50
+
+[gates]  # section 8.2, 8.3
+acq_gap_min = 0.50
+acq_margin_min = 0.30
+acq_marker_only_max = 0.25
+acq2_ratio_min = 0.80
+ret_forgetting_max = 0.03
+ret_rho_min = 0.90
+negative_acquisition = 0.25
+negative_retention = 0.70
+forgetting_pressure_cells = 4
+forgetting_pressure_second_min = 0.50
+forgetting_pressure_rho_max = 0.90
+retention_negative_min_cells = 4
+control_failed_gap = 0.50
+gen_loss_margin = 0.02
+dense_margin = 0.05
+lookup_sufficient_margin = 0.03
+lookup_adds_margin = 0.05
+second_not_acquired = 0.50
+modification_dcon_tolerance = 0.02
+modification_floor = 0.10
+composes_ratio_min = 0.80
+composes_negative = 0.50
+cells_per_arm = 6
+recompute_item_tolerance = 1.0e-6
+
+[arms]  # section 5.2
+stage_rows = 4096
+memory_arms = ["M1", "M-append", "M-seq", "M-ii", "M-joint"]
+dense_arms = ["D1", "D-append", "D-seq", "D-joint"]
+by_construction_arms = ["E-table", "M-sep", "D-sep"]
+lookup_baselines = ["R-exact", "R-gloss", "R-gloss-icl", "R-nn", "R-icl"]
+lookup_best_of = ["R-gloss", "R-gloss-icl", "R-nn", "R-icl", "E-table"]
+combined_arm_cells = ["M-append", "M-ii", "D-seq", "D-append", "M-joint", "D-joint", "M-sep", "D-sep"]
+timed_arms = ["S0", "M-append", "D-append", "D-seq", "E-table", "R-icl"]
+
+[seeds]  # section 6 and SEED_REGISTRY.md section 4.2
+replicate_bases = [250001, 250101, 250201]
+offsets = [1, 2, 4, 10, 13]               # training draw, batch order, permutation controls, code hash, router none prefixes and batch order
+calibration_bases = [251001, 251101]       # 251001 + 100 i, i = 0, 1
+repeat_calibration_bases = [251201, 251301]
+rehearsal_base = 252001
+analysis_bootstrap = 250915
+route_accuracy_pieces = 250918
+init_registered = [330201, 330211, 330221]   # + role j
+init_calibration = [330231, 330241]
+init_repeat_calibration = [330261, 330271]   # listed values, never the formula 330231 + 10 i at i = 2
+init_rehearsal = 330251
+init_test = [330298, 330299]
+init_roles = ["stage-1 store", "appended rows", "M-joint store", "D1", "second adapter of D-append", "D-joint", "E-table", "router projection and keys"]
+test_low = 934001
+test_high = 934999
+allocation_low = 250001
+allocation_high = 250899
+rehearsal_set_low = 252001
+rehearsal_set_high = 252899
+init_low = 330201
+init_high = 330299
+registry_checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+registry_checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+
+[caps]  # sections 9, 10
+measuring_rehearsal_hours = 3.0
+rehearsal_hours = 3.0
+extension_factor_max = 2.0
+provisional = true
+memory_per_worker_gib = 8.0
+memory_aggregate_gib = 24.0
+workers_max = 3
+workers_max_shared = 2
+disk_gib = 10.0
+
+[timing]  # section 10, stage 7 (descriptive; runs alone)
+threads = 6
+items_per_panel = 200
+repetitions = 3
+quiet_load_max = 2.0
+quiet_wait_seconds = 60
+start_bound_minutes = 30
+max_attempts = 5
+unstable_cv = 0.05
+
+[cost]  # section 8.5
+batch = 32
