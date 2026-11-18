@@ -31,7 +31,7 @@ def test_synthetic_pipeline_rehearsal_runs_every_stage(tmp_path: Path) -> None:
     assert not (rd / "sealed").exists() and not (rd / "cal").exists()  # B1: nothing of Stage R in the run directory
     # B3: no per-cell-type Stage R decision or measurement is anywhere in the run directory or in a task or manifest file
     for f in rd.rglob("*"):
-        if f.is_file() and f.suffix in (".json", ".log", ".jsonl", ".md") and f.name != "addendum.json":  # the X8 addendum is written after durations.json exists (section 8)
+        if f.is_file() and f.suffix in (".json", ".log", ".jsonl", ".md") and f.name != "addendum.json" and "cells" not in f.relative_to(rd).parts:  # the X8 addendum is written after durations.json exists (section 8); registered cells (cells/) are not Stage R
             text = f.read_text(errors="ignore")
             assert not any(w in text for w in ("CANDIDATE", "NON_FINITE", "task_loss", "distinct_top1", '"e_star"')), f
     assert core.read_record(copy / core.DURATIONS, "durations")["attempt"] == 0 and (rd / "sealed_location.json").is_file()
