@@ -161,7 +161,7 @@ def test_rehearsal_runs_generation_even_when_both_teachers_fail(tmp_path: Path) 
         pipeline.step_generation(plain, pipeline.step_partition(plain), pipeline.step_qfit(plain, pipeline.step_partition(plain)))
     forced = ctx_of(tmp_path / "forced", teachers={"A": FakeTeacher("A"), "B": FakeTeacher("B")}, force_generation=True, seal=True, accepted_min=1, accepted_disjoint=10**7)
     pipeline.run_all(forced)
-    assert forced.d("generation/result.json").is_file() and forced.d("regeneration.json").is_file()  # every stage ran: which stages ran reveals nothing
+    assert forced.d("sealed/generation_result.json").is_file() and forced.d("regeneration.json").is_file()  # every stage ran: which stages ran reveals nothing
     st = reh.stage_statuses(forced)
     assert st["generation"] and st["regeneration"] and st["qcheck"]
     assert not forced.d("qualification.json").exists() and forced.d("sealed/qualification.json").is_file()
@@ -290,7 +290,7 @@ def test_a_registered_stage_takes_its_parameters_from_the_plan_not_the_config(tm
     from studies.p10is2.partq import plan as qplan
 
     cfg = core.load_config("Q")
-    rec = qplan.build_candidate(ROOT, tmp_path / "run", cfg, inputs={}, walk={"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []})
+    rec = qplan.build_candidate(ROOT, tmp_path / "run", cfg, inputs={}, walk={"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []}, test_mode=True)
     rec["layout"]["batch_size"] = 16  # a plan that differs from the config
     rec["layout"]["digest"]["batches"] = 2
     rec["items"]["qfit"] = [i for i in rec["items"]["qfit"] if i["teacher"] == "A"]  # a plan that names one teacher
@@ -312,4 +312,4 @@ def test_the_part_q_manifest_lists_every_output_with_its_hash(tmp_path: Path) ->
     files = real_stages.write_manifest(ctx)
     m = json.loads((tmp_path / "run" / "manifest.json").read_text())
     assert m["files"] and set(m["files"]) == set(files) and not any("sealed" in k for k in m["files"])
-    assert "generation/result.json" in m["files"] and all(len(v) == 64 for v in m["files"].values())
+    assert "generation/teacher_A/block_0000/batch_0000000.json" in m["files"] and "generation/result.json" not in m["files"] and all(len(v) == 64 for v in m["files"].values())

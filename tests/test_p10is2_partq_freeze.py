@@ -83,7 +83,7 @@ def frozen_repo(repo: Path, platform_ok: None) -> tuple[Path, str, planmod.Plan]
     """Caps set, plan written and committed, freeze record written and committed: the freeze commit."""
     set_caps(repo, CAP_HOURS)
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK)
+    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True)
     qplan.write_candidate(repo, rec)
     plan_sha = file_sha256(repo / core.PLAN_Q)
     write_json(repo / core.FREEZE_RECORD_Q, {"kind": "freeze_record", "plan_file_sha256": plan_sha})
@@ -110,7 +110,7 @@ def test_items_per_stage_and_layout() -> None:
 
 def test_candidate_plan_written_once_superseded_never_deleted_never_after_freeze(repo: Path) -> None:
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK)
+    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True)
     path = qplan.write_candidate(repo, rec)
     first = file_sha256(path)
     with pytest.raises(core.StageRefused, match="supersede"):
@@ -124,7 +124,7 @@ def test_candidate_plan_written_once_superseded_never_deleted_never_after_freeze
 
 
 def test_plan_carries_every_threshold_the_config_has() -> None:
-    cfg_rec = qplan.build_candidate(ROOT, ROOT / "experiments" / "_unused", CFG, inputs=INPUTS, walk=FAKE_WALK)
+    cfg_rec = qplan.build_candidate(ROOT, ROOT / "experiments" / "_unused", CFG, inputs=INPUTS, walk=FAKE_WALK, test_mode=True)
     assert cfg_rec["thresholds"] == CFG["quality"] and cfg_rec["seeds"]["bootstrap"] == 250915 and cfg_rec["adr"]["note"].startswith("provenance only")
     assert "studies/p10is2/common/core.py" in cfg_rec["frozen_files"] and "studies/p10is2/partq/pipeline.py" in cfg_rec["frozen_files"]
     assert not any(f.startswith("studies/p10is2/freeze/") for f in cfg_rec["frozen_files"])
@@ -146,7 +146,7 @@ def test_caps_by_code_double_projected_and_total_counts_charge_once() -> None:
     assert qplan.caps_proposal(0.0, {"x": 1.0})["x_hours"] == 0.01  # rounded up to 0.01 h
     with pytest.raises(ValueError, match="no measured rate"):
         qplan.project_stage_seconds({"qfit": 10}, {})
-    assert qplan.project_stage_seconds({"qfit": 100, "gen": 5}, {"qfit": 0.5, "gen": 2.0}) == {"qfit": 50.0, "gen": 10.0}
+    assert qplan.project_stage_seconds({"qfit": 100, "gen": 5}, {"qfit": 0.5, "gen": 2.0}) == {"qfit": 50.0, "gen": 10.0, "analysis": qplan.ANALYSIS_PROJECTED_SECONDS}
     cfg = small_cfg()
     cfg["stage_caps"]["qfit_hours"] = 1.0
     assert qplan.caps_match_config(cfg, {"qfit_hours": 1.0}) == [] and qplan.caps_match_config(cfg, {"qfit_hours": 1.01})
@@ -294,12 +294,12 @@ def measuring_record(tmp: Path, units: dict, rates: dict, charged: float = 3600.
 def test_freeze_refuses_provisional_caps_and_caps_that_are_not_the_codes(repo: Path, tmp_path: Path, platform_ok: None, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(planmod, "import_walk", lambda *a, **k: FAKE_WALK)  # the throwaway repository holds no P10-S2 code to import
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK))
+    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True))
     with pytest.raises(core.StageRefused, match="provisional"):
         freeze.cmd_freeze(freeze_args(repo, tmp_path))
     set_caps(repo, CAP_HOURS)
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK), supersede=True)
+    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True), supersede=True)
     measuring_record(tmp_path, {"qfit": 4000.0}, {"qfit": 0.5})
     with pytest.raises(core.StageRefused, match="not what the code computes"):
         freeze.cmd_freeze(freeze_args(repo, tmp_path))
@@ -315,7 +315,7 @@ def test_freeze_refuses_a_counting_record_that_is_not_for_this_plan(repo: Path, 
     caps = qplan.caps_proposal(3600.0, qplan.project_stage_seconds(units, rates))
     set_caps(repo, caps)
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK))
+    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True))
     measuring_record(tmp_path, units, rates)
     core.write_record(tmp_path / "cnt.json", {**core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "counting", "caps_provisional": False, "plan_file_sha256": "0" * 64, "stages": {s: {"status": "COMPLETE"} for s in qplan.STAGES}, "forced": {"pause_resume": True, "paused_identity_restore": True}}, overwrite=True)
     with pytest.raises(core.StageRefused, match="counting rehearsal's record"):
@@ -527,7 +527,7 @@ def test_a_changed_frozen_file_is_paused_identity_and_resumes_on_restore(repo: P
 def frozen_repo_real_platform(repo: Path):  # type: ignore[no-untyped-def]
     set_caps(repo, CAP_HOURS)
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK)
+    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True)
     qplan.write_candidate(repo, rec)
     write_json(repo / core.FREEZE_RECORD_Q, {"kind": "freeze_record", "plan_file_sha256": file_sha256(repo / core.PLAN_Q)})
     git(repo, "add", "-A")

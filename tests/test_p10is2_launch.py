@@ -50,17 +50,17 @@ def make_repo(tmp: Path) -> Path:
 def set_caps(r: Path, part: str) -> None:
     p = r / (core.CONFIG_Q if part == "Q" else core.CONFIG_T)
     t = p.read_text().replace("provisional = true", "provisional = false")
-    stages = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs") if part == "Q" else ("gates", "calibration", "train", "evaluate", "controls", "combined", "analysis")
+    stages = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis") if part == "Q" else ("gates", "calibration", "train", "evaluate", "controls", "combined", "analysis")
     for k in (*stages, "total"):
         t = t.replace(f"{k}_hours = 0.0", f"{k}_hours = 1.0")
     p.write_text(t)
 
 
-def freeze(r: Path, part: str, decision: bool = True) -> str:
+def freeze(r: Path, part: str, decision: bool = True, inputs: dict | None = None) -> str:  # type: ignore[type-arg]
     set_caps(r, part)
     cfg = core.load_config(part, r / (core.CONFIG_Q if part == "Q" else core.CONFIG_T))
     if part == "Q":
-        rec = qplan.build_candidate(r, r / "runs", cfg, inputs={"x": {"path": "/x", "sha256": "0" * 64}}, walk=FAKE_WALK)
+        rec = qplan.build_candidate(r, r / "runs", cfg, inputs=inputs or {"x": {"path": "/x", "sha256": "0" * 64}}, walk=FAKE_WALK, test_mode=True)
         plan_path, rec_path = core.PLAN_Q, core.FREEZE_RECORD_Q
     else:
         rec = partt_plan.build_candidate(r, r / "runs", cfg, CALIB, walk=FAKE_WALK)

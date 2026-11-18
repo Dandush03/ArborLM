@@ -88,7 +88,20 @@ def loc(ctx: QContext, name: str) -> str:
     m = re.fullmatch(r"qcheck/teacher_([AB])/result\.json", name)
     if m:
         return f"sealed/qcheck_{m[1]}_result.json"
+    m = re.fullmatch(r"qcheck/teacher_([AB])/stop\.json", name)
+    if m:
+        return f"sealed/qcheck_{m[1]}_stop.json"  # the accepted counts of the Q_check blocks depend on the Q3 setting
+    if name in ("generation/result.json", "generation/pools.json"):
+        return "sealed/" + name.replace("/", "_")  # the accepted counts, the yields and the accepted pools depend on the Q3 setting
     return name
+
+
+def seal_permissions(path: Path) -> None:
+    """A sealed file is readable by its owner only, and so is its directory."""
+    import os
+
+    os.chmod(path.parent, 0o700)
+    os.chmod(path, 0o600)
 
 
 def _rec(ctx: QContext, name: str, what: str, body: Mapping[str, Any]) -> dict[str, Any]:
@@ -97,9 +110,7 @@ def _rec(ctx: QContext, name: str, what: str, body: Mapping[str, Any]) -> dict[s
     if not path.exists():
         core.write_record(path, rec)
         if "sealed" in path.relative_to(ctx.run_dir).parts:
-            import os
-
-            os.chmod(path, 0o600)  # sealed files are readable by the owner only
+            seal_permissions(path)  # sealed files are readable by the owner only
     return read_json(path)  # type: ignore[no-any-return]
 
 
@@ -235,8 +246,10 @@ def step_qcheck(ctx: QContext, p: partition.QPartition, qfit: Mapping[str, Any])
         setting = FilterSetting(fs["tau"], fs["rho1"], fs["rho2"])
         d = ctx.d(f"qcheck/teacher_{c}")
         count = gen.count_phase(ctx.teachers[c], blocks, setting, d, target=target, size=ctx.size, deadline=ctx.deadline)
-        stop_path = d / "stop.json"
+        stop_path = ctx.d(loc(ctx, f"qcheck/teacher_{c}/stop.json"))
         gen.record_stop(stop_path, count)  # BEFORE any reference is read
+        if ctx.sealed:
+            seal_permissions(stop_path)
         res = gen.finalize(ctx.teachers[c], blocks, count, setting, d, stop_path, lambda it, c=c: it.refs[c], ctx.cfg, size=ctx.size)
         scores = res.pop("items_per_item_scores")
         _rec(ctx, f"sealed/qcheck_{c}_values.json" if ctx.sealed else f"qcheck/teacher_{c}/values.json", "values", {"result": res, "per_item_chrf": scores})
@@ -291,7 +304,7 @@ def _with_targets(ctx: QContext) -> dict[str, Any]:
 
 
 def accepted_pool(ctx: QContext, capability: str) -> list[TrainItem]:
-    rec = read_json(ctx.d("generation/pools.json"))
+    rec = read_json(ctx.d(loc(ctx, "generation/pools.json")))
     return [TrainItem(x["key"], x["en"], x["target"], int(x["group"])) for x in rec["pools"][capability]]
 
 

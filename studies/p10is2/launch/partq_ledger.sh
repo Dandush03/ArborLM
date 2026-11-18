@@ -3,6 +3,7 @@
 # run directory in "rehearsal" mode). It needs the tokenizer, so the 28 packages go on the path ONLY from the verified durable copy, absolute path, offline, never through uv's cache. It refuses once a plan or a
 # freeze record exists; the registered `inputs` stage only VERIFIES the ledger.
 set -eu
+export PYTHONDONTWRITEBYTECODE=1  # the durable package copy is hashed into the plan: nothing may write .pyc files into it
 export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6
 if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then

@@ -93,7 +93,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
     walk = planmod.import_walk(repo, "Q")
     inputs = plan.data["inputs"]
-    rederived = qplan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, inputs=inputs, mode=plan.data["mode"], walk=walk)
+    rederived = qplan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, inputs=inputs, mode=plan.data["mode"], walk=walk, test_mode=True)  # the ledger is required (and read) just below
     if qplan.scientific_content(json.loads(json.dumps(core.jsonable(rederived)))) != qplan.scientific_content(plan.data):
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and inputs: supersede it and rehearse again")
     listed = {k: v for k, v in plan.data["frozen_files"].items()}

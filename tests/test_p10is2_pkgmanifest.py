@@ -130,7 +130,7 @@ def test_the_freeze_refuses_a_plan_without_the_package_manifest(repo: Path, tmp_
     set_caps(repo, qplan.caps_proposal(3600.0, qplan.project_stage_seconds(units, rates)))
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     bare = {k: v for k, v in INPUTS.items() if k != pkgmanifest.KEY}
-    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=bare, walk=FAKE_WALK))
+    qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=bare, walk=FAKE_WALK, test_mode=True))
     measuring_record(tmp_path, units, rates)
     with pytest.raises(core.StageRefused, match="installed-package manifest"):
         freeze.cmd_freeze(freeze_args(repo, tmp_path))

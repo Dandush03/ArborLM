@@ -54,17 +54,32 @@ def registered_items(cfg: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
     return items
 
 
-def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs: Mapping[str, Any], mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, ledger_path: str | None = None) -> dict[str, Any]:
+def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs: Mapping[str, Any], mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, ledger_path: str | None = None, test_mode: bool = False) -> dict[str, Any]:
     """The plan record. ``inputs`` names every input file with its path and SHA-256 (the downloads, WikiText-2, the package manifest); the panel ledger as it stands at the freeze is hashed into ``manifests``."""
     manifests: dict[str, Any] = {}
     led = ledger_path or cfg["paths"]["panel_ledger"]
     lp = Path(led) if Path(led).is_absolute() else repo / planmod_freeze_dir() / Path(led).name
+    if not test_mode:  # the registered plan pins a ledger that exists and already holds this study's windows; fixtures pass ``test_mode=True`` explicitly
+        require_study_ledger(lp, cfg)
     if lp.is_file():
         manifests["panel_ledger"] = {"path": str(lp), "sha256": file_sha256(lp)}  # the shared ledger as it stands at the freeze, by absolute path and SHA-256
     return planmod.build_plan(
         part="Q", mode=mode, cfg=cfg, repo=repo, items=registered_items(cfg), run_dir=run_dir, walk=walk,
         extra={"layout": layout(cfg), "inputs": dict(inputs), "manifests": manifests, "panel_ledger_path": led, "seeds": {k: v for k, v in core.partq_seeds(cfg, "registered").items()}, "thresholds": {k: cfg["quality"][k] for k in cfg["quality"]}},
     )  # fmt: skip
+
+
+def require_study_ledger(lp: Path, cfg: Mapping[str, Any]) -> None:
+    """A registered candidate plan REFUSES a missing shared ledger (no silent "no pin"), and one that does not already hold this study's windows (the ``ledger`` command writes them once, before the plan). The
+    full verification (the windows equal the grid's) is the ``inputs`` stage's; this is the count."""
+    if not lp.is_file():
+        raise StageRefused(f"refused: the shared panel ledger {lp} does not exist: run the ledger command before the candidate plan")
+    from ..common.panel_ledger import read_shared
+
+    mine = [w for w in read_shared(lp).get("windows", []) if w.get("owner") == "P10IS2-partq"]
+    need = int(cfg["panels"]["gen_marker_like"]) + int(cfg["panels"]["gen_ordinary"])
+    if len(mine) != need:
+        raise StageRefused(f"refused: the shared panel ledger holds {len(mine)} windows of this study, the plan needs {need}")
 
 
 def planmod_freeze_dir() -> Path:
@@ -101,5 +116,13 @@ def write_candidate(repo: Path, record: Mapping[str, Any], *, supersede: bool = 
 from ..common.caps import (  # noqa: E402, F401  (caps by code live in common/ so that both parts share one definition)
     caps_match_config,
     caps_proposal,
-    project_stage_seconds,
 )
+from ..common.caps import project_stage_seconds as _project  # noqa: E402
+
+ANALYSIS_PROJECTED_SECONDS = 60.0  # PENDING LEAD REVIEW: the analysis reads records only (no world, no package); it has no rate to measure, so its projection is this fixed figure; its cap is 2 x it by the common rule
+
+
+def project_stage_seconds(units, seconds_per_unit):  # type: ignore[no-untyped-def]
+    """The projected time of each registered stage: the measured rates times the plan's counts, plus the records-only ``analysis`` stage at its fixed projection (section 10 item 3 is otherwise unchanged)."""
+    return {**_project(units, seconds_per_unit), "analysis": ANALYSIS_PROJECTED_SECONDS}
+

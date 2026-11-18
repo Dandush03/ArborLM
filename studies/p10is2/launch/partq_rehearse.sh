@@ -4,6 +4,7 @@
 # Uses the real teachers, so the 28 packages go on the path of this process ONLY from the verified durable copy, by absolute path, offline, never through uv's cache. Values of Q1-Q4 and every per-item
 # score go to <run-dir>/sealed and are not displayed. Not run by the implementation.
 set -eu
+export PYTHONDONTWRITEBYTECODE=1  # the durable package copy is hashed into the plan: nothing may write .pyc files into it
 export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6
 if [ "$#" -ne 2 ]; then

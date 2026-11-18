@@ -20,6 +20,7 @@ from ..common import core, gates
 from . import batches as bt
 from . import pipeline
 
+SEAL_NOTE = "The teacher outputs and the corpus references in this run directory stay public, so the seal on the values under sealed/ is procedural: nobody reads them before the registered analysis."
 CONTEXT_KEYS_SEALED = ("q1", "q2", "q3", "q4", "grid", "per_item", "mean_chrf", "student", "values", "precision", "chrf", "filter", "yield", "accepted")
 
 
@@ -111,7 +112,7 @@ def run_measuring(ctx_factory: Callable[[], pipeline.QContext], *, cap_seconds: 
     units = {c: float(g[c]["sources_generated"]) for c in core.TASKS if c in g}
     rates, full_units = rates_and_units(ctx, external)
     rec = {
-        **core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "status": status, "rates_seconds_per_unit": rates, "projection_units": full_units, "charged_before_freeze_seconds": charged_before_freeze_seconds, "caps_provisional": True, "cannot_be_frozen_on": True, "fixed_cap_seconds": cap_seconds,
+        **core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "seal_note": SEAL_NOTE, "status": status, "rates_seconds_per_unit": rates, "projection_units": full_units, "charged_before_freeze_seconds": charged_before_freeze_seconds, "caps_provisional": True, "cannot_be_frozen_on": True, "fixed_cap_seconds": cap_seconds,
         "timings": {"total_seconds": seconds, "seconds_per_generated_source": {c: seconds / u for c, u in units.items() if u}}, "memory": {"peak_rss_mib": peak_rss_mib()}, "disk_bytes": disk_bytes(ctx.run_dir),
         "load": {"start": load0, "end": load_average(), "note": "the 1-minute load average is the first element"}, "counts": summary["counts"], "generation_items_per_second": items_per_second(ctx), "batches": summary["batches"],
         "platform": gates.platform_record(), "stages": {"all": {"status": status}}, "sealed_values_in": "sealed/ (not read)",
@@ -160,7 +161,7 @@ def run_counting(ctx_factory: Callable[[], pipeline.QContext], *, plan_file_sha2
     done = stage_statuses(ctx)
     stages = {s: {"status": "COMPLETE" if ok else "NOT RUN", "within_cap": None if not stage_caps or s not in stage_caps else (clock() - t0) <= stage_caps[s]} for s, ok in done.items()}
     return {
-        **core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "counting", "status": "COMPLETE" if all(v["status"] == "COMPLETE" for v in stages.values()) else "INCOMPLETE", "plan_file_sha256": plan_file_sha256, "caps_provisional": caps_provisional, "fixed_cap_seconds": cap_seconds,
+        **core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "counting", "seal_note": SEAL_NOTE, "status": "COMPLETE" if all(v["status"] == "COMPLETE" for v in stages.values()) else "INCOMPLETE", "plan_file_sha256": plan_file_sha256, "caps_provisional": caps_provisional, "fixed_cap_seconds": cap_seconds,
         "stages": stages, "forced": {"pause_resume": paused, "paused_identity_restore": identity_ok}, "timings": {"first_attempt_seconds": t_pause, "resume_seconds": t_resume}, "memory": {"peak_rss_mib": peak_rss_mib()},
         "counts": summary["counts"], "generation_items_per_second": items_per_second(ctx), "plan_stage_items": dict(plan_stage_items or {}), "platform": gates.platform_record(), "load": {"end": load_average()},
     }  # fmt: skip

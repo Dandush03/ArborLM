@@ -194,7 +194,7 @@ def test_the_candidate_plan_pins_the_shared_ledger_hash_and_leaves_the_file_alon
     base = core.load_config("Q")
     cfg = {**base, "paths": {**base["paths"], "panel_ledger": str(ledger)}}
     walk = {"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []}
-    rec = qplan.build_candidate(ROOT, tmp_path / "run", cfg, inputs={}, walk=walk)
+    rec = qplan.build_candidate(ROOT, tmp_path / "run", cfg, inputs={}, walk=walk, test_mode=True)
     assert rec["manifests"]["panel_ledger"] == {"path": str(ledger), "sha256": before[0]}
     assert (file_sha256(ledger), ledger.stat().st_mtime_ns) == before
     assert base["paths"]["panel_ledger"] == "/Users/daniellaloush/dandush03/ArborLM/data/p10i-shared/panel_ledger.json"

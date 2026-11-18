@@ -74,6 +74,8 @@ def assert_process_environment(cfg: Mapping[str, Any]) -> None:
     for v in ("HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE"):
         if env.get(v) != "1":
             problems.append(f"{v} is not 1")
+    if env.get("PYTHONDONTWRITEBYTECODE") != "1" or not sys.dont_write_bytecode:
+        problems.append("PYTHONDONTWRITEBYTECODE is not 1: the process would write bytecode into the verified durable package copy")
     if env.get("PYTORCH_ENABLE_MPS_FALLBACK"):
         problems.append("PYTORCH_ENABLE_MPS_FALLBACK is set")
     if problems:
