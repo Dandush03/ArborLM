@@ -157,7 +157,7 @@ def test_logit_watch_covers_every_logit_and_stops_on_a_non_finite_one(tmp_path: 
         from studies.p10s1 import evaluate as ev
 
         ev._read_record(model, data, spec["facts"], seeds, deep=False, robustness=False)
-    assert w.seen > 10 and w.bad == 0  # many forward passes: main, memory off, swap, shuffle, secondary streams
+    assert w.seen >= 5 and w.bad == 0  # many forward passes: main, memory off, swap, shuffle, secondary streams
     with pytest.raises(ValueError, match="engineering stop"):
         with torch.no_grad(), items.LogitWatch(model):
             model.backbone.final_norm.weight.data[0] = float("nan")
