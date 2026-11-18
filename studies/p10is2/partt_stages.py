@@ -15,6 +15,7 @@ import argparse
 import json
 import os
 import sys
+import time
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
@@ -28,7 +29,7 @@ from .common import plan as planmod
 from .common.caps import caps_match_config, caps_proposal, project_stage_seconds
 from .common.core import PendingLeadReview, StageRefused
 
-EXIT_REFUSED, EXIT_IDENTITY, EXIT_LEAD = 2, planmod.IDENTITY_EXIT, 3
+EXIT_REFUSED, EXIT_IDENTITY, EXIT_LEAD, EXIT_INCOMPLETE, EXIT_RECOMPUTATION = 2, planmod.IDENTITY_EXIT, 3, 4, 5  # 4: the stage did not complete (PAUSED or a task failed): see its manifest
 REGISTERED_STAGES = partt_plan.STAGES
 NOT_IMPLEMENTED = (
     "the arms' training loops over the P10-S2 student, store and LoRA modules (M1, M-append, M-seq, M-ii, D1, D-append, D-seq, M-joint, D-joint, E-table) with the seeded draws of Part Q's manifest",
@@ -62,9 +63,67 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
 def cmd_registered(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, args.stage)
+    from . import partt_real, partt_tasks
+
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    if args.stage in partt_tasks.TASK_STAGES:
+        man = partt_tasks.run_stage_tasks(args.stage, plan, cfg, repo, Path(args.run_dir), str(args.freeze_commit), Path(args.part_q_dir))
+        print(json.dumps({"stage": args.stage, "status": man["status"], "charged_seconds": man["charged_seconds"]}))
+        return 0 if man["status"] == "COMPLETE" else EXIT_INCOMPLETE
+    partt_real.run_stage(args.stage, repo, Path(args.run_dir), Path(args.part_q_dir), plan)
+    return 0
+
+
+def cmd_task(args: argparse.Namespace) -> int:
+    """One worker: it re-checks everything the entry point checks (an identity difference exits 75 and writes nothing), then runs its one task."""
+    repo = repo_of(args)
+    plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, args.stage)
     from . import partt_real
 
-    partt_real.run_stage(args.stage, repo, Path(args.run_dir), Path(args.part_q_dir), plan)
+    partt_real.run_task(args.stage, args.task_id, repo, Path(args.run_dir), Path(args.part_q_dir), plan)
+    return 0
+
+
+def cmd_recompute(args: argparse.Namespace) -> int:
+    """The independent recomputation (stage 8): re-score every snapshot on CPU. Exit 0 if it agrees; 5 on ENGINEERING STOP — RECOMPUTATION (nothing is labelled)."""
+    repo = repo_of(args)
+    plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, "analysis")
+    from . import partt_real
+
+    out = partt_real.run_recompute(repo, Path(args.run_dir), Path(args.part_q_dir), plan, own_code=bool(args.own_code))
+    print(json.dumps(out))
+    return 0 if out["ok"] else EXIT_RECOMPUTATION
+
+
+def cmd_timing(args: argparse.Namespace) -> int:
+    """Stage 7, the timing benchmark: it runs ALONE (no other process of any study alive), one attempt per invocation; the quiet condition is read before each repetition. Exit 0 if measured, 4 if the attempt
+    was incomplete (reschedule it)."""
+    repo = repo_of(args)
+    plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, "analysis")
+    from . import partt_real, partt_timing
+
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    w, _gloss, _ = partt_real.build_world_real(repo, cfg, Path(args.part_q_dir), plan.data["calibration"], "registered")
+    t0 = time.monotonic()
+    rec = partt_timing.run_stage(cfg, Path(args.run_dir) / "timing", partt_timing.make_repetition(w, Path(args.run_dir) / "snapshots"))
+    core.Ledger(Path(args.run_dir) / "charged_ledger.json", "T", max(1.0, float(cfg["stage_caps"].get("total_hours", 0.0)) * 3600.0) or 1e12).charge_process("timing", "registered", "main", time.monotonic() - t0)
+    print(json.dumps(core.jsonable({k: v for k, v in rec.items() if k != "record"}), default=str))
+    return 0 if rec["status"] in ("MEASURED", "NOT MEASURED") else EXIT_INCOMPLETE
+
+
+def cmd_cost(args: argparse.Namespace) -> int:
+    repo = repo_of(args)
+    plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, "analysis")
+    from . import partt_real
+
+    print(json.dumps(partt_real.run_cost(repo, Path(args.run_dir), Path(args.part_q_dir), plan)))
+    return 0
+
+
+def cmd_retry(args: argparse.Namespace) -> int:
+    from . import partt_tasks
+
+    print(json.dumps(partt_tasks.retry(Path(args.run_dir), args.stage, args.task_id, args.cause, bool(args.fix_changes_frozen_file))))
     return 0
 
 
@@ -227,6 +286,32 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--measuring-rehearsal", required=True)
     c.add_argument("--charged-hours", type=float, required=True)
     c.add_argument("--units", required=True)
+    tk = sub.add_parser("task")
+    for a in ("--stage", "--task-id", "--run-dir"):
+        tk.add_argument(a, required=True)
+    tk.add_argument("--freeze-commit")
+    tk.add_argument("--part-q-dir", default=".")
+    tk.add_argument("--repo")
+    co = sub.add_parser("cost")
+    co.add_argument("--run-dir", required=True)
+    co.add_argument("--freeze-commit")
+    co.add_argument("--part-q-dir", default=".")
+    co.add_argument("--repo")
+    tm = sub.add_parser("timing")
+    tm.add_argument("--run-dir", required=True)
+    tm.add_argument("--freeze-commit")
+    tm.add_argument("--part-q-dir", default=".")
+    tm.add_argument("--repo")
+    rc = sub.add_parser("recompute")
+    rc.add_argument("--run-dir", required=True)
+    rc.add_argument("--freeze-commit")
+    rc.add_argument("--part-q-dir", default=".")
+    rc.add_argument("--own-code", action="store_true")
+    rc.add_argument("--repo")
+    rt = sub.add_parser("retry")
+    for a in ("--stage", "--task-id", "--run-dir", "--cause"):
+        rt.add_argument(a, required=True)
+    rt.add_argument("--fix-changes-frozen-file", action="store_true")
     cal = sub.add_parser("calibrate")
     cal.add_argument("--part-q-dir", required=True)
     cal.add_argument("--run-dir", required=True)
@@ -251,7 +336,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        table: dict[str, Any] = {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "registered": cmd_registered, "work": cmd_registered, "rehearse": cmd_rehearse, "calibrate": cmd_calibrate}
+        table: dict[str, Any] = {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "registered": cmd_registered, "work": cmd_registered, "rehearse": cmd_rehearse, "calibrate": cmd_calibrate, "task": cmd_task, "retry": cmd_retry, "recompute": cmd_recompute, "timing": cmd_timing, "cost": cmd_cost}
         return int(table[args.command](args))
     except StageRefused as e:
         print(f"REFUSED: {e}", file=sys.stderr)

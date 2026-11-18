@@ -289,6 +289,9 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
         out = {"records": len(comb)}
     elif stage in ("analysis", "report"):
+        require_recomputation(run_dir)
+        if not (run_dir / "registry.json").is_file():
+            merge_results(run_dir)
         reg = Registry(read_json(run_dir / "registry.json"))
         side = read_json(run_dir / "side_records.json")["side"]
         comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
@@ -327,3 +330,105 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int) ->
     rec["repetition"] = repetition
     core.write_record(run_dir / f"calibration_{repetition}.json", {**core.envelope("calibration", "T"), **core.jsonable(rec)}, overwrite=True)
     return {k: rec[k] for k in ("store_rate", "lora_rate", "etable_rate", "read_layer", "U", "converged", "pilot")}
+
+
+# --- worker tasks (one process each; ``partt_tasks`` derives them from the frozen plan) --------------------------------------------------------------------------
+def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered") -> dict[str, Any]:
+    """The body of one worker. A trained cell: parent from its snapshot, resume from its checkpoint, train, snapshot; the cell record is written either way; the RESULT file only if the cell COMPLETED (a cell that
+    stopped on a non-finite loss or an error exits non-zero: the runner keeps a failed record and the analysis refuses while the item error stands). Scoring and the combined tasks write their records as the
+    result."""
+    from . import partt_tasks
+
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    calib = plan.data["calibration"]
+    w, gloss, _ = build_world_real(repo, cfg, qdir, calib, mode)
+    d = partt_tasks.tasks_dir(run_dir, stage)
+    sid = partt_tasks.safe(task_id)
+    snaps = run_dir / "snapshots"
+    result: dict[str, Any]
+    if stage == "train":
+        item = next(i for i in plan.items("train") if i["id"] == task_id)
+        spec = engine.CellSpec(item["arm"], item["order"], int(item["rep"]), item.get("capability", ""))
+        rec, _ = engine.run_cell(w, spec, int(calib["U"]), snaps, run_dir / "checkpoints")
+        core.write_record(d / f"{sid}.cell.json", {**core.envelope("cell_record", "T"), **core.jsonable(rec)}, overwrite=True)
+        if rec["status"] != "COMPLETE":
+            raise SystemExit(f"cell {task_id}: {rec['status']}: {rec['error']}")
+        result = {"cell": rec}
+    elif stage in ("evaluate", "controls"):
+        if task_id.endswith("|reference"):
+            result = {"records": partt_run.reference_task(w), "side": {}}
+        else:
+            rep = int(task_id.rsplit("|r", 1)[1])
+            recs, side = partt_run.score_replicate(w, rep, snaps, gloss)
+            result = {"records": recs, "side": side}
+    elif stage == "combined":
+        if task_id.endswith("|reference"):
+            result = {"combined": partt_run.combined_reference(w)}
+        else:
+            result = {"combined": partt_run.combined_replicate(w, int(task_id.rsplit("|r", 1)[1]), snaps)}
+    elif stage == "gates":
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered")
+        core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
+        if out["status"] != "PASSED":
+            raise SystemExit(f"gates failed: {out['failed']} (ENGINEERING-FAILURE)")
+        result = {"gates": out["status"], "skipped": out["skipped"]}
+    else:
+        raise core.StageRefused(f"refused: {stage!r} has no worker task")
+    core.write_record(d / f"{sid}.result.json", {**core.envelope("cell_record", "T"), "task": task_id, **core.jsonable(result)}, overwrite=False)
+    return result
+
+
+def merge_results(run_dir: Path) -> dict[str, int]:
+    """The task results of the evaluate and combined stages into ``registry.json``, ``side_records.json`` and ``combined.json`` (the analysis reads those). A missing replicate is simply absent: the study
+    status then says INCOMPLETE."""
+    records: dict[str, dict[str, float]] = {}
+    side: dict[str, Any] = {}
+    for f in sorted((run_dir / "tasks" / "evaluate").glob("*.result.json")):
+        r = read_json(f)
+        records.update(r["records"])
+        side.update(r["side"])
+    comb: dict[str, Any] = {}
+    for f in sorted((run_dir / "tasks" / "combined").glob("*.result.json")):
+        comb.update(read_json(f)["combined"])
+    write_json(run_dir / "registry.json", scoring.registry_from_reads(records).values)
+    core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
+    core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
+    return {"records": len(records), "combined": len(comb)}
+
+
+def require_recomputation(run_dir: Path) -> dict[str, Any]:
+    """No result is reported before every registered score is recomputed on CPU (section 8.6). A record of a recomputation that differs is ENGINEERING STOP — RECOMPUTATION: nothing is labelled."""
+    p = run_dir / "recomputation.json"
+    if not p.is_file():
+        raise core.StageRefused("refused: no recomputation record: every registered score is recomputed on CPU before any result is reported (section 8.6)")
+    rec = read_json(p)
+    if not rec.get("ok"):
+        raise core.StageRefused(f"refused: ENGINEERING STOP — RECOMPUTATION: {len(rec.get('differences', []))} difference(s); no line, condition or annotation is derived")
+    return dict(rec)
+
+
+def run_recompute(repo: Path, run_dir: Path, qdir: Path, plan: Any, own_code: bool = False, mode: str = "registered") -> dict[str, Any]:
+    """The recomputation command: re-score every snapshot on CPU, compare, write ``recomputation.json`` and charge the time to the ledger."""
+    from . import partt_recompute
+
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    t0 = time.monotonic()
+    w, gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode)
+    reg = read_json(run_dir / "registry.json")
+    comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
+    rec = partt_recompute.recompute(w, run_dir, gloss, reg, comb, own_code=own_code)
+    partt_recompute.write(run_dir, rec)
+    total = float(cfg["stage_caps"].get("total_hours", 0.0)) * 3600.0
+    core.Ledger(run_dir / "charged_ledger.json", "T", total if total > 0 else 1e12).charge_process("recompute", mode, "main", time.monotonic() - t0)
+    return {k: rec[k] for k in ("ok", "outcome", "checked", "tolerance")}
+
+
+def run_cost(repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered") -> dict[str, Any]:
+    """The cost-recording stage: the five measures from the run, written to ``cost.json`` and ``cost.txt`` (each line under the note that it enters no label)."""
+    from . import partt_cost
+
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    w, _gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode)
+    rec = partt_cost.record(w, run_dir, qdir if (qdir / "charged_ledger.json").is_file() else None, run_dir / "snapshots")
+    partt_cost.write(run_dir, rec)
+    return {"lines": len(partt_cost.lines(rec))}

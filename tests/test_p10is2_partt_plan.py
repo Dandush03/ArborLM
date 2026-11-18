@@ -57,7 +57,7 @@ def test_54_trained_cells_and_section_14_units() -> None:
 
 def test_stage_items_counts_updates_and_rates() -> None:
     items = partt_plan.stage_items(CALIB)
-    assert {k: len(v) for k, v in items.items()} == {"gates": 8, "train": 54, "evaluate": 54 + 3 * 7, "controls": 27, "combined": 3 * 12 + 2, "analysis": 1, "report": 1}
+    assert {k: len(v) for k, v in items.items()} == {"gates": 8, "train": 54, "evaluate": 54 + 3 * 7 + 1, "controls": 27, "combined": 3 * 12 + 2, "analysis": 1, "report": 1}
     tr = {i["id"]: i for i in items["train"]}
     assert tr["train|M-joint|-|r0"]["updates"] == 4000 and tr["train|D-joint|-|r1"]["updates"] == 4000 and tr["train|M-append|AB|r2"]["updates"] == 2000  # the joint arms train 2U
     assert tr["train|M-append|AB|r0"]["rate"] == 0.003 and tr["train|D-seq|BA|r1"]["rate"] == 0.0003 and tr["train|E-table|A|r0"]["rate"] == 0.003

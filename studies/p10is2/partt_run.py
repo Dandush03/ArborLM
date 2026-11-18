@@ -47,63 +47,91 @@ def train_all(world: engine.WorldT, snap_dir: Path, ckpt_dir: Path | None, updat
 
 
 @torch.no_grad()
+def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Mapping[str, Any]) -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
+    """Every scored read of ONE replicate (a task of the registered evaluate stage): the records keyed ``"{arm}|{order}|{rep}"`` and the side records."""
+    records: dict[str, dict[str, float]] = {}
+    side: dict[str, Any] = {}
+    routers = scoring.build_routers_t(world, r)
+    side[f"r{r}/routers"] = {"/".join(k): v[1] for k, v in routers.items()}
+    for o in ORDERS:
+        arms = {a: engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}") for a in ORDER_ARMS}
+        for a in ORDER_ARMS:
+            reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
+            records[f"{a}|{o}|{r}"] = reads
+            if a == "M-append":
+                lr, rside = scoring.route_reads(world, r, arms[a], routers)
+                records[f"{a}|{o}|{r}"] |= lr
+                side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
+                records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
+            if extra:
+                side.setdefault(f"r{r}/{a}/{o}", {}).update(extra)
+    for a in JOINT:
+        arm = engine.load_t(world, r, snap_dir, f"r{r}/{a}/-")
+        reads = scoring.panel_means(world, arm)
+        if isinstance(arm, MemoryArm):
+            reads |= scoring.control_reads(world, r, arm, a, "AB")
+        records[f"{a}|-|{r}"] = reads
+    table = {c: engine.load_t(world, r, snap_dir, f"r{r}/E-table/{c}") for c in core.TASKS}
+    records[f"E-table|-|{r}"] = {f"s:{scoring.PANEL[c]}": scoring.panel_means(world, table[c])[f"s:{scoring.PANEL[c]}"] for c in core.TASKS}
+    m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
+    d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
+    records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
+    records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
+    for name, v in scoring.baseline_reads(world, r, gloss_bank).items():
+        arm, read = name.split("|", 1)
+        if read.startswith("hits"):
+            side.setdefault(f"r{r}/R-exact-hits", {})[read] = v
+        else:
+            records.setdefault(f"{arm}|-|{r}", {})[read] = v
+    return records, side
+
+
+def reference_task(world: engine.WorldT) -> dict[str, dict[str, float]]:
+    """The reads of S0 and the teachers (the floor and the ceiling of every gap): one task of the evaluate stage."""
+    return scoring.reference_records(world)
+
+
+@torch.no_grad()
 def score_all(world: engine.WorldT, snap_dir: Path, gloss_bank: Mapping[str, Any], replicates: tuple[int, ...] = REPLICATES) -> tuple[Registry, dict[str, Any]]:
     """Score every snapshot (CPU) into the registry's reads; returns the registry and the side records (router diagnostics, modification)."""
-    records: dict[str, dict[str, float]] = scoring.reference_records(world)
+    records: dict[str, dict[str, float]] = reference_task(world)
     side: dict[str, Any] = {}
     for r in replicates:
-        routers = scoring.build_routers_t(world, r)
-        side[f"r{r}/routers"] = {"/".join(k): v[1] for k, v in routers.items()}
-        for o in ORDERS:
-            arms = {a: engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}") for a in ORDER_ARMS}
-            for a in ORDER_ARMS:
-                reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
-                records[f"{a}|{o}|{r}"] = reads
-                if a == "M-append":
-                    lr, rside = scoring.route_reads(world, r, arms[a], routers)
-                    records[f"{a}|{o}|{r}"] |= lr
-                    side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
-                    records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
-                if extra:
-                    side.setdefault(f"r{r}/{a}/{o}", {}).update(extra)
-        for a in JOINT:
-            arm = engine.load_t(world, r, snap_dir, f"r{r}/{a}/-")
-            reads = scoring.panel_means(world, arm)
-            if isinstance(arm, MemoryArm):
-                reads |= scoring.control_reads(world, r, arm, a, "AB")
-            records[f"{a}|-|{r}"] = reads
-        table = {c: engine.load_t(world, r, snap_dir, f"r{r}/E-table/{c}") for c in core.TASKS}
-        records[f"E-table|-|{r}"] = {f"s:{scoring.PANEL[c]}": scoring.panel_means(world, table[c])[f"s:{scoring.PANEL[c]}"] for c in core.TASKS}
-        m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
-        d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
-        records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
-        records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
-        for name, v in scoring.baseline_reads(world, r, gloss_bank).items():
-            arm, read = name.split("|", 1)
-            if read.startswith("hits"):
-                side.setdefault(f"r{r}/R-exact-hits", {})[read] = v
-            else:
-                records.setdefault(f"{arm}|-|{r}", {})[read] = v
+        rec, sd = score_replicate(world, r, snap_dir, gloss_bank)
+        records.update(rec)
+        side.update(sd)
     return scoring.registry_from_reads(records), side
 
 
 @torch.no_grad()
-def combined_all(world: engine.WorldT, snap_dir: Path, replicates: tuple[int, ...] = REPLICATES) -> dict[str, Any]:
-    """C1 and C2 on the twelve arm-cells per replicate (stage-2 snapshots of M-append, M-ii, D-seq and D-append in both orders, M-joint, D-joint, M-sep, D-sep), plus S0 and the ensemble: oracle route, never trained on."""
+def combined_reference(world: engine.WorldT) -> dict[str, Any]:
+    """S0's and the ensemble's combined records (one task of the combined stage)."""
     from studies.p10s2.memory import NullArm
 
+    ctx = world.ctx
+    return {"S0": combined_mod.score_combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
+
+
+@torch.no_grad()
+def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path) -> dict[str, Any]:
+    """C1 and C2 on the twelve arm-cells of ONE replicate (stage-2 snapshots of M-append, M-ii, D-seq and D-append in both orders, M-joint, D-joint, M-sep, D-sep): oracle route, never trained on."""
     ctx, out = world.ctx, {}
-    out["S0"] = combined_mod.score_combined_cell(ctx, NullArm(), ctx.ec)
-    out["ensemble"] = combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})
+    ctx.seed_plan = world.plan(r)  # type: ignore[assignment]
+    for o in ORDERS:
+        for a in ("M-append", "M-ii", "D-seq", "D-append"):
+            out[f"{a}|{o}|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}"), ctx.ec)
+    for a in JOINT:
+        out[f"{a}|-|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
+    m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
+    d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
+    out[f"M-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, CompositeStoreArm(m1), ctx.ec)  # type: ignore[arg-type]
+    out[f"D-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, AdapterRouteArm(d1), ctx.ec)  # type: ignore[arg-type]
+    return out
+
+
+@torch.no_grad()
+def combined_all(world: engine.WorldT, snap_dir: Path, replicates: tuple[int, ...] = REPLICATES) -> dict[str, Any]:
+    out = combined_reference(world)
     for r in replicates:
-        ctx.seed_plan = world.plan(r)  # type: ignore[assignment]
-        for o in ORDERS:
-            for a in ("M-append", "M-ii", "D-seq", "D-append"):
-                out[f"{a}|{o}|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}"), ctx.ec)
-        for a in JOINT:
-            out[f"{a}|-|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
-        m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
-        d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
-        out[f"M-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, CompositeStoreArm(m1), ctx.ec)  # type: ignore[arg-type]
-        out[f"D-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, AdapterRouteArm(d1), ctx.ec)  # type: ignore[arg-type]
+        out.update(combined_replicate(world, r, snap_dir))
     return out

@@ -104,6 +104,7 @@ def stage_items(ctx: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
                 items["combined"].append({"id": f"combined|{arm}|{o}|r{r}", "stage": "combined", "arm": arm, "order": o, "rep": r})
         for arm in (*JOINT_ARMS, *SEPARATE_ARMS):
             items["combined"].append({"id": f"combined|{arm}|-|r{r}", "stage": "combined", "arm": arm, "rep": r})
+    items["evaluate"].append({"id": "evaluate|reference", "stage": "evaluate", "reference": True, "what": "S0 and the teachers' stored outputs on the full panels and the 300-item subsample: the floor and the ceiling of every gap"})
     items["combined"] += [{"id": "combined|S0", "stage": "combined", "arm": "S0"}, {"id": "combined|ensemble", "stage": "combined", "arm": "ensemble"}]
     items["analysis"] = [{"id": "analysis", "stage": "analysis"}]
     items["report"] = [{"id": "report", "stage": "report"}]

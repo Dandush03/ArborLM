@@ -16,7 +16,7 @@ import pytest  # noqa: E402
 import torch  # noqa: E402
 
 from arborlm.io import file_sha256, write_json  # noqa: E402
-from studies.p10is2 import partt_plan, partt_real, partt_stages  # noqa: E402
+from studies.p10is2 import partt_plan, partt_stages, partt_tasks  # noqa: E402
 from studies.p10is2.common import core  # noqa: E402
 from studies.p10is2.partq import plan as qplan  # noqa: E402
 from studies.p10is2.partq import real as qreal  # noqa: E402
@@ -99,7 +99,7 @@ def test_part_t_launch_reaches_its_first_stage_after_other_thread_settings(tmp_p
     commit = freeze(r, "T")
     seen: dict[str, object] = {}
     monkeypatch.delenv("PYTHONPATH", raising=False)
-    monkeypatch.setattr(partt_real, "run_stage", lambda stage, repo, run_dir, qdir, plan, mode="registered": seen.update(stage=stage, threads=torch.get_num_threads(), deterministic=torch.are_deterministic_algorithms_enabled()) or {})
+    monkeypatch.setattr(partt_tasks, "run_stage_tasks", lambda stage, plan, cfg, repo, run_dir, fc, qdir, **k: seen.update(stage=stage, threads=torch.get_num_threads(), deterministic=torch.are_deterministic_algorithms_enabled()) or {"status": "COMPLETE", "charged_seconds": 0.0})
     keep = torch.get_num_threads()
     torch.set_num_threads(2)
     try:

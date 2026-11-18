@@ -53,7 +53,7 @@ def per_token_forward(shape: StudentShape, *, lora_rank: int = 0) -> int:
 
 
 def training_multiply_adds(
-    shape: StudentShape, kind: str, *, batch: int, mean_len: float, mean_reads: float = 0.0, rows: int = 0, trainable_rows: int = 0, read_block: int = 4, lora_rank: int = 0, trainable_share: float = 1.0
+    shape: StudentShape, kind: str, *, batch: int, mean_len: float, mean_reads: float = 0.0, rows: int = 0, trainable_rows: int = 0, read_block: int = 4, lora_rank: int = 0, trainable_share: float = 1.0, frozen_lora_rank: int = 0
 ) -> dict[str, float]:  # fmt: skip
     """Forward, backward and total multiply-adds of ONE update. ``kind`` is ``"memory"`` (the student frozen, a store read after block ``read_block``: ``rows`` scanned per read, ``trainable_rows`` of them
     trainable, ``mean_reads`` reads per sequence) or ``"lora"`` (rank ``lora_rank`` on q and v of every block). ``trainable_share`` is the share of the value mix's weights that train."""
@@ -69,8 +69,9 @@ def training_multiply_adds(
         if lora_rank < 1:
             raise ValueError("a LoRA count needs a rank")
         extra = sum(i * o for _, i, o in lora_maps(shape, lora_rank))
-        fwd = tokens * (shape.layers * (block + extra) + head)
-        bwd = tokens * (shape.layers * (block + 2 * extra) + head)  # frozen maps once (input gradient), trainable factors twice
+        frozen = sum(i * o for _, i, o in lora_maps(shape, frozen_lora_rank)) if frozen_lora_rank else 0  # D-append's frozen first adapter: forward once, input gradient once
+        fwd = tokens * (shape.layers * (block + extra + frozen) + head)
+        bwd = tokens * (shape.layers * (block + 2 * extra + frozen) + head)  # frozen maps once (input gradient), trainable factors twice
     else:
         raise ValueError(f"unknown kind {kind!r}")
     return {"forward": float(fwd), "backward": float(bwd), "total": float(fwd + bwd), "tokens": float(tokens)}  # COST_NOTE applies
