@@ -112,7 +112,16 @@ def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace
     """The two Part Q rehearsals on the real teachers (section 10): ``measuring`` (steps 1-8, one generation block per capability, one Q_check block, the fixed cap) and ``counting`` (the candidate plan file, two
     generation blocks per capability, one forced pause and resume, one forced PAUSED — IDENTITY and restore). The rehearsal runs generation, regeneration and the outputs WHATEVER Q1-Q4 give (``force_generation``:
     a fallback filter setting if Q3 gives none), so that which stages ran does not reveal the sealed outcome. Values of Q1-Q4 and every per-item score go to ``<run-dir>/sealed``; the record printed is the
-    whitelist. The rehearsal partition seeds 252901-252914 are used; the wall time of the whole run is charged to ``<run-dir>/charged_ledger.json`` (ruling L2)."""
+    whitelist. The rehearsal partition seeds 252901-252914 are used; the wall time of the whole run is charged to ``<run-dir>/charged_ledger.json`` (ruling L2), also when the rehearsal fails."""
+    t_start = time.monotonic()
+    try:
+        _run_rehearsal(kind, repo, run_dir, args)
+    except BaseException:
+        core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12).charge_process("rehearsal-failed", kind, "main", time.monotonic() - t_start)
+        raise
+
+
+def _run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace) -> None:
     from ..common import gates as cgates
     from ..common import procs
     from . import real_stages, rehearsal
@@ -160,7 +169,9 @@ def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace
     led = core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12)
     led.charge_process("rehearsal", kind, "main", total)  # rehearsal time counts in the part's charge (ruling L2)
     rec["charged_seconds"] = total
-    rec["charged_before_freeze_seconds"] = led.charged()  # everything charged in this run directory so far: the caps proposal's pre-freeze charge
+    earlier = {str(Path(x)): core.Ledger(Path(x), "Q", 1e12).charged() for x in (getattr(args, "charged_ledger", None) or [])}  # earlier Part Q ledgers named by the lead (the failed first attempt, the ledger command): their charge belongs to the same total
+    rec["charged_ledgers"] = {str(run_dir / "charged_ledger.json"): led.charged(), **earlier}
+    rec["charged_before_freeze_seconds"] = led.charged() + sum(earlier.values())  # the caps proposal's pre-freeze charge: this run directory and every ledger named with --charged-ledger
     core.write_record(run_dir / f"rehearsal_{kind}.json", rec, overwrite=True)
     print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "batches", "generation_items_per_second", "stages", "forced") if k in rec}), default=str))
 

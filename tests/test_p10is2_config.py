@@ -122,9 +122,14 @@ def test_the_thresholds_are_not_read_from_p10s2() -> None:
 
 def test_config_identity_fields() -> None:
     for cfg, part in ((Q, "Q"), (T, "T")):
-        assert cfg["study"] == "P10IS2" and cfg["part"] == part and cfg["spec_reference"] == core.SPEC and cfg["caps"]["provisional"] is True
+        assert cfg["study"] == "P10IS2" and cfg["part"] == part and cfg["spec_reference"] == core.SPEC and isinstance(cfg["caps"]["provisional"], bool)
         assert cfg["platform"] == {"system": "Darwin", "machine": "arm64", "torch": "2.8.0", "torch_num_threads": 6, "deterministic_algorithms": True}
-        assert all(v == 0.0 for v in cfg["stage_caps"].values())  # not yet computed from a measuring rehearsal
+        caps = cfg["stage_caps"]
+        if cfg["caps"]["provisional"]:  # before the lead enters the caps computed by code from the measuring record
+            assert all(v == 0.0 for v in caps.values())
+        else:  # after: every cap is set, and the total is the pre-freeze charge plus twice every stage (the rule of the caps proposal), so it is not below the sum of the stage caps up to the rounding of each (0.01 h)
+            stage = {k: v for k, v in caps.items() if k != "total_hours"}
+            assert all(v > 0.0 for v in caps.values()) and caps["total_hours"] >= sum(stage.values()) - 0.01 * len(stage)
     assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" == T["seeds"]["registry_checker_sha256"]
     assert core.load_config("Q")["paths"]["durable_packages"] == "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
     with pytest.raises(ValueError):

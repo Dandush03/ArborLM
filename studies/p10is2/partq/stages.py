@@ -59,6 +59,9 @@ def cmd_work(args: argparse.Namespace) -> int:
 def cmd_rehearse(args: argparse.Namespace) -> int:
     from . import real
 
+    relative = [x for x in args.charged_ledger if not Path(x).is_absolute()]
+    if relative:
+        raise StageRefused(f"refused: --charged-ledger paths must be absolute: {relative}")
     real.run_rehearsal(args.kind, repo_of(args), Path(args.run_dir), args)
     return 0
 
@@ -119,13 +122,14 @@ def build_parser() -> argparse.ArgumentParser:
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
     h.add_argument("--repo")
+    h.add_argument("--charged-ledger", action="append", default=[], help="an earlier Part Q charged_ledger.json (absolute path) whose charge joins the pre-freeze charge; repeatable")
     return ap
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        if args.command in ("candidate-plan", "freeze", "caps-proposal"):
+        if args.command in ("candidate-plan", "freeze", "caps-proposal", "inputs-file", "units-file", "caps-config"):
             return freeze.dispatch(args)
         if args.command == "registered":
             return cmd_registered(args)

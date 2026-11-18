@@ -7,8 +7,8 @@ set -eu
 export PYTHONDONTWRITEBYTECODE=1  # the durable package copy is hashed into the plan: nothing may write .pyc files into it
 export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6
-if [ "$#" -ne 2 ]; then
-    echo "usage: $0 <measuring|counting> <run-dir>" >&2
+if [ "$#" -lt 2 ]; then
+    echo "usage: $0 <measuring|counting> <run-dir> [--charged-ledger <earlier charged_ledger.json>]..." >&2
     exit 2
 fi
 KIND=$1
@@ -24,5 +24,6 @@ case "$2" in
     *) RUN_DIR=$PWD/$2 ;;
 esac
 DURABLE_PACKAGES=/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages
+shift 2  # what remains (the --charged-ledger options) goes to the command
 cd "$(dirname "$0")/../../.."
-PYTHONPATH="$DURABLE_PACKAGES" exec uv run --locked --offline --extra pilot python -m studies.p10is2.partq.stages rehearse --kind "$KIND" --run-dir "$RUN_DIR"
+PYTHONPATH="$DURABLE_PACKAGES" exec uv run --locked --offline --extra pilot python -m studies.p10is2.partq.stages rehearse --kind "$KIND" --run-dir "$RUN_DIR" "$@"

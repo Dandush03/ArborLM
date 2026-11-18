@@ -300,7 +300,7 @@ def test_freeze_refuses_provisional_caps_and_caps_that_are_not_the_codes(repo: P
     set_caps(repo, CAP_HOURS)
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     qplan.write_candidate(repo, qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK, test_mode=True), supersede=True)
-    measuring_record(tmp_path, {"qfit": 4000.0}, {"qfit": 0.5})
+    measuring_record(tmp_path, {k: 4000.0 for k in qplan.STAGES}, {k: 0.5 for k in qplan.STAGES})
     with pytest.raises(core.StageRefused, match="not what the code computes"):
         freeze.cmd_freeze(freeze_args(repo, tmp_path))
     bad = tmp_path / "bad.json"

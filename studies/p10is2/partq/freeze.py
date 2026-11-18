@@ -11,6 +11,7 @@ freeze commit and Decision 2 are the lead's acts.
 
 import argparse
 import json
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -39,8 +40,18 @@ def add_commands(sub: Any) -> None:
     f.add_argument("--repo")
     c = sub.add_parser("caps-proposal", help="print the caps by code: 2 x projected per stage; total = charge before the freeze + 2 x all stages")
     c.add_argument("--measuring-rehearsal", required=True)
-    c.add_argument("--charged-hours", type=float, required=True)
-    c.add_argument("--units", required=True, help="a JSON file: stage -> units (the plan's counts: whole pools generated, whole reserve drawn)")
+    c.add_argument("--charged-hours", type=float, help="default: the measuring record's charged_before_freeze_seconds / 3600, which is what the freeze compares against")
+    c.add_argument("--units", help="a JSON file: stage -> units; default: the measuring record's projection_units (what the freeze uses); write one with units-file")
+    i = sub.add_parser("inputs-file", help="write the inputs JSON for candidate-plan from the config, the durable data and package copies and the repository (verifies each against its pin)")
+    i.add_argument("--out", required=True)
+    i.add_argument("--repo")
+    u = sub.add_parser("units-file", help="write the units JSON for caps-proposal from the measuring rehearsal's record")
+    u.add_argument("--measuring-rehearsal", required=True)
+    u.add_argument("--out", required=True)
+    k = sub.add_parser("caps-config", help="print (or with --apply write) the stage caps for the config from the measuring record by the caps rule")
+    k.add_argument("--measuring-rehearsal", required=True)
+    k.add_argument("--apply", action="store_true", help="edit configs/p10is2_partq.toml: the nine cap keys and caps.provisional = false (refuses unless every cap is 0.0 and provisional is true)")
+    k.add_argument("--repo")
 
 
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
@@ -59,9 +70,108 @@ def cmd_caps_proposal(args: argparse.Namespace) -> int:
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps are computed from a MEASURING rehearsal's record")
     rates = {k: float(v) for k, v in (meas.get("rates_seconds_per_unit") or {}).items()}
-    units = {k: float(v) for k, v in read_json(Path(args.units)).items()}
+    units = {k: float(v) for k, v in (read_json(Path(args.units)) if args.units else meas.get("projection_units") or {}).items()}
+    charged = float(args.charged_hours) * 3600.0 if args.charged_hours is not None else float(meas.get("charged_before_freeze_seconds", 0.0))
     proj = qplan.project_stage_seconds(units, rates)
-    print(json.dumps({"projected_seconds": proj, "proposal_hours": qplan.caps_proposal(args.charged_hours * 3600.0, proj), "rule": "stage cap = 2 x projected; total = charge before the freeze + 2 x all stages (section 10 item 3)"}))
+    print(json.dumps({"projected_seconds": proj, "proposal_hours": qplan.caps_proposal(charged, proj), "charged_before_freeze_seconds": charged, "rule": "stage cap = 2 x projected; total = charge before the freeze + 2 x all stages (section 10 item 3)"}))
+    return 0
+
+
+def proposal_from_record(meas: Mapping[str, Any]) -> dict[str, float]:
+    """The caps by the code's rule from a measuring record; refuses a record that lacks a rate for a stage it has units for, or lacks a registered stage."""
+    rates = {k: float(v) for k, v in (meas.get("rates_seconds_per_unit") or {}).items()}
+    units = {k: float(v) for k, v in (meas.get("projection_units") or {}).items()}
+    missing = [s for s in qplan.STAGES if s not in units or s not in rates]
+    if missing:
+        raise StageRefused(f"refused: the measuring record has no rate or no units for stage(s) {missing}: a stage the registered run has was not measured; run the measuring rehearsal again")
+    return dict(qplan.caps_proposal(float(meas.get("charged_before_freeze_seconds", 0.0)), qplan.project_stage_seconds(units, rates)))
+
+
+def cmd_units_file(args: argparse.Namespace) -> int:
+    meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
+    if meas.get("kind_of_rehearsal") != "measuring":
+        raise StageRefused("refused: the units come from a MEASURING rehearsal's record")
+    out = Path(args.out)
+    if out.exists():
+        raise StageRefused(f"refused: {out} exists")
+    write_json(out, {k: float(v) for k, v in (meas.get("projection_units") or {}).items()})
+    print(json.dumps({"units_file": str(out), "sha256": file_sha256(out)}))
+    return 0
+
+
+def caps_toml(proposal: Mapping[str, float]) -> str:
+    return "\n".join(f"{k} = {v}" for k, v in proposal.items())
+
+
+def apply_caps(text: str, proposal: Mapping[str, float]) -> str:
+    """The config text with each ``<key> = 0.0`` of ``[stage_caps]`` replaced by the proposal and ``provisional = true`` by false. Refuses a config whose caps are already set."""
+    out = text
+    for k, v in proposal.items():
+        old = f"\n{k} = 0.0"
+        if out.count(old) != 1:
+            raise StageRefused(f"refused: the config does not hold exactly one unset line '{k} = 0.0' (caps already entered?)")
+        out = out.replace(old, f"\n{k} = {v}")
+    if out.count("\nprovisional = true") != 1:
+        raise StageRefused("refused: the config does not hold exactly one 'provisional = true'")
+    return out.replace("\nprovisional = true", "\nprovisional = false")
+
+
+def cmd_caps_config(args: argparse.Namespace) -> int:
+    repo = Path(args.repo) if args.repo else core.ROOT
+    meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
+    if meas.get("kind_of_rehearsal") != "measuring":
+        raise StageRefused("refused: the caps come from a MEASURING rehearsal's record")
+    proposal = proposal_from_record(meas)
+    if args.apply:
+        path = repo / core.CONFIG_Q
+        path.write_text(apply_caps(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
+        print(json.dumps({"config": str(path), "applied": proposal, "next": "commit the config, then candidate-plan"}))
+    else:
+        print(caps_toml(proposal))
+    return 0
+
+
+def build_inputs_block(cfg: Mapping[str, Any], repo: Path, downloads: Path, downloads_record: Mapping[str, Any], wikitext_record: Mapping[str, Any], manifest: Mapping[str, Any]) -> dict[str, Any]:
+    """The plan's ``inputs`` block from records the verifying functions already produced: every model and Tatoeba file with its path and digest, the WikiText-2 files, the requirements file, ADR-0004 (the pin
+    source, its working-tree hash) and the installed-package manifest. Each file entry is re-checked at the start of every registered stage (``pkgmanifest.verify_inputs``)."""
+    from . import real
+
+    block: dict[str, Any] = {}
+    for name, digest in sorted(downloads_record["models"].items()):
+        block[f"download:{name}"] = {"path": str(downloads / name), "sha256": digest}
+    for name, spec in sorted(downloads_record["tatoeba"]["files"].items()):
+        block[f"download:{name}"] = {"path": str(downloads / name), "sha256": spec["sha256"]}
+    wt_dir = Path(wikitext_record["directory"])
+    for name in real.WIKITEXT_FILES:
+        block[f"wikitext:{name}"] = {"path": str(wt_dir / name), "sha256": wikitext_record[name]["sha256"]}
+    req = repo / cfg["paths"]["packages_requirements"]
+    if file_sha256(req) != cfg["paths"]["packages_requirements_sha256"]:
+        raise StageRefused("refused: the requirements file is not the one the config pins")
+    block["requirements"] = {"path": str(req), "sha256": file_sha256(req)}
+    block["adr_0004"] = {"path": str(repo / real.ADR_0004), "sha256": file_sha256(repo / real.ADR_0004)}
+    block[pkgmanifest.KEY] = dict(manifest)
+    return block
+
+
+def cmd_inputs_file(args: argparse.Namespace) -> int:
+    import sysconfig
+
+    from studies.p10s2 import datagen
+
+    from . import real, real_stages, real_world
+
+    repo = Path(args.repo) if args.repo else core.ROOT
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    out = Path(args.out)
+    if out.exists():
+        raise StageRefused(f"refused: {out} exists")
+    downloads = real_stages.downloads_dir(cfg)
+    dl = datagen.verify_downloads(downloads, repo / real_world.TATOEBA_RECORD, root=repo)  # every model file against its constant, the Tatoeba files against the committed record
+    wt = real.check_wikitext(Path(cfg["paths"]["wikitext_dir"]), real.wikitext_pins(repo))  # each parquet file against its ADR-0004 pin
+    manifest = pkgmanifest.build_manifest(Path(cfg["paths"]["durable_packages"]), Path(sysconfig.get_paths()["purelib"]))
+    block = build_inputs_block(cfg, repo, downloads, dl, wt, manifest)
+    write_json(out, block)
+    print(json.dumps({"inputs_file": str(out), "sha256": file_sha256(out), "entries": sorted(k for k in block if k != pkgmanifest.KEY), "package_files": manifest["file_count"], "package_tree_sha256": manifest["tree_sha256"], "shadowed_lock_packages": sorted(manifest["shadowed_lock_packages"])}))
     return 0
 
 
@@ -85,9 +195,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring" or meas.get("caps_provisional") is not True:
         raise StageRefused("refused: --measuring-rehearsal must be the measuring rehearsal's record (made on its fixed cap)")
-    rates = {k: float(v) for k, v in (meas.get("rates_seconds_per_unit") or {}).items()}
-    units = {k: float(v) for k, v in (meas.get("projection_units") or {}).items()}
-    proposal = qplan.caps_proposal(float(meas.get("charged_before_freeze_seconds", 0.0)), qplan.project_stage_seconds(units, rates))
+    proposal = proposal_from_record(meas)  # refuses a record that did not measure every registered stage
     differ = qplan.caps_match_config(cfg, proposal)
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
@@ -132,4 +240,4 @@ def cmd_freeze(args: argparse.Namespace) -> int:
 
 
 def dispatch(args: argparse.Namespace) -> int:
-    return {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal}[args.command](args)
+    return {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "inputs-file": cmd_inputs_file, "units-file": cmd_units_file, "caps-config": cmd_caps_config}[args.command](args)

@@ -386,7 +386,7 @@ def _run_all(ctx: QContext) -> dict[str, Any]:
     both = ctx.force_generation or all(not labels.teacher_status(f["teachers"][c])["failed"] and not labels.teacher_status(f["teachers"][c])["reserve_exhausted"] and f["teachers"][c]["q4"] is not None for c in core.TASKS)
     if both:
         timed(ctx, "generation", lambda: step_generation(ctx, p, qf))
-        if (_have(ctx, "generation/result.json") or {}).get("draws_label") != split.EXHAUSTED:
+        if ctx.force_generation or (_have(ctx, "generation/result.json") or {}).get("draws_label") != split.EXHAUSTED:  # a rehearsal exercises (and times) the regeneration check even when its limited generation ends below the target
             timed(ctx, "regeneration", lambda: step_regeneration(ctx, p))
     result = labels.part_q_label(facts_of(ctx))
     core.write_record(ctx.d(loc(ctx, "qualification.json")), {**core.envelope("qualification", "Q"), **{k: v for k, v in result.items() if k != "oracle_line"}}, overwrite=True)
