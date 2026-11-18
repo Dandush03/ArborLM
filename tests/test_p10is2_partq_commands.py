@@ -4,6 +4,7 @@ Nothing here runs a teacher, a registered stage or a freeze. Seeds 937001-937999
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -86,7 +87,9 @@ def test_caps_proposal_defaults_to_what_the_freeze_compares_against(tmp_path: Pa
 def test_caps_config_apply_enters_exactly_the_proposal_and_then_matches_the_freeze_rule(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     (repo / "configs").mkdir(parents=True)
-    shutil.copy(ROOT / core.CONFIG_Q, repo / core.CONFIG_Q)
+    text = (ROOT / core.CONFIG_Q).read_text()  # the repository's config may already hold the caps: this test starts from the unset state
+    text = re.sub(r"(?m)^((?:inputs|partition|qfit|qcheck|generation|regeneration|outputs|analysis|total)_hours) = [0-9.]+", r"\1 = 0.0", text).replace("provisional = false", "provisional = true")
+    (repo / core.CONFIG_Q).write_text(text)
     rec = measuring_record(tmp_path)
     assert stages.main(["caps-config", "--measuring-rehearsal", str(rec), "--repo", str(repo)]) == 0  # print only: nothing written
     assert core.load_config("Q", repo / core.CONFIG_Q)["caps"]["provisional"] is True
@@ -103,35 +106,85 @@ def test_caps_config_apply_enters_exactly_the_proposal_and_then_matches_the_free
 # --- the inputs file -------------------------------------------------------------------------------------------------------------------------------
 def test_the_inputs_block_names_every_file_with_its_hash_and_verifies_at_stage_start(tmp_path: Path) -> None:
     downloads, wt = tmp_path / "downloads", tmp_path / "wikitext2"
-    for d, names in ((downloads, ["model.bin", "tatoeba/a.bz2"]), (wt, list(real.WIKITEXT_FILES))):
+    for d, names in ((downloads, ["model.bin", "student/config.json", "tatoeba/a.bz2"]), (wt, list(real.WIKITEXT_FILES))):
         for n in names:
             (d / n).parent.mkdir(parents=True, exist_ok=True)
             (d / n).write_bytes(n.encode())
-    dl = {"models": {"model.bin": file_sha256(downloads / "model.bin")}, "tatoeba": {"files": {"tatoeba/a.bz2": {"sha256": file_sha256(downloads / "tatoeba/a.bz2"), "bytes": 12}}}}
+    dl = {"models": {"model.bin": file_sha256(downloads / "model.bin"), "student/config.json": "ccf3dac2" * 5}, "tatoeba": {"files": {"tatoeba/a.bz2": {"sha256": file_sha256(downloads / "tatoeba/a.bz2"), "bytes": 12}}}}
     wrec = {"directory": str(wt), **{n: {"sha256": file_sha256(wt / n), "bytes": 1} for n in real.WIKITEXT_FILES}}
     manifest = {"path": "/durable", "packages": {}, "file_count": 0, "tree_sha256": "x", "files": {}, "shadowed_lock_packages": {}}
     block = freeze.build_inputs_block(core.load_config("Q"), ROOT, downloads, dl, wrec, manifest)
     assert {"download:model.bin", "download:tatoeba/a.bz2", "requirements", "adr_0004", pkgmanifest.KEY} <= set(block) and sum(k.startswith("wikitext:") for k in block) == 2
-    pkgmanifest.verify_inputs({k: v for k, v in block.items() if k != pkgmanifest.KEY}, uses_packages=False)  # the paths and hashes hold
+    files = {k: v for k, v in block.items() if k != pkgmanifest.KEY}
+    pkgmanifest.verify_inputs(files, uses_packages=False, repo=ROOT)  # the paths and hashes hold: a freshly built block passes the stage-start check, un-stubbed
+    assert all(len(v["sha256"]) == 64 and set(v["sha256"]) <= set("0123456789abcdef") for v in files.values())  # every "sha256" is a real SHA-256
+    cfg_json = block["download:student/config.json"]
+    assert cfg_json["sha256"] == file_sha256(downloads / "student/config.json") and cfg_json["upstream_checksum"] == "ccf3dac2" * 5 and cfg_json["upstream_checksum_kind"] == "git-blob-sha1"
+    assert block["download:model.bin"]["upstream_checksum_kind"] == "sha256"
+    assert not Path(block["requirements"]["path"]).is_absolute() and not Path(block["adr_0004"]["path"]).is_absolute()  # repository files: repo-relative
+    copy = tmp_path / "other_checkout"  # another checkout of the same files resolves the same entries
+    for rel in (block["requirements"]["path"], block["adr_0004"]["path"]):
+        (copy / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(ROOT / rel, copy / rel)
+    pkgmanifest.verify_inputs(files, uses_packages=False, repo=copy)
+    with pytest.raises(core.StageRefused, match="no repository"):
+        pkgmanifest.verify_inputs(files, uses_packages=False)
     (downloads / "model.bin").write_bytes(b"changed")
     with pytest.raises(core.StageRefused, match="PAUSED — IDENTITY"):
-        pkgmanifest.verify_inputs({k: v for k, v in block.items() if k != pkgmanifest.KEY}, uses_packages=False)
+        pkgmanifest.verify_inputs(files, uses_packages=False, repo=ROOT)
     assert block["requirements"]["sha256"] == core.load_config("Q")["paths"]["packages_requirements_sha256"]
 
 
 def test_the_inputs_file_command_writes_the_block_once(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from studies.p10is2.partq import real_stages
     from studies.p10s2 import datagen
 
-    wt = tmp_path / "wt"
-    dl = {"models": {"m.bin": "a" * 64}, "tatoeba": {"files": {"tatoeba/x.bz2": {"sha256": "b" * 64, "bytes": 1}}}}
+    wt, downloads = tmp_path / "wt", tmp_path / "dl"
+    for d, names in ((downloads, ["m.bin", "tatoeba/x.bz2"]), (wt, list(real.WIKITEXT_FILES))):
+        for n in names:
+            (d / n).parent.mkdir(parents=True, exist_ok=True)
+            (d / n).write_bytes(n.encode())
+    dl = {"models": {"m.bin": "a" * 40}, "tatoeba": {"files": {"tatoeba/x.bz2": {"sha256": "b" * 64, "bytes": 1}}}}
     wrec = {"directory": str(wt), **{n: {"sha256": "c" * 64, "bytes": 1} for n in real.WIKITEXT_FILES}}
     manifest = {"path": "/durable", "packages": {"p": "1"}, "file_count": 1, "tree_sha256": pkgmanifest.tree_sha256({"p/a.py": "1" * 64}), "files": {"p/a.py": "1" * 64}, "shadowed_lock_packages": {}}
-    monkeypatch.setattr(datagen, "verify_downloads", lambda *a, **k: dl)  # FAKE: the real call hashes the downloads (the lead's run does that)
-    monkeypatch.setattr(real, "check_wikitext", lambda *a, **k: wrec)  # FAKE: likewise the WikiText-2 files
+    monkeypatch.setattr(real_stages, "downloads_dir", lambda cfg: downloads)  # FAKE locations: the real run reads the durable copies
+    monkeypatch.setattr(datagen, "verify_downloads", lambda *a, **k: dl)  # FAKE: the real call checks the files against P10-S2's constants (the lead's run does that)
+    monkeypatch.setattr(real, "check_wikitext", lambda *a, **k: wrec)  # FAKE: likewise the WikiText-2 pins
     monkeypatch.setattr(pkgmanifest, "build_manifest", lambda *a, **k: manifest)  # FAKE: likewise the 4,270-file package copy (covered on a fake tree in test_p10is2_pkgmanifest.py)
     out = tmp_path / "inputs.json"
     assert stages.main(["inputs-file", "--out", str(out)]) == 0
     block = json.loads(out.read_text())
-    assert block["download:m.bin"]["sha256"] == "a" * 64 and block[pkgmanifest.KEY]["file_count"] == 1
+    assert block["download:m.bin"]["sha256"] == file_sha256(downloads / "m.bin") and block["download:m.bin"]["upstream_checksum_kind"] == "git-blob-sha1" and block[pkgmanifest.KEY]["file_count"] == 1
+    assert all(len(v["sha256"]) == 64 for k, v in block.items() if k != pkgmanifest.KEY)
     pkgmanifest.require_package_manifest(block)  # what the freeze requires
+    pkgmanifest.verify_inputs({k: v for k, v in block.items() if k != pkgmanifest.KEY}, uses_packages=False, repo=ROOT)  # the stage-start check passes on what the command wrote
     assert stages.main(["inputs-file", "--out", str(out)]) == 2  # written once
+
+
+# --- the counting rehearsal runs the stage-start check of the plan's inputs (as a registered stage does) ----------------------------------------------
+def test_the_counting_rehearsal_stops_on_an_input_that_differs_before_doing_anything_else(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from test_p10is2_launch import freeze as freeze_repo
+    from test_p10is2_launch import make_repo
+
+    from studies.p10is2.partq import real_stages
+
+    r = make_repo(tmp_path)
+    freeze_repo(r, "Q")  # its plan names an input file /x that does not exist
+    led = tmp_path / "candidate_ledger.json"
+    led.write_text("{}")
+    monkeypatch.setattr(real_stages, "ledger_path", lambda *a, **k: led)  # FAKE: the candidate ledger of the rehearsal exists (the real one needs the tokenizer)
+    with pytest.raises(core.StageRefused, match="PAUSED — IDENTITY"):
+        real.run_rehearsal("counting", r, r / "runs" / "counting", argparse.Namespace(charged_ledger=[]))
+    assert not (r / "runs/counting/inputs").exists()  # nothing after the check ran
+
+
+# --- a malformed record is a refusal, not a crash ------------------------------------------------------------------------------------------------
+def test_the_freeze_refuses_malformed_rehearsal_records(tmp_path: Path) -> None:
+    for name in ("counting", "measuring"):
+        bad = tmp_path / f"{name}.json"
+        bad.write_text("{}")
+        other = tmp_path / ("meas.json" if name == "counting" else "cnt.json")
+        other.write_text("{}")
+        args = argparse.Namespace(repo=None, measuring_rehearsal=str(bad if name == "measuring" else other), counting_rehearsal=str(bad if name == "counting" else other), attest_sealed_unopened="", seal_broken=False)
+        with pytest.raises(core.StageRefused):
+            freeze.cmd_freeze(args)

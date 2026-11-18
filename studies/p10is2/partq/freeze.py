@@ -137,18 +137,25 @@ def build_inputs_block(cfg: Mapping[str, Any], repo: Path, downloads: Path, down
     from . import real
 
     block: dict[str, Any] = {}
+    def entry(path: Path, upstream: str) -> dict[str, Any]:
+        """The file's REAL SHA-256 (what every stage re-hashes), the upstream checksum kept apart with its kind (P10-S2 pins small model files by git blob SHA-1, 40 hex, and the large ones by SHA-256)."""
+        kind = {40: "git-blob-sha1", 64: "sha256"}.get(len(upstream))
+        if kind is None:
+            raise StageRefused(f"refused: the upstream checksum {upstream!r} of {path} is neither 40 nor 64 hex characters")
+        return {"path": str(path), "sha256": file_sha256(path), "upstream_checksum": upstream, "upstream_checksum_kind": kind}
+
     for name, digest in sorted(downloads_record["models"].items()):
-        block[f"download:{name}"] = {"path": str(downloads / name), "sha256": digest}
+        block[f"download:{name}"] = entry(downloads / name, digest)
     for name, spec in sorted(downloads_record["tatoeba"]["files"].items()):
-        block[f"download:{name}"] = {"path": str(downloads / name), "sha256": spec["sha256"]}
+        block[f"download:{name}"] = entry(downloads / name, spec["sha256"])
     wt_dir = Path(wikitext_record["directory"])
     for name in real.WIKITEXT_FILES:
-        block[f"wikitext:{name}"] = {"path": str(wt_dir / name), "sha256": wikitext_record[name]["sha256"]}
+        block[f"wikitext:{name}"] = entry(wt_dir / name, wikitext_record[name]["sha256"])
     req = repo / cfg["paths"]["packages_requirements"]
     if file_sha256(req) != cfg["paths"]["packages_requirements_sha256"]:
         raise StageRefused("refused: the requirements file is not the one the config pins")
-    block["requirements"] = {"path": str(req), "sha256": file_sha256(req)}
-    block["adr_0004"] = {"path": str(repo / real.ADR_0004), "sha256": file_sha256(repo / real.ADR_0004)}
+    block["requirements"] = {"path": str(req.relative_to(repo)), "sha256": file_sha256(req)}  # repository files: repo-relative, resolved against the repository the stage runs from
+    block["adr_0004"] = {"path": str(real.ADR_0004), "sha256": file_sha256(repo / real.ADR_0004)}
     block[pkgmanifest.KEY] = dict(manifest)
     return block
 
@@ -192,7 +199,10 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if cfg["caps"]["provisional"] or plan.data.get("caps_provisional"):
         raise StageRefused("refused: caps.provisional is true: the caps are computed by code from the measuring rehearsal and set before the freeze; the candidate plan is then rewritten and rehearsed again")
     plan_sha = file_sha256(plan_path)
-    meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
+    try:
+        meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
+    except (ValueError, KeyError, OSError) as e:
+        raise StageRefused(f"refused: --measuring-rehearsal {args.measuring_rehearsal} is not a P10IS2 rehearsal record ({type(e).__name__}: {e})") from e
     if meas.get("kind_of_rehearsal") != "measuring" or meas.get("caps_provisional") is not True:
         raise StageRefused("refused: --measuring-rehearsal must be the measuring rehearsal's record (made on its fixed cap)")
     proposal = proposal_from_record(meas)  # refuses a record that did not measure every registered stage
@@ -209,7 +219,10 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if wp:
         raise StageRefused("refused: " + "; ".join(wp))
     pkgmanifest.require_package_manifest(plan.data["inputs"])  # R7: the plan names the installed-package manifest (names, versions, file hashes, the shadowed lock packages)
-    counting = core.read_record(Path(args.counting_rehearsal), "rehearsal")
+    try:
+        counting = core.read_record(Path(args.counting_rehearsal), "rehearsal")
+    except (ValueError, KeyError, OSError) as e:
+        raise StageRefused(f"refused: --counting-rehearsal {args.counting_rehearsal} is not a P10IS2 rehearsal record ({type(e).__name__}: {e})") from e
     reh = gates.rehearsal_gate(counting, qplan.REHEARSAL_STAGES, plan_file_sha256=plan_sha)
     if not reh["passed"]:
         raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")

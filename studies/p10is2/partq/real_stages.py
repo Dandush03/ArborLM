@@ -54,7 +54,7 @@ def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers
     """The real world. ``light`` loads only the tokenizer and WikiText-2 (the ``ledger`` command); otherwise also the student and the corpus (and the teachers if asked)."""
     gates.apply_platform_settings(cfg)
     if plan is not None:  # R7: the plan's inputs and the durable package copy are what the freeze recorded, checked at the start of every stage that uses them
-        pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=True)
+        pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=True, repo=repo)
     real_world.assert_process_environment(cfg)
     w = real_world.RealWorld(cfg, repo, run_dir, downloads_dir(cfg))
     w.record["packages"] = real_world.check_packages(cfg, repo)
@@ -299,7 +299,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
     def body() -> dict[str, Any]:
         if stage == "analysis":
             if plan is not None:
-                pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=False)
+                pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=False, repo=repo)
             ctx = holder["ctx"] = _light_ctx(cfg, run_dir, mode)
             res = labels.part_q_label(pipeline.facts_of(ctx))
             core.write_record(run_dir / pipeline.loc(ctx, "qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in res.items() if k != "oracle_line"}}, overwrite=True)

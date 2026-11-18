@@ -132,7 +132,8 @@ def _run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespac
     t0 = time.monotonic()
     if not real_stages.ledger_path(cfg, repo, run_dir, "rehearsal").is_file():
         real_stages.command_ledger(repo, run_dir, "rehearsal")  # the candidate ledger of the rehearsal (seed 252907); inputs verifies it
-    w = real_stages.build_world(cfg, repo, run_dir, "rehearsal", load_teachers=True)
+    cplan = planmod.Plan.load(repo / core.PLAN_Q, "Q") if kind == "counting" else None
+    w = real_stages.build_world(cfg, repo, run_dir, "rehearsal", load_teachers=True, plan=cplan)  # with the candidate plan the world runs the SAME stage-start check of the plan's inputs and package manifest as a registered stage
     ctx0 = real_stages.make_ctx(w, "rehearsal")
     inputs = real_stages.stage_inputs(w, ctx0, "rehearsal")
     t_inputs = time.monotonic() - t0
@@ -159,7 +160,7 @@ def _run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespac
         rec["projection_units"]["outputs"] = out_info["units"]
     else:
         plan_file = repo / core.PLAN_Q
-        plan = planmod.Plan.load(plan_file, "Q")
+        plan = cplan if cplan is not None else planmod.Plan.load(plan_file, "Q")
         items = {st: len(v) for st, v in plan.data["items"].items()}
         rec = rehearsal.run_counting(factory, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), cap_seconds=float(cfg["caps"]["rehearsal_hours"]) * 3600.0, identity_probe=identity_probe(plan, repo, run_dir), post_stages={"outputs": outputs_stage}, plan_stage_items=items)
     rec["inputs_stage"] = {"seconds": t_inputs, "ordinary_windows_left": inputs["ordinary_windows_left"], "marker_like_windows": inputs["marker_like_windows"], "corpus_supply": inputs["corpus_supply"]}

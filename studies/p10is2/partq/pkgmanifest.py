@@ -91,12 +91,16 @@ def require_package_manifest(inputs: Mapping[str, Any]) -> dict[str, Any]:
     return dict(m)
 
 
-def verify_inputs(inputs: Mapping[str, Any], *, uses_packages: bool) -> None:
-    """Stage start: every file input of the plan's ``inputs`` block (entries with a path and a SHA-256) still has its hash, and for a stage that uses the packages the durable copy still matches its manifest."""
+def verify_inputs(inputs: Mapping[str, Any], *, uses_packages: bool, repo: Path | None = None) -> None:
+    """Stage start: every file input of the plan's ``inputs`` block (entries with a path and a SHA-256, which is the file's real SHA-256: an upstream checksum of another kind is kept under ``upstream_checksum``) still has its hash, and for a stage that uses the packages the durable copy still matches its manifest."""
     for name, rec in sorted(inputs.items()):
         if name == KEY or not isinstance(rec, dict) or "sha256" not in rec or "path" not in rec:
             continue
         p = Path(rec["path"])
+        if not p.is_absolute():  # a repository file is stored repo-relative and resolved against the repository the stage runs from
+            if repo is None:
+                raise StageRefused(f"refused: input {name!r} has a repository-relative path and no repository was given")
+            p = repo / p
         if not p.is_file() or file_sha256(p) != rec["sha256"]:
             raise StageRefused(f"refused: input {name!r} ({p}) is missing or differs from the plan's hash (PAUSED — IDENTITY)")
     if uses_packages:
