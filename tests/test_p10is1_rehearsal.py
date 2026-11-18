@@ -228,6 +228,8 @@ def test_measuring_rehearsal_rates_file_feeds_the_projection(tmp_path: Path) -> 
     k2 = out["by_workers"]["2"]
     keys = {f"{c['arm']}|{c['slots']}" for c in pl.data["cells"]}
     assert set(k2["train"]) == keys and set(k2["evaluate"]) == keys and k2["contention"] >= 1.0 and k2["peak_rss_bytes_per_worker"] > 0 and all(v > 0 for v in k2["train"].values())
+    m = out["machine"]  # the record says what else was running when the slowdown was measured
+    assert set(m) == {"before", "after"} and isinstance(m["before"]["load_average_1m"], float) and isinstance(m["after"]["other_study_processes"], list)
     assert set(k2["fixed"]) == {"gates", "baselines", "timing", "analysis", "report", "throughput"} and out["draw"] == "rehearsal"
     from studies.p10is1 import budget
 

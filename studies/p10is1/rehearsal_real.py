@@ -118,6 +118,11 @@ def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_lis
     item's ratio of concurrent to isolated wall seconds per update, at least 1), evaluation seconds per snapshot (DEP at every snapshot), peak memory per worker, fixed stages (analysis and report measured on a synthetic
     registry; the throughput figure is P10-S1's, stated). All MEASURED on the rehearsal draw."""
     cfg = ctx.cfg()
+    import os
+
+    from . import quiet as quiet_mod
+
+    machine_before = {"load_average_1m": os.getloadavg()[0], "other_study_processes": quiet_mod.other_study_processes()}  # what else ran: the contention ratio is only as good as this record says (section 16.1 item 3)
     q = cfg["quiet"]  # the config's timing figures (32 warm-up updates, 256 updates, 3 repeats) unless a test passes smaller ones explicitly
     warmup, updates, repeats = int(q["timing_warmup_updates"]) if warmup is None else warmup, int(q["timing_updates"]) if updates is None else updates, int(q["timing_repeats"]) if repeats is None else repeats
     began = time.monotonic()
@@ -165,7 +170,7 @@ def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_lis
     for v in by.values():
         v["fixed"] = fixed
     return {
-        "by_workers": by, "timing_config": {"warmup_updates": warmup, "updates": updates, "repeats": repeats}, "fixed_notes": {"throughput": "P10-S1's figure (about 7 minutes), stated not measured", "analysis_report": "measured on a synthetic registry keyed by the plan's labels"}, "peak_rss_bytes_main": int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss),
+        "by_workers": by, "machine": {"before": machine_before, "after": {"load_average_1m": os.getloadavg()[0], "other_study_processes": quiet_mod.other_study_processes()}}, "timing_config": {"warmup_updates": warmup, "updates": updates, "repeats": repeats}, "fixed_notes": {"throughput": "P10-S1's figure (about 7 minutes), stated not measured", "analysis_report": "measured on a synthetic registry keyed by the plan's labels"}, "peak_rss_bytes_main": int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss),
         "seconds": time.monotonic() - began, "draw": "rehearsal", "platform": gates.platform_record(),
     }  # fmt: skip
 
