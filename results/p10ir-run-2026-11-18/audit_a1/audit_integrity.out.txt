@@ -1,0 +1,29 @@
+plan.json sha256 at c712a90: a52da5fbea0fa2123b091562ed8502d776f2bf09a94bc43c3d9e3c3a118b5e56; config: 388c16b249313c17f537d4b0e019dd309aaae895c20cadbea24ac15fcc2c2c44
+manifest gates-a1: status COMPLETE mode registered clean True item_errors 0 tasks 1 task statuses {'completed': 1} plan==freeze True config==freeze True platform Darwin/arm64/torch 2.8.0/threads 1,1/det True charged_s 3.4 history 1
+manifest a1: status COMPLETE mode registered clean True item_errors 0 tasks 70 task statuses {'completed': 70} plan==freeze True config==freeze True platform Darwin/arm64/torch 2.8.0/threads 1,1/det True charged_s 4003.4 history 1
+manifest analysis: status COMPLETE mode registered clean True item_errors 0 tasks 1 task statuses {'completed': 1} plan==freeze True config==freeze True platform Darwin/arm64/torch 2.8.0/threads 1,1/det True charged_s 0.6 history 1
+manifest report: status COMPLETE mode registered clean True item_errors 0 tasks 1 task statuses {'completed': 1} plan==freeze True config==freeze True platform Darwin/arm64/torch 2.8.0/threads 1,1/det True charged_s 0.0 history 1
+git diff c712a90..worktree for studies/p10ir, config, studies/p10s1, studies/p9, src/arborlm: EMPTY
+plan A1 items: 280; digests: 280
+gate 1 recomputed: checkpoints 280, disagreeing 0 []; committed train manifest hash ok True; train.json vs manifest result_sha256: 70 cells, disagreeing 0
+gate checkpoint_identity: present in 280 items; statuses {'passed': 280}
+gate f0_counts: present in 140 items; statuses {'passed': 140}
+gate i256_counts: present in 140 items; statuses {'passed': 140}
+gate index_rebuild_i256: present in 140 items; statuses {'passed': 140}
+gate index_rebuild_i64_s298001: present in 140 items; statuses {'passed': 140}
+gate index_rebuild_i64_s298002: present in 140 items; statuses {'passed': 140}
+gate index_rebuild_i64_s298003: present in 140 items; statuses {'passed': 140}
+gate ivf_recall_reproduction: present in 140 items; statuses {'passed': 140}
+gate t0_counts: present in 140 items; statuses {'passed': 140}
+gate t0_path: present in 140 items; statuses {'passed': 140}
+gate t2_against_independent_flat: present in 140 items; statuses {'passed': 140}
+gate t3_against_independent_flat: present in 140 items; statuses {'passed': 140}
+gate tree_recall_reproduction: present in 35 items; statuses {'passed': 35}
+gate tv1_priors_on_against_off: present in 140 items; statuses {'passed': 140}
+gate 3(a) tree_recall_reproduction present in 35 items (expected 35: T-OQ at U_P); 3(b) ivf_recall_reproduction in 140 (expected 140: every F-OQ checkpoint)
+t0_path queries checked: min 16384 max 139264 over 140 tree items
+gate 4 tv1_priors_on_against_off: items 140; total sets_differ 0; float_ties 0; not_float_ties 0; max weight diff 1.788e-07
+gate 4 t3_against_independent_flat: items 140; total sets_differ 4; float_ties 4; not_float_ties 0; max weight diff 4.172e-07
+gate 4 t2_against_independent_flat: items 140; total sets_differ 8; float_ties 8; not_float_ties 0; max weight diff 3.278e-07
+gates-a1: passed True failed []; gate1 checked 280 draws 5 manifests {'p10s1-draw-1': True, 'p10s1-draw-2': True, 'p10s1-draw-3': True, 'p10s1-draw-4': True, 'p10s1-draw-5': True}; gate5 True; gate6 True RESULT: PASS
+a1 task done-records: 70

@@ -1,0 +1,179 @@
+# P10-I-R (ADR-0029) frozen constants. Every threshold of the study lives here and nowhere else; the ADR text is not a frozen input
+# (it is hashed for provenance only). A test asserts that each value below equals the value of the ADR section named beside it.
+# Not frozen yet. No registered run is approved: the freeze and the registered stages need Decision 2.
+schema_version = 1
+experiment_family = "P10IR_ROUTING_DIAGNOSIS"
+spec_reference = "docs/decisions/ADR-0029-p10-i-r-routing-diagnosis.md"
+
+[thresholds]
+# section 8.1: the retention rule, in bits per fact (i of studies/p10s1/core.py bits_per_fact)
+gap_bits = 0.5                 # a gap exists if i(Y) - i(X) >= 0.5
+restored_margin_bits = 0.25    # RESTORED needs i(Y) - i(X) <= 0.25 ...
+restored_ratio = 0.90          # ... and i(X) >= 0.90 i(Y)
+floor_a_use = 0.25             # i(Y) >= 0.473 bits (a_use 0.25), derived as Fano(0.25); below it: WEAK REFERENCE
+floor_i_bits_printed = 0.473   # the printed value of Fano(0.25); a test requires round(Fano(0.25), 3) == this
+# section 8.3
+h_margin_bits = 0.25           # H: i(T2) <= i(T0) - 0.25 on both panels (its own key; same value as restored_margin_bits by the ADR)
+closure = 0.5                  # closure figure: "most of the gap"
+recall_r = 0.90                # R: CR8(T0) >= 0.90
+# section 9
+plateau_gain_bits = 0.10       # i*(run) - i*(run/2) <= 0.10, and i*(run/2) >= the floor above
+still_learning_min_replicates = 2  # the STILL LEARNING tag if the plateau check fails in at least 2 of 5 replicates
+# section 8.4
+tree_candidates = 512          # the tree's candidate count: the equal-candidate standard
+# section 8.2
+replicates = 5                 # the denominator is always 5
+label_min_replicates = 4       # a cell's label is the row held by at least 4 of 5
+not_evaluable_min_replicates = 2  # a cell is NOT EVALUABLE if at least 2 of 5 are
+
+[gates]
+# section 11 gate 4 (third review R3-6)
+tie_margin = 1e-5              # float tie: the 8th and 9th largest scores differ by at most 1e-5 (float32) in either computation
+weight_tolerance = 1e-6        # weights equal within 1e-6 absolute, slot by slot
+tie_share_max = 0.001          # more than 0.1% of facts at a float tie fails the gate
+
+[reads]
+# section 6
+visit_sweep = [1, 2, 4, 8]     # v <= N/256
+index_budgets = [128, 256, 512, 1024, 2048]   # c < N
+index_list_size = 64           # I64: k-means into N/64 lists
+index_standard_budget = 512    # I256@512, the registered index
+index_standard_list_size = 256
+lloyd_iterations = 10
+branch_size = 256
+visit_registered = 2
+top = 8
+temperature = 0.2
+shallow_slots = 1024           # four branches: SHALLOW
+
+[seeds]
+# section 5 (docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md section 4.2)
+bridge_base = 290001
+bridge_stride = 100
+bridge_draws = 5
+bridge_index_offset = 60
+bridge_init_base = 330600      # draw d -> 330600 + d
+index_seeds = [298001, 298002, 298003]
+test_index_seeds = [938901, 938902, 938903]   # rehearsal and tests read the I64 indexes with these (test range), never with the registered index seeds above
+rehearsal_base = 299201
+rehearsal_init = 330692
+test_init = [330698, 330699]
+test_range = [938001, 938999]
+# declared re-use, not an allocation (section 5): P10-S1's registered draws and one cell for the adapter identity gate
+p10s1_draw_base = 210001
+p10s1_draw_stride = 100
+p10s1_index_offset = 60
+p10s1_init_base = 2100         # draw r -> 2100 + r
+identity_gate_draw = 1
+identity_gate_updates = [512, 1024, 2048]
+identity_gate_cell = [8192, 4096]
+
+[a2]
+# section 10: the bridge block
+learning_rate = 0.003
+arms = ["F-OQ", "T-OQ"]
+cells = [[8192, 4096], [32768, 16384]]
+
+[[cells]]
+# section 4: the seven cells of stage A1; role primary / printed / loaded (section 9)
+facts = 2048
+slots = 1024
+role = "printed"
+u_p = 8192
+run = 49152
+trajectory = [16384, 32768]
+
+[[cells]]
+facts = 2048
+slots = 4096
+role = "printed"
+u_p = 8192
+run = 49152
+trajectory = [16384, 32768]
+
+[[cells]]
+facts = 8192
+slots = 4096
+role = "primary"
+u_p = 8192
+run = 49152
+trajectory = [16384, 32768]
+
+[[cells]]
+facts = 8192
+slots = 16384
+role = "printed"
+u_p = 8192
+run = 49152
+trajectory = [16384, 32768]
+
+[[cells]]
+facts = 32768
+slots = 16384
+role = "primary"
+u_p = 16384
+run = 98304
+trajectory = [32768, 65536]
+
+[[cells]]
+facts = 8192
+slots = 1024
+role = "loaded"
+u_p = 8192
+run = 393216
+trajectory = [49152, 196608]
+
+[[cells]]
+facts = 32768
+slots = 4096
+role = "loaded"
+u_p = 16384
+run = 786432
+trajectory = [98304, 393216]
+
+[resources]
+# section 12 and 13
+workers = 6
+rss_worker_bytes = 3221225472        # 3 GiB per worker
+rss_aggregate_bytes = 19327352832    # 18 GiB aggregate
+eval_chunk_elements = 1048576        # P10-S1's evaluation chunk (studies/p10s1/evaluate.py EVAL_CHUNK_ELEMENTS)
+
+[caps]
+# section 12: resource caps, "set after the rehearsal as charged + 2 x projected remaining"; section 14 estimates are placeholders until then.
+# provisional = true makes the freeze refuse. The caps are charged hours on six workers; they are the only values the rehearsal may change.
+provisional = false
+rehearsal_hours = 1.0
+a1_hours = 6.0
+a2_hours = 3.0
+total_hours = 10.0
+
+[platform]
+# section 13: platform of record
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 1
+torch_interop_threads = 1
+deterministic_algorithms = true
+
+[seed_ranges]
+# section 5 and registry section 4.2: the allocation of each role (inclusive); the seed gate (section 11 item 6) checks every planned value against these
+bridge = [290001, 296999]
+index = [298001, 298999]
+rehearsal = [299201, 299299]
+init = [330601, 330699]
+test = [938001, 938999]
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+
+[rehearsal]
+# section 13: the rehearsal runs every stage end to end against a plan of its own: on a synthetic memory (tiny sizes, test seeds, a random backbone) and on one rehearsal-trained tree cell and one
+# flat cell of the rehearsal draw (299201, initialisation 330692). The real-size cell is the largest one of the study (section 14: seconds per read at 16,384 slots and 32,768 facts).
+facts = 32768
+slots = 16384
+updates = 64                   # P10-S1's rehearsal updates (studies/p10s1/core.py REHEARSAL_UPDATES): the cell is trained to be read, not to learn
+snapshots = [32, 64]
+synthetic_facts = 128
+synthetic_slots = [1024, 4096]
+synthetic_updates = 64          # a tiny memory is above the information floor from about 48 updates on (a_use 0.25 is at about 32): U_P 48, run length 64
+synthetic_snapshots = [48, 64]
