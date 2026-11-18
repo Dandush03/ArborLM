@@ -53,6 +53,8 @@ def m_summary(ctx: bench.Context, cfg: Mapping[str, Any], hours_charged: float) 
     if cv["cv_r"] is not None:
         m_t, spread = core.margin_from_cv(float(cv["cv_r"]), cfg)
         margin = {"m_t": m_t, "timing_spread": spread}
+    incomplete = [p["key"] for p in passes if p.get("incomplete")]  # an interrupted pass has no wall time: skipped here, counted in the summary
+    passes = [p for p in passes if not p.get("incomplete")]
     wall = [p["wall_ns"] / 1e9 for p in passes]
     reg = core.registered_geometry(cfg)
     n_passes = len(reg.all_repeats) * len(reg.cells())
@@ -61,7 +63,7 @@ def m_summary(ctx: bench.Context, cfg: Mapping[str, Any], hours_charged: float) 
     return {
         "cv": cv, "margin": margin, "passes": len(passes), "mean_read_seconds_per_pass_measured": mean_pass_seconds, "charged_seconds_measured": hours_charged * 3600.0,
         "projection_analytical": None if mean_pass_seconds is None else {"note": "ANALYTICAL: read seconds only (process start and hashing excluded) x 144 registered passes + 120 s settle x 6 blocks; not a measurement of E2", "read_seconds": mean_pass_seconds * n_passes, "settle_seconds": settle * len(reg.all_repeats)},
-        "invalid_blocks_recorded_not_replaced": [b["key"] for b in blks if not b.get("complete")],
+        "incomplete_passes": incomplete, "invalid_blocks_recorded_not_replaced": [b["key"] for b in blks if not b.get("complete")],
     }  # fmt: skip
 
 

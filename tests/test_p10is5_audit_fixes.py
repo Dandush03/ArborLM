@@ -305,7 +305,7 @@ def test_n2_m_and_k_blocks_are_charged_once() -> None:
 def test_n4_an_unhandled_error_is_written_where_the_analysis_reads_it_and_makes_it_refuse(capsys: pytest.CaptureFixture[str]) -> None:
     with T.scratch("fix_n4") as d:
         ctx = T.tiny_context(d / "run", repeats=2, spare=True)
-        args = type("A", (), {"command": "registered", "run_dir": str(d / "run")})()
+        args = type("A", (), {"command": "registered", "stage": "e2", "run_dir": str(d / "run")})()
         stages.record_unhandled(d / "run", args, ZeroDivisionError("division"))  # type: ignore[arg-type]
         assert len(list((d / "run" / "E2" / "stops").glob("unhandled_*.json"))) == 1  # <run>/E2/stops: the directory e2.build_registry reads
         reg = e2.build_registry(ctx, CFG, {})
@@ -656,3 +656,52 @@ def test_point7_cv_r_needs_five_valid_medians_and_m_repeats_once() -> None:
         freeze.figures_from_records({"passed": True, "idle_figures": {k: 1.0 for k in freeze.FIGURE_KEYS}}, {"summary": {"margin": None}})
 
 
+
+
+# --- second re-audit: F1, F2, A1, A3 -----------------------------------------------------------------------------------------------------------
+def test_f1_m_summary_skips_incomplete_passes_and_counts_them() -> None:
+    with T.scratch("fix_f1") as d:
+        ctx, state, issued = interrupted_run(d, [(1, 2)])
+        summary = rehearsal.m_summary(ctx, CFG, 0.0)  # earlier code: KeyError 'wall_ns' on the INCOMPLETE record
+        assert len(summary["incomplete_passes"]) == 1 and summary["passes"] == len(bench.load_stage_records(ctx)[0]) - 1
+        assert summary["mean_read_seconds_per_pass_measured"] is not None
+
+
+def test_a3_sequence_numbers_are_unique_across_a_resume() -> None:
+    with T.scratch("fix_a3") as d:
+        ctx, state, issued = interrupted_run(d, [(1, 3)])
+        seqs = [p["seq"] for p in bench.load_stage_records(ctx)[0]]
+        assert len(seqs) == len(set(seqs))
+
+
+def test_f2_unhandled_stops_go_to_the_stage_own_folder_and_pre_freeze_commands_write_none() -> None:
+    with T.scratch("fix_f2") as d:
+        run = d / "run"
+        for stage, folder in (("e1", "E1"), ("p", "P"), ("report", "report"), ("delete", "delete"), ("analysis", "analysis"), ("e2", "E2")):
+            a = type("A", (), {"command": "registered", "stage": stage, "run_dir": str(run)})()
+            stages.record_unhandled(run, a, KeyError("x"))  # type: ignore[arg-type]
+            assert len(list((run / folder / "stops").glob("unhandled_*.json"))) == 1, stage
+        assert len(list((run / "E2" / "stops").iterdir())) == 1  # only the E2 stage's own stop is in E2/stops
+        for command in ("candidate-plan", "freeze", "config-proposal", "caps-proposal", "seed-gate"):
+            before = sorted(run.rglob("*"))
+            stages.record_unhandled(run, type("A", (), {"command": command, "run_dir": str(run)})(), OSError("mistyped path"))  # type: ignore[arg-type]
+            assert sorted(run.rglob("*")) == before, command
+        ctx = T.tiny_context(run, repeats=2, spare=True)
+        reg = e2.build_registry(ctx, CFG, {})
+        assert [s["cause"] for s in reg["stops"]] == ["KeyError"]  # the E2 analysis sees E2's own stop only
+
+
+def test_a1_a_resumed_repeat_of_m_records_attempt_two(monkeypatch: pytest.MonkeyPatch) -> None:
+    with T.scratch("fix_a1") as d:
+        run = d / "run"
+        (run / "r1").mkdir(parents=True)
+        r1p = run / "r1" / "r1.json"
+        core.write_record(r1p, {**core.envelope("r1"), "passed": True, "idle_figures": {k: 1.0 for k in freeze.FIGURE_KEYS}})
+        (run / "M_attempt1").mkdir()  # the first attempt was kept; the repeat was paused before it wrote m.json
+        monkeypatch.setattr(stages, "make_deps", lambda cfg, where: blocks.Deps(counter=T.FakeCounter(T.FakeIO(1)), gate=T.scripted_gate(lambda: T.quiet_record(True))))
+        monkeypatch.setattr(rehearsal, "run_rehearsal_stage", lambda *x, **k: None)
+        monkeypatch.setattr(rehearsal, "m_summary", lambda ctx, cfg, h: {"cv": {"cv_r": None}, "margin": None, "passes": 0})
+        a = type("A", (), {"run_dir": str(run), "data_dir": str(d / "x.noindex"), "r1_record": str(r1p), "repeat_cause": None})()
+        stages.cmd_m(a)  # type: ignore[arg-type]
+        rec = core.read_record(run / "M" / "m.json")
+        assert rec["attempt"] == 2 and rec["outcome"] == "ENGINEERING NOT EVALUABLE — MARGIN NOT DETERMINED"

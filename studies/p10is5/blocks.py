@@ -193,7 +193,10 @@ def run_stage_blocks(
         def guarded(*a: Any) -> dict[str, Any]:
             if hours is not None:
                 hours.require_room(ctx.stage, extra=(deps.clock() - t0) - (deps.slept - s0))  # the cap is checked before every pass, cumulatively over stages and resumes
-            return base(*a)
+            rec = base(*a)
+            state.data["next_seq"] = max(int(state.data["next_seq"]), int(rec["seq"]) + 1)  # sequence numbers stay unique across a resume
+            state.save()
+            return rec
 
         try:
             block = bench.run_block(ctx, repeat, role, reason, deps.gate, guarded, int(state.data["next_seq"]), rerun_of=rerun_of)

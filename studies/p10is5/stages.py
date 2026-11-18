@@ -188,7 +188,7 @@ def cmd_m(args: argparse.Namespace) -> int:
     r1_rec = core.read_record(Path(args.r1_record), "r1")
     if not r1_rec.get("passed"):
         raise StageRefused("refused: M needs a passed R1 record (EC4: every check of section 7 passed in R1)")
-    attempt = 1
+    attempt = 2 if (run_dir / "M_attempt1").exists() else 1  # a resumed repeat records the right attempt number
     m_path = run_dir / "M" / "m.json"
     if m_path.is_file():
         prior = core.read_record(m_path, "rehearsal")
@@ -491,13 +491,20 @@ def build_parser() -> argparse.ArgumentParser:
     return ap
 
 
-STAGE_OF = {"r0": "R0", "r1": "R1", "m": "M", "k": "K", "cleanup": "R1", "work-pass": None}
+STAGE_OF = {"r0": "R0", "r1": "R1", "m": "M", "k": "K", "cleanup": "cleanup"}
+REGISTERED_STAGE_DIR = {"e1": "E1", "p": "P", "e2": "E2", "analysis": "analysis", "report": "report", "delete": "delete"}
 
 
 def record_unhandled(run_dir: Path, args: argparse.Namespace, e: BaseException) -> None:
     """An ordinary error is a recorded ENGINEERING STOP written to ``<run>/<stage>/stops/`` (for the registered stages and workers: ``E2``, where the analysis reads them), with a key the analysis can parse; it is never resolved by a rerun."""
-    stage = getattr(args, "stage", None) if args.command == "work-pass" else STAGE_OF.get(args.command, "E2")
-    stage = stage or "E2"
+    if args.command == "work-pass":
+        stage = getattr(args, "stage", None) or "E2"
+    elif args.command == "registered":
+        stage = REGISTERED_STAGE_DIR[args.stage]  # each registered stage's own folder: only E2's stops are read by the E2 analysis
+    else:
+        stage = STAGE_OF.get(args.command)
+    if stage is None:
+        return  # pre-freeze commands (candidate-plan, freeze, proposals, seed-gate) write no stop record in the registered run directory
     rec = {**core.envelope("engineering_stop"), "id": f"{stage}|{stage}|r0|unhandled|{type(e).__name__}", "stage": stage, "key": f"{stage}|r0|unhandled", "cause": type(e).__name__, "detail": str(e)[:500], "command": args.command, "utc": core.utc_stamp(), "resolved": False}
     with contextlib.suppress(OSError, ValueError):
         core.write_record(run_dir / stage / "stops" / f"unhandled_{core.utc_stamp()}.json", rec)
