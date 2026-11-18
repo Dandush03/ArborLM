@@ -289,3 +289,20 @@ def test_gloss_icl_prompt_is_stored_segments_only_and_matches_text_for_hand_case
 
 def test_item_class_unused_marker() -> None:
     assert Item("a", "a", {}, -1).group == -1
+
+
+def test_ledger_file_format_is_the_stable_one(tmp_path: Path) -> None:
+    from studies.p10is2.common.panel_ledger import LEDGER_FORMAT, RowMap
+
+    rows = ["x" * 300] * 400
+    rm = RowMap.from_rows(rows)
+    ctx = ctx_of(tmp_path, sizes={**SMALL_SIZES, "gen_marker_like": 44, "gen_ordinary": 100})
+    markers = [Span(i * 1000, i * 1000 + 900, i // 3, (i * 1000 + 899) // 300) for i in range(44)]
+    cand = [Span(60_000 + i * 150, 60_000 + i * 150 + 100, 200 + i // 2, 200 + i // 2) for i in range(140)]
+    p = tmp_path / "ledger.json"
+    step8.step_ledger(ctx, p, markers, cand, row_map=rm)
+    d = json.loads(p.read_text())
+    assert d["format"] == LEDGER_FORMAT == "p10i-panel-ledger/1" and d["end_exclusive"] is True and len(d["windows"]) == 144
+    w = d["windows"][0]
+    assert {"start", "end", "first_row", "last_row", "kind", "owner", "per_row"} <= set(w) and w["per_row"][0][0] == 0
+    assert sum(b - a for _, a, b in w["per_row"]) == w["end"] - w["start"]

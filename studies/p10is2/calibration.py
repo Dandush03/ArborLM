@@ -45,10 +45,11 @@ def select_rate(cfg: Mapping[str, Any], module: str, means: Mapping[float, float
     return select_smallest_within(means, float(c["rate_tie_tolerance"]), f"{module} rate")
 
 
-def select_read_layer(cfg: Mapping[str, Any], mean_l4: float, mean_l12: float | None) -> int:
+def select_read_layer(cfg: Mapping[str, Any], mean_l4: float, mean_l12: float | None) -> int:  # the first and second of ``memory.read_layers`` (4 and 12 registered)
     """The store's read layer by the same rule with L = 4 as 'the smaller': the store at L = 12 at its chosen rate, against its L = 4 result; a read-layer run that diverges (None) is not eligible, so L = 4."""
     tol = float(cfg["calibration"]["rate_tie_tolerance"])
-    return int(select_smallest_within({4.0: mean_l4, 12.0: mean_l12}, tol, "read layer"))
+    lo, hi = (float(x) for x in cfg["memory"]["read_layers"])
+    return int(select_smallest_within({lo: mean_l4, hi: mean_l12}, tol, "read layer"))
 
 
 def choose_training_length(cfg: Mapping[str, Any], snapshots: Mapping[str, Mapping[str, Mapping[int, float | None]]]) -> dict[str, Any]:
@@ -96,7 +97,7 @@ def calibration_units(cfg: Mapping[str, Any]) -> list[dict[str, Any]]:
             units.append({"id": f"grid-store-{cap}-{r}", "module": "store", "capability": cap, "rate": r, "updates": c["rate_grid_updates"], "draw": 0, "layer": c["rate_grid_read_layer"], "kind": "store-type", "units_of_2000": 1})
         for r in c["lora_rates"]:
             units.append({"id": f"grid-lora-{cap}-{r}", "module": "lora", "capability": cap, "rate": r, "updates": c["rate_grid_updates"], "draw": 0, "kind": "lora", "units_of_2000": 1})
-        units.append({"id": f"layer12-{cap}", "module": "store", "capability": cap, "rate": "chosen", "updates": c["rate_grid_updates"], "draw": 0, "layer": 12, "kind": "store-type", "units_of_2000": 1})
+        units.append({"id": f"layer12-{cap}", "module": "store", "capability": cap, "rate": "chosen", "updates": c["rate_grid_updates"], "draw": 0, "layer": int(cfg["memory"]["read_layers"][1]), "kind": "store-type", "units_of_2000": 1})
         for r in c["store_rates"]:
             units.append({"id": f"grid-etable-{cap}-{r}", "module": "etable", "capability": cap, "rate": r, "updates": c["rate_grid_updates"], "draw": 0, "layer": "chosen", "kind": "store-type", "units_of_2000": 1})
         for module, kind in (("store", "store-type"), ("lora", "lora")):

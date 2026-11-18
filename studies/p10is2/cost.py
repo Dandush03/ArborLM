@@ -1,5 +1,6 @@
 # ruff: noqa: E501
 """Counted training multiply-adds per update (ADR-0025 section 8.5, "Counted training multiply-adds per update"). A COUNT of logical work, never measured efficiency and never a speedup.
+EVERY COST FIGURE PRINTED FROM THIS MODULE CARRIES ``COST_NOTE``: it enters no label, no gate and no comparison rule.
 
 The ADR's rule: at batch 32 and the mean training sequence length, one forward and one backward pass, counting each linear map as inputs x outputs per token and pass (twice in the backward pass where its weights
 are trainable), the key scan as rows x 16 per read and the value mix as 8 x 576 per read; computed by one function tested on hand cases.
@@ -12,6 +13,8 @@ gradient), the value mix 8 x 576 (gradient to the weights) plus 8 x 576 x traina
 """
 
 from dataclasses import dataclass
+
+COST_NOTE = "a count of logical work under the readings of the cost module docstring; it enters no label; not measured efficiency; never a speedup"
 
 
 @dataclass(frozen=True)
@@ -70,4 +73,4 @@ def training_multiply_adds(
         bwd = tokens * (shape.layers * (block + 2 * extra) + head)  # frozen maps once (input gradient), trainable factors twice
     else:
         raise ValueError(f"unknown kind {kind!r}")
-    return {"forward": float(fwd), "backward": float(bwd), "total": float(fwd + bwd), "tokens": float(tokens)}
+    return {"forward": float(fwd), "backward": float(bwd), "total": float(fwd + bwd), "tokens": float(tokens)}  # COST_NOTE applies

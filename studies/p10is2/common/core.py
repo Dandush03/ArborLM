@@ -51,6 +51,10 @@ RECORD_KINDS = (
 )  # fmt: skip
 
 
+def other_task(t: str) -> str:
+    return "B" if t == "A" else "A"
+
+
 class StageRefused(RuntimeError):
     """A registered entry point refuses to run (no plan, no freeze, no Decision 2, a dirty tree, an identity that differs)."""
 

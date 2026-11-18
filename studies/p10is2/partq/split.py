@@ -19,7 +19,7 @@ DISJOINT, OVERLAPPING, EXHAUSTED = "DISJOINT DRAWS", "OVERLAPPING DRAWS", "DATA-
 
 
 def assign_shared(units: Sequence[str], seed: int, allowed: frozenset[int] | set[int], share_b: float) -> dict[str, str]:
-    """G17. ``units`` are the identity units that are no-gold sources for both capabilities; they are taken in SORTED key order; each gets one uniform draw from a generator seeded ``seed`` (250904, one
+    """G17. THE DRAW ORDER IS PART OF THE DEFINITION (a vectorised ``torch.rand(n)`` is a different definition and gives other values): ``units`` are the identity units that are no-gold sources for both capabilities; they are taken in SORTED key order; each gets one uniform draw from a generator seeded ``seed`` (250904, one
     ``torch.rand(1)`` per unit, in that order); B if u < ``share_b`` (0.8), else A."""
     g = core.seeded_generator(seed, "source split", allowed)
     out: dict[str, str] = {}

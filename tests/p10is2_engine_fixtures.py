@@ -23,10 +23,13 @@ def bundle():  # type: ignore[no-untyped-def]
 
 
 def draws(n_reps: int = 3, n: int = 20):  # type: ignore[no-untyped-def]
+    """Training draws with disjoint sources between the capabilities (the registered split is made before generation): capability A from its pool, B from its pool minus every source of A's pool."""
     b = bundle()
+    a_keys = {x.key for x in b.accepted["A"]}
+    pool_b = [x for x in b.accepted["B"] if x.key not in a_keys]
     out = []
     for r in range(n_reps):
-        out.append({c: list(b.accepted[c])[r * 2 : r * 2 + n] for c in core.TASKS})
+        out.append({"A": list(b.accepted["A"])[r * 2 : r * 2 + n], "B": pool_b[r * 2 : r * 2 + n] or pool_b[:n]})
     return out
 
 

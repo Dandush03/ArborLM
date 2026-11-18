@@ -125,7 +125,7 @@ def test_part_t_entry_points_refuse_today(tmp_path: Path) -> None:
     for argv in (["registered", "--stage", "train", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["work", "--stage", "evaluate", "--run-dir", str(tmp_path / "r")], ["registered", "--stage", "nonsense", "--run-dir", str(tmp_path / "r")]):
         assert partt_stages.main(argv) == partt_stages.EXIT_REFUSED
     assert partt_stages.main(["freeze", "--measuring-rehearsal", "m", "--counting-rehearsal", "c"]) == partt_stages.EXIT_REFUSED
-    assert partt_stages.main(["rehearse", "--kind", "counting", "--run-dir", str(tmp_path / "x")]) == partt_stages.EXIT_LEAD
+    assert partt_stages.main(["rehearse", "--kind", "counting", "--run-dir", str(tmp_path / "x")]) == partt_stages.EXIT_REFUSED
     assert not (tmp_path / "r").exists()
 
 

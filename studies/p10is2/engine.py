@@ -21,7 +21,15 @@ from torch import nn
 
 from studies.p10s2 import train as p10train
 from studies.p10s2.data import TrainItem
-from studies.p10s2.memory import Arm, CodeBook, LoRAArm, MemoryArm, SparseStore, TableArm, new_lora_arm
+from studies.p10s2.memory import (
+    Arm,
+    CodeBook,
+    LoRAArm,
+    MemoryArm,
+    SparseStore,
+    TableArm,
+    new_lora_arm,
+)
 from studies.p10s2.model import LoRAAdapter
 from studies.p10s2.routing import RouterSpec
 from studies.p10s2.tokenization import Example
@@ -67,6 +75,11 @@ class SeedPlanT:
             raise core.SeedRefused(f"P10-S2 offset {offset} is not served by this study's seed plan: use init(role)")
         return core.seeded_generator(int(seed), purpose or f"offset {offset}", self.allowed)
 
+    def route_pieces_gen(self) -> torch.Generator:
+        """The generator that draws the 200 WikiText-2 train pieces of the route accuracy on general text: the listed seed 250918 in a registered run; in any other mode the replicate's router stream (250918 is a registered-mode seed)."""
+        seed = int(self.cfg["seeds"]["route_accuracy_pieces"]) if self.mode == "registered" else int(self.values["data"]["router"])
+        return core.seeded_generator(seed, "route accuracy pieces", self.allowed | ({seed} if self.mode == "registered" else set()))
+
     def code_seed(self) -> int:
         return int(self.values["data"]["code_hash"])
 
@@ -88,9 +101,10 @@ class WorldT(World):
     cfg_t: Mapping[str, Any]
     plan_mode: str = "registered"
     extra_seeds: tuple[int, ...] = ()
+    plan_offset: int = 0  # a repeated calibration: stream position 0 and 1 take the seeds of calibration draws 2 and 3 (section 7.1 rule 4)
 
     def plan(self, r: int) -> SeedPlanT:  # type: ignore[override]
-        return SeedPlanT(self.cfg_t, self.plan_mode, r, self.extra_seeds)
+        return SeedPlanT(self.cfg_t, self.plan_mode, r + self.plan_offset, self.extra_seeds)
 
     def codes(self, r: int) -> CodeBook:
         return CodeBook(self.plan(r).code_seed(), self.vocabulary)
@@ -274,7 +288,7 @@ def build_cell_arm(world: WorldT, spec: CellSpec, parent: Arm | None) -> tuple[A
 
 
 # --- training with checkpoints ----------------------------------------------------------------------------------------------------------------------------
-def train_cell(world: WorldT, spec: CellSpec, arm: Arm, rows: Sequence[Example], opts: Mapping[str, Any], updates: int, *, checkpoint_dir: Path | None = None, checkpoint_every: int = 500, stop_after: int | None = None) -> dict[str, Any]:
+def train_cell(world: WorldT, spec: CellSpec, arm: Arm, rows: Sequence[Example], opts: Mapping[str, Any], updates: int, *, checkpoint_dir: Path | None = None, checkpoint_every: int = 500, stop_after: int | None = None, snapshots: Sequence[int] = (), on_snapshot: Any = None) -> dict[str, Any]:
     """U updates of batch 32 with AdamW (no weight decay, clip 1.0, constant rate, fresh optimizer state), as P10-S2's ``train_arm``. A checkpoint (trainable parameters and the optimizer's state) every
     ``checkpoint_every`` updates; a call with an existing checkpoint RESUMES from it and the record says so. A non-finite loss ends the cell as ``STOPPED_NONFINITE`` with the last finite checkpoint named
     and the cell is never resumed (the caller reads ``partt_plan.resume_decision``). ``stop_after`` ends the call early, as a cap stop would (the rehearsal's forced pause). Returns the record."""
@@ -318,6 +332,12 @@ def train_cell(world: WorldT, spec: CellSpec, arm: Arm, rows: Sequence[Example],
             torch.nn.utils.clip_grad_norm_(params, clip)
             opt.step()
             losses.append(float(loss.item()))
+            if on_snapshot is not None and (u + 1) in snapshots:  # a ladder snapshot: scored on CPU while the training state is kept
+                arm.to(torch.device("cpu"))
+                world.student.to(torch.device("cpu"))
+                on_snapshot(u + 1, arm)
+                arm.to(dev)
+                world.student.to(dev)
             if ck_path is not None and (u + 1) % checkpoint_every == 0 and u + 1 < updates:
                 ck_path.parent.mkdir(parents=True, exist_ok=True)
                 torch.save({"update": u + 1, "params": [p.detach().cpu().clone() for p in params], "opt": opt.state_dict(), "losses": losses}, ck_path)

@@ -54,7 +54,7 @@ def test_registry_has_exactly_the_required_keys(run) -> None:  # type: ignore[no
     req = partt_plan.required_keys()
     assert req <= set(reg.values), sorted(req - set(reg.values))[:5]
     extra = set(reg.values) - req
-    assert all("R-exact" in k or "R-gloss" in k or "R-nn" in k or "R-icl" in k or "sub:words" in k or "sub:" in k or "|s:" in k for k in extra), sorted(extra)[:8]
+    assert all("R-exact" in k or "R-gloss" in k or "R-nn" in k or "R-icl" in k or "sub:words" in k or "sub:" in k or "|s:" in k or "em:" in k or "lr:" in k or "@append" in k for k in extra), sorted(extra)[:8]
     assert L.study_status(reg, required=req)["status"] == "OK"
     assert not reg.nonfinite()
 

@@ -60,12 +60,62 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
 
 def cmd_registered(args: argparse.Namespace) -> int:
     repo = repo_of(args)
-    refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, args.stage)
-    raise PendingLeadReview("the real Part T stage bodies need: " + "; ".join(NOT_IMPLEMENTED) + ". They were not run here (no training, no real data, no MPS work in the implementation).")
+    plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, args.stage)
+    from . import partt_real
+
+    partt_real.run_stage(args.stage, repo, Path(args.run_dir), Path(args.part_q_dir), plan)
+    return 0
+
+
+def cmd_calibrate(args: argparse.Namespace) -> int:
+    from . import partt_real
+
+    core.require_ignored_run_dir(repo_of(args), Path(args.run_dir))
+    print(json.dumps(core.jsonable(partt_real.calibrate_command(repo_of(args), Path(args.part_q_dir), Path(args.run_dir), int(args.repetition))), default=str))
+    return 0
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
-    raise PendingLeadReview(f"the Part T {args.kind} rehearsal needs Part Q's accepted outputs and: " + "; ".join(NOT_IMPLEMENTED))
+    """The Part T rehearsals on Part Q's accepted outputs with the rehearsal seeds (252001, 330251 + j) and D_cal only; scores are sealed."""
+    from . import partt_real
+
+    repo = repo_of(args)
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    core.require_ignored_run_dir(repo, Path(args.run_dir))
+    if not Path(args.calibration).is_file() or not (Path(args.part_q_dir) / "outputs/bundle").exists():
+        raise StageRefused("refused: the rehearsal needs --calibration (the calibration record) and --part-q-dir (Part Q's accepted run directory)")
+    calib = json.loads(Path(args.calibration).read_text())
+    w, gloss, _ = partt_real.build_world_real(repo, cfg, Path(args.part_q_dir), calib, "rehearsal")
+    run_dir = Path(args.run_dir)
+    if args.kind == "measuring":
+        rec = partt_real.measure_rates(w, run_dir / "snaps", gloss, updates=200)
+        out = {**core.envelope("rehearsal", "T"), "kind_of_rehearsal": "measuring", "caps_provisional": True, "cannot_be_frozen_on": True, **rec}
+    else:
+        plan_file = repo / core.PLAN_T
+        plan = planmod.Plan.load(plan_file, "T")
+        out = partt_real.counting_rehearsal(w, run_dir / "snaps", gloss, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), updates=int(calib["U"]), identity_probe=identity_probe(plan, repo, run_dir))
+    core.write_record(run_dir / f"rehearsal_{args.kind}.json", out, overwrite=True)
+    print(json.dumps({k: out[k] for k in ("kind_of_rehearsal", "rates_seconds_per_unit", "projection_units", "forced") if k in out}, default=str))
+    return 0
+
+
+def identity_probe(plan: planmod.Plan, repo: Path, run_dir: Path) -> Any:
+    """The forced PAUSED — IDENTITY of the counting rehearsal: a copy of the plan with one frozen hash altered is refused as PAUSED — IDENTITY, the real plan then verifies (the restore), and the probe raises."""
+
+    def probe() -> None:
+        data = json.loads(json.dumps(plan.data))
+        data["frozen_files"][sorted(data["frozen_files"])[0]] = "0" * 64
+        try:
+            planmod.verify_plan(planmod.Plan(data, "T"), repo, run_dir, candidate=True)
+        except StageRefused as e:
+            if "PAUSED — IDENTITY" not in str(e):
+                raise
+        else:
+            raise RuntimeError("the forced identity difference was not detected")
+        planmod.verify_plan(plan, repo, run_dir, candidate=True)
+        raise StageRefused("PAUSED — IDENTITY forced and restored")
+
+    return probe
 
 
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
@@ -173,8 +223,14 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--measuring-rehearsal", required=True)
     c.add_argument("--charged-hours", type=float, required=True)
     c.add_argument("--units", required=True)
+    cal = sub.add_parser("calibrate")
+    cal.add_argument("--part-q-dir", required=True)
+    cal.add_argument("--run-dir", required=True)
+    cal.add_argument("--repetition", type=int, default=0, choices=(0, 1))
+    cal.add_argument("--repo")
     for name in ("registered", "work"):
         r = sub.add_parser(name)
+        r.add_argument("--part-q-dir", required=False, default=".")
         r.add_argument("--stage", required=True)
         r.add_argument("--run-dir", required=True)
         r.add_argument("--freeze-commit")
@@ -182,6 +238,8 @@ def build_parser() -> argparse.ArgumentParser:
     h = sub.add_parser("rehearse")
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
+    h.add_argument("--part-q-dir", required=False, default=".")
+    h.add_argument("--calibration", required=False, default="calibration.json")
     h.add_argument("--repo")
     return ap
 
@@ -189,7 +247,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        table: dict[str, Any] = {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "registered": cmd_registered, "work": cmd_registered, "rehearse": cmd_rehearse}
+        table: dict[str, Any] = {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "registered": cmd_registered, "work": cmd_registered, "rehearse": cmd_rehearse, "calibrate": cmd_calibrate}
         return int(table[args.command](args))
     except StageRefused as e:
         print(f"REFUSED: {e}", file=sys.stderr)

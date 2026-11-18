@@ -59,8 +59,13 @@ def score_all(world: engine.WorldT, snap_dir: Path, gloss_bank: Mapping[str, Any
             for a in ORDER_ARMS:
                 reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
                 records[f"{a}|{o}|{r}"] = reads
+                if a == "M-append":
+                    lr, rside = scoring.route_reads(world, r, arms[a], routers)
+                    records[f"{a}|{o}|{r}"] |= lr
+                    side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
+                    records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
                 if extra:
-                    side[f"r{r}/{a}/{o}"] = extra
+                    side.setdefault(f"r{r}/{a}/{o}", {}).update(extra)
         for a in JOINT:
             arm = engine.load_t(world, r, snap_dir, f"r{r}/{a}/-")
             reads = scoring.panel_means(world, arm)

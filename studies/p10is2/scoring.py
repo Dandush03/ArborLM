@@ -7,7 +7,7 @@ words-only on the 300-item subsample, each permutation from a fresh +4 generator
 registry builder. Every read runs under ``torch.no_grad()`` and on CPU. The frozen scoring is repeated bit-identically (gate G2).
 """
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping
 from typing import Any
 
 import torch
@@ -36,7 +36,11 @@ def _cap(order: str, which: int) -> str:
 def panel_means(world: WorldT, arm: Arm) -> dict[str, float]:
     """s:E_A and s:E_B: the mean chrF-norm of the arm on each full panel under the oracle route."""
     ctx = world.ctx
-    return {f"s:{n}": score_panel(ctx, arm, ctx.panels[n]).mean for n in ("E_A", "E_B")}
+    out: dict[str, float] = {}
+    for n in ("E_A", "E_B"):
+        sc = score_panel(ctx, arm, ctx.panels[n])
+        out[f"s:{n}"], out[f"em:{n}"] = sc.mean, mean([float(x) for x in sc.exact])  # em: exact-match rate (EXACT-MATCH WEAK)
+    return out
 
 
 @torch.no_grad()
@@ -68,6 +72,8 @@ def reference_reads(world: WorldT) -> dict[str, float]:
         texts = world.teacher_outputs[c][n]
         items = [chrf_item(t, r) for t, r in zip(texts, panel.refs, strict=True)]
         out[f"TEACHER|s:{n}"] = mean(items)
+        out[f"TEACHER|em:{n}"] = mean([float(normalize(t) in {normalize(x) for x in r}) for t, r in zip(texts, panel.refs, strict=True)])
+        out[f"S0|em:{n}"] = mean([float(x) for x in s0_full.exact])
         out[f"TEACHER|sub:own:{n}"] = mean([items[i] for i in sub])
     return out
 
@@ -199,3 +205,20 @@ def panels_of(world: WorldT) -> dict[str, PanelData]:
 
 def is_append(arm: Arm) -> bool:
     return isinstance(arm, AppendLoRAArm)
+
+
+@torch.no_grad()
+def route_reads(world: WorldT, rep: int, arm: Arm, routers: Mapping[tuple[str, ...], tuple[Router, dict[str, Any]]]) -> tuple[dict[str, float], dict[str, Any]]:
+    """The learned-route scores of a stage-2 snapshot on E_A and E_B (``lr:E_x``) and the router's route accuracy on the task panels and on 200 general pieces of the WikiText-2 train file the router never saw
+    (pieces drawn with seed 250918 in a registered run)."""
+    from studies.p10s2.routing import none_pieces, route_accuracy
+
+    router = routers[TWO][0]
+    ctx = world.ctx
+    reads = {f"lr:{n}": score_panel(ctx, arm, ctx.panels[n], route="learned", router=router).mean for n in ("E_A", "E_B")}
+    plan = world.plan(rep)
+    pieces = none_pieces(world.wiki_train_ids, world.router_spec.prefix_tokens)
+    picked = set(torch.randperm(len(pieces), generator=plan.gen(3, "router sampling")).tolist()[: world.router_spec.none_prefixes])
+    order = [i for i in torch.randperm(len(pieces), generator=plan.route_pieces_gen()).tolist() if i not in picked][: world.router_spec.general_prefix_count]
+    acc = route_accuracy(router, world.student, world.layer, {c: [world.bank.prompt(c, x.en) for x in world.partition.panels[PANEL[c]]] for c in TWO}, [pieces[i] for i in order])
+    return reads, {"route_accuracy": acc, "general_pieces": len(order)}
