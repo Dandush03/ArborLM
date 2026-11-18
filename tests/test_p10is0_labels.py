@@ -12,7 +12,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pytest  # noqa: E402
 
 from studies.p10is0 import core, labels  # noqa: E402
-from studies.p10is0.labels import FAILS, HOLDS, NOT_EVALUABLE, NOT_READ, CellResult, Convergence, RefFlags, SeriesAtLoad, TypeState, arm_class, type_state  # noqa: E402
+from studies.p10is0.labels import (  # noqa: E402
+    FAILS,
+    HOLDS,
+    NOT_EVALUABLE,
+    NOT_READ,
+    CellResult,
+    Convergence,
+    RefFlags,
+    SeriesAtLoad,
+    TypeState,
+    arm_class,
+    type_state,
+)
 
 TH = core.Thresholds.from_config()
 OK = CellResult(labels.SUCCEEDED)

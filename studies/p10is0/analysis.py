@@ -209,7 +209,6 @@ def analyze(
     out["x8"] = {"triggered": triggered, "status": x8_status if triggered else f"NOT RUN — L_Q BELOW 4 (or the result of steps 0 to 2: step {head.step})", "label": "ONE SERIES" if triggered else None}
     out["headline"] = {"step": head.step, "text": head.text, "detail": head.detail}
     loads_main = sorted(by_load)
-    q_by_load = {ld: labels.combine_series([s.state.q for s in by_load[ld]], "Q") for ld in loads_main}
     lines: dict[str, Any] = {}
     for line in ("A", "G", "Q"):
         st = {ld: labels.combine_series([getattr(s.state, line.lower()) for s in by_load[ld]], line) for ld in loads_main if not (ld == 8.0 and not (triggered and x8_status == "COMPLETE"))}

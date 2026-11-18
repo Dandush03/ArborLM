@@ -50,10 +50,10 @@ def validate_public(obj: Any, *, path: str = "") -> None:
     if isinstance(obj, Mapping):
         for k, v in obj.items():
             key = str(k)
-            in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or path.endswith("counts") or path.endswith("hashes") or path.endswith("identity") or path.endswith("environment")
+            in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or path.endswith("hashes") or path.endswith("identity") or path.endswith("environment")
             if not in_cell_types and key not in PUBLIC_KEYS:
                 raise PublicOutputError(f"key not allowed in a public output: {path}/{key}")
-            if not in_cell_types and any(w in key.lower() for w in FORBIDDEN_WORDS) and key not in ("convergence", "labels"):
+            if any(w in key.lower() for w in FORBIDDEN_WORDS) and key not in ("convergence", "labels"):
                 raise PublicOutputError(f"key names a forbidden measure: {path}/{key}")
             validate_public(v, path=f"{path}/{key}")
     elif isinstance(obj, list | tuple):

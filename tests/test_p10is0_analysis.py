@@ -197,3 +197,14 @@ def test_lane_licence_is_empty_without_a_qualified_anchor() -> None:
     bad = fails("2K/4K", "A5-D", range(1, 4), rec(obs(0.5)))
     out = run(registry(bad))
     assert out["annotations"]["licence_loads"] == [] and out["licence_text"].startswith("OMITTED")  # type: ignore[index]
+
+
+def test_report_renders_every_section_and_labels_its_numbers() -> None:
+    from studies.p10is0 import report
+
+    out = run(registry(fails("8K/4K", "A5-D", range(1, 4), rec(obs(0.5)))))
+    text = report.render(out)
+    assert out["headline"]["text"] in text and labels.FIXED_SENTENCES in text and "ANALYTICAL" in text and "MEASURED" in text
+    assert "IN SERIES S ONLY" in text and "penalty against answer-only at 8K/4K" in text and "lane licence" in text
+    paused = report.render(run(registry(), paused=True))
+    assert "No scientific label" in paused and "Lines (MEASURED" not in paused

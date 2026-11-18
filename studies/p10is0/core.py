@@ -331,11 +331,11 @@ def check_set(cfg: Mapping[str, Any] | None = None) -> SetSpec:
 
 
 def test_set(k: int = 0, cfg: Mapping[str, Any] | None = None) -> SetSpec:
-    """Unit tests: 932001 + 100 k, k = 0..9 (the registry's test range)."""
+    """Unit tests: 932001 + 100 k, k = 0..8 (the registry's test range)."""
     s = (cfg or load_config())["seeds"]
     base = int(s["test_base"]) + 100 * k
-    if not 0 <= k <= 9 or base + 99 > int(s["test_top"]):
-        raise ValueError("test seed set out of range (0..9)")
+    if not 0 <= k <= 8 or base + 99 > int(s["test_top"]):
+        raise ValueError("test seed set out of range (0..8)")
     return SetSpec(f"p10is0-test-{k}", base)
 
 
