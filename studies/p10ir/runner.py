@@ -5,7 +5,7 @@ A stage is a list of tasks (one per cell label; the items of a cell are run in o
 A stop on a resource cap (the stage's wall-clock cap, the 3 GiB per-worker or the 18 GiB aggregate memory guard) leaves the stage PAUSED: the unfinished tasks are listed ``killed_cap``,
 ``killed_rss`` or ``not_started`` and the next invocation runs only them (inside a task a finished read or gate is not recomputed: ``items.run_item``). A task that exits with an error is FAILED: its
 record is kept and it is not re-run. The stage manifest records PAUSED or COMPLETE (or FAILED) and keeps one history entry per invocation. No shell is involved: argument lists only. Every wait has a
-deadline (the stage cap)."""
+deadline (the stage cap). A worker's refusal on an identity or precondition check (exit 75) is PAUSED — IDENTITY: no failed record, and the next invocation runs the task again."""
 
 import subprocess
 import time
@@ -22,7 +22,9 @@ from arborlm.io import write_json
 from . import core
 
 COMPLETED, FAILED, KILLED_CAP, KILLED_RSS, NOT_STARTED = "completed", "failed", "killed_cap", "killed_rss", "not_started"
-PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED)
+PAUSED_IDENTITY = "paused_identity"
+IDENTITY_EXIT = 75  # a worker that refuses on an identity or precondition check (a dirty tree, a frozen file that differs, no Decision 2) exits with this code (EX_TEMPFAIL): PAUSED — IDENTITY, not FAILED
+PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY)
 POLL = 0.2
 
 
@@ -93,6 +95,10 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
             peak = max(peak, rss)
             running[label] = (task, popen, proc, t0, peak)
             code = popen.poll()
+            if code == IDENTITY_EXIT:
+                out[label] = {"status": PAUSED_IDENTITY, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED — IDENTITY: the worker refused on an identity or precondition check; restore the file or the state bit for bit and run the stage again (no failed record is kept)"}
+                running.pop(label)
+                continue
             if code is not None:
                 ok = code == 0 and task.result_path.is_file()
                 out[label] = {"status": COMPLETED if ok else FAILED, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak}
@@ -118,7 +124,7 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
 
 
 def stage_status(outcomes: dict[str, dict[str, Any]]) -> str:
-    """COMPLETE when every task completed; FAILED if any failed (kept, not re-run); PAUSED if the only unfinished tasks stopped on a resource cap."""
+    """COMPLETE when every task completed; FAILED if any failed (kept, not re-run); PAUSED if the only unfinished tasks stopped on a resource cap or on an identity refusal (PAUSED — IDENTITY)."""
     statuses = [o["status"] for o in outcomes.values()]
     if statuses and all(s == COMPLETED for s in statuses):
         return "COMPLETE"

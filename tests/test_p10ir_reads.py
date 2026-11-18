@@ -10,11 +10,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
-import test_p10ir_tiny as tiny  # noqa: E402
 import torch  # noqa: E402
 from torch.nn import functional as F  # noqa: E402
 
 from studies.p10ir import core, gates, reads  # noqa: E402
+from studies.p10ir import testing as tiny  # noqa: E402
 from studies.p10s1 import core as s1core  # noqa: E402
 from studies.p10s1 import evaluate as s1eval  # noqa: E402
 from studies.p10s1 import index as s1index  # noqa: E402
@@ -216,13 +216,13 @@ def test_exhaustive_top_against_brute_force_and_p10s1_top_flat() -> None:
 def test_i64_budget_memory_with_512_equals_p10s1_ivf_memory_and_collects_at_least_c(slots: int) -> None:
     mem = tiny.flat_memory(slots, 938410 + slots // 1024)
     q = tiny.unit_queries(25, 938411)
-    idx256 = s1index.build_index(mem.keys.detach(), 298001)
+    idx256 = s1index.build_index(mem.keys.detach(), 938901)
     theirs = s1index.IVFMemory(mem, idx256)
     mine = reads.IVFBudgetMemory(mem, idx256, 512)
     tv, ti = theirs._top_flat(q)
     mv, mi = mine._top_flat(q)
     assert torch.equal(ti, mi) and same(tv, mv)  # the registered read, called through the new class
-    idx64 = s1index.build_index(mem.keys.detach(), 298002, slots // 64)
+    idx64 = s1index.build_index(mem.keys.detach(), 938902, slots // 64)
     assert idx64.lists == slots // 64
     for c in core.feasible_budgets(slots, CFG):
         mask, counts = s1index.candidate_mask(idx64, q, c)
@@ -309,8 +309,8 @@ def test_pair_statistics_and_testability_against_loops() -> None:
 def test_index_fact_measures_against_loops_and_f0_is_exact() -> None:
     mem = tiny.flat_memory(1024, 938451)
     codes = tiny.unit_queries(48, 938452)
-    idx = s1index.build_index(mem.keys.detach(), 298001, 16)
-    res = reads.flat_fact_pass(mem, codes, {"I64@128/s298001": (idx, 128)}, chunk=16)
+    idx = s1index.build_index(mem.keys.detach(), 938901, 16)
+    res = reads.flat_fact_pass(mem, codes, {"I64@128/s938901": (idx, 128)}, chunk=16)
     f0 = res["F0"]["facts"]
     assert f0["cr8"] == f0["cr1"] == f0["sr8"] == 1.0 and f0["am_c"] == pytest.approx(1.0) and f0["am_s"] == pytest.approx(1.0)
     keys = F.normalize(mem.keys.double(), dim=-1)
@@ -322,7 +322,7 @@ def test_index_fact_measures_against_loops_and_f0_is_exact() -> None:
         w_e = torch.tensor([float(scores[s]) for s in e8]).softmax(-1).tolist()
         cr8.append(sum(bool(mask[r, s]) for s in e8) / 8)
         am.append(sum(w for w, s in zip(w_e, e8, strict=True) if bool(mask[r, s])))
-    got = res["I64@128/s298001"]
+    got = res["I64@128/s938901"]
     assert got["facts"]["cr8"] == pytest.approx(sum(cr8) / len(cr8), abs=1e-5) and got["facts"]["am_c"] == pytest.approx(sum(am) / len(am), abs=1e-5)
     # for an index read of the flat memory there is no prior: SR8 = CR8 and AM_S = AM_C (the selection is the top 8 of the candidates)
     assert got["facts"]["sr8"] == pytest.approx(got["facts"]["cr8"], abs=1e-6) and got["facts"]["am_s"] == pytest.approx(got["facts"]["am_c"], abs=1e-6)

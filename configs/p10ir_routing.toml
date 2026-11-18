@@ -13,6 +13,7 @@ restored_ratio = 0.90          # ... and i(X) >= 0.90 i(Y)
 floor_a_use = 0.25             # i(Y) >= 0.473 bits (a_use 0.25), derived as Fano(0.25); below it: WEAK REFERENCE
 floor_i_bits_printed = 0.473   # the printed value of Fano(0.25); a test requires round(Fano(0.25), 3) == this
 # section 8.3
+h_margin_bits = 0.25           # H: i(T2) <= i(T0) - 0.25 on both panels (its own key; same value as restored_margin_bits by the ADR)
 closure = 0.5                  # closure figure: "most of the gap"
 recall_r = 0.90                # R: CR8(T0) >= 0.90
 # section 9
@@ -53,6 +54,7 @@ bridge_draws = 5
 bridge_index_offset = 60
 bridge_init_base = 330600      # draw d -> 330600 + d
 index_seeds = [298001, 298002, 298003]
+test_index_seeds = [938901, 938902, 938903]   # rehearsal and tests read the I64 indexes with these (test range), never with the registered index seeds above
 rehearsal_base = 299201
 rehearsal_init = 330692
 test_init = [330698, 330699]
@@ -173,5 +175,5 @@ updates = 64                   # P10-S1's rehearsal updates (studies/p10s1/core.
 snapshots = [32, 64]
 synthetic_facts = 128
 synthetic_slots = [1024, 4096]
-synthetic_updates = 16
-synthetic_snapshots = [8, 16]
+synthetic_updates = 64          # a tiny memory is above the information floor from about 48 updates on (a_use 0.25 is at about 32): U_P 48, run length 64
+synthetic_snapshots = [48, 64]

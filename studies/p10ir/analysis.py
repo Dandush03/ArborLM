@@ -27,6 +27,20 @@ def default_label_of(stage: str, cfg: Mapping[str, Any] | None = None) -> LabelO
     return of
 
 
+def label_of_from_items(plan_items: Sequence[Mapping[str, Any]]) -> LabelOf:
+    """Cell labels as the PLAN's items name them, keyed by (cell name, arm, draw): the analysis takes its labels from the plan and never from the config (audit R2; section 13: every stage derives its items from
+    the plan only)."""
+    table = {(it["cell_name"], it["arm"], int(it["draw"])): str(it["cell"]) for it in plan_items}
+
+    def of(arm: str, spec: core.CellSpec, draw: int) -> str:
+        try:
+            return table[(spec.name, arm, draw)]
+        except KeyError:
+            return f"NO-PLAN-ITEM|{spec.name}|{arm}|{draw}"  # a replicate the plan does not have: no item record, NOT EVALUABLE
+
+    return of
+
+
 def checkpoint_names(spec: core.CellSpec) -> dict[str, int]:
     """U_P and RUN (co-primary) and the two trajectory points (descriptive), by name."""
     out = {"U_P": spec.u_p, "RUN": spec.run}
@@ -72,6 +86,53 @@ def _pair(rec: Mapping[str, Any] | None, name: str) -> float | None:
     return None if v is None else float(v)
 
 
+def _acc(rec: Mapping[str, Any] | None, panel: str, key: str = "accuracy") -> float | None:
+    try:
+        return None if rec is None else float(rec["panels"][panel][key])
+    except (KeyError, TypeError):
+        return None
+
+
+def _acc0(rec: Mapping[str, Any] | None, panel: str) -> float | None:
+    """Memory-disabled accuracy of the checkpoint and panel: P10-S1's ``panel_counts`` ``disabled_correct`` / n (ruling 3)."""
+    try:
+        return None if rec is None else float(rec["panels"][panel]["disabled_correct"]) / float(rec["panels"][panel]["n"])
+    except (KeyError, TypeError, ZeroDivisionError):
+        return None
+
+
+def _retention_entry(x: Mapping[str, Any] | None, y: Mapping[str, Any] | None, th: core.Thresholds, accs_x: Sequence[Mapping[str, Any] | None] | None = None) -> dict[str, Any] | None:
+    """Per panel: the retention status of X against Y (the rule, in bits) and the accuracy version [acc(X) - acc0] / [acc(Y) - acc0], printed beside it and deciding nothing. ``accs_x`` are the reads
+    averaged for X (the index seeds)."""
+    recs = list(accs_x) if accs_x is not None else [x]
+    if y is None or any(r is None for r in recs) or x is None:
+        return None
+    out: dict[str, Any] = {}
+    for p in labels.PANELS:
+        ix = sum(float(r["panels"][p]["i"]) for r in recs if r is not None) / len(recs)
+        iy = float(y["panels"][p]["i"])
+        accx = [_acc(r, p) for r in recs]
+        acc0 = [_acc0(r, p) for r in recs]
+        accy, y0 = _acc(y, p), _acc0(y, p)
+        if None in accx or None in acc0 or accy is None or y0 is None:
+            ratio = None
+        else:
+            v = labels.accuracy_retained(sum(accx) / len(accx), accy, sum(acc0) / len(acc0))  # type: ignore[arg-type]
+            ratio = None if v != v else v
+        out[p] = {"status": labels.retention(ix, iy, th), "accuracy_version": ratio}
+    return out
+
+
+def tree_retention(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: int, label_of: LabelOf, th: core.Thresholds) -> dict[str, Any]:
+    treads, freads = reg.reads_of(stage, label_of("T-OQ", spec, d), update), reg.reads_of(stage, label_of("F-OQ", spec, d), update)
+    return {r: _retention_entry(treads.get(r), freads.get("F0"), th) for r in ("T1", "T3", "T2")}
+
+
+def index_retention(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: int, label_of: LabelOf, th: core.Thresholds, cfg: Mapping[str, Any], seeds: Sequence[int]) -> dict[str, Any]:
+    freads = reg.reads_of(stage, label_of("F-OQ", spec, d), update)
+    return {str(c): _retention_entry(freads.get(core.i64_name(c, seeds[0])), freads.get("F0"), th, [freads.get(core.i64_name(c, s)) for s in seeds]) for c in core.feasible_budgets(spec.slots, cfg)}
+
+
 # --- replicates -----------------------------------------------------------------------------------------------------------------------------
 def tree_rep(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: int, label_of: LabelOf) -> labels.TreeRep:
     t_label, f_label = label_of("T-OQ", spec, d), label_of("F-OQ", spec, d)
@@ -92,7 +153,7 @@ def tree_rep(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: int
     return labels.TreeRep(True, i, cr8)
 
 
-def index_rep(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: int, label_of: LabelOf, cfg: Mapping[str, Any]) -> labels.IndexRep:
+def index_rep(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: int, label_of: LabelOf, cfg: Mapping[str, Any], seeds: Sequence[int] | None = None) -> labels.IndexRep:
     f_label = label_of("F-OQ", spec, d)
     item = reg.item(stage, f_label, update)
     ok_f, why_f = scope_ok(item, "f0")
@@ -103,7 +164,7 @@ def index_rep(reg: Registry, stage: str, spec: core.CellSpec, d: int, update: in
     f0 = _panel_i(reads.get("F0"))
     if f0 is None:
         return labels.IndexRep(False, reason="missing read F0")
-    seeds = core.i64_seeds(cfg)
+    seeds = list(seeds) if seeds else core.i64_seeds(cfg)
     budget_i: dict[int, dict[str, float]] = {}
     for c in core.feasible_budgets(spec.slots, cfg):
         per_seed = [_panel_i(reads.get(core.i64_name(c, s))) for s in seeds]
@@ -174,8 +235,8 @@ def _delta(i: Mapping[str, float | None], a: str, b: str) -> float | None:
     return None if i[a] is None or i[b] is None else i[a] - i[b]  # type: ignore[operator]
 
 
-def index_descriptive(reg: Registry, stage: str, spec: core.CellSpec, update: int, label_of: LabelOf, cfg: Mapping[str, Any], th: core.Thresholds) -> dict[str, Any]:
-    seeds = core.i64_seeds(cfg)
+def index_descriptive(reg: Registry, stage: str, spec: core.CellSpec, update: int, label_of: LabelOf, cfg: Mapping[str, Any], th: core.Thresholds, seeds: Sequence[int] | None = None) -> dict[str, Any]:
+    seeds = list(seeds) if seeds else core.i64_seeds(cfg)
     out: dict[str, Any] = {"budgets": {}, "I256@512": {}, "F0": {}, "N_over_8": spec.slots / 8, "shallow": spec.shallow}
     f0s, i256s = [], []
     per_budget: dict[int, list[Mapping[str, Any] | None]] = {c: [] for c in cfg["reads"]["index_budgets"]}
@@ -218,6 +279,7 @@ def analyze_stage(
     context: Mapping[str, Any] | None = None,
     specs: Sequence[core.CellSpec] | None = None,
     seal_broken: bool = False,
+    i64_seeds: Sequence[int] | None = None,
 ) -> dict[str, Any]:
     """Labels of every cell at every checkpoint, R-DIAGNOSIS (primary cells at U_P and the run length), R-DIAGNOSIS-LOADED (printed only), and every descriptive section.
 
@@ -240,9 +302,9 @@ def analyze_stage(
             tree_labels, index_labels, t_rows, i_rows = [], [], [], []
             for d in range(1, th.replicates + 1):
                 tl = labels.tree_replicate(tree_rep(reg, stage, spec, d, update, label_of), th)
-                il = labels.index_replicate(index_rep(reg, stage, spec, d, update, label_of, cfg), th)
-                tree_labels.append({"draw": d, "row": tl.row, "suffix": tl.suffix, "tags": tl.tags, "reason": tl.reason})
-                index_labels.append({"draw": d, "row": il.row, "suffix": il.suffix, "tags": il.tags, "reason": il.reason})
+                il = labels.index_replicate(index_rep(reg, stage, spec, d, update, label_of, cfg, i64_seeds), th)
+                tree_labels.append({"draw": d, "row": tl.row, "suffix": tl.suffix, "tags": tl.tags, "reason": tl.reason, "retention": tree_retention(reg, stage, spec, d, update, label_of, th)})
+                index_labels.append({"draw": d, "row": il.row, "suffix": il.suffix, "tags": il.tags, "reason": il.reason, "retention": index_retention(reg, stage, spec, d, update, label_of, th, cfg, list(i64_seeds) if i64_seeds else core.i64_seeds(cfg))})
                 t_rows.append(tl.row)
                 i_rows.append(il.row)
             c_stars = [x["tags"].get("c_star") for x in index_labels]
@@ -253,7 +315,7 @@ def analyze_stage(
                 "index": {
                     "label": labels.cell_label(i_rows, th), "replicates": index_labels, "stage_tag": stage_tag, "standing_tag": core.STANDING_TAG,
                     "c_star_median": median_c, "c_star_share_of_N": None if median_c is None else median_c / spec.slots, "replicates_without_c_star": [x["draw"] for x in index_labels if x["tags"].get("c_star") is None],
-                    "descriptive": index_descriptive(reg, stage, spec, update, label_of, cfg, th),
+                    "descriptive": index_descriptive(reg, stage, spec, update, label_of, cfg, th, i64_seeds),
                 },
             }  # fmt: skip
             if cp == "RUN" and spec.role == "primary":

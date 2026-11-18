@@ -1,5 +1,5 @@
 # ruff: noqa: E501
-"""P10IR reads and measurements (ADR-0029 sections 6 and 7). Nothing here trains, tunes or writes a checkpoint.
+"""P10IR reads and measurements (ADR-0029 sections 6 and 7). Nothing here trains, tunes or writes a checkpoint. Every read and every fact-level pass runs under ``torch.no_grad()`` (the checkpoint's keys and router are Parameters: with autograd on, each chunk's graph would stay alive until the pass returned).
 
 * **One tree path** (``tree_path``): the router's ``v`` best branches, the prior on or off in the selection of the top 8, on or off in the weights. T0 (v = 2, both on), T1, T1w, T3 and T2
   (v = N/256) and the sweep Tv are this function. It repeats ``arborlm``'s and P9's operations of ``ScalableMemory._top_tree`` one for one (same chunking at v = 2, same normalisation of the gathered
@@ -78,6 +78,7 @@ class TreeOut:
     routes: "Tensor"  # [R, N/256]
 
 
+@torch.no_grad()
 def tree_path(keys: "Tensor", router: "Tensor", q: "Tensor", v: int, prior_select: bool, prior_weight: bool, *, per: int, chunk_elements: int) -> TreeOut:
     """The router's ``v`` best branches (ties to the lower branch id), every key of them scored cos(q, key) / 0.2, the prior (the log-softmax over all branches of the branch's route score, one constant per
     branch) added to the selection scores if ``prior_select`` and to the weight scores if ``prior_weight``; the top 64 by score with ties to the lower slot id (``stable_top`` with ids), whose first
@@ -107,6 +108,7 @@ def tree_path(keys: "Tensor", router: "Tensor", q: "Tensor", v: int, prior_selec
     return TreeOut(torch.cat(values), torch.cat(ids), branch_ids, routes)
 
 
+@torch.no_grad()
 def exhaustive_top(keys: "Tensor", q: "Tensor", count: int, chunk_elements: int) -> "tuple[Tensor, Tensor]":
     """The flat read: top ``count`` of cos / 0.2 against ``F.normalize(keys, eps=EPS)`` by ``stable_top`` (ties to the lower slot id), as ``ScalableMemory._top_flat``."""
     normalized = F.normalize(keys, dim=-1, eps=EPS)
@@ -119,6 +121,7 @@ def exhaustive_top(keys: "Tensor", q: "Tensor", count: int, chunk_elements: int)
     return torch.cat(values), torch.cat(ids)
 
 
+@torch.no_grad()
 def independent_flat(keys: "Tensor", router: "Tensor", q: "Tensor", with_prior: bool, *, per: int, chunk_elements: int) -> "tuple[Tensor, Tensor]":
     """The extra gate read of section 11 gate 4: ``q @ keys.T`` over all keys with (T3) or without (T2) the per-key prior of its branch; top 64 by ``stable_top`` (ties to the lower slot id)."""
     normalized = F.normalize(keys, dim=-1, eps=EPS)
@@ -252,13 +255,14 @@ def _pair_stats(a_ids: "Tensor", a_w: "Tensor", b_ids: "Tensor", b_w: "Tensor") 
 
 
 def _mean(parts: Sequence["Tensor"]) -> float:
-    return float(torch.cat(list(parts)).mean()) if parts else float("nan")
+    return float(torch.cat(list(parts)).to(torch.float64).mean()) if parts else float("nan")  # float64: the per-fact values are integer counts over 8 (or 0/1), exact in float32; the mean is not taken in float32
 
 
 def _weights(values: "Tensor") -> "Tensor":
     return values[:, :TOP].softmax(-1)
 
 
+@torch.no_grad()
 def tree_fact_pass(source: S1Memory, codes: "Tensor", specs: Sequence[TreeReadSpec], *, chunk_elements: int, chunk: int = FACT_CHUNK) -> dict[str, dict[str, Any]]:
     """CR8, CR1, SR8, AM_C, AM_S of every read of ``specs`` over all trained facts (each once), the share of facts whose eight slots span both branches (T0), and the pair statistics T0 against T1, T1w and
     T3, and T3 against T2. ``source`` is the checkpoint's T-OQ memory; ``codes [F, 16]`` the facts' oracle codes."""
@@ -298,6 +302,7 @@ def tree_fact_pass(source: S1Memory, codes: "Tensor", specs: Sequence[TreeReadSp
     return result
 
 
+@torch.no_grad()
 def flat_fact_pass(source: S1Memory, codes: "Tensor", indexes: Mapping[str, tuple[s1index.IVFIndex, int]], *, chunk: int = FACT_CHUNK) -> dict[str, dict[str, Any]]:
     """The same measures for F0 (C is every key) and for each named index read (``indexes[name] = (index, minimum candidates)``): C is the mask of the lists visited; the candidate counts are measured per
     fact (mean and 99th percentile)."""
@@ -326,7 +331,7 @@ def flat_fact_pass(source: S1Memory, codes: "Tensor", indexes: Mapping[str, tupl
     for n in names:
         entry: dict[str, Any] = {"facts": {k: _mean(v) for k, v in acc[n].items()}, "facts_n": int(codes.shape[0])}
         if n in counts_acc:
-            c = torch.cat(counts_acc[n]).float()
+            c = torch.cat(counts_acc[n]).to(torch.float64)
             entry["candidates_facts"] = {"mean": float(c.mean()), "p99": float(torch.quantile(c, 0.99))}
         out[n] = entry
     return out

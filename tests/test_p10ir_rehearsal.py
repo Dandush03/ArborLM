@@ -42,13 +42,14 @@ def synthetic_run(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Any]:
 
 def test_every_stage_runs_to_complete_against_the_rehearsals_own_plan(synthetic_run: dict[str, Any]) -> None:
     res = synthetic_run["result"]
-    assert list(res["stages"]) == list(stages.REHEARSAL_STAGES)
+    assert list(res["stages"]) == list(stages.REHEARSAL_STAGES) and "confirm" in res["stages"]
     assert all(v["status"] == "COMPLETE" for v in res["stages"].values()), res
+    assert res["item_errors"] == []  # no worker code raised inside an item (those are recorded as item_error gates, and would otherwise pass as 'complete')
     root: Path = synthetic_run["root"]
     for s in stages.REHEARSAL_STAGES:
         m = runner.read_manifest(root, s)
         assert m is not None and m["status"] == "COMPLETE" and m["mode"] == "rehearsal" and m["identity"]["plan_sha256"] == synthetic_run["plan"].sha256()
-    assert (root / "report" / "REPORT.md").is_file() and (root / "analysis" / "analysis.json").is_file()
+    assert (root / "report" / "REPORT.md").is_file() and (root / "analysis" / "analysis.json").is_file() and (root / "confirm" / "confirm.json").is_file()
 
 
 def test_items_come_from_the_rehearsals_plan_and_every_planned_read_exists_or_is_not_applicable(synthetic_run: dict[str, Any]) -> None:
@@ -87,7 +88,8 @@ def test_every_gate_of_every_item_passes_on_records_made_by_p10s1s_own_code(synt
                 assert not any("recall" in n for n in gs)  # fresh checkpoints have no recorded recall: gate 3 does not apply
                 assert all(g["source"].startswith("P10-S1's evaluation functions called from the adapter") for n, g in gs.items() if n.endswith("_counts") and "source" in g)
     assert {"checkpoint_identity", "t0_path", "t0_counts", "f0_counts", "i256_counts", "index_rebuild_i256", "tv1_priors_on_against_off", "t3_against_independent_flat", "t2_against_independent_flat"} <= seen
-    assert {f"index_rebuild_i64_s{s}" for s in core.i64_seeds(CFG)} <= seen
+    assert {f"index_rebuild_i64_s{s}" for s in core.i64_seeds(CFG, test=True)} <= seen
+    assert not any(str(x) in n for x in core.i64_seeds(CFG) for n in seen)  # the rehearsal never reads an index with a registered index seed
 
 
 def test_a2_gates_include_the_adapter_identity_gate_and_stop_before_training_on_a_failure(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
@@ -120,26 +122,178 @@ def test_a2_reads_need_the_training_stage_complete_and_a_completed_stage_is_not_
         stages.execute_stage("a2", plan, ctx2, other, root / "freeze" / "plan.json", repo=ROOT, workers=1, inline=True)
 
 
-def test_the_analysis_and_report_of_the_rehearsal_are_well_formed_and_make_no_claim(synthetic_run: dict[str, Any]) -> None:
+def test_the_analysis_of_the_rehearsal_uses_the_plans_labels_finds_every_record_and_reaches_rows(synthetic_run: dict[str, Any]) -> None:
+    """Audit R2: the analysis takes the plan's labels (the rehearsal's items are not the config's derivation), so every replicate is found; the memories are trained past the information floor, so rows other
+    than NOT EVALUABLE are reached; and no replicate may say 'no item record'."""
     root: Path = synthetic_run["root"]
     full = json.loads((root / "analysis" / "analysis.json").read_text(encoding="utf-8"))
     a1 = full["A1"]
-    assert set(a1["cells"]) == {"128/1K", "128/4K"} and a1["stage_tag"] == core.A1_TAG and full["A2"]["stage_tag"] == core.A2_TAG
-    assert set(full["r_confirm"]) == {"R-CONFIRM-TREE", "R-CONFIRM-INDEX"}
-    for cell in a1["cells"].values():
-        assert set(cell["checkpoints"]) == {"U_P", "RUN", "TRAJ1", "TRAJ2"}
-        for ck in cell["checkpoints"].values():
+    assert set(a1["cells"]) == {"128/1K", "128/4K"} and a1["stage_tag"] == core.A1_TAG
+    assert full["A2"] is None and {v["value"] for v in full["r_confirm"].values()} == {"NOT RUN"}  # A1's record never holds R-CONFIRM: the confirm stage computes it
+    reps = [(ck, comp, r) for c in a1["cells"].values() for ck in c["checkpoints"].values() for comp in ("tree", "index") for r in ck[comp]["replicates"]]
+    assert len(reps) == 2 * 4 * 2 * 5
+    assert not any("no item record" in r["reason"] for _, _, r in reps)
+    rows = {r["row"] for _, _, r in reps}
+    assert rows - {labels.NOT_EVALUABLE}, rows  # at least one row other than NOT EVALUABLE
+    assert any(r["row"] not in (labels.NOT_EVALUABLE,) for ck, comp, r in reps if ck["update"] in (48, 64))
+    for c in a1["cells"].values():
+        assert set(c["checkpoints"]) == {"U_P", "RUN", "TRAJ1", "TRAJ2"} and c["checkpoints"]["U_P"]["update"] == 48 and c["checkpoints"]["RUN"]["update"] == 64
+        for ck in c["checkpoints"].values():
             for comp in ("tree", "index"):
-                assert ck[comp]["label"] in (*labels.TREE_ROWS, *labels.INDEX_ROWS, labels.MIXED)
-                assert len(ck[comp]["replicates"]) == 5 and all(r["draw"] in (1, 2, 3, 4, 5) for r in ck[comp]["replicates"])
-    # every replicate is evaluable (all gates passed): an untrained 16-update memory is at chance, so F0 is a WEAK REFERENCE and the label is NOT EVALUABLE for that reason, not for a gate
-    reasons = {r["reason"] for c in a1["cells"].values() for ck in c["checkpoints"].values() for r in ck["tree"]["replicates"] if r["row"] == labels.NOT_EVALUABLE}
-    assert reasons <= {labels.WEAK, ""} or all("gate" not in x for x in reasons)
+                assert ck[comp]["label"] in (*labels.TREE_ROWS, *labels.INDEX_ROWS, labels.MIXED) and len(ck[comp]["replicates"]) == 5
+    synth = synthetic_run["result"]["synthetic_registry"]
+    assert synth["status"] == "COMPLETE" and not synth["A1"]["no_item_record"] and not synth["A2"]["no_item_record"]
+    assert len(set(synth["A1"]["rows_reached"]) - {labels.NOT_EVALUABLE}) >= 8  # the synthetic registry keyed by the plan's own labels reaches the rows
+    assert {"NOT RUN"} != set(synth["r_confirm"].values())
     text = (root / "report" / "REPORT.md").read_text(encoding="utf-8")
-    assert core.LIMIT_SENTENCE in text and "unproven research" in text and "Astra review: NOT_PERFORMED" in text and "R-DIAGNOSIS-LOADED" in text
+    assert core.LIMIT_SENTENCE in text and "unproven research" in text and "Astra review: NOT_PERFORMED" in text and "R-DIAGNOSIS-LOADED" in text and "accuracy version" in text
     assert report.HEADER in text and "success" not in text.lower().replace("not a success", "")
     ledger = json.loads(next(root.parent.glob("P10IR-rehearsal-*ledger.json")).read_text(encoding="utf-8"))
     assert {e["stage"] for e in ledger["entries"]} == set(stages.REHEARSAL_STAGES) and ledger["total_seconds"] == 8 * 3600.0
+
+
+def test_the_confirm_stage_writes_its_own_record_against_a1s_frozen_one_and_never_rewrites_it(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    from arborlm.io import file_sha256
+
+    root: Path = synthetic_run["root"]
+    plan: Plan = synthetic_run["plan"]
+    a1 = stages.analysis_path(root)
+    rec = core.read_record(stages.confirm_path(root), "confirm")
+    assert rec["a1_analysis_sha256"] == file_sha256(a1)  # A1's record is what it was when the confirmation read it
+    assert set(rec["r_confirm"]) == {"R-CONFIRM-TREE", "R-CONFIRM-INDEX"} and rec["A2"]["stage_tag"] == core.A2_TAG and rec["A2"]["cells"].keys() == {"128/1K", "128/4K"}
+    assert all(v["value"] in ("CONFIRMED", "NOT CONFIRMED", "NOT EVALUABLE", "NOT APPLICABLE") for v in rec["r_confirm"].values())
+    text = (root / "confirm" / "REPORT_CONFIRM.md").read_text(encoding="utf-8")
+    assert "R-CONFIRM-TREE" in text and "R-CONFIRM-INDEX" in text and rec["a1_analysis_sha256"] in text and core.A2_TAG in text and "Astra review: NOT_PERFORMED" in text
+    m = runner.read_manifest(root, "confirm")
+    assert m is not None and m["status"] == "COMPLETE" and runner.read_manifest(root, "analysis")["status"] == "COMPLETE"  # type: ignore[index]
+    ctx = stages.ctx_for(plan, root, run_sealed=True, experiments_root=None)
+    before = file_sha256(a1)
+    with pytest.raises(planmod.StageRefused, match="is COMPLETE"):
+        stages.execute_stage("confirm", plan, ctx, root, root / "freeze" / "plan.json", repo=ROOT, workers=1, inline=True)
+    with pytest.raises(planmod.StageRefused, match="is COMPLETE"):
+        stages.execute_stage("analysis", plan, ctx, root, root / "freeze" / "plan.json", repo=ROOT, workers=1, inline=True)
+    assert file_sha256(a1) == before
+    # it needs A2 complete and A1's analysis: a run directory without them refuses
+    with pytest.raises(planmod.StageRefused, match="is not COMPLETE"):
+        stages.execute_stage("confirm", plan, ctx, tmp_path, root / "freeze" / "plan.json", repo=ROOT, workers=1, inline=True)
+
+
+def test_confirm_computes_every_value_against_the_written_json_of_a1() -> None:
+    """The comparison goes through A1's written record (JSON turns tuples into lists): CONFIRMED and NOT CONFIRMED survive the round trip, CELL-DEPENDENT included."""
+    from studies.p10ir import analysis, synthetic
+
+    cfg = core.load_config()
+    specs = [s for s in core.cell_specs(cfg) if s.role == "primary"]
+
+    def diag(stage: str, tree_b: str) -> Any:
+        plan_rows = {(s.name, cp): ((labels.PRIORS if not (s.name == "32K/16K" and cp == "RUN") else tree_b), labels.NOT_APPROACH) for s in specs for cp in ("U_P", "RUN")}
+        reg = synthetic.full_registry(stage, plan_rows, cfg, lambda arm, sp, d: f"L_{arm}_{sp.name}_{d}", specs=specs, i64_seeds=core.i64_seeds(cfg, test=True))
+        return analysis.analyze_stage(reg, stage, cfg, specs=specs, label_of=lambda arm, sp, d: f"L_{arm}_{sp.name}_{d}", i64_seeds=core.i64_seeds(cfg, test=True))
+
+    a1 = json.loads(json.dumps(analysis.public(diag("A1", labels.CONTENT)), default=str))
+    same = labels.r_confirm(labels.diagnosis_from_json(a1["r_diagnosis"]), diag("A2", labels.CONTENT)["_diagnosis_object"])
+    assert same["R-CONFIRM-TREE"]["value"] == labels.CONFIRMED and same["R-CONFIRM-INDEX"]["value"] == labels.CONFIRMED
+    assert a1["r_diagnosis"]["components"]["tree"]["value"] == labels.CHECKPOINT_DEPENDENT  # PRIORS at U_P in both cells, CELL-DEPENDENT at the run length: the ruled reading
+    other = labels.r_confirm(labels.diagnosis_from_json(a1["r_diagnosis"]), diag("A2", labels.JOINT)["_diagnosis_object"])
+    assert other["R-CONFIRM-TREE"]["value"] == labels.NOT_CONFIRMED and other["R-CONFIRM-INDEX"]["value"] == labels.CONFIRMED
+
+
+def test_gate_1_runs_for_every_checkpoint_in_the_gates_stage_and_stops_the_stage(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    """Ruling 8 (audit R1): the identity links of section 4, for all checkpoints, before any read: file = snapshot.json = train.json entry = plan digest; train.json = the committed train manifest's
+    result_sha256; the data manifests = P10-S1's frozen data_manifests; the draws regenerated. A difference fails the gates stage, and the read stage then refuses."""
+    import shutil
+
+    root: Path = synthetic_run["root"]
+    plan: Plan = synthetic_run["plan"]
+    g = core.read_record(stages.gates_record_path(root, "gates-a1"), "gates_record")["gates"]["gate1_identities"]
+    assert g["passed"] is True and g["checkpoints_checked"] == 80 and g["failed"] == [] and g["draws_regenerated"] == 5 and all(g["manifests"].values())
+    ctx = stages.ctx_for(plan, root, run_sealed=False, experiments_root=None)
+    assert stages.gate1_all(plan, ctx, core.STAGE_A1, ROOT)["passed"] is True
+    copy = tmp_path / "copy"
+    shutil.copytree(root / "s1", copy / "s1")
+    ctx2 = items.Ctx("rehearsal", tmp_path / "run", copy / "s1", None, synthetic=True, sizes={"table_facts": 512, "unseen": 64}, manifests=ctx.manifests)
+    cell = plan.items("A1")[0]["cell"]
+    # (a) train.json no longer hashes to the committed train manifest
+    tj = copy / "s1" / "cells" / cell / "train.json"
+    tj.write_text(tj.read_text(encoding="utf-8") + " ", encoding="utf-8")
+    bad = stages.gate1_all(plan, ctx2, core.STAGE_A1, ROOT)
+    assert bad["passed"] is False and any("train.json" in f for f in bad["failed"])
+    # (b) a data manifest does not hash to P10-S1's frozen data_manifests entry
+    other = json.loads(json.dumps(plan.data))
+    name = next(iter(other["p10s1_frozen_data_manifests"]))
+    other["p10s1_frozen_data_manifests"][name] = "0" * 64
+    bad2 = stages.gate1_all(Plan(other), ctx, core.STAGE_A1, ROOT)
+    assert bad2["passed"] is False and any("frozen data_manifests" in f for f in bad2["failed"])
+    # (c) a plan digest that is not the file's
+    other2 = json.loads(json.dumps(plan.data))
+    k = next(iter(other2["checkpoint_digests"]))
+    other2["checkpoint_digests"][k] = "1" * 64
+    assert stages.gate1_all(Plan(other2), ctx, core.STAGE_A1, ROOT)["passed"] is False
+    # (d) a failed gates record stops the read stage
+    failed = {**core.envelope("gates_record"), "stage": "gates-a1", "passed": False, "failed": ["gate1_identities"]}
+    core.write_record(stages.gates_record_path(tmp_path, "gates-a1"), failed)
+    with pytest.raises(planmod.StageRefused, match="did not all pass"):
+        stages.execute_stage("a1", plan, ctx, tmp_path, root / "freeze" / "plan.json", repo=ROOT, workers=1, inline=True)
+
+
+def test_a_failure_inside_one_item_is_recorded_with_its_scope_and_the_other_checkpoints_run(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    """Ruling 7 (audit R5): a corrupt checkpoint does not fail the task; its item records the failure with its scope, the replicate is NOT EVALUABLE, and the rest of the cell runs."""
+    import shutil
+
+    root: Path = synthetic_run["root"]
+    plan: Plan = synthetic_run["plan"]
+    copy = tmp_path / "s1"
+    shutil.copytree(root / "s1", copy)
+    its = [i for i in plan.items("A1") if i["cell"] == plan.items("A1")[0]["cell"]]
+    victim, other = its[0], its[1]
+    (copy / "cells" / victim["cell"] / "snapshots" / s1stem(victim["update"]) / "model.pt").write_bytes(b"not a checkpoint")
+    ctx = items.Ctx("rehearsal", tmp_path / "run", copy, None, synthetic=True, run_sealed=True, sizes={"table_facts": 512, "unseen": 64}, manifests=stages.ctx_for(plan, root, run_sealed=True, experiments_root=None).manifests, index_seeds=plan.data["i64_seeds"])
+    done = items.run_item(ctx, victim, plan.data["checkpoint_digests"])
+    assert done["complete"] is True and "item_error" in done["gates"] and done["gates"]["item_error"]["passed"] is False and done["gates"]["item_error"]["scope"] in ("tree", "f0")
+    assert done["gates"]["checkpoint_identity"]["passed"] is False or "item_error" in done["gates"]
+    ok = items.run_item(ctx, other, plan.data["checkpoint_digests"])  # the next checkpoint of the cell still runs
+    assert ok["complete"] is True and "item_error" not in ok["gates"]
+    from studies.p10ir import registry
+
+    reg = registry.Registry()
+    reg.put_item(done)
+    ok_scope = registry.scope_ok(done, done["gates"]["item_error"]["scope"])
+    assert ok_scope[0] is False and "item_error" in ok_scope[1]
+
+
+def s1stem(update: int) -> str:
+    from studies.p10s1 import core as s1
+
+    return s1.snapshot_stem(update)
+
+
+def test_a_gate_that_raises_is_recorded_failed_with_its_scope() -> None:
+    """``items.guarded``: an exception inside one gate fails that gate only; a gate already recorded is not recomputed."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        ctx = items.Ctx("rehearsal", Path(tmp), None, None)
+        rec = items.Recorder(ctx, {"stage": "A1", "id": "A1|c|u0000001", "cell": "c", "update": 1})
+        items.guarded(rec, "boom", "index", lambda: (_ for _ in ()).throw(KeyError("x")))
+        items.guarded(rec, "fine", "tree", lambda: gates.gate("tree", True))
+        items.guarded(rec, "boom", "index", lambda: gates.gate("index", True))  # already on disk: not recomputed
+        got = rec.all_gates()
+        assert got["boom"]["passed"] is False and got["boom"]["scope"] == "index" and "KeyError" in got["boom"]["error"] and got["fine"]["passed"] is True
+
+
+def test_the_candidate_phase_fails_closed_on_a_plan_that_is_not_the_registered_one(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    """Ruling 5: the candidate phase rehearses the plan FILE. A plan whose items are not the registered derivation, or whose files are missing, is INCOMPLETE with its problems listed; a rehearsal plan is refused."""
+    plan: Plan = synthetic_run["plan"]
+    with pytest.raises(planmod.StageRefused, match="registered plan"):
+        rehearsal.run_candidate(tmp_path / "c1", repo=ROOT, plan_path=synthetic_run["root"] / "freeze" / "plan.json")
+    data = json.loads(json.dumps(plan.data))
+    data["mode"] = "registered"
+    path = tmp_path / "candidate_plan.json"
+    core.write_record(path, data)
+    res = rehearsal.run_candidate(tmp_path / "c2", repo=ROOT, plan_path=path)
+    assert res["status"] == "INCOMPLETE" and res["plan_file_sha256"] == planmod.file_sha256(path) and any("re-derivation" in p or "280" in p for p in res["problems"])
+    assert res["synthetic_registry"]["status"] == "COMPLETE"  # the analysis, report and confirmation on a synthetic registry keyed by the plan's own labels
+    assert len(set(res["synthetic_registry"]["A1"]["rows_reached"]) - {labels.NOT_EVALUABLE}) >= 8
 
 
 def test_gates_1_and_2_run_on_a_stand_in_for_the_registered_checkpoints_and_never_touch_a_sealed_value(synthetic_run: dict[str, Any], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -174,7 +328,7 @@ def test_gates_1_and_2_fail_closed_when_a_checkpoint_differs(synthetic_run: dict
     copy = tmp_path / "s1copy"
     shutil.copytree(root / "s1", copy)
     one = next(i for i in plan.items("A1") if i["arm"] == "T-OQ" and i["update"] == i["u_p"])
-    pt = copy / "cells" / one["cell"] / "snapshots" / "u0000008" / "model.pt"
+    pt = copy / "cells" / one["cell"] / "snapshots" / s1stem(one["update"]) / "model.pt"
     import torch
 
     payload = torch.load(pt, weights_only=True, map_location="cpu")
@@ -194,7 +348,7 @@ def test_the_real_size_phase_code_path_at_tiny_sizes(tmp_path: Path) -> None:
     cfg["rehearsal"].update({"facts": 128, "slots": 1024, "snapshots": [8, 16]})
     res = rehearsal.run_real(tmp_path / "real", repo=ROOT, workers=1, inline=True, cfg=cfg, synthetic=True, seeds=core.test_seeds(6), init=330699, sizes={"table_facts": 512, "unseen": 64})
     assert all(v["status"] == "COMPLETE" for v in res["stages"].values()) and list(res["stages"]) == ["gates-a1", "a1", "gates-a2", "a2-train", "a2"]
-    assert res["facts"] == 128 and res["slots"] == 1024
+    assert res["facts"] == 128 and res["slots"] == 1024 and res["item_errors"] == []
     keys = list(res["seconds_per_read"])
     assert any("|T0" in k for k in keys) and any("|F0" in k for k in keys) and any("A2|" in k for k in keys) and all(v >= 0 for v in res["seconds_per_read"].values())
     assert set(res["peak_rss_bytes_by_stage"]) == set(res["stages"])

@@ -184,7 +184,10 @@ def test_cell_label_rules() -> None:
     assert labels.cell_label([P, P, P, labels.NOT_EVALUABLE, labels.NOT_EVALUABLE], TH) == labels.NOT_EVALUABLE  # 2 of 5, before the 4-of-5 rule
     assert labels.cell_label([P, P, P, labels.NOT_EVALUABLE, C], TH) == labels.MIXED  # 3 of 5 only
     assert labels.cell_label([labels.NO_GAP] * 5, TH) == labels.NO_GAP
-    assert labels.cell_label([labels.MIXED_PANEL] * 4 + [P], TH) == labels.MIXED_PANEL
+    # ruling 2: a MIXED-PANEL replicate satisfies no condition, so a cell with four of them is MIXED, and so is one with five; no cell is ever labelled MIXED-PANEL
+    assert labels.cell_label([labels.MIXED_PANEL] * 4 + [P], TH) == labels.MIXED
+    assert labels.cell_label([labels.MIXED_PANEL] * 5, TH) == labels.MIXED
+    assert labels.cell_label([P, P, P, P, labels.MIXED_PANEL], TH) == P
     with pytest.raises(ValueError):
         labels.cell_label([P] * 4, TH)
 
@@ -265,7 +268,7 @@ def test_combination_values_and_actions() -> None:
     d = labels.combine(lab(uniform(labels.CANDIDATES), idx), PRIMARY)
     assert d.components["tree"].value == labels.CANDIDATES and d.components["index"].value == labels.CHECKPOINT_DEPENDENT
     assert d.recommended == {"tree": "Improve the router and candidate coverage", "index": None}
-    for no_action in (labels.JOINT, labels.EXACT_SEARCH_HARMS, labels.NOT_IDENTIFIED, labels.NO_GAP, labels.MIXED, labels.MIXED_PANEL):
+    for no_action in (labels.JOINT, labels.EXACT_SEARCH_HARMS, labels.NOT_IDENTIFIED, labels.NO_GAP, labels.MIXED):
         assert labels.combine(lab(uniform(no_action), uniform(labels.NOT_APPROACH)), PRIMARY).recommended["tree"] is None
     assert labels.combine(lab(uniform(labels.CONTENT), uniform(labels.NOT_APPROACH)), PRIMARY).recommended["tree"] == "Improve memory training and representation"  # CONTENT keeps its one action
 

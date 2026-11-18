@@ -21,9 +21,17 @@ PRIMARY = [s.name for s in core.primary_cells(CFG)]
 DEFAULT = (labels.CONTENT, labels.NOT_APPROACH)
 
 
+TEST_SEEDS = core.i64_seeds(CFG, test=True)  # the unit tests never read an index with the registered seeds 298001-298003
+
+
+def label_of(arm: str, spec: core.CellSpec, draw: int) -> str:
+    """Labels that are NOT the config's derivation (as the rehearsal's items are not): the analysis must take its labels from what it is given (audit R2, A12)."""
+    return f"X_{arm}_{spec.name.replace('/', '-')}_d{draw}"
+
+
 def run(stage: str = A1, plan: dict[tuple[str, str], tuple[Any, Any]] | None = None, **kw: Any) -> dict[str, Any]:
-    reg = synthetic.full_registry(stage, plan, CFG)
-    return analysis.analyze_stage(reg, stage, CFG, plateau=synthetic.plateau_series(CFG) if stage == A1 else None, **kw)
+    reg = synthetic.full_registry(stage, plan, CFG, label_of, i64_seeds=TEST_SEEDS)
+    return analysis.analyze_stage(reg, stage, CFG, plateau=synthetic.plateau_series(CFG) if stage == A1 else None, label_of=label_of, i64_seeds=TEST_SEEDS, **kw)
 
 
 def cell(a: dict[str, Any], name: str, cp: str, comp: str) -> str:
@@ -43,14 +51,14 @@ def test_registry_keys_carry_the_read_name_so_two_reads_of_one_cell_never_share_
     with pytest.raises(ValueError):
         core.read_key(A1, "cell", 8192, "T9")  # not a read name
     # every read name of every kind the study makes is a valid key part, and I64's index seed is part of the key
-    names = [*core.TREE_NAMED, *core.FLAT_NAMED, core.tv_name(4, "on"), core.tv_name(4, "off"), core.i64_name(256, 298001), core.i64_name(256, 298002)]
+    names = [*core.TREE_NAMED, *core.FLAT_NAMED, core.tv_name(4, "on"), core.tv_name(4, "off"), core.i64_name(256, 938901), core.i64_name(256, 938902)]
     keys = {core.read_key(A1, "c", 1, n) for n in names}
     assert len(keys) == len(names)
-    assert core.parse_read_key(core.read_key(A1, "c", 1, "I64@256/s298001")) == (A1, "c", 1, "I64@256/s298001")
+    assert core.parse_read_key(core.read_key(A1, "c", 1, "I64@256/s938901")) == (A1, "c", 1, "I64@256/s938901")
 
 
 def test_the_registry_holds_one_record_per_read_of_a_full_synthetic_stage() -> None:
-    reg = synthetic.full_registry(A1, None, CFG)
+    reg = synthetic.full_registry(A1, None, CFG, label_of, i64_seeds=TEST_SEEDS)
     assert len(set(reg.reads)) == len(reg.reads)
     # 7 cells x 4 checkpoints x 5 replicates; each tree checkpoint has 5 named reads plus the sweep reads not aliased to them
     tree_reads = [k for k in reg.reads if "_T-OQ_" in k]
@@ -68,9 +76,14 @@ TREE_PLAN = {
 
 def test_every_tree_row_is_reached_at_a_cell_with_its_known_label() -> None:
     a = run(plan={k: (v, labels.NOT_APPROACH) for k, v in TREE_PLAN.items()})
+    reached = set()
     for (name, cp), want in TREE_PLAN.items():
-        assert cell(a, name, cp, "tree") == want, (name, cp)
-    assert set(TREE_PLAN.values()) == set(labels.TREE_ROWS)
+        rows = {r["row"] for r in a["cells"][name]["checkpoints"][cp]["tree"]["replicates"]}
+        assert rows == {want}, (name, cp)  # every replicate of the cell reached the row
+        reached |= rows
+        # ruling 2: MIXED-PANEL is a replicate row only; a cell of five MIXED-PANEL replicates is MIXED
+        assert cell(a, name, cp, "tree") == (labels.MIXED if want == labels.MIXED_PANEL else want), (name, cp)
+    assert reached == set(labels.TREE_ROWS)
 
 
 def test_fully_and_partly_and_the_mainly_tag_are_printed() -> None:
@@ -137,9 +150,9 @@ def test_mixed_and_cell_level_not_evaluable_and_one_tolerated_replicate() -> Non
 
 
 def test_gate_scopes_tree_f0_and_index() -> None:
-    reg = synthetic.full_registry(A1, None, CFG)
+    reg = synthetic.full_registry(A1, None, CFG, label_of, i64_seeds=TEST_SEEDS)
     spec = core.spec_of(8192, 16384, CFG)
-    of = analysis.default_label_of(A1, CFG)
+    of = label_of
     upd = spec.u_p
     # an index-only failure (the F-OQ item's index gate) voids the index label of the replicate and leaves the tree label
     f_item = reg.item(A1, of("F-OQ", spec, 1), upd)
@@ -147,7 +160,7 @@ def test_gate_scopes_tree_f0_and_index() -> None:
     f_item["gates"]["i256_counts"]["passed"] = False
     assert not scope_ok(f_item, "index")[0] and scope_ok(f_item, "f0")[0]
     assert labels.tree_replicate(analysis.tree_rep(reg, A1, spec, 1, upd, of), core.Thresholds.from_config(CFG)).row == labels.CONTENT
-    assert analysis.index_rep(reg, A1, spec, 1, upd, of, CFG).evaluable is False
+    assert analysis.index_rep(reg, A1, spec, 1, upd, of, CFG, TEST_SEEDS).evaluable is False
     # a F0 failure voids both
     f_item["gates"]["f0_counts"]["passed"] = False
     assert analysis.tree_rep(reg, A1, spec, 1, upd, of).evaluable is False
@@ -155,7 +168,7 @@ def test_gate_scopes_tree_f0_and_index() -> None:
     t_item = reg.item(A1, of("T-OQ", spec, 2), upd)
     assert t_item is not None
     t_item["gates"]["t0_path"]["passed"] = False
-    assert analysis.tree_rep(reg, A1, spec, 2, upd, of).evaluable is False and analysis.index_rep(reg, A1, spec, 2, upd, of, CFG).evaluable is True
+    assert analysis.tree_rep(reg, A1, spec, 2, upd, of).evaluable is False and analysis.index_rep(reg, A1, spec, 2, upd, of, CFG, TEST_SEEDS).evaluable is True
     # a missing or incomplete item is not evaluable, never silently ok
     assert scope_ok(None, "tree") == (False, "no item record")
     assert scope_ok({"complete": False}, "tree")[0] is False
@@ -242,14 +255,14 @@ def test_trajectory_checkpoints_are_printed_and_enter_no_label() -> None:
 
 # --- the plateau check and the STILL LEARNING tags ----------------------------------------------------------------------------------------------------
 def test_both_still_learning_tags() -> None:
-    reg = synthetic.full_registry(A1, None, CFG)
+    reg = synthetic.full_registry(A1, None, CFG, label_of, i64_seeds=TEST_SEEDS)
     tags = {}
     for failing, key in (({"8K/4K:tree": [1, 2]}, "tree"), ({"8K/4K:flat": [3, 4, 5]}, "flat"), ({"8K/4K:tree": [1]}, "one"), ({}, "none")):
-        a = analysis.analyze_stage(reg, A1, CFG, plateau=synthetic.plateau_series(CFG, failing=failing))
+        a = analysis.analyze_stage(reg, A1, CFG, label_of=label_of, i64_seeds=TEST_SEEDS, plateau=synthetic.plateau_series(CFG, failing=failing))
         tags[key] = a["cells"]["8K/4K"]["checkpoints"]["RUN"]["plateau"]["tags"]
         assert "plateau" not in a["cells"]["8K/4K"]["checkpoints"]["U_P"]  # the check is made at the run length only
     assert tags["tree"] == ["TREE STILL LEARNING"] and tags["flat"] == ["FLAT STILL LEARNING"] and tags["one"] == [] and tags["none"] == []
-    both = analysis.analyze_stage(reg, A1, CFG, plateau=synthetic.plateau_series(CFG, failing={"32K/16K:tree": [1, 2], "32K/16K:flat": [1, 2]}))
+    both = analysis.analyze_stage(reg, A1, CFG, label_of=label_of, i64_seeds=TEST_SEEDS, plateau=synthetic.plateau_series(CFG, failing={"32K/16K:tree": [1, 2], "32K/16K:flat": [1, 2]}))
     assert both["cells"]["32K/16K"]["checkpoints"]["RUN"]["plateau"]["tags"] == ["TREE STILL LEARNING", "FLAT STILL LEARNING"]
     assert "plateau" not in both["cells"]["2K/4K"]["checkpoints"]["RUN"]  # primary cells only
     # the tag does not change the label (printed, never compared)
@@ -341,3 +354,49 @@ def test_the_report_prints_no_read_time_cause_banner_and_not_evaluable_cells() -
     ne[("8K/4K", "U_P")] = (labels.NOT_EVALUABLE, labels.NOT_APPROACH)
     text2 = report.render(analysis.analyze_all(run(A1, ne), None))
     assert "NOT EVALUABLE (component, cell, checkpoint): tree / 8K/4K / U_P" in text2 and "R-CONFIRM-TREE: NOT APPLICABLE" in text2
+
+
+# --- rulings 2 and 3, audit R2 and A12 ------------------------------------------------------------------------------------------------------------------
+def test_a_cell_with_four_mixed_panel_replicates_is_mixed_and_one_panel_closure_is_not_p() -> None:
+    mp = labels.MIXED_PANEL
+    a = run(plan={("2K/1K", "U_P"): ([mp, mp, mp, mp, labels.PRIORS], labels.NOT_APPROACH), ("2K/4K", "U_P"): (["ONE-PANEL-CLOSURE"] * 5, labels.NOT_APPROACH)})
+    assert cell(a, "2K/1K", "U_P", "tree") == labels.MIXED
+    assert [r["row"] for r in a["cells"]["2K/1K"]["checkpoints"]["U_P"]["tree"]["replicates"]].count(mp) == 4
+    # T1 closes the gap on Panel A only: P needs both panels, so the replicate is CONTENT (R holds), and that is the cell's label
+    one = a["cells"]["2K/4K"]["checkpoints"]["U_P"]["tree"]["replicates"][0]
+    assert one["row"] == labels.CONTENT and one["tags"]["P"] is False and cell(a, "2K/4K", "U_P", "tree") == labels.CONTENT
+
+
+def test_the_analysis_takes_its_labels_from_what_it_is_given_never_from_the_config() -> None:
+    reg = synthetic.full_registry(A1, None, CFG, label_of, i64_seeds=TEST_SEEDS)
+    # the config's derivation names other cells: every replicate is then "no item record", NOT EVALUABLE; the analysis must be told the plan's labels
+    blind = analysis.analyze_stage(reg, A1, CFG, i64_seeds=TEST_SEEDS)
+    reasons = {r["reason"] for c in blind["cells"].values() for ck in c["checkpoints"].values() for r in ck["tree"]["replicates"]}
+    assert all("no item record" in x for x in reasons) and not blind["r_diagnosis"]["evaluable"]
+    plan_items = [{"cell_name": s.name, "arm": arm, "draw": d, "cell": label_of(arm, s, d)} for s in core.cell_specs(CFG) for arm in ("T-OQ", "F-OQ") for d in range(1, 6)]
+    seen = analysis.analyze_stage(reg, A1, CFG, label_of=analysis.label_of_from_items(plan_items), i64_seeds=TEST_SEEDS)
+    rows = {r["row"] for c in seen["cells"].values() for ck in c["checkpoints"].values() for r in ck["tree"]["replicates"]}
+    assert rows == {labels.CONTENT} and seen["r_diagnosis"]["evaluable"]
+    assert not any("no item record" in r["reason"] for c in seen["cells"].values() for ck in c["checkpoints"].values() for r in ck["tree"]["replicates"])
+
+
+def test_the_accuracy_version_of_the_retention_ratio_is_computed_and_printed_beside_every_comparison() -> None:
+    from studies.p10s1 import core as s1
+
+    a = run(plan={("8K/4K", "U_P"): (labels.PRIORS, labels.SPARSE_APPROACHES)})
+    rep = a["cells"]["8K/4K"]["checkpoints"]["U_P"]["tree"]["replicates"][0]
+    acc = lambda i: s1.i_to_a_use(i)  # noqa: E731 - the synthetic records set accuracy = a_use; acc0 = 0.03 (memory disabled)
+    want = (acc(3.9) - 0.03) / (acc(4.0) - 0.03)
+    assert rep["retention"]["T1"]["A"]["status"] == labels.RESTORED and rep["retention"]["T1"]["A"]["accuracy_version"] == pytest.approx(want)
+    assert rep["retention"]["T3"]["A"]["status"] == labels.NOT_RESTORED and rep["retention"]["T3"]["B"]["accuracy_version"] is not None
+    idx = a["cells"]["8K/4K"]["checkpoints"]["U_P"]["index"]["replicates"][0]["retention"]
+    assert idx["128"]["A"]["status"] == labels.NOT_RESTORED and idx["256"]["A"]["status"] == labels.RESTORED and idx["256"]["A"]["accuracy_version"] == pytest.approx(want)
+    assert set(idx) == {"128", "256", "512", "1024", "2048"}
+    text = report.render(analysis.analyze_all(a, None))
+    assert f"accuracy version {want:.3f}" in text and "retention against F0 per panel A/B" in text and "decides nothing" in text
+    assert "T1 A: RESTORED (accuracy version" in text and "T3 A: NOT RESTORED (accuracy version" in text and "256 A: RESTORED" in text.replace("I64@", "") or "256 A: RESTORED" in text
+
+
+def test_the_convention_of_the_slack_and_the_rulings_are_printed() -> None:
+    text = report.render(analysis.analyze_all(run(plan=uniform_plan(labels.PRIORS, labels.SPARSE_APPROACHES)), None))
+    assert "1e-12" in text and "RULING 2" in text and "RULING 1" in text and "RULING 3" in text

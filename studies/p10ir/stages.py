@@ -1,15 +1,16 @@
 # ruff: noqa: E501
 """P10IR stage driver (ADR-0029 sections 10, 11, 13): ``registered <stage>`` (the entry point the fixed launch scripts call), ``freeze``, ``generate-bridge``, ``rehearse``, ``work`` (the worker processes).
 
-Registered stages, in order: ``gates-a1``, ``a1``, ``gates-a2``, ``a2-train``, ``a2``, ``analysis``, ``report``. Run from the repository root:
+Registered stages, in order: ``gates-a1``, ``a1``, ``analysis``, ``report`` (group A1) and ``gates-a2``, ``a2-train``, ``a2``, ``confirm`` (group A2: R-CONFIRM against A1's frozen analysis record; A1's records are never rewritten). Run from the repository root:
 ``uv run --locked python -m studies.p10ir.stages <command> ...``. Registered stages take the run directory and the freeze commit and nothing else; every other value (items, caps, seeds, paths) comes from
 ``freeze/plan.json`` and ``configs/p10ir_routing.toml``. They REFUSE unless the working tree is clean, the freeze commit is an ancestor of HEAD, the frozen files equal their content at that commit, the plan
 exists and every identity in it holds, and a committed Decision 2 for the stage's group (A1 or A2) names the freeze commit (``plan.check_preconditions``, ``plan.verify_plan``, ``plan.require_decision_2``).
 Every stage derives its items from ``freeze/plan.json`` only. Stages are resumable: a PAUSED stage continues and finished reads are not recomputed; the stage manifest records PAUSED or COMPLETE.
 
-Freeze procedure (nothing here is a freeze until the human lead's commands write ``plan.json``): tests and the independent audit pass; ``rehearse`` (synthetic and real-size cells, gates 1 and 2 on the registered
-checkpoints) writes ``rehearsal.json``; the lead sets the caps in the config from the rehearsal (``caps-proposal``) and clears ``provisional``; ``generate-bridge`` writes the bridge draws' manifests; ``freeze``
-writes ``plan.json``; the freeze commit is made; Decision 2 for A1 (and, separately, for A2) is committed; then ``studies/p10ir/launch/*.sh``.
+Freeze procedure (ADR-0029 section 19 ruling 5; nothing here is a freeze until the human lead's commands write the files): tests and the audit pass; ``generate-bridge`` writes the bridge draws' manifests; the lead sets the caps
+in the config (``caps-proposal``) and clears ``provisional``; ``candidate-plan`` writes ``freeze/plan.json``; ``rehearse`` (candidate plan file, synthetic, real-size cells, gates 1 and 2 on the registered checkpoints)
+writes ``rehearsal.json`` whose candidate section names the plan file's SHA-256; ``freeze`` writes ``freeze/freeze_record.json`` only if the committed plan has that hash; the freeze commit is made; Decision 2 for A1 (and,
+separately, for A2) is committed; then ``studies/p10ir/launch/*.sh``.
 """
 
 import argparse
@@ -23,13 +24,13 @@ from typing import Any
 
 from arborlm.io import file_sha256, read_json
 
-from . import analysis, core, gates, items, report, runner, sealed, stages_io
+from . import analysis, core, gates, items, labels, report, runner, sealed, stages_io
 from . import plan as planmod
 from .plan import Plan, StageRefused
 
 READ_STAGES = {"a1": core.STAGE_A1, "a2": core.STAGE_A2}
 GROUP_STAGES = {core.STAGE_A1: ("gates-a1", "a1", "analysis", "report"), core.STAGE_A2: ("gates-a2", "a2-train", "a2")}
-REHEARSAL_STAGES = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report")
+REHEARSAL_STAGES = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report", "confirm")
 
 
 # --- context and tasks ---------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ def ctx_for(plan: Plan, run_dir: Path, *, run_sealed: bool, experiments_root: Pa
     sizes = dict(d.get("sizes") or {})
     return items.Ctx(
         mode=plan.mode, run_dir=run_dir, s1_run_dir=None if d.get("s1_run_dir") is None else Path(d["s1_run_dir"]), experiments_root=experiments_root, synthetic=bool(d.get("synthetic", False)),
-        run_sealed=run_sealed, config_path=config_path, manifests=manifests, **({"sizes": sizes} if sizes else {}),
+        run_sealed=run_sealed, config_path=config_path, manifests=manifests, index_seeds=d.get("i64_seeds"), **({"sizes": sizes} if sizes else {}),
     )  # fmt: skip
 
 
@@ -137,14 +138,83 @@ def require_gates_passed(run_dir: Path, stage: str) -> dict[str, Any]:
     return rec
 
 
-def rehearsal_record_of(plan: Plan) -> dict[str, Any] | None:
-    ref = plan.data.get("rehearsal")
-    if not ref:
-        return None
-    p = Path(ref["path"])
-    if not p.is_file() or file_sha256(p) != ref["sha256"]:
-        raise StageRefused(f"refused: {p} does not hash to the frozen rehearsal record")
-    return core.read_record(p, "rehearsal")
+def rehearsal_record_of(plan: Plan) -> tuple[dict[str, Any] | None, str | None]:
+    """The rehearsal record the freeze named (registered plans: through ``freeze/freeze_record.json``, which names the SHA-256 of the committed ``plan.json`` and of the rehearsal record) and the SHA-256
+    of the plan file now in force (None for plans without one)."""
+    if plan.path is None:
+        return None, None
+    plan_sha = file_sha256(plan.path)
+    rec_path = plan.path.parent / "freeze_record.json"
+    if plan.mode != planmod.REGISTERED or not rec_path.is_file():
+        return None, plan_sha
+    fr = read_json(rec_path)
+    ref = fr.get("rehearsal") or {}
+    p = Path(ref.get("path", ""))
+    if fr.get("plan_file_sha256") != plan_sha or not p.is_file() or file_sha256(p) != ref.get("sha256"):
+        raise StageRefused("refused: the freeze record's plan or rehearsal record does not hash to what it names")
+    return core.read_record(p, "rehearsal"), plan_sha
+
+
+def gate1_all(plan: Plan, ctx: items.Ctx, group: str, repo: Path) -> dict[str, Any]:
+    """Gate 1 for the whole group, before any read (ruling 8; section 11: a failure stops the stage). Checkpoints (A1): every checkpoint's ``model.pt`` equals the ``model_sha256`` of its ``snapshot.json``, the entry
+    of its cell's ``train.json`` and the digest frozen in the plan; every ``train.json`` hashes to its task's ``result_sha256`` in the committed P10-S1 train manifest; the draws' data manifests hash to
+    P10-S1's frozen ``data_manifests``. Data: every draw of the group is regenerated by the fixed generator and equals its manifest's stream hashes, and each manifest file hashes to the plan's digest.
+    The per-item check stays as a second line."""
+    out: dict[str, Any] = {"failed": [], "checkpoints_checked": 0, "manifests": {}}
+
+    def fail(msg: str) -> None:
+        out["failed"].append(msg)
+
+    for name, rec in (plan.data.get("draw_manifests") or {}).items():
+        if group in rec["groups"]:
+            p = Path(rec["path"])
+            out["manifests"][name] = p.is_file() and file_sha256(p) == rec["sha256"]
+            if not out["manifests"][name]:
+                fail(f"manifest {name} does not hash to the plan's digest")
+    if group == core.STAGE_A1:
+        digests = plan.data.get("checkpoint_digests") or {}
+        cells: set[str] = set()
+        for it in plan.items(core.STAGE_A1):
+            try:
+                g = items.identity_gate(ctx, it, digests.get(f"{it['cell']}|{it['update']}"))
+            except Exception as exc:  # noqa: BLE001
+                g = {"passed": False, "error": type(exc).__name__}
+            out["checkpoints_checked"] += 1
+            cells.add(it["cell"])
+            if g["passed"] is not True:
+                fail(f"checkpoint {it['id']}: {g.get('error') or 'hashes disagree'}")
+        if ctx.mode == planmod.REGISTERED and len(digests) != len(plan.items(core.STAGE_A1)):
+            fail("the plan does not carry a digest for every checkpoint")
+        tm = plan.data.get("p10s1_train_manifest")
+        if tm:
+            p = Path(tm["path"]) if Path(tm["path"]).is_absolute() else repo / tm["path"]
+            if not p.is_file() or file_sha256(p) != tm["sha256"]:
+                fail("the committed train manifest does not hash to the plan's digest")
+            else:
+                by_label = {t["label"]: t.get("result_sha256") for t in read_json(p)["tasks"]}
+                assert ctx.s1_run_dir is not None
+                for label in sorted(cells):
+                    tj = ctx.s1_run_dir / "cells" / label / "train.json"
+                    if not tj.is_file() or file_sha256(tj) != by_label.get(label):
+                        fail(f"train.json of {label} does not hash to the committed train manifest's result_sha256")
+        frozen = plan.data.get("p10s1_frozen_data_manifests")
+        if frozen:
+            for name, rec in (plan.data.get("draw_manifests") or {}).items():
+                if group in rec["groups"] and frozen.get(name) != rec["sha256"]:
+                    fail(f"data manifest {name} does not hash to P10-S1's frozen data_manifests entry")
+    seen: set[tuple[Any, ...]] = set()
+    for it in plan.items(group):
+        key = (it["seed_name"], it["seed_base"], it["table_facts"], it["unseen"])
+        if key in seen:
+            continue
+        seen.add(key)
+        try:
+            items.load_data(ctx, it, verify=True)  # regenerated by the fixed generator and compared with the manifest's stream hashes
+        except Exception as exc:  # noqa: BLE001
+            fail(f"draw {it['seed_name']}: {type(exc).__name__}: {str(exc)[:200]}")
+    out["draws_regenerated"] = len(seen)
+    out["passed"] = not out["failed"] and bool(out["manifests"])
+    return out
 
 
 def run_gate_stage(stage: str, plan: Plan, ctx: items.Ctx, run_dir: Path, *, repo: Path, run_checker: bool = True, adapter_identity: bool = True) -> dict[str, Any]:
@@ -152,17 +222,13 @@ def run_gate_stage(stage: str, plan: Plan, ctx: items.Ctx, run_dir: Path, *, rep
     group = core.STAGE_A1 if stage == "gates-a1" else core.STAGE_A2
     record: dict[str, Any] = {**core.envelope("gates_record"), "stage": stage, "mode": plan.mode, "platform": gates.platform_record(), "gates": {}, "failed": []}
     cfg = ctx.cfg()
-    g1: dict[str, Any] = {"manifests": {}, "checkpoint_digests": len(plan.data.get("checkpoint_digests") or {})}
-    names = [n for n, r in (plan.data.get("draw_manifests") or {}).items() if group in r["groups"]]
-    for name in names:
-        rec = plan.data["draw_manifests"][name]
-        p = Path(rec["path"])
-        g1["manifests"][name] = p.is_file() and file_sha256(p) == rec["sha256"]
-    g1["passed"] = bool(g1["manifests"]) and all(g1["manifests"].values())
-    if group == core.STAGE_A1 and plan.mode == planmod.REGISTERED:
-        g1["passed"] = g1["passed"] and g1["checkpoint_digests"] == len([i for i in plan.items(core.STAGE_A1)])
+    g1 = gate1_all(plan, ctx, group, repo)
     record["gates"]["gate1_identities"] = g1
-    reh = gates.rehearsal_gate(rehearsal_record_of(plan), REHEARSAL_STAGES) if plan.mode == planmod.REGISTERED else {"passed": True, "note": f"{plan.mode} mode"}
+    if plan.mode == planmod.REGISTERED:
+        reh_record, plan_sha = rehearsal_record_of(plan)
+        reh = gates.rehearsal_gate(reh_record, REHEARSAL_STAGES, plan_file_sha256=plan_sha)
+    else:
+        reh = {"passed": True, "note": f"{plan.mode} mode"}
     record["gates"]["gate5_rehearsal"] = reh
     seeds = gates.seed_gate(cfg, run_checker=run_checker and plan.mode == planmod.REGISTERED)
     record["gates"]["gate6_seeds"] = seeds
@@ -221,13 +287,18 @@ def execute_stage(stage: str, plan: Plan, ctx: items.Ctx, run_dir: Path, plan_pa
     if stage.startswith("gates-"):
         rec = run_gate_stage(stage, plan, ctx, run_dir, repo=repo, run_checker=run_checker, adapter_identity=adapter_identity)
         outcomes = {stage: {"status": runner.COMPLETED if rec["passed"] else runner.FAILED, "seconds": time.monotonic() - began, "peak_rss_bytes": 0, "reason": None if rec["passed"] else f"gates failed: {rec['failed']}"}}
-    elif stage in ("analysis", "report"):
+    elif stage in ("analysis", "report", "confirm"):
         outcomes = {stage: {"status": runner.COMPLETED, "seconds": 0.0, "peak_rss_bytes": 0}}
         if stage == "analysis":
             m1 = runner.read_manifest(run_dir, "a1")
             if m1 is None or m1["status"] != "COMPLETE":
                 raise StageRefused("refused: a1 is not COMPLETE: the analysis needs every A1 read")
-        (run_analysis if stage == "analysis" else run_report)(plan, ctx, run_dir)
+        if stage == "confirm":
+            for needed in ("a2", "analysis"):
+                m = runner.read_manifest(run_dir, needed)
+                if m is None or m["status"] != "COMPLETE":
+                    raise StageRefused(f"refused: {needed} is not COMPLETE: the confirmation needs A2's reads and A1's frozen analysis record")
+        {"analysis": run_analysis, "report": run_report, "confirm": run_confirm}[stage](plan, ctx, run_dir)
         outcomes[stage]["seconds"] = time.monotonic() - began
     else:
         if stage in ("a1", "a2-train"):
@@ -303,22 +374,48 @@ def analysis_path(run_dir: Path) -> Path:
 
 
 def run_analysis(plan: Plan, ctx: items.Ctx, run_dir: Path) -> dict[str, Any]:
+    """A1's analysis, from the plan's own items and labels (never the config's). It never looks at A2: R-CONFIRM is the separate ``confirm`` stage's (ruling 9), and this record is never rewritten."""
     from . import registry
 
     cfg = ctx.cfg()
     reg1 = registry.load(run_dir, core.STAGE_A1)
-    a1 = analysis.analyze_stage(reg1, core.STAGE_A1, cfg, plateau=_plateau(plan, ctx), context=_context(plan, ctx), seal_broken=bool(plan.data.get("seal", {}).get("broken")), specs=_specs_of(plan, core.STAGE_A1))
-    m2 = runner.read_manifest(run_dir, "a2")
-    a2 = None
-    complete = False
-    if m2 is not None:
-        complete = m2["status"] == "COMPLETE"
-        if complete:
-            a2 = analysis.analyze_stage(registry.load(run_dir, core.STAGE_A2), core.STAGE_A2, cfg, specs=_specs_of(plan, core.STAGE_A2))
-    full = analysis.analyze_all(a1, a2, a2_complete=complete)
+    a1 = analysis.analyze_stage(
+        reg1, core.STAGE_A1, cfg, plateau=_plateau(plan, ctx), context=_context(plan, ctx), seal_broken=bool(plan.data.get("seal", {}).get("broken")), specs=_specs_of(plan, core.STAGE_A1),
+        label_of=analysis.label_of_from_items(plan.items(core.STAGE_A1)), i64_seeds=ctx.i64(cfg),
+    )  # fmt: skip
+    full = analysis.analyze_all(a1, None, a2_complete=False)
     full["kind"] = "analysis"
-    core.write_record(analysis_path(run_dir), {**core.envelope("analysis"), **full}, overwrite=True)
+    core.write_record(analysis_path(run_dir), {**core.envelope("analysis"), **full})
     return full
+
+
+def confirm_path(run_dir: Path) -> Path:
+    return run_dir / "confirm" / "confirm.json"
+
+
+def run_confirm(plan: Plan, ctx: items.Ctx, run_dir: Path) -> dict[str, Any]:
+    """The ``confirm`` stage (group A2, ruling 9): A2's analysis, and R-CONFIRM-TREE and R-CONFIRM-INDEX against A1's FROZEN analysis record (read from disk; its SHA-256 is recorded). It writes its own record and
+    report section and never rewrites A1's."""
+    from . import registry
+
+    a1_path = analysis_path(run_dir)
+    if not a1_path.is_file():
+        raise StageRefused("refused: no A1 analysis record to confirm against")
+    a1 = read_json(a1_path)
+    cfg = ctx.cfg()
+    a2 = analysis.analyze_stage(
+        registry.load(run_dir, core.STAGE_A2), core.STAGE_A2, cfg, specs=_specs_of(plan, core.STAGE_A2), label_of=analysis.label_of_from_items(plan.items(core.STAGE_A2)), i64_seeds=ctx.i64(cfg),
+    )  # fmt: skip
+    confirm = labels.r_confirm(labels.diagnosis_from_json(a1["A1"]["r_diagnosis"]), a2["_diagnosis_object"], a2_complete=True)
+    record = {
+        **core.envelope("confirm"), "a1_analysis_sha256": file_sha256(a1_path), "A2": analysis.public(a2), "r_confirm": confirm,
+        "statement_allowed": {"caused_by_a_named_factor_at_read_time": labels.may_say_cause(confirm), "training_time_causes": False},
+    }  # fmt: skip
+    core.write_record(confirm_path(run_dir), record)
+    note = f"Mode: {plan.mode}. Plan SHA-256 {plan.sha256()}."
+    out = run_dir / "confirm" / "REPORT_CONFIRM.md"
+    out.write_text(report.render_confirm(record, note), encoding="utf-8")
+    return record
 
 
 def _specs_of(plan: Plan, stage: str) -> list[core.CellSpec]:
@@ -353,6 +450,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     run_dir = Path(args.run_dir)
     planmod.check_preconditions(planmod.REGISTERED, repo, args.freeze_commit)
+    planmod.require_ignored_run_dir(repo, run_dir)
     plan = planmod.load_registered_plan(repo)
     planmod.verify_plan(plan, repo, run_dir)
     planmod.require_decision_2(repo, args.freeze_commit, planmod.STAGE_GROUP[args.name])
@@ -376,8 +474,13 @@ def cmd_work(args: argparse.Namespace) -> int:
         if Path(args.plan) != repo / core.PLAN:
             raise StageRefused(f"refused: the registered plan is {core.PLAN}")
         planmod.check_preconditions(planmod.REGISTERED, repo, args.freeze_commit)
+        planmod.require_ignored_run_dir(repo, run_dir)
         planmod.verify_plan(plan, repo, run_dir)
         planmod.require_decision_2(repo, args.freeze_commit, planmod.STAGE_GROUP[args.stage])
+    if args.run_sealed and plan.mode != planmod.REGISTERED:  # audit A8: a sealed value is compared only in a registered run, or against a rehearsal's own miniature records
+        s1 = plan.data.get("s1_run_dir")
+        if s1 is None or not Path(s1).resolve().is_relative_to(run_dir.resolve()):
+            raise StageRefused("refused: --run-sealed outside registered mode needs P10-S1's records to be the rehearsal's own miniature (inside the run directory)")
     ctx = ctx_for(plan, run_dir, run_sealed=bool(args.run_sealed), experiments_root=None if plan.data.get("synthetic") else _experiments_root())
     labels = [s for s in args.labels.split(",") if s]
     if args.kind == "train":
@@ -428,7 +531,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return freezemod.dispatch(args)
     except StageRefused as exc:
         print(str(exc), file=sys.stderr)
-        return 2
+        return runner.IDENTITY_EXIT if args.command == "work" else 2  # a worker's refusal is PAUSED — IDENTITY (resumable), not a failure
     except core.LedgerRefused as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 2

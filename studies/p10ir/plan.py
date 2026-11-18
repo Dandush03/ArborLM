@@ -24,9 +24,11 @@ from . import core, gates
 
 REGISTERED, REHEARSAL, TEST = "registered", "rehearsal", "test"
 MODES = (REGISTERED, REHEARSAL, TEST)
-REGISTERED_STAGES = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report")
-STAGE_GROUP = {"gates-a1": "A1", "a1": "A1", "gates-a2": "A2", "a2-train": "A2", "a2": "A2", "analysis": "A1", "report": "A1"}
-STAGE_CAP_KEY = {"gates-a1": "a1", "a1": "a1", "gates-a2": "a2", "a2-train": "a2", "a2": "a2", "analysis": "a1", "report": "a1"}
+REGISTERED_STAGES = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report", "confirm")
+STAGE_GROUP = {"gates-a1": "A1", "a1": "A1", "gates-a2": "A2", "a2-train": "A2", "a2": "A2", "analysis": "A1", "report": "A1", "confirm": "A2"}
+STAGE_CAP_KEY = {"gates-a1": "a1", "a1": "a1", "gates-a2": "a2", "a2-train": "a2", "a2": "a2", "analysis": "a1", "report": "a1", "confirm": "a2"}
+FREEZE_RECORD = core.FREEZE_DIR / "freeze_record.json"
+IMPORTED_CODE_ROOTS = ("studies/p10s1", "studies/p9", "studies/p9i")  # imported by every read; immutable by policy, compared between the freeze commit and HEAD (audit A6)
 DECISION_2_GLOB = "results/p10ir-freeze-*/DECISION_2_{group}.md"
 DECISION_RUN_LINE = "DECISION: RUN"
 DECISION_NO_RUN_LINE = "DECISION: DO NOT RUN"
@@ -53,7 +55,7 @@ def frozen_file_hashes(repo: Path) -> dict[str, str]:
     out: dict[str, str] = {}
     for root in FROZEN_ROOTS:
         for p in sorted((repo / root).rglob("*")):
-            if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc" and p != repo / core.PLAN:
+            if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc" and p not in (repo / core.PLAN, repo / FREEZE_RECORD):
                 out[str(p.relative_to(repo))] = file_sha256(p)
     out[str(core.CONFIG)] = file_sha256(repo / core.CONFIG)
     return out
@@ -67,7 +69,7 @@ def adr_provenance(repo: Path) -> dict[str, str]:
 LabelOf = Callable[[str, core.CellSpec, int], str]
 
 
-def read_entries(arm: str, spec: core.CellSpec, cfg: Mapping[str, Any]) -> list[dict[str, Any]]:
+def read_entries(arm: str, spec: core.CellSpec, cfg: Mapping[str, Any], i64: Sequence[int] | None = None) -> list[dict[str, Any]]:
     """Every read of one checkpoint of ``arm`` at ``spec``, each RUN or NOT APPLICABLE with the reason (feasibility is a plan item, never silently skipped, section 6)."""
     out: list[dict[str, Any]] = []
     if arm == "T-OQ":
@@ -84,7 +86,7 @@ def read_entries(arm: str, spec: core.CellSpec, cfg: Mapping[str, Any]) -> list[
     out += [{"name": "F0", "status": "RUN"}, {"name": "I256@512", "status": "RUN"}]
     feasible_b = set(core.feasible_budgets(spec.slots, cfg))
     for c in cfg["reads"]["index_budgets"]:
-        for s in core.i64_seeds(cfg):
+        for s in (list(i64) if i64 else core.i64_seeds(cfg)):
             if int(c) in feasible_b:
                 out.append({"name": core.i64_name(int(c), s), "status": "RUN"})
             else:
@@ -106,6 +108,7 @@ def build_items(
     unseen: int,
     synthetic: bool = False,
     facts_of: Callable[[core.CellSpec], int] | None = None,
+    i64_seeds: Sequence[int] | None = None,
 ) -> list[dict[str, Any]]:
     """One item per checkpoint of every cell of both arms and every draw: A1 70 cells x 4 checkpoints = 280 items, A2 20 cells x 2 = 40 (registered)."""
     items: list[dict[str, Any]] = []
@@ -118,7 +121,7 @@ def build_items(
                     items.append({
                         "id": core.item_id(stage, label, update), "stage": stage, "arm": arm, "cell": label, "cell_name": spec.name, "role": spec.role, "facts": facts_of(spec) if facts_of else spec.facts, "slots": spec.slots,
                         "draw": d, "update": update, "checkpoint": cp, "u_p": spec.u_p, "run": spec.run, "init_seed": seed["init_seed"], "seed_name": seed["name"], "seed_base": seed["base"], "checkpoint_root": checkpoint_root,
-                        "table_facts": table_facts, "unseen": unseen, "synthetic": synthetic, "reads": read_entries(arm, spec, cfg),
+                        "table_facts": table_facts, "unseen": unseen, "synthetic": synthetic, "reads": read_entries(arm, spec, cfg, i64_seeds),
                     })  # fmt: skip
     ids = [i["id"] for i in items]
     if len(set(ids)) != len(ids):
@@ -219,14 +222,14 @@ def build_plan(
         **core.envelope("freeze_plan"), "mode": mode, "adr": adr_provenance(repo), "config_sha256": core.config_sha256(repo / core.CONFIG), "frozen_files": frozen_file_hashes(repo),
         "stage_caps": {k: float(v) for k, v in cfg["caps"].items() if k.endswith("_hours")}, "caps_provisional": bool(cfg["caps"]["provisional"]),
         "run_dir": str(run_dir.resolve()), "s1_run_dir": None if s1_run_dir is None else str(s1_run_dir.resolve()), "items": {k: list(v) for k, v in items.items()},
-        "platform": gates.platform_record(), "seal": {"accesses_declared": SEAL_ACCESSES_DECLARED, "values_opened": False, "broken": False},
+        "i64_seeds": core.i64_seeds(cfg) if mode == REGISTERED else core.i64_seeds(cfg, test=True), "platform": gates.platform_record(), "seal": {"accesses_declared": SEAL_ACCESSES_DECLARED, "values_opened": False, "broken": False},
         "frozen_input_set": "studies/p10ir/** (code, launch scripts, freeze files), the config, freeze/plan.json, stage caps, checkpoint digests, P10-S1's data manifests, the bridge draws' manifests; the ADR text is not in it",
     }  # fmt: skip
     rec.update(dict(extra or {}))
     return rec
 
 
-def verify_plan(plan: Plan, repo: Path, run_dir: Path, *, check_items: bool = True) -> None:
+def verify_plan(plan: Plan, repo: Path, run_dir: Path, *, check_items: bool = True, candidate: bool = False) -> None:
     """Every identity the plan recorded must hold now: the frozen files and the config (SHA-256), the caps (not provisional, equal to the config's), P10-S1's data manifests, the bridge manifests, the
     checkpoint digests' own record, the run directory, and (registered) the items equal to a re-derivation from the config and the seeds."""
     d = plan.data
@@ -240,7 +243,7 @@ def verify_plan(plan: Plan, repo: Path, run_dir: Path, *, check_items: bool = Tr
     caps = {k: float(v) for k, v in cfg["caps"].items() if k.endswith("_hours")}
     if caps != d["stage_caps"]:
         raise StageRefused("refused: the stage caps in the config differ from the plan's")
-    if d["mode"] == REGISTERED and (core.caps_provisional(cfg) or d.get("caps_provisional")):
+    if d["mode"] == REGISTERED and not candidate and (core.caps_provisional(cfg) or d.get("caps_provisional")):
         raise StageRefused("refused: the caps are provisional: the human lead sets them after the rehearsal (section 12)")
     if Path(d["run_dir"]).resolve() != run_dir.resolve():
         raise StageRefused(f"refused: the freeze names the run directory {d['run_dir']}, not {run_dir}")
@@ -248,6 +251,8 @@ def verify_plan(plan: Plan, repo: Path, run_dir: Path, *, check_items: bool = Tr
         p = Path(rec["path"]) if Path(rec["path"]).is_absolute() else repo / rec["path"]
         if not p.is_file() or file_sha256(p) != rec["sha256"]:
             raise StageRefused(f"refused: {p} does not hash to the frozen manifest {name}")
+    if d["mode"] == REGISTERED and not candidate:
+        verify_freeze_record(plan, repo)
     if d["mode"] == REGISTERED and check_items:
         derived = registered_items(cfg)
         if derived != {k: d["items"][k] for k in core.STAGES}:
@@ -271,7 +276,7 @@ def check_preconditions(mode: str, repo: Path, freeze_commit: str | None) -> dic
     full = ok.stdout.decode().strip()
     if git(repo, "merge-base", "--is-ancestor", full, "HEAD").returncode != 0:
         raise StageRefused(f"refused: freeze commit {full} is not an ancestor of HEAD")
-    problems = [f"{p} at HEAD differs from the freeze commit" for p in (*FROZEN_ROOTS, str(core.CONFIG)) if git(repo, "rev-parse", f"{full}:{p}").stdout != git(repo, "rev-parse", f"HEAD:{p}").stdout]
+    problems = [f"{p} at HEAD differs from the freeze commit" for p in (*FROZEN_ROOTS, *IMPORTED_CODE_ROOTS, str(core.CONFIG)) if git(repo, "rev-parse", f"{full}:{p}").stdout != git(repo, "rev-parse", f"HEAD:{p}").stdout]
     if problems:
         raise StageRefused("refused: " + "; ".join(problems))
     bad = gates.platform_problems()
@@ -283,6 +288,16 @@ def check_preconditions(mode: str, repo: Path, freeze_commit: str | None) -> dic
     if not check["ok"]:
         raise StageRefused("refused: frozen inputs do not verify: " + "; ".join(map(str, check["problems"][:5])))
     return {"commit": full, "tree": git(repo, "rev-parse", f"{full}^{{tree}}").stdout.decode().strip()}
+
+
+def require_ignored_run_dir(repo: Path, run_dir: Path) -> None:
+    """A run directory inside the repository must be git-ignored: otherwise the first record makes the tree dirty and every later worker refuses (audit A7)."""
+    try:
+        rel = run_dir.resolve().relative_to(repo.resolve())
+    except ValueError:
+        return  # outside the repository: cannot dirty it
+    if git(repo, "check-ignore", "-q", str(rel) + "/x").returncode != 0:
+        raise StageRefused(f"refused: the run directory {run_dir} is inside the repository and is not git-ignored")
 
 
 def require_decision_2(repo: Path, freeze_commit: str, group: str) -> str:
@@ -299,6 +314,19 @@ def require_decision_2(repo: Path, freeze_commit: str, group: str) -> str:
         if full and full in text and DECISION_RUN_LINE in lines and DECISION_NO_RUN_LINE not in lines:
             return name
     raise StageRefused(f"refused: no committed {pattern} contains the line '{DECISION_RUN_LINE}' (and not '{DECISION_NO_RUN_LINE}') and the full freeze commit {full or freeze_commit}: Decision 2 is recorded there before anything registered runs")
+
+
+def verify_freeze_record(plan: Plan, repo: Path) -> dict[str, Any]:
+    """Ruling 5: the freeze record (``freeze/freeze_record.json``, written by the ``freeze`` command, hashed with the other frozen files) names the SHA-256 of the committed ``plan.json`` file and of the rehearsal
+    record whose candidate section rehearsed that very file. The plan file must hash to it."""
+    path = repo / FREEZE_RECORD
+    if not path.is_file():
+        raise StageRefused(f"refused: no freeze record at {path}")
+    rec = read_json(path)
+    plan_file = repo / core.PLAN
+    if rec.get("kind") != "freeze_record" or rec.get("plan_file_sha256") != file_sha256(plan_file):
+        raise StageRefused("refused: the freeze record does not name the SHA-256 of the committed plan.json")
+    return dict(rec)
 
 
 def load_registered_plan(repo: Path) -> Plan:

@@ -40,7 +40,7 @@ LIMIT_SENTENCE = (
 )
 
 RECORD_KINDS = (
-    "read", "item", "gate", "stage_manifest", "freeze_plan", "analysis", "ledger", "rehearsal", "bridge_manifest", "bridge_train", "identity_gate", "extract", "gates_record", "report_manifest",
+    "read", "item", "gate", "stage_manifest", "freeze_plan", "analysis", "ledger", "rehearsal", "bridge_manifest", "bridge_train", "identity_gate", "extract", "gates_record", "report_manifest", "confirm",
 )  # fmt: skip
 
 # --- the reads (section 6) and their names -----------------------------------------------------------------------------------------
@@ -99,10 +99,10 @@ def repo_root() -> Path:
 
 
 _REQUIRED: dict[str, tuple[str, ...]] = {
-    "thresholds": ("gap_bits", "restored_margin_bits", "restored_ratio", "floor_a_use", "floor_i_bits_printed", "closure", "recall_r", "plateau_gain_bits", "still_learning_min_replicates", "tree_candidates", "replicates", "label_min_replicates", "not_evaluable_min_replicates"),
+    "thresholds": ("gap_bits", "restored_margin_bits", "restored_ratio", "floor_a_use", "floor_i_bits_printed", "h_margin_bits", "closure", "recall_r", "plateau_gain_bits", "still_learning_min_replicates", "tree_candidates", "replicates", "label_min_replicates", "not_evaluable_min_replicates"),
     "gates": ("tie_margin", "weight_tolerance", "tie_share_max"),
     "reads": ("visit_sweep", "index_budgets", "index_list_size", "index_standard_budget", "index_standard_list_size", "lloyd_iterations", "branch_size", "visit_registered", "top", "temperature", "shallow_slots"),
-    "seeds": ("bridge_base", "bridge_stride", "bridge_draws", "bridge_index_offset", "bridge_init_base", "index_seeds", "rehearsal_base", "rehearsal_init", "test_init", "test_range", "p10s1_draw_base", "p10s1_draw_stride", "p10s1_index_offset", "p10s1_init_base", "identity_gate_draw", "identity_gate_updates", "identity_gate_cell"),
+    "seeds": ("bridge_base", "bridge_stride", "bridge_draws", "bridge_index_offset", "bridge_init_base", "index_seeds", "test_index_seeds", "rehearsal_base", "rehearsal_init", "test_init", "test_range", "p10s1_draw_base", "p10s1_draw_stride", "p10s1_index_offset", "p10s1_init_base", "identity_gate_draw", "identity_gate_updates", "identity_gate_cell"),
     "a2": ("learning_rate", "arms", "cells"),
     "resources": ("workers", "rss_worker_bytes", "rss_aggregate_bytes", "eval_chunk_elements"),
     "caps": ("provisional", "rehearsal_hours", "a1_hours", "a2_hours", "total_hours"),
@@ -168,6 +168,7 @@ class Thresholds:
     restored_margin_bits: float
     restored_ratio: float
     floor_i_bits: float
+    h_margin_bits: float
     closure: float
     recall_r: float
     plateau_gain_bits: float
@@ -185,7 +186,7 @@ class Thresholds:
         c = cfg or load_config()
         t, g = c["thresholds"], c["gates"]
         return cls(
-            float(t["gap_bits"]), float(t["restored_margin_bits"]), float(t["restored_ratio"]), floor_i_bits(float(t["floor_a_use"])), float(t["closure"]), float(t["recall_r"]),
+            float(t["gap_bits"]), float(t["restored_margin_bits"]), float(t["restored_ratio"]), floor_i_bits(float(t["floor_a_use"])), float(t["h_margin_bits"]), float(t["closure"]), float(t["recall_r"]),
             float(t["plateau_gain_bits"]), int(t["still_learning_min_replicates"]), int(t["tree_candidates"]), int(t["replicates"]), int(t["label_min_replicates"]), int(t["not_evaluable_min_replicates"]),
             float(g["tie_margin"]), float(g["weight_tolerance"]), float(g["tie_share_max"]),
         )  # fmt: skip
@@ -342,8 +343,9 @@ def seed_set_values(seeds: Any) -> frozenset[int]:
     return s1.set_values(seeds)
 
 
-def i64_seeds(cfg: Mapping[str, Any] | None = None) -> list[int]:
-    return [int(s) for s in (cfg or load_config())["seeds"]["index_seeds"]]
+def i64_seeds(cfg: Mapping[str, Any] | None = None, *, test: bool = False) -> list[int]:
+    """The three I64 index seeds: the registered 298001-298003, or (``test``: rehearsal and unit tests) the test-range values, never the registered ones."""
+    return [int(s) for s in (cfg or load_config())["seeds"]["test_index_seeds" if test else "index_seeds"]]
 
 
 # --- time, envelope, records, ledger --------------------------------------------------------------------------------------------

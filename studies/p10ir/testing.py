@@ -1,22 +1,18 @@
 # ruff: noqa: E501
-"""Helpers of the P10IR tests: tiny synthetic memories, models, data and registries. Seeds are the registry's unit-test range 938001-938999 only (``core.test_seeds``); the backbone is a random
+"""Helpers of the P10IR tests (module of the package so that pytest does not collect it): tiny synthetic memories, models, data and registries. Seeds are the registry's unit-test range 938001-938999 only (``core.test_seeds``); the backbone is a random
 synthetic one; no registered seed, no checkpoint of the experiments directory and no sealed value is touched. Self-check only."""
 
 import functools
-import sys
-from pathlib import Path
 from typing import Any
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import torch
 
-import torch  # noqa: E402
-
-from studies.p9 import controls  # noqa: E402
-from studies.p9 import core as p9core  # noqa: E402
-from studies.p9 import data as d  # noqa: E402
-from studies.p9.model import AdditionSpec  # noqa: E402
-from studies.p10ir import core  # noqa: E402
-from studies.p10s1 import model as s1model  # noqa: E402
+from studies.p9 import controls
+from studies.p9 import core as p9core
+from studies.p9 import data as d
+from studies.p9.model import AdditionSpec
+from studies.p10ir import core
+from studies.p10s1 import model as s1model
 
 CORPUS = bytes((i * 7 + 3) % 256 for i in range(p9core.CORPUS_ROW_BYTES * 64))
 FACTS = 128

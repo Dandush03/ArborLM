@@ -11,12 +11,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
-import test_p10ir_tiny as tiny  # noqa: E402
 import torch  # noqa: E402
 
 from arborlm.io import read_json  # noqa: E402
 from studies.p10ir import adapter, core, freeze, gates, items  # noqa: E402
 from studies.p10ir import plan as planmod
+from studies.p10ir import testing as tiny  # noqa: E402
 from studies.p10s1 import core as s1core  # noqa: E402
 from studies.p10s1 import train as s1train  # noqa: E402
 
@@ -150,8 +150,8 @@ def test_the_snapshot_schedule_of_a_bridge_cell_is_p10s1s_for_the_same_arm_facts
 
 def test_a_bridge_cell_is_built_partial_renamed_when_complete_and_a_failure_is_kept(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     ctx = ctx_at(tmp_path)
-    cell = adapter.bridge_cell("F-OQ", FACTS, 1024, 1, 8, 16, CFG)
-    spec = {"arm": "F-OQ", "facts": FACTS, "slots": 1024, "draw": 1, "init_seed": 330601, "u_p": 8, "run": 16, "seed_name": "p10ir-test-3", "seed_base": 938301, "table_facts": 512, "unseen": 64, "snapshots": [4, 8, 16]}
+    cell = s1core.make_cell("P", "F-OQ", FACTS, 1024, 1, 330698, u_p=8, run_updates=16)
+    spec = {"arm": "F-OQ", "facts": FACTS, "slots": 1024, "draw": 1, "init_seed": 330698, "u_p": 8, "run": 16, "seed_name": "p10ir-test-3", "seed_base": 938301, "table_facts": 512, "unseen": 64, "snapshots": [4, 8, 16]}
     cells = {cell.label: spec}
     rec = adapter.train_bridge_cell(ctx, cell.label, cells)
     root = ctx.run_dir / "A2" / "train" / "cells"
@@ -159,14 +159,14 @@ def test_a_bridge_cell_is_built_partial_renamed_when_complete_and_a_failure_is_k
     assert set(rec["snapshot_sha256"]) == {"4", "8", "16"} and (root / cell.label / "snapshots" / s1core.snapshot_stem(16) / "model.pt").is_file()
     assert adapter.train_bridge_cell(ctx, cell.label, cells)["snapshot_sha256"] == rec["snapshot_sha256"]  # a finished cell is not trained again
     # a killed run leaves a partial directory: the next run removes it and trains the same cell again with the same settings
-    spec2 = {**spec, "draw": 2, "init_seed": 330602}
-    cell2 = adapter.bridge_cell("F-OQ", FACTS, 1024, 2, 8, 16, CFG)
+    spec2 = {**spec, "draw": 2, "init_seed": 330699}
+    cell2 = s1core.make_cell("P", "F-OQ", FACTS, 1024, 2, 330699, u_p=8, run_updates=16)
     (root / f"{cell2.label}.partial" / "snapshots").mkdir(parents=True)
     (root / f"{cell2.label}.partial" / "stale").write_text("killed", encoding="utf-8")
     adapter.train_bridge_cell(ctx, cell2.label, {cell2.label: spec2})
     assert not (root / f"{cell2.label}.partial").exists() and not (root / cell2.label / "stale").exists()
     # a failure is kept and the cell is not re-run
-    cell3 = adapter.bridge_cell("T-OQ", FACTS, 1024, 1, 8, 16, CFG)
+    cell3 = s1core.make_cell("P", "T-OQ", FACTS, 1024, 1, 330698, u_p=8, run_updates=16)
     spec3 = {**spec, "arm": "T-OQ"}
     monkeypatch.setattr(adapter, "run_cell", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("boom")))
     with pytest.raises(RuntimeError, match="boom"):
@@ -174,6 +174,26 @@ def test_a_bridge_cell_is_built_partial_renamed_when_complete_and_a_failure_is_k
     assert (root / f"{cell3.label}.failed.json").is_file()
     with pytest.raises(RuntimeError, match="failed before and is kept"):
         adapter.train_bridge_cell(ctx, cell3.label, {cell3.label: spec3})
-    wrong = {**spec, "init_seed": 330609}
+    wrong = {**spec, "init_seed": 330698, "draw": 1}
     with pytest.raises(ValueError, match="label"):
         adapter.train_bridge_cell(ctx, cell.label.replace("d1", "d4"), {cell.label.replace("d1", "d4"): wrong})
+
+
+def test_the_seed_check_at_the_point_of_training() -> None:
+    """Audit A4: the adapter checks the seeds of the cell it is about to train, not only the plan's items."""
+    good = {"seed_name": "p10ir-bridge-2", "seed_base": 290101, "draw": 2, "init_seed": 330602}
+    adapter.assert_seed_allowed("registered", good, CFG)
+    for bad in (
+        {**good, "seed_base": 290001},  # another draw's set
+        {**good, "seed_name": "p10s1-draw-2", "seed_base": 210101},  # P10-S1's registered draw
+        {**good, "init_seed": 2102},  # P10-S1's initialisation seed
+        {**good, "seed_base": 297101},  # outside the registry's bridge range (the set's index seed would be 297161)
+    ):
+        with pytest.raises(ValueError, match="refused"):
+            adapter.assert_seed_allowed("registered", bad, CFG)
+    test_spec = {"seed_name": "p10ir-test-3", "seed_base": 938301, "draw": 1, "init_seed": 330698}
+    adapter.assert_seed_allowed("rehearsal", test_spec, CFG)
+    adapter.assert_seed_allowed("rehearsal", {"seed_name": "p10ir-rehearsal", "seed_base": 299201, "draw": 1, "init_seed": 330692}, CFG)
+    for bad in ({**test_spec, "seed_base": 290101}, {**test_spec, "seed_base": 210001}, {**test_spec, "init_seed": 330601}):
+        with pytest.raises(ValueError, match="refused"):
+            adapter.assert_seed_allowed("rehearsal", bad, CFG)

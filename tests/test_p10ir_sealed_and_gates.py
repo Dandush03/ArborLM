@@ -5,6 +5,7 @@ Self-check only: not independent review, not Astra validation, not human approva
 
 import copy
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -13,9 +14,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
-import test_p10ir_tiny as tiny  # noqa: E402
 
 from studies.p10ir import core, gates, reads, sealed  # noqa: E402
+from studies.p10ir import testing as tiny  # noqa: E402
 
 CFG = core.load_config()
 TH = core.Thresholds.from_config(CFG)
@@ -138,7 +139,7 @@ def test_bit_exact_gates_are_skipped_elsewhere_and_the_tolerance_gates_still_run
     codes = tiny.unit_queries(60, 938502)
     keys = mem.keys.detach()
     assert gates.exact("tree", lambda: (True, {}), CFG, LINUX) == {"scope": "tree", "passed": None, "status": "skipped", "reason": gates.exact("tree", lambda: (True, {}), CFG, LINUX)["reason"]}
-    assert gates.index_rebuild_gate(keys, 298001, 16, CFG, LINUX)["status"] == "skipped"
+    assert gates.index_rebuild_gate(keys, 938901, 16, CFG, LINUX)["status"] == "skipped"
     assert gates.path_gate(10, 0, CFG, LINUX)["status"] == "skipped" and gates.counts_gate("tree", {"A": {}}, {"A": {}}, source="x", cfg=CFG, record=LINUX)["status"] == "skipped"
     # gate 4 is a tolerance gate: it runs and passes on any platform
     res = gates.exactness_gates(mem, codes, TH, chunk_elements=1 << 20)
@@ -168,7 +169,7 @@ def test_gate_2_helpers_on_the_platform_of_record() -> None:
 def test_seed_gate_passes_with_the_registry_values_and_lists_the_declared_reuse() -> None:
     res = gates.seed_gate(CFG, run_checker=False)
     assert res["passed"], res["problems"]
-    assert res["declared_reuse_not_new"] == {"p10s1_registered_draws_160_values": 160, "adapter_identity_gate_draw_1": 33}
+    assert res["declared_reuse_not_new"] == {"p10s1_registered_draws_160_values": 160, "adapter_identity_gate_draw_1": 38}  # registry section 4.6: 2101, its R2 images 3101-7101 and the 32 values of set 210001
     assert res["roles"]["i64_index_seeds"] == 3 and res["roles"]["initialisation"] == 8 and res["roles"]["rehearsal_set"] == 32
     planned = gates.planned_seed_values(CFG)
     lo, hi = CFG["seed_ranges"]["bridge"]
@@ -224,3 +225,67 @@ def test_rehearsal_gate_needs_every_stage_complete_and_gates_1_and_2_on_the_regi
     ran_gate3 = {**done, "registered_checkpoint_gates": {"gate1_passed": True, "gate2_passed": True, "gate3_run": True}}
     assert gates.rehearsal_gate(ran_gate3, stages)["passed"] is False  # gate 3 is never run before the freeze
     assert gates.rehearsal_gate({**done, "registered_checkpoint_gates": {"gate1_passed": True, "gate2_passed": False, "gate3_run": False}}, stages)["passed"] is False
+
+
+def test_the_declared_reuse_of_the_identity_gate_is_the_registrys_38_values() -> None:
+    vals = gates.declared_reuse(CFG)["adapter_identity_gate_draw_1"]
+    assert len(vals) == 38 and {2101, 3101, 4101, 5101, 6101, 7101} <= vals and 210001 in vals and 210061 in vals
+
+
+def test_the_studys_own_ranges_lie_inside_the_registrys_allocation_rows_of_adr_0029() -> None:
+    """Ruling 6, the separate check: the rows are parsed from the cited checker's ALLOC table and compared with the config's ranges."""
+    text = (ROOT / CFG["seed_ranges"]["checker"]).read_text(encoding="utf-8")
+    rows = gates.allocation_rows(text)
+    assert ("data: bridge draw sets (5)", 290001, 296999) in rows and ("I64 index seeds (3)", 298001, 298999) in rows and ("rehearsal draw set (1)", 299201, 299299) in rows
+    assert ("init sub-row", 330601, 330699) in rows and ("test", 938001, 938999) in rows and len(rows) == 8
+    assert gates.allocation_problems(CFG, rows) == []
+    bad = copy.deepcopy(dict(CFG))
+    bad["seed_ranges"] = {**CFG["seed_ranges"], "bridge": [290001, 299999]}
+    assert any("bridge" in p for p in gates.allocation_problems(bad, rows))
+    # the test index seeds the rehearsal and the tests use are in the test range, and are not the registered index seeds
+    t = core.i64_seeds(CFG, test=True)
+    assert all(938001 <= v <= 938999 for v in t) and not set(t) & set(core.i64_seeds(CFG))
+    assert set(t) <= gates.planned_seed_values(CFG)["test_index_seeds"]
+
+
+def test_gate_4_and_the_fact_passes_run_without_autograd() -> None:
+    """Audit B1: the checkpoint's keys and router are Parameters; nothing a read or a gate returns may carry a graph."""
+    mem = tiny.tree_memory(4, 938601)
+    mem.keys.requires_grad_(True)
+    mem.router.requires_grad_(True)
+    q = tiny.unit_queries(40, 938602)
+    out = reads.tree_path(mem.keys, mem.router, q, 2, True, True, per=256, chunk_elements=1 << 20)
+    for t in (out.values, out.ids, out.branch_ids, out.routes, reads.exhaustive_top(mem.keys, q, 8, 1 << 20)[0], reads.independent_flat(mem.keys, mem.router, q, True, per=256, chunk_elements=1 << 20)[0]):
+        assert t.grad_fn is None and not t.requires_grad
+    res = reads.tree_fact_pass(mem, q, reads.tree_read_specs(1024, CFG), chunk_elements=1 << 20)
+    assert all(isinstance(v, float) for e in res.values() for v in e["facts"].values())
+    ids, vals = gates._collect(lambda x: (lambda o: (o.values, o.ids))(reads.tree_path(mem.keys, mem.router, x, 4, True, True, per=256, chunk_elements=1 << 20)), q, 16)
+    assert ids.grad_fn is None and vals.grad_fn is None and not vals.requires_grad
+    assert all(g["passed"] is True for g in gates.exactness_gates(mem, q, TH, chunk_elements=1 << 20).values())
+
+
+def test_fact_pass_memory_does_not_grow_with_the_number_of_facts() -> None:
+    """Audit B1, memory bound: 16,384 slots, 256 facts, keys that are Parameters: the peak RSS must grow by well under 100 MiB (with autograd on it grew by 841.6 MiB). A fresh process, so that the peak is this pass's."""
+    code = f"""
+import resource, sys
+sys.path.insert(0, {str(ROOT)!r})
+import torch
+from torch.nn import functional as F
+from studies.p9.model import AdditionSpec
+from studies.p10ir import core, reads
+from studies.p10s1.model import S1Memory
+torch.set_num_threads(1)
+mem = S1Memory(AdditionSpec("learned_tree", 16384, 16, "R1", 64, 0), 938801)
+assert mem.keys.requires_grad and mem.router.requires_grad
+g = torch.Generator().manual_seed(938802)
+q = F.normalize(torch.randn(256, 16, generator=g), dim=-1)
+specs = [s for s in reads.tree_read_specs(16384) if s.name in ("T0", "T1", "T1w", "T3", "T2")]
+before = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+reads.tree_fact_pass(mem, q, specs, chunk_elements=1 << 20)
+after = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+print((after - before) / 2**20)
+"""
+    out = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, timeout=600, check=False)
+    assert out.returncode == 0, out.stderr[-800:]
+    growth = float(out.stdout.strip().splitlines()[-1])
+    assert growth < 100.0, f"peak RSS grew by {growth:.1f} MiB"

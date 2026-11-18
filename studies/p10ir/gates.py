@@ -70,6 +70,7 @@ def exact(scope: str, fn: Callable[[], tuple[bool, dict[str, Any]]], cfg: Mappin
 
 
 # --- gate 4: exactness identities, with the precision each can have ---------------------------------------------------------------------------------------------
+@torch.no_grad()
 def compare_selection(a_ids: "Tensor", a_vals: "Tensor", b_ids: "Tensor", b_vals: "Tensor", th: core.Thresholds) -> dict[str, Any]:
     """Two reads of the same facts (``[F, >= 9]`` ids and scores in selection order, scores = cos / 0.2 plus any prior, float32): the selected sets must be identical except at float ties, which are counted
     (more than ``tie_share_max`` of the facts fails the gate); weights equal within ``weight_tolerance`` absolute, slot by slot (aligned by slot id), on the facts whose sets are identical. A fact's
@@ -97,6 +98,7 @@ def compare_selection(a_ids: "Tensor", a_vals: "Tensor", b_ids: "Tensor", b_vals
     }  # fmt: skip
 
 
+@torch.no_grad()
 def _collect(fn: Callable[["Tensor"], "tuple[Tensor, Tensor]"], codes: "Tensor", chunk: int) -> "tuple[Tensor, Tensor]":
     ids, vals = [], []
     for start in range(0, codes.shape[0], chunk):
@@ -106,6 +108,7 @@ def _collect(fn: Callable[["Tensor"], "tuple[Tensor, Tensor]"], codes: "Tensor",
     return torch.cat(ids), torch.cat(vals)
 
 
+@torch.no_grad()
 def exactness_gates(source: "S1Memory", codes: "Tensor", th: core.Thresholds, *, chunk_elements: int, chunk: int = reads.FACT_CHUNK) -> dict[str, dict[str, Any]]:
     """The tolerance gates of one tree checkpoint, all at fact level over the facts' oracle codes:
 
@@ -199,7 +202,7 @@ def planned_seed_values(cfg: Mapping[str, Any] | None = None) -> dict[str, froze
     inits = {core.bridge_init_seed(d, c) for d in range(1, int(c["seeds"]["bridge_draws"]) + 1)} | {int(c["seeds"]["rehearsal_init"])} | {int(x) for x in c["seeds"]["test_init"]}
     derived = {i + k for i in inits for k in s1core.DERIVED_INIT_OFFSETS}
     return {
-        "bridge_sets": frozenset(bridge), "i64_index_seeds": frozenset(core.i64_seeds(c)), "rehearsal_set": frozenset(core.seed_set_values(core.rehearsal_seeds(c))), "initialisation": frozenset(inits),
+        "bridge_sets": frozenset(bridge), "i64_index_seeds": frozenset(core.i64_seeds(c)), "test_index_seeds": frozenset(core.i64_seeds(c, test=True)), "rehearsal_set": frozenset(core.seed_set_values(core.rehearsal_seeds(c))), "initialisation": frozenset(inits),
         "derived_initialisation": frozenset(derived), "test_sets": frozenset(v for k in range(9) for v in core.seed_set_values(core.test_seeds(k, c))),
     }  # fmt: skip
 
@@ -207,7 +210,9 @@ def planned_seed_values(cfg: Mapping[str, Any] | None = None) -> dict[str, froze
 def declared_reuse(cfg: Mapping[str, Any] | None = None) -> dict[str, frozenset[int]]:
     c = cfg or core.load_config()
     p10s1 = frozenset(v for d in range(1, 6) for v in core.seed_set_values(core.p10s1_draw_seeds(d, c)))
-    gate_cell = frozenset([int(c["seeds"]["p10s1_init_base"]) + int(c["seeds"]["identity_gate_draw"]), *core.seed_set_values(core.p10s1_draw_seeds(int(c["seeds"]["identity_gate_draw"]), c))])
+    init = int(c["seeds"]["p10s1_init_base"]) + int(c["seeds"]["identity_gate_draw"])
+    images = [init + k for k in s1core.DERIVED_INIT_OFFSETS]  # 3101 .. 7101 (the R2 images of the initialisation seed)
+    gate_cell = frozenset([init, *images, *core.seed_set_values(core.p10s1_draw_seeds(int(c["seeds"]["identity_gate_draw"]), c))])  # 38 values: registry section 4.6
     return {"p10s1_registered_draws_160_values": p10s1, "adapter_identity_gate_draw_1": gate_cell}
 
 
@@ -220,6 +225,24 @@ CHECKER_SUBSTITUTIONS: tuple[tuple[str, str], ...] = (
     ('for path in sorted((ROOT / "configs").glob("*.toml")):', 'for path in [q for q in sorted((ROOT / "configs").glob("*.toml")) if q.name != "p10ir_routing.toml"]:'),
     ('for path in sorted((ROOT / d).rglob("*.py")):', 'for path in [q for q in sorted((ROOT / d).rglob("*.py")) if "p10ir" not in q.name and "p10ir" not in q.parts]:'),
 )
+
+
+def allocation_rows(checker_text: str) -> list[tuple[str, int, int]]:
+    """The rows of ADR-0029 in the cited checker's ``ALLOC`` table: (role, low, high)."""
+    import re
+
+    return [(m[1], int(m[2]), int(m[3])) for m in re.finditer(r'\("P10-I-R ADR-0029", "([^"]*)", (\d+), (\d+)\)', checker_text)]
+
+
+def allocation_problems(cfg: Mapping[str, Any], rows: Sequence[tuple[str, int, int]]) -> list[str]:
+    """Ruling 6, the separate check: every range the config assigns to a role of this study lies inside the registry's ALLOC row of that role, and every planned value inside the config's range of its role."""
+    want = {"bridge": "data: bridge draw sets", "index": "I64 index seeds", "rehearsal": "rehearsal draw set", "init": "init sub-row", "test": "test"}
+    problems = []
+    for key, prefix in want.items():
+        lo, hi = (int(x) for x in cfg["seed_ranges"][key])
+        if not any(r[0].startswith(prefix) and r[1] <= lo and hi <= r[2] for r in rows):
+            problems.append(f"the config's {key} range {lo}-{hi} is not inside a registry allocation row '{prefix}...' of ADR-0029")
+    return problems
 
 
 def checker_copy(original: str, root: Path) -> str:
@@ -252,7 +275,7 @@ def seed_gate(cfg: Mapping[str, Any] | None = None, *, root: Path | None = None,
     ranges = c["seed_ranges"]
     planned = planned_seed_values(c)
     allowed = {
-        "bridge_sets": [ranges["bridge"]], "i64_index_seeds": [ranges["index"]], "rehearsal_set": [ranges["rehearsal"]], "initialisation": [ranges["init"]], "derived_initialisation": [],
+        "bridge_sets": [ranges["bridge"]], "i64_index_seeds": [ranges["index"]], "test_index_seeds": [ranges["test"]], "rehearsal_set": [ranges["rehearsal"]], "initialisation": [ranges["init"]], "derived_initialisation": [],
         "test_sets": [ranges["test"]],
     }  # fmt: skip
     problems: list[str] = []
@@ -280,7 +303,11 @@ def seed_gate(cfg: Mapping[str, Any] | None = None, *, root: Path | None = None,
         checker["sha256"] = file_sha256(checker_path)
         if checker["sha256"] != ranges["checker_sha256"]:
             problems.append("the registry checker file differs from the SHA-256 the ADR cites")
-        elif run_checker:
+        else:
+            rows = allocation_rows(checker_path.read_text(encoding="utf-8"))
+            checker["allocation_rows"] = len(rows)
+            problems += allocation_problems(c, rows) if rows else ["no ADR-0029 rows in the checker's ALLOC table"]
+        if checker["sha256"] == ranges["checker_sha256"] and run_checker:
             checker.update(run_checker_copy(checker_path, base, timeout))
             if checker["returncode"] != 0 or checker["result_line"] != "RESULT: PASS":
                 problems.append(f"the extended registry checker did not print RESULT: PASS (returncode {checker['returncode']}, {checker['result_line']})")
@@ -292,13 +319,22 @@ def seed_gate(cfg: Mapping[str, Any] | None = None, *, root: Path | None = None,
     }  # fmt: skip
 
 
-def rehearsal_gate(record: Mapping[str, Any] | None, required: Sequence[str]) -> dict[str, Any]:
-    """Gate 5: the rehearsal record (``stages.cmd_rehearse``) says every required stage ran end to end against the rehearsal's own frozen plan with status COMPLETE, and that gates 1 and 2 were run on the
-    registered checkpoints themselves and passed (they compare counts already seen, so this observes nothing new; gate 3 is not run before the freeze)."""
+def rehearsal_gate(record: Mapping[str, Any] | None, required: Sequence[str], *, plan_file_sha256: str | None = None) -> dict[str, Any]:
+    """Gate 5: the rehearsal record (``rehearsal.py``) says every required stage ran end to end against the rehearsal's plans with status COMPLETE, that gates 1 and 2 were run on the registered checkpoints
+    themselves and passed (they compare counts already seen, so this observes nothing new; gate 3 is not run before the freeze), and (ruling 5), when ``plan_file_sha256`` is given, that the candidate
+    ``plan.json`` was rehearsed and that the record names the SHA-256 of the file now in ``freeze/``."""
     if record is None:
         return {"passed": False, "missing": list(required), "reason": "no rehearsal record"}
     done = {s: v for s, v in (record.get("stages") or {}).items() if v.get("status") == "COMPLETE"}
     missing = [s for s in required if s not in done]
     registered = record.get("registered_checkpoint_gates") or {}
     ok_registered = registered.get("gate1_passed") is True and registered.get("gate2_passed") is True and registered.get("gate3_run") is False
-    return {"passed": not missing and ok_registered, "missing": missing, "registered_checkpoint_gates_ok": ok_registered}
+    out: dict[str, Any] = {"missing": missing, "registered_checkpoint_gates_ok": ok_registered}
+    ok = not missing and ok_registered
+    if plan_file_sha256 is not None:
+        cand = record.get("candidate") or {}
+        ok_plan = cand.get("status") == "COMPLETE" and cand.get("plan_file_sha256") == plan_file_sha256
+        out["candidate_plan_rehearsed_with_this_file"] = ok_plan
+        ok = ok and ok_plan
+    out["passed"] = ok
+    return out

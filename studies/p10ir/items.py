@@ -44,10 +44,15 @@ class Ctx:
     run_sealed: bool = False
     config_path: Path | None = None
     manifests: dict[str, Path] = field(default_factory=dict)
+    index_seeds: list[int] | None = None
     sizes: dict[str, int] = field(default_factory=lambda: {"table_facts": s1core.FACT_TABLE, "unseen": s1core.UNSEEN_FACTS})
 
     def cfg(self) -> Any:
         return core.load_config(self.config_path)
+
+    def i64(self, cfg: Any = None) -> list[int]:
+        """The three I64 index seeds of this run: the plan's (rehearsal and tests: test-range values), else the registered ones of the config."""
+        return list(self.index_seeds) if self.index_seeds else core.i64_seeds(cfg or self.cfg())
 
     def snapshot_dir(self, item: dict[str, Any]) -> Path:
         root = self.s1_run_dir if item["checkpoint_root"] == "s1" else self.run_dir / "A2" / "train"
@@ -200,11 +205,31 @@ def reference_counts(ctx: Ctx, item: dict[str, Any], model: P10S1Model, data: An
     return {p: {k: int(rec["panels"][p][k]) for k in sealed.COUNT_KEYS} for p in sealed.PANELS}, {"source": "P10-S1's evaluation functions called from the adapter"}
 
 
+def guarded(rec: "Recorder", name: str, scope: str, fn: Any) -> None:
+    """Compute and record one gate; an exception inside it is recorded as that gate FAILED with its scope (the message holds no recorded value), so that the other gates and the other checkpoints of the
+    cell still run and the replicate is NOT EVALUABLE (ruling 7). A gate already on disk is not recomputed."""
+    if rec.has_gate(name):
+        return
+    try:
+        g = fn()
+    except Exception as exc:  # noqa: BLE001 - recorded, with its scope
+        g = gates.gate(scope, False, error=f"{type(exc).__name__}: {str(exc)[:300]}")
+    rec.put_gate(name, g)
+
+
+def check_identity_first(ctx: "Ctx", item: dict[str, Any], rec: "Recorder", plan_digest: str | None, scope: str) -> None:
+    """The per-item identity check, the second line behind gate 1 of the gates stage (ruling 8): made BEFORE the checkpoint is loaded or a read is computed; a checkpoint that is not the frozen one is not read."""
+    guarded(rec, "checkpoint_identity", scope, lambda: identity_gate(ctx, item, plan_digest))
+    if rec.all_gates()["checkpoint_identity"].get("passed") is False:
+        raise RuntimeError("the checkpoint is not the frozen one (identity gate failed): nothing of it is read")
+
+
 # --- a tree checkpoint ----------------------------------------------------------------------------------------------------------------------------------
 def run_tree_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: str | None) -> None:
     cfg = ctx.cfg()
     th = core.Thresholds.from_config(cfg)
     chunk = int(cfg["resources"]["eval_chunk_elements"])
+    check_identity_first(ctx, item, rec, plan_digest, "tree")
     data, seeds = load_data(ctx, item)
     model = load_model(ctx, item, seeds)
     facts = int(item["facts"])
@@ -216,8 +241,6 @@ def run_tree_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
     codes = s1eval.fact_codes(model, data, facts)
     pending = [s for s in specs if not rec.has_read(s.name)]
     stats = reads.tree_fact_pass(source, codes, specs, chunk_elements=chunk) if pending else {}
-    if not rec.has_gate("checkpoint_identity"):
-        rec.put_gate("checkpoint_identity", identity_gate(ctx, item, plan_digest))
     for spec in pending:
         mem = reads.TreeReadMemory(source, spec, verify=spec.name == "T0")
         began = time.monotonic()
@@ -228,36 +251,48 @@ def run_tree_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
             extra["path_check"] = {"checked": mem.checked, "mismatched": mem.mismatched}
         rec.put_read(spec.name, reads.read_record(item["stage"], item["cell"], item["update"], spec.name, counts, facts=stats.get(spec.name), extra=extra, seconds=time.monotonic() - began))
     t0 = rec.get_read("T0")
-    if not rec.has_gate("t0_path"):
-        rec.put_gate("t0_path", gates.path_gate(int(t0["path_check"]["checked"]), int(t0["path_check"]["mismatched"]), cfg))
-    if not rec.has_gate("t0_counts"):
+    guarded(rec, "t0_path", "tree", lambda: gates.path_gate(int(t0["path_check"]["checked"]), int(t0["path_check"]["mismatched"]), cfg))
+
+    def t0_counts() -> dict[str, Any]:
         ref, extra_ref = reference_counts(ctx, item, model, data, seeds, "main")
-        rec.put_gate("t0_counts", gates.counts_gate("tree", panel_counts_of(t0), ref, source=extra_ref["source"], cfg=cfg))
-    if item["stage"] == core.STAGE_A1 and item["update"] == item["u_p"] and ctx.run_sealed and not rec.has_gate("tree_recall_reproduction"):
-        value = s1eval.tree_recall(model, codes)  # P10-S1's own definition, on the checkpoint's own memory; consumed here, never stored or printed
-        assert ctx.s1_run_dir is not None
-        rec.put_gate("tree_recall_reproduction", gates.recall_gates(ctx.s1_run_dir, item["cell"], None, item["update"], tree_recall_value=value, ivf_recall_value=None, cfg=cfg)["tree_recall_reproduction"])
-        del value
-    if not all(rec.has_gate(n) for n in ("tv1_priors_on_against_off", "t3_against_independent_flat", "t2_against_independent_flat")):
-        for name, g in gates.exactness_gates(source, codes, th, chunk_elements=chunk).items():
-            rec.put_gate(name, g)
+        return gates.counts_gate("tree", panel_counts_of(t0), ref, source=extra_ref["source"], cfg=cfg)
+
+    guarded(rec, "t0_counts", "tree", t0_counts)
+    if item["stage"] == core.STAGE_A1 and item["update"] == item["u_p"] and ctx.run_sealed:
+
+        def recall() -> dict[str, Any]:
+            value = s1eval.tree_recall(model, codes)  # P10-S1's own definition, on the checkpoint's own memory; consumed here, never stored or printed
+            assert ctx.s1_run_dir is not None
+            out = gates.recall_gates(ctx.s1_run_dir, item["cell"], None, item["update"], tree_recall_value=value, ivf_recall_value=None, cfg=cfg)["tree_recall_reproduction"]
+            del value
+            return out
+
+        guarded(rec, "tree_recall_reproduction", "tree", recall)
+    names = ("tv1_priors_on_against_off", "t3_against_independent_flat", "t2_against_independent_flat")
+    if not all(rec.has_gate(n) for n in names):
+        try:
+            for name, g in gates.exactness_gates(source, codes, th, chunk_elements=chunk).items():
+                rec.put_gate(name, g)
+        except Exception as exc:  # noqa: BLE001
+            for name in names:
+                if not rec.has_gate(name):
+                    rec.put_gate(name, gates.gate("tree", False, error=f"{type(exc).__name__}: {str(exc)[:300]}"))
 
 
 # --- a flat checkpoint ---------------------------------------------------------------------------------------------------------------------------------------
 def run_flat_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: str | None) -> None:
     cfg = ctx.cfg()
+    check_identity_first(ctx, item, rec, plan_digest, "f0")
     data, seeds = load_data(ctx, item)
     model = load_model(ctx, item, seeds)
     facts, slots = int(item["facts"]), int(item["slots"])
     source = model.addition
-    seeds_i64 = core.i64_seeds(cfg)
+    seeds_i64 = ctx.i64(cfg)
     planned = {r["name"] for r in item["reads"] if r["status"] == "RUN"}
     budgets = core.feasible_budgets(slots, cfg)
     want = {"F0", "I256@512", *(core.i64_name(c, s) for c in budgets for s in seeds_i64)}
     if planned != want:
         raise ValueError("the plan's reads for this item differ from the reads of this slot count")
-    if not rec.has_gate("checkpoint_identity"):
-        rec.put_gate("checkpoint_identity", identity_gate(ctx, item, plan_digest))
     codes = s1eval.fact_codes(model, data, facts)
     idx256 = s1index.build_index(source.keys.detach(), s1core.index_seed(seeds))
     idx64 = {s: s1index.build_index(source.keys.detach(), s, slots // int(cfg["reads"]["index_list_size"])) for s in seeds_i64}
@@ -279,13 +314,20 @@ def run_flat_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
         ivf, idx = s1eval.ivf_model(model, seeds)
         counts = reads.read_counts(ivf, data, facts, seeds)
         recall = float(counts["measured"]["recall_of_exhaustive_top8"])  # P10-S1's quantity: consumed by gate 3(b) here, dropped by read_record
-        ref, extra_ref = reference_counts(ctx, item, model, data, seeds, "ivf")
-        same_hash = idx.sha256() == extra_ref["recorded_index"]["index_sha256"] and idx.lists == extra_ref["recorded_index"]["index_lists"]
-        if not rec.has_gate("i256_counts"):
-            rec.put_gate("i256_counts", gates.counts_gate("index", panel_counts_of({"panels": counts["panels"]}), ref, source=extra_ref["source"], cfg=cfg, extra_equal={"index_hash_equal": same_hash}))
-        if item["stage"] == core.STAGE_A1 and ctx.run_sealed and not rec.has_gate("ivf_recall_reproduction"):
-            assert ctx.s1_run_dir is not None
-            rec.put_gate("ivf_recall_reproduction", gates.recall_gates(ctx.s1_run_dir, None, item["cell"], item["update"], tree_recall_value=None, ivf_recall_value=recall, cfg=cfg)["ivf_recall_reproduction"])
+
+        def i256_gate() -> dict[str, Any]:
+            ref, extra_ref = reference_counts(ctx, item, model, data, seeds, "ivf")
+            same_hash = idx.sha256() == extra_ref["recorded_index"]["index_sha256"] and idx.lists == extra_ref["recorded_index"]["index_lists"]
+            return gates.counts_gate("index", panel_counts_of({"panels": counts["panels"]}), ref, source=extra_ref["source"], cfg=cfg, extra_equal={"index_hash_equal": same_hash})
+
+        guarded(rec, "i256_counts", "index", i256_gate)
+        if item["stage"] == core.STAGE_A1 and ctx.run_sealed:
+
+            def ivf_recall() -> dict[str, Any]:
+                assert ctx.s1_run_dir is not None
+                return gates.recall_gates(ctx.s1_run_dir, None, item["cell"], item["update"], tree_recall_value=None, ivf_recall_value=recall, cfg=cfg)["ivf_recall_reproduction"]
+
+            guarded(rec, "ivf_recall_reproduction", "index", ivf_recall)
         del recall
         put("I256@512", counts, time.monotonic() - began, {"index_sha256": idx.sha256(), "index_lists": idx.lists})
     for c in budgets:
@@ -297,14 +339,15 @@ def run_flat_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
                 with reads.swapped_addition(model, mem):
                     counts = reads.read_counts(model, data, facts, seeds)
                 put(name, counts, time.monotonic() - began, {"index_seed": s, "budget": c, "index_sha256": idx64[s].sha256(), "index_lists": idx64[s].lists})
-    if not rec.has_gate("f0_counts"):
+
+    def f0_gate() -> dict[str, Any]:
         ref, extra_ref = reference_counts(ctx, item, model, data, seeds, "main")
-        rec.put_gate("f0_counts", gates.counts_gate("f0", panel_counts_of(rec.get_read("F0")), ref, source=extra_ref["source"], cfg=cfg))
-    if not rec.has_gate("index_rebuild_i256"):
-        rec.put_gate("index_rebuild_i256", gates.index_rebuild_gate(source.keys.detach(), s1core.index_seed(seeds), None, cfg))
+        return gates.counts_gate("f0", panel_counts_of(rec.get_read("F0")), ref, source=extra_ref["source"], cfg=cfg)
+
+    guarded(rec, "f0_counts", "f0", f0_gate)
+    guarded(rec, "index_rebuild_i256", "index", lambda: gates.index_rebuild_gate(source.keys.detach(), s1core.index_seed(seeds), None, cfg))
     for s in seeds_i64:
-        if not rec.has_gate(f"index_rebuild_i64_s{s}"):
-            rec.put_gate(f"index_rebuild_i64_s{s}", gates.index_rebuild_gate(source.keys.detach(), s, slots // int(cfg["reads"]["index_list_size"]), cfg))
+        guarded(rec, f"index_rebuild_i64_s{s}", "index", lambda s=s: gates.index_rebuild_gate(source.keys.detach(), s, slots // int(cfg["reads"]["index_list_size"]), cfg))
 
 
 def run_item(ctx: Ctx, item: dict[str, Any], plan_digests: dict[str, str] | None = None) -> dict[str, Any]:
@@ -314,12 +357,13 @@ def run_item(ctx: Ctx, item: dict[str, Any], plan_digests: dict[str, str] | None
         return core.read_record(rec.dir / "item.json", "item")
     began = time.monotonic()
     digest = (plan_digests or {}).get(f"{item['cell']}|{item['update']}")
-    if item["arm"] == "T-OQ":
-        run_tree_item(ctx, item, rec, digest)
-    elif item["arm"] == "F-OQ":
-        run_flat_item(ctx, item, rec, digest)
-    else:
+    if item["arm"] not in ("T-OQ", "F-OQ"):
         raise ValueError(f"no read set for arm {item['arm']!r}")
+    try:
+        (run_tree_item if item["arm"] == "T-OQ" else run_flat_item)(ctx, item, rec, digest)
+    except Exception as exc:  # noqa: BLE001 - ruling 7: recorded with its scope; the other checkpoints of the cell run; the replicate is NOT EVALUABLE
+        if not rec.has_gate("item_error"):
+            rec.put_gate("item_error", gates.gate("tree" if item["arm"] == "T-OQ" else "f0", False, error=f"{type(exc).__name__}: {str(exc)[:300]}"))
     return rec.finish(time.monotonic() - began)
 
 
@@ -345,6 +389,7 @@ def run_gates12_item(ctx: Ctx, item: dict[str, Any]) -> dict[str, Any]:
         result["f0_counts"] = gates.counts_gate("f0", panel_counts_of(f0), ref, source=src["source"], cfg=cfg)
         ivf, idx = s1eval.ivf_model(model, seeds)
         c2 = reads.read_counts(ivf, data, facts, seeds)
+        c2.get("measured", {}).pop("recall_of_exhaustive_top8", None)  # sealed hygiene (audit A8): P10-S1's recall quantity is dropped at once; gate 3 is not run before the freeze
         ref2, src2 = reference_counts(ctx, item, model, data, seeds, "ivf")
         same = idx.sha256() == src2["recorded_index"]["index_sha256"] and idx.lists == src2["recorded_index"]["index_lists"]
         result["i256_counts"] = gates.counts_gate("index", panel_counts_of({"panels": c2["panels"]}), ref2, source=src2["source"], cfg=cfg, extra_equal={"index_hash_equal": same})

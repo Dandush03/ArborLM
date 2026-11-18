@@ -38,6 +38,7 @@ def test_launch_scripts_refuse_too_and_take_exactly_two_arguments(tmp_path: Path
     assert bad.returncode == 2 and "usage" in bad.stderr
     run = subprocess.run(["sh", str(script), str(tmp_path / "r"), "HEAD"], capture_output=True, text=True, timeout=300, check=False)
     assert run.returncode == 2 and "refused" in run.stderr and not (tmp_path / "r").exists()
+    assert "confirm" in planmod.REGISTERED_STAGES and planmod.STAGE_GROUP["confirm"] == "A2" and planmod.STAGE_GROUP["analysis"] == "A1"
     for name in [*planmod.REGISTERED_STAGES, "rehearse", "generate-bridge"]:
         text = (ROOT / "studies" / "p10ir" / "launch" / f"{name}.sh").read_text(encoding="utf-8")
         code = "\n".join(line for line in text.splitlines() if not line.lstrip().startswith("#"))
@@ -255,15 +256,83 @@ def test_verify_plan_checks_every_frozen_file_the_config_the_caps_and_the_run_di
         planmod.verify_plan(Plan(reg), ROOT, ctx.run_dir, check_items=False)  # the caps are provisional until the human lead sets them
 
 
-def test_freeze_refuses_provisional_caps_a_missing_rehearsal_and_missing_attestations(tmp_path: Path) -> None:
+def test_freeze_and_candidate_plan_refuse_in_this_repository_today(tmp_path: Path) -> None:
+    assert not (ROOT / core.PLAN).exists() and not (ROOT / planmod.FREEZE_RECORD).exists()
+    assert stages.main(["freeze", "--rehearsal", str(tmp_path / "rehearsal.json")]) == 2  # no candidate plan
+    assert stages.main(["candidate-plan", "--run-dir", str(tmp_path / "r"), "--s1-run-dir", str(tmp_path / "s1")]) == 2  # no checkpoint files, no manifests: nothing is written
+    assert not (ROOT / core.PLAN).exists()
+
+
+def freeze_repo(tmp: Path) -> tuple[Path, Path]:
+    """A temporary repository holding the code, the config (caps cleared) and a registered candidate plan; the freeze command works on it with the seed gate stubbed (it needs the whole repository)."""
+    repo = tmp / "frepo"
+    (repo / "studies" / "p10ir").mkdir(parents=True)
+    (repo / "configs").mkdir()
+    (repo / "docs" / "decisions").mkdir(parents=True)
+    (repo / core.SPEC).write_text("adr\n", encoding="utf-8")
+    (repo / "studies" / "p10ir" / "x.py").write_text("X = 1\n", encoding="utf-8")
+    cfg_text = (ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8").replace("provisional = true", "provisional = false")
+    (repo / "configs" / "p10ir_routing.toml").write_text(cfg_text, encoding="utf-8")
+    cfg = core.load_config(repo / core.CONFIG)
+    rec = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, items=planmod.registered_items(cfg), run_dir=tmp / "run", s1_run_dir=None, extra={"seal": {"accesses_declared": [], "values_opened": False, "broken": False}})
+    core.write_record(repo / core.PLAN, rec)
+    return repo, tmp / "rehearsal.json"
+
+
+def test_freeze_needs_the_rehearsed_plan_hash_and_writes_only_the_freeze_record(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Ruling 5: the candidate plan comes first; the rehearsal record names its SHA-256; the freeze refuses unless the committed file has that hash."""
+    from arborlm.io import file_sha256
+    from studies.p10ir import freeze, gates
+
+    repo, reh = freeze_repo(tmp_path)
+    monkeypatch.setattr(gates, "seed_gate", lambda *a, **k: {"passed": True, "problems": [], "roles": {}, "declared_reuse_not_new": {}, "checker": {}})
+    plan_sha = file_sha256(repo / core.PLAN)
+    full = {s: {"status": "COMPLETE"} for s in stages.REHEARSAL_STAGES}
+    good_gates = {"gate1_passed": True, "gate2_passed": True, "gate3_run": False}
+
+    def record(candidate_sha: str | None, status: str = "COMPLETE") -> None:
+        core.write_record(reh, {**core.envelope("rehearsal"), "stages": full, "registered_checkpoint_gates": good_gates, "candidate": {"status": status, "plan_file_sha256": candidate_sha}}, overwrite=True)
+
+    args = lambda *extra: stages.build_parser().parse_args(["freeze", "--rehearsal", str(reh), "--repo", str(repo), *extra])  # noqa: E731
+    record("0" * 64)  # a rehearsal of another plan file
+    with pytest.raises(StageRefused, match="candidate plan of SHA-256"):
+        freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
+    record(plan_sha, status="INCOMPLETE")
+    with pytest.raises(StageRefused, match="candidate plan of SHA-256"):
+        freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
+    record(plan_sha)
+    with pytest.raises(StageRefused, match="has not opened the sealed values|none has opened"):
+        freeze.cmd_freeze(args())  # no attestation
+    with pytest.raises(StageRefused, match="seal flag"):
+        freeze.cmd_freeze(args("--seal-broken"))
+    assert not (repo / planmod.FREEZE_RECORD).exists()
+    assert freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor")) == 0
+    fr = json.loads((repo / planmod.FREEZE_RECORD).read_text(encoding="utf-8"))
+    assert fr["kind"] == "freeze_record" and fr["plan_file_sha256"] == plan_sha and fr["rehearsal"]["sha256"] == file_sha256(reh)
+    assert file_sha256(repo / core.PLAN) == plan_sha  # the plan is never rewritten
+    plan = Plan.load(repo / core.PLAN)
+    assert planmod.verify_freeze_record(plan, repo)["plan_file_sha256"] == plan_sha
+    with pytest.raises(StageRefused, match="freeze is written once|exists"):
+        freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
+    # the freeze record is not part of the frozen-file hashes (like the plan), and a plan that changed after the freeze no longer matches it
+    assert str(planmod.FREEZE_RECORD) not in planmod.frozen_file_hashes(repo)
+    (repo / core.PLAN).write_text((repo / core.PLAN).read_text(encoding="utf-8") + " ", encoding="utf-8")
+    with pytest.raises(StageRefused, match="does not name the SHA-256"):
+        planmod.verify_freeze_record(plan, repo)
+
+
+def test_freeze_refuses_provisional_caps_and_a_registered_verify_needs_the_freeze_record(tmp_path: Path) -> None:
     from studies.p10ir import freeze
 
-    base = ["freeze", "--run-dir", str(tmp_path / "r"), "--s1-run-dir", str(tmp_path / "s1"), "--rehearsal", str(tmp_path / "rehearsal.json")]
-    args = stages.build_parser().parse_args(base)
+    repo, reh = freeze_repo(tmp_path)
+    (repo / "configs" / "p10ir_routing.toml").write_text((ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8"), encoding="utf-8")  # provisional again
     with pytest.raises(StageRefused, match="provisional"):
-        freeze.cmd_freeze(args)  # no plan exists, and today the caps are provisional: nothing is written
-    assert not (ROOT / core.PLAN).exists()
-    assert stages.main(base) == 2
+        freeze.cmd_freeze(stages.build_parser().parse_args(["freeze", "--rehearsal", str(reh), "--repo", str(repo)]))
+    repo2, _ = freeze_repo(tmp_path / "second")
+    plan = Plan.load(repo2 / core.PLAN)
+    with pytest.raises(StageRefused, match="no freeze record"):
+        planmod.verify_plan(plan, repo2, tmp_path / "second" / "run", check_items=False)
+    planmod.verify_plan(plan, repo2, tmp_path / "second" / "run", check_items=False, candidate=True)  # the candidate phase verifies the plan without a freeze record
 
 
 def test_caps_proposal_is_section_12s_rule(capsys: pytest.CaptureFixture[str]) -> None:
@@ -361,8 +430,8 @@ def test_a_resumed_item_recomputes_only_the_missing_reads_and_a_complete_item_no
 def test_item_files_are_one_per_read_with_the_read_name_in_the_path(mini: tuple[Plan, items.Ctx]) -> None:
     plan, ctx = mini
     it = next(i for i in plan.items("A1") if i["arm"] == "F-OQ")
-    p = stages_io.read_path(ctx.run_dir, it["stage"], it["id"], "I64@256/s298001")
-    assert p.name == "read.I64@256~s298001.json" and "/" not in p.name
+    p = stages_io.read_path(ctx.run_dir, it["stage"], it["id"], "I64@256/s938901")
+    assert p.name == "read.I64@256~s938901.json" and "/" not in p.name
     assert stages_io.read_path(ctx.run_dir, it["stage"], it["id"], "F0") != stages_io.read_path(ctx.run_dir, it["stage"], it["id"], "I256@512")
 
 
@@ -410,3 +479,99 @@ def test_the_entry_points_set_the_platform_settings_before_they_check_them() -> 
     out = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, timeout=120, check=False)
     assert out.returncode == 0, out.stderr
     assert out.stdout.strip().endswith("[]"), out.stdout
+
+
+# --- B2: PAUSED — IDENTITY ------------------------------------------------------------------------------------------------------------------------------
+def test_a_worker_that_refuses_exits_75_and_the_runner_pauses_it_without_a_failed_record(tmp_path: Path) -> None:
+    refusing = py_task(tmp_path, "r", "import sys; sys.exit(75)", result=False)
+    out, _ = runner.run_tasks([refusing], workers=1, cap_seconds=30.0, rss_worker_bytes=1 << 30, rss_aggregate_bytes=1 << 31, poll=0.05)
+    assert out["r"]["status"] == runner.PAUSED_IDENTITY and "PAUSED — IDENTITY" in out["r"]["reason"]
+    assert not refusing.failed_path.exists() and runner.stage_status(out) == "PAUSED"
+    # the next invocation runs the task again (the cause was removed)
+    again = py_task(tmp_path, "r", "pass")
+    out2, _ = runner.run_tasks([again], workers=1, cap_seconds=30.0, rss_worker_bytes=1 << 30, rss_aggregate_bytes=1 << 31, poll=0.05)
+    assert out2["r"]["status"] == runner.COMPLETED and runner.stage_status(out2) == "COMPLETE"
+    # a genuine failure is still FAILED and kept (exit 2 is not the identity code)
+    bad = py_task(tmp_path, "b", "raise SystemExit(2)", result=False)
+    assert runner.run_tasks([bad], workers=1, cap_seconds=30.0, rss_worker_bytes=1 << 30, rss_aggregate_bytes=1 << 31, poll=0.05)[0]["b"]["status"] == runner.FAILED
+
+
+def test_a_dirty_tree_appearing_during_a_stage_pauses_the_workers_and_the_stage_resumes(tmp_path: Path) -> None:
+    """The P10-S1 failure mode: a file written in the repository while a registered stage runs made every task that started then refuse, permanently. Here the real worker entry point refuses on the dirty tree with
+    exit 75, the runner records PAUSED — IDENTITY and the stage manifest says PAUSED; nothing is kept as failed; after the cause is removed the same task runs again."""
+    repo = make_repo(tmp_path)
+    plan = {**core.envelope("freeze_plan"), "mode": "registered", "items": {"A1": [], "A2": []}}
+    pf = repo / core.PLAN
+    pf.parent.mkdir(parents=True, exist_ok=True)
+    pf.write_text(json.dumps(plan), encoding="utf-8")
+    subprocess.run(["git", "-C", str(repo), "add", "-A"], check=True, capture_output=True, timeout=60)
+    subprocess.run(["git", "-C", str(repo), "commit", "-qm", "plan"], check=True, capture_output=True, timeout=60)
+    full = head(repo)
+    (repo / "NOTE.md").write_text("a note written during the stage", encoding="utf-8")  # the dirty tree
+    done = tmp_path / "out" / "x.done.json"
+    argv = (sys.executable, "-m", "studies.p10ir.stages", "work", "reads", "--stage", "a1", "--labels", "x", "--run-dir", str(tmp_path / "out"), "--plan", str(pf), "--mode", "registered", "--freeze-commit", full, "--repo", str(repo))
+    task = runner.Task("x", argv, done, tmp_path / "out" / "x.failed.json", tmp_path / "out" / "x.log")
+    out, _ = runner.run_tasks([task], workers=1, cap_seconds=120.0, rss_worker_bytes=1 << 31, rss_aggregate_bytes=1 << 33, env={"PYTHONPATH": str(ROOT)})
+    assert out["x"]["returncode"] == 75 and out["x"]["status"] == runner.PAUSED_IDENTITY, out
+    assert "not clean" in (tmp_path / "out" / "x.log").read_text(encoding="utf-8") and not task.failed_path.exists()
+    manifest = runner.write_manifest(tmp_path / "out", "a1", "registered", out, 1.0, identity={}, started="t", caps={})
+    assert manifest["status"] == "PAUSED"
+    (repo / "NOTE.md").unlink()  # restored bit for bit
+    stub = py_task(tmp_path / "out", "x", "pass")
+    out2, _ = runner.run_tasks([stub], workers=1, cap_seconds=30.0, rss_worker_bytes=1 << 30, rss_aggregate_bytes=1 << 31, poll=0.05)
+    assert out2["x"]["status"] == runner.COMPLETED
+    assert runner.write_manifest(tmp_path / "out", "a1", "registered", out2, 1.0, identity={}, started="t2", caps={})["status"] == "COMPLETE"
+
+
+def test_main_returns_75_for_a_worker_refusal_and_2_for_the_driver(tmp_path: Path) -> None:
+    plan = {**core.envelope("freeze_plan"), "mode": "registered", "items": {"A1": [], "A2": []}}
+    p = tmp_path / "plan.json"
+    p.write_text(json.dumps(plan), encoding="utf-8")
+    w = ["work", "reads", "--stage", "a1", "--labels", "x", "--run-dir", str(tmp_path / "r"), "--plan", str(p), "--mode", "registered", "--freeze-commit", "HEAD"]
+    assert stages.main(w) == runner.IDENTITY_EXIT == 75
+    assert stages.main(["registered", "a1", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"]) == 2
+
+
+# --- audit A6, A7, A8 --------------------------------------------------------------------------------------------------------------------------------
+def test_an_edit_of_imported_p10s1_code_after_the_freeze_refuses(tmp_path: Path) -> None:
+    repo = make_repo(tmp_path)
+    (repo / "studies" / "p10s1").mkdir(parents=True)
+    (repo / "studies" / "p10s1" / "index.py").write_text("A = 1\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(repo), "add", "-A"], check=True, capture_output=True, timeout=60)
+    subprocess.run(["git", "-C", str(repo), "commit", "-qm", "p10s1"], check=True, capture_output=True, timeout=60)
+    full = head(repo)
+    assert "studies/p10s1" in planmod.IMPORTED_CODE_ROOTS and "studies/p9" in planmod.IMPORTED_CODE_ROOTS and "studies/p9i" in planmod.IMPORTED_CODE_ROOTS
+    (repo / "studies" / "p10s1" / "index.py").write_text("A = 2\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(repo), "commit", "-qam", "edit p10s1 after the freeze"], check=True, capture_output=True, timeout=60)
+    with pytest.raises(StageRefused, match="studies/p10s1 at HEAD differs"):
+        planmod.check_preconditions(planmod.REGISTERED, repo, full)
+
+
+def test_a_run_directory_inside_the_repository_must_be_git_ignored(tmp_path: Path) -> None:
+    repo = make_repo(tmp_path)
+    (repo / ".gitignore").write_text("experiments/\n", encoding="utf-8")
+    planmod.require_ignored_run_dir(repo, repo / "experiments" / "P10IR-run")  # ignored: allowed
+    planmod.require_ignored_run_dir(repo, tmp_path / "elsewhere")  # outside the repository: allowed
+    with pytest.raises(StageRefused, match="not git-ignored"):
+        planmod.require_ignored_run_dir(repo, repo / "results" / "run")
+
+
+def test_run_sealed_outside_registered_mode_needs_the_rehearsals_own_records(tmp_path: Path) -> None:
+    """Audit A8: a plan whose ``s1_run_dir`` is the registered run, in rehearsal mode, must not be read with ``--run-sealed`` (that would compare a sealed value before the freeze)."""
+    plan = {**core.envelope("freeze_plan"), "mode": "rehearsal", "items": {"A1": [], "A2": []}, "s1_run_dir": str(tmp_path / "registered_run"), "i64_seeds": [1, 2, 3]}
+    p = tmp_path / "plan.json"
+    p.write_text(json.dumps(plan), encoding="utf-8")
+    base = ["work", "reads", "--stage", "a1", "--labels", "x", "--run-dir", str(tmp_path / "rehearsal"), "--plan", str(p), "--mode", "rehearsal"]
+    assert stages.main([*base, "--run-sealed"]) == 75
+    inside = {**plan, "s1_run_dir": str(tmp_path / "rehearsal" / "s1")}
+    p.write_text(json.dumps(inside), encoding="utf-8")
+    with pytest.raises(StageRefused, match="not a cell of the frozen plan"):
+        stages.cmd_work(stages.build_parser().parse_args([*base, "--run-sealed"]))  # the sealed-run guard passes; the unknown label then refuses
+
+
+def test_the_rehearsal_gate_in_a_registered_plan_reads_the_freeze_records_rehearsal(tmp_path: Path) -> None:
+    repo, reh = freeze_repo(tmp_path)
+    plan = Plan.load(repo / core.PLAN)
+    from arborlm.io import file_sha256
+
+    assert stages.rehearsal_record_of(plan) == (None, file_sha256(repo / core.PLAN))  # no freeze record yet: no rehearsal record, and the plan file's own hash

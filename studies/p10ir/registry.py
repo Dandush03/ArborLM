@@ -2,8 +2,8 @@
 """P10IR registry of records (ADR-0029 section 13, 'Analysis tests'): read records and item records keyed so that two reads of one cell can never share a key.
 
 The key of a read record is ``core.read_key(stage, cell label, update, read name)``: the read's name is part of it. ``studies/p10s1/analysis.py`` lines 167-169 keyed by cell and snapshot
-only, so that two reads of one cell would have collided; ``Registry.put_read`` refuses a key that is already held, and refuses a record whose fields do not give the key it is stored under.
-Pure: no torch, no I/O besides ``load``.
+only, so that two reads of one cell would have collided; ``Registry.put_read`` refuses a key that is already held. The key is computed from the record's own fields, so a record cannot be stored under
+another key; ``load`` does not compare the file name with the key (the file name is ``read.<read name>.json`` by construction, ``stages_io.read_path``; a duplicate read is still refused by the key). Pure: no torch, no I/O besides ``load``.
 """
 
 from collections.abc import Iterable, Mapping

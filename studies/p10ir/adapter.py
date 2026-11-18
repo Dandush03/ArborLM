@@ -64,6 +64,25 @@ def run_cell(job: train.TrainJob, *, keep_optimizer: bool = True) -> dict[str, A
     return {"snapshot_sha256": hashes, "updates": trainer.update, "seconds": time.monotonic() - began, "peak_rss_bytes": train.peak_rss(), "movement": trainer.movement()}
 
 
+def assert_seed_allowed(mode: str, spec: Mapping[str, Any], cfg: Mapping[str, Any] | None = None) -> None:
+    """The seed check at the point of training (audit A4; it replaces P10-S1's whitelist for the bridge values). Registered mode: the draw's seed set and initialisation seed are exactly
+    ``core.bridge_seeds(draw)`` and ``core.bridge_init_seed(draw)``, and every value of the set lies in the registry's bridge range. Rehearsal and test modes: the set lies in the test range or the
+    rehearsal range, never in P10-S1's registered draws or the bridge range."""
+    c = cfg or core.load_config()
+    base, draw, init = int(spec["seed_base"]), int(spec["draw"]), int(spec["init_seed"])
+    values = core.seed_set_values(s1core.seed_set(str(spec["seed_name"]), base))
+    rng = c["seed_ranges"]
+    if mode == "registered":
+        want = core.bridge_seeds(draw, c)
+        lo, hi = (int(x) for x in rng["bridge"])
+        if spec["seed_name"] != want.name or base != want.facts or init != core.bridge_init_seed(draw, c) or not all(lo <= v <= hi for v in values):
+            raise ValueError(f"refused: {spec['seed_name']} base {base} init {init} are not the registered bridge seeds of draw {draw}")
+        return
+    ok = [tuple(int(x) for x in rng[k]) for k in ("test", "rehearsal")]
+    if not all(any(lo <= v <= hi for lo, hi in ok) for v in values) or init not in {int(x) for x in c["seeds"]["test_init"]} | {int(c["seeds"]["rehearsal_init"])}:
+        raise ValueError(f"refused: {spec['seed_name']} base {base} init {init} are not test or rehearsal seeds")
+
+
 # --- a bridge cell -------------------------------------------------------------------------------------------------------------------------------------
 def train_bridge_cell(ctx: items.Ctx, cell_label: str, plan_cells: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     """Train one planned bridge cell into ``<run>/A2/train/cells/<label>`` (built in ``<label>.partial`` and renamed when complete; a stale partial from a killed run is removed first, which re-runs the
@@ -77,6 +96,7 @@ def train_bridge_cell(ctx: items.Ctx, cell_label: str, plan_cells: Mapping[str, 
         raise RuntimeError(f"{cell_label} failed before and is kept, not re-run (section 11)")
     if partial.exists():
         shutil.rmtree(partial)
+    assert_seed_allowed(ctx.mode, spec)
     probe = {"seed_name": spec["seed_name"], "seed_base": spec["seed_base"], "table_facts": spec["table_facts"], "unseen": spec["unseen"], "stage": core.STAGE_A2}
     data, seeds = items.load_data(ctx, probe)
     cell = s1core.make_cell("P", spec["arm"], spec["facts"], spec["slots"], spec["draw"], spec["init_seed"], u_p=spec["u_p"], run_updates=spec["run"], lr=TRAIN_LR)

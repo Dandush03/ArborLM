@@ -25,12 +25,15 @@ from studies.p10s1 import core as s1core
 from studies.p10s1 import evaluate as s1eval
 from studies.p10s1 import train as s1train
 
-from . import adapter, core, freeze, gates, items, runner, stages
+from . import adapter, core, freeze, gates, items, labels, runner, stages
 from . import plan as planmod
 from .plan import Plan
 from .stages_io import safe_name
 
-SYN_SNAPSHOTS = (4, 8, 12, 16)
+
+def snapshots_of(spec: core.CellSpec) -> tuple[int, ...]:
+    """The synthetic cell's snapshots: its four checkpoints (two trajectory points, U_P and the run length)."""
+    return tuple(sorted(set(spec.checkpoints())))
 
 
 def synthetic_specs(cfg: Any) -> list[core.CellSpec]:
@@ -70,10 +73,10 @@ def make_synthetic_s1_run(root: Path, specs: list[core.CellSpec], draws: int, ct
                 folder = root / "cells" / cell.label
                 job = s1train.TrainJob(
                     cell=cell, data=data, stream=s1train.training_stream_for(data, cell.facts), backbone=bb, out_dir=folder, r1_seed=seeds.r1_codes, hash_seed=s1core.h8_seed(seeds), mode="calibration",
-                    updates=cell.run_updates, snapshots=SYN_SNAPSHOTS, optimizer_marks=(cell.run_updates,), log_every=4,
+                    updates=cell.run_updates, snapshots=snapshots_of(spec), optimizer_marks=(cell.run_updates,), log_every=4,
                 )  # fmt: skip
                 s1train.train_cell(job)
-                s1eval.evaluate_cell(cell, root, data, bb, readouts=list(SYN_SNAPSHOTS), deep_at=cell.u_p, r1_seed=seeds.r1_codes, hash_seed=s1core.h8_seed(seeds), rows=None, require_train_record=True)
+                s1eval.evaluate_cell(cell, root, data, bb, readouts=list(snapshots_of(spec)), deep_at=cell.u_p, r1_seed=seeds.r1_codes, hash_seed=s1core.h8_seed(seeds), rows=None, require_train_record=True)
                 out["cells"].append(cell.label)
     return out
 
@@ -87,7 +90,7 @@ def build_synthetic_plan(root: Path, cfg: Any, draws: int) -> tuple[Plan, items.
     specs = synthetic_specs(cfg)
     sizes = {"table_facts": 512, "unseen": 64}
     root.mkdir(parents=True, exist_ok=True)
-    ctx = items.Ctx("rehearsal", root, root / "s1", None, synthetic=True, run_sealed=True, sizes=sizes)
+    ctx = items.Ctx("rehearsal", root, root / "s1", None, synthetic=True, run_sealed=True, sizes=sizes, index_seeds=core.i64_seeds(cfg, test=True))
     init_a1, init_a2 = int(cfg["seeds"]["test_init"][0]), int(cfg["seeds"]["test_init"][1])
     s1_root = root / "s1"
     made = make_synthetic_s1_run(s1_root, specs, draws, ctx, init_a1)
@@ -99,9 +102,10 @@ def build_synthetic_plan(root: Path, cfg: Any, draws: int) -> tuple[Plan, items.
         return s1core.make_cell("P", arm, s.facts, s.slots, d, init_a2, u_p=s.u_p, run_updates=s.run).label
 
     kw = {"table_facts": sizes["table_facts"], "unseen": sizes["unseen"], "synthetic": True}
-    a1 = planmod.build_items(core.STAGE_A1, specs, range(1, draws + 1), label_a1, lambda d: {**_mini_seed_a1(d - 1), "init_seed": init_a1}, cfg, checkpoint_root="s1", checkpoints_of=planmod.a1_checkpoints, **kw)
-    a2 = planmod.build_items(core.STAGE_A2, specs, range(1, draws + 1), label_a2, lambda d: {**_mini_seed_a2(d - 1), "init_seed": init_a2}, cfg, checkpoint_root="a2", checkpoints_of=planmod.a2_checkpoints, **kw)
-    bridge = {it["cell"]: {"arm": it["arm"], "facts": it["facts"], "slots": it["slots"], "draw": it["draw"], "init_seed": it["init_seed"], "u_p": it["u_p"], "run": it["run"], "seed_name": it["seed_name"], "seed_base": it["seed_base"], "table_facts": it["table_facts"], "unseen": it["unseen"], "snapshots": list(SYN_SNAPSHOTS)} for it in a2}
+    i64 = core.i64_seeds(cfg, test=True)  # the rehearsal reads its indexes with test-range seeds, never the registered 298001-298003
+    a1 = planmod.build_items(core.STAGE_A1, specs, range(1, draws + 1), label_a1, lambda d: {**_mini_seed_a1(d - 1), "init_seed": init_a1}, cfg, checkpoint_root="s1", checkpoints_of=planmod.a1_checkpoints, i64_seeds=i64, **kw)
+    a2 = planmod.build_items(core.STAGE_A2, specs, range(1, draws + 1), label_a2, lambda d: {**_mini_seed_a2(d - 1), "init_seed": init_a2}, cfg, checkpoint_root="a2", checkpoints_of=planmod.a2_checkpoints, i64_seeds=i64, **kw)
+    bridge = {it["cell"]: {"arm": it["arm"], "facts": it["facts"], "slots": it["slots"], "draw": it["draw"], "init_seed": it["init_seed"], "u_p": it["u_p"], "run": it["run"], "seed_name": it["seed_name"], "seed_base": it["seed_base"], "table_facts": it["table_facts"], "unseen": it["unseen"], "snapshots": list(snapshots_of(next(sp for sp in specs if sp.name == it["cell_name"])))} for it in a2}
     draw_manifests: dict[str, dict[str, Any]] = {}
     for d in range(1, draws + 1):
         a1n, a2n = _mini_seed_a1(d - 1)["name"], _mini_seed_a2(d - 1)["name"]
@@ -110,10 +114,14 @@ def build_synthetic_plan(root: Path, cfg: Any, draws: int) -> tuple[Plan, items.
         p2 = _write_manifest(root / "A2", a2n, data)
         draw_manifests[a2n] = {"path": str(p2), "sha256": file_sha256(p2), "groups": [core.STAGE_A2]}
     first = specs[0]
+    tm_path = s1_root / "train.manifest.json"
+    write_json(tm_path, {"tasks": [{"label": lab, "result_sha256": file_sha256(s1_root / "cells" / lab / "train.json")} for lab in made["cells"]]})
+    train_manifest = {"path": str(tm_path), "sha256": file_sha256(tm_path)}
     extra = {
         "bridge_cells": bridge, "checkpoint_digests": digests_of(s1_root, a1), "draw_manifests": draw_manifests, "manifests": draw_manifests, "sizes": sizes, "synthetic": True, "context": {"dense": []},
         "plateau": {s.name: {"tree": [{"label": label_a1("T-OQ", s, d), "updates": sealed_available(s1_root, label_a1("T-OQ", s, d), s.run)} for d in range(1, draws + 1)], "flat": [{"label": label_a1("F-OQ", s, d), "updates": sealed_available(s1_root, label_a1("F-OQ", s, d), s.run)} for d in range(1, draws + 1)]} for s in specs},
-        "identity_gate_cells": [[arm, first.facts, first.slots, 1, init_a1, first.u_p, first.run] for arm in ("F-OQ", "T-OQ")], "identity_seed_sets": {"1": _mini_seed_a1(0)}, "identity_gate_updates": list(SYN_SNAPSHOTS[:3]),
+        "identity_gate_cells": [[arm, first.facts, first.slots, 1, init_a1, first.u_p, first.run] for arm in ("F-OQ", "T-OQ")], "identity_seed_sets": {"1": _mini_seed_a1(0)}, "identity_gate_updates": list(snapshots_of(first)[:3]), "i64_seeds": i64,
+        "p10s1_train_manifest": train_manifest, "p10s1_frozen_data_manifests": {n: r["sha256"] for n, r in draw_manifests.items() if core.STAGE_A1 in r["groups"]},
     }  # fmt: skip
     rec = planmod.build_plan(mode=planmod.REHEARSAL, cfg=cfg, repo=core.repo_root(), items={core.STAGE_A1: a1, core.STAGE_A2: a2}, run_dir=root, s1_run_dir=s1_root, extra=extra)
     path = root / "freeze" / "plan.json"
@@ -127,7 +135,17 @@ def sealed_available(root: Path, label: str, limit: int) -> list[int]:
     return [u for u in sealed.available_updates(root, label) if u <= limit]
 
 
-STAGE_ORDER = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report")
+STAGE_ORDER = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report", "confirm")
+
+
+def item_errors(root: Path) -> list[str]:
+    """Items whose worker code raised (an ``item_error`` gate): a code error, not a gate failure. A rehearsal with any is INCOMPLETE."""
+    out = []
+    for p in sorted(root.glob("A[12]/items/*/item.json")):
+        rec = core.read_record(p, "item")
+        if "item_error" in rec.get("gates", {}):
+            out.append(f"{p.parent.name}: {rec['gates']['item_error'].get('error')}")
+    return out
 
 
 def run_pipeline(plan: Plan, ctx: items.Ctx, root: Path, *, repo: Path, workers: int, inline: bool, stages_to_run: tuple[str, ...] = STAGE_ORDER, adapter_identity: bool = True) -> dict[str, dict[str, Any]]:
@@ -140,6 +158,84 @@ def run_pipeline(plan: Plan, ctx: items.Ctx, root: Path, *, repo: Path, workers:
     return out
 
 
+def analysis_on_synthetic_registry(plan: Plan, root: Path, cfg: Any) -> dict[str, Any]:
+    """Analysis, report and confirmation on a synthetic registry KEYED BY THE PLAN'S OWN LABELS (ruling 5): every row of sections 8.3 and 8.4 is reached somewhere, A1 and A2 are analysed with labels taken
+    from the plan's items, R-CONFIRM is computed through A1's written record (JSON) as the ``confirm`` stage does, and the reports are rendered. Writes nothing; returns what it reached."""
+    import json
+
+    from . import analysis, report, synthetic
+
+    out: dict[str, Any] = {}
+    analyses: dict[str, Any] = {}
+    for stage in (core.STAGE_A1, core.STAGE_A2):
+        specs = stages._specs_of(plan, stage)
+        label_of = analysis.label_of_from_items(plan.items(stage))
+        seeds = plan.data.get("i64_seeds")
+        reg = synthetic.full_registry(stage, synthetic.coverage_plan(specs), cfg, label_of, specs=specs, i64_seeds=seeds)
+        analyses[stage] = analysis.analyze_stage(reg, stage, cfg, plateau=synthetic.plateau_series(cfg, specs=specs) if stage == core.STAGE_A1 else None, specs=specs, label_of=label_of, i64_seeds=seeds)
+        rows = {r["row"] for c in analyses[stage]["cells"].values() for ck in c["checkpoints"].values() for comp in ("tree", "index") for r in ck[comp]["replicates"]}
+        out[stage] = {"rows_reached": sorted(rows), "no_item_record": any("no item record" in r["reason"] for c in analyses[stage]["cells"].values() for ck in c["checkpoints"].values() for comp in ("tree", "index") for r in ck[comp]["replicates"])}
+    a1_json = json.loads(json.dumps(analysis.public(analyses[core.STAGE_A1]), default=str))
+    confirm = labels.r_confirm(labels.diagnosis_from_json(a1_json["r_diagnosis"]), analyses[core.STAGE_A2]["_diagnosis_object"])
+    full = analysis.analyze_all(analyses[core.STAGE_A1], analyses[core.STAGE_A2])
+    text = report.render(json.loads(json.dumps(full, default=str)))
+    out["r_confirm"] = {k: v["value"] for k, v in confirm.items()}
+    out["report_chars"] = len(text)
+    out["status"] = "COMPLETE" if not any(out[s_]["no_item_record"] for s_ in (core.STAGE_A1, core.STAGE_A2)) else "FAILED"
+    return out
+
+
+def run_candidate(root: Path, *, repo: Path, plan_path: Path | None = None) -> dict[str, Any]:
+    """The candidate phase (ruling 5): every stage rehearsed against the CANDIDATE ``freeze/plan.json`` itself, without reading a registered checkpoint or a sealed value. It enumerates, for every stage, the
+    tasks, the items, the labels, the checkpoint and manifest paths, the digests, the bridge cells and the seeds; verifies the plan's identities (frozen files, config, manifests, the items against a
+    re-derivation); runs the analysis, the report and the confirmation on a synthetic registry keyed by the plan's own labels; and records the plan file's SHA-256."""
+    from . import adapter
+
+    cfg = core.load_config(repo / core.CONFIG)
+    path = plan_path or repo / core.PLAN
+    plan = Plan.load(path)
+    problems: list[str] = []
+    if plan.mode != planmod.REGISTERED:
+        raise planmod.StageRefused("refused: the candidate phase rehearses a registered plan")
+    run_dir = Path(plan.data["run_dir"])
+    try:
+        planmod.verify_plan(plan, repo, run_dir, check_items=True, candidate=True)
+    except planmod.StageRefused as exc:
+        problems.append(str(exc))
+    counts: dict[str, int] = {}
+    for stage in ("a1", "a2-train", "a2"):
+        tasks = stages.make_tasks(stage, plan, run_dir, path, None, ())  # type: ignore[arg-type]
+        labels_ = [t.label for t in tasks]
+        counts[stage] = len(tasks)
+        if len(set(labels_)) != len(labels_) or not tasks:
+            problems.append(f"{stage}: task labels are empty or not unique")
+    n_a1 = len(plan.items(core.STAGE_A1))
+    n_a2 = len(plan.items(core.STAGE_A2))
+    if (n_a1, n_a2) != (280, 40) or counts != {"a1": 70, "a2-train": 20, "a2": 20}:
+        problems.append(f"the plan lists {n_a1} A1 items and {n_a2} A2 items in {counts} tasks; the registered plan has 280 and 40 in 70, 20 and 20")
+    s1_run = Path(plan.data["s1_run_dir"])
+    digests = plan.data.get("checkpoint_digests") or {}
+    for it in plan.items(core.STAGE_A1):
+        snap = s1_run / "cells" / it["cell"] / "snapshots" / s1core.snapshot_stem(it["update"]) / "model.pt"
+        if not snap.is_file() or f"{it['cell']}|{it['update']}" not in digests:
+            problems.append(f"{it['id']}: checkpoint file or digest missing")
+        s1core.parse_label(it["cell"])
+    for label, spec in (plan.data.get("bridge_cells") or {}).items():
+        try:
+            adapter.assert_seed_allowed(planmod.REGISTERED, spec, cfg)
+        except ValueError as exc:
+            problems.append(str(exc))
+        if not {spec["u_p"], spec["run"]} <= set(spec["snapshots"]):
+            problems.append(f"{label}: the snapshot schedule lacks U_P or the run length")
+    for name, rec in (plan.data.get("draw_manifests") or {}).items():
+        if not Path(rec["path"]).is_file():
+            problems.append(f"manifest {name} is missing")
+    synth = analysis_on_synthetic_registry(plan, root, cfg)
+    if synth["status"] != "COMPLETE":
+        problems.append("the analysis on the synthetic registry did not find every record by the plan's labels")
+    return {"status": "COMPLETE" if not problems else "INCOMPLETE", "plan_file_sha256": file_sha256(path), "plan_path": str(path), "tasks": counts, "items": {"A1": n_a1, "A2": n_a2}, "problems": problems, "synthetic_registry": synth}
+
+
 def run_synthetic(root: Path, *, draws: int, repo: Path, inline: bool = True, workers: int = 1) -> dict[str, Any]:
     """The synthetic phase. Returns the stage manifests."""
     cfg = core.load_config()
@@ -148,7 +244,8 @@ def run_synthetic(root: Path, *, draws: int, repo: Path, inline: bool = True, wo
     t.configure()
     plan, ctx = build_synthetic_plan(root, cfg, draws)
     manifests = run_pipeline(plan, ctx, root, repo=repo, workers=workers, inline=inline)
-    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in manifests.items()}, "plan_sha256": plan.sha256()}
+    synth = analysis_on_synthetic_registry(plan, root, cfg)
+    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in manifests.items()}, "plan_sha256": plan.sha256(), "synthetic_registry": synth, "item_errors": item_errors(root)}
 
 
 # --- the real-size phase ---------------------------------------------------------------------------------------------------------------------------------------
@@ -163,7 +260,7 @@ def build_real_plan(root: Path, cfg: Any, repo: Path, *, synthetic: bool = False
     init = int(cfg["seeds"]["rehearsal_init"]) if init is None else init
     sz = sizes or {"table_facts": s1.FACT_TABLE, "unseen": s1.UNSEEN_FACTS}
     root.mkdir(parents=True, exist_ok=True)
-    ctx = items.Ctx("rehearsal", root, root / "s1", None if synthetic else freeze.experiments_root(), synthetic=synthetic, run_sealed=True, sizes=sz)
+    ctx = items.Ctx("rehearsal", root, root / "s1", None if synthetic else freeze.experiments_root(), synthetic=synthetic, run_sealed=True, sizes=sz, index_seeds=core.i64_seeds(cfg, test=True))
     s1_root = root / "s1"
     data, _ = items.load_data(ctx, {"seed_name": seeds.name, "seed_base": seeds.facts, "table_facts": sz["table_facts"], "unseen": sz["unseen"]}, verify=False)
     manifest = _write_manifest(s1_root, seeds.name, data)
@@ -181,8 +278,8 @@ def build_real_plan(root: Path, cfg: Any, repo: Path, *, synthetic: bool = False
 
     seed = {"name": seeds.name, "base": seeds.facts, "init_seed": init}
     kw = {"table_facts": sz["table_facts"], "unseen": sz["unseen"], "synthetic": synthetic}
-    a1 = planmod.build_items(core.STAGE_A1, [spec], [1], label, lambda d: seed, cfg, checkpoint_root="s1", checkpoints_of=planmod.a2_checkpoints, **kw)
-    a2 = planmod.build_items(core.STAGE_A2, [spec], [1], label, lambda d: seed, cfg, checkpoint_root="a2", checkpoints_of=planmod.a2_checkpoints, **kw)
+    a1 = planmod.build_items(core.STAGE_A1, [spec], [1], label, lambda d: seed, cfg, checkpoint_root="s1", checkpoints_of=planmod.a2_checkpoints, i64_seeds=core.i64_seeds(cfg, test=True), **kw)
+    a2 = planmod.build_items(core.STAGE_A2, [spec], [1], label, lambda d: seed, cfg, checkpoint_root="a2", checkpoints_of=planmod.a2_checkpoints, i64_seeds=core.i64_seeds(cfg, test=True), **kw)
     bridge = {it["cell"]: {"arm": it["arm"], "facts": it["facts"], "slots": it["slots"], "draw": 1, "init_seed": init, "u_p": it["u_p"], "run": it["run"], "seed_name": seeds.name, "seed_base": seeds.facts, "table_facts": it["table_facts"], "unseen": it["unseen"], "snapshots": [int(x) for x in r["snapshots"]]} for it in a2}
     dm = {seeds.name: {"path": str(manifest), "sha256": file_sha256(manifest), "groups": [core.STAGE_A1, core.STAGE_A2]}}
     extra = {"bridge_cells": bridge, "checkpoint_digests": digests_of(s1_root, a1), "draw_manifests": dm, "manifests": dm, "sizes": sz, "synthetic": synthetic, "context": {"dense": []}, "plateau": {}}
@@ -203,7 +300,7 @@ def run_real(root: Path, *, repo: Path, workers: int, inline: bool = False, cfg:
             rec = core.read_record(p, "read")
             seconds_per_read[f"{stage}|{rec['cell']}|u{rec['update']}|{rec['read']}"] = float(rec["seconds"])
     peaks = {s: max((float(t.get("peak_rss_bytes", 0)) for t in m["tasks"].values()), default=0.0) for s, m in run.items()}
-    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in run.items()}, "seconds_per_read": seconds_per_read, "peak_rss_bytes_by_stage": peaks, "facts": cfg["rehearsal"]["facts"], "slots": cfg["rehearsal"]["slots"], "plan_sha256": plan.sha256()}
+    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in run.items()}, "seconds_per_read": seconds_per_read, "peak_rss_bytes_by_stage": peaks, "facts": cfg["rehearsal"]["facts"], "slots": cfg["rehearsal"]["slots"], "plan_sha256": plan.sha256(), "item_errors": item_errors(root)}
 
 
 # --- gates 1 and 2 on the registered checkpoints -----------------------------------------------------------------------------------------------------------------
@@ -270,6 +367,9 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         elif phase == "real":
             res = run_real(root / "real", repo=repo, workers=args.workers)
             record["real"] = res
+        elif phase == "candidate":
+            record["candidate"] = run_candidate(root / "candidate", repo=repo, plan_path=Path(args.candidate_plan) if getattr(args, "candidate_plan", None) else None)
+            continue
         elif phase == "gates12":
             if not args.s1_run_dir:
                 raise planmod.StageRefused("refused: gates12 needs --s1-run-dir")
@@ -279,7 +379,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         else:
             raise planmod.StageRefused(f"refused: unknown phase {phase!r}")
         for s, m in res["stages"].items():
-            statuses.setdefault(s, []).append(m["status"])
+            statuses.setdefault(s, []).append("INCOMPLETE" if res.get("item_errors") and s in ("a1", "a2") else m["status"])
     for s in stages.REHEARSAL_STAGES:
         have = statuses.get(s, [])
         record["stages"][s] = {"status": "COMPLETE" if have and all(x == "COMPLETE" for x in have) and len(have) == sum(1 for p in phases if p in ("synthetic", "real") and (p == "synthetic" or s in ("gates-a1", "a1", "gates-a2", "a2-train", "a2"))) else "INCOMPLETE", "phases": have}

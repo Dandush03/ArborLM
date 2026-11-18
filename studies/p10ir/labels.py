@@ -69,10 +69,13 @@ READINGS = {
     "panel_closure": "ADR §16 item 10 (ruled as recommended): P, C and J need the condition on both panels; a closure on one panel only is not P, C or J",
     "fully_row3": "READING: row 3 is FULLY if T1 and T3 are both RESTORED on both panels, else PARTLY",
     "mainly": "READING: 'mainly weights' / 'mainly selection' compares i(T1w) - i(T0) with i(T1) - i(T1w), each the mean of the two panels; equal is printed 'equal'",
-    "cell_dependent_equality": "READING: two CELL-DEPENDENT values are the same value only if they hold the same row at each primary cell (R-CONFIRM and the checkpoint rule compare these signatures)",
     "index_gate_scope": "§11 and §16 item 11: a failure of I256@512 or of an I64 index with F0 passing voids the index label of the replicate only; study-level NOT EVALUABLE (§9 item 1) applies per component's primary cells",
     "median_c_star": "READING: a cell's c* is the statistics.median of its replicates' c* (those that have one); with an even count this is the mean of the two middle values",
     "missing_plateau": "READING: a replicate whose recorded snapshots do not allow the plateau check counts as failing it",
+    "slack": "CONVENTION: every comparison of i with a threshold (gap, RESTORED, closure, H, R, plateau, floor) allows an absolute slack of 1e-12 (labels.EPS): a value within 1e-12 of a threshold counts as on its inclusive side; i comes from integer counts, so no real value lies that close",
+    "mixed_panel_cell": "RULING 2 (ADR section 19): a cell with four MIXED-PANEL replicates is MIXED (a MIXED-PANEL replicate satisfies no condition); MIXED-PANEL is a replicate row only",
+    "cell_dependent": "RULING 1 (ADR section 19): two CELL-DEPENDENT values are the same only if they hold the same row at each primary cell; otherwise the component is CHECKPOINT-DEPENDENT and R-CONFIRM is NOT CONFIRMED",
+    "accuracy_version": "RULING 3 (ADR section 19): acc0 is the memory-disabled accuracy of the same checkpoint and panel (P10-S1's own panel_counts; the frozen backbone's, identical for every checkpoint of a draw); the accuracy version of the retention ratio is printed beside each comparison and decides nothing",
     "mixed_cell": "READING: MIXED is a value that two primary cells can share; the component is then MIXED and recommends nothing",
 }
 
@@ -149,7 +152,7 @@ def tree_replicate(rep: TreeRep, th: Thresholds) -> RepLabel:
         return all(retention(i[r][p], i["F0"][p], th) == RESTORED or ge(g[r][p], th.closure) for p in PANELS)
 
     p_, c_, j_ = holds("T1"), holds("T3"), holds("T2")
-    h_ = all(le(i["T2"][p], i["T0"][p] - th.restored_margin_bits) for p in PANELS)
+    h_ = all(le(i["T2"][p], i["T0"][p] - th.h_margin_bits) for p in PANELS)
     if rep.cr8 is None:
         raise ValueError("an evaluable replicate needs CR8 of T0")
     r_ = ge(float(rep.cr8), th.recall_r)
@@ -209,7 +212,7 @@ def cell_label(rows: Sequence[str], th: Thresholds) -> str:
         raise ValueError(f"a cell has exactly {th.replicates} replicates (a missing record is a NOT EVALUABLE row)")
     if sum(1 for r in rows if r == NOT_EVALUABLE) >= th.not_evaluable_min_replicates:
         return NOT_EVALUABLE
-    for row, k in Counter(r for r in rows if r != NOT_EVALUABLE).most_common():
+    for row, k in Counter(r for r in rows if r not in (NOT_EVALUABLE, MIXED_PANEL)).most_common():  # ruling 2: a MIXED-PANEL replicate satisfies no condition, so no cell is labelled MIXED-PANEL
         if k >= th.label_min_replicates:
             return row
     return MIXED
@@ -328,7 +331,7 @@ def r_confirm(a1: Diagnosis, a2: Diagnosis | None, *, a2_complete: bool = True) 
             out[name] = {"value": NOT_EVALUABLE, "a2_not_evaluable": [list(x) for x in a2.not_evaluable if x[0] == comp]}
         else:
             c1, c2 = a1.components[comp], a2.components[comp]
-            out[name] = {"value": CONFIRMED if c1.signature == c2.signature else NOT_CONFIRMED, "a1": c1.value, "a2": c2.value}
+            out[name] = {"value": CONFIRMED if _tuplify(c1.signature) == _tuplify(c2.signature) else NOT_CONFIRMED, "a1": c1.value, "a2": c2.value}
     return out
 
 
@@ -341,3 +344,14 @@ def accuracy_retained(acc_x: float, acc_ref: float, acc0: float) -> float:
     """The accuracy version of the retention ratio, [acc(X) - acc0] / [acc(Y) - acc0], printed beside the rule and deciding nothing (section 8.1)."""
     den = acc_ref - acc0
     return math.nan if den <= 0 else (acc_x - acc0) / den
+
+
+def _tuplify(x: Any) -> Any:
+    return tuple(_tuplify(y) for y in x) if isinstance(x, list | tuple) else x
+
+
+def diagnosis_from_json(d: Mapping[str, Any]) -> Diagnosis:
+    """A ``Diagnosis`` rebuilt from the ``r_diagnosis`` block of a written analysis record (JSON turns tuples into lists; signatures are compared as tuples again). Used by the ``confirm`` stage, which
+    compares A2 with A1's FROZEN analysis record and never recomputes or rewrites A1's."""
+    comps = {k: Component(v["value"], v["at"], _tuplify(v["signature"]), len(v["signature"]) == 1) for k, v in d["components"].items()}
+    return Diagnosis(bool(d["evaluable"]), [tuple(x) for x in d["not_evaluable_cells"]], comps, None if d["pair"] is None else (d["pair"][0], d["pair"][1]), d["recommended"], bool(d["no_read_time_cause_identified"]))

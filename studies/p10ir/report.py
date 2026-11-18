@@ -38,6 +38,20 @@ def _rows_line(reps: Sequence[Mapping[str, Any]]) -> str:
     return "; ".join(out)
 
 
+def _retention_lines(reps: Sequence[Mapping[str, Any]]) -> list[str]:
+    """The retention status of every comparison with the accuracy version beside it (ruling 3; the accuracy version decides nothing)."""
+    out = ["    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):"]
+    for r in reps:
+        parts = []
+        for read, e in (r.get("retention") or {}).items():
+            if not e:
+                parts.append(f"{read}: n/a")
+            else:
+                parts.append(f"{read} " + " / ".join(f"{p}: {e[p]['status']} (accuracy version {_f(e[p]['accuracy_version'])})" for p in labels.PANELS))
+        out.append(f"      - d{r['draw']}: " + "; ".join(parts))
+    return out
+
+
 def _component_text(name: str, comp: Mapping[str, Any], stage_tag: str) -> list[str]:
     lines = [f"- **{name}: {tagged(str(comp['value']), stage_tag)}**"]
     for cp in labels.CHECKPOINTS:
@@ -88,8 +102,10 @@ def render_stage(a: Mapping[str, Any], title: str) -> list[str]:
             extra = f" [{'; '.join(plateau['tags'])}]" if plateau and plateau.get("tags") else (f" [plateau check {plateau['status']}]" if plateau else "")
             out.append(f"  - tree label: {tagged(ck['tree']['label'], tag)}{extra}")
             out.append(f"    - replicates: {_rows_line(ck['tree']['replicates'])}")
+            out += _retention_lines(ck["tree"]["replicates"])
             out.append(f"  - index label: {tagged(ck['index']['label'], tag)}{extra}")
             out.append(f"    - replicates: {_rows_line(ck['index']['replicates'])}")
+            out += _retention_lines(ck["index"]["replicates"])
             out.append(f"    - median c*: {_f(ck['index']['c_star_median'], 1)} keys, share of N: {_f(ck['index']['c_star_share_of_N'])}, N/8 for comparison: {_f(ck['index']['descriptive']['N_over_8'], 1)}; replicates without c*: {ck['index']['replicates_without_c_star']}")
             if ck["tree"].get("seal_note"):
                 out.append(f"    - CONTENT rows carry: {ck['tree']['seal_note']}")
@@ -160,10 +176,30 @@ def render(full: Mapping[str, Any], plan_note: str = "") -> str:
     out += render_stage(full["A1"], "Stage A1")
     if full.get("A2"):
         out += render_stage(full["A2"], "Stage A2")
+    if full["r_confirm"]["R-CONFIRM-TREE"]["value"] == "NOT RUN":
+        out += ["R-CONFIRM is computed by the separate `confirm` stage (group A2) against this record; this record is never rewritten.", ""]
     out.append("## Readings of the ADR taken here (each the most conservative course)")
     out.append("")
     for k, v in full["A1"]["readings"].items():
         out.append(f"- {k}: {v}")
     out.append("")
+    out.append("`Astra review: NOT_PERFORMED`.")
+    return "\n".join(out) + "\n"
+
+
+def render_confirm(record: Mapping[str, Any], note: str = "") -> str:
+    """The ``confirm`` stage's report section: R-CONFIRM-TREE and R-CONFIRM-INDEX against A1's frozen analysis record, and A2's own analysis."""
+    out = ["# P10-I-R confirmation (ADR-0029 section 10; stage `confirm`, group A2)", "", HEADER, ""]
+    if note:
+        out += [note, ""]
+    out.append(f"Against A1's analysis record, SHA-256 {record['a1_analysis_sha256']}; that record is not rewritten.")
+    out += ["", "## R-CONFIRM (does not change R-DIAGNOSIS)", ""]
+    for name in ("R-CONFIRM-TREE", "R-CONFIRM-INDEX"):
+        c = record["r_confirm"][name]
+        detail = f" (A1: {c['a1']}; A2: {c['a2']})" if "a1" in c else ""
+        out.append(f"- **{name}: {c['value']}**{detail}")
+    sa = record["statement_allowed"]
+    out += ["", f"- A statement that the tree's gap is caused by a named factor at read time requires R-CONFIRM-TREE: CONFIRMED. Allowed here: {sa['caused_by_a_named_factor_at_read_time']}.", ""]
+    out += render_stage(record["A2"], "Stage A2")
     out.append("`Astra review: NOT_PERFORMED`.")
     return "\n".join(out) + "\n"

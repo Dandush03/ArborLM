@@ -39,6 +39,7 @@ THRESHOLDS: list[tuple[str, Any, str, str]] = [
     ("thresholds.restored_ratio", 0.90, "8.1", "i(X) ≥ 0.90 · i(Y)"),
     ("thresholds.floor_i_bits_printed", 0.473, "8.1", "0.473 bits"),
     ("thresholds.floor_a_use", 0.25, "8.1", "a_use ≥ 0.25"),
+    ("thresholds.h_margin_bits", 0.25, "8.3", "i(T2) ≤ i(T0) − 0.25"),
     ("thresholds.closure", 0.5, "8.3", "g_P ≥ 0.5"),
     ("thresholds.recall_r", 0.90, "8.3", "CR8(T0) ≥ 0.90"),
     ("thresholds.plateau_gain_bits", 0.10, "9", "≤ 0.10 bits"),
@@ -125,7 +126,7 @@ def test_the_floor_is_fano_of_a_use_025_and_prints_as_0_473() -> None:
 def test_thresholds_object_carries_exactly_the_config_values() -> None:
     cfg = core.load_config()
     th = core.Thresholds.from_config(cfg)
-    assert (th.gap_bits, th.restored_margin_bits, th.restored_ratio, th.closure, th.recall_r, th.plateau_gain_bits) == (0.5, 0.25, 0.90, 0.5, 0.90, 0.10)
+    assert (th.gap_bits, th.restored_margin_bits, th.h_margin_bits, th.restored_ratio, th.closure, th.recall_r, th.plateau_gain_bits) == (0.5, 0.25, 0.25, 0.90, 0.5, 0.90, 0.10)
     assert (th.tree_candidates, th.replicates, th.label_min_replicates, th.not_evaluable_min_replicates, th.still_learning_min_replicates) == (512, 5, 4, 2, 2)
     assert (th.tie_margin, th.weight_tolerance, th.tie_share_max) == (1e-5, 1e-6, 0.001)
 

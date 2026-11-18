@@ -73,6 +73,9 @@ def tree_spec(row: str, *, partly: bool = False) -> TreeSpec:
     if row == "WEAK":
         i = {r: (0.3, 0.3) for r in labels.TREE_READS}
         return TreeSpec(i, 0.5)
+    if row == "ONE-PANEL-CLOSURE":  # T1 closes the gap on panel A only: not P (both panels are needed), so the replicate is CONTENT where R holds
+        i = {"T0": (2.0, 2.0), "T1": (3.9, 2.1), "T1w": (2.0, 2.0), "T2": (2.1, 2.1), "T3": (2.1, 2.1), "F0": (F0_I, F0_I)}
+        return TreeSpec(i, 0.95)
     if row == labels.MIXED_PANEL:
         i = {r: (3.0, 3.8) for r in ("T0", "T1", "T1w", "T2", "T3")} | {"F0": (F0_I, F0_I)}
         return TreeSpec(i, 0.5)
@@ -95,7 +98,8 @@ def _panels(i: tuple[float, float], n: int = 1000) -> dict[str, dict[str, float]
     out: dict[str, dict[str, float]] = {}
     for p, v in zip(labels.PANELS, i, strict=True):
         a = s1.i_to_a_use(v) if v > 0 else 0.03
-        out[p] = {"n": n, "useful": int(round(a * n)), "correct": int(round(a * n)), "i": float(v), "a_use": float(a), "accuracy": float(a)}
+        acc0 = 0.03  # memory-disabled accuracy (chance 1/32)
+        out[p] = {"n": n, "useful": int(round(a * n)), "correct": int(round(a * n)), "disabled_correct": int(round(acc0 * n)), "i": float(v), "a_use": float(a), "accuracy": float(a)}
     return out
 
 
@@ -117,10 +121,11 @@ def item_record(stage: str, cell: str, update: int, arm: str, gates: Mapping[str
 
 def fill_cell(
     reg: Registry, stage: str, spec: core.CellSpec, update: int, label_of: Any, tree_specs: Sequence[TreeSpec], index_specs: Sequence[IndexSpec], cfg: Mapping[str, Any] | None = None, *, share_changed: float = 0.4,
+    i64_seeds: Sequence[int] | None = None,
 ) -> None:  # fmt: skip
     """Write the records of both checkpoints (T-OQ and F-OQ) of the five replicates at ``update``."""
     cfg = cfg or core.load_config()
-    seeds = core.i64_seeds(cfg)
+    seeds = list(i64_seeds) if i64_seeds else core.i64_seeds(cfg, test=True)  # never the registered index seeds
     budgets = core.feasible_budgets(spec.slots, cfg)
     for d, (ts, ix) in enumerate(zip(tree_specs, index_specs, strict=True), start=1):
         t_label, f_label = label_of("T-OQ", spec, d), label_of("F-OQ", spec, d)
@@ -153,6 +158,8 @@ def full_registry(
     label_of: Any = None,
     *,
     default: tuple[str, str] = (labels.CONTENT, labels.NOT_APPROACH),
+    specs: Sequence[core.CellSpec] | None = None,
+    i64_seeds: Sequence[int] | None = None,
 ) -> Registry:
     """A registry of every cell and checkpoint of the stage. ``plan[(cell name, checkpoint name)] = (tree rows, index rows)``: a row name or five of them (replicates 1..5); a tree row
     'PARTLY:<row>' asks for the PARTLY variant. Unlisted checkpoints get ``default``."""
@@ -161,7 +168,7 @@ def full_registry(
     cfg = cfg or core.load_config()
     label_of = label_of or default_label_of(stage, cfg)
     reg = Registry()
-    specs = [s for s in core.cell_specs(cfg) if stage == core.STAGE_A1 or s.role == "primary"]
+    specs = list(specs) if specs is not None else [s for s in core.cell_specs(cfg) if stage == core.STAGE_A1 or s.role == "primary"]
     for spec in specs:
         budgets = core.feasible_budgets(spec.slots, cfg)
         cps = checkpoint_names(spec)
@@ -173,15 +180,34 @@ def full_registry(
             irow5 = [irows] * 5 if isinstance(irows, str) else list(irows)
             ts = [tree_spec(r.split(":", 1)[1], partly=True) if r.startswith("PARTLY:") else tree_spec(r) for r in trow5]
             ix = [index_spec(r, budgets) for r in irow5]
-            fill_cell(reg, stage, spec, update, label_of, ts, ix, cfg)
+            fill_cell(reg, stage, spec, update, label_of, ts, ix, cfg, i64_seeds=i64_seeds)
     return reg
 
 
-def plateau_series(cfg: Mapping[str, Any] | None = None, *, failing: Mapping[str, Sequence[int]] | None = None) -> dict[str, dict[str, list[dict[str, dict[int, float]] | None]]]:
+def coverage_plan(specs: Sequence[core.CellSpec]) -> dict[tuple[str, str], tuple[Any, Any]]:
+    """Rows over the checkpoints of ``specs`` other than the primary cells' U_P and run length, so that every replicate row of sections 8.3 and 8.4 is reached somewhere; the primary cells at U_P and the run
+    length are uniform PRIORS / SPARSE INDEX APPROACHES FLAT (so that R-DIAGNOSIS is evaluable and has an action)."""
+    from .analysis import checkpoint_names
+
+    tree_rows = [*labels.TREE_ROWS[1:], "PARTLY:PRIORS", "WEAK", labels.NOT_EVALUABLE]
+    index_rows = [labels.SPARSE_APPROACHES, labels.ONLY_ABOVE_512, labels.NOT_APPROACH, labels.NOT_EVALUABLE]
+    plan: dict[tuple[str, str], tuple[Any, Any]] = {}
+    k = 0
+    for spec in specs:
+        for cp in checkpoint_names(spec):
+            if spec.role == "primary" and cp in ("U_P", "RUN"):
+                plan[(spec.name, cp)] = (labels.PRIORS, labels.SPARSE_APPROACHES)
+            else:  # the five replicates of a checkpoint take five consecutive rows, so every row is reached somewhere and the cell is MIXED
+                plan[(spec.name, cp)] = ([tree_rows[(k + j) % len(tree_rows)] for j in range(5)], [index_rows[(k + j) % len(index_rows)] for j in range(5)])
+                k += 5
+    return plan
+
+
+def plateau_series(cfg: Mapping[str, Any] | None = None, *, failing: Mapping[str, Sequence[int]] | None = None, specs: Sequence[core.CellSpec] | None = None) -> dict[str, dict[str, list[dict[str, dict[int, float]] | None]]]:
     """Plateau series for the primary cells: every replicate plateaued (i flat at 3.5 over run/2 and run) except the replicates listed in ``failing[cell + ':' + arm]`` (still rising)."""
     cfg = cfg or core.load_config()
     out: dict[str, dict[str, list[dict[str, dict[int, float]] | None]]] = {}
-    for spec in core.primary_cells(cfg):
+    for spec in ([s for s in specs if s.role == "primary"] if specs is not None else core.primary_cells(cfg)):
         out[spec.name] = {}
         for arm in ("tree", "flat"):
             bad = set((failing or {}).get(f"{spec.name}:{arm}", ()))
