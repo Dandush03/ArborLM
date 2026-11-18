@@ -134,7 +134,7 @@ def test_plan_carries_every_threshold_the_config_has() -> None:
 def test_part_q_set_excludes_part_t_files_and_the_reverse() -> None:
     q, t = planmod.frozen_file_hashes(ROOT, "Q"), planmod.frozen_file_hashes(ROOT, "T")
     assert not any("/partq/" in f for f in t) and "configs/p10is2_partt.toml" in t and "studies/p10is2/common/core.py" in t
-    assert not any(f.startswith("studies/p10is2/") and "/partq/" not in f and "/common/" not in f for f in q)
+    assert not any(f.startswith("studies/p10is2/") and "/partq/" not in f and "/common/" not in f and "/launch/partq_" not in f for f in q)
 
 
 # --- caps by code ----------------------------------------------------------------------------------------------------------------------------
