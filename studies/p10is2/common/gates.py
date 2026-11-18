@@ -27,6 +27,7 @@ CHECKER_SUBSTITUTIONS: tuple[tuple[str, str], ...] = (
     ("ROOT = Path(__file__).resolve().parents[3]", "ROOT = Path({root!r})"),
     ('for path in sorted((ROOT / "configs").glob("*.toml")):', 'for path in [q for q in sorted((ROOT / "configs").glob("*.toml")) if not q.name.startswith("p10is2_")]:'),
     ('for path in sorted((ROOT / d).rglob("*.py")):', 'for path in [q for q in sorted((ROOT / d).rglob("*.py")) if "p10is2" not in q.name and "p10is2" not in q.parts]:'),
+    ("    for p_ in problems[:40]:", "    for p_ in problems:"),  # the checker prints only the first 40 problems: the copy prints ALL of them, so a problem naming this study cannot hide past line 40
 )
 OWN_MARKERS = ("P10IS2", "p10is2", "P10-I-S2 ADR-0025")
 
@@ -125,11 +126,12 @@ def run_checker_copy(path: Path, root: Path, timeout: float) -> dict[str, Any]:
         copy.write_text(text, encoding="utf-8")
         proc = subprocess.run([sys.executable, "-I", str(copy)], cwd=root, capture_output=True, text=True, timeout=timeout, check=False)  # noqa: S603
     fails = fail_lines(proc.stdout)
+    reported = [int(m[1]) for m in re.finditer(r"problems: (\d+)", proc.stdout)]
     own = [f for f in fails if any(m in f for m in OWN_MARKERS)]
     result = next((line for line in proc.stdout.splitlines() if line.startswith("RESULT:")), None)
     return {
         "returncode": proc.returncode, "result_line": result, "copy_sha256": sha256(text.encode()), "substitutions": [old for old, _ in CHECKER_SUBSTITUTIONS], "problems": len(fails), "problems_naming_this_study": own,
-        "problems_of_other_studies": len(fails) - len(own),
+        "problems_of_other_studies": len(fails) - len(own), "reported_problem_count": reported[0] if reported else None, "all_problems_printed": bool(reported) and reported[0] == len(fails),
     }  # fmt: skip
 
 
@@ -154,6 +156,8 @@ def seed_gate(part: str, cfg: Mapping[str, Any], *, root: Path | None = None, ru
             problems += allocation_problems(part, cfg, rows)
             if run_checker:
                 checker.update(run_checker_copy(checker_path, base, timeout))
+                if not checker["all_problems_printed"]:
+                    problems.append(f"the checker printed {checker['problems']} problem lines but reports {checker['reported_problem_count']}: the gate would be blind to some")
                 if checker["problems_naming_this_study"]:
                     problems.append(f"the extended registry checker reports {len(checker['problems_naming_this_study'])} problem(s) naming this study")
     named = named_values(part, cfg)

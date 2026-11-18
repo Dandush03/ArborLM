@@ -257,7 +257,7 @@ def test_identity_exit_code_is_75_and_nothing_written(repo: Path, platform_ok: N
     (repo / "studies/p10is2/partq/labels.py").write_text("changed\n")
     git(repo, "commit", "-q", "-am", "x")  # changed AND committed: the frozen roots differ at HEAD, which is a plain refusal at the precondition
     rc = stages.main(["registered", "--stage", "qfit", "--run-dir", str(repo / "runs"), "--freeze-commit", commit, "--repo", str(repo)])
-    assert rc == stages.EXIT_REFUSED
+    assert rc == stages.EXIT_IDENTITY  # a frozen root that differs from the freeze commit is an identity difference: PAUSED — IDENTITY, exit 75
     assert not (repo / "runs").exists()
     # an UNCOMMITTED change fails the clean-tree precondition first; the identity exit is reached only where the tree is clean: see the verify_plan test above and the exit mapping below
     assert stages.EXIT_IDENTITY == 75 == planmod.IDENTITY_EXIT
@@ -267,7 +267,7 @@ def test_registered_entry_points_refuse_today_in_the_real_repository(tmp_path: P
     """Nothing is frozen: no plan, no freeze record, no Decision 2 in this checkout."""
     assert not (ROOT / core.PLAN_Q).exists() and not (ROOT / core.FREEZE_RECORD_Q).exists()
     for argv in (["registered", "--stage", "qfit", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["work", "--stage", "generation", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["registered", "--stage", "qfit", "--run-dir", str(tmp_path / "r")]):
-        assert stages.main(argv) == stages.EXIT_REFUSED
+        assert stages.main(argv) in (stages.EXIT_REFUSED, stages.EXIT_IDENTITY)  # a checkout with uncommitted frozen files (work in progress) is an identity pause, a clean one a plain refusal: never a run
     assert stages.main(["freeze", "--measuring-rehearsal", "m", "--counting-rehearsal", "c"]) == stages.EXIT_REFUSED
     assert stages.main(["registered", "--stage", "nonsense", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"]) == stages.EXIT_REFUSED
     assert not (tmp_path / "r").exists()
@@ -481,7 +481,7 @@ def test_counting_rehearsal_forces_one_pause_and_one_identity_pause(tmp_path: Pa
 
     def probe() -> None:
         probes["n"] += 1
-        raise core.StageRefused("refused: frozen file differs (PAUSED — IDENTITY)")
+        raise core.ForcedIdentityPause("PAUSED — IDENTITY")
 
     rec = reh.run_counting(ctx_factory(tmp_path, seal=True), plan_file_sha256="c" * 64, caps_provisional=False, cap_seconds=10800.0, identity_probe=probe, pause_after_batches=4)
     assert rec["kind_of_rehearsal"] == "counting" and rec["plan_file_sha256"] == "c" * 64
@@ -496,3 +496,37 @@ def test_stage_statuses_follow_the_records_on_disk(tmp_path: Path) -> None:
     pipeline.run_all(ctx)
     st = reh.stage_statuses(ctx)
     assert st["partition"] and st["qfit"] and st["qcheck"] and st["generation"] and st["regeneration"] and not st["inputs"] and not st["outputs"]
+
+
+def test_a_changed_frozen_file_is_paused_identity_and_resumes_on_restore(repo: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """R5, without patching the platform check or the preconditions: an UNCOMMITTED change of a frozen file gives exit 75 and writes nothing; restoring it bit for bit lets the very same launch reach its stage."""
+    import platform as pf
+
+    if not (pf.system() == "Darwin" and pf.machine() == "arm64"):
+        pytest.skip("the platform of record")
+    repo, commit, _ = frozen_repo_real_platform(repo)
+    d = repo / "results/p10is2-partq-freeze-20261201/DECISION_2_PARTQ.md"
+    d.parent.mkdir(parents=True)
+    d.write_text(f"freeze {commit}\nDECISION: RUN\n")
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "decision 2")
+    reached: list[str] = []
+    monkeypatch.setattr(real, "run_registered_stage", lambda stage, repo_, run_dir, plan: reached.append(stage) or {"status": "COMPLETE"})
+    argv = ["registered", "--stage", "qfit", "--run-dir", str(repo / "runs"), "--freeze-commit", commit, "--repo", str(repo)]
+    f = repo / "studies/p10is2/partq/labels.py"
+    original = f.read_bytes()
+    f.write_bytes(original + b"\n# edited\n")
+    assert stages.main(argv) == stages.EXIT_IDENTITY == 75 and reached == [] and not (repo / "runs").exists()
+    f.write_bytes(original)
+    assert stages.main(argv) == 0 and reached == ["qfit"]
+
+
+def frozen_repo_real_platform(repo: Path):  # type: ignore[no-untyped-def]
+    set_caps(repo, CAP_HOURS)
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    rec = qplan.build_candidate(repo, repo / "runs", cfg, inputs=INPUTS, walk=FAKE_WALK)
+    qplan.write_candidate(repo, rec)
+    write_json(repo / core.FREEZE_RECORD_Q, {"kind": "freeze_record", "plan_file_sha256": file_sha256(repo / core.PLAN_Q)})
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "freeze")
+    return repo, git(repo, "rev-parse", "HEAD"), None

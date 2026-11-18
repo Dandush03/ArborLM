@@ -7,13 +7,18 @@ its last token. The row <-> concatenated-offset map is the cumulative UTF-8 byte
 
 THE LEDGER FILE (stable; the longer-training study READS it, so none of this changes without a recorded decision). One JSON object, written by ``write_ledger``::
 
-    {"format": "p10i-panel-ledger/1",
+    {"format": "p10i-panel-ledger-v1",
      "end_exclusive": true,
      "unit": "byte offsets in the concatenation of the rows of the WikiText-2 validation parquet file, rows in file order, nothing between them (ADR-0022 ruling A-B3)",
-     "windows": [{"start": int, "end": int, "first_row": int, "last_row": int, "kind": "marker" | "ordinary" | <another study's label>, "owner": str,
+     "windows": [{"start": int, "end": int, "first_row": int, "last_row": int,
+                  "stratum": "marker" | "ordinary",      # this study's windows only; the longer-training study checks the 44 marker-like windows by this field
+                  "source": "P10IS2 GEN marker-like window" | "P10IS2 GEN ordinary window", "kind": same as stratum, "owner": "P10IS2-partq",
                   "per_row": [[row, start_in_row, end_in_row], ...]}, ...],     # per_row only when the writer had the row map; ends exclusive
-     "owner": str, "check": {...}, "ordinary_eligible": int, "row_bytes_sha256": str | null,
-     "kind": "panel_ledger", "schema": 1, "study": "P10IS2", "part": "Q", "oracle_line": "..."}   # the study envelope
+     "p10is2": {"check": {...}, "ordinary_eligible": int, "row_bytes_sha256": str | null, "end_exclusive": true, "unit": "..."}}   # this study's block; other keys are other studies' and are kept
+
+The file is SHARED (``/Users/daniellaloush/dandush03/ArborLM/data/p10i-shared/panel_ledger.json``): the longer-training study (P10-I-S3) writes its own panel spans there first (format string ``p10i-panel-ledger-v1``,
+entries with ``source``, ``start``, ``end``, ``first_row``, ``last_row``). ``write_ledger`` MERGES: every entry of another owner and every unknown top-level key is kept as it is; this study's entries are replaced as
+a set and only by the ``ledger`` command before the freeze (``inputs`` only verifies). The format string is that study's, so its reader accepts the file unchanged.
 
 Another study that adds its panel spans appends objects with the same four required keys ``start``, ``end``, ``first_row``, ``last_row`` to ``windows`` and its own ``owner``; a reader needs only those four.
 """
@@ -46,7 +51,11 @@ class Span:
             raise SpanError(f"a span needs 0 <= first_row <= last_row: {self.first_row}, {self.last_row}")
 
     def to_json(self) -> dict[str, Any]:
-        return {"start": self.start, "end": self.end, "first_row": self.first_row, "last_row": self.last_row, "kind": self.kind, "owner": self.owner}
+        out = {"start": self.start, "end": self.end, "first_row": self.first_row, "last_row": self.last_row, "kind": self.kind, "owner": self.owner}
+        if self.kind in ("marker", "ordinary"):
+            out["stratum"] = self.kind
+            out["source"] = f"{self.owner or 'P10IS2'} GEN {'marker-like' if self.kind == 'marker' else 'ordinary'} window"
+        return out
 
     @staticmethod
     def from_json(d: Mapping[str, Any]) -> "Span":
@@ -162,24 +171,40 @@ class PanelLedger:
         return {"ok": ok, "counts": counts, "self_overlaps": self_overlaps, "ordinary_overlapping_other_owners": foreign}
 
 
-LEDGER_FORMAT = "p10i-panel-ledger/1"
+LEDGER_FORMAT = "p10i-panel-ledger-v1"
+
+
+def read_shared(path: "Any") -> dict[str, Any]:
+    """The shared ledger file as plain JSON (``{}`` if it does not exist)."""
+    import json
+    from pathlib import Path
+
+    p = Path(path)
+    return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
 
 
 def write_ledger(path: "Any", led: PanelLedger, owner: str, check: Mapping[str, Any], eligible: int, rows: RowMap | None = None) -> None:
-    """Writes the ledger file in the stable format of this module's docstring (overwrites: the ledger grows as studies add their panels)."""
-    from arborlm.io import canonical_json, sha256
+    """Writes this study's windows into the SHARED ledger in the stable format of this module's docstring, merging with what is there (other owners' entries and unknown top-level keys are kept verbatim)."""
+    from pathlib import Path
 
-    from . import core
+    from arborlm.io import canonical_json, sha256, write_json
 
-    windows = []
+    p = Path(path)
+    existing = read_shared(p)
+    foreign = [w for w in existing.get("windows", []) if w.get("owner") != owner]
+    mine = []
     for s in led.spans:
+        if s.owner != owner:
+            continue
         w = s.to_json()
         if rows is not None and s.end <= rows.total:
             w["per_row"] = [list(t) for t in per_row_spans(s, rows)]
-        windows.append(w)
-    rec = {
-        **core.envelope("panel_ledger", "Q"), "format": LEDGER_FORMAT, "end_exclusive": True, "windows": windows, "owner": owner, "check": dict(check), "ordinary_eligible": eligible,
-        "unit": "byte offsets in the concatenation of the rows of the WikiText-2 validation parquet file, rows in file order, nothing between them (ADR-0022 ruling A-B3)",
-        "row_bytes_sha256": None if rows is None else sha256(canonical_json(list(rows.row_bytes))),
-    }  # fmt: skip
-    core.write_record(path, rec, overwrite=True)
+        mine.append(w)
+    rec = {k: v for k, v in existing.items() if k not in ("windows", "format", "p10is2")}
+    rec.update({
+        "format": LEDGER_FORMAT, "windows": [*foreign, *mine],
+        "p10is2": {"check": dict(check), "ordinary_eligible": eligible, "end_exclusive": True, "row_bytes_sha256": None if rows is None else sha256(canonical_json(list(rows.row_bytes))), "owner": owner,
+                   "unit": "byte offsets in the concatenation of the rows of the WikiText-2 validation parquet file, rows in file order, nothing between them (ADR-0022 ruling A-B3)"},
+    })  # fmt: skip
+    p.parent.mkdir(parents=True, exist_ok=True)
+    write_json(p, rec)

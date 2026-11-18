@@ -5,6 +5,7 @@
 # score go to <run-dir>/sealed and are not displayed. Not run by the implementation.
 set -eu
 export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6
 if [ "$#" -ne 2 ]; then
     echo "usage: $0 <measuring|counting> <run-dir>" >&2
     exit 2

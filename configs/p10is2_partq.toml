@@ -106,7 +106,7 @@ durable_packages = "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages
 wikitext_dir = "/Users/daniellaloush/dandush03/ArborLM/data/wikitext2"
 packages_requirements = "studies/p10s2/requirements-datagen.txt"
 packages_requirements_sha256 = "d549380e67b220945d183a159a2cc2a85c2c982947367c70fd411038769e8867"
-panel_ledger = "freeze/panel_ledger.json"
+panel_ledger = "/Users/daniellaloush/dandush03/ArborLM/data/p10i-shared/panel_ledger.json"   # the SHARED ledger (section 4.1): outside the repository, so the longer-training study reads and writes the same file
 delegation_record = "docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md"
 decision_2_glob = "results/p10is2-partq-freeze-*/DECISION_2_PARTQ.md"
 

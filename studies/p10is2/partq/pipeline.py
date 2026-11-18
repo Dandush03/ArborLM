@@ -52,6 +52,7 @@ class QContext:
     deadline: Callable[[], bool] | None = None
     ordinary_windows_left: int | None = None
     marker_like_windows: int | None = None
+    force_generation: bool = False  # REHEARSALS ONLY: run qcheck, generation, regeneration and the outputs whatever Q1-Q4 give (a fallback filter setting if Q3 gives none), so that the sealed outcome is not revealed by which stages ran
     engineering_failures: list[str] = field(default_factory=list)
     timings: dict[str, float] = field(default_factory=dict)  # seconds spent in this invocation by stage (the measuring rehearsal's rates)
 
@@ -128,6 +129,48 @@ def _refs(it: Item, cap: str) -> list[str]:
     return list(it.refs[cap])
 
 
+def fallback_setting(ctx: QContext) -> FilterSetting:
+    """The most permissive setting of the grid (the smallest tau, the wider range): used ONLY by a rehearsal that must exercise generation whatever Q3 gives. Its use is not a result and is sealed with the rest."""
+    q = ctx.cfg["quality"]
+    return FilterSetting(round(min(float(t) for t in q["tau_grid"]), 2), float(q["ratio_ranges"][0][0]), float(q["ratio_ranges"][0][1]))
+
+
+def require_teachers_passed(ctx: QContext) -> None:
+    """Generation, regeneration and step 8 run only if BOTH teachers pass Q1-Q4 (section 4.1 step 7). A rehearsal (``force_generation``) is exempt: its outcome is sealed."""
+    if ctx.force_generation:
+        return
+    f = facts_of(ctx)
+    for c in core.TASKS:
+        st = labels.teacher_status(f["teachers"][c])
+        if st["failed"] or st["reserve_exhausted"] or f["teachers"][c]["q4"] is None:
+            raise core.StageRefused(f"refused: generation runs only if both teachers pass Q1-Q4 (teacher {c} has not): step 7 of section 4.1")
+
+
+def item_error_files(ctx: QContext) -> list[str]:
+    d = ctx.d("item_errors")
+    return sorted(str(p.name) for p in d.glob("*.json")) if d.is_dir() else []
+
+
+def record_item_error(ctx: QContext, stage: str, message: str) -> None:
+    """A code or environment error inside a stage is an ITEM ERROR the analysis refuses on (section 8.6); it is never a scientific label."""
+    d = ctx.d("item_errors")
+    d.mkdir(parents=True, exist_ok=True)
+    core.write_record(d / f"{stage}.json", {**core.envelope("item_error", "Q"), "stage": stage, "message": message[:2000]}, overwrite=True)
+
+
+def paused_stages(ctx: QContext) -> list[str]:
+    d = ctx.d("stages")
+    out = []
+    for p in sorted(d.glob("*.json")) if d.is_dir() else []:
+        try:
+            rec = read_json(p)
+        except Exception:  # noqa: BLE001
+            continue
+        if rec.get("status") == "PAUSED":
+            out.append(p.stem)
+    return out
+
+
 def step_qfit(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     """Both teachers on the whole Q_fit in the frozen layout; the digest batches; Q1, Q2 (needs both), Q3. Every per-item input is stored (rule 8). A resume re-asserts each teacher's digest by regeneration."""
     done = _have(ctx, "qfit/record.json")
@@ -164,7 +207,7 @@ def step_qfit(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     _rec(ctx, "qfit/values.json" if not ctx.sealed else "sealed/qfit_values.json", "values", values)
     summary = {
         "digests": digests, "n_batches": n_batches, "q1": q1, "q2": {c: bool(q2[c]["pass"]) for c in core.TASKS}, "q3": {c: q3[c].setting is not None for c in core.TASKS},
-        "filter_setting": {c: (None if q3[c].setting is None else q3[c].setting.to_json()) for c in core.TASKS}, "accepted_on_qfit": {c: q3[c].accepted for c in core.TASKS},
+        "filter_setting": {c: (fallback_setting(ctx).to_json() if (q3[c].setting is None and ctx.force_generation) else (None if q3[c].setting is None else q3[c].setting.to_json())) for c in core.TASKS}, "accepted_on_qfit": {c: q3[c].accepted for c in core.TASKS},
         "yields_on_qfit": {c: q3[c].accepted / max(1, len(items)) for c in core.TASKS}, "sealed": ctx.sealed,
     }  # fmt: skip
     return _rec(ctx, "qfit/record.json", "qfit", summary)
@@ -203,6 +246,7 @@ def step_generation(ctx: QContext, p: partition.QPartition, qfit: Mapping[str, A
     done = _have(ctx, "generation/result.json")
     if done is not None:
         return done
+    require_teachers_passed(ctx)
     sp = split.split_sources(p.source_pool["A"], p.source_pool["B"], partition.source_unit_key, ctx.seeds["source_split"], ctx.allowed, float(ctx.cfg["generation"]["split_share_b"]))
     orders = gen.source_orders(len(sp["A"]), len(sp["B"]), ctx.seeds["source_block_order"], ctx.allowed)
     eval_norm = {normalize(r) for name in ("E_A", "E_B", "E_C", "E_open") for it in p.panels[name] for refs in it.refs.values() for r in refs}
@@ -253,6 +297,7 @@ def step_regeneration(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     done = _have(ctx, "regeneration.json")
     if done is not None:
         return done
+    require_teachers_passed(ctx)
     report: dict[str, Any] = {}
     n_regen = ctx.regeneration_batches or int(ctx.cfg["generation"]["regeneration_batches"])
     src_of = {it.key: it.en for pool in p.source_pool.values() for it in pool}
@@ -290,7 +335,7 @@ def facts_of(ctx: QContext) -> dict[str, Any]:
         failures.append("regeneration difference")
     return {
         "engineering_failure": failures, "data_insufficient": fixed_input_problems_recorded(ctx), "teachers": teachers, "pools": None if g is None else g["counts"], "draws": None if g is None else g["draws_label"],
-        "item_errors": [], "paused": [],
+        "item_errors": item_error_files(ctx), "paused": paused_stages(ctx),
     }  # fmt: skip
 
 
@@ -320,7 +365,7 @@ def _run_all(ctx: QContext) -> dict[str, Any]:
     qf = timed(ctx, "qfit", lambda: step_qfit(ctx, p))
     timed(ctx, "qcheck", lambda: step_qcheck(ctx, p, qf))
     f = facts_of(ctx)
-    both = all(not labels.teacher_status(f["teachers"][c])["failed"] and not labels.teacher_status(f["teachers"][c])["reserve_exhausted"] and f["teachers"][c]["q4"] is not None for c in core.TASKS)
+    both = ctx.force_generation or all(not labels.teacher_status(f["teachers"][c])["failed"] and not labels.teacher_status(f["teachers"][c])["reserve_exhausted"] and f["teachers"][c]["q4"] is not None for c in core.TASKS)
     if both:
         timed(ctx, "generation", lambda: step_generation(ctx, p, qf))
         if (_have(ctx, "generation/result.json") or {}).get("draws_label") != split.EXHAUSTED:

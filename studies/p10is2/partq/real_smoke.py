@@ -51,7 +51,7 @@ def main() -> int:
         out["steps"][f"teacher_{c}_generation_config_asserted"] = datagen.check_generation_config(t.model.generation_config, t.generation_config) is None
         assert ok
     tok = datagen.HFTokenizer(downloads)
-    student, hf_state, srec = real_world.load_student(downloads, core.ROOT / "experiments/_scratch/real_smoke")
+    student, hf_state, srec = real_world.load_student(downloads, None)  # nothing is written
     dec = real_world.ByteDecoder(tok.token_bytes())
     nl = tuple(real_world.tokenize_segment(tok, "\n").ids)
 
@@ -61,10 +61,10 @@ def main() -> int:
     items = [type("I", (), {"en": s, "refs": {"A": ("Ich mag Tee.",), "B": ("J'aime le thé.",)}})() for s in SENTENCES[:2]]
     sc = real_world.student_scorer(student, tok, dec, nl)(items, P)
     out["steps"]["student_scorer"] = {"scores": sc, "finite_in_unit_interval": all(math.isfinite(v) and 0.0 <= v <= 1.0 for v in sc.values()), "student_plain_sha256": srec["student_plain_sha256"]}
-    text = PARAGRAPH * 40
+    rows = [f"Sentence {i} of the smoke text says that item {i * 7 + 3} was seen on day {i % 28 + 1}. {PARAGRAPH}" for i in range(40)]  # every row differs, so every window occurs once
+    text = "".join(rows)
     grid = real_world.window_grid(tok, text, 32, 8)
-    rows = [PARAGRAPH] * 40
-    spans = real_world.window_spans(grid, text, rows)
+    spans = real_world.window_spans(grid, tok.token_bytes(), rows)
     out["steps"]["window_grid"] = {"windows": len(grid), "strata": sorted({g["stratum"] for g in grid}), "first_span": [spans[0].start, spans[0].end, spans[0].first_row, spans[0].last_row] if spans else None}
     eq = real_world.equivalence_records(student, hf_state, downloads, tok, text * 4, real_world.seed_getter(cfg, "test"), (4,))
     out["steps"]["equivalence_layer4"] = {"logits_ok": eq["4"]["at_creation"]["logits"]["ok"], "injection_ok": eq["4"]["at_creation"]["injection"]["ok"]}

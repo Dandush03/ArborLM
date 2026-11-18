@@ -58,9 +58,9 @@ def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs
     """The plan record. ``inputs`` names every input file with its path and SHA-256 (the downloads, WikiText-2, the package manifest); the panel ledger as it stands at the freeze is hashed into ``manifests``."""
     manifests: dict[str, Any] = {}
     led = ledger_path or cfg["paths"]["panel_ledger"]
-    lp = repo / planmod_freeze_dir() / Path(led).name
+    lp = Path(led) if Path(led).is_absolute() else repo / planmod_freeze_dir() / Path(led).name
     if lp.is_file():
-        manifests["panel_ledger"] = {"path": str(lp.relative_to(repo)), "sha256": file_sha256(lp)}
+        manifests["panel_ledger"] = {"path": str(lp), "sha256": file_sha256(lp)}  # the shared ledger as it stands at the freeze, by absolute path and SHA-256
     return planmod.build_plan(
         part="Q", mode=mode, cfg=cfg, repo=repo, items=registered_items(cfg), run_dir=run_dir, walk=walk,
         extra={"layout": layout(cfg), "inputs": dict(inputs), "manifests": manifests, "panel_ledger_path": led, "seeds": {k: v for k, v in core.partq_seeds(cfg, "registered").items()}, "thresholds": {k: cfg["quality"][k] for k in cfg["quality"]}},

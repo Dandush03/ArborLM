@@ -213,8 +213,8 @@ def counting_rehearsal(world: engine.WorldT, snap_dir: Path, gloss: Mapping[str,
     if identity_probe is not None:
         try:
             identity_probe()
-        except core.StageRefused:
-            identity_ok = True
+        except core.ForcedIdentityPause:
+            identity_ok = True  # any other refusal propagates: it is a failure of the rehearsal, never a pass
     a2, rows, opts = engine.build_cell_arm(world, spec, None)
     resumed = engine.train_cell(world, spec, a2, rows, opts, updates, checkpoint_dir=snap_dir / "ck", checkpoint_every=max(1, updates // 2))
     ok_resume = resumed["status"] == "COMPLETE" and resumed["resumed"]

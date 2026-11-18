@@ -17,4 +17,5 @@ esac
 FREEZE_COMMIT=$3
 cd "$(dirname "$0")/../../.."
 unset PYTHONPATH
+export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6  # the ADR's six threads for scoring and recomputation
 exec uv run --locked python -m studies.p10is2.partt_stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT"

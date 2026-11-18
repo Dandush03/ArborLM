@@ -6,6 +6,7 @@
 # through uv's cache: the requirements file is never an argument of uv run. Part T never uses them. No word splitting: every expansion is quoted.
 set -eu
 export UV_OFFLINE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6  # the ADR's six threads; the process also sets them itself before its platform check
 if [ "$#" -ne 3 ]; then
     echo "usage: $0 <stage> <run-dir> <freeze-commit>" >&2
     exit 2
@@ -19,10 +20,12 @@ FREEZE_COMMIT=$3
 DURABLE_PACKAGES=/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages
 cd "$(dirname "$0")/../../.."
 case "$STAGE" in
-    inputs|qfit|qcheck|generation|regeneration|outputs)
+    inputs|partition|qfit|qcheck|generation|regeneration|outputs)
         PYTHONPATH="$DURABLE_PACKAGES" exec uv run --locked --offline --extra pilot python -m studies.p10is2.partq.stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT"
         ;;
-    partition|analysis)
+    analysis)
+        # records only: no package, so none is on the path (steps 1-8 of section 4.1 and the regeneration check are the only users of the 28 packages)
+        unset PYTHONPATH
         exec uv run --locked --offline --extra pilot python -m studies.p10is2.partq.stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT"
         ;;
     *)

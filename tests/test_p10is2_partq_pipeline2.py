@@ -250,7 +250,7 @@ def test_step_ledger_records_44_plus_100_and_excludes_foreign_spans(tmp_path: Pa
     out = step8.step_ledger(ctx, path, markers, cand)
     assert out["ok"] and out["eligible_ordinary"] == 120 and out["counts"] == {"marker": 44, "ordinary": 100}
     led = json.loads(path.read_text())
-    assert led["end_exclusive"] is True and len(led["windows"]) == 20 + 144
+    assert led["p10is2"]["end_exclusive"] is True and led["format"] == "p10i-panel-ledger-v1" and len(led["windows"]) == 20 + 144
     mine = [s for s in led["windows"] if s["owner"] == "P10IS2-partq" and s["kind"] == "ordinary"]
     assert len(mine) == 100 and all(s["start"] >= 70_000 for s in mine)  # none of the 20 candidates that overlap a foreign span
     with pytest.raises(core.PendingLeadReview):
@@ -302,7 +302,30 @@ def test_ledger_file_format_is_the_stable_one(tmp_path: Path) -> None:
     p = tmp_path / "ledger.json"
     step8.step_ledger(ctx, p, markers, cand, row_map=rm)
     d = json.loads(p.read_text())
-    assert d["format"] == LEDGER_FORMAT == "p10i-panel-ledger/1" and d["end_exclusive"] is True and len(d["windows"]) == 144
+    assert d["format"] == LEDGER_FORMAT == "p10i-panel-ledger-v1" and d["p10is2"]["end_exclusive"] is True and len(d["windows"]) == 144
     w = d["windows"][0]
-    assert {"start", "end", "first_row", "last_row", "kind", "owner", "per_row"} <= set(w) and w["per_row"][0][0] == 0
+    assert {"start", "end", "first_row", "last_row", "kind", "owner", "per_row", "stratum", "source"} <= set(w) and w["stratum"] == "marker" and w["per_row"][0][0] == 0
     assert sum(b - a for _, a, b in w["per_row"]) == w["end"] - w["start"]
+
+
+def test_shared_ledger_keeps_other_studies_entries_verbatim_and_is_written_once(tmp_path: Path) -> None:
+    """The file is shared with the longer-training study: its entries (without ``owner``, with ``source``) and its unknown top-level keys survive; this study's windows are written once; a reader needs only the four keys."""
+    ctx = ctx_of(tmp_path, sizes={**SMALL_SIZES, "gen_marker_like": 44, "gen_ordinary": 100})
+    foreign = {"end": 65, "first_row": 0, "last_row": 0, "source": "P10-I-S3 panel registered", "start": 0}
+    p = tmp_path / "shared.json"
+    p.write_text(json.dumps({"format": "p10i-panel-ledger-v1", "windows": [foreign], "their_extra": {"x": 1}}))
+    markers = [Span(1000 + i * 1000, 1900 + i * 1000, 3, 3) for i in range(44)]
+    cand = [Span(60_000 + i * 150, 60_000 + i * 150 + 100, 200, 200) for i in range(140)]
+    step8.step_ledger(ctx, p, markers, cand)
+    d = json.loads(p.read_text())
+    assert d["windows"][0] == foreign and d["their_extra"] == {"x": 1} and len(d["windows"]) == 145
+    mine = [w for w in d["windows"] if w.get("owner") == "P10IS2-partq"]
+    assert sum(w["stratum"] == "marker" for w in mine) == 44 and sum(w["stratum"] == "ordinary" for w in mine) == 100 and all(isinstance(w[k], int) for w in mine for k in ("start", "end", "first_row", "last_row"))
+    with pytest.raises(core.StageRefused, match="written once"):
+        step8.step_ledger(ctx, p, markers, cand)
+    v = step8.verify_study_ledger(ctx.cfg, p, markers, cand, sizes={"gen_marker_like": 44, "gen_ordinary": 100})
+    assert v["verified"] and v["marker_like"] == 44 and v["ordinary"] == 100
+    before = p.read_text()
+    with pytest.raises(core.StageRefused, match="does not verify"):
+        step8.verify_study_ledger(ctx.cfg, p, markers[:43], cand, sizes={"gen_marker_like": 44, "gen_ordinary": 100})
+    assert p.read_text() == before  # verification never writes

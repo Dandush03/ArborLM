@@ -14,7 +14,6 @@ from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-import psutil
 import torch
 
 from arborlm.io import read_json, write_json
@@ -24,24 +23,13 @@ from studies.p10s2.evaluate import score_panel
 from studies.p10s2.memory import NullArm
 
 from . import engine, partt_tasks, timing
-from .common import core
+from .common import core, procs
 from .common.core import StageRefused
 
 DECISION_FILE = "NOT_MEASURED_DECISION.md"
 
 
-def own_study_alive() -> list[str]:
-    """Command lines of live processes of THIS study other than this one (a worker or a stage of Part Q or T)."""
-    me = os.getpid()
-    out = []
-    for p in psutil.process_iter(["pid", "cmdline"]):
-        try:
-            text = " ".join(p.info["cmdline"] or [])
-        except psutil.Error:
-            continue
-        if p.info["pid"] != me and "python" in text and "studies.p10is2" in text:
-            out.append(text[:200])
-    return out
+own_study_alive = procs.own_study_alive
 
 
 def anything_alive() -> list[str]:

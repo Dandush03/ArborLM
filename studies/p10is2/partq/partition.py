@@ -226,23 +226,54 @@ def fixed_input_problems(p: QPartition, cfg: Mapping[str, Any], *, ordinary_wind
 
 
 def corpus_supply(corpus: CorpusLike, cfg: Mapping[str, Any]) -> dict[str, int]:
-    """The corpus-level supply of the Part Q measuring rehearsal (section 4.1 step 3, third bullet): in-vocabulary identity groups with a German reference, a French reference and both. These counts need no
-    partition seed: the vocabulary here is the 2,000 most frequent words of ALL sentences of 3-10 words (reading: the registered vocabulary depends on the partition's sides, so the rehearsal partition's own
-    counts are printed beside these)."""
+    """The corpus-level supply of the Part Q measuring rehearsal (section 4.1 step 3, third bullet): in-vocabulary IDENTITY GROUPS with a German reference, a French reference and both (the lead's ruling: groups,
+    not keys). A group counts for a language if one of its keys is in vocabulary, 3-10 words, and has a reference in that language; for both if one such key has both. No partition seed is needed: the
+    vocabulary is the 2,000 most frequent words of ALL sentences of 3-10 words (reading: the registered vocabulary depends on the partition's sides; the rehearsal partition's own counts are printed beside these)."""
     d = cfg["data"]
     min_w, max_w = int(d["min_words"]), int(d["max_words"])
     ne = {e: normalize(t) for e, t in corpus.eng.items()}
+    nx = {e: normalize(expand_contractions(t)) for e, t in corpus.eng.items()}
     freq: Counter[str] = Counter()
     for n in {x for x in ne.values() if x and min_w <= n_words(x) <= max_w}:
         freq.update(n.split())
     vset = {w for w, _ in sorted(freq.items(), key=lambda kv: (-kv[1], kv[0]))[: int(d["vocabulary"])]}
-    have: dict[str, set[str]] = {c: set() for c in TASKS}
-    for cap, links, store in (("A", corpus.links_de, corpus.deu), ("B", corpus.links_fr, corpus.fra)):
-        for e, t in links:
-            if e in corpus.eng and t in store:
-                have[cap].add(ne[e])
-    ok = {n for n in have["A"] | have["B"] if min_w <= n_words(n) <= max_w and all(w in vset for w in n.split())}
-    return {"in_vocabulary_keys_with_german": len(ok & have["A"]), "in_vocabulary_keys_with_french": len(ok & have["B"]), "in_vocabulary_keys_with_both": len(ok & have["A"] & have["B"])}
+    tgt = {"A": corpus.deu, "B": corpus.fra}
+    links = {"A": corpus.links_de, "B": corpus.links_fr}
+    pairs = sorted((cap, e, t) for cap in TASKS for e, t in links[cap] if e in corpus.eng and t in tgt[cap])
+    parent = list(range(len(pairs)))
+
+    def find(x: int) -> int:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    first: dict[tuple[str, str], int] = {}
+    for i, (cap, e, t) in enumerate(pairs):
+        for kind, s_ in (("e", ne[e]), ("x", nx[e]), ("r", normalize(tgt[cap][t]))):
+            if (kind, s_) in first:
+                a, b = find(first[(kind, s_)]), find(i)
+                if a != b:
+                    parent[max(a, b)] = min(a, b)
+            else:
+                first[(kind, s_)] = i
+    langs: dict[int, dict[str, bool]] = {}
+    for i, (cap, e, _t) in enumerate(pairs):
+        n = ne[e]
+        if min_w <= n_words(n) <= max_w and all(w in vset for w in n.split()):
+            langs.setdefault(find(i), {"A": False, "B": False, "both": False})[cap] = True
+    # a key with both references counts for "both" when its group holds an in-vocabulary key with a German pair and one with a French pair under the SAME English key
+    by_key: dict[str, set[str]] = defaultdict(set)
+    for cap, e, _t in pairs:
+        n = ne[e]
+        if min_w <= n_words(n) <= max_w and all(w in vset for w in n.split()):
+            by_key[n].add(cap)
+    group_of_key: dict[str, int] = {ne[e]: find(i) for i, (_c, e, _t) in enumerate(pairs)}
+    both = {group_of_key[k] for k, caps in by_key.items() if caps == {"A", "B"}}
+    return {
+        "in_vocabulary_groups_with_german": sum(1 for g in langs.values() if g["A"]), "in_vocabulary_groups_with_french": sum(1 for g in langs.values() if g["B"]), "in_vocabulary_groups_with_both": len(both),
+        "unit": "identity groups",
+    }  # fmt: skip
 
 
 def blocks_needed(accepted_per_block_mean: float, target: int) -> int:

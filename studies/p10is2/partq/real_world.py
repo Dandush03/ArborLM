@@ -42,7 +42,7 @@ from studies.p10s2.windows import first_marker
 
 from ..common import core
 from ..common.core import StageRefused
-from ..common.panel_ledger import RowMap, Span, char_to_byte_offsets
+from ..common.panel_ledger import RowMap, Span
 from . import real
 
 TATOEBA_RECORD = "studies/p10s2/records/tatoeba_session.json"
@@ -109,7 +109,7 @@ def read_wikitext_rows(directory: Path, pins: Mapping[str, Mapping[str, Any]]) -
 
 def window_grid(tok: Any, text: str, window: int, decision: int) -> list[dict[str, Any]]:
     """The fixed grid of ``window``-token windows over the whole text, classified exactly as P10-S2's ``windows.cut_windows`` does (marker-like if a marker-like string lies within the first ``decision``
-    tokens; ordinary if none lies in the whole window; any other window is not a candidate), each with the character span from the first character of its first token to the last character of its last token."""
+    tokens; ordinary if none lies in the whole window; any other window is not a candidate). Each carries the token ids of the window (the BYTES of its span come from them: ``window_spans``)."""
     ids, offs = tok.encode_offsets(text)
     out: list[dict[str, Any]] = []
     for w0 in range(0, len(ids) - window + 1, window):
@@ -117,18 +117,33 @@ def window_grid(tok: Any, text: str, window: int, decision: int) -> list[dict[st
         whole = text[offs[w0][0] : offs[w0 + window - 1][1]]
         stratum = "marker" if first_marker(head) is not None else ("ordinary" if first_marker(whole) is None else None)
         if stratum is not None:
-            out.append({"w0": w0, "stratum": stratum, "char_start": offs[w0][0], "char_end": offs[w0 + window - 1][1]})
+            out.append({"w0": w0, "stratum": stratum, "ids": ids[w0 : w0 + window], "char_start": offs[w0][0], "char_end": offs[w0 + window - 1][1]})
     return out
 
 
-def window_spans(grid: Sequence[Mapping[str, Any]], text: str, rows: Sequence[str]) -> list[Span]:
-    """Byte spans (exclusive ends) of the grid's windows in the concatenation of the rows, with first and last row (the row map is the cumulative UTF-8 length of the rows, nothing between them)."""
+def find_once(haystack: bytes, needle: bytes) -> int | None:
+    """The position of ``needle`` in ``haystack`` if it occurs exactly once (overlapping occurrences count), else None."""
+    pos = haystack.find(needle)
+    if pos < 0 or haystack.find(needle, pos + 1) >= 0:
+        return None
+    return pos
+
+
+def window_spans(grid: Sequence[Mapping[str, Any]], token_bytes: Sequence[bytes], rows: Sequence[str], text_bytes: bytes | None = None) -> list[Span]:
+    """Byte spans (exclusive ends) of the grid's windows in the concatenation of the rows, found from BYTES, as the longer-training study does (audit R8): the window's bytes are the join of its tokens' bytes and
+    must occur EXACTLY ONCE in the concatenated validation text; zero or several occurrences stop the step (``RegisteredTestStop``), nothing is guessed. The first and last row follow from the row map."""
+    from studies.p10s2.datagen import RegisteredTestStop
+
+    data = text_bytes if text_bytes is not None else "".join(rows).encode("utf-8")
     rm = RowMap.from_rows(rows)
-    c2b = char_to_byte_offsets(text)
     spans: list[Span] = []
     for g in grid:
-        start, end = c2b[g["char_start"]], c2b[g["char_end"]]
-        spans.append(Span(start, end, rm.row_of(start), rm.row_of(end - 1), g["stratum"]))
+        b = b"".join(token_bytes[i] for i in g["ids"])
+        pos = find_once(data, b)
+        if pos is None:
+            raise RegisteredTestStop(f"window {g['w0']} ({g['stratum']}) occurs {'0' if data.find(b) < 0 else 'more than once'} times in the validation text; the span is not guessed")
+        end = pos + len(b)
+        spans.append(Span(pos, end, rm.row_of(pos), rm.row_of(end - 1), g["stratum"]))
     return spans
 
 
@@ -139,7 +154,7 @@ def cut_general_windows(tok: Any, text: str, vocab_index: Mapping[str, int], win
 
 
 # --- student, tokenizer, equivalence ---------------------------------------------------------------------------------------------------------------
-def load_student(downloads: Path, out: Path) -> tuple[Any, Any, dict[str, Any]]:
+def load_student(downloads: Path, out: Path | None) -> tuple[Any, Any, dict[str, Any]]:
     load_file = importlib.import_module("safetensors.torch").load_file
     cfg = StudentConfig.from_hf_config(json.loads(fetch_guard.read_verified_bytes(downloads, "student/config.json")))
     fetch_guard.verify_against_constant(downloads / "student/model.safetensors", "student/model.safetensors")
@@ -147,9 +162,19 @@ def load_student(downloads: Path, out: Path) -> tuple[Any, Any, dict[str, Any]]:
     plain = convert_hf_state_dict(hf_state, cfg)
     student = build_student(cfg)
     load_plain_state(student, plain)
+    if out is None:  # a smoke writes nothing
+        import hashlib
+
+        from studies.p10s2.model import tensor_sha
+
+        h = hashlib.sha256()
+        for k in sorted(plain):
+            h.update(k.encode())
+            h.update(tensor_sha(plain[k]).encode())  # the study's own tensor hash: nothing is written
+        return student, hf_state, {"student_plain_sha256": h.hexdigest(), "written": False, "note": "a digest of the tensors, not the sha of the saved file"}
     out.mkdir(parents=True, exist_ok=True)
     torch.save({"cfg": cfg.__dict__, "state": plain}, out / "student_plain.pt")
-    return student, hf_state, {"student_plain_sha256": fetch_guard.sha256_file(out / "student_plain.pt")}
+    return student, hf_state, {"student_plain_sha256": fetch_guard.sha256_file(out / "student_plain.pt"), "written": True}
 
 
 def equivalence_records(student: Any, hf_state: Any, downloads: Path, tok: Any, train_text: str, ctx_seed: Callable[[str], torch.Generator], layers: Sequence[int]) -> dict[str, Any]:

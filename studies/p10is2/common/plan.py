@@ -69,6 +69,10 @@ def frozen_file_hashes(repo: Path, part: str) -> dict[str, str]:
             if "/launch/" in f"/{rel}" and part == "T" and p.name.startswith(LAUNCH_PREFIX["Q"]):
                 continue
             out[rel] = file_sha256(p)
+    if part == "Q":  # the launch scripts of Part Q are in its frozen set (section 11 item 2) although the directory lies outside partq/ and common/
+        for p in sorted((repo / "studies/p10is2/launch").glob(LAUNCH_PREFIX["Q"] + "*")):
+            if _is_source(p):
+                out[str(p.relative_to(repo))] = file_sha256(p)
     for rel in (str(part_config(part)), *ALWAYS, *EXTRA_FILES[part]):
         if (repo / rel).is_file():
             out[rel] = file_sha256(repo / rel)
@@ -246,7 +250,11 @@ def check_preconditions(part: str, mode: str, repo: Path, freeze_commit: str | N
     record is in this worktree, and the machine is the platform of record. Returns the freeze identity (None for rehearsal and test)."""
     if mode != REGISTERED:
         return None
-    dirty = core.git(repo, "status", "--porcelain", "--untracked-files=all").stdout.decode().strip()
+    dirty = core.git(repo, "status", "--porcelain", "--untracked-files=all").stdout.decode().rstrip()
+    frozen_paths = [*PART_ROOTS[part], *(["studies/p10is2/launch/partq_"] if part == "Q" else []), str(part_config(part)), *ALWAYS, *EXTRA_FILES[part]]
+    changed = [ln[3:] for ln in dirty.splitlines() if any(ln[3:].strip('"').startswith(fp) for fp in frozen_paths) and not any(ln[3:].strip('"').startswith(x) for x in EXCLUDED[part])]
+    if changed:  # a changed FROZEN file is an identity difference: PAUSED — IDENTITY (exit 75), nothing is written, restoring the file bit for bit resumes the stage
+        raise StageRefused("PAUSED — IDENTITY: a frozen file differs from the committed tree: " + ", ".join(changed[:6]))
     if dirty:
         raise StageRefused("refused: the working tree is not clean:\n" + "\n".join(dirty.splitlines()[:10]))
     if not freeze_commit:
@@ -257,8 +265,9 @@ def check_preconditions(part: str, mode: str, repo: Path, freeze_commit: str | N
     full = ok.stdout.decode().strip()
     if core.git(repo, "merge-base", "--is-ancestor", full, "HEAD").returncode != 0:
         raise StageRefused(f"refused: freeze commit {full} is not an ancestor of HEAD")
-    paths = [*PART_ROOTS[part], str(part_config(part)), *ALWAYS, *EXTRA_FILES[part]]
-    problems = [f"{p} at HEAD differs from the freeze commit" for p in paths if core.git(repo, "rev-parse", f"{full}:{p}").stdout != core.git(repo, "rev-parse", f"HEAD:{p}").stdout]
+    launch = [str(p.relative_to(repo)) for p in sorted((repo / "studies/p10is2/launch").glob(LAUNCH_PREFIX["Q"] + "*"))] if part == "Q" else []
+    paths = [*PART_ROOTS[part], *launch, str(part_config(part)), *ALWAYS, *EXTRA_FILES[part]]
+    problems = [f"PAUSED — IDENTITY: {p} at HEAD differs from the freeze commit" for p in paths if core.git(repo, "rev-parse", f"{full}:{p}").stdout != core.git(repo, "rev-parse", f"HEAD:{p}").stdout]
     if problems:
         raise StageRefused("refused: " + "; ".join(problems))
     foreign = foreign_freeze_records(repo)

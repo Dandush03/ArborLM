@@ -1,10 +1,20 @@
 # ruff: noqa: E501
-"""The real Part Q stage bodies (ADR-0025 sections 4.1, 4.3, 10): ``inputs``, ``partition``, ``qfit``, ``qcheck``, ``generation``, ``regeneration``, ``outputs``, ``analysis``.
+"""The real Part Q stage bodies (ADR-0025 sections 4.1, 4.3, 9, 10): ``ledger`` (the one pre-freeze command), ``inputs``, ``partition``, ``qfit``, ``qcheck``, ``generation``, ``regeneration``, ``outputs``, ``analysis``.
 
 Each stage builds the real world (``real_world``: P10-S2's own loaders), the real ``QContext`` and calls the SAME ``pipeline`` / ``step8`` functions the unit tests drive with fakes, so the real path adds no
-scientific code. One process, teachers one after the other inside it (the ADR allows one teacher per worker and at most two workers; this body runs one process: reading, listed). Charged time is the wall time of
-the process (ruling L2). A stop on the cap is PAUSED (``StageCapExceeded``); a registered test of the data step (a tokenization test, the equivalence test, the chrF cross-check) stops the stage and returns to
-the lead (ruling L3). Needs the packages; never imported by the unit tests.
+scientific code. What this module adds is the stage machinery the ADR asks for:
+
+* every registered stage takes its parameters from the FROZEN PLAN (``plan.items(stage)``, ``plan.data["layout"]``), not from the config;
+* stage ORDER is enforced (a stage runs only after its predecessor's completion record; generation, regeneration and the outputs only if both teachers passed Q1-Q4);
+* a CUMULATIVE ledger of charged seconds in the run directory (the wall time of each process, ruling L2): a stage may use the smaller of its cap less what it used and what is left of the part's total; a cap stop
+  or a memory-guard stop (12 GiB) is PAUSED and the stage resumes at the next batch; the stage manifest says so;
+* a code or environment error is an ITEM ERROR (``item_errors/``) the analysis refuses on; a digest mismatch, a failed G8 or any registered test of the data step leaves a record (``engineering_failures.json``)
+  and stops the stage (ruling L3); a worker's refusal on identity exits 75 (PAUSED — IDENTITY) before anything is written;
+* the process is configured (six threads, deterministic algorithms) first.
+
+The shared panel ledger is written ONLY by the ``ledger`` command, before the freeze (seed 250907; rehearsal 252907, into the run directory); ``inputs`` VERIFIES it and never writes. One process per stage, the
+teachers one after the other inside it (the ADR allows one teacher per worker and two workers; a worker split is an optimisation the lead's launch can add). Needs the packages (except ``analysis``, which reads
+records only); never imported by the unit tests.
 """
 
 import json
@@ -14,17 +24,21 @@ from pathlib import Path
 from typing import Any
 
 from arborlm.io import file_sha256, read_json, write_json
-from studies.p10s2 import datagen, fetch_guard
+from studies.p10s2 import datagen
 from studies.p10s2.datagen import RegisteredTestStop
 from studies.p10s2.tokenization import ByteDecoder, tokenize_segment
 
-from ..common import core
-from ..common.core import PendingLeadReview, StageRefused
-from ..common.panel_ledger import RowMap
+from ..common import core, gates, procs, runner
+from ..common import plan as planmod
+from ..common.core import StageRefused
+from . import batches as bt
 from . import generation as gen
-from . import labels, pipeline, real, real_bundle, real_world, step8
-from .batches import StageCapExceeded
+from . import labels, partition, pipeline, real, real_bundle, real_world, step8
+from .batches import DigestMismatch, StageCapExceeded
 from .teacher import marian_batch_teacher
+
+STAGE_ORDER = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis")
+TEACHER_GATED = ("generation", "regeneration", "outputs")
 
 
 def downloads_dir(cfg: Any) -> Path:
@@ -32,21 +46,25 @@ def downloads_dir(cfg: Any) -> Path:
 
 
 def ledger_path(cfg: Any, repo: Path, run_dir: Path, mode: str) -> Path:
-    """Registered: the shared ledger in the freeze directory (the plan names it); a rehearsal writes a candidate in its own run directory, which the lead copies into the freeze directory."""
-    name = Path(cfg["paths"]["panel_ledger"]).name
-    return repo / core.FREEZE_DIR / name if mode == "registered" else run_dir / name
+    """Registered: the SHARED ledger (``paths.panel_ledger``, outside the repository); a rehearsal writes a candidate in its own run directory, which the lead may use as the registered one only by copying it."""
+    return Path(cfg["paths"]["panel_ledger"]) if mode == "registered" else run_dir / "panel_ledger_candidate.json"
 
 
-def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers: bool, tick: Callable[[str], None] = lambda s: None) -> real_world.RealWorld:
+def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers: bool, light: bool = False, tick: Callable[[str], None] = lambda s: None) -> real_world.RealWorld:
+    """The real world. ``light`` loads only the tokenizer and WikiText-2 (the ``ledger`` command); otherwise also the student and the corpus (and the teachers if asked)."""
+    gates.apply_platform_settings(cfg)
     real_world.assert_process_environment(cfg)
     w = real_world.RealWorld(cfg, repo, run_dir, downloads_dir(cfg))
     w.record["packages"] = real_world.check_packages(cfg, repo)
-    w.record["hashes"] = datagen.verify_downloads(w.downloads, repo / real_world.TATOEBA_RECORD, root=repo)
     pins = real.wikitext_pins(repo)
     w.record["wikitext"] = real.check_wikitext(Path(cfg["paths"]["wikitext_dir"]), pins)
     w.record["wikitext"]["adr_0004_sha256"] = file_sha256(repo / real.ADR_0004)
     w.wikitext_rows = real_world.read_wikitext_rows(Path(cfg["paths"]["wikitext_dir"]), pins)
     w.texts = {k: "".join(v) for k, v in w.wikitext_rows.items()}
+    if light:
+        w.tok = datagen.HFTokenizer(w.downloads)
+        return w
+    w.record["hashes"] = datagen.verify_downloads(w.downloads, repo / real_world.TATOEBA_RECORD, root=repo)
     tick("hash checks")
     w.student, hf_state, w.record["student"] = real_world.load_student(w.downloads, run_dir / "inputs")
     w.tok = datagen.HFTokenizer(w.downloads)
@@ -63,60 +81,85 @@ def build_world(cfg: Any, repo: Path, run_dir: Path, mode: str, *, load_teachers
     return w
 
 
-def make_ctx(w: real_world.RealWorld, mode: str, *, limits: dict[str, Any] | None = None) -> pipeline.QContext:
-    nl = tuple(tokenize_segment(w.tok, "\n").ids)
-    inputs = (read_json(w.run_dir / "inputs/record.json") if (w.run_dir / "inputs/record.json").is_file() else {})
-    ctx = pipeline.QContext(
-        cfg=w.cfg, mode=mode, corpus=w.corpus, teachers=w.teachers, student_scores=real_world.student_scorer(w.student, w.tok, w.decoder, nl), run_dir=w.run_dir,
-        ordinary_windows_left=inputs.get("ordinary_windows_left"), marker_like_windows=inputs.get("marker_like_windows"),
-    )  # fmt: skip
+def make_ctx(w: real_world.RealWorld, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, deadline: Callable[[], bool] | None = None) -> pipeline.QContext:
+    """The context. In a registered stage every parameter comes from the plan: the layout (batch size, block size, digest and regeneration batches), the Q_check target and the generation targets of its items,
+    and only the teachers its items name."""
+    nl = tuple(tokenize_segment(w.tok, "\n").ids) if w.tok is not None and w.student is not None else ()
+    inputs = read_json(w.run_dir / "inputs/record.json") if (w.run_dir / "inputs/record.json").is_file() else {}
+    scorer = real_world.student_scorer(w.student, w.tok, w.decoder, nl) if w.student is not None else (lambda items, p: {})
+    ctx = pipeline.QContext(cfg=w.cfg, mode=mode, corpus=w.corpus, teachers=w.teachers, student_scores=scorer, run_dir=w.run_dir, ordinary_windows_left=inputs.get("ordinary_windows_left"), marker_like_windows=inputs.get("marker_like_windows"), deadline=deadline)
+    if plan is not None:
+        lay = plan.data["layout"]
+        ctx.batch_size, ctx.block_sources = int(lay["batch_size"]), int(lay["generation_block_sources"])
+        ctx.digest_batches, ctx.regeneration_batches = int(lay["digest"]["batches"]), int(lay["regeneration"]["batches"])
+        qc = plan.items("qcheck")
+        ctx.check_target = int(qc[0]["target_accepted"])
+        gi = plan.items("generation")
+        ctx.accepted_min, ctx.accepted_disjoint = int(gi[0]["minimum_accepted"]), int(gi[0]["target_accepted"])
+        named = {i["teacher"] for i in plan.items("qfit")}
+        ctx.teachers = {c: t for c, t in w.teachers.items() if c in named}
     for k, v in (limits or {}).items():
         setattr(ctx, k, v)
     return ctx
 
 
-# --- stage bodies ----------------------------------------------------------------------------------------------------------------------------
+# --- the ledger command (before the freeze) and the inputs stage -------------------------------------------------------------------------------------
+def window_candidates(w: real_world.RealWorld, cfg: Any) -> tuple[list[Any], list[Any], list[Any]]:
+    """(grid, marker spans, ordinary spans) of the validation text, the spans from BYTES (each window's token bytes found exactly once in the concatenated text)."""
+    window, decision = int(cfg["panels"]["general_window_tokens"]), 64
+    grid = real_world.window_grid(w.tok, w.texts["validation"], window, decision)
+    spans = real_world.window_spans(grid, w.tok.token_bytes(), w.wikitext_rows["validation"])
+    return grid, [s for s in spans if s.kind == "marker"], [s for s in spans if s.kind == "ordinary"]
+
+
+def command_ledger(repo: Path, run_dir: Path | None, mode: str) -> dict[str, Any]:
+    """THE pre-freeze ledger step: the 44 marker-like windows and the 100 ordinary windows (seed 250907; 252907 in a rehearsal) into the shared ledger (a candidate file in a rehearsal's run directory)."""
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    rd = run_dir or Path(".")
+    w = build_world(cfg, repo, rd, mode, load_teachers=False, light=True)
+    _grid, marker, ordinary = window_candidates(w, cfg)
+    lp = ledger_path(cfg, repo, rd, mode)
+    res = step8.write_study_ledger(cfg, mode, lp, marker, ordinary, row_map=real_world.RowMap.from_rows(w.wikitext_rows["validation"]))
+    return {"ledger": str(lp), "sha256": file_sha256(lp), "marker_like": len(marker), "ordinary_candidates": len(ordinary), **res}
+
+
 def stage_inputs(w: real_world.RealWorld, ctx: pipeline.QContext, mode: str) -> dict[str, Any]:
-    """Step 1: hash checks (done by ``build_world``), the applied generation configuration of each teacher against its pinned file, student conversion and the equivalence record at each read layer (gate G8),
-    test (c) of the tokenizer, and the GEN windows: the 44 marker-like and 100 ordinary windows as byte spans in the shared panel ledger (end exclusive, per-row conversion)."""
+    """Step 1: hash checks (``build_world``), the applied generation configuration of each teacher against its pinned file, the student's conversion and the equivalence record at each read layer (gate G8), test (c) of
+    the tokenizer, the corpus-level supply counts, and the shared panel ledger VERIFIED (never written here)."""
     cfg = w.cfg
     get = real_world.seed_getter(cfg, mode)
     for c, t in w.teachers.items():
         datagen.check_generation_config(t.model.generation_config, t.generation_config)  # the applied configuration equals the pinned file, else RegisteredTestStop
     w.record["generation_config"] = {c: {"pinned": t.generation_config, "applied": t.applied_generation_config} for c, t in w.teachers.items()}
-    layers = (4, 12)
+    layers = tuple(int(x) for x in (4, 12))
     eq = real_world.equivalence_records(w.student, w._hf_state, w.downloads, w.tok, w.texts["train"], get, layers)  # type: ignore[attr-defined]
     w.record["equivalence"] = {k: v["at_creation"] for k, v in eq.items()}
     if not all(v["at_creation"]["logits"]["ok"] and v["at_creation"]["injection"]["ok"] for v in eq.values()):
+        pipeline.fail(ctx, "gate G8: the student equivalence test failed at a read layer")
         raise RegisteredTestStop("the student equivalence test failed at a read layer (gate G8)")
     w.record["check_c"] = real_world.check_decoder_test_c(w.tok, get)
-    window, decision = int(cfg["panels"]["general_window_tokens"]), 64
-    grid = real_world.window_grid(w.tok, w.texts["validation"], window, decision)
-    spans = real_world.window_spans(grid, w.texts["validation"], w.wikitext_rows["validation"])
-    marker = [s for s in spans if s.kind == "marker"]
-    ordinary = [s for s in spans if s.kind == "ordinary"]
+    w.record["corpus_supply"] = partition.corpus_supply(w.corpus, cfg)
+    _grid, marker, ordinary = window_candidates(w, cfg)
     lp = ledger_path(cfg, w.repo, w.run_dir, mode)
-    ctx_for_ledger = ctx
-    ctx_for_ledger.mode = mode
-    res = step8.step_ledger(ctx_for_ledger, lp, marker, ordinary, row_map=RowMap.from_rows(w.wikitext_rows["validation"]))
-    w.record["gen_windows"] = {"grid_windows": len(grid), "marker_like": len(marker), "ordinary_candidates": len(ordinary), "ledger": str(lp), "ledger_sha256": file_sha256(lp), **res}
-    rec = {**core.envelope("block_record", "Q"), "what": "inputs", "ordinary_windows_left": res["eligible_ordinary"], "marker_like_windows": len(marker), **{k: v for k, v in w.record.items() if k not in ("corpus",)}}
+    verified = step8.verify_study_ledger(cfg, lp, marker, ordinary)
+    w.record["gen_windows"] = {"ledger": str(lp), "ledger_sha256": file_sha256(lp), "marker_like": len(marker), "ordinary_candidates": len(ordinary), **verified}
+    rec = {**core.envelope("block_record", "Q"), "what": "inputs", "ordinary_windows_left": len(ordinary), "marker_like_windows": len(marker), **{k: v for k, v in w.record.items() if k not in ("corpus",)}}
     core.write_record(w.run_dir / "inputs/record.json", rec, overwrite=True)
     return rec
 
 
 def tokenizer_record(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any) -> dict[str, Any]:
     """The token ids of 100 fixed sentences per teacher (seed 250908, drawn from that capability's own generation sources) and the teacher's own translation of them (P10-S2's ``tokenizer_record``)."""
+    import torch
+
+    from . import split
+
     path = w.run_dir / "inputs/tokenizer_record.json"
     if path.is_file():
         return read_json(path)  # type: ignore[no-any-return]
-    from . import split
-
-    sp = split.split_sources(p.source_pool["A"], p.source_pool["B"], pipeline.partition.source_unit_key, ctx.seeds["source_split"], ctx.allowed, float(ctx.cfg["generation"]["split_share_b"]))
+    sp = split.split_sources(p.source_pool["A"], p.source_pool["B"], partition.source_unit_key, ctx.seeds["source_split"], ctx.allowed, float(ctx.cfg["generation"]["split_share_b"]))
     g = core.seeded_generator(ctx.seeds["teacher_tokenizer_sentences_and_digest"], "teacher tokenizer sentences", ctx.allowed)
     out: dict[str, Any] = {}
-    import torch
-
     for c in core.TASKS:
         pool = sorted(sp[c], key=lambda i: i.key)
         pick = torch.randperm(len(pool), generator=g).tolist()[:100]
@@ -126,19 +169,20 @@ def tokenizer_record(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any) ->
 
 
 def stage_outputs(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any, mode: str) -> dict[str, Any]:
-    """Step 8: teacher outputs on the six panels (stored, not scored); the chrF cross-check against sacrebleu; the token-id bank, tests (a) and (b), the C1 pairing; the gloss word ids for R-gloss-icl; the bundle."""
+    """Step 8: teacher outputs on the six panels (stored, not scored); the chrF cross-check against sacrebleu; the token-id bank, tests (a) and (b), the C1 pairing; the gloss word ids for R-gloss-icl and
+    tokenization test (a) on the R-gloss-icl prompts of every E_A, E_B and D_cal item; the bundle; the Part Q manifest (every output with its hash)."""
     from studies.p10s2.worldio import write_bundle
 
-    from . import batches as bt
+    from . import gloss
 
+    pipeline.require_teachers_passed(ctx)
     step8.step_outputs(ctx, p)
-    qf = ctx.d(pipeline.loc(ctx, "qfit/record.json"))
     items = p.panels["Q_fit"]
     a_batches = [bt.read_batch(ctx.d("qfit/teacher_A"), i) for i in bt.stored_indices(ctx.d("qfit/teacher_A"))]
-    src_of = {it.key: it.en for it in items}
-    outs_a = gen.outputs_of(a_batches, src_of)[:1000]
+    outs_a = gen.outputs_of(a_batches, {it.key: it.en for it in items})[:1000]
     cross = datagen.crosscheck_chrf([(o.text, list(i.refs["A"])) for o, i in zip(outs_a, items[:1000], strict=True)])
     if not cross["ok"]:
+        pipeline.fail(ctx, f"the chrF cross-check against sacrebleu differs by {cross['max_abs_difference']} (0.001 allowed)")
         raise RegisteredTestStop(f"the chrF cross-check differs by {cross['max_abs_difference']} (0.001 allowed)")
     accepted = {c: pipeline.accepted_pool(ctx, c) for c in core.TASKS}
     teacher_outputs = {c: {name: [t for b in sorted_batches(ctx, c, name) for t in b.texts] for name in step8.PANEL_OUTPUT_PANELS} for c in core.TASKS}
@@ -148,71 +192,167 @@ def stage_outputs(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any, mode:
     try:
         bundle, rec = real_bundle.make_bundle(ctx, p, w.tok, w.student, accepted, windows, w.texts["train"], teacher_outputs, max_new, spill, {"wikitext": w.record["wikitext"], "tatoeba": w.record["hashes"]["tatoeba"]})
         if not rec["required_ok"]:
+            pipeline.fail(ctx, "tokenization test (a) or the combined whole-string test failed")
             raise RegisteredTestStop(f"tokenization test (a) or the combined whole-string test failed: {json.dumps(rec['tokenization'])[:400]}")
-        from . import gloss
-
         gb = gloss.gloss_bank(w.tok, accepted, p.vocab)
+        gtest = step8.step_gloss(ctx, w.tok, {n: p.panels[n] for n in ("E_A", "E_B", "D_cal")}, set(p.vocab))
+        if gtest["mismatches"]:
+            raise RegisteredTestStop(f"tokenization test (a) on the R-gloss-icl prompts: {gtest['mismatches']} mismatches (zero required)")
         write_bundle(bundle, w.run_dir / "outputs/bundle")
         write_json(w.run_dir / "outputs/gloss_bank.json", gb)
     finally:
         spill.unlink(missing_ok=True)
-    out = {"chrf_crosscheck": cross, "tokenization": rec["tokenization"], "c1_pairing": {k: v for k, v in rec["c1_pairing"].items() if k != "sigma"}, "bundle": str(w.run_dir / "outputs/bundle"), "qfit_record": str(qf)}
+    out = {"chrf_crosscheck": cross, "tokenization": rec["tokenization"], "c1_pairing": {k: v for k, v in rec["c1_pairing"].items() if k != "sigma"}, "gloss_test_mismatches": gtest["mismatches"], "bundle": str(w.run_dir / "outputs/bundle")}
     core.write_record(w.run_dir / "outputs/step8_record.json", {**core.envelope("block_record", "Q"), "what": "step8", **core.jsonable(out)}, overwrite=True)
+    write_manifest(ctx)
     return out
 
 
-def sorted_batches(ctx: pipeline.QContext, c: str, name: str) -> list[Any]:
-    from . import batches as bt
+def write_manifest(ctx: pipeline.QContext) -> dict[str, str]:
+    """The Part Q manifest: every output file of the run (sealed files excluded) with its SHA-256 (section 4.1: every output is listed with its hash). Part T reads these files by hash and nothing else."""
+    files = pipeline.hashes_of(ctx)
+    core.write_record(ctx.d("manifest.json"), {**core.envelope("block_record", "Q"), "what": "partq_manifest", "files": files, "bundle_dir": "outputs/bundle"}, overwrite=True)
+    return files
 
+
+def sorted_batches(ctx: pipeline.QContext, c: str, name: str) -> list[Any]:
     d = ctx.d(f"outputs/teacher_{c}/{name}")
     return [bt.read_batch(d, i) for i in bt.stored_indices(d)]
 
 
 def _stored_windows(w: real_world.RealWorld, ctx: pipeline.QContext, mode: str) -> list[Any]:
-    """The 144 stored GEN windows as ``GeneralWindow`` records: every marker-like window and the 100 ordinary windows the ledger recorded (the ledger is the source of which windows)."""
+    """The 144 stored GEN windows as ``GeneralWindow`` records: the windows the ledger recorded for this study (the ledger is the source of which windows), cut by P10-S2's own ``cut_windows``."""
     led = read_json(ledger_path(w.cfg, w.repo, w.run_dir, mode))["windows"]
     mine = {(x["start"], x["end"]) for x in led if x.get("owner") == "P10IS2-partq"}
     vocab_index = {x: i for i, x in enumerate(pipeline.partition.build_partition(w.corpus, w.cfg, ctx.seeds, ctx.allowed, sizes=ctx.sizes).vocab)}
     cut = real_world.cut_general_windows(w.tok, w.texts["validation"], vocab_index, int(w.cfg["panels"]["general_window_tokens"]), 64)
-    grid = real_world.window_grid(w.tok, w.texts["validation"], int(w.cfg["panels"]["general_window_tokens"]), 64)
-    spans = real_world.window_spans(grid, w.texts["validation"], w.wikitext_rows["validation"])
+    grid, _m, _o = window_candidates(w, w.cfg)
+    spans = real_world.window_spans(grid, w.tok.token_bytes(), w.wikitext_rows["validation"])
     if len(cut) != len(spans):
         raise RegisteredTestStop("the window grid and P10-S2's window cut disagree in count")
     return [win for win, s in zip(cut, spans, strict=True) if (s.start, s.end) in mine]
 
 
-def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, limits: dict[str, Any] | None = None) -> dict[str, Any]:
-    """One stage, in this process. Returns a small record; a cap stop raises ``StageCapExceeded`` (the caller records PAUSED)."""
+# --- the stage machinery ---------------------------------------------------------------------------------------------------------------------------
+class Guard:
+    """The deadline the pipeline asks between batches: the cumulative cap (the stage's own cap less what it used, never more than what is left of the part's total) and the memory guard (12 GiB per worker).
+    ``reason`` says which tripped; True means stop (PAUSED)."""
+
+    def __init__(self, cap_seconds: float, rss_gib_limit: float, clock: Callable[[], float] = time.monotonic, rss: Callable[[], float] = procs.rss_gib) -> None:
+        self.cap, self.limit, self.clock, self.rss = cap_seconds, rss_gib_limit, clock, rss
+        self.t0 = clock()
+        self.reason: str | None = None
+
+    def __call__(self) -> bool:
+        if self.clock() - self.t0 >= self.cap:
+            self.reason = f"cap: {self.cap:.0f} s of this stage's remaining hours used"
+        elif self.rss() > self.limit:
+            self.reason = f"memory: resident set above the guard of {self.limit} GiB"
+        return self.reason is not None
+
+
+def completion_path(run_dir: Path, stage: str) -> Path:
+    return run_dir / "stages" / f"{stage}.complete.json"
+
+
+def require_prerequisites(run_dir: Path, stage: str) -> None:
+    """Stage order is enforced: each stage runs only after its predecessor's completion record."""
+    i = STAGE_ORDER.index(stage)
+    if i and not completion_path(run_dir, STAGE_ORDER[i - 1]).is_file():
+        raise StageRefused(f"refused: stage {stage!r} needs {STAGE_ORDER[i - 1]!r} to be complete first (no completion record)")
+
+
+def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, other_alive: Callable[[], list[str]] = procs.other_studies_alive) -> dict[str, Any]:
+    """One stage, in this process. Returns a small record. A cap or memory stop leaves the stage PAUSED (manifest; exit 4 from the command); an error is an item error; a registered test of the data step or a
+    digest mismatch leaves an engineering-failure record and stops (ruling L3)."""
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    started = time.monotonic()
-    w = build_world(cfg, repo, run_dir, mode, load_teachers=stage != "analysis")
-    ctx = make_ctx(w, mode, limits=limits)
-    if stage == "inputs":
-        out = stage_inputs(w, ctx, mode)
-    else:
-        p = pipeline.step_partition(ctx)
-        if stage == "partition":
-            out = {"counts": p.counts, "tokenizer_record": bool(tokenizer_record(w, ctx, p))}
-        elif stage == "qfit":
-            out = pipeline.step_qfit(ctx, p)
-        elif stage == "qcheck":
-            out = pipeline.step_qcheck(ctx, p, pipeline.step_qfit(ctx, p))
-        elif stage == "generation":
-            out = pipeline.step_generation(ctx, p, pipeline.step_qfit(ctx, p))
-        elif stage == "regeneration":
-            out = pipeline.step_regeneration(ctx, p)
-        elif stage == "outputs":
-            out = stage_outputs(w, ctx, p, mode)
-        elif stage == "analysis":
+    gates.apply_platform_settings(cfg)
+    if stage not in STAGE_ORDER:
+        raise StageRefused(f"refused: {stage!r} is not a Part Q stage")
+    if mode == "registered" and plan is None:
+        raise StageRefused("refused: a registered stage takes its parameters from the frozen plan")
+    if mode == "registered":
+        require_prerequisites(run_dir, stage)
+    total = float(plan.total_cap_seconds()) if plan is not None else 0.0
+    led = core.Ledger(run_dir / "charged_ledger.json", "Q", total if total > 0 else 1e12)  # in the run directory, never in the tree
+    cap = 1e12
+    if plan is not None:
+        stage_cap = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else 1e12
+        cap = min(stage_cap - led.charged(stage), led.remaining())
+        if cap <= 0:
+            man = runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": runner.KILLED_CAP, "seconds": 0.0, "reason": "the cumulative hour cap is spent", "peak_rss_bytes": 0}}, 0.0, identity={}, started=core.utc_stamp(), caps={"stage_seconds_left": cap})
+            _mark(run_dir, stage, "PAUSED")
+            return {"status": "PAUSED", "reason": "the cumulative hour cap is spent", "manifest": man["status"]}
+    guard = Guard(cap, float(cfg["caps"]["memory_per_worker_gib"]))
+    t0 = time.monotonic()
+    started = core.utc_stamp()
+    status, out, ctx = "COMPLETE", {}, None
+    try:
+        if stage == "analysis":
+            ctx = _light_ctx(cfg, run_dir, mode)
             res = labels.part_q_label(pipeline.facts_of(ctx))
             core.write_record(run_dir / pipeline.loc(ctx, "qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in res.items() if k != "oracle_line"}}, overwrite=True)
+            write_manifest(ctx)
             out = {"label": res["label"], "part_t": res["part_t"]} if mode == "registered" else pipeline.summary_for_display(ctx)
         else:
-            raise StageRefused(f"refused: {stage!r} is not a Part Q stage")
-    total = float(cfg["stage_caps"].get("total_hours", 0.0)) * 3600.0
-    led = core.Ledger(run_dir / "charged_ledger.json", "Q", total if total > 0 else 1e12)  # the ledger lives in the run directory (git-ignored or outside the repository), never in the tree
-    led.charge_process(stage, mode, "main", time.monotonic() - started)
-    return out
+            w = build_world(cfg, repo, run_dir, mode, load_teachers=True)
+            ctx = make_ctx(w, mode, plan=plan, limits=limits, deadline=guard)
+            if stage == "inputs":
+                out = stage_inputs(w, ctx, mode)
+            else:
+                p = pipeline.step_partition(ctx)
+                if stage == "partition":
+                    out = {"counts": p.counts, "tokenizer_record": bool(tokenizer_record(w, ctx, p))}
+                elif stage == "qfit":
+                    out = pipeline.step_qfit(ctx, p)
+                elif stage == "qcheck":
+                    out = pipeline.step_qcheck(ctx, p, pipeline.step_qfit(ctx, p))
+                elif stage == "generation":
+                    out = pipeline.step_generation(ctx, p, pipeline.step_qfit(ctx, p))
+                elif stage == "regeneration":
+                    out = pipeline.step_regeneration(ctx, p)
+                else:
+                    out = stage_outputs(w, ctx, p, mode)
+    except StageCapExceeded:
+        status = "PAUSED"
+        out = {"reason": guard.reason or "the cap was reached"}
+    except (DigestMismatch, RegisteredTestStop) as e:
+        if ctx is not None and not ctx.engineering_failures:
+            pipeline.fail(ctx, f"{type(e).__name__}: {e}")
+        status = "ENGINEERING-FAILURE"
+        raise
+    except StageRefused:
+        raise
+    except Exception as e:  # noqa: BLE001 - a code or environment error is an item error, never a scientific label
+        if ctx is not None:
+            pipeline.record_item_error(ctx, stage, f"{type(e).__name__}: {e}")
+        status = "ITEM-ERROR"
+        raise
+    finally:
+        seconds = time.monotonic() - t0
+        led.charge_process(stage, mode, "main", seconds)  # the wall time of this process (ruling L2), also when it stopped
+        key = runner.COMPLETED if status == "COMPLETE" else (runner.KILLED_RSS if guard.reason and guard.reason.startswith("memory") else (runner.KILLED_CAP if status == "PAUSED" else runner.FAILED))
+        runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": key, "seconds": seconds, "reason": guard.reason or status, "peak_rss_bytes": int(procs.rss_gib() * 2**30)}}, seconds, identity={}, started=started, caps={"stage_seconds_left": cap}, extra={"other_studies_alive": other_alive()})
+        _mark(run_dir, stage, status)
+    return {"status": status, **({"result": out} if status == "COMPLETE" else out)}
 
 
-__all__ = ["PendingLeadReview", "StageCapExceeded", "fetch_guard", "run_stage"]
+def _mark(run_dir: Path, stage: str, status: str) -> None:
+    """The stage's state for the order check and for ``pipeline.paused_stages``: complete, or PAUSED (a state, not an outcome)."""
+    d = run_dir / "stages"
+    d.mkdir(parents=True, exist_ok=True)
+    if status == "COMPLETE":
+        write_json(completion_path(run_dir, stage), {"stage": stage, "status": "COMPLETE", "utc": core.utc_stamp()})
+        (d / f"{stage}.json").unlink(missing_ok=True)
+    elif status == "PAUSED":
+        write_json(d / f"{stage}.json", {"stage": stage, "status": "PAUSED", "utc": core.utc_stamp()})
+    else:
+        (d / f"{stage}.json").unlink(missing_ok=True)
+
+
+def _light_ctx(cfg: Any, run_dir: Path, mode: str) -> pipeline.QContext:
+    """The context of the analysis: records only, no corpus, no model, no package."""
+    return pipeline.QContext(cfg=cfg, mode=mode, corpus=None, teachers={}, student_scores=lambda items, p: {}, run_dir=run_dir)  # type: ignore[arg-type]
+
+
+__all__ = ["planmod", "run_stage", "write_manifest"]

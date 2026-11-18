@@ -136,8 +136,8 @@ def run_counting(ctx_factory: Callable[[], pipeline.QContext], *, plan_file_sha2
     if identity_probe is not None:
         try:
             identity_probe()  # must refuse
-        except core.StageRefused:
-            identity_ok = True  # PAUSED — IDENTITY recorded; the probe's restore step is the caller's, and the next line proves the stage resumes
+        except core.ForcedIdentityPause:
+            identity_ok = True  # any other refusal propagates: a refusal is never counted as the forced pause  # PAUSED — IDENTITY recorded; the probe's restore step is the caller's, and the next line proves the stage resumes
     t1 = clock()
     result = pipeline.run_all(ctx)  # resume: completed blocks are not regenerated
     t_resume = clock() - t1

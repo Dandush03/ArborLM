@@ -83,7 +83,7 @@ def test_part_q_launch_reaches_its_first_stage_after_other_thread_settings(tmp_p
     r = make_repo(tmp_path)
     commit = freeze(r, "Q")
     seen: dict[str, object] = {}
-    monkeypatch.setattr(qreal, "run_registered_stage", lambda stage, repo, run_dir, args: seen.update(stage=stage, threads=torch.get_num_threads(), deterministic=torch.are_deterministic_algorithms_enabled()))
+    monkeypatch.setattr(qreal, "run_registered_stage", lambda stage, repo, run_dir, plan: seen.update(stage=stage, threads=torch.get_num_threads(), deterministic=torch.are_deterministic_algorithms_enabled()) or {"status": "COMPLETE"})
     keep = torch.get_num_threads()
     torch.set_num_threads(3)
     torch.use_deterministic_algorithms(False)

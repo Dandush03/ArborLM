@@ -173,7 +173,7 @@ def identity_probe(plan: planmod.Plan, repo: Path, run_dir: Path) -> Any:
         else:
             raise RuntimeError("the forced identity difference was not detected")
         planmod.verify_plan(plan, repo, run_dir, candidate=True)
-        raise StageRefused("PAUSED — IDENTITY forced and restored")
+        raise core.ForcedIdentityPause("PAUSED — IDENTITY forced and restored")
 
     return probe
 

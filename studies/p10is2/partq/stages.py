@@ -8,6 +8,7 @@ implemented here, or a rule the ADR leaves open).
 """
 
 import argparse
+import json
 import sys
 from collections.abc import Sequence
 from pathlib import Path
@@ -17,7 +18,7 @@ from ..common import plan as planmod
 from ..common.core import PendingLeadReview, StageRefused
 from . import freeze
 
-EXIT_REFUSED, EXIT_IDENTITY, EXIT_LEAD = 2, planmod.IDENTITY_EXIT, 3
+EXIT_REFUSED, EXIT_IDENTITY, EXIT_LEAD, EXIT_INCOMPLETE = 2, planmod.IDENTITY_EXIT, 3, 4  # 4: the stage stopped on its cap or the memory guard (PAUSED): resume it
 REGISTERED_STAGES = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis")
 
 
@@ -43,11 +44,11 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
 def cmd_registered(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     run_dir = Path(args.run_dir)
-    refuse_unless_registered_ready(repo, run_dir, args.freeze_commit, args.stage)
+    plan = refuse_unless_registered_ready(repo, run_dir, args.freeze_commit, args.stage)
     from . import real
 
-    real.run_registered_stage(args.stage, repo, run_dir, args)  # raises PendingLeadReview where the real path is not implemented
-    return 0
+    out = real.run_registered_stage(args.stage, repo, run_dir, plan)
+    return 0 if (out or {}).get("status", "COMPLETE") == "COMPLETE" else EXIT_INCOMPLETE
 
 
 def cmd_work(args: argparse.Namespace) -> int:
@@ -62,6 +63,18 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ledger(args: argparse.Namespace) -> int:
+    """THE pre-freeze ledger command (section 4.1): writes this study's 144 GEN windows into the shared panel ledger once (seed 250907). It refuses once a plan or a freeze record exists."""
+    repo = repo_of(args)
+    if (repo / core.PLAN_Q).exists() or (repo / core.FREEZE_RECORD_Q).exists():
+        raise StageRefused("refused: the ledger is written before the plan and the freeze, never after")
+    from . import real_stages
+
+    out = real_stages.command_ledger(repo, Path(args.run_dir) if args.run_dir else None, args.mode)
+    print(json.dumps(out))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="studies.p10is2.partq.stages", description="P10IS2 Part Q (ADR-0025). Registered entry points refuse until a freeze record and a committed Decision 2 exist.")
     sub = ap.add_subparsers(dest="command", required=True)
@@ -72,6 +85,10 @@ def build_parser() -> argparse.ArgumentParser:
         r.add_argument("--run-dir", required=True)
         r.add_argument("--freeze-commit")
         r.add_argument("--repo")
+    lg = sub.add_parser("ledger")
+    lg.add_argument("--mode", choices=("registered", "rehearsal"), default="registered")
+    lg.add_argument("--run-dir")
+    lg.add_argument("--repo")
     h = sub.add_parser("rehearse")
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
@@ -88,6 +105,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return cmd_registered(args)
         if args.command == "work":
             return cmd_work(args)
+        if args.command == "ledger":
+            return cmd_ledger(args)
         return cmd_rehearse(args)
     except StageRefused as e:
         print(f"REFUSED: {e}", file=sys.stderr)

@@ -59,6 +59,11 @@ class StageRefused(RuntimeError):
     """A registered entry point refuses to run (no plan, no freeze, no Decision 2, a dirty tree, an identity that differs)."""
 
 
+class ForcedIdentityPause(Exception):
+    """Raised by a rehearsal's identity probe ONLY after it has observed the forced PAUSED — IDENTITY (a plan with one frozen hash altered refused as such) AND the restore (the real plan verifying). A rehearsal
+    counts the forced pause as done on this exception and on nothing else: any other refusal is a failure of the rehearsal, never a pass."""
+
+
 class SeedRefused(RuntimeError):
     """A generator was requested with a seed that is not listed for the running mode."""
 

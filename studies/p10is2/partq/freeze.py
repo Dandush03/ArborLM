@@ -112,9 +112,10 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     ledger = plan.data.get("manifests", {}).get("panel_ledger")
     if not ledger or not (repo / ledger["path"]).is_file():
         raise StageRefused("refused: the shared panel ledger is not in the plan's manifests or not on disk")
-    led = core.read_record(repo / ledger["path"], "panel_ledger")
-    if not led["check"]["ok"]:
-        raise StageRefused(f"refused: the panel ledger's own check did not pass: {led['check']}")
+    led = read_json(repo / ledger["path"] if not Path(ledger["path"]).is_absolute() else Path(ledger["path"]))
+    chk = (led.get("p10is2") or {}).get("check") or {}
+    if led.get("format") != "p10i-panel-ledger-v1" or not chk.get("ok"):
+        raise StageRefused(f"refused: the panel ledger is not in the shared format or its own check did not pass: {chk}")
     if not delegation_section7_present(repo, cfg):
         raise StageRefused("refused: section 7 of the delegation record is not on this branch (section 13 item 6): no package outside the lock may be used before it is")
     rec = {

@@ -11,7 +11,6 @@
 * A per-worker memory guard (8 GiB; 24 GiB aggregate; two workers and 16 GiB aggregate while another study's process is alive; at most three workers otherwise).
 """
 
-import os
 import sys
 import time
 from collections.abc import Callable, Mapping, Sequence
@@ -19,37 +18,22 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-import psutil
-
 from arborlm.io import read_json, write_json
 
 from . import partt_plan
-from .common import core, runner
+from .common import core, procs, runner
 from .common import plan as planmod
 from .common.core import StageRefused
 
 TASK_STAGES = ("gates", "train", "evaluate", "controls", "combined")
 WAVES = ((("M1", "D1", "M-joint", "D-joint", "E-table"),), (("M-append", "M-seq", "D-append", "D-seq"),), (("M-ii",),))  # dependency order of the cells: stage-1 modules, then the stage-2 modules, then M-ii
-STUDY_MODULES = ("studies.p10", "studies.p9", "studies.p8")
 
 
 def safe(task_id: str) -> str:
     return task_id.replace("|", "__").replace("/", "_").replace("@", "_at_")
 
 
-def other_studies_alive(own_pid: int | None = None) -> list[str]:
-    """Command lines of live processes of ANOTHER study (``python -m studies.p10…``/``p9…``); this study's own workers and this process are excluded. Used for the worker count and for the timing benchmark."""
-    me = own_pid or os.getpid()
-    out = []
-    for p in psutil.process_iter(["pid", "cmdline"]):
-        try:
-            cmd = p.info["cmdline"] or []
-        except psutil.Error:
-            continue
-        text = " ".join(cmd)
-        if p.info["pid"] != me and "python" in text and any(m in text for m in STUDY_MODULES) and "studies.p10is2" not in text:
-            out.append(text[:200])
-    return out
+other_studies_alive = procs.other_studies_alive  # shared with Part Q and the timing benchmark
 
 
 def worker_policy(cfg: Mapping[str, Any], other_alive: bool) -> dict[str, Any]:

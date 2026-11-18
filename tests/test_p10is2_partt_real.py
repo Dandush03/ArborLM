@@ -63,7 +63,7 @@ def test_measuring_and_counting_rehearsals(tmp_path: Path) -> None:
 
     def probe() -> None:
         probes["n"] += 1
-        raise core.StageRefused("PAUSED — IDENTITY")
+        raise core.ForcedIdentityPause("PAUSED — IDENTITY")
 
     rec = partt_real.counting_rehearsal(w, tmp_path / "c", fake_gloss_bank(w), plan_file_sha256="d" * 64, caps_provisional=False, updates=4, identity_probe=probe)
     assert rec["forced"] == {"pause_resume": True, "paused_identity_restore": True} and probes["n"] == 1

@@ -6,11 +6,17 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from arborlm.io import read_json
 from studies.p10s2.data import Item
 
 from ..common import core
-from ..common.panel_ledger import LEDGER_FORMAT, PanelLedger, RowMap, Span, write_ledger
+from ..common.panel_ledger import (
+    LEDGER_FORMAT,
+    PanelLedger,
+    RowMap,
+    Span,
+    read_shared,
+    write_ledger,
+)
 from . import batches as bt
 from . import gloss, partition
 from .pipeline import QContext, _rec, accepted_pool, fail
@@ -31,26 +37,63 @@ def step_outputs(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     return _rec(ctx, "outputs/record.json", "outputs", {"outputs": out, "scored": False})
 
 
-def step_ledger(ctx: QContext, ledger_path: Path, marker_windows: Sequence[Span], ordinary_candidates: Sequence[Span], owner: str = "P10IS2-partq", row_map: RowMap | None = None) -> dict[str, Any]:
-    """Records the 44 marker-like windows and 100 sampled ordinary windows in the shared panel ledger (byte spans, end exclusive). ``marker_windows`` and ``ordinary_candidates`` are the spans the caller built
-    from the tokenized WikiText-2 validation text (the real path) or synthetic spans (tests). The ordinary sample (seed 250907) takes only candidates that overlap no span already in the ledger."""
-    led = PanelLedger(Span.from_json(r) for r in (read_json(ledger_path)["windows"] if ledger_path.is_file() else []))
-    pn = dict(ctx.cfg["panels"])
-    if ctx.sizes:
-        pn.update(ctx.sizes)
+def write_study_ledger(cfg: Mapping[str, Any], mode: str, ledger_path: Path, marker_windows: Sequence[Span], ordinary_candidates: Sequence[Span], owner: str = "P10IS2-partq", row_map: RowMap | None = None, sizes: Mapping[str, int] | None = None) -> dict[str, Any]:
+    """The ONE pre-freeze ledger step: records the 44 marker-like windows and 100 ordinary windows sampled with seed 250907 (252907 in a rehearsal) from the candidates that overlap no span already in the shared ledger.
+    ``marker_windows`` and ``ordinary_candidates`` are byte spans from the tokenized WikiText-2 validation text. Refuses if this study's windows are already in the ledger (written once)."""
+    seeds = core.partq_seeds(cfg, mode)
+    allowed = frozenset(seeds.values()) | (core.test_range(cfg) if mode == "test" else frozenset())
+    shared = read_shared(ledger_path)
+    if any(w.get("owner") == owner for w in shared.get("windows", [])):
+        raise core.StageRefused(f"refused: {ledger_path} already holds this study's windows; the ledger is written once, before the freeze")
+    led = PanelLedger(Span.from_json(r) for r in shared.get("windows", []))
+    pn = dict(cfg["panels"])
+    if sizes:
+        pn.update(sizes)
     if len(marker_windows) != int(pn["gen_marker_like"]):
         raise core.PendingLeadReview(f"{len(marker_windows)} marker-like windows on the fixed grid, the rule needs exactly {pn['gen_marker_like']}")
     for m in marker_windows:
         led.add(replace(m, kind="marker", owner=owner))
-    g = core.seeded_generator(ctx.seeds["gen_ordinary_windows"], "GEN ordinary windows", ctx.allowed)
+    g = core.seeded_generator(seeds["gen_ordinary_windows"], "GEN ordinary windows", allowed)
     eligible = len(led.eligible_ordinary(ordinary_candidates))
     for s in led.sample_ordinary(ordinary_candidates, int(pn["gen_ordinary"]), g):
         led.add(replace(s, kind="ordinary", owner=owner))
     check = led.check_own_panel(owner, int(pn["gen_marker_like"]), int(pn["gen_ordinary"]))
     if not check["ok"]:
-        fail(ctx, f"the panel ledger check failed: {check}")
+        raise core.StageRefused(f"refused: the panel ledger's own check failed: {check}")
     write_ledger(ledger_path, led, owner, check, eligible, row_map)
     return {"eligible_ordinary": eligible, **check}
+
+
+def verify_study_ledger(cfg: Mapping[str, Any], ledger_path: Path, marker_windows: Sequence[Span], ordinary_candidates: Sequence[Span], owner: str = "P10IS2-partq", sizes: Mapping[str, int] | None = None) -> dict[str, Any]:
+    """What the registered ``inputs`` stage does with the ledger: it VERIFIES and never writes. The ledger must hold this study's 44 marker-like windows equal to the grid's, and 100 ordinary windows that are
+    candidates of the grid, overlap no other owner's span and no other window of this study. (The sample itself was drawn once, before the freeze, with seed 250907.)"""
+    pn = dict(cfg["panels"])
+    if sizes:
+        pn.update(sizes)
+    shared = read_shared(ledger_path)
+    mine = [Span.from_json(w) for w in shared.get("windows", []) if w.get("owner") == owner]
+    problems: list[str] = []
+    want_m = sorted((m.start, m.end) for m in marker_windows)
+    have_m = sorted((s.start, s.end) for s in mine if s.kind == "marker")
+    if have_m != want_m:
+        problems.append(f"the ledger's marker-like windows ({len(have_m)}) are not the grid's {len(want_m)}")
+    cand = {(c.start, c.end) for c in ordinary_candidates}
+    ordn = [s for s in mine if s.kind == "ordinary"]
+    if len(ordn) != int(pn["gen_ordinary"]):
+        problems.append(f"the ledger holds {len(ordn)} ordinary windows of this study, needs {pn['gen_ordinary']}")
+    problems += [f"ordinary window {s.start}-{s.end} is not a candidate of the grid" for s in ordn if (s.start, s.end) not in cand]
+    led = PanelLedger(Span.from_json(w) for w in shared.get("windows", []))
+    chk = led.check_own_panel(owner, int(pn["gen_marker_like"]), int(pn["gen_ordinary"]))
+    if not chk["ok"]:
+        problems.append(f"the ledger's own check fails: {chk}")
+    if problems:
+        raise core.StageRefused("refused: the shared panel ledger does not verify: " + "; ".join(problems))
+    return {"verified": True, "marker_like": len(have_m), "ordinary": len(ordn), "check": chk}
+
+
+def step_ledger(ctx: QContext, ledger_path: Path, marker_windows: Sequence[Span], ordinary_candidates: Sequence[Span], owner: str = "P10IS2-partq", row_map: RowMap | None = None) -> dict[str, Any]:
+    """Test and rehearsal wrapper of ``write_study_ledger`` with a context (its mode, its panel-size overrides)."""
+    return write_study_ledger(ctx.cfg, ctx.mode, ledger_path, marker_windows, ordinary_candidates, owner, row_map, ctx.sizes)
 
 
 def step_gloss(ctx: QContext, tok: Any, items_for_test: Mapping[str, Sequence[Item]], in_vocab: set[str]) -> dict[str, Any]:
