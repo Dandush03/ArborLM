@@ -88,8 +88,7 @@ def test_quiet_exhausted_after_four_sessions() -> None:
             with pytest.raises(core.Paused):
                 blocks.run_stage_blocks(ctx, deps, state, lambda r: blocks.inprocess_pass_runner(ctx, deps, pred))
             assert state.data["quiet_exhausted"] is (i == 3)  # one session and three further ones, then MACHINE NOT QUIET
-        res = analysis.analyse({**registry(ctx, state), "blocks": [], "passes": []}) if False else None
-        assert res is None
+        assert state.data["quiet_sessions_failed"] == 4
 
 
 def test_quiet_failure_at_block_end_invalidates_the_block_and_the_spare_replaces_it_once() -> None:
