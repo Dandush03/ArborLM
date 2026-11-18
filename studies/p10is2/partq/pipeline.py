@@ -16,7 +16,7 @@ from typing import Any
 
 from arborlm.io import file_sha256, read_json
 from studies.p10s2.data import CorpusLike, Item, TrainItem
-from studies.p10s2.filtering import FilterSetting
+from studies.p10s2.filtering import FilterSetting, accepts
 from studies.p10s2.text import normalize
 
 from ..common import core
@@ -157,7 +157,7 @@ def step_qfit(ctx: QContext, p: partition.QPartition) -> dict[str, Any]:
     for c in core.TASKS:
         table = qualify.grid_table(outs[c], scores[c][c], ctx.cfg)  # teacher c on capability c's references
         grids[c], q3[c] = table, qualify.select_filter(table, ctx.cfg)
-    per_item = {t: [{"key": k, "text": o.text, "score": o.score, "chrf_own": scores[t][t][n]} for n, (k, o) in enumerate(zip(keys, outs[t], strict=True))] for t in core.TASKS}
+    per_item = {t: [{"key": k, "text": o.text, "score": o.score, "chrf_own": scores[t][t][n], "accepted": None if q3[t].setting is None else accepts(o, q3[t].setting)} for n, (k, o) in enumerate(zip(keys, outs[t], strict=True))] for t in core.TASKS}
     values = {
         "q1": q1, "q2": q2, "mean_chrf": mean, "student": student, "q3": {c: q3[c].to_json() for c in core.TASKS}, "grid": grids, "per_item": per_item,
     }  # fmt: skip
