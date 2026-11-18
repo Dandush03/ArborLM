@@ -61,7 +61,7 @@ def main() -> int:
     items = [type("I", (), {"en": s, "refs": {"A": ("Ich mag Tee.",), "B": ("J'aime le thé.",)}})() for s in SENTENCES[:2]]
     sc = real_world.student_scorer(student, tok, dec, nl)(items, P)
     out["steps"]["student_scorer"] = {"scores": sc, "finite_in_unit_interval": all(math.isfinite(v) and 0.0 <= v <= 1.0 for v in sc.values()), "student_plain_sha256": srec["student_plain_sha256"]}
-    rows = [f"Sentence {i} of the smoke text says that item {i * 7 + 3} was seen on day {i % 28 + 1}. {PARAGRAPH}" for i in range(40)]  # every row differs, so every window occurs once
+    rows = [" ".join(f"Item {i}-{j} says that {i * j + 7} was seen on day {(i + j) % 28 + 1}." for j in range(14)) for i in range(40)]  # every window is unique, so every span occurs once
     text = "".join(rows)
     grid = real_world.window_grid(tok, text, 32, 8)
     spans = real_world.window_spans(grid, tok.token_bytes(), rows)
