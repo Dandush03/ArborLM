@@ -259,6 +259,9 @@ def run_gates(pl: Plan, ctx: items.Ctx, run_dir: Path, *, repo: Path, run_checke
         except core.StageRefused as exc:
             ok_draws = False
             why.append(str(exc))
+        except Exception as exc:  # noqa: BLE001 - a gate that cannot run (no corpus, no backbone) fails and is recorded; it is not raised past the stage
+            ok_draws = False
+            why.append(f"{type(exc).__name__}: {str(exc)[:200]}")
     rec["gates"]["manifests"] = gates.gate("data", ok_draws, name="manifests", draws=len(seen), problems=why)
     ident = pl.data.get("identity_gate") or {}
     if adapter_identity and pl.mode == core.REGISTERED:
@@ -477,6 +480,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     run_dir = Path(args.run_dir)
     try:
+        gates.configure_worker()  # one thread, one interop thread, deterministic: BEFORE the platform check, so a registered launch can start whatever the shell had set
         planmod.check_preconditions(core.REGISTERED, repo, args.freeze_commit)
         pl = planmod.load_registered_plan(repo)
         planmod.verify_plan(pl, repo, run_dir, freeze_commit=args.freeze_commit)
@@ -526,6 +530,15 @@ def build_parser() -> argparse.ArgumentParser:
     rh = sub.add_parser("rehearse", help="the synthetic rehearsal (tiny sizes, test seeds) end to end")
     rh.add_argument("--run-dir", required=True)
     rh.add_argument("--repo")
+    rh.add_argument("--measuring", action="store_true")
+    rh.add_argument("--counting", action="store_true")
+    for a in ("--plan", "--rates-out", "--record-out", "--qualification"):
+        rh.add_argument(a)
+    rh.add_argument("--workers", default="6,7")
+    qa = sub.add_parser("qualify", help="R2 through every validity check on the rehearsal and calibration draws")
+    qa.add_argument("--sealed-dir", required=True)
+    qa.add_argument("--run-dir", required=True)
+    qa.add_argument("--calibration", required=True)
     w = sub.add_parser("work", help="a worker process (one task)")
     w.add_argument("kind", choices=WORKER_KINDS)
     for a in ("--stage", "--label", "--run-dir", "--plan", "--mode", "--done"):
@@ -558,10 +571,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             from . import calibrate_engine
 
             return calibrate_engine.cmd_calibrate(args)
-        if args.command == "rehearse":
-            from . import rehearsal
+        if args.command == "qualify":
+            from . import rehearsal_real
 
-            return rehearsal.cmd_rehearse(args)
+            return rehearsal_real.cmd_qualify(args)
+        if args.command == "rehearse":
+            from . import rehearsal_real
+
+            return rehearsal_real.cmd_rehearse(args)
     except StageRefused as exc:
         print(str(exc), file=sys.stderr)
         return 2

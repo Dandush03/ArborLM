@@ -55,7 +55,7 @@ def tiny_plan(root: Path, repo: Path, cfg_path: Path) -> planmod.Plan:
     """A plan of the plan format on tiny cells (mode test): the real plan's frozen-file hashes, the tiny cells and parameters."""
     cfg = core.load_config(cfg_path)
     cells, params = tiny_cells(cfg)
-    data = planmod.build_plan(mode=core.TEST, cfg=cfg, repo=repo, params=core.PlanParams({2048: 8, 8192: 8, 32768: 16}, {u: 0.003 for u in core.units(cfg)}, {"2K/256": 98304, "8K/1K": 98304, "32K/4K": 98304}, {"2K/256": 98304, "8K/1K": 98304, "32K/4K": 98304}), run_dir=root, extra={"sizes": {"table_facts": 512, "unseen": 64}})
+    data = planmod.build_plan(mode=core.TEST, cfg=cfg, repo=repo, params=core.PlanParams({2048: 8, 8192: 8, 32768: 16}, {u: 0.003 for u in core.units(cfg)}, {"2K/256": 98304, "8K/1K": 98304, "32K/4K": 98304}, {"2K/256": 98304, "8K/1K": 98304, "32K/4K": 98304}), run_dir=root / "run", extra={"sizes": {"table_facts": 512, "unseen": 64}})
     data["cells"], data["params"] = cells, params.to_json()
     data["params"]["rates"] = {}
     data["frozen_files"] = planmod.frozen_file_hashes(repo)

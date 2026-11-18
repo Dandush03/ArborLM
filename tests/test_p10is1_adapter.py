@@ -3,6 +3,9 @@
 segment bit for bit (G4, on the platform of record), records FAILED — NON-FINITE and keeps it, evaluates a snapshot with DEP counts (P10-S1's own ``evaluate_readout``), and computes the whole cell's stop rule. Tiny
 synthetic models, test-range seeds (933001-933999) only; no registered seed and no experiments directory. Self-check only."""
 
+import os
+import platform
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -20,6 +23,18 @@ from studies.p10s1 import train as s1train  # noqa: E402
 CFG = core.load_config()
 ROOT = Path(__file__).resolve().parents[1]
 FACTS = 128
+
+
+STRICT = os.environ.get("P10IS1_STRICT") == "1"
+ON_MAC_ARM = sys.platform == "darwin" and platform.machine() == "arm64"
+
+
+def strict_or_skip() -> None:
+    """The bit-exact assertions run only in the configured subprocess (one thread, one interop thread, deterministic algorithms: the platform of record), where they are strict; the outer run skips them."""
+    if not STRICT:
+        pytest.skip("runs strictly in test_bit_exact_assertions_in_a_configured_subprocess")
+    gates.configure_worker(CFG)
+    assert gates.on_platform_of_record(CFG), gates.platform_problems(CFG)
 
 
 def ctx_at(tmp: Path) -> items.Ctx:
@@ -77,6 +92,7 @@ def test_assert_seed_allowed_at_the_point_of_use() -> None:
 
 @pytest.mark.parametrize("arm", ["F-OQ", "T-OQ", "H8", "D-OQ", "R2"])
 def test_every_arm_trains_a_segment_and_resumes_bit_for_bit(tmp_path: Path, arm: str) -> None:
+    strict_or_skip()
     spec = tiny_spec(arm, slots=1024 if arm != "R2" else 1024)
     ctx = ctx_at(tmp_path)
     data, seeds = items.load_data(ctx, spec, verify=False)
@@ -84,15 +100,11 @@ def test_every_arm_trains_a_segment_and_resumes_bit_for_bit(tmp_path: Path, arm:
     whole = tmp_path / "whole"
     chk = adapter.restoration_check(data, seeds, bb, whole, spec, 8, 16, mode=core.TEST)
     assert chk["split"] == 8 and chk["end"] == 16
-    if gates.on_platform_of_record(CFG):
-        assert chk["tensors_equal"] is True and chk["model_sha256_equal"] is True  # G4 on the platform of record
-    else:
-        ta = torch.load(whole / "uninterrupted" / "snapshots" / s1core.snapshot_stem(16) / "model.pt", weights_only=True)["model"]
-        tb = torch.load(whole / "resumed" / "snapshots" / s1core.snapshot_stem(16) / "model.pt", weights_only=True)["model"]
-        assert all(torch.allclose(ta[k], tb[k], atol=1e-5) for k in ta)
+    assert chk["tensors_equal"] is True and chk["model_sha256_equal"] is True  # G4 on the platform of record, strictly
 
 
 def test_train_to_resumes_from_the_optimizer_snapshot_and_skips_complete_segments(tmp_path: Path) -> None:
+    strict_or_skip()
     spec = tiny_spec()
     ctx = ctx_at(tmp_path)
     data, seeds = items.load_data(ctx, spec, verify=False)
@@ -108,8 +120,7 @@ def test_train_to_resumes_from_the_optimizer_snapshot_and_skips_complete_segment
     h = r2["snapshot_sha256"]["12"]
     (out / "snapshots" / s1core.snapshot_stem(16) / "snapshot.json").unlink()
     r3 = adapter.train_to(data, seeds, bb, ctx.run_dir, spec, 16, mode=core.TEST)
-    if gates.on_platform_of_record(CFG):
-        assert r3["snapshot_sha256"]["12"] == h
+    assert r3["snapshot_sha256"]["12"] == h
     assert "cpu_seconds_at_snapshot" in r3["segments"][-1]
 
 
@@ -145,6 +156,7 @@ def test_an_ordinary_error_is_not_turned_into_non_finite(tmp_path: Path, monkeyp
 
 
 def test_the_adapter_identity_gate_reproduces_p10s1_checkpoints(tmp_path: Path) -> None:
+    strict_or_skip()
     ctx = ctx_at(tmp_path)
     spec = tiny_spec()
     data, seeds = items.load_data(ctx, spec, verify=False)
@@ -168,12 +180,9 @@ def test_the_adapter_identity_gate_reproduces_p10s1_checkpoints(tmp_path: Path) 
     cells = [(arm, FACTS, 1024, 1, 330198, 8, 16) for arm in ("F-OQ", "T-OQ")]
     d2 = job.data
     res = adapter.identity_gate(tmp_path / "s1", tmp_path / "work", data=d2, seeds=d2.seeds, backbone=items.backbone_of(ctx), cells=cells, updates=[4, 8, 12], cfg=CFG)
-    if gates.on_platform_of_record(CFG):
-        assert res["passed"] is True
-        for label, per in res["cells"].items():
-            assert all(v == {"tensors_equal": True, "model_sha256_equal": True} for v in per.values()), label
-    else:
-        assert res["passed"] is None and res["status"] == "skipped"
+    assert res["passed"] is True
+    for label, per in res["cells"].items():
+        assert all(v == {"tensors_equal": True, "model_sha256_equal": True} for v in per.values()), label
 
 
 def test_evaluate_snapshot_records_dep_counts_and_the_index_read(tmp_path: Path) -> None:
@@ -253,3 +262,12 @@ def test_next_level_is_the_first_granted_ladder_point_above_what_was_reached() -
     assert items.next_level(393216, 786432, 393216) == 524288 and items.next_level(393216, 786432, 524288) == 786432 and items.next_level(393216, 786432, 786432) is None
     assert items.next_level(131072, 131072, 131072) is None  # G = U0: no level is granted
     assert items.next_level(131072, 524288, 131072) == 196608
+
+
+@pytest.mark.skipif(not ON_MAC_ARM, reason="the platform of record is macOS arm64")
+def test_bit_exact_assertions_in_a_configured_subprocess() -> None:
+    """The restoration (G4) on all five arms, the resume of a segment with a half-written snapshot, and the adapter identity gate against P10-S1's own training run STRICTLY: the child process is configured to the platform of
+    record before it runs (one thread, one interop thread, deterministic algorithms)."""
+    out = subprocess.run([sys.executable, "-m", "pytest", str(Path(__file__)), "-q", "-p", "no:cacheprovider", "-k", "bit_for_bit or resumes_from_the_optimizer or identity_gate_reproduces"], cwd=ROOT, env={**os.environ, "P10IS1_STRICT": "1", "PYTHONPATH": str(ROOT)}, capture_output=True, text=True, timeout=900, check=False)
+    assert out.returncode == 0, out.stdout[-2500:]
+    assert "passed" in out.stdout and "skipped" not in out.stdout.splitlines()[-1] and "failed" not in out.stdout.splitlines()[-1]
