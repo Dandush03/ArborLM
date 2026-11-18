@@ -300,6 +300,16 @@ def require_ignored_run_dir(repo: Path, run_dir: Path) -> None:
         raise StageRefused(f"refused: the run directory {run_dir} is inside the repository and is not git-ignored")
 
 
+def require_ignored_path(repo: Path, path: Path) -> None:
+    """A file this study writes inside the repository must be git-ignored (the ledger; audit N3)."""
+    try:
+        rel = path.resolve().relative_to(repo.resolve())
+    except ValueError:
+        return
+    if git(repo, "check-ignore", "-q", str(rel)).returncode != 0:
+        raise StageRefused(f"refused: {path} is inside the repository and is not git-ignored: writing it would dirty the tree")
+
+
 def require_decision_2(repo: Path, freeze_commit: str, group: str) -> str:
     """Decision 2 for ``group`` (A1 or A2; A2 has its own) is recorded in a committed file ``results/p10ir-freeze-*/DECISION_2_<group>.md`` that holds the line ``DECISION: RUN`` (and not ``DECISION: DO
     NOT RUN``) and the full freeze commit. Without it no registered stage starts."""

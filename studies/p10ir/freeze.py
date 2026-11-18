@@ -31,6 +31,7 @@ def add_commands(sub: Any) -> None:
     cp.add_argument("--run-dir", required=True)
     cp.add_argument("--s1-run-dir", required=True)
     cp.add_argument("--seal-broken", action="store_true")
+    cp.add_argument("--supersede", action="store_true", help="replace an existing candidate plan: the old file is moved to freeze/superseded/plan-<sha12>.json, never deleted")
     cp.add_argument("--repo")
     f = sub.add_parser("freeze", help="write freeze/freeze_record.json for the committed candidate plan")
     f.add_argument("--rehearsal", required=True, help="the rehearsal record (rehearsal.json) whose candidate section names the plan file's SHA-256")
@@ -171,7 +172,17 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     cfg = core.load_config(repo / core.CONFIG)
     plan_path = repo / core.PLAN
     if plan_path.exists():
-        raise StageRefused(f"refused: {plan_path} exists; a plan is written once")
+        if not args.supersede:
+            raise StageRefused(f"refused: {plan_path} exists; a candidate plan is replaced only with --supersede (the old file is moved aside, never deleted)")
+        if (repo / planmod.FREEZE_RECORD).exists():
+            raise StageRefused("refused: a freeze record exists; a frozen plan is not superseded")
+        old = file_sha256(plan_path)
+        target = plan_path.parent / "superseded" / f"plan-{old[:12]}.json"
+        if target.exists():
+            raise StageRefused(f"refused: {target} exists")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        plan_path.rename(target)
+        print(json.dumps({"superseded": str(target), "sha256": old}))
     record = build_candidate(repo, Path(args.run_dir).resolve(), Path(args.s1_run_dir).resolve(), cfg)
     if args.seal_broken:
         record["seal"] = {**record["seal"], "broken": True}
@@ -196,8 +207,14 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if core.caps_provisional(cfg) or plan.data.get("caps_provisional"):
         raise StageRefused("refused: caps.provisional is true: the human lead sets the caps from the rehearsal (section 12) and clears it, and the candidate plan is rewritten and rehearsed again")
     plan_sha = file_sha256(plan_path)
+    rederived = build_candidate(repo, Path(plan.data["run_dir"]), Path(plan.data["s1_run_dir"]), cfg)
+    rederived["seal"] = {**rederived["seal"], "broken": bool(plan.data.get("seal", {}).get("broken"))}
+    if json.loads(json.dumps(rederived)) != plan.data:
+        raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and run directories (the code or the config changed after the plan was written): supersede it and rehearse again")
     rehearsal_path = Path(args.rehearsal)
     rehearsal = core.read_record(rehearsal_path, "rehearsal")
+    if rehearsal.get("caps_provisional") is not False:
+        raise StageRefused("refused: the rehearsal record was made on provisional caps (or does not say): the counting rehearsal runs against the plan with the caps set (procedure of ruling 5, two rehearsals)")
     reh = gates.rehearsal_gate(rehearsal, planmod_rehearsal_stages(), plan_file_sha256=plan_sha)
     if not reh["passed"]:
         raise StageRefused(f"refused: the rehearsal record does not show every stage COMPLETE, gates 1 and 2 passed on the registered checkpoints and the candidate plan of SHA-256 {plan_sha} rehearsed: {reh}")

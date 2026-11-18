@@ -25,6 +25,7 @@ from studies.p10s1.model import P10S1Model, build_model
 from studies.p10s1.train import load_model_state
 
 from . import core, gates, reads, sealed, stages_io
+from .plan import StageRefused
 
 SYNTHETIC_CORPUS = bytes((i * 7 + 3) % 256 for i in range(p9core.CORPUS_ROW_BYTES * 64))
 PARENT = p9core.PRIMARY_PARENT
@@ -88,7 +89,7 @@ def load_data(ctx: Ctx, item: dict[str, Any], *, verify: bool = True) -> tuple[d
         if path is not None:
             recorded = read_json(path)["sha256s"]
             if recorded != study.sha256s():
-                raise ValueError(f"the regenerated draw {item['seed_name']} differs from the hashes in {path}")
+                raise StageRefused(f"refused: the regenerated draw {item['seed_name']} differs from the hashes in {path} (PAUSED — IDENTITY)")
     return study, study.seeds
 
 
@@ -219,9 +220,12 @@ def guarded(rec: "Recorder", name: str, scope: str, fn: Any) -> None:
 
 def check_identity_first(ctx: "Ctx", item: dict[str, Any], rec: "Recorder", plan_digest: str | None, scope: str) -> None:
     """The per-item identity check, the second line behind gate 1 of the gates stage (ruling 8): made BEFORE the checkpoint is loaded or a read is computed; a checkpoint that is not the frozen one is not read."""
-    guarded(rec, "checkpoint_identity", scope, lambda: identity_gate(ctx, item, plan_digest))
-    if rec.all_gates()["checkpoint_identity"].get("passed") is False:
-        raise RuntimeError("the checkpoint is not the frozen one (identity gate failed): nothing of it is read")
+    if rec.has_gate("checkpoint_identity"):
+        return
+    g = identity_gate(ctx, item, plan_digest)
+    if g["passed"] is not True:  # a checkpoint that is missing or is not the frozen one: PAUSED — IDENTITY (ruling 8, section 13); nothing is recorded, so restoring the file lets the task resume
+        raise StageRefused(f"refused: the checkpoint of {item['id']} is missing or is not the frozen one (PAUSED — IDENTITY)")
+    rec.put_gate("checkpoint_identity", g)
 
 
 # --- a tree checkpoint ----------------------------------------------------------------------------------------------------------------------------------
@@ -361,7 +365,9 @@ def run_item(ctx: Ctx, item: dict[str, Any], plan_digests: dict[str, str] | None
         raise ValueError(f"no read set for arm {item['arm']!r}")
     try:
         (run_tree_item if item["arm"] == "T-OQ" else run_flat_item)(ctx, item, rec, digest)
-    except Exception as exc:  # noqa: BLE001 - ruling 7: recorded with its scope; the other checkpoints of the cell run; the replicate is NOT EVALUABLE
+    except (StageRefused, OSError, MemoryError):  # identity and environment failures are not scientific outcomes: the worker refuses (exit 75, PAUSED — IDENTITY) or fails or is killed; no item record is written
+        raise
+    except Exception as exc:  # noqa: BLE001 - what remains is a code or data error inside the item: recorded with its scope (and counted in the stage manifest and the report), the other checkpoints of the cell run
         if not rec.has_gate("item_error"):
             rec.put_gate("item_error", gates.gate("tree" if item["arm"] == "T-OQ" else "f0", False, error=f"{type(exc).__name__}: {str(exc)[:300]}"))
     return rec.finish(time.monotonic() - began)

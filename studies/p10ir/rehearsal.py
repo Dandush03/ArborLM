@@ -138,14 +138,7 @@ def sealed_available(root: Path, label: str, limit: int) -> list[int]:
 STAGE_ORDER = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "report", "confirm")
 
 
-def item_errors(root: Path) -> list[str]:
-    """Items whose worker code raised (an ``item_error`` gate): a code error, not a gate failure. A rehearsal with any is INCOMPLETE."""
-    out = []
-    for p in sorted(root.glob("A[12]/items/*/item.json")):
-        rec = core.read_record(p, "item")
-        if "item_error" in rec.get("gates", {}):
-            out.append(f"{p.parent.name}: {rec['gates']['item_error'].get('error')}")
-    return out
+item_errors = stages.item_errors
 
 
 def run_pipeline(plan: Plan, ctx: items.Ctx, root: Path, *, repo: Path, workers: int, inline: bool, stages_to_run: tuple[str, ...] = STAGE_ORDER, adapter_identity: bool = True) -> dict[str, dict[str, Any]]:
@@ -193,6 +186,7 @@ def run_candidate(root: Path, *, repo: Path, plan_path: Path | None = None) -> d
 
     cfg = core.load_config(repo / core.CONFIG)
     path = plan_path or repo / core.PLAN
+    plan_sha = file_sha256(path)  # hashed when the file is loaded and used throughout (audit N4); compared again at the end
     plan = Plan.load(path)
     problems: list[str] = []
     if plan.mode != planmod.REGISTERED:
@@ -233,7 +227,9 @@ def run_candidate(root: Path, *, repo: Path, plan_path: Path | None = None) -> d
     synth = analysis_on_synthetic_registry(plan, root, cfg)
     if synth["status"] != "COMPLETE":
         problems.append("the analysis on the synthetic registry did not find every record by the plan's labels")
-    return {"status": "COMPLETE" if not problems else "INCOMPLETE", "plan_file_sha256": file_sha256(path), "plan_path": str(path), "tasks": counts, "items": {"A1": n_a1, "A2": n_a2}, "problems": problems, "synthetic_registry": synth}
+    if file_sha256(path) != plan_sha:
+        problems.append("the plan file changed while the candidate phase ran")
+    return {"status": "COMPLETE" if not problems else "INCOMPLETE", "plan_file_sha256": plan_sha, "plan_path": str(path), "tasks": counts, "items": {"A1": n_a1, "A2": n_a2}, "problems": problems, "synthetic_registry": synth}
 
 
 def run_synthetic(root: Path, *, draws: int, repo: Path, inline: bool = True, workers: int = 1) -> dict[str, Any]:
@@ -326,7 +322,9 @@ def run_gates12(root: Path, s1_run_dir: Path, *, repo: Path, workers: int, plan_
     for label in stages.labels_of_stage(plan, "a1"):
         argv = (sys.executable, "-m", "studies.p10ir.stages", "work", "gates12", "--stage", "a1", "--labels", label, "--run-dir", str(root), "--plan", str(path), "--mode", planmod.REHEARSAL)
         tasks.append(runner.Task(label, argv, root / "gates12" / "tasks" / f"{safe_name(label)}.done.json", root / "gates12" / "tasks" / f"{safe_name(label)}.failed.json", root / "gates12" / "tasks" / f"{safe_name(label)}.log"))
-    ledger = core.Ledger(root.parent / f"P10IR-rehearsal-{root.name}-ledger.json", plan.total_cap_seconds())
+    ledger_path = root.parent / f"P10IR-rehearsal-{root.name}-ledger.json"
+    planmod.require_ignored_path(repo, ledger_path)
+    ledger = core.Ledger(ledger_path, plan.total_cap_seconds())
     if workers < 1:
         outcomes = {}
         for t in tasks:
@@ -358,7 +356,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         raise planmod.StageRefused(f"refused: {root} exists and is not empty; a rehearsal runs in a new directory")
     root.mkdir(parents=True, exist_ok=True)
     phases = [p for p in args.phases.split(",") if p]
-    record: dict[str, Any] = {**core.envelope("rehearsal"), "phases": phases, "platform": gates.platform_record(), "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "stages": {}}
+    record: dict[str, Any] = {**core.envelope("rehearsal"), "phases": phases, "caps_provisional": core.caps_provisional(core.load_config(repo / core.CONFIG)), "platform": gates.platform_record(), "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "stages": {}}
     statuses: dict[str, list[str]] = {}
     for phase in phases:
         if phase == "synthetic":

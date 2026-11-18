@@ -236,8 +236,7 @@ def test_gate_1_runs_for_every_checkpoint_in_the_gates_stage_and_stops_the_stage
         stages.execute_stage("a1", plan, ctx, tmp_path, root / "freeze" / "plan.json", repo=ROOT, workers=1, inline=True)
 
 
-def test_a_failure_inside_one_item_is_recorded_with_its_scope_and_the_other_checkpoints_run(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
-    """Ruling 7 (audit R5): a corrupt checkpoint does not fail the task; its item records the failure with its scope, the replicate is NOT EVALUABLE, and the rest of the cell runs."""
+def _copy_run(synthetic_run: dict[str, Any], tmp_path: Path) -> tuple[Plan, Path, items.Ctx, list[dict[str, Any]]]:
     import shutil
 
     root: Path = synthetic_run["root"]
@@ -245,20 +244,101 @@ def test_a_failure_inside_one_item_is_recorded_with_its_scope_and_the_other_chec
     copy = tmp_path / "s1"
     shutil.copytree(root / "s1", copy)
     its = [i for i in plan.items("A1") if i["cell"] == plan.items("A1")[0]["cell"]]
-    victim, other = its[0], its[1]
-    (copy / "cells" / victim["cell"] / "snapshots" / s1stem(victim["update"]) / "model.pt").write_bytes(b"not a checkpoint")
     ctx = items.Ctx("rehearsal", tmp_path / "run", copy, None, synthetic=True, run_sealed=True, sizes={"table_facts": 512, "unseen": 64}, manifests=stages.ctx_for(plan, root, run_sealed=True, experiments_root=None).manifests, index_seeds=plan.data["i64_seeds"])
+    return plan, copy, ctx, its
+
+
+def test_a_missing_or_changed_checkpoint_pauses_identity_and_records_nothing_and_resumes_when_restored(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    """N1: an identity failure during the run is not a scientific NOT EVALUABLE. The item raises StageRefused (the worker exits 75: PAUSED — IDENTITY); no item or gate file is written, so restoring the file lets the task resume."""
+    plan, copy, ctx, its = _copy_run(synthetic_run, tmp_path)
+    victim = its[0]
+    pt = copy / "cells" / victim["cell"] / "snapshots" / s1stem(victim["update"]) / "model.pt"
+    good = pt.read_bytes()
+    pt.unlink()  # a missing checkpoint file
+    with pytest.raises(planmod.StageRefused, match="PAUSED — IDENTITY"):
+        items.run_item(ctx, victim, plan.data["checkpoint_digests"])
+    rec = items.Recorder(ctx, victim)
+    assert not rec.complete() and not rec.has_gate("checkpoint_identity") and not rec.has_gate("item_error")
+    pt.write_bytes(b"not the checkpoint")  # a changed one
+    with pytest.raises(planmod.StageRefused, match="PAUSED — IDENTITY"):
+        items.run_item(ctx, victim, plan.data["checkpoint_digests"])
+    assert not rec.complete()
+    pt.write_bytes(good)  # restored bit for bit
     done = items.run_item(ctx, victim, plan.data["checkpoint_digests"])
-    assert done["complete"] is True and "item_error" in done["gates"] and done["gates"]["item_error"]["passed"] is False and done["gates"]["item_error"]["scope"] in ("tree", "f0")
-    assert done["gates"]["checkpoint_identity"]["passed"] is False or "item_error" in done["gates"]
-    ok = items.run_item(ctx, other, plan.data["checkpoint_digests"])  # the next checkpoint of the cell still runs
-    assert ok["complete"] is True and "item_error" not in ok["gates"]
+    assert done["complete"] is True and "item_error" not in done["gates"] and done["gates"]["checkpoint_identity"]["passed"] is True
+    # the data identity: a draw that does not equal its manifest is the same kind of refusal
+    bad_manifest = tmp_path / "manifest.json"
+    bad_manifest.write_text(json.dumps({"sha256s": {"facts": "0"}}), encoding="utf-8")
+    ctx.manifests[victim["seed_name"]] = bad_manifest
+    with pytest.raises(planmod.StageRefused, match="differs from the hashes"):
+        items.load_data(ctx, victim)
+
+
+def test_a_missing_checkpoint_makes_the_worker_exit_75_and_the_task_paused(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    import sys as _sys
+
+    plan, copy, ctx, its = _copy_run(synthetic_run, tmp_path)
+    label = its[0]["cell"]
+    (copy / "cells" / label / "snapshots" / s1stem(its[0]["update"]) / "model.pt").unlink()
+    data = json.loads(json.dumps(plan.data))
+    data["s1_run_dir"] = str(copy)
+    data["run_dir"] = str(tmp_path / "run")
+    pf = tmp_path / "plan.json"
+    core.write_record(pf, data)
+    argv = (_sys.executable, "-m", "studies.p10ir.stages", "work", "reads", "--stage", "a1", "--labels", label, "--run-dir", str(tmp_path / "run"), "--plan", str(pf), "--mode", "rehearsal")
+    task = runner.Task(label, argv, tmp_path / "run" / "a1" / "tasks" / "x.done.json", tmp_path / "run" / "a1" / "tasks" / "x.failed.json", tmp_path / "run" / "a1" / "tasks" / "x.log")
+    out, _ = runner.run_tasks([task], workers=1, cap_seconds=300.0, rss_worker_bytes=1 << 31, rss_aggregate_bytes=1 << 33, env={"PYTHONPATH": str(ROOT)})
+    assert out[label]["returncode"] == 75 and out[label]["status"] == runner.PAUSED_IDENTITY and runner.stage_status(out) == "PAUSED" and not task.failed_path.exists()
+
+
+def test_an_environment_error_propagates_and_is_not_recorded_as_not_evaluable(synthetic_run: dict[str, Any], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    plan, _, ctx, its = _copy_run(synthetic_run, tmp_path)
+    item = its[1]
+
+    def boom(*a: Any, **k: Any) -> Any:
+        raise OSError("disk went away")
+
+    monkeypatch.setattr(items, "load_model", boom)
+    with pytest.raises(OSError):
+        items.run_item(ctx, item, plan.data["checkpoint_digests"])
+    monkeypatch.setattr(items, "load_model", lambda *a, **k: (_ for _ in ()).throw(MemoryError()))
+    with pytest.raises(MemoryError):
+        items.run_item(ctx, item, plan.data["checkpoint_digests"])
+    assert not items.Recorder(ctx, item).complete()
+
+
+def test_a_gate_4_failure_makes_that_replicate_not_evaluable_only_and_a_code_error_is_counted(synthetic_run: dict[str, Any], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """N1: only the scientific gate failures of section 11 make a replicate NOT EVALUABLE; a remaining code error inside an item is an item_error, counted in the manifest and the report."""
     from studies.p10ir import registry
 
-    reg = registry.Registry()
-    reg.put_item(done)
-    ok_scope = registry.scope_ok(done, done["gates"]["item_error"]["scope"])
-    assert ok_scope[0] is False and "item_error" in ok_scope[1]
+    plan, _, ctx, its = _copy_run(synthetic_run, tmp_path)
+    tree = next(i for i in its if i["arm"] == "T-OQ")
+    names = ("tv1_priors_on_against_off", "t3_against_independent_flat", "t2_against_independent_flat")
+    monkeypatch.setattr(gates, "exactness_gates", lambda *a, **k: {n: gates.gate("tree", False, not_float_ties=3) for n in names})
+    done = items.run_item(ctx, tree, plan.data["checkpoint_digests"])
+    assert done["complete"] and "item_error" not in done["gates"] and all(done["gates"][n]["passed"] is False for n in names)
+    assert registry.scope_ok(done, "tree")[0] is False and registry.scope_ok(done, "f0")[0] is True and registry.scope_ok(done, "index")[0] is True
+    monkeypatch.undo()
+    flat = next(i for i in plan.items("A1") if i["arm"] == "F-OQ" and i["cell"] == tree["cell"].replace("T-OQ", "F-OQ") and i["update"] == tree["update"])
+    monkeypatch.setattr(items.reads, "read_counts", lambda *a, **k: (_ for _ in ()).throw(ValueError("a code error")))
+    err = items.run_item(ctx, flat, plan.data["checkpoint_digests"])
+    assert err["gates"]["item_error"]["passed"] is False and "ValueError" in err["gates"]["item_error"]["error"]
+    errors = stages.item_errors(tmp_path / "run", "A1")
+    assert len(errors) == 1 and "ValueError" in errors[0]
+    from studies.p10ir import analysis, report, synthetic
+
+    cfg = core.load_config()
+    a = analysis.analyze_all(analysis.analyze_stage(synthetic.full_registry("A1", None, cfg, lambda arm, sp, d: f"X{arm}{sp.name}{d}", i64_seeds=core.i64_seeds(cfg, test=True)), "A1", cfg, label_of=lambda arm, sp, d: f"X{arm}{sp.name}{d}", i64_seeds=core.i64_seeds(cfg, test=True)), None)
+    assert "ITEM ERRORS" not in report.render(a)
+    a["item_errors"] = errors
+    assert "ITEM ERRORS (worker code raised inside an item; counted apart from gate failures): 1" in report.render(a)
+
+
+def test_the_stage_manifest_counts_item_errors(synthetic_run: dict[str, Any]) -> None:
+    root: Path = synthetic_run["root"]
+    for stage in ("a1", "a2"):
+        m = runner.read_manifest(root, stage)
+        assert m is not None and m["item_errors"] == 0 and m["clean"] is True and m["item_error_list"] == []
 
 
 def s1stem(update: int) -> str:

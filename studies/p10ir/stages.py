@@ -257,9 +257,23 @@ def _mini_seeds_of(plan: Plan) -> Any:
 
 
 # --- charged time, caps -------------------------------------------------------------------------------------------------------------------------------------
-def ledger_of(plan: Plan, run_dir: Path, ledger_root: Path | None) -> core.Ledger:
+def ledger_of(plan: Plan, run_dir: Path, ledger_root: Path | None, repo: Path | None = None) -> core.Ledger:
+    """The charged-time ledger, in ``ledger_root`` or the run directory's parent. Where it would be inside the repository it must be git-ignored (audit N3): a ledger that dirties the tree would pause every later worker."""
     root = ledger_root or run_dir.parent
-    return core.Ledger(root / ("P10IR-ledger.json" if plan.mode == planmod.REGISTERED else f"P10IR-{plan.mode}-{run_dir.name}-ledger.json"), plan.total_cap_seconds())
+    path = root / ("P10IR-ledger.json" if plan.mode == planmod.REGISTERED else f"P10IR-{plan.mode}-{run_dir.name}-ledger.json")
+    if repo is not None:
+        planmod.require_ignored_path(repo, path)
+    return core.Ledger(path, plan.total_cap_seconds())
+
+
+def item_errors(run_dir: Path, stage: str | None = None) -> list[str]:
+    """Items whose worker code raised (an ``item_error`` gate): code or data errors, counted apart from gate failures. Printed in the manifest, the analysis and the report."""
+    out = []
+    for p in sorted(run_dir.glob(f"{stage or 'A[12]'}/items/*/item.json")):
+        rec = core.read_record(p, "item")
+        if "item_error" in rec.get("gates", {}):
+            out.append(f"{p.parent.name}: {rec['gates']['item_error'].get('error')}")
+    return out
 
 
 def stage_cap_seconds(plan: Plan, stage: str, ledger: core.Ledger) -> float:
@@ -274,7 +288,7 @@ def stage_cap_seconds(plan: Plan, stage: str, ledger: core.Ledger) -> float:
 def execute_stage(stage: str, plan: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, *, repo: Path, workers: int, inline: bool, extra_worker_args: Sequence[str] = (), ledger_root: Path | None = None, run_checker: bool = True, adapter_identity: bool = True) -> dict[str, Any]:
     """One stage, resumable, from the plan only. ``inline`` runs the workers in this process (rehearsal's synthetic phase and tests); otherwise as subprocesses under ``runner.run_tasks``."""
     cfg = ctx.cfg()
-    ledger = ledger_of(plan, run_dir, ledger_root)
+    ledger = ledger_of(plan, run_dir, ledger_root, repo)
     cap = stage_cap_seconds(plan, stage, ledger)
     ledger.require_room(stage, max(cap, 1.0) if cap > 0 else 0.0)
     prior = runner.read_manifest(run_dir, stage)
@@ -326,7 +340,10 @@ def execute_stage(stage: str, plan: Plan, ctx: items.Ctx, run_dir: Path, plan_pa
             outcomes, _ = runner.run_tasks(tasks, workers=workers, cap_seconds=cap, rss_worker_bytes=int(cfg["resources"]["rss_worker_bytes"]), rss_aggregate_bytes=int(cfg["resources"]["rss_aggregate_bytes"]), env={"PYTHONPATH": str(repo)})
     seconds = time.monotonic() - began
     ledger.charge(stage, run_dir.name, seconds)
-    manifest = runner.write_manifest(run_dir, stage, plan.mode, outcomes, seconds, identity=identity, started=started, caps=caps)
+    errors = item_errors(run_dir, READ_STAGES[stage]) if stage in READ_STAGES else []
+    manifest = runner.write_manifest(run_dir, stage, plan.mode, outcomes, seconds, identity=identity, started=started, caps=caps, extra={"item_errors": len(errors), "item_error_list": errors[:50], "clean": not errors})
+    if errors:
+        print(f"WARNING: {len(errors)} item(s) raised in worker code (item_error): the stage is not clean; see the manifest")
     print(json.dumps({"stage": stage, "status": manifest["status"], "tasks": len(outcomes), "charged_seconds": round(seconds, 1)}))
     return manifest
 
@@ -384,6 +401,7 @@ def run_analysis(plan: Plan, ctx: items.Ctx, run_dir: Path) -> dict[str, Any]:
         label_of=analysis.label_of_from_items(plan.items(core.STAGE_A1)), i64_seeds=ctx.i64(cfg),
     )  # fmt: skip
     full = analysis.analyze_all(a1, None, a2_complete=False)
+    full["item_errors"] = item_errors(run_dir, core.STAGE_A1)
     full["kind"] = "analysis"
     core.write_record(analysis_path(run_dir), {**core.envelope("analysis"), **full})
     return full
@@ -409,7 +427,7 @@ def run_confirm(plan: Plan, ctx: items.Ctx, run_dir: Path) -> dict[str, Any]:
     confirm = labels.r_confirm(labels.diagnosis_from_json(a1["A1"]["r_diagnosis"]), a2["_diagnosis_object"], a2_complete=True)
     record = {
         **core.envelope("confirm"), "a1_analysis_sha256": file_sha256(a1_path), "A2": analysis.public(a2), "r_confirm": confirm,
-        "statement_allowed": {"caused_by_a_named_factor_at_read_time": labels.may_say_cause(confirm), "training_time_causes": False},
+        "statement_allowed": {"caused_by_a_named_factor_at_read_time": labels.may_say_cause(confirm), "training_time_causes": False}, "item_errors": item_errors(run_dir, core.STAGE_A2),
     }  # fmt: skip
     core.write_record(confirm_path(run_dir), record)
     note = f"Mode: {plan.mode}. Plan SHA-256 {plan.sha256()}."

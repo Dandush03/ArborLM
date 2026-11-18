@@ -178,6 +178,9 @@ def render(full: Mapping[str, Any], plan_note: str = "") -> str:
         out += render_stage(full["A2"], "Stage A2")
     if full["r_confirm"]["R-CONFIRM-TREE"]["value"] == "NOT RUN":
         out += ["R-CONFIRM is computed by the separate `confirm` stage (group A2) against this record; this record is never rewritten.", ""]
+    errs = full.get("item_errors")
+    if errs is not None:
+        out += [f"ITEM ERRORS (worker code raised inside an item; counted apart from gate failures): {len(errs)}" + ("" if not errs else "; " + "; ".join(errs[:10])), ""]
     out.append("## Readings of the ADR taken here (each the most conservative course)")
     out.append("")
     for k, v in full["A1"]["readings"].items():
@@ -200,6 +203,9 @@ def render_confirm(record: Mapping[str, Any], note: str = "") -> str:
         out.append(f"- **{name}: {c['value']}**{detail}")
     sa = record["statement_allowed"]
     out += ["", f"- A statement that the tree's gap is caused by a named factor at read time requires R-CONFIRM-TREE: CONFIRMED. Allowed here: {sa['caused_by_a_named_factor_at_read_time']}.", ""]
+    errs = record.get("item_errors")
+    if errs is not None:
+        out += [f"ITEM ERRORS (worker code raised inside an item; counted apart from gate failures): {len(errs)}" + ("" if not errs else "; " + "; ".join(errs[:10])), ""]
     out += render_stage(record["A2"], "Stage A2")
     out.append("`Astra review: NOT_PERFORMED`.")
     return "\n".join(out) + "\n"

@@ -274,7 +274,7 @@ def freeze_repo(tmp: Path) -> tuple[Path, Path]:
     cfg_text = (ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8").replace("provisional = true", "provisional = false")
     (repo / "configs" / "p10ir_routing.toml").write_text(cfg_text, encoding="utf-8")
     cfg = core.load_config(repo / core.CONFIG)
-    rec = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, items=planmod.registered_items(cfg), run_dir=tmp / "run", s1_run_dir=None, extra={"seal": {"accesses_declared": [], "values_opened": False, "broken": False}})
+    rec = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, items=planmod.registered_items(cfg), run_dir=tmp / "run", s1_run_dir=tmp / "s1", extra={"seal": {"accesses_declared": [], "values_opened": False, "broken": False}})
     core.write_record(repo / core.PLAN, rec)
     return repo, tmp / "rehearsal.json"
 
@@ -286,12 +286,14 @@ def test_freeze_needs_the_rehearsed_plan_hash_and_writes_only_the_freeze_record(
 
     repo, reh = freeze_repo(tmp_path)
     monkeypatch.setattr(gates, "seed_gate", lambda *a, **k: {"passed": True, "problems": [], "roles": {}, "declared_reuse_not_new": {}, "checker": {}})
+    plan_data = json.loads((repo / core.PLAN).read_text(encoding="utf-8"))
+    monkeypatch.setattr(freeze, "build_candidate", lambda *a, **k: json.loads(json.dumps(plan_data)))  # the re-derivation needs the registered run directories: stubbed to the plan itself
     plan_sha = file_sha256(repo / core.PLAN)
     full = {s: {"status": "COMPLETE"} for s in stages.REHEARSAL_STAGES}
     good_gates = {"gate1_passed": True, "gate2_passed": True, "gate3_run": False}
 
-    def record(candidate_sha: str | None, status: str = "COMPLETE") -> None:
-        core.write_record(reh, {**core.envelope("rehearsal"), "stages": full, "registered_checkpoint_gates": good_gates, "candidate": {"status": status, "plan_file_sha256": candidate_sha}}, overwrite=True)
+    def record(candidate_sha: str | None, status: str = "COMPLETE", provisional: bool | None = False) -> None:
+        core.write_record(reh, {**core.envelope("rehearsal"), "stages": full, "registered_checkpoint_gates": good_gates, "caps_provisional": provisional, "candidate": {"status": status, "plan_file_sha256": candidate_sha}}, overwrite=True)
 
     args = lambda *extra: stages.build_parser().parse_args(["freeze", "--rehearsal", str(reh), "--repo", str(repo), *extra])  # noqa: E731
     record("0" * 64)  # a rehearsal of another plan file
@@ -300,7 +302,19 @@ def test_freeze_needs_the_rehearsed_plan_hash_and_writes_only_the_freeze_record(
     record(plan_sha, status="INCOMPLETE")
     with pytest.raises(StageRefused, match="candidate plan of SHA-256"):
         freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
+    record(plan_sha, provisional=True)  # N2: a rehearsal made on provisional caps cannot be frozen on
+    with pytest.raises(StageRefused, match="provisional caps"):
+        freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
+    record(plan_sha, provisional=None)  # a record that does not say
+    with pytest.raises(StageRefused, match="provisional caps"):
+        freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
     record(plan_sha)
+    stale = json.loads(json.dumps(plan_data))
+    stale["config_sha256"] = "9" * 64  # N2: the plan no longer equals a re-derivation from the current code and config
+    monkeypatch.setattr(freeze, "build_candidate", lambda *a, **k: json.loads(json.dumps(stale)))
+    with pytest.raises(StageRefused, match="differs from a re-derivation"):
+        freeze.cmd_freeze(args("--attest-sealed-unopened", "lead,implementer,auditor"))
+    monkeypatch.setattr(freeze, "build_candidate", lambda *a, **k: json.loads(json.dumps(plan_data)))
     with pytest.raises(StageRefused, match="has not opened the sealed values|none has opened"):
         freeze.cmd_freeze(args())  # no attestation
     with pytest.raises(StageRefused, match="seal flag"):
@@ -575,3 +589,39 @@ def test_the_rehearsal_gate_in_a_registered_plan_reads_the_freeze_records_rehear
     from arborlm.io import file_sha256
 
     assert stages.rehearsal_record_of(plan) == (None, file_sha256(repo / core.PLAN))  # no freeze record yet: no rehearsal record, and the plan file's own hash
+
+
+def test_candidate_plan_is_superseded_only_with_the_flag_and_the_old_file_is_kept(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """N2: a candidate plan is never overwritten silently; with --supersede the old file moves to freeze/superseded/plan-<sha12>.json."""
+    from arborlm.io import file_sha256
+    from studies.p10ir import freeze
+
+    repo, _ = freeze_repo(tmp_path)
+    old_sha = file_sha256(repo / core.PLAN)
+    new = json.loads((repo / core.PLAN).read_text(encoding="utf-8"))
+    new["run_dir"] = str(tmp_path / "other_run")
+    monkeypatch.setattr(freeze, "build_candidate", lambda *a, **k: json.loads(json.dumps(new)))
+    base = ["candidate-plan", "--run-dir", str(tmp_path / "r"), "--s1-run-dir", str(tmp_path / "s1"), "--repo", str(repo)]
+    with pytest.raises(StageRefused, match="--supersede"):
+        freeze.cmd_candidate_plan(stages.build_parser().parse_args(base))
+    assert file_sha256(repo / core.PLAN) == old_sha
+    assert freeze.cmd_candidate_plan(stages.build_parser().parse_args([*base, "--supersede"])) == 0
+    kept = repo / "studies" / "p10ir" / "freeze" / "superseded" / f"plan-{old_sha[:12]}.json"
+    assert kept.is_file() and file_sha256(kept) == old_sha and file_sha256(repo / core.PLAN) != old_sha
+    (repo / planmod.FREEZE_RECORD).write_text("{}", encoding="utf-8")
+    with pytest.raises(StageRefused, match="freeze record exists"):
+        freeze.cmd_candidate_plan(stages.build_parser().parse_args([*base, "--supersede"]))
+
+
+def test_the_ledger_is_never_written_where_it_would_dirty_the_tree(tmp_path: Path) -> None:
+    """N3: a ledger path inside the repository must be git-ignored; the run directory being the ignored root itself puts the ledger in its parent, which is not."""
+    repo = make_repo(tmp_path)
+    (repo / ".gitignore").write_text("experiments/\n", encoding="utf-8")
+    plan = Plan({**core.envelope("freeze_plan"), "mode": "registered", "items": {"A1": [], "A2": []}, "stage_caps": {"total_hours": 1.0}})
+    ok = stages.ledger_of(plan, repo / "experiments" / "run", None, repo)
+    assert ok.path == repo / "experiments" / "P10IR-ledger.json"
+    with pytest.raises(StageRefused, match="not git-ignored"):
+        stages.ledger_of(plan, repo / "experiments", None, repo)  # the run directory is the ignored root: its parent is the repository root
+    assert stages.ledger_of(plan, tmp_path / "outside" / "run", None, repo).path.parent == tmp_path / "outside"
+    with pytest.raises(StageRefused, match="not git-ignored"):
+        stages.ledger_of(plan, repo / "experiments" / "run", repo / "results", repo)

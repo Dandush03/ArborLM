@@ -142,7 +142,7 @@ def read_manifest(run_dir: Path, stage: str) -> dict[str, Any] | None:
     return core.read_record(p, "stage_manifest") if p.is_file() else None
 
 
-def write_manifest(run_dir: Path, stage: str, mode: str, outcomes: dict[str, dict[str, Any]], seconds: float, *, identity: dict[str, Any], started: str, caps: dict[str, float]) -> dict[str, Any]:
+def write_manifest(run_dir: Path, stage: str, mode: str, outcomes: dict[str, dict[str, Any]], seconds: float, *, identity: dict[str, Any], started: str, caps: dict[str, float], extra: dict[str, Any] | None = None) -> dict[str, Any]:
     """The stage manifest: ``status`` COMPLETE, PAUSED or FAILED, the latest outcome of every task, and one ``history`` entry per invocation. A COMPLETE manifest is never rewritten."""
     prior = read_manifest(run_dir, stage)
     if prior is not None and prior["status"] == "COMPLETE":
@@ -152,7 +152,7 @@ def write_manifest(run_dir: Path, stage: str, mode: str, outcomes: dict[str, dic
     history = list(prior["history"]) if prior else []
     history.append({"started_utc": started, "finished_utc": datetime.now(UTC).isoformat(), "charged_seconds": seconds, "outcomes": {k: v["status"] for k, v in outcomes.items()}, "caps": caps})
     status = stage_status(tasks)
-    record = {**core.envelope("stage_manifest"), "stage": stage, "mode": mode, "status": status, "tasks": tasks, "history": history, "charged_seconds": float(sum(h["charged_seconds"] for h in history)), "identity": identity}
+    record = {**core.envelope("stage_manifest"), "stage": stage, "mode": mode, "status": status, "tasks": tasks, "history": history, "charged_seconds": float(sum(h["charged_seconds"] for h in history)), "identity": identity, **(extra or {})}
     core.write_record(manifest_path(run_dir, stage), record, overwrite=True)
     return record
 
