@@ -126,6 +126,7 @@ def test_the_analysis_of_the_rehearsal_uses_the_plans_labels_finds_every_record_
     """Audit R2: the analysis takes the plan's labels (the rehearsal's items are not the config's derivation), so every replicate is found; the memories are trained past the information floor, so rows other
     than NOT EVALUABLE are reached; and no replicate may say 'no item record'."""
     root: Path = synthetic_run["root"]
+    plan: Plan = synthetic_run["plan"]
     full = json.loads((root / "analysis" / "analysis.json").read_text(encoding="utf-8"))
     a1 = full["A1"]
     assert set(a1["cells"]) == {"128/1K", "128/4K"} and a1["stage_tag"] == core.A1_TAG
@@ -149,7 +150,7 @@ def test_the_analysis_of_the_rehearsal_uses_the_plans_labels_finds_every_record_
     assert core.LIMIT_SENTENCE in text and "unproven research" in text and "Astra review: NOT_PERFORMED" in text and "R-DIAGNOSIS-LOADED" in text and "accuracy version" in text
     assert report.HEADER in text and "success" not in text.lower().replace("not a success", "")
     ledger = json.loads(next(root.parent.glob("P10IR-rehearsal-*ledger.json")).read_text(encoding="utf-8"))
-    assert {e["stage"] for e in ledger["entries"]} == set(stages.REHEARSAL_STAGES) and ledger["total_seconds"] == 8 * 3600.0
+    assert {e["stage"] for e in ledger["entries"]} == set(stages.REHEARSAL_STAGES) and ledger["total_seconds"] == plan.total_cap_seconds()
 
 
 def test_the_confirm_stage_writes_its_own_record_against_a1s_frozen_one_and_never_rewrites_it(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
@@ -388,7 +389,11 @@ def test_gates_1_and_2_run_on_a_stand_in_for_the_registered_checkpoints_and_neve
     res = rehearsal.run_gates12(
         tmp_path / "g12", root / "s1", repo=ROOT, workers=0, plan_items=plan.items("A1"), synthetic=True, sizes={"table_facts": 512, "unseen": 64}, draw_names=names,
         identity={"cells": [tuple(c) for c in plan.data["identity_gate_cells"]], "seeds_of": stages._mini_seeds_of(plan), "updates": plan.data["identity_gate_updates"]},
+        train_manifest=plan.data["p10s1_train_manifest"], frozen_data_manifests=plan.data["p10s1_frozen_data_manifests"],
     )  # fmt: skip
+    assert res["gate1_links"] == {"passed": True, "failed": []}  # section 4's two links on the files, read before Decision 2
+    assert res["worker_platform"] == [{"torch_num_threads": 1, "torch_interop_threads": 1, "deterministic_algorithms": True}] and res["driver_platform"]["torch_num_threads"] == 1
+    assert set(res["adapter_identity"]["cells"]) and all(set(v) for v in res["adapter_identity"]["cells"].values())  # the per-snapshot detail is kept
     assert res["gate3_run"] is False and res["items_done"] == res["items_expected"] == 80
     if gates.on_platform_of_record(CFG):
         assert res["gate1_passed"] is True and res["gate2_passed"] is True and res["adapter_identity"]["passed"] is True
@@ -440,3 +445,62 @@ def test_rehearse_command_refuses_a_non_empty_directory_and_an_unknown_phase(tmp
     assert stages.main(["rehearse", "--run-dir", str(tmp_path / "x")]) == 2
     assert stages.main(["rehearse", "--run-dir", str(tmp_path / "y"), "--phases", "nope"]) == 2
     assert stages.main(["rehearse", "--run-dir", str(tmp_path / "z"), "--phases", "gates12"]) == 2  # needs --s1-run-dir
+
+
+def test_gates12_fails_when_a_section_4_link_fails(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    plan: Plan = synthetic_run["plan"]
+    root: Path = synthetic_run["root"]
+    bad = dict(plan.data["p10s1_frozen_data_manifests"])
+    bad[next(iter(bad))] = "0" * 64
+    names = [rehearsal._mini_seed_a1(d)["name"] for d in range(5)]
+    res = rehearsal.run_gates12(
+        tmp_path / "g12", root / "s1", repo=ROOT, workers=0, plan_items=plan.items("A1")[:8], synthetic=True, sizes={"table_facts": 512, "unseen": 64}, draw_names=names,
+        identity={"cells": [tuple(c) for c in plan.data["identity_gate_cells"]], "seeds_of": stages._mini_seeds_of(plan), "updates": plan.data["identity_gate_updates"][:1]},
+        train_manifest=plan.data["p10s1_train_manifest"], frozen_data_manifests=bad,
+    )  # fmt: skip
+    assert res["gate1_links"]["passed"] is False and res["gate1_passed"] is False and any("frozen data_manifests" in f for f in res["gate1_links"]["failed"])
+
+
+def _inject_item_error(src: Path, dst: Path, stage: str) -> Path:
+    import shutil
+
+    shutil.copytree(src, dst)
+    p = sorted(dst.glob(f"{stage}/items/*/item.json"))[0]
+    rec = json.loads(p.read_text(encoding="utf-8"))
+    rec["gates"]["item_error"] = {"scope": "tree", "passed": False, "status": "failed", "error": "ValueError: injected"}
+    p.write_text(json.dumps(rec), encoding="utf-8")
+    return dst
+
+
+def test_ruling_11_the_analysis_and_confirm_refuse_with_an_item_error_and_label_nothing(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    plan: Plan = synthetic_run["plan"]
+    for stage, run, path, want in (("A1", stages.run_analysis, "analysis", "analysis.json"), ("A2", stages.run_confirm, "confirm", "confirm.json")):
+        copy = _inject_item_error(synthetic_run["root"], tmp_path / stage, stage)
+        for f in (copy / path / want, copy / path / "REPORT.md", copy / path / "REPORT_CONFIRM.md", copy / "report" / "REPORT.md"):
+            f.unlink(missing_ok=True)
+        ctx = stages.ctx_for(plan, copy, run_sealed=True, experiments_root=None)
+        assert len(stages.item_errors(copy, stage)) == 1
+        with pytest.raises(planmod.StageRefused, match="ENGINEERING STOP — ITEM ERRORS"):
+            run(plan, ctx, copy)
+        stop = core.read_record(copy / path / "ENGINEERING_STOP.json", "engineering_stop")
+        assert stop["outcome"] == "ENGINEERING STOP — ITEM ERRORS" and stop["labelled"] is False and len(stop["items"]) == 1 and "ValueError: injected" in stop["items"][0]
+        assert not (copy / path / want).exists()  # nothing is labelled
+    with pytest.raises(planmod.StageRefused, match="no analysis"):
+        stages.run_report(plan, stages.ctx_for(plan, tmp_path / "A1", run_sealed=True, experiments_root=None), tmp_path / "A1")  # no report for the stage
+
+
+def test_an_environment_error_inside_a_gate_propagates_and_sealed_missing_stays_a_gate_failure(synthetic_run: dict[str, Any], tmp_path: Path) -> None:
+    """F1: MemoryError, OSError and StageRefused inside a gate are never recorded as a failed gate; SealedMissing (a FileNotFoundError P10-S1 did not write) is."""
+    from studies.p10ir import sealed
+
+    ctx = items.Ctx("rehearsal", tmp_path, None, None)
+    rec = items.Recorder(ctx, {"stage": "A1", "id": "A1|c|u0000001", "cell": "c", "update": 1})
+    for exc in (MemoryError(), OSError("disk"), planmod.StageRefused("refused: identity")):
+        with pytest.raises(type(exc)):
+            items.guarded(rec, "g", "tree", lambda e=exc: (_ for _ in ()).throw(e))
+        assert not rec.has_gate("g")
+    items.guarded(rec, "sealed", "index", lambda: (_ for _ in ()).throw(sealed.SealedMissing("no record at p")))
+    assert rec.all_gates()["sealed"]["passed"] is False
+    items.guarded(rec, "value", "tree", lambda: (_ for _ in ()).throw(ValueError("x")))
+    assert rec.all_gates()["value"]["passed"] is False
+    assert items.is_environment_error(MemoryError()) and items.is_environment_error(PermissionError()) and not items.is_environment_error(sealed.SealedMissing("x")) and not items.is_environment_error(KeyError("k"))

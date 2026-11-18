@@ -141,11 +141,11 @@ eval_chunk_elements = 1048576        # P10-S1's evaluation chunk (studies/p10s1/
 [caps]
 # section 12: resource caps, "set after the rehearsal as charged + 2 x projected remaining"; section 14 estimates are placeholders until then.
 # provisional = true makes the freeze refuse. The caps are charged hours on six workers; they are the only values the rehearsal may change.
-provisional = true
+provisional = false
 rehearsal_hours = 1.0
-a1_hours = 5.0
-a2_hours = 1.5
-total_hours = 8.0
+a1_hours = 6.0
+a2_hours = 3.0
+total_hours = 10.0
 
 [platform]
 # section 13: platform of record

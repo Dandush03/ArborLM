@@ -40,7 +40,7 @@ LIMIT_SENTENCE = (
 )
 
 RECORD_KINDS = (
-    "read", "item", "gate", "stage_manifest", "freeze_plan", "analysis", "ledger", "rehearsal", "bridge_manifest", "bridge_train", "identity_gate", "extract", "gates_record", "report_manifest", "confirm",
+    "read", "item", "gate", "stage_manifest", "freeze_plan", "analysis", "ledger", "rehearsal", "bridge_manifest", "bridge_train", "identity_gate", "extract", "gates_record", "report_manifest", "confirm", "engineering_stop",
 )  # fmt: skip
 
 # --- the reads (section 6) and their names -----------------------------------------------------------------------------------------

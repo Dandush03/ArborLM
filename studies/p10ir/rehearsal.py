@@ -20,7 +20,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from arborlm.io import file_sha256, write_json
+from arborlm.io import file_sha256, read_json, write_json
 from studies.p10s1 import core as s1core
 from studies.p10s1 import evaluate as s1eval
 from studies.p10s1 import train as s1train
@@ -141,6 +141,18 @@ STAGE_ORDER = ("gates-a1", "a1", "gates-a2", "a2-train", "a2", "analysis", "repo
 item_errors = stages.item_errors
 
 
+def worker_platforms(root: Path) -> list[dict[str, Any]]:
+    """The distinct platform settings (threads, interop threads, deterministic algorithms) the WORKERS reported in their item records."""
+    seen: list[dict[str, Any]] = []
+    for st in ("A1", "A2"):
+        for p in sorted(root.glob(f"{st}/items/*/item.json")):
+            pl = core.read_record(p, "item").get("platform") or {}
+            e = {k: pl.get(k) for k in ("torch_num_threads", "torch_interop_threads", "deterministic_algorithms")}
+            if e not in seen:
+                seen.append(e)
+    return seen
+
+
 def run_pipeline(plan: Plan, ctx: items.Ctx, root: Path, *, repo: Path, workers: int, inline: bool, stages_to_run: tuple[str, ...] = STAGE_ORDER, adapter_identity: bool = True) -> dict[str, dict[str, Any]]:
     """Every stage of ``stages_to_run`` in order against the plan, through ``stages.execute_stage`` (the code path of the registered entry points; the registered preconditions are what a rehearsal does not
     have, by design: it has no freeze commit)."""
@@ -241,7 +253,7 @@ def run_synthetic(root: Path, *, draws: int, repo: Path, inline: bool = True, wo
     plan, ctx = build_synthetic_plan(root, cfg, draws)
     manifests = run_pipeline(plan, ctx, root, repo=repo, workers=workers, inline=inline)
     synth = analysis_on_synthetic_registry(plan, root, cfg)
-    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in manifests.items()}, "plan_sha256": plan.sha256(), "synthetic_registry": synth, "item_errors": item_errors(root)}
+    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in manifests.items()}, "plan_sha256": plan.sha256(), "synthetic_registry": synth, "item_errors": item_errors(root), "worker_platform": worker_platforms(root)}
 
 
 # --- the real-size phase ---------------------------------------------------------------------------------------------------------------------------------------
@@ -296,11 +308,11 @@ def run_real(root: Path, *, repo: Path, workers: int, inline: bool = False, cfg:
             rec = core.read_record(p, "read")
             seconds_per_read[f"{stage}|{rec['cell']}|u{rec['update']}|{rec['read']}"] = float(rec["seconds"])
     peaks = {s: max((float(t.get("peak_rss_bytes", 0)) for t in m["tasks"].values()), default=0.0) for s, m in run.items()}
-    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in run.items()}, "seconds_per_read": seconds_per_read, "peak_rss_bytes_by_stage": peaks, "facts": cfg["rehearsal"]["facts"], "slots": cfg["rehearsal"]["slots"], "plan_sha256": plan.sha256(), "item_errors": item_errors(root)}
+    return {"stages": {s: {"status": m["status"], "charged_seconds": m["charged_seconds"]} for s, m in run.items()}, "seconds_per_read": seconds_per_read, "peak_rss_bytes_by_stage": peaks, "facts": cfg["rehearsal"]["facts"], "slots": cfg["rehearsal"]["slots"], "plan_sha256": plan.sha256(), "item_errors": item_errors(root), "worker_platform": worker_platforms(root)}
 
 
 # --- gates 1 and 2 on the registered checkpoints -----------------------------------------------------------------------------------------------------------------
-def run_gates12(root: Path, s1_run_dir: Path, *, repo: Path, workers: int, plan_items: list[dict[str, Any]] | None = None, synthetic: bool = False, sizes: dict[str, int] | None = None, draw_names: list[str] | None = None, identity: dict[str, Any] | None = None) -> dict[str, Any]:
+def run_gates12(root: Path, s1_run_dir: Path, *, repo: Path, workers: int, plan_items: list[dict[str, Any]] | None = None, synthetic: bool = False, sizes: dict[str, int] | None = None, draw_names: list[str] | None = None, identity: dict[str, Any] | None = None, train_manifest: dict[str, str] | None = None, frozen_data_manifests: dict[str, str] | None = None) -> dict[str, Any]:
     """Gate 1 and gate 2 on every registered A1 checkpoint (items from the config: the freeze does not exist yet) through the worker pool, and the adapter identity gate on P10-S1's draw-1 cells. Gate 3 is not run.
     The keyword arguments exist for the unit test, which runs this code path on the synthetic miniature run."""
     cfg = core.load_config()
@@ -311,7 +323,11 @@ def run_gates12(root: Path, s1_run_dir: Path, *, repo: Path, workers: int, plan_
     draw_manifests = {n: {"path": str(s1_run_dir / "draws" / n / "data_manifest.json"), "sha256": file_sha256(s1_run_dir / "draws" / n / "data_manifest.json"), "groups": [core.STAGE_A1]} for n in names}
     rec = planmod.build_plan(
         mode=planmod.REHEARSAL, cfg=cfg, repo=repo, items={core.STAGE_A1: itemset, core.STAGE_A2: []}, run_dir=root, s1_run_dir=s1_run_dir,
-        extra={"sizes": sz, "synthetic": synthetic, "draw_manifests": draw_manifests, "manifests": draw_manifests},
+        extra={
+            "sizes": sz, "synthetic": synthetic, "draw_manifests": draw_manifests, "manifests": draw_manifests,
+            "p10s1_train_manifest": train_manifest if train_manifest is not None else {"path": freeze.S1_TRAIN_MANIFEST, "sha256": file_sha256(repo / freeze.S1_TRAIN_MANIFEST)},
+            "p10s1_frozen_data_manifests": frozen_data_manifests if frozen_data_manifests is not None else read_json(repo / core.P10S1_PLAN)["data_manifests"],
+        },
     )  # fmt: skip
     path = root / "freeze" / "plan.json"
     core.write_record(path, rec)
@@ -332,8 +348,9 @@ def run_gates12(root: Path, s1_run_dir: Path, *, repo: Path, workers: int, plan_
             outcomes[t.label] = {"status": runner.COMPLETED}
     else:
         outcomes, _ = runner.run_tasks(tasks, workers=workers, cap_seconds=ledger.remaining(), rss_worker_bytes=int(cfg["resources"]["rss_worker_bytes"]), rss_aggregate_bytes=int(cfg["resources"]["rss_aggregate_bytes"]), env={"PYTHONPATH": str(repo)})
+    links = stages.gate1_links(plan, ctx, repo, {it["cell"] for it in itemset})  # section 4: train.json against the committed train manifest, data manifests against P10-S1's frozen ones (no sealed value)
     results = [core.read_record(p, "gate")["gate"] for p in sorted((root / "gates12" / "items").glob("*.json"))]
-    ok1 = bool(results) and len(results) == len(itemset) and all(r["identity"]["passed"] is True for r in results)
+    ok1 = bool(results) and len(results) == len(itemset) and all(r["identity"]["passed"] is True for r in results) and not links
     ok2 = bool(results) and len(results) == len(itemset) and all(r["passed"] is True for r in results)
     cfg_s = cfg["seeds"]
     cells = [(arm, int(cfg_s["identity_gate_cell"][0]), int(cfg_s["identity_gate_cell"][1]), int(cfg_s["identity_gate_draw"]), int(cfg_s["p10s1_init_base"]) + int(cfg_s["identity_gate_draw"]), 8192, 49152) for arm in ("F-OQ", "T-OQ")]
@@ -344,7 +361,8 @@ def run_gates12(root: Path, s1_run_dir: Path, *, repo: Path, workers: int, plan_
     ledger.charge("gates12", root.name, seconds)
     return {
         "gate1_passed": ok1, "gate2_passed": ok2, "gate3_run": False, "items_expected": len(itemset), "items_done": len(results), "task_statuses": {k: v["status"] for k, v in outcomes.items()},
-        "adapter_identity": {"passed": ident.get("passed"), "status": ident.get("status")}, "charged_seconds": seconds,
+        "gate1_links": {"passed": not links, "failed": links}, "adapter_identity": {"passed": ident.get("passed"), "status": ident.get("status"), "cells": ident.get("cells")},
+        "worker_platform": [dict(t) for t in {tuple(sorted(r.get("platform", {}).items())) for r in results}], "driver_platform": {k: v for k, v in gates.platform_record().items() if k in ("torch_num_threads", "torch_interop_threads", "deterministic_algorithms")}, "charged_seconds": seconds,
     }  # fmt: skip
 
 
@@ -358,6 +376,8 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     phases = [p for p in args.phases.split(",") if p]
     record: dict[str, Any] = {**core.envelope("rehearsal"), "phases": phases, "caps_provisional": core.caps_provisional(core.load_config(repo / core.CONFIG)), "platform": gates.platform_record(), "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "stages": {}}
     statuses: dict[str, list[str]] = {}
+    record["driver_platform"] = {k: v for k, v in gates.platform_record().items() if k in ("torch_num_threads", "torch_interop_threads", "deterministic_algorithms")}
+    record["worker_platform"] = {}  # what the WORKERS reported in their item records, per phase, beside the driver's
     for phase in phases:
         if phase == "synthetic":
             res = run_synthetic(root / "synthetic", draws=args.draws, repo=repo)
@@ -373,9 +393,11 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
                 raise planmod.StageRefused("refused: gates12 needs --s1-run-dir")
             res = run_gates12(root / "gates12", Path(args.s1_run_dir), repo=repo, workers=args.workers)
             record["registered_checkpoint_gates"] = res
+            record["worker_platform"]["gates12"] = res["worker_platform"]
             continue
         else:
             raise planmod.StageRefused(f"refused: unknown phase {phase!r}")
+        record["worker_platform"][phase] = res["worker_platform"]
         for s, m in res["stages"].items():
             statuses.setdefault(s, []).append("INCOMPLETE" if res.get("item_errors") and s in ("a1", "a2") else m["status"])
     for s in stages.REHEARSAL_STAGES:

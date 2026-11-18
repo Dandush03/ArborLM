@@ -165,6 +165,14 @@ def build_candidate(repo: Path, run_dir: Path, s1_run_dir: Path, cfg: Any) -> di
     )  # fmt: skip
 
 
+NOT_COMPARED = ("adr", "platform")  # the ADR is recorded for provenance only and is not a frozen input (section 13); the platform block is the freezing process's own
+
+
+def scientific_content(plan_data: dict[str, Any]) -> dict[str, Any]:
+    """The plan without the ADR's hash and the process platform record: what the freeze's re-derivation compares."""
+    return {k: v for k, v in plan_data.items() if k not in NOT_COMPARED}
+
+
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
     """Write the CANDIDATE ``freeze/plan.json`` (ruling 5: the plan comes first; the rehearsal runs against this very file and records its SHA-256; ``freeze`` refuses unless the committed file has that hash).
     Written once; the caps may still be provisional (the plan then says so and ``freeze`` refuses it); the seal flag is the plan's own and is set by ``--seal-broken``."""
@@ -209,7 +217,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     plan_sha = file_sha256(plan_path)
     rederived = build_candidate(repo, Path(plan.data["run_dir"]), Path(plan.data["s1_run_dir"]), cfg)
     rederived["seal"] = {**rederived["seal"], "broken": bool(plan.data.get("seal", {}).get("broken"))}
-    if json.loads(json.dumps(rederived)) != plan.data:
+    if scientific_content(json.loads(json.dumps(rederived))) != scientific_content(plan.data):
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and run directories (the code or the config changed after the plan was written): supersede it and rehearse again")
     rehearsal_path = Path(args.rehearsal)
     rehearsal = core.read_record(rehearsal_path, "rehearsal")

@@ -155,8 +155,25 @@ def test_config_validation_refuses_a_missing_key(tmp_path: Path) -> None:
         core.load_config(p)
 
 
-def test_caps_are_provisional_until_the_human_lead_sets_them() -> None:
-    cfg = core.load_config()
-    assert core.caps_provisional(cfg) is True
-    assert core.cap_hours("rehearsal", cfg) == 1.0 and core.cap_hours("a1", cfg) == 5.0 and core.cap_hours("a2", cfg) == 1.5
+def with_caps(tmp: Path, *, provisional: bool) -> Path:
+    """A temporary copy of the config with the cap flag a test needs: no test depends on the live config's caps."""
+    text = re.sub(r"(?m)^provisional = (true|false)", f"provisional = {'true' if provisional else 'false'}", (ROOT / core.CONFIG).read_text(encoding="utf-8"), count=1)
+    p = tmp / "p10ir_routing.toml"
+    p.write_text(text, encoding="utf-8")
+    return p
+
+
+def test_the_code_reads_and_refuses_provisional_caps_from_a_temporary_config(tmp_path: Path) -> None:
+    prov = core.load_config(with_caps(tmp_path, provisional=True))
+    assert core.caps_provisional(prov) is True
+    (tmp_path / "x").mkdir()
+    assert core.caps_provisional(core.load_config(with_caps(tmp_path / "x", provisional=False))) is False
     assert core.propose_cap_hours(1.0, 2.0) == 5.0  # section 12: charged + 2 x projected remaining
+    # the refusals themselves (the freeze and the registered verify) are tested in test_p10ir_stages on a temporary repository with provisional caps
+
+
+def test_the_live_configs_caps_are_positive_and_consistent() -> None:
+    cfg = core.load_config()
+    r, a1, a2, total = (core.cap_hours(k, cfg) for k in ("rehearsal", "a1", "a2", "total"))
+    assert min(r, a1, a2, total) > 0 and r + a1 + a2 <= total
+    assert isinstance(core.caps_provisional(cfg), bool)

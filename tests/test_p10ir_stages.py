@@ -4,10 +4,12 @@ the frozen-input set excludes the ADR; items come from the plan only; the runner
 seed, no registered checkpoint. Self-check only: not independent review, not Astra validation, not human approval."""
 
 import json
+import re
 import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -220,7 +222,8 @@ def test_the_plan_lists_every_planned_read_and_records_its_identities(mini: tupl
     assert d["kind"] == "freeze_plan" and d["mode"] == "rehearsal" and set(d["frozen_files"]) >= {str(core.CONFIG), "studies/p10ir/plan.py"}
     assert "freeze/plan.json" not in " ".join(d["frozen_files"]) and not any(k.startswith("docs/") for k in d["frozen_files"])
     assert d["adr"]["note"].startswith("provenance only") and d["config_sha256"] == core.config_sha256()
-    assert d["stage_caps"] == {"a1_hours": 5.0, "a2_hours": 1.5, "rehearsal_hours": 1.0, "total_hours": 8.0}
+    caps = core.load_config()["caps"]  # the plan copies the config's caps whatever they are
+    assert d["stage_caps"] == {k: float(v) for k, v in caps.items() if k.endswith("_hours")} and d["caps_provisional"] is bool(caps["provisional"])
     assert d["seal"]["values_opened"] is False and len(d["seal"]["accesses_declared"]) == 3
     it = plan.items("A1")[0]
     assert set(it) >= {"id", "stage", "arm", "cell", "facts", "slots", "draw", "update", "checkpoint", "init_seed", "seed_name", "seed_base", "reads", "table_facts", "synthetic"}
@@ -252,6 +255,7 @@ def test_verify_plan_checks_every_frozen_file_the_config_the_caps_and_the_run_di
         planmod.verify_plan(Plan(data), ROOT, ctx.run_dir, check_items=False)
     reg = json.loads(json.dumps(plan.data))
     reg["mode"] = "registered"
+    reg["caps_provisional"] = True  # a plan that records provisional caps (independent of the live config)
     with pytest.raises(StageRefused, match="provisional"):
         planmod.verify_plan(Plan(reg), ROOT, ctx.run_dir, check_items=False)  # the caps are provisional until the human lead sets them
 
@@ -271,7 +275,7 @@ def freeze_repo(tmp: Path) -> tuple[Path, Path]:
     (repo / "docs" / "decisions").mkdir(parents=True)
     (repo / core.SPEC).write_text("adr\n", encoding="utf-8")
     (repo / "studies" / "p10ir" / "x.py").write_text("X = 1\n", encoding="utf-8")
-    cfg_text = (ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8").replace("provisional = true", "provisional = false")
+    cfg_text = re.sub(r"(?m)^provisional = (true|false)", "provisional = false", (ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8"), count=1)
     (repo / "configs" / "p10ir_routing.toml").write_text(cfg_text, encoding="utf-8")
     cfg = core.load_config(repo / core.CONFIG)
     rec = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, items=planmod.registered_items(cfg), run_dir=tmp / "run", s1_run_dir=tmp / "s1", extra={"seal": {"accesses_declared": [], "values_opened": False, "broken": False}})
@@ -339,7 +343,7 @@ def test_freeze_refuses_provisional_caps_and_a_registered_verify_needs_the_freez
     from studies.p10ir import freeze
 
     repo, reh = freeze_repo(tmp_path)
-    (repo / "configs" / "p10ir_routing.toml").write_text((ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8"), encoding="utf-8")  # provisional again
+    (repo / "configs" / "p10ir_routing.toml").write_text(re.sub(r"(?m)^provisional = (true|false)", "provisional = true", (ROOT / "configs" / "p10ir_routing.toml").read_text(encoding="utf-8"), count=1), encoding="utf-8")  # provisional again
     with pytest.raises(StageRefused, match="provisional"):
         freeze.cmd_freeze(stages.build_parser().parse_args(["freeze", "--rehearsal", str(reh), "--repo", str(repo)]))
     repo2, _ = freeze_repo(tmp_path / "second")
@@ -625,3 +629,35 @@ def test_the_ledger_is_never_written_where_it_would_dirty_the_tree(tmp_path: Pat
     assert stages.ledger_of(plan, tmp_path / "outside" / "run", None, repo).path.parent == tmp_path / "outside"
     with pytest.raises(StageRefused, match="not git-ignored"):
         stages.ledger_of(plan, repo / "experiments" / "run", repo / "results", repo)
+
+
+def test_the_freeze_compares_the_scientific_content_not_the_adr_hash_or_the_platform(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """F3: an ADR edit between candidate-plan and freeze does not refuse the freeze (the ADR is recorded for provenance only, section 13); a config or code change does."""
+    from studies.p10ir import freeze, gates
+
+    repo, reh = freeze_repo(tmp_path)
+    cfg_path = repo / core.CONFIG
+    plan_sha = planmod.file_sha256(repo / core.PLAN)
+    monkeypatch.setattr(gates, "seed_gate", lambda *a, **k: {"passed": True, "problems": [], "roles": {}, "declared_reuse_not_new": {}, "checker": {}})
+
+    def rederive(*a: Any, **k: Any) -> dict[str, Any]:
+        c = core.load_config(cfg_path)
+        return planmod.build_plan(mode=planmod.REGISTERED, cfg=c, repo=repo, items=planmod.registered_items(c), run_dir=tmp_path / "run", s1_run_dir=tmp_path / "s1", extra={"seal": {"accesses_declared": [], "values_opened": False, "broken": False}})
+
+    monkeypatch.setattr(freeze, "build_candidate", rederive)
+    core.write_record(reh, {**core.envelope("rehearsal"), "stages": {s: {"status": "COMPLETE"} for s in stages.REHEARSAL_STAGES}, "registered_checkpoint_gates": {"gate1_passed": True, "gate2_passed": True, "gate3_run": False}, "caps_provisional": False, "candidate": {"status": "COMPLETE", "plan_file_sha256": plan_sha}})
+    args = stages.build_parser().parse_args(["freeze", "--rehearsal", str(reh), "--repo", str(repo), "--attest-sealed-unopened", "lead,implementer,auditor"])
+    (repo / core.SPEC).write_text("the ADR was edited to record the caps\n", encoding="utf-8")
+    assert freeze.scientific_content({"adr": 1, "platform": 2, "items": 3}) == {"items": 3}
+    # a code change refuses
+    (repo / "studies" / "p10ir" / "x.py").write_text("X = 2\n", encoding="utf-8")
+    with pytest.raises(StageRefused, match="differs from a re-derivation"):
+        freeze.cmd_freeze(args)
+    (repo / "studies" / "p10ir" / "x.py").write_text("X = 1\n", encoding="utf-8")
+    # a config change refuses
+    original = cfg_path.read_text(encoding="utf-8")
+    cfg_path.write_text(original.replace("closure = 0.5", "closure = 0.6"), encoding="utf-8")
+    with pytest.raises(StageRefused, match="differs from a re-derivation"):
+        freeze.cmd_freeze(args)
+    cfg_path.write_text(original, encoding="utf-8")
+    assert freeze.cmd_freeze(args) == 0  # the ADR edit and a different platform record alone do not refuse

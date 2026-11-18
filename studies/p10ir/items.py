@@ -206,6 +206,12 @@ def reference_counts(ctx: Ctx, item: dict[str, Any], model: P10S1Model, data: An
     return {p: {k: int(rec["panels"][p][k]) for k in sealed.COUNT_KEYS} for p in sealed.PANELS}, {"source": "P10-S1's evaluation functions called from the adapter"}
 
 
+def is_environment_error(exc: BaseException) -> bool:
+    """An identity or environment error (``StageRefused``, ``MemoryError``, ``OSError``) is never a failed gate: it propagates (the worker refuses, fails or is killed). ``SealedMissing`` (a record or key P10-S1 did
+    not write: a genuine gate 2 or 3 failure) is the one ``OSError`` that stays a recorded gate failure."""
+    return isinstance(exc, StageRefused | MemoryError) or (isinstance(exc, OSError) and not isinstance(exc, sealed.SealedMissing))
+
+
 def guarded(rec: "Recorder", name: str, scope: str, fn: Any) -> None:
     """Compute and record one gate; an exception inside it is recorded as that gate FAILED with its scope (the message holds no recorded value), so that the other gates and the other checkpoints of the
     cell still run and the replicate is NOT EVALUABLE (ruling 7). A gate already on disk is not recomputed."""
@@ -213,7 +219,9 @@ def guarded(rec: "Recorder", name: str, scope: str, fn: Any) -> None:
         return
     try:
         g = fn()
-    except Exception as exc:  # noqa: BLE001 - recorded, with its scope
+    except Exception as exc:  # noqa: BLE001 - recorded, with its scope, unless it is an environment or identity error
+        if is_environment_error(exc):
+            raise
         g = gates.gate(scope, False, error=f"{type(exc).__name__}: {str(exc)[:300]}")
     rec.put_gate(name, g)
 
@@ -278,6 +286,8 @@ def run_tree_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
             for name, g in gates.exactness_gates(source, codes, th, chunk_elements=chunk).items():
                 rec.put_gate(name, g)
         except Exception as exc:  # noqa: BLE001
+            if is_environment_error(exc):
+                raise
             for name in names:
                 if not rec.has_gate(name):
                     rec.put_gate(name, gates.gate("tree", False, error=f"{type(exc).__name__}: {str(exc)[:300]}"))
@@ -317,6 +327,7 @@ def run_flat_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
         began = time.monotonic()
         ivf, idx = s1eval.ivf_model(model, seeds)
         counts = reads.read_counts(ivf, data, facts, seeds)
+        read_seconds = time.monotonic() - began  # the read's own time: stopped before gate 2's reference evaluation (A2 calls P10-S1's evaluation functions there)
         recall = float(counts["measured"]["recall_of_exhaustive_top8"])  # P10-S1's quantity: consumed by gate 3(b) here, dropped by read_record
 
         def i256_gate() -> dict[str, Any]:
@@ -333,7 +344,7 @@ def run_flat_item(ctx: Ctx, item: dict[str, Any], rec: Recorder, plan_digest: st
 
             guarded(rec, "ivf_recall_reproduction", "index", ivf_recall)
         del recall
-        put("I256@512", counts, time.monotonic() - began, {"index_sha256": idx.sha256(), "index_lists": idx.lists})
+        put("I256@512", counts, read_seconds, {"index_sha256": idx.sha256(), "index_lists": idx.lists})
     for c in budgets:
         for s in seeds_i64:
             name = core.i64_name(c, s)
@@ -381,7 +392,7 @@ def run_gates12_item(ctx: Ctx, item: dict[str, Any]) -> dict[str, Any]:
     data, seeds = load_data(ctx, item)
     model = load_model(ctx, item, seeds)
     facts = int(item["facts"])
-    result: dict[str, Any] = {"item": item["id"], "identity": identity_gate(ctx, {**item, "stage": core.STAGE_A2}, None)}  # no plan digest before the freeze
+    result: dict[str, Any] = {"item": item["id"], "platform": {k: v for k, v in gates.platform_record().items() if k in ("torch_num_threads", "torch_interop_threads", "deterministic_algorithms")}, "identity": identity_gate(ctx, {**item, "stage": core.STAGE_A2}, None)}  # no plan digest before the freeze
     if item["arm"] == "T-OQ":
         mem = reads.TreeReadMemory(model.addition, reads.TreeReadSpec("T0", 2, True, True), verify=True)
         with reads.swapped_addition(model, mem):

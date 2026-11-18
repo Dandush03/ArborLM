@@ -155,6 +155,30 @@ def rehearsal_record_of(plan: Plan) -> tuple[dict[str, Any] | None, str | None]:
     return core.read_record(p, "rehearsal"), plan_sha
 
 
+def gate1_links(plan: Plan, ctx: items.Ctx, repo: Path, cells: set[str]) -> list[str]:
+    """The two identity links of section 4 that read no checkpoint: each cell's ``train.json`` against the committed P10-S1 train manifest's ``result_sha256``, and the draws' data manifests against P10-S1's frozen
+    ``data_manifests``. Reads no sealed value. Returns the failures."""
+    failed: list[str] = []
+    tm = plan.data.get("p10s1_train_manifest")
+    if tm:
+        p = Path(tm["path"]) if Path(tm["path"]).is_absolute() else repo / tm["path"]
+        if not p.is_file() or file_sha256(p) != tm["sha256"]:
+            failed.append("the committed train manifest does not hash to the plan's digest")
+        else:
+            by_label = {t["label"]: t.get("result_sha256") for t in read_json(p)["tasks"]}
+            assert ctx.s1_run_dir is not None
+            for label in sorted(cells):
+                tj = ctx.s1_run_dir / "cells" / label / "train.json"
+                if not tj.is_file() or file_sha256(tj) != by_label.get(label):
+                    failed.append(f"train.json of {label} does not hash to the committed train manifest's result_sha256")
+    frozen = plan.data.get("p10s1_frozen_data_manifests")
+    if frozen:
+        for name, rec in (plan.data.get("draw_manifests") or {}).items():
+            if core.STAGE_A1 in rec["groups"] and frozen.get(name) != rec["sha256"]:
+                failed.append(f"data manifest {name} does not hash to P10-S1's frozen data_manifests entry")
+    return failed
+
+
 def gate1_all(plan: Plan, ctx: items.Ctx, group: str, repo: Path) -> dict[str, Any]:
     """Gate 1 for the whole group, before any read (ruling 8; section 11: a failure stops the stage). Checkpoints (A1): every checkpoint's ``model.pt`` equals the ``model_sha256`` of its ``snapshot.json``, the entry
     of its cell's ``train.json`` and the digest frozen in the plan; every ``train.json`` hashes to its task's ``result_sha256`` in the committed P10-S1 train manifest; the draws' data manifests hash to
@@ -185,23 +209,8 @@ def gate1_all(plan: Plan, ctx: items.Ctx, group: str, repo: Path) -> dict[str, A
                 fail(f"checkpoint {it['id']}: {g.get('error') or 'hashes disagree'}")
         if ctx.mode == planmod.REGISTERED and len(digests) != len(plan.items(core.STAGE_A1)):
             fail("the plan does not carry a digest for every checkpoint")
-        tm = plan.data.get("p10s1_train_manifest")
-        if tm:
-            p = Path(tm["path"]) if Path(tm["path"]).is_absolute() else repo / tm["path"]
-            if not p.is_file() or file_sha256(p) != tm["sha256"]:
-                fail("the committed train manifest does not hash to the plan's digest")
-            else:
-                by_label = {t["label"]: t.get("result_sha256") for t in read_json(p)["tasks"]}
-                assert ctx.s1_run_dir is not None
-                for label in sorted(cells):
-                    tj = ctx.s1_run_dir / "cells" / label / "train.json"
-                    if not tj.is_file() or file_sha256(tj) != by_label.get(label):
-                        fail(f"train.json of {label} does not hash to the committed train manifest's result_sha256")
-        frozen = plan.data.get("p10s1_frozen_data_manifests")
-        if frozen:
-            for name, rec in (plan.data.get("draw_manifests") or {}).items():
-                if group in rec["groups"] and frozen.get(name) != rec["sha256"]:
-                    fail(f"data manifest {name} does not hash to P10-S1's frozen data_manifests entry")
+        for msg in gate1_links(plan, ctx, repo, cells):
+            fail(msg)
     seen: set[tuple[Any, ...]] = set()
     for it in plan.items(group):
         key = (it["seed_name"], it["seed_base"], it["table_facts"], it["unseen"])
@@ -267,12 +276,14 @@ def ledger_of(plan: Plan, run_dir: Path, ledger_root: Path | None, repo: Path | 
 
 
 def item_errors(run_dir: Path, stage: str | None = None) -> list[str]:
-    """Items whose worker code raised (an ``item_error`` gate): code or data errors, counted apart from gate failures. Printed in the manifest, the analysis and the report."""
-    out = []
-    for p in sorted(run_dir.glob(f"{stage or 'A[12]'}/items/*/item.json")):
-        rec = core.read_record(p, "item")
-        if "item_error" in rec.get("gates", {}):
-            out.append(f"{p.parent.name}: {rec['gates']['item_error'].get('error')}")
+    """Items whose worker code raised (an ``item_error`` gate): code or data errors, counted apart from gate failures. Literal directory names (``A1``, ``A2``): the pattern ``A[12]`` misses ``a1`` on a
+    case-insensitive file system, where the stage manifests' ``a1`` and the items' ``A1`` are one directory."""
+    out: list[str] = []
+    for st in ([stage] if stage else ["A1", "A2"]):
+        for p in sorted(run_dir.glob(f"{st}/items/*/item.json")):
+            rec = core.read_record(p, "item")
+            if "item_error" in rec.get("gates", {}):
+                out.append(f"{st}: {p.parent.name}: {rec['gates']['item_error'].get('error')}")
     return out
 
 
@@ -390,10 +401,22 @@ def analysis_path(run_dir: Path) -> Path:
     return run_dir / "analysis" / "analysis.json"
 
 
+def require_no_item_errors(run_dir: Path, stage: str, record: Path) -> None:
+    """Ruling 11 (ADR-0029 section 20): a code error inside an item is not a scientific NOT EVALUABLE. If the stage has any ``item_error``, the analysis (or ``confirm``) REFUSES, writes an engineering-stop
+    record naming the items, labels nothing and produces no report for the stage."""
+    errors = item_errors(run_dir, stage)
+    if not errors:
+        return
+    if not record.exists():
+        core.write_record(record, {**core.envelope("engineering_stop"), "stage": stage, "outcome": "ENGINEERING STOP — ITEM ERRORS", "items": errors, "labelled": False})
+    raise StageRefused(f"refused: ENGINEERING STOP — ITEM ERRORS: {len(errors)} item(s) of stage {stage} raised in worker code; nothing is labelled and no report is produced (first: {errors[0][:160]})")
+
+
 def run_analysis(plan: Plan, ctx: items.Ctx, run_dir: Path) -> dict[str, Any]:
     """A1's analysis, from the plan's own items and labels (never the config's). It never looks at A2: R-CONFIRM is the separate ``confirm`` stage's (ruling 9), and this record is never rewritten."""
     from . import registry
 
+    require_no_item_errors(run_dir, core.STAGE_A1, run_dir / "analysis" / "ENGINEERING_STOP.json")
     cfg = ctx.cfg()
     reg1 = registry.load(run_dir, core.STAGE_A1)
     a1 = analysis.analyze_stage(
@@ -416,6 +439,7 @@ def run_confirm(plan: Plan, ctx: items.Ctx, run_dir: Path) -> dict[str, Any]:
     report section and never rewrites A1's."""
     from . import registry
 
+    require_no_item_errors(run_dir, core.STAGE_A2, run_dir / "confirm" / "ENGINEERING_STOP.json")
     a1_path = analysis_path(run_dir)
     if not a1_path.is_file():
         raise StageRefused("refused: no A1 analysis record to confirm against")
