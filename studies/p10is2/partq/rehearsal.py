@@ -39,7 +39,7 @@ def disk_bytes(path: Path) -> int:
 
 def stage_statuses(ctx: pipeline.QContext) -> dict[str, bool]:
     """Which registered stages have a complete record on disk: nothing is called COMPLETE that did not run (``inputs`` and ``outputs`` are written by the real path's step 1 and step 8)."""
-    have = lambda name: ctx.d(name).is_file()  # noqa: E731
+    have = lambda name: ctx.d(pipeline.loc(ctx, name)).is_file()  # noqa: E731
     return {
         "inputs": have("inputs/record.json"), "partition": have("partition_counts.json"), "qfit": have("qfit/record.json"), "qcheck": have("qcheck/teacher_A/result.json") and have("qcheck/teacher_B/result.json"),
         "generation": have("generation/result.json"), "regeneration": have("regeneration.json"), "outputs": have("outputs/record.json"),

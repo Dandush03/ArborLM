@@ -64,8 +64,15 @@ def allocation_rows(checker_text: str) -> list[tuple[str, int, int]]:
     return [(m[1], int(m[2]), int(m[3])) for m in re.finditer(r'\("P10-I-S2 ADR-0025", "([^"]*)", (\d+), (\d+)\)', checker_text)]
 
 
+ROW_OF_ROLE = {
+    "partition side and analysis": "partition side, analysis, disjoint-draw permutations", "Part Q rehearsal partition side": "Part Q rehearsal partition side", "test": "test",
+    "registered replicate sets": "data: registered replicate sets (3)", "analysis and route accuracy (inside the partition-side row)": "partition side, analysis, disjoint-draw permutations",
+    "calibration": "calibration", "Part T rehearsal sets": "Part T rehearsal sets (i = 0..8)", "initialisation": "init sub-row",
+}  # fmt: skip
+
+
 def named_values(part: str, cfg: Mapping[str, Any]) -> dict[str, frozenset[int]]:
-    """Every seed this part names, by role, each to be inside one of the registry's rows."""
+    """Every seed this part names, by role, each to be inside the registry row of ITS role (``ROW_OF_ROLE``)."""
     if part == "Q":
         reg = frozenset(core.partq_seeds(cfg, "registered").values())
         reh = frozenset(core.partq_seeds(cfg, "rehearsal").values())
@@ -82,15 +89,19 @@ def named_values(part: str, cfg: Mapping[str, Any]) -> dict[str, frozenset[int]]
 
 
 def allocation_problems(part: str, cfg: Mapping[str, Any], rows: Sequence[tuple[str, int, int]]) -> list[str]:
-    """The separate check of ruling 6: every named value lies inside a registry row of this study. The registry's ALLOC table of revision 3 lacks 250918, 251201, 251301 and the sixteen extra initialisation
-    values as NAMED values, but its ROWS (250901-250999, 251001-251999, 330201-330299) cover them: the check is against rows."""
+    """The separate check of ruling 6: every named value lies inside the registry row of its own role. The registry's ALLOC rows of revision 3 cover 250918, 251201, 251301 and the sixteen extra
+    initialisation values (the ADR notes the registry is extended with them as named values before any freeze; the rows already contain them)."""
     out: list[str] = []
     if not rows:
         return ["no P10-I-S2 rows in the checker's ALLOC table"]
     for role, vals in named_values(part, cfg).items():
-        bad = sorted(v for v in vals if not any(lo <= v <= hi for _, lo, hi in rows))
+        row = [(lo, hi) for name, lo, hi in rows if name == ROW_OF_ROLE[role]]
+        if not row:
+            out.append(f"{role}: the registry has no row named {ROW_OF_ROLE[role]!r}")
+            continue
+        bad = sorted(v for v in vals if not any(lo <= v <= hi for lo, hi in row))
         if bad:
-            out.append(f"{role}: {len(bad)} value(s) outside every registry row of {ALLOC_STUDY}: {bad[:5]}")
+            out.append(f"{role}: {len(bad)} value(s) outside the registry row {ROW_OF_ROLE[role]!r}: {bad[:5]}")
     return out
 
 

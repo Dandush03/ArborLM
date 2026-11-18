@@ -7,6 +7,7 @@ its record atomically in the run directory and is skipped when its record exists
 the whitelist (ruling L5).
 """
 
+import re
 import time
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
@@ -47,6 +48,7 @@ class QContext:
     digest_batches: int | None = None
     max_generation_blocks: int | None = None  # rehearsals: limited blocks per capability
     max_check_blocks: int | None = None  # rehearsals: one Q_check block
+    seal: bool | None = None  # None: sealed exactly in rehearsal mode; tests set it to exercise the sealing on test-range seeds
     deadline: Callable[[], bool] | None = None
     ordinary_windows_left: int | None = None
     marker_like_windows: int | None = None
@@ -71,12 +73,26 @@ class QContext:
 
     @property
     def sealed(self) -> bool:
-        return self.mode == "rehearsal"
+        return self.mode == "rehearsal" if self.seal is None else self.seal
+
+
+def loc(ctx: QContext, name: str) -> str:
+    """The path of a record. In a sealed (rehearsal) run every record that holds a quality value, a pass or a fail, or the label goes under ``sealed/`` (ruling L5); the others keep their place."""
+    if not ctx.sealed:
+        return name
+    if name == "qfit/record.json":
+        return "sealed/qfit_record.json"
+    if name == "qualification.json":
+        return "sealed/qualification.json"
+    m = re.fullmatch(r"qcheck/teacher_([AB])/result\.json", name)
+    if m:
+        return f"sealed/qcheck_{m[1]}_result.json"
+    return name
 
 
 def _rec(ctx: QContext, name: str, what: str, body: Mapping[str, Any]) -> dict[str, Any]:
     rec = {**core.envelope("sealed" if (ctx.sealed and what == "values") else "block_record", "Q"), "what": what, **body}
-    path = ctx.d(name)
+    path = ctx.d(loc(ctx, name))
     if not path.exists():
         core.write_record(path, rec)
     return read_json(path)  # type: ignore[no-any-return]
@@ -89,7 +105,7 @@ def fail(ctx: QContext, message: str) -> None:
 
 
 def _have(ctx: QContext, name: str) -> dict[str, Any] | None:
-    p = ctx.d(name)
+    p = ctx.d(loc(ctx, name))
     return read_json(p) if p.is_file() else None  # type: ignore[no-any-return]
 
 
@@ -288,7 +304,16 @@ def timed(ctx: QContext, stage: str, fn: Callable[[], Any]) -> Any:
 
 
 def run_all(ctx: QContext) -> dict[str, Any]:
-    """Steps 2-7 in order, each complete before the next starts. Returns the label result. A teacher that failed Q1 or Q2 still has Q3 and Q4 run; generation runs only if both pass everything."""
+    """Steps 2-7 in order, each complete before the next starts. Returns the label result. A teacher that failed Q1 or Q2 still has Q3 and Q4 run; generation runs only if both pass everything. A digest mismatch at a
+    resume is QUALIFICATION-ENGINEERING-FAILURE (recorded, then the label is derived); a stop on the cap propagates (PAUSED)."""
+    try:
+        return _run_all(ctx)
+    except bt.DigestMismatch as e:
+        fail(ctx, f"digest mismatch at a resume: {e}")
+        return labels.part_q_label(facts_of(ctx))
+
+
+def _run_all(ctx: QContext) -> dict[str, Any]:
     p = timed(ctx, "partition", lambda: step_partition(ctx))
     if fixed_input_problems_recorded(ctx):
         return labels.part_q_label(facts_of(ctx))
@@ -301,7 +326,7 @@ def run_all(ctx: QContext) -> dict[str, Any]:
         if (_have(ctx, "generation/result.json") or {}).get("draws_label") != split.EXHAUSTED:
             timed(ctx, "regeneration", lambda: step_regeneration(ctx, p))
     result = labels.part_q_label(facts_of(ctx))
-    core.write_record(ctx.d("qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in result.items() if k != "oracle_line"}}, overwrite=True)
+    core.write_record(ctx.d(loc(ctx, "qualification.json")), {**core.envelope("qualification", "Q"), **{k: v for k, v in result.items() if k != "oracle_line"}}, overwrite=True)
     return result
 
 

@@ -102,7 +102,7 @@ for mod in list(sys.modules.values()):
     f = getattr(mod, "__file__", None)
     if f:
         p = os.path.realpath(f)
-        if p.startswith(repo + os.sep) and "/.venv/" not in p and p.endswith(".py"):
+        if p.startswith(repo + os.sep) and "/.venv/" not in p and p.endswith(".py") and os.path.isfile(p):
             py.add(p)
 rel = lambda p: os.path.relpath(p, repo)
 print(json.dumps({"python_files": sorted(rel(p) for p in py), "files_opened": sorted(rel(p) for p in opened - py)}))
