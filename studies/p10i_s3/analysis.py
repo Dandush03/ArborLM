@@ -12,7 +12,18 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from . import core, labels
-from .core import DENSE, FLAT, FRESH, REGIME_ARMS, REGIMES, REP, REPU, TREE, EngineeringStop, Thresholds
+from .core import (
+    DENSE,
+    FLAT,
+    FRESH,
+    REGIME_ARMS,
+    REGIMES,
+    REP,
+    REPU,
+    TREE,
+    EngineeringStop,
+    Thresholds,
+)
 
 Registry = Mapping[str, Any]
 RateTable = Mapping[str, Any]

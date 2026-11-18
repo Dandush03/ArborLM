@@ -11,7 +11,7 @@ import math
 import random
 import time
 from collections.abc import Callable, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -25,7 +25,20 @@ from arborlm.io import canonical_json, read_json, sha256, write_json
 from arborlm.longer_training import _isolated_rng
 from arborlm.p4_model import Backbone, DenseAdapter
 from arborlm.pilot_metrics import loss_for
-from arborlm.pilot_model import BRANCHES, CONTEXT, EPS, PER_BRANCH, SLOTS, TEMP, TOP, VOCAB, Lookup, Memory, stable_top, tree_candidates
+from arborlm.pilot_model import (
+    BRANCHES,
+    CONTEXT,
+    EPS,
+    PER_BRANCH,
+    SLOTS,
+    TEMP,
+    TOP,
+    VOCAB,
+    Lookup,
+    Memory,
+    stable_top,
+    tree_candidates,
+)
 
 from . import core
 from .core import DENSE, FLAT, TREE, FailedCell
@@ -242,10 +255,14 @@ def neg_ref_values(values: Tensor, usage: Tensor) -> Tensor:
     return mean.expand_as(values).clone()
 
 
-def evaluate_reads(model: S3Model, panel: Tensor, seeds: core.Seeds, cell: int, *, with_controls: bool = True, draws_p: int = 4, draws_x: int = 4, exhaustive_visit: int = 16, prior_off_visit: int = 2) -> dict[str, Any]:
+def evaluate_reads(model: S3Model, panel: Tensor, seeds: core.Seeds, cell: int, *, with_controls: bool = True, draws_p: int = 4, draws_x: int = 4, exhaustive_visit: int = 16, prior_off_visit: int = 2, expected_targets: int = 32768) -> dict[str, Any]:
     """Every read of one checkpoint of one arm (section 3.4; ruling 10: step 0 uses ``with_controls=False``: enabled and disabled only). Keys ``"<read>|<draw>"``; a non-finite intervention value is None.
     ``used_slots`` and ``branch_entropy`` are the statistics of the enabled read. The replay is made by the caller after a fresh restore."""
     arm = model.arm
+
+    def ev(m: S3Model, data: Tensor, ctl: Ctl | None = None, *, collector: Collector | None = None, nonfinite: str = "raise") -> float:
+        return evaluate(m, data, ctl, collector=collector, expected_targets=expected_targets, nonfinite=nonfinite)
+
     out: dict[str, float | None] = {}
     stats: dict[str, Any] = {}
 
@@ -253,14 +270,14 @@ def evaluate_reads(model: S3Model, panel: Tensor, seeds: core.Seeds, cell: int, 
         out[f"{read}|{draw}"] = v if math.isfinite(v) else None
 
     col = Collector() if arm in (TREE, FLAT) else None
-    put(core.READ_ENABLED, 0, evaluate(model, panel, collector=col))
+    put(core.READ_ENABLED, 0, ev(model, panel, collector=col))
     if col is not None:
         stats["used_slots"] = len(col.selected)
         stats["branch_entropy"] = col.entropy()
         stats["usage"] = [float(x) for x in col.usage.tolist()]
     model.bypass = True
     try:
-        put(core.READ_DISABLED, 0, evaluate(model, panel))
+        put(core.READ_DISABLED, 0, ev(model, panel))
     finally:
         model.bypass = False
     if not with_controls:
@@ -269,22 +286,22 @@ def evaluate_reads(model: S3Model, panel: Tensor, seeds: core.Seeds, cell: int, 
     if arm in (TREE, FLAT):
         mem = model.addition
         assert isinstance(mem, Memory) and col is not None
-        put(core.READ_P_ALL, 0, evaluate(model, panel, Ctl("values", values=p_all_values(mem.values, seeds.p_all(cell))), nonfinite=nf))
+        put(core.READ_P_ALL, 0, ev(model, panel, Ctl("values", values=p_all_values(mem.values, seeds.p_all(cell))), nonfinite=nf))
         for j in range(draws_p):
             v = p_used_values(mem.values, sorted(col.selected), seeds.p_used(cell, j))
-            out[f"{core.READ_P_USED}|{j}"] = None if v is None else _fin(evaluate(model, panel, Ctl("values", values=v), nonfinite=nf))
-        put(core.READ_X_MEAN, 0, evaluate(model, panel, Ctl("X_mean"), nonfinite=nf))
+            out[f"{core.READ_P_USED}|{j}"] = None if v is None else _fin(ev(model, panel, Ctl("values", values=v), nonfinite=nf))
+        put(core.READ_X_MEAN, 0, ev(model, panel, Ctl("X_mean"), nonfinite=nf))
         for j in range(draws_x):
-            put(core.READ_X, j, evaluate(model, panel, Ctl("X", gen=seeded(seeds.x(cell, j))), nonfinite=nf))
+            put(core.READ_X, j, ev(model, panel, Ctl("X", gen=seeded(seeds.x(cell, j))), nonfinite=nf))
         if arm == TREE:
             k2, v2 = joint_permutation(mem.keys, mem.values, seeds.joint(cell))
-            put(core.READ_JOINT, 0, evaluate(model, panel, Ctl("joint", keys=k2, values=v2), nonfinite=nf))
-            put(core.READ_EXHAUSTIVE, 0, evaluate(model, panel, Ctl("exhaustive", visit=exhaustive_visit, use_prior=True), nonfinite=nf))
-            put(core.READ_PRIOR_OFF, 0, evaluate(model, panel, Ctl("prior_off", visit=prior_off_visit, use_prior=False), nonfinite=nf))
+            put(core.READ_JOINT, 0, ev(model, panel, Ctl("joint", keys=k2, values=v2), nonfinite=nf))
+            put(core.READ_EXHAUSTIVE, 0, ev(model, panel, Ctl("exhaustive", visit=exhaustive_visit, use_prior=True), nonfinite=nf))
+            put(core.READ_PRIOR_OFF, 0, ev(model, panel, Ctl("prior_off", visit=prior_off_visit, use_prior=False), nonfinite=nf))
     else:
         for j in range(draws_x):
-            put(core.READ_X_DENSE, j, evaluate(model, panel, Ctl("X", gen=seeded(seeds.x(cell, j))), nonfinite=nf))
-        put(core.READ_X_MEAN_DENSE, 0, evaluate(model, panel, Ctl("X_mean"), nonfinite=nf))
+            put(core.READ_X_DENSE, j, ev(model, panel, Ctl("X", gen=seeded(seeds.x(cell, j))), nonfinite=nf))
+        put(core.READ_X_MEAN_DENSE, 0, ev(model, panel, Ctl("X_mean"), nonfinite=nf))
     return {"reads": out, "stats": stats}
 
 

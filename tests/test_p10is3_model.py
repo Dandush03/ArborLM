@@ -14,7 +14,15 @@ from torch.nn import functional as F  # noqa: E402
 from arborlm import p4_model  # noqa: E402
 from arborlm.p4_config import MEMORY, Cell  # noqa: E402
 from arborlm.p4_model import Backbone  # noqa: E402
-from arborlm.pilot_model import EPS, TEMP, TOP, Memory, PilotModel, stable_top, tree_candidates  # noqa: E402
+from arborlm.pilot_model import (  # noqa: E402
+    EPS,
+    TEMP,
+    TOP,
+    Memory,
+    PilotModel,
+    stable_top,
+    tree_candidates,
+)
 from studies.p10i_s3 import core, model  # noqa: E402
 
 T = core.test_seed

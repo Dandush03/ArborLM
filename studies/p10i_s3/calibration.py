@@ -103,14 +103,17 @@ def sealed_bytes(curves_by: Mapping[tuple[str, str], Curves], extra: Mapping[str
     return json.dumps(core.jsonable(body), sort_keys=True, separators=(",", ":")).encode()
 
 
-def write_sealed(path: Path, repo: Path, data: bytes) -> str:
+def write_sealed(path: Path, repo: Path, data: bytes, *, allow_inside_repo: bool = False) -> str:
     """Written once, outside the repository (the seal works by procedure; the path is logged in NOTES.md by the lead)."""
     try:
         path.resolve().relative_to(repo.resolve())
     except ValueError:
         pass
     else:
-        raise core.EngineeringStop("refused: the sealed archive must be stored outside the repository (section 5.3)")
+        if allow_inside_repo:  # the synthetic rehearsal's test device only
+            pass
+        else:
+            raise core.EngineeringStop("refused: the sealed archive must be stored outside the repository (section 5.3)")
     if path.exists():
         raise FileExistsError(path)
     path.parent.mkdir(parents=True, exist_ok=True)
