@@ -124,6 +124,7 @@ def reproduction_gate(cs: ChunkSet, expected: Mapping[str, str] | None = None) -
 
 def write_chunk_files(cs: ChunkSet, directory: Path) -> dict[str, str]:
     """The new chunk files are written and hashed (frozen inputs, section 11 item 7)."""
+    directory.mkdir(parents=True, exist_ok=True)
     files = {
         "train_all.bytes": bytes(cs.train_rows.to(torch.uint8).reshape(-1).tolist()),
         "validation_all.bytes": bytes(cs.val_rows.to(torch.uint8).reshape(-1).tolist()),

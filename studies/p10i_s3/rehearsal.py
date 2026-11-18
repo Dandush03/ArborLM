@@ -252,11 +252,16 @@ def _storage(run_dir: Path) -> dict[str, Any]:
 
 
 def _gate_summary(run_dir: Path, plan: Plan, neg: Mapping[str, Any]) -> dict[str, Any]:
+    """The whitelist's gate list (section 5.3): pass or fail of NEG-REF, the planted-positive test, the prefix gates (per arm-regime), the read-equality gate and the synthetic-registry test, plus the other gates."""
     out: dict[str, Any] = {"neg_ref": {"passed": neg["passed"]}}
     d = run_dir / "stages" / "r1-round0" / "gates" / "results"
     for p in sorted(d.glob("*.json")) if d.is_dir() else []:
         rec = core.read_record(p, "gate")
         out[p.stem] = {"passed": rec["passed"]}
+        if p.stem == "core":
+            for k, v in rec["results"].items():
+                if k in ("planted_positive", "read_equality", "synthetic_registry", "base_and_disabled", "seeds", "identity", "platform"):
+                    out[f"core:{k}"] = {"passed": v["passed"]}
     return out
 
 

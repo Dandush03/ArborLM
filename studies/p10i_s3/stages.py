@@ -149,6 +149,8 @@ def run_core_gates(plan: Plan, repo: Path, run_dir: Path, res: items.Resources, 
     out["identity"] = gates.gate("identity", True, frozen_files=len(plan.data["frozen_files"]), src_files=len(plan.data["src"]["files"]), named_not_reached=plan.data["src"]["named_not_reached"], reached_not_named=plan.data["src"]["reached_not_named"])
     out["seeds"] = gates.seed_gate(cfg, root=repo, run_checker=plan.mode == planmod.REGISTERED)
     out["read_equality"] = gates.read_equality_gate(core.test_seed(1), cfg=cfg)
+    out["synthetic_registry"] = gates.synthetic_registry_gate()  # always the registered config: it tests the rules, not a rehearsal's shortened checkpoints
+    out["notes"] = {"passed": True, **gates.NOTES}
     from . import planted
 
     pp = planted.planted_positive(th, core.Seeds("test", cfg))
@@ -347,6 +349,8 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     """Write ``freeze/plan.json`` first and once; ``--supersede`` moves an older file aside (never deletes it). The rate table is ``freeze/rate_table.json`` (written by ``write-rate-table`` from ``rehearsal_public.json``)."""
     repo = Path(args.repo or core.repo_root())
     cfg = core.load_config(repo / core.CONFIG)
+    if args.projected_remaining_hours is not None and 2 * args.projected_remaining_hours > float(cfg["caps"]["registered_hours"]) and not args.over_cap_approved:
+        raise StageRefused(f"refused: the section-7 cap (2 x {args.projected_remaining_hours} h) exceeds 48 charged hours: the lead returns to the human lead with the projection (pass --over-cap-approved once the human lead extends it)")
     plan_path = repo / core.PLAN
     if plan_path.exists():
         if not args.supersede:
@@ -360,12 +364,20 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
             raise StageRefused(f"refused: {target} exists")
         plan_path.rename(target)
     rt = read_json(repo / core.RATE_TABLE)
-    extra: dict[str, Any] = {}
+    old_files = [repo / gates.SEED_PLAN_FILE, repo / gates.CHECKER_FILE]
+    if any(f.exists() for f in old_files):  # a superseded candidate's seed files are moved aside too, never deleted
+        if not args.supersede:
+            raise StageRefused("refused: the seed plan or checker copy exists; they are replaced only with --supersede")
+        for f in old_files:
+            if f.exists():
+                target = f.parent / "superseded" / f"{f.stem}-{file_sha256(f)[:12]}{f.suffix}"
+                target.parent.mkdir(parents=True, exist_ok=True)
+                f.rename(target)
+    seed_hashes = gates.write_seed_files(repo, cfg)  # real files, frozen inputs: hashed in plan.json with the rest of studies/p10i_s3
+    extra: dict[str, Any] = {"seed_files": seed_hashes}
     if args.data_manifest:
         dm = Path(args.data_manifest).resolve()
         extra = {"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_suite": str(Path(args.parent_suite).resolve())}
-    if args.projected_remaining_hours is not None and 2 * args.projected_remaining_hours > float(cfg["caps"]["registered_hours"]) and not args.over_cap_approved:
-        raise StageRefused(f"refused: the section-7 cap (2 x {args.projected_remaining_hours} h) exceeds 48 charged hours: the lead returns to the human lead with the projection (pass --over-cap-approved once the human lead extends it)")
     record = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, run_dir=Path(args.run_dir).resolve(), rate_table=rt, projected_remaining_hours=args.projected_remaining_hours, extra=extra)
     core.write_record(plan_path, record)
     print(json.dumps({"candidate_plan": str(plan_path), "plan_file_sha256": file_sha256(plan_path), "items": {k: len(v) for k, v in record["items"].items()}, "caps_provisional": record["caps_provisional"]}))
@@ -383,8 +395,11 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     plan = Plan.load(repo / core.PLAN)
     if plan.data.get("caps_provisional") or cfg["caps"]["provisional"]:
         raise StageRefused("refused: the caps are provisional")
+    sp = gates.seed_files_problems(repo, cfg)
+    if sp:
+        raise StageRefused("refused: " + "; ".join(sp))
     plan_sha = file_sha256(repo / core.PLAN)
-    extra = {k: plan.data[k] for k in ("data_manifest", "data_dir", "parent_suite") if k in plan.data}
+    extra = {k: plan.data[k] for k in ("data_manifest", "data_dir", "parent_suite", "seed_files") if k in plan.data}
     again = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, run_dir=Path(plan.data["run_dir"]), rate_table=plan.data["rate_table"], projected_remaining_hours=plan.data["caps"]["registered_hours"] / 2.0, extra=extra)
     if planmod.scientific_content(json.loads(json.dumps(again))) != planmod.scientific_content(plan.data):
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and rate table: supersede it and rehearse again")

@@ -139,7 +139,8 @@ def test_synthetic_rehearsal_r1_r3_end_to_end(tmp_path: Path) -> None:
     # the public file carries the whitelist and no loss value
     assert set(pub) >= {"rate_table", "convergence", "gates", "timing", "storage", "sealed_sha256"}
     assert pub["gates"]["neg_ref"]["passed"] is True and pub["gates"]["core"]["passed"] is True
-    assert all(v["passed"] for v in pub["gates"].values())  # prefix identity for every arm-regime, read equality, planted positive, base
+    assert {"core:synthetic_registry", "core:planted_positive", "core:read_equality", "neg_ref", "prefix__M-TREE__FRESH"} <= set(pub["gates"])  # the whitelist of section 5.3
+    assert all(v["passed"] is not False for v in pub["gates"].values())  # a skipped gate (the platform gate outside a registered plan) is None, never False  # prefix identity for every arm-regime, read equality, planted positive, base
     text = (run / "rehearsal_public.json").read_text()
     sealed = sealed_path.read_bytes()
     nll_values = [x for x in json.loads(sealed)["curves"]["M-TREE|REP"]["0.003"]["0"].values()]

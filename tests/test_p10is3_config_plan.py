@@ -206,6 +206,9 @@ def _skeleton(tmp: Path) -> Path:
     (tmp / "docs/decisions").mkdir(parents=True)
     shutil.copy(ROOT / core.SPEC, tmp / core.SPEC)
     (tmp / "studies/__init__.py").write_text("")
+    chk = tmp / CFG["seed_ranges"]["checker"]
+    chk.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(ROOT / CFG["seed_ranges"]["checker"], chk)
     return tmp
 
 
