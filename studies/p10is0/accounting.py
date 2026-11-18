@@ -20,6 +20,46 @@ import psutil
 
 from . import core
 
+
+class PlatformMismatch(RuntimeError):
+    """The running platform is not the platform of record (ADR-0023 section 10: macOS arm64, torch 2.8.0, one thread, one interop thread, deterministic algorithms)."""
+
+
+def configure_process() -> None:
+    """One thread, one interop thread, deterministic algorithms: set BEFORE the platform check (N6), whatever thread variables the process was started with."""
+    import torch
+
+    torch.set_num_threads(1)
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError:
+        pass  # already set (and parallel work has started) in this process: the check below then verifies it
+    torch.use_deterministic_algorithms(True)
+
+
+def platform_record() -> dict[str, Any]:
+    """OS, machine, Python, torch version, threads, interop threads and the deterministic flag (recorded in every stage manifest, train record and the rehearsal record)."""
+    import platform
+    import sys
+
+    import torch
+
+    return {
+        "system": platform.system(), "machine": platform.machine(), "python": sys.version.split()[0], "torch": torch.__version__.split("+")[0], "torch_num_threads": torch.get_num_threads(),
+        "torch_interop_threads": torch.get_num_interop_threads(), "deterministic_algorithms": bool(torch.are_deterministic_algorithms_enabled()),
+    }  # fmt: skip
+
+
+def check_platform(cfg: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Compare the running platform with the config's ``[platform]`` (call ``configure_process`` first). Returns the record; raises ``PlatformMismatch`` naming every difference."""
+    want = (cfg or core.load_config())["platform"]
+    rec = platform_record()
+    diffs = [f"{k}: {rec[k]!r} != {want[k]!r}" for k in ("system", "machine", "torch", "torch_num_threads", "torch_interop_threads", "deterministic_algorithms") if rec[k] != want[k]]
+    if diffs:
+        raise PlatformMismatch("not the platform of record: " + "; ".join(diffs))
+    return rec
+
+
 PAUSED_DISK = "PAUSED — DISK"
 PAUSED_NOT_QUIET = "PAUSED — MACHINE NOT QUIET"
 OTHER_STUDY_MARKERS = ("studies.p9", "studies.p10", "arborlm.p")  # command lines of another study's compute stage
@@ -40,11 +80,12 @@ def dir_bytes(path: Path) -> int:
     return total
 
 
-def check_disk(run_dir: Path, cfg: Mapping[str, Any] | None = None, *, used: int | None = None, free: int | None = None) -> dict[str, int]:
+def check_disk(run_dir: Path, cfg: Mapping[str, Any] | None = None, *, used: int | None = None, free: int | None = None, also: Sequence[Path] = ()) -> dict[str, int]:
     """Raise ``DiskPause`` when the run directory is at 110 GiB or more, or free space is below 50 GiB. ``used`` and ``free`` are injectable for tests."""
     r = (cfg or core.load_config())["resources"]
     u = dir_bytes(run_dir) if used is None and run_dir.exists() else (used or 0)
-    f = shutil.disk_usage(run_dir if run_dir.exists() else run_dir.parent).free if free is None else free
+    u += sum(dir_bytes(d) for d in also if d.exists())  # N4: the sealed directory counts toward the same 110 GiB
+    f = min(shutil.disk_usage(d if d.exists() else d.parent).free for d in [run_dir, *also]) if free is None else free  # and free space is checked on both filesystems
     if u >= int(r["disk_cap_bytes"]):
         raise DiskPause(f"the run directory holds {u} bytes, at or above the cap of {r['disk_cap_bytes']}")
     if f < int(r["disk_free_min_bytes"]):

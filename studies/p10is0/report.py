@@ -38,7 +38,7 @@ def render(a: Mapping[str, Any], h_ratio: Mapping[str, Sequence[float]] | None =
     out.append("\n## Cell types: labels and descriptive measures (MEASURED)\n")
     for name, t in a["types"].items():
         d = t["descriptive"]
-        x = ", ".join(f"{v:.3f}" for v in (h_ratio or {}).get(name, [])) or "n/a (the sealed values are read only after the outcome)"
+        x = ", ".join(f"{v:.3f}" for v in (h_ratio or {}).get(name, [])) or "disclosed separately after the outcome (command `disclose`); the registered report reads nothing sealed"
         labs = "; ".join(s.replace("{x}", x) for s in t["labels"])
         out.append(f"- {name}: {labs or 'no label'} | successes {d.get('successes')} of {d.get('evaluated_cells')} evaluated cells, one-sided 95% per-draw bound {_fmt(d.get('per_draw_bound'))} | class {d.get('class')} | n_A {d.get('n_a')} n_G {d.get('n_g')} | A5-D accuracy median {_fmt(d.get('a5d_accuracy_median'))}, A6 {_fmt(d.get('a6_accuracy_median'))}, ratio {_fmt(d.get('median_ratio_to_a6'))} | {d.get('regime')} | convergence {d['convergence']['status']} {d['convergence']['tags']} | {d.get('collapse_free')} | condition 6 decided {d.get('condition_6_decided')} cell(s) | 512-exposure readout: {d['e512_readout']['label']} (class {d['e512_readout']['class']})")
     out.append("\n## Annotations\n")

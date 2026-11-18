@@ -22,7 +22,7 @@ from . import core
 
 SEALED = "sealed"
 ACCESS_LOG = "sealed_access_log.jsonl"
-ALLOWED_READERS = ("auditor-recomputation", "stage-r-code", "report-code")  # the code that makes the selections (resume, plateau) reads its own measurements; no person does
+ALLOWED_READERS = ("auditor-recomputation", "stage-r-code", "disclose-code")  # the code that makes the selections (resume, plateau) reads its own measurements; no person does
 LABEL_SEEN = "CALIBRATION VALUES SEEN BY THE LEAD"
 
 PUBLIC_KEYS = frozenset(

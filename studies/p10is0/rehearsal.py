@@ -25,7 +25,7 @@ from .profile import MARKER
 GIT = ("git", "-c", "commit.gpgsign=false", "-c", "user.name=rehearsal", "-c", "user.email=rehearsal@example.invalid")
 
 
-def make_copy(repo: Path, dest: Path) -> Path:
+def make_copy(repo: Path, dest: Path, workers: int | None = None) -> Path:
     """A repository of its own holding what the stages read; committed, so the tree is clean."""
     ign = shutil.ignore_patterns("__pycache__", "*.pyc", "freeze", "results")
     shutil.copytree(repo / "studies", dest / "studies", ignore=ign)
@@ -34,6 +34,12 @@ def make_copy(repo: Path, dest: Path) -> Path:
     for rel in (core.SPEC, load_checker_rel(repo)):
         (dest / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(repo / rel, dest / rel)
+    if workers is not None:  # the copy's config only (never the study's): fewer worker and busy processes on a shared machine
+        cfgp = dest / core.CONFIG
+        text = cfgp.read_text(encoding="utf-8")
+        text = text.replace("workers = 6                        # stage 3 then runs", f"workers = {workers}                        # stage 3 then runs").replace("busy_processes = 12", "busy_processes = 0")
+        text = text.replace("[budget]\nb_hours = 55.0", "[budget]\nb_hours = 55.0", 1)
+        cfgp.write_text(text.replace("workers = 6\nstage_cap_factor", f"workers = {workers}\nstage_cap_factor"), encoding="utf-8")
     (dest / ".gitignore").write_text("/experiments/\n__pycache__/\n*.pyc\n", encoding="utf-8")
     (dest / "studies/p10is0/freeze").mkdir(parents=True, exist_ok=True)
     run(dest, *GIT, "init", "-q")
@@ -60,11 +66,18 @@ def stage(copy: Path, run_dir: Path, *args: str, ok: tuple[int, ...] = (0,)) -> 
     return p
 
 
-def synthetic(repo: Path, run_dir: Path) -> dict[str, Any]:
+def accounting_platform() -> dict[str, Any]:
+    from . import accounting
+
+    accounting.configure_process()
+    return accounting.platform_record()
+
+
+def synthetic(repo: Path, run_dir: Path, workers: int | None = None) -> dict[str, Any]:
     """The synthetic pipeline rehearsal. Returns the rehearsal record (also written to ``<run dir>/rehearsal.json``)."""
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / MARKER).write_text("synthetic tiny configuration: no registered seed, no real draw, no real backbone\n", encoding="utf-8")
-    copy = make_copy(repo, run_dir / "repo")
+    copy = make_copy(repo, run_dir / "repo", workers)
     rd = copy / "experiments" / "rehearsal-run"
     rd.mkdir(parents=True)
     (rd / MARKER).write_text("synthetic tiny configuration\n", encoding="utf-8")
@@ -109,7 +122,7 @@ def synthetic(repo: Path, run_dir: Path) -> dict[str, Any]:
     analysis = read_json(rd / "analysis.json")
     record = {
         **core.envelope("rehearsal"), "phase": "synthetic", "profile": "test", "stages": stages, "candidate": {"status": "COMPLETE", "plan_file_sha256": file_sha256(copy / core.PLAN)}, "caps_provisional": False,
-        "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "sealed_dir": str(sealed_dir), "x8_status": analysis.get("x8", {}).get("status"), "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
+        "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "sealed_dir": str(sealed_dir), "x8_status": analysis.get("x8", {}).get("status"), "platform": accounting_platform(), "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
     }  # fmt: skip
     write_json(run_dir / "rehearsal.json", core.jsonable(record))
     return record

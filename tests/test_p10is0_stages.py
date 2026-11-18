@@ -60,7 +60,7 @@ def test_registered_entry_points_refuse_today(tmp_path: Path) -> None:
 
 def test_launch_scripts_take_exactly_two_arguments_and_nothing_else() -> None:
     scripts = sorted((REPO / core.LAUNCH_DIR).glob("*.sh"))
-    assert [s.stem for s in scripts] == ["analysis", "main", "report", "x8-gate", "x8"]
+    assert [s.stem for s in scripts] == ["analysis", "disclose", "main", "report", "x8-gate", "x8"]
     for s in scripts:
         text = s.read_text()
         assert 'if [ "$#" -ne 2 ]' in text and "set -eu" in text and "sleep" not in text.replace("no sleep", "") and "while" not in text and " & " not in text

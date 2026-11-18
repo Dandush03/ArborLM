@@ -18,7 +18,6 @@ from pathlib import Path
 from typing import Any
 
 import psutil
-import torch
 
 from arborlm.io import file_sha256, read_json, write_json
 
@@ -168,7 +167,7 @@ def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: f
     started = datetime.now(UTC).isoformat()
     r = ctx.cfg["resources"]
     outcomes, seconds = runner.run_tasks(
-        tasks, workers=workers or ctx.workers(), cap_seconds=left, rss_worker_bytes=int(r["rss_worker_bytes"]), rss_aggregate_bytes=int(r["rss_aggregate_bytes"]), disk_check=lambda: accounting.check_disk(ctx.run_dir, ctx.cfg)
+        tasks, workers=workers or ctx.workers(), cap_seconds=left, rss_worker_bytes=int(r["rss_worker_bytes"]), rss_aggregate_bytes=int(r["rss_aggregate_bytes"]), disk_check=lambda: accounting.check_disk(ctx.run_dir, ctx.cfg, also=[ctx.sealed_base] if ctx.sealed_base is not None else ())
     )  # fmt: skip
     ctx.ledger.charge(stage, f"{stage}-{core.utc_stamp()}", seconds, group=grp)
     peak = max((int(o.get("peak_rss_bytes", 0)) for o in outcomes.values()), default=0)
@@ -177,7 +176,7 @@ def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: f
     prior = runner.read_manifest(ctx.run_dir, stage)
     if prior is not None and prior["status"] == "COMPLETE":
         return prior
-    return runner.write_manifest(ctx.run_dir, stage, mode_of(ctx), outcomes, seconds, identity={"profile": ctx.profile.name}, started=started, caps={"stage_seconds": cap_seconds, "group": grp})
+    return runner.write_manifest(ctx.run_dir, stage, mode_of(ctx), outcomes, seconds, identity={"profile": ctx.profile.name, "platform": accounting.platform_record()}, started=started, caps={"stage_seconds": cap_seconds, "group": grp})
 
 
 def stage_status(ctx: Ctx, stage: str) -> str | None:
@@ -404,6 +403,18 @@ def ladders_of(ctx: Ctx, phase: str) -> tuple[list[int], int]:
     return lad, lad[-1]
 
 
+def opaque_label(sealed_base: Path, attempt: int, ct: str, arm: str, draw: int, e: int) -> str:
+    """A deterministic label that carries no cell type, arm or exposure: a hash with a salt kept in the sealed directory (created once, so a resumed wave names its tasks the same way)."""
+    import hashlib
+    import secrets
+
+    p = sealed.sealed_dir(sealed_base) / f"tasksalt-r{attempt}.json"
+    if not p.is_file():
+        sealed.write_sealed(sealed_base, p.name, {"salt": secrets.token_hex(16)})
+    salt = sealed.read_sealed(sealed_base, p.name, reader="stage-r-code", why="opaque task labels")["salt"]
+    return "t" + hashlib.sha256(f"{salt}|{attempt}|{ct}|{arm}|{draw}|{e}".encode()).hexdigest()[:14]
+
+
 def run_waves(ctx: Ctx, cts: Sequence[core.CellType], *, phase: str, attempt: int, prefix: str, group: str, cap_seconds: float) -> str:
     """Wave after wave until no cell type needs another run: COMPLETE, or the status of the stage that stopped (PAUSED, FAILED, ENGINEERING STOP)."""
     sb = ctx.need_sealed()
@@ -414,12 +425,18 @@ def run_waves(ctx: Ctx, cts: Sequence[core.CellType], *, phase: str, attempt: in
             n += 1
         stage = f"{prefix}_{phase}_i{n}"
         tasks = []
+        taskmap: dict[str, list[Any]] = {}
         for ct in cts:
             st = items.read_state(ct, sb, ctx.th, ctx.cfg, ctx.profile, attempt=attempt, lad=lad_phase, ceiling=ceil_phase)
             for arm, d, e in items.stage_r_needs(st, lad_phase, ctx.profile, ctx.cfg, ceiling=ceil_phase):
-                tasks.append(ctx.task(stage, f"{items.sealed_stem(ct)}-{arm}-c{d}-e{e}", "stage-r-run", "--cell-type", ct.name, "--arm", arm, "--draw", str(d), "--exposures", str(e), "--attempt", str(attempt)))
+                label = opaque_label(sb, attempt, ct.name, arm, d, e)  # N3: nothing public says which cell type continues
+                taskmap[label] = [ct.name, arm, d, e]
+                tasks.append(ctx.task(stage, label, "stage-r-run", "--cell-type", ct.name, "--arm", arm, "--draw", str(d), "--exposures", str(e), "--attempt", str(attempt)))
         if not tasks:
             return "COMPLETE"
+        mp = f"taskmap-{stage}.json"
+        if not (sealed.sealed_dir(sb) / mp).is_file():
+            sealed.write_sealed(sb, mp, {"label_to_run": taskmap})  # the label-to-run map lives only in the sealed directory
         m = run_stage(ctx, stage, tasks, cap_seconds, group=group)
         if m["status"] != "COMPLETE":
             return str(m["status"])
@@ -487,6 +504,16 @@ def other_hours_of(ctx: Ctx) -> float:
     return core.hours(ctx.ledger.charged(group="generate") + ctx.ledger.charged(group="gates")) + float(ctx.cfg["budget"]["analysis_report_hours"])
 
 
+def stage_r_charged_hours(ctx: Ctx, attempt: int) -> float:
+    """N2: Stage R's hours already charged, under the group ``run_waves`` writes (``stage_r_base_a<attempt>``)."""
+    return core.hours(ctx.ledger.charged(group=f"stage_r_base_a{attempt}"))
+
+
+def workers_cfg(ctx: Ctx) -> Mapping[str, Any]:
+    """A-a: the projections and the Stage R cap use the worker count the memory rule allows, not the nominal six."""
+    return {**ctx.cfg, "budget": {**ctx.cfg["budget"], "workers": ctx.workers()}}
+
+
 def stage_r_extensions(ctx: Ctx, cts: Sequence[core.CellType], attempt: int, rates: ladder.Rates) -> list[dict[str, Any]]:
     """Section 5.1 items 1 to 6, once, by code, on stage 3's quiet rates; persisted in the SEALED directory (an interrupted Stage R reuses it) and public only inside ``durations.json``."""
     sb = ctx.need_sealed()
@@ -499,7 +526,7 @@ def stage_r_extensions(ctx: Ctx, cts: Sequence[core.CellType], attempt: int, rat
     t_known = {ct.name: int(states[ct.name].decision.t or 0) for ct in cts if ct not in cands}
     x8 = core.cell_type_by_name("8K/1K", ctx.cfg)
     dec = ladder.decide_extensions(
-        cands, cts=cts, t_known=t_known, rates=rates, charged_hours=core.hours(ctx.ledger.charged(group="stage_r_base")), other_hours=other_hours_of(ctx), x8=x8, cfg=_scaled_cfg(ctx.cfg, ctx.profile)
+        cands, cts=cts, t_known=t_known, rates=rates, charged_hours=stage_r_charged_hours(ctx, attempt), other_hours=other_hours_of(ctx), x8=x8, cfg=_scaled_cfg(workers_cfg(ctx), ctx.profile)
     )  # fmt: skip
     decisions = [{"cell_type": d.cell_type, "granted": d.granted, "projected_hours": d.projected_hours, "budget_hours": d.budget_hours} for d in dec]
     sealed.write_sealed(sb, name, {"decisions": decisions})
@@ -520,7 +547,7 @@ def cmd_stage_r(ctx: Ctx, *, cause_file: Path | None = None, events_dir: Path | 
     rates = load_rates(ctx.run_dir, cfg=ctx.cfg)
     caps_rates = load_rates(ctx.run_dir, which="larger", cfg=ctx.cfg)
     tiny = ctx.profile.tiny
-    cap_base = 3600.0 if tiny else ladder.stage_r_cap_hours(cts, caps_rates, [], ctx.cfg) * 3600.0
+    cap_base = 3600.0 if tiny else ladder.stage_r_cap_hours(cts, caps_rates, [], workers_cfg(ctx)) * 3600.0
     s = run_waves(ctx, cts, phase="base", attempt=attempt, prefix=f"stage_r_a{attempt}", group=f"stage_r_base_a{attempt}", cap_seconds=cap_base)
     if s != "COMPLETE":
         return {"status": s}
@@ -528,7 +555,7 @@ def cmd_stage_r(ctx: Ctx, *, cause_file: Path | None = None, events_dir: Path | 
     granted = [d["cell_type"] for d in decisions if d["granted"]]
     if granted:
         by = {ct.name: ct for ct in cts}
-        cap_ext = 3600.0 if tiny else (ladder.stage_r_cap_hours(cts, caps_rates, granted, ctx.cfg) - ladder.stage_r_cap_hours(cts, caps_rates, [], ctx.cfg)) * 3600.0
+        cap_ext = 3600.0 if tiny else (ladder.stage_r_cap_hours(cts, caps_rates, granted, workers_cfg(ctx)) - ladder.stage_r_cap_hours(cts, caps_rates, [], workers_cfg(ctx))) * 3600.0
         s = run_waves(ctx, [by[n] for n in granted], phase="ext", attempt=attempt, prefix=f"stage_r_a{attempt}", group=f"stage_r_ext_a{attempt}", cap_seconds=cap_ext)
         if s != "COMPLETE":
             return {"status": s}
@@ -583,6 +610,7 @@ def cmd_caps(ctx: Ctx, *, other_hours: float | None = None) -> dict[str, Any]:
     x8_t = ctx.profile.exp(int(ctx.cfg["ladder"]["extended_ceiling_t"]))
     oh = other_hours if other_hours is not None else other_hours_of(ctx)
     charged = core.hours(ctx.ledger.charged())
+    att = int(read_json(ctx.repo / core.DURATIONS).get("attempt", 0))
     proj, stages = ladder.projected_hours(cts=live, t_assumed=t_assumed, granted_rounds=[], rates=rates, charged_hours=0.0, other_hours=oh, x8=x8, workers=ctx.workers(), ladder_top=0, x8_t=x8_t)
     f = float(ctx.cfg["budget"]["stage_cap_factor"])
     per = {s.name: f * (s.total_seconds / ctx.workers() + s.longest_seconds) / 3600.0 for s in stages}
@@ -590,7 +618,7 @@ def cmd_caps(ctx: Ctx, *, other_hours: float | None = None) -> dict[str, Any]:
     rec = {
         **core.envelope("stage_caps"), "provisional": False, "projection_hours": proj, "charged_hours_at_caps": charged, "total_hours": charged + f * proj,
         "stage_hours": {"main": per["main"], "x8_calibration": next((v for k, v in per.items() if k.startswith("calibration")), 0.0), "x8": per["x8"], "analysis": 1.0, "report": 1.0},
-        "stage_r_hours": f * core.hours(ctx.ledger.charged(group="stage_r_base_a0") + ctx.ledger.charged(group="stage_r_ext_a0")), "rates_used": "the larger of the quiet and busy rates", "workers": ctx.workers(),
+        "stage_r_hours": f * core.hours(ctx.ledger.charged(group=f"stage_r_base_a{att}") + ctx.ledger.charged(group=f"stage_r_ext_a{att}")), "rates_used": "the larger of the quiet and busy rates", "workers": ctx.workers(),
         "disk_projection_bytes_main": accounting.disk_projection_bytes(updates_total, ctx.cfg), "label": "ANALYTICAL projection from stage 3's measured rates; caps are charged-so-far plus twice it (resource caps, never a label)",
     }  # fmt: skip
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -730,7 +758,7 @@ def cmd_x8(ctx: Ctx) -> dict[str, Any]:
             if (sealed.sealed_dir(sb) / name).is_file():
                 d = sealed.read_sealed(sb, name, reader="stage-r-code", why="resume")["decision"]
             else:
-                dd = ladder.decide_x8_extension(ct, load_rates(ctx.run_dir, cfg=ctx.cfg), core.hours(ctx.ledger.charged()), _scaled_cfg(ctx.cfg, ctx.profile))
+                dd = ladder.decide_x8_extension(ct, load_rates(ctx.run_dir, cfg=ctx.cfg), core.hours(ctx.ledger.charged()), _scaled_cfg(workers_cfg(ctx), ctx.profile))
                 d = {"granted": dd.granted, "projected_hours": dd.projected_hours, "budget_hours": dd.budget_hours}
                 sealed.write_sealed(sb, name, {"decision": d})
             ext_status = "granted" if d["granted"] else "refused"
@@ -789,25 +817,44 @@ def cmd_analysis(ctx: Ctx) -> dict[str, Any]:
 
 
 def cmd_report(ctx: Ctx) -> dict[str, Any]:
+    """N5 (the lead's ruling): the registered report reads NOTHING sealed. It prints the label and says the measured value is disclosed by the separate post-outcome command ``disclose``."""
     p = ctx.run_dir / "analysis.json"
     if not p.is_file():
         raise StageRefused("refused: no analysis.json (the analysis refused or has not run)")
-    a = read_json(p)
-    ratios: dict[str, list[float]] = {}
-    dur_p = ctx.repo / core.DURATIONS
-    if ctx.sealed_base is not None and dur_p.is_file():
-        attempt = int(read_json(dur_p).get("attempt", 0))
-        plan = load_plan_checked(ctx)
-        for name, ty in a.get("types", {}).items():
-            if any("{x}" in x for x in ty["labels"]):
-                ct = core.cell_type_by_name(name, ctx.cfg)
-                for d in (1, 2):
-                    rec = sealed.read_sealed(ctx.sealed_base, items.point_name(ct, "A6", d, attempt, int(plan["cell_types"][name]["t_exposures"])), reader="report-code", why="x of the condition-4 label, after the outcome was recomputed")
-                    o = items.obs_from_json(rec["obs"])
-                    ratios.setdefault(name, []).append(float(o.m_h / o.m_p))
-    text = report.render(a, h_ratio=ratios)
+    text = report.render(read_json(p))
     (ctx.run_dir / "report.md").write_text(text, encoding="utf-8")
     return {"report": str(ctx.run_dir / "report.md")}
+
+
+def cmd_disclose(ctx: Ctx) -> dict[str, Any]:
+    """The post-outcome disclosure of the A6 H-ratio x of the condition-4 label: refuses unless ``analysis.json`` exists and is COMPLETE. x is condition 4's own ratio: the smallest of (H1, H2 accuracy) over (Panel A, Panel B accuracy) of A6 at the
+    cell type's T on each calibration draw. A missing A6 point (a non-finite run) is recorded as missing, never a crash. Every read is logged (``disclose-code``)."""
+    p = ctx.run_dir / "analysis.json"
+    if not p.is_file():
+        raise StageRefused("refused: no analysis record: the disclosure follows the recomputed outcome")
+    a = read_json(p)
+    if a.get("status") != "COMPLETE":
+        raise StageRefused("refused: the analysis record is not COMPLETE")
+    sb = ctx.need_sealed()
+    attempt = int(read_json(ctx.repo / core.DURATIONS).get("attempt", 0))
+    plan = load_plan_checked(ctx)
+    out: dict[str, Any] = {}
+    for name, ty in a.get("types", {}).items():
+        if not any("{x}" in x for x in ty["labels"]):
+            continue
+        ct = core.cell_type_by_name(name, ctx.cfg)
+        vals: dict[str, Any] = {}
+        for d in (1, 2):
+            fname = items.point_name(ct, "A6", d, attempt, int(plan["cell_types"][name]["t_exposures"]))
+            if not (sealed.sealed_dir(sb) / fname).is_file():
+                vals[f"calibration_draw_{d}"] = "missing"
+                continue
+            o = items.obs_from_json(sealed.read_sealed(sb, fname, reader="disclose-code", why="x of the condition-4 label, after the outcome was recomputed")["obs"])
+            vals[f"calibration_draw_{d}"] = float(min(h / acc for h in (o.acc_h1, o.acc_h2) for acc in (o.acc_a, o.acc_b)))
+        out[name] = vals
+    rec = {**core.envelope("report_manifest"), "kind": "report_manifest", "a6_h_ratio_x": out, "note": "disclosed after the outcome was recomputed; changes no label"}
+    write_json(ctx.run_dir / "disclosure.json", core.jsonable(rec))
+    return {"status": "COMPLETE", "disclosed_cell_types": sorted(out)}
 
 
 def cmd_a0_memory(ctx: Ctx) -> dict[str, Any]:
@@ -853,15 +900,12 @@ def worker_main(argv: Sequence[str]) -> int:
     ap.add_argument("--group")
     ap.add_argument("--x8", action="store_true")
     a = ap.parse_args(list(argv))
-    torch.set_num_threads(1)
-    try:
-        torch.set_num_interop_threads(1)
-    except RuntimeError:
-        pass  # already set in this process (a test calling the worker in-process)
-    torch.use_deterministic_algorithms(True)
+    accounting.configure_process()  # first: the platform check below reads the settings this sets (N6)
     run_dir, repo = Path(a.run_dir), Path(a.repo)
     registered = (repo / core.FREEZE_RECORD).is_file() and a.kind == "cells"
     try:
+        if registered:
+            accounting.check_platform(core.load_config(repo / core.CONFIG))
         ctx = Ctx(repo, run_dir, registered=registered, sealed_dir=Path(a.sealed_dir) if a.sealed_dir else None)
         worker_guard(ctx)
         public: dict[str, Any] = {}
@@ -889,6 +933,9 @@ def worker_main(argv: Sequence[str]) -> int:
     except (adapter.EnvironmentStop, accounting.DiskPause, MemoryError, psutil.Error, OSError) as exc:
         print(f"PAUSED — ENVIRONMENT: {type(exc).__name__}", file=sys.stderr)  # R4: an environment condition anywhere in a worker is a pause, never a permanent failed task
         return ENV_EXIT
+    except accounting.PlatformMismatch as exc:
+        print(f"PAUSED — IDENTITY: {exc}", file=sys.stderr)
+        return IDENTITY_EXIT
     except CodeChanged as exc:
         print(str(exc), file=sys.stderr)
         return CODE_CHANGED_EXIT

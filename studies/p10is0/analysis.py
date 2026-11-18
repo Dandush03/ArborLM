@@ -193,6 +193,7 @@ def analyze(
         h = labels.decide(loads={}, missing_cells=len(gaps), gate_failed=gate_failed, paused=paused, th=th)
         out["headline"] = {"step": h.step, "text": h.text, "detail": h.detail}
         out["scientific_labels"] = None
+        out["status"] = "INCOMPLETE"
         return out
     reports: dict[str, TypeReport] = {ct.name: analyse_type(ct, registry, durations.get(ct.name), th, draws) for ct in all_cts if not ct.conditional}
     by_load: dict[float, list[labels.SeriesAtLoad]] = {}
@@ -209,6 +210,7 @@ def analyze(
         head = labels.decide(loads=by_load, x8_triggered=True, x8_status="INCOMPLETE", th=th)
     out["x8"] = {"triggered": triggered, "status": x8_status if triggered else f"NOT RUN — L_Q BELOW 4 (or the result of steps 0 to 2: step {head.step})", "label": "ONE SERIES" if triggered else None}
     out["headline"] = {"step": head.step, "text": head.text, "detail": head.detail}
+    out["status"] = "COMPLETE"
     loads_main = sorted(by_load)
     lines: dict[str, Any] = {}
     for line in ("A", "G", "Q"):

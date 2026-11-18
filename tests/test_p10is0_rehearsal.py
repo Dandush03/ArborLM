@@ -13,7 +13,7 @@ from studies.p10is0 import core, rehearsal  # noqa: E402
 
 
 def test_synthetic_pipeline_rehearsal_runs_every_stage(tmp_path: Path) -> None:
-    rec = rehearsal.synthetic(REPO, tmp_path / "run")
+    rec = rehearsal.synthetic(REPO, tmp_path / "run", workers=4)  # at most four processes on a shared machine
     st = rec["stages"]
     required = ("generate", "timing", "stage_r", "caps", "candidate_plan", "counting_rehearsal", "freeze", "main", "x8-gate", "analysis", "report")
     assert all(st[s]["status"] == "COMPLETE" for s in required), st

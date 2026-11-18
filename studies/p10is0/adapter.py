@@ -144,6 +144,23 @@ def trainer_check(exc: BaseException, trainer: Trainer) -> tuple[str, int] | Non
     return None
 
 
+def set_aside_incomplete(out_dir: Path, start: int, marks: list[int]) -> list[Path]:
+    """N1: a task killed mid-segment (cap, memory guard, disk pause, environment error) leaves this segment's log files, and perhaps a snapshot of a mark, with no completed train record. On a resume they are MOVED ASIDE, never deleted,
+    into ``incomplete/<utc>/`` and the segment is run again from its snapshot; the logs are then opened exclusively as before. A segment whose train record exists is complete and is not touched (re-running it is refused by the exclusive open)."""
+    if (out_dir / f"train_{start:08d}.json").is_file():
+        return []
+    stale = [p for p in (out_dir / f"updates_{start:08d}.jsonl", out_dir / f"diagnostics_{start:08d}.jsonl", *(out_dir / "snapshots" / f"u{m:07d}" for m in marks)) if p.exists()]
+    moved = []
+    if stale:
+        dest = out_dir / "incomplete" / core.utc_stamp()
+        dest.mkdir(parents=True, exist_ok=True)
+        for p in stale:
+            target = dest / (p.name if p.parent == out_dir else f"{p.parent.name}-{p.name}")
+            p.rename(target)
+            moved.append(target)
+    return moved
+
+
 def run_segment(job: Job) -> Segment:
     """Train from the job's snapshot (or from initialization) to ``last_update``, writing every per-update record and diagnostic to disk as it is produced. Snapshots at ``job.snapshots``. A divergence is returned in
     ``Segment.diverged`` (the registered scientific outcome of a learned cell, or of Stage R's rehearsal); a code error propagates; an environment error is raised as ``EnvironmentStop``."""
@@ -161,6 +178,7 @@ def run_segment(job: Job) -> Segment:
     update_log = diag_log = None
     if job.write_records:
         job.out_dir.mkdir(parents=True, exist_ok=True)
+        set_aside_incomplete(job.out_dir, start, marks)
         update_log = (job.out_dir / f"updates_{start:08d}.jsonl").open("x", encoding="utf-8")
         diag_log = (job.out_dir / f"diagnostics_{start:08d}.jsonl").open("x", encoding="utf-8")
     process = psutil.Process()
@@ -206,7 +224,7 @@ def run_segment(job: Job) -> Segment:
         **core.envelope("train"), "label": job.cell.label, "arm": job.cell.arm, "slots": job.cell.slots, "facts": facts, "init_seed": job.cell.init_seed, "seed_set": job.data.seeds.name, "start_update": start,
         "end_update": trainer.update, "planned_last_update": job.last_update, "snapshots": marks, "snapshot_sha256": hashes, "diverged": diverged,
         "status": "diverged" if diverged else "completed", "trainable_parameters": report["trainable"], "stored_parameters": report["stored"], "wall_seconds": time.monotonic() - started,
-        "cpu_seconds": time.process_time() - cpu_started, "sampled_rss_bytes": sampled_rss, "peak_rss_bytes": peak_rss(), **job.extra,
+        "cpu_seconds": time.process_time() - cpu_started, "platform": accounting.platform_record(), "sampled_rss_bytes": sampled_rss, "peak_rss_bytes": peak_rss(), **job.extra,
     }  # fmt: skip
     if job.write_records:
         core.write_record(job.out_dir / f"train_{start:08d}.json", rec)

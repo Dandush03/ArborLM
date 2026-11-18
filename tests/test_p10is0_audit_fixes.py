@@ -409,13 +409,13 @@ def _traced_peak(tmp: Path, updates: int, tag: str) -> int:
 
 
 def test_retained_memory_is_constant_and_the_test_detects_a_keeping_loop(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    small, large = _traced_peak(tmp_path, 512, "a"), _traced_peak(tmp_path, 4096, "b")
-    assert large - small < 1 * 2**20, (small, large)  # the streamed loop holds nothing per update
+    small, large = _traced_peak(tmp_path, 256, "a"), _traced_peak(tmp_path, 2048, "b")
+    assert large - small < 0.5 * 2**20, (small, large)  # the streamed loop holds nothing per update
     kept: list[str] = []
     real = adapter.s0core.json_line
     monkeypatch.setattr(adapter.s0core, "json_line", lambda rec: kept.append(real(rec)) or kept[-1])  # the defect: records kept in memory, as P10-S0's loop does
-    small_k, large_k = _traced_peak(tmp_path, 512, "c"), _traced_peak(tmp_path, 4096, "d")
-    assert large_k - small_k >= 1 * 2**20, (small_k, large_k)  # the same bound fails on the keeping loop
+    small_k, large_k = _traced_peak(tmp_path, 256, "c"), _traced_peak(tmp_path, 2048, "d")
+    assert large_k - small_k >= 0.5 * 2**20, (small_k, large_k)  # the same bound fails on the keeping loop
 
 
 # --- R15: the report prints what section 7 requires ---------------------------------------------------------------------------------------------------------

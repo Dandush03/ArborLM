@@ -22,7 +22,7 @@ from . import ladder as ladder_mod
 from . import plan as planmod
 from .plan import IDENTITY_EXIT, IdentityMismatch, StageRefused
 
-REGISTERED_STAGES = ("main", "x8-gate", "x8", "analysis", "report")
+REGISTERED_STAGES = ("main", "x8-gate", "x8", "analysis", "report", "disclose")
 PAUSED_EXIT, FAILED_EXIT = 5, 1
 
 
@@ -31,9 +31,27 @@ def exit_of(status: str | None) -> int:
     return 0 if status in ("COMPLETE", None) else drivers.CODE_CHANGED_EXIT if s.startswith("ENGINEERING") else PAUSED_EXIT if s.startswith("PAUSED") else FAILED_EXIT
 
 
+def cmd_platform(args: argparse.Namespace) -> int:
+    """Configure the process (one thread, one interop thread, deterministic), THEN check the platform of record, and print the record."""
+    accounting.configure_process()
+    try:
+        rec = accounting.check_platform(core.load_config(Path(args.repo) / core.CONFIG) if args.repo else None)
+    except accounting.PlatformMismatch as exc:
+        print(f"refused: {exc}", file=sys.stderr)
+        return 2
+    print(json.dumps(rec, sort_keys=True))
+    return 0
+
+
 def cmd_registered(args: argparse.Namespace) -> int:
     repo = Path(args.repo) if args.repo else core.repo_root()
     run_dir = Path(args.run_dir).resolve()
+    accounting.configure_process()  # BEFORE the platform check, whatever thread variables the launching shell set (N6)
+    try:
+        accounting.check_platform(core.load_config(repo / core.CONFIG))
+    except accounting.PlatformMismatch as exc:
+        print(f"refused: {exc}", file=sys.stderr)
+        return 2
     try:
         planmod.check_preconditions(repo, run_dir, args.freeze_commit)
         drivers.check_code_identity(repo)
@@ -46,6 +64,8 @@ def cmd_registered(args: argparse.Namespace) -> int:
             res = drivers.cmd_x8(ctx)
         elif args.stage == "analysis":
             res = drivers.cmd_analysis(ctx)
+        elif args.stage == "disclose":
+            res = drivers.cmd_disclose(ctx)
         else:
             res = drivers.cmd_report(ctx)
     except IdentityMismatch as exc:
@@ -101,6 +121,8 @@ def build_parser() -> argparse.ArgumentParser:
     sg = sub.add_parser("seed-gate", help="run the seed gate (the cited checker as a copy)")
     sg.add_argument("--no-checker", action="store_true")
     sub.add_parser("quiet-check", help="stage 3's quiet condition, read before the workers start")
+    pf = sub.add_parser("platform", help="configure the process, then check and print the platform of record")
+    pf.add_argument("--repo")
     rh = add("rehearse", "stage 2: the pipeline rehearsal end to end (synthetic phase; real-size phase named separately)")
     rh.add_argument("--phase", choices=("synthetic", "real"), default="synthetic")
     rh.add_argument("--cell-type")
@@ -139,6 +161,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0 if res["passed"] else 1
         elif args.command == "quiet-check":
             return cmd_quiet_check(args)
+        elif args.command == "platform":
+            return cmd_platform(args)
         elif args.command == "registered":
             return cmd_registered(args)
         elif args.command == "rehearse":
