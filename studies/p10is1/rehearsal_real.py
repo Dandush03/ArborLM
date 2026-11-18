@@ -86,9 +86,9 @@ def synthetic_registry_for(pl: planmod.Plan) -> Any:
 
 
 # --- the measuring rehearsal -----------------------------------------------------------------------------------------------------------------------------
-def _concurrent_timing(task: tuple[str, str, str, str, int, bool, int, int, int]) -> dict[str, Any]:
+def _concurrent_timing(task: tuple[str, str, str, str, int, bool, int, int, int, int]) -> dict[str, Any]:
     """One process of the k-worker slowdown: single thread, one (arm, slots) item of the plan, wall seconds per update while the other workers run."""
-    plan_path, run_dir, config_path, arm, slots, synth, warmup, updates, repeats = task
+    plan_path, run_dir, config_path, arm, slots, synth, warmup, updates, repeats, eval_update = task
     from studies.p10s1 import timing as s1timing
 
     cfg = core.load_config(Path(config_path)) if config_path else core.load_config()
@@ -104,14 +104,22 @@ def _concurrent_timing(task: tuple[str, str, str, str, int, bool, int, int, int]
     cell = core.make_cell(pl.mode, arm, c["facts"], slots, c["draw"], c["init_seed"], u_p=c["u_p"], run=c["run"], lr=c["lr"])
     job = adapter.job_for(cell, data, sd, items.backbone_of(ctx), Path(run_dir) / "timing" / "work_k", (), optimizer_marks=(), mode="calibration")
     r = s1timing.cpu_seconds_per_update(job, warmup=warmup, updates=updates, repeats=repeats)
-    return {"item": f"{arm}|{slots}", "wall": float(r["wall_seconds_per_update"]), "cpu": float(r["cpu_seconds_per_update"]), "peak_rss_bytes": int(r["peak_rss_bytes"])}
+    ev_cell = core.make_cell(pl.mode, arm, c["facts"], slots, c["draw"], c["init_seed"], u_p=c["u_p"], run=eval_update, lr=c["lr"])
+    ev_spec = {**c, "mode": pl.mode, "snapshots": [eval_update], "run": eval_update, "label": ev_cell.label, "ladder_cell": False}
+    adapter.train_to(data, sd, items.backbone_of(ctx), ctx.run_dir / "timing" / "eval_k", ev_spec, eval_update, mode=pl.mode, cfg=cfg)
+    ev_ctx = items.Ctx(pl.mode, ctx.run_dir / "timing" / "eval_k", ctx.experiments_root, synthetic=synth, sizes=ctx.sizes, config_path=ctx.config_path)
+    t0 = time.monotonic()
+    items.evaluate_snapshot(ev_ctx, ev_spec, eval_update, data=data, seeds=sd)  # evaluation seconds per snapshot UNDER the k-worker load, DEP counts at every snapshot included
+    return {"item": f"{arm}|{slots}", "wall": float(r["wall_seconds_per_update"]), "cpu": float(r["cpu_seconds_per_update"]), "peak_rss_bytes": int(max(r["peak_rss_bytes"], resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)), "evaluate_seconds": time.monotonic() - t0}
 
 
-def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_list: Sequence[int], *, synthetic_data: bool = False, warmup: int = 2, updates: int = 8, repeats: int = 1, eval_update: int = 8, candidate: planmod.Plan | None = None) -> dict[str, Any]:
+def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_list: Sequence[int], *, synthetic_data: bool = False, warmup: int | None = None, updates: int | None = None, repeats: int | None = None, eval_update: int = 8, candidate: planmod.Plan | None = None) -> dict[str, Any]:
     """The rates file ``project`` reads (``{"by_workers": {"6": {train, evaluate, contention, fixed, peak_rss_bytes_per_worker}}}``): isolated seconds per update per (arm, slots) of the plan, the k-worker slowdown (the worst
     item's ratio of concurrent to isolated wall seconds per update, at least 1), evaluation seconds per snapshot (DEP at every snapshot), peak memory per worker, fixed stages (analysis and report measured on a synthetic
     registry; the throughput figure is P10-S1's, stated). All MEASURED on the rehearsal draw."""
     cfg = ctx.cfg()
+    q = cfg["quiet"]  # the config's timing figures (32 warm-up updates, 256 updates, 3 repeats) unless a test passes smaller ones explicitly
+    warmup, updates, repeats = int(q["timing_warmup_updates"]) if warmup is None else warmup, int(q["timing_updates"]) if updates is None else updates, int(q["timing_repeats"]) if repeats is None else repeats
     began = time.monotonic()
     iso = stages.measure_timing(pl, ctx, warmup=warmup, updates=updates, repeats=repeats)
     cpu = iso["cpu"]
@@ -126,6 +134,15 @@ def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_lis
         t0 = time.monotonic()
         items.evaluate_snapshot(ctx, spec, eval_update, data=data, seeds=sd)
         evals[f"{it['arm']}|{it['slots']}"] = time.monotonic() - t0
+    tg = time.monotonic()
+    stages.run_gates(pl, ctx, ctx.run_dir, repo=core.repo_root(), run_checker=False, adapter_identity=False)
+    gates_s = time.monotonic() - tg  # the gates stage (the registry checker, run once more, adds seconds not counted here)
+    base_s = 0.0
+    for facts in sorted({c["facts"] for c in pl.data["cells"]}):
+        c = next(x for x in pl.data["cells"] if x["facts"] == facts)
+        tb = time.monotonic()
+        items.baseline_item(ctx, c["draw"], facts, {**c, "mode": pl.mode})
+        base_s += (time.monotonic() - tb) * len({x["draw"] for x in (candidate or pl).data["cells"]})  # one baseline per (draw, row): the draws of the REGISTERED plan
     t1 = time.monotonic()
     try:
         res = analysis.analyze(synthetic_registry_for(candidate or pl))
@@ -138,16 +155,16 @@ def measure_rates(pl: planmod.Plan, ctx: items.Ctx, plan_path: Path, workers_lis
     item_keys = [f"{it['arm']}|{it['slots']}" for it in pl.items("timing")]
     by: dict[str, Any] = {}
     for k in workers_list:
-        tasks = [(str(plan_path), str(ctx.run_dir), str(ctx.config_path or ""), key.split("|")[0], int(key.split("|")[1]), synthetic_data, warmup, updates, repeats) for key in item_keys]
+        tasks = [(str(plan_path), str(ctx.run_dir), str(ctx.config_path or ""), key.split("|")[0], int(key.split("|")[1]), synthetic_data, warmup, updates, repeats, eval_update) for key in item_keys]
         with mp.get_context("spawn").Pool(k) as pool:
             got = pool.map(_concurrent_timing, tasks, chunksize=1)
         ratios = {g["item"]: max(1.0, g["wall"] / wall_iso[g["item"]]) for g in got}
-        by[str(k)] = {"train": dict(cpu), "evaluate": dict(evals), "contention": max(ratios.values()), "contention_by_item": ratios, "peak_rss_bytes_per_worker": max(g["peak_rss_bytes"] for g in got), "workers": k}
-    fixed = {"timing": sum(float(v) * (warmup + repeats * updates) for v in cpu.values()), "analysis": t2 - t1, "report": t3 - t2, "throughput": 420.0}
+        by[str(k)] = {"train": dict(cpu), "evaluate": {g["item"]: max(g["evaluate_seconds"], evals[g["item"]]) for g in got}, "contention": max(ratios.values()), "contention_by_item": ratios, "peak_rss_bytes_per_worker": max(g["peak_rss_bytes"] for g in got), "workers": k}
+    fixed = {"gates": gates_s, "baselines": base_s, "timing": sum(float(v) * (warmup + repeats * updates) for v in cpu.values()), "analysis": t2 - t1, "report": t3 - t2, "throughput": 420.0}
     for v in by.values():
         v["fixed"] = fixed
     return {
-        "by_workers": by, "fixed_notes": {"throughput": "P10-S1's figure (about 7 minutes), stated not measured", "analysis_report": "measured on a synthetic registry keyed by the plan's labels"}, "peak_rss_bytes_main": int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss),
+        "by_workers": by, "timing_config": {"warmup_updates": warmup, "updates": updates, "repeats": repeats}, "fixed_notes": {"throughput": "P10-S1's figure (about 7 minutes), stated not measured", "analysis_report": "measured on a synthetic registry keyed by the plan's labels"}, "peak_rss_bytes_main": int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss),
         "seconds": time.monotonic() - began, "draw": "rehearsal", "platform": gates.platform_record(),
     }  # fmt: skip
 

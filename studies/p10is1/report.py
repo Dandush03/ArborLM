@@ -17,6 +17,22 @@ UNREACHABLE = (
 )  # section 10: what MC-T NOT MEASURED makes unreachable (printed with every report)
 
 
+READINGS_TAKEN = (
+    "DEPARTURE (stricter for the store): a dependence failure on EITHER panel of either cell blocks the capacity step on both panels and gives DEPENDENCE_FAILED, never PANEL-DISAGREE (ADR-0024 section 9: a blocking condition needs one panel; P10-S1's code read DEP per panel; the lead's ruling).",
+    "DEPARTURE (stricter for the store): DENSE NOT FASTER is not established in a replicate in which D-OQ failed a qualified dependence condition at ANY snapshot it read, where ruling 17 names only s_prev and s_hit (the lead's ruling: kept).",
+    "READING: a snapshot at a fraction of U_P that has no reference-arm read (off the grid) has every dependence condition applied (nothing is disqualified): the stricter reading for the store.",
+    "READING: where the larger cell of a capacity step costs no more per update than the smaller, the larger cell is read at U_P in every matched-compute reading, MC-C included (ruling 1), never later.",
+    "READING: DENSE NOT FASTER needs the dense map's c_T above 0.8 of the arm's in all 5 replicates, on both panels, for every value the censoring bounds allow.",
+    "READING: `STORE HOLDS MORE` and DENSE HOLDS MORE read D-OQ's dependence at the snapshot attaining i* and at U_RUN/2 of the cell (ruling 17).",
+    "READING: the edge test of the rate search is 0.02 or more over the next rate (as P10-S1 did); the second extension steps (1.0 upwards, 0.0001 downwards) are not named by the ADR and were ruled by the lead on 2026-11-18, to be recorded in ADR-0024's rulings.",
+    "CHECK: the whole cell's recorded stop (U_run) is recomputed from the data; a difference is an engineering failure, never a label.",
+)
+
+
+def readings_section() -> list[str]:
+    return ["## Readings taken here (departures and readings the specification leaves to the implementation)", *[f"- {x}" for x in READINGS_TAKEN], ""]
+
+
 def fmt(v: Any, nd: int = 3) -> str:
     if v is None:
         return "n/a"
@@ -149,6 +165,7 @@ def render(res: Mapping[str, Any], *, throughput: Mapping[str, Any] | None = Non
     q = res["qualification"]
     out += [f"NOT QUALIFIED AT row {row} fraction {frac}: {sorted({'a', 'b', 'c'} - set(conds))}" for row, fr in q.items() for frac, conds in fr.items() if set(conds) != {"a", "b", "c"}] or ["no condition is unqualified at a fraction"]
     out += [f"REFERENCE FAILED DEP: row {r['row']}, replicate {r['draw']}, update {r['update']}, conditions {r['conditions']} (not applied at that snapshot in that replicate, for every arm of the row)" for r in res["reference_failed_dep"]]
+    out += ["", *readings_section()]
     out += ["", "## Counted work per query (logical counts; not measured efficiency)", ""]
     out += table(["arm", "cell", "K", "V", "W"], [[r["arm"], r["cell"], r.get("K"), r.get("V"), r.get("W")] for r in res["counted_work"]])
     out += ["", "## Read-path throughput", stage_line(res, "throughput")]

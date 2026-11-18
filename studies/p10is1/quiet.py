@@ -50,6 +50,12 @@ def available_bytes(text: str, kinds: Sequence[str] = ("free", "inactive", "purg
     return pages * size
 
 
+def memory_ok_once(guard_bytes: int, *, reader: Callable[[], str] = vm_stat_text, kinds: Sequence[str] = ("free", "inactive", "purgeable", "speculative")) -> bool:
+    """ONE reading, never a wait: does the available memory of the machine cover ``guard_bytes`` now? The runner calls it before each worker is added while it keeps supervising the workers that are running (finding F10);
+    the retry cadence and the six-hour limit are the runner's (``memory_retry``, ``memory_max``)."""
+    return available_bytes(reader(), kinds) >= guard_bytes
+
+
 def check_memory(guard_bytes: int, *, reader: Callable[[], str] = vm_stat_text, sleep: Callable[[float], None] = time.sleep, clock: Callable[[], float] = time.monotonic, cfg: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The available memory of the whole machine must cover ``guard_bytes`` (the stage's aggregate guard). Retried every ``retry_seconds`` until ``max_hours`` have passed; then ``PAUSED — ENVIRONMENT``. Bounded:
     the deadline is checked before every wait."""

@@ -57,7 +57,7 @@ def _kill(popen: "subprocess.Popen[bytes]") -> None:
     popen.wait(timeout=30)
 
 
-def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_worker_bytes: int, rss_aggregate_bytes: int, env: dict[str, str] | None = None, poll: float = POLL, memory_ok: Callable[[], bool] | None = None) -> tuple[dict[str, dict[str, Any]], float]:
+def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_worker_bytes: int, rss_aggregate_bytes: int, env: dict[str, str] | None = None, poll: float = POLL, memory_ok: Callable[[], bool] | None = None, memory_retry: float = 600.0, memory_max: float = 21600.0) -> tuple[dict[str, dict[str, Any]], float]:
     """Run the tasks in subprocesses, at most ``workers`` at once, until all are done or ``cap_seconds`` of wall clock pass (then every running task is killed: ``killed_cap``, the rest ``not_started``).
     Returns (label -> outcome, wall seconds). A task with a result file is ``completed`` without running; one with a failed record is ``failed`` without running."""
     import os
@@ -74,7 +74,21 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
             pending.append(t)
     running: dict[str, tuple[Task, subprocess.Popen[bytes], psutil.Process, float, int]] = {}
     environment = {**os.environ, "PYTHONUNBUFFERED": "1", **(env or {})}
+    mem_short_since: float | None = None
+    mem_next_check = 0.0
+    mem_state = True
     while pending or running:
+        if pending and memory_ok is not None and len(running) < workers and time.monotonic() >= mem_next_check:
+            mem_state = bool(memory_ok())  # ONE non-blocking reading; the workers that run keep being supervised below (RSS guards, the cap, reaping)
+            if mem_state:
+                mem_short_since, mem_next_check = None, 0.0
+            else:
+                mem_short_since = time.monotonic() if mem_short_since is None else mem_short_since
+                mem_next_check = time.monotonic() + memory_retry
+        if pending and not mem_state and mem_short_since is not None and time.monotonic() - mem_short_since >= memory_max:
+            for t in pending:  # PAUSED — ENVIRONMENT: the machine's available memory did not cover the aggregate guard for the whole limit; the tasks resume once it does
+                out[t.label] = {"status": PAUSED_ENVIRONMENT, "seconds": 0.0, "reason": "PAUSED — ENVIRONMENT: the available memory of the machine did not cover the aggregate guard", "peak_rss_bytes": 0}
+            pending = []
         if time.monotonic() - begun > cap_seconds:
             for label, (task, popen, _, t0, peak) in list(running.items()):
                 _kill(popen)
@@ -84,12 +98,13 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
                 out[t.label] = {"status": NOT_STARTED, "seconds": 0.0, "reason": "stage cap reached", "peak_rss_bytes": 0}
             pending = []
             break
-        while pending and len(running) < workers and (memory_ok is None or memory_ok()):
+        if pending and len(running) < workers and (memory_ok is None or mem_state):
             t = pending.pop(0)
             t.log_path.parent.mkdir(parents=True, exist_ok=True)
             with t.log_path.open("ab") as log:
                 popen = subprocess.Popen(list(t.argv), stdout=log, stderr=subprocess.STDOUT, start_new_session=True, env=environment)  # noqa: S603 - argument list, no shell
             running[t.label] = (t, popen, psutil.Process(popen.pid), time.monotonic(), 0)
+            mem_next_check = 0.0  # the memory check is made again before the next worker is added
         aggregate = 0
         for label in list(running):
             task, popen, proc, t0, peak = running[label]

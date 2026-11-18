@@ -68,8 +68,15 @@ def project(cells: Sequence[Mapping[str, Any]], grants: Mapping[str, int], rates
     lengths = {c["label"]: (int(grants[core.cell_name(c["facts"], c["slots"])]) if c["ladder_cell"] else int(c["run"])) for c in cells}
     tr, ev = training_items(cells, lengths, rates), evaluation_items(cells, lengths, rates)
     train_s, eval_s = makespan(tr, rates.workers), makespan(ev, rates.workers)
-    fixed = sum(rates.fixed.values())
-    return {"train_seconds": train_s, "evaluate_seconds": eval_s, "fixed_seconds": fixed, "remaining_seconds": train_s + eval_s + fixed, "longest_training_item_seconds": max(tr) if tr else 0.0, "workers": rates.workers}
+    # the COUNTING REHEARSAL (section 17.1 names it): every stage of ONE replicate on the rehearsal draw at the same lengths (a ladder cell at its granted length, as if it never stopped early), training then evaluation
+    first = min((c["draw"] for c in cells), default=0)
+    one = [c for c in cells if c["draw"] == first]
+    count_s = makespan(training_items(one, lengths, rates), rates.workers) + makespan(evaluation_items(one, lengths, rates), rates.workers)
+    fixed = sum(rates.fixed.values())  # gates, baselines, timing, throughput, analysis, report: whatever the measuring rehearsal measured
+    return {
+        "train_seconds": train_s, "evaluate_seconds": eval_s, "counting_rehearsal_seconds": count_s, "fixed_seconds": fixed, "remaining_seconds": train_s + eval_s + count_s + fixed,
+        "longest_training_item_seconds": max(tr) if tr else 0.0, "workers": rates.workers,
+    }  # fmt: skip
 
 
 def grant_levels(cells: Sequence[Mapping[str, Any]], rates: Rates, h_charged: float, cfg: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -107,7 +114,7 @@ def grant_levels(cells: Sequence[Mapping[str, Any]], rates: Rates, h_charged: fl
                 out["closed"].append({"cell": name, "at_level": j})
     p = project(cells, grants, rates)
     total = h_charged + p["remaining_seconds"] / 3600.0
-    out.update(status="WITHIN BUDGET", refused=False, grants=grants, total_hours=total, remaining_hours=p["remaining_seconds"] / 3600.0, longest_item_hours=p["longest_training_item_seconds"] / 3600.0, stage_hours={"train": p["train_seconds"] / 3600.0, "evaluate": p["evaluate_seconds"] / 3600.0, "fixed": p["fixed_seconds"] / 3600.0})
+    out.update(status="WITHIN BUDGET", refused=False, grants=grants, total_hours=total, remaining_hours=p["remaining_seconds"] / 3600.0, longest_item_hours=p["longest_training_item_seconds"] / 3600.0, stage_hours={"train": p["train_seconds"] / 3600.0, "evaluate": p["evaluate_seconds"] / 3600.0, "counting_rehearsal": p["counting_rehearsal_seconds"] / 3600.0, "fixed": p["fixed_seconds"] / 3600.0})
     return out
 
 

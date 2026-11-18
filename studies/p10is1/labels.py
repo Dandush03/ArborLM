@@ -269,7 +269,9 @@ class StepCtx:
 
 
 def capacity_panel(small: Series, large: Series, ctx: StepCtx, th: core.Thresholds) -> StepResult:
-    """One panel's verdict for the step N -> 4N (rows 1 to 10 of section 9.1, first match wins)."""
+    """One panel's verdict for the step N -> 4N (rows 1 to 10 of section 9.1, first match wins). DEPARTURE FROM P10-S1, by the lead's ruling: ADR-0024 section 9 says a BLOCKING condition needs only ONE panel, so a dependence
+    failure on EITHER panel of either cell blocks the capacity step on BOTH panels (``ctx.dep_failed_*`` hold the failures of both panels; the analysis passes their union): the replicate is DEPENDENCE_FAILED, never PANEL-DISAGREE.
+    P10-S1's code read DEP per panel (a failure on one panel gave PANEL-DISAGREE). This is the stricter reading for the store."""
     d: dict[str, Any] = {"mc": {k: (None if v is None else {"status": v.status, "small_update": (v.first_update), "large_update": v.second_update, "multiplier": v.multiplier, "ambiguous": v.ambiguous}) for k, v in ctx.mc.items()}}
     if not ctx.ref_ok or ctx.leakage:
         return StepResult(NOT_EVALUATED, {**d, "reason": "REF failed" if not ctx.ref_ok else "LEAKAGE"})
@@ -559,15 +561,16 @@ def efficiency_outcome(arm_classes: Mapping[str, Mapping[str, str]], dense: Mapp
     EFFICIENCY-INCONCLUSIVE otherwise."""
     readings = ["E-A"] + (["E-T"] if mct_measured else [])
     sup = "EFFICIENCY_SUPPORTED"
-    supported_both = [a for a in core.EFFICIENCY_ARMS if mct_measured and all(arm_classes[r].get(a) == sup for r in readings)]
-    positive = [a for a in supported_both if all(x == DENSE_NOT_FASTER for r in readings for x in dense[r].get(a, [])) and all(len(dense[r].get(a, [])) > 0 for r in readings)]
+    # row 4 (b) is evaluated over the readings that EXIST (ADR-0024 sections 9.5 and 10: with MC-T NOT MEASURED a negative stays reachable through E-A: "no negative becomes unreachable"); the positive needs both readings
+    supported_all = [a for a in core.EFFICIENCY_ARMS if all(arm_classes[r].get(a) == sup for r in readings)]
+    positive = [a for a in supported_all if mct_measured and all(x == DENSE_NOT_FASTER for r in readings for x in dense[r].get(a, [])) and all(len(dense[r].get(a, [])) > 0 for r in readings)]
     if positive:
         return {"label": EFFICIENCY_POSITIVE, "arms": positive, "reasons": [], "e_a_only": False}
     both_not = {r: all(arm_classes[r].get(a) == "EFFICIENCY_NOT_SUPPORTED" for a in core.EFFICIENCY_ARMS) for r in readings}
     if any(both_not.values()):
         return {"label": EFFICIENCY_NEGATIVE, "arms": [], "reasons": [f"F-OQ and T-OQ are both EFFICIENCY_NOT_SUPPORTED in {r}" for r, v in both_not.items() if v], "e_a_only": not mct_measured}
-    if supported_both and all(any(x == DENSE_FASTER for r in readings for x in dense[r].get(a, [])) for a in supported_both):
-        return {"label": EFFICIENCY_NEGATIVE, "arms": supported_both, "reasons": ["every EFFICIENCY_SUPPORTED arm is DENSE FASTER at one or more FASTER-STEP cells in one or more readings"], "e_a_only": False}
+    if supported_all and all(any(x == DENSE_FASTER for r in readings for x in dense[r].get(a, [])) for a in supported_all):
+        return {"label": EFFICIENCY_NEGATIVE, "arms": supported_all, "reasons": ["every EFFICIENCY_SUPPORTED arm is DENSE FASTER at one or more FASTER-STEP cells in one or more readings"], "e_a_only": not mct_measured}
     reasons = [f"{r}: " + ", ".join(f"{a}: {arm_classes[r].get(a, 'none')}" for a in core.EFFICIENCY_ARMS) for r in readings]
     if any(x == DENSE_SPEED_UNDECIDED for r in readings for a in core.EFFICIENCY_ARMS for x in dense[r].get(a, [])):
         reasons.append(DENSE_SPEED_UNDECIDED)

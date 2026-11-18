@@ -122,11 +122,13 @@ def worker_main(args: argparse.Namespace) -> int:
     repo, run_dir = repo_of(args), Path(args.run_dir)
     try:
         mode = args.mode
+        gates.configure_worker(core.load_config(Path(args.config)) if args.config else None)  # one thread, one interop thread, deterministic: BEFORE the platform check (a fresh worker interpreter has neither set)
+        if mode == core.REGISTERED and args.synthetic:
+            raise StageRefused("refused: a registered task never uses the synthetic corpus and backbone")
         if mode == core.REGISTERED:
             planmod.check_preconditions(mode, repo, args.freeze_commit)
         pl = Plan.load(Path(args.plan))
         planmod.verify_plan(pl, repo, run_dir, candidate=mode != core.REGISTERED, freeze_commit=args.freeze_commit if mode == core.REGISTERED else None)
-        gates.configure_worker(core.load_config(Path(args.config)) if args.config else None)
         ctx = ctx_for(pl, run_dir, experiments_root=None if args.synthetic else freezemod.experiments_root(), synthetic=args.synthetic, config_path=Path(args.config) if args.config else None)
         label = args.label
         if args.kind == "train":
@@ -142,6 +144,9 @@ def worker_main(args: argparse.Namespace) -> int:
     except StageRefused as exc:
         print(str(exc), file=sys.stderr)
         return core.IDENTITY_EXIT
+    except (adapter.NonFinite, adapter.CellFailedBefore) as exc:  # FAILED — NON-FINITE: the cell's own failed record is the whole record (section 14); not an item error
+        print(str(exc), file=sys.stderr)
+        return 1
     except (MemoryError, OSError) as exc:
         print(f"PAUSED — ENVIRONMENT: {type(exc).__name__}: {exc}", file=sys.stderr)
         return runner.ENVIRONMENT_EXIT
@@ -180,6 +185,9 @@ class Pool:
                         do_baseline(self.ctx, self.plan, int(params["draw"]), int(params["facts"]))
                 except (MemoryError, OSError):
                     raise
+                except (adapter.NonFinite, adapter.CellFailedBefore) as exc:
+                    out[label] = {"status": runner.FAILED, "reason": str(exc)}
+                    continue
                 except Exception as exc:  # noqa: BLE001
                     record_item_error(self.run_dir, stage, f"{kind}|{label}", exc)
                     out[label] = {"status": runner.FAILED, "reason": f"{type(exc).__name__}: {exc}"}
@@ -196,7 +204,7 @@ class Pool:
                 argv += [f"--{k}", ",".join(map(str, v)) if isinstance(v, list | tuple) else str(v)]
             pending.append(runner.Task(f"{kind}|{label}|{json.dumps(params, sort_keys=True)}", tuple(argv), done, task_dir(self.run_dir, stage) / f"{safe(label)}.failed.json", task_dir(self.run_dir, stage) / f"{safe(label)}.log"))
         res = cfg["resources"]
-        outcomes, secs = runner.run_tasks(pending, workers=self.workers, cap_seconds=self.cap, rss_worker_bytes=int(res["rss_worker_bytes"]), rss_aggregate_bytes=int(res["rss_aggregate_bytes"]), memory_ok=lambda: quiet.check_memory(int(res["rss_aggregate_bytes"]), cfg=cfg)["ok"])
+        outcomes, secs = runner.run_tasks(pending, workers=self.workers, cap_seconds=max(0.0, self.cap - self.seconds), rss_worker_bytes=int(res["rss_worker_bytes"]), rss_aggregate_bytes=int(res["rss_aggregate_bytes"]), memory_ok=lambda: quiet.memory_ok_once(int(res["rss_aggregate_bytes"])), memory_retry=float(cfg["memory_check"]["retry_seconds"]), memory_max=float(cfg["memory_check"]["max_hours"]) * 3600.0)
         self.seconds += secs
         return outcomes
 
@@ -230,7 +238,7 @@ def run_ladder_cell(pool: Pool, item: Mapping[str, Any], run_dir: Path) -> dict[
             if bad:
                 raise StageRefused(f"refused: ladder cell {name} could not finish the round at {point}: {sorted(bad)[:3]} (PAUSED; the cell resumes)")
         dec = items.ladder_decision(pool.ctx, [pool.plan.cell(s["label"]) for s in specs], point, cfg)
-        rounds.append({"point": point, "all_full": dec["all_full"], "full": dec["full"]})
+        rounds.append({"point": point, "all_full": dec["all_full"]})  # the per-arm statistic is not recorded: the stop rule sees it, nobody else
         nxt = items.next_level(u0, granted, point, cfg)
         if dec["all_full"] or nxt is None:
             break
@@ -359,6 +367,12 @@ def build_registry(ctx: items.Ctx, pl: Plan, run_dir: Path, *, rehearsal_record:
         "run": f"{run_dir.name} ({pl.mode})", "stages": {"analysis (capacity)": "the registered run's records", "analysis (saturation)": "the registered run's records", "analysis (efficiency)": "the registered run's records and the isolated timing record", "train (ladder)": "ladder decisions", "throughput": quiet.throughput_label(run_dir)},
         "item_errors": item_errors(run_dir), "failed_cells": failed_cells(run_dir), "lane_l": d.get("lane_l", core.LANE_L_NOT_LICENSED),
     }  # fmt: skip
+    paused = []
+    for mp in sorted(run_dir.glob("*/manifest.json")):
+        m = core.read_record(mp, "stage_manifest")
+        if m.get("status") == "PAUSED":
+            paused.append(f"{m['stage']}: PAUSED")
+    status["paused"] = paused
     gp = gates_path(run_dir)
     if gp.is_file() and core.read_record(gp, "gates_record").get("passed") is not True:
         status["gate_failures"] = core.read_record(gp, "gates_record").get("failed", ["gates"])
@@ -387,14 +401,10 @@ def do_report(run_dir: Path, pl: Plan) -> str:
 
 
 # --- executing a registered stage ------------------------------------------------------------------------------------------------------------------------------
-def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None) -> dict[str, Any]:
-    """One stage, resumable, from the plan only. Returns the stage record (status COMPLETE or PAUSED)."""
+def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None, ledger: core.Ledger | None = None, holder: dict[str, Any] | None = None) -> tuple[str, dict[str, Any], Any]:
+    """The body of a stage: returns (status, result, pool)."""
     cfg = ctx.cfg()
-    ledger = ledger_of(pl, run_dir, repo if pl.mode == core.REGISTERED else None)
-    ledger.require_room(stage)
     cap = stage_cap_seconds(pl, stage, ledger)
-    began = time.monotonic()
-    started = datetime.now(UTC).isoformat()
     n_workers = workers or int(cfg["resources"]["workers"])
     extra = ["--freeze-commit", args.freeze_commit] if getattr(args, "freeze_commit", None) else []
     if getattr(args, "synthetic", False):
@@ -402,6 +412,8 @@ def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path
     if ctx.config_path:
         extra += ["--config", str(ctx.config_path)]
     pool = Pool(pl, run_dir, plan_path, args, ctx, inline=inline, workers=n_workers, cap_seconds=cap, extra_argv=extra)
+    if holder is not None:
+        holder["pool"] = pool
     status, result = "COMPLETE", {}
     if stage == "gates":
         rec = run_gates(pl, ctx, run_dir, repo=repo, run_checker=pl.mode == core.REGISTERED)
@@ -453,8 +465,22 @@ def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path
         result = {"report": str(run_dir / "report" / "REPORT.md")}
     else:
         raise ValueError(f"unknown stage {stage!r}")
-    secs = max(pool.seconds, time.monotonic() - began) if stage not in ("train", "ladder", "evaluate", "baselines") else pool.seconds
-    ledger.charge(stage, run_dir.name, secs)
+    return status, result, pool
+
+
+def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None) -> dict[str, Any]:
+    """One stage, resumable, from the plan only. The seconds it used are charged to the ledger in a ``finally``: a stage that raises (a paused ladder round) still charges what it spent, so the caps are cumulative across invocations."""
+    ledger = ledger_of(pl, run_dir, repo if pl.mode == core.REGISTERED else None)
+    ledger.require_room(stage)
+    began = time.monotonic()
+    started = datetime.now(UTC).isoformat()
+    holder: dict[str, Any] = {}
+    try:
+        status, result, pool = _execute_stage_body(stage, pl, ctx, run_dir, plan_path, args, repo=repo, inline=inline, workers=workers, sleep=sleep, quiet_reading=quiet_reading, end_fn=end_fn, clock=clock, ledger=ledger, holder=holder)
+    finally:
+        pool_seconds = holder["pool"].seconds if "pool" in holder else 0.0
+        secs = pool_seconds if stage in ("train", "ladder", "evaluate", "baselines") else max(pool_seconds, time.monotonic() - began)
+        ledger.charge(stage, run_dir.name, secs)
     rec = {**core.envelope("stage_manifest"), "stage": stage, "mode": pl.mode, "status": status, "result": result, "started_utc": started, "finished_utc": datetime.now(UTC).isoformat(), "charged_seconds": secs}
     p = run_dir / stage / "manifest.json"
     prior = core.read_record(p, "stage_manifest") if p.is_file() else None
@@ -527,6 +553,14 @@ def build_parser() -> argparse.ArgumentParser:
     ca = sub.add_parser("calibrate", help="the calibration on the calibration draws; item records go to the sealed directory")
     ca.add_argument("--sealed-dir", required=True)
     ca.add_argument("--run-dir", required=True)
+    ca.add_argument("--workers")
+    wc = sub.add_parser("work-calibrate", help="a calibration worker process (one job)")
+    for a in ("--job", "--sealed-dir", "--done"):
+        wc.add_argument(a, required=True)
+    wc.add_argument("--config")
+    wc.add_argument("--synthetic", action="store_true")
+    wc.add_argument("--table-facts", default="32768")
+    wc.add_argument("--unseen", default="2048")
     rh = sub.add_parser("rehearse", help="the synthetic rehearsal (tiny sizes, test seeds) end to end")
     rh.add_argument("--run-dir", required=True)
     rh.add_argument("--repo")
@@ -567,6 +601,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "caps-proposal":
             print(json.dumps({"proposed_cap_hours": core.propose_cap_hours(args.charged_hours, args.projected_remaining_hours), "rule": "section 15: charged + 2 x projected remaining, rounded up to the hour; the caps sum to at most 60 by the construction of B; anything above is the human lead's own decision"}))
             return 0
+        if args.command == "work-calibrate":
+            from . import calibrate_engine
+
+            return calibrate_engine.worker_main(args)
         if args.command == "calibrate":
             from . import calibrate_engine
 

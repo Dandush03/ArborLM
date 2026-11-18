@@ -141,6 +141,30 @@ def cmd_project(args: argparse.Namespace) -> int:
     return 0 if not out["refused"] else 3
 
 
+def require_projection(plan: planmod.Plan, cfg: Any) -> None:
+    """The freeze requires the projection of section 17.1: present, WITHIN BUDGET (a base plan above it is refused), its grants equal to the plan's granted lengths, its caps (charged + 2 x projected remaining, rounded up) equal
+    to the config's, and the total cap within the block budget's 60 charged hours (a cap above it is the human lead's own decision, recorded elsewhere, never here)."""
+    proj = plan.data.get("projection")
+    if not proj:
+        raise StageRefused("refused: the candidate plan carries no projection (section 17.1): the granted lengths and the caps are fixed by it, once, from the measuring rehearsal; every loaded cell at 4 x U0 is not a grant")
+    if proj.get("refused") or proj.get("status") != "WITHIN BUDGET":
+        raise StageRefused(f"refused: the projection is not WITHIN BUDGET ({proj.get('status')}): {planmod.BASE_PLAN_ABOVE_BUDGET} returns the work to the human lead")
+    granted = {k: int(v) for k, v in plan.data["params"]["granted"].items()}
+    if {k: int(v) for k, v in proj["grants"].items()} != granted:
+        raise StageRefused("refused: the plan's granted lengths differ from the projection's grants")
+    caps = proj.get("caps")
+    if not caps:
+        raise StageRefused("refused: the projection carries no caps")
+    limit = float(cfg["budget"]["total_cap_hours"])
+    if caps["total_above_limit"] or float(caps["total_cap_hours"]) > limit + 1e-9:
+        raise StageRefused(f"refused: the projection's total cap {caps['total_cap_hours']} h is above the block budget's {limit} h: raising it is the human lead's own decision")
+    c = cfg["caps"]
+    want = {"total_hours": float(caps["total_cap_hours"]), "train_hours": float(caps["stage_cap_hours"]["train"]), "evaluate_hours": float(caps["stage_cap_hours"]["evaluate"])}
+    got = {k: float(c[k]) for k in want}
+    if got != want:
+        raise StageRefused(f"refused: the config's caps {got} are not the caps the projection's rule gives {want} (charged + 2 x projected remaining, rounded up)")
+
+
 def cmd_freeze(args: argparse.Namespace) -> int:
     """Write ``freeze/freeze_record.json`` for the committed candidate plan (refusals in the module docstring). It never rewrites the plan."""
     repo = Path(args.repo) if args.repo else core.repo_root()
@@ -155,6 +179,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused(f"refused: {planmod.BASE_PLAN_ABOVE_BUDGET}: the freeze refuses this plan; the work returns to the human lead (section 17.1 item 2)")
     if core.caps_provisional(cfg) or plan.data.get("caps_provisional"):
         raise StageRefused("refused: caps.provisional is true: the caps are set from the measuring rehearsal (section 15) and the candidate plan is rewritten and rehearsed again")
+    require_projection(plan, cfg)
     plan_sha = file_sha256(plan_path)
     calibration = read_json(Path(plan.data["calibration_path"]))
     if file_sha256(Path(plan.data["calibration_path"])) != plan.data["calibration_sha256"]:
@@ -165,6 +190,10 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rehearsal = core.read_record(Path(args.rehearsal), "rehearsal")
     if rehearsal.get("caps_provisional") is not False:
         raise StageRefused("refused: the rehearsal record was made on provisional caps (or does not say): the counting rehearsal runs against the plan with the caps set")
+    q = rehearsal.get("qualification") or {}
+    missing_rows = [str(r) for r in core.row_facts(cfg) if not q.get(str(r))]
+    if missing_rows:
+        raise StageRefused(f"refused: the rehearsal record has no R2 qualification table for row(s) {missing_rows}: an absent table would silently qualify every condition (section 8.1)")
     reh = gates.rehearsal_gate(rehearsal, REHEARSAL_STAGES, plan_file_sha256=plan_sha)
     if reh["passed"] is not True:
         raise StageRefused(f"refused: the rehearsal record does not show every stage COMPLETE on non-provisional caps against the candidate plan of SHA-256 {plan_sha}: {reh}")

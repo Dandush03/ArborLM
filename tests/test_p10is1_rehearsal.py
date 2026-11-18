@@ -180,7 +180,7 @@ def test_hour_caps_are_cumulative_across_stages_and_resumes(tmp_path: Path) -> N
     led.charge("train", "r2", 1500.0)
     with pytest.raises(core.LedgerRefused):
         led.require_room("train")
-    assert led.charged("train") == 3500.0 and led.charged() == 6000.0 or led.remaining() == 0.0
+    assert led.charged("train") == 3500.0 and led.charged() == 6000.0 and led.remaining() == 0.0
 
 
 def test_execute_stage_charges_the_ledger_and_a_resume_charges_again(tmp_path: Path) -> None:
@@ -207,7 +207,7 @@ def test_r2_qualification_driver_runs_every_check_at_every_fraction(tmp_path: Pa
     cfg = core.load_config(cfgp)
     out = rehearsal_real.run_r2_qualification(tmp_path / "work", {128: (128, 4096, 16, 0.003)}, [("t1", core.TEST, 1), ("t2", core.TEST, 2)], cfg=cfg, synthetic_data=True, sizes={"table_facts": 512, "unseen": 64})
     table = out["table"]["128"]
-    assert set(table) == {"0.0625", "0.125", "0.25", "0.5", "1"} or set(table) >= {"0.5", "1"}  # the fractions of U_P that R2's snapshots have
+    assert set(table) == {"0.0625", "0.125", "0.25", "0.5", "1"}  # exactly the fractions of U_P that R2's snapshots have (U_P 16: snapshots 1, 2, 4, 8, 16)
     assert all(set(v) <= {"a", "b", "c"} for v in table.values()) and "a_use" not in json.dumps(out)  # conditions, never accuracies
     fails = {(f["view"], f["update"]): f["conditions"] for f in out["failures"]}
     for key, conds in fails.items():  # every recorded failure is a condition removed from that fraction of the table
@@ -228,7 +228,7 @@ def test_measuring_rehearsal_rates_file_feeds_the_projection(tmp_path: Path) -> 
     k2 = out["by_workers"]["2"]
     keys = {f"{c['arm']}|{c['slots']}" for c in pl.data["cells"]}
     assert set(k2["train"]) == keys and set(k2["evaluate"]) == keys and k2["contention"] >= 1.0 and k2["peak_rss_bytes_per_worker"] > 0 and all(v > 0 for v in k2["train"].values())
-    assert set(k2["fixed"]) == {"timing", "analysis", "report", "throughput"} and out["draw"] == "rehearsal"
+    assert set(k2["fixed"]) == {"gates", "baselines", "timing", "analysis", "report", "throughput"} and out["draw"] == "rehearsal"
     from studies.p10is1 import budget
 
     rates = budget.Rates({(k.split("|")[0], int(k.split("|")[1])): v for k, v in k2["train"].items()}, {(k.split("|")[0], int(k.split("|")[1])): v for k, v in k2["evaluate"].items()}, k2["contention"], k2["fixed"], 2)

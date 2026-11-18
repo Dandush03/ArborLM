@@ -225,11 +225,13 @@ class Analyzer:
             u_p = int(sm["u_p"])
             costs_a, costs_t = self.costs(base, step.small, base, step.large)
             mc = L.mc_combined(costs_a, costs_t, u_p=u_p, run_first=fs["u_run"], run_second=fl["u_run"], grid=self.th.mc_grid, mode="capacity")
+            dep_s = frozenset().union(*(self.dep_failed(sm, read, q) for q in core.PANELS))  # a blocking condition needs only ONE panel (ADR-0024 section 9; lead's ruling): the union over panels
+            dep_l = frozenset().union(*(self.dep_failed(lg, read, q) for q in core.PANELS))
             panels = {}
             for p in core.PANELS:
                 ctx = L.StepCtx(
                     u_p=u_p, run_small=fs["u_run"], run_large=fl["u_run"], ref_ok=self.ref_ok(draw, step.facts), leakage=self.leakage(sm, read) or self.leakage(lg, read),
-                    dep_failed_small=self.dep_failed(sm, read, p), dep_failed_large=self.dep_failed(lg, read, p), small_full=fs["full"], large_full=fl["full"], small_loaded=fs["loaded"], mc=mc,
+                    dep_failed_small=dep_s, dep_failed_large=dep_l, small_full=fs["full"], large_full=fl["full"], small_loaded=fs["loaded"], mc=mc,
                 )  # fmt: skip
                 panels[p] = L.capacity_panel(self.series(sm, read, p), self.series(lg, read, p), ctx, self.th)
             rep = L.capacity_replicate(panels)
@@ -296,7 +298,7 @@ class Analyzer:
                 shorter[p] = L.i_star(sa, short) - L.i_star(sd, short)
                 fails = self.dep_failed(dq, "main", p)
                 best_u = max((u for u in sd if u <= ld), key=lambda u: (sd[u].i, -u))
-                blocked = blocked or best_u in fails or (ld // 2) in fails
+                blocked = blocked or best_u in fails or (self.u_run(dq) // 2) in fails  # ruling 17: the snapshot attaining i* and U_run/2 (of the cell, not of D-OQ's own length)
             cost_ok = self.mct and self.cost_t("D-OQ", cell[1]) >= self.cost_t(base, cell[1]) and self.cost_a("D-OQ", cell[1]) >= self.cost_a(base, cell[1])  # type: ignore[operator]
             reps.append(L.SatDenseRep(d_sat, ratio, fd["full"], bool(cost_ok), blocked))
             detail.append({"replicate": draw, "arm_length": la, "dense_length": ld, "d_sat": d_sat, "d_sat_at_shorter_length": shorter, "ratio": ratio, "dense_full": fd["full"], "dense_a_use_at_u_p": {p: self.series(dq, "main", p)[int(dq["u_p"])].a_use for p in core.PANELS}})
@@ -455,6 +457,11 @@ def analyze(reg: Registry) -> dict[str, Any]:
         return {**base, "status": ENGINEERING_STOP, "refused": True, "item_errors": list(st["item_errors"]), "lines": {k: ENGINEERING_STOP for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
     if st.get("gate_failures") or st.get("identity_unrestorable"):
         return {**base, "status": ENGINEERING_FAILURE, "gate_failures": list(st.get("gate_failures", [])), "lines": {k: ENGINEERING_FAILURE for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
+    names = sorted({core.cell_name(c["facts"], c["slots"]) for c in reg.cells if c["ladder_cell"]})
+    no_decision = [n for n in names if n not in reg.ladder_stops]
+    if no_decision:  # a ladder cell without its decision (PAUSED, or a failed cell): the registry is not complete; it is a status, never a crash
+        status = PAUSED if st.get("paused") else INCOMPLETE
+        return {**base, "status": status, "missing_ladder_decisions": no_decision, "missing_reads": [], "missing_count": 0, "paused": list(st.get("paused", [])), "failed_cells": list(st.get("failed_cells", [])), "lines": {k: status for k in ("C-CAPACITY", "C-SATURATION", "C-EFFICIENCY")}}
     an = Analyzer(reg)
     missing = check_complete(reg, an)
     if missing or st.get("paused") or st.get("failed_cells"):

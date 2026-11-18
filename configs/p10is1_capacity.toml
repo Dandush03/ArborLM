@@ -49,8 +49,8 @@ grid = [1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 6.0]
 # section 7.1
 grid = [0.001, 0.003, 0.01, 0.03, 0.1]
 tie_difference = 0.02
-extension_up = [0.3, 1.0]       # the ADR names only the first step (0.3); the second step (1.0) is NOT named by the ADR: the implementer chose it (grid continued), the lead ruled it stands
-extension_down = [0.0003, 0.0001]  # likewise: 0.0003 is the ADR's, 0.0001 is not named by it (the lead ruled it stands)
+extension_up = [0.3, 1.0]       # the ADR names only the first step (0.3); the second step (1.0) is NOT named by the ADR: the implementer chose it (grid continued); ruled by the lead on 2026-11-18; to be recorded in ADR-0024's rulings
+extension_down = [0.0003, 0.0001]  # likewise: 0.0003 is the ADR's, 0.0001 is not named by it (ruled by the lead on 2026-11-18; to be recorded in ADR-0024's rulings)
 extensions_max = 2             # at most twice per unit in total, across both selections
 provisional_readout = { "2048" = 8192, "8192" = 8192, "32768" = 16384 }   # rows -> updates (P10-S1's U_P values)
 loaded_readout = 65536

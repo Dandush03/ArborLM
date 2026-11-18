@@ -27,7 +27,9 @@ U0 = {"2K/256": 98304, "8K/1K": 131072, "32K/4K": 131072}
 # by hand (five replicates): not-ladder cells run 6 U_P (49,152 at rows 2,048 and 8,192, 98,304 at row 32,768), R2 runs U_P.
 #   F-OQ, T-OQ, H8 at the five not-ladder cells: 4 x 49,152 + 98,304 = 294,912 each; D-OQ at four: 3 x 49,152 + 98,304 = 245,760; R2: 8,192 + 8,192 + 16,384 = 32,768
 NOT_LADDER_PER_REPLICATE = 3 * 294_912 + 245_760 + 32_768  # 1,163,264
-BASE_UPDATES = 5 * (NOT_LADDER_PER_REPLICATE + 2 * 4 * 131_072 + 98_304)  # ladder cells at U0: 8K/1K and 32K/4K carry four arms each, 2K/256 one arm: 11,550,720
+ONE_REPLICATE = NOT_LADDER_PER_REPLICATE + 2 * 4 * 131_072 + 98_304  # ladder cells at U0: 8K/1K and 32K/4K carry four arms each, 2K/256 one arm: 2,310,144
+BASE_UPDATES = 5 * ONE_REPLICATE  # 11,550,720
+BASE_ALL = BASE_UPDATES + ONE_REPLICATE  # plus the COUNTING REHEARSAL (section 17.1): every stage of one replicate on the rehearsal draw: 13,860,864
 
 
 def test_base_plan_updates_by_hand() -> None:
@@ -48,7 +50,7 @@ def test_budget_formula_and_makespan() -> None:
 
 def test_levels_granted_to_whole_cells_in_the_fixed_order_and_closed_cells_get_no_later_level() -> None:
     # H_c = 4 -> B = 32 h on the TOTAL (the hours already charged count). Rate chosen so that the base plan's remaining work is 26 h (total 30 h): r = 26 x 3600 / 11,550,720 s per update.
-    r = 26 * 3600 / BASE_UPDATES
+    r = 26 * 3600 / BASE_ALL
     out = budget.grant_levels(cells(U0), rates(r), 4.0)
     assert out["refused"] is False and out["budget_B_hours"] == 32.0 and abs(out["base_total_hours"] - 30.0) < 1e-9
     # by hand, in the fixed order (levels j = 1..4, cells 2K/256, 8K/1K, 32K/4K within a level), U0 = 98,304 / 131,072 / 131,072, five replicates:
@@ -59,10 +61,10 @@ def test_levels_granted_to_whole_cells_in_the_fixed_order_and_closed_cells_get_n
     assert out["grants"] == {"2K/256": 262144, "8K/1K": 131072, "32K/4K": 131072}
     assert [(x["level"], x["cell"], x["granted"]) for x in out["levels_considered"]] == [(1, "2K/256", True), (1, "8K/1K", False), (1, "32K/4K", False), (2, "2K/256", True), (3, "2K/256", True), (4, "2K/256", False)]
     assert out["closed"] == [{"cell": "8K/1K", "at_level": 1}, {"cell": "32K/4K", "at_level": 1}, {"cell": "2K/256", "at_level": 4}]  # a closed cell is not considered again at levels 2 to 4
-    assert abs(out["total_hours"] - (30.0 + 819_200 * r / 3600.0)) < 1e-6 and out["total_hours"] <= 32.0
+    assert abs(out["total_hours"] - (30.0 + 1.2 * 819_200 * r / 3600.0)) < 1e-6  # five replicates plus the counting rehearsal's one: 6/5 of the extra updates and out["total_hours"] <= 32.0
     assert out["bound_at_4_u0_printed"] == {"2K/256": 393216, "8K/1K": 524288, "32K/4K": 524288}  # the projection's assumption is U0, with 4 x U0 printed beside it
     # a bigger budget grants more, in the same order: level 1 for all three cells comes before any level 2
-    r_small = 10 * 3600 / BASE_UPDATES
+    r_small = 10 * 3600 / BASE_ALL
     big = budget.grant_levels(cells(U0), rates(r_small), 20.0)
     assert [(x["level"], x["cell"]) for x in big["levels_considered"][:3]] == [(1, "2K/256"), (1, "8K/1K"), (1, "32K/4K")] and all(x["granted"] for x in big["levels_considered"][:3])
     assert big["grants"]["8K/1K"] >= 196608 and big["grants"]["32K/4K"] >= 196608
@@ -87,10 +89,10 @@ def test_u0_of_p10s1_form_and_of_the_power_of_two_form() -> None:
 
 
 def test_base_plan_above_the_budget_is_refused() -> None:
-    r = 28.5 * 3600 / BASE_UPDATES  # remaining 28.5 h + 4 h charged = 32.5 h against B = 32 h
+    r = 28.5 * 3600 / BASE_ALL  # remaining 28.5 h + 4 h charged = 32.5 h against B = 32 h
     out = budget.grant_levels(cells(U0), rates(r), 4.0)
     assert out["refused"] is True and out["status"] == "BASE PLAN ABOVE BUDGET" and abs(out["total_hours"] - 32.5) < 1e-9 and out["grants"] == U0 and not out["levels_considered"]
-    assert budget.grant_levels(cells(U0), rates(27.9 * 3600 / BASE_UPDATES), 4.0)["refused"] is False  # 31.9 h fits
+    assert budget.grant_levels(cells(U0), rates(27.9 * 3600 / BASE_ALL), 4.0)["refused"] is False  # 31.9 h fits
 
 
 def test_a_long_item_sets_the_makespan_and_can_close_a_cell() -> None:
@@ -104,8 +106,9 @@ def test_a_long_item_sets_the_makespan_and_can_close_a_cell() -> None:
     # with a tolerable long item the cell is closed at level 1 although the rest of the budget has room
     tr[("T-OQ", 4096)] = 0.2  # one T-OQ item at G is G x 0.2 s: 131,072 -> 7.3 h, 196,608 -> 10.9 h, 262,144 -> 14.6 h, 393,216 -> 21.8 h, 524,288 -> 29.1 h; the other cells add far less on the other five workers
     out = budget.grant_levels(cells(U0), budget.Rates(tr, {k: 0.0 for k in RATES_ALL}, 1.0, {}, 6), 4.0)
-    # total = 4 h charged + the longest item: 4 + 21.8 = 25.8 h <= 32 (level 3, 393,216, granted); 4 + 29.1 = 33.1 h > 32: 32K/4K is closed at level 4
-    assert out["refused"] is False and out["grants"]["32K/4K"] == 393216 and {"cell": "32K/4K", "at_level": 4} in out["closed"]
+    # the longest item is run twice in sequence (the registered training stage, then the counting rehearsal's one replicate): total = 4 h charged + 2 x the item: level 1 (196,608): 4 + 21.8 = 25.8 h <= 32, granted;
+    # level 2 (262,144): 4 + 29.1 = 33.1 h > 32: 32K/4K is closed at level 2 and keeps 196,608. 8K/1K (no long item) is not limited by it
+    assert out["refused"] is False and out["grants"]["32K/4K"] == 196608 and {"cell": "32K/4K", "at_level": 2} in out["closed"]
 
 
 def test_evaluation_and_fixed_stages_enter_the_projection() -> None:
@@ -113,7 +116,9 @@ def test_evaluation_and_fixed_stages_enter_the_projection() -> None:
     r = rates(0.0, workers=1, evaluate=2.0, fixed=100.0)
     p = budget.project(cs, U0, r)
     snaps = sum(sum(1 for u in c["snapshots"] if u <= (U0[core.cell_name(c["facts"], c["slots"])] if c["ladder_cell"] else c["run"])) for c in cs)
-    assert p["evaluate_seconds"] == 2.0 * snaps and p["fixed_seconds"] == 100.0 and p["remaining_seconds"] == 2.0 * snaps + 100.0
+    first = [c for c in cs if c["draw"] == 1]  # the counting rehearsal evaluates the snapshots of one replicate
+    snaps1 = sum(sum(1 for u in c["snapshots"] if u <= (U0[core.cell_name(c["facts"], c["slots"])] if c["ladder_cell"] else c["run"])) for c in first)
+    assert p["evaluate_seconds"] == 2.0 * snaps and p["fixed_seconds"] == 100.0 and p["counting_rehearsal_seconds"] == 2.0 * snaps1 and p["remaining_seconds"] == 2.0 * snaps + 2.0 * snaps1 + 100.0
     assert budget.Rates({}, {}, 1.0, {}, 1).contention == 1.0
     with pytest.raises(ValueError):
         budget.Rates({}, {}, 0.5, {}, 1)  # the contention ratio is at least 1

@@ -235,6 +235,10 @@ def run_calibration(engine: Engine, cfg: Mapping[str, Any] | None = None) -> Cal
             cal.rates[unit] = float(sel["rate"])
         return sel
 
+    grid0 = [float(x) for x in c["rates"]["grid"]]
+    pre = getattr(engine, "prefetch", None)  # an engine with a worker pool runs the independent (unit, rate, draw) runs of a phase together; the arithmetic of every run is unchanged
+    if pre is not None:
+        pre([(unit, r, prov[core.unit_row(unit, c)]) for unit in plain for r in grid0])
     for unit in plain:  # (1) provisional readouts
         do(unit, prov[core.unit_row(unit, c)])
     if cal.returns_to_lead:
@@ -256,23 +260,30 @@ def run_calibration(engine: Engine, cfg: Mapping[str, Any] | None = None) -> Cal
         u_p = int(cal.row_u_p[row] or 0)
         if u_p == prov[row]:
             continue
+        if pre is not None:
+            pre([(unit, r, u_p) for unit in plain if core.unit_row(unit, c) == row for r in states[unit]["grid"]])
         for unit in plain:
             if core.unit_row(unit, c) == row:
                 do(unit, u_p)
     if cal.returns_to_lead:
         return cal
+    if pre is not None:
+        pre([(unit, r, int(c["rates"]["loaded_readout"])) for unit in loaded for r in grid0])
     for unit in loaded:  # (4) the loaded-cell units, last, at 65,536
         do(unit, int(c["rates"]["loaded_readout"]))
     if cal.returns_to_lead:
         return cal
     sat256 = True
+    batch = getattr(engine, "ladder_batch", None)
+    reqs = [(core.cell_name(f, n), arm, cal.rates[f"{arm}|{core.cell_name(f, n)}"], ladder_ceiling(core.cell_name(f, n), c)) for f, n in core.ladder_cells(c) for arm in (("F-OQ",) if (f, n) == core.saturation_only_cell(c) else ("F-OQ", "T-OQ"))]
+    got = batch(reqs) if batch is not None else {(nm, arm): engine.ladder_views(nm, arm, rt, ce) for nm, arm, rt, ce in reqs}
     for f, n in core.ladder_cells(c):
         name = core.cell_name(f, n)
         ceiling = ladder_ceiling(name, c)
-        foq_len = arm_calibrated_length(engine.ladder_views(name, "F-OQ", cal.rates[f"F-OQ|{name}"], ceiling), ceiling, c)
+        foq_len = arm_calibrated_length(got[(name, "F-OQ")], ceiling, c)
         toq_len = None
         if (f, n) != core.saturation_only_cell(c):
-            toq_len = arm_calibrated_length(engine.ladder_views(name, "T-OQ", cal.rates[f"T-OQ|{name}"], ceiling), ceiling, c)
+            toq_len = arm_calibrated_length(got[(name, "T-OQ")], ceiling, c)
         out = cell_outcome(name, foq_len, toq_len, c)
         out.update(foq_length=foq_len, toq_length=toq_len, ceiling=ceiling)
         cal.ladder[name] = out

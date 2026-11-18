@@ -6,9 +6,7 @@ import argparse
 import json
 import subprocess
 import sys
-from collections.abc import Mapping
 from pathlib import Path
-from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -118,7 +116,7 @@ def test_engine_measures_on_calibration_seeds_continues_runs_and_seals_records(t
     assert isinstance(r.readout_a_use, float) and set(r.walk) == {8, 4, 2, 1} and isinstance(r.diverged, bool)
     sd = ctx.run_dir
     cells = list((sd / "train" / "cells").iterdir())
-    assert len(cells) == 2 and all("_CAL_" in c.name or c.name.startswith("P_") or "CAL" in c.name for c in cells) and not any(c.name.startswith("TEST_") for c in cells)
+    assert len(cells) == 2 and all(c.name.startswith("CAL_") for c in cells) and not any(c.name.startswith("TEST_") for c in cells)
     # the same (cell, rate, draw) at a later readout CONTINUES the run (a segment from the optimizer snapshot), it is not restarted
     eng.measure("F-OQ|1024", 0.003, 32)
     rec = json.loads(next(iter((sd / "train" / "cells").iterdir())).joinpath("cell_train.json").read_text())
@@ -166,6 +164,3 @@ def test_logit_watch_covers_every_logit_and_stops_on_a_non_finite_one(tmp_path: 
         with items.LogitWatch(model):
             pass
 
-
-def _unused(_: Mapping[str, Any]) -> None:
-    return None

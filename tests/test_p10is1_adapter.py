@@ -218,11 +218,22 @@ def test_evaluation_runs_under_no_grad_and_bounded_memory(tmp_path: Path) -> Non
     import resource
 
     before = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    with torch.enable_grad():
-        items.evaluate_snapshot(ctx, spec, 4, data=data, seeds=seeds)
+    modes: list[bool] = []
+    real = items.s1eval.evaluate_readout
+
+    def spy(*a: Any, **k: Any) -> Any:  # calls through: records whether autograd was enabled while P10-S1's evaluation ran
+        modes.append(torch.is_grad_enabled())
+        return real(*a, **k)
+
+    items.s1eval.evaluate_readout = spy  # type: ignore[assignment]
+    try:
+        with torch.enable_grad():
+            items.evaluate_snapshot(ctx, spec, 4, data=data, seeds=seeds)
+    finally:
+        items.s1eval.evaluate_readout = real  # type: ignore[assignment]
+    assert modes == [False] and torch.is_grad_enabled()  # evaluation ran under no_grad and the caller's mode is restored
     after = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     assert (after - before) < 3 * 1024**3  # a tiny model must not grow the process by gigabytes (ru_maxrss is bytes on darwin, kilobytes on linux: the bound holds on both)
-    assert not torch.is_grad_enabled() or True
 
 
 # --- the ladder decision (the whole cell's stop rule) ----------------------------------------------------------------------------------------------------

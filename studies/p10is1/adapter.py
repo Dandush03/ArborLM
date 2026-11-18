@@ -36,6 +36,10 @@ class NonFinite(RuntimeError):
         self.update = update
 
 
+class CellFailedBefore(RuntimeError):
+    """The cell has a failed record (FAILED — NON-FINITE): it is kept and not re-run (ADR-0024 section 14). It is a recorded cell state, never an item error."""
+
+
 def cell_dir(run_dir: Path, label: str, group: str = "train") -> Path:
     return run_dir / group / "cells" / label
 
@@ -146,7 +150,7 @@ def train_to(data: Any, seeds: Any, backbone: Any, run_dir: Path, spec: Mapping[
     The cumulative record ``cell_train.json`` is rewritten after each segment. A cell with ``cell_failed.json`` is kept and not re-run (section 14). A segment that is already complete is not recomputed."""
     out = cell_dir(run_dir, spec["label"], group)
     if (out / FAILED_RECORD).is_file():
-        raise RuntimeError(f"{spec['label']} failed before and is kept, not re-run (section 14)")
+        raise CellFailedBefore(f"{spec['label']} failed before and is kept, not re-run (section 14)")
     assert_seed_allowed(mode, spec, cfg)
     cell = cell_of(spec, mode)
     have = completed_snapshots(out)

@@ -127,7 +127,7 @@ def test_the_code_has_no_path_that_writes_a_not_measured_decision() -> None:
     assert "decision_path(" in src
     for line in src.splitlines():
         if "decision_path" in line:
-            assert "write" not in line.lower().replace("def decision_path", "") or "read_json" in line  # the decision file is only ever read here
+            assert not any(w in line for w in ("write_text", "write_record", "write_json", "open(", ".mkdir")), line  # the decision file is only ever read here
     stages = Path(__file__).resolve().parents[1] / "studies" / "p10is1"
     for f in stages.glob("*.py"):
         text = f.read_text(encoding="utf-8")

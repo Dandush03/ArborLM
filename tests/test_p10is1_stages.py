@@ -3,6 +3,7 @@
 freeze refuses every missing precondition, every stage derives its items from the plan only (the throughput stage lists no cell the plan does not run), gate G9 passes with its extended copy of the registry's checker, the
 R2 qualification table, and the tiny synthetic pipeline end to end (training in segments, the whole-cell ladder with no per-arm early stop, evaluation, baselines, timing, throughput) with test seeds only. Self-check only."""
 
+import argparse
 import json
 import shutil
 import subprocess
@@ -14,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402
 
-from arborlm.io import read_json  # noqa: E402
+from arborlm.io import file_sha256, read_json  # noqa: E402
 from studies.p10is1 import (  # noqa: E402
     analysis,
     core,
@@ -174,33 +175,96 @@ def test_freeze_refuses_each_missing_precondition(tmp_path: Path) -> None:
         freeze.cmd_freeze(fargs)
 
 
-def test_freeze_with_nonprovisional_caps_needs_the_counting_rehearsal_of_this_exact_file(tmp_path: Path) -> None:
-    import argparse
+RATES_ALL = [(arm, n) for arm in core.ARMS for n in (256, 1024, 4096, 16384, 32768)]
 
-    repo = mini_repo(tmp_path)
-    cfgp = repo / core.CONFIG
-    cfgp.write_text(cfgp.read_text().replace("provisional = true", "provisional = false"))  # the lead sets the caps and clears the flag after the measuring rehearsal
-    run = tmp_path / "run"
+
+def projected_candidate(tmp: Path, *, projection: bool = True, over_budget: bool = False, config_caps: dict[str, float] | None = None) -> tuple[Path, Path]:
+    """A mini repository whose candidate plan carries a real projection (``budget.grant_levels`` on planted rates, H_c = 4 h) and whose config caps are what the projection's rule gives (or ``config_caps``)."""
+    import re
+
+    from studies.p10is1 import budget
+
+    repo = mini_repo(tmp)
+    run = tmp / "run"
     seed_manifests(run)
-    cal = tmp_path / "cal.json"
+    cal = tmp / "cal.json"
     cal.write_text(json.dumps(CAL))
-    freeze.cmd_candidate_plan(candidate_args(repo, run, cal))
-    plan_sha = planmod.Plan.load(repo / core.PLAN).data and __import__("arborlm.io", fromlist=["file_sha256"]).file_sha256(repo / core.PLAN)
-    rehearsal_path = tmp_path / "rehearsal.json"
-    fargs = argparse.Namespace(repo=str(repo), rehearsal=str(rehearsal_path))
-    core.write_record(rehearsal_path, {**core.envelope("rehearsal"), "caps_provisional": True, "stages": {s: {"status": "COMPLETE"} for s in freeze.REHEARSAL_STAGES}, "candidate": {"status": "COMPLETE", "plan_file_sha256": plan_sha}})
+    cfgp = repo / core.CONFIG
+    cfg = core.load_config(cfgp)
+    cells = core.planned_cells(freeze.params_from_calibration(CAL), core.REGISTERED, cfg)
+    r = (30 if over_budget else 5) * 3600 * 6 / sum(c["run"] if not c["ladder_cell"] else c["u0"] for c in cells)
+    rates = budget.Rates({k: r for k in RATES_ALL}, {k: 0.0 for k in RATES_ALL}, 1.0, {"gates": 60.0}, 6)
+    proj = budget.grant_levels(cells, rates, 4.0, cfg)
+    caps = budget.caps_from_projection(4.0, proj["stage_hours"], cfg) if not proj["refused"] else None
+    if caps:
+        proj["caps"] = caps
+    text = cfgp.read_text().replace("provisional = true", "provisional = false")
+    want = config_caps or ({"total_hours": caps["total_cap_hours"], "train_hours": caps["stage_cap_hours"]["train"], "evaluate_hours": caps["stage_cap_hours"]["evaluate"]} if caps else {})
+    for k, v in want.items():
+        text = re.sub(rf"^{k} = .*$", f"{k} = {v}", text, flags=re.M)
+    cfgp.write_text(text)
+    pj = tmp / "projection.json"
+    pj.write_text(json.dumps(core.jsonable(proj)))
+    freeze.cmd_candidate_plan(candidate_args(repo, run, cal, projection=str(pj) if projection else None))
+    return repo, tmp / "rehearsal.json"
+
+
+def rehearsal_record(path: Path, repo: Path, *, table: bool = True, stage_missing: bool = False, other_hash: str | None = None) -> argparse.Namespace:
+    sha = other_hash or file_sha256(repo / core.PLAN)
+    stages_ = freeze.REHEARSAL_STAGES[:-1] if stage_missing else freeze.REHEARSAL_STAGES
+    q = {str(r): {"0.5": ["a", "b", "c"]} for r in (2048, 8192, 32768)} if table else {}
+    core.write_record(path, {**core.envelope("rehearsal"), "caps_provisional": False, "stages": {s: {"status": "COMPLETE"} for s in stages_}, "candidate": {"status": "COMPLETE", "plan_file_sha256": sha}, "qualification": q}, overwrite=True)
+    return argparse.Namespace(repo=str(repo), rehearsal=str(path))
+
+
+def test_freeze_requires_the_projection_its_grants_its_caps_and_the_block_budget(tmp_path: Path) -> None:
+    # no projection: every loaded cell granted 4 x U0 and caps of 500 h used to freeze; now refused
+    repo, rpath = projected_candidate(tmp_path / "a", projection=False, config_caps={"total_hours": 500.0})
+    with pytest.raises(core.StageRefused, match="carries no projection"):
+        freeze.cmd_freeze(rehearsal_record(rpath, repo))
+    # a projection whose base plan is above the budget: refused by the freeze, the work returns to the human lead
+    repo2, rpath2 = projected_candidate(tmp_path / "b", over_budget=True)
+    with pytest.raises(core.StageRefused, match="BASE PLAN ABOVE BUDGET"):
+        freeze.cmd_freeze(rehearsal_record(rpath2, repo2))
+    # grants that differ from the plan's granted lengths
+    repo3, rpath3 = projected_candidate(tmp_path / "c")
+    data = read_json(repo3 / core.PLAN)
+    data["projection"]["grants"]["8K/1K"] = int(data["projection"]["grants"]["8K/1K"]) * 2
+    (repo3 / core.PLAN).write_text(json.dumps(data))
+    with pytest.raises(core.StageRefused, match="granted lengths differ from the projection"):
+        freeze.cmd_freeze(rehearsal_record(rpath3, repo3))
+    # config caps of 500 h that are not the caps the projection's rule gives
+    repo4, rpath4 = projected_candidate(tmp_path / "d", config_caps={"total_hours": 500.0, "train_hours": 30.0, "evaluate_hours": 4.0})
+    with pytest.raises(core.StageRefused, match="are not the caps the projection's rule gives"):
+        freeze.cmd_freeze(rehearsal_record(rpath4, repo4))
+    # a projection whose total cap is above the 60 h block budget is the human lead's own decision
+    repo5, rpath5 = projected_candidate(tmp_path / "e")
+    data5 = read_json(repo5 / core.PLAN)
+    data5["projection"]["caps"]["total_above_limit"] = True
+    (repo5 / core.PLAN).write_text(json.dumps(data5))
+    with pytest.raises(core.StageRefused, match="above the block budget"):
+        freeze.cmd_freeze(rehearsal_record(rpath5, repo5))
+
+
+def test_freeze_needs_the_r2_qualification_table_and_the_counting_rehearsal_of_this_exact_file(tmp_path: Path) -> None:
+    repo, rpath = projected_candidate(tmp_path)
+    with pytest.raises(core.StageRefused, match="no R2 qualification table"):
+        freeze.cmd_freeze(rehearsal_record(rpath, repo, table=False))  # an absent table would silently qualify every condition
+    with pytest.raises(core.StageRefused, match="every stage COMPLETE"):
+        freeze.cmd_freeze(rehearsal_record(rpath, repo, stage_missing=True))
+    with pytest.raises(core.StageRefused, match="every stage COMPLETE"):
+        freeze.cmd_freeze(rehearsal_record(rpath, repo, other_hash="0" * 64))  # another plan file was rehearsed
+    core.write_record(rpath, {**core.envelope("rehearsal"), "caps_provisional": True, "stages": {}, "candidate": {}, "qualification": {"2048": {"1": ["a"]}, "8192": {"1": ["a"]}, "32768": {"1": ["a"]}}}, overwrite=True)
     with pytest.raises(core.StageRefused, match="made on provisional caps"):
-        freeze.cmd_freeze(fargs)
-    core.write_record(rehearsal_path, {**core.envelope("rehearsal"), "caps_provisional": False, "stages": {s: {"status": "COMPLETE"} for s in freeze.REHEARSAL_STAGES[:-1]}, "candidate": {"status": "COMPLETE", "plan_file_sha256": plan_sha}}, overwrite=True)
-    with pytest.raises(core.StageRefused, match="every stage COMPLETE"):
-        freeze.cmd_freeze(fargs)  # a stage missing
-    core.write_record(rehearsal_path, {**core.envelope("rehearsal"), "caps_provisional": False, "stages": {s: {"status": "COMPLETE"} for s in freeze.REHEARSAL_STAGES}, "candidate": {"status": "COMPLETE", "plan_file_sha256": "0" * 64}}, overwrite=True)
-    with pytest.raises(core.StageRefused, match="every stage COMPLETE"):
-        freeze.cmd_freeze(fargs)  # another plan file was rehearsed
+        freeze.cmd_freeze(argparse.Namespace(repo=str(repo), rehearsal=str(rpath)))
+    # everything else holds: the freeze reaches gate G9 (a throw-away repository has no registry checker), which proves no earlier check refused
+    with pytest.raises(core.StageRefused, match="gate G9"):
+        freeze.cmd_freeze(rehearsal_record(rpath, repo))
     # the re-derivation catches a change of code after the plan was written
     (repo / "studies/p10is1/core.py").write_text((repo / "studies/p10is1/core.py").read_text() + "\n# changed after the plan\n")
     with pytest.raises(core.StageRefused, match="differs from a re-derivation"):
-        freeze.cmd_freeze(fargs)
+        freeze.cmd_freeze(rehearsal_record(rpath, repo))
+
 
 
 # --- items from the plan only ------------------------------------------------------------------------------------------------------------------------
