@@ -7,13 +7,18 @@ The stage ``outputs`` died on the first real run with ``'QPartition' object has 
 import json
 import sys
 from pathlib import Path
-from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import pytest  # noqa: E402
-from p10is2_fixtures import SMALL_SIZES, lex_teachers, small_cfg, small_corpus, stub_student  # noqa: E402
+from p10is2_fixtures import (  # noqa: E402
+    SMALL_SIZES,
+    lex_teachers,
+    small_cfg,
+    small_corpus,
+    stub_student,
+)
 from p10is2_fixtures import test_gen as tgen  # noqa: E402
 
 from studies.p10is2.common import core  # noqa: E402
