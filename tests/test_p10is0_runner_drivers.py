@@ -201,8 +201,7 @@ def test_timing_attempt_not_quiet_is_kept_and_nothing_runs(tmp_path: Path, monke
     from studies.p10is0 import accounting
 
     repo = REPO
-    run_dir = REPO / "experiments" / "_scratch" / "timing_quiet_test"
-    shutil.rmtree(run_dir, ignore_errors=True)
+    run_dir = tmp_path / "timing_quiet_test"
     ctx = drivers.Ctx(repo, run_dir, registered=False)
     monkeypatch.setattr(accounting, "quiet_check", lambda cfg=None: {"quiet": False, "samples": [3.0], "max_sample": 3.0, "limit": 2.0, "other_processes": [], "reasons": ["a load-average sample above 2.0"]})
     r = drivers.cmd_timing(ctx, 1.0)
@@ -213,4 +212,3 @@ def test_timing_attempt_not_quiet_is_kept_and_nothing_runs(tmp_path: Path, monke
     assert r["decision"] == accounting.PAUSED_NOT_QUIET and r["attempts"] == 3
     att = core.jsonable(__import__("json").loads((run_dir / "timing" / "attempts.json").read_text()))
     assert len(att["attempts"]) == 3 and datetime.fromisoformat(att["first_started"]) <= datetime.now(UTC)
-    shutil.rmtree(run_dir, ignore_errors=True)

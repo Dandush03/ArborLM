@@ -26,7 +26,15 @@ def test_synthetic_pipeline_rehearsal_runs_every_stage(tmp_path: Path) -> None:
     fr = core.read_record(copy / core.FREEZE_RECORD, "freeze_record")
     assert "studies/p10is0/freeze/durations.json" in fr["inputs"] and fr["seed_gate"]["named_spare_values"]["initialisation"][0] == 330061
     # Stage R's measurements are sealed (hashed, access-logged) and the ledger and run files are outside the tracked tree
-    assert len(list((rd / "sealed").glob("*.json"))) > 0 and (rd / "P10IS0-ledger.json").is_file()
+    sealed_store = Path(rec["sealed_dir"])
+    assert len(list((sealed_store / "sealed").glob("*.json"))) > 0 and list((sealed_store / "sealed").glob("cal/*/updates_*.jsonl")) and (rd / "P10IS0-ledger.json").is_file()
+    assert not (rd / "sealed").exists() and not (rd / "cal").exists()  # B1: nothing of Stage R in the run directory
+    # B3: no per-cell-type Stage R decision or measurement is anywhere in the run directory or in a task or manifest file
+    for f in rd.rglob("*"):
+        if f.is_file() and f.suffix in (".json", ".log", ".jsonl", ".md"):
+            text = f.read_text(errors="ignore")
+            assert not any(w in text for w in ("CANDIDATE", "NON_FINITE", "task_loss", "distinct_top1", '"e_star"')), f
+    assert core.read_record(copy / core.DURATIONS, "durations")["attempt"] == 0 and (rd / "sealed_location.json").is_file()
     caps = core.read_record(copy / core.STAGE_CAPS, "stage_caps")
     assert caps["provisional"] is False and caps["total_hours"] > 0
     # X8 was exercised through a forced gate in this synthetic run only; its addendum is in the run directory, never in the worktree

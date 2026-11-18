@@ -9,8 +9,7 @@ The auditor writes an independent reference. Bit-exact assertions are made on th
 
 Recorded for the auditor (implementer's observation, not a result): with L_div written as exp-sum the reference differed from the trainer by 8.4e-6 in ONE element of ``wq`` at 8,192 slots (A5-D). Cause: AdamW's first step is
 lr * g / (|g| + 1e-8), which is about lr * sign(g) for |g| above eps and has slope about lr / (4 eps) = 75,000 per unit of g near |g| = eps, so a float32 difference of 1e-10 in a gradient entry near eps becomes up to 7.5e-6 in the
-parameter. The tolerance stays 1e-6 and the reference reproduces float32 operation order (``torch.logsumexp``, ``F.cross_entropy``), after which the worst difference is 7e-9. The reference uses the model's own forward (an independent
-forward of the memory read is not written here) and checks selection by a brute-force top-8; loss, L_div, clip and AdamW are written from their definitions. P10-S0's own A6 records carry no read swap: this study computes a_use for A6
+parameter. The tolerance stays 1e-6 and the reference reproduces float32 operation order (``torch.logsumexp``, ``F.cross_entropy``), after which the worst difference is 7e-9. The reference now has its OWN forward of the memory read (R9; the frozen backbone modules and the oracle code table are re-used, see ``reference_update``) and checks selection by a brute-force top-8. P10-S0's own A6 records carry no read swap: this study computes a_use for A6
 (``reference_swap``) because Stage R's reference validity reads condition 6 on A6; the identity gate ignores that key.
 """
 
@@ -116,45 +115,65 @@ def identity_part_a(
 
 
 # --- part (b): a reference written from the definitions --------------------------------------------------------------------------------------------------
-def reference_update(model: Any, tokens: torch.Tensor, arm: str) -> dict[str, Any]:
-    """One AdamW update computed directly in float32 from the definitions, on a model that is not touched: the alphabet loss, L_div for A5-D, the clip at 1.0 and the first AdamW step (lr 0.003, betas 0.9 and 0.999, eps 1e-8, no weight
-    decay). Returns the loss(es) and the new value of every trainable parameter. The forward is the model's own."""
-    from studies.p9.core import ALPHABET
+def _normalize(x: torch.Tensor) -> torch.Tensor:
+    return x / x.norm(dim=-1, keepdim=True).clamp_min(1e-8)
 
-    sites = p9iimodel.SITES
-    memory = model.addition
-    params = [p for _, p in model.trainable()]
-    for p in params:
-        p.grad = None
-    if arm == "A5-D":
-        memory.keep_query = True
-    try:
-        logits, _ = model(tokens[:, :-1])
-    finally:
-        memory.keep_query = False
-    inside = logits[:, sites][..., torch.tensor(ALPHABET)]
-    targets = tokens[:, 1:][:, sites] - int(min(ALPHABET))
-    answer = torch.nn.functional.cross_entropy(inside.reshape(-1, 32), targets.reshape(-1))
+
+def reference_update(model: Any, tokens: torch.Tensor, arm: str) -> dict[str, Any]:
+    """One AdamW update computed directly in float32 from the definitions, on a model that is not touched, with its OWN forward (R9). Re-used, not re-written: the frozen backbone modules (token and position embeddings, block 0 and block 1,
+    the final norm, the causal mask: frozen P4 code, not under test), the training batch, the initial parameter VALUES of the model (copied as plain tensors) and ``studies.p9.model.unit_code`` (the oracle code table of A6 is a fixed hash, part
+    of the data definition). Written here: the window features, the W7 query and its normalisation, cosine keys, top-8 with ties by slot id through a full stable sort, softmax at temperature 0.2, the value read, the output projection and
+    gate, the insertion at the answer sites, the alphabet cross-entropy, L_div, the gradients (autograd on this graph), the global-norm clip and the first AdamW step. The architecture of the memory read is written from ADR-0019 section 3,
+    so a defect in the model's own read would show as a difference."""
+    from studies.p9 import core as p9core
+    from studies.p9.model import unit_code
+
+    sites = list(p9core.ANSWER_SITE_POSITIONS)
+    alpha0 = int(p9core.ALPHABET[0])
+    bb = model.backbone
+    pars = {n: p.detach().clone().requires_grad_(True) for n, p in model.trainable()}
+    inp = tokens[:, :-1]
+    length = inp.shape[1]
+    with torch.no_grad():
+        h = bb.token(inp) + bb.position(torch.arange(length))
+        h = bb.blocks[0](h, bb.mask[:length, :length])
+    pre = {n.split(".")[-1]: v for n, v in pars.items()}
+    if arm == "A6":
+        sym = (inp[:, [8 * r + 1 + i for r in range(8) for i in range(4)]].reshape(-1, 8, 4) - alpha0) & 31
+        codes = (sym * torch.tensor([1, 32, 1024, 32768])).sum(-1)
+        q = torch.tensor([[unit_code(model.addition.r1_seed, int(c), 16) for c in row] for row in codes.tolist()], dtype=torch.float32).reshape(-1, 16)
+    else:
+        feats = torch.stack([torch.cat([h[:, s + o] for o in range(-6, 1)], dim=-1) for s in sites], dim=1)  # [B, 8, 224], oldest first
+        q = _normalize(feats @ pre["wq"].T).reshape(-1, 16)
+    scores = q @ _normalize(pre["keys"]).T / 0.2
+    order = torch.sort(scores.detach(), dim=-1, descending=True, stable=True).indices[:, :8]
+    w = torch.softmax(scores.gather(1, order), dim=-1)
+    read = (w[..., None] * pre["values"][order]).sum(1)
+    out = torch.sigmoid(pre["gate"]) * (read @ pre["wo"].T)
+    delta = torch.zeros(h.shape).index_put((torch.arange(h.shape[0])[:, None], torch.tensor(sites)[None, :]), out.reshape(h.shape[0], 8, -1))
+    logits = bb.final_norm(bb.blocks[1](h + delta, bb.mask[:length, :length])) @ bb.token.weight.T
+    inside = logits[:, sites][..., torch.tensor(list(p9core.ALPHABET))].reshape(-1, 32)
+    target = (tokens[:, 1:][:, sites] - alpha0).reshape(-1)
+    answer = -(inside.log_softmax(-1).gather(1, target[:, None])).mean()
     total, div = answer, None
     if arm == "A5-D":
-        q = memory.last_query
         n = q.shape[0]
         sims = 2.0 * (q @ q.T)
-        mask = ~torch.eye(n, dtype=torch.bool)
-        div = torch.logsumexp(sims[mask], dim=0) - math.log(n * (n - 1))  # log of the mean of exp over the off-diagonal pairs; the stable form of the definition (the exp-sum form differs by float noise that AdamW's first step amplifies at gradient entries near eps)
+        off = sims[~torch.eye(n, dtype=torch.bool)]
+        div = torch.logsumexp(off, dim=0) - math.log(n * (n - 1))  # log of the mean of exp over the off-diagonal pairs (the stable form of the definition)
         total = answer + 1.0 * div
-    grads = torch.autograd.grad(total, params, allow_unused=True)
-    grads = [torch.zeros_like(p) if g is None else g for p, g in zip(params, grads, strict=True)]
-    norm = torch.sqrt(sum((g.double() ** 2).sum() for g in grads)).float()
-    scale = min(1.0, 1.0 / (float(norm) + 1e-6))
-    new = []
-    for p, g in zip(params, grads, strict=True):
+    names = list(pars)
+    grads = torch.autograd.grad(total, [pars[n] for n in names], allow_unused=True)
+    grads = [torch.zeros_like(pars[n]) if g is None else g for n, g in zip(names, grads, strict=True)]
+    norm = math.sqrt(sum(float((g.double() ** 2).sum()) for g in grads))
+    scale = min(1.0, 1.0 / (norm + 1e-6))
+    new = {}
+    for n, g in zip(names, grads, strict=True):
         g = g * scale
-        m = 0.1 * g
-        v = 0.001 * g * g
-        m_hat, v_hat = m / (1 - 0.9), v / (1 - 0.999)
-        new.append((p.detach() - 0.003 * m_hat / (v_hat.sqrt() + 1e-8)).clone())
-    return {"answer_loss": float(answer), "diversity_loss": None if div is None else float(div), "new_parameters": {n: t for (n, _), t in zip(model.trainable(), new, strict=True)}}
+        mhat = (1 - 0.9) * g / (1 - 0.9)
+        vhat = (1 - 0.999) * g * g / (1 - 0.999)
+        new[n] = pars[n].detach() - 0.003 * mhat / (vhat.sqrt() + 1e-8)
+    return {"answer_loss": float(answer), "diversity_loss": None if div is None else float(div), "new_parameters": new}
 
 
 def brute_force_selection(model: Any, tokens: torch.Tensor) -> list[str]:

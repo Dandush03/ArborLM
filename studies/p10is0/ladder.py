@@ -118,7 +118,8 @@ def _stage(name: str, tasks: Sequence[float]) -> Stage:
 
 def main_grid_stage(cts: Sequence[CellType], t_assumed: Mapping[str, int], rates: Rates, draws: int = 10) -> Stage:
     """Training at each cell type's T (stage 3's seconds per update) with three evaluations per cell."""
-    tasks = [rates.train(arm, ct.slots, ct.updates(t_assumed[ct.name])) + rates.evaluate(arm, ct.slots, 3) for ct in cts for arm in ct.arms for _ in range(draws)]
+    # one task per (cell type, draw): its arms run in one process so that the draw is generated once (the longest task is the sum over the arms)
+    tasks = [sum(rates.train(arm, ct.slots, ct.updates(t_assumed[ct.name])) + rates.evaluate(arm, ct.slots, 3) for arm in ct.arms) for ct in cts for _ in range(draws)]
     return _stage("main", tasks)
 
 
@@ -208,6 +209,40 @@ def decide_extensions(
     return out
 
 
+def x8_extension_projection(ct: CellType, rates: Rates, charged_hours: float, workers: int, ladder_top: int, x8_t: int, draws: int = 10) -> float:
+    """R1, section 8 and 5.1 item 2: for X8's own extension decision P is the hours charged so far (the main grid and X8's base calibration are already in them) plus X8's REMAINING projection: the extension round and X8's cells at T =
+    ``x8_t``, summed worker-seconds over the workers plus the longest single task of each of those two stages, at stage 3's quiet rates. Nothing is counted twice."""
+    rnd = extension_round_stage(ct, rates, ladder_top)
+    cells = main_grid_stage([ct], {ct.name: x8_t}, rates, draws)
+    return charged_hours + ((rnd.total_seconds + cells.total_seconds) / workers + rnd.longest_seconds + cells.longest_seconds) / 3600.0
+
+
+def decide_x8_extension(ct: CellType, rates: Rates, charged_hours: float, cfg: Mapping[str, Any] | None = None) -> ExtensionDecision:
+    c = cfg or core.load_config()
+    p = x8_extension_projection(ct, rates, charged_hours, int(c["budget"]["workers"]), max(c["ladder"]["base"]), int(c["ladder"]["extended_ceiling_t"]))
+    b = float(c["budget"]["b_hours"])
+    return ExtensionDecision(ct.name, p <= b, p, b)
+
+
+def stage_r_makespan_hours(cts: Sequence[CellType], rates: Rates, workers: int, ladder_values: Sequence[int], facts_of: Any = None) -> float:
+    """ANALYTICAL: Stage R's wall time with one task per run and the round barrier, all runs continuing to the top of the ladder (the worst case): per round the runs' increments are list-scheduled on ``workers`` workers (longest first)
+    and the rounds add, so the time is set by the longest runs and not by the sum of the four runs of a cell type."""
+    total = 0.0
+    prev = 0
+    for e in ladder_values:
+        tasks = []
+        for ct in cts:
+            facts = facts_of(ct.facts) if facts_of else ct.facts
+            inc = core.updates_for(e, facts) - core.updates_for(prev, facts)
+            tasks += [rates.train(arm, ct.slots, inc) + rates.evaluate(arm, ct.slots) for arm in ("A5-D", "A6") for _ in (1, 2)]
+        loads = [0.0] * workers
+        for tsk in sorted(tasks, reverse=True):
+            loads[loads.index(min(loads))] += tsk
+        total += max(loads)
+        prev = e
+    return total / 3600.0
+
+
 def stage_r_cap_hours(cts: Sequence[CellType], rates: Rates, granted_rounds: Sequence[str], cfg: Mapping[str, Any] | None = None) -> float:
     """Stage R's own cap: twice the base-ladder worst case (all runs to the top of the base ladder at stage 3's rates, six workers, one evaluation per ladder point) plus twice the projection of the extension rounds granted."""
     c = cfg or core.load_config()
@@ -243,7 +278,7 @@ def reference_flags(a6_at_t: Mapping[int, labels.Obs | None], floor: float, th: 
 # --- durations.json, events, and the memory rule -----------------------------------------------------------------------------------------------------
 def durations_record(entries: Mapping[str, Mapping[str, Any]], code_identity: Mapping[str, str] | None = None) -> dict[str, Any]:
     """The ``durations.json`` record: per cell type exactly the whitelisted keys of section 5.2 (iii). Nothing else of Stage R leaves the sealed directory in clear."""
-    allowed = {"e_star", "t_exposures", "convergence", "flat_below_floor", "extension", "reference_flags", "reference_below_floor_at_t", "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels"}
+    allowed = {"e_star", "t_exposures", "convergence", "flat_below_floor", "extension", "reference_flags", "reference_flags_computed", "reference_below_floor_at_t", "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels"}
     for name, e in entries.items():
         extra = set(e) - allowed
         if extra:
@@ -279,6 +314,8 @@ def worker_count(measured_peak_bytes: int, cfg: Mapping[str, Any] | None = None)
     c = cfg or core.load_config()
     if measured_peak_bytes <= 0 or not math.isfinite(measured_peak_bytes):
         raise EngineeringStop("the measured peak per worker must be positive")
+    if measured_peak_bytes > int(c["resources"]["rss_worker_bytes"]):
+        raise EngineeringStop(f"measured peak {measured_peak_bytes} B is above the 3 GiB per-worker guard: PAUSED before it starts, an engineering stop until the human lead rules; the cell type is neither dropped nor labelled")
     n = min(int(c["budget"]["workers"]), int(c["resources"]["memory_budget_bytes"]) // int(measured_peak_bytes))
     if n < 1:
         raise EngineeringStop(f"measured peak {measured_peak_bytes} B per worker allows no worker within the memory budget: an engineering stop until the human lead rules")

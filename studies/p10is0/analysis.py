@@ -108,7 +108,7 @@ def analyse_type(ct: CellType, registry: Mapping[Key, CellRecord], entry: Mappin
     if entry.get("flat_below_floor"):
         text.append(labels.FLAT_BELOW_FLOOR)
     if flags.cond4:
-        text.append("REFERENCE ALSO FAILS CONDITION 4 (A6 H-ratio x on calibration draws)")
+        text.append("REFERENCE ALSO FAILS CONDITION 4 (A6 H-ratio {x} on calibration draws)")
     if entry.get("reference_below_floor_at_t"):
         text.append("REFERENCE BELOW FLOOR AT T")
     if entry.get("lead_saw_sealed"):
@@ -141,6 +141,7 @@ def analyse_type(ct: CellType, registry: Mapping[Key, CellRecord], entry: Mappin
         "a6_accuracy_median": core.median(a6_acc) if a6_acc else None,
         "collapse_free": labels.collapse_free([bool(registry[(ct.name, "A5-D", d)].collapse_onset) for d in draws if (ct.name, "A5-D", d) in registry and registry[(ct.name, "A5-D", d)].collapse_onset is not None]),
         "e512_readout": {"label": "P10-S0's regime on new draws; descriptive; not a replication verdict", "class": labels.arm_class(e512, th).cls if e512 else None, "successes": sum(1 for r in e512.values() if r.status == labels.SUCCEEDED)},
+        "successes": cls.successes, "evaluated_cells": cls.evaluated, "per_draw_bound": labels.per_draw_bound(cls.successes, cls.evaluated),
         "condition_6_decided": sum(1 for r in results.values() if r.failed == {6}),
         "non_finite_cells": {d: r.nonfinite_update for d, r in results.items() if r.nonfinite_update is not None},
         "convergence": {"status": conv.status, "tags": list(conv.tags), "d": {k: (float(v) if v is not None else None) for k, v in conv.d.items()}},
@@ -228,6 +229,12 @@ def analyze(
         out["l1_failure_counts_by_series"] = {s.series: dict(reports[s.cell_type].cls.condition_failures) for s in by_load[l1] if reports[s.cell_type].cls is not None}
         out["l1_line_a_beside_headline"] = {s.series: s.state.a for s in by_load[l1] if s.state.q == labels.NOT_EVALUABLE and s.state.flagged_cond4}
     at_l1 = {s.series: s.state for s in by_load[l1]} if l1 in by_load else {}
+    if l1 in by_load:
+        out["l1_which_line"] = {s.series: labels.fails_print(s.state) for s in by_load[l1] if s.state.q == labels.FAILS}  # section 7: printed at every step that has an l1 that FAILS
+    lq = head.detail.get("L_Q")
+    out["at_L_Q"] = {s.series: {"cell_type": s.cell_type, "regime": reports[s.cell_type].regime, "convergence": reports[s.cell_type].convergence.status, "tags": list(reports[s.cell_type].convergence.tags)} for s in by_load[lq]} if lq in by_load else {}
+    out["at_l1"] = {s.series: {"cell_type": s.cell_type, "regime": reports[s.cell_type].regime, "convergence": reports[s.cell_type].convergence.status, "tags": list(reports[s.cell_type].convergence.tags)} for s in by_load[l1]} if l1 in by_load else {}
+    out["ratio_above_1_definition"] = "RATIO ABOVE 1 is this study's descriptive tag: the median over evaluated draws of A5-D's mean panel accuracy over A6's exceeds 1; it enters no line (ADR-0023 section 3 says only that the label adds it)"
     pair2 = reports[next(n for n, r in reports.items() if r.ct.series == "M" and r.ct.load == 2.0)].a0
     out["annotations"] = {
         "penalty_vs_a0": {r.ct.name: (r.a0["paired"] if r.a0 else None) for r in reports.values() if r.ct.series in ("M", "X")},

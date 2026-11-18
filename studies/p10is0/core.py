@@ -48,7 +48,7 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
         "line_fail_cells", "plateau_step", "plateau_steps_required", "confirm_step", "t_factor", "paired_d", "paired_p", "reference_near_ceiling", "x8_trigger_load",
     ),
     "ladder": ("base", "extension_ceiling", "base_ceiling_t", "extended_ceiling_t", "extension_doublings"),
-    "budget": ("b_hours", "workers", "stage_cap_factor", "x8_in_projection"),
+    "budget": ("b_hours", "workers", "stage_cap_factor", "x8_in_projection", "analysis_report_hours"),
     "grid": ("cell_types",),
     "draws": ("registered", "reserve", "calibration", "checkpoint_probe_every", "checkpoint_probe_every_late", "checkpoint_probe_switch", "first_readout_exposures"),
     "seeds": (
@@ -483,8 +483,8 @@ class Ledger:
             raise ValueError(f"not a P10IS0 ledger: {self.path}")
         return list(data["entries"])
 
-    def charged(self, stage: str | None = None) -> float:
-        return float(sum(float(e["seconds"]) for e in self.entries() if stage is None or e["stage"] == stage))
+    def charged(self, stage: str | None = None, *, group: str | None = None) -> float:
+        return float(sum(float(e["seconds"]) for e in self.entries() if (stage is None or e["stage"] == stage) and (group is None or e.get("group") == group)))
 
     def remaining(self) -> float:
         return max(0.0, self.total_seconds - self.charged())
@@ -493,9 +493,9 @@ class Ledger:
         if self.remaining() <= 0:
             raise LedgerRefused(f"stage {stage}: the cap of {self.total_seconds:.0f} s is spent; the stage is PAUSED and an extension is the human lead's, on cost projections only")
 
-    def charge(self, stage: str, run: str, seconds: float) -> None:
+    def charge(self, stage: str, run: str, seconds: float, group: str | None = None) -> None:
         entries = self.entries()
-        entries.append({"stage": stage, "run": run, "seconds": max(0.0, float(seconds)), "utc": datetime.now(UTC).isoformat()})
+        entries.append({"stage": stage, "run": run, "seconds": max(0.0, float(seconds)), "utc": datetime.now(UTC).isoformat(), "group": group or stage})
         self.path.parent.mkdir(parents=True, exist_ok=True)
         write_json(self.path, {"study": STUDY, "kind": "ledger", "schema": SCHEMA, "total_seconds": self.total_seconds, "entries": entries})
 

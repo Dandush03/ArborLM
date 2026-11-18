@@ -22,14 +22,14 @@ from . import core
 
 SEALED = "sealed"
 ACCESS_LOG = "sealed_access_log.jsonl"
-ALLOWED_READERS = ("auditor-recomputation", "stage-r-code")  # the code that makes the selections (resume, plateau) reads its own measurements; no person does
+ALLOWED_READERS = ("auditor-recomputation", "stage-r-code", "report-code")  # the code that makes the selections (resume, plateau) reads its own measurements; no person does
 LABEL_SEEN = "CALIBRATION VALUES SEEN BY THE LEAD"
 
 PUBLIC_KEYS = frozenset(
     {
         "kind", "schema", "study", "stage", "round", "cell_type", "label", "arm", "calibration_draw", "slots", "facts", "exposures", "updates", "wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average",
         "shapes", "parameter_counts", "counts", "count", "status", "identity", "environment", "sha256", "path", "decision", "e_star", "t_exposures", "convergence", "flat_below_floor", "extension", "reference_flags", "reference_below_floor_at_t",
-        "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels", "cell_types", "seed_set", "workers", "tasks", "completed", "cells", "items", "run", "stages", "hashes", "ok", "passed", "reason", "files", "cond4", "other", "evaluation_wall_seconds", "code_identity", "extension_decisions", "projected_hours", "budget_hours", "granted",
+        "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels", "cell_types", "seed_set", "workers", "tasks", "completed", "cells", "items", "run", "stages", "hashes", "ok", "passed", "reason", "files", "cond4", "other", "evaluation_wall_seconds", "reference_flags_computed", "attempt", "code_identity", "extension_decisions", "projected_hours", "budget_hours", "granted",
     }
 )  # fmt: skip
 FORBIDDEN_WORDS = ("loss", "acc", "nll", "perplex", "entropy", "margin", "correct", "bits", "m_p", "m_h", "plateau_value", "curve")
@@ -73,6 +73,47 @@ def emit(obj: Mapping[str, Any]) -> None:
     print(json.dumps(core.jsonable(dict(obj)), sort_keys=True, ensure_ascii=False))
 
 
+def repo_common_root(repo: Path) -> Path | None:
+    """The main checkout of the repository (the parent of the common repository directory), or None outside a repository."""
+    import subprocess
+
+    r = subprocess.run(["git", "-C", str(repo), "rev-parse", "--git-common-dir"], capture_output=True, text=True, check=False)  # noqa: S603, S607
+    if r.returncode != 0 or not r.stdout.strip():
+        return None
+    d = Path(r.stdout.strip())
+    d = d if d.is_absolute() else (repo / d)
+    return d.resolve().parent
+
+
+def sealed_location_problems(path: Path, repo: Path | None = None) -> list[str]:
+    """B1: the sealed directory is refused inside any working tree of a repository (a resolved ancestor holding ``.git``) and anywhere under the repository's main checkout, symlinks resolved. Procedural, not an access control."""
+    resolved = path.resolve()
+    problems = []
+    for anc in [resolved, *resolved.parents]:
+        if (anc / ".git").exists():
+            problems.append(f"{resolved} is inside the working tree {anc}")
+            break
+    base = repo or core.repo_root()
+    roots = {base.resolve()}
+    common = repo_common_root(base)
+    if common is not None:
+        roots.add(common.resolve())
+    for r in roots:
+        if resolved == r or r in resolved.parents:
+            problems.append(f"{resolved} is under {r}")
+    return problems
+
+
+def disclosed_cell_types(freeze_record: Mapping[str, Any] | None, cell_type_names: Sequence[str]) -> set[str]:
+    """R12: the cell types whose sealed files the freeze record says were read by the lead (``disclosed_reads``: file names), or all of them when the seal is declared broken."""
+    if not freeze_record:
+        return set()
+    if freeze_record.get("seal_broken"):
+        return set(cell_type_names)
+    stems = {n: n.replace("/", "-") + "-" for n in cell_type_names}
+    return {n for n, s in stems.items() for f in freeze_record.get("disclosed_reads", []) if str(f).startswith(s)}
+
+
 def sealed_dir(run_dir: Path) -> Path:
     return run_dir / SEALED
 
@@ -89,7 +130,7 @@ def write_sealed(run_dir: Path, name: str, payload: Mapping[str, Any]) -> Path:
 def sealed_hashes(run_dir: Path) -> dict[str, str]:
     """SHA-256 of every sealed file (committed at the freeze); reading a hash opens the bytes for hashing only and returns no value of the record."""
     root = sealed_dir(run_dir)
-    return {p.name: file_sha256(p) for p in sorted(root.glob("*.json"))} if root.is_dir() else {}
+    return {str(p.relative_to(root)): file_sha256(p) for p in sorted(root.rglob("*")) if p.is_file()} if root.is_dir() else {}
 
 
 def log_access(run_dir: Path, who: str, what: str, why: str) -> None:

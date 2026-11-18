@@ -188,7 +188,7 @@ def seed_blind(plan: Mapping[str, Any]) -> dict[str, Any]:
 
 def scientific_content(plan: Mapping[str, Any]) -> dict[str, Any]:
     """The plan without the fields the freeze does not compare (the ADR's hash is not a field; the caps are compared by their own file)."""
-    return {k: v for k, v in plan.items() if k not in ("caps", "durations_sha256")}
+    return {k: v for k, v in plan.items() if k not in ("caps", "durations_sha256", "stage_r_projection")}
 
 
 def load_plan(path: Path) -> dict[str, Any]:

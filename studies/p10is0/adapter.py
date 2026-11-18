@@ -37,7 +37,7 @@ from studies.p9ii.train import TrainJob as P9IIJob
 from studies.p10s0 import core as s0core
 from studies.p10s0 import evaluate as s0eval
 
-from . import core
+from . import accounting, core
 from .core import Cell
 
 if TYPE_CHECKING:
@@ -181,6 +181,8 @@ def run_segment(job: Job) -> Segment:
                 diverged = {"check": found[0], "update": found[1]}
                 break
             sampled_rss = max(sampled_rss, int(process.memory_info().rss))
+            if job.write_records and update % 1024 == 0:
+                accounting.check_free(job.out_dir)  # R5: a full disk PAUSES (DiskPause is an environment condition)
             if update_log is not None:
                 update_log.write(s0core.json_line(record) + "\n")
             if diag_due(update, job.diag_early, job.diag_late, job.diag_switch):
@@ -190,6 +192,8 @@ def run_segment(job: Job) -> Segment:
             if update in marks:
                 h = save_snapshot(job.out_dir, update, model, trainer.optimizers, trainer.snapshot_extra(), write_json=False)
                 hashes[str(update)] = h["model_sha256"]
+    except accounting.DiskPause:
+        raise
     except (MemoryError, OSError) as exc:
         raise EnvironmentStop(f"{type(exc).__name__}: {exc}") from exc
     finally:

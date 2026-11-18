@@ -24,10 +24,12 @@ from . import core
 
 R2_OFFSETS = tuple(1000 * k for k in range(1, 11))
 CHECKER_SUBSTITUTIONS: tuple[tuple[str, str], ...] = (
-    ("ROOT = Path(__file__).resolve().parents[3]", "ROOT = Path({root!r})\nNAMED_SPARE_VALUES = {named!r}  # the twelve spare values of a repeated Stage R, named explicitly (ADR-0023 section 4.2)"),
+    ("ROOT = Path(__file__).resolve().parents[3]", "ROOT = Path({root!r})"),
     ('for path in sorted((ROOT / "configs").glob("*.toml")):', 'for path in [q for q in sorted((ROOT / "configs").glob("*.toml")) if q.name not in ("p10is0_overload.toml", "p10ir_routing.toml")]:'),
     ('for path in sorted((ROOT / d).rglob("*.py")):', 'for path in [q for q in sorted((ROOT / d).rglob("*.py")) if not any(x in q.name or x in q.parts for x in ("p10is0", "p10ir"))]:'),
-)
+    ('    "P10-I-S0 ADR-0023": {"registered": [330001, 330002], "calibration": [330091, 330093], "rehearsal + pipeline check": [330092], "test mode": [330098, 330099]},', '    "P10-I-S0 ADR-0023": {{"registered": [330001, 330002], "calibration": [330091, 330093], "rehearsal + pipeline check": [330092], "test mode": [330098, 330099], "repeated Stage R (ADR-0023 section 4.2)": {init}}},'),
+    ("NAMED_DATA = {\n", 'NAMED_DATA = {{\n    "P10-I-S0 ADR-0023": {{"repeated Stage R draw sets (ADR-0023 section 4.2)": {data}}},\n'),
+)  # the last two put the twelve spare values into the checker's own NAMED_INIT and NAMED_DATA tables, so the checker verifies them (R10); the first three are the own-files exclusion of ADR-0029 ruling 6
 ROW_PREFIX = {"registered": "data:", "auxiliary": "auxiliary", "calibration": "calibration", "rehearsal": "rehearsal draw", "check": "pipeline-check", "spare": "spare", "init": "init sub-row", "test": "test"}
 
 
@@ -76,12 +78,13 @@ def allocation_problems(cfg: Mapping[str, Any], rows: Sequence[tuple[str, int, i
 
 
 def checker_copy(original: str, root: Path, named: Mapping[str, Sequence[int]] | None = None) -> str:
-    named_values = {k: list(v) for k, v in (named or named_spare_values()).items()}
+    nv = {k: list(v) for k, v in (named or named_spare_values()).items()}
     out = original
     for old, new in CHECKER_SUBSTITUTIONS:
         if out.count(old) != 1:
             raise ValueError(f"the checker file does not contain the line to extend exactly once: {old!r}")
-        out = out.replace(old, new.format(root=str(root), named=named_values))
+        fmt = "{root" in new or "{init" in new or "{data" in new
+        out = out.replace(old, new.format(root=str(root), init=nv["initialisation"], data=nv["draw_sets"]) if fmt else new)
     return out
 
 

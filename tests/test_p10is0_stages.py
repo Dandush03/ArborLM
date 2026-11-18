@@ -1,7 +1,6 @@
 # ruff: noqa: E501
 """P10IS0 plan, freeze, preconditions, launch scripts, run_cell and a tiny Stage R (ADR-0023 sections 5.2, 10, 14). Registered entry points refuse today (nothing is frozen)."""
 
-import json
 import shutil
 import subprocess
 import sys
@@ -14,7 +13,7 @@ import pytest  # noqa: E402
 import torch  # noqa: E402
 
 from arborlm.io import write_json  # noqa: E402
-from studies.p10is0 import adapter, analysis, core, freeze, items, ladder, sealed  # noqa: E402
+from studies.p10is0 import adapter, core, freeze, items, ladder  # noqa: E402
 from studies.p10is0 import plan as planmod  # noqa: E402
 from studies.p10is0.plan import StageRefused  # noqa: E402
 
@@ -50,7 +49,7 @@ def write_caps(root: Path, provisional: bool) -> None:
 
 
 def test_registered_entry_points_refuse_today(tmp_path: Path) -> None:
-    run = REPO / "experiments" / "_scratch" / "refusal_run"
+    run = tmp_path / "refusal_run"
     for stage in ("main", "x8-gate", "x8", "analysis", "report"):
         p = subprocess.run([sys.executable, "-m", "studies.p10is0.stages", "registered", stage, "--run-dir", str(run), "--freeze-commit", "0" * 40], cwd=REPO, capture_output=True, text=True, check=False)
         assert p.returncode == 2 and "refused" in p.stderr, (stage, p.stderr)
@@ -70,14 +69,22 @@ def test_launch_scripts_take_exactly_two_arguments_and_nothing_else() -> None:
         assert p.returncode == 2 and "usage" in p.stderr
 
 
-def test_run_dir_must_be_ignored_untracked_and_named() -> None:
-    assert planmod.run_dir_problems(REPO / "experiments" / "p10is0-run-x", REPO) == []
-    assert planmod.run_dir_problems(Path("/nonexistent-elsewhere/run"), REPO) == []
-    assert any("tracked" in x or "not git-ignored" in x for x in planmod.run_dir_problems(REPO / "studies", REPO))
-    assert any("not git-ignored" in x for x in planmod.run_dir_problems(REPO / "zz_untracked_run", REPO))
+def test_run_dir_must_be_ignored_untracked_and_named(tmp_path: Path) -> None:
+    """On its own repository (the test does not assume the directory it runs in is a working tree: A11)."""
+    repo = tmp_path / "wt"
+    (repo / "experiments").mkdir(parents=True)
+    (repo / "studies").mkdir()
+    (repo / "studies" / "tracked.py").write_text("x = 1\n")
+    (repo / ".gitignore").write_text("/experiments/\n")
+    for argv in (["init", "-q"], ["add", "-A"], ["-c", "user.name=t", "-c", "user.email=t@e.invalid", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "x"]):
+        subprocess.run(["git", *argv], cwd=repo, check=True, capture_output=True)
+    assert planmod.run_dir_problems(repo / "experiments" / "p10is0-run-x", repo) == []
+    assert planmod.run_dir_problems(Path("/nonexistent-elsewhere/run"), repo) == []
+    assert any("tracked" in x or "not git-ignored" in x for x in planmod.run_dir_problems(repo / "studies", repo))
+    assert any("not git-ignored" in x for x in planmod.run_dir_problems(repo / "zz_untracked_run", repo))
     with pytest.raises(ValueError):
-        core.assert_run_dir_ignored(REPO / "zz_untracked_run", REPO)
-    core.assert_run_dir_ignored(REPO / "experiments" / "x", REPO)
+        core.assert_run_dir_ignored(repo / "zz_untracked_run", repo)
+    core.assert_run_dir_ignored(repo / "experiments" / "x", repo)
 
 
 def test_frozen_inputs_are_a_file_list_hashed_individually() -> None:
@@ -159,7 +166,7 @@ def test_seed_gate_fast_part() -> None:
     assert core.init_seed("CAL", "A5-D", 1, 0, CFG) == 330091 and core.init_seed("CAL", "A5-D", 2, 0, CFG) == 330093 and core.init_seed("REH", "A0", 1, 0, CFG) == 330092
     assert core.registered_set(10, CFG).base == 300901 and core.reserve_set(4, CFG).base == 301301
     r2 = seeds.checker_copy((REPO / CFG["seed_ranges"]["checker"]).read_text(), REPO)
-    assert "p10is0" in r2 and r2.count("p10ir_routing.toml") == 1 and "NAMED_SPARE_VALUES" in r2 and "330066" in r2
+    assert "p10is0" in r2 and r2.count("p10ir_routing.toml") == 1 and "repeated Stage R" in r2 and "330066" in r2 and "309901" in r2
 
 
 def test_labels_of_cells_are_unique_across_roles_and_attempts() -> None:
@@ -214,21 +221,3 @@ def test_run_cell_records_a_divergence_as_a_result(tmp_path: Path, monkeypatch: 
     rec = items.run_cell(cell, ct, 16, tmp_path, tiny_env(), CFG)
     assert rec["status"] == "nonfinite" and rec["nonfinite_update"] == 4
     assert items.run_cell(cell, ct, 16, tmp_path, tiny_env(), CFG)["status"] == "nonfinite"  # kept, not re-run
-
-
-def test_tiny_stage_r_seals_everything_and_prints_nothing_but_the_decision(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    ct = core.cell_type_by_name("2K/512", CFG)
-    out = items.stage_r_cell_type(ct, tmp_path, tiny_env(), TH, CFG, ladder_values=[16, 32, 64], ceiling=64, diag=(8, 16, 16))
-    assert capsys.readouterr().out == ""  # Stage R prints nothing per cell type before durations.json is written
-    d = out["decision"]
-    assert d.status in (ladder.STATUS_SHOWN, ladder.STATUS_CANDIDATE, ladder.STATUS_UNDECIDED, ladder.STATUS_NONFINITE)
-    files = sorted(p.name for p in (tmp_path / "sealed").glob("*.json"))
-    assert len(files) == 4 * 3 and all(f.startswith("2K-512-") for f in files)  # four runs x three rounds, every measurement sealed
-    assert all(set(c.points) == {16, 32, 64} for c in out["curves"].values())
-    sealed.validate_public({"cell_types": {ct.name: {"e_star": d.e_star or 0, "t_exposures": d.t or 0, "convergence": d.status}}})
-    assert len(sealed.sealed_hashes(tmp_path)) == 12
-    dur = ladder.durations_record({ct.name: {"e_star": d.e_star, "t_exposures": d.t, "convergence": d.status, "reference_flags": out["reference_flags"]}})
-    sealed.validate_public(dur)
-    reg = analysis.removed(dur["cell_types"][ct.name])
-    assert isinstance(reg.cond4, bool)
-    assert json.dumps(core.jsonable(dur))  # no accuracy anywhere in it

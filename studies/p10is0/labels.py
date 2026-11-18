@@ -350,8 +350,15 @@ def paired(a5d: Mapping[int, CellResult], a0: Mapping[int, CellResult], th: Thre
 
 def reference_regime(a6_mean_panel_accuracies: Sequence[float], th: Thresholds) -> str:
     """Section 6.5, from the median over draws of A6's mean panel accuracy: NEAR CEILING (>= 0.90) or DEGRADED (A6 = x)."""
-    m = median([x for x in a6_mean_panel_accuracies if math.isfinite(x)])
-    return REGIME_NEAR if m >= th.reference_near_ceiling else f"{REGIME_DEGRADED} (A6 = {m:.3f})"
+    vals = [x for x in a6_mean_panel_accuracies if math.isfinite(x)]
+    if not vals:
+        return "REFERENCE NOT MEASURED"
+    m = median(vals)
+    if m >= th.reference_near_ceiling:
+        return REGIME_NEAR
+    if m < th.a6_floor_loaded:
+        return f"{REGIME_DEGRADED} (A6 = {m:.4f}; BELOW THE 0.50 FLOOR)"
+    return f"{REGIME_DEGRADED} (A6 = {m:.4f})"
 
 
 def false_negative_table(ps: Sequence[float] = (0.90, 0.95, 0.97, 0.99)) -> list[dict[str, float | str]]:
@@ -362,6 +369,15 @@ def false_negative_table(ps: Sequence[float] = (0.90, 0.95, 0.97, 0.99)) -> list
         one = p**10 + 10 * p**9 * (1 - p)
         out.append({"kind": "ANALYTICAL", "p": p, "one_series": one, "both_series": one**2, "l_q_at_least_2": one**6})
     return out
+
+
+def per_draw_bound(k: int, n: int) -> float | None:
+    """The one-sided 95% Clopper-Pearson lower bound on the per-draw success probability (section 6.3), by P9-II's function; None with no evaluated draw."""
+    if n <= 0:
+        return None
+    from studies.p9ii import classes as p9c
+
+    return float(p9c.clopper_pearson_lower(k, n, 0.05))
 
 
 def collapse_free(onsets: Sequence[bool]) -> str:
@@ -466,7 +482,7 @@ def hypotheses(h: Headline, lines_at_l1: Mapping[str, TypeState], a5d_vs_a0_at_l
     lq = h.detail.get("L_Q")
     out["H23-O"] = "supported" if (lq is not None and lq >= 2 and h.step == 3) else "not supported"
     l1_state = h.detail.get("l1_state")
-    if h.step in (1, 2) or h.detail.get("l1") is None or l1_state == NOT_EVALUABLE:
+    if h.step == 1 or h.detail.get("l1") is None or l1_state == NOT_EVALUABLE:  # R11: at step 2 l1 = 0.5 exists and FAILS, so it is read
         out["H23-G"] = "not read"
     else:
         prints = [fails_print(ts) for ts in lines_at_l1.values() if ts.q == FAILS]

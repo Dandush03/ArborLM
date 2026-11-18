@@ -52,6 +52,14 @@ def check_disk(run_dir: Path, cfg: Mapping[str, Any] | None = None, *, used: int
     return {"run_dir_bytes": u, "free_bytes": f}
 
 
+def check_free(path: Path, cfg: Mapping[str, Any] | None = None, *, free: int | None = None) -> None:
+    """The free-space half of the disk rule, cheap enough for a training loop (every 1,024 updates)."""
+    r = (cfg or core.load_config())["resources"]
+    f = shutil.disk_usage(path if path.exists() else path.parent if path.parent.exists() else Path("/")).free if free is None else free
+    if f < int(r["disk_free_min_bytes"]):
+        raise DiskPause(f"free disk space {f} bytes is below the minimum of {r['disk_free_min_bytes']}")
+
+
 def disk_projection_bytes(updates_total: int, cfg: Mapping[str, Any] | None = None) -> int:
     """ANALYTICAL: per-update logs at 609 bytes per update (P10-S0: 19,948,322 bytes for 32,768 updates), plus nothing for snapshots (counted separately by the plan)."""
     return updates_total * int((cfg or core.load_config())["resources"]["disk_bytes_per_update"])
@@ -65,16 +73,21 @@ def memory_projection_bytes(updates: int, cfg: Mapping[str, Any] | None = None) 
 def other_study_processes(*, exclude_pids: Sequence[int] = ()) -> list[dict[str, Any]]:
     """Processes of another study's compute stage alive on the machine (by command line). Never matches this process or ``exclude_pids``."""
     me = {os.getpid(), *exclude_pids}
+    try:
+        cur = psutil.Process()
+        me |= {p.pid for p in cur.parents()} | {p.pid for p in cur.children(recursive=True)}
+    except psutil.Error:
+        pass
     out = []
     for p in psutil.process_iter(["pid", "cmdline"]):
         try:
             cmd = " ".join(p.info["cmdline"] or [])
         except psutil.Error:
             continue
-        if p.info["pid"] in me or "pytest" in cmd:
-            continue
+        if p.info["pid"] in me:
+            continue  # this process, its ancestors and its descendants (its own workers); another study's test suite is another study's process (R13)
         if "python" in cmd and any(m in cmd for m in OTHER_STUDY_MARKERS) and "studies.p10is0" not in cmd:
-            out.append({"pid": p.info["pid"], "command": cmd[:120]})
+            out.append({"pid": p.info["pid"], "command": cmd[:400]})
     return out
 
 

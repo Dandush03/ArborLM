@@ -9,6 +9,7 @@ exception propagates as an item error (ENGINEERING STOP). The three are never mi
 
 import functools
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass as _dataclass
 from pathlib import Path
 from typing import Any
 
@@ -140,68 +141,145 @@ def load_registry(run_dir: Path, cells: Sequence[Mapping[str, Any]]) -> tuple[di
 
 
 # --- Stage R (section 5.2) ----------------------------------------------------------------------------------------------------------------------
-def stage_r_cell_type(
-    ct: CellType, run_dir: Path, env: Env, th: core.Thresholds, cfg: Mapping[str, Any] | None = None, *, attempt: int = 0, ladder_values: Sequence[int] | None = None, ceiling: int | None = None, diag: tuple[int, int, int] | None = None
-) -> dict[str, Any]:
-    """The four runs of a cell type (A5-D and A6, calibration draws 1 and 2) train in doubling rounds, each resuming from the previous round's snapshot; after each round (the barrier of ruling 11) the plateau rule is evaluated
-    by code; the cell type stops at the first decision or at its ceiling. Every measurement goes to ``sealed/`` and nothing is printed; the return value holds only what ``durations.json`` may hold (no accuracy).
+# Everything Stage R produces per run (the per-update losses, the probe records, the snapshots, the evaluation counts) goes into the sealed directory (B1); nothing per cell type is public before durations.json exists (B3). One RUN
+# (arm, calibration draw) is one unit of work: ``stage_r_run`` trains it to the next ladder exposure, resuming from its previous snapshot, so the driver can run the four runs of a cell type, and the runs of different cell types, in parallel.
+# The decision is made by code from the sealed points (``read_state``); the arithmetic of a run does not depend on which process runs it or in what order (a test proves it).
+def sealed_stem(ct: CellType) -> str:
+    return ct.name.replace("/", "-")
 
-    Resumable and extendable: a (run, round) whose sealed file exists is read back by the code itself (``stage-r-code``; selections are by code) and not trained again, so an interrupted Stage R continues and an extension round
-    (a larger ``ceiling`` and ladder) trains only the new doubling."""
+
+def point_name(ct: CellType, arm: str, draw: int, attempt: int, e: int) -> str:
+    return f"{sealed_stem(ct)}-{arm}-c{draw}-r{attempt}-e{e}.json"
+
+
+def nonfinite_name(ct: CellType, arm: str, draw: int, attempt: int) -> str:
+    return f"{sealed_stem(ct)}-{arm}-c{draw}-r{attempt}-nonfinite.json"
+
+
+def cal_cell(ct: CellType, arm: str, draw: int, attempt: int, cfg: Mapping[str, Any], profile: Profile) -> Cell:
+    return core.Cell("CAL", ct.series, arm, ct.facts, ct.slots, draw, core.init_seed("CAL", arm, draw, attempt, cfg, profile.name), attempt)
+
+
+def stage_r_run(
+    ct: CellType, arm: str, draw: int, e: int, sealed_base: Path, env: Env, cfg: Mapping[str, Any] | None = None, *, attempt: int = 0, diag: tuple[int, int, int] | None = None, lad: Sequence[int] | None = None
+) -> str:
+    """Train one calibration run to ``e`` exposures per fact (from its last snapshot), evaluate there and write the sealed point (or the sealed non-finite record). Returns "ok", "nonfinite" or "present" (already done)."""
     from studies.p9i.train import training_stream_for
 
     c = cfg or core.load_config()
-    lad = list(ladder_values or [env.profile.exp(int(e)) for e in c["ladder"]["base"]])
-    top = ceiling or max(lad)
+    lad = list(lad or [env.profile.exp(int(x)) for x in c["ladder"]["base"]])
+    sdir = sealed.sealed_dir(sealed_base)
+    if (sdir / point_name(ct, arm, draw, attempt, e)).is_file() or (sdir / nonfinite_name(ct, arm, draw, attempt)).is_file():
+        return "present"
     early, late, switch = diag or env.profile.diag or (int(c["draws"]["checkpoint_probe_every"]), int(c["draws"]["checkpoint_probe_every_late"]), int(c["draws"]["checkpoint_probe_switch"]))
     facts = env.facts_of(ct.facts)
-    stem = ct.name.replace("/", "-")
+    cell = cal_cell(ct, arm, draw, attempt, c, env.profile)
+    prev = max((x for x in lad if x < e and (sdir / point_name(ct, arm, draw, attempt, x)).is_file()), default=0)
+    out = sdir / "cal" / cell.label
+    spec = core.calibration_set(draw, attempt, c, env.profile.name)
+    data = data_for(env, spec, ct.facts, c)
+    stream = training_stream_for(data, facts)
+    u = core.updates_for(e, facts)
+    snap = out / "snapshots" / f"u{core.updates_for(prev, facts):07d}" if prev else None
+    seg = adapter.run_segment(adapter.Job(cell, data, stream, env.backbone, out, data.seeds.r1_codes, last_update=u, snapshots=(u,), init_snapshot=snap, diag_early=early, diag_late=late, diag_switch=switch))
+    if seg.diverged is not None:
+        sealed.write_sealed(sealed_base, nonfinite_name(ct, arm, draw, attempt), {"diverged": seg.diverged})
+        return "nonfinite"
+    rec = adapter.evaluate_snapshot(cell, out / "snapshots" / f"u{u:07d}", data, facts, u, backbone=env.backbone, rows=env.rows, r1_seed=data.seeds.r1_codes, swap_seed=spec.swap_seed(ct.facts, c), reference_swap=arm == "A6")
+    sealed.write_sealed(sealed_base, point_name(ct, arm, draw, attempt, e), {"obs": obs_to_json(adapter.counts_of(rec)["obs"]), "exposures": e})
+    return "ok"
+
+
+@_dataclass
+class RState:
+    decision: ladder.Decision
+    curves: dict[tuple[str, int], ladder.Curve]
+    obs_at: dict[tuple[tuple[str, int], int], Obs]
+
+
+def read_state(ct: CellType, sealed_base: Path, th: core.Thresholds, cfg: Mapping[str, Any], profile: Profile, *, attempt: int = 0, lad: Sequence[int] | None = None, ceiling: int | None = None) -> RState:
+    """The plateau rule applied by code to the sealed points of a cell type. The reads are the code's own (``stage-r-code``); no person reads them."""
+    c = cfg
+    base = [profile.exp(int(x)) for x in c["ladder"]["base"]]
+    lad = list(lad or base)
+    top = ceiling or max(lad)
+    sdir = sealed.sealed_dir(sealed_base)
     curves = {k: ladder.Curve(k[0], k[1]) for k in ladder.RUN_KEYS}
-    cells = {k: core.Cell("CAL", ct.series, k[0], ct.facts, ct.slots, k[1], core.init_seed("CAL", k[0], k[1], attempt, c, env.profile.name), attempt) for k in ladder.RUN_KEYS}
-    last: dict[tuple[str, int], int] = dict.fromkeys(ladder.RUN_KEYS, 0)
     obs_at: dict[tuple[tuple[str, int], int], Obs] = {}
-    decision = ladder.Decision(ladder.STATUS_UNDECIDED)
-    for e in [x for x in lad if x <= top]:
-        for key, cell in cells.items():
-            if curves[key].nonfinite_update is not None:
-                continue
-            name = f"{stem}-{key[0]}-c{key[1]}-r{attempt}-e{e}.json"
-            nf_name = f"{stem}-{key[0]}-c{key[1]}-r{attempt}-nonfinite.json"
-            u = core.updates_for(e, facts)
-            if (sealed.sealed_dir(run_dir) / nf_name).is_file():
-                curves[key].nonfinite_update = int(sealed.read_sealed(run_dir, nf_name, reader="stage-r-code", why="resume")["diverged"]["update"])
-                continue
-            if (sealed.sealed_dir(run_dir) / name).is_file():
-                o = obs_from_json(sealed.read_sealed(run_dir, name, reader="stage-r-code", why="resume")["obs"])
-                last[key] = u
-            else:
-                spec = core.calibration_set(key[1], attempt, c, env.profile.name)
-                data = data_for(env, spec, ct.facts, c)
-                stream = training_stream_for(data, facts)
-                out = run_dir / "cal" / cell.label
-                snap = out / "snapshots" / f"u{last[key]:07d}" if last[key] else None
-                seg = adapter.run_segment(adapter.Job(cell, data, stream, env.backbone, out, data.seeds.r1_codes, last_update=u, snapshots=(u,), init_snapshot=snap, diag_early=early, diag_late=late, diag_switch=switch))
-                if seg.diverged is not None:
-                    curves[key].nonfinite_update = seg.diverged["update"]
-                    sealed.write_sealed(run_dir, nf_name, {"diverged": seg.diverged})
-                    continue
-                last[key] = u
-                rec = adapter.evaluate_snapshot(cell, out / "snapshots" / f"u{u:07d}", data, facts, u, backbone=env.backbone, rows=env.rows, r1_seed=data.seeds.r1_codes, swap_seed=spec.swap_seed(ct.facts, c), reference_swap=key[0] == "A6")
-                o = adapter.counts_of(rec)["obs"]
-                sealed.write_sealed(run_dir, name, {"obs": obs_to_json(o), "exposures": e})
-            obs_at[(key, e)] = o
-            curves[key].points[e] = ladder.Point(o.m_p, o.m_h)
-        decision = ladder.decide_cell_type(curves, ct.floor(th), top, th, lad, cfg=c, base_top=lad[min(len(lad), len(c["ladder"]["base"])) - 1], t_values=_t_values(env.profile, c))
-        if decision.status != ladder.STATUS_UNDECIDED:
+    for key, cv in curves.items():
+        arm, draw = key
+        nf = nonfinite_name(ct, arm, draw, attempt)
+        if (sdir / nf).is_file():
+            cv.nonfinite_update = int(sealed.read_sealed(sealed_base, nf, reader="stage-r-code", why="decision")["diverged"]["update"])
+        for e in [x for x in lad if x <= top]:
+            nm = point_name(ct, arm, draw, attempt, e)
+            if (sdir / nm).is_file():
+                o = obs_from_json(sealed.read_sealed(sealed_base, nm, reader="stage-r-code", why="decision")["obs"])
+                obs_at[(key, e)] = o
+                cv.points[e] = ladder.Point(o.m_p, o.m_h)
+    # the barrier of ruling 11: the plateau rule reads a round only once every run has it (a run that diverged does not hold the others back)
+    live = [cv for cv in curves.values() if cv.nonfinite_update is None]
+    barrier = min((max(cv.points, default=0) for cv in live), default=0)
+    for cv in live:
+        cv.points = {e: p for e, p in cv.points.items() if e <= barrier}
+    decision = ladder.decide_cell_type(curves, ct.floor(th), top, th, lad, cfg=c, base_top=base[-1], t_values=_t_values(profile, c))
+    return RState(decision, curves, obs_at)
+
+
+def stage_r_needs(state: RState, lad: Sequence[int], profile: Profile, cfg: Mapping[str, Any], *, ceiling: int | None = None) -> list[tuple[str, int, int]]:
+    """The (arm, draw, e) runs still to train. UNDECIDED: every run to the next ladder value. NON_FINITE (B2): the surviving runs continue, one ladder value at a time, to the base ceiling T so that the reference flags can be computed
+    there. Anything else: none."""
+    d = state.decision
+    top = ceiling or max(lad)
+    live = {k: cv for k, cv in state.curves.items() if cv.nonfinite_update is None}
+    out: list[tuple[str, int, int]] = []
+    if d.status == ladder.STATUS_UNDECIDED:
+        reached = {k: max((e for (kk, e) in state.obs_at if kk == k), default=0) for k in live}
+        nxt = next((x for x in lad if x > min(reached.values(), default=0) and x <= top), None)
+        if nxt is not None:
+            out = [(k[0], k[1], nxt) for k in live if reached[k] < nxt]
+    elif d.status == ladder.STATUS_NONFINITE:
+        stop = _t_values(profile, cfg)[0]
+        for k in live:
+            r = max((e for (kk, e) in state.obs_at if kk == k), default=0)
+            if r < stop:
+                nxt = next((x for x in lad if x > r), None)
+                if nxt is not None:
+                    out.append((k[0], k[1], nxt))
+    return out
+
+
+def stage_r_flags(state: RState, ct: CellType, th: core.Thresholds) -> dict[str, Any]:
+    """The reference flags at the cell type's final T (rulings 3 and 4). ``computed`` is False, explicitly, when no A6 run has a usable point there (both diverged, or both below the floor): an empty flag set is never a silent result (B2)."""
+    d = state.decision
+    if d.t is None:
+        return {"reference_flags": None, "computed": False, "reference_below_floor_at_t": [], "reference_nonfinite": False}
+    t_obs = {draw: state.obs_at.get((("A6", draw), d.t)) for draw in (1, 2)}
+    refl, info = ladder.reference_flags(t_obs, ct.floor(th), th)
+    nonf = [draw for draw in (1, 2) if state.curves[("A6", draw)].nonfinite_update is not None]
+    return {
+        "reference_flags": {"cond4": refl.cond4, "other": list(refl.other)}, "computed": bool(info["computed_on_draws"]), "reference_below_floor_at_t": info["reference_below_floor_at_t_draws"],
+        "reference_nonfinite": len(nonf) == 2, "reference_nonfinite_draws": nonf,
+    }  # fmt: skip
+
+
+def stage_r_cell_type(
+    ct: CellType, sealed_base: Path, env: Env, th: core.Thresholds, cfg: Mapping[str, Any] | None = None, *, attempt: int = 0, ladder_values: Sequence[int] | None = None, ceiling: int | None = None, diag: tuple[int, int, int] | None = None
+) -> dict[str, Any]:
+    """The sequential reference of Stage R for one cell type: the same ``stage_r_run`` calls the driver farms out to workers, in order, with the decision by code after each round. Used by tests and single-process runs; the driver runs the same
+    runs in parallel and a test shows the sealed points are identical."""
+    c = cfg or core.load_config()
+    lad = list(ladder_values or [env.profile.exp(int(x)) for x in c["ladder"]["base"]])
+    top = ceiling or max(lad)
+    while True:
+        state = read_state(ct, sealed_base, th, c, env.profile, attempt=attempt, lad=lad, ceiling=top)
+        todo = stage_r_needs(state, lad, env.profile, c, ceiling=top)
+        if not todo:
             break
-    labels_flags: dict[str, Any] | None = None
-    flags: dict[str, Any] = {}
-    if decision.t is not None:
-        t_obs = {d: obs_at.get((("A6", d), decision.t)) for d in (1, 2)}
-        refl, info = ladder.reference_flags(t_obs, ct.floor(th), th)
-        labels_flags = {"cond4": refl.cond4, "other": list(refl.other)}
-        flags = {"reference_below_floor_at_t": info["reference_below_floor_at_t_draws"], "reference_nonfinite": any(curves[("A6", d)].nonfinite_update is not None for d in (1, 2))}
-    return {"decision": decision, "reference_flags": labels_flags, **flags, "curves": curves}
+        for arm, draw, e in todo:
+            stage_r_run(ct, arm, draw, e, sealed_base, env, c, attempt=attempt, diag=diag, lad=lad)
+    flags = stage_r_flags(state, ct, th)
+    return {"decision": state.decision, **flags, "curves": state.curves}
 
 
 def _t_values(profile: Profile, c: Mapping[str, Any]) -> tuple[int, int]:

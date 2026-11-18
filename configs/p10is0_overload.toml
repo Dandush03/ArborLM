@@ -42,6 +42,7 @@ b_hours = 55.0                     # section 5.1 item 3 (Decision 1): charged ho
 workers = 6
 stage_cap_factor = 2.0             # Stage R's own cap and the hour cap: twice the projection (sections 5.1, 9)
 x8_in_projection = true
+analysis_report_hours = 2.0        # the allowance for analysis and report in P and in the caps (R16; an estimate, replaced by nothing measured: those stages are seconds)
 
 [grid]
 # section 4.1. load = facts / slots; series M at 8,192 facts, S at 2,048, X8 conditional.

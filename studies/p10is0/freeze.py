@@ -48,9 +48,25 @@ def candidate_plan(repo: Path, *, supersede: bool = False, run_dir: Path | None 
 
     dp, mf = _draws_of(run_dir)
     record = planmod.build_plan(cfg, durations, caps=caps, profile=profile_of(run_dir), draw_plan=dp, manifests=mf, run_dir=str(run_dir.resolve()) if run_dir else None)
+    record["stage_r_projection"] = stage_r_projection(run_dir, cfg)
     record["durations_sha256"] = file_sha256(dur_path)
     core.write_record(plan_path, record)
     return {"candidate_plan": str(plan_path), "plan_file_sha256": file_sha256(plan_path), "cells": len(record["items"]["main"]), "caps_provisional": bool(caps.get("provisional", True))}
+
+
+def stage_r_projection(run_dir: Path | None, cfg: Mapping[str, Any]) -> dict[str, Any] | None:
+    """The projected Stage R wall hours with one task per run (ANALYTICAL, from stage 3's rates in the run directory at the larger of the quiet and busy rates, six workers, every cell type run to the top of the base ladder: the worst case)."""
+    if run_dir is None or not (run_dir / "timing" / "rates.json").is_file():
+        return None
+    from . import drivers, ladder
+    from .profile import profile_of
+
+    prof = profile_of(run_dir)
+    rates = drivers.load_rates(run_dir, which="larger", cfg=cfg)
+    cts = core.cell_types(cfg)
+    lad = [prof.exp(int(e)) for e in cfg["ladder"]["base"]]
+    hours = ladder.stage_r_makespan_hours(cts, rates, int(cfg["budget"]["workers"]), lad, prof.facts_of)
+    return {"kind": "ANALYTICAL", "hours_with_runs_as_tasks": hours, "basis": "stage 3's rates, larger of quiet and busy, six workers, round barrier, every run to the top of the base ladder (the worst case)"}
 
 
 def _draws_of(run_dir: Path | None) -> tuple[dict[str, Any] | None, dict[str, str] | None]:
@@ -106,7 +122,7 @@ def _synthetic_obs() -> Any:
     return Obs((950, 1000), (950, 1000), (950, 1000), (950, 1000), True, True, False, 200, 0.01, 256, 0.0, 0.95, 0.95, 0.95)
 
 
-def freeze(repo: Path, rehearsal_path: Path, *, attest_unopened: Sequence[str], seal_broken: bool = False, run_dir: Path | None = None, run_checker: bool = True) -> dict[str, Any]:
+def freeze(repo: Path, rehearsal_path: Path, *, attest_unopened: Sequence[str], seal_broken: bool = False, sealed_dir: Path | None = None, run_checker: bool = True, disclosed_reads: Sequence[str] = ()) -> dict[str, Any]:
     """Write ``freeze/freeze_record.json``. Refuses on every condition in the module docstring; writes only the freeze record."""
     cfg = core.load_config(repo / core.CONFIG)
     plan_path, record_path = repo / core.PLAN, repo / core.FREEZE_RECORD
@@ -139,7 +155,7 @@ def freeze(repo: Path, rehearsal_path: Path, *, attest_unopened: Sequence[str], 
         raise StageRefused(f"refused: the seed gate did not pass: {gate['problems']}")
     inputs = planmod.hash_inputs(repo)
     rec = {
-        **core.envelope("freeze_record"), "plan_file_sha256": file_sha256(plan_path), "inputs": inputs, "sealed_files_sha256": sealed.sealed_hashes(run_dir) if run_dir is not None else {},
+        **core.envelope("freeze_record"), "plan_file_sha256": file_sha256(plan_path), "inputs": inputs, "sealed_files_sha256": sealed.sealed_hashes(sealed_dir) if sealed_dir is not None else {}, "disclosed_reads": sorted(disclosed_reads),
         "attestations": {"sealed_files_unopened_by": sorted(attest), "recorded_by": "the freeze command from the flags; not verified by code"}, "seal_broken": seal_broken,
         "seed_gate": {k: gate[k] for k in ("passed", "roles", "declared_reuse_not_new", "named_spare_values", "checker")}, "rehearsal": {"path": str(rehearsal_path.resolve()), "sha256": file_sha256(rehearsal_path)},
         "adr_sha256_provenance_only": core.spec_sha256(repo),

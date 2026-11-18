@@ -75,12 +75,14 @@ def synthetic(repo: Path, run_dir: Path) -> dict[str, Any]:
 
     rec("generate", stage(copy, rd, "generate", "--run-dir", str(rd), "--cap-hours", "1"))
     rec("timing", stage(copy, rd, "timing", "--run-dir", str(rd), "--cap-hours", "1"))
-    rec("stage_r", stage(copy, rd, "stage-r", "--run-dir", str(rd)))
+    sealed_dir = run_dir / "sealed_store"  # outside the copy (no working tree above it) and outside the worktree
+    rec("stage_r", stage(copy, rd, "stage-r", "--run-dir", str(rd), "--sealed-dir", str(sealed_dir)))
+    rec("a0_memory", stage(copy, rd, "a0-memory", "--run-dir", str(rd)))
     rec("caps", stage(copy, rd, "caps", "--run-dir", str(rd)))
     rec("candidate_plan", stage(copy, rd, "candidate-plan", "--run-dir", str(rd)))
     reh = rd / "counting_rehearsal.json"
     rec("counting_rehearsal", stage(copy, rd, "counting-rehearsal", "--out", str(reh)))
-    p = stage(copy, rd, "freeze", "--rehearsal", str(reh), "--attest-sealed-unopened", "lead,implementer,auditor", "--run-dir", str(rd), "--no-checker", ok=(0, 2))
+    p = stage(copy, rd, "freeze", "--rehearsal", str(reh), "--attest-sealed-unopened", "lead,implementer,auditor", "--sealed-dir", str(sealed_dir), "--no-checker", ok=(0, 2))
     rec("freeze", p)
     if p.returncode != 0:
         raise RuntimeError(f"freeze refused in the rehearsal copy: {p.stderr[-400:]}")
@@ -91,6 +93,7 @@ def synthetic(repo: Path, run_dir: Path) -> dict[str, Any]:
     (copy / "results/p10is0-freeze-rehearsal/DECISION_2.md").write_text(f"Decision 2 (synthetic rehearsal): run the frozen plan as frozen. Freeze commit {commit}.\n", encoding="utf-8")
     run(copy, *GIT, "add", "-A")
     run(copy, *GIT, "commit", "-q", "-m", "decision 2")
+    assert (rd / "timing" / "a0_memory.json").is_file()
     for name, ok in (("main", (0,)), ("x8-gate", (0,)), ("x8", (0, 2)), ("analysis", (0,)), ("report", (0,))):
         p = stage(copy, rd, "registered", name, "--run-dir", str(rd), "--freeze-commit", commit, ok=ok)
         rec(name, p)
@@ -106,7 +109,7 @@ def synthetic(repo: Path, run_dir: Path) -> dict[str, Any]:
     analysis = read_json(rd / "analysis.json")
     record = {
         **core.envelope("rehearsal"), "phase": "synthetic", "profile": "test", "stages": stages, "candidate": {"status": "COMPLETE", "plan_file_sha256": file_sha256(copy / core.PLAN)}, "caps_provisional": False,
-        "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "x8_status": analysis.get("x8", {}).get("status"), "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
+        "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "sealed_dir": str(sealed_dir), "x8_status": analysis.get("x8", {}).get("status"), "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
     }  # fmt: skip
     write_json(run_dir / "rehearsal.json", core.jsonable(record))
     return record

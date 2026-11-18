@@ -18,6 +18,7 @@ from pathlib import Path
 from arborlm.io import write_json
 
 from . import accounting, core, drivers, freeze, sealed, seeds
+from . import ladder as ladder_mod
 from . import plan as planmod
 from .plan import IDENTITY_EXIT, IdentityMismatch, StageRefused
 
@@ -26,7 +27,8 @@ PAUSED_EXIT, FAILED_EXIT = 5, 1
 
 
 def exit_of(status: str | None) -> int:
-    return 0 if status in ("COMPLETE", None) else PAUSED_EXIT if str(status).startswith("PAUSED") else FAILED_EXIT
+    s = str(status)
+    return 0 if status in ("COMPLETE", None) else drivers.CODE_CHANGED_EXIT if s.startswith("ENGINEERING") else PAUSED_EXIT if s.startswith("PAUSED") else FAILED_EXIT
 
 
 def cmd_registered(args: argparse.Namespace) -> int:
@@ -49,7 +51,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     except IdentityMismatch as exc:
         print(json.dumps({"status": "PAUSED — IDENTITY", "reason": str(exc)[:300]}), file=sys.stderr)
         return IDENTITY_EXIT
-    except drivers.CodeChanged as exc:
+    except (drivers.CodeChanged, ladder_mod.EngineeringStop) as exc:
         print(str(exc), file=sys.stderr)
         return drivers.CODE_CHANGED_EXIT
     except StageRefused as exc:
@@ -81,8 +83,9 @@ def build_parser() -> argparse.ArgumentParser:
     sr = add("stage-r", "stage 4: Stage R, the extension rule, freeze/durations.json")
     sr.add_argument("--cause-file")
     sr.add_argument("--events-dir")
-    sr.add_argument("--attempt", type=int, default=0)
+    sr.add_argument("--sealed-dir", required=True, help="outside version control: refused inside any working tree and under the main checkout")
     add("caps", "write freeze/stage_caps.json from the measured projection")
+    add("a0-memory", "stage 5: the full-length A0 memory cell on the rehearsal draw (time and memory only)")
     cp = add("candidate-plan", "write freeze/plan.json (refuses to overwrite without --supersede)", run_dir=False)
     cp.add_argument("--supersede", action="store_true")
     cp.add_argument("--run-dir")
@@ -92,7 +95,8 @@ def build_parser() -> argparse.ArgumentParser:
     f.add_argument("--rehearsal", required=True)
     f.add_argument("--attest-sealed-unopened", default="")
     f.add_argument("--seal-broken", action="store_true")
-    f.add_argument("--run-dir")
+    f.add_argument("--sealed-dir")
+    f.add_argument("--disclosed-read", action="append", default=[], help="a sealed file the lead read (disclosed in the freeze record; prints CALIBRATION VALUES SEEN BY THE LEAD)")
     f.add_argument("--no-checker", action="store_true", help="test profile only (the rehearsal copy has no registry inventory to scan)")
     sg = sub.add_parser("seed-gate", help="run the seed gate (the cited checker as a copy)")
     sg.add_argument("--no-checker", action="store_true")
@@ -127,7 +131,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "freeze":
             if args.no_checker and planmod.load_plan(repo / core.PLAN).get("profile") != "test":
                 raise StageRefused("refused: --no-checker is allowed for a test-profile plan only: a registered freeze runs the registry's checker")
-            res = freeze.freeze(repo, Path(args.rehearsal), attest_unopened=[x for x in args.attest_sealed_unopened.split(",") if x], seal_broken=args.seal_broken, run_dir=Path(args.run_dir) if args.run_dir else None, run_checker=not args.no_checker)
+            res = freeze.freeze(repo, Path(args.rehearsal), attest_unopened=[x for x in args.attest_sealed_unopened.split(",") if x], seal_broken=args.seal_broken, sealed_dir=Path(args.sealed_dir) if args.sealed_dir else None, run_checker=not args.no_checker, disclosed_reads=args.disclosed_read)
             print(json.dumps(res))
         elif args.command == "seed-gate":
             res = seeds.seed_gate(run_checker=not args.no_checker)
@@ -142,7 +146,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
             return rehearsal.cmd_rehearse(args)
         else:
-            ctx = drivers.Ctx(repo, Path(args.run_dir).resolve(), registered=False)
+            ctx = drivers.Ctx(repo, Path(args.run_dir).resolve(), registered=False, sealed_dir=Path(args.sealed_dir) if getattr(args, "sealed_dir", None) else None)
             if args.command == "generate":
                 res = drivers.cmd_generate(ctx, args.cap_hours)
             elif args.command == "timing":
@@ -150,14 +154,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print(json.dumps(core.jsonable(res)))
                 return 0 if res["decision"] == "READY" else 3
             elif args.command == "stage-r":
-                res = drivers.cmd_stage_r(ctx, cause_file=Path(args.cause_file) if args.cause_file else None, attempt=args.attempt, events_dir=Path(args.events_dir) if args.events_dir else None)
+                res = drivers.cmd_stage_r(ctx, cause_file=Path(args.cause_file) if args.cause_file else None, events_dir=Path(args.events_dir) if args.events_dir else None)
                 return exit_of(res["status"])
+            elif args.command == "a0-memory":
+                res = drivers.cmd_a0_memory(ctx)
             else:
                 res = drivers.cmd_caps(ctx)
             print(json.dumps(core.jsonable(res), default=str))
             return exit_of(res.get("status"))
     except drivers.CodeChanged as exc:
         print(str(exc), file=sys.stderr)
+        return drivers.CODE_CHANGED_EXIT
+    except ladder_mod.EngineeringStop as exc:
+        print(f"ENGINEERING STOP: {exc}", file=sys.stderr)
         return drivers.CODE_CHANGED_EXIT
     except StageRefused as exc:
         print(str(exc), file=sys.stderr)

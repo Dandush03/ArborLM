@@ -26,6 +26,8 @@ PAUSED_IDENTITY = "paused_identity"
 IDENTITY_EXIT = 75  # a worker that refuses on an identity or precondition check (a dirty tree, a frozen file that differs, no Decision 2) exits with this code (EX_TEMPFAIL): PAUSED — IDENTITY, not FAILED
 ENV_EXIT = 76  # an out-of-memory kill, a full disk or a file-system error inside a worker: PAUSED — ENVIRONMENT, never a failed cell (ADR-0023 section 12)
 PAUSED_ENVIRONMENT = "paused_environment"
+CODE_EXIT = 4  # the code differs from the code Stage R ran under: an ENGINEERING STOP for the human lead, recorded as such and never as a failed task (R4)
+ENGINEERING_STOP = "engineering_stop"
 PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY, PAUSED_ENVIRONMENT)
 POLL = 0.2
 
@@ -57,7 +59,7 @@ def _kill(popen: "subprocess.Popen[bytes]") -> None:
     popen.wait(timeout=30)
 
 
-def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_worker_bytes: int, rss_aggregate_bytes: int, env: dict[str, str] | None = None, poll: float = POLL) -> tuple[dict[str, dict[str, Any]], float]:
+def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_worker_bytes: int, rss_aggregate_bytes: int, env: dict[str, str] | None = None, poll: float = POLL, disk_check: Callable[[], None] | None = None) -> tuple[dict[str, dict[str, Any]], float]:
     """Run the tasks in subprocesses, at most ``workers`` at once, until all are done or ``cap_seconds`` of wall clock pass (then every running task is killed: ``killed_cap``, the rest ``not_started``).
     Returns (label -> outcome, wall seconds). A task with a result file is ``completed`` without running; one with a failed record is ``failed`` without running."""
     import os
@@ -74,7 +76,21 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
             pending.append(t)
     running: dict[str, tuple[Task, subprocess.Popen[bytes], psutil.Process, float, int]] = {}
     environment = {**os.environ, "PYTHONUNBUFFERED": "1", **(env or {})}
+    disk_every, last_disk = 5.0, 0.0
     while pending or running:
+        if disk_check is not None and time.monotonic() - last_disk >= (disk_every if running else 0.0):
+            last_disk = time.monotonic()
+            try:
+                disk_check()
+            except Exception as exc:  # DiskPause: the disk cap or the free-space minimum (R5): every running task is stopped, the rest not started; the stage is PAUSED and resumes
+                for label, (task, popen, _, t0, peak) in list(running.items()):
+                    _kill(popen)
+                    out[label] = {"status": PAUSED_ENVIRONMENT, "seconds": time.monotonic() - t0, "reason": f"PAUSED — DISK: {exc}", "peak_rss_bytes": peak}
+                    running.pop(label)
+                for t in pending:
+                    out[t.label] = {"status": NOT_STARTED, "seconds": 0.0, "reason": f"PAUSED — DISK: {exc}", "peak_rss_bytes": 0}
+                pending = []
+                break
         if time.monotonic() - begun > cap_seconds:
             for label, (task, popen, _, t0, peak) in list(running.items()):
                 _kill(popen)
@@ -99,6 +115,10 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
             code = popen.poll()
             if code == IDENTITY_EXIT:
                 out[label] = {"status": PAUSED_IDENTITY, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED — IDENTITY: the worker refused on an identity or precondition check; restore the file or the state bit for bit and run the stage again (no failed record is kept)"}
+                running.pop(label)
+                continue
+            if code == CODE_EXIT:
+                out[label] = {"status": ENGINEERING_STOP, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "ENGINEERING STOP: the code differs from the code Stage R ran under; the human lead rules (no failed record is kept)"}
                 running.pop(label)
                 continue
             if code == ENV_EXIT:
@@ -134,6 +154,8 @@ def stage_status(outcomes: dict[str, dict[str, Any]]) -> str:
     statuses = [o["status"] for o in outcomes.values()]
     if statuses and all(s == COMPLETED for s in statuses):
         return "COMPLETE"
+    if any(s == ENGINEERING_STOP for s in statuses):
+        return "ENGINEERING STOP"
     if any(s == FAILED for s in statuses):
         return "FAILED"
     return "PAUSED"

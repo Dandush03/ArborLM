@@ -42,23 +42,34 @@ def code_identity(repo: Path) -> dict[str, str]:
     return planmod.hash_inputs(repo, planmod.frozen_paths(repo, include_freeze_files=False))
 
 
+def current_attempt(run_dir: Path) -> int:
+    p = run_dir / CODE_IDENTITY_FILE
+    return int(read_json(p)["history"][-1].get("attempt", 0)) if p.is_file() else 0
+
+
 def record_code_identity(run_dir: Path, repo: Path, *, cause_file: Path | None = None) -> dict[str, Any]:
-    """Stage R's start: record the code identity it runs under. A change before ``durations.json`` exists is allowed only with a recorded cause (a file under ``results/`` naming it); a change after it exists is an engineering stop."""
+    """Stage R's start: record the code identity it runs under and return the ATTEMPT number. A change of the code before ``durations.json`` exists VOIDS Stage R (R8): it needs a recorded cause (a file under ``results/``) and starts the
+    next attempt, which repeats Stage R in full on the registry's spare draws (repeat k = 1, 2, 3); the voided results stay sealed, are listed in the history and enter nothing. A fourth repeat has no allocated values and a change
+    after ``durations.json`` exists is an engineering stop: both for the human lead."""
     path = run_dir / CODE_IDENTITY_FILE
     now = code_identity(repo)
     if not path.is_file():
-        write_json(path, {"history": [{"inputs": now, "cause": None, "utc": datetime.now(UTC).isoformat()}]})
-        return {"recorded": True}
+        write_json(path, {"history": [{"inputs": now, "cause": None, "attempt": 0, "utc": datetime.now(UTC).isoformat()}]})
+        return {"recorded": True, "attempt": 0}
     rec = read_json(path)
-    if rec["history"][-1]["inputs"] == now:
-        return {"recorded": False}
+    last = rec["history"][-1]
+    if last["inputs"] == now:
+        return {"recorded": False, "attempt": int(last.get("attempt", 0))}
     if (repo / core.DURATIONS).is_file():
         raise CodeChanged("ENGINEERING STOP: the code changed after freeze/durations.json exists; the human lead rules (no automatic re-draw)")
     if cause_file is None or not cause_file.is_file() or "results" not in cause_file.resolve().parts:
         raise CodeChanged("ENGINEERING STOP: the code changed during Stage R without a recorded cause (a file under results/ naming it)")
-    rec["history"].append({"inputs": now, "cause": str(cause_file), "cause_sha256": file_sha256(cause_file), "utc": datetime.now(UTC).isoformat()})
+    nxt = int(last.get("attempt", 0)) + 1
+    if nxt > int(core.load_config(repo / core.CONFIG)["seeds"]["repeat_count"]):
+        raise CodeChanged("ENGINEERING STOP: a fourth repeat of Stage R has no allocated values; the human lead rules")
+    rec["history"].append({"inputs": now, "cause": str(cause_file), "cause_sha256": file_sha256(cause_file), "attempt": nxt, "voids_attempt": int(last.get("attempt", 0)), "utc": datetime.now(UTC).isoformat()})
     write_json(path, rec)
-    return {"recorded": True, "cause": str(cause_file)}
+    return {"recorded": True, "cause": str(cause_file), "attempt": nxt}
 
 
 def check_code_identity(repo: Path, run_dir: Path | None = None) -> None:
@@ -80,7 +91,7 @@ def check_code_identity(repo: Path, run_dir: Path | None = None) -> None:
 
 # --- context -------------------------------------------------------------------------------------------------------------------------------------
 class Ctx:
-    def __init__(self, repo: Path, run_dir: Path, *, registered: bool, total_hours: float | None = None) -> None:
+    def __init__(self, repo: Path, run_dir: Path, *, registered: bool, total_hours: float | None = None, sealed_dir: Path | None = None) -> None:
         self.repo, self.run_dir, self.registered = repo, run_dir, registered
         self.cfg = core.load_config(repo / core.CONFIG)
         self.profile: Profile = profile_of(run_dir)
@@ -91,39 +102,82 @@ class Ctx:
         caps = repo / core.STAGE_CAPS
         total = total_hours if total_hours is not None else (float(read_json(caps)["total_hours"]) if registered and caps.is_file() else 1000.0)
         self.ledger = core.Ledger(run_dir / "P10IS0-ledger.json", total * 3600.0)
+        self.sealed_base: Path | None = None
+        loc = run_dir / "sealed_location.json"
+        recorded = Path(read_json(loc)["path"]) if loc.is_file() else None
+        chosen = Path(sealed_dir).resolve() if sealed_dir is not None else recorded
+        if chosen is not None:
+            bad = sealed.sealed_location_problems(chosen, repo)
+            if bad:
+                raise StageRefused("refused: the sealed directory must be outside version control: " + "; ".join(bad))
+            if recorded is not None and recorded != chosen:
+                raise StageRefused(f"refused: the sealed directory is {recorded}, not {chosen}")
+            chosen.mkdir(parents=True, exist_ok=True)
+            if recorded is None:
+                write_json(loc, {"path": str(chosen)})
+            self.sealed_base = chosen
 
     @property
     def th(self) -> core.Thresholds:
         return core.Thresholds.from_config(self.cfg)
 
+    def need_sealed(self) -> Path:
+        if self.sealed_base is None:
+            raise StageRefused("refused: Stage R needs an explicit --sealed-dir outside version control")
+        return self.sealed_base
+
     def worker_argv(self, kind: str, *extra: str) -> tuple[str, ...]:
-        return (sys.executable, "-m", "studies.p10is0.stages", "work", kind, "--run-dir", str(self.run_dir), "--repo", str(self.repo), *extra)
+        s = ("--sealed-dir", str(self.sealed_base)) if self.sealed_base is not None else ()
+        return (sys.executable, "-m", "studies.p10is0.stages", "work", kind, "--run-dir", str(self.run_dir), "--repo", str(self.repo), *s, *extra)
 
     def task(self, stage: str, name: str, kind: str, *extra: str) -> runner.Task:
         d = self.run_dir / "tasks" / stage
-        return runner.Task(name, self.worker_argv(kind, *extra), d / f"{name}.result.json", d / f"{name}.failed.json", d / f"{name}.log")
+        result = d / f"{name}.result.json"
+        return runner.Task(name, self.worker_argv(kind, *extra, "--result", str(result)), result, d / f"{name}.failed.json", d / f"{name}.log")
+
+    def peaks(self) -> dict[str, int]:
+        p = self.run_dir / "timing" / "memory_peaks.json"
+        return {k: int(v) for k, v in read_json(p).items()} if p.is_file() else {}
+
+    def record_peak(self, name: str, peak: int) -> None:
+        pk = self.peaks()
+        pk[name] = max(pk.get(name, 0), int(peak))
+        (self.run_dir / "timing").mkdir(parents=True, exist_ok=True)
+        write_json(self.run_dir / "timing" / "memory_peaks.json", pk)
 
     def workers(self) -> int:
-        w = int(self.cfg["budget"]["workers"])
+        """R6: n = min(6, floor(9 GiB / the largest measured peak per worker)) over stage 3, Stage R's runs (at 2T) and the full-length A0 memory cell; above 3 GiB per worker is an engineering stop (``ladder.worker_count``)."""
+        pk = self.peaks()
         rates = self.run_dir / "timing" / "rates.json"
-        return int(read_json(rates)["workers"]) if rates.is_file() else w
+        if rates.is_file():
+            pk = {"stage3": int(read_json(rates)["peak_rss_bytes"]), **pk}
+        return ladder.worker_count(max(pk.values()), self.cfg) if pk else int(self.cfg["budget"]["workers"])
 
 
 def mode_of(ctx: Ctx) -> str:
     return "registered" if ctx.registered else ctx.profile.name
 
 
-def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: float, *, workers: int | None = None) -> dict[str, Any]:
-    """Run a stage's tasks (resumable), charge the ledger, write the manifest. A stage at its cap is PAUSED; an identity refusal PAUSED — IDENTITY; an environment error PAUSED — ENVIRONMENT; a failed task makes the stage FAILED (item error)."""
-    ctx.ledger.require_room(stage)
+def run_stage(ctx: Ctx, stage: str, tasks: Sequence[runner.Task], cap_seconds: float, *, workers: int | None = None, group: str | None = None) -> dict[str, Any]:
+    """Run a stage's tasks (resumable), charge the ledger, write the manifest. The stage's cap is CUMULATIVE over its group (R3): an invocation gets what the group's cap has left and what the total cap has left, so a resume cannot
+    run beyond either. A stage at its cap is PAUSED; an identity refusal PAUSED — IDENTITY; an environment error or the disk rule PAUSED — ENVIRONMENT; a code change ENGINEERING STOP (never a failed task); an item error FAILED."""
+    grp = group or stage
+    left = min(cap_seconds - ctx.ledger.charged(group=grp), ctx.ledger.remaining())
+    if left <= 0:
+        return {"status": "PAUSED", "reason": f"the cap of group {grp} or the total cap is spent: an extension is the human lead's, on cost projections only"}
     started = datetime.now(UTC).isoformat()
     r = ctx.cfg["resources"]
-    outcomes, seconds = runner.run_tasks(tasks, workers=workers or ctx.workers(), cap_seconds=cap_seconds, rss_worker_bytes=int(r["rss_worker_bytes"]), rss_aggregate_bytes=int(r["rss_aggregate_bytes"]))
-    ctx.ledger.charge(stage, f"{stage}-{core.utc_stamp()}", seconds)
+    outcomes, seconds = runner.run_tasks(
+        tasks, workers=workers or ctx.workers(), cap_seconds=left, rss_worker_bytes=int(r["rss_worker_bytes"]), rss_aggregate_bytes=int(r["rss_aggregate_bytes"]), disk_check=lambda: accounting.check_disk(ctx.run_dir, ctx.cfg)
+    )  # fmt: skip
+    ctx.ledger.charge(stage, f"{stage}-{core.utc_stamp()}", seconds, group=grp)
+    peak = max((int(o.get("peak_rss_bytes", 0)) for o in outcomes.values()), default=0)
+    if peak:
+        ctx.record_peak(grp, peak)
     prior = runner.read_manifest(ctx.run_dir, stage)
     if prior is not None and prior["status"] == "COMPLETE":
         return prior
-    return runner.write_manifest(ctx.run_dir, stage, mode_of(ctx), outcomes, seconds, identity={"profile": ctx.profile.name}, started=started, caps={"stage_seconds": cap_seconds})
+    return runner.write_manifest(ctx.run_dir, stage, mode_of(ctx), outcomes, seconds, identity={"profile": ctx.profile.name}, started=started, caps={"stage_seconds": cap_seconds, "group": grp})
 
 
 def stage_status(ctx: Ctx, stage: str) -> str | None:
@@ -307,9 +361,16 @@ def cmd_timing(ctx: Ctx, cap_hours: float) -> dict[str, Any]:
             _stop_busy(procs)
         if m["status"] != "COMPLETE":
             return {"decision": f"PAUSED ({m['status']})", "tag": tag}
+        if tag == "quiet" and not ctx.profile.tiny:
+            alive = accounting.other_study_processes()  # R13: the condition is checked again at the end of the attempt; a process of another study that started during it makes the attempt unusable (kept, never used)
+            if alive:
+                state["attempts"][-1].update({"quiet": False, "reasons": ["another study's process was alive at the end of the attempt"], "other_processes": len(alive)})
+                write_json(att_path, core.jsonable(state))
+                return {"decision": accounting.attempt_decision(state["attempts"], first, cfg=ctx.cfg)["decision"], "attempts": len(state["attempts"]), "reasons": ["another study's process was alive at the end of the attempt"]}
         results[tag] = [read_json(t.result_path) for t in tasks]
     peak = max(int(r["peak_rss_bytes"]) for rs in results.values() for r in rs)
     n_workers = ladder.worker_count(peak, ctx.cfg)
+    ctx.record_peak("stage3", peak)
     rates = {"quiet": {f"{r['arm']}|{r['cell_type']}": r["seconds_per_update"] for r in results["quiet"]}, "busy": {f"{r['arm']}|{r['cell_type']}": r["seconds_per_update"] for r in results["busy"]},
              "eval_seconds": {f"{r['arm']}|{r['cell_type']}": r["evaluation_wall_seconds"] for r in results["quiet"]}, "eval_seconds_busy": {f"{r['arm']}|{r['cell_type']}": r["evaluation_wall_seconds"] for r in results["busy"]},
              "slots": {f"{r['arm']}|{r['cell_type']}": r["slots"] for r in results["quiet"]}, "peak_rss_bytes": peak, "workers": n_workers, "used_attempt": len(state["attempts"]) - 1}  # fmt: skip
@@ -335,48 +396,60 @@ def load_rates(run_dir: Path, *, which: str = "quiet", cfg: Mapping[str, Any] | 
 
 
 # --- Stage R -----------------------------------------------------------------------------------------------------------------------------------------
-def stage_r_result_path(run_dir: Path, name: str, phase: str) -> Path:
-    return run_dir / "stage_r" / f"{name.replace('/', '-')}-{phase}.json"
+# One task per RUN (cell type, arm, calibration draw, next ladder exposure): the driver runs the runs of every undecided cell type in parallel, one wave per round (the barrier of ruling 11), and decides by code from the sealed points.
+# Stage R's wall time is therefore set by the longest runs, not by the sum of the four runs of a cell type. Everything per run, and every intermediate decision, lives in the sealed directory; a task's result file says only ok (B1, B3).
+def ladders_of(ctx: Ctx, phase: str) -> tuple[list[int], int]:
+    base = [ctx.profile.exp(int(e)) for e in ctx.cfg["ladder"]["base"]]
+    lad = base if phase == "base" else [*base, ctx.profile.exp(int(ctx.cfg["ladder"]["extension_ceiling"]))]
+    return lad, lad[-1]
 
 
-def work_stage_r(ctx: Ctx, ct_name: str, phase: str, attempt: int) -> dict[str, Any]:
-    ct = core.cell_type_by_name(ct_name, ctx.cfg)
-    env = env_for(ctx.run_dir)
-    c, prof = ctx.cfg, ctx.profile
-    base = [prof.exp(int(e)) for e in c["ladder"]["base"]]
-    if phase == "base":
-        lad, ceiling = base, max(base)
-    else:
-        lad = [*base, prof.exp(int(c["ladder"]["extension_ceiling"]))]
-        ceiling = lad[-1]
-    out = items.stage_r_cell_type(ct, ctx.run_dir, env, ctx.th, c, attempt=attempt, ladder_values=lad, ceiling=ceiling)
-    d: ladder.Decision = out["decision"]
-    rec = {
-        "cell_type": ct_name, "phase": phase, "status": d.status, "e_star": d.e_star, "t_exposures": d.t, "shown": d.shown, "flat_below_floor": d.flat_below_floor, "label": d.label, "reference_flags": out["reference_flags"],
-        "reference_below_floor_at_t": out.get("reference_below_floor_at_t", []), "reference_nonfinite": bool(out.get("reference_nonfinite", False)),
-        "nonfinite_runs": [k[0] + str(k[1]) for k, cv in out["curves"].items() if cv.nonfinite_update is not None],
-    }  # fmt: skip
-    stage_r_result_path(ctx.run_dir, ct_name, phase).parent.mkdir(parents=True, exist_ok=True)
-    write_json(stage_r_result_path(ctx.run_dir, ct_name, phase), core.jsonable(rec))
-    return rec
+def run_waves(ctx: Ctx, cts: Sequence[core.CellType], *, phase: str, attempt: int, prefix: str, group: str, cap_seconds: float) -> str:
+    """Wave after wave until no cell type needs another run: COMPLETE, or the status of the stage that stopped (PAUSED, FAILED, ENGINEERING STOP)."""
+    sb = ctx.need_sealed()
+    lad_phase, ceil_phase = ladders_of(ctx, phase)
+    while True:
+        n = 0
+        while stage_status(ctx, f"{prefix}_{phase}_i{n}") == "COMPLETE":
+            n += 1
+        stage = f"{prefix}_{phase}_i{n}"
+        tasks = []
+        for ct in cts:
+            st = items.read_state(ct, sb, ctx.th, ctx.cfg, ctx.profile, attempt=attempt, lad=lad_phase, ceiling=ceil_phase)
+            for arm, d, e in items.stage_r_needs(st, lad_phase, ctx.profile, ctx.cfg, ceiling=ceil_phase):
+                tasks.append(ctx.task(stage, f"{items.sealed_stem(ct)}-{arm}-c{d}-e{e}", "stage-r-run", "--cell-type", ct.name, "--arm", arm, "--draw", str(d), "--exposures", str(e), "--attempt", str(attempt)))
+        if not tasks:
+            return "COMPLETE"
+        m = run_stage(ctx, stage, tasks, cap_seconds, group=group)
+        if m["status"] != "COMPLETE":
+            return str(m["status"])
+
+
+def res_of(state: items.RState, ct: core.CellType, th: core.Thresholds) -> dict[str, Any]:
+    d = state.decision
+    return {"status": d.status, "e_star": d.e_star, "t_exposures": d.t, "shown": d.shown, "flat_below_floor": d.flat_below_floor, "label": d.label, **items.stage_r_flags(state, ct, th)}
 
 
 def stage_r_entry(res: Mapping[str, Any], *, extension: str, convergence: str, t: int | None = None) -> dict[str, Any]:
-    """One ``durations.json`` entry (section 5.2 (iii)) from a cell type's final Stage R result."""
+    """One ``durations.json`` entry (section 5.2 (iii)) from a cell type's final Stage R result. An empty flag set is never silent: ``reference_flags_computed`` says whether any flag could be computed (B2)."""
     flags = res.get("reference_flags") or {"cond4": False, "other": []}
     nf = res["status"] == ladder.STATUS_NONFINITE
+    computed = bool(res.get("computed", False))
     labs: list[str] = []
     if nf:
         labs.append(labels.NON_FINITE_REHEARSAL)
     if res.get("reference_nonfinite"):
         labs.append("REFERENCE NON-FINITE IN REHEARSAL")
+    elif not computed:
+        labs.append("REFERENCE FLAGS NOT COMPUTED (A6 BELOW ITS FLOOR AT T ON BOTH DRAWS)")
     if res.get("flat_below_floor"):
         labs.append(labels.FLAT_BELOW_FLOOR)
     if res.get("reference_below_floor_at_t"):
         labs.append("REFERENCE BELOW FLOOR AT T")
     return {
         "e_star": res["e_star"], "t_exposures": t if t is not None else res["t_exposures"], "convergence": convergence, "flat_below_floor": bool(res.get("flat_below_floor")), "extension": extension, "reference_flags": flags,
-        "reference_below_floor_at_t": res.get("reference_below_floor_at_t", []), "reference_nonfinite": bool(res.get("reference_nonfinite")), "nonfinite_in_rehearsal": nf, "removed": bool(flags.get("other")), "labels": labs,
+        "reference_flags_computed": computed, "reference_below_floor_at_t": res.get("reference_below_floor_at_t", []), "reference_nonfinite": bool(res.get("reference_nonfinite")), "nonfinite_in_rehearsal": nf,
+        "removed": bool(flags.get("other")), "labels": labs,
     }  # fmt: skip
 
 
@@ -398,55 +471,78 @@ def final_entry(res_base: Mapping[str, Any], res_ext: Mapping[str, Any] | None, 
     return stage_r_entry(res_ext, extension="granted", convergence=labels.NOT_SHOWN_REHEARSAL, t=ext_t)
 
 
-def cmd_stage_r(ctx: Ctx, *, cause_file: Path | None = None, attempt: int = 0, events_dir: Path | None = None) -> dict[str, Any]:
-    """Stage R on the main grid's eight cell types: base ladders, then (once, by code) the extension rule on stage 3's quiet rates, the extension rounds granted, then ``durations.json`` with the code identity. Prints nothing before
-    ``durations.json`` is written. Refuses to overwrite ``durations.json``."""
+def entry_for(ctx: Ctx, ct: core.CellType, attempt: int, ext_status: str) -> dict[str, Any]:
+    sb = ctx.need_sealed()
+    lad, top = ladders_of(ctx, "base")
+    base = res_of(items.read_state(ct, sb, ctx.th, ctx.cfg, ctx.profile, attempt=attempt, lad=lad, ceiling=top), ct, ctx.th)
+    ext = None
+    if ext_status == "granted":
+        lad2, top2 = ladders_of(ctx, "ext")
+        ext = res_of(items.read_state(ct, sb, ctx.th, ctx.cfg, ctx.profile, attempt=attempt, lad=lad2, ceiling=top2), ct, ctx.th)
+    return final_entry(base, ext, ext_status, ctx.profile, ctx.cfg)
+
+
+def other_hours_of(ctx: Ctx) -> float:
+    """R16: the hours of the stages P adds beyond training: the measured generation and gates (stage 2) times, and the analysis and report at the config's allowance."""
+    return core.hours(ctx.ledger.charged(group="generate") + ctx.ledger.charged(group="gates")) + float(ctx.cfg["budget"]["analysis_report_hours"])
+
+
+def stage_r_extensions(ctx: Ctx, cts: Sequence[core.CellType], attempt: int, rates: ladder.Rates) -> list[dict[str, Any]]:
+    """Section 5.1 items 1 to 6, once, by code, on stage 3's quiet rates; persisted in the SEALED directory (an interrupted Stage R reuses it) and public only inside ``durations.json``."""
+    sb = ctx.need_sealed()
+    name = f"extensions-r{attempt}.json"
+    if (sealed.sealed_dir(sb) / name).is_file():
+        return list(sealed.read_sealed(sb, name, reader="stage-r-code", why="resume")["decisions"])
+    lad, top = ladders_of(ctx, "base")
+    states = {ct.name: items.read_state(ct, sb, ctx.th, ctx.cfg, ctx.profile, attempt=attempt, lad=lad, ceiling=top) for ct in cts}
+    cands = [ct for ct in cts if states[ct.name].decision.status == ladder.STATUS_CANDIDATE]
+    t_known = {ct.name: int(states[ct.name].decision.t or 0) for ct in cts if ct not in cands}
+    x8 = core.cell_type_by_name("8K/1K", ctx.cfg)
+    dec = ladder.decide_extensions(
+        cands, cts=cts, t_known=t_known, rates=rates, charged_hours=core.hours(ctx.ledger.charged(group="stage_r_base")), other_hours=other_hours_of(ctx), x8=x8, cfg=_scaled_cfg(ctx.cfg, ctx.profile)
+    )  # fmt: skip
+    decisions = [{"cell_type": d.cell_type, "granted": d.granted, "projected_hours": d.projected_hours, "budget_hours": d.budget_hours} for d in dec]
+    sealed.write_sealed(sb, name, {"decisions": decisions})
+    return decisions
+
+
+def cmd_stage_r(ctx: Ctx, *, cause_file: Path | None = None, events_dir: Path | None = None) -> dict[str, Any]:
+    """Stage R on the main grid's eight cell types. Prints nothing and writes nothing in the clear per cell type before ``durations.json`` exists (B3); all measurements, snapshots and intermediate decisions are in the sealed directory
+    (B1). Refuses to overwrite ``durations.json``. The attempt number comes from the code-identity record (R8)."""
     dur_path = ctx.repo / core.DURATIONS
     if dur_path.exists():
         raise StageRefused(f"refused: {dur_path} exists")
     if not (ctx.run_dir / "timing" / "rates.json").is_file():
         raise StageRefused("refused: stage 3 has not written timing/rates.json")
-    record_code_identity(ctx.run_dir, ctx.repo, cause_file=cause_file)
+    ctx.need_sealed()
+    attempt = int(record_code_identity(ctx.run_dir, ctx.repo, cause_file=cause_file)["attempt"])
     cts = core.cell_types(ctx.cfg)
     rates = load_rates(ctx.run_dir, cfg=ctx.cfg)
-    cap_r = ladder.stage_r_cap_hours(cts, load_rates(ctx.run_dir, which="larger", cfg=ctx.cfg), [], ctx.cfg) if not ctx.profile.tiny else 1.0
-    tasks = [ctx.task("stage_r_base", ct.name.replace("/", "-"), "stage-r", "--cell-type", ct.name, "--phase", "base", "--attempt", str(attempt)) for ct in cts]
-    m = run_stage(ctx, "stage_r_base", tasks, cap_r * 3600.0)
-    if m["status"] != "COMPLETE":
-        return {"status": m["status"], "stage": "stage_r_base"}
-    base = {ct.name: read_json(stage_r_result_path(ctx.run_dir, ct.name, "base")) for ct in cts}
-    ext_path = ctx.run_dir / "stage_r" / "extensions.json"
-    if ext_path.is_file():
-        decisions = read_json(ext_path)["decisions"]
-    else:
-        cands = [ct for ct in cts if base[ct.name]["status"] == ladder.STATUS_CANDIDATE]
-        prof = ctx.profile
-        t_known = {ct.name: int(base[ct.name]["t_exposures"]) for ct in cts if ct.name not in {c.name for c in cands}}
-        x8 = core.cell_type_by_name("8K/1K", ctx.cfg)
-        other_h = core.hours(ctx.ledger.charged("generate") + ctx.ledger.charged("timing-quiet") + ctx.ledger.charged("timing-busy"))
-        dec = ladder.decide_extensions(cands, cts=cts, t_known=t_known, rates=rates, charged_hours=core.hours(ctx.ledger.charged("stage_r_base")), other_hours=other_h, x8=x8, cfg=_scaled_cfg(ctx.cfg, prof))
-        decisions = [{"cell_type": d.cell_type, "granted": d.granted, "projected_hours": d.projected_hours, "budget_hours": d.budget_hours} for d in dec]
-        ext_path.parent.mkdir(parents=True, exist_ok=True)
-        write_json(ext_path, {**core.envelope("durations"), "decisions": decisions})
+    caps_rates = load_rates(ctx.run_dir, which="larger", cfg=ctx.cfg)
+    tiny = ctx.profile.tiny
+    cap_base = 3600.0 if tiny else ladder.stage_r_cap_hours(cts, caps_rates, [], ctx.cfg) * 3600.0
+    s = run_waves(ctx, cts, phase="base", attempt=attempt, prefix=f"stage_r_a{attempt}", group=f"stage_r_base_a{attempt}", cap_seconds=cap_base)
+    if s != "COMPLETE":
+        return {"status": s}
+    decisions = stage_r_extensions(ctx, cts, attempt, rates)
     granted = [d["cell_type"] for d in decisions if d["granted"]]
-    ext: dict[str, Any] = {}
     if granted:
-        cap_e = ladder.stage_r_cap_hours(cts, load_rates(ctx.run_dir, which="larger", cfg=ctx.cfg), granted, ctx.cfg) if not ctx.profile.tiny else 1.0
-        etasks = [ctx.task("stage_r_ext", n.replace("/", "-"), "stage-r", "--cell-type", n, "--phase", "ext", "--attempt", str(attempt)) for n in granted]
-        me = run_stage(ctx, "stage_r_ext", etasks, cap_e * 3600.0)
-        if me["status"] != "COMPLETE":
-            return {"status": me["status"], "stage": "stage_r_ext"}
-        ext = {n: read_json(stage_r_result_path(ctx.run_dir, n, "ext")) for n in granted}
+        by = {ct.name: ct for ct in cts}
+        cap_ext = 3600.0 if tiny else (ladder.stage_r_cap_hours(cts, caps_rates, granted, ctx.cfg) - ladder.stage_r_cap_hours(cts, caps_rates, [], ctx.cfg)) * 3600.0
+        s = run_waves(ctx, [by[n] for n in granted], phase="ext", attempt=attempt, prefix=f"stage_r_a{attempt}", group=f"stage_r_ext_a{attempt}", cap_seconds=cap_ext)
+        if s != "COMPLETE":
+            return {"status": s}
     status_of = {d["cell_type"]: ("granted" if d["granted"] else "refused") for d in decisions}
-    entries = {ct.name: final_entry(base[ct.name], ext.get(ct.name), status_of.get(ct.name, "none"), ctx.profile, ctx.cfg) for ct in cts}
+    entries = {ct.name: entry_for(ctx, ct, attempt, status_of.get(ct.name, "none")) for ct in cts}
     rec = ladder.durations_record(entries, code_identity(ctx.repo))
     rec["extension_decisions"] = decisions
+    rec["attempt"] = attempt
     dur_path.parent.mkdir(parents=True, exist_ok=True)
     write_json(dur_path, core.jsonable(rec))
     ev = ladder.events(entries, cts)
     if events_dir is not None:
         write_events(events_dir, ev, rec)
-    sealed.emit({"stage": "R", "status": "COMPLETE", "path": str(dur_path), "sha256": file_sha256(dur_path), "labels": ev, "hashes": sealed.sealed_hashes(ctx.run_dir)})
+    sealed.emit({"stage": "R", "status": "COMPLETE", "path": str(dur_path), "sha256": file_sha256(dur_path), "labels": ev, "hashes": sealed.sealed_hashes(ctx.need_sealed())})
     return {"status": "COMPLETE", "events": ev}
 
 
@@ -473,8 +569,8 @@ def write_events(events_dir: Path, events: Sequence[str], durations: Mapping[str
 
 # --- caps -----------------------------------------------------------------------------------------------------------------------------------------------
 def cmd_caps(ctx: Ctx, *, other_hours: float | None = None) -> dict[str, Any]:
-    """``freeze/stage_caps.json``: twice the measured projection with X8 at its ceiling included, at the larger of the quiet and busy rates (the registered run may share the machine); per-stage caps likewise; the disk projection and the
-    worker count. Refuses to overwrite."""
+    """``freeze/stage_caps.json``: the total cap is the hours CHARGED SO FAR plus twice the measured projection (R2), the projection taken at the larger of the quiet and busy rates (the registered run may share the machine), with X8 at its
+    ceiling included; X8 has its own stage cap (twice its own projected stage), and so has its calibration. Refuses to overwrite."""
     path = ctx.repo / core.STAGE_CAPS
     if path.exists():
         raise StageRefused(f"refused: {path} exists")
@@ -485,15 +581,17 @@ def cmd_caps(ctx: Ctx, *, other_hours: float | None = None) -> dict[str, Any]:
     live = [ct for ct in cts if ct.name in t_assumed]
     x8 = core.cell_type_by_name("8K/1K", ctx.cfg)
     x8_t = ctx.profile.exp(int(ctx.cfg["ladder"]["extended_ceiling_t"]))
-    oh = other_hours if other_hours is not None else core.hours(ctx.ledger.charged("generate"))
+    oh = other_hours if other_hours is not None else other_hours_of(ctx)
+    charged = core.hours(ctx.ledger.charged())
     proj, stages = ladder.projected_hours(cts=live, t_assumed=t_assumed, granted_rounds=[], rates=rates, charged_hours=0.0, other_hours=oh, x8=x8, workers=ctx.workers(), ladder_top=0, x8_t=x8_t)
     f = float(ctx.cfg["budget"]["stage_cap_factor"])
     per = {s.name: f * (s.total_seconds / ctx.workers() + s.longest_seconds) / 3600.0 for s in stages}
     updates_total = sum(it["updates"] for it in planmod.build_plan(ctx.cfg, dur, profile=ctx.profile)["items"]["main"])
     rec = {
-        **core.envelope("stage_caps"), "provisional": False, "projection_hours": proj, "total_hours": f * proj, "stage_hours": {"main": per["main"], "x8_calibration": next((v for k, v in per.items() if k.startswith("calibration")), 0.0), "x8": per.get("main", 0.0), "analysis": 1.0, "report": 1.0},
-        "stage_r_hours": f * core.hours(ctx.ledger.charged("stage_r_base") + ctx.ledger.charged("stage_r_ext")), "rates_used": "the larger of the quiet and busy rates", "workers": ctx.workers(), "disk_projection_bytes_main": accounting.disk_projection_bytes(updates_total, ctx.cfg),
-        "label": "ANALYTICAL projection from stage 3's measured rates; caps are twice it (resource caps, never a label)",
+        **core.envelope("stage_caps"), "provisional": False, "projection_hours": proj, "charged_hours_at_caps": charged, "total_hours": charged + f * proj,
+        "stage_hours": {"main": per["main"], "x8_calibration": next((v for k, v in per.items() if k.startswith("calibration")), 0.0), "x8": per["x8"], "analysis": 1.0, "report": 1.0},
+        "stage_r_hours": f * core.hours(ctx.ledger.charged(group="stage_r_base_a0") + ctx.ledger.charged(group="stage_r_ext_a0")), "rates_used": "the larger of the quiet and busy rates", "workers": ctx.workers(),
+        "disk_projection_bytes_main": accounting.disk_projection_bytes(updates_total, ctx.cfg), "label": "ANALYTICAL projection from stage 3's measured rates; caps are charged-so-far plus twice it (resource caps, never a label)",
     }  # fmt: skip
     path.parent.mkdir(parents=True, exist_ok=True)
     write_json(path, core.jsonable(rec))
@@ -501,23 +599,26 @@ def cmd_caps(ctx: Ctx, *, other_hours: float | None = None) -> dict[str, Any]:
 
 
 # --- main grid ------------------------------------------------------------------------------------------------------------------------------------
-def verify_manifest(ctx: Ctx, set_name: str, ct: core.CellType, data: Any) -> None:
-    """The draw's recorded hashes (frozen with the plan) must equal the regenerated data's: a difference is PAUSED — IDENTITY."""
-    m = core.read_record(draw_manifest_path(ctx.run_dir, set_name), "data_manifest")
+def verify_manifest(ctx: Ctx, plan: Mapping[str, Any], set_name: str, ct: core.CellType, data: Any) -> None:
+    """R17 (section 14): the draw's manifest is a frozen input. Its file must hash to the value the plan names, and the regenerated data must equal the hashes in it; a difference is PAUSED — IDENTITY."""
+    path = draw_manifest_path(ctx.run_dir, set_name)
+    want = (plan.get("draw_manifests") or {}).get(set_name)
+    if want is None or not path.is_file() or file_sha256(path) != want:
+        raise IdentityMismatch(f"the data manifest of {set_name} is missing or differs from the SHA-256 the plan names")
+    m = core.read_record(path, "data_manifest")
     if m["sha256s"][str(ct.facts)] != data.sha256s():
         raise IdentityMismatch(f"the data of {set_name} differ from the manifest the plan names")
 
 
-def work_cell_group(ctx: Ctx, plan_items: Sequence[Mapping[str, Any]], result: Path, *, x8: bool = False) -> dict[str, Any]:
+def work_cell_group(ctx: Ctx, plan_items: Sequence[Mapping[str, Any]], plan: Mapping[str, Any], *, x8: bool = False) -> dict[str, Any]:
     env = env_for(ctx.run_dir)
     done = []
     for it in plan_items:
         ct = core.cell_type_by_name(it["cell_type"], ctx.cfg)
         spec = core.set_of_name(it["seed_set"], ctx.cfg, ctx.profile.name)
-        verify_manifest(ctx, it["seed_set"], ct, items.data_for(env, spec, ct.facts, ctx.cfg))
+        verify_manifest(ctx, plan, it["seed_set"], ct, items.data_for(env, spec, ct.facts, ctx.cfg))
         cell = core.Cell("REG", ct.series, it["arm"], ct.facts, ct.slots, it["draw"], it["init_seed"])
-        t = int(it["t_exposures"])
-        items.run_cell(cell, ct, t, ctx.run_dir, env, ctx.cfg, spec=spec)
+        items.run_cell(cell, ct, int(it["t_exposures"]), ctx.run_dir, env, ctx.cfg, spec=spec)
         done.append(it["label"])
     return {"cells": done}
 
@@ -565,11 +666,19 @@ def main_analysis(ctx: Ctx, plan: Mapping[str, Any], *, x8_items: Sequence[Mappi
     durations = {n: {**v, "t_exposures": v.get("t_exposures")} for n, v in plan["cell_types"].items()}
     if x8_entry is not None:
         durations[x8_entry["cell_type"]] = dict(x8_entry)
-    errs = [*load_errors, *item_errors_of(ctx, ("main", "x8"))]
+    errs = [*load_errors, *item_errors_of(ctx, ("main", "x8", *x8_stage_names(ctx)))]
     dp = read_json(ctx.run_dir / "draw_plan.json") if (ctx.run_dir / "draw_plan.json").is_file() else {}
     cells = [core.make_cell("REG", core.cell_type_by_name(it["cell_type"], ctx.cfg), it["arm"], it["draw"], 0, ctx.cfg, ctx.profile.name) for it in plan["items"]["main"]]
     paused = any(stage_status(ctx, s) == "PAUSED" for s in ("main",))
+    fr_path = ctx.repo / core.FREEZE_RECORD
+    for n in sealed.disclosed_cell_types(read_json(fr_path) if fr_path.is_file() else None, list(durations)):
+        durations[n] = {**durations[n], "lead_saw_sealed": True}
     return analysis.analyze(reg, durations, plan_cells=cells, item_errors=errs, paused=paused, x8_status=x8_status, replaced_draws={int(k): v for k, v in dp.get("replacements", {}).items()}, cfg=ctx.cfg)
+
+
+def x8_stage_names(ctx: Ctx) -> list[str]:
+    """R7: every stage of X8's calibration, whatever attempt and iteration (their failed tasks are item errors that stop the analysis)."""
+    return sorted(p.name for p in (ctx.run_dir).glob("x8_cal_a*_i*") if (p / "manifest.json").is_file())
 
 
 def x8_dir(ctx: Ctx) -> Path:
@@ -596,9 +705,9 @@ def cmd_x8_gate(ctx: Ctx) -> dict[str, Any]:
     return {"x8_triggered": trig, "L_Q": lq}
 
 
-def cmd_x8(ctx: Ctx, *, cause_file: Path | None = None, attempt: int = 0) -> dict[str, Any]:
-    """The conditional block: X8's calibration by the same ladder on the same calibration draws (the Stage R whose durations.json was frozen), the extension rule with B unchanged (a refusal gives NOT SHOWN), the addendum written to the
-    run directory (never the worktree) with its SHA-256 in the ledger, then its 30 cells."""
+def cmd_x8(ctx: Ctx) -> dict[str, Any]:
+    """The conditional block: X8's calibration by the same ladder (one task per run, waves) on the calibration draws of the Stage R whose durations.json was frozen (its attempt is read from it), the extension rule with B unchanged and P
+    equal to the hours charged so far plus X8's remaining projection on stage 3's quiet rates (R1; a refusal gives NOT SHOWN), the addendum written to the run directory (never the worktree) with its SHA-256 in the ledger, then its cells."""
     gate = core.read_record(x8_dir(ctx) / "gate.json", "gate") if (x8_dir(ctx) / "gate.json").is_file() else None
     if gate is None or not gate["x8_triggered"]:
         raise StageRefused("refused: X8 was not triggered (no gate record, or L_Q is below 4)")
@@ -606,28 +715,30 @@ def cmd_x8(ctx: Ctx, *, cause_file: Path | None = None, attempt: int = 0) -> dic
     ct = core.cell_type_by_name("8K/1K", ctx.cfg)
     add_path = x8_dir(ctx) / "addendum.json"
     caps = core.read_record(ctx.repo / core.STAGE_CAPS, "stage_caps")
+    attempt = int(read_json(ctx.repo / core.DURATIONS).get("attempt", 0))
     if not add_path.is_file():
+        sb = ctx.need_sealed()
         cap_s = float(caps["stage_hours"]["x8_calibration"]) * 3600.0
-        t1 = [ctx.task("x8_cal_base", "8K-1K", "stage-r", "--cell-type", ct.name, "--phase", "base", "--attempt", str(attempt))]
-        m = run_stage(ctx, "x8_cal_base", t1, cap_s)
-        if m["status"] != "COMPLETE":
-            return {"status": m["status"], "stage": "x8_cal_base"}
-        base = read_json(stage_r_result_path(ctx.run_dir, ct.name, "base"))
-        ext_status, res_ext = "none", None
-        if base["status"] == ladder.STATUS_CANDIDATE:
-            cts = core.cell_types(ctx.cfg)
-            t_known = {n: int(v["t_exposures"]) for n, v in plan["cell_types"].items() if not v.get("removed")}
-            rates = load_rates(ctx.run_dir, which="larger", cfg=ctx.cfg)
-            live = [c for c in cts if c.name in t_known]
-            d = ladder.decide_extensions([ct], cts=live, t_known=t_known, rates=rates, charged_hours=core.hours(ctx.ledger.charged()), other_hours=0.0, x8=ct, cfg=_scaled_cfg(ctx.cfg, ctx.profile))[0]
-            ext_status = "granted" if d.granted else "refused"
-            if d.granted:
-                t2 = [ctx.task("x8_cal_ext", "8K-1K", "stage-r", "--cell-type", ct.name, "--phase", "ext", "--attempt", str(attempt))]
-                me = run_stage(ctx, "x8_cal_ext", t2, cap_s)
-                if me["status"] != "COMPLETE":
-                    return {"status": me["status"], "stage": "x8_cal_ext"}
-                res_ext = read_json(stage_r_result_path(ctx.run_dir, ct.name, "ext"))
-        entry = final_entry(base, res_ext, ext_status, ctx.profile, ctx.cfg)
+        prefix = f"x8_cal_a{attempt}"
+        s = run_waves(ctx, [ct], phase="base", attempt=attempt, prefix=prefix, group="x8_cal", cap_seconds=cap_s)
+        if s != "COMPLETE":
+            return {"status": s, "stage": prefix}
+        ext_status = "none"
+        lad, top = ladders_of(ctx, "base")
+        if items.read_state(ct, sb, ctx.th, ctx.cfg, ctx.profile, attempt=attempt, lad=lad, ceiling=top).decision.status == ladder.STATUS_CANDIDATE:
+            name = f"x8-extension-r{attempt}.json"
+            if (sealed.sealed_dir(sb) / name).is_file():
+                d = sealed.read_sealed(sb, name, reader="stage-r-code", why="resume")["decision"]
+            else:
+                dd = ladder.decide_x8_extension(ct, load_rates(ctx.run_dir, cfg=ctx.cfg), core.hours(ctx.ledger.charged()), _scaled_cfg(ctx.cfg, ctx.profile))
+                d = {"granted": dd.granted, "projected_hours": dd.projected_hours, "budget_hours": dd.budget_hours}
+                sealed.write_sealed(sb, name, {"decision": d})
+            ext_status = "granted" if d["granted"] else "refused"
+            if d["granted"]:
+                s = run_waves(ctx, [ct], phase="ext", attempt=attempt, prefix=prefix, group="x8_cal", cap_seconds=cap_s)
+                if s != "COMPLETE":
+                    return {"status": s, "stage": prefix}
+        entry = entry_for(ctx, ct, attempt, ext_status)
         cells = []
         if not entry["removed"]:
             for arm in ct.arms:
@@ -635,12 +746,16 @@ def cmd_x8(ctx: Ctx, *, cause_file: Path | None = None, attempt: int = 0) -> dic
                     p0 = next(it for it in plan["items"]["main"] if it["draw"] == draw)
                     c = core.make_cell("REG", ct, arm, draw, 0, ctx.cfg, ctx.profile.name)
                     cells.append({"label": c.label, "cell_type": ct.name, "arm": arm, "draw": draw, "init_seed": c.init_seed, "seed_set": p0["seed_set"], "t_exposures": entry["t_exposures"], "updates": core.updates_for(entry["t_exposures"], ctx.profile.facts_of(ct.facts))})
-        add = {**core.envelope("x8_addendum"), "cell_type": ct.name, "entry": entry, "items": cells, "plan_file_sha256": file_sha256(ctx.repo / core.PLAN), "code_identity": code_identity(ctx.repo)}
+        add = {**core.envelope("x8_addendum"), "cell_type": ct.name, "entry": entry, "items": cells, "plan_file_sha256": file_sha256(ctx.repo / core.PLAN), "code_identity": code_identity(ctx.repo), "attempt": attempt}
         core.write_record(add_path, add)
         ctx.ledger.charge("x8-addendum", f"sha256:{file_sha256(add_path)}", 0.0)
+        gate_hash = file_sha256(x8_dir(ctx) / "gate.json")
+        ctx.ledger.charge("x8-gate", f"sha256:{gate_hash}", 0.0)
     add = core.read_record(add_path, "x8_addendum")
     if not any(e["run"] == f"sha256:{file_sha256(add_path)}" for e in ctx.ledger.entries()):
         raise IdentityMismatch("the X8 addendum differs from the SHA-256 in the ledger")
+    if not any(e["run"] == f"sha256:{file_sha256(x8_dir(ctx) / 'gate.json')}" for e in ctx.ledger.entries()):
+        raise IdentityMismatch("the X8 gate record differs from the SHA-256 in the ledger")
     if add["entry"]["removed"] or not add["items"]:
         return {"status": "COMPLETE", "not_run": "NOT RUN — REFERENCE FAILS CONDITION " + "/".join(str(x) for x in add["entry"]["reference_flags"]["other"])}
     groups = groups_of(add["items"])
@@ -677,9 +792,45 @@ def cmd_report(ctx: Ctx) -> dict[str, Any]:
     p = ctx.run_dir / "analysis.json"
     if not p.is_file():
         raise StageRefused("refused: no analysis.json (the analysis refused or has not run)")
-    text = report.render(read_json(p))
+    a = read_json(p)
+    ratios: dict[str, list[float]] = {}
+    dur_p = ctx.repo / core.DURATIONS
+    if ctx.sealed_base is not None and dur_p.is_file():
+        attempt = int(read_json(dur_p).get("attempt", 0))
+        plan = load_plan_checked(ctx)
+        for name, ty in a.get("types", {}).items():
+            if any("{x}" in x for x in ty["labels"]):
+                ct = core.cell_type_by_name(name, ctx.cfg)
+                for d in (1, 2):
+                    rec = sealed.read_sealed(ctx.sealed_base, items.point_name(ct, "A6", d, attempt, int(plan["cell_types"][name]["t_exposures"])), reader="report-code", why="x of the condition-4 label, after the outcome was recomputed")
+                    o = items.obs_from_json(rec["obs"])
+                    ratios.setdefault(name, []).append(float(o.m_h / o.m_p))
+    text = report.render(a, h_ratio=ratios)
     (ctx.run_dir / "report.md").write_text(text, encoding="utf-8")
     return {"report": str(ctx.run_dir / "report.md")}
+
+
+def cmd_a0_memory(ctx: Ctx) -> dict[str, Any]:
+    """Sections 9 and 10 (R6): one A0 cell on the rehearsal draw at the full frozen T of the series-M cell type with the most updates (ties: the larger slot count); time and memory are its only output. Its peak joins the memory rule."""
+    from studies.p9i.train import training_stream_for
+
+    dur = core.read_record(ctx.repo / core.DURATIONS, "durations")["cell_types"]
+    ms = [ct for ct in core.cell_types(ctx.cfg) if ct.series == "M" and not dur[ct.name].get("removed")]
+    ct = max(ms, key=lambda c: (core.updates_for(int(dur[c.name]["t_exposures"]), ctx.profile.facts_of(c.facts)), c.slots))
+    t_exp = int(dur[ct.name]["t_exposures"])
+    env = env_for(ctx.run_dir)
+    facts = env.facts_of(ct.facts)
+    spec = core.rehearsal_set(ctx.cfg, ctx.profile.name)
+    data = items.data_for(env, spec, ct.facts, ctx.cfg)
+    cell = core.Cell("REH", ct.series, "A0", ct.facts, ct.slots, 1, core.init_seed("REH", "A0", 1, 0, ctx.cfg, ctx.profile.name))
+    began = time.monotonic()
+    seg = adapter.run_segment(adapter.Job(cell, data, training_stream_for(data, facts), env.backbone, ctx.run_dir / "a0_memory", data.seeds.r1_codes, last_update=core.updates_for(t_exp, facts), snapshots=(), diag_early=(ctx.profile.diag or (64, 1024, 4096))[0], diag_late=(ctx.profile.diag or (64, 1024, 4096))[1], diag_switch=(ctx.profile.diag or (64, 1024, 4096))[2]))
+    peak = int(max(seg.record["sampled_rss_bytes"], seg.record["peak_rss_bytes"]))
+    ctx.record_peak("a0_memory", peak)
+    rec = {**core.envelope("timing"), "label": "a0-memory", "cell_type": ct.name, "arm": "A0", "updates": core.updates_for(t_exp, facts), "wall_seconds": time.monotonic() - began, "peak_rss_bytes": peak, "status": seg.record["status"]}
+    sealed.validate_public(rec)
+    write_json(ctx.run_dir / "timing" / "a0_memory.json", core.jsonable(rec))
+    return {"status": "COMPLETE" if seg.record["status"] == "completed" else "FAILED", "workers": ctx.workers(), "peak_rss_bytes": peak}
 
 
 # --- worker entry ------------------------------------------------------------------------------------------------------------------------------
@@ -687,54 +838,56 @@ def worker_main(argv: Sequence[str]) -> int:
     import argparse
 
     ap = argparse.ArgumentParser()
-    ap.add_argument("kind", choices=("generate", "timing", "stage-r", "cells"))
+    ap.add_argument("kind", choices=("generate", "timing", "stage-r-run", "cells"))
     ap.add_argument("--run-dir", required=True)
     ap.add_argument("--repo", required=True)
+    ap.add_argument("--sealed-dir")
+    ap.add_argument("--result", required=True)
     ap.add_argument("--set")
     ap.add_argument("--arm")
     ap.add_argument("--cell-type")
     ap.add_argument("--tag")
-    ap.add_argument("--phase")
+    ap.add_argument("--draw", type=int)
+    ap.add_argument("--exposures", type=int)
     ap.add_argument("--attempt", type=int, default=0)
     ap.add_argument("--group")
     ap.add_argument("--x8", action="store_true")
     a = ap.parse_args(list(argv))
     torch.set_num_threads(1)
-    torch.set_num_interop_threads(1)
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError:
+        pass  # already set in this process (a test calling the worker in-process)
     torch.use_deterministic_algorithms(True)
     run_dir, repo = Path(a.run_dir), Path(a.repo)
     registered = (repo / core.FREEZE_RECORD).is_file() and a.kind == "cells"
-    d = run_dir / "tasks"
     try:
-        ctx = Ctx(repo, run_dir, registered=registered)
+        ctx = Ctx(repo, run_dir, registered=registered, sealed_dir=Path(a.sealed_dir) if a.sealed_dir else None)
         worker_guard(ctx)
+        public: dict[str, Any] = {}
         if a.kind == "generate":
-            res: dict[str, Any] = work_generate(ctx, a.set)
-            out = d / "generate" / f"{a.set}.result.json"
+            res = work_generate(ctx, a.set)
+            public = {"g1_passed": res["g1_passed"]}
         elif a.kind == "timing":
             res = work_timing(ctx, a.arm, a.cell_type, a.tag)
-            out = d / f"timing-{a.tag}" / f"{a.arm}-{a.cell_type.replace('/', '-')}.result.json"
-        elif a.kind == "stage-r":
-            res = work_stage_r(ctx, a.cell_type, a.phase, a.attempt)
-            stage = {"base": "stage_r_base", "ext": "stage_r_ext"}[a.phase]
-            if a.cell_type == "8K/1K":
-                stage = "x8_cal_" + a.phase
-            out = d / stage / f"{a.cell_type.replace('/', '-')}.result.json"
+            public = {k: res[k] for k in ("arm", "cell_type", "slots", "facts", "updates", "wall_seconds", "seconds_per_update", "evaluation_wall_seconds", "peak_rss_bytes")}
+        elif a.kind == "stage-r-run":
+            ct = core.cell_type_by_name(a.cell_type, ctx.cfg)
+            lad, _ = ladders_of(ctx, "ext")
+            items.stage_r_run(ct, a.arm, a.draw, a.exposures, ctx.need_sealed(), env_for(run_dir), ctx.cfg, attempt=a.attempt, lad=lad)  # nothing about the run is returned or printed (B3)
         else:
             plan = load_plan_checked(ctx)
             its = list(core.read_record(x8_dir(ctx) / "addendum.json", "x8_addendum")["items"]) if a.x8 else plan["items"]["main"]
-            g = groups_of(its)[a.group]
-            res = work_cell_group(ctx, g, d, x8=a.x8)
-            out = d / ("x8" if a.x8 else "main") / f"{a.group}.result.json"
+            work_cell_group(ctx, groups_of(its)[a.group], plan, x8=a.x8)
+        out = Path(a.result)
         out.parent.mkdir(parents=True, exist_ok=True)
-        keep = ("arm", "cell_type", "slots", "facts", "updates", "wall_seconds", "seconds_per_update", "evaluation_wall_seconds", "peak_rss_bytes") if a.kind == "timing" else ("cells", "status", "label", "cell_type", "g1_passed")
-        write_json(out, core.jsonable({"ok": True, **{k: v for k, v in res.items() if k in keep}}))
+        write_json(out, core.jsonable({"ok": True, **public}))
         return 0
-    except IdentityMismatch as exc:
+    except (IdentityMismatch, StageRefused) as exc:
         print(f"PAUSED — IDENTITY: {str(exc)[:200]}", file=sys.stderr)
         return IDENTITY_EXIT
-    except (adapter.EnvironmentStop, accounting.DiskPause, MemoryError, psutil.Error) as exc:
-        print(f"PAUSED — ENVIRONMENT: {type(exc).__name__}", file=sys.stderr)
+    except (adapter.EnvironmentStop, accounting.DiskPause, MemoryError, psutil.Error, OSError) as exc:
+        print(f"PAUSED — ENVIRONMENT: {type(exc).__name__}", file=sys.stderr)  # R4: an environment condition anywhere in a worker is a pause, never a permanent failed task
         return ENV_EXIT
     except CodeChanged as exc:
         print(str(exc), file=sys.stderr)

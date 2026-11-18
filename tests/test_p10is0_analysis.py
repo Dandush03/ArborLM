@@ -117,7 +117,7 @@ def test_flag_on_condition_4_keeps_line_a_and_prints_not_evaluable() -> None:
     assert (st["A"], st["G"], st["Q"]) == ("HOLDS", "NOT EVALUABLE", "NOT EVALUABLE")
     assert head(out) == "OVERLOAD NOT EVALUABLE AT ℓ₁ — REFERENCE; ADDRESSING QUALIFIED UP TO 1"  # load 2: M NE, S holds -> NE
     assert out["l1_line_a_beside_headline"] == {"M": "HOLDS"}  # type: ignore[index]
-    assert "REFERENCE ALSO FAILS CONDITION 4 (A6 H-ratio x on calibration draws)" in out["types"]["8K/4K"]["labels"]  # type: ignore[index]
+    assert "REFERENCE ALSO FAILS CONDITION 4 (A6 H-ratio {x} on calibration draws)" in out["types"]["8K/4K"]["labels"]  # type: ignore[index]
     two = run({**reg, **fails("8K/4K", "A5-D", range(1, 3), rec(obs(0.5)))}, dur)  # n_A = 2: Line Q FAILS whatever condition 4 gives
     assert two["states_by_load_series"]["2"]["M"]["Q"] == "FAILS" and two["states_by_load_series"]["2"]["M"]["G"] == "NOT EVALUABLE"  # type: ignore[index]
     unstable = run({**reg, **fails("8K/4K", "A5-D", DRAWS, rec(obs(stab=0.3)))}, dur)  # Line A holds but not ADDRESS STABLE: FAILS

@@ -124,17 +124,17 @@ def test_extension_rule_order_budget_and_continue_after_refusal() -> None:
     x8 = core.cell_type_by_name("8K/1K", CFG)
     t_known = {ct.name: 2048 for ct in cts}
     cands = [core.cell_type_by_name(n, CFG) for n in ("2K/512", "8K/4K", "2K/4K")]  # deliberately out of order
-    dec = ladder.decide_extensions(cands, cts=cts, t_known=t_known, rates=rates(), charged_hours=0.0, other_hours=1.5, x8=x8, cfg=CFG)
+    dec = ladder.decide_extensions(cands, cts=cts, t_known=t_known, rates=rates(0.002), charged_hours=0.0, other_hours=1.5, x8=x8, cfg=CFG)
     assert [d.cell_type for d in dec] == ["2K/4K", "8K/4K", "2K/512"]  # ascending load; the 0.5 load first
     assert all(d.budget_hours == 55.0 for d in dec)
     assert [d.granted for d in dec][0] is True
     # a tight budget: refuse the big one, still try the next
     tight = {**{k: v for k, v in CFG.items()}, "budget": {**CFG["budget"], "b_hours": 1e-9}}
-    assert not any(d.granted for d in ladder.decide_extensions(cands, cts=cts, t_known=t_known, rates=rates(), charged_hours=0.0, other_hours=0.0, x8=x8, cfg=tight))
+    assert not any(d.granted for d in ladder.decide_extensions(cands, cts=cts, t_known=t_known, rates=rates(0.002), charged_hours=0.0, other_hours=0.0, x8=x8, cfg=tight))
     # continue after refusal: budget between the cheap and the expensive cell type
-    lo = ladder.decide_extensions(cands[:1], cts=cts, t_known=t_known, rates=rates(), charged_hours=0.0, other_hours=0.0, x8=x8, cfg=CFG)[0].projected_hours
+    lo = ladder.decide_extensions(cands[:1], cts=cts, t_known=t_known, rates=rates(0.002), charged_hours=0.0, other_hours=0.0, x8=x8, cfg=CFG)[0].projected_hours
     mid = {**CFG, "budget": {**CFG["budget"], "b_hours": lo + 0.0001}}
-    out = ladder.decide_extensions([core.cell_type_by_name("8K/4K", CFG), core.cell_type_by_name("2K/512", CFG)], cts=cts, t_known=t_known, rates=rates(), charged_hours=0.0, other_hours=0.0, x8=x8, cfg=mid)
+    out = ladder.decide_extensions([core.cell_type_by_name("8K/4K", CFG), core.cell_type_by_name("2K/512", CFG)], cts=cts, t_known=t_known, rates=rates(0.002), charged_hours=0.0, other_hours=0.0, x8=x8, cfg=mid)
     assert out[0].granted is False and out[0].projected_hours > lo  # the expensive one is refused; the next candidate is still tried
     assert out[1].cell_type == "2K/512" and out[1].projected_hours > 0
 
@@ -144,8 +144,8 @@ def test_projection_arithmetic() -> None:
     r = rates(0.01, 0.0)
     p, stages = ladder.projected_hours(cts=[ct], t_assumed={ct.name: 512}, granted_rounds=[], rates=r, charged_hours=1.0, other_hours=0.5, x8=None, workers=6, ladder_top=16384, x8_t=0)
     per_cell = 0.01 * 8192
-    assert stages[0].total_seconds == pytest.approx(per_cell * 20) and stages[0].longest_seconds == pytest.approx(per_cell)
-    assert p == pytest.approx(1.5 + (per_cell * 20 / 6 + per_cell) / 3600)
+    assert stages[0].total_seconds == pytest.approx(per_cell * 20) and stages[0].longest_seconds == pytest.approx(per_cell * 2)  # one task per (cell type, draw): its two arms
+    assert p == pytest.approx(1.5 + (per_cell * 20 / 6 + per_cell * 2) / 3600)
 
 
 def test_worker_count_rule() -> None:
@@ -153,9 +153,9 @@ def test_worker_count_rule() -> None:
     assert ladder.worker_count(int(0.5 * gib), CFG) == 6
     assert ladder.worker_count(int(1.5 * gib), CFG) == 6
     assert ladder.worker_count(2 * gib, CFG) == 4
-    assert ladder.worker_count(9 * gib, CFG) == 1
-    with pytest.raises(ladder.EngineeringStop):
-        ladder.worker_count(9 * gib + 1, CFG)
+    assert ladder.worker_count(3 * gib, CFG) == 3
+    with pytest.raises(ladder.EngineeringStop, match="3 GiB"):
+        ladder.worker_count(3 * gib + 1, CFG)  # R6: above the per-worker guard it is PAUSED before it starts
 
 
 def obs(acc: float = 0.95, **kw: object) -> labels.Obs:
