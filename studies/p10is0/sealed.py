@@ -23,7 +23,7 @@ from . import core
 SEALED = "sealed"
 ACCESS_LOG = "sealed_access_log.jsonl"
 ALLOWED_READERS = ("auditor-recomputation", "stage-r-code", "disclose-code")  # the code that makes the selections (resume, plateau) reads its own measurements; no person does
-WAVE_LIMIT_SENTENCE = "Stage R's public manifests still show each wave's task count, which shows that some cell type decided or that a run went non-finite, but not which."
+WAVE_LIMIT_SENTENCE = "Stage R's public manifests still show each wave's task count and its duration, which show that some cell type decided or that a run went non-finite, but not which."
 LABEL_SEEN = "CALIBRATION VALUES SEEN BY THE LEAD"
 
 PUBLIC_KEYS = frozenset(

@@ -14,6 +14,7 @@ import json
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -124,26 +125,55 @@ def synthetic(repo: Path, run_dir: Path, workers: int | None = None) -> dict[str
         **core.envelope("rehearsal"), "phase": "synthetic", "profile": "test", "stages": stages, "candidate": {"status": "COMPLETE", "plan_file_sha256": file_sha256(copy / core.PLAN)}, "caps_provisional": False,
         "headline_step": analysis["headline"]["step"], "x8_gate_forced_in_synthetic_run": forced, "sealed_dir": str(sealed_dir), "x8_status": analysis.get("x8", {}).get("status"), "platform": accounting_platform(), "wave_size_limit": sealed.WAVE_LIMIT_SENTENCE, "note": "a pipeline rehearsal on synthetic tiny data: not a measurement of anything", "seeds": "test profile only",
     }  # fmt: skip
-    write_json(run_dir / "rehearsal.json", core.jsonable(record))
+    write_json(run_dir / "rehearsal.json", core.jsonable(public_rehearsal_record(record)))
     return record
 
 
-def real(repo: Path, run_dir: Path, ct_name: str, exposures: int) -> dict[str, Any]:
-    """One real-size cell type on the rehearsal draw (the lead runs this). Prints and records whitelisted figures only."""
-    ctx = drivers.Ctx(repo, run_dir, registered=False)
-    if ctx.profile.tiny:
+PUBLIC_REHEARSAL_KEYS = frozenset({"kind", "schema", "study", "phase", "profile", "cell_type", "exposures", "stages", "items", "platform", "gate", "note", "seeds", "wave_size_limit", "sealed_dir_recorded", "caps_provisional", "candidate", "headline_step", "x8_gate_forced_in_synthetic_run", "sealed_dir", "x8_status"})
+PUBLIC_REHEARSAL_STAGE_KEYS = frozenset({"status", "seconds_per_update", "peak_rss_bytes", "evaluation_wall_seconds", "items", "stdout_lines", "passed"})
+PUBLIC_PLATFORM_KEYS = frozenset({"system", "machine", "python", "torch", "torch_num_threads", "torch_interop_threads", "deterministic_algorithms"})
+
+
+class RehearsalRecordError(ValueError):
+    """A public rehearsal record held a key outside the whitelist (E2): accuracy, loss and probe values belong in the sealed directory."""
+
+
+def public_rehearsal_record(rec: dict[str, Any]) -> dict[str, Any]:
+    """E2: the public rehearsal record keeps only engineering figures (status, seconds, peak memory, counts of items, platform, gate pass or fail). Any other key refuses the whole record."""
+    extra = set(rec) - PUBLIC_REHEARSAL_KEYS
+    if extra:
+        raise RehearsalRecordError(f"keys outside the public rehearsal whitelist: {sorted(extra)}")
+    for name, st in (rec.get("stages") or {}).items():
+        bad = set(st) - PUBLIC_REHEARSAL_STAGE_KEYS
+        if bad:
+            raise RehearsalRecordError(f"stage {name!r} has keys outside the whitelist: {sorted(bad)}")
+    bad_p = set(rec.get("platform") or {}) - PUBLIC_PLATFORM_KEYS
+    if bad_p:
+        raise RehearsalRecordError(f"platform has keys outside the whitelist: {sorted(bad_p)}")
+    return rec
+
+
+def real(repo: Path, run_dir: Path, ct_name: str, exposures: int, sealed_dir: Path, *, allow_test_profile: bool = False) -> dict[str, Any]:
+    """One real-size cell type on the rehearsal draw (the lead runs this). The cell records of the rehearsal draw (accuracy counts, per-update losses, probe records, snapshots) go to the SEALED directory (E2); the public record and the
+    printed lines hold whitelisted engineering figures only. The time of this phase is charged to the ledger's ``gates`` group (it enters the projection P)."""
+    began = time.monotonic()
+    ctx = drivers.Ctx(repo, run_dir, registered=False, sealed_dir=sealed_dir)
+    if ctx.profile.tiny and not allow_test_profile:
         raise ValueError("the real phase runs under the registered profile")
     ct = core.cell_type_by_name(ct_name, ctx.cfg)
-    out: dict[str, Any] = {**core.envelope("rehearsal"), "phase": "real", "cell_type": ct_name, "exposures": exposures, "stages": {}}
+    out: dict[str, Any] = {**core.envelope("rehearsal"), "phase": "real", "profile": ctx.profile.name, "cell_type": ct_name, "exposures": exposures, "stages": {}, "platform": accounting_platform(), "wave_size_limit": sealed.WAVE_LIMIT_SENTENCE}
     drivers.work_generate_rehearsal(ctx)
     env = drivers.env_for(run_dir)
+    store = sealed.sealed_dir(ctx.need_sealed()) / "rehearsal"
     for arm in ct.arms:
         timing = drivers.work_timing(ctx, arm, ct_name, "rehearsal")
-        cell = core.make_cell("REH", ct, arm, 1, 0, ctx.cfg)
-        items.run_cell(cell, ct, exposures, run_dir, env, ctx.cfg, spec=core.rehearsal_set(ctx.cfg), reference_swap=arm == "A6")
-        out["stages"][arm] = {"status": "COMPLETE", "seconds_per_update": timing["seconds_per_update"], "peak_rss_bytes": timing["peak_rss_bytes"], "evaluation_wall_seconds": timing["evaluation_wall_seconds"]}
-        sealed.emit({"stage": "rehearsal", "arm": arm, "cell_type": ct_name, "seconds_per_update": timing["seconds_per_update"], "peak_rss_bytes": timing["peak_rss_bytes"], "status": "COMPLETE"})
-    write_json(run_dir / "rehearsal_real.json", core.jsonable(out))
+        cell = core.make_cell("REH", ct, arm, 1, 0, ctx.cfg, ctx.profile.name)
+        res = items.run_cell(cell, ct, exposures, store, env, ctx.cfg, spec=core.rehearsal_set(ctx.cfg, ctx.profile.name), reference_swap=arm == "A6")
+        out["stages"][arm] = {"status": "COMPLETE" if res["status"] == "ok" else str(res["status"]).upper(), "seconds_per_update": timing["seconds_per_update"], "peak_rss_bytes": timing["peak_rss_bytes"], "evaluation_wall_seconds": timing["evaluation_wall_seconds"]}
+        sealed.emit({"stage": "rehearsal", "arm": arm, "cell_type": ct_name, "seconds_per_update": timing["seconds_per_update"], "peak_rss_bytes": timing["peak_rss_bytes"], "status": out["stages"][arm]["status"]})
+    out["items"] = len(ct.arms)
+    ctx.ledger.charge("rehearsal-real", f"real-{core.utc_stamp()}", time.monotonic() - began, group="gates")
+    write_json(run_dir / "rehearsal_real.json", core.jsonable(public_rehearsal_record(out)))
     return out
 
 
@@ -154,8 +184,8 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         res = synthetic(repo, run_dir)
         print(json.dumps({"phase": "synthetic", "stages": {k: v["status"] for k, v in res["stages"].items()}, "headline_step": res["headline_step"]}))
     else:
-        if not args.cell_type or not args.exposures:
-            raise SystemExit("the real phase needs --cell-type and --exposures")
-        res = real(repo, run_dir, args.cell_type, args.exposures)
+        if not args.cell_type or not args.exposures or not args.sealed_dir:
+            raise SystemExit("the real phase needs --cell-type, --exposures and --sealed-dir (outside version control)")
+        res = real(repo, run_dir, args.cell_type, args.exposures, Path(args.sealed_dir))
         print(json.dumps({"phase": "real", "cell_type": args.cell_type, "stages": {k: v["status"] for k, v in res["stages"].items()}}))
     return 0

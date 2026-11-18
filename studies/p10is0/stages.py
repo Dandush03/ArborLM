@@ -126,6 +126,7 @@ def build_parser() -> argparse.ArgumentParser:
     rh = add("rehearse", "stage 2: the pipeline rehearsal end to end (synthetic phase; real-size phase named separately)")
     rh.add_argument("--phase", choices=("synthetic", "real"), default="synthetic")
     rh.add_argument("--cell-type")
+    rh.add_argument("--sealed-dir")
     rh.add_argument("--exposures", type=int)
     reg = add("registered", "a registered stage (refuses unless frozen and approved)")
     reg.add_argument("stage", choices=REGISTERED_STAGES)
