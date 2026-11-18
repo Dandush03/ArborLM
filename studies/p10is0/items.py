@@ -90,6 +90,10 @@ def run_cell(cell: Cell, ct: CellType, t_exposures: int, run_dir: Path, env: Env
     start = 0
     for tr in sorted(out.glob("train_*.json")):
         rec = core.read_record(tr, "train")
+        if rec.get("label") != cell.label:
+            from .plan import IdentityMismatch
+
+            raise IdentityMismatch(f"the train record {tr} belongs to {rec.get('label')}, not to {cell.label}")  # D2: PAUSED — IDENTITY
         hashes.update(rec["snapshot_sha256"])
         if rec["status"] == "diverged":
             return _write_result(result_path, cell, "nonfinite", {}, rec["diverged"]["update"])

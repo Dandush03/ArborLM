@@ -165,6 +165,26 @@ def snapshot_update(snapshot: Path | None) -> int:
     return int(snapshot.name[1:]) if snapshot is not None else 0
 
 
+def check_own_record(rec: Mapping[str, Any], job: Job, start: int) -> None:
+    """D2: a finished segment's record is accepted only if it is this run's own: its label, its start and its planned target equal the job's, and every snapshot hash it lists equals the file on disk. Anything else is PAUSED — IDENTITY
+    (``IdentityMismatch``, exit 75), never a result and never an endless environment pause."""
+    from .plan import IdentityMismatch
+
+    bad = []
+    if rec.get("label") != job.cell.label:
+        bad.append("label")
+    if int(rec.get("start_update", -1)) != start:
+        bad.append("start")
+    if int(rec.get("planned_last_update", -1)) != job.last_update:
+        bad.append("planned target")
+    for mark, sha in (rec.get("snapshot_sha256") or {}).items():
+        f = job.out_dir / "snapshots" / f"u{int(mark):07d}" / "model.pt"
+        if not f.is_file() or file_sha256(f) != sha:
+            bad.append(f"snapshot {mark}")
+    if bad:
+        raise IdentityMismatch(f"the train record in {job.out_dir} is not this run's own ({', '.join(bad)})")
+
+
 def completed_segment(job: Job) -> "Segment | None":
     """N1 remainder: a task killed AFTER its segment reached the target (its train record exists) but before the result was written (during the evaluation) resumes by skipping straight to the evaluation: the finished segment's record is
     returned (``model`` and ``trainer`` are None: the snapshot on disk is the state) and nothing is trained, opened or set aside. The same for a segment with no work to do (the start is already the target), which must not open logs of its own.
@@ -174,6 +194,7 @@ def completed_segment(job: Job) -> "Segment | None":
         path = job.out_dir / f"train_{start:08d}.json"
         if path.is_file():
             rec = core.read_record(path, "train")
+            check_own_record(rec, job, start)
             if rec.get("diverged") or int(rec["end_update"]) >= job.last_update:
                 return Segment(rec, None, None, rec.get("diverged"))
     if start >= job.last_update > 0:

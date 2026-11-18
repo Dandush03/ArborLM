@@ -129,8 +129,9 @@ class Ctx:
         s = ("--sealed-dir", str(self.sealed_base)) if self.sealed_base is not None else ()
         return (sys.executable, "-m", "studies.p10is0.stages", "work", kind, "--run-dir", str(self.run_dir), "--repo", str(self.repo), *s, *extra)
 
-    def task(self, stage: str, name: str, kind: str, *extra: str) -> runner.Task:
-        d = self.run_dir / "tasks" / stage
+    def task(self, stage: str, name: str, kind: str, *extra: str, sealed_tasks: bool = False) -> runner.Task:
+        """D1: every per-task file of Stage R (log, result, failed record) lives in the sealed directory, because the times of their creation and last write give each task's duration, which splits by cell type."""
+        d = (sealed.sealed_dir(self.need_sealed()) / "tasks" / stage) if sealed_tasks else self.run_dir / "tasks" / stage
         result = d / f"{name}.result.json"
         return runner.Task(name, self.worker_argv(kind, *extra, "--result", str(result)), result, d / f"{name}.failed.json", d / f"{name}.log")
 
@@ -437,7 +438,7 @@ def run_waves(ctx: Ctx, cts: Sequence[core.CellType], *, phase: str, attempt: in
             for arm, d, e in items.stage_r_needs(st, lad_phase, ctx.profile, ctx.cfg, ceiling=ceil_phase):
                 label = opaque_label(sb, attempt, ct.name, arm, d, e)  # N3: nothing public says which cell type continues
                 taskmap[label] = [ct.name, arm, d, e]
-                tasks.append(ctx.task(stage, label, "stage-r-run", "--cell-type", ct.name, "--arm", arm, "--draw", str(d), "--exposures", str(e), "--attempt", str(attempt)))
+                tasks.append(ctx.task(stage, label, "stage-r-run", "--cell-type", ct.name, "--arm", arm, "--draw", str(d), "--exposures", str(e), "--attempt", str(attempt), sealed_tasks=True))
         if not tasks:
             return "COMPLETE"
         mp = f"taskmap-{stage}.json"
