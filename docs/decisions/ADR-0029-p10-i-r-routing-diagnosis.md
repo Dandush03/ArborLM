@@ -452,3 +452,18 @@ Earlier rulings on the same day, already recorded in §16: "Keep ADR-0029" (item
 The advisory findings of the audit are taken where they add a check (the imported P10-S1 code in the freeze comparison; a seed check at the point of training; a guard that the run directory is git-ignored; no sealed-value recomputation outside registered mode; rehearsal index seeds outside the registered values).
 
 `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+
+## 20. Second re-audit, the measuring rehearsal, caps, and one changed ruling (2026-11-18 UTC)
+
+**Measuring rehearsal** (`results/p10ir-rehearsal-measure-2026-11-18/`): every stage COMPLETE on the synthetic memory and on the real-size cells; no item error; no task paused or killed; gates 1 and 2 passed on 280 of 280 registered checkpoints; the adapter identity gate passed; gate 3 not run and no sealed value read; peak memory per worker 643 / 711 / 344 MiB. It ran on provisional caps and cannot be frozen on.
+
+**Second re-audit** (`docs/reviews/p10ir-implementation-audit-2026-11-17/REAUDIT2.md`, `arbor-auditor`, Opus 5.5): READY FOR THE COUNTING REHEARSAL AND FREEZE AFTER THE LISTED FIXES. It confirmed the rehearsal's record against its watch list and corrected the lead's cost projection: whole-item costs are 236 s per tree checkpoint and 198 s per flat one at the largest cell, so the upper bound for stage A1 is about 60,800 worker-seconds, 2.81 hours on six workers (the lead's README said 57,400 and 2.7, counting read times only).
+
+**Caps (§12: charged + 2 × projected remaining).** Rehearsal 1.0 h, A1 6.0 h, A2 3.0 h, total 10.0 charged hours on six workers. The human lead was shown a proposal of 10 hours in total and wrote "I mean 10 hours" on 2026-11-18; the split is set by the lead under the delegation of that day (`docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md`), with A1 raised from the proposed 5.5 to 6.0 on the auditor's projection.
+
+**Ruling 7 of §19 is changed (ruling 11).** A code error inside an item (`item_error`) is not a scientific NOT EVALUABLE. If stage A1 or A2 has any `item_error`, the registered analysis of that stage **refuses**, the stage's outcome is ENGINEERING STOP — ITEM ERRORS, and nothing is labelled. Only the gate failures that §11 names (gates 2, 3 and 4 on a checkpoint) make a replicate NOT EVALUABLE. Reason, from the auditor: otherwise a code defect would become a permanent registered result that reads as a finding. An environment error (out of memory, file system) inside a gate propagates and is never recorded as a failed gate.
+
+**Decisions under the delegation.** The lead takes Decision 2 for A1 and for A2 under the human lead's delegation of 2026-11-18, after the counting rehearsal against the candidate plan has completed without problems and the fixes of the second re-audit are in; each is recorded in `results/p10ir-freeze-<date>/`. Rulings 1 to 11 take effect with those decisions.
+
+`Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+
