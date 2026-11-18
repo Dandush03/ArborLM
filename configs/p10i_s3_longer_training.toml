@@ -1,0 +1,121 @@
+# P10-I-S3 (ADR-0026): every threshold, tolerance, grid, margin and seed of sections 4 to 7 and 16 lives here and nowhere else.
+schema_version = 1
+experiment_family = "P10IS3_LONGER_TRAINING"
+spec_reference = "docs/decisions/ADR-0026-p10-i-s3-longer-training.md"
+
+[setting]
+backbones = [101, 102, 103]
+orders = [301, 302, 303]
+backbone_parameters = 27392
+batch = 8
+context = 64
+positions_per_eval_batch = 512
+panel_chunks = 512
+val_targets = 32768
+slots = 4096
+tree_parameters = 198401
+flat_parameters = 198145
+dense_parameters = 198401
+dense_width = 3100
+adamw_betas = [0.9, 0.999]
+adamw_eps = 1e-8
+weight_decay = 0.0
+grad_clip = 1.0
+
+[duration]
+u_star = 16384
+checkpoints = [512, 2048, 8192, 16384]
+step_zero = 0
+epsilon = 0.001
+past_best_margin = 0.005
+
+[rates]
+grid = [0.0003, 0.001, 0.003, 0.01, 0.03]
+extension_up = [0.1, 0.3]
+extension_down = [0.0001, 0.00003]
+tie_tolerance = 0.0005
+max_extensions_per_side = 2
+p4_rate = 0.003
+
+[thresholds]
+effect = 0.005
+dense_tolerance = -0.005
+min_cells = 22
+min_parents = 8
+cells = 27
+parents = 9
+calibration_cells = 3
+half = 0.5
+dense_share = 0.90
+dense_floor = 0.005
+tolerance_joint = 1e-6
+tolerance_neg_ref = 1e-6
+routing_effect = 0.005
+loaded_load_average = 4.0
+
+[controls]
+p_used_draws = 4
+x_draws = 4
+exhaustive_visit = 16
+prior_off_visit = 2
+
+[data]
+rep_ranks = [0, 2048]
+rep_u_ranks = [2048, 4096]
+fresh_start = 4096
+eligible_train = 156611
+eligible_validation = 16407
+panel_walk_start = 8192
+fresh_pool = 152515
+max_fresh_updates = 19064
+
+[seeds]
+init_registered = [330301, 330302, 330303]
+init_calibration = 330391
+init_dry = 330392
+init_test = [330398, 330399]
+stream_base = 260001
+p_all_base = 260101
+joint_base = 260131
+p_used_base = 260201
+x_base = 260401
+cal_stream_base = 269001
+cal_p_all_base = 269021
+cal_joint_base = 269024
+cal_p_used_base = 269031
+cal_x_base = 269051
+dry_stream_base = 269201
+dry_p_all = 269221
+dry_joint = 269222
+dry_p_used_base = 269231
+dry_x_base = 269251
+test_range = [935001, 935999]
+
+[resources]
+workers = 6
+rss_worker_bytes = 2147483648
+rss_aggregate_bytes = 12884901888
+rss_aggregate_alone_bytes = 25769803776
+snapshot_bytes_estimate = 2400000
+
+[caps]
+provisional = true
+rehearsal_hours = 25.0
+registered_hours = 48.0
+
+[platform]
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 1
+torch_interop_threads = 1
+deterministic_algorithms = true
+
+[seed_ranges]
+stream = [260001, 266999]
+calibration = [269001, 269199]
+dry = [269201, 269299]
+init = [330301, 330399]
+test = [935001, 935999]
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
