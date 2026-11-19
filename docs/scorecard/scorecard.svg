@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="694" viewBox="0 0 1000 694" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-19">
-<rect width="1000" height="694" rx="14" fill="#0f0f10"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1318" viewBox="0 0 1000 1318" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-19">
+<rect width="1000" height="1318" rx="14" fill="#0f0f10"/>
 <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
 <text x="28" y="48" fill="#f2f2f2" font-size="19" font-weight="600">External memory improves prediction</text>
 <text x="972" y="48" fill="#f2f2f2" font-size="19" text-anchor="end">7/10</text>
@@ -31,6 +31,36 @@
 <rect x="28" y="582" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="582" width="189" height="8" rx="4" fill="#6b7a99"/>
 <text x="28" y="616" fill="#c9c9c9" font-size="15">Physical SSD costs measured, but no neural-memory SSD comparison.</text>
-<text x="28" y="676" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-19: main after the merges of P10-I-R, P10-I-S3 and P10-I-S5.</text>
+<text x="28" y="672" fill="#f2f2f2" font-size="19" font-weight="600">Works on a real pretrained student</text>
+<text x="972" y="672" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="686" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="686" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="720" fill="#c9c9c9" font-size="15">Untested: every result so far uses the project&#x27;s own small byte-level backbone.</text>
+<text x="28" y="776" fill="#f2f2f2" font-size="19" font-weight="600">Generalises beyond stored items</text>
+<text x="972" y="776" fill="#f2f2f2" font-size="19" text-anchor="end">2/10</text>
+<rect x="28" y="790" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="790" width="189" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="824" fill="#c9c9c9" font-size="15">Mostly recall of stored items so far; held-out templates failed under overload.</text>
+<text x="28" y="880" fill="#f2f2f2" font-size="19" font-weight="600">Beats plain retrieval</text>
+<text x="972" y="880" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="894" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="894" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="928" fill="#c9c9c9" font-size="15">Untested: the memory has only been compared with dense adapters.</text>
+<text x="28" y="984" fill="#f2f2f2" font-size="19" font-weight="600">Local (sparse) memory updates</text>
+<text x="972" y="984" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="998" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="998" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1032" fill="#c9c9c9" font-size="15">Untested: an update is an optimiser step that moves many rows, not a single write.</text>
+<text x="28" y="1088" fill="#f2f2f2" font-size="19" font-weight="600">Scalable read for the flat memory</text>
+<text x="972" y="1088" fill="#f2f2f2" font-size="19" text-anchor="end">1/10</text>
+<rect x="28" y="1102" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="1102" width="94" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1136" fill="#c9c9c9" font-size="15">The flat memory scores every key; an index built afterwards needs about an eighth of the store.</text>
+<text x="28" y="1192" fill="#f2f2f2" font-size="19" font-weight="600">Teachers complement each other</text>
+<text x="972" y="1192" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="1206" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="1206" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1240" fill="#c9c9c9" font-size="15">Untested: how often one teacher is right where the other is wrong.</text>
+<text x="28" y="1300" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-19: main after the merges of P10-I-R, P10-I-S3 and P10-I-S5; six untested theories added.</text>
 </g>
 </svg>
