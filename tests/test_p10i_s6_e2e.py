@@ -81,7 +81,7 @@ class Chain:
         ):
             assert a in t, a
             t = t.replace(a, b)
-        cfg_path.write_text(t + "\n[synthetic]\nregistered_pool = 200\ncalibration_pool = 100\nk_max = 2\n", encoding="utf-8")
+        cfg_path.write_text(t + "\n[synthetic]\nregistered_pool = 200\ncalibration_pool = 13000\nk_max = 2\n", encoding="utf-8")
         git(r, "init", "-q")
         git(r, "add", "-A")
         git(r, "commit", "-q", "-m", "copy for the end-to-end test")
