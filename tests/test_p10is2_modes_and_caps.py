@@ -156,9 +156,31 @@ def test_a_killed_process_is_charged_by_the_next_one_from_its_start_marker(tmp_p
 def test_a_stage_whose_start_marker_names_a_live_process_is_refused(tmp_path: Path) -> None:
     run = tmp_path / "run"
     real_stages.running_path(run, "qfit").parent.mkdir(parents=True, exist_ok=True)
-    write_json(real_stages.running_path(run, "qfit"), {"stage": "qfit", "mode": "registered", "pid": os.getppid(), "start_utc": "x", "start_epoch": time.time()})
-    with pytest.raises(core.StageRefused, match="still running|may still be running"):
+    write_json(real_stages.running_path(run, "qfit"), {"stage": "qfit", "mode": "registered", "pid": os.getppid(), "pid_start": real_stages.process_start(os.getppid()), "start_utc": "x", "start_epoch": time.time()})
+    with pytest.raises(core.StageRefused, match="still running"):
         real_stages.settle_killed(run, "qfit", "registered", ledger(run))
+
+
+def test_a_reused_process_id_does_not_make_a_stage_refuse_for_ever(tmp_path: Path) -> None:
+    run = tmp_path / "run"
+    led = ledger(run)
+    marker = real_stages.running_path(run, "qfit")
+    marker.parent.mkdir(parents=True, exist_ok=True)
+    now = time.time()
+    # the marker names a pid that is alive NOW (the parent of this process) but recorded another start time: the original process died and its ID was reused
+    write_json(marker, {"stage": "qfit", "mode": "registered", "pid": os.getppid(), "pid_start": "Mon Jan  1 00:00:00 2001", "start_utc": "x", "start_epoch": now - 50.0})
+    os.utime(marker, (now - 20.0, now - 20.0))
+    assert abs(real_stages.settle_killed(run, "qfit", "registered", led) - 30.0) < 0.5 and not marker.exists()
+    assert real_stages.process_is_the_same(os.getpid(), real_stages.process_start(os.getpid())) and not real_stages.process_is_the_same(2**22 - 3, None)
+
+
+def test_the_manifest_excludes_exactly_the_volatile_files() -> None:
+    from studies.p10is2.partq import pipeline
+
+    for rel in ("stages/analysis.running.json", "stages/inputs.complete.json", "charged_ledger.json", "manifest.json", "analysis/manifest.json", "outputs/manifest.json", "sealed/x.json", "logs/qfit.log"):
+        assert pipeline.manifest_excluded(Path(rel)), rel
+    for rel in ("qualification.json", "outputs/bundle/manifest.json", "outputs/step8_record.json", "generation/teacher_A/block_0000/batch_0000000.json", "qfit/record.json"):
+        assert not pipeline.manifest_excluded(Path(rel)), rel
 
 
 def test_the_heartbeat_refreshes_the_marker_and_stop_removes_it(tmp_path: Path) -> None:

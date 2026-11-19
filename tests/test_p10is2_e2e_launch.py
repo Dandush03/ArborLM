@@ -83,6 +83,18 @@ def test_every_registered_stage_launches_through_the_launch_script_in_order_and_
     assert label.startswith("QUALIFICATION-") or "TEACHERS-QUALIFIED" in label or "NEGATIVE" in label, label
     assert json.loads((r / "runs/stages/outputs.complete.json").read_text())["status"] == "COMPLETE"  # the outputs ran: both teachers qualified on this synthetic data
     assert git(r, "status", "--porcelain") == ""  # nothing of the run is in the tree
+    run = r / "runs"  # the Part Q manifest is true once the analysis has ended: every listed file re-hashes to its entry, none is missing, none of the volatile files is listed
+    manifest = json.loads((run / "manifest.json").read_text())
+    assert manifest["files"] and manifest["excluded"]
+    for rel, digest in manifest["files"].items():
+        assert (run / rel).is_file(), f"{rel} is listed and missing"
+        assert file_sha256(run / rel) == digest, f"{rel} changed after the manifest was written"
+    assert not [k for k in manifest["files"] if k.startswith("stages/") or k.endswith("charged_ledger.json") or k == "manifest.json" or k.count("/") == 1 and k.endswith("/manifest.json")]
+    assert "qualification.json" in manifest["files"]  # the analysis's own result is listed
+    listed = set(manifest["files"])
+    on_disk = {str(f.relative_to(run)) for f in run.rglob("*") if f.is_file()}
+    left_out = {k for k in on_disk - listed if not (k.startswith(("stages/", "sealed/", "logs/")) or k in ("charged_ledger.json", "manifest.json") or k.count("/") == 1 and k.endswith("/manifest.json"))}
+    assert left_out == set(), left_out  # every other file of the run directory is listed
 
 
 def test_the_counting_rehearsal_drives_the_same_entry_point_in_a_fresh_process_per_stage(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

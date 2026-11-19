@@ -423,9 +423,21 @@ def write_sealed_summary(ctx: QContext) -> Path:
     return path
 
 
+MANIFEST_EXCLUDES = (
+    "sealed/ (rehearsal values, never listed)", "stages/ (stage state: completion, paused, refused and running records)", "charged_ledger.json (the charge, which changes with every process)", "manifest.json (this file)",
+    "<stage>/manifest.json (the runner's stage manifests, one level below the run directory, which a resume rewrites)", "logs/ (process logs of a rehearsal)",
+)  # fmt: skip
+
+
+def manifest_excluded(rel: Path) -> bool:
+    """True for the files that are not outputs: they change after the manifest is written or are the manifest itself (the list is ``MANIFEST_EXCLUDES``, stated in the manifest)."""
+    parts = rel.parts
+    return "sealed" in parts or parts[0] in ("stages", "logs") or rel.name == "charged_ledger.json" and len(parts) == 1 or rel.name == "manifest.json" and len(parts) <= 2
+
+
 def hashes_of(ctx: QContext) -> dict[str, str]:
-    """SHA-256 of every file of the run directory except sealed ones, for the Part Q manifest (every output is listed with its hash)."""
-    return {str(f.relative_to(ctx.run_dir)): file_sha256(f) for f in sorted(ctx.run_dir.rglob("*")) if f.is_file() and "sealed" not in f.parts}
+    """SHA-256 of every OUTPUT file of the run directory, for the Part Q manifest (every output is listed with its hash): all files except ``MANIFEST_EXCLUDES``."""
+    return {str(f.relative_to(ctx.run_dir)): file_sha256(f) for f in sorted(ctx.run_dir.rglob("*")) if f.is_file() and not manifest_excluded(f.relative_to(ctx.run_dir))}
 
 
 __all__ = ["QContext", "WHITELIST", "run_all", "step_generation", "step_partition", "step_qcheck", "step_qfit", "step_regeneration", "summary_for_display"]

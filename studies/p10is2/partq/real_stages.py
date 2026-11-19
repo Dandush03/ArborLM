@@ -218,7 +218,9 @@ def stage_outputs(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any, mode:
 def write_manifest(ctx: pipeline.QContext) -> dict[str, str]:
     """The Part Q manifest: every output file of the run (sealed files excluded) with its SHA-256 (section 4.1: every output is listed with its hash). Part T reads these files by hash and nothing else."""
     files = pipeline.hashes_of(ctx)
-    core.write_record(ctx.d("manifest.json"), {**core.envelope("block_record", "Q"), "what": "partq_manifest", "files": files, "bundle_dir": "outputs/bundle"}, overwrite=True)
+    core.write_record(ctx.d("manifest.json"), {**core.envelope("block_record", "Q"), "what": "partq_manifest", "files": files, "excluded": list(pipeline.MANIFEST_EXCLUDES), "bundle_dir": "outputs/bundle"}, overwrite=True)
+    if pipeline.hashes_of(ctx) != files:  # the manifest is written LAST of the outputs: nothing it lists may have changed while it was written
+        raise RegisteredTestStop("the Part Q manifest does not describe the run directory it was written in (a listed file changed or a result file was written after it)")
     return files
 
 
@@ -278,6 +280,22 @@ def running_path(run_dir: Path, stage: str) -> Path:
     return run_dir / "stages" / f"{stage}.running.json"
 
 
+def process_start(pid: int) -> str | None:
+    """The start time of a process as ``ps`` prints it (``lstart``), or None if there is no such process. A reused process ID has another start time."""
+    import subprocess
+
+    out = subprocess.run(["ps", "-o", "lstart=", "-p", str(pid)], capture_output=True, text=True, check=False).stdout.strip()  # noqa: S603, S607
+    return out or None
+
+
+def process_is_the_same(pid: int, recorded_start: str | None) -> bool:
+    """True if ``pid`` is alive AND (when the marker recorded a start time) started at that time: a dead process whose ID was reused does not count as running."""
+    now = process_start(pid)
+    if now is None:
+        return False
+    return recorded_start is None or now == recorded_start
+
+
 def settle_killed(run_dir: Path, stage: str, mode: str, led: core.Ledger) -> float:
     """A stage process that was killed (SIGKILL, power loss) never reached its charge. Its start marker (written at stage start, its modification time refreshed by a heartbeat every few seconds) is still there: the
     time from the start to the last heartbeat is charged now, honestly as a LOWER bound within one heartbeat interval of the true time. If the process that wrote the marker is still alive the stage is refused."""
@@ -286,15 +304,8 @@ def settle_killed(run_dir: Path, stage: str, mode: str, led: core.Ledger) -> flo
         return 0.0
     rec = read_json(path)
     pid = int(rec.get("pid", 0))
-    if pid and pid != os.getpid():
-        try:
-            os.kill(pid, 0)
-        except ProcessLookupError:
-            pass
-        except PermissionError:
-            raise StageRefused(f"refused: process {pid} that started stage {stage!r} may still be running") from None
-        else:
-            raise StageRefused(f"refused: process {pid} that started stage {stage!r} is still running")
+    if pid and pid != os.getpid() and process_is_the_same(pid, rec.get("pid_start")):
+        raise StageRefused(f"refused: process {pid} that started stage {stage!r} is still running")
     seconds = max(0.0, path.stat().st_mtime - float(rec["start_epoch"]))
     led.charge_process(stage, mode, "killed-process-lower-bound", seconds)
     path.unlink()
@@ -309,7 +320,7 @@ class Heartbeat:
 
         self.path, self.interval = path, interval
         path.parent.mkdir(parents=True, exist_ok=True)
-        write_json(path, {"stage": stage, "mode": mode, "pid": os.getpid(), "start_utc": core.utc_stamp(), "start_epoch": time.time()})
+        write_json(path, {"stage": stage, "mode": mode, "pid": os.getpid(), "pid_start": process_start(os.getpid()), "start_utc": core.utc_stamp(), "start_epoch": time.time()})
         self._stop = threading.Event()
         self._thread = threading.Thread(target=self._run, daemon=True)
         self._thread.start()
