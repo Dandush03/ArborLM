@@ -25,6 +25,9 @@ def render(res: Mapping[str, Any], mode: str) -> str:
             "## Per rung", "", "| k | updates | rate F | rate D | L(F) | L(D) | delta F | delta D | deltarun F | deltarun D | conv F | conv D | mean Q | class |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for k, r in res["per_rung"].items():
         out.append(f"| {k} | {r['updates']} | {r['rates']['M-FLAT']} | {r['rates']['D-ADAPT']} | {_f(r['L']['M-FLAT'])} | {_f(r['L']['D-ADAPT'])} | {_f(r['delta']['M-FLAT'])} | {_f(r['delta']['D-ADAPT'])} | {_f(r['delta_run']['M-FLAT'])} | {_f(r['delta_run']['D-ADAPT'])} | {r['convergence']['M-FLAT']} | {r['convergence']['D-ADAPT']} | {_f(r['mean_Q'])} | {r['class']} |")
+    out += ["", "## X_mean_dense per rung (descriptive: the adapter's delta replaced by its batch mean; X_mean_dense = H_xmd - A)", ""]
+    for k, r in res["per_rung"].items():
+        out.append(f"- rung {k}: mean {_f(r['X_mean_dense']['mean'])} (min {_f(r['X_mean_dense']['min'])}, max {_f(r['X_mean_dense']['max'])}, cells above 0: {r['X_mean_dense']['positive']})")
     out += ["", "## Harm figures per rung (strict '>')", ""]
     for k, h in res["harm"].items():
         out.append(f"- rung {k}: B-H_used {_f(h['H_used']['mean_B_minus'])} ({h['H_used']['cells_worse_than_base']} cells worse than BASE); B-H_mean {_f(h['H_mean']['mean_B_minus'])} ({h['H_mean']['cells_worse_than_base']}); B-H_vmean {_f(h['H_vmean']['mean_B_minus'])} ({h['H_vmean']['cells_worse_than_base']})")

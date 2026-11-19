@@ -236,5 +236,5 @@ def record_stage_start(run_dir: Path, stage: str, *, table: Sequence[dict[str, A
     d = run_dir / "stage_starts"
     d.mkdir(parents=True, exist_ok=True)
     path = d / f"{stage}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}.json"
-    core.write_record(path, {**core.envelope("stage_start"), "stage": stage, "utc": datetime.now(UTC).isoformat(), "load_average": list(os.getloadavg()), "top_cpu": top, "own_family": sorted(own_family(procs, me)), "other_study_processes": other_study_processes(procs, me), "note": "descriptive; no rule reads it (this study registers no timing reading)"})
+    core.write_record(path, {**core.envelope("stage_start"), "stage": stage, "utc": datetime.now(UTC).isoformat(), "load_average": list(os.getloadavg()), "top_cpu": top, "own_family": sorted(own_family(procs, me)), "own_family_names": sorted({p["name"] for p in procs if p["pid"] in own_family(procs, me)}), "other_study_processes": other_study_processes(procs, me), "note": "descriptive; no rule reads it (this study registers no timing reading)"})
     return path

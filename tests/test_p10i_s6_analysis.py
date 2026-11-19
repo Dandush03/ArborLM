@@ -382,3 +382,11 @@ def test_scaled_denominators_never_used_for_a_registered_label() -> None:
     th = TH.scaled(12)
     assert (th.cells, th.parents, th.min_cells, th.min_parents) == (12, 4, 22, 8)
 
+
+
+def test_x_mean_dense_is_reported_per_rung_and_changes_no_label() -> None:
+    res = run(pair(SMALL, [0.02] * 5))
+    for k in range(5):
+        x = res["per_rung"][str(k)]["X_mean_dense"]
+        assert x["n"] == 27 and abs(x["mean"] - 0.001) < 1e-12 and x["positive"] == 27  # the synthetic registry sets H_xmd = A + 0.001
+    assert label_of(res) == "PERSISTS AT CONVERGENCE"

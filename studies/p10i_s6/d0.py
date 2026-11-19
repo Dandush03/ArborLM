@@ -17,7 +17,11 @@ from typing import Any
 
 from arborlm.io import atomic_write, canonical_json, file_sha256
 from arborlm.pilot_data import CHUNK_BYTES, select
-from studies.p10i_s3.data import Span, span_of, walk_panels  # frozen imports: pure functions, no P10-I-S3 config read
+from studies.p10i_s3.data import (  # frozen imports: pure functions, no P10-I-S3 config read
+    Span,
+    span_of,
+    walk_panels,
+)
 
 from . import core, corpus
 from .core import EngineeringStop

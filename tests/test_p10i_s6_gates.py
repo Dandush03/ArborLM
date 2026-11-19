@@ -49,7 +49,11 @@ def test_seed_problems_catch_each_planted_fault() -> None:
 
     assert any("outside" in x for x in gates.seed_problems(with_seeds(stream_base=330001)))
     assert any("share" in x for x in gates.seed_problems(with_seeds(oa_stream_base=320001)))  # overlaps the registered streams
-    assert any("collides" in x or "derivation" in x for x in gates.seed_problems(with_seeds(init_registered_base=330701, dry_stream=329201 + 0, cal_stream_base=329001)) + gates.seed_problems(with_seeds(init_calibration=329201 + 1000)))
+    # an initialisation value 1,000 below a data seed: its component seed (+ 1000) lands on the data seed
+    assert any("component seed" in x and "collides" in x for x in gates.seed_problems(with_seeds(init_calibration=329201 - 1000)))
+    # a data seed 1,000 below an initialisation value: derivation by arithmetic
+    assert any("derivation by arithmetic" in x for x in gates.seed_problems(with_seeds(dry_stream=330791 - 1000)))
+    assert not any("derivation" in x or "component seed" in x for x in gates.seed_problems(CFG))
 
 
 def make_root(d: Any, *, pass_checker: bool = True, rows: bool = True) -> Any:

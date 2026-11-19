@@ -50,14 +50,14 @@ def cfg_for(plan: Plan, repo: Path) -> dict[str, Any]:
     return cfg
 
 
-def synthetic_resources(cfg: Mapping[str, Any], seed: int = 0) -> items.Resources:
+def synthetic_resources(cfg: Mapping[str, Any], seed: int = 0, registered_mode: bool = True) -> items.Resources:
     """Random bytes and random backbones: tests and the synthetic rehearsal. Never used by a registered plan."""
     from .testing import random_rows, synthetic_backbone
 
     n_reg, n_cal = int(cfg.get("synthetic", {}).get("registered_pool", 200)), int(cfg.get("synthetic", {}).get("calibration_pool", 100))
     table = random_rows(n_reg + n_cal, core.test_seed(900 + seed, cfg)).to(torch.uint8)
     panel = random_rows(4, core.test_seed(901 + seed, cfg))
-    return items.Resources(cfg, table, {"registered": (0, n_reg), "calibration": (n_reg, n_cal)}, {"registered": panel, "calibration": panel}, lambda g, p: synthetic_backbone(p % 3), expected_targets=4 * 64, resume_ok=True)
+    return items.Resources(cfg, table, {"registered": (0, n_reg), "calibration": (n_reg, n_cal)}, {"registered": panel, "calibration": panel}, lambda g, p: synthetic_backbone(p % 3), expected_targets=4 * 64, resume_ok=True, registered_mode=registered_mode)
 
 
 def real_resources(plan: Plan, repo: Path, cfg: Mapping[str, Any]) -> items.Resources:
@@ -94,7 +94,7 @@ def real_resources(plan: Plan, repo: Path, cfg: Mapping[str, Any]) -> items.Reso
                 cache[(group, p)] = parents.load_new_backbone(Path(d["parent_dir"]) / f"{group}{p:02d}.pt", template)
         return cache[(group, p)]
 
-    return items.Resources(cfg, table, {"registered": (0, int(t["registered_rows"])), "calibration": (int(t["registered_rows"]), int(t["calibration_rows"]))}, panels, backbone, resume_ok=_resume_ok(Path(d["run_dir"])))
+    return items.Resources(cfg, table, {"registered": (0, int(t["registered_rows"])), "calibration": (int(t["registered_rows"]), int(t["calibration_rows"]))}, panels, backbone, resume_ok=_resume_ok(Path(d["run_dir"])), registered_mode=plan.mode == planmod.REGISTERED)
 
 
 def _resume_ok(public_dir: Path) -> bool:
@@ -104,7 +104,9 @@ def _resume_ok(public_dir: Path) -> bool:
 
 
 def resources_for(plan: Plan, repo: Path, cfg: Mapping[str, Any]) -> items.Resources:
-    return synthetic_resources(cfg) if plan.data.get("synthetic") else real_resources(plan, repo, cfg)
+    if plan.data.get("synthetic") and plan.mode == planmod.REGISTERED and "synthetic" not in cfg:
+        raise StageRefused("refused: a registered plan may use synthetic inputs only in an injected configuration that declares a [synthetic] section (the real config has none)")
+    return synthetic_resources(cfg, registered_mode=plan.mode == planmod.REGISTERED) if plan.data.get("synthetic") else real_resources(plan, repo, cfg)
 
 
 # --- paths, tasks ---------------------------------------------------------------------------------------------------------------------------
@@ -162,7 +164,7 @@ def run_core_gates(plan: Plan, repo: Path, res: items.Resources, cfg: Mapping[st
     bitwise = gates.on_platform_of_record(cfg)
     vals: dict[str, tuple[float, float, float]] = {}
     bases: dict[str, dict[str, float]] = {}
-    panel = res.panels["registered"]
+    panel = res.panels["registered" if registered else "calibration"]  # ruling 15: BASE is read on the registered panel in registered mode only
     groups = [("registered", 9 if registered else 3, ""), ("old", 9 if registered else 3, "oa")]
     for group, n, prefix in groups:
         for p in range(n):
@@ -335,7 +337,7 @@ def work_main(args: argparse.Namespace) -> int:
 # --- the stage driver -------------------------------------------------------------------------------------------------------------------------------
 def ledger_of(plan: Plan, repo: Path) -> core.Ledger:
     public = Path(plan.data["run_dir"])
-    path = public / "ledger.json"
+    path = public / ("ledger.json" if plan.mode == planmod.REGISTERED else "ledger-rehearsal.json")  # the rehearsals and the registered run charge separate ledgers (the registered cap is charged so far + 2 x projected FROM THE REGISTERED RUN)
     planmod.require_ignored_path(repo, path)
     return core.Ledger(path, plan.cap_seconds())
 
@@ -384,7 +386,10 @@ def run_analysis(plan: Plan, repo: Path, items_dir: Path, cfg: Mapping[str, Any]
     cells = sorted({i["cell"] for i in plan.items("train") if i["profile"] != "oa"})
     oa_cells = sorted({i["cell"] for i in plan.items("train") if i["profile"] == "oa"})
     th = core.Thresholds.from_config(cfg) if plan.mode == planmod.REGISTERED else core.Thresholds.from_config(cfg).scaled(len(cells))
-    result = analysis.analyse(reg, plan.rate_table, cfg, k_max=plan.k_max, bitwise=gates.on_platform_of_record(cfg), th=th, cells=len(cells), oa_cells=len(oa_cells) or None)
+    if plan.mode == planmod.REGISTERED and not gates.on_platform_of_record(cfg):
+        raise core.EngineeringStop("ENGINEERING STOP — not the platform of record: a registered result is never produced elsewhere (the integrity checks of section 12.2 are bitwise on macOS arm64, torch 2.8.0, one thread)")
+    bitwise = True if plan.mode == planmod.REGISTERED else gates.on_platform_of_record(cfg)  # registered: always bitwise; the 1e-6 tolerance exists only for rehearsals and tests off the platform
+    result = analysis.analyse(reg, plan.rate_table, cfg, k_max=plan.k_max, bitwise=bitwise, th=th, cells=len(cells), oa_cells=len(oa_cells) or None)
     core.write_record((out_dir or items_dir) / "analysis" / "analysis.json", {**core.envelope("analysis"), "result": result, "mode": plan.mode})
     return result
 
@@ -473,6 +478,10 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
             raise StageRefused("refused: a freeze record exists; a frozen plan is not superseded")
         _move_aside(plan_path)
     extra: dict[str, Any] = {"projection": projection}
+    if args.synthetic:
+        if "synthetic" not in cfg:
+            raise StageRefused("refused: --synthetic needs an injected configuration with a [synthetic] section; the real configuration has none")
+        extra["synthetic"] = True
     if dm and manifest is not None:
         extra.update({"data_manifest": {"path": str(dm), "sha256": file_sha256(dm)}, "data_dir": str(dm.parent), "parent_dir": str(Path(args.parent_dir).resolve()), "parent_suite": str(Path(args.parent_suite).resolve())})
         if args.parents_record:
@@ -503,7 +512,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     again_h = cost.project_hours(plan.data["items"], proj["unit_costs"])["hours"]
     if again_h != proj["hours"] or plan.data["caps"]["registered_hours"] != planmod.caps_from_projection(0.0, proj["hours"]):
         raise StageRefused("refused: the registered cap is not the shared formula (charged + 2 x projected remaining) applied to the projection recomputed from R2's record and the plan's items")
-    extra = {k: plan.data[k] for k in ("data_manifest", "data_dir", "parent_dir", "parent_suite", "parent_files", "parents_record", "projection") if k in plan.data}
+    extra = {k: plan.data[k] for k in ("data_manifest", "data_dir", "parent_dir", "parent_suite", "parent_files", "parents_record", "projection", "synthetic") if k in plan.data}
     rederived = planmod.build_plan(mode=planmod.REGISTERED, cfg=cfg, repo=repo, run_dir=Path(plan.data["run_dir"]), rate_table=plan.data["rate_table"], k_max=plan.k_max, projected_remaining_hours=proj["hours"], extra=extra)
     if planmod.scientific_content(json.loads(json.dumps(rederived))) != planmod.scientific_content(plan.data):
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and rate table: supersede it and rehearse again")
@@ -570,6 +579,7 @@ def build_parser() -> argparse.ArgumentParser:
     cp.add_argument("--parent-suite")
     cp.add_argument("--parents-record")
     cp.add_argument("--k-max", default="4")
+    cp.add_argument("--synthetic", action="store_true", help="tiny synthetic inputs; refused unless the configuration declares a [synthetic] section (an injected test configuration)")
     cp.add_argument("--r2")
     cp.add_argument("--over-cap-approved", action="store_true")
     cp.add_argument("--supersede", action="store_true")
@@ -580,6 +590,8 @@ def build_parser() -> argparse.ArgumentParser:
     wr = sub.add_parser("write-rate-table")
     wr.add_argument("--public", required=True)
     wr.add_argument("--repo")
+    rh = sub.add_parser("rehearse")
+    rh.add_argument("rest", nargs=argparse.REMAINDER)
     c = sub.add_parser("caps-proposal")
     c.add_argument("--charged-hours", type=float, default=0.0)
     c.add_argument("--projected-remaining-hours", type=float, required=True)
@@ -594,6 +606,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             return cmd_registered(args)
         if args.command == "work":
             return work_main(args)
+        if args.command == "rehearse":
+            from . import rehearsal
+
+            return rehearsal.main(args.rest)
         if args.command == "candidate-plan":
             return cmd_candidate_plan(args)
         if args.command == "freeze":

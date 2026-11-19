@@ -204,6 +204,18 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
     qualified = labels.dependence_qualified(lp["row"], dep["label"])
 
     # harm figures (section 11), per rung, strict ">"
+    # X_mean_dense (descriptive like-for-like figure, section 11): the adapter's delta replaced by its batch mean; X_mean_dense = H_xmd - A per cell
+    xmd: dict[int, list[float | None]] = {}
+    for k in range(0, k_max + 1):
+        vals_k: list[float | None] = []
+        for c in cell_range:
+            a_ck = A[k][c]
+            if a_ck is None:
+                vals_k.append(None)
+                continue
+            v = rd.read(DENSE, k, c, rd.u(k), core.READ_X_MEAN_DENSE)
+            vals_k.append(None if v is None else v - float(a_ck))
+        xmd[k] = vals_k
     harm: dict[int, dict[str, Any]] = {}
     for k in range(0, k_max + 1):
         entry: dict[str, Any] = {}
@@ -246,7 +258,7 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
             "updates": rd.u(k), "rates": {a: rates[a][k] for a in core.ARMS}, "L": {a: L[a][k] for a in core.ARMS}, "delta": {a: delta[a][k] for a in core.ARMS}, "delta_run": {a: delta_run[a][k] for a in core.ARMS},
             "convergence": {a: states[a][k] for a in core.ARMS}, "class": classes[k], "held": held[k], "mean_Q": mean_q[k], "Q": _stats(q[k]), "Q_dag": _stats(q_dag[k]),
             "Q_cells_positive": labels.count([x is not None and x > 0 for x in q[k]]), "Q_parents_positive": labels.count([x is not None and x > 0 for x in labels.parent_means(q[k])]),
-            "C": _stats(c_flat[k]), "Cd": _stats(cd[k]), "delta_per_parent": {a: _per_parent_delta(nll[a], nll_prev[a], k, n) for a in core.ARMS},
+            "C": _stats(c_flat[k]), "Cd": _stats(cd[k]), "X_mean_dense": _stats(xmd[k]), "delta_per_parent": {a: _per_parent_delta(nll[a], nll_prev[a], k, n) for a in core.ARMS},
         }
         for k in range(0, k_max + 1)
     }

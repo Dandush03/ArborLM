@@ -146,3 +146,11 @@ keep_awake = true
 # ruling G15: prefix and resume identity on calibration cell 0 at this rate (prefix: U_-1; resume: stop at U_0, resume to U_1)
 identity_rate = 0.01
 identity_cell = 0
+
+[rehearsal]
+# R2 probes (whole processes through the same entry point) and the DRY profile of R3 (a shortened ladder; the rate table is the real one)
+r2_updates = 50
+r2_evals = 2
+dry_base_updates = 8
+dry_below_updates = 4
+r1_max_rounds = 7

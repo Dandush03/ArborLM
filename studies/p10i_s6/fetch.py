@@ -21,7 +21,15 @@ from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from studies.p10s2.fetch_guard import DOWNLOAD_LEDGER, FetchRefused, is_git_ignored, ledger_begin, ledger_complete, ledger_total_bytes, make_ssl_context  # frozen imports (section 15): the ledger of record's own functions
+from studies.p10s2.fetch_guard import (  # frozen imports (section 15): the ledger of record's own functions
+    DOWNLOAD_LEDGER,
+    FetchRefused,
+    is_git_ignored,
+    ledger_begin,
+    ledger_complete,
+    ledger_total_bytes,
+    make_ssl_context,
+)
 
 from . import core
 from .core import EngineeringStop

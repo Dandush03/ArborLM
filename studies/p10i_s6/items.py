@@ -73,8 +73,8 @@ def registered_items(cfg: Mapping[str, Any], rt: Mapping[str, Any], k_max: int, 
     for arm in core.ARMS:
         for g in run_groups(cfg, rt, arm, k_max):
             for c in cells:
-                parent = core.parent_of(c) if profile in ("registered", "test") else 0
-                grp = "registered" if profile in ("registered", "test") else "calibration"
+                parent = core.parent_of(c) if profile in ("registered", "test", "dry") else 0
+                grp = "registered" if profile in ("registered", "test", "dry") else "calibration"
                 it = _item(profile, arm, g["rate"], c, grp, parent, seeds, max_update=g["max_update"], snapshots=g["snapshots"], serves=g["serves"], pool="registered" if profile == "registered" else "calibration")
                 trains.append(it)
                 evals += _evals(it["id"], profile, arm, g["rate"], c, g["snapshots"], g["modes"])
@@ -84,7 +84,7 @@ def registered_items(cfg: Mapping[str, Any], rt: Mapping[str, Any], k_max: int, 
         for arm in core.ARMS:
             for c in (oa_cells if oa_cells is not None else range(27)):
                 rate = rate_for(rt, arm, 0)
-                it = _item("oa", arm, rate, c, "old", core.parent_of(c), oa, max_update=u0, snapshots=[um1, u0], serves=[0], pool="registered")
+                it = _item("oa", arm, rate, c, "old", core.parent_of(c), oa, max_update=u0, snapshots=[um1, u0], serves=[0], pool="registered" if profile == "registered" else "calibration")
                 trains.append(it)
                 evals += _evals(it["id"], "oa", arm, rate, c, [um1, u0], {um1: "enabled", u0: "triple"})
     for lst in (trains, evals):
@@ -118,9 +118,10 @@ class Resources:
     backbone: Callable[[str, int], Any]  # (group, parent) -> Backbone (deep-copied per use by the caller)
     expected_targets: int = 32768
     resume_ok: bool = False  # the resume-identity gate passed (otherwise a restart is from update 0)
+    registered_mode: bool = True  # ruling 15: the registered panel is read only in registered mode; rehearsals and DRY runs read the calibration panel
 
     def panel_for(self, profile: str) -> Tensor:
-        return self.panels["registered" if profile in ("registered", "oa", "test") else "calibration"]
+        return self.panels["registered" if (self.registered_mode and profile in ("registered", "oa", "test")) else "calibration"]
 
 
 def _identity(item: Mapping[str, Any]) -> dict[str, Any]:

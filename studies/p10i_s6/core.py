@@ -81,6 +81,7 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "seed_ranges": ("stream", "calibration", "init", "order", "test", "checker", "checker_sha256", "addendum", "addendum_sha256", "own_globs", "allocation_label"),
     "launch": ("keep_awake",),
     "gates": ("identity_rate", "identity_cell"),
+    "rehearsal": ("r2_updates", "r2_evals", "dry_base_updates", "dry_below_updates", "r1_max_rounds"),
 }  # fmt: skip
 
 
@@ -200,7 +201,7 @@ def parent_label(profile_group: str, parent: int) -> str:
 
 
 PROFILES = ("registered", "oa", "calibration", "dry", "test")
-CELLS_OF = {"registered": 27, "oa": 27, "calibration": 3, "dry": 1, "test": 27}
+CELLS_OF = {"registered": 27, "oa": 27, "calibration": 3, "dry": 3, "test": 27}  # DRY: three cells share one stream and one initialisation (a dry run needs three cells for the parent mean, nothing more)
 
 
 class Seeds:

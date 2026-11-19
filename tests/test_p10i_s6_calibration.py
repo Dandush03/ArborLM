@@ -55,8 +55,8 @@ def test_extension_decision_per_arm_across_all_durations_and_stop() -> None:
     assert dec == {"up": 0.3, "down": None, "stop": None}
     more = cal.extension_decision(curves_for(best, [*GRID, 0.3]), U, CFG)
     assert more["up"] == 1.0
-    stop = cal.extension_decision(curves_for(best, [*GRID, 0.3, 1.0][:-0] + [1.0]), U, CFG)
-    assert stop["up"] is None or stop["stop"] is None  # 1.0 is now the highest rate run and the minimiser sits there: second extension used up
+    stop = cal.extension_decision(curves_for(dict(zip(U, [1.0] * 4)), [*GRID, 0.3, 1.0]), U, CFG)
+    assert stop["up"] is None and stop["down"] is None and "CALIBRATION NOT INTERIOR" in stop["stop"] and "highest" in stop["stop"]  # 1.0 is the highest rate run, the minimiser sits there, both up-extensions are used
     best_low = {u: 0.0001 for u in U}
     d_low = cal.extension_decision(curves_for(best_low, GRID), U, CFG)
     assert d_low["down"] == 0.00003 and d_low["up"] is None
@@ -70,7 +70,8 @@ def test_extension_decision_per_arm_across_all_durations_and_stop() -> None:
 def test_rate_table_and_interior_flags_and_states_stay_sealed() -> None:
     curves = {FLAT: curves_for(dict(zip(U, [0.003, 0.01, 0.01, 0.01])), GRID), DENSE: curves_for(dict(zip(U, [0.001, 0.003, 0.01, 0.01])), GRID)}
     rt = cal.rate_table(curves, CFG, K)
-    assert rt["rates"][FLAT] == {"-1": 0.003, "0": 0.01, "1": 0.01, "2": 0.01} and rt["rates"][DENSE] == {"-1": 0.001, "0": 0.003, "1": 0.01, "2": 0.01} or rt["rates"][DENSE]["-1"] == 0.001
+    assert rt["rates"][FLAT] == {"-1": 0.003, "0": 0.01, "1": 0.01, "2": 0.01}
+    assert rt["rates"][DENSE] == {"-1": 0.001, "0": 0.003, "1": 0.01, "2": 0.01}
     assert all(all(v.values()) for v in rt["interior"].values())
     states = cal.calibration_states(curves, rt, CFG, K)
     assert set(states[FLAT]) >= {"L", "0", "1", "2"} and states[FLAT]["0"]["state"] in ("CONVERGED", "NOT CONVERGED", "NOT DETERMINED")
