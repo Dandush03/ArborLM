@@ -80,6 +80,7 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "platform": ("system", "machine", "torch", "torch_num_threads", "torch_interop_threads", "deterministic_algorithms"),
     "seed_ranges": ("stream", "calibration", "init", "order", "test", "checker", "checker_sha256", "addendum", "addendum_sha256", "own_globs", "allocation_label"),
     "launch": ("keep_awake",),
+    "gates": ("identity_rate", "identity_cell"),
 }  # fmt: skip
 
 

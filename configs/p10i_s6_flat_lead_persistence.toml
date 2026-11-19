@@ -141,3 +141,8 @@ allocation_label = "P10-I-S6 ADR-0031"
 
 [launch]
 keep_awake = true
+
+[gates]
+# ruling G15: prefix and resume identity on calibration cell 0 at this rate (prefix: U_-1; resume: stop at U_0, resume to U_1)
+identity_rate = 0.01
+identity_cell = 0
