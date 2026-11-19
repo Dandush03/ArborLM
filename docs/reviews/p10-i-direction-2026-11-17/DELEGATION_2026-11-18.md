@@ -50,3 +50,33 @@ The human lead then wrote: "I mean 10 hours" (the hour cap of P10-I-R, set at 10
 - Nothing is committed or written inside a study's tree while one of its registered stages is running.
 - Still outside the delegation: publication, pushing weights, paid services, packages outside the lock, the SSD write budget, administrator access, and any change to a completed study. No threshold is relaxed and no safeguard is skipped.
 - After the 24 hours, merges to `main` go back to the human lead unless the grant is renewed.
+
+## 7. Widened, same day (2026-11-18 UTC): until P10-I is complete
+
+Later messages of the human lead, verbatim and in order:
+
+> no its ok, just make sure to parallels each run that you can
+
+> and you have my permission to auto approve everything until you complete P10-I
+
+> we could do a better test in my ssd not sure why not
+
+> ok, but you are allowed to download up to 75gb of data needed for the ssd test if needed. im going to sleep, I'll let you drive the simulations
+
+> if you need 200gb or 250gb for the test im also ok with that
+
+Also, on scratch files: "avoid using tmp dir since you always require me to approve it and use does that you already have access to".
+
+**How the lead reads them.**
+
+- The 24-hour limit of section 6 no longer applies. Until P10-I is complete, the lead takes every P10-I approval: specifications, hour caps, run decisions, pushes, merges to `main`.
+- "Everything" includes the packages outside the lock that the teacher-transfer study needs for its qualification part. The lead takes only the smallest form of that: the 28 packages already on disk from P10-S2, with no download and no change to `uv.lock` or `pyproject.toml`.
+- Studies run in parallel wherever no stage takes a timing measurement; each study in its own worktree.
+- The SSD test: the engineering part of P10-I-S5 may be entered before a neural memory is qualified at scale; drive writes up to 250 GB, kept to the minimum the reviews say a proper test needs; downloads up to 75 GB for it if needed (none is expected). Nothing needing administrator access.
+- Scratch files go in the git-ignored `experiments/_scratch/` of the working tree, not in a temporary directory.
+
+**Limits the lead keeps, unchanged by the above.** No threshold is relaxed and a failure is recorded as a failure. Every study keeps its specification review, implementation audit, rehearsals and independent recomputation. The conditional studies run only if their written entry criteria are met. No publication, no paid service, no pushing of weights. Where an independent reviewer advised that a choice should go to the human lead and the lead takes it under this delegation, the study's approval record says so and the choice is reported to the human lead as the first item of that study's record, so that he can overrule it before the run decision.
+
+**Figures the human lead was given in conversation** (so that a later cost can be compared with them): the routing diagnosis about 4–8 hours with a total cap of 10 ("I mean 10 hours"); addressing 15–55 hours without the load-8 block and up to about 75 with it; capacity main block about 26 (19 to 60); longer training 26–48; teacher transfer 20–100; the whole of P10-I of the order of 100–250 hours, three to five days at best with parallel running and seven to ten as the planning figure.
+
+The grant ends when P10-I is complete. The redesign after it returns to the human lead.

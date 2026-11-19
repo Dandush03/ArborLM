@@ -1,0 +1,69 @@
+== tensors_F-OQ_d1_u16384.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 31.3
+   F0               a_use 0.9122 i(A,B) 4.1304,4.1413 CR8 nan AM_C nan counts EXACT facts AGREE misses 0
+   I64@512/s298001  a_use 0.6840 i(A,B) 2.5372,2.5315 CR8 0.6936 AM_C 0.7258 counts EXACT facts ['candidates mean 543.5382995605469 vs 543.5381774902344'] misses 0 index hash equal True; float64-vs-float32 candidate-set differences 1
+   I64@2048/s298001 a_use 0.8901 i(A,B) 3.9555,3.9565 CR8 0.9466 AM_C 0.9554 counts EXACT facts AGREE misses 0 index hash equal True; float64-vs-float32 candidate-set differences 0
+== tensors_F-OQ_d1_u98304.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 31.3
+   F0               a_use 0.9917 i(A,B) 4.8928,4.8863 CR8 nan AM_C nan counts EXACT facts AGREE misses 0
+   I64@512/s298001  a_use 0.7657 i(A,B) 3.0541,3.0539 CR8 0.6881 AM_C 0.7212 counts EXACT facts AGREE misses 0 index hash equal True; float64-vs-float32 candidate-set differences 0
+   I64@2048/s298001 a_use 0.9770 i(A,B) 4.7299,4.7258 CR8 0.9448 AM_C 0.9543 counts EXACT facts AGREE misses 0 index hash equal True; float64-vs-float32 candidate-set differences 0
+== tensors_F-OQ_d2_u16384.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 31.4
+   F0               a_use 0.9090 i(A,B) 4.1106,4.1076 CR8 nan AM_C nan counts EXACT facts AGREE misses 0
+   I64@512/s298001  a_use 0.6763 i(A,B) 2.4882,2.4883 CR8 0.6934 AM_C 0.7257 counts EXACT facts AGREE misses 0 index hash equal True; float64-vs-float32 candidate-set differences 0
+   I64@2048/s298001 a_use 0.8865 i(A,B) 3.9278,3.9264 CR8 0.9473 AM_C 0.9560 counts ['A.correct 29170 vs 29169', 'A.useful 29051 vs 29050', 'B.correct 29152 vs 29151', 'B.useful 29045 vs 29044'] facts AGREE misses 0 index hash equal True; float64-vs-float32 candidate-set differences 0
+== tensors_F-OQ_d2_u98304.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 37.2
+   F0               a_use 0.9917 i(A,B) 4.8914,4.8881 CR8 nan AM_C nan counts EXACT facts AGREE misses 0
+   I64@512/s298001  a_use 0.7643 i(A,B) 3.0474,3.0421 CR8 0.6873 AM_C 0.7210 counts EXACT facts AGREE misses 0 index hash equal True; float64-vs-float32 candidate-set differences 0
+   I64@2048/s298001 a_use 0.9768 i(A,B) 4.7267,4.7255 CR8 0.9447 AM_C 0.9542 counts EXACT facts ['candidates mean 2079.983642578125 vs 2079.983917236328'] misses 0 index hash equal True; float64-vs-float32 candidate-set differences 1
+== tensors_T-OQ_d1_u16384.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 137.8
+   P10-S1 recorded tree_recall_of_exhaustive_top8 at this snapshot: 0.015865325927734375; my CR8(T0) 0.015865325927734375
+   T0               a_use 0.3866 i(A,B) 0.9935,1.0035 CR8 0.0159 AM_C 0.0160 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.83e-07]
+   T1               a_use 0.3238 i(A,B) 0.7354,0.7473 CR8 0.0159 AM_C 0.0160 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.09e-07]
+   T1w              a_use 0.3581 i(A,B) 0.8755,0.8822 CR8 0.0159 AM_C 0.0160 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.07e-07]
+   T3               a_use 0.2810 i(A,B) 0.5791,0.5832 CR8 1.0000 AM_C 1.0000 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.89e-07]
+   T2               a_use 0.0398 i(A,B) 0.0013,0.0019 CR8 1.0000 AM_C 1.0000 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.77e-07]
+   Tv1_on           a_use 0.2284 i(A,B) 0.3985,0.4057 CR8 0.0086 AM_C 0.0086 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.15e-07]
+   Tv1_off          a_use 0.2284 i(A,B) 0.3985,0.4057 CR8 0.0086 AM_C 0.0086 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.15e-07]
+   Tv4_on           a_use 0.3282 i(A,B) 0.7536,0.7640 CR8 0.0285 AM_C 0.0286 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.89e-07]
+   Tv4_off          a_use 0.1776 i(A,B) 0.2510,0.2510 CR8 0.0285 AM_C 0.0286 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.13e-07]
+   Tv8_on           a_use 0.2903 i(A,B) 0.6136,0.6160 CR8 0.0584 AM_C 0.0586 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.89e-07]
+   Tv8_off          a_use 0.0971 i(A,B) 0.0665,0.0677 CR8 0.0584 AM_C 0.0586 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.99e-07]
+== tensors_T-OQ_d1_u98304.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 189.0
+   P10-S1 recorded tree_recall_of_exhaustive_top8 at this snapshot: absent (KeyError); my CR8(T0) 0.006458282470703125
+   T0               a_use 0.6920 i(A,B) 2.5834,2.5826 CR8 0.0065 AM_C 0.0063 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.41e-07]
+   T1               a_use 0.5245 i(A,B) 1.6464,1.6457 CR8 0.0065 AM_C 0.0063 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.05e-07]
+   T1w              a_use 0.6254 i(A,B) 2.1905,2.1897 CR8 0.0065 AM_C 0.0063 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.04e-07]
+   T3               a_use 0.4068 i(A,B) 1.0889,1.0841 CR8 1.0000 AM_C 1.0000 counts EXACT facts ['sr8 0.065510 vs 0.065506', 'am_s 0.067992 vs 0.067988'] misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.20e-07]
+   T2               a_use 0.0325 i(A,B) 0.0000,0.0000 CR8 1.0000 AM_C 1.0000 counts EXACT facts ['pair tv_mean 0.939770 vs 0.939773'] misses 0 gate4[sets_differ 1, ties 1, non-ties 0, max dw 1.65e-07]
+   Tv1_on           a_use 0.3467 i(A,B) 0.8325,0.8325 CR8 0.0029 AM_C 0.0028 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.95e-07]
+   Tv1_off          a_use 0.3467 i(A,B) 0.8325,0.8325 CR8 0.0029 AM_C 0.0028 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.95e-07]
+   Tv4_on           a_use 0.5074 i(A,B) 1.5635,1.5560 CR8 0.0139 AM_C 0.0137 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.40e-07]
+   Tv4_off          a_use 0.2198 i(A,B) 0.3745,0.3754 CR8 0.0139 AM_C 0.0137 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.90e-07]
+   Tv8_on           a_use 0.4260 i(A,B) 1.1739,1.1701 CR8 0.0356 AM_C 0.0353 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.20e-07]
+   Tv8_off          a_use 0.1000 i(A,B) 0.0731,0.0714 CR8 0.0356 AM_C 0.0353 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.77e-07]
+== tensors_T-OQ_d2_u16384.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 189.5
+   P10-S1 recorded tree_recall_of_exhaustive_top8 at this snapshot: 0.015865325927734375; my CR8(T0) 0.015865325927734375
+   T0               a_use 0.3699 i(A,B) 0.9288,0.9266 CR8 0.0159 AM_C 0.0160 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.80e-07]
+   T1               a_use 0.3085 i(A,B) 0.6773,0.6881 CR8 0.0159 AM_C 0.0160 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.67e-07]
+   T1w              a_use 0.3430 i(A,B) 0.8186,0.8164 CR8 0.0159 AM_C 0.0160 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.39e-07]
+   T3               a_use 0.2739 i(A,B) 0.5563,0.5550 CR8 1.0000 AM_C 1.0000 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.55e-07]
+   T2               a_use 0.0400 i(A,B) 0.0016,0.0018 CR8 1.0000 AM_C 1.0000 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.59e-07]
+   Tv1_on           a_use 0.2222 i(A,B) 0.3821,0.3827 CR8 0.0086 AM_C 0.0086 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.84e-07]
+   Tv1_off          a_use 0.2222 i(A,B) 0.3821,0.3827 CR8 0.0086 AM_C 0.0086 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.84e-07]
+   Tv4_on           a_use 0.3138 i(A,B) 0.6955,0.7105 CR8 0.0284 AM_C 0.0284 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.55e-07]
+   Tv4_off          a_use 0.1703 i(A,B) 0.2291,0.2334 CR8 0.0284 AM_C 0.0284 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.55e-07]
+   Tv8_on           a_use 0.2814 i(A,B) 0.5826,0.5826 CR8 0.0578 AM_C 0.0580 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.55e-07]
+   Tv8_off          a_use 0.0948 i(A,B) 0.0645,0.0619 CR8 0.0578 AM_C 0.0580 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.55e-07]
+== tensors_T-OQ_d2_u98304.json: draw hashes equal manifest True; keys equal raw tensor True; facts in table 34816; seconds 189.3
+   P10-S1 recorded tree_recall_of_exhaustive_top8 at this snapshot: absent (KeyError); my CR8(T0) 0.00579833984375
+   T0               a_use 0.6801 i(A,B) 2.5156,2.5056 CR8 0.0058 AM_C 0.0056 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.53e-07]
+   T1               a_use 0.5198 i(A,B) 1.6194,1.6253 CR8 0.0058 AM_C 0.0056 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.77e-07]
+   T1w              a_use 0.6154 i(A,B) 2.1326,2.1343 CR8 0.0058 AM_C 0.0056 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.73e-07]
+   T3               a_use 0.3909 i(A,B) 1.0140,1.0199 CR8 1.0000 AM_C 1.0000 counts EXACT facts ['pair tv_mean 0.358106 vs 0.358103'] misses 0 gate4[sets_differ 1, ties 1, non-ties 0, max dw 2.36e-07]
+   T2               a_use 0.0329 i(A,B) 0.0000,0.0000 CR8 1.0000 AM_C 1.0000 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.64e-07]
+   Tv1_on           a_use 0.3359 i(A,B) 0.7857,0.7923 CR8 0.0027 AM_C 0.0026 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.63e-07]
+   Tv1_off          a_use 0.3359 i(A,B) 0.7857,0.7923 CR8 0.0027 AM_C 0.0026 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.63e-07]
+   Tv4_on           a_use 0.4931 i(A,B) 1.4871,1.4902 CR8 0.0131 AM_C 0.0127 counts EXACT facts AGREE misses 0 gate4[sets_differ 1, ties 1, non-ties 0, max dw 2.36e-07]
+   Tv4_off          a_use 0.2149 i(A,B) 0.3592,0.3603 CR8 0.0131 AM_C 0.0127 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 1.53e-07]
+   Tv8_on           a_use 0.4134 i(A,B) 1.1141,1.1169 CR8 0.0337 AM_C 0.0333 counts EXACT facts AGREE misses 0 gate4[sets_differ 1, ties 1, non-ties 0, max dw 2.36e-07]
+   Tv8_off          a_use 0.1000 i(A,B) 0.0720,0.0723 CR8 0.0337 AM_C 0.0333 counts EXACT facts AGREE misses 0 gate4[sets_differ 0, ties 0, non-ties 0, max dw 2.16e-07]
+COMPARISONS 624; DIFFERENCES 10; largest |fact-measure difference| 3.81e-06
