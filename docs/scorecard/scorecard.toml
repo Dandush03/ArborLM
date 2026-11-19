@@ -19,8 +19,8 @@ scale = "0 = nothing shown; 10 = shown at the scale the target architecture need
 
 [[row]]
 title = "External memory improves prediction"
-score = 8
-note = "Shown with a frozen backbone; stronger dependence after longer training."
+score = 7  # lowered from 8 by the human lead on 2026-11-19: the flat memory has not had its own dependence controls
+note = "Shown with a frozen backbone; the flat memory's own dependence controls are still to run."
 evidence = [
   "P4: registered capacity and slot-association criteria passed on a frozen backbone ([results](results/p4-2026-11-12/)).",
   "P10-I-S3 line 1: DEPENDENT on fresh data, read on the tree memory, not converged; the control passes largely because wrong values hurt ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
