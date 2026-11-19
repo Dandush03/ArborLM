@@ -286,8 +286,8 @@ def test_gloss_icl_prompt_is_stored_segments_only_and_matches_text_for_hand_case
     assert lines == [("cat", "katze"), ("sits", "sitzt"), ("cat", "katze")]  # source order, repeated words included, "the" has no entry
     assert gloss.icl_prompt_text(lines) == " cat = katze\n sits = sitzt\n cat = katze\n"
     assert gloss.icl_lines("zzz", lex, {"zzz"}) == [] and gloss.icl_prompt_text([]) == ""
-    bank = {"separator": [9], "newline": [10], "words": {"A": {"katze": [1, 2], "sitzt": [3]}}}
-    ids = gloss.icl_prompt_ids(lines, {"cat": [7], "sits": [8]}, bank, "A")
+    bank = {"separator": [9], "newline": [10], "words": {"A": {"katze": [1, 2], "sitzt": [3]}}, "source_words": {"cat": [7], "sits": [8]}, "source_words_after_newline": {"cat": [10, 7], "sits": [10, 8]}, "last_newline": {"rule": "own-segment"}}
+    ids = gloss.icl_prompt_ids(lines, bank, "A")  # the amended rule: the first line as before, every later line begins with the newline stored with its source word, the last newline is its own segment
     assert ids == [7, 9, 1, 2, 10, 8, 9, 3, 10, 7, 9, 1, 2, 10]
 
 
