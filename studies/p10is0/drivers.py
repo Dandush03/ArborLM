@@ -511,6 +511,68 @@ def other_hours_of(ctx: Ctx) -> float:
     return core.hours(ctx.ledger.charged(group="generate") + ctx.ledger.charged(group="gates")) + float(ctx.cfg["budget"]["analysis_report_hours"])
 
 
+def emit_stage_r_completion(ctx: Ctx, dur_path: Path, ev: Sequence[str]) -> None:
+    """The one public status line of Stage R, printed after ``durations.json`` exists: its path and hash, the events, the number of sealed files and ONE digest of their hashes (not the hundreds of sealed file names)."""
+    sb = ctx.need_sealed()
+    sealed.emit({"stage": "R", "status": "COMPLETE", "path": str(dur_path), "sha256": file_sha256(dur_path), "labels": list(ev), "count": len(sealed.sealed_hashes(sb)), "sealed_digest": sealed.hashes_digest(sb)})
+
+
+def cmd_stage_r_status(ctx: Ctx, *, events_dir: Path | None = None) -> dict[str, Any]:
+    """After a Stage R whose completion line failed: re-derive the events from ``durations.json`` (read-only), write the ``EVENT_<n>.md`` files that are missing (never overwriting), and print the completion line. Reads no sealed value
+    (the sealed files are hashed as bytes only) and writes nothing else."""
+    dur_path = ctx.repo / core.DURATIONS
+    if not dur_path.is_file():
+        raise StageRefused("refused: no freeze/durations.json: Stage R has not finished")
+    rec = core.read_record(dur_path, "durations")
+    cts = core.cell_types(ctx.cfg)
+    ev = ladder.events(rec["cell_types"], cts)
+    written: list[str] = []
+    if events_dir is not None:
+        events_dir.mkdir(parents=True, exist_ok=True)
+        existing = {p.name for p in events_dir.glob("EVENT_*.md")}
+        for i, e in enumerate(ev, 1):
+            if f"EVENT_{i}.md" not in existing:
+                written += [p.name for p in write_events_numbered(events_dir, [(i, e)], rec)]
+    emit_stage_r_completion(ctx, dur_path, ev)
+    return {"status": "COMPLETE", "events": ev, "event_files_written": written}
+
+
+def write_events_numbered(events_dir: Path, numbered: Sequence[tuple[int, str]], durations: Mapping[str, Any]) -> list[Path]:
+    out = []
+    for i, e in numbered:
+        p = events_dir / f"EVENT_{i}.md"
+        if p.exists():
+            continue
+        p.write_text(f"# EVENT {i} (ADR-0023 section 5.2)\n\n{e}\n\nBy the rule fixed before any observation the study proceeds to the counting rehearsal, the freeze and Decision 2, unchanged. The human lead may stop it; that stop is his alone.\n\n`durations.json` entries at the time:\n\n```json\n{json.dumps(core.jsonable(durations.get('cell_types', {})), indent=2, sort_keys=True)}\n```\n\n`Astra review: NOT_PERFORMED`.\n", encoding="utf-8")
+        out.append(p)
+    return out
+
+
+RULING_COSMETIC_FILES = frozenset({"studies/p10is0/sealed.py", "studies/p10is0/stages.py", "studies/p10is0/drivers.py"})
+
+
+def cmd_rebind_identity(ctx: Ctx, ruling_file: Path) -> dict[str, Any]:
+    """A code change after ``durations.json`` exists is an ENGINEERING STOP for the human lead. This command applies the lead's RULING that a change confined to output validation and the command line (``sealed.py``, ``stages.py``,
+    ``drivers.py``; never a file of the training or evaluation path) does not void Stage R: it refuses unless the ruling file exists under ``results/``, and unless every file that differs from the identity ``durations.json`` records is one of those
+    three. It rewrites only ``code_identity`` in ``durations.json`` and keeps the old identity, the changed files and the ruling's hash in ``freeze/durations_identity_rebind.json``."""
+    dur_path = ctx.repo / core.DURATIONS
+    if not dur_path.is_file() or not ruling_file.is_file() or "results" not in ruling_file.resolve().parts:
+        raise StageRefused("refused: needs freeze/durations.json and a ruling file under results/ (the lead's ruling that the change is confined to output validation)")
+    rec = core.read_record(dur_path, "durations")
+    old, now = rec["code_identity"], code_identity(ctx.repo)
+    changed = sorted(k for k in set(old) | set(now) if old.get(k) != now.get(k))
+    outside = [k for k in changed if k not in RULING_COSMETIC_FILES]
+    if outside:
+        raise StageRefused(f"refused: files outside the ruling's scope differ from Stage R's code: {outside}")
+    log = ctx.repo / core.FREEZE_DIR / "durations_identity_rebind.json"
+    hist = read_json(log) if log.is_file() else {"rebinds": []}
+    hist["rebinds"].append({"old_identity": old, "changed_files": changed, "ruling_file": str(ruling_file), "ruling_sha256": file_sha256(ruling_file), "utc": datetime.now(UTC).isoformat()})
+    write_json(log, hist)
+    rec["code_identity"] = now
+    write_json(dur_path, core.jsonable(rec))
+    return {"status": "COMPLETE", "changed_files": changed, "durations_sha256": file_sha256(dur_path)}
+
+
 def stage_r_charged_hours(ctx: Ctx, attempt: int) -> float:
     """N2: Stage R's hours already charged, under the group ``run_waves`` writes (``stage_r_base_a<attempt>``)."""
     return core.hours(ctx.ledger.charged(group=f"stage_r_base_a{attempt}"))
@@ -576,7 +638,7 @@ def cmd_stage_r(ctx: Ctx, *, cause_file: Path | None = None, events_dir: Path | 
     ev = ladder.events(entries, cts)
     if events_dir is not None:
         write_events(events_dir, ev, rec)
-    sealed.emit({"stage": "R", "status": "COMPLETE", "path": str(dur_path), "sha256": file_sha256(dur_path), "labels": ev, "hashes": sealed.sealed_hashes(ctx.need_sealed())})
+    emit_stage_r_completion(ctx, dur_path, ev)
     return {"status": "COMPLETE", "events": ev}
 
 

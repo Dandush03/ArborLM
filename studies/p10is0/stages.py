@@ -105,6 +105,10 @@ def build_parser() -> argparse.ArgumentParser:
     sr.add_argument("--events-dir")
     sr.add_argument("--sealed-dir", required=True, help="outside version control: refused inside any working tree and under the main checkout")
     add("caps", "write freeze/stage_caps.json from the measured projection")
+    ss = add("stage-r-status", "re-derive the events from durations.json, write the missing EVENT files, print Stage R's completion line (read-only otherwise)")
+    ss.add_argument("--events-dir")
+    rb = add("rebind-identity", "apply the lead's ruling that a change confined to sealed.py, stages.py and drivers.py does not void Stage R (rewrites code_identity in durations.json)")
+    rb.add_argument("--ruling-file", required=True)
     add("a0-memory", "stage 5: the full-length A0 memory cell on the rehearsal draw (time and memory only)")
     cp = add("candidate-plan", "write freeze/plan.json (refuses to overwrite without --supersede)", run_dir=False)
     cp.add_argument("--supersede", action="store_true")
@@ -181,6 +185,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             elif args.command == "stage-r":
                 res = drivers.cmd_stage_r(ctx, cause_file=Path(args.cause_file) if args.cause_file else None, events_dir=Path(args.events_dir) if args.events_dir else None)
                 return exit_of(res["status"])
+            elif args.command == "stage-r-status":
+                res = drivers.cmd_stage_r_status(ctx, events_dir=Path(args.events_dir) if args.events_dir else None)
+            elif args.command == "rebind-identity":
+                res = drivers.cmd_rebind_identity(ctx, Path(args.ruling_file))
             elif args.command == "a0-memory":
                 res = drivers.cmd_a0_memory(ctx)
             else:

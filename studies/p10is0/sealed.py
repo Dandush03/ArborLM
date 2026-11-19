@@ -11,6 +11,7 @@
 
 import json
 import math
+import re
 from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
@@ -30,7 +31,7 @@ PUBLIC_KEYS = frozenset(
     {
         "kind", "schema", "study", "stage", "round", "cell_type", "label", "arm", "calibration_draw", "slots", "facts", "exposures", "updates", "wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average",
         "shapes", "parameter_counts", "counts", "count", "status", "identity", "environment", "sha256", "path", "decision", "e_star", "t_exposures", "convergence", "flat_below_floor", "extension", "reference_flags", "reference_below_floor_at_t",
-        "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels", "cell_types", "seed_set", "workers", "tasks", "completed", "cells", "items", "run", "stages", "hashes", "ok", "passed", "reason", "files", "cond4", "other", "evaluation_wall_seconds", "reference_flags_computed", "attempt", "code_identity", "extension_decisions", "projected_hours", "budget_hours", "granted",
+        "reference_nonfinite", "nonfinite_in_rehearsal", "removed", "labels", "cell_types", "seed_set", "workers", "tasks", "completed", "cells", "items", "run", "stages", "hashes", "ok", "passed", "reason", "files", "cond4", "other", "evaluation_wall_seconds", "sealed_digest", "sealed_files_sha256", "reference_flags_computed", "attempt", "code_identity", "extension_decisions", "projected_hours", "budget_hours", "granted",
     }
 )  # fmt: skip
 FORBIDDEN_WORDS = ("loss", "acc", "nll", "perplex", "entropy", "margin", "correct", "bits", "m_p", "m_h", "plateau_value", "curve")
@@ -45,17 +46,46 @@ class SealedRefused(PermissionError):
     """A read of the sealed directory by anything but the auditor's recomputation script (procedural; all sessions share one OS account)."""
 
 
+OPAQUE_ID = re.compile(r"^[A-Za-z]?[0-9a-f]{8,}$")
+NAME_TOKENS = re.compile(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])|\d+")
+HEX64 = re.compile(r"^[0-9a-f]{64}$")
+MEASURE_STEMS = tuple(w for w in FORBIDDEN_WORDS if "_" not in w) + ("recall",)
+MEASURE_PAIRS = tuple(tuple(w.split("_")) for w in FORBIDDEN_WORDS if "_" in w)  # m_p, m_h, plateau_value: adjacent tokens
+HASH_MAPS = ("hashes", "sealed_files_sha256")
+
+
+def names_a_measure(key: str) -> bool:
+    """Whether a key NAMES a sealed measure. The rule: the key is split into path components and dotted parts; a part that is an opaque identifier (at most one letter followed by at least eight lowercase hex digits: a task id, a hash) is
+    skipped, because a random identifier can contain any three-letter run by chance; every other part is split into lower-cased tokens on non-alphanumerics, case changes and digit runs; the key names a measure when a token STARTS WITH a
+    forbidden stem (``acc`` finds ``acc``, ``accuracy``, ``mean_acc``, ``meanAcc``; ``recall`` finds ``recall_at_1``) or two adjacent tokens are a forbidden pair (``m`` ``p``). A stem inside a token that is not at its start (``caccd``) is not a match."""
+    for part in re.split(r"[/\\.]", key):
+        if not part or OPAQUE_ID.match(part):
+            continue
+        tokens = [x.lower() for x in NAME_TOKENS.findall(part)]
+        if any(tok.startswith(s) for tok in tokens for s in MEASURE_STEMS):
+            return True
+        if any(tuple(tokens[k : k + 2]) == pair for k in range(len(tokens) - 1) for pair in MEASURE_PAIRS):
+            return True
+    return False
+
+
 def validate_public(obj: Any, *, path: str = "") -> None:
-    """Keys must be in ``PUBLIC_KEYS`` (or the cell-type names of ``durations.json``'s ``cell_types`` map); values must be plain: no float that could be an accuracy or loss unless the key is a time, rate, memory or load key."""
+    """Keys must be in ``PUBLIC_KEYS`` (or the cell-type names and the fixed maps of a record); values must be plain: no float that could be an accuracy or loss unless the key is a time, rate, memory or load key.
+
+    The leak guard keeps its purpose, that no sealed measure NAME or VALUE reaches public output, without matching inside opaque identifiers: ``names_a_measure`` matches whole tokens (see its docstring). The keys of a hashes map
+    (``hashes``, ``sealed_files_sha256``) are file paths and are checked the same way, and every VALUE in such a map must be a 64-character lowercase hex string and nothing else."""
     numeric_ok = {"wall_seconds", "evaluation_wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average", "seconds", "updates", "exposures", "slots", "facts", "t_exposures", "e_star", "round", "calibration_draw", "count", "workers", "schema"}
     if isinstance(obj, Mapping):
+        in_hashes = any(path.endswith(h) for h in HASH_MAPS)
         for k, v in obj.items():
             key = str(k)
-            in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or path.endswith("hashes") or path.endswith("code_identity") or path.endswith("identity") or path.endswith("environment")
+            in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or in_hashes or path.endswith("code_identity") or path.endswith("identity") or path.endswith("environment")
             if not in_cell_types and key not in PUBLIC_KEYS:
                 raise PublicOutputError(f"key not allowed in a public output: {path}/{key}")
-            if any(w in key.lower() for w in FORBIDDEN_WORDS) and key not in ("convergence", "labels"):
+            if key not in ("convergence", "labels") and names_a_measure(key):
                 raise PublicOutputError(f"key names a forbidden measure: {path}/{key}")
+            if in_hashes and not (isinstance(v, str) and HEX64.match(v)):
+                raise PublicOutputError(f"a value in the hashes map at {path}/{key} is not a 64-hex string")
             validate_public(v, path=f"{path}/{key}")
     elif isinstance(obj, list | tuple):
         for x in obj:
@@ -66,6 +96,13 @@ def validate_public(obj: Any, *, path: str = "") -> None:
             raise PublicOutputError(f"a float at {path} is not a time, rate, memory or load figure")
         if not math.isfinite(obj):
             raise PublicOutputError(f"non-finite number at {path}")
+
+
+def hashes_digest(sealed_base: Path) -> str:
+    """One SHA-256 over the canonical JSON of every sealed file's hash: what Stage R's completion line publishes instead of hundreds of file names."""
+    import hashlib
+
+    return hashlib.sha256(json.dumps(sealed_hashes(sealed_base), sort_keys=True).encode()).hexdigest()
 
 
 def emit(obj: Mapping[str, Any]) -> None:
