@@ -1,6 +1,6 @@
 # ADR-0031 — P10-I-S6: does the flat memory's lead over the dense adapter persist at convergence on fresh data?
 
-**Status: DRAFT 3 — NOT APPROVED. Reviewed twice by the `arbor-auditor` subagent (Claude Opus 5.5); second verdict READY AFTER THE LISTED EDITS; those edits are applied in this draft and have not been re-read. Decision 1 is the human lead's own. Nothing under this ADR may be implemented, downloaded, rehearsed, frozen or run.**
+**Status: APPROVED FOR IMPLEMENTATION AND REHEARSAL ONLY by the human lead on 2026-11-19 ("Approve as recommended"), at the recommended option of every open choice, with the byte-matched store R-KNN left OUT (section 21). The registered run is NOT approved: Decision 2 is the human lead's own. Draft 3 was reviewed twice by the `arbor-auditor` subagent (Claude Opus 5.5); the second review's edits are applied here and were not re-read before the approval.**
 
 > **For the human lead.**
 > - **What it can tell you.** If both arms converge within 16 times the old duration: whether the flat memory's lead over an equal-size dense adapter holds at convergence, on new parents and new data.
@@ -484,12 +484,12 @@ Options (additional to the recommended design): M-TREE as a secondary line: 27 r
 
 ## 21. Decisions and approval record
 
-- Decision 1 (the human lead): approve this specification, after independent review, for the download, the parent training, implementation and rehearsal only. Every open choice of section 20 is ruled at Decision 1. **Not given.**
+- Decision 1 (the human lead): approve this specification, after independent review, for the download, the parent training, implementation and rehearsal only. Every open choice of section 20 is ruled at Decision 1. **GIVEN on 2026-11-19 (local date; Panama time).** The lead put this question to the human lead after presenting draft 3, the two reviews and the table of his own choices with the recommended option for each: "Do you approve P10-I-S6 for implementation and rehearsal at the recommended options, or not yet?" The human lead answered: **"Approve as recommended"**. What was recommended, as shown to him: (1) corpus WikiText-103, a 0.3 GB download; (2) ladder (a), 16× to 262,144 updates, without the continuation rung (section 9.5 has no effect); (3) twelve new small backbones (nine registered, three for calibration) plus the old nine parents as an anchor; (5) no larger dense arm; (6) thresholds unchanged from ADR-0026 (0.005, 22 of 27, 8 of 9, ε = 0.001), the 0.0005 rate tie tolerance kept; (7) labels as drafted, with the trend line; (13) convergence on both the envelope and the run; (15) no "ordering without convergence" rule; and, where drafter and reviewer differed, (14) the lead's recommendation shown to him: **R-KNN is left out**. The remaining open choices of section 20 are taken at their recommended options. He was told in the same message that the second review's fourteen edits were applied and not re-read, that the most likely outcome is CONVERGENCE NOT REACHED, and that the cost is about 16 to 31 charged hours. The approval covers the download, the parent training, implementation and rehearsal only. Decision 2 was not delegated: it is the human lead's own.
 - Decision 2 (the human lead, unless he delegates it in writing at Decision 1; recorded in `results/p10i-s6-freeze-<date>/DECISION_2.md`): after the rehearsal record, the auditor's `agree`, the implementation audit, the cost projection and the freeze record, approve the single registered run. **Not given.**
 - Grounds stated in advance for not running after Decision 1: an engineering stop of section 12.1, or a cost projection over a cap that the human lead declines to extend. A refusal on any other ground is recorded with its reason before any sealed file is opened, and the outcome is NOT RUN (DECISION 2 REFUSED: reason).
 - If the independent recomputation disagrees with the frozen analysis, the frozen labels are recorded as written with the disagreement beside them; no label is changed without a recorded amendment.
 
-No approval of any kind is recorded for this draft. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
+Decision 1 is recorded above; no other approval exists. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 
 ## 22. Review record
 
