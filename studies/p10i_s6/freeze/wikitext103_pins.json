@@ -1,0 +1,20 @@
+{
+ "configuration": "wikitext-103-raw-v1",
+ "expected_configuration_download_bytes": 315466397,
+ "files": [
+  {
+   "bytes": 156987808,
+   "name": "train-00000-of-00002.parquet",
+   "sha256": "74da360f23826045b3e6ac6375411fdb15f003030aa74f2596ed08b857cb9212",
+   "source": "LFS pointer at raw/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1/train-00000-of-00002.parquet"
+  },
+  {
+   "bytes": 157088770,
+   "name": "train-00001-of-00002.parquet",
+   "sha256": "ba090ac30dbf5461e8dcbdd1a1b8e6f3cf9c2c756d64f0c1220450acd514f720",
+   "source": "LFS pointer at raw/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1/train-00001-of-00002.parquet"
+  }
+ ],
+ "repo": "Salesforce/WikiText",
+ "revision": "b08601e04326c79dfdd32d625aee71d232d685c3"
+}
