@@ -437,7 +437,7 @@ def manifest_excluded(rel: Path) -> bool:
 
 def hashes_of(ctx: QContext) -> dict[str, str]:
     """SHA-256 of every OUTPUT file of the run directory, for the Part Q manifest (every output is listed with its hash): all files except ``MANIFEST_EXCLUDES``."""
-    return {str(f.relative_to(ctx.run_dir)): file_sha256(f) for f in sorted(ctx.run_dir.rglob("*")) if f.is_file() and not manifest_excluded(f.relative_to(ctx.run_dir))}
+    return {str(f.relative_to(ctx.run_dir)): file_sha256(f) for f in sorted(ctx.run_dir.rglob("*")) if f.is_file() and not manifest_excluded(f.relative_to(ctx.run_dir)) and not (ctx.run_dir / f.relative_to(ctx.run_dir).parts[0]).is_symlink()}  # a linked (reused) directory is listed by the plan's reuse block, not here
 
 
 __all__ = ["QContext", "WHITELIST", "run_all", "step_generation", "step_partition", "step_qcheck", "step_qfit", "step_regeneration", "summary_for_display"]

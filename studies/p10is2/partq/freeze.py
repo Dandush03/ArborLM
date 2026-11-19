@@ -20,7 +20,7 @@ from arborlm.io import file_sha256, read_json, write_json
 from ..common import core, gates
 from ..common import plan as planmod
 from ..common.core import StageRefused
-from . import pkgmanifest
+from . import pkgmanifest, reuse, reusecheck
 from . import plan as qplan
 
 DELEGATION_SECTION_7_MARKER = "## 7"
@@ -31,6 +31,14 @@ def add_commands(sub: Any) -> None:
     cp.add_argument("--run-dir", required=True)
     cp.add_argument("--inputs", required=True, help="a JSON file naming every input with its path and SHA-256")
     cp.add_argument("--supersede", action="store_true")
+    cp.add_argument("--charged-ledger", action="append", default=[], help="every Part Q charged_ledger.json charged so far (absolute paths; the measuring run's, every rehearsal's, every attempt's): their sum is the charge before the freeze the registered cap check counts")
+    ru = sub.add_parser("reuse-file", help="add the reuse block (every file of an earlier attempt's six completed stages, hashed as bytes) to a copy of the inputs file")
+    ru.add_argument("--source-run-dir", required=True)
+    ru.add_argument("--freeze-commit", required=True, help="the full freeze commit under which the reused stages were computed")
+    ru.add_argument("--base-inputs", required=True)
+    ru.add_argument("--out", required=True)
+    ru.add_argument("--mode", choices=("registered", "rehearsal"), default="registered")
+    ru.add_argument("--repo")
     cp.add_argument("--repo")
     f = sub.add_parser("freeze", help="write freeze/partq_freeze_record.json for the committed candidate plan")
     f.add_argument("--measuring-rehearsal", required=True)
@@ -52,6 +60,8 @@ def add_commands(sub: Any) -> None:
     k.add_argument("--measuring-rehearsal", required=True)
     k.add_argument("--apply", action="store_true", help="edit configs/p10is2_partq.toml: the nine cap keys and caps.provisional = false (refuses unless every cap is 0.0 and provisional is true)")
     k.add_argument("--repo")
+    k.add_argument("--attempt3", action="store_true", help="the caps of a plan that reuses completed stages: reuse, regeneration, outputs, analysis and the total from the charge so far (--charged-ledger, every ledger)")
+    k.add_argument("--charged-ledger", action="append", default=[])
     z = sub.add_parser("caps-reset", help="reset the entered caps to unset (a recorded correction of a cost projection before any registered result exists) so that a new measuring record can be applied")
     z.add_argument("--reason", required=True)
     z.add_argument("--repo")
@@ -62,7 +72,10 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     inputs = read_json(Path(args.inputs))
     walk = planmod.import_walk(repo, "Q")
-    rec = qplan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, inputs=inputs, walk=walk)
+    charge = ledgers_charge(args.charged_ledger) if args.charged_ledger else None
+    if inputs.get(reuse.KEY) and charge is None:
+        raise StageRefused("refused: a plan that reuses completed stages needs --charged-ledger (every ledger charged so far): its caps are computed from that charge")
+    rec = qplan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, inputs=inputs, walk=walk, charge_before_freeze=charge)
     path = qplan.write_candidate(repo, rec, supersede=args.supersede)
     print(json.dumps({"candidate_plan": str(path), "plan_file_sha256": file_sha256(path), "items": {k: len(v) for k, v in rec["items"].items()}, "caps_provisional": rec["caps_provisional"]}))
     return 0
@@ -100,6 +113,53 @@ def cmd_caps_proposal(args: argparse.Namespace) -> int:
     return 0
 
 
+def ledgers_charge(paths: list[str]) -> dict[str, Any]:
+    """The charge so far: the sum of every named Part Q ledger (all its stages), each listed. A path that is not absolute or does not exist is refused: nothing is guessed."""
+    per: dict[str, float] = {}
+    for x in paths:
+        pth = Path(x)
+        if not pth.is_absolute() or not pth.is_file():
+            raise StageRefused(f"refused: --charged-ledger {x} must be the absolute path of an existing charged_ledger.json")
+        per[str(pth)] = core.Ledger(pth, "Q", 1e12).charged()
+    return {"seconds": sum(per.values()), "ledgers": per}
+
+
+REMAINING = reuse.ORDER  # the stages attempt 3 runs: the reuse check, the regeneration re-check, outputs, analysis
+
+
+def proposal_attempt3(meas: Mapping[str, Any], charge_seconds: float) -> dict[str, float]:
+    """The caps of a plan that REUSES completed stages (addendum section 4 condition 5), by the same shared function (``qplan.caps_proposal``): each remaining stage cap is 2 x its projected seconds, the total is the
+    charge so far (everything: attempts, rehearsals) plus 2 x the projection of the REMAINING stages only. ``regeneration``, ``outputs`` and ``analysis`` come from the measuring record by the whole-process formula;
+    ``reuse`` hashes the reused files and builds no world: its projection is the measured per-process overhead of ``inputs`` (which hashes more bytes than the reuse set: the plan's input files), an upper bound."""
+    full = projection_from_record(meas)
+    proj = {s: full[s] for s in ("regeneration", "outputs", "analysis")}
+    proj["reuse"] = float((meas.get("overhead_seconds") or {})["inputs"])
+    return dict(qplan.caps_proposal(charge_seconds, proj))
+
+
+def cmd_reuse_file(args: argparse.Namespace) -> int:
+    repo = Path(args.repo) if args.repo else core.ROOT
+    out = Path(args.out)
+    if out.exists():
+        raise StageRefused(f"refused: {out} exists")
+    full = core.git(repo, "rev-parse", "--verify", "--quiet", f"{args.freeze_commit}^{{commit}}").stdout.decode().strip()
+    if not full or full != args.freeze_commit:
+        raise StageRefused("refused: --freeze-commit must be the FULL commit of this repository")
+    block = reuse.build_block(Path(args.source_run_dir), full, args.mode)  # the files are only read, as bytes
+    write_json(out, {**read_json(Path(args.base_inputs)), reuse.KEY: block})
+    print(json.dumps({"inputs_file": str(out), "sha256": file_sha256(out), "reuse_file_count": block["file_count"], "reuse_tree_sha256": block["tree_sha256"], "freeze_commit": full}))
+    return 0
+
+
+def reuse_rehearsal_gate(record: Mapping[str, Any], plan_file_sha256: str) -> dict[str, Any]:
+    """The counting rehearsal of a plan that reuses stages: kind counting on non-provisional caps, this plan's SHA-256, every stage of ``reuse.ORDER`` COMPLETE, and the forced PAUSED — IDENTITY on a reused file."""
+    done = {s for s, v in (record.get("stages") or {}).items() if v.get("status") == "COMPLETE"}
+    missing = [s for s in reuse.ORDER if s not in done]
+    forced = record.get("forced") or {}
+    ok = not missing and record.get("kind_of_rehearsal") == "counting" and record.get("caps_provisional") is False and record.get("plan_file_sha256") == plan_file_sha256 and bool(forced.get("identity_on_reused_file"))
+    return {"passed": ok, "missing": missing, "forced_identity_on_reused_file": bool(forced.get("identity_on_reused_file")), "plan_file_hash_matches": record.get("plan_file_sha256") == plan_file_sha256}
+
+
 def cmd_units_file(args: argparse.Namespace) -> int:
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
@@ -134,7 +194,12 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps come from a MEASURING rehearsal's record")
-    proposal = proposal_from_record(meas)
+    if args.attempt3:
+        if not args.charged_ledger:
+            raise StageRefused("refused: --attempt3 needs --charged-ledger (every ledger charged so far)")
+        proposal = proposal_attempt3(meas, ledgers_charge(args.charged_ledger)["seconds"])
+    else:
+        proposal = proposal_from_record(meas)
     if args.apply:
         path = repo / core.CONFIG_Q
         path.write_text(apply_caps(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
@@ -144,7 +209,7 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
     return 0
 
 
-CAPS_KEYS = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis", "total")
+CAPS_KEYS = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis", "reuse", "total")
 
 
 def reset_caps_text(text: str, stamp: str, superseded: str) -> str:
@@ -264,7 +329,14 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused(f"refused: --measuring-rehearsal {args.measuring_rehearsal} is not a P10IS2 rehearsal record ({type(e).__name__}: {e})") from e
     if meas.get("kind_of_rehearsal") != "measuring" or meas.get("caps_provisional") is not True:
         raise StageRefused("refused: --measuring-rehearsal must be the measuring rehearsal's record (made on its fixed cap)")
-    proposal = proposal_from_record(meas)  # refuses a record that did not measure every registered stage
+    block = (plan.data.get("inputs") or {}).get(reuse.KEY)
+    if block:  # attempt 3: the caps from the charge so far and the remaining stages only
+        charge = plan.data.get("charge_before_freeze") or {}
+        if not charge.get("seconds"):
+            raise StageRefused("refused: the plan that reuses completed stages records no charge before the freeze")
+        proposal = proposal_attempt3(meas, float(charge["seconds"]))
+    else:
+        proposal = proposal_from_record(meas)  # refuses a record that did not measure every registered stage
     differ = qplan.caps_match_config(cfg, proposal)
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
@@ -282,10 +354,17 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         counting = core.read_record(Path(args.counting_rehearsal), "rehearsal")
     except (ValueError, KeyError, OSError) as e:
         raise StageRefused(f"refused: --counting-rehearsal {args.counting_rehearsal} is not a P10IS2 rehearsal record ({type(e).__name__}: {e})") from e
-    reh = gates.rehearsal_gate(counting, qplan.REHEARSAL_STAGES, plan_file_sha256=plan_sha)
+    reuse_info: dict[str, Any] = {}
+    if block:
+        reuse.verify_block(block)  # condition 1: every file, byte for byte, now
+        reuse_info = {"files_verified": block["file_count"], "tree_sha256": block["tree_sha256"], "diff_against_earlier_freeze": reusecheck.confined_diff(repo, block["freeze_commit"]), "ledger": reusecheck.check_ledger_pin(repo, block["freeze_commit"], plan), "seeds": reusecheck.check_seeds(repo, block["freeze_commit"], plan)}
+        reh = reuse_rehearsal_gate(counting, plan_sha)
+    else:
+        reh = gates.rehearsal_gate(counting, qplan.REHEARSAL_STAGES, plan_file_sha256=plan_sha)
     if not reh["passed"]:
-        raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")
-    stage_lines = {s: {"seconds": (counting.get("stages", {}).get(s) or {}).get("seconds"), "cap_seconds": plan.cap_seconds(s), "within_cap": (counting.get("stages", {}).get(s) or {}).get("within_cap")} for s in qplan.REHEARSAL_STAGES}
+        raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, the forced identity pause (and pause/resume of a first attempt), and this plan file's SHA-256: {reh}")
+    stages_required = reuse.ORDER if block else qplan.REHEARSAL_STAGES
+    stage_lines = {s: {"seconds": (counting.get("stages", {}).get(s) or {}).get("seconds"), "cap_seconds": plan.cap_seconds(s), "within_cap": (counting.get("stages", {}).get(s) or {}).get("within_cap")} for s in stages_required}
     over = [s for s, v in stage_lines.items() if v["within_cap"] is not True]
     print(json.dumps({"counting_rehearsal_stage_seconds_against_caps": stage_lines}))
     if over:
@@ -308,7 +387,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rec = {
         **core.envelope("freeze_record", "Q"), "plan_file_sha256": plan_sha, "measuring_rehearsal": {"path": str(Path(args.measuring_rehearsal).resolve()), "sha256": file_sha256(Path(args.measuring_rehearsal))},
         "counting_rehearsal": {"path": str(Path(args.counting_rehearsal).resolve()), "sha256": file_sha256(Path(args.counting_rehearsal))}, "attestations": {"sealed_values_unopened_by": attest, "recorded_by": "the freeze command from the flags; not verified by code"},
-        "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "counting_stage_seconds_against_caps": stage_lines, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
+        "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "reuse": reuse_info or None, "counting_stage_seconds_against_caps": stage_lines, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
     }  # fmt: skip
     record.parent.mkdir(parents=True, exist_ok=True)
     write_json(record, core.jsonable(rec))
@@ -317,4 +396,4 @@ def cmd_freeze(args: argparse.Namespace) -> int:
 
 
 def dispatch(args: argparse.Namespace) -> int:
-    return {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "inputs-file": cmd_inputs_file, "units-file": cmd_units_file, "caps-config": cmd_caps_config, "caps-reset": cmd_caps_reset}[args.command](args)
+    return {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "inputs-file": cmd_inputs_file, "units-file": cmd_units_file, "caps-config": cmd_caps_config, "reuse-file": cmd_reuse_file, "caps-reset": cmd_caps_reset}[args.command](args)

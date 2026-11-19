@@ -54,7 +54,7 @@ def registered_items(cfg: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
     return items
 
 
-def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs: Mapping[str, Any], mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, ledger_path: str | None = None, test_mode: bool = False) -> dict[str, Any]:
+def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs: Mapping[str, Any], mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, ledger_path: str | None = None, test_mode: bool = False, charge_before_freeze: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The plan record. ``inputs`` names every input file with its path and SHA-256 (the downloads, WikiText-2, the package manifest); the panel ledger as it stands at the freeze is hashed into ``manifests``."""
     manifests: dict[str, Any] = {}
     led = ledger_path or cfg["paths"]["panel_ledger"]
@@ -65,7 +65,7 @@ def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs
         manifests["panel_ledger"] = {"path": str(lp), "sha256": file_sha256(lp)}  # the shared ledger as it stands at the freeze, by absolute path and SHA-256
     return planmod.build_plan(
         part="Q", mode=mode, cfg=cfg, repo=repo, items=registered_items(cfg), run_dir=run_dir, walk=walk,
-        extra={"layout": layout(cfg), "inputs": dict(inputs), "manifests": manifests, "panel_ledger_path": led, "seeds": {k: v for k, v in core.partq_seeds(cfg, "registered").items()}, "thresholds": {k: cfg["quality"][k] for k in cfg["quality"]}},
+        extra={**({"charge_before_freeze": dict(charge_before_freeze)} if charge_before_freeze else {}), "layout": layout(cfg), "inputs": dict(inputs), "manifests": manifests, "panel_ledger_path": led, "seeds": {k: v for k, v in core.partq_seeds(cfg, "registered").items()}, "thresholds": {k: cfg["quality"][k] for k in cfg["quality"]}},
     )  # fmt: skip
 
 

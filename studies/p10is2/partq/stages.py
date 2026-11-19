@@ -19,7 +19,7 @@ from ..common.core import PendingLeadReview, StageRefused
 from . import freeze
 
 EXIT_REFUSED, EXIT_IDENTITY, EXIT_LEAD, EXIT_INCOMPLETE = 2, planmod.IDENTITY_EXIT, 3, 4  # 4: the stage stopped on its cap or the memory guard (PAUSED): resume it
-REGISTERED_STAGES = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis")
+REGISTERED_STAGES = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis", "reuse")  # "reuse" only for a plan that reuses an earlier attempt's completed stages
 
 
 def repo_of(args: argparse.Namespace | None = None) -> Path:
@@ -169,7 +169,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        if args.command in ("candidate-plan", "freeze", "caps-proposal", "inputs-file", "units-file", "caps-config", "caps-reset"):
+        if args.command in ("candidate-plan", "freeze", "caps-proposal", "inputs-file", "units-file", "caps-config", "caps-reset", "reuse-file"):
             return freeze.dispatch(args)
         if args.command == "registered":
             return cmd_registered(args)

@@ -35,7 +35,7 @@ from ..common import plan as planmod
 from ..common.core import StageRefused
 from . import batches as bt
 from . import generation as gen
-from . import labels, partition, pipeline, pkgmanifest, real, real_bundle, real_world, step8
+from . import labels, partition, pipeline, pkgmanifest, real, real_bundle, real_world, reuse, step8
 from .batches import DigestMismatch, StageCapExceeded
 from .teacher import marian_batch_teacher
 
@@ -201,8 +201,9 @@ def stage_outputs(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any, mode:
         if not rec["required_ok"]:
             pipeline.fail(ctx, "tokenization test (a) or the combined whole-string test failed")
             raise RegisteredTestStop(f"tokenization test (a) or the combined whole-string test failed: {json.dumps(rec['tokenization'])[:400]}")
-        gb = gloss.gloss_bank(w.tok, accepted, p.vocab)
-        gtest = step8.step_gloss(ctx, w.tok, {n: p.panels[n] for n in ("E_A", "E_B", "D_cal")}, set(p.vocab))
+        pieces = gloss.first_task_pieces(w.tok, {"A": [*p.panels["E_A"], *p.panels["D_cal"]], "B": [*p.panels["E_B"], *p.panels["D_cal"]]})
+        gb = gloss.gloss_bank(w.tok, accepted, p.vocab, pieces)  # the amended segment rule (addendum section 3); the last newline's rule is decided here from the tokenizer and the items alone and recorded in the bank
+        gtest = step8.step_gloss(ctx, w.tok, {n: p.panels[n] for n in ("E_A", "E_B", "D_cal")}, set(p.vocab), bank=gb)
         if gtest["mismatches"]:
             raise RegisteredTestStop(f"tokenization test (a) on the R-gloss-icl prompts: {gtest['mismatches']} mismatches (zero required)")
         write_bundle(bundle, w.run_dir / "outputs/bundle")
@@ -215,10 +216,10 @@ def stage_outputs(w: real_world.RealWorld, ctx: pipeline.QContext, p: Any, mode:
     return out
 
 
-def write_manifest(ctx: pipeline.QContext) -> dict[str, str]:
+def write_manifest(ctx: pipeline.QContext, reused: dict[str, Any] | None = None) -> dict[str, str]:
     """The Part Q manifest: every output file of the run (sealed files excluded) with its SHA-256 (section 4.1: every output is listed with its hash). Part T reads these files by hash and nothing else."""
     files = pipeline.hashes_of(ctx)
-    core.write_record(ctx.d("manifest.json"), {**core.envelope("block_record", "Q"), "what": "partq_manifest", "files": files, "excluded": list(pipeline.MANIFEST_EXCLUDES), "bundle_dir": "outputs/bundle"}, overwrite=True)
+    core.write_record(ctx.d("manifest.json"), {**core.envelope("block_record", "Q"), "what": "partq_manifest", "files": files, "excluded": list(pipeline.MANIFEST_EXCLUDES), "bundle_dir": "outputs/bundle", **({"reused": {k: reused[k] for k in ("source_run_dir", "freeze_commit", "stages", "file_count", "tree_sha256")}} if reused else {})}, overwrite=True)
     if pipeline.hashes_of(ctx) != files:  # the manifest is written LAST of the outputs: nothing it lists may have changed while it was written
         raise RegisteredTestStop("the Part Q manifest does not describe the run directory it was written in (a listed file changed or a result file was written after it)")
     return files
@@ -359,11 +360,19 @@ def completion_path(run_dir: Path, stage: str) -> Path:
     return run_dir / "stages" / f"{stage}.complete.json"
 
 
-def require_prerequisites(run_dir: Path, stage: str) -> None:
-    """Stage order is enforced: each stage runs only after its predecessor's completion record."""
-    i = STAGE_ORDER.index(stage)
-    if i and not completion_path(run_dir, STAGE_ORDER[i - 1]).is_file():
-        raise StageRefused(f"refused: stage {stage!r} needs {STAGE_ORDER[i - 1]!r} to be complete first (no completion record)")
+def order_of(plan: planmod.Plan | None) -> tuple[str, ...]:
+    """The stages of a plan in order: the eight of a first attempt, or ``reuse.ORDER`` for a plan that reuses the completed stages of an earlier attempt."""
+    return reuse.ORDER if plan is not None and (plan.data.get("inputs") or {}).get(reuse.KEY) else STAGE_ORDER
+
+
+def require_prerequisites(run_dir: Path, stage: str, order: tuple[str, ...] = STAGE_ORDER) -> None:
+    """Stage order is enforced: each stage runs only after its predecessor's completion record. The ``analysis`` also runs after a RECORDED ENGINEERING FAILURE (``engineering_failures.json``): a registered test of
+    the data step that stopped a stage leaves no completion record, and ADR-0025 section 4.4 row 1 derives its label from the records (QUALIFICATION-ENGINEERING-FAILURE, no line derived)."""
+    i = order.index(stage)
+    if stage == "analysis" and (run_dir / "engineering_failures.json").is_file():
+        return
+    if i and not completion_path(run_dir, order[i - 1]).is_file():
+        raise StageRefused(f"refused: stage {stage!r} needs {order[i - 1]!r} to be complete first (no completion record)")
 
 
 def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod.Plan | None = None, limits: dict[str, Any] | None = None, other_alive: Callable[[], list[str]] = procs.other_studies_alive, pause_after_batches: int | None = None) -> dict[str, Any]:
@@ -371,22 +380,25 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
     digest mismatch leaves an engineering-failure record and stops (ruling L3)."""
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
     gates.apply_platform_settings(cfg)
-    if stage not in STAGE_ORDER:
-        raise StageRefused(f"refused: {stage!r} is not a Part Q stage")
+    order = order_of(plan)
+    if stage not in order:
+        raise StageRefused(f"refused: {stage!r} is not a stage of this plan ({', '.join(order)})")
     if mode in ("registered", "rehearsal") and plan is None:
         raise StageRefused("refused: a registered stage takes its parameters from the frozen plan")
     if mode in ("registered", "rehearsal"):
-        require_prerequisites(run_dir, stage)
+        require_prerequisites(run_dir, stage, order)
     total = float(plan.total_cap_seconds()) if plan is not None else 0.0
-    led = core.Ledger(run_dir / "charged_ledger.json", "Q", total if total > 0 else 1e12)  # in the run directory, never in the tree
+    before = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0)) if plan is not None else 0.0  # everything charged before the freeze counts against the total cap
+    led = core.Ledger(run_dir / "charged_ledger.json", "Q", max(1.0, total - before) if total > 0 else 1e12)  # in the run directory, never in the tree
     if mode in ("registered", "rehearsal"):
         require_one_mode(run_dir, mode, led)
         settle_killed(run_dir, stage, mode, led)  # the time of a killed earlier process of this stage, charged now (a lower bound)
     cap = 1e12
     stage_cap_total: float | None = None
     if plan is not None:
-        stage_cap = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else 1e12
-        stage_cap_total = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else None
+        own = float(plan.data["stage_caps"].get(f"{stage}_hours", 0.0)) * 3600.0
+        stage_cap = own if own > 0 else 1e12
+        stage_cap_total = own if own > 0 else None
         cap = min(stage_cap - led.charged(stage), led.remaining())
         if cap <= 0:
             reason = "the cumulative hour cap is spent. " + CAP_SENTENCE
@@ -405,14 +417,26 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
         guard = PauseGuard(guard, pause_after_batches)
     holder: dict[str, Any] = {"ctx": None}
 
+    reuse_block = (plan.data.get("inputs") or {}).get(reuse.KEY) if plan is not None else None
+
     def body() -> dict[str, Any]:
+        out = body_inner()
+        if reuse_block:
+            reuse.verify_block(reuse_block)  # the reused files are still, byte for byte, what the plan listed: no stage of this attempt wrote into them
+        return out
+
+    def body_inner() -> dict[str, Any]:
+        if stage == "reuse":
+            if not reuse_block:
+                raise StageRefused("refused: this plan reuses no earlier stage")
+            return reuse.link_and_record(reuse_block, run_dir, mode)
         if stage == "analysis":
             if plan is not None:
                 pkgmanifest.verify_inputs(plan.data["inputs"], uses_packages=False, repo=repo)
             ctx = holder["ctx"] = _light_ctx(cfg, run_dir, mode)
             res = labels.part_q_label(pipeline.facts_of(ctx))
             core.write_record(run_dir / pipeline.loc(ctx, "qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in res.items() if k != "oracle_line"}}, overwrite=True)
-            write_manifest(ctx)
+            write_manifest(ctx, reuse_block)
             return {"label": res["label"], "part_t": res["part_t"]} if mode == "registered" else pipeline.summary_for_display(ctx)
         t_world = time.monotonic()
         w = build_world(cfg, repo, run_dir, mode, load_teachers=True, plan=plan)

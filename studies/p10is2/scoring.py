@@ -139,12 +139,20 @@ def cell_reads(world: WorldT, rep: int, name: str, order: str, arm: Arm, routers
 def gloss_icl_ids(source: str, query: Any, lexicon: Mapping[str, str], vocab: set[str], bank: Mapping[str, Any], cap: str, bos_len: int) -> list[int]:
     """R-gloss-icl (section 5.2): before the task prompt S0 receives, unchanged, one line per in-vocabulary source word with a lexicon entry, in source order, repeats included: the source word's stored
     segment, the separator segment, the gloss word's stored segment, the newline segment; no tokenizer is called. A BOS token, if the prompt starts with one, stays once at the start (reading, as ``icl_ids``)."""
-    lines: list[int] = []
-    for w in normalize(source).split():
-        if w in vocab and w in lexicon:
-            lines += [*bank["source_words"][w], *bank["separator"], *bank["words"][cap][lexicon[w]], *bank["newline"]]
+    pairs = [(w, lexicon[w]) for w in normalize(source).split() if w in vocab and w in lexicon]
     ids = list(query.prompt_ids)
-    return ids[:bos_len] + lines + ids[bos_len:]
+    if not pairs:
+        return ids
+    lines: list[int] = []
+    for i, (w, g) in enumerate(pairs):  # the amended segment rule (addendum section 3): a later line's source-word segment carries the newline before it
+        lines += [*(bank["source_words"][w] if i == 0 else bank["source_words_after_newline"][w]), *bank["separator"], *bank["words"][cap][g]]
+    ln = bank["last_newline"]
+    if ln["rule"] == "own-segment":
+        return ids[:bos_len] + lines + list(bank["newline"]) + ids[bos_len:]
+    drop = len(ln["first_task_piece_ids"])  # the last newline is stored together with the task prompt's first piece
+    if ids[bos_len : bos_len + drop] != ln["first_task_piece_ids"]:
+        raise ValueError("the task prompt does not begin with the piece the bank's last-newline rule names")
+    return ids[:bos_len] + lines + list(ln["fused_ids"]) + ids[bos_len + drop :]
 
 
 @torch.no_grad()

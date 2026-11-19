@@ -96,11 +96,12 @@ def step_ledger(ctx: QContext, ledger_path: Path, marker_windows: Sequence[Span]
     return write_study_ledger(ctx.cfg, ctx.mode, ledger_path, marker_windows, ordinary_candidates, owner, row_map, ctx.sizes)
 
 
-def step_gloss(ctx: QContext, tok: Any, items_for_test: Mapping[str, Sequence[Item]], in_vocab: set[str]) -> dict[str, Any]:
+def step_gloss(ctx: QContext, tok: Any, items_for_test: Mapping[str, Sequence[Item]], in_vocab: set[str], bank: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The gloss bank (token ids of every target-language word type of each accepted pool, the separator and newline segments) and tokenization test (a) on the R-gloss-icl prompts of every E_A, E_B and
     D_cal item with a lexicon built from the whole accepted pool. Zero mismatches are required; a mismatch is a failed gate on study-produced data."""
     pools = {c: accepted_pool(ctx, c) for c in core.TASKS}
-    bank = gloss.gloss_bank(tok, pools)
+    if bank is None:
+        bank = gloss.gloss_bank(tok, pools, sorted(in_vocab), gloss.first_task_pieces(tok, {"A": items_for_test["E_A"], "B": items_for_test["E_B"]}))  # the bank that is stored is the bank that is tested
     tests: dict[str, Any] = {}
     for name, cap in (("E_A", "A"), ("E_B", "B"), ("D_cal", "A"), ("D_cal", "B")):
         lex = gloss.gloss_lexicon(pools[cap])
@@ -108,5 +109,5 @@ def step_gloss(ctx: QContext, tok: Any, items_for_test: Mapping[str, Sequence[It
     bad = sum(t["mismatches"] for t in tests.values())
     if bad:
         fail(ctx, f"tokenization test (a) on R-gloss-icl prompts: {bad} mismatches (zero required)")
-    _rec(ctx, "outputs/gloss_bank.json", "gloss_bank", {"bank": bank})
+    _rec(ctx, "outputs/gloss_bank.json", "gloss_bank", {"bank": dict(bank)})
     return _rec(ctx, "outputs/gloss_test.json", "gloss_test", {"tests": tests, "mismatches": bad})

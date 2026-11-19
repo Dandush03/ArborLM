@@ -30,7 +30,7 @@ def fake_gloss_bank(w):  # type: ignore[no-untyped-def]
             for x in s.t[c]:
                 for t in normalize(x.target).split():
                     words[c][t] = ids(t)
-    return {"source_words": {x: ids(x) for x in w.partition.vocab}, "words": words, "separator": [2], "newline": [3]}
+    return {"source_words": {x: ids(x) for x in w.partition.vocab}, "source_words_after_newline": {x: [3, *ids(x)] for x in w.partition.vocab}, "words": words, "separator": [2], "newline": [3], "last_newline": {"rule": "own-segment"}}
 
 
 @pytest.fixture(scope="module")

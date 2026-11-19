@@ -25,8 +25,8 @@ case "$STAGE" in
     inputs|partition|qfit|qcheck|generation|regeneration|outputs)
         PYTHONPATH="$DURABLE_PACKAGES" exec uv run --locked --offline --extra pilot python -m studies.p10is2.partq.stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" "$@"
         ;;
-    analysis)
-        # records only: no package, so none is on the path (steps 1-8 of section 4.1 and the regeneration check are the only users of the 28 packages)
+    analysis|reuse)
+        # records only (analysis) or hashes only (reuse, attempt 3): no package, so none is on the path (steps 1-8 of section 4.1 and the regeneration check are the only users of the 28 packages)
         unset PYTHONPATH
         exec uv run --locked --offline --extra pilot python -m studies.p10is2.partq.stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" "$@"
         ;;

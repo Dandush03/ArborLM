@@ -94,6 +94,11 @@ def require_package_manifest(inputs: Mapping[str, Any]) -> dict[str, Any]:
 def verify_inputs(inputs: Mapping[str, Any], *, uses_packages: bool, repo: Path | None = None) -> None:
     """Stage start: every file input of the plan's ``inputs`` block (entries with a path and a SHA-256, which is the file's real SHA-256: an upstream checksum of another kind is kept under ``upstream_checksum``) still has its hash, and for a stage that uses the packages the durable copy still matches its manifest."""
     for name, rec in sorted(inputs.items()):
+        if name == "reuse" and isinstance(rec, dict) and "source_run_dir" in rec:
+            from . import reuse
+
+            reuse.verify_block(rec)  # the reused stages' files of the earlier attempt, byte for byte (condition 1 of the attempt-3 addendum)
+            continue
         if name == KEY or not isinstance(rec, dict) or "sha256" not in rec or "path" not in rec:
             continue
         p = Path(rec["path"])

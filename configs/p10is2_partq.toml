@@ -127,4 +127,5 @@ generation_hours = 8.47
 regeneration_hours = 0.26
 outputs_hours = 0.35
 analysis_hours = 0.01  # the records-only analysis stage: projected at a fixed 60 s (plan.ANALYSIS_PROJECTED_SECONDS), cap 2 x that
+reuse_hours = 0.0   # attempt 3 only: the reuse stage (hashing the reused files of the earlier attempt); 0.0 = not set
 total_hours = 15.15
