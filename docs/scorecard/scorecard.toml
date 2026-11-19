@@ -1,0 +1,74 @@
+# ArborLM progress scorecard: the source of truth for the chart in README.md.
+#
+# The SCORES are the human lead's working estimate of how close each requirement of the target
+# architecture is to being met. They are a planning aid. They are not registered results and not
+# success claims. The EVIDENCE lines quote registered labels and link to their records.
+#
+# How to update (on every merge to main that adds or changes a registered outcome):
+#   1. edit the row(s) below: evidence and next always; the score only when the human lead changes it
+#      or confirms a proposed change;
+#   2. set `updated` and `basis`;
+#   3. run `uv run --locked python docs/scorecard/render_scorecard.py`;
+#   4. commit this file, docs/scorecard/scorecard.svg and README.md together.
+# `uv run --locked python docs/scorecard/render_scorecard.py --check` fails when they are out of step
+# (tests/test_scorecard.py runs it).
+
+updated = "2026-11-19"
+basis = "main after the merges of P10-I-R, P10-I-S3 and P10-I-S5"
+scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
+
+[[row]]
+title = "External memory improves prediction"
+score = 8
+note = "Shown with a frozen backbone; stronger dependence after longer training."
+evidence = [
+  "P4: registered capacity and slot-association criteria passed on a frozen backbone ([results](results/p4-2026-11-12/)).",
+  "P10-I-S3 line 1: DEPENDENT on fresh data, read on the tree memory, not converged; the control passes largely because wrong values hurt ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
+]
+next = "The same dependence controls on the flat memory at convergence (P10-I-S6, drafted, not approved)."
+
+[[row]]
+title = "Reliable learned addressing"
+score = 7
+note = "Qualified at 4K and 16K slots on synthetic records, but not under overload or natural contexts."
+evidence = [
+  "P10-S0: ADDRESSING-QUALIFIED (4,096 AND 16,384); OVERLOAD NOT QUALIFIED; 65,536 slots a probe only ([outcome](results/p10s0-run-2026-11-16/OUTCOME.md)).",
+]
+next = "P10-I-S0 (addressing under overload): registered main grid running. Natural contexts: no study yet."
+
+[[row]]
+title = "Quality versus dense alternatives"
+score = 5
+note = "Flat memory beat dense at 16,384 updates, but neither had converged."
+evidence = [
+  "P10-I-S3 line 2 [FLAT]: MEMORY AHEAD (DENSE STILL IMPROVING), mean lead +0.0127 against 0.005, 27 of 27 cells ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
+  "P10-I-S3 line 2 [TREE]: INCONCLUSIVE (MEMORY RATE AT EDGE). P10-I-R: the tree is behind the flat memory and no read-time cause is identified ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
+]
+next = "P10-I-S6: does the flat lead persist at convergence on fresh data (drafted, not approved). The tree needs a training study that does not exist."
+
+[[row]]
+title = "Useful capacity scaling"
+score = 3
+note = "Still inconclusive; larger stores have not proven superior capacity."
+evidence = [
+  "P10-S1: CAPACITY-INCONCLUSIVE; SATURATION-INCONCLUSIVE; the 16,384 to 65,536 step NOT TESTED ([results](results/p10s1-run-2026-11-17/)).",
+]
+next = "P10-I-S1 (capacity): calibrated, not yet frozen; blocked on a quiet-machine limit this machine does not reach."
+
+[[row]]
+title = "Sequential learning from teachers"
+score = 1
+note = "No student transfer experiment completed yet."
+evidence = [
+  "P10-S2: TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED; the transfer question was not tested ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)).",
+]
+next = "P10-I-S2: teacher qualification (Part Q) running; the transfer part (Part T) only if the teachers qualify."
+
+[[row]]
+title = "SSD-backed neural-memory advantage"
+score = 2
+note = "Physical SSD costs measured, but no neural-memory SSD comparison."
+evidence = [
+  "P10-I-S5 (engineering only): BYTES CONFIRMED EXACTLY; CONTIGUOUS REQUEST CHEAPER PER PAGE; scientific part NOT EVALUABLE (PREREQUISITES NOT MET) ([outcome](results/p10is5-run-2026-11-18/OUTCOME.md)).",
+]
+next = "P10-II-S5: page traces and drive reads of trained stores (drafted, not approved). A scientific claim still needs learned addressing at a size where storage matters."

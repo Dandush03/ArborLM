@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="694" viewBox="0 0 1000 694" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-19">
+<rect width="1000" height="694" rx="14" fill="#0f0f10"/>
+<g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<text x="28" y="48" fill="#f2f2f2" font-size="19" font-weight="600">External memory improves prediction</text>
+<text x="972" y="48" fill="#f2f2f2" font-size="19" text-anchor="end">8/10</text>
+<rect x="28" y="62" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="62" width="755" height="8" rx="4" fill="#3f8f4f"/>
+<text x="28" y="96" fill="#c9c9c9" font-size="15">Shown with a frozen backbone; stronger dependence after longer training.</text>
+<text x="28" y="152" fill="#f2f2f2" font-size="19" font-weight="600">Reliable learned addressing</text>
+<text x="972" y="152" fill="#f2f2f2" font-size="19" text-anchor="end">7/10</text>
+<rect x="28" y="166" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="166" width="661" height="8" rx="4" fill="#3f8f4f"/>
+<text x="28" y="200" fill="#c9c9c9" font-size="15">Qualified at 4K and 16K slots on synthetic records, but not under overload or natural contexts.</text>
+<text x="28" y="256" fill="#f2f2f2" font-size="19" font-weight="600">Quality versus dense alternatives</text>
+<text x="972" y="256" fill="#f2f2f2" font-size="19" text-anchor="end">5/10</text>
+<rect x="28" y="270" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="270" width="472" height="8" rx="4" fill="#d9822b"/>
+<text x="28" y="304" fill="#c9c9c9" font-size="15">Flat memory beat dense at 16,384 updates, but neither had converged.</text>
+<text x="28" y="360" fill="#f2f2f2" font-size="19" font-weight="600">Useful capacity scaling</text>
+<text x="972" y="360" fill="#f2f2f2" font-size="19" text-anchor="end">3/10</text>
+<rect x="28" y="374" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="374" width="283" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="408" fill="#c9c9c9" font-size="15">Still inconclusive; larger stores have not proven superior capacity.</text>
+<text x="28" y="464" fill="#f2f2f2" font-size="19" font-weight="600">Sequential learning from teachers</text>
+<text x="972" y="464" fill="#f2f2f2" font-size="19" text-anchor="end">1/10</text>
+<rect x="28" y="478" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="478" width="94" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="512" fill="#c9c9c9" font-size="15">No student transfer experiment completed yet.</text>
+<text x="28" y="568" fill="#f2f2f2" font-size="19" font-weight="600">SSD-backed neural-memory advantage</text>
+<text x="972" y="568" fill="#f2f2f2" font-size="19" text-anchor="end">2/10</text>
+<rect x="28" y="582" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="582" width="189" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="616" fill="#c9c9c9" font-size="15">Physical SSD costs measured, but no neural-memory SSD comparison.</text>
+<text x="28" y="676" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-19: main after the merges of P10-I-R, P10-I-S3 and P10-I-S5.</text>
+</g>
+</svg>
