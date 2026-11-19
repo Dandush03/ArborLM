@@ -5,6 +5,7 @@ import json
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -109,17 +110,70 @@ def test_a_removed_definition_is_refused_and_comments_and_formatting_do_not_coun
         reusecheck.confined_diff(r, c)
 
 
-def test_the_config_may_differ_only_in_the_caps_and_the_ledger_path(tmp_path: Path) -> None:
+def test_the_config_may_differ_only_in_the_attempt3_caps_and_the_ledger_path_and_attempt2s_caps_are_a_record(tmp_path: Path) -> None:
     r, c = mini_repo(tmp_path)
     cfg = r / core.CONFIG_Q
     text = cfg.read_text()
-    text = re.sub(r"(?m)^total_hours = [0-9.]+", "total_hours = 99.0", text).replace("provisional = true", "provisional = false")
+    a, b = freeze.section_span(text, "stage_caps_attempt3")
+    body = re.sub(r"(?m)^total_hours = [0-9.]+", "total_hours = 12.5", text[a:b])
+    text = text[:a] + body + text[b:]
     text = re.sub(r'(?m)^panel_ledger = "[^"]*"', 'panel_ledger = "/elsewhere/preserved_copy.json"', text)
     cfg.write_text(text)
     assert reusecheck.confined_diff(r, c)["changed"][core.CONFIG_Q.as_posix()]
-    cfg.write_text(re.sub(r"(?m)^batch_size = [0-9]+", "batch_size = 16", cfg.read_text()))
-    with pytest.raises(core.StageRefused, match="batch_size"):
+    a, b = freeze.section_span(cfg.read_text(), "stage_caps")  # attempt 2's caps: ANY edit is refused (R1)
+    cfg.write_text(cfg.read_text()[:a] + re.sub(r"(?m)^total_hours = [0-9.]+", "total_hours = 99.0", cfg.read_text()[a:b]) + cfg.read_text()[b:])
+    with pytest.raises(core.StageRefused, match="total_hours"):
         reusecheck.confined_diff(r, c)
+    cfg.write_text(re.sub(r"(?m)^provisional = false", "provisional = true", (r / core.CONFIG_Q).read_text()))
+    with pytest.raises(core.StageRefused, match="config"):
+        reusecheck.confined_diff(r, c)
+
+
+def test_an_import_walk_file_of_the_earlier_plan_that_differs_is_refused(tmp_path: Path) -> None:
+    r, _c = mini_repo(tmp_path)
+    walked = r / "studies/p10s2/model.py"
+    walked.parent.mkdir(parents=True, exist_ok=True)
+    walked.write_text("A = 1\n")
+    from arborlm.io import file_sha256
+
+    (r / core.FREEZE_DIR).mkdir(parents=True, exist_ok=True)
+    write_json(r / core.PLAN_Q, {"frozen_files": {"studies/p10s2/model.py": file_sha256(walked)}})
+    git(r, "add", "-A")
+    git(r, "commit", "-q", "-m", "plan with a walked file")
+    c = git(r, "rev-parse", "HEAD")
+    assert reusecheck.confined_diff(r, c)["import_walk_files_compared"] == 1
+    walked.write_text("A = 2\n")  # P10-S2's code, which the reused stages executed, differs now
+    with pytest.raises(core.StageRefused, match="import-walk file"):
+        reusecheck.confined_diff(r, c)
+
+
+def test_attempt_2s_run_directory_must_be_read_only(tmp_path: Path) -> None:
+    d = fake_attempt(tmp_path)
+    with pytest.raises(core.StageRefused, match="chmod -R a-w"):
+        reuse.require_read_only(d, "registered")
+    reuse.require_read_only(d, "rehearsal")  # a rehearsal source is not held to it
+    import os
+    import stat
+
+    for p in [d, *d.rglob("*")]:
+        os.chmod(p, os.stat(p).st_mode & ~(stat.S_IWUSR | stat.S_IWGRP | stat.S_IWOTH))
+    try:
+        reuse.require_read_only(d, "registered")
+        reuse.verify_block(reuse.build_block(d, "c" * 40))  # reading and hashing still work
+    finally:
+        for p in [d, *d.rglob("*")]:
+            os.chmod(p, os.stat(p).st_mode | stat.S_IWUSR)
+
+
+def test_caps_config_attempt3_writes_only_its_own_section(tmp_path: Path) -> None:
+    text = (ROOT / core.CONFIG_Q).read_text()
+    new = freeze.apply_caps_attempt3(text, {"reuse_hours": 0.05, "regeneration_hours": 0.3, "outputs_hours": 0.4, "analysis_hours": 0.05, "total_hours": 12.5})
+    cfg_old, cfg_new = tomllib.loads(text), tomllib.loads(new)
+    assert cfg_new["stage_caps"] == cfg_old["stage_caps"] and cfg_new["caps"] == cfg_old["caps"]  # attempt 2's caps and caps.provisional untouched
+    assert cfg_new["stage_caps_attempt3"] == {"reuse_hours": 0.05, "regeneration_hours": 0.3, "outputs_hours": 0.4, "analysis_hours": 0.05, "total_hours": 12.5}
+    with pytest.raises(core.StageRefused, match="already entered"):
+        freeze.apply_caps_attempt3(new, {"reuse_hours": 0.06})  # refuses unless the keys read 0.0
+    assert core.load_config("Q")["paths"]["panel_ledger"].endswith("panel_ledger.before-s6.json")  # R2: the preserved copy, not the live file
 
 
 # --- the ledger pin and the seeds ----------------------------------------------------------------------------------------------------------------------
@@ -150,7 +204,8 @@ def test_the_caps_of_attempt_3_come_from_the_charge_so_far_and_the_remaining_sta
     charge = 42_636.8
     caps = freeze.proposal_attempt3(rec, charge)
     full = freeze.projection_from_record(rec)
-    remaining = {s: full[s] for s in ("regeneration", "outputs", "analysis")} | {"reuse": rec["overhead_seconds"]["inputs"]}
+    hashing = reuse.HASH_PASSES_PER_STAGE * reuse.HASH_PASS_SECONDS  # every remaining stage hashes the reuse set twice
+    remaining = {s: full[s] + hashing for s in ("regeneration", "outputs", "analysis")} | {"reuse": rec["overhead_seconds"]["inputs"] + hashing}
     assert set(caps) == {"reuse_hours", "regeneration_hours", "outputs_hours", "analysis_hours", "total_hours"}  # the stages attempt 3 does not run get no cap
     assert caps == qplan.caps_proposal(charge, remaining)  # by the one shared function
     assert caps["total_hours"] * 3600 >= charge + 2 * sum(remaining.values()) - 36 and caps["total_hours"] * 3600 < charge + 2 * sum(full.values())  # not the whole eight-stage projection

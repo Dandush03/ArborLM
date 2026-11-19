@@ -65,7 +65,7 @@ def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], *, inputs
         manifests["panel_ledger"] = {"path": str(lp), "sha256": file_sha256(lp)}  # the shared ledger as it stands at the freeze, by absolute path and SHA-256
     return planmod.build_plan(
         part="Q", mode=mode, cfg=cfg, repo=repo, items=registered_items(cfg), run_dir=run_dir, walk=walk,
-        extra={**({"charge_before_freeze": dict(charge_before_freeze)} if charge_before_freeze else {}), "layout": layout(cfg), "inputs": dict(inputs), "manifests": manifests, "panel_ledger_path": led, "seeds": {k: v for k, v in core.partq_seeds(cfg, "registered").items()}, "thresholds": {k: cfg["quality"][k] for k in cfg["quality"]}},
+        extra={**({"charge_before_freeze": dict(charge_before_freeze)} if charge_before_freeze else {}), **({"stage_caps": {k: float(v) for k, v in cfg["stage_caps_attempt3"].items()}, "caps_section": "stage_caps_attempt3"} if (inputs or {}).get("reuse") else {}), "layout": layout(cfg), "inputs": dict(inputs), "manifests": manifests, "panel_ledger_path": led, "seeds": {k: v for k, v in core.partq_seeds(cfg, "registered").items()}, "thresholds": {k: cfg["quality"][k] for k in cfg["quality"]}},
     )  # fmt: skip
 
 

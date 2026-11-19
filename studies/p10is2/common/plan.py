@@ -220,7 +220,8 @@ def verify_plan(plan: Plan, repo: Path, run_dir: Path, *, candidate: bool = Fals
     if file_sha256(repo / part_config(part)) != d["config_sha256"]:
         raise StageRefused("refused: the config differs from the freeze (PAUSED — IDENTITY)")
     cfg = core.load_config(part, repo / part_config(part))
-    caps = {k: float(v) for k, v in cfg["stage_caps"].items()}
+    section = "stage_caps_attempt3" if (d.get("inputs") or {}).get("reuse") else "stage_caps"  # a plan that reuses completed stages takes its caps from the attempt-3 section
+    caps = {k: float(v) for k, v in cfg[section].items()}
     if caps != d["stage_caps"]:
         raise StageRefused("refused: the stage caps in the config differ from the plan's")
     if d["mode"] == REGISTERED and not candidate and (cfg["caps"]["provisional"] or d.get("caps_provisional")):

@@ -457,7 +457,10 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
         if stage == "generation":
             return pipeline.step_generation(ctx, p, pipeline.step_qfit(ctx, p))
         if stage == "regeneration":
-            return pipeline.step_regeneration(ctx, p)
+            res = pipeline.step_regeneration(ctx, p)
+            if reuse_block and not res.get("ok", False):  # addendum section 4 condition 3: zero differing token sequences are required; otherwise the reuse is void
+                raise RegisteredTestStop("the regeneration re-check of attempt 3 found differing token sequences: this VOIDS the reuse of the six earlier stages (ADR-0025 section 4.4 row 1, QUALIFICATION-ENGINEERING-FAILURE); attempt 3 stops before outputs; the stages are redone with the same registered seeds")
+            return res
         return stage_outputs(w, ctx, p, mode)
 
     return execute(stage, run_dir, mode, led, guard, cap, body, holder, other_alive, stage_cap_total=stage_cap_total, prior_charged=led.charged(stage))

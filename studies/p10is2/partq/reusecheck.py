@@ -40,15 +40,17 @@ ALLOWED_DEFINITIONS: dict[str, set[str]] = {
     Q + "real_stages.py": {"stage_outputs", "write_manifest", "require_prerequisites", "run_stage", "order_of", "make_ctx", "build_world"},
     Q + "stages.py": {"build_parser", "cmd_registered", "refuse_unless_rehearsal_ready", "main", "REGISTERED_STAGES", "cmd_rehearse", "cmd_ledger"},
     Q + "real.py": {"run_rehearsal", "run_rehearsal_stage", "run_registered_stage"},
+    "studies/p10is2/common/plan.py": {"verify_plan"},  # the caps section a reuse plan is compared with
 }
 MIXED = {  # executed by the reused stages and edited: allowed by name, listed in the freeze record for the auditor's certification
     Q + "real_stages.py": {"run_stage", "require_prerequisites", "make_ctx", "build_world", "write_manifest"},
     Q + "pkgmanifest.py": {"verify_inputs"},
     Q + "stages.py": {"build_parser", "cmd_registered", "main", "REGISTERED_STAGES"},
     Q + "pipeline.py": {"hashes_of"},
+    "studies/p10is2/common/plan.py": {"verify_plan"},
 }
 ALLOWED_SCRIPTS = {"studies/p10is2/launch/partq_registered.sh", "studies/p10is2/launch/partq_rehearse.sh", "studies/p10is2/launch/partq_prompt_check.sh"}  # the reuse stage's line; the prompt check (new)
-CONFIG_FREE_SECTIONS = {("stage_caps",), ("caps", "provisional"), ("paths", "panel_ledger")}
+CONFIG_FREE_SECTIONS = {("stage_caps_attempt3",), ("paths", "panel_ledger")}  # attempt 2's caps ([stage_caps], caps.provisional) are a record: any edit of them is refused
 
 
 def _show(repo: Path, commit: str, rel: str) -> str | None:
@@ -107,6 +109,8 @@ def config_diff(old: str, new: str) -> list[str]:
             return
         if isinstance(a, dict) and isinstance(b, dict):
             for k in sorted(set(a) | set(b)):
+                if any((*path, k)[: len(f)] == f for f in CONFIG_FREE_SECTIONS):
+                    continue
                 if k not in a or k not in b:
                     out.append(f"config: {'.'.join((*path, k))} was {'added' if k not in a else 'removed'}")
                 else:
@@ -155,6 +159,17 @@ def confined_diff(repo: Path, old_commit: str, part: str = "Q") -> dict[str, Any
             record["requires_auditor_certification"].append(rel)
         else:
             refusals.append(f"{rel}: differs from {old_commit} and is not an allowed change (the reused stages executed it, or it holds the environment)")
+    import json
+
+    from arborlm.io import file_sha256
+
+    old_plan = json.loads(_show(repo, old_commit, str(core.PLAN_Q)) or "{}")
+    walked = {rel: h for rel, h in (old_plan.get("frozen_files") or {}).items() if rel not in now and rel not in old_names}  # the import-walk files the reused stages executed (P10-S2's code, src/arborlm, its config)
+    for rel, h in sorted(walked.items()):
+        path = repo / rel
+        if not path.is_file() or file_sha256(path) != h:
+            refusals.append(f"{rel}: an import-walk file of the earlier plan differs now (or is missing)")
+    record["import_walk_files_compared"] = len(walked)
     if refusals:
         raise StageRefused(f"refused: the code differs from freeze {old_commit} outside the confined set (segment rule, outputs and analysis stages, cap check, reuse mechanism): " + "; ".join(refusals[:12]) + (f" ... (+{len(refusals) - 12})" if len(refusals) > 12 else ""))
     return record

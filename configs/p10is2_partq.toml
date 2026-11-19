@@ -106,7 +106,7 @@ durable_packages = "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages
 wikitext_dir = "/Users/daniellaloush/dandush03/ArborLM/data/wikitext2"
 packages_requirements = "studies/p10s2/requirements-datagen.txt"
 packages_requirements_sha256 = "d549380e67b220945d183a159a2cc2a85c2c982947367c70fd411038769e8867"
-panel_ledger = "/Users/daniellaloush/dandush03/ArborLM/data/p10i-shared/panel_ledger.json"   # the SHARED ledger (section 4.1): outside the repository, so the longer-training study reads and writes the same file
+panel_ledger = "/Users/daniellaloush/dandush03/ArborLM-sealed/p10i-s6-backups/panel_ledger.before-s6.json"   # the SHARED ledger (section 4.1): outside the repository, so the longer-training study reads and writes the same file
 delegation_record = "docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md"
 decision_2_glob = "results/p10is2-partq-freeze-*/DECISION_2_PARTQ.md"
 
@@ -127,5 +127,11 @@ generation_hours = 8.47
 regeneration_hours = 0.26
 outputs_hours = 0.35
 analysis_hours = 0.01  # the records-only analysis stage: projected at a fixed 60 s (plan.ANALYSIS_PROJECTED_SECONDS), cap 2 x that
-reuse_hours = 0.0   # attempt 3 only: the reuse stage (hashing the reused files of the earlier attempt); 0.0 = not set
 total_hours = 15.15
+
+[stage_caps_attempt3]  # attempt 3 only (ADR-0025 addendum, attempt 3): the caps of the stages that run when completed stages are reused, written by `caps-config --attempt3 --apply`; attempt 2's caps above stay as its record and are never edited
+reuse_hours = 0.0
+regeneration_hours = 0.0
+outputs_hours = 0.0
+analysis_hours = 0.0
+total_hours = 0.0

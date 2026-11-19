@@ -28,6 +28,17 @@ LINKED = ("inputs", "partition", "partition_counts.json", "qfit", "qcheck", "gen
 RECORDED = ("inputs", "partition", "qfit", "qcheck", "generation")  # the stages whose completion record this run writes (regeneration runs again)
 ORDER = ("reuse", "regeneration", "outputs", "analysis")
 KEY = "reuse"
+HASH_PASS_SECONDS = 5.3  # one pass over the reuse set (about 720 MB), as MEASURED by the auditor of attempt 3 on a warm cache; a cold cache costs more (the caps carry the 2x of the rule)
+HASH_PASSES_PER_STAGE = 2  # the start check (``verify_inputs``) and the end check (the mutation guard)
+
+
+def require_read_only(source: Path, mode: str) -> None:
+    """The earlier attempt's run directory has no write permission anywhere (``chmod -R a-w``): the freeze refuses otherwise. A rehearsal source is not held to it."""
+    if mode != "registered":
+        return
+    writable = [str(p) for p in (source, *sorted(source.rglob("*"))) if p.stat().st_mode & 0o222][:5]
+    if writable:
+        raise StageRefused(f"refused: {source} is not read-only (e.g. {writable[0]}): run `chmod -R a-w {source}` first (metadata only; no file is changed)")
 
 
 def tree_sha256(files: dict[str, str]) -> str:

@@ -11,6 +11,7 @@ freeze commit and Decision 2 are the lead's acts.
 
 import argparse
 import json
+import re
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -132,8 +133,9 @@ def proposal_attempt3(meas: Mapping[str, Any], charge_seconds: float) -> dict[st
     charge so far (everything: attempts, rehearsals) plus 2 x the projection of the REMAINING stages only. ``regeneration``, ``outputs`` and ``analysis`` come from the measuring record by the whole-process formula;
     ``reuse`` hashes the reused files and builds no world: its projection is the measured per-process overhead of ``inputs`` (which hashes more bytes than the reuse set: the plan's input files), an upper bound."""
     full = projection_from_record(meas)
-    proj = {s: full[s] for s in ("regeneration", "outputs", "analysis")}
-    proj["reuse"] = float((meas.get("overhead_seconds") or {})["inputs"])
+    hashing = reuse.HASH_PASSES_PER_STAGE * reuse.HASH_PASS_SECONDS  # every remaining stage hashes the reuse set at its start and at its end
+    proj = {s: full[s] + hashing for s in ("regeneration", "outputs", "analysis")}
+    proj["reuse"] = float((meas.get("overhead_seconds") or {})["inputs"]) + hashing
     return dict(qplan.caps_proposal(charge_seconds, proj))
 
 
@@ -178,12 +180,14 @@ def caps_toml(proposal: Mapping[str, float]) -> str:
 
 def apply_caps(text: str, proposal: Mapping[str, float]) -> str:
     """The config text with each ``<key> = 0.0`` of ``[stage_caps]`` replaced by the proposal and ``provisional = true`` by false. Refuses a config whose caps are already set."""
-    out = text
+    a, b = section_span(text, "stage_caps")  # ONLY [stage_caps]: [stage_caps_attempt3] has its own writer
+    body = text[a:b]
     for k, v in proposal.items():
-        old = f"\n{k} = 0.0"
-        if out.count(old) != 1:
-            raise StageRefused(f"refused: the config does not hold exactly one unset line '{k} = 0.0' (caps already entered?)")
-        out = out.replace(old, f"\n{k} = {v}")
+        pat = re.compile(rf"(?m)^{k} = 0\.0(?![0-9])")
+        if len(pat.findall(body)) != 1:
+            raise StageRefused(f"refused: the config does not hold exactly one unset line '{k} = 0.0' in [stage_caps] (caps already entered?)")
+        body = pat.sub(f"{k} = {v}", body)
+    out = text[:a] + body + text[b:]
     if out.count("\nprovisional = true") != 1:
         raise StageRefused("refused: the config does not hold exactly one 'provisional = true'")
     return out.replace("\nprovisional = true", "\nprovisional = false")
@@ -202,25 +206,46 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
         proposal = proposal_from_record(meas)
     if args.apply:
         path = repo / core.CONFIG_Q
-        path.write_text(apply_caps(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
+        path.write_text((apply_caps_attempt3 if args.attempt3 else apply_caps)(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
         print(json.dumps({"config": str(path), "applied": proposal, "next": "commit the config, then candidate-plan"}))
     else:
         print(caps_toml(proposal))
     return 0
 
 
-CAPS_KEYS = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis", "reuse", "total")
+CAPS_KEYS = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis", "total")
+
+
+def section_span(text: str, name: str) -> tuple[int, int]:
+    """The character span of the body of ``[name]`` (from its header line to the next section header)."""
+    m = re.search(rf"(?m)^\[{re.escape(name)}\].*$", text)
+    if not m:
+        raise StageRefused(f"refused: the config has no [{name}] section")
+    nxt = re.search(r"(?m)^\[", text[m.end():])
+    return m.start(), m.end() + (nxt.start() if nxt else len(text) - m.end())
+
+
+def apply_caps_attempt3(text: str, proposal: Mapping[str, float]) -> str:
+    """Writes ONLY ``[stage_caps_attempt3]``: refuses unless every key it is about to set still reads ``0.0``; never touches ``[stage_caps]`` (attempt 2's caps, a record) or ``caps.provisional``."""
+    a, b = section_span(text, "stage_caps_attempt3")
+    body = text[a:b]
+    for k, v in proposal.items():
+        pat = re.compile(rf"(?m)^{k} = 0\.0(?![0-9])")  # exactly "0.0": not the prefix of "0.05"
+        if len(pat.findall(body)) != 1:
+            raise StageRefused(f"refused: [stage_caps_attempt3] does not hold exactly one unset line '{k} = 0.0' (already entered?)")
+        body = pat.sub(f"{k} = {v}", body)
+    return text[:a] + body + text[b:]
 
 
 def reset_caps_text(text: str, stamp: str, superseded: str) -> str:
     """The config text with the nine caps set back to ``0.0``, ``provisional`` back to true, and a dated comment under ``[stage_caps]`` naming the record of the superseded values."""
-    import re
-
-    out = text
+    a, b = section_span(text, "stage_caps")
+    body = text[a:b]
     for k in CAPS_KEYS:
-        out, n = re.subn(rf"(?m)^{k}_hours = [0-9.]+", f"{k}_hours = 0.0", out)
+        body, n = re.subn(rf"(?m)^{k}_hours = [0-9.]+", f"{k}_hours = 0.0", body)
         if n != 1:
-            raise StageRefused(f"refused: the config does not hold exactly one '{k}_hours' line")
+            raise StageRefused(f"refused: the config does not hold exactly one '{k}_hours' line in [stage_caps]")
+    out = text[:a] + body + text[b:]
     if out.count("\nprovisional = false") != 1:
         raise StageRefused("refused: the config does not hold exactly one 'provisional = false' (the caps are not entered)")
     out = out.replace("\nprovisional = false", "\nprovisional = true")
@@ -337,7 +362,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         proposal = proposal_attempt3(meas, float(charge["seconds"]))
     else:
         proposal = proposal_from_record(meas)  # refuses a record that did not measure every registered stage
-    differ = qplan.caps_match_config(cfg, proposal)
+    differ = qplan.caps_match_config({"stage_caps": cfg["stage_caps_attempt3"]} if block else cfg, proposal)
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
     walk = planmod.import_walk(repo, "Q")
@@ -357,6 +382,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     reuse_info: dict[str, Any] = {}
     if block:
         reuse.verify_block(block)  # condition 1: every file, byte for byte, now
+        reuse.require_read_only(Path(block["source_run_dir"]), block["mode"])  # the earlier attempt's directory is protected by the file system as well as by the hashing
         reuse_info = {"files_verified": block["file_count"], "tree_sha256": block["tree_sha256"], "diff_against_earlier_freeze": reusecheck.confined_diff(repo, block["freeze_commit"]), "ledger": reusecheck.check_ledger_pin(repo, block["freeze_commit"], plan), "seeds": reusecheck.check_seeds(repo, block["freeze_commit"], plan)}
         reh = reuse_rehearsal_gate(counting, plan_sha)
     else:
