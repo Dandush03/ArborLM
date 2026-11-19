@@ -1,156 +1,170 @@
 # ruff: noqa: E501
-"""P10IS6 fetch stage (ADR-0031 section 6.3, ruling G20): the WikiText-103 raw TRAIN parquet files of the pinned publisher repository and revision. The lead runs it; the implementer never does (no network here, the tests use a local fixture).
+"""P10IS6 fetch stage (ADR-0031 section 6.3, ruling G20), against the project's ledger of record. The lead runs it; the implementer never does (no network here, the tests use a local fixture and a throw-away COPY of the ledger).
 
-Order: (1) the repository listing at the pinned revision gives the train file names with their LFS size and SHA-256; (2) one ledger row per file is written BEFORE the fetch (status PLANNED: URL at the pinned revision, expected bytes and
-SHA-256); (3) each file is streamed to a staging name under a byte cap equal to its expected size; (4) size and SHA-256 are verified AFTER it, and a completion row is written (COMPLETE or FAILED); a mismatch is an engineering stop and
-the staged file is kept as failure evidence; (5) the file is published without replacing anything. The test and validation splits are never listed for fetching. A total above the hard stop is an engineering stop, not an extension.
+Source and pin practice (read from ``arborlm.fetch_wikitext``, which acquired WikiText-2): the publisher repository ``Salesforce/WikiText`` at the pinned revision; file URLs ``https://huggingface.co/datasets/<repo>/resolve/<revision>/<config>/<file>?download=true``;
+size and SHA-256 are constants pinned BEFORE the download and verified AFTER it. This module does not assume the Hub's listing API. ``pin`` reads the Git-LFS POINTER FILE of each named train shard at the pinned revision
+(``https://huggingface.co/datasets/<repo>/raw/<revision>/<config>/<file>``: a few hundred bytes, ``oid sha256:<hex>`` and ``size <bytes>``; the same ``raw/<revision>/`` form ``fetch_wikitext`` uses for the card) and writes
+``studies/p10i_s6/freeze/wikitext103_pins.json`` (refuses to overwrite). The lead names the shards from the dataset's file view (the card's ``data_files`` glob is ``wikitext-103-raw-v1/train-*``). ``get`` refuses unless that pins file exists
+(it is a frozen input once committed), then fetches each pinned file and verifies size and SHA-256.
 
-The ledger is written in two forms: ``DOWNLOAD_LEDGER_S6.jsonl`` (one JSON object per event) and ``DOWNLOAD_LEDGER_S6.md`` (one table row per event). The project's own ``DOWNLOAD_LEDGER.md`` lives in the git-ignored ``data/`` of
-the lead's checkout and its exact column layout could not be read from this worktree (listed as an ambiguity): the rows carry the fields it is known to hold (date, URL at the pinned revision, file, expected and actual bytes, SHA-256).
+The LEDGER OF RECORD is ``docs/reviews/p10-design-2026-11-15/DOWNLOAD_LEDGER.md``, the one document; no other ledger file is created. P10-S2's code (``studies/p10s2/fetch_guard.py``) appended to it like this and this study does the same through the SAME
+functions (imported, frozen inputs): ``ledger_begin`` appends a row with status ``started`` and the DECLARED bytes BEFORE the fetch (columns ``Date (UTC) | Study | What | Source | Revision / hash | Licence | Bytes | Running total (bytes) | Status``,
+refusing if the running total would reach the 30 GB standing permission); ``ledger_complete`` sets the bytes actually fetched and the status ``completed`` (or ``failed: <ExceptionType>``); every write recomputes the whole Running-total column and
+replaces the file atomically. The Study cell is ``P10-I-S6``. Nothing is ever overwritten; a ``.part`` file is renamed by hard link.
 """
 
 import hashlib
 import json
 import os
+import re
 from collections.abc import Callable, Mapping, Sequence
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
+from studies.p10s2.fetch_guard import DOWNLOAD_LEDGER, FetchRefused, is_git_ignored, ledger_begin, ledger_complete, ledger_total_bytes, make_ssl_context  # frozen imports (section 15): the ledger of record's own functions
 
 from . import core
 from .core import EngineeringStop
 
 Opener = Callable[..., Any]
+Downloader = Callable[[str, Path, int], int]  # (url, part file, byte limit) -> bytes written; raises past the limit
 TIMEOUT = 60
 BLOCK = 1 << 20
-LICENCE = "publisher card front matter CC-BY-SA-3.0/GFDL, body CC BY-SA 4.0; discrepancy unresolved; local use only was approved (ADR-0004); no publication rights inferred"
+STUDY = "P10-I-S6"
+PINS = core.FREEZE_DIR / "wikitext103_pins.json"
+LICENCE = "CC-BY-SA-3.0/GFDL per card front matter; body CC BY-SA 4.0; discrepancy unresolved; local use only"
+POINTER = re.compile(r"^version https://git-lfs\.github\.com/spec/v1\noid sha256:([0-9a-f]{64})\nsize (\d+)\n?$")
 
 
-def listing_url(cfg: Mapping[str, Any]) -> str:
+def base_url(cfg: Mapping[str, Any], kind: str) -> str:
     d = cfg["data"]
-    return f"https://huggingface.co/api/datasets/{d['publisher_repo']}/tree/{d['revision']}/{d['configuration']}"
+    return f"https://huggingface.co/datasets/{d['publisher_repo']}/{kind}/{d['revision']}/{d['configuration']}"
 
 
-def file_url(cfg: Mapping[str, Any], path: str) -> str:
-    d = cfg["data"]
-    return f"https://huggingface.co/datasets/{d['publisher_repo']}/resolve/{d['revision']}/{path}?download=true"
+def parse_pointer(text: str) -> tuple[str, int]:
+    m = POINTER.match(text.replace("\r\n", "\n"))
+    if not m:
+        raise EngineeringStop("ENGINEERING STOP — the file is not a Git-LFS pointer (oid sha256 and size)")
+    return m[1], int(m[2])
 
 
-def plan_from_listing(listing: Sequence[Mapping[str, Any]], cfg: Mapping[str, Any]) -> list[dict[str, Any]]:
-    """The train parquet files of the configuration, in lexicographic order of file name (the order the pools read them in), with LFS size and SHA-256. Anything that is not a train parquet file is ignored (the test and validation splits are never fetched)."""
-    conf = str(cfg["data"]["configuration"])
-    rows = []
-    for e in listing:
-        path = str(e.get("path", ""))
-        name = path.split("/")[-1]
-        if e.get("type") != "file" or not path.startswith(f"{conf}/") or not name.startswith("train-") or not name.endswith(".parquet"):
-            continue
-        lfs = e.get("lfs")
-        if not isinstance(lfs, Mapping) or "oid" not in lfs or "size" not in lfs:
-            raise EngineeringStop(f"ENGINEERING STOP — the listing gives no LFS size and SHA-256 for {path}")
-        rows.append({"file": name, "path": path, "url": file_url(cfg, path), "expected_bytes": int(lfs["size"]), "expected_sha256": str(lfs["oid"])})
-    rows.sort(key=lambda r: str(r["file"]))
-    if not rows:
-        raise EngineeringStop("ENGINEERING STOP — the listing at the pinned revision has no train parquet file")
-    total = sum(int(r["expected_bytes"]) for r in rows)
+def pin(names: Sequence[str], cfg: Mapping[str, Any], opener: Opener, out: Path) -> dict[str, Any]:
+    """Pin names, sizes and SHA-256 values from the LFS pointer files at the pinned revision. Never overwrites."""
+    if out.exists():
+        raise EngineeringStop(f"ENGINEERING STOP — {out} exists: a pins file is written once")
+    if not names or any(not re.fullmatch(r"train-\d{5}-of-\d{5}\.parquet", n) for n in names):
+        raise EngineeringStop("ENGINEERING STOP — only train shards named train-NNNNN-of-NNNNN.parquet are pinned (the test and validation splits are never fetched)")
+    files = []
+    for n in sorted(names):
+        with opener(f"{base_url(cfg, 'raw')}/{n}", timeout=TIMEOUT) as resp:
+            sha, size = parse_pointer(resp.read().decode("utf-8"))
+        files.append({"name": n, "bytes": size, "sha256": sha, "source": f"LFS pointer at raw/{cfg['data']['revision']}/{cfg['data']['configuration']}/{n}"})
+    total = sum(f["bytes"] for f in files)
     if total > int(cfg["data"]["download_hard_stop_bytes"]):
-        raise EngineeringStop(f"ENGINEERING STOP — the train files total {total} bytes, above the hard stop of {int(cfg['data']['download_hard_stop_bytes'])}; a larger size is not an extension")
-    return rows
+        raise EngineeringStop(f"ENGINEERING STOP — the pinned files total {total} bytes, above the hard stop; not an extension")
+    rec = {"repo": cfg["data"]["publisher_repo"], "revision": cfg["data"]["revision"], "configuration": cfg["data"]["configuration"], "expected_configuration_download_bytes": int(cfg["data"]["download_expected_bytes"]), "files": files}
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(rec, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    return rec
 
 
-def _row_md(row: Mapping[str, Any]) -> str:
-    return "| {utc} | {status} | {file} | {url} | {expected_bytes} | {expected_sha256} | {actual_bytes} | {actual_sha256} | {running_total_bytes} | {note} |".format(**{k: row.get(k, "") for k in ("utc", "status", "file", "url", "expected_bytes", "expected_sha256", "actual_bytes", "actual_sha256", "running_total_bytes", "note")})
+def load_pins(path: Path, cfg: Mapping[str, Any]) -> dict[str, Any]:
+    if not path.is_file():
+        raise EngineeringStop(f"ENGINEERING STOP — no pins file at {path}: pin the shards from their LFS pointers first (``pin``); nothing is fetched without constants fixed before the download")
+    rec = json.loads(path.read_text(encoding="utf-8"))
+    d = cfg["data"]
+    if (rec["repo"], rec["revision"], rec["configuration"]) != (d["publisher_repo"], d["revision"], d["configuration"]) or not rec["files"]:
+        raise EngineeringStop("ENGINEERING STOP — the pins file names another repository, revision or configuration than the config")
+    if any(not f["name"].startswith("train-") for f in rec["files"]):
+        raise EngineeringStop("ENGINEERING STOP — a pinned file is not a train shard")
+    return dict(rec)
 
 
-def append_ledger(ledger_dir: Path, row: Mapping[str, Any]) -> None:
-    ledger_dir.mkdir(parents=True, exist_ok=True)
-    row = {"utc": datetime.now(UTC).isoformat(), **row}
-    with (ledger_dir / "DOWNLOAD_LEDGER_S6.jsonl").open("a", encoding="utf-8") as f:
-        f.write(json.dumps(row, sort_keys=True) + "\n")
-        f.flush()
-        os.fsync(f.fileno())
-    md = ledger_dir / "DOWNLOAD_LEDGER_S6.md"
-    if not md.exists():
-        md.write_text("| utc | status | file | URL at the pinned revision | expected bytes | expected SHA-256 (LFS) | actual bytes | actual SHA-256 | running total (this study) | note |\n|---|---|---|---|---|---|---|---|---|---|\n", encoding="utf-8")
-    with md.open("a", encoding="utf-8") as f:
-        f.write(_row_md(row) + "\n")
+def urllib_downloader() -> Downloader:  # pragma: no cover - the lead's real download; never run by the implementer
+    import urllib.request
+
+    ctx = make_ssl_context()
+
+    def go(url: str, part: Path, limit: int) -> int:
+        got = 0
+        with urllib.request.urlopen(url, timeout=TIMEOUT, context=ctx) as resp, part.open("xb") as f:  # noqa: S310
+            while True:
+                block = resp.read(min(BLOCK, limit - got + 1))
+                if not block:
+                    break
+                got += len(block)
+                if got > limit:
+                    raise FetchRefused(f"refused: {url} sent more than {limit} bytes")
+                f.write(block)
+            f.flush()
+            os.fsync(f.fileno())
+        return got
+
+    return go
 
 
-def _stream(opener: Opener, url: str, dest: Path, cap: int) -> tuple[int, str]:
-    digest, got = hashlib.sha256(), 0
-    with opener(url, timeout=TIMEOUT) as resp, dest.open("xb") as out:
-        length = resp.headers.get("Content-Length")
-        if length is not None and int(length) > cap:
-            raise EngineeringStop(f"ENGINEERING STOP — declared size {length} of {url} exceeds the expected {cap}")
-        while True:
-            block = resp.read(min(BLOCK, cap - got + 1))
-            if not block:
-                break
-            got += len(block)
-            if got > cap:
-                raise EngineeringStop(f"ENGINEERING STOP — {url} sent more than the expected {cap} bytes")
-            out.write(block)
-            digest.update(block)
-        out.flush()
-        os.fsync(out.fileno())
-    return got, digest.hexdigest()
-
-
-def fetch(out_dir: Path, ledger_dir: Path, cfg: Mapping[str, Any], opener: Opener, *, running_total_before: int = 0) -> dict[str, Any]:
-    """The whole stage. ``opener(url, timeout=...)`` is ``urllib.request.urlopen`` in the real run and a local fixture in tests. Existing files that verify are kept; an existing file that does not verify is preserved and is an engineering stop."""
-    with opener(listing_url(cfg), timeout=TIMEOUT) as resp:
-        listing = json.loads(resp.read())
-    plan = plan_from_listing(listing, cfg)
-    for r in plan:  # (2) every row is on the ledger before any fetch
-        append_ledger(ledger_dir, {"status": "PLANNED", "file": r["file"], "url": r["url"], "expected_bytes": r["expected_bytes"], "expected_sha256": r["expected_sha256"], "note": f"revision {cfg['data']['revision']}; {LICENCE}"})
+def get(out_dir: Path, ledger_path: Path, cfg: Mapping[str, Any], pins: Mapping[str, Any], download: Downloader, *, root: Path | None = None) -> dict[str, Any]:
+    """One session: for each pinned file, ledger row ``started`` FIRST, fetch to ``.part`` under a byte limit equal to the pin, verify size and SHA-256 after, hard-link into place, complete the row."""
+    root = root or core.repo_root()
+    if out_dir.exists() and any(out_dir.iterdir()):
+        raise EngineeringStop(f"ENGINEERING STOP — {out_dir} is not a fresh folder")
+    try:
+        out_dir.resolve().relative_to(root.resolve())
+        inside = True
+    except ValueError:
+        inside = False
+    if inside and not is_git_ignored(out_dir, root):
+        raise EngineeringStop(f"ENGINEERING STOP — {out_dir} is inside the repository and not git-ignored")
+    declared = sum(int(f["bytes"]) for f in pins["files"])
+    if declared > int(cfg["data"]["download_hard_stop_bytes"]):
+        raise EngineeringStop("ENGINEERING STOP — the pinned files exceed the hard stop")
+    make_ssl_context()
     out_dir.mkdir(parents=True, exist_ok=True)
-    total = running_total_before
-    done: list[dict[str, Any]] = []
-    for r in plan:
-        target = out_dir / str(r["file"])
-        if target.exists():
-            ok = target.stat().st_size == r["expected_bytes"] and hashlib.file_digest(target.open("rb"), "sha256").hexdigest() == r["expected_sha256"]
-            if not ok:
-                append_ledger(ledger_dir, {"status": "FAILED", "file": r["file"], "note": "an existing file does not match the LFS size or SHA-256; preserved"})
-                raise EngineeringStop(f"ENGINEERING STOP — existing {target} does not match the pinned LFS size and SHA-256; preserved as evidence")
-            total += int(r["expected_bytes"])
-            append_ledger(ledger_dir, {"status": "COMPLETE", "file": r["file"], "actual_bytes": r["expected_bytes"], "actual_sha256": r["expected_sha256"], "running_total_bytes": total, "note": "already present and verified"})
-            done.append(r)
-            continue
-        staged = out_dir / f".staging-{r['file']}"
-        if staged.exists():
-            raise EngineeringStop(f"ENGINEERING STOP — a staged file already exists: {staged} (kept; remove it by hand after looking)")
+    before = ledger_total_bytes(ledger_path)
+    done = []
+    for f in pins["files"]:
+        target, part = out_dir / f["name"], out_dir / (f["name"] + ".part")
+        if target.exists() or part.exists():
+            raise EngineeringStop(f"ENGINEERING STOP — {target} or its .part exists; nothing is overwritten")
+        url = f"{base_url(cfg, 'resolve')}/{f['name']}?download=true"
+        idx = ledger_begin(ledger_path, what=f"wikitext103/{f['name']}", source=url, revision=f"{cfg['data']['revision']}; SHA-256 {f['sha256']}", licence=LICENCE, declared_bytes=int(f["bytes"]), study=STUDY)
+        got = 0
         try:
-            got, sha = _stream(opener, str(r["url"]), staged, int(r["expected_bytes"]))
-        except EngineeringStop as e:
-            append_ledger(ledger_dir, {"status": "FAILED", "file": r["file"], "note": str(e)[:200]})
+            got = download(url, part, int(f["bytes"]))
+            if got != int(f["bytes"]):
+                raise FetchRefused(f"refused: {f['name']} has {got} bytes, pinned {f['bytes']}")
+            with part.open("rb") as fh:
+                sha = hashlib.file_digest(fh, "sha256").hexdigest()
+            if sha != f["sha256"]:
+                raise FetchRefused(f"refused: {f['name']} does not hash to its pinned SHA-256")
+            os.link(part, target)
+            part.unlink()
+        except BaseException as e:
+            part.unlink(missing_ok=True)
+            ledger_complete(ledger_path, idx, actual_bytes=got, status=f"failed: {type(e).__name__}")
             raise
-        if got != r["expected_bytes"] or sha != r["expected_sha256"]:
-            append_ledger(ledger_dir, {"status": "FAILED", "file": r["file"], "actual_bytes": got, "actual_sha256": sha, "note": "size or SHA-256 differs from the LFS metadata; the staged file is kept"})
-            raise EngineeringStop(f"ENGINEERING STOP — {r['file']}: {got} bytes / {sha} differ from the LFS {r['expected_bytes']} / {r['expected_sha256']} (staged file kept)")
-        try:
-            os.link(staged, target)
-        except FileExistsError as e:
-            raise EngineeringStop(f"ENGINEERING STOP — {target} appeared during the fetch; kept") from e
-        staged.unlink()
-        total += got
-        append_ledger(ledger_dir, {"status": "COMPLETE", "file": r["file"], "actual_bytes": got, "actual_sha256": sha, "running_total_bytes": total})
-        done.append(r)
-    return {"files": [{k: r[k] for k in ("file", "expected_bytes", "expected_sha256")} for r in done], "total_bytes": total - running_total_before, "revision": cfg["data"]["revision"], "configuration": cfg["data"]["configuration"], "listing_url": listing_url(cfg)}
+        ledger_complete(ledger_path, idx, actual_bytes=got, status="completed")
+        done.append({"file": f["name"], "bytes": got, "sha256": f["sha256"]})
+    return {"files": done, "total_bytes": sum(d["bytes"] for d in done), "ledger_total_before": before, "ledger_total_after": ledger_total_bytes(ledger_path), "ledger": str(DOWNLOAD_LEDGER)}
 
 
-def main() -> int:  # pragma: no cover - the lead's command; it is never run by the implementer
+def main() -> int:  # pragma: no cover - the lead's command
     import argparse
     import urllib.request
 
     ap = argparse.ArgumentParser(prog="studies.p10i_s6.fetch")
-    ap.add_argument("--out-dir", required=True)
-    ap.add_argument("--ledger-dir", required=True)
-    ap.add_argument("--running-total-bytes", type=int, default=0)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    p = sub.add_parser("pin")
+    p.add_argument("--files", required=True, help="comma-separated train shard names, e.g. train-00000-of-00002.parquet,...")
+    g = sub.add_parser("get")
+    g.add_argument("--out-dir", required=True)
+    g.add_argument("--ledger", default=str(core.repo_root() / DOWNLOAD_LEDGER))
     a = ap.parse_args()
     cfg = core.load_config()
-    res = fetch(Path(a.out_dir), Path(a.ledger_dir), cfg, urllib.request.urlopen, running_total_before=a.running_total_bytes)
-    print(json.dumps(res, indent=1))
+    if a.cmd == "pin":
+        print(json.dumps(pin(a.files.split(","), cfg, urllib.request.urlopen, core.repo_root() / PINS), indent=1))
+        return 0
+    print(json.dumps(get(Path(a.out_dir), Path(a.ledger), cfg, load_pins(core.repo_root() / PINS, cfg), urllib_downloader()), indent=1))
     return 0
 
 

@@ -31,7 +31,7 @@ PRINTING = "studies/p10i_s6/printing"
 COMPUTING = ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch")
 ORCHESTRATION = ("plan", "runner", "stages", "cost", "rehearsal", "testing", "report_input")
 DECISION_RUN_LINE, DECISION_NO_RUN_LINE = "DECISION: RUN", "DECISION: DO NOT RUN"
-IMPORTED_S3 = ("studies/p10i_s3/model.py", "studies/p10i_s3/calibration.py", "studies/p10i_s3/core.py", "studies/p10i_s3/planted.py", "studies/p10i_s3/data.py", "studies/p10i_s3/parents.py")
+IMPORTED_S3 = ("studies/p10i_s3/model.py", "studies/p10i_s3/calibration.py", "studies/p10i_s3/core.py", "studies/p10i_s3/planted.py", "studies/p10i_s3/data.py", "studies/p10i_s3/parents.py", "studies/p10s2/fetch_guard.py", "studies/p10s2/core.py")
 RUNTIME_RESULTS_GLOBS = ("results/p3-lt-2026-11-12/b*-control/manifest.json", "results/p3-lt-2026-11-12/b*-control/order.json", "results/p4-2026-11-12/b*-baseline/result.json")
 NAMED_SRC = (
     "pilot_model", "model", "pilot_config", "pilot_data", "fetch_wikitext", "io", "p4_model", "p4_config", "p2_model", "engine", "longer_training", "pilot_metrics", "__init__", "config", "data",
