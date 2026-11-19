@@ -516,6 +516,13 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     proj = plan.data.get("projection")
     if proj is None:
         raise StageRefused("refused: the plan carries no projection from R2")
+    r2_path = Path(args.r2_record)  # ruling 18 (audit R7): the plan's unit costs, and so the caps, are tied to the measuring rehearsal's record by SHA-256
+    if not r2_path.is_file():
+        raise StageRefused(f"refused: no R2 record at {r2_path}")
+    r2_sha = file_sha256(r2_path)
+    pub_sha = core.read_record(Path(args.rehearsal), "rehearsal_public").get("r2_record_sha256")
+    if not (r2_sha == proj.get("r2_sha256") == pub_sha) or read_json(r2_path)["unit_costs"] != proj["unit_costs"]:
+        raise StageRefused("refused: the plan's unit costs and caps do not come from R2's record (its SHA-256, the plan's recorded one and the rehearsal file's must be equal, and the unit costs identical)")
     again_h = cost.project_hours(plan.data["items"], proj["unit_costs"])["hours"]
     if again_h != proj["hours"] or plan.data["caps"]["registered_hours"] != planmod.caps_from_projection(0.0, proj["hours"]):
         raise StageRefused("refused: the registered cap is not the shared formula (charged + 2 x projected remaining) applied to the projection recomputed from R2's record and the plan's items")
@@ -596,6 +603,7 @@ def build_parser() -> argparse.ArgumentParser:
     cp.add_argument("--repo")
     f = sub.add_parser("freeze")
     f.add_argument("--rehearsal", required=True)
+    f.add_argument("--r2-record", required=True, help="the measuring rehearsal's record (<run>/r2/r2_record.json)")
     f.add_argument("--repo")
     wr = sub.add_parser("write-rate-table")
     wr.add_argument("--public", required=True)

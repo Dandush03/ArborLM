@@ -73,7 +73,7 @@ class Chain:
         t = cfg_path.read_text(encoding="utf-8")
         for a, b in (
             ("base_updates = 16384", "base_updates = 2"), ("below_updates = 8192", "below_updates = 1"), ("workers = 6", "workers = 4"), # wide grid: tiny runs on learnable bytes need large rates for an interior minimiser
-            ("grid = [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]", "grid = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]"), ("r2_updates = 50", "r2_updates = 6"), ("dry_base_updates = 8", "dry_base_updates = 2"), ("dry_below_updates = 4", "dry_below_updates = 1"),
+            ("grid = [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]", "grid = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]"), ("r2_updates = 2048", "r2_updates = 6"), ("r2_min_updates = 2048", "r2_min_updates = 6"), ("dry_base_updates = 8", "dry_base_updates = 2"), ("dry_below_updates = 4", "dry_below_updates = 1"),
             ('checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r4.py"', 'checker = "docs/reviews/checker_stub.py"'),
             ('checker_sha256 = "7bc791e0f24528020b9c3f569751f6528f30444a761b6bae514efad96acd81e8"', f'checker_sha256 = "{hashlib.sha256(stub.read_bytes()).hexdigest()}"'),
             ('addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R4.md"', 'addendum = "docs/reviews/addendum_stub.md"'),
@@ -152,7 +152,7 @@ class Chain:
         assert self.log["r3"].returncode == 0, tail(self.log["r3"])
 
     def freeze(self, rehearsal: Path) -> subprocess.CompletedProcess[str]:
-        return self.stages("freeze", "--rehearsal", str(rehearsal))
+        return self.stages("freeze", "--rehearsal", str(rehearsal), "--r2-record", str(self.pub / "r2" / "r2_record.json"))
 
 
 @pytest.fixture(scope="module")
@@ -220,6 +220,13 @@ def test_freeze_refusals_then_acceptance_then_registered_launch(chain: Chain) ->
         o = chain.freeze(path)
         assert o.returncode == 2 and word in o.stderr, (name, o.stderr)
         assert not (repo / core.FREEZE_RECORD).exists()
+    # ruling 18 (audit R7): the plan's unit costs and caps are tied to R2's record by SHA-256; a different record, or a typed unit cost, is refused
+    r2 = json.loads((chain.pub / "r2" / "r2_record.json").read_text())
+    r2["unit_costs"]["process_overhead_seconds"] += 1.0
+    other = chain.root / "r2_other.json"
+    other.write_text(json.dumps(r2))
+    o = chain.stages("freeze", "--rehearsal", str(pub_file), "--r2-record", str(other))
+    assert o.returncode == 2 and "R2" in o.stderr and not (repo / core.FREEZE_RECORD).exists()
     o = chain.freeze(pub_file)
     assert o.returncode == 0, o.stdout + o.stderr
     assert chain.freeze(pub_file).returncode == 2  # written once

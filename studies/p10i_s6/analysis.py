@@ -128,6 +128,11 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
                 fl.append(bool(bad))
                 vals.append(None if bad else e)
                 prev.append(None if bad or k < 0 else pv)
+                if bad:  # ruling 21: a failed run that ALSO shows an integrity break on a snapshot it did produce reads row 1, as section 12.2's order gives
+                    ke = core.nll_key(a, rates[a][k], c, rd.u(k), core.READ_ENABLED, oa=False)
+                    kp, kd = core.nll_key(a, rates[a][k], c, rd.u(k), core.READ_REPLAY), core.nll_key(a, rates[a][k], c, rd.u(k), core.READ_DISABLED)
+                    if reg.get(ke) is not None and kd in reg and kp in reg and base.get(parent[c]) is not None and (reg[kd] != base[parent[c]] or reg[kp] is None or reg[kp] != reg[ke]):
+                        integrity_bad.append(f"{a} c{c:02d} k{k}: a failed run's produced snapshot breaks disabled == BASE or replay == enabled")
                 if not bad:
                     rep, dis = rd.read(a, k, c, rd.u(k), core.READ_REPLAY), rd.read(a, k, c, rd.u(k), core.READ_DISABLED)
                     b = base.get(parent[c])

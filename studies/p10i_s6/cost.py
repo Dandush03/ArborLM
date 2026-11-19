@@ -7,10 +7,19 @@ item (overhead + its evaluations); the gates stage is its measured total. Wall h
 the caps command. Seconds per update are descriptive cost records of this implementation on this machine, never an efficiency result.
 """
 
+import math
 from collections.abc import Mapping, Sequence
 from typing import Any
 
 from . import core
+
+
+def _rate(probe: Mapping[str, Any], overhead: float, units: int) -> float:
+    """(whole-process seconds - overhead) / units; a negative, zero or non-finite rate is an ENGINEERING STOP of the rehearsal, never a figure the caps use (ruling 18)."""
+    r = (float(probe["seconds"]) - overhead) / units
+    if not math.isfinite(r) or r <= 0.0:
+        raise core.EngineeringStop(f"ENGINEERING STOP — R2 measured a non-positive or non-finite rate ({r}) for {probe.get('arm')} {probe.get('kind')}: the probe is too short against the process overhead; the rehearsal is not usable")
+    return r
 
 
 def unit_costs_from_probes(overhead: Mapping[str, float], probes: Sequence[Mapping[str, Any]], workers: int, gates_seconds: float) -> dict[str, Any]:
@@ -23,10 +32,10 @@ def unit_costs_from_probes(overhead: Mapping[str, float], probes: Sequence[Mappi
         ev = [p for p in probes if p["arm"] == arm and p["kind"] == "eval"]
         if not tr or not ev:
             raise ValueError(f"no probes of {arm}")
-        spu = sum((float(p["seconds"]) - ov) / int(p["updates"]) for p in tr) / len(tr)
+        spu = sum(_rate(p, ov, int(p["updates"])) for p in tr) / len(tr)
         per_eval: dict[str, float] = {}
         for mode in core.MODES:
-            vals = [(float(p["seconds"]) - ov) / int(p["evals"][mode]) for p in ev if int(p["evals"].get(mode, 0)) > 0 and len([m for m, n in p["evals"].items() if n]) == 1]
+            vals = [_rate(p, ov, int(p["evals"][mode])) for p in ev if int(p["evals"].get(mode, 0)) > 0 and len([m for m, n in p["evals"].items() if n]) == 1]
             if vals:
                 per_eval[mode] = sum(vals) / len(vals)
         arms[arm] = {"seconds_per_update": spu, "seconds_per_eval": per_eval}

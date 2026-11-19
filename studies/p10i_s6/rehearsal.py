@@ -91,6 +91,7 @@ def curves_from_records(items_dir: Path, plan_items: Mapping[str, Sequence[Mappi
 def run_r1(repo: Path, run_dir: Path, sealed_dir: Path, *, synthetic: bool = False, cfg_override: Mapping[str, Any] | None = None, data_args: Mapping[str, Any] | None = None, k_max: int | None = None) -> int:
     cfg = copy.deepcopy(dict(core.load_config(repo / core.CONFIG)))
     stages.deep_update(cfg, cfg_override or {})
+    calibration.check_sealed_dir(sealed_dir, repo, cfg, allow_inside_repo=synthetic)  # ruling 20: BEFORE anything is written
     if k_max is None:
         if synthetic:
             k_max = int(cfg.get("synthetic", {}).get("k_max", 2))
@@ -180,11 +181,14 @@ def run_r2(repo: Path, run_dir: Path, sealed_dir: Path, *, rate_table: Mapping[s
 
     cfg = copy.deepcopy(dict(core.load_config(repo / core.CONFIG)))
     stages.deep_update(cfg, cfg_override or {})
+    calibration.check_sealed_dir(sealed_dir, repo, cfg, allow_inside_repo=synthetic)  # ruling 20: BEFORE anything is written
     planmod.require_ignored_path(repo, run_dir / "x")
     extra = data_extra_for({**(data_args or {}), "synthetic": synthetic})
     plan, plan_path = make_plan(repo, run_dir, "r2", {"train": [], "eval": []}, k_max, rate_table, cfg_override=cfg_override, synthetic=synthetic, data_extra=extra, provisional=True)
     workers = int(plan.data["workers"])
     n_up, n_ev = int(cfg["rehearsal"]["r2_updates"]), int(cfg["rehearsal"]["r2_evals"])
+    if n_up < int(cfg["rehearsal"]["r2_min_updates"]):
+        raise core.EngineeringStop(f"ENGINEERING STOP — R2 probes train {n_up} updates, fewer than the {cfg['rehearsal']['r2_min_updates']} that ruling 18 requires")
     pdir = run_dir / "r2" / "probes"
     pdir.mkdir(parents=True, exist_ok=True)
     base = (sys.executable, "-m", "studies.p10i_s6.stages", "work", "r2probe", "--run-dir", str(sealed_dir), "--state-dir", str(sealed_dir / "state" / "r2"), "--plan", str(plan_path), "--repo", str(repo))
@@ -231,6 +235,7 @@ def dry_override(cfg: Mapping[str, Any], base: Mapping[str, Any] | None) -> dict
 
 def run_r3(repo: Path, run_dir: Path, sealed_dir: Path, *, synthetic: bool = False, cfg_override: Mapping[str, Any] | None = None, data_args: Mapping[str, Any] | None = None) -> int:
     """Every registered stage end to end in the DRY profile against the candidate ``freeze/plan.json`` (non-provisional caps required); its SHA-256 goes into the record."""
+    calibration.check_sealed_dir(sealed_dir, repo, core.load_config(repo / core.CONFIG), allow_inside_repo=synthetic)  # ruling 20: BEFORE anything is written
     cand_path = repo / core.PLAN
     cand = Plan.load(cand_path)
     if cand.mode != planmod.REGISTERED or cand.data.get("caps_provisional"):

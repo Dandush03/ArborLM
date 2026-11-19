@@ -28,8 +28,10 @@ MODES = (REGISTERED, REHEARSAL, TEST)
 REGISTERED_STAGES = ("gates", "train", "eval", "analysis", "report")
 FROZEN_ROOTS = ("studies/p10i_s6",)
 PRINTING = "studies/p10i_s6/printing"
-COMPUTING = ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch")
-ORCHESTRATION = ("plan", "runner", "stages", "cost", "rehearsal", "testing", "report_input")
+# ruling 19: everything that produces a number is COMPUTING (BASE values and panel slices in stages, calibration curves in rehearsal, the data tables in d0, the parents in p0, the caps in plan and cost, the synthetic data in testing);
+# ORCHESTRATION holds only code that cannot change a number (process supervision); ``printing/`` and the launch scripts print or start processes.
+COMPUTING = ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch", "plan", "stages", "rehearsal", "d0", "p0", "cost", "testing", "realcheck")
+ORCHESTRATION = ("runner", "__init__")
 DECISION_RUN_LINE, DECISION_NO_RUN_LINE = "DECISION: RUN", "DECISION: DO NOT RUN"
 IMPORTED_S3 = ("studies/p10i_s3/model.py", "studies/p10i_s3/calibration.py", "studies/p10i_s3/core.py", "studies/p10i_s3/planted.py", "studies/p10i_s3/data.py", "studies/p10i_s3/parents.py", "studies/p10s2/fetch_guard.py", "studies/p10s2/core.py")
 RUNTIME_RESULTS_GLOBS = ("results/p3-lt-2026-11-12/b*-control/manifest.json", "results/p3-lt-2026-11-12/b*-control/order.json", "results/p4-2026-11-12/b*-baseline/result.json")
@@ -119,7 +121,7 @@ def computing_hashes(repo: Path) -> dict[str, str]:
 
 def adr_provenance(repo: Path) -> dict[str, str]:
     add = repo / "docs/decisions/ADR-0031-addendum-implementation-rulings.md"
-    return {"path": core.SPEC, "sha256": file_sha256(repo / core.SPEC), "addendum_path": str(add.relative_to(repo)), "addendum_sha256": file_sha256(add) if add.is_file() else None, "note": "provenance only: the ADR text is not a frozen input and no check compares this hash"}
+    return {"path": core.SPEC, "sha256": file_sha256(repo / core.SPEC), "addendum_path": str(add.relative_to(repo)), "addendum_sha256": file_sha256(add) if add.is_file() else None, "addendum_2_sha256": file_sha256(repo / "docs/decisions/ADR-0031-addendum-2-implementation-rulings.md") if (repo / "docs/decisions/ADR-0031-addendum-2-implementation-rulings.md").is_file() else None, "note": "provenance only: the ADR text is not a frozen input and no check compares this hash"}
 
 
 class Plan:
@@ -272,6 +274,8 @@ def require_ignored_path(repo: Path, path: Path) -> None:
         rel = path.resolve().relative_to(repo.resolve())
     except ValueError:
         return
+    if git(repo, "rev-parse", "--is-inside-work-tree").returncode != 0:
+        return  # not a git work tree: nothing to dirty, and no test or run depends on being in one
     if git(repo, "check-ignore", "-q", str(rel) + ("/x" if path.is_dir() or not path.suffix else "")).returncode != 0:
         raise StageRefused(f"refused: {path} is inside the repository and is not git-ignored: writing it would dirty the tree")
 

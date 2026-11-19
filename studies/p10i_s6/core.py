@@ -81,7 +81,7 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "seed_ranges": ("stream", "calibration", "init", "order", "test", "checker", "checker_sha256", "addendum", "addendum_sha256", "own_globs", "allocation_label"),
     "launch": ("keep_awake",),
     "gates": ("identity_rate", "identity_cell"),
-    "rehearsal": ("r2_updates", "r2_evals", "dry_base_updates", "dry_below_updates", "r1_max_rounds"),
+    "rehearsal": ("r2_updates", "r2_min_updates", "r2_evals", "dry_base_updates", "dry_below_updates", "r1_max_rounds"),
 }  # fmt: skip
 
 

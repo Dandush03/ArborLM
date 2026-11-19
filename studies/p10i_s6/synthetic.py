@@ -56,6 +56,7 @@ class Spec:
     nonfinite_replay: frozenset[tuple[str, int, int]] = frozenset()
     slots_missing: frozenset[tuple[int, int]] = frozenset()  # (rung, cell): the used_slots statistic is not in the registry
     nonfinite_xmean: frozenset[tuple[int, int]] = frozenset()  # (rung, cell): the X_mean read is non-finite
+    failed_keep: frozenset[tuple[str, int, int]] = frozenset()  # failed runs that still wrote the triple reads of the snapshot they produced (rung k)
     shared: bool = False  # one rate for every rung: run sharing (use ``rate_table(k_max, shared=True)``)
 
 
@@ -86,6 +87,12 @@ def registry(cfg: Mapping[str, Any], spec: Spec) -> dict[str, Any]:
                 if not spec.shared:
                     reg[core.run_key(arm, r, c)] = {"status": "failed_cell" if (arm, k, c) in spec.failed else "ok", "reason": None}
                 if reg[core.run_key(arm, r, c)]["status"] == "failed_cell":
+                    if (arm, k, c) in spec.failed_keep:
+                        uk = core.rung_updates(cfg, k)
+                        vk = b - aspec.gain[k]
+                        reg[core.nll_key(arm, r, c, uk, core.READ_ENABLED)] = vk
+                        reg[core.nll_key(arm, r, c, uk, core.READ_REPLAY)] = vk
+                        reg[core.nll_key(arm, r, c, uk, core.READ_DISABLED)] = b + (1e-3 if (arm, k, c) in spec.bad_disabled else 0.0)
                     continue
                 off = aspec.cell[k][c] if k in aspec.cell else 0.0
                 v = b - aspec.gain[k] + off

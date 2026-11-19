@@ -17,6 +17,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -62,6 +63,10 @@ def pin(names: Sequence[str], cfg: Mapping[str, Any], opener: Opener, out: Path)
         raise EngineeringStop(f"ENGINEERING STOP — {out} exists: a pins file is written once")
     if not names or any(not re.fullmatch(r"train-\d{5}-of-\d{5}\.parquet", n) for n in names):
         raise EngineeringStop("ENGINEERING STOP — only train shards named train-NNNNN-of-NNNNN.parquet are pinned (the test and validation splits are never fetched)")
+    idx = [(int(m[1]), int(m[2])) for n in names if (m := re.fullmatch(r"train-(\d{5})-of-(\d{5})\.parquet", n))]
+    total_n = {t for _, t in idx}
+    if len(total_n) != 1 or len(set(names)) != len(names) or sorted(i for i, _ in idx) != list(range(next(iter(total_n)))):
+        raise EngineeringStop("ENGINEERING STOP — the shard list is incomplete or inconsistent: train-0000i-of-0000N is needed for every i from 0 to N-1 (ruling 22); the lead verifies names, sizes and SHA-256 values by hand at the Hub before the download")
     files = []
     for n in sorted(names):
         with opener(f"{base_url(cfg, 'raw')}/{n}", timeout=TIMEOUT) as resp:
@@ -121,7 +126,8 @@ def get(out_dir: Path, ledger_path: Path, cfg: Mapping[str, Any], pins: Mapping[
         inside = True
     except ValueError:
         inside = False
-    if inside and not is_git_ignored(out_dir, root):
+    in_tree = subprocess.run(["git", "-C", str(root), "rev-parse", "--is-inside-work-tree"], capture_output=True, check=False).returncode == 0  # noqa: S603, S607  (outside a work tree there is nothing to dirty)
+    if inside and in_tree and not is_git_ignored(out_dir, root):
         raise EngineeringStop(f"ENGINEERING STOP — {out_dir} is inside the repository and not git-ignored")
     declared = sum(int(f["bytes"]) for f in pins["files"])
     if declared > int(cfg["data"]["download_hard_stop_bytes"]):

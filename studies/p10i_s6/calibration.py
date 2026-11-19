@@ -142,6 +142,11 @@ def curves_from_sealed(data: bytes) -> dict[str, dict[float, dict[int, dict[int,
     return {arm: {float(r): {int(c): {int(d): v for d, v in ds.items()} for c, ds in cells.items()} for r, cells in rates.items()} for arm, rates in body["curves"].items()}
 
 
+def check_sealed_dir(path: Path, repo: Path, cfg: Mapping[str, Any], *, allow_inside_repo: bool = False) -> None:
+    """Ruling 20: sealed values are never written inside a git working tree; the rehearsals call this BEFORE they write anything (it only inspects the path)."""
+    require_outside_repo(path, repo, allow_inside_repo=allow_inside_repo, forbidden_roots=[str(x) for x in cfg["seal"]["forbidden_roots"]])
+
+
 def write_sealed(path: Path, repo: Path, data: bytes, cfg: Mapping[str, Any], *, allow_inside_repo: bool = False) -> str:
     """Written once, outside every git working tree and outside the roots the config forbids (symlinks resolved). The explicit ``forbidden_roots`` argument is this study's own (section 15)."""
     require_outside_repo(path, repo, allow_inside_repo=allow_inside_repo, forbidden_roots=[str(x) for x in cfg["seal"]["forbidden_roots"]])

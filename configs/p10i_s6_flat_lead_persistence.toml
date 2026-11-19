@@ -74,6 +74,7 @@ download_expected_bytes = 315466397
 download_hard_stop_bytes = 1000000000
 d0_rss_bytes = 8589934592
 chunk_table_name = "train103_chunks.u8"
+s3_excluded_spans_sha256 = "40e633631b00dcb770efff594c823c4467f2a3aa8400dfb952ad27d5af8a7fa4"
 
 [seeds]
 stream_base = 320001
@@ -149,7 +150,8 @@ identity_cell = 0
 
 [rehearsal]
 # R2 probes (whole processes through the same entry point) and the DRY profile of R3 (a shortened ladder; the rate table is the real one)
-r2_updates = 50
+r2_updates = 2048
+r2_min_updates = 2048  # ruling 18: a probe is long enough to measure a rate against the process overhead
 r2_evals = 2
 dry_base_updates = 8
 dry_below_updates = 4
@@ -160,3 +162,5 @@ r1_max_rounds = 7
 adr = "2db830d279470c49f10b3c451b205edeaca2f12184f4fc35f1a67399552854f8"
 addendum = "a61430c8056b09c61b7347d9dee2c3d7b49f009cf5ce4c58fa8707b0d9dbc490"
 addendum_path = "docs/decisions/ADR-0031-addendum-implementation-rulings.md"
+addendum_2 = "2f4490b4b2c7850a93bcca0f4bc0e371a385f154931ceee5fe526500aa7fd775"
+addendum_2_path = "docs/decisions/ADR-0031-addendum-2-implementation-rulings.md"
