@@ -15,7 +15,10 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from studies.p10i_s3.calibration import require_outside_repo, selection  # frozen imports: both read no P10-I-S3 value (require_outside_repo is given ``forbidden_roots`` explicitly)
+from studies.p10i_s3.calibration import (  # frozen imports: both read no P10-I-S3 value (require_outside_repo is given ``forbidden_roots`` explicitly)
+    require_outside_repo,
+    selection,
+)
 
 from . import core, labels
 from .core import EngineeringStop

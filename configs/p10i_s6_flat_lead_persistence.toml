@@ -91,6 +91,11 @@ backbone_registered = [330741, 330742, 330743, 330744, 330745, 330746, 330747, 3
 backbone_calibration = [330751, 330752, 330753]
 init_calibration = 330791
 init_dry = 330792
+init_planted_toy = 330793
+# held values of registry revision 4, used only if the DRY profile needs them (DRY trains a parent / runs OA as a separate item)
+held_dry_backbone = 330794
+held_dry_order = 329211
+held_dry_oa_stream = 329202
 init_test = [330798, 330799]
 test_range = [952001, 952999]
 control_memory_reuse = 201
@@ -127,8 +132,11 @@ calibration = [329001, 329299]
 init = [330701, 330799]
 order = [321001, 321099]
 test = [952001, 952999]
-checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
-checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r4.py"
+checker_sha256 = "7bc791e0f24528020b9c3f569751f6528f30444a761b6bae514efad96acd81e8"
+addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R4.md"
+addendum_sha256 = "d1d22cc45d12b0bfa2856aed00ce7e2d1cbf1eef14c366b8abcea4b7237cab7f"
+own_globs = "configs/p10i_s6_*,studies/p10i_s6/*,tests/test_p10i_s6_*"
 allocation_label = "P10-I-S6 ADR-0031"
 
 [launch]

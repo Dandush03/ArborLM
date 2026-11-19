@@ -20,7 +20,20 @@ from torch import Tensor
 from torch.optim import AdamW
 
 from arborlm.io import canonical_json, read_json, sha256, write_json
-from studies.p10i_s3.model import Collector, Ctl, S3Model, build_model, evaluate, make_optimizer, neg_ref_values, p_used_values, seeded, state_digest, train_step, trainable_count
+from studies.p10i_s3.model import (
+    Collector,
+    Ctl,
+    S3Model,
+    build_model,
+    evaluate,
+    make_optimizer,
+    neg_ref_values,
+    p_used_values,
+    seeded,
+    state_digest,
+    train_step,
+    trainable_count,
+)
 from studies.p10i_s3.planted import plant, toy_panel
 
 from . import core

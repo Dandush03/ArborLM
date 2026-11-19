@@ -73,12 +73,12 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "thresholds": ("effect", "min_cells", "min_parents", "cells", "parents", "calibration_cells", "half", "dense_share", "dense_floor", "dense_tolerance", "tolerance_neg_ref", "trend_delta"),
     "controls": ("p_used_draws", "min_used_slots"),
     "data": ("publisher_repo", "revision", "configuration", "rank_label", "wikitext2_rank_label", "calibration_article_mod", "calibration_article_residue", "fallback_article_mod", "fallback_article_residue", "pool_chunks_for_umax", "panel_walk_start", "download_expected_bytes", "download_hard_stop_bytes", "d0_rss_bytes", "chunk_table_name"),
-    "seeds": ("stream_base", "oa_stream_base", "p_used_base", "order_registered", "order_calibration", "cal_stream_base", "cal_p_used_base", "dry_stream", "dry_p_used_base", "init_registered_base", "init_oa", "backbone_registered", "backbone_calibration", "init_calibration", "init_dry", "init_test", "test_range", "control_memory_reuse"),
+    "seeds": ("stream_base", "oa_stream_base", "p_used_base", "order_registered", "order_calibration", "cal_stream_base", "cal_p_used_base", "dry_stream", "dry_p_used_base", "init_registered_base", "init_oa", "backbone_registered", "backbone_calibration", "init_calibration", "init_dry", "init_planted_toy", "held_dry_backbone", "held_dry_order", "held_dry_oa_stream", "init_test", "test_range", "control_memory_reuse"),
     "resources": ("workers", "rss_worker_bytes", "rss_aggregate_bytes", "rss_aggregate_alone_bytes", "snapshot_bytes_estimate"),
     "caps": ("provisional", "d0_p0_hours", "rehearsal_hours", "registered_hours_bound"),
     "seal": ("forbidden_roots", "expected_snapshot_gb"),
     "platform": ("system", "machine", "torch", "torch_num_threads", "torch_interop_threads", "deterministic_algorithms"),
-    "seed_ranges": ("stream", "calibration", "init", "order", "test", "checker", "checker_sha256", "allocation_label"),
+    "seed_ranges": ("stream", "calibration", "init", "order", "test", "checker", "checker_sha256", "addendum", "addendum_sha256", "own_globs", "allocation_label"),
     "launch": ("keep_awake",),
 }  # fmt: skip
 
