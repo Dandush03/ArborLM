@@ -70,21 +70,24 @@ pass_timeout_seconds = 900
 process_markers = ["studies/", "arborlm", "pytest", "studies."]  # the ADR names the first three; "studies." (python -m studies.<name>.stages, which has no slash) is a conservative addition, listed as a departure
 
 [fixed_after_r1_and_m]  # section 5.4 and section 8: written from R1's and M's records BEFORE the candidate plan; provisional until then
-provisional = true
-m_t = 0.0
+provisional = false
+m_t = 0.1
 timing_spread = false
-load_p95 = 0.0
-read_bytes_per_s_p95 = 0.0
-write_bytes_per_s_p95 = 0.0
-read_ops_per_s_p95 = 0.0
-write_ops_per_s_p95 = 0.0
+load_p95 = 3.03
+read_bytes_per_s_p95 = 64915.08918839288
+write_bytes_per_s_p95 = 514885.99623690004
+read_ops_per_s_p95 = 6.4887227579591755
+write_ops_per_s_p95 = 52.065161813958575
 
 [caps]  # section 9 and section 10 (hours of charged wall time; provisional figure 5 hours until set by the rule after M)
-provisional = true
-rehearsal_hours = 5.0
-e1_hours = 5.0
-e2_hours = 5.0
-total_hours = 5.0
+# Set by the lead on 2026-11-18 by the rule (charged + 2 x projected remaining). Charged before the candidate plan: 160.3 s (R0 15.6, R1 18.7, M 125.9), all in the rehearsal group.
+# Projected remaining, from M (240 passes in 124.6 charged s) and R1 (1.14 GB built and checked in 18.7 s): K 200 s; E1 and P 300 s (a 4 GiB build, one rebuild allowed); E2 and the analysis 400 s (144 passes with the spare, one rebuild).
+# rehearsal = 160.3 + 2 x 200 = 560.3 s; e1 = 2 x 300 = 600 s; e2 = 2 x 400 = 800 s; total = 160.3 + 2 x 900 = 1960.3 s.
+provisional = false
+rehearsal_hours = 0.1557
+e1_hours = 0.1667
+e2_hours = 0.2223
+total_hours = 0.5446
 
 [resources]  # section 9
 memory_guard_bytes = 4294967296

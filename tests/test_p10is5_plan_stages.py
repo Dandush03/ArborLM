@@ -49,9 +49,16 @@ def test_candidate_plan_refuses_provisional_figures_and_caps() -> None:
         supersede = False
         repo = None
 
-    assert core.provisional_figures(CFG) and core.caps_provisional(CFG)  # today: provisional
-    with pytest.raises(core.StageRefused, match="provisional"):
-        freeze.cmd_candidate_plan(A())  # type: ignore[arg-type]
+    # Independent of the planning state: the command is given a configuration in which the figures, then the caps, are provisional.
+    for section_name in ("fixed_after_r1_and_m", "caps"):
+        cfg = copy.deepcopy(dict(CFG))
+        cfg["fixed_after_r1_and_m"] = {**cfg["fixed_after_r1_and_m"], "provisional": False}
+        cfg["caps"] = {**cfg["caps"], "provisional": False}
+        cfg[section_name] = {**cfg[section_name], "provisional": True}
+        with pytest.MonkeyPatch.context() as mp:
+            mp.setattr(core, "load_config", lambda _p, _c=cfg: _c)
+            with pytest.raises(core.StageRefused, match="provisional"):
+                freeze.cmd_candidate_plan(A())  # type: ignore[arg-type]
 
 
 def test_figures_from_records_and_comparison() -> None:

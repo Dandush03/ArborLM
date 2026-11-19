@@ -88,7 +88,6 @@ THRESHOLDS: list[tuple[str, Any, str, str]] = [
     ("quiet.cold_wait_seconds", 600, "7", "after the build and a 10-minute wait"),
     ("quiet.extra_sessions", 3, "8", "in up to three further sessions"),
     ("resources.memory_guard_bytes", 4 * 1024**3, "9", "Memory guard: 4 GiB of `ri_phys_footprint` per process"),
-    ("caps.total_hours", 5.0, "10", "the provisional figure is 5 hours"),
     ("platform.system", "Darwin", "12", "macOS arm64"),
     ("platform.machine", "arm64", "12", "macOS arm64"),
     ("platform.torch", "2.8.0", "12", "torch 2.8.0"),
@@ -117,6 +116,13 @@ THRESHOLDS: list[tuple[str, Any, str, str]] = [
 def test_threshold_equals_the_adr(path: str, expected: Any, sec: str, literal: str) -> None:
     assert at(CFG, path) == expected, path
     assert literal in section(sec), f"section {sec} of the ADR does not contain {literal!r}"
+
+
+def test_total_cap_is_the_provisional_figure_or_the_rule_value_below_it() -> None:
+    # Independent of the planning state: 5 hours while the caps are provisional (section 10); after M the lead sets them by the rule, and the rule's value never exceeds the provisional figure here.
+    assert "the provisional figure is 5 hours" in section("10")
+    total = float(at(CFG, "caps.total_hours"))
+    assert total == 5.0 if CFG["caps"]["provisional"] else 0.0 < total <= 5.0
 
 
 def test_registry_ranges() -> None:
