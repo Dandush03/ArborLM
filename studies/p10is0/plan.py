@@ -49,7 +49,7 @@ def frozen_paths(repo: Path | None = None, *, include_freeze_files: bool = True)
     for p in sorted((base / core.LAUNCH_DIR).glob("*.sh")):
         out.add(f"{core.LAUNCH_DIR}/{p.name}")
     if include_freeze_files:
-        for rel in (core.PLAN, core.DURATIONS, core.STAGE_CAPS):
+        for rel in (core.PLAN, core.DURATIONS, core.STAGE_CAPS, core.FREEZE_DIR / "durations_identity_rebind.json"):
             if (base / rel).is_file():
                 out.add(str(rel))
     for d in IMPORTED_DIRS:

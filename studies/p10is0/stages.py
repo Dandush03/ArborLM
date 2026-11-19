@@ -107,6 +107,10 @@ def build_parser() -> argparse.ArgumentParser:
     add("caps", "write freeze/stage_caps.json from the measured projection")
     ss = add("stage-r-status", "re-derive the events from durations.json, write the missing EVENT files, print Stage R's completion line (read-only otherwise)")
     ss.add_argument("--events-dir")
+    rp = add("rebind-pins", "print the pin block a code-identity ruling must contain (commits and per-file old/new SHA-256)", run_dir=False)
+    rp.add_argument("--stage-r-commit", required=True)
+    rp.add_argument("--new-commit", required=True)
+    rp.add_argument("--ruler", required=True)
     rb = add("rebind-identity", "apply the lead's ruling that a change confined to sealed.py, stages.py and drivers.py does not void Stage R (rewrites code_identity in durations.json)")
     rb.add_argument("--ruling-file", required=True)
     add("a0-memory", "stage 5: the full-length A0 memory cell on the rehearsal draw (time and memory only)")
@@ -166,6 +170,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0 if res["passed"] else 1
         elif args.command == "quiet-check":
             return cmd_quiet_check(args)
+        elif args.command == "rebind-pins":
+            print(drivers.rebind_pins(repo, args.stage_r_commit, args.new_commit, args.ruler), end="")
+            return 0
         elif args.command == "platform":
             return cmd_platform(args)
         elif args.command == "registered":

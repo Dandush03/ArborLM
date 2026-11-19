@@ -46,25 +46,25 @@ class SealedRefused(PermissionError):
     """A read of the sealed directory by anything but the auditor's recomputation script (procedural; all sessions share one OS account)."""
 
 
-OPAQUE_ID = re.compile(r"^[A-Za-z]?[0-9a-f]{8,}$")
-NAME_TOKENS = re.compile(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])|\d+")
+# The exact opaque shapes this study generates (a test asserts they agree with the code that creates them): a task id ``t`` + 14 lowercase hex (``drivers.opaque_label``) with the suffixes ``runner`` tasks give their files, and a 64-hex digest.
+OPAQUE_TASK_FILE = re.compile(r"^t[0-9a-f]{14}\.(log|result\.json|failed\.json)$")
+OPAQUE_DIGEST = re.compile(r"^[0-9a-f]{64}(\.[a-z]+)?$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
-MEASURE_STEMS = tuple(w for w in FORBIDDEN_WORDS if "_" not in w) + ("recall",)
-MEASURE_PAIRS = tuple(tuple(w.split("_")) for w in FORBIDDEN_WORDS if "_" in w)  # m_p, m_h, plateau_value: adjacent tokens
+MEASURE_WORDS = (*FORBIDDEN_WORDS, "recall")
 HASH_MAPS = ("hashes", "sealed_files_sha256")
 
 
-def names_a_measure(key: str) -> bool:
-    """Whether a key NAMES a sealed measure. The rule: the key is split into path components and dotted parts; a part that is an opaque identifier (at most one letter followed by at least eight lowercase hex digits: a task id, a hash) is
-    skipped, because a random identifier can contain any three-letter run by chance; every other part is split into lower-cased tokens on non-alphanumerics, case changes and digit runs; the key names a measure when a token STARTS WITH a
-    forbidden stem (``acc`` finds ``acc``, ``accuracy``, ``mean_acc``, ``meanAcc``; ``recall`` finds ``recall_at_1``) or two adjacent tokens are a forbidden pair (``m`` ``p``). A stem inside a token that is not at its start (``caccd``) is not a match."""
-    for part in re.split(r"[/\\.]", key):
-        if not part or OPAQUE_ID.match(part):
+def names_a_measure(key: str, *, hashes_key: bool = False) -> bool:
+    """Whether a key NAMES a sealed measure. The rule is the original substring test, kept on every key: the lower-cased key must contain none of the forbidden words (``acc``, ``loss``, ``correct``, ``m_p``, ``recall`` ...).
+    The only exemption: when the key is a key of a hashes map (a file path) a path component that is EXACTLY a known opaque shape is not tested: a task id ``t`` + 14 lowercase hex with ``.log``, ``.result.json`` or ``.failed.json``
+    (the names ``drivers.opaque_label`` and the runner give), or a 64-hex digest, because a random identifier can contain any three-letter run by chance. Nothing else is exempt: ``acc12345678``, ``accdeadbeef``, ``trainloss``,
+    ``meanacc`` and every other name the substring rule refuses is still refused, and outside a hashes map nothing is exempt."""
+    comps = key.split("/") if hashes_key else [key]
+    for c in comps:
+        if hashes_key and (OPAQUE_TASK_FILE.match(c) or OPAQUE_DIGEST.match(c)):
             continue
-        tokens = [x.lower() for x in NAME_TOKENS.findall(part)]
-        if any(tok.startswith(s) for tok in tokens for s in MEASURE_STEMS):
-            return True
-        if any(tuple(tokens[k : k + 2]) == pair for k in range(len(tokens) - 1) for pair in MEASURE_PAIRS):
+        low = c.lower()
+        if any(w in low for w in MEASURE_WORDS):
             return True
     return False
 
@@ -72,8 +72,8 @@ def names_a_measure(key: str) -> bool:
 def validate_public(obj: Any, *, path: str = "") -> None:
     """Keys must be in ``PUBLIC_KEYS`` (or the cell-type names and the fixed maps of a record); values must be plain: no float that could be an accuracy or loss unless the key is a time, rate, memory or load key.
 
-    The leak guard keeps its purpose, that no sealed measure NAME or VALUE reaches public output, without matching inside opaque identifiers: ``names_a_measure`` matches whole tokens (see its docstring). The keys of a hashes map
-    (``hashes``, ``sealed_files_sha256``) are file paths and are checked the same way, and every VALUE in such a map must be a 64-character lowercase hex string and nothing else."""
+    The leak guard keeps its purpose, that no sealed measure NAME or VALUE reaches public output: ``names_a_measure`` keeps the substring test on every key and exempts only exact opaque task-id and digest shapes in a hashes map (see its docstring). The keys of a hashes map
+    (``hashes``, ``sealed_files_sha256``) are file paths, and every VALUE in such a map must be a 64-character lowercase hex string and nothing else."""
     numeric_ok = {"wall_seconds", "evaluation_wall_seconds", "seconds_per_update", "peak_rss_bytes", "sampled_rss_bytes", "load_average", "seconds", "updates", "exposures", "slots", "facts", "t_exposures", "e_star", "round", "calibration_draw", "count", "workers", "schema"}
     if isinstance(obj, Mapping):
         in_hashes = any(path.endswith(h) for h in HASH_MAPS)
@@ -82,7 +82,7 @@ def validate_public(obj: Any, *, path: str = "") -> None:
             in_cell_types = path.endswith("cell_types") or path.endswith("shapes") or path.endswith("parameter_counts") or in_hashes or path.endswith("code_identity") or path.endswith("identity") or path.endswith("environment")
             if not in_cell_types and key not in PUBLIC_KEYS:
                 raise PublicOutputError(f"key not allowed in a public output: {path}/{key}")
-            if key not in ("convergence", "labels") and names_a_measure(key):
+            if key not in ("convergence", "labels") and names_a_measure(key, hashes_key=in_hashes):
                 raise PublicOutputError(f"key names a forbidden measure: {path}/{key}")
             if in_hashes and not (isinstance(v, str) and HEX64.match(v)):
                 raise PublicOutputError(f"a value in the hashes map at {path}/{key} is not a 64-hex string")

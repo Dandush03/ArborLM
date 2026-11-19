@@ -9,6 +9,7 @@ builder is the same code (``plan.build_plan``).
 """
 
 import json
+import re
 import subprocess
 import sys
 import time
@@ -538,6 +539,7 @@ def cmd_stage_r_status(ctx: Ctx, *, events_dir: Path | None = None) -> dict[str,
 
 
 def write_events_numbered(events_dir: Path, numbered: Sequence[tuple[int, str]], durations: Mapping[str, Any]) -> list[Path]:
+    events_dir.mkdir(parents=True, exist_ok=True)
     out = []
     for i, e in numbered:
         p = events_dir / f"EVENT_{i}.md"
@@ -549,28 +551,98 @@ def write_events_numbered(events_dir: Path, numbered: Sequence[tuple[int, str]],
 
 
 RULING_COSMETIC_FILES = frozenset({"studies/p10is0/sealed.py", "studies/p10is0/stages.py", "studies/p10is0/drivers.py"})
+REBIND_RECORD = core.FREEZE_DIR / "durations_identity_rebind.json"
+PIN_RE = re.compile(r"^PIN (stage_r_commit|new_commit|ruler|file) (.+)$")
+
+
+def _changed_since_stage_r(repo: Path, recorded: Mapping[str, str]) -> dict[str, tuple[str, str]]:
+    now = code_identity(repo)
+    return {k: (recorded.get(k, ""), now.get(k, "")) for k in sorted(set(recorded) | set(now)) if recorded.get(k) != now.get(k)}
+
+
+def rebind_pins(repo: Path, stage_r_commit: str, new_commit: str, ruler: str) -> str:
+    """The pin block the ruling file must contain, printed for pasting (nothing typed by hand): Stage R's commit, the new commit, and for every file whose hash differs from the identity ``durations.json`` records its old and new SHA-256. The
+    old hashes are checked against Stage R's commit and the new ones against the new commit; a difference refuses."""
+    rec = core.read_record(repo / core.DURATIONS, "durations")
+    changed = _changed_since_stage_r(repo, rec["code_identity"])
+    full = {}
+    for name, c in (("stage_r_commit", stage_r_commit), ("new_commit", new_commit)):
+        r = planmod.git(repo, "rev-parse", "--verify", f"{c}^{{commit}}")
+        if r.returncode != 0:
+            raise StageRefused(f"refused: {name} {c!r} is not a commit")
+        full[name] = r.stdout.decode().strip()
+    lines = [f"PIN stage_r_commit {full['stage_r_commit']}", f"PIN new_commit {full['new_commit']}"]
+    for path, (old, new) in changed.items():
+        if planmod.committed_hash(repo, full["stage_r_commit"], path) != old or planmod.committed_hash(repo, full["new_commit"], path) != new:
+            raise StageRefused(f"refused: {path} does not match Stage R's commit and the new commit")
+        lines.append(f"PIN file {path} old {old} new {new}")
+    lines.append(f"PIN ruler {ruler}")
+    return "\n".join(lines) + "\n"
 
 
 def cmd_rebind_identity(ctx: Ctx, ruling_file: Path) -> dict[str, Any]:
-    """A code change after ``durations.json`` exists is an ENGINEERING STOP for the human lead. This command applies the lead's RULING that a change confined to output validation and the command line (``sealed.py``, ``stages.py``,
-    ``drivers.py``; never a file of the training or evaluation path) does not void Stage R: it refuses unless the ruling file exists under ``results/``, and unless every file that differs from the identity ``durations.json`` records is one of those
-    three. It rewrites only ``code_identity`` in ``durations.json`` and keeps the old identity, the changed files and the ruling's hash in ``freeze/durations_identity_rebind.json``."""
-    dur_path = ctx.repo / core.DURATIONS
+    """A code change after ``durations.json`` exists is an ENGINEERING STOP for the human lead. This command applies his RULING that a change confined to output validation and the command line does not void Stage R, and only on a ruling
+    that pins exactly what changed (F2):
+
+    * the ruling file is COMMITTED under ``results/`` and the tree has no uncommitted change;
+    * it carries the pin block of ``rebind_pins``: Stage R's commit, the new commit (an ancestor of HEAD), the old and new SHA-256 of every changed file and the ruler's name;
+    * every pin is verified: the set of pinned files equals the set that differs from ``durations.json``'s recorded identity, each old hash equals that identity and the file at Stage R's commit, each new hash equals the current file and
+      the file at the new commit, and every changed file is one of ``sealed.py``, ``stages.py``, ``drivers.py``;
+    * once: a second rebind, or one after the candidate plan exists, is refused.
+
+    It rewrites only ``code_identity`` in ``durations.json`` and writes ``freeze/durations_identity_rebind.json`` (a frozen input: the freeze and the registered stages check it)."""
+    repo = ctx.repo
+    dur_path = repo / core.DURATIONS
+    record_path = repo / REBIND_RECORD
+    if record_path.exists() or (repo / core.PLAN).exists():
+        raise StageRefused("refused: a rebind was already made or the candidate plan exists; one ruling covers one change and nothing after the plan")
     if not dur_path.is_file() or not ruling_file.is_file() or "results" not in ruling_file.resolve().parts:
-        raise StageRefused("refused: needs freeze/durations.json and a ruling file under results/ (the lead's ruling that the change is confined to output validation)")
+        raise StageRefused("refused: needs freeze/durations.json and a ruling file under results/")
+    rel = str(ruling_file.resolve().relative_to(repo.resolve()))
+    if planmod.git(repo, "ls-files", "--error-unmatch", rel).returncode != 0 or planmod.git(repo, "status", "--porcelain", "--untracked-files=no").stdout.strip():
+        raise StageRefused("refused: the ruling file must be committed and the tree must have no uncommitted change")
+    pins: dict[str, Any] = {"files": {}}
+    for line in ruling_file.read_text(encoding="utf-8").splitlines():
+        m = PIN_RE.match(line.strip())
+        if m is None:
+            continue
+        if m[1] == "file":
+            parts = m[2].split()
+            if len(parts) != 5 or parts[1] != "old" or parts[3] != "new":
+                raise StageRefused(f"refused: a malformed PIN file line: {line!r}")
+            pins["files"][parts[0]] = (parts[2], parts[4])
+        else:
+            pins[m[1]] = m[2].strip()
+    for need in ("stage_r_commit", "new_commit", "ruler"):
+        if not pins.get(need):
+            raise StageRefused(f"refused: the ruling pins no {need}")
     rec = core.read_record(dur_path, "durations")
-    old, now = rec["code_identity"], code_identity(ctx.repo)
-    changed = sorted(k for k in set(old) | set(now) if old.get(k) != now.get(k))
+    changed = _changed_since_stage_r(repo, rec["code_identity"])
+    if set(changed) != set(pins["files"]):
+        raise StageRefused(f"refused: the files that differ ({sorted(changed)}) are not the files the ruling pins ({sorted(pins['files'])})")
     outside = [k for k in changed if k not in RULING_COSMETIC_FILES]
     if outside:
         raise StageRefused(f"refused: files outside the ruling's scope differ from Stage R's code: {outside}")
-    log = ctx.repo / core.FREEZE_DIR / "durations_identity_rebind.json"
-    hist = read_json(log) if log.is_file() else {"rebinds": []}
-    hist["rebinds"].append({"old_identity": old, "changed_files": changed, "ruling_file": str(ruling_file), "ruling_sha256": file_sha256(ruling_file), "utc": datetime.now(UTC).isoformat()})
-    write_json(log, hist)
+    for k, v in (("stage_r_commit", pins["stage_r_commit"]), ("new_commit", pins["new_commit"])):
+        r = planmod.git(repo, "rev-parse", "--verify", f"{v}^{{commit}}")
+        if r.returncode != 0 or r.stdout.decode().strip() != v:
+            raise StageRefused(f"refused: {k} must be a full commit hash that exists")
+    if planmod.git(repo, "merge-base", "--is-ancestor", pins["stage_r_commit"], pins["new_commit"]).returncode != 0 or planmod.git(repo, "merge-base", "--is-ancestor", pins["new_commit"], "HEAD").returncode != 0:
+        raise StageRefused("refused: Stage R's commit must be an ancestor of the new commit, and the new commit an ancestor of HEAD")
+    for path, (old, new) in changed.items():
+        pin_old, pin_new = pins["files"][path]
+        ok = pin_old == old == planmod.committed_hash(repo, pins["stage_r_commit"], path) and pin_new == new == planmod.committed_hash(repo, pins["new_commit"], path)
+        if not ok:
+            raise StageRefused(f"refused: the pinned hashes of {path} do not equal durations.json's identity, the file at Stage R's commit, the current file and the file at the new commit")
+    now = code_identity(repo)
+    out = {
+        **core.envelope("event"), "kind": "event", "what": "durations code identity rebound by the lead's ruling", "stage_r_commit": pins["stage_r_commit"], "new_commit": pins["new_commit"], "ruler": pins["ruler"],
+        "files": [{"path": k, "old_sha256": o, "new_sha256": n} for k, (o, n) in sorted(changed.items())], "ruling_file": rel, "ruling_sha256": file_sha256(ruling_file), "utc": datetime.now(UTC).isoformat(),
+    }  # fmt: skip
+    write_json(record_path, core.jsonable(out))
     rec["code_identity"] = now
     write_json(dur_path, core.jsonable(rec))
-    return {"status": "COMPLETE", "changed_files": changed, "durations_sha256": file_sha256(dur_path)}
+    return {"status": "COMPLETE", "changed_files": sorted(changed), "durations_sha256": file_sha256(dur_path), "record": str(record_path)}
 
 
 def stage_r_charged_hours(ctx: Ctx, attempt: int) -> float:
@@ -651,16 +723,12 @@ def _scaled_cfg(cfg: Mapping[str, Any], prof: Profile) -> Mapping[str, Any]:
 
 
 def write_events(events_dir: Path, events: Sequence[str], durations: Mapping[str, Any]) -> list[Path]:
-    """One ``EVENT_<n>.md`` per event of section 5.2 (the study proceeds; the human lead is told at once). Written outside any registered stage, into a results directory the lead commits."""
+    """One ``EVENT_<n>.md`` per event of section 5.2 (the study proceeds; the human lead is told at once), by the same template ``write_events_numbered`` uses. Refuses to overwrite."""
     events_dir.mkdir(parents=True, exist_ok=True)
-    out = []
-    for i, e in enumerate(events, 1):
-        p = events_dir / f"EVENT_{i}.md"
-        if p.exists():
-            raise FileExistsError(p)
-        p.write_text(f"# EVENT {i} (ADR-0023 section 5.2)\n\n{e}\n\nBy the rule fixed before any observation the study proceeds to the counting rehearsal, the freeze and Decision 2, unchanged. The human lead may stop it; that stop is his alone.\n\n`durations.json` entries at the time:\n\n```json\n{json.dumps(core.jsonable(durations.get('cell_types', {})), indent=2, sort_keys=True)}\n```\n\n`Astra review: NOT_PERFORMED`.\n", encoding="utf-8")
-        out.append(p)
-    return out
+    for i in range(1, len(events) + 1):
+        if (events_dir / f"EVENT_{i}.md").exists():
+            raise FileExistsError(events_dir / f"EVENT_{i}.md")
+    return write_events_numbered(events_dir, list(enumerate(events, 1)), durations)
 
 
 # --- caps -----------------------------------------------------------------------------------------------------------------------------------------------

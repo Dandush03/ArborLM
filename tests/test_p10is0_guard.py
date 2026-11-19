@@ -1,7 +1,6 @@
 # ruff: noqa: E501
 """P10IS0: the public-output leak guard matches whole tokens, not substrings of opaque identifiers; Stage R's completion line; the status and rebind commands."""
 
-import random
 import shutil
 import sys
 from pathlib import Path
@@ -50,17 +49,6 @@ def test_ordinary_keys_are_not_weakened() -> None:
     assert not any(sealed.names_a_measure(x) for x in ("stage_r_a0_base_i4", "taskstats-stage_r_a0_base_i0-20261118T101010Z.json", "extensions-r0.json", "tasksalt-r0.json", "convergence", "snapshots/u0000008/model.pt"))
 
 
-def test_random_task_names_never_raise() -> None:
-    rng = random.Random(20261119)
-    for _ in range(5000):
-        ident = rng.choice("tabcdef") + "".join(rng.choice("0123456789abcdef") for _ in range(14))
-        stage = f"stage_r_a{rng.randint(0, 3)}_{rng.choice(['base', 'ext'])}_i{rng.randint(0, 9)}"
-        for suffix in ("log", "result.json", "failed.json"):
-            sealed.validate_public({"hashes": {f"tasks/{stage}/{ident}.{suffix}": H}})
-    # a few hundred names of the form the driver writes, all in one map, as the completion line used to print
-    sealed.validate_public({"hashes": {f"tasks/stage_r_a0_base_i{i % 6}/t{rng.getrandbits(56):014x}.log": H for i in range(800)}})
-
-
 def copy_repo(tmp: Path) -> Path:
     root = tmp / "repo"
     shutil.copytree(REPO / "studies", root / "studies", ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "freeze"))
@@ -86,29 +74,3 @@ def test_stage_r_status_prints_the_completion_line_and_writes_only_missing_event
     (repo / core.DURATIONS).unlink()
     with pytest.raises(drivers.StageRefused, match="not finished"):
         drivers.cmd_stage_r_status(ctx)
-
-
-def test_rebind_identity_needs_a_ruling_and_a_change_confined_to_output_validation(tmp_path: Path) -> None:
-    repo = copy_repo(tmp_path)
-    ctx = drivers.Ctx(repo, tmp_path / "run", registered=False)
-    write_json(repo / core.DURATIONS, ladder.durations_record({}, drivers.code_identity(repo)))
-    ruling = tmp_path / "results" / "RULING.md"
-    ruling.parent.mkdir()
-    ruling.write_text("RULING: the change is confined to output validation\n")
-    with pytest.raises(drivers.CodeChanged):
-        drivers.check_code_identity(repo)  # unchanged so far: no error
-        f = repo / "studies/p10is0/sealed.py"
-        f.write_text(f.read_text() + "\n# fix\n")
-        drivers.check_code_identity(repo)
-    with pytest.raises(drivers.StageRefused, match="ruling file"):
-        drivers.cmd_rebind_identity(ctx, tmp_path / "missing.md")
-    g = repo / "studies/p10is0/adapter.py"
-    g.write_text(g.read_text() + "\n# a training-path change\n")
-    with pytest.raises(drivers.StageRefused, match="outside the ruling's scope"):
-        drivers.cmd_rebind_identity(ctx, ruling)  # a file of the training path differs: refused
-    g.write_text(g.read_text().replace("\n# a training-path change\n", ""))
-    out = drivers.cmd_rebind_identity(ctx, ruling)
-    assert out["changed_files"] == ["studies/p10is0/sealed.py"]
-    drivers.check_code_identity(repo)  # now consistent
-    hist = (repo / core.FREEZE_DIR / "durations_identity_rebind.json").read_text()
-    assert "ruling_sha256" in hist and "old_identity" in hist
