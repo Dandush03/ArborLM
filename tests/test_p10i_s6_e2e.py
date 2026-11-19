@@ -144,12 +144,29 @@ class Chain:
         assert self.log["rate_table_cmd"].returncode == 0, self.log["rate_table_cmd"].stderr
         self.log["r2"] = self.script("rehearse.sh", "r2", *common, "--k-max", "2")
         assert self.log["r2"].returncode == 0, tail(self.log["r2"])
+        self.generous_caps()
         self.log["cand"] = self.stages("candidate-plan", "--run-dir", str(self.pub), "--k-max", "2", "--synthetic", "--r2", str(self.pub / "r2" / "r2_record.json"))
         assert self.log["cand"].returncode == 0, tail(self.log["cand"])
         git(self.repo, "add", "-A")
         git(self.repo, "commit", "-q", "-m", "candidate plan and rate table")
         self.log["r3"] = self.script("rehearse.sh", "r3", *common)
         assert self.log["r3"].returncode == 0, tail(self.log["r3"])
+
+    def generous_caps(self) -> None:
+        """A TEST DEVICE: the measured unit costs of tiny processes on a machine shared with other studies are noisy, and the cap is twice their projection; the record's costs are scaled by 5 (and its SHA-256 in the public file updated) so that the registered stages
+        of the test do not pause at a cap. The freeze still ties the plan's costs and caps to this very file by SHA-256."""
+        path = self.pub / "r2" / "r2_record.json"
+        rec = json.loads(path.read_text())
+        u = rec["unit_costs"]
+        u["process_overhead_seconds"] *= 5
+        u["gates_seconds"] *= 5
+        for a in u["arms"].values():
+            a["seconds_per_update"] *= 5
+            a["seconds_per_eval"] = {k: v * 5 for k, v in a["seconds_per_eval"].items()}
+        path.write_text(json.dumps(rec))
+        pub = core.read_record(self.pub / "rehearsal_public.json", "rehearsal_public")
+        pub["r2_record_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+        core.write_record(self.pub / "rehearsal_public.json", pub, overwrite=True)
 
     def freeze(self, rehearsal: Path) -> subprocess.CompletedProcess[str]:
         return self.stages("freeze", "--rehearsal", str(rehearsal), "--r2-record", str(self.pub / "r2" / "r2_record.json"))

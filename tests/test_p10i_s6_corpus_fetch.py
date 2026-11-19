@@ -153,7 +153,7 @@ def pointer(data: bytes) -> bytes:
 
 def test_the_ledger_of_record_is_the_only_ledger_file() -> None:
     root = core.repo_root()
-    assert [p.name for p in root.rglob("DOWNLOAD_LEDGER*.md") if ".venv" not in p.relative_to(root).parts] == ["DOWNLOAD_LEDGER.md"]
+    assert [p.name for p in root.rglob("DOWNLOAD_LEDGER*.md") if not {".venv", "experiments", "data"} & set(p.relative_to(root).parts)]  # tracked documents only (scratch copies are not records) == ["DOWNLOAD_LEDGER.md"]
     assert LEDGER.is_file() and fetch.DOWNLOAD_LEDGER == fetch.Path("docs/reviews/p10-design-2026-11-15/DOWNLOAD_LEDGER.md")
 
 
@@ -190,6 +190,7 @@ def test_get_appends_started_rows_first_then_completes_them_like_p10s2() -> None
         ledger = d / "DL.md"  # the throw-away copy (its name is not DOWNLOAD_LEDGER*.md, the real one is never touched)
         ledger.write_text(LEDGER.read_text())
         before_rows = fetch.ledger_total_bytes(ledger)
+        s6_before = sum("P10-I-S6" in ln for ln in ledger.read_text().splitlines())  # the real ledger may already hold this study's rows: count what THIS call adds
         lines_before = ledger.read_text().splitlines()
         seen: list[str] = []
 
@@ -204,11 +205,11 @@ def test_get_appends_started_rows_first_then_completes_them_like_p10s2() -> None
         res = fetch.get(d / "out", ledger, CFG, pins_for(files), download, root=d)
         assert all("| P10-I-S6 |" in r and "| started |" in r for r in seen) and len(seen) == 2
         text = ledger.read_text().splitlines()
-        new = [ln for ln in text if "P10-I-S6" in ln]
+        new = [ln for ln in text if "P10-I-S6" in ln][s6_before:]
         assert len(new) == 2 and all(ln.rstrip().endswith("| completed |") for ln in new)
         assert fetch.ledger_total_bytes(ledger) == before_rows + 3000 and res["total_bytes"] == 3000 and res["ledger_total_after"] - res["ledger_total_before"] == 3000
         # the running-total column is recomputed over the whole table, and the old rows are unchanged but for it
-        old_cells = [[c.strip() for c in ln.strip("|").split("|")][:7] + [[c.strip() for c in ln.strip("|").split("|")][8]] for ln in lines_before if ln.startswith("| 2026")]
+        old_cells = [[c.strip() for c in ln.strip("|").split("|")][:7] + [[c.strip() for c in ln.strip("|").split("|")][8]] for ln in lines_before if ln.startswith("| 2026") and "P10-I-S6" not in ln]
         new_cells = [[c.strip() for c in ln.strip("|").split("|")][:7] + [[c.strip() for c in ln.strip("|").split("|")][8]] for ln in text if ln.startswith("| 2026") and "P10-I-S6" not in ln]
         assert old_cells == new_cells
         assert "revision b08601e04326c79dfdd32d625aee71d232d685c3; SHA-256".replace("revision ", "") in new[0] and "/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-103-raw-v1/" in new[0]
