@@ -73,7 +73,7 @@ class Chain:
         t = cfg_path.read_text(encoding="utf-8")
         for a, b in (
             ("base_updates = 16384", "base_updates = 2"), ("below_updates = 8192", "below_updates = 1"), ("workers = 6", "workers = 4"), # wide grid: tiny runs on learnable bytes need large rates for an interior minimiser
-            ("grid = [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]", "grid = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]"), ("r2_updates = 2048", "r2_updates = 6"), ("r2_min_updates = 2048", "r2_min_updates = 6"), ("dry_base_updates = 8", "dry_base_updates = 2"), ("dry_below_updates = 4", "dry_below_updates = 1"),
+            ("grid = [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]", "grid = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]"), ("r2_updates = 2048", "r2_updates = 1500"), ("r2_min_updates = 2048", "r2_min_updates = 1500"), ("r2_evals = 2", "r2_evals = 1000"), ("dry_base_updates = 8", "dry_base_updates = 2"), ("dry_below_updates = 4", "dry_below_updates = 1"),
             ('checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r4.py"', 'checker = "docs/reviews/checker_stub.py"'),
             ('checker_sha256 = "7bc791e0f24528020b9c3f569751f6528f30444a761b6bae514efad96acd81e8"', f'checker_sha256 = "{hashlib.sha256(stub.read_bytes()).hexdigest()}"'),
             ('addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R4.md"', 'addendum = "docs/reviews/addendum_stub.md"'),
