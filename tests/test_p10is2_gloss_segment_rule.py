@@ -124,3 +124,24 @@ def test_part_t_builds_the_same_ids_from_the_bank_in_both_branches() -> None:
         lines = gloss.icl_lines("alpha 230", LEXICON, set(WORDS))
         assert got == tok.encode(gloss.icl_prompt_text(lines) + "English: alpha")
         assert gloss_icl_ids("unknown", query, LEXICON, set(WORDS), bank, "A", 0) == list(query.prompt_ids)  # no line: the task prompt alone
+
+
+# --- the pre-freeze check of the prompt texts ---------------------------------------------------------------------------------------------------------
+def test_the_prompt_check_passes_the_amended_rule_and_catches_the_old_one(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    from studies.p10is2.partq import promptcheck
+
+    tok = ToyTok()
+    panels = {"E_A": [item("alpha", "230", "beta")], "E_B": [item("alpha", "9th")], "D_cal": [item("beta", "?!", "230")]}
+    vocab = ["alpha", "230", "beta", "9th", "?!"]
+    res = promptcheck.check(tok, panels, vocab, {"A": ["haus", "2go", "été"], "B": ["maison", "9x"]})
+    assert res["required_ok"] and res["mismatches"] == 0 and res["gloss_sweep"]["mismatches"] == 0 and res["last_newline"]["rule"] == "own-segment" and res["items_checked"] == 4 and res["gloss_sweep"]["gloss_types_checked"] == 5
+
+    def old_ids(lines, bank, capability):  # the rule of attempt 2, as a stand-in for a regression
+        ids = []
+        for w, g in lines:
+            ids += [*bank["source_words"][w], *bank["separator"], *bank["words"][capability][g], *bank["newline"]]
+        return ids
+
+    monkeypatch.setattr(gloss, "icl_prompt_ids", old_ids)
+    bad = promptcheck.check(tok, panels, vocab, {"A": ["haus"], "B": ["maison"]})
+    assert not bad["required_ok"] and bad["mismatches"] > 0 and bad["gloss_sweep"]["mismatches"] > 0  # the check fails on the old rule, on the digit after a newline

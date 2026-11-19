@@ -125,7 +125,9 @@ def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace
     and the record printed is the whitelist. Each stage process charges its own wall time to ``<run-dir>/charged_ledger.json`` (ruling L2)."""
     from . import counting
 
-    if kind == "counting":
+    if kind == "counting" and getattr(args, "reuse_source", None):  # attempt 3: the plan reuses completed stages
+        counting.run_reuse_counting_rehearsal(repo, run_dir, Path(args.reuse_source), charged_ledgers=getattr(args, "charged_ledger", None) or [])
+    elif kind == "counting":
         counting.run_counting_rehearsal(repo, run_dir, charged_ledgers=getattr(args, "charged_ledger", None) or [])
     else:
         if not getattr(args, "inputs", None):

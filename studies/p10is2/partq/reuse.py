@@ -37,9 +37,23 @@ def tree_sha256(files: dict[str, str]) -> str:
     return h.hexdigest()
 
 
-def hash_files(source: Path) -> dict[str, str]:
-    """SHA-256 of every file of the six stages in ``source`` (relative path -> digest), by bytes. Symbolic links are refused. The directory is only read."""
+SEALED_PREFIXES = ("qfit_", "qcheck_", "generation_")  # a REHEARSAL's stage records that live under sealed/ (``pipeline.loc``): carried like the rest, as bytes; never opened
+
+
+def sealed_files(source: Path) -> list[Path]:
+    d = source / "sealed"
+    return sorted(p for p in d.iterdir() if p.is_file() and p.name.startswith(SEALED_PREFIXES)) if d.is_dir() else []
+
+
+def hash_files(source: Path, mode: str = "registered") -> dict[str, str]:
+    """SHA-256 of every file of the six stages in ``source`` (relative path -> digest), by bytes. Symbolic links are refused. The directory is only read. A rehearsal's sealed stage records are included."""
     out: dict[str, str] = {}
+    if mode == "rehearsal":
+        for p in sealed_files(source):
+            out[str(p.relative_to(source))] = file_sha256(p)
+        cand = source / "panel_ledger_candidate.json"  # a rehearsal's candidate ledger (the outputs stage reads its windows)
+        if cand.is_file():
+            out[cand.name] = file_sha256(cand)
     for top in HASHED_TOP:
         base = source / top
         if base.is_symlink():
@@ -62,13 +76,13 @@ def hash_files(source: Path) -> dict[str, str]:
 
 def build_block(source: Path, freeze_commit: str, mode: str = "registered") -> dict[str, Any]:
     """The ``inputs["reuse"]`` block of a plan: where the files are, under which freeze they were computed, every file with its digest, and the tree digest."""
-    files = hash_files(source)
+    files = hash_files(source, mode)
     return {"source_run_dir": str(source), "freeze_commit": freeze_commit, "mode": mode, "stages": list(SOURCE_STAGES), "file_count": len(files), "tree_sha256": tree_sha256(files), "files": files}
 
 
 def verify_block(block: dict[str, Any]) -> None:
     """The earlier attempt's files are, byte for byte, the files the plan recorded (and no file was added to the hashed set). A difference is PAUSED — IDENTITY."""
-    now = hash_files(Path(block["source_run_dir"]))
+    now = hash_files(Path(block["source_run_dir"]), block.get("mode", "registered"))
     want: dict[str, str] = block["files"]
     differ = sorted(k for k in set(now) | set(want) if now.get(k) != want.get(k))
     if differ or tree_sha256(now) != block["tree_sha256"] or len(now) != block["file_count"]:
@@ -91,6 +105,15 @@ def link_and_record(block: dict[str, Any], run_dir: Path, mode: str) -> dict[str
         if dest.exists() or dest.is_symlink():
             raise StageRefused(f"refused: {dest} exists and is not the link to the reused {top}")
         os.symlink(source / top, dest)
+    if mode == "rehearsal":  # the sealed stage records are COPIED (bytes), so that nothing the later stages write reaches the source; permissions as every sealed file
+        sealed = run_dir / "sealed"
+        sealed.mkdir(exist_ok=True)
+        os.chmod(sealed, 0o700)
+        for src in sealed_files(source):
+            (sealed / src.name).write_bytes(src.read_bytes())
+            os.chmod(sealed / src.name, 0o600)
+    if mode == "rehearsal" and (source / "panel_ledger_candidate.json").is_file():
+        (run_dir / "panel_ledger_candidate.json").write_bytes((source / "panel_ledger_candidate.json").read_bytes())  # copied: the later stages never reach the source
     (run_dir / "stages").mkdir(exist_ok=True)
     for s in RECORDED:
         original = json.loads((source / "stages" / f"{s}.complete.json").read_text())

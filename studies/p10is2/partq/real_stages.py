@@ -389,7 +389,8 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
         require_prerequisites(run_dir, stage, order)
     total = float(plan.total_cap_seconds()) if plan is not None else 0.0
     before = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0)) if plan is not None else 0.0  # everything charged before the freeze counts against the total cap
-    led = core.Ledger(run_dir / "charged_ledger.json", "Q", max(1.0, total - before) if total > 0 else 1e12)  # in the run directory, never in the tree
+    led = core.Ledger(run_dir / "charged_ledger.json", "Q", total if total > 0 else 1e12)  # in the run directory, never in the tree
+    left_in_total = (total - before - led.charged()) if total > 0 else led.remaining()  # the total cap less EVERYTHING charged: before the freeze (attempts, rehearsals) and in this run directory
     if mode in ("registered", "rehearsal"):
         require_one_mode(run_dir, mode, led)
         settle_killed(run_dir, stage, mode, led)  # the time of a killed earlier process of this stage, charged now (a lower bound)
@@ -399,7 +400,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
         own = float(plan.data["stage_caps"].get(f"{stage}_hours", 0.0)) * 3600.0
         stage_cap = own if own > 0 else 1e12
         stage_cap_total = own if own > 0 else None
-        cap = min(stage_cap - led.charged(stage), led.remaining())
+        cap = min(stage_cap - led.charged(stage), left_in_total)
         if cap <= 0:
             reason = "the cumulative hour cap is spent. " + CAP_SENTENCE
             man = runner.write_manifest(run_dir, "Q", stage, mode, {stage: {"status": runner.KILLED_CAP, "seconds": 0.0, "reason": reason, "peak_rss_bytes": 0}}, 0.0, identity={}, started=core.utc_stamp(), caps={"stage_seconds_left": cap})

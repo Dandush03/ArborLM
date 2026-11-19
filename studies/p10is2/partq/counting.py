@@ -27,7 +27,7 @@ from arborlm.io import file_sha256, read_json, write_json
 
 from ..common import core, gates, procs
 from ..common import plan as planmod
-from . import pipeline, real_stages, rehearsal
+from . import pipeline, real_stages, rehearsal, reuse
 from . import plan as qplan
 
 FORCED_PAUSE_AFTER = 4
@@ -207,4 +207,78 @@ def run_measuring_rehearsal(repo: Path, run_dir: Path, inputs_file: Path, *, lau
     print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "batches", "generation_items_per_second", "stages") if k in rec}), default=str))
     if not complete_all:
         raise core.StageRefused(f"refused: the measuring rehearsal is incomplete: {problems or 'a stage did not complete'}")
+    return rec
+
+
+def run_reuse_counting_rehearsal(repo: Path, run_dir: Path, reuse_source: Path, *, launch: Launch = subprocess_launch, clock: Callable[[], float] = time.monotonic, charged_ledgers: Sequence[str] = ()) -> dict[str, Any]:
+    """The counting rehearsal of attempt 3 (ADR-0025 addendum section 4): the stages of the plan that reuses completed stages (``reuse.ORDER``: reuse, regeneration, outputs, analysis), through the same entry point and
+    a fresh process per stage, on REHEARSAL draws, where the stages reused are those of an earlier REHEARSAL run (``reuse_source``, a rehearsal run directory whose inputs .. generation stages completed): a rehearsal reuse
+    of a rehearsal run. The candidate plan's reuse block (attempt 2's registered directory) is replaced, in a copy of the plan kept in this run directory, by the block of ``reuse_source`` (mode rehearsal); nothing
+    else of the plan changes. ONE forced PAUSED — IDENTITY, on a REUSED FILE: the ``reuse`` stage launched with a copy of the plan in which one reused file's recorded hash is altered must exit 75 and write no
+    completion record; the real plan copy (the restore) then runs. The documented rehearsal overrides are those of the other rehearsals."""
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    gates.apply_platform_settings(cfg)
+    core.require_ignored_run_dir(repo, run_dir)
+    plan_file = repo / core.PLAN_Q
+    base = planmod.Plan.load(plan_file, "Q")
+    block0 = (base.data.get("inputs") or {}).get(reuse.KEY)
+    if not block0:
+        raise core.StageRefused("refused: the candidate plan reuses no completed stages: use the counting rehearsal of a first attempt")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    data = json.loads(json.dumps(base.data))
+    data["inputs"][reuse.KEY] = reuse.build_block(reuse_source, block0["freeze_commit"], "rehearsal")
+    rplan_file = run_dir / "reuse_rehearsal_plan.json"
+    write_json(rplan_file, data)
+    plan = planmod.Plan.load(rplan_file, "Q")
+    altered = json.loads(json.dumps(data))
+    victim = sorted(altered["inputs"][reuse.KEY]["files"])[0]
+    altered["inputs"][reuse.KEY]["files"][victim] = "0" * 64
+    alt_file = run_dir / "identity_probe/reuse_rehearsal_plan_altered.json"
+    alt_file.parent.mkdir(parents=True, exist_ok=True)
+    write_json(alt_file, altered)
+    logs = run_dir / "logs"
+    t0 = clock()
+    problems: list[str] = []
+    timings: dict[str, float] = {}
+    forced = {"identity_on_reused_file": False}
+
+    def go(name: str, argv: Sequence[str], expect: int, stage: str) -> bool:
+        cap = plan.cap_seconds(stage)
+        t = clock()
+        rc = launch(argv, logs / f"{name}.log", (cap if cap > 0 else 3600.0) + 900.0)
+        timings[name] = clock() - t
+        if rc != expect:
+            problems.append(f"{name}: exit {rc}, expected {expect}")
+        return rc == expect
+
+    base_extra = ("--plan-file", str(rplan_file))
+    ok = go("reuse-identity-altered-file", stage_argv(repo, "reuse", run_dir, "--plan-file", str(alt_file)), planmod.IDENTITY_EXIT, "reuse")
+    forced["identity_on_reused_file"] = ok and not real_stages.completion_path(run_dir, "reuse").exists()
+    for stage in reuse.ORDER:
+        if not ok:
+            break
+        ok = go(stage, stage_argv(repo, stage, run_dir, *base_extra), 0, stage)
+    led = core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12)
+    ctx = real_stages._light_ctx(cfg, run_dir, "rehearsal")
+    pipeline.write_sealed_summary(ctx)
+    summary = pipeline.summary_for_display(ctx)
+
+    def completion(s: str) -> dict[str, Any]:
+        f = real_stages.completion_path(run_dir, s)
+        return json.loads(f.read_text()) if f.is_file() else {}
+
+    stages = {s: {"status": "COMPLETE" if completion(s).get("status") == "COMPLETE" else "NOT RUN", "seconds": led.charged(s), "cap_seconds": plan.cap_seconds(s) if plan.cap_seconds(s) > 0 else None, "within_cap": (led.charged(s) <= plan.cap_seconds(s) and completion(s).get("within_cap") is not False) if plan.cap_seconds(s) > 0 else None} for s in reuse.ORDER}
+    r = resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss
+    peak = float(r) / (1024 * 1024) if os.uname().sysname == "Darwin" else float(r) / 1024
+    complete = all(v["status"] == "COMPLETE" for v in stages.values()) and all(forced.values()) and not problems
+    rec = {
+        **core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "counting", "attempt": 3, "seal_note": rehearsal.SEAL_NOTE, "status": "COMPLETE" if complete else "INCOMPLETE", "plan_file_sha256": file_sha256(plan_file), "rehearsal_plan_sha256": file_sha256(rplan_file),
+        "caps_provisional": bool(base.data.get("caps_provisional", True)), "stages": stages, "forced": forced, "problems": problems, "reuse_source": str(reuse_source), "entry_point": "partq_registered.sh <stage> <run-dir> - --rehearsal --plan-file <reuse plan>, one fresh process per stage",
+        "timings": {"total_seconds": clock() - t0, "process_seconds": timings}, "memory": {"peak_rss_mib_of_any_stage_process": peak}, "counts": summary["counts"], "platform": gates.platform_record(), "load": {"end": rehearsal.load_average()},
+        "other_studies_alive": procs.other_studies_alive(), "charged_seconds": led.charged(), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "Q", 1e12).charged() for x in charged_ledgers}},
+    }  # fmt: skip
+    core.write_record(run_dir / "rehearsal_counting.json", rec, overwrite=True)
+    print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "stages", "forced") if k in rec}), default=str))
+    if not complete:
+        raise core.StageRefused(f"refused: the attempt-3 counting rehearsal is incomplete: {problems or 'a stage did not complete'}")
     return rec

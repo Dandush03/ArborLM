@@ -113,6 +113,15 @@ def cmd_ledger(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_prompt_check(args: argparse.Namespace) -> int:
+    """The pre-freeze check of the R-gloss-icl prompt texts (``promptcheck``): no teacher output, nothing sealed. Exit 0 if every test passes, 2 if any mismatch is found (the record is written either way)."""
+    from . import promptcheck
+
+    res = promptcheck.cmd_prompt_check(repo_of(args), Path(args.out))
+    print(json.dumps({k: res[k] for k in ("required_ok", "items_checked", "mismatches", "last_newline", "tests", "gloss_sweep", "covers", "left_for_outputs")}, default=str))
+    return 0 if res["required_ok"] else EXIT_REFUSED
+
+
 def cmd_package_manifest(args: argparse.Namespace) -> int:
     """Produces the installed-package manifest of the durable copy (R7, A7). With ``--merge-into`` the manifest is added under ``package_manifest`` to an inputs file (for ``candidate-plan --inputs``); otherwise it is
     written to ``--out``. Reads the copy and the lock environment's site-packages; writes nothing into either."""
@@ -152,6 +161,9 @@ def build_parser() -> argparse.ArgumentParser:
     lg.add_argument("--mode", choices=("registered", "rehearsal"), default="registered")
     lg.add_argument("--run-dir")
     lg.add_argument("--repo")
+    pc = sub.add_parser("prompt-check")
+    pc.add_argument("--out", required=True)
+    pc.add_argument("--repo")
     pm = sub.add_parser("package-manifest")
     pm.add_argument("--out")
     pm.add_argument("--merge-into")
@@ -161,6 +173,7 @@ def build_parser() -> argparse.ArgumentParser:
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
     h.add_argument("--repo")
+    h.add_argument("--reuse-source", help="the counting rehearsal of attempt 3: a REHEARSAL run directory whose inputs .. generation stages completed, reused in rehearsal mode")
     h.add_argument("--inputs", help="the measuring rehearsal: the inputs file (inputs-file) its stages verify at start, like a registered stage")
     h.add_argument("--charged-ledger", action="append", default=[], help="an earlier Part Q charged_ledger.json (absolute path) whose charge joins the pre-freeze charge; repeatable")
     return ap
@@ -177,6 +190,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return cmd_work(args)
         if args.command == "ledger":
             return cmd_ledger(args)
+        if args.command == "prompt-check":
+            return cmd_prompt_check(args)
         if args.command == "package-manifest":
             if bool(args.out) == bool(args.merge_into):
                 raise StageRefused("refused: give exactly one of --out and --merge-into")

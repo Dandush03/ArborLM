@@ -110,3 +110,63 @@ def test_the_analysis_derives_the_engineering_failure_label_after_a_recorded_fai
     assert out.returncode == 0, out.stderr[-800:]
     assert "ENGINEERING-FAILURE" in json.loads((run / "qualification.json").read_text())["label"]
     assert os.path.exists(run / "stages/analysis.complete.json")
+
+
+def test_the_prompt_check_runs_through_its_launch_script_without_writing_anything_else(tmp_path: Path) -> None:
+    r, _inputs = synthetic_base(tmp_path)
+    env = fake_uv(tmp_path)
+    out_path = tmp_path / "prompt_check.json"
+    status_before = git(r, "status", "--porcelain")
+    out = subprocess.run(["sh", str(r / "studies/p10is2/launch/partq_prompt_check.sh"), str(out_path)], cwd=r, env=env, capture_output=True, text=True, timeout=900, check=False)  # noqa: S603, S607
+    assert out.returncode == 0, out.stderr[-1200:]
+    rec = json.loads(out_path.read_text())
+    assert rec["required_ok"] is True and rec["items_checked"] > 0 and rec["last_newline"]["rule"] == "own-segment" and rec["left_for_outputs"]
+    assert not (tmp_path / "_prompt_check_unused").exists() and git(r, "status", "--porcelain") == status_before  # nothing in the repository was written
+    again = subprocess.run(["sh", str(r / "studies/p10is2/launch/partq_prompt_check.sh"), str(out_path)], cwd=r, env=env, capture_output=True, text=True, timeout=900, check=False)  # noqa: S603, S607
+    assert again.returncode == 2  # written once
+
+
+def test_the_attempt3_counting_rehearsal_reuses_a_rehearsal_run_and_stops_on_an_altered_reused_file(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from studies.p10is2.partq import counting
+
+    r, inputs = synthetic_base(tmp_path)
+    for k, v in fake_uv(tmp_path).items():
+        monkeypatch.setenv(k, v)
+    set_caps(r, "Q")
+    cfg = core.load_config("Q", r / core.CONFIG_Q)
+    src = r / "runs" / "rehearsal_source"
+    qplan.write_candidate(r, qplan.build_candidate(r, r / "runs" / "registered", cfg, inputs=inputs, walk=FAKE_WALK))
+    counting.run_counting_rehearsal(r, src)  # a first-attempt counting rehearsal: its six stages are what attempt 3's rehearsal reuses
+    block = reuse.build_block(src, "a" * 40, "rehearsal")
+    assert any(k.startswith("sealed/") for k in block["files"])  # a rehearsal's sealed stage records are carried as bytes
+    qplan.write_candidate(r, qplan.build_candidate(r, r / "runs" / "registered3", cfg, inputs={**inputs, reuse.KEY: block}, walk=FAKE_WALK, charge_before_freeze={"seconds": 5.0, "ledgers": {}}), supersede=True)
+    before = reuse.hash_files(src, "rehearsal")
+    rec = counting.run_reuse_counting_rehearsal(r, r / "runs" / "rehearsal3", src)
+    assert rec["status"] == "COMPLETE" and rec["forced"] == {"identity_on_reused_file": True} and set(rec["stages"]) == set(reuse.ORDER)
+    assert all(v["status"] == "COMPLETE" and v["within_cap"] is not False for v in rec["stages"].values())
+    logs = sorted(p.name for p in (r / "runs/rehearsal3/logs").iterdir())
+    assert "reuse-identity-altered-file.log" in logs and "outputs.log" in logs and "regeneration.log" in logs
+    assert reuse.hash_files(src, "rehearsal") == before  # the source rehearsal directory was never written
+    assert (r / "runs/rehearsal3/sealed/rehearsal_values.json").is_file()
+
+
+def test_the_registered_cap_check_counts_the_charge_before_the_freeze(tmp_path: Path) -> None:
+    import re
+
+    from test_p10is2_reusecheck import fake_attempt
+
+    r, inputs = synthetic_base(tmp_path)
+    env = fake_uv(tmp_path)
+    cfg_path = r / core.CONFIG_Q
+    cfg_path.write_text(re.sub(r"(?m)^total_hours = [0-9.]+", "total_hours = 1.0", cfg_path.read_text()))  # a total cap of 3,600 s
+    src = fake_attempt(tmp_path)
+    block = reuse.build_block(src, "c" * 40)
+    run = r / "runs" / "capcheck"
+    commit = freeze_plan(r, run, {**inputs, reuse.KEY: block}, charge_before_freeze={"seconds": 3600.0, "ledgers": {"/x/a.json": 3600.0}})  # everything charged before the freeze already equals the total cap
+    out = launch_in(r, env, "reuse", run, commit)
+    assert out.returncode == 4 and "cumulative hour cap is spent" in out.stderr and "Caps are frozen" in out.stderr, out.stderr[-600:]  # the OLD check (the total less this run's charges only) would have allowed 3,600 s
+    assert not real_stages.completion_path(run, "reuse").exists()
+    run_b = r / "runs" / "capcheck_b"
+    commit_b = freeze_plan(r, run_b, {**inputs, reuse.KEY: block}, charge_before_freeze={"seconds": 100.0, "ledgers": {"/x/a.json": 100.0}})
+    ok = launch_in(r, env, "reuse", run_b, commit_b)
+    assert ok.returncode == 0, ok.stderr[-600:]  # 3,500 s are left: the stage runs

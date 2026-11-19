@@ -56,11 +56,11 @@ def _show(repo: Path, commit: str, rel: str) -> str | None:
     return r.stdout.decode("utf-8") if r.returncode == 0 else None
 
 
-def definitions(source: str) -> tuple[dict[str, str], set[str], list[str]]:
-    """(definition name -> dump of its syntax tree, the set of import statements as dumps, other module-level statements as dumps) of a Python module; the docstring is ignored."""
+def definitions(source: str) -> tuple[dict[str, str], dict[tuple[str, str | None, int], frozenset[tuple[str, str | None]]], list[str]]:
+    """(definition name -> dump of its syntax tree, imports as {(kind, module, level): the names imported}, other module-level statements as dumps) of a Python module; the docstring is ignored."""
     tree = ast.parse(source)
     defs: dict[str, str] = {}
-    imports: set[str] = set()
+    imports: dict[tuple[str, str | None, int], frozenset[tuple[str, str | None]]] = {}
     other: list[str] = []
     for i, node in enumerate(tree.body):
         if isinstance(node, ast.Expr) and isinstance(getattr(node, "value", None), ast.Constant) and i == 0:
@@ -72,7 +72,8 @@ def definitions(source: str) -> tuple[dict[str, str], set[str], list[str]]:
         elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
             defs[node.target.id] = ast.dump(node)
         elif isinstance(node, ast.Import | ast.ImportFrom):
-            imports.add(ast.dump(node))
+            key = ("from", node.module, node.level) if isinstance(node, ast.ImportFrom) else ("import", None, 0)
+            imports[key] = imports.get(key, frozenset()) | frozenset((a.name, a.asname) for a in node.names)
         else:
             other.append(ast.dump(node))
     return defs, imports, other
@@ -88,7 +89,7 @@ def python_diff(path: str, old: str, new: str) -> tuple[list[str], list[str]]:
     changed = sorted(n for n in set(od) | set(nd) if n in od and (n not in nd or od[n] != nd[n]))  # a new definition (not in od) is an addition
     allowed = ALLOWED_DEFINITIONS.get(path, set())
     refusals += [f"{path}: definition {n!r} changed or was removed and is not an allowed change" for n in changed if n not in allowed]
-    removed_imports = oi - ni
+    removed_imports = [k for k, names in oi.items() if not names <= ni.get(k, frozenset())]  # a name added to an import is an addition; a name or a whole import removed is not
     if removed_imports:
         refusals.append(f"{path}: {len(removed_imports)} import statement(s) changed or removed")
     if oo != no:
