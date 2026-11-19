@@ -550,7 +550,7 @@ def write_events_numbered(events_dir: Path, numbered: Sequence[tuple[int, str]],
     return out
 
 
-RULING_COSMETIC_FILES = frozenset({"studies/p10is0/sealed.py", "studies/p10is0/stages.py", "studies/p10is0/drivers.py"})
+RULING_COSMETIC_FILES = frozenset({"studies/p10is0/sealed.py", "studies/p10is0/stages.py", "studies/p10is0/drivers.py", "studies/p10is0/plan.py"})  # plan.py: frozen_paths lists the rebind record as a frozen input (F2 b)
 REBIND_RECORD = core.FREEZE_DIR / "durations_identity_rebind.json"
 PIN_RE = re.compile(r"^PIN (stage_r_commit|new_commit|ruler|file) (.+)$")
 
@@ -581,13 +581,13 @@ def rebind_pins(repo: Path, stage_r_commit: str, new_commit: str, ruler: str) ->
 
 
 def cmd_rebind_identity(ctx: Ctx, ruling_file: Path) -> dict[str, Any]:
-    """A code change after ``durations.json`` exists is an ENGINEERING STOP for the human lead. This command applies his RULING that a change confined to output validation and the command line does not void Stage R, and only on a ruling
+    """A code change after ``durations.json`` exists is an ENGINEERING STOP for the human lead. This command applies his RULING that a change confined to output validation, the command line and the frozen-input list does not void Stage R, and only on a ruling
     that pins exactly what changed (F2):
 
     * the ruling file is COMMITTED under ``results/`` and the tree has no uncommitted change;
     * it carries the pin block of ``rebind_pins``: Stage R's commit, the new commit (an ancestor of HEAD), the old and new SHA-256 of every changed file and the ruler's name;
     * every pin is verified: the set of pinned files equals the set that differs from ``durations.json``'s recorded identity, each old hash equals that identity and the file at Stage R's commit, each new hash equals the current file and
-      the file at the new commit, and every changed file is one of ``sealed.py``, ``stages.py``, ``drivers.py``;
+      the file at the new commit, and every changed file is one of ``sealed.py``, ``stages.py``, ``drivers.py``, ``plan.py``;
     * once: a second rebind, or one after the candidate plan exists, is refused.
 
     It rewrites only ``code_identity`` in ``durations.json`` and writes ``freeze/durations_identity_rebind.json`` (a frozen input: the freeze and the registered stages check it)."""
