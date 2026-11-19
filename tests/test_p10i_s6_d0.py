@@ -95,3 +95,18 @@ def test_d0_refuses_a_ledger_key_that_exists_a_failed_reproduction_and_a_too_sma
             d0.prepare(iter(tiny), wt2_train, wt2_val, ledger, d / "o2", cfg)
         with pytest.raises(core.EngineeringStop, match="exhausted|ran out"):
             d0.prepare(iter(rows103), wt2_train, wt2_val[:3], ledger, d / "o3", cfg)  # the panel walk runs out: engineering stop before Decision 2
+
+
+def test_ledger_byte_ranges_in_the_concatenated_rows_are_converted_to_row_spans() -> None:
+    """Audit R5(c): the shared ledger may hold byte offsets in the concatenated validation rows; ``walk_panels`` overlaps (row, start, end) spans, so each range is split over the rows it touches."""
+    lengths = [100, 50, 200]
+    led = {"ledger": {"panels": {"a": [[0, 10, 75], {"start": 90, "end": 170}, [160, 300]]}, "excluded_windows": [{"byte_start": 0, "byte_end": 5}]}}
+    got = d0.spans_in_ledger(led, lengths)
+    assert got == [(0, 10, 75), (0, 90, 100), (1, 0, 50), (2, 0, 20), (2, 10, 150), (0, 0, 5)]
+    with pytest.raises(core.EngineeringStop, match="row lengths"):
+        d0.spans_in_ledger(led)
+    with pytest.raises(core.EngineeringStop, match="unknown shape"):
+        d0.spans_in_ledger({"ledger": {"panels": {"a": [[1, 2, 3, 4]]}}}, lengths)
+    from studies.p10i_s3.data import overlaps
+
+    assert any(overlaps((1, 20, 85), s) for s in got) and not any(overlaps((2, 150, 215), s) for s in got)

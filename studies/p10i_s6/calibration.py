@@ -61,7 +61,7 @@ def extension_decision(curves: Curves, durations: Sequence[int], cfg: Mapping[st
 
 
 def rate_table(curves_by_arm: Mapping[str, Curves], cfg: Mapping[str, Any], k_max: int) -> dict[str, Any]:
-    """r(arm, k) for k = -1..k_max; ``interior[arm][k]`` is True if the minimiser is neither the lowest nor the highest rate run (always True in a table that reached the freeze). Raises ``EngineeringStop`` if the edge persists."""
+    """r(arm, k) for k = -1..k_max; ``interior[arm][k]`` is True if the minimiser is neither the lowest nor the highest rate run. RAISES ``EngineeringStop`` if the edge persists at any rung (so a table that exists has every flag True; the freeze re-checks)."""
     tol = float(cfg["rates"]["tie_tolerance"])
     rates: dict[str, dict[str, float]] = {}
     interior: dict[str, dict[str, bool]] = {}
@@ -72,6 +72,8 @@ def rate_table(curves_by_arm: Mapping[str, Curves], cfg: Mapping[str, Any], k_ma
             sel = selection(curves, core.rung_updates(cfg, k), tol)
             rates[arm][str(k)] = float(sel["selected"])
             interior[arm][str(k)] = sel["edge"] is None
+            if sel["edge"] is not None:  # ruling 7 (audit R2): a minimiser still at an edge after the registered extensions is an ENGINEERING STOP raised here
+                raise EngineeringStop(f"ENGINEERING STOP — CALIBRATION NOT INTERIOR: {arm} at rung {k} ({core.rung_updates(cfg, k)} updates) has its minimiser at the {sel['edge']}est rate run after the extensions; the grid is amended with a recorded approval and the calibration re-run on the same calibration seeds, before Decision 2")
     return {"rates": rates, "interior": interior}
 
 

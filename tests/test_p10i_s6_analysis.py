@@ -130,7 +130,7 @@ def test_delta_run_condition_blocks_convergence() -> None:
 # ------------------------------------------------------------------------------------------------ rows 1 and 2 and every cause
 @pytest.mark.parametrize(
     "kw,cause_id",
-    [({"base_missing": frozenset({2})}, 1), ({"base_bad_replay": frozenset({1})}, 1), ({"bad_disabled": frozenset({(FLAT, 2, 5)})}, 2), ({"bad_replay": frozenset({(DENSE, 0, 7)})}, 2), ({"failed": frozenset({(DENSE, 3, 4)})}, 3)],
+    [({"base_nonfinite": frozenset({2})}, 1), ({"nonfinite_replay": frozenset({(DENSE, 1, 3)})}, 2), ({"base_bad_replay": frozenset({1})}, 1), ({"bad_disabled": frozenset({(FLAT, 2, 5)})}, 2), ({"bad_replay": frozenset({(DENSE, 0, 7)})}, 2), ({"failed": frozenset({(DENSE, 3, 4)})}, 3)],
 )
 def test_row1_causes(kw: dict[str, Any], cause_id: int) -> None:
     res = run(pair(SMALL, [0.02] * 5, **kw))
@@ -177,8 +177,10 @@ def test_two_rungs_swapped_changes_the_result() -> None:
             b = core.nll_key(FLAT, synthetic.RATES_FLAT[2], c, core.rung_updates(CFG, 2), read)
             swapped[a], swapped[b] = reg[b], reg[a]
     other = analysis.analyse(swapped, synthetic.rate_table(K), CFG, k_max=K, bitwise=True)
-    assert good["line_p"]["label"] != other["line_p"]["label"] or good["per_rung"] != other["per_rung"]
-    assert good["trend"]["tag"] == "LEAD LOST BY RUNG 2"
+    assert good["line_p"]["label"].startswith("ORDERING NOT STABLE AFTER CONVERGENCE (M-AHEAD, M-AHEAD, LEVEL, LEVEL, LEVEL)") and good["trend"]["tag"] == "LEAD LOST BY RUNG 2"
+    # worked by hand: the memory's rung-0 value becomes its rung-2 value (lead 0) and vice versa, so the classes become LEVEL, M-AHEAD, M-AHEAD, LEVEL, LEVEL
+    assert [other["per_rung"][str(k)]["class"] for k in range(5)] == ["LEVEL", "M-AHEAD", "M-AHEAD", "LEVEL", "LEVEL"]
+    assert other["line_p"]["label"] != good["line_p"]["label"] and other["trend"]["tag"] != good["trend"]["tag"]  # the known-answer assertions above FAIL on the swapped records
 
 
 # ------------------------------------------------------------------------------------------------ D[FLAT], harm, collapsed
@@ -259,7 +261,7 @@ def test_every_comparison_is_as_written_at_the_boundary() -> None:
     th = replace(TH, effect=0.125, dense_floor=0.125, epsilon=0.125)  # exact binary fractions: the boundary is reached exactly
     q = [0.125] * 27
     assert labels.rung_class(q, q, th) == "M-AHEAD"  # mean >= 0.125
-    assert labels.rung_class([x - 2**-40 for x in q], q, th) == "UNDECIDED" or labels.rung_class([x - 2**-40 for x in q], q, th) != "M-AHEAD"
+    assert labels.rung_class([x - 2**-40 for x in q], q, th) == "LEVEL"  # just below the margin on both clauses: not M-AHEAD, and inside the level band
     assert labels.rung_class([-0.125] * 27, [-0.125] * 27, th) == "D-AHEAD"  # mean <= -0.125
     assert labels.rung_class([0.0] * 27, [0.0] * 27, th) == "LEVEL"
     assert labels.rung_class([0.125 - 2**-40] * 27, [0.125] * 27, th) == "LEVEL"  # just below the margin

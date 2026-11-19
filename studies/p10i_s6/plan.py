@@ -118,7 +118,8 @@ def computing_hashes(repo: Path) -> dict[str, str]:
 
 
 def adr_provenance(repo: Path) -> dict[str, str]:
-    return {"path": core.SPEC, "sha256": file_sha256(repo / core.SPEC), "note": "provenance only: the ADR text is not a frozen input and no check compares this hash"}
+    add = repo / "docs/decisions/ADR-0031-addendum-implementation-rulings.md"
+    return {"path": core.SPEC, "sha256": file_sha256(repo / core.SPEC), "addendum_path": str(add.relative_to(repo)), "addendum_sha256": file_sha256(add) if add.is_file() else None, "note": "provenance only: the ADR text is not a frozen input and no check compares this hash"}
 
 
 class Plan:

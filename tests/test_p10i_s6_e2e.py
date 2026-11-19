@@ -31,6 +31,10 @@ def git(repo: Path, *a: str) -> str:
     return subprocess.run(["git", "-C", str(repo), "-c", "commit.gpgsign=false", "-c", "user.email=t@example.invalid", "-c", "user.name=t", *a], capture_output=True, text=True, check=True).stdout.strip()  # noqa: S603, S607
 
 
+def tail(o: subprocess.CompletedProcess[str]) -> str:
+    return (o.stdout[-1200:] + "\n" + "\n".join(x for x in o.stderr.splitlines() if "NumPy" not in x and "_conversion_method" not in x)[-1500:])
+
+
 class Chain:
     def __init__(self, root: Path) -> None:
         self.root = root
@@ -58,6 +62,7 @@ class Chain:
             shutil.copy(REAL / f, r / f)
         (r / "docs/decisions").mkdir(parents=True)
         shutil.copy(REAL / core.SPEC, r / core.SPEC)
+        shutil.copy(REAL / "docs/decisions/ADR-0031-addendum-implementation-rulings.md", r / "docs/decisions/ADR-0031-addendum-implementation-rulings.md")
         (r / "docs/reviews").mkdir(parents=True)
         stub = r / "docs/reviews/checker_stub.py"
         rows = "".join(f'    ("P10-I-S6 ADR-0031", "row{i}", {lo}, {hi}),\n' for i, (lo, hi) in enumerate([(320001, 329299), (330701, 330799), (952001, 952999)]))
@@ -67,7 +72,8 @@ class Chain:
         cfg_path = r / core.CONFIG
         t = cfg_path.read_text(encoding="utf-8")
         for a, b in (
-            ("base_updates = 16384", "base_updates = 2"), ("below_updates = 8192", "below_updates = 1"), ("workers = 6", "workers = 4"), ("r2_updates = 50", "r2_updates = 6"), ("dry_base_updates = 8", "dry_base_updates = 2"), ("dry_below_updates = 4", "dry_below_updates = 1"),
+            ("base_updates = 16384", "base_updates = 2"), ("below_updates = 8192", "below_updates = 1"), ("workers = 6", "workers = 4"), # wide grid: tiny runs on learnable bytes need large rates for an interior minimiser
+            ("grid = [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]", "grid = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]"), ("r2_updates = 50", "r2_updates = 6"), ("dry_base_updates = 8", "dry_base_updates = 2"), ("dry_below_updates = 4", "dry_below_updates = 1"),
             ('checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r4.py"', 'checker = "docs/reviews/checker_stub.py"'),
             ('checker_sha256 = "7bc791e0f24528020b9c3f569751f6528f30444a761b6bae514efad96acd81e8"', f'checker_sha256 = "{hashlib.sha256(stub.read_bytes()).hexdigest()}"'),
             ('addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R4.md"', 'addendum = "docs/reviews/addendum_stub.md"'),
@@ -130,17 +136,17 @@ class Chain:
         syn.write_text(json.dumps({"cfg_override": {}}))
         common = ["--run-dir", str(self.pub), "--sealed-dir", str(self.sealed), "--synthetic-json", str(syn)]
         self.log["r1"] = self.script("rehearse.sh", "r1", *common)
-        assert self.log["r1"].returncode == 0, self.log["r1"].stdout + self.log["r1"].stderr
+        assert self.log["r1"].returncode == 0, tail(self.log["r1"])
         self.log["rate_table_cmd"] = self.stages("write-rate-table", "--public", str(self.pub / "rehearsal_public.json"))
         assert self.log["rate_table_cmd"].returncode == 0, self.log["rate_table_cmd"].stderr
         self.log["r2"] = self.script("rehearse.sh", "r2", *common, "--k-max", "2")
-        assert self.log["r2"].returncode == 0, self.log["r2"].stdout + self.log["r2"].stderr
+        assert self.log["r2"].returncode == 0, tail(self.log["r2"])
         self.log["cand"] = self.stages("candidate-plan", "--run-dir", str(self.pub), "--k-max", "2", "--synthetic", "--r2", str(self.pub / "r2" / "r2_record.json"))
-        assert self.log["cand"].returncode == 0, self.log["cand"].stdout + self.log["cand"].stderr
+        assert self.log["cand"].returncode == 0, tail(self.log["cand"])
         git(self.repo, "add", "-A")
         git(self.repo, "commit", "-q", "-m", "candidate plan and rate table")
         self.log["r3"] = self.script("rehearse.sh", "r3", *common)
-        assert self.log["r3"].returncode == 0, self.log["r3"].stdout + self.log["r3"].stderr
+        assert self.log["r3"].returncode == 0, tail(self.log["r3"])
 
     def freeze(self, rehearsal: Path) -> subprocess.CompletedProcess[str]:
         return self.stages("freeze", "--rehearsal", str(rehearsal))
@@ -205,6 +211,7 @@ def test_freeze_refusals_then_acceptance_then_registered_launch(chain: Chain) ->
         "other_plan": (with_changes("other", candidate={"plan_file_sha256": "0" * 64}), "SHA-256"),
         "over_cap": (with_changes("overcap", R={"R3": {"status": "PAUSED"}}), "COMPLETE"),
         "missing_stage": (with_changes("missing", R={"R2": {"status": "NOT RUN"}}), "COMPLETE"),
+        "not_interior": (with_changes("edge", rate_table={**good["rate_table"], "interior": {**good["rate_table"]["interior"], "M-FLAT": {**good["rate_table"]["interior"]["M-FLAT"], "1": False}}}), "not interior"),
     }
     for name, (path, word) in cases.items():
         o = chain.freeze(path)

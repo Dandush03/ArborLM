@@ -42,12 +42,46 @@ def validation_candidates(train_rows: Sequence[str], val_rows: Sequence[str]) ->
     return val, [span_of(c.row, c.offset) for c in val], counts
 
 
-def spans_in_ledger(ledger: Mapping[str, Any]) -> list[Span]:
+def _convert(entry: Any, starts: Sequence[int], lengths: Sequence[int]) -> list[Span]:
+    """One ledger entry as (row, start, end) spans in bytes of the source row. A 3-sequence is already a span; a pair or a mapping with ``start``/``end`` (or ``byte_start``/``byte_end``) is a byte range in the CONCATENATED validation rows (audit R5(c)) and is
+    split over the rows it overlaps (rows concatenated without separators: an assumption stated in the departures)."""
+    import bisect
+
+    if isinstance(entry, Mapping):
+        lo, hi = entry.get("byte_start", entry.get("start")), entry.get("byte_end", entry.get("end"))
+    elif len(entry) == 3:
+        return [(int(entry[0]), int(entry[1]), int(entry[2]))]
+    elif len(entry) == 2:
+        lo, hi = entry
+    else:
+        raise EngineeringStop(f"ENGINEERING STOP — a panel-ledger entry has an unknown shape: {entry!r}")
+    if lo is None or hi is None or not starts:
+        raise EngineeringStop("ENGINEERING STOP — a panel-ledger byte range needs the validation row lengths")
+    lo, hi = int(lo), int(hi)
+    out: list[Span] = []
+    row = max(0, bisect.bisect_right(starts, lo) - 1)
+    while row < len(starts) and starts[row] < hi:
+        a_, b_ = max(lo, starts[row]), min(hi, starts[row] + lengths[row])
+        if a_ < b_:
+            out.append((row, a_ - starts[row], b_ - starts[row]))
+        row += 1
+    return out
+
+
+def spans_in_ledger(ledger: Mapping[str, Any], row_lengths: Sequence[int] = ()) -> list[Span]:
+    """Every span the shared ledger excludes (panels and excluded windows), converted to (row, start, end)."""
+    starts: list[int] = []
+    t = 0
+    for n in row_lengths:
+        starts.append(t)
+        t += int(n)
     body = ledger["ledger"]
     out: list[Span] = []
     for spans in body.get("panels", {}).values():
-        out += [(int(a), int(b), int(c)) for a, b, c in spans]
-    out += [(int(a), int(b), int(c)) for a, b, c in body.get("excluded_windows", [])]
+        for e in spans:
+            out += _convert(e, starts, list(row_lengths))
+    for e in body.get("excluded_windows", []):
+        out += _convert(e, starts, list(row_lengths))
     return out
 
 
@@ -91,7 +125,7 @@ def prepare(rows103: Iterable[str], wt2_train: Sequence[str], wt2_val: Sequence[
     # panels
     val, val_spans, vcounts = validation_candidates(list(wt2_train), list(wt2_val))
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
-    excluded = [*spans_in_ledger(ledger), *extra_excluded]
+    excluded = [*spans_in_ledger(ledger, [len(r.encode('utf-8')) for r in wt2_val]), *extra_excluded]
     n = int(cfg["setting"]["panel_chunks"])
     reg_ranks, cal_ranks = walk_panels(val_spans, excluded, int(d["panel_walk_start"]), n, 2)
     panel_bytes = b"".join(val[r].payload for r in [*reg_ranks, *cal_ranks])

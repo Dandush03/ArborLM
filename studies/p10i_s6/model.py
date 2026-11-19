@@ -120,12 +120,19 @@ def restore_for_resume(root: Path, model: S3Model, rate: float, step: int, ident
     return opt
 
 
+def bytes_equal(x: Tensor, y: Tensor) -> bool:
+    """Bytewise tensor equality: same dtype and shape and the same bytes, so -0.0 and +0.0 differ and NaNs of equal bits agree (ruling 11)."""
+    if x.dtype != y.dtype or x.shape != y.shape:
+        return False
+    return bool(torch.equal(x.contiguous().reshape(-1).view(torch.uint8), y.contiguous().reshape(-1).view(torch.uint8)))
+
+
 def snapshots_equal(root_a: Path, step_a: int, root_b: Path, step_b: int) -> bool:
     """Bitwise equality of the CONTENT of two snapshots (addition tensors, optimizer state tensors, param groups, step): the resume-identity and prefix-identity comparison. File hashes are not compared: serialising a restored
     optimizer's state can differ in bytes while every tensor is bit-identical."""
     a = torch.load(snapshot_dir(root_a, step_a) / "state.pt", weights_only=True, map_location="cpu")
     b = torch.load(snapshot_dir(root_b, step_b) / "state.pt", weights_only=True, map_location="cpu")
-    if a["step"] != b["step"] or set(a["addition"]) != set(b["addition"]) or not all(torch.equal(a["addition"][k], b["addition"][k]) for k in a["addition"]):
+    if a["step"] != b["step"] or set(a["addition"]) != set(b["addition"]) or not all(bytes_equal(a["addition"][k], b["addition"][k]) for k in a["addition"]):
         return False
     oa, ob = a["optimizer"], b["optimizer"]
     if (oa is None) != (ob is None):
@@ -134,7 +141,7 @@ def snapshots_equal(root_a: Path, step_a: int, root_b: Path, step_b: int) -> boo
         return True
     if oa["param_groups"] != ob["param_groups"] or list(oa["state"]) != list(ob["state"]):
         return False
-    return all(set(oa["state"][i]) == set(ob["state"][i]) and all(torch.equal(oa["state"][i][k], ob["state"][i][k]) for k in oa["state"][i]) for i in oa["state"])
+    return all(set(oa["state"][i]) == set(ob["state"][i]) and all(bytes_equal(oa["state"][i][k], ob["state"][i][k]) for k in oa["state"][i]) for i in oa["state"])
 
 
 def train_run(model: S3Model, stream: PoolStream, rate: float, root: Path, snapshots: Sequence[int], max_update: int, identity: Mapping[str, Any], *, start: int = 0, optimizer: AdamW | None = None, pause_check: Callable[[], str | None] | None = None) -> dict[str, Any]:
@@ -246,7 +253,7 @@ def neg_ref_check(m: S3Model, panel: Tensor, seeds: Any, cfg: Mapping[str, Any],
 def planted_positive(cfg: Mapping[str, Any], seeds: Any) -> dict[str, Any]:
     """On the toy of ``studies.p10i_s3.planted`` (identity blocks, tied embedding, a planted memory): P_used and X_mean are each >= 0.5 C with C > 0, and NEG-REF gives 0. Nothing here touches natural text or a registered seed."""
     panel = toy_panel(32)
-    m = plant(FLAT)
+    m = plant(FLAT, seed=int(cfg["seeds"]["init_planted_toy"]))  # the study's allocated value (ruling 12)
     half = float(cfg["thresholds"]["half"])
     n = panel.shape[0] * 64
     e = _effects(m, panel, seeds, 0, int(cfg["controls"]["p_used_draws"]), n)

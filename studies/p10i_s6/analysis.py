@@ -27,8 +27,9 @@ def rates_of(rate_table: Mapping[str, Any], k_max: int) -> dict[str, dict[int, f
     return out
 
 
-def _eq(a: float, b: float, bitwise: bool) -> bool:
-    return a == b if bitwise else abs(a - b) <= 1e-6
+def _eq(a: float, b: float, bitwise: bool = True) -> bool:
+    """Integrity equalities compare recorded numbers EXACTLY on every platform (ruling 8, audit R3); ``bitwise`` is accepted for old callers and ignored."""
+    return a == b
 
 
 class _Reader:
@@ -84,13 +85,16 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
     base: dict[int, float | None] = {}
     base_ok = True
     for p in range(n // 3):
-        e, r = reg.get(core.base_key(p)), reg.get(core.base_key(p, core.READ_REPLAY))
+        ke, kr = core.base_key(p), core.base_key(p, core.READ_REPLAY)
+        if ke not in reg or kr not in reg:  # ruling 3: a MISSING BASE record is an engineering stop; a present non-finite one is cause 1
+            raise EngineeringStop(f"ENGINEERING STOP — INCOMPLETE REGISTRY: no BASE record {ke if ke not in reg else kr}")
+        e, r = reg[ke], reg[kr]
         if e is None or r is None:
             base_ok = False
             base[p] = None if e is None else float(e)
             continue
         base[p] = float(e)
-        if not _eq(float(e), float(r), bitwise):
+        if not _eq(float(e), float(r)):
             base_ok = False
 
     # failed cells and the values the rules read
@@ -98,14 +102,29 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
     nll: dict[str, dict[int, list[float | None]]] = {a: {} for a in core.ARMS}
     nll_prev: dict[str, dict[int, list[float | None]]] = {a: {} for a in core.ARMS}  # the enabled read at U_{k-1} of the run at r(arm, k)
     integrity_bad: list[str] = []
+    run_bad_cache: dict[tuple[str, float, int], bool] = {}
+
+    def run_bad(a: str, k: int, c: int) -> bool:
+        """A failed cell at the RUN level (ruling 10): the run failed, or its enabled NLL is non-finite at ANY snapshot a rule reads (U_j and U_{j-1} of every rung j the run serves): L is then NOT DETERMINED at every rung the run serves."""
+        key = (a, rates[a][k], c)
+        if key not in run_bad_cache:
+            bad = rd.run_failed(a, k, c)
+            for j in ks if not bad else []:
+                if rates[a][j] != rates[a][k]:
+                    continue
+                if rd.read(a, j, c, rd.u(j), core.READ_ENABLED) is None or (j >= 0 and rd.read(a, j, c, rd.u(j - 1), core.READ_ENABLED) is None):
+                    bad = True
+                    break
+            run_bad_cache[key] = bad
+        return run_bad_cache[key]
+
     for a in core.ARMS:
         for k in ks:
             fl, vals, prev = [], [], []
             for c in cell_range:
-                run_failed = rd.run_failed(a, k, c)
-                e = None if run_failed else rd.read(a, k, c, rd.u(k), core.READ_ENABLED)
-                pv = None if (run_failed or k < 0) else rd.read(a, k, c, rd.u(k - 1), core.READ_ENABLED)
-                bad = run_failed or e is None or (k >= 0 and pv is None)
+                bad = run_bad(a, k, c)
+                e = None if bad else rd.read(a, k, c, rd.u(k), core.READ_ENABLED)
+                pv = None if (bad or k < 0) else rd.read(a, k, c, rd.u(k - 1), core.READ_ENABLED)
                 fl.append(bool(bad))
                 vals.append(None if bad else e)
                 prev.append(None if bad or k < 0 else pv)
@@ -115,9 +134,9 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
                     if rep is None or dis is None or b is None:
                         integrity_bad.append(f"{a} c{c:02d} k{k}: replay, disabled or BASE not finite")
                     else:
-                        if not _eq(rep, float(e), bitwise):  # type: ignore[arg-type]
+                        if not _eq(rep, float(e)):  # type: ignore[arg-type]
                             integrity_bad.append(f"{a} c{c:02d} k{k}: replay != enabled")
-                        if not _eq(dis, b, bitwise):
+                        if not _eq(dis, b):
                             integrity_bad.append(f"{a} c{c:02d} k{k}: disabled != BASE")
             failed[a][k], nll[a][k], nll_prev[a][k] = fl, vals, prev
 
@@ -196,8 +215,7 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
         h_mean.append(xm)
         h_vmean.append(vm)
         x_mean.append(None if xm is None else xm - float(hr[c]))  # type: ignore[arg-type]
-        us = reg.get(core.stat_key(FLAT, rates[FLAT][reading], c, rd.u(reading), "used_slots"))
-        used_slots.append(None if us is None else int(us))
+        used_slots.append(_slots(reg, rates[FLAT][reading], c, rd.u(reading)))
     collapsed = [(u is not None and u < int(cfg["controls"]["min_used_slots"])) for u in used_slots]
     d_ne = any(i in (1, 2) for i in cause_ids) or any(failed[FLAT][reading])
     dep = labels.d_flat(c_flat[reading], p_used, x_mean, th, collapsed=collapsed, not_evaluable=d_ne)
@@ -231,8 +249,7 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
             used_k.append(None if any(d is None for d in draws) else sum(float(d) for d in draws if d is not None) / len(draws))
             hm_k.append(rd.read(FLAT, k, c, rd.u(k), core.READ_X_MEAN))
             hv_k.append(rd.read(FLAT, k, c, rd.u(k), core.READ_V_MEAN))
-            us = reg.get(core.stat_key(FLAT, rates[FLAT][k], c, rd.u(k), "used_slots"))
-            us_k.append(None if us is None else int(us))
+            us_k.append(_slots(reg, rates[FLAT][k], c, rd.u(k)))
         for name, vals in (("H_used", used_k), ("H_mean", hm_k), ("H_vmean", hv_k)):
             gap = labels.diff(B, vals)
             entry[name] = {"mean_B_minus": labels.mean_of(gap), "cells_worse_than_base": labels.count([v is not None and b is not None and v > b for v, b in zip(vals, B, strict=True)])}
@@ -240,9 +257,18 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
         harm[k] = entry
 
     # R16 (rung 0) and OA
-    r16 = labels.replication(c_flat[0], cd[0], th, integrity_stop=any(i in (1, 2) for i in cause_ids))
+    r16_stop = lp["row"] == 2 or (lp["row"] == 1 and any(i in (1, 2, 3) for i in cause_ids))  # ruling 1 (audit R1): never a favourable readout beside a failure label; cause 4 alone does not suppress it
+    r16 = labels.replication(c_flat[0], cd[0], th, integrity_stop=r16_stop)
     r16["convergence_rung0"] = {a: states[a][0] for a in core.ARMS}
     oa = _analyse_oa(reg, cfg, rates, th, bitwise, oa_cells) if oa_cells else {"label": "NOT RUN"}
+    # section 12.5: the per-parent ENVELOPE delta, the statistics at 8,192 by cell and parent, and calibration against registered convergence states where they differ
+    env_parent = {a: {str(k): [None if (x is None or y is None) else x - y for x, y in zip(labels.parent_means(nll[a][k - 1]), labels.parent_means(nll[a][k]), strict=True)] for k in range(0, k_max + 1)} for a in core.ARMS}
+    differ: dict[str, Any] = {}
+    for a in core.ARMS:
+        for k in range(0, k_max + 1):
+            cs = ((calibration_states or {}).get(a) or {}).get(str(k))
+            if cs is not None and cs.get("state") != states[a][k]:
+                differ[f"{a}|{k}"] = {"calibration": cs.get("state"), "registered": states[a][k]}
 
     nd = lp["row"] in (1, 2)
     held = {k: labels.held(q[k], th) for k in q}
@@ -256,24 +282,32 @@ def analyse(reg: Registry, rate_table: Mapping[str, Any], cfg: Mapping[str, Any]
     per_rung = {
         str(k): {
             "updates": rd.u(k), "rates": {a: rates[a][k] for a in core.ARMS}, "L": {a: L[a][k] for a in core.ARMS}, "delta": {a: delta[a][k] for a in core.ARMS}, "delta_run": {a: delta_run[a][k] for a in core.ARMS},
-            "convergence": {a: states[a][k] for a in core.ARMS}, "class": classes[k], "held": held[k], "mean_Q": mean_q[k], "Q": _stats(q[k]), "Q_dag": _stats(q_dag[k]),
+            "convergence": {a: states[a][k] for a in core.ARMS}, "delta_envelope_per_parent": {a: env_parent[a][str(k)] for a in core.ARMS}, "class": classes[k], "held": held[k], "mean_Q": mean_q[k], "Q": _stats(q[k]), "Q_dag": _stats(q_dag[k]),
             "Q_cells_positive": labels.count([x is not None and x > 0 for x in q[k]]), "Q_parents_positive": labels.count([x is not None and x > 0 for x in labels.parent_means(q[k])]),
             "C": _stats(c_flat[k]), "Cd": _stats(cd[k]), "X_mean_dense": _stats(xmd[k]), "delta_per_parent": {a: _per_parent_delta(nll[a], nll_prev[a], k, n) for a in core.ARMS},
         }
         for k in range(0, k_max + 1)
     }
-    rung_m1 = {a: {"updates": rd.u(-1), "rate": rates[a][-1], "L": L[a][-1]} for a in core.ARMS}
+    rung_m1 = {a: {"updates": rd.u(-1), "rate": rates[a][-1], "L": L[a][-1], "stats": _stats(nll[a][-1]), "parent_means": labels.parent_means(nll[a][-1]), "cells": list(nll[a][-1])} for a in core.ARMS}
     step0 = {a: {str(k): _step0(rd, reg, a, k, n) for k in ks} for a in core.ARMS}
     out = {
         "mode": "analysis", "k_max": k_max, "cells": n, "reading_rung": reading, "k_star": ks_, "j_dagger": jd,
         "line_p": {**lp, "label": label, "base_label": lp["base"], "dependence_qualified": qualified, "causes": causes, "cause_ids": cause_ids, "integrity_problems": integrity_bad[:20]},
         "d_flat": {**dep, "reading_rung": reading, "H_used_worse_than_base_cells": harm[reading]["H_used"]["cells_worse_than_base"], "mean_V_mean_gap": harm[reading]["H_vmean"]["mean_B_minus"]},
         "r16": r16, "oa": oa, "trend": {**trend, "lead_sentence": sentence}, "per_rung": per_rung, "rung_minus_one": rung_m1, "harm": {str(k): v for k, v in harm.items()}, "step0": step0,
-        "collapsed_cells": dep.get("collapsed", []), "flat_failed": flat_failed, "dense_failed": dense_failed, "base": {str(p): v for p, v in base.items()}, "calibration_states": dict(calibration_states) if calibration_states else None,
+        "collapsed_cells": dep.get("collapsed", []), "flat_failed": flat_failed, "dense_failed": dense_failed, "base": {str(p): v for p, v in base.items()}, "calibration_states": dict(calibration_states) if calibration_states else None, "calibration_vs_registered_states_that_differ": differ,
         "rates": {a: {str(k): rates[a][k] for k in ks} for a in core.ARMS},
         "note": "Self-check only; not independent review. The label is a registered outcome only after the auditor's recomputation (section 7).",
     }
     return out
+
+
+def _slots(reg: Registry, rate: float, c: int, update: int) -> int:
+    """The used-slot statistic of an M-FLAT snapshot: a missing statistic is INCOMPLETE REGISTRY, never 'not COLLAPSED' (ruling 3, audit A1)."""
+    key = core.stat_key(FLAT, rate, c, update, "used_slots")
+    if reg.get(key) is None:
+        raise EngineeringStop(f"ENGINEERING STOP — INCOMPLETE REGISTRY: no used_slots statistic {key}")
+    return int(reg[key])
 
 
 def _per_parent_delta(nll_k: Mapping[int, Sequence[float | None]], nll_prev_k: Mapping[int, Sequence[float | None]], k: int, n: int) -> list[float | None]:
@@ -298,8 +332,11 @@ def _analyse_oa(reg: Registry, cfg: Mapping[str, Any], rates: Mapping[str, Mappi
     cause: list[str] = []
     base = {}
     for p in range(n // 3):
-        e, r = reg.get(core.base_key(p, oa=True)), reg.get(core.base_key(p, core.READ_REPLAY, oa=True))
-        if e is None or r is None or not _eq(float(e), float(r), bitwise):
+        ke, kr = core.base_key(p, oa=True), core.base_key(p, core.READ_REPLAY, oa=True)
+        if ke not in reg or kr not in reg:
+            raise EngineeringStop(f"ENGINEERING STOP — INCOMPLETE REGISTRY: no OA BASE record {ke if ke not in reg else kr}")
+        e, r = reg[ke], reg[kr]
+        if e is None or r is None or not _eq(float(e), float(r)):
             cause.append(f"BASE missing or fails replay on old parent {p}")
         base[p] = None if e is None else float(e)
     vals: dict[str, list[float | None]] = {a: [] for a in core.ARMS}
@@ -320,7 +357,7 @@ def _analyse_oa(reg: Registry, cfg: Mapping[str, Any], rates: Mapping[str, Mappi
                 vals[a].append(None)
                 runs[a].append(None)
                 continue
-            if not _eq(rep, e, bitwise) or not _eq(dis, b, bitwise):
+            if not _eq(rep, e) or not _eq(dis, b):
                 cause.append(f"{a} OA cell {c}: replay or disabled differ")
             vals[a].append(e)
             runs[a].append(prev)

@@ -160,7 +160,10 @@ def run_train(res: Resources, item: Mapping[str, Any], run_dir: Path, public_dir
     snap_root = d / "snapshots"
     start_step = _last_snapshot(snap_root, [int(x) for x in item["snapshots"]])
     if start_step is not None and (not res.resume_ok or start_step >= int(item["max_update"])) and d.exists():
-        shutil.rmtree(d)  # ruling 6: without the resume-identity gate a restart is from update 0 and partial snapshots are discarded
+        aside = d.parent / "_kept_aside" / f"{d.name}-{len(list((d.parent / '_kept_aside').glob(d.name + '-*'))) if (d.parent / '_kept_aside').exists() else 0}"
+        aside.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(d), str(aside))  # ruling 6 and 13: a restart is from update 0 but the partial directory is KEPT ASIDE, never deleted
+        core.log_attempt(public_dir or run_dir, "partial item directory kept aside", item=item["id"], aside=str(aside.name))
         start_step = None
     pstart, psize = res.pools[item["pool"]]
     stream = model.PoolStream(res.table, pstart, psize, int(item["stream_seed"]))
@@ -205,7 +208,7 @@ def run_eval(res: Resources, item: Mapping[str, Any], run_dir: Path, train_rec: 
         if core.READ_REPLAY in {r for r, _ in core.read_list(arm, mode, draws)}:
             m2 = _build(res, train_item)
             model.restore_snapshot(snap_root, m2, update, ident)
-            rp = model.evaluate(m2, panel, expected_targets=res.expected_targets)
+            rp = model.evaluate(m2, panel, expected_targets=res.expected_targets, nonfinite="value")  # a non-finite replay after a finite enabled read is NOT EVALUABLE by section 12.2 item 2, not a failed cell (ruling 10)
             reads[f"{core.READ_REPLAY}|0"] = rp if math.isfinite(rp) else None
         nonfinite = False
     except FailedCell:

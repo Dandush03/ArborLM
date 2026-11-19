@@ -3,6 +3,7 @@
 Seeds are the registry's test range only; no registered seed, no checkpoint of the experiments directory and no sealed value is touched. Self-check only."""
 
 import contextlib
+import os
 import shutil
 import uuid
 from collections.abc import Iterator
@@ -28,19 +29,28 @@ def scratch(name: str = "t") -> Iterator[Path]:
     try:
         yield d
     finally:
-        shutil.rmtree(d, ignore_errors=True)
+        if not os.environ.get("P10I_S6_KEEP_SCRATCH"):  # a debugging aid: keep the folder to read the logs of a failed chain
+            shutil.rmtree(d, ignore_errors=True)
 
 
 def synthetic_backbone(k: int = 0) -> Any:
-    from arborlm.p4_model import Backbone
-    from arborlm.pilot_model import PilotModel
+    """A random backbone of the study's structure from a TEST-RANGE seed (ruling 12: never P1's 42-44)."""
+    from .parents import untrained_backbone
 
-    return Backbone(PilotModel("dense_small", 42 + k))
+    return untrained_backbone(core.test_seed(700 + k, core.load_config()))
 
 
 def random_rows(n: int, seed: int) -> torch.Tensor:
     g = torch.Generator().manual_seed(seed)
     return torch.randint(0, 256, (n, 65), generator=g, dtype=torch.int64)
+
+
+def patterned_rows(n: int, seed: int) -> torch.Tensor:
+    """Learnable synthetic bytes: row = (a + b * t) mod 17 with a in 0..16 and b in 1..3, so that an addition can lower the loss and the calibration has an interior optimum (random bytes give none: no learning rate helps)."""
+    g = torch.Generator().manual_seed(seed)
+    a = torch.randint(0, 17, (n, 1), generator=g)
+    b = torch.randint(1, 4, (n, 1), generator=g)
+    return (a + b * torch.arange(65)[None, :]) % 17
 
 
 def write_table(path: Path, rows: torch.Tensor) -> None:

@@ -16,7 +16,13 @@ RATES_FLAT = {-1: 0.0001, 0: 0.0003, 1: 0.001, 2: 0.003, 3: 0.01, 4: 0.03, 5: 0.
 RATES_DENSE = {-1: 0.0003, 0: 0.001, 1: 0.003, 2: 0.01, 3: 0.03, 4: 0.1, 5: 0.3}
 
 
-def rate_table(k_max: int = 4) -> dict[str, Any]:
+SHARED_RATE = 0.01
+
+
+def rate_table(k_max: int = 4, *, shared: bool = False) -> dict[str, Any]:
+    """A distinct rate per rung, or (``shared``) ONE rate for every rung of both arms: one run serves every rung, the expected real case."""
+    if shared:
+        return {"rates": {a: {str(k): SHARED_RATE for k in range(-1, k_max + 1)} for a in (FLAT, DENSE)}}
     return {"rates": {FLAT: {str(k): RATES_FLAT[k] for k in range(-1, k_max + 1)}, DENSE: {str(k): RATES_DENSE[k] for k in range(-1, k_max + 1)}}}
 
 
@@ -46,6 +52,11 @@ class Spec:
     base_missing: frozenset[int] = frozenset()
     base_bad_replay: frozenset[int] = frozenset()
     nonfinite_draw: frozenset[tuple[int, int]] = frozenset()  # (rung, cell): a P_used draw is non-finite
+    base_nonfinite: frozenset[int] = frozenset()  # BASE present but not finite: cause 1
+    nonfinite_replay: frozenset[tuple[str, int, int]] = frozenset()
+    slots_missing: frozenset[tuple[int, int]] = frozenset()  # (rung, cell): the used_slots statistic is not in the registry
+    nonfinite_xmean: frozenset[tuple[int, int]] = frozenset()  # (rung, cell): the X_mean read is non-finite
+    shared: bool = False  # one rate for every rung: run sharing (use ``rate_table(k_max, shared=True)``)
 
 
 def baseline(c: int) -> float:
@@ -56,17 +67,25 @@ def registry(cfg: Mapping[str, Any], spec: Spec) -> dict[str, Any]:
     reg: dict[str, Any] = {}
     n, km = spec.cells, spec.k_max
     for p in range(n // 3):
-        if p not in spec.base_missing:
-            b = baseline(3 * p)
+        if p in spec.base_missing:
+            continue
+        b = baseline(3 * p)
+        if p in spec.base_nonfinite:
+            reg[core.base_key(p)], reg[core.base_key(p, core.READ_REPLAY)] = None, None
+        else:
             reg[core.base_key(p)] = b
             reg[core.base_key(p, core.READ_REPLAY)] = b + (1e-3 if p in spec.base_bad_replay else 0.0)
     for arm, aspec, rates in ((FLAT, spec.flat, RATES_FLAT), (DENSE, spec.dense, RATES_DENSE)):
+        for c in range(n):
+            if spec.shared:  # one run serves every rung: it fails if any rung of that cell fails
+                reg[core.run_key(arm, SHARED_RATE, c)] = {"status": "failed_cell" if any((arm, k, c) in spec.failed for k in range(-1, km + 1)) else "ok", "reason": None}
         for k in range(-1, km + 1):
-            r = rates[k]
+            r = SHARED_RATE if spec.shared else rates[k]
             for c in range(n):
                 b = baseline(3 * (c // 3))
-                reg[core.run_key(arm, r, c)] = {"status": "failed_cell" if (arm, k, c) in spec.failed else "ok", "reason": None}
-                if (arm, k, c) in spec.failed:
+                if not spec.shared:
+                    reg[core.run_key(arm, r, c)] = {"status": "failed_cell" if (arm, k, c) in spec.failed else "ok", "reason": None}
+                if reg[core.run_key(arm, r, c)]["status"] == "failed_cell":
                     continue
                 off = aspec.cell[k][c] if k in aspec.cell else 0.0
                 v = b - aspec.gain[k] + off
@@ -77,17 +96,19 @@ def registry(cfg: Mapping[str, Any], spec: Spec) -> dict[str, Any]:
                     reg[core.nll_key(arm, r, c, u, core.READ_REPLAY)] = None
                     reg[core.nll_key(arm, r, c, u, core.READ_DISABLED)] = None
                 else:
-                    reg[core.nll_key(arm, r, c, u, core.READ_REPLAY)] = v + (1e-3 if (arm, k, c) in spec.bad_replay else 0.0)
+                    reg[core.nll_key(arm, r, c, u, core.READ_REPLAY)] = None if (arm, k, c) in spec.nonfinite_replay else v + (1e-3 if (arm, k, c) in spec.bad_replay else 0.0)
                     reg[core.nll_key(arm, r, c, u, core.READ_DISABLED)] = b + (1e-3 if (arm, k, c) in spec.bad_disabled else 0.0)
                 if k >= 0:
-                    drun = (aspec.drun or {}).get(k, 0.0)
-                    reg[core.nll_key(arm, r, c, core.rung_updates(cfg, k - 1), core.READ_ENABLED)] = v + drun
+                    if not spec.shared:  # the along-run point U_{k-1} of this rung's own run; with sharing it is the earlier rung's snapshot
+                        drun = (aspec.drun or {}).get(k, 0.0)
+                        reg[core.nll_key(arm, r, c, core.rung_updates(cfg, k - 1), core.READ_ENABLED)] = v + drun
                     if arm == FLAT:
                         for j in range(4):
                             reg[core.nll_key(arm, r, c, u, core.READ_P_USED, j)] = None if (k, c) in spec.nonfinite_draw and j == 2 else v + spec.p_used(k, c)
-                        reg[core.nll_key(arm, r, c, u, core.READ_X_MEAN)] = v + spec.x_mean(k, c)
+                        reg[core.nll_key(arm, r, c, u, core.READ_X_MEAN)] = None if (k, c) in spec.nonfinite_xmean else v + spec.x_mean(k, c)
                         reg[core.nll_key(arm, r, c, u, core.READ_V_MEAN)] = v + spec.v_mean(k, c)
-                        reg[core.stat_key(arm, r, c, u, "used_slots")] = spec.used_slots(k, c)
+                        if (k, c) not in spec.slots_missing:
+                            reg[core.stat_key(arm, r, c, u, "used_slots")] = spec.used_slots(k, c)
                     else:
                         reg[core.nll_key(arm, r, c, u, core.READ_X_MEAN_DENSE)] = v + 0.001
     return reg

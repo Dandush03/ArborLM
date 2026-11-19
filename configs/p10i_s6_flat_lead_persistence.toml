@@ -154,3 +154,9 @@ r2_evals = 2
 dry_base_updates = 8
 dry_below_updates = 4
 r1_max_rounds = 7
+
+[spec_hashes]
+# provenance only (the ADR text is not a frozen input); the addendum's rulings 1-15 bind the implementation as the ADR does
+adr = "2db830d279470c49f10b3c451b205edeaca2f12184f4fc35f1a67399552854f8"
+addendum = "a61430c8056b09c61b7347d9dee2c3d7b49f009cf5ce4c58fa8707b0d9dbc490"
+addendum_path = "docs/decisions/ADR-0031-addendum-implementation-rulings.md"

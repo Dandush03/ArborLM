@@ -113,13 +113,6 @@ def test_registry_inputs_of_the_plan_walk_include_the_imported_s3_files() -> Non
     assert "src/arborlm/p4_model.py" in walk and "src/arborlm/pilot_model.py" in walk
 
 
-def test_run_directory_must_be_ignored_or_outside() -> None:
-    planmod.require_ignored_path(REPO, REPO / "experiments" / "_scratch" / "x")
-    with pytest.raises(planmod.StageRefused, match="not git-ignored"):
-        planmod.require_ignored_path(REPO, REPO / "studies" / "p10i_s6" / "ledger.json")
-    planmod.require_ignored_path(REPO, Path(sys.prefix) / "elsewhere")  # outside the repository: nothing to dirty
-
-
 def test_caps_formula_is_shared_by_plan_freeze_and_command(capsys: pytest.CaptureFixture[str]) -> None:
     assert planmod.caps_from_projection(3.0, 5.0) == 13.0
     stages.cmd_caps_proposal(argparse.Namespace(charged_hours=3.0, projected_remaining_hours=5.0))

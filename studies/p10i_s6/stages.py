@@ -52,7 +52,8 @@ def cfg_for(plan: Plan, repo: Path) -> dict[str, Any]:
 
 def synthetic_resources(cfg: Mapping[str, Any], seed: int = 0, registered_mode: bool = True) -> items.Resources:
     """Random bytes and random backbones: tests and the synthetic rehearsal. Never used by a registered plan."""
-    from .testing import random_rows, synthetic_backbone
+    from .testing import patterned_rows as random_rows
+    from .testing import synthetic_backbone
 
     n_reg, n_cal = int(cfg.get("synthetic", {}).get("registered_pool", 200)), int(cfg.get("synthetic", {}).get("calibration_pool", 100))
     table = random_rows(n_reg + n_cal, core.test_seed(900 + seed, cfg)).to(torch.uint8)
@@ -379,17 +380,23 @@ def bases_of(state_dir: Path) -> dict[str, dict[str, float | None]]:
 def run_analysis(plan: Plan, repo: Path, items_dir: Path, cfg: Mapping[str, Any], *, state_dir: Path | None = None, out_dir: Path | None = None) -> dict[str, Any]:
     """Refuses (ENGINEERING STOP — ITEM ERRORS / INCOMPLETE REGISTRY) while any item error or missing record exists; labels nothing then."""
     state_dir = state_dir or items_dir
+    cells = sorted({i["cell"] for i in plan.items("train") if i["profile"] != "oa"})
+    oa_cells = sorted({i["cell"] for i in plan.items("train") if i["profile"] == "oa"})
+    if plan.mode == planmod.REGISTERED and (len(cells) != 27 or len(oa_cells) != 27):  # ruling 13: denominators are never reduced
+        raise core.EngineeringStop(f"ENGINEERING STOP — INCOMPLETE REGISTRY: registered mode needs 27 cells and 27 OA cells, the plan has {len(cells)} and {len(oa_cells)}")
     reg = items.collect_registry(items_dir, plan.data["items"], bases_of(state_dir))
     for it in plan.items("train"):
         if core.run_key(it["arm"], it["rate"], it["cell"], oa=it["profile"] == "oa") not in reg:
             raise core.EngineeringStop(f"ENGINEERING STOP — INCOMPLETE REGISTRY: a planned run has no record: {it['id']}")
-    cells = sorted({i["cell"] for i in plan.items("train") if i["profile"] != "oa"})
-    oa_cells = sorted({i["cell"] for i in plan.items("train") if i["profile"] == "oa"})
     th = core.Thresholds.from_config(cfg) if plan.mode == planmod.REGISTERED else core.Thresholds.from_config(cfg).scaled(len(cells))
     if plan.mode == planmod.REGISTERED and not gates.on_platform_of_record(cfg):
         raise core.EngineeringStop("ENGINEERING STOP — not the platform of record: a registered result is never produced elsewhere (the integrity checks of section 12.2 are bitwise on macOS arm64, torch 2.8.0, one thread)")
-    bitwise = True if plan.mode == planmod.REGISTERED else gates.on_platform_of_record(cfg)  # registered: always bitwise; the 1e-6 tolerance exists only for rehearsals and tests off the platform
-    result = analysis.analyse(reg, plan.rate_table, cfg, k_max=plan.k_max, bitwise=bitwise, th=th, cells=len(cells), oa_cells=len(oa_cells) or None)
+    bitwise = True  # the integrity equalities are exact on every platform (ruling 8)
+    cal_states = None
+    cs_path = Path(plan.data["run_dir"]) / "calibration_states.json"  # placed by the lead after the auditor's recomputation; never read before
+    if cs_path.is_file():
+        cal_states = read_json(cs_path)
+    result = analysis.analyse(reg, plan.rate_table, cfg, k_max=plan.k_max, bitwise=bitwise, th=th, cells=len(cells), oa_cells=len(oa_cells) or None, calibration_states=cal_states)
     core.write_record((out_dir or items_dir) / "analysis" / "analysis.json", {**core.envelope("analysis"), "result": result, "mode": plan.mode})
     return result
 
@@ -519,6 +526,9 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rehearsal = core.read_record(Path(args.rehearsal), "rehearsal_public")
     if rehearsal.get("caps_provisional") is not False:
         raise StageRefused("refused: the rehearsal record was made on provisional caps (a measuring rehearsal cannot be frozen on)")
+    flags = rehearsal.get("rate_table", {}).get("interior") or {}
+    if not all(flags.get(a, {}).get(str(k)) is True for a in core.ARMS for k in core.rung_range(plan.k_max)):  # ruling 7: every interior flag at every rung -1..k_max for both arms
+        raise StageRefused("refused: the calibration is not interior at every rung -1..k_max for both arms (ENGINEERING STOP — CALIBRATION NOT INTERIOR): a rate at the edge is never frozen")
     on_disk = read_json(repo / core.RATE_TABLE)
     if not (plan.data["rate_table"] == on_disk == rehearsal.get("rate_table")):
         raise StageRefused("refused: the plan's rate table, freeze/rate_table.json and rehearsal_public.json's rate table are not the same (the selection is made by code, never typed)")

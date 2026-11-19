@@ -37,7 +37,7 @@ def main(argv: list[str] | None = None) -> int:  # pragma: no cover - the lead's
     if not gate["passed"]:
         write_json(out / "adapter_identity_FAILED.json", gate)
         raise core.EngineeringStop("ENGINEERING STOP — the adapter identity gate did not reproduce all nine old parents; nothing was trained (the human lead decides between an amended recipe and the alternative of open choice 3)")
-    rec = {"adapter_identity": gate, "registered": parents.train_new_parents(cfg, rows, out, group="registered"), "calibration": parents.train_new_parents(cfg, rows, out, group="calibration")}
+    rec = {"adapter_identity": gate, "registered": parents.train_new_parents(cfg, rows, out, group="registered", identity=gate), "calibration": parents.train_new_parents(cfg, rows, out, group="calibration", identity=gate)}
     write_json(out / "parents_record.json", rec)
     print(json.dumps({"parents_record": str(out / "parents_record.json"), "adapter_identity_passed": True}))
     return 0
