@@ -174,7 +174,7 @@ def test_pin_reads_lfs_pointers_and_refuses_other_names_and_overwrite() -> None:
             with pytest.raises(core.EngineeringStop, match="train shards"):
                 fetch.pin(bad, CFG, opener, d / "p2.json")
         with pytest.raises(core.EngineeringStop, match="Git-LFS pointer"):
-            fetch.pin(NAMES[:1], CFG, lambda url, timeout=0: Resp(b"not a pointer"), d / "p3.json")
+            fetch.pin(NAMES, CFG, lambda url, timeout=0: Resp(b"not a pointer"), d / "p3.json")
         assert fetch.load_pins(d / "pins.json", CFG)["files"][0]["name"] == NAMES[0]
         with pytest.raises(core.EngineeringStop, match="no pins file"):
             fetch.load_pins(d / "absent.json", CFG)

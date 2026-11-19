@@ -102,7 +102,7 @@ def test_code_identity_has_two_lists_and_printing_is_not_frozen() -> None:
     frozen = planmod.frozen_file_hashes(REPO)
     assert not any("/printing/" in f for f in frozen) and "studies/p10i_s6/stages.py" in frozen and "studies/p10i_s3/model.py" in frozen and str(core.CONFIG) in frozen
     comp = planmod.computing_hashes(REPO)
-    assert "studies/p10i_s6/analysis.py" in comp and "studies/p10i_s6/stages.py" not in comp and not any("printing" in f for f in comp)
+    assert "studies/p10i_s6/analysis.py" in comp and "studies/p10i_s6/stages.py" in comp and "studies/p10i_s6/runner.py" not in comp and not any("printing" in f for f in comp)
     assert set(planmod.COMPUTING).isdisjoint(planmod.ORCHESTRATION)
     data = build_candidate(REPO / "experiments" / "_scratch")
     assert data["computing_files"] == comp and data["imports_from_p10i_s3"]

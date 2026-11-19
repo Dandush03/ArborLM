@@ -122,7 +122,7 @@ class Chain:
             return rows
 
         led = self.root / "panel_ledger.json"
-        led.write_text(json.dumps({"ledger": {"panels": {}, "excluded_windows": [], "panel_ranks": {}}, "sha256": "x"}))
+        led.write_text(json.dumps({"format": d0.LEDGER_FORMAT, "p10is2": {"end_exclusive": True}, "windows": []}, sort_keys=True, separators=(",", ":")) + "\n")  # the real format
         small = json.loads(json.dumps({"ladder": {**cfg["ladder"], "base_updates": 1, "below_updates": 1}}))
         dcfg = {**dict(cfg), "ladder": small["ladder"], "data": {**cfg["data"], "pool_chunks_for_umax": 128, "panel_walk_start": 0}, "setting": {**cfg["setting"], "panel_chunks": 8}}
         self.log["d0"] = d0.prepare(iter(wiki(120, 300)), wiki(10, 300), wiki(12, 400), led, self.root / "d0out", dcfg)
@@ -258,7 +258,7 @@ def test_freeze_refusals_then_acceptance_then_registered_launch(chain: Chain) ->
     for st in ("gates", "train", "eval"):
         man = core.read_record(chain.pub / st / "manifest.json", "stage_manifest")
         assert man["status"] == "COMPLETE" and man["identity"]["commit"] == freeze_commit and "studies/p10i_s6/analysis.py" in man["identity"]["computing_files"]
-        assert "studies/p10i_s6/stages.py" not in man["identity"]["computing_files"]  # orchestration code is not in a stage record's identity
+        assert "studies/p10i_s6/stages.py" in man["identity"]["computing_files"] and "studies/p10i_s6/runner.py" not in man["identity"]["computing_files"]  # everything that produces a number is in a stage record's identity; supervision is not
     res = core.read_record(chain.pub / "analysis" / "analysis.json", "analysis")["result"]
     assert res["k_max"] == 2 and res["cells"] == 27 and res["line_p"]["row"] in range(1, 13) and res["trend"]["text"].endswith("is not the label PERSISTS.")
     rep = (chain.pub / "analysis" / "report.md").read_text()
