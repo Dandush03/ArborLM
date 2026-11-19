@@ -169,6 +169,8 @@ def test_the_real_r4_seed_checker_through_seed_gate() -> None:
 
 # ---- item 10 (a): the UNMODIFIED gates.sh through the real `uv run --locked` on a throw-away clone
 def test_unmodified_gates_script_passes_the_preconditions_and_refuses_at_decision_2(pilot_env: Path) -> None:
+    if subprocess.run(["git", "-C", str(REAL), "rev-parse", "--is-inside-work-tree"], capture_output=True, check=False).returncode != 0:  # noqa: S603, S607
+        pytest.skip("a clone needs the code to be in a git work tree; every other test runs from a git archive copy")
     with testing.scratch("clone") as d:
         clone = d / "clone"
         subprocess.run(["git", "clone", "--no-local", "--quiet", str(REAL), str(clone)], check=True, capture_output=True, timeout=300)  # noqa: S603, S607
