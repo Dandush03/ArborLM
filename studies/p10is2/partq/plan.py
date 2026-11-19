@@ -122,7 +122,17 @@ from ..common.caps import project_stage_seconds as _project  # noqa: E402
 ANALYSIS_PROJECTED_SECONDS = 60.0  # PENDING LEAD REVIEW: the analysis reads records only (no world, no package); it has no rate to measure, so its projection is this fixed figure; its cap is 2 x it by the common rule
 
 
-def project_stage_seconds(units, seconds_per_unit):  # type: ignore[no-untyped-def]
-    """The projected time of each registered stage: the measured rates times the plan's counts, plus the records-only ``analysis`` stage at its fixed projection (section 10 item 3 is otherwise unchanged)."""
-    return {**_project(units, seconds_per_unit), "analysis": ANALYSIS_PROJECTED_SECONDS}
+CAPS_FORMULA = "whole-process-v2"  # projected seconds of a stage = its measured per-process overhead + (its measured per-unit rate x its units); a record without this key predates it and is refused for caps
+
+
+def project_stage_seconds(units, seconds_per_unit, overhead=None):  # type: ignore[no-untyped-def]
+    """The projected time of each registered stage. With ``overhead`` (seconds per stage process, measured through the registered entry point): ``overhead + rate x units`` for every stage in ``units``, ``analysis``
+    included (it is measured like the rest). Without it (the older, in-process figures; unit tests): rate x units plus the records-only ``analysis`` at the fixed ``ANALYSIS_PROJECTED_SECONDS``."""
+    if overhead is None:
+        return {**_project(units, seconds_per_unit), "analysis": ANALYSIS_PROJECTED_SECONDS}
+    out = _project(units, seconds_per_unit)
+    missing = [s for s in out if s not in overhead]
+    if missing:
+        raise ValueError(f"no measured overhead for stage(s) {missing}")
+    return {s: float(overhead[s]) + v for s, v in out.items()}
 

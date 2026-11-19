@@ -71,7 +71,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
 
     if getattr(args, "rehearsal", False):
         plan = refuse_unless_rehearsal_ready(repo, run_dir, args.plan_file, args.stage, args.freeze_commit)
-        out = real.run_rehearsal_stage(args.stage, repo, run_dir, plan, pause_after_batches=args.pause_after_batches)
+        out = real.run_rehearsal_stage(args.stage, repo, run_dir, plan, pause_after_batches=args.pause_after_batches, kind=args.rehearsal_kind)
     else:
         if args.plan_file or args.pause_after_batches is not None:
             raise StageRefused("refused: --plan-file and --pause-after-batches exist in a rehearsal (--rehearsal) only")
@@ -145,6 +145,7 @@ def build_parser() -> argparse.ArgumentParser:
         r.add_argument("--freeze-commit")
         r.add_argument("--repo")
         r.add_argument("--rehearsal", action="store_true", help="the counting rehearsal's stage: the candidate plan, no freeze commit or Decision 2, rehearsal seeds, limited blocks, every stage run whatever Q1-Q4 give")
+        r.add_argument("--rehearsal-kind", choices=("measuring", "counting"), default="counting", help="rehearsal only: the block limits of the measuring rehearsal (one generation block per capability) or of the counting rehearsal")
         r.add_argument("--plan-file", help="rehearsal only: a plan file other than freeze/partq_plan.json (the forced identity check)")
         r.add_argument("--pause-after-batches", type=int, help="rehearsal only: the forced pause (the stage stops PAUSED, exit 4, after this many guard checks)")
     lg = sub.add_parser("ledger")
@@ -160,6 +161,7 @@ def build_parser() -> argparse.ArgumentParser:
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
     h.add_argument("--repo")
+    h.add_argument("--inputs", help="the measuring rehearsal: the inputs file (inputs-file) its stages verify at start, like a registered stage")
     h.add_argument("--charged-ledger", action="append", default=[], help="an earlier Part Q charged_ledger.json (absolute path) whose charge joins the pre-freeze charge; repeatable")
     return ap
 
@@ -167,7 +169,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        if args.command in ("candidate-plan", "freeze", "caps-proposal", "inputs-file", "units-file", "caps-config"):
+        if args.command in ("candidate-plan", "freeze", "caps-proposal", "inputs-file", "units-file", "caps-config", "caps-reset"):
             return freeze.dispatch(args)
         if args.command == "registered":
             return cmd_registered(args)

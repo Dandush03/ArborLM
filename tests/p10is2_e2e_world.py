@@ -4,8 +4,10 @@ validation text); everything else on the path (``partq_registered.sh``, ``stages
 ``install()`` is called inside the child process by ``hook.py``; the test process uses ``make_world`` to write the candidate ledger. Test-range seeds only inside this module (the launched stages use the
 seeds of their mode on SYNTHETIC data). Self-check only."""
 
+import os
 import re
 import sys
+import time
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -70,6 +72,7 @@ def make_world(cfg: Any, repo: Path, run_dir: Path) -> Any:
 
 def install() -> None:
     """Patches the DOWNLOAD and TEACHER entry points only (called in the child process before the stage's entry point runs)."""
+    from studies.p10is2.common import plan as planmod
     from studies.p10is2.partq import real, real_stages, real_world
     from studies.p10s2 import datagen
 
@@ -92,7 +95,14 @@ def install() -> None:
     real_world.equivalence_records = lambda *a, **k: {str(layer): {"at_creation": {"logits": {"ok": True}, "injection": {"ok": True}}} for layer in (4, 12)}  # FAKE: needs the downloaded reference model
     real.wikitext_pins = lambda repo: {}  # FAKE: ADR-0004's pins of the downloaded files
     real.check_wikitext = lambda directory, pins: {"directory": str(directory), "fake": True}
-    datagen.verify_downloads = lambda *a, **k: {"models": {}, "tatoeba": {"fake": True}}  # FAKE: the downloads
+    overhead = float(os.environ.get("E2E_OVERHEAD", "0"))
+
+    def verify_downloads(*a: Any, **k: Any) -> dict[str, Any]:
+        time.sleep(overhead)  # a synthetic per-process cost of building the world (the real one is the hashing, the corpus, the student and the teachers)
+        return {"models": {}, "tatoeba": {"fake": True}}
+
+    datagen.verify_downloads = verify_downloads  # FAKE: the downloads
+    planmod.import_walk = lambda *a, **k: {"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []}  # FAKE: the import walk (a subprocess that imports the repository's code)
     datagen.load_corpus = lambda downloads, rec: (small_corpus(), {"fake": True})
     datagen.HFTokenizer = lambda downloads: tok
     datagen.check_generation_config = lambda *a, **k: None  # FAKE: the pinned configuration file of a real teacher

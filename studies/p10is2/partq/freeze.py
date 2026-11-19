@@ -52,6 +52,9 @@ def add_commands(sub: Any) -> None:
     k.add_argument("--measuring-rehearsal", required=True)
     k.add_argument("--apply", action="store_true", help="edit configs/p10is2_partq.toml: the nine cap keys and caps.provisional = false (refuses unless every cap is 0.0 and provisional is true)")
     k.add_argument("--repo")
+    z = sub.add_parser("caps-reset", help="reset the entered caps to unset (a recorded correction of a cost projection before any registered result exists) so that a new measuring record can be applied")
+    z.add_argument("--reason", required=True)
+    z.add_argument("--repo")
 
 
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
@@ -65,26 +68,36 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     return 0
 
 
+def projection_from_record(meas: Mapping[str, Any], *, units: Mapping[str, float] | None = None) -> dict[str, float]:
+    """The projected seconds of every registered stage by the ONE formula (``qplan.CAPS_FORMULA``: measured per-process overhead + per-unit rate x units) from a measuring record made through the registered entry
+    point. Refuses a record without that formula (made in one process, before the formula: its rates exclude the world build every stage process pays) and a record that lacks a stage."""
+    if meas.get("caps_formula") != qplan.CAPS_FORMULA:
+        raise StageRefused(f"refused: the measuring record does not carry caps_formula {qplan.CAPS_FORMULA!r}: it was not made through the registered entry point (one fresh process per stage), so its rates exclude the per-process overhead; measure again")
+    rates = {k: float(v) for k, v in (meas.get("rates_seconds_per_unit") or {}).items()}
+    overhead = {k: float(v) for k, v in (meas.get("overhead_seconds") or {}).items()}
+    use = {k: float(v) for k, v in (units if units is not None else meas.get("projection_units") or {}).items()}
+    missing = [s for s in qplan.REHEARSAL_STAGES if s not in use or s not in rates or s not in overhead]
+    if missing:
+        raise StageRefused(f"refused: the measuring record has no rate, overhead or units for stage(s) {missing}: a stage the registered run has was not measured; run the measuring rehearsal again")
+    return qplan.project_stage_seconds({s: use[s] for s in qplan.REHEARSAL_STAGES}, rates, overhead)
+
+
+def proposal_from_record(meas: Mapping[str, Any], *, units: Mapping[str, float] | None = None, charged_seconds: float | None = None) -> dict[str, float]:
+    """The caps by the code's rule from a measuring record: each stage cap 2 x its projected seconds, the total the pre-freeze charge plus 2 x all stages (rounded up to 0.01 h). The caps proposal, ``caps-config`` and
+    the freeze's comparison all call this function."""
+    charge = float(meas.get("charged_before_freeze_seconds", 0.0)) if charged_seconds is None else charged_seconds
+    return dict(qplan.caps_proposal(charge, projection_from_record(meas, units=units)))
+
+
 def cmd_caps_proposal(args: argparse.Namespace) -> int:
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps are computed from a MEASURING rehearsal's record")
-    rates = {k: float(v) for k, v in (meas.get("rates_seconds_per_unit") or {}).items()}
-    units = {k: float(v) for k, v in (read_json(Path(args.units)) if args.units else meas.get("projection_units") or {}).items()}
+    units = {k: float(v) for k, v in read_json(Path(args.units)).items()} if args.units else None
     charged = float(args.charged_hours) * 3600.0 if args.charged_hours is not None else float(meas.get("charged_before_freeze_seconds", 0.0))
-    proj = qplan.project_stage_seconds(units, rates)
-    print(json.dumps({"projected_seconds": proj, "proposal_hours": qplan.caps_proposal(charged, proj), "charged_before_freeze_seconds": charged, "rule": "stage cap = 2 x projected; total = charge before the freeze + 2 x all stages (section 10 item 3)"}))
+    proj = projection_from_record(meas, units=units)
+    print(json.dumps({"projected_seconds": proj, "proposal_hours": qplan.caps_proposal(charged, proj), "charged_before_freeze_seconds": charged, "rule": "stage projected = measured per-process overhead + per-unit rate x units (whole-process-v2); stage cap = 2 x projected; total = charge before the freeze + 2 x all stages (section 10 item 3)"}))
     return 0
-
-
-def proposal_from_record(meas: Mapping[str, Any]) -> dict[str, float]:
-    """The caps by the code's rule from a measuring record; refuses a record that lacks a rate for a stage it has units for, or lacks a registered stage."""
-    rates = {k: float(v) for k, v in (meas.get("rates_seconds_per_unit") or {}).items()}
-    units = {k: float(v) for k, v in (meas.get("projection_units") or {}).items()}
-    missing = [s for s in qplan.STAGES if s not in units or s not in rates]
-    if missing:
-        raise StageRefused(f"refused: the measuring record has no rate or no units for stage(s) {missing}: a stage the registered run has was not measured; run the measuring rehearsal again")
-    return dict(qplan.caps_proposal(float(meas.get("charged_before_freeze_seconds", 0.0)), qplan.project_stage_seconds(units, rates)))
 
 
 def cmd_units_file(args: argparse.Namespace) -> int:
@@ -128,6 +141,52 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
         print(json.dumps({"config": str(path), "applied": proposal, "next": "commit the config, then candidate-plan"}))
     else:
         print(caps_toml(proposal))
+    return 0
+
+
+CAPS_KEYS = ("inputs", "partition", "qfit", "qcheck", "generation", "regeneration", "outputs", "analysis", "total")
+
+
+def reset_caps_text(text: str, stamp: str, superseded: str) -> str:
+    """The config text with the nine caps set back to ``0.0``, ``provisional`` back to true, and a dated comment under ``[stage_caps]`` naming the record of the superseded values."""
+    import re
+
+    out = text
+    for k in CAPS_KEYS:
+        out, n = re.subn(rf"(?m)^{k}_hours = [0-9.]+", f"{k}_hours = 0.0", out)
+        if n != 1:
+            raise StageRefused(f"refused: the config does not hold exactly one '{k}_hours' line")
+    if out.count("\nprovisional = false") != 1:
+        raise StageRefused("refused: the config does not hold exactly one 'provisional = false' (the caps are not entered)")
+    out = out.replace("\nprovisional = false", "\nprovisional = true")
+    marker = "[stage_caps]"
+    i = out.index(marker)
+    j = out.index("\n", i)
+    note = f"\n# caps reset {stamp}: a correction of a cost projection made before any registered result exists; the superseded values are in {superseded}"
+    return out[: j] + note + out[j:]
+
+
+def cmd_caps_reset(args: argparse.Namespace) -> int:
+    """Moves the entered caps into a superseded record and sets the config back to unset, by code: never a hand edit that could be mistaken for relaxing a cap after a result. Refuses once a freeze record exists and
+    when the caps are not entered."""
+    repo = Path(args.repo) if args.repo else core.ROOT
+    if (repo / core.FREEZE_RECORD_Q).exists():
+        raise StageRefused("refused: a freeze record exists; move it aside by a recorded step before correcting the caps")
+    path = repo / core.CONFIG_Q
+    text = path.read_text(encoding="utf-8")
+    cfg = core.load_config("Q", path)
+    if cfg["caps"]["provisional"]:
+        raise StageRefused("refused: the caps are not entered (provisional is true): nothing to reset")
+    stamp = core.utc_stamp()
+    rec_path = repo / core.FREEZE_DIR / "superseded" / f"partq_caps_superseded_{stamp.replace(':', '').replace('-', '')}.json"
+    if rec_path.exists():
+        raise StageRefused(f"refused: {rec_path} exists")
+    rec = {**core.envelope("block_record", "Q"), "what": "superseded_caps", "reason": args.reason, "utc": stamp, "stage_caps_hours": {k: float(v) for k, v in cfg["stage_caps"].items()}, "provisional_was": bool(cfg["caps"]["provisional"]),
+           "config_sha256_before": file_sha256(path), "note": "A correction of a cost projection made before any registered result exists (the earlier caps came from rates measured inside one process, without the per-process overhead); not a relaxation after an observation."}  # fmt: skip
+    rec_path.parent.mkdir(parents=True, exist_ok=True)
+    write_json(rec_path, core.jsonable(rec))
+    path.write_text(reset_caps_text(text, stamp, str(rec_path.relative_to(repo))), encoding="utf-8")
+    print(json.dumps({"config": str(path), "superseded_record": str(rec_path), "next": "commit the config and the record, then the measuring rehearsal"}))
     return 0
 
 
@@ -258,4 +317,4 @@ def cmd_freeze(args: argparse.Namespace) -> int:
 
 
 def dispatch(args: argparse.Namespace) -> int:
-    return {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "inputs-file": cmd_inputs_file, "units-file": cmd_units_file, "caps-config": cmd_caps_config}[args.command](args)
+    return {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "inputs-file": cmd_inputs_file, "units-file": cmd_units_file, "caps-config": cmd_caps_config, "caps-reset": cmd_caps_reset}[args.command](args)

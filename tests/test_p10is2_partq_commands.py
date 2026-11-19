@@ -23,14 +23,15 @@ from studies.p10is2.partq import plan as qplan  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def measuring_record(tmp: Path, *, regeneration: bool = True) -> Path:
-    units = {"inputs": 1.0, "partition": 1.0, "qfit": 4000.0, "qcheck": 16000.0, "generation": 845079.0, "regeneration": 2048.0, "outputs": 5800.0}
-    rates = {"inputs": 99.1, "partition": 72.1, "qfit": 0.2488, "qcheck": 0.0459, "generation": 0.0455, "regeneration": 0.05, "outputs": 0.0612}
+def measuring_record(tmp: Path, *, regeneration: bool = True, formula: bool = True) -> Path:
+    units = {"inputs": 1.0, "partition": 1.0, "qfit": 4000.0, "qcheck": 16000.0, "generation": 845079.0, "regeneration": 2048.0, "outputs": 5800.0, "analysis": 1.0}
+    rates = {"inputs": 20.1, "partition": 12.1, "qfit": 0.2488, "qcheck": 0.0459, "generation": 0.0455, "regeneration": 0.05, "outputs": 0.0612, "analysis": 1.0}
+    overhead = {"inputs": 79.0, "partition": 60.0, "qfit": 62.0, "qcheck": 61.0, "generation": 63.0, "regeneration": 60.0, "outputs": 65.0, "analysis": 0.0}
     if not regeneration:
         del rates["regeneration"]
     tmp.mkdir(parents=True, exist_ok=True)
     path = tmp / "rehearsal_measuring.json"
-    write_json(path, {**core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "caps_provisional": True, "rates_seconds_per_unit": rates, "projection_units": units, "charged_before_freeze_seconds": 3468.4})
+    write_json(path, {**core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "caps_provisional": True, **({"caps_formula": qplan.CAPS_FORMULA} if formula else {}), "rates_seconds_per_unit": rates, "overhead_seconds": overhead, "projection_units": units, "charged_before_freeze_seconds": 3468.4})
     return path
 
 
@@ -49,19 +50,24 @@ def test_a_measuring_record_without_a_rate_for_a_registered_stage_cannot_give_ca
     with pytest.raises(core.StageRefused, match="regeneration"):
         freeze.proposal_from_record(core.read_record(measuring_record(tmp_path, regeneration=False), "rehearsal"))
     assert set(freeze.proposal_from_record(core.read_record(measuring_record(tmp_path / "ok"), "rehearsal"))) == {f"{s}_hours" for s in (*qplan.STAGES, "analysis", "total")}
+    with pytest.raises(core.StageRefused, match="caps_formula"):  # a record made in one process (before the formula) is refused for caps
+        freeze.proposal_from_record(core.read_record(measuring_record(tmp_path / "old", formula=False), "rehearsal"))
+
+
+def test_the_projection_includes_the_per_process_overhead_of_every_stage(tmp_path: Path) -> None:
+    rec = core.read_record(measuring_record(tmp_path), "rehearsal")
+    proj = freeze.projection_from_record(rec)
+    assert proj["partition"] == pytest.approx(60.0 + 12.1) and proj["analysis"] == pytest.approx(1.0) and proj["regeneration"] == pytest.approx(60.0 + 2048 * 0.05)
+    old = {s: rec["projection_units"][s] * rec["rates_seconds_per_unit"][s] for s in proj}  # the old formula: rate x units
+    assert all(proj[s] >= old[s] for s in proj) and proj["partition"] > 5 * old["partition"]  # a stage with a small per-unit cost is dominated by the overhead it really pays
+    caps = freeze.proposal_from_record(rec)
+    assert caps["partition_hours"] * 3600 >= 2 * proj["partition"] - 36.0
 
 
 # --- a failed rehearsal is charged; earlier ledgers join the charge --------------------------------------------------------------------------------
-def test_a_failed_rehearsal_charges_its_wall_time(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    def boom(*a: object, **k: object) -> None:
-        raise RuntimeError("code error in the outputs stage")
-
-    monkeypatch.setattr(real, "_run_rehearsal", boom)
-    run = tmp_path / "run"
-    with pytest.raises(RuntimeError):
-        real.run_rehearsal("measuring", ROOT, run, argparse.Namespace(charged_ledger=[]))
-    entries = json.loads((run / "charged_ledger.json").read_text())["entries"]
-    assert len(entries) == 1 and entries[0]["stage"] == "rehearsal-failed" and entries[0]["seconds"] >= 0.0
+def test_the_rehearsals_are_driven_through_the_entry_point_and_the_measuring_one_needs_its_inputs_file(tmp_path: Path) -> None:
+    with pytest.raises(core.StageRefused, match="--inputs"):
+        real.run_rehearsal("measuring", ROOT, tmp_path / "run", argparse.Namespace(charged_ledger=[], inputs=None))
 
 
 def test_charged_ledger_paths_must_be_absolute(tmp_path: Path) -> None:
@@ -171,3 +177,43 @@ def test_the_freeze_refuses_malformed_rehearsal_records(tmp_path: Path) -> None:
         args = argparse.Namespace(repo=None, measuring_rehearsal=str(bad if name == "measuring" else other), counting_rehearsal=str(bad if name == "counting" else other), attest_sealed_unopened="", seal_broken=False)
         with pytest.raises(core.StageRefused):
             freeze.cmd_freeze(args)
+
+
+# --- caps-reset: a recorded correction, never a hand edit ----------------------------------------------------------------------------------------------
+def entered_config_repo(tmp: Path) -> Path:
+    repo = tmp / "repo"
+    (repo / "configs").mkdir(parents=True)
+    shutil.copy(ROOT / core.CONFIG_Q, repo / core.CONFIG_Q)
+    text = (repo / core.CONFIG_Q).read_text()
+    if "provisional = true" in text:  # the repository's config may not hold caps: enter some
+        for k in freeze.CAPS_KEYS:
+            text = re.sub(rf"(?m)^{k}_hours = [0-9.]+", f"{k}_hours = 1.5", text)
+        (repo / core.CONFIG_Q).write_text(text.replace("provisional = true", "provisional = false"))
+    return repo
+
+
+def test_caps_reset_moves_the_entered_caps_into_a_record_and_leaves_a_dated_comment(tmp_path: Path) -> None:
+    repo = entered_config_repo(tmp_path)
+    before = core.load_config("Q", repo / core.CONFIG_Q)
+    assert before["caps"]["provisional"] is False
+    assert stages.main(["caps-reset", "--reason", "per-process overhead was not in the rates", "--repo", str(repo)]) == 0
+    after = core.load_config("Q", repo / core.CONFIG_Q)
+    assert after["caps"]["provisional"] is True and all(v == 0.0 for v in after["stage_caps"].values())
+    text = (repo / core.CONFIG_Q).read_text()
+    assert "# caps reset " in text and "a correction of a cost projection made before any registered result exists" in text
+    (record,) = list((repo / core.FREEZE_DIR / "superseded").glob("partq_caps_superseded_*.json"))
+    rec = json.loads(record.read_text())
+    assert rec["stage_caps_hours"] == {k: float(v) for k, v in before["stage_caps"].items()} and rec["reason"].startswith("per-process") and "not a relaxation" in rec["note"]
+    assert stages.main(["caps-reset", "--reason", "again", "--repo", str(repo)]) == 2  # nothing left to reset
+    rec_path = tmp_path / "rehearsal_measuring.json"
+    write_json(rec_path, json.loads(measuring_record(tmp_path / "m").read_text()))
+    assert stages.main(["caps-config", "--measuring-rehearsal", str(rec_path), "--repo", str(repo), "--apply"]) == 0  # and the new caps apply
+    assert core.load_config("Q", repo / core.CONFIG_Q)["caps"]["provisional"] is False
+
+
+def test_caps_reset_refuses_once_a_freeze_record_exists(tmp_path: Path) -> None:
+    repo = entered_config_repo(tmp_path)
+    (repo / core.FREEZE_DIR).mkdir(parents=True)
+    (repo / core.FREEZE_RECORD_Q).write_text("{}")
+    assert stages.main(["caps-reset", "--reason", "x", "--repo", str(repo)]) == 2
+    assert core.load_config("Q", repo / core.CONFIG_Q)["caps"]["provisional"] is False  # untouched

@@ -10,20 +10,22 @@ EXP=/Users/daniellaloush/dandush03/ArborLM/experiments                          
 Q="uv run --locked --offline python -m studies.p10is2.partq.stages"
 ```
 
-## Step 0. The measuring rehearsal must be run again (the one at measure2 cannot give caps)
+## Step 0. Correct the caps, then measure through the registered entry point
 
-The record at `measure2` has **no rate for `regeneration`**: its one generation block per capability ends DATA-EXHAUSTED and the pipeline skipped the regeneration check (measured: no `regeneration.json` in that run directory; `rates_seconds_per_unit` has no `regeneration`). The freeze and `caps-config` now refuse such a record. A rehearsal now runs and times the regeneration check whatever the draws label (`pipeline._run_all`, test `test_a_rehearsal_runs_and_times_the_regeneration_check…`). Resuming in the same directory would time only the stages that run in that process (a finished stage keeps no wall time in its record, so its rate would be missing), so run it fresh:
+**Why.** The caps entered from `measure3` were twice the per-unit rate x units measured INSIDE one process with the world already built. The registered run (and the counting rehearsal) runs each stage in a FRESH process that builds the world first, and a stage's charge is the whole process. The counting rehearsal's `partition` took 391 s against a cap of 144 s (measured, `counting4`); the caps of the short stages cannot hold on the registered path. This is a correction of a cost projection made before any registered result exists, not a relaxation after an observation; the superseded values are kept in a record. The old measuring records (`measure2`, `measure3`: no `caps_formula`) stay readable and are refused for caps.
+
+**Formula (`caps_formula = whole-process-v2`).** For each stage: projected seconds = measured per-process overhead + (measured per-unit rate x units). The overhead is the time the stage process spent building its world (`overhead_seconds`: input hashing, package manifest, corpus, student, teachers; `analysis` builds none). The rate is `(whole-process seconds - overhead) / units measured`. A stage cap is 2 x projected; the total is the pre-freeze charge plus 2 x all eight stages. `caps-proposal`, `caps-config` and the freeze's comparison call the same function. One overhead per stage PROCESS: the batches of a stage (generation, qfit, qcheck) are inside its one process and are counted by units (generation: sources; qfit, qcheck: items; regeneration: sources of its stored batches), never by processes; a stage that is paused and resumed pays the overhead again, and that is charged.
 
 ```sh
-cd "$REPO" && sh studies/p10is2/launch/partq_rehearse.sh measuring "$EXP/P10IS2-Q-rehearsal-measure3-20261118" \
-    --charged-ledger "$EXP/<earlier Part Q run dir>/charged_ledger.json" ...      # one option per earlier ledger, ABSOLUTE paths
+cd "$REPO" && $Q caps-reset --reason "caps came from in-process rates without the per-process overhead (counting4: partition 391 s vs cap 144 s)"
+cd "$REPO" && git add -A configs studies/p10is2/freeze/superseded && git commit -S -m "P10-I-S2: Part Q caps reset by code (superseded values recorded)"
+cd "$REPO" && sh studies/p10is2/launch/partq_rehearse.sh measuring "$EXP/P10IS2-Q-rehearsal-measure4-20261119" --inputs "$EXP/<inputs file>.json" \
+    --charged-ledger <each earlier Part Q ledger, absolute>                                           # NEW directory name
 ```
 
-- Output: `<run-dir>/rehearsal_measuring.json` (public keys only; `sealed/` is not to be opened), `<run-dir>/charged_ledger.json`.
-- `--charged-ledger` adds that ledger's charge to `charged_before_freeze_seconds` (the pre-freeze charge the caps rule uses) and lists each ledger in `charged_ledgers`. Name every earlier Part Q ledger: `measure2`'s own (3,468 s, measured) and the ledger command's run directory if it wrote one (UNSURE which directory). The failed first attempt `P10IS2-Q-rehearsal-measure-20261118` wrote no ledger (it died before the charge; a failed rehearsal is now charged, but that one was not). Its wall time is not recorded by code: PENDING LEAD REVIEW whether to add an estimate by hand (it cannot be added by code).
-- Duration: about 1 h (measured 3,369 s for the run that failed to measure regeneration, plus about 100 s for regeneration, hypothetical). Fixed cap 3.0 h. **Needs a quiet machine**: the rates become the caps (a loaded machine inflates them; the record lists `other_studies_alive`). The memory guard is 12 GiB per process.
-- The first failed attempt's time: by code nothing adds it (I cannot honestly produce its ledger). The pre-freeze check found a ledger for it with 959.3 s; that is NOT in the caps' total (the caps are fixed; including it would make the total 22.75 h instead of 22.49 h, stricter); record the omission in Decision 2.
-- Exit 0 and a printed whitelist (timings, memory, counts, batches, generation items/s, stages). Nothing else is to be read before the registered analysis.
+- `caps-reset` moves the nine entered caps into `studies/p10is2/freeze/superseded/partq_caps_superseded_<UTC>.json` (with the reason, the config hash before, and the note above), sets the config back to `0.0` / `provisional = true`, and leaves a dated comment under `[stage_caps]` naming that record. It refuses once a freeze record exists and when the caps are not entered. A hand edit is never needed.
+- The measuring rehearsal refuses to run while caps are entered (so no stage can stop on the cap it measures), builds its plan in its own run directory from the config and the inputs file (never under `freeze/`), runs `partq_ledger.sh rehearsal` then every stage as `partq_registered.sh <stage> <dir> - --rehearsal --rehearsal-kind measuring` in a fresh process (one generation block per capability, one Q_check block), and writes `<dir>/rehearsal_measuring.json` with `rates_seconds_per_unit`, `overhead_seconds`, `projection_units`, `units_measured`, `stage_process_seconds`, `caps_formula`.
+- Duration, hypothetical: about 1 h of stage work plus one world build per stage process (`inputs` took 67 s in total in `counting4`; `partition`'s process took 391 s on a saturated machine), so about 1.2 to 2 h. **Needs a quiet machine**: the overhead and the rates become the caps.
 
 ## Step 1. Inputs file (by code)
 
@@ -38,23 +40,23 @@ cd "$REPO" && $Q inputs-file --out "$EXP/P10IS2-Q-freeze-inputs-20261118.json"
 ## Step 2. Units, charge and caps (by code; nothing typed)
 
 ```sh
-cd "$REPO" && $Q units-file --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure3-20261118/rehearsal_measuring.json" --out "$EXP/P10IS2-Q-freeze-units-20261118.json"
-cd "$REPO" && $Q caps-proposal --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure3-20261118/rehearsal_measuring.json" --units "$EXP/P10IS2-Q-freeze-units-20261118.json"
-cd "$REPO" && $Q caps-config  --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure3-20261118/rehearsal_measuring.json"            # prints the lines
+cd "$REPO" && $Q units-file --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure4-20261119/rehearsal_measuring.json" --out "$EXP/P10IS2-Q-freeze-units-20261118.json"
+cd "$REPO" && $Q caps-proposal --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure4-20261119/rehearsal_measuring.json" --units "$EXP/P10IS2-Q-freeze-units-20261118.json"
+cd "$REPO" && $Q caps-config  --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure4-20261119/rehearsal_measuring.json"            # prints the lines
 ```
 
 - `units-file` writes the record's `projection_units` (both split pools generated to the end, the whole Q_check reserve, the whole regeneration subsample). `caps-proposal` prints projected seconds and the hours; without `--charged-hours` it uses the record's `charged_before_freeze_seconds`, which is exactly what the freeze compares against, so do not type a charge (the sum of the ledgers is already in the record, step 0). The rule is unchanged: each stage cap is 2 x its projected time, the total is the pre-freeze charge plus 2 x all stages, rounded up to 0.01 h. `analysis` (records only, no rate to measure) is projected at a fixed 60 s: `ANALYSIS_PROJECTED_SECONDS` in `partq/plan.py`, PENDING LEAD REVIEW.
-- Rough figures (hypothetical, from the measure2 rates and units): partition 72 s, inputs 99 s, qfit about 1,000 s, qcheck about 730 s, **generation about 38,500 s (10.7 h)**, outputs about 355 s, regeneration about 100 s: about 11.3 h projected, caps about double.
+- Projected seconds per stage are overhead + rate x units (see step 0); the old figures (generation about 38,500 s, 10.7 h) did not include the per-process overhead and are superseded. The new figures come from `measure4` and are printed by `caps-proposal`.
 - **Caps are frozen: a batch stage whose cap is spent stays PAUSED, and the only way on is a recorded new freeze by the lead; no code path extends a cap.** (The same sentence is in the PAUSED message.) `partition`, `regeneration` and `analysis` have no guard between batches and can finish past their cap: their completion record then says `within_cap: false` and a warning goes to stderr, never silently.
-- Already done on this branch (`f882eb4`, total 22.49 h): the caps are entered. If the record changes, they must be recomputed; `--apply` then refuses (caps already set), so edit the ten lines by the printed values. Where the caps are entered: `configs/p10is2_partq.toml`, section `[stage_caps]`, the nine keys `inputs_hours`, `partition_hours`, `qfit_hours`, `qcheck_hours`, `generation_hours`, `regeneration_hours`, `outputs_hours`, `analysis_hours`, `total_hours` (each `0.0` now), and in `[caps]` `provisional = true` becomes `false`. By code:
+- The caps entered earlier (`f882eb4`) are reset by `caps-reset` in step 0 (a recorded correction). Where the caps are entered: `configs/p10is2_partq.toml`, section `[stage_caps]`, the nine keys `inputs_hours` ... `total_hours`, and in `[caps]` `provisional = false`. By code:
 
 ```sh
-cd "$REPO" && $Q caps-config --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure3-20261118/rehearsal_measuring.json" --apply
+cd "$REPO" && $Q caps-config --measuring-rehearsal "$EXP/P10IS2-Q-rehearsal-measure4-20261119/rehearsal_measuring.json" --apply
 cd "$REPO" && git diff configs/p10is2_partq.toml          # only those ten lines
 cd "$REPO" && git add configs/p10is2_partq.toml && git commit -S -m "P10-I-S2: Part Q stage caps from the measuring rehearsal"
 ```
 
-- `--apply` refuses unless every cap is still `0.0` and `provisional` is `true`. The freeze refuses a config whose caps differ from the rule applied to the measuring record, and refuses a record that lacks a rate or units for any registered stage.
+- `--apply` refuses unless every cap is still `0.0` and `provisional` is `true`. The freeze refuses a config whose caps differ from the rule applied to the measuring record, and refuses a record that lacks a rate, an overhead or units for any of the eight stages, or that lacks `caps_formula` (an old in-process record).
 - Tests: the config test reads the rule (all caps `0.0` while provisional; otherwise every cap set and the total not below the sum of the stage caps up to the 0.01 h rounding), so it needs no edit when the caps are entered.
 
 ## Step 3. Candidate plan

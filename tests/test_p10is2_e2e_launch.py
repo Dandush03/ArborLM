@@ -31,7 +31,7 @@ ON_RECORD = platform.system() == "Darwin" and platform.machine() == "arm64" and 
 pytestmark = pytest.mark.skipif(not ON_RECORD, reason="the platform of record (the platform check is the real one)")
 
 
-def fake_uv(tmp: Path) -> dict[str, str]:
+def fake_uv(tmp: Path, overhead: float = 0.0) -> dict[str, str]:
     """A ``uv`` that runs the child through ``p10is2_e2e_hook.py`` with the lock environment's interpreter and NO PYTHONPATH (a test never puts the durable packages on a path)."""
     bindir = tmp / "bin"
     bindir.mkdir()
@@ -39,11 +39,12 @@ def fake_uv(tmp: Path) -> dict[str, str]:
     uv.write_text('#!/bin/sh\nwhile [ "$1" != "python" ]; do shift; done\nshift\nshift\nunset PYTHONPATH\nexec "$E2E_PY" "$E2E_HOOK" "$@"\n')
     uv.chmod(uv.stat().st_mode | stat.S_IEXEC)
     env = {k: v for k, v in os.environ.items() if k not in ("PYTHONPATH", "OMP_NUM_THREADS")}
-    env.update(PATH=f"{bindir}:{env['PATH']}", E2E_PY=sys.executable, E2E_HOOK=str(TESTS / "p10is2_e2e_hook.py"), E2E_SRC=str(ROOT / "src"), E2E_ROOT=str(ROOT), E2E_TESTS=str(TESTS), PYTHONDONTWRITEBYTECODE="1")
+    env.update(PATH=f"{bindir}:{env['PATH']}", E2E_PY=sys.executable, E2E_HOOK=str(TESTS / "p10is2_e2e_hook.py"), E2E_SRC=str(ROOT / "src"), E2E_ROOT=str(ROOT), E2E_TESTS=str(TESTS), E2E_OVERHEAD=str(overhead), PYTHONDONTWRITEBYTECODE="1")
     return env
 
 
-def synthetic_repo(tmp: Path, *, decision: bool = True, record: bool = True) -> tuple[Path, str]:
+def synthetic_base(tmp: Path) -> tuple[Path, dict]:  # type: ignore[type-arg]
+    """The synthetic repository (scaled config, the study's windows in a shared ledger written with test seeds) and the plan's inputs block; no plan yet."""
     import p10is2_e2e_world as world
 
     r = make_repo(tmp)
@@ -63,6 +64,11 @@ def synthetic_repo(tmp: Path, *, decision: bool = True, record: bool = True) -> 
     data = tmp / "in.bin"
     data.write_bytes(b"abc")
     inputs = {"data": {"path": str(data), "sha256": file_sha256(data)}, pkgmanifest.KEY: pkgmanifest.build_manifest(durable, None)}
+    return r, inputs
+
+
+def synthetic_repo(tmp: Path, *, decision: bool = True, record: bool = True) -> tuple[Path, str]:
+    r, inputs = synthetic_base(tmp)
     commit = freeze(r, "Q", decision=decision, inputs=inputs, record=record)
     return r, commit
 

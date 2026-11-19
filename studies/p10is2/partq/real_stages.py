@@ -414,8 +414,10 @@ def run_stage(stage: str, repo: Path, run_dir: Path, mode: str, *, plan: planmod
             core.write_record(run_dir / pipeline.loc(ctx, "qualification.json"), {**core.envelope("qualification", "Q"), **{k: v for k, v in res.items() if k != "oracle_line"}}, overwrite=True)
             write_manifest(ctx)
             return {"label": res["label"], "part_t": res["part_t"]} if mode == "registered" else pipeline.summary_for_display(ctx)
+        t_world = time.monotonic()
         w = build_world(cfg, repo, run_dir, mode, load_teachers=True, plan=plan)
         ctx = holder["ctx"] = make_ctx(w, mode, plan=plan, limits=limits, deadline=guard, inputs_stage=stage == "inputs")
+        holder["overhead"] = time.monotonic() - t_world  # the fixed per-process cost of every stage that needs the world (checks, hashing, corpus, student, teachers): the caps rule keeps it apart from the per-unit rate
         if guard():  # the phases before the first batch are not guarded between batches: check the resident set and the cap once the world stands
             raise StageCapExceeded(guard.reason or "guard")
         if stage == "inputs":
@@ -478,7 +480,7 @@ def execute(stage: str, run_dir: Path, mode: str, led: core.Ledger, guard: Calla
         if status == "COMPLETE":
             total_seconds = prior_charged + seconds
             within = None if stage_cap_total is None else total_seconds <= stage_cap_total
-            extra = {"stage_seconds": total_seconds, "stage_cap_seconds": stage_cap_total, "within_cap": within}
+            extra = {"stage_seconds": total_seconds, "stage_cap_seconds": stage_cap_total, "within_cap": within, "overhead_seconds": float(holder.get("overhead", 0.0)), "process_seconds": seconds}
             if within is False:
                 print(f"WARNING: stage {stage} took {total_seconds:.0f} s in all, above its cap of {stage_cap_total:.0f} s: within_cap false is recorded", file=sys.stderr)
         if status != "REFUSED":

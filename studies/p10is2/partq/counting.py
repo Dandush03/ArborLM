@@ -23,7 +23,7 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import Any
 
-from arborlm.io import file_sha256, write_json
+from arborlm.io import file_sha256, read_json, write_json
 
 from ..common import core, gates, procs
 from ..common import plan as planmod
@@ -129,4 +129,82 @@ def run_counting_rehearsal(repo: Path, run_dir: Path, *, launch: Launch = subpro
     print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "batches", "generation_items_per_second", "stages", "forced") if k in rec}), default=str))
     if not complete:
         raise core.StageRefused(f"refused: the counting rehearsal is incomplete: {problems or 'a stage did not complete'}")
+    return rec
+
+
+def run_measuring_rehearsal(repo: Path, run_dir: Path, inputs_file: Path, *, launch: Launch = subprocess_launch, clock: Callable[[], float] = time.monotonic, charged_ledgers: Sequence[str] = ()) -> dict[str, Any]:
+    """The MEASURING rehearsal, through the same entry point and one fresh process per stage as the registered run and the counting rehearsal, so that what it measures is what the caps rule needs: each stage's
+    WHOLE-PROCESS seconds (the wall time ``execute`` charges, the world build inside it). Per stage it records the fixed per-process ``overhead_seconds`` (the seconds the process spent building its world: the checks,
+    the hashing, the corpus, the student, the teachers) apart from the per-unit rate ``(stage seconds - overhead) / units``; the registered charge of a stage is then ``overhead + rate x units`` (``caps_formula``),
+    one overhead per stage PROCESS: a stage that is paused and resumed pays it again, and the batches of a stage are inside its one process, so they are counted by units (generation: sources; qfit and qcheck: items;
+    regeneration: sources of the stored batches), never by processes. It runs against a plan built here from the config (caps unset: ``caps-reset`` first) and the inputs file, kept in the run directory, never under
+    ``freeze/``. Block limits: one generation block per capability and one Q_check block."""
+    cfg = core.load_config("Q", repo / core.CONFIG_Q)
+    gates.apply_platform_settings(cfg)
+    core.require_ignored_run_dir(repo, run_dir)
+    if not cfg["caps"]["provisional"] or any(float(v) != 0.0 for v in cfg["stage_caps"].values()):
+        raise core.StageRefused("refused: the config holds caps already; a measuring rehearsal runs with the caps unset (run caps-reset first), so that no stage can stop on a cap it is there to measure")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    plan_rec = qplan.build_candidate(repo, run_dir / "registered_run_dir_unused", cfg, inputs=read_json(inputs_file), walk=planmod.import_walk(repo, "Q"))
+    plan_file = run_dir / "measuring_plan.json"
+    write_json(plan_file, core.jsonable(plan_rec))
+    plan = planmod.Plan.load(plan_file, "Q")
+    logs = run_dir / "logs"
+    t0 = clock()
+    problems: list[str] = []
+    wall: dict[str, float] = {}
+
+    def go(name: str, argv: Sequence[str]) -> bool:
+        t = clock()
+        rc = launch(argv, logs / f"{name}.log", 4 * 3600.0)
+        wall[name] = clock() - t
+        if rc != 0:
+            problems.append(f"{name}: exit {rc}, expected 0")
+        return rc == 0
+
+    ok = True
+    if not real_stages.ledger_path(cfg, repo, run_dir, "rehearsal").is_file():
+        ok = go("ledger", ["sh", str(repo / "studies/p10is2/launch/partq_ledger.sh"), "rehearsal", str(run_dir)])
+    for stage in real_stages.STAGE_ORDER:
+        if not ok:
+            break
+        ok = go(stage, stage_argv(repo, stage, run_dir, "--rehearsal-kind", "measuring", "--plan-file", str(plan_file)))
+    ctx = real_stages._light_ctx(cfg, run_dir, "rehearsal")
+    led = core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12)
+    done, full = rehearsal.units_done_and_full(ctx)
+    stages: dict[str, dict[str, Any]] = {}
+    rates: dict[str, float] = {}
+    overhead: dict[str, float] = {}
+    for s in qplan.REHEARSAL_STAGES:
+        f = real_stages.completion_path(run_dir, s)
+        comp = json.loads(f.read_text()) if f.is_file() else {}
+        complete = comp.get("status") == "COMPLETE" and "overhead_seconds" in comp
+        stages[s] = {"status": "COMPLETE" if complete else "NOT RUN", "seconds": led.charged(s)}
+        if complete and done[s] > 0:
+            overhead[s] = float(comp["overhead_seconds"])
+            rates[s] = max(0.0, float(comp["stage_seconds"]) - overhead[s]) / done[s]
+            stages[s].update(overhead_seconds=overhead[s], units=done[s])
+        elif complete:
+            problems.append(f"{s}: no units to measure a rate on")
+    pipeline.write_sealed_summary(ctx)
+    summary = pipeline.summary_for_display(ctx)
+    sources = sum(float(v) for v in ((summary["counts"] or {}).get("generation_sources") or {}).values())
+    gen_seconds = led.charged("generation")
+    r = resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss
+    peak = float(r) / (1024 * 1024) if os.uname().sysname == "Darwin" else float(r) / 1024
+    earlier = {str(Path(x)): core.Ledger(Path(x), "Q", 1e12).charged() for x in charged_ledgers}
+    complete_all = all(v["status"] == "COMPLETE" for v in stages.values()) and not problems
+    rec = {
+        **core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "seal_note": rehearsal.SEAL_NOTE, "status": "COMPLETE" if complete_all else "INCOMPLETE", "caps_provisional": True, "cannot_be_frozen_on": True,
+        "caps_formula": qplan.CAPS_FORMULA, "entry_point": "partq_registered.sh <stage> <run-dir> - --rehearsal --rehearsal-kind measuring, one fresh process per stage", "stages": stages, "problems": problems,
+        "rates_seconds_per_unit": rates, "overhead_seconds": overhead, "projection_units": full, "units_measured": done, "stage_process_seconds": {s: v["seconds"] for s, v in stages.items()},
+        "charged_before_freeze_seconds": led.charged() + sum(earlier.values()), "charged_seconds": led.charged(), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **earlier},
+        "timings": {"total_seconds": clock() - t0, "process_seconds": wall}, "memory": {"peak_rss_mib_of_any_stage_process": peak}, "counts": summary["counts"], "batches": summary["batches"],
+        "generation_items_per_second": {"all": (sources / gen_seconds) if gen_seconds and sources else None}, "plan_stage_items": {st: len(v) for st, v in plan.data["items"].items()}, "platform": gates.platform_record(),
+        "load": {"end": rehearsal.load_average()}, "other_studies_alive": procs.other_studies_alive(),
+    }  # fmt: skip
+    core.write_record(run_dir / "rehearsal_measuring.json", rec, overwrite=True)
+    print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "batches", "generation_items_per_second", "stages") if k in rec}), default=str))
+    if not complete_all:
+        raise core.StageRefused(f"refused: the measuring rehearsal is incomplete: {problems or 'a stage did not complete'}")
     return rec

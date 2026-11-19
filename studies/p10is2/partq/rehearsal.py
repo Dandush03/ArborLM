@@ -56,6 +56,27 @@ def whitelist(summary: Mapping[str, Any]) -> dict[str, Any]:
     return {k: v for k, v in summary.items() if k in allowed}
 
 
+def units_done_and_full(ctx: pipeline.QContext) -> tuple[dict[str, float], dict[str, float]]:
+    """The units each stage processed in this run directory and the units of the FULL run (both split pools generated to the end, the whole Q_check reserve drawn, the whole regeneration subsample, every panel
+    of the outputs), read from the records. ``inputs`` and ``analysis`` are one unit each."""
+    have = pipeline._have
+    pc = (have(ctx, "partition_counts.json") or {}).get("counts", {})
+    qc = {c: have(ctx, f"qcheck/teacher_{c}/result.json") or {} for c in core.TASKS}
+    gen = have(ctx, "generation/result.json") or {}
+    n_qfit = float(pc.get("panel_sizes", {}).get("Q_fit", 0))
+    block = int(ctx.sizes["q_check_block"]) if ctx.sizes and "q_check_block" in ctx.sizes else int(ctx.cfg["panels"]["q_check_block"])
+    panels = float(sum(float(v) for v in (pc.get("panel_sizes") or {}).values()))
+    regen = float(2 * (ctx.regeneration_batches or int(ctx.cfg["generation"]["regeneration_batches"])) * ctx.size)
+    done = {
+        "inputs": 1.0, "partition": 1.0, "qfit": 2.0 * n_qfit, "qcheck": float(sum((qc[c].get("stop") or {}).get("blocks_drawn", 0) for c in core.TASKS) * block),
+        "generation": float(sum(v.get("sources_generated", 0) for v in (gen.get("per_capability") or {}).values())), "regeneration": regen, "outputs": panels, "analysis": 1.0,
+    }  # fmt: skip
+    full = dict(done)
+    full["qcheck"] = float(2 * int(pc.get("reserve_blocks", 0)) * block)
+    full["generation"] = float((gen.get("split") or {}).get("A_sources", 0) + (gen.get("split") or {}).get("B_sources", 0))
+    return done, full
+
+
 def rates_and_units(ctx: pipeline.QContext, external: Mapping[str, tuple[float, float]] | None = None) -> tuple[dict[str, float], dict[str, float]]:
     """Seconds per unit by stage from this run's timings and the units it actually processed, and the units of the FULL run (both split pools generated to the end, the whole Q_check reserve drawn, the whole
     regeneration subsample): Part Q's projection assumes the worst case (section 10 item 3). ``external`` is (seconds, units) for the stages the pipeline does not run itself (inputs, outputs)."""

@@ -14,7 +14,6 @@ import argparse
 import json
 import os
 import re
-import time
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -24,7 +23,6 @@ from arborlm.io import file_sha256
 from ..common import core
 from ..common import plan as planmod
 from ..common.core import StageRefused
-from . import pipeline
 
 ADR_0004 = "docs/decisions/ADR-0004-real-data-pilot-prerequisite.md"
 ADR_0004_REVISION = "b08601e04326c79dfdd32d625aee71d232d685c3"  # the Hugging Face DATASET revision ADR-0004 pins for the parquet files; NOT a git commit
@@ -108,83 +106,31 @@ def run_registered_stage(stage: str, repo: Path, run_dir: Path, plan: Any) -> di
     return real_stages.run_stage(stage, repo, run_dir, "registered", plan=plan)
 
 
-def run_rehearsal_stage(stage: str, repo: Path, run_dir: Path, plan: Any, *, pause_after_batches: int | None = None) -> dict[str, Any]:
-    """One stage of the COUNTING rehearsal: the registered stage function (``real_stages.run_stage``), in this process, parameters from the candidate plan. The documented rehearsal overrides, and only these:
-    mode ``rehearsal`` (the rehearsal partition and generation seeds 2529xx, the candidate ledger, the sealed layout), the block limits of the config (``caps.rehearsal_generation_blocks`` generation blocks per
-    capability, one Q_check block), ``force_generation`` (every stage runs whatever Q1-Q4 gave), the forced pause, and no Decision 2."""
+def run_rehearsal_stage(stage: str, repo: Path, run_dir: Path, plan: Any, *, pause_after_batches: int | None = None, kind: str = "counting") -> dict[str, Any]:
+    """One stage of a rehearsal: the registered stage function (``real_stages.run_stage``), in this process, parameters from the plan. The documented rehearsal overrides, and only these: mode ``rehearsal`` (the
+    rehearsal partition and generation seeds 2529xx, the candidate ledger, the sealed layout), the block limits (counting: ``caps.rehearsal_generation_blocks`` generation blocks per capability; measuring: one),
+    one Q_check block, ``force_generation`` (every stage runs whatever Q1-Q4 gave), the forced pause, and no Decision 2."""
     from . import real_stages
 
     cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    limits = {"force_generation": True, "max_generation_blocks": int(cfg["caps"]["rehearsal_generation_blocks"]), "max_check_blocks": 1}
+    blocks = 1 if kind == "measuring" else int(cfg["caps"]["rehearsal_generation_blocks"])
+    limits = {"force_generation": True, "max_generation_blocks": blocks, "max_check_blocks": 1}
     return real_stages.run_stage(stage, repo, run_dir, "rehearsal", plan=plan, limits=limits, pause_after_batches=pause_after_batches)
 
 
 def run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace) -> None:
-    """The two Part Q rehearsals on the real teachers (section 10): ``measuring`` (steps 1-8, one generation block per capability, one Q_check block, the fixed cap) and ``counting`` (the candidate plan file, two
-    generation blocks per capability, one forced pause and resume, one forced PAUSED — IDENTITY and restore). The rehearsal runs generation, regeneration and the outputs WHATEVER Q1-Q4 give (``force_generation``:
-    a fallback filter setting if Q3 gives none), so that which stages ran does not reveal the sealed outcome. Values of Q1-Q4 and every per-item score go to ``<run-dir>/sealed``; the record printed is the
-    whitelist. The rehearsal partition seeds 252901-252914 are used; the wall time of the whole run is charged to ``<run-dir>/charged_ledger.json`` (ruling L2), also when the rehearsal fails."""
-    t_start = time.monotonic()
-    try:
-        _run_rehearsal(kind, repo, run_dir, args)
-    except BaseException:
-        core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12).charge_process("rehearsal-failed", kind, "main", time.monotonic() - t_start)
-        raise
+    """The two Part Q rehearsals on the real teachers (section 10), BOTH driven through the registered entry point, one fresh process per stage (``partq/counting.py``): ``measuring`` (one generation block per
+    capability, one Q_check block; it measures each stage's whole-process seconds, the fixed per-process overhead apart from the per-unit rate, for the caps rule) and ``counting`` (the candidate plan file, the
+    block limit of the config, one forced pause and resume, one forced PAUSED — IDENTITY and restore). Both run every stage whatever Q1-Q4 give (``force_generation``); the values of Q1-Q4 go to ``<run-dir>/sealed``
+    and the record printed is the whitelist. Each stage process charges its own wall time to ``<run-dir>/charged_ledger.json`` (ruling L2)."""
+    from . import counting
 
-
-def _run_rehearsal(kind: str, repo: Path, run_dir: Path, args: argparse.Namespace) -> None:
-    from ..common import gates as cgates
-    from ..common import procs
-    from . import real_stages, rehearsal
-
-    if kind == "counting":  # driven through the registered entry point, a fresh process per stage (partq/counting.py)
-        from . import counting
-
+    if kind == "counting":
         counting.run_counting_rehearsal(repo, run_dir, charged_ledgers=getattr(args, "charged_ledger", None) or [])
-        return
-    cfg = core.load_config("Q", repo / core.CONFIG_Q)
-    cgates.apply_platform_settings(cfg)
-    core.require_ignored_run_dir(repo, run_dir)
-    t0 = time.monotonic()
-    if not real_stages.ledger_path(cfg, repo, run_dir, "rehearsal").is_file():
-        real_stages.command_ledger(repo, run_dir, "rehearsal")  # the candidate ledger of the rehearsal (seed 252907); inputs verifies it
-    w = real_stages.build_world(cfg, repo, run_dir, "rehearsal", load_teachers=True)  # with the candidate plan the world runs the SAME stage-start check of the plan's inputs and package manifest as a registered stage
-    ctx0 = real_stages.make_ctx(w, "rehearsal")
-    inputs = real_stages.stage_inputs(w, ctx0, "rehearsal")
-    t_inputs = time.monotonic() - t0
-
-    def factory() -> pipeline.QContext:
-        c = real_stages.make_ctx(w, "rehearsal")
-        c.force_generation = True
-        return c
-
-    cap = float(cfg["caps"]["measuring_rehearsal_hours"]) * 3600.0
-    out_info: dict[str, Any] = {}
-
-    def outputs_stage() -> None:
-        """Step 8, a stage of the registered run: it runs in EVERY rehearsal, whatever Q1-Q4 gave (whether it ran must not reveal the sealed outcome)."""
-        c = factory()
-        p = pipeline.step_partition(c)
-        t1 = time.monotonic()
-        out = real_stages.stage_outputs(w, c, p, "rehearsal")
-        out_info.update(seconds=time.monotonic() - t1, bundle=out["bundle"], units=float(sum(len(v) for v in p.panels.values())))
-
-    if kind == "measuring":
-        rec = rehearsal.run_measuring(factory, cap_seconds=cap, external={"inputs": (t_inputs, 1.0)}, post_stages={"outputs": outputs_stage})
-        rec["rates_seconds_per_unit"]["outputs"] = out_info["seconds"] / max(1.0, out_info["units"])
-        rec["projection_units"]["outputs"] = out_info["units"]
-    rec["inputs_stage"] = {"seconds": t_inputs, "ordinary_windows_left": inputs["ordinary_windows_left"], "marker_like_windows": inputs["marker_like_windows"], "corpus_supply": inputs["corpus_supply"]}
-    rec["outputs_stage"] = {"ran": True, "seconds": out_info["seconds"]}
-    rec["other_studies_alive"] = procs.other_studies_alive()
-    total = time.monotonic() - t0
-    led = core.Ledger(run_dir / "charged_ledger.json", "Q", 1e12)
-    led.charge_process("rehearsal", kind, "main", total)  # rehearsal time counts in the part's charge (ruling L2)
-    rec["charged_seconds"] = total
-    earlier = {str(Path(x)): core.Ledger(Path(x), "Q", 1e12).charged() for x in (getattr(args, "charged_ledger", None) or [])}  # earlier Part Q ledgers named by the lead (the failed first attempt, the ledger command): their charge belongs to the same total
-    rec["charged_ledgers"] = {str(run_dir / "charged_ledger.json"): led.charged(), **earlier}
-    rec["charged_before_freeze_seconds"] = led.charged() + sum(earlier.values())  # the caps proposal's pre-freeze charge: this run directory and every ledger named with --charged-ledger
-    core.write_record(run_dir / f"rehearsal_{kind}.json", rec, overwrite=True)
-    print(json.dumps(rehearsal.whitelist({k: rec[k] for k in ("timings", "memory", "counts", "batches", "generation_items_per_second", "stages", "forced") if k in rec}), default=str))
+    else:
+        if not getattr(args, "inputs", None):
+            raise StageRefused("refused: the measuring rehearsal needs --inputs (the inputs file of inputs-file): its stages verify the plan's inputs like a registered stage")
+        counting.run_measuring_rehearsal(repo, run_dir, Path(args.inputs), charged_ledgers=getattr(args, "charged_ledger", None) or [])
 
 
 def identity_probe(plan: Any, repo: Path, run_dir: Path) -> Any:

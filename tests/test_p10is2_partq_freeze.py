@@ -290,7 +290,8 @@ def freeze_args(repo: Path, tmp: Path, **kw) -> argparse.Namespace:  # type: ign
 
 
 def measuring_record(tmp: Path, units: dict, rates: dict, charged: float = 3600.0) -> None:  # type: ignore[type-arg]
-    core.write_record(tmp / "meas.json", {**core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "caps_provisional": True, "rates_seconds_per_unit": rates, "projection_units": units, "charged_before_freeze_seconds": charged}, overwrite=True)
+    units, rates = {**{"analysis": 1.0}, **units}, {**{"analysis": 60.0}, **rates}  # analysis is measured like the rest (here: one unit at 60 s, the old fixed figure)
+    core.write_record(tmp / "meas.json", {**core.envelope("rehearsal", "Q"), "kind_of_rehearsal": "measuring", "caps_provisional": True, "caps_formula": qplan.CAPS_FORMULA, "rates_seconds_per_unit": rates, "overhead_seconds": {k: 0.0 for k in units}, "projection_units": units, "charged_before_freeze_seconds": charged}, overwrite=True)
 
 
 def test_freeze_refuses_provisional_caps_and_caps_that_are_not_the_codes(repo: Path, tmp_path: Path, platform_ok: None, monkeypatch: pytest.MonkeyPatch) -> None:
