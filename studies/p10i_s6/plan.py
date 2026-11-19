@@ -30,8 +30,10 @@ FROZEN_ROOTS = ("studies/p10i_s6",)
 PRINTING = "studies/p10i_s6/printing"
 # ruling 19: everything that produces a number is COMPUTING (BASE values and panel slices in stages, calibration curves in rehearsal, the data tables in d0, the parents in p0, the caps in plan and cost, the synthetic data in testing);
 # ORCHESTRATION holds only code that cannot change a number (process supervision); ``printing/`` and the launch scripts print or start processes.
-COMPUTING = ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch", "plan", "stages", "rehearsal", "d0", "p0", "cost", "testing", "realcheck")
-ORCHESTRATION = ("runner", "__init__")
+COMPUTING = ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch", "plan", "stages", "rehearsal", "d0", "p0", "cost")
+# ORCHESTRATION: ``runner`` (process supervision), ``testing`` (test support and synthetic rehearsals: no real path imports it, a test asserts that) and ``realcheck`` (a standalone check that reads COPIES of public inputs and writes only a copy of the
+# ledger; no stage imports it). None of them can change a number of a real run; as files of the study folder they are still frozen inputs, so an edit after the freeze pauses a run whichever list they are in (move or fix them before the freeze).
+ORCHESTRATION = ("runner", "__init__", "testing", "realcheck")
 DECISION_RUN_LINE, DECISION_NO_RUN_LINE = "DECISION: RUN", "DECISION: DO NOT RUN"
 IMPORTED_S3 = ("studies/p10i_s3/model.py", "studies/p10i_s3/calibration.py", "studies/p10i_s3/core.py", "studies/p10i_s3/planted.py", "studies/p10i_s3/data.py", "studies/p10i_s3/parents.py", "studies/p10s2/fetch_guard.py", "studies/p10s2/core.py")
 RUNTIME_RESULTS_GLOBS = ("results/p3-lt-2026-11-12/b*-control/manifest.json", "results/p3-lt-2026-11-12/b*-control/order.json", "results/p4-2026-11-12/b*-baseline/result.json")

@@ -90,8 +90,8 @@ def test_d0_end_to_end_on_a_fixture() -> None:
         assert count_overlaps(panel, excl) == 0 and len(panel) == 16
         pb = (d / "out" / "panels.bytes").read_bytes()
         assert len(pb) == 16 * 65 and pb[: 8 * 65] == b"".join(val[r].payload for r in m["panels"]["registered"])
-        with pytest.raises(core.EngineeringStop, match="written once"):
-            d0.prepare(iter(rows103), wt2_train, wt2_val, ledger, d / "out", cfg, s3_excluded=spans)
+        again = d0.prepare(iter(rows103), wt2_train, wt2_val, ledger, d / "out", cfg, s3_excluded=spans)  # a rerun on a complete verified output with the ledger already holding these windows changes nothing
+        assert again == m and ledger.read_bytes() == new_raw
         assert not list((d / "out").glob("_work"))  # the work folder was moved into place
 
 
@@ -152,3 +152,81 @@ def test_byte_windows_of_the_concatenated_rows_become_row_spans() -> None:
     from studies.p10i_s3.data import overlaps
 
     assert overlaps((1, 20, 85), (1, 0, 50)) and not overlaps((2, 150, 215), (2, 10, 150))
+
+
+def test_n1_a_failure_before_or_right_after_the_append_is_rerunnable(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Audit N1: the manifest in its final form is in place and verified BEFORE the append; the append is the last act. A crash before it leaves the ledger untouched and the rerun performs only the append; a crash right after it leaves exactly these windows and the rerun accepts them."""
+    rng = random.Random(9)
+    wt2_train, wt2_val, rows103 = wiki(rng, 10), wiki(rng, 12, 3, 400), wiki(rng, 120)
+    cfg = cfg_small()
+    real_commit = d0.commit_append
+
+    def run(d: Path, ledger: Path, tag: str) -> dict[str, Any]:
+        return d0.prepare(iter(rows103), wt2_train, wt2_val, ledger, d / tag, cfg)
+
+    with testing.scratch("n1a") as d:
+        ledger = d / "l.json"
+        raw = real_format_ledger(ledger, wt2_val)
+
+        def boom(path: Path, plan: Any) -> Any:
+            raise OSError("disk full before the append")
+
+        monkeypatch.setattr(d0, "commit_append", boom)
+        with pytest.raises(OSError):
+            run(d, ledger, "o")
+        assert ledger.read_bytes() == raw and (d / "o" / "d0_manifest.json").is_file()  # output complete and verified, ledger untouched
+        d0.verify_output(d / "o")
+        monkeypatch.setattr(d0, "commit_append", real_commit)
+        m = run(d, ledger, "o")  # the rerun does only the append
+        assert hashlib.sha256(ledger.read_bytes()).hexdigest() == m["panels"]["ledger_append"]["sha256_after"] and len(json.loads(ledger.read_bytes())["windows"]) == 2 + 16
+    with testing.scratch("n1b") as d:
+        ledger = d / "l.json"
+        raw = real_format_ledger(ledger, wt2_val)
+
+        def after(path: Path, plan: Any) -> Any:
+            real_commit(path, plan)
+            raise OSError("killed right after the append")
+
+        monkeypatch.setattr(d0, "commit_append", after)
+        with pytest.raises(OSError):
+            run(d, ledger, "o")
+        done = ledger.read_bytes()
+        assert done != raw
+        monkeypatch.setattr(d0, "commit_append", real_commit)
+        m = run(d, ledger, "o")  # accepted: exactly this study's windows, complete verified output
+        assert ledger.read_bytes() == done and m["panels"]["ledger_append"]["entries_added"] == 16
+        rec = json.loads(done)
+        rec["windows"][-1]["end"] += 1
+        ledger.write_bytes((json.dumps(rec, sort_keys=True, separators=(",", ":")) + "\n").encode())
+        with pytest.raises(core.EngineeringStop, match="not exactly this D0's panels"):
+            run(d, ledger, "o")  # any other mismatch still refuses
+        rec = json.loads(done)
+        del rec["windows"][-1]
+        ledger.write_bytes((json.dumps(rec, sort_keys=True, separators=(",", ":")) + "\n").encode())
+        with pytest.raises(core.EngineeringStop, match="not exactly this D0's panels"):
+            run(d, ledger, "o")  # a partial append is refused
+        (d / "o" / "panels.bytes").write_bytes(b"x")
+        with pytest.raises(core.EngineeringStop, match="does not hash"):
+            run(d, ledger, "o")  # an unverified output is refused
+
+
+REAL_LEDGER = Path("/Users/daniellaloush/dandush03/ArborLM/data/p10i-shared/panel_ledger.json")
+
+
+@pytest.mark.skipif(not REAL_LEDGER.is_file(), reason="the lead's shared ledger is not on this machine")
+def test_n1_primitives_on_a_copy_of_the_real_ledger() -> None:
+    before = hashlib.sha256(REAL_LEDGER.read_bytes()).hexdigest()
+    add = [{"start": 10 * i, "end": 10 * i + 5, "first_row": 0, "last_row": 0, "source": d0.SOURCES[i % 2]} for i in range(1024)]
+    with testing.scratch("n1real") as d:
+        copy_ = d / "ledger.json"
+        copy_.write_bytes(REAL_LEDGER.read_bytes())
+        assert d0.ledger_state(copy_, add) == "absent"
+        plan = d0.plan_append(copy_, add)  # planning writes nothing
+        assert hashlib.sha256(copy_.read_bytes()).hexdigest() == before
+        info = d0.commit_append(copy_, plan)
+        assert info["entries_added"] == 1024 and info["windows_after"] == info["windows_before"] + 1024 and d0.ledger_state(copy_, add) == "present"
+        with pytest.raises(core.EngineeringStop, match="not exactly"):
+            d0.ledger_state(copy_, add[:-1])
+        with pytest.raises(core.EngineeringStop, match="changed since"):
+            d0.commit_append(copy_, plan)  # the file is no longer the one the plan was made on
+    assert hashlib.sha256(REAL_LEDGER.read_bytes()).hexdigest() == before

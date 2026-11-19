@@ -130,9 +130,14 @@ def test_the_two_lists_partition_the_package_and_each_files_side_is_named() -> N
     stems = {p.stem for p in (REAL / "studies/p10i_s6").glob("*.py")}
     comp, orch = set(planmod.COMPUTING), set(planmod.ORCHESTRATION)
     assert comp | orch == stems and not comp & orch, sorted(stems ^ (comp | orch))
-    for n in ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch", "plan", "stages", "rehearsal", "d0", "p0", "cost", "testing", "realcheck"):
+    for n in ("core", "labels", "analysis", "calibration", "model", "items", "corpus", "parents", "gates", "synthetic", "fetch", "plan", "stages", "rehearsal", "d0", "p0", "cost"):
         assert n in comp, n  # BASE values and panel slices (stages), calibration curves (rehearsal), data tables (d0), parents (p0), caps (plan, cost): all produce numbers
-    assert orch == {"runner", "__init__"}  # supervision only: it cannot change a number
+    assert orch == {"runner", "__init__", "testing", "realcheck"}  # supervision, test support and a standalone copy-only check: none can change a number of a real run
+    import inspect
+
+    from studies.p10i_s6 import stages
+
+    assert ".testing" not in inspect.getsource(stages.real_resources)  # no real path imports the test support (the synthetic resources do, in their own function)
     ch = planmod.computing_hashes(REAL)
     assert set(ch) == {f"studies/p10i_s6/{n}.py" for n in comp} | {str(core.CONFIG)}
     assert not any("printing" in f for f in ch)

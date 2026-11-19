@@ -112,9 +112,9 @@ def new_windows(panels: Mapping[str, Sequence[int]], val_spans: Sequence[Span], 
     return out
 
 
-def append_panels(path: Path, add: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    """Append entries to ``windows`` without rewriting any existing key or entry (ruling 17). The file is canonical JSON (sorted keys, compact separators, one trailing newline); that is verified first so that the old entries keep their bytes. Returns the hash
-    before and after and the number of entries added; refuses if this study's sources are already there."""
+def plan_append(path: Path, add: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Everything about the append EXCEPT writing it: the new bytes and the record (hash before and after, entries added). Refuses a non-canonical ledger (the old entries must keep their bytes), a ledger that already holds this study's windows, and any change
+    to an existing key or entry."""
     raw, rec = read_ledger(path)
     canon = (json.dumps(rec, sort_keys=True, separators=(",", ":")) + "\n").encode()
     if canon != raw:
@@ -128,31 +128,91 @@ def append_panels(path: Path, add: Sequence[Mapping[str, Any]]) -> dict[str, Any
     check = json.loads(new)
     if check["windows"][: len(old_windows)] != old_windows or {k: v for k, v in check.items() if k != "windows"} != {k: v for k, v in json.loads(raw).items() if k != "windows"}:
         raise EngineeringStop("ENGINEERING STOP — appending would change an existing key or entry")
-    atomic_write(path, new)
-    return {"sha256_before": before, "sha256_after": hashlib.sha256(new).hexdigest(), "entries_added": len(add), "windows_before": len(old_windows), "windows_after": len(check["windows"])}
+    return {"new_bytes": new, "before_bytes_sha256": before, "info": {"sha256_before": before, "sha256_after": hashlib.sha256(new).hexdigest(), "entries_added": len(add), "windows_before": len(old_windows), "windows_after": len(check["windows"])}}
+
+
+def commit_append(path: Path, plan: Mapping[str, Any]) -> dict[str, Any]:
+    """The append, the LAST act of D0: it writes only if the file still has the hash the plan was made on."""
+    if hashlib.sha256(path.read_bytes()).hexdigest() != plan["before_bytes_sha256"]:
+        raise EngineeringStop("ENGINEERING STOP — the panel ledger changed since D0 planned its append")
+    atomic_write(path, plan["new_bytes"])
+    return dict(plan["info"])
+
+
+def append_panels(path: Path, add: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Append entries to ``windows`` without rewriting any existing key or entry (ruling 17): plan, then commit."""
+    return commit_append(path, plan_append(path, add))
+
+
+def ledger_state(path: Path, add: Sequence[Mapping[str, Any]]) -> str:
+    """``absent``: the ledger holds none of this study's windows. ``present``: it holds EXACTLY ``add`` (by value, in order) as its last entries. Anything else (some of them, other content, other places) is an engineering stop."""
+    _, rec = read_ledger(path)
+    mine = [i for i, w in enumerate(rec["windows"]) if w.get("source") in SOURCES]
+    if not mine:
+        return "absent"
+    n = len(add)
+    if mine != list(range(len(rec["windows"]) - n, len(rec["windows"]))) or rec["windows"][-n:] != json.loads(json.dumps(list(add))):
+        raise EngineeringStop("ENGINEERING STOP — the panel ledger holds P10-I-S6 windows that are not exactly this D0's panels (or not at its end): it is not accepted")
+    return "present"
+
+
+def verify_output(out_dir: Path) -> dict[str, Any]:
+    """The output is complete and verified: the manifest exists, every file it lists is there and hashes to what it says, the table has its recorded size."""
+    mf = out_dir / "d0_manifest.json"
+    if not mf.is_file():
+        raise EngineeringStop("ENGINEERING STOP — the D0 output has no manifest")
+    m = json.loads(mf.read_text(encoding="utf-8"))
+    for name, digest in m["files"].items():
+        f = out_dir / name
+        if not f.is_file() or file_sha256(f) != digest:
+            raise EngineeringStop(f"ENGINEERING STOP — the D0 output file {name} is missing or does not hash to the manifest")
+    if (out_dir / m["table"]["name"]).stat().st_size != int(m["table"]["rows"]) * 65:
+        raise EngineeringStop("ENGINEERING STOP — the chunk table has the wrong size")
+    return m  # type: ignore[no-any-return]
 
 
 def prepare(rows103: Iterable[str], wt2_train: Sequence[str], wt2_val: Sequence[str], ledger_path: Path, out_dir: Path, cfg: Mapping[str, Any], *, s3_excluded: Sequence[Span] = (), s3_excluded_sha256: str | None = None, expect_p1_train_sha: str | None = None) -> dict[str, Any]:
-    """Everything is built in ``out_dir/_work`` and moved into place only when every gate has passed; the ledger is appended LAST. A failure leaves the ledger untouched and the partial work kept aside as ``_failed-N`` (never deleted), so a rerun is possible (ruling 17)."""
+    """Order of acts (audit N1, ruling 17): everything this study writes for itself, the manifest in its final form included, is built in ``out_dir/_work``, moved into place and VERIFIED; only then is the shared ledger appended, as the very last act.
+    A failure before the append leaves the ledger untouched and the partial work kept aside as ``_failed-N``. A rerun that finds a complete verified output accepts it: if the ledger does not yet hold the windows it performs only the append; if it already holds exactly
+    these windows (by value) it changes nothing. Any other state is refused."""
     out_dir.mkdir(parents=True, exist_ok=True)
     if (out_dir / "d0_manifest.json").exists():
-        raise EngineeringStop("ENGINEERING STOP — a D0 manifest exists in the output folder; D0 is written once")
+        return _resume(wt2_train, wt2_val, ledger_path, out_dir)
     work = out_dir / "_work"
     if work.exists():
         work.rename(out_dir / f"_failed-{len(list(out_dir.glob('_failed-*')))}")
     work.mkdir()
     try:
-        manifest = _prepare(rows103, wt2_train, wt2_val, ledger_path, work, cfg, s3_excluded, s3_excluded_sha256, expect_p1_train_sha)
+        manifest, plan = _prepare(rows103, wt2_train, wt2_val, ledger_path, work, cfg, s3_excluded, s3_excluded_sha256, expect_p1_train_sha)
     except BaseException:
         work.rename(out_dir / f"_failed-{len(list(out_dir.glob('_failed-*')))}")
         raise
-    for f in sorted(work.iterdir()):
+    for f in sorted(work.iterdir(), key=lambda p: p.name == "d0_manifest.json"):  # the manifest is moved last: its presence means the output is complete
         f.rename(out_dir / f.name)
     work.rmdir()
+    verify_output(out_dir)
+    commit_append(ledger_path, plan)  # the last act
     return manifest
 
 
-def _prepare(rows103: Iterable[str], wt2_train: Sequence[str], wt2_val: Sequence[str], ledger_path: Path, out_dir: Path, cfg: Mapping[str, Any], s3_excluded: Sequence[Span], s3_sha: str | None, expect_p1_train_sha: str | None) -> dict[str, Any]:
+def _resume(wt2_train: Sequence[str], wt2_val: Sequence[str], ledger_path: Path, out_dir: Path) -> dict[str, Any]:
+    m = verify_output(out_dir)
+    lengths = [len(r.encode("utf-8")) for r in wt2_val]
+    _, vspans, _ = validation_candidates(list(wt2_train), list(wt2_val))
+    adds = new_windows({SOURCES[0]: m["panels"]["registered"], SOURCES[1]: m["panels"]["calibration"]}, vspans, row_starts(lengths))
+    info = m["panels"]["ledger_append"]
+    if ledger_state(ledger_path, adds) == "present":
+        if hashlib.sha256(ledger_path.read_bytes()).hexdigest() != info["sha256_after"]:
+            raise EngineeringStop("ENGINEERING STOP — the ledger holds this D0's windows but its hash is not the one the manifest recorded")
+        return m
+    plan = plan_append(ledger_path, adds)
+    if plan["info"] != info:
+        raise EngineeringStop("ENGINEERING STOP — the ledger is not the file this D0 was prepared against (its hash before differs from the manifest's)")
+    commit_append(ledger_path, plan)
+    return m
+
+
+def _prepare(rows103: Iterable[str], wt2_train: Sequence[str], wt2_val: Sequence[str], ledger_path: Path, out_dir: Path, cfg: Mapping[str, Any], s3_excluded: Sequence[Span], s3_sha: str | None, expect_p1_train_sha: str | None) -> tuple[dict[str, Any], dict[str, Any]]:
     d = cfg["data"]
     label = str(d["rank_label"])
     gates: dict[str, Any] = {}
@@ -187,11 +247,12 @@ def _prepare(rows103: Iterable[str], wt2_train: Sequence[str], wt2_val: Sequence
     if not all(g["passed"] for g in gates.values()):
         raise EngineeringStop(f"ENGINEERING STOP — a D0 gate failed: {[k for k, g in gates.items() if not g['passed']]}")
     adds = new_windows({SOURCES[0]: reg_ranks, SOURCES[1]: cal_ranks}, val_spans, row_starts(lengths))
-    appended = append_panels(ledger_path, adds)  # LAST: nothing above can fail after this
+    plan = plan_append(ledger_path, adds)  # planned here, WRITTEN last (by ``prepare``, after the output is in place and verified)
+    appended = plan["info"]
     files = {table["name"]: table["sha256"], "panels.bytes": hashlib.sha256(panel_bytes).hexdigest()}
     manifest = {**core.envelope("d0"), "counts": sel.counts, "decision": decision, "table": table, "panels_file": "panels.bytes", "panels": {"registered": reg_ranks, "calibration": cal_ranks, "ledger_append": appended}, "eligible_validation_spans_left_for_panels": left, "validation_counts": dict(vcounts), "near_duplicate_share_registered_panel": near, "gates": gates, "files": files, "k_max": k_max, "rank_label": label, "s3_excluded_spans_sha256": s3_sha}
     atomic_write(out_dir / "d0_manifest.json", canonical_json(core.jsonable(manifest)))
-    return manifest
+    return manifest, plan
 
 
 def main() -> int:  # pragma: no cover - the lead's command, run through launch/prepare-data.sh with python -I

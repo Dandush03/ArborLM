@@ -89,9 +89,7 @@ def real_resources(plan: Plan, repo: Path, cfg: Mapping[str, Any]) -> items.Reso
                 cache[(group, p)] = s3parents.load_backbone(repo, Path(d["parent_suite"]), p)[0]
             else:
                 if template is None:
-                    from .testing import synthetic_backbone
-
-                    template = synthetic_backbone(0)
+                    template = parents.untrained_backbone(core.test_seed(799, cfg))  # the structure only; its values are overwritten by the stored state
                 cache[(group, p)] = parents.load_new_backbone(Path(d["parent_dir"]) / f"{group}{p:02d}.pt", template)
         return cache[(group, p)]
 
