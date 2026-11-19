@@ -63,7 +63,7 @@ def test_resume_identity_and_prefix_identity_bitwise(arm: str) -> None:
         r1 = model.train_run(part, stream(), 0.01, d / "part", [4, 8], 8, IDENT)
         resumed = build(arm)
         opt = model.restore_for_resume(d / "part", resumed, 0.01, 8, IDENT)
-        r2 = model.train_run(resumed, stream(), 0.01, d / "part", [12], 12, IDENT, start=8, optimizer=opt)
+        model.train_run(resumed, stream(), 0.01, d / "part", [12], 12, IDENT, start=8, optimizer=opt)
         assert r1["snapshots"]["8"]["sha256"] == r_full["snapshots"]["8"]["sha256"]  # prefix identity: the 8-update snapshot of a run that stops there is the same file as the long run's
         assert model.snapshots_equal(d / "part", 12, d / "full", 12)  # resume identity: model and optimizer state of the resumed run equal the uninterrupted run's, tensor by tensor
         assert model.state_digest(resumed) == model.state_digest(full)
