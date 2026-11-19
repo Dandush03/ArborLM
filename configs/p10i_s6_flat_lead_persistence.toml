@@ -152,7 +152,7 @@ identity_cell = 0
 # R2 probes (whole processes through the same entry point) and the DRY profile of R3 (a shortened ladder; the rate table is the real one)
 r2_updates = 2048
 r2_min_updates = 2048  # ruling 18: a probe is long enough to measure a rate against the process overhead
-r2_evals = 2
+r2_evals = 20  # whole-process eval probes must also be long enough to measure a rate against the overhead (ruling 18)
 dry_base_updates = 8
 dry_below_updates = 4
 r1_max_rounds = 7
