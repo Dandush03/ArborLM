@@ -197,4 +197,4 @@ def test_the_candidate_plan_pins_the_shared_ledger_hash_and_leaves_the_file_alon
     rec = qplan.build_candidate(ROOT, tmp_path / "run", cfg, inputs={}, walk=walk, test_mode=True)
     assert rec["manifests"]["panel_ledger"] == {"path": str(ledger), "sha256": before[0]}
     assert (file_sha256(ledger), ledger.stat().st_mtime_ns) == before
-    assert base["paths"]["panel_ledger"] == "/Users/daniellaloush/dandush03/ArborLM/data/p10i-shared/panel_ledger.json"
+    assert base["paths"]["panel_ledger"].endswith("/p10i-s6-backups/panel_ledger.before-s6.json")  # attempt 3 pins the preserved copy, not the live shared file
