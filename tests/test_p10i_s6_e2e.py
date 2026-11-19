@@ -127,8 +127,11 @@ class Chain:
         dcfg = {**dict(cfg), "ladder": small["ladder"], "data": {**cfg["data"], "pool_chunks_for_umax": 128, "panel_walk_start": 0}, "setting": {**cfg["setting"], "panel_chunks": 8}}
         self.log["d0"] = d0.prepare(iter(wiki(120, 300)), wiki(10, 300), wiki(12, 400), led, self.root / "d0out", dcfg)
         rows = testing.random_rows(4096, core.test_seed(10, cfg))
-        reg = parents.train_new_parents(cfg, rows, self.root / "parents", group="registered", steps=2)
-        calp = parents.train_new_parents(cfg, rows, self.root / "parents", group="calibration", steps=2)
+        recorded = {p: parents.train_backbone(*core.old_parent_ids(p), rows, steps=2, control_memory=201)[1] for p in range(9)}  # the old recipe's digests (the real run reads them from the P4 records)
+        gate = parents.identity_gate(self.repo, rows, cfg, steps=2, recorded=recorded)
+        assert gate["passed"] and gate["control_memory"] is None
+        reg = parents.train_new_parents(cfg, rows, self.root / "parents", group="registered", identity=gate, steps=2)
+        calp = parents.train_new_parents(cfg, rows, self.root / "parents", group="calibration", identity=gate, steps=2)
         self.log["parents"] = (len(reg), len(calp))
 
     def step_rehearsals_and_freeze(self) -> None:
