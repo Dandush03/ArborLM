@@ -223,7 +223,7 @@ def run_r1(
     # 1. the idle baseline, taken first
     st = load_step(run_dir, "idle")
     if st is None:
-        idle = system.idle_baseline(deps.run, deps.run_b, cfg, deps.snooze, deps.clock)
+        idle = system.idle_baseline(deps.run, deps.run_b, cfg, deps.snooze, deps.clock, lambda ev: core.append_jsonl(run_dir / "r1" / "idle_attempts.jsonl", ev))
         if idle["status"] != "MEASURED":
             save_step(run_dir, "idle_paused", idle)
             raise Paused("PAUSED — NO IDLE BASELINE", f"{len(idle['attempts'])} windows discarded over {q['retry_deadline_seconds']} s; the readings are recorded; R1 is rescheduled")

@@ -179,6 +179,23 @@ def process_family(ps_with_ppid: Sequence[tuple[int, int]], pid: int) -> set[int
     return fam | down
 
 
+def parse_ps_comm(text: str) -> list[tuple[int, int, str]]:
+    """``ps -Ao pid,ppid,comm``: (pid, ppid, executable path)."""
+    out = []
+    for line in text.splitlines()[1:]:
+        m = re.match(r"\s*(\d+)\s+(\d+)\s+(.*)$", line)
+        if m:
+            out.append((int(m[1]), int(m[2]), m[3].strip()))
+    return out
+
+
+def launcher_watchers(table: Sequence[tuple[int, int, str]], ancestors: Iterable[int]) -> set[int]:
+    """The keep-awake watcher of the fixed launch scripts (``exec caffeinate -i uv run ...``): caffeinate forks a watcher, so it is a SIBLING of the stage, a child of the launcher. The rule, and nothing wider: a process
+    whose parent is one of the stage's ancestors AND whose executable is ``caffeinate``. A second study started from the same shell is not family; a caffeinate whose parent is not an ancestor is not family."""
+    anc = set(ancestors)
+    return {pid for pid, ppid, comm in table if ppid in anc and comm.rsplit("/", 1)[-1] == "caffeinate"}
+
+
 def parse_ppids(text: str) -> list[tuple[int, int]]:
     out = []
     for line in text.splitlines()[1:]:
@@ -207,9 +224,27 @@ def read_driver(run_b: Callable[[Sequence[str]], tuple[int, bytes]], bsd: str = 
 
 
 def own_family(run: Run) -> set[int]:
-    rc, out, _ = run(["ps", "-Ao", "pid,ppid"])
+    """The stage, its ancestors, its descendants, and the launch script's keep-awake watcher (``launcher_watchers``)."""
+    rc, out, _ = run(["ps", "-Ao", "pid,ppid,comm"])
     me = os.getpid()
-    return process_family(parse_ppids(out), me) if rc == 0 else {me}
+    if rc != 0:
+        return {me}
+    table = parse_ps_comm(out)
+    fam = process_family([(p, pp) for p, pp, _ in table], me)
+    ancestors = fam - {p for p, pp in descendants_pairs([(p, pp) for p, pp, _ in table], me)} | {me}
+    return fam | launcher_watchers(table, ancestors)
+
+
+def descendants_pairs(pairs: Sequence[tuple[int, int]], pid: int) -> list[tuple[int, int]]:
+    down = {pid}
+    changed = True
+    while changed:
+        changed = False
+        for p, pp in pairs:
+            if pp in down and p not in down:
+                down.add(p)
+                changed = True
+    return [(p, pp) for p, pp in pairs if p in down and p != pid]
 
 
 def read_other_processes(run: Run, markers: Sequence[str]) -> list[tuple[int, str]]:
@@ -315,7 +350,7 @@ def idle_conditions_hold(run: Run, markers: Sequence[str], hid_min: float) -> di
     return {"ok": ok, "other_processes": [list(x) for x in others], "hid_idle_seconds": hid, "power": p}
 
 
-def take_idle_window(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes]], cfg: Mapping[str, Any], sleep: Sleep, clock: Clock) -> dict[str, Any]:
+def take_idle_window(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes]], cfg: Mapping[str, Any], sleep: Sleep, clock: Clock, record: Callable[[dict[str, Any]], None] | None = None, attempt: int = 1) -> dict[str, Any]:
     """One attempt at the idle window: sixty samples every ``idle_interval_seconds`` (the 1-minute load average, and the disk0 driver's rates over each interval). If any sample finds another study's process
     alive or a condition failing, the window is discarded (``discarded`` lists the failing sample); the caller retakes it from the start."""
     q = cfg["quiet"]
@@ -335,6 +370,8 @@ def take_idle_window(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes
         cond = idle_conditions_hold(run, q["process_markers"], float(q["hid_idle_min_seconds"]))
         load = read_loadavg(run)
         samples.append({"i": i, "load": load, **cond})
+        if record is not None:
+            record({"kind": "sample", "attempt": attempt, **samples[-1], "utc": core.utc_stamp()})  # written as it happens: a killed process leaves its readings
         if not cond["ok"]:
             return {"discarded": True, "failed_sample": i, "samples": samples}
         loads.append(load)
@@ -354,15 +391,17 @@ def idle_figures(window: Mapping[str, Any], cfg: Mapping[str, Any]) -> dict[str,
     }  # fmt: skip
 
 
-def idle_baseline(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes]], cfg: Mapping[str, Any], sleep: Sleep, clock: Clock) -> dict[str, Any]:
+def idle_baseline(run: Run, run_b: Callable[[Sequence[str]], tuple[int, bytes]], cfg: Mapping[str, Any], sleep: Sleep, clock: Clock, record: Callable[[dict[str, Any]], None] | None = None) -> dict[str, Any]:
     """Section 8: the idle window is taken first and only when the machine is idle; a discarded window is retaken from the start, retried every 10 minutes for at most 6 hours; then R1 is PAUSED (no idle baseline)
     with the readings recorded, and is rescheduled."""
     q = cfg["quiet"]
     t0 = clock()
     attempts: list[dict[str, Any]] = []
     while True:
-        w = take_idle_window(run, run_b, cfg, sleep, clock)
+        w = take_idle_window(run, run_b, cfg, sleep, clock, record, len(attempts) + 1)
         attempts.append({k: w[k] for k in ("discarded", "failed_sample") if k in w} | {"failing": w["samples"][-1] if w["discarded"] else None})
+        if record is not None:
+            record({"kind": "attempt", "attempt": len(attempts), **attempts[-1], "utc": core.utc_stamp()})
         if not w["discarded"]:
             fig = idle_figures(w, cfg)
             own = w["loads"][-1] <= fig["load_ceiling"]  # R1's own check uses the rule on its own idle window

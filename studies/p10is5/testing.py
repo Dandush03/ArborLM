@@ -205,8 +205,8 @@ class FakeSystem:
             return 0, f"{{ {self.load + (self.clk.t % 7) / 100:.2f} 1.0 1.0 }}", ""
         if a[:2] == ["sysctl", "-n"]:
             return 0, "{ sec = 5, usec = 1 }", ""
-        if a[0] == "ps" and "pid,ppid" in a:
-            return 0, "  PID  PPID\n  505   404\n  404     1\n", ""
+        if a[0] == "ps" and any(x.startswith("pid,ppid") for x in a):
+            return 0, "  PID  PPID COMM\n  505   404 python\n  404     1 /usr/bin/caffeinate\n", ""
         if a[0] == "ps":
             busy = any(lo <= self.clk.t < hi for lo, hi in self.other)
             return 0, "  PID COMMAND\n    1 /sbin/launchd\n  404 caffeinate\n" + ("  900 python -m pytest\n" if busy else ""), ""

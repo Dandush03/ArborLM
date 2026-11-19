@@ -705,3 +705,78 @@ def test_a1_a_resumed_repeat_of_m_records_attempt_two(monkeypatch: pytest.Monkey
         stages.cmd_m(a)  # type: ignore[arg-type]
         rec = core.read_record(run / "M" / "m.json")
         assert rec["attempt"] == 2 and rec["outcome"] == "ENGINEERING NOT EVALUABLE — MARGIN NOT DETERMINED"
+
+
+# --- the launcher's keep-awake watcher is not another study's process --------------------------------------------------------------------------
+LAUNCH_TABLE = """  PID  PPID COMM
+69270     1 /usr/bin/timeout
+69271 69270 /opt/homebrew/bin/uv
+69275 69271 /usr/bin/caffeinate
+69276 69271 /Users/x/ArborLM/.venv/bin/python
+69300     1 -zsh
+69301 69300 /Users/x/ArborLM/.venv/bin/python
+69400     1 /usr/bin/caffeinate
+"""
+LAUNCH_PS = """  PID COMMAND
+69270 timeout 3h sh studies/p10is5/launch/r1.sh /Users/x/ArborLM/run /Users/x/data.noindex
+69271 uv run --locked python -m studies.p10is5.stages r1 --run-dir /Users/x/ArborLM/run
+69275 caffeinate -i uv run --locked python -m studies.p10is5.stages r1 --run-dir /Users/x/ArborLM/run
+69276 /Users/x/ArborLM/.venv/bin/python -m studies.p10is5.stages r1 --run-dir /Users/x/ArborLM/run
+69301 /Users/x/ArborLM/.venv/bin/python -m studies.p10s1.stages registered a1
+69400 caffeinate -i /Users/x/ArborLM/.venv/bin/python -m studies.p10is3.stages rehearse
+"""
+
+
+def test_launcher_watcher_is_family_but_a_sibling_study_and_a_foreign_caffeinate_are_not(monkeypatch: pytest.MonkeyPatch) -> None:
+    import os
+
+    monkeypatch.setattr(os, "getpid", lambda: 69276)
+
+    def run(argv: Any) -> tuple[int, str, str]:
+        return (0, LAUNCH_TABLE, "") if "pid,ppid,comm" in argv else (0, LAUNCH_PS, "")
+
+    fam = system.own_family(run)
+    assert {69270, 69271, 69276, 69275} <= fam and 69301 not in fam and 69400 not in fam
+    others = system.read_other_processes(run, CFG["quiet"]["process_markers"])
+    assert [p for p, _ in others] == [69301, 69400]  # a second study from another shell counts; a caffeinate that is not the child of an ancestor counts, as its command carries a marker
+    # the rule is nothing wider: a caffeinate child of an ancestor is family, a non-caffeinate sibling of the stage with a marker is not
+    table = system.parse_ps_comm(LAUNCH_TABLE)
+    assert system.launcher_watchers(table, {69271}) == {69275} and system.launcher_watchers(table, {69300}) == set()
+
+
+def test_idle_window_records_every_sample_and_attempt_as_it_happens() -> None:
+    with T.scratch("fix_idle_rec") as d:
+        clk = T.Clock()
+        fs = T.FakeSystem(clk, other_windows=[(25.0, 35.0)])
+        path = d / "r1" / "idle_attempts.jsonl"
+        seen: list[int] = []
+
+        def rec(ev: dict[str, Any]) -> None:
+            core.append_jsonl(path, ev)
+            seen.append(len(path.read_text().splitlines()))  # the line is on disk before the next sample is taken
+
+        base = system.idle_baseline(fs.run, fs.run_b, CFG, clk.sleep, clk, rec)
+        lines = [json.loads(x) for x in path.read_text().splitlines()]
+        assert seen == list(range(1, len(lines) + 1)) and base["status"] == "MEASURED"
+        attempts = [x for x in lines if x["kind"] == "attempt"]
+        assert [a["discarded"] for a in attempts] == [True, False] and attempts[0]["failing"]["other_processes"]  # the discarded window's reading survives
+        assert sum(1 for x in lines if x["kind"] == "sample" and x["attempt"] == 2) == 60
+
+
+def test_real_launch_shape_exec_caffeinate_does_not_list_the_watcher() -> None:
+    import shutil
+
+    if sys.platform != "darwin" or not shutil.which("caffeinate"):
+        pytest.skip("macOS caffeinate only")
+    script = (
+        "import sys, json\nsys.path.insert(0, {root!r})\nfrom studies.p10is5 import system\nrun = system.run_command\n"
+        "rc, out, _ = run(['ps', '-Ao', 'pid,ppid,comm'])\ntable = system.parse_ps_comm(out)\nfam = system.own_family(run)\n"
+        "others = system.read_other_processes(run, {markers!r})\n"
+        "print(json.dumps({{'caffeinate_in_table': [p for p, pp, c in table if c.rsplit('/', 1)[-1] == 'caffeinate'], 'family': sorted(fam), 'others': [[p, c[:100]] for p, c in others]}}))\n"
+    
+    ).format(root=str(ROOT), markers=list(CFG["quiet"]["process_markers"]))
+    p = subprocess.run(["sh", "-c", f'exec caffeinate -i "{sys.executable}" -c "$0"', script], capture_output=True, text=True, timeout=120)  # the shape of the fixed launch scripts
+    assert p.returncode == 0, p.stderr[-500:]
+    out = json.loads(p.stdout.strip().splitlines()[-1])
+    assert out["caffeinate_in_table"], "no caffeinate process was seen: the test would be vacuous"
+    assert not [o for o in out["others"] if o[1].lstrip().startswith("caffeinate")], out["others"]  # the launcher's own keep-awake watcher is not 'another study's process'

@@ -318,6 +318,20 @@ def write_record(path: Path, record: Mapping[str, Any], *, overwrite: bool = Fal
     write_json(path, jsonable(dict(record)))
 
 
+def append_jsonl(path: Path, obj: Mapping[str, Any]) -> None:
+    """Append one JSON line atomically (one ``write`` on an ``O_APPEND`` descriptor, then ``fsync``): the readings of an attempt survive a kill."""
+    import json
+    import os
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(path, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+    try:
+        os.write(fd, (json.dumps(jsonable(dict(obj)), sort_keys=True) + "\n").encode())
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
 def read_record(path: Path, kind: str | None = None) -> dict[str, Any]:
     rec = read_json(path)
     if not isinstance(rec, dict):
