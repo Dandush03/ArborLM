@@ -1,58 +1,86 @@
 # ADR-0028 — P10-I-S5: physical SSD-backed memory (conditional specification)
 
-**Status: DRAFT — CONDITIONAL — NOT APPROVED. Nothing under this ADR is implemented, calibrated, frozen or run. Entry requires a separate decision by the human lead.**
+**Status: ENGINEERING PART APPROVED FOR IMPLEMENTATION AND REHEARSAL (Decision 1) by the lead under the human lead's delegation of 2026-11-18. The scientific part is not approved and is NOT EVALUABLE as capped. Not frozen. No registered run is approved.**
 
-- Date: 2026-11-17 UTC. Revision 3, after the independent review and its confirmation review (section 15), aligned with the sibling drafts as they stood on disk at this revision (ADR-0023, ADR-0024 and ADR-0026 third drafts; ADR-0029). Drafted by the lead (Claude Fable 5.2) under `docs/reviews/p10-i-direction-2026-11-17/DIRECTION.md` sections 2 to 5 and 8.
+- Date: 2026-11-18 UTC. Revision 6: revision 5 (after the fourth independent review, section 15, and the lead's scope decision, section 2.4) with corrections C-1 to C-9 of the confirmation read applied under the lead's rulings. Drafted by the lead (an `arbor-lead` subagent, Claude Fable 5.2, as the session reports it) under `docs/reviews/p10-i-direction-2026-11-17/DIRECTION.md` sections 2 to 5 and 8. The drafter ran no probe, wrote no store and executed no code. Every device figure below is **the reviewer's observation of 2026-11-18**, made on a machine that was not quiet; the third review's probes ran under an interpreter that is not the platform of record.
 - `Astra review: NOT_PERFORMED`. Claude review is not Astra review. **SPEC: PENDING ASTRA REVIEW.**
-- Kind of document: a conditional specification. It fixes the entry criteria, the questions, the primary comparisons, the verdict labels, the stop rules, the cost and write ceilings and what is reserved for the human lead. Section 13 lists what a later revision must fix before a freeze. Approval of the P10-I programme does not authorize this study, and authorizes no write to the drive.
-- **No hardware purchase and no large write-intensive benchmark is authorized, by this document or by its approval.** The only device is the internal SSD of the human lead's working computer.
+- Kind of document: a conditional specification with two parts. The scientific part is unchanged since draft 3 and cannot be evaluated (section 3.2). The engineering part is reduced in this revision to **a study of the device's cost model**: what uncached reads cost on the human lead's SSD as a function of request size and of the number of requests issued at once. Section 3.2, the scientific label rule (section 5.6) and the earlier review tables are kept word for word.
+- No hardware purchase is proposed. The only device is the internal SSD of the human lead's working computer. Nothing here needs administrator access, a tool install, a download or a package outside the lock.
 - P1 to P10 code, records, thresholds, seeds and outcomes are immutable. ArborLM is unproven research; no label below is a success claim for the project.
 
 ## 1. Two questions, two verdicts, never combined
 
 | Verdict line | Question | Evidence it may use |
 |---|---|---|
-| **ENGINEERING SSD PERFORMANCE** | On this device, from a cold cache, at equal result quality and equal RAM held, how does a sparse tree-shaped read path over a store on SSD compare in measured block-device traffic and throughput with a flat read and an ANN index over the same bytes? | A synthetic store and synthetic queries are allowed |
+| **ENGINEERING SSD PERFORMANCE** | On this device, under a written uncached read discipline: do the bytes read equal the bytes predicted from the layout, what does one page cost, what does a page cost inside a larger contiguous request, and how do latency and pages per second change with the number of requests issued at once? (Sections 4 and 5.) | A synthetic file; no memory, no keys, no queries |
 | **SCIENTIFIC NEURAL-MEMORY ADVANTAGE** | Does one trained neural memory, addressed without an oracle, give better task quality at equal measured block-device traffic than fair storage baselines, at a scale where storage is really needed? | Only a qualified, trained memory (section 3.2) |
 
-A synthetic large-store benchmark tests real storage behaviour. It is **not** evidence of useful neural-memory scaling, whatever it shows. Neither line is summarised by the other. No report sentence joins them, and no paragraph about one line cites the other's label.
+A synthetic benchmark tests real storage behaviour. It is **not** evidence of useful neural-memory scaling, whatever it shows. Neither line is summarised by the other. No report sentence joins them, and no paragraph about one line cites the other's label.
 
-| Line | Positive | Negative | Inconclusive / not evaluable |
-|---|---|---|---|
-| Engineering | SPARSE PATH READS LESS AND IS FASTER AT MATCHED RECALL AND RAM | BASELINE NOT WORSE | NOT SEPARATED AT MARGIN; MEASURES DISAGREE; ENGINEERING NOT EVALUABLE (reason) |
-| Scientific | ADVANTAGE SUPPORTED AT TESTED SCALE | NO ADVANTAGE OVER STORAGE BASELINES | INCONCLUSIVE; SCIENTIFIC NOT EVALUABLE (reason) |
+| Line | Registered values |
+|---|---|
+| Engineering, three lines, each read alone (section 5.3) | **EQ-A** BYTES CONFIRMED EXACTLY / BYTES NOT CONFIRMED (reason). **EQ-B** CONTIGUOUS REQUEST CHEAPER PER PAGE / COST PROPORTIONAL TO PAGES / CONTIGUOUS REQUEST DEARER PER PAGE / NOT SEPARATED AT MARGIN. **EQ-D** COST TABLE REGISTERED (a measured table; descriptive; no pass or fail). Any of them: ENGINEERING NOT EVALUABLE (reason) |
+| Scientific | ADVANTAGE SUPPORTED AT TESTED SCALE / NO ADVANTAGE OVER STORAGE BASELINES / INCONCLUSIVE / SCIENTIFIC NOT EVALUABLE (reason) |
 
-A positive engineering label is about one read path, on one device, under one synthetic workload. It says nothing about learning.
+No engineering value is "positive" or "negative" for ArborLM. Draft 3's contest labels were withdrawn in draft 4. Draft 4's EQ-C (does a read path's time equal its computing time plus its pages' cost) is withdrawn here, with its read-path arms (section 2.4).
 
-**Why cold is primary.** A cold cache is the regime in which storage traffic is actually paid, and the only one this design can verify. It is the worst case; a deployed system would also cache hot pages. Warm figures are printed for every arm under the same rule, descriptively, and enter no label.
+**Why cold and uncached is the registered regime.** It is the regime in which storage traffic is actually paid, and the only one the counter can verify exactly (section 7). A deployed system would also cache hot pages; that is not measured here.
 
-## 2. Background: what the records already hold
+## 2. Background and approval context
+
+### 2.1 What the records already hold
 
 | Finding | Record |
 |---|---|
 | P7-A: CONCENTRATION-ONLY for both tree kinds: the trees' lower simulated page reads "come from using fewer rows"; "No NVMe experiment on these checkpoints is proposed" | `docs/decisions/ADR-0013-p7a-storage-page-locality.md`, outcome record |
-| P7-B: WITHIN 10% OF FLAT CO-ACCESS on both streams for both tree kinds, REPLICATED; decision class N (no storage-locality case for the hierarchy) | `docs/decisions/ADR-0014-p7b-coaccess-layout-equivalence.md` section 16 |
-| P8: INCOMPLETE (55 of 60 cells simulated); no case LOCALITY-POSITIVE; every locality term acted as a concentration term; the standard flat memory used about 127 effective slots of 4,096 | `results/p8-2026-11-14/SUMMARY.md` |
-| P8 supplement: 5 of 5 collapsed cells simulated; supplementary classes of C04 and C05 QUALITY-FAILED; P8 stays INCOMPLETE | `results/p8-supplement-2026-11-14/README.md` |
-| P10-S1 "Estimated storage traffic": arithmetic and simulation, no device; value pages only, keys assumed in RAM; 1,024 value bytes per query at 8 rows | `results/p10s1-run-2026-11-17/RESULTS.md` |
-| P10-S1 supplementary throughput, in RAM, descriptive: T-OQ 10,106 to 10,211 queries/s at batch 1 from 1,024 to 16,384 slots; F-OQ 19,177 → 7,292; D-OQ 107,879 → 16,768 | `results/p10s1-run-2026-11-17/OUTCOME.md` section 3; `supplement/throughput_supplement.json` |
-| P10-S1 mean a_use at 32K/16K: at the registered read point U_P, T-OQ 0.401, F-OQ 0.916, D-OQ 0.957; at the run length, 0.697, 0.992, 0.999. The comparison of the tree with the clustered index reverses between the two read points at some cells | `OUTCOME.md` section 4; `LITERATURE_AND_ROUTING_NOTE.md` section 5.1 |
-| P10-S0: ADDRESSING-QUALIFIED (4,096 AND 16,384) for arm A5-D at 0.5 facts per slot; NOT DISTINGUISHED FROM A0 at 16,384; OVERLOAD NOT QUALIFIED (1 of 10 cells at two facts per slot); 65,536 slots a probe only | `results/p10s0-run-2026-11-16/OUTCOME.md` |
+| P7-B: WITHIN 10% OF FLAT CO-ACCESS on both streams for both tree kinds, REPLICATED; decision class N | `docs/decisions/ADR-0014-p7b-coaccess-layout-equivalence.md` section 16 |
+| P8: INCOMPLETE; no case LOCALITY-POSITIVE; every locality term acted as a concentration term | `docs/decisions/ADR-0015-p8-locality-aware-memory-training.md`; `results/p8-2026-11-14/SUMMARY.md` |
+| P10-S1 "Estimated storage traffic": arithmetic and simulation, no device | `results/p10s1-run-2026-11-17/RESULTS.md` |
+| P10-S1 supplementary throughput, in RAM, descriptive, not the registered stage: T-OQ 10,106 / 10,211 / 10,132 queries/s at batch 1 at 1,024 / 4,096 / 16,384 slots (about 99 µs per query) | `results/p10s1-run-2026-11-17/OUTCOME.md` section 3; `supplement/throughput_supplement.json` |
 
-Everything about storage in P7, P8 and P10-S1 is simulated or arithmetic. No ArborLM record contains a measurement on a device. DiskANN, SPANN and FreshDiskANN are engineering precedent for keeping routing data in RAM and contents on SSD (`LITERATURE_AND_ROUTING_NOTE.md` section 2); they concern vector search, not memories trained by gradient descent, and no number from them is used here. The drafter has not re-read those papers.
+Everything about storage in P7, P8 and P10-S1 is simulated or arithmetic. No ArborLM record contains a registered measurement on a device.
 
-**P7-A's lesson, carried into the rules.** A read path that examines fewer candidates reads fewer pages by construction, whether or not it finds the right rows. On a device the same holds. So no arm is compared on traffic or speed unless it returns results of the same registered quality and holds the same amount in RAM (section 5).
+**P7-A's lesson, carried into the rules.** A read path that examines fewer candidates reads fewer pages by construction, whether or not it finds the right rows. Under the read discipline of section 7 that holds exactly: bytes are a function of the layout. So bytes are predicted before any read and only confirmed by the device (EQ-A), and what is measured is time.
 
-**The scale gap.** The largest cell type at which learned addressing has been qualified (P10-S0), and the largest ADR-0023 can license, has 16,384 slots. By the P10-S1 record's arithmetic a slot is 64 key bytes (16 × 4) plus 128 value bytes (1,024 bytes per query over 8 rows): 192 bytes. 16,384 × 192 = 3,145,728 bytes, about 3.15 MB. The machine has 48 GiB of RAM (51,539,607,552 bytes; read with `sysctl` by the drafter at first drafting and again by the reviewer, both on 2026-11-17). 51,539,607,552 / 3,145,728 = 16,384: about four orders of magnitude. This gap, not the device, stands between the project and the scientific verdict.
+**The scale gap** (unchanged). A slot is 64 key bytes plus 128 value bytes: 192 bytes. The largest cell at which learned addressing is qualified has 16,384 slots: 16,384 × 192 = 3,145,728 bytes, against 51,539,607,552 bytes of RAM, a factor of 16,384. This gap, not the device, stands between the project and the scientific verdict.
+
+### 2.2 What the trained tree reads (from the code; used only for the arithmetic of section 5.5)
+
+`studies/p9/model.py` `_top_tree`, `studies/p10s1/core.py` (`BRANCH_SIZE = 256`, two branches visited): T-OQ scores one router row per branch for **every** branch, in RAM, visits the two best branches, scores their 512 keys with a branch prior and reads the top 8. A branch of 256 slots of 192 bytes is 49,152 bytes, **exactly 3 pages of 16,384 bytes**. So a T-OQ-shaped query touches at most 2 branches × 3 pages.
+
+### 2.3 The human lead's words on this study
+
+They are recorded verbatim, in order and with the lead's reading, in `docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md` section 7, committed as `fa60cc4`. The words were given by the human lead in the lead's working session on 2026-11-18 UTC. That commit is on the lead's branch; this branch is rebased on it before the freeze, so that the frozen tree contains the record. **That record governs; this section only quotes it.** The four sentences that bear on this study:
+
+> and you have my permission to auto approve everything until you complete P10-I
+
+> we could do a better test in my ssd not sure why not
+
+> ok, but you are allowed to download up to 75gb of data needed for the ssd test if needed. im going to sleep, I'll let you drive the simulations
+
+> if you need 200gb or 250gb for the test im also ok with that
+
+**How the record reads them, and no further:** the engineering part may be entered before a neural memory is qualified at scale; drive writes up to 250 GB, kept to the minimum a proper test needs (this draft caps them at 10 GB, section 6); downloads up to 75 GB if needed (none is expected: the file is synthetic); nothing needing administrator access. The words do not say that the scientific part may be entered, that a threshold may move, or that any result is expected. EC1 and EC2 are met only from that record (the fourth review's X-1). Under the record's last rule, a choice that a reviewer advised should go to the human lead and that the lead takes under the delegation is reported to him as the first item of this study's record, so that he can overrule it before the run decision. There are two: the restated EC3 (section 3.1) and the scope decision (section 2.4).
+
+### 2.4 The lead's scope decision (2026-11-18), with its reasons
+
+The fourth review offered a choice: keep draft 4's study (a 16 GiB store, seven read-path arms, 19.5 GB written, 4 to 6.5 hours) with twelve edits, or run a smaller study of the device alone. **The lead adopts the smaller study.** Reasons, as the lead gave them:
+
+1. **The tree-versus-index contest is decided by construction for the arms the trained tree allows.** T-OQ's router is one level and is scanned in full, so an index over the same leaves reads the same key pages; the prior cannot raise recall for a fixed candidate set; with keys resident both are one arm (the fourth review's section 2 confirms each step). The regimes in which layouts would really differ are unequal lists, a multi-level router with only its top in RAM, and reuse of hot pages. They belong to the redesign after P10-I, not to a benchmark of today's one-level tree. Unequal lists are, besides, a question that arithmetic in RAM on P10-S1's own keys can answer without a device.
+2. **Draft 4's EQ-C is nearly insensitive on this machine.** The reviewer timed routing at about 0.9 to 1.1 ms per query in RAM at 349,525 branches against about 0.3 to 0.8 ms of I/O; a 30 % error in page cost would move the gap by 6 to 13 %, under the margin. COST MODEL HOLDS would have been reached almost by construction.
+3. **What the human lead can use for a redesign is the device's cost model, and its largest missing piece is parallel reads**, which is how SSD-backed indexes keep their speed. With a table of cost by request size and by requests issued at once, the latency of any future layout can be predicted by arithmetic.
+
+Consequences: the read paths of the trained tree are **no longer arms**; there is no store of keys and values, no query, no recall, no index, no resident-budget ladder and no workload calibration. What a T-OQ-shaped query would cost under the measured table is printed as arithmetic only (section 5.5).
 
 ## 3. Entry criteria
 
-Entry to any part is a decision by the human lead.
-
 ### 3.1 Engineering part
 
-- **E0, method rehearsal.** The human lead authorises stages R0 and R1 as a method rehearsal, with at most 2 GB written. This is separate from entry to the benchmark. Without E0 nothing is written.
-- **Entry to stages E1 and E2 requires all of:** (EC1) the human lead's decision on section 11, item 1; (EC2) the write budget of section 6 approved; (EC3) the drive's free space and health counters recorded before any write. Lifetime bytes written and percentage used cannot be read with the tools present: `smartctl` was not found (the drafter's and the reviewer's `which`, 2026-11-17), and installing it is a download. EC3 therefore needs either an approved tool or the human lead reading the counters. Without one, the part is ENGINEERING NOT EVALUABLE (HEALTH COUNTERS UNREADABLE); (EC4) every rehearsal check of section 7 passed in R1.
+- **EC1, entry before qualification.** Met only from the delegation record, section 7 (`fa60cc4`).
+- **EC2, write budget.** Section 6 (10 GB hard cap, inside the 250 GB of the record).
+- **EC3, device record.** Before and after every stage that writes, the study records SMART status (`diskutil info disk0`; it must read `Verified`), free space (`df -k`) and the disk0 driver's bytes written since boot (`ioreg -r -c IOBlockStorageDriver -l -w0`). Lifetime bytes written, percentage used and temperature cannot be read without administrator access or a tool install (the reviewer's observation); they are printed **NOT READABLE** in every record and report, and that does **not** make the part NOT EVALUABLE. Wear is accounted in the study's own bytes written. A status other than `Verified` is PAUSED and goes to the human lead. The fourth review judged this sound; it is reported to the human lead as section 2.3 says.
+- **EC4, method.** Every check of section 7 passed in R1 under the platform of record.
+- **Decisions.** Decision 1 covers implementation, R0, R1 and the two rehearsals (1.21 GB planned; 2.28 GB with one rebuild of the rehearsal file). Decision 2, taken on the rehearsal records and an independent implementation audit, covers E1, P and E2.
 
 ### 3.2 Scientific part
 
@@ -73,166 +101,261 @@ Any scientific label would then carry `RAM RESTRICTED BY CONSTRUCTION`, and such
 
 "RAM restriction" on macOS without administrator access is not an enforced limit: there is no per-process page-cache limit. It means only uncached reads (section 7) plus the resident budget of section 5.
 
-## 4. Arms and baselines
+Section 3.2 is draft 3's text, unchanged. Its Q4 points to "sections 4, 5 and 7" and to "the resident budget of section 5". Draft 5's engineering part defines no arm, baseline or resident budget, so the scientific part could not be entered without a revision that defines them again; that changes nothing in its present value.
 
-| Arm | What it isolates |
+## 4. The benchmark: file, tiling, cells
+
+### 4.1 The file
+
+| Quantity | Value | Why |
+|---|---|---|
+| Page | 16,384 B | `hw.pagesize` on this machine. The reviewer's probe 1E: a 4 KiB uncached request reads 16 KiB. Every request is whole pages at page offsets |
+| Tile | 64 pages = 1,048,576 B (1 MiB) | The largest request size; the unit of the no-page-twice rule |
+| File | 4,096 tiles = 262,144 pages = **4,294,967,296 B (4 GiB)** | Sized from the sweep's needs (section 4.3): 3,996 tiles used, 100 never read |
+| Rehearsal file | 1,024 tiles = 1,073,741,824 B (1 GiB) | Holds R1, M and K (section 8) |
+| Contents | Tile t is 1,048,576 bytes of `torch.randint(0, 256, …, dtype=torch.uint8)` from a generator whose state is the first 8 bytes of SHA-256(`p10is5|store|<seed>|<t>`) modulo 2⁶³ | Incompressible; any page can be regenerated from the seed without reading the file |
+
+**Why the file need not exceed RAM.** The page cache is excluded per read by the discipline of section 7, and the per-process counter verifies that exactly on every pass (the reviewer's probes 1B, 1B2, 3). A size-based cold state is not valid here: reclaimable file-backed pages (about 14 GB at the third review) mean even a file twice the size of RAM would be partly cached and never exact. The 250 GB permission would allow such a file; the reviewer's figures show it would buy nothing exact, so it is not used. The cost of this choice is stated in section 14.
+
+**Why 4 GiB and not 16.** No page is read twice (section 4.3), so the file need only hold the pages the sweep reads once; a working set "far beyond any device cache" is not needed when nothing is re-read. The reviewer's candidate was "one roughly 4 GiB file".
+
+### 4.2 Cells
+
+A **cell** is one request size s at one depth k. A **pass** is one cell in one repeat, run in its own process.
+
+- **Request sizes s (pages):** 1, 3, 8, 64. Three pages is one T-OQ branch. Sixty-four pages is 1 MiB: at a 16 KiB page the "64 pages" and "1 MiB" of the fourth review's X-7 are one size.
+- **Depths k:** 1, 2, 4, 8, 16, 32. Depth k means k threads, each issuing one `os.pread` at a time and the next as soon as it returns (a closed loop). It is the number of requests the host has outstanding. What the drive's own queue holds cannot be read from software and is not claimed.
+- **Requests per pass n(s):** 400, 400, 160, 64 for s = 1, 3, 8, 64. Reason: at least two full rounds of 32 threads at the largest size, and 400 samples per repeat (2,000 over five repeats) for the percentiles of the small sizes that a layout would use most.
+- **24 cells × 5 repeats = 120 passes**, 30,720 requests and 209,280 pages (3.43 GB read). One spare repeat is planned (section 8).
+
+**Threads and the interpreter lock.** `os.pread` releases CPython's global interpreter lock for the duration of the system call, so k threads can have k reads outstanding. The lock is held for the few interpreter operations around each call (the timer, the loop). At high k and short reads these serialise and can add to the latency seen. So every figure is the **host-visible cost through this harness**, not the drive's service time, and the harness's own cost is measured and printed beside it (section 5.4). No package outside the lock and no native code is used.
+
+### 4.3 Tiling: no page is read twice, by construction (the fourth review's N1)
+
+Draft 4 accepted requests one by one against a list of used pages and, by the reviewer's simulation, ran out of pages by the second or third repeat. Draft 5 has no acceptance loop.
+
+- One seeded permutation of the 4,096 tiles assigns tiles to (repeat, k, s). Repeats are 1 to 5 and the spare, 6.
+- A tile given to size s is cut into ⌊64/s⌋ aligned, non-overlapping segments from its start: 64, 21, 8 and 1 segments for s = 1, 3, 8, 64.
+- Tiles per pass: 7, 20, 20, 64 (448, 420, 160 and 64 segments; the first n(s) in a seeded order are used). That is 111 tiles per (repeat, k); × 6 depths × 6 repeats = **3,996 of 4,096**.
+- Because the assignment is a permutation of the whole file, every cell's requests are spread over the whole file (the fourth review's X-9: no cell samples only a region written early or late).
+- Within a pass the requests are issued in a seeded order and dealt to the k threads in turn.
+
+Exhaustion cannot occur: the counts above are fixed arithmetic. Each tile belongs to one pass and each page to at most one request, so in E2 no page of the file is read twice.
+
+## 5. Measures, the prediction, and the registered questions
+
+### 5.1 Measures
+
+- **Bytes read per pass**: `ri_diskio_bytesread` of `proc_pid_rusage(getpid(), RUSAGE_INFO_V2)`, read through `ctypes` on `/usr/lib/libSystem.B.dylib`, as the reviewer's probe did (`ssd_probe_0028.py`, `proc_io`), in the one process that issues every read of the pass; all its threads are in that process. Not `getrusage` (its block counts stayed 0 in the probes) and not `psutil` (no I/O counters on macOS). Cross-checks, printed only: the APFS volume's "Bytes read from block device" and the disk0 driver's `Bytes (Read)`, which are system-wide. All are host-side, block-layer figures. They are never called NAND or media traffic.
+- **Latency per request**: `time.perf_counter_ns` immediately before and after each `os.pread`, in the issuing thread.
+- **Pages per second of a pass**: pages read over the wall time from the release of the start barrier to the last thread's last return.
+- Counter snapshots and all `ioreg` calls are outside the timed region.
+
+### 5.2 The registered prediction
+
+The plan defines every pass (section 12). Stage P, after the freeze and before E2, expands each pass into its ordered list of requests (offset, length, thread) and its predicted bytes, 16,384 × pages: 6,553,600 / 19,660,800 / 20,971,520 / 67,108,864 bytes for s = 1, 3, 8, 64. It also writes the expected SHA-256 of every page. The prediction record's SHA-256 is recorded and E2 refuses to start on any other. Each pass derives its requests again from the plan and asserts they equal the record's before issuing any; a difference is ENGINEERING STOP (PREDICTION MISMATCH).
+
+### 5.3 The registered questions
+
+Five repeats. One repeat (block) is one pass of each of the 24 cells, in the order given by that repeat's order seed.
+
+**EQ-A. Do the bytes read equal the layout's prediction exactly?** *BYTES CONFIRMED EXACTLY* only if **every pass of every repeat attempted**, including any repeat run again and the spare if used, has counter bytes equal to its predicted bytes (the counter rule of section 7). Otherwise *BYTES NOT CONFIRMED* with the reason of the first failing pass, and every failing pass is printed beside the same cell's pass in the replacing block, if any. A file found polluted **before** E2's first pass is a different case and never reaches this label (section 7, item 7). There is one rule and no "4 of 5": a label that says "exactly" cannot sit over a failed pass (the fourth review's N5). EQ-A uses every pass, whether or not its block was quiet.
+
+**EQ-B. What does one uncached page cost at depth 1, and what does a page cost inside a contiguous request?** c_r(s) is the median latency of the n(s) requests of size s at depth 1 in repeat r. Registered as measured: c_r(1) with its p90, p99 and maximum, per repeat and pooled; and ρ_r(s) = c_r(s) / (s × c_r(1)) for s = 3, 8, 64. The label is on ρ_r(3), because three pages is one branch and that is the figure a layout decision needs:
+
+| Label | Rule |
 |---|---|
-| S-TREE: routing data in RAM, tree-shaped candidate set, value pages on SSD | The subject read path |
-| S-FLAT: the same store, exact search over all keys | The cost of not routing; the exact-search reference for recall |
-| ANN: an approximate nearest-neighbour index over the same keys and values (clustered or graph) | The conventional answer to the same retrieval problem |
-| KV: a plain key-value store, one lookup per requested row, address given | The floor: what storage costs when the address is known. Printed beside every label; decides none |
-| RAM: each arm with its store fully in memory | Value parity of the SSD read within dtype tolerance (`docs/EXPERIMENT_PROTOCOL.md`) |
+| CONTIGUOUS REQUEST CHEAPER PER PAGE | ρ_r(3) ≤ 1 − m_t in at least 4 of 5 repeats |
+| CONTIGUOUS REQUEST DEARER PER PAGE | ρ_r(3) ≥ 1 + m_t in at least 4 of 5 |
+| COST PROPORTIONAL TO PAGES | \|ρ_r(3) − 1\| < m_t in at least 4 of 5 |
+| NOT SEPARATED AT MARGIN | otherwise |
 
-Common to every arm: the same store bytes, queries, page size, read primitive (positional reads on a descriptor with caching and read-ahead off; no memory mapping), block size, one thread, queue depth 1. A higher queue depth is a different measurement and is descriptive. Baseline implementations are fixed by the later revision. A production key-value or ANN library is a new dependency and possibly a download, needs an approved amendment, and must be able to use the common read primitive; a library that can only memory-map is ENGINEERING NOT EVALUABLE (BASELINE NOT FAIR) for that arm.
+The first label is the expected one (a command's fixed latency usually exceeds the transfer time of two more pages; the fourth review calls it near-certain). EQ-B is therefore mostly a confirmation with a measured size. It is registered because the figure, not the label, is what the redesign needs.
 
-Workloads are synthetic and fixed, with reasons, in the later revision. The label is read on one primary pattern in which each repeat's queries touch pages no other repeat touches. A pattern replayed from a trained checkpoint's trace repeats pages by nature; it is descriptive.
+**EQ-D. How do latency and pages per second change with depth and request size?** A measured table of the 24 cells. For each cell and repeat: the median, p90, p99 and maximum request latency, and pages per second. Across repeats: the median of the per-repeat medians, their range and their coefficient of variation. **This line is descriptive.** No ordering, speed-up or monotonicity is registered as a hypothesis: the drafter can justify no threshold for one before observing the device, and a rule written without one would be a guess dressed as a test. What is registered is the table's definition, its dispersion figures and its validity rule, stated once: the table is built from valid repeats only (section 5.4). Validity is per block, so every cell has the same valid repeats. The line's value is COST TABLE REGISTERED when at least 4 of the 5 repeats are valid, and ENGINEERING NOT EVALUABLE (reason) otherwise.
 
-## 5. Measures and label rules
+### 5.4 Margin, validity and the harness figure
 
-**Measures.**
+- **The margin m_t (EQ-B only), from the measuring rehearsal, fixed before the candidate plan exists.** CV_R is the larger of the repeat-to-repeat coefficients of variation (sample standard deviation over mean of the five per-repeat medians) of c(1) and c(3) at depth 1 in stage M. m_t = max(0.10, 2 × CV_R). Reasons: a difference under a tenth is not an engineering finding on a working computer; twice the spread keeps noise alone from crossing. If m_t would exceed 0.30, EQ-B's label is registered as ENGINEERING NOT EVALUABLE (TIMING SPREAD) in the config, before any registered read, and its figures are printed descriptively. There is no margin on EQ-A (the quantity is deterministic) and none on EQ-D (no comparison is registered).
+- **Valid repeat (EQ-B, EQ-D).** The block was quiet at its start and at its end (section 8) and every one of its passes met the counter rule. The denominator stays 5. The first invalid block is replaced once by the spare repeat, on tiles no pass has read; a second invalid block stays invalid. The spare is used once in all (section 9).
+- **Harness figure.** In R1 and at the start of E2, the same threaded loop runs at each depth on cached pages of R1's control file, 400 single-page requests. The control file is its own file of 64 tiles; no registered pass and no rehearsal pass ever reads it, and the harness never reads a tile of the file or of the rehearsal file. **Warm-up:** the whole control file is first read once, in 1 MiB requests, on a descriptor without `F_NOCACHE`. The 400 requests are then the 448 pages of its tiles 0 to 6 in a seeded order (first 400), on descriptors without `F_NOCACHE`; the pass must count 0 bytes read, otherwise it is repeated once after a new warm-up and then recorded HARNESS FIGURE NOT MEASURED. Its median, h(k), is the cost of the loop itself. The tag uses E2's h(k); R1's is printed. It is printed beside every cell; a cell whose depth has h(k) above a quarter of the cell's median latency is tagged HARNESS-LIMITED. The tag is descriptive, changes no label and removes no cell.
 
-- **Bytes read per query**: bytes the operating system requested from the block device for the study's process. Primary counter: the per-process disk I/O counters of the process's resource usage. Cross-check: the system-wide block-driver statistics, minus an idle-window baseline. Both are host-side, block-layer figures. They are never called NAND or media traffic.
-- **Queries per second**, and latency median and p99, on a quiet block.
-- **Recall at 8** against S-FLAT's exact result on the same store and queries.
-- **Resident bytes**: the keys, routing data and index each arm holds in RAM.
+### 5.5 Printed as arithmetic only
 
-**Matching conditions (from P7-A's lesson).**
+**ARITHMETIC ONLY — NOT MEASURED — NOT A READ PATH.** With L(k, s) the pooled median request latency of cell (k, s) from EQ-D's table, the report prints, for each depth k, what the page reads of one T-OQ-shaped query (2 branches × 3 pages; section 2.2) would cost under the table:
 
-1. **Recall floor R_min = 0.90**, proposed, `PENDING LEAD REVIEW`. Reason: 0.90 is the proportion this programme uses for "close to a reference" (P10-S0, ADR-0026). S-TREE and ANN are each read at the smallest registered candidate budget whose recall is at least R_min in every repeat. An arm with no such budget is not compared: ENGINEERING NOT EVALUABLE (RECALL NOT MATCHED). Each arm's recall at its operating point, and the gap between arms, are printed beside every bytes and speed figure. Two facts are stated with the rule. S-FLAT is exact, so its recall is 1 and a comparison of S-TREE with S-FLAT is never at equal recall. ANN's budgets are discrete, so ANN may sit above 0.90 while S-TREE sits at it; if ANN's recall exceeds S-TREE's by more than 0.05 the label carries `RECALL GAP`.
-2. **Common resident budget, and what it decides against S-FLAT.** Let K be the bytes of all keys and R the bytes of S-TREE's routing data. Because S-FLAT is exact, the budget alone settles its bytes comparison:
+- as two 3-page requests: ⌈2 / min(k, 2)⌉ × L(min(k, 2), 3);
+- as six 1-page requests: ⌈6 / k′⌉ × L(k′, 1), with k′ the largest depth of the grid not above min(k, 6), that is 1, 2, 4, 4, 4, 4.
 
-   | Regime | Budget | Bytes against S-FLAT |
-   |---|---|---|
-   | **KEYS ON DEVICE** (primary) | R | S-FLAT must read every key from the device for every query. It loses on bytes **by construction**. The comparison is printed, marked BY CONSTRUCTION, and does not count towards the label |
-   | **KEYS RESIDENT** (secondary) | K + R | S-FLAT reads only the 8 value rows, the minimum. S-TREE cannot read less. The bytes comparison is **tied or lost by construction** and does not count towards the label; the positive label is not reachable on bytes against S-FLAT |
+It excludes the routing computation in RAM (which the fourth review timed at about 1 ms at 349,525 branches, descriptively, and which no stage here measures), assumes the pages are not cached, and assumes rounds add. No query is issued, no branch exists in the file, and nothing in these lines is a measurement of ArborLM's tree or of any memory. The lines carry that heading wherever they are printed.
 
-   So in neither regime is "reads less than S-FLAT" a finding; that is P7-A's mechanism again. **The deciding baseline is ANN, in the KEYS ON DEVICE regime**, where a store too large for RAM would live. S-FLAT is the recall reference and a printed context figure. The KEYS RESIDENT regime is run and printed with its own label line, never merged with the primary one. Each arm is configured within the regime's budget and its actual residency is recorded; an arm above the budget is not compared: ENGINEERING NOT EVALUABLE (RAM RESIDENCY NOT MATCHED). The two budgets are fixed now by these formulas; whether R is the right primary budget is `PENDING LEAD REVIEW` (section 11, item 6).
-3. **Cache ratio** of section 7 within bounds for every arm, and arms' ratios within 0.05 of each other; otherwise ENGINEERING NOT EVALUABLE (CACHE RATIO NOT MATCHED).
-
-**Engineering label**, KEYS ON DEVICE regime, at the largest registered store size, cold, five repeats (smaller sizes and the KEYS RESIDENT regime are printed with the same rule and decide nothing). "Better by the margin" means a relative difference: (ANN − S-TREE) / ANN ≥ m_b for bytes per query, (S-TREE − ANN) / ANN ≥ m_q for queries per second; "worse by the margin" is the mirror. m_b and m_q are fixed at the freeze from R1's repeat variability, each at least twice the repeat-to-repeat coefficient of variation. A repeat flagged DEVICE CACHE SUSPECTED (section 7) is invalid; the denominator stays 5, so with four valid repeats a 4-of-5 rule needs all four; fewer than four valid repeats is NOT EVALUABLE.
-
-| Label | Rule (first match) |
-|---|---|
-| SPARSE PATH READS LESS AND IS FASTER AT MATCHED RECALL AND RAM | In at least 4 of 5 repeats, in each of them S-TREE is better than ANN by the margin on **both** bytes per query and queries per second. Printed with `KEYS ON DEVICE; FLAT LOSES ON BYTES BY CONSTRUCTION` |
-| BASELINE NOT WORSE | In at least 4 of 5 repeats S-TREE is better than ANN by the margin on neither measure. This includes "within the margin on both"; the name is conservative on purpose |
-| MEASURES DISAGREE | In at least 4 of 5 repeats S-TREE is better than ANN by the margin on one measure and worse by the margin on the other |
-| NOT SEPARATED AT MARGIN | Otherwise |
+### 5.6 Scientific label (kept from draft 3, word for word)
 
 **Scientific label** (structure fixed now; read only if Q1 to Q4 hold). The memory is read at its registered operating point; its mean bytes per query there is b0. Each baseline (ANN, S-FLAT, and KV) is swept over a registered list of candidate budgets and read at the smallest budget whose bytes per query are at least b0, so a baseline never has less traffic than the memory. No such point: SCIENTIFIC NOT EVALUABLE (NO MATCHING POINT AT EQUAL BYTES). KV is addressed by the task's own surface key, never by an oracle slot address; if KV's quality is within the margin of the memory's, every label carries `LOOKUP SUFFICIENT ON THIS TASK`. Five fresh draws; a replicate favours the memory only if on both panels it is ahead of every baseline by the margin, and favours a baseline if on either panel that baseline is ahead. ADVANTAGE SUPPORTED: at least 4 of 5 favour the memory. NO ADVANTAGE: at least 4 of 5 favour one and the same baseline. INCONCLUSIVE: otherwise. Margins are fixed by the later revision before any such draw.
 
-Rows read, pages simulated, parameters touched and any other logical count are never reported as measured traffic or as efficiency.
+Rows read, pages simulated, parameters touched and any other logical count are never reported as measured traffic or as efficiency. The predicted bytes of section 5.2 are a prediction; only counter bytes are called measured.
 
-## 6. Storage-write budget
+## 6. Storage-write budget, free space, file hygiene
 
-| Item | Proposed | Kind |
+| File | Stage | Bytes | Builds planned |
+|---|---|---|---|
+| Probe files | R0 | at most 67,108,864 (64 MiB) | 1 |
+| Control file (positive control, harness figure) | R1 | 67,108,864 | 1 |
+| Rehearsal file (R1, M and K) | R1 | 1,073,741,824 | 1 |
+| The file | E1 | 4,294,967,296 | 1 |
+| **Planned total** | | **5,502,926,848 B (5.50 GB)** | |
+| One rebuild of the file (recovery from pollution, section 7) | | 4,294,967,296 | |
+| **Planned plus that rebuild** | | **9,797,894,144 B (9.80 GB)** | |
+| **Hard cap, all stages and attempts, failed ones included** | | **10,000,000,000 B (10 GB)** | |
+
+- **Rebuilds** are taken first come within the cap. After a rebuild of the rehearsal file, 3.42 GB remain under the cap, less than one 4 GiB file, so a later pollution of the file is then PAUSED and goes to the human lead. No file is built a third time.
+- **Share of the drive**, from the reviewer's figures (drive 2,001,111,162,880 B; mean write rate since boot 5.53 MB/s): the cap is **0.50 %** of one full drive write and about 30 minutes of this machine's ordinary writing; the planned total is 0.27 % and about 17 minutes. The cap is 4 % of the 250 GB the human lead permitted. Endurance is not readable and no figure for it is assumed.
+- **What is charged:** the study's own logical bytes written, before each write, and the larger of that and its `ri_diskio_byteswritten` after it (they were equal in the reviewer's probe 1A). The system-wide counter is recorded and not charged. A run stops before any write that would pass the cap: **PAUSED**, resumable. Only the human lead changes the cap, on projection, never on outcome values.
+- **Free space:** at least 500 GB at all times (721.3 GB free at the fourth review). Checked before every write stage.
+- **Location:** one directory whose name ends in `.noindex`, under the human lead's home directory, outside every git worktree and every synced folder; its path is in the plan.
+- **Hygiene, all without administrator access, checked in R0, before E1, before each E2 block and after deletion:**
+
+| Check | Command | If it cannot be made or fails |
 |---|---|---|
-| Bytes written by the study's own processes, all stages and attempts, failed ones included | **64 GB** | Resource cap on a physical resource; only the human lead may change it |
-| Share of endurance | 64 GB is about 3.2% of one full write of the drive (1.81 TiB by `df`, read by the drafter and by the reviewer on 2026-11-17; 2.0 TB). Under an **unverified placeholder** of 300 full drive writes, about 0.011%. Ceiling: 0.05% of the endurance figure the human lead accepts | Same |
-| Largest single store | 16 GB | Design ceiling |
-| Free space kept at all times, stores included | At least 500 GB (675 GiB free by `df`, read by the drafter and by the reviewer on 2026-11-17). Stores held by a local snapshot count against the floor until released | Resource cap |
-| Method rehearsal R0 and R1 | At most 2 GB of the 64 GB | Resource cap |
+| Local snapshots | `tmutil listlocalsnapshots /` and `/System/Volumes/Data`; `diskutil apfs listSnapshots disk3s5` | A snapshot present while a file exists: recorded STORE RETAINED BY SNAPSHOT; its removal is the human lead's action. Not a stop for reads |
+| Time Machine | `tmutil destinationinfo`; `tmutil isexcluded <dir>`; `tmutil addexclusion <dir>` without `-p` | Recorded. If the exclusion cannot be set without administrator access: EXCLUSION NOT SET |
+| Spotlight | `mdutil -s`; `mdfind -onlyin <dir> .` must return nothing | The `.noindex` rule is untested (both reviews). R0 records whether Spotlight indexes the directory. If it is indexed, or R1's post-settle sweep is short: PAUSED before E1. A reader that cached pages is caught by the counter rule in any case |
+| Deletion | The file is unlinked, its absence checked, free space and snapshots recorded | STORE RETAINED BY SNAPSHOT if a snapshot holds it |
 
-**What is charged.** The study's own logical bytes written, cross-checked by its per-process write counter. The system-wide device counter is not charged, because it counts every process on a working computer: the reviewer measured about 1 MB/s of background writes over 20 s and 5.6 MB/s on average since boot. It is recorded over the study's write windows and the remainder reported as background. A run stops before any write that would pass the cap.
+Any check whose command needs administrator access on the platform of record is printed NOT CHECKABLE WITHOUT ADMINISTRATOR ACCESS and the study continues on the counter rule. Files are written once, never rewritten in a loop, persist across a PAUSE and are deleted after the independent recomputation. Update traffic (trained updates in place on SSD) is write-intensive and is **outside** this document.
 
-**Endurance.** No project record holds this drive's endurance rating and the drafter knows of no published figure; the 300-writes figure is a placeholder, not a fact. For context, descriptive: the reviewer read about 3.8 TB written in the 7.9 days since boot, a period that includes registered P10 runs; against that, 64 GB is small. Health counters are recorded before and after (entry condition EC3).
+## 7. The counter rule and the read discipline
 
-**Store hygiene, checked in R0, before E1 and before each E2 block.** The store directory is outside any synced folder, excluded from backup and from search indexing, and no local filesystem snapshot holds it. The first reviewer reported on 2026-11-17 that `tmutil listlocalsnapshots /` ran without administrator access and listed none; the drafter has not run it, and R0 checks it. To the reviewer's knowledge, untested, a local snapshot covers the whole volume, so excluding a path from backup does not stop a snapshot from holding the store's blocks; that case is the outcome STORE RETAINED BY SNAPSHOT. The method of exclusion is verified in R0; if exclusion needs administrator access it is the human lead's action. Stores hold incompressible data, are written once with uncached, page-aligned writes, are never rewritten in a loop, persist across a PAUSE, and are deleted at the end; a store that cannot be shown deleted is reported STORE RETAINED BY SNAPSHOT.
+**Counter rule (exact).** For every uncached pass, the per-process bytes read between the snapshot before the start barrier is released and the snapshot after the last thread has joined must equal 16,384 × the number of pages requested. Below: **STORE PAGES CACHED**. Above: **COUNTER CONTAMINATED**. Either makes the pass invalid. The rule was chosen after the third review's probes on this machine (ratio 1.000 on probes 1B, 1B2, 3; 0 on cached pages), before any registered observation. With it no pass can benefit from cache hits. The process's bytes written during a read pass must be 0.
 
-Update traffic (in-place trained updates on SSD) is write-intensive and is **outside** this document.
+**Read discipline.**
 
-## 7. Cache verification: rehearsal checks, not assumptions
+1. Files are written only on a descriptor with `F_NOCACHE` 1 (`fcntl` command 48), in 1 MiB `os.pwrite` calls, and closed after `F_FULLFSYNC` (51). A buffered build leaves the file warm (probe 2(i)).
+2. Every read of the file or the rehearsal file by any part of the study (passes, checks, hashes, a human) uses `F_NOCACHE` 1 and `F_RDAHEAD` 0 (45) and whole pages at page offsets. `F_NOCACHE` does not bypass pages already cached (probe 1D): one cached read pollutes those pages until evicted. Reference data are regenerated from the seed, not read back; no memory mapping; no `shasum`, `cat` or Finder preview.
+3. Cached reads (the positive control, the pollution control, the 4 KiB amplification, the harness figure) run **only on R1's control file**.
+4. Every import, allocation and thread start happens before the first snapshot; no file other than the one being read is opened between snapshots; nothing is printed or written between snapshots (output is held in memory).
+5. **Recovery from pollution** (a pass below prediction): the pass and its block are invalid; the file is deleted and rebuilt once, charged to the write budget, and the block is run again as the spare on tiles not yet read. A second pollution is PAUSED: a restart, or `purge`, is the human lead's action (no reviewer ran `purge`; that it needs administrator access is untested). EQ-A is BYTES NOT CONFIRMED in either case (section 5.3).
+6. **Parity: bit identity.** The bytes of every request are kept in memory during the pass; after the last snapshot, the SHA-256 of every page read must equal the expected hash written by stage P. A mismatch is an ENGINEERING STOP (DATA MISMATCH), not a label.
+7. **The cold check before any pass (the confirmation read's C-1).** The reader's probe found that in a file freshly built with `F_NOCACHE`, the first and the last 1 MiB were already cached about 5 seconds after the build, in a folder that Spotlight indexes. That a system reader caused it is the reader's guess and is not proven. Such pages would fail the counter rule before E2 could begin. So: every file is created in the `.noindex` directory; after the build and a 10-minute wait, and immediately before the stage that reads it (R1 for the rehearsal file, E2's harness figure for the file), **the whole file is read once, uncached, in 1 MiB requests, and checked against the counter** (the cold check). A short count is **PAUSED — STORE NOT COLD**: the file is deleted and rebuilt once, within the 10 GB cap, and checked again after another 10 minutes. A second short count is **ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD** for the engineering part. It is never a silent EQ-A failure: EQ-A is read only on registered passes, which start only after a cold check has passed. The cold check reads every page once and equally, so it favours no cell; "no page is read twice" is a statement about E2's passes.
 
-Nothing in this section has been tested on this machine. Each item is a check in R1 on the reference arm (KV) and then on the exact build-then-read path of every arm. A check that fails is ENGINEERING NOT EVALUABLE with the reason named; a check the reference fails is not used.
+**R1 must show, under the platform of record:** the cold check on the rehearsal file, as item 7; on the rehearsal file's reserved band (tiles 896 to 1,023), the counter rule on a first and a repeated uncached pass for requests of 1, 3, 8 and 64 pages (1 MiB), at depth 1 and at depth 32 (so that the per-process counter is shown to cover every thread); on the control file, the positive control (a second cached pass counts 0 bytes), the pollution control (probe 1D), the 4 KiB amplification (probe 1E) and the harness figure h(k); descriptively, uncached re-reads back to back at working sets of 32, 64 and 128 MiB; and, over a 10-minute idle window sampled every 10 s, the 1-minute load average and the disk0 driver's read and write bytes and operations. A failed check is ENGINEERING NOT EVALUABLE with the reason: NO PHYSICAL COUNTER, CACHE NOT DEFEATED, POSITIVE CONTROL FAILED.
 
-| Check | What R1 must show | If it fails |
-|---|---|---|
-| Counter visibility | The per-process counters and the block-driver statistics can be read without administrator access and move with a known uncached read (the reviewer could read the driver statistics; the per-process counters are untested) | NO PHYSICAL COUNTER, unless the human lead provides access |
-| Cold state reachable | After an uncached, aligned build, a first read pass has cache ratio (counted bytes over logical bytes requested) at least 0.9. Disabling caching on a descriptor is not known to evict pages already cached, so the build path matters. The system-wide cache flush (`purge`) is believed to need administrator access and is not relied on; if a cold state can be reached only that way, or only by a restart, it is the human lead's action and the procedure after a pause or restart is written into the freeze | CACHE NOT DEFEATED |
-| Ratio upper bound | The ratio is at most 1.1 times the layout's expected read amplification, so other processes' reads cannot pass as the study's | COUNTER CONTAMINATED |
-| Positive control | The same reads with caching allowed, second pass: ratio below 0.1. Run last, or on pages no cold pass uses | POSITIVE CONTROL FAILED: the counter cannot see caching and the method is invalid |
-| Drive and controller cache | Cannot be defeated from software. A settling interval after E1 fixed at the freeze; disjoint pages per repeat; arm order randomised within a block; a repeat pass faster than its first pass by more than a registered factor is DEVICE CACHE SUSPECTED and that repeat is invalid | Fewer than four valid repeats: NOT EVALUABLE |
-| Counter continuity | No restart or sleep inside a block (driver statistics are since boot); the machine is kept awake | COUNTER RESET; the block is PAUSED and repeated |
-
-The 0.9 floor still allows up to a tenth of an arm's reads to be cache hits, which would favour an arm with concentrated access (P7-A's mechanism again). That is why each arm's ratio is printed and arms whose ratios differ by more than 0.05 are not compared. 0.9, 0.1, 1.1 and 0.05 are proposals with these reasons: aligned reads should count at least their logical bytes; a tenth allows for counter granularity. All four are `PENDING LEAD REVIEW`. Encryption, copy-on-write and fragmentation are properties of this device, stay on, and are recorded in the hardware fingerprint.
+**What cannot be verified from software:** the drive's internal caches, its own queue and NAND traffic. The no-page-twice tiling and the seeded pass order are the safeguards. Encryption (FileVault), copy-on-write and fragmentation are properties of this device, stay on and are recorded.
 
 ## 8. Stages
 
-| Stage | Writes | Quiet machine | Notes |
+| Stage | Writes | Machine | Content |
 |---|---|---|---|
-| R0 device record | none | No | Free space, health counters (EC3), fingerprint, store-hygiene checks |
-| R1 method rehearsal (needs E0) | at most 2 GB | Yes, about 30 minutes | Every check of section 7; repeat variability; background I/O rates; fixes margins |
-| Freeze, Decision 2 | none | No | |
-| E1 store build | up to 16 GB per layout | No | Resumable per layout; bytes charged before each write |
-| E2 read benchmark | none | Yes, about 1 to 2 hours (estimate) | See below |
-| S scientific comparison | within the same cap | Yes | Only if Q1 to Q4 hold |
-| Analysis, report, independent recomputation | none | No | |
+| R0 device record | ≤ 64 MiB | shared | EC3 record, fingerprint, hygiene checks, the third review's three probes repeated under the platform of record |
+| R1 method rehearsal | 1.14 GB | **alone** | Builds the control and rehearsal files; section 7's list; the idle figures |
+| M measuring rehearsal | none | **alone** | Every stage end to end on the rehearsal file in the rehearsal geometry: 24 cells × 5 repeats with n(s) = 100, 100, 40, 16 (28 tiles per (repeat, k), 840 of tiles 0 to 895). Measures rates, times and CV_R |
+| Config fixed | none | — | m_t (or TIMING SPREAD) and the quiet figures are written into the config from M's and R1's records; the caps are set (charged hours so far + 2 × projected remaining, ADR-0029's rule) |
+| Candidate plan | none | shared | `plan.json` written: definitions only (section 12) |
+| K counting rehearsal | none | **alone** | The same end-to-end run against the candidate plan file itself, on the rehearsal file with K's own seeds, and the registered geometry's passes enumerated and checked in RAM (tile counts, no page twice). K produces nothing that any frozen file contains |
+| Freeze, Decision 2 | none | — | Refuses unless the plan file has the SHA-256 in K's record |
+| E1 build | 4.29 GB | not alongside another study's wall-time stage | 1 GiB chunks, each verified; resumable |
+| P prediction | none | shared | Section 5.2 |
+| E2 read benchmark | none | **alone** | The harness figure, then five blocks, then the spare if needed |
+| S scientific comparison | — | **alone** | Not entered (section 3.2) |
+| Analysis, report, independent recomputation, deletion | none | shared | The auditor receives the specification, code and records, not the lead's conclusions |
 
-**Quiet condition, measured at the stage.** No record states this machine's idle load or idle disk activity; R1 measures both. A block is quiet if, over a window before it and at its end, the 1-minute load average is at most 1.0 (fixed now; the figure ADR-0024 section 16 uses for the same machine, retried every 10 minutes for up to 6 hours within a session) and the background read and write rates from the driver statistics stay at or below figures fixed at the freeze, the machine is on mains power, not in Low Power Mode, and reports no thermal pressure. A block that is not quiet is **PAUSED** and rescheduled with the human lead, in up to three further sessions; only then MACHINE NOT QUIET. No throughput, latency or traffic comparison is registered on a block that was not quiet.
+**R1, M, K, E2 and S run alone on a quiet machine.** Checked at the start of the stage and around every block, all without administrator access:
+
+- **load:** the 1-minute load average (`sysctl -n vm.loadavg`), read before the block's first pass process starts and again after its last one has exited and 120 s have passed, is at most the 95th percentile of R1's idle window plus 0.5. The figure is fixed in the config before the candidate plan. It is never read while the stage's own process loads the machine (the fourth review's N6: an absolute 1.0 could not pass; idle load there was 1.95 to 2.13). R1's own check uses this rule on its own idle window, taken first. **The idle window is a baseline only if the machine is idle:** it is taken only when no other study's process is alive, and the no-other-study, idle-time and power conditions below must hold at every one of its sixty samples. If a study's process is found alive during it, or a condition fails, the window is discarded and taken again from the start, retried every 10 minutes for at most 6 hours; after that R1 is **PAUSED** (no idle baseline) with the readings recorded, and is rescheduled;
+- **no other study's process alive:** no process, other than the stage's own, whose command line contains `studies/`, `arborlm` or `pytest` (`ps -Ao pid,command`). E2 therefore cannot overlap any registered stage of another P10-I study;
+- `HIDIdleTime` at least 600 s (the human lead is not using the machine);
+- AC power, power mode not low, no thermal warning (`pmset -g batt`, `pmset -g`, `pmset -g therm`);
+- disk0 driver activity whose mean rates over a 30 s window (read bytes, write bytes, read operations, write operations, each per second) are at or below the 95th percentile of the same rates over R1's sixty 10 s intervals, fixed in the config;
+- no sleep or restart inside a block (boot time unchanged; the stage runs under `caffeinate -i`, a system tool).
+
+If the check fails at a start, the stage waits and retries every 10 minutes for at most 6 hours, then is **PAUSED** with the failed readings recorded and is rescheduled, in up to three further sessions; only then ENGINEERING NOT EVALUABLE (MACHINE NOT QUIET). A block that was not quiet at its end is invalid and is replaced once by the spare repeat (workload seed 280006). No latency or throughput figure is registered from a block that was not quiet. Every wait has a deadline.
 
 ## 9. Limits, stop rules, NOT EVALUABLE
 
-| Limit | Kind | Rule |
+| Limit | Kind (DIRECTION.md section 5) | Rule |
 |---|---|---|
-| 64 GB written; 0.05% of endurance; 500 GB free | Resource cap (physical) | Changed only by the human lead, on projection, never on outcome values. Reaching one is **PAUSED**, resumable from the last completed layout |
-| Charged time, proposed 8 hours | Resource cap | Extendable on projection; PAUSED and resumable |
-| 16 GB per store; store sizes; repeats (5); patterns; candidate budgets | Design ceiling | Fixed at the freeze |
-| Rescheduled quiet sessions (3); settling interval; idle-baseline window | Design ceiling | Fixed now (3) or at the freeze |
-| Load ceiling 1.0; background-I/O figures; device-cache factor | Validity threshold | The load ceiling is fixed now; the others at the freeze from R1; none changed after |
-| R_min 0.90; U ≥ 0.5 relative to random placement; the two resident budgets; margins; 4 of 5; ratios 0.9, 0.1, 1.1, 0.05 | Scientific threshold | Never relaxed after observation |
+| 10 GB written; no third build of a file; 500 GB free | Resource cap (physical) | Only the human lead changes it, on projection, never on outcome values. Reaching it is PAUSED, resumable from the last verified chunk |
+| Charged hours (section 10) | Resource cap | Set before the candidate plan by the rule; extendable on projection; PAUSED, resumable |
+| Memory guard: 4 GiB of `ri_phys_footprint` per process | Resource cap | No stage needs more than about 1 GiB (the largest pass holds 64 MiB of read bytes). Passing it is ENGINEERING STOP (MEMORY GUARD) |
+| File size; sizes s; depths k; n(s); 5 repeats and one spare; tiling | Design ceiling | Fixed now. No count gate on generated data: the counts are fixed arithmetic |
+| Quiet sessions (1 + 3); retry 10 min for 6 h; idle window 10 min; 120 s settle | Design ceiling | Fixed now |
+| Load ceiling by the rule of section 8; idle time 600 s; background I/O at R1's 95th percentile; counter exactness; bit identity; the HARNESS-LIMITED quarter | Validity threshold | The rules are fixed now, the figures in the config before the candidate plan; never changed after |
+| m_t rule with its 0.10 floor and 0.30 ceiling; 4 of 5 valid repeats (EQ-B, EQ-D); EQ-A's every-pass rule; U ≥ 0.5 and R_min 0.90 (scientific part) | Scientific threshold | Never relaxed after observation |
 
-The study stops and returns to the human lead on a drive health warning, an I/O error, or a failed gate. No limit is extended because a partial result looks close.
+**ENGINEERING STOP (ADR-0029 section 20, ruling 11).** A code error inside an item, or an environment error (I/O error, out of memory, full disk, data mismatch, prediction mismatch), refuses the registered analysis of its stage. The outcome is ENGINEERING STOP (cause). It is never recorded as NOT EVALUABLE and never as a label, and nothing is labelled from that stage until the cause is fixed under a recorded amendment and the stage is run again. **In E2 a rerun after an engineering stop uses the spare repeat's tiles and seeds only** (repeat 6 of the tiling; 280006 and 280206), is recorded with its cause, and there is **at most one**. The spare serves one invalid block or one such rerun, not both; after it is used, a further stop or invalid block is not replaced and the repeat stays invalid. EQ-A covers every pass that has both counter snapshots, in every attempt, including a stopped one. An identity difference in a frozen input is PAUSED — IDENTITY; restoring the file bit for bit lets the stage resume. A drive health warning is PAUSED and goes to the human lead. No limit is extended because a partial result looks close.
 
-NOT EVALUABLE reasons, each printed by name: PREREQUISITES NOT MET; HEALTH COUNTERS UNREADABLE; NO PHYSICAL COUNTER; CACHE NOT DEFEATED; COUNTER CONTAMINATED; POSITIVE CONTROL FAILED; CACHE RATIO NOT MATCHED; COUNTER RESET (after the allowed repeats); MACHINE NOT QUIET (after rescheduling); POWER OR THERMAL STATE; RECALL NOT MATCHED; RAM RESIDENCY NOT MATCHED; BASELINE NOT FAIR; VALUE PARITY FAILED; DEVICE CACHE SUSPECTED (fewer than four valid repeats); WRITE BUDGET EXHAUSTED (only if the human lead declines more after a PAUSE); NO MATCHING POINT AT EQUAL BYTES (scientific part).
+**NOT EVALUABLE reasons, checked in this order; the first failing one is the label and all failing ones are printed.** Engineering: NO PHYSICAL COUNTER; CACHE NOT DEFEATED; POSITIVE CONTROL FAILED; STORE CANNOT BE HELD COLD (section 7, item 7); TIMING SPREAD (EQ-B's label only); MACHINE NOT QUIET (after rescheduling; EQ-B and EQ-D only); FEWER THAN FOUR VALID REPEATS (EQ-B and EQ-D); WRITE BUDGET EXHAUSTED (only if the human lead declines more after a PAUSE). EQ-A uses every pass whether or not its block was quiet, and neither TIMING SPREAD nor MACHINE NOT QUIET applies to it. Scientific: PREREQUISITES NOT MET; NO MATCHING POINT AT EQUAL BYTES. Unreadable wear counters are not on this list (EC3).
 
-## 10. Cost projection (estimate; replaced by the rehearsal)
+## 10. Cost and seeds
 
-Time is small: P10-S1's supplementary throughput took 26.9 s for 30 figures in RAM (`throughput_supplement.json`). No record holds a device read or write rate, so build and read times are a guess: minutes to an hour per layout, 2 to 6 hours for the engineering part. The binding cost is wear: about three on-device layouts of 16 GB plus rehearsal is about 50 GB of the 64 GB cap; whether 50 to 64 GB of store builds counts as "large" is the human lead's judgement (section 11, item 2). R1 measures rates, variability and counter behaviour and replaces this. The scientific part cannot be costed.
+**Hours (estimates from the reviewers' descriptive timings; replaced by M).** R0 0.2; R1 0.5 (two builds, the checks, a 10-minute idle window); M 0.3 to 0.5; K 0.3; E1 0.1 to 0.2; P under 0.1; E2 0.5 to 0.8 (120 passes, each a process start, well under a second of reads and its hashing, plus 120 s of settling per block), plus quiet waiting, which is not charged; analysis 0.2. **Total about 2 to 3 charged hours.** The cap is set by the rule after M; until then the provisional figure is 5 hours. E2 reads 3.43 GB (4.11 GB with the spare); reads are not charged to the write budget.
 
-**Seeds** are those of `docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md` section 4.2: registered 280001–286999; auxiliary 287001–288999; R1 289001–289199; rehearsal 289201–289299; initialisation 330501–330599, used only if a memory initialiser is used (the scientific part); tests 937001–937999. A gate re-runs the registry checker before the freeze. Roles and counts for the engineering part, which the registry does not yet hold (`PENDING LEAD REVIEW`):
+**Seeds** (`docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md`, revision 3, section 4.2 row P10-I-S5). A gate re-runs the registry checker before the freeze.
 
-| Role | Registered (280001–286999) | R1 (289001–289199) | Rehearsal (289201–289299) |
-|---|---|---|---|
-| Store contents, one per store size | up to 3 (280101–280103) | 1 | 1 |
-| Query workload, one per pattern and repeat (2 patterns × 5 repeats, disjoint pages per repeat) | 10 (280001–280010) | 2, plus 1 for the positive control | 2 |
-| Arm order within a block, one per repeat | 5 (280201–280205) | 1 | 1 |
-| ANN index build, one per store size | up to 3 (280301–280303) | 1 | 1 |
-| Total | at most 21 | 6 | 5 |
+| Role | Registered | R1 | Rehearsal M | Rehearsal K |
+|---|---|---|---|---|
+| File contents | 280101 (280102, 280103 unused) | 289001 (rehearsal file); 289013 (control file) | — (R1's file) | — |
+| Request order, one per repeat ("query workload" in the registry) | 280001–280005; spare 280006; 280007–280010 unused | 289011 | 289211–289215 | 289216–289220 |
+| Pass order, one per repeat ("arm order") | 280201–280205; spare **280206** | 289021 | 289221–289225 | 289226–289230 |
+| Tile assignment, one per file | **287001** | — (reserved band) | **289241** | **289242** |
+| Re-read test offsets | — | **289051** | — | — |
 
-The scientific part's seeds (data draws, initialisation 330501–330505) are not laid out; it cannot be entered.
+**For the registry's revision 4** (by the auditor, before the freeze; every value lies in this study's own blocks and was found free by the confirmation read). New roles, eleven as the drafter counts them: (1) tile assignment, registered, 287001; (2) tile assignment, M, 289241; (3) tile assignment, K, 289242; (4) spare pass order, 280206; (5) spare request order, 280006 (registered as a workload of the withdrawn second pattern); (6) M request orders for repeats 3 to 5, 289213–289215; (7) K request orders, 289216–289220; (8) M pass orders for repeats 2 to 5, 289222–289225; (9) K pass orders, 289226–289230; (10) R1 re-read offsets, 289051; (11) the harness's request order, derived from 289013 with no new value. **Two values change role:** 289013, from the positive control's workload to the control file's contents (and the source of role 11); 289212, from the second pattern's rehearsal workload to M's request order for repeat 2. **No longer used:** 289012 and 289201 (one R1 order; the rehearsal file is R1's), the ANN build seeds (280301–280303, 289031, 289231) and the workload-calibration seeds, which the fourth review moved to 287101 and 287102: this revision has no index and no calibration, so those two values stay unassigned. Initialisation 330501–330599 stays unused (scientific part).
 
-## 11. Reserved for the human lead
+## 11. Open choices, with the lead's recommendation
 
-1. **May the engineering part run before a neural memory is qualified at scale?**
-   - For: it depends on no neural result; the project's motivation is storage (`docs/RESEARCH_HANDOFF.md`) and no device measurement exists; the cache method is untested here and is better debugged before a scientific result depends on it; it would show whether the tree's constant read-path throughput in RAM (about 10,100 queries/s at batch 1 from 1,024 to 16,384 slots) survives real I/O.
-   - Against: P7-A, P7-B and P8 found no storage-locality case for the hierarchy, in simulation; the workload must be invented and the label depends on it; the tree's quality is behind the flat memory's at both read points (0.401 against 0.916 at U_P, 0.697 against 0.992 at the run length), so the read path benchmarked may not be the one that survives ADR-0029's routing diagnosis, and a favourable label would be about that path only; it wears the working drive; an engineering label is easily misread as progress on the objective.
-   - Recommendation: authorise only E0 (R0 and R1, at most 2 GB) early. Hold stages E1 and E2 until ADR-0029's R-DIAGNOSIS is recorded and accepted (with R-CONFIRM if its Stage A2 is funded). If a component of it is CHECKPOINT-DEPENDENT, or it is NOT EVALUABLE, it names no read path, and the human lead decides.
-2. **The write budget, the endurance figure, and whether 50 to 64 GB of store builds is acceptable.** Recommendation: 64 GB and the 0.05% ceiling, or lower.
-3. **Actions that need administrator access or a tool install:** reading drive health counters (EC3); a cache flush or restart if R1 shows a cold state needs one; backup or indexing exclusions if they need it; device counters if R1 shows they need it. Recommendation: the human lead runs these; the lead does not hold the access.
-4. **Baseline implementations**: written in the project, or an approved dependency amendment. Recommendation: an amendment, if the library can use the common read primitive.
-5. **The scientific part cannot be evaluated as capped** (section 3.2), for two reasons: no approved learned-address capacity line, and a largest licensed cell of about 3 MB. Options: leave it NOT EVALUABLE on record (recommended); or, in later and separate decisions, the specification of ADR-0024's lane L and a study of a larger composed store.
-6. **R_min; the utilisation measure and its floor (U ≥ 0.5 relative to random placement); the primary resident budget R; the cache ratios; 4 of 5.**
-7. **The entry decision for each part**, and approval of the revised specification. Any other device or any purchase is a separate decision and is not proposed.
+1. **Scope: the device cost-model study** (section 2.4). Taken by the lead under the delegation with the recorded reasons; reported to the human lead first. The alternative is draft 4's study with the fourth review's twelve edits.
+2. **EC3 restated** so that unreadable wear counters do not block the part. Sound by the fourth review; reported to the human lead with item 1.
+3. **Write cap 10 GB** (permitted: 250 GB). A file above RAM is within the permission and is not recommended: it is not exact.
+4. **Depths 1 to 32 and sizes 1, 3, 8, 64 pages; n(s).** The reviewer's candidate named depths 1 to 16; 32 is added at the lead's direction and costs 111 tiles per repeat. Alternative: stop at 16 and raise n(64).
+5. **EQ-D descriptive, with no registered ordering.** Alternative: a three-way label on pages per second at depth 4 against depth 1 at one page, at margin m_t. Not recommended: the drafter cannot say in advance which depth a redesign would use, and the harness's own cost may bound the high depths.
+6. **m_t rule; EQ-B's label on three pages; 4 of 5 valid repeats.** As drafted.
+7. **The scientific part stays NOT EVALUABLE on record** (section 3.2). Nothing here changes it.
+8. **Decision 1 and Decision 2.** The drafter stops here.
 
-## 12. Engineering requirements carried from P10
+## 12. Engineering pattern (ADR-0029 sections 13 and 18 to 20)
 
-- The frozen-input set is listed file by file. Status and run notes go to a notes file outside it; nothing is committed in the frozen worktree during a run. Stages are resumable; PAUSED continues; completed layouts and blocks are not redone, which also protects the write budget.
-- Every registered stage is rehearsed end to end against the frozen plan itself before Decision 2, at a reduced store size.
-- Every reading rule is in the specification (section 5). The reference arm (KV) is run through every validity check in rehearsal; a check it fails is not used. The analysis, with its descriptive sections, is tested on a synthetic registry with known answers, one for each label row.
-- No count gate on generated data: stores are "generate until built, within the write budget".
-- Platform of record: the research machine (macOS 27.2.1, arm64, CPython 3.12.14, torch 2.8.0, as in the throughput supplement's environment record). Bit-exact and value-parity assertions are made on it only. Checks run locally; GitHub CI is not relied on.
-- Delegated work records the model that ran it from session metadata; implementer and auditor in separate contexts.
+- **Order:** independent review of this draft → Decision 1 → implementation in new files (`studies/p10is5/`, `configs/p10is5_ssd.toml`, `tests/test_p10is5_*.py`) with an independent implementation audit → R0, R1 → measuring rehearsal → config fixed (m_t, quiet figures, caps) → candidate `plan.json` → counting rehearsal against that file, whose SHA-256 goes into its record → freeze, which refuses any other hash → Decision 2 → E1 → P → E2 → independent recomputation → outcome record → deletion.
+- **Nothing a rehearsal produces after the candidate plan is inside a frozen file (the fourth review's N2).** The margin and the quiet figures come from R1 and M and are in the config before the plan is written. `plan.json` holds **definitions, not outputs**: the registered and the rehearsal geometries, the seeds, the cells, n(s), the tiling rule, the file paths. It does not hold m_t, the quiet figures, request lists or any measured value. The prediction record (every request) is written by P after the freeze and bound by E2's refusal rule.
+- **Frozen inputs, with this ADR outside them:** `studies/p10is5/**`; the config, which holds every threshold; launch scripts; `freeze/plan.json`; stage caps; R1's and M's records. Identity by SHA-256 of each file. The freeze stores this ADR's hash for provenance only. A test asserts that every threshold here equals the config's value. A difference is PAUSED — IDENTITY.
+- **The file directory is outside every worktree.** Nothing is written or committed in the frozen worktree between a Decision 2 and the end of that stage's report; status goes to the lead in chat or to another branch.
+- **Analysis tests:** the analysis and report are tested on a synthetic registry with known answers for every row of section 5.3, HARNESS-LIMITED, STORE NOT COLD, every NOT EVALUABLE reason and ENGINEERING STOP, and the arithmetic lines of section 5.5.
+- **Platform of record:** the research machine, macOS arm64, the project `.venv` (CPython 3.12.14, torch 2.8.0). The third review's probes ran under another interpreter; R0 repeats them. Checks run locally. Delegated work records the model that ran it from session metadata; implementer and auditor in separate contexts.
 
-## 13. What a later revision must fix before a freeze
+## 13. Rulings for the implementer
 
-Baseline implementations and versions; the workloads and their reasons; page size, block size and layout; store sizes; candidate budgets; margins from R1; the background-I/O figures; the settling interval and device-cache factor; the cold-state procedure; the rule of the Q2 reference check, if the scientific part is ever proposed; seed values inside each role's block; the frozen-input set. Fixed already: the label rules, the deciding baseline, R_min, the utilisation measure and floor, the two resident budgets, the cache ratios, the load ceiling, what is charged to the write budget.
+The fourth review's rulings G1 to G14 are taken where they still apply; G2, G3's routing table, G8, G9, G13 and G14 concerned the withdrawn read paths.
 
-## 14. What S5 cannot establish
+1. **Generator (G1).** Exactly section 4.1: one generator per tile, one `torch.randint` call of 1,048,576 `uint8` values. "The first 8 bytes modulo 2⁶³" is big-endian everywhere: `int.from_bytes(d[:8], "big") % 2**63`. No numpy (it is not in the lock); torch and the standard library only.
+2. **Constants.** `F_RDAHEAD` 45, `F_NOCACHE` 48, `F_FULLFSYNC` 51; `proc_pid_rusage(pid, 2, …)` with the structure of `ssd_probe_0028.py` (`ri_diskio_bytesread`, `ri_diskio_byteswritten`, `ri_phys_footprint`). A non-zero return is an environment error.
+3. **Tile assignment (G6).** `torch.randperm(4096, generator=torch.Generator().manual_seed(seed))`; tiles are dealt in the order repeat 1 to 6, then k = 1, 2, 4, 8, 16, 32, then s = 1, 3, 8, 64, taking 7, 20, 20, 64 tiles each. Segment i of a tile starts at page i × s of the tile. In the rehearsal geometry the permutation is over tiles 0 to 895 and the counts are 2, 5, 5, 16.
+4. **Request order.** The pass's segments, listed by (tile position in the deal, segment index), are permuted by `torch.randperm` with a generator whose state is the first 8 bytes of SHA-256(`p10is5|order|<repeat seed>|<k>|<s>`) modulo 2⁶³; the first n(s) are used; request j goes to thread j mod k.
+5. **Pass order (G11).** `torch.randperm(24, generator=manual_seed(order seed))` over the cells listed k-major as in ruling 3.
+6. **Harness.** One process per pass. k `threading.Thread`s, each with its own descriptor (opened with the discipline before the first snapshot), started and parked on a `threading.Barrier`; snapshot; release; each thread runs its list with `t0 = perf_counter_ns(); b = os.pread(fd, n, off); t1 = perf_counter_ns()` and keeps (t0, t1, b); join; snapshot. A short read is an environment error. `sys.getswitchinterval()` is recorded and not changed; `torch.set_num_threads(1)`.
+7. **Live requests against the prediction (G3, X-10).** As section 5.2.
+8. **Hashing (G4, X-11).** After the pass's last snapshot, never between snapshots.
+9. **No print and no file write between snapshots (G10).**
+10. **Statistics.** Medians and percentiles by the nearest-rank rule on the sorted values; CV with the sample standard deviation (n − 1); "pooled" means all requests of a cell over its valid repeats.
+11. **Rehearsals (G5, G12).** M and K use the rehearsal geometry with their own seeds; K's tiles may repeat M's (nothing is cached on the host, and K's timings decide nothing). Neither reads the file, which does not exist before E1. M and K have five repeats and **no spare** (a sixth would need 1,008 tiles of 896); an invalid rehearsal block is recorded, not replaced. Their pass order is ruling 5 with their own seeds. **R1's use of the band:** counter passes with the rehearsal n(s) at k = 1 and k = 32 over tiles 896 to 951, dealt in order, in the 289011 order, each read a second time; the re-reads at working sets of 32, 64 and 128 tiles from tile 896 run last, at offsets from 289051.
+12. **Spare (G7, X-12).** One, seeds 280006 and 280206, repeat 6 of the tiling; used for the first invalid block only.
+13. **Build.** Chunks of 1 GiB, each written, then verified by an uncached read against the regenerated SHA-256 (it leaves nothing cached, probes 1B2 and 3; it precedes every registered pass). Resume at the first unverified chunk; rewritten bytes are charged. Each verification read is checked against the counter like a pass. E2 starts no sooner than 10 minutes after E1's last write, after a quiet check, and after the cold check of section 7, item 7, has passed; a file found polluted there is rebuilt before any registered pass and EQ-A is not affected.
+14. **Order of checks at the start of every stage:** identity, EC3 record, free space, hygiene, memory guard, write-budget projection, quiet check (if the stage needs it).
+15. **Outcomes and records.** Exactly the names in sections 1, 5, 7 and 9; wear counters print `NOT READABLE`. Every pass writes its requests, per-request times and thread, counter snapshots (process, volume, driver), page hashes and quiet readings under a git-ignored run directory outside the frozen files; a guard asserts that it is ignored.
+16. **Anything not ruled here is a question to the lead before code is written, not a choice.**
 
-- From the engineering part: anything about learning, useful capacity, neural-memory scaling or the project objective; anything about a read path other than the one tested.
-- NAND or media traffic, endurance, sustained-write or update behaviour; behaviour on another drive, filesystem or operating system, at another queue depth, or with warm caches.
-- That an advantage holds beyond the tested store size, workload and recall floor.
-- From a scientific label under `RAM RESTRICTED BY CONSTRUCTION`: that storage was needed.
-- That hypotheses H3 to H5 hold in general. P7 and P8 outcomes are unchanged whatever S5 finds.
+## 14. What the engineering result can and cannot say
+
+**It can say**, for one Apple SSD (AP2048Z) behind APFS with FileVault, with uncached whole-page requests issued from CPython threads on a 4 GiB synthetic file that fits in RAM and is only made to behave as if it did not: whether the host-side counter equals the layout's arithmetic; what one page costs at depth 1, with its distribution; whether a page costs less inside a contiguous request; and how request latency and pages per second change over six depths and four request sizes, as seen by the host through this harness.
+
+**It cannot say anything about:**
+
+- **accuracy, the trained tree, or a neural-memory advantage.** No memory, key, query or index is in the file. The lines of section 5.5 are arithmetic on the cost table, not a measurement of T-OQ, and no sentence about the project's objective, about hypotheses H3 to H5 or about the scientific line may cite an engineering label or those lines;
+- whether a tree or an index is better: for today's one-level tree that is fixed by the layout (section 2.4), and the regimes where it is not belong to the redesign;
+- the cost of routing or of any computation in RAM, which is of the same order as the I/O for a T-OQ-shaped query and is not measured here;
+- whether storage is needed (the file fits in RAM); warm or hot-page caching; other drives, filesystems or operating systems; an asynchronous or native I/O path, which may be cheaper than threads under the interpreter lock; the drive's internal queue;
+- NAND traffic, wear, endurance, sustained writes or updates;
+- published ANN systems: no number from them is used;
+- from a scientific label under `RAM RESTRICTED BY CONSTRUCTION`: that storage was needed. P7 and P8 outcomes are unchanged whatever S5 finds.
 
 ## 15. Review record
 
@@ -279,4 +402,110 @@ Independent review by the `arbor-auditor` subagent (Claude Opus 5.5): `docs/revi
 | S5-N10 / Y4 pointer to R-DIAGNOSIS | ADVISORY | FIXED (ADR-0029) | §11 item 1 |
 | Quiet-load ceiling (raised for ADR-0027 as S4-N5) | — | FIXED here as well: 1.0 | §8, §9 |
 
-`Astra review: NOT_PERFORMED`.
+Section numbers in the two tables above are draft 3's.
+
+**Third review** by the `arbor-auditor` subagent (Claude Opus 5.5, as that review reports): `docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW3_ADR-0028.md`, copied word for word; engineering part only; verdict NOT READY (3 blocking, 10 required, 5 advisory). It probed this machine on 2026-11-18 (56 MiB written and deleted). Draft 4 (commit `2d92c27`) answered it; the table is draft 4's, with draft 4's section numbers. Rows about the store of keys and values, the read-path arms, the index, recall, the resident budgets and S-FLAT describe content that draft 5 withdraws (section 2.4); the counter rule, the read discipline, EC3, the engineering stops and the engineering pattern stand.
+
+| Finding | Disposition | Where |
+|---|---|---|
+| F1 exact counter rule in place of the ratios | FIXED: exactness; STORE PAGES CACHED, COUNTER CONTAMINATED | §7; §5.4 EQ-A |
+| F2 uncached build and reads; nothing may warm the store | FIXED: read discipline; reference data regenerated, never read cached | §7 |
+| F3 the benchmark undefined | FIXED: store, layout, arms, workload, budgets, page, queries per pass | §4 |
+| F4 margins | FIXED: none on bytes; m_t = max(0.10, 2 × CV_R) with a 0.30 ceiling, the quantity named | §5.4 |
+| F5 bytes computable before any read; same leaves give the tree no advantage | ACCEPTED IN FULL: the contest is withdrawn; a prediction is registered; the device answers EQ-A to EQ-C | §1, §5.2, §5.3, §5.4 |
+| F6 EC3 and unreadable health counters | FIXED as the brief directs: printed NOT READABLE, not a NOT EVALUABLE reason; put to the human lead for confirmation | §3.1, §9, §11 item 3 |
+| F7 counter API named | FIXED | §5.1, §13 item 2 |
+| F8 engineering stops; order of NOT EVALUABLE reasons | FIXED | §9 |
+| F9 in-project IVF; no package outside the lock; weak-evidence asymmetry; SPANN note | FIXED: IVF-flat in the project. The asymmetry no longer applies, because no label compares the tree with the index; the SPANN note is kept | §4.3, §5.2, §14 |
+| F10 S-FLAT's cost | FIXED: reference exact in RAM; ten on-device queries; hours stated | §4.4, §10 |
+| F11 rehearsal order, caps, frozen inputs | FIXED: ADR-0029's order and rule; ADR outside the frozen set; store outside worktrees | §8, §12 |
+| F12 memory guard; the RAM arm | FIXED: 12 GiB guard; no arm loads the store; parity against regenerated pages | §9, §7 item 6 |
+| F13 KEYS RESIDENT decided by construction | FIXED: one arm, X-RES, at that rung | §4.2, §5.2 item 5 |
+| F14 bit identity | FIXED | §7 item 6 |
+| F15 symmetric recall gap | SUPERSEDED: no label compares two arms' recall; every arm's recall is printed | §4.4, §5.5 |
+| F16 seeds cited | FIXED; five roles the registry lacks are listed | §10 |
+| F17 device facts updated and attributed | FIXED | header, §6, §12 |
+| F18 reason for holding E1 and E2 | FIXED: no hold; no read path is contested | §11 item 1 |
+| E-1 | SUPERSEDED by the human lead's words (§2.3) and this revision | §2.3, §3.1 |
+| E-2, E-3, E-4, E-5, E-7 | APPLIED (reworded into the new sections) | §7, §5.1, §9, §12 |
+| E-6 | APPLIED: platform of record, idle time, no other stage, power, idle window. The idle window is 10 minutes as proposed | §7, §8 |
+| Section D, guesses 1 to 24 | RULED. Departures from the reviewer's recommendation: one file, not one per arm (3); no padding, because a branch is exactly 3 pages (4); one pattern (5); operating point fixed in stage P (20); S-FLAT 2 per repeat, not 10 (11) | §4, §13 |
+| "Smallest study worth running" | TAKEN, made smaller: one layout, 19.5 GB planned, 40 GB cap | §6, §8 |
+
+**Fourth review** by the `arbor-auditor` subagent (Claude Opus 5.5, as that review reports; the same reviewer as the third, which it discloses): `docs/reviews/p10-i-spec-reviews-2026-11-17/REVIEW4_ADR-0028.md`, copied word for word; verdict READY AFTER THE LISTED EDITS (X-1 to X-12), with two blocking construction problems (N1, N2) and a smaller study offered as a scope choice. The lead adopted the smaller study (section 2.4). Draft 5 is by the lead (an `arbor-lead` subagent, Claude Fable 5.2). The reviewer's "ready after the edits" was given for draft 4's scope; draft 5 was then read (below). The drafter ran no probe and no code; it ran read-only commands, `ruff` and `git`.
+
+| Finding or edit | Disposition | Where |
+|---|---|---|
+| N1 (blocking) the disjoint-page plan runs out of pages | FIXED by construction: a seeded permutation of tiles, aligned segments, fixed counts, no acceptance loop | §4.3 |
+| N2 (blocking) the counting rehearsal's outputs inside the file it rehearses; rehearsal geometry; rehearsal seeds | FIXED: margin and quiet figures from M and R1, in the config before the plan; the plan holds definitions only; a rehearsal geometry that fits the rehearsal file; five seeds per rehearsal | §5.4, §8, §10, §12 |
+| N3 EQ-C nearly insensitive | ACCEPTED: EQ-C withdrawn with its arms | §1, §2.4 |
+| N4 EQ-B's outcome near-certain; the sweep sampled one region | FIXED: said in the text; every cell is spread over the whole file | §5.3, §4.3 |
+| N5 "exactly" under 4 of 5 | FIXED: every pass of every repeat attempted | §5.3 EQ-A |
+| N6 the quiet rule could not pass | FIXED: R1's idle 95th percentile plus 0.5, read before the stage's own process loads the machine and 120 s after | §8 |
+| Section 2: "by construction" partly the draft's own definition; regimes (a) to (e); the prior costs one pass over the routes | ACCEPTED and recorded with the scope decision | §2.4 |
+| X-1 | APPLIED: the delegation record, section 7, commit `fa60cc4`, governs; EC1 and EC2 are met only from it | §2.3, §3.1 |
+| X-2 | APPLIED in substance (the stage that measures is M, not K, at the lead's direction) | §8, §10, §12 |
+| X-3 queries per pass, reserved band | SETTLED by the scope decision: no queries; the band idea became the tiling | §4.3 |
+| X-4 EQ-C on the I/O part | SETTLED by the scope decision: EQ-C withdrawn; EQ-D in its place | §5.3 |
+| X-5 | APPLIED | §5.3 |
+| X-6 | APPLIED, with the figure fixed from R1 before the candidate plan | §8, §9 |
+| X-7 | APPLIED: 1, 3, 8 and 64 pages; 64 pages is 1 MiB; also at depth 32 | §7 |
+| X-8 | APPLIED | §9 |
+| X-9 | APPLIED as whole-file sampling; the calibration seeds 287101 and 287102 have no use, because no calibration remains | §4.3, §10 |
+| X-10 | APPLIED to request lists; there is no routing table | §5.2, §13 item 7 |
+| X-11 | APPLIED; the S-FLAT clause has no object | §7 item 6, §13 item 8 |
+| X-12 | APPLIED: one spare, 280006, with pass-order seed 280206 | §8, §13 item 12 |
+| G1, G4 to G7, G10 to G12 | RULED | §13 |
+| G2, G3 (routing table), G8, G9, G13, G14 | NO OBJECT after the scope decision | §13 heading |
+| Section 8, open choices | Taken as recommended; scope and EC3 are reported to the human lead first | §2.3, §11 |
+
+**Confirmation read of draft 5** by the `arbor-auditor` subagent (Claude Opus 5.5, as that read reports; the same reader as the third and fourth reviews, which it discloses): `docs/reviews/p10-i-spec-reviews-2026-11-17/READ_ADR-0028_draft5.md`, copied word for word; verdict CONFIRMED WITH THE LISTED CORRECTIONS (C-1 and C-2 required, C-3 to C-9 smaller). Its 64 MiB probe, on a machine that was not quiet and under an interpreter that is not the platform of record, found the per-process counter exact across threads, concurrent device reads from `os.pread` threads (descriptive), and the pollution hazard behind C-1. Revision 6 applies the corrections under the lead's rulings. **The corrected text has not been read again.**
+
+| Correction | Disposition | Where |
+|---|---|---|
+| C-1 a fresh file's first and last 1 MiB found cached | APPLIED with the lead's ruling: a whole-file uncached cold check against the counter after the 10-minute wait, for the rehearsal file in R1 and for the file before E2; `.noindex` directory and R0's Spotlight record; PAUSED — STORE NOT COLD, one rebuild within the cap; then ENGINEERING NOT EVALUABLE — STORE CANNOT BE HELD COLD; never a silent EQ-A failure | §7 item 7 and R1 list, §6, §9, §13 item 13 |
+| C-2 the idle baseline could be taken on a loaded machine; the I/O comparison undefined | APPLIED: baseline only with no other study's process alive, retaken if one appears, 6-hour deadline, then PAUSED; rates defined | §8 |
+| C-3 the 20-of-24 rule cannot separate cells | APPLIED in the simpler form: at least 4 of 5 valid repeats, stated once | §5.3, §9, §11 |
+| C-4 headroom after a rehearsal-file rebuild | APPLIED | §6, §3.1 |
+| C-5 no rehearsal spare | APPLIED | §13 item 11 |
+| C-6 "second attempt" | APPLIED | §5.3 EQ-A |
+| C-7 rerun after an engineering stop | APPLIED with the lead's ruling: the spare's tiles and seeds only, recorded with its cause, at most one. This replaces the reader's "on a rebuilt file" | §9, §5.4 |
+| C-8 harness warm-up; which h(k) | APPLIED: what is read, on which file and tiles, that no pass uses them; E2's h(k) sets the tag | §5.4 |
+| C-9 the channel of the human lead's words | APPLIED | §2.3 |
+| Remaining guesses (byte order; R1's use of the band; rehearsal pass order) | RULED as the reader recommends | §13 items 1 and 11 |
+| Seeds for revision 4 | LISTED: eleven roles and two values that change role | §10 |
+| Section 7 of the read: whether a delegated Decision 1 is "recorded human approval" under `AGENTS.md` is governance, pending | NOT SETTLED HERE: see section 16 | §16 |
+
+**Not settled by this draft:** whether `.noindex` keeps Spotlight out and what cached the head and tail of the reader's probe file (the cold check catches the effect either way); whether `purge` needs administrator access; what the idle load and idle I/O of this machine are, and so whether the quiet rule can be met in a reasonable wait; whether the harness or the drive bounds depths 16 and 32 (the reader saw 13 % more pages per second at depth 32 than at depth 8, descriptively; the HARNESS-LIMITED tag reports it). None could be settled without a probe, which the drafter was not permitted to run.
+
+## 16. Decision 1 for the engineering part (in force since 2026-11-18 UTC)
+
+**How this record came into force.** The drafter, an `arbor-lead` subagent, prepared the record below and declined to attest it: its instructions say the human research lead alone approves specifications for execution, and it had seen the human lead's words only as quoted. That was the right course for it. The record is put in force by the lead (Claude Fable 5.2) in the session in which the human lead gave the delegation, by this signed commit. It is a decision of the lead under a recorded delegation (`docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md`, section 7), not the human lead's own approval of this text. The independent reviewer asked whether a delegated Decision 1 counts as the "recorded human approval" that `AGENTS.md` requires; the lead reads the human lead's words "and you have my permission to auto approve everything until you complete P10-I" as that approval given in advance, and reports the question to him as the first item of this study's record, so that he can say otherwise before any registered run.
+
+**Record.**
+
+*Review trail.* Four independent reviews by the `arbor-auditor` subagent (Claude Opus 5.5): two of the earlier drafts (NOT READY; NOT READY), the third (NOT READY for the benchmark; it probed this machine), the fourth (READY AFTER THE LISTED EDITS, with a smaller study offered). A confirmation read of draft 5: CONFIRMED WITH THE LISTED CORRECTIONS. The corrections are applied in revision 6; the corrected text has not been read again. None of this is Astra review.
+
+*Entry condition EC1 and the write budget are answered by the human lead's own words*, recorded verbatim in `docs/reviews/p10-i-direction-2026-11-17/DELEGATION_2026-11-18.md` section 7 (commit `fa60cc4`):
+
+> we could do a better test in my ssd not sure why not
+
+> ok, but you are allowed to download up to 75gb of data needed for the ssd test if needed
+
+> if you need 200gb or 250gb for the test im also ok with that
+
+*Decision 1* (implementation and rehearsal of the engineering part: new files, R0, R1, the measuring and counting rehearsals; 1.21 GB of writes planned, 2.28 GB with one rebuild of the rehearsal file) is taken by the lead (Claude Fable 5.2) under:
+
+> and you have my permission to auto approve everything until you complete P10-I
+
+*It is a decision of the lead under a recorded delegation. It is not the human lead's own approval of this specification and is not to be cited as one.*
+
+*Reported to the human lead as the first two items of the study's record*, so that he can overrule them before the run decision: (1) the scope was reduced by the lead to a study of the device's cost model, with no read path of the trained tree as an arm (section 2.4); (2) entry condition EC3 was restated by the lead so that unreadable wear counters are printed NOT READABLE and do not block the part (section 3.1).
+
+*Not approved.* **The scientific part is not approved and stays SCIENTIFIC NOT EVALUABLE (PREREQUISITES NOT MET) as capped.**
+
+*Not covered:* the freeze; the registered run (E1, P, E2), which needs Decision 2 on the rehearsal records and an independent implementation audit; any write above the 10 GB cap; anything needing administrator access, a tool install, a download or a package outside the lock. No threshold, label or seed changes after this point without a recorded amendment.
+
+*Status line to set when the record is put in force:* "Status: ENGINEERING PART APPROVED FOR IMPLEMENTATION AND REHEARSAL (Decision 1) by the lead under the human lead's delegation of 2026-11-18. The scientific part is not approved and is NOT EVALUABLE as capped. Not frozen. No registered run is approved."
+
+`Astra review: NOT_PERFORMED`. Claude review is not Astra review.
