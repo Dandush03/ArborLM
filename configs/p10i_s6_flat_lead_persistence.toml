@@ -1,0 +1,135 @@
+# P10-I-S6 (ADR-0031): every threshold, tolerance, grid, rung, margin and seed of sections 4 to 14 lives here and nowhere else.
+# The registered run is NOT approved (ADR-0031 section 21: implementation and rehearsal only). Self-check only: not independent review, not Astra validation, not human approval.
+schema_version = 1
+experiment_family = "P10IS6_FLAT_LEAD_PERSISTENCE"
+spec_reference = "docs/decisions/ADR-0031-p10-i-s6-flat-lead-persistence.md"
+
+[setting]
+backbone_parameters = 27392
+batch = 8
+context = 64
+positions_per_eval_batch = 512
+panel_chunks = 512
+val_targets = 32768
+slots = 4096
+flat_parameters = 198145
+dense_parameters = 198401
+dense_width = 3100
+adamw_betas = [0.9, 0.999]
+adamw_eps = 1e-8
+weight_decay = 0.0
+grad_clip = 1.0
+chunk_bytes = 65
+
+[ladder]
+# section 4: U_k = 16,384 * 2^k, k = 0..4; U_{-1} = 8,192 is a calibrated duration read only for delta(., 0). The continuation rung (section 9.5) is NOT implemented (Decision 1, choice 2(a)).
+base_updates = 16384
+rungs = 5
+below_updates = 8192
+parent_updates = 1024
+min_rungs_after_cut = 3
+
+[convergence]
+epsilon = 0.001
+
+[rates]
+grid = [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1]
+extension_up = [0.3, 1.0]
+extension_down = [0.00003, 0.00001, 0.000003, 0.000001]
+tie_tolerance = 0.0005
+max_extensions_up = 2
+max_extensions_down = 4
+
+[thresholds]
+effect = 0.005
+min_cells = 22
+min_parents = 8
+cells = 27
+parents = 9
+calibration_cells = 3
+half = 0.5
+dense_share = 0.90
+dense_floor = 0.005
+dense_tolerance = -0.005
+tolerance_neg_ref = 1e-6
+trend_delta = 0.005
+
+[controls]
+p_used_draws = 4
+min_used_slots = 2
+
+[data]
+publisher_repo = "Salesforce/WikiText"
+revision = "b08601e04326c79dfdd32d625aee71d232d685c3"
+configuration = "wikitext-103-raw-v1"
+rank_label = "p10i-s6-v1:train103"
+wikitext2_rank_label = "arborlm-pilot-v1"
+calibration_article_mod = 3
+calibration_article_residue = 2
+fallback_article_mod = 2
+fallback_article_residue = 1
+pool_chunks_for_umax = 2097152
+panel_walk_start = 8192
+download_expected_bytes = 315466397
+download_hard_stop_bytes = 1000000000
+d0_rss_bytes = 8589934592
+chunk_table_name = "train103_chunks.u8"
+
+[seeds]
+stream_base = 320001
+oa_stream_base = 320101
+p_used_base = 320201
+order_registered = [321001, 321002, 321003, 321004, 321005, 321006, 321007, 321008, 321009]
+order_calibration = [321091, 321092, 321093]
+cal_stream_base = 329001
+cal_p_used_base = 329031
+dry_stream = 329201
+dry_p_used_base = 329231
+init_registered_base = 330701
+init_oa = [330731, 330732, 330733]
+backbone_registered = [330741, 330742, 330743, 330744, 330745, 330746, 330747, 330748, 330749]
+backbone_calibration = [330751, 330752, 330753]
+init_calibration = 330791
+init_dry = 330792
+init_test = [330798, 330799]
+test_range = [952001, 952999]
+control_memory_reuse = 201
+
+[resources]
+workers = 6
+rss_worker_bytes = 2147483648
+rss_aggregate_bytes = 12884901888
+rss_aggregate_alone_bytes = 25769803776
+snapshot_bytes_estimate = 2400000
+
+[caps]
+# section 17: D0 + P0 2 h; rehearsal 16 h; registered run = charged so far + 2 x projected remaining from R2 (in the candidate plan); above 40 h the lead returns to the human lead before Decision 2 and the matrix is not cut
+provisional = false
+d0_p0_hours = 2.0
+rehearsal_hours = 16.0
+registered_hours_bound = 40.0
+
+[seal]
+forbidden_roots = ["/Users/daniellaloush/dandush03/ArborLM"]
+expected_snapshot_gb = [1.4, 5.0]
+
+[platform]
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 1
+torch_interop_threads = 1
+deterministic_algorithms = true
+
+[seed_ranges]
+stream = [320001, 320399]
+calibration = [329001, 329299]
+init = [330701, 330799]
+order = [321001, 321099]
+test = [952001, 952999]
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+allocation_label = "P10-I-S6 ADR-0031"
+
+[launch]
+keep_awake = true
