@@ -130,8 +130,8 @@ analysis_hours = 0.01  # the records-only analysis stage: projected at a fixed 6
 total_hours = 15.15
 
 [stage_caps_attempt3]  # attempt 3 only (ADR-0025 addendum, attempt 3): the caps of the stages that run when completed stages are reused, written by `caps-config --attempt3 --apply`; attempt 2's caps above stay as its record and are never edited
-reuse_hours = 0.0
-regeneration_hours = 0.0
-outputs_hours = 0.0
-analysis_hours = 0.0
-total_hours = 0.0
+reuse_hours = 0.02
+regeneration_hours = 0.26
+outputs_hours = 0.36
+analysis_hours = 0.01
+total_hours = 13.83
