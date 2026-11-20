@@ -496,6 +496,7 @@ def test_n4_the_baseline_refuses_before_sampling_and_prints_the_offending_comman
     baseline.preflight(probe=qr.FakeMachine().probe(), cfg=qr.qcfg())  # a quiet machine passes
     # through the command: exit 2, the lines on stderr, no sample and no record written
     monkeypatch.setattr(baseline, "_test_root", tmp_path / "troot")
+    monkeypatch.setattr(baseline, "require_clean_code", lambda repo: "0" * 40)
     fake_probe = fm.probe()
     monkeypatch.setattr(machine, "Probe", lambda: fake_probe)
     assert baseline.main(["run"]) == 2
@@ -597,3 +598,122 @@ def test_adv2_the_freeze_requires_the_committed_sessions_log_and_the_run_sheet_s
         freeze.require_baseline(repo, cfg)
     text = (TS.ROOT / "studies" / "p10is1" / "README_RUN.md").read_text()
     assert baseline.SESSIONS_LOG in text and "outside any registered stage" in text and "commit" in text
+
+
+# --- S1: SESSIONS.log — repeated lines and the prefix hash -----------------------------------------------------------------------------------------------
+def two_sessions(tmp_path: Path) -> tuple[Path, Path]:
+    root = tmp_path / "root"
+    log = tmp_path / "repo" / "results" / "p10is1-quiet-baseline" / "SESSIONS.log"
+    qr.run_session(qr.FakeMachine(lambda t: (2.6, 2.6)), root / "first", qr.small(), sessions_log=log)
+    qr.run_session(qr.FakeMachine(), root / "first", qr.small(), sessions_log=log)
+    return root, log
+
+
+def test_s1_the_freeze_refuses_a_repeated_directory_and_session_and_checks_each_hash_against_the_matching_prefix(tmp_path: Path) -> None:
+    root, log = two_sessions(tmp_path)
+    baseline.check_sessions_log(root, log)  # session 1's hash is the hash of the file as it was then: a PREFIX of the file now
+    lines = log.read_text().splitlines()
+    f1 = dict(x.split("=", 1) for x in lines[0].split("\t")[1:])
+    assert f1["samples_sha256"] != file_sha256(root / "first" / baseline.SAMPLES) and f1["samples_sha256"] == baseline.prefix_sha(root / "first" / baseline.SAMPLES, 1)
+    log.write_text("\n".join([*lines, lines[1]]) + "\n")  # the second session's line repeated
+    with pytest.raises(core.StageRefused, match="more than once"):
+        baseline.check_sessions_log(root, log)
+    log.write_text("\n".join(lines) + "\n")
+    # a deleted-and-retaken root: the same sessions, other samples; the committed log's hashes are not the prefixes of the new file
+    sp = root / "first" / baseline.SAMPLES
+    rows = [json.loads(x) for x in sp.read_text().splitlines()]
+    for r in rows:
+        r["utc"] = "2030-01-01T00:00:00+00:00"
+    sp.write_text("\n".join(json.dumps(r, sort_keys=True) for r in rows) + "\n")
+    with pytest.raises(core.StageRefused, match="matching prefix"):
+        baseline.check_sessions_log(root, log)
+
+
+# --- S2: interrupted sessions -----------------------------------------------------------------------------------------------------------------------
+def test_s2_an_attempt_of_a_killed_session_gets_an_interrupted_line_before_the_next_session_samples(tmp_path: Path) -> None:
+    root = tmp_path / "root"
+    log = tmp_path / "repo" / "results" / "p10is1-quiet-baseline" / "SESSIONS.log"
+    qr.run_session(qr.FakeMachine(lambda t: (2.6, 2.6)), root / "first", qr.small())  # session 1 ran WITHOUT logging...
+    (root / "first" / baseline.RECORD).unlink()  # ...and was killed before it wrote its record or its line: its samples are all that is left
+    n_before = len((root / "first" / baseline.SAMPLES).read_text().splitlines())
+    seen_at_first_sleep: list[list[str]] = []
+    fm = qr.FakeMachine()
+    fm.hooks.append(lambda m: seen_at_first_sleep.append(log.read_text().splitlines()) if not seen_at_first_sleep else None)
+    rec = qr.run_session(fm, root / "first", qr.small(), sessions_log=log)
+    first_line = seen_at_first_sleep[0][0]
+    f = dict(x.split("=", 1) for x in first_line.split("\t")[1:])
+    assert (f["status"], f["session"], f["attempts"], f["dir"]) == ("INTERRUPTED", "1", "1-1", "first") and len(seen_at_first_sleep[0]) == 1  # there before the second sampled sample
+    assert f["samples_sha256"] == baseline.prefix_sha(root / "first" / baseline.SAMPLES, 1) and len((root / "first" / baseline.SAMPLES).read_text().splitlines()) > n_before
+    assert rec["sessions"][-1]["session"] == 2 and rec["attempts"][0]["attempt"] == 2  # numbers of the interrupted session are not reused
+    lines = log.read_text().splitlines()
+    assert [dict(x.split("=", 1) for x in ln.split("\t")[1:])["status"] for ln in lines] == ["INTERRUPTED", "ACCEPTED"]
+    baseline.check_sessions_log(root, log)  # INTERRUPTED lines count as listed
+    assert baseline.interrupted_attempts(log) == {("first", 1, 1)}
+    # the record does not list attempt 1; the root check needs the interrupted set to accept it
+    with pytest.raises(core.StageRefused, match="every attempt must be listed"):
+        baseline.check_root_consistency(root, root / "first" / baseline.RECORD)
+    rec_obj = core.read_record(root / "first" / baseline.RECORD, "quiet_baseline")
+    rec_obj["test_root"], rec_obj["root"] = False, str(root.resolve())
+    core.write_record(root / "first" / baseline.RECORD, rec_obj, overwrite=True)
+    baseline.check_root_consistency(root, root / "first" / baseline.RECORD, baseline.interrupted_attempts(log))
+
+
+# --- S3: the code commit -------------------------------------------------------------------------------------------------------------------------------
+def test_s3_the_baseline_runs_only_on_a_clean_tree_and_records_the_commit(tmp_path: Path) -> None:
+    repo = TS.mini_repo(tmp_path / "m")
+    head = baseline.require_clean_code(repo)
+    assert head == TS.git(repo, "rev-parse", "HEAD").strip() and len(head) == 40
+    (repo / "studies" / "p10is1" / "new_untracked.py").write_text("x = 1\n")
+    with pytest.raises(core.StageRefused, match="not clean"):
+        baseline.require_clean_code(repo)
+    (repo / "studies" / "p10is1" / "new_untracked.py").unlink()
+    (repo / "studies" / "p10is1" / "core.py").write_text((repo / "studies" / "p10is1" / "core.py").read_text() + "\n# edited\n")
+    with pytest.raises(core.StageRefused, match="not clean"):
+        baseline.require_clean_code(repo)
+    TS.git(repo, "checkout", "--", "studies/p10is1/core.py")
+    (repo / "other.txt").write_text("x")  # a file outside studies/p10is1 and the config does not matter
+    assert baseline.require_clean_code(repo) == head
+    rec = qr.run_session(qr.FakeMachine(), tmp_path / "root" / "first", qr.qcfg(), code_commit=head)
+    assert rec["code_commit"] == head
+
+
+def test_s3_the_candidate_plan_and_the_freeze_refuse_a_commit_that_is_not_an_ancestor_or_changed_baseline_files(tmp_path: Path) -> None:
+    repo = TS.mini_repo(tmp_path / "m")
+    cfg = core.load_config(repo / core.CONFIG)
+    rec_path = repo / str(cfg["quiet"]["baseline_record_path"])
+    assert freeze.require_baseline(repo, cfg)["load_limit"] == 180  # stamped by mini_repo: an ancestor, files unchanged
+    good = core.read_record(rec_path, "quiet_baseline")
+    cal = tmp_path / "cal.json"
+    cal.write_text(json.dumps(TS.CAL))
+    TS.seed_manifests(tmp_path / "run")
+
+    def refused(match: str) -> None:
+        for call in (lambda: freeze.require_baseline(repo, core.load_config(repo / core.CONFIG)), lambda: freeze.cmd_candidate_plan(TS.candidate_args(repo, tmp_path / "run", cal))):
+            with pytest.raises(core.StageRefused, match=match):
+                call()
+
+    def set_commit(c: Any) -> None:
+        rec = dict(good)
+        rec["code_commit"] = c
+        core.write_record(rec_path, rec, overwrite=True)
+        shutil_copy = qr.shutil.copy
+        shutil_copy(rec_path, qr.CANON / "first" / baseline.RECORD)
+        p = repo / core.CONFIG
+        p.write_text(qr.set_quiet_figures(p.read_text(), baseline_record_sha256=f'"{file_sha256(rec_path)}"'))
+
+    set_commit(None)
+    refused("carries no code commit")
+    set_commit("f" * 40)
+    refused("is not a commit of this repository")
+    # a commit on a side branch is a commit of the repository but not an ancestor of HEAD
+    side = TS.git(repo, "commit-tree", "HEAD^{tree}", "-p", "HEAD~1", "-m", "side").strip()  # a commit of the repository that is not an ancestor of HEAD
+    set_commit(side)
+    refused("is not an ancestor of HEAD")
+    # a baseline-relevant file that differs from the baseline's commit
+    set_commit(good["code_commit"])
+    assert freeze.require_baseline(repo, core.load_config(repo / core.CONFIG))["load_limit"] == 180
+    (repo / "studies" / "p10is1" / "machine.py").write_text((repo / "studies" / "p10is1" / "machine.py").read_text() + "\n# relaxed\n")
+    refused("baseline-relevant files differ")
+    TS.git(repo, "checkout", "--", "studies/p10is1/machine.py")
+    (repo / "studies" / "p10is1" / "core.py").write_text((repo / "studies" / "p10is1" / "core.py").read_text() + "\n# not baseline-relevant\n")
+    assert freeze.require_baseline(repo, core.load_config(repo / core.CONFIG))["load_limit"] == 180

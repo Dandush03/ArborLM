@@ -93,6 +93,7 @@ def use_test_root(monkeypatch: pytest.MonkeyPatch, root: Path) -> None:
     """The TEST-ONLY override (``baseline._test_root``) and no preflight against this machine's real process table."""
     monkeypatch.setattr(baseline, "_test_root", root)
     monkeypatch.setattr(baseline, "preflight", lambda **kw: None)
+    monkeypatch.setattr(baseline, "require_clean_code", lambda repo: "0" * 40)
 
 
 def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", app: bool = False, cli: bool = False, repo: Path | None = None) -> dict[str, Any]:
@@ -107,7 +108,7 @@ def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", a
         lines.append(json.dumps(s, sort_keys=True))
     (out / baseline.SAMPLES).write_text("\n".join(lines) + "\n", encoding="utf-8")
     d = loadrule.derive([load] * int(q["baseline_samples"]), q)
-    rec = {**core.envelope("quiet_baseline"), "status": baseline.ACCEPTED, "condition": condition, "sessions": [], "attempts": [{"session": 1, "attempt": 1, "outcome": "ACCEPTED"}], "accepted": {"session": 1, "attempt": 1, **d}, "samples_file": baseline.SAMPLES, "samples_sha256": file_sha256(out / baseline.SAMPLES), "root": str(CANON.resolve()), "test_root": False, "quiet_rules_sha256": core.quiet_rules_sha256(core.load_config()), "config_file_sha256": "0" * 64}
+    rec = {**core.envelope("quiet_baseline"), "status": baseline.ACCEPTED, "condition": condition, "sessions": [], "attempts": [{"session": 1, "attempt": 1, "outcome": "ACCEPTED"}], "accepted": {"session": 1, "attempt": 1, **d}, "samples_file": baseline.SAMPLES, "samples_sha256": file_sha256(out / baseline.SAMPLES), "root": str(CANON.resolve()), "test_root": False, "quiet_rules_sha256": core.quiet_rules_sha256(core.load_config()), "config_file_sha256": "0" * 64, "code_commit": None}
     core.write_record(out / baseline.RECORD, rec, overwrite=True)
     mirror = CANON / "first"
     shutil.rmtree(mirror, ignore_errors=True)
@@ -132,6 +133,21 @@ def set_quiet_figures(text: str, **figures: str) -> str:
 def measured_quiet_text(text: str, *, load_p95: int = 130, load_limit: int = 180, condition: str = "open", app: bool = False, cli: bool = False) -> str:
     """A config text whose ``[quiet]`` block is MEASURED (not provisional) with the given figures (no record: for stage tests that read L only)."""
     return set_quiet_figures(text, baseline_provisional="false", load_p95=str(load_p95), load_limit=str(load_limit), condition=f'"{condition}"', app_present=str(app).lower(), cli_present=str(cli).lower())
+
+
+def stamp_code_commit(repo: Path, git: Callable[..., str]) -> None:
+    """After the throw-away repository's first commit: the baseline record carries that commit (``code_commit``), the config names the record's new hash, the test canonical root mirrors the record, and a second commit holds
+    it (the record's commit is then an ancestor of HEAD, and the baseline-relevant files are unchanged since)."""
+    p = repo / core.CONFIG
+    cfg = core.load_config(p)
+    rec_path = repo / str(cfg["quiet"]["baseline_record_path"])
+    rec = core.read_record(rec_path, "quiet_baseline")
+    rec["code_commit"] = git(repo, "rev-parse", "HEAD").strip()
+    core.write_record(rec_path, rec, overwrite=True)
+    shutil.copy(rec_path, CANON / "first" / baseline.RECORD)
+    p.write_text(set_quiet_figures(p.read_text(), baseline_record_sha256=f'"{file_sha256(rec_path)}"'))
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "stamp the baseline's code commit")
 
 
 def install_baseline(repo: Path, **kw: Any) -> dict[str, Any]:

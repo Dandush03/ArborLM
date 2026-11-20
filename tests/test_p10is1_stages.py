@@ -71,6 +71,9 @@ def mini_repo(tmp: Path) -> Path:
     git(repo, "init", "-q")
     git(repo, "-c", "user.email=t@t", "-c", "user.name=t", "add", "-A")
     git(repo, "-c", "user.email=t@t", "-c", "user.name=t", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "x")
+    import test_p10is1_quiet_rule as qr
+
+    qr.stamp_code_commit(repo, lambda r, *a: git(r, "-c", "user.email=t@t", "-c", "user.name=t", "-c", "commit.gpgsign=false", *a))
     return repo
 
 

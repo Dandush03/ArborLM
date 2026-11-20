@@ -45,6 +45,7 @@ def provisional_repo(tmp: Path) -> Path:
     repo = TS.mini_repo(tmp)
     p = repo / core.CONFIG
     p.write_text(qr.set_quiet_figures(p.read_text(), baseline_provisional="true", baseline_record_path='""', baseline_record_sha256='""'))
+    (repo / baseline.SESSIONS_LOG).unlink(missing_ok=True)  # the synthetic one: this repository has taken no baseline yet
     TR.git(repo, "add", "-A")
     TR.git(repo, "commit", "-q", "-m", "provisional baseline")
     return repo
@@ -119,7 +120,7 @@ def test_the_baseline_taken_by_the_command_flows_into_the_config_the_plan_and_th
     repo = provisional_repo(tmp_path)
     shutil.rmtree(qr.CANON / "first", ignore_errors=True)  # the synthetic mirror of the provisional repo is not this study's baseline
     canon_first = qr.CANON / "first"  # the baseline is taken by the command in the canonical root, then its record and samples are copied into results/ and committed
-    rec = qr.run_session(qr.FakeMachine(lambda t: (1.30 + (0.05 if int(t / 10) % 7 == 0 else 0.0), 1.30)), canon_first, qr.qcfg(), sessions_log=repo / baseline.SESSIONS_LOG)
+    rec = qr.run_session(qr.FakeMachine(lambda t: (1.30 + (0.05 if int(t / 10) % 7 == 0 else 0.0), 1.30)), canon_first, qr.qcfg(), sessions_log=repo / baseline.SESSIONS_LOG, code_commit=TR.git(repo, "rev-parse", "HEAD").strip())
     assert rec["status"] == "ACCEPTED" and rec["accepted"]["load_limit"] == 185 and rec["test_root"] is False and rec["root"] == str(qr.CANON.resolve())
     out = repo / "results" / "p10is1-quiet-baseline-e2e"
     out.mkdir(parents=True)
@@ -160,7 +161,7 @@ def test_the_freeze_prints_the_report_notice_for_a_limit_above_250_and_it_is_not
     repo = provisional_repo(tmp_path)
     shutil.rmtree(qr.CANON / "first", ignore_errors=True)
     canon_first = qr.CANON / "first"
-    rec = qr.run_session(qr.FakeMachine(lambda t: (2.20, 2.20)), canon_first, qr.qcfg(), sessions_log=repo / baseline.SESSIONS_LOG)
+    rec = qr.run_session(qr.FakeMachine(lambda t: (2.20, 2.20)), canon_first, qr.qcfg(), sessions_log=repo / baseline.SESSIONS_LOG, code_commit=TR.git(repo, "rev-parse", "HEAD").strip())
     assert rec["accepted"]["load_limit"] == 270
     out = repo / "results" / "high"
     out.mkdir(parents=True)

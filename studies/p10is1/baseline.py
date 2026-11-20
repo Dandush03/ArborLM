@@ -18,9 +18,10 @@
 import argparse
 import json
 import os
+import subprocess
 import sys
 import time
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Collection, Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -97,7 +98,7 @@ def resolve_out(root: Path, replaces: bool) -> Path:
     return second
 
 
-def check_root_consistency(root: Path, record_path: Path) -> None:
+def check_root_consistency(root: Path, record_path: Path, interrupted: Collection[tuple[str, int, int]] = ()) -> None:
     """The freeze's check (F4). The canonical root must exist (no skip). The committed record must say it was taken under THIS root and not under a test root, must be the root's first ACCEPTED record (or the root's
     second whose reason file predates its first sample), its samples file must be the root's, and the attempts it lists must be exactly the root's full list of attempts (every attempt of every session)."""
     if not root.is_dir():
@@ -125,7 +126,7 @@ def check_root_consistency(root: Path, record_path: Path) -> None:
     if not root_samples.is_file() or file_sha256(root_samples) != committed["samples_sha256"] or file_sha256(record_path.parent / str(committed["samples_file"])) != committed["samples_sha256"]:
         raise core.StageRefused("refused: the committed samples file is not the root's samples file")
     seen = {(int(r["session"]), int(r["attempt"])) for r in (json.loads(x) for x in root_samples.read_text(encoding="utf-8").splitlines() if x.strip()) if int(r["attempt"]) > 0}
-    listed = {(int(a["session"]), int(a["attempt"])) for a in committed["attempts"]}
+    listed = {(int(a["session"]), int(a["attempt"])) for a in committed["attempts"]} | {(s, a) for d, s, a in interrupted if d == which.name}  # attempts of a killed session are listed in SESSIONS.log as INTERRUPTED
     if seen != listed:
         raise core.StageRefused(f"refused: the record lists attempts {sorted(listed)} but the root's samples hold {sorted(seen)}: every attempt must be listed")
 
@@ -149,26 +150,61 @@ def default_sessions_log() -> Path:
     return core.repo_root() / SESSIONS_LOG
 
 
-def append_session_line(log: Path, directory: str, session: int, rec: Mapping[str, Any], status: str) -> None:
-    """One line per baseline session (Advisory 2): UTC time, the directory (first/second), the session, the attempt numbers it ran (``first-last``, or ``none``), its status and the SHA-256 of the samples file at its end.
-    The lead commits the file before the next step; the freeze refuses when the root's attempts are not all listed in it."""
-    nums = [int(a["attempt"]) for a in rec["attempts"] if int(a["session"]) == session]
-    span = f"{min(nums)}-{max(nums)}" if nums else "none"
+def prefix_sha(samples_path: Path, upto_session: int) -> str | None:
+    """SHA-256 of the samples file's PREFIX that holds the samples of sessions 1 to ``upto_session`` (sessions are appended in order): what the file was when that session ended. None if there is no such prefix."""
+    if not samples_path.is_file():
+        return None
+    import hashlib
+
+    h, n = hashlib.sha256(), 0
+    for ln in samples_path.read_bytes().splitlines(keepends=True):
+        if not ln.strip():
+            continue
+        if int(json.loads(ln)["session"]) > upto_session:
+            break
+        h.update(ln)
+        n += 1
+    return h.hexdigest() if n else None
+
+
+def samples_maxes(samples_path: Path) -> tuple[int, int]:
+    """(highest session, highest attempt) already in the samples file: a new session or attempt never reuses a number of a session that was interrupted."""
+    s = a = 0
+    if samples_path.is_file():
+        for ln in samples_path.read_text(encoding="utf-8").splitlines():
+            if ln.strip():
+                r = json.loads(ln)
+                s, a = max(s, int(r["session"])), max(a, int(r["attempt"]))
+    return s, a
+
+
+def _log_line(log: Path, directory: str, session: int, span: str, status: str, sha: str | None) -> None:
     log.parent.mkdir(parents=True, exist_ok=True)
     with log.open("a", encoding="utf-8") as f:
-        f.write(f"{_utc()}\tdir={directory}\tsession={session}\tattempts={span}\tstatus={status}\tsamples_sha256={rec.get('samples_sha256')}\n")
+        f.write(f"{_utc()}\tdir={directory}\tsession={session}\tattempts={span}\tstatus={status}\tsamples_sha256={sha}\n")
         f.flush()
         os.fsync(f.fileno())
 
 
+def append_session_line(log: Path, directory: str, session: int, rec: Mapping[str, Any], status: str, samples_path: Path | None = None) -> None:
+    """One line per baseline session (Advisory 2): UTC time, the directory (first/second), the session, the attempt numbers it ran (``first-last``, or ``none``), its status and the SHA-256 of the samples file as it was
+    when the session ended (the prefix through that session). The lead commits the file before the next step; the freeze refuses repeated (directory, session) lines, a hash that is not the matching prefix of the root's
+    samples, and attempts of the root that are not all listed."""
+    nums = [int(a["attempt"]) for a in rec["attempts"] if int(a["session"]) == session]
+    span = f"{min(nums)}-{max(nums)}" if nums else "none"
+    sha = prefix_sha(samples_path, session) if samples_path is not None else rec.get("samples_sha256")
+    _log_line(log, directory, session, span, status, sha)
+
+
+def parse_log(log: Path) -> list[dict[str, str]]:
+    return [dict(x.split("=", 1) for x in ln.split("\t")[1:]) for ln in log.read_text(encoding="utf-8").splitlines() if ln.strip()]
+
+
 def listed_attempts(log: Path) -> tuple[set[tuple[str, int, int]], str | None]:
-    """(dir, session, attempt) for every attempt the log lists, and the samples hash of its last line."""
+    """(dir, session, attempt) for every attempt the log lists (INTERRUPTED lines included), and the samples hash of its last line."""
     out: set[tuple[str, int, int]] = set()
     last = None
-    for ln in log.read_text(encoding="utf-8").splitlines():
-        if not ln.strip():
-            continue
-        f = dict(x.split("=", 1) for x in ln.split("\t")[1:])
+    for f in parse_log(log):
         if f["attempts"] != "none":
             a, b = (int(x) for x in f["attempts"].split("-"))
             out |= {(f["dir"], int(f["session"]), n) for n in range(a, b + 1)}
@@ -176,10 +212,51 @@ def listed_attempts(log: Path) -> tuple[set[tuple[str, int, int]], str | None]:
     return out, last
 
 
+def interrupted_attempts(log: Path) -> set[tuple[str, int, int]]:
+    """(dir, session, attempt) of the attempts the log lists as INTERRUPTED (a session that was killed before it wrote its record)."""
+    out: set[tuple[str, int, int]] = set()
+    if log.is_file():
+        for f in parse_log(log):
+            if f["status"] == "INTERRUPTED" and f["attempts"] != "none":
+                a, b = (int(x) for x in f["attempts"].split("-"))
+                out |= {(f["dir"], int(f["session"]), n) for n in range(a, b + 1)}
+    return out
+
+
+def record_interrupted(log: Path, out: Path) -> list[int]:
+    """At the START of a session (before any sampling): every attempt present in this directory's samples but not listed in SESSIONS.log belongs to a session that was killed before it could log itself; it gets an appended
+    INTERRUPTED line (with the samples hash through that session). Returns the sessions so recorded."""
+    sp = out / SAMPLES
+    if not sp.is_file():
+        return []
+    listed = {(s, a) for d, s, a in (listed_attempts(log)[0] if log.is_file() else set()) if d == out.name}
+    missing: dict[int, list[int]] = {}
+    for ln in sp.read_text(encoding="utf-8").splitlines():
+        if ln.strip():
+            r = json.loads(ln)
+            if int(r["attempt"]) > 0 and (int(r["session"]), int(r["attempt"])) not in listed:
+                missing.setdefault(int(r["session"]), [])
+                if int(r["attempt"]) not in missing[int(r["session"])]:
+                    missing[int(r["session"])].append(int(r["attempt"]))
+    for s, nums in sorted(missing.items()):
+        _log_line(log, out.name, s, f"{min(nums)}-{max(nums)}", "INTERRUPTED", prefix_sha(sp, s))
+    return sorted(missing)
+
+
 def check_sessions_log(root: Path, log: Path) -> None:
-    """The freeze's check (Advisory 2): the committed SESSIONS.log exists and lists EVERY attempt of the root's samples (first/ and second/), and the samples hash of its last line is one of the root's samples files'."""
+    """The freeze's check: the committed SESSIONS.log exists; no (directory, session) is listed twice; each line's samples SHA-256 is the hash of the matching PREFIX of the root's samples file (so a deleted-and-retaken
+    root cannot pass); and it lists EVERY attempt of the root's samples (first/ and second/), INTERRUPTED lines included."""
     if not log.is_file():
         raise core.StageRefused(f"refused: {log} does not exist: every baseline session appends a line to it and the lead commits it before the next step")
+    lines = parse_log(log)
+    keys = [(f["dir"], int(f["session"])) for f in lines]
+    if len(set(keys)) != len(keys):
+        raise core.StageRefused(f"refused: {log.name} lists a (directory, session) more than once: {sorted(k for k in set(keys) if keys.count(k) > 1)}")
+    for f in lines:
+        sp = root / f["dir"] / SAMPLES
+        want = prefix_sha(sp, int(f["session"]))
+        if str(want) != f["samples_sha256"]:
+            raise core.StageRefused(f"refused: {log.name} line for {f['dir']} session {f['session']} names samples hash {f['samples_sha256']}, not the hash {want} of the matching prefix of the root's samples file")
     listed, _ = listed_attempts(log)
     seen: set[tuple[str, int, int]] = set()
     for d in ("first", "second"):
@@ -188,6 +265,45 @@ def check_sessions_log(root: Path, log: Path) -> None:
             seen |= {(d, int(r["session"]), int(r["attempt"])) for r in (json.loads(x) for x in sp.read_text(encoding="utf-8").splitlines() if x.strip()) if int(r["attempt"]) > 0}
     if seen != listed:
         raise core.StageRefused(f"refused: {log.name} lists attempts {sorted(listed)} but the root's samples hold {sorted(seen)}: every attempt of every session must be listed (and committed)")
+
+
+BASELINE_FILES = ("machine.py", "baseline.py", "quiet.py", "loadrule.py", "watch_child.py")  # the code a baseline is taken with, under studies/p10is1/
+CODE_PATHS = ("studies/p10is1", "configs/p10is1_capacity.toml")
+
+
+def _git(repo: Path, *args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["git", "-C", str(repo), *args], capture_output=True, text=True, check=False, timeout=60)  # noqa: S603, S607
+
+
+def head_commit(repo: Path) -> str:
+    r = _git(repo, "rev-parse", "HEAD")
+    if r.returncode != 0:
+        raise core.StageRefused(f"refused: no git HEAD in {repo}")
+    return r.stdout.strip()
+
+
+def require_clean_code(repo: Path) -> str:
+    """The baseline runs only on a clean tree for the files of studies/p10is1 and the config (untracked files included); returns HEAD, which the record carries."""
+    r = _git(repo, "status", "--porcelain", "--", *CODE_PATHS)
+    if r.returncode != 0 or r.stdout.strip():
+        raise core.StageRefused("refused: the tree is not clean for studies/p10is1 and the config: commit them first (the baseline is taken on a commit):\n" + r.stdout.rstrip())
+    return head_commit(repo)
+
+
+def check_code_commit(repo: Path, record_path: Path) -> None:
+    """The candidate plan and the freeze: the record's code commit exists, is an ancestor of HEAD, and the baseline-relevant files (machine.py, baseline.py, quiet.py, loadrule.py, watch_child.py) are, in the working
+    tree, exactly what that commit holds."""
+    commit = core.read_record(record_path, "quiet_baseline").get("code_commit")
+    if not isinstance(commit, str) or len(commit) != 40:
+        raise core.StageRefused("refused: the baseline record carries no code commit")
+    if _git(repo, "cat-file", "-e", f"{commit}^{{commit}}").returncode != 0:
+        raise core.StageRefused(f"refused: the baseline's code commit {commit} is not a commit of this repository")
+    if _git(repo, "merge-base", "--is-ancestor", commit, "HEAD").returncode != 0:
+        raise core.StageRefused(f"refused: the baseline's code commit {commit} is not an ancestor of HEAD")
+    paths = [f"studies/p10is1/{f}" for f in BASELINE_FILES]
+    d = _git(repo, "diff", "--name-only", commit, "--", *paths)
+    if d.returncode != 0 or d.stdout.strip():
+        raise core.StageRefused(f"refused: baseline-relevant files differ from the baseline's code commit {commit}: {d.stdout.split()}")
 
 
 def write_record(out: Path, rec: Mapping[str, Any]) -> None:
@@ -208,6 +324,7 @@ def run_baseline(
     awake: Callable[[], Any] = machine.keep_awake,
     config_file_sha256: str | None = None,
     sessions_log: Path | None = None,
+    code_commit: str | None = None,
 ) -> dict[str, Any]:
     """One SESSION of the baseline (at most ``baseline_session_hours``) in ``out``. Returns the record (also written to ``out/record.json``). Every wait has a deadline; every sample is on disk when taken."""
     q = core.cfg_of(cfg)["quiet"]
@@ -222,6 +339,14 @@ def run_baseline(
         raise core.StageRefused("refused: this baseline was begun under other [quiet] rules (hash differs): one baseline per study is taken under one set of rules")
     rec["quiet_rules_sha256"] = rules  # F4-b: the rules (the committed config's [quiet] block without the figures entered afterwards) this baseline is taken under
     rec["config_file_sha256"] = config_file_sha256
+    if code_commit is not None:
+        if rec.get("code_commit") not in (None, code_commit):
+            raise core.StageRefused("refused: this baseline was begun on another code commit: one baseline per study is taken on one commit")
+        rec["code_commit"] = code_commit  # the commit the baseline-relevant files were at (the freeze compares them with it)
+    elif "code_commit" not in rec:
+        rec["code_commit"] = None
+    if sessions_log is not None:
+        record_interrupted(sessions_log, out)  # BEFORE any sampling: attempts of a killed session get their INTERRUPTED line
     rec["root"] = str(out.parent.resolve())  # F4: where it was taken
     rec["test_root"] = _test_root is not None  # a record taken under the test-only override is refused by the candidate plan and the freeze
     sessions: list[dict[str, Any]] = list(rec["sessions"])
@@ -232,7 +357,8 @@ def run_baseline(
         if condition not in machine.CONDITIONS:
             raise core.StageRefused(f"refused: condition is 'open' or 'closed', not {condition!r}")
         cond = condition
-    n_session = len(sessions) + 1
+    max_session, max_attempt = samples_maxes(out / SAMPLES)
+    n_session = max(len(sessions), max_session) + 1  # never the number of a session that was interrupted
     interval, settle, window_n = float(q["baseline_interval_seconds"]), int(q["settle_samples"]), int(q["baseline_samples"])
     gap_max = float(q["sample_gap_max_seconds"])
     limit_s = float(q["baseline_session_hours"]) * 3600.0
@@ -240,7 +366,7 @@ def run_baseline(
     samples_path = out / SAMPLES
     session: dict[str, Any] = {"session": n_session, "condition": cond, "started_utc": _utc(), "status": PAUSED_NO_BASELINE, "attempts": 0, "samples": 0, **({"forced_condition": True} if condition is not None else {})}
     began, cpu0 = clock(), pr.cpu()
-    attempt_no = int(rec["attempts"][-1]["attempt"]) if rec["attempts"] else 0
+    attempt_no = max(int(rec["attempts"][-1]["attempt"]) if rec["attempts"] else 0, max_attempt)
     cur: list[dict[str, Any]] = []
     cur_top: list[Any] = []
     cur_start = ""
@@ -323,7 +449,7 @@ def run_baseline(
             )  # fmt: skip
             write_record(out, rec)
             if sessions_log is not None:
-                append_session_line(sessions_log, out.name, n_session, rec, session["status"])
+                append_session_line(sessions_log, out.name, n_session, rec, session["status"], samples_path)
     return dict(rec)
 
 
@@ -448,6 +574,7 @@ def main(argv: list[str] | None = None) -> int:
             d = rederive(Path(args.record), cfg["quiet"])
             print(json.dumps(core.jsonable({"load_p95": d["load_p95"], "load_limit": d["load_limit"], "condition": d["condition"], "app_present": d["app_present"], "cli_present": d["cli_present"], "baseline_record_sha256": d["record_sha256"], "settled": d["settled"], "report_above": d["report_above"]}), sort_keys=True))
             return 0
+        code = require_clean_code(core.repo_root())  # the baseline is taken on a clean, committed tree; the record carries the commit
         preflight(cfg=cfg)
         root = default_root()  # the canonical root: there is no option for another
         out = resolve_out(root, bool(args.replaces))
@@ -461,7 +588,7 @@ def main(argv: list[str] | None = None) -> int:
                 (out / REASON_FILE).write_text(json.dumps(second, indent=2, sort_keys=True) + "\n", encoding="utf-8")  # the reason is on disk BEFORE the second baseline is taken
         elif args.reason or args.condition:
             raise core.StageRefused("refused: --reason and --condition belong to a second baseline (--replaces)")
-        rec = run_baseline(out, cfg=cfg, condition=args.condition, second=second, config_file_sha256=core.config_sha256(), sessions_log=default_sessions_log())
+        rec = run_baseline(out, cfg=cfg, condition=args.condition, second=second, config_file_sha256=core.config_sha256(), sessions_log=default_sessions_log(), code_commit=code)
     except core.StageRefused as exc:
         print(str(exc), file=sys.stderr)
         return 2
