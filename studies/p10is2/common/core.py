@@ -240,8 +240,21 @@ def under_line(*lines: str) -> str:
 
 
 # --- git and run directory -------------------------------------------------------------------------------------------------------------------
+GIT_TIMEOUT = 60.0
+
+
+def git_env() -> dict[str, str]:
+    """Ruling 37: a non-interactive environment for every git subprocess (no terminal prompt, no askpass or pinentry wait)."""
+    import os
+
+    env = dict(os.environ)
+    env.update(GIT_TERMINAL_PROMPT="0", GIT_ASKPASS="true", SSH_ASKPASS="true", SSH_ASKPASS_REQUIRE="never", GCM_INTERACTIVE="never")
+    env.pop("GPG_TTY", None)
+    return env
+
+
 def git(repo: Path, *argv: str) -> subprocess.CompletedProcess[bytes]:
-    return subprocess.run(["git", "-C", str(repo), *argv], capture_output=True, check=False)  # noqa: S603, S607
+    return subprocess.run(["git", "-C", str(repo), *argv], capture_output=True, check=False, timeout=GIT_TIMEOUT, env=git_env())  # noqa: S603, S607
 
 
 def records_dir(run_dir: Path) -> Path:

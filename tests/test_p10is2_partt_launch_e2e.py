@@ -41,6 +41,13 @@ def synthetic_repo(tmp: Path, *, installable: bool = False, with_plan: bool = Tr
     cfg_path.write_text(text.replace("study_budget_hours = 0.0", "study_budget_hours = 100000.0"))  # the human lead's bound (ruling 33), set for the synthetic study
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "test-size rehearsal updates")
+    bare = tmp / "remote.git"  # a local bare repository as the calibration log's remote (no network); the config records its URL (ruling 35)
+    subprocess.run(["git", "init", "-q", "--bare", str(bare)], check=True, capture_output=True)  # noqa: S603, S607
+    git(r, "remote", "add", "origin", str(bare))
+    cfg_path.write_text(cfg_path.read_text().replace('remote_url = ""', f'remote_url = "{bare}"'))
+    git(r, "add", "-A")
+    git(r, "commit", "-q", "-m", "the remote the log is pushed to")
+    git(r, "push", "-q", "-u", "origin", "HEAD:main")
     if installable:
         shutil.copy(ROOT / "LICENSE", r / "LICENSE")
         shutil.copytree(ROOT / "src", r / "src", ignore=shutil.ignore_patterns("__pycache__"))
@@ -167,7 +174,13 @@ def test_measuring_caps_calibration_plan_counting_freeze_then_a_registered_stage
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "calibration log")  # ruling 26: the plan and the freeze read the COMMITTED log
     # 4. the candidate plan (the charge from the ledgers by rule), the registered caps by code, the plan again
+    cfg_text = (r / core.CONFIG_T).read_text()
     plan_args = ["candidate-plan", "--run-dir", str(runs / "registered"), "--part-q-dir", str(q), "--part-q-plan", str(pq_plan), "--manifests", str(manifests), "--measuring-rehearsal", str(meas_path), *common]
+    assert partt_stages.main(plan_args) == partt_stages.EXIT_REFUSED  # ruling 35: the finished log is committed but not pushed
+    git(r, "push", "-q", "origin", "HEAD:main")
+    (r / core.CONFIG_T).write_text(cfg_text.replace("study_budget_hours = 100000.0", "study_budget_hours = 0.001"))
+    assert partt_stages.main(plan_args) == partt_stages.EXIT_REFUSED  # ruling 37: the plan's own projected total exceeds the bound (the config total is still 0.0)
+    (r / core.CONFIG_T).write_text(cfg_text)
     assert partt_stages.main(plan_args) == 0
     plan0 = planmod.Plan.load(r / core.PLAN_T, "T")
     assert set(plan0.data["charge_before_freeze"]["ledgers"]) == {str(runs / "measuring" / "charged_ledger.json"), str(cal_dir / "charged_ledger.json")}  # the measuring and the calibration ledgers, listed by rule

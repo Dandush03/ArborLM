@@ -51,6 +51,10 @@ lora_rate = 0.0003
 etable_rate = 0.003
 read_layer = 4
 
+[calibration_log]  # ruling 35: where the calibration log is pushed; the human lead fills these (empty refuses)
+remote_url = ""
+remote_branch = ""
+
 [pilot]  # section 7.2
 gap_min = 0.25
 
