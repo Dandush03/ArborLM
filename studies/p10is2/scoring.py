@@ -9,7 +9,8 @@ registry builder. Every read runs under ``torch.no_grad()`` and on CPU. The froz
 
 import contextlib
 import time
-from collections.abc import Iterator, Mapping
+from collections.abc import Iterator, Mapping, Sequence
+from pathlib import Path
 from typing import Any
 
 import torch
@@ -41,6 +42,48 @@ def require_evaluation_allowed(world: WorldT) -> None:
         raise core.StageRefused(f"refused: a {world.plan_mode} never scores E_A, E_B, E_C or E_open (section 4.1: not before the registered run of Part T); it scores D_cal only")
 
 
+ITEMS: dict[str, dict[str, Any]] = {}  # registry key (without the read's own scalar) -> per-item records of the read, written by the scoring functions (audit R5, ruling 8)
+_AT: list[str] = []
+
+
+@contextlib.contextmanager
+def at(prefix: str) -> Iterator[None]:
+    """The registry-key prefix (``arm|order|rep``) the scoring calls inside this block belong to: a per-item record is stored under ``prefix|read``."""
+    _AT.append(prefix)
+    try:
+        yield
+    finally:
+        _AT.pop()
+
+
+def log_items(prefix: str, read: str, items: Sequence[float], *, exact: Sequence[bool] | None = None, sequences: Sequence[Sequence[int]] | None = None, texts: Sequence[str] | None = None) -> None:
+    """Store one read's per-item scores (and, where the scoring made them, its exact-match flags, greedy token sequences and answer texts) under the registry key of the read."""
+    rec: dict[str, Any] = {"items": [float(x) for x in items]}
+    if exact is not None:
+        rec["exact"] = [bool(x) for x in exact]
+    if sequences is not None:
+        rec["sequences"] = [[int(t) for t in s] for s in sequences]
+    if texts is not None:
+        rec["texts"] = [str(t) for t in texts]
+    ITEMS[f"{prefix}|{read}"] = rec
+
+
+def log_panel(read: str, sc: Any) -> None:
+    if _AT:
+        log_items(_AT[-1], read, sc.items, exact=sc.exact, sequences=sc.sequences)
+
+
+def log_json(read: str, js: Mapping[str, Any]) -> None:
+    if _AT:
+        log_items(_AT[-1], read, js["items"], exact=js["exact"], sequences=js["sequences"])
+
+
+def take_items() -> dict[str, dict[str, Any]]:
+    out = dict(ITEMS)
+    ITEMS.clear()
+    return out
+
+
 KIND_SECONDS: dict[str, float] = {}
 KIND_CALLS: dict[str, int] = {}
 
@@ -61,7 +104,7 @@ def _cap(order: str, which: int) -> str:
 
 
 @torch.no_grad()
-def panel_means(world: WorldT, arm: Arm) -> dict[str, float]:
+def panel_means(world: WorldT, arm: Arm, log: bool = True) -> dict[str, float]:
     """s:E_A and s:E_B: the mean chrF-norm of the arm on each full panel under the oracle route."""
     require_evaluation_allowed(world)
     ctx = world.ctx
@@ -69,6 +112,8 @@ def panel_means(world: WorldT, arm: Arm) -> dict[str, float]:
     for n in ("E_A", "E_B"):
         with timed("score:plain"):
             sc = score_panel(ctx, arm, ctx.panels[n])
+        if log:
+            log_panel(f"s:{n}", sc)
         out[f"s:{n}"], out[f"em:{n}"] = sc.mean, mean([float(x) for x in sc.exact])  # em: exact-match rate (EXACT-MATCH WEAK)
     return out
 
@@ -85,6 +130,7 @@ def control_reads(world: WorldT, rep: int, arm: MemoryArm, name: str, order: str
     for c in caps:
         for kind, cond in COND.items():
             out[f"sub:{cond}:{PANEL[c]}"] = float(res[PANEL[c]][kind]["mean"])
+            log_json(f"sub:{cond}:{PANEL[c]}", res[PANEL[c]][kind])
     return out
 
 
@@ -98,10 +144,15 @@ def reference_reads(world: WorldT) -> dict[str, float]:
         panel = ctx.panels[n]
         sub = ctx.subsample[n]
         s0_full = score_panel(ctx, NullArm(), panel)
+        log_items("S0|-|-", f"s:{n}", s0_full.items, exact=s0_full.exact, sequences=s0_full.sequences)
+        log_items("S0|-|-", f"sub:own:{n}", [s0_full.items[i] for i in sub])
         out[f"S0|s:{n}"] = s0_full.mean
         out[f"S0|sub:own:{n}"] = mean([s0_full.items[i] for i in sub])
         texts = world.teacher_outputs[c][n]
         items = [chrf_item(t, r) for t, r in zip(texts, panel.refs, strict=True)]
+        t_exact = [normalize(t) in {normalize(x) for x in r} for t, r in zip(texts, panel.refs, strict=True)]
+        log_items("TEACHER|-|-", f"s:{n}", items, exact=t_exact, texts=texts)
+        log_items("TEACHER|-|-", f"sub:own:{n}", [items[i] for i in sub])
         out[f"TEACHER|s:{n}"] = mean(items)
         out[f"TEACHER|em:{n}"] = mean([float(normalize(t) in {normalize(x) for x in r}) for t, r in zip(texts, panel.refs, strict=True)])
         out[f"S0|em:{n}"] = mean([float(x) for x in s0_full.exact])
@@ -119,6 +170,50 @@ def build_routers_t(world: WorldT, rep: int) -> dict[tuple[str, ...], tuple[Rout
     return out
 
 
+def save_routers(routers: Mapping[tuple[str, ...], tuple[Router, dict[str, Any]]], directory: Path) -> dict[str, Any]:
+    """Snapshot every router of a replicate with its hashes (audit R5, ruling 11): one file and one manifest per task set; written once, never overwritten."""
+    import json
+
+    from arborlm.io import atomic_write, file_sha256
+
+    directory.mkdir(parents=True, exist_ok=True)
+    out: dict[str, Any] = {}
+    for tasks, (router, diag) in routers.items():
+        name = "_".join(tasks)
+        data, manifest = directory / f"{name}.pt", directory / f"{name}.manifest.json"
+        if data.exists():
+            raise FileExistsError(f"router snapshot {name!r} exists and is immutable")
+        torch.save({"tasks": list(tasks), "width": int(router.proj.shape[1]), "state": {k: v.detach().clone() for k, v in router.state_dict().items()}}, data)
+        m = {"tasks": list(tasks), "file": data.name, "file_sha256": file_sha256(data), "state_hash": router.state_hash(), "diagnostics": diag}
+        atomic_write(manifest, (json.dumps(core.jsonable(m), sort_keys=True) + "\n").encode())
+        out[name] = m
+    return out
+
+
+def load_routers(directory: Path) -> dict[tuple[str, ...], tuple[Router, dict[str, Any]]]:
+    """The routers of a replicate from their snapshots, each file re-hashed against its manifest and each state against its recorded state hash (the recomputation uses THESE routers, never new ones)."""
+    import json
+
+    from arborlm.io import file_sha256
+
+    out: dict[tuple[str, ...], tuple[Router, dict[str, Any]]] = {}
+    manifests = sorted(directory.glob("*.manifest.json")) if directory.is_dir() else []
+    if not manifests:
+        raise core.StageRefused(f"refused: no router snapshot under {directory}: the recomputation re-reads the routers the evaluation used")
+    for mf in manifests:
+        m = json.loads(mf.read_text())
+        data = directory / m["file"]
+        if file_sha256(data) != m["file_sha256"]:
+            raise core.StageRefused(f"refused: {data} does not hash to its router manifest (PAUSED — IDENTITY)")
+        st = torch.load(data, weights_only=True)
+        router = Router(st["tasks"], int(st["width"]), torch.Generator())  # the initial values are replaced by the stored state
+        router.load_state_dict(st["state"])
+        if router.state_hash() != m["state_hash"]:
+            raise core.StageRefused(f"refused: the router in {data} does not match its recorded state hash")
+        out[tuple(m["tasks"])] = (router, m["diagnostics"])
+    return out
+
+
 @torch.no_grad()
 def gen_reads(world: WorldT, rep: int, arm: Arm, name: str, order: str, routers: Mapping[tuple[str, ...], tuple[Router, dict[str, Any]]]) -> tuple[dict[str, float], dict[str, Any]]:
     """gen:token64 and gen:first_marker: the loss increase over the unmodified student under the learned router, at the two decision positions (``general_quality``). M1 is read with the router of its first
@@ -132,8 +227,13 @@ def gen_reads(world: WorldT, rep: int, arm: Arm, name: str, order: str, routers:
 
 @torch.no_grad()
 def dcon_reads(world: WorldT, arm: Arm) -> dict[str, float]:
+    out: dict[str, float] = {}
     with timed("score:dcon"):
-        return {f"dcon:{c}": score_panel(world.ctx, arm, world.d_con[c]).mean for c in TWO}
+        for c in TWO:
+            sc = score_panel(world.ctx, arm, world.d_con[c])
+            log_panel(f"dcon:{c}", sc)
+            out[f"dcon:{c}"] = sc.mean
+    return out
 
 
 def modification(m_ii: MemoryArm, m1: MemoryArm) -> dict[str, float]:
@@ -200,19 +300,26 @@ def baseline_reads(world: WorldT, rep: int, gloss_bank: Mapping[str, Any]) -> di
         items = world.partition.panels[PANEL[c]]
         n = PANEL[c]
         idx = retrieval.TfidfIndex(train)
-        out[f"R-exact|s:{n}"] = retrieval.r_exact(train, items, c)["mean"]
-        out[f"R-exact|hits:{n}"] = float(retrieval.r_exact(train, items, c)["hits"])
-        out[f"R-nn|s:{n}"] = retrieval.r_nn(train, items, c, idx)["mean"]
-        out[f"R-gloss|s:{n}"] = retrieval.r_gloss(train, items, c)["mean"]
+        r_ex, r_nn, r_gl = retrieval.r_exact(train, items, c), retrieval.r_nn(train, items, c, idx), retrieval.r_gloss(train, items, c)
+        for arm_name, rr in (("R-exact", r_ex), ("R-nn", r_nn), ("R-gloss", r_gl)):
+            log_items(f"{arm_name}|-|{rep}", f"s:{n}", rr["items"])
+        out[f"R-exact|s:{n}"] = r_ex["mean"]
+        out[f"R-exact|hits:{n}"] = float(r_ex["hits"])
+        out[f"R-nn|s:{n}"] = r_nn["mean"]
+        out[f"R-gloss|s:{n}"] = r_gl["mean"]
         lex = retrieval.gloss_lexicon(train)
-        icl, gicl = [], []
+        icl, gicl, icl_seq, gicl_seq = [], [], [], []
         for it, ex, refs in zip(items, ctx.panels[n].examples, ctx.panels[n].refs, strict=True):
             demos = retrieval.r_icl_prompt_items(train, it.en, 4, idx)
             seq = ctx.student.greedy(torch.tensor([icl_ids([world.bank.train(c, d) for d in demos], ex)]), add=None, adapter=None, max_new=ctx.max_new, stop_bytes=ctx.decoder.table)
             icl.append(chrf_item(ctx.decoder.answer_text(seq), refs))
+            icl_seq.append(seq)
             bos = len(ex.segments[0].ids) if ex.segments and ex.segments[0].text == "<bos>" else 0
             seq2 = ctx.student.greedy(torch.tensor([gloss_icl_ids(it.en, ex, lex, vocab, gloss_bank, c, bos)]), add=None, adapter=None, max_new=ctx.max_new, stop_bytes=ctx.decoder.table)
             gicl.append(chrf_item(ctx.decoder.answer_text(seq2), refs))
+            gicl_seq.append(seq2)
+        log_items(f"R-icl|-|{rep}", f"s:{n}", icl, sequences=icl_seq)
+        log_items(f"R-gloss-icl|-|{rep}", f"s:{n}", gicl, sequences=gicl_seq)
         out[f"R-icl|s:{n}"], out[f"R-gloss-icl|s:{n}"] = mean(icl), mean(gicl)
     return out
 
@@ -257,8 +364,12 @@ def route_reads(world: WorldT, rep: int, arm: Arm, routers: Mapping[tuple[str, .
 
     router = routers[TWO][0]
     ctx = world.ctx
+    reads: dict[str, float] = {}
     with timed("score:route"):
-        reads = {f"lr:{n}": score_panel(ctx, arm, ctx.panels[n], route="learned", router=router).mean for n in ("E_A", "E_B")}
+        for n in ("E_A", "E_B"):
+            sc = score_panel(ctx, arm, ctx.panels[n], route="learned", router=router)
+            log_panel(f"lr:{n}", sc)
+            reads[f"lr:{n}"] = sc.mean
     plan = world.plan(rep)
     pieces = none_pieces(world.wiki_train_ids, world.router_spec.prefix_tokens)
     picked = set(torch.randperm(len(pieces), generator=plan.gen(3, "router sampling")).tolist()[: world.router_spec.none_prefixes])

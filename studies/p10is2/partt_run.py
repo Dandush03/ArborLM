@@ -52,37 +52,56 @@ def train_all(world: engine.WorldT, snap_dir: Path, ckpt_dir: Path | None, updat
 
 
 @torch.no_grad()
-def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Mapping[str, Any]) -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
-    """Every scored read of ONE replicate (a task of the registered evaluate stage): the records keyed ``"{arm}|{order}|{rep}"`` and the side records."""
+def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Mapping[str, Any], routers_mode: str = "build") -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
+    """Every scored read of ONE replicate (a task of the registered evaluate stage): the records keyed ``"{arm}|{order}|{rep}"`` and the side records. ``routers_mode``: ``build`` (train them; the tests), ``save`` (train
+    and snapshot them under ``snap_dir/routers/r<rep>``; the registered evaluate) or ``load`` (re-read the snapshots; the recomputation). Per-item records go to ``scoring.ITEMS``."""
     scoring.require_evaluation_allowed(world)
     records: dict[str, dict[str, float]] = {}
     side: dict[str, Any] = {}
-    routers = scoring.build_routers_t(world, r)
+    rdir = snap_dir / "routers" / f"r{r}"
+    if routers_mode == "load":
+        routers = scoring.load_routers(rdir)
+    else:
+        routers = scoring.build_routers_t(world, r)
+        if routers_mode == "save":
+            side[f"r{r}/router_snapshots"] = scoring.save_routers(routers, rdir)
     side[f"r{r}/routers"] = {"/".join(k): v[1] for k, v in routers.items()}
     for o in ORDERS:
         arms = {a: engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}") for a in ORDER_ARMS}
         for a in ORDER_ARMS:
-            reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
-            records[f"{a}|{o}|{r}"] = reads
+            with scoring.at(f"{a}|{o}|{r}"):
+                reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
+                records[f"{a}|{o}|{r}"] = reads
+                if a == "M-append":
+                    lr, rside = scoring.route_reads(world, r, arms[a], routers)
+                    records[f"{a}|{o}|{r}"] |= lr
+                    side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
             if a == "M-append":
-                lr, rside = scoring.route_reads(world, r, arms[a], routers)
-                records[f"{a}|{o}|{r}"] |= lr
-                side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
-                records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
+                with scoring.at(f"M-append@append|{o}|{r}"):
+                    records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
             if extra:
                 side.setdefault(f"r{r}/{a}/{o}", {}).update(extra)
     for a in JOINT:
         arm = engine.load_t(world, r, snap_dir, f"r{r}/{a}/-")
-        reads = scoring.panel_means(world, arm)
-        if isinstance(arm, MemoryArm):
-            reads |= scoring.control_reads(world, r, arm, a, "AB")
+        with scoring.at(f"{a}|-|{r}"):
+            reads = scoring.panel_means(world, arm)
+            if isinstance(arm, MemoryArm):
+                reads |= scoring.control_reads(world, r, arm, a, "AB")
         records[f"{a}|-|{r}"] = reads
     table = {c: engine.load_t(world, r, snap_dir, f"r{r}/E-table/{c}") for c in core.TASKS}
-    records[f"E-table|-|{r}"] = {f"s:{scoring.PANEL[c]}": scoring.panel_means(world, table[c])[f"s:{scoring.PANEL[c]}"] for c in core.TASKS}
+    records[f"E-table|-|{r}"] = {}
+    for c in core.TASKS:  # each capability's registry read is that capability's table scored on its own panel: only that read is logged
+        read = f"s:{scoring.PANEL[c]}"
+        with scoring.at(f"E-table|-|{r}"):
+            sc = scoring.score_panel(world.ctx, table[c], world.ctx.panels[scoring.PANEL[c]])
+            scoring.log_panel(read, sc)
+            records[f"E-table|-|{r}"][read] = sc.mean
     m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
     d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
-    records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
-    records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
+    with scoring.at(f"M-sep|-|{r}"):
+        records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
+    with scoring.at(f"D-sep|-|{r}"):
+        records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
     with scoring.timed("score:icl"):
         baselines = scoring.baseline_reads(world, r, gloss_bank)
     for name, v in baselines.items():

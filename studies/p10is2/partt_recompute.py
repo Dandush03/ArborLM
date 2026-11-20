@@ -14,7 +14,7 @@ from typing import Any
 
 import torch
 
-from . import engine, partt_run, scoring
+from . import engine, partt_items, partt_run, scoring
 from .common import core, gates
 
 OWN_CODE_TOLERANCE = 1e-6
@@ -53,17 +53,19 @@ def combined_means(comb: Mapping[str, Any]) -> dict[str, float]:
     return out
 
 
-def recompute(world: engine.WorldT, run_dir: Path, gloss: Mapping[str, Any], registered: Mapping[str, float], combined_registered: Mapping[str, Any] | None = None, *, own_code: bool = False, replicates: tuple[int, ...] = (0, 1, 2)) -> dict[str, Any]:
+def recompute(world: engine.WorldT, run_dir: Path, gloss: Mapping[str, Any], registered: Mapping[str, float], combined_registered: Mapping[str, Any] | None = None, *, own_code: bool = False, replicates: tuple[int, ...] = (0, 1, 2), routers_mode: str = "load", stored_items: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Re-score every snapshot of the run on CPU and compare with the registry (and the combined records' means). Returns the record written as ``recomputation.json``."""
     tol = OWN_CODE_TOLERANCE if own_code else FROZEN_CODE_TOLERANCE
     keep, world.device = world.device, torch.device("cpu")
     try:
+        scoring.ITEMS.clear()
         records = partt_run.reference_task(world)
         for r in replicates:
-            rec, _ = partt_run.score_replicate(world, r, run_dir / "snapshots", gloss)
+            rec, _ = partt_run.score_replicate(world, r, run_dir / "snapshots", gloss, routers_mode=routers_mode)  # "load": the routers the evaluation snapshotted, hash-checked, never new ones
             records.update(rec)
         again = scoring.registry_from_reads(records).values
         diffs = compare(registered, again, tol)
+        item_diffs = partt_items.compare_items(stored_items, scoring.take_items(), tol) if stored_items is not None else []
         cdiffs: list[dict[str, Any]] = []
         if combined_registered is not None:
             comb = partt_run.combined_reference(world)
@@ -73,7 +75,8 @@ def recompute(world: engine.WorldT, run_dir: Path, gloss: Mapping[str, Any], reg
     finally:
         world.device = keep
     return {
-        "ok": not diffs and not cdiffs, "outcome": None if not (diffs or cdiffs) else "ENGINEERING STOP — RECOMPUTATION", "checked": len(registered), "tolerance": tol, "code": "own" if own_code else "frozen", "differences": diffs + cdiffs,
+        "ok": not diffs and not cdiffs and not item_diffs, "outcome": None if not (diffs or cdiffs or item_diffs) else "ENGINEERING STOP — RECOMPUTATION", "checked": len(registered), "tolerance": tol, "code": "own" if own_code else "frozen", "differences": diffs + cdiffs + item_diffs,
+        "item_records_compared": None if stored_items is None else len(stored_items), "routers_mode": routers_mode,
         "platform": gates.platform_record(), "note": "a difference is an engineering stop: both values and the cell are recorded and nothing is labelled",
     }  # fmt: skip
 

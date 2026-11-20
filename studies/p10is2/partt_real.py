@@ -388,11 +388,11 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
         kinds = {"seconds": {f"train:{item['arm']}": float(rec["wall_seconds"])}, "units": {f"train:{item['arm']}": int(rec["updates_done"])}}
     elif stage in ("evaluate", "controls"):
         if task_id.endswith("|reference"):
-            result = {"records": partt_run.reference_task(w), "side": {}}
+            result = {"records": partt_run.reference_task(w), "side": {}, "items": scoring.take_items()}
         else:
             rep = int(task_id.rsplit("|r", 1)[1])
-            recs, side = partt_run.score_replicate(w, rep, snaps, gloss)
-            result = {"records": recs, "side": side}
+            recs, side = partt_run.score_replicate(w, rep, snaps, gloss, routers_mode="save")
+            result = {"records": recs, "side": side, "items": scoring.take_items()}
     elif stage == "combined":
         if task_id.endswith("|reference"):
             ref = partt_run.combined_reference(w)
@@ -476,11 +476,15 @@ def merge_evaluate(run_dir: Path) -> dict[str, int]:
     """The END of the evaluate stage: its task results into ``registry.json`` and ``side_records.json`` (the recomputation and the analysis read those). Written once; a second call must produce the same bytes."""
     records: dict[str, dict[str, float]] = {}
     side: dict[str, Any] = {}
+    items: dict[str, Any] = {}
     for f in sorted((run_dir / "tasks" / "evaluate").glob("*.result.json")):
         r = read_json(f)
         records.update(r["records"])
         side.update(r["side"])
+        items.update(r.get("items") or {})
     reg = scoring.registry_from_reads(records).values
+    if not (run_dir / "item_records.json").is_file():  # ruling 8: every registered score's per-item scores and greedy sequences, written once
+        core.write_record(run_dir / "item_records.json", {**core.envelope("cell_record", "T"), "items": core.jsonable(items)}, overwrite=False)
     if (run_dir / "registry.json").is_file():
         if read_json(run_dir / "registry.json") != json_safe(reg):
             raise core.StageRefused("refused: registry.json exists and differs from the evaluate results: no record is overwritten")
@@ -538,7 +542,8 @@ def run_recompute(repo: Path, run_dir: Path, qdir: Path, plan: Any, own_code: bo
     w, gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode, door_of(plan, qdir))
     reg = read_json(run_dir / "registry.json")
     comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
-    rec = partt_recompute.recompute(w, run_dir, gloss, reg, comb, own_code=own_code, **({"replicates": (partt_rehearsal.SUBSET_REP,)} if mode == "rehearsal" else {}))
+    stored = read_json(run_dir / "item_records.json")["items"] if (run_dir / "item_records.json").is_file() else None
+    rec = partt_recompute.recompute(w, run_dir, gloss, reg, comb, own_code=own_code, stored_items=stored, **({"replicates": (partt_rehearsal.SUBSET_REP,)} if mode == "rehearsal" else {}))
     partt_recompute.write(run_dir, rec)
     if charge:
         total = float(cfg["stage_caps"].get("total_hours", 0.0)) * 3600.0
