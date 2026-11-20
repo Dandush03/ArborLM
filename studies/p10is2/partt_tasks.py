@@ -132,8 +132,11 @@ def record_item_errors(run_dir: Path, stage: str, outcomes: Mapping[str, Mapping
     return errs
 
 
-def rehearsal_cap_seconds(cfg: Mapping[str, Any], kind: str) -> float:
-    """A rehearsal's fixed cap (ADR section 10): the measuring rehearsal's 3.0 charged hours, the counting rehearsal's, both from the config; they are not the registered stages' caps."""
+def rehearsal_cap_seconds(cfg: Mapping[str, Any], kind: str, plan: Any = None) -> float:
+    """A rehearsal's cap. The measuring rehearsal keeps the fixed 3.0 charged hours of ADR section 10 (config). The COUNTING rehearsal's cap is its own plan allowance, ``counting_allowance_hours`` (rulings 20, 27 and
+    30), fixed before it runs; a plan without one (a unit-test fixture) falls back to the config's ``rehearsal_hours``."""
+    if kind != "measuring" and plan is not None and "counting_allowance_hours" in getattr(plan, "data", {}):
+        return float(plan.data["counting_allowance_hours"]) * 3600.0
     return float(cfg["caps"]["measuring_rehearsal_hours" if kind == "measuring" else "rehearsal_hours"]) * 3600.0
 
 
@@ -148,7 +151,7 @@ def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo
     caps_used: dict[str, float] = {}
     t_stage = time.monotonic()
     for wave in waves_of(stage, plan, mode == "rehearsal"):
-        cap = stage_cap_for(plan, stage, led) if mode == "registered" else rehearsal_cap_seconds(cfg, kind) - led.charged()
+        cap = stage_cap_for(plan, stage, led) if mode == "registered" else rehearsal_cap_seconds(cfg, kind, plan) - led.charged()
         caps_used = {"stage_seconds_left": cap, "total_seconds_left": led.remaining()}
         if cap <= 0:  # nothing left: PAUSED, the extension is the lead's (section 9)
             for it in wave:

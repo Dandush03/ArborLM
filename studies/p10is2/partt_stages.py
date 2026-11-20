@@ -305,10 +305,65 @@ def check_calibration_ledger(repo: Path, log: list[dict[str, Any]]) -> None:
         raise StageRefused(f"refused: logged calibration sessions with no ledger entry and no INTERRUPTED line: {missing}")
 
 
+def check_study_budget(cfg: Any, total_hours: float, allowance_hours: float) -> None:
+    """Ruling 30: if the counting allowance makes the plan's total cap exceed the study's budget bound, the candidate plan (and the registered caps) refuse and it goes to the human lead; no automatic extension. A bound of 0.0 is
+    'not set' (the human lead sets it)."""
+    budget = float(cfg["caps"].get("study_budget_hours", 0.0))
+    if budget > 0.0 and total_hours > budget:
+        raise StageRefused(f"refused: PENDING LEAD REVIEW: the plan's total cap {total_hours} h exceeds the study's budget bound {budget} h (the counting allowance is {allowance_hours} h): the human lead decides; nothing is extended here")
+
+
+def session_identity(repo: Path) -> dict[str, str]:
+    """Ruling 28: the hashes of the files a calibration computes with (every ``studies/p10is2/*.py``) and of the config. Each session's start line carries them; a resume refuses when they differ from the first session's, and
+    the final record's must equal every session's."""
+    frozen = planmod.frozen_file_hashes(repo, "T")
+    return {k: v for k, v in sorted(frozen.items()) if (k.startswith("studies/p10is2/") and k.endswith(".py")) or k == str(core.CONFIG_T)}
+
+
+def open_session(log: Sequence[dict[str, Any]], rep: int) -> dict[str, Any] | None:
+    """The OPEN start line of a repetition: an ``open`` start with no ``end`` after it."""
+    opened = None
+    for e in log:
+        if e.get("repetition") != rep:
+            continue
+        if e.get("event") == "start" and e.get("open"):
+            opened = e
+        elif e.get("event") == "end":
+            opened = None
+    return opened
+
+
+def line_sha(event: dict[str, Any]) -> str:
+    import hashlib
+
+    return hashlib.sha256(json.dumps(event, sort_keys=True).encode()).hexdigest()
+
+
+def committed_head_log(repo: Path) -> list[dict[str, Any]]:
+    """The log at HEAD for a RUN (``calibrate`` without ``--open``): committed, its history append-only; the working file must extend it (the lines of a stopped session, appended after the commit, are allowed)."""
+    rel = str(core.CALIBRATION_LOG)
+    head = core.git(repo, "show", f"HEAD:{rel}")
+    if head.returncode != 0:
+        raise StageRefused(f"refused: {rel} is not committed at HEAD: run `calibrate --open`, and the lead commits the log, before any unit runs (ruling 29)")
+    work = (repo / rel).read_bytes() if (repo / rel).is_file() else b""
+    if not work.startswith(head.stdout):
+        raise StageRefused(f"refused: the working {rel} does not extend HEAD's (it was changed or checked out): the committed log is the one that counts")
+    revs = [x for x in core.git(repo, "log", "--format=%H", "--reverse", "--", rel).stdout.decode().split() if x]
+    texts = [core.git(repo, "show", f"{r}:{rel}").stdout for r in revs]
+    for older, newer in zip(texts, texts[1:], strict=False):
+        if not newer.startswith(older):
+            raise StageRefused(f"refused: the history of {rel} in git is not append-only")
+    extra = work[len(head.stdout) :].decode("utf-8")
+    if any(json.loads(x).get("event") == "end" or json.loads(x).get("open") for x in extra.splitlines() if x.strip()):
+        raise StageRefused(f"refused: the working {rel} holds an end line or an open start line HEAD does not: commit it first (the lead commits the end line before the plan)")
+    return [json.loads(x) for x in head.stdout.decode("utf-8").splitlines() if x.strip()]
+
+
 def cmd_calibrate(args: argparse.Namespace) -> int:
-    """ONE calibration (ruling 21), PAUSED when it stops and resumable by this same command (ruling 25): the fixed directory, a tracked log line per session, the cap from the measuring record (ruling 22). A start without an
-    end gets an INTERRUPTED line with the reason found (or UNKNOWN) and the session continues from the stored per-unit state; each resume gets what is left of the cap. The single repetition is ``second/`` under a
-    committed lead record (ruling 26); the first is kept."""
+    """ONE calibration (ruling 21), in two steps (ruling 29). ``calibrate --open``: the tracked log must be clean and equal to HEAD; it appends the session's start line (with the code and config hashes, ruling 28) and
+    exits without running a unit; the lead commits it. ``calibrate``: refuses unless HEAD's log carries an open start line for the repetition (the working file extending it) and the calibration directory's state is
+    consistent with the log; it then runs, PAUSED when it stops and resumable by the same command with no new commit (ruling 25): the INTERRUPTED line is appended and the same open session continues, from the stored
+    per-unit state, under the same code (a resume under other code is refused: that is the single recorded repetition, ruling 26). The end line is committed by the lead before the plan."""
     from . import partt_real
 
     repo = repo_of(args)
@@ -319,8 +374,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     if cap_h <= 0.0:
         raise StageRefused("refused: the calibration cap is 0 (never 'uncapped'): write it from the measuring rehearsal first (caps-config --phase calibration)")
     log = read_calibration_log(repo)
-    mine = [e for e in log if e.get("repetition") == rep]
-    if any(e.get("event") == "end" for e in mine):
+    if any(e.get("event") == "end" and e.get("repetition") == rep for e in log):
         raise StageRefused(f"refused: the calibration for repetition {rep} is complete (an end line is in {core.CALIBRATION_LOG}): there is ONE calibration; its single repetition is second/ under a committed lead record, the first is kept")
     if rep == 1:
         if not any(e.get("event") == "end" and e.get("repetition") == 0 for e in log):
@@ -328,26 +382,70 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         problems = repetition_record_problems(repo)
         if problems:
             raise StageRefused("refused: the single repetition needs a committed lead record (ruling 26): " + "; ".join(problems))
+    sub_dir = d if rep == 0 else d / "second"
+    identity = session_identity(repo)
+    if args.open:
+        if open_session(log, rep) is not None:
+            raise StageRefused(f"refused: a session for repetition {rep} is already open in {core.CALIBRATION_LOG}: run it (or resume it); no second start line")
+        rel = str(core.CALIBRATION_LOG)
+        if core.git(repo, "show", f"HEAD:{rel}").returncode == 0:
+            committed_calibration_log(repo)  # clean, equal to HEAD, append-only
+        elif (repo / rel).is_file() and (repo / rel).read_bytes():
+            raise StageRefused(f"refused: {rel} holds lines that are not committed: the log must be clean before a session is opened")
+        core.require_ignored_run_dir(repo, d)
+        claim_run_dir(d, "calibration", None)
+        sub_dir.mkdir(parents=True, exist_ok=True)
+        session = core.utc_stamp()
+        event = {"event": "start", "repetition": rep, "session": session, "open": True, "resumed": False, "identity": identity, "directory": str(sub_dir), "cap_seconds": cap_h * 3600.0}
+        log_calibration(repo, event)
+        written = read_calibration_log(repo)[-1]
+        write_json(sub_dir / "session.json", {"session": session, "repetition": rep, "start_line_sha256": line_sha(written)})
+        print(json.dumps({"opened": session, "next": f"commit {core.CALIBRATION_LOG}, then run calibrate (without --open)"}))
+        return 0
     if not args.part_q_plan:
         raise StageRefused("refused: calibrate needs --part-q-plan: the checked door admits generation/result.json through Part Q's plan reuse list")
+    head_log = committed_head_log(repo)
+    opened = open_session(head_log, rep)
+    if opened is None:
+        raise StageRefused(f"refused: HEAD's {core.CALIBRATION_LOG} holds no open start line for repetition {rep}: `calibrate --open`, then the lead commits it (ruling 29); no unseen redraw")
+    marker = sub_dir / "session.json"
+    if not marker.is_file() or json.loads(marker.read_text()).get("session") != opened["session"] or json.loads(marker.read_text()).get("start_line_sha256") != line_sha(opened):
+        raise StageRefused(f"refused: the calibration directory {sub_dir} does not hold the session HEAD's log opened (a deleted or replaced directory under a log that lists a session): the lead decides")
+    after_open = log[log.index(opened) + 1 :] if opened in log else []
+    listed = {e["unit"] for e in after_open if e.get("event") == "unit"}
+    state_dir = sub_dir / "state"
+    on_disk = {p.stem for p in state_dir.glob("*.json")} if state_dir.is_dir() else set()
+    if listed - on_disk:
+        raise StageRefused(f"refused: the log lists finished units whose state is not in {state_dir} (a deleted or emptied directory): {sorted(listed - on_disk)[:3]}")
+    session_events = [e for e in after_open if e.get("repetition") == rep]
+    resumed = bool(session_events)
+    if resumed and opened.get("identity") != identity:
+        differ = sorted(k for k in set(opened.get("identity") or {}) | set(identity) if (opened.get("identity") or {}).get(k) != identity.get(k))
+        raise StageRefused(f"refused: a resume under other code or config than the session's first start line (ruling 28): {differ[:4]}; that is the single recorded repetition (second/ under a committed lead record), never a silent continue")
     led = core.Ledger(d / "charged_ledger.json", "T", 1e12)
     remaining = cap_h * 3600.0 - led.charged("calibration")
     if remaining <= 0:
         raise StageRefused("refused: the calibration cap is spent (PAUSED): an extension is the lead's")
-    core.require_ignored_run_dir(repo, d)
-    claim_run_dir(d, "calibration", None)
-    sub_dir = d if rep == 0 else d / "second"
-    sub_dir.mkdir(parents=True, exist_ok=True)
-    resumed = bool(mine)
-    if resumed:  # a start without an end: the session was stopped or interrupted; the reason found is logged, nothing is edited by hand
-        last = mine[-1]
+    for unit_id in sorted(on_disk - listed):  # state written, its log line not (a stop between the two): reconciled, never redrawn
+        log_calibration(repo, {"event": "unit", "repetition": rep, "session": opened["session"], "unit": unit_id, "reconciled": True})
+    if resumed:  # the reason found is logged, nothing is edited by hand
+        last = next((e for e in reversed(session_events) if e.get("event") in ("stopped", "start", "end")), session_events[-1])
         reason = str(last.get("error")) if last.get("event") == "stopped" and last.get("error") else "UNKNOWN"
         log_calibration(repo, {"event": "INTERRUPTED", "repetition": rep, "reason": reason, "after": last.get("event")})
-    session = core.utc_stamp()
-    log_calibration(repo, {"event": "start", "repetition": rep, "session": session, "resumed": resumed, "directory": str(sub_dir), "cap_seconds": cap_h * 3600.0, "remaining_seconds": remaining})
+        session = core.utc_stamp()
+        log_calibration(repo, {"event": "start", "repetition": rep, "session": session, "open": False, "resumed": True, "identity": identity, "directory": str(sub_dir), "remaining_seconds": remaining})
+    else:
+        session = str(opened["session"])
     t0 = time.monotonic()
     try:
-        out = partt_real.calibrate_command(repo, Path(args.part_q_dir), sub_dir, rep, Path(args.part_q_plan), remaining)
+        out = partt_real.calibrate_command(repo, Path(args.part_q_dir), sub_dir, rep, Path(args.part_q_plan), remaining, on_unit=lambda uid: log_calibration(repo, {"event": "unit", "repetition": rep, "session": session, "unit": uid}))
+        record = core.read_record(sub_dir / f"calibration_{rep}.json", "calibration")
+        now = session_identity(repo)
+        starts = [e for e in read_calibration_log(repo) if e.get("event") == "start" and e.get("repetition") == rep]
+        bad = [e["session"] for e in starts if e.get("identity") != now]
+        wrong = sorted(k for k in now if (record.get("code_hashes") or {}).get(k) != now[k])
+        if bad or wrong:
+            raise StageRefused(f"refused: the final record's code and config hashes must equal every session's (ruling 28): sessions {bad}, record {wrong[:3]}")
     except BaseException as e:
         log_calibration(repo, {"event": "stopped", "repetition": rep, "session": session, "error": f"{type(e).__name__}: {e}"[:300]})
         raise
@@ -436,6 +534,7 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     pq = part_q_block(Path(args.part_q_dir), Path(args.part_q_plan) if args.part_q_plan else None)
     allowance = partt_caps.counting_allowance_hours(meas, partt_plan.stage_items(calib), int(calib["U"]))  # ruling 20 at the calibrated U (ruling 27): fixed in the plan BEFORE the counting rehearsal runs
     rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq, counting_allowance_hours=allowance, measuring_rehearsal=pin)
+    check_study_budget(cfg, float(cfg["stage_caps"].get("total_hours", 0.0)), allowance)
     path = repo / core.PLAN_T
     if path.exists():
         if not args.supersede:
@@ -494,6 +593,7 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
     plan = planmod.Plan.load(repo / core.PLAN_T, "T")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
     proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0)
+    check_study_budget(cfg, float(proposal["total_hours"]), float(plan.data.get("counting_allowance_hours", 0.0)))
     if args.apply:
         path.write_text(partt_caps.apply_caps_text(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
         print(json.dumps({"config": str(path), "applied": proposal, "next": "commit the config, candidate-plan --supersede, the counting rehearsal, the freeze"}))
@@ -693,6 +793,7 @@ def build_parser() -> argparse.ArgumentParser:
     cal = sub.add_parser("calibrate")
     cal.add_argument("--part-q-dir", required=True)
     cal.add_argument("--part-q-plan", help="Part Q's plan file (its reuse list holds generation/result.json): required")
+    cal.add_argument("--open", action="store_true", help="step 1: append the session's open start line (with the code and config hashes) and exit without running a unit; the lead commits the log")
     cal.add_argument("--repetition", type=int, default=0, choices=(0, 1))
     cal.add_argument("--reason", default="", help="required for the single repetition (second/)")
     cal.add_argument("--repo")

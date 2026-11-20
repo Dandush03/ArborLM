@@ -139,6 +139,7 @@ measuring_rehearsal_hours = 3.0
 rehearsal_hours = 3.0
 extension_factor_max = 2.0
 provisional = true
+study_budget_hours = 0.0   # the study's budget bound for Part T's total cap, set by the human lead (0.0 = not set: the candidate plan then states PENDING LEAD REVIEW and cannot check it)
 memory_per_worker_gib = 8.0
 memory_aggregate_gib = 24.0
 workers_max = 3

@@ -76,7 +76,7 @@ def run_stages(repo: Path, run_dir: Path, plan: planmod.Plan, kind: str, launch:
     base = ("--plan-file", str(plan_file)) if plan_file else ()
 
     def go(name: str, stage: str, expect: int, *extra: str) -> bool:
-        cap = partt_tasks.rehearsal_cap_seconds(core.load_config("T", repo / core.CONFIG_T), kind)
+        cap = partt_tasks.rehearsal_cap_seconds(core.load_config("T", repo / core.CONFIG_T), kind, plan)
         t = clock()
         rc = launch(stage_argv(repo, stage, run_dir, kind, *extra), run_dir.parent / f"{run_dir.name}_driver_logs" / f"{name}.log", cap + 900.0)
         timings[name] = clock() - t

@@ -137,6 +137,7 @@ def draw_overlap(calibration: Sequence[Mapping[str, Sequence[TrainItem]]], regis
 
 _DEADLINE: list[float | None] = []
 _STATE: list[Path | None] = []
+_ON_UNIT: list[Any] = []
 
 
 def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: int | None, draw_index: int) -> dict[str, Any]:
@@ -178,6 +179,8 @@ def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: 
         if state_file is not None:
             state_file.parent.mkdir(parents=True, exist_ok=True)
             write_json(state_file, core.jsonable(result))
+            if _ON_UNIT and _ON_UNIT[-1] is not None:
+                _ON_UNIT[-1](unit["id"])  # ruling 29: the finished unit is listed in the log, after its state is on disk
         return result
     finally:
         world.layer, world.store_lr, world.lora_lr, el, world.ctx.router_layer = saved
@@ -185,17 +188,19 @@ def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: 
             world.etable_lr = el  # type: ignore[attr-defined]
 
 
-def run_calibration(world: engine.WorldT, cfg: Mapping[str, Any], deadline: float | None = None, state_dir: Path | None = None) -> dict[str, Any]:
+def run_calibration(world: engine.WorldT, cfg: Mapping[str, Any], deadline: float | None = None, state_dir: Path | None = None, on_unit: Any = None) -> dict[str, Any]:
     """The whole of section 7.1 on a calibration world: the store's and LoRA's rate grids (draw 0, store at L = 4), the store at L = 12 at its chosen rate, E-table's grid at the chosen layer, the convergence
     ladder (M1 and D1 on each capability, draw 1, to 8,000 updates), then U and the pilot. Returns the record the Part T plan is built from. A stop (every rate diverged, a non-finite value in the ladder
     or the pilot) is ``calibration.CalibrationStop``: the work returns to the human lead."""
     _DEADLINE.append(deadline)
     _STATE.append(state_dir)
+    _ON_UNIT.append(on_unit)
     try:
         return _run_calibration(world, cfg)
     finally:
         _DEADLINE.pop()
         _STATE.pop()
+        _ON_UNIT.pop()
 
 
 def _run_calibration(world: engine.WorldT, cfg: Mapping[str, Any]) -> dict[str, Any]:
@@ -376,7 +381,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         from . import partt_tasks
 
         led0 = core.Ledger(run_dir / "charged_ledger.json", "T", 1e12)
-        remaining = partt_tasks.stage_cap_for(plan, stage, led0) if mode == "registered" else partt_tasks.rehearsal_cap_seconds(cfg, kind) - led0.charged()
+        remaining = partt_tasks.stage_cap_for(plan, stage, led0) if mode == "registered" else partt_tasks.rehearsal_cap_seconds(cfg, kind, plan) - led0.charged()
         if remaining <= 0:
             raise core.StageRefused(f"refused: the cap of stage {stage!r} is spent (PAUSED): an extension is the lead's")
         guard = StageGuard(stage, run_dir, led0, remaining, int(float(cfg["caps"]["memory_per_worker_gib"]) * 2**30)).__enter__()
@@ -448,7 +453,7 @@ def bundle_equivalence(qdir: Path) -> Mapping[str, Any] | None:
     return read_bundle(qdir / "outputs/bundle").extra.get("equivalence_layers")
 
 
-def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, part_q_plan: Path | None, cap_seconds: float) -> dict[str, Any]:
+def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, part_q_plan: Path | None, cap_seconds: float, on_unit: Any = None) -> dict[str, Any]:
     """Calibration and the pilot on calibration draws (0, 1; the single repetition 2, 3) with the frozen devices, in ``run_dir`` (the one calibration directory, or its ``second/``), under its cap; writes
     ``calibration_<repetition>.json`` once with the code hashes of every file it ran (section 7.1 rule 4). Part Q is read through the checked door built from Part Q's manifest AND its plan (the reuse list holds
     ``generation/result.json``). Nothing it scores is a result."""
@@ -464,7 +469,7 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, pa
     run = engine.run_config(cfg, layer=int(cfg["calibration"]["rate_grid_read_layer"]), updates=int(cfg["calibration"]["rate_grid_updates"]), store_rate=0.003, lora_rate=0.0003, device=cfg["training"]["training_device"])
     w = engine.build_world_t(bundle, cfg, calibration_draws(pool, cfg, [off, off + 1]), run, plan_mode="calibration")
     w.plan_offset = off
-    rec = run_calibration(w, cfg, deadline=time.monotonic() + cap_seconds, state_dir=run_dir / "state")
+    rec = run_calibration(w, cfg, deadline=time.monotonic() + cap_seconds, state_dir=run_dir / "state", on_unit=on_unit)
     rec["overlap_with_registered_draws"] = draw_overlap(calibration_draws(pool, cfg, [off, off + 1]), registered_draws)  # ruling 2: stated, by code
     rec["part_q_manifest_sha256"] = file_sha256(qdir / "manifest.json")
     rec["code_hashes"] = planmod.frozen_file_hashes(repo, "T")
