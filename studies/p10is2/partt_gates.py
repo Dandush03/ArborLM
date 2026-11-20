@@ -91,36 +91,124 @@ def g4_round_trip(world: engine.WorldT, arm: Any, directory: Path, name: str) ->
     return {"passed": again.state_hash() == arm.state_hash() == m["arm_hash"]}
 
 
+def tensor_names(arm: Any) -> list[str]:
+    """Names of the trainable tensors of an arm (``store.keys.0``, ...), by identity; a tensor with no name is ``param<i>``."""
+    ids: dict[int, str] = {}
+    for attr in ("store", "adapter", "module"):
+        m = getattr(arm, attr, None)
+        if m is not None and hasattr(m, "named_parameters"):
+            ids.update({id(p): f"{attr}.{n}" for n, p in m.named_parameters()})
+    return [ids.get(id(p), f"param{i}") for i, p in enumerate(arm.trainable())]
+
+
+def _train_cell_on(world: engine.WorldT, spec: engine.CellSpec, dev: torch.device, updates: int) -> tuple[dict[str, Any], Any, list[Any], Mapping[str, Any]]:
+    arm, rows, opts = engine.build_cell_arm(world, spec, None)
+    keep, world.device = world.device, dev
+    try:
+        rec = engine.train_cell(world, spec, arm, rows, opts, updates, record_losses=updates)
+    finally:
+        world.device = keep
+    return rec, arm, rows, opts
+
+
+def gradients_along(world: engine.WorldT, spec: engine.CellSpec, rows: Sequence[Any], trajectory: Sequence[Sequence[torch.Tensor]], batches: Sequence[Sequence[int]], dev: torch.device) -> list[list[torch.Tensor]]:
+    """The gradient of each update's batch loss on ``dev`` from the parameter values of the CPU run at that update (copied in), before the optimiser step: per update, one float64 CPU tensor per trainable tensor."""
+    arm, _r, _o = engine.build_cell_arm(world, spec, None)
+    world.student.to(dev)
+    arm.to(dev)
+    out: list[list[torch.Tensor]] = []
+    try:
+        for u, values in enumerate(trajectory):
+            for p, v in zip(arm.trainable(), values, strict=True):
+                p.data.copy_(v.to(dev))
+                p.grad = None
+            loss = p10train.loss_of(world.student, arm, [rows[i] for i in batches[u]], world.marker_index, dev)
+            loss.backward()
+            out.append([p.grad.detach().cpu().double().clone() if p.grad is not None else torch.zeros(p.shape, dtype=torch.float64) for p in arm.trainable()])
+    finally:
+        arm.to(torch.device("cpu"))
+        world.student.to(torch.device("cpu"))
+    return out
+
+
 def g4_mps(world: engine.WorldT, spec: engine.CellSpec, cfg: Mapping[str, Any] | None = None) -> dict[str, Any]:
-    """MPS against CPU. WHAT IT COMPARES: the same cell (``spec``: the stage-1 store M1, replicate 0, order AB, in the registered gate) built twice from its listed seeds and trained for the same
-    ``g4_repeat_updates`` (20) updates on the same batches, once on CPU and once on the world's MPS device. TOLERANCES (config ``gates``, ADR-0022 section 12.3): (1) EVERY one of the 20 per-update losses
-    within ``mps_loss_tolerance`` = 1e-3 (absolute); (2) EVERY trainable parameter tensor after the 20 updates within a relative L2 norm difference of ``mps_parameter_relative_tolerance`` = 1e-4
-    (||p_mps - p_cpu|| / ||p_cpu||, the largest over tensors). Both must hold. SKIPPED (None) unless the world's device is MPS; a skipped gate is NOT a pass: the Part T freeze requires a record in which it RAN and
-    passed on this machine, and the registered gates stage fails if it did not run."""
+    """MPS against CPU (amended by ruling 39, the human lead's decision of 2026-11-20; ADR-0025 addendum ``g4-mps-amendment``).
+
+    GATING: (1) every one of the ``g4_repeat_updates`` (20) per-update losses of the CPU run and the MPS run within ``mps_loss_tolerance`` = 1e-3 (absolute), the same cell (``spec``: M1, replicate 0, order AB) built
+    twice from its listed seeds and trained on the same batches; (2) GRADIENT AGREEMENT AT IDENTICAL PARAMETERS: along the CPU run's trajectory, at each update before the optimiser step, the gradient of the same batch's
+    loss on CPU and on MPS from the SAME parameter values; for every trainable tensor with ||g_cpu|| > 0, ||g_mps - g_cpu|| / ||g_cpu|| <= ``mps_gradient_relative_tolerance`` = 1e-3; where ||g_cpu|| is exactly 0,
+    ||g_mps|| must be exactly 0 (a violation fails the gate and is reported, never adjusted). The largest figure over tensors and updates is recorded with its tensor and update. RECORDED, NOT GATING: the old relative parameter
+    difference after the 20 updates per tensor (``mps_parameter_relative_tolerance`` named as superseded) and the MPS-against-MPS repeat. SKIPPED (None) unless the world's device is MPS; a skipped gate is NOT a pass."""
     t = (cfg or core.load_config("T"))["gates"]
     updates = int(t["g4_repeat_updates"])
     if world.device.type != "mps":
-        return {"passed": None, "skipped": "the training device is not MPS", "compares": "per-update losses and trained parameters of one cell, CPU against MPS", "updates": updates}
-    runs: dict[str, tuple[list[float], list[torch.Tensor]]] = {}
-    for name, dev in (("cpu", torch.device("cpu")), ("mps", world.device)):
-        arm, rows, opts = engine.build_cell_arm(world, spec, None)
-        keep, world.device = world.device, dev
-        try:
-            rec = engine.train_cell(world, spec, arm, rows, opts, updates, record_losses=updates)
-        finally:
-            world.device = keep
+        return {"passed": None, "skipped": "the training device is not MPS", "compares": "per-update losses and gradients at identical parameters of one cell, CPU against MPS", "updates": updates}
+    traj: list[list[torch.Tensor]] = []
+
+    def capture(opt: Any, args: Any, kwargs: Any) -> None:  # the parameters the batch's gradient was taken at: before the optimiser step
+        traj.append([p.detach().cpu().clone() for p in opt.param_groups[0]["params"]])
+
+    from torch.optim.optimizer import register_optimizer_step_pre_hook
+
+    handle = register_optimizer_step_pre_hook(capture)
+    try:
+        rec_cpu, arm_cpu, rows, opts = _train_cell_on(world, spec, torch.device("cpu"), updates)
+    finally:
+        handle.remove()
+    if rec_cpu["status"] != "COMPLETE":
+        return {"passed": False, "error": f"cpu: {rec_cpu['status']} {rec_cpu['error']}", "updates": updates}
+    if opts.get("replay") is not None or len(traj) != updates:
+        return {"passed": False, "error": "the gate's cell must be a first-stage arm without replay and train every update", "updates": updates}
+    runs: dict[str, tuple[list[float], list[torch.Tensor]]] = {"cpu": (rec_cpu["losses_head"], [p.detach().cpu().clone() for p in arm_cpu.trainable()])}
+    for name in ("mps", "mps_repeat"):
+        rec, arm, _r, _o = _train_cell_on(world, spec, world.device, updates)
         if rec["status"] != "COMPLETE":
             return {"passed": False, "error": f"{name}: {rec['status']} {rec['error']}", "updates": updates}
         runs[name] = (rec["losses_head"], [p.detach().cpu().clone() for p in arm.trainable()])
-    return {**compare_runs(runs["cpu"], runs["mps"], t), "updates": updates, "device": str(world.device)}
+    batches = p10train.batch_plan(len(rows), updates, world.batch, world.plan(spec.rep).gen(2, "batch order"))
+    g_cpu = gradients_along(world, spec, rows, traj, batches, torch.device("cpu"))
+    g_mps = gradients_along(world, spec, rows, traj, batches, world.device)
+    grad = compare_gradients(g_cpu, g_mps, tensor_names(arm_cpu), t)
+    loss = compare_runs(runs["cpu"], runs["mps"], t)
+    repeat = compare_runs(runs["mps"], runs["mps_repeat"], t)
+    ok = bool(loss["loss_ok"] and grad["passed"])
+    return {
+        "passed": ok, "max_loss_difference": loss["max_loss_difference"], "loss_tolerance": loss["loss_tolerance"], "loss_ok": loss["loss_ok"], "gradient_agreement": grad,
+        "parameters_recorded_not_gating": {**{k: loss[k] for k in ("max_relative_parameter_difference", "parameter_relative_difference_per_tensor", "parameter_tolerance_superseded")}, "tensors": tensor_names(arm_cpu), "gating": False},
+        "mps_repeat_recorded_not_gating": {"max_loss_difference": repeat["max_loss_difference"], "max_relative_parameter_difference": repeat["max_relative_parameter_difference"]},
+        "updates": updates, "device": str(world.device),
+    }  # fmt: skip
 
 
 def compare_runs(cpu: tuple[Sequence[float], Sequence[torch.Tensor]], other: tuple[Sequence[float], Sequence[torch.Tensor]], t: Mapping[str, Any]) -> dict[str, Any]:
-    """The comparison of G4's MPS gate, pure: every per-update loss within ``mps_loss_tolerance`` (absolute) and every parameter tensor within ``mps_parameter_relative_tolerance`` (relative L2)."""
+    """The loss condition of G4's MPS gate (gating: every per-update loss within ``mps_loss_tolerance``, absolute) and the old relative parameter difference, RECORDED and never gating (``mps_parameter_relative_tolerance``
+    is named as superseded by ruling 39). ``passed`` is the loss condition alone."""
     dl = max(abs(a - b) for a, b in zip(cpu[0], other[0], strict=True))
-    rel = max(float((pm - pc).norm() / pc.norm().clamp_min(1e-30)) for pc, pm in zip(cpu[1], other[1], strict=True))
-    ok = dl <= float(t["mps_loss_tolerance"]) and rel <= float(t["mps_parameter_relative_tolerance"])
-    return {"passed": bool(ok), "max_loss_difference": dl, "loss_tolerance": float(t["mps_loss_tolerance"]), "max_relative_parameter_difference": rel, "parameter_tolerance": float(t["mps_parameter_relative_tolerance"])}
+    per = [float((pm - pc).norm() / pc.norm().clamp_min(1e-30)) for pc, pm in zip(cpu[1], other[1], strict=True)]
+    ok = dl <= float(t["mps_loss_tolerance"])
+    return {"passed": bool(ok), "loss_ok": bool(ok), "max_loss_difference": dl, "loss_tolerance": float(t["mps_loss_tolerance"]), "max_relative_parameter_difference": max(per), "parameter_relative_difference_per_tensor": per, "parameter_tolerance_superseded": float(t["mps_parameter_relative_tolerance"])}
+
+
+def compare_gradients(g_cpu: Sequence[Sequence[torch.Tensor]], g_mps: Sequence[Sequence[torch.Tensor]], names: Sequence[str], t: Mapping[str, Any]) -> dict[str, Any]:
+    """The gradient condition (pure): for every update and trainable tensor, ``||g_mps - g_cpu|| / ||g_cpu|| <= mps_gradient_relative_tolerance`` where ``||g_cpu|| > 0``; where it is exactly 0 the MPS gradient must be
+    exactly 0. Returns the largest relative figure with its tensor and update, and every violation of either clause."""
+    tol = float(t["mps_gradient_relative_tolerance"])
+    worst: dict[str, Any] = {"relative_difference": 0.0, "tensor": None, "update": None}
+    over: list[dict[str, Any]] = []
+    zero_violations: list[dict[str, Any]] = []
+    for u, (gc_u, gm_u) in enumerate(zip(g_cpu, g_mps, strict=True), start=1):
+        for i, (gc, gm) in enumerate(zip(gc_u, gm_u, strict=True)):
+            n = float(gc.norm())
+            if n > 0.0:
+                r = float((gm - gc).norm()) / n
+                if r > float(worst["relative_difference"]):
+                    worst = {"relative_difference": r, "tensor": names[i], "update": u}
+                if r > tol:
+                    over.append({"tensor": names[i], "update": u, "relative_difference": r})
+            elif float(gm.norm()) != 0.0:
+                zero_violations.append({"tensor": names[i], "update": u, "mps_gradient_norm": float(gm.norm())})
+    zero_cases = sum(1 for gc_u in g_cpu for gc in gc_u if float(gc.norm()) == 0.0)
+    return {"passed": not over and not zero_violations, "tolerance": tol, "largest": worst, "violations_over_tolerance": over[:10], "n_violations_over_tolerance": len(over), "exact_zero_clause": {"cases": zero_cases, "violations": zero_violations[:10], "n_violations": len(zero_violations), "ok": not zero_violations}}
 
 
 def g5b(store: Any, gen: torch.Generator) -> dict[str, Any]:

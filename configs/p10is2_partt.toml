@@ -93,7 +93,8 @@ composes_ratio_min = 0.80
 composes_negative = 0.50
 cells_per_arm = 6
 mps_loss_tolerance = 1.0e-3                  # gate G4, MPS against CPU (ADR-0022 section 12.3, carried by ADR-0025 section 7.3)
-mps_parameter_relative_tolerance = 1.0e-4
+mps_gradient_relative_tolerance = 1.0e-3     # ruling 39 (the amended G4-MPS): gradient agreement at identical parameters, fixed as the figure already registered for the loss condition of the same gate
+mps_parameter_relative_tolerance = 1.0e-4    # SUPERSEDED by ruling 39: recorded after 20 updates, never gating (it was written without a measurement and failed at 1.48e-2 on 2026-11-20; see docs/decisions/ADR-0025-addendum-part-t-g4-mps-amendment.md)
 g4_repeat_updates = 20
 recompute_item_tolerance = 1.0e-6
 

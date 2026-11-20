@@ -1,0 +1,43 @@
+{
+ "names": [
+  "keys",
+  "values",
+  "gates"
+ ],
+ "mps_vs_cpu": [
+  0.014769435579559679,
+  0.009889162586302286,
+  3.849534689072137e-06
+ ],
+ "cpu_1thread_vs_6threads": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "cpu_1thread_loss_diff": 0.0,
+ "cpu_with_relative_gradient_noise_1e-07": {
+  "rel_per_tensor": [
+   2.0377230919457817e-06,
+   1.214534491501281e-06,
+   6.310712605036289e-08
+  ],
+  "loss_diff": 1.1920928955078125e-06
+ },
+ "cpu_with_relative_gradient_noise_1e-06": {
+  "rel_per_tensor": [
+   2.3157746120179894e-06,
+   1.2778698184234657e-06,
+   0.0
+  ],
+  "loss_diff": 7.152557373046875e-07
+ },
+ "cpu_with_relative_gradient_noise_1e-05": {
+  "rel_per_tensor": [
+   3.122677349094608e-06,
+   2.087958767776463e-06,
+   2.5242850420145156e-07
+  ],
+  "loss_diff": 9.5367431640625e-07
+ },
+ "f64_error": "AssertionError: RuntimeError: expected m1 and m2 to have the same dtype, but got: float != double"
+}
