@@ -6,6 +6,7 @@ is in ``configs/p10is2_partq.toml`` or ``configs/p10is2_partt.toml``. Every gene
 purpose (section 6). No seed is derived by hashing or arithmetic beyond the listed offsets.
 """
 
+import json
 import math
 import subprocess
 import tomllib
@@ -241,6 +242,32 @@ def under_line(*lines: str) -> str:
 # --- git and run directory -------------------------------------------------------------------------------------------------------------------
 def git(repo: Path, *argv: str) -> subprocess.CompletedProcess[bytes]:
     return subprocess.run(["git", "-C", str(repo), *argv], capture_output=True, check=False)  # noqa: S603, S607
+
+
+def records_dir(run_dir: Path) -> Path:
+    """Where a run's registry, per-item records, side and combined records, analysis and report go: the run directory itself in a registered run, its ``sealed/`` subdirectory in a rehearsal (ADR section 10: the
+    rehearsal's scores are sealed and not displayed; its label-worded report is plumbing)."""
+    marker = run_dir / "run_mode.json"
+    if marker.is_file() and json.loads(marker.read_text()).get("mode") == "rehearsal":
+        d = run_dir / "sealed"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+    return run_dir
+
+
+CALIBRATION_NAME = "P10IS2-T-calibration"
+CALIBRATION_LOG = Path("results/p10is2-partt-calibration/CALIBRATION_LOG.jsonl")
+
+
+def experiments_dir(repo: Path) -> Path:
+    """The experiments directory of the repository this worktree belongs to (the main checkout's, where Part Q's run directories are), derived from git, never typed."""
+    common = git(repo, "rev-parse", "--path-format=absolute", "--git-common-dir").stdout.decode().strip()
+    return Path(common).parent / "experiments"
+
+
+def calibration_dir(repo: Path) -> Path:
+    """Ruling 21: the ONE calibration directory (no free path on the real path)."""
+    return experiments_dir(repo) / CALIBRATION_NAME
 
 
 def require_ignored_run_dir(repo: Path, run_dir: Path) -> None:

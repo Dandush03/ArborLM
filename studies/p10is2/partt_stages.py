@@ -130,7 +130,7 @@ def execute_stage(args: argparse.Namespace, repo: Path, plan: planmod.Plan, mode
             partt_tasks.mark_complete(run_dir, args.stage, mode)
         print(json.dumps({"stage": args.stage, "status": man["status"], "charged_seconds": man["charged_seconds"]}))
         return 0 if man["status"] == "COMPLETE" else EXIT_INCOMPLETE
-    out = partt_real.run_stage(args.stage, repo, run_dir, Path(args.part_q_dir), plan, mode=mode)
+    out = partt_real.run_stage(args.stage, repo, run_dir, Path(args.part_q_dir), plan, mode=mode, kind=getattr(args, "rehearsal_kind", "counting"))
     if args.stage == "recompute" and not out.get("ok"):
         print(json.dumps(out))
         return EXIT_RECOMPUTATION  # the failed attempt is kept; nothing is labelled
@@ -201,18 +201,72 @@ def cmd_retry(args: argparse.Namespace) -> int:
     return 0
 
 
+def read_calibration_log(repo: Path) -> list[dict[str, Any]]:
+    p = repo / core.CALIBRATION_LOG
+    return [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()] if p.is_file() else []
+
+
+def log_calibration(repo: Path, event: dict[str, Any]) -> None:
+    """Ruling 21: every calibration session appends a line to the tracked log under ``results/`` (append only)."""
+    p = repo / core.CALIBRATION_LOG
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with p.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps({"utc": core.utc_stamp(), **event}, sort_keys=True) + "\n")
+
+
+def calibration_record_paths(repo: Path) -> dict[int, Path]:
+    d = core.calibration_dir(repo)
+    return {0: d / "calibration_0.json", 1: d / "second" / "calibration_1.json"}
+
+
+def chosen_calibration(repo: Path) -> tuple[Path, int]:
+    """The record the plan takes: only the one calibration directory's, by ``calibration.repetition_used`` (the repetition whose code hashes equal the frozen files; the first when both do), never by its values."""
+    d = core.calibration_dir(repo)
+    if not d.is_dir():
+        raise StageRefused(f"refused: the calibration directory {d} does not exist (ruling 21: the plan takes only that directory's record)")
+    paths = {i: p for i, p in calibration_record_paths(repo).items() if p.is_file()}
+    if not paths:
+        raise StageRefused(f"refused: no calibration record in {d}")
+    frozen = planmod.frozen_file_hashes(repo, "T")
+    files = [f for f in frozen if f.startswith("studies/p10is2/") and f.endswith(".py")]
+    used = cal.repetition_used({i: core.read_record(p, "calibration") for i, p in paths.items()}, frozen, files)
+    if used["used"] is None:
+        raise StageRefused("refused: " + used["refused"])
+    return paths[used["used"]], int(used["used"])
+
+
 def cmd_calibrate(args: argparse.Namespace) -> int:
+    """ONE calibration (ruling 21): the fixed directory, a tracked log line per session, the cap from the measuring record (ruling 22). The single repetition is ``second/`` with its reason; the first is kept."""
     from . import partt_real
 
-    core.require_ignored_run_dir(repo_of(args), Path(args.run_dir))
-    plan_file = repo_of(args) / core.PLAN_T
-    claim_run_dir(Path(args.run_dir), "calibration", read_json(plan_file).get("run_dir") if plan_file.is_file() else None)
-    ledger = Path(args.ledger) if args.ledger else Path(args.run_dir) / "charged_ledger.json"
+    repo = repo_of(args)
+    cfg = core.load_config("T", repo / core.CONFIG_T)
+    d = core.calibration_dir(repo)
+    rep = int(args.repetition)
+    cap_h = float(cfg["stage_caps"]["calibration_hours"])
+    if cap_h <= 0.0:
+        raise StageRefused("refused: the calibration cap is 0 (never 'uncapped'): write it from the measuring rehearsal first (caps-config --phase calibration)")
+    log = read_calibration_log(repo)
+    if any(e.get("event") == "start" and e.get("repetition") == rep for e in log):
+        raise StageRefused(f"refused: a calibration session for repetition {rep} is already in {core.CALIBRATION_LOG}: there is ONE calibration; its single repetition is a recorded second/ with its reason, the first is kept")
+    if rep == 1 and (not args.reason or not any(e.get("event") == "end" and e.get("repetition") == 0 for e in log)):
+        raise StageRefused("refused: the single repetition (section 7.1 rule 4) needs --reason and a completed first calibration")
+    if not args.part_q_plan:
+        raise StageRefused("refused: calibrate needs --part-q-plan: the checked door admits generation/result.json through Part Q's plan reuse list")
+    core.require_ignored_run_dir(repo, d)
+    claim_run_dir(d, "calibration", None)
+    sub_dir = d if rep == 0 else d / "second"
+    sub_dir.mkdir(parents=True, exist_ok=True)
+    log_calibration(repo, {"event": "start", "repetition": rep, "reason": args.reason, "directory": str(sub_dir), "cap_seconds": cap_h * 3600.0})
     t0 = time.monotonic()
     try:
-        out = partt_real.calibrate_command(repo_of(args), Path(args.part_q_dir), Path(args.run_dir), int(args.repetition), args.reason)
+        out = partt_real.calibrate_command(repo, Path(args.part_q_dir), sub_dir, rep, Path(args.part_q_plan), cap_h * 3600.0)
+    except BaseException as e:
+        log_calibration(repo, {"event": "stopped", "repetition": rep, "error": f"{type(e).__name__}: {e}"[:300]})
+        raise
     finally:
-        charged(ledger, "calibration", "calibration", time.monotonic() - t0)
+        charged(d / "charged_ledger.json", "calibration", "calibration", time.monotonic() - t0)
+    log_calibration(repo, {"event": "end", "repetition": rep, "record": str(sub_dir / f"calibration_{rep}.json"), "record_sha256": file_sha256(sub_dir / f"calibration_{rep}.json")})
     print(json.dumps(core.jsonable(out), default=str))
     return 0
 
@@ -223,9 +277,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
 
     repo = repo_of(args)
     if args.kind == "measuring":
-        if not args.calibration:
-            raise StageRefused("refused: the measuring rehearsal needs --calibration (the calibration's own record) to build its plan")
-        rec = partt_counting.run_measuring_rehearsal(repo, Path(args.run_dir), Path(args.calibration), Path(args.part_q_dir), part_q_plan=Path(args.part_q_plan) if args.part_q_plan else None, manifests=read_json(Path(args.manifests)) if args.manifests else None, charged_ledgers=args.charged_ledger)
+        rec = partt_counting.run_measuring_rehearsal(repo, Path(args.run_dir), Path(args.part_q_dir), part_q_plan=Path(args.part_q_plan) if args.part_q_plan else None, manifests=read_json(Path(args.manifests)) if args.manifests else None, charged_ledgers=args.charged_ledger)
     else:
         rec = partt_counting.run_counting_rehearsal(repo, Path(args.run_dir), charged_ledgers=args.charged_ledger)
     print(json.dumps({k: rec[k] for k in ("kind_of_rehearsal", "status", "stages", "forced", "rates_seconds_per_unit", "overhead_seconds") if k in rec}, default=str))
@@ -282,18 +334,20 @@ def ledgers_charge(paths: Sequence[str]) -> dict[str, Any]:
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    calib = calibration_from_record(Path(args.calibration))
+    cal_path, _rep = chosen_calibration(repo)  # ruling 21: no free path; the record of the one calibration directory
+    calib = calibration_from_record(cal_path)
     walk = planmod.import_walk(repo, "T")
     manifests = read_json(Path(args.manifests)) if args.manifests else {}
-    charge = ledgers_charge(args.charged_ledger) if args.charged_ledger else None
+    meas_path = Path(args.measuring_rehearsal)
+    meas = core.read_record(meas_path, "rehearsal")
+    if meas.get("kind_of_rehearsal") != "measuring":
+        raise StageRefused("refused: --measuring-rehearsal must be the Part T measuring rehearsal's record")
+    ledgers = sorted({*[str(Path(x)) for x in (meas.get("charged_ledgers") or {})], str(core.calibration_dir(repo) / "charged_ledger.json"), *args.charged_ledger})
+    charge = ledgers_charge(ledgers)  # the charge before the freeze: the measuring rehearsal's and the calibration's ledgers by rule, plus any named
+    pin = {"path": str(meas_path.resolve()), "sha256": file_sha256(meas_path)}
     pq = part_q_block(Path(args.part_q_dir), Path(args.part_q_plan) if args.part_q_plan else None)
-    allowance = None
-    if getattr(args, "measuring_rehearsal", None):  # ruling 20: the counting allowance is fixed in the plan BEFORE the counting rehearsal runs
-        meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
-        if meas.get("kind_of_rehearsal") != "measuring":
-            raise StageRefused("refused: --measuring-rehearsal must be the Part T measuring rehearsal's record")
-        allowance = partt_caps.counting_allowance_hours(meas, partt_plan.stage_items(calib))
-    rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq, counting_allowance_hours=allowance)
+    allowance = partt_caps.counting_allowance_hours(meas, partt_plan.stage_items(calib))  # ruling 20: fixed in the plan BEFORE the counting rehearsal runs
+    rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq, counting_allowance_hours=allowance, measuring_rehearsal=pin)
     path = repo / core.PLAN_T
     if path.exists():
         if not args.supersede:
@@ -311,30 +365,48 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
 
 
 def cmd_caps_proposal(args: argparse.Namespace) -> int:
-    """The caps by the rule from the measuring record and the PLAN's own task units (nothing typed): ``partt_caps.proposal_from_record`` with the charge before the freeze the plan recorded."""
+    """The caps by the rule from the measuring record (nothing typed). ``--phase calibration``: the cap for calibration only (2 x the projected calibration charge; no plan exists yet). Default: the registered stages' caps and the
+    total from the PLAN's own task units, the charge before the freeze and the counting allowance the plan recorded, plus the calibration cap."""
     repo = repo_of(args)
-    plan = planmod.Plan.load(repo / core.PLAN_T, "T")
+    cfg = core.load_config("T", repo / core.CONFIG_T)
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps are computed from a MEASURING rehearsal's record")
+    cal_h = partt_caps.calibration_cap_hours(meas, cfg)
+    if getattr(args, "phase", "registered") == "calibration":
+        print(json.dumps({"proposal_hours": {"calibration_hours": cal_h}, "rule": "calibration cap = 2 x the projected calibration charge (measured per-update rates x the calibration units, plus D_cal scoring)"}))
+        return 0
+    plan = planmod.Plan.load(repo / core.PLAN_T, "T")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
     allowance = float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0
-    print(json.dumps({"proposal_hours": partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, allowance), "charge_before_freeze_seconds": charge, "counting_allowance_seconds": allowance, "rule": "stage cap = 2 x projected (sum over the plan's tasks of units x measured seconds per unit of the kind, plus tasks x the per-process overhead); total = charge before the freeze + 2 x all stages"}))
+    prop = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, allowance)
+    print(json.dumps({"proposal_hours": {"calibration_hours": cal_h, **prop}, "charge_before_freeze_seconds": charge, "counting_allowance_seconds": allowance, "rule": "stage cap = 2 x projected; total = plan charge + counting allowance + 2 x all registered stages, rounded up to 0.01 h"}))
     return 0
 
 
 def cmd_caps_config(args: argparse.Namespace) -> int:
-    """Writes the caps into ``[stage_caps]`` by the shared function (no hand entry): the proposal of ``caps-proposal`` (the plan's own task units, the measuring record, the charge before the freeze the plan recorded)
-    and ``caps.provisional = false``. The candidate plan must be rebuilt afterwards (its caps come from the config)."""
+    """Writes the caps into ``[stage_caps]`` by the shared function (no hand entry). ``--phase calibration`` (BEFORE calibration, ruling 22): ``calibration_hours`` only. The registered phase (after calibration and the candidate
+    plan): every other cap and ``caps.provisional = false``; it refuses unless the calibration cap in the config is the one the record gives. The candidate plan must be rebuilt afterwards."""
     repo = repo_of(args)
-    plan = planmod.Plan.load(repo / core.PLAN_T, "T")
+    cfg = core.load_config("T", repo / core.CONFIG_T)
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps come from a MEASURING rehearsal's record")
+    cal_h = partt_caps.calibration_cap_hours(meas, cfg)
+    path = repo / core.CONFIG_T
+    if getattr(args, "phase", "registered") == "calibration":
+        if args.apply:
+            path.write_text(partt_caps.apply_caps_text(path.read_text(encoding="utf-8"), {"calibration_hours": cal_h}, final=False), encoding="utf-8")
+            print(json.dumps({"config": str(path), "applied": {"calibration_hours": cal_h}, "next": "commit the config, then calibrate"}))
+        else:
+            print(f"calibration_hours = {cal_h}")
+        return 0
+    if abs(float(cfg["stage_caps"]["calibration_hours"]) - cal_h) > 1e-9:
+        raise StageRefused(f"refused: the calibration cap in the config ({cfg['stage_caps']['calibration_hours']}) is not the one the measuring record gives ({cal_h}): write it with --phase calibration first")
+    plan = planmod.Plan.load(repo / core.PLAN_T, "T")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
     proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0)
     if args.apply:
-        path = repo / core.CONFIG_T
         path.write_text(partt_caps.apply_caps_text(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
         print(json.dumps({"config": str(path), "applied": proposal, "next": "commit the config, candidate-plan --supersede, the counting rehearsal, the freeze"}))
     else:
@@ -374,7 +446,12 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused("refused: --measuring-rehearsal must be the Part T measuring rehearsal's record")
     if meas.get("status") == "INCOMPLETE" or meas.get("problems"):
         raise StageRefused(f"refused: the measuring rehearsal's record is INCOMPLETE ({meas.get('problems')}): caps are computed from a complete measurement of every kind")
+    pin = plan.data.get("measuring_rehearsal")
+    if not pin or pin.get("sha256") != file_sha256(Path(args.measuring_rehearsal)) or Path(pin["path"]).resolve() != Path(args.measuring_rehearsal).resolve():
+        raise StageRefused("refused: the plan does not pin this measuring record by SHA-256 (candidate-plan --measuring-rehearsal): one measuring record, the one the plan names")
     zero = partt_caps.zero_caps(cfg, REGISTERED_STAGES)
+    if float(cfg["stage_caps"].get("calibration_hours", 0.0)) <= 0.0:
+        zero = [*zero, "calibration"]
     if zero:
         raise StageRefused(f"refused: stage cap(s) of 0 in the config ({zero}): a cap of 0 is never 'uncapped'; every registered stage has a cap by the rule")
     charge = plan.data.get("charge_before_freeze") or {}
@@ -386,13 +463,27 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if abs(allowance_h - partt_caps.counting_allowance_hours(meas, plan.data["items"])) > 1e-9:
         raise StageRefused("refused: the plan's counting allowance is not 2 x the counting charge projected from this measuring record: re-plan with --supersede (no cap is edited by hand)")
     proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], float(charge["seconds"]), allowance_h * 3600.0)  # the units come from the plan; the charge and the allowance are the ones the plan recorded
+    proposal = {"calibration_hours": partt_caps.calibration_cap_hours(meas, cfg), **proposal}
     differ = caps_match_config(cfg, proposal)
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
     walk = planmod.import_walk(repo, "T")
     crec = plan.data["calibration"]["record"]
-    calib = calibration_from_record(Path(crec["path"]), crec["sha256"])  # U, the rates, the layer and the pilot come from the calibration's own record, by hash
-    rederived = partt_plan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, calib, mode=plan.data["mode"], walk=walk, manifests=plan.data.get("manifests"), charge_before_freeze=plan.data.get("charge_before_freeze"), part_q=plan.data.get("part_q"), counting_allowance_hours=allowance_h)
+    chosen, chosen_rep = chosen_calibration(repo)  # ruling 21: only the one calibration directory's record, by the rule, never another
+    if Path(crec["path"]).resolve() != chosen.resolve():
+        raise StageRefused(f"refused: the plan's calibration record {crec['path']} is not the record of the one calibration directory ({chosen})")
+    if not any(e.get("event") == "end" and e.get("repetition") == chosen_rep and e.get("record_sha256") == crec["sha256"] for e in read_calibration_log(repo)):
+        raise StageRefused(f"refused: no calibration session in {core.CALIBRATION_LOG} lists this record (an unlisted session)")
+    calib = calibration_from_record(chosen, crec["sha256"])  # U, the rates, the layer and the pilot come from the calibration's own record, by hash
+    ledgers_now = ledgers_charge(list((charge.get("ledgers") or {}).keys()))
+    if abs(ledgers_now["seconds"] - float(charge["seconds"])) > 1e-6:  # the charge before the freeze is RE-DERIVED from the ledgers, never taken from the plan
+        raise StageRefused(f"refused: the plan's charge before the freeze ({charge['seconds']} s) is not the sum of its ledgers now ({ledgers_now['seconds']} s)")
+    required = {str(Path(x)) for x in (meas.get("charged_ledgers") or {})} | {str(core.calibration_dir(repo) / "charged_ledger.json")}
+    if required - set(ledgers_now["ledgers"]):
+        raise StageRefused(f"refused: the plan's ledgers omit {sorted(required - set(ledgers_now['ledgers']))}: the measuring rehearsal's and the calibration's ledgers are part of the charge")
+    if core.Ledger(core.calibration_dir(repo) / "charged_ledger.json", "T", 1e12).charged("calibration") > float(cfg["stage_caps"]["calibration_hours"]) * 3600.0 + 1e-6:
+        raise StageRefused("refused: calibration charged more than its cap")
+    rederived = partt_plan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, calib, mode=plan.data["mode"], walk=walk, manifests=plan.data.get("manifests"), charge_before_freeze=ledgers_now, part_q=plan.data.get("part_q"), counting_allowance_hours=allowance_h, measuring_rehearsal=pin)
     differing = differing_paths(json.loads(json.dumps(core.jsonable({k: v for k, v in rederived.items() if k not in ("adr", "platform")}))), {k: v for k, v in plan.data.items() if k not in ("adr", "platform")})
     if differing:
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and calibration record in: " + ", ".join(differing[:10]) + ": supersede it, repeat calibration if a training or scoring file changed (section 7.1 rule 4), and rehearse again")
@@ -460,12 +551,11 @@ def build_parser() -> argparse.ArgumentParser:
     sub = ap.add_subparsers(dest="command", required=True)
     cp = sub.add_parser("candidate-plan")
     cp.add_argument("--run-dir", required=True)
-    cp.add_argument("--calibration", required=True, help="the calibration's OWN record file (calibration_<n>.json): the plan takes U, the rates, the layer and the pilot from it, by hash")
     cp.add_argument("--manifests", help="JSON naming part_q_acceptance and panel_ledger by path and SHA-256")
     cp.add_argument("--part-q-dir", required=True, help="Part Q's run directory of record (attempt 3): named in the plan; its manifest is listed by hash")
     cp.add_argument("--part-q-plan", help="Part Q's plan file, whose reuse list holds the hashes of the reused stages' files")
     cp.add_argument("--charged-ledger", action="append", default=[], help="every Part T charged_ledger.json charged so far (absolute): the charge before the freeze")
-    cp.add_argument("--measuring-rehearsal", help="the Part T measuring rehearsal's record: the plan carries the counting allowance (2 x the projected counting charge) fixed before the counting rehearsal (ruling 20)")
+    cp.add_argument("--measuring-rehearsal", required=True, help="the Part T measuring rehearsal's record, pinned by SHA-256: the plan carries the counting allowance (2 x the projected counting charge) fixed before the counting rehearsal (ruling 20)")
     cp.add_argument("--supersede", action="store_true")
     cp.add_argument("--repo")
     f = sub.add_parser("freeze")
@@ -476,10 +566,12 @@ def build_parser() -> argparse.ArgumentParser:
     f.add_argument("--repo")
     c = sub.add_parser("caps-proposal")
     c.add_argument("--measuring-rehearsal", required=True)
+    c.add_argument("--phase", choices=("calibration", "registered"), default="registered")
     c.add_argument("--repo")
     cc = sub.add_parser("caps-config")
     cc.add_argument("--measuring-rehearsal", required=True)
     cc.add_argument("--apply", action="store_true")
+    cc.add_argument("--phase", choices=("calibration", "registered"), default="registered")
     cc.add_argument("--repo")
     tk = sub.add_parser("task")
     for a in ("--stage", "--task-id", "--run-dir"):
@@ -510,10 +602,9 @@ def build_parser() -> argparse.ArgumentParser:
     rt.add_argument("--fix-changes-frozen-file", action="store_true")
     cal = sub.add_parser("calibrate")
     cal.add_argument("--part-q-dir", required=True)
-    cal.add_argument("--run-dir", required=True)
+    cal.add_argument("--part-q-plan", help="Part Q's plan file (its reuse list holds generation/result.json): required")
     cal.add_argument("--repetition", type=int, default=0, choices=(0, 1))
-    cal.add_argument("--ledger", help="the Part T ledger to charge (absolute); default <run-dir>/charged_ledger.json")
-    cal.add_argument("--reason", default="", help="required when a record for this repetition exists: a new record is written beside it")
+    cal.add_argument("--reason", default="", help="required for the single repetition (second/)")
     cal.add_argument("--repo")
     for name in ("registered", "work"):
         r = sub.add_parser(name)
@@ -527,7 +618,6 @@ def build_parser() -> argparse.ArgumentParser:
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
     h.add_argument("--part-q-dir", required=False, default=".")
-    h.add_argument("--calibration", help="the measuring rehearsal: the calibration's own record (calibration_<n>.json)")
     h.add_argument("--part-q-plan")
     h.add_argument("--manifests", help="JSON naming part_q_acceptance and panel_ledger by path and SHA-256")
     h.add_argument("--charged-ledger", action="append", default=[], help="an earlier Part T charged_ledger.json (absolute), listed in the record")

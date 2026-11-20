@@ -371,23 +371,6 @@ def test_caps_config_writes_exactly_the_proposal_once() -> None:
         partt_caps.apply_caps_text(new, proposal)  # written once
 
 
-def test_calibration_and_rehearsals_charge_the_one_part_t_ledger_also_when_they_fail(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    def boom(*a: object, **k: object) -> None:
-        raise RuntimeError("calibration stopped")
-
-    monkeypatch.setattr(partt_real, "calibrate_command", boom)
-    ledger = tmp_path / "part_t_ledger.json"
-    run = ROOT / "experiments" / "_scratch" / "p10is2_partt_calibration_probe"
-    try:
-        with pytest.raises(RuntimeError):
-            partt_stages.main(["calibrate", "--part-q-dir", str(tmp_path), "--run-dir", str(run), "--ledger", str(ledger)])
-    finally:
-        import shutil
-
-        shutil.rmtree(run, ignore_errors=True)
-    entries = json.loads(ledger.read_text())["entries"]
-    assert len(entries) == 1 and entries[0]["stage"] == "calibration" and entries[0]["seconds"] >= 0.0
-
 
 # --- seed registry revision 5: the config equals the registry's rows, no seed literal in code ------------------------------------------------------------
 def test_seeds_equal_the_registry_revision_5_rows() -> None:

@@ -61,9 +61,15 @@ def make_part_q(qdir: Path) -> Path:
     write_json(qdir / "generation/result.json", {"draws_label": "DISJOINT DRAWS", "draws": {"indices": indices}})
     write_json(qdir / "outputs/gloss_bank.json", fake_gloss_bank(world(updates=2, n_reps=1), pool))
     write_json(qdir / "qcheck/teacher_A/block_0/batch_0.json", {"keys": ["a q check sentence that no training stream holds", "another q check sentence"]})
-    files = sorted(str(p.relative_to(qdir)) for p in qdir.rglob("*") if p.is_file() and p.name != "manifest.json")
+    # as the real Part Q run directory: generation/result.json is NOT in the manifest; it is listed only in Part Q's plan, in its reuse list (the audit's N1)
+    files = sorted(str(p.relative_to(qdir)) for p in qdir.rglob("*") if p.is_file() and p.name != "manifest.json" and not str(p.relative_to(qdir)).startswith("generation/"))
     write_json(qdir / "manifest.json", {"files": {rel: file_sha256(qdir / rel) for rel in files}})
+    write_json(qdir.parent / "partq_plan.json", {"inputs": {"reuse": {"files": {"generation/result.json": file_sha256(qdir / "generation/result.json")}}}})
     return qdir
+
+
+def part_q_plan_of(qdir: Path) -> Path:
+    return qdir.parent / "partq_plan.json"
 
 
 def fake_uv(tmp: Path) -> dict[str, str]:

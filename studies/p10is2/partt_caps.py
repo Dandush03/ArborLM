@@ -101,6 +101,27 @@ def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Seq
     return {"seconds": work + overhead + forced, "unit_work_seconds": work, "overhead_seconds": overhead, "forced_events_seconds": forced, "basis": basis}
 
 
+def calibration_projection_seconds(meas: Mapping[str, Any], cfg: Mapping[str, Any]) -> float:
+    """The projected charge of calibration (ruling 22), by the same measured per-update rates: the sum over the calibration units of updates x the rate of the unit's module type (store: M1, LoRA: D1, E-table), plus one
+    D_cal-sized scoring per unit snapshot at the plain scoring rate (D_cal is counted at the D_con panel's size, the config's own D_cal-sized figure), plus one process overhead of the training stage per unit."""
+    from . import calibration
+
+    rates, over = meas["rates_seconds_per_unit"], meas["overhead_seconds"]
+    per = {"store": "train:M1", "lora": "train:D1", "etable": "train:E-table"}
+    n_dcal = int(cfg["data"]["d_con_panel"])
+    total = 0.0
+    for u in calibration.calibration_units(cfg):
+        total += float(u["updates"]) * float(rates[per[u["module"]]]) + max(1, len(u.get("snapshots") or [])) * n_dcal * float(rates["score:plain"]) + float(over["train"])
+    return total
+
+
+def calibration_cap_hours(meas: Mapping[str, Any], cfg: Mapping[str, Any]) -> float:
+    """``calibration_hours`` = 2 x the projected calibration charge, rounded up to 0.01 h (the registered stages' own rule, applied to calibration)."""
+    import math
+
+    return math.ceil(2.0 * calibration_projection_seconds(meas, cfg) / 3600.0 * 100.0 - 1e-9) / 100.0
+
+
 def counting_allowance_hours(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]]) -> float:
     """``counting_allowance_hours`` = 2 x the projected counting charge, in hours rounded UP to 0.01 h; fixed in the candidate plan BEFORE the counting rehearsal runs (ruling 20)."""
     import math
@@ -120,7 +141,7 @@ def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[M
 CAPS_FORMULA = "partt-whole-process-v1"
 
 
-def apply_caps_text(text: str, proposal: Mapping[str, float]) -> str:
+def apply_caps_text(text: str, proposal: Mapping[str, float], final: bool = True) -> str:
     """The config text with each ``<key> = 0.0`` of ``[stage_caps]`` replaced by the proposal and ``caps.provisional`` set false. Refuses unless every key is still exactly 0.0 (caps are written once by code)."""
     import re
 
@@ -136,6 +157,8 @@ def apply_caps_text(text: str, proposal: Mapping[str, float]) -> str:
             raise StageRefused(f"refused: [stage_caps] does not hold exactly one unset line '{k} = 0.0' (caps already entered?)")
         body = pat.sub(f"{k} = {v}", body)
     out = text[:a] + body + text[b:]
+    if not final:  # the first write (the cap for calibration, ruling 22): the registered caps need U and are written after calibration
+        return out
     if out.count("\nprovisional = true") != 1:
         raise StageRefused("refused: the config does not hold exactly one 'provisional = true'")
     return out.replace("\nprovisional = true", "\nprovisional = false")

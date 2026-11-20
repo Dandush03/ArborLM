@@ -7,6 +7,7 @@ per-item score. Charged time is the wall time of each process (ruling L2); the s
 """
 
 import json
+import sys
 import time
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -115,10 +116,15 @@ def draw_overlap(calibration: Sequence[Mapping[str, Sequence[TrainItem]]], regis
     return out
 
 
+_DEADLINE: list[float | None] = []
+
+
 def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: int | None, draw_index: int) -> dict[str, Any]:
     """One calibration training unit on a calibration draw's seeds (the world is built in ``calibration`` mode with the calibration draws), scored on D_cal. A non-finite loss is DIVERGED (``diverged``, no
     mean at the diverged snapshot); the caller applies ``calibration``'s rules. A ladder unit has ``snapshots``; each is scored on D_cal on CPU while the optimizer state is kept."""
     cap, module = unit["capability"], unit["module"]
+    if _DEADLINE and _DEADLINE[-1] is not None and time.monotonic() > _DEADLINE[-1]:
+        raise calibration.CalibrationStop("calibration reached its cap (ruling 22): the work returns to the lead; nothing is extended here")
     saved = (world.layer, world.store_lr, world.lora_lr, getattr(world, "etable_lr", None), world.ctx.router_layer)
     try:
         if layer is not None:
@@ -150,10 +156,18 @@ def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: 
             world.etable_lr = el  # type: ignore[attr-defined]
 
 
-def run_calibration(world: engine.WorldT, cfg: Mapping[str, Any]) -> dict[str, Any]:
+def run_calibration(world: engine.WorldT, cfg: Mapping[str, Any], deadline: float | None = None) -> dict[str, Any]:
     """The whole of section 7.1 on a calibration world: the store's and LoRA's rate grids (draw 0, store at L = 4), the store at L = 12 at its chosen rate, E-table's grid at the chosen layer, the convergence
     ladder (M1 and D1 on each capability, draw 1, to 8,000 updates), then U and the pilot. Returns the record the Part T plan is built from. A stop (every rate diverged, a non-finite value in the ladder
     or the pilot) is ``calibration.CalibrationStop``: the work returns to the human lead."""
+    _DEADLINE.append(deadline)
+    try:
+        return _run_calibration(world, cfg)
+    finally:
+        _DEADLINE.pop()
+
+
+def _run_calibration(world: engine.WorldT, cfg: Mapping[str, Any]) -> dict[str, Any]:
     c = cfg["calibration"]
     units = {u["id"]: u for u in calibration.calibration_units(cfg)}
     rec: dict[str, Any] = {"units": {}, "stand_in": False}
@@ -222,8 +236,8 @@ def analyse(reg: Registry, side: Mapping[str, Any], comb: Mapping[str, Any] | No
 
 
 def write_analysis(run_dir: Path, result: Mapping[str, Any]) -> None:
-    core.write_record(run_dir / "analysis.json", {**core.envelope("analysis", "T"), **core.jsonable(dict(result))}, overwrite=True)
-    (run_dir / "report.txt").write_text(core.require_oracle_line(result["report"]) + "\n", encoding="utf-8")
+    core.write_record(core.records_dir(run_dir) / "analysis.json", {**core.envelope("analysis", "T"), **core.jsonable(dict(result))}, overwrite=True)
+    (core.records_dir(run_dir) / "report.txt").write_text(core.require_oracle_line(result["report"]) + "\n", encoding="utf-8")
 
 
 def json_safe(x: Any) -> Any:
@@ -260,13 +274,81 @@ def build_world_real(repo: Path, cfg: Mapping[str, Any], qdir: Path, plan_calibr
     return w, gloss, result
 
 
-def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered") -> dict[str, Any]:
+SINGLE_BODY_STAGES = ("controls", "recompute", "analysis", "report")
+
+
+class StageGuard:
+    """The cap and the memory guard of a stage that runs in its own process (audit N7): a watcher thread stops the process, PAUSED (exit 4, ``stages/<stage>.paused.json``, the time charged), when the stage's remaining cap
+    is spent or the process's resident set passes the per-worker guard. A resume gets what is left of the cap."""
+
+    def __init__(self, stage: str, run_dir: Path, ledger: Any, cap_seconds: float, rss_limit: int, poll: float = 1.0, on_trip: Any = None) -> None:
+        import threading
+
+        self.stage, self.run_dir, self.ledger, self.cap, self.limit, self.poll = stage, run_dir, ledger, cap_seconds, rss_limit, poll
+        self.t0 = time.monotonic()
+        self.stop = threading.Event()
+        self.on_trip = on_trip or self._exit
+        self.thread = threading.Thread(target=self._watch, daemon=True)
+
+    def __enter__(self) -> "StageGuard":
+        self.thread.start()
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        self.stop.set()
+
+    def _watch(self) -> None:
+        import psutil
+
+        while not self.stop.wait(self.poll):
+            elapsed = time.monotonic() - self.t0
+            rss = psutil.Process().memory_info().rss
+            if elapsed > self.cap:
+                self.trip(f"the stage cap of {self.cap:.0f} s is spent")
+                return
+            if rss > self.limit:
+                self.trip(f"resident set {rss} above the per-worker guard {self.limit}")
+                return
+
+    def trip(self, reason: str) -> None:
+        elapsed = time.monotonic() - self.t0
+        self.ledger.charge_process(self.stage, "guard", "main", elapsed)
+        (self.run_dir / "stages").mkdir(parents=True, exist_ok=True)
+        write_json(self.run_dir / "stages" / f"{self.stage}.paused.json", {"stage": self.stage, "status": "PAUSED", "reason": reason, "charged_seconds": elapsed, "note": "run the same command again: it gets what is left of the cap (an extension is the lead's)"})
+        self.on_trip(reason)
+
+    @staticmethod
+    def _exit(reason: str) -> None:
+        import os
+
+        print(f"PAUSED: {reason}", file=sys.stderr, flush=True)
+        os._exit(4)
+
+
+def calibration_of(cfg: Mapping[str, Any], plan: Any, mode: str) -> dict[str, Any]:
+    """The calibration block a stage uses: the plan's in a registered run; in a rehearsal the same with U = the ADR's 200 updates (section 10), whatever the plan's U (the measuring rehearsal needs no calibration result)."""
+    calib = dict(plan.data["calibration"])
+    if mode == "rehearsal":
+        calib["U"] = int(cfg["rehearsal"]["updates"])
+    return calib
+
+
+def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered", kind: str = "counting") -> dict[str, Any]:
     """One registered Part T stage over the run directory (``train``, ``evaluate``, ``controls``, ``combined``, ``gates``, ``analysis``, ``report``). The entry point has checked identity."""
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    calib = plan.data["calibration"]
+    calib = calibration_of(cfg, plan, mode)
     qdir = qdir_of(plan, qdir)
     st0 = partt_rehearsal.stats_begin(run_dir)
     t_proc = time.monotonic()
+    guard = None
+    if stage in SINGLE_BODY_STAGES and plan.data.get("stage_caps"):  # the cap and the memory guard (audit N7)
+        from . import partt_tasks
+
+        led0 = core.Ledger(run_dir / "charged_ledger.json", "T", 1e12)
+        remaining = partt_tasks.stage_cap_for(plan, stage, led0) if mode == "registered" else partt_tasks.rehearsal_cap_seconds(cfg, kind) - led0.charged()
+        if remaining <= 0:
+            raise core.StageRefused(f"refused: the cap of stage {stage!r} is spent (PAUSED): an extension is the lead's")
+        guard = StageGuard(stage, run_dir, led0, remaining, int(float(cfg["caps"]["memory_per_worker_gib"]) * 2**30)).__enter__()
     w, gloss, qres = build_world_real(repo, cfg, qdir, calib, mode, door_of(plan, qdir))
     world_build = time.monotonic() - t_proc
     snaps = run_dir / "snapshots"
@@ -279,8 +361,8 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         core.write_record(run_dir / "train_records.json", {**core.envelope("cell_record", "T"), "records": core.jsonable(out)}, overwrite=True)
     elif stage == "evaluate":
         reg, side = partt_run.score_all(w, snaps, gloss)  # the in-process path of the tests; the registered stage runs worker tasks and ``merge_evaluate``
-        write_json(run_dir / "registry.json", reg.values)
-        core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
+        write_json(core.records_dir(run_dir) / "registry.json", reg.values)
+        core.write_record(core.records_dir(run_dir) / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
         out = {"registry_keys": len(reg.values)}
     elif stage == "controls":
         out = check_controls(run_dir, plan, mode)
@@ -290,17 +372,17 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         out = run_recompute(repo, run_dir, qdir, plan, mode=mode, charge=False)  # run_stage charges the stage below
     elif stage == "combined":
         comb = partt_run.combined_all(w, snaps)
-        core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
+        core.write_record(core.records_dir(run_dir) / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
         out = {"records": len(comb)}
     elif stage in ("analysis", "report"):
         require_recomputation(run_dir)  # the recomputation is a registered stage before this one; the results were merged at the end of evaluate and combined
-        reg_values = read_json(run_dir / "registry.json")
+        reg_values = read_json(core.records_dir(run_dir) / "registry.json")
         if mode == "rehearsal":  # the rehearsal scored one replicate: the analysis and the report run on a registry keyed by the plan's labels, replicates 1 and 2 copied from 0 (listed), never a result
             reg_values, filled = partt_rehearsal.fill_registry(reg_values)
-            write_json(run_dir / "analysis_registry_filled.json", {"filled_from_replicate_0": filled, "note": "plumbing for the analysis and the report; a rehearsal registry is never a result"})
+            write_json(core.records_dir(run_dir) / "analysis_registry_filled.json", {"filled_from_replicate_0": filled, "note": "plumbing for the analysis and the report; a rehearsal registry is never a result"})
         reg = Registry(reg_values)
-        side = read_json(run_dir / "side_records.json")["side"]
-        comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
+        side = read_json(core.records_dir(run_dir) / "side_records.json")["side"]
+        comb = read_json(core.records_dir(run_dir) / "combined.json")["combined"] if (core.records_dir(run_dir) / "combined.json").is_file() else None
         errors = sorted(str(p) for p in (run_dir / "item_errors").glob("*.json")) if (run_dir / "item_errors").is_dir() else []
         eng = engineering_failures_of(run_dir)
         ctx = {"U": int(calib["U"]), "converged": bool(calib.get("converged", True)), "draws": qres["draws_label"], "shared_share": shared_share([dict(s.t) for s in w.streams])}
@@ -317,6 +399,8 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     led = core.Ledger(run_dir / "charged_ledger.json", "T", total if total > 0 and mode == "registered" else 1e12)
     body = time.monotonic() - t0
     led.charge_process(stage, mode, "main", time.monotonic() - t_proc)  # the wall time of this process, the world build inside it (ruling L2)
+    if guard is not None:
+        guard.__exit__()
     write_json(run_dir / "stages" / f"{stage}.timing.json", {"stage": stage, "mode": mode, "world_build_seconds": world_build, "body_seconds": body, **partt_rehearsal.stats_end(st0, run_dir)})
     return json_safe(out)  # type: ignore[no-any-return]
 
@@ -325,36 +409,29 @@ def bundle_equivalence(qdir: Path) -> Mapping[str, Any] | None:
     return read_bundle(qdir / "outputs/bundle").extra.get("equivalence_layers")
 
 
-def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, reason: str = "") -> dict[str, Any]:
-    """Calibration and the pilot on calibration draws (0, 1; a repetition 2, 3) with the frozen devices; writes ``calibration_<repetition>.json`` with the code hashes of every file it ran (section 7.1 rule 4).
-    Nothing it scores is a result."""
+def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, part_q_plan: Path | None, cap_seconds: float) -> dict[str, Any]:
+    """Calibration and the pilot on calibration draws (0, 1; the single repetition 2, 3) with the frozen devices, in ``run_dir`` (the one calibration directory, or its ``second/``), under its cap; writes
+    ``calibration_<repetition>.json`` once with the code hashes of every file it ran (section 7.1 rule 4). Part Q is read through the checked door built from Part Q's manifest AND its plan (the reuse list holds
+    ``generation/result.json``). Nothing it scores is a result."""
     from .common import plan as planmod
     from .partt_door import PartQDoor
+    from .partt_stages import part_q_block
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    door = PartQDoor.from_dir(qdir)  # every Part Q file read is re-hashed against Part Q's own manifest (the plan does not exist yet)
+    door = PartQDoor.from_plan(part_q_block(qdir, part_q_plan))  # every Part Q file read is re-hashed against Part Q's manifest or its plan's reuse list
     bundle, registered_draws, _gloss, _res = load_part_q(qdir, cfg, "registered", door)
     pool = {c: list(bundle.accepted[c]) for c in core.TASKS}
     off = 2 * repetition
     run = engine.run_config(cfg, layer=int(cfg["calibration"]["rate_grid_read_layer"]), updates=int(cfg["calibration"]["rate_grid_updates"]), store_rate=0.003, lora_rate=0.0003, device=cfg["training"]["training_device"])
     w = engine.build_world_t(bundle, cfg, calibration_draws(pool, cfg, [off, off + 1]), run, plan_mode="calibration")
     w.plan_offset = off
-    rec = run_calibration(w, cfg)
+    rec = run_calibration(w, cfg, deadline=time.monotonic() + cap_seconds)
     rec["overlap_with_registered_draws"] = draw_overlap(calibration_draws(pool, cfg, [off, off + 1]), registered_draws)  # ruling 2: stated, by code
     rec["part_q_manifest_sha256"] = file_sha256(qdir / "manifest.json")
     rec["code_hashes"] = planmod.frozen_file_hashes(repo, "T")
     rec["repetition"] = repetition
     path = run_dir / f"calibration_{repetition}.json"
-    if path.exists():  # a calibration that is run again writes a NEW record beside the old one, with the reason; the old one is kept (ruling 13; section 7.1 rule 4)
-        if not reason:
-            raise core.StageRefused(f"refused: {path} exists: a repetition needs --reason, and writes a new record beside it (nothing is overwritten)")
-        n = 2
-        while (run_dir / f"calibration_{repetition}.attempt{n}.json").exists():
-            n += 1
-        path = run_dir / f"calibration_{repetition}.attempt{n}.json"
-        rec["reason_for_repetition"] = reason
-        rec["supersedes"] = {"path": str(run_dir / f"calibration_{repetition}.json"), "sha256": file_sha256(run_dir / f"calibration_{repetition}.json")}
-    core.write_record(path, {**core.envelope("calibration", "T"), **core.jsonable(rec)}, overwrite=False)
+    core.write_record(path, {**core.envelope("calibration", "T"), **core.jsonable(rec)}, overwrite=False)  # one record per directory: never overwritten, no re-draw (ruling 21)
     return {k: rec[k] for k in ("store_rate", "lora_rate", "etable_rate", "read_layer", "U", "converged", "pilot")}
 
 
@@ -366,7 +443,7 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
     from . import partt_tasks
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    calib = plan.data["calibration"]
+    calib = calibration_of(cfg, plan, mode)
     qdir = qdir_of(plan, qdir)
     st0 = partt_rehearsal.stats_begin(run_dir)
     t_proc = time.monotonic()
@@ -404,10 +481,10 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
         else:
             rep = int(task_id.rsplit("|r", 1)[1])
             tol = Thresholds.from_config(cfg).modification_dcon_tolerance
-            reg_values = read_json(run_dir / "registry.json") if (run_dir / "registry.json").is_file() else {}
+            reg_values = read_json(core.records_dir(run_dir) / "registry.json") if (core.records_dir(run_dir) / "registry.json").is_file() else {}
             result = {"combined": partt_run.combined_replicate(w, rep, snaps, pinned_orders=partt_run.rejected_orders(reg_values, rep, tol))}
     elif stage == "gates":
-        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered", q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode in ("registered", "rehearsal"), q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
         result = {"gates": out["status"], "failed": out["failed"], "skipped": out["skipped"]}  # a failed gate is recorded in gates.json and makes the study status ENGINEERING-FAILURE; it is no item error
     else:
@@ -451,9 +528,9 @@ def merge_results(run_dir: Path) -> dict[str, int]:
     comb: dict[str, Any] = {}
     for f in sorted((run_dir / "tasks" / "combined").glob("*.result.json")):
         comb.update(read_json(f)["combined"])
-    write_json(run_dir / "registry.json", scoring.registry_from_reads(records).values)
-    core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
-    core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
+    write_json(core.records_dir(run_dir) / "registry.json", scoring.registry_from_reads(records).values)
+    core.write_record(core.records_dir(run_dir) / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
+    core.write_record(core.records_dir(run_dir) / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
     return {"records": len(records), "combined": len(comb)}
 
 
@@ -464,7 +541,7 @@ def engineering_failures_of(run_dir: Path) -> list[str]:
     g = run_dir / "gates.json"
     if g.is_file() and read_json(g).get("status") == "ENGINEERING-FAILURE":
         out.append(f"gates failed: {read_json(g).get('failed')}")
-    e = run_dir / "ensemble_check.json"
+    e = core.records_dir(run_dir) / "ensemble_check.json"
     if e.is_file() and not read_json(e).get("ok", True):
         out.append("the oracle-routed ensemble's score differs from the teacher's own (section 8.6)")
     return out
@@ -490,14 +567,14 @@ def merge_evaluate(run_dir: Path) -> dict[str, int]:
         side.update(r["side"])
         items.update(r.get("items") or {})
     reg = scoring.registry_from_reads(records).values
-    if not (run_dir / "item_records.json").is_file():  # ruling 8: every registered score's per-item scores and greedy sequences, written once
-        core.write_record(run_dir / "item_records.json", {**core.envelope("cell_record", "T"), "items": core.jsonable(items)}, overwrite=False)
-    if (run_dir / "registry.json").is_file():
-        if read_json(run_dir / "registry.json") != json_safe(reg):
+    if not (core.records_dir(run_dir) / "item_records.json").is_file():  # ruling 8: every registered score's per-item scores and greedy sequences, written once
+        core.write_record(core.records_dir(run_dir) / "item_records.json", {**core.envelope("cell_record", "T"), "items": core.jsonable(items)}, overwrite=False)
+    if (core.records_dir(run_dir) / "registry.json").is_file():
+        if read_json(core.records_dir(run_dir) / "registry.json") != json_safe(reg):
             raise core.StageRefused("refused: registry.json exists and differs from the evaluate results: no record is overwritten")
     else:
-        write_json(run_dir / "registry.json", reg)
-        core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=False)
+        write_json(core.records_dir(run_dir) / "registry.json", reg)
+        core.write_record(core.records_dir(run_dir) / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=False)
     return {"records": len(records)}
 
 
@@ -507,17 +584,17 @@ def merge_combined(run_dir: Path) -> dict[str, int]:
     for f in sorted((run_dir / "tasks" / "combined").glob("*.result.json")):
         r = read_json(f)
         comb.update(r["combined"])
-        if "ensemble_check" in r and not (run_dir / "ensemble_check.json").is_file():
-            core.write_record(run_dir / "ensemble_check.json", {**core.envelope("cell_record", "T"), **core.jsonable(r["ensemble_check"])}, overwrite=False)
-    if not (run_dir / "combined.json").is_file():
-        core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=False)
+        if "ensemble_check" in r and not (core.records_dir(run_dir) / "ensemble_check.json").is_file():
+            core.write_record(core.records_dir(run_dir) / "ensemble_check.json", {**core.envelope("cell_record", "T"), **core.jsonable(r["ensemble_check"])}, overwrite=False)
+    if not (core.records_dir(run_dir) / "combined.json").is_file():
+        core.write_record(core.records_dir(run_dir) / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=False)
     return {"combined": len(comb)}
 
 
 def check_controls(run_dir: Path, plan: Any, mode: str = "registered") -> dict[str, Any]:
     """The controls stage (ruling 12): the controls of section 5.2 were scored on their registered subsamples by the evaluate tasks; this stage scores nothing. It checks that every control key the plan's items
     name is in the registry (the analysis would otherwise call the line INCOMPLETE)."""
-    reg = read_json(run_dir / "registry.json")
+    reg = read_json(core.records_dir(run_dir) / "registry.json")
     need = [k for k in plan.data.get("registry_keys", []) if ":sub:" in k or "|sub:" in k]
     if mode == "rehearsal":  # a rehearsal scored replicate 0 only
         need = [k for k in need if k.split("|")[2] in (str(partt_rehearsal.SUBSET_REP), "-")]
@@ -546,10 +623,10 @@ def run_recompute(repo: Path, run_dir: Path, qdir: Path, plan: Any, own_code: bo
     cfg = core.load_config("T", repo / core.CONFIG_T)
     t0 = time.monotonic()
     qdir = qdir_of(plan, qdir)
-    w, gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode, door_of(plan, qdir))
-    reg = read_json(run_dir / "registry.json")
-    comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
-    stored = read_json(run_dir / "item_records.json")["items"] if (run_dir / "item_records.json").is_file() else None
+    w, gloss, _ = build_world_real(repo, cfg, qdir, calibration_of(cfg, plan, mode), mode, door_of(plan, qdir))
+    reg = read_json(core.records_dir(run_dir) / "registry.json")
+    comb = read_json(core.records_dir(run_dir) / "combined.json")["combined"] if (core.records_dir(run_dir) / "combined.json").is_file() else None
+    stored = read_json(core.records_dir(run_dir) / "item_records.json")["items"] if (core.records_dir(run_dir) / "item_records.json").is_file() else None
     rec = partt_recompute.recompute(w, run_dir, gloss, reg, comb, own_code=own_code, stored_items=stored, **({"replicates": (partt_rehearsal.SUBSET_REP,)} if mode == "rehearsal" else {}))
     partt_recompute.write(run_dir, rec)
     if charge:
@@ -564,7 +641,7 @@ def run_cost(repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "regi
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
     qdir = qdir_of(plan, qdir)
-    w, _gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode, door_of(plan, qdir))
+    w, _gloss, _ = build_world_real(repo, cfg, qdir, calibration_of(cfg, plan, mode), mode, door_of(plan, qdir))
     rec = partt_cost.record(w, run_dir, qdir if (qdir / "charged_ledger.json").is_file() else None, run_dir / "snapshots")
     partt_cost.write(run_dir, rec)
     return {"lines": len(partt_cost.lines(rec))}

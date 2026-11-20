@@ -38,7 +38,7 @@ def test_rehearsal_and_registered_stages_call_the_same_functions_with_only_the_m
         calls.append(("run_stage_tasks", stage, {"mode": k.get("mode"), "run_dir": str(run_dir)}))
         return {"status": "PAUSED", "charged_seconds": 0.0}
 
-    def fake_stage(stage: str, repo: Any, run_dir: Any, qdir: Any, plan: Any, mode: str = "registered") -> dict[str, Any]:
+    def fake_stage(stage: str, repo: Any, run_dir: Any, qdir: Any, plan: Any, mode: str = "registered", kind: str = "counting") -> dict[str, Any]:
         calls.append(("run_stage", stage, {"mode": mode, "run_dir": str(run_dir)}))
         return {"ok": True}
 

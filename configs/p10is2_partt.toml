@@ -44,6 +44,13 @@ ladder_top = 8000
 convergence_tolerance = 0.01
 repetitions_provided = 1
 
+[rehearsal]  # section 10: both rehearsals train 200 updates of every trained cell type and need no calibration result; the rates and the layer are the grid's own starting values, used for timing only
+updates = 200
+store_rate = 0.003
+lora_rate = 0.0003
+etable_rate = 0.003
+read_layer = 4
+
 [pilot]  # section 7.2
 gap_min = 0.25
 

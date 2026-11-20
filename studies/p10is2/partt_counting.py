@@ -85,23 +85,32 @@ def run_stages(repo: Path, run_dir: Path, plan: planmod.Plan, kind: str, launch:
         return rc == expect
 
     ok = True
+    state_file = run_dir / "forced_events.json"
+    if forced is not None and state_file.is_file():  # a resumed counting rehearsal: the forced events recorded once are not run again
+        forced.update(read_json(state_file))
+    cfg = core.load_config("T", repo / core.CONFIG_T)
     for stage in partt_plan.STAGES:
         if not ok:
             break
-        if stage == "train" and forced is not None:
-            alt = altered_plan_file(plan, run_dir)
-            ident = go("train-identity-altered-plan", stage, EXIT_IDENTITY, "--plan-file", str(alt))
-            forced["paused_identity_restore"] = ident and not partt_tasks.stage_marker(run_dir, stage).exists() and runner_manifest(run_dir, stage) is None
-            ok = ident
-            if not ok:
-                break
-            updates = max(1, int(plan.data["calibration"]["U"]) // 2)
-            ok = go("train-forced-pause", stage, EXIT_PAUSED, *base, "--pause-after-updates", str(updates))
-            forced["pause_resume"] = ok
-            if not ok:
-                break
-            ok = go("train-resume", stage, 0, *base)
-            forced["pause_resume"] = forced["pause_resume"] and ok and _resumed(run_dir)
+        if partt_tasks.stage_marker(run_dir, stage).is_file():
+            continue  # complete: a resume does not start it again
+        if stage == "train" and forced is not None and not (forced["paused_identity_restore"] and forced["pause_resume"]):
+            if not forced["paused_identity_restore"]:
+                alt = altered_plan_file(plan, run_dir)
+                ident = go("train-identity-altered-plan", stage, EXIT_IDENTITY, "--plan-file", str(alt))
+                forced["paused_identity_restore"] = ident and not partt_tasks.stage_marker(run_dir, stage).exists() and runner_manifest(run_dir, stage) is None
+                write_json(state_file, dict(forced))
+                ok = ident
+                if not ok:
+                    break
+            if not forced["pause_resume"]:
+                updates = max(1, int(cfg["rehearsal"]["updates"]) // 2)
+                ok = go("train-forced-pause", stage, EXIT_PAUSED, *base, "--pause-after-updates", str(updates))
+                if not ok:
+                    break
+                ok = go("train-resume", stage, 0, *base)
+                forced["pause_resume"] = ok and _resumed(run_dir)
+                write_json(state_file, dict(forced))
             continue
         ok = go(stage, stage, 0, *base)
     return ok
@@ -110,6 +119,18 @@ def run_stages(repo: Path, run_dir: Path, plan: planmod.Plan, kind: str, launch:
 def _resumed(run_dir: Path) -> bool:
     f = partt_tasks.tasks_dir(run_dir, "train") / f"{partt_tasks.safe(partt_tasks.FORCED_PAUSE_CELL)}.cell.json"
     return f.is_file() and bool(read_json(f).get("resumed"))
+
+
+def write_rehearsal_record(path: Path, rec: Mapping[str, Any]) -> None:
+    """A rehearsal's record is written when the run ends, complete or not. A later (resumed) run that ends writes a new final record; the INCOMPLETE one before it is KEPT as ``<name>.attempt<n>.json``. A COMPLETE record is never replaced."""
+    if path.exists():
+        if read_json(path).get("status") == "COMPLETE":
+            raise StageRefused(f"refused: {path} is COMPLETE; a complete rehearsal record is never replaced")
+        n = 2
+        while path.with_name(f"{path.stem}.attempt{n}.json").exists():
+            n += 1
+        path.rename(path.with_name(f"{path.stem}.attempt{n}.json"))
+    core.write_record(path, rec, overwrite=False)
 
 
 def run_counting_rehearsal(repo: Path, run_dir: Path, *, launch: Launch = subprocess_launch, clock: Callable[[], float] = time.monotonic, charged_ledgers: Sequence[str] = ()) -> dict[str, Any]:
@@ -137,21 +158,26 @@ def run_counting_rehearsal(repo: Path, run_dir: Path, *, launch: Launch = subpro
         "other_studies_alive": procs.other_studies_alive(), "charged_seconds": led.charged(), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers}},
         "plan_stage_items": {st: len(v) for st, v in plan.data["items"].items()}, "subset": "replicate 0; one cell of each of the ten trained types at full U; D_cal only",
     }  # fmt: skip
-    core.write_record(run_dir / "rehearsal_counting.json", rec, overwrite=False)
+    write_rehearsal_record(run_dir / "rehearsal_counting.json", rec)
     if not complete:
         raise StageRefused(f"refused: the counting rehearsal is incomplete: {problems or 'a stage did not complete'}")
     return rec
 
 
-def measuring_plan(repo: Path, run_dir: Path, calibration_record: Path, part_q_dir: Path, part_q_plan: Path | None, manifests: Mapping[str, Any] | None) -> Path:
-    """The measuring rehearsal's own plan, built here from the config with the caps unset and the calibration's own record; kept in the run directory, never under ``freeze/``."""
-    from .partt_stages import calibration_from_record, part_q_block
+def measuring_plan(repo: Path, run_dir: Path, part_q_dir: Path, part_q_plan: Path | None, manifests: Mapping[str, Any] | None) -> Path:
+    """The measuring rehearsal's own plan, built here from the config with the caps unset and NO calibration result (ADR section 10: 200 updates of every trained cell type): a stand-in calibration block from the
+    config's ``[rehearsal]`` section (U = 200, the grid's starting rates, the grid's read layer). Kept in the run directory, never under ``freeze/``; reused when the rehearsal resumes."""
+    path = run_dir / "measuring_plan.json"
+    if path.is_file():
+        return path
+    from .partt_stages import part_q_block
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    if not cfg["caps"]["provisional"] or any(float(v) != 0.0 for v in cfg["stage_caps"].values()):
-        raise StageRefused("refused: the config holds caps already; a measuring rehearsal runs with the caps unset, so that no stage can stop on a cap it is there to measure")
-    rec = partt_plan.build_candidate(repo, run_dir.parent / f"{run_dir.name}_registered_run_dir_unused", cfg, calibration_from_record(calibration_record), walk=planmod.import_walk(repo, "T"), manifests=dict(manifests or {}), part_q=part_q_block(part_q_dir, part_q_plan))
-    path = run_dir / "measuring_plan.json"
+    if not cfg["caps"]["provisional"] or any(float(v) != 0.0 for k, v in cfg["stage_caps"].items() if k != "calibration_hours"):
+        raise StageRefused("refused: the config holds registered caps already; a measuring rehearsal runs with them unset, so that no stage can stop on a cap it is there to measure")
+    r = cfg["rehearsal"]
+    stand_in = {"U": int(r["updates"]), "converged": True, "store_rate": float(r["store_rate"]), "lora_rate": float(r["lora_rate"]), "etable_rate": float(r["etable_rate"]), "read_layer": int(r["read_layer"]), "pilot": {"passed": True}, "records": {}, "stand_in": True}
+    rec = partt_plan.build_candidate(repo, run_dir.parent / f"{run_dir.name}_registered_run_dir_unused", cfg, stand_in, walk=planmod.import_walk(repo, "T"), manifests=dict(manifests or {}), part_q=part_q_block(part_q_dir, part_q_plan))
     write_json(path, core.jsonable(rec))
     return path
 
@@ -217,14 +243,14 @@ def mean_world_build(run_dir: Path) -> float:
     return sum(vals) / len(vals) if vals else 0.0
 
 
-def run_measuring_rehearsal(repo: Path, run_dir: Path, calibration_record: Path, part_q_dir: Path, *, part_q_plan: Path | None = None, manifests: Mapping[str, Any] | None = None, launch: Launch = subprocess_launch, clock: Callable[[], float] = time.monotonic, charged_ledgers: Sequence[str] = ()) -> dict[str, Any]:
+def run_measuring_rehearsal(repo: Path, run_dir: Path, part_q_dir: Path, *, part_q_plan: Path | None = None, manifests: Mapping[str, Any] | None = None, launch: Launch = subprocess_launch, clock: Callable[[], float] = time.monotonic, charged_ledgers: Sequence[str] = ()) -> dict[str, Any]:
     from .partt_stages import claim_run_dir
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
     gates.apply_platform_settings(cfg)
     core.require_ignored_run_dir(repo, run_dir)
     claim_run_dir(run_dir, "rehearsal", None)
-    plan_file = measuring_plan(repo, run_dir, calibration_record, part_q_dir, part_q_plan, manifests)
+    plan_file = measuring_plan(repo, run_dir, part_q_dir, part_q_plan, manifests)
     plan = planmod.Plan.load(plan_file, "T")
     t0 = clock()
     problems: list[str] = []
@@ -248,7 +274,7 @@ def run_measuring_rehearsal(repo: Path, run_dir: Path, calibration_record: Path,
         "charged_seconds": led.charged(), "charged_before_freeze_seconds": led.charged() + sum(core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers}},
         "subset": "replicate 0; one cell of each of the ten trained types at full U; D_cal only",
     }  # fmt: skip
-    core.write_record(run_dir / "rehearsal_measuring.json", rec, overwrite=False)
+    write_rehearsal_record(run_dir / "rehearsal_measuring.json", rec)
     if not complete:
         raise StageRefused(f"refused: the measuring rehearsal is incomplete: {problems or 'a stage did not complete'}")
     return rec
