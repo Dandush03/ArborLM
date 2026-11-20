@@ -218,7 +218,7 @@ def analyse(reg: Registry, side: Mapping[str, Any], comb: Mapping[str, Any] | No
     q = Quantities(reg, thresholds)
     derived = L.derive_all(q, recompute_failed)
     ann = annotations.all_annotations(q, side if all(f"r{r}/M-append/{o}" in side and "route" in side[f"r{r}/M-append/{o}"] for r, o in CELLS) else None, comb)
-    return {"status": st, "lines": derived, "annotations": ann, "report": report.render(st, derived, ctx)}
+    return {"status": st, "lines": derived, "annotations": ann, "report": report.render(st, derived, {**ctx, "annotations": ann})}
 
 
 def write_analysis(run_dir: Path, result: Mapping[str, Any]) -> None:
@@ -304,6 +304,10 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         errors = sorted(str(p) for p in (run_dir / "item_errors").glob("*.json")) if (run_dir / "item_errors").is_dir() else []
         eng = engineering_failures_of(run_dir)
         ctx = {"U": int(calib["U"]), "converged": bool(calib.get("converged", True)), "draws": qres["draws_label"], "shared_share": shared_share([dict(s.t) for s in w.streams])}
+        if (run_dir / "cost.json").is_file():  # the cost lines (section 8.5) when the cost stage has run; they enter no label
+            from . import partt_cost
+
+            ctx["cost_lines"] = partt_cost.lines(read_json(run_dir / "cost.json"))
         res = analyse(reg, side, comb, ctx, required=sorted(partt_plan.required_keys()), thresholds=Thresholds.from_config(cfg), item_errors=errors, engineering_failure=eng)
         write_analysis(run_dir, res)
         out = {"status": res["status"]["status"]}
@@ -398,7 +402,10 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
             ref = partt_run.combined_reference(w)
             result = {"combined": ref, "ensemble_check": partt_run.ensemble_check(w, ref["ensemble"])}
         else:
-            result = {"combined": partt_run.combined_replicate(w, int(task_id.rsplit("|r", 1)[1]), snaps)}
+            rep = int(task_id.rsplit("|r", 1)[1])
+            tol = Thresholds.from_config(cfg).modification_dcon_tolerance
+            reg_values = read_json(run_dir / "registry.json") if (run_dir / "registry.json").is_file() else {}
+            result = {"combined": partt_run.combined_replicate(w, rep, snaps, pinned_orders=partt_run.rejected_orders(reg_values, rep, tol))}
     elif stage == "gates":
         out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered", q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)

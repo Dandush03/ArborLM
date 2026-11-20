@@ -36,6 +36,46 @@ def line(name: str, text: str, ctx: Mapping[str, Any]) -> str:
     return core.under_line(f"{name}: {text}{suffix(ctx, name)}")
 
 
+def compact(v: Any) -> str:
+    if isinstance(v, float):
+        return f"{v:.3f}"
+    if isinstance(v, dict):
+        return "{" + ", ".join(f"{k}: {compact(x)}" for k, x in v.items()) + "}"
+    if isinstance(v, list | tuple):
+        return "[" + ", ".join(compact(x) for x in v) + "]"
+    return str(v)
+
+
+def companion_blocks(derived: Mapping[str, Any], ctx: Mapping[str, Any]) -> list[str]:
+    """What the ADR prints with each line (audit R14): the per-cell tables behind ACQUISITION and RETENTION (with the evaluable cells and those in the negative zone, the passing cells per order, CONTROLS UNDEFINED
+    and the cells behind NOT EVALUABLE), AGAINST-DENSE's per-cell differences, GENERAL-QUALITY's per-cell loss increases, AGAINST-LOOKUP's per-cell values, every annotation (NO ADVANTAGE OVER SEPARATE ADAPTERS, the
+    M-sep and D-sep reading, ROUTER with its false-trigger counts, COMPOSES, ...) and the cost lines. Each is its own block under the fixed line; nothing here enters a label."""
+    out: list[str] = []
+    for name in ("ACQUISITION", "RETENTION"):
+        d = derived.get(name) or {}
+        for k, v in (d.get("table") or {}).items():
+            out.append(line(f"{name} table, {k}", compact(v), ctx))
+        for key in ("passing_cells_per_order", "why"):
+            if d.get(key):
+                out.append(line(f"{name} {key.replace('_', ' ')}", compact(d[key]), ctx))
+    for name in ("AGAINST-DENSE", "AGAINST-DENSE (M-seq vs D-seq)"):
+        d = derived.get(name) or {}
+        for key in ("delta_G", "delta_rho"):
+            if key in d:
+                out.append(line(f"{name} per-cell {key}", compact(d[key]), ctx))
+    g = derived.get("GENERAL-QUALITY") or {}
+    if g.get("readings"):
+        out.append(line("GENERAL-QUALITY per-cell loss increases (token64 and first marker)", compact(g["readings"]), ctx))
+    lk = derived.get("AGAINST-LOOKUP") or {}
+    if lk.get("per_cell"):
+        out.append(line("AGAINST-LOOKUP per cell", compact(lk["per_cell"]), ctx))
+    for aname, a in sorted((ctx.get("annotations") or {}).items()):
+        out.append(line(f"ANNOTATION {aname}", f"holds {a.get('holds')}; {compact(a.get('detail'))}", ctx))
+    for text in ctx.get("cost_lines") or []:
+        out.append(line("COST", text, ctx))
+    return out
+
+
 def render(status: Mapping[str, Any], derived: Mapping[str, Any] | None, ctx: Mapping[str, Any]) -> str:
     """The report text. ``status`` is ``labels.study_status``; ``derived`` is ``labels.derive_all`` (None when the status does not derive)."""
     if not status["derive"] or derived is None:
@@ -54,6 +94,7 @@ def render(status: Mapping[str, Any], derived: Mapping[str, Any] | None, ctx: Ma
     g = derived["GENERAL-QUALITY"]
     blocks.append(line("GENERAL-QUALITY", g["label"] + (f" ({g['note']})" if g.get("note") else ""), ctx))
     blocks.append(line("MODIFICATION (M-ii, descriptive)", derived["MODIFICATION"]["label"], ctx))
+    blocks += companion_blocks(derived, ctx)
     blocks.append(line("DISCLOSED LIMITATION (ruling 19)", "gate G1 tests Q_check against the training streams by English key only: Part Q stored no Q_check identity groups, so a paraphrase that shares an identity group with a training item is not detected", ctx))
     blocks.append(core.under_line(core.FIXED_NOTE))
     text = "\n\n".join(blocks)

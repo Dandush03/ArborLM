@@ -13,7 +13,13 @@ from p10is2_engine_fixtures import CFG_T, world  # noqa: E402
 from p10is2_partt_e2e_world import fake_gloss_bank  # noqa: E402
 
 from studies.p10is2 import labels as L  # noqa: E402
-from studies.p10is2 import partt_items, partt_recompute, partt_rehearsal, partt_run, scoring  # noqa: E402
+from studies.p10is2 import (  # noqa: E402
+    partt_items,
+    partt_recompute,
+    partt_rehearsal,
+    partt_run,
+    scoring,
+)
 from studies.p10is2.common import core  # noqa: E402
 from studies.p10is2.quantities import Quantities, Registry, Thresholds  # noqa: E402
 

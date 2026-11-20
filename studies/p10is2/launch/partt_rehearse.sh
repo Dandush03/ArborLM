@@ -24,4 +24,8 @@ shift 2  # what remains (--part-q-dir, --calibration, --charged-ledger ...) goes
 cd "$(dirname "$0")/../../.."
 unset PYTHONPATH
 export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6
+# keep the machine awake for exactly the life of this stage: the watcher follows THIS shell's pid, which the exec below keeps, and ends when the stage ends (caffeinate -i -w <pid>); never a bare caffeinate
+if command -v caffeinate >/dev/null 2>&1; then
+    caffeinate -i -w $$ >/dev/null 2>&1 &
+fi
 exec uv run --locked python -m studies.p10is2.partt_stages rehearse --kind "$KIND" --run-dir "$RUN_DIR" "$@"

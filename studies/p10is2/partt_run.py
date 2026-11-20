@@ -5,7 +5,7 @@
 frozen device (MPS in a registered run, CPU in tests), scoring CPU. A cell that stops on a non-finite loss is not resumed and stops the cells that depend on it (their status is ``skipped_dependency``).
 """
 
-from collections.abc import Mapping
+from collections.abc import Collection, Mapping
 from pathlib import Path
 from typing import Any
 
@@ -17,7 +17,7 @@ from studies.p10s2.memory import MemoryArm
 
 from . import engine, scoring
 from .common import core
-from .quantities import NONE, ORDERS, REPLICATES, Registry
+from .quantities import NONE, ORDERS, REPLICATES, Registry, Thresholds
 
 ORDER_ARMS = ("M1", "D1", "M-append", "M-seq", "M-ii", "D-append", "D-seq")
 JOINT = ("M-joint", "D-joint")
@@ -26,6 +26,20 @@ JOINT = ("M-joint", "D-joint")
 def _combined_cell(ctx: Any, arm: Any, cs: Any) -> dict[str, Any]:
     with scoring.timed("combined:arm-cell"):
         return combined_mod.score_combined_cell(ctx, arm, cs)  # type: ignore[no-any-return]
+
+
+def is_rejected(m_ii: Mapping[str, float], m_append: Mapping[str, float], tolerance: float) -> bool:
+    """CONSOLIDATION-REJECTED (ADR-0025 section 8.5; ``labels.modification``): chrF on D_con of either capability under M-ii is below M-append's minus the tolerance."""
+    return any(m_ii[f"dcon:{c}"] < m_append[f"dcon:{c}"] - tolerance for c in core.TASKS)
+
+
+def rejected_orders(values: Mapping[str, float], r: int, tolerance: float) -> set[str]:
+    """The orders of replicate ``r`` whose M-ii cell is rejected, read from the registry of the evaluate stage (the combined stage pins M-append's snapshot in those cells)."""
+    out = set()
+    for o in ORDERS:
+        if all(f"M-ii|{o}|{r}|dcon:{c}" in values for c in core.TASKS) and is_rejected({f"dcon:{c}": values[f"M-ii|{o}|{r}|dcon:{c}"] for c in core.TASKS}, {f"dcon:{c}": values[f"M-append|{o}|{r}|dcon:{c}"] for c in core.TASKS}, tolerance):
+            out.add(o)
+    return out
 
 
 def cell_specs(replicates: tuple[int, ...] = REPLICATES) -> list[engine.CellSpec]:
@@ -76,6 +90,17 @@ def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Ma
                     lr, rside = scoring.route_reads(world, r, arms[a], routers)
                     records[f"{a}|{o}|{r}"] |= lr
                     side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
+            if a == "M-ii" and is_rejected(records[f"M-ii|{o}|{r}"], records[f"M-append|{o}|{r}"], Thresholds.from_config(world.cfg_t).modification_dcon_tolerance):
+                # ADR section 8.5 (ruling 9): in a CONSOLIDATION-REJECTED cell the pinned M-append snapshot is what every other reading of M-ii uses, CONTROL-FAILED included; the unpublished M-ii state enters no label
+                key = f"M-ii|{o}|{r}"
+                kept = {k: v for k, v in records[key].items() if k.startswith("dcon:")}  # the D_con reads of the real M-ii are the evidence of the rejection
+                kept_items = {k: scoring.ITEMS[f"{key}|{k}"] for k in kept if f"{key}|{k}" in scoring.ITEMS}
+                unpublished = dict(records[key])
+                with scoring.at(key):
+                    pinned, pextra = scoring.cell_reads(world, r, "M-ii", o, arms["M-append"], routers, m1=arms["M1"])
+                records[key] = {**pinned, **kept}
+                scoring.ITEMS.update(kept_items)
+                side.setdefault(f"r{r}/M-ii/{o}", {}).update({**pextra, "pinned_from": "M-append", "unpublished_m_ii_reads": unpublished})
             if a == "M-append":
                 with scoring.at(f"M-append@append|{o}|{r}"):
                     records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
@@ -159,14 +184,17 @@ def ensemble_check(world: engine.WorldT, ensemble: Mapping[str, Any] | None = No
 
 
 @torch.no_grad()
-def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path) -> dict[str, Any]:
+def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path, pinned_orders: Collection[str] = ()) -> dict[str, Any]:
     """C1 and C2 on the twelve arm-cells of ONE replicate (stage-2 snapshots of M-append, M-ii, D-seq and D-append in both orders, M-joint, D-joint, M-sep, D-sep): oracle route, never trained on."""
     scoring.require_evaluation_allowed(world)
     ctx, out = world.ctx, {}
     ctx.seed_plan = world.plan(r)  # type: ignore[assignment]
     for o in ORDERS:
         for a in ("M-append", "M-ii", "D-seq", "D-append"):
-            out[f"{a}|{o}|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}"), ctx.ec)
+            pinned = a == "M-ii" and o in pinned_orders  # a rejected cell: M-append's snapshot is read in M-ii's place, marked
+            out[f"{a}|{o}|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{'M-append' if pinned else a}/{o}"), ctx.ec)
+            if pinned:
+                out[f"{a}|{o}|{r}"] = {**out[f"{a}|{o}|{r}"], "pinned_from": "M-append"}
     for a in JOINT:
         out[f"{a}|-|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
     m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}

@@ -16,6 +16,7 @@ import torch
 
 from . import engine, partt_items, partt_run, scoring
 from .common import core, gates
+from .quantities import Thresholds
 
 OWN_CODE_TOLERANCE = 1e-6
 FROZEN_CODE_TOLERANCE = 0.0
@@ -70,7 +71,7 @@ def recompute(world: engine.WorldT, run_dir: Path, gloss: Mapping[str, Any], reg
         if combined_registered is not None:
             comb = partt_run.combined_reference(world)
             for r in replicates:
-                comb.update(partt_run.combined_replicate(world, r, run_dir / "snapshots"))
+                comb.update(partt_run.combined_replicate(world, r, run_dir / "snapshots", pinned_orders=partt_run.rejected_orders(registered, r, Thresholds.from_config(world.cfg_t).modification_dcon_tolerance)))
             cdiffs = compare(combined_means(combined_registered), combined_means(comb), tol)
     finally:
         world.device = keep
