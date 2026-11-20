@@ -1,0 +1,8 @@
+18:40:25 study processes alive: S0 0, S2 0, other 0
+18:40:27 starting S1 counting rehearsal into /Users/daniellaloush/dandush03/ArborLM/experiments/P10IS1-counting-quiet-20261119T184025
+22:28:01 rehearsal exited with code 143
+22:28:01 the timing part started (a quiet reading was obtained)
+22:28:01 load while this ran: samples 1362  min 0.82  mean 2.62  p95 6.49  max 8.09  at or below 1.0: 29 (2.1%)
+22:28:23 S0 main grid resumed
+22:28:43 P10-I-S6 calibration rehearsal resumed
+22:28:43 done. Summary: /Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/s1_quiet/summary-20261119T184025.txt   load log: /Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/s1_quiet/load-20261119T184025.log
