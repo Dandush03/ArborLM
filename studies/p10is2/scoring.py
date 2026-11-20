@@ -28,6 +28,15 @@ GEN_ARMS = ("M1", "M-append", "M-seq", "M-ii", "D-seq")
 TWO = core.TASKS
 
 
+EVALUATION_FORBIDDEN_MODES = ("rehearsal", "calibration")  # section 4.1: E_A, E_B, E_C and E_open are NEVER scored before the registered run of Part T (rulings 1 and 2)
+
+
+def require_evaluation_allowed(world: WorldT) -> None:
+    """The code REFUSES to score an evaluation panel (E_A, E_B, E_C, E_open) outside a registered stage: a rehearsal and a calibration score D_cal only (audit B2, ruling 1)."""
+    if getattr(world, "plan_mode", "registered") in EVALUATION_FORBIDDEN_MODES:
+        raise core.StageRefused(f"refused: a {world.plan_mode} never scores E_A, E_B, E_C or E_open (section 4.1: not before the registered run of Part T); it scores D_cal only")
+
+
 def _cap(order: str, which: int) -> str:
     return order[which]
 
@@ -35,6 +44,7 @@ def _cap(order: str, which: int) -> str:
 @torch.no_grad()
 def panel_means(world: WorldT, arm: Arm) -> dict[str, float]:
     """s:E_A and s:E_B: the mean chrF-norm of the arm on each full panel under the oracle route."""
+    require_evaluation_allowed(world)
     ctx = world.ctx
     out: dict[str, float] = {}
     for n in ("E_A", "E_B"):

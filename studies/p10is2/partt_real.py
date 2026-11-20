@@ -295,7 +295,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     snaps = run_dir / "snapshots"
     t0 = time.monotonic()
     if stage == "gates":
-        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered")
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered", q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
     elif stage == "train":
         out = partt_run.train_all(w, snaps, run_dir / "checkpoints", int(calib["U"]))
@@ -321,8 +321,9 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         side = read_json(run_dir / "side_records.json")["side"]
         comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
         errors = sorted(str(p) for p in (run_dir / "item_errors").glob("*.json")) if (run_dir / "item_errors").is_dir() else []
+        eng = engineering_failures_of(run_dir)
         ctx = {"U": int(calib["U"]), "converged": bool(calib.get("converged", True)), "draws": qres["draws_label"], "shared_share": shared_share([dict(s.t) for s in w.streams])}
-        res = analyse(reg, side, comb, ctx, required=sorted(partt_plan.required_keys()), thresholds=Thresholds.from_config(cfg), item_errors=errors)
+        res = analyse(reg, side, comb, ctx, required=sorted(partt_plan.required_keys()), thresholds=Thresholds.from_config(cfg), item_errors=errors, engineering_failure=eng)
         write_analysis(run_dir, res)
         out = {"status": res["status"]["status"]}
     else:
@@ -403,11 +404,9 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
         else:
             result = {"combined": partt_run.combined_replicate(w, int(task_id.rsplit("|r", 1)[1]), snaps)}
     elif stage == "gates":
-        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered")
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode == "registered", q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
-        if out["status"] != "PASSED":
-            raise SystemExit(f"gates failed: {out['failed']} (ENGINEERING-FAILURE)")
-        result = {"gates": out["status"], "skipped": out["skipped"]}
+        result = {"gates": out["status"], "failed": out["failed"], "skipped": out["skipped"]}  # a failed gate is recorded in gates.json and makes the study status ENGINEERING-FAILURE; it is no item error
     else:
         raise core.StageRefused(f"refused: {stage!r} has no worker task")
     core.write_record(d / f"{sid}.result.json", {**core.envelope("cell_record", "T"), "task": task_id, **core.jsonable(result)}, overwrite=False)
@@ -430,6 +429,28 @@ def merge_results(run_dir: Path) -> dict[str, int]:
     core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
     core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
     return {"records": len(records), "combined": len(comb)}
+
+
+def engineering_failures_of(run_dir: Path) -> list[str]:
+    """The causes ADR-0025 section 8.6 names for ENGINEERING-FAILURE that the run records: a failed gate (``gates.json``) and a failed oracle-routed ensemble integrity check (``ensemble_check.json``). Passed to the
+    analysis so that the status is ENGINEERING-FAILURE, not an item error (audit R9, ruling 14)."""
+    out: list[str] = []
+    g = run_dir / "gates.json"
+    if g.is_file() and read_json(g).get("status") == "ENGINEERING-FAILURE":
+        out.append(f"gates failed: {read_json(g).get('failed')}")
+    e = run_dir / "ensemble_check.json"
+    if e.is_file() and not read_json(e).get("ok", True):
+        out.append("the oracle-routed ensemble's score differs from the teacher's own (section 8.6)")
+    return out
+
+
+def require_gates_passed(run_dir: Path, stage: str) -> None:
+    """A failed gate is ENGINEERING-FAILURE before training: no stage but the analysis and the report runs after it."""
+    if stage in ("gates", "analysis", "report"):
+        return
+    fails = engineering_failures_of(run_dir)
+    if fails:
+        raise core.StageRefused(f"refused: ENGINEERING-FAILURE recorded ({fails[0]}): nothing further is trained or scored; only the analysis states the status")
 
 
 def merge_evaluate(run_dir: Path) -> dict[str, int]:

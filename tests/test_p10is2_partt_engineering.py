@@ -234,3 +234,76 @@ def test_the_ledger_charges_are_listed_and_a_relative_or_missing_ledger_is_refus
         with pytest.raises(core.StageRefused, match="absolute path of an existing"):
             partt_stages.ledgers_charge([bad])
     assert time.monotonic() > 0
+
+
+# --- B2 and R3 ---------------------------------------------------------------------------------------------------------------------------------------
+def test_a_rehearsal_and_a_calibration_never_score_an_evaluation_panel() -> None:
+    from p10is2_engine_fixtures import world as tiny_world
+
+    from studies.p10is2 import partt_run, scoring
+    from studies.p10s2.memory import NullArm
+
+    w = tiny_world(updates=2, n_reps=1)
+    for mode in ("rehearsal", "calibration"):
+        w.plan_mode = mode
+        with pytest.raises(core.StageRefused, match="never scores E_A, E_B, E_C or E_open"):
+            scoring.panel_means(w, NullArm())
+        with pytest.raises(core.StageRefused, match="never scores"):
+            partt_run.reference_task(w)
+        with pytest.raises(core.StageRefused, match="never scores"):
+            partt_run.combined_reference(w)
+    w.plan_mode = "registered"
+
+
+def test_gate_g1_runs_on_the_real_bundle_shape_without_a_q_check_panel() -> None:
+    from p10is2_engine_fixtures import world as tiny_world
+
+    from studies.p10is2 import partt_gates
+
+    w = tiny_world(updates=2, n_reps=1)
+    assert "Q_check" in w.partition.panels
+    keys = sorted(i.key for i in w.partition.panels["Q_check"])[:5]
+    import copy as _copy
+
+    part = _copy.copy(w.partition)  # the fixture's bundle is shared: work on a copy
+    part.panels = {k: v for k, v in part.panels.items() if k != "Q_check"}  # the real bundle holds D_cal, D_con, E_A, E_B, E_C, E_open and Q_fit only
+    w.partition = part
+    with pytest.raises(core.StageRefused, match="needs the Q_check panel"):
+        partt_gates.g1(w)  # it used to crash with KeyError 'Q_check'; it never passes on a missing panel
+    assert partt_gates.g1(w, q_check_keys=keys)["passed"] is True
+    leak = next(iter(w.streams[0].t["A"])).key
+    assert partt_gates.g1(w, q_check_keys=[*keys, leak])["passed"] is False  # a Q_check key that is also a training key is a failure
+
+
+def test_q_check_keys_are_read_through_the_door_keys_only(tmp_path: Path) -> None:
+    q = tmp_path / "partq"
+    (q / "qcheck/teacher_A/block_000").mkdir(parents=True)
+    f = q / "qcheck/teacher_A/block_000/batch_0000000.json"
+    f.write_text(json.dumps({"index": 0, "keys": ["a b", "c d"], "scores": [-0.1, -0.2], "texts": ["x", "y"], "tokens": [[1], [2]]}))
+    door = partt_door.PartQDoor(q, {"qcheck/teacher_A/block_000/batch_0000000.json": file_sha256(f)})
+    assert door.q_check_keys() == ["a b", "c d"]
+    f.write_text(json.dumps({"index": 0, "keys": ["changed"]}))
+    with pytest.raises(core.StageRefused, match="PAUSED — IDENTITY"):
+        door.q_check_keys()
+
+
+# --- R9 ---------------------------------------------------------------------------------------------------------------------------------------------
+def test_a_failed_gate_or_ensemble_check_makes_the_status_engineering_failure_and_stops_the_run(tmp_path: Path) -> None:
+    from studies.p10is2 import labels as L
+    from studies.p10is2.quantities import Registry, Thresholds
+
+    assert partt_real.engineering_failures_of(tmp_path) == []
+    write_json(tmp_path / "gates.json", {"status": "ENGINEERING-FAILURE", "failed": ["G1"]})
+    write_json(tmp_path / "ensemble_check.json", {"ok": False})
+    fails = partt_real.engineering_failures_of(tmp_path)
+    assert len(fails) == 2 and "gates failed" in fails[0] and "ensemble" in fails[1]
+    with pytest.raises(core.StageRefused, match="ENGINEERING-FAILURE recorded"):
+        partt_real.require_gates_passed(tmp_path, "train")  # nothing further is trained or scored
+    partt_real.require_gates_passed(tmp_path, "analysis")  # the analysis states the status
+    res = partt_real.analyse(Registry({}), {}, None, {"U": 2000, "converged": True}, required=[], thresholds=Thresholds.from_config(CFG), engineering_failure=fails)
+    assert res["status"]["status"] == L.STOP_ENGINEERING if hasattr(L, "STOP_ENGINEERING") else "ENGINEERING" in str(res["status"]["status"])
+    assert "lines" not in res  # no line is derived under it
+
+
+def test_the_config_cites_the_rulings_addendum_by_hash() -> None:
+    assert CFG["rulings_addendum_sha256"] == file_sha256(ROOT / CFG["rulings_addendum"])  # the rulings the implementation follows, beside the ADR's reference

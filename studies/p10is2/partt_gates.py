@@ -27,16 +27,43 @@ from .common import core, gates
 TOL_REPEAT = 0.0
 
 
-def g1(world: engine.WorldT, extra_eval_refs: Sequence[str] = ()) -> dict[str, Any]:
+def with_q_check(partition: Any, q_check_keys: Sequence[str] | None) -> Any:
+    """Part Q's bundle holds D_cal, D_con, E_A, E_B, E_C, E_open and Q_fit but NO Q_check (audit R3); P10-S2's ``gate_g1`` indexes it. A copy of the partition with a Q_check panel made of the English keys of the Q_check
+    blocks Part Q drew, read through the checked door (ruling 6), is what G1 gets. The identity groups of those items are not recoverable from Part Q's records without recomputing its partition: they carry group -1
+    (the gate's group tests skip them), so G1 tests Q_check's disjointness from the training streams by English keys. Without the keys and without a Q_check panel the gate REFUSES: it never passes on a missing panel."""
+    import copy as _copy
+
+    from studies.p10s2.data import Item
+
+    if "Q_check" in partition.panels:
+        return partition
+    if q_check_keys is None:
+        raise core.StageRefused("refused: gate G1 needs the Q_check panel, which Part Q's bundle does not hold: pass the Q_check keys read through the checked door")
+    p = _copy.copy(partition)
+    p.panels = {**partition.panels, "Q_check": [Item(k, k, {}, -1) for k in sorted(set(q_check_keys))]}
+    return p
+
+
+def g1(world: engine.WorldT, extra_eval_refs: Sequence[str] = (), q_check_keys: Sequence[str] | None = None) -> dict[str, Any]:
     from studies.p10s2.data import Streams as S2Streams
 
     streams = [S2Streams(s.t, s.gold, 0, {}, 0) for s in world.streams]
-    res = gate_g1(world.partition, streams, {c: [x.target for s in world.streams for x in s.t[c]] for c in core.TASKS}, set(extra_eval_refs) or None)
-    return {"passed": bool(res.get("ok", res.get("passed"))), "detail": res}
+    res = gate_g1(with_q_check(world.partition, q_check_keys), streams, {c: [x.target for s in world.streams for x in s.t[c]] for c in core.TASKS}, set(extra_eval_refs) or None)
+    ok = bool(res.get("ok", res.get("passed")))
+    if q_check_keys is not None:  # P10-S2's gate skips group -1: the Q_check items Part T has are known by English key only, so their disjointness from every training stream is tested here by key
+        overlap = sorted({x.key for s in world.streams for c in core.TASKS for x in s.t[c]} & set(q_check_keys))
+        res = {**res, "q_check_key_overlap": len(overlap)}
+        ok = ok and not overlap
+    return {"passed": ok, "detail": res}
 
 
 def g2(world: engine.WorldT, arm: Any) -> dict[str, Any]:
-    """Repeat-scoring identity: the same snapshot scored twice gives bit-identical panel scores."""
+    """Repeat-scoring identity: the same snapshot scored twice gives bit-identical panel scores. In a rehearsal or a calibration it scores D_cal (ruling 1: never an evaluation panel before the registered run)."""
+    if world.plan_mode in scoring.EVALUATION_FORBIDDEN_MODES:
+        from studies.p10s2.evaluate import score_panel
+
+        a, b = ({c: score_panel(world.ctx, arm, world.d_cal[c]).mean for c in core.TASKS} for _ in range(2))
+        return {"passed": a == b, "panel": "D_cal", "repeat_difference": max(abs(a[c] - b[c]) for c in a)}
     a, b = scoring.panel_means(world, arm), scoring.panel_means(world, arm)
     return {"passed": a == b, "first": a, "second": b}
 
@@ -145,7 +172,38 @@ def g9(cfg: Mapping[str, Any], root: Path | None = None) -> dict[str, Any]:
     return {"passed": r["passed"], "problems": r["problems"], "checker": {k: v for k, v in r["checker"].items() if k != "problems_naming_this_study"}}
 
 
-def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False) -> dict[str, Any]:
+def g4_reach_all(world: engine.WorldT, updates: int = 2) -> dict[str, Any]:
+    """Gradient reach on EVERY arm with a frozen part (ADR-0022 section 12.3 as carried by ADR-0025 section 7.3; audit R4), each built from a loaded/trained parent as the registered worker builds it: M-append, M-seq,
+    M-ii, D-append and D-seq. In each, every trainable parameter receives a gradient and no student parameter does (the frozen first stage/adapter is checked by G7's hashes)."""
+    dev, world.device = world.device, torch.device("cpu")
+    out: dict[str, Any] = {}
+    try:
+        m1 = engine.build_cell_arm(world, engine.CellSpec("M1", "AB", 0), None)
+        engine.train_cell(world, engine.CellSpec("M1", "AB", 0), m1[0], m1[1], m1[2], updates)
+        d1 = engine.build_cell_arm(world, engine.CellSpec("D1", "AB", 0), None)
+        engine.train_cell(world, engine.CellSpec("D1", "AB", 0), d1[0], d1[1], d1[2], updates)
+        parents: dict[str, Any] = {"M-append": m1[0], "M-seq": m1[0], "D-append": d1[0], "D-seq": d1[0]}
+        for name in ("M-append", "M-seq", "D-append", "D-seq"):
+            spec = engine.CellSpec(name, "AB", 0)
+            arm, rows, opts = engine.build_cell_arm(world, spec, parents[name])
+            out[name] = reach_of(world, arm, rows)
+            if name == "M-append":
+                engine.train_cell(world, spec, arm, rows, opts, updates)
+                parents["M-ii"] = arm
+        spec = engine.CellSpec("M-ii", "AB", 0)
+        arm, rows, _ = engine.build_cell_arm(world, spec, parents["M-ii"])
+        out["M-ii"] = reach_of(world, arm, rows)
+    finally:
+        world.device = dev
+    return {"passed": all(v["passed"] for v in out.values()), "arms": out}
+
+
+def reach_of(world: engine.WorldT, arm: Any, rows: Sequence[Any]) -> dict[str, Any]:
+    reach = p10train.gradient_reach(world.student, arm, rows[: world.batch], world.marker_index)
+    return {"passed": bool(reach["arm_with_gradient"] == reach["arm_parameters"] and reach["student_with_gradient"] == 0), "reach": reach}
+
+
+def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False, q_check_keys: Sequence[str] | None = None) -> dict[str, Any]:
     """Every gate on the world's data (the registered gates stage). Trains the small cells the gates need on CPU from their seeds; nothing registered is read."""
     spec = engine.CellSpec("M1", "AB", 0)
     arm, rows, opts = engine.build_cell_arm(world, spec, None)
@@ -160,9 +218,10 @@ def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, e
     finally:
         world.device = keep
     out = {
-        "G1": g1(world), "G2": g2(world, ma), "G4": {**g4_determinism(world, spec, 4), "round_trip": g4_round_trip(world, copy.deepcopy(ma), snap_dir, "gate/M-append")}, "G4-MPS": g4_mps(world, spec, cfg), "G5": g5(world, ma), "G6": g6(world),
+        "G1": g1(world, q_check_keys=q_check_keys), "G2": g2(world, ma), "G4": {**g4_determinism(world, spec, int(cfg["gates"].get("g4_repeat_updates", 20))), "round_trip": g4_round_trip(world, copy.deepcopy(ma), snap_dir, "gate/M-append"), "reach_all_arms": g4_reach_all(world)}, "G4-MPS": g4_mps(world, spec, cfg), "G5": g5(world, ma), "G6": g6(world),
         "G7": g7(f_before, ma, sh, world.student), "G8": g8(world, equivalence_records), "G9": g9(cfg, root) if run_checker else {"passed": None, "skipped": "checker not run"},
     }  # fmt: skip
     del before
+    out["G4"]["passed"] = bool(out["G4"]["passed"] and out["G4"]["reach_all_arms"]["passed"])  # the gate names gradient reach on every arm with a frozen part
     failed = [k for k, v in out.items() if v["passed"] is False or (require_mps and k == "G4-MPS" and v["passed"] is not True)]  # with ``require_mps`` a skipped MPS gate is a failure: it must have RUN and passed
     return {"gates": out, "failed": failed, "status": "ENGINEERING-FAILURE" if failed else "PASSED", "skipped": [k for k, v in out.items() if v["passed"] is None]}

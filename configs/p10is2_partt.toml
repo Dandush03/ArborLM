@@ -5,6 +5,8 @@ schema_version = 1
 study = "P10IS2"
 part = "T"
 spec_reference = "docs/decisions/ADR-0025-p10-i-s2-sequential-teacher-transfer.md"
+rulings_addendum = "docs/decisions/ADR-0025-addendum-part-t-rulings.md"  # the lead's rulings 1-15 on the Part T implementation (2026-11-20): they bind as the ADR does
+rulings_addendum_sha256 = "13b472dc0c0e9fac7100221f4f5bde7610b59aae3df1ce201a158652152ad14e"
 
 [memory]  # section 5.2 (as ADR-0022 section 3)
 rows_per_stage = 4096

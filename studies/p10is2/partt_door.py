@@ -62,5 +62,17 @@ class PartQDoor:
     def read_json(self, rel: str) -> Any:
         return read_json(self.verify(rel))
 
+    def q_check_keys(self) -> list[str]:
+        """The English keys of the Q_check blocks Part Q drew (public, listed in the reuse hashes): ONLY the ``keys`` field of each stored batch is taken; no score, text or token is used (gate G1's disjointness, ruling 3 and 6)."""
+        import fnmatch
+
+        out: set[str] = set()
+        for rel in sorted(self.files):
+            if fnmatch.fnmatch(rel, "qcheck/teacher_*/block_*/batch_*.json"):
+                out.update(self.read_json(rel)["keys"])
+        if not out:
+            raise StageRefused("refused: the Part Q lists name no Q_check batch: G1 cannot test Q_check's disjointness")
+        return sorted(out)
+
 
 __all__ = ["PartQDoor"]

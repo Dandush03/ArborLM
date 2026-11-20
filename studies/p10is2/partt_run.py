@@ -49,6 +49,7 @@ def train_all(world: engine.WorldT, snap_dir: Path, ckpt_dir: Path | None, updat
 @torch.no_grad()
 def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Mapping[str, Any]) -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
     """Every scored read of ONE replicate (a task of the registered evaluate stage): the records keyed ``"{arm}|{order}|{rep}"`` and the side records."""
+    scoring.require_evaluation_allowed(world)
     records: dict[str, dict[str, float]] = {}
     side: dict[str, Any] = {}
     routers = scoring.build_routers_t(world, r)
@@ -88,6 +89,7 @@ def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Ma
 
 def reference_task(world: engine.WorldT) -> dict[str, dict[str, float]]:
     """The reads of S0 and the teachers (the floor and the ceiling of every gap): one task of the evaluate stage."""
+    scoring.require_evaluation_allowed(world)
     return scoring.reference_records(world)
 
 
@@ -108,6 +110,7 @@ def combined_reference(world: engine.WorldT) -> dict[str, Any]:
     """S0's and the ensemble's combined records (one task of the combined stage)."""
     from studies.p10s2.memory import NullArm
 
+    scoring.require_evaluation_allowed(world)
     ctx = world.ctx
     return {"S0": combined_mod.score_combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
 
@@ -115,6 +118,7 @@ def combined_reference(world: engine.WorldT) -> dict[str, Any]:
 @torch.no_grad()
 def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path) -> dict[str, Any]:
     """C1 and C2 on the twelve arm-cells of ONE replicate (stage-2 snapshots of M-append, M-ii, D-seq and D-append in both orders, M-joint, D-joint, M-sep, D-sep): oracle route, never trained on."""
+    scoring.require_evaluation_allowed(world)
     ctx, out = world.ctx, {}
     ctx.seed_plan = world.plan(r)  # type: ignore[assignment]
     for o in ORDERS:

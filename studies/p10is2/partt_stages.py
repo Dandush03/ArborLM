@@ -86,6 +86,7 @@ def cmd_registered(args: argparse.Namespace) -> int:
     cfg = core.load_config("T", repo / core.CONFIG_T)
     run_dir = Path(args.run_dir)
     partt_tasks.require_predecessor(run_dir, args.stage, REGISTERED_STAGES)
+    partt_real.require_gates_passed(run_dir, args.stage)
     if args.stage in partt_tasks.TASK_STAGES:
         man = partt_tasks.run_stage_tasks(args.stage, plan, cfg, repo, run_dir, str(args.freeze_commit), partt_real.qdir_of(plan, Path(args.part_q_dir)))
         if man["status"] == "COMPLETE":  # the results are merged at the END of the stage that produces them

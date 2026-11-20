@@ -170,8 +170,11 @@ def test_merge_results_and_the_recomputation_requirement(tmp_path: Path) -> None
     assert json.loads((tmp_path / "registry.json").read_text()) == {"M1|AB|0|s:E_A": 0.5, "S0|-|-|s:E_A": 0.1}
     with pytest.raises(core.StageRefused, match="no recomputation record"):
         partt_real.require_recomputation(tmp_path)
-    (tmp_path / "recomputation.json").write_text(json.dumps({"ok": False, "differences": ["x"]}))
+    from studies.p10is2 import partt_recompute
+
+    partt_recompute.write(tmp_path, {"ok": False, "differences": ["x"]})
     with pytest.raises(core.StageRefused, match="ENGINEERING STOP — RECOMPUTATION"):
         partt_real.require_recomputation(tmp_path)
-    (tmp_path / "recomputation.json").write_text(json.dumps({"ok": True}))
+    (tmp_path / "recomputation_lead_record.json").write_text(json.dumps({"cause": "named by the lead"}))  # a failed attempt stands unless a lead record names the cause
+    partt_recompute.write(tmp_path, {"ok": True})
     assert partt_real.require_recomputation(tmp_path)["ok"]
