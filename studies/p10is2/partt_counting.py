@@ -88,7 +88,6 @@ def run_stages(repo: Path, run_dir: Path, plan: planmod.Plan, kind: str, launch:
     state_file = run_dir / "forced_events.json"
     if forced is not None and state_file.is_file():  # a resumed counting rehearsal: the forced events recorded once are not run again
         forced.update(read_json(state_file))
-    cfg = core.load_config("T", repo / core.CONFIG_T)
     for stage in partt_plan.STAGES:
         if not ok:
             break
@@ -104,7 +103,7 @@ def run_stages(repo: Path, run_dir: Path, plan: planmod.Plan, kind: str, launch:
                 if not ok:
                     break
             if not forced["pause_resume"]:
-                updates = max(1, int(cfg["rehearsal"]["updates"]) // 2)
+                updates = max(1, int(plan.data["calibration"]["U"]) // 2)  # ruling 27: the counting rehearsal trains at the calibrated U
                 ok = go("train-forced-pause", stage, EXIT_PAUSED, *base, "--pause-after-updates", str(updates))
                 if not ok:
                     break
@@ -154,7 +153,7 @@ def run_counting_rehearsal(repo: Path, run_dir: Path, *, launch: Launch = subpro
     rec = {
         **core.envelope("rehearsal", "T"), "kind_of_rehearsal": "counting", "status": "COMPLETE" if complete else "INCOMPLETE", "plan_file_sha256": file_sha256(plan_file), "caps_provisional": bool(plan.data.get("caps_provisional", True)),
         "stages": stages, "forced": forced, "problems": problems, "entry_point": "partt_registered.sh <stage> <run-dir> - --rehearsal, one fresh process per stage invocation; the stage's tasks are worker processes of the task runner",
-        "g4_mps": (gates_rec.get("gates") or {}).get("G4-MPS"), "platform": gates.platform_record(), "timings": {"total_seconds": clock() - t0, "process_seconds": timings}, "load": {"end": os.getloadavg()[0]},
+        "rehearsal_draw": read_json(run_dir / "rehearsal_draw.json") if (run_dir / "rehearsal_draw.json").is_file() else None, "g4_mps": (gates_rec.get("gates") or {}).get("G4-MPS"), "platform": gates.platform_record(), "timings": {"total_seconds": clock() - t0, "process_seconds": timings}, "load": {"end": os.getloadavg()[0]},
         "other_studies_alive": procs.other_studies_alive(), "charged_seconds": led.charged(), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers}},
         "plan_stage_items": {st: len(v) for st, v in plan.data["items"].items()}, "subset": "replicate 0; one cell of each of the ten trained types at full U; D_cal only",
     }  # fmt: skip
@@ -268,7 +267,7 @@ def run_measuring_rehearsal(repo: Path, run_dir: Path, part_q_dir: Path, *, part
     rec = {
         **core.envelope("rehearsal", "T"), "kind_of_rehearsal": "measuring", "status": "COMPLETE" if complete else "INCOMPLETE", "caps_provisional": True, "cannot_be_frozen_on": True, "caps_formula": partt_caps.CAPS_FORMULA,
         "entry_point": "partt_registered.sh <stage> <run-dir> - --rehearsal --rehearsal-kind measuring --plan-file <measuring plan>, one fresh process per stage; tasks are worker processes", "plan_file_sha256": file_sha256(plan_file),
-        "stages": stages, "problems": problems, "rates_seconds_per_unit": rates, "overhead_seconds": overhead, "subset_units": subset_units, "subset_processes": {s: max(1, len(rows)) for s, rows in process_table(run_dir).items()}, "world_build_seconds": mean_world_build(run_dir), "processes": process_table(run_dir), "timings": {"total_seconds": clock() - t0, "process_seconds": timings},
+        "stages": stages, "problems": problems, "rates_seconds_per_unit": rates, "overhead_seconds": overhead, "updates": int(plan.data["calibration"]["U"]), "rehearsal_draw": read_json(run_dir / "rehearsal_draw.json") if (run_dir / "rehearsal_draw.json").is_file() else None, "subset_units": subset_units, "subset_processes": {s: max(1, len(rows)) for s, rows in process_table(run_dir).items()}, "world_build_seconds": mean_world_build(run_dir), "processes": process_table(run_dir), "timings": {"total_seconds": clock() - t0, "process_seconds": timings},
         "load": {"start": load_start, "end": os.getloadavg()[0]}, "other_studies_alive": {"start": others_start, "end": procs.other_studies_alive()}, "platform": gates.platform_record(),
         "disk_written_bytes": sum(int(r.get("worker", {}).get("disk_written_bytes", 0)) for rows in process_table(run_dir).values() for r in rows.values()),
         "charged_seconds": led.charged(), "charged_before_freeze_seconds": led.charged() + sum(core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers}},

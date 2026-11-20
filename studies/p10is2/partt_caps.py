@@ -74,7 +74,7 @@ def basis_of(cfg: Mapping[str, Any]) -> dict[str, int]:
     return {"eval_panel": int(d["eval_panel"]), "control_subsample": int(d["control_subsample"]), "d_con_panel": int(d["d_con_panel"]), "seen_items": int(d.get("seen_items", 0)), "e_open_panel": int(d.get("e_open_panel", 0))}
 
 
-def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict[str, Any]:
+def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], counting_updates: int | None = None) -> dict[str, Any]:
     """The projected charge of the counting rehearsal (ruling 20), by the shared projection (units x measured seconds per unit of the kind + processes x the stage's measured per-process overhead):
 
     projected = sum over kinds (subset units of the kind x its measured rate) + sum over stages (processes the rehearsal starts in the stage x its overhead) + 2 x the training stage's overhead (the resumed worker of
@@ -85,8 +85,9 @@ def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Seq
     process per worker, + the same forced extra. The allowance is 2 x the projection."""
     rates, over = meas["rates_seconds_per_unit"], meas["overhead_seconds"]
     units, procs = meas.get("subset_units"), meas.get("subset_processes")
+    scale = 1.0 if not counting_updates or not meas.get("updates") else float(counting_updates) / float(meas["updates"])  # ruling 27: the counting rehearsal trains at the calibrated U, the measuring one at 200
     if units and procs:
-        work = sum(float(n) * float(rates[k]) for k, n in units.items())
+        work = sum(float(n) * (scale if k.startswith("train:") else 1.0) * float(rates[k]) for k, n in units.items())
         overhead = sum(int(procs[s]) * float(over[s]) for s in procs)
         basis = "subset units x rates + processes x overhead"
     else:
@@ -104,12 +105,12 @@ def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Seq
 
 def calibration_projection_seconds(meas: Mapping[str, Any], cfg: Mapping[str, Any]) -> float:
     """The projected charge of calibration (ruling 22), by the same measured per-update rates: the sum over the calibration units of updates x the rate of the unit's module type (store: M1, LoRA: D1, E-table), plus one
-    D_cal-sized scoring per unit snapshot at the plain scoring rate (D_cal is counted at the D_con panel's size, the config's own D_cal-sized figure), plus one process overhead of the training stage per unit."""
+    D_cal-sized scoring per unit snapshot at the plain scoring rate (D_cal is counted at its real size, ``data.d_cal_panel``), plus one process overhead of the training stage per unit."""
     from . import calibration
 
     rates, over = meas["rates_seconds_per_unit"], meas["overhead_seconds"]
     per = {"store": "train:M1", "lora": "train:D1", "etable": "train:E-table"}
-    n_dcal = int(cfg["data"]["d_con_panel"])
+    n_dcal = int(cfg["data"]["d_cal_panel"])
     total = 0.0
     for u in calibration.calibration_units(cfg):
         total += float(u["updates"]) * float(rates[per[u["module"]]]) + max(1, len(u.get("snapshots") or [])) * n_dcal * float(rates["score:plain"]) + float(over["train"])
@@ -123,11 +124,11 @@ def calibration_cap_hours(meas: Mapping[str, Any], cfg: Mapping[str, Any]) -> fl
     return math.ceil(2.0 * calibration_projection_seconds(meas, cfg) / 3600.0 * 100.0 - 1e-9) / 100.0
 
 
-def counting_allowance_hours(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]]) -> float:
+def counting_allowance_hours(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], counting_updates: int | None = None) -> float:
     """``counting_allowance_hours`` = 2 x the projected counting charge, in hours rounded UP to 0.01 h; fixed in the candidate plan BEFORE the counting rehearsal runs (ruling 20)."""
     import math
 
-    return math.ceil(2.0 * counting_projection_seconds(meas, items)["seconds"] / 3600.0 * 100.0 - 1e-9) / 100.0
+    return math.ceil(2.0 * counting_projection_seconds(meas, items, counting_updates)["seconds"] / 3600.0 * 100.0 - 1e-9) / 100.0
 
 
 def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], basis: Mapping[str, int], charge_seconds: float, allowance_seconds: float = 0.0) -> dict[str, float]:

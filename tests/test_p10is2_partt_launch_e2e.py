@@ -159,9 +159,12 @@ def test_measuring_caps_calibration_plan_counting_freeze_then_a_registered_stage
     cal_dir.mkdir(parents=True)
     cal = cal_dir / "calibration_0.json"
     core.write_record(cal, {**core.envelope("calibration", "T"), **{k: v for k, v in TINY_CALIB.items() if k != "records"}, "stand_in": False, "code_hashes": planmod.frozen_file_hashes(r, "T"), "repetition": 0}, overwrite=False)
-    core.Ledger(cal_dir / "charged_ledger.json", "T", 1e12).charge_process("calibration", "calibration", "main", 5.0)
-    partt_stages.log_calibration(r, {"event": "start", "repetition": 0, "reason": "", "directory": str(cal_dir)})
-    partt_stages.log_calibration(r, {"event": "end", "repetition": 0, "record": str(cal), "record_sha256": hashlib.sha256(cal.read_bytes()).hexdigest()})
+    session = core.utc_stamp()
+    core.Ledger(cal_dir / "charged_ledger.json", "T", 1e12).charge_process("calibration", session, "main", 5.0)  # the session's start UTC is the ledger entry's run (ruling 26)
+    partt_stages.log_calibration(r, {"event": "start", "repetition": 0, "session": session, "reason": "", "directory": str(cal_dir)})
+    partt_stages.log_calibration(r, {"event": "end", "repetition": 0, "session": session, "record": str(cal), "record_sha256": hashlib.sha256(cal.read_bytes()).hexdigest()})
+    git(r, "add", "-A")
+    git(r, "commit", "-q", "-m", "calibration log")  # ruling 26: the plan and the freeze read the COMMITTED log
     # 4. the candidate plan (the charge from the ledgers by rule), the registered caps by code, the plan again
     plan_args = ["candidate-plan", "--run-dir", str(runs / "registered"), "--part-q-dir", str(q), "--part-q-plan", str(pq_plan), "--manifests", str(manifests), "--measuring-rehearsal", str(meas_path), *common]
     assert partt_stages.main(plan_args) == 0

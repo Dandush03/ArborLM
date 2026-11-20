@@ -57,7 +57,13 @@ def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str, door: Any = None)
         if result["draws_label"] not in ("DISJOINT DRAWS", "OVERLAPPING DRAWS"):
             raise core.StageRefused(f"refused: Part Q's draws label is {result['draws_label']!r}: Part T has no material")
         gloss = door.read_json("outputs/gloss_bank.json") if door is not None else read_json(qdir / "outputs/gloss_bank.json")
-        return partt_rehearsal.rehearsal_bundle(bundle, cfg, door.q_check_keys() if door is not None else ()), rehearsal_draws(pool, cfg, per), gloss, result
+        from studies.p10s2.text import normalize
+
+        rb = partt_rehearsal.rehearsal_bundle(bundle, cfg, door.q_check_keys() if door is not None else ())
+        stand_in_refs = {normalize(r) for n in ("E_A", "E_B", "E_C") for it in rb.panels[n] for refs in it.refs.values() for r in refs}
+        info: dict[str, Any] = {}
+        draws = rehearsal_draws(pool, cfg, per, stand_in_refs, info)
+        return rb, draws, gloss, {**result, "rehearsal_draw": info}
     if result["draws_label"] == "DISJOINT DRAWS":
         idx = result["draws"]["indices"]
         draws = [{c: [pool[c][i] for i in idx[c][r]] for c in core.TASKS} for r in range(3)]
@@ -75,10 +81,23 @@ def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str, door: Any = None)
     return bundle, draws, gloss, result
 
 
-def rehearsal_draws(pool: Mapping[str, Sequence[TrainItem]], cfg: Mapping[str, Any], per: int = 8000) -> list[dict[str, list[TrainItem]]]:
-    """The rehearsal's own training draw (registry revision 5: seed 252002 = ``gen(1)`` of the rehearsal set), A then B, one generator; never Part Q's registered indices."""
+def rehearsal_draws(pool: Mapping[str, Sequence[TrainItem]], cfg: Mapping[str, Any], per: int = 8000, forbidden: set[str] | None = None, report: dict[str, Any] | None = None) -> list[dict[str, list[TrainItem]]]:
+    """The rehearsal's own training draw (registry revision 5: seed 252002 = ``gen(1)`` of the rehearsal set), A then B, one generator; never Part Q's registered indices. Ruling 24 (audit N9): D_cal stands in for the
+    evaluation panels in a rehearsal, so every item whose output equals (normalized) a stand-in reference is DROPPED from the draw by the rule Part Q applied to evaluation references; the count dropped per capability
+    goes into ``report`` and the rehearsal record. ``forbidden`` is None only in a test of what G1 does without the drop."""
+    from studies.p10s2.text import normalize
+
     g = engine.SeedPlanT(cfg, "rehearsal", 0).gen(1, "rehearsal training draw")
-    return [{c: [pool[c][k] for k in torch.randperm(len(pool[c]), generator=g).tolist()[:per]] for c in core.TASKS}]
+    draw = {c: [pool[c][k] for k in torch.randperm(len(pool[c]), generator=g).tolist()[:per]] for c in core.TASKS}
+    dropped = {c: 0 for c in core.TASKS}
+    if forbidden is not None:
+        for c in core.TASKS:
+            kept = [x for x in draw[c] if normalize(x.target) not in forbidden]
+            dropped[c] = len(draw[c]) - len(kept)
+            draw[c] = kept
+    if report is not None:
+        report.update({"rule": "items whose normalized output equals a normalized stand-in reference are dropped (ruling 24)", "dropped_per_capability": dropped, "drawn_per_capability": {c: len(draw[c]) + dropped[c] for c in core.TASKS}, "applied": forbidden is not None})
+    return [draw]
 
 
 def shared_share(draws: Sequence[Mapping[str, Sequence[TrainItem]]]) -> dict[str, float]:
@@ -117,12 +136,18 @@ def draw_overlap(calibration: Sequence[Mapping[str, Sequence[TrainItem]]], regis
 
 
 _DEADLINE: list[float | None] = []
+_STATE: list[Path | None] = []
 
 
 def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: int | None, draw_index: int) -> dict[str, Any]:
     """One calibration training unit on a calibration draw's seeds (the world is built in ``calibration`` mode with the calibration draws), scored on D_cal. A non-finite loss is DIVERGED (``diverged``, no
     mean at the diverged snapshot); the caller applies ``calibration``'s rules. A ladder unit has ``snapshots``; each is scored on D_cal on CPU while the optimizer state is kept."""
     cap, module = unit["capability"], unit["module"]
+    state_file = (_STATE[-1] / f"{unit['id']}.json") if _STATE and _STATE[-1] is not None else None
+    if state_file is not None and state_file.is_file():  # ruling 25: a unit already run in an earlier session is read back, never drawn again (a non-finite outcome is a stored outcome, not retried)
+        cached = json.loads(state_file.read_text())
+        cached["means"] = {int(k): v for k, v in cached["means"].items()}
+        return cached  # type: ignore[no-any-return]
     if _DEADLINE and _DEADLINE[-1] is not None and time.monotonic() > _DEADLINE[-1]:
         raise calibration.CalibrationStop("calibration reached its cap (ruling 22): the work returns to the lead; nothing is extended here")
     saved = (world.layer, world.store_lr, world.lora_lr, getattr(world, "etable_lr", None), world.ctx.router_layer)
@@ -149,22 +174,28 @@ def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: 
         if rec["status"] == "ERROR":
             raise RuntimeError(f"calibration unit {unit['id']} stopped on a code or environment error (an engineering stop, never DIVERGED): {rec['error']}")
         diverged = rec["status"] == "STOPPED_NONFINITE"
-        return {"unit": unit["id"], "rate": rate, "layer": world.layer, "means": means, "diverged": diverged, "status": rec["status"], "error": rec["error"], "seconds_per_update": rec["seconds_per_update"]}
+        result = {"unit": unit["id"], "rate": rate, "layer": world.layer, "means": means, "diverged": diverged, "status": rec["status"], "error": rec["error"], "seconds_per_update": rec["seconds_per_update"]}
+        if state_file is not None:
+            state_file.parent.mkdir(parents=True, exist_ok=True)
+            write_json(state_file, core.jsonable(result))
+        return result
     finally:
         world.layer, world.store_lr, world.lora_lr, el, world.ctx.router_layer = saved
         if el is not None:
             world.etable_lr = el  # type: ignore[attr-defined]
 
 
-def run_calibration(world: engine.WorldT, cfg: Mapping[str, Any], deadline: float | None = None) -> dict[str, Any]:
+def run_calibration(world: engine.WorldT, cfg: Mapping[str, Any], deadline: float | None = None, state_dir: Path | None = None) -> dict[str, Any]:
     """The whole of section 7.1 on a calibration world: the store's and LoRA's rate grids (draw 0, store at L = 4), the store at L = 12 at its chosen rate, E-table's grid at the chosen layer, the convergence
     ladder (M1 and D1 on each capability, draw 1, to 8,000 updates), then U and the pilot. Returns the record the Part T plan is built from. A stop (every rate diverged, a non-finite value in the ladder
     or the pilot) is ``calibration.CalibrationStop``: the work returns to the human lead."""
     _DEADLINE.append(deadline)
+    _STATE.append(state_dir)
     try:
         return _run_calibration(world, cfg)
     finally:
         _DEADLINE.pop()
+        _STATE.pop()
 
 
 def _run_calibration(world: engine.WorldT, cfg: Mapping[str, Any]) -> dict[str, Any]:
@@ -325,10 +356,10 @@ class StageGuard:
         os._exit(4)
 
 
-def calibration_of(cfg: Mapping[str, Any], plan: Any, mode: str) -> dict[str, Any]:
+def calibration_of(cfg: Mapping[str, Any], plan: Any, mode: str, kind: str = "counting") -> dict[str, Any]:
     """The calibration block a stage uses: the plan's in a registered run; in a rehearsal the same with U = the ADR's 200 updates (section 10), whatever the plan's U (the measuring rehearsal needs no calibration result)."""
     calib = dict(plan.data["calibration"])
-    if mode == "rehearsal":
+    if mode == "rehearsal" and kind == "measuring":  # ruling 27: the measuring rehearsal trains the ADR's 200 updates; the counting rehearsal the calibrated U (the plan's)
         calib["U"] = int(cfg["rehearsal"]["updates"])
     return calib
 
@@ -336,7 +367,7 @@ def calibration_of(cfg: Mapping[str, Any], plan: Any, mode: str) -> dict[str, An
 def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered", kind: str = "counting") -> dict[str, Any]:
     """One registered Part T stage over the run directory (``train``, ``evaluate``, ``controls``, ``combined``, ``gates``, ``analysis``, ``report``). The entry point has checked identity."""
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    calib = calibration_of(cfg, plan, mode)
+    calib = calibration_of(cfg, plan, mode, kind)
     qdir = qdir_of(plan, qdir)
     st0 = partt_rehearsal.stats_begin(run_dir)
     t_proc = time.monotonic()
@@ -433,7 +464,7 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, pa
     run = engine.run_config(cfg, layer=int(cfg["calibration"]["rate_grid_read_layer"]), updates=int(cfg["calibration"]["rate_grid_updates"]), store_rate=0.003, lora_rate=0.0003, device=cfg["training"]["training_device"])
     w = engine.build_world_t(bundle, cfg, calibration_draws(pool, cfg, [off, off + 1]), run, plan_mode="calibration")
     w.plan_offset = off
-    rec = run_calibration(w, cfg, deadline=time.monotonic() + cap_seconds)
+    rec = run_calibration(w, cfg, deadline=time.monotonic() + cap_seconds, state_dir=run_dir / "state")
     rec["overlap_with_registered_draws"] = draw_overlap(calibration_draws(pool, cfg, [off, off + 1]), registered_draws)  # ruling 2: stated, by code
     rec["part_q_manifest_sha256"] = file_sha256(qdir / "manifest.json")
     rec["code_hashes"] = planmod.frozen_file_hashes(repo, "T")
@@ -444,20 +475,22 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, pa
 
 
 # --- worker tasks (one process each; ``partt_tasks`` derives them from the frozen plan) --------------------------------------------------------------------------
-def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered", stop_after: int | None = None) -> dict[str, Any]:
+def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "registered", stop_after: int | None = None, kind: str = "counting") -> dict[str, Any]:
     """The body of one worker. A trained cell: parent from its snapshot, resume from its checkpoint, train, snapshot; the cell record is written either way; the RESULT file only if the cell COMPLETED (a cell that
     stopped on a non-finite loss or an error exits non-zero: the runner keeps a failed record and the analysis refuses while the item error stands). Scoring and the combined tasks write their records as the
     result."""
     from . import partt_tasks
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    calib = calibration_of(cfg, plan, mode)
+    calib = calibration_of(cfg, plan, mode, kind)
     qdir = qdir_of(plan, qdir)
     st0 = partt_rehearsal.stats_begin(run_dir)
     t_proc = time.monotonic()
     scoring.KIND_SECONDS.clear()
     scoring.KIND_CALLS.clear()
-    w, gloss, _ = build_world_real(repo, cfg, qdir, calib, mode, door_of(plan, qdir))
+    w, gloss, qres_task = build_world_real(repo, cfg, qdir, calib, mode, door_of(plan, qdir))
+    if mode == "rehearsal" and stage == "gates" and not (run_dir / "rehearsal_draw.json").is_file():  # ruling 24: what the draw dropped is recorded in the rehearsal's record
+        write_json(run_dir / "rehearsal_draw.json", qres_task.get("rehearsal_draw") or {})
     world_build = time.monotonic() - t_proc
     d = partt_tasks.tasks_dir(run_dir, stage)
     sid = partt_tasks.safe(task_id)
