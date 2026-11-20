@@ -54,6 +54,7 @@ def render(status: Mapping[str, Any], derived: Mapping[str, Any] | None, ctx: Ma
     g = derived["GENERAL-QUALITY"]
     blocks.append(line("GENERAL-QUALITY", g["label"] + (f" ({g['note']})" if g.get("note") else ""), ctx))
     blocks.append(line("MODIFICATION (M-ii, descriptive)", derived["MODIFICATION"]["label"], ctx))
+    blocks.append(line("DISCLOSED LIMITATION (ruling 19)", "gate G1 tests Q_check against the training streams by English key only: Part Q stored no Q_check identity groups, so a paraphrase that shares an identity group with a training item is not detected", ctx))
     blocks.append(core.under_line(core.FIXED_NOTE))
     text = "\n\n".join(blocks)
     return check(text)

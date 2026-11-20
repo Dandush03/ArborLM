@@ -103,6 +103,11 @@ def ledger_of(plan: planmod.Plan, run_dir: Path) -> core.Ledger:
 
 def charge_before_freeze(plan: planmod.Plan) -> float:
     """Everything Part T charged before the freeze (the measuring rehearsal, calibration and its repetitions, earlier counting rehearsals), as the plan RECORDED it: it counts against the total cap (ruling 4)."""
+    rec = plan.path.parent / "partt_freeze_record.json" if plan.path is not None else None
+    if rec is not None and rec.is_file():  # ruling 17: after the freeze the registered ledger starts from plan charge + the counting rehearsal's charge, as the freeze recorded
+        start = (read_json(rec).get("pre_freeze_charge") or {}).get("registered_ledger_starts_from_seconds")
+        if start is not None:
+            return float(start)
     return float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
 
 

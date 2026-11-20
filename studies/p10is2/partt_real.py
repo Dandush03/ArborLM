@@ -56,7 +56,7 @@ def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str, door: Any = None)
         if result["draws_label"] not in ("DISJOINT DRAWS", "OVERLAPPING DRAWS"):
             raise core.StageRefused(f"refused: Part Q's draws label is {result['draws_label']!r}: Part T has no material")
         gloss = door.read_json("outputs/gloss_bank.json") if door is not None else read_json(qdir / "outputs/gloss_bank.json")
-        return partt_rehearsal.rehearsal_bundle(bundle, cfg), rehearsal_draws(pool, cfg, per), gloss, result
+        return partt_rehearsal.rehearsal_bundle(bundle, cfg, door.q_check_keys() if door is not None else ()), rehearsal_draws(pool, cfg, per), gloss, result
     if result["draws_label"] == "DISJOINT DRAWS":
         idx = result["draws"]["indices"]
         draws = [{c: [pool[c][i] for i in idx[c][r]] for c in core.TASKS} for r in range(3)]

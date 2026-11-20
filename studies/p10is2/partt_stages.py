@@ -335,6 +335,18 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
     return 0
 
 
+def counting_charge_of(counting: dict[str, Any]) -> float:
+    """The counting rehearsal's charge, READ from its own ledger (the file the record names, re-read now) and checked against what the record says (ruling 17)."""
+    ledgers = counting.get("charged_ledgers") or {}
+    own = next((p for p in ledgers if p.endswith("charged_ledger.json")), None)
+    if own is None or not Path(own).is_file():
+        raise StageRefused("refused: the counting rehearsal's record names no ledger that exists: its charge cannot be read (ruling 17)")
+    seconds = core.Ledger(Path(own), "T", 1e12).charged()
+    if abs(seconds - float(counting.get("charged_seconds", -1.0))) > 1e-6:
+        raise StageRefused(f"refused: the counting rehearsal's ledger holds {seconds} s but its record says {counting.get('charged_seconds')} s")
+    return seconds
+
+
 def charged(ledger: Path, stage: str, mode: str, seconds: float) -> None:
     """One Part T ledger: every Part T process (calibration and its repetitions, the rehearsals, a counting rehearsal) charges its wall time, also when it fails."""
     core.Ledger(ledger, "T", 1e12).charge_process(stage, mode, "main", seconds)
@@ -401,6 +413,13 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused(f"refused: gate G4 MPS against CPU must have RUN and PASSED on this machine before the freeze (a skipped gate is not a pass); the counting rehearsal's record has: {mps}")
     if not reh["passed"]:
         raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")
+    counting_charge = counting_charge_of(counting)  # ruling 17: read from the counting rehearsal's ledger, recorded, added to the pre-freeze charge the registered ledger starts from
+    plan_charge = float(charge["seconds"])
+    projected = partt_caps.project_stage_seconds(plan.data["items"], plan.data["task_units_basis"], meas["rates_seconds_per_unit"], meas["overhead_seconds"])
+    need = core.total_cap_seconds(plan_charge + counting_charge, projected)
+    total_cap = float(cfg["stage_caps"]["total_hours"]) * 3600.0
+    if need > total_cap + 1e-6:
+        raise StageRefused(f"refused: plan charge {plan_charge:.1f} s + counting charge {counting_charge:.1f} s + 2 x projected {2 * sum(projected.values()):.1f} s = {need:.1f} s exceeds the total cap {total_cap:.1f} s (ruling 17: no cap is recomputed after counting)")
     attest = [x for x in args.attest_sealed_unopened.split(",") if x]
     if not args.seal_broken and set(attest) != {"lead", "implementer", "auditor"}:
         raise StageRefused("refused: the record must state, for the lead, the implementer and the auditor, that none has opened a sealed value, or declare the seal broken")
@@ -410,6 +429,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rec = {
         **core.envelope("freeze_record", "T"), "plan_file_sha256": plan_sha, "counting_rehearsal": {"path": str(Path(args.counting_rehearsal).resolve()), "sha256": file_sha256(Path(args.counting_rehearsal))},
         "attestations": {"sealed_values_unopened_by": attest}, "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
+        "pre_freeze_charge": {"plan_seconds": plan_charge, "counting_rehearsal_seconds": counting_charge, "registered_ledger_starts_from_seconds": plan_charge + counting_charge, "total_cap_seconds": total_cap, "needed_seconds": need},
     }  # fmt: skip
     record.parent.mkdir(parents=True, exist_ok=True)
     write_json(record, core.jsonable(rec))

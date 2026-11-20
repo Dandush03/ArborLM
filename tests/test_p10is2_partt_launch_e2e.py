@@ -159,6 +159,10 @@ def test_plan_measuring_counting_freeze_then_a_registered_stage_refuses_on_a_cha
     # 4. the counting rehearsal against that plan, then the freeze
     count = partt_counting.run_counting_rehearsal(r, runs / "counting")
     assert count["status"] == "COMPLETE" and count["forced"] == {"pause_resume": True, "paused_identity_restore": True}
+    freeze_args = ["freeze", "--measuring-rehearsal", str(meas_path), "--counting-rehearsal", str(runs / "counting" / "rehearsal_counting.json"), "--attest-sealed-unopened", "lead,implementer,auditor", *common]
+    assert partt_stages.main(freeze_args) == partt_stages.EXIT_REFUSED  # ruling 17 as ruled: plan charge + counting charge + 2 x projected exceeds a total cap that was computed before counting (PENDING LEAD REVIEW, second addendum)
+    assert partt_stages.counting_charge_of(count) > 0
+    monkeypatch.setattr(partt_stages, "counting_charge_of", lambda rec: 0.0)  # only so that the rest of the sequence can be exercised: the refusal above is the real behaviour
     assert partt_stages.main(["freeze", "--measuring-rehearsal", str(meas_path), "--counting-rehearsal", str(runs / "counting" / "rehearsal_counting.json"), "--attest-sealed-unopened", "lead,implementer,auditor", *common]) == 0
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "freeze")

@@ -440,3 +440,52 @@ def test_no_part_t_module_holds_an_integer_literal_in_a_registered_or_test_seed_
             if isinstance(n, ast.Constant) and isinstance(n.value, int) and not isinstance(n.value, bool) and (250001 <= n.value <= 259999 or 330201 <= n.value <= 330299 or 934001 <= n.value <= 934999) and not (f.name == "core.py" and n.value in (252901, 252915)):  # the only exception: Part Q's own rehearsal-range assertion (252901-252914)
                 bad.append(f"{f.relative_to(ROOT)}:{n.lineno}: {n.value}")
     assert bad == [], bad
+
+
+# --- rulings 16, 17, 19 (second addendum) --------------------------------------------------------------------------------------------------------------
+def test_ruling_16_the_rehearsal_bundle_is_disjoint_from_every_e_set_and_q_check_and_refused_otherwise() -> None:
+    import dataclasses
+
+    from p10is2_engine_fixtures import bundle
+
+    from studies.p10is2 import partt_rehearsal
+
+    b = bundle()
+    q_check = [i.key for i in b.panels["Q_check"]] if "Q_check" in b.panels else []
+    rb = partt_rehearsal.rehearsal_bundle(b, CFG, q_check)
+    forbidden = {i.key for n in ("E_A", "E_B", "E_C", "E_open", "Q_check") for i in b.panels.get(n, [])} | set(q_check)
+    for n in ("E_A", "E_B", "E_C", "D_cal"):
+        assert not ({i.key for i in rb.panels[n]} & forbidden), n
+    leaky = dataclasses.replace(b, panels={**b.panels, "E_open": [b.panels["D_cal"][0]]})  # an evaluation set that holds a D_cal item: the rehearsal bundle must refuse
+    with pytest.raises(core.StageRefused, match="ruling 16"):
+        partt_rehearsal.rehearsal_bundle(leaky, CFG)
+    with pytest.raises(core.StageRefused, match="ruling 16"):
+        partt_rehearsal.rehearsal_bundle(b, CFG, [b.panels["D_cal"][1].key])  # a Q_check key that is a D_cal item
+
+
+def test_ruling_17_the_counting_charge_is_read_from_its_ledger_and_the_registered_ledger_starts_from_plan_plus_counting(tmp_path: Path) -> None:
+    led = tmp_path / "charged_ledger.json"
+    core.Ledger(led, "T", 1e12).charge_process("train", "counting", "main", 123.0)
+    rec = {"charged_ledgers": {str(led): 123.0}, "charged_seconds": 123.0}
+    assert partt_stages.counting_charge_of(rec) == 123.0
+    with pytest.raises(core.StageRefused, match="holds"):
+        partt_stages.counting_charge_of({**rec, "charged_seconds": 5.0})  # the record disagrees with the ledger
+    with pytest.raises(core.StageRefused, match="no ledger"):
+        partt_stages.counting_charge_of({"charged_seconds": 1.0})
+    freeze_dir = tmp_path / "freeze"
+    freeze_dir.mkdir()
+    plan = planmod.Plan({"kind": "freeze_plan", "study": core.STUDY, "schema": core.SCHEMA, "part": "T", "items": {}, "stage_caps": {}, "charge_before_freeze": {"seconds": 40.0}}, "T", freeze_dir / "partt_plan.json")
+    assert partt_tasks.charge_before_freeze(plan) == 40.0
+    (freeze_dir / "partt_freeze_record.json").write_text(json.dumps({"pre_freeze_charge": {"registered_ledger_starts_from_seconds": 163.0}}))
+    assert partt_tasks.charge_before_freeze(plan) == 163.0
+
+
+def test_ruling_19_the_report_states_the_q_check_limitation() -> None:
+    from p10is2_partt_fixtures import quantities
+
+    from studies.p10is2 import labels as L
+    from studies.p10is2 import report
+
+    q = quantities()
+    text = report.render(L.study_status(q.reg, required=partt_plan.required_keys()), L.derive_all(q), {"U": 2000, "converged": True, "draws": "DISJOINT DRAWS", "shared_share": {}})
+    assert "DISCLOSED LIMITATION (ruling 19)" in text and "by English key only" in text

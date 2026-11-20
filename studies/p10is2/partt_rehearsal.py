@@ -74,13 +74,17 @@ def split_by_group(items: Sequence[Any], parts: int) -> list[list[Any]]:
     return out
 
 
-def rehearsal_bundle(b: DataBundle, cfg: Mapping[str, Any]) -> DataBundle:
+def rehearsal_bundle(b: DataBundle, cfg: Mapping[str, Any], q_check_keys: Sequence[str] = ()) -> DataBundle:
     """The bundle a rehearsal world is built from: D_cal is split by identity group into four disjoint parts; the first three are E_A, E_B and E_C of the rehearsal world and the fourth is D_cal; E_open is empty.
     Every scoring function and gate G1 therefore run unchanged on training-side items only; a rehearsal world holds no evaluation item. The control subsample is the first ``control_subsample`` items of E_A."""
     d_cal = list(b.panels["D_cal"])
     a, bb, c, rest = split_by_group(d_cal, 4)
     if min(len(a), len(bb), len(c), len(rest)) < 2:
         raise core.StageRefused(f"refused: D_cal ({len(d_cal)} items) is too small to split into four disjoint parts of at least two items: a rehearsal has nothing to score")
+    forbidden = {i.key for n in ("E_A", "E_B", "E_C", "E_open", "Q_check") for i in b.panels.get(n, [])} | set(q_check_keys)
+    hit = sorted(i.key for part in (a, bb, c, rest) for i in part if i.key in forbidden)
+    if hit:  # ruling 16: no evaluation item and no Q_check item may be in any rehearsal
+        raise core.StageRefused(f"refused: {len(hit)} rehearsal item(s) are evaluation or Q_check items (ruling 16): {hit[:3]}")
     sub = int(cfg["data"]["control_subsample"])
     panels = dict(b.panels)
     panels["E_A"], panels["E_B"], panels["E_C"], panels["D_cal"], panels["E_open"] = a, bb, c, rest, []
