@@ -151,9 +151,9 @@ def read_conditions(probe: Probe, q: Mapping[str, Any], *, condition: str, expec
     try:
         table = probe.table()
         own = probe.own if probe.own is not None else family(table, probe.pid)
-        r["other_study_processes"] = [f"{p}: {c[:160]}" for p, _, c in table if p not in own and STUDY_STAGE_RE.search(c) and not (probe.allow and probe.allow.search(c))]
-        r["tool_shells"] = [f"{p}: {c[:120]}" for p, _, c in table if p not in own and TOOL_SHELL_MARK in c]
-        r["vm_processes"] = [f"{p}: {c[:160]}" for p, _, c in table if p not in own and any(x.search(c) for x in pats["vm"])]
+        r["other_study_processes"] = [f"{p}: {c}" for p, _, c in table if p not in own and STUDY_STAGE_RE.search(c) and not (probe.allow and probe.allow.search(c))]
+        r["tool_shells"] = [f"{p}: {c}" for p, _, c in table if p not in own and TOOL_SHELL_MARK in c]
+        r["vm_processes"] = [f"{p}: {c}" for p, _, c in table if p not in own and any(x.search(c) for x in pats["vm"])]  # full command lines (no cut): the task must be identifiable]
         r["app_present"] = any(x.search(c) for _, _, c in table for x in pats["app"])
         r["cli_present"] = any(x.search(c) for _, _, c in table for x in pats["cli"])
         r["claude_pids"] = sorted(p for p, _, c in table if any(x.search(c) for x in pats["app"] + pats["cli"]))

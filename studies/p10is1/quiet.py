@@ -105,10 +105,10 @@ def other_study_processes(commands: Sequence[tuple[int, str]] | None = None, own
     """Processes of any ArborLM study's stage (``python -m studies.p9...`` / ``studies.p10...``, this study's other stages included) other than this one's own family."""
     if commands is not None:
         me = own if own is not None else own_pids()
-        return [f"{pid}: {cmd[:160]}" for pid, cmd in commands if pid not in me and STUDY_STAGE_RE.search(cmd) and not (allow and allow.search(cmd))]
+        return [f"{pid}: {cmd}" for pid, cmd in commands if pid not in me and STUDY_STAGE_RE.search(cmd) and not (allow and allow.search(cmd))]
     table = machine.ps_table()
     me = own if own is not None else machine.family(table, os.getpid())
-    return [f"{pid}: {cmd[:160]}" for pid, _, cmd in table if pid not in me and STUDY_STAGE_RE.search(cmd) and not (allow and allow.search(cmd))]
+    return [f"{pid}: {cmd}" for pid, _, cmd in table if pid not in me and STUDY_STAGE_RE.search(cmd) and not (allow and allow.search(cmd))]
 
 
 def power_state() -> dict[str, Any]:

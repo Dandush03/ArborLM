@@ -100,7 +100,7 @@ def test_a_refused_baseline_cannot_reach_a_candidate_plan(shape: str, tmp_path: 
     assert reason.startswith("NOT SETTLED") if shape != "above_ceiling" else "ABOVE CEILING" in reason
     p = repo / core.CONFIG
     p.write_text(qr.set_quiet_figures(p.read_text(), baseline_provisional="false", load_p95="130", load_limit="180", baseline_record_path='"results/refused/record.json"', baseline_record_sha256=f'"{file_sha256(out / baseline.RECORD)}"'))
-    with pytest.raises(core.StageRefused, match="not an ACCEPTED quiet baseline"):
+    with pytest.raises(core.StageRefused, match="not an ACCEPTED quiet baseline|other \\[quiet\\] rules"):
         candidate(repo, tmp_path)
     assert not (repo / core.PLAN).exists()
 
@@ -119,7 +119,7 @@ def test_the_baseline_taken_by_the_command_flows_into_the_config_the_plan_and_th
     repo = provisional_repo(tmp_path)
     shutil.rmtree(qr.CANON / "first", ignore_errors=True)  # the synthetic mirror of the provisional repo is not this study's baseline
     canon_first = qr.CANON / "first"  # the baseline is taken by the command in the canonical root, then its record and samples are copied into results/ and committed
-    rec = qr.run_session(qr.FakeMachine(lambda t: (1.30 + (0.05 if int(t / 10) % 7 == 0 else 0.0), 1.30)), canon_first, qr.qcfg())
+    rec = qr.run_session(qr.FakeMachine(lambda t: (1.30 + (0.05 if int(t / 10) % 7 == 0 else 0.0), 1.30)), canon_first, qr.qcfg(), sessions_log=repo / baseline.SESSIONS_LOG)
     assert rec["status"] == "ACCEPTED" and rec["accepted"]["load_limit"] == 185 and rec["test_root"] is False and rec["root"] == str(qr.CANON.resolve())
     out = repo / "results" / "p10is1-quiet-baseline-e2e"
     out.mkdir(parents=True)
@@ -160,7 +160,7 @@ def test_the_freeze_prints_the_report_notice_for_a_limit_above_250_and_it_is_not
     repo = provisional_repo(tmp_path)
     shutil.rmtree(qr.CANON / "first", ignore_errors=True)
     canon_first = qr.CANON / "first"
-    rec = qr.run_session(qr.FakeMachine(lambda t: (2.20, 2.20)), canon_first, qr.qcfg())
+    rec = qr.run_session(qr.FakeMachine(lambda t: (2.20, 2.20)), canon_first, qr.qcfg(), sessions_log=repo / baseline.SESSIONS_LOG)
     assert rec["accepted"]["load_limit"] == 270
     out = repo / "results" / "high"
     out.mkdir(parents=True)

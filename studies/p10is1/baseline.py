@@ -17,6 +17,7 @@
 
 import argparse
 import json
+import os
 import sys
 import time
 from collections.abc import Callable, Mapping, Sequence
@@ -141,6 +142,54 @@ def check_second(reason: str, replaces: Path, registered_run_dir: Path) -> dict[
     return {"replaces": str(rec_path.resolve()), "replaces_sha256": file_sha256(rec_path), "earlier_attempts": core.read_record(rec_path, "quiet_baseline").get("attempts", [])}  # the first baseline's attempts stay listed
 
 
+SESSIONS_LOG = "results/p10is1-quiet-baseline/SESSIONS.log"  # repository-tracked; written by the baseline command OUTSIDE any registered stage (the baseline is not one)
+
+
+def default_sessions_log() -> Path:
+    return core.repo_root() / SESSIONS_LOG
+
+
+def append_session_line(log: Path, directory: str, session: int, rec: Mapping[str, Any], status: str) -> None:
+    """One line per baseline session (Advisory 2): UTC time, the directory (first/second), the session, the attempt numbers it ran (``first-last``, or ``none``), its status and the SHA-256 of the samples file at its end.
+    The lead commits the file before the next step; the freeze refuses when the root's attempts are not all listed in it."""
+    nums = [int(a["attempt"]) for a in rec["attempts"] if int(a["session"]) == session]
+    span = f"{min(nums)}-{max(nums)}" if nums else "none"
+    log.parent.mkdir(parents=True, exist_ok=True)
+    with log.open("a", encoding="utf-8") as f:
+        f.write(f"{_utc()}\tdir={directory}\tsession={session}\tattempts={span}\tstatus={status}\tsamples_sha256={rec.get('samples_sha256')}\n")
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def listed_attempts(log: Path) -> tuple[set[tuple[str, int, int]], str | None]:
+    """(dir, session, attempt) for every attempt the log lists, and the samples hash of its last line."""
+    out: set[tuple[str, int, int]] = set()
+    last = None
+    for ln in log.read_text(encoding="utf-8").splitlines():
+        if not ln.strip():
+            continue
+        f = dict(x.split("=", 1) for x in ln.split("\t")[1:])
+        if f["attempts"] != "none":
+            a, b = (int(x) for x in f["attempts"].split("-"))
+            out |= {(f["dir"], int(f["session"]), n) for n in range(a, b + 1)}
+        last = f["samples_sha256"]
+    return out, last
+
+
+def check_sessions_log(root: Path, log: Path) -> None:
+    """The freeze's check (Advisory 2): the committed SESSIONS.log exists and lists EVERY attempt of the root's samples (first/ and second/), and the samples hash of its last line is one of the root's samples files'."""
+    if not log.is_file():
+        raise core.StageRefused(f"refused: {log} does not exist: every baseline session appends a line to it and the lead commits it before the next step")
+    listed, _ = listed_attempts(log)
+    seen: set[tuple[str, int, int]] = set()
+    for d in ("first", "second"):
+        sp = root / d / SAMPLES
+        if sp.is_file():
+            seen |= {(d, int(r["session"]), int(r["attempt"])) for r in (json.loads(x) for x in sp.read_text(encoding="utf-8").splitlines() if x.strip()) if int(r["attempt"]) > 0}
+    if seen != listed:
+        raise core.StageRefused(f"refused: {log.name} lists attempts {sorted(listed)} but the root's samples hold {sorted(seen)}: every attempt of every session must be listed (and committed)")
+
+
 def write_record(out: Path, rec: Mapping[str, Any]) -> None:
     core.write_record(out / RECORD, rec, overwrite=True)
 
@@ -157,6 +206,8 @@ def run_baseline(
     second: Mapping[str, Any] | None = None,
     os_build: Callable[[], str] = lambda: machine._run(["sw_vers", "-buildVersion"]).strip(),  # noqa: SLF001
     awake: Callable[[], Any] = machine.keep_awake,
+    config_file_sha256: str | None = None,
+    sessions_log: Path | None = None,
 ) -> dict[str, Any]:
     """One SESSION of the baseline (at most ``baseline_session_hours``) in ``out``. Returns the record (also written to ``out/record.json``). Every wait has a deadline; every sample is on disk when taken."""
     q = core.cfg_of(cfg)["quiet"]
@@ -166,6 +217,11 @@ def run_baseline(
     rec: dict[str, Any] = dict(core.read_record(rec_path, "quiet_baseline")) if rec_path.is_file() else {**core.envelope("quiet_baseline"), "status": PAUSED_NO_BASELINE, "sessions": [], "attempts": [], "accepted": None, "second_baseline": dict(second) if second else None}
     if rec["status"] == ACCEPTED:
         raise core.StageRefused(f"refused: {rec_path} is an ACCEPTED baseline: a baseline is taken once (a second only by --replaces with one of {list(SECOND_REASONS)})")
+    rules = core.quiet_rules_sha256(cfg)
+    if rec.get("quiet_rules_sha256") not in (None, rules):
+        raise core.StageRefused("refused: this baseline was begun under other [quiet] rules (hash differs): one baseline per study is taken under one set of rules")
+    rec["quiet_rules_sha256"] = rules  # F4-b: the rules (the committed config's [quiet] block without the figures entered afterwards) this baseline is taken under
+    rec["config_file_sha256"] = config_file_sha256
     rec["root"] = str(out.parent.resolve())  # F4: where it was taken
     rec["test_root"] = _test_root is not None  # a record taken under the test-only override is refused by the candidate plan and the freeze
     sessions: list[dict[str, Any]] = list(rec["sessions"])
@@ -266,6 +322,8 @@ def run_baseline(
                 os_build=os_build(), boot=_safe(pr.boot), samples_file=SAMPLES, samples_sha256=file_sha256(samples_path) if samples_path.is_file() else None, sampler_cpu_seconds=(pr.cpu() - cpu0), config_figures={k: q[k] for k in ("baseline_samples", "baseline_interval_seconds", "settle_samples", "settled_median_diff_max", "settled_p95_diff_max", "load_margin", "load_ceiling", "percentile")},
             )  # fmt: skip
             write_record(out, rec)
+            if sessions_log is not None:
+                append_session_line(sessions_log, out.name, n_session, rec, session["status"])
     return dict(rec)
 
 
@@ -339,6 +397,8 @@ def verify_against_config(repo: Path, cfg: Mapping[str, Any]) -> dict[str, Any]:
     if file_sha256(path) != q["baseline_record_sha256"]:
         raise core.StageRefused("refused: the baseline record does not hash to the config's baseline_record_sha256")
     committed = core.read_record(path, "quiet_baseline")
+    if committed.get("quiet_rules_sha256") != core.quiet_rules_sha256(cfg):
+        raise core.StageRefused("refused: the baseline record was taken under other [quiet] rules than the committed config's (relaxed conditions are not frozen on): its quiet_rules_sha256 differs")
     if committed.get("test_root") is not False:
         raise core.StageRefused("refused: the baseline record does not say test_root = false: a baseline taken under a test root is refused")
     d = rederive(path, q)
@@ -370,7 +430,6 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="studies.p10is1.baseline")
     sub = p.add_subparsers(dest="command", required=True)
     r = sub.add_parser("run", help="one session of the quiet baseline (about 80 minutes when the machine is left alone; up to 6 hours)")
-    r.add_argument("--config")
     r.add_argument("--replaces", action="store_true", help="a second baseline, replacing the ACCEPTED first one of the root")
     r.add_argument("--reason", help=f"one of {list(SECOND_REASONS)} (second baseline only)")
     r.add_argument("--reason-text", default="")
@@ -378,13 +437,12 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--condition", help="only with --reason condition_change_by_human_lead")
     v = sub.add_parser("verify", help="re-derive the figures from a committed baseline record and its samples")
     v.add_argument("--record", required=True)
-    v.add_argument("--config")
     return p
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    cfg = core.load_config(Path(args.config)) if args.config else core.load_config()
+    cfg = core.load_config()  # ALWAYS the committed configs/p10is1_capacity.toml: there is no option for another
     try:
         if args.command == "verify":
             d = rederive(Path(args.record), cfg["quiet"])
@@ -403,7 +461,7 @@ def main(argv: list[str] | None = None) -> int:
                 (out / REASON_FILE).write_text(json.dumps(second, indent=2, sort_keys=True) + "\n", encoding="utf-8")  # the reason is on disk BEFORE the second baseline is taken
         elif args.reason or args.condition:
             raise core.StageRefused("refused: --reason and --condition belong to a second baseline (--replaces)")
-        rec = run_baseline(out, cfg=cfg, condition=args.condition, second=second)
+        rec = run_baseline(out, cfg=cfg, condition=args.condition, second=second, config_file_sha256=core.config_sha256(), sessions_log=default_sessions_log())
     except core.StageRefused as exc:
         print(str(exc), file=sys.stderr)
         return 2

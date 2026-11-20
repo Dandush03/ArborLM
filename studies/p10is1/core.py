@@ -7,6 +7,7 @@ The ADR text is not a frozen input: ``spec_sha256`` is for provenance only.
 """
 
 import functools
+import json
 import math
 import re
 import tomllib
@@ -828,6 +829,18 @@ def cap_hours(name: str, cfg: Mapping[str, Any] | None = None) -> float:
 
 def caps_provisional(cfg: Mapping[str, Any] | None = None) -> bool:
     return bool(cfg_of(cfg)["caps"]["provisional"])
+
+
+BASELINE_FIGURE_KEYS = ("baseline_provisional", "load_p95", "load_limit", "condition", "app_present", "cli_present", "baseline_record_path", "baseline_record_sha256")  # entered BY HAND after the baseline: not part of the rules it was taken under
+
+
+def quiet_rules_sha256(cfg: Mapping[str, Any] | None = None) -> str:
+    """SHA-256 of the ``[quiet]`` rules a baseline is taken under: the whole block except the figures the lead enters after it (``BASELINE_FIGURE_KEYS``). The baseline record carries it; the candidate plan and the
+    freeze refuse a record whose hash differs from the committed config's (a baseline taken with relaxed conditions)."""
+    import hashlib
+
+    q = {k: v for k, v in cfg_of(cfg)["quiet"].items() if k not in BASELINE_FIGURE_KEYS}
+    return hashlib.sha256(json.dumps(q, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
 def baseline_provisional(cfg: Mapping[str, Any] | None = None) -> bool:

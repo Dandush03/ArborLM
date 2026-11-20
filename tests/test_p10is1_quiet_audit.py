@@ -188,7 +188,7 @@ def test_f4_no_option_environment_variable_or_launch_script_reaches_another_root
     import inspect
 
     src = inspect.getsource(baseline)
-    assert "os.environ" not in src and "getenv" not in src and "import os" not in src and '"--root"' not in src  # no environment override and no option on any real path
+    assert "os.environ" not in src and "getenv" not in src and '"--root"' not in src  # no environment override and no option on any real path
     with pytest.raises(SystemExit):
         baseline.main(["run", "--root", str(tmp_path / "x")])
     with pytest.raises(SystemExit):
@@ -507,3 +507,93 @@ def test_n4_the_run_sheet_says_which_processes_to_stop_before_the_baseline() -> 
     text = (TS.ROOT / "studies" / "p10is1" / "README_RUN.md").read_text()
     for needle in ("shell-snapshots/snapshot-", "background", "tool-call shell of every Claude session", "other studies", "run_in_background"):
         assert needle in text, needle
+
+
+# --- F4-b: the baseline always reads the committed config; a record taken under other rules is refused ----------------------------------------------------
+def test_f4b_the_baseline_has_no_config_option_and_records_the_rules_hash(tmp_path: Path) -> None:
+    for argv in (["run", "--config", str(tmp_path / "c.toml")], ["verify", "--record", "x", "--config", str(tmp_path / "c.toml")]):
+        with pytest.raises(SystemExit):
+            baseline.main(argv)
+    rec = qr.run_session(qr.FakeMachine(), tmp_path / "root" / "first", qr.qcfg(), config_file_sha256="ab" * 32)
+    assert rec["quiet_rules_sha256"] == core.quiet_rules_sha256(core.load_config()) and rec["config_file_sha256"] == "ab" * 32
+    # the hash covers the rules and not the figures the lead enters afterwards
+    q1 = qr.qcfg(load_limit=999, baseline_provisional=True)
+    q2 = qr.qcfg(settled_median_diff_max=26)
+    assert core.quiet_rules_sha256(q1) == core.quiet_rules_sha256(core.load_config()) and core.quiet_rules_sha256(q2) != core.quiet_rules_sha256(core.load_config())
+    # a baseline begun under other rules cannot be continued under these
+    small_rec = qr.run_session(qr.FakeMachine(lambda t: (2.6, 2.6)), tmp_path / "r2" / "first", qr.small())
+    with pytest.raises(core.StageRefused, match="begun under other"):
+        qr.run_session(qr.FakeMachine(), tmp_path / "r2" / "first", qr.qcfg())
+    assert small_rec["status"] == baseline.PAUSED_NO_BASELINE
+
+
+def test_f4b_a_record_taken_under_other_quiet_rules_is_refused_by_the_candidate_plan_and_the_freeze(tmp_path: Path) -> None:
+    import argparse
+
+    repo = TS.mini_repo(tmp_path / "m")
+    cfg = core.load_config(repo / core.CONFIG)
+    assert freeze.require_baseline(repo, cfg)["load_limit"] == 180
+    cal = tmp_path / "cal.json"
+    cal.write_text(json.dumps(TS.CAL))
+    TS.seed_manifests(tmp_path / "run")
+    assert freeze.cmd_candidate_plan(TS.candidate_args(repo, tmp_path / "run", cal)) == 0  # a plan exists while the baseline is good
+    rec_path = repo / str(cfg["quiet"]["baseline_record_path"])
+    rec = core.read_record(rec_path, "quiet_baseline")
+    rec["quiet_rules_sha256"] = core.quiet_rules_sha256(qr.qcfg(settled_median_diff_max=60, hid_idle_min_seconds=0))  # taken with relaxed conditions
+    core.write_record(rec_path, rec, overwrite=True)
+    p = repo / core.CONFIG
+    p.write_text(qr.set_quiet_figures(p.read_text(), baseline_record_sha256=f'"{file_sha256(rec_path)}"'))
+    cfg2 = core.load_config(p)
+    with pytest.raises(core.StageRefused, match="other \\[quiet\\] rules"):
+        baseline.verify_against_config(repo, cfg2)
+    with pytest.raises(core.StageRefused, match="other \\[quiet\\] rules"):
+        freeze.require_baseline(repo, cfg2)
+    with pytest.raises(core.StageRefused, match="other \\[quiet\\] rules"):
+        freeze.cmd_candidate_plan(TS.candidate_args(repo, tmp_path / "run", cal, supersede=True))  # the candidate plan
+    with pytest.raises(core.StageRefused, match="other \\[quiet\\] rules"):
+        freeze.cmd_freeze(argparse.Namespace(repo=str(repo), rehearsal=str(tmp_path / "r.json")))  # the freeze
+
+
+# --- Advisory 1: the refusal prints the full command lines ------------------------------------------------------------------------------------------
+def test_adv1_the_refusal_prints_offending_command_lines_in_full(tmp_path: Path) -> None:
+    long_cmd = "python -m studies.p10is5.stages registered timing --run-dir /Users/x/" + "d" * 400 + " --freeze-commit abc"
+    shell = TOOL_SHELL + " # " + "z" * 300
+    fm = qr.FakeMachine()
+    fm.extra = [(701, 1, long_cmd), (700, 1, shell), (702, 1, "/opt/homebrew/bin/colima daemon --" + "v" * 300)]
+    with pytest.raises(core.StageRefused) as ei:
+        baseline.preflight(probe=fm.probe(), cfg=qr.qcfg())
+    msg = str(ei.value)
+    assert long_cmd in msg and shell in msg and "v" * 300 in msg  # no 120- or 160-character cut
+    assert "..." not in msg
+
+
+# --- Advisory 2: SESSIONS.log, one line per session, checked by the freeze -------------------------------------------------------------------------------
+def test_adv2_every_session_appends_one_line_and_the_freeze_refuses_when_the_root_attempts_are_not_all_listed(tmp_path: Path) -> None:
+    root = tmp_path / "root"
+    log = tmp_path / "repo" / "results" / "p10is1-quiet-baseline" / "SESSIONS.log"
+    cfg = qr.small()
+    qr.run_session(qr.FakeMachine(lambda t: (2.6, 2.6)), root / "first", cfg, sessions_log=log)  # session 1: above the ceiling, PAUSED
+    qr.run_session(qr.FakeMachine(), root / "first", cfg, sessions_log=log)  # session 2: accepted
+    lines = log.read_text().splitlines()
+    assert len(lines) == 2
+    f = [dict(x.split("=", 1) for x in ln.split("\t")[1:]) for ln in lines]
+    assert [x["session"] for x in f] == ["1", "2"] and [x["status"] for x in f] == [baseline.PAUSED_NO_BASELINE, "ACCEPTED"] and [x["attempts"] for x in f] == ["1-1", "2-2"] and all(re.fullmatch(r"[0-9a-f]{64}", x["samples_sha256"]) for x in f)
+    assert re.match(r"\d{4}-\d\d-\d\dT", lines[0].split("\t")[0]) and f[1]["samples_sha256"] == file_sha256(root / "first" / baseline.SAMPLES)
+    baseline.check_sessions_log(root, log)  # every attempt of the root is listed
+    log.write_text(lines[0] + "\n")  # the second session's line was not committed
+    with pytest.raises(core.StageRefused, match="every attempt of every session must be listed"):
+        baseline.check_sessions_log(root, log)
+    log.unlink()
+    with pytest.raises(core.StageRefused, match="does not exist"):
+        baseline.check_sessions_log(root, log)
+
+
+def test_adv2_the_freeze_requires_the_committed_sessions_log_and_the_run_sheet_says_where_it_is_written(tmp_path: Path) -> None:
+    repo = TS.mini_repo(tmp_path / "m")
+    cfg = core.load_config(repo / core.CONFIG)
+    assert freeze.require_baseline(repo, cfg)["load_limit"] == 180
+    (repo / baseline.SESSIONS_LOG).unlink()
+    with pytest.raises(core.StageRefused, match="SESSIONS.log does not exist|does not exist"):
+        freeze.require_baseline(repo, cfg)
+    text = (TS.ROOT / "studies" / "p10is1" / "README_RUN.md").read_text()
+    assert baseline.SESSIONS_LOG in text and "outside any registered stage" in text and "commit" in text

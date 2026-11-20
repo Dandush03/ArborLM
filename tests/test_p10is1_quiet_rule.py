@@ -95,7 +95,7 @@ def use_test_root(monkeypatch: pytest.MonkeyPatch, root: Path) -> None:
     monkeypatch.setattr(baseline, "preflight", lambda **kw: None)
 
 
-def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", app: bool = False, cli: bool = False) -> dict[str, Any]:
+def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", app: bool = False, cli: bool = False, repo: Path | None = None) -> dict[str, Any]:
     """Write a record and a samples file with the schema of ``baseline.run_baseline`` (420 samples at a constant ``load`` hundredths), mirrored as the TEST canonical root's ``first/`` (``CANON``), and return the config
     figures that match them. The record says it was taken under that root, with ``test_root = false``, and lists its one attempt."""
     q = core.load_config()["quiet"]
@@ -107,13 +107,17 @@ def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", a
         lines.append(json.dumps(s, sort_keys=True))
     (out / baseline.SAMPLES).write_text("\n".join(lines) + "\n", encoding="utf-8")
     d = loadrule.derive([load] * int(q["baseline_samples"]), q)
-    rec = {**core.envelope("quiet_baseline"), "status": baseline.ACCEPTED, "condition": condition, "sessions": [], "attempts": [{"session": 1, "attempt": 1, "outcome": "ACCEPTED"}], "accepted": {"session": 1, "attempt": 1, **d}, "samples_file": baseline.SAMPLES, "samples_sha256": file_sha256(out / baseline.SAMPLES), "root": str(CANON.resolve()), "test_root": False}
+    rec = {**core.envelope("quiet_baseline"), "status": baseline.ACCEPTED, "condition": condition, "sessions": [], "attempts": [{"session": 1, "attempt": 1, "outcome": "ACCEPTED"}], "accepted": {"session": 1, "attempt": 1, **d}, "samples_file": baseline.SAMPLES, "samples_sha256": file_sha256(out / baseline.SAMPLES), "root": str(CANON.resolve()), "test_root": False, "quiet_rules_sha256": core.quiet_rules_sha256(core.load_config()), "config_file_sha256": "0" * 64}
     core.write_record(out / baseline.RECORD, rec, overwrite=True)
     mirror = CANON / "first"
     shutil.rmtree(mirror, ignore_errors=True)
     mirror.mkdir(parents=True)
     for f in (baseline.RECORD, baseline.SAMPLES):
         shutil.copy(out / f, mirror / f)
+    if repo is not None:  # the repository-tracked SESSIONS.log the lead commits: one line for the one session
+        log = repo / baseline.SESSIONS_LOG
+        log.parent.mkdir(parents=True, exist_ok=True)
+        log.write_text(f"2026-01-01T00:00:00+00:00\tdir=first\tsession=1\tattempts=1-1\tstatus=ACCEPTED\tsamples_sha256={rec['samples_sha256']}\n")
     return {"load_p95": d["load_p95"], "load_limit": d["load_limit"], "condition": condition, "app_present": app, "cli_present": cli, "baseline_record_sha256": file_sha256(out / baseline.RECORD)}
 
 
@@ -133,7 +137,7 @@ def measured_quiet_text(text: str, *, load_p95: int = 130, load_limit: int = 180
 def install_baseline(repo: Path, **kw: Any) -> dict[str, Any]:
     """Make the throw-away repository's config carry a MEASURED quiet block (``baseline_provisional = false``) and commit-ready baseline files under ``results/``: the tests never depend on the repository's own state."""
     rel = "results/p10is1-quiet-baseline-test"
-    fig = synthetic_baseline(repo / rel, **kw)
+    fig = synthetic_baseline(repo / rel, repo=repo, **kw)
     p = repo / core.CONFIG
     text = p.read_text()
     text = set_quiet_figures(text, baseline_provisional="false", load_p95=str(fig["load_p95"]), load_limit=str(fig["load_limit"]), condition=f'"{fig["condition"]}"', app_present=str(fig["app_present"]).lower(), cli_present=str(fig["cli_present"]).lower(), baseline_record_path=f'"{rel}/{baseline.RECORD}"', baseline_record_sha256=f'"{fig["baseline_record_sha256"]}"')
