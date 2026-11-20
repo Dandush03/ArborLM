@@ -54,21 +54,21 @@ def companion_blocks(derived: Mapping[str, Any], ctx: Mapping[str, Any]) -> list
     for name in ("ACQUISITION", "RETENTION"):
         d = derived.get(name) or {}
         for k, v in (d.get("table") or {}).items():
-            out.append(line(f"{name} table, {k}", compact(v), ctx))
+            out.append(line(f"COMPANION {name} table, {k}", compact(v), ctx))
         for key in ("passing_cells_per_order", "why"):
             if d.get(key):
-                out.append(line(f"{name} {key.replace('_', ' ')}", compact(d[key]), ctx))
+                out.append(line(f"COMPANION {name} {key.replace('_', ' ')}", compact(d[key]), ctx))
     for name in ("AGAINST-DENSE", "AGAINST-DENSE (M-seq vs D-seq)"):
         d = derived.get(name) or {}
         for key in ("delta_G", "delta_rho"):
             if key in d:
-                out.append(line(f"{name} per-cell {key}", compact(d[key]), ctx))
+                out.append(line(f"COMPANION {name} per-cell {key}", compact(d[key]), ctx))
     g = derived.get("GENERAL-QUALITY") or {}
     if g.get("readings"):
-        out.append(line("GENERAL-QUALITY per-cell loss increases (token64 and first marker)", compact(g["readings"]), ctx))
+        out.append(line("COMPANION GENERAL-QUALITY per-cell loss increases (token64 and first marker)", compact(g["readings"]), ctx))
     lk = derived.get("AGAINST-LOOKUP") or {}
     if lk.get("per_cell"):
-        out.append(line("AGAINST-LOOKUP per cell", compact(lk["per_cell"]), ctx))
+        out.append(line("COMPANION AGAINST-LOOKUP per cell", compact(lk["per_cell"]), ctx))
     for aname, a in sorted((ctx.get("annotations") or {}).items()):
         out.append(line(f"ANNOTATION {aname}", f"holds {a.get('holds')}; {compact(a.get('detail'))}", ctx))
     for text in ctx.get("cost_lines") or []:

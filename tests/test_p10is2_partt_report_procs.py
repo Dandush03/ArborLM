@@ -30,8 +30,8 @@ def test_the_report_prints_the_tables_companions_annotations_and_cost_lines() ->
     derived = L.derive_all(q)
     ctx: dict[str, Any] = {"U": 2000, "converged": True, "draws": "DISJOINT DRAWS", "shared_share": {}, "annotations": {a["name"]: a for a in (annotations.no_advantage_over_separate(q),)}, "cost_lines": ["counted training multiply-adds per update, M-append: 1.0e9 (logical work)"]}
     text = report.render(L.study_status(q.reg, required=partt_plan.required_keys()), derived, ctx)
-    for must in ("ACQUISITION table, G_first(M1)", "ACQUISITION table, ACQ2", "RETENTION table, rho", "RETENTION table, evaluable_cells_in_negative_zone", "AGAINST-DENSE per-cell delta_G", "AGAINST-DENSE per-cell delta_rho",
-                 "GENERAL-QUALITY per-cell loss increases", "AGAINST-LOOKUP per cell", "ANNOTATION NO ADVANTAGE OVER SEPARATE ADAPTERS", "COST: counted training multiply-adds per update", "DISCLOSED LIMITATION (ruling 19)"):
+    for must in ("COMPANION ACQUISITION table, G_first(M1)", "COMPANION ACQUISITION table, ACQ2", "COMPANION RETENTION table, rho", "COMPANION RETENTION table, evaluable_cells_in_negative_zone", "COMPANION AGAINST-DENSE per-cell delta_G", "COMPANION AGAINST-DENSE per-cell delta_rho",
+                 "COMPANION GENERAL-QUALITY per-cell loss increases", "COMPANION AGAINST-LOOKUP per cell", "ANNOTATION NO ADVANTAGE OVER SEPARATE ADAPTERS", "COST: counted training multiply-adds per update", "DISCLOSED LIMITATION (ruling 19)"):
         assert must in text, must
     assert all(b.split("\n")[0] == core_oracle() for b in text.split("\n\n"))  # every block still starts with the fixed line (the renderer's own check passed)
 
@@ -45,7 +45,7 @@ def core_oracle() -> str:
 def test_the_companions_of_an_inconclusive_acquisition_and_controls_undefined_are_printed() -> None:
     derived = {"ACQUISITION": {"label": "ACQUISITION-INCONCLUSIVE", "table": {"CONTROLS UNDEFINED": ["0AB:A"], "ACQ1": {"0AB": True}}, "passing_cells_per_order": {"ACQ1": {"AB": 3, "BA": 2}}, "why": "x"}}
     text = "\n\n".join(report.companion_blocks(derived, {"U": 2000, "converged": True}))
-    assert "ACQUISITION table, CONTROLS UNDEFINED: [0AB:A]" in text and "ACQUISITION passing cells per order: {ACQ1: {AB: 3, BA: 2}}" in text
+    assert "COMPANION ACQUISITION table, CONTROLS UNDEFINED: [0AB:A]" in text and "COMPANION ACQUISITION passing cells per order: {ACQ1: {AB: 3, BA: 2}}" in text
 
 
 def test_a_keep_awake_process_is_never_another_study_nor_a_second_instance_of_this_one(monkeypatch: pytest.MonkeyPatch) -> None:
