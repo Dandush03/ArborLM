@@ -118,7 +118,7 @@ def test_the_units_of_the_caps_are_counted_from_the_plan_and_match_the_audits_co
     assert sum(v for k, v in per.items() if k.startswith("score:")) == 72_400
     items = partt_plan.stage_items(CALIB)
     units = partt_caps.task_units(items, basis)
-    assert sum(sum(t["units"].get(k, 0) for k in ("score:plain", "score:route", "score:control", "score:dcon", "score:icl", "score:reference")) for t in units["evaluate"]) == 3 * 72_400 + 2_000  # about 219,000 greedy items per pass
+    assert sum(sum(t["units"].get(k, 0) for k in ("score:plain", "score:route", "score:control", "score:dcon", "score:icl", "score:reference")) for t in units["evaluate"]) == 3 * (72_400 + 6_400) + 2_000 + 1_000  # the auditor's 219,200 greedy items per pass plus the A4 reads (ruling 23): 2 arms x 2 orders x 2 capabilities x (300 seen + 500 E_open) per replicate and the E_open reference
     train_units = {k: sum(t["units"].get(k, 0) for t in units["train"]) for k in partt_caps.required_kinds(items, basis) if k.startswith("train:")}
     assert set(train_units) == {f"train:{a}" for a in partt_caps.TRAINED_TYPES}  # ALL ten trained types are kinds the measuring rehearsal must time
     assert len(units["train"]) == 54 and len(units["gates"]) == 1 and len(units["recompute"]) == 1
