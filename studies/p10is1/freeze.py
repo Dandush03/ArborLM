@@ -3,7 +3,7 @@
 overwrite without ``--supersede``, which moves the old file to ``freeze/superseded/``), ``project`` (the projection of section 17.1, once: granted lengths and caps from the measuring rehearsal's rates), ``freeze`` (writes
 ``freeze/freeze_record.json`` for the committed candidate plan), ``caps-proposal``.
 
-``freeze`` REFUSES unless: the candidate plan exists and its caps are not provisional (the caps are set from the measuring rehearsal and the plan rewritten); the plan is not BASE PLAN ABOVE BUDGET; the plan re-derived from the
+``freeze`` REFUSES unless: the quiet baseline is not provisional and its figures re-derived from the committed samples equal the config's (ADR-0024 addendum A8 item 3); the candidate plan exists and its caps are not provisional (the caps are set from the measuring rehearsal and the plan rewritten); the plan is not BASE PLAN ABOVE BUDGET; the plan re-derived from the
 current code, config and calibration record equals the committed one (the ADR's hash is not compared); the counting rehearsal's record was made on caps that are not provisional, shows every stage COMPLETE and names the SHA-256
 of THIS plan file; gate G9 passes with the registry's checker. It writes only the freeze record. The freeze commit is the human lead's act; nothing here is a freeze until those commands are run and committed.
 """
@@ -16,7 +16,7 @@ from typing import Any
 
 from arborlm.io import file_sha256, read_json, write_json
 
-from . import budget, core, gates, items
+from . import baseline, budget, core, gates, items
 from . import plan as planmod
 from .plan import StageRefused
 
@@ -102,11 +102,23 @@ def draw_manifests(run_dir: Path, cfg: Any) -> dict[str, Any]:
     return out
 
 
+def require_baseline(repo: Path, cfg: Any) -> dict[str, Any]:
+    """The candidate plan and the freeze need the quiet baseline: ``[quiet] baseline_provisional`` false, the committed record hashing to the config's SHA-256, and P95, L, the condition and both presences re-derived
+    from its samples equal to the config's (a difference, an unsettled window or L above the ceiling refuses). Prints a notice when L is above 250 (a report to the human lead, not a gate)."""
+    if core.baseline_provisional(cfg):
+        raise StageRefused("refused: [quiet] baseline_provisional is true: the quiet baseline (python -m studies.p10is1.baseline run) has not been taken and written into the config; no candidate plan is written without it (ADR-0024 addendum A3.1 item 8)")
+    d = baseline.verify_against_config(repo, cfg)
+    if d.get("notice"):
+        print(d["notice"], flush=True)
+    return d
+
+
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
     """Write the CANDIDATE ``freeze/plan.json`` once. The measuring rehearsal runs against it on provisional caps; the projection and the caps are then written into it (``--projection``, ``--supersede``) and the counting
     rehearsal runs against that exact file. Refuses to overwrite without ``--supersede``; a freeze record forbids superseding."""
     repo = Path(args.repo) if args.repo else core.repo_root()
     cfg = core.load_config(repo / core.CONFIG)
+    require_baseline(repo, cfg)  # ADR-0024 addendum A3.1 item 8 / A8 item 3: no candidate plan without the study's own quiet baseline written into [quiet]
     plan_path = repo / core.PLAN
     if plan_path.exists():
         if not args.supersede:
@@ -199,6 +211,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     plan = planmod.Plan.load(plan_path)
     if plan.data.get("base_plan_above_budget"):
         raise StageRefused(f"refused: {planmod.BASE_PLAN_ABOVE_BUDGET}: the freeze refuses this plan; the work returns to the human lead (section 17.1 item 2)")
+    bl = require_baseline(repo, cfg)  # re-derived from the committed samples: P95, L, the condition and both presences must equal the config's
     if core.caps_provisional(cfg) or plan.data.get("caps_provisional"):
         raise StageRefused("refused: caps.provisional is true: the caps are set from the measuring rehearsal (section 15) and the candidate plan is rewritten and rehearsed again")
     require_projection(plan, cfg)
@@ -222,7 +235,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     seed = gates.seed_gate(cfg, root=repo)
     if seed["passed"] is not True:
         raise StageRefused(f"refused: gate G9 (seeds) did not pass: {seed['problems']}")
-    rec = {**core.envelope("freeze_record"), "plan_file_sha256": plan_sha, "rehearsal": {"path": str(Path(args.rehearsal).resolve()), "sha256": file_sha256(Path(args.rehearsal))}, "g9": {k: seed[k] for k in ("passed", "roles", "declared_reuse_not_new", "checker")}, "rehearsal_gate": reh, "adr_sha256_provenance_only": planmod.adr_provenance(repo)["sha256"]}
+    rec = {**core.envelope("freeze_record"), "plan_file_sha256": plan_sha, "rehearsal": {"path": str(Path(args.rehearsal).resolve()), "sha256": file_sha256(Path(args.rehearsal))}, "g9": {k: seed[k] for k in ("passed", "roles", "declared_reuse_not_new", "checker")}, "rehearsal_gate": reh, "quiet_baseline": {k: bl[k] for k in ("load_p95", "load_limit", "condition", "app_present", "cli_present", "record_sha256", "samples_sha256", "report_above")}, "adr_sha256_provenance_only": planmod.adr_provenance(repo)["sha256"]}
     record_path.parent.mkdir(parents=True, exist_ok=True)
     write_json(record_path, core.jsonable(rec))
     print(json.dumps({"freeze_record": str(record_path), "sha256": file_sha256(record_path), "plan_file_sha256": plan_sha}))

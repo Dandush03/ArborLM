@@ -20,7 +20,7 @@ from typing import Any
 
 from arborlm.io import file_sha256, read_json
 
-from . import adapter, analysis, core, gates, items, report, stages, synthetic
+from . import adapter, analysis, core, gates, items, machine, report, stages, synthetic
 from . import labels as L
 from . import plan as planmod
 from .rehearsal import check_plan_items, qualification_table
@@ -184,8 +184,11 @@ def write_rehearsal_record(path: Path, *, caps_provisional: bool, stage_status: 
     return rec
 
 
-def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Path | None = None, synthetic_data: bool = False, inline: bool = False, workers: int = 6, qualification: Mapping[str, Any] | None = None, record_path: Path | None = None, quiet_reading: Any = None, end_fn: Any = None, sleep: Any = None, chain: Sequence[str] = REHEARSAL_STAGE_CHAIN) -> dict[str, Any]:
-    """The counting rehearsal (see the module docstring). ``chain`` names the stage functions to run (a test of the record alone passes ``()``; the lead's run uses the whole chain)."""
+def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Path | None = None, synthetic_data: bool = False, inline: bool = False, workers: int = 6, qualification: Mapping[str, Any] | None = None, record_path: Path | None = None, quiet_reading: Any = None, end_fn: Any = None, sleep: Any = None, chain: Sequence[str] = REHEARSAL_STAGE_CHAIN, resume: bool = False, clock: Any = None) -> dict[str, Any]:
+    """The counting rehearsal (see the module docstring). ``chain`` names the stage functions to run (a test of the record alone passes ``()``; the lead's run uses the whole chain). The quiet stages (timing,
+    throughput) run through the SAME ``stages.execute_stage`` as the registered launch, with the config's measured rule (``quiet.quiet_reading``, ``quiet.end_check``) unless a test injects a reading. ``resume=True``
+    (ADR-0024 addendum A8 item 6): the run directory already exists; a stage whose manifest says COMPLETE is NOT run again, a PAUSED one is retried by itself; the record is COMPLETE only when every stage, both quiet
+    stages included, has a quiet run. The seconds spent waiting for a quiet reading are returned (``waited_seconds``) and are not charged."""
     cfg = core.load_config(config_path) if config_path else core.load_config(repo / core.CONFIG)
     run_dir.mkdir(parents=True, exist_ok=True)
     pl = planmod.Plan.load(plan_path)
@@ -198,10 +201,16 @@ def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Pat
         ctx.experiments_root = fz.experiments_root()
     args = argparse.Namespace(freeze_commit=None, synthetic=synthetic_data)
     status: dict[str, str] = {}
+    waited = 0.0
     for st in chain:
-        kw: dict[str, Any] = {"quiet_reading": quiet_reading, "end_fn": end_fn, "sleep": sleep} if quiet_reading is not None else {}
+        mpath = run_dir / st / "manifest.json"
+        if resume and mpath.is_file() and core.read_record(mpath, "stage_manifest")["status"] == "COMPLETE":
+            status[st] = "COMPLETE"  # completed stages are not run again
+            continue
+        kw: dict[str, Any] = {"quiet_reading": quiet_reading, "end_fn": end_fn, "sleep": sleep, **({"clock": clock} if clock is not None else {})} if quiet_reading is not None else {}
         rec = stages.execute_stage(st, view, ctx, run_dir, vpath, args, repo=repo, inline=inline, workers=workers, **kw)
         status[st] = rec["status"]
+        waited += float(rec.get("waited_seconds_not_charged", 0.0))
         if rec["status"] != "COMPLETE":
             break
     chk = check_plan_items(pl)
@@ -213,7 +222,7 @@ def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Pat
     status["analysis"] = status["report"] = "COMPLETE" if ok else "FAILED"
     cand = {"status": "COMPLETE" if all(v == "COMPLETE" for v in status.values()) else "FAILED", "plan_file_sha256": file_sha256(plan_path), "item_counts": chk["counts"], "item_problems": chk["problems"]}
     rec2 = write_rehearsal_record(record_path or run_dir / "rehearsal.json", caps_provisional=bool(pl.data.get("caps_provisional", True)), stage_status=status, candidate=cand, qualification=qualification, kind="counting")
-    return {"stages": status, "candidate": cand, "record": rec2, "run_dir": str(run_dir)}
+    return {"stages": status, "candidate": cand, "record": rec2, "run_dir": str(run_dir), "waited_seconds": waited}
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
@@ -222,8 +231,13 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
 
     repo = Path(args.repo) if args.repo else core.repo_root()
     root = Path(args.run_dir)
-    if root.exists() and any(root.iterdir()):
-        raise core.StageRefused(f"refused: {root} is not a new rehearsal directory")
+    resume = bool(getattr(args, "resume", False))
+    if resume and not args.counting:
+        raise core.StageRefused("refused: --resume belongs to the counting rehearsal (a PAUSED quiet stage is retried by itself in the same directory)")
+    if root.exists() and any(root.iterdir()) and not resume:
+        raise core.StageRefused(f"refused: {root} is not a new rehearsal directory (a PAUSED counting rehearsal continues with --resume)")
+    if resume and not (root / "view_plan.json").is_file():
+        raise core.StageRefused(f"refused: {root} holds no counting rehearsal to resume")
     planmod.require_ignored_run_dir(repo, root)
     if not (args.measuring or args.counting):
         rec = rh.run_synthetic(root, repo=repo)
@@ -233,7 +247,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     gates.configure_worker()
     if not args.plan:
         raise core.StageRefused("refused: --plan (the candidate plan file) is required")
-    root.mkdir(parents=True)
+    root.mkdir(parents=True, exist_ok=resume)
     plan_path = Path(args.plan)
     if args.measuring:
         from . import freeze as fz
@@ -248,9 +262,10 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         return 0
     q = read_json(Path(args.qualification))["table"] if args.qualification else None
     t_count = time.monotonic()
-    res = run_counting(plan_path, root, repo=repo, qualification=q, record_path=Path(args.record_out) if args.record_out else None)
-    print(json.dumps({"stages": res["stages"], "candidate": res["candidate"]["status"]}))
-    core.prefreeze_ledger(root).charge("counting-rehearsal", root.name, time.monotonic() - t_count)
+    with machine.keep_awake():  # a child of this process: inside its own process family
+        res = run_counting(plan_path, root, repo=repo, qualification=q, record_path=Path(args.record_out) if args.record_out else None, resume=resume, chain=REHEARSAL_STAGE_CHAIN)
+    print(json.dumps({"stages": res["stages"], "candidate": res["candidate"]["status"], "waited_seconds_not_charged": res["waited_seconds"]}))
+    core.prefreeze_ledger(root).charge("counting-rehearsal", root.name, max(0.0, time.monotonic() - t_count - float(res["waited_seconds"])))  # the waiting for a quiet reading is recorded, never charged
     return 0 if res["candidate"]["status"] == "COMPLETE" else 1
 
 

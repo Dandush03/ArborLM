@@ -52,6 +52,9 @@ def placeholder_config(repo: Path) -> None:
     text, n = re.subn(r"^provisional = .*$", "provisional = true", text, flags=re.M)
     assert n == 1
     p.write_text(text)
+    import test_p10is1_quiet_rule as qr
+
+    qr.install_baseline(repo)  # a MEASURED quiet block and its committed-style record in the copy (the repository's own [quiet] is provisional until the lead has taken the baseline)
 
 
 def mini_repo(tmp: Path) -> Path:

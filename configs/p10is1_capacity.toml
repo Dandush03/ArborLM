@@ -139,8 +139,38 @@ rss_aggregate_bytes = 19327352832
 eval_chunk_elements = 1048576
 
 [quiet]
-# section 16
-load_average_max = 1.0
+# section 16 as amended by the quiet-rule addendum (ADR-0024-addendum-quiet-rule.md, A3 and A8 item 2). Loads are INTEGERS in hundredths (v = round(x, 2) x 100). The fixed 1.0 limit is REMOVED.
+# The measured figures below stay provisional (nothing reads them) until the study's own baseline has been taken (`python -m studies.p10is1.baseline run`), its record and samples committed under results/, and the
+# figures copied here by hand. The candidate plan refuses while baseline_provisional is true; the freeze re-derives load_p95, load_limit, condition and both presences from the committed samples and refuses a difference.
+baseline_provisional = true
+load_p95 = 0                   # measured: nearest-rank 95th percentile of the 360 window loads, hundredths (placeholder while provisional)
+load_limit = 0                 # measured: L = load_p95 + load_margin, hundredths (placeholder while provisional)
+condition = "open"             # measured: "open" (the application and Claude Code may be open, the lead silent) or "closed" (by the fallback of A3.1 item 7)
+app_present = false            # measured: the desktop application's presence at the baseline (a stage must equal it)
+cli_present = false            # measured: Claude Code's presence at the baseline (a stage must equal it)
+baseline_record_path = ""      # repo-relative path of the committed baseline record (results/...)
+baseline_record_sha256 = ""    # SHA-256 of that record file (the record names the samples file and its SHA-256)
+load_margin = 50
+load_ceiling = 300
+load_report_above = 250        # a report to the human lead before the freeze, not a gate
+percentile = 95
+baseline_samples = 360         # the 60-minute window
+baseline_interval_seconds = 10
+settle_samples = 60            # the 10-minute settle period
+settled_median_diff_max = 25   # |median(T1) - median(T3)| <= 25 hundredths (two-sided)
+settled_p95_diff_max = 50      # |P95(T1) - P95(T3)| <= 50 hundredths (two-sided)
+sample_gap_max_seconds = 15
+hid_idle_min_seconds = 600
+end_load_delay_seconds = 120
+baseline_session_hours = 6
+baseline_attempt_minutes = 70  # no attempt starts that could not finish inside the session
+open_sessions_before_closed = 3
+closed_sessions_to_human_lead = 3
+timing_spread_max = 0.05       # (max - min) / median of the three CPU repeats, per item
+timing_spread_sessions_to_human_lead = 3
+vm_markers = ['com\.apple\.Virtualization\.VirtualMachine', 'qemu-system', 'limactl', 'colima', 'com\.docker\.(backend|virtualization|vmnetd)', 'Docker Desktop', 'vfkit', 'krunkit', 'OrbStack', 'prl_vm_app', 'VirtualBoxVM', 'UTM']  # regular expressions on the full command line, case-insensitive
+app_markers = ['/Applications/Claude\.app/Contents/MacOS/Claude']  # the desktop application (case-sensitive)
+cli_markers = ['(^|/)claude(\s|$)']  # any process whose command line runs Claude Code (the `claude` CLI), listed separately from the application
 poll_seconds = 600             # retried every 10 minutes
 session_hours = 6              # for at most 6 hours in a session
 attempts = 6                   # the first attempt and five rescheduled attempts

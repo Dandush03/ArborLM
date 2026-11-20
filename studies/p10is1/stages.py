@@ -22,7 +22,7 @@ from typing import Any
 
 from arborlm.io import read_json
 
-from . import adapter, analysis, core, gates, items, quiet, report, runner
+from . import adapter, analysis, core, gates, items, machine, quiet, report, runner
 from . import freeze as freezemod
 from . import plan as planmod
 from .plan import Plan, StageRefused
@@ -297,8 +297,10 @@ def run_gates(pl: Plan, ctx: items.Ctx, run_dir: Path, *, repo: Path, run_checke
 
 
 # --- timing and throughput (alone) ---------------------------------------------------------------------------------------------------------------------
-def measure_timing(pl: Plan, ctx: items.Ctx, *, warmup: int | None = None, updates: int | None = None, repeats: int | None = None) -> dict[str, Any]:
-    """The isolated timing stage's measurement (the source of MC-T): single-thread process CPU seconds per update of every (arm, slots) of the plan on the rehearsal draw (P10-S1's ``cpu_seconds_per_update``). All or nothing."""
+def measure_timing(pl: Plan, ctx: items.Ctx, *, warmup: int | None = None, updates: int | None = None, repeats: int | None = None, guard: Callable[[], None] | None = None) -> dict[str, Any]:
+    """The isolated timing stage's measurement (the source of MC-T): single-thread process CPU seconds per update of every (arm, slots) of the plan on the rehearsal draw (P10-S1's ``cpu_seconds_per_update``). All or
+    nothing. Every item keeps its PER-REPEAT values (``runs``: CPU seconds per update, ``wall_runs``: wall seconds per update) and the CPU-to-wall ratio per repeat (addendum A3.4, A8 item 5: the timing-spread rule
+    reads them). ``guard`` (the stage's own cap) is called before each item and may raise ``quiet.CapReached``."""
     from studies.p10s1 import timing as s1timing
 
     cfg = ctx.cfg()
@@ -307,6 +309,8 @@ def measure_timing(pl: Plan, ctx: items.Ctx, *, warmup: int | None = None, updat
     detail: dict[str, Any] = {}
     seeds, init = core.seeds_for(core.REHEARSAL if pl.mode == core.REGISTERED else pl.mode, 1, cfg)
     for it in pl.items("timing"):
+        if guard is not None:
+            guard()
         c = next(x for x in pl.data["cells"] if x["arm"] == it["arm"] and x["slots"] == it["slots"])
         spec = {**c, "seed_name": seeds.name, "seed_base": seeds.facts, "init_seed": init, "mode": core.REHEARSAL if pl.mode == core.REGISTERED else pl.mode}
         data, sd = items.load_data(ctx, spec, verify=False)
@@ -314,11 +318,11 @@ def measure_timing(pl: Plan, ctx: items.Ctx, *, warmup: int | None = None, updat
         job = adapter.job_for(cell, data, sd, items.backbone_of(ctx), ctx.run_dir / "timing" / "work", (), optimizer_marks=(), max_updates=None, mode="calibration")
         r = s1timing.cpu_seconds_per_update(job, warmup=warmup or int(q["timing_warmup_updates"]), updates=updates or int(q["timing_updates"]), repeats=repeats or int(q["timing_repeats"]))
         cpu[f"{it['arm']}|{it['slots']}"] = float(r["cpu_seconds_per_update"])
-        detail[f"{it['arm']}|{it['slots']}"] = {"wall_seconds_per_update": r["wall_seconds_per_update"], "peak_rss_bytes": r["peak_rss_bytes"]}
+        detail[f"{it['arm']}|{it['slots']}"] = {"wall_seconds_per_update": r["wall_seconds_per_update"], "peak_rss_bytes": r["peak_rss_bytes"], "runs": [float(x) for x in r["runs"]], "wall_runs": [float(x) for x in r["wall_runs"]], "cpu_to_wall_per_repeat": [float(c_) / float(w_) if w_ > 0 else None for c_, w_ in zip(r["runs"], r["wall_runs"], strict=False)]}
     return {"cpu": cpu, "detail": detail, "draw": "rehearsal", "platform": gates.platform_record()}
 
 
-def measure_throughput(pl: Plan, ctx: items.Ctx) -> dict[str, Any]:
+def measure_throughput(pl: Plan, ctx: items.Ctx, guard: Callable[[], None] | None = None) -> dict[str, Any]:
     """The read-path throughput of the trained checkpoints at U_P of the first replicate (RAM, one process; descriptive only), for every item of the plan's throughput list."""
     import torch
 
@@ -329,6 +333,8 @@ def measure_throughput(pl: Plan, ctx: items.Ctx) -> dict[str, Any]:
 
     out: dict[str, Any] = {}
     for it in pl.items("throughput"):
+        if guard is not None:
+            guard()  # the stage's own cap on charged measuring seconds, checked before each item
         spec = {**pl.cell(it["cell"]), "mode": pl.mode}
         data, seeds = items.load_data(ctx, spec, verify=False)
         snap = adapter.cell_dir(ctx.run_dir, spec["label"]) / "snapshots" / s1.snapshot_stem(int(it["update"]))
@@ -429,13 +435,21 @@ def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, pla
         if quiet.stage_state(run_dir, stage, f"{stage}.json") in ("COMPLETE", quiet.NOT_MEASURED):
             result = {"state": quiet.stage_state(run_dir, stage, f"{stage}.json")}
         else:
-            measure = (lambda: measure_timing(pl, ctx)) if stage == "timing" else (lambda: measure_throughput(pl, ctx))
-            r = quiet.run_alone_stage(run_dir, stage, measure, reading=quiet_reading or quiet.quiet_reading, end=end_fn or (lambda s: quiet.end_check(s)), **({"sleep": sleep} if sleep else {}), **({"clock": clock} if clock else {}), cfg=cfg)
+            measure = (lambda guard: measure_timing(pl, ctx, guard=guard)) if stage == "timing" else (lambda guard: measure_throughput(pl, ctx, guard))
+            sleeper = sleep or time.sleep
+            account = holder["account"] if holder is not None else {}
+            clock_kw: dict[str, Any] = {"clock": clock} if clock else {}
+            # ONE code path for the registered stage and the counting rehearsal: the reading is the config's measured rule (``quiet.quiet_reading``) unless a test injects one; the waiting is not charged (it goes to
+            # ``account['wait_seconds']``), the measuring seconds are, against the stage's own cap
+            r = quiet.run_alone_stage(
+                run_dir, stage, measure, reading=quiet_reading or quiet.quiet_reading, end=end_fn or (lambda s: quiet.end_check(s, sleep=sleeper)), sleep=sleeper, cfg=cfg, **clock_kw,
+                validate=(lambda res: quiet.timing_spreads(res, cfg)) if stage == "timing" else None, cap_seconds=cap, account=account, guarded=True,
+            )  # fmt: skip
             if r["status"] == "COMPLETE":
-                core.write_record(run_dir / stage / f"{stage}.json", {**core.envelope("timing" if stage == "timing" else "throughput"), **{k: v for k, v in r["result"].items()}, "quiet": r["end_check"], "attempt_record": r["attempt_record"]})
+                core.write_record(run_dir / stage / f"{stage}.json", {**core.envelope("timing" if stage == "timing" else "throughput"), **{k: v for k, v in r["result"].items()}, "quiet": r["end_check"], "attempt_record": r["attempt_record"], "wait_seconds": r["wait_seconds"], "measure_seconds": r["measure_seconds"], "retimed": r["retimed"], "timing_spread": r.get("validation")})
             else:
                 status = "PAUSED"
-            result = {k: v for k, v in r.items() if k != "result"}
+            result = {k: v for k, v in r.items() if k not in ("result", "load_trace", "timing_attempts")}
     elif stage in ("train", "ladder", "evaluate", "baselines"):
         require_gates_passed(run_dir)
         if stage in ("train", "ladder"):
@@ -478,14 +492,20 @@ def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path
     ledger.require_room(stage)
     began = time.monotonic()
     started = datetime.now(UTC).isoformat()
-    holder: dict[str, Any] = {}
+    holder: dict[str, Any] = {"account": {"measure_seconds": 0.0, "wait_seconds": 0.0}}
     try:
         status, result, pool = _execute_stage_body(stage, pl, ctx, run_dir, plan_path, args, repo=repo, inline=inline, workers=workers, sleep=sleep, quiet_reading=quiet_reading, end_fn=end_fn, clock=clock, ledger=ledger, holder=holder)
     finally:
         pool_seconds = holder["pool"].seconds if "pool" in holder else 0.0
-        secs = pool_seconds if stage in ("train", "ladder", "evaluate", "baselines") else max(pool_seconds, time.monotonic() - began)
+        waited = float(holder["account"]["wait_seconds"])
+        if stage in ("train", "ladder", "evaluate", "baselines"):
+            secs = pool_seconds
+        elif stage in quiet.STAGES_ALONE:
+            secs = float(holder["account"]["measure_seconds"])  # the measuring seconds only: the waiting for a quiet reading is recorded, never charged (ADR-0024 addendum A8 item 9; ADR-0028 section 9)
+        else:
+            secs = max(pool_seconds, time.monotonic() - began)
         ledger.charge(stage, run_dir.name, secs)
-    rec = {**core.envelope("stage_manifest"), "stage": stage, "mode": pl.mode, "status": status, "result": result, "started_utc": started, "finished_utc": datetime.now(UTC).isoformat(), "charged_seconds": secs}
+    rec = {**core.envelope("stage_manifest"), "stage": stage, "mode": pl.mode, "status": status, "result": result, "started_utc": started, "finished_utc": datetime.now(UTC).isoformat(), "charged_seconds": secs, "waited_seconds_not_charged": waited}
     p = run_dir / stage / "manifest.json"
     prior = core.read_record(p, "stage_manifest") if p.is_file() else None
     if prior is not None and prior["status"] == "COMPLETE" and status == "COMPLETE":
@@ -517,7 +537,8 @@ def cmd_registered(args: argparse.Namespace) -> int:
         planmod.require_decision_2(repo, args.freeze_commit)
         planmod.require_ignored_run_dir(repo, run_dir)
         ctx = ctx_for(pl, run_dir, experiments_root=freezemod.experiments_root())
-        rec = execute_stage(args.stage, pl, ctx, run_dir, repo / core.PLAN, args, repo=repo)
+        with machine.keep_awake():  # a child of this process: inside the stage's own process family (the study-process check counts descendants as its own)
+            rec = execute_stage(args.stage, pl, ctx, run_dir, repo / core.PLAN, args, repo=repo)
     except StageRefused as exc:
         print(str(exc), file=sys.stderr)
         return core.IDENTITY_EXIT if "IDENTITY" in str(exc) or "not clean" in str(exc) or "freeze commit" in str(exc) else 2
@@ -571,6 +592,7 @@ def build_parser() -> argparse.ArgumentParser:
     rh.add_argument("--repo")
     rh.add_argument("--measuring", action="store_true")
     rh.add_argument("--counting", action="store_true")
+    rh.add_argument("--resume", action="store_true", help="the counting rehearsal's existing directory: completed stages are not run again, a PAUSED quiet stage is retried by itself")
     for a in ("--plan", "--rates-out", "--record-out", "--qualification"):
         rh.add_argument(a)
     rh.add_argument("--workers", default="6,7")

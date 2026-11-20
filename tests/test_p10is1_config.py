@@ -37,7 +37,13 @@ def test_every_threshold_equals_the_adr_value() -> None:
     assert CFG["ladder"]["calibration_i_max"] == 4.0
     assert CFG["budget"]["total_cap_hours"] == 60.0 and CFG["budget"]["level_count"] == 4
     q = CFG["quiet"]
-    assert q["load_average_max"] == 1.0 and q["poll_seconds"] == 600 and q["session_hours"] == 6 and q["attempts"] == 6 and q["not_measured_after_paused_attempts"] == 6
+    assert "load_average_max" not in q  # ADR-0024 addendum A8 item 2: removed, not left at 1.0
+    assert q["poll_seconds"] == 600 and q["session_hours"] == 6 and q["attempts"] == 6 and q["not_measured_after_paused_attempts"] == 6
+    assert (q["load_margin"], q["load_ceiling"], q["load_report_above"], q["percentile"], q["baseline_samples"], q["baseline_interval_seconds"], q["settle_samples"]) == (50, 300, 250, 95, 360, 10, 60)
+    assert (q["settled_median_diff_max"], q["settled_p95_diff_max"], q["sample_gap_max_seconds"], q["hid_idle_min_seconds"], q["end_load_delay_seconds"]) == (25, 50, 15, 600, 120)
+    assert (q["timing_spread_max"], q["timing_spread_sessions_to_human_lead"], q["open_sessions_before_closed"], q["closed_sessions_to_human_lead"], q["baseline_session_hours"], q["baseline_attempt_minutes"]) == (0.05, 3, 3, 3, 6, 70)
+    assert len(q["vm_markers"]) == 12 and q["app_markers"] == ["/Applications/Claude\\.app/Contents/MacOS/Claude"] and len(q["cli_markers"]) == 1
+    assert q["condition"] in ("open", "closed") and isinstance(q["baseline_provisional"], bool) and isinstance(q["app_present"], bool) and isinstance(q["cli_present"], bool)
     m = CFG["memory_check"]
     assert m["retry_seconds"] == 600 and m["max_hours"] == 6 and m["page_kinds"] == ["free", "inactive", "purgeable", "speculative"]
     p = CFG["platform"]

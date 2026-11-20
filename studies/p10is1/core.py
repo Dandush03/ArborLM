@@ -47,7 +47,7 @@ PANELS = ("A", "B")
 READS = ("main", "ivf")
 RECORD_KINDS = (
     "eval", "baseline", "train", "snapshot", "gate", "stage_manifest", "freeze_plan", "freeze_record", "analysis", "ledger", "rehearsal", "calibration", "calibration_run", "timing", "throughput", "decision",
-    "identity_gate", "gates_record", "report_manifest", "engineering_stop", "projection", "quiet_attempt", "memory_check", "task_done",
+    "identity_gate", "gates_record", "report_manifest", "engineering_stop", "projection", "quiet_attempt", "quiet_baseline", "memory_check", "task_done",
 )  # fmt: skip
 
 
@@ -78,7 +78,10 @@ _REQUIRED: dict[str, tuple[str, ...]] = {
     "seed_ranges": ("registered", "calibration", "rehearsal", "init", "test", "checker", "checker_sha256", "checker_allocation_name"),
     "platform": ("system", "machine", "torch", "torch_num_threads", "torch_interop_threads", "deterministic_algorithms"),
     "resources": ("workers", "workers_alternatives", "rss_worker_bytes", "rss_aggregate_bytes", "eval_chunk_elements"),
-    "quiet": ("load_average_max", "poll_seconds", "session_hours", "attempts", "not_measured_after_paused_attempts", "timing_warmup_updates", "timing_updates", "timing_repeats", "throughput_batches", "throughput_repeats", "throughput_cv_max"),
+    "quiet": (
+        "baseline_provisional", "load_p95", "load_limit", "condition", "app_present", "cli_present", "baseline_record_path", "baseline_record_sha256", "load_margin", "load_ceiling", "load_report_above", "percentile", "baseline_samples",
+        "baseline_interval_seconds", "settle_samples", "settled_median_diff_max", "settled_p95_diff_max", "sample_gap_max_seconds", "hid_idle_min_seconds", "end_load_delay_seconds", "baseline_session_hours",
+        "baseline_attempt_minutes", "open_sessions_before_closed", "closed_sessions_to_human_lead", "timing_spread_max", "timing_spread_sessions_to_human_lead", "vm_markers", "app_markers", "cli_markers", "poll_seconds", "session_hours", "attempts", "not_measured_after_paused_attempts", "timing_warmup_updates", "timing_updates", "timing_repeats", "throughput_batches", "throughput_repeats", "throughput_cv_max"),
     "memory_check": ("retry_seconds", "max_hours", "page_kinds"),
     "budget": ("total_cap_hours", "level_count", "cell_order", "cap_rule"),
     "caps": ("provisional", "rehearsal_hours", "calibration_hours", "train_hours", "evaluate_hours", "timing_hours", "throughput_hours", "analysis_hours", "total_hours"),
@@ -825,3 +828,8 @@ def cap_hours(name: str, cfg: Mapping[str, Any] | None = None) -> float:
 
 def caps_provisional(cfg: Mapping[str, Any] | None = None) -> bool:
     return bool(cfg_of(cfg)["caps"]["provisional"])
+
+
+def baseline_provisional(cfg: Mapping[str, Any] | None = None) -> bool:
+    """True until the study's own quiet baseline (ADR-0024 addendum A3.1) has been taken and its figures written into ``[quiet]``."""
+    return bool(cfg_of(cfg)["quiet"]["baseline_provisional"])

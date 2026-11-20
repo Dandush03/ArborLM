@@ -143,12 +143,12 @@ def test_f4_the_pool_gives_bit_identical_results_to_one_worker_and_workers_are_s
 def test_f4_the_cumulative_cap_pauses_and_a_resume_gets_what_is_left(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.chdir(ROOT)
     led_path = tmp_path / "sealed" / "ledger.json"
-    first = pool_engine(tmp_path, 1, core.Ledger(led_path, 1.0))  # a one-second cap: the first worker cannot finish
+    first = pool_engine(tmp_path, 1, core.Ledger(led_path, 0.2))  # a 0.2-second cap (a worker needs about a second on an idle machine: a one-second cap was a race): the first worker cannot finish
     with pytest.raises(calibrate_engine.CalibrationPaused):
         first.prefetch([("F-OQ|1024", 0.003, 16)])
-    assert core.Ledger(led_path, 1.0).charged("calibration") >= 0.9 and not list((first.ctx.run_dir / "evaluate").rglob("*.json"))
+    assert core.Ledger(led_path, 0.2).charged("calibration") >= 0.15 and not list((first.ctx.run_dir / "evaluate").rglob("*.json"))
     with pytest.raises(core.LedgerRefused):
-        pool_engine(tmp_path, 1, core.Ledger(led_path, 1.0)).prefetch([("F-OQ|1024", 0.003, 16)])  # nothing left: PAUSED, not run
+        pool_engine(tmp_path, 1, core.Ledger(led_path, 0.2)).prefetch([("F-OQ|1024", 0.003, 16)])  # nothing left: PAUSED, not run
     resumed = pool_engine(tmp_path, 1, core.Ledger(led_path, 600.0))  # the lead extends the cap by a decision on cost: the same records resume
     resumed.prefetch([("F-OQ|1024", 0.003, 16)])
     assert resumed.measure("F-OQ|1024", 0.003, 16).readout_a_use >= 0.0 and core.Ledger(led_path, 600.0).charged("calibration") > 1.0
