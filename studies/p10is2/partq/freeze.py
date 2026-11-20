@@ -153,6 +153,34 @@ def cmd_reuse_file(args: argparse.Namespace) -> int:
     return 0
 
 
+def differing_paths(a: Any, b: Any, path: str = "") -> list[str]:
+    """The paths at which two parsed JSON values differ (a path present in one only counts)."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        out: list[str] = []
+        for k in sorted(set(a) | set(b)):
+            out += [f"{path}.{k}"] if (k not in a or k not in b) else differing_paths(a[k], b[k], f"{path}.{k}")
+        return out
+    return [] if a == b else [path or "."]
+
+
+def rederive_differences(repo: Path, plan: planmod.Plan, cfg: Mapping[str, Any], walk: Mapping[str, Any]) -> list[str]:
+    """What differs between the committed plan and a re-derivation from the current code, config and inputs. The re-derivation is built with everything the plan was built from: its inputs (the reuse block included) and
+    the charge before the freeze it RECORDED (``charge_before_freeze``: it is an input of the plan, not something the freeze can recompute without the ledgers; ``check_charge_unchanged`` checks the ledgers)."""
+    rederived = qplan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, inputs=plan.data["inputs"], mode=plan.data["mode"], walk=walk, test_mode=True, charge_before_freeze=plan.data.get("charge_before_freeze"))
+    return differing_paths(qplan.scientific_content(json.loads(json.dumps(core.jsonable(rederived)))), qplan.scientific_content(plan.data))
+
+
+def check_charge_unchanged(plan: planmod.Plan) -> dict[str, Any]:
+    """The charge before the freeze is the one the plan recorded (the caps came from it). Each ledger the plan names must still hold at least the seconds recorded (a ledger that holds LESS was altered: refused); a ledger
+    that grew since (a later attempt or rehearsal charged to it) is reported, not added: the counting rehearsal's own charge is NOT added to the cap (the auditor's ruling; its seconds go in Decision 2)."""
+    rec = plan.data.get("charge_before_freeze") or {}
+    now = {k: core.Ledger(Path(k), "Q", 1e12).charged() if Path(k).is_file() else None for k in (rec.get("ledgers") or {})}
+    lost = [k for k, v in (rec.get("ledgers") or {}).items() if now[k] is None or now[k] < float(v) - 1e-6]
+    if lost:
+        raise StageRefused("refused: a ledger the plan's charge before the freeze was taken from holds less now (or is gone): " + ", ".join(lost))
+    return {"recorded_seconds": rec.get("seconds"), "grown_since": {k: now[k] - float(v) for k, v in (rec.get("ledgers") or {}).items() if now[k] is not None and now[k] - float(v) > 1e-6}}
+
+
 def reuse_rehearsal_gate(record: Mapping[str, Any], plan_file_sha256: str) -> dict[str, Any]:
     """The counting rehearsal of a plan that reuses stages: kind counting on non-provisional caps, this plan's SHA-256, every stage of ``reuse.ORDER`` COMPLETE, and the forced PAUSED — IDENTITY on a reused file."""
     done = {s for s, v in (record.get("stages") or {}).items() if v.get("status") == "COMPLETE"}
@@ -366,10 +394,10 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
     walk = planmod.import_walk(repo, "Q")
-    inputs = plan.data["inputs"]
-    rederived = qplan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, inputs=inputs, mode=plan.data["mode"], walk=walk, test_mode=True)  # the ledger is required (and read) just below
-    if qplan.scientific_content(json.loads(json.dumps(core.jsonable(rederived)))) != qplan.scientific_content(plan.data):
-        raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and inputs: supersede it and rehearse again")
+    differing = rederive_differences(repo, plan, cfg, walk)  # the ledger is required (and read) just below
+    if differing:
+        raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and inputs in: " + ", ".join(differing[:10]) + ": supersede it and rehearse again")
+    charge_info = check_charge_unchanged(plan)
     listed = {k: v for k, v in plan.data["frozen_files"].items()}
     wp = planmod.walk_problems(walk, listed, repo)
     if wp:
@@ -413,7 +441,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rec = {
         **core.envelope("freeze_record", "Q"), "plan_file_sha256": plan_sha, "measuring_rehearsal": {"path": str(Path(args.measuring_rehearsal).resolve()), "sha256": file_sha256(Path(args.measuring_rehearsal))},
         "counting_rehearsal": {"path": str(Path(args.counting_rehearsal).resolve()), "sha256": file_sha256(Path(args.counting_rehearsal))}, "attestations": {"sealed_values_unopened_by": attest, "recorded_by": "the freeze command from the flags; not verified by code"},
-        "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "reuse": reuse_info or None, "counting_stage_seconds_against_caps": stage_lines, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
+        "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "charge_before_freeze": charge_info, "reuse": reuse_info or None, "counting_stage_seconds_against_caps": stage_lines, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
     }  # fmt: skip
     record.parent.mkdir(parents=True, exist_ok=True)
     write_json(record, core.jsonable(rec))

@@ -166,7 +166,9 @@ def test_attempt_2s_run_directory_must_be_read_only(tmp_path: Path) -> None:
 
 
 def test_caps_config_attempt3_writes_only_its_own_section(tmp_path: Path) -> None:
-    text = (ROOT / core.CONFIG_Q).read_text()
+    text = (ROOT / core.CONFIG_Q).read_text()  # the repository's config may already hold the attempt-3 caps: start from the unset section
+    sa, sb = freeze.section_span(text, "stage_caps_attempt3")
+    text = text[:sa] + re.sub(r"(?m)^((?:reuse|regeneration|outputs|analysis|total)_hours) = [0-9.]+", r"\1 = 0.0", text[sa:sb]) + text[sb:]
     new = freeze.apply_caps_attempt3(text, {"reuse_hours": 0.05, "regeneration_hours": 0.3, "outputs_hours": 0.4, "analysis_hours": 0.05, "total_hours": 12.5})
     cfg_old, cfg_new = tomllib.loads(text), tomllib.loads(new)
     assert cfg_new["stage_caps"] == cfg_old["stage_caps"] and cfg_new["caps"] == cfg_old["caps"]  # attempt 2's caps and caps.provisional untouched
@@ -281,3 +283,52 @@ def test_the_reuse_file_command_adds_the_block_to_a_copy_of_the_inputs_and_refus
 def test_the_plan_builder_records_the_charge_before_the_freeze(tmp_path: Path) -> None:
     rec = qplan.build_candidate(ROOT, tmp_path / "run", core.load_config("Q"), inputs={}, walk={"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []}, test_mode=True, charge_before_freeze={"seconds": 42636.8, "ledgers": {"/x/charged_ledger.json": 42636.8}})
     assert rec["charge_before_freeze"]["seconds"] == 42636.8
+
+
+# --- the freeze's re-derivation compares like with like (the real freeze refused a plan built with --charged-ledger) -----------------------------------
+def real_plan_with_charge(tmp: Path, charge: dict, inputs: dict) -> tuple[planmod.Plan, dict]:  # type: ignore[type-arg]
+    cfg = core.load_config("Q")
+    walk = {"python_files": [], "files_opened": [], "outside_study_python": [], "outside_study_data": []}
+    rec = qplan.build_candidate(ROOT, tmp / "registered3", cfg, inputs=inputs, walk=walk, test_mode=True, charge_before_freeze=charge)
+    return planmod.Plan(json.loads(json.dumps(core.jsonable(rec))), "Q"), walk
+
+
+def test_the_rederivation_of_a_plan_built_with_a_charge_and_a_reuse_block_equals_the_plan(tmp_path: Path) -> None:
+    d = fake_attempt(tmp_path)
+    led = tmp_path / "charged_ledger.json"
+    core.Ledger(led, "Q", 1e12).charge_process("qfit", "registered", "main", 100.0)
+    charge = freeze.ledgers_charge([str(led)])
+    inputs = {"requirements": {"path": "r", "sha256": "0" * 64}, reuse.KEY: reuse.build_block(d, "c" * 40)}
+    plan, walk = real_plan_with_charge(tmp_path, charge, inputs)
+    cfg = core.load_config("Q")
+    assert freeze.rederive_differences(ROOT, plan, cfg, walk) == []  # like with like: the recorded charge and the reuse block are inputs of the plan
+    old_style = qplan.build_candidate(ROOT, tmp_path / "registered3", cfg, inputs=inputs, walk=walk, test_mode=True)  # what the freeze did before: no charge
+    assert freeze.differing_paths(qplan.scientific_content(json.loads(json.dumps(core.jsonable(old_style)))), qplan.scientific_content(plan.data)) == [".charge_before_freeze"]
+
+
+def test_a_genuinely_different_plan_is_still_refused_and_the_differing_fields_are_named(tmp_path: Path) -> None:
+    d = fake_attempt(tmp_path)
+    led = tmp_path / "charged_ledger.json"
+    core.Ledger(led, "Q", 1e12).charge_process("qfit", "registered", "main", 100.0)
+    inputs = {"requirements": {"path": "r", "sha256": "0" * 64}, reuse.KEY: reuse.build_block(d, "c" * 40)}
+    plan, walk = real_plan_with_charge(tmp_path, freeze.ledgers_charge([str(led)]), inputs)
+    cfg = core.load_config("Q")
+    tampered = json.loads(json.dumps(plan.data))
+    tampered["stage_caps"]["total_hours"] = 99.0  # a cap that is not the config's
+    tampered["charge_before_freeze"]["seconds"] += 1000.0  # a charge other than the one the inputs and ledgers give: it is compared with itself, so the ledger check carries it
+    tampered["inputs"]["reuse"]["files"]["inputs/a.json"] = "0" * 64
+    diffs = freeze.rederive_differences(ROOT, planmod.Plan(tampered, "Q"), cfg, walk)
+    assert ".stage_caps.total_hours" in diffs  # named, not guessed
+
+
+def test_the_charge_before_the_freeze_is_the_one_the_plan_recorded(tmp_path: Path) -> None:
+    led = tmp_path / "charged_ledger.json"
+    core.Ledger(led, "Q", 1e12).charge_process("qfit", "registered", "main", 100.0)
+    plan, _walk = real_plan_with_charge(tmp_path, freeze.ledgers_charge([str(led)]), {})
+    assert freeze.check_charge_unchanged(plan)["grown_since"] == {}
+    core.Ledger(led, "Q", 1e12).charge_process("counting", "rehearsal", "main", 50.0)  # a later charge to a named ledger is reported, never added to the cap
+    assert freeze.check_charge_unchanged(plan)["grown_since"] == {str(led): pytest.approx(50.0)}
+    led.unlink()
+    core.Ledger(led, "Q", 1e12).charge_process("qfit", "registered", "main", 1.0)  # a ledger that holds LESS: altered
+    with pytest.raises(core.StageRefused, match="holds less"):
+        freeze.check_charge_unchanged(plan)
