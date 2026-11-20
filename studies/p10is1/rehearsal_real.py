@@ -184,13 +184,23 @@ def write_rehearsal_record(path: Path, *, caps_provisional: bool, stage_status: 
     return rec
 
 
-def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Path | None = None, synthetic_data: bool = False, inline: bool = False, workers: int = 6, qualification: Mapping[str, Any] | None = None, record_path: Path | None = None, quiet_reading: Any = None, end_fn: Any = None, sleep: Any = None, chain: Sequence[str] = REHEARSAL_STAGE_CHAIN, resume: bool = False, clock: Any = None) -> dict[str, Any]:
+def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Path | None = None, synthetic_data: bool = False, inline: bool = False, workers: int = 6, qualification: Mapping[str, Any] | None = None, record_path: Path | None = None, quiet_reading: Any = None, end_fn: Any = None, sleep: Any = None, chain: Sequence[str] = REHEARSAL_STAGE_CHAIN, resume: bool = False, clock: Any = None, watch_fn: Any = None) -> dict[str, Any]:
     """The counting rehearsal (see the module docstring). ``chain`` names the stage functions to run (a test of the record alone passes ``()``; the lead's run uses the whole chain). The quiet stages (timing,
     throughput) run through the SAME ``stages.execute_stage`` as the registered launch, with the config's measured rule (``quiet.quiet_reading``, ``quiet.end_check``) unless a test injects a reading. ``resume=True``
     (ADR-0024 addendum A8 item 6): the run directory already exists; a stage whose manifest says COMPLETE is NOT run again, a PAUSED one is retried by itself; the record is COMPLETE only when every stage, both quiet
     stages included, has a quiet run. The seconds spent waiting for a quiet reading are returned (``waited_seconds``) and are not charged."""
     cfg = core.load_config(config_path) if config_path else core.load_config(repo / core.CONFIG)
     run_dir.mkdir(parents=True, exist_ok=True)
+    start_path = run_dir / "counting_start.json"  # F5: the plan file this directory was started with; a resume (or any later call) with another plan is refused: stages completed under one plan must not be named by a record of another
+    plan_sha = file_sha256(plan_path)
+    if start_path.is_file():
+        started_with = read_json(start_path)["plan_file_sha256"]
+        if started_with != plan_sha:
+            raise core.StageRefused(f"refused: {run_dir} was started with the plan of SHA-256 {started_with}, not {plan_sha}: a counting rehearsal is resumed with its own plan file only")
+    elif resume:
+        raise core.StageRefused(f"refused: {run_dir} has no counting_start.json: there is no counting rehearsal of a known plan to resume")
+    else:
+        start_path.write_text(json.dumps({"plan_file_sha256": plan_sha}, sort_keys=True) + "\n", encoding="utf-8")
     pl = planmod.Plan.load(plan_path)
     view = rehearsal_view(pl, run_dir, cfg)
     vpath = view.path or plan_path
@@ -207,7 +217,7 @@ def run_counting(plan_path: Path, run_dir: Path, *, repo: Path, config_path: Pat
         if resume and mpath.is_file() and core.read_record(mpath, "stage_manifest")["status"] == "COMPLETE":
             status[st] = "COMPLETE"  # completed stages are not run again
             continue
-        kw: dict[str, Any] = {"quiet_reading": quiet_reading, "end_fn": end_fn, "sleep": sleep, **({"clock": clock} if clock is not None else {})} if quiet_reading is not None else {}
+        kw: dict[str, Any] = {"quiet_reading": quiet_reading, "end_fn": end_fn, "sleep": sleep, **({"clock": clock} if clock is not None else {}), **({"watch_fn": watch_fn} if watch_fn is not None else {})} if quiet_reading is not None else {}
         rec = stages.execute_stage(st, view, ctx, run_dir, vpath, args, repo=repo, inline=inline, workers=workers, **kw)
         status[st] = rec["status"]
         waited += float(rec.get("waited_seconds_not_charged", 0.0))

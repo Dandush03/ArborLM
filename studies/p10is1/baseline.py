@@ -17,6 +17,7 @@
 
 import argparse
 import json
+import os
 import sys
 import time
 from collections.abc import Callable, Mapping, Sequence
@@ -55,6 +56,53 @@ def next_condition(sessions: Sequence[Mapping[str, Any]], q: Mapping[str, Any]) 
     return ("closed" if open_n >= int(q["open_sessions_before_closed"]) else "open"), counts
 
 
+def default_root() -> Path:
+    """The study's ONE baseline root (F4): ``<experiments>/P10IS1-quiet-baseline`` (the environment variable ``P10IS1_BASELINE_ROOT`` names another, for tests). It holds ``first/`` (every session of the first baseline)
+    and, only for one of the four reasons, ``second/``; nothing else may hold a baseline record."""
+    env = os.environ.get("P10IS1_BASELINE_ROOT")
+    if env:
+        return Path(env)
+    from studies.p9 import core as p9core
+
+    return Path(p9core.default_experiments_root()) / "P10IS1-quiet-baseline"
+
+
+def resolve_out(root: Path, replaces: bool) -> Path:
+    """One baseline per STUDY, not per output directory (F4). The first baseline lives in ``root/first`` and continues there across PAUSED sessions; a record that is not ACCEPTED is "not settled under the addendum's own
+    rule" and may be continued, never restarted elsewhere. Refused: any other directory under the root that holds a baseline record; a new first baseline once ``first`` is ACCEPTED; a second baseline otherwise than
+    through ``--replaces`` (into ``root/second``, with one of the four reasons, written before the sampling)."""
+    first, second = root / "first", root / "second"
+    strays = sorted(str(p.parent) for p in root.glob("*/" + RECORD) if p.parent.name not in ("first", "second")) if root.is_dir() else []
+    if strays:
+        raise core.StageRefused(f"refused: {strays} hold baseline records outside first/ and second/: this study has ONE baseline root ({root})")
+    first_status = core.read_record(first / RECORD, "quiet_baseline").get("status") if (first / RECORD).is_file() else None
+    if not replaces:
+        if first_status == ACCEPTED or (second / RECORD).is_file() or (second / REASON_FILE).is_file():
+            raise core.StageRefused(f"refused: this study's baseline is taken once ({first / RECORD} is ACCEPTED); a second only with --replaces and one of {list(SECOND_REASONS)}")
+        return first
+    if first_status != ACCEPTED:
+        raise core.StageRefused("refused: there is no ACCEPTED first baseline to replace")
+    if (second / RECORD).is_file() and core.read_record(second / RECORD, "quiet_baseline").get("status") == ACCEPTED:
+        raise core.StageRefused("refused: a second baseline has been taken; there is no third")
+    return second
+
+
+def check_root_consistency(root: Path, record_path: Path) -> None:
+    """The freeze's check (F4), when this machine's root exists: the committed record must be the root's first ACCEPTED record, or the root's second whose reason file predates its first sample."""
+    first, second = root / "first", root / "second"
+    sha = file_sha256(record_path)
+    if (first / RECORD).is_file() and file_sha256(first / RECORD) == sha:
+        if (second / RECORD).is_file() and core.read_record(second / RECORD, "quiet_baseline").get("status") == ACCEPTED:
+            raise core.StageRefused("refused: the committed baseline is the first, but an ACCEPTED second baseline exists in the root: the second replaced it")
+        return
+    if (second / RECORD).is_file() and file_sha256(second / RECORD) == sha:
+        reason, samples = second / REASON_FILE, second / SAMPLES
+        if not reason.is_file() or not samples.is_file() or json.loads(reason.read_text())["utc"] >= json.loads(samples.read_text().splitlines()[0])["utc"]:
+            raise core.StageRefused("refused: the second baseline's reason file does not predate its first sample")
+        return
+    raise core.StageRefused(f"refused: the committed baseline record is neither the first ACCEPTED record nor the second of {root}: one baseline per study, taken by this command in its root")
+
+
 def check_second(reason: str, replaces: Path, registered_run_dir: Path) -> dict[str, Any]:
     """A second baseline only for one of the four reasons, an accepted first record to replace, and no registered timing value yet."""
     if reason not in SECOND_REASONS:
@@ -64,7 +112,7 @@ def check_second(reason: str, replaces: Path, registered_run_dir: Path) -> dict[
         raise core.StageRefused(f"refused: {rec_path} is not an accepted baseline record: there is nothing to replace")
     if (registered_run_dir / "timing" / "timing.json").exists():
         raise core.StageRefused("refused: a registered timing value exists: no baseline is taken after it")
-    return {"replaces": str(rec_path.resolve()), "replaces_sha256": file_sha256(rec_path)}
+    return {"replaces": str(rec_path.resolve()), "replaces_sha256": file_sha256(rec_path), "earlier_attempts": core.read_record(rec_path, "quiet_baseline").get("attempts", [])}  # the first baseline's attempts stay listed
 
 
 def write_record(out: Path, rec: Mapping[str, Any]) -> None:
@@ -144,6 +192,8 @@ def run_baseline(
                         failed.append("BOOT TIME CHANGED")
                     if (got["app_present"], got["cli_present"]) != (cur[0]["app_present"], cur[0]["cli_present"]):
                         failed.append("APPLICATION PRESENCE CHANGED")
+                    if got.get("claude_pids") != cur[0].get("claude_pids"):
+                        failed.append("CLAUDE PROCESS SET CHANGED")  # F1: a new or ended Claude process (another session started or stopped) inside the attempt
                 in_attempt = bool(cur) or not failed
                 if in_attempt and not cur:
                     attempt_no += 1
@@ -151,7 +201,7 @@ def run_baseline(
                 idx = len(cur) + 1 if in_attempt else 0
                 sample = {
                     "session": n_session, "attempt": attempt_no if in_attempt else 0, "index": idx, "phase": ("settle" if idx <= settle else "window") if in_attempt else "waiting", "utc": _utc(), "t": t, "condition": cond, "load1_h": h1, "load5_h": h5,
-                    "failed": failed, "app_present": got["app_present"], "cli_present": got["cli_present"], "hid_idle_seconds": got.get("hid_idle_seconds"), "boot": got["boot"], "mains": got.get("mains"), "low_power_mode": got.get("low_power_mode"),
+                    "failed": failed, "app_present": got["app_present"], "cli_present": got["cli_present"], "claude_pids": got.get("claude_pids"), "tool_shells": got.get("tool_shells", []), "hid_idle_seconds": got.get("hid_idle_seconds"), "boot": got["boot"], "mains": got.get("mains"), "low_power_mode": got.get("low_power_mode"),
                     "thermal_lines": got.get("thermal_lines", []), "other_study_processes": got["other_study_processes"], "vm_processes": got["vm_processes"], "sampler_cpu_seconds": pr.cpu() - cpu0,
                 }  # fmt: skip
                 quiet.append_line(samples_path, sample)  # on disk before anything else happens
@@ -274,9 +324,9 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="studies.p10is1.baseline")
     sub = p.add_subparsers(dest="command", required=True)
     r = sub.add_parser("run", help="one session of the quiet baseline (about 80 minutes when the machine is left alone; up to 6 hours)")
-    r.add_argument("--out-dir", required=True)
+    r.add_argument("--root", help="the study's baseline root (default: <experiments>/P10IS1-quiet-baseline); the first baseline is root/first, a second root/second")
     r.add_argument("--config")
-    r.add_argument("--replaces", help="a second baseline: the directory of the accepted first one")
+    r.add_argument("--replaces", action="store_true", help="a second baseline, replacing the ACCEPTED first one of the root")
     r.add_argument("--reason", help=f"one of {list(SECOND_REASONS)} (second baseline only)")
     r.add_argument("--reason-text", default="")
     r.add_argument("--registered-run-dir", help="the registered run directory (a second baseline is refused if its timing record exists)")
@@ -295,12 +345,13 @@ def main(argv: list[str] | None = None) -> int:
             d = rederive(Path(args.record), cfg["quiet"])
             print(json.dumps(core.jsonable({"load_p95": d["load_p95"], "load_limit": d["load_limit"], "condition": d["condition"], "app_present": d["app_present"], "cli_present": d["cli_present"], "baseline_record_sha256": d["record_sha256"], "settled": d["settled"], "report_above": d["report_above"]}), sort_keys=True))
             return 0
-        out = Path(args.out_dir)
+        root = Path(args.root) if args.root else default_root()
+        out = resolve_out(root, bool(args.replaces))
         second = None
         if args.replaces:
             if not args.reason or not args.registered_run_dir:
                 raise core.StageRefused("refused: a second baseline needs --reason and --registered-run-dir")
-            second = {**check_second(args.reason, Path(args.replaces), Path(args.registered_run_dir)), "reason": args.reason, "text": args.reason_text, "utc": _utc()}
+            second = {**check_second(args.reason, root / "first", Path(args.registered_run_dir)), "reason": args.reason, "text": args.reason_text, "utc": _utc()}
             out.mkdir(parents=True, exist_ok=True)
             if not (out / REASON_FILE).exists():
                 (out / REASON_FILE).write_text(json.dumps(second, indent=2, sort_keys=True) + "\n", encoding="utf-8")  # the reason is on disk BEFORE the second baseline is taken

@@ -422,7 +422,8 @@ def test_a_closed_baseline_is_accepted_when_nothing_of_the_application_is_open(t
 
 
 def test_a_second_baseline_only_for_a_listed_reason_before_any_timing_value(tmp_path: Path) -> None:
-    first = tmp_path / "first"
+    root = tmp_path / "root"
+    first = root / "first"
     run_session(FakeMachine(), first, small())
     reg = tmp_path / "registered_run"
     for r in baseline.SECOND_REASONS:
@@ -437,10 +438,10 @@ def test_a_second_baseline_only_for_a_listed_reason_before_any_timing_value(tmp_
     with pytest.raises(core.StageRefused, match="nothing to replace"):
         baseline.check_second("os_update", tmp_path / "missing", reg)
     # through the command: a refusal writes no reason file and takes no sample
-    out2 = tmp_path / "second"
-    rc = baseline.main(["run", "--out-dir", str(out2), "--replaces", str(first), "--reason", "because", "--registered-run-dir", str(reg)])
+    out2 = root / "second"
+    rc = baseline.main(["run", "--root", str(root), "--replaces", "--reason", "because", "--registered-run-dir", str(reg)])
     assert rc == 2 and not out2.exists()
-    assert baseline.main(["run", "--out-dir", str(out2), "--condition", "closed"]) == 2  # a condition is chosen by the rule, not by an argument
+    assert baseline.main(["run", "--root", str(root), "--condition", "closed"]) == 2  # the first baseline is taken: no condition argument, no new first one
     # a replacing baseline may name the condition only for the human lead's decision, and carries its reason
     rec = run_session(FakeMachine(), out2, small(), condition="closed", second={"reason": "condition_change_by_human_lead", "replaces": "x"})
     assert rec["condition"] == "closed" and rec["second_baseline"]["reason"] == "condition_change_by_human_lead"
@@ -449,9 +450,9 @@ def test_a_second_baseline_only_for_a_listed_reason_before_any_timing_value(tmp_
 
 
 def test_the_second_baselines_reason_is_on_disk_before_its_first_sample(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    first = tmp_path / "first"
-    run_session(FakeMachine(), first, small())
-    out2 = tmp_path / "second"
+    root = tmp_path / "root"
+    run_session(FakeMachine(), root / "first", small())
+    out2 = root / "second"
 
     def fake_run(o: Path, **kw: Any) -> dict[str, Any]:
         assert (o / baseline.REASON_FILE).is_file() and not (o / baseline.SAMPLES).exists()  # the reason precedes the sampling
@@ -459,7 +460,7 @@ def test_the_second_baselines_reason_is_on_disk_before_its_first_sample(tmp_path
 
     monkeypatch.setattr(baseline, "run_baseline", fake_run)
     monkeypatch.setattr(baseline, "file_sha256", lambda p: "0" * 64)
-    rc = baseline.main(["run", "--out-dir", str(out2), "--replaces", str(first), "--reason", "os_update", "--reason-text", "26B131 to the next build", "--registered-run-dir", str(tmp_path / "none")])
+    rc = baseline.main(["run", "--root", str(root), "--replaces", "--reason", "os_update", "--reason-text", "26B131 to the next build", "--registered-run-dir", str(tmp_path / "none")])
     assert rc == baseline.EXIT_PAUSED
     assert json.loads((out2 / baseline.REASON_FILE).read_text())["text"] == "26B131 to the next build"
 

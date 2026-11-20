@@ -413,3 +413,9 @@ def test_the_launch_scripts_are_single_commands_with_a_timeout_above_the_deadlin
     mach = (ROOT / "studies" / "p10is1" / "machine.py").read_text()
     assert '"caffeinate"' not in mach.split("def keep_awake")[0] and "subprocess.Popen([exe, \"-i\", \"-w\"" in mach
     assert 'machine.keep_awake()' in inspect.getsource(stages.cmd_registered) and "keep_awake" in inspect.getsource(baseline.run_baseline.__globals__["machine"].keep_awake) + inspect.getsource(baseline.run_baseline)
+
+
+@pytest.fixture(autouse=True)
+def _no_real_baseline_root(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The freeze checks the committed baseline against the study's real baseline root when that exists on this machine; these tests use synthetic records and never depend on it (F4)."""
+    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(tmp_path_factory.mktemp("no_baseline_root") / "absent"))

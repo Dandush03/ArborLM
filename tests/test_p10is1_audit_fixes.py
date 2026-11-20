@@ -385,3 +385,9 @@ def test_prefreeze_stages_charge_a_ledger(tmp_path: Path) -> None:
     led.charge("generate", "run", 90.0)
     led.charge("qualify", "run", 30.0)
     assert core.read_ledger_seconds(run.parent / "P10IS1-prefreeze-ledger.json") == 120.0
+
+
+@pytest.fixture(autouse=True)
+def _no_real_baseline_root(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The freeze checks the committed baseline against the study's real baseline root when that exists on this machine; these tests use synthetic records and never depend on it (F4)."""
+    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(tmp_path_factory.mktemp("no_baseline_root") / "absent"))

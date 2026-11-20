@@ -63,7 +63,7 @@ def test_memory_check_retries_every_ten_minutes_for_at_most_six_hours_then_pause
 
 def _fake(load: tuple[float, float] = (1.0, 1.0), extra: list[tuple[int, int, str]] | None = None, **kw: Any) -> machine.Probe:
     rows = [(1, 0, "/sbin/launchd"), (500, 1, "python -m studies.p10is1.stages registered timing"), *(extra or [])]
-    return machine.Probe(load=lambda: load, table=lambda: rows, power=lambda: {"mains": kw.get("mains", True), "low_power_mode": kw.get("low", False)}, therm=lambda: [], hid_ns=lambda: kw.get("hid", 10**13), boot=lambda: 1, pid=500)
+    return machine.Probe(load=lambda: load, table=lambda: rows, power=lambda: {"mains": kw.get("mains", True), "low_power_mode": kw.get("low", False)}, therm=lambda: [], hid_ns=lambda: kw.get("hid", 10**13), boot=lambda: 1, pid=500, allow=kw.get("allow"))
 
 
 CFG = qr.qcfg()  # a MEASURED quiet block: L = 180 hundredths (1.80), open condition, the application and Claude Code absent
@@ -82,7 +82,11 @@ def test_quiet_reading_is_one_and_five_minute_load_at_most_l_in_integer_hundredt
     other = [(5, 1, "python -m studies.p10s1.stages timing --mode registered"), (6, 1, "python -m studies.p10is1.stages train --run-dir x"), (7, 1, "uv run python -m studies.p10ir.stages a1")]
     r2 = rd((1.0, 1.0), extra=other)
     assert r2["quiet"] is False and len(r2["other_study_processes"]) == 3 and not any(p.startswith("500:") for p in r2["other_study_processes"])  # this process is not "another"
-    assert rd((1.0, 1.0), extra=[(9, 1, "pytest tests/test_p10s1_core.py studies.p10s1"), (10, 1, "vim studies/p10s1/core.py")])["quiet"] is True
+    pyt = [(9, 1, "pytest tests/test_p10s1_core.py studies.p10s1"), (10, 1, "vim studies/p10s1/core.py")]
+    assert rd((1.0, 1.0), extra=pyt)["failed"] == ["OTHER STUDY PROCESS ALIVE"]  # F2: a pytest of another study is seen
+    import re
+
+    assert rd((1.0, 1.0), extra=pyt, allow=re.compile("pytest"))["quiet"] is True  # only a test-only allowance exempts it
     assert rd((1.0, 1.0), extra=[(900, 1, "/Applications/Claude.app/Contents/MacOS/Claude")])["failed"] == ["APPLICATION PRESENCE DIFFERS FROM THE BASELINE'S"]  # the baseline had it closed
     app_cfg = qr.qcfg(app_present=True)
     assert quiet.quiet_reading(probe=_fake((1.0, 1.0), extra=[(900, 1, "/Applications/Claude.app/Contents/MacOS/Claude")]), cfg=app_cfg)["quiet"] is True
@@ -193,10 +197,12 @@ def test_run_alone_stage_pauses_discards_and_completes(tmp_path: Path) -> None:
     kw: dict[str, Any] = {"sleep": clk.sleep, "clock": clk, "cfg": CFG, "top_fn": lambda: []}
     r = quiet.run_alone_stage(tmp_path, "timing", measure, reading=lambda: not_quiet, end=lambda s: {"ok": True}, **kw)
     assert r["status"] == "PAUSED — QUIET CONDITION NOT MET" and calls["measured"] == 0 and quiet.paused_attempts(tmp_path, "timing") == [1]  # a session without a quiet run: PAUSED and rescheduled, never ended
-    bad_end = quiet.run_alone_stage(tmp_path, "timing", measure, reading=lambda: quiet_r, end=lambda s: {"ok": False, "other_study_processes": ["5: x"]}, **kw)
-    assert bad_end["status"] == "PAUSED — QUIET CONDITION NOT MET" and bad_end["discarded"] and calls["measured"] == 1 and quiet.paused_attempts(tmp_path, "timing") == [1, 2]
+    bad_end = quiet.run_alone_stage(tmp_path, "timing", measure, reading=lambda: quiet_r, end=lambda s: {"ok": False, "other_study_processes": ["5: x"], "failed": ["OTHER STUDY PROCESS ALIVE"]}, **kw)
+    assert bad_end["status"] == quiet.PAUSED_DISCARDED and calls["measured"] > 1 and len(bad_end["discards"]) == calls["measured"]  # F7: a failed end check is retried inside the bounded wait and never counts
+    assert quiet.paused_attempts(tmp_path, "timing") == [1]
+    calls["measured"] = 1
     good = quiet.run_alone_stage(tmp_path, "timing", measure, reading=lambda: quiet_r, end=lambda s: {"ok": True, "other_study_processes": []}, **kw)
-    assert good["status"] == "COMPLETE" and good["result"]["cpu"]["F-OQ|1024"] == 0.006 and calls["measured"] == 2 and quiet.paused_attempts(tmp_path, "timing") == [1, 2]
+    assert good["status"] == "COMPLETE" and good["result"]["cpu"]["F-OQ|1024"] == 0.006 and calls["measured"] == 2 and quiet.paused_attempts(tmp_path, "timing") == [1]
     rec = json.loads(Path(good["attempt_record"]).read_text())
     assert rec["attempt"] == 3 and rec["status"] == "QUIET RUN"
 
@@ -211,7 +217,7 @@ def timed(runs: list[float]) -> dict[str, Any]:
     return {"cpu": {"A|1": sorted(runs)[1]}, "detail": {"A|1": {"runs": runs, "wall_runs": [r * 1.1 for r in runs]}}}
 
 
-def drive(run: Path, clk: Clock, results: list[Any], *, readings: Any = None, stage: str = "timing", cap: float | None = None, spend: float = 5.0, account: dict[str, Any] | None = None, ends: Any = None) -> dict[str, Any]:
+def drive(run: Path, clk: Clock, results: list[Any], *, readings: Any = None, stage: str = "timing", cap: float | None = None, spend: float = 5.0, account: dict[str, Any] | None = None, ends: Any = None, watch: Any = None) -> dict[str, Any]:
     seq = iter(results)
 
     def measure(guard: Any = None) -> Any:
@@ -222,7 +228,7 @@ def drive(run: Path, clk: Clock, results: list[Any], *, readings: Any = None, st
 
     return quiet.run_alone_stage(
         run, stage, measure, reading=readings or (lambda: QUIET), end=ends or (lambda s: OK_END), sleep=clk.sleep, clock=clk, cfg=CFG, validate=(lambda res: quiet.timing_spreads(res, CFG)) if stage == "timing" else None, cap_seconds=cap, account=account,
-        guarded=True, top_fn=lambda: [{"pid": 1, "pcpu": 9.0, "comm": "x"}], trace_factory=lambda: quiet.LoadTrace(1e9, load_fn=lambda: 1.0, clock=clk),
+        guarded=True, watch=watch, top_fn=lambda: [{"pid": 1, "pcpu": 9.0, "comm": "x"}], trace_factory=lambda: quiet.LoadTrace(1e9, load_fn=lambda: 1.0, clock=clk),
     )  # fmt: skip
 
 
@@ -330,9 +336,11 @@ def test_a_second_spread_failure_ends_the_session_paused_timing_spread_and_three
 
 
 def test_a_failed_end_check_after_a_spread_failure_is_still_not_a_counted_session(tmp_path: Path) -> None:
-    ends = iter([OK_END, {"ok": False, "other_study_processes": ["5: x"], "failed": ["OTHER STUDY PROCESS ALIVE"]}])
-    r = drive(tmp_path, Clock(), [timed([1.0, 1.2, 1.0]), timed([1.0, 1.0, 1.0])], ends=lambda s: next(ends))
-    assert r["status"] == quiet.PAUSED_SPREAD and r["discarded"] and quiet.paused_attempts(tmp_path, "timing") == []
+    import itertools
+
+    ends = itertools.chain([OK_END], itertools.repeat({"ok": False, "other_study_processes": ["5: x"], "failed": ["OTHER STUDY PROCESS ALIVE"]}))
+    r = drive(tmp_path, Clock(), itertools.chain([timed([1.0, 1.2, 1.0])], itertools.repeat(timed([1.0, 1.0, 1.0]))), ends=lambda s: next(ends))
+    assert r["status"] == quiet.PAUSED_SPREAD and r["discards"] and quiet.paused_attempts(tmp_path, "timing") == []
 
 
 def test_the_six_session_decision_refuses_when_the_sessions_it_names_include_a_timing_spread_one(tmp_path: Path) -> None:

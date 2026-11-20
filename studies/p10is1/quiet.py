@@ -36,6 +36,8 @@ from . import core, loadrule, machine
 PAUSED_QUIET = "PAUSED — QUIET CONDITION NOT MET"
 PAUSED_SPREAD = "PAUSED — TIMING SPREAD"
 PAUSED_CAP = "PAUSED — STAGE CAP"
+PAUSED_NOT_SILENT = "PAUSED — NOT SILENT"  # F1/F6: a tool call of a Claude session, or a changed set of Claude processes, during the measurement or at the end check; never counted
+PAUSED_DISCARDED = "PAUSED — MEASUREMENT DISCARDED"  # F7: an end-check or in-measurement discard of any other cause; never counted (it is retried inside the bounded wait)
 PAUSED_ENVIRONMENT = "PAUSED — ENVIRONMENT"
 NOT_MEASURED = "NOT MEASURED"
 STAGES_ALONE = ("timing", "throughput")
@@ -96,14 +98,14 @@ def own_pids() -> set[int]:
     return machine.family(machine.ps_table(), os.getpid())
 
 
-def other_study_processes(commands: Sequence[tuple[int, str]] | None = None, own: set[int] | None = None) -> list[str]:
+def other_study_processes(commands: Sequence[tuple[int, str]] | None = None, own: set[int] | None = None, allow: re.Pattern[str] | None = None) -> list[str]:
     """Processes of any ArborLM study's stage (``python -m studies.p9...`` / ``studies.p10...``, this study's other stages included) other than this one's own family."""
     if commands is not None:
         me = own if own is not None else own_pids()
-        return [f"{pid}: {cmd[:160]}" for pid, cmd in commands if pid not in me and STUDY_STAGE_RE.search(cmd) and "pytest" not in cmd]
+        return [f"{pid}: {cmd[:160]}" for pid, cmd in commands if pid not in me and STUDY_STAGE_RE.search(cmd) and not (allow and allow.search(cmd))]
     table = machine.ps_table()
     me = own if own is not None else machine.family(table, os.getpid())
-    return [f"{pid}: {cmd[:160]}" for pid, _, cmd in table if pid not in me and STUDY_STAGE_RE.search(cmd) and "pytest" not in cmd]
+    return [f"{pid}: {cmd[:160]}" for pid, _, cmd in table if pid not in me and STUDY_STAGE_RE.search(cmd) and not (allow and allow.search(cmd))]
 
 
 def power_state() -> dict[str, Any]:
@@ -171,11 +173,11 @@ def polls_path(run_dir: Path, stage: str) -> Path:
     return run_dir / stage / "polls.jsonl"
 
 
-def quiet_session(*, reading: Callable[[], dict[str, Any]], sleep: Callable[[float], None] = time.sleep, clock: Callable[[], float] = time.monotonic, cfg: Mapping[str, Any] | None = None, log_path: Path | None = None, wait: str = "") -> dict[str, Any]:
+def quiet_session(*, reading: Callable[[], dict[str, Any]], sleep: Callable[[float], None] = time.sleep, clock: Callable[[], float] = time.monotonic, cfg: Mapping[str, Any] | None = None, log_path: Path | None = None, wait: str = "", limit_seconds: float | None = None) -> dict[str, Any]:
     """One WAIT for a quiet reading: the start conditions are checked and, if they are not met, every ``poll_seconds`` for at most ``session_hours`` (this wait's own deadline). Bounded: the deadline is checked before
     every sleep. Every reading is appended to ``log_path`` as it is taken. Returns the readings and whether a quiet reading was found."""
     q = core.cfg_of(cfg)["quiet"]
-    poll, limit = float(q["poll_seconds"]), float(q["session_hours"]) * 3600.0
+    poll, limit = float(q["poll_seconds"]), float(q["session_hours"]) * 3600.0 if limit_seconds is None else float(limit_seconds)
     began = clock()
     readings: list[dict[str, Any]] = []
     while True:
@@ -219,8 +221,10 @@ def end_check(started_pids: Sequence[int], *, probe: machine.Probe | None = None
 class LoadTrace:
     """The one-minute load every ``interval`` seconds while a quiet stage measures (descriptive, A8 item 5): a sleeping thread that reads ``getloadavg``. Stopped in a ``finally``."""
 
-    def __init__(self, interval: float, load_fn: Callable[[], float] = lambda: os.getloadavg()[0], clock: Callable[[], float] = time.monotonic) -> None:
+    def __init__(self, interval: float, load_fn: Callable[[], float] = lambda: os.getloadavg()[0], clock: Callable[[], float] = time.monotonic, check_fn: Callable[[], list[str]] | None = None) -> None:
         self.interval, self.load_fn, self.clock = float(interval), load_fn, clock
+        self.check_fn = check_fn  # F6: the machine's conditions, read at every tick; a failure is kept in ``failures``
+        self.failures: list[dict[str, Any]] = []
         self.samples: list[dict[str, Any]] = []
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
@@ -231,6 +235,13 @@ class LoadTrace:
             self.samples.append({"t_seconds": self.clock() - self._t0, "load1_h": loadrule.hundredths(self.load_fn())})
         except Exception:  # noqa: BLE001 - descriptive only
             self.samples.append({"t_seconds": self.clock() - self._t0, "load1_h": None})
+        if self.check_fn is not None:
+            try:
+                failed = list(self.check_fn())
+            except Exception as exc:  # noqa: BLE001 - an unreadable condition fails closed
+                failed = [f"CONDITIONS UNREADABLE DURING THE MEASUREMENT ({str(exc)[:80]})"]
+            if failed:
+                self.failures.append({"t_seconds": self.clock() - self._t0, "failed": failed})
 
     def start(self) -> "LoadTrace":
         self._t0 = self.clock()
@@ -249,6 +260,21 @@ class LoadTrace:
             self._thread.join(timeout=30)
         self._take()
         return self.samples
+
+
+def watch_conditions(first: Mapping[str, Any], *, probe: machine.Probe | None = None, cfg: Mapping[str, Any] | None = None) -> list[str]:
+    """F6: the conditions of A3.3 (not the loads) read once, compared with the quiet reading the measurement started from: every condition holds and the set of Claude processes is the same. Returns the failures."""
+    q = core.cfg_of(cfg)["quiet"]
+    cond = machine.read_conditions(probe or machine.Probe(), q, condition=str(q["condition"]), expect=expected_presence(cfg))
+    failed = list(cond["failed"])
+    if first.get("claude_pids") is not None and cond.get("claude_pids") is not None and list(cond["claude_pids"]) != list(first["claude_pids"]):
+        failed.append("CLAUDE PROCESS SET CHANGED")
+    return failed
+
+
+def discard_status(failed: Sequence[str]) -> str:
+    """The status of a discarded measurement: NOT SILENT when the lead's silence failed, else MEASUREMENT DISCARDED. Neither counts towards the six sessions of NOT MEASURED (ruling F7)."""
+    return PAUSED_NOT_SILENT if any(f in machine.SILENCE_FAILURES for f in failed) else PAUSED_DISCARDED
 
 
 class CapReached(RuntimeError):
@@ -384,12 +410,15 @@ def run_alone_stage(
     guarded: bool = False,
     top_fn: Callable[[], list[dict[str, Any]]] | None = None,
     trace_factory: Callable[[], LoadTrace] | None = None,
+    watch: Callable[[Mapping[str, Any]], list[str]] | None = None,
 ) -> dict[str, Any]:
-    """One session of a stage that runs alone (addendum A3.2 to A3.5). WAIT for a quiet reading (its own bounded wait; every poll appended to ``polls.jsonl``; the waiting is recorded in ``account['wait_seconds']`` and NOT
-    charged), MEASURE (``account['measure_seconds']``, from the quiet reading to the end check including its 120-s delay: the charged seconds, against ``cap_seconds`` of the stage's own cap), END-CHECK. ``validate`` (the
-    timing spread) judges a clean measurement: a failure discards it and the WHOLE list is measured once more after a new quiet reading with a wait of its own; a second failure ends the session PAUSED — TIMING SPREAD
-    (its own status; it never counts towards the six sessions of NOT MEASURED). A session without a quiet run is PAUSED — QUIET CONDITION NOT MET (counted) unless it already held a spread failure (then PAUSED — TIMING
-    SPREAD). A failed end check discards the figures. The measured record is written by the caller only on COMPLETE. The code never writes NOT MEASURED; three TIMING SPREAD sessions refuse (the human lead's)."""
+    """One session of a stage that runs alone (addendum A3.2 to A3.5 and the rulings F1-F7). WAIT for a quiet reading (a bounded wait window of its own; every poll appended to ``polls.jsonl``; the waiting is recorded
+    in ``account['wait_seconds']`` and NOT charged), MEASURE (``account['measure_seconds']``, from the quiet reading to the end check including its 120-s delay: the charged seconds, against ``cap_seconds`` of the stage's own
+    cap), END-CHECK. ``watch`` reads the conditions at every 10-s tick of the measurement (F6). A measurement whose end check or in-measurement watch fails is DISCARDED (F7): the session is not ended and nothing counts
+    towards NOT MEASURED; it WAITS AGAIN inside the SAME bounded wait window (at most ``session_hours`` from its start, and at most that many polls) and measures again; a window that runs out after a discard ends the session
+    PAUSED — NOT SILENT (the lead's silence failed) or PAUSED — MEASUREMENT DISCARDED. ``validate`` (the timing spread) judges a clean measurement: a failure discards it and the WHOLE list is measured once more after a
+    new quiet reading with a wait window of its own; a second failure ends the session PAUSED — TIMING SPREAD. Only a session WITHOUT any quiet reading and without any discard or spread failure is PAUSED — QUIET
+    CONDITION NOT MET, the only status that counts towards the six sessions. The measured record is written by the caller only on COMPLETE. The code never writes NOT MEASURED; three TIMING SPREAD sessions refuse."""
     q = core.cfg_of(cfg)["quiet"]
     acct = account if account is not None else {}
     acct.setdefault("measure_seconds", 0.0)
@@ -399,30 +428,49 @@ def run_alone_stage(
         raise core.StageRefused(f"refused: {need} sessions of the {stage} stage ended {PAUSED_SPREAD}: the matter returns to the human lead (ADR-0024 addendum A3.4); no outcome follows automatically")
     polls = polls_path(run_dir, stage)
     top = top_fn or safe_top
+    poll, window_s = float(q["poll_seconds"]), float(q["session_hours"]) * 3600.0
     readings: list[dict[str, Any]] = []
     attempts: list[dict[str, Any]] = []
+    discards: list[dict[str, Any]] = []
     spread_failed = False
+    clean_runs = 0
+    window_start, tries, max_tries, wait_no = clock(), 0, int(window_s // poll) + 2, 1
 
     def left() -> float | None:
         return None if cap_seconds is None else cap_seconds - acct["measure_seconds"]
 
-    def paused(status: str, extra: Mapping[str, Any]) -> dict[str, Any]:
-        path = record_attempt(run_dir, stage, {"readings": readings}, status=status, extra={"timing_attempts": attempts, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], **extra})
-        return {"status": status, "attempt_record": str(path), "paused_attempts": paused_attempts(run_dir, stage), "timing_attempts": attempts, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], **extra}
+    def end_status() -> str:
+        if spread_failed:
+            return PAUSED_SPREAD
+        if discards:
+            return str(discards[-1]["status"])
+        return PAUSED_QUIET
 
-    for attempt in (1, 2):
+    def paused(status: str, extra: Mapping[str, Any]) -> dict[str, Any]:
+        path = record_attempt(run_dir, stage, {"readings": readings}, status=status, extra={"timing_attempts": attempts, "discards": discards, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], **extra})
+        return {"status": status, "attempt_record": str(path), "paused_attempts": paused_attempts(run_dir, stage), "timing_attempts": attempts, "discards": discards, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], **extra}
+
+    while True:
         room = left()
         if room is not None and room <= 0:
             return paused(PAUSED_CAP, {"reason": f"the stage's own cap on charged measuring seconds ({cap_seconds:.0f} s) is spent"})
+        remaining = window_s - (clock() - window_start)
+        tries += 1
+        if remaining < 0 or tries > max_tries:
+            return paused(end_status(), {})
         w0 = clock()
-        sess = quiet_session(reading=reading, sleep=sleep, clock=clock, cfg=cfg, log_path=polls, wait=f"{stage} wait {attempt}")
+        sess = quiet_session(reading=reading, sleep=sleep, clock=clock, cfg=cfg, log_path=polls, wait=f"{stage} wait {wait_no}", limit_seconds=remaining)
         acct["wait_seconds"] += clock() - w0
         readings += sess["readings"]
         if not sess["quiet"]:
-            return paused(PAUSED_SPREAD if spread_failed else PAUSED_QUIET, {})
-        started = [int(p.split(":", 1)[0]) for p in sess["readings"][-1].get("other_study_processes", [])]
+            return paused(end_status(), {})
+        first = sess["readings"][-1]
+        started = [int(p.split(":", 1)[0]) for p in first.get("other_study_processes", [])]
         top_start = top()
-        trace = trace_factory() if trace_factory else LoadTrace(float(q["baseline_interval_seconds"]))
+        check = (lambda first=first: watch(first)) if watch is not None else None
+        trace = trace_factory() if trace_factory else LoadTrace(float(q["baseline_interval_seconds"]), check_fn=check)
+        if trace_factory is not None and check is not None:
+            trace.check_fn = check
         m0 = clock()
 
         def guard(m0: float = m0) -> None:
@@ -431,32 +479,44 @@ def run_alone_stage(
 
         trace.start()
         capped: str | None = None
-        result, fin = {}, {}
+        result: dict[str, Any] = {}
+        fin: dict[str, Any] = {}
         try:
             result = dict(measure(guard) if guarded else measure())
-            fin = end(started)
+            fin = dict(end(started))
         except CapReached as exc:
             capped = str(exc)
         finally:
             load_trace = trace.stop()
             acct["measure_seconds"] += clock() - m0
         if capped is not None:
-            return paused(PAUSED_CAP, {"reason": capped, "attempt_in_session": attempt})
+            return paused(PAUSED_CAP, {"reason": capped})
         top_end = top()
-        extra: dict[str, Any] = {"end_check": fin, "top_processes": {"start": top_start, "end": top_end}, "load_trace": load_trace, "attempt_in_session": attempt}
-        if not fin["ok"]:
-            return paused(PAUSED_SPREAD if spread_failed else PAUSED_QUIET, {**extra, "discarded": True})
+        failed = list(fin.get("failed", [])) if not fin.get("ok", False) else []
+        if not fin.get("ok", False) and not failed:
+            failed = ["END CHECK FAILED"]
+        for f in trace.failures:  # F6: a condition that failed at any tick of the measurement
+            failed += [x for x in f["failed"] if x not in failed]
+        end_pids, first_pids = (fin.get("conditions") or {}).get("claude_pids"), first.get("claude_pids")
+        if end_pids is not None and first_pids is not None and list(end_pids) != list(first_pids) and "CLAUDE PROCESS SET CHANGED" not in failed:
+            failed.append("CLAUDE PROCESS SET CHANGED")  # F1: the set of Claude processes is the same from the quiet reading to the end check
+        extra: dict[str, Any] = {"end_check": fin, "top_processes": {"start": top_start, "end": top_end}, "load_trace": load_trace, "watch_failures": trace.failures, "attempt_in_session": clean_runs + len(discards) + 1}
+        if failed:
+            st = discard_status(failed)
+            discards.append({"status": st, "failed": failed, "end_check": fin, "watch_failures": trace.failures, "measure_seconds": clock() - m0, "result": result, "top_processes": extra["top_processes"]})
+            sleep(poll)  # let the disturbance pass, then wait again inside the same bounded window
+            continue
         v = validate(result) if validate else None
-        attempts.append({"attempt_in_session": attempt, "valid": v is None or bool(v["ok"]), "validation": v, "result": result, "load_trace": load_trace, "top_processes": extra["top_processes"]})
+        attempts.append({"attempt_in_session": clean_runs + 1, "valid": v is None or bool(v["ok"]), "validation": v, "result": result, "load_trace": load_trace, "top_processes": extra["top_processes"]})
         if v is not None and not v["ok"]:
             spread_failed = True
-            print(json.dumps(core.jsonable({"timing_spread_failure": {"attempt_in_session": attempt, "failing_items": v["failing_items"], "max_spread": v["max_spread"], "bound": v["bound"], "spreads": v["spreads"], "cpu_to_wall_per_repeat": v["cpu_to_wall_per_repeat"]}})), flush=True)
-            if attempt == 1:
-                continue  # the WHOLE list is timed once more, after a new quiet reading
+            print(json.dumps(core.jsonable({"timing_spread_failure": {"attempt_in_session": clean_runs + 1, "failing_items": v["failing_items"], "max_spread": v["max_spread"], "bound": v["bound"], "spreads": v["spreads"], "cpu_to_wall_per_repeat": v["cpu_to_wall_per_repeat"]}})), flush=True)
+            if clean_runs == 0:
+                clean_runs, window_start, tries, wait_no = 1, clock(), 0, 2  # the WHOLE list is timed once more, after a new quiet reading with a wait window of its own
+                continue
             return paused(PAUSED_SPREAD, extra)
-        path = record_attempt(run_dir, stage, {"readings": readings}, status="QUIET RUN", extra={**extra, "timing_attempts": attempts, "retimed": attempt == 2, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"]})
-        return {"status": "COMPLETE", "result": result, "attempt_record": str(path), "end_check": fin, "validation": v, "retimed": attempt == 2, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], "load_trace": load_trace, "top_processes": extra["top_processes"]}
-    raise AssertionError("unreachable")  # pragma: no cover
+        path = record_attempt(run_dir, stage, {"readings": readings}, status="QUIET RUN", extra={**extra, "timing_attempts": attempts, "discards": discards, "retimed": clean_runs == 1, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"]})
+        return {"status": "COMPLETE", "result": result, "attempt_record": str(path), "end_check": fin, "validation": v, "retimed": clean_runs == 1, "discards": discards, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], "load_trace": load_trace, "top_processes": extra["top_processes"]}
 
 
 def finite_seconds(values: Mapping[str, float]) -> bool:

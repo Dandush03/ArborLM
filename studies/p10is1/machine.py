@@ -19,6 +19,9 @@ from typing import Any
 STUDY_STAGE_RE = re.compile(r"(?<![\w.])studies\.(?:p9[\w]*|p10[\w]+)(?:\.stages|\.[a-z_]+)?(?![\w])")
 THERM_OK_RE = re.compile(r"^\s*(?:Note:\s*)?No .+ has been recorded\s*$")
 HID_RE = re.compile(r'"HIDIdleTime"\s*=\s*(\d+)')
+TOOL_SHELL_MARK = "shell-snapshots/snapshot-"  # a tool call of ANY Claude session runs as `/bin/zsh -c source ~/.claude/shell-snapshots/snapshot-zsh-... && eval ...` (seen on the live process table, 2026-11-20)
+SILENCE_FAILURES = ("CLAUDE TOOL-CALL SHELL ACTIVE", "CLAUDE PROCESS SET CHANGED")  # the failures that mean the lead was not silent (a stage discard with one of them is PAUSED — NOT SILENT)
+POWER_RE = re.compile(r"^\s*(low)?powermode\s+(\d+)\s*$", re.MULTILINE)
 CONDITIONS = ("open", "closed")
 
 Row = tuple[int, int, str]  # (pid, ppid, full command line)
@@ -74,11 +77,19 @@ def _run(args: Sequence[str]) -> str:
     return subprocess.run(list(args), capture_output=True, text=True, check=False, timeout=30).stdout
 
 
+def parse_power(batt: str, full: str) -> dict[str, Any]:
+    """Mains power and Low Power Mode from the text of ``pmset -g batt`` and ``pmset -g``. This Mac prints ``powermode 0`` (1 is Low Power Mode), older ones ``lowpowermode 0``: BOTH spellings are read, and if neither
+    is present, or the power source line is missing, the setting is unreadable and ``ValueError`` is raised (a refusal, never a pass)."""
+    if "Now drawing from" not in batt:
+        raise ValueError("pmset -g batt without a power source line")
+    flags = [(m.group(1) or "", int(m.group(2))) for m in POWER_RE.finditer(full)]
+    if not flags:
+        raise ValueError("pmset -g prints neither 'powermode' nor 'lowpowermode': Low Power Mode is unreadable")
+    return {"mains": "AC Power" in batt, "low_power_mode": any(v == 1 for _, v in flags), "power_settings": {(k or "") + "powermode": v for k, v in flags}, "raw": batt.splitlines()[:2]}
+
+
 def real_power() -> dict[str, Any]:
-    batt = _run(["pmset", "-g", "batt"])
-    full = _run(["pmset", "-g"])
-    low = re.search(r"lowpowermode\s+(\d)", full)
-    return {"mains": "AC Power" in batt, "low_power_mode": bool(low and low.group(1) == "1"), "raw": batt.splitlines()[:2]}
+    return parse_power(_run(["pmset", "-g", "batt"]), _run(["pmset", "-g"]))
 
 
 def real_top() -> list[dict[str, Any]]:
@@ -118,6 +129,7 @@ class Probe:
     top: Callable[[], list[dict[str, Any]]] = real_top
     pid: int = field(default_factory=os.getpid)
     own: set[int] | None = None  # a fixed own set (a test); None: the process family of ``pid`` from the table
+    allow: re.Pattern[str] | None = None  # TEST-ONLY allowance: a study command line matching it is not counted (the real path has none: a ``pytest`` of another study must be seen)
 
 
 def compiled(cfg_quiet: Mapping[str, Any]) -> dict[str, list[re.Pattern[str]]]:
@@ -139,18 +151,22 @@ def read_conditions(probe: Probe, q: Mapping[str, Any], *, condition: str, expec
     try:
         table = probe.table()
         own = probe.own if probe.own is not None else family(table, probe.pid)
-        r["other_study_processes"] = [f"{p}: {c[:160]}" for p, _, c in table if p not in own and STUDY_STAGE_RE.search(c) and "pytest" not in c]
+        r["other_study_processes"] = [f"{p}: {c[:160]}" for p, _, c in table if p not in own and STUDY_STAGE_RE.search(c) and not (probe.allow and probe.allow.search(c))]
+        r["tool_shells"] = [f"{p}: {c[:120]}" for p, _, c in table if p not in own and TOOL_SHELL_MARK in c]
         r["vm_processes"] = [f"{p}: {c[:160]}" for p, _, c in table if p not in own and any(x.search(c) for x in pats["vm"])]
         r["app_present"] = any(x.search(c) for _, _, c in table for x in pats["app"])
         r["cli_present"] = any(x.search(c) for _, _, c in table for x in pats["cli"])
+        r["claude_pids"] = sorted(p for p, _, c in table if any(x.search(c) for x in pats["app"] + pats["cli"]))
         r["own_family"] = sorted(own)
     except Exception as exc:  # noqa: BLE001 - fail closed
         failed.append("PROCESS TABLE UNREADABLE")
-        r.update(other_study_processes=[], vm_processes=[], app_present=None, cli_present=None, error_table=str(exc)[:200])
+        r.update(other_study_processes=[], vm_processes=[], tool_shells=[], claude_pids=[], app_present=None, cli_present=None, error_table=str(exc)[:200])
     if r.get("other_study_processes"):
         failed.append("OTHER STUDY PROCESS ALIVE")
     if r.get("vm_processes"):
         failed.append("VIRTUAL MACHINE PRESENT")
+    if r.get("tool_shells"):
+        failed.append("CLAUDE TOOL-CALL SHELL ACTIVE")  # the lead is not silent: a tool call of any Claude session outside the caller's own process chain
     try:
         pw = probe.power()
         r["mains"], r["low_power_mode"] = bool(pw.get("mains")), bool(pw.get("low_power_mode"))

@@ -454,3 +454,9 @@ def test_training_refuses_without_gates_and_without_a_settled_timing_stage(tmp_p
 
     rec = stages.execute_stage("timing", pl, ctx2, run2, pl.path, args, repo=ROOT, inline=True, quiet_reading=lambda: noisy, sleep=sleep, clock=lambda: clock["t"])
     assert rec["status"] == "PAUSED" and not (run2 / "timing" / "timing.json").exists() and (run2 / "timing" / "attempts" / "01.json").is_file()
+
+
+@pytest.fixture(autouse=True)
+def _no_real_baseline_root(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The freeze checks the committed baseline against the study's real baseline root when that exists on this machine; these tests use synthetic records and never depend on it (F4)."""
+    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(tmp_path_factory.mktemp("no_baseline_root") / "absent"))

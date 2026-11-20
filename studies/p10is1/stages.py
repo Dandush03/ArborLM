@@ -411,7 +411,7 @@ def do_report(run_dir: Path, pl: Plan) -> str:
 
 
 # --- executing a registered stage ------------------------------------------------------------------------------------------------------------------------------
-def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None, ledger: core.Ledger | None = None, holder: dict[str, Any] | None = None) -> tuple[str, dict[str, Any], Any]:
+def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None, ledger: core.Ledger | None = None, holder: dict[str, Any] | None = None, watch_fn: Callable[[Mapping[str, Any]], list[str]] | None = None) -> tuple[str, dict[str, Any], Any]:
     """The body of a stage: returns (status, result, pool)."""
     cfg = ctx.cfg()
     cap = stage_cap_seconds(pl, stage, ledger)
@@ -439,17 +439,19 @@ def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, pla
             sleeper = sleep or time.sleep
             account = holder["account"] if holder is not None else {}
             clock_kw: dict[str, Any] = {"clock": clock} if clock else {}
+            # F6: the conditions are read at every 10-s tick of the measurement; a test that injects the reading injects the watch too (none by default, never the real machine)
+            watch = watch_fn if watch_fn is not None else (None if quiet_reading is not None else (lambda first: quiet.watch_conditions(first, cfg=cfg)))
             # ONE code path for the registered stage and the counting rehearsal: the reading is the config's measured rule (``quiet.quiet_reading``) unless a test injects one; the waiting is not charged (it goes to
             # ``account['wait_seconds']``), the measuring seconds are, against the stage's own cap
             r = quiet.run_alone_stage(
                 run_dir, stage, measure, reading=quiet_reading or quiet.quiet_reading, end=end_fn or (lambda s: quiet.end_check(s, sleep=sleeper)), sleep=sleeper, cfg=cfg, **clock_kw,
-                validate=(lambda res: quiet.timing_spreads(res, cfg)) if stage == "timing" else None, cap_seconds=cap, account=account, guarded=True,
+                validate=(lambda res: quiet.timing_spreads(res, cfg)) if stage == "timing" else None, cap_seconds=cap, account=account, guarded=True, watch=watch,
             )  # fmt: skip
             if r["status"] == "COMPLETE":
                 core.write_record(run_dir / stage / f"{stage}.json", {**core.envelope("timing" if stage == "timing" else "throughput"), **{k: v for k, v in r["result"].items()}, "quiet": r["end_check"], "attempt_record": r["attempt_record"], "wait_seconds": r["wait_seconds"], "measure_seconds": r["measure_seconds"], "retimed": r["retimed"], "timing_spread": r.get("validation")})
             else:
                 status = "PAUSED"
-            result = {k: v for k, v in r.items() if k not in ("result", "load_trace", "timing_attempts")}
+            result = {k: v for k, v in r.items() if k not in ("result", "load_trace", "timing_attempts", "discards")} | {"discarded_measurements": len(r.get("discards", []))}
     elif stage in ("train", "ladder", "evaluate", "baselines"):
         require_gates_passed(run_dir)
         if stage in ("train", "ladder"):
@@ -486,7 +488,7 @@ def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, pla
     return status, result, pool
 
 
-def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None) -> dict[str, Any]:
+def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path: Path, args: argparse.Namespace, *, repo: Path, inline: bool = False, workers: int | None = None, sleep: Callable[[float], None] | None = None, quiet_reading: Callable[[], dict[str, Any]] | None = None, end_fn: Callable[[Sequence[int]], dict[str, Any]] | None = None, clock: Callable[[], float] | None = None, watch_fn: Callable[[Mapping[str, Any]], list[str]] | None = None) -> dict[str, Any]:
     """One stage, resumable, from the plan only. The seconds it used are charged to the ledger in a ``finally``: a stage that raises (a paused ladder round) still charges what it spent, so the caps are cumulative across invocations."""
     ledger = ledger_of(pl, run_dir, repo if pl.mode == core.REGISTERED else None)
     ledger.require_room(stage)
@@ -494,7 +496,7 @@ def execute_stage(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, plan_path
     started = datetime.now(UTC).isoformat()
     holder: dict[str, Any] = {"account": {"measure_seconds": 0.0, "wait_seconds": 0.0}}
     try:
-        status, result, pool = _execute_stage_body(stage, pl, ctx, run_dir, plan_path, args, repo=repo, inline=inline, workers=workers, sleep=sleep, quiet_reading=quiet_reading, end_fn=end_fn, clock=clock, ledger=ledger, holder=holder)
+        status, result, pool = _execute_stage_body(stage, pl, ctx, run_dir, plan_path, args, repo=repo, inline=inline, workers=workers, sleep=sleep, quiet_reading=quiet_reading, end_fn=end_fn, clock=clock, ledger=ledger, holder=holder, watch_fn=watch_fn)
     finally:
         pool_seconds = holder["pool"].seconds if "pool" in holder else 0.0
         waited = float(holder["account"]["wait_seconds"])
