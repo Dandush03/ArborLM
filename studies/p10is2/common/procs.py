@@ -23,16 +23,30 @@ def other_studies_alive(own_pid: int | None = None) -> list[str]:
     return out
 
 
+def ancestor_pids(pid: int | None = None) -> set[int]:
+    """The process ids of this process's ancestors: its parent (``uv run``, a shell), the shell's parent, a keep-awake watcher: its own launcher, which is family, not another process (audit R11, ruling 15)."""
+    out: set[int] = set()
+    try:
+        p = psutil.Process(pid or os.getpid()).parent()
+        while p is not None and p.pid not in out and p.pid > 1:
+            out.add(p.pid)
+            p = p.parent()
+    except psutil.Error:
+        pass
+    return out
+
+
 def own_study_alive() -> list[str]:
-    """Command lines of live processes of THIS study other than this one."""
+    """Command lines of live processes of THIS study other than this one and its ancestors (its own launcher counts as family)."""
     me = os.getpid()
+    family = ancestor_pids()
     out = []
     for p in psutil.process_iter(["pid", "cmdline"]):
         try:
             text = " ".join(p.info["cmdline"] or [])
         except psutil.Error:
             continue
-        if p.info["pid"] != me and "python" in text and "studies.p10is2" in text:
+        if p.info["pid"] != me and p.info["pid"] not in family and "python" in text and "studies.p10is2" in text:
             out.append(text[:200])
     return out
 

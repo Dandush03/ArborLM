@@ -28,14 +28,20 @@ from .quantities import CELLS, Quantities, Registry, Thresholds
 
 
 # --- Part Q's outputs -------------------------------------------------------------------------------------------------------------------------------
-def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str) -> tuple[Any, list[dict[str, list[TrainItem]]], dict[str, Any], dict[str, Any]]:
+def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str, door: Any = None) -> tuple[Any, list[dict[str, list[TrainItem]]], dict[str, Any], dict[str, Any]]:
     """The bundle, the replicates' training draws, the gloss bank and the draws record from a Part Q run directory (``outputs/bundle``, ``generation/pools.json``, ``generation/result.json``,
     ``outputs/gloss_bank.json``). DISJOINT DRAWS: the recorded permutation positions; OVERLAPPING DRAWS: each replicate draws 8,000 from the whole pool with its training-draw seed (capability A first, then B, one
     generator per replicate)."""
-    bundle = read_bundle(qdir / "outputs/bundle")
-    pools = read_json(qdir / "generation/pools.json")["pools"]
-    result = read_json(qdir / "generation/result.json")
-    pool = {c: [TrainItem(x["key"], x["en"], x["target"], int(x["group"])) for x in pools[c]] for c in core.TASKS}
+    if door is not None:  # the one checked door (ruling 10): every file read is re-hashed against Part Q's manifest or reuse hashes; the pools come from the listed bundle, not from generation/pools.json
+        door.verify_prefix("outputs/bundle")
+        bundle = read_bundle(qdir / "outputs/bundle")
+        result = door.read_json("generation/result.json")
+        pool = {c: list(bundle.accepted[c]) for c in core.TASKS}
+    else:
+        bundle = read_bundle(qdir / "outputs/bundle")
+        pools = read_json(qdir / "generation/pools.json")["pools"]
+        result = read_json(qdir / "generation/result.json")
+        pool = {c: [TrainItem(x["key"], x["en"], x["target"], int(x["group"])) for x in pools[c]] for c in core.TASKS}
     per = int(cfg["data"].get("per_replicate", 8000)) if "per_replicate" in cfg.get("data", {}) else 8000
     if result["draws_label"] == "DISJOINT DRAWS":
         idx = result["draws"]["indices"]
@@ -48,7 +54,7 @@ def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str) -> tuple[Any, lis
             draws.append({c: [pool[c][i] for i in torch.randperm(len(pool[c]), generator=g).tolist()[:per]] for c in core.TASKS})
     else:
         raise core.StageRefused(f"refused: Part Q's draws label is {result['draws_label']!r}: Part T has no material")
-    gloss = read_json(qdir / "outputs/gloss_bank.json")
+    gloss = door.read_json("outputs/gloss_bank.json") if door is not None else read_json(qdir / "outputs/gloss_bank.json")
     return bundle, draws, gloss, result
 
 
@@ -257,9 +263,23 @@ __all__ = ["file_sha256", "write_json"]
 
 
 # --- the registered stage bodies and the commands --------------------------------------------------------------------------------------------------
-def build_world_real(repo: Path, cfg: Mapping[str, Any], qdir: Path, plan_calibration: Mapping[str, Any], mode: str) -> tuple[engine.WorldT, Mapping[str, Any], Any]:
+def door_of(plan: Any, qdir: Path) -> Any:
+    """The checked door of a plan that names Part Q (every registered plan does); a plan without ``part_q`` (a unit-test fixture) has none."""
+    from .partt_door import PartQDoor
+
+    pq = (getattr(plan, "data", None) or {}).get("part_q")
+    return PartQDoor.from_plan(pq) if pq else None
+
+
+def qdir_of(plan: Any, fallback: Path) -> Path:
+    """The Part Q run directory of record is the plan's, never the command line's (audit R2)."""
+    pq = (getattr(plan, "data", None) or {}).get("part_q")
+    return Path(pq["run_dir"]) if pq else fallback
+
+
+def build_world_real(repo: Path, cfg: Mapping[str, Any], qdir: Path, plan_calibration: Mapping[str, Any], mode: str, door: Any = None) -> tuple[engine.WorldT, Mapping[str, Any], Any]:
     """The world of a registered run or a rehearsal: Part Q's bundle and draws, the calibrated settings, the frozen devices (MPS training, CPU scoring)."""
-    bundle, draws, gloss, result = load_part_q(qdir, cfg, mode)
+    bundle, draws, gloss, result = load_part_q(qdir, cfg, mode, door)
     run = engine.run_config(cfg, layer=int(plan_calibration["read_layer"]), updates=int(plan_calibration["U"]), store_rate=float(plan_calibration["store_rate"]), lora_rate=float(plan_calibration["lora_rate"]), device=cfg["training"]["training_device"])
     w = engine.build_world_t(bundle, cfg, draws, run, plan_mode=mode)
     w.etable_lr = float(plan_calibration["etable_rate"])  # type: ignore[attr-defined]
@@ -270,7 +290,8 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     """One registered Part T stage over the run directory (``train``, ``evaluate``, ``controls``, ``combined``, ``gates``, ``analysis``, ``report``). The entry point has checked identity."""
     cfg = core.load_config("T", repo / core.CONFIG_T)
     calib = plan.data["calibration"]
-    w, gloss, qres = build_world_real(repo, cfg, qdir, calib, mode)
+    qdir = qdir_of(plan, qdir)
+    w, gloss, qres = build_world_real(repo, cfg, qdir, calib, mode, door_of(plan, qdir))
     snaps = run_dir / "snapshots"
     t0 = time.monotonic()
     if stage == "gates":
@@ -279,19 +300,23 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     elif stage == "train":
         out = partt_run.train_all(w, snaps, run_dir / "checkpoints", int(calib["U"]))
         core.write_record(run_dir / "train_records.json", {**core.envelope("cell_record", "T"), "records": core.jsonable(out)}, overwrite=True)
-    elif stage in ("evaluate", "controls"):
-        reg, side = partt_run.score_all(w, snaps, gloss)
+    elif stage == "evaluate":
+        reg, side = partt_run.score_all(w, snaps, gloss)  # the in-process path of the tests; the registered stage runs worker tasks and ``merge_evaluate``
         write_json(run_dir / "registry.json", reg.values)
         core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=True)
         out = {"registry_keys": len(reg.values)}
+    elif stage == "controls":
+        out = check_controls(run_dir, plan)
+        if out["n_missing"]:
+            raise core.StageRefused(f"refused: {out['n_missing']} control key(s) the plan names are not in the registry: {out['missing'][:3]}")
+    elif stage == "recompute":
+        out = run_recompute(repo, run_dir, qdir, plan, mode=mode, charge=False)  # run_stage charges the stage below
     elif stage == "combined":
         comb = partt_run.combined_all(w, snaps)
         core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
         out = {"records": len(comb)}
     elif stage in ("analysis", "report"):
-        require_recomputation(run_dir)
-        if not (run_dir / "registry.json").is_file():
-            merge_results(run_dir)
+        require_recomputation(run_dir)  # the recomputation is a registered stage before this one; the results were merged at the end of evaluate and combined
         reg = Registry(read_json(run_dir / "registry.json"))
         side = read_json(run_dir / "side_records.json")["side"]
         comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
@@ -312,7 +337,7 @@ def bundle_equivalence(qdir: Path) -> Mapping[str, Any] | None:
     return read_bundle(qdir / "outputs/bundle").extra.get("equivalence_layers")
 
 
-def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int) -> dict[str, Any]:
+def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, reason: str = "") -> dict[str, Any]:
     """Calibration and the pilot on calibration draws (0, 1; a repetition 2, 3) with the frozen devices; writes ``calibration_<repetition>.json`` with the code hashes of every file it ran (section 7.1 rule 4).
     Nothing it scores is a result."""
     from .common import plan as planmod
@@ -328,7 +353,17 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int) ->
     rec = run_calibration(w, cfg)
     rec["code_hashes"] = planmod.frozen_file_hashes(repo, "T")
     rec["repetition"] = repetition
-    core.write_record(run_dir / f"calibration_{repetition}.json", {**core.envelope("calibration", "T"), **core.jsonable(rec)}, overwrite=True)
+    path = run_dir / f"calibration_{repetition}.json"
+    if path.exists():  # a calibration that is run again writes a NEW record beside the old one, with the reason; the old one is kept (ruling 13; section 7.1 rule 4)
+        if not reason:
+            raise core.StageRefused(f"refused: {path} exists: a repetition needs --reason, and writes a new record beside it (nothing is overwritten)")
+        n = 2
+        while (run_dir / f"calibration_{repetition}.attempt{n}.json").exists():
+            n += 1
+        path = run_dir / f"calibration_{repetition}.attempt{n}.json"
+        rec["reason_for_repetition"] = reason
+        rec["supersedes"] = {"path": str(run_dir / f"calibration_{repetition}.json"), "sha256": file_sha256(run_dir / f"calibration_{repetition}.json")}
+    core.write_record(path, {**core.envelope("calibration", "T"), **core.jsonable(rec)}, overwrite=False)
     return {k: rec[k] for k in ("store_rate", "lora_rate", "etable_rate", "read_layer", "U", "converged", "pilot")}
 
 
@@ -341,7 +376,8 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
     calib = plan.data["calibration"]
-    w, gloss, _ = build_world_real(repo, cfg, qdir, calib, mode)
+    qdir = qdir_of(plan, qdir)
+    w, gloss, _ = build_world_real(repo, cfg, qdir, calib, mode, door_of(plan, qdir))
     d = partt_tasks.tasks_dir(run_dir, stage)
     sid = partt_tasks.safe(task_id)
     snaps = run_dir / "snapshots"
@@ -396,30 +432,72 @@ def merge_results(run_dir: Path) -> dict[str, int]:
     return {"records": len(records), "combined": len(comb)}
 
 
+def merge_evaluate(run_dir: Path) -> dict[str, int]:
+    """The END of the evaluate stage: its task results into ``registry.json`` and ``side_records.json`` (the recomputation and the analysis read those). Written once; a second call must produce the same bytes."""
+    records: dict[str, dict[str, float]] = {}
+    side: dict[str, Any] = {}
+    for f in sorted((run_dir / "tasks" / "evaluate").glob("*.result.json")):
+        r = read_json(f)
+        records.update(r["records"])
+        side.update(r["side"])
+    reg = scoring.registry_from_reads(records).values
+    if (run_dir / "registry.json").is_file():
+        if read_json(run_dir / "registry.json") != json_safe(reg):
+            raise core.StageRefused("refused: registry.json exists and differs from the evaluate results: no record is overwritten")
+    else:
+        write_json(run_dir / "registry.json", reg)
+        core.write_record(run_dir / "side_records.json", {**core.envelope("cell_record", "T"), "side": core.jsonable(side)}, overwrite=False)
+    return {"records": len(records)}
+
+
+def merge_combined(run_dir: Path) -> dict[str, int]:
+    """The END of the combined stage: its task results into ``combined.json`` (written once)."""
+    comb: dict[str, Any] = {}
+    for f in sorted((run_dir / "tasks" / "combined").glob("*.result.json")):
+        comb.update(read_json(f)["combined"])
+    if not (run_dir / "combined.json").is_file():
+        core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=False)
+    return {"combined": len(comb)}
+
+
+def check_controls(run_dir: Path, plan: Any) -> dict[str, Any]:
+    """The controls stage (ruling 12): the controls of section 5.2 were scored on their registered subsamples by the evaluate tasks; this stage scores nothing. It checks that every control key the plan's items
+    name is in the registry (the analysis would otherwise call the line INCOMPLETE)."""
+    reg = read_json(run_dir / "registry.json")
+    need = [k for k in plan.data.get("registry_keys", []) if ":sub:" in k or "|sub:" in k]
+    missing = [k for k in need if k not in reg]
+    return {"control_keys_required": len(need), "missing": missing[:20], "n_missing": len(missing)}
+
+
 def require_recomputation(run_dir: Path) -> dict[str, Any]:
     """No result is reported before every registered score is recomputed on CPU (section 8.6). A record of a recomputation that differs is ENGINEERING STOP — RECOMPUTATION: nothing is labelled."""
-    p = run_dir / "recomputation.json"
-    if not p.is_file():
+    from . import partt_recompute
+
+    atts = partt_recompute.attempts(run_dir)
+    if not atts:
         raise core.StageRefused("refused: no recomputation record: every registered score is recomputed on CPU before any result is reported (section 8.6)")
-    rec = read_json(p)
-    if not rec.get("ok"):
-        raise core.StageRefused(f"refused: ENGINEERING STOP — RECOMPUTATION: {len(rec.get('differences', []))} difference(s); no line, condition or annotation is derived")
-    return dict(rec)
+    recs = [read_json(a) for a in atts]
+    failed = [r for r in recs if not r.get("ok")]
+    if failed and not (run_dir / "recomputation_lead_record.json").is_file():  # a failed attempt stands: the analysis refuses unless a lead record names the cause (section 8.6)
+        raise core.StageRefused(f"refused: ENGINEERING STOP — RECOMPUTATION: {len(failed)} attempt(s) with differences ({len(failed[0].get('differences', []))} in the first); no line, condition or annotation is derived")
+    return dict(recs[-1])
 
 
-def run_recompute(repo: Path, run_dir: Path, qdir: Path, plan: Any, own_code: bool = False, mode: str = "registered") -> dict[str, Any]:
+def run_recompute(repo: Path, run_dir: Path, qdir: Path, plan: Any, own_code: bool = False, mode: str = "registered", charge: bool = True) -> dict[str, Any]:
     """The recomputation command: re-score every snapshot on CPU, compare, write ``recomputation.json`` and charge the time to the ledger."""
     from . import partt_recompute
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
     t0 = time.monotonic()
-    w, gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode)
+    qdir = qdir_of(plan, qdir)
+    w, gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode, door_of(plan, qdir))
     reg = read_json(run_dir / "registry.json")
     comb = read_json(run_dir / "combined.json")["combined"] if (run_dir / "combined.json").is_file() else None
     rec = partt_recompute.recompute(w, run_dir, gloss, reg, comb, own_code=own_code)
     partt_recompute.write(run_dir, rec)
-    total = float(cfg["stage_caps"].get("total_hours", 0.0)) * 3600.0
-    core.Ledger(run_dir / "charged_ledger.json", "T", total if total > 0 else 1e12).charge_process("recompute", mode, "main", time.monotonic() - t0)
+    if charge:
+        total = float(cfg["stage_caps"].get("total_hours", 0.0)) * 3600.0
+        core.Ledger(run_dir / "charged_ledger.json", "T", total if total > 0 else 1e12).charge_process("recompute", mode, "main", time.monotonic() - t0)
     return {k: rec[k] for k in ("ok", "outcome", "checked", "tolerance")}
 
 
@@ -428,7 +506,8 @@ def run_cost(repo: Path, run_dir: Path, qdir: Path, plan: Any, mode: str = "regi
     from . import partt_cost
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    w, _gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode)
+    qdir = qdir_of(plan, qdir)
+    w, _gloss, _ = build_world_real(repo, cfg, qdir, plan.data["calibration"], mode, door_of(plan, qdir))
     rec = partt_cost.record(w, run_dir, qdir if (qdir / "charged_ledger.json").is_file() else None, run_dir / "snapshots")
     partt_cost.write(run_dir, rec)
     return {"lines": len(partt_cost.lines(rec))}

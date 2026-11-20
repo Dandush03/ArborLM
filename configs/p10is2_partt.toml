@@ -49,6 +49,7 @@ gap_min = 0.25
 gap_denominator_min = 0.30
 control_subsample = 300
 eval_panel = 1000
+d_con_panel = 300          # D_con (section 4.1): the size the units of the caps count (the Part Q bundle holds it)
 first_not_acquired_g = 0.50
 
 [gates]  # section 8.2, 8.3
@@ -153,5 +154,7 @@ train_hours = 0.0
 evaluate_hours = 0.0
 controls_hours = 0.0
 combined_hours = 0.0
+recompute_hours = 0.0
 analysis_hours = 0.0
+report_hours = 0.0
 total_hours = 0.0

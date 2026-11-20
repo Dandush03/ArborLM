@@ -57,7 +57,7 @@ def test_54_trained_cells_and_section_14_units() -> None:
 
 def test_stage_items_counts_updates_and_rates() -> None:
     items = partt_plan.stage_items(CALIB)
-    assert {k: len(v) for k, v in items.items()} == {"gates": 8, "train": 54, "evaluate": 54 + 3 * 7 + 1, "controls": 27, "combined": 3 * 12 + 2, "analysis": 1, "report": 1}
+    assert {k: len(v) for k, v in items.items()} == {"gates": 8, "train": 54, "evaluate": 54 + 3 * 7 + 1, "controls": 27, "combined": 3 * 12 + 2, "recompute": 1, "analysis": 1, "report": 1}
     tr = {i["id"]: i for i in items["train"]}
     assert tr["train|M-joint|-|r0"]["updates"] == 4000 and tr["train|D-joint|-|r1"]["updates"] == 4000 and tr["train|M-append|AB|r2"]["updates"] == 2000  # the joint arms train 2U
     assert tr["train|M-append|AB|r0"]["rate"] == 0.003 and tr["train|D-seq|BA|r1"]["rate"] == 0.0003 and tr["train|E-table|A|r0"]["rate"] == 0.003
@@ -121,7 +121,7 @@ def test_resume_policy_non_finite_is_not_resumed_errors_are_when_the_fix_is_not_
 
 # --- refusing entry points -----------------------------------------------------------------------------------------------------------------------
 def test_part_t_entry_points_refuse_today(tmp_path: Path) -> None:
-    assert not (ROOT / core.PLAN_T).exists() and not (ROOT / core.FREEZE_RECORD_T).exists()
+    # whatever the checkout holds (nothing, a candidate plan, a freeze), an entry point asked without a valid freeze commit and a matching Decision 2 refuses: never a run
     for argv in (["registered", "--stage", "train", "--run-dir", str(tmp_path / "r"), "--freeze-commit", "HEAD"], ["work", "--stage", "evaluate", "--run-dir", str(tmp_path / "r")], ["registered", "--stage", "nonsense", "--run-dir", str(tmp_path / "r")]):
         assert partt_stages.main(argv) in (partt_stages.EXIT_REFUSED, partt_stages.EXIT_IDENTITY)  # a checkout with uncommitted frozen files is an identity pause, a clean one a refusal: never a run
     assert partt_stages.main(["freeze", "--measuring-rehearsal", "m", "--counting-rehearsal", "c"]) == partt_stages.EXIT_REFUSED
@@ -170,7 +170,7 @@ def test_registered_chain_for_part_t_needs_decision_2_and_lock_only(repo: Path, 
     f.write_bytes(orig)
     planmod.verify_plan(plan, repo, run)
     with pytest.raises(core.StageRefused, match="not a registered Part T stage"):
-        partt_stages.refuse_unless_registered_ready(repo, run, commit, "recompute")
+        partt_stages.refuse_unless_registered_ready(repo, run, commit, "nonsense")
     # Part Q's Decision 2 does not open Part T
     assert planmod.DECISION_2_GLOB["Q"] != planmod.DECISION_2_GLOB["T"]
 

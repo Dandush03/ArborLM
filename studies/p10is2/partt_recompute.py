@@ -78,5 +78,16 @@ def recompute(world: engine.WorldT, run_dir: Path, gloss: Mapping[str, Any], reg
     }  # fmt: skip
 
 
-def write(run_dir: Path, rec: Mapping[str, Any]) -> None:
-    core.write_record(run_dir / "recomputation.json", {**core.envelope("recomputation", "T"), **core.jsonable(dict(rec))}, overwrite=True)
+def attempts(run_dir: Path) -> list[Path]:
+    d = run_dir / "recomputation"
+    return sorted(d.glob("attempt_*.json")) if d.is_dir() else []
+
+
+def write(run_dir: Path, rec: Mapping[str, Any]) -> Path:
+    """Writes ``recomputation/attempt_<n>.json``: every attempt is KEPT (a failed one is never erased by running the recomputation again; ruling 13). The record of an attempt says which snapshots, routers and per-item
+    files it read."""
+    d = run_dir / "recomputation"
+    d.mkdir(parents=True, exist_ok=True)
+    path = d / f"attempt_{len(attempts(run_dir)) + 1:03d}.json"
+    core.write_record(path, {**core.envelope("recomputation", "T"), **core.jsonable(dict(rec))}, overwrite=False)
+    return path

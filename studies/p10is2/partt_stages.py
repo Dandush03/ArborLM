@@ -23,10 +23,10 @@ from typing import Any
 from arborlm.io import file_sha256, read_json, write_json
 
 from . import calibration as cal
-from . import partt_plan
+from . import partt_caps, partt_plan
 from .common import core, gates
 from .common import plan as planmod
-from .common.caps import caps_match_config, caps_proposal, project_stage_seconds
+from .common.caps import caps_match_config
 from .common.core import PendingLeadReview, StageRefused
 
 EXIT_REFUSED, EXIT_IDENTITY, EXIT_LEAD, EXIT_INCOMPLETE, EXIT_RECOMPUTATION = 2, planmod.IDENTITY_EXIT, 3, 4, 5  # 4: the stage did not complete (PAUSED or a task failed): see its manifest
@@ -44,6 +44,23 @@ def repo_of(args: argparse.Namespace | None = None) -> Path:
     return Path(r) if r else core.ROOT
 
 
+def claim_run_dir(run_dir: Path, mode: str, plan_run_dir: str | None = None) -> None:
+    """A run directory belongs to ONE mode (registered, rehearsal or calibration), recorded in ``run_mode.json`` the first time and checked every time (audit R15). A rehearsal or a calibration never uses the run
+    directory the plan names (the registered one); a registered stage never uses a directory that holds rehearsal or calibration records."""
+    if plan_run_dir is not None and mode != "registered" and Path(plan_run_dir).resolve() == run_dir.resolve():
+        raise StageRefused(f"refused: {run_dir} is the plan's registered run directory: a {mode} never writes there")
+    marker = run_dir / "run_mode.json"
+    if marker.is_file():
+        have = read_json(marker).get("mode")
+        if have != mode:
+            raise StageRefused(f"refused: {run_dir} is a {have} run directory; this is a {mode} stage: a directory holds one mode only")
+        return
+    if run_dir.is_dir() and any(run_dir.iterdir()):
+        raise StageRefused(f"refused: {run_dir} holds files but no run_mode.json: a directory holds one mode only and is claimed when it is first used")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    write_json(marker, {"mode": mode, "utc": core.utc_stamp()})
+
+
 def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str | None, stage: str) -> planmod.Plan:
     if stage not in REGISTERED_STAGES:
         raise StageRefused(f"refused: {stage!r} is not a registered Part T stage")
@@ -54,6 +71,7 @@ def refuse_unless_registered_ready(repo: Path, run_dir: Path, freeze_commit: str
     planmod.verify_plan(plan, repo, run_dir)
     planmod.require_decision_2(repo, str(freeze_commit), "T")
     core.require_ignored_run_dir(repo, run_dir)
+    claim_run_dir(run_dir, "registered")
     problems = [p for p in os.environ.get("PYTHONPATH", "").split(os.pathsep) if p and os.path.realpath(p) == os.path.realpath(core.DURABLE_PACKAGES)]  # normalized: a trailing slash or a symlink does not slip through
     if problems:
         raise StageRefused("refused: Part T uses the lock alone (section 13 item 6): the durable package copy is on this process's PYTHONPATH")
@@ -66,18 +84,34 @@ def cmd_registered(args: argparse.Namespace) -> int:
     from . import partt_real, partt_tasks
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
+    run_dir = Path(args.run_dir)
+    partt_tasks.require_predecessor(run_dir, args.stage, REGISTERED_STAGES)
     if args.stage in partt_tasks.TASK_STAGES:
-        man = partt_tasks.run_stage_tasks(args.stage, plan, cfg, repo, Path(args.run_dir), str(args.freeze_commit), Path(args.part_q_dir))
+        man = partt_tasks.run_stage_tasks(args.stage, plan, cfg, repo, run_dir, str(args.freeze_commit), partt_real.qdir_of(plan, Path(args.part_q_dir)))
+        if man["status"] == "COMPLETE":  # the results are merged at the END of the stage that produces them
+            if args.stage == "evaluate":
+                partt_real.merge_evaluate(run_dir)
+            elif args.stage == "combined":
+                partt_real.merge_combined(run_dir)
+            partt_tasks.mark_complete(run_dir, args.stage)
         print(json.dumps({"stage": args.stage, "status": man["status"], "charged_seconds": man["charged_seconds"]}))
         return 0 if man["status"] == "COMPLETE" else EXIT_INCOMPLETE
-    partt_real.run_stage(args.stage, repo, Path(args.run_dir), Path(args.part_q_dir), plan)
+    out = partt_real.run_stage(args.stage, repo, run_dir, Path(args.part_q_dir), plan)
+    if args.stage == "recompute" and not out.get("ok"):
+        print(json.dumps(out))
+        return EXIT_RECOMPUTATION  # the failed attempt is kept; nothing is labelled
+    partt_tasks.mark_complete(run_dir, args.stage)
     return 0
 
 
 def cmd_task(args: argparse.Namespace) -> int:
     """One worker: it re-checks everything the entry point checks (an identity difference exits 75 and writes nothing), then runs its one task."""
     repo = repo_of(args)
-    plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, args.stage)
+    try:
+        plan = refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, args.stage)
+    except StageRefused as e:  # a worker never turns a precondition refusal (an untracked note in the worktree, a frozen file, Decision 2) into a failed task and an item error: it PAUSES, the runner records it, restoring the cause resumes
+        print(f"REFUSED: {e}", file=sys.stderr)
+        return EXIT_IDENTITY
     from . import partt_real
 
     partt_real.run_task(args.stage, args.task_id, repo, Path(args.run_dir), Path(args.part_q_dir), plan)
@@ -131,7 +165,9 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     from . import partt_real
 
     core.require_ignored_run_dir(repo_of(args), Path(args.run_dir))
-    print(json.dumps(core.jsonable(partt_real.calibrate_command(repo_of(args), Path(args.part_q_dir), Path(args.run_dir), int(args.repetition))), default=str))
+    plan_file = repo_of(args) / core.PLAN_T
+    claim_run_dir(Path(args.run_dir), "calibration", read_json(plan_file).get("run_dir") if plan_file.is_file() else None)
+    print(json.dumps(core.jsonable(partt_real.calibrate_command(repo_of(args), Path(args.part_q_dir), Path(args.run_dir), int(args.repetition), args.reason)), default=str))
     return 0
 
 
@@ -142,6 +178,8 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
     core.require_ignored_run_dir(repo, Path(args.run_dir))
+    plan_file = repo / core.PLAN_T
+    claim_run_dir(Path(args.run_dir), "rehearsal", read_json(plan_file).get("run_dir") if plan_file.is_file() else None)
     if not Path(args.calibration).is_file() or not (Path(args.part_q_dir) / "outputs/bundle").exists():
         raise StageRefused("refused: the rehearsal needs --calibration (the calibration record) and --part-q-dir (Part Q's accepted run directory)")
     calib = json.loads(Path(args.calibration).read_text())
@@ -178,12 +216,62 @@ def identity_probe(plan: planmod.Plan, repo: Path, run_dir: Path) -> Any:
     return probe
 
 
+def differing_paths(a: Any, b: Any, path: str = "") -> list[str]:
+    """The paths at which two parsed JSON values differ (a path present in one only counts)."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        out: list[str] = []
+        for k in sorted(set(a) | set(b)):
+            out += [f"{path}.{k}"] if (k not in a or k not in b) else differing_paths(a[k], b[k], f"{path}.{k}")
+        return out
+    return [] if a == b else [path or "."]
+
+
+def calibration_from_record(path: Path, expected_sha: str | None = None) -> dict[str, Any]:
+    """The plan's calibration block, taken from the calibration's OWN record file by hash, never from a hand-assembled file (ruling 13): U, the rates, the layer, the pilot and the code hashes it carries, and the
+    record's path and SHA-256. A stand-in record, a superseded one or one that records a repetition reason without the record it supersedes is refused."""
+    sha = file_sha256(path)
+    if expected_sha is not None and sha != expected_sha:
+        raise StageRefused(f"refused: the calibration record {path} differs from the hash in the plan (PAUSED — IDENTITY)")
+    rec = core.read_record(path, "calibration")
+    if rec.get("stand_in") or rec.get("superseded"):
+        raise StageRefused(f"refused: {path} is a stand-in or superseded calibration record")
+    block = {k: rec[k] for k in ("store_rate", "lora_rate", "etable_rate", "read_layer", "U", "converged", "pilot") if k in rec}
+    block["records"] = {path.stem: {"code_hashes": rec.get("code_hashes") or {}}}
+    block["record"] = {"path": str(path.resolve()), "sha256": sha, "repetition": rec.get("repetition")}
+    return block
+
+
+def part_q_block(qdir: Path, part_q_plan: Path | None) -> dict[str, Any]:
+    """What the Part T plan records of Part Q: the run directory of record, its manifest and (for the files of reused stages) Part Q's plan, each by path and SHA-256 (rulings 6 and 10)."""
+    man = qdir / "manifest.json"
+    if not man.is_file():
+        raise StageRefused(f"refused: {man} does not exist")
+    out: dict[str, Any] = {"run_dir": str(qdir.resolve()), "manifest": {"path": str(man.resolve()), "sha256": file_sha256(man)}}
+    if part_q_plan is not None:
+        out["plan"] = {"path": str(part_q_plan.resolve()), "sha256": file_sha256(part_q_plan)}
+    return out
+
+
+def ledgers_charge(paths: Sequence[str]) -> dict[str, Any]:
+    """The charge before the freeze: the sum of every named Part T ledger, each listed (a path that is not absolute or does not exist is refused)."""
+    per: dict[str, float] = {}
+    for x in paths:
+        pth = Path(x)
+        if not pth.is_absolute() or not pth.is_file():
+            raise StageRefused(f"refused: --charged-ledger {x} must be the absolute path of an existing charged_ledger.json")
+        per[str(pth)] = core.Ledger(pth, "T", 1e12).charged()
+    return {"seconds": sum(per.values()), "ledgers": per}
+
+
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    calib = read_json(Path(args.calibration))
+    calib = calibration_from_record(Path(args.calibration))
     walk = planmod.import_walk(repo, "T")
-    rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=read_json(Path(args.manifests)))
+    manifests = read_json(Path(args.manifests)) if args.manifests else {}
+    charge = ledgers_charge(args.charged_ledger) if args.charged_ledger else None
+    pq = part_q_block(Path(args.part_q_dir), Path(args.part_q_plan) if args.part_q_plan else None)
+    rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq)
     path = repo / core.PLAN_T
     if path.exists():
         if not args.supersede:
@@ -201,11 +289,14 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
 
 
 def cmd_caps_proposal(args: argparse.Namespace) -> int:
+    """The caps by the rule from the measuring record and the PLAN's own task units (nothing typed): ``partt_caps.proposal_from_record`` with the charge before the freeze the plan recorded."""
+    repo = repo_of(args)
+    plan = planmod.Plan.load(repo / core.PLAN_T, "T")
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps are computed from a MEASURING rehearsal's record")
-    proj = project_stage_seconds({k: float(v) for k, v in read_json(Path(args.units)).items()}, {k: float(v) for k, v in meas["rates_seconds_per_unit"].items()})
-    print(json.dumps({"projected_seconds": proj, "proposal_hours": caps_proposal(args.charged_hours * 3600.0, proj)}))
+    charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
+    print(json.dumps({"proposal_hours": partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge), "charge_before_freeze_seconds": charge, "rule": "stage cap = 2 x projected (sum over the plan's tasks of units x measured seconds per unit of the kind, plus tasks x the per-process overhead); total = charge before the freeze + 2 x all stages"}))
     return 0
 
 
@@ -222,15 +313,27 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring" or meas.get("caps_provisional") is not True:
         raise StageRefused("refused: --measuring-rehearsal must be the Part T measuring rehearsal's record")
-    proposal = caps_proposal(float(meas.get("charged_before_freeze_seconds", 0.0)), project_stage_seconds({k: float(v) for k, v in meas["projection_units"].items()}, {k: float(v) for k, v in meas["rates_seconds_per_unit"].items()}))
+    zero = partt_caps.zero_caps(cfg, REGISTERED_STAGES)
+    if zero:
+        raise StageRefused(f"refused: stage cap(s) of 0 in the config ({zero}): a cap of 0 is never 'uncapped'; every registered stage has a cap by the rule")
+    charge = plan.data.get("charge_before_freeze") or {}
+    if not charge.get("seconds"):
+        raise StageRefused("refused: the plan records no charge before the freeze (candidate-plan --charged-ledger): the caps' total counts it")
+    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], float(charge["seconds"]))  # the units come from the plan; the charge is the one the plan recorded
     differ = caps_match_config(cfg, proposal)
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
     walk = planmod.import_walk(repo, "T")
-    calib = plan.data["calibration"]
-    rederived = partt_plan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, calib, mode=plan.data["mode"], walk=walk, manifests=plan.data.get("manifests"))
-    if json.loads(json.dumps(core.jsonable({k: v for k, v in rederived.items() if k not in ("adr", "platform")}))) != {k: v for k, v in plan.data.items() if k not in ("adr", "platform")}:
-        raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and calibration: supersede it, repeat calibration if a training or scoring file changed (section 7.1 rule 4), and rehearse again")
+    crec = plan.data["calibration"]["record"]
+    calib = calibration_from_record(Path(crec["path"]), crec["sha256"])  # U, the rates, the layer and the pilot come from the calibration's own record, by hash
+    rederived = partt_plan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, calib, mode=plan.data["mode"], walk=walk, manifests=plan.data.get("manifests"), charge_before_freeze=plan.data.get("charge_before_freeze"), part_q=plan.data.get("part_q"))
+    differing = differing_paths(json.loads(json.dumps(core.jsonable({k: v for k, v in rederived.items() if k not in ("adr", "platform")}))), {k: v for k, v in plan.data.items() if k not in ("adr", "platform")})
+    if differing:
+        raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and calibration record in: " + ", ".join(differing[:10]) + ": supersede it, repeat calibration if a training or scoring file changed (section 7.1 rule 4), and rehearse again")
+    now_charge = ledgers_charge(list((charge.get("ledgers") or {}).keys()))
+    lost = [k for k, v in (charge.get("ledgers") or {}).items() if now_charge["ledgers"][k] < float(v) - 1e-6]
+    if lost:
+        raise StageRefused("refused: a ledger the plan's charge before the freeze was taken from holds less now: " + ", ".join(lost))
     wp = planmod.walk_problems(walk, plan.data["frozen_files"], repo)
     if wp:
         raise StageRefused("refused: " + "; ".join(wp))
@@ -239,7 +342,12 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     bad = ["the plan carries no calibration records"] if not records else [f"{n}: {p}" for n, rec in records.items() for p in cal.code_identity_problems(rec, plan.data["frozen_files"], files)]
     if bad:
         raise StageRefused("refused: the calibration records do not match the frozen files: " + "; ".join(bad[:4]))
-    for name in ("part_q_manifest", "part_q_acceptance", "panel_ledger"):
+    from .partt_door import PartQDoor
+
+    if not plan.data.get("part_q"):
+        raise StageRefused("refused: the plan names no Part Q run directory of record (--part-q-dir): Part T reads Part Q through one checked door")
+    PartQDoor.from_plan(plan.data["part_q"])  # Part Q's manifest (and plan) are the hashes the plan recorded
+    for name in ("part_q_acceptance", "panel_ledger"):
         m = (plan.data.get("manifests") or {}).get(name)
         p = None if not m else (Path(m["path"]) if Path(m["path"]).is_absolute() else repo / m["path"])
         if p is None or not p.is_file() or file_sha256(p) != m["sha256"]:
@@ -272,8 +380,11 @@ def build_parser() -> argparse.ArgumentParser:
     sub = ap.add_subparsers(dest="command", required=True)
     cp = sub.add_parser("candidate-plan")
     cp.add_argument("--run-dir", required=True)
-    cp.add_argument("--calibration", required=True, help="the calibration outcome (JSON: U, rates, read layer, pilot, records)")
-    cp.add_argument("--manifests", required=True, help="JSON naming part_q_manifest, part_q_acceptance, panel_ledger by path and SHA-256")
+    cp.add_argument("--calibration", required=True, help="the calibration's OWN record file (calibration_<n>.json): the plan takes U, the rates, the layer and the pilot from it, by hash")
+    cp.add_argument("--manifests", help="JSON naming part_q_acceptance and panel_ledger by path and SHA-256")
+    cp.add_argument("--part-q-dir", required=True, help="Part Q's run directory of record (attempt 3): named in the plan; its manifest is listed by hash")
+    cp.add_argument("--part-q-plan", help="Part Q's plan file, whose reuse list holds the hashes of the reused stages' files")
+    cp.add_argument("--charged-ledger", action="append", default=[], help="every Part T charged_ledger.json charged so far (absolute): the charge before the freeze")
     cp.add_argument("--supersede", action="store_true")
     cp.add_argument("--repo")
     f = sub.add_parser("freeze")
@@ -284,8 +395,7 @@ def build_parser() -> argparse.ArgumentParser:
     f.add_argument("--repo")
     c = sub.add_parser("caps-proposal")
     c.add_argument("--measuring-rehearsal", required=True)
-    c.add_argument("--charged-hours", type=float, required=True)
-    c.add_argument("--units", required=True)
+    c.add_argument("--repo")
     tk = sub.add_parser("task")
     for a in ("--stage", "--task-id", "--run-dir"):
         tk.add_argument(a, required=True)
@@ -316,6 +426,7 @@ def build_parser() -> argparse.ArgumentParser:
     cal.add_argument("--part-q-dir", required=True)
     cal.add_argument("--run-dir", required=True)
     cal.add_argument("--repetition", type=int, default=0, choices=(0, 1))
+    cal.add_argument("--reason", default="", help="required when a record for this repetition exists: a new record is written beside it")
     cal.add_argument("--repo")
     for name in ("registered", "work"):
         r = sub.add_parser(name)

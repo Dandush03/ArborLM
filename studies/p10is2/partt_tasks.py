@@ -25,7 +25,7 @@ from .common import core, procs, runner
 from .common import plan as planmod
 from .common.core import StageRefused
 
-TASK_STAGES = ("gates", "train", "evaluate", "controls", "combined")
+TASK_STAGES = ("gates", "train", "evaluate", "combined")  # "controls" scores nothing again (ruling 12): a check stage; "recompute" is a stage with its own body
 WAVES = ((("M1", "D1", "M-joint", "D-joint", "E-table"),), (("M-append", "M-seq", "D-append", "D-seq"),), (("M-ii",),))  # dependency order of the cells: stage-1 modules, then the stage-2 modules, then M-ii
 
 
@@ -60,6 +60,23 @@ def waves_of(stage: str, plan: planmod.Plan) -> list[list[dict[str, Any]]]:
     raise StageRefused(f"refused: {stage!r} has no task stage")
 
 
+def stage_marker(run_dir: Path, stage: str) -> Path:
+    return run_dir / "stages" / f"{stage}.complete.json"
+
+
+def mark_complete(run_dir: Path, stage: str, mode: str = "registered") -> None:
+    p = stage_marker(run_dir, stage)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    write_json(p, {"stage": stage, "status": "COMPLETE", "mode": mode, "utc": core.utc_stamp()})
+
+
+def require_predecessor(run_dir: Path, stage: str, order: Sequence[str]) -> None:
+    """Stage order is enforced: a stage runs only after its predecessor's completion record (no stage needs a record that only it or a later stage writes: audit B3)."""
+    i = order.index(stage)
+    if i and not stage_marker(run_dir, order[i - 1]).is_file():
+        raise StageRefused(f"refused: stage {stage!r} needs {order[i - 1]!r} to be complete first (no completion record)")
+
+
 def tasks_dir(run_dir: Path, stage: str) -> Path:
     return run_dir / "tasks" / stage
 
@@ -78,10 +95,18 @@ def ledger_of(plan: planmod.Plan, run_dir: Path) -> core.Ledger:
     return core.Ledger(run_dir / "charged_ledger.json", "T", plan.total_cap_seconds() if plan.total_cap_seconds() > 0 else 1e12)
 
 
+def charge_before_freeze(plan: planmod.Plan) -> float:
+    """Everything Part T charged before the freeze (the measuring rehearsal, calibration and its repetitions, earlier counting rehearsals), as the plan RECORDED it: it counts against the total cap (ruling 4)."""
+    return float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
+
+
 def stage_cap_for(plan: planmod.Plan, stage: str, led: core.Ledger) -> float:
-    """The seconds this invocation may use: the stage's cap less what it already used, but never more than is left of the part's total (cumulative across stages and resumes)."""
-    stage_cap = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else 1e12
-    return min(stage_cap - led.charged(stage), led.remaining())
+    """The seconds this invocation may use: the stage's cap less what it already used, but never more than is left of the part's total less the charge before the freeze (cumulative across stages and resumes).
+    A cap of 0 is NEVER "uncapped": every registered stage has a cap by the rule, or this refuses."""
+    own = plan.cap_seconds(stage)
+    if own <= 0 or plan.total_cap_seconds() <= 0:
+        raise StageRefused(f"refused: stage {stage!r} has no cap (a cap of 0 is not 'uncapped'): the caps are computed by the rule from the measuring rehearsal and written before the freeze")
+    return min(own - led.charged(stage), plan.total_cap_seconds() - charge_before_freeze(plan) - led.charged())
 
 
 def record_item_errors(run_dir: Path, stage: str, outcomes: Mapping[str, Mapping[str, Any]]) -> list[str]:

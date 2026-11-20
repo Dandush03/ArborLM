@@ -149,7 +149,7 @@ def test_retry_releases_an_error_once_and_never_a_non_finite_cell(tmp_path: Path
 
 def test_run_task_trains_a_cell_and_resumes_a_dependent_one(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     w = world(updates=2)
-    monkeypatch.setattr(partt_real, "build_world_real", lambda repo, cfg, qdir, calib, mode: (w, {}, {}))
+    monkeypatch.setattr(partt_real, "build_world_real", lambda repo, cfg, qdir, calib, mode, door=None: (w, {}, {}))
     plan = a_plan()
     run = tmp_path / "run"
     r1 = partt_real.run_task("train", "train|M1|AB|r0", core.ROOT, run, tmp_path / "q", plan, mode="test")
