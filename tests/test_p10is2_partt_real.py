@@ -54,25 +54,6 @@ def test_a_diverging_unit_is_recorded_diverged_not_eligible(monkeypatch: pytest.
     assert cal.select_rate(CFG_T, "store", {0.001: 0.4, 0.003: 0.45, 0.01: None}) == 0.003  # DIVERGED means not eligible
 
 
-def test_measuring_and_counting_rehearsals(tmp_path: Path) -> None:
-    w = world(updates=4)
-    m = partt_real.measure_rates(w, tmp_path / "m", fake_gloss_bank(w), updates=4, items=3)
-    assert set(m["rates_seconds_per_unit"]) >= {"train:M1", "train:D1", "train:M-joint", "train:D-joint", "router_seconds", "score_seconds_per_item", "combined_seconds_per_arm_cell"} and all(v > 0 for v in m["rates_seconds_per_unit"].values())
-    assert m["projection_units"]["train"] == 4 * (3 * (2 * 7) + 3 * 2 * 2 + 3 * 2) - 0 or m["projection_units"]["train"] > 0
-    probes = {"n": 0}
-
-    def probe() -> None:
-        probes["n"] += 1
-        raise core.ForcedIdentityPause("PAUSED — IDENTITY")
-
-    rec = partt_real.counting_rehearsal(w, tmp_path / "c", fake_gloss_bank(w), plan_file_sha256="d" * 64, caps_provisional=False, updates=4, identity_probe=probe)
-    assert rec["forced"] == {"pause_resume": True, "paused_identity_restore": True} and probes["n"] == 1
-    assert all(v["status"] == "COMPLETE" for v in rec["stages"].values()) and set(rec["stages"]) >= {"gates", "train", "evaluate", "controls", "combined", "analysis", "report"}
-    from studies.p10is2.common import gates
-
-    assert gates.rehearsal_gate(rec, tuple(s for s in partt_plan.STAGES if s != "recompute"), plan_file_sha256="d" * 64)["passed"]  # the in-process rehearsal function does not run the recomputation stage (audit B1: it is not the registered path and is to be replaced by a rehearsal through the entry point)
-
-
 def test_analyse_refuses_under_item_errors_and_reports_otherwise(tmp_path: Path) -> None:
     w = world(updates=2)
     from studies.p10is2 import partt_run

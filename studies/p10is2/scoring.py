@@ -7,7 +7,9 @@ words-only on the 300-item subsample, each permutation from a fresh +4 generator
 registry builder. Every read runs under ``torch.no_grad()`` and on CPU. The frozen scoring is repeated bit-identically (gate G2).
 """
 
-from collections.abc import Mapping
+import contextlib
+import time
+from collections.abc import Iterator, Mapping
 from typing import Any
 
 import torch
@@ -33,8 +35,25 @@ EVALUATION_FORBIDDEN_MODES = ("rehearsal", "calibration")  # section 4.1: E_A, E
 
 def require_evaluation_allowed(world: WorldT) -> None:
     """The code REFUSES to score an evaluation panel (E_A, E_B, E_C, E_open) outside a registered stage: a rehearsal and a calibration score D_cal only (audit B2, ruling 1)."""
+    if getattr(world, "evaluation_is_d_cal", False):  # a rehearsal world built by ``partt_rehearsal.rehearsal_bundle`` holds no evaluation item: its E_A, E_B and E_C ARE D_cal
+        return
     if getattr(world, "plan_mode", "registered") in EVALUATION_FORBIDDEN_MODES:
         raise core.StageRefused(f"refused: a {world.plan_mode} never scores E_A, E_B, E_C or E_open (section 4.1: not before the registered run of Part T); it scores D_cal only")
+
+
+KIND_SECONDS: dict[str, float] = {}
+KIND_CALLS: dict[str, int] = {}
+
+
+@contextlib.contextmanager
+def timed(kind: str) -> Iterator[None]:
+    """Seconds spent per kind of work in this process (the measuring rehearsal's per-kind rates; nothing else reads them)."""
+    t0 = time.perf_counter()
+    try:
+        yield
+    finally:
+        KIND_SECONDS[kind] = KIND_SECONDS.get(kind, 0.0) + (time.perf_counter() - t0)
+        KIND_CALLS[kind] = KIND_CALLS.get(kind, 0) + 1
 
 
 def _cap(order: str, which: int) -> str:
@@ -48,7 +67,8 @@ def panel_means(world: WorldT, arm: Arm) -> dict[str, float]:
     ctx = world.ctx
     out: dict[str, float] = {}
     for n in ("E_A", "E_B"):
-        sc = score_panel(ctx, arm, ctx.panels[n])
+        with timed("score:plain"):
+            sc = score_panel(ctx, arm, ctx.panels[n])
         out[f"s:{n}"], out[f"em:{n}"] = sc.mean, mean([float(x) for x in sc.exact])  # em: exact-match rate (EXACT-MATCH WEAK)
     return out
 
@@ -59,7 +79,8 @@ def control_reads(world: WorldT, rep: int, arm: MemoryArm, name: str, order: str
     ctx = world.ctx
     ctx.seed_plan = world.plan(rep)  # type: ignore[assignment]
     caps = list(TWO) if name == "M-joint" else [_cap(order, 0 if name == "M1" else 1)]
-    res = memory_ablations(ctx, arm, [PANEL[c] for c in caps], CONTROL_STAGES[name], caps)
+    with timed("score:control"):
+        res = memory_ablations(ctx, arm, [PANEL[c] for c in caps], CONTROL_STAGES[name], caps)
     out: dict[str, float] = {}
     for c in caps:
         for kind, cond in COND.items():
@@ -93,7 +114,7 @@ def build_routers_t(world: WorldT, rep: int) -> dict[tuple[str, ...], tuple[Rout
     out: dict[tuple[str, ...], tuple[Router, dict[str, Any]]] = {}
     for tasks in (("A",), ("B",), TWO):
         prompts = {t: [world.bank.prompt(t, x.en) for x in world.streams[rep].t[t]] for t in tasks}
-        with torch.enable_grad():  # the router trains: scoring's no_grad does not apply to it
+        with torch.enable_grad(), timed("router:train"):  # the router trains: scoring's no_grad does not apply to it
             out[tasks] = train_router(world.student, world.layer, tasks, prompts, world.wiki_train_ids, world.plan(rep), world.router_spec)  # type: ignore[arg-type]
     return out
 
@@ -104,13 +125,15 @@ def gen_reads(world: WorldT, rep: int, arm: Arm, name: str, order: str, routers:
     task; a stage-2 snapshot with the router of both tasks."""
     tasks = (_cap(order, 0),) if name == "M1" else TWO
     router = routers[tasks][0]
-    res = general_quality(world.ctx, arm, router)
+    with timed("score:gen"):
+        res = general_quality(world.ctx, arm, router)
     return {"gen:token64": float(res["loss_increase"]), "gen:first_marker": float(res["loss_increase_first_marker"])}, {k: res[k] for k in ("false_trigger_count", "false_trigger_count_first_marker", "stratum_sizes", "stratum_means", "passes")}
 
 
 @torch.no_grad()
 def dcon_reads(world: WorldT, arm: Arm) -> dict[str, float]:
-    return {f"dcon:{c}": score_panel(world.ctx, arm, world.d_con[c]).mean for c in TWO}
+    with timed("score:dcon"):
+        return {f"dcon:{c}": score_panel(world.ctx, arm, world.d_con[c]).mean for c in TWO}
 
 
 def modification(m_ii: MemoryArm, m1: MemoryArm) -> dict[str, float]:
@@ -205,7 +228,8 @@ def registry_from_reads(records: Mapping[str, Mapping[str, float]]) -> Registry:
 
 
 def reference_records(world: WorldT) -> dict[str, dict[str, float]]:
-    ref = reference_reads(world)
+    with timed("score:reference"):
+        ref = reference_reads(world)
     out: dict[str, dict[str, float]] = {"S0|-|-": {}, "TEACHER|-|-": {}}
     for k, v in ref.items():
         who, read = k.split("|", 1)
@@ -233,7 +257,8 @@ def route_reads(world: WorldT, rep: int, arm: Arm, routers: Mapping[tuple[str, .
 
     router = routers[TWO][0]
     ctx = world.ctx
-    reads = {f"lr:{n}": score_panel(ctx, arm, ctx.panels[n], route="learned", router=router).mean for n in ("E_A", "E_B")}
+    with timed("score:route"):
+        reads = {f"lr:{n}": score_panel(ctx, arm, ctx.panels[n], route="learned", router=router).mean for n in ("E_A", "E_B")}
     plan = world.plan(rep)
     pieces = none_pieces(world.wiki_train_ids, world.router_spec.prefix_tokens)
     picked = set(torch.randperm(len(pieces), generator=plan.gen(3, "router sampling")).tolist()[: world.router_spec.none_prefixes])

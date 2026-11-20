@@ -194,6 +194,9 @@ def load_t(world: WorldT, r: int, directory: Path, name: str) -> Arm:
 
     from arborlm.io import file_sha256
 
+    alias = getattr(world, "snapshot_alias", None)  # a rehearsal reads the cells it did not train from the trained cell of the same arm (partt_rehearsal.AliasMap); a registered world has none
+    if alias is not None:
+        name = alias.get(name, name)
     safe = name.replace("/", "__").replace("@", "_at_")
     data, manifest = directory / f"{safe}.pt", directory / f"{safe}.manifest.json"
     m = json.loads(manifest.read_text())

@@ -23,6 +23,11 @@ ORDER_ARMS = ("M1", "D1", "M-append", "M-seq", "M-ii", "D-append", "D-seq")
 JOINT = ("M-joint", "D-joint")
 
 
+def _combined_cell(ctx: Any, arm: Any, cs: Any) -> dict[str, Any]:
+    with scoring.timed("combined:arm-cell"):
+        return combined_mod.score_combined_cell(ctx, arm, cs)  # type: ignore[no-any-return]
+
+
 def cell_specs(replicates: tuple[int, ...] = REPLICATES) -> list[engine.CellSpec]:
     """Every trained cell in dependency order: per (replicate, order) the stage-1 modules then the stage-2 modules; per replicate the joint arms and E-table."""
     out: list[engine.CellSpec] = []
@@ -78,7 +83,9 @@ def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Ma
     d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
     records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
     records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
-    for name, v in scoring.baseline_reads(world, r, gloss_bank).items():
+    with scoring.timed("score:icl"):
+        baselines = scoring.baseline_reads(world, r, gloss_bank)
+    for name, v in baselines.items():
         arm, read = name.split("|", 1)
         if read.startswith("hits"):
             side.setdefault(f"r{r}/R-exact-hits", {})[read] = v
@@ -112,7 +119,7 @@ def combined_reference(world: engine.WorldT) -> dict[str, Any]:
 
     scoring.require_evaluation_allowed(world)
     ctx = world.ctx
-    return {"S0": combined_mod.score_combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
+    return {"S0": _combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
 
 
 def ensemble_check(world: engine.WorldT, ensemble: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -140,13 +147,13 @@ def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path) -> dict[str
     ctx.seed_plan = world.plan(r)  # type: ignore[assignment]
     for o in ORDERS:
         for a in ("M-append", "M-ii", "D-seq", "D-append"):
-            out[f"{a}|{o}|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}"), ctx.ec)
+            out[f"{a}|{o}|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}"), ctx.ec)
     for a in JOINT:
-        out[f"{a}|-|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
+        out[f"{a}|-|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
     m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
     d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
-    out[f"M-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, CompositeStoreArm(m1), ctx.ec)  # type: ignore[arg-type]
-    out[f"D-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, AdapterRouteArm(d1), ctx.ec)  # type: ignore[arg-type]
+    out[f"M-sep|-|{r}"] = _combined_cell(ctx, CompositeStoreArm(m1), ctx.ec)  # type: ignore[arg-type]
+    out[f"D-sep|-|{r}"] = _combined_cell(ctx, AdapterRouteArm(d1), ctx.ec)  # type: ignore[arg-type]
     return out
 
 

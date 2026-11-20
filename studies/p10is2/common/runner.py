@@ -25,8 +25,10 @@ from . import core
 
 COMPLETED, FAILED, KILLED_CAP, KILLED_RSS, NOT_STARTED = "completed", "failed", "killed_cap", "killed_rss", "not_started"
 PAUSED_IDENTITY = "paused_identity"
+PAUSED_FORCED = "paused_forced"
+FORCED_PAUSE_EXIT = 74  # a worker that stops on purpose after a checkpoint (the rehearsal's ONE forced pause): PAUSED, no failed record; the same command resumes it
 IDENTITY_EXIT = 75  # a worker that refuses on an identity or precondition check (a dirty tree, a frozen file that differs, no Decision 2) exits with this code (EX_TEMPFAIL): PAUSED — IDENTITY, not FAILED
-PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY)
+PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY, PAUSED_FORCED)
 POLL = 0.2
 
 
@@ -101,11 +103,16 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
                 out[label] = {"status": PAUSED_IDENTITY, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED — IDENTITY: the worker refused on an identity or precondition check; restore the file or the state bit for bit and run the stage again (no failed record is kept)"}
                 running.pop(label)
                 continue
+            if code == FORCED_PAUSE_EXIT:
+                out[label] = {"status": PAUSED_FORCED, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED: the forced pause of a rehearsal; the same command resumes the task from its checkpoint"}
+                running.pop(label)
+                continue
             if code is not None:
                 ok = code == 0 and task.result_path.is_file()
                 out[label] = {"status": COMPLETED if ok else FAILED, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak}
                 if not ok:
                     out[label]["reason"] = f"exit status {code}" if code != 0 else "exit status 0 but no result file"
+                    task.failed_path.parent.mkdir(parents=True, exist_ok=True)  # a worker that failed before writing anything (its tasks directory does not exist yet) still leaves its failed record
                     write_json(task.failed_path, {"label": label, "status": FAILED, "reason": out[label]["reason"], "returncode": code, "log": str(task.log_path), "utc": datetime.now(UTC).isoformat(), "note": "failed record kept; the task is not re-run"})
                 running.pop(label)
                 continue
