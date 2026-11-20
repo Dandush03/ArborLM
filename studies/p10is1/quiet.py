@@ -22,6 +22,7 @@ import math
 import os
 import re
 import subprocess
+import sys
 import threading
 import time
 from collections.abc import Callable, Mapping, Sequence
@@ -37,6 +38,8 @@ PAUSED_QUIET = "PAUSED — QUIET CONDITION NOT MET"
 PAUSED_SPREAD = "PAUSED — TIMING SPREAD"
 PAUSED_CAP = "PAUSED — STAGE CAP"
 PAUSED_NOT_SILENT = "PAUSED — NOT SILENT"  # F1/F6: a tool call of a Claude session, or a changed set of Claude processes, during the measurement or at the end check; never counted
+PAUSED_CONDITION = "PAUSED — MACHINE CONDITION"  # N2: wait readings failed on a machine condition other than the load being above L (and not on silence); never counted
+LOAD_FAILURES = ("ONE-MINUTE LOAD ABOVE L", "FIVE-MINUTE LOAD ABOVE L")
 PAUSED_DISCARDED = "PAUSED — MEASUREMENT DISCARDED"  # F7: an end-check or in-measurement discard of any other cause; never counted (it is retried inside the bounded wait)
 PAUSED_ENVIRONMENT = "PAUSED — ENVIRONMENT"
 NOT_MEASURED = "NOT MEASURED"
@@ -272,9 +275,65 @@ def watch_conditions(first: Mapping[str, Any], *, probe: machine.Probe | None = 
     return failed
 
 
+def wait_status(readings: Sequence[Mapping[str, Any]]) -> str:
+    """N2: the status of a session that never got (another) quiet reading. Only a session in which the conditions held and the LOAD ALONE stayed above L at every reading counts (PAUSED — QUIET CONDITION NOT MET).
+    A reading that failed on silence (a tool call of any Claude session, a changed Claude process set) makes it PAUSED — NOT SILENT; one that failed on any other machine condition (or an unreadable load) makes it
+    PAUSED — MACHINE CONDITION. Neither counts towards NOT MEASURED."""
+    seen = {f for r in readings for f in r.get("failed", [])}
+    if any(f in machine.SILENCE_FAILURES for f in seen):
+        return PAUSED_NOT_SILENT
+    if any(f not in LOAD_FAILURES for f in seen):
+        return PAUSED_CONDITION
+    return PAUSED_QUIET
+
+
 def discard_status(failed: Sequence[str]) -> str:
     """The status of a discarded measurement: NOT SILENT when the lead's silence failed, else MEASUREMENT DISCARDED. Neither counts towards the six sessions of NOT MEASURED (ruling F7)."""
     return PAUSED_NOT_SILENT if any(f in machine.SILENCE_FAILURES for f in failed) else PAUSED_DISCARDED
+
+
+class ChildWatch:
+    """N3: the in-measurement watch as a CHILD process (``watch_child.py``), started before the measurement and read after it, so that its CPU is not in the timing process's ``process_time`` (MC-T). A descendant of the
+    stage: part of its own process family for the study-process check (F1). Fails closed: a child that does not start, or leaves no summary, is a failure."""
+
+    def __init__(self, path: Path, first: Mapping[str, Any], *, cfg_path: Path | None = None, interval: float = 10.0, startup_timeout: float = 120.0, stop_timeout: float = 60.0) -> None:
+        self.path, self.first, self.cfg_path, self.interval = path, dict(first), cfg_path, float(interval)
+        self.startup_timeout, self.stop_timeout = float(startup_timeout), float(stop_timeout)
+        self.proc: subprocess.Popen[bytes] | None = None
+        self.pid: int | None = None
+
+    def start(self) -> "ChildWatch":
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        args = self.path.with_suffix(".args.json")
+        args.write_text(json.dumps(core.jsonable({"first": {"claude_pids": self.first.get("claude_pids")}, "cfg_path": str(self.cfg_path) if self.cfg_path else None, "interval": self.interval, "out": str(self.path), "parent_pid": os.getpid()})), encoding="utf-8")
+        err = self.path.with_suffix(".err").open("ab")
+        self.proc = subprocess.Popen([sys.executable, "-m", "studies.p10is1.watch_child", "--args", str(args)], stdout=subprocess.DEVNULL, stderr=err)  # noqa: S603
+        self.pid = self.proc.pid
+        deadline = time.monotonic() + self.startup_timeout
+        while time.monotonic() < deadline and self.proc.poll() is None and not (self.path.is_file() and self.path.read_text(encoding="utf-8").strip()):
+            time.sleep(0.05)  # the first tick is on disk: the watch is running before the measurement starts (bounded)
+        return self
+
+    def stop(self) -> dict[str, Any]:
+        failures: list[dict[str, Any]] = []
+        summary: dict[str, Any] | None = None
+        if self.proc is not None:
+            if self.proc.poll() is None:
+                self.proc.terminate()
+            try:
+                self.proc.wait(timeout=self.stop_timeout)
+            except subprocess.TimeoutExpired:
+                self.proc.kill()
+                self.proc.wait(timeout=30)
+        rows = [json.loads(x) for x in self.path.read_text(encoding="utf-8").splitlines() if x.strip()] if self.path.is_file() else []
+        for r in rows:
+            if r.get("summary"):
+                summary = r
+            elif r.get("failed"):
+                failures.append({"t": r.get("t"), "failed": list(r["failed"])})
+        if summary is None or not any("tick" in r for r in rows):
+            failures.append({"t": None, "failed": ["WATCH CHILD DID NOT RUN"]})
+        return {"failures": failures, "ticks": (summary or {}).get("ticks", 0), "child_cpu_seconds": (summary or {}).get("cpu_seconds"), "record": str(self.path)}
 
 
 class CapReached(RuntimeError):
@@ -411,6 +470,7 @@ def run_alone_stage(
     top_fn: Callable[[], list[dict[str, Any]]] | None = None,
     trace_factory: Callable[[], LoadTrace] | None = None,
     watch: Callable[[Mapping[str, Any]], list[str]] | None = None,
+    child_watch: Callable[[Mapping[str, Any], Path], Any] | None = None,
 ) -> dict[str, Any]:
     """One session of a stage that runs alone (addendum A3.2 to A3.5 and the rulings F1-F7). WAIT for a quiet reading (a bounded wait window of its own; every poll appended to ``polls.jsonl``; the waiting is recorded
     in ``account['wait_seconds']`` and NOT charged), MEASURE (``account['measure_seconds']``, from the quiet reading to the end check including its 120-s delay: the charged seconds, against ``cap_seconds`` of the stage's own
@@ -444,7 +504,7 @@ def run_alone_stage(
             return PAUSED_SPREAD
         if discards:
             return str(discards[-1]["status"])
-        return PAUSED_QUIET
+        return wait_status(readings)
 
     def paused(status: str, extra: Mapping[str, Any]) -> dict[str, Any]:
         path = record_attempt(run_dir, stage, {"readings": readings}, status=status, extra={"timing_attempts": attempts, "discards": discards, "wait_seconds": acct["wait_seconds"], "measure_seconds": acct["measure_seconds"], **extra})
@@ -471,6 +531,7 @@ def run_alone_stage(
         trace = trace_factory() if trace_factory else LoadTrace(float(q["baseline_interval_seconds"]), check_fn=check)
         if trace_factory is not None and check is not None:
             trace.check_fn = check
+        cw = child_watch(first, run_dir / stage / "watch" / f"watch-{clean_runs + len(discards) + 1:02d}.jsonl").start() if child_watch is not None else None  # N3: BEFORE the measurement, in its own process
         m0 = clock()
 
         def guard(m0: float = m0) -> None:
@@ -489,18 +550,19 @@ def run_alone_stage(
         finally:
             load_trace = trace.stop()
             acct["measure_seconds"] += clock() - m0
+            watch_res = cw.stop() if cw is not None else None  # read AFTER the measurement; its CPU was never in the timing process
         if capped is not None:
             return paused(PAUSED_CAP, {"reason": capped})
         top_end = top()
         failed = list(fin.get("failed", [])) if not fin.get("ok", False) else []
         if not fin.get("ok", False) and not failed:
             failed = ["END CHECK FAILED"]
-        for f in trace.failures:  # F6: a condition that failed at any tick of the measurement
+        for f in [*trace.failures, *((watch_res or {}).get("failures") or [])]:  # F6: a condition that failed at any tick of the measurement
             failed += [x for x in f["failed"] if x not in failed]
         end_pids, first_pids = (fin.get("conditions") or {}).get("claude_pids"), first.get("claude_pids")
         if end_pids is not None and first_pids is not None and list(end_pids) != list(first_pids) and "CLAUDE PROCESS SET CHANGED" not in failed:
             failed.append("CLAUDE PROCESS SET CHANGED")  # F1: the set of Claude processes is the same from the quiet reading to the end check
-        extra: dict[str, Any] = {"end_check": fin, "top_processes": {"start": top_start, "end": top_end}, "load_trace": load_trace, "watch_failures": trace.failures, "attempt_in_session": clean_runs + len(discards) + 1}
+        extra: dict[str, Any] = {"end_check": fin, "top_processes": {"start": top_start, "end": top_end}, "load_trace": load_trace, "watch_failures": trace.failures, "watch_child": watch_res, "attempt_in_session": clean_runs + len(discards) + 1}
         if failed:
             st = discard_status(failed)
             discards.append({"status": st, "failed": failed, "end_check": fin, "watch_failures": trace.failures, "measure_seconds": clock() - m0, "result": result, "top_processes": extra["top_processes"]})

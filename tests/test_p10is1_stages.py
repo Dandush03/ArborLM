@@ -457,6 +457,8 @@ def test_training_refuses_without_gates_and_without_a_settled_timing_stage(tmp_p
 
 
 @pytest.fixture(autouse=True)
-def _no_real_baseline_root(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch) -> None:
-    """The freeze checks the committed baseline against the study's real baseline root when that exists on this machine; these tests use synthetic records and never depend on it (F4)."""
-    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(tmp_path_factory.mktemp("no_baseline_root") / "absent"))
+def _canonical_baseline_root_is_a_test_directory(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The freeze requires the study's canonical baseline root; these tests use synthetic records mirrored into a per-process TEST directory standing in for it, and never touch the real one (F4)."""
+    import test_p10is1_quiet_rule as qr
+
+    qr.use_canon(monkeypatch)

@@ -440,12 +440,14 @@ def _execute_stage_body(stage: str, pl: Plan, ctx: items.Ctx, run_dir: Path, pla
             account = holder["account"] if holder is not None else {}
             clock_kw: dict[str, Any] = {"clock": clock} if clock else {}
             # F6: the conditions are read at every 10-s tick of the measurement; a test that injects the reading injects the watch too (none by default, never the real machine)
-            watch = watch_fn if watch_fn is not None else (None if quiet_reading is not None else (lambda first: quiet.watch_conditions(first, cfg=cfg)))
+            watch = watch_fn
+            # N3: the real watch is a CHILD process (its CPU is not in the timing process's process_time); a test that injects the reading gets none unless it injects an in-process ``watch_fn``
+            child_watch = None if (watch_fn is not None or quiet_reading is not None) else (lambda first, path: quiet.ChildWatch(path, first, cfg_path=ctx.config_path, interval=float(cfg["quiet"]["baseline_interval_seconds"])))
             # ONE code path for the registered stage and the counting rehearsal: the reading is the config's measured rule (``quiet.quiet_reading``) unless a test injects one; the waiting is not charged (it goes to
             # ``account['wait_seconds']``), the measuring seconds are, against the stage's own cap
             r = quiet.run_alone_stage(
                 run_dir, stage, measure, reading=quiet_reading or quiet.quiet_reading, end=end_fn or (lambda s: quiet.end_check(s, sleep=sleeper)), sleep=sleeper, cfg=cfg, **clock_kw,
-                validate=(lambda res: quiet.timing_spreads(res, cfg)) if stage == "timing" else None, cap_seconds=cap, account=account, guarded=True, watch=watch,
+                validate=(lambda res: quiet.timing_spreads(res, cfg)) if stage == "timing" else None, cap_seconds=cap, account=account, guarded=True, watch=watch, child_watch=child_watch,
             )  # fmt: skip
             if r["status"] == "COMPLETE":
                 core.write_record(run_dir / stage / f"{stage}.json", {**core.envelope("timing" if stage == "timing" else "throughput"), **{k: v for k, v in r["result"].items()}, "quiet": r["end_check"], "attempt_record": r["attempt_record"], "wait_seconds": r["wait_seconds"], "measure_seconds": r["measure_seconds"], "retimed": r["retimed"], "timing_spread": r.get("validation")})

@@ -8,8 +8,10 @@ import copy
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -76,8 +78,26 @@ def run_session(fm: FakeMachine, out: Path, cfg: dict[str, Any], **kw: Any) -> d
 
 
 # --- synthetic committed baseline (what the freeze re-derives): used by every test that needs a config that is not provisional ------------------------
+CANON = Path(tempfile.mkdtemp(prefix="p10is1-canon-"))  # the TEST stand-in for the canonical baseline root: the autouse fixtures point ``baseline.canonical_root`` at it; no test ever writes the real one
+
+
+def use_canon(monkeypatch: pytest.MonkeyPatch) -> Path:
+    """Point the canonical root at the per-process test directory (emptied) for one test."""
+    shutil.rmtree(CANON, ignore_errors=True)
+    CANON.mkdir(parents=True)
+    monkeypatch.setattr(baseline, "canonical_root", lambda: CANON)
+    return CANON
+
+
+def use_test_root(monkeypatch: pytest.MonkeyPatch, root: Path) -> None:
+    """The TEST-ONLY override (``baseline._test_root``) and no preflight against this machine's real process table."""
+    monkeypatch.setattr(baseline, "_test_root", root)
+    monkeypatch.setattr(baseline, "preflight", lambda **kw: None)
+
+
 def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", app: bool = False, cli: bool = False) -> dict[str, Any]:
-    """Write a record and a samples file with the schema of ``baseline.run_baseline`` (420 samples at a constant ``load`` hundredths) and return the config figures that match them."""
+    """Write a record and a samples file with the schema of ``baseline.run_baseline`` (420 samples at a constant ``load`` hundredths), mirrored as the TEST canonical root's ``first/`` (``CANON``), and return the config
+    figures that match them. The record says it was taken under that root, with ``test_root = false``, and lists its one attempt."""
     q = core.load_config()["quiet"]
     n = int(q["settle_samples"]) + int(q["baseline_samples"])
     out.mkdir(parents=True, exist_ok=True)
@@ -87,8 +107,13 @@ def synthetic_baseline(out: Path, *, load: int = 130, condition: str = "open", a
         lines.append(json.dumps(s, sort_keys=True))
     (out / baseline.SAMPLES).write_text("\n".join(lines) + "\n", encoding="utf-8")
     d = loadrule.derive([load] * int(q["baseline_samples"]), q)
-    rec = {**core.envelope("quiet_baseline"), "status": baseline.ACCEPTED, "condition": condition, "sessions": [], "attempts": [], "accepted": {"session": 1, "attempt": 1, **d}, "samples_file": baseline.SAMPLES, "samples_sha256": file_sha256(out / baseline.SAMPLES)}
+    rec = {**core.envelope("quiet_baseline"), "status": baseline.ACCEPTED, "condition": condition, "sessions": [], "attempts": [{"session": 1, "attempt": 1, "outcome": "ACCEPTED"}], "accepted": {"session": 1, "attempt": 1, **d}, "samples_file": baseline.SAMPLES, "samples_sha256": file_sha256(out / baseline.SAMPLES), "root": str(CANON.resolve()), "test_root": False}
     core.write_record(out / baseline.RECORD, rec, overwrite=True)
+    mirror = CANON / "first"
+    shutil.rmtree(mirror, ignore_errors=True)
+    mirror.mkdir(parents=True)
+    for f in (baseline.RECORD, baseline.SAMPLES):
+        shutil.copy(out / f, mirror / f)
     return {"load_p95": d["load_p95"], "load_limit": d["load_limit"], "condition": condition, "app_present": app, "cli_present": cli, "baseline_record_sha256": file_sha256(out / baseline.RECORD)}
 
 
@@ -183,25 +208,24 @@ def test_a_quiet_machine_has_no_failed_condition_and_records_the_presences() -> 
 
 VM_EXAMPLES = {
     "com.apple.Virtualization.VirtualMachine": "/System/Library/Frameworks/Virtualization.framework/Versions/A/XPCServices/com.apple.Virtualization.VirtualMachine.xpc/Contents/MacOS/com.apple.Virtualization.VirtualMachine",
-    "qemu-system": "qemu-system-aarch64 -M virt", "limactl": "limactl hostagent default", "colima": "/opt/homebrew/bin/colima daemon", "com.docker.backend": "/Applications/Docker.app/Contents/MacOS/com.docker.backend run",
-    "com.docker.virtualization": "com.docker.virtualization --kernel x", "com.docker.vmnetd": "/Library/PrivilegedHelperTools/com.docker.vmnetd", "Docker Desktop": "/Applications/Docker.app/Contents/MacOS/Docker Desktop --foo", "vfkit": "vfkit --cpus 2",
-    "krunkit": "krunkit --memory 2048", "OrbStack": "/Applications/OrbStack.app/Contents/MacOS/OrbStack", "prl_vm_app": "/Applications/Parallels Desktop.app/Contents/MacOS/prl_vm_app", "VirtualBoxVM": "/Applications/VirtualBox.app/Contents/Resources/VirtualBoxVM.app/Contents/MacOS/VirtualBoxVM",
-    "UTM": "/Applications/UTM.app/Contents/MacOS/UTM",
+    "qemu-system": "/opt/homebrew/bin/qemu-system-aarch64 -M virt", "limactl": "/opt/homebrew/bin/limactl hostagent default", "colima": "/opt/homebrew/bin/colima daemon", "com.docker.backend": "/Applications/Docker.app/Contents/MacOS/com.docker.backend run",
+    "com.docker.virtualization": "com.docker.virtualization --kernel x", "com.docker.vmnetd": "/Library/PrivilegedHelperTools/com.docker.vmnetd", "Docker.app": "/Applications/Docker.app/Contents/MacOS/Docker Desktop --foo", "vfkit": "/opt/homebrew/bin/vfkit --cpus 2",
+    "krunkit": "/opt/homebrew/bin/krunkit --memory 2048", "OrbStack": "/Applications/OrbStack.app/Contents/MacOS/OrbStack", "prl_vm_app": "/Applications/Parallels Desktop.app/Contents/MacOS/prl_vm_app", "Parallels": "/Applications/Parallels Desktop.app/Contents/MacOS/Parallels Desktop",
+    "VirtualBoxVM": "/Applications/VirtualBox.app/Contents/Resources/VirtualBoxVM.app/Contents/MacOS/VirtualBoxVM", "VirtualBox.app": "/Applications/VirtualBox.app/Contents/MacOS/VirtualBox", "UTM": "/Applications/UTM.app/Contents/MacOS/UTM",
+    "VMware Fusion": "/Applications/VMware Fusion.app/Contents/MacOS/VMware Fusion", "vmware-vmx": "/Applications/VMware Fusion.app/Contents/Library/vmware-vmx -s x",
 }  # fmt: skip
 
 
 def test_the_vm_marker_list_is_exactly_the_addendums_twelve() -> None:
-    assert len(Q["vm_markers"]) == 12 and Q["app_markers"] == ["/Applications/Claude\\.app/Contents/MacOS/Claude"]
+    assert len(Q["vm_markers"]) == 16 and Q["app_markers"] == ["/Applications/Claude\\.app/Contents/MacOS/Claude"]
     for marker in Q["vm_markers"]:
-        assert re.compile(marker, re.IGNORECASE).pattern == marker
+        assert re.compile(marker).pattern == marker and marker not in ("UTM", "colima", "qemu-system")  # N1: every marker is anchored (a path component, a bundle, a bundle id), none is a bare word
 
 
 @pytest.mark.parametrize("name", sorted(VM_EXAMPLES))
 def test_each_vm_marker_refuses(name: str) -> None:
     fm = FakeMachine()
     fm.extra = [(700, 1, VM_EXAMPLES[name])]
-    assert "VIRTUAL MACHINE PRESENT" in reading(fm)["failed"], name
-    fm.extra = [(700, 1, VM_EXAMPLES[name].upper())]  # case-insensitive
     assert "VIRTUAL MACHINE PRESENT" in reading(fm)["failed"], name
 
 
@@ -421,7 +445,7 @@ def test_a_closed_baseline_is_accepted_when_nothing_of_the_application_is_open(t
     assert rec["status"] == "ACCEPTED" and rec["condition"] == "closed" and rec["accepted"]["app_present"] is False and rec["accepted"]["cli_present"] is False and rec["accepted"]["condition"] == "closed"
 
 
-def test_a_second_baseline_only_for_a_listed_reason_before_any_timing_value(tmp_path: Path) -> None:
+def test_a_second_baseline_only_for_a_listed_reason_before_any_timing_value(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = tmp_path / "root"
     first = root / "first"
     run_session(FakeMachine(), first, small())
@@ -439,9 +463,10 @@ def test_a_second_baseline_only_for_a_listed_reason_before_any_timing_value(tmp_
         baseline.check_second("os_update", tmp_path / "missing", reg)
     # through the command: a refusal writes no reason file and takes no sample
     out2 = root / "second"
-    rc = baseline.main(["run", "--root", str(root), "--replaces", "--reason", "because", "--registered-run-dir", str(reg)])
+    use_test_root(monkeypatch, root)
+    rc = baseline.main(["run", "--replaces", "--reason", "because", "--registered-run-dir", str(reg)])
     assert rc == 2 and not out2.exists()
-    assert baseline.main(["run", "--root", str(root), "--condition", "closed"]) == 2  # the first baseline is taken: no condition argument, no new first one
+    assert baseline.main(["run", "--condition", "closed"]) == 2  # the first baseline is taken: no condition argument, no new first one
     # a replacing baseline may name the condition only for the human lead's decision, and carries its reason
     rec = run_session(FakeMachine(), out2, small(), condition="closed", second={"reason": "condition_change_by_human_lead", "replaces": "x"})
     assert rec["condition"] == "closed" and rec["second_baseline"]["reason"] == "condition_change_by_human_lead"
@@ -458,9 +483,10 @@ def test_the_second_baselines_reason_is_on_disk_before_its_first_sample(tmp_path
         assert (o / baseline.REASON_FILE).is_file() and not (o / baseline.SAMPLES).exists()  # the reason precedes the sampling
         return {"status": baseline.PAUSED_NO_BASELINE, "condition": "open", "paused_sessions": {"open": 1, "closed": 0}, "accepted": None, "samples_sha256": None}
 
+    use_test_root(monkeypatch, root)
     monkeypatch.setattr(baseline, "run_baseline", fake_run)
     monkeypatch.setattr(baseline, "file_sha256", lambda p: "0" * 64)
-    rc = baseline.main(["run", "--root", str(root), "--replaces", "--reason", "os_update", "--reason-text", "26B131 to the next build", "--registered-run-dir", str(tmp_path / "none")])
+    rc = baseline.main(["run", "--replaces", "--reason", "os_update", "--reason-text", "26B131 to the next build", "--registered-run-dir", str(tmp_path / "none")])
     assert rc == baseline.EXIT_PAUSED
     assert json.loads((out2 / baseline.REASON_FILE).read_text())["text"] == "26B131 to the next build"
 

@@ -134,7 +134,7 @@ class Probe:
 
 def compiled(cfg_quiet: Mapping[str, Any]) -> dict[str, list[re.Pattern[str]]]:
     return {
-        "vm": [re.compile(p, re.IGNORECASE) for p in cfg_quiet["vm_markers"]],
+        "vm": [re.compile(p) for p in cfg_quiet["vm_markers"]],  # case-sensitive: every marker is anchored to a path component, a bundle or a bundle id (N1)
         "app": [re.compile(p) for p in cfg_quiet["app_markers"]],
         "cli": [re.compile(p) for p in cfg_quiet["cli_markers"]],
     }

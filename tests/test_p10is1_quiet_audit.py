@@ -4,7 +4,9 @@ injected clocks; the one real-thread test waits at most a few seconds with a dea
 
 import itertools
 import json
+import os
 import re
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -18,6 +20,7 @@ import test_p10is1_quiet as TQ  # noqa: E402
 import test_p10is1_quiet_rule as qr  # noqa: E402
 import test_p10is1_stages as TS  # noqa: E402
 
+from arborlm.io import file_sha256  # noqa: E402
 from studies.p10is1 import baseline, core, freeze, machine, quiet, rehearsal_real  # noqa: E402
 
 TOOL_SHELL = "/bin/zsh -c source /Users/x/.claude/shell-snapshots/snapshot-zsh-1795145190023-zhwmnx.sh 2>/dev/null || true && eval 'pytest tests/test_p10s1_core.py'"
@@ -177,39 +180,72 @@ def test_f4_one_baseline_root_per_study_refuses_a_second_directory_and_a_new_fir
     qr.synthetic_baseline(root / "elsewhere")
     with pytest.raises(core.StageRefused, match="outside first/ and second/"):
         baseline.resolve_out(root, True)
-    assert baseline.default_root().name == "P10IS1-quiet-baseline"
+
+    assert '"P10IS1-quiet-baseline"' in Path(baseline.__file__).read_text()
 
 
-def test_f4_the_default_root_can_be_named_by_the_environment_and_the_command_uses_it(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(tmp_path / "r"))
-    assert baseline.default_root() == tmp_path / "r"
+def test_f4_no_option_environment_variable_or_launch_script_reaches_another_root_and_a_test_root_is_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import inspect
+
+    src = inspect.getsource(baseline)
+    assert "os.environ" not in src and "getenv" not in src and "import os" not in src and '"--root"' not in src  # no environment override and no option on any real path
     with pytest.raises(SystemExit):
-        baseline.main(["run", "--out-dir", str(tmp_path / "x")])  # there is no --out-dir any more: the command works in the fixed root only
-
-
-def test_f4_the_freeze_refuses_a_committed_record_that_is_not_the_roots_first_accepted_one(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    root = tmp_path / "root"
-    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(root))
-    repo = TS.mini_repo(tmp_path / "m")  # its committed baseline is a synthetic record that is NOT in the root
+        baseline.main(["run", "--root", str(tmp_path / "x")])
+    with pytest.raises(SystemExit):
+        baseline.main(["run", "--out-dir", str(tmp_path / "x")])
+    for f in (TS.ROOT / "studies" / "p10is1" / "launch").glob("*.sh"):
+        assert "--root" not in f.read_text() and "ROOT" not in f.read_text().replace("README", ""), f.name  # the launch scripts cannot reach the test-only override
+    assert '"P10IS1-quiet-baseline"' in Path(baseline.__file__).read_text() and baseline.default_root() == baseline.canonical_root()
+    # the test-only override marks the record, and the candidate plan and the freeze refuse it
+    repo = TS.mini_repo(tmp_path / "m")
     cfg = core.load_config(repo / core.CONFIG)
-    qr.run_session(qr.FakeMachine(), root / "first", qr.qcfg())  # the study's own first baseline, a different record
-    with pytest.raises(core.StageRefused, match="neither the first ACCEPTED record nor the second"):
-        freeze.require_baseline(repo, cfg)
-    # the committed record IS the root's first: accepted by the root check
+    monkeypatch.setattr(baseline, "_test_root", tmp_path / "troot")
+    rec = qr.run_session(qr.FakeMachine(), tmp_path / "troot" / "first", qr.qcfg())
+    assert rec["test_root"] is True and rec["root"] == str((tmp_path / "troot").resolve())
+    committed = repo / str(cfg["quiet"]["baseline_record_path"])
+    committed.write_bytes((tmp_path / "troot" / "first" / baseline.RECORD).read_bytes())
+    (committed.parent / baseline.SAMPLES).write_bytes((tmp_path / "troot" / "first" / baseline.SAMPLES).read_bytes())
+    cfg2 = qr.qcfg(baseline_record_path=str(cfg["quiet"]["baseline_record_path"]), baseline_record_sha256=file_sha256(committed), load_p95=130, load_limit=180)
+    with pytest.raises(core.StageRefused, match="test_root = false"):
+        baseline.verify_against_config(repo, cfg2)
+    with pytest.raises(core.StageRefused, match="test_root = false"):
+        freeze.require_baseline(repo, cfg2)
+
+
+def test_f4_the_freeze_refuses_when_the_canonical_root_is_absent_or_does_not_hold_the_committed_record(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    repo = TS.mini_repo(tmp_path / "m")  # synthetic baseline mirrored into the test canonical root by the helper
+    cfg = core.load_config(repo / core.CONFIG)
+    assert freeze.require_baseline(repo, cfg)["load_limit"] == 180
     rec_path = repo / str(cfg["quiet"]["baseline_record_path"])
-    rec_path.write_bytes((root / "first" / baseline.RECORD).read_bytes())
-    (rec_path.parent / baseline.SAMPLES).write_bytes((root / "first" / baseline.SAMPLES).read_bytes())
-    baseline.check_root_consistency(root, rec_path)
-    # a second baseline that is ACCEPTED replaces the first: the first can no longer be the committed one
-    second = root / "second"
-    qr.run_session(qr.FakeMachine(), second, qr.qcfg(), condition="closed", second={"reason": "condition_change_by_human_lead", "replaces": "x", "utc": "2000-01-01T00:00:00+00:00"})
-    with pytest.raises(core.StageRefused, match="the second replaced it"):
-        baseline.check_root_consistency(root, rec_path)
-    (second / baseline.REASON_FILE).write_text(json.dumps({"utc": "2999-01-01T00:00:00+00:00"}))
-    with pytest.raises(core.StageRefused, match="reason file does not predate"):
-        baseline.check_root_consistency(root, second / baseline.RECORD)
-    (second / baseline.REASON_FILE).write_text(json.dumps({"utc": "2000-01-01T00:00:00+00:00"}))
-    baseline.check_root_consistency(root, second / baseline.RECORD)
+    monkeypatch.setattr(baseline, "canonical_root", lambda: tmp_path / "absent")
+    with pytest.raises(core.StageRefused, match="does not exist"):
+        freeze.require_baseline(repo, cfg)  # no skip: the baseline was not taken by the command
+    other = tmp_path / "other"
+    shutil.copytree(qr.CANON, other)
+    monkeypatch.setattr(baseline, "canonical_root", lambda: other)
+    with pytest.raises(core.StageRefused, match="not under the canonical root"):
+        freeze.require_baseline(repo, cfg)  # the record says it was taken elsewhere
+    monkeypatch.setattr(baseline, "canonical_root", lambda: qr.CANON)
+    baseline.check_root_consistency(qr.CANON, rec_path)
+    # a different record in the root (a re-rolled L): the committed one is neither its first nor its second
+    keep = {f: (qr.CANON / "first" / f).read_bytes() for f in (baseline.RECORD, baseline.SAMPLES)}
+    qr.synthetic_baseline(tmp_path / "rerolled", load=140)  # replaces the root's first by another accepted record
+    with pytest.raises(core.StageRefused, match="neither the first ACCEPTED record nor the second"):
+        baseline.check_root_consistency(qr.CANON, rec_path)
+    for f, b in keep.items():
+        (qr.CANON / "first" / f).write_bytes(b)
+    baseline.check_root_consistency(qr.CANON, rec_path)
+    # every attempt must be listed: the root's samples hold an attempt (2) that the committed record does not list
+    rows = (qr.CANON / "first" / baseline.SAMPLES).read_text().splitlines()
+    extra = json.loads(rows[0])
+    extra["attempt"], extra["index"] = 2, 1
+    for d in (qr.CANON / "first", rec_path.parent):
+        (d / baseline.SAMPLES).write_text("\n".join([*rows, json.dumps(extra, sort_keys=True)]) + "\n")
+        rec = core.read_record(d / baseline.RECORD, "quiet_baseline")
+        rec["samples_sha256"] = file_sha256(d / baseline.SAMPLES)
+        core.write_record(d / baseline.RECORD, rec, overwrite=True)
+    with pytest.raises(core.StageRefused, match="every attempt must be listed"):
+        baseline.check_root_consistency(qr.CANON, rec_path)
 
 
 # --- F5: resume with another plan ---------------------------------------------------------------------------------------------------------------
@@ -285,3 +321,189 @@ def test_f7_the_rulings_file_exists_and_states_the_standing_facts() -> None:
     for k in ("F1", "F2", "F3", "F4", "F5", "F6", "F7"):
         assert f"| {k} |" in text
     assert "No registered value of P10-I-S1 exists" in text and "sealed values are unopened" in text and "`Astra review: NOT_PERFORMED`" in text and "4,546.17 s = 1.2628 h" in text
+
+
+@pytest.fixture(autouse=True)
+def _canonical_baseline_root_is_a_test_directory(monkeypatch: pytest.MonkeyPatch) -> None:
+    qr.use_canon(monkeypatch)
+
+
+# --- N1: anchored markers, tested on a captured sample of this Mac's real process list ---------------------------------------------------------------
+SAMPLE = TS.ROOT / "tests" / "data" / "p10is1_ps_comm_sample.txt"  # one `ps -Ao pid=,ppid=,comm=` call, user names removed, no arguments
+
+
+def sample_rows() -> list[machine.Row]:
+    rows = []
+    for ln in SAMPLE.read_text().splitlines():
+        pid, ppid, comm = ln.split(None, 2)
+        rows.append((int(pid), int(ppid), comm))
+    return rows
+
+
+def n1_probe(extra: list[machine.Row]) -> machine.Probe:
+    rows = sample_rows() + extra
+    return machine.Probe(load=lambda: (1.0, 1.0), table=lambda: rows, power=lambda: {"mains": True, "low_power_mode": False}, therm=lambda: [], hid_ns=lambda: 10**13, boot=lambda: 1, pid=999999)
+
+
+def test_n1_an_idle_machine_passes_and_each_real_vm_marker_fails_on_a_captured_process_list() -> None:
+    rows = sample_rows()
+    assert len(rows) > 500 and any("imklaunchagent" in c for _, _, c in rows) and any("TextInputMenuAgent" in c for _, _, c in rows)
+    old = re.compile("UTM", re.IGNORECASE)  # the 4bb38c7 / 2449908 marker: matches always-running system processes on this Mac
+    assert [c for _, _, c in rows if old.search(c)], "the captured list must contain the false positives the old marker had"
+    r = machine.read_conditions(n1_probe([]), qr.Q, condition="open")
+    assert "VIRTUAL MACHINE PRESENT" not in r["failed"] and r["vm_processes"] == []  # an idle machine passes
+    real = {
+        "Docker": "/Applications/Docker.app/Contents/MacOS/com.docker.backend", "Docker Desktop": "/Applications/Docker.app/Contents/MacOS/Docker Desktop", "Colima": "/opt/homebrew/bin/colima", "qemu": "/opt/homebrew/bin/qemu-system-aarch64",
+        "UTM": "/Applications/UTM.app/Contents/MacOS/UTM", "VMware": "/Applications/VMware Fusion.app/Contents/Library/vmware-vmx", "Parallels": "/Applications/Parallels Desktop.app/Contents/MacOS/prl_vm_app",
+        "Apple Virtualization": "/System/Library/Frameworks/Virtualization.framework/Versions/A/XPCServices/com.apple.Virtualization.VirtualMachine.xpc/Contents/MacOS/com.apple.Virtualization.VirtualMachine",
+    }  # fmt: skip
+    for name, path in real.items():
+        got = machine.read_conditions(n1_probe([(900001, 1, path)]), qr.Q, condition="open")
+        assert "VIRTUAL MACHINE PRESENT" in got["failed"] and got["vm_processes"][0].startswith("900001:"), name
+
+
+# --- N2: only the load alone above L counts -----------------------------------------------------------------------------------------------------------
+@pytest.mark.parametrize(
+    ("failed", "status", "counted"),
+    [
+        (["ONE-MINUTE LOAD ABOVE L"], quiet.PAUSED_QUIET, True),
+        (["ONE-MINUTE LOAD ABOVE L", "FIVE-MINUTE LOAD ABOVE L"], quiet.PAUSED_QUIET, True),
+        (["ONE-MINUTE LOAD ABOVE L", "CLAUDE TOOL-CALL SHELL ACTIVE"], quiet.PAUSED_NOT_SILENT, False),
+        (["CLAUDE PROCESS SET CHANGED"], quiet.PAUSED_NOT_SILENT, False),
+        (["NOT ON MAINS POWER"], quiet.PAUSED_CONDITION, False),
+        (["ONE-MINUTE LOAD ABOVE L", "VIRTUAL MACHINE PRESENT"], quiet.PAUSED_CONDITION, False),
+        (["OTHER STUDY PROCESS ALIVE"], quiet.PAUSED_CONDITION, False),
+        (["APPLICATION PRESENCE DIFFERS FROM THE BASELINE'S"], quiet.PAUSED_CONDITION, False),
+        (["LOAD UNREADABLE"], quiet.PAUSED_CONDITION, False),
+    ],
+)
+def test_n2_a_session_whose_waits_failed_on_anything_but_the_load_never_counts(failed: list[str], status: str, counted: bool, tmp_path: Path) -> None:
+    reading = {"quiet": False, "load_average": 2.5, "other_study_processes": [], "failed": failed}
+    r = TQ.drive(tmp_path, TQ.Clock(), [], readings=lambda: reading)
+    assert r["status"] == status and (quiet.paused_attempts(tmp_path, "timing") == [1]) is counted
+    assert quiet.wait_status([reading]) == status
+    assert quiet.wait_status([TQ.NOT_QUIET, reading]) == (quiet.PAUSED_QUIET if counted else status)  # one bad reading among load-only ones decides
+    if not counted:  # six such sessions are not six PAUSED — QUIET CONDITION NOT MET sessions
+        for _ in range(5):
+            TQ.drive(tmp_path, TQ.Clock(), [], readings=lambda: reading)
+        dec = quiet.decision_path(tmp_path, "timing")
+        dec.parent.mkdir(parents=True)
+        dec.write_text(json.dumps({"decision": "NOT MEASURED", "stage": "timing", "paused_attempts": [1, 2, 3, 4, 5, 6], "decided_by": "the lead", "table_of_section_10": "labels that become unreachable"}))
+        with pytest.raises(core.StageRefused, match="only 0 attempts ended PAUSED"):
+            quiet.load_decision(tmp_path, "timing")
+
+
+# --- N3: the watch is a child process; its CPU is not the measuring process's ------------------------------------------------------------------------
+def idle_cpu(seconds: float) -> float:
+    c0 = time.process_time()
+    time.sleep(seconds)
+    return time.process_time() - c0
+
+
+def test_n3_the_child_watch_adds_no_cpu_to_the_measuring_process_and_the_in_process_thread_does(tmp_path: Path) -> None:
+    """The measuring process sleeps for one second of wall time (CPU-free); only the watch could add CPU to ``process_time``. Three conditions: no watch, the watch as a CHILD process (interval 0.05 s), and the
+    previous design, the same reading in a THREAD of this process. The numbers are printed (pytest -s) and stated in the report."""
+    first = {"claude_pids": None}
+    cfg = qr.qcfg()
+    base = min(idle_cpu(1.0) for _ in range(3))
+    cw = quiet.ChildWatch(tmp_path / "w" / "watch.jsonl", first, interval=0.05).start()
+    child_cpu = idle_cpu(1.0)
+    res = cw.stop()
+    tr = quiet.LoadTrace(0.05, load_fn=lambda: 1.0, check_fn=lambda: quiet.watch_conditions(first, cfg=cfg)).start()
+    thread_cpu = idle_cpu(1.0)
+    tr.stop()
+    print(f"N3 parent CPU over 1.0 s idle: no watch {base * 1000:.1f} ms, child watch {child_cpu * 1000:.1f} ms (child itself {1000 * (res['child_cpu_seconds'] or 0):.1f} ms in {res['ticks']} ticks), in-process thread {thread_cpu * 1000:.1f} ms")
+    assert res["ticks"] >= 5 and res["child_cpu_seconds"] and res["child_cpu_seconds"] > 0.05  # the child really read the conditions, many times, at its own CPU cost
+    assert child_cpu - base < 0.01  # the child's work is not in this process's process_time
+    assert thread_cpu - base > 0.04 and thread_cpu > 4 * max(child_cpu - base, 0.005)  # the thread design charged the measuring process
+
+
+@pytest.mark.skipif(sys.platform != "darwin", reason="the process tree of record is macOS")
+def test_n3_the_child_is_in_the_stages_own_process_family_and_records_failures(tmp_path: Path) -> None:
+    cw = quiet.ChildWatch(tmp_path / "w.jsonl", {"claude_pids": [1, 2, 3]}, interval=0.05).start()  # a Claude set that cannot be the real one: the child must report a change
+    try:
+        assert cw.pid in machine.family(machine.ps_table(), os.getpid())  # a descendant: its command line (studies.p10is1.watch_child) is not another study's process
+        assert cw.pid is not None and not any(str(cw.pid) == o.split(":")[0] for o in quiet.other_study_processes())
+    finally:
+        res = cw.stop()
+    assert res["ticks"] >= 2 and any("CLAUDE PROCESS SET CHANGED" in f["failed"] for f in res["failures"]) and "WATCH CHILD DID NOT RUN" not in json.dumps(res)
+    dead = quiet.ChildWatch(tmp_path / "never.jsonl", {}, interval=0.05)
+    assert dead.stop()["failures"][0]["failed"] == ["WATCH CHILD DID NOT RUN"]  # fail closed
+
+
+def test_n3_the_stage_starts_the_watch_before_the_measurement_reads_it_after_and_discards_on_its_failures(tmp_path: Path) -> None:
+    log: list[str] = []
+
+    class Fake:
+        def __init__(self, fail: bool) -> None:
+            self.fail = fail
+
+        def start(self) -> "Fake":
+            log.append("start")
+            return self
+
+        def stop(self) -> dict[str, Any]:
+            log.append("stop")
+            return {"failures": [{"t": 1.0, "failed": ["CLAUDE TOOL-CALL SHELL ACTIVE"]}] if self.fail else [], "ticks": 3, "child_cpu_seconds": 0.07}
+
+    made = iter([Fake(True), Fake(False)])
+    clk = TQ.Clock()
+
+    def measure(guard: Any = None) -> Any:
+        log.append("measure")
+        return TQ.timed([1.0, 1.0, 1.0])
+
+    r = quiet.run_alone_stage(tmp_path, "timing", measure, reading=lambda: TQ.QUIET, end=lambda s: TQ.OK_END, sleep=clk.sleep, clock=clk, cfg=TQ.CFG, validate=lambda res: quiet.timing_spreads(res, TQ.CFG), guarded=True, top_fn=lambda: [], trace_factory=lambda: quiet.LoadTrace(1e9, load_fn=lambda: 1.0, clock=clk), child_watch=lambda first, path: next(made))
+    assert log == ["start", "measure", "stop", "start", "measure", "stop"]  # started BEFORE the measurement, read AFTER it
+    assert r["status"] == "COMPLETE" and [d["status"] for d in r["discards"]] == [quiet.PAUSED_NOT_SILENT] and r["discards"][0]["failed"] == ["CLAUDE TOOL-CALL SHELL ACTIVE"]
+    rec = json.loads(Path(r["attempt_record"]).read_text())
+    assert rec["watch_child"]["child_cpu_seconds"] == 0.07 and quiet.paused_attempts(tmp_path, "timing") == []
+
+
+def test_n3_the_registered_stage_uses_the_child_watch_unless_a_test_injects_its_own(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import argparse
+
+    from studies.p10is1 import items, rehearsal, stages
+
+    root = tmp_path / "r"
+    root.mkdir()
+    cfg_path = root / "tiny.toml"
+    cfg_path.write_text(qr.measured_quiet_text(rehearsal.tiny_config_text()))
+    pl = rehearsal.tiny_plan(root, TS.ROOT, cfg_path)
+    seen: list[dict[str, Any]] = []
+
+    def spy(run_dir: Path, stage: str, measure: Any, **kw: Any) -> dict[str, Any]:
+        seen.append({"child": kw["child_watch"] is not None, "watch": kw["watch"] is not None})
+        return {"status": quiet.PAUSED_QUIET, "attempt_record": "x", "paused_attempts": [], "wait_seconds": 0.0, "measure_seconds": 0.0}
+
+    monkeypatch.setattr(quiet, "run_alone_stage", spy)
+    ctx = items.Ctx(core.TEST, root / "run", None, synthetic=True, sizes={"table_facts": 512, "unseen": 64}, config_path=cfg_path)
+    args = argparse.Namespace(freeze_commit=None, synthetic=True)
+    stages.execute_stage("timing", pl, ctx, root / "run", pl.path, args, repo=TS.ROOT, inline=True)  # nothing injected: the real watch
+    stages.execute_stage("timing", pl, ctx, root / "run2", pl.path, args, repo=TS.ROOT, inline=True, quiet_reading=lambda: TQ.QUIET)  # a test injected the reading: no real watch
+    stages.execute_stage("timing", pl, ctx, root / "run3", pl.path, args, repo=TS.ROOT, inline=True, quiet_reading=lambda: TQ.QUIET, watch_fn=lambda first: [])
+    assert seen == [{"child": True, "watch": False}, {"child": False, "watch": False}, {"child": False, "watch": True}]
+
+
+# --- N4: stop list and offending command lines --------------------------------------------------------------------------------------------------
+def test_n4_the_baseline_refuses_before_sampling_and_prints_the_offending_command_lines(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+    fm = qr.FakeMachine()
+    fm.extra = [(700, 1, TOOL_SHELL), (701, 1, "python -m studies.p10is5.stages registered timing"), (702, 1, "/opt/homebrew/bin/colima daemon")]
+    with pytest.raises(core.StageRefused) as ei:
+        baseline.preflight(probe=fm.probe(), cfg=qr.qcfg())
+    msg = str(ei.value)
+    assert "tool-call shells of Claude sessions:" in msg and "700: /bin/zsh -c source /Users/x/.claude/shell-snapshots/snapshot-zsh" in msg and "701: python -m studies.p10is5.stages registered timing" in msg and "702: /opt/homebrew/bin/colima daemon" in msg
+    baseline.preflight(probe=qr.FakeMachine().probe(), cfg=qr.qcfg())  # a quiet machine passes
+    # through the command: exit 2, the lines on stderr, no sample and no record written
+    monkeypatch.setattr(baseline, "_test_root", tmp_path / "troot")
+    fake_probe = fm.probe()
+    monkeypatch.setattr(machine, "Probe", lambda: fake_probe)
+    assert baseline.main(["run"]) == 2
+    err = capsys.readouterr().err
+    assert "700: /bin/zsh -c source" in err and "stop these processes before the baseline" in err and not (tmp_path / "troot").exists()
+
+
+def test_n4_the_run_sheet_says_which_processes_to_stop_before_the_baseline() -> None:
+    text = (TS.ROOT / "studies" / "p10is1" / "README_RUN.md").read_text()
+    for needle in ("shell-snapshots/snapshot-", "background", "tool-call shell of every Claude session", "other studies", "run_in_background"):
+        assert needle in text, needle

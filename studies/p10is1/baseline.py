@@ -17,7 +17,6 @@
 
 import argparse
 import json
-import os
 import sys
 import time
 from collections.abc import Callable, Mapping, Sequence
@@ -56,15 +55,25 @@ def next_condition(sessions: Sequence[Mapping[str, Any]], q: Mapping[str, Any]) 
     return ("closed" if open_n >= int(q["open_sessions_before_closed"]) else "open"), counts
 
 
-def default_root() -> Path:
-    """The study's ONE baseline root (F4): ``<experiments>/P10IS1-quiet-baseline`` (the environment variable ``P10IS1_BASELINE_ROOT`` names another, for tests). It holds ``first/`` (every session of the first baseline)
-    and, only for one of the four reasons, ``second/``; nothing else may hold a baseline record."""
-    env = os.environ.get("P10IS1_BASELINE_ROOT")
-    if env:
-        return Path(env)
+_test_root: Path | None = None  # TEST-ONLY override (set through ``set_test_root`` by a test module): no option, no environment variable and no launch script reaches it
+
+
+def canonical_root() -> Path:
+    """The study's ONE baseline root (F4): ``<experiments>/P10IS1-quiet-baseline``, derived from the repository's experiments directory; no option and no environment variable changes it. It holds ``first/`` (every
+    session of the first baseline) and, only for one of the four reasons, ``second/``; nothing else may hold a baseline record."""
     from studies.p9 import core as p9core
 
     return Path(p9core.default_experiments_root()) / "P10IS1-quiet-baseline"
+
+
+def set_test_root(path: Path | None) -> None:
+    """TEST ONLY. A record taken under it says ``test_root = true`` and is refused by the candidate plan and the freeze."""
+    global _test_root
+    _test_root = path
+
+
+def default_root() -> Path:
+    return _test_root if _test_root is not None else canonical_root()
 
 
 def resolve_out(root: Path, replaces: bool) -> Path:
@@ -88,19 +97,36 @@ def resolve_out(root: Path, replaces: bool) -> Path:
 
 
 def check_root_consistency(root: Path, record_path: Path) -> None:
-    """The freeze's check (F4), when this machine's root exists: the committed record must be the root's first ACCEPTED record, or the root's second whose reason file predates its first sample."""
+    """The freeze's check (F4). The canonical root must exist (no skip). The committed record must say it was taken under THIS root and not under a test root, must be the root's first ACCEPTED record (or the root's
+    second whose reason file predates its first sample), its samples file must be the root's, and the attempts it lists must be exactly the root's full list of attempts (every attempt of every session)."""
+    if not root.is_dir():
+        raise core.StageRefused(f"refused: the canonical baseline root {root} does not exist: the baseline was not taken by this study's command, so nothing can be frozen on it")
+    committed = core.read_record(record_path, "quiet_baseline")
+    if committed.get("test_root") is not False:
+        raise core.StageRefused("refused: the committed baseline record does not say test_root = false: a baseline taken under a test root is never frozen")
+    if committed.get("root") != str(root.resolve()):
+        raise core.StageRefused(f"refused: the committed baseline was taken under {committed.get('root')!r}, not under the canonical root {str(root.resolve())!r}")
     first, second = root / "first", root / "second"
     sha = file_sha256(record_path)
+    which: Path | None = None
     if (first / RECORD).is_file() and file_sha256(first / RECORD) == sha:
         if (second / RECORD).is_file() and core.read_record(second / RECORD, "quiet_baseline").get("status") == ACCEPTED:
             raise core.StageRefused("refused: the committed baseline is the first, but an ACCEPTED second baseline exists in the root: the second replaced it")
-        return
-    if (second / RECORD).is_file() and file_sha256(second / RECORD) == sha:
+        which = first
+    elif (second / RECORD).is_file() and file_sha256(second / RECORD) == sha:
         reason, samples = second / REASON_FILE, second / SAMPLES
         if not reason.is_file() or not samples.is_file() or json.loads(reason.read_text())["utc"] >= json.loads(samples.read_text().splitlines()[0])["utc"]:
             raise core.StageRefused("refused: the second baseline's reason file does not predate its first sample")
-        return
-    raise core.StageRefused(f"refused: the committed baseline record is neither the first ACCEPTED record nor the second of {root}: one baseline per study, taken by this command in its root")
+        which = second
+    if which is None:
+        raise core.StageRefused(f"refused: the committed baseline record is neither the first ACCEPTED record nor the second of {root}: one baseline per study, taken by this command in its root")
+    root_samples = which / SAMPLES
+    if not root_samples.is_file() or file_sha256(root_samples) != committed["samples_sha256"] or file_sha256(record_path.parent / str(committed["samples_file"])) != committed["samples_sha256"]:
+        raise core.StageRefused("refused: the committed samples file is not the root's samples file")
+    seen = {(int(r["session"]), int(r["attempt"])) for r in (json.loads(x) for x in root_samples.read_text(encoding="utf-8").splitlines() if x.strip()) if int(r["attempt"]) > 0}
+    listed = {(int(a["session"]), int(a["attempt"])) for a in committed["attempts"]}
+    if seen != listed:
+        raise core.StageRefused(f"refused: the record lists attempts {sorted(listed)} but the root's samples hold {sorted(seen)}: every attempt must be listed")
 
 
 def check_second(reason: str, replaces: Path, registered_run_dir: Path) -> dict[str, Any]:
@@ -140,6 +166,8 @@ def run_baseline(
     rec: dict[str, Any] = dict(core.read_record(rec_path, "quiet_baseline")) if rec_path.is_file() else {**core.envelope("quiet_baseline"), "status": PAUSED_NO_BASELINE, "sessions": [], "attempts": [], "accepted": None, "second_baseline": dict(second) if second else None}
     if rec["status"] == ACCEPTED:
         raise core.StageRefused(f"refused: {rec_path} is an ACCEPTED baseline: a baseline is taken once (a second only by --replaces with one of {list(SECOND_REASONS)})")
+    rec["root"] = str(out.parent.resolve())  # F4: where it was taken
+    rec["test_root"] = _test_root is not None  # a record taken under the test-only override is refused by the candidate plan and the freeze
     sessions: list[dict[str, Any]] = list(rec["sessions"])
     cond, counts = next_condition(sessions, q)
     if condition is not None:
@@ -310,6 +338,9 @@ def verify_against_config(repo: Path, cfg: Mapping[str, Any]) -> dict[str, Any]:
         raise core.StageRefused(f"refused: the config's baseline_record_path {q['baseline_record_path']!r} is not a file of the repository")
     if file_sha256(path) != q["baseline_record_sha256"]:
         raise core.StageRefused("refused: the baseline record does not hash to the config's baseline_record_sha256")
+    committed = core.read_record(path, "quiet_baseline")
+    if committed.get("test_root") is not False:
+        raise core.StageRefused("refused: the baseline record does not say test_root = false: a baseline taken under a test root is refused")
     d = rederive(path, q)
     want = {"load_p95": int(q["load_p95"]), "load_limit": int(q["load_limit"]), "condition": str(q["condition"]), "app_present": bool(q["app_present"]), "cli_present": bool(q["cli_present"])}
     got = {"load_p95": d["load_p95"], "load_limit": d["load_limit"], "condition": d["condition"], "app_present": d["app_present"], "cli_present": d["cli_present"]}
@@ -320,11 +351,25 @@ def verify_against_config(repo: Path, cfg: Mapping[str, Any]) -> dict[str, Any]:
 
 
 # --- the command ------------------------------------------------------------------------------------------------------------------------------------------
+def preflight(probe: machine.Probe | None = None, cfg: Mapping[str, Any] | None = None) -> None:
+    """N4: before any sampling, refuse (exit 2, nothing written) if a process that the baseline would discard every attempt for is alive, and PRINT its command line: a tool-call shell of any Claude session outside
+    this command's own chain (the lead's long-running background shells included), another study's process, a virtual machine."""
+    q = core.cfg_of(cfg)["quiet"]
+    got = machine.read_conditions(probe or machine.Probe(), q, condition="open")
+    groups = (("CLAUDE TOOL-CALL SHELL ACTIVE", "tool-call shells of Claude sessions", "tool_shells"), ("OTHER STUDY PROCESS ALIVE", "processes of other studies", "other_study_processes"), ("VIRTUAL MACHINE PRESENT", "virtual machine processes", "vm_processes"))
+    lines: list[str] = []
+    for failure, title, key in groups:
+        if failure in got["failed"]:
+            lines.append(f"{title}:")
+            lines += [f"  {x}" for x in got[key]]
+    if lines:
+        raise core.StageRefused("refused: stop these processes before the baseline (every attempt would be discarded):\n" + "\n".join(lines))
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="studies.p10is1.baseline")
     sub = p.add_subparsers(dest="command", required=True)
     r = sub.add_parser("run", help="one session of the quiet baseline (about 80 minutes when the machine is left alone; up to 6 hours)")
-    r.add_argument("--root", help="the study's baseline root (default: <experiments>/P10IS1-quiet-baseline); the first baseline is root/first, a second root/second")
     r.add_argument("--config")
     r.add_argument("--replaces", action="store_true", help="a second baseline, replacing the ACCEPTED first one of the root")
     r.add_argument("--reason", help=f"one of {list(SECOND_REASONS)} (second baseline only)")
@@ -345,7 +390,8 @@ def main(argv: list[str] | None = None) -> int:
             d = rederive(Path(args.record), cfg["quiet"])
             print(json.dumps(core.jsonable({"load_p95": d["load_p95"], "load_limit": d["load_limit"], "condition": d["condition"], "app_present": d["app_present"], "cli_present": d["cli_present"], "baseline_record_sha256": d["record_sha256"], "settled": d["settled"], "report_above": d["report_above"]}), sort_keys=True))
             return 0
-        root = Path(args.root) if args.root else default_root()
+        preflight(cfg=cfg)
+        root = default_root()  # the canonical root: there is no option for another
         out = resolve_out(root, bool(args.replaces))
         second = None
         if args.replaces:

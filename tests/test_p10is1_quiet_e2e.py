@@ -8,6 +8,7 @@ import argparse
 import inspect
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -116,9 +117,14 @@ def test_a_limit_above_the_ceiling_in_the_config_is_never_read_or_clamped(tmp_pa
 
 def test_the_baseline_taken_by_the_command_flows_into_the_config_the_plan_and_the_freeze(tmp_path: Path) -> None:
     repo = provisional_repo(tmp_path)
+    shutil.rmtree(qr.CANON / "first", ignore_errors=True)  # the synthetic mirror of the provisional repo is not this study's baseline
+    canon_first = qr.CANON / "first"  # the baseline is taken by the command in the canonical root, then its record and samples are copied into results/ and committed
+    rec = qr.run_session(qr.FakeMachine(lambda t: (1.30 + (0.05 if int(t / 10) % 7 == 0 else 0.0), 1.30)), canon_first, qr.qcfg())
+    assert rec["status"] == "ACCEPTED" and rec["accepted"]["load_limit"] == 185 and rec["test_root"] is False and rec["root"] == str(qr.CANON.resolve())
     out = repo / "results" / "p10is1-quiet-baseline-e2e"
-    rec = qr.run_session(qr.FakeMachine(lambda t: (1.30 + (0.05 if int(t / 10) % 7 == 0 else 0.0), 1.30)), out, qr.qcfg())
-    assert rec["status"] == "ACCEPTED" and rec["accepted"]["load_limit"] == 185
+    out.mkdir(parents=True)
+    for f in (baseline.RECORD, baseline.SAMPLES):
+        (out / f).write_bytes((canon_first / f).read_bytes())
     write_config_from(repo, out, rec)  # the figures are written into [quiet] BEFORE the candidate plan
     TR.git(repo, "add", "-A")
     TR.git(repo, "commit", "-q", "-m", "baseline and its figures")
@@ -152,9 +158,14 @@ def test_the_baseline_taken_by_the_command_flows_into_the_config_the_plan_and_th
 
 def test_the_freeze_prints_the_report_notice_for_a_limit_above_250_and_it_is_not_a_gate(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     repo = provisional_repo(tmp_path)
-    out = repo / "results" / "high"
-    rec = qr.run_session(qr.FakeMachine(lambda t: (2.20, 2.20)), out, qr.qcfg())
+    shutil.rmtree(qr.CANON / "first", ignore_errors=True)
+    canon_first = qr.CANON / "first"
+    rec = qr.run_session(qr.FakeMachine(lambda t: (2.20, 2.20)), canon_first, qr.qcfg())
     assert rec["accepted"]["load_limit"] == 270
+    out = repo / "results" / "high"
+    out.mkdir(parents=True)
+    for f in (baseline.RECORD, baseline.SAMPLES):
+        (out / f).write_bytes((canon_first / f).read_bytes())
     write_config_from(repo, out, rec)
     assert candidate(repo, tmp_path) == 0  # written: a report, not a gate
     assert "above 250" in capsys.readouterr().out
@@ -212,7 +223,7 @@ def test_a_stage_refuses_every_poll_when_the_applications_presence_differs_from_
     assert rec["status"] == "PAUSED" and not calls and rec["charged_seconds"] == 0.0 and rec["waited_seconds_not_charged"] == 21600.0
     rows = [json.loads(x) for x in quiet.polls_path(root / "run", "timing").read_text().splitlines()]
     assert len(rows) == 37 and all(r["failed"] == ["APPLICATION PRESENCE DIFFERS FROM THE BASELINE'S"] and r["app_present"] is True and r["limit_h"] == 180 for r in rows)
-    assert quiet.paused_attempts(root / "run", "timing") == [1] and not (root / "run" / "timing" / "timing.json").exists()
+    assert quiet.paused_attempts(root / "run", "timing") == [] and quiet.attempt_statuses(root / "run", "timing") == {1: quiet.PAUSED_CONDITION} and not (root / "run" / "timing" / "timing.json").exists()  # N2: a machine-condition failure never counts
     led = stages.ledger_of(pl, root / "run")
     assert led.charged("timing") == 0.0  # six hours of waiting, none charged: the per-stage cap is not eaten by the wait
 
@@ -416,6 +427,8 @@ def test_the_launch_scripts_are_single_commands_with_a_timeout_above_the_deadlin
 
 
 @pytest.fixture(autouse=True)
-def _no_real_baseline_root(tmp_path_factory: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch) -> None:
-    """The freeze checks the committed baseline against the study's real baseline root when that exists on this machine; these tests use synthetic records and never depend on it (F4)."""
-    monkeypatch.setenv("P10IS1_BASELINE_ROOT", str(tmp_path_factory.mktemp("no_baseline_root") / "absent"))
+def _canonical_baseline_root_is_a_test_directory(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The freeze requires the study's canonical baseline root; these tests use synthetic records mirrored into a per-process TEST directory standing in for it, and never touch the real one (F4)."""
+    import test_p10is1_quiet_rule as qr
+
+    qr.use_canon(monkeypatch)

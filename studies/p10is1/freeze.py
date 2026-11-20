@@ -108,9 +108,7 @@ def require_baseline(repo: Path, cfg: Any) -> dict[str, Any]:
     if core.baseline_provisional(cfg):
         raise StageRefused("refused: [quiet] baseline_provisional is true: the quiet baseline (python -m studies.p10is1.baseline run) has not been taken and written into the config; no candidate plan is written without it (ADR-0024 addendum A3.1 item 8)")
     d = baseline.verify_against_config(repo, cfg)
-    root = baseline.default_root()
-    if root.is_dir():  # one baseline per study (F4): the committed record is the root's first ACCEPTED record, or its second with a reason that predates its first sample
-        baseline.check_root_consistency(root, repo / str(cfg["quiet"]["baseline_record_path"]))
+    baseline.check_root_consistency(baseline.canonical_root(), repo / str(cfg["quiet"]["baseline_record_path"]))  # one baseline per study (F4): the canonical root MUST exist; the committed record is its first ACCEPTED record (or its second), with its samples and its full list of attempts
     if d.get("notice"):
         print(d["notice"], flush=True)
     return d
