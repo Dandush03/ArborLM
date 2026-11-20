@@ -1,0 +1,15 @@
+main task logs: 80 first birth 2026-11-19T13:03:32 last birth 2026-11-20T21:50:44
+result.json written: first 2026-11-19T13:19:20 last 2026-11-20T22:41:21 count before 03:28Z 88 before 05:36Z 88
+REG-M-A0-8K-2K-d01-i330001 20261120T032808218540Z killed records 527604 identical prefix True
+REG-M-A0-8K-2K-d01-i330001 20261120T053612504692Z killed records 39879 identical prefix True
+REG-M-A0-8K-2K-d02-i330002 20261120T032808231433Z killed records 523800 identical prefix True
+REG-M-A0-8K-2K-d02-i330002 20261120T053612518451Z killed records 37366 identical prefix True
+REG-M-A6-8K-4K-d07-i330001 20261120T032808203477Z killed records 276996 identical prefix True
+REG-M-A6-8K-4K-d07-i330001 20261120T053612489186Z killed records 30015 identical prefix True
+REG-M-A6-8K-4K-d08-i330001 20261120T032808189174Z killed records 285101 identical prefix True
+REG-M-A6-8K-4K-d08-i330001 20261120T053612474622Z killed records 29985 identical prefix True
+REG-M-A6-8K-4K-d09-i330001 20261120T032808204191Z killed records 275106 identical prefix True
+REG-M-A6-8K-4K-d09-i330001 20261120T053612491550Z killed records 30060 identical prefix True
+REG-M-A6-8K-4K-d10-i330001 20261120T032808204586Z killed records 277403 identical prefix True
+REG-M-A6-8K-4K-d10-i330001 20261120T053612502829Z killed records 30000 identical prefix True
+task logs mentioning PAUSED: {}
