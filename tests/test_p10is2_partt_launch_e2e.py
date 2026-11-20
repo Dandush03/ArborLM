@@ -136,7 +136,7 @@ def test_plan_measuring_counting_freeze_then_a_registered_stage_refuses_on_a_cha
     common = ["--repo", str(r)]
 
     # 1. the measuring rehearsal (plan built from the unset config), through the registered launch
-    meas = partt_counting.run_measuring_rehearsal(r, runs / "measuring", calib, q)
+    partt_counting.run_measuring_rehearsal(r, runs / "measuring", calib, q)
     meas_path = runs / "measuring" / "rehearsal_measuring.json"
     charge_ledger = str(runs / "measuring" / "charged_ledger.json")
     # 2. a candidate plan that records the charge before the freeze; the caps by code from the record; the plan again (its caps come from the config)
