@@ -85,6 +85,27 @@ def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[M
 CAPS_FORMULA = "partt-whole-process-v1"
 
 
+def apply_caps_text(text: str, proposal: Mapping[str, float]) -> str:
+    """The config text with each ``<key> = 0.0`` of ``[stage_caps]`` replaced by the proposal and ``caps.provisional`` set false. Refuses unless every key is still exactly 0.0 (caps are written once by code)."""
+    import re
+
+    m = re.search(r"(?m)^\[stage_caps\].*$", text)
+    if not m:
+        raise StageRefused("refused: the config has no [stage_caps] section")
+    nxt = re.search(r"(?m)^\[", text[m.end():])
+    a, b = m.start(), m.end() + (nxt.start() if nxt else len(text) - m.end())
+    body = text[a:b]
+    for k, v in proposal.items():
+        pat = re.compile(rf"(?m)^{k} = 0\.0(?![0-9])")
+        if len(pat.findall(body)) != 1:
+            raise StageRefused(f"refused: [stage_caps] does not hold exactly one unset line '{k} = 0.0' (caps already entered?)")
+        body = pat.sub(f"{k} = {v}", body)
+    out = text[:a] + body + text[b:]
+    if out.count("\nprovisional = true") != 1:
+        raise StageRefused("refused: the config does not hold exactly one 'provisional = true'")
+    return out.replace("\nprovisional = true", "\nprovisional = false")
+
+
 def zero_caps(cfg: Mapping[str, Any], stages: Sequence[str]) -> list[str]:
     """The registered stages whose cap in the config is 0 (never "uncapped"): the freeze refuses while any."""
     return [s for s in stages if float(cfg["stage_caps"].get(f"{s}_hours", 0.0)) <= 0.0] + (["total"] if float(cfg["stage_caps"].get("total_hours", 0.0)) <= 0.0 else [])

@@ -123,6 +123,17 @@ def compare_runs(cpu: tuple[Sequence[float], Sequence[torch.Tensor]], other: tup
     return {"passed": bool(ok), "max_loss_difference": dl, "loss_tolerance": float(t["mps_loss_tolerance"]), "max_relative_parameter_difference": rel, "parameter_tolerance": float(t["mps_parameter_relative_tolerance"])}
 
 
+def g5b(store: Any) -> dict[str, Any]:
+    """G5(b) (ADR-0022 section 12.3): a new store with gate 0 on an empty base changes nothing: with every gate at its initial 0 the store's read is exactly zero for any query, so adding it to the student adds
+    nothing (checked on a clone of the store whose gates are set to 0, and on the store as it is only if its gates are 0)."""
+    fresh = store.clone()
+    for g in fresh.gates:
+        g.data.zero_()
+    q = torch.nn.functional.normalize(torch.randn(7, 16, generator=torch.Generator().manual_seed(934901)), dim=-1)
+    zero = fresh.read(q)
+    return {"passed": bool(torch.count_nonzero(zero) == 0), "max_abs_read": float(zero.abs().max())}
+
+
 def g5(world: engine.WorldT, m_append: MemoryArm) -> dict[str, Any]:
     """Route "none" is bit-identical to the student (``general_by_construction``), and appended rows are isolated by their gate: with the gate at its initial 0, the values of the appended stage do not enter
     the read (the read is unchanged when they are replaced)."""
@@ -134,7 +145,8 @@ def g5(world: engine.WorldT, m_append: MemoryArm) -> dict[str, Any]:
     before = store.read(q)
     store.values[k].data.add_(7.0)
     after = store.read(q)
-    return {"passed": bool(ident and torch.equal(before, after)), "none_route_bit_identical": ident, "appended_values_isolated_by_gate": bool(torch.equal(before, after))}
+    b = g5b(m_append.store)
+    return {"passed": bool(ident and torch.equal(before, after) and b["passed"]), "none_route_bit_identical": ident, "appended_values_isolated_by_gate": bool(torch.equal(before, after)), "new_store_gate_zero_adds_nothing": b}
 
 
 def g6(world: engine.WorldT, count: int = 50) -> dict[str, Any]:

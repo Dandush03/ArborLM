@@ -115,6 +115,23 @@ def combined_reference(world: engine.WorldT) -> dict[str, Any]:
     return {"S0": combined_mod.score_combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
 
 
+def ensemble_check(world: engine.WorldT, ensemble: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """The integrity check ADR-0025 section 8.6 names: the oracle-routed ensemble's tested score of each language on E_C must equal the teacher's own mean chrF-norm on E_C (each ensemble answer IS the stored
+    output of the teacher of its language). A difference is ENGINEERING-FAILURE (audit R9, ruling 14)."""
+    from studies.p10s2.text import chrf_item, mean
+
+    scoring.require_evaluation_allowed(world)
+    ec = world.ctx.ec
+    rec = ensemble if ensemble is not None else combined_reference(world)["ensemble"]
+    diffs: list[dict[str, Any]] = []
+    for lang in core.TASKS:
+        own = mean([chrf_item(world.teacher_outputs[lang]["E_C"][i], ec.sentences[i].refs[lang]) for i in range(len(ec.sentences))])
+        got = rec["C2"]["tested_by_language"][lang]
+        if got is None or abs(float(got) - float(own)) > 1e-9:
+            diffs.append({"language": lang, "teacher_own": own, "ensemble": got})
+    return {"ok": not diffs, "differences": diffs, "tolerance": 1e-9}
+
+
 @torch.no_grad()
 def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path) -> dict[str, Any]:
     """C1 and C2 on the twelve arm-cells of ONE replicate (stage-2 snapshots of M-append, M-ii, D-seq and D-append in both orders, M-joint, D-joint, M-sep, D-sep): oracle route, never trained on."""

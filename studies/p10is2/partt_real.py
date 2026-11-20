@@ -83,6 +83,16 @@ def calibration_draws(pool: Mapping[str, Sequence[TrainItem]], cfg: Mapping[str,
     return out
 
 
+def draw_overlap(calibration: Sequence[Mapping[str, Sequence[TrainItem]]], registered: Sequence[Mapping[str, Sequence[TrainItem]]]) -> dict[str, Any]:
+    """Ruling 2: the calibration draws may overlap the registered draws (teacher A's pool is 24,187 items, the registered replicates take 24,000 disjoint ones, leaving 187), and the overlap is STATED: per
+    capability and per calibration draw, the number and the share of its items (by English key) that are in the union of the registered replicates' draws. Training material only; no evaluation item is involved."""
+    out: dict[str, Any] = {}
+    for c in core.TASKS:
+        reg = {x.key for d in registered for x in d[c]}
+        out[c] = [{"draw": i, "items": len(d[c]), "in_registered_draws": sum(1 for x in d[c] if x.key in reg), "share": (sum(1 for x in d[c] if x.key in reg) / len(d[c])) if d[c] else 0.0} for i, d in enumerate(calibration)]
+    return out
+
+
 def run_unit(world: engine.WorldT, unit: Mapping[str, Any], rate: float, layer: int | None, draw_index: int) -> dict[str, Any]:
     """One calibration training unit on a calibration draw's seeds (the world is built in ``calibration`` mode with the calibration draws), scored on D_cal. A non-finite loss is DIVERGED (``diverged``, no
     mean at the diverged snapshot); the caller applies ``calibration``'s rules. A ladder unit has ``snapshots``; each is scored on D_cal on CPU while the optimizer state is kept."""
@@ -342,16 +352,19 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, re
     """Calibration and the pilot on calibration draws (0, 1; a repetition 2, 3) with the frozen devices; writes ``calibration_<repetition>.json`` with the code hashes of every file it ran (section 7.1 rule 4).
     Nothing it scores is a result."""
     from .common import plan as planmod
+    from .partt_door import PartQDoor
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
-    bundle = read_bundle(qdir / "outputs/bundle")
-    pools = read_json(qdir / "generation/pools.json")["pools"]
-    pool = {c: [TrainItem(x["key"], x["en"], x["target"], int(x["group"])) for x in pools[c]] for c in core.TASKS}
+    door = PartQDoor.from_dir(qdir)  # every Part Q file read is re-hashed against Part Q's own manifest (the plan does not exist yet)
+    bundle, registered_draws, _gloss, _res = load_part_q(qdir, cfg, "registered", door)
+    pool = {c: list(bundle.accepted[c]) for c in core.TASKS}
     off = 2 * repetition
     run = engine.run_config(cfg, layer=int(cfg["calibration"]["rate_grid_read_layer"]), updates=int(cfg["calibration"]["rate_grid_updates"]), store_rate=0.003, lora_rate=0.0003, device=cfg["training"]["training_device"])
     w = engine.build_world_t(bundle, cfg, calibration_draws(pool, cfg, [off, off + 1]), run, plan_mode="calibration")
     w.plan_offset = off
     rec = run_calibration(w, cfg)
+    rec["overlap_with_registered_draws"] = draw_overlap(calibration_draws(pool, cfg, [off, off + 1]), registered_draws)  # ruling 2: stated, by code
+    rec["part_q_manifest_sha256"] = file_sha256(qdir / "manifest.json")
     rec["code_hashes"] = planmod.frozen_file_hashes(repo, "T")
     rec["repetition"] = repetition
     path = run_dir / f"calibration_{repetition}.json"
@@ -400,7 +413,8 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
             result = {"records": recs, "side": side}
     elif stage == "combined":
         if task_id.endswith("|reference"):
-            result = {"combined": partt_run.combined_reference(w)}
+            ref = partt_run.combined_reference(w)
+            result = {"combined": ref, "ensemble_check": partt_run.ensemble_check(w, ref["ensemble"])}
         else:
             result = {"combined": partt_run.combined_replicate(w, int(task_id.rsplit("|r", 1)[1]), snaps)}
     elif stage == "gates":
@@ -475,7 +489,10 @@ def merge_combined(run_dir: Path) -> dict[str, int]:
     """The END of the combined stage: its task results into ``combined.json`` (written once)."""
     comb: dict[str, Any] = {}
     for f in sorted((run_dir / "tasks" / "combined").glob("*.result.json")):
-        comb.update(read_json(f)["combined"])
+        r = read_json(f)
+        comb.update(r["combined"])
+        if "ensemble_check" in r and not (run_dir / "ensemble_check.json").is_file():
+            core.write_record(run_dir / "ensemble_check.json", {**core.envelope("cell_record", "T"), **core.jsonable(r["ensemble_check"])}, overwrite=False)
     if not (run_dir / "combined.json").is_file():
         core.write_record(run_dir / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=False)
     return {"combined": len(comb)}

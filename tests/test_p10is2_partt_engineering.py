@@ -307,3 +307,83 @@ def test_a_failed_gate_or_ensemble_check_makes_the_status_engineering_failure_an
 
 def test_the_config_cites_the_rulings_addendum_by_hash() -> None:
     assert CFG["rulings_addendum_sha256"] == file_sha256(ROOT / CFG["rulings_addendum"])  # the rulings the implementation follows, beside the ADR's reference
+
+
+# --- R4 (G5(b)), R9 (the ensemble integrity check) -------------------------------------------------------------------------------------------------------
+def test_g5b_a_store_with_every_gate_at_zero_adds_nothing_and_the_check_notices_a_changed_read() -> None:
+    from p10is2_engine_fixtures import world as tiny_world
+
+    from studies.p10is2 import engine, partt_gates
+
+    w = tiny_world(updates=2, n_reps=1)
+    spec = engine.CellSpec("M1", "AB", 0)
+    arm, rows, opts = engine.build_cell_arm(w, spec, None)
+    engine.train_cell(w, spec, arm, rows, opts, 2)
+    assert partt_gates.g5b(arm.store)["passed"] is True
+    res = partt_gates.g5(w, arm)
+    assert res["new_store_gate_zero_adds_nothing"]["passed"] is True and res["passed"] is True
+
+
+def test_the_ensemble_integrity_check_passes_on_the_oracle_ensemble_and_fails_on_a_changed_score() -> None:
+    import copy as _copy
+
+    from p10is2_engine_fixtures import world as tiny_world
+
+    from studies.p10is2 import partt_run
+
+    w = tiny_world(updates=2, n_reps=1)
+    rec = partt_run.combined_reference(w)["ensemble"]
+    assert partt_run.ensemble_check(w, rec)["ok"] is True  # each ensemble answer is the stored output of its teacher: the score equals the teacher's own
+    bad = _copy.deepcopy(rec)
+    bad["C2"]["tested_by_language"]["A"] = float(bad["C2"]["tested_by_language"]["A"]) + 0.01
+    out = partt_run.ensemble_check(w, bad)
+    assert out["ok"] is False and out["differences"][0]["language"] == "A"
+
+
+# --- ruling 2 ----------------------------------------------------------------------------------------------------------------------------------------
+def test_the_calibration_record_states_the_overlap_with_the_registered_draws_by_code() -> None:
+    from studies.p10s2.data import TrainItem
+
+    def items(keys: list[str]) -> list[TrainItem]:
+        return [TrainItem(k, k, "t", 0) for k in keys]
+
+    reg = [{"A": items(["a", "b", "c"]), "B": items(["x"])}, {"A": items(["d", "e"]), "B": items(["y"])}]
+    cal = [{"A": items(["a", "z", "d", "q"]), "B": items(["x", "w"])}]
+    out = partt_real.draw_overlap(cal, reg)
+    assert out["A"] == [{"draw": 0, "items": 4, "in_registered_draws": 2, "share": 0.5}] and out["B"][0]["in_registered_draws"] == 1 and out["B"][0]["share"] == 0.5
+
+
+# --- B4: the caps are written by code; one Part T ledger ---------------------------------------------------------------------------------------------
+def test_caps_config_writes_exactly_the_proposal_once() -> None:
+    basis = partt_caps.basis_of(CFG)
+    items = partt_plan.stage_items(CALIB)
+    rec = {"caps_formula": partt_caps.CAPS_FORMULA, "rates_seconds_per_unit": {k: 0.01 for k in partt_caps.required_kinds(items, basis)}, "overhead_seconds": {s: 10.0 for s in partt_plan.STAGES}}
+    proposal = partt_caps.proposal_from_record(rec, items, basis, 7200.0)
+    text = (ROOT / core.CONFIG_T).read_text()
+    import re
+    import tomllib
+
+    text = re.sub(r"(?m)^((?:gates|train|evaluate|controls|combined|recompute|analysis|report|total)_hours) = [0-9.]+", r"\1 = 0.0", text).replace("provisional = false", "provisional = true")  # start from the unset state
+    new = partt_caps.apply_caps_text(text, proposal)
+    cfg = tomllib.loads(new)
+    assert cfg["caps"]["provisional"] is False and {k: cfg["stage_caps"][k] for k in proposal} == proposal and partt_caps.zero_caps(cfg, partt_plan.STAGES) == []
+    with pytest.raises(core.StageRefused, match="already entered"):
+        partt_caps.apply_caps_text(new, proposal)  # written once
+
+
+def test_calibration_and_rehearsals_charge_the_one_part_t_ledger_also_when_they_fail(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    def boom(*a: object, **k: object) -> None:
+        raise RuntimeError("calibration stopped")
+
+    monkeypatch.setattr(partt_real, "calibrate_command", boom)
+    ledger = tmp_path / "part_t_ledger.json"
+    run = ROOT / "experiments" / "_scratch" / "p10is2_partt_calibration_probe"
+    try:
+        with pytest.raises(RuntimeError):
+            partt_stages.main(["calibrate", "--part-q-dir", str(tmp_path), "--run-dir", str(run), "--ledger", str(ledger)])
+    finally:
+        import shutil
+
+        shutil.rmtree(run, ignore_errors=True)
+    entries = json.loads(ledger.read_text())["entries"]
+    assert len(entries) == 1 and entries[0]["stage"] == "calibration" and entries[0]["seconds"] >= 0.0

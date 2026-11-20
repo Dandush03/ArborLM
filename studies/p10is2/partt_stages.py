@@ -168,13 +168,18 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     core.require_ignored_run_dir(repo_of(args), Path(args.run_dir))
     plan_file = repo_of(args) / core.PLAN_T
     claim_run_dir(Path(args.run_dir), "calibration", read_json(plan_file).get("run_dir") if plan_file.is_file() else None)
-    print(json.dumps(core.jsonable(partt_real.calibrate_command(repo_of(args), Path(args.part_q_dir), Path(args.run_dir), int(args.repetition), args.reason)), default=str))
+    ledger = Path(args.ledger) if args.ledger else Path(args.run_dir) / "charged_ledger.json"
+    t0 = time.monotonic()
+    try:
+        out = partt_real.calibrate_command(repo_of(args), Path(args.part_q_dir), Path(args.run_dir), int(args.repetition), args.reason)
+    finally:
+        charged(ledger, "calibration", "calibration", time.monotonic() - t0)
+    print(json.dumps(core.jsonable(out), default=str))
     return 0
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
     """The Part T rehearsals on Part Q's accepted outputs with the rehearsal seeds (252001, 330251 + j) and D_cal only; scores are sealed."""
-    from . import partt_real
 
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
@@ -184,6 +189,17 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     if not Path(args.calibration).is_file() or not (Path(args.part_q_dir) / "outputs/bundle").exists():
         raise StageRefused("refused: the rehearsal needs --calibration (the calibration record) and --part-q-dir (Part Q's accepted run directory)")
     calib = json.loads(Path(args.calibration).read_text())
+    ledger = Path(args.ledger) if args.ledger else Path(args.run_dir) / "charged_ledger.json"
+    t_start = time.monotonic()
+    try:
+        return _rehearse(args, repo, cfg, calib)
+    finally:
+        charged(ledger, f"rehearsal-{args.kind}", "rehearsal", time.monotonic() - t_start)
+
+
+def _rehearse(args: argparse.Namespace, repo: Path, cfg: Any, calib: Any) -> int:
+    from . import partt_real
+
     w, gloss, _ = partt_real.build_world_real(repo, cfg, Path(args.part_q_dir), calib, "rehearsal")
     run_dir = Path(args.run_dir)
     if args.kind == "measuring":
@@ -193,7 +209,7 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
         plan_file = repo / core.PLAN_T
         plan = planmod.Plan.load(plan_file, "T")
         out = partt_real.counting_rehearsal(w, run_dir / "snaps", gloss, plan_file_sha256=file_sha256(plan_file), caps_provisional=bool(plan.data.get("caps_provisional", True)), updates=int(calib["U"]), identity_probe=identity_probe(plan, repo, run_dir), require_mps=True)
-    core.write_record(run_dir / f"rehearsal_{args.kind}.json", out, overwrite=True)
+    core.write_record(run_dir / f"rehearsal_{args.kind}.json", out, overwrite=False)  # no record is overwritten
     print(json.dumps({k: out[k] for k in ("kind_of_rehearsal", "rates_seconds_per_unit", "projection_units", "forced") if k in out}, default=str))
     return 0
 
@@ -301,6 +317,30 @@ def cmd_caps_proposal(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_caps_config(args: argparse.Namespace) -> int:
+    """Writes the caps into ``[stage_caps]`` by the shared function (no hand entry): the proposal of ``caps-proposal`` (the plan's own task units, the measuring record, the charge before the freeze the plan recorded)
+    and ``caps.provisional = false``. The candidate plan must be rebuilt afterwards (its caps come from the config)."""
+    repo = repo_of(args)
+    plan = planmod.Plan.load(repo / core.PLAN_T, "T")
+    meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
+    if meas.get("kind_of_rehearsal") != "measuring":
+        raise StageRefused("refused: the caps come from a MEASURING rehearsal's record")
+    charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
+    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge)
+    if args.apply:
+        path = repo / core.CONFIG_T
+        path.write_text(partt_caps.apply_caps_text(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
+        print(json.dumps({"config": str(path), "applied": proposal, "next": "commit the config, candidate-plan --supersede, the counting rehearsal, the freeze"}))
+    else:
+        print("\n".join(f"{k} = {v}" for k, v in proposal.items()))
+    return 0
+
+
+def charged(ledger: Path, stage: str, mode: str, seconds: float) -> None:
+    """One Part T ledger: every Part T process (calibration and its repetitions, the rehearsals, a counting rehearsal) charges its wall time, also when it fails."""
+    core.Ledger(ledger, "T", 1e12).charge_process(stage, mode, "main", seconds)
+
+
 def cmd_freeze(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
@@ -397,6 +437,10 @@ def build_parser() -> argparse.ArgumentParser:
     c = sub.add_parser("caps-proposal")
     c.add_argument("--measuring-rehearsal", required=True)
     c.add_argument("--repo")
+    cc = sub.add_parser("caps-config")
+    cc.add_argument("--measuring-rehearsal", required=True)
+    cc.add_argument("--apply", action="store_true")
+    cc.add_argument("--repo")
     tk = sub.add_parser("task")
     for a in ("--stage", "--task-id", "--run-dir"):
         tk.add_argument(a, required=True)
@@ -427,6 +471,7 @@ def build_parser() -> argparse.ArgumentParser:
     cal.add_argument("--part-q-dir", required=True)
     cal.add_argument("--run-dir", required=True)
     cal.add_argument("--repetition", type=int, default=0, choices=(0, 1))
+    cal.add_argument("--ledger", help="the Part T ledger to charge (absolute); default <run-dir>/charged_ledger.json")
     cal.add_argument("--reason", default="", help="required when a record for this repetition exists: a new record is written beside it")
     cal.add_argument("--repo")
     for name in ("registered", "work"):
@@ -440,6 +485,7 @@ def build_parser() -> argparse.ArgumentParser:
     h.add_argument("--kind", choices=("measuring", "counting"), required=True)
     h.add_argument("--run-dir", required=True)
     h.add_argument("--part-q-dir", required=False, default=".")
+    h.add_argument("--ledger", help="the Part T ledger to charge (absolute); default <run-dir>/charged_ledger.json")
     h.add_argument("--calibration", required=False, default="calibration.json")
     h.add_argument("--repo")
     return ap
@@ -448,7 +494,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        table: dict[str, Any] = {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "registered": cmd_registered, "work": cmd_registered, "rehearse": cmd_rehearse, "calibrate": cmd_calibrate, "task": cmd_task, "retry": cmd_retry, "recompute": cmd_recompute, "timing": cmd_timing, "cost": cmd_cost}
+        table: dict[str, Any] = {"candidate-plan": cmd_candidate_plan, "freeze": cmd_freeze, "caps-proposal": cmd_caps_proposal, "registered": cmd_registered, "work": cmd_registered, "rehearse": cmd_rehearse, "calibrate": cmd_calibrate, "task": cmd_task, "retry": cmd_retry, "recompute": cmd_recompute, "timing": cmd_timing, "cost": cmd_cost, "caps-config": cmd_caps_config}
         return int(table[args.command](args))
     except StageRefused as e:
         print(f"REFUSED: {e}", file=sys.stderr)
