@@ -20,10 +20,24 @@ from studies.p10is2.common import core  # noqa: E402
 from studies.p10is2.common import plan as planmod  # noqa: E402
 from studies.p10is2.partt_door import PartQDoor  # noqa: E402
 
+WALK = {"outside_study_python": ["studies/p10s2/stub.py", "src/arborlm/stub.py"], "outside_study_data": ["configs/p10s2_transfer.toml"], "python_files": [], "files_opened": []}
+
+
+@pytest.fixture(autouse=True)
+def unsigned_commits_and_a_fixed_walk(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The synthetic repositories hold the study only (no studies/p10s2): the import walk is a fixed closure over stub files; log commits are unsigned here (the argv of the real, signed commit is its own test)."""
+    monkeypatch.setattr(planmod, "import_walk", lambda repo, part, *a, **k: WALK)
+    monkeypatch.setattr(partt_stages, "SIGN", [])
+    for k, v in (("GIT_AUTHOR_NAME", "t"), ("GIT_AUTHOR_EMAIL", "t@example.invalid"), ("GIT_COMMITTER_NAME", "t"), ("GIT_COMMITTER_EMAIL", "t@example.invalid"), ("GIT_CONFIG_COUNT", "1"), ("GIT_CONFIG_KEY_0", "commit.gpgsign"), ("GIT_CONFIG_VALUE_0", "false")):
+        monkeypatch.setenv(k, v)
+
 
 def repo_with_cap(tmp: Path, cap: float = 1.0) -> Path:
     r = make_repo(tmp)
     (r / ".gitignore").write_text("runs/\nexperiments/\n")
+    for rel in ("studies/p10s2/stub.py", "src/arborlm/stub.py", "configs/p10s2_transfer.toml"):
+        (r / rel).parent.mkdir(parents=True, exist_ok=True)
+        (r / rel).write_text("# stub\n")
     p = r / core.CONFIG_T
     p.write_text(p.read_text().replace("calibration_hours = 0.0", f"calibration_hours = {cap}"))
     git(r, "add", "-A")
@@ -34,6 +48,8 @@ def repo_with_cap(tmp: Path, cap: float = 1.0) -> Path:
 def fake_calibrate(repo: Path, qdir: Path, run_dir: Path, repetition: int, part_q_plan: Path | None, cap_seconds: float, on_unit: Any = None) -> dict[str, Any]:
     hashes = planmod.frozen_file_hashes(repo, "T")
     core.write_record(run_dir / f"calibration_{repetition}.json", {**core.envelope("calibration", "T"), "store_rate": 0.003, "lora_rate": 0.0003, "etable_rate": 0.003, "read_layer": 4, "U": 2000, "converged": True, "pilot": {"passed": True}, "stand_in": False, "code_hashes": hashes, "repetition": repetition}, overwrite=False)
+    rec = json.loads((run_dir / f"calibration_{repetition}.json").read_text())
+    (run_dir / f"calibration_{repetition}.json").write_text(json.dumps({**rec, "session_identity": partt_stages.session_identity(repo)}))
     return {"U": 2000}
 
 
@@ -55,6 +71,7 @@ def open_and_commit(r: Path, q: Path, rep: int = 0) -> None:
     assert partt_stages.main(args(r, q, rep, open_=True)) == 0
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", f"open calibration session {rep}")
+    git(r, "update-ref", "refs/remotes/origin/main", "HEAD")  # the lead pushes the open line before the run (ruling 32): a remote-tracking branch contains it
 
 
 def commit_all(r: Path, msg: str) -> None:
@@ -78,14 +95,12 @@ def test_there_is_one_calibration_in_one_directory_with_a_tracked_log_and_a_reco
     assert [e["event"] for e in log] == ["start", "end"] and log[0]["open"] is True and log[0]["identity"] and log[1]["record_sha256"]
     assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # no re-draw: the calibration is complete
     assert partt_stages.main(args(r, q, rep=1, open_=True)) == partt_stages.EXIT_REFUSED  # the repetition needs a committed lead record
-    commit_all(r, "end line committed by the lead")
     commit_repetition_record(r)
     open_and_commit(r, q, 1)
     assert partt_stages.main(args(r, q, rep=1)) == 0
     assert (d / "second" / "calibration_1.json").is_file() and (d / "calibration_0.json").is_file()  # the first is kept
     assert partt_stages.main(args(r, q, rep=1)) == partt_stages.EXIT_REFUSED  # the single repetition only (it is complete)
     assert [e["event"] for e in partt_stages.read_calibration_log(r)] == ["start", "end", "start", "end"]
-    commit_all(r, "calibration log")
     # the plan takes the first when both match the frozen files; the second only when the first no longer does
     assert partt_stages.chosen_calibration(r) == (d / "calibration_0.json", 0)
     first = json.loads((d / "calibration_0.json").read_text())
@@ -195,7 +210,8 @@ def test_a_killed_session_with_finished_units_and_no_stopped_line_gets_an_interr
     state = core.calibration_dir(r) / "state"
     state.mkdir(parents=True)
     (state / "grid-store-A-0.001.json").write_text("{}")
-    partt_stages.log_calibration(r, {"event": "unit", "repetition": 0, "session": "x", "unit": "grid-store-A-0.001"})  # a power loss or a kill leaves exactly this
+    sha = __import__("hashlib").sha256(b"{}").hexdigest()
+    partt_stages.log_calibration(r, {"event": "unit", "repetition": 0, "session": "x", "unit": "grid-store-A-0.001", "state_sha256": sha})  # a power loss or a kill leaves exactly this: the unit line was appended, its commit did not happen
     assert partt_stages.main(args(r, q)) == 0
     log = partt_stages.read_calibration_log(r)
     assert [e["event"] for e in log] == ["start", "unit", "INTERRUPTED", "start", "end"] and log[2]["reason"] == "UNKNOWN"
@@ -208,7 +224,7 @@ def test_a_killed_session_with_finished_units_and_no_stopped_line_gets_an_interr
 def stopping_after_one_unit(repo: Path, qdir: Path, run_dir: Path, repetition: int, plan: Path | None, cap_seconds: float, on_unit: Any = None) -> dict[str, Any]:
     (run_dir / "state").mkdir(parents=True, exist_ok=True)
     (run_dir / "state" / "grid-store-A-0.001.json").write_text("{}")
-    on_unit("grid-store-A-0.001")
+    on_unit("grid-store-A-0.001")  # the real run's callback: the unit line with the state's SHA-256, appended and committed
     raise MemoryError("out of memory")
 
 
@@ -223,6 +239,7 @@ def test_no_unseen_redraw_run_needs_a_committed_open_line_and_a_consistent_direc
     assert not (core.calibration_dir(r) / "calibration_0.json").exists() and [e["event"] for e in partt_stages.read_calibration_log(r)] == ["start"]
     assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # opened but not committed: HEAD has no log, so a run is refused
     commit_all(r, "the lead commits the open line")
+    git(r, "update-ref", "refs/remotes/origin/main", "HEAD")
     assert partt_stages.main(args(r, q, open_=True)) == partt_stages.EXIT_REFUSED  # a session is already open: no second start line
     monkeypatch.setattr(partt_real, "calibrate_command", stopping_after_one_unit)
     with pytest.raises(MemoryError):
@@ -230,7 +247,8 @@ def test_no_unseen_redraw_run_needs_a_committed_open_line_and_a_consistent_direc
     # the delete-the-directory-and-check-out-the-log sequence: both halves of the evidence a redraw would hide are refused
     d = core.calibration_dir(r)
     shutil.rmtree(d)
-    git(r, "checkout", "--", str(core.CALIBRATION_LOG))
+    git(r, "checkout", "--", str(core.CALIBRATION_LOG))  # nothing to undo: the run committed its own unit and stop lines
+    assert "unit" in [e["event"] for e in partt_stages.read_calibration_log(r)]
     monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
     assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # the directory no longer holds the session HEAD's log opened
     assert partt_stages.main(args(r, q, open_=True)) == partt_stages.EXIT_REFUSED  # and a fresh session cannot be opened over the open one
@@ -269,7 +287,7 @@ def test_a_resume_under_other_code_is_refused_and_the_final_record_must_carry_ev
     def wrong_hashes(repo: Path, qdir: Path, run_dir: Path, repetition: int, plan: Path | None, cap_seconds: float, on_unit: Any = None) -> dict[str, Any]:
         out = fake_calibrate(repo, qdir, run_dir, repetition, plan, cap_seconds)
         rec = json.loads((run_dir / f"calibration_{repetition}.json").read_text())
-        rec["code_hashes"] = {k: "0" * 64 for k in rec["code_hashes"]}
+        rec["session_identity"] = {k: "0" * 64 for k in rec["session_identity"]}
         (run_dir / f"calibration_{repetition}.json").write_text(json.dumps(rec))
         return out
 
@@ -289,7 +307,6 @@ def test_the_counting_rehearsal_cap_is_its_own_allowance_and_the_study_budget_bo
     assert partt_tasks.rehearsal_cap_seconds(cfg, "counting", P) == 7.5 * 3600.0  # not the fixed 3.0 h
     assert partt_tasks.rehearsal_cap_seconds(cfg, "measuring", P) == float(cfg["caps"]["measuring_rehearsal_hours"]) * 3600.0  # the measuring rehearsal keeps the fixed cap
     assert partt_tasks.rehearsal_cap_seconds(cfg, "counting") == float(cfg["caps"]["rehearsal_hours"]) * 3600.0  # a plan without an allowance: the fixed figure
-    partt_stages.check_study_budget(cfg, 100.0, 7.5)  # the bound is not set (0.0): nothing to check
     bounded = {**cfg, "caps": {**cfg["caps"], "study_budget_hours": 60.0}}
     partt_stages.check_study_budget(bounded, 59.0, 7.5)
     with pytest.raises(core.StageRefused, match="PENDING LEAD REVIEW"):
@@ -401,3 +418,125 @@ def test_a_code_edit_alone_never_switches_to_the_second_record(tmp_path: Path, m
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "bad record")
     assert partt_stages.repetition_record_problems(r)
+
+
+def test_the_log_lines_are_committed_by_the_run_itself_with_the_ruled_message_and_a_signed_commit(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    open_and_commit(r, q)
+    monkeypatch.setattr(partt_real, "calibrate_command", stopping_after_one_unit)
+    with pytest.raises(MemoryError):
+        partt_stages.main(args(r, q))
+    subjects = git(r, "log", "--format=%s", "-4").splitlines()
+    session = partt_stages.read_calibration_log(r)[0]["session"]
+    assert subjects[0] == f"P10-I-S2 Part T: calibration log {session} stopped [skip ci]" and subjects[1] == f"P10-I-S2 Part T: calibration log {session} unit [skip ci]"
+    assert git(r, "show", "--stat", "--format=", "HEAD").split()[0] == str(core.CALIBRATION_LOG)  # the log file alone
+    assert "Co-Authored" not in git(r, "log", "-1", "--format=%B") and git(r, "status", "--porcelain") == ""
+    calls: list[list[str]] = []
+
+    class Done:
+        returncode, stderr, stdout = 0, "", ""
+
+    partt_stages.SIGN = ["-S"]
+    partt_stages.commit_log_line(r, "S", "unit", run=lambda argv, **k: calls.append(argv) or Done())
+    commit = calls[1]
+    assert "-S" in commit and "--no-verify" not in commit and "-n" not in commit and commit[commit.index("-m") + 1] == "P10-I-S2 Part T: calibration log S unit [skip ci]" and commit[-2:] == ["--", str(core.CALIBRATION_LOG)]
+
+
+def test_a_failed_log_commit_stops_the_session_paused_before_the_next_unit_and_the_resume_commits_first(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    open_and_commit(r, q)
+    real = partt_stages.commit_log_line
+    fail = {"on": True}
+
+    def flaky(repo: Path, session: str, event: str, run: Any = None) -> None:
+        if fail["on"] and event == "unit":
+            raise partt_stages.LogCommitFailed("the signing agent is not available")
+        real(repo, session, event) if run is None else real(repo, session, event, run)
+
+    monkeypatch.setattr(partt_stages, "commit_log_line", flaky)
+    trained: list[str] = []
+
+    def two_units(repo: Path, qdir: Path, run_dir: Path, repetition: int, plan: Path | None, cap_seconds: float, on_unit: Any = None) -> dict[str, Any]:
+        for u in ("u1", "u2"):
+            if (run_dir / "state" / f"{u}.json").exists():
+                continue
+            (run_dir / "state").mkdir(parents=True, exist_ok=True)
+            (run_dir / "state" / f"{u}.json").write_text("{}")
+            trained.append(u)
+            on_unit(u)
+        return fake_calibrate(repo, qdir, run_dir, repetition, plan, cap_seconds)
+
+    monkeypatch.setattr(partt_real, "calibrate_command", two_units)
+    with pytest.raises(partt_stages.LogCommitFailed):
+        partt_stages.main(args(r, q))
+    assert trained == ["u1"]  # PAUSED before the next unit
+    fail["on"] = False
+    assert partt_stages.main(args(r, q)) == 0
+    assert trained == ["u1", "u2"]  # u1 was not redrawn: its pending line was committed first and its state accepted
+    assert git(r, "status", "--porcelain") == ""
+
+
+def test_state_without_a_committed_unit_line_is_kept_aside_and_the_unit_waits_for_the_leads_decision(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    open_and_commit(r, q)
+    state = core.calibration_dir(r) / "state"
+    state.mkdir(parents=True)
+    (state / "grid-store-A-0.001.json").write_text("{}")  # a state file no committed unit line vouches for (a stop between the state and its line)
+    assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED
+    assert not (state / "grid-store-A-0.001.json").exists() and len(list((state / "attempts").glob("grid-store-A-0.001.*.json"))) == 1  # kept aside, not deleted
+    assert not (core.calibration_dir(r) / "calibration_0.json").exists()  # nothing was run
+    (r / partt_stages.UNIT_DECISION).parent.mkdir(parents=True, exist_ok=True)
+    (r / partt_stages.UNIT_DECISION).write_text("unit: grid-store-A-0.001\nreason: the lead decides the unit is rerun\n")
+    git(r, "add", "-A")
+    git(r, "commit", "-q", "-m", "the lead's recorded decision")
+    assert partt_stages.main(args(r, q)) == 0  # with the recorded decision the run proceeds
+
+
+def test_the_run_needs_the_open_line_in_a_remote_tracking_branch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    assert partt_stages.main(args(r, q, open_=True)) == 0
+    git(r, "add", "-A")
+    git(r, "commit", "-q", "-m", "the lead commits but does not push")
+    assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED
+    git(r, "update-ref", "refs/remotes/origin/main", "HEAD")
+    assert partt_stages.main(args(r, q)) == 0
+
+
+def test_the_session_identity_covers_the_import_closure_both_configs_and_the_lock_and_a_changed_file_refuses_the_resume(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    ident = partt_stages.session_identity(r)
+    assert {"studies/p10s2/stub.py", "src/arborlm/stub.py", "configs/p10s2_transfer.toml", "uv.lock", str(core.CONFIG_T)} <= set(ident) and any(k.startswith("studies/p10is2/") for k in ident)
+    open_and_commit(r, q)
+    monkeypatch.setattr(partt_real, "calibrate_command", stopping_after_one_unit)
+    with pytest.raises(MemoryError):
+        partt_stages.main(args(r, q))
+    monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
+    for rel in ("studies/p10is2/partt_tasks.py", "studies/p10s2/stub.py", "src/arborlm/stub.py", "configs/p10s2_transfer.toml", str(core.CONFIG_T), "uv.lock"):
+        f = r / rel
+        keep = f.read_text()
+        f.write_text(keep + "\n# changed after the first session\n")
+        assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED, rel  # a resume under other code, config or lock is refused
+        f.write_text(keep)
+    assert partt_stages.main(args(r, q)) == 0  # restored bit for bit: the resume goes through
+
+
+def test_the_budget_bound_is_the_human_leads_and_three_commands_refuse_without_it(tmp_path: Path) -> None:
+    r = repo_with_cap(tmp_path / "r")
+    base = ["--repo", str(r)]
+    for argv in (["caps-config", "--measuring-rehearsal", "m.json", "--apply", *base], ["candidate-plan", "--run-dir", "x", "--part-q-dir", "q", "--measuring-rehearsal", "m.json", *base], ["freeze", "--measuring-rehearsal", "m.json", "--counting-rehearsal", "c.json", *base]):
+        assert partt_stages.main(argv) == partt_stages.EXIT_REFUSED, argv[0]  # 0.0: refused before anything is read
+    cfg = core.load_config("T", r / core.CONFIG_T)
+    assert float(cfg["caps"]["study_budget_hours"]) == 0.0
+    bounded = {**cfg, "caps": {**cfg["caps"], "study_budget_hours": 60.0}}
+    partt_stages.check_study_budget(bounded, 60.0, 7.5)  # at the bound it passes
+    with pytest.raises(core.StageRefused, match="exceeds"):
+        partt_stages.check_study_budget(bounded, 60.01, 7.5)
+    with pytest.raises(core.StageRefused, match="human lead"):
+        partt_stages.check_study_budget(cfg, 1.0, 0.0)

@@ -472,7 +472,10 @@ def calibrate_command(repo: Path, qdir: Path, run_dir: Path, repetition: int, pa
     rec = run_calibration(w, cfg, deadline=time.monotonic() + cap_seconds, state_dir=run_dir / "state", on_unit=on_unit)
     rec["overlap_with_registered_draws"] = draw_overlap(calibration_draws(pool, cfg, [off, off + 1]), registered_draws)  # ruling 2: stated, by code
     rec["part_q_manifest_sha256"] = file_sha256(qdir / "manifest.json")
+    from .partt_stages import session_identity
+
     rec["code_hashes"] = planmod.frozen_file_hashes(repo, "T")
+    rec["session_identity"] = session_identity(repo)  # ruling 31: the identity the record was computed under
     rec["repetition"] = repetition
     path = run_dir / f"calibration_{repetition}.json"
     core.write_record(path, {**core.envelope("calibration", "T"), **core.jsonable(rec)}, overwrite=False)  # one record per directory: never overwritten, no re-draw (ruling 21)

@@ -37,7 +37,8 @@ def synthetic_repo(tmp: Path, *, installable: bool = False, with_plan: bool = Tr
     (r / ".gitignore").write_text("runs/\nexperiments/\n.venv/\n")  # the calibration directory lives under the repository's experiments directory, as in the real repository
     cfg_path = r / core.CONFIG_T
     text = re.sub(r"(\[rehearsal\][^\n]*\nupdates = )200", r"\g<1>4", cfg_path.read_text())  # test size: the ADR's 200 updates scaled to 4
-    cfg_path.write_text(re.sub(r"(\[rehearsal\].*?read_layer = )4", r"\g<1>1", text, flags=re.S))  # and the tiny world's read layer
+    text = re.sub(r"(\[rehearsal\].*?read_layer = )4", r"\g<1>1", text, flags=re.S)  # and the tiny world's read layer
+    cfg_path.write_text(text.replace("study_budget_hours = 0.0", "study_budget_hours = 100000.0"))  # the human lead's bound (ruling 33), set for the synthetic study
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "test-size rehearsal updates")
     if installable:

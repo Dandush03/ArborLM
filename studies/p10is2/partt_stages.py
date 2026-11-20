@@ -14,6 +14,7 @@ the pilot passed; the Part Q manifest and its ACCEPTANCE record are listed by ha
 import argparse
 import json
 import os
+import subprocess
 import sys
 import time
 from collections.abc import Sequence
@@ -211,12 +212,59 @@ def read_calibration_log(repo: Path) -> list[dict[str, Any]]:
     return [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines() if x.strip()] if p.is_file() else []
 
 
+SIGN: list[str] = ["-S"]  # the real path signs every log commit; a test of the behaviour (not of the signature) sets it empty
+
+
+class LogCommitFailed(cal.CalibrationStop):
+    """The signed commit of a log line failed: the session stops PAUSED before the next unit (ruling 32)."""
+
+
 def log_calibration(repo: Path, event: dict[str, Any]) -> None:
     """Ruling 21: every calibration session appends a line to the tracked log under ``results/`` (append only)."""
     p = repo / core.CALIBRATION_LOG
     p.parent.mkdir(parents=True, exist_ok=True)
     with p.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps({"utc": core.utc_stamp(), **event}, sort_keys=True) + "\n")
+
+
+def commit_log_line(repo: Path, session: str, event: str, run: Any = subprocess.run) -> None:
+    """Ruling 32: a signed single-line commit of the log file ALONE: ``P10-I-S2 Part T: calibration log <session> <event> [skip ci]``, no trailers, ``git commit -S``, never ``--no-verify``. A failure raises
+    ``LogCommitFailed``: the session stops PAUSED before the next unit."""
+    rel = str(core.CALIBRATION_LOG)
+    msg = f"P10-I-S2 Part T: calibration log {session} {event} [skip ci]"
+    for argv in (["git", "-C", str(repo), "add", "--", rel], ["git", "-C", str(repo), "commit", *SIGN, "-m", msg, "--", rel]):
+        done = run(argv, capture_output=True, text=True, check=False)  # noqa: S603
+        if done.returncode != 0:
+            raise LogCommitFailed(f"the commit of the calibration log failed ({' '.join(argv[3:6])}): {(done.stderr or done.stdout).strip()[:200]}: the session stops PAUSED before the next unit")
+
+
+def log_and_commit(repo: Path, event: dict[str, Any]) -> None:
+    log_calibration(repo, event)
+    commit_log_line(repo, str(event.get("session", "-")), str(event["event"]))
+
+
+def require_open_pushed(repo: Path, session: str) -> None:
+    """Ruling 32: the commit holding the open line must be contained in a remote-tracking branch (``git branch -r --contains``; no network call): the lead pushes it before the run."""
+    rel = str(core.CALIBRATION_LOG)
+    shas = [x for x in core.git(repo, "log", "--format=%H", "--reverse", f"-S{session}", "--", rel).stdout.decode().split() if x]
+    if not shas:
+        raise StageRefused(f"refused: no commit holds the open line of session {session}")
+    out = core.git(repo, "branch", "-r", "--contains", shas[0]).stdout.decode().strip()
+    if not out:
+        raise StageRefused(f"refused: the commit {shas[0][:12]} holding the open line is not contained in any remote-tracking branch: the lead pushes it before the run (ruling 32)")
+
+
+def unit_decisions(repo: Path) -> set[str]:
+    """The units the lead's committed ``UNIT_DECISION.md`` names (lines ``unit: <id>``)."""
+    got = core.git(repo, "show", f"HEAD:{UNIT_DECISION}")
+    if got.returncode != 0:
+        return set()
+    import re
+
+    return set(re.findall(r"(?m)^unit:\s*(\S+)\s*$", got.stdout.decode("utf-8")))
+
+
+UNIT_DECISION = Path("results/p10is2-partt-calibration/UNIT_DECISION.md")
 
 
 def committed_calibration_log(repo: Path) -> list[dict[str, Any]]:
@@ -305,19 +353,30 @@ def check_calibration_ledger(repo: Path, log: list[dict[str, Any]]) -> None:
         raise StageRefused(f"refused: logged calibration sessions with no ledger entry and no INTERRUPTED line: {missing}")
 
 
-def check_study_budget(cfg: Any, total_hours: float, allowance_hours: float) -> None:
-    """Ruling 30: if the counting allowance makes the plan's total cap exceed the study's budget bound, the candidate plan (and the registered caps) refuse and it goes to the human lead; no automatic extension. A bound of 0.0 is
-    'not set' (the human lead sets it)."""
+def require_study_budget(cfg: Any) -> float:
+    """Ruling 33: while ``caps.study_budget_hours`` is 0.0 or absent, ``caps-config``, ``candidate-plan`` and ``freeze`` REFUSE: the bound is the human lead's to set and is recorded in the rulings before the plan."""
     budget = float(cfg["caps"].get("study_budget_hours", 0.0))
-    if budget > 0.0 and total_hours > budget:
-        raise StageRefused(f"refused: PENDING LEAD REVIEW: the plan's total cap {total_hours} h exceeds the study's budget bound {budget} h (the counting allowance is {allowance_hours} h): the human lead decides; nothing is extended here")
+    if budget <= 0.0:
+        raise StageRefused("refused: PENDING LEAD REVIEW: caps.study_budget_hours is 0.0 or absent: the study's budget bound is the human lead's to set and is recorded in the rulings before the plan")
+    return budget
+
+
+def check_study_budget(cfg: Any, total_hours: float, allowance_hours: float) -> None:
+    """Ruling 33 (and 30): with the bound set, the proposed total must not exceed it (equal passes); otherwise the human lead decides and nothing is extended."""
+    budget = require_study_budget(cfg)
+    if total_hours > budget:
+        raise StageRefused(f"refused: PENDING LEAD REVIEW: the total cap {total_hours} h exceeds the study's budget bound {budget} h (the counting allowance is {allowance_hours} h): the human lead decides; nothing is extended here")
 
 
 def session_identity(repo: Path) -> dict[str, str]:
-    """Ruling 28: the hashes of the files a calibration computes with (every ``studies/p10is2/*.py``) and of the config. Each session's start line carries them; a resume refuses when they differ from the first session's, and
-    the final record's must equal every session's."""
-    frozen = planmod.frozen_file_hashes(repo, "T")
-    return {k: v for k, v in sorted(frozen.items()) if (k.startswith("studies/p10is2/") and k.endswith(".py")) or k == str(core.CONFIG_T)}
+    """Ruling 31: the hashes of everything that can change a calibration value: the Part T frozen set (``studies/p10is2``, the Part T config, ``uv.lock``, ``pyproject.toml``), the import-walk closure of the Part T entry
+    modules (the function the freeze uses for the registered stages: ``studies/p10s2``, ``src/arborlm`` and whatever else they import from the repository) and ``configs/p10s2_transfer.toml``. Each session's start line carries it."""
+    out = dict(planmod.frozen_file_hashes(repo, "T"))
+    out.update(planmod.walk_set(planmod.import_walk(repo, "T"), repo))
+    extra = repo / "configs/p10s2_transfer.toml"
+    if extra.is_file():
+        out["configs/p10s2_transfer.toml"] = file_sha256(extra)
+    return dict(sorted(out.items()))
 
 
 def open_session(log: Sequence[dict[str, Any]], rep: int) -> dict[str, Any] | None:
@@ -404,6 +463,10 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
         return 0
     if not args.part_q_plan:
         raise StageRefused("refused: calibrate needs --part-q-plan: the checked door admits generation/result.json through Part Q's plan reuse list")
+    pending = [e for e in read_calibration_log(repo)]
+    head_now = core.git(repo, "show", f"HEAD:{core.CALIBRATION_LOG}")
+    if head_now.returncode == 0 and (repo / core.CALIBRATION_LOG).read_bytes() != head_now.stdout:  # lines of an earlier run that could not be committed (or a commit that failed): committed first
+        commit_log_line(repo, str(pending[-1].get("session", "-")) if pending else "-", "pending")
     head_log = committed_head_log(repo)
     opened = open_session(head_log, rep)
     if opened is None:
@@ -411,12 +474,24 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     marker = sub_dir / "session.json"
     if not marker.is_file() or json.loads(marker.read_text()).get("session") != opened["session"] or json.loads(marker.read_text()).get("start_line_sha256") != line_sha(opened):
         raise StageRefused(f"refused: the calibration directory {sub_dir} does not hold the session HEAD's log opened (a deleted or replaced directory under a log that lists a session): the lead decides")
+    require_open_pushed(repo, str(opened["session"]))
+    log = read_calibration_log(repo)
     after_open = log[log.index(opened) + 1 :] if opened in log else []
-    listed = {e["unit"] for e in after_open if e.get("event") == "unit"}
+    committed_units = {e["unit"]: e.get("state_sha256") for e in after_open if e.get("event") == "unit"}
     state_dir = sub_dir / "state"
     on_disk = {p.stem for p in state_dir.glob("*.json")} if state_dir.is_dir() else set()
-    if listed - on_disk:
-        raise StageRefused(f"refused: the log lists finished units whose state is not in {state_dir} (a deleted or emptied directory): {sorted(listed - on_disk)[:3]}")
+    if set(committed_units) - on_disk:
+        raise StageRefused(f"refused: the committed log lists finished units whose state is not in {state_dir} (a deleted or emptied directory): {sorted(set(committed_units) - on_disk)[:3]}")
+    unaccepted = sorted(u for u in on_disk if committed_units.get(u) != file_sha256(state_dir / f"{u}.json"))  # ruling 32: accepted only if a committed unit line carries its SHA-256
+    if unaccepted:
+        decided = unit_decisions(repo)
+        aside = state_dir / "attempts"
+        aside.mkdir(parents=True, exist_ok=True)
+        for u in unaccepted:
+            (state_dir / f"{u}.json").rename(aside / f"{u}.{core.utc_stamp()}.json")  # kept, never deleted
+        if not set(unaccepted) <= decided:
+            raise StageRefused(f"refused: state without a committed unit line was kept aside under {aside} and the unit is NOT rerun silently: the run needs the lead's recorded decision, a committed {UNIT_DECISION} naming {sorted(set(unaccepted) - decided)} (lines 'unit: <id>')")
+        on_disk -= set(unaccepted)
     session_events = [e for e in after_open if e.get("repetition") == rep]
     resumed = bool(session_events)
     if resumed and opened.get("identity") != identity:
@@ -426,32 +501,34 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     remaining = cap_h * 3600.0 - led.charged("calibration")
     if remaining <= 0:
         raise StageRefused("refused: the calibration cap is spent (PAUSED): an extension is the lead's")
-    for unit_id in sorted(on_disk - listed):  # state written, its log line not (a stop between the two): reconciled, never redrawn
-        log_calibration(repo, {"event": "unit", "repetition": rep, "session": opened["session"], "unit": unit_id, "reconciled": True})
     if resumed:  # the reason found is logged, nothing is edited by hand
         last = next((e for e in reversed(session_events) if e.get("event") in ("stopped", "start", "end")), session_events[-1])
         reason = str(last.get("error")) if last.get("event") == "stopped" and last.get("error") else "UNKNOWN"
-        log_calibration(repo, {"event": "INTERRUPTED", "repetition": rep, "reason": reason, "after": last.get("event")})
+        log_and_commit(repo, {"event": "INTERRUPTED", "repetition": rep, "session": opened["session"], "reason": reason, "after": last.get("event")})
         session = core.utc_stamp()
-        log_calibration(repo, {"event": "start", "repetition": rep, "session": session, "open": False, "resumed": True, "identity": identity, "directory": str(sub_dir), "remaining_seconds": remaining})
+        log_and_commit(repo, {"event": "start", "repetition": rep, "session": session, "open": False, "resumed": True, "identity": identity, "directory": str(sub_dir), "remaining_seconds": remaining})
     else:
         session = str(opened["session"])
     t0 = time.monotonic()
     try:
-        out = partt_real.calibrate_command(repo, Path(args.part_q_dir), sub_dir, rep, Path(args.part_q_plan), remaining, on_unit=lambda uid: log_calibration(repo, {"event": "unit", "repetition": rep, "session": session, "unit": uid}))
+        out = partt_real.calibrate_command(repo, Path(args.part_q_dir), sub_dir, rep, Path(args.part_q_plan), remaining, on_unit=lambda uid: log_and_commit(repo, {"event": "unit", "repetition": rep, "session": session, "unit": uid, "state_sha256": file_sha256(sub_dir / "state" / f"{uid}.json")}))
         record = core.read_record(sub_dir / f"calibration_{rep}.json", "calibration")
         now = session_identity(repo)
         starts = [e for e in read_calibration_log(repo) if e.get("event") == "start" and e.get("repetition") == rep]
         bad = [e["session"] for e in starts if e.get("identity") != now]
-        wrong = sorted(k for k in now if (record.get("code_hashes") or {}).get(k) != now[k])
+        wrong = [] if record.get("session_identity") == now else ["session_identity"]
         if bad or wrong:
             raise StageRefused(f"refused: the final record's code and config hashes must equal every session's (ruling 28): sessions {bad}, record {wrong[:3]}")
     except BaseException as e:
         log_calibration(repo, {"event": "stopped", "repetition": rep, "session": session, "error": f"{type(e).__name__}: {e}"[:300]})
+        try:
+            commit_log_line(repo, session, "stopped")
+        except LogCommitFailed:
+            pass  # the line is in the working log; the next run commits it first
         raise
     finally:
         charged(d / "charged_ledger.json", "calibration", session, time.monotonic() - t0)
-    log_calibration(repo, {"event": "end", "repetition": rep, "session": session, "record": str(sub_dir / f"calibration_{rep}.json"), "record_sha256": file_sha256(sub_dir / f"calibration_{rep}.json")})
+    log_and_commit(repo, {"event": "end", "repetition": rep, "session": session, "record": str(sub_dir / f"calibration_{rep}.json"), "record_sha256": file_sha256(sub_dir / f"calibration_{rep}.json")})
     print(json.dumps(core.jsonable(out), default=str))
     return 0
 
@@ -519,6 +596,7 @@ def ledgers_charge(paths: Sequence[str]) -> dict[str, Any]:
 def cmd_candidate_plan(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
+    require_study_budget(cfg)  # ruling 33
     committed_calibration_log(repo)  # ruling 26: the log is committed, clean and append-only
     cal_path, _rep = chosen_calibration(repo)  # ruling 21: no free path; the record of the one calibration directory
     calib = calibration_from_record(cal_path)
@@ -576,6 +654,7 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
     plan): every other cap and ``caps.provisional = false``; it refuses unless the calibration cap in the config is the one the record gives. The candidate plan must be rebuilt afterwards."""
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
+    require_study_budget(cfg)  # ruling 33
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps come from a MEASURING rehearsal's record")
@@ -622,6 +701,7 @@ def charged(ledger: Path, stage: str, mode: str, seconds: float) -> None:
 def cmd_freeze(args: argparse.Namespace) -> int:
     repo = repo_of(args)
     cfg = core.load_config("T", repo / core.CONFIG_T)
+    require_study_budget(cfg)  # ruling 33
     plan_path, record = repo / core.PLAN_T, repo / core.FREEZE_RECORD_T
     if record.exists():
         raise StageRefused(f"refused: {record} exists; a freeze is written once")
@@ -709,6 +789,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     counting_charge = counting_charge_of(counting)  # ruling 17: read from the counting rehearsal's ledger, recorded, added to the pre-freeze charge the registered ledger starts from
     plan_charge = float(charge["seconds"])
     total_cap = float(cfg["stage_caps"]["total_hours"]) * 3600.0
+    check_study_budget(cfg, float(cfg["stage_caps"]["total_hours"]), allowance_h)
     if counting_charge > allowance_h * 3600.0 + 1e-6:  # ruling 20: ENGINEERING STOP; the plan is re-made with --supersede, no cap is edited by hand
         raise StageRefused(f"refused: ENGINEERING STOP: the counting rehearsal charged {counting_charge:.1f} s, above the counting allowance of {allowance_h * 3600.0:.1f} s fixed in the plan before it ran: re-plan with --supersede")
     need = plan_charge + counting_charge
