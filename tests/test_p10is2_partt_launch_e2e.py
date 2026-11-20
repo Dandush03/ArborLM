@@ -140,7 +140,7 @@ def test_plan_measuring_counting_freeze_then_a_registered_stage_refuses_on_a_cha
     meas_path = runs / "measuring" / "rehearsal_measuring.json"
     charge_ledger = str(runs / "measuring" / "charged_ledger.json")
     # 2. a candidate plan that records the charge before the freeze; the caps by code from the record; the plan again (its caps come from the config)
-    plan_args = ["candidate-plan", "--run-dir", str(runs / "registered"), "--calibration", str(calib), "--part-q-dir", str(q), "--charged-ledger", charge_ledger, "--manifests", str(manifests), *common]
+    plan_args = ["candidate-plan", "--run-dir", str(runs / "registered"), "--calibration", str(calib), "--part-q-dir", str(q), "--charged-ledger", charge_ledger, "--manifests", str(manifests), "--measuring-rehearsal", str(meas_path), *common]
     assert partt_stages.main(plan_args) == 0
     assert partt_stages.main(["caps-config", "--measuring-rehearsal", str(meas_path), "--apply", *common]) == 0
     cfg = core.load_config("T", r / core.CONFIG_T)
@@ -160,10 +160,18 @@ def test_plan_measuring_counting_freeze_then_a_registered_stage_refuses_on_a_cha
     count = partt_counting.run_counting_rehearsal(r, runs / "counting")
     assert count["status"] == "COMPLETE" and count["forced"] == {"pause_resume": True, "paused_identity_restore": True}
     freeze_args = ["freeze", "--measuring-rehearsal", str(meas_path), "--counting-rehearsal", str(runs / "counting" / "rehearsal_counting.json"), "--attest-sealed-unopened", "lead,implementer,auditor", *common]
-    assert partt_stages.main(freeze_args) == partt_stages.EXIT_REFUSED  # ruling 17 as ruled: plan charge + counting charge + 2 x projected exceeds a total cap that was computed before counting (PENDING LEAD REVIEW, second addendum)
-    assert partt_stages.counting_charge_of(count) > 0
-    monkeypatch.setattr(partt_stages, "counting_charge_of", lambda rec: 0.0)  # only so that the rest of the sequence can be exercised: the refusal above is the real behaviour
-    assert partt_stages.main(["freeze", "--measuring-rehearsal", str(meas_path), "--counting-rehearsal", str(runs / "counting" / "rehearsal_counting.json"), "--attest-sealed-unopened", "lead,implementer,auditor", *common]) == 0
+    plan_now = planmod.Plan.load(r / core.PLAN_T, "T")
+    allowance_s = float(plan_now.data["counting_allowance_hours"]) * 3600.0  # fixed in the plan before the counting rehearsal ran (ruling 20)
+    real_charge = partt_stages.counting_charge_of(count)
+    assert 0 < real_charge <= allowance_s, (real_charge, allowance_s)  # the REAL counting charge is within 2 x its projection
+    # a counting charge above the allowance is refused (ENGINEERING STOP: re-plan with --supersede): the same record with its ledger replaced by one that holds more than the allowance
+    big = runs / "counting_big_ledger" / "charged_ledger.json"
+    big.parent.mkdir()
+    core.Ledger(big, "T", 1e12).charge_process("train", "counting", "main", allowance_s + 60.0)
+    doctored = runs / "rehearsal_counting_over_allowance.json"
+    write_json(doctored, {**json.loads((runs / "counting" / "rehearsal_counting.json").read_text()), "charged_ledgers": {str(big): allowance_s + 60.0}, "charged_seconds": allowance_s + 60.0})
+    assert partt_stages.main([*freeze_args[:4], str(doctored), *freeze_args[5:]]) == partt_stages.EXIT_REFUSED
+    assert partt_stages.main(freeze_args) == 0  # the REAL freeze with the REAL counting charge
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "freeze")
     commit = git(r, "rev-parse", "HEAD")

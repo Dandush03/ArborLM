@@ -73,13 +73,48 @@ def basis_of(cfg: Mapping[str, Any]) -> dict[str, int]:
     return {"eval_panel": int(d["eval_panel"]), "control_subsample": int(d["control_subsample"]), "d_con_panel": int(d["d_con_panel"])}
 
 
-def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], basis: Mapping[str, int], charge_seconds: float) -> dict[str, float]:
+def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict[str, Any]:
+    """The projected charge of the counting rehearsal (ruling 20), by the shared projection (units x measured seconds per unit of the kind + processes x the stage's measured per-process overhead):
+
+    projected = sum over kinds (subset units of the kind x its measured rate) + sum over stages (processes the rehearsal starts in the stage x its overhead) + 2 x the training stage's overhead (the resumed worker of
+    the forced pause and the stage process of the forced identity stop).
+
+    The subset units and the processes per stage are those the measuring rehearsal ran (it runs the same subset through the same entry point). A measuring record that carries no ``subset_units`` (no dry-profile
+    rate) is projected as: processes the counting rehearsal starts (per stage, the stage process and one per task of the plan-derived subset) x the stage's overhead + the measured world-build seconds of one
+    process per worker, + the same forced extra. The allowance is 2 x the projection."""
+    rates, over = meas["rates_seconds_per_unit"], meas["overhead_seconds"]
+    units, procs = meas.get("subset_units"), meas.get("subset_processes")
+    if units and procs:
+        work = sum(float(n) * float(rates[k]) for k, n in units.items())
+        overhead = sum(int(procs[s]) * float(over[s]) for s in procs)
+        basis = "subset units x rates + processes x overhead"
+    else:
+        from . import partt_tasks
+        from .common import plan as planmod
+
+        plan = planmod.Plan({"kind": "freeze_plan", "study": core.STUDY, "schema": core.SCHEMA, "part": "T", "items": dict(items), "stage_caps": {}}, "T")
+        n_proc = {s: 1 + (sum(len(w) for w in partt_tasks.waves_of(s, plan, True)) if s in partt_tasks.TASK_STAGES else 0) for s in items if s in over}
+        work = float(meas.get("world_build_seconds", 0.0)) * sum(n_proc.values())
+        overhead = sum(n * float(over[s]) for s, n in n_proc.items())
+        basis = "processes x overhead + measured world-build seconds"
+    forced = 2.0 * float(over["train"])
+    return {"seconds": work + overhead + forced, "unit_work_seconds": work, "overhead_seconds": overhead, "forced_events_seconds": forced, "basis": basis}
+
+
+def counting_allowance_hours(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]]) -> float:
+    """``counting_allowance_hours`` = 2 x the projected counting charge, in hours rounded UP to 0.01 h; fixed in the candidate plan BEFORE the counting rehearsal runs (ruling 20)."""
+    import math
+
+    return math.ceil(2.0 * counting_projection_seconds(meas, items)["seconds"] / 3600.0 * 100.0 - 1e-9) / 100.0
+
+
+def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], basis: Mapping[str, int], charge_seconds: float, allowance_seconds: float = 0.0) -> dict[str, float]:
     """The caps by the rule: every registered stage gets 2 x its projection, the total is the charge before the freeze + 2 x all stages (rounded up to 0.01 h), by ``common.caps.caps_proposal``. Refuses a measuring
     record that was not made through the registered entry point (no ``caps_formula``)."""
     if meas.get("caps_formula") != CAPS_FORMULA:
         raise StageRefused(f"refused: the Part T measuring record does not carry caps_formula {CAPS_FORMULA!r}: it was not made through the registered entry point in fresh worker processes")
     proj = project_stage_seconds(items, basis, meas["rates_seconds_per_unit"], meas["overhead_seconds"])
-    return dict(caps_proposal(charge_seconds, proj))
+    return dict(caps_proposal(charge_seconds + allowance_seconds, proj))  # total = plan charge + counting allowance + 2 x projected registered stages (ruling 20)
 
 
 CAPS_FORMULA = "partt-whole-process-v1"

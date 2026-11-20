@@ -120,14 +120,14 @@ def combined_arm_cells_per_replicate() -> int:
     return 4 * len(ORDERS) + len(JOINT_ARMS) + len(SEPARATE_ARMS)
 
 
-def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], calibration: Mapping[str, Any], *, mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, manifests: Mapping[str, Any] | None = None, charge_before_freeze: Mapping[str, Any] | None = None, part_q: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], calibration: Mapping[str, Any], *, mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, manifests: Mapping[str, Any] | None = None, charge_before_freeze: Mapping[str, Any] | None = None, part_q: Mapping[str, Any] | None = None, counting_allowance_hours: float | None = None) -> dict[str, Any]:
     """The plan record. ``calibration`` holds U (and NOT CONVERGED AT U), the rates, the layer, the calibration records' hashes (refused if stand-in or if their code hashes differ from the frozen files) and the pilot
     outcome. ``manifests`` names the Part Q manifest, the shared panel ledger and the calibration records by path and SHA-256."""
     if calibration.get("pilot", {}).get("passed") is not True:
         raise core.StageRefused("refused: the pilot gate did not pass (NOT STARTED: PILOT): Part T has no plan")
     return planmod.build_plan(
         part="T", mode=mode, cfg=cfg, repo=repo, items=stage_items(calibration), run_dir=run_dir, walk=walk,
-        extra={**({"charge_before_freeze": dict(charge_before_freeze)} if charge_before_freeze else {}), **({"part_q": dict(part_q)} if part_q else {}), "task_units_basis": {k: int(cfg["data"][k]) for k in ("eval_panel", "control_subsample", "d_con_panel")}, "calibration": dict(calibration), "manifests": dict(manifests or {}), "registry_keys": sorted(required_keys()), "units_of_U": units_of_training(), "seeds": {"replicates": [core.partt_replicate_values(cfg, "registered", r) for r in range(3)]}},
+        extra={**({"charge_before_freeze": dict(charge_before_freeze)} if charge_before_freeze else {}), **({"counting_allowance_hours": float(counting_allowance_hours)} if counting_allowance_hours is not None else {}), **({"part_q": dict(part_q)} if part_q else {}), "task_units_basis": {k: int(cfg["data"][k]) for k in ("eval_panel", "control_subsample", "d_con_panel")}, "calibration": dict(calibration), "manifests": dict(manifests or {}), "registry_keys": sorted(required_keys()), "units_of_U": units_of_training(), "seeds": {"replicates": [core.partt_replicate_values(cfg, "registered", r) for r in range(3)]}},
     )  # fmt: skip
 
 

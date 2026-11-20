@@ -174,7 +174,7 @@ def process_table(run_dir: Path) -> dict[str, Any]:
     return out
 
 
-def derive_rates(run_dir: Path, plan: planmod.Plan) -> tuple[dict[str, float], dict[str, float], list[str]]:
+def derive_rates(run_dir: Path, plan: planmod.Plan) -> tuple[dict[str, float], dict[str, float], list[str], dict[str, float]]:
     """Seconds per unit of every kind (sum of the kind's seconds over the tasks that ran it / the units they covered) and, per stage, the per-process overhead (the mean over its processes of whole-process seconds
     less the seconds of unit work). A stage that runs as one body (gates, controls, analysis, report, recompute) takes its body seconds as the unit work of its one unit (the recomputation reuses the scoring rates)."""
     seconds: dict[str, float] = {}
@@ -208,7 +208,13 @@ def derive_rates(run_dir: Path, plan: planmod.Plan) -> tuple[dict[str, float], d
                 over.setdefault(stage, []).append(max(0.0, whole - float(w["body_seconds"])) if m is None else 0.0)
     rates = {k: seconds[k] / units[k] for k in seconds if units.get(k)}
     overhead = {s: sum(v) / len(v) for s, v in over.items() if v}
-    return rates, overhead, problems
+    return rates, overhead, problems, units
+
+
+def mean_world_build(run_dir: Path) -> float:
+    """The mean seconds the processes of this rehearsal spent building their world (measured)."""
+    vals = [float(r["worker"]["world_build_seconds"]) for rows in process_table(run_dir).values() for r in rows.values() if "world_build_seconds" in r.get("worker", {})]
+    return sum(vals) / len(vals) if vals else 0.0
 
 
 def run_measuring_rehearsal(repo: Path, run_dir: Path, calibration_record: Path, part_q_dir: Path, *, part_q_plan: Path | None = None, manifests: Mapping[str, Any] | None = None, launch: Launch = subprocess_launch, clock: Callable[[], float] = time.monotonic, charged_ledgers: Sequence[str] = ()) -> dict[str, Any]:
@@ -227,7 +233,7 @@ def run_measuring_rehearsal(repo: Path, run_dir: Path, calibration_record: Path,
     run_stages(repo, run_dir, plan, "measuring", launch, plan_file, forced=None, problems=problems, timings=timings, clock=clock)
     led = core.Ledger(run_dir / "charged_ledger.json", "T", 1e12)
     stages = {s: stage_record(run_dir, s, led) for s in partt_plan.STAGES}
-    rates, overhead, rate_problems = derive_rates(run_dir, plan) if all(v["status"] == "COMPLETE" for v in stages.values()) else ({}, {}, [])
+    rates, overhead, rate_problems, subset_units = derive_rates(run_dir, plan) if all(v["status"] == "COMPLETE" for v in stages.values()) else ({}, {}, [], {})
     problems += rate_problems
     missing = [k for k in partt_caps.required_kinds(plan.data["items"], plan.data["task_units_basis"]) if k not in rates] if rates else []
     if rates and missing:
@@ -236,7 +242,7 @@ def run_measuring_rehearsal(repo: Path, run_dir: Path, calibration_record: Path,
     rec = {
         **core.envelope("rehearsal", "T"), "kind_of_rehearsal": "measuring", "status": "COMPLETE" if complete else "INCOMPLETE", "caps_provisional": True, "cannot_be_frozen_on": True, "caps_formula": partt_caps.CAPS_FORMULA,
         "entry_point": "partt_registered.sh <stage> <run-dir> - --rehearsal --rehearsal-kind measuring --plan-file <measuring plan>, one fresh process per stage; tasks are worker processes", "plan_file_sha256": file_sha256(plan_file),
-        "stages": stages, "problems": problems, "rates_seconds_per_unit": rates, "overhead_seconds": overhead, "processes": process_table(run_dir), "timings": {"total_seconds": clock() - t0, "process_seconds": timings},
+        "stages": stages, "problems": problems, "rates_seconds_per_unit": rates, "overhead_seconds": overhead, "subset_units": subset_units, "subset_processes": {s: max(1, len(rows)) for s, rows in process_table(run_dir).items()}, "world_build_seconds": mean_world_build(run_dir), "processes": process_table(run_dir), "timings": {"total_seconds": clock() - t0, "process_seconds": timings},
         "load": {"start": load_start, "end": os.getloadavg()[0]}, "other_studies_alive": {"start": others_start, "end": procs.other_studies_alive()}, "platform": gates.platform_record(),
         "disk_written_bytes": sum(int(r.get("worker", {}).get("disk_written_bytes", 0)) for rows in process_table(run_dir).values() for r in rows.values()),
         "charged_seconds": led.charged(), "charged_before_freeze_seconds": led.charged() + sum(core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers}},

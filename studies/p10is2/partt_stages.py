@@ -287,7 +287,13 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     manifests = read_json(Path(args.manifests)) if args.manifests else {}
     charge = ledgers_charge(args.charged_ledger) if args.charged_ledger else None
     pq = part_q_block(Path(args.part_q_dir), Path(args.part_q_plan) if args.part_q_plan else None)
-    rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq)
+    allowance = None
+    if getattr(args, "measuring_rehearsal", None):  # ruling 20: the counting allowance is fixed in the plan BEFORE the counting rehearsal runs
+        meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
+        if meas.get("kind_of_rehearsal") != "measuring":
+            raise StageRefused("refused: --measuring-rehearsal must be the Part T measuring rehearsal's record")
+        allowance = partt_caps.counting_allowance_hours(meas, partt_plan.stage_items(calib))
+    rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq, counting_allowance_hours=allowance)
     path = repo / core.PLAN_T
     if path.exists():
         if not args.supersede:
@@ -312,7 +318,8 @@ def cmd_caps_proposal(args: argparse.Namespace) -> int:
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps are computed from a MEASURING rehearsal's record")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
-    print(json.dumps({"proposal_hours": partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge), "charge_before_freeze_seconds": charge, "rule": "stage cap = 2 x projected (sum over the plan's tasks of units x measured seconds per unit of the kind, plus tasks x the per-process overhead); total = charge before the freeze + 2 x all stages"}))
+    allowance = float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0
+    print(json.dumps({"proposal_hours": partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, allowance), "charge_before_freeze_seconds": charge, "counting_allowance_seconds": allowance, "rule": "stage cap = 2 x projected (sum over the plan's tasks of units x measured seconds per unit of the kind, plus tasks x the per-process overhead); total = charge before the freeze + 2 x all stages"}))
     return 0
 
 
@@ -325,7 +332,7 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
     if meas.get("kind_of_rehearsal") != "measuring":
         raise StageRefused("refused: the caps come from a MEASURING rehearsal's record")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
-    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge)
+    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0)
     if args.apply:
         path = repo / core.CONFIG_T
         path.write_text(partt_caps.apply_caps_text(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
@@ -373,14 +380,19 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     charge = plan.data.get("charge_before_freeze") or {}
     if not charge.get("seconds"):
         raise StageRefused("refused: the plan records no charge before the freeze (candidate-plan --charged-ledger): the caps' total counts it")
-    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], float(charge["seconds"]))  # the units come from the plan; the charge is the one the plan recorded
+    if "counting_allowance_hours" not in plan.data:
+        raise StageRefused("refused: the plan carries no counting allowance (candidate-plan --measuring-rehearsal, ruling 20): re-plan with --supersede")
+    allowance_h = float(plan.data["counting_allowance_hours"])
+    if abs(allowance_h - partt_caps.counting_allowance_hours(meas, plan.data["items"])) > 1e-9:
+        raise StageRefused("refused: the plan's counting allowance is not 2 x the counting charge projected from this measuring record: re-plan with --supersede (no cap is edited by hand)")
+    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], float(charge["seconds"]), allowance_h * 3600.0)  # the units come from the plan; the charge and the allowance are the ones the plan recorded
     differ = caps_match_config(cfg, proposal)
     if differ:
         raise StageRefused("refused: the config's stage caps are not what the code computes from the measuring rehearsal: " + "; ".join(differ))
     walk = planmod.import_walk(repo, "T")
     crec = plan.data["calibration"]["record"]
     calib = calibration_from_record(Path(crec["path"]), crec["sha256"])  # U, the rates, the layer and the pilot come from the calibration's own record, by hash
-    rederived = partt_plan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, calib, mode=plan.data["mode"], walk=walk, manifests=plan.data.get("manifests"), charge_before_freeze=plan.data.get("charge_before_freeze"), part_q=plan.data.get("part_q"))
+    rederived = partt_plan.build_candidate(repo, Path(plan.data["run_dir"]), cfg, calib, mode=plan.data["mode"], walk=walk, manifests=plan.data.get("manifests"), charge_before_freeze=plan.data.get("charge_before_freeze"), part_q=plan.data.get("part_q"), counting_allowance_hours=allowance_h)
     differing = differing_paths(json.loads(json.dumps(core.jsonable({k: v for k, v in rederived.items() if k not in ("adr", "platform")}))), {k: v for k, v in plan.data.items() if k not in ("adr", "platform")})
     if differing:
         raise StageRefused("refused: the candidate plan differs from a re-derivation from the current code, config and calibration record in: " + ", ".join(differing[:10]) + ": supersede it, repeat calibration if a training or scoring file changed (section 7.1 rule 4), and rehearse again")
@@ -415,11 +427,10 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")
     counting_charge = counting_charge_of(counting)  # ruling 17: read from the counting rehearsal's ledger, recorded, added to the pre-freeze charge the registered ledger starts from
     plan_charge = float(charge["seconds"])
-    projected = partt_caps.project_stage_seconds(plan.data["items"], plan.data["task_units_basis"], meas["rates_seconds_per_unit"], meas["overhead_seconds"])
-    need = core.total_cap_seconds(plan_charge + counting_charge, projected)
     total_cap = float(cfg["stage_caps"]["total_hours"]) * 3600.0
-    if need > total_cap + 1e-6:
-        raise StageRefused(f"refused: plan charge {plan_charge:.1f} s + counting charge {counting_charge:.1f} s + 2 x projected {2 * sum(projected.values()):.1f} s = {need:.1f} s exceeds the total cap {total_cap:.1f} s (ruling 17: no cap is recomputed after counting)")
+    if counting_charge > allowance_h * 3600.0 + 1e-6:  # ruling 20: ENGINEERING STOP; the plan is re-made with --supersede, no cap is edited by hand
+        raise StageRefused(f"refused: ENGINEERING STOP: the counting rehearsal charged {counting_charge:.1f} s, above the counting allowance of {allowance_h * 3600.0:.1f} s fixed in the plan before it ran: re-plan with --supersede")
+    need = plan_charge + counting_charge
     attest = [x for x in args.attest_sealed_unopened.split(",") if x]
     if not args.seal_broken and set(attest) != {"lead", "implementer", "auditor"}:
         raise StageRefused("refused: the record must state, for the lead, the implementer and the auditor, that none has opened a sealed value, or declare the seal broken")
@@ -429,7 +440,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     rec = {
         **core.envelope("freeze_record", "T"), "plan_file_sha256": plan_sha, "counting_rehearsal": {"path": str(Path(args.counting_rehearsal).resolve()), "sha256": file_sha256(Path(args.counting_rehearsal))},
         "attestations": {"sealed_values_unopened_by": attest}, "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
-        "pre_freeze_charge": {"plan_seconds": plan_charge, "counting_rehearsal_seconds": counting_charge, "registered_ledger_starts_from_seconds": plan_charge + counting_charge, "total_cap_seconds": total_cap, "needed_seconds": need},
+        "pre_freeze_charge": {"plan_seconds": plan_charge, "counting_rehearsal_seconds": counting_charge, "counting_allowance_seconds": allowance_h * 3600.0, "registered_ledger_starts_from_seconds": need, "total_cap_seconds": total_cap},
     }  # fmt: skip
     record.parent.mkdir(parents=True, exist_ok=True)
     write_json(record, core.jsonable(rec))
@@ -454,6 +465,7 @@ def build_parser() -> argparse.ArgumentParser:
     cp.add_argument("--part-q-dir", required=True, help="Part Q's run directory of record (attempt 3): named in the plan; its manifest is listed by hash")
     cp.add_argument("--part-q-plan", help="Part Q's plan file, whose reuse list holds the hashes of the reused stages' files")
     cp.add_argument("--charged-ledger", action="append", default=[], help="every Part T charged_ledger.json charged so far (absolute): the charge before the freeze")
+    cp.add_argument("--measuring-rehearsal", help="the Part T measuring rehearsal's record: the plan carries the counting allowance (2 x the projected counting charge) fixed before the counting rehearsal (ruling 20)")
     cp.add_argument("--supersede", action="store_true")
     cp.add_argument("--repo")
     f = sub.add_parser("freeze")
