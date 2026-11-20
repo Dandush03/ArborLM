@@ -353,6 +353,8 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     meas = core.read_record(Path(args.measuring_rehearsal), "rehearsal")
     if meas.get("kind_of_rehearsal") != "measuring" or meas.get("caps_provisional") is not True:
         raise StageRefused("refused: --measuring-rehearsal must be the Part T measuring rehearsal's record")
+    if meas.get("status") == "INCOMPLETE" or meas.get("problems"):
+        raise StageRefused(f"refused: the measuring rehearsal's record is INCOMPLETE ({meas.get('problems')}): caps are computed from a complete measurement of every kind")
     zero = partt_caps.zero_caps(cfg, REGISTERED_STAGES)
     if zero:
         raise StageRefused(f"refused: stage cap(s) of 0 in the config ({zero}): a cap of 0 is never 'uncapped'; every registered stage has a cap by the rule")
