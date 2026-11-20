@@ -54,8 +54,16 @@ def load_part_q(qdir: Path, cfg: Mapping[str, Any], mode: str, door: Any = None)
             draws.append({c: [pool[c][i] for i in torch.randperm(len(pool[c]), generator=g).tolist()[:per]] for c in core.TASKS})
     else:
         raise core.StageRefused(f"refused: Part Q's draws label is {result['draws_label']!r}: Part T has no material")
+    if mode == "rehearsal":  # a rehearsal never trains on Part Q's registered indices (audit B2, ruling 1): the rehearsal's own draw, SeedPlanT(rehearsal, 0).gen(1), A then B, one generator
+        draws = rehearsal_draws(pool, cfg, per)
     gloss = door.read_json("outputs/gloss_bank.json") if door is not None else read_json(qdir / "outputs/gloss_bank.json")
     return bundle, draws, gloss, result
+
+
+def rehearsal_draws(pool: Mapping[str, Sequence[TrainItem]], cfg: Mapping[str, Any], per: int = 8000) -> list[dict[str, list[TrainItem]]]:
+    """The rehearsal's own training draw (registry revision 5: seed 252002 = ``gen(1)`` of the rehearsal set), A then B, one generator; never Part Q's registered indices."""
+    g = engine.SeedPlanT(cfg, "rehearsal", 0).gen(1, "rehearsal training draw")
+    return [{c: [pool[c][k] for k in torch.randperm(len(pool[c]), generator=g).tolist()[:per]] for c in core.TASKS}]
 
 
 def shared_share(draws: Sequence[Mapping[str, Sequence[TrainItem]]]) -> dict[str, float]:

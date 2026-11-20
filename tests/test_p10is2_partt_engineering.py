@@ -319,7 +319,7 @@ def test_g5b_a_store_with_every_gate_at_zero_adds_nothing_and_the_check_notices_
     spec = engine.CellSpec("M1", "AB", 0)
     arm, rows, opts = engine.build_cell_arm(w, spec, None)
     engine.train_cell(w, spec, arm, rows, opts, 2)
-    assert partt_gates.g5b(arm.store)["passed"] is True
+    assert partt_gates.g5b(arm.store, core.seeded_generator(934900, "probe", {934900}))["passed"] is True
     res = partt_gates.g5(w, arm)
     assert res["new_store_gate_zero_adds_nothing"]["passed"] is True and res["passed"] is True
 
@@ -387,3 +387,56 @@ def test_calibration_and_rehearsals_charge_the_one_part_t_ledger_also_when_they_
         shutil.rmtree(run, ignore_errors=True)
     entries = json.loads(ledger.read_text())["entries"]
     assert len(entries) == 1 and entries[0]["stage"] == "calibration" and entries[0]["seconds"] >= 0.0
+
+
+# --- seed registry revision 5: the config equals the registry's rows, no seed literal in code ------------------------------------------------------------
+def test_seeds_equal_the_registry_revision_5_rows() -> None:
+    s = CFG["seeds"]
+    assert s["init_test"] == [330281, 330289]
+    got = sorted(v for i in (0, 1) for v in core.partt_replicate_values(CFG, "test", i)["init"].values())
+    assert got == list(range(330281, 330297)) and not set(got) & {330301, 330302, 330303}  # P10-I-S3's registered initialisation seeds
+    assert core.partt_replicate_values(CFG, "rehearsal", 0)["data"]["training_draw"] == 252002 and s["rehearsal_base"] == 252001
+    pieces = [core.partt_replicate_values(CFG, "calibration", i)["route_pieces"] for i in range(4)] + [core.partt_replicate_values(CFG, "rehearsal", 0)["route_pieces"]]
+    assert pieces == [251019, 251119, 251219, 251319, 252019]
+    assert [core.partt_replicate_values(CFG, "test", i)["route_pieces"] for i in (0, 1)] == [934019, 934119]
+    assert core.partt_replicate_values(CFG, "registered", 0)["route_pieces"] == 250918 == s["route_accuracy_pieces"]
+    assert s["g5_probe"] == 250919 and core.g5_probe_seed(CFG, "registered") == 250919 and core.g5_probe_seed(CFG, "rehearsal") == s["g5_probe_test"]
+    for m, n in (("calibration", 4), ("rehearsal", 1), ("test", 2)):
+        for i in range(n):
+            v = core.partt_replicate_values(CFG, m, i)
+            assert v["route_pieces"] != v["data"]["router"]  # outside registered mode the pieces never reuse the router seed
+
+
+def test_g9_names_every_derived_initialisation_value_and_cites_revision_5() -> None:
+    import hashlib
+
+    from studies.p10is2.common import gates
+
+    named = gates.named_values("T", CFG)
+    assert set(range(330281, 330297)) <= named["initialisation"] and 330298 not in named["initialisation"]
+    assert 250919 in named["analysis and route accuracy (inside the partition-side row)"]
+    assert CFG["seeds"]["registry_checker"].endswith("seed_registry_check_r5.py") and CFG["seeds"]["own_file_globs"] == ["configs/p10is2_*", "studies/p10is2/*", "tests/test_p10is2_*"]
+    for k in ("registry_checker", "registry_addendum"):
+        assert hashlib.sha256((ROOT / CFG["seeds"][k]).read_bytes()).hexdigest() == CFG["seeds"][k + "_sha256"]
+
+
+def test_the_rehearsal_training_draw_uses_its_own_seed_and_is_recorded() -> None:
+    from studies.p10s2.data import TrainItem
+
+    pool = {c: [TrainItem(f"{c}{i}", f"{c}{i}", "t", i) for i in range(30)] for c in core.TASKS}
+    before = len(core.recorded_seeds())
+    d = partt_real.rehearsal_draws(pool, CFG, per=10)
+    assert len(d) == 1 and all(len(d[0][c]) == 10 for c in core.TASKS)
+    assert core.recorded_seeds()[before:] == [(252002, "rehearsal training draw")]
+
+
+def test_no_part_t_module_holds_an_integer_literal_in_a_registered_or_test_seed_range() -> None:
+    import ast
+
+    files = [p for p in (ROOT / "studies/p10is2").rglob("*.py") if "partq" not in p.parts and "launch" not in p.parts]
+    bad: list[str] = []
+    for f in files:
+        for n in ast.walk(ast.parse(f.read_text(encoding="utf-8"))):
+            if isinstance(n, ast.Constant) and isinstance(n.value, int) and not isinstance(n.value, bool) and (250001 <= n.value <= 259999 or 330201 <= n.value <= 330299 or 934001 <= n.value <= 934999) and not (f.name == "core.py" and n.value in (252901, 252915)):  # the only exception: Part Q's own rehearsal-range assertion (252901-252914)
+                bad.append(f"{f.relative_to(ROOT)}:{n.lineno}: {n.value}")
+    assert bad == [], bad

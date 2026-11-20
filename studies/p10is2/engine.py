@@ -77,8 +77,8 @@ class SeedPlanT:
 
     def route_pieces_gen(self) -> torch.Generator:
         """The generator that draws the 200 WikiText-2 train pieces of the route accuracy on general text: the listed seed 250918 in a registered run; in any other mode the replicate's router stream (250918 is a registered-mode seed)."""
-        seed = int(self.cfg["seeds"]["route_accuracy_pieces"]) if self.mode == "registered" else int(self.values["data"]["router"])
-        return core.seeded_generator(seed, "route accuracy pieces", self.allowed | ({seed} if self.mode == "registered" else set()))
+        seed = int(self.values["route_pieces"])
+        return core.seeded_generator(seed, "route accuracy pieces", self.allowed | {seed})
 
     def code_seed(self) -> int:
         return int(self.values["data"]["code_hash"])

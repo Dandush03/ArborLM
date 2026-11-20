@@ -101,7 +101,7 @@ def test_grids_and_lists_equal_the_adr() -> None:
     assert T["seeds"]["replicate_bases"] == [250001, 250101, 250201] and T["seeds"]["offsets"] == [1, 2, 4, 10, 13] and "+1 training draw" in section("6") and "+13 router" in section("6")
     assert T["seeds"]["calibration_bases"] == [251001, 251101] and T["seeds"]["repeat_calibration_bases"] == [251201, 251301] and "251001 + 100·i, i = 0, 1" in section("6") and "251201 and 251301" in section("6")
     assert T["seeds"]["init_registered"] == [330201, 330211, 330221] and T["seeds"]["init_calibration"] == [330231, 330241] and T["seeds"]["init_repeat_calibration"] == [330261, 330271]
-    assert "330261 + j and 330271 + j" in section("6") and T["seeds"]["init_test"] == [330298, 330299] and "330298, 330299" in section("6")
+    assert "330261 + j and 330271 + j" in section("6") and T["seeds"]["init_test"] == [330281, 330289] and "330298, 330299" in section("6")  # the ADR text is immutable; registry revision 5 moved test mode to 330281 + 8 i + j
     assert T["seeds"]["init_roles"] == ["stage-1 store", "appended rows", "M-joint store", "D1", "second adapter of D-append", "D-joint", "E-table", "router projection and keys"]
     assert T["memory"]["read_layers"] == [4, 12] and Q["seeds"]["test_low"] == 934001 and Q["seeds"]["test_high"] == 934999 and "934001–934999" in section("6")
     assert T["arms"]["lookup_best_of"] == ["R-gloss", "R-gloss-icl", "R-nn", "R-icl", "E-table"] and "R-gloss, R-gloss-icl, R-nn, R-icl and E-table" in section("8.3")
@@ -131,7 +131,7 @@ def test_config_identity_fields() -> None:
             stage = {k: v for k, v in caps.items() if k != "total_hours"}
             used = {k: v for k, v in caps.items() if k != "reuse_hours"}  # reuse_hours belongs to a plan that reuses completed stages (attempt 3); the stages a plan does not run keep 0.0
             assert (all(v > 0.0 for v in used.values()) or caps["total_hours"] > 0.0 and any(v > 0.0 for v in stage.values())) and caps["total_hours"] >= sum(stage.values()) - 0.01 * len(stage)
-    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" == T["seeds"]["registry_checker_sha256"]
+    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" != T["seeds"]["registry_checker_sha256"] == "8ce47ab52abbe25b4b308ca2a1e7587f5461b13340f1faa2a0c0cff6804f4611"  # Part Q froze on r3; Part T cites r5
     assert core.load_config("Q")["paths"]["durable_packages"] == "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
     with pytest.raises(ValueError):
         core.load_config("T", ROOT / core.CONFIG_Q)

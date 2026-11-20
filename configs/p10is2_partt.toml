@@ -105,7 +105,10 @@ init_registered = [330201, 330211, 330221]   # + role j
 init_calibration = [330231, 330241]
 init_repeat_calibration = [330261, 330271]   # listed values, never the formula 330231 + 10 i at i = 2
 init_rehearsal = 330251
-init_test = [330298, 330299]
+init_test = [330281, 330289]   # revision 5 of the seed registry: 330281 + 8 i + j (the ADR's 330298, 330299 ran onto P10-I-S3's registered initialisation seeds)
+route_pieces_offset = 18        # outside registered mode the route-accuracy pieces use base + 18 (251019, 251119, 251219, 251319, 252019), never the router seed (base + 13)
+g5_probe = 250919               # gate G5's probe queries in the registered gates stage (registry revision 5)
+g5_probe_test = 934900          # the same probe outside registered mode (test range)
 init_roles = ["stage-1 store", "appended rows", "M-joint store", "D1", "second adapter of D-append", "D-joint", "E-table", "router projection and keys"]
 test_low = 934001
 test_high = 934999
@@ -115,8 +118,11 @@ rehearsal_set_low = 252001
 rehearsal_set_high = 252899
 init_low = 330201
 init_high = 330299
-registry_checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
-registry_checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+registry_checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r5.py"
+registry_checker_sha256 = "8ce47ab52abbe25b4b308ca2a1e7587f5461b13340f1faa2a0c0cff6804f4611"
+registry_addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R5.md"
+registry_addendum_sha256 = "19199e46d9f4e51d5650b9cfd9f3e1dd11730d45ae9fdada776a111e741ea865"
+own_file_globs = ["configs/p10is2_*", "studies/p10is2/*", "tests/test_p10is2_*"]   # the checker's built-in owner of this study (no --own needed)
 
 [caps]  # sections 9, 10
 measuring_rehearsal_hours = 3.0

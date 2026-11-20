@@ -133,9 +133,10 @@ def partt_replicate_values(cfg: Mapping[str, Any], mode: str, index: int = 0) ->
         base, init0 = int(s["test_low"]) + 100 * index, int(s["init_test"][index % 2])
     else:
         raise ValueError(f"unknown mode {mode!r}")
+    pieces = int(s["route_accuracy_pieces"]) if mode == "registered" else base + int(s["route_pieces_offset"])  # never the router seed (base + 13) outside registered mode
     data = {"training_draw": base + offs[0], "batch_order": base + offs[1], "permutation_controls": base + offs[2], "code_hash": base + offs[3], "router": base + offs[4]}
     init = {r: init0 + j for j, r in enumerate(roles)}
-    return {"base": base, "data": data, "init": init, "init_base": init0}
+    return {"base": base, "data": data, "init": init, "init_base": init0, "route_pieces": pieces}
 
 
 def partt_listed_seeds(cfg: Mapping[str, Any], mode: str) -> frozenset[int]:
@@ -147,6 +148,11 @@ def partt_listed_seeds(cfg: Mapping[str, Any], mode: str) -> frozenset[int]:
     if mode == "registered":
         out |= {int(cfg["seeds"]["analysis_bootstrap"]), int(cfg["seeds"]["route_accuracy_pieces"])}
     return frozenset(out)
+
+
+def g5_probe_seed(cfg: Mapping[str, Any], mode: str) -> int:
+    """Gate G5's probe seed: 250919 in a registered run, the test value elsewhere (no literal in code)."""
+    return int(cfg["seeds"]["g5_probe"] if mode == "registered" else cfg["seeds"]["g5_probe_test"])
 
 
 _RECORDED: list[tuple[int, str]] = []

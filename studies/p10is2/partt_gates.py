@@ -123,13 +123,13 @@ def compare_runs(cpu: tuple[Sequence[float], Sequence[torch.Tensor]], other: tup
     return {"passed": bool(ok), "max_loss_difference": dl, "loss_tolerance": float(t["mps_loss_tolerance"]), "max_relative_parameter_difference": rel, "parameter_tolerance": float(t["mps_parameter_relative_tolerance"])}
 
 
-def g5b(store: Any) -> dict[str, Any]:
+def g5b(store: Any, gen: torch.Generator) -> dict[str, Any]:
     """G5(b) (ADR-0022 section 12.3): a new store with gate 0 on an empty base changes nothing: with every gate at its initial 0 the store's read is exactly zero for any query, so adding it to the student adds
     nothing (checked on a clone of the store whose gates are set to 0, and on the store as it is only if its gates are 0)."""
     fresh = store.clone()
     for g in fresh.gates:
         g.data.zero_()
-    q = torch.nn.functional.normalize(torch.randn(7, 16, generator=torch.Generator().manual_seed(934901)), dim=-1)
+    q = torch.nn.functional.normalize(torch.randn(7, 16, generator=gen), dim=-1)
     zero = fresh.read(q)
     return {"passed": bool(torch.count_nonzero(zero) == 0), "max_abs_read": float(zero.abs().max())}
 
@@ -140,12 +140,12 @@ def g5(world: engine.WorldT, m_append: MemoryArm) -> dict[str, Any]:
     ident = general_by_construction(world.ctx, m_append)["bit_identical_to_student"]
     store = m_append.store.clone()
     k = store.stages - 1
-    q = torch.nn.functional.normalize(torch.randn(5, 16, generator=torch.Generator().manual_seed(934900)), dim=-1)
+    q = torch.nn.functional.normalize(torch.randn(5, 16, generator=core.seeded_generator(core.g5_probe_seed(world.cfg_t, world.plan_mode), "G5 probe", {core.g5_probe_seed(world.cfg_t, world.plan_mode)})), dim=-1)
     store.gates[k].data.zero_()
     before = store.read(q)
     store.values[k].data.add_(7.0)
     after = store.read(q)
-    b = g5b(m_append.store)
+    b = g5b(m_append.store, core.seeded_generator(core.g5_probe_seed(world.cfg_t, world.plan_mode), "G5(b) probe", {core.g5_probe_seed(world.cfg_t, world.plan_mode)}))
     return {"passed": bool(ident and torch.equal(before, after) and b["passed"]), "none_route_bit_identical": ident, "appended_values_isolated_by_gate": bool(torch.equal(before, after)), "new_store_gate_zero_adds_nothing": b}
 
 
