@@ -72,6 +72,7 @@ def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Ma
     scoring.require_evaluation_allowed(world)
     records: dict[str, dict[str, float]] = {}
     side: dict[str, Any] = {}
+    scoring.log_edit1_flags(world, r)  # section 5.3: the edit-distance-1 flags of E_A and E_B, stored beside the scores they are applied to
     rdir = snap_dir / "routers" / f"r{r}"
     if routers_mode == "load":
         routers = scoring.load_routers(rdir)

@@ -60,6 +60,8 @@ control_subsample = 300
 eval_panel = 1000
 d_con_panel = 300          # D_con (section 4.1): the size the units of the caps count (the Part Q bundle holds it)
 first_not_acquired_g = 0.50
+seen_items = 300           # the seen-item reads (section 8.5): Part Q's seen order, 300 per capability
+e_open_panel = 500         # E_open (section 4.1): the size the units of the caps count (the panel holds the items with a reference in the capability's language)
 
 [gates]  # section 8.2, 8.3
 acq_gap_min = 0.50

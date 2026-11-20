@@ -59,7 +59,7 @@ Order (ADR-0025 sections 7.1 and 10 as written, rulings 21 and 22): **measuring 
 ## What was exercised, and what never was
 
 - **Exercised at test size** (tiny synthetic world through the real launch scripts and `uv run --locked` in a throw-away clone; self-checks): the measuring rehearsal, the counting rehearsal with both forced events, caps by code, the candidate plan, the freeze (with the REAL counting charge, and its refusal of a changed cap and of a counting charge above the allowance), the registered `gates` and `train` stages, refusals on a changed frozen file, a missing Decision 2 and a changed cap, per-item storage and independent recomputation, the pinned M-ii cell, the report, the keep-awake watcher.
-- **Never exercised on real data:** calibration, both rehearsals, every registered stage, the real G1/G4-MPS/G8, the real item sizes (the item records will be large), the real durations, the `evaluate`/`combined`/`recompute` stages' memory, the cost and timing stages, and the A4 lines of the report (seen-item and E_open scores, the edit-distance-1 share and the scores without those items), which are **not implemented** (see the departure below).
+- **Never exercised on real data:** calibration, both rehearsals, every registered stage, the real G1/G4-MPS/G8, the real item sizes (the item records will be large), the real durations, the `evaluate`/`combined`/`recompute` stages' memory, the cost and timing stages, and the A4 lines of the report (implemented, never run on real data).
 - Faked in the end-to-end tests only: the registry-checker gate (tested on the real tree separately).
 
 ## Departures for the lead's ruling
@@ -78,15 +78,16 @@ Order (ADR-0025 sections 7.1 and 10 as written, rulings 21 and 22): **measuring 
 
 Ruling 19 (second addendum, `docs/decisions/ADR-0025-addendum-part-t-rulings-2.md`): this departure stands as a disclosed limitation, pending the auditor's reading of whether any Part T label reads Q_check; the report prints it.
 
-### R14's missing lines: seen-item scores, E_open scores, the edit-distance-1 share (for the auditor's ruling; nothing implemented)
+### The A4 lines (ruling 23): implemented
 
-The ADR-0025 sentences that ask for them:
-- Section 8.5, the annotations paragraph: "Seen-item and E_open scores are printed and enter nothing."
-- Section 4.1 (panel table): E_open is "Evaluation; combined tasks; descriptive. **Never scored before the registered run of Part T**" (so it is to be scored in it).
-- Section 5.3 ("What transfer is measured on"): "The share of evaluation items with a training source at word-level edit distance 1 (0.0816 in P10-S2's partition) is reported, and every score is also printed without those items; that figure enters no rule."
-- Part Q's seed table: 250912 "seen items" (the 300 seen-item training items per capability).
+The seen-item scores (M1 and M-append, the 300 seen items of Part Q's seed-250912 order restricted to the replicate's draw), the E_open scores (oracle route, S0 and the teacher on the same panel for reference), the edit-distance-1 flag of every E_A and E_B item against the replicate's training sources and the scores without those items are scored in the `evaluate` tasks, read through the checked door like everything else, stored in `item_records.json` and printed by the report as "A4 READING (reported, enters no label)". The labels read none of them (their registry keys are outside `partt_plan.required_keys`). Their units are counted in the caps (`data.seen_items`, `data.e_open_panel`).
 
-Why Part T as built scores neither, as far as I can tell (I found no sentence that says so; this is my reading of what the sections define):
-- The stage and registry definitions (section 5 and the keys `partt_plan.required_keys` takes from `quantities`) define reads on E_A, E_B, D_con, the subsamples, GEN and the combined set E_C only. No section 5 read, plan item or registry key names E_open or a seen-item panel, so the evaluate tasks contain none. The world builds the `E_open_<capability>` panels and carries the 300 seen items per replicate, but no function scores them.
-- The edit-distance-1 share: gate G1 computes `neighbour_share_distance_1` (recorded in `gates.json`); the report does not print it, and no code scores E_A/E_B without those items, because no per-item flag marks them. The stored per-item records (`item_records.json`) would allow it, given the item ids, which Part T does not store beside them.
-- I did not add any of this: each needs a new scored read and registry keys, which is a specification decision. PENDING the auditor's ruling.
+### Disclosures printed in the report template (audit section 4)
+
+- 4(a) Q_check by key only: ruling 19, above.
+- 4(c) The rehearsal world: rates measured on both-reference D_cal sentences (lengths may differ from E_A/E_B), stand-in panels of about 125 items, the identity C1 pairing (plumbing only), a sealed D_cal-based analysis.
+- 4(d) Untrained cells read from the trained cell of the same arm (`AliasMap`): the first real loading of BA cells, E-table B and M-ii's BA parent chain is in the registered run.
+
+### Audit N5 and N6
+
+GEN is stored per window (the base and the arm's mean NLL at both decision positions, the router's decisions, the strata) and `partt_items` recomputes `gen:token64` and `gen:first_marker` from them; the code refuses to store them if they do not reproduce `general_quality`'s figures. Not item-based and not reproduced from the stored records: `modification` (recomputable from the snapshots with one's own code), route accuracy and false-trigger counts, R-exact hit counts, and the combined C1/C2 means (frozen code only). After a recorded gate or ensemble failure the `analysis` stage skips the `recompute` predecessor, runs without a registry and records ENGINEERING-FAILURE (never a scientific label).

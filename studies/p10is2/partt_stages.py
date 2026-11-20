@@ -117,7 +117,8 @@ def execute_stage(args: argparse.Namespace, repo: Path, plan: planmod.Plan, mode
 
     cfg = core.load_config("T", repo / core.CONFIG_T)
     run_dir = Path(args.run_dir)
-    partt_tasks.require_predecessor(run_dir, args.stage, REGISTERED_STAGES)
+    if not (args.stage == "analysis" and partt_real.engineering_failures_of(run_dir)):  # N6: after a recorded engineering failure the analysis needs no recomputation: it records the stop (never a label)
+        partt_tasks.require_predecessor(run_dir, args.stage, REGISTERED_STAGES)
     partt_real.require_gates_passed(run_dir, args.stage)
     if args.stage in partt_tasks.TASK_STAGES:
         extra = ["--rehearsal", "--rehearsal-kind", getattr(args, "rehearsal_kind", "counting"), *(["--plan-file", str(args.plan_file)] if getattr(args, "plan_file", None) else [])] if mode == "rehearsal" else []

@@ -375,21 +375,28 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
         core.write_record(core.records_dir(run_dir) / "combined.json", {**core.envelope("cell_record", "T"), "combined": core.jsonable(comb)}, overwrite=True)
         out = {"records": len(comb)}
     elif stage in ("analysis", "report"):
-        require_recomputation(run_dir)  # the recomputation is a registered stage before this one; the results were merged at the end of evaluate and combined
-        reg_values = read_json(core.records_dir(run_dir) / "registry.json")
+        eng = engineering_failures_of(run_dir)
+        if not eng:  # N6: after a recorded engineering failure there may be no registry and no recomputation; the analysis then records the stop and derives nothing
+            require_recomputation(run_dir)  # the recomputation is a registered stage before this one; the results were merged at the end of evaluate and combined
+        rd = core.records_dir(run_dir)
+        reg_values = read_json(rd / "registry.json") if (rd / "registry.json").is_file() else {}
         if mode == "rehearsal":  # the rehearsal scored one replicate: the analysis and the report run on a registry keyed by the plan's labels, replicates 1 and 2 copied from 0 (listed), never a result
             reg_values, filled = partt_rehearsal.fill_registry(reg_values)
             write_json(core.records_dir(run_dir) / "analysis_registry_filled.json", {"filled_from_replicate_0": filled, "note": "plumbing for the analysis and the report; a rehearsal registry is never a result"})
         reg = Registry(reg_values)
-        side = read_json(core.records_dir(run_dir) / "side_records.json")["side"]
+        side = read_json(rd / "side_records.json")["side"] if (rd / "side_records.json").is_file() else {}
         comb = read_json(core.records_dir(run_dir) / "combined.json")["combined"] if (core.records_dir(run_dir) / "combined.json").is_file() else None
         errors = sorted(str(p) for p in (run_dir / "item_errors").glob("*.json")) if (run_dir / "item_errors").is_dir() else []
-        eng = engineering_failures_of(run_dir)
         ctx = {"U": int(calib["U"]), "converged": bool(calib.get("converged", True)), "draws": qres["draws_label"], "shared_share": shared_share([dict(s.t) for s in w.streams])}
         if (run_dir / "cost.json").is_file():  # the cost lines (section 8.5) when the cost stage has run; they enter no label
             from . import partt_cost
 
             ctx["cost_lines"] = partt_cost.lines(read_json(run_dir / "cost.json"))
+        if reg_values and not eng:  # the A4 readings (ruling 23): seen-item and E_open scores, the edit-distance-1 share and the scores without those items; reported, they enter no label
+            from . import partt_items
+
+            stored = read_json(rd / "item_records.json")["items"] if (rd / "item_records.json").is_file() else None
+            ctx["a4_lines"] = partt_items.a4_lines(reg_values, stored)
         res = analyse(reg, side, comb, ctx, required=sorted(partt_plan.required_keys()), thresholds=Thresholds.from_config(cfg), item_errors=errors, engineering_failure=eng)
         write_analysis(run_dir, res)
         out = {"status": res["status"]["status"]}
@@ -401,6 +408,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     led.charge_process(stage, mode, "main", time.monotonic() - t_proc)  # the wall time of this process, the world build inside it (ruling L2)
     if guard is not None:
         guard.__exit__()
+    (run_dir / "stages").mkdir(parents=True, exist_ok=True)
     write_json(run_dir / "stages" / f"{stage}.timing.json", {"stage": stage, "mode": mode, "world_build_seconds": world_build, "body_seconds": body, **partt_rehearsal.stats_end(st0, run_dir)})
     return json_safe(out)  # type: ignore[no-any-return]
 
@@ -511,7 +519,9 @@ def task_kinds(w: engine.WorldT, stage: str, task_id: str) -> dict[str, Any]:
     if stage == "gates":
         return {"seconds": {}, "units": {"gates:all": 1}, "note": "the gates run as one body: its seconds are the task body"}
     if stage == "evaluate":
-        units = {"score:reference": 2 * e} if task_id.endswith("|reference") else partt_caps.replicate_units(e, s, dcon)
+        n_open = sum(len(w.ctx.panels[f"E_open_{c}"].refs) for c in core.TASKS if f"E_open_{c}" in w.ctx.panels) // 2
+        n_seen = len(w.seen_items[0][core.TASKS[0]]) if getattr(w, "seen_items", None) else 0
+        units = {"score:reference": 2 * e + 2 * n_open} if task_id.endswith("|reference") else partt_caps.replicate_units(e, s, dcon, n_seen, n_open)
         return {"seconds": sec, "units": {k: v for k, v in units.items() if k in sec}, "gen_seconds_folded_into_plain": gen}
     return {"seconds": sec, "units": {"combined:arm-cell": int(scoring.KIND_CALLS.get("combined:arm-cell", 0))}}
 

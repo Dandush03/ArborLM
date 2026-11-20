@@ -20,11 +20,11 @@ TRAINED_TYPES = ("M1", "D1", "M-append", "M-seq", "M-ii", "D-append", "D-seq", "
 ORDER_ARMS_N, ORDERS_N, JOINT_N, ETABLE_N, SEP_N = 7, 2, 2, 2, 2
 
 
-def replicate_units(e: int, s: int, d_con: int) -> dict[str, int]:
+def replicate_units(e: int, s: int, d_con: int, seen: int = 0, open_panel: int = 0) -> dict[str, int]:
     """The greedy decodes of ONE replicate's evaluate task, by kind (audit section 5): full panels of 22 snapshot-pairs, the learned route reads, the controls on their subsamples, D_con, R-icl and R-gloss-icl."""
     pairs = ORDER_ARMS_N * ORDERS_N + JOINT_N + ETABLE_N + ORDERS_N + SEP_N  # the 14 two-stage cells, 2 joint, 2 E-table, M-append@append in each order, M-sep and D-sep = 22
     return {
-        "score:plain": pairs * 2 * e, "score:route": ORDERS_N * 2 * e, "score:control": 4 * CONTROL_RUNS * s * ORDERS_N + JOINT_N * CONTROL_RUNS * s, "score:dcon": 2 * 2 * d_con * ORDERS_N, "score:icl": 2 * 2 * e, "router:train": 1,
+        "score:plain": pairs * 2 * e + ORDERS_N * 2 * 2 * (seen + open_panel), "score:route": ORDERS_N * 2 * e, "score:control": 4 * CONTROL_RUNS * s * ORDERS_N + JOINT_N * CONTROL_RUNS * s, "score:dcon": 2 * 2 * d_con * ORDERS_N, "score:icl": 2 * 2 * e, "router:train": 1,
     }  # fmt: skip
 
 
@@ -32,11 +32,12 @@ def task_units(items: Mapping[str, Sequence[Mapping[str, Any]]], basis: Mapping[
     """Per stage, the plan's tasks with their units by kind: ``{"stage": [{"id", "units": {kind: n}}]}``. Counted from the plan's ITEMS (one task per trained cell; one per replicate for the evaluate and combined
     stages; one for the references, the gates, the recomputation, the controls check, the analysis and the report)."""
     e, s, d = int(basis["eval_panel"]), int(basis["control_subsample"]), int(basis["d_con_panel"])
+    seen, op = int(basis.get("seen_items", 0)), int(basis.get("e_open_panel", 0))
     out: dict[str, list[dict[str, Any]]] = {}
     out["gates"] = [{"id": "gates|all", "units": {"gates:all": 1}}]
     out["train"] = [{"id": c["id"], "units": {f"train:{c['arm']}": int(c["updates"])}} for c in items["train"]]
     reps = sorted({int(i["rep"]) for i in items["train"]})
-    out["evaluate"] = [{"id": f"evaluate|r{r}", "units": replicate_units(e, s, d)} for r in reps] + [{"id": "evaluate|reference", "units": {"score:reference": 2 * e}}]
+    out["evaluate"] = [{"id": f"evaluate|r{r}", "units": replicate_units(e, s, d, seen, op)} for r in reps] + [{"id": "evaluate|reference", "units": {"score:reference": 2 * e + 2 * op}}]
     out["controls"] = [{"id": "controls|check", "units": {"controls:check": 1}}]
     per_rep_combined = {r: sum(1 for i in items["combined"] if i.get("rep") == r) for r in reps}
     out["combined"] = [{"id": f"combined|r{r}", "units": {"combined:arm-cell": per_rep_combined[r]}} for r in reps] + [{"id": "combined|reference", "units": {"combined:arm-cell": 2}}]
@@ -70,7 +71,7 @@ def project_stage_seconds(items: Mapping[str, Sequence[Mapping[str, Any]]], basi
 
 def basis_of(cfg: Mapping[str, Any]) -> dict[str, int]:
     d = cfg["data"]
-    return {"eval_panel": int(d["eval_panel"]), "control_subsample": int(d["control_subsample"]), "d_con_panel": int(d["d_con_panel"])}
+    return {"eval_panel": int(d["eval_panel"]), "control_subsample": int(d["control_subsample"]), "d_con_panel": int(d["d_con_panel"]), "seen_items": int(d.get("seen_items", 0)), "e_open_panel": int(d.get("e_open_panel", 0))}
 
 
 def counting_projection_seconds(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict[str, Any]:

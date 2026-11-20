@@ -73,6 +73,8 @@ def companion_blocks(derived: Mapping[str, Any], ctx: Mapping[str, Any]) -> list
         out.append(line(f"ANNOTATION {aname}", f"holds {a.get('holds')}; {compact(a.get('detail'))}", ctx))
     for text in ctx.get("cost_lines") or []:
         out.append(line("COST", text, ctx))
+    for text in ctx.get("a4_lines") or []:
+        out.append(line("A4 READING (reported, enters no label)", text, ctx))
     return out
 
 
@@ -95,6 +97,8 @@ def render(status: Mapping[str, Any], derived: Mapping[str, Any] | None, ctx: Ma
     blocks.append(line("GENERAL-QUALITY", g["label"] + (f" ({g['note']})" if g.get("note") else ""), ctx))
     blocks.append(line("MODIFICATION (M-ii, descriptive)", derived["MODIFICATION"]["label"], ctx))
     blocks += companion_blocks(derived, ctx)
+    blocks.append(line("DISCLOSED LIMITATION (rehearsal world, audit 4c)", "the caps and the per-unit rates were measured by rehearsals whose evaluation panels were stand-ins made of four disjoint parts of D_cal (both-reference sentences whose lengths may differ from E_A and E_B; about 125 items, not 1,000); the rehearsals' combined task paired each sentence with itself (the identity pairing: plumbing only); their analysis ran on D_cal-based numbers and is sealed", ctx))
+    blocks.append(line("DISCLOSED LIMITATION (untrained cells in rehearsals, audit 4d)", "the rehearsals trained one cell of each of the ten types and read the cells they did not train (order BA, E-table on capability B, M-ii's BA parent chain) from the trained cell of the same arm; the first real loading of those cells is in this registered run", ctx))
     blocks.append(line("DISCLOSED LIMITATION (ruling 19)", "gate G1 tests Q_check against the training streams by English key only: Part Q stored no Q_check identity groups, so a paraphrase that shares an identity group with a training item is not detected", ctx))
     blocks.append(core.under_line(core.FIXED_NOTE))
     text = "\n\n".join(blocks)

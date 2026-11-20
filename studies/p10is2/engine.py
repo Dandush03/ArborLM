@@ -122,8 +122,14 @@ def build_world_t(bundle: DataBundle, cfg: Mapping[str, Any], draws: Sequence[Ma
     w.cfg_t, w.plan_mode, w.extra_seeds = cfg, plan_mode, tuple(extra_seeds)
     w.streams = [Streams({c: list(d[c]) for c in core.TASKS}, {c: [] for c in core.TASKS}) for d in draws]  # type: ignore[assignment]
     w.replicates = len(draws)
-    n_seen = 300
-    w.seen_items = [{c: [x for x in s.t[c]][:n_seen] for c in core.TASKS} for s in w.streams]  # type: ignore[attr-defined]
+    n_seen = int(cfg["data"]["seen_items"])
+    w.seen_items = []
+    for s in w.streams:  # the seen items are Part Q's seed-250912 order (stored in the bundle) restricted to the replicate's draw, not the first 300 of the draw (audit A4)
+        per: dict[str, list[TrainItem]] = {}
+        for c in core.TASKS:
+            in_draw = {x.key: x for x in s.t[c]}
+            per[c] = [in_draw[k] for k in bundle.seen_order[c] if k in in_draw][:n_seen]
+        w.seen_items.append(per)  # type: ignore[attr-defined]
     return w
 
 
