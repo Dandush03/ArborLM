@@ -263,8 +263,10 @@ def require_log_pushed(repo: Path, cfg: Any, need: str | None, session: str | No
     if now != url:
         raise StageRefused(f"refused: the upstream's remote {remote!r} has the URL {now!r}, not the recorded {url!r} (ruling 35)")
     branch = str(rl.get("remote_branch", "")).strip()
-    if branch and upname != f"{remote}/{branch}":
-        raise StageRefused(f"refused: the upstream is {upname}, not the recorded {remote}/{branch} (ruling 35)")
+    if not branch:
+        raise StageRefused("refused: PENDING LEAD REVIEW: [calibration_log] remote_branch is empty: the human lead records the branch the calibration log is pushed to (ruling 38b)")
+    if upname != f"{remote}/{branch}":
+        raise StageRefused(f"refused: the upstream is {upname}, not exactly the recorded {remote}/{branch} (ruling 38b)")
     rel = str(core.CALIBRATION_LOG)
     head = core.git(repo, "show", f"HEAD:{rel}")
     pushed = core.git(repo, "show", f"@{{u}}:{rel}")
@@ -513,6 +515,9 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
     if not args.part_q_plan:
         raise StageRefused("refused: calibrate needs --part-q-plan: the checked door admits generation/result.json through Part Q's plan reuse list")
     pending = [e for e in read_calibration_log(repo)]
+    opened_now = open_session(pending, rep)
+    if opened_now is not None and any(e.get("repetition") == rep for e in pending[pending.index(opened_now) + 1 :]):
+        require_log_pushed(repo, cfg, "head")  # ruling 38a: a resume (any session after the first) needs the log commit at HEAD pushed before any unit trains: the lead pushes after each stop
     head_now = core.git(repo, "show", f"HEAD:{core.CALIBRATION_LOG}")
     if head_now.returncode == 0 and (repo / core.CALIBRATION_LOG).read_bytes() != head_now.stdout:  # lines of an earlier run that could not be committed (or a commit that failed): committed first
         commit_log_line(repo, str(pending[-1].get("session", "-")) if pending else "-", "pending")

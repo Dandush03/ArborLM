@@ -39,7 +39,7 @@ def add_remote(r: Path, url: str | None = None) -> Path:
     subprocess.run(["git", "init", "-q", "--bare", str(bare)], check=True, capture_output=True)  # noqa: S603, S607
     git(r, "remote", "add", "origin", str(bare))
     cfg = r / core.CONFIG_T
-    cfg.write_text(cfg.read_text().replace('remote_url = ""', f'remote_url = "{url or bare}"'))
+    cfg.write_text(cfg.read_text().replace('remote_url = ""', f'remote_url = "{url or bare}"').replace('remote_branch = ""', 'remote_branch = "main"'))
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "the remote the log is pushed to")
     git(r, "push", "-q", "-u", "origin", "HEAD:main")
@@ -207,6 +207,7 @@ def test_a_calibration_that_stops_is_logged_charged_and_resumed_by_the_same_comm
         partt_stages.main(args(r, q))
     assert [e["event"] for e in partt_stages.read_calibration_log(r)] == ["start", "stopped"]
     assert (core.calibration_dir(r) / "charged_ledger.json").is_file()  # charged also when it stops
+    push(r)  # the lead pushes after the stop (ruling 38a)
     seen: dict[str, float] = {}
 
     def fine(repo: Path, qdir: Path, run_dir: Path, repetition: int, plan: Path | None, cap_seconds: float, on_unit: Any = None, on_begin: Any = None) -> dict[str, Any]:
@@ -494,6 +495,7 @@ def test_a_failed_log_commit_stops_the_session_paused_before_the_next_unit_and_t
     with pytest.raises(partt_stages.LogCommitFailed):
         partt_stages.main(args(r, q))
     assert trained == ["u1"]  # PAUSED before the next unit
+    push(r)
     fail["on"] = False
     assert partt_stages.main(args(r, q)) == 0
     assert trained == ["u1", "u2"]  # u1 was not redrawn: its pending line was committed first and its state accepted
@@ -563,6 +565,7 @@ def test_a_begun_unit_without_a_committed_result_is_not_retrained_silently(tmp_p
     with pytest.raises(MemoryError):
         partt_stages.main(args(r, q))
     assert "unit_begin" in [e["event"] for e in partt_stages.read_calibration_log(r)] and "Part T: calibration log" in git(r, "log", "-3", "--format=%s")
+    push(r)
     monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
     assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # begun, never finished: needs the lead's recorded decision
     assert list((core.calibration_dir(r) / "state" / "attempts").glob("u1.*.json"))  # its state was set aside, not deleted
@@ -731,6 +734,7 @@ def test_the_session_identity_covers_the_import_closure_both_configs_and_the_loc
     monkeypatch.setattr(partt_real, "calibrate_command", stopping_after_one_unit)
     with pytest.raises(MemoryError):
         partt_stages.main(args(r, q))
+    push(r)
     monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
     for rel in ("studies/p10is2/partt_tasks.py", "studies/p10s2/stub.py", "src/arborlm/stub.py", "configs/p10s2_transfer.toml", str(core.CONFIG_T), "uv.lock"):
         f = r / rel
@@ -756,3 +760,43 @@ def test_the_budget_bound_is_the_human_leads_and_three_commands_refuse_without_i
         partt_stages.check_study_budget(bounded, 60.01, 7.5)
     with pytest.raises(core.StageRefused, match="human lead"):
         partt_stages.check_study_budget(cfg, 1.0, 0.0)
+
+
+def test_a_resume_needs_the_head_log_commit_pushed_before_any_unit_trains(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    open_and_commit(r, q)
+    monkeypatch.setattr(partt_real, "calibrate_command", stopping_after_one_unit)
+    with pytest.raises(MemoryError):
+        partt_stages.main(args(r, q))
+    trained: list[str] = []
+
+    def resumed(repo: Path, qdir: Path, run_dir: Path, repetition: int, plan: Path | None, cap_seconds: float, on_unit: Any = None, on_begin: Any = None) -> dict[str, Any]:
+        trained.append("ran")
+        return fake_calibrate(repo, qdir, run_dir, repetition, plan, cap_seconds)
+
+    monkeypatch.setattr(partt_real, "calibrate_command", resumed)
+    before = [e["event"] for e in partt_stages.read_calibration_log(r)]
+    assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # the stop's log commits are local: the lead has not pushed
+    assert trained == [] and [e["event"] for e in partt_stages.read_calibration_log(r)] == before  # nothing trained, nothing written
+    push(r)
+    assert partt_stages.main(args(r, q)) == 0 and trained == ["ran"]
+
+
+def test_the_remote_branch_must_be_recorded_and_the_upstream_exactly_that_branch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
+    q = make_part_q(tmp_path / "partq")
+    r = repo_with_cap(tmp_path / "r")
+    open_and_commit(r, q)
+    cfg_path = r / core.CONFIG_T
+    keep = cfg_path.read_text()
+    cfg_path.write_text(keep.replace('remote_branch = "main"', 'remote_branch = ""'))
+    assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # an empty branch is the human lead's to fill
+    cfg_path.write_text(keep.replace('remote_branch = "main"', 'remote_branch = "calibration"'))
+    assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # @{u} is origin/main, not the recorded branch of the same remote
+    cfg_path.write_text(keep)
+    git(r, "push", "-q", "origin", "HEAD:other")
+    git(r, "branch", "--set-upstream-to=origin/other")
+    assert partt_stages.main(args(r, q)) == partt_stages.EXIT_REFUSED  # another branch of the same remote
+    git(r, "branch", "--set-upstream-to=origin/main")
+    assert partt_stages.main(args(r, q)) == 0

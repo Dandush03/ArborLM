@@ -44,7 +44,7 @@ def synthetic_repo(tmp: Path, *, installable: bool = False, with_plan: bool = Tr
     bare = tmp / "remote.git"  # a local bare repository as the calibration log's remote (no network); the config records its URL (ruling 35)
     subprocess.run(["git", "init", "-q", "--bare", str(bare)], check=True, capture_output=True)  # noqa: S603, S607
     git(r, "remote", "add", "origin", str(bare))
-    cfg_path.write_text(cfg_path.read_text().replace('remote_url = ""', f'remote_url = "{bare}"'))
+    cfg_path.write_text(cfg_path.read_text().replace('remote_url = ""', f'remote_url = "{bare}"').replace('remote_branch = ""', 'remote_branch = "main"'))
     git(r, "add", "-A")
     git(r, "commit", "-q", "-m", "the remote the log is pushed to")
     git(r, "push", "-q", "-u", "origin", "HEAD:main")
