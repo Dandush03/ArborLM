@@ -182,6 +182,10 @@ def test_part_t_freeze_refuses_provisional_caps_and_missing_calibration_records(
     cfg = core.load_config("T", repo / core.CONFIG_T)
     write_json(repo / core.PLAN_T, core.jsonable(partt_plan.build_candidate(repo, repo / "runs", cfg, CALIB, walk=FAKE_WALK)))
     args = argparse.Namespace(repo=str(repo), measuring_rehearsal=str(tmp_path / "m.json"), counting_rehearsal=str(tmp_path / "c.json"), attest_sealed_unopened="lead,implementer,auditor", seal_broken=False)
+    with pytest.raises(core.StageRefused, match="budget bound"):  # ruling 33: the human lead's bound comes first
+        partt_stages.cmd_freeze(args)
+    cfg_path = repo / core.CONFIG_T
+    cfg_path.write_text(cfg_path.read_text().replace("study_budget_hours = 0.0", "study_budget_hours = 1000.0"))
     with pytest.raises(core.StageRefused, match="provisional"):
         partt_stages.cmd_freeze(args)
 
