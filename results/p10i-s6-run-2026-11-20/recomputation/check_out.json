@@ -1,0 +1,1903 @@
+{
+ "report_checks": [
+  {
+   "name": "table rows",
+   "printed": 5,
+   "mine": 5,
+   "equal": true
+  },
+  {
+   "name": "table k0 col0",
+   "printed": "0",
+   "mine": "0",
+   "equal": true
+  },
+  {
+   "name": "table k0 col1",
+   "printed": "16384",
+   "mine": "16384",
+   "equal": true
+  },
+  {
+   "name": "table k0 col2",
+   "printed": "0.03",
+   "mine": "0.03",
+   "equal": true
+  },
+  {
+   "name": "table k0 col3",
+   "printed": "0.01",
+   "mine": "0.01",
+   "equal": true
+  },
+  {
+   "name": "table k0 col4",
+   "printed": "2.2122",
+   "mine": "2.2122",
+   "equal": true
+  },
+  {
+   "name": "table k0 col5",
+   "printed": "2.2245",
+   "mine": "2.2245",
+   "equal": true
+  },
+  {
+   "name": "table k0 col6",
+   "printed": "0.0194",
+   "mine": "0.0194",
+   "equal": true
+  },
+  {
+   "name": "table k0 col7",
+   "printed": "0.0208",
+   "mine": "0.0208",
+   "equal": true
+  },
+  {
+   "name": "table k0 col8",
+   "printed": "0.0202",
+   "mine": "0.0202",
+   "equal": true
+  },
+  {
+   "name": "table k0 col9",
+   "printed": "0.0208",
+   "mine": "0.0208",
+   "equal": true
+  },
+  {
+   "name": "table k0 col10",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k0 col11",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k0 col12",
+   "printed": "0.0124",
+   "mine": "0.0124",
+   "equal": true
+  },
+  {
+   "name": "table k0 col13",
+   "printed": "UNDECIDED",
+   "mine": "UNDECIDED",
+   "equal": true
+  },
+  {
+   "name": "table k1 col0",
+   "printed": "1",
+   "mine": "1",
+   "equal": true
+  },
+  {
+   "name": "table k1 col1",
+   "printed": "32768",
+   "mine": "32768",
+   "equal": true
+  },
+  {
+   "name": "table k1 col2",
+   "printed": "0.1",
+   "mine": "0.1",
+   "equal": true
+  },
+  {
+   "name": "table k1 col3",
+   "printed": "0.01",
+   "mine": "0.01",
+   "equal": true
+  },
+  {
+   "name": "table k1 col4",
+   "printed": "2.1925",
+   "mine": "2.1925",
+   "equal": true
+  },
+  {
+   "name": "table k1 col5",
+   "printed": "2.2056",
+   "mine": "2.2056",
+   "equal": true
+  },
+  {
+   "name": "table k1 col6",
+   "printed": "0.0197",
+   "mine": "0.0197",
+   "equal": true
+  },
+  {
+   "name": "table k1 col7",
+   "printed": "0.0189",
+   "mine": "0.0189",
+   "equal": true
+  },
+  {
+   "name": "table k1 col8",
+   "printed": "0.0201",
+   "mine": "0.0201",
+   "equal": true
+  },
+  {
+   "name": "table k1 col9",
+   "printed": "0.0189",
+   "mine": "0.0189",
+   "equal": true
+  },
+  {
+   "name": "table k1 col10",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k1 col11",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k1 col12",
+   "printed": "0.0131",
+   "mine": "0.0131",
+   "equal": true
+  },
+  {
+   "name": "table k1 col13",
+   "printed": "UNDECIDED",
+   "mine": "UNDECIDED",
+   "equal": true
+  },
+  {
+   "name": "table k2 col0",
+   "printed": "2",
+   "mine": "2",
+   "equal": true
+  },
+  {
+   "name": "table k2 col1",
+   "printed": "65536",
+   "mine": "65536",
+   "equal": true
+  },
+  {
+   "name": "table k2 col2",
+   "printed": "0.03",
+   "mine": "0.03",
+   "equal": true
+  },
+  {
+   "name": "table k2 col3",
+   "printed": "0.01",
+   "mine": "0.01",
+   "equal": true
+  },
+  {
+   "name": "table k2 col4",
+   "printed": "2.1742",
+   "mine": "2.1742",
+   "equal": true
+  },
+  {
+   "name": "table k2 col5",
+   "printed": "2.1879",
+   "mine": "2.1879",
+   "equal": true
+  },
+  {
+   "name": "table k2 col6",
+   "printed": "0.0183",
+   "mine": "0.0183",
+   "equal": true
+  },
+  {
+   "name": "table k2 col7",
+   "printed": "0.0177",
+   "mine": "0.0177",
+   "equal": true
+  },
+  {
+   "name": "table k2 col8",
+   "printed": "0.0182",
+   "mine": "0.0182",
+   "equal": true
+  },
+  {
+   "name": "table k2 col9",
+   "printed": "0.0177",
+   "mine": "0.0177",
+   "equal": true
+  },
+  {
+   "name": "table k2 col10",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k2 col11",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k2 col12",
+   "printed": "0.0137",
+   "mine": "0.0137",
+   "equal": true
+  },
+  {
+   "name": "table k2 col13",
+   "printed": "UNDECIDED",
+   "mine": "UNDECIDED",
+   "equal": true
+  },
+  {
+   "name": "table k3 col0",
+   "printed": "3",
+   "mine": "3",
+   "equal": true
+  },
+  {
+   "name": "table k3 col1",
+   "printed": "131072",
+   "mine": "131072",
+   "equal": true
+  },
+  {
+   "name": "table k3 col2",
+   "printed": "0.1",
+   "mine": "0.1",
+   "equal": true
+  },
+  {
+   "name": "table k3 col3",
+   "printed": "0.01",
+   "mine": "0.01",
+   "equal": true
+  },
+  {
+   "name": "table k3 col4",
+   "printed": "2.1576",
+   "mine": "2.1576",
+   "equal": true
+  },
+  {
+   "name": "table k3 col5",
+   "printed": "2.1695",
+   "mine": "2.1695",
+   "equal": true
+  },
+  {
+   "name": "table k3 col6",
+   "printed": "0.0166",
+   "mine": "0.0166",
+   "equal": true
+  },
+  {
+   "name": "table k3 col7",
+   "printed": "0.0184",
+   "mine": "0.0184",
+   "equal": true
+  },
+  {
+   "name": "table k3 col8",
+   "printed": "0.0159",
+   "mine": "0.0159",
+   "equal": true
+  },
+  {
+   "name": "table k3 col9",
+   "printed": "0.0184",
+   "mine": "0.0184",
+   "equal": true
+  },
+  {
+   "name": "table k3 col10",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k3 col11",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k3 col12",
+   "printed": "0.0119",
+   "mine": "0.0119",
+   "equal": true
+  },
+  {
+   "name": "table k3 col13",
+   "printed": "UNDECIDED",
+   "mine": "UNDECIDED",
+   "equal": true
+  },
+  {
+   "name": "table k4 col0",
+   "printed": "4",
+   "mine": "4",
+   "equal": true
+  },
+  {
+   "name": "table k4 col1",
+   "printed": "262144",
+   "mine": "262144",
+   "equal": true
+  },
+  {
+   "name": "table k4 col2",
+   "printed": "0.003",
+   "mine": "0.003",
+   "equal": true
+  },
+  {
+   "name": "table k4 col3",
+   "printed": "0.01",
+   "mine": "0.01",
+   "equal": true
+  },
+  {
+   "name": "table k4 col4",
+   "printed": "2.1454",
+   "mine": "2.1454",
+   "equal": true
+  },
+  {
+   "name": "table k4 col5",
+   "printed": "2.1522",
+   "mine": "2.1522",
+   "equal": true
+  },
+  {
+   "name": "table k4 col6",
+   "printed": "0.0122",
+   "mine": "0.0122",
+   "equal": true
+  },
+  {
+   "name": "table k4 col7",
+   "printed": "0.0173",
+   "mine": "0.0173",
+   "equal": true
+  },
+  {
+   "name": "table k4 col8",
+   "printed": "0.0121",
+   "mine": "0.0121",
+   "equal": true
+  },
+  {
+   "name": "table k4 col9",
+   "printed": "0.0173",
+   "mine": "0.0173",
+   "equal": true
+  },
+  {
+   "name": "table k4 col10",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k4 col11",
+   "printed": "NOT CONVERGED",
+   "mine": "NOT CONVERGED",
+   "equal": true
+  },
+  {
+   "name": "table k4 col12",
+   "printed": "0.0068",
+   "mine": "0.0068",
+   "equal": true
+  },
+  {
+   "name": "table k4 col13",
+   "printed": "M-AHEAD",
+   "mine": "M-AHEAD",
+   "equal": true
+  },
+  {
+   "name": "line P label",
+   "printed": "CONVERGENCE NOT REACHED (BOTH STILL IMPROVING)",
+   "mine": "CONVERGENCE NOT REACHED (BOTH STILL IMPROVING)",
+   "equal": true
+  },
+  {
+   "name": "trend inside line P",
+   "printed": "LEAD SHRINKING (Δ = -0.0056; 0.0124, 0.0131, 0.0137, 0.0119, 0.0068); over 16,384 to U_max updates only; descriptive; this says nothing about the ordering at convergence and is not the label PERSISTS.",
+   "mine": "LEAD SHRINKING (Δ = -0.0056; 0.0124, 0.0131, 0.0137, 0.0119, 0.0068); over 16,384 to U_max updates only; descriptive; this says nothing about the ordering at convergence and is not the label PERSISTS.",
+   "equal": true
+  },
+  {
+   "name": "trend line",
+   "printed": "LEAD SHRINKING (Δ = -0.0056; 0.0124, 0.0131, 0.0137, 0.0119, 0.0068); over 16,384 to U_max updates only; descriptive; this says nothing about the ordering at convergence and is not the label PERSISTS.",
+   "mine": "LEAD SHRINKING (Δ = -0.0056; 0.0124, 0.0131, 0.0137, 0.0119, 0.0068); over 16,384 to U_max updates only; descriptive; this says nothing about the ordering at convergence and is not the label PERSISTS.",
+   "equal": true
+  },
+  {
+   "name": "row/R/K*/kmax/depq",
+   "printed": [
+    "12",
+    "4",
+    "None",
+    "4",
+    "False"
+   ],
+   "mine": [
+    "12",
+    "4",
+    "None",
+    "4",
+    "False"
+   ],
+   "equal": true
+  },
+  {
+   "name": "lead sentence",
+   "printed": "- |mean Q(k_max)| = 0.0068; δ(M-FLAT, k_max) = 0.0122; δ(D-ADAPT, k_max) = 0.0173. an arm is still improving per doubling by at least the size of the lead",
+   "mine": "- |mean Q(k_max)| = 0.0068; δ(M-FLAT, k_max) = 0.0122; δ(D-ADAPT, k_max) = 0.0173. an arm is still improving per doubling by at least the size of the lead",
+   "equal": true
+  },
+  {
+   "name": "D[FLAT]",
+   "printed": "DEPENDENT",
+   "mine": "DEPENDENT",
+   "equal": true
+  },
+  {
+   "name": "D[FLAT] detail",
+   "printed": "- failing: []; collapsed cells: []; cells with H_used > B: 27; mean B - H_vmean: -0.0030",
+   "mine": "- failing: []; collapsed cells: []; cells with H_used > B: 27; mean B - H_vmean: -0.0030",
+   "equal": true
+  },
+  {
+   "name": "XMD k0",
+   "printed": "- rung 0: mean 0.2321 (min 0.0899, max 0.5315, cells above 0: 27)",
+   "mine": "- rung 0: mean 0.2321 (min 0.0899, max 0.5315, cells above 0: 27)",
+   "equal": true
+  },
+  {
+   "name": "harm k0",
+   "printed": "- rung 0: B-H_used -0.1113 (27 cells worse than BASE); B-H_mean -0.0011 (15); B-H_vmean -0.0008 (14)",
+   "mine": "- rung 0: B-H_used -0.1113 (27 cells worse than BASE); B-H_mean -0.0011 (15); B-H_vmean -0.0008 (14)",
+   "equal": true
+  },
+  {
+   "name": "XMD k1",
+   "printed": "- rung 1: mean 0.3434 (min 0.1063, max 0.8817, cells above 0: 27)",
+   "mine": "- rung 1: mean 0.3434 (min 0.1063, max 0.8817, cells above 0: 27)",
+   "equal": true
+  },
+  {
+   "name": "harm k1",
+   "printed": "- rung 1: B-H_used -0.1366 (27 cells worse than BASE); B-H_mean -0.0028 (17); B-H_vmean -0.0024 (17)",
+   "mine": "- rung 1: B-H_used -0.1366 (27 cells worse than BASE); B-H_mean -0.0028 (17); B-H_vmean -0.0024 (17)",
+   "equal": true
+  },
+  {
+   "name": "XMD k2",
+   "printed": "- rung 2: mean 0.4937 (min 0.1257, max 1.1253, cells above 0: 27)",
+   "mine": "- rung 2: mean 0.4937 (min 0.1257, max 1.1253, cells above 0: 27)",
+   "equal": true
+  },
+  {
+   "name": "harm k2",
+   "printed": "- rung 2: B-H_used -0.1701 (27 cells worse than BASE); B-H_mean -0.0027 (16); B-H_vmean -0.0023 (16)",
+   "mine": "- rung 2: B-H_used -0.1701 (27 cells worse than BASE); B-H_mean -0.0027 (16); B-H_vmean -0.0023 (16)",
+   "equal": true
+  },
+  {
+   "name": "XMD k3",
+   "printed": "- rung 3: mean 0.6340 (min 0.1581, max 1.3695, cells above 0: 27)",
+   "mine": "- rung 3: mean 0.6340 (min 0.1581, max 1.3695, cells above 0: 27)",
+   "equal": true
+  },
+  {
+   "name": "harm k3",
+   "printed": "- rung 3: B-H_used -0.2103 (27 cells worse than BASE); B-H_mean -0.0060 (19); B-H_vmean -0.0054 (18)",
+   "mine": "- rung 3: B-H_used -0.2103 (27 cells worse than BASE); B-H_mean -0.0060 (19); B-H_vmean -0.0054 (18)",
+   "equal": true
+  },
+  {
+   "name": "XMD k4",
+   "printed": "- rung 4: mean 0.7791 (min 0.2186, max 1.4823, cells above 0: 27)",
+   "mine": "- rung 4: mean 0.7791 (min 0.2186, max 1.4823, cells above 0: 27)",
+   "equal": true
+  },
+  {
+   "name": "harm k4",
+   "printed": "- rung 4: B-H_used -0.2266 (27 cells worse than BASE); B-H_mean -0.0036 (17); B-H_vmean -0.0030 (17)",
+   "mine": "- rung 4: B-H_used -0.2266 (27 cells worse than BASE); B-H_mean -0.0036 (17); B-H_vmean -0.0030 (17)",
+   "equal": true
+  },
+  {
+   "name": "R16/OA",
+   "printed": [
+    "REPLICATED AT 16,384",
+    "REPLICATED AT 16,384"
+   ],
+   "mine": [
+    "REPLICATED AT 16,384",
+    "REPLICATED AT 16,384"
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta M-FLAT k0 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.018759589021404732,
+    0.015405524522066116,
+    0.009092119832833312,
+    0.024717366322875023,
+    0.023786744102835655,
+    0.01859316974878311,
+    0.021608267600337516,
+    0.017106973876555465,
+    0.025275082637866042
+   ],
+   "mine": [
+    0.018759589021404732,
+    0.015405524522066116,
+    0.009092119832833312,
+    0.024717366322875023,
+    0.023786744102835655,
+    0.01859316974878311,
+    0.021608267600337516,
+    0.017106973876555465,
+    0.025275082637866042
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta M-FLAT k0 == analysis.delta_per_parent",
+   "printed": [
+    0.02064875327050686,
+    0.015387217203775894,
+    0.00932837153474475,
+    0.02710685196022178,
+    0.025614046802123536,
+    0.018117833882570267,
+    0.022755981112519752,
+    0.017180385688940536,
+    0.025931348403294585
+   ],
+   "mine": [
+    0.02064875327050686,
+    0.015387217203775894,
+    0.00932837153474475,
+    0.02710685196022178,
+    0.025614046802123536,
+    0.018117833882570267,
+    0.022755981112519752,
+    0.017180385688940536,
+    0.025931348403294585
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta M-FLAT k1 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.023697312300403617,
+    0.016837646563848008,
+    0.012387591103713014,
+    0.024421707416574456,
+    0.028043102473020554,
+    0.018929094076156616,
+    0.016990368564923752,
+    0.014280953754981507,
+    0.021470083544651963
+   ],
+   "mine": [
+    0.023697312300403617,
+    0.016837646563848008,
+    0.012387591103713014,
+    0.024421707416574456,
+    0.028043102473020554,
+    0.018929094076156616,
+    0.016990368564923752,
+    0.014280953754981507,
+    0.021470083544651963
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta M-FLAT k1 == analysis.delta_per_parent",
+   "printed": [
+    0.02398156374692917,
+    0.016638124982515823,
+    0.010991234332323074,
+    0.02410443437596177,
+    0.027031019950906288,
+    0.019924682875474442,
+    0.01900660867492343,
+    0.01608280837535858,
+    0.023238081485033035
+   ],
+   "mine": [
+    0.02398156374692917,
+    0.016638124982515823,
+    0.010991234332323074,
+    0.02410443437596177,
+    0.027031019950906288,
+    0.019924682875474442,
+    0.01900660867492343,
+    0.01608280837535858,
+    0.023238081485033035
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta M-FLAT k2 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.019533661504586686,
+    0.012606075654427062,
+    0.011821349461873076,
+    0.022508371621370316,
+    0.020716167986392975,
+    0.018291987478733063,
+    0.02259739550451423,
+    0.016244710733493317,
+    0.020326041926939986
+   ],
+   "mine": [
+    0.019533661504586686,
+    0.012606075654427062,
+    0.011821349461873076,
+    0.022508371621370316,
+    0.020716167986392975,
+    0.018291987478733063,
+    0.02259739550451423,
+    0.016244710733493317,
+    0.020326041926939986
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta M-FLAT k2 == analysis.delta_per_parent",
+   "printed": [
+    0.018701973060766708,
+    0.012169831742842696,
+    0.01232210050026561,
+    0.025339654957254876,
+    0.021844993034998428,
+    0.0185338159402213,
+    0.021041636665661834,
+    0.014464903622865677,
+    0.01906490946809436
+   ],
+   "mine": [
+    0.018701973060766708,
+    0.012169831742842696,
+    0.01232210050026561,
+    0.025339654957254876,
+    0.021844993034998428,
+    0.0185338159402213,
+    0.021041636665661834,
+    0.014464903622865677,
+    0.01906490946809436
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta M-FLAT k3 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.02017441764473915,
+    0.017961036413908005,
+    0.01353277638554573,
+    0.015858348459005356,
+    0.020260637626051903,
+    0.01307360207041075,
+    0.017122967789570787,
+    0.014016475528478622,
+    0.017550707484285333
+   ],
+   "mine": [
+    0.02017441764473915,
+    0.017961036413908005,
+    0.01353277638554573,
+    0.015858348459005356,
+    0.020260637626051903,
+    0.01307360207041075,
+    0.017122967789570787,
+    0.014016475528478622,
+    0.017550707484285333
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta M-FLAT k3 == analysis.delta_per_parent",
+   "printed": [
+    0.018285593017935753,
+    0.015623389432827484,
+    0.013133863608042251,
+    0.016916589190562714,
+    0.018963273614645004,
+    0.013725124299526215,
+    0.01566671642164419,
+    0.015086926519870758,
+    0.015806666885813225
+   ],
+   "mine": [
+    0.018285593017935753,
+    0.015623389432827484,
+    0.013133863608042251,
+    0.016916589190562714,
+    0.018963273614645004,
+    0.013725124299526215,
+    0.01566671642164419,
+    0.015086926519870758,
+    0.015806666885813225
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta M-FLAT k4 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.010362255076567184,
+    0.013238908722996712,
+    0.014133956283330917,
+    0.008750921115279198,
+    0.010683517282207955,
+    0.012673605233430862,
+    0.01191725768148899,
+    0.013537529855966568,
+    0.014137900123993408
+   ],
+   "mine": [
+    0.010362255076567184,
+    0.013238908722996712,
+    0.014133956283330917,
+    0.008750921115279198,
+    0.010683517282207955,
+    0.012673605233430862,
+    0.01191725768148899,
+    0.013537529855966568,
+    0.014137900123993408
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta M-FLAT k4 == analysis.delta_per_parent",
+   "printed": [
+    0.010977278153101455,
+    0.014425277089078925,
+    0.0124607061346369,
+    0.010443875566124916,
+    0.011933069055279244,
+    0.011227380484342575,
+    0.012449127932389725,
+    0.012370272229115464,
+    0.012908239538470756
+   ],
+   "mine": [
+    0.010977278153101455,
+    0.014425277089078925,
+    0.0124607061346369,
+    0.010443875566124916,
+    0.011933069055279244,
+    0.011227380484342575,
+    0.012449127932389725,
+    0.012370272229115464,
+    0.012908239538470756
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta D-ADAPT k0 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.02286056987941265,
+    0.013678301125764847,
+    0.011984596649805557,
+    0.03275479624668787,
+    0.025008324533700943,
+    0.017016157507896423,
+    0.021155305206775665,
+    0.017147139956553925,
+    0.025641601532697678
+   ],
+   "mine": [
+    0.02286056987941265,
+    0.013678301125764847,
+    0.011984596649805557,
+    0.03275479624668787,
+    0.025008324533700943,
+    0.017016157507896423,
+    0.021155305206775665,
+    0.017147139956553925,
+    0.025641601532697678
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta D-ADAPT k0 == analysis.delta_per_parent",
+   "printed": [
+    0.02286056987941265,
+    0.013678301125764847,
+    0.011984596649805557,
+    0.03275479624668787,
+    0.025008324533700943,
+    0.017016157507896423,
+    0.021155305206775665,
+    0.017147139956553925,
+    0.025641601532697678
+   ],
+   "mine": [
+    0.02286056987941265,
+    0.013678301125764847,
+    0.011984596649805557,
+    0.03275479624668787,
+    0.025008324533700943,
+    0.017016157507896423,
+    0.021155305206775665,
+    0.017147139956553925,
+    0.025641601532697678
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta D-ADAPT k1 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.021098983784516356,
+    0.017572623987992753,
+    0.011307746171951294,
+    0.02477968794604113,
+    0.0243617445230484,
+    0.013903714716434479,
+    0.021045656874775887,
+    0.013277139514684677,
+    0.02296750868360231
+   ],
+   "mine": [
+    0.021098983784516356,
+    0.017572623987992753,
+    0.011307746171951294,
+    0.02477968794604113,
+    0.0243617445230484,
+    0.013903714716434479,
+    0.021045656874775887,
+    0.013277139514684677,
+    0.02296750868360231
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta D-ADAPT k1 == analysis.delta_per_parent",
+   "printed": [
+    0.021098983784516356,
+    0.017572623987992753,
+    0.011307746171951294,
+    0.02477968794604113,
+    0.0243617445230484,
+    0.013903714716434479,
+    0.021045656874775887,
+    0.013277139514684677,
+    0.02296750868360231
+   ],
+   "mine": [
+    0.021098983784516356,
+    0.017572623987992753,
+    0.011307746171951294,
+    0.02477968794604113,
+    0.0243617445230484,
+    0.013903714716434479,
+    0.021045656874775887,
+    0.013277139514684677,
+    0.02296750868360231
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta D-ADAPT k2 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.016693015272418954,
+    0.012358777225017548,
+    0.011193557331959259,
+    0.02511056636770581,
+    0.023362868155042182,
+    0.015617527067661285,
+    0.02028930125137185,
+    0.01576685532927513,
+    0.019253218546509743
+   ],
+   "mine": [
+    0.016693015272418954,
+    0.012358777225017548,
+    0.011193557331959259,
+    0.02511056636770581,
+    0.023362868155042182,
+    0.015617527067661285,
+    0.02028930125137185,
+    0.01576685532927513,
+    0.019253218546509743
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta D-ADAPT k2 == analysis.delta_per_parent",
+   "printed": [
+    0.016693015272418954,
+    0.012358777225017548,
+    0.011193557331959259,
+    0.02511056636770581,
+    0.023362868155042182,
+    0.015617527067661285,
+    0.02028930125137185,
+    0.01576685532927513,
+    0.019253218546509743
+   ],
+   "mine": [
+    0.016693015272418954,
+    0.012358777225017548,
+    0.011193557331959259,
+    0.02511056636770581,
+    0.023362868155042182,
+    0.015617527067661285,
+    0.02028930125137185,
+    0.01576685532927513,
+    0.019253218546509743
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta D-ADAPT k3 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.021598147228360176,
+    0.015151871989170562,
+    0.011497383316358079,
+    0.022110605612397194,
+    0.022189301749070633,
+    0.017672092964251984,
+    0.0202841802189746,
+    0.014474789301554214,
+    0.020337995141744614
+   ],
+   "mine": [
+    0.021598147228360176,
+    0.015151871989170562,
+    0.011497383316358079,
+    0.022110605612397194,
+    0.022189301749070633,
+    0.017672092964251984,
+    0.0202841802189746,
+    0.014474789301554214,
+    0.020337995141744614
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta D-ADAPT k3 == analysis.delta_per_parent",
+   "printed": [
+    0.021598147228360176,
+    0.015151871989170562,
+    0.011497383316358079,
+    0.022110605612397194,
+    0.022189301749070633,
+    0.017672092964251984,
+    0.0202841802189746,
+    0.014474789301554214,
+    0.020337995141744614
+   ],
+   "mine": [
+    0.021598147228360176,
+    0.015151871989170562,
+    0.011497383316358079,
+    0.022110605612397194,
+    0.022189301749070633,
+    0.017672092964251984,
+    0.0202841802189746,
+    0.014474789301554214,
+    0.020337995141744614
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent envelope delta D-ADAPT k4 == analysis.delta_envelope_per_parent",
+   "printed": [
+    0.019820780803759597,
+    0.014756618688503753,
+    0.013440212855736267,
+    0.021738660832246293,
+    0.02117336541414261,
+    0.01318111891547824,
+    0.017803517480691422,
+    0.015377568701902877,
+    0.01835040313502123
+   ],
+   "mine": [
+    0.019820780803759597,
+    0.014756618688503753,
+    0.013440212855736267,
+    0.021738660832246293,
+    0.02117336541414261,
+    0.01318111891547824,
+    0.017803517480691422,
+    0.015377568701902877,
+    0.01835040313502123
+   ],
+   "equal": true
+  },
+  {
+   "name": "per-parent run delta D-ADAPT k4 == analysis.delta_per_parent",
+   "printed": [
+    0.019820780803759597,
+    0.014756618688503753,
+    0.013440212855736267,
+    0.021738660832246293,
+    0.02117336541414261,
+    0.01318111891547824,
+    0.017803517480691422,
+    0.015377568701902877,
+    0.01835040313502123
+   ],
+   "mine": [
+    0.019820780803759597,
+    0.014756618688503753,
+    0.013440212855736267,
+    0.021738660832246293,
+    0.02117336541414261,
+    0.01318111891547824,
+    0.017803517480691422,
+    0.015377568701902877,
+    0.01835040313502123
+   ],
+   "equal": true
+  },
+  {
+   "name": "rung -1 L M-FLAT",
+   "printed": 2.2315331055196346,
+   "mine": 2.2315331055196346,
+   "equal": true
+  },
+  {
+   "name": "step0 M-FLAT r0.003 == analysis step0 (same for every rung)",
+   "printed": 2.3618639224657305,
+   "mine": 2.3618639224657305,
+   "equal": true
+  },
+  {
+   "name": "step0 disabled == BASE M-FLAT r0.003",
+   "printed": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "mine": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "equal": true
+  },
+  {
+   "name": "step0 M-FLAT r0.01 == analysis step0 (same for every rung)",
+   "printed": 2.3618639224657305,
+   "mine": 2.3618639224657305,
+   "equal": true
+  },
+  {
+   "name": "step0 disabled == BASE M-FLAT r0.01",
+   "printed": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "mine": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "equal": true
+  },
+  {
+   "name": "step0 M-FLAT r0.03 == analysis step0 (same for every rung)",
+   "printed": 2.3618639224657305,
+   "mine": 2.3618639224657305,
+   "equal": true
+  },
+  {
+   "name": "step0 disabled == BASE M-FLAT r0.03",
+   "printed": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "mine": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "equal": true
+  },
+  {
+   "name": "step0 M-FLAT r0.1 == analysis step0 (same for every rung)",
+   "printed": 2.3618639224657305,
+   "mine": 2.3618639224657305,
+   "equal": true
+  },
+  {
+   "name": "step0 disabled == BASE M-FLAT r0.1",
+   "printed": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "mine": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "equal": true
+  },
+  {
+   "name": "rung -1 L D-ADAPT",
+   "printed": 2.2453365385946302,
+   "mine": 2.2453365385946302,
+   "equal": true
+  },
+  {
+   "name": "step0 D-ADAPT r0.01 == analysis step0 (same for every rung)",
+   "printed": 2.3619500786342003,
+   "mine": 2.3619500786342003,
+   "equal": true
+  },
+  {
+   "name": "step0 disabled == BASE D-ADAPT r0.01",
+   "printed": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "mine": [
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3353039249777794,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.3783701099455357,
+    2.427720759063959,
+    2.427720759063959,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.3294604420661926,
+    2.381515461951494,
+    2.381515461951494,
+    2.381515461951494,
+    2.338582579046488,
+    2.338582579046488,
+    2.338582579046488,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.4047661162912846,
+    2.3341453075408936,
+    2.3341453075408936,
+    2.3341453075408936
+   ],
+   "equal": true
+  }
+ ],
+ "ledger": {
+  "total_seconds": 80428.62437765177,
+  "cap_hours_times_3600": 80428.62437765177,
+  "total_equals_cap": true,
+  "charged_seconds": 47636.55004266708,
+  "charged_hours": 13.232375011851966,
+  "remaining_seconds": 32792.07433498469,
+  "fraction_of_cap": 0.5922835360081524,
+  "entries": [
+   {
+    "seconds": 923.9066177500645,
+    "stage": "gates",
+    "utc": "2026-11-20T11:13:04.314626+00:00"
+   },
+   {
+    "seconds": 46537.21728754195,
+    "stage": "train",
+    "utc": "2026-11-21T00:08:43.047714+00:00"
+   },
+   {
+    "seconds": 175.42613737506326,
+    "stage": "eval",
+    "utc": "2026-11-21T00:11:39.584389+00:00"
+   }
+  ]
+ },
+ "manifests": {
+  "gates": {
+   "status": "COMPLETE",
+   "mode": "registered",
+   "charged": 923.9066177500645,
+   "n_history": 1,
+   "history": [
+    {
+     "start": "2026-11-20T10:57:40.322451+00:00",
+     "end": "2026-11-20T11:13:04.315657+00:00",
+     "charged": 923.9066177500645,
+     "caps": {
+      "cap_seconds_total": 80428.62437765177,
+      "charged_before_seconds": 0.0
+     },
+     "outcomes": {
+      "completed": 3
+     }
+    }
+   ],
+   "commit": "cedfbe2842e8eb8bcc99c4303f5191fe0b3861e1"
+  },
+  "train": {
+   "status": "COMPLETE",
+   "mode": "registered",
+   "charged": 46537.21728754195,
+   "n_history": 1,
+   "history": [
+    {
+     "start": "2026-11-20T11:13:05.505018+00:00",
+     "end": "2026-11-21T00:08:43.050088+00:00",
+     "charged": 46537.21728754195,
+     "caps": {
+      "cap_seconds_total": 80428.62437765177,
+      "charged_before_seconds": 923.9066177500645
+     },
+     "outcomes": {
+      "completed": 189
+     }
+    }
+   ],
+   "commit": "cedfbe2842e8eb8bcc99c4303f5191fe0b3861e1"
+  },
+  "eval": {
+   "status": "COMPLETE",
+   "mode": "registered",
+   "charged": 175.42613737506326,
+   "n_history": 1,
+   "history": [
+    {
+     "start": "2026-11-21T00:08:44.067583+00:00",
+     "end": "2026-11-21T00:11:39.585422+00:00",
+     "charged": 175.42613737506326,
+     "caps": {
+      "cap_seconds_total": 80428.62437765177,
+      "charged_before_seconds": 47461.123905292014
+     },
+     "outcomes": {
+      "completed": 189
+     }
+    }
+   ],
+   "commit": "cedfbe2842e8eb8bcc99c4303f5191fe0b3861e1"
+  }
+ },
+ "attempts": [
+  [
+   "2026-11-19T22:05:06.063869+00:00",
+   "item paused at a rung snapshot",
+   "train|calibration|M-FLAT|r0.1|c00",
+   ""
+  ],
+  [
+   "2026-11-19T22:05:10.218507+00:00",
+   "item paused at a rung snapshot",
+   "train|calibration|M-FLAT|r0.1|c01",
+   ""
+  ],
+  [
+   "2026-11-19T22:05:11.648093+00:00",
+   "item paused at a rung snapshot",
+   "train|calibration|M-FLAT|r0.1|c02",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:39.255980+00:00",
+   "item paused at a rung snapshot",
+   "train|calibration|D-ADAPT|r0.0001|c00",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:39.981167+00:00",
+   "item paused at a rung snapshot",
+   "train|calibration|D-ADAPT|r0.0001|c01",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:42.255845+00:00",
+   "item paused at a rung snapshot",
+   "train|calibration|D-ADAPT|r0.0001|c02",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:42.593089+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0003|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.593714+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0003|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.594261+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0003|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.594760+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.001|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.595267+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.001|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.595789+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.001|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.596229+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.003|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.596633+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.003|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.596967+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.003|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.597311+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.01|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.597640+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.01|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.597999+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.01|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.598308+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.03|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.598654+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.03|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.598966+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.03|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.599285+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.1|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.599576+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.1|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.599872+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.1|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:04 so that P10-I-S1's quiet-machine stage can have the machine; resume after it"
+  ],
+  [
+   "2026-11-19T22:07:42.600147+00:00",
+   "task paused_by_request",
+   "train|calibration|M-FLAT|r0.1|c00",
+   "PAUSED — BY REQUEST: the item stopped at a rung snapshot"
+  ],
+  [
+   "2026-11-19T22:07:42.600422+00:00",
+   "task paused_by_request",
+   "train|calibration|M-FLAT|r0.1|c01",
+   "PAUSED — BY REQUEST: the item stopped at a rung snapshot"
+  ],
+  [
+   "2026-11-19T22:07:42.600747+00:00",
+   "task paused_by_request",
+   "train|calibration|M-FLAT|r0.1|c02",
+   "PAUSED — BY REQUEST: the item stopped at a rung snapshot"
+  ],
+  [
+   "2026-11-19T22:07:42.601136+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0001|c00",
+   "PAUSED — BY REQUEST: the item stopped at a rung snapshot"
+  ],
+  [
+   "2026-11-19T22:07:42.601480+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0001|c01",
+   "PAUSED — BY REQUEST: the item stopped at a rung snapshot"
+  ],
+  [
+   "2026-11-19T22:07:42.601747+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0001|c02",
+   "PAUSED — BY REQUEST: the item stopped at a rung snapshot"
+  ],
+  [
+   "2026-11-19T22:07:42.603027+00:00",
+   "R1 stage not complete",
+   "train",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:56.154441+00:00",
+   "partial item directory kept aside",
+   "train|calibration|M-FLAT|r0.1|c00",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:56.166837+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.0001|c00",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:56.167769+00:00",
+   "partial item directory kept aside",
+   "train|calibration|M-FLAT|r0.1|c01",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:56.170747+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.0001|c02",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:56.172668+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.0001|c01",
+   ""
+  ],
+  [
+   "2026-11-19T22:07:56.178416+00:00",
+   "partial item directory kept aside",
+   "train|calibration|M-FLAT|r0.1|c02",
+   ""
+  ],
+  [
+   "2026-11-19T23:12:22.024669+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0003|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.025189+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0003|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.025614+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.0003|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.025973+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.001|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.026266+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.001|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.026656+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.001|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.027249+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.003|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.027591+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.003|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.027883+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.003|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.028450+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.01|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.028905+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.01|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.029292+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.01|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.029659+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.03|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.030018+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.03|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.030363+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.03|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.030754+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.1|c00",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.031127+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.1|c01",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.031436+00:00",
+   "task paused_by_request",
+   "train|calibration|D-ADAPT|r0.1|c02",
+   "PAUSED — BY REQUEST: paused by the lead at 17:44 so that P10-I-S1's quiet-machine stage can have the machine; the quiet-run script resumes i"
+  ],
+  [
+   "2026-11-19T23:12:22.033060+00:00",
+   "R1 stage not complete",
+   "train",
+   ""
+  ],
+  [
+   "2026-11-20T05:36:13.687682+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.001|c00",
+   ""
+  ],
+  [
+   "2026-11-20T05:36:13.687906+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.0003|c00",
+   ""
+  ],
+  [
+   "2026-11-20T05:36:13.688085+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.0003|c02",
+   ""
+  ],
+  [
+   "2026-11-20T05:36:13.688107+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.001|c01",
+   ""
+  ],
+  [
+   "2026-11-20T05:36:13.688313+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.0003|c01",
+   ""
+  ],
+  [
+   "2026-11-20T05:36:13.688623+00:00",
+   "partial item directory kept aside",
+   "train|calibration|D-ADAPT|r0.001|c02",
+   ""
+  ]
+ ],
+ "attempts_summary": {
+  "2026-11-19T22 / item paused at a rung snapshot / calibration": 6,
+  "2026-11-19T22 / task paused_by_request / calibration": 24,
+  "2026-11-19T22 / R1 stage not complete / train": 1,
+  "2026-11-19T22 / partial item directory kept aside / calibration": 6,
+  "2026-11-19T23 / task paused_by_request / calibration": 18,
+  "2026-11-19T23 / R1 stage not complete / train": 1,
+  "2026-11-20T05 / partial item directory kept aside / calibration": 6
+ },
+ "base_mean_27": 2.3618642600874105
+}
