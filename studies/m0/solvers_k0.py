@@ -1,4 +1,4 @@
-"""Independent second solver for K0: the fact table (structured form) gives the letter of the stated value."""
+"""Independent second solver for K0: the fact table gives the letter of the stated value."""
 
 from __future__ import annotations
 

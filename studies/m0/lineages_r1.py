@@ -12,7 +12,7 @@ import itertools
 import random
 
 from studies.m0.core import Built, Retry, lineage
-from studies.m0.vocab import NAMES, OBJECTS, PETS, PSEUDO, TOWNS, COLOURS, SHAPES, MARKS, EVENTS
+from studies.m0.vocab import COLOURS, EVENTS, MARKS, NAMES, OBJECTS, PETS, PSEUDO, SHAPES, TOWNS
 
 YNU = ("yes", "no", "cannot be determined")
 

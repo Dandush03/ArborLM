@@ -113,7 +113,13 @@ def lineages_of(eval_id: str) -> list[Lineage]:
 
 
 def _load_all() -> None:
-    from studies.m0 import lineages_c1, lineages_k0, lineages_m1, lineages_r1, lineages_r2  # noqa: F401
+    from studies.m0 import (  # noqa: F401
+        lineages_c1,
+        lineages_k0,
+        lineages_m1,
+        lineages_r1,
+        lineages_r2,
+    )
 
 
 def family_partition(eval_id: str, seed: int = 400004) -> dict[str, str]:
@@ -167,6 +173,7 @@ def draw_items(
     taken: set[str],
     role: str,
     attempt_factor: int = 40,
+    allow_short: bool = False,
 ) -> list[Item]:
     """Draw ``count`` items whose normalised text is new (not in ``taken``, which is updated)."""
     out: list[Item] = []
@@ -174,6 +181,8 @@ def draw_items(
     while len(out) < count:
         attempts += 1
         if attempts > attempt_factor * count + 1000:
+            if allow_short:
+                break
             raise RuntimeError(f"{lin.id} level {level}: cannot draw {count} distinct items ({len(out)} found)")
         it = build_item(lin, level, rng, part, f"{lin.id}/{role}/L{level}/{len(out)}")
         h = text_hash(it.question)
@@ -194,6 +203,7 @@ def generate_pool(
     taken: set[str],
     salt_label: str = "",
     partition_seed: int = 400004,
+    shortfalls: list[tuple[str, int, int, int]] | None = None,
 ) -> list[Item]:
     """A pool balanced over the part's clusters (lineages) and distributed over levels by ``level_mix``.
 
@@ -210,7 +220,10 @@ def generate_pool(
             if c == 0:
                 continue
             rng = stream(seed, role, salt_label, eval_id, part, lin.id, str(lv))
-            out.extend(draw_items(lin, part, lv, c, rng, taken, role))
+            got = draw_items(lin, part, lv, c, rng, taken, role, allow_short=shortfalls is not None)
+            if shortfalls is not None and len(got) < c:
+                shortfalls.append((lin.id, lv, c, len(got)))  # (lineage, level, wanted, supplied): a capacity failure
+            out.extend(got)
     return out
 
 
@@ -248,7 +261,7 @@ def ngram_fingerprints(text: str, key: bytes, n: int = 13) -> list[bytes]:
     return [hmac.new(key, " ".join(words[i : i + n]).encode("utf-8"), hashlib.sha256).digest() for i in range(len(words) - n + 1)]
 
 
-def m0_draw(pool: Sequence[Item], size: int, seed: int = 400006) -> list[Item]:
+def m0_draw(pool: Sequence[Item], size: int, seed: int = 400006, allow_short: bool = False) -> list[Item]:
     """The registered M0 draw: ``size`` items of the development pool, balanced over clusters (lineages)."""
     by: dict[str, list[Item]] = {}
     for it in pool:
@@ -260,7 +273,9 @@ def m0_draw(pool: Sequence[Item], size: int, seed: int = 400006) -> list[Item]:
         r = stream(seed, "m0-draw", key)
         members = by[key][:]
         if q > len(members):
-            raise ValueError(f"cluster {key} has {len(members)} items, quota {q}")
+            if not allow_short:
+                raise ValueError(f"cluster {key} has {len(members)} items, quota {q}")
+            q = len(members)  # rehearsal: the balanced draw is impossible; take what the cluster has and record the short draw
         out.extend(r.sample(members, q))
     return out
 
