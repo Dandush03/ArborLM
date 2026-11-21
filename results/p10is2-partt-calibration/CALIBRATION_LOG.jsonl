@@ -3,3 +3,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "eb2c9793a0905f390413ac3ba324a13b0865eecf48431564430a0a79f6e57926", "unit": "grid-store-A-0.001", "utc": "20261121T230948817388Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-store-B-0.001", "utc": "20261121T230948942687Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "77ea29f58eb4fd0c77ea2f590ab55bd92c873d1962b2d6a936cf353b3d26503e", "unit": "grid-store-B-0.001", "utc": "20261121T231459991925Z"}
+{"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-store-A-0.003", "utc": "20261121T231500118738Z"}
