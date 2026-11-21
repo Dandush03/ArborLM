@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1734" viewBox="0 0 1000 1734" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-20">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1734" viewBox="0 0 1000 1734" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-21">
 <rect width="1000" height="1734" rx="14" fill="#0f0f10"/>
 <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
 <text x="28" y="48" fill="#f2f2f2" font-size="19" font-weight="600">External memory improves prediction</text>
 <text x="972" y="48" fill="#f2f2f2" font-size="19" text-anchor="end">7/10</text>
 <rect x="28" y="62" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="62" width="661" height="8" rx="4" fill="#3f8f4f"/>
-<text x="28" y="96" fill="#c9c9c9" font-size="15">Shown with a frozen backbone; the flat memory&#x27;s own dependence controls are still to run.</text>
+<text x="28" y="96" fill="#c9c9c9" font-size="15">Shown with a frozen backbone; the flat memory&#x27;s dependence control passes before convergence, through harm.</text>
 <text x="28" y="152" fill="#f2f2f2" font-size="19" font-weight="600">Reliable learned addressing</text>
 <text x="972" y="152" fill="#f2f2f2" font-size="19" text-anchor="end">7/10</text>
 <rect x="28" y="166" width="944" height="8" rx="4" fill="#262626"/>
@@ -15,7 +15,7 @@
 <text x="972" y="256" fill="#f2f2f2" font-size="19" text-anchor="end">5/10</text>
 <rect x="28" y="270" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="270" width="472" height="8" rx="4" fill="#d9822b"/>
-<text x="28" y="304" fill="#c9c9c9" font-size="15">Flat memory beat dense at 16,384 updates, but neither had converged.</text>
+<text x="28" y="304" fill="#c9c9c9" font-size="15">Flat memory led dense at 16,384 updates; the lead shrank by 262,144 and neither had converged.</text>
 <text x="28" y="360" fill="#f2f2f2" font-size="19" font-weight="600">Useful capacity scaling</text>
 <text x="972" y="360" fill="#f2f2f2" font-size="19" text-anchor="end">3/10</text>
 <rect x="28" y="374" width="944" height="8" rx="4" fill="#262626"/>
@@ -81,6 +81,6 @@
 <rect x="28" y="1622" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="1622" width="0" height="8" rx="4" fill="#6b7a99"/>
 <text x="28" y="1656" fill="#c9c9c9" font-size="15">Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit.</text>
-<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-20: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032 and P10-I-S0.</text>
+<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-21: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6.</text>
 </g>
 </svg>

@@ -1,0 +1,1702 @@
+{
+ "problems": [],
+ "integrity": [],
+ "reads_missing": [],
+ "items_plan": 1026,
+ "item_dirs": 1026,
+ "missing": [],
+ "extra": [],
+ "earliest_record_birth": "2026-11-20T11:55:27.401851+00:00",
+ "latest_record_birth": "2026-11-21T00:11:39.204850+00:00",
+ "record_births_after_registered_gates_start": true,
+ "rates": {
+  "M-FLAT": {
+   "-1": 0.01,
+   "0": 0.03,
+   "1": 0.1,
+   "2": 0.03,
+   "3": 0.1,
+   "4": 0.003
+  },
+  "D-ADAPT": {
+   "-1": 0.01,
+   "0": 0.01,
+   "1": 0.01,
+   "2": 0.01,
+   "3": 0.01,
+   "4": 0.01
+  }
+ },
+ "kstar": null,
+ "R": 4,
+ "jdagger": 4,
+ "row": 12,
+ "label": "CONVERGENCE NOT REACHED (BOTH STILL IMPROVING)",
+ "dependence_qualified": false,
+ "tag": "LEAD SHRINKING",
+ "Delta": -0.005580962739057011,
+ "absQ": 0.0067889197833008235,
+ "still_improving_sentence": true,
+ "held": {
+  "0": true,
+  "1": true,
+  "2": true,
+  "3": true,
+  "4": true
+ },
+ "per_rung": {
+  "0": {
+   "updates": 16384,
+   "rate_F": 0.03,
+   "rate_D": 0.01,
+   "L_F": 2.2121614568901284,
+   "L_D": 2.224531339412486,
+   "delta_F": 0.019371648629506133,
+   "delta_D": 0.020805199182144296,
+   "drun_F": 0.020230087762077353,
+   "drun_D": 0.020805199182144296,
+   "conv_F": false,
+   "conv_D": false,
+   "mean_Q": 0.012369882522357835,
+   "Q_cells_pos": 26,
+   "Q_parents_pos": 9,
+   "Q_min": -9.056925773620605e-05,
+   "Q_max": 0.02510138228535652,
+   "mean_Qdag": -0.05995446271090596,
+   "Qdag_cells_pos": 0,
+   "Qdag_parents_pos": 0,
+   "held": true,
+   "cls": "UNDECIDED",
+   "mean_C": 0.14970280319728232,
+   "mean_Cd": 0.1373329206749245,
+   "C_cells_pos": 27,
+   "harm_Hused": -0.11134090547070459,
+   "harm_Hused_n": 27,
+   "harm_Hmean": -0.001064423609662939,
+   "harm_Hmean_n": 15,
+   "harm_Hv": -0.0007824271365448281,
+   "harm_Hv_n": 14,
+   "used_slots": [
+    1949,
+    1980,
+    2102,
+    1467,
+    1367,
+    1404,
+    1374,
+    1365,
+    1259,
+    2577,
+    2525,
+    2655,
+    2273,
+    2330,
+    2215,
+    1565,
+    1668,
+    1707,
+    2296,
+    2399,
+    2344,
+    1556,
+    1620,
+    1686,
+    2069,
+    2141,
+    2142
+   ],
+   "used_min": 1259,
+   "used_max": 2655,
+   "xmd_mean": 0.23214533069619425,
+   "xmd_min": 0.08991659432649612,
+   "xmd_max": 0.5315186493098736,
+   "xmd_pos": 27
+  },
+  "1": {
+   "updates": 32768,
+   "rate_F": 0.1,
+   "rate_D": 0.01,
+   "L_F": 2.192488361356987,
+   "L_D": 2.205607472056592,
+   "delta_F": 0.01967309553314145,
+   "delta_D": 0.018923867355893798,
+   "drun_F": 0.02011095097771376,
+   "drun_D": 0.018923867355893798,
+   "conv_F": false,
+   "conv_D": false,
+   "mean_Q": 0.01311911069960506,
+   "Q_cells_pos": 27,
+   "Q_parents_pos": 9,
+   "Q_min": 0.002912387251853943,
+   "Q_max": 0.02597178891301155,
+   "mean_Qdag": -0.04028136717776457,
+   "Qdag_cells_pos": 0,
+   "Qdag_parents_pos": 0,
+   "held": true,
+   "cls": "UNDECIDED",
+   "mean_C": 0.16937589873042372,
+   "mean_Cd": 0.15625678803081866,
+   "C_cells_pos": 27,
+   "harm_Hused": -0.13661296006844,
+   "harm_Hused_n": 27,
+   "harm_Hmean": -0.0028250107058772336,
+   "harm_Hmean_n": 17,
+   "harm_Hv": -0.002418205279994894,
+   "harm_Hv_n": 17,
+   "used_slots": [
+    2608,
+    2593,
+    2570,
+    1832,
+    1758,
+    1845,
+    1719,
+    1670,
+    1662,
+    3057,
+    3172,
+    3230,
+    2965,
+    2846,
+    2924,
+    2202,
+    2062,
+    2006,
+    2822,
+    2716,
+    2859,
+    2016,
+    2050,
+    2023,
+    2600,
+    2573,
+    2682
+   ],
+   "used_min": 1662,
+   "used_max": 3230,
+   "xmd_mean": 0.34338187481518145,
+   "xmd_min": 0.10632839053869247,
+   "xmd_max": 0.8816833831369877,
+   "xmd_pos": 27
+  },
+  "2": {
+   "updates": 65536,
+   "rate_F": 0.03,
+   "rate_D": 0.01,
+   "L_F": 2.174194387815617,
+   "L_D": 2.187869062440263,
+   "delta_F": 0.01829397354137008,
+   "delta_D": 0.01773840961632933,
+   "drun_F": 0.018164868776996634,
+   "drun_D": 0.01773840961632933,
+   "conv_F": false,
+   "conv_D": false,
+   "mean_Q": 0.013674674624646152,
+   "Q_cells_pos": 27,
+   "Q_parents_pos": 9,
+   "Q_min": 0.00440526008605957,
+   "Q_max": 0.025689218193292618,
+   "mean_Qdag": -0.02198739363639443,
+   "Qdag_cells_pos": 0,
+   "Qdag_parents_pos": 0,
+   "held": true,
+   "cls": "UNDECIDED",
+   "mean_C": 0.18766987227179385,
+   "mean_Cd": 0.17399519764714771,
+   "C_cells_pos": 27,
+   "harm_Hused": -0.1701116253518396,
+   "harm_Hused_n": 27,
+   "harm_Hmean": -0.0027295059903904243,
+   "harm_Hmean_n": 16,
+   "harm_Hv": -0.0023022180906048526,
+   "harm_Hv_n": 16,
+   "used_slots": [
+    3075,
+    3047,
+    3179,
+    2239,
+    2160,
+    2294,
+    2217,
+    2202,
+    2096,
+    3509,
+    3572,
+    3627,
+    3388,
+    3344,
+    3256,
+    2569,
+    2560,
+    2691,
+    3190,
+    3192,
+    3171,
+    2488,
+    2543,
+    2605,
+    3182,
+    3207,
+    3206
+   ],
+   "used_min": 2096,
+   "used_max": 3627,
+   "xmd_mean": 0.4937079050750644,
+   "xmd_min": 0.12571948394179344,
+   "xmd_max": 1.1252607926726341,
+   "xmd_pos": 27
+  },
+  "3": {
+   "updates": 131072,
+   "rate_F": 0.1,
+   "rate_D": 0.01,
+   "L_F": 2.1575776134376174,
+   "L_D": 2.1695005771600537,
+   "delta_F": 0.016616774377999466,
+   "delta_D": 0.018368485280209068,
+   "drun_F": 0.01591201588787383,
+   "drun_D": 0.018368485280209068,
+   "conv_F": false,
+   "conv_D": false,
+   "mean_Q": 0.011922963722436517,
+   "Q_cells_pos": 27,
+   "Q_parents_pos": 9,
+   "Q_min": 0.004521727561950684,
+   "Q_max": 0.023174826055765152,
+   "mean_Qdag": -0.005370619258394948,
+   "Qdag_cells_pos": 3,
+   "Qdag_parents_pos": 0,
+   "held": true,
+   "cls": "UNDECIDED",
+   "mean_C": 0.20428664664979335,
+   "mean_Cd": 0.19236368292735684,
+   "C_cells_pos": 27,
+   "harm_Hused": -0.21032750327140093,
+   "harm_Hused_n": 27,
+   "harm_Hmean": -0.006009397821293937,
+   "harm_Hmean_n": 19,
+   "harm_Hv": -0.005353836135731803,
+   "harm_Hv_n": 18,
+   "used_slots": [
+    3651,
+    3606,
+    3543,
+    2942,
+    2778,
+    2911,
+    2843,
+    2898,
+    2867,
+    3833,
+    3921,
+    3925,
+    3762,
+    3704,
+    3736,
+    3290,
+    3072,
+    3112,
+    3655,
+    3588,
+    3769,
+    3009,
+    3118,
+    3141,
+    3532,
+    3557,
+    3652
+   ],
+   "used_min": 2778,
+   "used_max": 3925,
+   "xmd_mean": 0.6340228186023457,
+   "xmd_min": 0.1581013835966587,
+   "xmd_max": 1.3694847635924816,
+   "xmd_pos": 27
+  },
+  "4": {
+   "updates": 262144,
+   "rate_F": 0.003,
+   "rate_D": 0.01,
+   "L_F": 2.1454180743959217,
+   "L_D": 2.152206994179222,
+   "delta_F": 0.012159539041695755,
+   "delta_D": 0.017293582980831612,
+   "drun_F": 0.012132802909170959,
+   "drun_D": 0.017293582980831612,
+   "conv_F": false,
+   "conv_D": false,
+   "mean_Q": 0.0067889197833008235,
+   "Q_cells_pos": 24,
+   "Q_parents_pos": 8,
+   "Q_min": -0.0063486248254776,
+   "Q_max": 0.016588473692536354,
+   "mean_Qdag": 0.0067889197833008235,
+   "Qdag_cells_pos": 24,
+   "Qdag_parents_pos": 8,
+   "held": true,
+   "cls": "M-AHEAD",
+   "mean_C": 0.2164461856914891,
+   "mean_Cd": 0.20965726590818828,
+   "C_cells_pos": 27,
+   "harm_Hused": -0.22664969321340322,
+   "harm_Hused_n": 27,
+   "harm_Hmean": -0.003563630912039015,
+   "harm_Hmean_n": 17,
+   "harm_Hv": -0.002966577394141091,
+   "harm_Hv_n": 17,
+   "used_slots": [
+    3937,
+    3934,
+    3847,
+    3348,
+    3388,
+    3387,
+    3472,
+    3562,
+    3615,
+    4003,
+    4048,
+    4039,
+    3954,
+    3981,
+    3961,
+    3551,
+    3478,
+    3672,
+    3933,
+    3890,
+    3965,
+    3625,
+    3545,
+    3550,
+    3948,
+    4024,
+    3892
+   ],
+   "used_min": 3348,
+   "used_max": 4048,
+   "xmd_mean": 0.7790599452952544,
+   "xmd_min": 0.21857625246047974,
+   "xmd_max": 1.4822594840079546,
+   "xmd_pos": 27
+  }
+ },
+ "L_minus1": {
+  "M-FLAT": 2.2315331055196346,
+  "D-ADAPT": 2.2453365385946302
+ },
+ "dflat": "DEPENDENT",
+ "dflat_detail": {
+  "F1_mean": 0.2164461856914891,
+  "F1_cells": 27,
+  "F1_parents": 9,
+  "F2_mean": 0.4430958789048923,
+  "F2_mean_alt": 0.4430958789048923,
+  "F2_cells": 27,
+  "F2_parents": 9,
+  "F3_mean": 0.22000981660352814,
+  "F3_cells": 27,
+  "F3_parents": 9,
+  "F1": true,
+  "F2": true,
+  "F2_alt": true,
+  "F3": true,
+  "collapsed": []
+ },
+ "dflat_Hused_worse": 27,
+ "dflat_mean_B_minus_Hv": -0.002966577394141091,
+ "R16": {
+  "label": "REPLICATED AT 16,384",
+  "K1": true,
+  "K2": true,
+  "K3": true,
+  "mean_Q": 0.012369882522357835,
+  "mean_C": 0.14970280319728232,
+  "mean_Cd": 0.1373329206749245,
+  "Q_cells_pos": 26,
+  "Q_parents_pos": 9,
+  "min_parent_Q": 0.0032857867578665414,
+  "conv_rung0": {
+   "M-FLAT": false,
+   "D-ADAPT": false
+  }
+ },
+ "OA": {
+  "label": "REPLICATED AT 16,384",
+  "K1": true,
+  "K2": true,
+  "K3": true,
+  "mean_Q": 0.013418922545733276,
+  "mean_C": 0.14030758857175155,
+  "mean_Cd": 0.12688866602601828,
+  "Q_cells_pos": 27,
+  "Q_parents_pos": 9,
+  "min_parent_Q": 0.005168519914150238,
+  "drun": {
+   "M-FLAT": 0.021806043193296265,
+   "D-ADAPT": 0.01751168265386882
+  }
+ },
+ "comparisons": [
+  {
+   "name": "k0 L_F",
+   "equal": true,
+   "mine": 2.2121614568901284,
+   "theirs": 2.2121614568901284
+  },
+  {
+   "name": "k0 L_D",
+   "equal": true,
+   "mine": 2.224531339412486,
+   "theirs": 2.224531339412486
+  },
+  {
+   "name": "k0 delta_F",
+   "equal": true,
+   "mine": 0.019371648629506133,
+   "theirs": 0.019371648629506133
+  },
+  {
+   "name": "k0 delta_D",
+   "equal": true,
+   "mine": 0.020805199182144296,
+   "theirs": 0.020805199182144296
+  },
+  {
+   "name": "k0 drun_F",
+   "equal": true,
+   "mine": 0.020230087762077353,
+   "theirs": 0.020230087762077353
+  },
+  {
+   "name": "k0 drun_D",
+   "equal": true,
+   "mine": 0.020805199182144296,
+   "theirs": 0.020805199182144296
+  },
+  {
+   "name": "k0 conv",
+   "equal": true,
+   "mine": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ],
+   "theirs": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ]
+  },
+  {
+   "name": "k0 mean_Q",
+   "equal": true,
+   "mine": 0.012369882522357835,
+   "theirs": 0.012369882522357835
+  },
+  {
+   "name": "k0 Q_cells_pos",
+   "equal": true,
+   "mine": 26,
+   "theirs": 26
+  },
+  {
+   "name": "k0 Q_parents_pos",
+   "equal": true,
+   "mine": 9,
+   "theirs": 9
+  },
+  {
+   "name": "k0 mean_Qdag",
+   "equal": true,
+   "mine": -0.05995446271090596,
+   "theirs": -0.05995446271090596
+  },
+  {
+   "name": "k0 class",
+   "equal": true,
+   "mine": "UNDECIDED",
+   "theirs": "UNDECIDED"
+  },
+  {
+   "name": "k0 held",
+   "equal": true,
+   "mine": true,
+   "theirs": true
+  },
+  {
+   "name": "k0 rates",
+   "equal": true,
+   "mine": [
+    0.03,
+    0.01
+   ],
+   "theirs": [
+    0.03,
+    0.01
+   ]
+  },
+  {
+   "name": "k0 mean_C",
+   "equal": true,
+   "mine": 0.14970280319728232,
+   "theirs": 0.14970280319728232
+  },
+  {
+   "name": "k0 mean_Cd",
+   "equal": true,
+   "mine": 0.1373329206749245,
+   "theirs": 0.1373329206749245
+  },
+  {
+   "name": "k0 xmd_mean",
+   "equal": true,
+   "mine": 0.23214533069619425,
+   "theirs": 0.23214533069619425
+  },
+  {
+   "name": "k0 xmd_min",
+   "equal": true,
+   "mine": 0.08991659432649612,
+   "theirs": 0.08991659432649612
+  },
+  {
+   "name": "k0 xmd_max",
+   "equal": true,
+   "mine": 0.5315186493098736,
+   "theirs": 0.5315186493098736
+  },
+  {
+   "name": "k0 harm_Hused",
+   "equal": true,
+   "mine": -0.11134090547070459,
+   "theirs": -0.11134090547070459
+  },
+  {
+   "name": "k0 harm_Hused_n",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k0 harm_Hmean",
+   "equal": true,
+   "mine": -0.001064423609662939,
+   "theirs": -0.001064423609662939
+  },
+  {
+   "name": "k0 harm_Hmean_n",
+   "equal": true,
+   "mine": 15,
+   "theirs": 15
+  },
+  {
+   "name": "k0 harm_Hv",
+   "equal": true,
+   "mine": -0.0007824271365448281,
+   "theirs": -0.0007824271365448281
+  },
+  {
+   "name": "k0 harm_Hv_n",
+   "equal": true,
+   "mine": 14,
+   "theirs": 14
+  },
+  {
+   "name": "k0 used_slots",
+   "equal": false,
+   "mine": [
+    1949,
+    1980,
+    2102,
+    1467,
+    1367,
+    1404,
+    1374,
+    1365,
+    1259,
+    2577,
+    2525,
+    2655,
+    2273,
+    2330,
+    2215,
+    1565,
+    1668,
+    1707,
+    2296,
+    2399,
+    2344,
+    1556,
+    1620,
+    1686,
+    2069,
+    2141,
+    2142
+   ],
+   "theirs": [
+    1441,
+    1447,
+    1522,
+    1629,
+    1658,
+    1581,
+    1989,
+    1942,
+    1848,
+    1738,
+    1648,
+    1727,
+    1482,
+    1415,
+    1487,
+    2280,
+    2326,
+    2311,
+    1599,
+    1593,
+    1643,
+    2861,
+    2864,
+    2798,
+    1378,
+    1438,
+    1376
+   ]
+  },
+  {
+   "name": "k1 L_F",
+   "equal": true,
+   "mine": 2.192488361356987,
+   "theirs": 2.192488361356987
+  },
+  {
+   "name": "k1 L_D",
+   "equal": true,
+   "mine": 2.205607472056592,
+   "theirs": 2.205607472056592
+  },
+  {
+   "name": "k1 delta_F",
+   "equal": true,
+   "mine": 0.01967309553314145,
+   "theirs": 0.01967309553314145
+  },
+  {
+   "name": "k1 delta_D",
+   "equal": true,
+   "mine": 0.018923867355893798,
+   "theirs": 0.018923867355893798
+  },
+  {
+   "name": "k1 drun_F",
+   "equal": true,
+   "mine": 0.02011095097771376,
+   "theirs": 0.02011095097771376
+  },
+  {
+   "name": "k1 drun_D",
+   "equal": true,
+   "mine": 0.018923867355893798,
+   "theirs": 0.018923867355893798
+  },
+  {
+   "name": "k1 conv",
+   "equal": true,
+   "mine": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ],
+   "theirs": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ]
+  },
+  {
+   "name": "k1 mean_Q",
+   "equal": true,
+   "mine": 0.01311911069960506,
+   "theirs": 0.01311911069960506
+  },
+  {
+   "name": "k1 Q_cells_pos",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k1 Q_parents_pos",
+   "equal": true,
+   "mine": 9,
+   "theirs": 9
+  },
+  {
+   "name": "k1 mean_Qdag",
+   "equal": true,
+   "mine": -0.04028136717776457,
+   "theirs": -0.04028136717776457
+  },
+  {
+   "name": "k1 class",
+   "equal": true,
+   "mine": "UNDECIDED",
+   "theirs": "UNDECIDED"
+  },
+  {
+   "name": "k1 held",
+   "equal": true,
+   "mine": true,
+   "theirs": true
+  },
+  {
+   "name": "k1 rates",
+   "equal": true,
+   "mine": [
+    0.1,
+    0.01
+   ],
+   "theirs": [
+    0.1,
+    0.01
+   ]
+  },
+  {
+   "name": "k1 mean_C",
+   "equal": true,
+   "mine": 0.16937589873042372,
+   "theirs": 0.16937589873042372
+  },
+  {
+   "name": "k1 mean_Cd",
+   "equal": true,
+   "mine": 0.15625678803081866,
+   "theirs": 0.15625678803081866
+  },
+  {
+   "name": "k1 xmd_mean",
+   "equal": true,
+   "mine": 0.34338187481518145,
+   "theirs": 0.34338187481518145
+  },
+  {
+   "name": "k1 xmd_min",
+   "equal": true,
+   "mine": 0.10632839053869247,
+   "theirs": 0.10632839053869247
+  },
+  {
+   "name": "k1 xmd_max",
+   "equal": true,
+   "mine": 0.8816833831369877,
+   "theirs": 0.8816833831369877
+  },
+  {
+   "name": "k1 harm_Hused",
+   "equal": true,
+   "mine": -0.13661296006844,
+   "theirs": -0.13661296006844
+  },
+  {
+   "name": "k1 harm_Hused_n",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k1 harm_Hmean",
+   "equal": true,
+   "mine": -0.0028250107058772336,
+   "theirs": -0.0028250107058772336
+  },
+  {
+   "name": "k1 harm_Hmean_n",
+   "equal": true,
+   "mine": 17,
+   "theirs": 17
+  },
+  {
+   "name": "k1 harm_Hv",
+   "equal": true,
+   "mine": -0.002418205279994894,
+   "theirs": -0.002418205279994894
+  },
+  {
+   "name": "k1 harm_Hv_n",
+   "equal": true,
+   "mine": 17,
+   "theirs": 17
+  },
+  {
+   "name": "k1 used_slots",
+   "equal": true,
+   "mine": [
+    2608,
+    2593,
+    2570,
+    1832,
+    1758,
+    1845,
+    1719,
+    1670,
+    1662,
+    3057,
+    3172,
+    3230,
+    2965,
+    2846,
+    2924,
+    2202,
+    2062,
+    2006,
+    2822,
+    2716,
+    2859,
+    2016,
+    2050,
+    2023,
+    2600,
+    2573,
+    2682
+   ],
+   "theirs": [
+    2608,
+    2593,
+    2570,
+    1832,
+    1758,
+    1845,
+    1719,
+    1670,
+    1662,
+    3057,
+    3172,
+    3230,
+    2965,
+    2846,
+    2924,
+    2202,
+    2062,
+    2006,
+    2822,
+    2716,
+    2859,
+    2016,
+    2050,
+    2023,
+    2600,
+    2573,
+    2682
+   ]
+  },
+  {
+   "name": "k2 L_F",
+   "equal": true,
+   "mine": 2.174194387815617,
+   "theirs": 2.174194387815617
+  },
+  {
+   "name": "k2 L_D",
+   "equal": true,
+   "mine": 2.187869062440263,
+   "theirs": 2.187869062440263
+  },
+  {
+   "name": "k2 delta_F",
+   "equal": true,
+   "mine": 0.01829397354137008,
+   "theirs": 0.01829397354137008
+  },
+  {
+   "name": "k2 delta_D",
+   "equal": true,
+   "mine": 0.01773840961632933,
+   "theirs": 0.01773840961632933
+  },
+  {
+   "name": "k2 drun_F",
+   "equal": true,
+   "mine": 0.018164868776996634,
+   "theirs": 0.018164868776996634
+  },
+  {
+   "name": "k2 drun_D",
+   "equal": true,
+   "mine": 0.01773840961632933,
+   "theirs": 0.01773840961632933
+  },
+  {
+   "name": "k2 conv",
+   "equal": true,
+   "mine": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ],
+   "theirs": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ]
+  },
+  {
+   "name": "k2 mean_Q",
+   "equal": true,
+   "mine": 0.013674674624646152,
+   "theirs": 0.013674674624646152
+  },
+  {
+   "name": "k2 Q_cells_pos",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k2 Q_parents_pos",
+   "equal": true,
+   "mine": 9,
+   "theirs": 9
+  },
+  {
+   "name": "k2 mean_Qdag",
+   "equal": true,
+   "mine": -0.02198739363639443,
+   "theirs": -0.02198739363639443
+  },
+  {
+   "name": "k2 class",
+   "equal": true,
+   "mine": "UNDECIDED",
+   "theirs": "UNDECIDED"
+  },
+  {
+   "name": "k2 held",
+   "equal": true,
+   "mine": true,
+   "theirs": true
+  },
+  {
+   "name": "k2 rates",
+   "equal": true,
+   "mine": [
+    0.03,
+    0.01
+   ],
+   "theirs": [
+    0.03,
+    0.01
+   ]
+  },
+  {
+   "name": "k2 mean_C",
+   "equal": true,
+   "mine": 0.18766987227179385,
+   "theirs": 0.18766987227179385
+  },
+  {
+   "name": "k2 mean_Cd",
+   "equal": true,
+   "mine": 0.17399519764714771,
+   "theirs": 0.17399519764714771
+  },
+  {
+   "name": "k2 xmd_mean",
+   "equal": true,
+   "mine": 0.4937079050750644,
+   "theirs": 0.4937079050750644
+  },
+  {
+   "name": "k2 xmd_min",
+   "equal": true,
+   "mine": 0.12571948394179344,
+   "theirs": 0.12571948394179344
+  },
+  {
+   "name": "k2 xmd_max",
+   "equal": true,
+   "mine": 1.1252607926726341,
+   "theirs": 1.1252607926726341
+  },
+  {
+   "name": "k2 harm_Hused",
+   "equal": true,
+   "mine": -0.1701116253518396,
+   "theirs": -0.1701116253518396
+  },
+  {
+   "name": "k2 harm_Hused_n",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k2 harm_Hmean",
+   "equal": true,
+   "mine": -0.0027295059903904243,
+   "theirs": -0.0027295059903904243
+  },
+  {
+   "name": "k2 harm_Hmean_n",
+   "equal": true,
+   "mine": 16,
+   "theirs": 16
+  },
+  {
+   "name": "k2 harm_Hv",
+   "equal": true,
+   "mine": -0.0023022180906048526,
+   "theirs": -0.0023022180906048526
+  },
+  {
+   "name": "k2 harm_Hv_n",
+   "equal": true,
+   "mine": 16,
+   "theirs": 16
+  },
+  {
+   "name": "k2 used_slots",
+   "equal": true,
+   "mine": [
+    3075,
+    3047,
+    3179,
+    2239,
+    2160,
+    2294,
+    2217,
+    2202,
+    2096,
+    3509,
+    3572,
+    3627,
+    3388,
+    3344,
+    3256,
+    2569,
+    2560,
+    2691,
+    3190,
+    3192,
+    3171,
+    2488,
+    2543,
+    2605,
+    3182,
+    3207,
+    3206
+   ],
+   "theirs": [
+    3075,
+    3047,
+    3179,
+    2239,
+    2160,
+    2294,
+    2217,
+    2202,
+    2096,
+    3509,
+    3572,
+    3627,
+    3388,
+    3344,
+    3256,
+    2569,
+    2560,
+    2691,
+    3190,
+    3192,
+    3171,
+    2488,
+    2543,
+    2605,
+    3182,
+    3207,
+    3206
+   ]
+  },
+  {
+   "name": "k3 L_F",
+   "equal": true,
+   "mine": 2.1575776134376174,
+   "theirs": 2.1575776134376174
+  },
+  {
+   "name": "k3 L_D",
+   "equal": true,
+   "mine": 2.1695005771600537,
+   "theirs": 2.1695005771600537
+  },
+  {
+   "name": "k3 delta_F",
+   "equal": true,
+   "mine": 0.016616774377999466,
+   "theirs": 0.016616774377999466
+  },
+  {
+   "name": "k3 delta_D",
+   "equal": true,
+   "mine": 0.018368485280209068,
+   "theirs": 0.018368485280209068
+  },
+  {
+   "name": "k3 drun_F",
+   "equal": true,
+   "mine": 0.01591201588787383,
+   "theirs": 0.01591201588787383
+  },
+  {
+   "name": "k3 drun_D",
+   "equal": true,
+   "mine": 0.018368485280209068,
+   "theirs": 0.018368485280209068
+  },
+  {
+   "name": "k3 conv",
+   "equal": true,
+   "mine": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ],
+   "theirs": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ]
+  },
+  {
+   "name": "k3 mean_Q",
+   "equal": true,
+   "mine": 0.011922963722436517,
+   "theirs": 0.011922963722436517
+  },
+  {
+   "name": "k3 Q_cells_pos",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k3 Q_parents_pos",
+   "equal": true,
+   "mine": 9,
+   "theirs": 9
+  },
+  {
+   "name": "k3 mean_Qdag",
+   "equal": true,
+   "mine": -0.005370619258394948,
+   "theirs": -0.005370619258394948
+  },
+  {
+   "name": "k3 class",
+   "equal": true,
+   "mine": "UNDECIDED",
+   "theirs": "UNDECIDED"
+  },
+  {
+   "name": "k3 held",
+   "equal": true,
+   "mine": true,
+   "theirs": true
+  },
+  {
+   "name": "k3 rates",
+   "equal": true,
+   "mine": [
+    0.1,
+    0.01
+   ],
+   "theirs": [
+    0.1,
+    0.01
+   ]
+  },
+  {
+   "name": "k3 mean_C",
+   "equal": true,
+   "mine": 0.20428664664979335,
+   "theirs": 0.20428664664979335
+  },
+  {
+   "name": "k3 mean_Cd",
+   "equal": true,
+   "mine": 0.19236368292735684,
+   "theirs": 0.19236368292735684
+  },
+  {
+   "name": "k3 xmd_mean",
+   "equal": true,
+   "mine": 0.6340228186023457,
+   "theirs": 0.6340228186023457
+  },
+  {
+   "name": "k3 xmd_min",
+   "equal": true,
+   "mine": 0.1581013835966587,
+   "theirs": 0.1581013835966587
+  },
+  {
+   "name": "k3 xmd_max",
+   "equal": true,
+   "mine": 1.3694847635924816,
+   "theirs": 1.3694847635924816
+  },
+  {
+   "name": "k3 harm_Hused",
+   "equal": true,
+   "mine": -0.21032750327140093,
+   "theirs": -0.21032750327140093
+  },
+  {
+   "name": "k3 harm_Hused_n",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k3 harm_Hmean",
+   "equal": true,
+   "mine": -0.006009397821293937,
+   "theirs": -0.006009397821293937
+  },
+  {
+   "name": "k3 harm_Hmean_n",
+   "equal": true,
+   "mine": 19,
+   "theirs": 19
+  },
+  {
+   "name": "k3 harm_Hv",
+   "equal": true,
+   "mine": -0.005353836135731803,
+   "theirs": -0.005353836135731803
+  },
+  {
+   "name": "k3 harm_Hv_n",
+   "equal": true,
+   "mine": 18,
+   "theirs": 18
+  },
+  {
+   "name": "k3 used_slots",
+   "equal": true,
+   "mine": [
+    3651,
+    3606,
+    3543,
+    2942,
+    2778,
+    2911,
+    2843,
+    2898,
+    2867,
+    3833,
+    3921,
+    3925,
+    3762,
+    3704,
+    3736,
+    3290,
+    3072,
+    3112,
+    3655,
+    3588,
+    3769,
+    3009,
+    3118,
+    3141,
+    3532,
+    3557,
+    3652
+   ],
+   "theirs": [
+    3651,
+    3606,
+    3543,
+    2942,
+    2778,
+    2911,
+    2843,
+    2898,
+    2867,
+    3833,
+    3921,
+    3925,
+    3762,
+    3704,
+    3736,
+    3290,
+    3072,
+    3112,
+    3655,
+    3588,
+    3769,
+    3009,
+    3118,
+    3141,
+    3532,
+    3557,
+    3652
+   ]
+  },
+  {
+   "name": "k4 L_F",
+   "equal": true,
+   "mine": 2.1454180743959217,
+   "theirs": 2.1454180743959217
+  },
+  {
+   "name": "k4 L_D",
+   "equal": true,
+   "mine": 2.152206994179222,
+   "theirs": 2.152206994179222
+  },
+  {
+   "name": "k4 delta_F",
+   "equal": true,
+   "mine": 0.012159539041695755,
+   "theirs": 0.012159539041695755
+  },
+  {
+   "name": "k4 delta_D",
+   "equal": true,
+   "mine": 0.017293582980831612,
+   "theirs": 0.017293582980831612
+  },
+  {
+   "name": "k4 drun_F",
+   "equal": true,
+   "mine": 0.012132802909170959,
+   "theirs": 0.012132802909170959
+  },
+  {
+   "name": "k4 drun_D",
+   "equal": true,
+   "mine": 0.017293582980831612,
+   "theirs": 0.017293582980831612
+  },
+  {
+   "name": "k4 conv",
+   "equal": true,
+   "mine": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ],
+   "theirs": [
+    "NOT CONVERGED",
+    "NOT CONVERGED"
+   ]
+  },
+  {
+   "name": "k4 mean_Q",
+   "equal": true,
+   "mine": 0.0067889197833008235,
+   "theirs": 0.0067889197833008235
+  },
+  {
+   "name": "k4 Q_cells_pos",
+   "equal": true,
+   "mine": 24,
+   "theirs": 24
+  },
+  {
+   "name": "k4 Q_parents_pos",
+   "equal": true,
+   "mine": 8,
+   "theirs": 8
+  },
+  {
+   "name": "k4 mean_Qdag",
+   "equal": true,
+   "mine": 0.0067889197833008235,
+   "theirs": 0.0067889197833008235
+  },
+  {
+   "name": "k4 class",
+   "equal": true,
+   "mine": "M-AHEAD",
+   "theirs": "M-AHEAD"
+  },
+  {
+   "name": "k4 held",
+   "equal": true,
+   "mine": true,
+   "theirs": true
+  },
+  {
+   "name": "k4 rates",
+   "equal": true,
+   "mine": [
+    0.003,
+    0.01
+   ],
+   "theirs": [
+    0.003,
+    0.01
+   ]
+  },
+  {
+   "name": "k4 mean_C",
+   "equal": true,
+   "mine": 0.2164461856914891,
+   "theirs": 0.2164461856914891
+  },
+  {
+   "name": "k4 mean_Cd",
+   "equal": true,
+   "mine": 0.20965726590818828,
+   "theirs": 0.20965726590818828
+  },
+  {
+   "name": "k4 xmd_mean",
+   "equal": true,
+   "mine": 0.7790599452952544,
+   "theirs": 0.7790599452952544
+  },
+  {
+   "name": "k4 xmd_min",
+   "equal": true,
+   "mine": 0.21857625246047974,
+   "theirs": 0.21857625246047974
+  },
+  {
+   "name": "k4 xmd_max",
+   "equal": true,
+   "mine": 1.4822594840079546,
+   "theirs": 1.4822594840079546
+  },
+  {
+   "name": "k4 harm_Hused",
+   "equal": true,
+   "mine": -0.22664969321340322,
+   "theirs": -0.22664969321340322
+  },
+  {
+   "name": "k4 harm_Hused_n",
+   "equal": true,
+   "mine": 27,
+   "theirs": 27
+  },
+  {
+   "name": "k4 harm_Hmean",
+   "equal": true,
+   "mine": -0.003563630912039015,
+   "theirs": -0.003563630912039015
+  },
+  {
+   "name": "k4 harm_Hmean_n",
+   "equal": true,
+   "mine": 17,
+   "theirs": 17
+  },
+  {
+   "name": "k4 harm_Hv",
+   "equal": true,
+   "mine": -0.002966577394141091,
+   "theirs": -0.002966577394141091
+  },
+  {
+   "name": "k4 harm_Hv_n",
+   "equal": true,
+   "mine": 17,
+   "theirs": 17
+  },
+  {
+   "name": "k4 used_slots",
+   "equal": true,
+   "mine": [
+    3937,
+    3934,
+    3847,
+    3348,
+    3388,
+    3387,
+    3472,
+    3562,
+    3615,
+    4003,
+    4048,
+    4039,
+    3954,
+    3981,
+    3961,
+    3551,
+    3478,
+    3672,
+    3933,
+    3890,
+    3965,
+    3625,
+    3545,
+    3550,
+    3948,
+    4024,
+    3892
+   ],
+   "theirs": [
+    3937,
+    3934,
+    3847,
+    3348,
+    3388,
+    3387,
+    3472,
+    3562,
+    3615,
+    4003,
+    4048,
+    4039,
+    3954,
+    3981,
+    3961,
+    3551,
+    3478,
+    3672,
+    3933,
+    3890,
+    3965,
+    3625,
+    3545,
+    3550,
+    3948,
+    4024,
+    3892
+   ]
+  },
+  {
+   "name": "j_dagger",
+   "equal": true,
+   "mine": 4,
+   "theirs": 4
+  },
+  {
+   "name": "k_star",
+   "equal": true,
+   "mine": null,
+   "theirs": null
+  },
+  {
+   "name": "row",
+   "equal": true,
+   "mine": 12,
+   "theirs": 12
+  },
+  {
+   "name": "label base",
+   "equal": true,
+   "mine": "CONVERGENCE NOT REACHED (BOTH STILL IMPROVING)",
+   "theirs": "CONVERGENCE NOT REACHED (BOTH STILL IMPROVING)"
+  },
+  {
+   "name": "dependence_qualified",
+   "equal": true,
+   "mine": false,
+   "theirs": false
+  },
+  {
+   "name": "D[FLAT]",
+   "equal": true,
+   "mine": "DEPENDENT",
+   "theirs": "DEPENDENT"
+  },
+  {
+   "name": "F1 mean",
+   "equal": true,
+   "mine": 0.2164461856914891,
+   "theirs": 0.2164461856914891
+  },
+  {
+   "name": "F2 mean",
+   "equal": true,
+   "mine": 0.4430958789048923,
+   "theirs": 0.4430958789048923
+  },
+  {
+   "name": "F3 mean",
+   "equal": true,
+   "mine": 0.22000981660352814,
+   "theirs": 0.22000981660352814
+  },
+  {
+   "name": "F1 cells/parents",
+   "equal": true,
+   "mine": [
+    27,
+    9
+   ],
+   "theirs": [
+    27,
+    9
+   ]
+  },
+  {
+   "name": "F2 cells/parents",
+   "equal": true,
+   "mine": [
+    27,
+    9
+   ],
+   "theirs": [
+    27,
+    9
+   ]
+  },
+  {
+   "name": "F3 cells/parents",
+   "equal": true,
+   "mine": [
+    27,
+    9
+   ],
+   "theirs": [
+    27,
+    9
+   ]
+  },
+  {
+   "name": "OA label",
+   "equal": true,
+   "mine": "REPLICATED AT 16,384",
+   "theirs": "REPLICATED AT 16,384"
+  },
+  {
+   "name": "OA mean_Q",
+   "equal": true,
+   "mine": 0.013418922545733276,
+   "theirs": 0.013418922545733276
+  },
+  {
+   "name": "OA drun_F",
+   "equal": true,
+   "mine": 0.021806043193296265,
+   "theirs": 0.021806043193296265
+  },
+  {
+   "name": "OA drun_D",
+   "equal": true,
+   "mine": 0.01751168265386882,
+   "theirs": 0.01751168265386882
+  },
+  {
+   "name": "BASE",
+   "equal": true,
+   "mine": [
+    2.3353039249777794,
+    2.3783701099455357,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.381515461951494,
+    2.338582579046488,
+    2.4047661162912846,
+    2.3341453075408936
+   ],
+   "theirs": [
+    2.3353039249777794,
+    2.3783701099455357,
+    2.427720759063959,
+    2.3269136399030685,
+    2.3294604420661926,
+    2.381515461951494,
+    2.338582579046488,
+    2.4047661162912846,
+    2.3341453075408936
+   ]
+  }
+ ]
+}
