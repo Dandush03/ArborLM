@@ -12,3 +12,4 @@
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-store-B-0.01", "utc": "20261121T233054100851Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "e3e3c464088ae31fd233d1d99a738329aa3044c5b37bdfee794f943375c1898d", "unit": "grid-store-B-0.01", "utc": "20261121T233602815477Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-lora-A-0.0001", "utc": "20261121T233602959126Z"}
+{"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "e1a44802be6d98aecf6c8dbf9ef6fe9188ff452753474cf2f448908384cc4c48", "unit": "grid-lora-A-0.0001", "utc": "20261121T234233335294Z"}
