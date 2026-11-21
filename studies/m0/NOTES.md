@@ -44,3 +44,11 @@ Nothing here is a result. No model was run, nothing was downloaded, no score exi
 - The model-facing stages (G-load, R1 to R3, F, M, A, V), nuisance variations beyond the registered order function, and the confirmation bootstrap at registered size (the function exists and is tested small).
 - Removal of read permission on the sealed directory (see above).
 - mypy on `studies/m0`: strict mypy gives 142 errors (the repository's other study packages also fail it: `studies/p10s1` 84); only `src/arborlm` is the repository's gate and it passes.
+
+## After the I0-a audit (AUDIT_I0A.md): defects fixed that hold under either design
+
+Fixed (each with a test in `tests/test_m0_audit_fixes.py` that failed before): B1 (the size search now uses M_e, `tests_total`); R1 (union gain on the t branch is the minimum of the two one-sided t bounds, independent of the teacher order); R3 (`raises=AssertionError` on the S6 expected failure); R4 (the "passes" test covers S1 only; S3 at the registered 0.03 is a strict expected failure); R5 (oracle test with tau > 0: S1, S3); R7 (config is now `configs/m0_reference_models.toml`, as ADR section 13); C1 (exact Student t quantile through the incomplete beta function); C2 (a stratum without residuals uses the residuals pooled over strata); C3 (stronger tests: guaranteed-outcome size search, known-answer tau interval and confirmation, shrinkage factors on data with tau2 > 0); C4 (a cluster id in two strata is refused); C5 (capacity failure is recorded as "not shown", not "cannot").
+
+NOT fixed: B2 (the simulation at G < 30 and single-lineage strata: depends on lineages as clusters or as strata, the human lead's decision); R2 (the gate's operating point: pending the lead); R6 (second solvers must be rewritten by a separate context).
+
+Known defect awaiting the lineage work (not rewritten, not a checker fix): `R1.categories_follow` is ambiguous in 236 of 500 development items under existential import (the item does not say that a category may be empty), and about 80 % of its keys are "cannot be determined". Both solvers agree because both use the modern reading; no checker can fix this.

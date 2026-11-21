@@ -26,13 +26,69 @@ from studies.m0.core import derive_seed
 _N = NormalDist()
 
 
+def _betacf(a: float, b: float, x: float) -> float:
+    """Continued fraction of the regularised incomplete beta function (modified Lentz)."""
+    tiny = 1e-300
+    qab, qap, qam = a + b, a + 1.0, a - 1.0
+    c, d = 1.0, 1.0 - qab * x / qap
+    d = 1.0 / (d if abs(d) > tiny else tiny)
+    h = d
+    for m in range(1, 400):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1.0 + aa * d
+        d = 1.0 / (d if abs(d) > tiny else tiny)
+        c = 1.0 + aa / c
+        c = c if abs(c) > tiny else tiny
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1.0 + aa * d
+        d = 1.0 / (d if abs(d) > tiny else tiny)
+        c = 1.0 + aa / c
+        c = c if abs(c) > tiny else tiny
+        delta = d * c
+        h *= delta
+        if abs(delta - 1.0) < 1e-15:
+            break
+    return h
+
+
+def _betainc(a: float, b: float, x: float) -> float:
+    if x <= 0.0:
+        return 0.0
+    if x >= 1.0:
+        return 1.0
+    front = math.exp(math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log(1.0 - x))
+    if x < (a + 1.0) / (a + b + 2.0):
+        return front * _betacf(a, b, x) / a
+    return 1.0 - front * _betacf(b, a, 1.0 - x) / b
+
+
+def t_cdf(x: float, df: int) -> float:
+    """Student t distribution function through the incomplete beta function."""
+    tail = 0.5 * _betainc(df / 2.0, 0.5, df / (df + x * x))  # P(T > |x|)
+    return 1.0 - tail if x >= 0 else tail
+
+
 def t_quantile(p: float, df: int) -> float:
-    """Student t quantile by the Cornish-Fisher series in 1/df (accurate for df >= 5; conservative below)."""
-    z = _N.inv_cdf(p)
-    g1 = (z**3 + z) / 4
-    g2 = (5 * z**5 + 16 * z**3 + 3 * z) / 96
-    g3 = (3 * z**7 + 19 * z**5 + 17 * z**3 - 15 * z) / 384
-    return z + g1 / df + g2 / df**2 + g3 / df**3
+    """Exact Student t quantile (bisection on ``t_cdf``; audit C1 replaced the Cornish-Fisher series, which was
+    anti-conservative below df 5)."""
+    if p == 0.5:
+        return 0.0
+    if p < 0.5:
+        return -t_quantile(1.0 - p, df)
+    lo, hi = 0.0, 1.0
+    while t_cdf(hi, df) < p:
+        hi *= 2.0
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        if t_cdf(mid, df) < p:
+            lo = mid
+        else:
+            hi = mid
+        if hi - lo < 1e-13 * max(1.0, hi):
+            break
+    return 0.5 * (lo + hi)
 
 
 @dataclass(frozen=True)
@@ -76,6 +132,8 @@ class Table:
         """Rows = clusters (sorted by stratum, cluster id); columns = [n_items, sum of each named column].
         Also returns [(stratum, first row, last row + 1)] for each stratum."""
         key = {c: s for c, s in zip(self.clusters, self.strata, strict=True)}
+        if len(set(zip(self.clusters, self.strata, strict=True))) != len(key):
+            raise ValueError("a cluster id occurs in more than one stratum")
         order = sorted(key, key=lambda c: (key[c], c))
         pos = {c: i for i, c in enumerate(order)}
         m = torch.zeros((len(order), 1 + len(names)), dtype=torch.float64)
@@ -241,6 +299,19 @@ def union_gain(table: Table, t1: str, t2: str, b: int, seed: int, label: str = "
     best = t1 if s1 >= s2 else t2  # ties go to the first teacher named
     cbest = _col(best)
     lin = f"g_{t1}_{t2}"
+    if table.n_clusters() < 30:
+        # t branch (audit R1): G_U = min over the two teachers of (U - score of that teacher); the smaller of the two one-sided
+        # t bounds is a valid 95 % lower bound of the minimum, whichever teacher is the better one
+        los = []
+        for t in (t1, t2):
+            col = f"g_{t1}_{t2}_{t}"
+            if col not in table.cols:
+                table.add(col, [x - y for x, y in zip(table.cols[u], table.cols[_col(t)], strict=True)])
+            cl, _ = table.cluster_table([col])
+            mean, se, g = cluster_robust(cl, 1)
+            los.append(mean - t_quantile(0.95, g - 1) * se)
+        uu = sum(table.cols[u]) / table.n
+        return UnionGain(uu, max(s1, s2), uu - max(s1, s2), best, Interval(uu - max(s1, s2), min(los), float("nan"), "t", True))
     if lin not in table.cols:  # linearisation with the better teacher fixed at the point estimate
         table.add(lin, [x - y for x, y in zip(table.cols[u], table.cols[cbest], strict=True)])
     iv = interval(

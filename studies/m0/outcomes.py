@@ -199,7 +199,10 @@ class PartOutcome:
 
 
 def analyse_part(p: PartInput, roles: Roles, cfg: Mapping[str, Any], *, b: int, seed: int, sims: int, tests_total: int, m_tests: int) -> PartOutcome:
-    """Apply sections 9.1, 9.4 and 10 to one evaluation part. ``b`` bootstrap resamples, ``sims`` simulated samples."""
+    """Apply sections 9.1, 9.4 and 10 to one evaluation part. ``b`` bootstrap resamples, ``sims`` simulated samples.
+
+    ``tests_total`` is M_e, the size of the whole conjunction (Boole's bound uses it for both the size search and the floor
+    check); ``m_tests`` is the per-part count and is kept for the record only (audit B1)."""
     deltas = list(cfg["stats"]["margin_grid"])
     lo, hi = cfg["bands"]["floor_ceiling_low"], cfg["bands"]["floor_ceiling_high"]
     S0 = roles.student
@@ -244,7 +247,7 @@ def analyse_part(p: PartInput, roles: Roles, cfg: Mapping[str, Any], *, b: int, 
         target = per_test_target(cfg["stats"]["power"], tests_total)
         for dl in deltas:
             floor_pw[dl] = (pw.cluster_floor(comp, dl, p.n_clusters_sealed), pw.cluster_floor(comp, dl, p.n_clusters_sealed, tau=tau[2]))
-            req[dl], tried[dl] = pw.required_size(comp, dl, p.n_clusters_sealed, m_tests, sims, seed, cfg["stats"]["power"], tuple(cfg["stats"]["size_ladder"]), label=p.evaluation + p.part)
+            req[dl], tried[dl] = pw.required_size(comp, dl, p.n_clusters_sealed, tests_total, sims, seed, cfg["stats"]["power"], tuple(cfg["stats"]["size_ladder"]), label=p.evaluation + p.part)
             under[dl] = underpowered(floor_pw[dl][0], target, req[dl], p.pool)
     out = PartOutcome(p.evaluation, p.part, p.domain, c, scores, fc, part_not_evaluable(fc), paired, ahead, disc, d_e, d_pair, union, ug, cap, tau, floor_pw, req, tried, under)
     out.lines = outcome_lines(out, roles, deltas)

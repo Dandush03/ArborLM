@@ -45,15 +45,21 @@ def test_scenarios_match_review_3_definitions() -> None:
     assert K["tolerance"] == 0.03 and K["max_monte_carlo_se"] == 0.01 and K["clusters"] == 300 and K["n_items"] == 6000
 
 
-@pytest.mark.parametrize("name", ["S1", "S3"])
-def test_short_known_truth_passes_in_balanced_and_unbalanced_scenarios(name: str) -> None:
+@pytest.mark.parametrize("name", ["S1"])
+def test_short_known_truth_passes_in_the_balanced_scenario_at_the_loose_tolerance(name: str) -> None:
     r = _short(name)
     assert r.verdict == "PASS", r
 
 
-@pytest.mark.xfail(strict=True, reason="FINDING: revision 4's plug-in tau-hat under-recovers the known power in S6 (unbalanced, tau = 0); see studies/m0/NOTES.md")
+@pytest.mark.xfail(strict=True, raises=AssertionError, reason="FINDING: revision 4's plug-in tau-hat under-recovers the known power in S6 (unbalanced, tau = 0); see studies/m0/NOTES.md")
 def test_short_known_truth_s6() -> None:
     assert _short("S6").verdict == "PASS"
+
+
+@pytest.mark.xfail(strict=True, raises=AssertionError, reason="FINDING: S3 misses the REGISTERED tolerance 0.03 (long run: -0.052; auditor -0.060); the loose 0.06 tolerance hides it")
+def test_registered_tolerance_fails_in_s3() -> None:
+    r = kt.run_scenario(SC["S3"], K["clusters"], K["n_items"], 150, 300, 6000, K["seed"], K["tolerance"], 1.0)
+    assert r.verdict == "PASS", r
 
 
 def test_the_gate_can_fail_with_a_tight_tolerance_and_with_a_broken_tau_formula(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -82,3 +88,21 @@ def test_the_machinery_recovers_the_known_power_when_the_true_tau_is_plugged_in(
 def test_inconclusive_when_the_monte_carlo_bound_is_exceeded() -> None:
     r = kt.run_scenario(SC["S1"], 300, 6000, 4, 100, 2000, 953302, 0.5, 0.0001)
     assert r.verdict.startswith("INCONCLUSIVE")
+
+
+def test_oracle_with_positive_tau_recovers_the_known_power() -> None:
+    """Audit R5: S1 and S3 have tau = 0.05, so the shrinkage path (lambda_g > 0) is exercised."""
+    for name in ("S1", "S3"):
+        sc = SC[name]
+        rng = random.Random(78)
+        got = []
+        for i in range(30):
+            comp = pw.components(kt.synthetic_m0(sc, 300, rng))
+            t2 = sc.tau**2
+            lam = tuple(math.sqrt(t2 / (t2 + comp.s_w2 / m)) for m in comp.m_g)
+            assert all(x > 0 for x in lam)
+            xbar = fmean(comp.mean_g)
+            dev = tuple(lam[j] * (comp.mean_g[j] - xbar) for j in range(300))
+            got.append(pw.simulate_power(dataclasses.replace(comp, tau2=t2, lam=lam, dev=dev), 6000, [sc.delta], 300, 300, 953303, label=f"p{i}")[sc.delta][0])
+        known, _ = kt.truth_power(sc, 300, 6000, 4000, 953303)
+        assert abs(fmean(got) - known) < 0.06, (name, fmean(got), known)

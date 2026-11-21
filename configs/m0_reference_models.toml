@@ -2,7 +2,7 @@
 #
 # Nothing here is confirmed. The human lead confirms or changes every number marked below before the freeze (ADR-0033 section 14,
 # choices 5, 9 and 10). No value was tuned after seeing any score: no model has been run and no score exists.
-# The file name follows the implementation brief; ADR-0033 section 13 names it configs/m0_reference_models.toml (ruling needed 1).
+# The file name is that of ADR-0033 section 13 (audit R7; the first implementation used configs/m0_references.toml, as the brief said).
 # Self-checked implementation only: not independent review, not Astra validation, not human approval.
 
 [meta]

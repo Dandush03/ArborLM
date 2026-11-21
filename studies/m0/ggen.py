@@ -48,6 +48,7 @@ from studies.m0.core import (
 )
 from studies.m0.scoring import canon, in_grammar, normalise_answer
 
+CAPACITY_FAILURE_MEANING = "a failure means the required number of distinct items was not shown within the attempt budget (3x the need); it does not prove that the generator cannot produce them"
 PRIVATE_EVALS = ("R1", "R2", "M1", "C1")
 PARTS = ("A", "B")
 ALL_ROLES = ("tuning", "development", "sealed")
@@ -374,6 +375,7 @@ def rehearse(out: Path, workers: int = 2, remove_read: bool = False) -> dict[str
     log["capacity"] = {
         "reading": "worst case: the whole development and sealed pools of the part could fall on one level; reserve levels demand the tuning draw only",
         "factor": sizes.capacity_factor,
+        "failure_meaning": CAPACITY_FAILURE_MEANING,
         "rows": [asdict(r) for r in rows],
         "failed": [asdict(r) for r in rows if not r.passed],
         "n_rows": len(rows),

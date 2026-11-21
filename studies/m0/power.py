@@ -14,7 +14,7 @@ Implements, exactly as worded there:
 
 Standard library and the locked torch only. Readings that the wording leaves open, each chosen for the least favourable
 result and listed in studies/m0/NOTES.md: V is pooled over strata (strata with one cluster contribute nothing);
-n is spread over the G_e drawn clusters as evenly as integers allow; a stratum with no residual keeps zero noise.
+n is spread over the G_e drawn clusters as evenly as integers allow; a stratum with no residual uses the residuals pooled over strata (zero noise only if there are none anywhere).
 """
 
 from __future__ import annotations
@@ -103,6 +103,10 @@ def components(clusters: Sequence[tuple[str, Sequence[float]]]) -> Components:
                 k = math.sqrt(m_g[i] / (m_g[i] - 1))
                 pool.extend((v - mean_g[i]) * k for v in clusters[i][1])
         res[h] = tuple(pool)
+    pooled_all = tuple(v for h in strata for v in res[h])
+    for h in strata:  # a stratum with no residual of its own uses the residuals pooled over strata (audit C2)
+        if not res[h]:
+            res[h] = pooled_all
     return Components(strata, sc, mean_g, m_g, ssw, mu, d, s_w2, v_between, tau2, lam, dev, res)
 
 
