@@ -1,0 +1,216 @@
+# P10-I-S1 block M (ADR-0024) frozen constants. Every threshold and rule parameter of the study lives here and nowhere else; the ADR text is not a frozen input
+# (it is hashed for provenance only). A test asserts that each value below equals the value of the ADR section named beside it.
+# Not frozen. No registered run is approved: the freeze and the registered stages need Decision 2. Lane L and block X are not implemented.
+schema_version = 1
+experiment_family = "P10IS1_CAPACITY_SCALING"
+spec_reference = "docs/decisions/ADR-0024-p10-i-s1-capacity-scaling.md"
+
+[thresholds]
+# ADR-0021 section 8, unchanged where ADR-0024 section 9 restates them
+ref_r2_min = 0.95              # REF: R2 a_use at U_P
+dep_use_floor = 0.25           # DEP applies at a_use >= 0.25 (section 8.1)
+dep_c_tail = 1e-4              # DEP-c (i): upper 1 - 1e-4 quantile of Binomial(m, p+)  (section 8.1)
+dep_c_floor = 0.01             # DEP-c (ii): (c - u - m b/n)/n > 0.01  (section 8.1, section 21 item 7)
+gain_min = 0.5                 # section 9.1
+null_max = 0.25
+plateau_max = 0.10             # section 7.2 item 3: i*(U) - i*(U/2) <= 0.10
+plateau_floor_a_use = 0.25     # i*(U/2) >= Fano(0.25) = 0.473 bits
+plateau_floor_i_printed = 0.473
+loaded_i_max = 4.0
+ceiling_i = 4.5
+a_use_floor_capacity = 0.5
+arm_a_use_at_largest = 0.80
+dense_ahead_bits = -0.25
+beats_dense_ratio = 1.10
+tree_ahead_ratio = 1.03
+tree_competitive_ratio = 0.97
+saturation_ratio = 3.0         # section 9.4
+efficiency_i_t = 3.0           # section 9.5
+efficiency_updates_factor = 0.5
+efficiency_cost_factor = 0.8
+dense_faster_cost = 0.8
+calibration_a_use_foq = 0.90   # section 7.2 U_P rule: F-OQ
+calibration_a_use_r2 = 0.95    # section 7.2 U_P rule: R2
+undertrained_a_use = 0.90      # section 4: H8 UNDERTRAINED-AT-U_P below this at U_P
+paired_all = 5
+paired_most = 4
+replicates = 5
+sparse_ratio_min_replicates = 4
+not_evaluated_min = 2
+panel_disagree_min = 2
+not_full_min = 2
+unloaded_min = 4
+
+[mc]
+# section 8.2: matched-compute grid, multiples of U_P
+grid = [1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 6.0]
+
+[rates]
+# section 7.1
+grid = [0.001, 0.003, 0.01, 0.03, 0.1]
+tie_difference = 0.02
+extension_up = [0.3, 1.0]       # the ADR names only the first step (0.3); the second step (1.0) is NOT named by the ADR: the implementer chose it (grid continued); ruled by the lead on 2026-11-18; to be recorded in ADR-0024's rulings
+extension_down = [0.0003, 0.0001]  # likewise: 0.0003 is the ADR's, 0.0001 is not named by it (ruled by the lead on 2026-11-18; to be recorded in ADR-0024's rulings)
+extensions_max = 2             # at most twice per unit in total, across both selections
+provisional_readout = { "2048" = 8192, "8192" = 8192, "32768" = 16384 }   # rows -> updates (P10-S1's U_P values)
+loaded_readout = 65536
+walk_steps = 4                 # readout/2, /4, /8, /16
+
+[ladder]
+# section 7.2 items 1, 5, 6
+base = 65536
+factors_half_units = [2, 3]    # the ladder is 32768 * {2^j (j >= 1)} and 32768 * {3 * 2^j (j >= 0)}: 65536, 98304, 131072, 196608, ...
+half_unit = 32768
+levels = 4                     # the first four ladder points above U0; the fourth is 4 x U0
+u_p_candidates = [8192, 16384, 32768, 65536]
+u_p_ceiling = 65536
+doubling_from = 512
+u_p_multiples = [1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 6.0]
+snapshot_fractions = [0.0625, 0.125, 0.25, 0.5, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0, 6.0]
+run_multiplier = 6
+r2_run_multiplier = 1
+calibration_ceiling = { "8192/1024" = 1572864, "2048/256" = 1572864, "32768/4096" = 3145728 }   # 4 x P10-S1's registered run lengths (section 7.2 item 5)
+p10s1_run = { "8192/1024" = 393216, "2048/256" = 393216, "32768/4096" = 786432 }
+calibration_i_max = 4.0
+
+[grid]
+# section 5
+cells = [[2048, 1024], [2048, 4096], [8192, 1024], [8192, 4096], [8192, 16384], [32768, 4096], [32768, 16384]]
+saturation_only_cell = [2048, 256]
+loaded_cells = [[8192, 1024], [32768, 4096]]
+saturation_cells = [[2048, 256], [8192, 1024], [32768, 4096]]
+doq_cells = [[2048, 4096], [8192, 4096], [8192, 16384], [32768, 16384], [8192, 1024], [32768, 4096]]
+r2_cells = [[2048, 4096], [8192, 16384], [32768, 32768]]
+h8_cells = [[2048, 1024], [2048, 4096], [8192, 1024], [8192, 4096], [8192, 16384], [32768, 4096], [32768, 16384]]
+row_facts = [2048, 8192, 32768]
+u_p_larger_step_cell = { "2048" = [2048, 4096], "8192" = [8192, 4096], "32768" = [32768, 16384] }
+r2_reference_cell = { "2048" = [2048, 4096], "8192" = [8192, 16384], "32768" = [32768, 32768] }
+table_facts = 32768
+trained_configurations = 31
+registered_cells = 155
+registered_cells_without_256 = 150
+steps = [["C1", 8192, 1024, 4096, "loaded"], ["N1", 2048, 1024, 4096, "control"], ["C2", 32768, 4096, 16384, "loaded"], ["N2", 8192, 4096, 16384, "control"]]
+
+[seeds]
+# section 6 and docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY.md section 4.2
+registered_base = 240001
+registered_stride = 100
+registered_draws = 5
+init_base = 330100             # replicate r -> 330100 + r
+calibration_bases = [249001, 249101]
+calibration_init = [330191, 330193]
+rehearsal_base = 249201
+rehearsal_init = 330192
+test_base = 933001
+test_top = 933999
+test_init = [330198, 330199]
+h8_offset = 40
+index_offset = 60
+# the declared re-use for the adapter identity gate: P10-S1's draw 1 with initialisation 2101, F-OQ and T-OQ at 8K/4K (registry section 4.6)
+identity_gate_draw = 1
+identity_gate_init = 2101
+identity_gate_updates = [512, 1024, 2048]
+identity_gate_cell = [8192, 4096]
+
+[seed_ranges]
+registered = [240001, 240499]
+calibration = [249001, 249199]
+rehearsal = [249201, 249299]
+init = [330101, 330199]
+test = [933001, 933999]
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"
+checker_allocation_name = "P10-I-S1 ADR-0024"
+
+[platform]
+# section 16
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 1
+torch_interop_threads = 1
+deterministic_algorithms = true
+
+[resources]
+workers = 6
+workers_alternatives = [6, 7]  # the measuring rehearsal chooses the count with the lower projected charged hours (a cost rule)
+rss_worker_bytes = 3221225472
+rss_aggregate_bytes = 19327352832
+eval_chunk_elements = 1048576
+
+[quiet]
+# section 16 as amended by the quiet-rule addendum (ADR-0024-addendum-quiet-rule.md, A3 and A8 item 2). Loads are INTEGERS in hundredths (v = round(x, 2) x 100). The fixed 1.0 limit is REMOVED.
+# The measured figures below stay provisional (nothing reads them) until the study's own baseline has been taken (`python -m studies.p10is1.baseline run`), its record and samples committed under results/, and the
+# figures copied here by hand. The candidate plan refuses while baseline_provisional is true; the freeze re-derives load_p95, load_limit, condition and both presences from the committed samples and refuses a difference.
+baseline_provisional = false
+load_p95 = 167                 # measured: nearest-rank 95th percentile of the 360 window loads, hundredths (placeholder while provisional)
+load_limit = 217               # measured: L = load_p95 + load_margin, hundredths (placeholder while provisional)
+condition = "open"             # measured: "open" (the application and Claude Code may be open, the lead silent) or "closed" (by the fallback of A3.1 item 7)
+app_present = true             # measured: the desktop application's presence at the baseline (a stage must equal it)
+cli_present = true             # measured: Claude Code's presence at the baseline (a stage must equal it)
+baseline_record_path = "results/p10is1-quiet-baseline-20261121/record.json"      # repo-relative path of the committed baseline record (results/...)
+baseline_record_sha256 = "62c031ecf29f9634cc3e7e8b170c17e68a7298a7ade1a50a7c8f828f4ba347bd"    # SHA-256 of that record file (the record names the samples file and its SHA-256)
+load_margin = 50
+load_ceiling = 300
+load_report_above = 250        # a report to the human lead before the freeze, not a gate
+percentile = 95
+baseline_samples = 360         # the 60-minute window
+baseline_interval_seconds = 10
+settle_samples = 60            # the 10-minute settle period
+settled_median_diff_max = 25   # |median(T1) - median(T3)| <= 25 hundredths (two-sided)
+settled_p95_diff_max = 50      # |P95(T1) - P95(T3)| <= 50 hundredths (two-sided)
+sample_gap_max_seconds = 15
+hid_idle_min_seconds = 600
+end_load_delay_seconds = 120
+baseline_session_hours = 6
+baseline_attempt_minutes = 70  # no attempt starts that could not finish inside the session
+open_sessions_before_closed = 3
+closed_sessions_to_human_lead = 3
+timing_spread_max = 0.05       # (max - min) / median of the three CPU repeats, per item
+timing_spread_sessions_to_human_lead = 3
+vm_markers = ['com\.apple\.Virtualization\.VirtualMachine', '(^|/)qemu-system-', '(^|/)limactl(\s|$)', '(^|/)colima(\s|$)', '/Docker\.app/', 'com\.docker\.(backend|virtualization|vmnetd)', '(^|/)vfkit(\s|$)', '(^|/)krunkit(\s|$)', '/OrbStack\.app/', '(^|/)prl_vm_app(\s|$)', '/Parallels Desktop\.app/', '(^|/)VirtualBoxVM(\s|$)', '/VirtualBox\.app/', '/UTM\.app/', '/VMware Fusion\.app/', '(^|/)vmware-vmx(\s|$)']  # regular expressions on the full command line, CASE-SENSITIVE and each anchored to an executable path, a bundle name or a bundle id (N1: the bare case-insensitive `UTM` matched imklaunchagent and TextInputMenuAgent on this Mac)
+app_markers = ['/Applications/Claude\.app/Contents/MacOS/Claude']  # the desktop application (case-sensitive)
+cli_markers = ['(^|/)claude(\s|$)']  # any process whose command line runs Claude Code (the `claude` CLI), listed separately from the application
+poll_seconds = 600             # retried every 10 minutes
+session_hours = 6              # for at most 6 hours in a session
+attempts = 6                   # the first attempt and five rescheduled attempts
+not_measured_after_paused_attempts = 6
+timing_warmup_updates = 32
+timing_updates = 256
+timing_repeats = 3
+throughput_batches = [1, 128]
+throughput_repeats = 5
+throughput_cv_max = 0.05
+
+[memory_check]
+# section 16.1 and ruling 26
+retry_seconds = 600
+max_hours = 6
+page_kinds = ["free", "inactive", "purgeable", "speculative"]
+
+[budget]
+# section 15 and 17.1
+total_cap_hours = 60.0         # a hard limit that only the human lead raises
+level_count = 4
+cell_order = [[2048, 256], [8192, 1024], [32768, 4096]]   # ascending load, then ascending facts
+cap_rule = "charged + 2 x projected remaining, rounded up to the hour"
+
+[caps]
+# section 15: resource caps in charged hours; provisional = true makes the freeze refuse
+provisional = false
+rehearsal_hours = 13.0
+calibration_hours = 20.0
+train_hours = 31.0
+evaluate_hours = 1.0
+timing_hours = 1.0
+throughput_hours = 1.0
+analysis_hours = 1.0
+total_hours = 52.0
+
+[rehearsal]
+# the tiny synthetic memory of the unit tests and the synthetic rehearsal phase (test seeds, a random backbone)
+synthetic_facts = 128
+synthetic_table = 512
+synthetic_unseen = 64
+synthetic_slots = [1024, 4096]
+synthetic_updates = 16

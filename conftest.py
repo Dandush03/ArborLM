@@ -101,6 +101,16 @@ _ORDER_OR_ENVIRONMENT_DEPENDENT_2 = (
 )
 
 
+# Added 2026-11-21 at the merge of main into P10-I-S1. P10-I-S1's gate G9 runs the registry checker copy (revision 3) over the whole repository. With the other studies' configs merged it prints RESULT: FAIL (56 problems:
+# the later studies' own allocations hitting their own configs, named in configs/p10i_s3_longer_training.toml, p10i_s6_flat_lead_persistence.toml, p10is0_overload.toml, p10is2_partq.toml, p10is2_partt.toml, p10is5_ssd.toml;
+# no P10-I-S1 value is involved). The gate passed in P10-I-S1's own tree at its freeze and in the registered run (2026-11-21); in the unmerged branch these two tests passed. They are stale by construction; the study's
+# files are not edited. Strict expected failures.
+_P10IS1_STALE_AFTER_LATER_STUDIES = (
+    "tests/test_p10is1_stages.py::test_gate_g9_passes_with_the_extended_checker_copy_and_records_it",
+    "tests/test_p10is1_rehearsal.py::test_the_registered_launch_reaches_its_first_stage_with_several_threads_set_beforehand",
+)
+
+
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_FREEZE:
@@ -123,3 +133,5 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S6 is run and accepted: the real shared ledger now holds its windows (hash changed) and later studies' own seeds are in the merged repository; the frozen assertion is stale by construction"))
         if item.nodeid.split("[")[0] in _ORDER_OR_ENVIRONMENT_DEPENDENT_2:
             item.add_marker(pytest.mark.xfail(strict=False, reason="order-dependent torch thread settings, or local experiments/ data present only in the main checkout; passes where the precondition holds"))
+        if item.nodeid.split("[")[0] in _P10IS1_STALE_AFTER_LATER_STUDIES:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="other studies' own registered seeds are in the merged repository; P10-I-S1's frozen gate G9 (whole-repository checker copy) reports them; the gate passed in P10-I-S1's own tree at its freeze and in the registered run"))

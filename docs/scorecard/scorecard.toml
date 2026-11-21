@@ -14,7 +14,7 @@
 # (tests/test_scorecard.py runs it).
 
 updated = "2026-11-21"
-basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6"
+basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6, with the P10-I-S1 outcome record on its branch (not yet accepted by the human lead)"
 scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
 
 [[row]]
@@ -45,6 +45,7 @@ note = "Flat memory led dense at 16,384 updates; the lead shrank by 262,144 and 
 evidence = [
   "P10-I-S3 line 2 [FLAT]: MEMORY AHEAD (DENSE STILL IMPROVING), mean lead +0.0127 against 0.005, 27 of 27 cells ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
   "P10-I-S6: CONVERGENCE NOT REACHED (BOTH STILL IMPROVING) at 262,144 updates; descriptive only: LEAD SHRINKING, mean lead +0.0124 at 16,384 updates and +0.0068 at 262,144; independently recomputed; accepted as registered ([outcome](results/p10i-s6-run-2026-11-20/OUTCOME.md), [acceptance](results/p10i-s6-run-2026-11-20/ACCEPTANCE.md)).",
+  "P10-I-S1 (trained oracle-addressed store against the dense map, 1,024 to 16,384 slots): the dense map is ahead at its best snapshot in 5 of 5 replicates at 32K/16K (d from -0.80 to -0.85 bits) and at saturation at both loaded cells (d_sat -1.67 or lower), while the flat memory is ahead at equal updates and at matched compute at 32K/16K (+1.7 to +2.7 bits); descriptive; not yet accepted by the human lead ([outcome](results/p10is1-run-2026-11-21/OUTCOME.md)).",
   "P10-I-S3 line 2 [TREE]: INCONCLUSIVE (MEMORY RATE AT EDGE). P10-I-R: the tree is behind the flat memory and no read-time cause is identified ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
 ]
 next = "The ordering at convergence is unknown: sixteen times the duration was not enough, and at the last rung both arms improve per doubling by more than the lead. No further study exists yet. The tree needs a training study that does not exist."
@@ -52,11 +53,12 @@ next = "The ordering at convergence is unknown: sixteen times the duration was n
 [[row]]
 title = "Useful capacity scaling"
 score = 3
-note = "Still inconclusive; larger stores have not proven superior capacity."
+note = "Capacity steps are present for the flat memory at 1,024 to 16,384 slots, but the registered label is negative: on this task the dense map is the better use of the parameters. Not yet accepted by the human lead."
 evidence = [
   "P10-S1: CAPACITY-INCONCLUSIVE; SATURATION-INCONCLUSIVE; the 16,384 to 65,536 step NOT TESTED ([results](results/p10s1-run-2026-11-17/)).",
+  "P10-I-S1: CAPACITY-NEGATIVE by clause (b), carried by the flat memory (F-OQ) alone; capacity steps present in 5 of 5 replicates; the dense map is ahead only at its best snapshot (D-BEST) and at saturation, while the flat memory is ahead at equal updates and at matched compute at 32K/16K; SATURATION-PROPORTIONAL for the flat memory; 16,384 to 65,536 slots not tested; the labels come from the frozen analysis through a disclosed corrected loader (the registered analysis stage is an engineering stop); independently recomputed; not yet accepted by the human lead ([outcome](results/p10is1-run-2026-11-21/OUTCOME.md)).",
 ]
-next = "P10-I-S1 (capacity): calibrated, not yet frozen; blocked on a quiet-machine limit this machine does not reach."
+next = "The human lead's decision on the P10-I-S1 outcome, and on whether the registered analysis stage should be re-run under an amending freeze. Block X (16,384 to 65,536 slots) is not approved."
 
 [[row]]
 title = "Sequential learning from teachers"

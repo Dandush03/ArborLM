@@ -20,7 +20,7 @@
 <text x="972" y="360" fill="#f2f2f2" font-size="19" text-anchor="end">3/10</text>
 <rect x="28" y="374" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="374" width="283" height="8" rx="4" fill="#6b7a99"/>
-<text x="28" y="408" fill="#c9c9c9" font-size="15">Still inconclusive; larger stores have not proven superior capacity.</text>
+<text x="28" y="408" fill="#c9c9c9" font-size="15">Capacity steps are present for the flat memory at 1,024 to 16,384 slots, but the registered label is negative: on this task the dense map is the better use of the parameters. Not yet accepted by the human lead.</text>
 <text x="28" y="464" fill="#f2f2f2" font-size="19" font-weight="600">Sequential learning from teachers</text>
 <text x="972" y="464" fill="#f2f2f2" font-size="19" text-anchor="end">1/10</text>
 <rect x="28" y="478" width="944" height="8" rx="4" fill="#262626"/>
@@ -81,6 +81,6 @@
 <rect x="28" y="1622" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="1622" width="0" height="8" rx="4" fill="#6b7a99"/>
 <text x="28" y="1656" fill="#c9c9c9" font-size="15">Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit.</text>
-<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-21: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6.</text>
+<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-21: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6, with the P10-I-S1 outcome record on its branch (not yet accepted by the human lead).</text>
 </g>
 </svg>
