@@ -8,3 +8,7 @@ Copy into the outcome / acceptance record when it is written (the frozen report 
 2. The frozen report prints an evaluate cap of 1.0 h; the effective evaluate-and-baselines cap was 2.0 h.
 3. The ledger's `evaluate` sum is 3,600 s below evaluate's true charged wall time and `evaluate-cap-extension-offset` shows +3,600 s that was never run. Evaluate's true charged time is the sum of the stage manifests' `charged_seconds` (equivalently the ledger sum excluding the two `EXTENSION` entries). The total charged seconds, every other stage's sum and the 52 h total cap are as the ledger says.
 4. The registered analysis and report stages could not run (ENGINEERING STOP — ANALYSIS LOADER DEFECT); see `docs/decisions/ADR-0024-addendum-analysis-loader-defect.md` and `results/p10is1-analysis-supplement-20261121/`.
+
+## Dated correction (2026-11-21, after the run)
+
+Item 3 above says evaluate's true charged time is the sum of the stage manifests' `charged_seconds`. **That is false**: a stage's manifest is overwritten at each invocation, so evaluate's holds only the second run (125.7 s). The true figure is the ledger's evaluate entries without the credit: 3,600.03 + 125.67 = 3,725.7 s (1.035 h). See `docs/decisions/ADR-0024-addendum-evaluate-cap-extension-correction.md`. The committed text above is left as written.
