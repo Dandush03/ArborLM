@@ -9,3 +9,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "3031b2994ae748ea384fe0e1102733dbd7141f7e3a4ca5ec6a8ed32c9e195ccf", "unit": "grid-store-B-0.003", "utc": "20261121T232534490962Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-store-A-0.01", "utc": "20261121T232534628202Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "0f07baee4ad9830d812cd96a7f250f937f6e16d6d4efa5e833655db39db35b81", "unit": "grid-store-A-0.01", "utc": "20261121T233053956687Z"}
+{"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-store-B-0.01", "utc": "20261121T233054100851Z"}
