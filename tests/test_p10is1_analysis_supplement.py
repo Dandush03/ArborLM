@@ -22,17 +22,33 @@ from studies.p10is1 import plan as planmod  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 DRIVER = ROOT / "results" / "p10is1-analysis-supplement-20261121" / "run_analysis_supplement.py"
 COUNTING = Path("/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS1-counting-20261121")
-STAGES_TEXT = """{"stage": "ladder", "status": "COMPLETE", "result": {"u_run": {"2K/256": 123456}}}
-Traceback (most recent call last):
-  File "studies/p10is1/stages.py", line 367, in build_registry
-    rec = core.read_record(p, "baseline")
+STAGES_TEXT = """=== train Sat Nov 21 03:12:29 EST 2026
+ult": {"SECRET_TRAIN_777": 1}}
+=== train exit=0
+=== ladder Sat Nov 21 07:48:05 EST 2026
+{"stage": "ladder", "status": "COMPLETE", "result": {"u_run": {"2K/256": 123456}}}
+=== ladder exit=0
+=== evaluate Sat Nov 21 09:45:37 EST 2026
+{"stage": "evaluate", "status": "PAUSED", "note": "SECRET_EVAL_VALUE_777"}
+=== evaluate exit=3
+=== baselines Sat Nov 21 10:45:38 EST 2026
+{"stage": "baselines", "status": "PAUSED"}
+=== baselines exit=3
+=== analysis Sat Nov 21 10:45:42 EST 2026
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/w/studies/p10is1/stages.py", line 483, in _execute_stage_body
+    res = do_analysis(ctx, pl, run_dir, rehearsal_record_of(pl, repo))
+{"stage": "analysis", "note": "SECRET_ANALYSIS_LINE_888"}
+    raise ValueError(f"expected a {kind!r} record, got {record.get('kind')!r}")
 ValueError: expected a 'baseline' record, got 'stage_manifest'
-{"stage": "evaluate", "status": "COMPLETE", "note": "SECRET_EVAL_VALUE_777"}
-Traceback (most recent call last):
-  File "studies/p10is1/stages.py", line 405, in do_report
-    res = read_json(run_dir / "analysis" / "analysis.json")["result"]
-FileNotFoundError: [Errno 2] No such file or directory: 'experiments/P10IS1-pre-20261118/analysis/analysis.json'
-"""
+=== analysis exit=1
+=== report Sat Nov 21 10:45:45 EST 2026
+, run_dir, plan_path, args, repo=repo, inline=inline, workers=workers)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/x/P10IS1-pre-20261118/analysis/analysis.json'
+=== report exit=1
+"""  # the structure of the real file (experiments/P10IS1-registered-20261121-stages.out): each stage's output cut to its last 1,500 bytes, section markers, no "Traceback" header, a mid-line start
 
 
 def driver() -> Any:
@@ -81,7 +97,6 @@ def test_the_corrected_loader_equals_the_frozen_loader_with_its_one_line_fixed_i
     fixed = frozen_with_the_one_line_fix_in_memory()(ctx, pl, run)
     mine = drv.build_registry(ctx, pl, run)
     assert mine == fixed and len(mine.baselines) == 2  # same keys and values: every field of the Registry
-    assert [p.name for p in (run / "baselines").glob("*.json")] == [p.name for p in (run / "baselines").glob("*.json")]  # the real directory's listing is not changed by the loader
     assert sorted(p.name for p in (run / "baselines").glob("*.json")) == ["d1_f128.json", "d2_f128.json", "manifest.json"]
     # the status of the registry still sees the baselines stage manifest (as the frozen function reads */manifest.json): nothing was hidden but the glob
     assert any(s.startswith("baselines:") or s == "baselines: PAUSED" for s in mine.status["paused"]) is False and mine.status["run"].endswith("(test)")
@@ -125,10 +140,11 @@ def test_the_driver_writes_only_a_new_directory_beside_the_run_labels_everything
     for n in names:
         text = (out / n).read_text()
         assert (drv.LABEL in text) if n.endswith(".md") else (json.loads(text)["label"] == drv.LABEL), n  # every output is labelled
-        assert "SECRET_EVAL_VALUE_777" not in text and "123456" not in text and "u_run" not in text.replace("ladder_stops", ""), n  # no non-Traceback line of the stage-output file is copied
+        assert "SECRET_EVAL_VALUE_777" not in text and "SECRET_ANALYSIS_LINE_888" not in text and "SECRET_TRAIN_777" not in text and "123456" not in text and "u_run" not in text.replace("ladder_stops", ""), n  # no non-Traceback line of the stage-output file is copied
     stop = core.read_record(out / "ENGINEERING_STOP_ANALYSIS_LOADER_DEFECT.json", "engineering_stop")
     assert stop["status"] == drv.STOP == "ENGINEERING STOP — ANALYSIS LOADER DEFECT" and stop["traceback_count"] == 2 and "got 'stage_manifest'" in stop["tracebacks"][0] and "analysis.json" in stop["tracebacks"][1]
     assert set(stop["stages"]) == {"analysis", "report"}
+    assert "TRUNCATED TAILS that were captured" in stop["tracebacks_note"] and "1,500 bytes" in stop["tracebacks_note"] and stop["section_headers"] == ["=== analysis Sat Nov 21 10:45:42 EST 2026", "=== report Sat Nov 21 10:45:45 EST 2026"]
     md = (out / "report" / "REPORT_SUPPLEMENT.md").read_text()
     assert md.startswith("> **frozen analysis function on the registered records, through a disclosed corrected loader — not the registered analysis stage**") and "RENDERED COMPLETE" in md
     man = core.read_record(out / "SUPPLEMENT_MANIFEST.json", "report_manifest")
@@ -145,15 +161,37 @@ def test_the_driver_refuses_unless_evaluate_and_baselines_are_complete(tmp_path:
         (tmp_path / f"t{k}").mkdir()
         ctx, pl, run = tiny_run(tmp_path / f"t{k}", evaluate_manifest=status)
         with pytest.raises(SystemExit, match="evaluate and baselines stage manifests must both be COMPLETE"):
-            drv.produce(ctx, pl, run, drv.supplement_dir_of(run), rehearsal_record=None, stages_text="", identity={})
+            drv.produce(ctx, pl, run, drv.supplement_dir_of(run), rehearsal_record=None, stages_text=STAGES_TEXT, identity={})
         assert not drv.supplement_dir_of(run).exists()  # nothing created on a refusal
 
 
-def test_extract_tracebacks_keeps_only_traceback_blocks() -> None:
+def test_extract_tracebacks_takes_the_two_section_tails_of_the_truncated_file_and_drops_result_lines() -> None:
     drv = driver()
     tbs = drv.extract_tracebacks(STAGES_TEXT)
-    assert len(tbs) == 2 and tbs[0].startswith("Traceback") and tbs[0].endswith("got 'stage_manifest'") and tbs[1].endswith("analysis/analysis.json'")
-    assert not any("SECRET_EVAL_VALUE_777" in t or "u_run" in t for t in tbs) and drv.extract_tracebacks("no traceback here\n{}") == []
+    assert len(tbs) == 2
+    a, r = tbs
+    assert a.splitlines()[0].startswith("^^^^") and '  File "/w/studies/p10is1/stages.py", line 483, in _execute_stage_body' in a and a.endswith("ValueError: expected a 'baseline' record, got 'stage_manifest'")
+    assert r.endswith("analysis/analysis.json'") and r.splitlines()[-2].strip().startswith("^^^^") and not r.startswith(",")  # the mid-line fragment that began the truncated section is not a frame or an exception line
+    assert not any("{" in ln[:1] or "SECRET" in ln or "u_run" in ln for t_ in tbs for ln in t_.splitlines())  # result lines never come along, not even inside a section
+    assert drv.extract_tracebacks("no sections\n{}") == []
+    only_analysis = STAGES_TEXT.split("=== report Sat")[0]
+    assert len(drv.extract_tracebacks(only_analysis)) == 1  # a section without its exit marker or exception line is not a block
+    assert len(drv.extract_tracebacks(STAGES_TEXT.replace("FileNotFoundError: [Errno 2] No such file or directory: '/x/P10IS1-pre-20261118/analysis/analysis.json'", "partial output"))) == 1
+
+
+def test_the_driver_refuses_unless_exactly_two_tracebacks_are_found_and_refuses_a_supplement_inside_the_repository(tmp_path: Path) -> None:
+    drv = driver()
+    ctx, pl, run = tiny_run(tmp_path)
+    out = drv.supplement_dir_of(run)
+    for text in ("", STAGES_TEXT.split("=== report Sat")[0]):
+        with pytest.raises(SystemExit, match="exactly two captured tracebacks"):
+            drv.produce(ctx, pl, run, out, rehearsal_record=None, stages_text=text, identity={})
+        assert not out.exists()  # nothing created on a refusal
+    for inside in (ROOT / "studies" / "p10is1" / "supp", ROOT / "results" / "supp", ROOT):
+        with pytest.raises(SystemExit, match="inside the repository or worktree"):
+            drv.produce(ctx, pl, run, inside, rehearsal_record=None, stages_text=STAGES_TEXT, identity={}, repo=ROOT)
+        assert not inside.exists() or inside == ROOT
+    assert not (ROOT / "studies" / "p10is1" / "supp").exists() and not (ROOT / "results" / "supp").exists()
 
 
 def test_only_the_registered_report_reads_analysis_json_so_throughput_can_still_run_as_registered() -> None:
@@ -172,5 +210,5 @@ def test_only_the_registered_report_reads_analysis_json_so_throughput_can_still_
 def test_the_addendum_states_the_defect_the_ruling_and_that_the_human_lead_may_overrule() -> None:
     text = (ROOT / "docs" / "decisions" / "ADR-0024-addendum-analysis-loader-defect.md").read_text()
     for needle in ("expected a 'baseline' record, got 'stage_manifest'", "BEFORE any outcome value of P10-I-S1 was read", "may overrule it in favour of an amending freeze (route (a))", "ENGINEERING STOP — ANALYSIS LOADER DEFECT", "ADR-0021 section 25.21",
-                   "frozen analysis function on the registered records, through a disclosed corrected loader — not the registered analysis stage", "the throughput stage can still run as registered", "`Astra review: NOT_PERFORMED`", "synthetic_registry_for"):
+                   "frozen analysis function on the registered records, through a disclosed corrected loader — not the registered analysis stage", "the throughput stage can still run as registered", "`Astra review: NOT_PERFORMED`", "synthetic_registry_for", "launched once, at 10:45 local", "before `analysis.analyze`, so it produced no value", "last 1,500 bytes", "any second supplement directory is disclosed", "refused inside the repository or worktree"):
         assert needle in text, needle
