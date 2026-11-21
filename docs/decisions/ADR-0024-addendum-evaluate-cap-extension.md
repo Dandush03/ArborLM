@@ -25,6 +25,14 @@ The cap is in three frozen places: the plan's `stage_caps`, the config's `[caps]
 
 Both entries carry the SHA-256 of the approval record in their `run` field. The script is applied once (it refuses if the offset stage exists), refuses an approval record without the machine-read lines and the quoted answer, and asserts after writing that the total charged seconds are unchanged and every earlier entry is intact. Its default is a dry run.
 
+**Applied with S1 stopped (audit R2).** `apply_extension.py --apply` refuses, and writes nothing, while any `studies.p10is1` process other than its own is alive: `Ledger.charge` is read-modify-write, so a stage charging during the rewrite could silently drop the two entries, or the extension could drop that charge.
+
+**What the ledger says after the extension (audit R3, R4).** The ledger is defined as the charged wall time of the study. After the two entries it no longer gives per-stage charged time for `evaluate`:
+- the ledger's `evaluate` sum is 3,600 s BELOW evaluate's true charged wall time, and a stage that never ran, `evaluate-cap-extension-offset`, shows +3,600 s;
+- **the true per-stage charge is the sum of the stage manifests' `charged_seconds` (`run_dir/<stage>/manifest.json`, one per invocation, positive), or equivalently the ledger's sum excluding the two entries whose `run` begins `EXTENSION`;**
+- figures that remain true: the TOTAL charged seconds and so the 52 h total cap and its headroom; every other stage's sum (train, ladder, timing, throughput, analysis, gates, pre-freeze H_c); the stage manifests; `read_ledger_seconds` (the sum is unchanged);
+- the effective evaluate-and-baselines cap is 2.0 h as the ledger arithmetic reads it, while the frozen report prints the plan's cap, 1.0 h. The report is frozen and cannot carry this; the disclosure is owed in the outcome record (`results/p10is1-evaluate-cap-extension-20261121/OWED_DISCLOSURES.md` lists the text to copy) and in any accounting that sums the ledger by stage (the scorecard, a later projection).
+
 **Disclosure.** The plan's frozen `stage_caps.evaluate_hours` stays 1.0, and `do_report` prints the plan's caps: the report will show 1.0 h for evaluate while the ledger shows the credit. The effective cap is 2.0 h as the ledger arithmetic reads it. This is a ledger adjustment, not a change of the frozen cap, and it is the reason this addendum and the approval record exist.
 
 ## 4. What stays valid (read-only check)

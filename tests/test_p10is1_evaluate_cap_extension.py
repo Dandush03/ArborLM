@@ -25,6 +25,7 @@ from studies.p10is1 import plan as planmod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 EXT = ROOT / "results" / "p10is1-evaluate-cap-extension-20261121"
+QUIET_TABLE = [(1, 0, "/sbin/launchd")]  # a synthetic process table with no S1 process: the tests never depend on what runs on this machine
 
 
 def load_script(name: str) -> Any:
@@ -70,10 +71,10 @@ def test_the_ledger_credit_opens_the_evaluate_and_baselines_cap_and_leaves_every
     pl = planmod.Plan.load(plan)
     assert stages.stage_cap_seconds(pl, "evaluate", led) == 0.0 and stages.stage_cap_seconds(pl, "baselines", led) == 0.0  # the shared cap key is spent: baselines was PAUSED with the cap at zero
     # the dry run writes nothing
-    assert ext.main(["--ledger", str(led_path), "--plan", str(plan)]) == 0 and led_path.read_text() == old_text and not list(tmp_path.glob("*.before-*"))
+    assert ext.main(["--ledger", str(led_path), "--plan", str(plan)], process_table=QUIET_TABLE) == 0 and led_path.read_text() == old_text and not list(tmp_path.glob("*.before-*"))
     assert json.loads(capsys.readouterr().out)["dry_run"] is True
     total_before = led.charged()
-    assert ext.main(["--ledger", str(led_path), "--plan", str(plan), "--apply"]) == 0
+    assert ext.main(["--ledger", str(led_path), "--plan", str(plan), "--apply"], process_table=QUIET_TABLE) == 0
     led2 = core.Ledger(led_path, 187200.0)
     entries = led2.entries()
     assert entries[: len(old)] == old and len(entries) == len(old) + 2  # no existing entry changed; two appended
@@ -87,7 +88,7 @@ def test_the_ledger_credit_opens_the_evaluate_and_baselines_cap_and_leaves_every
         assert stages.stage_cap_seconds(pl, stage, led2) == stages.stage_cap_seconds(pl, stage, led)
     assert (tmp_path / "P10IS1-ledger.json.before-evaluate-cap-extension").read_text() == old_text  # the pre-image, a new file
     with pytest.raises(SystemExit, match="already been applied"):
-        ext.main(["--ledger", str(led_path), "--plan", str(plan), "--apply"])
+        ext.main(["--ledger", str(led_path), "--plan", str(plan), "--apply"], process_table=QUIET_TABLE)
     assert read_json(plan)["stage_caps"]["evaluate_hours"] == 1.0  # the plan's frozen cap is not touched
 
 
@@ -100,7 +101,7 @@ def test_the_extension_refuses_an_approval_without_the_lead_words_or_the_machine
         bad = tmp_path / f"{name}.md"
         bad.write_text(text)
         with pytest.raises(SystemExit, match="refused"):
-            ext.main(["--ledger", str(led_path), "--plan", str(plan), "--approval", str(bad), "--apply"])
+            ext.main(["--ledger", str(led_path), "--plan", str(plan), "--approval", str(bad), "--apply"], process_table=QUIET_TABLE)
     assert not list(tmp_path.glob("*.before-*"))
     assert "Approve 1 h" in good and "Do you approve extending S1's evaluate cap by 1 hour" in good and "`Astra review: NOT_PERFORMED`" in good
 
@@ -170,3 +171,34 @@ def test_known_defect_the_analysis_registry_refuses_the_baselines_stage_manifest
     assert sorted(p.name for p in (run / "baselines").glob("*.json")) == ["d1_f128.json", "d2_f128.json", "manifest.json"]
     with pytest.raises(ValueError, match="expected a 'baseline' record, got 'stage_manifest'"):
         stages.build_registry(ctx, pl, run)
+
+
+def test_r2_the_extension_is_refused_and_writes_nothing_while_a_studies_p10is1_process_is_alive(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    import os
+
+    ext = load_script("apply_extension")
+    led_path, plan = tmp_path / "L.json", plan_file(tmp_path)
+    real_shaped_ledger(led_path)
+    before = led_path.read_text()
+    alive = [(1, 0, "/sbin/launchd"), (900, 1, "uv run --locked python -m studies.p10is1.stages registered evaluate --run-dir /x --freeze-commit f"), (901, 900, "/venv/bin/python -m studies.p10is1.stages work evaluate --label L")]
+    with pytest.raises(SystemExit, match="a studies.p10is1 process is alive") as ei:
+        ext.main(["--ledger", str(led_path), "--plan", str(plan), "--apply"], process_table=alive)
+    assert "900: uv run" in str(ei.value) and "901: /venv/bin/python" in str(ei.value)  # the command lines are printed
+    assert led_path.read_text() == before and not list(tmp_path.glob("*.before-*"))  # nothing was written, not even the pre-image
+    # the dry run reports them and still writes nothing
+    assert ext.main(["--ledger", str(led_path), "--plan", str(plan)], process_table=alive) == 0 and led_path.read_text() == before
+    assert len(json.loads(capsys.readouterr().out)["s1_processes_alive"]) == 2
+    # this process's own family is not "another" process; a process of another study is not an S1 process
+    mine = [(1, 0, "/sbin/launchd"), (os.getpid(), 1, "python -m studies.p10is1.stages registered x"), (902, 1, "python -m studies.p10is5.stages registered y")]
+    assert ext.live_s1_processes(mine) == []
+    assert ext.main(["--ledger", str(led_path), "--plan", str(plan), "--apply"], process_table=mine) == 0  # S1 stopped: applied
+    assert led_path.read_text() != before
+
+
+def test_r3_r4_the_addendum_and_the_owed_disclosures_state_what_the_ledger_no_longer_says() -> None:
+    text = (ROOT / "docs" / "decisions" / "ADR-0024-addendum-evaluate-cap-extension.md").read_text()
+    owed = (EXT / "OWED_DISCLOSURES.md").read_text()
+    for needle in ("no longer gives per-stage charged time for `evaluate`", "sum of the stage manifests' `charged_seconds`", "figures that remain true", "prints the plan's cap, 1.0 h", "effective evaluate-and-baselines cap is 2.0 h", "with S1 stopped"):
+        assert needle in text, needle
+    for needle in ("true charged wall time", "stage manifests' `charged_seconds`", "frozen report prints an evaluate cap of 1.0 h", "`Astra review: NOT_PERFORMED`"):
+        assert needle in owed, needle

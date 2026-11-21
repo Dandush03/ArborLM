@@ -25,6 +25,19 @@ REPO = HERE.parents[1]
 APPROVAL = HERE / "APPROVAL.md"
 OFFSET_STAGE = "evaluate-cap-extension-offset"
 FREEZE_COMMIT = "46bf55a5cc0eda11b7201c4ab777e69c6970c4cd"
+S1_PROCESS_MARK = "studies.p10is1"  # any command line that runs a module of this study (the registered stages and their workers)
+
+
+def live_s1_processes(table: list[tuple[int, int, str]] | None = None) -> list[str]:
+    """R2: command lines of every ``studies.p10is1`` process alive other than this one's own family. ``Ledger.charge`` is read-modify-write, so a stage charging while the ledger is rewritten could silently drop the two
+    extension entries (or the extension could drop its charge): the credit is applied only with S1 stopped."""
+    from studies.p10is1 import machine
+
+    rows = table if table is not None else machine.ps_table()
+    import os
+
+    own = machine.family(rows, os.getpid())
+    return [f"{p}: {c}" for p, _, c in rows if p not in own and S1_PROCESS_MARK in c]
 
 
 def read_approval(path: Path) -> tuple[float, str]:
@@ -38,7 +51,7 @@ def read_approval(path: Path) -> tuple[float, str]:
     return 1.0, hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: list[str] | None = None, process_table: list[tuple[int, int, str]] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--ledger", required=True)
     ap.add_argument("--approval", default=str(APPROVAL))
@@ -64,10 +77,13 @@ def main(argv: list[str] | None = None) -> int:
         {"run": run, "seconds": -secs, "stage": "evaluate", "utc": now, "note": "credit on the evaluate cap key: the human lead's approved +1 h (a ledger credit; the plan's frozen cap is unchanged)"},
         {"run": run, "seconds": secs, "stage": OFFSET_STAGE, "utc": now, "note": "equal debit on a stage of no cap key: the TOTAL charged seconds are unchanged"},
     ]
-    out = {"plan_evaluate_hours": plan.data["stage_caps"]["evaluate_hours"], "approval_sha256": sha, "before": before, "new_entries": new, "ledger_total_cap_s": led.total_seconds}
+    alive = live_s1_processes(process_table)
+    out = {"s1_processes_alive": alive, "plan_evaluate_hours": plan.data["stage_caps"]["evaluate_hours"], "approval_sha256": sha, "before": before, "new_entries": new, "ledger_total_cap_s": led.total_seconds}
     if not a.apply:
         print(json.dumps({"dry_run": True, **out}, indent=2, sort_keys=True))
         return 0
+    if alive:
+        raise SystemExit("refused: a studies.p10is1 process is alive (the ledger would be rewritten under a running stage); stop S1 first, nothing was written:\n" + "\n".join(alive))
     pre = ledger_path.with_name(ledger_path.name + ".before-evaluate-cap-extension")
     if pre.exists():
         raise SystemExit(f"refused: {pre} exists")
