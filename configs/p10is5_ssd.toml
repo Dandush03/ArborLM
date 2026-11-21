@@ -1,0 +1,131 @@
+# P10-I-S5 (ADR-0028) frozen constants: the engineering part, a device cost-model study of the human lead's internal SSD.
+# Every threshold of the study lives here and nowhere else; the ADR text is not a frozen input (it is hashed for provenance only).
+# A test asserts that each value below equals the value of the ADR section named beside it.
+# Not frozen. No registered run is approved. The scientific part is not implemented (it is NOT EVALUABLE as capped, ADR-0028 section 3.2).
+schema_version = 1
+experiment_family = "P10IS5_SSD_COST_MODEL"
+spec_reference = "docs/decisions/ADR-0028-p10-i-s5-physical-ssd-memory.md"
+
+[device]  # ADR-0028 section 4.1 and section 7, rulings 2 and 13
+page_bytes = 16384
+tile_pages = 64
+store_tiles = 4096
+rehearsal_tiles = 1024
+control_tiles = 64
+rehearsal_usable_tiles = 896  # tiles 0..895 are M's and K's; 896..1023 are R1's reserved band
+band_start_tile = 896
+f_rdahead = 45
+f_nocache = 48
+f_fullfsync = 51
+write_unit_bytes = 1048576
+build_chunk_bytes = 1073741824
+directory_suffix = ".noindex"
+
+[cells]  # section 4.2, 4.3, 8 and ruling 3
+sizes = [1, 3, 8, 64]
+depths = [1, 2, 4, 8, 16, 32]
+requests_per_pass = [400, 400, 160, 64]
+tiles_per_pass = [7, 20, 20, 64]
+rehearsal_requests_per_pass = [100, 100, 40, 16]
+rehearsal_tiles_per_pass = [2, 5, 5, 16]
+repeats = 5
+spare_repeat = 6
+r1_depths = [1, 32]
+r1_reread_working_set_tiles = [32, 64, 128]
+
+[thresholds]  # sections 5.3, 5.4, 9
+m_floor = 0.10
+m_ceiling = 0.30
+m_cv_multiple = 2.0
+label_min_repeats = 4
+valid_min_repeats = 4
+harness_limited_fraction = 0.25
+harness_requests = 400
+harness_tiles = 7
+harness_depths = [1, 2, 4, 8, 16, 32]
+
+[budget]  # section 6
+cap_bytes = 10000000000
+probe_bytes = 67108864
+control_file_bytes = 67108864
+rehearsal_file_bytes = 1073741824
+store_file_bytes = 4294967296
+free_space_min_bytes = 500000000000
+max_builds_per_file = 2
+
+[quiet]  # section 7 item 7 and section 8
+load_margin = 0.5
+idle_window_seconds = 600
+idle_interval_seconds = 10
+idle_samples = 60
+retry_interval_seconds = 600
+retry_deadline_seconds = 21600
+settle_seconds = 120
+activity_window_seconds = 30
+percentile = 0.95
+hid_idle_min_seconds = 600
+cold_wait_seconds = 600
+extra_sessions = 3
+pass_timeout_seconds = 900
+process_markers = ["studies/", "arborlm", "pytest", "studies."]  # the ADR names the first three; "studies." (python -m studies.<name>.stages, which has no slash) is a conservative addition, listed as a departure
+
+[fixed_after_r1_and_m]  # section 5.4 and section 8: written from R1's and M's records BEFORE the candidate plan; provisional until then
+provisional = false
+m_t = 0.1
+timing_spread = false
+load_p95 = 3.03
+read_bytes_per_s_p95 = 64915.08918839288
+write_bytes_per_s_p95 = 514885.99623690004
+read_ops_per_s_p95 = 6.4887227579591755
+write_ops_per_s_p95 = 52.065161813958575
+
+[caps]  # section 9 and section 10 (hours of charged wall time; provisional figure 5 hours until set by the rule after M)
+# Set by the lead on 2026-11-18 by the rule (charged + 2 x projected remaining). Charged before the candidate plan: 160.3 s (R0 15.6, R1 18.7, M 125.9), all in the rehearsal group.
+# Projected remaining, from M (240 passes in 124.6 charged s) and R1 (1.14 GB built and checked in 18.7 s): K 200 s; E1 and P 300 s (a 4 GiB build, one rebuild allowed); E2 and the analysis 400 s (144 passes with the spare, one rebuild).
+# rehearsal = 160.3 + 2 x 200 = 560.3 s; e1 = 2 x 300 = 600 s; e2 = 2 x 400 = 800 s; total = 160.3 + 2 x 900 = 1960.3 s.
+provisional = false
+rehearsal_hours = 0.1557
+e1_hours = 0.1667
+e2_hours = 0.2223
+total_hours = 0.5446
+
+[resources]  # section 9
+memory_guard_bytes = 4294967296
+
+[platform]  # section 12
+system = "Darwin"
+machine = "arm64"
+torch = "2.8.0"
+torch_num_threads = 1
+torch_interop_threads = 1
+deterministic_algorithms = true
+python_prefix = "3.12"
+
+[seeds]  # section 10; SEED_REGISTRY.md revision 3 section 4.2 row P10-I-S5 and the ADR's revision-4 list
+store_contents = 280101
+r1_rehearsal_file_contents = 289001
+r1_control_file_contents = 289013
+request_order = [280001, 280002, 280003, 280004, 280005]
+spare_request_order = 280006
+r1_request_order = 289011
+m_request_order = [289211, 289212, 289213, 289214, 289215]
+k_request_order = [289216, 289217, 289218, 289219, 289220]
+pass_order = [280201, 280202, 280203, 280204, 280205]
+spare_pass_order = 280206
+r1_pass_order = 289021
+m_pass_order = [289221, 289222, 289223, 289224, 289225]
+k_pass_order = [289226, 289227, 289228, 289229, 289230]
+tile_assignment = 287001
+m_tile_assignment = 289241
+k_tile_assignment = 289242
+r1_reread_offsets = 289051
+test_range = [937001, 937999]
+
+[seed_ranges]  # SEED_REGISTRY.md ALLOC rows of P10-I-S5 (ADR-0028)
+registered = [280001, 286999]
+auxiliary = [287001, 288999]
+r1 = [289001, 289199]
+rehearsal = [289201, 289299]
+test = [937001, 937999]
+checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r3.py"
+checker_sha256 = "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594"

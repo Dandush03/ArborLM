@@ -1,0 +1,994 @@
+# P10-I-R routing diagnosis (ADR-0029)
+
+ArborLM is unproven research. This report is a diagnosis of read-time reads over memories trained under the registered read; it is neither a positive nor a negative result for ArborLM. Implementation self-checked only: not independent review, not Astra validation, not human approval. `Astra review: NOT_PERFORMED`.
+
+Mode: registered. Plan SHA-256 a52da5fbea0fa2123b091562ed8502d776f2bf09a94bc43c3d9e3c3a118b5e56. Platform: macOS-27.2.1-arm64-arm-64bit.
+
+## R-CONFIRM (does not change R-DIAGNOSIS)
+
+- **R-CONFIRM-TREE: NOT RUN**
+- **R-CONFIRM-INDEX: NOT RUN**
+
+## What may be said
+
+- After A1 alone: "the re-analysis points to ...".
+- A statement that the tree's gap is caused by a named factor at read time requires R-CONFIRM-TREE: CONFIRMED. Allowed here: False.
+- Neither A1 nor A2 supports a statement about training-time causes (Stage B).
+
+## Stage A1
+
+**R-DIAGNOSIS: EVALUABLE [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]**
+
+- **tree component: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]**
+  - at U_P: EXACT SEARCH HARMS (32K/16K = EXACT SEARCH HARMS, 8K/4K = EXACT SEARCH HARMS)
+  - at RUN: EXACT SEARCH HARMS (32K/16K = EXACT SEARCH HARMS, 8K/4K = EXACT SEARCH HARMS)
+- **index component: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]**
+  - at U_P: INDEX APPROACHES FLAT ONLY ABOVE 512 (32K/16K = INDEX APPROACHES FLAT ONLY ABOVE 512, 8K/4K = INDEX APPROACHES FLAT ONLY ABOVE 512)
+  - at RUN: INDEX APPROACHES FLAT ONLY ABOVE 512 (32K/16K = INDEX APPROACHES FLAT ONLY ABOVE 512, 8K/4K = INDEX APPROACHES FLAT ONLY ABOVE 512)
+- pair (tree, index): (EXACT SEARCH HARMS, INDEX APPROACHES FLAT ONLY ABOVE 512)
+- recommended action, tree component: none
+- recommended action, index component: none
+
+A limit printed with every label: these are read-time changes to memories trained under the registered read. The tree's values and output projection were trained with the prior in the weights and two branches visited. A read-time change that does not help does not show that training without it would not; one that helps shows only that the trained content tolerates it. Causes that act during training need Stage B.
+
+### R-DIAGNOSIS-LOADED (descriptive; printed only; recommends nothing; no combination rule)
+
+- 32K/4K at RUN: tree EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]; index INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+- 32K/4K at U_P: tree NOT IDENTIFIED [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]; index INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+- 8K/1K at RUN: tree EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]; index INDEX DOES NOT APPROACH FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+- 8K/1K at U_P: tree NOT IDENTIFIED [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]; index INDEX DOES NOT APPROACH FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+
+### Cells and checkpoints
+
+#### 2K/1K (printed; SHALLOW (four branches; 512 candidates is half the store); facts 2048, slots 1024)
+
+- **RUN, update 49152**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: NO GAP; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.466) / B: NOT RESTORED (accuracy version 0.463); T2 A: NOT RESTORED (accuracy version 0.177) / B: NOT RESTORED (accuracy version 0.168); T3 A: NOT RESTORED (accuracy version 0.846) / B: NOT RESTORED (accuracy version 0.848)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.504) / B: NOT RESTORED (accuracy version 0.504); T2 A: NOT RESTORED (accuracy version 0.187) / B: NOT RESTORED (accuracy version 0.183); T3 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.896)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.506) / B: NOT RESTORED (accuracy version 0.509); T2 A: NOT RESTORED (accuracy version 0.201) / B: NOT RESTORED (accuracy version 0.212); T3 A: NOT RESTORED (accuracy version 0.910) / B: NOT RESTORED (accuracy version 0.908)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.527) / B: NOT RESTORED (accuracy version 0.529); T2 A: NOT RESTORED (accuracy version 0.204) / B: NOT RESTORED (accuracy version 0.207); T3 A: NOT RESTORED (accuracy version 0.922) / B: NOT RESTORED (accuracy version 0.921)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.534) / B: NOT RESTORED (accuracy version 0.535); T2 A: NOT RESTORED (accuracy version 0.204) / B: NOT RESTORED (accuracy version 0.212); T3 A: NOT RESTORED (accuracy version 0.904) / B: NOT RESTORED (accuracy version 0.903)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.708) / B: NOT RESTORED (accuracy version 0.705); 256 A: NOT RESTORED (accuracy version 0.886) / B: NOT RESTORED (accuracy version 0.886); 512 A: RESTORED (accuracy version 0.988) / B: RESTORED (accuracy version 0.988)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.702) / B: NOT RESTORED (accuracy version 0.702); 256 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.893); 512 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.986)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.703) / B: NOT RESTORED (accuracy version 0.706); 256 A: NOT RESTORED (accuracy version 0.884) / B: NOT RESTORED (accuracy version 0.885); 512 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.986)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.710) / B: NOT RESTORED (accuracy version 0.711); 256 A: NOT RESTORED (accuracy version 0.887) / B: NOT RESTORED (accuracy version 0.888); 512 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.986)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.716) / B: NOT RESTORED (accuracy version 0.719); 256 A: NOT RESTORED (accuracy version 0.885) / B: NOT RESTORED (accuracy version 0.886); 512 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.986)
+    - median c*: 512.0 keys, share of N: 0.500, N/8 for comparison: 128.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.984, a_use 0.999, T0: i 4.298, a_use 0.931, T1: i 1.579, a_use 0.511, T1w: i 3.712, a_use 0.858, T2: i 0.347, a_use 0.210, T3: i 3.990, a_use 0.894
+    - g_P -3.963, g_C -0.449, g_PC -5.760; i(F0) - i(T2) 4.638
+    - visit sweep Tv: v=1: i on 2.556, off 2.556, CR8(on) 0.189, keys scored 260; v=2: i on 4.298, off 1.579, CR8(on) 0.364, keys scored 516; v=4: i on 3.990, off 0.347, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.364, CR1 0.497, SR8 0.286, AM_C 0.383, AM_S 0.311
+    - prior effect: i(T1)-i(T0) -2.719, i(T1w)-i(T0) -0.586, i(T2)-i(T3) -3.644; selection changed T0->T1 0.906; facts spanning both branches 0.575; TV distance T0->T1 0.353
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.779 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.984, a_use 0.999; I256@512: i 4.265, a_use 0.927, CR8 0.885, measured candidates mean 643.3, p99 777.2
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 2.695, a_use 0.710, CR8 0.604, CR1 0.802, AM_C 0.655, candidates mean 159.1, p99 202.3
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 3.932, a_use 0.887, CR8 0.789, CR1 0.931, AM_C 0.827, candidates mean 287.7, p99 330.1
+    - I64@512: i 4.822, a_use 0.986, CR8 0.949, CR1 0.992, AM_C 0.961, candidates mean 543.8, p99 585.0
+- **TRAJ1, update 16384 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.447) / B: NOT RESTORED (accuracy version 0.444); T2 A: NOT RESTORED (accuracy version 0.170) / B: NOT RESTORED (accuracy version 0.168); T3 A: NOT RESTORED (accuracy version 0.789) / B: NOT RESTORED (accuracy version 0.790)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.468) / B: NOT RESTORED (accuracy version 0.466); T2 A: NOT RESTORED (accuracy version 0.176) / B: NOT RESTORED (accuracy version 0.175); T3 A: NOT RESTORED (accuracy version 0.825) / B: NOT RESTORED (accuracy version 0.822)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.481) / B: NOT RESTORED (accuracy version 0.486); T2 A: NOT RESTORED (accuracy version 0.174) / B: NOT RESTORED (accuracy version 0.182); T3 A: NOT RESTORED (accuracy version 0.845) / B: NOT RESTORED (accuracy version 0.844)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.525) / B: NOT RESTORED (accuracy version 0.532); T2 A: NOT RESTORED (accuracy version 0.227) / B: NOT RESTORED (accuracy version 0.228); T3 A: NOT RESTORED (accuracy version 0.903) / B: NOT RESTORED (accuracy version 0.904)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.515) / B: NOT RESTORED (accuracy version 0.515); T2 A: NOT RESTORED (accuracy version 0.189) / B: NOT RESTORED (accuracy version 0.195); T3 A: NOT RESTORED (accuracy version 0.832) / B: NOT RESTORED (accuracy version 0.826)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.686) / B: NOT RESTORED (accuracy version 0.687); 256 A: NOT RESTORED (accuracy version 0.882) / B: NOT RESTORED (accuracy version 0.883); 512 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.987)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.709) / B: NOT RESTORED (accuracy version 0.711); 256 A: NOT RESTORED (accuracy version 0.882) / B: NOT RESTORED (accuracy version 0.881); 512 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.983)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.693) / B: NOT RESTORED (accuracy version 0.692); 256 A: NOT RESTORED (accuracy version 0.886) / B: NOT RESTORED (accuracy version 0.887); 512 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.693) / B: NOT RESTORED (accuracy version 0.694); 256 A: NOT RESTORED (accuracy version 0.876) / B: NOT RESTORED (accuracy version 0.876); 512 A: RESTORED (accuracy version 0.989) / B: RESTORED (accuracy version 0.989)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.706) / B: NOT RESTORED (accuracy version 0.709); 256 A: NOT RESTORED (accuracy version 0.892) / B: NOT RESTORED (accuracy version 0.893); 512 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.983)
+    - median c*: 512.0 keys, share of N: 0.500, N/8 for comparison: 128.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.965, a_use 0.998, T0: i 3.827, a_use 0.873, T1: i 1.486, a_use 0.492, T1w: i 3.259, a_use 0.795, T2: i 0.326, a_use 0.203, T3: i 3.559, a_use 0.837
+    - g_P -2.058, g_C -0.235, g_PC -3.077; i(F0) - i(T2) 4.639
+    - visit sweep Tv: v=1: i on 2.170, off 2.170, CR8(on) 0.191, keys scored 260; v=2: i on 3.827, off 1.486, CR8(on) 0.367, keys scored 516; v=4: i on 3.559, off 0.326, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.367, CR1 0.502, SR8 0.290, AM_C 0.387, AM_S 0.315
+    - prior effect: i(T1)-i(T0) -2.341, i(T1w)-i(T0) -0.568, i(T2)-i(T3) -3.234; selection changed T0->T1 0.898; facts spanning both branches 0.587; TV distance T0->T1 0.350
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.779 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.965, a_use 0.998; I256@512: i 4.149, a_use 0.914, CR8 0.875, measured candidates mean 625.6, p99 776.8
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 2.620, a_use 0.698, CR8 0.601, CR1 0.794, AM_C 0.652, candidates mean 158.0, p99 201.3
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 3.887, a_use 0.881, CR8 0.790, CR1 0.929, AM_C 0.827, candidates mean 287.2, p99 328.8
+    - I64@512: i 4.790, a_use 0.983, CR8 0.950, CR1 0.992, AM_C 0.962, candidates mean 543.9, p99 584.0
+- **TRAJ2, update 32768 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.474) / B: NOT RESTORED (accuracy version 0.473); T2 A: NOT RESTORED (accuracy version 0.180) / B: NOT RESTORED (accuracy version 0.177); T3 A: NOT RESTORED (accuracy version 0.843) / B: NOT RESTORED (accuracy version 0.841)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.495) / B: NOT RESTORED (accuracy version 0.501); T2 A: NOT RESTORED (accuracy version 0.197) / B: NOT RESTORED (accuracy version 0.207); T3 A: NOT RESTORED (accuracy version 0.878) / B: NOT RESTORED (accuracy version 0.878)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.499) / B: NOT RESTORED (accuracy version 0.498); T2 A: NOT RESTORED (accuracy version 0.194) / B: NOT RESTORED (accuracy version 0.199); T3 A: NOT RESTORED (accuracy version 0.884) / B: NOT RESTORED (accuracy version 0.886)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.527) / B: NOT RESTORED (accuracy version 0.526); T2 A: NOT RESTORED (accuracy version 0.210) / B: NOT RESTORED (accuracy version 0.211); T3 A: NOT RESTORED (accuracy version 0.916) / B: NOT RESTORED (accuracy version 0.913)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.513) / B: NOT RESTORED (accuracy version 0.519); T2 A: NOT RESTORED (accuracy version 0.206) / B: NOT RESTORED (accuracy version 0.204); T3 A: NOT RESTORED (accuracy version 0.890) / B: NOT RESTORED (accuracy version 0.888)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.714) / B: NOT RESTORED (accuracy version 0.711); 256 A: NOT RESTORED (accuracy version 0.891) / B: NOT RESTORED (accuracy version 0.891); 512 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.986)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.711) / B: NOT RESTORED (accuracy version 0.713); 256 A: NOT RESTORED (accuracy version 0.882) / B: NOT RESTORED (accuracy version 0.882); 512 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.986)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.685) / B: NOT RESTORED (accuracy version 0.689); 256 A: NOT RESTORED (accuracy version 0.885) / B: NOT RESTORED (accuracy version 0.884); 512 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.987)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.709) / B: NOT RESTORED (accuracy version 0.711); 256 A: NOT RESTORED (accuracy version 0.887) / B: NOT RESTORED (accuracy version 0.886); 512 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.987)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.707) / B: NOT RESTORED (accuracy version 0.709); 256 A: NOT RESTORED (accuracy version 0.884) / B: NOT RESTORED (accuracy version 0.884); 512 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.985)
+    - median c*: 512.0 keys, share of N: 0.500, N/8 for comparison: 128.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.981, a_use 0.999, T0: i 4.169, a_use 0.916, T1: i 1.555, a_use 0.506, T1w: i 3.558, a_use 0.837, T2: i 0.361, a_use 0.215, T3: i 3.891, a_use 0.881
+    - g_P -3.223, g_C -0.343, g_PC -4.695; i(F0) - i(T2) 4.619
+    - visit sweep Tv: v=1: i on 2.449, off 2.449, CR8(on) 0.191, keys scored 260; v=2: i on 4.169, off 1.555, CR8(on) 0.366, keys scored 516; v=4: i on 3.891, off 0.361, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.366, CR1 0.494, SR8 0.288, AM_C 0.385, AM_S 0.313
+    - prior effect: i(T1)-i(T0) -2.614, i(T1w)-i(T0) -0.612, i(T2)-i(T3) -3.530; selection changed T0->T1 0.902; facts spanning both branches 0.575; TV distance T0->T1 0.351
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.780 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.981, a_use 0.999; I256@512: i 4.251, a_use 0.926, CR8 0.883, measured candidates mean 635.2, p99 780.4
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 2.671, a_use 0.706, CR8 0.603, CR1 0.798, AM_C 0.654, candidates mean 157.8, p99 199.7
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 3.914, a_use 0.885, CR8 0.790, CR1 0.928, AM_C 0.828, candidates mean 287.0, p99 326.9
+    - I64@512: i 4.815, a_use 0.985, CR8 0.950, CR1 0.992, AM_C 0.962, candidates mean 543.4, p99 583.0
+- **U_P, update 8192**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.399) / B: NOT RESTORED (accuracy version 0.407); T2 A: NOT RESTORED (accuracy version 0.163) / B: NOT RESTORED (accuracy version 0.162); T3 A: NOT RESTORED (accuracy version 0.711) / B: NOT RESTORED (accuracy version 0.717)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.402) / B: NOT RESTORED (accuracy version 0.403); T2 A: NOT RESTORED (accuracy version 0.160) / B: NOT RESTORED (accuracy version 0.165); T3 A: NOT RESTORED (accuracy version 0.735) / B: NOT RESTORED (accuracy version 0.736)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.436) / B: NOT RESTORED (accuracy version 0.438); T2 A: NOT RESTORED (accuracy version 0.162) / B: NOT RESTORED (accuracy version 0.166); T3 A: NOT RESTORED (accuracy version 0.764) / B: NOT RESTORED (accuracy version 0.761)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.470) / B: NOT RESTORED (accuracy version 0.475); T2 A: NOT RESTORED (accuracy version 0.208) / B: NOT RESTORED (accuracy version 0.208); T3 A: NOT RESTORED (accuracy version 0.836) / B: NOT RESTORED (accuracy version 0.841)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.448) / B: NOT RESTORED (accuracy version 0.453); T2 A: NOT RESTORED (accuracy version 0.162) / B: NOT RESTORED (accuracy version 0.161); T3 A: NOT RESTORED (accuracy version 0.752) / B: NOT RESTORED (accuracy version 0.751)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.673) / B: NOT RESTORED (accuracy version 0.678); 256 A: NOT RESTORED (accuracy version 0.862) / B: NOT RESTORED (accuracy version 0.865); 512 A: RESTORED (accuracy version 0.978) / B: RESTORED (accuracy version 0.979)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.684) / B: NOT RESTORED (accuracy version 0.684); 256 A: NOT RESTORED (accuracy version 0.876) / B: NOT RESTORED (accuracy version 0.874); 512 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.980)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.669) / B: NOT RESTORED (accuracy version 0.670); 256 A: NOT RESTORED (accuracy version 0.865) / B: NOT RESTORED (accuracy version 0.864); 512 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.982)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.696) / B: NOT RESTORED (accuracy version 0.699); 256 A: NOT RESTORED (accuracy version 0.884) / B: NOT RESTORED (accuracy version 0.886); 512 A: RESTORED (accuracy version 0.988) / B: RESTORED (accuracy version 0.988)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.692) / B: NOT RESTORED (accuracy version 0.694); 256 A: NOT RESTORED (accuracy version 0.878) / B: NOT RESTORED (accuracy version 0.879); 512 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.985)
+    - median c*: 512.0 keys, share of N: 0.500, N/8 for comparison: 128.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.880, a_use 0.991, T0: i 3.206, a_use 0.787, T1: i 1.218, a_use 0.435, T1w: i 2.708, a_use 0.711, T2: i 0.276, a_use 0.186, T3: i 2.988, a_use 0.755
+    - g_P -1.188, g_C -0.130, g_PC -1.750; i(F0) - i(T2) 4.604
+    - visit sweep Tv: v=1: i on 1.816, off 1.816, CR8(on) 0.189, keys scored 260; v=2: i on 3.206, off 1.218, CR8(on) 0.365, keys scored 516; v=4: i on 2.988, off 0.276, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.365, CR1 0.515, SR8 0.287, AM_C 0.387, AM_S 0.315
+    - prior effect: i(T1)-i(T0) -1.989, i(T1w)-i(T0) -0.498, i(T2)-i(T3) -2.711; selection changed T0->T1 0.901; facts spanning both branches 0.583; TV distance T0->T1 0.350
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.781 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.880, a_use 0.991; I256@512: i 4.166, a_use 0.916, CR8 0.887, measured candidates mean 643.0, p99 777.0
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 2.509, a_use 0.680, CR8 0.601, CR1 0.794, AM_C 0.652, candidates mean 158.0, p99 200.7
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 3.759, a_use 0.865, CR8 0.790, CR1 0.929, AM_C 0.826, candidates mean 287.2, p99 328.2
+    - I64@512: i 4.700, a_use 0.974, CR8 0.949, CR1 0.992, AM_C 0.961, candidates mean 543.8, p99 583.9
+
+#### 2K/4K (printed; facts 2048, slots 4096)
+
+- **RUN, update 49152**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.887) / B: NOT RESTORED (accuracy version 0.887); T2 A: NOT RESTORED (accuracy version 0.236) / B: NOT RESTORED (accuracy version 0.233); T3 A: NOT RESTORED (accuracy version 0.957) / B: NOT RESTORED (accuracy version 0.954)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.890) / B: NOT RESTORED (accuracy version 0.892); T2 A: NOT RESTORED (accuracy version 0.199) / B: NOT RESTORED (accuracy version 0.205); T3 A: NOT RESTORED (accuracy version 0.941) / B: NOT RESTORED (accuracy version 0.941)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.886) / B: NOT RESTORED (accuracy version 0.886); T2 A: NOT RESTORED (accuracy version 0.237) / B: NOT RESTORED (accuracy version 0.242); T3 A: NOT RESTORED (accuracy version 0.931) / B: NOT RESTORED (accuracy version 0.930)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.900) / B: NOT RESTORED (accuracy version 0.904); T2 A: NOT RESTORED (accuracy version 0.253) / B: NOT RESTORED (accuracy version 0.256); T3 A: NOT RESTORED (accuracy version 0.945) / B: NOT RESTORED (accuracy version 0.946)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.904) / B: NOT RESTORED (accuracy version 0.906); T2 A: NOT RESTORED (accuracy version 0.231) / B: NOT RESTORED (accuracy version 0.240); T3 A: NOT RESTORED (accuracy version 0.942) / B: NOT RESTORED (accuracy version 0.944)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.940) / B: NOT RESTORED (accuracy version 0.940); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.980) / B: RESTORED (accuracy version 0.980); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+      - d2: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.943) / B: NOT RESTORED (accuracy version 0.943); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.984); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+      - d3: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.940) / B: NOT RESTORED (accuracy version 0.940); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+      - d4: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.947) / B: NOT RESTORED (accuracy version 0.947); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.987); 512 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999)
+      - d5: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.942) / B: NOT RESTORED (accuracy version 0.943); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+    - median c*: 256.0 keys, share of N: 0.062, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 5.000, a_use 1.000, T0: i 4.994, a_use 1.000, T1: i 3.983, a_use 0.893, T1w: i 4.747, a_use 0.979, T2: i 0.466, a_use 0.248, T3: i 4.408, a_use 0.944
+    - g_P -156.367, g_C -90.594, g_PC -700.240; i(F0) - i(T2) 4.534
+    - visit sweep Tv: v=1: i on 3.149, off 3.149, CR8(on) 0.065, keys scored 272; v=2: i on 4.994, off 3.983, CR8(on) 0.097, keys scored 528; v=4: i on 4.565, off 1.851, CR8(on) 0.142, keys scored 1040; v=8: i on 4.418, off 0.780, CR8(on) 0.249, keys scored 2064
+    - T0: CR8 0.097, CR1 0.230, SR8 0.096, AM_C 0.111, AM_S 0.111
+    - prior effect: i(T1)-i(T0) -1.011, i(T1w)-i(T0) -0.247, i(T2)-i(T3) -3.942; selection changed T0->T1 0.846; facts spanning both branches 0.849; TV distance T0->T1 0.242
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.183 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 5.000, a_use 1.000; I256@512: i 4.562, a_use 0.960, CR8 0.661, measured candidates mean 642.2, p99 797.2
+    - I64@1024: i 4.998, a_use 1.000, CR8 0.917, CR1 1.000, AM_C 0.955, candidates mean 1056.5, p99 1102.8
+    - I64@128: i 4.397, a_use 0.942, CR8 0.520, CR1 0.934, AM_C 0.689, candidates mean 162.1, p99 208.5
+    - I64@2048: i 5.000, a_use 1.000, CR8 0.990, CR1 1.000, AM_C 0.995, candidates mean 2080.3, p99 2126.4
+    - I64@256: i 4.799, a_use 0.984, CR8 0.649, CR1 0.981, AM_C 0.787, candidates mean 289.3, p99 335.2
+    - I64@512: i 4.968, a_use 0.998, CR8 0.789, CR1 0.997, AM_C 0.879, candidates mean 544.6, p99 590.8
+- **TRAJ1, update 16384 (trajectory; descriptive; enters no label)**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.885) / B: NOT RESTORED (accuracy version 0.893); T2 A: NOT RESTORED (accuracy version 0.217) / B: NOT RESTORED (accuracy version 0.217); T3 A: NOT RESTORED (accuracy version 0.943) / B: NOT RESTORED (accuracy version 0.943)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.877) / B: NOT RESTORED (accuracy version 0.881); T2 A: NOT RESTORED (accuracy version 0.188) / B: NOT RESTORED (accuracy version 0.184); T3 A: NOT RESTORED (accuracy version 0.930) / B: NOT RESTORED (accuracy version 0.931)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.888) / B: NOT RESTORED (accuracy version 0.886); T2 A: NOT RESTORED (accuracy version 0.223) / B: NOT RESTORED (accuracy version 0.223); T3 A: NOT RESTORED (accuracy version 0.923) / B: NOT RESTORED (accuracy version 0.925)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.896) / B: NOT RESTORED (accuracy version 0.895); T2 A: NOT RESTORED (accuracy version 0.257) / B: NOT RESTORED (accuracy version 0.257); T3 A: NOT RESTORED (accuracy version 0.946) / B: NOT RESTORED (accuracy version 0.944)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.895); T2 A: NOT RESTORED (accuracy version 0.220) / B: NOT RESTORED (accuracy version 0.223); T3 A: NOT RESTORED (accuracy version 0.940) / B: NOT RESTORED (accuracy version 0.937)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.939) / B: NOT RESTORED (accuracy version 0.937); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.983); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+      - d2: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.932) / B: NOT RESTORED (accuracy version 0.933); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.983); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+      - d3: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.937) / B: NOT RESTORED (accuracy version 0.938); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.986); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+      - d4: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.945) / B: NOT RESTORED (accuracy version 0.946); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.988); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+      - d5: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.940) / B: NOT RESTORED (accuracy version 0.940); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.983); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+    - median c*: 256.0 keys, share of N: 0.062, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 5.000, a_use 1.000, T0: i 4.963, a_use 0.998, T1: i 3.960, a_use 0.891, T1w: i 4.672, a_use 0.971, T2: i 0.423, a_use 0.234, T3: i 4.342, a_use 0.936
+    - g_P -27.370, g_C -16.937, g_PC -123.804; i(F0) - i(T2) 4.577
+    - visit sweep Tv: v=1: i on 3.029, off 3.029, CR8(on) 0.058, keys scored 272; v=2: i on 4.963, off 3.960, CR8(on) 0.090, keys scored 528; v=4: i on 4.521, off 1.739, CR8(on) 0.136, keys scored 1040; v=8: i on 4.342, off 0.687, CR8(on) 0.245, keys scored 2064
+    - T0: CR8 0.090, CR1 0.200, SR8 0.090, AM_C 0.102, AM_S 0.102
+    - prior effect: i(T1)-i(T0) -1.004, i(T1w)-i(T0) -0.291, i(T2)-i(T3) -3.919; selection changed T0->T1 0.840; facts spanning both branches 0.854; TV distance T0->T1 0.245
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.197 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 5.000, a_use 1.000; I256@512: i 4.582, a_use 0.962, CR8 0.654, measured candidates mean 644.2, p99 799.0
+    - I64@1024: i 4.996, a_use 1.000, CR8 0.910, CR1 1.000, AM_C 0.951, candidates mean 1056.5, p99 1101.6
+    - I64@128: i 4.363, a_use 0.939, CR8 0.506, CR1 0.925, AM_C 0.680, candidates mean 162.2, p99 208.5
+    - I64@2048: i 5.000, a_use 1.000, CR8 0.990, CR1 1.000, AM_C 0.995, candidates mean 2080.3, p99 2126.3
+    - I64@256: i 4.809, a_use 0.985, CR8 0.636, CR1 0.978, AM_C 0.780, candidates mean 289.7, p99 334.9
+    - I64@512: i 4.965, a_use 0.998, CR8 0.777, CR1 0.996, AM_C 0.873, candidates mean 544.9, p99 590.2
+- **TRAJ2, update 32768 (trajectory; descriptive; enters no label)**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.886) / B: NOT RESTORED (accuracy version 0.888); T2 A: NOT RESTORED (accuracy version 0.232) / B: NOT RESTORED (accuracy version 0.233); T3 A: NOT RESTORED (accuracy version 0.950) / B: NOT RESTORED (accuracy version 0.949)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.887) / B: NOT RESTORED (accuracy version 0.890); T2 A: NOT RESTORED (accuracy version 0.220) / B: NOT RESTORED (accuracy version 0.222); T3 A: NOT RESTORED (accuracy version 0.941) / B: NOT RESTORED (accuracy version 0.939)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.879) / B: NOT RESTORED (accuracy version 0.880); T2 A: NOT RESTORED (accuracy version 0.223) / B: NOT RESTORED (accuracy version 0.237); T3 A: NOT RESTORED (accuracy version 0.939) / B: NOT RESTORED (accuracy version 0.935)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.905) / B: NOT RESTORED (accuracy version 0.906); T2 A: NOT RESTORED (accuracy version 0.260) / B: NOT RESTORED (accuracy version 0.266); T3 A: NOT RESTORED (accuracy version 0.945) / B: NOT RESTORED (accuracy version 0.944)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.888) / B: NOT RESTORED (accuracy version 0.888); T2 A: NOT RESTORED (accuracy version 0.223) / B: NOT RESTORED (accuracy version 0.226); T3 A: NOT RESTORED (accuracy version 0.943) / B: NOT RESTORED (accuracy version 0.943)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.942) / B: NOT RESTORED (accuracy version 0.943); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+      - d2: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.938) / B: NOT RESTORED (accuracy version 0.938); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+      - d3: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.936) / B: NOT RESTORED (accuracy version 0.936); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+      - d4: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.947) / B: NOT RESTORED (accuracy version 0.948); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.986) / B: RESTORED (accuracy version 0.986); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998)
+      - d5: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.942) / B: NOT RESTORED (accuracy version 0.942); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+    - median c*: 256.0 keys, share of N: 0.062, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 5.000, a_use 1.000, T0: i 4.979, a_use 0.999, T1: i 3.949, a_use 0.889, T1w: i 4.702, a_use 0.974, T2: i 0.470, a_use 0.249, T3: i 4.402, a_use 0.943
+    - g_P -49.814, g_C -27.936, g_PC -218.111; i(F0) - i(T2) 4.530
+    - visit sweep Tv: v=1: i on 3.121, off 3.121, CR8(on) 0.062, keys scored 272; v=2: i on 4.979, off 3.949, CR8(on) 0.094, keys scored 528; v=4: i on 4.570, off 1.818, CR8(on) 0.139, keys scored 1040; v=8: i on 4.406, off 0.736, CR8(on) 0.247, keys scored 2064
+    - T0: CR8 0.094, CR1 0.223, SR8 0.094, AM_C 0.107, AM_S 0.107
+    - prior effect: i(T1)-i(T0) -1.030, i(T1w)-i(T0) -0.278, i(T2)-i(T3) -3.932; selection changed T0->T1 0.846; facts spanning both branches 0.849; TV distance T0->T1 0.244
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.192 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 5.000, a_use 1.000; I256@512: i 4.568, a_use 0.961, CR8 0.660, measured candidates mean 648.8, p99 803.1
+    - I64@1024: i 4.998, a_use 1.000, CR8 0.915, CR1 1.000, AM_C 0.954, candidates mean 1056.7, p99 1102.9
+    - I64@128: i 4.383, a_use 0.941, CR8 0.515, CR1 0.932, AM_C 0.686, candidates mean 162.0, p99 209.4
+    - I64@2048: i 5.000, a_use 1.000, CR8 0.990, CR1 1.000, AM_C 0.995, candidates mean 2080.6, p99 2127.5
+    - I64@256: i 4.805, a_use 0.984, CR8 0.643, CR1 0.980, AM_C 0.784, candidates mean 289.6, p99 335.9
+    - I64@512: i 4.962, a_use 0.997, CR8 0.785, CR1 0.997, AM_C 0.876, candidates mean 544.8, p99 591.2
+- **U_P, update 8192**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.869) / B: NOT RESTORED (accuracy version 0.872); T2 A: NOT RESTORED (accuracy version 0.192) / B: NOT RESTORED (accuracy version 0.194); T3 A: NOT RESTORED (accuracy version 0.924) / B: NOT RESTORED (accuracy version 0.924)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.851) / B: NOT RESTORED (accuracy version 0.846); T2 A: NOT RESTORED (accuracy version 0.176) / B: NOT RESTORED (accuracy version 0.187); T3 A: NOT RESTORED (accuracy version 0.912) / B: NOT RESTORED (accuracy version 0.909)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.866) / B: NOT RESTORED (accuracy version 0.868); T2 A: NOT RESTORED (accuracy version 0.193) / B: NOT RESTORED (accuracy version 0.194); T3 A: NOT RESTORED (accuracy version 0.912) / B: NOT RESTORED (accuracy version 0.906)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.873) / B: NOT RESTORED (accuracy version 0.876); T2 A: NOT RESTORED (accuracy version 0.227) / B: NOT RESTORED (accuracy version 0.228); T3 A: NOT RESTORED (accuracy version 0.940) / B: NOT RESTORED (accuracy version 0.941)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.862) / B: NOT RESTORED (accuracy version 0.859); T2 A: NOT RESTORED (accuracy version 0.187) / B: NOT RESTORED (accuracy version 0.185); T3 A: NOT RESTORED (accuracy version 0.919) / B: NOT RESTORED (accuracy version 0.917)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.925) / B: NOT RESTORED (accuracy version 0.925); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.976) / B: NOT RESTORED (accuracy version 0.976); 512 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997)
+      - d2: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.926) / B: NOT RESTORED (accuracy version 0.925); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.976) / B: NOT RESTORED (accuracy version 0.975); 512 A: RESTORED (accuracy version 0.996) / B: RESTORED (accuracy version 0.995)
+      - d3: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.933) / B: NOT RESTORED (accuracy version 0.933); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.981) / B: RESTORED (accuracy version 0.982); 512 A: RESTORED (accuracy version 0.996) / B: RESTORED (accuracy version 0.997)
+      - d4: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.935) / B: NOT RESTORED (accuracy version 0.935); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: RESTORED (accuracy version 0.981) / B: RESTORED (accuracy version 0.980); 512 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.997)
+      - d5: 1024 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 128 A: NOT RESTORED (accuracy version 0.928) / B: NOT RESTORED (accuracy version 0.928); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.977) / B: NOT RESTORED (accuracy version 0.977); 512 A: RESTORED (accuracy version 0.996) / B: RESTORED (accuracy version 0.996)
+    - median c*: 512.0 keys, share of N: 0.125, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.999, a_use 1.000, T0: i 4.858, a_use 0.989, T1: i 3.760, a_use 0.865, T1w: i 4.516, a_use 0.955, T2: i 0.353, a_use 0.212, T3: i 4.204, a_use 0.920
+    - g_P -7.769, g_C -4.630, g_PC -31.874; i(F0) - i(T2) 4.646
+    - visit sweep Tv: v=1: i on 2.888, off 2.888, CR8(on) 0.054, keys scored 272; v=2: i on 4.858, off 3.760, CR8(on) 0.087, keys scored 528; v=4: i on 4.377, off 1.543, CR8(on) 0.133, keys scored 1040; v=8: i on 4.220, off 0.593, CR8(on) 0.242, keys scored 2064
+    - T0: CR8 0.087, CR1 0.200, SR8 0.086, AM_C 0.099, AM_S 0.099
+    - prior effect: i(T1)-i(T0) -1.098, i(T1w)-i(T0) -0.342, i(T2)-i(T3) -3.851; selection changed T0->T1 0.841; facts spanning both branches 0.854; TV distance T0->T1 0.247
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.202 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.999, a_use 1.000; I256@512: i 4.493, a_use 0.953, CR8 0.650, measured candidates mean 646.6, p99 803.8
+    - I64@1024: i 4.996, a_use 1.000, CR8 0.909, CR1 1.000, AM_C 0.950, candidates mean 1056.4, p99 1100.7
+    - I64@128: i 4.279, a_use 0.929, CR8 0.496, CR1 0.915, AM_C 0.670, candidates mean 161.3, p99 206.8
+    - I64@2048: i 4.999, a_use 1.000, CR8 0.989, CR1 1.000, AM_C 0.994, candidates mean 2080.3, p99 2125.5
+    - I64@256: i 4.738, a_use 0.978, CR8 0.625, CR1 0.970, AM_C 0.771, candidates mean 289.0, p99 333.9
+    - I64@512: i 4.948, a_use 0.996, CR8 0.772, CR1 0.994, AM_C 0.868, candidates mean 544.4, p99 589.0
+
+#### 32K/16K (primary; facts 32768, slots 16384)
+
+- **RUN, update 98304**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK] [TREE STILL LEARNING]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.524) / B: NOT RESTORED (accuracy version 0.524); T2 A: NOT RESTORED (accuracy version 0.004) / B: NOT RESTORED (accuracy version 0.004); T3 A: NOT RESTORED (accuracy version 0.402) / B: NOT RESTORED (accuracy version 0.402)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.517) / B: NOT RESTORED (accuracy version 0.518); T2 A: NOT RESTORED (accuracy version 0.001) / B: NOT RESTORED (accuracy version 0.001); T3 A: NOT RESTORED (accuracy version 0.384) / B: NOT RESTORED (accuracy version 0.384)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.515) / B: NOT RESTORED (accuracy version 0.515); T2 A: NOT RESTORED (accuracy version 0.002) / B: NOT RESTORED (accuracy version 0.003); T3 A: NOT RESTORED (accuracy version 0.389) / B: NOT RESTORED (accuracy version 0.388)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.559) / B: NOT RESTORED (accuracy version 0.558); T2 A: NOT RESTORED (accuracy version 0.004) / B: NOT RESTORED (accuracy version 0.003); T3 A: NOT RESTORED (accuracy version 0.431) / B: NOT RESTORED (accuracy version 0.431)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.525) / B: NOT RESTORED (accuracy version 0.524); T2 A: NOT RESTORED (accuracy version 0.004) / B: NOT RESTORED (accuracy version 0.004); T3 A: NOT RESTORED (accuracy version 0.405) / B: NOT RESTORED (accuracy version 0.403)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK] [TREE STILL LEARNING]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.919) / B: NOT RESTORED (accuracy version 0.919); 128 A: NOT RESTORED (accuracy version 0.417) / B: NOT RESTORED (accuracy version 0.417); 2048 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.985); 256 A: NOT RESTORED (accuracy version 0.585) / B: NOT RESTORED (accuracy version 0.585); 512 A: NOT RESTORED (accuracy version 0.771) / B: NOT RESTORED (accuracy version 0.772)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.918) / B: NOT RESTORED (accuracy version 0.918); 128 A: NOT RESTORED (accuracy version 0.413) / B: NOT RESTORED (accuracy version 0.413); 2048 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.985); 256 A: NOT RESTORED (accuracy version 0.581) / B: NOT RESTORED (accuracy version 0.581); 512 A: NOT RESTORED (accuracy version 0.770) / B: NOT RESTORED (accuracy version 0.770)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.918) / B: NOT RESTORED (accuracy version 0.918); 128 A: NOT RESTORED (accuracy version 0.415) / B: NOT RESTORED (accuracy version 0.415); 2048 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 256 A: NOT RESTORED (accuracy version 0.579) / B: NOT RESTORED (accuracy version 0.579); 512 A: NOT RESTORED (accuracy version 0.769) / B: NOT RESTORED (accuracy version 0.769)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.920) / B: NOT RESTORED (accuracy version 0.920); 128 A: NOT RESTORED (accuracy version 0.415) / B: NOT RESTORED (accuracy version 0.415); 2048 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 256 A: NOT RESTORED (accuracy version 0.580) / B: NOT RESTORED (accuracy version 0.579); 512 A: NOT RESTORED (accuracy version 0.770) / B: NOT RESTORED (accuracy version 0.770)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.921) / B: NOT RESTORED (accuracy version 0.921); 128 A: NOT RESTORED (accuracy version 0.420) / B: NOT RESTORED (accuracy version 0.419); 2048 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.985); 256 A: NOT RESTORED (accuracy version 0.585) / B: NOT RESTORED (accuracy version 0.585); 512 A: NOT RESTORED (accuracy version 0.774) / B: NOT RESTORED (accuracy version 0.775)
+    - median c*: 2048.0 keys, share of N: 0.125, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.888, a_use 0.992, T0: i 2.615, a_use 0.697, T1: i 1.671, a_use 0.529, T1w: i 2.235, a_use 0.633, T2: i 0.000, a_use 0.033, T3: i 1.092, a_use 0.408
+    - g_P -0.416, g_C -0.670, g_PC -1.151; i(F0) - i(T2) 4.888
+    - visit sweep Tv: v=1: i on 0.837, off 0.837, CR8(on) 0.003, keys scored 320; v=2: i on 2.615, off 1.671, CR8(on) 0.006, keys scored 576; v=4: i on 1.578, off 0.382, CR8(on) 0.014, keys scored 1088; v=8: i on 1.182, off 0.074, CR8(on) 0.035, keys scored 2112
+    - T0: CR8 0.006, CR1 0.004, SR8 0.006, AM_C 0.006, AM_S 0.006
+    - prior effect: i(T1)-i(T0) -0.944, i(T1w)-i(T0) -0.380, i(T2)-i(T3) -1.092; selection changed T0->T1 0.744; facts spanning both branches 0.920; TV distance T0->T1 0.213
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.064 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.888, a_use 0.992; I256@512: i 1.723, a_use 0.539, CR8 0.521, measured candidates mean 637.4, p99 791.2
+    - I64@1024: i 4.131, a_use 0.912, CR8 0.835, CR1 0.962, AM_C 0.858, candidates mean 1055.8, p99 1094.4
+    - I64@128: i 1.154, a_use 0.422, CR8 0.396, CR1 0.621, AM_C 0.433, candidates mean 158.7, p99 201.3
+    - I64@2048: i 4.721, a_use 0.976, CR8 0.944, CR1 0.994, AM_C 0.954, candidates mean 2079.8, p99 2118.1
+    - I64@256: i 1.948, a_use 0.582, CR8 0.532, CR1 0.762, AM_C 0.570, candidates mean 287.1, p99 328.3
+    - I64@512: i 3.056, a_use 0.766, CR8 0.686, CR1 0.883, AM_C 0.720, candidates mean 543.4, p99 583.3
+- **TRAJ1, update 32768 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.446) / B: NOT RESTORED (accuracy version 0.445); T2 A: NOT RESTORED (accuracy version 0.006) / B: NOT RESTORED (accuracy version 0.008); T3 A: NOT RESTORED (accuracy version 0.360) / B: NOT RESTORED (accuracy version 0.360)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.435) / B: NOT RESTORED (accuracy version 0.435); T2 A: NOT RESTORED (accuracy version 0.006) / B: NOT RESTORED (accuracy version 0.005); T3 A: NOT RESTORED (accuracy version 0.349) / B: NOT RESTORED (accuracy version 0.347)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.447) / B: NOT RESTORED (accuracy version 0.446); T2 A: NOT RESTORED (accuracy version 0.005) / B: NOT RESTORED (accuracy version 0.006); T3 A: NOT RESTORED (accuracy version 0.351) / B: NOT RESTORED (accuracy version 0.355)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.495) / B: NOT RESTORED (accuracy version 0.495); T2 A: NOT RESTORED (accuracy version 0.008) / B: NOT RESTORED (accuracy version 0.006); T3 A: NOT RESTORED (accuracy version 0.402) / B: NOT RESTORED (accuracy version 0.402)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.449) / B: NOT RESTORED (accuracy version 0.449); T2 A: NOT RESTORED (accuracy version 0.009) / B: NOT RESTORED (accuracy version 0.008); T3 A: NOT RESTORED (accuracy version 0.367) / B: NOT RESTORED (accuracy version 0.367)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.915) / B: NOT RESTORED (accuracy version 0.913); 128 A: NOT RESTORED (accuracy version 0.419) / B: NOT RESTORED (accuracy version 0.420); 2048 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 256 A: NOT RESTORED (accuracy version 0.582) / B: NOT RESTORED (accuracy version 0.582); 512 A: NOT RESTORED (accuracy version 0.768) / B: NOT RESTORED (accuracy version 0.768)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.914) / B: NOT RESTORED (accuracy version 0.913); 128 A: NOT RESTORED (accuracy version 0.421) / B: NOT RESTORED (accuracy version 0.420); 2048 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.983); 256 A: NOT RESTORED (accuracy version 0.585) / B: NOT RESTORED (accuracy version 0.585); 512 A: NOT RESTORED (accuracy version 0.770) / B: NOT RESTORED (accuracy version 0.771)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.913) / B: NOT RESTORED (accuracy version 0.913); 128 A: NOT RESTORED (accuracy version 0.416) / B: NOT RESTORED (accuracy version 0.415); 2048 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 256 A: NOT RESTORED (accuracy version 0.583) / B: NOT RESTORED (accuracy version 0.582); 512 A: NOT RESTORED (accuracy version 0.767) / B: NOT RESTORED (accuracy version 0.767)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.916) / B: NOT RESTORED (accuracy version 0.917); 128 A: NOT RESTORED (accuracy version 0.422) / B: NOT RESTORED (accuracy version 0.422); 2048 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.983); 256 A: NOT RESTORED (accuracy version 0.587) / B: NOT RESTORED (accuracy version 0.587); 512 A: NOT RESTORED (accuracy version 0.774) / B: NOT RESTORED (accuracy version 0.774)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.916) / B: NOT RESTORED (accuracy version 0.916); 128 A: NOT RESTORED (accuracy version 0.420) / B: NOT RESTORED (accuracy version 0.419); 2048 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.983); 256 A: NOT RESTORED (accuracy version 0.584) / B: NOT RESTORED (accuracy version 0.583); 512 A: NOT RESTORED (accuracy version 0.772) / B: NOT RESTORED (accuracy version 0.771)
+    - median c*: 2048.0 keys, share of N: 0.125, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.700, a_use 0.974, T0: i 1.870, a_use 0.567, T1: i 1.286, a_use 0.451, T1w: i 1.618, a_use 0.519, T2: i 0.000, a_use 0.036, T3: i 0.918, a_use 0.367
+    - g_P -0.206, g_C -0.337, g_PC -0.661; i(F0) - i(T2) 4.700
+    - visit sweep Tv: v=1: i on 0.673, off 0.673, CR8(on) 0.005, keys scored 320; v=2: i on 1.870, off 1.286, CR8(on) 0.009, keys scored 576; v=4: i on 1.263, off 0.345, CR8(on) 0.019, keys scored 1088; v=8: i on 0.986, off 0.077, CR8(on) 0.044, keys scored 2112
+    - T0: CR8 0.009, CR1 0.008, SR8 0.009, AM_C 0.009, AM_S 0.009
+    - prior effect: i(T1)-i(T0) -0.584, i(T1w)-i(T0) -0.252, i(T2)-i(T3) -0.918; selection changed T0->T1 0.732; facts spanning both branches 0.916; TV distance T0->T1 0.208
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.079 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.700, a_use 0.974; I256@512: i 1.685, a_use 0.532, CR8 0.524, measured candidates mean 638.4, p99 790.2
+    - I64@1024: i 3.967, a_use 0.891, CR8 0.838, CR1 0.964, AM_C 0.860, candidates mean 1055.7, p99 1094.5
+    - I64@128: i 1.137, a_use 0.418, CR8 0.399, CR1 0.624, AM_C 0.436, candidates mean 158.7, p99 201.5
+    - I64@2048: i 4.532, a_use 0.957, CR8 0.946, CR1 0.995, AM_C 0.955, candidates mean 2079.9, p99 2118.4
+    - I64@256: i 1.905, a_use 0.574, CR8 0.535, CR1 0.766, AM_C 0.574, candidates mean 287.0, p99 328.4
+    - I64@512: i 2.961, a_use 0.752, CR8 0.690, CR1 0.887, AM_C 0.723, candidates mean 543.5, p99 583.2
+- **TRAJ2, update 65536 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.502) / B: NOT RESTORED (accuracy version 0.503); T2 A: NOT RESTORED (accuracy version 0.006) / B: NOT RESTORED (accuracy version 0.006); T3 A: NOT RESTORED (accuracy version 0.394) / B: NOT RESTORED (accuracy version 0.394)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.492) / B: NOT RESTORED (accuracy version 0.493); T2 A: NOT RESTORED (accuracy version 0.001) / B: NOT RESTORED (accuracy version 0.000); T3 A: NOT RESTORED (accuracy version 0.378) / B: NOT RESTORED (accuracy version 0.376)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.497) / B: NOT RESTORED (accuracy version 0.497); T2 A: NOT RESTORED (accuracy version 0.003) / B: NOT RESTORED (accuracy version 0.004); T3 A: NOT RESTORED (accuracy version 0.382) / B: NOT RESTORED (accuracy version 0.382)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.542) / B: NOT RESTORED (accuracy version 0.541); T2 A: NOT RESTORED (accuracy version 0.005) / B: NOT RESTORED (accuracy version 0.004); T3 A: NOT RESTORED (accuracy version 0.423) / B: NOT RESTORED (accuracy version 0.422)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.505) / B: NOT RESTORED (accuracy version 0.505); T2 A: NOT RESTORED (accuracy version 0.005) / B: NOT RESTORED (accuracy version 0.005); T3 A: NOT RESTORED (accuracy version 0.390) / B: NOT RESTORED (accuracy version 0.390)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.918) / B: NOT RESTORED (accuracy version 0.919); 128 A: NOT RESTORED (accuracy version 0.419) / B: NOT RESTORED (accuracy version 0.420); 2048 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 256 A: NOT RESTORED (accuracy version 0.584) / B: NOT RESTORED (accuracy version 0.584); 512 A: NOT RESTORED (accuracy version 0.775) / B: NOT RESTORED (accuracy version 0.776)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.918) / B: NOT RESTORED (accuracy version 0.918); 128 A: NOT RESTORED (accuracy version 0.416) / B: NOT RESTORED (accuracy version 0.416); 2048 A: RESTORED (accuracy version 0.985) / B: RESTORED (accuracy version 0.985); 256 A: NOT RESTORED (accuracy version 0.582) / B: NOT RESTORED (accuracy version 0.582); 512 A: NOT RESTORED (accuracy version 0.770) / B: NOT RESTORED (accuracy version 0.770)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.919) / B: NOT RESTORED (accuracy version 0.918); 128 A: NOT RESTORED (accuracy version 0.415) / B: NOT RESTORED (accuracy version 0.416); 2048 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 256 A: NOT RESTORED (accuracy version 0.581) / B: NOT RESTORED (accuracy version 0.582); 512 A: NOT RESTORED (accuracy version 0.771) / B: NOT RESTORED (accuracy version 0.770)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.919) / B: NOT RESTORED (accuracy version 0.919); 128 A: NOT RESTORED (accuracy version 0.419) / B: NOT RESTORED (accuracy version 0.417); 2048 A: RESTORED (accuracy version 0.984) / B: RESTORED (accuracy version 0.984); 256 A: NOT RESTORED (accuracy version 0.584) / B: NOT RESTORED (accuracy version 0.583); 512 A: NOT RESTORED (accuracy version 0.773) / B: NOT RESTORED (accuracy version 0.773)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.918) / B: NOT RESTORED (accuracy version 0.918); 128 A: NOT RESTORED (accuracy version 0.420) / B: NOT RESTORED (accuracy version 0.420); 2048 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.984); 256 A: NOT RESTORED (accuracy version 0.587) / B: NOT RESTORED (accuracy version 0.586); 512 A: NOT RESTORED (accuracy version 0.773) / B: NOT RESTORED (accuracy version 0.773)
+    - median c*: 2048.0 keys, share of N: 0.125, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.848, a_use 0.988, T0: i 2.396, a_use 0.661, T1: i 1.565, a_use 0.508, T1w: i 2.056, a_use 0.601, T2: i 0.000, a_use 0.034, T3: i 1.049, a_use 0.398
+    - g_P -0.339, g_C -0.549, g_PC -0.977; i(F0) - i(T2) 4.848
+    - visit sweep Tv: v=1: i on 0.796, off 0.796, CR8(on) 0.003, keys scored 320; v=2: i on 2.396, off 1.565, CR8(on) 0.007, keys scored 576; v=4: i on 1.503, off 0.375, CR8(on) 0.015, keys scored 1088; v=8: i on 1.135, off 0.076, CR8(on) 0.038, keys scored 2112
+    - T0: CR8 0.007, CR1 0.005, SR8 0.007, AM_C 0.007, AM_S 0.007
+    - prior effect: i(T1)-i(T0) -0.832, i(T1w)-i(T0) -0.340, i(T2)-i(T3) -1.049; selection changed T0->T1 0.740; facts spanning both branches 0.918; TV distance T0->T1 0.212
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.067 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.848, a_use 0.988; I256@512: i 1.721, a_use 0.539, CR8 0.522, measured candidates mean 636.8, p99 789.0
+    - I64@1024: i 4.100, a_use 0.908, CR8 0.836, CR1 0.963, AM_C 0.858, candidates mean 1055.9, p99 1094.5
+    - I64@128: i 1.157, a_use 0.423, CR8 0.397, CR1 0.623, AM_C 0.434, candidates mean 158.6, p99 201.7
+    - I64@2048: i 4.680, a_use 0.972, CR8 0.945, CR1 0.994, AM_C 0.954, candidates mean 2079.9, p99 2118.3
+    - I64@256: i 1.947, a_use 0.582, CR8 0.533, CR1 0.764, AM_C 0.571, candidates mean 287.0, p99 328.3
+    - I64@512: i 3.048, a_use 0.765, CR8 0.687, CR1 0.885, AM_C 0.721, candidates mean 543.5, p99 583.1
+- **U_P, update 16384**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.341) / B: NOT RESTORED (accuracy version 0.343); T2 A: NOT RESTORED (accuracy version 0.014) / B: NOT RESTORED (accuracy version 0.016); T3 A: NOT RESTORED (accuracy version 0.293) / B: NOT RESTORED (accuracy version 0.294)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.323) / B: NOT RESTORED (accuracy version 0.326); T2 A: NOT RESTORED (accuracy version 0.012) / B: NOT RESTORED (accuracy version 0.012); T3 A: NOT RESTORED (accuracy version 0.284) / B: NOT RESTORED (accuracy version 0.283)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.337) / B: NOT RESTORED (accuracy version 0.339); T2 A: NOT RESTORED (accuracy version 0.011) / B: NOT RESTORED (accuracy version 0.010); T3 A: NOT RESTORED (accuracy version 0.294) / B: NOT RESTORED (accuracy version 0.296)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.404) / B: NOT RESTORED (accuracy version 0.403); T2 A: NOT RESTORED (accuracy version 0.013) / B: NOT RESTORED (accuracy version 0.012); T3 A: NOT RESTORED (accuracy version 0.353) / B: NOT RESTORED (accuracy version 0.354)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.338) / B: NOT RESTORED (accuracy version 0.339); T2 A: NOT RESTORED (accuracy version 0.013) / B: NOT RESTORED (accuracy version 0.014); T3 A: NOT RESTORED (accuracy version 0.302) / B: NOT RESTORED (accuracy version 0.298)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.895) / B: NOT RESTORED (accuracy version 0.896); 128 A: NOT RESTORED (accuracy version 0.405) / B: NOT RESTORED (accuracy version 0.405); 2048 A: RESTORED (accuracy version 0.975) / B: RESTORED (accuracy version 0.975); 256 A: NOT RESTORED (accuracy version 0.563) / B: NOT RESTORED (accuracy version 0.563); 512 A: NOT RESTORED (accuracy version 0.745) / B: NOT RESTORED (accuracy version 0.744)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.896) / B: NOT RESTORED (accuracy version 0.895); 128 A: NOT RESTORED (accuracy version 0.401) / B: NOT RESTORED (accuracy version 0.402); 2048 A: RESTORED (accuracy version 0.976) / B: RESTORED (accuracy version 0.976); 256 A: NOT RESTORED (accuracy version 0.564) / B: NOT RESTORED (accuracy version 0.564); 512 A: NOT RESTORED (accuracy version 0.742) / B: NOT RESTORED (accuracy version 0.742)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.894); 128 A: NOT RESTORED (accuracy version 0.400) / B: NOT RESTORED (accuracy version 0.402); 2048 A: RESTORED (accuracy version 0.974) / B: RESTORED (accuracy version 0.974); 256 A: NOT RESTORED (accuracy version 0.556) / B: NOT RESTORED (accuracy version 0.558); 512 A: NOT RESTORED (accuracy version 0.740) / B: NOT RESTORED (accuracy version 0.741)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.905) / B: NOT RESTORED (accuracy version 0.904); 128 A: NOT RESTORED (accuracy version 0.411) / B: NOT RESTORED (accuracy version 0.411); 2048 A: RESTORED (accuracy version 0.980) / B: RESTORED (accuracy version 0.978); 256 A: NOT RESTORED (accuracy version 0.574) / B: NOT RESTORED (accuracy version 0.574); 512 A: NOT RESTORED (accuracy version 0.756) / B: NOT RESTORED (accuracy version 0.756)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.896) / B: NOT RESTORED (accuracy version 0.894); 128 A: NOT RESTORED (accuracy version 0.398) / B: NOT RESTORED (accuracy version 0.398); 2048 A: RESTORED (accuracy version 0.975) / B: RESTORED (accuracy version 0.976); 256 A: NOT RESTORED (accuracy version 0.560) / B: NOT RESTORED (accuracy version 0.560); 512 A: NOT RESTORED (accuracy version 0.743) / B: NOT RESTORED (accuracy version 0.742)
+    - median c*: 2048.0 keys, share of N: 0.125, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.166, a_use 0.916, T0: i 1.064, a_use 0.401, T1: i 0.775, a_use 0.332, T1w: i 0.934, a_use 0.371, T2: i 0.001, a_use 0.039, T3: i 0.627, a_use 0.293
+    - g_P -0.093, g_C -0.141, g_PC -0.343; i(F0) - i(T2) 4.164
+    - visit sweep Tv: v=1: i on 0.432, off 0.432, CR8(on) 0.009, keys scored 320; v=2: i on 1.064, off 0.775, CR8(on) 0.016, keys scored 576; v=4: i on 0.810, off 0.262, CR8(on) 0.029, keys scored 1088; v=8: i on 0.662, off 0.068, CR8(on) 0.059, keys scored 2112
+    - T0: CR8 0.016, CR1 0.017, SR8 0.016, AM_C 0.016, AM_S 0.016
+    - prior effect: i(T1)-i(T0) -0.290, i(T1w)-i(T0) -0.130, i(T2)-i(T3) -0.626; selection changed T0->T1 0.722; facts spanning both branches 0.909; TV distance T0->T1 0.201
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.101 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.166, a_use 0.916; I256@512: i 1.439, a_use 0.483, CR8 0.527, measured candidates mean 639.9, p99 793.2
+    - I64@1024: i 3.441, a_use 0.822, CR8 0.841, CR1 0.964, AM_C 0.862, candidates mean 1055.8, p99 1094.6
+    - I64@128: i 0.970, a_use 0.380, CR8 0.403, CR1 0.624, AM_C 0.439, candidates mean 158.7, p99 201.5
+    - I64@2048: i 3.985, a_use 0.894, CR8 0.947, CR1 0.994, AM_C 0.956, candidates mean 2079.9, p99 2118.4
+    - I64@256: i 1.633, a_use 0.522, CR8 0.539, CR1 0.765, AM_C 0.576, candidates mean 287.0, p99 328.3
+    - I64@512: i 2.538, a_use 0.684, CR8 0.694, CR1 0.887, AM_C 0.726, candidates mean 543.4, p99 583.1
+
+#### 32K/4K (loaded; facts 32768, slots 4096)
+
+- **RUN, update 786432**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.336) / B: NOT RESTORED (accuracy version 0.337); T2 A: NOT RESTORED (accuracy version 0.019) / B: NOT RESTORED (accuracy version 0.019); T3 A: NOT RESTORED (accuracy version 0.396) / B: NOT RESTORED (accuracy version 0.397)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.311) / B: NOT RESTORED (accuracy version 0.310); T2 A: NOT RESTORED (accuracy version 0.015) / B: NOT RESTORED (accuracy version 0.014); T3 A: NOT RESTORED (accuracy version 0.371) / B: NOT RESTORED (accuracy version 0.370)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.331) / B: NOT RESTORED (accuracy version 0.331); T2 A: NOT RESTORED (accuracy version 0.015) / B: NOT RESTORED (accuracy version 0.016); T3 A: NOT RESTORED (accuracy version 0.384) / B: NOT RESTORED (accuracy version 0.384)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.322) / B: NOT RESTORED (accuracy version 0.320); T2 A: NOT RESTORED (accuracy version 0.014) / B: NOT RESTORED (accuracy version 0.014); T3 A: NOT RESTORED (accuracy version 0.393) / B: NOT RESTORED (accuracy version 0.391)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.326) / B: NOT RESTORED (accuracy version 0.327); T2 A: NOT RESTORED (accuracy version 0.019) / B: NOT RESTORED (accuracy version 0.019); T3 A: NOT RESTORED (accuracy version 0.389) / B: NOT RESTORED (accuracy version 0.387)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.861) / B: NOT RESTORED (accuracy version 0.861); 128 A: NOT RESTORED (accuracy version 0.244) / B: NOT RESTORED (accuracy version 0.244); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.382) / B: NOT RESTORED (accuracy version 0.381); 512 A: NOT RESTORED (accuracy version 0.603) / B: NOT RESTORED (accuracy version 0.603)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.860) / B: NOT RESTORED (accuracy version 0.861); 128 A: NOT RESTORED (accuracy version 0.242) / B: NOT RESTORED (accuracy version 0.240); 2048 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991); 256 A: NOT RESTORED (accuracy version 0.376) / B: NOT RESTORED (accuracy version 0.375); 512 A: NOT RESTORED (accuracy version 0.597) / B: NOT RESTORED (accuracy version 0.596)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.861) / B: NOT RESTORED (accuracy version 0.862); 128 A: NOT RESTORED (accuracy version 0.241) / B: NOT RESTORED (accuracy version 0.241); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.379) / B: NOT RESTORED (accuracy version 0.379); 512 A: NOT RESTORED (accuracy version 0.603) / B: NOT RESTORED (accuracy version 0.603)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.864) / B: NOT RESTORED (accuracy version 0.864); 128 A: NOT RESTORED (accuracy version 0.245) / B: NOT RESTORED (accuracy version 0.244); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.382) / B: NOT RESTORED (accuracy version 0.381); 512 A: NOT RESTORED (accuracy version 0.606) / B: NOT RESTORED (accuracy version 0.605)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.859) / B: NOT RESTORED (accuracy version 0.859); 128 A: NOT RESTORED (accuracy version 0.238) / B: NOT RESTORED (accuracy version 0.239); 2048 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991); 256 A: NOT RESTORED (accuracy version 0.380) / B: NOT RESTORED (accuracy version 0.380); 512 A: NOT RESTORED (accuracy version 0.601) / B: NOT RESTORED (accuracy version 0.602)
+    - median c*: 2048.0 keys, share of N: 0.500, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 2.256, a_use 0.637, T0: i 0.740, a_use 0.323, T1: i 0.388, a_use 0.224, T1w: i 0.622, a_use 0.292, T2: i 0.002, a_use 0.040, T3: i 0.509, a_use 0.261
+    - g_P -0.232, g_C -0.152, g_PC -0.487; i(F0) - i(T2) 2.254
+    - visit sweep Tv: v=1: i on 0.280, off 0.280, CR8(on) 0.027, keys scored 272; v=2: i on 0.740, off 0.388, CR8(on) 0.059, keys scored 528; v=4: i on 0.556, off 0.086, CR8(on) 0.130, keys scored 1040; v=8: i on 0.511, off 0.013, CR8(on) 0.289, keys scored 2064
+    - T0: CR8 0.059, CR1 0.065, SR8 0.057, AM_C 0.059, AM_S 0.058
+    - prior effect: i(T1)-i(T0) -0.352, i(T1w)-i(T0) -0.118, i(T2)-i(T3) -0.508; selection changed T0->T1 0.795; facts spanning both branches 0.823; TV distance T0->T1 0.263
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.328 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 2.256, a_use 0.637; I256@512: i 0.544, a_use 0.270, CR8 0.648, measured candidates mean 640.0, p99 793.4
+    - I64@1024: i 1.783, a_use 0.551, CR8 0.936, CR1 0.978, AM_C 0.942, candidates mean 1055.9, p99 1095.3
+    - I64@128: i 0.241, a_use 0.174, CR8 0.462, CR1 0.593, AM_C 0.480, candidates mean 158.9, p99 202.5
+    - I64@2048: i 2.226, a_use 0.632, CR8 0.996, CR1 0.999, AM_C 0.996, candidates mean 2079.9, p99 2119.3
+    - I64@256: i 0.496, a_use 0.257, CR8 0.623, CR1 0.752, AM_C 0.641, candidates mean 287.3, p99 329.2
+    - I64@512: i 1.020, a_use 0.392, CR8 0.796, CR1 0.894, AM_C 0.810, candidates mean 543.6, p99 584.1
+- **TRAJ1, update 98304 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.338) / B: NOT RESTORED (accuracy version 0.340); T2 A: NOT RESTORED (accuracy version 0.029) / B: NOT RESTORED (accuracy version 0.030); T3 A: NOT RESTORED (accuracy version 0.385) / B: NOT RESTORED (accuracy version 0.385)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.303) / B: NOT RESTORED (accuracy version 0.304); T2 A: NOT RESTORED (accuracy version 0.022) / B: NOT RESTORED (accuracy version 0.021); T3 A: NOT RESTORED (accuracy version 0.358) / B: NOT RESTORED (accuracy version 0.356)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.328) / B: NOT RESTORED (accuracy version 0.329); T2 A: NOT RESTORED (accuracy version 0.028) / B: NOT RESTORED (accuracy version 0.028); T3 A: NOT RESTORED (accuracy version 0.375) / B: NOT RESTORED (accuracy version 0.374)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.328) / B: NOT RESTORED (accuracy version 0.328); T2 A: NOT RESTORED (accuracy version 0.025) / B: NOT RESTORED (accuracy version 0.024); T3 A: NOT RESTORED (accuracy version 0.378) / B: NOT RESTORED (accuracy version 0.379)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.327) / B: NOT RESTORED (accuracy version 0.330); T2 A: NOT RESTORED (accuracy version 0.026) / B: NOT RESTORED (accuracy version 0.025); T3 A: NOT RESTORED (accuracy version 0.380) / B: NOT RESTORED (accuracy version 0.380)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.877) / B: NOT RESTORED (accuracy version 0.878); 128 A: NOT RESTORED (accuracy version 0.257) / B: NOT RESTORED (accuracy version 0.258); 2048 A: RESTORED (accuracy version 0.993) / B: RESTORED (accuracy version 0.993); 256 A: NOT RESTORED (accuracy version 0.401) / B: NOT RESTORED (accuracy version 0.403); 512 A: NOT RESTORED (accuracy version 0.628) / B: NOT RESTORED (accuracy version 0.629)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.878) / B: NOT RESTORED (accuracy version 0.878); 128 A: NOT RESTORED (accuracy version 0.256) / B: NOT RESTORED (accuracy version 0.254); 2048 A: RESTORED (accuracy version 0.994) / B: RESTORED (accuracy version 0.994); 256 A: NOT RESTORED (accuracy version 0.401) / B: NOT RESTORED (accuracy version 0.399); 512 A: NOT RESTORED (accuracy version 0.630) / B: NOT RESTORED (accuracy version 0.629)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.878) / B: NOT RESTORED (accuracy version 0.880); 128 A: NOT RESTORED (accuracy version 0.254) / B: NOT RESTORED (accuracy version 0.255); 2048 A: RESTORED (accuracy version 0.993) / B: RESTORED (accuracy version 0.993); 256 A: NOT RESTORED (accuracy version 0.398) / B: NOT RESTORED (accuracy version 0.400); 512 A: NOT RESTORED (accuracy version 0.629) / B: NOT RESTORED (accuracy version 0.631)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.878) / B: NOT RESTORED (accuracy version 0.878); 128 A: NOT RESTORED (accuracy version 0.253) / B: NOT RESTORED (accuracy version 0.252); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.400) / B: NOT RESTORED (accuracy version 0.400); 512 A: NOT RESTORED (accuracy version 0.629) / B: NOT RESTORED (accuracy version 0.627)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.879) / B: NOT RESTORED (accuracy version 0.881); 128 A: NOT RESTORED (accuracy version 0.256) / B: NOT RESTORED (accuracy version 0.256); 2048 A: RESTORED (accuracy version 0.993) / B: RESTORED (accuracy version 0.993); 256 A: NOT RESTORED (accuracy version 0.403) / B: NOT RESTORED (accuracy version 0.404); 512 A: NOT RESTORED (accuracy version 0.630) / B: NOT RESTORED (accuracy version 0.631)
+    - median c*: 2048.0 keys, share of N: 0.500, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 2.047, a_use 0.600, T0: i 0.598, a_use 0.286, T1: i 0.351, a_use 0.212, T1w: i 0.507, a_use 0.260, T2: i 0.004, a_use 0.044, T3: i 0.442, a_use 0.241
+    - g_P -0.171, g_C -0.107, g_PC -0.410; i(F0) - i(T2) 2.043
+    - visit sweep Tv: v=1: i on 0.241, off 0.241, CR8(on) 0.030, keys scored 272; v=2: i on 0.598, off 0.351, CR8(on) 0.065, keys scored 528; v=4: i on 0.476, off 0.088, CR8(on) 0.143, keys scored 1040; v=8: i on 0.444, off 0.018, CR8(on) 0.307, keys scored 2064
+    - T0: CR8 0.065, CR1 0.072, SR8 0.063, AM_C 0.066, AM_S 0.064
+    - prior effect: i(T1)-i(T0) -0.248, i(T1w)-i(T0) -0.091, i(T2)-i(T3) -0.439; selection changed T0->T1 0.790; facts spanning both branches 0.825; TV distance T0->T1 0.262
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.331 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 2.047, a_use 0.600; I256@512: i 0.524, a_use 0.265, CR8 0.645, measured candidates mean 634.9, p99 789.8
+    - I64@1024: i 1.671, a_use 0.529, CR8 0.936, CR1 0.978, AM_C 0.942, candidates mean 1055.7, p99 1094.7
+    - I64@128: i 0.238, a_use 0.173, CR8 0.462, CR1 0.593, AM_C 0.480, candidates mean 158.9, p99 201.6
+    - I64@2048: i 2.025, a_use 0.596, CR8 0.996, CR1 0.999, AM_C 0.996, candidates mean 2079.9, p99 2118.4
+    - I64@256: i 0.491, a_use 0.255, CR8 0.623, CR1 0.752, AM_C 0.641, candidates mean 287.1, p99 328.5
+    - I64@512: i 0.995, a_use 0.386, CR8 0.797, CR1 0.894, AM_C 0.810, candidates mean 543.4, p99 583.5
+- **TRAJ2, update 393216 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.339) / B: NOT RESTORED (accuracy version 0.338); T2 A: NOT RESTORED (accuracy version 0.024) / B: NOT RESTORED (accuracy version 0.024); T3 A: NOT RESTORED (accuracy version 0.403) / B: NOT RESTORED (accuracy version 0.405)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.312) / B: NOT RESTORED (accuracy version 0.311); T2 A: NOT RESTORED (accuracy version 0.014) / B: NOT RESTORED (accuracy version 0.013); T3 A: NOT RESTORED (accuracy version 0.364) / B: NOT RESTORED (accuracy version 0.363)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.333) / B: NOT RESTORED (accuracy version 0.334); T2 A: NOT RESTORED (accuracy version 0.019) / B: NOT RESTORED (accuracy version 0.020); T3 A: NOT RESTORED (accuracy version 0.385) / B: NOT RESTORED (accuracy version 0.385)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.319) / B: NOT RESTORED (accuracy version 0.320); T2 A: NOT RESTORED (accuracy version 0.017) / B: NOT RESTORED (accuracy version 0.016); T3 A: NOT RESTORED (accuracy version 0.385) / B: NOT RESTORED (accuracy version 0.384)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.332) / B: NOT RESTORED (accuracy version 0.330); T2 A: NOT RESTORED (accuracy version 0.023) / B: NOT RESTORED (accuracy version 0.021); T3 A: NOT RESTORED (accuracy version 0.387) / B: NOT RESTORED (accuracy version 0.386)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.867) / B: NOT RESTORED (accuracy version 0.867); 128 A: NOT RESTORED (accuracy version 0.245) / B: NOT RESTORED (accuracy version 0.246); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.385) / B: NOT RESTORED (accuracy version 0.385); 512 A: NOT RESTORED (accuracy version 0.610) / B: NOT RESTORED (accuracy version 0.611)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.864) / B: NOT RESTORED (accuracy version 0.863); 128 A: NOT RESTORED (accuracy version 0.246) / B: NOT RESTORED (accuracy version 0.244); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.384) / B: NOT RESTORED (accuracy version 0.383); 512 A: NOT RESTORED (accuracy version 0.610) / B: NOT RESTORED (accuracy version 0.609)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.865) / B: NOT RESTORED (accuracy version 0.865); 128 A: NOT RESTORED (accuracy version 0.247) / B: NOT RESTORED (accuracy version 0.247); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.388) / B: NOT RESTORED (accuracy version 0.386); 512 A: NOT RESTORED (accuracy version 0.611) / B: NOT RESTORED (accuracy version 0.609)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.868) / B: NOT RESTORED (accuracy version 0.868); 128 A: NOT RESTORED (accuracy version 0.248) / B: NOT RESTORED (accuracy version 0.247); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.388) / B: NOT RESTORED (accuracy version 0.388); 512 A: NOT RESTORED (accuracy version 0.612) / B: NOT RESTORED (accuracy version 0.612)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.861) / B: NOT RESTORED (accuracy version 0.862); 128 A: NOT RESTORED (accuracy version 0.244) / B: NOT RESTORED (accuracy version 0.243); 2048 A: RESTORED (accuracy version 0.992) / B: RESTORED (accuracy version 0.992); 256 A: NOT RESTORED (accuracy version 0.380) / B: NOT RESTORED (accuracy version 0.380); 512 A: NOT RESTORED (accuracy version 0.604) / B: NOT RESTORED (accuracy version 0.603)
+    - median c*: 2048.0 keys, share of N: 0.500, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 2.216, a_use 0.630, T0: i 0.710, a_use 0.316, T1: i 0.384, a_use 0.223, T1w: i 0.595, a_use 0.285, T2: i 0.002, a_use 0.041, T3: i 0.498, a_use 0.257
+    - g_P -0.217, g_C -0.141, g_PC -0.470; i(F0) - i(T2) 2.214
+    - visit sweep Tv: v=1: i on 0.268, off 0.268, CR8(on) 0.028, keys scored 272; v=2: i on 0.710, off 0.384, CR8(on) 0.061, keys scored 528; v=4: i on 0.540, off 0.085, CR8(on) 0.134, keys scored 1040; v=8: i on 0.499, off 0.015, CR8(on) 0.295, keys scored 2064
+    - T0: CR8 0.061, CR1 0.068, SR8 0.059, AM_C 0.062, AM_S 0.060
+    - prior effect: i(T1)-i(T0) -0.327, i(T1w)-i(T0) -0.115, i(T2)-i(T3) -0.496; selection changed T0->T1 0.794; facts spanning both branches 0.822; TV distance T0->T1 0.263
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.330 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 2.216, a_use 0.630; I256@512: i 0.525, a_use 0.265, CR8 0.643, measured candidates mean 634.1, p99 787.0
+    - I64@1024: i 1.762, a_use 0.547, CR8 0.936, CR1 0.978, AM_C 0.942, candidates mean 1055.9, p99 1095.1
+    - I64@128: i 0.243, a_use 0.175, CR8 0.463, CR1 0.595, AM_C 0.481, candidates mean 159.0, p99 201.7
+    - I64@2048: i 2.188, a_use 0.625, CR8 0.996, CR1 0.999, AM_C 0.996, candidates mean 2079.9, p99 2118.5
+    - I64@256: i 0.499, a_use 0.258, CR8 0.624, CR1 0.754, AM_C 0.642, candidates mean 287.4, p99 328.5
+    - I64@512: i 1.021, a_use 0.392, CR8 0.798, CR1 0.894, AM_C 0.811, candidates mean 543.7, p99 583.7
+- **U_P, update 16384**
+  - tree label: NOT IDENTIFIED [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NOT IDENTIFIED; d2: NOT IDENTIFIED; d3: NOT IDENTIFIED; d4: EXACT SEARCH HARMS; d5: NOT IDENTIFIED
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.263) / B: NOT RESTORED (accuracy version 0.264); T2 A: NOT RESTORED (accuracy version 0.043) / B: NOT RESTORED (accuracy version 0.041); T3 A: NOT RESTORED (accuracy version 0.293) / B: NOT RESTORED (accuracy version 0.294)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.246) / B: NOT RESTORED (accuracy version 0.242); T2 A: NOT RESTORED (accuracy version 0.033) / B: NOT RESTORED (accuracy version 0.032); T3 A: NOT RESTORED (accuracy version 0.275) / B: NOT RESTORED (accuracy version 0.272)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.270) / B: NOT RESTORED (accuracy version 0.278); T2 A: NOT RESTORED (accuracy version 0.037) / B: NOT RESTORED (accuracy version 0.041); T3 A: NOT RESTORED (accuracy version 0.304) / B: NOT RESTORED (accuracy version 0.305)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.304) / B: NOT RESTORED (accuracy version 0.301); T2 A: NOT RESTORED (accuracy version 0.042) / B: NOT RESTORED (accuracy version 0.041); T3 A: NOT RESTORED (accuracy version 0.333) / B: NOT RESTORED (accuracy version 0.327)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.271) / B: NOT RESTORED (accuracy version 0.271); T2 A: NOT RESTORED (accuracy version 0.038) / B: NOT RESTORED (accuracy version 0.041); T3 A: NOT RESTORED (accuracy version 0.294) / B: NOT RESTORED (accuracy version 0.288)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.906) / B: NOT RESTORED (accuracy version 0.905); 128 A: NOT RESTORED (accuracy version 0.312) / B: NOT RESTORED (accuracy version 0.308); 2048 A: RESTORED (accuracy version 0.995) / B: RESTORED (accuracy version 0.995); 256 A: NOT RESTORED (accuracy version 0.471) / B: NOT RESTORED (accuracy version 0.471); 512 A: NOT RESTORED (accuracy version 0.689) / B: NOT RESTORED (accuracy version 0.692)
+      - d2: 1024 A: NOT RESTORED (accuracy version 0.903) / B: NOT RESTORED (accuracy version 0.907); 128 A: NOT RESTORED (accuracy version 0.316) / B: NOT RESTORED (accuracy version 0.316); 2048 A: RESTORED (accuracy version 0.995) / B: RESTORED (accuracy version 0.995); 256 A: NOT RESTORED (accuracy version 0.471) / B: NOT RESTORED (accuracy version 0.472); 512 A: NOT RESTORED (accuracy version 0.692) / B: NOT RESTORED (accuracy version 0.698)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.904) / B: NOT RESTORED (accuracy version 0.902); 128 A: NOT RESTORED (accuracy version 0.303) / B: NOT RESTORED (accuracy version 0.309); 2048 A: RESTORED (accuracy version 0.995) / B: RESTORED (accuracy version 0.994); 256 A: NOT RESTORED (accuracy version 0.463) / B: NOT RESTORED (accuracy version 0.466); 512 A: NOT RESTORED (accuracy version 0.683) / B: NOT RESTORED (accuracy version 0.686)
+      - d4: 1024 A: NOT RESTORED (accuracy version 0.906) / B: NOT RESTORED (accuracy version 0.906); 128 A: NOT RESTORED (accuracy version 0.303) / B: NOT RESTORED (accuracy version 0.299); 2048 A: RESTORED (accuracy version 0.996) / B: RESTORED (accuracy version 0.996); 256 A: NOT RESTORED (accuracy version 0.459) / B: NOT RESTORED (accuracy version 0.453); 512 A: NOT RESTORED (accuracy version 0.684) / B: NOT RESTORED (accuracy version 0.683)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.907) / B: NOT RESTORED (accuracy version 0.906); 128 A: NOT RESTORED (accuracy version 0.313) / B: NOT RESTORED (accuracy version 0.312); 2048 A: RESTORED (accuracy version 0.995) / B: RESTORED (accuracy version 0.995); 256 A: NOT RESTORED (accuracy version 0.469) / B: NOT RESTORED (accuracy version 0.467); 512 A: NOT RESTORED (accuracy version 0.688) / B: NOT RESTORED (accuracy version 0.687)
+    - median c*: 2048.0 keys, share of N: 0.500, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 1.021, a_use 0.392, T0: i 0.183, a_use 0.151, T1: i 0.125, a_use 0.126, T1w: i 0.161, a_use 0.142, T2: i 0.003, a_use 0.042, T3: i 0.147, a_use 0.136
+    - g_P -0.070, g_C -0.043, g_PC -0.216; i(F0) - i(T2) 1.019
+    - visit sweep Tv: v=1: i on 0.084, off 0.084, CR8(on) 0.037, keys scored 272; v=2: i on 0.183, off 0.125, CR8(on) 0.076, keys scored 528; v=4: i on 0.157, off 0.043, CR8(on) 0.158, keys scored 1040; v=8: i on 0.147, off 0.011, CR8(on) 0.316, keys scored 2064
+    - T0: CR8 0.076, CR1 0.096, SR8 0.073, AM_C 0.078, AM_S 0.076
+    - prior effect: i(T1)-i(T0) -0.059, i(T1w)-i(T0) -0.023, i(T2)-i(T3) -0.144; selection changed T0->T1 0.780; facts spanning both branches 0.819; TV distance T0->T1 0.252
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.347 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 1.021, a_use 0.392; I256@512: i 0.319, a_use 0.201, CR8 0.648, measured candidates mean 639.3, p99 787.4
+    - I64@1024: i 0.874, a_use 0.357, CR8 0.937, CR1 0.979, AM_C 0.943, candidates mean 1055.7, p99 1094.9
+    - I64@128: i 0.156, a_use 0.140, CR8 0.464, CR1 0.597, AM_C 0.482, candidates mean 158.8, p99 201.8
+    - I64@2048: i 1.014, a_use 0.390, CR8 0.996, CR1 0.999, AM_C 0.996, candidates mean 2079.9, p99 2118.8
+    - I64@256: i 0.305, a_use 0.197, CR8 0.626, CR1 0.756, AM_C 0.644, candidates mean 287.2, p99 328.7
+    - I64@512: i 0.568, a_use 0.277, CR8 0.799, CR1 0.896, AM_C 0.813, candidates mean 543.5, p99 583.6
+
+#### 8K/16K (printed; facts 8192, slots 16384)
+
+- **RUN, update 49152**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.926) / B: NOT RESTORED (accuracy version 0.925); T2 A: NOT RESTORED (accuracy version 0.057) / B: NOT RESTORED (accuracy version 0.053); T3 A: NOT RESTORED (accuracy version 0.819) / B: NOT RESTORED (accuracy version 0.816)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.919) / B: NOT RESTORED (accuracy version 0.921); T2 A: NOT RESTORED (accuracy version 0.049) / B: NOT RESTORED (accuracy version 0.045); T3 A: NOT RESTORED (accuracy version 0.814) / B: NOT RESTORED (accuracy version 0.815)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.915) / B: NOT RESTORED (accuracy version 0.915); T2 A: NOT RESTORED (accuracy version 0.049) / B: NOT RESTORED (accuracy version 0.045); T3 A: NOT RESTORED (accuracy version 0.817) / B: NOT RESTORED (accuracy version 0.816)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.924) / B: NOT RESTORED (accuracy version 0.923); T2 A: NOT RESTORED (accuracy version 0.058) / B: NOT RESTORED (accuracy version 0.057); T3 A: NOT RESTORED (accuracy version 0.835) / B: NOT RESTORED (accuracy version 0.836)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.920) / B: NOT RESTORED (accuracy version 0.921); T2 A: NOT RESTORED (accuracy version 0.059) / B: NOT RESTORED (accuracy version 0.061); T3 A: NOT RESTORED (accuracy version 0.828) / B: NOT RESTORED (accuracy version 0.824)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.899) / B: NOT RESTORED (accuracy version 0.899); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.963) / B: NOT RESTORED (accuracy version 0.963); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d2: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.900) / B: NOT RESTORED (accuracy version 0.900); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.963) / B: NOT RESTORED (accuracy version 0.963); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d3: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.901) / B: NOT RESTORED (accuracy version 0.901); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.963) / B: NOT RESTORED (accuracy version 0.962); 512 A: RESTORED (accuracy version 0.990) / B: RESTORED (accuracy version 0.990)
+      - d4: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.899) / B: NOT RESTORED (accuracy version 0.899); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.964) / B: NOT RESTORED (accuracy version 0.963); 512 A: RESTORED (accuracy version 0.990) / B: RESTORED (accuracy version 0.990)
+      - d5: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.900) / B: NOT RESTORED (accuracy version 0.900); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.962) / B: NOT RESTORED (accuracy version 0.962); 512 A: RESTORED (accuracy version 0.989) / B: RESTORED (accuracy version 0.990)
+    - median c*: 512.0 keys, share of N: 0.031, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 5.000, a_use 1.000, T0: i 4.947, a_use 0.996, T1: i 4.209, a_use 0.921, T1w: i 4.737, a_use 0.978, T2: i 0.039, a_use 0.079, T3: i 3.450, a_use 0.823
+    - g_P -13.859, g_C -28.132, g_PC -92.221; i(F0) - i(T2) 4.961
+    - visit sweep Tv: v=1: i on 2.837, off 2.837, CR8(on) 0.013, keys scored 320; v=2: i on 4.947, off 4.209, CR8(on) 0.021, keys scored 576; v=4: i on 4.154, off 1.834, CR8(on) 0.027, keys scored 1088; v=8: i on 3.611, off 0.630, CR8(on) 0.043, keys scored 2112
+    - T0: CR8 0.021, CR1 0.025, SR8 0.021, AM_C 0.022, AM_S 0.022
+    - prior effect: i(T1)-i(T0) -0.738, i(T1w)-i(T0) -0.210, i(T2)-i(T3) -3.411; selection changed T0->T1 0.788; facts spanning both branches 0.921; TV distance T0->T1 0.204
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.030 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 5.000, a_use 1.000; I256@512: i 4.192, a_use 0.919, CR8 0.572, measured candidates mean 636.2, p99 791.6
+    - I64@1024: i 4.980, a_use 0.999, CR8 0.840, CR1 0.998, AM_C 0.902, candidates mean 1056.0, p99 1097.0
+    - I64@128: i 4.035, a_use 0.900, CR8 0.478, CR1 0.895, AM_C 0.625, candidates mean 159.0, p99 203.8
+    - I64@2048: i 4.997, a_use 1.000, CR8 0.939, CR1 1.000, AM_C 0.964, candidates mean 2080.1, p99 2121.1
+    - I64@256: i 4.584, a_use 0.963, CR8 0.592, CR1 0.959, AM_C 0.724, candidates mean 287.3, p99 330.1
+    - I64@512: i 4.875, a_use 0.990, CR8 0.716, CR1 0.989, AM_C 0.818, candidates mean 543.9, p99 585.1
+- **TRAJ1, update 16384 (trajectory; descriptive; enters no label)**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.895); T2 A: NOT RESTORED (accuracy version 0.059) / B: NOT RESTORED (accuracy version 0.058); T3 A: NOT RESTORED (accuracy version 0.795) / B: NOT RESTORED (accuracy version 0.800)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.891); T2 A: NOT RESTORED (accuracy version 0.064) / B: NOT RESTORED (accuracy version 0.061); T3 A: NOT RESTORED (accuracy version 0.793) / B: NOT RESTORED (accuracy version 0.789)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.897) / B: NOT RESTORED (accuracy version 0.894); T2 A: NOT RESTORED (accuracy version 0.058) / B: NOT RESTORED (accuracy version 0.056); T3 A: NOT RESTORED (accuracy version 0.791) / B: NOT RESTORED (accuracy version 0.788)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.906) / B: NOT RESTORED (accuracy version 0.907); T2 A: NOT RESTORED (accuracy version 0.068) / B: NOT RESTORED (accuracy version 0.065); T3 A: NOT RESTORED (accuracy version 0.822) / B: NOT RESTORED (accuracy version 0.822)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.898) / B: NOT RESTORED (accuracy version 0.901); T2 A: NOT RESTORED (accuracy version 0.063) / B: NOT RESTORED (accuracy version 0.064); T3 A: NOT RESTORED (accuracy version 0.803) / B: NOT RESTORED (accuracy version 0.802)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.903) / B: NOT RESTORED (accuracy version 0.904); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.964) / B: NOT RESTORED (accuracy version 0.964); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d2: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.902) / B: NOT RESTORED (accuracy version 0.902); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.963) / B: NOT RESTORED (accuracy version 0.963); 512 A: RESTORED (accuracy version 0.990) / B: RESTORED (accuracy version 0.990)
+      - d3: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.900) / B: NOT RESTORED (accuracy version 0.900); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.963) / B: NOT RESTORED (accuracy version 0.962); 512 A: RESTORED (accuracy version 0.990) / B: RESTORED (accuracy version 0.990)
+      - d4: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.902) / B: NOT RESTORED (accuracy version 0.903); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.966) / B: NOT RESTORED (accuracy version 0.966); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d5: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.900) / B: NOT RESTORED (accuracy version 0.901); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.960) / B: NOT RESTORED (accuracy version 0.960); 512 A: RESTORED (accuracy version 0.990) / B: RESTORED (accuracy version 0.990)
+    - median c*: 512.0 keys, share of N: 0.031, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.999, a_use 1.000, T0: i 4.768, a_use 0.981, T1: i 4.015, a_use 0.897, T1w: i 4.530, a_use 0.957, T2: i 0.049, a_use 0.086, T3: i 3.297, a_use 0.801
+    - g_P -3.271, g_C -6.386, g_PC -20.476; i(F0) - i(T2) 4.949
+    - visit sweep Tv: v=1: i on 2.680, off 2.680, CR8(on) 0.015, keys scored 320; v=2: i on 4.768, off 4.015, CR8(on) 0.025, keys scored 576; v=4: i on 4.021, off 1.753, CR8(on) 0.032, keys scored 1088; v=8: i on 3.451, off 0.577, CR8(on) 0.050, keys scored 2112
+    - T0: CR8 0.025, CR1 0.035, SR8 0.025, AM_C 0.025, AM_S 0.025
+    - prior effect: i(T1)-i(T0) -0.754, i(T1w)-i(T0) -0.238, i(T2)-i(T3) -3.247; selection changed T0->T1 0.777; facts spanning both branches 0.918; TV distance T0->T1 0.201
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.042 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.999, a_use 1.000; I256@512: i 4.191, a_use 0.919, CR8 0.568, measured candidates mean 638.8, p99 795.2
+    - I64@1024: i 4.974, a_use 0.998, CR8 0.835, CR1 0.998, AM_C 0.898, candidates mean 1056.1, p99 1096.7
+    - I64@128: i 4.049, a_use 0.902, CR8 0.473, CR1 0.892, AM_C 0.620, candidates mean 159.1, p99 203.8
+    - I64@2048: i 4.998, a_use 1.000, CR8 0.936, CR1 1.000, AM_C 0.962, candidates mean 2080.1, p99 2121.3
+    - I64@256: i 4.587, a_use 0.963, CR8 0.586, CR1 0.957, AM_C 0.719, candidates mean 287.4, p99 330.3
+    - I64@512: i 4.873, a_use 0.990, CR8 0.711, CR1 0.988, AM_C 0.813, candidates mean 543.7, p99 585.1
+- **TRAJ2, update 32768 (trajectory; descriptive; enters no label)**
+  - tree label: NO GAP [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NO GAP; d2: NO GAP; d3: NO GAP; d4: NO GAP; d5: NO GAP
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.913) / B: NOT RESTORED (accuracy version 0.915); T2 A: NOT RESTORED (accuracy version 0.058) / B: NOT RESTORED (accuracy version 0.053); T3 A: NOT RESTORED (accuracy version 0.812) / B: NOT RESTORED (accuracy version 0.811)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.913) / B: NOT RESTORED (accuracy version 0.913); T2 A: NOT RESTORED (accuracy version 0.049) / B: NOT RESTORED (accuracy version 0.045); T3 A: NOT RESTORED (accuracy version 0.803) / B: NOT RESTORED (accuracy version 0.805)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.916) / B: NOT RESTORED (accuracy version 0.916); T2 A: NOT RESTORED (accuracy version 0.051) / B: NOT RESTORED (accuracy version 0.047); T3 A: NOT RESTORED (accuracy version 0.812) / B: NOT RESTORED (accuracy version 0.812)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.924) / B: NOT RESTORED (accuracy version 0.923); T2 A: NOT RESTORED (accuracy version 0.062) / B: NOT RESTORED (accuracy version 0.060); T3 A: NOT RESTORED (accuracy version 0.831) / B: NOT RESTORED (accuracy version 0.832)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.917) / B: NOT RESTORED (accuracy version 0.918); T2 A: NOT RESTORED (accuracy version 0.054) / B: NOT RESTORED (accuracy version 0.052); T3 A: NOT RESTORED (accuracy version 0.821) / B: NOT RESTORED (accuracy version 0.819)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.906) / B: NOT RESTORED (accuracy version 0.906); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.967) / B: NOT RESTORED (accuracy version 0.967); 512 A: RESTORED (accuracy version 0.993) / B: RESTORED (accuracy version 0.992)
+      - d2: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.902) / B: NOT RESTORED (accuracy version 0.902); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.964) / B: NOT RESTORED (accuracy version 0.964); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d3: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.899) / B: NOT RESTORED (accuracy version 0.898); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.963) / B: NOT RESTORED (accuracy version 0.963); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d4: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.899) / B: NOT RESTORED (accuracy version 0.898); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.965) / B: NOT RESTORED (accuracy version 0.964); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+      - d5: 1024 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 128 A: NOT RESTORED (accuracy version 0.899) / B: NOT RESTORED (accuracy version 0.898); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.962) / B: NOT RESTORED (accuracy version 0.962); 512 A: RESTORED (accuracy version 0.991) / B: RESTORED (accuracy version 0.991)
+    - median c*: 512.0 keys, share of N: 0.031, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 5.000, a_use 1.000, T0: i 4.912, a_use 0.994, T1: i 4.173, a_use 0.917, T1w: i 4.699, a_use 0.974, T2: i 0.039, a_use 0.079, T3: i 3.404, a_use 0.817
+    - g_P -8.442, g_C -17.232, g_PC -55.671; i(F0) - i(T2) 4.961
+    - visit sweep Tv: v=1: i on 2.803, off 2.803, CR8(on) 0.013, keys scored 320; v=2: i on 4.912, off 4.173, CR8(on) 0.021, keys scored 576; v=4: i on 4.128, off 1.803, CR8(on) 0.027, keys scored 1088; v=8: i on 3.569, off 0.605, CR8(on) 0.044, keys scored 2112
+    - T0: CR8 0.021, CR1 0.026, SR8 0.021, AM_C 0.022, AM_S 0.022
+    - prior effect: i(T1)-i(T0) -0.739, i(T1w)-i(T0) -0.213, i(T2)-i(T3) -3.365; selection changed T0->T1 0.786; facts spanning both branches 0.921; TV distance T0->T1 0.203
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.031 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 5.000, a_use 1.000; I256@512: i 4.214, a_use 0.921, CR8 0.571, measured candidates mean 642.1, p99 794.8
+    - I64@1024: i 4.979, a_use 0.999, CR8 0.837, CR1 0.998, AM_C 0.900, candidates mean 1056.0, p99 1096.8
+    - I64@128: i 4.044, a_use 0.901, CR8 0.476, CR1 0.893, AM_C 0.623, candidates mean 159.1, p99 203.7
+    - I64@2048: i 4.998, a_use 1.000, CR8 0.937, CR1 1.000, AM_C 0.963, candidates mean 2080.0, p99 2120.9
+    - I64@256: i 4.599, a_use 0.964, CR8 0.589, CR1 0.959, AM_C 0.722, candidates mean 287.6, p99 330.5
+    - I64@512: i 4.885, a_use 0.991, CR8 0.714, CR1 0.989, AM_C 0.816, candidates mean 543.9, p99 585.3
+- **U_P, update 8192**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.803) / B: NOT RESTORED (accuracy version 0.806); T2 A: NOT RESTORED (accuracy version 0.068) / B: NOT RESTORED (accuracy version 0.063); T3 A: NOT RESTORED (accuracy version 0.716) / B: NOT RESTORED (accuracy version 0.716)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.794) / B: NOT RESTORED (accuracy version 0.793); T2 A: NOT RESTORED (accuracy version 0.068) / B: NOT RESTORED (accuracy version 0.063); T3 A: NOT RESTORED (accuracy version 0.698) / B: NOT RESTORED (accuracy version 0.704)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.806) / B: NOT RESTORED (accuracy version 0.803); T2 A: NOT RESTORED (accuracy version 0.068) / B: NOT RESTORED (accuracy version 0.063); T3 A: NOT RESTORED (accuracy version 0.717) / B: NOT RESTORED (accuracy version 0.717)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.850) / B: NOT RESTORED (accuracy version 0.853); T2 A: NOT RESTORED (accuracy version 0.080) / B: NOT RESTORED (accuracy version 0.078); T3 A: NOT RESTORED (accuracy version 0.776) / B: NOT RESTORED (accuracy version 0.772)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.804) / B: NOT RESTORED (accuracy version 0.806); T2 A: NOT RESTORED (accuracy version 0.074) / B: NOT RESTORED (accuracy version 0.071); T3 A: NOT RESTORED (accuracy version 0.725) / B: NOT RESTORED (accuracy version 0.725)
+  - index label: SPARSE INDEX APPROACHES FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: SPARSE INDEX APPROACHES FLAT; d2: SPARSE INDEX APPROACHES FLAT; d3: SPARSE INDEX APPROACHES FLAT; d4: SPARSE INDEX APPROACHES FLAT; d5: SPARSE INDEX APPROACHES FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.894); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.957) / B: NOT RESTORED (accuracy version 0.957); 512 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.987)
+      - d2: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.888) / B: NOT RESTORED (accuracy version 0.887); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.958) / B: NOT RESTORED (accuracy version 0.957); 512 A: RESTORED (accuracy version 0.988) / B: RESTORED (accuracy version 0.988)
+      - d3: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.890) / B: NOT RESTORED (accuracy version 0.890); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.957) / B: NOT RESTORED (accuracy version 0.957); 512 A: RESTORED (accuracy version 0.988) / B: RESTORED (accuracy version 0.988)
+      - d4: 1024 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.998); 128 A: NOT RESTORED (accuracy version 0.895) / B: NOT RESTORED (accuracy version 0.894); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.960) / B: NOT RESTORED (accuracy version 0.959); 512 A: RESTORED (accuracy version 0.989) / B: RESTORED (accuracy version 0.989)
+      - d5: 1024 A: RESTORED (accuracy version 0.997) / B: RESTORED (accuracy version 0.997); 128 A: NOT RESTORED (accuracy version 0.887) / B: NOT RESTORED (accuracy version 0.886); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.952) / B: NOT RESTORED (accuracy version 0.953); 512 A: RESTORED (accuracy version 0.987) / B: RESTORED (accuracy version 0.986)
+    - median c*: 512.0 keys, share of N: 0.031, N/8 for comparison: 2048.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.989, a_use 0.999, T0: i 4.207, a_use 0.920, T1: i 3.372, a_use 0.812, T1w: i 3.896, a_use 0.882, T2: i 0.059, a_use 0.092, T3: i 2.808, a_use 0.728
+    - g_P -1.068, g_C -1.790, g_PC -5.307; i(F0) - i(T2) 4.930
+    - visit sweep Tv: v=1: i on 2.212, off 2.212, CR8(on) 0.021, keys scored 320; v=2: i on 4.207, off 3.372, CR8(on) 0.033, keys scored 576; v=4: i on 3.463, off 1.419, CR8(on) 0.043, keys scored 1088; v=8: i on 2.937, off 0.484, CR8(on) 0.066, keys scored 2112
+    - T0: CR8 0.033, CR1 0.061, SR8 0.033, AM_C 0.036, AM_S 0.036
+    - prior effect: i(T1)-i(T0) -0.835, i(T1w)-i(T0) -0.311, i(T2)-i(T3) -2.749; selection changed T0->T1 0.761; facts spanning both branches 0.915; TV distance T0->T1 0.196
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.060 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.989, a_use 0.999; I256@512: i 4.128, a_use 0.911, CR8 0.569, measured candidates mean 638.4, p99 791.8
+    - I64@1024: i 4.956, a_use 0.997, CR8 0.836, CR1 0.997, AM_C 0.897, candidates mean 1056.0, p99 1096.5
+    - I64@128: i 3.953, a_use 0.890, CR8 0.470, CR1 0.885, AM_C 0.611, candidates mean 158.8, p99 203.7
+    - I64@2048: i 4.985, a_use 0.999, CR8 0.937, CR1 1.000, AM_C 0.962, candidates mean 2080.1, p99 2120.3
+    - I64@256: i 4.522, a_use 0.956, CR8 0.585, CR1 0.953, AM_C 0.713, candidates mean 287.2, p99 330.0
+    - I64@512: i 4.835, a_use 0.987, CR8 0.711, CR1 0.986, AM_C 0.810, candidates mean 543.8, p99 584.7
+
+#### 8K/1K (loaded; SHALLOW (four branches; 512 candidates is half the store); facts 8192, slots 1024)
+
+- **RUN, update 393216**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.296) / B: NOT RESTORED (accuracy version 0.292); T2 A: NOT RESTORED (accuracy version 0.106) / B: NOT RESTORED (accuracy version 0.100); T3 A: NOT RESTORED (accuracy version 0.559) / B: NOT RESTORED (accuracy version 0.555)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.320) / B: NOT RESTORED (accuracy version 0.317); T2 A: NOT RESTORED (accuracy version 0.099) / B: NOT RESTORED (accuracy version 0.094); T3 A: NOT RESTORED (accuracy version 0.568) / B: NOT RESTORED (accuracy version 0.567)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.314) / B: NOT RESTORED (accuracy version 0.306); T2 A: NOT RESTORED (accuracy version 0.097) / B: NOT RESTORED (accuracy version 0.091); T3 A: NOT RESTORED (accuracy version 0.613) / B: NOT RESTORED (accuracy version 0.606)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.337) / B: NOT RESTORED (accuracy version 0.337); T2 A: NOT RESTORED (accuracy version 0.119) / B: NOT RESTORED (accuracy version 0.119); T3 A: NOT RESTORED (accuracy version 0.632) / B: NOT RESTORED (accuracy version 0.630)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.309) / B: NOT RESTORED (accuracy version 0.307); T2 A: NOT RESTORED (accuracy version 0.101) / B: NOT RESTORED (accuracy version 0.100); T3 A: NOT RESTORED (accuracy version 0.582) / B: NOT RESTORED (accuracy version 0.584)
+  - index label: INDEX DOES NOT APPROACH FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX DOES NOT APPROACH FLAT; d2: INDEX DOES NOT APPROACH FLAT; d3: INDEX DOES NOT APPROACH FLAT; d4: INDEX DOES NOT APPROACH FLAT; d5: INDEX DOES NOT APPROACH FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.365) / B: NOT RESTORED (accuracy version 0.362); 256 A: NOT RESTORED (accuracy version 0.591) / B: NOT RESTORED (accuracy version 0.589); 512 A: NOT RESTORED (accuracy version 0.891) / B: NOT RESTORED (accuracy version 0.891)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.372) / B: NOT RESTORED (accuracy version 0.367); 256 A: NOT RESTORED (accuracy version 0.602) / B: NOT RESTORED (accuracy version 0.601); 512 A: NOT RESTORED (accuracy version 0.899) / B: NOT RESTORED (accuracy version 0.899)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.354) / B: NOT RESTORED (accuracy version 0.349); 256 A: NOT RESTORED (accuracy version 0.593) / B: NOT RESTORED (accuracy version 0.590); 512 A: NOT RESTORED (accuracy version 0.897) / B: NOT RESTORED (accuracy version 0.896)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.361) / B: NOT RESTORED (accuracy version 0.360); 256 A: NOT RESTORED (accuracy version 0.588) / B: NOT RESTORED (accuracy version 0.587); 512 A: NOT RESTORED (accuracy version 0.890) / B: NOT RESTORED (accuracy version 0.890)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.362) / B: NOT RESTORED (accuracy version 0.363); 256 A: NOT RESTORED (accuracy version 0.593) / B: NOT RESTORED (accuracy version 0.594); 512 A: NOT RESTORED (accuracy version 0.890) / B: NOT RESTORED (accuracy version 0.890)
+    - median c*: n/a keys, share of N: n/a, N/8 for comparison: 128.0; replicates without c*: [1, 2, 3, 4, 5]
+  - printed with the tree label (means over the replicates present):
+    - F0: i 2.354, a_use 0.654, T0: i 1.127, a_use 0.416, T1: i 0.380, a_use 0.221, T1w: i 0.930, a_use 0.370, T2: i 0.058, a_use 0.092, T3: i 1.027, a_use 0.393
+    - g_P -0.609, g_C -0.081, g_PC -0.871; i(F0) - i(T2) 2.296
+    - visit sweep Tv: v=1: i on 0.609, off 0.609, CR8(on) 0.184, keys scored 260; v=2: i on 1.127, off 0.380, CR8(on) 0.377, keys scored 516; v=4: i on 1.027, off 0.058, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.377, CR1 0.434, SR8 0.286, AM_C 0.386, AM_S 0.300
+    - prior effect: i(T1)-i(T0) -0.747, i(T1w)-i(T0) -0.197, i(T2)-i(T3) -0.969; selection changed T0->T1 0.894; facts spanning both branches 0.565; TV distance T0->T1 0.360
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.808 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 2.354, a_use 0.654; I256@512: i 1.509, a_use 0.497, CR8 0.886, measured candidates mean 643.1, p99 775.0
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 0.477, a_use 0.251, CR8 0.600, CR1 0.719, AM_C 0.621, candidates mean 158.4, p99 201.6
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 1.036, a_use 0.395, CR8 0.792, CR1 0.881, AM_C 0.808, candidates mean 287.4, p99 329.1
+    - I64@512: i 1.967, a_use 0.585, CR8 0.953, CR1 0.983, AM_C 0.958, candidates mean 544.0, p99 584.5
+- **TRAJ1, update 49152 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.308) / B: NOT RESTORED (accuracy version 0.306); T2 A: NOT RESTORED (accuracy version 0.117) / B: NOT RESTORED (accuracy version 0.109); T3 A: NOT RESTORED (accuracy version 0.504) / B: NOT RESTORED (accuracy version 0.511)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.309) / B: NOT RESTORED (accuracy version 0.307); T2 A: NOT RESTORED (accuracy version 0.122) / B: NOT RESTORED (accuracy version 0.119); T3 A: NOT RESTORED (accuracy version 0.533) / B: NOT RESTORED (accuracy version 0.538)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.314) / B: NOT RESTORED (accuracy version 0.316); T2 A: NOT RESTORED (accuracy version 0.134) / B: NOT RESTORED (accuracy version 0.126); T3 A: NOT RESTORED (accuracy version 0.528) / B: NOT RESTORED (accuracy version 0.522)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.346) / B: NOT RESTORED (accuracy version 0.338); T2 A: NOT RESTORED (accuracy version 0.133) / B: NOT RESTORED (accuracy version 0.133); T3 A: NOT RESTORED (accuracy version 0.604) / B: NOT RESTORED (accuracy version 0.601)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.297) / B: NOT RESTORED (accuracy version 0.294); T2 A: NOT RESTORED (accuracy version 0.116) / B: NOT RESTORED (accuracy version 0.116); T3 A: NOT RESTORED (accuracy version 0.504) / B: NOT RESTORED (accuracy version 0.504)
+  - index label: INDEX DOES NOT APPROACH FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX DOES NOT APPROACH FLAT; d2: INDEX DOES NOT APPROACH FLAT; d3: INDEX DOES NOT APPROACH FLAT; d4: INDEX DOES NOT APPROACH FLAT; d5: INDEX DOES NOT APPROACH FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.381) / B: NOT RESTORED (accuracy version 0.373); 256 A: NOT RESTORED (accuracy version 0.614) / B: NOT RESTORED (accuracy version 0.611); 512 A: NOT RESTORED (accuracy version 0.905) / B: NOT RESTORED (accuracy version 0.904)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.378) / B: NOT RESTORED (accuracy version 0.377); 256 A: NOT RESTORED (accuracy version 0.617) / B: NOT RESTORED (accuracy version 0.618); 512 A: NOT RESTORED (accuracy version 0.905) / B: NOT RESTORED (accuracy version 0.906)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.376) / B: NOT RESTORED (accuracy version 0.371); 256 A: NOT RESTORED (accuracy version 0.604) / B: NOT RESTORED (accuracy version 0.603); 512 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.892)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.372) / B: NOT RESTORED (accuracy version 0.372); 256 A: NOT RESTORED (accuracy version 0.604) / B: NOT RESTORED (accuracy version 0.605); 512 A: NOT RESTORED (accuracy version 0.900) / B: NOT RESTORED (accuracy version 0.899)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.382) / B: NOT RESTORED (accuracy version 0.379); 256 A: NOT RESTORED (accuracy version 0.608) / B: NOT RESTORED (accuracy version 0.607); 512 A: NOT RESTORED (accuracy version 0.902) / B: NOT RESTORED (accuracy version 0.901)
+    - median c*: n/a keys, share of N: n/a, N/8 for comparison: 128.0; replicates without c*: [1, 2, 3, 4, 5]
+  - printed with the tree label (means over the replicates present):
+    - F0: i 2.128, a_use 0.614, T0: i 0.850, a_use 0.351, T1: i 0.341, a_use 0.209, T1w: i 0.710, a_use 0.315, T2: i 0.070, a_use 0.099, T3: i 0.797, a_use 0.338
+    - g_P -0.398, g_C -0.042, g_PC -0.611; i(F0) - i(T2) 2.058
+    - visit sweep Tv: v=1: i on 0.479, off 0.479, CR8(on) 0.197, keys scored 260; v=2: i on 0.850, off 0.341, CR8(on) 0.395, keys scored 516; v=4: i on 0.797, off 0.070, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.395, CR1 0.467, SR8 0.303, AM_C 0.405, AM_S 0.319
+    - prior effect: i(T1)-i(T0) -0.509, i(T1w)-i(T0) -0.140, i(T2)-i(T3) -0.727; selection changed T0->T1 0.887; facts spanning both branches 0.567; TV distance T0->T1 0.347
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.806 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 2.128, a_use 0.614; I256@512: i 1.398, a_use 0.474, CR8 0.887, measured candidates mean 644.0, p99 783.2
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 0.457, a_use 0.245, CR8 0.603, CR1 0.719, AM_C 0.623, candidates mean 158.8, p99 201.1
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 0.977, a_use 0.381, CR8 0.792, CR1 0.882, AM_C 0.808, candidates mean 287.1, p99 328.5
+    - I64@512: i 1.803, a_use 0.555, CR8 0.953, CR1 0.982, AM_C 0.958, candidates mean 543.7, p99 584.0
+- **TRAJ2, update 196608 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.309) / B: NOT RESTORED (accuracy version 0.304); T2 A: NOT RESTORED (accuracy version 0.109) / B: NOT RESTORED (accuracy version 0.103); T3 A: NOT RESTORED (accuracy version 0.555) / B: NOT RESTORED (accuracy version 0.554)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.314) / B: NOT RESTORED (accuracy version 0.312); T2 A: NOT RESTORED (accuracy version 0.107) / B: NOT RESTORED (accuracy version 0.103); T3 A: NOT RESTORED (accuracy version 0.554) / B: NOT RESTORED (accuracy version 0.551)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.310) / B: NOT RESTORED (accuracy version 0.308); T2 A: NOT RESTORED (accuracy version 0.112) / B: NOT RESTORED (accuracy version 0.107); T3 A: NOT RESTORED (accuracy version 0.604) / B: NOT RESTORED (accuracy version 0.604)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.339) / B: NOT RESTORED (accuracy version 0.335); T2 A: NOT RESTORED (accuracy version 0.125) / B: NOT RESTORED (accuracy version 0.124); T3 A: NOT RESTORED (accuracy version 0.628) / B: NOT RESTORED (accuracy version 0.628)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.305) / B: NOT RESTORED (accuracy version 0.307); T2 A: NOT RESTORED (accuracy version 0.106) / B: NOT RESTORED (accuracy version 0.105); T3 A: NOT RESTORED (accuracy version 0.548) / B: NOT RESTORED (accuracy version 0.547)
+  - index label: INDEX DOES NOT APPROACH FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX DOES NOT APPROACH FLAT; d2: INDEX DOES NOT APPROACH FLAT; d3: INDEX DOES NOT APPROACH FLAT; d4: INDEX DOES NOT APPROACH FLAT; d5: INDEX DOES NOT APPROACH FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.378) / B: NOT RESTORED (accuracy version 0.374); 256 A: NOT RESTORED (accuracy version 0.607) / B: NOT RESTORED (accuracy version 0.605); 512 A: NOT RESTORED (accuracy version 0.898) / B: NOT RESTORED (accuracy version 0.898)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.367) / B: NOT RESTORED (accuracy version 0.363); 256 A: NOT RESTORED (accuracy version 0.592) / B: NOT RESTORED (accuracy version 0.590); 512 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.893)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.363) / B: NOT RESTORED (accuracy version 0.361); 256 A: NOT RESTORED (accuracy version 0.600) / B: NOT RESTORED (accuracy version 0.598); 512 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.895)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.365) / B: NOT RESTORED (accuracy version 0.365); 256 A: NOT RESTORED (accuracy version 0.594) / B: NOT RESTORED (accuracy version 0.594); 512 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.894)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.360) / B: NOT RESTORED (accuracy version 0.359); 256 A: NOT RESTORED (accuracy version 0.601) / B: NOT RESTORED (accuracy version 0.599); 512 A: NOT RESTORED (accuracy version 0.895) / B: NOT RESTORED (accuracy version 0.895)
+    - median c*: n/a keys, share of N: n/a, N/8 for comparison: 128.0; replicates without c*: [1, 2, 3, 4, 5]
+  - printed with the tree label (means over the replicates present):
+    - F0: i 2.298, a_use 0.644, T0: i 1.045, a_use 0.397, T1: i 0.370, a_use 0.218, T1w: i 0.883, a_use 0.359, T2: i 0.064, a_use 0.095, T3: i 0.971, a_use 0.380
+    - g_P -0.539, g_C -0.059, g_PC -0.783; i(F0) - i(T2) 2.235
+    - visit sweep Tv: v=1: i on 0.569, off 0.569, CR8(on) 0.186, keys scored 260; v=2: i on 1.045, off 0.370, CR8(on) 0.381, keys scored 516; v=4: i on 0.971, off 0.064, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.381, CR1 0.446, SR8 0.290, AM_C 0.390, AM_S 0.305
+    - prior effect: i(T1)-i(T0) -0.675, i(T1w)-i(T0) -0.162, i(T2)-i(T3) -0.907; selection changed T0->T1 0.893; facts spanning both branches 0.568; TV distance T0->T1 0.356
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.806 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 2.298, a_use 0.644; I256@512: i 1.456, a_use 0.486, CR8 0.882, measured candidates mean 633.8, p99 776.0
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 0.472, a_use 0.250, CR8 0.601, CR1 0.718, AM_C 0.622, candidates mean 158.6, p99 202.7
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 1.026, a_use 0.393, CR8 0.792, CR1 0.880, AM_C 0.807, candidates mean 287.3, p99 330.1
+    - I64@512: i 1.926, a_use 0.578, CR8 0.952, CR1 0.982, AM_C 0.958, candidates mean 543.9, p99 585.7
+- **U_P, update 8192**
+  - tree label: NOT IDENTIFIED [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: NOT IDENTIFIED; d2: NOT IDENTIFIED; d3: NOT IDENTIFIED; d4: EXACT SEARCH HARMS; d5: NOT IDENTIFIED
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.260) / B: NOT RESTORED (accuracy version 0.254); T2 A: NOT RESTORED (accuracy version 0.135) / B: NOT RESTORED (accuracy version 0.122); T3 A: NOT RESTORED (accuracy version 0.375) / B: NOT RESTORED (accuracy version 0.358)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.263) / B: NOT RESTORED (accuracy version 0.263); T2 A: NOT RESTORED (accuracy version 0.117) / B: NOT RESTORED (accuracy version 0.110); T3 A: NOT RESTORED (accuracy version 0.353) / B: NOT RESTORED (accuracy version 0.363)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.291) / B: NOT RESTORED (accuracy version 0.286); T2 A: NOT RESTORED (accuracy version 0.128) / B: NOT RESTORED (accuracy version 0.123); T3 A: NOT RESTORED (accuracy version 0.401) / B: NOT RESTORED (accuracy version 0.392)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.311) / B: NOT RESTORED (accuracy version 0.303); T2 A: NOT RESTORED (accuracy version 0.154) / B: NOT RESTORED (accuracy version 0.143); T3 A: NOT RESTORED (accuracy version 0.496) / B: NOT RESTORED (accuracy version 0.473)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.269) / B: NOT RESTORED (accuracy version 0.262); T2 A: NOT RESTORED (accuracy version 0.121) / B: NOT RESTORED (accuracy version 0.131); T3 A: NOT RESTORED (accuracy version 0.383) / B: NOT RESTORED (accuracy version 0.374)
+  - index label: INDEX DOES NOT APPROACH FLAT [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX DOES NOT APPROACH FLAT; d2: INDEX DOES NOT APPROACH FLAT; d3: INDEX DOES NOT APPROACH FLAT; d4: INDEX DOES NOT APPROACH FLAT; d5: INDEX DOES NOT APPROACH FLAT
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 128 A: NOT RESTORED (accuracy version 0.424) / B: NOT RESTORED (accuracy version 0.423); 256 A: NOT RESTORED (accuracy version 0.644) / B: NOT RESTORED (accuracy version 0.638); 512 A: NOT RESTORED (accuracy version 0.919) / B: NOT RESTORED (accuracy version 0.913)
+      - d2: 128 A: NOT RESTORED (accuracy version 0.406) / B: NOT RESTORED (accuracy version 0.405); 256 A: NOT RESTORED (accuracy version 0.652) / B: NOT RESTORED (accuracy version 0.653); 512 A: NOT RESTORED (accuracy version 0.916) / B: NOT RESTORED (accuracy version 0.910)
+      - d3: 128 A: NOT RESTORED (accuracy version 0.413) / B: NOT RESTORED (accuracy version 0.412); 256 A: NOT RESTORED (accuracy version 0.641) / B: NOT RESTORED (accuracy version 0.642); 512 A: NOT RESTORED (accuracy version 0.913) / B: NOT RESTORED (accuracy version 0.913)
+      - d4: 128 A: NOT RESTORED (accuracy version 0.411) / B: NOT RESTORED (accuracy version 0.398); 256 A: NOT RESTORED (accuracy version 0.653) / B: NOT RESTORED (accuracy version 0.635); 512 A: NOT RESTORED (accuracy version 0.915) / B: NOT RESTORED (accuracy version 0.901)
+      - d5: 128 A: NOT RESTORED (accuracy version 0.397) / B: NOT RESTORED (accuracy version 0.402); 256 A: NOT RESTORED (accuracy version 0.628) / B: NOT RESTORED (accuracy version 0.632); 512 A: NOT RESTORED (accuracy version 0.906) / B: NOT RESTORED (accuracy version 0.908)
+    - median c*: n/a keys, share of N: n/a, N/8 for comparison: 128.0; replicates without c*: [1, 2, 3, 4, 5]
+  - printed with the tree label (means over the replicates present):
+    - F0: i 1.014, a_use 0.390, T0: i 0.249, a_use 0.176, T1: i 0.125, a_use 0.126, T1w: i 0.209, a_use 0.161, T2: i 0.031, a_use 0.073, T3: i 0.235, a_use 0.171
+    - g_P -0.162, g_C -0.019, g_PC -0.286; i(F0) - i(T2) 0.983
+    - visit sweep Tv: v=1: i on 0.142, off 0.142, CR8(on) 0.191, keys scored 260; v=2: i on 0.249, off 0.125, CR8(on) 0.387, keys scored 516; v=4: i on 0.235, off 0.031, CR8(on) 1.000, keys scored 1028; v=8: NOT APPLICABLE (v = 8 exceeds N/256 = 4)
+    - T0: CR8 0.387, CR1 0.472, SR8 0.299, AM_C 0.399, AM_S 0.317
+    - prior effect: i(T1)-i(T0) -0.124, i(T1w)-i(T0) -0.040, i(T2)-i(T3) -0.204; selection changed T0->T1 0.877; facts spanning both branches 0.586; TV distance T0->T1 0.343
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.795 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 1.014, a_use 0.390; I256@512: i 0.675, a_use 0.306, CR8 0.881, measured candidates mean 635.5, p99 778.0
+    - I64@1024: NOT APPLICABLE (c = 1024 is not below N = 1024)
+    - I64@128: i 0.243, a_use 0.174, CR8 0.601, CR1 0.719, AM_C 0.622, candidates mean 158.8, p99 200.5
+    - I64@2048: NOT APPLICABLE (c = 2048 is not below N = 1024)
+    - I64@256: i 0.503, a_use 0.259, CR8 0.792, CR1 0.879, AM_C 0.808, candidates mean 287.1, p99 327.9
+    - I64@512: i 0.876, a_use 0.357, CR8 0.953, CR1 0.981, AM_C 0.958, candidates mean 543.8, p99 583.5
+
+#### 8K/4K (primary; facts 8192, slots 4096)
+
+- **RUN, update 49152**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK] [TREE STILL LEARNING]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.533) / B: NOT RESTORED (accuracy version 0.532); T2 A: NOT RESTORED (accuracy version 0.041) / B: NOT RESTORED (accuracy version 0.037); T3 A: NOT RESTORED (accuracy version 0.605) / B: NOT RESTORED (accuracy version 0.605)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.483) / B: NOT RESTORED (accuracy version 0.479); T2 A: NOT RESTORED (accuracy version 0.033) / B: NOT RESTORED (accuracy version 0.031); T3 A: NOT RESTORED (accuracy version 0.552) / B: NOT RESTORED (accuracy version 0.544)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.500) / B: NOT RESTORED (accuracy version 0.495); T2 A: NOT RESTORED (accuracy version 0.035) / B: NOT RESTORED (accuracy version 0.030); T3 A: NOT RESTORED (accuracy version 0.568) / B: NOT RESTORED (accuracy version 0.565)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.537) / B: NOT RESTORED (accuracy version 0.534); T2 A: NOT RESTORED (accuracy version 0.041) / B: NOT RESTORED (accuracy version 0.037); T3 A: NOT RESTORED (accuracy version 0.631) / B: NOT RESTORED (accuracy version 0.629)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.510) / B: NOT RESTORED (accuracy version 0.513); T2 A: NOT RESTORED (accuracy version 0.039) / B: NOT RESTORED (accuracy version 0.038); T3 A: NOT RESTORED (accuracy version 0.586) / B: NOT RESTORED (accuracy version 0.587)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK] [TREE STILL LEARNING]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.982); 128 A: NOT RESTORED (accuracy version 0.533) / B: NOT RESTORED (accuracy version 0.531); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.720) / B: NOT RESTORED (accuracy version 0.718); 512 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.894)
+      - d2: 1024 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 128 A: NOT RESTORED (accuracy version 0.542) / B: NOT RESTORED (accuracy version 0.540); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.725) / B: NOT RESTORED (accuracy version 0.724); 512 A: NOT RESTORED (accuracy version 0.892) / B: NOT RESTORED (accuracy version 0.890)
+      - d3: 1024 A: RESTORED (accuracy version 0.980) / B: RESTORED (accuracy version 0.980); 128 A: NOT RESTORED (accuracy version 0.537) / B: NOT RESTORED (accuracy version 0.534); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.719) / B: NOT RESTORED (accuracy version 0.720); 512 A: NOT RESTORED (accuracy version 0.890) / B: NOT RESTORED (accuracy version 0.889)
+      - d4: 1024 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 128 A: NOT RESTORED (accuracy version 0.539) / B: NOT RESTORED (accuracy version 0.540); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.720) / B: NOT RESTORED (accuracy version 0.720); 512 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.894)
+      - d5: 1024 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 128 A: NOT RESTORED (accuracy version 0.540) / B: NOT RESTORED (accuracy version 0.540); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.724) / B: NOT RESTORED (accuracy version 0.723); 512 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.894)
+    - median c*: 1024.0 keys, share of N: 0.250, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.946, a_use 0.996, T0: i 3.076, a_use 0.769, T1: i 1.599, a_use 0.515, T1w: i 2.521, a_use 0.681, T2: i 0.018, a_use 0.062, T3: i 1.989, a_use 0.589
+    - g_P -0.790, g_C -0.582, g_PC -1.636; i(F0) - i(T2) 4.927
+    - visit sweep Tv: v=1: i on 1.202, off 1.202, CR8(on) 0.032, keys scored 272; v=2: i on 3.076, off 1.599, CR8(on) 0.063, keys scored 528; v=4: i on 2.163, off 0.344, CR8(on) 0.127, keys scored 1040; v=8: i on 1.995, off 0.076, CR8(on) 0.264, keys scored 2064
+    - T0: CR8 0.063, CR1 0.077, SR8 0.061, AM_C 0.064, AM_S 0.063
+    - prior effect: i(T1)-i(T0) -1.477, i(T1w)-i(T0) -0.556, i(T2)-i(T3) -1.971; selection changed T0->T1 0.806; facts spanning both branches 0.832; TV distance T0->T1 0.258
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.290 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.946, a_use 0.996; I256@512: i 2.668, a_use 0.706, CR8 0.650, measured candidates mean 635.5, p99 785.6
+    - I64@1024: i 4.738, a_use 0.978, CR8 0.934, CR1 0.992, AM_C 0.947, candidates mean 1055.7, p99 1094.7
+    - I64@128: i 1.732, a_use 0.541, CR8 0.471, CR1 0.699, AM_C 0.519, candidates mean 158.4, p99 201.4
+    - I64@2048: i 4.938, a_use 0.996, CR8 0.995, CR1 1.000, AM_C 0.996, candidates mean 2079.9, p99 2118.4
+    - I64@256: i 2.761, a_use 0.721, CR8 0.629, CR1 0.840, AM_C 0.673, candidates mean 287.1, p99 328.5
+    - I64@512: i 3.948, a_use 0.889, CR8 0.797, CR1 0.944, AM_C 0.829, candidates mean 543.5, p99 583.5
+- **TRAJ1, update 16384 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.448) / B: NOT RESTORED (accuracy version 0.453); T2 A: NOT RESTORED (accuracy version 0.045) / B: NOT RESTORED (accuracy version 0.043); T3 A: NOT RESTORED (accuracy version 0.514) / B: NOT RESTORED (accuracy version 0.512)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.411) / B: NOT RESTORED (accuracy version 0.409); T2 A: NOT RESTORED (accuracy version 0.033) / B: NOT RESTORED (accuracy version 0.030); T3 A: NOT RESTORED (accuracy version 0.468) / B: NOT RESTORED (accuracy version 0.467)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.447) / B: NOT RESTORED (accuracy version 0.442); T2 A: NOT RESTORED (accuracy version 0.042) / B: NOT RESTORED (accuracy version 0.039); T3 A: NOT RESTORED (accuracy version 0.502) / B: NOT RESTORED (accuracy version 0.499)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.486) / B: NOT RESTORED (accuracy version 0.484); T2 A: NOT RESTORED (accuracy version 0.045) / B: NOT RESTORED (accuracy version 0.046); T3 A: NOT RESTORED (accuracy version 0.569) / B: NOT RESTORED (accuracy version 0.570)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.448) / B: NOT RESTORED (accuracy version 0.447); T2 A: NOT RESTORED (accuracy version 0.043) / B: NOT RESTORED (accuracy version 0.040); T3 A: NOT RESTORED (accuracy version 0.516) / B: NOT RESTORED (accuracy version 0.507)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.979) / B: RESTORED (accuracy version 0.980); 128 A: NOT RESTORED (accuracy version 0.534) / B: NOT RESTORED (accuracy version 0.534); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.716) / B: NOT RESTORED (accuracy version 0.716); 512 A: NOT RESTORED (accuracy version 0.886) / B: NOT RESTORED (accuracy version 0.888)
+      - d2: 1024 A: RESTORED (accuracy version 0.979) / B: RESTORED (accuracy version 0.978); 128 A: NOT RESTORED (accuracy version 0.531) / B: NOT RESTORED (accuracy version 0.532); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.718) / B: NOT RESTORED (accuracy version 0.716); 512 A: NOT RESTORED (accuracy version 0.887) / B: NOT RESTORED (accuracy version 0.885)
+      - d3: 1024 A: RESTORED (accuracy version 0.979) / B: RESTORED (accuracy version 0.977); 128 A: NOT RESTORED (accuracy version 0.527) / B: NOT RESTORED (accuracy version 0.527); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.707) / B: NOT RESTORED (accuracy version 0.706); 512 A: NOT RESTORED (accuracy version 0.881) / B: NOT RESTORED (accuracy version 0.881)
+      - d4: 1024 A: RESTORED (accuracy version 0.978) / B: RESTORED (accuracy version 0.978); 128 A: NOT RESTORED (accuracy version 0.535) / B: NOT RESTORED (accuracy version 0.534); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.721) / B: NOT RESTORED (accuracy version 0.722); 512 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.895)
+      - d5: 1024 A: RESTORED (accuracy version 0.977) / B: RESTORED (accuracy version 0.978); 128 A: NOT RESTORED (accuracy version 0.534) / B: NOT RESTORED (accuracy version 0.533); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.715) / B: NOT RESTORED (accuracy version 0.713); 512 A: NOT RESTORED (accuracy version 0.889) / B: NOT RESTORED (accuracy version 0.888)
+    - median c*: 1024.0 keys, share of N: 0.250, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.834, a_use 0.987, T0: i 2.321, a_use 0.647, T1: i 1.278, a_use 0.449, T1w: i 1.910, a_use 0.574, T2: i 0.022, a_use 0.066, T3: i 1.582, a_use 0.511
+    - g_P -0.415, g_C -0.294, g_PC -0.915; i(F0) - i(T2) 4.812
+    - visit sweep Tv: v=1: i on 0.927, off 0.927, CR8(on) 0.035, keys scored 272; v=2: i on 2.321, off 1.278, CR8(on) 0.067, keys scored 528; v=4: i on 1.710, off 0.301, CR8(on) 0.132, keys scored 1040; v=8: i on 1.585, off 0.069, CR8(on) 0.269, keys scored 2064
+    - T0: CR8 0.067, CR1 0.087, SR8 0.065, AM_C 0.069, AM_S 0.068
+    - prior effect: i(T1)-i(T0) -1.043, i(T1w)-i(T0) -0.411, i(T2)-i(T3) -1.560; selection changed T0->T1 0.800; facts spanning both branches 0.830; TV distance T0->T1 0.257
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.296 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.834, a_use 0.987; I256@512: i 2.604, a_use 0.695, CR8 0.654, measured candidates mean 637.4, p99 787.0
+    - I64@1024: i 4.612, a_use 0.965, CR8 0.934, CR1 0.991, AM_C 0.947, candidates mean 1055.9, p99 1095.3
+    - I64@128: i 1.677, a_use 0.531, CR8 0.473, CR1 0.696, AM_C 0.520, candidates mean 159.2, p99 202.5
+    - I64@2048: i 4.828, a_use 0.986, CR8 0.995, CR1 1.000, AM_C 0.996, candidates mean 2080.0, p99 2119.1
+    - I64@256: i 2.680, a_use 0.708, CR8 0.631, CR1 0.838, AM_C 0.675, candidates mean 287.6, p99 329.1
+    - I64@512: i 3.846, a_use 0.876, CR8 0.798, CR1 0.942, AM_C 0.829, candidates mean 543.8, p99 584.2
+- **TRAJ2, update 32768 (trajectory; descriptive; enters no label)**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.518) / B: NOT RESTORED (accuracy version 0.519); T2 A: NOT RESTORED (accuracy version 0.039) / B: NOT RESTORED (accuracy version 0.035); T3 A: NOT RESTORED (accuracy version 0.571) / B: NOT RESTORED (accuracy version 0.569)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.460) / B: NOT RESTORED (accuracy version 0.462); T2 A: NOT RESTORED (accuracy version 0.033) / B: NOT RESTORED (accuracy version 0.032); T3 A: NOT RESTORED (accuracy version 0.529) / B: NOT RESTORED (accuracy version 0.525)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.486) / B: NOT RESTORED (accuracy version 0.483); T2 A: NOT RESTORED (accuracy version 0.035) / B: NOT RESTORED (accuracy version 0.030); T3 A: NOT RESTORED (accuracy version 0.550) / B: NOT RESTORED (accuracy version 0.547)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.540) / B: NOT RESTORED (accuracy version 0.539); T2 A: NOT RESTORED (accuracy version 0.044) / B: NOT RESTORED (accuracy version 0.043); T3 A: NOT RESTORED (accuracy version 0.618) / B: NOT RESTORED (accuracy version 0.615)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.500) / B: NOT RESTORED (accuracy version 0.495); T2 A: NOT RESTORED (accuracy version 0.042) / B: NOT RESTORED (accuracy version 0.041); T3 A: NOT RESTORED (accuracy version 0.575) / B: NOT RESTORED (accuracy version 0.570)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: RESTORED (accuracy version 0.981) / B: RESTORED (accuracy version 0.980); 128 A: NOT RESTORED (accuracy version 0.541) / B: NOT RESTORED (accuracy version 0.538); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.724) / B: NOT RESTORED (accuracy version 0.722); 512 A: NOT RESTORED (accuracy version 0.893) / B: NOT RESTORED (accuracy version 0.892)
+      - d2: 1024 A: RESTORED (accuracy version 0.983) / B: RESTORED (accuracy version 0.983); 128 A: NOT RESTORED (accuracy version 0.542) / B: NOT RESTORED (accuracy version 0.539); 2048 A: RESTORED (accuracy version 1.000) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.722) / B: NOT RESTORED (accuracy version 0.719); 512 A: NOT RESTORED (accuracy version 0.895) / B: NOT RESTORED (accuracy version 0.894)
+      - d3: 1024 A: RESTORED (accuracy version 0.981) / B: RESTORED (accuracy version 0.980); 128 A: NOT RESTORED (accuracy version 0.535) / B: NOT RESTORED (accuracy version 0.532); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.719) / B: NOT RESTORED (accuracy version 0.717); 512 A: NOT RESTORED (accuracy version 0.889) / B: NOT RESTORED (accuracy version 0.888)
+      - d4: 1024 A: RESTORED (accuracy version 0.982) / B: RESTORED (accuracy version 0.982); 128 A: NOT RESTORED (accuracy version 0.542) / B: NOT RESTORED (accuracy version 0.543); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.725) / B: NOT RESTORED (accuracy version 0.725); 512 A: NOT RESTORED (accuracy version 0.894) / B: NOT RESTORED (accuracy version 0.896)
+      - d5: 1024 A: RESTORED (accuracy version 0.981) / B: RESTORED (accuracy version 0.981); 128 A: NOT RESTORED (accuracy version 0.541) / B: NOT RESTORED (accuracy version 0.542); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 1.000); 256 A: NOT RESTORED (accuracy version 0.723) / B: NOT RESTORED (accuracy version 0.724); 512 A: NOT RESTORED (accuracy version 0.891) / B: NOT RESTORED (accuracy version 0.892)
+    - median c*: 1024.0 keys, share of N: 0.250, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.920, a_use 0.994, T0: i 2.875, a_use 0.738, T1: i 1.541, a_use 0.503, T1w: i 2.357, a_use 0.654, T2: i 0.020, a_use 0.064, T3: i 1.869, a_use 0.567
+    - g_P -0.652, g_C -0.492, g_PC -1.396; i(F0) - i(T2) 4.901
+    - visit sweep Tv: v=1: i on 1.131, off 1.131, CR8(on) 0.033, keys scored 272; v=2: i on 2.875, off 1.541, CR8(on) 0.064, keys scored 528; v=4: i on 2.035, off 0.334, CR8(on) 0.129, keys scored 1040; v=8: i on 1.874, off 0.072, CR8(on) 0.266, keys scored 2064
+    - T0: CR8 0.064, CR1 0.081, SR8 0.063, AM_C 0.066, AM_S 0.065
+    - prior effect: i(T1)-i(T0) -1.334, i(T1w)-i(T0) -0.518, i(T2)-i(T3) -1.849; selection changed T0->T1 0.808; facts spanning both branches 0.833; TV distance T0->T1 0.258
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.289 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.920, a_use 0.994; I256@512: i 2.658, a_use 0.704, CR8 0.651, measured candidates mean 636.3, p99 790.0
+    - I64@1024: i 4.715, a_use 0.976, CR8 0.934, CR1 0.992, AM_C 0.947, candidates mean 1055.8, p99 1094.5
+    - I64@128: i 1.735, a_use 0.542, CR8 0.471, CR1 0.698, AM_C 0.519, candidates mean 158.4, p99 201.2
+    - I64@2048: i 4.914, a_use 0.994, CR8 0.995, CR1 1.000, AM_C 0.996, candidates mean 2079.7, p99 2118.1
+    - I64@256: i 2.753, a_use 0.719, CR8 0.629, CR1 0.840, AM_C 0.674, candidates mean 287.1, p99 328.5
+    - I64@512: i 3.936, a_use 0.888, CR8 0.797, CR1 0.944, AM_C 0.829, candidates mean 543.5, p99 583.0
+- **U_P, update 8192**
+  - tree label: EXACT SEARCH HARMS [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: EXACT SEARCH HARMS; d2: EXACT SEARCH HARMS; d3: EXACT SEARCH HARMS; d4: EXACT SEARCH HARMS; d5: EXACT SEARCH HARMS
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: T1 A: NOT RESTORED (accuracy version 0.346) / B: NOT RESTORED (accuracy version 0.343); T2 A: NOT RESTORED (accuracy version 0.042) / B: NOT RESTORED (accuracy version 0.041); T3 A: NOT RESTORED (accuracy version 0.384) / B: NOT RESTORED (accuracy version 0.387)
+      - d2: T1 A: NOT RESTORED (accuracy version 0.308) / B: NOT RESTORED (accuracy version 0.308); T2 A: NOT RESTORED (accuracy version 0.039) / B: NOT RESTORED (accuracy version 0.040); T3 A: NOT RESTORED (accuracy version 0.338) / B: NOT RESTORED (accuracy version 0.342)
+      - d3: T1 A: NOT RESTORED (accuracy version 0.353) / B: NOT RESTORED (accuracy version 0.354); T2 A: NOT RESTORED (accuracy version 0.043) / B: NOT RESTORED (accuracy version 0.039); T3 A: NOT RESTORED (accuracy version 0.410) / B: NOT RESTORED (accuracy version 0.406)
+      - d4: T1 A: NOT RESTORED (accuracy version 0.400) / B: NOT RESTORED (accuracy version 0.399); T2 A: NOT RESTORED (accuracy version 0.044) / B: NOT RESTORED (accuracy version 0.044); T3 A: NOT RESTORED (accuracy version 0.466) / B: NOT RESTORED (accuracy version 0.463)
+      - d5: T1 A: NOT RESTORED (accuracy version 0.333) / B: NOT RESTORED (accuracy version 0.329); T2 A: NOT RESTORED (accuracy version 0.044) / B: NOT RESTORED (accuracy version 0.038); T3 A: NOT RESTORED (accuracy version 0.381) / B: NOT RESTORED (accuracy version 0.377)
+  - index label: INDEX APPROACHES FLAT ONLY ABOVE 512 [REGISTERED RE-ANALYSIS OF OBSERVED CELLS; ORACLE-ADDRESSED; RECALL OF TRAINED RANDOM FACTS; DICT DOMINATES ON THIS TASK]
+    - replicates: d1: INDEX APPROACHES FLAT ONLY ABOVE 512; d2: INDEX APPROACHES FLAT ONLY ABOVE 512; d3: INDEX APPROACHES FLAT ONLY ABOVE 512; d4: INDEX APPROACHES FLAT ONLY ABOVE 512; d5: INDEX APPROACHES FLAT ONLY ABOVE 512
+    - retention against F0 per panel A/B: the rule in bits, with the accuracy version [acc(X) - acc0] / [acc(F0) - acc0] beside it (acc0 = memory-disabled accuracy; it decides nothing):
+      - d1: 1024 A: NOT RESTORED (accuracy version 0.969) / B: NOT RESTORED (accuracy version 0.969); 128 A: NOT RESTORED (accuracy version 0.498) / B: NOT RESTORED (accuracy version 0.495); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.680) / B: NOT RESTORED (accuracy version 0.679); 512 A: NOT RESTORED (accuracy version 0.858) / B: NOT RESTORED (accuracy version 0.859)
+      - d2: 1024 A: RESTORED (accuracy version 0.970) / B: NOT RESTORED (accuracy version 0.968); 128 A: NOT RESTORED (accuracy version 0.491) / B: NOT RESTORED (accuracy version 0.493); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.998); 256 A: NOT RESTORED (accuracy version 0.673) / B: NOT RESTORED (accuracy version 0.672); 512 A: NOT RESTORED (accuracy version 0.855) / B: NOT RESTORED (accuracy version 0.854)
+      - d3: 1024 A: NOT RESTORED (accuracy version 0.970) / B: RESTORED (accuracy version 0.970); 128 A: NOT RESTORED (accuracy version 0.500) / B: NOT RESTORED (accuracy version 0.495); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.998); 256 A: NOT RESTORED (accuracy version 0.682) / B: NOT RESTORED (accuracy version 0.680); 512 A: NOT RESTORED (accuracy version 0.861) / B: NOT RESTORED (accuracy version 0.861)
+      - d4: 1024 A: RESTORED (accuracy version 0.974) / B: RESTORED (accuracy version 0.975); 128 A: NOT RESTORED (accuracy version 0.512) / B: NOT RESTORED (accuracy version 0.513); 2048 A: RESTORED (accuracy version 0.999) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.692) / B: NOT RESTORED (accuracy version 0.694); 512 A: NOT RESTORED (accuracy version 0.868) / B: NOT RESTORED (accuracy version 0.869)
+      - d5: 1024 A: NOT RESTORED (accuracy version 0.968) / B: NOT RESTORED (accuracy version 0.969); 128 A: NOT RESTORED (accuracy version 0.498) / B: NOT RESTORED (accuracy version 0.500); 2048 A: RESTORED (accuracy version 0.998) / B: RESTORED (accuracy version 0.999); 256 A: NOT RESTORED (accuracy version 0.676) / B: NOT RESTORED (accuracy version 0.674); 512 A: NOT RESTORED (accuracy version 0.858) / B: NOT RESTORED (accuracy version 0.857)
+    - median c*: 2048.0 keys, share of N: 0.500, N/8 for comparison: 512.0; replicates without c*: []
+  - printed with the tree label (means over the replicates present):
+    - F0: i 4.452, a_use 0.948, T0: i 1.381, a_use 0.469, T1: i 0.810, a_use 0.340, T1w: i 1.138, a_use 0.417, T2: i 0.020, a_use 0.064, T3: i 0.993, a_use 0.384
+    - g_P -0.186, g_C -0.126, g_PC -0.443; i(F0) - i(T2) 4.432
+    - visit sweep Tv: v=1: i on 0.583, off 0.583, CR8(on) 0.038, keys scored 272; v=2: i on 1.381, off 0.810, CR8(on) 0.072, keys scored 528; v=4: i on 1.066, off 0.214, CR8(on) 0.139, keys scored 1040; v=8: i on 0.996, off 0.058, CR8(on) 0.274, keys scored 2064
+    - T0: CR8 0.072, CR1 0.106, SR8 0.071, AM_C 0.076, AM_S 0.075
+    - prior effect: i(T1)-i(T0) -0.571, i(T1w)-i(T0) -0.242, i(T2)-i(T3) -0.973; selection changed T0->T1 0.795; facts spanning both branches 0.832; TV distance T0->T1 0.252
+    - testability of the candidate restriction: share of facts whose T3 selection equals T0's 0.310 (near 1: T3 could not differ from T0, and the row CANDIDATES was not testable at this cell)
+  - printed with the index label:
+    - F0: i 4.452, a_use 0.948; I256@512: i 2.221, a_use 0.631, CR8 0.650, measured candidates mean 631.9, p99 783.6
+    - I64@1024: i 4.205, a_use 0.920, CR8 0.936, CR1 0.991, AM_C 0.948, candidates mean 1055.7, p99 1094.5
+    - I64@128: i 1.428, a_use 0.481, CR8 0.477, CR1 0.696, AM_C 0.522, candidates mean 158.5, p99 201.1
+    - I64@2048: i 4.441, a_use 0.947, CR8 0.995, CR1 1.000, AM_C 0.996, candidates mean 2079.9, p99 2118.3
+    - I64@256: i 2.321, a_use 0.648, CR8 0.635, CR1 0.837, AM_C 0.677, candidates mean 286.9, p99 328.2
+    - I64@512: i 3.403, a_use 0.816, CR8 0.801, CR1 0.941, AM_C 0.831, candidates mean 543.3, p99 583.1
+
+### Context from P10-S1's records (descriptive)
+
+- D-OQ a_use, 2K/4K at RUN (mean over 5 replicates; P10-S1's recorded counts): 1.0
+- D-OQ a_use, 2K/4K at U_P (mean over 5 replicates; P10-S1's recorded counts): 1.0
+- D-OQ a_use, 32K/16K at RUN (mean over 5 replicates; P10-S1's recorded counts): 0.9987884521484375
+- D-OQ a_use, 32K/16K at U_P (mean over 5 replicates; P10-S1's recorded counts): 0.95654296875
+- D-OQ a_use, 32K/4K at RUN (mean over 5 replicates; P10-S1's recorded counts): 0.9008514404296875
+- D-OQ a_use, 32K/4K at U_P (mean over 5 replicates; P10-S1's recorded counts): 0.57574462890625
+- D-OQ a_use, 8K/16K at RUN (mean over 5 replicates; P10-S1's recorded counts): 1.0
+- D-OQ a_use, 8K/16K at U_P (mean over 5 replicates; P10-S1's recorded counts): 0.99852294921875
+- D-OQ a_use, 8K/1K at RUN (mean over 5 replicates; P10-S1's recorded counts): 0.91781005859375
+- D-OQ a_use, 8K/1K at U_P (mean over 5 replicates; P10-S1's recorded counts): 0.77020263671875
+- D-OQ a_use, 8K/4K at RUN (mean over 5 replicates; P10-S1's recorded counts): 0.9996826171875
+- D-OQ a_use, 8K/4K at U_P (mean over 5 replicates; P10-S1's recorded counts): 0.99635009765625
+
+R-CONFIRM is computed by the separate `confirm` stage (group A2) against this record; this record is never rewritten.
+
+ITEM ERRORS (worker code raised inside an item; counted apart from gate failures): 0
+
+## Readings of the ADR taken here (each the most conservative course)
+
+- accuracy_version: RULING 3 (ADR section 19): acc0 is the memory-disabled accuracy of the same checkpoint and panel (P10-S1's own panel_counts; the frozen backbone's, identical for every checkpoint of a draw); the accuracy version of the retention ratio is printed beside each comparison and decides nothing
+- cell_dependent: RULING 1 (ADR section 19): two CELL-DEPENDENT values are the same only if they hold the same row at each primary cell; otherwise the component is CHECKPOINT-DEPENDENT and R-CONFIRM is NOT CONFIRMED
+- fully_row3: READING: row 3 is FULLY if T1 and T3 are both RESTORED on both panels, else PARTLY
+- index_gate_scope: §11 and §16 item 11: a failure of I256@512 or of an I64 index with F0 passing voids the index label of the replicate only; study-level NOT EVALUABLE (§9 item 1) applies per component's primary cells
+- mainly: READING: 'mainly weights' / 'mainly selection' compares i(T1w) - i(T0) with i(T1) - i(T1w), each the mean of the two panels; equal is printed 'equal'
+- median_c_star: READING: a cell's c* is the statistics.median of its replicates' c* (those that have one); with an even count this is the mean of the two middle values
+- missing_plateau: READING: a replicate whose recorded snapshots do not allow the plateau check counts as failing it
+- mixed_cell: READING: MIXED is a value that two primary cells can share; the component is then MIXED and recommends nothing
+- mixed_panel_cell: RULING 2 (ADR section 19): a cell with four MIXED-PANEL replicates is MIXED (a MIXED-PANEL replicate satisfies no condition); MIXED-PANEL is a replicate row only
+- panel_closure: ADR §16 item 10 (ruled as recommended): P, C and J need the condition on both panels; a closure on one panel only is not P, C or J
+- slack: CONVENTION: every comparison of i with a threshold (gap, RESTORED, closure, H, R, plateau, floor) allows an absolute slack of 1e-12 (labels.EPS): a value within 1e-12 of a threshold counts as on its inclusive side; i comes from integer counts, so no real value lies that close
+- weak_reference: READING: a WEAK REFERENCE (i(F0) below the floor on either panel) makes the replicate NOT EVALUABLE for the label concerned (row 1 / index NOT EVALUABLE); no row is assigned
+
+`Astra review: NOT_PERFORMED`.
