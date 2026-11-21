@@ -23,7 +23,7 @@
 
 ![ArborLM progress scorecard](docs/scorecard/scorecard.svg)
 
-The scores are the research lead's working estimate of how close each requirement of the target architecture is to being met. They are a planning aid: they are not registered results and not success claims. The evidence column quotes registered labels. Scale: 0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted. Updated 2026-11-20 (main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories added). Source: [`docs/scorecard/scorecard.toml`](docs/scorecard/scorecard.toml).
+The scores are the research lead's working estimate of how close each requirement of the target architecture is to being met. They are a planning aid: they are not registered results and not success claims. The evidence column quotes registered labels. Scale: 0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted. Updated 2026-11-20 (main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories and, on 2026-11-20, four model-level rows added). Source: [`docs/scorecard/scorecard.toml`](docs/scorecard/scorecard.toml).
 
 | Requirement | Score | Registered evidence | What would move it |
 |---|---|---|---|
@@ -39,6 +39,10 @@ The scores are the research lead's working estimate of how close each requiremen
 | Local (sparse) memory updates | 0/10 | No registered measurement of what one update changes. P10-I-S5 excluded writes ([outcome](results/p10is5-run-2026-11-18/OUTCOME.md)). | Measure rows changed per update (P10-II-S5, Part U, drafted); then test a write rule that touches only the addressed rows. |
 | Scalable read for the flat memory | 1/10 | P10-I-R: INDEX APPROACHES FLAT ONLY ABOVE 512; about N/8 candidates needed at 32K facts / 16K slots; for the tree, EXACT SEARCH HARMS ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)). | A training study: an index or a tree trained with the memory (wider or soft routing, re-indexing). None exists or is authorised. |
 | Teachers complement each other | 0/10 | No measurement. P10-S2 ended TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)). | Run both frozen teachers on one benchmark and record each score, the either-right ceiling and the both-right floor, before any transfer. |
+| Capability parity with reference models | 0/10 | No study yet. Every result above uses one measure, predictive loss, on a 27,392-parameter byte-level backbone; it does not establish parity with any pretrained model ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md), not approved). | Measure the reference models themselves on independent evaluations (proposed test M0, not approved), then the first contact of the memory with a real student. |
+| Self-optimisation of memory and computation | 0/10 | No study yet. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)). | A staged, preregistered test against an outside search given the same compute; to be proposed for approval. |
+| Self-directed capability learning | 0/10 | No study yet, and no system capable enough to test it exists. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)). | Needs a real student that has first acquired a capability from a teacher; then a bounded, preregistered single cycle. |
+| Sustained improvement across cycles | 0/10 | No study yet. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)). | Needs a single self-directed cycle shown first; then a fixed number of bounded cycles scored on evaluations the process cannot see. |
 
 <!-- scorecard:end -->
 
