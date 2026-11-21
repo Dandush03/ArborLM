@@ -142,14 +142,14 @@ eval_chunk_elements = 1048576
 # section 16 as amended by the quiet-rule addendum (ADR-0024-addendum-quiet-rule.md, A3 and A8 item 2). Loads are INTEGERS in hundredths (v = round(x, 2) x 100). The fixed 1.0 limit is REMOVED.
 # The measured figures below stay provisional (nothing reads them) until the study's own baseline has been taken (`python -m studies.p10is1.baseline run`), its record and samples committed under results/, and the
 # figures copied here by hand. The candidate plan refuses while baseline_provisional is true; the freeze re-derives load_p95, load_limit, condition and both presences from the committed samples and refuses a difference.
-baseline_provisional = true
-load_p95 = 0                   # measured: nearest-rank 95th percentile of the 360 window loads, hundredths (placeholder while provisional)
-load_limit = 0                 # measured: L = load_p95 + load_margin, hundredths (placeholder while provisional)
+baseline_provisional = false
+load_p95 = 167                 # measured: nearest-rank 95th percentile of the 360 window loads, hundredths (placeholder while provisional)
+load_limit = 217               # measured: L = load_p95 + load_margin, hundredths (placeholder while provisional)
 condition = "open"             # measured: "open" (the application and Claude Code may be open, the lead silent) or "closed" (by the fallback of A3.1 item 7)
-app_present = false            # measured: the desktop application's presence at the baseline (a stage must equal it)
-cli_present = false            # measured: Claude Code's presence at the baseline (a stage must equal it)
-baseline_record_path = ""      # repo-relative path of the committed baseline record (results/...)
-baseline_record_sha256 = ""    # SHA-256 of that record file (the record names the samples file and its SHA-256)
+app_present = true             # measured: the desktop application's presence at the baseline (a stage must equal it)
+cli_present = true             # measured: Claude Code's presence at the baseline (a stage must equal it)
+baseline_record_path = "results/p10is1-quiet-baseline-20261121/record.json"      # repo-relative path of the committed baseline record (results/...)
+baseline_record_sha256 = "62c031ecf29f9634cc3e7e8b170c17e68a7298a7ade1a50a7c8f828f4ba347bd"    # SHA-256 of that record file (the record names the samples file and its SHA-256)
 load_margin = 50
 load_ceiling = 300
 load_report_above = 250        # a report to the human lead before the freeze, not a gate
@@ -205,7 +205,7 @@ evaluate_hours = 1.0
 timing_hours = 1.0
 throughput_hours = 1.0
 analysis_hours = 1.0
-total_hours = 51.0
+total_hours = 52.0
 
 [rehearsal]
 # the tiny synthetic memory of the unit tests and the synthetic rehearsal phase (test seeds, a random backbone)
