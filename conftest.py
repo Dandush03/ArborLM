@@ -39,6 +39,18 @@ _P10IS5_STALE_AFTER_LATER_STUDIES = (
 )
 
 
+# Added 2026-11-19 at the merge of P10-I-S2. P10-I-S3's frozen seed gate accepts its own allocation and P10-I-R's self-collision; with P10-I-S2's files in the tree the registry checker copy it runs also reports
+# P10-I-S2's own allocation hitting P10-I-S2's own files, which that frozen gate does not know, so every P10-I-S3 test that needs its gate to pass in this repository fails. The gate passed in P10-I-S3's own tree at
+# its freeze (2e98578); seed registry revision 4 and its checker class such hits correctly. Frozen files are not edited; strict expected failures.
+_P10IS3_STALE_AFTER_LATER_STUDIES = (
+    "tests/test_p10is3_audit_fixes.py::test_b1_registered_launch_gets_past_the_platform_check_from_an_unconfigured_process",
+    "tests/test_p10is3_audit_fixes.py::test_r3_r4_freeze_refuses_a_rate_table_or_rule_hash_not_from_r1",
+    "tests/test_p10is3_audit_fixes.py::test_ruling_checker_copy_excludes_only_this_study_and_p10ir",
+    "tests/test_p10is3_config_plan.py::test_seed_problems_empty_and_gate_passes_with_the_extended_checker",
+    "tests/test_p10is3_realpath.py::test_candidate_plan_writes_the_seed_files_and_the_freeze_succeeds",
+)
+
+
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_FREEZE:
@@ -49,5 +61,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S5 is frozen and executed (45a2c84): the pre-freeze half of the assertion is stale by construction"))
         if item.nodeid.split("[")[0] in _P10IS5_STALE_AFTER_LATER_STUDIES:
             item.add_marker(pytest.mark.xfail(strict=True, reason="another study's own registered seeds are in the merged repository; P10-I-S5's frozen seed gate knows only P10-I-R's self-collision pattern; the gate passed in its own tree at the freeze"))
+        if item.nodeid.split("[")[0] in _P10IS3_STALE_AFTER_LATER_STUDIES:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="another study's own registered seeds are in the merged repository; P10-I-S3's frozen seed gate does not know them; the gate passed in its own tree at the freeze"))
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_LATER_STUDIES:
             item.add_marker(pytest.mark.xfail(strict=True, reason="a later study's own registered seeds are in the repository: P10-I-R's whole-repository checker run reports them; each later study's own seed gate covers them"))
