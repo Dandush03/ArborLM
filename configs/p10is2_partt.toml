@@ -52,8 +52,8 @@ etable_rate = 0.003
 read_layer = 4
 
 [calibration_log]  # ruling 35: where the calibration log is pushed; the human lead fills these (empty refuses)
-remote_url = ""
-remote_branch = ""
+remote_url = "https://github.com/Dandush03/ArborLM"
+remote_branch = "claude/p10-i-s2-impl"
 
 [pilot]  # section 7.2
 gap_min = 0.25
@@ -144,7 +144,7 @@ measuring_rehearsal_hours = 6.0   # ruling 40: the ONE extension of the fixed 3.
 rehearsal_hours = 3.0
 extension_factor_max = 2.0
 provisional = true
-study_budget_hours = 0.0   # the study's budget bound for Part T's total cap, set by the human lead (0.0 = not set: the candidate plan then states PENDING LEAD REVIEW and cannot check it)
+study_budget_hours = 95.68   # ruling 41 (lead, under the human lead's delegation of 2026-11-20; he may overrule): 110 h (ADR-0025 upper figure) minus Part Q's 14.311 h charged
 memory_per_worker_gib = 8.0
 memory_aggregate_gib = 24.0
 workers_max = 3
@@ -173,7 +173,7 @@ deterministic_algorithms = true
 
 [stage_caps]  # section 10 item 3: computed by code from the Part T measuring rehearsal; 0.0 = not yet set
 gates_hours = 0.0
-calibration_hours = 0.0
+calibration_hours = 13.18
 train_hours = 0.0
 evaluate_hours = 0.0
 controls_hours = 0.0
