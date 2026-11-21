@@ -1,8 +1,8 @@
 # ADR-0033 — M0: the reference models and the evaluation harness (first rung of the model-level ladder)
 
-**Status: DRAFT (revision 2). NOTHING APPROVED. Draft 1 was reviewed once (`docs/reviews/adr-0033-m0-2026-11-20/REVIEW_1.md`: READY AFTER THE LISTED EDITS, two blocking findings). This revision applies that review and has not been reviewed again; the reviewer recommends a short confirmation review of B1, B2, R1, R3 and R4 before Decision 1. Nothing in this document authorises implementation, a download, a run or a decision.**
+**Status: DRAFT (revision 3). NOTHING APPROVED. Draft 1 was reviewed in `docs/reviews/adr-0033-m0-2026-11-20/REVIEW_1.md` (READY AFTER THE LISTED EDITS, two blocking findings) and revision 2 in `REVIEW_2.md` of the same folder (yes after the listed edits, one blocking finding, N1). This revision applies Review 2's findings N1 to N9 and has not been reviewed again. Nothing in this document authorises implementation, a download, a run or a decision.**
 
-- Date: 2026-11-20 (Panama time). Draft 1 (commit `c89c1f2`) and revision 2 by the `arbor-lead` subagent (Claude Fable 5.2, `claude-fable-5-2`) on the scientific lead's brief. Review 1 by the `arbor-auditor` subagent (Claude Opus 5.5, `claude-opus-5-5`). The drafter read records only. It downloaded nothing, ran no model, ran no heavy computation and made no git write.
+- Date: 2026-11-20 (Panama time). Draft 1 (commit `c89c1f2`), revision 2 (commit `44879b4`) and revision 3 by the `arbor-lead` subagent (Claude Fable 5.2, `claude-fable-5-2`) on the scientific lead's brief. Reviews 1 and 2 by the `arbor-auditor` subagent (Claude Opus 5.5, `claude-opus-5-5`). The drafter read records only. It downloaded nothing, ran no model, ran no heavy computation and made no git write.
 - `SPEC: PENDING ASTRA REVIEW`. `Astra review: NOT_PERFORMED`. Claude review is not Astra review.
 - ArborLM is unproven research. This document claims no result. P1 to P10-I, their thresholds, labels, outcome records and rulings stand exactly as recorded. No existing file is edited.
 - **What binds this specification.** The five rules of ADR-0032 revision 4, section E2, approved by the lead under the weekend delegation (`docs/reviews/adr-0032-model-level-2026-11-20/APPROVAL_OF_RULES.md`): the two levels of evidence; the margin rule; the power rule; the label structure of sections 5 and 6; the order of the M ladder. The human lead may overrule any of them on Monday 2026-11-23. Everything else in ADR-0032 is a proposal and is treated as one here.
@@ -13,20 +13,20 @@
 > - **What M0 is.** Groundwork with no ArborLM component in it. It measures the pretrained models themselves, the small student and the larger models it would be compared with, on evaluations built for the purpose. It contains no memory code and says nothing about ArborLM.
 > - **What it can tell you.** How each model scores here, on this machine and software. Whether each teacher is ahead of the student, and where. Whether the two teachers differ item by item, which the two-teacher question needs. How many test items the parity gate needs for a margin of 2, 3 or 5 points, and whether any number of items is enough. Whether that gate is affordable on this machine.
 > - **What it cannot tell you.** Anything about ArborLM. Whether parity is reachable. Anything about cost or efficiency of a memory. Anything about writing code: M0 measures code tracing only.
-> - **Expectation, not a measurement.** The teachers will most likely be ahead of a small student almost everywhere. Whether the two teachers complement each other is open. The gate will most likely need several thousand sealed items per evaluation; at a 2-point margin some evaluations may be out of reach whatever the number of items (section 9.4). The final test (M5) may project to weeks of machine time.
+> - **Expectation, not a measurement.** The teachers will most likely be ahead of a small student almost everywhere. Whether the two teachers complement each other is open. The gate will most likely need several thousand sealed items per evaluation; at the proposed numbers a 3-point margin is not reachable if the evaluations' clusters differ as much as the planning worst case assumes, and a 2-point margin may be out of reach whatever the number of items (section 8). The final test (M5) may project to weeks of machine time.
 > - **Cost.** About 41 GB (set B) or 43 GB (set A) of downloads in total after M0 (limit 50 GB; 1.50 GB already used, not 1.19: section 4.1). One to four days of machine time for the registered measurement, and about a third to two fifths as much again for rehearsals; all uncertain by a factor of about three until timed here (section 11).
 > - **Yours alone, in the order the work waits for them (sections 16 and 17):**
->   1. **How the models are run (choice 8)**: a lockfile amendment, a separate pinned package file, or the models re-implemented in plain torch on the locked environment. No package is installed before this. Recommended to you: the third, with its cost stated in section 5.
->   2. **The model list**: which set, which model is the student S₀, the upper bounds on the student plus memory. Sets A and B are both workable; draft 1 recommended B, and after the review's corrections the drafter gives no recommendation between them (section 4.2).
+>   1. **How the models are run (choice 8)**: a lockfile amendment, a separate pinned package file, or the models re-implemented in plain torch on the locked environment. No package is installed before this. Two recommendations are put to you and none is chosen for you: the reviewer's (the separate file, for M0) and the drafter's (the re-implementation). Section 5 gives both with their reasons and costs.
+>   2. **The model list**: which set, which model is the student S₀, the upper bounds on the student plus memory. Sets A and B both fit. No recommendation between them: the facts that would separate them are from memory and are re-read at their source before this choice is put to you (section 4.2).
 >   3. **The domain list** and which evaluations may gate. Recommended: reasoning, mathematics, code tracing (output prediction), language understanding, factual knowledge. Code writing is then NOT MEASURED.
->   4. **G, the number of clusters per evaluation part**, before the generators are frozen. Proposed: at least 300.
+>   4. **The minimum number of clusters (hand-written base rules) per evaluation part**, before the generators are frozen, and **the worst-case spread between clusters you plan for**. Proposed: at least 300, and τ = 0.10. With those two numbers and a 20,000-item pool, a 3-point margin is not reachable in the worst case; the pool, the minimum or the margin would have to move (section 8).
 >   5. **The margins δ_e**, per evaluation, **before stage R1**, that is before any model scores any item.
 >   6. **Every number of the config** (section 14) before the freeze: alpha, power, the cap fraction, the floor and ceiling band, pool sizes, hour ceilings.
 >   7. **A ruling on 7,030,741 bytes of WikiText-2** fetched on 2026-11-12, before the download ledger began: do they count against the 50 GB?
 >   8. **Starting Docker (Colima)**, only if you want code writing measured by execution. Recommended: not in M0.
 >   9. **Every model and dataset download**, the non-commercial licence of ANLI, and any model that needs repository code to load.
 >   10. **Decision 2**: the registered measurement.
-> - **What the lead may do under your weekend delegation, after the auditor's review, and nothing more:** approve this specification for the work that runs on the locked environment alone. That is stage I0-a (generators, solvers, scorers, analysis and their tests) and stage G-gen. The packages that would run the models (choice 8), every model and dataset (choices 1, 2 and 7) and every number of section 14 are yours. No package, model or dataset is fetched before your choice.
+> - **What the lead may do under your weekend delegation, after the auditor's review, and nothing more:** approve this specification for the work that runs on the locked environment alone. That is stage I0-a (generators, solvers, scorers, analysis and their tests) and a rehearsal of stage G-gen at the proposed numbers; G-gen's record of record waits for your G and domain list. The packages that would run the models (choice 8), every model and dataset (choices 1, 2 and 7) and every number of section 14 are yours. No package, model or dataset is fetched before your choice.
 
 ## 1. Question, registered outcomes and non-claims
 
@@ -140,7 +140,7 @@ Licence tags per note 1: the Qwen candidates Apache-2.0 (tag and card only; **th
 
 **Revisions and files.** Note 1 gives commit prefixes only (for example `7ae55760…` for the 0.5B student) [V]. They are pointers. At D0b each repository is pinned by its full 40-character commit and each file by the SHA-256 of its LFS metadata. The allowlist of files is: `.safetensors` weights, `model.safetensors.index.json`, `config.json`, `generation_config.json`, tokenizer files, `chat_template.jinja` and the LICENSE. No pickle file is loaded.
 
-**Sets A and B, side by side.** Draft 1 recommended B. Review 1 (C1) corrected two of its four reasons, and one more falls with them:
+**Sets A and B: facts to re-read at source before choice 1 is put to him.** Draft 1 recommended B. Review 1 (C1) questioned two of its four reasons, and one more falls with them:
 
 | | Set B | Set A |
 |---|---|---|
@@ -149,6 +149,8 @@ Licence tags per note 1: the Qwen candidates Apache-2.0 (tag and card only; **th
 | Library | Classes expected in the proposed pins ([D] UNVERIFIED) | The same expected ([D] UNVERIFIED, the reviewer's memory). Draft 1's claim that only B avoids a newer library was not established |
 | Age of the Qwen models | About two years ([D], the reviewer) | About eighteen months ([D], the reviewer) |
 | Age of the two teachers against each other | Qwen teacher older than the GLM teacher | Probably closer in age ([D] UNVERIFIED). Draft 1 said B's teachers were closest; that was not established either |
+
+Every [D] entry in this table is the reviewer's memory. Before choice 1 is put to the human lead, the lead re-reads each one at its source: the model cards' thinking switch and release dates, and the library's release notes for the Qwen3 and GLM-4 classes. This means reading web pages only; no file is fetched into the ledger. Until then the table lists what to check; it is not a comparison.
 
 **No recommendation between A and B.** What would decide it is the human lead's judgement of which models ArborLM "aims to replace": A's are newer; B is simpler by one switch and leaves 2.6 GB more. Set C is not recommended: it needs a library version outside the pins, has multimodal checkpoints and leaves 2.9 GB. Figures below use set B as the worked example only; with set A the same rules apply to its models.
 
@@ -189,7 +191,7 @@ Under this bound, reference (c) is S₀: the sibling is 3.1 times S₀ by parame
 | `tokenizers` | 0.22.1 | Tokenizers |
 | `safetensors` | 0.6.2 | Weight files |
 | `huggingface-hub` | 0.35.3 | Imported by `transformers`; used offline only after D0b |
-| `numpy` | 2.3.3 | Imported by `transformers`; bootstrap arithmetic |
+| `numpy` | 2.3.3 | Imported by `transformers`. Not used by the analysis, which runs on the locked environment |
 | resolver dependencies (`regex`, `pyyaml`, `tqdm`, `requests` and theirs) | as resolved | — |
 
 These five pins are versions already resolved and hashed for P10-S2. There they ran a one-off data-generation step only; P10-S2's registered path ran on the locked environment alone, with the model re-implemented in torch and checked for equivalence (ADR-0022 §14.2). In M0 they would run the registered measurement itself, which has no precedent in this repository. `jinja2`, which chat templates need, is expected in the lock as a dependency of `torch` [D] UNVERIFIED. Whether `transformers` 4.57.1 has built-in classes for every model of the chosen set is [D] UNVERIFIED and is gated at D0b before any weight is fetched. `accelerate` is not listed; if the load gate shows it is needed to hold peak memory, it is added before the freeze. `pyarrow` (dataset files) comes from the lock's existing `pilot` extra.
@@ -202,20 +204,39 @@ These five pins are versions already resolved and hashed for P10-S2. There they 
 | 2. A separate hash-pinned file (`studies/m0/requirements-m0.txt`, resolved with `uv pip compile --generate-hashes`, shared packages constrained to the lock's versions, installed with `--require-hashes` into a git-ignored directory, on the path of M0 processes only) | The lock is untouched. The fastest route | A second environment that runs the registered measurement. No precedent for that |
 | 3. Models re-implemented in plain torch inside the locked environment, verified once against the library's reference logits and greedy outputs in a separate one-off step (the P10-S2 pattern) | The lock is untouched, and M1 attaches the memory to code the project owns | More implementation work, and an equivalence gate per architecture (Qwen2, GLM-4) |
 
-**Recommended to him: option 3.** Reasons:
+**Two recommendations are put to him. Neither is chosen here.** Option 1 is not recommended by the reviewer or by the drafter while studies are frozen on the lock's hash.
+
+*The reviewer's recommendation (Review 2, N9): option 2 for M0.* Reasons:
+
+- In M0 the library is the measuring instrument. A widely used reference implementation at a hashed version is less likely to carry an undetected error than new code for two architectures.
+- GLM-4-0414 has post-norms and partial rotary embeddings ([D] UNVERIFIED). Option 3's gate checks only a sample of prompts.
+- It is days of work, not one to two weeks.
+- M1a can probably attach the memory to library modules by subclassing or forward hooks.
+
+Costs of option 2:
+
+- A large third-party library sits in the registered path. It is pinned, not audited.
+- If M1a cannot attach to the library, the condition "the model code M0 measured binds M1 to M5" forces the references to be measured again: one to four days of machine time.
+
+*The drafter's recommendation: option 3.* Reasons:
 
 1. It is the only route with a precedent he approved (ADR-0022 §14.2). The registered path stays on the locked environment.
 2. M1 must attach a memory inside the student's forward pass. That is simplest in code the project owns, and the one-stack rule then puts every reference on that code too. Under option 1 or 2 that question returns at M1.
 3. The fixings of section 7 (attention, cache, generation loop) become code under audit, not library defaults.
 
-Its honest cost and risk:
+Costs and risks of option 3:
 
 - **Work.** Two architectures with batched greedy generation and a key-value cache; a decoder from output ids to text; an equivalence gate per architecture and per model; their audit. The drafter's guess is one to two weeks of implementation and audit before the load gate, against days for option 2 [E]. Nothing here has been measured.
 - **The packages are still installed**, for two one-off steps: rendering and tokenising every prompt into stored, hashed ids; and producing the library's reference logits and greedy outputs. So the install waits for his choice under every option.
-- **The equivalence gate.** Per model, on 64 fixed prompts, in CPU float32 (models up to 1.5B) or CPU bfloat16 (larger): identical greedy token sequences for 64 new tokens, and a largest logit difference under a tolerance registered before the gate runs. A failure is an engineering stop.
+- **The equivalence gate.** Per model, on 64 fixed prompts, in CPU float32 (models up to 1.5B) or CPU bfloat16 (larger): identical greedy token sequences for 64 new tokens, and a largest logit difference under a tolerance registered before the gate runs. A failure is an engineering stop. The gate also covers:
+  - batches at the registered batch size with left padding, every prompt compared with its batch-1 library output;
+  - 8 prompts of at least 1,500 tokens, generated to 1,024 new tokens;
+  - the project's decoder from ids to text, which must equal the library's decode on every raw output of R1, checked in a one-off step.
+
+  Any difference is an engineering stop.
 - **Risks.** A divergence outside the gate's prompts; a generation loop slower than the library's; the unknown behaviour of half precision on MPS, which no option removes.
 
-If he weighs speed first, option 2 is the reasonable choice. Option 1 is not recommended while studies are frozen on the lock's hash. **Condition under every option:** the resolved versions and the model code that M0 measured bind M1 to M5; if any differs, the references are measured again before S is scored.
+In the reviewer's words, option 3 is the better choice if he weighs owning and auditing every line of the measuring path above calendar time, or expects M1a to need its own model code anyway. **Condition under every option:** the resolved versions and the model code that M0 measured bind M1 to M5; if any differs, the references are measured again before S is scored.
 
 **Repository code.** Loading a model may never execute code from its repository. `trust_remote_code=False` is passed explicitly wherever the library is used. Before any weight is fetched, the small configuration files are fetched at the pinned revision. The repository-code check covers `config.json`, `tokenizer_config.json` and `generation_config.json`: no `auto_map`, no custom tokenizer class, and no `.py` file in the repository listing that the loader would reference; and `model_type` must be a class built into the pinned library. A model that fails is not downloaded; it is recorded as REFERENCE NOT RUNNABLE LOCALLY (NEEDS REPOSITORY CODE) and returns to the human lead. He alone may approve one specific revision, after the code has been read and its hash recorded.
 
@@ -233,7 +254,7 @@ Every item has one score in {0, 1}, given by a rule. No model grades anything.
 
 ### 6.2 Private generated evaluations (gate candidates)
 
-Generated by code from registered seeds. The generator is frozen before any model is run on any item.
+Generated by code from registered seeds. The generator is frozen before any model is run on any item. The record of record of G-gen precedes G-load.
 
 | Id | Domain | What is generated | How the answer is fixed | Response mode |
 |---|---|---|---|---|
@@ -244,7 +265,9 @@ Generated by code from registered seeds. The generator is frozen before any mode
 
 Requirements for each:
 
-- **Families and clusters.** At least 12 template families, each a distinct rule structure. A cluster is a (family, rule shape) pair, the level at which items share their rule; surface frames vary within a cluster. The number of clusters per evaluation part, G, is a registered design number, fixed before G-gen. Proposed: at least 300 (the human lead's number). The reason: in the sealed split the clusters are fixed, and between-cluster variance sets a floor on the standard error that no number of items removes (review B1). Families are strata.
+- **Families, lineages and clusters.** At least 12 families (strata). Each rule shape is registered with a lineage: the hand-written base rule, a distinct solution procedure, from which it derives. Shapes made mechanically from one base rule (by changing parameters, order, negation, names or surface frame) share a lineage. **The cluster, for G and for every bootstrap, is the lineage.** G is the number of lineages per part.
+- **G is the number written, not a number tuned.** For a fixed n, more clusters never lower the power, so every lineage that passes the G-gen gates is used. The human lead registers a minimum before G-gen's record (proposed: 300). If fewer can be written, the count written is registered, and the table below shows what it can reach. (The table is in section 8. The reason clusters matter: in the sealed split they are fixed, and between-cluster variance sets a floor on the standard error that no number of items removes; Review 1, B1.)
+- **Checks.** The auditor reads one rendered item from each of 50 random pairs of lineages in one family and records any pair that is the same procedure. Such a pair is merged into one lineage before the record. M0 also prints, descriptively, the variance component between shapes within a lineage beside τ̂.
 - **Difficulty.** Five registered levels (depth, steps or program size), and two reserve levels, one easier and one harder, implemented before any scoring.
 - **Reproducible generation.** No generator iterates a set or dict of strings without sorting, and none calls `hash()`. Every process runs with `PYTHONHASHSEED=0`. A test generates each pool twice in two processes and compares hashes.
 - **Capacity gate (G-gen).** For every cluster and level, the number of distinct items the generator can produce is at least 10 times the number the pools demand. Otherwise engineering stop.
@@ -347,7 +370,7 @@ Fixed before any tuning score, in a record whose hash enters the freeze. Rows th
 | Token limit (worked mode) | Chosen by code on the tuning draw: the smallest of {384, 512, 768, 1,024} at which every system's limit-hit rate is at most 2 %. Fixed before the development pools are generated. Tuning runs at 1,024; an output at a smaller limit is its prefix |
 | Prompt length | An item whose prompt exceeds 2,048 tokens under any system's tokenizer is excluded for every system, before scoring; the count is printed |
 | Answer extraction | The text after the last answer marker on its own line; trimmed; case-folded; whitespace collapsed; a final full stop removed; numbers compared as decimals after removing thousands separators. No extractable answer scores 0 and is counted as a format failure; a limit reached without an answer scores 0 and is counted separately |
-| Answer grammar | Per evaluation, a registered regular expression for the marker and a canonical answer grammar: numbers; one letter A–J; yes/no/cannot be determined; single-line printed output for C1, whose programs print exactly one line; lists. The scorer is tested on at least 200 hand-labelled raw outputs per evaluation from R1, labelled by a context that did not write the scorer. Any disagreement is an engineering stop. (The labelling runs inside the sealed stage; only counts leave it.) |
+| Answer grammar | Per evaluation, a registered regular expression for the marker and a canonical answer grammar: numbers; one letter A–J; yes/no/cannot be determined; single-line printed output for C1, whose programs print exactly one line; lists. The scorer is tested on at least 200 hand-labelled raw outputs per evaluation from R1, labelled by a context that did not write the scorer. The 200 outputs per evaluation are drawn by a registered seed, stratified over systems. Any disagreement is an engineering stop. (The labelling runs inside the sealed stage; only counts leave it.) |
 | Chance level | c of section 10.2 is the item mean of 1/k_i for closed answers, 0 for open answers |
 | Batching | Left padding; batches formed by a stable sort on prompt length. Batch size per (model, mode) is fixed at G-load by a rule: the largest power of two whose peak memory at the longest admitted prompt plus the token limit stays at or under 24 GiB. It is used unchanged in R1, R2, R3 and M. Each item's batch membership is stored in its raw record. (The worked-mode limit is not yet chosen at G-load, so the rule uses the largest candidate, 1,024.) |
 | Numerical check | At G-load, each model's greedy output in MPS bfloat16 on 32 fixed prompts is compared with CPU float32 (models up to 1.5B) or CPU bfloat16 (larger models). The token-agreement rate and any non-finite value are recorded. A non-finite value fails the precision gate |
@@ -370,7 +393,22 @@ Response mode per evaluation: worked for R1, R2, M1, C1, GSM8K, BIG-Bench Hard a
 
 **M0 scores development items only.** Every registered outcome of M0 is defined by ADR-0032 on the development split, so none needs a sealed item. M5 remains the only reader of the sealed pools. The price, stated: M0 cannot confirm that a sealed pool is interior or has the same disagreement rate as the development draw. It has the same frozen generator, level mix, families and clusters, and that is all that is known. A sealed split later found at floor or ceiling is NOT EVALUABLE and is never re-drawn.
 
-**Why 20,000, and why it may not be enough.** Arithmetic only [E], with the rule of section 9.4 and 55 to 70 tests in the conjunction. Ignoring clusters, a part needs about 19·d/δ² items: about 6,200 to 6,500 at d = 0.3 and δ = 0.03, and about 14,100 to 14,600 at δ = 0.02. Clusters add a term that items cannot remove: the largest power any number of items can reach needs δ·√G/τ of at least about 4.3, τ being the between-cluster standard deviation of the paired difference. With the reviewer's illustrative τ = 0.10 that asks for G above about 75 at δ = 0.05, above about 210 at δ = 0.03 and above about 470 at δ = 0.02; with τ = 0.05, above about 120 at δ = 0.02. Review 1's own run gives 19,349 items at τ = 0.10, G = 300, δ = 0.03 (product rule). τ is not known before M0 measures it, and G must be fixed before that. So G = 300 may leave δ = 0.02 UNDERPOWERED whatever the pool. The pool size and G are the human lead's to change before the freeze; the pool may be raised later, never lowered (ADR-0032 section 5).
+**Why 20,000, and why it may not be enough.** Arithmetic only [E], with the rule of section 9.4 and 55 to 70 tests in the conjunction. Ignoring clusters, a part needs about 19·d/δ² items: about 6,200 to 6,500 at d = 0.3 and δ = 0.03, and about 14,100 to 14,600 at δ = 0.02. Clusters add a term that items cannot remove: the largest power any number of items can reach needs δ·√G/τ of at least about 4.3, τ being the between-cluster standard deviation of the paired difference. With the reviewer's illustrative τ = 0.10 that asks for G above about 75 at δ = 0.05, above about 210 at δ = 0.03 and above about 470 at δ = 0.02; with τ = 0.05, above about 120 at δ = 0.02. At τ = 0.10, G = 300, δ = 0.03 and d = 0.3, the size under Boole's bound is 20,418 items at 55 tests and 23,125 at 70, both above the 20,000 pool. Review 1's 19,349 used the product rule.
+
+**What that means, plainly.** At the proposed numbers (pool 20,000, minimum G 300) a 3-point margin is not reachable under the planning worst case τ = 0.10: such a part would read NOT EVALUABLE (UNDERPOWERED) at δ = 0.03, and at δ = 0.02 whatever the pool. For a 3-point margin to be reachable in that case one of three numbers has to move, and each is the human lead's: the pool size (above about 23,125 items per part, with the ladder of section 9.4 extended to match, and the M5 cost growing with it); G (the table below: 600 lineages reach about 0.024 at 20,000 items); or δ itself (0.03 is at the edge at G = 300; 0.05 is reachable). If the true τ is nearer 0.05, the proposed numbers reach about 0.021. Nothing here is measured.
+
+**What G can reach** (Boole's bound, 55 tests, d = 0.3; smallest δ reachable at 20,000 items / at any number of items; review 2, `power_check2.out.txt`):
+
+| τ | G = 60 | G = 150 | G = 300 | G = 600 | G = 1,200 |
+|---|---|---|---|---|---|
+| 0.03 | 0.024 / 0.017 | 0.020 / 0.011 | 0.018 / 0.008 | 0.018 / 0.005 | 0.017 / 0.004 |
+| 0.05 | 0.033 / 0.028 | 0.024 / 0.018 | 0.021 / 0.013 | 0.019 / 0.009 | 0.018 / 0.006 |
+| 0.10 | 0.058 / 0.056 | 0.039 / 0.035 | 0.030 / 0.025 | 0.024 / 0.018 | 0.021 / 0.013 |
+| 0.15 | 0.086 / 0.084 | 0.056 / 0.053 | 0.041 / 0.038 | 0.031 / 0.027 | 0.025 / 0.019 |
+
+τ is not known before M0, and no model may run before the generators are frozen, so no pilot τ is possible without breaking that order. The human lead chooses G's minimum with this table in view. The lead registers which τ he treats as the planning worst case (proposed: 0.10). That value is a number, so it is the human lead's to confirm (choice 10). The pool may be raised later, never lowered (ADR-0032 section 5).
+
+**Option for the human lead only (PENDING LEAD REVIEW; it would amend an approved rule; choice 19).** Under the approved power rule, templates are clusters, i.e. random effects. The sealed split uses the same templates as development and teaching, and part B already carries the generalisation question. Treating lineages as strata (fixed) instead would remove the τ floor. That is a change to the approved rule's inference target, and it is his to make or refuse. It is not the lead's.
 
 **How the sealed pool is made.** A dedicated stage at the freeze generates it from the registered sealed-pool seed combined with a secret salt (32 random bytes drawn at that moment). The pool and the salt are written outside the repository, with read permission removed. The repository receives only: the pool's SHA-256, the salt's SHA-256, item counts per family, cluster and level, and the results of the checks. The checks run inside that stage with no model: solver agreement, uniqueness, and no exact or normalised match with any tuning or development item. Revealing the salt at M5 lets anyone regenerate the pool and check the hash. No sealed item is tokenised, loaded beside a model or printed.
 
@@ -415,8 +453,8 @@ Printed per system and evaluation: the share of items whose score flips, and the
 M0 does not set δ_e. It reports, for each candidate margin δ in the **registered grid {0.02, 0.03, 0.05}** (and any value the human lead adds before the freeze):
 
 - **d_e**, per evaluation part: the largest discordance between S₀ and any Tier 2 reference (ADR-0032 section 5, item (i)), and the pair that gives it. If a reference is NOT RUNNABLE, d_e is taken over runnable references, and the M5 tests against an unrunnable reference are NOT EVALUABLE LOCALLY.
-- **Per-test power by simulation of M5's own design from the measured paired outcomes.** For that pair, a candidate size n and G_e, the number of clusters the part's sealed split will contain (for a private part, the number of templates of the part as fixed by the frozen generator and recorded at G-gen; for a public part, the number of clusters in its sealed part): 20,000 simulated samples. Each is drawn in two stages within strata: first G_e clusters with replacement from the M0 draw's clusters, allocated to strata as the sealed split will be; then n/G_e items with replacement within each drawn cluster. In each sample, the mean difference is recentred to zero. The mean difference and its cluster-robust standard error over the G_e drawn clusters are then scaled by √(d_e / (d_e − μ²)). The simulated test passes if the estimate minus t₀.₉₅,G_e−1 standard errors is above −δ. π_e(n, δ) is the share that pass, printed with its Monte Carlo standard error. (μ is the measured mean difference of the pair. "Templates" here are the clusters of section 6.2.)
-- **Floor from the clusters.** Also printed per part: τ̂_e, the between-cluster standard deviation of the paired difference within strata (method of moments, registered formula); and the largest per-test power reachable at any n, Φ(δ·√G_e / τ̂_e − z₀.₉₅). If that is below the per-test target, the part is NOT EVALUABLE (UNDERPOWERED, e, δ) whatever the pool size.
+- **Per-test power by simulation of M5's own design from the measured paired outcomes.** For that pair, a candidate size n and G_e, the number of clusters the part's sealed split will contain (for a private part, the number of templates of the part as fixed by the frozen generator and recorded at G-gen; for a public part, the number of clusters in its sealed part): 20,000 simulated samples. Each is drawn in two stages within strata. First, G_e clusters are drawn with replacement from the M0 draw's clusters, allocated to strata as the sealed split will be. Each drawn cluster's deviation from its stratum mean is multiplied by λ = √(τ̂² / (τ̂² + s_w²/m̄)), where τ̂² is the method-of-moments between-cluster variance (truncated at 0), s_w² the pooled within-cluster variance and m̄ the mean number of M0-draw items per cluster. The simulated between-cluster variance is therefore τ̂², not τ̂² + s_w²/m̄. Second, n/G_e item differences per cluster are drawn with replacement from the cluster's own items, centred on the cluster's observed mean, and added to its shrunk mean. In each sample, the mean difference is recentred to zero. The mean difference and its cluster-robust standard error over the G_e drawn clusters are then scaled by √(d_e / (d_e − μ²)). The simulated test passes if the estimate minus t₀.₉₅,G_e−1 standard errors is above −δ. π_e(n, δ) is the share that pass, printed with its Monte Carlo standard error. (μ is the measured mean difference of the pair. "Templates" here are the clusters of section 6.2, that is the lineages.)
+- **Floor from the clusters.** Also printed per part: τ̂_e, the between-cluster standard deviation of the paired difference within strata (method of moments, registered formula); and the largest per-test power reachable at any n, Φ(δ·√G_e / τ̂_e − z₀.₉₅). If that is below the per-test target, the part is NOT EVALUABLE (UNDERPOWERED, e, δ) whatever the pool size. τ̂_e is printed with its cluster-bootstrap 90 % interval. With about 5 items per cluster it is imprecise: at G = 300 its standard error in τ² is about 0.005, the size of τ² itself at τ = 0.07 (review 2, N1). The point estimate is used, as d_e is, by the approved rule. **PENDING LEAD REVIEW, put to the human lead (choice 18):** whether the floor should use an upper bound of τ instead. The lead's recommendation is the conservative option, the upper bound of that interval. Until it is decided M0 prints the floor both ways.
 - **The conjunction.** Each evaluation part carries m tests: one per Tier 2 reference, one NO HARM test, and one interference test (ADR-0032 section 7 says these join; a second table omits it). With M_e = m·P tests in all, the size required for part e is the smallest n on the ladder {500, 1,000, 1,500, 2,000, 3,000, 4,000, 6,000, 8,000, 12,000, 16,000, 20,000} with π_e(n, δ) ≥ 1 − 0.2/M_e. This is Boole's inequality, which holds whatever the dependence between tests, so no assumption about dependence is needed. P counts every gate-candidate part of the registered domain list, including parts later found NOT EVALUABLE. Alpha 0.05 and power 0.8 are ADR-0032's proposed values.
 - **Retention tests (PENDING LEAD REVIEW; choice 15).** ADR-0032 section 6 is part of the gate, and its tests are not among the m above. If M5 scores retention on sealed splits, they join the conjunction. Until that is decided M0 prints a third table with two more tests per part as a placeholder; the true count is fixed in M3's specification.
 - **Confirmation.** At the size found, 2,000 simulations with the full percentile bootstrap inside, its Monte Carlo standard error printed; both figures are printed. The cost of this step is measured in R2.
@@ -522,6 +560,7 @@ Read against `SEED_REGISTRY_R4.md`, section 5 item 3: the next free data blocks 
 | Bootstrap | 400008 |
 | Power simulation | 400009 |
 | Sampling seeds (nuisance) | 400011, 400012 |
+| Scorer hand-label sample | 400013 |
 | Reserved for M5's sealed draw; not used in M0 | 400031 |
 | Reserved for the composition supplement; not used in M0 | 400032 |
 | Rehearsal and dry-profile draws | 409001–409099 |
@@ -538,12 +577,12 @@ Per-evaluation, per-family, per-cluster and per-level streams are derived by SHA
 
 | Stage | Content | Needs |
 |---|---|---|
-| I0-a | Locked environment only: generators, solvers, scorers, analysis, and their tests. No download, no package | Decision 1 |
+| I0-a | Locked environment only: generators, solvers, scorers, analysis, and their tests. No download, no package. Analysis and power simulation use the standard library and the locked `torch` only. `numpy` is not in the lock | Decision 1 |
 | G-gen | Generator gates of section 6.2 (validity, reproducibility, capacity, disjointness); the registry check. It may be rehearsed under Decision 1 at the proposed numbers. Its record of record, which freezes the generators, is made only at his G and his domain list, and is made again if either changes | Decision 1; for the record: choices 2 and 10 (G) |
 | D0a | Resolve and install the packages, with ledger rows | The human lead's choice 8 |
 | I0-b | Harness and loaders (or, under option 3, the model code and its equivalence gates), tested on a tiny random model | Choice 8; D0a |
 | D0b | Clerk's download inventory. Each licence re-read at its source and its text hashed. The repository-code check. Then weights and dataset files | Choices 1, 2, 7, 11 and 14; choice 6 if an image is pulled |
-| G-load | Load without repository code; precision; numerical check; memory and batch sizes; template rendering and token ids; repeat identity | D0b; I0-b; the memory numbers of section 14 (choice 10) |
+| G-load | Load without repository code; precision; numerical check; memory and batch sizes; template rendering and token ids; repeat identity | D0b; I0-b; G-gen's record of record; the memory numbers of section 14 (choice 10) |
 | R1 | Tuning: format choice, level ranges and worked-mode token limit, by code; scores sealed; scorer hand-label test | G-load; **choice 3 (δ_e)**; choice 9 (band); choice 5 (rehearsal cap); choice 13 |
 | R2 | Measuring rehearsal; caps written by code into the candidate plan | R1; choice 5 |
 | R3 | Counting rehearsal: every registered stage end to end in the dry profile against the candidate plan; repeat identity again | R2 |
@@ -580,10 +619,10 @@ Charged hours: a stage supervisor's wall clock (ADR-0031 §17). **Every number i
 | **Per-reference ceiling: 72 charged hours** of the registered measurement | Budget ceiling | Above it: section 10.1, COST |
 | **Whole registered measurement: 168 charged hours** | Budget ceiling | Above it the lead returns to the human lead before Decision 2. The battery is not cut |
 | Memory: 34 GiB peak footprint for the M0 process; 24 GiB in the batch-size rule; 4 GiB free beyond a model's need before loading and between batches | Resource cap | Sections 7, 10.1 and 11 |
-| Sizes: G at least 300 clusters per private part; 1,500 scored per part; pools 4,000 and 20,000; public development 1,650 and reserve 1,000; nuisance 150; tuning 100 per level, 50 per part for the format choice | Design ceiling | G is fixed before G-gen's record. Nothing is extended after the freeze. The sealed pool may be raised before any sealed score, never lowered |
+| Sizes: G = every lineage that passes the G-gen gates, with a registered minimum of 300 per private part; 1,500 scored per part; pools 4,000 and 20,000; public development 1,650 and reserve 1,000; nuisance 150; tuning 100 per level, 50 per part for the format choice | Design ceiling | G is fixed before G-gen's record. Nothing is extended after the freeze. The sealed pool may be raised before any sealed score, never lowered |
 | Simulation: 20,000 samples per size; 2,000 for the confirmation; bootstrap 10,000 resamples | Design value | Fixed at the freeze |
 | Token limits: 32 (direct); worked from {384, 512, 768, 1,024} at a 2 % limit-hit rate; prompt 2,048 | Design value | Section 7 |
-| Margin grid {0.02, 0.03, 0.05}; alpha 0.05; power 0.8; cap fraction ½; band 0.10 and 0.90; 336 hours; active-compute bound 1.25 | Thresholds | The band before R1; all fixed at the freeze. Never changed after a score exists |
+| Margin grid {0.02, 0.03, 0.05}; alpha 0.05; power 0.8; cap fraction ½; band 0.10 and 0.90; 336 hours; active-compute bound 1.25; planning worst-case τ 0.10 | Thresholds | The band before R1; all fixed at the freeze. Never changed after a score exists |
 
 The registered measurement happens once. No outcome is a reason to add items, formats, seeds or models. A further measurement would be a later study with its own specification.
 
@@ -611,9 +650,9 @@ Each is his. None is taken by approving this specification under the delegation.
 5. **Budget ceilings:** 72 hours per reference, 168 hours in all, 48 hours of rehearsal, 336 hours for the M5 projection flag (recommended as proposed).
 6. **Starting Docker (Colima)** or another container tool, for C2 only; what it would need is in section 6.3. Recommended: not in M0.
 7. **ANLI's non-commercial licence** for local research use. Recommended: accept; without it L1 is smaller and more likely underpowered.
-8. **How the models are run:** (1) a lockfile amendment; (2) a separate hash-pinned file; (3) **re-implementation in plain torch on the locked environment, verified once against the library (recommended, with its cost: section 5)**. The lead cannot take this choice.
+8. **How the models are run:** (1) a lockfile amendment (recommended by nobody); (2) a separate hash-pinned file (**the reviewer's recommendation, for M0**); (3) re-implementation in plain torch on the locked environment, verified once against the library (**the drafter's recommendation**). Both recommendations, with reasons and costs, are in section 5; neither is chosen for him. The lead cannot take this choice.
 9. **Floor and ceiling:** the band 0.10 and 0.90, and reading it per pair (recommended, with the rule that such a pair cannot pass) or per evaluation as ADR-0032 words it.
-10. **Every number of section 14**, among them: **G, at least 300 clusters per part, before the generators are frozen**; the sealed pool size, 20,000 per part; alpha 0.05, power 0.8, the cap fraction ½, which ADR-0032 already lists as his.
+10. **Every number of section 14**, among them: **the minimum G, proposed 300 lineages per part, before the generators are frozen**; **the planning worst-case τ, proposed 0.10**; the sealed pool size, 20,000 per part, knowing that with these three numbers a 3-point margin is not reachable in the worst case (section 8); alpha 0.05, power 0.8, the cap fraction ½, which ADR-0032 already lists as his.
 11. **A model that needs repository code**, if the gate finds one. Recommended: none.
 12. **The smaller design** of section 11. Recommended: no.
 13. **System message (new; Review 1, C2).** (a) Each template's own default (as drafted); (b) one identical neutral system message for every model, which replaces Qwen's default persona and makes the prompts more nearly identical. Whichever is not the rule is measured as a nuisance variation. No recommendation from the reviewer; the drafter's is (a), because ADR-0032 section 4 names each model's published template.
@@ -621,8 +660,10 @@ Each is his. None is taken by approving this specification under the delegation.
 15. **Retention tests in the M5 conjunction (new; Review 1, C8; PENDING LEAD REVIEW).** Recommended, the reviewer's reading: if M5 scores retention on sealed splits, those tests join the conjunction, and the sealed sizes may only rise for it.
 16. **NO HARM where S₀ is at floor (new; Review 1, C10; PENDING LEAD REVIEW).** Recommended, the reviewer's reading: the test stays in the gate, and every line that prints it on such a part says it is nearly vacuous there.
 17. **When composition items are frozen (new; Review 1, R15).** (a) Before any S is trained, that is before M1b (recommended; ADR-0032 section 7 says "before S exists"); (b) before any S taught by both teachers exists, that is before M4.
+18. **The cluster floor: point estimate or upper bound of τ (new; Review 2, N1; PENDING LEAD REVIEW).** (a) The point estimate τ̂, as the approved rule uses d_e; (b) **the upper bound of τ̂'s 90 % interval (the lead's recommendation: the conservative option)**, because τ̂ from about 5 items per cluster is imprecise. M0 prints both until he decides.
+19. **Lineages as strata instead of clusters (new; Review 2, N7; PENDING LEAD REVIEW; listed for him only).** It would remove the τ floor of section 8. It would also amend the approved power rule, whose inference target is other templates of the same kind. The lead does not propose it and cannot take it.
 
-**What the drafter could not settle from the records:** whether the pinned library loads every model of the chosen set with built-in classes; whether torch 2.8.0 runs them in bfloat16 on MPS; whether greedy generation on MPS repeats exactly; any generation rate on this stack; τ, the between-cluster spread that decides whether G = 300 is enough; whether 300 distinct rule shapes per part can be written for every private evaluation; the SuperGLUE per-task licences.
+**What the drafter could not settle from the records:** whether the pinned library loads every model of the chosen set with built-in classes; whether torch 2.8.0 runs them in bfloat16 on MPS; whether greedy generation on MPS repeats exactly; any generation rate on this stack; τ, the between-cluster spread that decides whether G = 300 is enough; whether 300 distinct lineages (hand-written base rules) per part can be written for every private evaluation; the SuperGLUE per-task licences.
 
 ## 17. Decisions and approval record
 
@@ -640,7 +681,8 @@ Decision 1 takes none of the choices of section 16. It covers D0b, G-load, R1, R
 | The package route | 8 | D0a, I0-b: no package is installed, no harness or model code is written |
 | The model list, S₀ and the bounds on S | 1 | D0b: no model is fetched |
 | The domain list; ANLI's licence; any repository code | 2, 7, 11 | D0b: no dataset is fetched. G-gen's record |
-| G, the clusters per part | 10 | G-gen's record: the generators are not frozen |
+| The minimum G (lineages per part); the planning worst-case τ | 10 | G-gen's record: the generators are not frozen |
+| The smaller design | 12 | F (the scored size per part) |
 | The WikiText-2 ledger ruling | 14 | D0b's inventory |
 | Starting Colima | 6 | Any image pull; C2 |
 | Any model or dataset download | 1, 2, 7 | D0b. Within the standing limit a download needs no further asking once its licence has been re-read at the source, but which models and datasets is his |
@@ -648,7 +690,7 @@ Decision 1 takes none of the choices of section 16. It covers D0b, G-load, R1, R
 | The band; the rehearsal cap; the system message | 9, 5, 13 | R1 |
 | Every other config number | 5, 10 | F |
 | **Decision 2** | 4 | M. Recorded in `results/m0-freeze-<date>/DECISION_2.md`, after the rehearsal record, the auditor's agree, the implementation audit, the cost projection and the freeze record. **Not given.** |
-| Retention in the conjunction; NO HARM at floor; composition timing | 15, 16, 17 | Nothing in M0 waits; they change what M0 prints and what later rungs inherit |
+| Retention in the conjunction; NO HARM at floor; composition timing; the τ floor; lineages as strata | 15, 16, 17, 18, 19 | Nothing in M0 waits; they change what M0 prints and what later rungs inherit |
 
 - Grounds stated in advance for not running after Decision 1: an engineering stop of section 10.7, or a projection above a ceiling that he declines to extend. A refusal on another ground is recorded with its reason before any development score is read: NOT RUN (DECISION 2 REFUSED: reason).
 - If the independent recomputation disagrees with the frozen analysis, the frozen outcomes are recorded as written with the disagreement beside them; nothing is changed without a recorded amendment.
@@ -673,7 +715,7 @@ The last column gives Review 1's ruling on each departure.
 | 6 | Section 4 margin: recommended that δ_e be fixed "in M0's specification" | This document cannot contain δ_e: it is his and held for Monday. He fixes it before stage R1, i.e. before any model scores any item. If he has not fixed it, R1 waits | Human lead (choice 3) | Acceptable with R3 |
 | 7 | Section 4, Tier 2 (c), and "active compute per token" | Under the proposed bound (c) is S₀, by NO HARM, adding no model and no test; S₀ is a parity reference in this role only. S's active compute cannot be measured before M1a; the bound is a defined parameter count used only to choose a reference | Human lead (choice 1) | Acceptable with R14 |
 | 8 | Section 4: floor and ceiling per evaluation | Read per (reference, evaluation part); such a pair cannot pass, so PARITY is never easier to print | Human lead (choice 9) | Acceptable with R13 |
-| 9 | M0 row: "an amendment to `uv.lock` and `pyproject.toml`" | Three routes are put to him. Any of them is an amendment in substance. Recommended to him: option 3, which needs no change to the lock | **Human lead only (choice 8)** | Not acceptable as something the lead can take; B2 |
+| 9 | M0 row: "an amendment to `uv.lock` and `pyproject.toml`" | Three routes are put to him. Any of them is an amendment in substance. Two recommendations are put beside them (the reviewer's, option 2; the drafter's, option 3); neither changes the lock | **Human lead only (choice 8)** | Not acceptable as something the lead can take; B2 |
 | 10 | M0 row and section 9: the cumulative download total "counted and printed" | Printed (1.50 GB, the ledger on `main` being behind), with a clerk inventory gate and the unledgered WikiText-2 bytes put to him | Lead; clerk; human lead (choice 14) | Acceptable with R10 |
 | 11 | Section 7: complementarity "for each domain" | Measured per evaluation part; the domain line gives three readings and leaves the choice to section 7's approval | Human lead | Acceptable |
 | 12 | Section 4: Tier 2 (b), "the strongest available conventional model of the student's family" | Read as the largest of the same release series under the bound | Human lead (choice 1) | Acceptable |
@@ -681,7 +723,7 @@ The last column gives Review 1's ruling on each departure.
 
 ## 20. Review record
 
-**Review 1** (`docs/reviews/adr-0033-m0-2026-11-20/REVIEW_1.md`, SHA-256 `f7aef8b81602fd8881c3a1431a1ed600df466250d7bc1be9d066cd794b7c1e6c`; `arbor-auditor`, Claude Opus 5.5) read draft 1 at commit `c89c1f2`. Verdict: READY AFTER THE LISTED EDITS. The scientific lead accepted B1, B2 and R1 to R17 with the reviewer's wording, and C1 to C11. Revision 2 has not been reviewed.
+**Review 1** (`docs/reviews/adr-0033-m0-2026-11-20/REVIEW_1.md`, SHA-256 `f7aef8b81602fd8881c3a1431a1ed600df466250d7bc1be9d066cd794b7c1e6c`; `arbor-auditor`, Claude Opus 5.5) read draft 1 at commit `c89c1f2`. Verdict: READY AFTER THE LISTED EDITS. The scientific lead accepted B1, B2 and R1 to R17 with the reviewer's wording, and C1 to C11. **Review 2** (`REVIEW_2.md` in the same folder, SHA-256 `0e2a2648efae5b4fc364622e9ef78d25211c44cb9d8751be4ea6d99cfed97239`; the same reviewer) read revision 2 at commit `44879b4`. Gating answer: yes, after the listed edits; N1 blocking, an error in the wording Review 1 gave for B1, which revision 2 had adopted verbatim. It ruled the drafter's seven departures acceptable, three of them with edits (N3, N4, and the registered seed for hand labels). The scientific lead accepted N1 to N9 with the reviewer's wording. Revision 3 has not been reviewed.
 
 ### Review 1 findings and what was done
 
@@ -718,5 +760,20 @@ The last column gives Review 1's ruling on each departure.
 | C10 NO HARM nearly vacuous at floor | PUT TO THE HUMAN LEAD | Choice 16; the sentence in section 10.2 |
 | C11 sealed archive check | FIXED | Sections 8, 13 |
 | Departure 5 rewording | FIXED | Section 6.6; row 5 |
+
+### Review 2 findings and what was done
+
+| Finding | Status | Where; difference if any |
+|---|---|---|
+| N1 (blocking) shrinkage in the two-stage simulation; τ̂ with its interval | FIXED | Section 9.4, the reviewer's wording. The pending question (floor from an upper bound of τ) is choice 18, with the upper bound as the lead's recommendation; both are printed until he decides |
+| N2 corrected sizes | FIXED | Section 8: 20,418 and 23,125, above the pool; what that means and which numbers would have to move; the box; choice 10 |
+| N3 wider equivalence gate (option 3) | FIXED | Section 5 |
+| N4 generator frozen before G-load | FIXED | Sections 6.2 and 13 |
+| N5 box consistency; analysis on the locked environment | FIXED | The box; section 13 (I0-a); the `numpy` row of section 5 reworded to agree |
+| N6 choice 12 in the held table | FIXED | Section 17 |
+| N7 what G is and what a cluster is | FIXED | Section 6.2 (lineages); section 8 (the table); sections 14, 16, 17. The planning worst-case τ is put to the human lead to confirm (choice 10). Strata instead of clusters is choice 19, for him only |
+| N8 the A/B table is a list to re-read | FIXED | Section 4.2; the box |
+| N9 both package recommendations | FIXED | Section 5; choice 8; the box; row 9. Neither is chosen |
+| Departure 4 edit: hand-label sample by registered seed | FIXED | Section 7; seed 400013 (section 12) |
 
 `SPEC: PENDING ASTRA REVIEW`. `Astra review: NOT_PERFORMED`.
