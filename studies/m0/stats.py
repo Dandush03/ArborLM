@@ -25,6 +25,8 @@ from studies.m0.core import derive_seed
 
 _N = NormalDist()
 
+MIN_CLUSTERS_BOOTSTRAP = 30  # below this many clusters the t-quantile branch replaces the percentile bootstrap (ADR-0033 section 9.2)
+
 
 def _betacf(a: float, b: float, x: float) -> float:
     """Continued fraction of the regularised incomplete beta function (modified Lentz)."""
@@ -73,6 +75,8 @@ def t_cdf(x: float, df: int) -> float:
 def t_quantile(p: float, df: int) -> float:
     """Exact Student t quantile (bisection on ``t_cdf``; audit C1 replaced the Cornish-Fisher series, which was
     anti-conservative below df 5)."""
+    if not 0.0 < p < 1.0:
+        raise ValueError(f"t_quantile needs 0 < p < 1, got {p}")
     if p == 0.5:
         return 0.0
     if p < 0.5:
@@ -218,7 +222,7 @@ def interval(
     b: int,
     seed: int,
     label: str,
-    min_clusters_bootstrap: int = 30,
+    min_clusters_bootstrap: int = MIN_CLUSTERS_BOOTSTRAP,
 ) -> Interval:
     """Interval of ``stat`` of the column means. ``linear`` names an item-level column whose mean equals the statistic
     when the statistic is linear (used for the t branch); a derived statistic passes a linearisation."""
@@ -299,7 +303,7 @@ def union_gain(table: Table, t1: str, t2: str, b: int, seed: int, label: str = "
     best = t1 if s1 >= s2 else t2  # ties go to the first teacher named
     cbest = _col(best)
     lin = f"g_{t1}_{t2}"
-    if table.n_clusters() < 30:
+    if table.n_clusters() < MIN_CLUSTERS_BOOTSTRAP:
         # t branch (audit R1): G_U = min over the two teachers of (U - score of that teacher); the smaller of the two one-sided
         # t bounds is a valid 95 % lower bound of the minimum, whichever teacher is the better one
         los = []

@@ -106,3 +106,24 @@ def test_oracle_with_positive_tau_recovers_the_known_power() -> None:
             got.append(pw.simulate_power(dataclasses.replace(comp, tau2=t2, lam=lam, dev=dev), 6000, [sc.delta], 300, 300, 953303, label=f"p{i}")[sc.delta][0])
         known, _ = kt.truth_power(sc, 300, 6000, 4000, 953303)
         assert abs(fmean(got) - known) < 0.06, (name, fmean(got), known)
+
+
+def test_oracle_is_sensitive_to_dropping_the_cluster_deviations_at_high_tau() -> None:
+    """Audit follow-up on R5: with tau = 0.10 the between-cluster spread dominates, so a simulation without the cluster
+    deviations is far from the known power while the oracle is close to it."""
+    sc = kt.Scenario("S7", 0.30, 0.10, "balanced5", 0.015)
+    rng = random.Random(79)
+    with_dev, without = [], []
+    for i in range(20):
+        comp = pw.components(kt.synthetic_m0(sc, 300, rng))
+        t2 = sc.tau**2
+        lam = tuple(math.sqrt(t2 / (t2 + comp.s_w2 / m)) for m in comp.m_g)
+        xbar = fmean(comp.mean_g)
+        dev = tuple(lam[j] * (comp.mean_g[j] - xbar) for j in range(300))
+        full = dataclasses.replace(comp, tau2=t2, lam=lam, dev=dev)
+        flat = dataclasses.replace(full, dev=(0.0,) * 300)
+        with_dev.append(pw.simulate_power(full, 6000, [sc.delta], 300, 300, 953304, label=f"a{i}")[sc.delta][0])
+        without.append(pw.simulate_power(flat, 6000, [sc.delta], 300, 300, 953304, label=f"b{i}")[sc.delta][0])
+    known, _ = kt.truth_power(sc, 300, 6000, 4000, 953304)
+    assert abs(fmean(with_dev) - known) < 0.06, (fmean(with_dev), known)
+    assert abs(fmean(without) - known) > 0.15, (fmean(without), known)

@@ -1,5 +1,5 @@
 # ruff: noqa: E501
-"""M0 stage I0-a: tests for the implementation defects of docs/reviews/adr-0033-m0-2026-11-20/AUDIT_I0A.md that hold under
+"""M0 stage I0-a: tests for the implementation defects of experiments/_scratch/audits/AUDIT_M0_I0A.md (git-ignored scratch) that hold under
 either design (B1, R1, R3, R4, R5, R7, C1 to C5). Each test failed before its fix. B2, R2 and R6 are NOT fixed here (they
 depend on the design decision or on a separate context) and have no test. Self-checked only."""
 
@@ -140,3 +140,16 @@ def test_c4_the_same_cluster_id_in_two_strata_is_refused() -> None:
 
 def test_c5_a_capacity_failure_is_worded_as_not_shown() -> None:
     assert "not shown" in ggen.CAPACITY_FAILURE_MEANING and "cannot" in ggen.CAPACITY_FAILURE_MEANING
+
+
+def test_followup_t_quantile_refuses_p_outside_the_open_unit_interval() -> None:
+    for bad in (0.0, 1.0, -0.1, 1.5, float("nan")):
+        with pytest.raises(ValueError, match="0 < p < 1"):
+            st.t_quantile(bad, 10)
+
+
+def test_followup_the_thirty_cluster_cutoff_is_one_named_constant_equal_to_the_config() -> None:
+    assert st.MIN_CLUSTERS_BOOTSTRAP == cfgmod.load()["stats"]["min_clusters_for_bootstrap"] == 30
+    text = (ROOT / "studies" / "m0" / "stats.py").read_text()
+    assert text.count("MIN_CLUSTERS_BOOTSTRAP") >= 3  # the definition and both uses
+    assert "< 30" not in text and "= 30,\n" not in text
