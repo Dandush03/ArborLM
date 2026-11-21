@@ -51,6 +51,12 @@ _P10IS3_STALE_AFTER_LATER_STUDIES = (
 )
 
 
+# Added 2026-11-20 with P10-I-S2 Part T ruling 40. This parametrized row asserts that `caps.measuring_rehearsal_hours` equals the 3.0 h ADR-0025 section 10 states. Section 10 also says "the figure may be raised
+# once, to twice, by the lead"; ruling 40 (docs/decisions/ADR-0025-addendum-part-t-rulings-9.md) took that one extension, so the config holds 6.0. The existing test file is not edited; this one row (matched by its
+# full parametrized id) is a strict expected failure, and tests/test_p10is2_partt_ruling40.py pins the 6.0.
+_P10IS2_PARTT_RULING_40 = ("tests/test_p10is2_config.py::test_part_t_threshold_equals_the_adr[caps.measuring_rehearsal_hours-3.0-10-**3.0 charged hours for Part Q, 3.0 for Part T**]",)
+
+
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_FREEZE:
@@ -65,3 +71,5 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="another study's own registered seeds are in the merged repository; P10-I-S3's frozen seed gate does not know them; the gate passed in its own tree at the freeze"))
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_LATER_STUDIES:
             item.add_marker(pytest.mark.xfail(strict=True, reason="a later study's own registered seeds are in the repository: P10-I-R's whole-repository checker run reports them; each later study's own seed gate covers them"))
+        if item.nodeid in _P10IS2_PARTT_RULING_40:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="ruling 40 took the one extension ADR-0025 section 10 allows (3.0 h to 6.0 h); the row pins the unextended figure"))
