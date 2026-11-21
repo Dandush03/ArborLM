@@ -1,0 +1,181 @@
+# ArborLM progress scorecard: the source of truth for the chart in README.md.
+#
+# The SCORES are the human lead's working estimate of how close each requirement of the target
+# architecture is to being met. They are a planning aid. They are not registered results and not
+# success claims. The EVIDENCE lines quote registered labels and link to their records.
+#
+# How to update (on every merge to main that adds or changes a registered outcome):
+#   1. edit the row(s) below: evidence and next always; the score only when the human lead changes it
+#      or confirms a proposed change;
+#   2. set `updated` and `basis`;
+#   3. run `uv run --locked python docs/scorecard/render_scorecard.py`;
+#   4. commit this file, docs/scorecard/scorecard.svg and README.md together.
+# `uv run --locked python docs/scorecard/render_scorecard.py --check` fails when they are out of step
+# (tests/test_scorecard.py runs it).
+
+updated = "2026-11-21"
+basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6"
+scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
+
+[[row]]
+title = "External memory improves prediction"
+score = 7  # lowered from 8 by the human lead on 2026-11-19: the flat memory has not had its own dependence controls
+note = "Shown with a frozen backbone; the flat memory's dependence control passes before convergence, through harm."
+evidence = [
+  "P4: registered capacity and slot-association criteria passed on a frozen backbone ([results](results/p4-2026-11-12/)).",
+  "P10-I-S3 line 1: DEPENDENT on fresh data, read on the tree memory, not converged; the control passes largely because wrong values hurt ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
+  "P10-I-S6: D[FLAT] DEPENDENT at 262,144 updates, not converged and not dependence-qualified; it passes through harm (wrong values hurt), and reading the mean value row loses the gain ([outcome](results/p10i-s6-run-2026-11-20/OUTCOME.md)).",
+]
+next = "The flat memory's dependence at convergence is still unread: P10-I-S6 did not reach convergence. No study for it exists yet."
+
+[[row]]
+title = "Reliable learned addressing"
+score = 7
+note = "Qualified up to one fact per slot on synthetic records; overload unresolved; natural contexts untested."
+evidence = [
+  "P10-S0: ADDRESSING-QUALIFIED (4,096 AND 16,384); OVERLOAD NOT QUALIFIED; 65,536 slots a probe only ([outcome](results/p10s0-run-2026-11-16/OUTCOME.md)).",
+  "P10-I-S0: OVERLOAD UNRESOLVED AT load 2 (CONVERGENCE NOT SHOWN); ADDRESSING QUALIFIED UP TO 1 fact per slot; licence loads 0.5 and 1.0 only; independently recomputed ([outcome](results/p10is0-run-2026-11-18/OUTCOME.md)).",
+]
+next = "Above one fact per slot nothing is licensed: 8K facts in 4K slots held in 2 of 10 cells, with convergence not shown after a budget refusal. Natural contexts: no study yet."
+
+[[row]]
+title = "Quality versus dense alternatives"
+score = 5
+note = "Flat memory led dense at 16,384 updates; the lead shrank by 262,144 and neither had converged."
+evidence = [
+  "P10-I-S3 line 2 [FLAT]: MEMORY AHEAD (DENSE STILL IMPROVING), mean lead +0.0127 against 0.005, 27 of 27 cells ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
+  "P10-I-S6: CONVERGENCE NOT REACHED (BOTH STILL IMPROVING) at 262,144 updates; descriptive only: LEAD SHRINKING, mean lead +0.0124 at 16,384 updates and +0.0068 at 262,144; independently recomputed; accepted as registered ([outcome](results/p10i-s6-run-2026-11-20/OUTCOME.md), [acceptance](results/p10i-s6-run-2026-11-20/ACCEPTANCE.md)).",
+  "P10-I-S3 line 2 [TREE]: INCONCLUSIVE (MEMORY RATE AT EDGE). P10-I-R: the tree is behind the flat memory and no read-time cause is identified ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
+]
+next = "The ordering at convergence is unknown: sixteen times the duration was not enough, and at the last rung both arms improve per doubling by more than the lead. No further study exists yet. The tree needs a training study that does not exist."
+
+[[row]]
+title = "Useful capacity scaling"
+score = 3
+note = "Still inconclusive; larger stores have not proven superior capacity."
+evidence = [
+  "P10-S1: CAPACITY-INCONCLUSIVE; SATURATION-INCONCLUSIVE; the 16,384 to 65,536 step NOT TESTED ([results](results/p10s1-run-2026-11-17/)).",
+]
+next = "P10-I-S1 (capacity): calibrated, not yet frozen; blocked on a quiet-machine limit this machine does not reach."
+
+[[row]]
+title = "Sequential learning from teachers"
+score = 1
+note = "Both teachers now qualify; no student transfer experiment completed yet."
+evidence = [
+  "P10-S2: TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED; the transfer question was not tested ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)).",
+  "P10-I-S2 Part Q: TEACHERS-QUALIFIED (DISJOINT DRAWS) on the third registered attempt, independently recomputed; a qualification of teachers and training material, not a transfer result ([outcome](results/p10is2-partq-run-20261119-attempt3/OUTCOME.md)).",
+]
+next = "P10-I-S2 Part T (the transfer itself): implemented, never audited or run; its implementation audit is under way, then rehearsals and a registered run."
+
+[[row]]
+title = "SSD-backed neural-memory advantage"
+score = 2
+note = "Physical SSD costs measured, but no neural-memory SSD comparison."
+evidence = [
+  "P10-I-S5 (engineering only): BYTES CONFIRMED EXACTLY; CONTIGUOUS REQUEST CHEAPER PER PAGE; scientific part NOT EVALUABLE (PREREQUISITES NOT MET) ([outcome](results/p10is5-run-2026-11-18/OUTCOME.md)).",
+]
+next = "P10-II-S5: page traces and drive reads of trained stores (drafted, not approved). A scientific claim still needs learned addressing at a size where storage matters."
+
+# The six rows below were added on 2026-11-19 at the human lead's request ("add them to our working
+# progress chart so we wont miss them"): theories the target architecture depends on that no row covered.
+# Their starting scores were proposed by the lead (Claude) and await the human lead's confirmation.
+
+[[row]]
+title = "Works on a real pretrained student"
+score = 0
+note = "Untested: every result so far uses the project's own small byte-level backbone."
+evidence = [
+  "No study yet. The frozen backbones of P4 to P10-I are trained in this repository on byte-level text ([research handoff](docs/RESEARCH_HANDOFF.md)).",
+]
+next = "Attach the flat memory to a small pretrained model, train on text it has not seen, compare with an adapter of equal size."
+
+[[row]]
+title = "Generalises beyond stored items"
+score = 2
+note = "Mostly recall of stored items so far; held-out templates failed under overload."
+evidence = [
+  "P10-S0: qualified at 4,096 and 16,384 slots including held-out templates, but the overload failures are on held-out templates alone ([outcome](results/p10s0-run-2026-11-16/OUTCOME.md)).",
+  "P10-I-R: every label carries RECALL OF TRAINED RANDOM FACTS and DICT DOMINATES ON THIS TASK ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
+]
+next = "Score only on held-out items and paraphrases, with a plain dictionary as a baseline. P10-I-S0 (running) reads held-out templates under overload."
+
+[[row]]
+title = "Beats plain retrieval"
+score = 0
+note = "Untested: the memory has only been compared with dense adapters."
+evidence = [
+  "No comparison with a non-learned retrieval store exists. P10-I-R notes that a dictionary dominates on its task ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
+]
+next = "Add a retrieval baseline (stored items fetched by similarity, no training) to the quality comparison."
+
+[[row]]
+title = "Local (sparse) memory updates"
+score = 0
+note = "Untested: an update is an optimiser step that moves many rows, not a single write."
+evidence = [
+  "No registered measurement of what one update changes. P10-I-S5 excluded writes ([outcome](results/p10is5-run-2026-11-18/OUTCOME.md)).",
+]
+next = "Measure rows changed per update (P10-II-S5, Part U, drafted); then test a write rule that touches only the addressed rows."
+
+[[row]]
+title = "Scalable read for the flat memory"
+score = 1
+note = "The flat memory scores every key; an index built afterwards needs about an eighth of the store."
+evidence = [
+  "P10-I-R: INDEX APPROACHES FLAT ONLY ABOVE 512; about N/8 candidates needed at 32K facts / 16K slots; for the tree, EXACT SEARCH HARMS ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
+]
+next = "A training study: an index or a tree trained with the memory (wider or soft routing, re-indexing). None exists or is authorised."
+
+[[row]]
+title = "Teachers complement each other"
+score = 0
+note = "Untested: how often one teacher is right where the other is wrong."
+evidence = [
+  "No measurement. P10-S2 ended TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)).",
+]
+next = "Run both frozen teachers on one benchmark and record each score, the either-right ceiling and the both-right floor, before any transfer."
+
+# The four rows below were added on 2026-11-20 at the human lead's request ("let's add does metric to the readme chart as well"),
+# after his statements of that day: capability parity is mandatory, and self-learning is a research direction in three parts
+# (docs/reviews/adr-0032-model-level-2026-11-20/). Every row above is COMPONENT evidence on a small byte-level backbone and
+# does not add up to the first row below. His properties 2, 3 and 4 are tracked by the rows "Teachers complement each other" and
+# "Sequential learning from teachers" (2), "Sequential learning from teachers" (3), and "Useful capacity scaling",
+# "SSD-backed neural-memory advantage", "Local (sparse) memory updates" and "Scalable read for the flat memory" (4).
+# Starting scores proposed by the lead (Claude); they await the human lead's confirmation.
+
+[[row]]
+title = "Capability parity with reference models"
+score = 0
+note = "Mandatory and untested: no pretrained model has had the memory attached, and no task-level evaluation has been run."
+evidence = [
+  "No study yet. Every result above uses one measure, predictive loss, on a 27,392-parameter byte-level backbone; it does not establish parity with any pretrained model ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md), not approved).",
+]
+next = "Measure the reference models themselves on independent evaluations (proposed test M0, not approved), then the first contact of the memory with a real student."
+
+[[row]]
+title = "Self-optimisation of memory and computation"
+score = 0
+note = "Untested: whether the system can learn better retrieval, layout, indexing, updates or consolidation without losing quality."
+evidence = [
+  "No study yet. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)).",
+]
+next = "A staged, preregistered test against an outside search given the same compute; to be proposed for approval."
+
+[[row]]
+title = "Self-directed capability learning"
+score = 0
+note = "Untested: whether the system can set itself useful challenges, use independent feedback and keep the gains without a larger teacher."
+evidence = [
+  "No study yet, and no system capable enough to test it exists. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)).",
+]
+next = "Needs a real student that has first acquired a capability from a teacher; then a bounded, preregistered single cycle."
+
+[[row]]
+title = "Sustained improvement across cycles"
+score = 0
+note = "Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit."
+evidence = [
+  "No study yet. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)).",
+]
+next = "Needs a single self-directed cycle shown first; then a fixed number of bounded cycles scored on evaluations the process cannot see."

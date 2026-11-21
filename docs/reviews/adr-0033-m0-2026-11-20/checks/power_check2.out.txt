@@ -1,0 +1,26 @@
+== A. Review 1's figure (tau=0.10, G=300, delta=0.03, d=0.3), product vs Boole
+  M=55 product: z=4.293 n=   19349
+  M=55 Boole  : z=4.329 n=   20418
+  M=70 product: z=4.373 n=   21856
+  M=70 Boole  : z=4.409 n=   23125
+== B. Smallest delta reachable (Boole, M=55, d=0.3) at n=20,000 and at n=infinity
+  tau=0.03: G=60: 0.0237/0.0168  G=150: 0.0198/0.0106  G=300: 0.0184/0.0075  G=600: 0.0176/0.0053  G=1200: 0.0172/0.0037
+  tau=0.05: G=60: 0.0326/0.0279  G=150: 0.0244/0.0177  G=300: 0.0209/0.0125  G=600: 0.0190/0.0088  G=1200: 0.0179/0.0062
+  tau=0.1: G=60: 0.0583/0.0559  G=150: 0.0391/0.0353  G=300: 0.0301/0.0250  G=600: 0.0244/0.0177  G=1200: 0.0209/0.0125
+  tau=0.15: G=60: 0.0855/0.0838  G=150: 0.0556/0.0530  G=300: 0.0411/0.0375  G=600: 0.0314/0.0265  G=1200: 0.0251/0.0187
+== C. Between-cluster SD seen by naive two-stage resampling vs shrunk resampling
+  G=300 m_obs=5 true tau=0.05: naive resampled between-SD=0.2514; method-of-moments tau_hat=0.0689; shrink factor=0.274
+    naive : SE floor=0.0145; max per-test power at delta=0.03=0.6634 (need 0.9964)
+    shrunk: SE floor=0.0040; max per-test power at delta=0.03=1.0000 (need 0.9964)
+    true  : SE floor=0.0029; max per-test power at delta=0.03=1.0000 (need 0.9964)
+    approx SE of tau^2_hat = 0.0052 (tau^2_hat = 0.0047)
+  G=60 m_obs=25 true tau=0.05: naive resampled between-SD=0.1326; method-of-moments tau_hat=0.0748; shrink factor=0.564
+    naive : SE floor=0.0171; max per-test power at delta=0.03=0.5428 (need 0.9964)
+    shrunk: SE floor=0.0097; max per-test power at delta=0.03=0.9281 (need 0.9964)
+    true  : SE floor=0.0065; max per-test power at delta=0.03=0.9987 (need 0.9964)
+    approx SE of tau^2_hat = 0.0032 (tau^2_hat = 0.0056)
+  G=300 m_obs=5 true tau=0.0: naive resampled between-SD=0.2484; method-of-moments tau_hat=0.0656; shrink factor=0.264
+    naive : SE floor=0.0143; max per-test power at delta=0.03=0.6726 (need 0.9964)
+    shrunk: SE floor=0.0038; max per-test power at delta=0.03=1.0000 (need 0.9964)
+    true  : SE floor=0.0000; max per-test power at delta=0.03=1.0000 (need 0.9964)
+    approx SE of tau^2_hat = 0.0050 (tau^2_hat = 0.0043)
