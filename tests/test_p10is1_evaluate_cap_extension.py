@@ -107,7 +107,7 @@ def test_the_extension_refuses_an_approval_without_the_lead_words_or_the_machine
 
 
 def test_the_new_files_are_outside_every_frozen_root_and_do_not_match_the_decision_2_glob() -> None:
-    for f in (EXT / "APPROVAL.md", EXT / "apply_extension.py", EXT / "verify_resume_identity.py", ROOT / "docs" / "decisions" / "ADR-0024-addendum-evaluate-cap-extension.md", Path(__file__)):
+    for f in (EXT / "APPROVAL.md", EXT / "apply_extension.py", EXT / "verify_resume_identity.py", ROOT / "docs" / "decisions" / "ADR-0024-addendum-evaluate-cap-extension.md", ROOT / "docs" / "decisions" / "ADR-0024-addendum-analysis-loader-defect.md", ROOT / "results" / "p10is1-analysis-supplement-20261121" / "run_analysis_supplement.py", ROOT / "tests" / "test_p10is1_analysis_supplement.py", Path(__file__)):
         rel = f.relative_to(ROOT)
         assert not str(rel).startswith(tuple(("studies/p10is1", *planmod.IMPORTED_ROOTS, "configs/", "uv.lock"))), rel
         assert not rel.match(planmod.DECISION_2_GLOB), rel
@@ -135,6 +135,8 @@ def test_the_resume_identity_checks_pass_after_a_commit_outside_the_frozen_roots
     (repo / "results" / "p10is1-evaluate-cap-extension-20261121").mkdir(parents=True)
     (repo / "results" / "p10is1-evaluate-cap-extension-20261121" / "APPROVAL.md").write_text("approval\n")
     (repo / "docs" / "decisions" / "ADR-0024-addendum-evaluate-cap-extension.md").write_text("addendum\n")
+    (repo / "results" / "p10is1-analysis-supplement-20261121").mkdir(parents=True)  # the out-of-tree analysis driver's folder (a commit that adds it keeps the identity checks green)
+    (repo / "results" / "p10is1-analysis-supplement-20261121" / "run_analysis_supplement.py").write_text("x = 1\n")
     (repo / "tests").mkdir(exist_ok=True)
     (repo / "tests" / "test_x.py").write_text("x = 1\n")
     TR.git(repo, "add", "-A")
