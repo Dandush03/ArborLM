@@ -1,0 +1,7 @@
+n = 6,000 items (20 per cluster), G = 300; deltas chosen for mid-range power
+S1 balanced m=5, d=0.3, tau=0.05: true tau=0.05 mean tau_hat=0.0379 (range 0.0000-0.0902); known power=0.825 (MC se 0.009); pooled, m_bar formula=0.825 [0.733-0.885]; corrected wording=0.829 [0.707-0.903]
+S2 balanced m=5, d=0.3, tau=0   : true tau=0.0 mean tau_hat=0.0068 (range 0.0000-0.0410); known power=0.811 (MC se 0.009); pooled, m_bar formula=0.808 [0.787-0.822]; corrected wording=0.816 [0.792-0.847]
+S3 unbalanced,   d=0.3, tau=0.05: true tau=0.05 mean tau_hat=0.0425 (range 0.0000-0.1398); known power=0.825 (MC se 0.009); pooled, m_bar formula=0.344 [0.097-0.977]; corrected wording=0.812 [0.577-0.903]
+S4 s_w near 0,   d=0.02, tau=0.01: true tau=0.01 mean tau_hat=0.0091 (range 0.0000-0.0261); known power=0.674 (MC se 0.010); pooled, m_bar formula=0.661 [0.495-0.805]; corrected wording=0.661 [0.488-0.785]
+S5 s_w near 0.5, d=0.5, tau=0.05: true tau=0.05 mean tau_hat=0.0734 (range 0.0000-0.1451); known power=0.813 (MC se 0.009); pooled, m_bar formula=0.781 [0.660-0.882]; corrected wording=0.798 [0.707-0.883]
+S6 unbalanced,   d=0.3, tau=0   : true tau=0.0 mean tau_hat=0.0326 (range 0.0000-0.1175); known power=0.811 (MC se 0.009); pooled, m_bar formula=0.317 [0.058-0.957]; corrected wording=0.793 [0.727-0.832]
