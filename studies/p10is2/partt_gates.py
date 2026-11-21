@@ -23,6 +23,8 @@ from studies.p10s2.train import reads_of
 
 from . import engine, scoring
 from .common import core, gates
+from .partt_g8 import not_run as g8_not_run
+from .partt_mps_step import compare_steps
 
 TOL_REPEAT = 0.0
 
@@ -137,7 +139,9 @@ def g4_mps(world: engine.WorldT, spec: engine.CellSpec, cfg: Mapping[str, Any] |
     GATING: (1) every one of the ``g4_repeat_updates`` (20) per-update losses of the CPU run and the MPS run within ``mps_loss_tolerance`` = 1e-3 (absolute), the same cell (``spec``: M1, replicate 0, order AB) built
     twice from its listed seeds and trained on the same batches; (2) GRADIENT AGREEMENT AT IDENTICAL PARAMETERS: along the CPU run's trajectory, at each update before the optimiser step, the gradient of the same batch's
     loss on CPU and on MPS from the SAME parameter values; for every trainable tensor with ||g_cpu|| > 0, ||g_mps - g_cpu|| / ||g_cpu|| <= ``mps_gradient_relative_tolerance`` = 1e-3; where ||g_cpu|| is exactly 0,
-    ||g_mps|| must be exactly 0 (a violation fails the gate and is reported, never adjusted). The largest figure over tensors and updates is recorded with its tensor and update. RECORDED, NOT GATING: the old relative parameter
+    ||g_mps|| must be exactly 0 (a violation fails the gate and is reported, never adjusted). The largest figure over tensors and updates is recorded with its tensor and update. (3) OPTIMISER STEP (ruling 43, ``partt_mps_step``): identical parameters,
+    gradients and AdamW state on CPU and on MPS, one ``clip_grad_norm_`` plus ``AdamW.step`` each (fresh state; copied state; clipping active); the two updates agree relative to the step size within the same registered
+    ``mps_gradient_relative_tolerance``, with the exact-zero clause. RECORDED, NOT GATING: the old relative parameter
     difference after the 20 updates per tensor (``mps_parameter_relative_tolerance`` named as superseded) and the MPS-against-MPS repeat. SKIPPED (None) unless the world's device is MPS; a skipped gate is NOT a pass."""
     t = (cfg or core.load_config("T"))["gates"]
     updates = int(t["g4_repeat_updates"])
@@ -170,10 +174,11 @@ def g4_mps(world: engine.WorldT, spec: engine.CellSpec, cfg: Mapping[str, Any] |
     g_mps = gradients_along(world, spec, rows, traj, batches, world.device)
     grad = compare_gradients(g_cpu, g_mps, tensor_names(arm_cpu), t)
     loss = compare_runs(runs["cpu"], runs["mps"], t)
+    step = compare_steps(traj[0], [[g.float() for g in gu] for gu in g_cpu[:2]], tensor_names(arm_cpu), t, world.device, lr=float(opts["rate"]), weight_decay=float(world.cfg_t["training"]["weight_decay"]), clip=float(world.cfg_t["training"]["clip_norm"]))  # ruling 43: clipping and the AdamW step
     repeat = compare_runs(runs["mps"], runs["mps_repeat"], t)
-    ok = bool(loss["loss_ok"] and grad["passed"])
+    ok = bool(loss["loss_ok"] and grad["passed"] and step["passed"])
     return {
-        "passed": ok, "max_loss_difference": loss["max_loss_difference"], "loss_tolerance": loss["loss_tolerance"], "loss_ok": loss["loss_ok"], "gradient_agreement": grad,
+        "passed": ok, "max_loss_difference": loss["max_loss_difference"], "loss_tolerance": loss["loss_tolerance"], "loss_ok": loss["loss_ok"], "gradient_agreement": grad, "optimiser_step_agreement": step,
         "parameters_recorded_not_gating": {**{k: loss[k] for k in ("max_relative_parameter_difference", "parameter_relative_difference_per_tensor", "parameter_tolerance_superseded")}, "tensors": tensor_names(arm_cpu), "gating": False},
         "mps_repeat_recorded_not_gating": {"max_loss_difference": repeat["max_loss_difference"], "max_relative_parameter_difference": repeat["max_relative_parameter_difference"]},
         "updates": updates, "device": str(world.device),
@@ -260,9 +265,9 @@ def student_hash(student: Any) -> str:
     return "|".join(tensor_sha(p) for p in student.parameters())
 
 
-def g8(world: engine.WorldT, records: Mapping[str, Any] | None) -> dict[str, Any]:
+def g8(world: engine.WorldT, records: Mapping[str, Any] | None, q_record: Mapping[str, Any] | None = None) -> dict[str, Any]:
     if not records:
-        return {"passed": None, "skipped": "no equivalence record in the bundle (synthetic stand-in)"}
+        return g8_not_run(q_record)  # ruling 44: NOT RUN, never a pass; Part Q's step-1 verdicts are echoed
     res = equivalence.verify_all(world.student, dict(records))
     return {"passed": bool(res["ok"]), "detail": {k: v["ok"] for k, v in res["layers"].items()}}
 
@@ -303,7 +308,7 @@ def reach_of(world: engine.WorldT, arm: Any, rows: Sequence[Any]) -> dict[str, A
     return {"passed": bool(reach["arm_with_gradient"] == reach["arm_parameters"] and reach["student_with_gradient"] == 0), "reach": reach}
 
 
-def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False, q_check_keys: Sequence[str] | None = None) -> dict[str, Any]:
+def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, q_equivalence_record: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False, q_check_keys: Sequence[str] | None = None) -> dict[str, Any]:
     """Every gate on the world's data (the registered gates stage). Trains the small cells the gates need on CPU from their seeds; nothing registered is read."""
     spec = engine.CellSpec("M1", "AB", 0)
     arm, rows, opts = engine.build_cell_arm(world, spec, None)
@@ -319,9 +324,9 @@ def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, e
         world.device = keep
     out = {
         "G1": g1(world, q_check_keys=q_check_keys), "G2": g2(world, ma), "G4": {**g4_determinism(world, spec, int(cfg["gates"].get("g4_repeat_updates", 20))), "round_trip": g4_round_trip(world, copy.deepcopy(ma), snap_dir, "gate/M-append"), "reach_all_arms": g4_reach_all(world)}, "G4-MPS": g4_mps(world, spec, cfg), "G5": g5(world, ma), "G6": g6(world),
-        "G7": g7(f_before, ma, sh, world.student), "G8": g8(world, equivalence_records), "G9": g9(cfg, root) if run_checker else {"passed": None, "skipped": "checker not run"},
+        "G7": g7(f_before, ma, sh, world.student), "G8": g8(world, equivalence_records, q_equivalence_record), "G9": g9(cfg, root) if run_checker else {"passed": None, "skipped": "checker not run"},
     }  # fmt: skip
     del before
     out["G4"]["passed"] = bool(out["G4"]["passed"] and out["G4"]["reach_all_arms"]["passed"])  # the gate names gradient reach on every arm with a frozen part
     failed = [k for k, v in out.items() if v["passed"] is False or (require_mps and k == "G4-MPS" and v["passed"] is not True)]  # with ``require_mps`` a skipped MPS gate is a failure: it must have RUN and passed
-    return {"gates": out, "failed": failed, "status": "ENGINEERING-FAILURE" if failed else "PASSED", "skipped": [k for k, v in out.items() if v["passed"] is None]}
+    return {"gates": out, "failed": failed, "status": "ENGINEERING-FAILURE" if failed else "PASSED", "skipped": [k for k, v in out.items() if v["passed"] is None], "not_run": [k for k, v in out.items() if v.get("not_run")]}

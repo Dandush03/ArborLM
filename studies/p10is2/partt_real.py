@@ -34,6 +34,7 @@ from . import (
 )
 from . import labels as L
 from .common import core
+from .partt_g8 import q_equivalence_through_door
 from .quantities import CELLS, Quantities, Registry, Thresholds
 
 
@@ -395,7 +396,7 @@ def run_stage(stage: str, repo: Path, run_dir: Path, qdir: Path, plan: Any, mode
     snaps = run_dir / "snapshots"
     t0 = time.monotonic()
     if stage == "gates":
-        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode in ("registered", "rehearsal"), q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), q_equivalence_record=q_equivalence_through_door(door_of(plan, qdir)), root=repo, require_mps=mode in ("registered", "rehearsal"), q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
     elif stage == "train":
         out = partt_run.train_all(w, snaps, run_dir / "checkpoints", int(calib["U"]))
@@ -538,7 +539,7 @@ def run_task(stage: str, task_id: str, repo: Path, run_dir: Path, qdir: Path, pl
             reg_values = read_json(core.records_dir(run_dir) / "registry.json") if (core.records_dir(run_dir) / "registry.json").is_file() else {}
             result = {"combined": partt_run.combined_replicate(w, rep, snaps, pinned_orders=partt_run.rejected_orders(reg_values, rep, tol))}
     elif stage == "gates":
-        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), root=repo, require_mps=mode in ("registered", "rehearsal"), q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
+        out = partt_gates.run_gates(w, cfg, snaps / "gates", equivalence_records=(bundle_equivalence(qdir) or None), q_equivalence_record=q_equivalence_through_door(door_of(plan, qdir)), root=repo, require_mps=mode in ("registered", "rehearsal"), q_check_keys=(door_of(plan, qdir).q_check_keys() if door_of(plan, qdir) is not None else None))
         core.write_record(run_dir / "gates.json", {**core.envelope("gates", "T"), **core.jsonable(out)}, overwrite=True)
         result = {"gates": out["status"], "failed": out["failed"], "skipped": out["skipped"]}  # a failed gate is recorded in gates.json and makes the study status ENGINEERING-FAILURE; it is no item error
     else:
