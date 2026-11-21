@@ -1,0 +1,151 @@
+"""Independent recomputation of P10-I-S0's registered result from the raw cell records, written from ADR-0023 (d2ac14c text; sections 5.3, 6.2-6.7, 7, 8, 15).
+No studies.p10is0 import. Inputs (read-only): <run>/cells/*/result.json, <worktree>/studies/p10is0/freeze/{plan,durations}.json, the config's thresholds.
+Usage: python3 recompute.py RUN_DIR WORKTREE  -> JSON on stdout."""
+import json, math, sys, tomllib
+from fractions import Fraction as Fr
+from pathlib import Path
+
+RUN, WT = Path(sys.argv[1]), Path(sys.argv[2])
+plan = json.loads((WT / "studies/p10is0/freeze/plan.json").read_text())
+dur = json.loads((WT / "studies/p10is0/freeze/durations.json").read_text())["cell_types"]
+cfg = tomllib.loads((WT / "configs/p10is0_overload.toml").read_text())
+# thresholds written from the ADR; asserted equal to the frozen config
+ADR = dict(success_fraction_of_a6=0.90, heldout_fraction=0.90, dependence_fraction=0.95, a6_floor_anchor=0.90, a6_floor_loaded=0.50, stable_threshold=0.80, plateau_step=0.01, confirm_step=0.02, paired_d=6, paired_p=0.05, reference_near_ceiling=0.90)
+assert all(abs(cfg["thresholds"][k] - v) < 1e-12 for k, v in ADR.items()), "config differs from the ADR"
+LM_MARGIN, LM_CELLS, DISTINCT_FRAC, LARGEST = 0.05, 1, 0.50, 0.02  # ADR-0019 8.3/8.4 via ADR-0020 (P9-II's constants)
+CTS = {"8K/16K": ("M", 8192, 16384), "8K/8K": ("M", 8192, 8192), "8K/4K": ("M", 8192, 4096), "8K/2K": ("M", 8192, 2048),
+       "2K/4K": ("S", 2048, 4096), "2K/2K": ("S", 2048, 2048), "2K/1K": ("S", 2048, 1024), "2K/512": ("S", 2048, 512)}
+load = {n: f / s for n, (_, f, s) in CTS.items()}
+recs = {}
+for it in plan["items"]["main"]:
+    r = json.loads((RUN / "cells" / it["label"] / "result.json").read_text())
+    recs[(it["cell_type"], it["arm"], it["draw"])] = r
+
+def acc(p): return p[0] / p[1]
+def failed(o, ref):
+    f = set()
+    if not (acc(o["a"]) >= 0.9 * acc(ref["a"]) and acc(o["b"]) >= 0.9 * acc(ref["b"])): f.add(1)
+    if not (o["dep_chance_a"] and o["dep_chance_b"]): f.add(2)
+    if not (o["probe_facts"] > 0 and o["distinct_top1"] >= DISTINCT_FRAC * o["probe_facts"] and o["largest_share"] <= LARGEST): f.add(3)
+    if not all(acc(h) >= 0.9 * acc(p) for h in (o["h1"], o["h2"]) for p in (o["a"], o["b"])): f.add(4)
+    if o["leakage"]: f.add(5)
+    if not all(u is not None and u >= 0.95 * acc(p) for u, p in ((o["a_use_a"], o["a"]), (o["a_use_b"], o["b"]))): f.add(6)
+    return f
+def lmflag(o, ref):
+    r, ra = o.get("lm_rise"), ref.get("lm_rise")
+    if r is None or not math.isfinite(r): return True
+    return ra is not None and math.isfinite(ra) and r > ra + LM_MARGIN
+def usable(ref, floor): return ref is not None and acc(ref["a"]) >= floor and acc(ref["b"]) >= floor
+def med(v):
+    s = sorted(v); n = len(s)
+    return s[n // 2] if n % 2 else (s[n // 2 - 1] + s[n // 2]) / 2
+def cp_lower(k, n, alpha=0.05):
+    if k == 0: return 0.0
+    lo, hi = 0.0, 1.0
+    for _ in range(200):  # P(X >= k | p) increasing in p; find p with tail = alpha
+        mid = (lo + hi) / 2
+        tail = sum(math.comb(n, j) * mid**j * (1 - mid)**(n - j) for j in range(k, n + 1))
+        lo, hi = (mid, hi) if tail < alpha else (lo, mid)
+    return lo
+def results(ct, arm, ro):
+    floor = 0.9 if load[ct] <= 0.5 else 0.5
+    out = {}
+    for d in range(1, 11):
+        rr, aa = recs[(ct, "A6", d)], recs[(ct, arm, d)]
+        ref = rr["readouts"].get(ro) if rr["status"] == "ok" else None
+        if rr["status"] != "ok" or not usable(ref, floor): out[d] = ("NE", set(), False); continue
+        if aa["status"] == "nonfinite": out[d] = ("F", {1, 2, 3, 4, 5, 6}, False); continue
+        o = aa["readouts"][ro]; f = failed(o, ref)
+        out[d] = ("F" if f else "S", f, lmflag(o, ref))
+    return out
+def klass(res):
+    ev = {d: r for d, r in res.items() if r[0] != "NE"}
+    ne = 10 - len(ev); succ = sum(r[0] == "S" for r in ev.values()); fail = len(ev) - succ
+    red = sum(r[2] for r in ev.values()) > LM_CELLS
+    n_a = sum(1 for r in ev.values() if r[1] & {1, 2, 3, 5, 6}); n_g = sum(1 for r in ev.values() if not (r[1] & {1, 2, 3, 5, 6}) and 4 in r[1])
+    c = "NOT_EVALUATED" if ne > 1 else "RELIABLE" if fail <= 1 and not red else "UNRELIABLE" if succ >= 3 else "FAILS"
+    return dict(cls=c, succ=succ, ev=len(ev), ne=ne, n_a=n_a, n_g=n_g, red=red, bound=round(cp_lower(succ, len(ev)), 3) if ev else None,
+                cond_counts={c_: sum(c_ in r[1] for r in ev.values()) for c_ in range(1, 7)})
+def mp(o): return Fr(o["a"][0] + o["b"][0], o["a"][1] + o["b"][1])
+def mh(o): return Fr(o["h1"][0] + o["h2"][0], o["h1"][1] + o["h2"][1])
+def meanpanel(o): return (acc(o["a"]) + acc(o["b"])) / 2
+H, F, NE, NR = "HOLDS", "FAILS", "NOT EVALUABLE", "NOT READ"
+COMB = {(NE, NE, NE): 1, (H, NE, NE): 2, (H, NE, F): 3, (F, NE, F): 4, (H, H, H): 5, (H, H, F): 6, (H, F, F): 7, (F, NR, F): 8}
+types = {}
+for ct in CTS:
+    flags = dur[ct]["reference_flags"]
+    res = results(ct, "A5-D", "T"); k = klass(res)
+    ev = [d for d, r in res.items() if r[0] != "NE"]
+    stab = [recs[(ct, "A5-D", d)]["readouts"]["T"]["address_stability"] if recs[(ct, "A5-D", d)]["status"] == "ok" else 0.0 for d in ev]
+    stable = bool(stab) and med([0.0 if s is None else s for s in stab]) >= 0.80
+    if flags.get("other") or k["cls"] == "NOT_EVALUATED": st = (NE, NE, NE)
+    elif flags.get("cond4"): st = (H if k["n_a"] <= 1 else F, NE, F if (k["n_a"] >= 2 or k["red"] or not stable) else NE)
+    else:
+        a = H if k["n_a"] <= 1 else F
+        st = (a, NR if a == F else (H if k["n_g"] <= 1 else F), H if (k["cls"] == "RELIABLE" and stable) else F)
+    # convergence (5.3)
+    ds = {}
+    for arm in ("A5-D", "A6"):
+        for m, fn in (("P", mp), ("H", mh)):
+            v = [fn(recs[(ct, arm, d)]["readouts"]["T"]) - fn(recs[(ct, arm, d)]["readouts"]["half"]) for d in range(1, 11) if recs[(ct, arm, d)]["status"] == "ok"]
+            ds[f"{arm}|{m}"] = med(v)
+    shown = dur[ct]["convergence"] == "SHOWN"
+    tags = (["RISING"] if any(x > Fr(2, 100) for x in ds.values()) else []) + (["DECLINING AT T"] if any(x < -Fr(2, 100) for x in ds.values()) else []) + ([] if shown else ["NOT SHOWN"])
+    a6 = [meanpanel(recs[(ct, "A6", d)]["readouts"]["T"]) for d in range(1, 11) if recs[(ct, "A6", d)]["status"] == "ok"]
+    a5 = [meanpanel(recs[(ct, "A5-D", d)]["readouts"]["T"]) for d in ev if recs[(ct, "A5-D", d)]["status"] == "ok"]
+    ratio = [meanpanel(recs[(ct, "A5-D", d)]["readouts"]["T"]) / meanpanel(recs[(ct, "A6", d)]["readouts"]["T"]) for d in ev]
+    e5 = klass(results(ct, "A5-D", "e512"))
+    t = dict(series=CTS[ct][0], load=load[ct], state=st, comb=COMB[st], stable=stable, **k, conv=("CONVERGENCE CONFIRMED" if not tags else "CONVERGENCE NOT CONFIRMED"), tags=tags,
+             d={x: float(y) for x, y in ds.items()}, a5_med=round(med(a5), 3), a6_med=round(med(a6), 3), ratio=round(med(ratio), 3), regime="REFERENCE NEAR CEILING" if med(a6) >= 0.9 else f"REFERENCE DEGRADED (A6 = {med(a6):.4f})",
+             e512_class=e5["cls"], cond6_decided=sum(1 for r in res.values() if r[1] == {6}), shown=shown, label=dur[ct]["convergence"])
+    if "A0" in plan["cell_types"][ct]["arms"]:
+        r0 = results(ct, "A0", "T"); b = c = used = 0
+        for dd in range(1, 11):
+            x, y = res[dd], r0[dd]
+            if "NE" in (x[0], y[0]): continue
+            used += 1; b += x[0] == "S" and y[0] == "F"; c += x[0] == "F" and y[0] == "S"
+        n = b + c; p = 1.0 if n == 0 else min(1.0, 2 * sum(math.comb(n, j) for j in range(min(b, c) + 1)) / 2**n)
+        t["paired"] = dict(d=b - c, p=p, pairs=used, label="IMPROVES ON A0" if (b - c >= 6 and p < 0.05) else "HARMS" if (b - c <= -6 and p < 0.05) else "NOT DISTINGUISHED")
+    types[ct] = t
+LOADS = [0.5, 1.0, 2.0, 4.0]
+def comb_line(sts, line):
+    m = [F if (line == "G" and s == NR) else s for s in sts]
+    return H if all(s == H for s in m) else F if any(s == F for s in m) else NE
+def brk(st):
+    L = None
+    for ld in LOADS:
+        if st[ld] == H: L = ld
+        else: break
+    l1 = LOADS[0] if L is None else next((x for x in LOADS if x > L), None)
+    return L, l1, (st[l1] if l1 is not None else None), (l1 is not None and any(st[x] == H for x in LOADS if x > l1))
+lines = {}
+for i, ln in enumerate("AGQ"):
+    st = {ld: comb_line([types[c]["state"][i] for c in CTS if load[c] == ld], ln) for ld in LOADS}
+    lines[ln] = dict(states=st, brk=brk(st))
+q = lines["Q"]["states"]; Lq, l1, l1s, nonmono = lines["Q"]["brk"]
+def conv_at(ld): return all(types[c]["conv"] == "CONVERGENCE CONFIRMED" for c in CTS if load[c] == ld and types[c]["state"][2] == F)
+if q[0.5] == NE: step, head = 1, "NOT EVALUABLE — ANCHOR REFERENCE"
+elif q[0.5] == F: step, head = 2, "ANCHOR NOT REPRODUCED"
+elif Lq >= 2: step, head = 3, f"OVERLOAD-QUALIFIED UP TO {Lq:g}"
+elif l1s == NE: step, head = 4, f"OVERLOAD NOT EVALUABLE AT {l1:g} — REFERENCE; ADDRESSING QUALIFIED UP TO {Lq:g}"
+elif not conv_at(l1):
+    tg = sorted({t for c in CTS if load[c] == l1 and types[c]["state"][2] == F for t in types[c]["tags"]})
+    step, head = 5, f"OVERLOAD UNRESOLVED AT {l1:g} — CONVERGENCE NOT CONFIRMED ({' / '.join(tg)}); ADDRESSING QUALIFIED UP TO {Lq:g}"
+else: step, head = 6, f"OVERLOAD NOT QUALIFIED AT {l1:g}; ADDRESSING QUALIFIED UP TO {Lq:g}"
+def fails_print(c):
+    a, g, qq = types[c]["state"]
+    return "LINE A FAILS" if a == F else "LINE G FAILS (A HOLDS)" if g == F else "NEITHER ALONE"
+fail_at_l1 = [c for c in CTS if l1 is not None and load[c] == l1 and types[c]["state"][2] == F]
+hyp = {"H23-A": "supported" if q[0.5] == H else "not supported", "H23-O": "supported" if (step == 3) else "not supported",
+       "H23-G": "not read" if (step == 1 or l1 is None or l1s == NE) else ("supported" if fail_at_l1 and all(fails_print(c) == "LINE G FAILS (A HOLDS)" for c in fail_at_l1) else "not supported"),
+       "H23-P": "supported" if types["8K/4K"]["paired"]["label"] == "IMPROVES ON A0" else "not supported"}
+lic = [] if step < 3 else [x for x in (0.5, 1.0, 2.0, 4.0, 8.0) if x <= Lq]
+x8 = step == 3 and Lq == 4.0
+fn = []
+for p_ in (0.90, 0.95, 0.97, 0.99):
+    one = p_**10 + 10 * p_**9 * (1 - p_); fn.append((p_, round(one, 3), round(one**2, 3), round(one**6, 2)))
+# counterfactual: 8K/4K SHOWN with its measured d
+cf = dict(types["8K/4K"]["d"]); cf_conf = all(abs(v) <= 0.02 for v in cf.values())
+print(json.dumps({"types": types, "lines": {k: {"states": {str(a): b for a, b in v["states"].items()}, "L": v["brk"][0], "l1": v["brk"][1], "l1_state": v["brk"][2], "non_monotone": v["brk"][3]} for k, v in lines.items()},
+                  "step": step, "headline": head, "fails_at_l1": {c: fails_print(c) for c in fail_at_l1}, "hypotheses": hyp, "licence_loads": lic, "x8_triggered": x8, "false_negative": fn,
+                  "counterfactual_8K4K_shown": {"d": cf, "would_be_confirmed": cf_conf, "headline_would_be": f"step 6: OVERLOAD NOT QUALIFIED AT 2; ADDRESSING QUALIFIED UP TO 1" if cf_conf else "step 5 (RISING/DECLINING)"}}, indent=1, default=str))
