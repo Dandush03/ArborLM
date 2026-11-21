@@ -265,9 +265,9 @@ def student_hash(student: Any) -> str:
     return "|".join(tensor_sha(p) for p in student.parameters())
 
 
-def g8(world: engine.WorldT, records: Mapping[str, Any] | None, q_record: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def g8(world: engine.WorldT, records: Mapping[str, Any] | None, q_record: Mapping[str, Any] | None = None, identity: Mapping[str, Any] | None = None) -> dict[str, Any]:
     if not records:
-        return g8_not_run(q_record)  # ruling 44: NOT RUN, never a pass; Part Q's step-1 verdicts are echoed
+        return g8_not_run(q_record, identity)  # ruling 44: NOT RUN, never a pass; Part Q's step-1 verdicts are echoed
     res = equivalence.verify_all(world.student, dict(records))
     return {"passed": bool(res["ok"]), "detail": {k: v["ok"] for k, v in res["layers"].items()}}
 
@@ -308,7 +308,7 @@ def reach_of(world: engine.WorldT, arm: Any, rows: Sequence[Any]) -> dict[str, A
     return {"passed": bool(reach["arm_with_gradient"] == reach["arm_parameters"] and reach["student_with_gradient"] == 0), "reach": reach}
 
 
-def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, q_equivalence_record: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False, q_check_keys: Sequence[str] | None = None) -> dict[str, Any]:
+def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, equivalence_records: Mapping[str, Any] | None = None, q_equivalence_record: Mapping[str, Any] | None = None, student_identity: Mapping[str, Any] | None = None, root: Path | None = None, run_checker: bool = True, require_mps: bool = False, q_check_keys: Sequence[str] | None = None) -> dict[str, Any]:
     """Every gate on the world's data (the registered gates stage). Trains the small cells the gates need on CPU from their seeds; nothing registered is read."""
     spec = engine.CellSpec("M1", "AB", 0)
     arm, rows, opts = engine.build_cell_arm(world, spec, None)
@@ -324,7 +324,7 @@ def run_gates(world: engine.WorldT, cfg: Mapping[str, Any], snap_dir: Path, *, e
         world.device = keep
     out = {
         "G1": g1(world, q_check_keys=q_check_keys), "G2": g2(world, ma), "G4": {**g4_determinism(world, spec, int(cfg["gates"].get("g4_repeat_updates", 20))), "round_trip": g4_round_trip(world, copy.deepcopy(ma), snap_dir, "gate/M-append"), "reach_all_arms": g4_reach_all(world)}, "G4-MPS": g4_mps(world, spec, cfg), "G5": g5(world, ma), "G6": g6(world),
-        "G7": g7(f_before, ma, sh, world.student), "G8": g8(world, equivalence_records, q_equivalence_record), "G9": g9(cfg, root) if run_checker else {"passed": None, "skipped": "checker not run"},
+        "G7": g7(f_before, ma, sh, world.student), "G8": g8(world, equivalence_records, q_equivalence_record, student_identity), "G9": g9(cfg, root) if run_checker else {"passed": None, "skipped": "checker not run"},
     }  # fmt: skip
     del before
     out["G4"]["passed"] = bool(out["G4"]["passed"] and out["G4"]["reach_all_arms"]["passed"])  # the gate names gradient reach on every arm with a frozen part

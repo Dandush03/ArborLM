@@ -16,10 +16,19 @@ applied here beyond the ``ok`` flags Part Q recorded under the registered tolera
 
 from __future__ import annotations
 
+import json
 from collections.abc import Mapping
+from pathlib import Path
 from typing import Any
 
+import torch
+
+from arborlm.io import file_sha256
+
 RECORD = "inputs/record.json"
+STUDENT_FILE = "inputs/student_plain.pt"  # the converted student Part Q's step-1 equivalence test passed on (listed in Part Q's plan reuse hashes)
+Q_PLAN = "studies/p10is2/freeze/partq_plan.json"  # Part Q's freeze: the hashes of its frozen files
+FORWARD_CODE = ("studies/p10s2/model.py", "studies/p10s2/equivalence.py", "studies/p10s2/tokenization.py", "uv.lock")
 
 
 def q_equivalence_through_door(door: Any) -> Mapping[str, Any] | None:
@@ -46,10 +55,47 @@ def part_one(q_record: Mapping[str, Any] | None) -> dict[str, Any]:
     return {"present": True, "layers": layers, "all_ok": bool(all_ok)}
 
 
-def not_run(q_record: Mapping[str, Any] | None) -> dict[str, Any]:
-    """The G8 record when the bundle holds no stored reference logits: NOT RUN, never a pass."""
+def forward_code_identity(repo: Path) -> dict[str, Any]:
+    """The forward code the student runs on equals Part Q's freeze: ``model.py``, ``equivalence.py``, ``tokenization.py`` and ``uv.lock`` against the hashes in ``freeze/partq_plan.json``."""
+    plan = repo / Q_PLAN
+    if not plan.is_file():
+        return {"checked": False, "ok": None, "reason": f"{Q_PLAN} is not in this tree"}
+    frozen = json.loads(plan.read_text())["frozen_files"]
+    files = {rel: {"frozen": frozen.get(rel), "now": file_sha256(repo / rel) if (repo / rel).is_file() else None} for rel in FORWARD_CODE}
+    differing = sorted(rel for rel, h in files.items() if h["frozen"] is None or h["frozen"] != h["now"])
+    return {"checked": True, "ok": not differing, "differing": differing, "files": files}
+
+
+def student_weights_identity(door: Any, student: Any) -> dict[str, Any]:
+    """The student the registered path trains on is bit-identical, tensor by tensor, to the converted student of Part Q's step 1 (``inputs/student_plain.pt``, read through the checked door, hash-verified): the same
+    parameter names, the same shapes, ``torch.equal`` on every tensor."""
+    if door is None or STUDENT_FILE not in door.files:
+        return {"checked": False, "ok": None, "reason": f"{STUDENT_FILE} is not listed by the door"}
+    plain = torch.load(door.verify(STUDENT_FILE), weights_only=True, map_location="cpu")["state"]
+    own = dict(student.named_parameters())
+    names_equal = set(own) == set(plain)
+    differing = sorted(n for n in set(own) & set(plain) if own[n].shape != plain[n].shape or not torch.equal(own[n].detach().cpu(), plain[n].to(own[n].dtype)))
+    return {"checked": True, "ok": bool(names_equal and not differing), "tensors": len(own), "names_equal": names_equal, "differing": differing[:10], "n_differing": len(differing)}
+
+
+def student_identity(door: Any, student: Any, repo: Path) -> dict[str, Any] | None:
+    """Supporting evidence for G8 NOT RUN (ruling 44, option (a)), a field of its own and never G8 passing: weights and forward code of the tested student. ``ok`` is False if anything checked differs, None if nothing could be
+    checked (no door: a unit-test fixture), True otherwise. None is returned without a door."""
+    if door is None:
+        return None
+    weights, code = student_weights_identity(door, student), forward_code_identity(repo)
+    parts = [x["ok"] for x in (weights, code) if x["ok"] is not None]
+    return {"ok": (all(parts) if parts else None), "weights": weights, "forward_code": code}
+
+
+def not_run(q_record: Mapping[str, Any] | None, identity: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """The G8 record when the bundle holds no stored reference logits: NOT RUN, never a pass. The coded identity evidence is its own field; if it FAILS, G8 is a failure (a student that is not the tested student has no
+    equivalence evidence at all)."""
+    failed = identity is not None and identity.get("ok") is False
     return {
-        "passed": None,
+        "passed": False if failed else None,
+        "identity_failed": True if failed else None,
+        "student_identity_supporting_evidence": identity,
         "not_run": True,
         "skipped": "G8 NOT RUN: no stored reference logits or greedy sequences in the bundle, so half (2) of ADR-0022 section 12.3's definition cannot be tested; the lead rules",
         "half_1_part_q_step_1_record": part_one(q_record),

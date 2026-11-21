@@ -1,0 +1,30 @@
+# ADR-0025 addendum: Part T rulings 43 (amended) and 44 (decided), and the G9 wording (twelfth addendum)
+
+Status: rulings of the lead coordinator, taken under the human lead's delegations of 2026-11-18 and 2026-11-20 (record on main: `docs/reviews/adr-0032-model-level-2026-11-20/DELEGATION_NEXT_PHASE.md`), on the tenth audit (`AUDIT_P10IS2_PARTT_10.md`, READY FOR CALIBRATION, with three code points that can only land before `calibrate --open` because `studies/p10is2/*.py` is part of the calibration identity). **The human lead may overrule each.** Recorded by the implementer from the coordinator's message. `ADR-0025-addendum-part-t-rulings-11.md` is not edited; this file amends and decides on top of it. No registered, calibration or score value was observed. `Astra review: NOT_PERFORMED`.
+
+## Ruling 43, amended: clipping is compared directly
+
+- **Finding (audit 10, finding 2).** Step 3 of the optimiser-step check used a fresh optimiser, and Adam's first step is nearly scale-free, so the clip factor nearly cancelled: a device skipping the clip was caught only at about 2.2e-3 relative, barely over 1e-3. On the real cell the key and value gradients are exactly zero at update 1 (the gate starts at 0), so a wrong clip could not be seen there at all.
+- **Fix, both ways the audit names** (`studies/p10is2/partt_mps_step.py`):
+  1. Step 3 loads the optimiser state carried from step 1, as step 2 does, so the clip factor does not cancel.
+  2. A direct comparison of the CLIPPED gradients: for the batch-0 gradient scaled to 0.5, 1.01 and 4 times `clip_norm` (inactive, barely active, active), the gradients after `clip_grad_norm_` on CPU and on the device are compared with the same registered tolerance (`gates.mps_gradient_relative_tolerance` = 1.0e-3) and the exact-zero clause. The gate fails if the updates or the clipped gradients disagree. The record carries `clipped_gradient_agreement` and `update_passed`.
+- **A defect the device test found in my first version, fixed.** `AdamW.load_state_dict` on the same device shares the moment tensors with the source, so the CPU reference's later steps were stepping state already advanced by an earlier step, while the device received an independent copy. The honest device then "disagreed" at step 3 (1.3e-2). The states are now deep-copied at each load; honest CPU against honest MPS agrees again.
+- **Measured sensitivity** (planted clip norm too large on one side only; relative difference of the clipped gradients; tolerance 1e-3). Test-world shape and a shape like the real cell (zero key and value gradients at update 1, the gate a scalar), identical results for the clipped-gradient check: a missing clip 1.0 (fails); x2 1.0; x1.1 0.10; x1.01 0.010; x1.005 5e-3; x1.002 2e-3; **x1.001 1.000e-3 (fails, at the tolerance)**; x1.0005 5e-4 (passes); x1.0001 1e-4 (passes). So the smallest planted clip error the check catches is about 0.1 % of the clip norm, the registered tolerance itself, on both shapes. The update comparison alone catches a missing clip on both shapes (relative difference 0.10) and a doubled clip on the test-world shape only (2.8e-3); nothing smaller. **On the real-cell shape the clipped-gradient comparison is what catches a wrong clip**; the update comparison alone catches a missing clip but not a smaller error.
+- **Not changed.** The loss condition, the gradient condition, the three-step update comparison (step 3 now carried), the tolerance (no new value), M1 as the only compared cell.
+
+## Ruling 44, decided: option (a), G8 stays NOT RUN, with coded identity evidence
+
+- **Decision.** G8 remains **NOT RUN** on the real Part Q bundle (never a pass), printed in the gates record, disclosed in the freeze record and in Decision 2. The audit's finding stands: Part Q stored verdicts only (layers 4 and 12: `ok`, `max_abs_difference` 8.3e-5 to 9.2e-5 against 1e-3, `identical_top1`) and not the reference logits and sequences, a Part Q record-keeping departure from ADR-0022 section 14.2 step 3 ("the reference logits are stored for gate G8").
+- **Supporting evidence, coded, a field of its own, never G8 passing** (`studies/p10is2/partt_g8.py`, field `student_identity_supporting_evidence` of the G8 record):
+  1. **Weights.** The student the registered path trains on is bit-identical, tensor by tensor (`torch.equal`, same parameter names and shapes), to the converted student of Part Q's step 1, `inputs/student_plain.pt`, read through the checked door (listed in Part Q's plan reuse hashes, hash-verified). Measured on the real Part Q bundle: 272 tensors, 0 differing.
+  2. **Forward code.** `studies/p10s2/model.py`, `studies/p10s2/equivalence.py`, `studies/p10s2/tokenization.py` and `uv.lock` equal the hashes of Part Q's freeze (`studies/p10is2/freeze/partq_plan.json`, `frozen_files`). Measured: all four equal.
+- **If the identity check FAILS, the gates stage fails** (G8 `passed` False, `identity_failed` True): a student that is not the tested student has no equivalence evidence at all. If it cannot be checked (no door, a unit-test fixture, or a file the door does not list), it is reported unchecked (`ok` None) and G8 is still NOT RUN, never a pass.
+- **Not done.** Option (c), regenerating the reference arrays, is a Part Q-side step needing the Hugging Face reference model and the out-of-lock packages; it is not taken. Nothing sealed (`qfit/`, `qcheck/`, `generation/`, `sealed/`) was opened.
+
+## G9 wording
+
+The failure message of `seed_gate_r5` named "revision 5, unedited" as a literal. It now names the cited checker file (`Path(...).name`, for example `seed_registry_check_r6.py`) and says "the revision the config cites". The r6 checker's own banner and selftest header still print inherited text ("revision 5"); the file is cited by hash and is not edited, so a reader of a gates record should read "revision" as the checker named in the message and the config.
+
+## Timing
+
+All of this changes files in the calibration identity (`studies/p10is2/*.py`). It lands before `calibrate --open`; nothing may change any identity file between `--open` and the `end` line.

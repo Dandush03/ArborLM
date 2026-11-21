@@ -164,7 +164,7 @@ def seed_gate_r5(part: str, cfg: Mapping[str, Any], *, root: Path | None = None,
         if run_checker:
             checker.update(run_checker_unedited(cp, base, timeout))
             if checker["returncode"] != 0 or checker["result_line"] != "RESULT: PASS":
-                problems.append(f"the registry checker (revision 5, unedited) did not print RESULT: PASS: {checker['result_line']!r}")
+                problems.append(f"the registry checker ({Path(str(cp)).name}, the revision the config cites, unedited) did not print RESULT: PASS: {checker['result_line']!r}")
     named = named_values(part, cfg)
     return {"passed": not problems, "problems": problems, "roles": {k: len(v) for k, v in named.items()}, "checker": checker}
 
