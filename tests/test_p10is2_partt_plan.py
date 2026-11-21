@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import pytest  # noqa: E402
 from p10is2_partt_fixtures import CFG_T, build  # noqa: E402
+from p10is2_partt_unset import unset_config  # noqa: E402
 
 from arborlm.io import file_sha256, write_json  # noqa: E402
 from studies.p10is2 import labels as L  # noqa: E402
@@ -37,6 +38,7 @@ def repo(tmp_path: Path) -> Path:
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__", "freeze")) if src.is_dir() else shutil.copy(src, dst)
     (r / "studies/p10is2/freeze").mkdir(exist_ok=True)
+    unset_config(r)  # ruling 41 set the real config's values; each synthetic copy starts unset
     git(r, "init", "-q")
     (r / ".gitignore").write_text("runs/\n")
     git(r, "add", "-A")

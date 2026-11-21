@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import pytest  # noqa: E402
 import torch  # noqa: E402
 from p10is2_partt_e2e_world import TINY_CALIB, fake_uv, make_part_q, part_q_plan_of  # noqa: E402
+from p10is2_partt_unset import unset_config  # noqa: E402
 from test_p10is2_launch import FAKE_WALK, git, make_repo  # noqa: E402
 
 from arborlm.io import write_json  # noqa: E402
@@ -35,6 +36,7 @@ def synthetic_repo(tmp: Path, *, installable: bool = False, with_plan: bool = Tr
     r = make_repo(tmp)
     (r / "studies/__init__.py").write_text((ROOT / "studies/__init__.py").read_text())
     (r / ".gitignore").write_text("runs/\nexperiments/\n.venv/\n")  # the calibration directory lives under the repository's experiments directory, as in the real repository
+    unset_config(r)  # ruling 41 set the real config's values; the synthetic study starts unset
     cfg_path = r / core.CONFIG_T
     text = re.sub(r"(\[rehearsal\][^\n]*\nupdates = )200", r"\g<1>4", cfg_path.read_text())  # test size: the ADR's 200 updates scaled to 4
     text = re.sub(r"(\[rehearsal\].*?read_layer = )4", r"\g<1>1", text, flags=re.S)  # and the tiny world's read layer

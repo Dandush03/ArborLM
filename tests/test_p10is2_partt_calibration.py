@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import pytest  # noqa: E402
 from p10is2_partt_e2e_world import make_part_q, part_q_plan_of  # noqa: E402
+from p10is2_partt_unset import unset_config, unset_text  # noqa: E402
 from test_p10is2_launch import git, make_repo  # noqa: E402
 
 from studies.p10is2 import partt_caps, partt_counting, partt_real, partt_stages  # noqa: E402
@@ -52,6 +53,7 @@ def push(r: Path) -> None:
 
 def repo_with_cap(tmp: Path, cap: float = 1.0, remote: bool = True) -> Path:
     r = make_repo(tmp)
+    unset_config(r)  # ruling 41 set the real config's values; each synthetic copy starts unset
     (r / ".gitignore").write_text("runs/\nexperiments/\n")
     for rel in ("studies/p10s2/stub.py", "src/arborlm/stub.py", "configs/p10s2_transfer.toml"):
         (r / rel).parent.mkdir(parents=True, exist_ok=True)
@@ -103,6 +105,7 @@ def test_there_is_one_calibration_in_one_directory_with_a_tracked_log_and_a_reco
     monkeypatch.setattr(partt_real, "calibrate_command", fake_calibrate)
     q = make_part_q(tmp_path / "partq")
     zero = make_repo(tmp_path / "zero")
+    unset_config(zero)
     assert partt_stages.main(args(zero, q)) == partt_stages.EXIT_REFUSED  # a cap of 0 is never "uncapped"
     r = repo_with_cap(tmp_path / "r")
     d = core.calibration_dir(r)
@@ -187,7 +190,7 @@ def test_a_rehearsal_directory_writes_its_records_under_sealed(tmp_path: Path) -
 
 
 def test_the_first_cap_write_is_the_calibration_cap_only() -> None:
-    text = (Path(__file__).resolve().parents[1] / core.CONFIG_T).read_text()
+    text = unset_text((Path(__file__).resolve().parents[1] / core.CONFIG_T).read_text())  # the calibration cap is written once, from unset
     out = partt_caps.apply_caps_text(text, {"calibration_hours": 1.25}, final=False)
     cfg = __import__("tomllib").loads(out)
     assert cfg["stage_caps"]["calibration_hours"] == 1.25 and cfg["caps"]["provisional"] is True and cfg["stage_caps"]["train_hours"] == 0.0
