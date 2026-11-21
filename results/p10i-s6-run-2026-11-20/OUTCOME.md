@@ -46,3 +46,5 @@ By the auditor (arbor-auditor, Claude Opus 5.5 per the agent definition), 2026-1
 ## Files
 
 `report.md`, `analysis.json`, `ledger.json`: copies from the run directory (git-ignored `experiments/P10IS6-run-20261119`). `recomputation/`: the auditor's scripts, outputs and `RECOMPUTATION.md`.
+
+Note: the three scripts here are the auditor's, unchanged except for one added first line (`# ruff: noqa`) so the repository lint passes; the originals are in the local audit folder.

@@ -1,3 +1,4 @@
+# ruff: noqa
 """Auditor's rate-selection check (ADR-0031 section 8, rulings 5 and G14), run AFTER the registered outcome was recomputed.
 Reads ONLY <sealed_dir>/rehearsal_sealed.json (hash checked first) and the frozen rate_table.json. Imports nothing from the study.
 Also recomputes the calibration convergence states (sealed 'states') from the curves, for the section 12.5 comparison.

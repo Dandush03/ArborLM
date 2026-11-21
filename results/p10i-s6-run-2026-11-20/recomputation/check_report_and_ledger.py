@@ -1,3 +1,4 @@
+# ruff: noqa
 """Auditor's second checker: (a) every printed figure of report.md against recompute_out.json at the printed precision;
 (b) per-parent delta / delta-run, rung -1 and step-0 figures of analysis.json against an independent computation;
 (c) the ledger arithmetic, the stage manifests and the attempts records.

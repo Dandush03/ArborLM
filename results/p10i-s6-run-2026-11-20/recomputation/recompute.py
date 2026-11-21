@@ -1,3 +1,4 @@
+# ruff: noqa
 """Independent recomputation of the P10-I-S6 registered outcome (ADR-0031 + addenda 1 and 2).
 
 Written by the auditor from the specification text. Imports nothing from studies/ or arborlm/.
