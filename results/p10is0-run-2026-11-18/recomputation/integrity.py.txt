@@ -1,0 +1,53 @@
+"""Integrity checks (a), (b) of the registered run, read-only. Usage: integrity.py RUN WORKTREE"""
+import hashlib, json, sys
+from collections import Counter
+from pathlib import Path
+RUN, WT = Path(sys.argv[1]), Path(sys.argv[2])
+plan = json.loads((WT / "studies/p10is0/freeze/plan.json").read_text())
+fr = json.loads((WT / "studies/p10is0/freeze/freeze_record.json").read_text())
+caps = json.loads((WT / "studies/p10is0/freeze/stage_caps.json").read_text())
+items = plan["items"]["main"]; out = {}
+labels = [it["label"] for it in items]
+out["plan_items"] = len(items); out["distinct_labels"] = len(set(labels)); out["cell_dirs"] = len(list((RUN / "cells").iterdir()))
+out["dirs_not_in_plan"] = sorted(set(p.name for p in (RUN / "cells").iterdir()) - set(labels))
+prob = []; status = Counter(); segs = Counter(); incomplete = 0
+for it in items:
+    d = RUN / "cells" / it["label"]
+    r = json.loads((d / "result.json").read_text()); status[r["status"]] += 1
+    if r["label"] != it["label"]: prob.append((it["label"], "result label"))
+    if set(r["readouts"]) != {"e512", "half", "T"}: prob.append((it["label"], "readouts"))
+    trs = sorted(d.glob("train_*.json")); segs[len(trs)] += 1
+    for t in trs:
+        tr = json.loads(t.read_text())
+        if tr["label"] != it["label"] or tr["init_seed"] != it["init_seed"] or tr["seed_set"] != it["seed_set"] or tr["planned_last_update"] != it["updates"]: prob.append((it["label"], t.name, "train record identity"))
+        for mark, sha in tr["snapshot_sha256"].items():
+            f = d / "snapshots" / f"u{int(mark):07d}" / "model.pt"
+            if not f.is_file() or hashlib.sha256(f.read_bytes()).hexdigest() != sha: prob.append((it["label"], "snapshot", mark))
+        if tr.get("platform", {}).get("torch_num_threads") not in (1, None): prob.append((it["label"], "threads"))
+    if int(r and max(json.loads(t.read_text())["end_update"] for t in trs)) != it["updates"]: prob.append((it["label"], "end_update"))
+    incomplete += len(list(d.glob("incomplete/*")))
+    # seeds: the label carries draw and init; the plan's rule
+    exp_init = 330001 if (it["arm"] == "A6" or it["draw"] % 2 == 1) else 330002
+    if it["init_seed"] != exp_init or it["seed_set"] != plan["draws"]["seed_set_of"][str(it["draw"])] or it["seed_set"] != f"p10is0-draw-{it['draw']}": prob.append((it["label"], "seed rule"))
+out["problems"] = prob[:20]; out["n_problems"] = len(prob); out["status"] = dict(status); out["train_segments_per_cell"] = dict(segs); out["incomplete_dirs_kept"] = incomplete
+out["per_celltype_arm_draw_counts"] = dict(Counter(f"{it['cell_type']}|{it['arm']}" for it in items))
+# frozen inputs: hashes now vs freeze record
+diffs = [k for k, v in fr["inputs"].items() if not (WT / k).is_file() or hashlib.sha256((WT / k).read_bytes()).hexdigest() != v]
+out["frozen_inputs"] = len(fr["inputs"]); out["frozen_inputs_differing_now"] = diffs
+ci = json.loads((WT / "studies/p10is0/freeze/durations.json").read_text())["code_identity"]
+out["durations_identity_vs_freeze_inputs_differ"] = [k for k, v in ci.items() if fr["inputs"].get(k) != v]
+# ledger and caps
+led = json.loads((RUN / "P10IS0-ledger.json").read_text())
+ent = led["entries"]; tot = sum(e["seconds"] for e in ent)
+by = Counter()
+for e in ent: by[e.get("group", e["stage"])] += e["seconds"]
+out["ledger_total_hours"] = round(tot / 3600, 3); out["ledger_cap_hours_recorded"] = round(led["total_seconds"] / 3600, 3); out["stage_caps_total_hours"] = caps["total_hours"]
+out["ledger_hours_by_group"] = {k: round(v / 3600, 3) for k, v in sorted(by.items())}
+mainents = [e for e in ent if e["stage"] in ("main",)]
+out["main_invocations"] = [(e["utc"][:19], round(e["seconds"] / 3600, 2)) for e in mainents]
+out["main_cap_hours"] = caps["stage_hours"]["main"]
+m = json.loads((RUN / "main/manifest.json").read_text())
+out["main_manifest_status"] = m["status"]; out["main_history"] = [(h["started_utc"][:19], h["finished_utc"][:19], round(h["charged_seconds"] / 3600, 2), dict(Counter(h["outcomes"].values()))) for h in m["history"]]
+out["failed_records_main"] = sorted(p.name for p in (RUN / "tasks/main").glob("*.failed.json")) if (RUN / "tasks/main").is_dir() else None
+out["x8_gate"] = json.loads((RUN / "x8/gate.json").read_text()) if (RUN / "x8/gate.json").is_file() else None
+print(json.dumps(out, indent=1, default=str))

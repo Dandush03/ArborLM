@@ -14,7 +14,7 @@
 # (tests/test_scorecard.py runs it).
 
 updated = "2026-11-20"
-basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories added"
+basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032 and P10-I-S0"
 scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
 
 [[row]]
@@ -30,11 +30,12 @@ next = "The same dependence controls on the flat memory at convergence (P10-I-S6
 [[row]]
 title = "Reliable learned addressing"
 score = 7
-note = "Qualified at 4K and 16K slots on synthetic records, but not under overload or natural contexts."
+note = "Qualified up to one fact per slot on synthetic records; overload unresolved; natural contexts untested."
 evidence = [
   "P10-S0: ADDRESSING-QUALIFIED (4,096 AND 16,384); OVERLOAD NOT QUALIFIED; 65,536 slots a probe only ([outcome](results/p10s0-run-2026-11-16/OUTCOME.md)).",
+  "P10-I-S0: OVERLOAD UNRESOLVED AT load 2 (CONVERGENCE NOT SHOWN); ADDRESSING QUALIFIED UP TO 1 fact per slot; licence loads 0.5 and 1.0 only; independently recomputed ([outcome](results/p10is0-run-2026-11-18/OUTCOME.md)).",
 ]
-next = "P10-I-S0 (addressing under overload): registered main grid running. Natural contexts: no study yet."
+next = "Above one fact per slot nothing is licensed: 8K facts in 4K slots held in 2 of 10 cells, with convergence not shown after a budget refusal. Natural contexts: no study yet."
 
 [[row]]
 title = "Quality versus dense alternatives"
@@ -132,3 +133,47 @@ evidence = [
   "No measurement. P10-S2 ended TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)).",
 ]
 next = "Run both frozen teachers on one benchmark and record each score, the either-right ceiling and the both-right floor, before any transfer."
+
+# The four rows below were added on 2026-11-20 at the human lead's request ("let's add does metric to the readme chart as well"),
+# after his statements of that day: capability parity is mandatory, and self-learning is a research direction in three parts
+# (docs/reviews/adr-0032-model-level-2026-11-20/). Every row above is COMPONENT evidence on a small byte-level backbone and
+# does not add up to the first row below. His properties 2, 3 and 4 are tracked by the rows "Teachers complement each other" and
+# "Sequential learning from teachers" (2), "Sequential learning from teachers" (3), and "Useful capacity scaling",
+# "SSD-backed neural-memory advantage", "Local (sparse) memory updates" and "Scalable read for the flat memory" (4).
+# Starting scores proposed by the lead (Claude); they await the human lead's confirmation.
+
+[[row]]
+title = "Capability parity with reference models"
+score = 0
+note = "Mandatory and untested: no pretrained model has had the memory attached, and no task-level evaluation has been run."
+evidence = [
+  "No study yet. Every result above uses one measure, predictive loss, on a 27,392-parameter byte-level backbone; it does not establish parity with any pretrained model ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md), not approved).",
+]
+next = "Measure the reference models themselves on independent evaluations (proposed test M0, not approved), then the first contact of the memory with a real student."
+
+[[row]]
+title = "Self-optimisation of memory and computation"
+score = 0
+note = "Untested: whether the system can learn better retrieval, layout, indexing, updates or consolidation without losing quality."
+evidence = [
+  "No study yet. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)).",
+]
+next = "A staged, preregistered test against an outside search given the same compute; to be proposed for approval."
+
+[[row]]
+title = "Self-directed capability learning"
+score = 0
+note = "Untested: whether the system can set itself useful challenges, use independent feedback and keep the gains without a larger teacher."
+evidence = [
+  "No study yet, and no system capable enough to test it exists. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)).",
+]
+next = "Needs a real student that has first acquired a capability from a teacher; then a bounded, preregistered single cycle."
+
+[[row]]
+title = "Sustained improvement across cycles"
+score = 0
+note = "Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit."
+evidence = [
+  "No study yet. Proposed direction, not a result ([draft ADR-0032](docs/decisions/ADR-0032-model-level-requirement-capability-parity.md)).",
+]
+next = "Needs a single self-directed cycle shown first; then a fixed number of bounded cycles scored on evaluations the process cannot see."

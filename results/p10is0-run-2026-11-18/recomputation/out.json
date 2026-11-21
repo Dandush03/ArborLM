@@ -1,0 +1,470 @@
+{
+ "types": {
+  "8K/16K": {
+   "series": "M",
+   "load": 0.5,
+   "state": [
+    "HOLDS",
+    "HOLDS",
+    "HOLDS"
+   ],
+   "comb": 5,
+   "stable": true,
+   "cls": "RELIABLE",
+   "succ": 10,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 0,
+   "red": false,
+   "bound": 0.741,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE CONFIRMED",
+   "tags": [],
+   "d": {
+    "A5-D|P": 0.0006103515625,
+    "A5-D|H": 0.00250244140625,
+    "A6|P": 0.0,
+    "A6|H": 0.0
+   },
+   "a5_med": 0.999,
+   "a6_med": 1.0,
+   "ratio": 0.999,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "RELIABLE",
+   "cond6_decided": 0,
+   "shown": true,
+   "label": "SHOWN",
+   "paired": {
+    "d": 0,
+    "p": 1.0,
+    "pairs": 10,
+    "label": "NOT DISTINGUISHED"
+   }
+  },
+  "8K/8K": {
+   "series": "M",
+   "load": 1.0,
+   "state": [
+    "HOLDS",
+    "HOLDS",
+    "HOLDS"
+   ],
+   "comb": 5,
+   "stable": true,
+   "cls": "RELIABLE",
+   "succ": 10,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 0,
+   "red": false,
+   "bound": 0.741,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE CONFIRMED",
+   "tags": [],
+   "d": {
+    "A5-D|P": 0.002838134765625,
+    "A5-D|H": 0.007659912109375,
+    "A6|P": 9.1552734375e-05,
+    "A6|H": 9.1552734375e-05
+   },
+   "a5_med": 0.997,
+   "a6_med": 1.0,
+   "ratio": 0.997,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "RELIABLE",
+   "cond6_decided": 0,
+   "shown": true,
+   "label": "SHOWN",
+   "paired": {
+    "d": 0,
+    "p": 1.0,
+    "pairs": 10,
+    "label": "NOT DISTINGUISHED"
+   }
+  },
+  "8K/4K": {
+   "series": "M",
+   "load": 2.0,
+   "state": [
+    "HOLDS",
+    "FAILS",
+    "FAILS"
+   ],
+   "comb": 7,
+   "stable": true,
+   "cls": "FAILS",
+   "succ": 2,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 8,
+   "red": false,
+   "bound": 0.037,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 8,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE NOT CONFIRMED",
+   "tags": [
+    "NOT SHOWN"
+   ],
+   "d": {
+    "A5-D|P": 0.00335693359375,
+    "A5-D|H": 0.00323486328125,
+    "A6|P": 3.0517578125e-05,
+    "A6|H": 6.103515625e-05
+   },
+   "a5_med": 0.981,
+   "a6_med": 0.998,
+   "ratio": 0.983,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "FAILS",
+   "cond6_decided": 0,
+   "shown": false,
+   "label": "CONVERGENCE NOT SHOWN \u2014 EXTENSION REFUSED (BUDGET)",
+   "paired": {
+    "d": -1,
+    "p": 1.0,
+    "pairs": 10,
+    "label": "NOT DISTINGUISHED"
+   }
+  },
+  "8K/2K": {
+   "series": "M",
+   "load": 4.0,
+   "state": [
+    "FAILS",
+    "NOT READ",
+    "FAILS"
+   ],
+   "comb": 8,
+   "stable": true,
+   "cls": "FAILS",
+   "succ": 0,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 2,
+   "n_g": 8,
+   "red": false,
+   "bound": 0.0,
+   "cond_counts": {
+    "1": 2,
+    "2": 0,
+    "3": 0,
+    "4": 10,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE NOT CONFIRMED",
+   "tags": [
+    "NOT SHOWN"
+   ],
+   "d": {
+    "A5-D|P": 0.009002685546875,
+    "A5-D|H": -0.001190185546875,
+    "A6|P": 0.002166748046875,
+    "A6|H": 0.002166748046875
+   },
+   "a5_med": 0.863,
+   "a6_med": 0.951,
+   "ratio": 0.907,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "FAILS",
+   "cond6_decided": 0,
+   "shown": false,
+   "label": "CONVERGENCE NOT SHOWN IN REHEARSAL",
+   "paired": {
+    "d": 0,
+    "p": 1.0,
+    "pairs": 10,
+    "label": "NOT DISTINGUISHED"
+   }
+  },
+  "2K/4K": {
+   "series": "S",
+   "load": 0.5,
+   "state": [
+    "HOLDS",
+    "HOLDS",
+    "HOLDS"
+   ],
+   "comb": 5,
+   "stable": true,
+   "cls": "RELIABLE",
+   "succ": 10,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 0,
+   "red": false,
+   "bound": 0.741,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE CONFIRMED",
+   "tags": [],
+   "d": {
+    "A5-D|P": 0.0006103515625,
+    "A5-D|H": 0.00341796875,
+    "A6|P": 0.0,
+    "A6|H": 0.0
+   },
+   "a5_med": 1.0,
+   "a6_med": 1.0,
+   "ratio": 1.0,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "RELIABLE",
+   "cond6_decided": 0,
+   "shown": true,
+   "label": "SHOWN"
+  },
+  "2K/2K": {
+   "series": "S",
+   "load": 1.0,
+   "state": [
+    "HOLDS",
+    "HOLDS",
+    "HOLDS"
+   ],
+   "comb": 5,
+   "stable": true,
+   "cls": "RELIABLE",
+   "succ": 10,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 0,
+   "red": false,
+   "bound": 0.741,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE CONFIRMED",
+   "tags": [],
+   "d": {
+    "A5-D|P": 0.0,
+    "A5-D|H": 0.0015869140625,
+    "A6|P": 0.0,
+    "A6|H": 0.0
+   },
+   "a5_med": 1.0,
+   "a6_med": 1.0,
+   "ratio": 1.0,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "RELIABLE",
+   "cond6_decided": 0,
+   "shown": true,
+   "label": "SHOWN"
+  },
+  "2K/1K": {
+   "series": "S",
+   "load": 2.0,
+   "state": [
+    "HOLDS",
+    "HOLDS",
+    "HOLDS"
+   ],
+   "comb": 5,
+   "stable": true,
+   "cls": "RELIABLE",
+   "succ": 10,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 0,
+   "red": false,
+   "bound": 0.741,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE NOT CONFIRMED",
+   "tags": [
+    "NOT SHOWN"
+   ],
+   "d": {
+    "A5-D|P": 0.00146484375,
+    "A5-D|H": 0.0023193359375,
+    "A6|P": 0.0,
+    "A6|H": 0.0
+   },
+   "a5_med": 0.993,
+   "a6_med": 1.0,
+   "ratio": 0.993,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "UNRELIABLE",
+   "cond6_decided": 0,
+   "shown": false,
+   "label": "CONVERGENCE NOT SHOWN IN REHEARSAL"
+  },
+  "2K/512": {
+   "series": "S",
+   "load": 4.0,
+   "state": [
+    "HOLDS",
+    "FAILS",
+    "FAILS"
+   ],
+   "comb": 7,
+   "stable": true,
+   "cls": "FAILS",
+   "succ": 0,
+   "ev": 10,
+   "ne": 0,
+   "n_a": 0,
+   "n_g": 10,
+   "red": false,
+   "bound": 0.0,
+   "cond_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 10,
+    "5": 0,
+    "6": 0
+   },
+   "conv": "CONVERGENCE NOT CONFIRMED",
+   "tags": [
+    "NOT SHOWN"
+   ],
+   "d": {
+    "A5-D|P": 0.0111083984375,
+    "A5-D|H": 0.0047607421875,
+    "A6|P": 0.0006103515625,
+    "A6|H": -0.0003662109375
+   },
+   "a5_med": 0.916,
+   "a6_med": 0.961,
+   "ratio": 0.952,
+   "regime": "REFERENCE NEAR CEILING",
+   "e512_class": "FAILS",
+   "cond6_decided": 0,
+   "shown": false,
+   "label": "CONVERGENCE NOT SHOWN IN REHEARSAL"
+  }
+ },
+ "lines": {
+  "A": {
+   "states": {
+    "0.5": "HOLDS",
+    "1.0": "HOLDS",
+    "2.0": "HOLDS",
+    "4.0": "FAILS"
+   },
+   "L": 2.0,
+   "l1": 4.0,
+   "l1_state": "FAILS",
+   "non_monotone": false
+  },
+  "G": {
+   "states": {
+    "0.5": "HOLDS",
+    "1.0": "HOLDS",
+    "2.0": "FAILS",
+    "4.0": "FAILS"
+   },
+   "L": 1.0,
+   "l1": 2.0,
+   "l1_state": "FAILS",
+   "non_monotone": false
+  },
+  "Q": {
+   "states": {
+    "0.5": "HOLDS",
+    "1.0": "HOLDS",
+    "2.0": "FAILS",
+    "4.0": "FAILS"
+   },
+   "L": 1.0,
+   "l1": 2.0,
+   "l1_state": "FAILS",
+   "non_monotone": false
+  }
+ },
+ "step": 5,
+ "headline": "OVERLOAD UNRESOLVED AT 2 \u2014 CONVERGENCE NOT CONFIRMED (NOT SHOWN); ADDRESSING QUALIFIED UP TO 1",
+ "fails_at_l1": {
+  "8K/4K": "LINE G FAILS (A HOLDS)"
+ },
+ "hypotheses": {
+  "H23-A": "supported",
+  "H23-O": "not supported",
+  "H23-G": "supported",
+  "H23-P": "not supported"
+ },
+ "licence_loads": [
+  0.5,
+  1.0
+ ],
+ "x8_triggered": false,
+ "false_negative": [
+  [
+   0.9,
+   0.736,
+   0.542,
+   0.16
+  ],
+  [
+   0.95,
+   0.914,
+   0.835,
+   0.58
+  ],
+  [
+   0.97,
+   0.965,
+   0.932,
+   0.81
+  ],
+  [
+   0.99,
+   0.996,
+   0.991,
+   0.97
+  ]
+ ],
+ "counterfactual_8K4K_shown": {
+  "d": {
+   "A5-D|P": 0.00335693359375,
+   "A5-D|H": 0.00323486328125,
+   "A6|P": 3.0517578125e-05,
+   "A6|H": 6.103515625e-05
+  },
+  "would_be_confirmed": true,
+  "headline_would_be": "step 6: OVERLOAD NOT QUALIFIED AT 2; ADDRESSING QUALIFIED UP TO 1"
+ }
+}

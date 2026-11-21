@@ -1,0 +1,79 @@
+{
+ "plan_items": 200,
+ "distinct_labels": 200,
+ "cell_dirs": 200,
+ "dirs_not_in_plan": [],
+ "problems": [],
+ "n_problems": 0,
+ "status": {
+  "ok": 200
+ },
+ "train_segments_per_cell": {
+  "1": 200
+ },
+ "incomplete_dirs_kept": 12,
+ "per_celltype_arm_draw_counts": {
+  "8K/16K|A5-D": 10,
+  "8K/16K|A0": 10,
+  "8K/16K|A6": 10,
+  "8K/8K|A5-D": 10,
+  "8K/8K|A0": 10,
+  "8K/8K|A6": 10,
+  "8K/4K|A5-D": 10,
+  "8K/4K|A0": 10,
+  "8K/4K|A6": 10,
+  "8K/2K|A5-D": 10,
+  "8K/2K|A0": 10,
+  "8K/2K|A6": 10,
+  "2K/4K|A5-D": 10,
+  "2K/4K|A6": 10,
+  "2K/2K|A5-D": 10,
+  "2K/2K|A6": 10,
+  "2K/1K|A5-D": 10,
+  "2K/1K|A6": 10,
+  "2K/512|A5-D": 10,
+  "2K/512|A6": 10
+ },
+ "frozen_inputs": 75,
+ "frozen_inputs_differing_now": [],
+ "durations_identity_vs_freeze_inputs_differ": [],
+ "ledger_total_hours": 23.385,
+ "ledger_cap_hours_recorded": 113.012,
+ "stage_caps_total_hours": 113.01240788820876,
+ "ledger_hours_by_group": {
+  "gates": 0.133,
+  "generate": 0.018,
+  "main": 17.086,
+  "stage_r_base_a0": 4.002,
+  "stage_r_ext_a0": 1.982,
+  "timing-busy": 0.088,
+  "timing-quiet": 0.076
+ },
+ "main_invocations": [
+  [
+   "2026-11-20T22:41:21",
+   17.09
+  ]
+ ],
+ "main_cap_hours": 61.15458933195481,
+ "main_manifest_status": "COMPLETE",
+ "main_history": [
+  [
+   "2026-11-20T05:36:11",
+   "2026-11-20T22:41:21",
+   17.09,
+   {
+    "completed": 80
+   }
+  ]
+ ],
+ "failed_records_main": [],
+ "x8_gate": {
+  "L_Q": 1.0,
+  "kind": "gate",
+  "not_run_label": "NOT RUN \u2014 L_Q BELOW 4 (or the result of steps 0 to 2: step 5)",
+  "schema": 1,
+  "study": "P10IS0",
+  "x8_triggered": false
+ }
+}
