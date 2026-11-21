@@ -133,10 +133,10 @@ rehearsal_set_low = 252001
 rehearsal_set_high = 252899
 init_low = 330201
 init_high = 330299
-registry_checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r5.py"
-registry_checker_sha256 = "8ce47ab52abbe25b4b308ca2a1e7587f5461b13340f1faa2a0c0cff6804f4611"
-registry_addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R5.md"
-registry_addendum_sha256 = "19199e46d9f4e51d5650b9cfd9f3e1dd11730d45ae9fdada776a111e741ea865"
+registry_checker = "docs/reviews/p10-i-direction-2026-11-17/seed_registry_check_r6.py"   # revision 6 (ruling 42): revision 5 plus P10-I-S0 as an owner of its own files, nothing else
+registry_checker_sha256 = "eb757082dac6e0e34a28c4d2ac87e0b96cd0e1f6af68505dc434792f475280a4"
+registry_addendum = "docs/reviews/p10-i-direction-2026-11-17/SEED_REGISTRY_R6.md"
+registry_addendum_sha256 = "4f2afd94928c70229db5956a5781e53d8f25265a64318c9f56f608d5188a0efb"
 own_file_globs = ["configs/p10is2_*", "studies/p10is2/*", "tests/test_p10is2_*"]   # the checker's built-in owner of this study (no --own needed)
 
 [caps]  # sections 9, 10

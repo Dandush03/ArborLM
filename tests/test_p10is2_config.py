@@ -126,12 +126,12 @@ def test_config_identity_fields() -> None:
         assert cfg["platform"] == {"system": "Darwin", "machine": "arm64", "torch": "2.8.0", "torch_num_threads": 6, "deterministic_algorithms": True}
         caps = cfg["stage_caps"]
         if cfg["caps"]["provisional"]:  # before the lead enters the caps computed by code from the measuring record
-            assert all(v == 0.0 for k, v in caps.items() if k != "calibration_hours") and caps["calibration_hours"] >= 0.0  # the calibration cap is the one cap written while provisional (rulings 22 and 41's setup)
+            assert all(v == 0.0 for k, v in caps.items() if k != "calibration_hours") and caps["calibration_hours"] in (0.0, 13.18)  # 0.0 or exactly the figure ruling 41's setup recorded; the calibration cap is the one cap written while provisional (rulings 22 and 41's setup)
         else:  # after: every cap is set, and the total is the pre-freeze charge plus twice every stage (the rule of the caps proposal), so it is not below the sum of the stage caps up to the rounding of each (0.01 h)
             stage = {k: v for k, v in caps.items() if k != "total_hours"}
             used = {k: v for k, v in caps.items() if k != "reuse_hours"}  # reuse_hours belongs to a plan that reuses completed stages (attempt 3); the stages a plan does not run keep 0.0
             assert (all(v > 0.0 for v in used.values()) or caps["total_hours"] > 0.0 and any(v > 0.0 for v in stage.values())) and caps["total_hours"] >= sum(stage.values()) - 0.01 * len(stage)
-    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" != T["seeds"]["registry_checker_sha256"] == "8ce47ab52abbe25b4b308ca2a1e7587f5461b13340f1faa2a0c0cff6804f4611"  # Part Q froze on r3; Part T cites r5
+    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" != T["seeds"]["registry_checker_sha256"] == "eb757082dac6e0e34a28c4d2ac87e0b96cd0e1f6af68505dc434792f475280a4"  # Part Q froze on r3; Part T cites r6 (ruling 42)
     assert core.load_config("Q")["paths"]["durable_packages"] == "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
     with pytest.raises(ValueError):
         core.load_config("T", ROOT / core.CONFIG_Q)
