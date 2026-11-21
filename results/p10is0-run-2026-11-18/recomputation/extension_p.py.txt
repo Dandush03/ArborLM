@@ -1,0 +1,34 @@
+"""Hand recomputation of the extension rule's P for each candidate (ADR-0023 5.1 items 2-5), from the run's public timing/rates.json and ledger.
+Rates: stage 3's quiet seconds per update keyed by (arm, slots), the larger where two cell types share a slot count (the implementation's documented choice); evaluations likewise.
+Usage: extension_p.py RUN"""
+import json, sys
+from pathlib import Path
+R = Path(sys.argv[1])
+r = json.loads((R / "timing/rates.json").read_text())
+spu, ev = {}, {}
+for k, v in r["quiet"].items():
+    arm, s = k.split("|")[0], r["slots"][k]
+    spu[(arm, s)] = max(spu.get((arm, s), 0), v); ev[(arm, s)] = max(ev.get((arm, s), 0), r["eval_seconds"][k])
+CT = {"8K/16K": (8192, 16384, ("A5-D", "A0", "A6")), "8K/8K": (8192, 8192, ("A5-D", "A0", "A6")), "8K/4K": (8192, 4096, ("A5-D", "A0", "A6")), "8K/2K": (8192, 2048, ("A5-D", "A0", "A6")),
+      "2K/4K": (2048, 4096, ("A5-D", "A6")), "2K/2K": (2048, 2048, ("A5-D", "A6")), "2K/1K": (2048, 1024, ("A5-D", "A6")), "2K/512": (2048, 512, ("A5-D", "A6"))}
+X8 = (8192, 1024, ("A5-D", "A0", "A6"))
+upd = lambda e, f: e * f // 128
+led = json.loads((R / "P10IS0-ledger.json").read_text())["entries"]
+charged = sum(e["seconds"] for e in led if e.get("group") == "stage_r_base_a0") / 3600
+other = sum(e["seconds"] for e in led if e.get("group") in ("generate", "gates")) / 3600 + 2.0
+W = 6
+def stage(tasks): return sum(tasks) / W + max(tasks)
+def main(T): return stage([sum(spu[(a, s)] * upd(T[n], f) + 3 * ev[(a, s)] for a in arms) for n, (f, s, arms) in CT.items() for _ in range(10)])
+def ext_round(n): f, s, _ = CT[n]; return stage([spu[(a, s)] * upd(16384, f) + ev[(a, s)] for a in ("A5-D", "A6") for _ in (1, 2)])
+f, s, arms = X8
+x8 = stage([spu[(a, s)] * upd(32768, f) + 7 * ev[(a, s)] for a in ("A5-D", "A6") for _ in (1, 2)]) + stage([sum(spu[(a, s)] * upd(16384, f) + 3 * ev[(a, s)] for a in arms) for _ in range(10)])
+T = {"8K/16K": 1024, "8K/8K": 1024, "2K/4K": 1024, "2K/2K": 8192}
+cands = ["8K/4K", "2K/1K", "8K/2K", "2K/512"]  # ascending load, M before S
+granted, out = [], []
+for c in cands:
+    t = dict(T); t.update({o: (16384 if o in granted else 8192) for o in cands}); t[c] = 16384
+    P = charged + other + (main(t) + sum(ext_round(g) for g in [*granted, c]) + x8) / 3600
+    ok = P <= 55.0
+    if ok: granted.append(c)
+    out.append((c, round(P, 3), ok))
+print(json.dumps({"charged_stage_r_base_h": round(charged, 4), "other_h": round(other, 4), "decisions": out}, indent=1))

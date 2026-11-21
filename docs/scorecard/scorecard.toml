@@ -14,7 +14,7 @@
 # (tests/test_scorecard.py runs it).
 
 updated = "2026-11-20"
-basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories and, on 2026-11-20, four model-level rows added"
+basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032 and P10-I-S0"
 scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
 
 [[row]]
@@ -30,11 +30,12 @@ next = "The same dependence controls on the flat memory at convergence (P10-I-S6
 [[row]]
 title = "Reliable learned addressing"
 score = 7
-note = "Qualified at 4K and 16K slots on synthetic records, but not under overload or natural contexts."
+note = "Qualified up to one fact per slot on synthetic records; overload unresolved; natural contexts untested."
 evidence = [
   "P10-S0: ADDRESSING-QUALIFIED (4,096 AND 16,384); OVERLOAD NOT QUALIFIED; 65,536 slots a probe only ([outcome](results/p10s0-run-2026-11-16/OUTCOME.md)).",
+  "P10-I-S0: OVERLOAD UNRESOLVED AT load 2 (CONVERGENCE NOT SHOWN); ADDRESSING QUALIFIED UP TO 1 fact per slot; licence loads 0.5 and 1.0 only; independently recomputed ([outcome](results/p10is0-run-2026-11-18/OUTCOME.md)).",
 ]
-next = "P10-I-S0 (addressing under overload): registered main grid running. Natural contexts: no study yet."
+next = "Above one fact per slot nothing is licensed: 8K facts in 4K slots held in 2 of 10 cells, with convergence not shown after a budget refusal. Natural contexts: no study yet."
 
 [[row]]
 title = "Quality versus dense alternatives"
