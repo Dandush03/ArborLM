@@ -10,7 +10,7 @@
 <text x="972" y="152" fill="#f2f2f2" font-size="19" text-anchor="end">7/10</text>
 <rect x="28" y="166" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="166" width="661" height="8" rx="4" fill="#3f8f4f"/>
-<text x="28" y="200" fill="#c9c9c9" font-size="15">Qualified at 4K and 16K slots on synthetic records, but not under overload or natural contexts.</text>
+<text x="28" y="200" fill="#c9c9c9" font-size="15">Qualified up to one fact per slot on synthetic records; overload unresolved; natural contexts untested.</text>
 <text x="28" y="256" fill="#f2f2f2" font-size="19" font-weight="600">Quality versus dense alternatives</text>
 <text x="972" y="256" fill="#f2f2f2" font-size="19" text-anchor="end">5/10</text>
 <rect x="28" y="270" width="944" height="8" rx="4" fill="#262626"/>
@@ -81,6 +81,6 @@
 <rect x="28" y="1622" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="1622" width="0" height="8" rx="4" fill="#6b7a99"/>
 <text x="28" y="1656" fill="#c9c9c9" font-size="15">Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit.</text>
-<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-20: main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories and, on 2026-11-20, four model-level rows added.</text>
+<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-20: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032 and P10-I-S0.</text>
 </g>
 </svg>
