@@ -81,6 +81,6 @@
 <rect x="28" y="1622" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="1622" width="0" height="8" rx="4" fill="#6b7a99"/>
 <text x="28" y="1656" fill="#c9c9c9" font-size="15">Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit.</text>
-<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-21: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0 and P10-I-S6, with the P10-I-S1 outcome record on its branch (not yet accepted by the human lead).</text>
+<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-21: main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0, P10-I-S6 and P10-I-S1.</text>
 </g>
 </svg>
