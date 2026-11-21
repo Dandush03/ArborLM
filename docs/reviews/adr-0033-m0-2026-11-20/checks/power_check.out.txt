@@ -1,0 +1,51 @@
+== A. Coefficient k in n = k * d / delta^2 (independence, no cluster effect)
+  M=  1 tests: product k=  6.18   Boole k=  6.18   ratio=1.0000
+  M=  5 tests: product k= 11.25   Boole k= 11.53   ratio=1.0245
+  M= 40 tests: product k= 17.50   Boole k= 17.81   ratio=1.0178
+  M= 55 tests: product k= 18.43   Boole k= 18.74   ratio=1.0169
+  M= 70 tests: product k= 19.12   Boole k= 19.44   ratio=1.0163
+  ADR-0032 quotes: 6.2 (M=1), 11.5 (M=5), 17.5 (M=40); draft: 18 to 19 (M=55..70)
+== A2. Draft's example sizes
+  M=55 d=0.3 delta=0.03: product n=    6143  Boole n=    6247
+  M=55 d=0.3 delta=0.02: product n=   13821  Boole n=   14055
+  M=55 d=0.2 delta=0.03: product n=    4095  Boole n=    4164
+  M=55 d=0.3 delta=0.05: product n=    2211  Boole n=    2249
+  M=55: largest d coverable by 20,000 at delta 0.02 (product) = 0.434
+  M=70 d=0.3 delta=0.03: product n=    6375  Boole n=    6479
+  M=70 d=0.3 delta=0.02: product n=   14344  Boole n=   14577
+  M=70 d=0.2 delta=0.03: product n=    4250  Boole n=    4319
+  M=70 d=0.3 delta=0.05: product n=    2295  Boole n=    2332
+  M=70: largest d coverable by 20,000 at delta 0.02 (product) = 0.418
+== B. Recentring and variance scaling, item-level (no clusters)
+  measured d=0.3700 mu=0.2633 scale=1.1093 (true d=0.36, mu=0.24)
+  n=1000 delta=0.05: simulated power=0.8270  analytic=0.8301
+  n=2000 delta=0.03: simulated power=0.7045  analytic=0.7125
+== C. Cluster design: sealed split has G fixed templates; draft resamples n/25 clusters
+  between-template SD of the recentred difference, within family: tau=0.03
+    G= 60 delta=0.02: max per-test power=0.9998 (need 0.9960); n draft=   14858  n true design=   44737
+    G= 60 delta=0.03: max per-test power=1.0000 (need 0.9960); n draft=    6603  n true design=    8866
+    G= 60 delta=0.05: max per-test power=1.0000 (need 0.9960); n draft=    2377  n true design=    2486
+    G=300 delta=0.02: max per-test power=1.0000 (need 0.9960); n draft=   14858  n true design=   16038
+    G=300 delta=0.03: max per-test power=1.0000 (need 0.9960); n draft=    6603  n true design=    6545
+    G=300 delta=0.05: max per-test power=1.0000 (need 0.9960); n draft=    2377  n true design=    2261
+  between-template SD of the recentred difference, within family: tau=0.05
+    G= 60 delta=0.02: max per-test power=0.9270 (need 0.9960); n draft=   16701  n true design=UNREACHABLE
+    G= 60 delta=0.03: max per-test power=0.9987 (need 0.9960); n draft=    7422  n true design=   41833
+    G= 60 delta=0.05: max per-test power=1.0000 (need 0.9960); n draft=    2672  n true design=    3192
+    G=300 delta=0.02: max per-test power=1.0000 (need 0.9960); n draft=   16701  n true design=   22434
+    G=300 delta=0.03: max per-test power=1.0000 (need 0.9960); n draft=    7422  n true design=    7407
+    G=300 delta=0.05: max per-test power=1.0000 (need 0.9960); n draft=    2672  n true design=    2356
+  between-template SD of the recentred difference, within family: tau=0.1
+    G= 60 delta=0.02: max per-test power=0.4619 (need 0.9960); n draft=   25339  n true design=UNREACHABLE
+    G= 60 delta=0.03: max per-test power=0.7514 (need 0.9960); n draft=   11262  n true design=UNREACHABLE
+    G= 60 delta=0.05: max per-test power=0.9871 (need 0.9960); n draft=    4054  n true design=UNREACHABLE
+    G=300 delta=0.02: max per-test power=0.9656 (need 0.9960); n draft=   25339  n true design=UNREACHABLE
+    G=300 delta=0.03: max per-test power=0.9998 (need 0.9960); n draft=   11262  n true design=   19349
+    G=300 delta=0.05: max per-test power=1.0000 (need 0.9960); n draft=    4054  n true design=    2932
+== D. Dependence between the parity tests against two complementary teachers
+  n=2000 delta=0.03 sims=3000: P(pass1)=0.8637 P(pass2)=0.8670 product=0.7488 joint=0.7457 (MC se 0.0080) Boole bound=0.7307
+== E. Monte Carlo resolution of the per-test power near the target
+  P=11: per-test pi needed=0.99595; expected failures in 2000 sims=8.1; MC se of pi=0.00142; se of pi^5 ~ 0.0071 vs target 0.9799
+  P=11: per-test pi needed=0.99595; expected failures in 20000 sims=81.0; MC se of pi=0.00045; se of pi^5 ~ 0.0022 vs target 0.9799
+  P=14: per-test pi needed=0.99682; expected failures in 2000 sims=6.4; MC se of pi=0.00126; se of pi^5 ~ 0.0063 vs target 0.9842
+  P=14: per-test pi needed=0.99682; expected failures in 20000 sims=63.7; MC se of pi=0.00040; se of pi^5 ~ 0.0020 vs target 0.9842

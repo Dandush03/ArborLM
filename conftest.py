@@ -56,6 +56,33 @@ _P10IS3_STALE_AFTER_LATER_STUDIES = (
 # full parametrized id) is a strict expected failure, and tests/test_p10is2_partt_ruling40.py pins the 6.0.
 _P10IS2_PARTT_RULING_40 = ("tests/test_p10is2_config.py::test_part_t_threshold_equals_the_adr[caps.measuring_rehearsal_hours-3.0-10-**3.0 charged hours for Part Q, 3.0 for Part T**]",)
 
+# Added 2026-11-20 at the merge of P10-I-S0. P10-S0 (frozen, executed 2026-11-16) asserts through its gate G9 that no config file holds a value inside P10-S0's seed ranges. P10-I-S0's identity gate re-uses, read-only and
+# by design, P10-S0's rehearsal data base 209101 and initialisation 2092 (ADR-0023 section 5 identity gate part (a); seed registry section 4.6: listed as re-used, not new; `identity_gate_data_base` and `identity_gate_init`
+# in configs/p10is0_overload.toml). With that config in the tree G9 fails, and so does every P10-S0 test that runs G9 or the dry stages behind it. P10-S0's gate passed in its own tree at its freeze and run; its frozen
+# files are not edited. Strict expected failures: the suite turns red again if one passes. What this costs: P10-S0's dry-stage tests no longer exercise that completed study's stage code in the merged tree.
+_P10S0_STALE_AFTER_P10IS0 = (
+    "tests/test_p10s0_core.py::test_p1_to_p8_config_seeds_do_not_touch_s0",
+    "tests/test_p10s0_core.py::test_g9_reads_p9ii_s_test_seeds_from_its_committed_code_and_tests",
+    "tests/test_p10s0_governance.py::test_g9_asserts_p9ii_s_test_seed_constants_directly",
+    "tests/test_p10s0_stages.py::test_the_dry_stage_runs_every_stage_to_a_report",
+    "tests/test_p10s0_stages.py::test_dry_run_directories_and_records_carry_the_study_code",
+    "tests/test_p10s0_stages.py::test_dry_cells_hold_train_and_eval_records_with_the_read_swap",
+    "tests/test_p10s0_stages.py::test_dry_gates_all_pass_and_g10_cites_the_table_cell",
+    "tests/test_p10s0_stages.py::test_dry_manifests_one_per_stage_and_every_task_completed",
+    "tests/test_p10s0_stages.py::test_dry_q1_gate_record",
+    "tests/test_p10s0_stages.py::test_dry_report_carries_the_provenance_block_wherever_a5d_appears",
+    "tests/test_p10s0_stages.py::test_a_stage_is_run_once_and_never_overwritten",
+    "tests/test_p10s0_stages.py::test_dry_ledger_is_one_budget_charged_by_every_stage",
+    "tests/test_p10s0_stages.py::test_the_dry_analysis_loaded_every_cell_from_disk",
+    "tests/test_p10s0_stages.py::test_dry_rehearsal_wrote_only_whitelisted_records_for_every_item",
+    "tests/test_p10s0_stages.py::test_projection_and_caps_procedure",
+    "tests/test_p10s0_stages.py::test_an_incomplete_rehearsal_gives_a_projection_without_a_table",
+)
+
+# Added 2026-11-20 at the same merge. P10-I-S0's frozen seed-gate test runs the revision-3 registry checker copy over the whole repository with only P10-I-S0's and P10-I-R's files excluded; with P10-I-S2's configs
+# merged it reports P10-I-S2's own allocation hitting P10-I-S2's own files (no P10-I-S0 value is involved; 160 problems, all of that kind). The gate passed in P10-I-S0's own tree at its freeze (58cef50). Strict.
+_P10IS0_STALE_AFTER_LATER_STUDIES = ("tests/test_p10is0_audit_fixes.py::test_checker_copy_counts_the_twelve_named_values",)
+
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
@@ -73,3 +100,7 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="a later study's own registered seeds are in the repository: P10-I-R's whole-repository checker run reports them; each later study's own seed gate covers them"))
         if item.nodeid in _P10IS2_PARTT_RULING_40:
             item.add_marker(pytest.mark.xfail(strict=True, reason="ruling 40 took the one extension ADR-0025 section 10 allows (3.0 h to 6.0 h); the row pins the unextended figure"))
+        if item.nodeid.split("[")[0] in _P10S0_STALE_AFTER_P10IS0:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S0's identity gate re-uses P10-S0's rehearsal seeds 209101 and 2092 by design (ADR-0023); P10-S0's frozen gate G9 forbids any config holding them"))
+        if item.nodeid.split("[")[0] in _P10IS0_STALE_AFTER_LATER_STUDIES:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S2's own registered seeds are in the merged repository; P10-I-S0's frozen checker copy does not know them; the gate passed in its own tree at the freeze"))
