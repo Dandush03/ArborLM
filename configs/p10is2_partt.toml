@@ -140,7 +140,7 @@ registry_addendum_sha256 = "19199e46d9f4e51d5650b9cfd9f3e1dd11730d45ae9fdada776a
 own_file_globs = ["configs/p10is2_*", "studies/p10is2/*", "tests/test_p10is2_*"]   # the checker's built-in owner of this study (no --own needed)
 
 [caps]  # sections 9, 10
-measuring_rehearsal_hours = 3.0
+measuring_rehearsal_hours = 6.0   # ruling 40: the ONE extension of the fixed 3.0 h (ADR-0025 section 10) to twice its value, the most extension_factor_max allows; docs/decisions/ADR-0025-addendum-part-t-rulings-9.md
 rehearsal_hours = 3.0
 extension_factor_max = 2.0
 provisional = true
