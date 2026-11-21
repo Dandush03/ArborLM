@@ -398,7 +398,7 @@ def test_g9_names_every_derived_initialisation_value_and_cites_revision_5() -> N
     named = gates.named_values("T", CFG)
     assert set(range(330281, 330297)) <= named["initialisation"] and 330298 not in named["initialisation"]
     assert 250919 in named["analysis and route accuracy (inside the partition-side row)"]
-    assert CFG["seeds"]["registry_checker"].endswith("seed_registry_check_r6.py") and CFG["seeds"]["own_file_globs"] == ["configs/p10is2_*", "studies/p10is2/*", "tests/test_p10is2_*"]
+    assert CFG["seeds"]["registry_checker"].endswith("seed_registry_check_r7.py") and CFG["seeds"]["own_file_globs"] == ["configs/p10is2_*", "studies/p10is2/*", "tests/test_p10is2_*"]
     for k in ("registry_checker", "registry_addendum"):
         assert hashlib.sha256((ROOT / CFG["seeds"][k]).read_bytes()).hexdigest() == CFG["seeds"][k + "_sha256"]
 

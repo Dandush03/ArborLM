@@ -39,7 +39,7 @@ def test_r6_checker_is_r5_plus_one_ownership_line_and_a_note() -> None:
 def test_the_config_cites_r6_by_hash_and_r5_is_unchanged() -> None:
     cfg = core.load_config("T")
     s = cfg["seeds"]
-    assert s["registry_checker"].endswith("seed_registry_check_r6.py") and s["registry_addendum"].endswith("SEED_REGISTRY_R6.md")
+    assert s["registry_checker"].endswith("seed_registry_check_r7.py") and s["registry_addendum"].endswith("SEED_REGISTRY_R7.md")  # ruling 45 moved the citation to r7; r6 itself is pinned by tests/test_p10is2_partt_rulings13.py
     assert file_sha256(ROOT / s["registry_checker"]) == s["registry_checker_sha256"] and file_sha256(ROOT / s["registry_addendum"]) == s["registry_addendum_sha256"]
     assert file_sha256(REG / "seed_registry_check_r5.py") == "8ce47ab52abbe25b4b308ca2a1e7587f5461b13340f1faa2a0c0cff6804f4611"  # revision 5 is never edited
     assert file_sha256(REG / "SEED_REGISTRY_R5.md") == "19199e46d9f4e51d5650b9cfd9f3e1dd11730d45ae9fdada776a111e741ea865"
@@ -49,10 +49,10 @@ def test_g9_passes_on_this_tree_with_r6_and_the_checker_still_fails_planted_faul
     res = gates.seed_gate("T", core.load_config("T"), root=ROOT)
     assert res["passed"], res["problems"]
     assert res["checker"]["result_line"] == "RESULT: PASS" and res["checker"]["unedited"] is True
-    proc = subprocess.run([sys.executable, "-I", str(REG / "seed_registry_check_r6.py"), "--selftest", "--root", str(ROOT)], cwd=ROOT, capture_output=True, text=True, timeout=900, check=False)  # noqa: S603
+    proc = subprocess.run([sys.executable, "-I", str(REG / "seed_registry_check_r7.py"), "--selftest", "--root", str(ROOT)], cwd=ROOT, capture_output=True, text=True, timeout=900, check=False)  # noqa: S603
     fails = [x for x in proc.stdout.splitlines() if x.strip().startswith("FAIL:")]
     assert proc.returncode == 1 and "RESULT: FAIL" in proc.stdout and fails and all("ADR-0031" in x for x in fails)  # every remaining failure is one of the planted P10-I-S6 faults
-    assert not any("P10-I-S0 ADR-0023 /" in x for x in fails)  # the S0 own-files hits are the known case now; only the planted faults remain
+    assert not any(f"{s} /" in x for x in fails for s in ("P10-I-S0 ADR-0023", "P10-I-S1 ADR-0024"))  # the S0 own-files hits are the known case now; only the planted faults remain
 
 
 # --- ruling 43: the optimiser-step comparison --------------------------------------------------------------------------------------------------------

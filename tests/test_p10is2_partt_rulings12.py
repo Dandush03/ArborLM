@@ -94,7 +94,7 @@ def test_the_g9_failure_message_names_the_cited_checker_not_a_literal_revision(t
     cfg2["seeds"]["registry_addendum_sha256"] = file_sha256(root / add)
     res = gates.seed_gate_r5("T", cfg2, root=root)
     msgs = [p for p in res["problems"] if "did not print RESULT: PASS" in p]
-    assert msgs and "seed_registry_check_r6.py" in msgs[0] and "revision 5" not in msgs[0]
+    assert msgs and "seed_registry_check_r7.py" in msgs[0] and "revision 5" not in msgs[0]
 
 
 # --- ruling 44 decided: G8 coded identity evidence -------------------------------------------------------------------------------------------------------------

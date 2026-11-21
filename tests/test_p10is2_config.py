@@ -131,7 +131,7 @@ def test_config_identity_fields() -> None:
             stage = {k: v for k, v in caps.items() if k != "total_hours"}
             used = {k: v for k, v in caps.items() if k != "reuse_hours"}  # reuse_hours belongs to a plan that reuses completed stages (attempt 3); the stages a plan does not run keep 0.0
             assert (all(v > 0.0 for v in used.values()) or caps["total_hours"] > 0.0 and any(v > 0.0 for v in stage.values())) and caps["total_hours"] >= sum(stage.values()) - 0.01 * len(stage)
-    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" != T["seeds"]["registry_checker_sha256"] == "eb757082dac6e0e34a28c4d2ac87e0b96cd0e1f6af68505dc434792f475280a4"  # Part Q froze on r3; Part T cites r6 (ruling 42)
+    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" != T["seeds"]["registry_checker_sha256"] == "1f3b2de22ef3ff9bd01d81d67d7fcccac27710ed3394b62bec9c0688bc8b8f8f"  # Part Q froze on r3; Part T cites r7 (rulings 42 and 45)
     assert core.load_config("Q")["paths"]["durable_packages"] == "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
     with pytest.raises(ValueError):
         core.load_config("T", ROOT / core.CONFIG_Q)
