@@ -84,6 +84,38 @@ _P10S0_STALE_AFTER_P10IS0 = (
 _P10IS0_STALE_AFTER_LATER_STUDIES = ("tests/test_p10is0_audit_fixes.py::test_checker_copy_counts_the_twelve_named_values",)
 
 
+# Added 2026-11-21 at the merge of main into P10-I-S6 (the outcome was accepted as registered). Three of P10-I-S6's own frozen tests are false by construction after its run and after later studies merged; the frozen files are not edited.
+#  - test_real_ledger_and_s3_excluded_set_on_copies asserts that the lead's real shared panel ledger still hashes to 62f81116... (its state before D0); D0 appended this study's 1,024 windows (now ba14c714...).
+#  - test_n1_primitives_on_a_copy_of_the_real_ledger appends this study's windows to a copy of the real ledger, which now already holds them (the study's own refusal, "not exactly this D0's panels").
+#  - test_the_real_r4_seed_checker_through_seed_gate runs the revision-4 checker over the whole repository with only P10-I-S6's own files named; with P10-I-S0's and P10-I-S2's own configs merged it reports 60 of THEIR own-allocation hits
+#    (48 + 12, none involving an S6 value; the checker's built-in owner list does not know those studies). The gate passed at the S6 freeze. Strict expected failures.
+_P10IS6_STALE_AFTER_RUN = (
+    "tests/test_p10i_s6_audit2.py::test_real_ledger_and_s3_excluded_set_on_copies",
+    "tests/test_p10i_s6_d0.py::test_n1_primitives_on_a_copy_of_the_real_ledger",
+    "tests/test_p10i_s6_audit2.py::test_the_real_r4_seed_checker_through_seed_gate",
+)
+
+# Added 2026-11-21, same merge. Order- and environment-dependent frozen tests, NON-strict (they pass where their precondition holds):
+#  - tests/test_p6_retrieval.py (two tests): the process-wide torch thread settings (6 threads where the test expects 1; "cannot set number of interop threads after parallel work has started") depend on what ran earlier in the session.
+#    Both pass alone; the first fails in a shard that contains none of P10-I-S6's files (diagnosed 2026-11-21), and the p6 files are unchanged by the merge.
+#  - tests/test_p8_sim.py::test_p7b_reproduction_gate reads experiments/P7AT-.../ by a relative path: those local, git-ignored traces exist in the main checkout only, not in a worktree. Fails alone in a worktree.
+_ORDER_OR_ENVIRONMENT_DEPENDENT_2 = (
+    "tests/test_p6_retrieval.py::test_manifest_has_every_registered_field",
+    "tests/test_p6_retrieval.py::test_dry_run_refuses_to_write_under_experiments_or_results",
+    "tests/test_p8_sim.py::test_p7b_reproduction_gate",
+)
+
+
+# Added 2026-11-21 at the merge of main into P10-I-S1. P10-I-S1's gate G9 runs the registry checker copy (revision 3) over the whole repository. With the other studies' configs merged it prints RESULT: FAIL (56 problems:
+# the later studies' own allocations hitting their own configs, named in configs/p10i_s3_longer_training.toml, p10i_s6_flat_lead_persistence.toml, p10is0_overload.toml, p10is2_partq.toml, p10is2_partt.toml, p10is5_ssd.toml;
+# no P10-I-S1 value is involved). The gate passed in P10-I-S1's own tree at its freeze and in the registered run (2026-11-21); in the unmerged branch these two tests passed. They are stale by construction; the study's
+# files are not edited. Strict expected failures.
+_P10IS1_STALE_AFTER_LATER_STUDIES = (
+    "tests/test_p10is1_stages.py::test_gate_g9_passes_with_the_extended_checker_copy_and_records_it",
+    "tests/test_p10is1_rehearsal.py::test_the_registered_launch_reaches_its_first_stage_with_several_threads_set_beforehand",
+)
+
+
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_FREEZE:
@@ -104,3 +136,9 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S0's identity gate re-uses P10-S0's rehearsal seeds 209101 and 2092 by design (ADR-0023); P10-S0's frozen gate G9 forbids any config holding them"))
         if item.nodeid.split("[")[0] in _P10IS0_STALE_AFTER_LATER_STUDIES:
             item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S2's own registered seeds are in the merged repository; P10-I-S0's frozen checker copy does not know them; the gate passed in its own tree at the freeze"))
+        if item.nodeid.split("[")[0] in _P10IS6_STALE_AFTER_RUN:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S6 is run and accepted: the real shared ledger now holds its windows (hash changed) and later studies' own seeds are in the merged repository; the frozen assertion is stale by construction"))
+        if item.nodeid.split("[")[0] in _ORDER_OR_ENVIRONMENT_DEPENDENT_2:
+            item.add_marker(pytest.mark.xfail(strict=False, reason="order-dependent torch thread settings, or local experiments/ data present only in the main checkout; passes where the precondition holds"))
+        if item.nodeid.split("[")[0] in _P10IS1_STALE_AFTER_LATER_STUDIES:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="other studies' own registered seeds are in the merged repository; P10-I-S1's frozen gate G9 (whole-repository checker copy) reports them; the gate passed in P10-I-S1's own tree at its freeze and in the registered run"))
