@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1318" viewBox="0 0 1000 1318" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-20">
-<rect width="1000" height="1318" rx="14" fill="#0f0f10"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1734" viewBox="0 0 1000 1734" role="img" aria-label="ArborLM progress scorecard, updated 2026-11-20">
+<rect width="1000" height="1734" rx="14" fill="#0f0f10"/>
 <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
 <text x="28" y="48" fill="#f2f2f2" font-size="19" font-weight="600">External memory improves prediction</text>
 <text x="972" y="48" fill="#f2f2f2" font-size="19" text-anchor="end">7/10</text>
@@ -61,6 +61,26 @@
 <rect x="28" y="1206" width="944" height="8" rx="4" fill="#262626"/>
 <rect x="28" y="1206" width="0" height="8" rx="4" fill="#6b7a99"/>
 <text x="28" y="1240" fill="#c9c9c9" font-size="15">Untested: how often one teacher is right where the other is wrong.</text>
-<text x="28" y="1300" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-20: main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories added.</text>
+<text x="28" y="1296" fill="#f2f2f2" font-size="19" font-weight="600">Capability parity with reference models</text>
+<text x="972" y="1296" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="1310" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="1310" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1344" fill="#c9c9c9" font-size="15">Mandatory and untested: no pretrained model has had the memory attached, and no task-level evaluation has been run.</text>
+<text x="28" y="1400" fill="#f2f2f2" font-size="19" font-weight="600">Self-optimisation of memory and computation</text>
+<text x="972" y="1400" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="1414" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="1414" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1448" fill="#c9c9c9" font-size="15">Untested: whether the system can learn better retrieval, layout, indexing, updates or consolidation without losing quality.</text>
+<text x="28" y="1504" fill="#f2f2f2" font-size="19" font-weight="600">Self-directed capability learning</text>
+<text x="972" y="1504" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="1518" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="1518" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1552" fill="#c9c9c9" font-size="15">Untested: whether the system can set itself useful challenges, use independent feedback and keep the gains without a larger teacher.</text>
+<text x="28" y="1608" fill="#f2f2f2" font-size="19" font-weight="600">Sustained improvement across cycles</text>
+<text x="972" y="1608" fill="#f2f2f2" font-size="19" text-anchor="end">0/10</text>
+<rect x="28" y="1622" width="944" height="8" rx="4" fill="#262626"/>
+<rect x="28" y="1622" width="0" height="8" rx="4" fill="#6b7a99"/>
+<text x="28" y="1656" fill="#c9c9c9" font-size="15">Untested: whether gains accumulate over cycles without collapse, self-reinforced errors or costs that cancel the benefit.</text>
+<text x="28" y="1716" fill="#8a8a8a" font-size="13">Working estimate, not a registered result. Updated 2026-11-20: main after the merges of P10-I-R, P10-I-S3, P10-I-S5 and P10-I-S2 Part Q; six untested theories and, on 2026-11-20, four model-level rows added.</text>
 </g>
 </svg>
