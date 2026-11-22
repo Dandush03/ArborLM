@@ -22,3 +22,4 @@
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-lora-A-0.001", "utc": "20261122T000131405251Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "f4c9b0a306cade23248e593f94601700277836d0d302fe435b460068a3028b80", "unit": "grid-lora-A-0.001", "utc": "20261122T000758557809Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-lora-B-0.001", "utc": "20261122T000758749857Z"}
+{"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "1c43bdb4e4b643afa54cac561f892eb6f28b3918e1b571922876660be6773b0f", "unit": "grid-lora-B-0.001", "utc": "20261122T001415377175Z"}
