@@ -47,3 +47,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "1a9aafb41c6c8d7f5abd28c6e96fd7eaef4e98d6db7ed79ddc6df796f418ef34", "unit": "ladder-lora-A", "utc": "20261122T020258727674Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "ladder-lora-B", "utc": "20261122T020259023998Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "20b4e5f326a2282c82c6963c029f6ba9dbf2c2ec253cd63a90f4b88c80ded704", "unit": "ladder-lora-B", "utc": "20261122T022745876023Z"}
+{"event": "end", "record": "/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-T-calibration/calibration_0.json", "record_sha256": "cf6573246d84c455a9109dce77d8ce529b9e4883e2539d71b35655ba8e2348ef", "repetition": 0, "session": "20261121T230355206911Z", "utc": "20261122T022911374192Z"}
