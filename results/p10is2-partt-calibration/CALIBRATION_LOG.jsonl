@@ -33,3 +33,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "57fa557affecd996bec918303cd3cbfc2441749d28a7e9c4d8eff218909f1064", "unit": "grid-etable-B-0.001", "utc": "20261122T003407049343Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-etable-A-0.003", "utc": "20261122T003407257667Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "dda64ae965b89fcd12b73cad0a73834335706c9cdce89fa6721e032f0f9469a7", "unit": "grid-etable-A-0.003", "utc": "20261122T003922277426Z"}
+{"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-etable-B-0.003", "utc": "20261122T003922492473Z"}
