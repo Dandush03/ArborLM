@@ -29,3 +29,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "81f4be8b6a6d60fbf76740922a7d574c055de5bff1578b2627f53253ea44bc64", "unit": "layer12-B", "utc": "20261122T002343357080Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-etable-A-0.001", "utc": "20261122T002343558157Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "37cb45fc8521bfe645fcd7b9e330ef08941d22f2e7f1d9659d6e6573478a7f33", "unit": "grid-etable-A-0.001", "utc": "20261122T002903999681Z"}
+{"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-etable-B-0.001", "utc": "20261122T002904204003Z"}
