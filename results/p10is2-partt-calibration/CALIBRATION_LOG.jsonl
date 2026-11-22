@@ -43,3 +43,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "16c97e9410a6833a0634a6fbf1d13be591aba31a0d2c574f03ccae2351771875", "unit": "ladder-store-A", "utc": "20261122T011627387465Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "ladder-store-B", "utc": "20261122T011627661232Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "b7f5e9822c94baa6ba7e5508ec5c0485d87030fb5cf1c8c7b9af0025e987e451", "unit": "ladder-store-B", "utc": "20261122T013700706587Z"}
+{"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "ladder-lora-A", "utc": "20261122T013700991062Z"}
