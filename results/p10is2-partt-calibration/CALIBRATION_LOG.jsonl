@@ -25,3 +25,4 @@
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "1c43bdb4e4b643afa54cac561f892eb6f28b3918e1b571922876660be6773b0f", "unit": "grid-lora-B-0.001", "utc": "20261122T001415377175Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "layer12-A", "utc": "20261122T001415574176Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "d39cf74a489148d27f33c882e4e128fbbdb7da5722d7de09ee9da69447d29820", "unit": "layer12-A", "utc": "20261122T001903476827Z"}
+{"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "layer12-B", "utc": "20261122T001903674824Z"}
