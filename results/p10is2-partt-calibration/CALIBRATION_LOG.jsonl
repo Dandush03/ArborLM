@@ -36,3 +36,4 @@
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-etable-B-0.003", "utc": "20261122T003922492473Z"}
 {"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "de879a5f565f1298398073f1b33f767f4dce582a9419fc99278f7c1011cafca8", "unit": "grid-etable-B-0.003", "utc": "20261122T004427214670Z"}
 {"event": "unit_begin", "identity_sha256": "8eeea8143986dfe34e5fae160af829da728757f5819992d64070e7e472d00a80", "repetition": 0, "session": "20261121T230355206911Z", "unit": "grid-etable-A-0.01", "utc": "20261122T004427444149Z"}
+{"event": "unit", "repetition": 0, "session": "20261121T230355206911Z", "state_sha256": "e5d9545a90ae25ec01d8df8c253dce3f8dfacb53b493b2712c63e623f81142a0", "unit": "grid-etable-A-0.01", "utc": "20261122T004943211678Z"}
