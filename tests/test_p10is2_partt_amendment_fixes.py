@@ -77,3 +77,36 @@ def test_the_plan_takes_the_one_calibration_record_with_the_amendment_in_force()
         pytest.skip("the calibration directory is not on this machine")
     path, rep = partt_stages.chosen_calibration(ROOT)
     assert rep == 0 and path.name == "calibration_0.json"
+
+
+def test_a_train_stage_that_completed_cannot_be_invoked_again_in_the_same_run_directory(tmp_path: Path) -> None:
+    """The failure of the first targeted rehearsal (2026-11-23): the parents' invocation completed ``train`` (waves 1 and 2, wave 3 empty), so the M-ii invocation in the same directory died in ``write_manifest`` with exit 1
+    instead of pausing with exit 4. The same sequence in two run directories works, which is what the driver now does."""
+    from studies.p10is2 import partt_tasks
+    from studies.p10is2.common import runner
+
+    cfg = core.load_config("T")
+    from test_p10is2_partt_amendment import a_train_plan
+
+    plan = a_train_plan()
+
+    def ok_runner(tasks, **kw):  # type: ignore[no-untyped-def]
+        return {t.label: {"status": runner.COMPLETED, "seconds": 1.0, "peak_rss_bytes": 1} for t in tasks}, 1.0
+
+    def invoke(run_dir: Path, arms: list[str]) -> dict:  # type: ignore[type-arg]
+        return partt_tasks.run_stage_tasks("train", plan, cfg, tmp_path, run_dir, "-", tmp_path / "q", other_alive=lambda: [], task_runner=ok_runner, mode="rehearsal", kind="counting", arms=arms)
+
+    a, b = tmp_path / "a", tmp_path / "b"
+    assert invoke(a, ["M1", "M-append"])["status"] == "COMPLETE"
+    with pytest.raises(RuntimeError, match="a completed stage is never rewritten"):
+        invoke(a, ["M-ii"])  # the failure
+    assert invoke(b, ["M-ii"])["status"] == "COMPLETE"  # a run directory of its own: no failure
+
+
+def test_the_parents_snapshots_are_copied_into_the_m_ii_run_directory(tmp_path: Path) -> None:
+    src, dst = tmp_path / "parents/snapshots", tmp_path / "main/snapshots"
+    src.mkdir(parents=True)
+    (src / "r0__M1__AB.pt").write_bytes(b"a")
+    (src / "r0__M-append__AB.pt").write_bytes(b"bb")
+    assert partt_targeted.copy_snapshots(src, dst) == ["r0__M-append__AB.pt", "r0__M1__AB.pt"]
+    assert (dst / "r0__M-append__AB.pt").read_bytes() == b"bb" and (src / "r0__M1__AB.pt").is_file()  # copied, the source kept

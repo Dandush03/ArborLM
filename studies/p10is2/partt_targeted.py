@@ -12,6 +12,7 @@ rehearsal completed them against the pre-amendment plan): a departure from ADR-0
 
 import json
 import os
+import shutil
 import sys
 import time
 from collections.abc import Callable, Mapping, Sequence
@@ -115,6 +116,16 @@ def cap_and_admission_checks(directory: Path) -> tuple[dict[str, Any], dict[str,
     return cap, adm
 
 
+def copy_snapshots(src: Path, dst: Path) -> list[str]:
+    """The parents' snapshots (written in the parents' own run directory) copied into the M-ii run directory. A stage's manifest is COMPLETE once its waves are, and a completed stage is never rewritten
+    (``runner.write_manifest``), so the parents cannot be trained by an invocation of ``train`` in the run directory whose ``train`` is then PAUSED and resumed (the first attempt, 2026-11-23, ended there)."""
+    dst.mkdir(parents=True, exist_ok=True)
+    names = sorted(p.name for p in src.glob("*") if p.is_file())
+    for n in names:
+        shutil.copy2(src / n, dst / n)
+    return names
+
+
 def capped_plan_file(plan: planmod.Plan, run_dir: Path, led: core.Ledger) -> Path:
     """A copy of the plan whose counting allowance leaves CAP_STOP_SECONDS of the rehearsal cap (kept under the run directory, never under ``freeze/``)."""
     data = json.loads(json.dumps(plan.data))
@@ -143,9 +154,11 @@ def run_targeted_rehearsal(repo: Path, run_dir: Path, part_q_dir: Path, *, launc
     checks: dict[str, Any] = {}
     logs = run_dir.parent / f"{run_dir.name}_driver_logs"
 
-    def go(name: str, stage: str, kind: str, expect: int, *extra: str) -> bool:
+    parents_dir = run_dir.parent / f"{run_dir.name}_parents"
+
+    def go(name: str, stage: str, kind: str, expect: int, *extra: str, where: Path = run_dir) -> bool:
         cap = partt_tasks.rehearsal_cap_seconds(cfg, kind, plan) + 900.0
-        rc = launch(partt_counting.stage_argv(repo, stage, run_dir, kind, *extra), logs / f"{name}.log", cap)
+        rc = launch(partt_counting.stage_argv(repo, stage, where, kind, *extra), logs / f"{name}.log", cap)
         if rc != expect:
             problems.append(f"{name}: exit {rc}, expected {expect}")
         return rc == expect
@@ -161,7 +174,13 @@ def run_targeted_rehearsal(repo: Path, run_dir: Path, part_q_dir: Path, *, launc
     mii: dict[str, Any] = {"passed": False}
     stop: dict[str, Any] = {"passed": False}
     if not problems:
-        ok = go("train-parents", "train", "measuring", 0, "--rehearsal-arms", "M1,M-append")
+        claim_run_dir(parents_dir, "rehearsal", plan.data["run_dir"])  # the parents are trained in a run directory of their own (copy_snapshots)
+        if not partt_tasks.stage_marker(parents_dir, "gates").is_file():
+            partt_tasks.mark_complete(parents_dir, "gates", "targeted")
+        ok = go("train-parents", "train", "measuring", 0, "--rehearsal-arms", "M1,M-append", where=parents_dir)
+        if ok:
+            copy_snapshots(parents_dir / "snapshots", run_dir / "snapshots")
+            led.charge_process("train", "parents", "driver:parents", core.Ledger(parents_dir / "charged_ledger.json", "T", 1e12).charged())  # the parents' charge is part of this rehearsal's
         ok = ok and go("train-m-ii-to-the-cap", "train", "counting", partt_counting.EXIT_PAUSED, "--plan-file", str(capped_plan_file(plan, run_dir, led)), "--rehearsal-arms", "M-ii")
         ckpts = sorted(p.name for p in (run_dir / "checkpoints").glob("*M-ii*")) if (run_dir / "checkpoints").is_dir() else []
         man = partt_counting.runner_manifest(run_dir, "train") or {}
@@ -182,7 +201,7 @@ def run_targeted_rehearsal(repo: Path, run_dir: Path, part_q_dir: Path, *, launc
         **core.envelope("rehearsal", "T"), "kind_of_rehearsal": "targeted", "status": "COMPLETE" if complete else "INCOMPLETE", "plan_file_sha256": file_sha256(plan_file), "caps_provisional": bool(plan.data.get("caps_provisional", True)),
         "checks": checks, "problems": problems, "not_rehearsed_here": ["gates", "evaluate", "controls", "combined", "recompute", "analysis", "report"], "amendment_record": amend["record"],
         "platform": gates.platform_record(), "timings": {"total_seconds": clock() - t0}, "charged_seconds": led.charged(), "charged_ledgers": {str(run_dir / "charged_ledger.json"): led.charged(), **{str(Path(x)): core.Ledger(Path(x), "T", 1e12).charged() for x in charged_ledgers}},
-        "targeted_allowance_hours": amend["allowance_hours"], "part_q_dir": str(part_q_dir),
+        "targeted_allowance_hours": amend["allowance_hours"], "part_q_dir": str(part_q_dir), "parents_run_dir": str(parents_dir),
     }  # fmt: skip
     partt_counting.write_rehearsal_record(run_dir / "rehearsal_targeted.json", rec)
     if not complete:
