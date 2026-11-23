@@ -45,6 +45,10 @@ def preflight(repo: Path, cfg: Mapping[str, Any], plan: planmod.Plan, amend: Map
         items["registered_run_dir_ignored"] = True
     except StageRefused as e:
         items["registered_run_dir_ignored"] = str(e)
+    ckdir = reg / "checkpoints"
+    health = checkpoint_health(ckdir) if ckdir.is_dir() else {}
+    items["checkpoints"] = health
+    items["checkpoints_loadable"] = all(v["loadable"] for v in health.values())
     items["amendment_manifest_problem"] = partt_amendment.manifest_problem(plan.data.get("manifests"), amend, repo)
     ledger = reg / "charged_ledger.json"
     if ledger.is_file():
@@ -59,8 +63,31 @@ def preflight(repo: Path, cfg: Mapping[str, Any], plan: planmod.Plan, amend: Map
         items["amended_cap_lets_the_stage_resume"] = min(own_left, total_left) > 0.0
     else:
         items["amended_cap_lets_the_stage_resume"] = False
-    passed = not items["foreign_freeze_records"] and not items["platform_problems"] and items["tree_clean"] is True and items["pythonpath_clean"] is True and items["registered_run_dir_mode"] == "registered" and items["registered_run_dir_ignored"] is True and items["amendment_manifest_problem"] is None and items["amended_cap_lets_the_stage_resume"] is True
+    passed = not items["foreign_freeze_records"] and not items["platform_problems"] and items["tree_clean"] is True and items["pythonpath_clean"] is True and items["registered_run_dir_mode"] == "registered" and items["registered_run_dir_ignored"] is True and items["checkpoints_loadable"] is True and items["amendment_manifest_problem"] is None and items["amended_cap_lets_the_stage_resume"] is True
     return {"passed": bool(passed), **items}
+
+
+def checkpoint_health(directory: Path, pattern: str = "*M-ii*.ckpt") -> dict[str, dict[str, Any]]:
+    """Read-only (audit 17): each checkpoint matching ``pattern`` is loaded on CPU exactly as the resume path loads it (``torch.load`` of the dict ``engine.train_cell`` reads: ``update``, ``params``, ``opt``,
+    ``losses``) and checked for structure, an integer update counter within the calibrated updates' reach, one loss per update and finite parameters. Nothing is written; no tensor value or loss is returned, only
+    loadable yes/no and the update the cell would resume from. ``engine.train_cell`` itself does NOT validate on load and does not fall back to a fresh start: a corrupt file makes the cell ERROR."""
+    import torch
+
+    out: dict[str, dict[str, Any]] = {}
+    for f in sorted(directory.glob(pattern)):
+        try:
+            ck = torch.load(f, weights_only=False, map_location="cpu")
+            missing = [k for k in ("update", "params", "opt", "losses") if k not in ck]
+            if missing:
+                out[f.name] = {"loadable": False, "update": None, "problem": f"missing {missing}"}
+                continue
+            update = int(ck["update"])
+            finite = all(bool(torch.isfinite(p).all()) for p in ck["params"])
+            problems = [] if len(ck["losses"]) == update and finite and update >= 0 and isinstance(ck["opt"], dict) and "state" in ck["opt"] else ["structure, loss count or finiteness"]
+            out[f.name] = {"loadable": not problems, "update": update, "problem": problems[0] if problems else None}
+        except Exception as e:  # a truncated or corrupt file
+            out[f.name] = {"loadable": False, "update": None, "problem": type(e).__name__}
+    return out
 
 
 def tiny_tasks(directory: Path, n: int, seconds: float) -> list[runner.Task]:
@@ -161,3 +188,9 @@ def run_targeted_rehearsal(repo: Path, run_dir: Path, part_q_dir: Path, *, launc
     if not complete:
         raise StageRefused(f"refused: the targeted rehearsal is incomplete: {problems or [c for c in partt_amendment.REQUIRED_CHECKS if checks[c].get('passed') is not True]}")
     return rec
+
+
+if __name__ == "__main__":  # python -m studies.p10is2.partt_targeted <checkpoints directory> [glob]: read-only, CPU, prints loadable yes/no and the update per checkpoint
+    d = Path(sys.argv[1])
+    for name, r in checkpoint_health(d, sys.argv[2] if len(sys.argv) > 2 else "*M-ii*.ckpt").items():
+        print(f"{name}: loadable={'yes' if r['loadable'] else 'no'} resume_from_update={r['update']}" + (f" ({r['problem']})" if r["problem"] else ""))

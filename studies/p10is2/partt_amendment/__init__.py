@@ -110,7 +110,7 @@ def plan_diff_problems(old: Mapping[str, Any], new: Mapping[str, Any], amend: Ma
         if d in (".import_walk.python_files", ".import_walk.files_opened"):
             key = d.rsplit(".", 1)[1]
             changed = set(map(str, old["import_walk"][key])) ^ set(map(str, new["import_walk"][key]))
-            if all(own in c for c in changed):
+            if all(own in c or c in amend["exempt_files"] for c in changed):  # the amendment's own directory and its exempt files (the targeted rehearsal's module)
                 continue
         out.append(d)
     return out

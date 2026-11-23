@@ -107,8 +107,8 @@ def plan_for(args: argparse.Namespace, repo: Path, stage: str) -> tuple[planmod.
     """The plan and the mode of this launch: ``registered`` (freeze, Decision 2) or ``rehearsal`` (``--rehearsal``: the candidate plan). The only branch between the two; everything after it is one path."""
     if getattr(args, "rehearsal", False):
         return refuse_unless_rehearsal_ready(repo, Path(args.run_dir), getattr(args, "plan_file", None), stage, args.freeze_commit), "rehearsal"
-    if getattr(args, "plan_file", None) or getattr(args, "pause_after_updates", None) is not None:
-        raise StageRefused("refused: --plan-file and --pause-after-updates exist in a rehearsal (--rehearsal) only")
+    if getattr(args, "plan_file", None) or getattr(args, "pause_after_updates", None) is not None or getattr(args, "rehearsal_arms", None):
+        raise StageRefused("refused: --plan-file, --pause-after-updates and --rehearsal-arms exist in a rehearsal (--rehearsal) only")
     return refuse_unless_registered_ready(repo, Path(args.run_dir), args.freeze_commit, stage), "registered"
 
 
@@ -356,7 +356,7 @@ def chosen_calibration(repo: Path) -> tuple[Path, int]:
     if not paths:
         raise StageRefused(f"refused: no calibration record in {d}")
     frozen = planmod.frozen_file_hashes(repo, "T")
-    files = [f for f in frozen if f.startswith("studies/p10is2/") and f.endswith(".py")]
+    files = partt_amendment.checked_files([f for f in frozen if f.startswith("studies/p10is2/") and f.endswith(".py")], partt_amendment.load(core.load_config("T", repo / core.CONFIG_T), repo))  # ruling 51: less the amendment's exempt files, as at the freeze
     used = cal.repetition_used({i: core.read_record(p, "calibration") for i, p in paths.items()}, frozen, files)
     if used["used"] is None:
         raise StageRefused("refused: " + used["refused"])
