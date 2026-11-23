@@ -1,5 +1,7 @@
 # ArborLM
 
+[![Support ArborLM on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/arborlm) · [Research site](https://arborlm.ai) · [Project and support](https://arborlm.com/#support)
+
 **ArborLM** is a research proposal for a language model with **trainable hierarchical neural parameter memory**. The motivating hypothesis is that a model might learn to navigate a very large parameter-memory store while retrieving only a small, useful and physically local working set per token, potentially reducing data movement in SSD-backed inference.
 
 > **Scientific status: memory helped frozen backbones, but P5 did not establish a hierarchy advantage.** Learned routing failed its improvement criterion; both trees reduced scored-key work but were slower than flat memory on the registered CPU workload. Earlier failures stand, the broader storage-scaling concept remains unproven, and scaling is not authorized. The human research lead authorized a Codex reviewer exception; Astra review was not performed.
