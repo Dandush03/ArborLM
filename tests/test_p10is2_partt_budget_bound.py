@@ -30,7 +30,7 @@ def test_the_config_holds_151_the_approval_says_151_and_the_entry_agrees() -> No
     cfg = core.load_config("T")
     text = (DIR / "APPROVAL.md").read_text()
     e = entry()
-    assert float(cfg["caps"]["study_budget_hours"]) == 151.0 == e["approved_bound_hours"]
+    assert float(cfg["caps"]["study_budget_hours"]) == 205.0 and e["approved_bound_hours"] == 151.0  # ruling 51 raised the bound to 205 after the 151 h of ruling 46 (the approval record and its entry are history)
     assert e["registered_bound_hours"] == 95.68
     assert "Raise to 151 h" in text and "95.68" in text and "151 h" in text and "Astra review: NOT_PERFORMED" in text
     assert "No rule, threshold, grid, seed, cell count, U, padding factor or stage-cap rule changes" in text and "Calibration is not repeated" in text
@@ -39,10 +39,10 @@ def test_the_config_holds_151_the_approval_says_151_and_the_entry_agrees() -> No
 
 def test_the_bound_still_refuses_a_total_above_it_and_passes_the_plans_total() -> None:
     cfg = core.load_config("T")
-    partt_stages.check_study_budget(cfg, 150.17, 18.26)  # the plan's total cap at U = 8,000 now fits
-    partt_stages.check_study_budget(cfg, 151.0, 18.26)  # equal passes
-    with pytest.raises(core.StageRefused, match="exceeds the study's budget bound 151.0 h"):
-        partt_stages.check_study_budget(cfg, 151.01, 18.26)  # ruling 33's check is unchanged
+    partt_stages.check_study_budget(cfg, 204.02, 3.0)  # the amended plan's total cap fits
+    partt_stages.check_study_budget(cfg, 205.0, 3.0)  # equal passes
+    with pytest.raises(core.StageRefused, match="exceeds the study's budget bound 205.0 h"):
+        partt_stages.check_study_budget(cfg, 205.01, 3.0)  # ruling 33's check is unchanged
 
 
 def test_the_calibration_records_validity_check_ignores_the_config_key_the_bound_lives_in() -> None:

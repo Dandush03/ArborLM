@@ -44,13 +44,22 @@ def worker_policy(cfg: Mapping[str, Any], other_alive: bool) -> dict[str, Any]:
     return {"workers": workers, "rss_worker_bytes": int(per * 2**30), "rss_aggregate_bytes": int(min(float(c["memory_aggregate_gib"]), per * workers) * 2**30), "other_study_alive": other_alive}
 
 
-def waves_of(stage: str, plan: planmod.Plan, rehearsal: bool = False) -> list[list[dict[str, Any]]]:
+def wave_workers(cfg: Mapping[str, Any], wave: Sequence[Mapping[str, Any]], pol: Mapping[str, Any]) -> int:
+    """Ruling 51: a wave made only of the arms in ``caps.single_worker_arms`` (M-ii, whose cell holds about 35 GB of MPS driver memory) runs with at most ``caps.workers_max_single_arm`` workers; any other wave keeps the policy's."""
+    c = cfg["caps"]
+    arms = set(c.get("single_worker_arms", []))
+    if arms and wave and all(i.get("arm") in arms for i in wave):
+        return min(int(pol["workers"]), int(c.get("workers_max_single_arm", pol["workers"])))
+    return int(pol["workers"])
+
+
+def waves_of(stage: str, plan: planmod.Plan, rehearsal: bool = False, arms: Sequence[str] | None = None) -> list[list[dict[str, Any]]]:
     """The task groups of a stage from the plan's items. Training runs in dependency waves; every other stage is one wave. A rehearsal takes the plan-derived subset (``partt_rehearsal.subset_items``) of the same items."""
     items = list(plan.items(stage))
     if rehearsal:
         items = list(partt_rehearsal.subset_items(stage, items))
     if stage == "train":
-        return [[i for i in items if i["arm"] in w[0]] for w in WAVES]
+        return [[i for i in items if i["arm"] in w[0] and (not arms or i["arm"] in arms)] for w in WAVES]  # ruling 51: a targeted rehearsal trains only the arms it names
     if stage in ("evaluate", "controls", "combined"):
         reps = sorted({int(i["rep"]) if "rep" in i else int(i["of"].rsplit("|r", 1)[1]) for i in items if ("rep" in i or "of" in i) and ("rep" in i or "|r" in i["of"])})
         tasks = [{"id": f"{stage}|r{r}", "stage": stage, "rep": r} for r in reps]
@@ -140,7 +149,7 @@ def rehearsal_cap_seconds(cfg: Mapping[str, Any], kind: str, plan: Any = None) -
     return float(cfg["caps"]["measuring_rehearsal_hours" if kind == "measuring" else "rehearsal_hours"]) * 3600.0
 
 
-def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo: Path, run_dir: Path, freeze_commit: str, qdir: Path, *, other_alive: Callable[[], Sequence[str]] = other_studies_alive, poll: float = 0.5, task_runner: Callable[..., Any] | None = None, mode: str = "registered", kind: str = "counting", extra: Sequence[str] = (), pause_after_updates: int | None = None) -> dict[str, Any]:
+def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo: Path, run_dir: Path, freeze_commit: str, qdir: Path, *, other_alive: Callable[[], Sequence[str]] = other_studies_alive, poll: float = 0.5, task_runner: Callable[..., Any] | None = None, mode: str = "registered", kind: str = "counting", extra: Sequence[str] = (), pause_after_updates: int | None = None, arms: Sequence[str] | None = None) -> dict[str, Any]:
     """One invocation of a task stage, for a registered run (``mode="registered"``) or a rehearsal (``mode="rehearsal"``: the plan-derived subset, the rehearsal's fixed cap, the same runner and workers).
     Returns the stage manifest (COMPLETE, PAUSED or FAILED). Waves run one after another; a wave that does not complete stops the stage (the next wave needs its snapshots)."""
     started = datetime.now(UTC).isoformat()
@@ -150,7 +159,9 @@ def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo
     all_out: dict[str, dict[str, Any]] = {}
     caps_used: dict[str, float] = {}
     t_stage = time.monotonic()
-    for wave in waves_of(stage, plan, mode == "rehearsal"):
+    for wave in waves_of(stage, plan, mode == "rehearsal", arms):
+        if not wave:
+            continue
         cap = stage_cap_for(plan, stage, led) if mode == "registered" else rehearsal_cap_seconds(cfg, kind, plan) - led.charged()
         caps_used = {"stage_seconds_left": cap, "total_seconds_left": led.remaining()}
         if cap <= 0:  # nothing left: PAUSED, the extension is the lead's (section 9)
@@ -158,7 +169,7 @@ def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo
                 all_out.setdefault(it["id"], {"status": runner.NOT_STARTED, "seconds": 0.0, "reason": "the cumulative hour cap is spent", "peak_rss_bytes": 0})
             break
         tasks = make_tasks(stage, wave, repo, run_dir, freeze_commit, qdir, extra, pause_after_updates)
-        outcomes, _wall = run(tasks, workers=pol["workers"], cap_seconds=cap, rss_worker_bytes=pol["rss_worker_bytes"], rss_aggregate_bytes=pol["rss_aggregate_bytes"], poll=poll)
+        outcomes, _wall = run(tasks, workers=wave_workers(cfg, wave, pol), cap_seconds=cap, rss_worker_bytes=pol["rss_worker_bytes"], rss_aggregate_bytes=pol["rss_aggregate_bytes"], poll=poll, admit_free_bytes=int(float(cfg["caps"].get("memory_admission_free_gib", 0.0)) * 2**30))
         for label, o in outcomes.items():
             led.charge_process(stage, label, f"worker:{label}", float(o.get("seconds", 0.0)))  # the sum of each worker process's wall time (C10)
         all_out.update(outcomes)

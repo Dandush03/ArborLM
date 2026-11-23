@@ -11,6 +11,7 @@ error: nothing is guessed). The caps themselves are the shared ``common.caps.cap
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from . import partt_amendment
 from .common import core
 from .common.caps import caps_proposal
 from .common.core import StageRefused
@@ -131,13 +132,14 @@ def counting_allowance_hours(meas: Mapping[str, Any], items: Mapping[str, Sequen
     return math.ceil(2.0 * counting_projection_seconds(meas, items, counting_updates)["seconds"] / 3600.0 * 100.0 - 1e-9) / 100.0
 
 
-def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], basis: Mapping[str, int], charge_seconds: float, allowance_seconds: float = 0.0) -> dict[str, float]:
+def proposal_from_record(meas: Mapping[str, Any], items: Mapping[str, Sequence[Mapping[str, Any]]], basis: Mapping[str, int], charge_seconds: float, allowance_seconds: float = 0.0, amendment: Mapping[str, Any] | None = None) -> dict[str, float]:
     """The caps by the rule: every registered stage gets 2 x its projection, the total is the charge before the freeze + 2 x all stages (rounded up to 0.01 h), by ``common.caps.caps_proposal``. Refuses a measuring
     record that was not made through the registered entry point (no ``caps_formula``)."""
     if meas.get("caps_formula") != CAPS_FORMULA:
         raise StageRefused(f"refused: the Part T measuring record does not carry caps_formula {CAPS_FORMULA!r}: it was not made through the registered entry point in fresh worker processes")
     proj = project_stage_seconds(items, basis, meas["rates_seconds_per_unit"], meas["overhead_seconds"])
-    return dict(caps_proposal(charge_seconds + allowance_seconds, proj))  # total = plan charge + counting allowance + 2 x projected registered stages (ruling 20)
+    proposed = dict(caps_proposal(charge_seconds + allowance_seconds, proj))  # total = plan charge + counting allowance + 2 x projected registered stages (ruling 20)
+    return partt_amendment.apply(proposed, amendment, charge_seconds, allowance_seconds)  # ruling 51: the amended stage caps and the total over them; unchanged without an amendment
 
 
 CAPS_FORMULA = "partt-whole-process-v1"

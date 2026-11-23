@@ -116,6 +116,11 @@ _P10IS1_STALE_AFTER_LATER_STUDIES = (
 )
 
 
+# Added 2026-11-23 with the P10-I-S2 Part T cap amendment (ruling 51). This test reads the REAL config and asserts that no stage cap is entered yet ("the unset config"); the caps were entered by the first freeze
+# (c25d4f0b), so it is false by construction from then on. Strict expected failure; the same behaviour is tested on an unset copy by the tests that use tests/p10is2_partt_unset.py.
+_P10IS2_PARTT_CAPS_ENTERED = ("tests/test_p10is2_partt_engineering.py::test_the_caps_come_from_a_record_with_the_formula_and_a_zero_cap_is_refused",)
+
+
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_FREEZE:
@@ -130,6 +135,8 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="another study's own registered seeds are in the merged repository; P10-I-S3's frozen seed gate does not know them; the gate passed in its own tree at the freeze"))
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_LATER_STUDIES:
             item.add_marker(pytest.mark.xfail(strict=True, reason="a later study's own registered seeds are in the repository: P10-I-R's whole-repository checker run reports them; each later study's own seed gate covers them"))
+        if item.nodeid in _P10IS2_PARTT_CAPS_ENTERED:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="the first freeze entered the stage caps into the real config; this test asserts they are unset (ruling 51 note, 2026-11-23)"))
         if item.nodeid in _P10IS2_PARTT_RULING_40:
             item.add_marker(pytest.mark.xfail(strict=True, reason="ruling 40 took the one extension ADR-0025 section 10 allows (3.0 h to 6.0 h); the row pins the unextended figure"))
         if item.nodeid.split("[")[0] in _P10S0_STALE_AFTER_P10IS0:

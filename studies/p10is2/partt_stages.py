@@ -24,7 +24,7 @@ from typing import Any
 from arborlm.io import file_sha256, read_json, write_json
 
 from . import calibration as cal
-from . import partt_caps, partt_plan
+from . import partt_amendment, partt_caps, partt_plan
 from .common import core, gates
 from .common import plan as planmod
 from .common.caps import caps_match_config
@@ -123,7 +123,7 @@ def execute_stage(args: argparse.Namespace, repo: Path, plan: planmod.Plan, mode
     partt_real.require_gates_passed(run_dir, args.stage)
     if args.stage in partt_tasks.TASK_STAGES:
         extra = ["--rehearsal", "--rehearsal-kind", getattr(args, "rehearsal_kind", "counting"), *(["--plan-file", str(args.plan_file)] if getattr(args, "plan_file", None) else [])] if mode == "rehearsal" else []
-        man = partt_tasks.run_stage_tasks(args.stage, plan, cfg, repo, run_dir, str(args.freeze_commit), partt_real.qdir_of(plan, Path(args.part_q_dir)), mode=mode, kind=getattr(args, "rehearsal_kind", "counting"), extra=extra, pause_after_updates=getattr(args, "pause_after_updates", None))
+        man = partt_tasks.run_stage_tasks(args.stage, plan, cfg, repo, run_dir, str(args.freeze_commit), partt_real.qdir_of(plan, Path(args.part_q_dir)), mode=mode, kind=getattr(args, "rehearsal_kind", "counting"), extra=extra, pause_after_updates=getattr(args, "pause_after_updates", None), arms=[a for a in (getattr(args, "rehearsal_arms", None) or "").split(",") if a])
         if man["status"] == "COMPLETE":  # the results are merged at the END of the stage that produces them
             if args.stage == "evaluate":
                 partt_real.merge_evaluate(run_dir)
@@ -597,9 +597,15 @@ def cmd_rehearse(args: argparse.Namespace) -> int:
     if args.kind == "measuring":
         rec = partt_counting.run_measuring_rehearsal(repo, Path(args.run_dir), Path(args.part_q_dir), part_q_plan=Path(args.part_q_plan) if args.part_q_plan else None, manifests=read_json(Path(args.manifests)) if args.manifests else None, charged_ledgers=args.charged_ledger)
     else:
-        rec = partt_counting.run_counting_rehearsal(repo, Path(args.run_dir), charged_ledgers=args.charged_ledger)
+        rec = partt_targeted_run(repo, args) if args.kind == "targeted" else partt_counting.run_counting_rehearsal(repo, Path(args.run_dir), charged_ledgers=args.charged_ledger)
     print(json.dumps({k: rec[k] for k in ("kind_of_rehearsal", "status", "stages", "forced", "rates_seconds_per_unit", "overhead_seconds") if k in rec}, default=str))
     return 0
+
+
+def partt_targeted_run(repo: Path, args: argparse.Namespace) -> dict[str, Any]:
+    from . import partt_targeted
+
+    return partt_targeted.run_targeted_rehearsal(repo, Path(args.run_dir), Path(args.part_q_dir), charged_ledgers=args.charged_ledger)
 
 
 def differing_paths(a: Any, b: Any, path: str = "") -> list[str]:
@@ -667,9 +673,10 @@ def cmd_candidate_plan(args: argparse.Namespace) -> int:
     charge = ledgers_charge(ledgers)  # the charge before the freeze: the measuring rehearsal's and the calibration's ledgers by rule, plus any named
     pin = {"path": str(meas_path.resolve()), "sha256": file_sha256(meas_path)}
     pq = part_q_block(Path(args.part_q_dir), Path(args.part_q_plan) if args.part_q_plan else None)
-    allowance = partt_caps.counting_allowance_hours(meas, partt_plan.stage_items(calib), int(calib["U"]))  # ruling 20 at the calibrated U (ruling 27): fixed in the plan BEFORE the counting rehearsal runs
+    amend = partt_amendment.load(cfg, repo)
+    allowance = amend["allowance_hours"] if amend else partt_caps.counting_allowance_hours(meas, partt_plan.stage_items(calib), int(calib["U"]))  # ruling 20 at the calibrated U (ruling 27): fixed in the plan BEFORE the counting rehearsal runs; ruling 51: the targeted rehearsal's allowance
     rec = partt_plan.build_candidate(repo, Path(args.run_dir).resolve(), cfg, calib, walk=walk, manifests=manifests, charge_before_freeze=charge, part_q=pq, counting_allowance_hours=allowance, measuring_rehearsal=pin)
-    proposed = partt_caps.proposal_from_record(meas, rec["items"], rec["task_units_basis"], float(charge["seconds"]), allowance * 3600.0)["total_hours"]
+    proposed = partt_caps.proposal_from_record(meas, rec["items"], rec["task_units_basis"], float(charge["seconds"]), allowance * 3600.0, amend)["total_hours"]
     check_study_budget(cfg, float(proposed), allowance)  # ruling 37: the plan's own projected total, not a config total that is still 0.0 at the first plan
     path = repo / core.PLAN_T
     if path.exists():
@@ -702,7 +709,7 @@ def cmd_caps_proposal(args: argparse.Namespace) -> int:
     plan = planmod.Plan.load(repo / core.PLAN_T, "T")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
     allowance = float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0
-    prop = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, allowance)
+    prop = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, allowance, partt_amendment.load(cfg, repo))
     print(json.dumps({"proposal_hours": {"calibration_hours": cal_h, **prop}, "charge_before_freeze_seconds": charge, "counting_allowance_seconds": allowance, "rule": "stage cap = 2 x projected; total = plan charge + counting allowance + 2 x all registered stages, rounded up to 0.01 h"}))
     return 0
 
@@ -729,7 +736,7 @@ def cmd_caps_config(args: argparse.Namespace) -> int:
         raise StageRefused(f"refused: the calibration cap in the config ({cfg['stage_caps']['calibration_hours']}) is not the one the measuring record gives ({cal_h}): write it with --phase calibration first")
     plan = planmod.Plan.load(repo / core.PLAN_T, "T")
     charge = float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
-    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0)
+    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], charge, float(plan.data.get("counting_allowance_hours", 0.0)) * 3600.0, partt_amendment.load(cfg, repo))
     check_study_budget(cfg, float(proposal["total_hours"]), float(plan.data.get("counting_allowance_hours", 0.0)))
     if args.apply:
         path.write_text(partt_caps.apply_caps_text(path.read_text(encoding="utf-8"), proposal), encoding="utf-8")
@@ -786,9 +793,13 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     if "counting_allowance_hours" not in plan.data:
         raise StageRefused("refused: the plan carries no counting allowance (candidate-plan --measuring-rehearsal, ruling 20): re-plan with --supersede")
     allowance_h = float(plan.data["counting_allowance_hours"])
-    if abs(allowance_h - partt_caps.counting_allowance_hours(meas, plan.data["items"], int(plan.data["calibration"]["U"]))) > 1e-9:
+    amend = partt_amendment.load(cfg, repo)  # ruling 51: amended caps and the targeted rehearsal's allowance only while an amendment record names them
+    if abs(allowance_h - (amend["allowance_hours"] if amend else partt_caps.counting_allowance_hours(meas, plan.data["items"], int(plan.data["calibration"]["U"])))) > 1e-9:
         raise StageRefused("refused: the plan's counting allowance is not 2 x the counting charge projected from this measuring record: re-plan with --supersede (no cap is edited by hand)")
-    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], float(charge["seconds"]), allowance_h * 3600.0)  # the units come from the plan; the charge and the allowance are the ones the plan recorded
+    problem = partt_amendment.manifest_problem(plan.data.get("manifests"), amend, repo)
+    if problem:
+        raise StageRefused(f"refused: {problem}")
+    proposal = partt_caps.proposal_from_record(meas, plan.data["items"], plan.data["task_units_basis"], float(charge["seconds"]), allowance_h * 3600.0, amend)  # the units come from the plan; the charge and the allowance are the ones the plan recorded
     proposal = {"calibration_hours": partt_caps.calibration_cap_hours(meas, cfg), **proposal}
     differ = caps_match_config(cfg, proposal)
     if differ:
@@ -823,7 +834,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
     wp = planmod.walk_problems(walk, plan.data["frozen_files"], repo)
     if wp:
         raise StageRefused("refused: " + "; ".join(wp))
-    files = [f for f in plan.data["frozen_files"] if f.startswith("studies/p10is2/") and f.endswith(".py")]
+    files = partt_amendment.checked_files([f for f in plan.data["frozen_files"] if f.startswith("studies/p10is2/") and f.endswith(".py")], amend)  # ruling 51: less the files the amendment record exempts
     records = calib.get("records") or {}
     bad = ["the plan carries no calibration records"] if not records else [f"{n}: {p}" for n, rec in records.items() for p in cal.code_identity_problems(rec, plan.data["frozen_files"], files)]
     if bad:
@@ -839,13 +850,22 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         if p is None or not p.is_file() or file_sha256(p) != m["sha256"]:
             raise StageRefused(f"refused: the plan does not list {name} by a hash that holds (Part T reads the Part Q manifest's files only, by hash: ruling L12)")
     counting = core.read_record(Path(args.counting_rehearsal), "rehearsal")
-    reh = gates.rehearsal_gate(counting, REHEARSAL_STAGES, plan_file_sha256=plan_sha)
+    targeted = None
+    if amend:  # ruling 51: the FIRST counting rehearsal completed against the pre-amendment plan, a TARGETED rehearsal against this plan, and an amendment record whose listed differences are the only ones
+        reh = gates.rehearsal_gate(counting, REHEARSAL_STAGES, plan_file_sha256=amend["pre_amendment_plan_sha256"])
+        diffs = partt_amendment.freeze_problems(repo, cfg, plan.data, amend)
+        targeted = core.read_record(Path(args.targeted_rehearsal), "rehearsal") if args.targeted_rehearsal else None
+        tgate = partt_amendment.targeted_gate(targeted, plan_sha)
+        if diffs or not tgate["passed"]:
+            raise StageRefused(f"refused: the amendment's differences from the pre-amendment plan and config are not only the listed ones, or the targeted rehearsal is not COMPLETE against this plan: {diffs[:6]}; {tgate}")
+    else:
+        reh = gates.rehearsal_gate(counting, REHEARSAL_STAGES, plan_file_sha256=plan_sha)
     mps = counting.get("g4_mps") or {}
     if mps.get("passed") is not True or (counting.get("platform") or {}).get("machine") != gates.platform_record()["machine"] or (counting.get("platform") or {}).get("system") != gates.platform_record()["system"]:
         raise StageRefused(f"refused: gate G4 MPS against CPU must have RUN and PASSED on this machine before the freeze (a skipped gate is not a pass); the counting rehearsal's record has: {mps}")
     if not reh["passed"]:
         raise StageRefused(f"refused: the counting rehearsal's record does not show every stage COMPLETE, one forced pause and resume, one forced PAUSED — IDENTITY and restore, and this plan file's SHA-256: {reh}")
-    counting_charge = counting_charge_of(counting)  # ruling 17: read from the counting rehearsal's ledger, recorded, added to the pre-freeze charge the registered ledger starts from
+    counting_charge = counting_charge_of(targeted if amend and targeted else counting)  # ruling 17 (ruling 51: with an amendment, the targeted rehearsal's charge; the first counting rehearsal's is in the plan's charge before the freeze): read from the counting rehearsal's ledger, recorded, added to the pre-freeze charge the registered ledger starts from
     plan_charge = float(charge["seconds"])
     total_cap = float(cfg["stage_caps"]["total_hours"]) * 3600.0
     check_study_budget(cfg, float(cfg["stage_caps"]["total_hours"]), allowance_h)
@@ -860,7 +880,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
         raise StageRefused(f"refused: gate G9 did not pass: {seed['problems']}")
     rec = {
         **core.envelope("freeze_record", "T"), "plan_file_sha256": plan_sha, "counting_rehearsal": {"path": str(Path(args.counting_rehearsal).resolve()), "sha256": file_sha256(Path(args.counting_rehearsal))},
-        "attestations": {"sealed_values_unopened_by": attest}, "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "caps_by_code": proposal, "adr_hash_provenance_only": plan.data["adr"]["sha256"],
+        "attestations": {"sealed_values_unopened_by": attest}, "seal_broken": bool(args.seal_broken), "seed_gate": seed, "rehearsal_gate": reh, "caps_by_code": proposal, "amendment": ({"record": amend["record"], "pre_amendment_plan_sha256": amend["pre_amendment_plan_sha256"], "first_freeze_commit": amend["first_freeze_commit"], "targeted_rehearsal": {"path": str(Path(args.targeted_rehearsal).resolve()), "sha256": file_sha256(Path(args.targeted_rehearsal))}} if amend and targeted else None), "adr_hash_provenance_only": plan.data["adr"]["sha256"],
         "pre_freeze_charge": {"plan_seconds": plan_charge, "counting_rehearsal_seconds": counting_charge, "counting_allowance_seconds": allowance_h * 3600.0, "registered_ledger_starts_from_seconds": need, "total_cap_seconds": total_cap},
     }  # fmt: skip
     record.parent.mkdir(parents=True, exist_ok=True)
@@ -872,6 +892,7 @@ def cmd_freeze(args: argparse.Namespace) -> int:
 def add_rehearsal_flags(r: argparse.ArgumentParser) -> None:
     r.add_argument("--rehearsal", action="store_true", help="a rehearsal stage: the candidate plan, '-' for the freeze commit, no Decision 2, rehearsal seeds, the plan-derived subset, D_cal only")
     r.add_argument("--rehearsal-kind", choices=("measuring", "counting"), default="counting", help="rehearsal only: which rehearsal's fixed cap applies")
+    r.add_argument("--rehearsal-arms", help="rehearsal only (ruling 51, the targeted rehearsal): train only these arms, comma separated")
     r.add_argument("--plan-file", help="rehearsal only: a plan file other than freeze/partt_plan.json (the measuring rehearsal's own plan, the forced identity check)")
     r.add_argument("--pause-after-updates", type=int, help="rehearsal only: the forced pause (the cell train|M1|AB|r0 stops after this many updates, exits 74; the same command resumes it)")
 
@@ -891,6 +912,7 @@ def build_parser() -> argparse.ArgumentParser:
     f = sub.add_parser("freeze")
     f.add_argument("--measuring-rehearsal", required=True)
     f.add_argument("--counting-rehearsal", required=True)
+    f.add_argument("--targeted-rehearsal", help="ruling 51: the targeted rehearsal's record (required with an amendment)")
     f.add_argument("--attest-sealed-unopened", default="")
     f.add_argument("--seal-broken", action="store_true")
     f.add_argument("--repo")
@@ -946,7 +968,7 @@ def build_parser() -> argparse.ArgumentParser:
         r.add_argument("--repo")
         add_rehearsal_flags(r)
     h = sub.add_parser("rehearse")
-    h.add_argument("--kind", choices=("measuring", "counting"), required=True)
+    h.add_argument("--kind", choices=("measuring", "counting", "targeted"), required=True)
     h.add_argument("--run-dir", required=True)
     h.add_argument("--part-q-dir", required=False, default=".")
     h.add_argument("--part-q-plan")
