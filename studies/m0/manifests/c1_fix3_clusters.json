@@ -1,0 +1,267 @@
+{
+ "clusters_in_map": 28,
+ "cross_evaluation": {
+  "B1": {
+   "medium": [
+    "R2.count_divisible",
+    "M1.arithmetic_series"
+   ]
+  },
+  "B3": {
+   "medium": [
+    "R2.list_ops",
+    "R2.string_rewrite"
+   ]
+  },
+  "B4": {
+   "strong": [
+    "R2.coin_change_min",
+    "R2.lcs_length",
+    "M1.S5_unbounded_table (change_ways)"
+   ]
+  },
+  "B5": {
+   "strong": [
+    "R2.gcd_euclid",
+    "M1.gcd_lcm"
+   ]
+  },
+  "B6": {
+   "strong": [
+    "M1.S7_step_rule (recurrence_iterate)"
+   ]
+  },
+  "B7": {
+   "medium": [
+    "R1.boolean_lights (compass_turns)",
+    "R1.spatial_grid_walk"
+   ]
+  },
+  "B8": {
+   "medium": [
+    "R2.stack_machine",
+    "R2.expression_eval"
+   ],
+   "strong": [
+    "R2.bracket_match"
+   ]
+  },
+  "C1.bfs_queue": {
+   "medium": [
+    "R1.categories_follow"
+   ]
+  },
+  "C1.binary_search": {
+   "strong": [
+    "R2.binary_search_trace"
+   ]
+  },
+  "C1.bubble_pass": {
+   "medium": [
+    "R2.sort_list"
+   ]
+  },
+  "C1.cellular_update": {
+   "strong": [
+    "R2.cellular_automaton"
+   ]
+  },
+  "C1.circle_elimination": {
+   "strong": [
+    "R1.containers_queue_line (elimination_josephus)"
+   ]
+  },
+  "C1.counter_list": {
+   "medium": [
+    "M1.mode_tally"
+   ]
+  },
+  "C1.digit_peel": {
+   "strong": [
+    "R2.from_base",
+    "R2.to_base"
+   ]
+  },
+  "C1.fast_power": {
+   "strong": [
+    "R2.modular_power (the unmodified algorithm; the variant fast_power_f3 differs in the squaring step)"
+   ]
+  },
+  "C1.insertion_sort": {
+   "medium": [
+    "R2.sort_list"
+   ]
+  },
+  "C1.kadane_scan": {
+   "strong": [
+    "R2.max_subarray_sum"
+   ]
+  },
+  "C1.majority_vote_scan": {
+   "medium": [
+    "M1.mode_tally"
+   ]
+  },
+  "C1.minmax_track": {
+   "medium": [
+    "R1.order_extreme"
+   ]
+  },
+  "C1.mirror_pointers": {
+   "medium": [
+    "R2.palindrome_check"
+   ]
+  },
+  "C1.run_length_scan": {
+   "strong": [
+    "R2.run_length"
+   ]
+  },
+  "C1.union_find_links": {
+   "medium": [
+    "R1.categories_follow"
+   ]
+  }
+ },
+ "excluded_lineages_not_registered": [
+  "C1.insertion_sort",
+  "C1.minmax_track",
+  "C1.kadane_scan"
+ ],
+ "fix3_lineages": [
+  "C1.binary_search_f3",
+  "C1.bracket_matching_f3",
+  "C1.bytecode_loop_f3",
+  "C1.cellular_update_f3",
+  "C1.coin_change_table_f3",
+  "C1.cond_chain_f3",
+  "C1.counter_list_f3",
+  "C1.digit_peel_f3",
+  "C1.euclid_gcd_traced_f3",
+  "C1.fast_power_f3",
+  "C1.fib_like_f3",
+  "C1.fib_shapes_recursive_f3",
+  "C1.func_compose_f3",
+  "C1.list_build_f3",
+  "C1.majority_vote_scan_f3",
+  "C1.merge_two_sorted_f3",
+  "C1.nested_pairs_f3",
+  "C1.partition_pass_f3",
+  "C1.shared_lists_f3",
+  "C1.sieve_marking_f3",
+  "C1.string_build_f3",
+  "C1.string_methods_f3",
+  "C1.turtle_walk_f3",
+  "C1.union_find_links_f3",
+  "C1.while_counter_f3"
+ ],
+ "members": {
+  "B1": [
+   "C1.loop_sum",
+   "C1.string_build_f3",
+   "C1.list_build_f3",
+   "C1.nested_pairs_f3"
+  ],
+  "B2": [
+   "C1.func_branch",
+   "C1.func_compose_f3"
+  ],
+  "B3": [
+   "C1.slices",
+   "C1.string_methods_f3"
+  ],
+  "B4": [
+   "C1.coin_change_table_f3",
+   "C1.string_pair_table",
+   "C1.grid_path_table"
+  ],
+  "B5": [
+   "C1.euclid_gcd_traced_f3",
+   "C1.cond_chain_f3"
+  ],
+  "B6": [
+   "C1.fib_like_f3",
+   "C1.fib_shapes_recursive_f3",
+   "C1.recursive_calls_r2"
+  ],
+  "B7": [
+   "C1.bytecode_loop_f3",
+   "C1.turtle_walk_f3"
+  ],
+  "B8": [
+   "C1.bracket_matching_f3",
+   "C1.postfix_evaluation"
+  ],
+  "C1.bfs_queue": [
+   "C1.bfs_queue"
+  ],
+  "C1.binary_search": [
+   "C1.binary_search_f3"
+  ],
+  "C1.bubble_pass": [
+   "C1.bubble_pass"
+  ],
+  "C1.cellular_update": [
+   "C1.cellular_update_f3"
+  ],
+  "C1.circle_elimination": [
+   "C1.circle_elimination_r2"
+  ],
+  "C1.counter_list": [
+   "C1.counter_list_f3"
+  ],
+  "C1.digit_peel": [
+   "C1.digit_peel_f3"
+  ],
+  "C1.fast_power": [
+   "C1.fast_power_f3"
+  ],
+  "C1.insertion_sort": [],
+  "C1.kadane_scan": [],
+  "C1.majority_vote_scan": [
+   "C1.majority_vote_scan_f3"
+  ],
+  "C1.merge_two_sorted": [
+   "C1.merge_two_sorted_f3"
+  ],
+  "C1.minmax_track": [],
+  "C1.mirror_pointers": [
+   "C1.mirror_pointers"
+  ],
+  "C1.partition_pass": [
+   "C1.partition_pass_f3"
+  ],
+  "C1.run_length_scan": [
+   "C1.run_length_scan"
+  ],
+  "C1.shared_lists": [
+   "C1.shared_lists_f3"
+  ],
+  "C1.sieve_marking": [
+   "C1.sieve_marking_f3"
+  ],
+  "C1.union_find_links": [
+   "C1.union_find_links_f3"
+  ],
+  "C1.while_counter": [
+   "C1.while_counter_f3"
+  ]
+ },
+ "not_registered_reasons": {
+  "C1.counter_list[unmodified]": "the histogram of v % k is a residue count (audit section 3); the state-machine tally counter_list_f3 replaces it",
+  "C1.fast_power[unmodified]": "every state of square-and-multiply is a pow(b, e mod 2^s, m) or a sum of such terms (audit section 3; ruling R-14); the VARIANT fast_power_f3 with an added term in the squaring replaces it (see VARIANT)",
+  "C1.insertion_sort": "every state of insertion sort (the list after any number of rounds, a hole index, the number of shifts) is a function of sorted(prefix) and rank counts (audit section 3: list, at, shifts, hole, holesum all 100 % formula); no question about the unchanged program forces tracing",
+  "C1.insertion_sort_traced": "closed form: hole = number of earlier elements that do not satisfy the test, minus one; holesum is the sum of those ranks (audit section 3; ruling R-14)",
+  "C1.kadane_scan": "every state of Kadane's scan is a max-suffix or max-subarray value (audit section 3: best, cur, curs all 100 %; kadane_scan_traced[cur_at] is the max suffix of a prefix, ruling R-14). Two variants were tried and measured (battery runs bat_r1, bat_r2, kept in the scratch directory): restart when cur < thr with thr 3 to 12 (cur equal to the LAST element in 0.43-0.70 of items, best equal to the largest element in 0.38-0.67, the Kadane formulas 0.3-0.5) and restart only when cur < -thr with thr 1 to 4 (the max-suffix formula for cur 0.76-0.85, for the sum of cur 0.50-0.70). Neither tell could be removed by construction, so the lineage is NOT REGISTERED (no variant is in this round's code)",
+  "C1.minmax_track": "every shape (the maximum or minimum, its first index, their sum) is max/min/index of the list (audit section 3); the running state of a one-pass extreme scan has no non-formula quantity"
+ },
+ "registered_candidate_clusters": 25,
+ "registered_candidate_clusters_without_variants": 23,
+ "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/AUDIT3_C1.md section 2 (auditor's strict map: 28 clusters, recursive_calls_r2 merged into the fib cluster B6); self-checked only, not a registration",
+ "supersedes": {},
+ "variant_clusters": {
+  "C1.counter_list": "C1.counter_list_f3",
+  "C1.fast_power": "C1.fast_power_f3"
+ },
+ "variants": {}
+}

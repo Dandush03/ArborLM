@@ -1,0 +1,196 @@
+{
+ "hash_seeds": [
+  "0",
+  "98765"
+ ],
+ "interpreters": [
+  "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/.venv/bin/python",
+  "/opt/homebrew/bin/python3"
+ ],
+ "lineages": {
+  "C1.binary_search_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.bracket_matching_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.bytecode_loop_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.cellular_update_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.coin_change_table_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.cond_chain_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.counter_list_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.digit_peel_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.euclid_gcd_traced_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.fast_power_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.fib_like_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.fib_shapes_recursive_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.func_compose_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.list_build_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.majority_vote_scan_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.merge_two_sorted_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.nested_pairs_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.partition_pass_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.shared_lists_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.sieve_marking_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.string_build_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.string_methods_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.turtle_walk_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.union_find_links_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  },
+  "C1.while_counter_f3": {
+   "errors": 0,
+   "items": 2100,
+   "key_mismatches": 0,
+   "not_one_line": 0,
+   "run_disagreements": 0
+  }
+ },
+ "per_level": 300,
+ "seed": 5,
+ "total": {
+  "errors": 0,
+  "items": 52500,
+  "key_mismatches": 0,
+  "not_one_line": 0,
+  "run_disagreements": 0
+ }
+}
