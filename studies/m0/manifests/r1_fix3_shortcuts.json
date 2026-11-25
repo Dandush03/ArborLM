@@ -1,0 +1,1656 @@
+{
+ "note": "Measured with studies/m0/r1_fix3_battery.py: 500 items per level, seed 6200 (a throwaway integer, not a registered seed). gain = the largest of (accuracy - chance) and (anti accuracy - chance) over the battery at that level; low = the most negative (accuracy - chance). Rules that are an exact algorithm are listed and not counted. Not a threshold; the working target of the fix round was +-0.10.",
+ "shapes": {
+  "R1.activity_selection_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.184,
+     "1": 0.184,
+     "2": 0.132,
+     "3": 0.148,
+     "4": 0.122,
+     "5": 0.104,
+     "6": 0.118
+    },
+    "excluded_exact": [
+     "latest_start_first"
+    ],
+    "gain": 0.184,
+    "level": 0,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.144,
+    "rule": "listed_order"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.496,
+     "1": 0.344,
+     "2": 0.354,
+     "3": 0.298,
+     "4": 0.33,
+     "5": 0.284,
+     "6": 0.232
+    },
+    "gain": 0.496,
+    "level": 0,
+    "rule": "round_2n_3"
+   },
+   "replaces": "R1.activity_selection_r4",
+   "status": "registered candidate"
+  },
+  "R1.attribute_rule_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.1782,
+     "1": 0.1965,
+     "2": 0.2069,
+     "3": 0.1876,
+     "4": 0.1967,
+     "5": 0.2007,
+     "6": 0.1751
+    },
+    "excluded_exact": [],
+    "gain": 0.2069,
+    "level": 2,
+    "low_by_level": {
+     "0": -0.034,
+     "1": -0.038,
+     "2": -0.0147,
+     "3": -0.0147,
+     "4": -0.029,
+     "5": -0.015,
+     "6": -0.017
+    },
+    "mode_rate_max": 0.024,
+    "rule": "matches_last_leaf"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.6838,
+     "1": 0.6995,
+     "2": 0.5782,
+     "3": 0.5836,
+     "4": 0.4726,
+     "5": 0.4242,
+     "6": 0.4904
+    },
+    "gain": 0.6995,
+    "level": 1,
+    "rule": "all_or"
+   },
+   "replaces": "R1.attribute_rule",
+   "status": "registered candidate"
+  },
+  "R1.boolean_lights_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.144,
+     "1": 0.076,
+     "2": 0.08,
+     "3": 0.034,
+     "4": 0.046,
+     "5": 0.028,
+     "6": 0.03
+    },
+    "excluded_exact": [],
+    "gain": 0.144,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.03,
+     "1": -0.016,
+     "2": -0.026,
+     "3": -0.034,
+     "4": -0.046,
+     "5": -0.028,
+     "6": -0.026
+    },
+    "mode_rate_max": 0.542,
+    "rule": "wired_switch_count_parity"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.categories_default_exceptions_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.096,
+     "1": 0.032,
+     "2": 0.062,
+     "3": 0.038,
+     "4": 0.06,
+     "5": 0.052,
+     "6": 0.04
+    },
+    "excluded_exact": [
+     "partial_walk_3",
+     "rule_at_distance_1",
+     "second_nearest_rule",
+     "third_nearest_rule"
+    ],
+    "gain": 0.096,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.096,
+     "1": -0.032,
+     "2": -0.062,
+     "3": -0.038,
+     "4": -0.06,
+     "5": -0.052,
+     "6": -0.01
+    },
+    "mode_rate_max": 0.562,
+    "rule": "least_specific_rule"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.categories_follow_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0967,
+     "1": 0.0987,
+     "2": 0.0927,
+     "3": 0.1007,
+     "4": 0.0747,
+     "5": 0.1207,
+     "6": 0.1187
+    },
+    "excluded_exact": [],
+    "gain": 0.1207,
+    "level": 5,
+    "low_by_level": {
+     "0": -0.1333,
+     "1": -0.0833,
+     "2": -0.1193,
+     "3": -0.1373,
+     "4": -0.1193,
+     "5": -0.0973,
+     "6": -0.1113
+    },
+    "mode_rate_max": 0.364,
+    "rule": "all_reach_else_cbd"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.4267,
+     "1": 0.4367,
+     "2": 0.4147,
+     "3": 0.4307,
+     "4": 0.4187,
+     "5": 0.3727,
+     "6": 0.4087
+    },
+    "gain": 0.4367,
+    "level": 1,
+    "rule": "naive_no_lifting"
+   },
+   "replaces": "R1.categories_follow_r4",
+   "status": "registered candidate"
+  },
+  "R1.compass_turns": {
+   "after": {
+    "by_level": {
+     "0": 0.054,
+     "1": 0.036,
+     "2": 0.018,
+     "3": 0.01,
+     "4": 0.022,
+     "5": 0.012,
+     "6": 0.012
+    },
+    "excluded_exact": [
+     "ccw_as_cw",
+     "cw270_as_90",
+     "ignore_180s",
+     "left_right_only"
+    ],
+    "gain": 0.054,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.03,
+     "1": -0.064,
+     "2": -0.008,
+     "3": -0.02,
+     "4": -0.026,
+     "5": -0.036,
+     "6": -0.034
+    },
+    "mode_rate_max": 0.302,
+    "rule": "last_turn_only"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.conditional_chain_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0057,
+     "1": 0.0067,
+     "2": 0.0167,
+     "3": 0.0247,
+     "4": 0.0227,
+     "5": 0.0207,
+     "6": 0.0177
+    },
+    "excluded_exact": [],
+    "gain": 0.0247,
+    "level": 3,
+    "low_by_level": {
+     "0": -0.0113,
+     "1": 0.0,
+     "2": -0.0333,
+     "3": -0.0413,
+     "4": -0.0453,
+     "5": -0.0413,
+     "6": -0.0353
+    },
+    "mode_rate_max": 0.39,
+    "rule": "majority_conclusion_sign"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.5307,
+     "1": 0.5187,
+     "2": 0.4827,
+     "3": 0.5007,
+     "4": 0.4327,
+     "5": 0.4447,
+     "6": 0.456
+    },
+    "gain": 0.5307,
+    "level": 0,
+    "rule": "query_is_fact_else_cbd"
+   },
+   "replaces": "R1.conditional_chain",
+   "status": "registered candidate"
+  },
+  "R1.conditional_decision_tree_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.0367,
+     "1": 0.036,
+     "2": 0.0177,
+     "3": 0.0323,
+     "4": 0.016,
+     "5": 0.0153,
+     "6": 0.029
+    },
+    "excluded_exact": [
+     "first_cond_only_then_first",
+     "ignore_last_condition"
+    ],
+    "gain": 0.0367,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.11,
+     "1": -0.108,
+     "2": -0.02,
+     "3": -0.044,
+     "4": -0.048,
+     "5": -0.042,
+     "6": -0.043
+    },
+    "mode_rate_max": 0.136,
+    "rule": "negate_all"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.conditional_threshold_rule_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.146,
+     "1": 0.114,
+     "2": 0.12,
+     "3": 0.096,
+     "4": 0.096,
+     "5": 0.09,
+     "6": 0.054
+    },
+    "excluded_exact": [
+     "off_by_one_low",
+     "strict_gt_D"
+    ],
+    "gain": 0.146,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.026,
+     "1": -0.002,
+     "2": -0.016,
+     "3": -0.008,
+     "4": -0.036,
+     "5": -0.024,
+     "6": -0.012
+    },
+    "mode_rate_max": 0.542,
+    "rule": "abstain_as_no"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.containers_queue_line_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0182,
+     "1": 0.0215,
+     "2": 0.035,
+     "3": 0.0484,
+     "4": 0.057,
+     "5": 0.0612,
+     "6": 0.0812
+    },
+    "excluded_exact": [],
+    "gain": 0.0812,
+    "level": 6,
+    "low_by_level": {
+     "0": -0.0818,
+     "1": -0.0765,
+     "2": -0.067,
+     "3": -0.0636,
+     "4": -0.057,
+     "5": -0.0548,
+     "6": -0.0488
+    },
+    "mode_rate_max": 0.022,
+    "rule": "ignore_leave"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.4652,
+     "1": 0.3651,
+     "2": 0.3144,
+     "3": 0.2722,
+     "4": 0.2394,
+     "5": 0.2053,
+     "6": 0.163
+    },
+    "gain": 0.4652,
+    "level": 0,
+    "rule": "ignore_leave"
+   },
+   "replaces": "R1.containers_queue_line_r2",
+   "status": "registered candidate"
+  },
+  "R1.containers_stack_piles_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.0896,
+     "1": 0.1873,
+     "2": 0.1771,
+     "3": 0.137,
+     "4": 0.1509,
+     "5": 0.11,
+     "6": 0.1191
+    },
+    "excluded_exact": [
+     "ignore_turns",
+     "turn_moves_bottom_to_top"
+    ],
+    "gain": 0.1873,
+    "level": 1,
+    "low_by_level": {
+     "0": -0.024,
+     "1": -0.0147,
+     "2": -0.0309,
+     "3": -0.025,
+     "4": -0.0131,
+     "5": -0.01,
+     "6": -0.0109
+    },
+    "mode_rate_max": 0.072,
+    "rule": "ignore_turns"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.elimination_bracket_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.1673,
+     "1": 0.1591,
+     "2": 0.1655,
+     "3": 0.0721,
+     "4": 0.144,
+     "5": 0.1092,
+     "6": 0.1083
+    },
+    "excluded_exact": [],
+    "gain": 0.1673,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.009,
+     "1": -0.025,
+     "2": -0.035,
+     "3": -0.0165,
+     "4": -0.0064,
+     "5": -0.0145,
+     "6": -0.0055
+    },
+    "mode_rate_max": 0.024,
+    "rule": "best_in_each_half"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.1673,
+     "1": 0.1591,
+     "2": 0.1655,
+     "3": 0.0721,
+     "4": 0.144,
+     "5": 0.3485,
+     "6": 0.1224
+    },
+    "gain": 0.3485,
+    "level": 5,
+    "rule": "beater_in_own_half"
+   },
+   "replaces": "R1.elimination_bracket_r4",
+   "status": "registered candidate"
+  },
+  "R1.elimination_josephus": {
+   "after": null,
+   "before": {
+    "gain": 0.2011,
+    "level": 3,
+    "rule": "no_removal_index"
+   },
+   "replaces": null,
+   "status": "NOT REGISTERED (reason in r1_fix3_clusters.json)"
+  },
+  "R1.equivalence_classes_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.1207,
+     "1": 0.0953,
+     "2": 0.0767,
+     "3": 0.0853,
+     "4": 0.044,
+     "5": 0.0567,
+     "6": 0.0673
+    },
+    "excluded_exact": [],
+    "gain": 0.1207,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.0453,
+     "1": -0.0173,
+     "2": -0.0153,
+     "3": -0.0073,
+     "4": 0.0007,
+     "5": -0.0213,
+     "6": -0.0393
+    },
+    "mode_rate_max": 0.402,
+    "rule": "common_same_neighbour_else_cbd"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.2127,
+     "1": 0.224,
+     "2": 0.2607,
+     "3": 0.2587,
+     "4": 0.2727,
+     "5": 0.3047,
+     "6": 0.2287
+    },
+    "gain": 0.3047,
+    "level": 5,
+    "rule": "common_same_neighbour_else_cbd"
+   },
+   "replaces": "R1.equivalence_classes_r2",
+   "status": "registered candidate"
+  },
+  "R1.equivalence_exchange_rates_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.03,
+     "1": 0.026,
+     "2": 0.036,
+     "3": 0.042,
+     "4": 0.042,
+     "5": 0.046,
+     "6": 0.042
+    },
+    "excluded_exact": [],
+    "gain": 0.046,
+    "level": 5,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.08,
+    "rule": "smallest_number"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.5107,
+     "1": 0.432,
+     "2": 0.3565,
+     "3": 0.3287,
+     "4": 0.2875,
+     "5": 0.2957,
+     "6": 0.2702
+    },
+    "gain": 0.5107,
+    "level": 0,
+    "rule": "local_max"
+   },
+   "replaces": "R1.equivalence_exchange_rates",
+   "status": "registered candidate"
+  },
+  "R1.event_timeline_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.13,
+     "1": 0.128,
+     "2": 0.092,
+     "3": 0.064,
+     "4": 0.054,
+     "5": 0.042,
+     "6": 0.022
+    },
+    "excluded_exact": [],
+    "gain": 0.13,
+    "level": 0,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.026,
+    "rule": "path_alternating_sign_diff"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.5107,
+     "1": 0.492,
+     "2": 0.448,
+     "3": 0.4733,
+     "4": 0.4951,
+     "5": 0.405,
+     "6": 0.4169
+    },
+    "gain": 0.5107,
+    "level": 0,
+    "rule": "net_side_count"
+   },
+   "replaces": "R1.event_timeline",
+   "status": "registered candidate"
+  },
+  "R1.graph_bipartite_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.024,
+     "1": 0.02,
+     "2": 0.004,
+     "3": 0.022,
+     "4": 0.016,
+     "5": 0.01,
+     "6": 0.044
+    },
+    "excluded_exact": [],
+    "gain": 0.044,
+    "level": 6,
+    "low_by_level": {
+     "0": -0.024,
+     "1": -0.02,
+     "2": -0.004,
+     "3": -0.022,
+     "4": -0.016,
+     "5": -0.01,
+     "6": -0.044
+    },
+    "mode_rate_max": 0.544,
+    "rule": "anyone_with_3_rivals"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.346,
+     "1": 0.49,
+     "2": 0.484,
+     "3": 0.452,
+     "4": 0.468,
+     "5": 0.43,
+     "6": 0.422
+    },
+    "gain": 0.49,
+    "level": 1,
+    "rule": "triangle_means_no"
+   },
+   "replaces": "R1.graph_bipartite",
+   "status": "registered candidate"
+  },
+  "R1.graph_shortest_route_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.146,
+     "1": 0.134,
+     "2": 0.058,
+     "3": 0.062,
+     "4": 0.056,
+     "5": 0.046,
+     "6": 0.046
+    },
+    "excluded_exact": [],
+    "gain": 0.146,
+    "level": 0,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.128,
+    "rule": "fewest_roads_then_length"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.instant_runoff_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.4163,
+     "1": 0.4533,
+     "2": 0.3661,
+     "3": 0.3661,
+     "4": 0.307,
+     "5": 0.337,
+     "6": 0.2839
+    },
+    "excluded_exact": [],
+    "gain": 0.4533,
+    "level": 1,
+    "low_by_level": {
+     "0": -0.0407,
+     "1": -0.0427,
+     "2": -0.0369,
+     "3": -0.0429,
+     "4": -0.0215,
+     "5": -0.031,
+     "6": -0.0331
+    },
+    "mode_rate_max": 0.024,
+    "rule": "top_two_runoff"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.397,
+     "1": 0.389,
+     "2": 0.382,
+     "3": 0.371,
+     "4": 0.37,
+     "5": 0.4,
+     "6": 0.2743
+    },
+    "gain": 0.4,
+    "level": 5,
+    "rule": "one_elimination_then_plurality"
+   },
+   "replaces": "R1.instant_runoff_r4",
+   "status": "NOT REGISTERED (reason in r1_fix3_clusters.json)"
+  },
+  "R1.kinship_ancestor_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.0573,
+     "1": 0.0415,
+     "2": 0.0335,
+     "3": 0.052,
+     "4": 0.04,
+     "5": 0.0867,
+     "6": 0.0613
+    },
+    "excluded_exact": [],
+    "gain": 0.0867,
+    "level": 5,
+    "low_by_level": {
+     "0": -0.127,
+     "1": -0.122,
+     "2": -0.0991,
+     "3": -0.0893,
+     "4": -0.0747,
+     "5": -0.066,
+     "6": -0.0639
+    },
+    "mode_rate_max": 0.028,
+    "rule": "root_of_family"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.kinship_cousins_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.196,
+     "1": 0.178,
+     "2": 0.198,
+     "3": 0.202,
+     "4": 0.198,
+     "5": 0.168,
+     "6": 0.2
+    },
+    "excluded_exact": [],
+    "gain": 0.202,
+    "level": 3,
+    "low_by_level": {
+     "0": -0.178,
+     "1": -0.178,
+     "2": -0.154,
+     "3": -0.188,
+     "4": -0.138,
+     "5": -0.168,
+     "6": -0.112
+    },
+    "mode_rate_max": 0.688,
+    "rule": "different_parents"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.424,
+     "1": 0.444,
+     "2": 0.438,
+     "3": 0.422,
+     "4": 0.426,
+     "5": 0.454,
+     "6": 0.446
+    },
+    "gain": 0.454,
+    "level": 5,
+    "rule": "same_family_root"
+   },
+   "replaces": "R1.kinship_cousins",
+   "status": "registered candidate"
+  },
+  "R1.kinship_descendants_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0307,
+     "1": 0.0287,
+     "2": 0.042,
+     "3": 0.038,
+     "4": 0.032,
+     "5": 0.0336,
+     "6": 0.0193
+    },
+    "excluded_exact": [],
+    "gain": 0.042,
+    "level": 2,
+    "low_by_level": {
+     "0": -0.0107,
+     "1": -0.023,
+     "2": -0.0118,
+     "3": -0.036,
+     "4": -0.014,
+     "5": -0.028,
+     "6": -0.0251
+    },
+    "mode_rate_max": 0.024,
+    "rule": "first_mentioned"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.4667,
+     "1": 0.457,
+     "2": 0.5417,
+     "3": 0.5657,
+     "4": 0.6172,
+     "5": 0.6212,
+     "6": 0.6767
+    },
+    "gain": 0.6767,
+    "level": 6,
+    "rule": "deepest_line"
+   },
+   "replaces": "R1.kinship_descendants_r4",
+   "status": "registered candidate"
+  },
+  "R1.knights_knaves_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.13,
+     "1": 0.114,
+     "2": 0.14,
+     "3": 0.124,
+     "4": 0.1,
+     "5": 0.138,
+     "6": 0.102
+    },
+    "excluded_exact": [],
+    "gain": 0.14,
+    "level": 2,
+    "low_by_level": {
+     "0": -0.13,
+     "1": -0.114,
+     "2": -0.14,
+     "3": -0.124,
+     "4": -0.1,
+     "5": -0.138,
+     "6": -0.102
+    },
+    "mode_rate_max": 0.53,
+    "rule": "accuses_someone_means_knave"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.17,
+     "1": 0.28,
+     "2": 0.274,
+     "3": 0.242,
+     "4": 0.264,
+     "5": 0.228,
+     "6": 0.23
+    },
+    "gain": 0.28,
+    "level": 1,
+    "rule": "accuses_someone_means_knave"
+   },
+   "replaces": "R1.knights_knaves",
+   "status": "registered candidate"
+  },
+  "R1.minimax_tree_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.204,
+     "1": 0.098,
+     "2": 0.068,
+     "3": 0.07,
+     "4": 0.062,
+     "5": 0.04,
+     "6": 0.038
+    },
+    "excluded_exact": [],
+    "gain": 0.204,
+    "level": 0,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.054,
+    "rule": "greedy_best_leaf"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.674,
+     "1": 0.512,
+     "2": 0.47,
+     "3": 0.35,
+     "4": 0.272,
+     "5": 0.292,
+     "6": 0.17
+    },
+    "gain": 0.674,
+    "level": 0,
+    "rule": "greedy_best_leaf"
+   },
+   "replaces": "R1.minimax_tree_r4",
+   "status": "registered candidate"
+  },
+  "R1.mst_cost_r4": {
+   "after": {
+    "by_level": {
+     "0": 0.184,
+     "1": 0.182,
+     "2": 0.19,
+     "3": 0.018,
+     "4": 0.024,
+     "5": 0.014,
+     "6": 0.0
+    },
+    "excluded_exact": [],
+    "gain": 0.19,
+    "level": 2,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.088,
+    "rule": "nearest_neighbour_path"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.nim_xor_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.13,
+     "1": 0.162,
+     "2": 0.12,
+     "3": 0.102,
+     "4": 0.104,
+     "5": 0.116,
+     "6": 0.082
+    },
+    "excluded_exact": [],
+    "gain": 0.162,
+    "level": 1,
+    "low_by_level": {
+     "0": -0.018,
+     "1": -0.044,
+     "2": -0.068,
+     "3": -0.04,
+     "4": -0.022,
+     "5": -0.012,
+     "6": -0.06
+    },
+    "mode_rate_max": 0.56,
+    "rule": "bits1_2_parity"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.414,
+     "1": 0.38,
+     "2": 0.406,
+     "3": 0.36,
+     "4": 0.37,
+     "5": 0.404,
+     "6": 0.36
+    },
+    "gain": 0.414,
+    "level": 0,
+    "rule": "bits1_2_parity"
+   },
+   "replaces": "R1.nim_xor_r4",
+   "status": "registered candidate"
+  },
+  "R1.one_culprit": {
+   "after": {
+    "by_level": {
+     "0": 0.1088,
+     "1": 0.0827,
+     "2": 0.079,
+     "3": 0.117,
+     "4": 0.1176,
+     "5": 0.1523,
+     "6": 0.1769
+    },
+    "excluded_exact": [],
+    "gain": 0.1769,
+    "level": 6,
+    "low_by_level": {
+     "0": -0.0355,
+     "1": -0.0368,
+     "2": -0.0215,
+     "3": -0.0133,
+     "4": -0.0208,
+     "5": -0.0199,
+     "6": -0.0357
+    },
+    "mode_rate_max": 0.022,
+    "rule": "most_accused"
+   },
+   "before": null,
+   "replaces": null,
+   "status": "registered candidate"
+  },
+  "R1.order_compare_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0967,
+     "1": 0.0057,
+     "2": 0.0247,
+     "3": 0.0307,
+     "4": 0.0387,
+     "5": 0.0187,
+     "6": 0.0247
+    },
+    "excluded_exact": [],
+    "gain": 0.0967,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.0153,
+     "1": -0.0113,
+     "2": 0.0027,
+     "3": -0.0033,
+     "4": -0.0193,
+     "5": -0.0153,
+     "6": -0.0173
+    },
+    "mode_rate_max": 0.372,
+    "rule": "two_step_else_cbd"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.6367,
+     "1": 0.6187,
+     "2": 0.6327,
+     "3": 0.6207,
+     "4": 0.6247,
+     "5": 0.6087,
+     "6": 0.6027
+    },
+    "gain": 0.6367,
+    "level": 0,
+    "rule": "two_step_else_cbd"
+   },
+   "replaces": "R1.order_compare_r4",
+   "status": "registered candidate"
+  },
+  "R1.order_extreme": {
+   "after": null,
+   "before": {
+    "gain": 0.3889,
+    "level": 6,
+    "rule": "least_mentioned"
+   },
+   "replaces": null,
+   "status": "NOT REGISTERED (reason in r1_fix3_clusters.json)"
+  },
+  "R1.order_tournament_wins": {
+   "after": null,
+   "before": {
+    "gain": 0.3753,
+    "level": 0,
+    "rule": "half_of_results_tally"
+   },
+   "replaces": null,
+   "status": "NOT REGISTERED (reason in r1_fix3_clusters.json)"
+  },
+  "R1.pet_owners_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.638,
+     "1": 0.622,
+     "2": 0.6808,
+     "3": 0.6607,
+     "4": 0.7043,
+     "5": 0.7141,
+     "6": 0.7171
+    },
+    "excluded_exact": [],
+    "gain": 0.7171,
+    "level": 6,
+    "low_by_level": {
+     "0": -0.1035,
+     "1": -0.0901,
+     "2": -0.0971,
+     "3": -0.0807,
+     "4": -0.0609,
+     "5": -0.072,
+     "6": -0.0736
+    },
+    "mode_rate_max": 0.02,
+    "rule": "never_excluded_from_pet"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.2353,
+     "1": 0.252,
+     "2": 0.3152,
+     "3": 0.3717,
+     "4": 0.35,
+     "5": 0.3333,
+     "6": 0.3867
+    },
+    "gain": 0.3867,
+    "level": 6,
+    "rule": "stated_owner"
+   },
+   "replaces": "R1.pet_owners",
+   "status": "NOT REGISTERED (reason in r1_fix3_clusters.json)"
+  },
+  "R1.road_reachability_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.07,
+     "1": 0.072,
+     "2": 0.08,
+     "3": 0.022,
+     "4": 0.056,
+     "5": 0.042,
+     "6": 0.02
+    },
+    "excluded_exact": [],
+    "gain": 0.08,
+    "level": 2,
+    "low_by_level": {
+     "0": -0.006,
+     "1": -0.006,
+     "2": -0.007,
+     "3": -0.008,
+     "4": 0.0,
+     "5": -0.042,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.542,
+    "rule": "within_two"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.392,
+     "1": 0.368,
+     "2": 0.356,
+     "3": 0.38,
+     "4": 0.378,
+     "5": 0.372,
+     "6": 0.328
+    },
+    "gain": 0.392,
+    "level": 0,
+    "rule": "within_two"
+   },
+   "replaces": "R1.road_reachability",
+   "status": "registered candidate"
+  },
+  "R1.seating_row_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0993,
+     "1": 0.1104,
+     "2": 0.1163,
+     "3": 0.0943,
+     "4": 0.1021,
+     "5": 0.108,
+     "6": 0.1396
+    },
+    "excluded_exact": [],
+    "gain": 0.1396,
+    "level": 6,
+    "low_by_level": {
+     "0": -0.0207,
+     "1": -0.0306,
+     "2": -0.0169,
+     "3": -0.0245,
+     "4": -0.0169,
+     "5": -0.0111,
+     "6": -0.0229
+    },
+    "mode_rate_max": 0.022,
+    "rule": "end_person_for_end_seat"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.1147,
+     "1": 0.162,
+     "2": 0.1824,
+     "3": 0.1488,
+     "4": 0.1783,
+     "5": 0.175,
+     "6": 0.2109
+    },
+    "gain": 0.2109,
+    "level": 6,
+    "rule": "stated_seat"
+   },
+   "replaces": "R1.seating_row",
+   "status": "registered candidate"
+  },
+  "R1.spatial_grid_walk_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0305,
+     "1": 0.0588,
+     "2": 0.0489,
+     "3": 0.0656,
+     "4": 0.0349,
+     "5": 0.0571,
+     "6": 0.0437
+    },
+    "excluded_exact": [],
+    "gain": 0.0656,
+    "level": 3,
+    "low_by_level": {
+     "0": -0.0319,
+     "1": -0.0252,
+     "2": -0.0371,
+     "3": -0.0224,
+     "4": -0.0111,
+     "5": -0.0149,
+     "6": -0.0223
+    },
+    "mode_rate_max": 0.006,
+    "rule": "east_west_mirrored"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.6246,
+     "1": 0.6619,
+     "2": 0.5764,
+     "3": 0.5348,
+     "4": 0.5122,
+     "5": 0.517,
+     "6": 0.4761
+    },
+    "gain": 0.6619,
+    "level": 1,
+    "rule": "ignore_walls"
+   },
+   "replaces": "R1.spatial_grid_walk_r2",
+   "status": "registered candidate"
+  },
+  "R1.spatial_relative_directions_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.132,
+     "1": 0.116,
+     "2": 0.12,
+     "3": 0.07,
+     "4": 0.058,
+     "5": 0.078,
+     "6": 0.036
+    },
+    "excluded_exact": [],
+    "gain": 0.132,
+    "level": 0,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.076,
+    "rule": "sum_along_path_unsigned"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.626,
+     "1": 0.57,
+     "2": 0.61,
+     "3": 0.532,
+     "4": 0.484,
+     "5": 0.458,
+     "6": 0.414
+    },
+    "gain": 0.626,
+    "level": 0,
+    "rule": "sum_along_path_unsigned"
+   },
+   "replaces": "R1.spatial_relative_directions_r4",
+   "status": "registered candidate"
+  },
+  "R1.stable_matching_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.314,
+     "1": 0.32,
+     "2": 0.224,
+     "3": 0.254,
+     "4": 0.1813,
+     "5": 0.1633,
+     "6": 0.1291
+    },
+    "excluded_exact": [],
+    "gain": 0.32,
+    "level": 1,
+    "low_by_level": {
+     "0": -0.25,
+     "1": -0.25,
+     "2": -0.2,
+     "3": -0.2,
+     "4": -0.1667,
+     "5": -0.1667,
+     "6": -0.1429
+    },
+    "mode_rate_max": 0.026,
+    "rule": "serial_dictatorship_text_order"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.4487,
+     "1": 0.484,
+     "2": 0.494,
+     "3": 0.478,
+     "4": 0.518,
+     "5": 0.5353,
+     "6": 0.5053
+    },
+    "gain": 0.5353,
+    "level": 5,
+    "rule": "receiver_proposing"
+   },
+   "replaces": "R1.stable_matching_r4",
+   "status": "NOT REGISTERED (reason in r1_fix3_clusters.json)"
+  },
+  "R1.swap_tracking_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.024,
+     "1": 0.034,
+     "2": 0.0133,
+     "3": 0.0453,
+     "4": 0.0116,
+     "5": 0.0098,
+     "6": 0.015
+    },
+    "excluded_exact": [],
+    "gain": 0.0453,
+    "level": 3,
+    "low_by_level": {
+     "0": -0.068,
+     "1": -0.032,
+     "2": -0.0667,
+     "3": -0.0367,
+     "4": -0.0349,
+     "5": -0.0449,
+     "6": -0.031
+    },
+    "mode_rate_max": 0.068,
+    "rule": "alpha_first"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.1967,
+     "1": 0.216,
+     "2": 0.152,
+     "3": 0.1593,
+     "4": 0.1253,
+     "5": 0.0493,
+     "6": 0.0693
+    },
+    "gain": 0.216,
+    "level": 1,
+    "rule": "rotation_reversed"
+   },
+   "replaces": "R1.swap_tracking",
+   "status": "registered candidate"
+  },
+  "R1.temporal_critical_path_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.17,
+     "1": 0.15,
+     "2": 0.102,
+     "3": 0.062,
+     "4": 0.058,
+     "5": 0.028,
+     "6": 0.022
+    },
+    "excluded_exact": [
+     "inclusive_day_reading"
+    ],
+    "gain": 0.17,
+    "level": 0,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.064,
+    "rule": "greedy_backward"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.824,
+     "1": 0.82,
+     "2": 0.764,
+     "3": 0.756,
+     "4": 0.728,
+     "5": 0.66,
+     "6": 0.68
+    },
+    "gain": 0.824,
+    "level": 0,
+    "rule": "greedy_backward"
+   },
+   "replaces": "R1.temporal_critical_path_r4",
+   "status": "registered candidate"
+  },
+  "R1.temporal_interval_overlap_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.192,
+     "1": 0.144,
+     "2": 0.15,
+     "3": 0.156,
+     "4": 0.188,
+     "5": 0.136,
+     "6": 0.168
+    },
+    "excluded_exact": [
+     "duration_end_off_by_one"
+    ],
+    "gain": 0.192,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.048,
+     "1": -0.084,
+     "2": -0.088,
+     "3": -0.07,
+     "4": -0.036,
+     "5": -0.092,
+     "6": -0.04
+    },
+    "mode_rate_max": 0.542,
+    "rule": "longer_len_gt_gap"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.458,
+     "1": 0.456,
+     "2": 0.446,
+     "3": 0.47,
+     "4": 0.466,
+     "5": 0.46,
+     "6": 0.47
+    },
+    "gain": 0.47,
+    "level": 3,
+    "rule": "longer_len_gt_gap"
+   },
+   "replaces": "R1.temporal_interval_overlap",
+   "status": "registered candidate"
+  },
+  "R1.temporal_weekday_shift_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.0491,
+     "1": 0.0191,
+     "2": 0.0471,
+     "3": 0.0031,
+     "4": 0.0271,
+     "5": 0.0011,
+     "6": 0.0191
+    },
+    "excluded_exact": [],
+    "gain": 0.0491,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.0009,
+     "1": 0.0031,
+     "2": -0.0169,
+     "3": -0.0049,
+     "4": -0.0389,
+     "5": -0.0029,
+     "6": -0.0189
+    },
+    "mode_rate_max": 0.182,
+    "rule": "ignore_before_after"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.3911,
+     "1": 0.3931,
+     "2": 0.3331,
+     "3": 0.3151,
+     "4": 0.2651,
+     "5": 0.2711,
+     "6": 0.2471
+    },
+    "gain": 0.3931,
+    "level": 1,
+    "rule": "ignore_before_after"
+   },
+   "replaces": "R1.temporal_weekday_shift",
+   "status": "registered candidate"
+  },
+  "R1.topological_order_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.184,
+     "1": 0.1791,
+     "2": 0.1787,
+     "3": 0.1771,
+     "4": 0.1726,
+     "5": 0.1013,
+     "6": 0.1315
+    },
+    "excluded_exact": [],
+    "gain": 0.184,
+    "level": 0,
+    "low_by_level": {
+     "0": -0.022,
+     "1": -0.0289,
+     "2": -0.0293,
+     "3": -0.0249,
+     "4": -0.0254,
+     "5": -0.0207,
+     "6": -0.0265
+    },
+    "mode_rate_max": 0.026,
+    "rule": "layered_depth_then_name"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.6893,
+     "1": 0.6411,
+     "2": 0.635,
+     "3": 0.5789,
+     "4": 0.55,
+     "5": 0.4871,
+     "6": 0.4287
+    },
+    "gain": 0.6893,
+    "level": 0,
+    "rule": "layered_depth_then_name"
+   },
+   "replaces": "R1.topological_order_r4",
+   "status": "registered candidate"
+  },
+  "R1.tracking_accounts_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.012,
+     "1": 0.008,
+     "2": 0.008,
+     "3": 0.008,
+     "4": 0.014,
+     "5": 0.012,
+     "6": 0.016
+    },
+    "excluded_exact": [],
+    "gain": 0.016,
+    "level": 6,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.018,
+    "rule": "ignore_pay"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.5147,
+     "1": 0.573,
+     "2": 0.516,
+     "3": 0.55,
+     "4": 0.49,
+     "5": 0.5233,
+     "6": 0.5093
+    },
+    "gain": 0.573,
+    "level": 1,
+    "rule": "ignore_earnings"
+   },
+   "replaces": "R1.tracking_accounts",
+   "status": "registered candidate"
+  },
+  "R1.venn_counting_r5": {
+   "after": {
+    "by_level": {
+     "0": 0.02,
+     "1": 0.02,
+     "2": 0.032,
+     "3": 0.018,
+     "4": 0.01,
+     "5": 0.008,
+     "6": 0.006
+    },
+    "excluded_exact": [
+     "ignore_triples",
+     "pairs_minus_2triples",
+     "pairs_minus_3triples",
+     "sizes_minus_2pairs",
+     "total_minus_union_wrong_sign"
+    ],
+    "gain": 0.032,
+    "level": 2,
+    "low_by_level": {
+     "0": 0.0,
+     "1": 0.0,
+     "2": 0.0,
+     "3": 0.0,
+     "4": 0.0,
+     "5": 0.0,
+     "6": 0.0
+    },
+    "mode_rate_max": 0.056,
+    "rule": "last_number"
+   },
+   "before": {
+    "by_level": {
+     "0": 0.074,
+     "1": 0.044,
+     "2": 0.046,
+     "3": 0.024,
+     "4": 0.014,
+     "5": 0.034,
+     "6": 0.008
+    },
+    "gain": 0.074,
+    "level": 0,
+    "rule": "last_number"
+   },
+   "replaces": "R1.venn_counting_r4",
+   "status": "registered candidate"
+  }
+ }
+}
