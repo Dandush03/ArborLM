@@ -1,0 +1,28 @@
+Fixtures of shapes that were superseded: they must NOT be solved. Old fixtures live in studies/m0/fixtures/r1_pilot/ (the 20 + 8 pilot and new shapes) and, for the 15 original lineages, in no fixture directory.
+The revision-4 shape that replaces each is in THIS directory (fixtures/r1_rev4/). Replaced by redraw on a heuristic's outcome (ruling R-1 withdrawn) or by a design defect of the second audit (docs/reviews/m0-lineage-decision-2026-11-25/audit2_r1/).
+
+old shape -> revision-4 shape
+R1.activity_selection -> R1.activity_selection_r4
+R1.boolean_lights_r2 -> R1.boolean_lights_r4
+R1.categories_default_exceptions_r3 -> R1.categories_default_exceptions_r4
+R1.categories_follow_r2 -> R1.categories_follow_r4
+R1.conditional_decision_tree -> R1.conditional_decision_tree_r4
+R1.conditional_threshold_rule_r3 -> R1.conditional_threshold_rule_r4
+R1.containers_stack_piles_r3 -> R1.containers_stack_piles_r4
+R1.elimination_bracket_r3 -> R1.elimination_bracket_r4
+R1.graph_shortest_route_r2 -> R1.graph_shortest_route_r4
+R1.instant_runoff_r2 -> R1.instant_runoff_r4
+R1.kinship_ancestor_r3 -> R1.kinship_ancestor_r4
+R1.kinship_descendants_r3 -> R1.kinship_descendants_r4
+R1.minimax_tree -> R1.minimax_tree_r4
+R1.mst_cost -> R1.mst_cost_r4
+R1.nim_xor -> R1.nim_xor_r4
+R1.order_compare -> R1.order_compare_r4
+R1.spatial_relative_directions -> R1.spatial_relative_directions_r4
+R1.stable_matching_r2 -> R1.stable_matching_r4
+R1.temporal_critical_path -> R1.temporal_critical_path_r4
+R1.topological_order_r2 -> R1.topological_order_r4
+R1.venn_counting -> R1.venn_counting_r4
+
+Earlier superseded shapes (listed in fixtures/r1_pilot/SUPERSEDED.txt) stay superseded.
+Tables: manifests/r1_rev4_two_sided.md replaces manifests/r1_two_sided_table.md for the registered set; the earlier tables are kept unchanged.

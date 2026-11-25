@@ -25,6 +25,13 @@ from studies.m0.vocab import NAMES, OBJECTS, PSEUDO, TOWNS
 Pred = str | list[str] | None
 _ENT = set(NAMES) | set(TOWNS) | set(OBJECTS) | set(PSEUDO) | {w.capitalize() for w in PSEUDO}
 _WORD = re.compile(r"[A-Za-z']+")
+# a name followed by 's is the same word (audit 2, section 6.3 (a)): "Flynn's job" mentions Flynn
+_AFTER = r"(?![A-Za-z])(?!'(?!s(?![A-Za-z])))"
+
+
+def words(text: str) -> list[str]:
+    """Words of a text with a possessive 's removed ("Flynn's" -> "Flynn")."""
+    return [w[:-2] if w.endswith("'s") else w for w in _WORD.findall(text)]
 _NEG = {"different", "not", "never", "rivals", "cannot", "no"}
 
 
@@ -47,16 +54,16 @@ def parse_options(q: str) -> list[str] | None:
 
 
 def _count(body: str, o: str) -> int:
-    return len(re.findall(r"(?<![A-Za-z'])" + re.escape(o) + r"(?![A-Za-z'])", body))
+    return len(re.findall(r"(?<![A-Za-z'])" + re.escape(o) + _AFTER, body))
 
 
 def _last(body: str, o: str) -> int:
-    ms = list(re.finditer(r"(?<![A-Za-z'])" + re.escape(o) + r"(?![A-Za-z'])", body))
+    ms = list(re.finditer(r"(?<![A-Za-z'])" + re.escape(o) + _AFTER, body))
     return ms[-1].start() if ms else -1
 
 
 def _first(body: str, o: str) -> int:
-    m = re.search(r"(?<![A-Za-z'])" + re.escape(o) + r"(?![A-Za-z'])", body)
+    m = re.search(r"(?<![A-Za-z'])" + re.escape(o) + _AFTER, body)
     return m.start() if m else -1
 
 
@@ -64,6 +71,43 @@ def _pick(cands: list[str], key: Callable[[str], float], best: str) -> list[str]
     vals = {c: key(c) for c in cands}
     tgt = max(vals.values()) if best == "max" else min(vals.values())
     return [c for c in cands if vals[c] == tgt]
+
+
+_COMPARATIVE = re.compile(r"\b([A-Za-z]+) than\b")
+
+
+def _stated_reading(q1: str, sentence: str, ents: list[str]) -> str | None:
+    """What a stated sentence that names both asked entities says about the asked statement, reading the DIRECTION (audit 2, section 6.3 (b)).
+    Comparative relations ("X is taller than Y"): the sentence says yes when it states the same direction, no when it states the opposite (the reversed
+    order with the same comparative, or the same order with the opposite comparative). Quantified statements ("All X are Y"): only the same order says
+    anything. Symmetric relations: as before (a negative word makes it "no")."""
+    cq, cs = _COMPARATIVE.search(q1), _COMPARATIVE.search(sentence)
+    iq = [q1.find(e) for e in ents]
+    is_ = [sentence.find(e) for e in ents]
+    same_order = (iq[0] < iq[1]) == (is_[0] < is_[1])
+    if cq and cs:
+        same_word = cq.group(1) == cs.group(1)
+        return "yes" if same_order == same_word else "no"
+    neg = any(w.lower() in _NEG for w in _WORD.findall(sentence))
+    if re.match(r"\s*(All|No|Some|Every)\b", sentence):
+        return None if not same_order else ("no" if neg else "yes")
+    return "no" if neg else "yes"
+
+
+# numbers that count the parts of the setting, not data (audit 2, section 6.3 (c): the depth in "2 choices in a row")
+_STRUCTURE_NOUNS = ("choice", "choices", "pile", "piles", "row", "rows", "column", "columns", "lamp", "lamps", "switch", "switches", "job", "jobs", "player", "players",
+                    "candidate", "candidates", "town", "towns", "group", "groups", "round", "rounds", "step", "steps", "move", "moves")
+_NUM = re.compile(r"(?<![\w.])-?\d+(?![\w])(?:\s+([A-Za-z]+))?")
+
+
+def numbers(body: str) -> list[int]:
+    """The data numbers of a text: signed (a minus sign directly before the digits, not after a word character) and without the counts of structure."""
+    out = []
+    for m in _NUM.finditer(body):
+        if m.group(1) and m.group(1).lower() in _STRUCTURE_NOUNS:
+            continue
+        out.append(int(re.match(r"-?\d+", m.group(0)).group(0)))  # type: ignore[union-attr]
+    return out
 
 
 def generic(it: Item) -> dict[str, Pred]:
@@ -84,14 +128,14 @@ def generic(it: Item) -> dict[str, Pred]:
         out["alphabetical_last"] = [sorted(opts)[-1]]
     if it.answer_type in ("yn", "ynu"):
         q1 = next((s for s in re.split(r"(?<=[.?!])\s+", tail) if "?" in s), tail)
-        ents = [w for w in _WORD.findall(q1) if w in _ENT]
+        ents = [w for w in words(q1) if w in _ENT]
         ents = list(dict.fromkeys(ents))[:2]
         if len(ents) == 2:
             hit = [s for s in re.split(r"(?<=[.?!])\s+", body) if ents[0] in s and ents[1] in s]
-            out["asked_pair_stated_verbatim"] = (("no" if any(w.lower() in _NEG for w in _WORD.findall(hit[0])) else "yes") if hit else None)
+            out["asked_pair_stated_verbatim"] = _stated_reading(q1, hit[0], ents) if hit else None
             out["asked_entity_never_mentioned"] = ("cannot be determined" if it.answer_type == "ynu" else "no") if any(e not in body for e in ents) else None
     if it.answer_type == "number":
-        nums = [int(x) for x in re.findall(r"\d+", body)]
+        nums = numbers(body)
         if nums:
             out["largest_number"] = str(max(nums))
             out["smallest_number"] = str(min(nums))
@@ -406,7 +450,7 @@ def _valid(pred: Pred, it: Item) -> Pred:
     elif it.answer_type in ("name", "text", "word", "letter"):
         opts = parse_options(it.question)
         if not opts and it.answer_type in ("name", "text"):
-            opts = list(dict.fromkeys(w for w in _WORD.findall(it.question) if w in _ENT))  # no list in the text: the entities the item mentions
+            opts = list(dict.fromkeys(w for w in words(it.question) if w in _ENT))  # no list in the text: the entities the item mentions
         if it.answer_type == "word" and not opts and it.k:
             return pred  # no option list in the text (weekday, directions): keep as is
     else:
@@ -462,6 +506,26 @@ def spec_for(lid: str) -> dict[str, Callable[[Item], Pred]]:
     return {}
 
 
+def per_level_rows(name: str, items: Sequence[Item], preds_by_item: Sequence[dict[str, Pred]]) -> dict[str, dict[str, Any]]:
+    """Per-level, two-sided reading of one heuristic (audit 2, section 6.3 and ruling R-3). For each level: n items, how many the heuristic fired on, its accuracy on the
+    items it fired on, the chance on those items (mean 1/k; 0 for open answers), ``departure`` = accuracy - chance, and ``anti_departure`` = the accuracy of picking
+    uniformly among the options it did NOT choose, minus chance (closed answers only; None for open ones)."""
+    out: dict[str, dict[str, Any]] = {}
+    for level in sorted({it.level for it in items}):
+        idx = [i for i, it in enumerate(items) if it.level == level]
+        fired = [i for i in idx if _valid(preds_by_item[i].get(name), items[i]) not in (None, [])]
+        row: dict[str, Any] = {"n": len(idx), "fires": len(fired), "accuracy": None, "chance": None, "departure": None, "anti_departure": None}
+        if fired:
+            acc = sum(credit(preds_by_item[i][name], items[i]) or 0.0 for i in fired) / len(fired)
+            ch = sum((1.0 / items[i].k) if items[i].k else 0.0 for i in fired) / len(fired)
+            row.update(accuracy=round(acc, 4), chance=round(ch, 4), departure=round(acc - ch, 4))
+            if all(items[i].k for i in fired):
+                aa = [anti_credit(preds_by_item[i][name], items[i]) for i in fired]
+                row["anti_departure"] = round(sum(x for x in aa if x is not None) / len(aa) - ch, 4)
+        out[str(level)] = row
+    return out
+
+
 def run_battery(lin: Lineage, items: Sequence[Item]) -> dict[str, Any]:
     chance = sum((1.0 / it.k) if it.k else 0.0 for it in items) / len(items)
     keys = Counter(it.answer for it in items)
@@ -471,10 +535,12 @@ def run_battery(lin: Lineage, items: Sequence[Item]) -> dict[str, Any]:
     anti: dict[str, list[float]] = {}
     const_key = keys.most_common(1)[0][0]
     spec = spec_for(lin.id)
+    preds_by_item: list[dict[str, Pred]] = []
     for it in items:
         preds: dict[str, Pred] = {"constant_most_frequent_key": const_key, **generic(it)}
         for n, fn in spec.items():
             preds[n] = fn(it)
+        preds_by_item.append(preds)
         for n, p in preds.items():
             c = credit(p, it)
             per.setdefault(n, {}).setdefault(it.level, []).append(c if c is not None else 0.0)
@@ -492,7 +558,8 @@ def run_battery(lin: Lineage, items: Sequence[Item]) -> dict[str, Any]:
                      "worst_level": max(bylevel, key=lambda x: bylevel[x]) if bylevel else None, "worst_level_excess": round(max(bylevel.values()), 4) if bylevel else None,
                      "anti_accuracy": round(sum(anti[n]) / len(anti[n]), 4) if anti.get(n) else None,
                      "anti_excess": round(sum(anti[n]) / len(anti[n]) - chance, 4) if anti.get(n) else None,
-                     "per_level_accuracy": {str(level): round(sum(v) / len(v), 4) for level, v in sorted(lv.items())}})
+                     "per_level_accuracy": {str(level): round(sum(v) / len(v), 4) for level, v in sorted(lv.items())},
+                     "per_level": per_level_rows(n, items, preds_by_item)})
     rows.sort(key=lambda r: -r["excess_over_chance"])
     two = max(rows, key=lambda r: max(abs(r["excess_over_chance"]), abs(r["anti_excess"]) if r["anti_excess"] is not None else 0.0)) if not open_answers else max(rows, key=lambda r: r["accuracy"])
     return {"id": lin.id, "n_items": len(items), "chance": round(chance, 4), "open_answers": open_answers, "most_frequent_rate": round(keys.most_common(1)[0][1] / len(items), 4),

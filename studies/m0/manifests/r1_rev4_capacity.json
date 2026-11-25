@@ -1,0 +1,3555 @@
+{
+ "clusters": {},
+ "demand_rule": "10 x (ceil(24000 / G) + 100) on a core level, 10 x 100 on a reserve level",
+ "failures": {
+  "G13": [
+   {
+    "best_single_shape": 500,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 532,
+    "level": 0,
+    "need": 1000,
+    "shapes": {
+     "R1.containers_queue_line_r2": 500,
+     "R1.elimination_josephus": 32
+    }
+   },
+   {
+    "best_single_shape": 2065,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 2105,
+    "level": 1,
+    "need": 19470,
+    "shapes": {
+     "R1.containers_queue_line_r2": 2065,
+     "R1.elimination_josephus": 40
+    }
+   },
+   {
+    "best_single_shape": 6750,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 6797,
+    "level": 2,
+    "need": 19470,
+    "shapes": {
+     "R1.containers_queue_line_r2": 6750,
+     "R1.elimination_josephus": 47
+    }
+   },
+   {
+    "best_single_shape": 12035,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 12069,
+    "level": 3,
+    "need": 19470,
+    "shapes": {
+     "R1.containers_queue_line_r2": 12035,
+     "R1.elimination_josephus": 34
+    }
+   },
+   {
+    "best_single_shape": 110,
+    "cluster": "R1.graph_bipartite",
+    "cluster_sum_of_shapes": 110,
+    "level": 0,
+    "need": 1000,
+    "shapes": {
+     "R1.graph_bipartite": 110
+    }
+   },
+   {
+    "best_single_shape": 1614,
+    "cluster": "R1.graph_bipartite",
+    "cluster_sum_of_shapes": 1614,
+    "level": 1,
+    "need": 19470,
+    "shapes": {
+     "R1.graph_bipartite": 1614
+    }
+   },
+   {
+    "best_single_shape": 16473,
+    "cluster": "R1.graph_bipartite",
+    "cluster_sum_of_shapes": 16473,
+    "level": 2,
+    "need": 19470,
+    "shapes": {
+     "R1.graph_bipartite": 16473
+    }
+   }
+  ],
+  "G13_single_shape": [
+   {
+    "attempts": 5000,
+    "found": 500,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 2065,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 6750,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 12035,
+    "level": 3,
+    "need": 19470,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 5000,
+    "found": 32,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 40,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 47,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 34,
+    "level": 3,
+    "need": 19470,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 33,
+    "level": 4,
+    "need": 19470,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 36,
+    "level": 5,
+    "need": 19470,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 5000,
+    "found": 40,
+    "level": 6,
+    "need": 1000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 11315,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.equivalence_classes_r2"
+   },
+   {
+    "attempts": 5000,
+    "found": 110,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.graph_bipartite"
+   },
+   {
+    "attempts": 95000,
+    "found": 1614,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.graph_bipartite"
+   },
+   {
+    "attempts": 95000,
+    "found": 16473,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.graph_bipartite"
+   },
+   {
+    "attempts": 5000,
+    "found": 368,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 372,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 1214,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 1213,
+    "level": 3,
+    "need": 19470,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 2870,
+    "level": 4,
+    "need": 19470,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 2877,
+    "level": 5,
+    "need": 19470,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 5000,
+    "found": 52,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.knights_knaves"
+   },
+   {
+    "attempts": 95000,
+    "found": 5780,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.knights_knaves"
+   },
+   {
+    "attempts": 95000,
+    "found": 5740,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.knights_knaves"
+   },
+   {
+    "attempts": 5000,
+    "found": 2,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 3,
+    "need": 19470,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 4,
+    "need": 19470,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 5,
+    "need": 19470,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 5000,
+    "found": 2,
+    "level": 6,
+    "need": 1000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 5000,
+    "found": 4,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 14,
+    "level": 1,
+    "need": 19470,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 14,
+    "level": 2,
+    "need": 19470,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 68,
+    "level": 3,
+    "need": 19470,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 68,
+    "level": 4,
+    "need": 19470,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 524,
+    "level": 5,
+    "need": 19470,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 5000,
+    "found": 522,
+    "level": 6,
+    "need": 1000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 5000,
+    "found": 655,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.pet_owners"
+   },
+   {
+    "attempts": 5000,
+    "found": 521,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.seating_row"
+   }
+  ],
+  "G8": [
+   {
+    "best_single_shape": 500,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 532,
+    "level": 0,
+    "need": 1000,
+    "shapes": {
+     "R1.containers_queue_line_r2": 500,
+     "R1.elimination_josephus": 32
+    }
+   },
+   {
+    "best_single_shape": 2065,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 2105,
+    "level": 1,
+    "need": 31000,
+    "shapes": {
+     "R1.containers_queue_line_r2": 2065,
+     "R1.elimination_josephus": 40
+    }
+   },
+   {
+    "best_single_shape": 6750,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 6797,
+    "level": 2,
+    "need": 31000,
+    "shapes": {
+     "R1.containers_queue_line_r2": 6750,
+     "R1.elimination_josephus": 47
+    }
+   },
+   {
+    "best_single_shape": 12035,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 12069,
+    "level": 3,
+    "need": 31000,
+    "shapes": {
+     "R1.containers_queue_line_r2": 12035,
+     "R1.elimination_josephus": 34
+    }
+   },
+   {
+    "best_single_shape": 23682,
+    "cluster": "R1.containers_queue_line",
+    "cluster_sum_of_shapes": 23715,
+    "level": 4,
+    "need": 31000,
+    "shapes": {
+     "R1.containers_queue_line_r2": 23682,
+     "R1.elimination_josephus": 33
+    }
+   },
+   {
+    "best_single_shape": 110,
+    "cluster": "R1.graph_bipartite",
+    "cluster_sum_of_shapes": 110,
+    "level": 0,
+    "need": 1000,
+    "shapes": {
+     "R1.graph_bipartite": 110
+    }
+   },
+   {
+    "best_single_shape": 1614,
+    "cluster": "R1.graph_bipartite",
+    "cluster_sum_of_shapes": 1614,
+    "level": 1,
+    "need": 31000,
+    "shapes": {
+     "R1.graph_bipartite": 1614
+    }
+   },
+   {
+    "best_single_shape": 16473,
+    "cluster": "R1.graph_bipartite",
+    "cluster_sum_of_shapes": 16473,
+    "level": 2,
+    "need": 31000,
+    "shapes": {
+     "R1.graph_bipartite": 16473
+    }
+   }
+  ],
+  "G8_single_shape": [
+   {
+    "attempts": 5000,
+    "found": 500,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 2065,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 6750,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 12035,
+    "level": 3,
+    "need": 31000,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 95000,
+    "found": 23682,
+    "level": 4,
+    "need": 31000,
+    "shape": "R1.containers_queue_line_r2"
+   },
+   {
+    "attempts": 5000,
+    "found": 32,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 40,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 47,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 34,
+    "level": 3,
+    "need": 31000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 33,
+    "level": 4,
+    "need": 31000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 36,
+    "level": 5,
+    "need": 31000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 5000,
+    "found": 40,
+    "level": 6,
+    "need": 1000,
+    "shape": "R1.elimination_josephus"
+   },
+   {
+    "attempts": 95000,
+    "found": 11315,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.equivalence_classes_r2"
+   },
+   {
+    "attempts": 5000,
+    "found": 110,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.graph_bipartite"
+   },
+   {
+    "attempts": 95000,
+    "found": 1614,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.graph_bipartite"
+   },
+   {
+    "attempts": 95000,
+    "found": 16473,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.graph_bipartite"
+   },
+   {
+    "attempts": 5000,
+    "found": 368,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 372,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 1214,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 1213,
+    "level": 3,
+    "need": 31000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 2870,
+    "level": 4,
+    "need": 31000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 95000,
+    "found": 2877,
+    "level": 5,
+    "need": 31000,
+    "shape": "R1.kinship_cousins"
+   },
+   {
+    "attempts": 5000,
+    "found": 52,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.knights_knaves"
+   },
+   {
+    "attempts": 95000,
+    "found": 5780,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.knights_knaves"
+   },
+   {
+    "attempts": 95000,
+    "found": 5740,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.knights_knaves"
+   },
+   {
+    "attempts": 95000,
+    "found": 30135,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.one_culprit"
+   },
+   {
+    "attempts": 5000,
+    "found": 2,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 3,
+    "need": 31000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 4,
+    "need": 31000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 95000,
+    "found": 2,
+    "level": 5,
+    "need": 31000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 5000,
+    "found": 2,
+    "level": 6,
+    "need": 1000,
+    "shape": "R1.order_extreme"
+   },
+   {
+    "attempts": 5000,
+    "found": 4,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 14,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 14,
+    "level": 2,
+    "need": 31000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 68,
+    "level": 3,
+    "need": 31000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 68,
+    "level": 4,
+    "need": 31000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 95000,
+    "found": 524,
+    "level": 5,
+    "need": 31000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 5000,
+    "found": 522,
+    "level": 6,
+    "need": 1000,
+    "shape": "R1.order_tournament_wins"
+   },
+   {
+    "attempts": 5000,
+    "found": 655,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.pet_owners"
+   },
+   {
+    "attempts": 5000,
+    "found": 521,
+    "level": 0,
+    "need": 1000,
+    "shape": "R1.seating_row"
+   },
+   {
+    "attempts": 95000,
+    "found": 24676,
+    "level": 1,
+    "need": 31000,
+    "shape": "R1.seating_row"
+   }
+  ]
+ },
+ "scenarios": {
+  "G13": 13,
+  "G8": 8
+ },
+ "shapes": {
+  "R1.activity_selection_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.activity_selection_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.09
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.activity_selection_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.63
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.activity_selection_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.33
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.activity_selection_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.05
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.activity_selection_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.75
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.activity_selection_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.76
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.activity_selection_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.23
+   }
+  },
+  "R1.attribute_rule": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.attribute_rule",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.1
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.attribute_rule",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.79
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.attribute_rule",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.6
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.attribute_rule",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.35
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.attribute_rule",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.48
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.attribute_rule",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.45
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.attribute_rule",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.3
+   }
+  },
+  "R1.boolean_lights_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.boolean_lights_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 31014,
+    "found": 31000,
+    "id": "R1.boolean_lights_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.65
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.boolean_lights_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.88
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.boolean_lights_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.26
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.boolean_lights_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.35
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.boolean_lights_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.62
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.boolean_lights_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.12
+   }
+  },
+  "R1.categories_default_exceptions_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.22
+   },
+   "1": {
+    "attempts": 31002,
+    "found": 31000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.64
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.06
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.54
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.79
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 11.39
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.categories_default_exceptions_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.41
+   }
+  },
+  "R1.categories_follow_r4": {
+   "0": {
+    "attempts": 1250,
+    "found": 1000,
+    "id": "R1.categories_follow_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.28
+   },
+   "1": {
+    "attempts": 36603,
+    "found": 31000,
+    "id": "R1.categories_follow_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.38
+   },
+   "2": {
+    "attempts": 31661,
+    "found": 31000,
+    "id": "R1.categories_follow_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.38
+   },
+   "3": {
+    "attempts": 31007,
+    "found": 31000,
+    "id": "R1.categories_follow_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.71
+   },
+   "4": {
+    "attempts": 31001,
+    "found": 31000,
+    "id": "R1.categories_follow_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 11.88
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.categories_follow_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 11.01
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.categories_follow_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.7
+   }
+  },
+  "R1.compass_turns": {
+   "0": {
+    "attempts": 1049,
+    "found": 1000,
+    "id": "R1.compass_turns",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.03
+   },
+   "1": {
+    "attempts": 31388,
+    "found": 31000,
+    "id": "R1.compass_turns",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.05
+   },
+   "2": {
+    "attempts": 31002,
+    "found": 31000,
+    "id": "R1.compass_turns",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.17
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.compass_turns",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.35
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.compass_turns",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.52
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.compass_turns",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.68
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.compass_turns",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.06
+   }
+  },
+  "R1.conditional_chain": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.conditional_chain",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.11
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_chain",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.06
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_chain",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.07
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_chain",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.22
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_chain",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.62
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_chain",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.43
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.conditional_chain",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.44
+   }
+  },
+  "R1.conditional_decision_tree_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.11
+   },
+   "1": {
+    "attempts": 31017,
+    "found": 31000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.28
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.6
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.58
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.6
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.73
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.conditional_decision_tree_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.3
+   }
+  },
+  "R1.conditional_threshold_rule_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.81
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.0
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.01
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.18
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.33
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.conditional_threshold_rule_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.12
+   }
+  },
+  "R1.containers_queue_line_r2": {
+   "0": {
+    "attempts": 5000,
+    "found": 500,
+    "id": "R1.containers_queue_line_r2",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.36
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 2065,
+    "id": "R1.containers_queue_line_r2",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 7.55
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 6750,
+    "id": "R1.containers_queue_line_r2",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 9.13
+   },
+   "3": {
+    "attempts": 95000,
+    "found": 12035,
+    "id": "R1.containers_queue_line_r2",
+    "level": 3,
+    "need": 31000,
+    "passed": false,
+    "seconds": 10.6
+   },
+   "4": {
+    "attempts": 95000,
+    "found": 23682,
+    "id": "R1.containers_queue_line_r2",
+    "level": 4,
+    "need": 31000,
+    "passed": false,
+    "seconds": 12.28
+   },
+   "5": {
+    "attempts": 87343,
+    "found": 31000,
+    "id": "R1.containers_queue_line_r2",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 12.74
+   },
+   "6": {
+    "attempts": 1013,
+    "found": 1000,
+    "id": "R1.containers_queue_line_r2",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.16
+   }
+  },
+  "R1.containers_stack_piles_r4": {
+   "0": {
+    "attempts": 1181,
+    "found": 1000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.2
+   },
+   "1": {
+    "attempts": 32407,
+    "found": 31000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.2
+   },
+   "2": {
+    "attempts": 31504,
+    "found": 31000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.82
+   },
+   "3": {
+    "attempts": 31209,
+    "found": 31000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.9
+   },
+   "4": {
+    "attempts": 31095,
+    "found": 31000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.7
+   },
+   "5": {
+    "attempts": 31068,
+    "found": 31000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.59
+   },
+   "6": {
+    "attempts": 1001,
+    "found": 1000,
+    "id": "R1.containers_stack_piles_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.32
+   }
+  },
+  "R1.elimination_bracket_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.31
+   },
+   "1": {
+    "attempts": 31005,
+    "found": 31000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.27
+   },
+   "2": {
+    "attempts": 31004,
+    "found": 31000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.21
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 30.01
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 30.21
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 30.51
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.elimination_bracket_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.96
+   }
+  },
+  "R1.elimination_josephus": {
+   "0": {
+    "attempts": 5000,
+    "found": 32,
+    "id": "R1.elimination_josephus",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.25
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 40,
+    "id": "R1.elimination_josephus",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 5.01
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 47,
+    "id": "R1.elimination_josephus",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 5.31
+   },
+   "3": {
+    "attempts": 95000,
+    "found": 34,
+    "id": "R1.elimination_josephus",
+    "level": 3,
+    "need": 31000,
+    "passed": false,
+    "seconds": 5.56
+   },
+   "4": {
+    "attempts": 95000,
+    "found": 33,
+    "id": "R1.elimination_josephus",
+    "level": 4,
+    "need": 31000,
+    "passed": false,
+    "seconds": 5.75
+   },
+   "5": {
+    "attempts": 95000,
+    "found": 36,
+    "id": "R1.elimination_josephus",
+    "level": 5,
+    "need": 31000,
+    "passed": false,
+    "seconds": 6.12
+   },
+   "6": {
+    "attempts": 5000,
+    "found": 40,
+    "id": "R1.elimination_josephus",
+    "level": 6,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.33
+   }
+  },
+  "R1.equivalence_classes_r2": {
+   "0": {
+    "attempts": 2393,
+    "found": 1000,
+    "id": "R1.equivalence_classes_r2",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.17
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 11315,
+    "id": "R1.equivalence_classes_r2",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 7.08
+   },
+   "2": {
+    "attempts": 47256,
+    "found": 31000,
+    "id": "R1.equivalence_classes_r2",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.09
+   },
+   "3": {
+    "attempts": 37791,
+    "found": 31000,
+    "id": "R1.equivalence_classes_r2",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.23
+   },
+   "4": {
+    "attempts": 31766,
+    "found": 31000,
+    "id": "R1.equivalence_classes_r2",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.17
+   },
+   "5": {
+    "attempts": 31447,
+    "found": 31000,
+    "id": "R1.equivalence_classes_r2",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.34
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.equivalence_classes_r2",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.14
+   }
+  },
+  "R1.equivalence_exchange_rates": {
+   "0": {
+    "attempts": 1001,
+    "found": 1000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.04
+   },
+   "1": {
+    "attempts": 31005,
+    "found": 31000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.52
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.9
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.26
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.64
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.99
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.equivalence_exchange_rates",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.1
+   }
+  },
+  "R1.event_timeline": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.event_timeline",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.04
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.event_timeline",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.05
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.event_timeline",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.62
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.event_timeline",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.26
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.event_timeline",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.76
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.event_timeline",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.32
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.event_timeline",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.18
+   }
+  },
+  "R1.graph_bipartite": {
+   "0": {
+    "attempts": 5000,
+    "found": 110,
+    "id": "R1.graph_bipartite",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.41
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 1614,
+    "id": "R1.graph_bipartite",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 7.87
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 16473,
+    "id": "R1.graph_bipartite",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 9.07
+   },
+   "3": {
+    "attempts": 51319,
+    "found": 31000,
+    "id": "R1.graph_bipartite",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.55
+   },
+   "4": {
+    "attempts": 35372,
+    "found": 31000,
+    "id": "R1.graph_bipartite",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.28
+   },
+   "5": {
+    "attempts": 32435,
+    "found": 31000,
+    "id": "R1.graph_bipartite",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.24
+   },
+   "6": {
+    "attempts": 1003,
+    "found": 1000,
+    "id": "R1.graph_bipartite",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.14
+   }
+  },
+  "R1.graph_shortest_route_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.12
+   },
+   "1": {
+    "attempts": 31001,
+    "found": 31000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.66
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.09
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.2
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.56
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.59
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.graph_shortest_route_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.32
+   }
+  },
+  "R1.instant_runoff_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.instant_runoff_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.22
+   },
+   "1": {
+    "attempts": 31027,
+    "found": 31000,
+    "id": "R1.instant_runoff_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.46
+   },
+   "2": {
+    "attempts": 31034,
+    "found": 31000,
+    "id": "R1.instant_runoff_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.42
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.instant_runoff_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.79
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.instant_runoff_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.75
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.instant_runoff_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 10.63
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.instant_runoff_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.84
+   }
+  },
+  "R1.kinship_ancestor_r4": {
+   "0": {
+    "attempts": 1264,
+    "found": 1000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.27
+   },
+   "1": {
+    "attempts": 64291,
+    "found": 31000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 13.83
+   },
+   "2": {
+    "attempts": 32249,
+    "found": 31000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.79
+   },
+   "3": {
+    "attempts": 31331,
+    "found": 31000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.73
+   },
+   "4": {
+    "attempts": 31016,
+    "found": 31000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.83
+   },
+   "5": {
+    "attempts": 31007,
+    "found": 31000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 11.01
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.kinship_ancestor_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.4
+   }
+  },
+  "R1.kinship_cousins": {
+   "0": {
+    "attempts": 5000,
+    "found": 368,
+    "id": "R1.kinship_cousins",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.76
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 372,
+    "id": "R1.kinship_cousins",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 13.09
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 1214,
+    "id": "R1.kinship_cousins",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 14.96
+   },
+   "3": {
+    "attempts": 95000,
+    "found": 1213,
+    "id": "R1.kinship_cousins",
+    "level": 3,
+    "need": 31000,
+    "passed": false,
+    "seconds": 15.07
+   },
+   "4": {
+    "attempts": 95000,
+    "found": 2870,
+    "id": "R1.kinship_cousins",
+    "level": 4,
+    "need": 31000,
+    "passed": false,
+    "seconds": 16.4
+   },
+   "5": {
+    "attempts": 95000,
+    "found": 2877,
+    "id": "R1.kinship_cousins",
+    "level": 5,
+    "need": 31000,
+    "passed": false,
+    "seconds": 16.32
+   },
+   "6": {
+    "attempts": 1317,
+    "found": 1000,
+    "id": "R1.kinship_cousins",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.31
+   }
+  },
+  "R1.kinship_descendants_r4": {
+   "0": {
+    "attempts": 1060,
+    "found": 1000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.32
+   },
+   "1": {
+    "attempts": 87180,
+    "found": 31000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 25.31
+   },
+   "2": {
+    "attempts": 35109,
+    "found": 31000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 13.65
+   },
+   "3": {
+    "attempts": 35126,
+    "found": 31000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 14.34
+   },
+   "4": {
+    "attempts": 31885,
+    "found": 31000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 16.72
+   },
+   "5": {
+    "attempts": 31916,
+    "found": 31000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 17.55
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.kinship_descendants_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.6
+   }
+  },
+  "R1.knights_knaves": {
+   "0": {
+    "attempts": 5000,
+    "found": 52,
+    "id": "R1.knights_knaves",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.27
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 5780,
+    "id": "R1.knights_knaves",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 6.82
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 5740,
+    "id": "R1.knights_knaves",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 6.96
+   },
+   "3": {
+    "attempts": 36703,
+    "found": 31000,
+    "id": "R1.knights_knaves",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.61
+   },
+   "4": {
+    "attempts": 36728,
+    "found": 31000,
+    "id": "R1.knights_knaves",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.52
+   },
+   "5": {
+    "attempts": 31169,
+    "found": 31000,
+    "id": "R1.knights_knaves",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.97
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.knights_knaves",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.12
+   }
+  },
+  "R1.minimax_tree_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.minimax_tree_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.minimax_tree_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.17
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.minimax_tree_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.12
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.minimax_tree_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.21
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.minimax_tree_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.89
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.minimax_tree_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.6
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.minimax_tree_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.13
+   }
+  },
+  "R1.mst_cost_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.mst_cost_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.13
+   },
+   "1": {
+    "attempts": 31004,
+    "found": 31000,
+    "id": "R1.mst_cost_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.96
+   },
+   "2": {
+    "attempts": 31001,
+    "found": 31000,
+    "id": "R1.mst_cost_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.37
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.mst_cost_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.65
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.mst_cost_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.02
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.mst_cost_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.35
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.mst_cost_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.34
+   }
+  },
+  "R1.nim_xor_r4": {
+   "0": {
+    "attempts": 1009,
+    "found": 1000,
+    "id": "R1.nim_xor_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.05
+   },
+   "1": {
+    "attempts": 31513,
+    "found": 31000,
+    "id": "R1.nim_xor_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.71
+   },
+   "2": {
+    "attempts": 31063,
+    "found": 31000,
+    "id": "R1.nim_xor_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.65
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.nim_xor_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.74
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.nim_xor_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.69
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.nim_xor_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 1.76
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.nim_xor_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.05
+   }
+  },
+  "R1.one_culprit": {
+   "0": {
+    "attempts": 1029,
+    "found": 1000,
+    "id": "R1.one_culprit",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 30135,
+    "id": "R1.one_culprit",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 7.53
+   },
+   "2": {
+    "attempts": 32921,
+    "found": 31000,
+    "id": "R1.one_culprit",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.26
+   },
+   "3": {
+    "attempts": 32953,
+    "found": 31000,
+    "id": "R1.one_culprit",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.19
+   },
+   "4": {
+    "attempts": 31134,
+    "found": 31000,
+    "id": "R1.one_culprit",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.55
+   },
+   "5": {
+    "attempts": 31133,
+    "found": 31000,
+    "id": "R1.one_culprit",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.42
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.one_culprit",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.12
+   }
+  },
+  "R1.order_compare_r4": {
+   "0": {
+    "attempts": 1152,
+    "found": 1000,
+    "id": "R1.order_compare_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.13
+   },
+   "1": {
+    "attempts": 48954,
+    "found": 31000,
+    "id": "R1.order_compare_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.36
+   },
+   "2": {
+    "attempts": 33899,
+    "found": 31000,
+    "id": "R1.order_compare_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.56
+   },
+   "3": {
+    "attempts": 31442,
+    "found": 31000,
+    "id": "R1.order_compare_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.67
+   },
+   "4": {
+    "attempts": 31057,
+    "found": 31000,
+    "id": "R1.order_compare_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.02
+   },
+   "5": {
+    "attempts": 31011,
+    "found": 31000,
+    "id": "R1.order_compare_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.74
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.order_compare_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.19
+   }
+  },
+  "R1.order_extreme": {
+   "0": {
+    "attempts": 5000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.18
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 4.53
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 5.32
+   },
+   "3": {
+    "attempts": 95000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 3,
+    "need": 31000,
+    "passed": false,
+    "seconds": 6.0
+   },
+   "4": {
+    "attempts": 95000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 4,
+    "need": 31000,
+    "passed": false,
+    "seconds": 6.66
+   },
+   "5": {
+    "attempts": 95000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 5,
+    "need": 31000,
+    "passed": false,
+    "seconds": 7.49
+   },
+   "6": {
+    "attempts": 5000,
+    "found": 2,
+    "id": "R1.order_extreme",
+    "level": 6,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.43
+   }
+  },
+  "R1.order_tournament_wins": {
+   "0": {
+    "attempts": 5000,
+    "found": 4,
+    "id": "R1.order_tournament_wins",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.32
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 14,
+    "id": "R1.order_tournament_wins",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 10.07
+   },
+   "2": {
+    "attempts": 95000,
+    "found": 14,
+    "id": "R1.order_tournament_wins",
+    "level": 2,
+    "need": 31000,
+    "passed": false,
+    "seconds": 10.29
+   },
+   "3": {
+    "attempts": 95000,
+    "found": 68,
+    "id": "R1.order_tournament_wins",
+    "level": 3,
+    "need": 31000,
+    "passed": false,
+    "seconds": 13.26
+   },
+   "4": {
+    "attempts": 95000,
+    "found": 68,
+    "id": "R1.order_tournament_wins",
+    "level": 4,
+    "need": 31000,
+    "passed": false,
+    "seconds": 12.93
+   },
+   "5": {
+    "attempts": 95000,
+    "found": 524,
+    "id": "R1.order_tournament_wins",
+    "level": 5,
+    "need": 31000,
+    "passed": false,
+    "seconds": 16.08
+   },
+   "6": {
+    "attempts": 5000,
+    "found": 522,
+    "id": "R1.order_tournament_wins",
+    "level": 6,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.9
+   }
+  },
+  "R1.pet_owners": {
+   "0": {
+    "attempts": 5000,
+    "found": 655,
+    "id": "R1.pet_owners",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.34
+   },
+   "1": {
+    "attempts": 89269,
+    "found": 31000,
+    "id": "R1.pet_owners",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.16
+   },
+   "2": {
+    "attempts": 41686,
+    "found": 31000,
+    "id": "R1.pet_owners",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.98
+   },
+   "3": {
+    "attempts": 34367,
+    "found": 31000,
+    "id": "R1.pet_owners",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.41
+   },
+   "4": {
+    "attempts": 34378,
+    "found": 31000,
+    "id": "R1.pet_owners",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.09
+   },
+   "5": {
+    "attempts": 34246,
+    "found": 31000,
+    "id": "R1.pet_owners",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 8.2
+   },
+   "6": {
+    "attempts": 1015,
+    "found": 1000,
+    "id": "R1.pet_owners",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.26
+   }
+  },
+  "R1.road_reachability": {
+   "0": {
+    "attempts": 1042,
+    "found": 1000,
+    "id": "R1.road_reachability",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.11
+   },
+   "1": {
+    "attempts": 33002,
+    "found": 31000,
+    "id": "R1.road_reachability",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.23
+   },
+   "2": {
+    "attempts": 31326,
+    "found": 31000,
+    "id": "R1.road_reachability",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.56
+   },
+   "3": {
+    "attempts": 31050,
+    "found": 31000,
+    "id": "R1.road_reachability",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.7
+   },
+   "4": {
+    "attempts": 31002,
+    "found": 31000,
+    "id": "R1.road_reachability",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.95
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.road_reachability",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.52
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.road_reachability",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.18
+   }
+  },
+  "R1.seating_row": {
+   "0": {
+    "attempts": 5000,
+    "found": 521,
+    "id": "R1.seating_row",
+    "level": 0,
+    "need": 1000,
+    "passed": false,
+    "seconds": 0.27
+   },
+   "1": {
+    "attempts": 95000,
+    "found": 24676,
+    "id": "R1.seating_row",
+    "level": 1,
+    "need": 31000,
+    "passed": false,
+    "seconds": 8.36
+   },
+   "2": {
+    "attempts": 38019,
+    "found": 31000,
+    "id": "R1.seating_row",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.75
+   },
+   "3": {
+    "attempts": 32882,
+    "found": 31000,
+    "id": "R1.seating_row",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.13
+   },
+   "4": {
+    "attempts": 31177,
+    "found": 31000,
+    "id": "R1.seating_row",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 14.69
+   },
+   "5": {
+    "attempts": 31163,
+    "found": 31000,
+    "id": "R1.seating_row",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 14.46
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.seating_row",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 2.77
+   }
+  },
+  "R1.spatial_grid_walk_r2": {
+   "0": {
+    "attempts": 1005,
+    "found": 1000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.1
+   },
+   "1": {
+    "attempts": 31413,
+    "found": 31000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.15
+   },
+   "2": {
+    "attempts": 31013,
+    "found": 31000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.73
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.26
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.18
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.53
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.spatial_grid_walk_r2",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.2
+   }
+  },
+  "R1.spatial_relative_directions_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.15
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.38
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.74
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.09
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.49
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.spatial_relative_directions_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.12
+   }
+  },
+  "R1.stable_matching_r4": {
+   "0": {
+    "attempts": 1119,
+    "found": 1000,
+    "id": "R1.stable_matching_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.15
+   },
+   "1": {
+    "attempts": 31005,
+    "found": 31000,
+    "id": "R1.stable_matching_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.87
+   },
+   "2": {
+    "attempts": 31002,
+    "found": 31000,
+    "id": "R1.stable_matching_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.82
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.stable_matching_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.22
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.stable_matching_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 7.22
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.stable_matching_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 9.22
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.stable_matching_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.29
+   }
+  },
+  "R1.swap_tracking": {
+   "0": {
+    "attempts": 2149,
+    "found": 1000,
+    "id": "R1.swap_tracking",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.13
+   },
+   "1": {
+    "attempts": 31526,
+    "found": 31000,
+    "id": "R1.swap_tracking",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.9
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.swap_tracking",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.05
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.swap_tracking",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.01
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.swap_tracking",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.59
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.swap_tracking",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.44
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.swap_tracking",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.2
+   }
+  },
+  "R1.temporal_critical_path_r4": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.06
+   },
+   "1": {
+    "attempts": 31018,
+    "found": 31000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.43
+   },
+   "2": {
+    "attempts": 31001,
+    "found": 31000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.82
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.3
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.83
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.25
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.temporal_critical_path_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.14
+   }
+  },
+  "R1.temporal_interval_overlap": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.78
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.82
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.25
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.1
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.79
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.temporal_interval_overlap",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.11
+   }
+  },
+  "R1.temporal_weekday_shift": {
+   "0": {
+    "attempts": 1054,
+    "found": 1000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.05
+   },
+   "1": {
+    "attempts": 31017,
+    "found": 31000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.25
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.26
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.06
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.75
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.51
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.temporal_weekday_shift",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.24
+   }
+  },
+  "R1.topological_order_r4": {
+   "0": {
+    "attempts": 1112,
+    "found": 1000,
+    "id": "R1.topological_order_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.14
+   },
+   "1": {
+    "attempts": 38335,
+    "found": 31000,
+    "id": "R1.topological_order_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.6
+   },
+   "2": {
+    "attempts": 31350,
+    "found": 31000,
+    "id": "R1.topological_order_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.01
+   },
+   "3": {
+    "attempts": 31015,
+    "found": 31000,
+    "id": "R1.topological_order_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.46
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.topological_order_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.98
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.topological_order_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 6.36
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.topological_order_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.21
+   }
+  },
+  "R1.tracking_accounts": {
+   "0": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.tracking_accounts",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.07
+   },
+   "1": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.tracking_accounts",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.02
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.tracking_accounts",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.3
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.tracking_accounts",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 3.83
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.tracking_accounts",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.13
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.tracking_accounts",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 4.6
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.tracking_accounts",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.18
+   }
+  },
+  "R1.venn_counting_r4": {
+   "0": {
+    "attempts": 1054,
+    "found": 1000,
+    "id": "R1.venn_counting_r4",
+    "level": 0,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.05
+   },
+   "1": {
+    "attempts": 66446,
+    "found": 31000,
+    "id": "R1.venn_counting_r4",
+    "level": 1,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.83
+   },
+   "2": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.venn_counting_r4",
+    "level": 2,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.36
+   },
+   "3": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.venn_counting_r4",
+    "level": 3,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.38
+   },
+   "4": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.venn_counting_r4",
+    "level": 4,
+    "need": 31000,
+    "passed": true,
+    "seconds": 2.26
+   },
+   "5": {
+    "attempts": 31000,
+    "found": 31000,
+    "id": "R1.venn_counting_r4",
+    "level": 5,
+    "need": 31000,
+    "passed": true,
+    "seconds": 5.17
+   },
+   "6": {
+    "attempts": 1000,
+    "found": 1000,
+    "id": "R1.venn_counting_r4",
+    "level": 6,
+    "need": 1000,
+    "passed": true,
+    "seconds": 0.17
+   }
+  }
+ }
+}

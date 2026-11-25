@@ -1,0 +1,216 @@
+{
+ "not_registered": {},
+ "note": "Revision-4 shapes of R1 (second audit, lead rulings R-1..R-9). Self-checked only: not independent review, not Astra validation, not human approval. Nothing is in core.REGISTRY; no second solver exists; no part is assigned.",
+ "shapes": {
+  "R1.activity_selection_r4": {
+   "cluster": "R1.activity_selection",
+   "family": "scheduling",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.activity_selection_r4.jsonl",
+   "fixture_sha256": "3da518ebd02c18fd5499304eb1bbd22e00dc7603502f96a90f490256deef41f2",
+   "not_registered": null,
+   "replaces": "R1.activity_selection",
+   "signature": "94b771e995782d72b8e62463660ea5e0997428e29c24336d36bc9fb7dabf3afb"
+  },
+  "R1.boolean_lights_r4": {
+   "cluster": "R1.boolean_lights",
+   "family": "boolean_state",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.boolean_lights_r4.jsonl",
+   "fixture_sha256": "c38d0ca16b3cd4d02196784ebd95b5097d8df1a08ffd89b3a2ce5fc78e216e0a",
+   "not_registered": null,
+   "replaces": "R1.boolean_lights_r2",
+   "signature": "ffa3ec4cef2e589f8c86397f3f5139811445f85b3a792b0dbd4bcf8e8e1b0820"
+  },
+  "R1.categories_default_exceptions_r4": {
+   "cluster": "R1.categories_default_exceptions",
+   "family": "categories",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.categories_default_exceptions_r4.jsonl",
+   "fixture_sha256": "b7b6f8e0209d0f67511aa953a730885a331c9082d68a9f188f47be0dda71351b",
+   "not_registered": null,
+   "replaces": "R1.categories_default_exceptions_r3",
+   "signature": "392c8a51e391b83788a9040917817e6831da386ae2eb2812de44d05ed63de447"
+  },
+  "R1.categories_follow_r4": {
+   "cluster": "R1.categories_follow",
+   "family": "categories",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.categories_follow_r4.jsonl",
+   "fixture_sha256": "d4806a1347f282dd89abe269159aebc2f38db1023ec7f1bacf53d88517e1dfaf",
+   "not_registered": null,
+   "replaces": "R1.categories_follow_r2",
+   "signature": "520ea4a6ce6287f1e7547507339b21f037574e94943625a74fe9b72c5abc4f20"
+  },
+  "R1.conditional_decision_tree_r4": {
+   "cluster": "R1.attribute_rule",
+   "family": "conditional",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.conditional_decision_tree_r4.jsonl",
+   "fixture_sha256": "a86e4f9cbcdc00f598faf28dc71970a87a591050e39dddc049f73f8b546997fb",
+   "not_registered": null,
+   "replaces": "R1.conditional_decision_tree",
+   "signature": "3c3bf04edef49d5d51f9fe2b6e7d1901e14b3b9584c0800fc8b62bbd24777d5a"
+  },
+  "R1.conditional_threshold_rule_r4": {
+   "cluster": "R1.conditional_threshold_rule",
+   "family": "conditional",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.conditional_threshold_rule_r4.jsonl",
+   "fixture_sha256": "3b0defbaf2229150dc19bb76401a2fe69e15d6d33b60da1df1ed44b5e94742f1",
+   "not_registered": null,
+   "replaces": "R1.conditional_threshold_rule_r3",
+   "signature": "1a064db9fc9aed86130c961095782cd244ee30a904c37a7f467801ff8602e9bc"
+  },
+  "R1.containers_stack_piles_r4": {
+   "cluster": "R1.containers_stack_piles",
+   "family": "containers",
+   "file": "studies/m0/lineages_r1_rev4_c.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.containers_stack_piles_r4.jsonl",
+   "fixture_sha256": "f92a72926aba5a90fd3478b2d17b8c65ef6caf51e08799309ec91fc328da013b",
+   "not_registered": null,
+   "replaces": "R1.containers_stack_piles_r3",
+   "signature": "2cef209c4673b2a1c3a23861d9b63f22a393cfb4d1decef6879d28144082101d"
+  },
+  "R1.elimination_bracket_r4": {
+   "cluster": "R1.elimination_bracket",
+   "family": "elimination",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.elimination_bracket_r4.jsonl",
+   "fixture_sha256": "dcbd745731b3d7cf55d47da36d2c408a326e835acef222e62bdbc7159f78aa88",
+   "not_registered": null,
+   "replaces": "R1.elimination_bracket_r3",
+   "signature": "efe858fb9415b811f812ae4aa0853df57f58352ba8f83c635c2645e0395bfad5"
+  },
+  "R1.graph_shortest_route_r4": {
+   "cluster": "R1.graph_shortest_route",
+   "family": "graph",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.graph_shortest_route_r4.jsonl",
+   "fixture_sha256": "efc888c4b3a8150b9f30abc153912fd57cd18d6a323702206dbeaa15f59c3d4d",
+   "not_registered": null,
+   "replaces": "R1.graph_shortest_route_r2",
+   "signature": "cd98410872f61e4c1563496af7c781335312f31179f0cdb4e01ea333322b0dbb"
+  },
+  "R1.instant_runoff_r4": {
+   "cluster": "R1.instant_runoff",
+   "family": "voting",
+   "file": "studies/m0/lineages_r1_rev4_c.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.instant_runoff_r4.jsonl",
+   "fixture_sha256": "dc6763027af542c225d09cc2fb758e894786fd5cf2437d6bebf659e8d5b259d3",
+   "not_registered": null,
+   "replaces": "R1.instant_runoff_r2",
+   "signature": "8499b23e131b26536cca6211cbc2bc6a5583a6b0ebda73d4f55fc4fa5018d6bd"
+  },
+  "R1.kinship_ancestor_r4": {
+   "cluster": "R1.categories_default_exceptions",
+   "family": "kinship",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.kinship_ancestor_r4.jsonl",
+   "fixture_sha256": "432a1b05fc5461f91750684fd5819d057cacf9eb3b72084125b5754f533888bd",
+   "not_registered": null,
+   "replaces": "R1.kinship_ancestor_r3",
+   "signature": "fc193abe7b09e9922bd1f32ec9b9b0475a619fa81b8eb7d07b2312e44b109099"
+  },
+  "R1.kinship_descendants_r4": {
+   "cluster": "R1.kinship_descendants",
+   "family": "kinship",
+   "file": "studies/m0/lineages_r1_rev4.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.kinship_descendants_r4.jsonl",
+   "fixture_sha256": "ea0d358158cd394c4e374a186ce3a3056672ad5c4f7f7a997e9e214f6afa4586",
+   "not_registered": null,
+   "replaces": "R1.kinship_descendants_r3",
+   "signature": "c503ac23caa6a94064d507e51d9346cfcf1e8df4844511c978be525a18366cb2"
+  },
+  "R1.minimax_tree_r4": {
+   "cluster": "R1.attribute_rule",
+   "family": "games",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.minimax_tree_r4.jsonl",
+   "fixture_sha256": "7e2460e6cee83ca22e4328b77c4118526e68411c3eba5a3f49d2e1dca734eaad",
+   "not_registered": null,
+   "replaces": "R1.minimax_tree",
+   "signature": "f4cb4f76d0c95bb3a39685d05648c4e4aa36c51f26430c7a541fd30b56e6d3c2"
+  },
+  "R1.mst_cost_r4": {
+   "cluster": "R1.mst_cost",
+   "family": "network",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.mst_cost_r4.jsonl",
+   "fixture_sha256": "02d948ccedea1e04090f59b77e470cd0ef9f4dcd9140c76d2d81368a98013b6d",
+   "not_registered": null,
+   "replaces": "R1.mst_cost",
+   "signature": "49e726a15cd2f4d8c2c116f501abdc514938c799210f844b60490780f6dbbd9f"
+  },
+  "R1.nim_xor_r4": {
+   "cluster": "R1.nim_xor",
+   "family": "games",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.nim_xor_r4.jsonl",
+   "fixture_sha256": "a66207033072a9e7254c0070e1ab48b82ea94c65c888627b4311963b20a0e22b",
+   "not_registered": null,
+   "replaces": "R1.nim_xor",
+   "signature": "428d30e1c8e19f38843caf9ab925c6089cd754b4ff0ad02d5e251c11c27706b6"
+  },
+  "R1.order_compare_r4": {
+   "cluster": "R1.categories_follow",
+   "family": "order",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.order_compare_r4.jsonl",
+   "fixture_sha256": "a128136b690d2a8983a9113a79e62c38a12dfd0d7454d2b965e14b2351a03f8f",
+   "not_registered": null,
+   "replaces": "R1.order_compare",
+   "signature": "3496bf5c8eeea46dbe6116518a03f54fd30beefb2b33f96b0495857c21a5db10"
+  },
+  "R1.spatial_relative_directions_r4": {
+   "cluster": "R1.equivalence_exchange_rates",
+   "family": "spatial",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.spatial_relative_directions_r4.jsonl",
+   "fixture_sha256": "ab027e903039981a6758179f7e88a7871a150beb21b0702759db1504ac294164",
+   "not_registered": null,
+   "replaces": "R1.spatial_relative_directions",
+   "signature": "74f124e20ea7629e6165dbb46bd64c624a2e4689107e6d148f536d7d761066e8"
+  },
+  "R1.stable_matching_r4": {
+   "cluster": "R1.stable_matching",
+   "family": "matching",
+   "file": "studies/m0/lineages_r1_rev4_c.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.stable_matching_r4.jsonl",
+   "fixture_sha256": "76cecf9f2bae5858e56b6f806f02013c5a95aafb0dcb1c353a9ad2f82f040996",
+   "not_registered": null,
+   "replaces": "R1.stable_matching_r2",
+   "signature": "855e43e99823c4a4f45176b98ae6db5098ed7deb9f08933f1f98a564f4413c0c"
+  },
+  "R1.temporal_critical_path_r4": {
+   "cluster": "R1.temporal_critical_path",
+   "family": "temporal",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.temporal_critical_path_r4.jsonl",
+   "fixture_sha256": "4eab54db74a9413b6608a74b3eef1c3f5c408afe8b95ce792d804d619338cc19",
+   "not_registered": null,
+   "replaces": "R1.temporal_critical_path",
+   "signature": "e9618f6f57f2ae50b26553e14172a52971cf25c011d3a300efa79473849aa202"
+  },
+  "R1.topological_order_r4": {
+   "cluster": "R1.order_extreme",
+   "family": "scheduling",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.topological_order_r4.jsonl",
+   "fixture_sha256": "ae6dc19cbaeeed2ef61235cce19131640a96910c25ec6bfcf97a06e49453aa74",
+   "not_registered": null,
+   "replaces": "R1.topological_order_r2",
+   "signature": "7189fbb6cf2e2aa4899935cebe130fa20a3107f7216d9e92e874fe23a0d91cc0"
+  },
+  "R1.venn_counting_r4": {
+   "cluster": "R1.venn_counting",
+   "family": "sets",
+   "file": "studies/m0/lineages_r1_rev4_b.py",
+   "fixture": "studies/m0/fixtures/r1_rev4/R1.venn_counting_r4.jsonl",
+   "fixture_sha256": "19d1ecacce691c07375a33d2e9bb3d447b0d927d0a449a764b209b0aa92521b5",
+   "not_registered": null,
+   "replaces": "R1.venn_counting",
+   "signature": "c3204a1d47ea4108efaffb9c31fc7785e77771c8a713c92b098f4251504a8028"
+  }
+ }
+}

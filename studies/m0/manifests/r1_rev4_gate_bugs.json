@@ -1,0 +1,104 @@
+[
+ {
+  "after": {
+   "accuracy": 0.2952,
+   "accuracy_when_fires": 0.2952,
+   "anti_excess": -0.0314,
+   "excess_over_chance": 0.1183,
+   "fires": 2000,
+   "per_level_accuracy": {
+    "1": 0.4056,
+    "2": 0.2796,
+    "3": 0.3038,
+    "4": 0.2554,
+    "5": 0.2317
+   }
+  },
+  "before": {
+   "accuracy": 0.0816,
+   "accuracy_when_fires": 0.0088,
+   "anti_excess": 0.0247,
+   "excess_over_chance": -0.0953,
+   "fires": 1142,
+   "per_level_accuracy": {
+    "1": 0.1325,
+    "2": 0.093,
+    "3": 0.0737,
+    "4": 0.0607,
+    "5": 0.0481
+   }
+  },
+  "bug": "(a) possessive: 'Flynn's' read as another word, the prediction discarded",
+  "heuristic": "longest_job",
+  "lineage": "R1.temporal_critical_path",
+  "n_items": 2000
+ },
+ {
+  "after": {
+   "accuracy": 0.6927,
+   "accuracy_when_fires": 1.0,
+   "anti_excess": -0.1797,
+   "excess_over_chance": 0.3593,
+   "fires": 1078,
+   "per_level_accuracy": {
+    "1": 0.725,
+    "2": 0.7217,
+    "3": 0.665,
+    "4": 0.67,
+    "5": 0.6817
+   }
+  },
+  "before": {
+   "accuracy": 0.4102,
+   "accuracy_when_fires": 0.4759,
+   "anti_excess": -0.0384,
+   "excess_over_chance": 0.0768,
+   "fires": 1078,
+   "per_level_accuracy": {
+    "1": 0.445,
+    "2": 0.3942,
+    "3": 0.385,
+    "4": 0.4125,
+    "5": 0.4142
+   }
+  },
+  "bug": "(b) direction of the stated pair ignored",
+  "heuristic": "asked_pair_stated_verbatim",
+  "lineage": "R1.order_compare",
+  "n_items": 2000
+ },
+ {
+  "after": {
+   "accuracy": 0.0315,
+   "accuracy_when_fires": 0.0315,
+   "anti_excess": null,
+   "excess_over_chance": 0.0315,
+   "fires": 2000,
+   "per_level_accuracy": {
+    "1": 0.075,
+    "2": 0.0825,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  },
+  "before": {
+   "accuracy": 0.17,
+   "accuracy_when_fires": 0.17,
+   "anti_excess": null,
+   "excess_over_chance": 0.17,
+   "fires": 2000,
+   "per_level_accuracy": {
+    "1": 0.165,
+    "2": 0.2,
+    "3": 0.14,
+    "4": 0.1675,
+    "5": 0.1775
+   }
+  },
+  "bug": "(c) minus sign dropped, depth counted as a number",
+  "heuristic": "smallest_number",
+  "lineage": "R1.minimax_tree",
+  "n_items": 2000
+ }
+]

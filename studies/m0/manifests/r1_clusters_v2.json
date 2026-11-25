@@ -1,0 +1,238 @@
+{
+ "author_notes": [
+  {
+   "merge": "(i) minimax_tree with attribute_rule / conditional_decision_tree",
+   "note": "none recorded: the docstring lists 'minimax_tree with any other tree evaluation' among the merges an auditor may make",
+   "who": "earlier implementer (lineages_r1_new2.py docstring)"
+  },
+  {
+   "merge": "(ii) topological_order with order_extreme / order_tournament_wins",
+   "note": "the pilot notes rejected 'topological-order questions' as 'the same procedure as reachability' and later wrote topological_order as a priority-queue Kahn sort; the author's stated difference is the alphabetical priority rule, which audit 2 reads as a parameter",
+   "who": "earlier implementer (NOTES_LINEAGE_REPAIR.md, pilot design rejections)"
+  },
+  {
+   "merge": "(iii) containers_queue_line with elimination_josephus",
+   "note": "the 'front goes to the back' operation was added by the _r2 shape to remove a shortcut; the author did not mention the Josephus overlap. Under the rev-4 rulings the shape keeps that operation (_r2 is unchanged in this revision)",
+   "who": "earlier implementer"
+  },
+  {
+   "merge": "(iv) order_compare / road_reachability with categories_follow / equivalence_classes",
+   "note": "audit 1 kept order_compare apart from categories_follow; audit 2 merges them under the explicit strict ruling; ruling R-2 adopts audit 2",
+   "who": "audit 1 (not an author)"
+  }
+ ],
+ "borderline_not_merged": [
+  {
+   "a": "R1.knights_knaves",
+   "auditor_reason": "generate-and-test over a finite hypothesis space (Boolean assignments versus permutations)",
+   "b": "R1.seating_row"
+  },
+  {
+   "a": "R1.temporal_critical_path",
+   "auditor_reason": "optimal path weight by relaxation or dynamic programming (max on a DAG versus min on an undirected graph)",
+   "b": "R1.graph_shortest_route"
+  },
+  {
+   "a": "R1.mst_cost",
+   "auditor_reason": "Prim is Dijkstra with a different key",
+   "b": "R1.graph_shortest_route"
+  },
+  {
+   "a": "R1.activity_selection",
+   "auditor_reason": "sort by a key, greedily accept items compatible with the accepted set",
+   "b": "R1.mst_cost"
+  },
+  {
+   "a": "R1.instant_runoff",
+   "auditor_reason": "tally a relation and take the extremum, iterated with elimination",
+   "b": "R1.order_tournament_wins"
+  },
+  {
+   "a": "R1.nim_xor",
+   "auditor_reason": "XOR or parity fold (Bouton's theorem maps the game to it)",
+   "b": "R1.boolean_lights"
+  },
+  {
+   "a": "R1.graph_bipartite",
+   "auditor_reason": "propagation of same/different constraints (parity union-find)",
+   "b": "R1.equivalence_classes"
+  },
+  {
+   "a": "R1.spatial_grid_walk",
+   "auditor_reason": "fold a sequence of moves into a position and heading state",
+   "b": "R1.compass_turns"
+  },
+  {
+   "a": "R1.temporal_critical_path",
+   "auditor_reason": "process a prerequisite DAG in topological order",
+   "b": "R1.topological_order"
+  },
+  {
+   "a": "R1.conditional_chain",
+   "auditor_reason": "entailment by enumerating assignments (the generator itself verifies by brute force)",
+   "b": "R1.knights_knaves"
+  },
+  {
+   "a": "R1.tracking_accounts",
+   "auditor_reason": "multi-register transfer simulation, read one register or an extremum",
+   "b": "R1.swap_tracking"
+  },
+  {
+   "a": "R1.instant_runoff",
+   "auditor_reason": "weighted vote tally",
+   "b": "R1.conditional_threshold_rule"
+  },
+  {
+   "a": "R1.kinship_descendants",
+   "auditor_reason": "count per element, argmax (aggregated over a tree)",
+   "b": "R1.order_tournament_wins"
+  }
+ ],
+ "clusters": {
+  "R1.activity_selection": [
+   "R1.activity_selection_r4"
+  ],
+  "R1.attribute_rule": [
+   "R1.attribute_rule",
+   "R1.conditional_decision_tree_r4",
+   "R1.minimax_tree_r4"
+  ],
+  "R1.boolean_lights": [
+   "R1.boolean_lights_r4",
+   "R1.compass_turns"
+  ],
+  "R1.categories_default_exceptions": [
+   "R1.categories_default_exceptions_r4",
+   "R1.kinship_ancestor_r4",
+   "R1.kinship_cousins"
+  ],
+  "R1.categories_follow": [
+   "R1.categories_follow_r4",
+   "R1.equivalence_classes_r2",
+   "R1.order_compare_r4",
+   "R1.road_reachability"
+  ],
+  "R1.conditional_chain": [
+   "R1.conditional_chain"
+  ],
+  "R1.conditional_threshold_rule": [
+   "R1.conditional_threshold_rule_r4"
+  ],
+  "R1.containers_queue_line": [
+   "R1.containers_queue_line_r2",
+   "R1.elimination_josephus"
+  ],
+  "R1.containers_stack_piles": [
+   "R1.containers_stack_piles_r4"
+  ],
+  "R1.elimination_bracket": [
+   "R1.elimination_bracket_r4"
+  ],
+  "R1.equivalence_exchange_rates": [
+   "R1.equivalence_exchange_rates",
+   "R1.event_timeline",
+   "R1.spatial_relative_directions_r4",
+   "R1.temporal_weekday_shift"
+  ],
+  "R1.graph_bipartite": [
+   "R1.graph_bipartite"
+  ],
+  "R1.graph_shortest_route": [
+   "R1.graph_shortest_route_r4"
+  ],
+  "R1.instant_runoff": [
+   "R1.instant_runoff_r4"
+  ],
+  "R1.kinship_descendants": [
+   "R1.kinship_descendants_r4"
+  ],
+  "R1.knights_knaves": [
+   "R1.knights_knaves",
+   "R1.one_culprit"
+  ],
+  "R1.mst_cost": [
+   "R1.mst_cost_r4"
+  ],
+  "R1.nim_xor": [
+   "R1.nim_xor_r4"
+  ],
+  "R1.order_extreme": [
+   "R1.order_extreme",
+   "R1.order_tournament_wins",
+   "R1.topological_order_r4"
+  ],
+  "R1.pet_owners": [
+   "R1.pet_owners",
+   "R1.seating_row"
+  ],
+  "R1.spatial_grid_walk": [
+   "R1.spatial_grid_walk_r2"
+  ],
+  "R1.stable_matching": [
+   "R1.stable_matching_r4"
+  ],
+  "R1.swap_tracking": [
+   "R1.swap_tracking"
+  ],
+  "R1.temporal_critical_path": [
+   "R1.temporal_critical_path_r4"
+  ],
+  "R1.temporal_interval_overlap": [
+   "R1.temporal_interval_overlap"
+  ],
+  "R1.tracking_accounts": [
+   "R1.tracking_accounts"
+  ],
+  "R1.venn_counting": [
+   "R1.venn_counting_r4"
+  ]
+ },
+ "n_clusters": 27,
+ "n_shapes": 43,
+ "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit2_r1/AUDIT_M0_R1_2.md section 1 (primary strict, 27) and my_clusters.py (BORDER list, strictest 14); ruling R-2 of LEAD_RULINGS_2.md",
+ "strict_merges": [
+  [
+   "R1.order_compare",
+   "R1.road_reachability",
+   "R1.categories_follow",
+   "R1.equivalence_classes"
+  ],
+  [
+   "R1.event_timeline",
+   "R1.temporal_weekday_shift",
+   "R1.spatial_relative_directions",
+   "R1.equivalence_exchange_rates"
+  ],
+  [
+   "R1.kinship_ancestor",
+   "R1.kinship_cousins",
+   "R1.categories_default_exceptions"
+  ],
+  [
+   "R1.knights_knaves",
+   "R1.one_culprit"
+  ],
+  [
+   "R1.seating_row",
+   "R1.pet_owners"
+  ],
+  [
+   "R1.attribute_rule",
+   "R1.conditional_decision_tree",
+   "R1.minimax_tree"
+  ],
+  [
+   "R1.compass_turns",
+   "R1.boolean_lights"
+  ],
+  [
+   "R1.order_extreme",
+   "R1.order_tournament_wins",
+   "R1.topological_order"
+  ],
+  [
+   "R1.containers_queue_line",
+   "R1.elimination_josephus"
+  ]
+ ]
+}
