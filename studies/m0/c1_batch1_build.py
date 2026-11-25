@@ -172,7 +172,7 @@ def write_schema(lins: list[Any]) -> None:
         "- Lists are objects: `b = a` makes two names for one list, `a[:]` and `a + [x]` make new lists; a function that assigns to an element of its list parameter changes the caller's list, one that rebinds the parameter does not (C1.shared_lists is about exactly this). `aug` on a list is never used (`xs += ys` mutates in Python but the tree walker would rebind).",
         "- `and` and `or` short-circuit (the insertion sort and the stack matcher rely on `j >= 0 and xs[j] > key`).",
         "- There is no `break`: loops end by their tests. Every loop is bounded; the runner kills a program after 2 s.",
-        "- A function is defined before it is called; recursion is used only by C1.recursive_calls, with at most about 12 nested calls.\n",
+        "- A function is defined before it is called; recursion is used only by C1.recursive_calls, with a call depth of up to 17 measured in the batch-1 fixtures by the audit (the statement 'about 12' in the first version was wrong).\n",
         "## Tree grammar (from `studies/m0/c1grammar.py`)\n",
         "```\nExpression nodes:" + (c1grammar.__doc__ or "").split("Expression nodes:")[1] + "```\n",
         "## Lineages (family, strict procedure, builder description)\n",

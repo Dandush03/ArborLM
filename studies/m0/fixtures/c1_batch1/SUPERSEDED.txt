@@ -1,0 +1,23 @@
+SUPERSEDED (C1 batch 1, revision 2). Nothing in this directory is edited or removed; the lineages below are superseded by the revised shapes in
+studies/m0/fixtures/c1_batch1_rev2/ (generators in studies/m0/lineages_c1_rev2.py). Written by studies/m0/c1_batch1_rev2_build.py.
+
+C1.bytecode_loop  superseded by  C1.bytecode_loop_r2
+    reason: 'sum of all arguments' is the key in 0.82-0.89 of the sum-of-arguments shape (audit)
+C1.cellular_update  superseded by  C1.cellular_update_r2
+    reason: fixed accumulator name 'w' collides with the drawn names (audit: 4 fixtures, 3.7 % of weighted-shape draws print another quantity)
+C1.circle_elimination  superseded by  C1.circle_elimination_r2
+    reason: level-0 space thin; widened (shapes unchanged)
+C1.fast_power  superseded by  C1.fast_power_r2
+    reason: level-0 space thin; widened (shapes unchanged; formula-answerable status unchanged and reserved to the human lead)
+C1.majority_vote_scan  superseded by  C1.majority_vote_scan_r2
+    reason: its redraws (candidate neither first nor last; mode 25 %) were conditioned on heuristic outcomes (ruling R-1) and moved the tell to the elements next to the last (battery literal-position rule 0.85); the candidate-alone shape cannot be made tell-free by construction
+C1.merge_two_sorted  superseded by  C1.merge_two_sorted_r2
+    reason: partial-list shape = sorted(a + b) without the last element (0.50-0.57); the comparison count = len(a) + len(b) - 1 in 0.50-0.57 of its shape
+C1.recursive_calls  superseded by  C1.recursive_calls_r2
+    reason: audit B6: shapes 'two' and 'tri' are the fib_like recurrence; split into fib_shapes_recursive (fib_like cluster) and recursive_calls_r2; space also widened
+C1.recursive_calls  superseded by  C1.fib_shapes_recursive
+    reason: audit B6: shapes 'two' and 'tri' are the fib_like recurrence; split into fib_shapes_recursive (fib_like cluster) and recursive_calls_r2; space also widened
+C1.sieve_marking  superseded by  C1.sieve_marking_r2
+    reason: count shape: ones at indices 0, 1 and at primes explain 0.36-0.50 of it
+C1.turtle_walk  superseded by  C1.turtle_walk_r2
+    reason: 'count the F commands' is the key in 0.53 of items at level 1 and about 0.8 inside the distance shapes (audit)

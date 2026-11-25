@@ -109,7 +109,8 @@ def check_family(family: str, per_level: int = 40) -> list[str]:
     For each lineage and each of the seven levels: ``per_level`` items are built; the generation is deterministic; the questions are
     mostly distinct; the key is in the line grammar; the program is run TWICE in fresh restricted processes (``run_isolated``) and both runs
     equal the key; the existing tree-walking second solver ``solvers_c1.c1_trace`` agrees on every item; the structured form is JSON-stable
-    and carries no key; the program contains exactly one print and no node kind the second solver lacks.
+    and carries no key; the program contains exactly one print statement. (An earlier docstring also claimed a check that no node kind is used which the second solver lacks; the code has no such
+    check of its own: an unsupported node kind makes ``c1_trace`` raise, and the exception fails the check. Corrected in revision 2.)
     """
     import json
 

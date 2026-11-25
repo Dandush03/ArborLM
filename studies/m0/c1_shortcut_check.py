@@ -112,7 +112,7 @@ def oracle_literal(f: Facts, ans: str) -> bool:
 
 
 def oracle_list_stat(f: Facts, ans: str) -> bool:
-    return any(ans in list_stats(xs).values() for xs in f.flat) or any(ans == str(len(s)) or ans in {str(s.count(c)) for c in set(s)} for s in f.strs)
+    return any(ans in list_stats(xs).values() for xs in f.flat) or any(ans == str(len(s)) or ans in {str(s.count(c)) for c in sorted(set(s))} for s in f.strs)
 
 
 SPECIFIC: dict[str, tuple[str, Guess]] = {
