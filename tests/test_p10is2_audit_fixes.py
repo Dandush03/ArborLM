@@ -63,7 +63,7 @@ def test_fresh_process_part_t_launch_reaches_its_stage(tmp_path: Path) -> None:
     commit = freeze(r, "T")
     env = {k: v for k, v in os.environ.items() if k not in ("PYTHONPATH", "OMP_NUM_THREADS")}
     out = subprocess.run([sys.executable, "-m", "studies.p10is2.partt_stages", "registered", "--stage", "analysis", "--run-dir", str(r / "runs"), "--freeze-commit", commit, "--repo", str(r), "--part-q-dir", str(tmp_path / "noq")], cwd=ROOT, env=env, capture_output=True, text=True, timeout=300, check=False)  # noqa: S603
-    assert "platform of record" not in out.stderr and "REFUSED" not in out.stderr and "FileNotFoundError" in out.stderr, out.stderr[-600:]  # it got to Part Q's missing outputs
+    assert "platform of record" not in out.stderr and "frozen file" not in out.stderr and "needs 'recompute'" in out.stderr, out.stderr[-600:]  # every identity and platform check passed and it reached the stage-order check (the recomputation is a stage before the analysis)
 
 
 def test_the_scripts_set_the_adr_thread_count_and_give_each_stage_its_environment(tmp_path: Path) -> None:

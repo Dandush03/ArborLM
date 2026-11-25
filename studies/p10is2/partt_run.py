@@ -5,7 +5,7 @@
 frozen device (MPS in a registered run, CPU in tests), scoring CPU. A cell that stops on a non-finite loss is not resumed and stops the cells that depend on it (their status is ``skipped_dependency``).
 """
 
-from collections.abc import Mapping
+from collections.abc import Collection, Mapping
 from pathlib import Path
 from typing import Any
 
@@ -17,10 +17,29 @@ from studies.p10s2.memory import MemoryArm
 
 from . import engine, scoring
 from .common import core
-from .quantities import NONE, ORDERS, REPLICATES, Registry
+from .quantities import NONE, ORDERS, REPLICATES, Registry, Thresholds
 
 ORDER_ARMS = ("M1", "D1", "M-append", "M-seq", "M-ii", "D-append", "D-seq")
 JOINT = ("M-joint", "D-joint")
+
+
+def _combined_cell(ctx: Any, arm: Any, cs: Any) -> dict[str, Any]:
+    with scoring.timed("combined:arm-cell"):
+        return combined_mod.score_combined_cell(ctx, arm, cs)  # type: ignore[no-any-return]
+
+
+def is_rejected(m_ii: Mapping[str, float], m_append: Mapping[str, float], tolerance: float) -> bool:
+    """CONSOLIDATION-REJECTED (ADR-0025 section 8.5; ``labels.modification``): chrF on D_con of either capability under M-ii is below M-append's minus the tolerance."""
+    return any(m_ii[f"dcon:{c}"] < m_append[f"dcon:{c}"] - tolerance for c in core.TASKS)
+
+
+def rejected_orders(values: Mapping[str, float], r: int, tolerance: float) -> set[str]:
+    """The orders of replicate ``r`` whose M-ii cell is rejected, read from the registry of the evaluate stage (the combined stage pins M-append's snapshot in those cells)."""
+    out = set()
+    for o in ORDERS:
+        if all(f"M-ii|{o}|{r}|dcon:{c}" in values for c in core.TASKS) and is_rejected({f"dcon:{c}": values[f"M-ii|{o}|{r}|dcon:{c}"] for c in core.TASKS}, {f"dcon:{c}": values[f"M-append|{o}|{r}|dcon:{c}"] for c in core.TASKS}, tolerance):
+            out.add(o)
+    return out
 
 
 def cell_specs(replicates: tuple[int, ...] = REPLICATES) -> list[engine.CellSpec]:
@@ -47,37 +66,71 @@ def train_all(world: engine.WorldT, snap_dir: Path, ckpt_dir: Path | None, updat
 
 
 @torch.no_grad()
-def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Mapping[str, Any]) -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
-    """Every scored read of ONE replicate (a task of the registered evaluate stage): the records keyed ``"{arm}|{order}|{rep}"`` and the side records."""
+def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Mapping[str, Any], routers_mode: str = "build") -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
+    """Every scored read of ONE replicate (a task of the registered evaluate stage): the records keyed ``"{arm}|{order}|{rep}"`` and the side records. ``routers_mode``: ``build`` (train them; the tests), ``save`` (train
+    and snapshot them under ``snap_dir/routers/r<rep>``; the registered evaluate) or ``load`` (re-read the snapshots; the recomputation). Per-item records go to ``scoring.ITEMS``."""
+    scoring.require_evaluation_allowed(world)
     records: dict[str, dict[str, float]] = {}
     side: dict[str, Any] = {}
-    routers = scoring.build_routers_t(world, r)
+    scoring.log_edit1_flags(world, r)  # section 5.3: the edit-distance-1 flags of E_A and E_B, stored beside the scores they are applied to
+    rdir = snap_dir / "routers" / f"r{r}"
+    if routers_mode == "load":
+        routers = scoring.load_routers(rdir)
+    else:
+        routers = scoring.build_routers_t(world, r)
+        if routers_mode == "save":
+            side[f"r{r}/router_snapshots"] = scoring.save_routers(routers, rdir)
     side[f"r{r}/routers"] = {"/".join(k): v[1] for k, v in routers.items()}
     for o in ORDERS:
         arms = {a: engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}") for a in ORDER_ARMS}
         for a in ORDER_ARMS:
-            reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
-            records[f"{a}|{o}|{r}"] = reads
+            with scoring.at(f"{a}|{o}|{r}"):
+                reads, extra = scoring.cell_reads(world, r, a, o, arms[a], routers, m1=arms["M1"])
+                records[f"{a}|{o}|{r}"] = reads
+                if a == "M-append":
+                    lr, rside = scoring.route_reads(world, r, arms[a], routers)
+                    records[f"{a}|{o}|{r}"] |= lr
+                    side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
+            if a == "M-ii" and is_rejected(records[f"M-ii|{o}|{r}"], records[f"M-append|{o}|{r}"], Thresholds.from_config(world.cfg_t).modification_dcon_tolerance):
+                # ADR section 8.5 (ruling 9): in a CONSOLIDATION-REJECTED cell the pinned M-append snapshot is what every other reading of M-ii uses, CONTROL-FAILED included; the unpublished M-ii state enters no label
+                key = f"M-ii|{o}|{r}"
+                kept = {k: v for k, v in records[key].items() if k.startswith("dcon:")}  # the D_con reads of the real M-ii are the evidence of the rejection
+                kept_items = {k: scoring.ITEMS[f"{key}|{k}"] for k in kept if f"{key}|{k}" in scoring.ITEMS}
+                unpublished = dict(records[key])
+                with scoring.at(key):
+                    pinned, pextra = scoring.cell_reads(world, r, "M-ii", o, arms["M-append"], routers, m1=arms["M1"])
+                records[key] = {**pinned, **kept}
+                scoring.ITEMS.update(kept_items)
+                side.setdefault(f"r{r}/M-ii/{o}", {}).update({**pextra, "pinned_from": "M-append", "unpublished_m_ii_reads": unpublished})
             if a == "M-append":
-                lr, rside = scoring.route_reads(world, r, arms[a], routers)
-                records[f"{a}|{o}|{r}"] |= lr
-                side.setdefault(f"r{r}/{a}/{o}", {})["route"] = rside
-                records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
+                with scoring.at(f"M-append@append|{o}|{r}"):
+                    records[f"M-append@append|{o}|{r}"] = scoring.panel_means(world, engine.load_t(world, r, snap_dir, f"r{r}/M-append/{o}@append"))
             if extra:
                 side.setdefault(f"r{r}/{a}/{o}", {}).update(extra)
     for a in JOINT:
         arm = engine.load_t(world, r, snap_dir, f"r{r}/{a}/-")
-        reads = scoring.panel_means(world, arm)
-        if isinstance(arm, MemoryArm):
-            reads |= scoring.control_reads(world, r, arm, a, "AB")
+        with scoring.at(f"{a}|-|{r}"):
+            reads = scoring.panel_means(world, arm)
+            if isinstance(arm, MemoryArm):
+                reads |= scoring.control_reads(world, r, arm, a, "AB")
         records[f"{a}|-|{r}"] = reads
     table = {c: engine.load_t(world, r, snap_dir, f"r{r}/E-table/{c}") for c in core.TASKS}
-    records[f"E-table|-|{r}"] = {f"s:{scoring.PANEL[c]}": scoring.panel_means(world, table[c])[f"s:{scoring.PANEL[c]}"] for c in core.TASKS}
+    records[f"E-table|-|{r}"] = {}
+    for c in core.TASKS:  # each capability's registry read is that capability's table scored on its own panel: only that read is logged
+        read = f"s:{scoring.PANEL[c]}"
+        with scoring.at(f"E-table|-|{r}"):
+            sc = scoring.score_panel(world.ctx, table[c], world.ctx.panels[scoring.PANEL[c]])
+            scoring.log_panel(read, sc)
+            records[f"E-table|-|{r}"][read] = sc.mean
     m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
     d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
-    records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
-    records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
-    for name, v in scoring.baseline_reads(world, r, gloss_bank).items():
+    with scoring.at(f"M-sep|-|{r}"):
+        records[f"M-sep|-|{r}"] = scoring.panel_means(world, CompositeStoreArm(m1))  # type: ignore[arg-type]
+    with scoring.at(f"D-sep|-|{r}"):
+        records[f"D-sep|-|{r}"] = scoring.panel_means(world, AdapterRouteArm(d1))  # type: ignore[arg-type]
+    with scoring.timed("score:icl"):
+        baselines = scoring.baseline_reads(world, r, gloss_bank)
+    for name, v in baselines.items():
         arm, read = name.split("|", 1)
         if read.startswith("hits"):
             side.setdefault(f"r{r}/R-exact-hits", {})[read] = v
@@ -88,6 +141,7 @@ def score_replicate(world: engine.WorldT, r: int, snap_dir: Path, gloss_bank: Ma
 
 def reference_task(world: engine.WorldT) -> dict[str, dict[str, float]]:
     """The reads of S0 and the teachers (the floor and the ceiling of every gap): one task of the evaluate stage."""
+    scoring.require_evaluation_allowed(world)
     return scoring.reference_records(world)
 
 
@@ -108,24 +162,46 @@ def combined_reference(world: engine.WorldT) -> dict[str, Any]:
     """S0's and the ensemble's combined records (one task of the combined stage)."""
     from studies.p10s2.memory import NullArm
 
+    scoring.require_evaluation_allowed(world)
     ctx = world.ctx
-    return {"S0": combined_mod.score_combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
+    return {"S0": _combined_cell(ctx, NullArm(), ctx.ec), "ensemble": combined_mod.ensemble_record(ctx.ec, {c: world.teacher_outputs[c]["E_C"] for c in core.TASKS})}
+
+
+def ensemble_check(world: engine.WorldT, ensemble: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """The integrity check ADR-0025 section 8.6 names: the oracle-routed ensemble's tested score of each language on E_C must equal the teacher's own mean chrF-norm on E_C (each ensemble answer IS the stored
+    output of the teacher of its language). A difference is ENGINEERING-FAILURE (audit R9, ruling 14)."""
+    from studies.p10s2.text import chrf_item, mean
+
+    scoring.require_evaluation_allowed(world)
+    ec = world.ctx.ec
+    rec = ensemble if ensemble is not None else combined_reference(world)["ensemble"]
+    diffs: list[dict[str, Any]] = []
+    for lang in core.TASKS:
+        own = mean([chrf_item(world.teacher_outputs[lang]["E_C"][i], ec.sentences[i].refs[lang]) for i in range(len(ec.sentences))])
+        got = rec["C2"]["tested_by_language"][lang]
+        if got is None or abs(float(got) - float(own)) > 1e-9:
+            diffs.append({"language": lang, "teacher_own": own, "ensemble": got})
+    return {"ok": not diffs, "differences": diffs, "tolerance": 1e-9}
 
 
 @torch.no_grad()
-def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path) -> dict[str, Any]:
+def combined_replicate(world: engine.WorldT, r: int, snap_dir: Path, pinned_orders: Collection[str] = ()) -> dict[str, Any]:
     """C1 and C2 on the twelve arm-cells of ONE replicate (stage-2 snapshots of M-append, M-ii, D-seq and D-append in both orders, M-joint, D-joint, M-sep, D-sep): oracle route, never trained on."""
+    scoring.require_evaluation_allowed(world)
     ctx, out = world.ctx, {}
     ctx.seed_plan = world.plan(r)  # type: ignore[assignment]
     for o in ORDERS:
         for a in ("M-append", "M-ii", "D-seq", "D-append"):
-            out[f"{a}|{o}|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/{o}"), ctx.ec)
+            pinned = a == "M-ii" and o in pinned_orders  # a rejected cell: M-append's snapshot is read in M-ii's place, marked
+            out[f"{a}|{o}|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{'M-append' if pinned else a}/{o}"), ctx.ec)
+            if pinned:
+                out[f"{a}|{o}|{r}"] = {**out[f"{a}|{o}|{r}"], "pinned_from": "M-append"}
     for a in JOINT:
-        out[f"{a}|-|{r}"] = combined_mod.score_combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
+        out[f"{a}|-|{r}"] = _combined_cell(ctx, engine.load_t(world, r, snap_dir, f"r{r}/{a}/-"), ctx.ec)
     m1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/M1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/M1/BA")}
     d1 = {"A": engine.load_t(world, r, snap_dir, f"r{r}/D1/AB"), "B": engine.load_t(world, r, snap_dir, f"r{r}/D1/BA")}
-    out[f"M-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, CompositeStoreArm(m1), ctx.ec)  # type: ignore[arg-type]
-    out[f"D-sep|-|{r}"] = combined_mod.score_combined_cell(ctx, AdapterRouteArm(d1), ctx.ec)  # type: ignore[arg-type]
+    out[f"M-sep|-|{r}"] = _combined_cell(ctx, CompositeStoreArm(m1), ctx.ec)  # type: ignore[arg-type]
+    out[f"D-sep|-|{r}"] = _combined_cell(ctx, AdapterRouteArm(d1), ctx.ec)  # type: ignore[arg-type]
     return out
 
 

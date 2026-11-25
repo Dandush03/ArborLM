@@ -25,8 +25,10 @@ from . import core
 
 COMPLETED, FAILED, KILLED_CAP, KILLED_RSS, NOT_STARTED = "completed", "failed", "killed_cap", "killed_rss", "not_started"
 PAUSED_IDENTITY = "paused_identity"
+PAUSED_FORCED = "paused_forced"
+FORCED_PAUSE_EXIT = 74  # a worker that stops on purpose after a checkpoint (the rehearsal's ONE forced pause): PAUSED, no failed record; the same command resumes it
 IDENTITY_EXIT = 75  # a worker that refuses on an identity or precondition check (a dirty tree, a frozen file that differs, no Decision 2) exits with this code (EX_TEMPFAIL): PAUSED — IDENTITY, not FAILED
-PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY)
+PAUSED_STATUSES = (KILLED_CAP, KILLED_RSS, NOT_STARTED, PAUSED_IDENTITY, PAUSED_FORCED)
 POLL = 0.2
 
 
@@ -57,8 +59,14 @@ def _kill(popen: "subprocess.Popen[bytes]") -> None:
     popen.wait(timeout=30)
 
 
-def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_worker_bytes: int, rss_aggregate_bytes: int, env: dict[str, str] | None = None, poll: float = POLL) -> tuple[dict[str, dict[str, Any]], float]:
+def free_memory_bytes() -> int:
+    """System memory available now (ruling 51: the per-worker RSS guard does not see MPS driver memory, which a training cell holds in the tens of GiB; admission looks at the whole machine)."""
+    return int(psutil.virtual_memory().available)
+
+
+def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_worker_bytes: int, rss_aggregate_bytes: int, env: dict[str, str] | None = None, poll: float = POLL, admit_free_bytes: int = 0) -> tuple[dict[str, dict[str, Any]], float]:
     """Run the tasks in subprocesses, at most ``workers`` at once, until all are done or ``cap_seconds`` of wall clock pass (then every running task is killed: ``killed_cap``, the rest ``not_started``).
+    Ruling 51: the cap is compared with CHARGED time (the sum of every task's seconds in this call, running tasks counted up to now), not with wall clock; and with ``admit_free_bytes`` > 0 a further worker is started only while that much system memory is available (the first always starts).
     Returns (label -> outcome, wall seconds). A task with a result file is ``completed`` without running; one with a failed record is ``failed`` without running."""
     import os
 
@@ -75,7 +83,7 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
     running: dict[str, tuple[Task, subprocess.Popen[bytes], psutil.Process, float, int]] = {}
     environment = {**os.environ, "PYTHONUNBUFFERED": "1", **(env or {})}
     while pending or running:
-        if time.monotonic() - begun > cap_seconds:
+        if sum(float(o.get("seconds", 0.0)) for o in out.values()) + sum(time.monotonic() - r[3] for r in running.values()) > cap_seconds:  # charged time (ruling 51), not the wall clock of the call
             for label, (task, popen, _, t0, peak) in list(running.items()):
                 _kill(popen)
                 out[label] = {"status": KILLED_CAP, "seconds": time.monotonic() - t0, "reason": f"stage cap of {cap_seconds:.0f} s reached", "peak_rss_bytes": peak}
@@ -84,7 +92,7 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
                 out[t.label] = {"status": NOT_STARTED, "seconds": 0.0, "reason": "stage cap reached", "peak_rss_bytes": 0}
             pending = []
             break
-        while pending and len(running) < workers:
+        while pending and len(running) < workers and (not running or admit_free_bytes <= 0 or free_memory_bytes() >= admit_free_bytes):
             t = pending.pop(0)
             t.log_path.parent.mkdir(parents=True, exist_ok=True)
             with t.log_path.open("ab") as log:
@@ -101,11 +109,16 @@ def run_tasks(tasks: Sequence[Task], *, workers: int, cap_seconds: float, rss_wo
                 out[label] = {"status": PAUSED_IDENTITY, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED — IDENTITY: the worker refused on an identity or precondition check; restore the file or the state bit for bit and run the stage again (no failed record is kept)"}
                 running.pop(label)
                 continue
+            if code == FORCED_PAUSE_EXIT:
+                out[label] = {"status": PAUSED_FORCED, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak, "reason": "PAUSED: the forced pause of a rehearsal; the same command resumes the task from its checkpoint"}
+                running.pop(label)
+                continue
             if code is not None:
                 ok = code == 0 and task.result_path.is_file()
                 out[label] = {"status": COMPLETED if ok else FAILED, "seconds": time.monotonic() - t0, "returncode": code, "peak_rss_bytes": peak}
                 if not ok:
                     out[label]["reason"] = f"exit status {code}" if code != 0 else "exit status 0 but no result file"
+                    task.failed_path.parent.mkdir(parents=True, exist_ok=True)  # a worker that failed before writing anything (its tasks directory does not exist yet) still leaves its failed record
                     write_json(task.failed_path, {"label": label, "status": FAILED, "reason": out[label]["reason"], "returncode": code, "log": str(task.log_path), "utc": datetime.now(UTC).isoformat(), "note": "failed record kept; the task is not re-run"})
                 running.pop(label)
                 continue

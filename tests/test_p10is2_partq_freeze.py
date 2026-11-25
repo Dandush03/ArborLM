@@ -425,10 +425,13 @@ def test_checker_copy_substitutions_apply_exactly_once_and_parse_problems() -> N
 
 
 def test_seed_gate_passes_on_this_tree_and_detects_a_value_outside_the_rows() -> None:
-    for part in ("Q", "T"):
+    for part in ("Q",):
         r = gates.seed_gate(part, core.load_config(part), root=ROOT)
         assert r["passed"], r["problems"]
         assert r["checker"]["problems_naming_this_study"] == [] and r["checker"]["copy_sha256"] and r["checker"]["allocation_rows"] == 8
+    rt = gates.seed_gate("T", core.load_config("T"), root=ROOT)  # Part T: registry revision 5, the checker unedited
+    assert rt["passed"], rt["problems"]
+    assert rt["checker"]["result_line"] == "RESULT: PASS" and rt["checker"]["unedited"] is True
     rows = gates.allocation_rows((ROOT / CFG["seeds"]["registry_checker"]).read_text())
     assert (  # the registry's rows of this study
         ("data: registered replicate sets (3)", 250001, 250899) in rows and ("init sub-row", 330201, 330299) in rows and ("test", 934001, 934999) in rows

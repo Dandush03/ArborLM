@@ -1,0 +1,31 @@
+"""Runs ONLY the amended G4-MPS gate (ruling 39) once on the real rehearsal world (the failed measuring rehearsal's plan; nothing under sealed/ is opened, no score is computed)."""
+
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ[k] = "6"
+REPO = Path("/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f")
+RUN = Path("/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-T-measuring-20261120")
+OUT = REPO / "experiments/_scratch/s2_g4mps"
+sys.path.insert(0, str(REPO))
+
+from studies.p10is2 import engine, partt_gates, partt_real  # noqa: E402
+from studies.p10is2.common import core, gates  # noqa: E402
+from studies.p10is2.common import plan as planmod  # noqa: E402
+
+cfg = core.load_config("T", REPO / core.CONFIG_T)
+gates.apply_platform_settings(cfg)
+plan = planmod.Plan.load(RUN / "measuring_plan.json", "T")
+qdir = partt_real.qdir_of(plan, Path("."))
+calib = partt_real.calibration_of(cfg, plan, "rehearsal", "measuring")
+t0 = time.time()
+w, _g, _q = partt_real.build_world_real(REPO, cfg, qdir, calib, "rehearsal", partt_real.door_of(plan, qdir))
+t1 = time.time()
+res = partt_gates.g4_mps(w, engine.CellSpec("M1", "AB", 0), cfg)
+res["seconds_world"], res["seconds_gate"] = t1 - t0, time.time() - t1
+json.dump(res, open(OUT / "amended_gate_real_world.json", "w"), indent=1, default=str)
+print(json.dumps(res, default=str)[:4000])

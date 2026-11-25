@@ -51,6 +51,11 @@ _P10IS3_STALE_AFTER_LATER_STUDIES = (
 )
 
 
+# Added 2026-11-20 with P10-I-S2 Part T ruling 40. This parametrized row asserts that `caps.measuring_rehearsal_hours` equals the 3.0 h ADR-0025 section 10 states. Section 10 also says "the figure may be raised
+# once, to twice, by the lead"; ruling 40 (docs/decisions/ADR-0025-addendum-part-t-rulings-9.md) took that one extension, so the config holds 6.0. The existing test file is not edited; this one row (matched by its
+# full parametrized id) is a strict expected failure, and tests/test_p10is2_partt_ruling40.py pins the 6.0.
+_P10IS2_PARTT_RULING_40 = ("tests/test_p10is2_config.py::test_part_t_threshold_equals_the_adr[caps.measuring_rehearsal_hours-3.0-10-**3.0 charged hours for Part Q, 3.0 for Part T**]",)
+
 # Added 2026-11-20 at the merge of P10-I-S0. P10-S0 (frozen, executed 2026-11-16) asserts through its gate G9 that no config file holds a value inside P10-S0's seed ranges. P10-I-S0's identity gate re-uses, read-only and
 # by design, P10-S0's rehearsal data base 209101 and initialisation 2092 (ADR-0023 section 5 identity gate part (a); seed registry section 4.6: listed as re-used, not new; `identity_gate_data_base` and `identity_gate_init`
 # in configs/p10is0_overload.toml). With that config in the tree G9 fails, and so does every P10-S0 test that runs G9 or the dry stages behind it. P10-S0's gate passed in its own tree at its freeze and run; its frozen
@@ -111,6 +116,11 @@ _P10IS1_STALE_AFTER_LATER_STUDIES = (
 )
 
 
+# Added 2026-11-23 with the P10-I-S2 Part T cap amendment (ruling 51). This test reads the REAL config and asserts that no stage cap is entered yet ("the unset config"); the caps were entered by the first freeze
+# (c25d4f0b), so it is false by construction from then on. Strict expected failure; the same behaviour is tested on an unset copy by the tests that use tests/p10is2_partt_unset.py.
+_P10IS2_PARTT_CAPS_ENTERED = ("tests/test_p10is2_partt_engineering.py::test_the_caps_come_from_a_record_with_the_formula_and_a_zero_cap_is_refused",)
+
+
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
     for item in items:
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_FREEZE:
@@ -125,6 +135,10 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.xfail(strict=True, reason="another study's own registered seeds are in the merged repository; P10-I-S3's frozen seed gate does not know them; the gate passed in its own tree at the freeze"))
         if item.nodeid.split("[")[0] in _P10IR_STALE_AFTER_LATER_STUDIES:
             item.add_marker(pytest.mark.xfail(strict=True, reason="a later study's own registered seeds are in the repository: P10-I-R's whole-repository checker run reports them; each later study's own seed gate covers them"))
+        if item.nodeid in _P10IS2_PARTT_CAPS_ENTERED:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="the first freeze entered the stage caps into the real config; this test asserts they are unset (ruling 51 note, 2026-11-23)"))
+        if item.nodeid in _P10IS2_PARTT_RULING_40:
+            item.add_marker(pytest.mark.xfail(strict=True, reason="ruling 40 took the one extension ADR-0025 section 10 allows (3.0 h to 6.0 h); the row pins the unextended figure"))
         if item.nodeid.split("[")[0] in _P10S0_STALE_AFTER_P10IS0:
             item.add_marker(pytest.mark.xfail(strict=True, reason="P10-I-S0's identity gate re-uses P10-S0's rehearsal seeds 209101 and 2092 by design (ADR-0023); P10-S0's frozen gate G9 forbids any config holding them"))
         if item.nodeid.split("[")[0] in _P10IS0_STALE_AFTER_LATER_STUDIES:

@@ -20,12 +20,12 @@ from typing import Any
 
 from arborlm.io import read_json, write_json
 
-from . import partt_plan
+from . import partt_plan, partt_rehearsal
 from .common import core, procs, runner
 from .common import plan as planmod
 from .common.core import StageRefused
 
-TASK_STAGES = ("gates", "train", "evaluate", "controls", "combined")
+TASK_STAGES = ("gates", "train", "evaluate", "combined")  # "controls" scores nothing again (ruling 12): a check stage; "recompute" is a stage with its own body
 WAVES = ((("M1", "D1", "M-joint", "D-joint", "E-table"),), (("M-append", "M-seq", "D-append", "D-seq"),), (("M-ii",),))  # dependency order of the cells: stage-1 modules, then the stage-2 modules, then M-ii
 
 
@@ -44,11 +44,22 @@ def worker_policy(cfg: Mapping[str, Any], other_alive: bool) -> dict[str, Any]:
     return {"workers": workers, "rss_worker_bytes": int(per * 2**30), "rss_aggregate_bytes": int(min(float(c["memory_aggregate_gib"]), per * workers) * 2**30), "other_study_alive": other_alive}
 
 
-def waves_of(stage: str, plan: planmod.Plan) -> list[list[dict[str, Any]]]:
-    """The task groups of a stage from the plan's items. Training runs in dependency waves; every other stage is one wave."""
-    items = plan.items(stage)
+def wave_workers(cfg: Mapping[str, Any], wave: Sequence[Mapping[str, Any]], pol: Mapping[str, Any]) -> int:
+    """Ruling 51: a wave made only of the arms in ``caps.single_worker_arms`` (M-ii, whose cell holds about 35 GB of MPS driver memory) runs with at most ``caps.workers_max_single_arm`` workers; any other wave keeps the policy's."""
+    c = cfg["caps"]
+    arms = set(c.get("single_worker_arms", []))
+    if arms and wave and all(i.get("arm") in arms for i in wave):
+        return min(int(pol["workers"]), int(c.get("workers_max_single_arm", pol["workers"])))
+    return int(pol["workers"])
+
+
+def waves_of(stage: str, plan: planmod.Plan, rehearsal: bool = False, arms: Sequence[str] | None = None) -> list[list[dict[str, Any]]]:
+    """The task groups of a stage from the plan's items. Training runs in dependency waves; every other stage is one wave. A rehearsal takes the plan-derived subset (``partt_rehearsal.subset_items``) of the same items."""
+    items = list(plan.items(stage))
+    if rehearsal:
+        items = list(partt_rehearsal.subset_items(stage, items))
     if stage == "train":
-        return [[i for i in items if i["arm"] in w[0]] for w in WAVES]
+        return [[i for i in items if i["arm"] in w[0] and (not arms or i["arm"] in arms)] for w in WAVES]  # ruling 51: a targeted rehearsal trains only the arms it names
     if stage in ("evaluate", "controls", "combined"):
         reps = sorted({int(i["rep"]) if "rep" in i else int(i["of"].rsplit("|r", 1)[1]) for i in items if ("rep" in i or "of" in i) and ("rep" in i or "|r" in i["of"])})
         tasks = [{"id": f"{stage}|r{r}", "stage": stage, "rep": r} for r in reps]
@@ -60,16 +71,37 @@ def waves_of(stage: str, plan: planmod.Plan) -> list[list[dict[str, Any]]]:
     raise StageRefused(f"refused: {stage!r} has no task stage")
 
 
+def stage_marker(run_dir: Path, stage: str) -> Path:
+    return run_dir / "stages" / f"{stage}.complete.json"
+
+
+def mark_complete(run_dir: Path, stage: str, mode: str = "registered") -> None:
+    p = stage_marker(run_dir, stage)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    write_json(p, {"stage": stage, "status": "COMPLETE", "mode": mode, "utc": core.utc_stamp()})
+
+
+def require_predecessor(run_dir: Path, stage: str, order: Sequence[str]) -> None:
+    """Stage order is enforced: a stage runs only after its predecessor's completion record (no stage needs a record that only it or a later stage writes: audit B3)."""
+    i = order.index(stage)
+    if i and not stage_marker(run_dir, order[i - 1]).is_file():
+        raise StageRefused(f"refused: stage {stage!r} needs {order[i - 1]!r} to be complete first (no completion record)")
+
+
 def tasks_dir(run_dir: Path, stage: str) -> Path:
     return run_dir / "tasks" / stage
 
 
-def make_tasks(stage: str, wave: Sequence[Mapping[str, Any]], repo: Path, run_dir: Path, freeze_commit: str, qdir: Path) -> list[runner.Task]:
+FORCED_PAUSE_CELL = "train|M1|AB|r0"  # the cell the rehearsal's ONE forced pause stops
+
+
+def make_tasks(stage: str, wave: Sequence[Mapping[str, Any]], repo: Path, run_dir: Path, freeze_commit: str, qdir: Path, extra: Sequence[str] = (), pause_after_updates: int | None = None) -> list[runner.Task]:
     d = tasks_dir(run_dir, stage)
     out = []
     for it in wave:
         sid = safe(it["id"])
-        argv = (sys.executable, "-m", "studies.p10is2.partt_stages", "task", "--stage", stage, "--task-id", it["id"], "--run-dir", str(run_dir), "--freeze-commit", freeze_commit, "--repo", str(repo), "--part-q-dir", str(qdir))
+        more = [*extra, *(["--pause-after-updates", str(pause_after_updates)] if pause_after_updates and it["id"] == FORCED_PAUSE_CELL else [])]
+        argv = (sys.executable, "-m", "studies.p10is2.partt_stages", "task", "--stage", stage, "--task-id", it["id"], "--run-dir", str(run_dir), "--freeze-commit", freeze_commit, "--repo", str(repo), "--part-q-dir", str(qdir), *more)
         out.append(runner.Task(it["id"], argv, d / f"{sid}.result.json", d / f"{sid}.failed.json", run_dir / "logs" / stage / f"{sid}.log"))
     return out
 
@@ -78,10 +110,23 @@ def ledger_of(plan: planmod.Plan, run_dir: Path) -> core.Ledger:
     return core.Ledger(run_dir / "charged_ledger.json", "T", plan.total_cap_seconds() if plan.total_cap_seconds() > 0 else 1e12)
 
 
+def charge_before_freeze(plan: planmod.Plan) -> float:
+    """Everything Part T charged before the freeze (the measuring rehearsal, calibration and its repetitions, earlier counting rehearsals), as the plan RECORDED it: it counts against the total cap (ruling 4)."""
+    rec = plan.path.parent / "partt_freeze_record.json" if plan.path is not None else None
+    if rec is not None and rec.is_file():  # ruling 17: after the freeze the registered ledger starts from plan charge + the counting rehearsal's charge, as the freeze recorded
+        start = (read_json(rec).get("pre_freeze_charge") or {}).get("registered_ledger_starts_from_seconds")
+        if start is not None:
+            return float(start)
+    return float((plan.data.get("charge_before_freeze") or {}).get("seconds", 0.0))
+
+
 def stage_cap_for(plan: planmod.Plan, stage: str, led: core.Ledger) -> float:
-    """The seconds this invocation may use: the stage's cap less what it already used, but never more than is left of the part's total (cumulative across stages and resumes)."""
-    stage_cap = plan.cap_seconds(stage) if plan.cap_seconds(stage) > 0 else 1e12
-    return min(stage_cap - led.charged(stage), led.remaining())
+    """The seconds this invocation may use: the stage's cap less what it already used, but never more than is left of the part's total less the charge before the freeze (cumulative across stages and resumes).
+    A cap of 0 is NEVER "uncapped": every registered stage has a cap by the rule, or this refuses."""
+    own = plan.cap_seconds(stage)
+    if own <= 0 or plan.total_cap_seconds() <= 0:
+        raise StageRefused(f"refused: stage {stage!r} has no cap (a cap of 0 is not 'uncapped'): the caps are computed by the rule from the measuring rehearsal and written before the freeze")
+    return min(own - led.charged(stage), plan.total_cap_seconds() - charge_before_freeze(plan) - led.charged())
 
 
 def record_item_errors(run_dir: Path, stage: str, outcomes: Mapping[str, Mapping[str, Any]]) -> list[str]:
@@ -96,31 +141,42 @@ def record_item_errors(run_dir: Path, stage: str, outcomes: Mapping[str, Mapping
     return errs
 
 
-def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo: Path, run_dir: Path, freeze_commit: str, qdir: Path, *, other_alive: Callable[[], Sequence[str]] = other_studies_alive, poll: float = 0.5, task_runner: Callable[..., Any] | None = None) -> dict[str, Any]:
-    """One invocation of a task stage. Returns the stage manifest (COMPLETE, PAUSED or FAILED). Waves run one after another; a wave that does not complete stops the stage (the next wave needs its snapshots)."""
+def rehearsal_cap_seconds(cfg: Mapping[str, Any], kind: str, plan: Any = None) -> float:
+    """A rehearsal's cap. The measuring rehearsal keeps the fixed 3.0 charged hours of ADR section 10 (config). The COUNTING rehearsal's cap is its own plan allowance, ``counting_allowance_hours`` (rulings 20, 27 and
+    30), fixed before it runs; a plan without one (a unit-test fixture) falls back to the config's ``rehearsal_hours``."""
+    if kind != "measuring" and plan is not None and "counting_allowance_hours" in getattr(plan, "data", {}):
+        return float(plan.data["counting_allowance_hours"]) * 3600.0
+    return float(cfg["caps"]["measuring_rehearsal_hours" if kind == "measuring" else "rehearsal_hours"]) * 3600.0
+
+
+def run_stage_tasks(stage: str, plan: planmod.Plan, cfg: Mapping[str, Any], repo: Path, run_dir: Path, freeze_commit: str, qdir: Path, *, other_alive: Callable[[], Sequence[str]] = other_studies_alive, poll: float = 0.5, task_runner: Callable[..., Any] | None = None, mode: str = "registered", kind: str = "counting", extra: Sequence[str] = (), pause_after_updates: int | None = None, arms: Sequence[str] | None = None) -> dict[str, Any]:
+    """One invocation of a task stage, for a registered run (``mode="registered"``) or a rehearsal (``mode="rehearsal"``: the plan-derived subset, the rehearsal's fixed cap, the same runner and workers).
+    Returns the stage manifest (COMPLETE, PAUSED or FAILED). Waves run one after another; a wave that does not complete stops the stage (the next wave needs its snapshots)."""
     started = datetime.now(UTC).isoformat()
-    led = ledger_of(plan, run_dir)
+    led = ledger_of(plan, run_dir) if mode == "registered" else core.Ledger(run_dir / "charged_ledger.json", "T", 1e12)
     pol = worker_policy(cfg, bool(other_alive()))
     run = task_runner or runner.run_tasks
     all_out: dict[str, dict[str, Any]] = {}
     caps_used: dict[str, float] = {}
     t_stage = time.monotonic()
-    for wave in waves_of(stage, plan):
-        cap = stage_cap_for(plan, stage, led)
+    for wave in waves_of(stage, plan, mode == "rehearsal", arms):
+        if not wave:
+            continue
+        cap = stage_cap_for(plan, stage, led) if mode == "registered" else rehearsal_cap_seconds(cfg, kind, plan) - led.charged()
         caps_used = {"stage_seconds_left": cap, "total_seconds_left": led.remaining()}
         if cap <= 0:  # nothing left: PAUSED, the extension is the lead's (section 9)
             for it in wave:
                 all_out.setdefault(it["id"], {"status": runner.NOT_STARTED, "seconds": 0.0, "reason": "the cumulative hour cap is spent", "peak_rss_bytes": 0})
             break
-        tasks = make_tasks(stage, wave, repo, run_dir, freeze_commit, qdir)
-        outcomes, _wall = run(tasks, workers=pol["workers"], cap_seconds=cap, rss_worker_bytes=pol["rss_worker_bytes"], rss_aggregate_bytes=pol["rss_aggregate_bytes"], poll=poll)
+        tasks = make_tasks(stage, wave, repo, run_dir, freeze_commit, qdir, extra, pause_after_updates)
+        outcomes, _wall = run(tasks, workers=wave_workers(cfg, wave, pol), cap_seconds=cap, rss_worker_bytes=pol["rss_worker_bytes"], rss_aggregate_bytes=pol["rss_aggregate_bytes"], poll=poll, admit_free_bytes=int(float(cfg["caps"].get("memory_admission_free_gib", 0.0)) * 2**30))
         for label, o in outcomes.items():
             led.charge_process(stage, label, f"worker:{label}", float(o.get("seconds", 0.0)))  # the sum of each worker process's wall time (C10)
         all_out.update(outcomes)
         record_item_errors(run_dir, stage, outcomes)
         if runner.stage_status(outcomes) != "COMPLETE":
             break
-    manifest = runner.write_manifest(run_dir, "T", stage, "registered", all_out, time.monotonic() - t_stage, identity={"freeze_commit": freeze_commit}, started=started, caps={**caps_used, **{k: v for k, v in pol.items() if k != "other_study_alive"}}, extra={"worker_policy": pol})
+    manifest = runner.write_manifest(run_dir, "T", stage, mode, all_out, time.monotonic() - t_stage, identity={"freeze_commit": freeze_commit}, started=started, caps={**caps_used, **{k: v for k, v in pol.items() if k != "other_study_alive"}}, extra={"worker_policy": pol})
     return manifest
 
 

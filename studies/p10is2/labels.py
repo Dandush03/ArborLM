@@ -181,7 +181,7 @@ def against_dense(q: Quantities, m: str = "M-append", d: str = "D-append") -> di
 # --- AGAINST-LOOKUP -----------------------------------------------------------------------------------------------------------------------------
 def against_lookup(q: Quantities, arm: str = "M-append") -> dict[str, Any]:
     """b is the best score among R-gloss, R-gloss-icl, R-nn, R-icl and E-table, per cell and capability. LOOKUP SUFFICES if b >= s(arm) - 0.03 on both capabilities in every cell; MEMORY ADDS OVER LOOKUP if
-    s(arm) - b >= 0.05 on both capabilities in every cell; MIXED otherwise. The baseline that gave b is named (here: the one that gives b most often, ties by name; every reading is listed)."""
+    s(arm) - b >= 0.05 on both capabilities in every cell; MIXED otherwise. The baseline that gave b is named FOR EACH CELL AND CAPABILITY (ruling 5): one name if the same baseline gave b in every reading, otherwise the list per cell and capability; every reading is listed."""
     th = q.th
     gave: Counter[str] = Counter()
     suff, adds = [], []
@@ -198,12 +198,13 @@ def against_lookup(q: Quantities, arm: str = "M-append") -> dict[str, Any]:
             ok_a.append(s - cand[best] >= th.lookup_adds_margin)
         suff.append(all(ok_s))
         adds.append(all(ok_a))
-    name = sorted(gave, key=lambda b: (-gave[b], b))[0]
+    per_cell = {f"{x['cell']}/{x['capability']}": x["best"] for x in readings}
+    name = next(iter(gave)) if len(gave) == 1 else "per cell and capability: " + ", ".join(f"{k} {v}" for k, v in per_cell.items())
     if all(suff):
-        return {"label": "LOOKUP SUFFICES", "baseline": name, "line": f"a lookup baseline does as well: {name}", "readings": readings}
+        return {"label": "LOOKUP SUFFICES", "baseline": name, "per_cell": per_cell, "line": f"a lookup baseline does as well: {name}", "readings": readings}
     if all(adds):
-        return {"label": "MEMORY ADDS OVER LOOKUP", "baseline": name, "readings": readings}
-    return {"label": "MIXED", "baseline": name, "readings": readings}
+        return {"label": "MEMORY ADDS OVER LOOKUP", "baseline": name, "per_cell": per_cell, "readings": readings}
+    return {"label": "MIXED", "baseline": name, "per_cell": per_cell, "readings": readings}
 
 
 # --- MODIFICATION (M-ii), descriptive -------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,5 @@
+{
+  "part_q_acceptance": {"path": "results/p10is2-partq-run-20261119-attempt3/ACCEPTANCE.md", "sha256": "38d1a1257b400c48440fe732ba52815b191e79c6a20fe100bdee7626466d1dcf"},
+  "panel_ledger": {"path": "/Users/daniellaloush/dandush03/ArborLM-sealed/p10i-s6-backups/panel_ledger.before-s6.json", "sha256": "62f8111614207fec61173af0f91246f1629d744739a4173778af0de293921756"},
+  "budget_bound_approval": {"path": "results/p10is2-partt-budget-bound-20261121/APPROVAL.md", "sha256": "2dd7aa9012e9c699714c3544ef6fa9a0c803e228ecf514085768aeeb5f39148e", "registered_bound_hours": 95.68, "approved_bound_hours": 151.0}
+}

@@ -149,7 +149,7 @@ def test_retry_releases_an_error_once_and_never_a_non_finite_cell(tmp_path: Path
 
 def test_run_task_trains_a_cell_and_resumes_a_dependent_one(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     w = world(updates=2)
-    monkeypatch.setattr(partt_real, "build_world_real", lambda repo, cfg, qdir, calib, mode: (w, {}, {}))
+    monkeypatch.setattr(partt_real, "build_world_real", lambda repo, cfg, qdir, calib, mode, door=None: (w, {}, {}))
     plan = a_plan()
     run = tmp_path / "run"
     r1 = partt_real.run_task("train", "train|M1|AB|r0", core.ROOT, run, tmp_path / "q", plan, mode="test")
@@ -170,8 +170,11 @@ def test_merge_results_and_the_recomputation_requirement(tmp_path: Path) -> None
     assert json.loads((tmp_path / "registry.json").read_text()) == {"M1|AB|0|s:E_A": 0.5, "S0|-|-|s:E_A": 0.1}
     with pytest.raises(core.StageRefused, match="no recomputation record"):
         partt_real.require_recomputation(tmp_path)
-    (tmp_path / "recomputation.json").write_text(json.dumps({"ok": False, "differences": ["x"]}))
+    from studies.p10is2 import partt_recompute
+
+    partt_recompute.write(tmp_path, {"ok": False, "differences": ["x"]})
     with pytest.raises(core.StageRefused, match="ENGINEERING STOP — RECOMPUTATION"):
         partt_real.require_recomputation(tmp_path)
-    (tmp_path / "recomputation.json").write_text(json.dumps({"ok": True}))
+    (tmp_path / "recomputation_lead_record.json").write_text(json.dumps({"cause": "named by the lead"}))  # a failed attempt stands unless a lead record names the cause
+    partt_recompute.write(tmp_path, {"ok": True})
     assert partt_real.require_recomputation(tmp_path)["ok"]

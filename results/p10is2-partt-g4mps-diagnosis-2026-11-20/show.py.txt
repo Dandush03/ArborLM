@@ -1,0 +1,16 @@
+import json
+
+d = json.load(open("/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f/experiments/_scratch/s2_g4mps/partA.json"))
+print({k: d[k] for k in d if k not in ("tensors", "growth", "first_step_gradients", "control_mps_mps_per_tensor", "control_cpu_f32_vs_f64_per_tensor", "worst_tensor_elements")})
+print("TENSORS")
+for t in d["tensors"]:
+    print(t["name"], t["shape"], "norm_cpu %.3e norm_init %.3e diff %.3e change %.3e rel_final %.3e rel_change %.3e" % (t["norm_cpu"], t["norm_init"], t["diff_mps_cpu"], t["change_cpu"], t["rel_to_final"], t["rel_to_change"]))
+print("GROWTH")
+for g in d["growth"]:
+    print(g["update"], "%.3e" % g["max_rel"], g["worst_tensor"], "loss diff %.2e" % g["loss_diff"], "loss_cpu %.5f" % g["loss_cpu"])
+print(d["worst_tensor_elements"])
+print("mps/mps per tensor", ["%.1e" % x for x in d["control_mps_mps_per_tensor"]])
+print("f32/f64 per tensor", ["%.1e" % x for x in d.get("control_cpu_f32_vs_f64_per_tensor", [])])
+print("GRADS", d["first_step_gradients"]["loss_cpu"], d["first_step_gradients"]["loss_mps"])
+for g in d["first_step_gradients"]["tensors"]:
+    print(g)
