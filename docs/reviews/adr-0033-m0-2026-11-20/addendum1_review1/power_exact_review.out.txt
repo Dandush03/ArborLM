@@ -1,0 +1,104 @@
+check: t_{0.95,12} = 1.7823 (tables: 1.7823)
+
+== M = 55: per-test target 0.99636; normal z sum 4.3289
+(a) floor as written, largest tau with delta*sqrt(G)/tau >= z sum
+  delta=0.02: G=11: 0.0153  G=13: 0.0167  G=14: 0.0173  G=15: 0.0179  G=19: 0.0201
+  delta=0.03: G=11: 0.0230  G=13: 0.0250  G=14: 0.0259  G=15: 0.0268  G=19: 0.0302
+  delta=0.05: G=11: 0.0383  G=13: 0.0416  G=14: 0.0432  G=15: 0.0447  G=19: 0.0503
+(b) exact noncentral t, n = 20,000, d = 0.3, CR1 SE, sw2 = d: largest tau at which power >= target
+  delta=0.02: G=11: 0.0060  G=13: 0.0071  G=14: 0.0075  G=15: 0.0079  G=19: 0.0094
+  delta=0.03: G=11: 0.0170  G=13: 0.0189  G=14: 0.0197  G=15: 0.0206  G=19: 0.0236
+  delta=0.05: G=11: 0.0331  G=13: 0.0366  G=14: 0.0382  G=15: 0.0397  G=19: 0.0453
+(b) exact noncentral t, n = 20,000, d = 0.3, CR1 SE, sw2 = d - tau^2: largest tau at which power >= target
+  delta=0.02: G=11: 0.0060  G=13: 0.0071  G=14: 0.0075  G=15: 0.0080  G=19: 0.0095
+  delta=0.03: G=11: 0.0170  G=13: 0.0189  G=14: 0.0198  G=15: 0.0206  G=19: 0.0236
+  delta=0.05: G=11: 0.0331  G=13: 0.0366  G=14: 0.0382  G=15: 0.0397  G=19: 0.0453
+(b) exact noncentral t, n = 20,000, d = 0.3, CR0 SE (divisor G), sw2 = d: largest tau at which power >= target
+  delta=0.02: G=11: 0.0068  G=13: 0.0077  G=14: 0.0081  G=15: 0.0085  G=19: 0.0099
+  delta=0.03: G=11: 0.0176  G=13: 0.0194  G=14: 0.0202  G=15: 0.0211  G=19: 0.0240
+  delta=0.05: G=11: 0.0339  G=13: 0.0373  G=14: 0.0389  G=15: 0.0404  G=19: 0.0459
+(b') exact power at n = 20,000, d = 0.3, CR1, sw2 = d
+  tau=0.00 delta=0.02: G=11: 0.9991  G=13: 0.9993  G=14: 0.9994  G=15: 0.9994  G=19: 0.9995
+  tau=0.00 delta=0.03: G=11: 1.0000  G=13: 1.0000  G=14: 1.0000  G=15: 1.0000  G=19: 1.0000
+  tau=0.00 delta=0.05: G=11: 1.0000  G=13: 1.0000  G=14: 1.0000  G=15: 1.0000  G=19: 1.0000
+  tau=0.02 delta=0.02: G=11: 0.8289  G=13: 0.8726  G=14: 0.8891  G=15: 0.9030  G=19: 0.9403
+  tau=0.02 delta=0.03: G=11: 0.9874  G=13: 0.9942  G=14: 0.9960  G=15: 0.9971  G=19: 0.9992
+  tau=0.02 delta=0.05: G=11: 1.0000  G=13: 1.0000  G=14: 1.0000  G=15: 1.0000  G=19: 1.0000
+  tau=0.03 delta=0.02: G=11: 0.5979  G=13: 0.6588  G=14: 0.6851  G=15: 0.7091  G=19: 0.7854
+  tau=0.03 delta=0.03: G=11: 0.8827  G=13: 0.9239  G=14: 0.9384  G=15: 0.9500  G=19: 0.9776
+  tau=0.03 delta=0.05: G=11: 0.9989  G=13: 0.9997  G=14: 0.9999  G=15: 0.9999  G=19: 1.0000
+  tau=0.05 delta=0.02: G=11: 0.3275  G=13: 0.3691  G=14: 0.3888  G=15: 0.4079  G=19: 0.4779
+  tau=0.05 delta=0.03: G=11: 0.5597  G=13: 0.6252  G=14: 0.6544  G=15: 0.6814  G=19: 0.7698
+  tau=0.05 delta=0.05: G=11: 0.9098  G=13: 0.9477  G=14: 0.9602  G=15: 0.9698  G=19: 0.9899
+  tau=0.10 delta=0.02: G=11: 0.1514  G=13: 0.1659  G=14: 0.1730  G=15: 0.1800  G=19: 0.2069
+  tau=0.10 delta=0.03: G=11: 0.2345  G=13: 0.2632  G=14: 0.2771  G=15: 0.2908  G=19: 0.3431
+  tau=0.10 delta=0.05: G=11: 0.4553  G=13: 0.5155  G=14: 0.5435  G=15: 0.5701  G=19: 0.6636
+(c) smallest delta reachable, normal formula z sum * sqrt(tau^2/G + d/n), n = 20,000 / n -> inf
+  tau=0.03: G=11: 0.043/0.039  G=13: 0.040/0.036  G=15: 0.037/0.034  G=19: 0.034/0.030
+  tau=0.05: G=11: 0.067/0.065  G=13: 0.062/0.060  G=15: 0.058/0.056  G=19: 0.052/0.050
+  tau=0.1: G=11: 0.132/0.131  G=13: 0.121/0.120  G=15: 0.113/0.112  G=19: 0.101/0.099
+  tau=0.15: G=11: 0.197/0.196  G=13: 0.181/0.180  G=15: 0.168/0.168  G=19: 0.150/0.149
+
+== M = 70: per-test target 0.99714; normal z sum 4.4086
+(a) floor as written, largest tau with delta*sqrt(G)/tau >= z sum
+  delta=0.02: G=11: 0.0150  G=13: 0.0164  G=14: 0.0170  G=15: 0.0176  G=19: 0.0198
+  delta=0.03: G=11: 0.0226  G=13: 0.0245  G=14: 0.0255  G=15: 0.0264  G=19: 0.0297
+  delta=0.05: G=11: 0.0376  G=13: 0.0409  G=14: 0.0424  G=15: 0.0439  G=19: 0.0494
+(b) exact noncentral t, n = 20,000, d = 0.3, CR1 SE, sw2 = d: largest tau at which power >= target
+  delta=0.02: G=11: 0.0054  G=13: 0.0064  G=14: 0.0069  G=15: 0.0073  G=19: 0.0087
+  delta=0.03: G=11: 0.0165  G=13: 0.0183  G=14: 0.0192  G=15: 0.0200  G=19: 0.0230
+  delta=0.05: G=11: 0.0324  G=13: 0.0358  G=14: 0.0374  G=15: 0.0389  G=19: 0.0444
+(b) exact noncentral t, n = 20,000, d = 0.3, CR1 SE, sw2 = d - tau^2: largest tau at which power >= target
+  delta=0.02: G=11: 0.0054  G=13: 0.0064  G=14: 0.0069  G=15: 0.0073  G=19: 0.0087
+  delta=0.03: G=11: 0.0165  G=13: 0.0183  G=14: 0.0192  G=15: 0.0200  G=19: 0.0230
+  delta=0.05: G=11: 0.0324  G=13: 0.0358  G=14: 0.0374  G=15: 0.0389  G=19: 0.0444
+(b) exact noncentral t, n = 20,000, d = 0.3, CR0 SE (divisor G), sw2 = d: largest tau at which power >= target
+  delta=0.02: G=11: 0.0062  G=13: 0.0070  G=14: 0.0074  G=15: 0.0078  G=19: 0.0092
+  delta=0.03: G=11: 0.0171  G=13: 0.0189  G=14: 0.0197  G=15: 0.0205  G=19: 0.0234
+  delta=0.05: G=11: 0.0332  G=13: 0.0365  G=14: 0.0381  G=15: 0.0395  G=19: 0.0450
+(b') exact power at n = 20,000, d = 0.3, CR1, sw2 = d
+  tau=0.00 delta=0.02: G=11: 0.9991  G=13: 0.9993  G=14: 0.9994  G=15: 0.9994  G=19: 0.9995
+  tau=0.00 delta=0.03: G=11: 1.0000  G=13: 1.0000  G=14: 1.0000  G=15: 1.0000  G=19: 1.0000
+  tau=0.00 delta=0.05: G=11: 1.0000  G=13: 1.0000  G=14: 1.0000  G=15: 1.0000  G=19: 1.0000
+  tau=0.02 delta=0.02: G=11: 0.8289  G=13: 0.8726  G=14: 0.8891  G=15: 0.9030  G=19: 0.9403
+  tau=0.02 delta=0.03: G=11: 0.9874  G=13: 0.9942  G=14: 0.9960  G=15: 0.9971  G=19: 0.9992
+  tau=0.02 delta=0.05: G=11: 1.0000  G=13: 1.0000  G=14: 1.0000  G=15: 1.0000  G=19: 1.0000
+  tau=0.03 delta=0.02: G=11: 0.5979  G=13: 0.6588  G=14: 0.6851  G=15: 0.7091  G=19: 0.7854
+  tau=0.03 delta=0.03: G=11: 0.8827  G=13: 0.9239  G=14: 0.9384  G=15: 0.9500  G=19: 0.9776
+  tau=0.03 delta=0.05: G=11: 0.9989  G=13: 0.9997  G=14: 0.9999  G=15: 0.9999  G=19: 1.0000
+  tau=0.05 delta=0.02: G=11: 0.3275  G=13: 0.3691  G=14: 0.3888  G=15: 0.4079  G=19: 0.4779
+  tau=0.05 delta=0.03: G=11: 0.5597  G=13: 0.6252  G=14: 0.6544  G=15: 0.6814  G=19: 0.7698
+  tau=0.05 delta=0.05: G=11: 0.9098  G=13: 0.9477  G=14: 0.9602  G=15: 0.9698  G=19: 0.9899
+  tau=0.10 delta=0.02: G=11: 0.1514  G=13: 0.1659  G=14: 0.1730  G=15: 0.1800  G=19: 0.2069
+  tau=0.10 delta=0.03: G=11: 0.2345  G=13: 0.2632  G=14: 0.2771  G=15: 0.2908  G=19: 0.3431
+  tau=0.10 delta=0.05: G=11: 0.4553  G=13: 0.5155  G=14: 0.5435  G=15: 0.5701  G=19: 0.6636
+
+== P(tau_hat = 0): G clusters of m = round(1500/G) M0-draw items, d = 0.3, sw2 = d - tau^2
+  G=11 m=136.4 tau=0.00: P(trunc) divisor G-1 0.560; divisor G 0.642
+  G=11 m=136.4 tau=0.01: P(trunc) divisor G-1 0.521; divisor G 0.604
+  G=11 m=136.4 tau=0.02: P(trunc) divisor G-1 0.416; divisor G 0.497
+  G=11 m=136.4 tau=0.03: P(trunc) divisor G-1 0.283; divisor G 0.352
+  G=11 m=136.4 tau=0.04: P(trunc) divisor G-1 0.166; divisor G 0.215
+  G=11 m=136.4 tau=0.05: P(trunc) divisor G-1 0.087; divisor G 0.117
+  G=11 m=136.4 tau=0.10: P(trunc) divisor G-1 0.002; divisor G 0.003
+  G=13 m=115.4 tau=0.00: P(trunc) divisor G-1 0.554; divisor G 0.631
+  G=13 m=115.4 tau=0.01: P(trunc) divisor G-1 0.518; divisor G 0.595
+  G=13 m=115.4 tau=0.02: P(trunc) divisor G-1 0.419; divisor G 0.494
+  G=13 m=115.4 tau=0.03: P(trunc) divisor G-1 0.289; divisor G 0.353
+  G=13 m=115.4 tau=0.04: P(trunc) divisor G-1 0.171; divisor G 0.217
+  G=13 m=115.4 tau=0.05: P(trunc) divisor G-1 0.089; divisor G 0.117
+  G=13 m=115.4 tau=0.10: P(trunc) divisor G-1 0.002; divisor G 0.002
+  G=15 m=100.0 tau=0.00: P(trunc) divisor G-1 0.550; divisor G 0.622
+  G=15 m=100.0 tau=0.01: P(trunc) divisor G-1 0.516; divisor G 0.588
+  G=15 m=100.0 tau=0.02: P(trunc) divisor G-1 0.422; divisor G 0.492
+  G=15 m=100.0 tau=0.03: P(trunc) divisor G-1 0.295; divisor G 0.356
+  G=15 m=100.0 tau=0.04: P(trunc) divisor G-1 0.176; divisor G 0.221
+  G=15 m=100.0 tau=0.05: P(trunc) divisor G-1 0.091; divisor G 0.119
+  G=15 m=100.0 tau=0.10: P(trunc) divisor G-1 0.001; divisor G 0.002
+  G=19 m=78.9 tau=0.00: P(trunc) divisor G-1 0.544; divisor G 0.608
+  G=19 m=78.9 tau=0.01: P(trunc) divisor G-1 0.514; divisor G 0.578
+  G=19 m=78.9 tau=0.02: P(trunc) divisor G-1 0.427; divisor G 0.490
+  G=19 m=78.9 tau=0.03: P(trunc) divisor G-1 0.307; divisor G 0.362
+  G=19 m=78.9 tau=0.04: P(trunc) divisor G-1 0.188; divisor G 0.230
+  G=19 m=78.9 tau=0.05: P(trunc) divisor G-1 0.098; divisor G 0.124
+  G=19 m=78.9 tau=0.10: P(trunc) divisor G-1 0.001; divisor G 0.001

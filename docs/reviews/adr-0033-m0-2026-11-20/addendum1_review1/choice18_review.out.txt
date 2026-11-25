@@ -1,0 +1,52 @@
+== G=11, m=136.4, chi2_0.05,10 = 3.940
+  true tau=0.00  P(reads reachable) (a) point: d=0.02: 0.574  d=0.03: 0.666  d=0.05: 0.867
+                     (b) upper bound: d=0.02: 0.053 (truly reachable)  d=0.03: 0.076 (truly reachable)  d=0.05: 0.177 (truly reachable)
+  true tau=0.01  P(reads reachable) (a) point: d=0.02: 0.535  d=0.03: 0.628  d=0.05: 0.842
+                     (b) upper bound: d=0.02: 0.045 (truly NOT reachable)  d=0.03: 0.065 (truly reachable)  d=0.05: 0.156 (truly reachable)
+  true tau=0.02  P(reads reachable) (a) point: d=0.02: 0.429  d=0.03: 0.521  d=0.05: 0.758
+                     (b) upper bound: d=0.02: 0.029 (truly NOT reachable)  d=0.03: 0.043 (truly NOT reachable)  d=0.05: 0.109 (truly reachable)
+  true tau=0.03  P(reads reachable) (a) point: d=0.02: 0.294  d=0.03: 0.374  d=0.05: 0.613
+                     (b) upper bound: d=0.02: 0.015 (truly NOT reachable)  d=0.03: 0.023 (truly NOT reachable)  d=0.05: 0.062 (truly reachable)
+  true tau=0.05  P(reads reachable) (a) point: d=0.02: 0.092  d=0.03: 0.128  d=0.05: 0.275
+                     (b) upper bound: d=0.02: 0.003 (truly NOT reachable)  d=0.03: 0.004 (truly NOT reachable)  d=0.05: 0.013 (truly NOT reachable)
+  true tau=0.10  P(reads reachable) (a) point: d=0.02: 0.002  d=0.03: 0.004  d=0.05: 0.012
+                     (b) upper bound: d=0.02: 0.000 (truly NOT reachable)  d=0.03: 0.000 (truly NOT reachable)  d=0.05: 0.000 (truly NOT reachable)
+== G=13, m=115.4, chi2_0.05,12 = 5.226
+  true tau=0.00  P(reads reachable) (a) point: d=0.02: 0.573  d=0.03: 0.676  d=0.05: 0.890
+                     (b) upper bound: d=0.02: 0.054 (truly reachable)  d=0.03: 0.081 (truly reachable)  d=0.05: 0.209 (truly reachable)
+  true tau=0.01  P(reads reachable) (a) point: d=0.02: 0.536  d=0.03: 0.641  d=0.05: 0.869
+                     (b) upper bound: d=0.02: 0.047 (truly NOT reachable)  d=0.03: 0.071 (truly reachable)  d=0.05: 0.186 (truly reachable)
+  true tau=0.02  P(reads reachable) (a) point: d=0.02: 0.437  d=0.03: 0.540  d=0.05: 0.798
+                     (b) upper bound: d=0.02: 0.030 (truly NOT reachable)  d=0.03: 0.047 (truly NOT reachable)  d=0.05: 0.134 (truly reachable)
+  true tau=0.03  P(reads reachable) (a) point: d=0.02: 0.304  d=0.03: 0.396  d=0.05: 0.667
+                     (b) upper bound: d=0.02: 0.016 (truly NOT reachable)  d=0.03: 0.025 (truly NOT reachable)  d=0.05: 0.078 (truly reachable)
+  true tau=0.05  P(reads reachable) (a) point: d=0.02: 0.095  d=0.03: 0.138  d=0.05: 0.319
+                     (b) upper bound: d=0.02: 0.003 (truly NOT reachable)  d=0.03: 0.005 (truly NOT reachable)  d=0.05: 0.017 (truly NOT reachable)
+  true tau=0.10  P(reads reachable) (a) point: d=0.02: 0.002  d=0.03: 0.003  d=0.05: 0.012
+                     (b) upper bound: d=0.02: 0.000 (truly NOT reachable)  d=0.03: 0.000 (truly NOT reachable)  d=0.05: 0.000 (truly NOT reachable)
+== G=15, m=100.0, chi2_0.05,14 = 6.571
+  true tau=0.00  P(reads reachable) (a) point: d=0.02: 0.572  d=0.03: 0.685  d=0.05: 0.907
+                     (b) upper bound: d=0.02: 0.055 (truly reachable)  d=0.03: 0.086 (truly reachable)  d=0.05: 0.239 (truly reachable)
+  true tau=0.01  P(reads reachable) (a) point: d=0.02: 0.538  d=0.03: 0.653  d=0.05: 0.890
+                     (b) upper bound: d=0.02: 0.047 (truly NOT reachable)  d=0.03: 0.076 (truly reachable)  d=0.05: 0.216 (truly reachable)
+  true tau=0.02  P(reads reachable) (a) point: d=0.02: 0.442  d=0.03: 0.558  d=0.05: 0.829
+                     (b) upper bound: d=0.02: 0.031 (truly NOT reachable)  d=0.03: 0.052 (truly reachable)  d=0.05: 0.159 (truly reachable)
+  true tau=0.03  P(reads reachable) (a) point: d=0.02: 0.313  d=0.03: 0.417  d=0.05: 0.712
+                     (b) upper bound: d=0.02: 0.016 (truly NOT reachable)  d=0.03: 0.028 (truly NOT reachable)  d=0.05: 0.096 (truly reachable)
+  true tau=0.05  P(reads reachable) (a) point: d=0.02: 0.099  d=0.03: 0.150  d=0.05: 0.365
+                     (b) upper bound: d=0.02: 0.003 (truly NOT reachable)  d=0.03: 0.005 (truly NOT reachable)  d=0.05: 0.022 (truly NOT reachable)
+  true tau=0.10  P(reads reachable) (a) point: d=0.02: 0.001  d=0.03: 0.003  d=0.05: 0.012
+                     (b) upper bound: d=0.02: 0.000 (truly NOT reachable)  d=0.03: 0.000 (truly NOT reachable)  d=0.05: 0.000 (truly NOT reachable)
+== G=19, m=78.9, chi2_0.05,18 = 9.390
+  true tau=0.00  P(reads reachable) (a) point: d=0.02: 0.572  d=0.03: 0.702  d=0.05: 0.934
+                     (b) upper bound: d=0.02: 0.056 (truly reachable)  d=0.03: 0.096 (truly reachable)  d=0.05: 0.301 (truly reachable)
+  true tau=0.01  P(reads reachable) (a) point: d=0.02: 0.541  d=0.03: 0.673  d=0.05: 0.921
+                     (b) upper bound: d=0.02: 0.049 (truly NOT reachable)  d=0.03: 0.085 (truly reachable)  d=0.05: 0.277 (truly reachable)
+  true tau=0.02  P(reads reachable) (a) point: d=0.02: 0.454  d=0.03: 0.588  d=0.05: 0.878
+                     (b) upper bound: d=0.02: 0.034 (truly NOT reachable)  d=0.03: 0.060 (truly reachable)  d=0.05: 0.214 (truly reachable)
+  true tau=0.03  P(reads reachable) (a) point: d=0.02: 0.330  d=0.03: 0.455  d=0.05: 0.786
+                     (b) upper bound: d=0.02: 0.018 (truly NOT reachable)  d=0.03: 0.034 (truly NOT reachable)  d=0.05: 0.138 (truly reachable)
+  true tau=0.05  P(reads reachable) (a) point: d=0.02: 0.109  d=0.03: 0.175  d=0.05: 0.457
+                     (b) upper bound: d=0.02: 0.003 (truly NOT reachable)  d=0.03: 0.006 (truly NOT reachable)  d=0.05: 0.034 (truly NOT reachable)
+  true tau=0.10  P(reads reachable) (a) point: d=0.02: 0.001  d=0.03: 0.002  d=0.05: 0.015
+                     (b) upper bound: d=0.02: 0.000 (truly NOT reachable)  d=0.03: 0.000 (truly NOT reachable)  d=0.05: 0.000 (truly NOT reachable)

@@ -1,0 +1,38 @@
+made-up global clusters (identity: members):
+  c1_l00: ['c1_l00', 'r2_l03']
+  c1_l01: ['c1_l01', 'r2_l04', 'r2_l05']
+  c1_l05: ['c1_l05', 'm1_l06']
+  c1_l06: ['c1_l06', 'm1_l03', 'r1_l05']
+  m1_l02: ['m1_l02', 'r2_l07']
+  r1_l00: ['r1_l00', 'r1_l01']
+  r2_l08: ['r2_l08', 'r2_l09']
+
+== stream v1 ('|'-joined, 8 bytes); random.shuffle: X = ['c1_l00', 'c1_l01', 'c1_l06', 'm1_l02']
+   per evaluation (G_e,total, A, B): {'R1': (8, 4, 4), 'R2': (8, 4, 4), 'M1': (6, 3, 3), 'C1': (8, 4, 4)}
+   part A: ['c1_l03', 'c1_l05', 'c1_l06', 'c1_l07', 'm1_l02', 'm1_l04', 'r1_l00', 'r1_l04', 'r1_l07', 'r2_l01', 'r2_l06', 'r2_l08']
+
+== stream v1 ('|'-joined, 8 bytes); sort by random key: X = ['c1_l00', 'c1_l01', 'c1_l06', 'm1_l02']
+   per evaluation (G_e,total, A, B): {'R1': (8, 4, 4), 'R2': (8, 4, 4), 'M1': (6, 3, 3), 'C1': (8, 4, 4)}
+   part A: ['c1_l00', 'c1_l01', 'c1_l04', 'c1_l07', 'm1_l00', 'm1_l01', 'm1_l04', 'r1_l00', 'r1_l02', 'r1_l03', 'r1_l07', 'r2_l00', 'r2_l01']
+
+== stream v2 (concatenated, 32 bytes); random.shuffle: X = ['c1_l00', 'c1_l01', 'c1_l06', 'm1_l02']
+   per evaluation (G_e,total, A, B): {'R1': (8, 4, 4), 'R2': (8, 4, 4), 'M1': (6, 3, 3), 'C1': (8, 4, 4)}
+   part A: ['c1_l01', 'c1_l04', 'c1_l05', 'c1_l06', 'm1_l00', 'm1_l04', 'r1_l03', 'r1_l07', 'r1_l08', 'r2_l01', 'r2_l02', 'r2_l06']
+
+== stream v2 (concatenated, 32 bytes); sort by random key: X = ['c1_l00', 'c1_l01', 'c1_l06', 'm1_l02']
+   per evaluation (G_e,total, A, B): {'R1': (8, 4, 4), 'R2': (8, 4, 4), 'M1': (6, 3, 3), 'C1': (8, 4, 4)}
+   part A: ['c1_l01', 'c1_l05', 'c1_l06', 'c1_l07', 'm1_l01', 'm1_l05', 'r1_l02', 'r1_l03', 'r1_l07', 'r2_l00', 'r2_l02', 'r2_l06']
+
+== do the guesses change the split?
+  ("stream v1 ('|'-joined, 8 bytes)", 'random.shuffle') vs ("stream v1 ('|'-joined, 8 bytes)", 'sort by random key'): 15 clusters differ
+  ("stream v1 ('|'-joined, 8 bytes)", 'random.shuffle') vs ('stream v2 (concatenated, 32 bytes)', 'random.shuffle'): 12 clusters differ
+  ("stream v1 ('|'-joined, 8 bytes)", 'random.shuffle') vs ('stream v2 (concatenated, 32 bytes)', 'sort by random key'): 14 clusters differ
+  ("stream v1 ('|'-joined, 8 bytes)", 'sort by random key') vs ('stream v2 (concatenated, 32 bytes)', 'random.shuffle'): 11 clusters differ
+  ("stream v1 ('|'-joined, 8 bytes)", 'sort by random key') vs ('stream v2 (concatenated, 32 bytes)', 'sort by random key'): 11 clusters differ
+  ('stream v2 (concatenated, 32 bytes)', 'random.shuffle') vs ('stream v2 (concatenated, 32 bytes)', 'sort by random key'): 10 clusters differ
+
+== step 5: made-up scenario; |X| = 14 cross clusters, each touching two evaluations
+  R1: G=13, X touching it=2: P(parts not floor/ceil half)=0.000; largest |A-B|=1; smallest part, 1st percentile=6, minimum=6
+  R2: G=19, X touching it=12: P(parts not floor/ceil half)=0.000; largest |A-B|=1; smallest part, 1st percentile=9, minimum=9
+  M1: G=11, X touching it=2: P(parts not floor/ceil half)=0.000; largest |A-B|=1; smallest part, 1st percentile=5, minimum=5
+  C1: G=14, X touching it=12: P(parts not floor/ceil half)=0.000; largest |A-B|=0; smallest part, 1st percentile=7, minimum=7
