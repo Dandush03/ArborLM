@@ -1,0 +1,4814 @@
+{
+ "lineages": {
+  "R2.binary_search_trace": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 586,
+       "mode_key_share": 0.0495,
+       "worst_acc_two_sided": 0.5473,
+       "worst_heuristic": "X:nearest list value below the target"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1414,
+       "mode_key_share": 0.0021,
+       "worst_acc_two_sided": 0.64,
+       "worst_heuristic": "X:first three of the true trace only"
+      }
+     },
+     "1": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 686,
+       "mode_key_share": 0.0452,
+       "worst_acc_two_sided": 0.5593,
+       "worst_heuristic": "X:nearest list value below the target"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1314,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.3501,
+       "worst_heuristic": "X:first three of the true trace only"
+      }
+     },
+     "2": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 720,
+       "mode_key_share": 0.0333,
+       "worst_acc_two_sided": 0.4222,
+       "worst_heuristic": "X:ceil-midpoint third probe"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1280,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.3219,
+       "worst_heuristic": "X:ceil-midpoint trace"
+      }
+     },
+     "3": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 707,
+       "mode_key_share": 0.0368,
+       "worst_acc_two_sided": 0.312,
+       "worst_heuristic": "X:nearest list value below the target"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1293,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.1825,
+       "worst_heuristic": "X:first three of the true trace only"
+      }
+     },
+     "4": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 776,
+       "mode_key_share": 0.0284,
+       "worst_acc_two_sided": 0.2977,
+       "worst_heuristic": "X:value at position n/8 or 7n/8 nearer the target"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1224,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.1348,
+       "worst_heuristic": "X:first three of the true trace only"
+      }
+     },
+     "5": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 765,
+       "mode_key_share": 0.0288,
+       "worst_acc_two_sided": 0.3764,
+       "worst_heuristic": "X:ceil-midpoint third probe"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1235,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.1223,
+       "worst_heuristic": "X:first three of the true trace only"
+      }
+     },
+     "6": {
+      "ask=third": {
+       "chance": 0.0,
+       "items": 707,
+       "mode_key_share": 0.0255,
+       "worst_acc_two_sided": 0.2433,
+       "worst_heuristic": "X:value at position n/8 or 7n/8 nearer the target"
+      },
+      "ask=values": {
+       "chance": 0.0,
+       "items": 1293,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.1075,
+       "worst_heuristic": "X:first three of the true trace only"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.64,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:first three of the true trace only",
+     "shape": "ask=values"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=third",
+     "share": 0.0495
+    }
+   },
+   "revised": false
+  },
+  "R2.bracket_match": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 754,
+       "mode_key_share": 0.2507,
+       "worst_acc_two_sided": 0.508,
+       "worst_heuristic": "X:last closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1246,
+       "mode_key_share": 0.5144,
+       "worst_acc_two_sided": 0.5305,
+       "worst_heuristic": "X:first and last are a matching pair"
+      }
+     },
+     "1": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 826,
+       "mode_key_share": 0.1877,
+       "worst_acc_two_sided": 0.4576,
+       "worst_heuristic": "X:last closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1174,
+       "mode_key_share": 0.5085,
+       "worst_acc_two_sided": 0.5085,
+       "worst_heuristic": "A:equal counts of each kind"
+      }
+     },
+     "2": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 820,
+       "mode_key_share": 0.1939,
+       "worst_acc_two_sided": 0.4488,
+       "worst_heuristic": "X:last closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1180,
+       "mode_key_share": 0.5,
+       "worst_acc_two_sided": 0.5297,
+       "worst_heuristic": "X:first and last are a matching pair"
+      }
+     },
+     "3": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 849,
+       "mode_key_share": 0.1684,
+       "worst_acc_two_sided": 0.4146,
+       "worst_heuristic": "X:last closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1151,
+       "mode_key_share": 0.5083,
+       "worst_acc_two_sided": 0.5265,
+       "worst_heuristic": "X:no ')(' style closer-then-opener at the middle"
+      }
+     },
+     "4": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 830,
+       "mode_key_share": 0.1675,
+       "worst_acc_two_sided": 0.3843,
+       "worst_heuristic": "A:next closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1170,
+       "mode_key_share": 0.5068,
+       "worst_acc_two_sided": 0.5068,
+       "worst_heuristic": "A:equal counts of each kind"
+      }
+     },
+     "5": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 787,
+       "mode_key_share": 0.1461,
+       "worst_acc_two_sided": 0.3792,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1213,
+       "mode_key_share": 0.5012,
+       "worst_acc_two_sided": 0.507,
+       "worst_heuristic": "X:no ')(' style closer-then-opener at the middle"
+      }
+     },
+     "6": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 763,
+       "mode_key_share": 0.1363,
+       "worst_acc_two_sided": 0.3997,
+       "worst_heuristic": "A:next closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1237,
+       "mode_key_share": 0.5271,
+       "worst_acc_two_sided": 0.5271,
+       "worst_heuristic": "A:equal counts of each kind"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.508,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:last closer of the same kind",
+     "shape": "ask=match"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=match",
+     "share": 0.2507
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 786,
+       "mode_key_share": 0.3588,
+       "worst_acc_two_sided": 0.785,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1214,
+       "mode_key_share": 0.5272,
+       "worst_acc_two_sided": 0.8641,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     },
+     "1": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 797,
+       "mode_key_share": 0.3137,
+       "worst_acc_two_sided": 0.6926,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1203,
+       "mode_key_share": 0.5012,
+       "worst_acc_two_sided": 0.8562,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     },
+     "2": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 775,
+       "mode_key_share": 0.2787,
+       "worst_acc_two_sided": 0.6439,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1225,
+       "mode_key_share": 0.5045,
+       "worst_acc_two_sided": 0.8335,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     },
+     "3": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 787,
+       "mode_key_share": 0.2579,
+       "worst_acc_two_sided": 0.6925,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1213,
+       "mode_key_share": 0.5012,
+       "worst_acc_two_sided": 0.8838,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     },
+     "4": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 774,
+       "mode_key_share": 0.2416,
+       "worst_acc_two_sided": 0.6395,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1226,
+       "mode_key_share": 0.5033,
+       "worst_acc_two_sided": 0.8483,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     },
+     "5": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 790,
+       "mode_key_share": 0.1962,
+       "worst_acc_two_sided": 0.6304,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1210,
+       "mode_key_share": 0.5033,
+       "worst_acc_two_sided": 0.8496,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     },
+     "6": {
+      "ask=match": {
+       "chance": 0.0,
+       "items": 779,
+       "mode_key_share": 0.1951,
+       "worst_acc_two_sided": 0.5931,
+       "worst_heuristic": "X:second closer of the same kind"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1221,
+       "mode_key_share": 0.5037,
+       "worst_acc_two_sided": 0.8583,
+       "worst_heuristic": "X:no adjacent wrong-kind pair"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.785,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:second closer of the same kind",
+     "shape": "ask=match"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=match",
+     "share": 0.3588
+    }
+   },
+   "revised": true
+  },
+  "R2.bst_traversal": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 575,
+       "mode_key_share": 0.0017,
+       "worst_acc_two_sided": 0.1983,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 884,
+       "mode_key_share": 0.0011,
+       "worst_acc_two_sided": 0.3473,
+       "worst_heuristic": "X:reversed insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 541,
+       "mode_key_share": 0.0018,
+       "worst_acc_two_sided": 0.6266,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     },
+     "1": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 608,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.0806,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 756,
+       "mode_key_share": 0.0013,
+       "worst_acc_two_sided": 0.1812,
+       "worst_heuristic": "X:reversed insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 636,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.4513,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     },
+     "2": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 641,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.0343,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 691,
+       "mode_key_share": 0.0014,
+       "worst_acc_two_sided": 0.0854,
+       "worst_heuristic": "X:reversed insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 668,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.3982,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     },
+     "3": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 641,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.0296,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 715,
+       "mode_key_share": 0.0014,
+       "worst_acc_two_sided": 0.028,
+       "worst_heuristic": "X:reversed insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 644,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.2671,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     },
+     "4": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 672,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0074,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 697,
+       "mode_key_share": 0.0014,
+       "worst_acc_two_sided": 0.01,
+       "worst_heuristic": "X:reversed insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 631,
+       "mode_key_share": 0.0016,
+       "worst_acc_two_sided": 0.168,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     },
+     "5": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 650,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0046,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 668,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.006,
+       "worst_heuristic": "X:reversed insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 682,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0777,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     },
+     "6": {
+      "kind=level": {
+       "chance": 0.0,
+       "items": 675,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:insertion order"
+      },
+      "kind=post": {
+       "chance": 0.0,
+       "items": 659,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:insertion order"
+      },
+      "kind=pre": {
+       "chance": 0.0,
+       "items": 666,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0465,
+       "worst_heuristic": "X:root, smaller in insertion order, larger in insertion order"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6266,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:root, smaller in insertion order, larger in insertion order",
+     "shape": "kind=pre"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "kind=pre",
+     "share": 0.0018
+    }
+   },
+   "revised": false
+  },
+  "R2.cache_eviction": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 499,
+       "mode_key_share": 0.2265,
+       "worst_acc_two_sided": 0.5792,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 494,
+       "mode_key_share": 0.2308,
+       "worst_acc_two_sided": 0.5911,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 1007,
+       "mode_key_share": 0.5134,
+       "worst_acc_two_sided": 0.8967,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "1": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 493,
+       "mode_key_share": 0.2556,
+       "worst_acc_two_sided": 0.4402,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 488,
+       "mode_key_share": 0.2357,
+       "worst_acc_two_sided": 0.4816,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 1019,
+       "mode_key_share": 0.526,
+       "worst_acc_two_sided": 0.897,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "2": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 484,
+       "mode_key_share": 0.2211,
+       "worst_acc_two_sided": 0.5,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 504,
+       "mode_key_share": 0.2063,
+       "worst_acc_two_sided": 0.5317,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 1012,
+       "mode_key_share": 0.5168,
+       "worst_acc_two_sided": 0.914,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "3": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 460,
+       "mode_key_share": 0.1739,
+       "worst_acc_two_sided": 0.4413,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 508,
+       "mode_key_share": 0.1752,
+       "worst_acc_two_sided": 0.4685,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 1032,
+       "mode_key_share": 0.5194,
+       "worst_acc_two_sided": 0.8992,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "4": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 504,
+       "mode_key_share": 0.1647,
+       "worst_acc_two_sided": 0.4722,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 519,
+       "mode_key_share": 0.1734,
+       "worst_acc_two_sided": 0.4663,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 977,
+       "mode_key_share": 0.5005,
+       "worst_acc_two_sided": 0.8905,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "5": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 503,
+       "mode_key_share": 0.159,
+       "worst_acc_two_sided": 0.4036,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 503,
+       "mode_key_share": 0.1849,
+       "worst_acc_two_sided": 0.4294,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 994,
+       "mode_key_share": 0.5262,
+       "worst_acc_two_sided": 0.9014,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "6": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 515,
+       "mode_key_share": 0.1534,
+       "worst_acc_two_sided": 0.3961,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 495,
+       "mode_key_share": 0.1535,
+       "worst_acc_two_sided": 0.396,
+       "worst_heuristic": "A:other policy"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 990,
+       "mode_key_share": 0.5131,
+       "worst_acc_two_sided": 0.899,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.5911,
+     "chance": 0.0,
+     "level": 0,
+     "name": "A:other policy",
+     "shape": "ask=misses|policy=lru"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 1,
+     "shape": "ask=misses|policy=fifo",
+     "share": 0.2556
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 496,
+       "mode_key_share": 0.2843,
+       "worst_acc_two_sided": 0.2722,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 471,
+       "mode_key_share": 0.2866,
+       "worst_acc_two_sided": 0.4968,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 528,
+       "mode_key_share": 0.5095,
+       "worst_acc_two_sided": 0.6439,
+       "worst_heuristic": "X:item is the last request"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 505,
+       "mode_key_share": 0.5109,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "1": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 479,
+       "mode_key_share": 0.2359,
+       "worst_acc_two_sided": 0.2067,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 484,
+       "mode_key_share": 0.2479,
+       "worst_acc_two_sided": 0.4525,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 509,
+       "mode_key_share": 0.5344,
+       "worst_acc_two_sided": 0.6326,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 528,
+       "mode_key_share": 0.5057,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "2": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 498,
+       "mode_key_share": 0.2068,
+       "worst_acc_two_sided": 0.2249,
+       "worst_heuristic": "X:distinct + (len-distinct)//2"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 536,
+       "mode_key_share": 0.2369,
+       "worst_acc_two_sided": 0.459,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 488,
+       "mode_key_share": 0.5082,
+       "worst_acc_two_sided": 0.6189,
+       "worst_heuristic": "X:item requested in the second half"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 478,
+       "mode_key_share": 0.5084,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "3": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 519,
+       "mode_key_share": 0.1927,
+       "worst_acc_two_sided": 0.2177,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 467,
+       "mode_key_share": 0.2163,
+       "worst_acc_two_sided": 0.3319,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 507,
+       "mode_key_share": 0.5562,
+       "worst_acc_two_sided": 0.6489,
+       "worst_heuristic": "X:item is the last request"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 507,
+       "mode_key_share": 0.5089,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "4": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 480,
+       "mode_key_share": 0.1688,
+       "worst_acc_two_sided": 0.2083,
+       "worst_heuristic": "X:cap+1 policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 530,
+       "mode_key_share": 0.1698,
+       "worst_acc_two_sided": 0.4264,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 502,
+       "mode_key_share": 0.508,
+       "worst_acc_two_sided": 0.6275,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 488,
+       "mode_key_share": 0.543,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "5": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 487,
+       "mode_key_share": 0.1602,
+       "worst_acc_two_sided": 0.2053,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 531,
+       "mode_key_share": 0.1808,
+       "worst_acc_two_sided": 0.3333,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 497,
+       "mode_key_share": 0.5191,
+       "worst_acc_two_sided": 0.6398,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 485,
+       "mode_key_share": 0.501,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     },
+     "6": {
+      "ask=misses|policy=fifo": {
+       "chance": 0.0,
+       "items": 489,
+       "mode_key_share": 0.1595,
+       "worst_acc_two_sided": 0.2065,
+       "worst_heuristic": "X:cap+1 policy"
+      },
+      "ask=misses|policy=lru": {
+       "chance": 0.0,
+       "items": 506,
+       "mode_key_share": 0.1522,
+       "worst_acc_two_sided": 0.3261,
+       "worst_heuristic": "X:requests not among the previous cap requests"
+      },
+      "ask=present|policy=fifo": {
+       "chance": 0.5,
+       "items": 527,
+       "mode_key_share": 0.518,
+       "worst_acc_two_sided": 0.649,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      },
+      "ask=present|policy=lru": {
+       "chance": 0.5,
+       "items": 478,
+       "mode_key_share": 0.5105,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:item among the last cap distinct items (=LRU answer)"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 1.0,
+     "chance": 0.5,
+     "level": 0,
+     "name": "X:item among the last cap distinct items (=LRU answer)",
+     "shape": "ask=present|policy=lru"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=misses|policy=lru",
+     "share": 0.2866
+    }
+   },
+   "revised": true
+  },
+  "R2.cellular_automaton": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 677,
+       "mode_key_share": 0.2482,
+       "worst_acc_two_sided": 0.4018,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1323,
+       "mode_key_share": 0.037,
+       "worst_acc_two_sided": 0.1005,
+       "worst_heuristic": "X:one step too many"
+      }
+     },
+     "1": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 670,
+       "mode_key_share": 0.206,
+       "worst_acc_two_sided": 0.3687,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1330,
+       "mode_key_share": 0.018,
+       "worst_acc_two_sided": 0.0895,
+       "worst_heuristic": "X:one step too many"
+      }
+     },
+     "2": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 666,
+       "mode_key_share": 0.1667,
+       "worst_acc_two_sided": 0.4219,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1334,
+       "mode_key_share": 0.012,
+       "worst_acc_two_sided": 0.1462,
+       "worst_heuristic": "X:one step too many"
+      }
+     },
+     "3": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 663,
+       "mode_key_share": 0.1418,
+       "worst_acc_two_sided": 0.4027,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1337,
+       "mode_key_share": 0.0082,
+       "worst_acc_two_sided": 0.1354,
+       "worst_heuristic": "X:one step too many"
+      }
+     },
+     "4": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 697,
+       "mode_key_share": 0.1263,
+       "worst_acc_two_sided": 0.4763,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1303,
+       "mode_key_share": 0.0061,
+       "worst_acc_two_sided": 0.1819,
+       "worst_heuristic": "X:one step too many"
+      }
+     },
+     "5": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 655,
+       "mode_key_share": 0.1282,
+       "worst_acc_two_sided": 0.484,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1345,
+       "mode_key_share": 0.0045,
+       "worst_acc_two_sided": 0.1569,
+       "worst_heuristic": "X:one step too many"
+      }
+     },
+     "6": {
+      "ask=count": {
+       "chance": 0.0,
+       "items": 689,
+       "mode_key_share": 0.1045,
+       "worst_acc_two_sided": 0.5094,
+       "worst_heuristic": "X:one step too many"
+      },
+      "ask=row": {
+       "chance": 0.0,
+       "items": 1311,
+       "mode_key_share": 0.0053,
+       "worst_acc_two_sided": 0.1945,
+       "worst_heuristic": "X:one step too many"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.5094,
+     "chance": 0.0,
+     "level": 6,
+     "name": "X:one step too many",
+     "shape": "ask=count"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=count",
+     "share": 0.2482
+    }
+   },
+   "revised": false
+  },
+  "R2.cheapest_network": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.099,
+       "worst_acc_two_sided": 0.2848,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.097,
+       "worst_acc_two_sided": 0.2842,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0975,
+       "worst_acc_two_sided": 0.305,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0705,
+       "worst_acc_two_sided": 0.1185,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0675,
+       "worst_acc_two_sided": 0.1258,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0695,
+       "worst_acc_two_sided": 0.0968,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0575,
+       "worst_acc_two_sided": 0.0357,
+       "worst_heuristic": "X:nearest-neighbour walk"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.305,
+     "chance": 0.0,
+     "level": 2,
+     "name": "X:nearest-neighbour walk",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.099
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.04,
+       "worst_acc_two_sided": 0.6935,
+       "worst_heuristic": "X:cheapest per town minus cheapest cable"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0415,
+       "worst_acc_two_sided": 0.504,
+       "worst_heuristic": "X:cheapest per town minus cheapest cable"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0365,
+       "worst_acc_two_sided": 0.509,
+       "worst_heuristic": "X:cheapest per town minus cheapest cable"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.036,
+       "worst_acc_two_sided": 0.3535,
+       "worst_heuristic": "X:cheapest per town minus cheapest cable"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0345,
+       "worst_acc_two_sided": 0.341,
+       "worst_heuristic": "X:cheapest per town minus cheapest cable"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0365,
+       "worst_acc_two_sided": 0.229,
+       "worst_heuristic": "X:n-1 cheapest + 1 step"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0345,
+       "worst_acc_two_sided": 0.2405,
+       "worst_heuristic": "X:n-1 cheapest + 1 step"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6935,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:cheapest per town minus cheapest cable",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 1,
+     "shape": "",
+     "share": 0.0415
+    }
+   },
+   "revised": true
+  },
+  "R2.chip_toppling": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 1009,
+       "mode_key_share": 0.0466,
+       "worst_acc_two_sided": 0.0317,
+       "worst_heuristic": "X:total chips"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 991,
+       "mode_key_share": 0.1534,
+       "worst_acc_two_sided": 0.2059,
+       "worst_heuristic": "X:chips minus n"
+      }
+     },
+     "1": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 1011,
+       "mode_key_share": 0.0307,
+       "worst_acc_two_sided": 0.0208,
+       "worst_heuristic": "X:total chips"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 989,
+       "mode_key_share": 0.1254,
+       "worst_acc_two_sided": 0.2113,
+       "worst_heuristic": "X:chips minus n"
+      }
+     },
+     "2": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 1010,
+       "mode_key_share": 0.0188,
+       "worst_acc_two_sided": 0.003,
+       "worst_heuristic": "B:chips * n / 4"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 990,
+       "mode_key_share": 0.0808,
+       "worst_acc_two_sided": 0.1101,
+       "worst_heuristic": "X:chips minus (n-1)"
+      }
+     },
+     "3": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 970,
+       "mode_key_share": 0.0155,
+       "worst_acc_two_sided": 0.0041,
+       "worst_heuristic": "B:chips * n / 4"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 1030,
+       "mode_key_share": 0.0699,
+       "worst_acc_two_sided": 0.0971,
+       "worst_heuristic": "X:chips minus (n-1)"
+      }
+     },
+     "4": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 986,
+       "mode_key_share": 0.0132,
+       "worst_acc_two_sided": 0.001,
+       "worst_heuristic": "A:half the chips"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 1014,
+       "mode_key_share": 0.0503,
+       "worst_acc_two_sided": 0.0602,
+       "worst_heuristic": "X:chips minus (n-1)"
+      }
+     },
+     "5": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 999,
+       "mode_key_share": 0.015,
+       "worst_acc_two_sided": 0.001,
+       "worst_heuristic": "B:chips * n / 4"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 1001,
+       "mode_key_share": 0.038,
+       "worst_acc_two_sided": 0.043,
+       "worst_heuristic": "X:excess over 1 per cell"
+      }
+     },
+     "6": {
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 1016,
+       "mode_key_share": 0.0108,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:half the chips"
+      },
+      "ask=topplings_of": {
+       "chance": 0.0,
+       "items": 984,
+       "mode_key_share": 0.0386,
+       "worst_acc_two_sided": 0.0315,
+       "worst_heuristic": "X:chips minus n"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.2113,
+     "chance": 0.0,
+     "level": 1,
+     "name": "X:chips minus n",
+     "shape": "ask=topplings_of"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=topplings_of",
+     "share": 0.1534
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 671,
+       "mode_key_share": 0.1818,
+       "worst_acc_two_sided": 0.9806,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 699,
+       "mode_key_share": 0.1202,
+       "worst_acc_two_sided": 0.794,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 630,
+       "mode_key_share": 0.0444,
+       "worst_acc_two_sided": 0.0254,
+       "worst_heuristic": "A:half the chips"
+      }
+     },
+     "1": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 651,
+       "mode_key_share": 0.1567,
+       "worst_acc_two_sided": 0.9677,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 660,
+       "mode_key_share": 0.1152,
+       "worst_acc_two_sided": 0.8515,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 689,
+       "mode_key_share": 0.0348,
+       "worst_acc_two_sided": 0.0218,
+       "worst_heuristic": "B:chips * n / 4"
+      }
+     },
+     "2": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 675,
+       "mode_key_share": 0.1348,
+       "worst_acc_two_sided": 0.9881,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 669,
+       "mode_key_share": 0.0897,
+       "worst_acc_two_sided": 0.8819,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 656,
+       "mode_key_share": 0.0244,
+       "worst_acc_two_sided": 0.0046,
+       "worst_heuristic": "B:chips * n / 4"
+      }
+     },
+     "3": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 669,
+       "mode_key_share": 0.1375,
+       "worst_acc_two_sided": 0.9955,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 632,
+       "mode_key_share": 0.0854,
+       "worst_acc_two_sided": 0.8655,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 699,
+       "mode_key_share": 0.0172,
+       "worst_acc_two_sided": 0.0014,
+       "worst_heuristic": "A:half the chips"
+      }
+     },
+     "4": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 658,
+       "mode_key_share": 0.1292,
+       "worst_acc_two_sided": 0.997,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 667,
+       "mode_key_share": 0.0825,
+       "worst_acc_two_sided": 0.901,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 675,
+       "mode_key_share": 0.0133,
+       "worst_acc_two_sided": 0.0015,
+       "worst_heuristic": "B:first number in the question"
+      }
+     },
+     "5": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 655,
+       "mode_key_share": 0.116,
+       "worst_acc_two_sided": 0.9985,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 669,
+       "mode_key_share": 0.0688,
+       "worst_acc_two_sided": 0.9193,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 676,
+       "mode_key_share": 0.0148,
+       "worst_acc_two_sided": 0.0015,
+       "worst_heuristic": "B:chips * n / 4"
+      }
+     },
+     "6": {
+      "ask=final": {
+       "chance": 0.0,
+       "items": 653,
+       "mode_key_share": 0.0965,
+       "worst_acc_two_sided": 1.0,
+       "worst_heuristic": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)"
+      },
+      "ask=lost": {
+       "chance": 0.0,
+       "items": 672,
+       "mode_key_share": 0.0878,
+       "worst_acc_two_sided": 0.9018,
+       "worst_heuristic": "X:chips minus (n-1)"
+      },
+      "ask=topplings": {
+       "chance": 0.0,
+       "items": 675,
+       "mode_key_share": 0.0148,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:half the chips"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 1.0,
+     "chance": 0.0,
+     "level": 6,
+     "name": "X:invariant formula: ones with a 0 at (n(n+1)/2 - sum i*c_i) mod (n+1)",
+     "shape": "ask=final"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=final",
+     "share": 0.1818
+    }
+   },
+   "revised": true
+  },
+  "R2.coin_change_min": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2,
+       "worst_acc_two_sided": 0.246,
+       "worst_heuristic": "X:amount/largest rounded down"
+      }
+     },
+     "1": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.213,
+       "worst_acc_two_sided": 0.2495,
+       "worst_heuristic": "B:amount // product of two smallest coins + 1"
+      }
+     },
+     "2": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.254,
+       "worst_acc_two_sided": 0.291,
+       "worst_heuristic": "B:amount // product of two smallest coins + 1"
+      }
+     },
+     "3": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.127,
+       "worst_acc_two_sided": 0.139,
+       "worst_heuristic": "X:amount/largest rounded down"
+      }
+     },
+     "4": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.134,
+       "worst_acc_two_sided": 0.161,
+       "worst_heuristic": "X:amount/largest rounded down"
+      }
+     },
+     "5": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1455,
+       "worst_acc_two_sided": 0.1595,
+       "worst_heuristic": "X:amount/largest rounded down"
+      }
+     },
+     "6": {
+      "ask=ways": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.163,
+       "worst_acc_two_sided": 0.1645,
+       "worst_heuristic": "B:amount // product of two smallest coins + 1"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.291,
+     "chance": 0.0,
+     "level": 2,
+     "name": "B:amount // product of two smallest coins + 1",
+     "shape": "ask=ways"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 2,
+     "shape": "ask=ways",
+     "share": 0.254
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1695,
+       "worst_acc_two_sided": 0.7015,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1785,
+       "worst_acc_two_sided": 0.6,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1825,
+       "worst_acc_two_sided": 0.5715,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.196,
+       "worst_acc_two_sided": 0.658,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.22,
+       "worst_acc_two_sided": 0.6555,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2185,
+       "worst_acc_two_sided": 0.6265,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.221,
+       "worst_acc_two_sided": 0.6195,
+       "worst_heuristic": "X:amount/largest rounded up + 1"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.7015,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:amount/largest rounded up + 1",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 6,
+     "shape": "",
+     "share": 0.221
+    }
+   },
+   "revised": true
+  },
+  "R2.crt_smallest": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.012,
+       "worst_acc_two_sided": 0.118,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0085,
+       "worst_acc_two_sided": 0.095,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.008,
+       "worst_acc_two_sided": 0.0965,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.0075,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.007,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.001,
+       "worst_acc_two_sided": 0.0065,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0015,
+       "worst_acc_two_sided": 0.005,
+       "worst_heuristic": "A:largest remainder"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.118,
+     "chance": 0.0,
+     "level": 0,
+     "name": "A:largest remainder",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.012
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0325,
+       "worst_acc_two_sided": 0.195,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0265,
+       "worst_acc_two_sided": 0.168,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.021,
+       "worst_acc_two_sided": 0.169,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.005,
+       "worst_acc_two_sided": 0.0285,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.004,
+       "worst_acc_two_sided": 0.013,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.003,
+       "worst_acc_two_sided": 0.012,
+       "worst_heuristic": "A:largest remainder"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0025,
+       "worst_acc_two_sided": 0.011,
+       "worst_heuristic": "A:largest remainder"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.195,
+     "chance": 0.0,
+     "level": 0,
+     "name": "A:largest remainder",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.0325
+    }
+   },
+   "revised": true
+  },
+  "R2.deferred_acceptance_partner": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.25,
+       "items": 2000,
+       "mode_key_share": 0.014,
+       "worst_acc_two_sided": 0.744,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.25,
+       "items": 2000,
+       "mode_key_share": 0.0145,
+       "worst_acc_two_sided": 0.765,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.2,
+       "items": 2000,
+       "mode_key_share": 0.0125,
+       "worst_acc_two_sided": 0.722,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.2,
+       "items": 2000,
+       "mode_key_share": 0.0135,
+       "worst_acc_two_sided": 0.704,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.1667,
+       "items": 2000,
+       "mode_key_share": 0.0155,
+       "worst_acc_two_sided": 0.689,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.1667,
+       "items": 2000,
+       "mode_key_share": 0.0145,
+       "worst_acc_two_sided": 0.691,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.1429,
+       "items": 2000,
+       "mode_key_share": 0.013,
+       "worst_acc_two_sided": 0.6815,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6815,
+     "chance": 0.1429,
+     "level": 6,
+     "name": "X:responder-proposing stable partner",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": -1,
+     "shape": "",
+     "share": 0.0
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.3333,
+       "items": 2000,
+       "mode_key_share": 0.015,
+       "worst_acc_two_sided": 0.748,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.3333,
+       "items": 2000,
+       "mode_key_share": 0.015,
+       "worst_acc_two_sided": 0.737,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.25,
+       "items": 2000,
+       "mode_key_share": 0.014,
+       "worst_acc_two_sided": 0.691,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.25,
+       "items": 2000,
+       "mode_key_share": 0.0135,
+       "worst_acc_two_sided": 0.6865,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.2,
+       "items": 2000,
+       "mode_key_share": 0.015,
+       "worst_acc_two_sided": 0.63,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.2,
+       "items": 2000,
+       "mode_key_share": 0.014,
+       "worst_acc_two_sided": 0.6695,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.1667,
+       "items": 2000,
+       "mode_key_share": 0.0145,
+       "worst_acc_two_sided": 0.589,
+       "worst_heuristic": "X:responder-proposing stable partner"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6695,
+     "chance": 0.2,
+     "level": 5,
+     "name": "X:responder-proposing stable partner",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": -1,
+     "shape": "",
+     "share": 0.0
+    }
+   },
+   "revised": true
+  },
+  "R2.dictionary_rank": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 806,
+       "mode_key_share": 0.0596,
+       "worst_acc_two_sided": 0.4913,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1194,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.1449,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     },
+     "1": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 789,
+       "mode_key_share": 0.0735,
+       "worst_acc_two_sided": 0.4715,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1211,
+       "mode_key_share": 0.0017,
+       "worst_acc_two_sided": 0.1544,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     },
+     "2": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 794,
+       "mode_key_share": 0.0189,
+       "worst_acc_two_sided": 0.1662,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1206,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.0373,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     },
+     "3": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 813,
+       "mode_key_share": 0.016,
+       "worst_acc_two_sided": 0.1685,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1187,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.0362,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     },
+     "4": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 815,
+       "mode_key_share": 0.0074,
+       "worst_acc_two_sided": 0.0479,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1185,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.0008,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     },
+     "5": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 815,
+       "mode_key_share": 0.0074,
+       "worst_acc_two_sided": 0.0356,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1185,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.0059,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     },
+     "6": {
+      "ask=position": {
+       "chance": 0.0,
+       "items": 790,
+       "mode_key_share": 0.0051,
+       "worst_acc_two_sided": 0.0127,
+       "worst_heuristic": "X:first two letters only"
+      },
+      "ask=word": {
+       "chance": 0.0,
+       "items": 1210,
+       "mode_key_share": 0.0008,
+       "worst_acc_two_sided": 0.0008,
+       "worst_heuristic": "X:first letter right, rest sorted"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.4913,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:first two letters only",
+     "shape": "ask=position"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 1,
+     "shape": "ask=position",
+     "share": 0.0735
+    }
+   },
+   "revised": false
+  },
+  "R2.expression_eval": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 982,
+       "mode_key_share": 0.0295,
+       "worst_acc_two_sided": 0.0265,
+       "worst_heuristic": "X:sum of all numbers"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1018,
+       "mode_key_share": 0.0383,
+       "worst_acc_two_sided": 0.0275,
+       "worst_heuristic": "X:sum of all numbers"
+      }
+     },
+     "1": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 988,
+       "mode_key_share": 0.0253,
+       "worst_acc_two_sided": 0.0182,
+       "worst_heuristic": "B:first number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1012,
+       "mode_key_share": 0.0257,
+       "worst_acc_two_sided": 0.0119,
+       "worst_heuristic": "B:first number in the question"
+      }
+     },
+     "2": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 997,
+       "mode_key_share": 0.0361,
+       "worst_acc_two_sided": 0.012,
+       "worst_heuristic": "X:largest number"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1003,
+       "mode_key_share": 0.016,
+       "worst_acc_two_sided": 0.012,
+       "worst_heuristic": "X:largest number"
+      }
+     },
+     "3": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 1001,
+       "mode_key_share": 0.023,
+       "worst_acc_two_sided": 0.011,
+       "worst_heuristic": "X:largest number"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 999,
+       "mode_key_share": 0.023,
+       "worst_acc_two_sided": 0.012,
+       "worst_heuristic": "X:largest number"
+      }
+     },
+     "4": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 971,
+       "mode_key_share": 0.0072,
+       "worst_acc_two_sided": 0.0031,
+       "worst_heuristic": "X:largest number"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1029,
+       "mode_key_share": 0.0117,
+       "worst_acc_two_sided": 0.0019,
+       "worst_heuristic": "B:largest number in the question"
+      }
+     },
+     "5": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 980,
+       "mode_key_share": 0.0092,
+       "worst_acc_two_sided": 0.002,
+       "worst_heuristic": "B:first number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1020,
+       "mode_key_share": 0.0059,
+       "worst_acc_two_sided": 0.0039,
+       "worst_heuristic": "B:last number in the question"
+      }
+     },
+     "6": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 961,
+       "mode_key_share": 0.0083,
+       "worst_acc_two_sided": 0.001,
+       "worst_heuristic": "B:first number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1039,
+       "mode_key_share": 0.0125,
+       "worst_acc_two_sided": 0.0019,
+       "worst_heuristic": "B:first number in the question"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.0275,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:sum of all numbers",
+     "shape": "convention=ranked"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "convention=ranked",
+     "share": 0.0383
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 987,
+       "mode_key_share": 0.0415,
+       "worst_acc_two_sided": 0.0152,
+       "worst_heuristic": "B:largest number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1013,
+       "mode_key_share": 0.0197,
+       "worst_acc_two_sided": 0.0227,
+       "worst_heuristic": "B:first number in the question"
+      }
+     },
+     "1": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 972,
+       "mode_key_share": 0.0309,
+       "worst_acc_two_sided": 0.0113,
+       "worst_heuristic": "B:last number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1028,
+       "mode_key_share": 0.0165,
+       "worst_acc_two_sided": 0.0136,
+       "worst_heuristic": "B:first number in the question"
+      }
+     },
+     "2": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 1030,
+       "mode_key_share": 0.0282,
+       "worst_acc_two_sided": 0.0068,
+       "worst_heuristic": "B:last number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 970,
+       "mode_key_share": 0.0124,
+       "worst_acc_two_sided": 0.0093,
+       "worst_heuristic": "B:largest number in the question"
+      }
+     },
+     "3": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 993,
+       "mode_key_share": 0.0211,
+       "worst_acc_two_sided": 0.007,
+       "worst_heuristic": "B:last number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1007,
+       "mode_key_share": 0.0119,
+       "worst_acc_two_sided": 0.0129,
+       "worst_heuristic": "B:first number in the question"
+      }
+     },
+     "4": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 993,
+       "mode_key_share": 0.0151,
+       "worst_acc_two_sided": 0.003,
+       "worst_heuristic": "B:last number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1007,
+       "mode_key_share": 0.004,
+       "worst_acc_two_sided": 0.002,
+       "worst_heuristic": "B:last number in the question"
+      }
+     },
+     "5": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 994,
+       "mode_key_share": 0.0091,
+       "worst_acc_two_sided": 0.002,
+       "worst_heuristic": "B:first number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 1006,
+       "mode_key_share": 0.004,
+       "worst_acc_two_sided": 0.001,
+       "worst_heuristic": "B:largest number in the question"
+      }
+     },
+     "6": {
+      "convention=left_to_right": {
+       "chance": 0.0,
+       "items": 1009,
+       "mode_key_share": 0.0099,
+       "worst_acc_two_sided": 0.002,
+       "worst_heuristic": "B:first number in the question"
+      },
+      "convention=ranked": {
+       "chance": 0.0,
+       "items": 991,
+       "mode_key_share": 0.004,
+       "worst_acc_two_sided": 0.003,
+       "worst_heuristic": "B:first number in the question"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.0227,
+     "chance": 0.0,
+     "level": 0,
+     "name": "B:first number in the question",
+     "shape": "convention=ranked"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "convention=left_to_right",
+     "share": 0.0415
+    }
+   },
+   "revised": true
+  },
+  "R2.gcd_euclid": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 994,
+       "mode_key_share": 0.0905,
+       "worst_acc_two_sided": 0.1348,
+       "worst_heuristic": "X:a mod b"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 1006,
+       "mode_key_share": 0.003,
+       "worst_acc_two_sided": 0.1252,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "1": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 1006,
+       "mode_key_share": 0.0636,
+       "worst_acc_two_sided": 0.1153,
+       "worst_heuristic": "X:b - (a mod b)"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 994,
+       "mode_key_share": 0.002,
+       "worst_acc_two_sided": 0.1087,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "2": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 1010,
+       "mode_key_share": 0.0535,
+       "worst_acc_two_sided": 0.102,
+       "worst_heuristic": "X:b - (a mod b)"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 990,
+       "mode_key_share": 0.002,
+       "worst_acc_two_sided": 0.0848,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "3": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 996,
+       "mode_key_share": 0.0452,
+       "worst_acc_two_sided": 0.0713,
+       "worst_heuristic": "X:b - (a mod b)"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 1004,
+       "mode_key_share": 0.002,
+       "worst_acc_two_sided": 0.0807,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "4": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 1012,
+       "mode_key_share": 0.0356,
+       "worst_acc_two_sided": 0.082,
+       "worst_heuristic": "X:b - (a mod b)"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 988,
+       "mode_key_share": 0.002,
+       "worst_acc_two_sided": 0.0577,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "5": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 964,
+       "mode_key_share": 0.0301,
+       "worst_acc_two_sided": 0.0602,
+       "worst_heuristic": "X:b - (a mod b)"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 1036,
+       "mode_key_share": 0.0019,
+       "worst_acc_two_sided": 0.0512,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "6": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 1009,
+       "mode_key_share": 0.0268,
+       "worst_acc_two_sided": 0.0585,
+       "worst_heuristic": "X:a mod b"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 991,
+       "mode_key_share": 0.002,
+       "worst_acc_two_sided": 0.0454,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.1348,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:a mod b",
+     "shape": "ask=gcd"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=gcd",
+     "share": 0.0905
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 974,
+       "mode_key_share": 0.0842,
+       "worst_acc_two_sided": 0.8696,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 1026,
+       "mode_key_share": 0.0156,
+       "worst_acc_two_sided": 0.2632,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "1": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 1009,
+       "mode_key_share": 0.0624,
+       "worst_acc_two_sided": 0.8196,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 991,
+       "mode_key_share": 0.0091,
+       "worst_acc_two_sided": 0.218,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      }
+     },
+     "2": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 640,
+       "mode_key_share": 0.0547,
+       "worst_acc_two_sided": 0.725,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 696,
+       "mode_key_share": 0.0057,
+       "worst_acc_two_sided": 0.1595,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      },
+      "ask=steps": {
+       "chance": 0.0,
+       "items": 664,
+       "mode_key_share": 0.3163,
+       "worst_acc_two_sided": 0.3163,
+       "worst_heuristic": "A:3"
+      }
+     },
+     "3": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 669,
+       "mode_key_share": 0.0568,
+       "worst_acc_two_sided": 0.7175,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 704,
+       "mode_key_share": 0.0043,
+       "worst_acc_two_sided": 0.1222,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      },
+      "ask=steps": {
+       "chance": 0.0,
+       "items": 627,
+       "mode_key_share": 0.3158,
+       "worst_acc_two_sided": 0.3158,
+       "worst_heuristic": "A:3"
+      }
+     },
+     "4": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 657,
+       "mode_key_share": 0.0381,
+       "worst_acc_two_sided": 0.6271,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 680,
+       "mode_key_share": 0.0044,
+       "worst_acc_two_sided": 0.1574,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      },
+      "ask=steps": {
+       "chance": 0.0,
+       "items": 663,
+       "mode_key_share": 0.3484,
+       "worst_acc_two_sided": 0.3484,
+       "worst_heuristic": "X:4"
+      }
+     },
+     "5": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 666,
+       "mode_key_share": 0.033,
+       "worst_acc_two_sided": 0.6291,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 666,
+       "mode_key_share": 0.006,
+       "worst_acc_two_sided": 0.1201,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      },
+      "ask=steps": {
+       "chance": 0.0,
+       "items": 668,
+       "mode_key_share": 0.3084,
+       "worst_acc_two_sided": 0.3084,
+       "worst_heuristic": "A:3"
+      }
+     },
+     "6": {
+      "ask=gcd": {
+       "chance": 0.0,
+       "items": 650,
+       "mode_key_share": 0.0323,
+       "worst_acc_two_sided": 0.6277,
+       "worst_heuristic": "X:common small primes (2,3,5,7) product"
+      },
+      "ask=lcm": {
+       "chance": 0.0,
+       "items": 669,
+       "mode_key_share": 0.003,
+       "worst_acc_two_sided": 0.1016,
+       "worst_heuristic": "X:a*b/(a mod b)"
+      },
+      "ask=steps": {
+       "chance": 0.0,
+       "items": 681,
+       "mode_key_share": 0.2981,
+       "worst_acc_two_sided": 0.3436,
+       "worst_heuristic": "X:digits of b"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.8696,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:common small primes (2,3,5,7) product",
+     "shape": "ask=gcd"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 4,
+     "shape": "ask=steps",
+     "share": 0.3484
+    }
+   },
+   "revised": true
+  },
+  "R2.hamming_error_position": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.085,
+       "worst_acc_two_sided": 0.1265,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.108,
+       "worst_acc_two_sided": 0.236,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0975,
+       "worst_acc_two_sided": 0.2205,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0935,
+       "worst_acc_two_sided": 0.1685,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.105,
+       "worst_acc_two_sided": 0.181,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0995,
+       "worst_acc_two_sided": 0.1645,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.115,
+       "worst_acc_two_sided": 0.1585,
+       "worst_heuristic": "A:lowest failing check"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.236,
+     "chance": 0.0,
+     "level": 1,
+     "name": "A:lowest failing check",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 6,
+     "shape": "",
+     "share": 0.115
+    }
+   },
+   "revised": false
+  },
+  "R2.hash_probe": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 510,
+       "mode_key_share": 0.3275,
+       "worst_acc_two_sided": 0.3275,
+       "worst_heuristic": "X:keys before it"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1490,
+       "mode_key_share": 0.1812,
+       "worst_acc_two_sided": 0.6188,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "1": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 512,
+       "mode_key_share": 0.3379,
+       "worst_acc_two_sided": 0.3379,
+       "worst_heuristic": "X:keys before it"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1488,
+       "mode_key_share": 0.1573,
+       "worst_acc_two_sided": 0.6102,
+       "worst_heuristic": "X:insertion index"
+      }
+     },
+     "2": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 539,
+       "mode_key_share": 0.2709,
+       "worst_acc_two_sided": 0.2709,
+       "worst_heuristic": "X:number of keys"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1461,
+       "mode_key_share": 0.1424,
+       "worst_acc_two_sided": 0.5099,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "3": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 502,
+       "mode_key_share": 0.2749,
+       "worst_acc_two_sided": 0.2749,
+       "worst_heuristic": "X:number of keys"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1498,
+       "mode_key_share": 0.1168,
+       "worst_acc_two_sided": 0.528,
+       "worst_heuristic": "X:insertion index"
+      }
+     },
+     "4": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 469,
+       "mode_key_share": 0.258,
+       "worst_acc_two_sided": 0.258,
+       "worst_heuristic": "X:keys before it"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1531,
+       "mode_key_share": 0.111,
+       "worst_acc_two_sided": 0.5761,
+       "worst_heuristic": "X:insertion index"
+      }
+     },
+     "5": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 527,
+       "mode_key_share": 0.2049,
+       "worst_acc_two_sided": 0.2049,
+       "worst_heuristic": "X:number of keys"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1473,
+       "mode_key_share": 0.112,
+       "worst_acc_two_sided": 0.4997,
+       "worst_heuristic": "X:insertion index"
+      }
+     },
+     "6": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 520,
+       "mode_key_share": 0.2135,
+       "worst_acc_two_sided": 0.2058,
+       "worst_heuristic": "X:keys before it"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1480,
+       "mode_key_share": 0.0946,
+       "worst_acc_two_sided": 0.5527,
+       "worst_heuristic": "X:insertion index"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6188,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:home + earlier keys with the same home",
+     "shape": "ask=slot"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 1,
+     "shape": "ask=probes",
+     "share": 0.3379
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 541,
+       "mode_key_share": 0.4418,
+       "worst_acc_two_sided": 0.6396,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1459,
+       "mode_key_share": 0.1624,
+       "worst_acc_two_sided": 0.7862,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "1": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 518,
+       "mode_key_share": 0.5579,
+       "worst_acc_two_sided": 0.7085,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1482,
+       "mode_key_share": 0.1302,
+       "worst_acc_two_sided": 0.7982,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "2": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 488,
+       "mode_key_share": 0.457,
+       "worst_acc_two_sided": 0.6004,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1512,
+       "mode_key_share": 0.1204,
+       "worst_acc_two_sided": 0.7116,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "3": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 517,
+       "mode_key_share": 0.4217,
+       "worst_acc_two_sided": 0.5899,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1483,
+       "mode_key_share": 0.1079,
+       "worst_acc_two_sided": 0.6682,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "4": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 482,
+       "mode_key_share": 0.4025,
+       "worst_acc_two_sided": 0.5726,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1518,
+       "mode_key_share": 0.0988,
+       "worst_acc_two_sided": 0.7246,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "5": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 471,
+       "mode_key_share": 0.3949,
+       "worst_acc_two_sided": 0.5329,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1529,
+       "mode_key_share": 0.0974,
+       "worst_acc_two_sided": 0.6763,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     },
+     "6": {
+      "ask=probes": {
+       "chance": 0.0,
+       "items": 481,
+       "mode_key_share": 0.3992,
+       "worst_acc_two_sided": 0.5759,
+       "worst_heuristic": "X:earlier keys with the same home + 1"
+      },
+      "ask=slot": {
+       "chance": 0.0,
+       "items": 1519,
+       "mode_key_share": 0.0876,
+       "worst_acc_two_sided": 0.7117,
+       "worst_heuristic": "X:home + earlier keys with the same home"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.7982,
+     "chance": 0.0,
+     "level": 1,
+     "name": "X:home + earlier keys with the same home",
+     "shape": "ask=slot"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 1,
+     "shape": "ask=probes",
+     "share": 0.5579
+    }
+   },
+   "revised": true
+  },
+  "R2.interval_scheduling": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.257,
+       "worst_acc_two_sided": 0.392,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.244,
+       "worst_acc_two_sided": 0.3825,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2405,
+       "worst_acc_two_sided": 0.3225,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2325,
+       "worst_acc_two_sided": 0.317,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2305,
+       "worst_acc_two_sided": 0.275,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.221,
+       "worst_acc_two_sided": 0.2585,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.213,
+       "worst_acc_two_sided": 0.213,
+       "worst_heuristic": "X:meetings in written order, keep if no clash"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.392,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:meetings in written order, keep if no clash",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.257
+    }
+   },
+   "revised": false
+  },
+  "R2.lcs_length": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2485,
+       "worst_acc_two_sided": 0.469,
+       "worst_heuristic": "X:greedy matching, better of both directions"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2425,
+       "worst_acc_two_sided": 0.3685,
+       "worst_heuristic": "X:greedy matching, better of both directions"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.229,
+       "worst_acc_two_sided": 0.291,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.192,
+       "worst_acc_two_sided": 0.2825,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1825,
+       "worst_acc_two_sided": 0.2505,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1785,
+       "worst_acc_two_sided": 0.226,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.156,
+       "worst_acc_two_sided": 0.193,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.469,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:greedy matching, better of both directions",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.2485
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.289,
+       "worst_acc_two_sided": 0.6215,
+       "worst_heuristic": "X:greedy matching, better of both directions"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2935,
+       "worst_acc_two_sided": 0.537,
+       "worst_heuristic": "X:greedy matching, better of both directions"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.248,
+       "worst_acc_two_sided": 0.4715,
+       "worst_heuristic": "X:greedy matching, better of both directions"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2495,
+       "worst_acc_two_sided": 0.376,
+       "worst_heuristic": "X:greedy matching, better of both directions"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.234,
+       "worst_acc_two_sided": 0.3235,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.21,
+       "worst_acc_two_sided": 0.286,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.225,
+       "worst_acc_two_sided": 0.269,
+       "worst_heuristic": "X:overlap minus 2"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6215,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:greedy matching, better of both directions",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 1,
+     "shape": "",
+     "share": 0.2935
+    }
+   },
+   "revised": true
+  },
+  "R2.lis_length": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1855,
+       "worst_acc_two_sided": 0.3745,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1645,
+       "worst_acc_two_sided": 0.338,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1245,
+       "worst_acc_two_sided": 0.2955,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1165,
+       "worst_acc_two_sided": 0.305,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.113,
+       "worst_acc_two_sided": 0.2415,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.101,
+       "worst_acc_two_sided": 0.2375,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0835,
+       "worst_acc_two_sided": 0.227,
+       "worst_heuristic": "A:ascents + 1"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.3745,
+     "chance": 0.0,
+     "level": 0,
+     "name": "A:ascents + 1",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.1855
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.32,
+       "worst_acc_two_sided": 0.3895,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 2"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.3025,
+       "worst_acc_two_sided": 0.3705,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 2"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.314,
+       "worst_acc_two_sided": 0.3515,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 2"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2995,
+       "worst_acc_two_sided": 0.3235,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 2"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.326,
+       "worst_acc_two_sided": 0.323,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 2"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.323,
+       "worst_acc_two_sided": 0.33,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 3"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2865,
+       "worst_acc_two_sided": 0.3075,
+       "worst_heuristic": "X:round(2*sqrt(n)) - 3"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.3895,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:round(2*sqrt(n)) - 2",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 4,
+     "shape": "",
+     "share": 0.326
+    }
+   },
+   "revised": true
+  },
+  "R2.longest_palindromic_substring": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.147,
+       "worst_acc_two_sided": 0.5145,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1445,
+       "worst_acc_two_sided": 0.5135,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.147,
+       "worst_acc_two_sided": 0.515,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1505,
+       "worst_acc_two_sided": 0.548,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.148,
+       "worst_acc_two_sided": 0.5315,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.143,
+       "worst_acc_two_sided": 0.516,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.151,
+       "worst_acc_two_sided": 0.516,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.548,
+     "chance": 0.0,
+     "level": 3,
+     "name": "X:longest odd-length palindrome only",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 6,
+     "shape": "",
+     "share": 0.151
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.299,
+       "worst_acc_two_sided": 0.611,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.24,
+       "worst_acc_two_sided": 0.5205,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.215,
+       "worst_acc_two_sided": 0.601,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1685,
+       "worst_acc_two_sided": 0.505,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1505,
+       "worst_acc_two_sided": 0.5775,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1425,
+       "worst_acc_two_sided": 0.5265,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.154,
+       "worst_acc_two_sided": 0.595,
+       "worst_heuristic": "X:longest odd-length palindrome only"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.611,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:longest odd-length palindrome only",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.299
+    }
+   },
+   "revised": true
+  },
+  "R2.luhn_check": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 1002,
+       "mode_key_share": 0.1238,
+       "worst_acc_two_sided": 0.1337,
+       "worst_heuristic": "X:check digit without subtracting 9"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 998,
+       "mode_key_share": 0.515,
+       "worst_acc_two_sided": 0.522,
+       "worst_heuristic": "X:last digit even"
+      }
+     },
+     "1": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 988,
+       "mode_key_share": 0.1184,
+       "worst_acc_two_sided": 0.1134,
+       "worst_heuristic": "X:last payload digit"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1012,
+       "mode_key_share": 0.5059,
+       "worst_acc_two_sided": 0.5178,
+       "worst_heuristic": "A:plain digit sum is a multiple of 10"
+      }
+     },
+     "2": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 1039,
+       "mode_key_share": 0.1107,
+       "worst_acc_two_sided": 0.102,
+       "worst_heuristic": "A:plain digit-sum check digit"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 961,
+       "mode_key_share": 0.5047,
+       "worst_acc_two_sided": 0.5505,
+       "worst_heuristic": "X:Luhn without subtracting 9"
+      }
+     },
+     "3": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 1015,
+       "mode_key_share": 0.1202,
+       "worst_acc_two_sided": 0.1103,
+       "worst_heuristic": "A:plain digit-sum check digit"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 985,
+       "mode_key_share": 0.5208,
+       "worst_acc_two_sided": 0.5452,
+       "worst_heuristic": "A:plain digit sum is a multiple of 10"
+      }
+     },
+     "4": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 1003,
+       "mode_key_share": 0.1236,
+       "worst_acc_two_sided": 0.1087,
+       "worst_heuristic": "X:Luhn total of the payload mod 10"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 997,
+       "mode_key_share": 0.5135,
+       "worst_acc_two_sided": 0.5356,
+       "worst_heuristic": "X:Luhn without subtracting 9"
+      }
+     },
+     "5": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 994,
+       "mode_key_share": 0.1167,
+       "worst_acc_two_sided": 0.1237,
+       "worst_heuristic": "X:check digit with doubling parity wrong"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 1006,
+       "mode_key_share": 0.5119,
+       "worst_acc_two_sided": 0.5408,
+       "worst_heuristic": "X:Luhn without subtracting 9"
+      }
+     },
+     "6": {
+      "ask=check_digit": {
+       "chance": 0.0,
+       "items": 1022,
+       "mode_key_share": 0.1155,
+       "worst_acc_two_sided": 0.1155,
+       "worst_heuristic": "A:plain digit-sum check digit"
+      },
+      "ask=valid": {
+       "chance": 0.5,
+       "items": 978,
+       "mode_key_share": 0.5051,
+       "worst_acc_two_sided": 0.5613,
+       "worst_heuristic": "X:Luhn without subtracting 9"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.1337,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:check digit without subtracting 9",
+     "shape": "ask=check_digit"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=check_digit",
+     "share": 0.1238
+    }
+   },
+   "revised": false
+  },
+  "R2.max_subarray_sum": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.06,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0605,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.063,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.058,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0625,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0615,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.059,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:largest single number"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.0,
+     "chance": 0.0,
+     "level": -1,
+     "name": "",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 2,
+     "shape": "",
+     "share": 0.063
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.106,
+       "worst_acc_two_sided": 0.5735,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0815,
+       "worst_acc_two_sided": 0.57,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0665,
+       "worst_acc_two_sided": 0.5145,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.064,
+       "worst_acc_two_sided": 0.472,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0525,
+       "worst_acc_two_sided": 0.4435,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.051,
+       "worst_acc_two_sided": 0.3875,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.046,
+       "worst_acc_two_sided": 0.345,
+       "worst_heuristic": "X:best run of non-negative numbers"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.5735,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:best run of non-negative numbers",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.106
+    }
+   },
+   "revised": true
+  },
+  "R2.merge_smallest_cost": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.018,
+       "worst_acc_two_sided": 0.3205,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0115,
+       "worst_acc_two_sided": 0.0835,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.009,
+       "worst_acc_two_sided": 0.014,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.008,
+       "worst_acc_two_sided": 0.0255,
+       "worst_heuristic": "X:sum * ceil(log2 n)"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0065,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:join in written order"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0055,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:join in written order"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.005,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:join in written order"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.3205,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:join in ascending order (chain)",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.018
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.041,
+       "worst_acc_two_sided": 0.7255,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0235,
+       "worst_acc_two_sided": 0.306,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.015,
+       "worst_acc_two_sided": 0.0765,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0135,
+       "worst_acc_two_sided": 0.0095,
+       "worst_heuristic": "X:join in ascending order (chain)"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.011,
+       "worst_acc_two_sided": 0.015,
+       "worst_heuristic": "X:sum * ceil(log2 n)"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0085,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:join in written order"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.007,
+       "worst_acc_two_sided": 0.0,
+       "worst_heuristic": "A:join in written order"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.7255,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:join in ascending order (chain)",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.041
+    }
+   },
+   "revised": true
+  },
+  "R2.min_heap_ops": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.159,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.071,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.0382,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.0109,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.0071,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.003,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0005,
+       "worst_acc_two_sided": 0.002,
+       "worst_heuristic": "X:minimum swapped to the front"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.159,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:minimum swapped to the front",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.0005
+    }
+   },
+   "revised": false
+  },
+  "R2.modular_power": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1075,
+       "worst_acc_two_sided": 0.3195,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0965,
+       "worst_acc_two_sided": 0.307,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0735,
+       "worst_acc_two_sided": 0.235,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0675,
+       "worst_acc_two_sided": 0.195,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0685,
+       "worst_acc_two_sided": 0.188,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0585,
+       "worst_acc_two_sided": 0.186,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.064,
+       "worst_acc_two_sided": 0.195,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.3195,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.1075
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.2045,
+       "worst_acc_two_sided": 0.6975,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.103,
+       "worst_acc_two_sided": 0.577,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.1035,
+       "worst_acc_two_sided": 0.5205,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.081,
+       "worst_acc_two_sided": 0.4875,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0745,
+       "worst_acc_two_sided": 0.4895,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.071,
+       "worst_acc_two_sided": 0.454,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.0,
+       "items": 2000,
+       "mode_key_share": 0.0465,
+       "worst_acc_two_sided": 0.4555,
+       "worst_heuristic": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.6975,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:a^(e mod (m-1)) mod m (Fermat, valid only for prime m)",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "",
+     "share": 0.2045
+    }
+   },
+   "revised": true
+  },
+  "R2.prime_factor_query": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 1000,
+       "mode_key_share": 0.095,
+       "worst_acc_two_sided": 0.011,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1000,
+       "mode_key_share": 0.029,
+       "worst_acc_two_sided": 0.028,
+       "worst_heuristic": "X:largest prime factor * 2"
+      }
+     },
+     "1": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 1000,
+       "mode_key_share": 0.065,
+       "worst_acc_two_sided": 0.02,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1000,
+       "mode_key_share": 0.015,
+       "worst_acc_two_sided": 0.006,
+       "worst_heuristic": "X:n mod 100"
+      }
+     },
+     "2": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 1014,
+       "mode_key_share": 0.0651,
+       "worst_acc_two_sided": 0.0158,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 986,
+       "mode_key_share": 0.0152,
+       "worst_acc_two_sided": 0.0091,
+       "worst_heuristic": "X:n mod 100"
+      }
+     },
+     "3": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 993,
+       "mode_key_share": 0.0614,
+       "worst_acc_two_sided": 0.0121,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1007,
+       "mode_key_share": 0.0189,
+       "worst_acc_two_sided": 0.0149,
+       "worst_heuristic": "X:n mod 100"
+      }
+     },
+     "4": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 968,
+       "mode_key_share": 0.0682,
+       "worst_acc_two_sided": 0.0155,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1032,
+       "mode_key_share": 0.0194,
+       "worst_acc_two_sided": 0.0136,
+       "worst_heuristic": "X:n mod 100"
+      }
+     },
+     "5": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 978,
+       "mode_key_share": 0.0767,
+       "worst_acc_two_sided": 0.0164,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1022,
+       "mode_key_share": 0.0166,
+       "worst_acc_two_sided": 0.0088,
+       "worst_heuristic": "X:n mod 100"
+      }
+     },
+     "6": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 964,
+       "mode_key_share": 0.0612,
+       "worst_acc_two_sided": 0.0176,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1036,
+       "mode_key_share": 0.0135,
+       "worst_acc_two_sided": 0.0048,
+       "worst_heuristic": "X:largest prime factor * 2"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.028,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:largest prime factor * 2",
+     "shape": "ask=sum_all"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 0,
+     "shape": "ask=largest",
+     "share": 0.095
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 995,
+       "mode_key_share": 0.206,
+       "worst_acc_two_sided": 0.009,
+       "worst_heuristic": "X:isqrt(n)"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1005,
+       "mode_key_share": 0.0388,
+       "worst_acc_two_sided": 0.8348,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     },
+     "1": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 1051,
+       "mode_key_share": 0.2055,
+       "worst_acc_two_sided": 0.0143,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 949,
+       "mode_key_share": 0.0253,
+       "worst_acc_two_sided": 0.6965,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     },
+     "2": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 977,
+       "mode_key_share": 0.2139,
+       "worst_acc_two_sided": 0.0164,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1023,
+       "mode_key_share": 0.0235,
+       "worst_acc_two_sided": 0.7107,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     },
+     "3": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 989,
+       "mode_key_share": 0.1871,
+       "worst_acc_two_sided": 0.0172,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1011,
+       "mode_key_share": 0.0218,
+       "worst_acc_two_sided": 0.7122,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     },
+     "4": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 966,
+       "mode_key_share": 0.1925,
+       "worst_acc_two_sided": 0.0248,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1034,
+       "mode_key_share": 0.0203,
+       "worst_acc_two_sided": 0.7466,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     },
+     "5": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 982,
+       "mode_key_share": 0.164,
+       "worst_acc_two_sided": 0.0183,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 1018,
+       "mode_key_share": 0.0196,
+       "worst_acc_two_sided": 0.7613,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     },
+     "6": {
+      "ask=largest": {
+       "chance": 0.0,
+       "items": 1044,
+       "mode_key_share": 0.2146,
+       "worst_acc_two_sided": 0.0172,
+       "worst_heuristic": "X:n mod 100"
+      },
+      "ask=sum_all": {
+       "chance": 0.0,
+       "items": 956,
+       "mode_key_share": 0.0178,
+       "worst_acc_two_sided": 0.6088,
+       "worst_heuristic": "X:sum of distinct prime factors"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.8348,
+     "chance": 0.0,
+     "level": 0,
+     "name": "X:sum of distinct prime factors",
+     "shape": "ask=sum_all"
+    },
+    "worst_mode": {
+     "chance": 0.0,
+     "level": 6,
+     "shape": "ask=largest",
+     "share": 0.2146
+    }
+   },
+   "revised": true
+  },
+  "R2.subtraction_game": {
+   "after": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5115,
+       "worst_acc_two_sided": 0.5935,
+       "worst_heuristic": "B:(n1 mod (max+1)) xor (n2 mod (max+1)) nonzero"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.504,
+       "worst_acc_two_sided": 0.576,
+       "worst_heuristic": "B:(n1 mod (max+1)) xor (n2 mod (max+1)) nonzero"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5035,
+       "worst_acc_two_sided": 0.5605,
+       "worst_heuristic": "B:(n1 mod (max+1)) xor (n2 mod (max+1)) nonzero"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5155,
+       "worst_acc_two_sided": 0.547,
+       "worst_heuristic": "A:n odd"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5025,
+       "worst_acc_two_sided": 0.5535,
+       "worst_heuristic": "X:number of moves is odd"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5105,
+       "worst_acc_two_sided": 0.5645,
+       "worst_heuristic": "A:n odd"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.504,
+       "worst_acc_two_sided": 0.528,
+       "worst_heuristic": "A:n odd"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.5935,
+     "chance": 0.5,
+     "level": 0,
+     "name": "B:(n1 mod (max+1)) xor (n2 mod (max+1)) nonzero",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.5,
+     "level": 3,
+     "shape": "",
+     "share": 0.5155
+    }
+   },
+   "before": {
+    "per_level_and_shape": {
+     "0": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5215,
+       "worst_acc_two_sided": 0.6135,
+       "worst_heuristic": "A:n mod (smallest+largest) != 0"
+      }
+     },
+     "1": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5085,
+       "worst_acc_two_sided": 0.6005,
+       "worst_heuristic": "A:n mod (largest+1) != 0"
+      }
+     },
+     "2": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5125,
+       "worst_acc_two_sided": 0.618,
+       "worst_heuristic": "A:n mod (largest+1) != 0"
+      }
+     },
+     "3": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.5295,
+       "worst_acc_two_sided": 0.583,
+       "worst_heuristic": "A:n mod (smallest+largest) != 0"
+      }
+     },
+     "4": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.526,
+       "worst_acc_two_sided": 0.587,
+       "worst_heuristic": "A:n mod (smallest+largest) != 0"
+      }
+     },
+     "5": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.524,
+       "worst_acc_two_sided": 0.622,
+       "worst_heuristic": "A:n mod (largest+1) != 0"
+      }
+     },
+     "6": {
+      "": {
+       "chance": 0.5,
+       "items": 2000,
+       "mode_key_share": 0.51,
+       "worst_acc_two_sided": 0.5965,
+       "worst_heuristic": "A:n mod (largest+1) != 0"
+      }
+     }
+    },
+    "worst_heuristic": {
+     "acc": 0.622,
+     "chance": 0.5,
+     "level": 5,
+     "name": "A:n mod (largest+1) != 0",
+     "shape": ""
+    },
+    "worst_mode": {
+     "chance": 0.5,
+     "level": 3,
+     "shape": "",
+     "share": 0.5295
+    }
+   },
+   "revised": true
+  }
+ },
+ "seed": 953901
+}

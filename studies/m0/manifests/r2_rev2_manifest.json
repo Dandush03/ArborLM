@@ -1,0 +1,475 @@
+{
+ "batch": "r2_batch1_rev2",
+ "batch1_ids": [
+  "R2.binary_search_trace",
+  "R2.bracket_match",
+  "R2.bst_traversal",
+  "R2.cache_eviction",
+  "R2.cellular_automaton",
+  "R2.cheapest_network",
+  "R2.chip_toppling",
+  "R2.coin_change_min",
+  "R2.crt_smallest",
+  "R2.deferred_acceptance_partner",
+  "R2.dictionary_rank",
+  "R2.expression_eval",
+  "R2.gcd_euclid",
+  "R2.hamming_error_position",
+  "R2.hash_probe",
+  "R2.interval_scheduling",
+  "R2.lcs_length",
+  "R2.lis_length",
+  "R2.longest_palindromic_substring",
+  "R2.luhn_check",
+  "R2.max_subarray_sum",
+  "R2.merge_smallest_cost",
+  "R2.min_heap_ops",
+  "R2.modular_power",
+  "R2.prime_factor_query",
+  "R2.subtraction_game"
+ ],
+ "capacity": {
+  "G": 19,
+  "G_derivation": "the auditor's strict map has 38 clusters over the 42 R2 lineages (lineages_r2_clusters.strict_clusters); two parts of 19 clusters each",
+  "demand_rule": "core level: 10 x (ceil(24,000 / G) + 100) = 13640; reserve level: 10 x 100 = 1000 (ADR-0033 section 6.2, same arithmetic as lineage_gates.demand_at_g with G = 19 instead of 300)",
+  "levels_failing_after": {},
+  "per_lineage": {
+   "R2.binary_search_trace": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.bracket_match": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.bst_traversal": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.cache_eviction": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.cellular_automaton": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.cheapest_network": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.chip_toppling": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.coin_change_min": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     1,
+     2
+    ],
+    "revised": true
+   },
+   "R2.crt_smallest": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     1,
+     2
+    ],
+    "revised": true
+   },
+   "R2.deferred_acceptance_partner": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.dictionary_rank": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.expression_eval": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.gcd_euclid": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     1
+    ],
+    "revised": true
+   },
+   "R2.hamming_error_position": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.hash_probe": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.interval_scheduling": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.lcs_length": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.lis_length": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.longest_palindromic_substring": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.luhn_check": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.max_subarray_sum": {
+    "levels_failed_after": [],
+    "levels_failed_before": [],
+    "revised": true
+   },
+   "R2.merge_smallest_cost": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     0,
+     1
+    ],
+    "revised": true
+   },
+   "R2.min_heap_ops": {
+    "levels_failed_after": [],
+    "levels_failed_before": null,
+    "revised": false
+   },
+   "R2.modular_power": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     1
+    ],
+    "revised": true
+   },
+   "R2.prime_factor_query": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "revised": true
+   },
+   "R2.subtraction_game": {
+    "levels_failed_after": [],
+    "levels_failed_before": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "revised": true
+   }
+  },
+  "reading": "R-5: distinct canonical STRUCTURED forms (names relabelled by first appearance, presentation order dropped where the answer does not depend on it); lower bound from 2*need+1000 draws"
+ },
+ "clusters": {
+  "disagreements": "Author's notes beside the auditor's strict map (they do not un-merge anything):\n1. to_base + from_base. Division gives digits right to left and Horner evaluates left to right, so on the lenient reading they are two procedures; the auditor's strict reading (number system and final question\n   are parameters) and the batch's own dictionary_rank (one lineage for rank and unrank) point the same way. No objection to the merge.\n2. permutation_power + modular_power. The batch-1 note kept them apart because square-and-multiply applies only to modular_power. The batch's own rejection log ('iterate a stated rule until a condition: the same strict\n   procedure as permutation_power and digit_root') is inconsistent with that note, as the auditor says; under that rule digit_root would also join this cluster. digit_root is NOT merged in the working map (the auditor\n   keeps it apart); the inconsistency is the author's, to be settled by the lead.\n3. count_letter + count_divisible and sort_list + kth_smallest: agreed.\n4. list_ops + stack_machine: the author's earlier note merged them on the strictest reading; the auditor keeps them apart (op sets and data structure differ). Not merged here.\n5. subtraction_game / coin_change_min and dictionary_rank / base conversion: the author's log implies these merges ('strictest'); the auditor lists them as near misses. They stay apart in the working map and are counted in 'strictest'.\n6. Cross-evaluation duplicates (audit section 3) are not clusters of this map (ruling R-7).\n",
+  "strict_count": 38,
+  "strict_merges": [
+   [
+    "R2.sort_list",
+    "R2.kth_smallest"
+   ],
+   [
+    "R2.count_letter",
+    "R2.count_divisible"
+   ],
+   [
+    "R2.to_base",
+    "R2.from_base"
+   ],
+   [
+    "R2.permutation_power",
+    "R2.modular_power"
+   ]
+  ],
+  "strictest_count": 36,
+  "strictest_extra": [
+   [
+    "R2.subtraction_game",
+    "R2.coin_change_min"
+   ],
+   [
+    "R2.dictionary_rank",
+    "R2.to_base"
+   ]
+  ]
+ },
+ "existing_not_edited": [
+  "R2.caesar_shift",
+  "R2.count_divisible",
+  "R2.count_letter",
+  "R2.digit_root",
+  "R2.from_base",
+  "R2.grid_sum",
+  "R2.kth_smallest",
+  "R2.list_ops",
+  "R2.multiples_between",
+  "R2.palindrome_check",
+  "R2.permutation_power",
+  "R2.run_length",
+  "R2.sort_list",
+  "R2.stack_machine",
+  "R2.string_rewrite",
+  "R2.to_base"
+ ],
+ "family_rename_in_rev2": {
+  "numtheory": "numtheory_b1"
+ },
+ "not_registered": {
+  "R2.deferred_acceptance_partner": "the audit's tells cannot be removed by construction: with independent uniform preferences 'the responder-proposing stable partner' is right on 0.68-0.77 of items (the stable matching is usually unique) and 'own first choice' on 0.46-0.56; any preference structure that makes the stable matching non-unique makes the proposer-optimal partner the proposer's first choice, and any structure that makes first choices collide makes the matching unique. The batch-1 redraw is withdrawn (R-1); n was widened to 4..7. Left out of the registered set until a construction exists."
+ },
+ "note": "Fix round after AUDIT_M0_R2_1 under LEAD_RULINGS_2 (R-1 shortcuts by construction, R-4 wording, R-5 structural capacity). No new lineages. Revised SHAPES in studies/m0/lineages_r2_rev2.py (own registry REV2); batch-1 shapes stay on file, superseded where listed. Self-checked only: not independent review, not Astra validation, not human approval. Nothing is registered in core.REGISTRY.",
+ "revised_shapes": [
+  {
+   "defect_and_fix": [
+    "shortcut R-1",
+    "fixed by construction: wrong texts swap the closing kinds of two pairs that enclose something (no adjacent wrong pair possible; counts kept); match asks about an enclosing opener, no exclusion of other partner positions; 3 kinds, 8+level pairs. Residual: 'last closer of the same kind' 0.51 at level 0, falling with level"
+   ],
+   "family_reported": "parsing",
+   "fixture_sha256": "dec1507c8fd52e1626f1298687639a4416d41166cd10739b23fb020625af3d2e",
+   "id": "R2.bracket_match",
+   "supersedes": "R2.bracket_match"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (agree logic)",
+    "fixed: `present` is FIFO only with a pool of 2*cap and a uniform asked item; no coupling to a heuristic. Residual: other-policy count 0.59 on `misses` at level 0"
+   ],
+   "family_reported": "structures",
+   "fixture_sha256": "ed6e25864ba8f31c554c3ae31211b8896ddae14be9c856f6d895447b774efcbe",
+   "id": "R2.cache_eviction",
+   "supersedes": "R2.cache_eviction"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (level 0 and per-town sums)",
+    "fixed by construction: groups of three towns with a cheap triangle each and dearer cables between groups; n-1 cheapest never right; per-town sums right only by coincidence (under 1%)"
+   ],
+   "family_reported": "graphs",
+   "fixture_sha256": "6b67b3ec556d8e4fdbc0381155ad3938552bd82c9202adf052ded0d4a7654482",
+   "id": "R2.cheapest_network",
+   "supersedes": "R2.cheapest_network"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (closed forms)",
+    "fixed by dropping `final` and `lost`; new shape `topplings_of` (order-independent per-cell count)"
+   ],
+   "family_reported": "dynamics",
+   "fixture_sha256": "f53da9927d43448f07bbaa7c8c5bad8ace6bdf16b15d700d86f6bed466da21f9",
+   "id": "R2.chip_toppling",
+   "supersedes": "R2.chip_toppling"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (greedy, ceil+1)",
+    "fixed by changing the final question to the number of ways (no greedy or bound answers it); wider space for capacity"
+   ],
+   "family_reported": "dynprog",
+   "fixture_sha256": "bc44e4bcc9322fb822a7176aade840f33077eeed66f28b18b29506b645297372",
+   "id": "R2.coin_change_min",
+   "supersedes": "R2.coin_change_min"
+  },
+  {
+   "defect_and_fix": [
+    "capacity R-5 (level 1-2 close to the demand)",
+    "widened moduli"
+   ],
+   "family_reported": "numtheory_b1",
+   "fixture_sha256": "2e1764250217fc56fd1ca7ae3ed9fba75e014e2d2ac024f246b2492d0b698963",
+   "id": "R2.crt_smallest",
+   "supersedes": "R2.crt_smallest"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1",
+    "NOT REGISTERED (see reason)"
+   ],
+   "family_reported": "graphs",
+   "fixture_sha256": "ed6de61d52fe5cb95029ed5ba7e1bca3883e25417e68b98301517118e1d1fec3",
+   "id": "R2.deferred_acceptance_partner",
+   "supersedes": "R2.deferred_acceptance_partner"
+  },
+  {
+   "defect_and_fix": [
+    "wording R-4",
+    "fixed by construction of the wording: both conventions state that the rule applies inside parentheses; ranked defines + and - as one rank worked left to right; the batch-1 redraw on the other convention's value is removed. The wrong-rule rate (evaluating under the other stated rule) is natural: about 0.8 at level 0 down to 0.4 at level 6, reported, not counted as a cue."
+   ],
+   "family_reported": "parsing",
+   "fixture_sha256": "31372793d678a64ba030f95b450b1e555c878a527c127ca1e48d0127ed1cfe73",
+   "id": "R2.expression_eval",
+   "supersedes": "R2.expression_eval"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (common small primes, steps constant)",
+    "fixed by construction: common divisor with no prime factor below 11; steps shape dropped"
+   ],
+   "family_reported": "numtheory_b1",
+   "fixture_sha256": "d980edb7810a1d56fd5da26d91b0673564a8225f0d03f15233a03390d2167ea7",
+   "id": "R2.gcd_euclid",
+   "supersedes": "R2.gcd_euclid"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1",
+    "mostly fixed by construction: m-1 of m slots filled, homes in the first third of the table, asked key uniform. Residual: 'home + earlier keys with the same home' 0.62 at level 0 (0.74-0.82 in batch 1)"
+   ],
+   "family_reported": "structures",
+   "fixture_sha256": "8cfc2bf0d799446936a0a5ce82884d75a161f4117724941ff135e072fafbbe17",
+   "id": "R2.hash_probe",
+   "supersedes": "R2.hash_probe"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (answer range)",
+    "partly fixed: planted common subsequence of uniform length, alphabet 4..6, lengths 8+level..14+2*level. Residual: constant guess 0.27 at level 0 (batch 1: 0.29); greedy matching, better of both directions, 0.47 at level 0"
+   ],
+   "family_reported": "dynprog",
+   "fixture_sha256": "062c3890e3a36a1967ba035d812a3224f562dffb7b7e2c3abe28c989b5c3bcc2",
+   "id": "R2.lcs_length",
+   "supersedes": "R2.lcs_length"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (answer range)",
+    "fixed: planted increasing subsequence of uniform length, random elsewhere, n drawn per item; constant guess at most 0.19 (batch 1: 0.33)"
+   ],
+   "family_reported": "dynprog",
+   "fixture_sha256": "2bca5df932a3b972b8812275fa2df992047b018e480b3a0bf09be47c84774419",
+   "id": "R2.lis_length",
+   "supersedes": "R2.lis_length"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (mode)",
+    "fixed: planted palindrome 3..12; constant guess at most 0.15 (batch 1: 0.30)"
+   ],
+   "family_reported": "strings",
+   "fixture_sha256": "df086327680387fa18a3a7b513d144bb1d9748360efce1ea903cd924c2b89cb0",
+   "id": "R2.longest_palindromic_substring",
+   "supersedes": "R2.longest_palindromic_substring"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (best run of non-negative numbers)",
+    "fixed by construction: planted best block across one small dip, strongly negative separators, smaller decoy runs; 'best run' accuracy 0.0"
+   ],
+   "family_reported": "dynprog",
+   "fixture_sha256": "db4bd296aefd39c2eded1da89875efb11eed94d2f50155fb24acfd421818fe33",
+   "id": "R2.max_subarray_sum",
+   "supersedes": "R2.max_subarray_sum"
+  },
+  {
+   "defect_and_fix": [
+    "wording R-4 + capacity R-5",
+    "fixed: 'any two piles'; level 0 widened to 5 piles of 1..20"
+   ],
+   "family_reported": "greedy",
+   "fixture_sha256": "882ba9261a81fd2dc9d320d4f09d0fcf34afea8ab12790772eed611a8aa2b703",
+   "id": "R2.merge_smallest_cost",
+   "supersedes": "R2.merge_smallest_cost"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (level 0, Fermat)",
+    "fixed by construction: modulus a product of two primes, e at least 2m; 'a^(e mod (m-1))' 0.32 at level 0 (0.70 in batch 1)"
+   ],
+   "family_reported": "numtheory_b1",
+   "fixture_sha256": "bbd0fb8740d63f87987098ec62727dad4b07a7c8692eb05b2c9aadf85715394e",
+   "id": "R2.modular_power",
+   "supersedes": "R2.modular_power"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (largest = pool top) + capacity R-5",
+    "fixed by construction: largest prime uniform over 17..pool, one prime repeated, 4..6 factors; capacity widened"
+   ],
+   "family_reported": "numtheory_b1",
+   "fixture_sha256": "be8b026d620ee798837bb67abfcdb64712f1ac8a193da97298c787a0bd54fe35",
+   "id": "R2.prime_factor_query",
+   "supersedes": "R2.prime_factor_query"
+  },
+  {
+   "defect_and_fix": [
+    "existing lineage string_rewrite: identity rules",
+    "fixed by construction: each pattern is a substring of the current string and differs from its replacement"
+   ],
+   "family_reported": "rewrite",
+   "fixture_sha256": "2e9fc71eedcbb7e35521997376d67aa5d0ced95b1385de2d13bc39ffb324bb2d",
+   "id": "R2.string_rewrite_nonidentity",
+   "supersedes": "R2.string_rewrite"
+  },
+  {
+   "defect_and_fix": [
+    "shortcut R-1 (residues, overshoot)",
+    "changed by construction to two piles (a position label per pile, combined by exclusive-or); the heuristic-outcome exclusion is removed; answer balanced 50/50 on the key only. Residual: 'residues of the piles xor' 0.59 at level 0, 'n mod (largest+1)' about 0.5"
+   ],
+   "family_reported": "games",
+   "fixture_sha256": "6baddcf4abf440a2e0461ef6aabcebbe08cf3a317229a0f06e2c89abe18fc6ed",
+   "id": "R2.subtraction_game",
+   "supersedes": "R2.subtraction_game"
+  },
+  {
+   "defect_and_fix": [
+    "existing lineage to_base: level 0 capacity 755",
+    "fixed: wider bases and n range"
+   ],
+   "family_reported": "base",
+   "fixture_sha256": "ac7bd680b30aa6d486bc5fb7f35bb4a207dfb847b71a6a2b0558bfa996615951",
+   "id": "R2.to_base_wide",
+   "supersedes": "R2.to_base"
+  }
+ ],
+ "superseded_shapes": {
+  "R2.bracket_match": "R2.bracket_match",
+  "R2.cache_eviction": "R2.cache_eviction",
+  "R2.cheapest_network": "R2.cheapest_network",
+  "R2.chip_toppling": "R2.chip_toppling",
+  "R2.coin_change_min": "R2.coin_change_min",
+  "R2.crt_smallest": "R2.crt_smallest",
+  "R2.deferred_acceptance_partner": "R2.deferred_acceptance_partner",
+  "R2.expression_eval": "R2.expression_eval",
+  "R2.gcd_euclid": "R2.gcd_euclid",
+  "R2.hash_probe": "R2.hash_probe",
+  "R2.lcs_length": "R2.lcs_length",
+  "R2.lis_length": "R2.lis_length",
+  "R2.longest_palindromic_substring": "R2.longest_palindromic_substring",
+  "R2.max_subarray_sum": "R2.max_subarray_sum",
+  "R2.merge_smallest_cost": "R2.merge_smallest_cost",
+  "R2.modular_power": "R2.modular_power",
+  "R2.prime_factor_query": "R2.prime_factor_query",
+  "R2.string_rewrite_nonidentity": "R2.string_rewrite",
+  "R2.subtraction_game": "R2.subtraction_game",
+  "R2.to_base_wide": "R2.to_base"
+ }
+}
