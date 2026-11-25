@@ -1,0 +1,7859 @@
+{
+ "lineages": {
+  "R2.binary_search_trace": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.3,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.016,
+     "distinct_answers": 1358,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.7,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0283,
+       "chance_on_subset": 0.0,
+       "coverage": 0.3
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.3
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.3
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0283,
+       "chance_on_subset": 0.0,
+       "coverage": 0.3
+      },
+      "the target": {
+       "accuracy": 0.1417,
+       "chance_on_subset": 0.0,
+       "coverage": 0.3,
+       "raw_accuracy": 0.1417
+      }
+     },
+     "shapes": {
+      "ask=third": 600,
+      "ask=values": 1400
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.348,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.023,
+     "distinct_answers": 1332,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.652,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0158,
+       "chance_on_subset": 0.0,
+       "coverage": 0.348
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.348
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.348
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0632,
+       "chance_on_subset": 0.0,
+       "coverage": 0.348
+      },
+      "the target": {
+       "accuracy": 0.079,
+       "chance_on_subset": 0.0,
+       "coverage": 0.348,
+       "raw_accuracy": 0.079
+      }
+     },
+     "shapes": {
+      "ask=third": 696,
+      "ask=values": 1304
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.3355,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0115,
+     "distinct_answers": 1385,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.664,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0209,
+       "chance_on_subset": 0.0,
+       "coverage": 0.336
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.336
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.336
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0075,
+       "chance_on_subset": 0.0,
+       "coverage": 0.336
+      },
+      "the target": {
+       "accuracy": 0.0373,
+       "chance_on_subset": 0.0,
+       "coverage": 0.336,
+       "raw_accuracy": 0.0373
+      }
+     },
+     "shapes": {
+      "ask=third": 671,
+      "ask=values": 1329
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.3615,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.012,
+     "distinct_answers": 1347,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.638,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0111,
+       "chance_on_subset": 0.0,
+       "coverage": 0.361
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.361
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.361
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.361
+      },
+      "the target": {
+       "accuracy": 0.0456,
+       "chance_on_subset": 0.0,
+       "coverage": 0.361,
+       "raw_accuracy": 0.0456
+      }
+     },
+     "shapes": {
+      "ask=third": 723,
+      "ask=values": 1277
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.3625,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0095,
+     "distinct_answers": 1356,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.637,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0055,
+       "chance_on_subset": 0.0,
+       "coverage": 0.362
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.362
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.362
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.362
+      },
+      "the target": {
+       "accuracy": 0.0276,
+       "chance_on_subset": 0.0,
+       "coverage": 0.362,
+       "raw_accuracy": 0.0276
+      }
+     },
+     "shapes": {
+      "ask=third": 725,
+      "ask=values": 1275
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.375,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.011,
+     "distinct_answers": 1340,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.625,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0107,
+       "chance_on_subset": 0.0,
+       "coverage": 0.375
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.375
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.375
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.375
+      },
+      "the target": {
+       "accuracy": 0.0253,
+       "chance_on_subset": 0.0,
+       "coverage": 0.375,
+       "raw_accuracy": 0.0253
+      }
+     },
+     "shapes": {
+      "ask=third": 750,
+      "ask=values": 1250
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.3655,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.01,
+     "distinct_answers": 1372,
+     "heuristics": {
+      "first middle value only": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.634,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0109,
+       "chance_on_subset": 0.0,
+       "coverage": 0.365
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.365
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.365
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.365
+      },
+      "the target": {
+       "accuracy": 0.0246,
+       "chance_on_subset": 0.0,
+       "coverage": 0.365,
+       "raw_accuracy": 0.0246
+      }
+     },
+     "shapes": {
+      "ask=third": 731,
+      "ask=values": 1269
+     }
+    }
+   }
+  },
+  "R2.bracket_match": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.297,
+     "constant_key_per_shape": 0.4515,
+     "distinct_answers": 9,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5017,
+       "chance_on_subset": 0.5,
+       "coverage": 0.594,
+       "raw_accuracy": 0.5017
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.406
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.406
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.406
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.406,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.406,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.406
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5017,
+       "chance_on_subset": 0.5,
+       "coverage": 0.594,
+       "raw_accuracy": 0.5017
+      }
+     },
+     "shapes": {
+      "ask=match": 812,
+      "ask=valid": 1188
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.301,
+     "constant_key_per_shape": 0.428,
+     "distinct_answers": 11,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5058,
+       "chance_on_subset": 0.5,
+       "coverage": 0.602,
+       "raw_accuracy": 0.4942
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.398
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.398
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.398
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.398,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.398,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.398
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5058,
+       "chance_on_subset": 0.5,
+       "coverage": 0.602,
+       "raw_accuracy": 0.4942
+      }
+     },
+     "shapes": {
+      "ask=match": 796,
+      "ask=valid": 1204
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.3103,
+     "constant_key_per_shape": 0.427,
+     "distinct_answers": 13,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5117,
+       "chance_on_subset": 0.5,
+       "coverage": 0.621,
+       "raw_accuracy": 0.4883
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.38
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.38
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.38
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.38,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.38,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.38
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5117,
+       "chance_on_subset": 0.5,
+       "coverage": 0.621,
+       "raw_accuracy": 0.4883
+      }
+     },
+     "shapes": {
+      "ask=match": 759,
+      "ask=valid": 1241
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.294,
+     "constant_key_per_shape": 0.424,
+     "distinct_answers": 15,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5315,
+       "chance_on_subset": 0.5,
+       "coverage": 0.588,
+       "raw_accuracy": 0.4685
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.412
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.412
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.412
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.412,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.412,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.412
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5315,
+       "chance_on_subset": 0.5,
+       "coverage": 0.588,
+       "raw_accuracy": 0.4685
+      }
+     },
+     "shapes": {
+      "ask=match": 824,
+      "ask=valid": 1176
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2995,
+     "constant_key_per_shape": 0.396,
+     "distinct_answers": 17,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5092,
+       "chance_on_subset": 0.5,
+       "coverage": 0.599,
+       "raw_accuracy": 0.4908
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.401
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.401
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.401
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.401,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.401,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.401
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5092,
+       "chance_on_subset": 0.5,
+       "coverage": 0.599,
+       "raw_accuracy": 0.4908
+      }
+     },
+     "shapes": {
+      "ask=match": 802,
+      "ask=valid": 1198
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.303,
+     "constant_key_per_shape": 0.414,
+     "distinct_answers": 19,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5454,
+       "chance_on_subset": 0.5,
+       "coverage": 0.606,
+       "raw_accuracy": 0.5454
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.394
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.394
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.394
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.394,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.394,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.394
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5454,
+       "chance_on_subset": 0.5,
+       "coverage": 0.606,
+       "raw_accuracy": 0.5454
+      }
+     },
+     "shapes": {
+      "ask=match": 788,
+      "ask=valid": 1212
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.296,
+     "constant_key_per_shape": 0.388,
+     "distinct_answers": 21,
+     "heuristics": {
+      "equal counts of each kind": {
+       "accuracy": 0.5287,
+       "chance_on_subset": 0.5,
+       "coverage": 0.592,
+       "raw_accuracy": 0.4713
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.408
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.408
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.408
+      },
+      "mirror position": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.408,
+       "raw_accuracy": 0.0
+      },
+      "next closer of the same kind": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.408,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.408
+      },
+      "starts with opener, ends with closer": {
+       "accuracy": 0.5287,
+       "chance_on_subset": 0.5,
+       "coverage": 0.592,
+       "raw_accuracy": 0.4713
+      }
+     },
+     "shapes": {
+      "ask=match": 816,
+      "ask=valid": 1184
+     }
+    }
+   }
+  },
+  "R2.bst_traversal": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.001
+      }
+     },
+     "shapes": {
+      "kind=level": 566,
+      "kind=post": 872,
+      "kind=pre": 562
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      }
+     },
+     "shapes": {
+      "kind=level": 598,
+      "kind=post": 772,
+      "kind=pre": 630
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      }
+     },
+     "shapes": {
+      "kind=level": 651,
+      "kind=post": 710,
+      "kind=pre": 639
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "kind=level": 688,
+      "kind=post": 659,
+      "kind=pre": 653
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "kind=level": 646,
+      "kind=post": 698,
+      "kind=pre": 656
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "kind=level": 665,
+      "kind=post": 679,
+      "kind=pre": 656
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0015,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted descending": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "kind=level": 680,
+      "kind=post": 646,
+      "kind=pre": 674
+     }
+    }
+   }
+  },
+  "R2.cache_eviction": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2427,
+     "constant_key_per_shape": 0.4095,
+     "distinct_answers": 10,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.514
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6231,
+       "chance_on_subset": 0.5,
+       "coverage": 0.485,
+       "raw_accuracy": 0.6231
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.514
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.514
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.514,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.514,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.514
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 519,
+      "ask=misses|policy=lru": 510,
+      "ask=present|policy=fifo": 452,
+      "ask=present|policy=lru": 519
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2455,
+     "constant_key_per_shape": 0.3775,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.509
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6191,
+       "chance_on_subset": 0.5,
+       "coverage": 0.491,
+       "raw_accuracy": 0.6191
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.509
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.509
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.509,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.509,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.509
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 506,
+      "ask=misses|policy=lru": 512,
+      "ask=present|policy=fifo": 477,
+      "ask=present|policy=lru": 505
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.252,
+     "constant_key_per_shape": 0.3585,
+     "distinct_answers": 13,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.496
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6121,
+       "chance_on_subset": 0.5,
+       "coverage": 0.504,
+       "raw_accuracy": 0.6121
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.496
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.496
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.496,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.496,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.496
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 479,
+      "ask=misses|policy=lru": 513,
+      "ask=present|policy=fifo": 540,
+      "ask=present|policy=lru": 468
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2437,
+     "constant_key_per_shape": 0.367,
+     "distinct_answers": 14,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.512
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6246,
+       "chance_on_subset": 0.5,
+       "coverage": 0.487,
+       "raw_accuracy": 0.6246
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.512
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.512
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.512,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.512,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.512
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 516,
+      "ask=misses|policy=lru": 509,
+      "ask=present|policy=fifo": 478,
+      "ask=present|policy=lru": 497
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.251,
+     "constant_key_per_shape": 0.347,
+     "distinct_answers": 16,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.498
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6454,
+       "chance_on_subset": 0.5,
+       "coverage": 0.502,
+       "raw_accuracy": 0.6454
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.498
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.498
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.498,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.498,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.498
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 478,
+      "ask=misses|policy=lru": 518,
+      "ask=present|policy=fifo": 504,
+      "ask=present|policy=lru": 500
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2492,
+     "constant_key_per_shape": 0.3455,
+     "distinct_answers": 17,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.501
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6449,
+       "chance_on_subset": 0.5,
+       "coverage": 0.498,
+       "raw_accuracy": 0.6449
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.501
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.501
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.501,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.501,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.501
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 500,
+      "ask=misses|policy=lru": 503,
+      "ask=present|policy=fifo": 474,
+      "ask=present|policy=lru": 523
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2477,
+     "constant_key_per_shape": 0.343,
+     "distinct_answers": 18,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.504
+      },
+      "item among the last cap requests": {
+       "accuracy": 0.6196,
+       "chance_on_subset": 0.5,
+       "coverage": 0.495,
+       "raw_accuracy": 0.6196
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.504
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.504
+      },
+      "number of distinct items": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.504,
+       "raw_accuracy": 0.0
+      },
+      "other policy": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.504,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.504
+      }
+     },
+     "shapes": {
+      "ask=misses|policy=fifo": 505,
+      "ask=misses|policy=lru": 504,
+      "ask=present|policy=fifo": 524,
+      "ask=present|policy=lru": 467
+     }
+    }
+   }
+  },
+  "R2.cellular_automaton": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.046,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.107,
+     "distinct_answers": 132,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.329
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.329
+      },
+      "last number in the question": {
+       "accuracy": 0.1398,
+       "chance_on_subset": 0.0,
+       "coverage": 0.329
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.329
+      },
+      "the start": {
+       "accuracy": 0.067,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.067
+      }
+     },
+     "shapes": {
+      "ask=count": 658,
+      "ask=row": 1342
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.033,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0715,
+     "distinct_answers": 438,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.349
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.349
+      },
+      "last number in the question": {
+       "accuracy": 0.0944,
+       "chance_on_subset": 0.0,
+       "coverage": 0.349
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.349
+      },
+      "the start": {
+       "accuracy": 0.0565,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0565
+      }
+     },
+     "shapes": {
+      "ask=count": 699,
+      "ask=row": 1301
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.079,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0555,
+     "distinct_answers": 789,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.33
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.33
+      },
+      "last number in the question": {
+       "accuracy": 0.0818,
+       "chance_on_subset": 0.0,
+       "coverage": 0.33
+      },
+      "one step only": {
+       "accuracy": 0.1625,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1625
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.33
+      },
+      "the start": {
+       "accuracy": 0.041,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.041
+      }
+     },
+     "shapes": {
+      "ask=count": 660,
+      "ask=row": 1340
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0675,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0505,
+     "distinct_answers": 1092,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.326
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.326
+      },
+      "last number in the question": {
+       "accuracy": 0.0598,
+       "chance_on_subset": 0.0,
+       "coverage": 0.326
+      },
+      "one step only": {
+       "accuracy": 0.166,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.166
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.326
+      },
+      "the start": {
+       "accuracy": 0.0425,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0425
+      }
+     },
+     "shapes": {
+      "ask=count": 652,
+      "ask=row": 1348
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0875,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0455,
+     "distinct_answers": 1128,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.344
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.344
+      },
+      "last number in the question": {
+       "accuracy": 0.0451,
+       "chance_on_subset": 0.0,
+       "coverage": 0.344
+      },
+      "one step only": {
+       "accuracy": 0.16,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.16
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.344
+      },
+      "the start": {
+       "accuracy": 0.03,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.03
+      }
+     },
+     "shapes": {
+      "ask=count": 687,
+      "ask=row": 1313
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0825,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.043,
+     "distinct_answers": 1196,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.36
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.36
+      },
+      "last number in the question": {
+       "accuracy": 0.0292,
+       "chance_on_subset": 0.0,
+       "coverage": 0.36
+      },
+      "one step only": {
+       "accuracy": 0.166,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.166
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.36
+      },
+      "the start": {
+       "accuracy": 0.025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.025
+      }
+     },
+     "shapes": {
+      "ask=count": 720,
+      "ask=row": 1280
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.097,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0365,
+     "distinct_answers": 1286,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.327
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.327
+      },
+      "last number in the question": {
+       "accuracy": 0.0276,
+       "chance_on_subset": 0.0,
+       "coverage": 0.327
+      },
+      "one step only": {
+       "accuracy": 0.1165,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1165
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.327
+      },
+      "the start": {
+       "accuracy": 0.0265,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0265
+      }
+     },
+     "shapes": {
+      "ask=count": 653,
+      "ask=row": 1347
+     }
+    }
+   }
+  },
+  "R2.cheapest_network": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.019,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.041,
+     "distinct_answers": 62,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.0165,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0165
+      },
+      "first number in the question": {
+       "accuracy": 0.0025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.013,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.204,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.204
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0085,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.039,
+     "distinct_answers": 68,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.0175,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0175
+      },
+      "first number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0065,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.1475,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1475
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.005,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.039,
+     "distinct_answers": 66,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.0205,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0205
+      },
+      "first number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.157,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.157
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.002,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.036,
+     "distinct_answers": 76,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.028,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.028
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.002,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.1335,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1335
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0025,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0345,
+     "distinct_answers": 78,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.02,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.02
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.002,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.12,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.12
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.035,
+     "distinct_answers": 83,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.023,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.023
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.095,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.095
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0005,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.032,
+     "distinct_answers": 83,
+     "heuristics": {
+      "cheapest cable at each town": {
+       "accuracy": 0.0185,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0185
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "n-1 cheapest cables": {
+       "accuracy": 0.089,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.089
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.chip_toppling": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.1345,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.129,
+     "distinct_answers": 61,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0624,
+       "chance_on_subset": 0.0,
+       "coverage": 0.673
+      },
+      "largest number in the question": {
+       "accuracy": 0.0624,
+       "chance_on_subset": 0.0,
+       "coverage": 0.673
+      },
+      "last number in the question": {
+       "accuracy": 0.0572,
+       "chance_on_subset": 0.0,
+       "coverage": 0.673
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.673
+      },
+      "start mod 2": {
+       "accuracy": 0.0291,
+       "chance_on_subset": 0.0,
+       "coverage": 0.327,
+       "raw_accuracy": 0.0291
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0144,
+       "chance_on_subset": 0.0,
+       "coverage": 0.658,
+       "raw_accuracy": 0.0144
+      }
+     },
+     "shapes": {
+      "ask=final": 653,
+      "ask=lost": 684,
+      "ask=topplings": 663
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.114,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.105,
+     "distinct_answers": 96,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0699,
+       "chance_on_subset": 0.0,
+       "coverage": 0.658
+      },
+      "largest number in the question": {
+       "accuracy": 0.0699,
+       "chance_on_subset": 0.0,
+       "coverage": 0.658
+      },
+      "last number in the question": {
+       "accuracy": 0.0365,
+       "chance_on_subset": 0.0,
+       "coverage": 0.658
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.658
+      },
+      "start mod 2": {
+       "accuracy": 0.0058,
+       "chance_on_subset": 0.0,
+       "coverage": 0.342,
+       "raw_accuracy": 0.0058
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0075,
+       "chance_on_subset": 0.0,
+       "coverage": 0.663,
+       "raw_accuracy": 0.0075
+      }
+     },
+     "shapes": {
+      "ask=final": 684,
+      "ask=lost": 673,
+      "ask=topplings": 643
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0345,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.095,
+     "distinct_answers": 140,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0283,
+       "chance_on_subset": 0.0,
+       "coverage": 0.672
+      },
+      "largest number in the question": {
+       "accuracy": 0.0283,
+       "chance_on_subset": 0.0,
+       "coverage": 0.672
+      },
+      "last number in the question": {
+       "accuracy": 0.0059,
+       "chance_on_subset": 0.0,
+       "coverage": 0.672
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.672
+      },
+      "start mod 2": {
+       "accuracy": 0.0244,
+       "chance_on_subset": 0.0,
+       "coverage": 0.328,
+       "raw_accuracy": 0.0244
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 0.666,
+       "raw_accuracy": 0.0015
+      }
+     },
+     "shapes": {
+      "ask=final": 655,
+      "ask=lost": 668,
+      "ask=topplings": 677
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.032,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.081,
+     "distinct_answers": 193,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0264,
+       "chance_on_subset": 0.0,
+       "coverage": 0.681
+      },
+      "largest number in the question": {
+       "accuracy": 0.0264,
+       "chance_on_subset": 0.0,
+       "coverage": 0.681
+      },
+      "last number in the question": {
+       "accuracy": 0.0073,
+       "chance_on_subset": 0.0,
+       "coverage": 0.681
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.681
+      },
+      "start mod 2": {
+       "accuracy": 0.0016,
+       "chance_on_subset": 0.0,
+       "coverage": 0.319,
+       "raw_accuracy": 0.0016
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.654,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=final": 638,
+      "ask=lost": 692,
+      "ask=topplings": 670
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.011,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0685,
+     "distinct_answers": 262,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0121,
+       "chance_on_subset": 0.0,
+       "coverage": 0.663
+      },
+      "largest number in the question": {
+       "accuracy": 0.0121,
+       "chance_on_subset": 0.0,
+       "coverage": 0.663
+      },
+      "last number in the question": {
+       "accuracy": 0.0008,
+       "chance_on_subset": 0.0,
+       "coverage": 0.663
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.663
+      },
+      "start mod 2": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.337,
+       "raw_accuracy": 0.0
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.66,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=final": 674,
+      "ask=lost": 680,
+      "ask=topplings": 646
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0085,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.063,
+     "distinct_answers": 300,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0103,
+       "chance_on_subset": 0.0,
+       "coverage": 0.68
+      },
+      "largest number in the question": {
+       "accuracy": 0.0103,
+       "chance_on_subset": 0.0,
+       "coverage": 0.68
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.68
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.68
+      },
+      "start mod 2": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.32,
+       "raw_accuracy": 0.0
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0008,
+       "chance_on_subset": 0.0,
+       "coverage": 0.657,
+       "raw_accuracy": 0.0008
+      }
+     },
+     "shapes": {
+      "ask=final": 640,
+      "ask=lost": 685,
+      "ask=topplings": 675
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0025,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.068,
+     "distinct_answers": 265,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0029,
+       "chance_on_subset": 0.0,
+       "coverage": 0.686
+      },
+      "largest number in the question": {
+       "accuracy": 0.0029,
+       "chance_on_subset": 0.0,
+       "coverage": 0.686
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.686
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.686
+      },
+      "start mod 2": {
+       "accuracy": 0.0016,
+       "chance_on_subset": 0.0,
+       "coverage": 0.314,
+       "raw_accuracy": 0.0016
+      },
+      "the start / half the chips": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.646,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=final": 628,
+      "ask=lost": 708,
+      "ask=topplings": 664
+     }
+    }
+   }
+  },
+  "R2.coin_change_min": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.2795,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.164,
+     "distinct_answers": 14,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.208,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.208
+      },
+      "first number in the question": {
+       "accuracy": 0.0515,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.1905,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1905
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0515,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.228,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1805,
+     "distinct_answers": 17,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.155,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.155
+      },
+      "first number in the question": {
+       "accuracy": 0.0645,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.2095,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.2095
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0645,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.1865,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.189,
+     "distinct_answers": 17,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.1205,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1205
+      },
+      "first number in the question": {
+       "accuracy": 0.066,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.191,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.191
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.066,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.229,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.221,
+     "distinct_answers": 16,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.1505,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1505
+      },
+      "first number in the question": {
+       "accuracy": 0.0665,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.22,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.22
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0665,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.201,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2145,
+     "distinct_answers": 15,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.1285,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1285
+      },
+      "first number in the question": {
+       "accuracy": 0.075,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.1975,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1975
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.075,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.19,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.218,
+     "distinct_answers": 17,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.0985,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0985
+      },
+      "first number in the question": {
+       "accuracy": 0.082,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.208,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.208
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.082,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.164,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2185,
+     "distinct_answers": 15,
+     "heuristics": {
+      "amount / largest coin, rounded up": {
+       "accuracy": 0.101,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.101
+      },
+      "first number in the question": {
+       "accuracy": 0.0785,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest coin first": {
+       "accuracy": 0.215,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.215
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0785,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.crt_smallest": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.201,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.03,
+     "distinct_answers": 100,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.091,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.091,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.091
+      },
+      "largest number in the question": {
+       "accuracy": 0.028,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.173,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.173
+      },
+      "last number in the question": {
+       "accuracy": 0.028,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.091,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0405,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0405
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.1985,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.029,
+     "distinct_answers": 152,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0945,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.0945,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0945
+      },
+      "largest number in the question": {
+       "accuracy": 0.0295,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.169,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.169
+      },
+      "last number in the question": {
+       "accuracy": 0.0295,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0945,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0275,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0275
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.176,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0235,
+     "distinct_answers": 214,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.071,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.071,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.071
+      },
+      "largest number in the question": {
+       "accuracy": 0.019,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.157,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.157
+      },
+      "last number in the question": {
+       "accuracy": 0.019,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.071,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0265,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0265
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0215,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.005,
+     "distinct_answers": 1165,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.0055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0055
+      },
+      "largest number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.02,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.02
+      },
+      "last number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0175,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0045,
+     "distinct_answers": 1308,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0015
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.0175,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0175
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.015,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.004,
+     "distinct_answers": 1403,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0045,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.0045,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0045
+      },
+      "largest number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.0145,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0145
+      },
+      "last number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0045,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.013,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0025,
+     "distinct_answers": 1579,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "first remainder": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.003
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest remainder": {
+       "accuracy": 0.013,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.013
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of remainders": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.deferred_acceptance_partner": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.3333,
+     "constant_key_per_shape": 0.0135,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.2005,
+       "chance_on_subset": 0.3333,
+       "coverage": 1.0,
+       "raw_accuracy": 0.2005
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.2815,
+       "chance_on_subset": 0.3333,
+       "coverage": 1.0,
+       "raw_accuracy": 0.2815
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.3333,
+     "constant_key_per_shape": 0.0135,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.192,
+       "chance_on_subset": 0.3333,
+       "coverage": 1.0,
+       "raw_accuracy": 0.192
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.2585,
+       "chance_on_subset": 0.3333,
+       "coverage": 1.0,
+       "raw_accuracy": 0.2585
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.25,
+     "constant_key_per_shape": 0.0125,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.1585,
+       "chance_on_subset": 0.25,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1585
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.2085,
+       "chance_on_subset": 0.25,
+       "coverage": 1.0,
+       "raw_accuracy": 0.2085
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.25,
+     "constant_key_per_shape": 0.012,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.1585,
+       "chance_on_subset": 0.25,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1585
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.2155,
+       "chance_on_subset": 0.25,
+       "coverage": 1.0,
+       "raw_accuracy": 0.2155
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2,
+     "constant_key_per_shape": 0.015,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.1555,
+       "chance_on_subset": 0.2,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1555
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.195,
+       "chance_on_subset": 0.2,
+       "coverage": 1.0,
+       "raw_accuracy": 0.195
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.2,
+     "constant_key_per_shape": 0.013,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.1705,
+       "chance_on_subset": 0.2,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1705
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.185,
+       "chance_on_subset": 0.2,
+       "coverage": 1.0,
+       "raw_accuracy": 0.185
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.1667,
+     "constant_key_per_shape": 0.0125,
+     "distinct_answers": 122,
+     "heuristics": {
+      "own first choice": {
+       "accuracy": 0.147,
+       "chance_on_subset": 0.1667,
+       "coverage": 1.0,
+       "raw_accuracy": 0.147
+      },
+      "responder who ranks them first-highest": {
+       "accuracy": 0.173,
+       "chance_on_subset": 0.1667,
+       "coverage": 1.0,
+       "raw_accuracy": 0.173
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.dictionary_rank": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.035,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.027,
+     "distinct_answers": 1194,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0024,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "first-letter block start": {
+       "accuracy": 0.1356,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413,
+       "raw_accuracy": 0.1356
+      },
+      "largest number in the question": {
+       "accuracy": 0.0424,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "last number in the question": {
+       "accuracy": 0.0424,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.587,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0024,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.587,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 826,
+      "ask=word": 1174
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.035,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0225,
+     "distinct_answers": 1209,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0074,
+       "chance_on_subset": 0.0,
+       "coverage": 0.405
+      },
+      "first-letter block start": {
+       "accuracy": 0.1506,
+       "chance_on_subset": 0.0,
+       "coverage": 0.405,
+       "raw_accuracy": 0.1506
+      },
+      "largest number in the question": {
+       "accuracy": 0.0272,
+       "chance_on_subset": 0.0,
+       "coverage": 0.405
+      },
+      "last number in the question": {
+       "accuracy": 0.0272,
+       "chance_on_subset": 0.0,
+       "coverage": 0.405
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.595,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0074,
+       "chance_on_subset": 0.0,
+       "coverage": 0.405
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.595,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 810,
+      "ask=word": 1190
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.008,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0075,
+     "distinct_answers": 1298,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.409
+      },
+      "first-letter block start": {
+       "accuracy": 0.0366,
+       "chance_on_subset": 0.0,
+       "coverage": 0.409,
+       "raw_accuracy": 0.0366
+      },
+      "largest number in the question": {
+       "accuracy": 0.0085,
+       "chance_on_subset": 0.0,
+       "coverage": 0.409
+      },
+      "last number in the question": {
+       "accuracy": 0.0085,
+       "chance_on_subset": 0.0,
+       "coverage": 0.409
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.591,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.409
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.591,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 819,
+      "ask=word": 1181
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0085,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.008,
+     "distinct_answers": 1312,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.403
+      },
+      "first-letter block start": {
+       "accuracy": 0.0348,
+       "chance_on_subset": 0.0,
+       "coverage": 0.403,
+       "raw_accuracy": 0.0348
+      },
+      "largest number in the question": {
+       "accuracy": 0.0087,
+       "chance_on_subset": 0.0,
+       "coverage": 0.403
+      },
+      "last number in the question": {
+       "accuracy": 0.0087,
+       "chance_on_subset": 0.0,
+       "coverage": 0.403
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.598,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.403
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.598,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 805,
+      "ask=word": 1195
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0005,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.003,
+     "distinct_answers": 1655,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "first-letter block start": {
+       "accuracy": 0.0145,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413,
+       "raw_accuracy": 0.0145
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.587,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.587,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 827,
+      "ask=word": 1173
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.001,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.004,
+     "distinct_answers": 1653,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411
+      },
+      "first-letter block start": {
+       "accuracy": 0.0085,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411,
+       "raw_accuracy": 0.0085
+      },
+      "largest number in the question": {
+       "accuracy": 0.0024,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411
+      },
+      "last number in the question": {
+       "accuracy": 0.0024,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.589,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.589,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 822,
+      "ask=word": 1178
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.002,
+     "distinct_answers": 1951,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.377
+      },
+      "first-letter block start": {
+       "accuracy": 0.0027,
+       "chance_on_subset": 0.0,
+       "coverage": 0.377,
+       "raw_accuracy": 0.0027
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.377
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.377
+      },
+      "reverse letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.623,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.377
+      },
+      "sorted letters": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.623,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=position": 754,
+      "ask=word": 1246
+     }
+    }
+   }
+  },
+  "R2.expression_eval": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0385,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0325,
+     "distinct_answers": 469,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0175,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.009,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.013,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.256,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.256
+      },
+      "smallest number in the question": {
+       "accuracy": 0.011,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.233,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.233
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 1029,
+      "convention=ranked": 971
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0395,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0255,
+     "distinct_answers": 625,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.01,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.012,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0105,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.163,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.163
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0095,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.153,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.153
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 974,
+      "convention=ranked": 1026
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0315,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.023,
+     "distinct_answers": 750,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.01,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0065,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0095,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.097,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.097
+      },
+      "smallest number in the question": {
+       "accuracy": 0.008,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.1315,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1315
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 1018,
+      "convention=ranked": 982
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.025,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.025,
+     "distinct_answers": 883,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0075,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0065,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.0575,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0575
+      },
+      "smallest number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.081,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.081
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 1028,
+      "convention=ranked": 972
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.009,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.005,
+     "distinct_answers": 1666,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.043,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.043
+      },
+      "smallest number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.0765,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0765
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 991,
+      "convention=ranked": 1009
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0085,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.008,
+     "distinct_answers": 1730,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.002,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.0185,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0185
+      },
+      "smallest number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.0585,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0585
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 1011,
+      "convention=ranked": 989
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0065,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0075,
+     "distinct_answers": 1773,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "parentheses ignored, ranked": {
+       "accuracy": 0.012,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.012
+      },
+      "smallest number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "the other convention": {
+       "accuracy": 0.051,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.051
+      }
+     },
+     "shapes": {
+      "convention=left_to_right": 1008,
+      "convention=ranked": 992
+     }
+    }
+   }
+  },
+  "R2.gcd_euclid": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.05,
+     "distinct_answers": 396,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 962,
+      "ask=lcm": 1038
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.036,
+     "distinct_answers": 671,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 1006,
+      "ask=lcm": 994
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.138,
+     "distinct_answers": 599,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.1165,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1165
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 645,
+      "ask=lcm": 666,
+      "ask=steps": 689
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1255,
+     "distinct_answers": 619,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.1065,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1065
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 687,
+      "ask=lcm": 662,
+      "ask=steps": 651
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.12,
+     "distinct_answers": 655,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.093,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.093
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 685,
+      "ask=lcm": 651,
+      "ask=steps": 664
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1115,
+     "distinct_answers": 695,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.097,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.097
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 643,
+      "ask=lcm": 680,
+      "ask=steps": 677
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.112,
+     "distinct_answers": 690,
+     "heuristics": {
+      "a-b / a*b / 3": {
+       "accuracy": 0.0915,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0915
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=gcd": 683,
+      "ask=lcm": 656,
+      "ask=steps": 661
+     }
+    }
+   }
+  },
+  "R2.hamming_error_position": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.1895,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.093,
+     "distinct_answers": 15,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.037,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.037
+      },
+      "first number in the question": {
+       "accuracy": 0.074,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.1155,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1155
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.297,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0945,
+     "distinct_answers": 16,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.039,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.039
+      },
+      "first number in the question": {
+       "accuracy": 0.076,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0945,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.221,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.221
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0945,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.2915,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0995,
+     "distinct_answers": 16,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.0405,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0405
+      },
+      "first number in the question": {
+       "accuracy": 0.0715,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0995,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.22,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.22
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0995,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.189,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1025,
+     "distinct_answers": 32,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.0125,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0125
+      },
+      "first number in the question": {
+       "accuracy": 0.0305,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.1025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.1725,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1725
+      },
+      "smallest number in the question": {
+       "accuracy": 0.1025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.197,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.101,
+     "distinct_answers": 32,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.0195,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0195
+      },
+      "first number in the question": {
+       "accuracy": 0.0335,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.101,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.1785,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1785
+      },
+      "smallest number in the question": {
+       "accuracy": 0.101,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.196,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.096,
+     "distinct_answers": 32,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.014,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.014
+      },
+      "first number in the question": {
+       "accuracy": 0.0435,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.096,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.1695,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1695
+      },
+      "smallest number in the question": {
+       "accuracy": 0.096,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.152,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1055,
+     "distinct_answers": 64,
+     "heuristics": {
+      "first 1": {
+       "accuracy": 0.006,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.006
+      },
+      "first number in the question": {
+       "accuracy": 0.0185,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.1055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "lowest failing check": {
+       "accuracy": 0.1435,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1435
+      },
+      "smallest number in the question": {
+       "accuracy": 0.1055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.hash_probe": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.2185,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.229,
+     "distinct_answers": 7,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1368,
+       "chance_on_subset": 0.0,
+       "coverage": 0.76,
+       "raw_accuracy": 0.1368
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.2229,
+       "chance_on_subset": 0.0,
+       "coverage": 0.24,
+       "raw_accuracy": 0.2229
+      },
+      "smallest number in the question": {
+       "accuracy": 0.114,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 480,
+      "ask=slot": 1520
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.19,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2295,
+     "distinct_answers": 8,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1347,
+       "chance_on_subset": 0.0,
+       "coverage": 0.757,
+       "raw_accuracy": 0.1347
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.2124,
+       "chance_on_subset": 0.0,
+       "coverage": 0.242,
+       "raw_accuracy": 0.2124
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0925,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 485,
+      "ask=slot": 1515
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.169,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2065,
+     "distinct_answers": 9,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1363,
+       "chance_on_subset": 0.0,
+       "coverage": 0.741,
+       "raw_accuracy": 0.1363
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.2046,
+       "chance_on_subset": 0.0,
+       "coverage": 0.259,
+       "raw_accuracy": 0.2046
+      },
+      "smallest number in the question": {
+       "accuracy": 0.09,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 518,
+      "ask=slot": 1482
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.15,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.176,
+     "distinct_answers": 10,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1551,
+       "chance_on_subset": 0.0,
+       "coverage": 0.754,
+       "raw_accuracy": 0.1551
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.169,
+       "chance_on_subset": 0.0,
+       "coverage": 0.245,
+       "raw_accuracy": 0.169
+      },
+      "smallest number in the question": {
+       "accuracy": 0.083,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 491,
+      "ask=slot": 1509
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.1305,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2015,
+     "distinct_answers": 11,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1472,
+       "chance_on_subset": 0.0,
+       "coverage": 0.731,
+       "raw_accuracy": 0.1472
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.002,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.1781,
+       "chance_on_subset": 0.0,
+       "coverage": 0.27,
+       "raw_accuracy": 0.1781
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0685,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 539,
+      "ask=slot": 1461
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.133,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.184,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1451,
+       "chance_on_subset": 0.0,
+       "coverage": 0.745,
+       "raw_accuracy": 0.1451
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.2074,
+       "chance_on_subset": 0.0,
+       "coverage": 0.256,
+       "raw_accuracy": 0.2074
+      },
+      "smallest number in the question": {
+       "accuracy": 0.067,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 511,
+      "ask=slot": 1489
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.1115,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1695,
+     "distinct_answers": 13,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "home slot (key mod m)": {
+       "accuracy": 0.1568,
+       "chance_on_subset": 0.0,
+       "coverage": 0.759,
+       "raw_accuracy": 0.1568
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.004,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "one slot looked at": {
+       "accuracy": 0.2282,
+       "chance_on_subset": 0.0,
+       "coverage": 0.241,
+       "raw_accuracy": 0.2282
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0525,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "ask=probes": 482,
+      "ask=slot": 1518
+     }
+    }
+   }
+  },
+  "R2.interval_scheduling": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2415,
+     "distinct_answers": 10,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.1905,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1905
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0195,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.225,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.225
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2675,
+     "distinct_answers": 11,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.167,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.167
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0205,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.203,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.203
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.249,
+     "distinct_answers": 11,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.1555,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1555
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.026,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.195,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.195
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.229,
+     "distinct_answers": 12,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.1265,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1265
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0215,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.1805,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1805
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2385,
+     "distinct_answers": 12,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.1255,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1255
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0155,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.1925,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1925
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2215,
+     "distinct_answers": 12,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.1245,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1245
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0205,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.192,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.192
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 1.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2275,
+     "distinct_answers": 12,
+     "heuristics": {
+      "earliest start first": {
+       "accuracy": 0.115,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.115
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0175,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "shortest first": {
+       "accuracy": 0.1745,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1745
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.lcs_length": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.3035,
+     "distinct_answers": 7,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.1295,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1295
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.085,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.085
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2725,
+     "distinct_answers": 8,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.1445,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1445
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.071,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.071
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2665,
+     "distinct_answers": 10,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.1785,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1785
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.0495,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0495
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.243,
+     "distinct_answers": 10,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.173,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.173
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.0365,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0365
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.234,
+     "distinct_answers": 10,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.1445,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1445
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.0285,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0285
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2175,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.142,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.142
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.027,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.027
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.213,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "half the shorter string": {
+       "accuracy": 0.1255,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1255
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "letter-multiset overlap": {
+       "accuracy": 0.018,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.018
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.lis_length": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0905,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.322,
+     "distinct_answers": 8,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.0395,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0395
+      },
+      "first number in the question": {
+       "accuracy": 0.0105,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0075,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.0275,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0275
+      },
+      "smallest number in the question": {
+       "accuracy": 0.055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.09,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.3035,
+     "distinct_answers": 9,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.0105,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0105
+      },
+      "first number in the question": {
+       "accuracy": 0.008,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.01,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.01
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0595,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.1045,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.3025,
+     "distinct_answers": 10,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.0035,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0035
+      },
+      "first number in the question": {
+       "accuracy": 0.0085,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.006,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.0085,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0085
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0615,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.1005,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.3035,
+     "distinct_answers": 9,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.004,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.004
+      },
+      "first number in the question": {
+       "accuracy": 0.0065,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.004,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.004
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0645,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.104,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.3185,
+     "distinct_answers": 9,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0015
+      },
+      "first number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0035,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      },
+      "smallest number in the question": {
+       "accuracy": 0.058,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.095,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.3035,
+     "distinct_answers": 9,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.0035,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.001
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0425,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0895,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.295,
+     "distinct_answers": 9,
+     "heuristics": {
+      "ascents + 1": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "first number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.004,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of ascents": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0455,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.longest_palindromic_substring": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.2855,
+     "distinct_answers": 12,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.01,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.01
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.0845,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0845
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.248,
+     "distinct_answers": 14,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.0055,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0055
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.0795,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0795
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.205,
+     "distinct_answers": 15,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.002,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.002
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.048,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.048
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1715,
+     "distinct_answers": 14,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.009,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.009
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.053,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.053
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1645,
+     "distinct_answers": 16,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.007,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.007
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.043,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.043
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1345,
+     "distinct_answers": 16,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.0075,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0075
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.0385,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0385
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.143,
+     "distinct_answers": 18,
+     "heuristics": {
+      "3": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.003
+      },
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "longest run of one letter": {
+       "accuracy": 0.0335,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0335
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.luhn_check": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.244,
+     "chance": 0.2562,
+     "constant_key_per_shape": 0.3155,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.1015,
+       "chance_on_subset": 0.0,
+       "coverage": 0.487
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.487
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.487
+      },
+      "plain digit sum": {
+       "accuracy": 0.5073,
+       "chance_on_subset": 0.5,
+       "coverage": 0.512,
+       "raw_accuracy": 0.4927
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.1118,
+       "chance_on_subset": 0.0,
+       "coverage": 0.487,
+       "raw_accuracy": 0.1118
+      },
+      "smallest number in the question": {
+       "accuracy": 0.1015,
+       "chance_on_subset": 0.0,
+       "coverage": 0.487
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 975,
+      "ask=valid": 1025
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.2315,
+     "chance": 0.2592,
+     "constant_key_per_shape": 0.325,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.1007,
+       "chance_on_subset": 0.0,
+       "coverage": 0.481
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.481
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.481
+      },
+      "plain digit sum": {
+       "accuracy": 0.5159,
+       "chance_on_subset": 0.5,
+       "coverage": 0.518,
+       "raw_accuracy": 0.4841
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.0945,
+       "chance_on_subset": 0.0,
+       "coverage": 0.481,
+       "raw_accuracy": 0.0945
+      },
+      "smallest number in the question": {
+       "accuracy": 0.1007,
+       "chance_on_subset": 0.0,
+       "coverage": 0.481
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 963,
+      "ask=valid": 1037
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.273,
+     "chance": 0.2422,
+     "constant_key_per_shape": 0.309,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0999,
+       "chance_on_subset": 0.0,
+       "coverage": 0.515
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.515
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.515
+      },
+      "plain digit sum": {
+       "accuracy": 0.5119,
+       "chance_on_subset": 0.5,
+       "coverage": 0.484,
+       "raw_accuracy": 0.4881
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.1096,
+       "chance_on_subset": 0.0,
+       "coverage": 0.515,
+       "raw_accuracy": 0.1096
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0999,
+       "chance_on_subset": 0.0,
+       "coverage": 0.515
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 1031,
+      "ask=valid": 969
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.2655,
+     "chance": 0.249,
+     "constant_key_per_shape": 0.31,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.1116,
+       "chance_on_subset": 0.0,
+       "coverage": 0.502
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.502
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.502
+      },
+      "plain digit sum": {
+       "accuracy": 0.507,
+       "chance_on_subset": 0.5,
+       "coverage": 0.498,
+       "raw_accuracy": 0.507
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.0916,
+       "chance_on_subset": 0.0,
+       "coverage": 0.502,
+       "raw_accuracy": 0.0916
+      },
+      "smallest number in the question": {
+       "accuracy": 0.1116,
+       "chance_on_subset": 0.0,
+       "coverage": 0.502
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 1004,
+      "ask=valid": 996
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.2665,
+     "chance": 0.255,
+     "constant_key_per_shape": 0.3245,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.1071,
+       "chance_on_subset": 0.0,
+       "coverage": 0.49
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.49
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.49
+      },
+      "plain digit sum": {
+       "accuracy": 0.5225,
+       "chance_on_subset": 0.5,
+       "coverage": 0.51,
+       "raw_accuracy": 0.5225
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.1041,
+       "chance_on_subset": 0.0,
+       "coverage": 0.49,
+       "raw_accuracy": 0.1041
+      },
+      "smallest number in the question": {
+       "accuracy": 0.1071,
+       "chance_on_subset": 0.0,
+       "coverage": 0.49
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 980,
+      "ask=valid": 1020
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.2335,
+     "chance": 0.2472,
+     "constant_key_per_shape": 0.319,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.09,
+       "chance_on_subset": 0.0,
+       "coverage": 0.505
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.505
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.505
+      },
+      "plain digit sum": {
+       "accuracy": 0.5177,
+       "chance_on_subset": 0.5,
+       "coverage": 0.494,
+       "raw_accuracy": 0.4823
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.1088,
+       "chance_on_subset": 0.0,
+       "coverage": 0.505,
+       "raw_accuracy": 0.1088
+      },
+      "smallest number in the question": {
+       "accuracy": 0.09,
+       "chance_on_subset": 0.0,
+       "coverage": 0.505
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 1011,
+      "ask=valid": 989
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.238,
+     "chance": 0.2537,
+     "constant_key_per_shape": 0.3095,
+     "distinct_answers": 12,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0853,
+       "chance_on_subset": 0.0,
+       "coverage": 0.492
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.492
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.492
+      },
+      "plain digit sum": {
+       "accuracy": 0.5094,
+       "chance_on_subset": 0.5,
+       "coverage": 0.507,
+       "raw_accuracy": 0.4906
+      },
+      "plain digit-sum check digit": {
+       "accuracy": 0.0893,
+       "chance_on_subset": 0.0,
+       "coverage": 0.492,
+       "raw_accuracy": 0.0893
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0853,
+       "chance_on_subset": 0.0,
+       "coverage": 0.492
+      }
+     },
+     "shapes": {
+      "ask=check_digit": 985,
+      "ask=valid": 1015
+     }
+    }
+   }
+  },
+  "R2.max_subarray_sum": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1065,
+     "distinct_answers": 29,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0775,
+     "distinct_answers": 41,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0735,
+     "distinct_answers": 47,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.064,
+     "distinct_answers": 51,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.058,
+     "distinct_answers": 54,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.06,
+     "distinct_answers": 60,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.052,
+     "distinct_answers": 63,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest single number": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of positives": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "total": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.merge_smallest_cost": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0445,
+     "distinct_answers": 52,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.091,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.091
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.023,
+     "distinct_answers": 110,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.008,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.008
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0155,
+     "distinct_answers": 175,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.012,
+     "distinct_answers": 242,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0005
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0095,
+     "distinct_answers": 305,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.008,
+     "distinct_answers": 388,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0065,
+     "distinct_answers": 460,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "join in written order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of sizes": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.min_heap_ops": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0005,
+     "distinct_answers": 2000,
+     "heuristics": {
+      "insertion order": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "sorted minus the removals": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.modular_power": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0155,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.203,
+     "distinct_answers": 17,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.1725,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1725
+      },
+      "e mod m": {
+       "accuracy": 0.0795,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0795
+      },
+      "first number in the question": {
+       "accuracy": 0.0155,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0065,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.107,
+     "distinct_answers": 32,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.206,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.206
+      },
+      "e mod m": {
+       "accuracy": 0.051,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.051
+      },
+      "first number in the question": {
+       "accuracy": 0.0065,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0025,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.097,
+     "distinct_answers": 47,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.187,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.187
+      },
+      "e mod m": {
+       "accuracy": 0.0325,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0325
+      },
+      "first number in the question": {
+       "accuracy": 0.0025,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0035,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0825,
+     "distinct_answers": 62,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.171,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.171
+      },
+      "e mod m": {
+       "accuracy": 0.0245,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0245
+      },
+      "first number in the question": {
+       "accuracy": 0.0035,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.003,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.072,
+     "distinct_answers": 75,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.1655,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1655
+      },
+      "e mod m": {
+       "accuracy": 0.0245,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0245
+      },
+      "first number in the question": {
+       "accuracy": 0.003,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.002,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0545,
+     "distinct_answers": 89,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.15,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.15
+      },
+      "e mod m": {
+       "accuracy": 0.014,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.014
+      },
+      "first number in the question": {
+       "accuracy": 0.002,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.001,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.0565,
+     "distinct_answers": 104,
+     "heuristics": {
+      "a": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.0
+      },
+      "a mod m after e mod 5": {
+       "accuracy": 0.1465,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.1465
+      },
+      "e mod m": {
+       "accuracy": 0.015,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0,
+       "raw_accuracy": 0.015
+      },
+      "first number in the question": {
+       "accuracy": 0.001,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0005,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  },
+  "R2.prime_factor_query": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.118,
+     "distinct_answers": 99,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.393,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.35,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 1043,
+      "ask=sum_all": 957
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1235,
+     "distinct_answers": 144,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.413,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 991,
+      "ask=sum_all": 1009
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1115,
+     "distinct_answers": 157,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.397,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.399,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 985,
+      "ask=sum_all": 1015
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.105,
+     "distinct_answers": 166,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.382,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.395,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 976,
+      "ask=sum_all": 1024
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1015,
+     "distinct_answers": 177,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.389,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.363,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 1022,
+      "ask=sum_all": 978
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.1015,
+     "distinct_answers": 177,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.363,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.354,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 1018,
+      "ask=sum_all": 982
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.0,
+     "constant_key_per_shape": 0.119,
+     "distinct_answers": 223,
+     "heuristics": {
+      "first number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "largest small prime (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.393,
+       "raw_accuracy": 0.0
+      },
+      "last number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "smallest number in the question": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 1.0
+      },
+      "sum of the small primes (<=13) dividing n": {
+       "accuracy": 0.0,
+       "chance_on_subset": 0.0,
+       "coverage": 0.411,
+       "raw_accuracy": 0.0
+      }
+     },
+     "shapes": {
+      "ask=largest": 982,
+      "ask=sum_all": 1018
+     }
+    }
+   }
+  },
+  "R2.subtraction_game": {
+   "levels": {
+    "0": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.5105,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.617,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.383
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.576,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.576
+      },
+      "parity of n": {
+       "accuracy": 0.5555,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.5555
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "1": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.52,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.606,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.394
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.5775,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.5775
+      },
+      "parity of n": {
+       "accuracy": 0.565,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.565
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "2": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.506,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.604,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.396
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.5625,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.5625
+      },
+      "parity of n": {
+       "accuracy": 0.537,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.537
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "3": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.5205,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.6005,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.3995
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.552,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.552
+      },
+      "parity of n": {
+       "accuracy": 0.526,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.526
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "4": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.505,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.609,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.391
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.5635,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.5635
+      },
+      "parity of n": {
+       "accuracy": 0.506,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.506
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "5": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.5085,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.6005,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.3995
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.55,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.55
+      },
+      "parity of n": {
+       "accuracy": 0.5065,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.5065
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    },
+    "6": {
+     "answer_token_in_question": 0.0,
+     "chance": 0.5,
+     "constant_key_per_shape": 0.5065,
+     "distinct_answers": 2,
+     "heuristics": {
+      "n mod (largest move + 1)": {
+       "accuracy": 0.5955,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.4045
+      },
+      "n mod (smallest + largest)": {
+       "accuracy": 0.547,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.547
+      },
+      "parity of n": {
+       "accuracy": 0.5205,
+       "chance_on_subset": 0.5,
+       "coverage": 1.0,
+       "raw_accuracy": 0.5205
+      }
+     },
+     "shapes": {
+      "": 2000
+     }
+    }
+   }
+  }
+ },
+ "per_level": 2000,
+ "seed": 953731
+}

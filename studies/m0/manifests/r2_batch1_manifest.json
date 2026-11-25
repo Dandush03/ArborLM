@@ -1,0 +1,898 @@
+{
+ "batch": "r2_batch1",
+ "capacity_factor": 10,
+ "capacity_note": "the registered gate counts distinct question texts (names and wording included); 'structured' counts distinct structured forms, a stricter reading",
+ "considered_log": [
+  {
+   "name": "lcs_length",
+   "note": "dynprog family; same PARADIGM as coin_change_min and lis_length (flag for the lead), different recurrence and data flow",
+   "status": "delivered"
+  },
+  {
+   "name": "coin_change_min",
+   "note": "paradigm-adjacent to lcs_length; greedy is the planted wrong shortcut",
+   "status": "delivered"
+  },
+  {
+   "name": "lis_length",
+   "note": "paradigm-adjacent to lcs_length",
+   "status": "delivered"
+  },
+  {
+   "name": "max_subarray_sum",
+   "note": "single left-to-right scan with carried state; distinct from count_divisible (a predicate count)",
+   "status": "delivered"
+  },
+  {
+   "name": "gcd_euclid",
+   "note": "lcm and step-count questions are shapes of this lineage",
+   "status": "delivered"
+  },
+  {
+   "name": "modular_power",
+   "note": "distinct from the existing permutation_power (iterate a stated map)",
+   "status": "delivered"
+  },
+  {
+   "name": "crt_smallest",
+   "note": "congruence combination; adjacent to numtheory but a different procedure from multiples_between (floor formula) and digit_root",
+   "status": "delivered"
+  },
+  {
+   "name": "prime_factor_query",
+   "note": "largest prime and sum of prime factors are shapes of one factorisation lineage",
+   "status": "delivered"
+  },
+  {
+   "name": "bst_traversal",
+   "note": "pre-, post- and level order are shapes; distinct data structure from list_ops and stack_machine",
+   "status": "delivered"
+  },
+  {
+   "name": "min_heap_ops",
+   "note": "adjacent to bst_traversal and stack_machine as 'simulate a data structure'; kept apart because the invariant and the repair steps differ",
+   "status": "delivered"
+  },
+  {
+   "name": "cache_eviction",
+   "note": "LRU and FIFO are shapes of one lineage (changing the eviction rule is a rule change inside one simulation)",
+   "status": "delivered"
+  },
+  {
+   "name": "hash_probe",
+   "note": "adjacent to cache_eviction as 'simulate a data structure'",
+   "status": "delivered"
+  },
+  {
+   "name": "bracket_match",
+   "note": "distinct from stack_machine (push/pop of numbers with arithmetic): here the stack is for matching",
+   "status": "delivered"
+  },
+  {
+   "name": "expression_eval",
+   "note": "the left-to-right convention is a shape (changing a convention), not a second lineage",
+   "status": "delivered"
+  },
+  {
+   "name": "interval_scheduling",
+   "note": "adjacent to merge_smallest_cost as 'greedy'; different selection key and structure",
+   "status": "delivered"
+  },
+  {
+   "name": "merge_smallest_cost",
+   "note": "priority-queue greedy",
+   "status": "delivered"
+  },
+  {
+   "name": "cheapest_network",
+   "note": "same strict procedure as R1.graph_shortest_route? No: Kruskal edge selection versus single-source distance; R1 is a different evaluation",
+   "status": "delivered"
+  },
+  {
+   "name": "deferred_acceptance_partner",
+   "note": "matching by proposal rounds",
+   "status": "delivered"
+  },
+  {
+   "name": "subtraction_game",
+   "note": "win/lose labelling; nim, misere and multi-pile variants would be shapes, not built",
+   "status": "delivered"
+  },
+  {
+   "name": "cellular_automaton",
+   "note": "Game of Life would be a shape of this (synchronous local rule)",
+   "status": "delivered"
+  },
+  {
+   "name": "chip_toppling",
+   "note": "asynchronous relaxation to a stable state; kept apart from cellular_automaton (synchronous)",
+   "status": "delivered"
+  },
+  {
+   "name": "luhn_check",
+   "note": "ISBN or other weighted-sum checksums would be shapes",
+   "status": "delivered"
+  },
+  {
+   "name": "hamming_error_position",
+   "note": "parity-check syndrome",
+   "status": "delivered"
+  },
+  {
+   "name": "dictionary_rank",
+   "note": "ranking and unranking are shapes of one lineage",
+   "status": "delivered"
+  },
+  {
+   "name": "binary_search_trace",
+   "note": "different midpoint conventions are shapes",
+   "status": "delivered"
+  },
+  {
+   "name": "longest_palindromic_substring",
+   "note": "distinct from the existing palindrome_check (a yes/no reverse comparison)",
+   "status": "delivered"
+  },
+  {
+   "name": "edit_distance (Levenshtein)",
+   "note": "same strict procedure as lcs_length: two-string prefix table with a different cell rule",
+   "status": "rejected"
+  },
+  {
+   "name": "0/1 knapsack, subset sum, count the ways to make change, stair paths",
+   "note": "same strict procedure as coin_change_min (capacity table)",
+   "status": "rejected"
+  },
+  {
+   "name": "grid path counting / minimum-cost grid path",
+   "note": "same paradigm as the DP lineages already delivered; a third and fourth table recurrence would pad the dynprog family",
+   "status": "rejected"
+  },
+  {
+   "name": "inversion count / bubble-sort passes / insertion-sort state",
+   "note": "same strict procedure as the existing sorting lineages (order relation over a list)",
+   "status": "rejected"
+  },
+  {
+   "name": "Lomuto partition step",
+   "note": "a named sorting step; shape of sorting-procedure simulation, near-duplicate of list_ops",
+   "status": "rejected"
+  },
+  {
+   "name": "mode / majority / histogram",
+   "note": "same strict procedure as count_letter and count_divisible (tally)",
+   "status": "rejected"
+  },
+  {
+   "name": "pairs with a given sum; pair counting",
+   "note": "same strict procedure as count_divisible (count items by a relation)",
+   "status": "rejected"
+  },
+  {
+   "name": "union length of intervals; maximum overlap (rooms needed)",
+   "note": "same interval-sweep family as interval_scheduling under the strict reading",
+   "status": "rejected"
+  },
+  {
+   "name": "Collatz / digit-sum iteration / cycle detection / linear recurrence unrolling",
+   "note": "iterate a stated rule until a condition: same strict procedure as the existing permutation_power and digit_root",
+   "status": "rejected"
+  },
+  {
+   "name": "Roman numerals, balanced ternary, factorial base conversion, binary XOR/AND",
+   "note": "changing the number system: a shape of the existing base-conversion lineages",
+   "status": "rejected"
+  },
+  {
+   "name": "Vigenere / affine / rot-N cipher",
+   "note": "same strict procedure as caesar_shift (per-letter modular map)",
+   "status": "rejected"
+  },
+  {
+   "name": "run-length decoding, look-and-say",
+   "note": "same strict procedure as run_length",
+   "status": "rejected"
+  },
+  {
+   "name": "substring occurrence count (overlaps), anagram test, longest run",
+   "note": "same strict procedure as count_letter or run_length (scan and tally)",
+   "status": "rejected"
+  },
+  {
+   "name": "Markov (priority-ordered) string rewriting to normal form",
+   "note": "string rewriting is the existing string_rewrite family; iterating to a fixed point is a change of control, not of procedure",
+   "status": "rejected"
+  },
+  {
+   "name": "set-algebra expression sizes",
+   "note": "same strict procedure as expression_eval (evaluate a nested expression)",
+   "status": "rejected"
+  },
+  {
+   "name": "prefix/postfix (Polish) expression evaluation, function composition f(g(x))",
+   "note": "same strict procedure as expression_eval or stack_machine",
+   "status": "rejected"
+  },
+  {
+   "name": "matrix product entry, determinant, polynomial coefficient of a product",
+   "note": "sum-of-products indexing: same strict procedure as grid_sum (aggregate over indexed cells)",
+   "status": "rejected"
+  },
+  {
+   "name": "spiral / transpose / rotate a grid, then read a cell",
+   "note": "index-transform simulation: same strict procedure as grid_sum and list_ops",
+   "status": "rejected"
+  },
+  {
+   "name": "Tower of Hanoi move queries",
+   "note": "capacity: (n, move index) has far fewer than 1,800 items at level 1 without padding by decoration",
+   "status": "rejected"
+  },
+  {
+   "name": "Nim (xor of heaps), minimax on a game tree, misere subtraction",
+   "note": "same strict procedure as subtraction_game (outcome of an impartial or alternating game)",
+   "status": "rejected"
+  },
+  {
+   "name": "first-fit bin packing",
+   "note": "built as a draft idea only; judged simulation-adjacent to cache_eviction and cheaper to leave out than to defend",
+   "status": "deferred"
+  },
+  {
+   "name": "round-robin scheduling finish time",
+   "note": "cyclic-queue simulation: adjacent to the R1 Josephus lineage and to cache_eviction; not built",
+   "status": "deferred"
+  },
+  {
+   "name": "tree diameter / longest path in a tree",
+   "note": "not built; adjacent to cheapest_network under a strict reading (tree aggregates over weighted edges)",
+   "status": "deferred"
+  },
+  {
+   "name": "bipartite maximum matching size (augmenting paths)",
+   "note": "not built; adjacent to deferred_acceptance_partner (matching)",
+   "status": "deferred"
+  },
+  {
+   "name": "connected components / flood fill on a grid",
+   "note": "closure: same strict procedure as R1 reachability and equivalence classes",
+   "status": "rejected"
+  },
+  {
+   "name": "topological order (Kahn), longest path in a DAG",
+   "note": "R1 audit and notes: same strict procedure as reachability / critical path",
+   "status": "rejected"
+  },
+  {
+   "name": "Dijkstra shortest route, Josephus, queue/stack piles",
+   "note": "already R1 pilot lineages (different evaluation); not repeated",
+   "status": "rejected"
+  },
+  {
+   "name": "Hamming distance, parity bit, CRC",
+   "note": "CRC polynomial division is a different procedure but too long for a short item; parity/distance are shapes of hamming_error_position or count_letter",
+   "status": "rejected"
+  }
+ ],
+ "existing_r2_strict_procedures": {
+  "caesar_shift": "per-letter modular map",
+  "count_letter, count_divisible": "scan items and tally those meeting a predicate (ONE strict procedure)",
+  "count_of_distinct_strict_procedures": "12 to 14 of the 16 existing lineages, depending on how the pairs above are read",
+  "digit_root": "iterate digit sum",
+  "grid_sum": "aggregate along a row, column or diagonal",
+  "list_ops, stack_machine": "apply an operation list to a small structure (one strict procedure on the strictest reading; two on the data-structure reading)",
+  "multiples_between": "floor-division count",
+  "palindrome_check": "compare with the reverse",
+  "permutation_power": "iterate a stated map",
+  "run_length": "maximal-run encoding",
+  "sort_list, kth_smallest": "order a list (ONE strict procedure)",
+  "string_rewrite": "sequential substitution",
+  "to_base, from_base": "positional-numeral conversion (ONE strict procedure on the strictest reading; division versus Horner on a looser one)"
+ },
+ "g_for_capacity": 300,
+ "new_lineages": [
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "search",
+   "file": "studies/m0/lineages_r2_search.py",
+   "fixture_sha256": "8bc30a9bc0535a28aa81a1c4bba3b23070c9d7d98aa5647a9a417a899bb26d83",
+   "id": "R2.binary_search_trace",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 1,
+    "flag": false,
+    "lineage": "R2.binary_search_trace",
+    "worst_constant": 0.023,
+    "worst_heuristic": "the target",
+    "worst_heuristic_acc": 0.1417,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "6fac4c836e85a5032f3f58fb33499baea618059794c10c02a817a4674d06e018",
+   "strict_procedure": "binary search with a stated midpoint rule: values looked at, or the third value",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "parsing",
+   "file": "studies/m0/lineages_r2_parsing.py",
+   "fixture_sha256": "80e5c31d0400c4851d802741206750749ad6b4a0c2241efa54084ea37fc2f77c",
+   "id": "R2.bracket_match",
+   "shortcut_screen": {
+    "constant_chance": 0.297,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.bracket_match",
+    "worst_constant": 0.452,
+    "worst_heuristic": "equal counts of each kind",
+    "worst_heuristic_acc": 0.5454,
+    "worst_heuristic_chance": 0.5,
+    "worst_heuristic_level": 5
+   },
+   "signature": "0ad22866aec402be1f7229edda93a186e7f9affeedd7fc8fe8454393a9ad258a",
+   "strict_procedure": "last-opened-first-closed matching of three kinds of bracket: validity, or the partner position",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "structures",
+   "file": "studies/m0/lineages_r2_structures.py",
+   "fixture_sha256": "713e4107b50328b5d3581cf61777d1a110a31c8cd2d9ebc7030f6d14dd249785",
+   "id": "R2.bst_traversal",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.bst_traversal",
+    "worst_constant": 0.002,
+    "worst_heuristic": "sorted descending",
+    "worst_heuristic_acc": 0.001,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "5452660e2e4ba252b4b874f3a6718850bbef57a7adc33009180912355a20cf24",
+   "strict_procedure": "binary-search-tree insertion, then a pre-, post- or level-order walk",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "structures",
+   "file": "studies/m0/lineages_r2_structures.py",
+   "fixture_sha256": "2f33354c22d6813264f61448de53c798ef99e6ec833566ded662dcd0bba099fd",
+   "id": "R2.cache_eviction",
+   "shortcut_screen": {
+    "constant_chance": 0.243,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.cache_eviction",
+    "worst_constant": 0.409,
+    "worst_heuristic": "item among the last cap requests",
+    "worst_heuristic_acc": 0.6454,
+    "worst_heuristic_chance": 0.5,
+    "worst_heuristic_level": 4
+   },
+   "signature": "11d89846a7bc92147a1e2d914f1cc2be30ee323d706db13a9e02ac39b416d8af",
+   "strict_procedure": "cache with a stated eviction rule (LRU or FIFO): misses, or presence at the end",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "dynamics",
+   "file": "studies/m0/lineages_r2_dynamics.py",
+   "fixture_sha256": "cc6aa284aa4a2bab3bf44c34638c4d81c655b3cc14a677f169cd76d652a52ae1",
+   "id": "R2.cellular_automaton",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.cellular_automaton",
+    "worst_constant": 0.107,
+    "worst_heuristic": "one step only",
+    "worst_heuristic_acc": 0.166,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 3
+   },
+   "signature": "0833a37ab17257dcfba460571d099cf12c75e158dece770b9113e1d82090bcc8",
+   "strict_procedure": "synchronous three-neighbour table update of a row, repeated",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "graphs",
+   "file": "studies/m0/lineages_r2_graphs.py",
+   "fixture_sha256": "73f1484a471a80d9dc97f8de96b480230fc49e08a5226fb81bd41ac279e8260c",
+   "id": "R2.cheapest_network",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.cheapest_network",
+    "worst_constant": 0.041,
+    "worst_heuristic": "n-1 cheapest cables",
+    "worst_heuristic_acc": 0.204,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "d2ee18032793ea439c3ee0c71bdd59a8eafe2f4ae5edddbb33303e194372dfdd",
+   "strict_procedure": "cycle-avoiding cheapest-edge selection (minimum spanning network weight)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "dynamics",
+   "file": "studies/m0/lineages_r2_dynamics.py",
+   "fixture_sha256": "195d692f8787933e8082124ba577eaf478fb7aa9676c229715257f9207f0c29f",
+   "id": "R2.chip_toppling",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.chip_toppling",
+    "worst_constant": 0.129,
+    "worst_heuristic": "first number in the question",
+    "worst_heuristic_acc": 0.0699,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 1
+   },
+   "signature": "040f34e39d0c02cc601641be7131915fe6f194f689345cb2ccf646b79dc5868d",
+   "strict_procedure": "topple cells with 2+ chips until stable (abelian sandpile on a path with open ends)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "dynprog",
+   "file": "studies/m0/lineages_r2_dynprog.py",
+   "fixture_sha256": "f3073b6d385dbc4d48529b4932fbbe0678297f6a2163bfee03e8ea22be784e26",
+   "id": "R2.coin_change_min",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 3,
+    "flag": false,
+    "lineage": "R2.coin_change_min",
+    "worst_constant": 0.221,
+    "worst_heuristic": "largest coin first",
+    "worst_heuristic_acc": 0.22,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 3
+   },
+   "signature": "d3d8f53c19bb3a114f1768727d5499a6841b30cf02230b882002838c454c871e",
+   "strict_procedure": "unbounded-supply capacity table: fewest coins for an exact amount (greedy is wrong in most items)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "numtheory",
+   "file": "studies/m0/lineages_r2_numtheory.py",
+   "fixture_sha256": "12645b5f52d2fe344cb64b99388266eba5d61834157260eeb83b2a291445a9d9",
+   "id": "R2.crt_smallest",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.crt_smallest",
+    "worst_constant": 0.03,
+    "worst_heuristic": "largest remainder",
+    "worst_heuristic_acc": 0.173,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "b25cdc95371de3ec4f20bb616c39e52934ec6762e6907d2061a2853893e08624",
+   "strict_procedure": "combine congruences with coprime moduli: smallest positive solution",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "graphs",
+   "file": "studies/m0/lineages_r2_graphs.py",
+   "fixture_sha256": "384e5e97a40b5a39e795bd0e464dfbde97ee4cc7c77b9b28e88b895ba168c722",
+   "id": "R2.deferred_acceptance_partner",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": -1,
+    "flag": false,
+    "lineage": "R2.deferred_acceptance_partner",
+    "worst_constant": 0.0,
+    "worst_heuristic": "responder who ranks them first-highest",
+    "worst_heuristic_acc": 0.173,
+    "worst_heuristic_chance": 0.1667,
+    "worst_heuristic_level": 6
+   },
+   "signature": "4453bf108dbb6311175ced094a3fc54213fbea433cbd72ee553f6d18952b1e22",
+   "strict_procedure": "proposal-and-hold rounds (Gale-Shapley deferred acceptance)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "combinatorics",
+   "file": "studies/m0/lineages_r2_combinatorics.py",
+   "fixture_sha256": "47e51d3e3dced3493ab310a5f74bff96d43814181bc5edabc2e0c996d0b3e100",
+   "id": "R2.dictionary_rank",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.dictionary_rank",
+    "worst_constant": 0.027,
+    "worst_heuristic": "first-letter block start",
+    "worst_heuristic_acc": 0.1506,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 1
+   },
+   "signature": "35077b2e67da519c4d26af6f0ea8e6709bfe9c2025cf948fcae97d34c35d43f1",
+   "strict_procedure": "factorial-base ranking or unranking of arrangements in dictionary order",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "parsing",
+   "file": "studies/m0/lineages_r2_parsing.py",
+   "fixture_sha256": "51b06c6841e800bc3452734f5d4d2b411934ef694c0112d162179299014af113",
+   "id": "R2.expression_eval",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.expression_eval",
+    "worst_constant": 0.033,
+    "worst_heuristic": "parentheses ignored, ranked",
+    "worst_heuristic_acc": 0.256,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "e93da1a8b97179334484350b95852ba3d27a4f087f447e0e3e50e555f6d10874",
+   "strict_procedure": "evaluate an infix expression under a stated operator-precedence convention",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "numtheory",
+   "file": "studies/m0/lineages_r2_numtheory.py",
+   "fixture_sha256": "f670421ba9926405d93af98300c2a2c885acd2e5068bc3a932d8f37159b996e9",
+   "id": "R2.gcd_euclid",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 2,
+    "flag": false,
+    "lineage": "R2.gcd_euclid",
+    "worst_constant": 0.138,
+    "worst_heuristic": "a-b / a*b / 3",
+    "worst_heuristic_acc": 0.1165,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 2
+   },
+   "signature": "e5a8f7d6fa4822c39c4d5962307e28f669e2d73339ded7d63ff9a7271ac3302d",
+   "strict_procedure": "Euclid's remainder algorithm (gcd, lcm or step count)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "codes",
+   "file": "studies/m0/lineages_r2_codes.py",
+   "fixture_sha256": "a7e029a35b510bd5b0a780fa5f9bc43dd67a2de7dc268f0a770e48ff7f6ec166",
+   "id": "R2.hamming_error_position",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 6,
+    "flag": false,
+    "lineage": "R2.hamming_error_position",
+    "worst_constant": 0.105,
+    "worst_heuristic": "lowest failing check",
+    "worst_heuristic_acc": 0.221,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 1
+   },
+   "signature": "0d580167f2abb3dc6c62296d861ea7957b7d187d5fd46f0ea813ab98b64dcf99",
+   "strict_procedure": "parity-check syndrome of a Hamming code: the flipped position",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "structures",
+   "file": "studies/m0/lineages_r2_structures.py",
+   "fixture_sha256": "dfb6108558611273eb469a0d4dcb067abd9de9101f2a586c96035cca37451b92",
+   "id": "R2.hash_probe",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 1,
+    "flag": false,
+    "lineage": "R2.hash_probe",
+    "worst_constant": 0.23,
+    "worst_heuristic": "one slot looked at",
+    "worst_heuristic_acc": 0.2282,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 6
+   },
+   "signature": "b7532e8673a967ee79e6a8379ba8b642b50e56911a2ee8ab1e4238338cf08a8a",
+   "strict_procedure": "open-addressing hash table with linear probing: final slot or number of probes",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "greedy",
+   "file": "studies/m0/lineages_r2_greedy.py",
+   "fixture_sha256": "d09ec564189526a3e49b434bfcd306c4b7ec5d3fea411d2946b9678d2babfeb0",
+   "id": "R2.interval_scheduling",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 1,
+    "flag": false,
+    "lineage": "R2.interval_scheduling",
+    "worst_constant": 0.268,
+    "worst_heuristic": "shortest first",
+    "worst_heuristic_acc": 0.225,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "11b5e565b0c74390dc6207cd7add01411ba81a658c503fd877f347e042669179",
+   "strict_procedure": "earliest-finish-time selection of non-overlapping intervals",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "dynprog",
+   "file": "studies/m0/lineages_r2_dynprog.py",
+   "fixture_sha256": "ae805ec9183bc7753d5cc16275a79e354b87f0564a2b90d264bd8facc7163da6",
+   "id": "R2.lcs_length",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": true,
+    "lineage": "R2.lcs_length",
+    "worst_constant": 0.303,
+    "worst_heuristic": "half the shorter string",
+    "worst_heuristic_acc": 0.1785,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 2
+   },
+   "signature": "27cb11dac6a9e6fc02d5a4dc05ffa1a7c06372854da57e9b58dcbe5149740438",
+   "strict_procedure": "fill a two-string prefix table: longest common subsequence length",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "dynprog",
+   "file": "studies/m0/lineages_r2_dynprog.py",
+   "fixture_sha256": "14add161dbf3b2d5f1d20823faccddc895a4a76a6090e7209ea7581a23595d38",
+   "id": "R2.lis_length",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": true,
+    "lineage": "R2.lis_length",
+    "worst_constant": 0.322,
+    "worst_heuristic": "smallest number in the question",
+    "worst_heuristic_acc": 0.0645,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 3
+   },
+   "signature": "609d126c80afe6515d251672b9e63db396a902014e2440bb8633125595cf8367",
+   "strict_procedure": "longest strictly increasing subsequence length",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "strings",
+   "file": "studies/m0/lineages_r2_strings.py",
+   "fixture_sha256": "1bfd742d7d0f50b85edb84885f81a2b686f0406c5d75e89d90ddb63cefa97edc",
+   "id": "R2.longest_palindromic_substring",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.longest_palindromic_substring",
+    "worst_constant": 0.285,
+    "worst_heuristic": "longest run of one letter",
+    "worst_heuristic_acc": 0.0845,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "213d712e6cfbbd0deb5ab66636c31526d58a65413ca32effc0243134df803b7f",
+   "strict_procedure": "expand around every centre: longest palindromic block length",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "codes",
+   "file": "studies/m0/lineages_r2_codes.py",
+   "fixture_sha256": "b97a78ccdc8f0b7b521ab4a74fe843c45355ac9539209b10bb88a3b0a4fb0228",
+   "id": "R2.luhn_check",
+   "shortcut_screen": {
+    "constant_chance": 0.247,
+    "constant_level": 5,
+    "flag": false,
+    "lineage": "R2.luhn_check",
+    "worst_constant": 0.319,
+    "worst_heuristic": "plain digit-sum check digit",
+    "worst_heuristic_acc": 0.1118,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "e4218d5b58f756dbda4465b9aeeda92d1f25cbfebeaf6852395652bdab2ecdf8",
+   "strict_procedure": "alternate-digit doubling checksum (Luhn): validity or check digit",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "dynprog",
+   "file": "studies/m0/lineages_r2_dynprog.py",
+   "fixture_sha256": "7ce7436afa79158a2d1abba0835d41c1165ad8dac02c6d20aca7a34bd55f3be0",
+   "id": "R2.max_subarray_sum",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.max_subarray_sum",
+    "worst_constant": 0.106,
+    "worst_heuristic": "",
+    "worst_heuristic_acc": 0.0,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": -1
+   },
+   "signature": "e6ccd72efeaa9b33f47488169faef3dcf09ba12a989d491fecca009b9aa228ba",
+   "strict_procedure": "running best-ending-here scan: largest sum of a contiguous block",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "greedy",
+   "file": "studies/m0/lineages_r2_greedy.py",
+   "fixture_sha256": "967c352d19d209748d04a670c3030de0061bd5f20fe63305232e06986056b48a",
+   "id": "R2.merge_smallest_cost",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.merge_smallest_cost",
+    "worst_constant": 0.044,
+    "worst_heuristic": "join in written order",
+    "worst_heuristic_acc": 0.091,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 0
+   },
+   "signature": "4eea9aeb69da5ef89cd08709e629ea071096ebe6b02d464db27141f2591c926b",
+   "strict_procedure": "repeatedly merge the two smallest items (Huffman-style total cost)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "structures",
+   "file": "studies/m0/lineages_r2_structures.py",
+   "fixture_sha256": "3705c34e12765e2ae0cd3903756fd509d7d5fa7dfafbb418c6c9c2701a764ea5",
+   "id": "R2.min_heap_ops",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.min_heap_ops",
+    "worst_constant": 0.001,
+    "worst_heuristic": "",
+    "worst_heuristic_acc": 0.0,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": -1
+   },
+   "signature": "40c3986fe9a80fb661033b8b00d71c0f18e97a94ea038eb88cd0ef550d161d78",
+   "strict_procedure": "array binary min-heap: sift-up insertion and sift-down removal",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "numtheory",
+   "file": "studies/m0/lineages_r2_numtheory.py",
+   "fixture_sha256": "6065c19cd1aa79b47e8136f174036aca5c43de0eb5e569f9befd83d1f68bd1e0",
+   "id": "R2.modular_power",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 0,
+    "flag": false,
+    "lineage": "R2.modular_power",
+    "worst_constant": 0.203,
+    "worst_heuristic": "a mod m after e mod 5",
+    "worst_heuristic_acc": 0.206,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": 1
+   },
+   "signature": "01c537b061d49a05ae5352c796a02546302527546d6f11f323c903d40c0631ac",
+   "strict_procedure": "repeated squaring modulo m",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "numtheory",
+   "file": "studies/m0/lineages_r2_numtheory.py",
+   "fixture_sha256": "ff64dda098827d29bbde8601f4794e52da03d0a5c1ec50b422dd59cfc8b39d69",
+   "id": "R2.prime_factor_query",
+   "shortcut_screen": {
+    "constant_chance": 0.0,
+    "constant_level": 1,
+    "flag": false,
+    "lineage": "R2.prime_factor_query",
+    "worst_constant": 0.123,
+    "worst_heuristic": "",
+    "worst_heuristic_acc": 0.0,
+    "worst_heuristic_chance": 0.0,
+    "worst_heuristic_level": -1
+   },
+   "signature": "59953d599b8aa1330868836a9c9659e4b7d11af5d875908f0dae342b7857765d",
+   "strict_procedure": "trial-division prime factorisation (largest prime, or sum of the prime factors with multiplicity)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "family": "games",
+   "file": "studies/m0/lineages_r2_games.py",
+   "fixture_sha256": "817919baf7233ff1725bcb46f3c5ebd3b23781e03f1325dd629014008709b568",
+   "id": "R2.subtraction_game",
+   "shortcut_screen": {
+    "constant_chance": 0.5,
+    "constant_level": 3,
+    "flag": false,
+    "lineage": "R2.subtraction_game",
+    "worst_constant": 0.52,
+    "worst_heuristic": "n mod (largest move + 1)",
+    "worst_heuristic_acc": 0.617,
+    "worst_heuristic_chance": 0.5,
+    "worst_heuristic_level": 0
+   },
+   "signature": "02b5c461be870d438ac5a2e859400d60e9865ecc618338db3aaff30dc198d8ca",
+   "strict_procedure": "label pile sizes win/lose from small to large (backward induction)",
+   "structured_capacity_levels_short": [],
+   "structured_capacity_passed_all_levels": true
+  }
+ ],
+ "note": "New R2 lineages under the STRICT reading (a lineage is a general algorithm; number system, constraint mix, final question, names, order, negation and surface frame are shapes). No second solvers exist yet; none is registered in core.REGISTRY. No part is assigned: the registered partition is by seed over the final family list. Self-checked only: not independent review, not Astra validation, not human approval.",
+ "seconds": {
+  "all": 21.5,
+  "fixtures": 0.14
+ }
+}
