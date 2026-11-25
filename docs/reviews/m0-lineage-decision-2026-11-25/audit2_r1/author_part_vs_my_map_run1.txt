@@ -1,0 +1,11 @@
+PRIMARY: 27 clusters; wholly A 9, wholly B 15, straddling 3
+    [('attribute_rule', 'B'), ('conditional_decision_tree', 'B'), ('minimax_tree', 'A')]
+    [('categories_follow_r2', 'B'), ('equivalence_classes_r2', 'B'), ('order_compare', 'A'), ('road_reachability', 'A')]
+    [('containers_queue_line_r2', 'A'), ('elimination_josephus', 'B')]
+STRICTEST: 14 clusters; wholly A 3, wholly B 5, straddling 6
+    [('activity_selection', 'A'), ('conditional_threshold_rule_r3', 'B'), ('graph_shortest_route_r2', 'A'), ('instant_runoff_r2', 'B'), ('kinship_descendants_r3', 'B'), ('mst_cost', 'B'), ('order_extreme', 'A'), ('order_tournament_wins', 'A'), ('temporal_critical_path', 'B'), ('topological_order_r2', 'A')]
+    [('attribute_rule', 'B'), ('conditional_decision_tree', 'B'), ('minimax_tree', 'A')]
+    [('boolean_lights_r2', 'B'), ('compass_turns', 'B'), ('nim_xor', 'A'), ('spatial_grid_walk_r2', 'B')]
+    [('categories_follow_r2', 'B'), ('equivalence_classes_r2', 'B'), ('graph_bipartite', 'A'), ('order_compare', 'A'), ('road_reachability', 'A')]
+    [('conditional_chain', 'B'), ('knights_knaves', 'B'), ('one_culprit', 'B'), ('pet_owners', 'A'), ('seating_row', 'A')]
+    [('containers_queue_line_r2', 'A'), ('elimination_josephus', 'B')]

@@ -1,0 +1,28 @@
+
+== AUTHOR map (own code): 31 clusters
+   attribute_rule + conditional_decision_tree | families: ['conditional', 'rules']
+   boolean_lights_r2 + compass_turns | families: ['boolean_state', 'spatial']
+   categories_default_exceptions_r3 + kinship_ancestor_r3 + kinship_cousins | families: ['categories', 'kinship']
+   categories_follow_r2 + equivalence_classes_r2 | families: ['categories', 'equivalence']
+   equivalence_exchange_rates + event_timeline + spatial_relative_directions + temporal_weekday_shift | families: ['equivalence', 'spatial', 'temporal']
+   knights_knaves + one_culprit | families: ['culprit', 'truth']
+   order_compare + road_reachability | families: ['graph', 'order']
+   order_extreme + order_tournament_wins | families: ['order']
+   pet_owners + seating_row | families: ['arrangement']
+  [literal: 22 families, label 'R1'] families A=['boolean_state', 'culprit', 'elimination', 'games', 'kinship', 'network', 'order', 'rules', 'temporal', 'tracking', 'voting']
+     lineages A=21 B=22; clusters wholly A=12 wholly B=13 straddling=6
+     straddle: [('attribute_rule', 'A'), ('conditional_decision_tree', 'B')]
+     straddle: [('boolean_lights_r2', 'A'), ('compass_turns', 'B')]
+     straddle: [('categories_default_exceptions_r3', 'B'), ('kinship_ancestor_r3', 'A'), ('kinship_cousins', 'A')]
+     straddle: [('equivalence_exchange_rates', 'B'), ('event_timeline', 'A'), ('spatial_relative_directions', 'B'), ('temporal_weekday_shift', 'A')]
+     straddle: [('knights_knaves', 'B'), ('one_culprit', 'A')]
+     straddle: [('order_compare', 'A'), ('road_reachability', 'B')]
+  [family-closure keys (14 keys), shuffled with the registered rule] A keys=['arrangement', 'containers', 'games', 'graph+order', 'matching', 'scheduling', 'sets']
+     B keys=['boolean_state+categories+equivalence+kinship+spatial+temporal', 'conditional+rules', 'culprit+truth', 'elimination', 'network', 'tracking', 'voting']
+     lineages A=16 B=27; clusters A=13 B=18 straddling=0
+  [cluster keys shuffled with the registered rule] clusters A=15 B=16; lineages A=17 B=26
+     A: ['activity_selection', 'conditional_chain', 'containers_queue_line_r2', 'containers_stack_piles_r3', 'graph_bipartite', 'graph_shortest_route_r2', 'knights_knaves', 'minimax_tree', 'mst_cost', 'nim_xor', 'pet_owners', 'spatial_grid_walk_r2', 'temporal_interval_overlap', 'topological_order_r2', 'venn_counting']
+
+author function clusters_per_part: A 13 B 18
+author partition keys: {'games': 'A', 'sets': 'A', 'scheduling': 'A', 'arrangement': 'A', 'matching': 'A', 'containers': 'A', 'graph+order': 'A', 'network': 'B', 'voting': 'B', 'elimination': 'B', 'tracking': 'B', 'conditional+rules': 'B', 'culprit+truth': 'B', 'boolean_state+categories+equivalence+kinship+spatial+temporal': 'B'}
+author registered count 43 clusters 31

@@ -1,0 +1,46 @@
+loaded 64 superseded 21 registered 43
+families 22 ['arrangement', 'boolean_state', 'categories', 'conditional', 'containers', 'culprit', 'elimination', 'equivalence', 'games', 'graph', 'kinship', 'matching', 'network', 'order', 'rules', 'scheduling', 'sets', 'spatial', 'temporal', 'tracking', 'truth', 'voting']
+R1.activity_selection scheduling
+R1.attribute_rule rules
+R1.boolean_lights_r2 boolean_state
+R1.categories_default_exceptions_r3 categories
+R1.categories_follow_r2 categories
+R1.compass_turns spatial
+R1.conditional_chain conditional
+R1.conditional_decision_tree conditional
+R1.conditional_threshold_rule_r3 conditional
+R1.containers_queue_line_r2 containers
+R1.containers_stack_piles_r3 containers
+R1.elimination_bracket_r3 elimination
+R1.elimination_josephus elimination
+R1.equivalence_classes_r2 equivalence
+R1.equivalence_exchange_rates equivalence
+R1.event_timeline temporal
+R1.graph_bipartite graph
+R1.graph_shortest_route_r2 graph
+R1.instant_runoff_r2 voting
+R1.kinship_ancestor_r3 kinship
+R1.kinship_cousins kinship
+R1.kinship_descendants_r3 kinship
+R1.knights_knaves truth
+R1.minimax_tree games
+R1.mst_cost network
+R1.nim_xor games
+R1.one_culprit culprit
+R1.order_compare order
+R1.order_extreme order
+R1.order_tournament_wins order
+R1.pet_owners arrangement
+R1.road_reachability graph
+R1.seating_row arrangement
+R1.spatial_grid_walk_r2 spatial
+R1.spatial_relative_directions spatial
+R1.stable_matching_r2 matching
+R1.swap_tracking tracking
+R1.temporal_critical_path temporal
+R1.temporal_interval_overlap temporal
+R1.temporal_weekday_shift temporal
+R1.topological_order_r2 scheduling
+R1.tracking_accounts tracking
+R1.venn_counting sets
+core.family_partition('R1') on core registry: {'truth': 'A', 'spatial': 'A', 'rules': 'A', 'culprit': 'A', 'temporal': 'A', 'arrangement': 'A', 'order': 'B', 'kinship': 'B', 'tracking': 'B', 'conditional': 'B', 'graph': 'B', 'categories': 'B'}

@@ -1,0 +1,31 @@
+fixture items: 2940; solver agrees with key: 2940; disagreements: 0; solver errors: 0
+
+Alternative readings that change the key (count of fixture items, first 3 ids):
+  M1.binomial_choose [at_least_j] 47/140  e.g. [('M1.binomial_choose/fixture/0/0', '63', '98'), ('M1.binomial_choose/fixture/0/1', '252', '308'), ('M1.binomial_choose/fixture/0/3', '224', '280')]
+  M1.binomial_choose [ignore_forced] 49/140  e.g. [('M1.binomial_choose/fixture/0/2', '165', '220'), ('M1.binomial_choose/fixture/0/5', '45', '165'), ('M1.binomial_choose/fixture/0/9', '210', '330')]
+  M1.digit_puzzle [reverse_of_trailing_zero_is_not_a_number] 7/140  e.g. [('M1.digit_puzzle/fixture/1/12', '980', 'AMBIG'), ('M1.digit_puzzle/fixture/2/15', '510', 'AMBIG'), ('M1.digit_puzzle/fixture/4/15', '610', 'AMBIG')]
+  M1.last_digit_power [literal_multiplied_by_itself_e_times] 116/140  e.g. [('M1.last_digit_power/fixture/0/0', '6', '2'), ('M1.last_digit_power/fixture/0/1', '9', '7'), ('M1.last_digit_power/fixture/0/2', '8', '6')]
+  M1.slot_permutations [conventional_no_leading_zero] 13/140  e.g. [('M1.slot_permutations/fixture/0/13', '405', '360'), ('M1.slot_permutations/fixture/0/18', '90', '80'), ('M1.slot_permutations/fixture/1/7', '168', '150')]
+
+Key appears verbatim among the numbers printed in the question (count / items):
+  M1.binomial_choose               0/140
+  M1.change_ways                  18/140
+  M1.crt_congruence                0/140
+  M1.digit_puzzle                  0/140
+  M1.division_counting             0/140
+  M1.finite_differences            0/140
+  M1.gcd_lcm                       2/140
+  M1.grid_perimeter                0/140
+  M1.inclusion_exclusion           0/140
+  M1.last_digit_power              2/140
+  M1.median_list                  84/140
+  M1.min_cost_packs                0/140
+  M1.mode_tally                   97/140
+  M1.painted_cube                  0/140
+  M1.pigeonhole_worst_case         1/140
+  M1.prime_factors                 8/140
+  M1.pythagoras                    0/140
+  M1.quadratic_area                1/140
+  M1.recurrence_iterate            0/140
+  M1.slot_permutations             0/140
+  M1.tiered_pricing                0/140

@@ -1,0 +1,24 @@
+M1.binomial_choose             best heuristic spec:O:C(n-1,k-1)_always                      L1 0.349 (const at that level 0.075); max const 0.098
+M1.change_ways                 best heuristic spec:O:target_div_middle_plus1                L1 0.094 (const at that level 0.096); max const 0.124
+M1.crt_congruence              best heuristic spec:O:largest_mod_plus_its_rem               L0 0.211 (const at that level 0.034); max const 0.034
+M1.digit_puzzle                best heuristic spec:O:smallest_fit_all_but_last              L5 0.200 (const at that level 0.008); max const 0.032
+M1.division_counting           best heuristic spec:O:ceil_of_product                        L1 0.308 (const at that level 0.054); max const 0.081
+M1.finite_differences          best heuristic spec:O:quadratic_diffs_for_any_degree         L0 1.000 (const at that level 0.012); max const 0.012
+M1.gcd_lcm                     best heuristic spec:O:product_over_gcd_all                   L0 0.388 (const at that level 0.067); max const 0.067
+M1.grid_perimeter              best heuristic spec:O:top_plus_bottom_plus_2rows_plus_steps  L0 1.000 (const at that level 0.200); max const 0.223
+M1.inclusion_exclusion         best heuristic spec:O:triple_sign_error                      L0 1.000 (const at that level 0.100); max const 0.100
+M1.last_digit_power            best heuristic spec:O:e_mod4_zero_bug                        L1 0.837 (const at that level 0.171); max const 0.220
+M1.median_list                 best heuristic spec:O:lower_middle_no_average                L6 0.677 (const at that level 0.022); max const 0.061
+M1.min_cost_packs              best heuristic spec:O:exactly_need_dp                        L0 0.859 (const at that level 0.024); max const 0.024
+M1.mode_tally                  best heuristic O:most_common_number                          L0 0.530 (const at that level 0.213); max const 0.213
+M1.painted_cube                best heuristic spec:O:all_faces_formula_always               L0 0.538 (const at that level 0.054); max const 0.054
+M1.pigeonhole_worst_case       best heuristic spec:A:total_minus_min                        L0 0.046 (const at that level 0.098); max const 0.098
+M1.prime_factors               best heuristic spec:O:largest_prime_le_29_dividing           L4 0.281 (const at that level 0.074); max const 0.123
+M1.pythagoras                  best heuristic spec:O:hyp_always                             L0 0.439 (const at that level 0.046); max const 0.046
+M1.quadratic_area              best heuristic spec:O:isqrt_minus_d                          L0 0.048 (const at that level 0.039); max const 0.039
+M1.recurrence_iterate          best heuristic spec:A:first_times_mult_pow                   L1 0.016 (const at that level 0.014); max const 0.018
+M1.slot_permutations           best heuristic spec:O:always_no_leading_zero                 L0 0.911 (const at that level 0.063); max const 0.065
+M1.tiered_pricing              best heuristic spec:O:skip_middle_tiers                      L0 1.000 (const at that level 0.007); max const 0.010
+
+solver check on generated items: disagreements 0, errors 0
+rc=0

@@ -1,0 +1,10 @@
+gen1 weighted-shape items 6904 items where a role variable is named w 1036 by role {'rule': 260, 'g': 269, 'nxt': 251, 'i': 256} semantics broken (i or cells == w) 256
+  fixture item with broken weighted shape: C1.cellular_update/fixture/1/4 10
+  fixture item with broken weighted shape: C1.cellular_update/fixture/1/14 10
+  fixture item with broken weighted shape: C1.cellular_update/fixture/1/16 10
+  fixture item with broken weighted shape: C1.cellular_update/fixture/6/6 20
+fixtures weighted-shape items 68 items where a role variable is named w 13 by role {'g': 3, 'i': 4, 'rule': 3, 'nxt': 3} semantics broken (i or cells == w) 4
+fast_power tot in VARS: False
+turtle_walk far in VARS: False
+string_pair_table cst in VARS: False
+union_find_links find in VARS: False

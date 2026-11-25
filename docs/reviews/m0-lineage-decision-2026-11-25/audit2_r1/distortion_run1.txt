@@ -1,0 +1,80 @@
+
+## instant_runoff_r2: share of items whose IRV winner is the first-round plurality leader
+  unc: L0:0.93 | L1:0.87 | L2:0.84 | L3:0.78 | L4:0.74 | L5:0.75 | L6:0.65
+  reg: L0:0.52 | L1:0.39 | L2:0.36 | L3:0.20 | L4:0.21 | L5:0.22 | L6:0.15
+
+## stable_matching_r2: mean rank of the answer on the asker's list (1 = first choice)
+  unc: L0:1.48 | L1:1.43 | L2:1.57 | L3:1.57 | L4:1.84 | L5:1.79 | L6:1.93
+  reg: L0:1.88 | L1:1.88 | L2:2.13 | L3:2.14 | L4:2.34 | L5:2.26 | L6:2.50
+
+## stable_matching_r2: distribution of the asker's partner rank (3 = third or worse)
+  unc: L0:1.48 | L1:1.43 | L2:1.53 | L3:1.52 | L4:1.73 | L5:1.71 | L6:1.75
+  reg: L0:1.88 | L1:1.88 | L2:2.06 | L3:2.06 | L4:2.15 | L5:2.11 | L6:2.25
+
+## kinship_descendants_r3: mean depth of the answer (1 = child of the root)
+  unc: L0:1.00 | L1:1.00 | L2:1.02 | L3:1.02 | L4:1.03 | L5:1.04 | L6:1.04
+  reg: L0:1.00 | L1:1.02 | L2:1.05 | L3:1.07 | L4:1.10 | L5:1.12 | L6:1.14
+
+## elimination_bracket_r3: beaten_by items: round in which the asked player is knocked out
+  unc: L0:1.35 | L1:1.36 | L2:1.34 | L3:1.37 | L4:1.52 | L5:1.53 | L6:1.68
+  reg: L0:1.26 | L1:1.27 | L2:1.24 | L3:1.25 | L4:1.50 | L5:1.44 | L6:1.46
+
+## conditional_threshold_rule_r3: mean |(yes - no weight) - margin| (distance from the threshold)
+  unc: L0:1.88 | L1:2.12 | L2:4.47 | L3:4.95 | L4:5.11 | L5:5.44 | L6:5.43
+  reg: L0:1.39 | L1:1.37 | L2:2.94 | L3:3.29 | L4:3.17 | L5:3.59 | L6:3.86
+
+## conditional_threshold_rule_r3: share with margin <= 0
+  unc: L0:0.50 | L1:0.46 | L2:0.54 | L3:0.50 | L4:0.54 | L5:0.50 | L6:0.47
+  reg: L0:0.49 | L1:0.52 | L2:0.54 | L3:0.52 | L4:0.47 | L5:0.50 | L6:0.50
+
+## containers_stack_piles_r3: mean number of moves onto the asked pile
+  unc: L0:1.29 | L1:2.04 | L2:2.66 | L3:2.59 | L4:3.20 | L5:3.57 | L6:4.32
+  reg: L0:0.98 | L1:1.81 | L2:2.53 | L3:2.50 | L4:3.06 | L5:3.68 | L6:4.17
+
+## activity_selection: answer / number of meetings
+  unc: L0:0.72 | L1:0.66 | L2:0.62 | L3:0.59 | L4:0.56 | L5:0.54 | L6:0.52
+  reg: L0:0.72 | L1:0.67 | L2:0.63 | L3:0.61 | L4:0.57 | L5:0.55 | L6:0.54
+
+## mst_cost: mean answer
+  unc: L0:24.56 | L1:31.48 | L2:30.94 | L3:36.71 | L4:37.33 | L5:44.04 | L6:43.26
+  reg: L0:25.65 | L1:32.56 | L2:31.76 | L3:39.77 | L4:39.35 | L5:45.34 | L6:44.69
+
+## topological_order_r2: answer's alphabetical rank minus asked day (0 = jth alphabetical)
+  unc: L0:-0.34 | L1:-0.28 | L2:-0.36 | L3:-0.45 | L4:-0.18 | L5:-0.31 | L6:-0.29
+  reg: L0:-0.42 | L1:-0.34 | L2:-0.44 | L3:-0.25 | L4:-0.09 | L5:-0.60 | L6:-0.16
+
+## topological_order_r2: mean asked day j
+  unc: L0:3.08 | L1:3.48 | L2:4.01 | L3:4.51 | L4:4.92 | L5:5.55 | L6:6.16
+  reg: L0:2.97 | L1:3.47 | L2:3.90 | L3:4.38 | L4:4.86 | L5:5.49 | L6:5.91
+
+## categories_default_exceptions_r3: share of items where the member's immediate supergroup (named in the first sentence) carries a rule about the asked verb, and accuracy of that rule
+  L0: fires 1.000, correct when fires 1.000 | L1: fires 1.000, correct when fires 1.000 | L2: fires 0.806, correct when fires 1.000 | L3: fires 0.840, correct when fires 1.000 | L4: fires 0.714, correct when fires 1.000 | L5: fires 0.740, correct when fires 1.000 | L6: fires 0.606, correct when fires 1.000
+  number of rules about the asked verb: {5: 3500}; items where the member's own group has a rule about the asked verb: 0
+
+## nim_xor capacity (exact counts of distinct ordered pile tuples per level)
+  L0: k=3, piles 1..20: 'second' tuples 270, 'first' tuples 3730
+  L1: k=3, piles 1..24: 'second' tuples 426, 'first' tuples 6486
+  L2: k=3, piles 1..28: 'second' tuples 678, 'first' tuples 10298
+  L3: k=4, piles 1..32: 'second' tuples 29048, 'first' tuples 495240
+  L4: k=4, piles 1..36: 'second' tuples 33480, 'first' tuples 806328
+  L5: k=4, piles 1..40: 'second' tuples 44056, 'first' tuples 1235944
+  L6: k=5, piles 1..44: large (not enumerated)
+  sample L0 first: 253 drawn, 244 distinct
+  sample L0 second: 247 drawn, 161 distinct
+  sample L1 first: 237 drawn, 235 distinct
+  sample L1 second: 263 drawn, 199 distinct
+  sample L2 first: 238 drawn, 234 distinct
+  sample L2 second: 262 drawn, 217 distinct
+  sample L3 first: 245 drawn, 245 distinct
+  sample L3 second: 255 drawn, 254 distinct
+  sample L4 first: 239 drawn, 239 distinct
+  sample L4 second: 261 drawn, 261 distinct
+  sample L5 first: 243 drawn, 243 distinct
+  sample L5 second: 257 drawn, 257 distinct
+  sample L6 first: 241 drawn, 241 distinct
+  sample L6 second: 259 drawn, 259 distinct
+
+## level structure: minimax depth by level, venn group count by level, nim pile count by level
+  minimax_tree: L0=[2] L1=[2] L2=[2] L3=[3] L4=[3] L5=[4] L6=[4]
+  venn_counting: L0=[2] L1=[2] L2=[3] L3=[3] L4=[3] L5=[3] L6=[3]
+  nim_xor: L0=[3] L1=[3] L2=[3] L3=[4] L4=[4] L5=[4] L6=[5]

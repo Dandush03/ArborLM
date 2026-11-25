@@ -1,0 +1,25 @@
+topological_order_r2 [reg]: 3500/3500 agree; notes {}
+activity_selection [reg]: 3500/3500 agree; notes {'touch_convention_matters': 2015}
+   note touch_convention_matters e.g. ['R1.activity_selection/audit2reg/L0/1', 'R1.activity_selection/audit2reg/L0/2', 'R1.activity_selection/audit2reg/L0/6']
+mst_cost [reg]: 3500/3500 agree; notes {}
+instant_runoff_r2 [reg]: 3500/3500 agree; notes {}
+stable_matching_r2 [reg]: 3500/3500 agree; notes {}
+nim_xor [reg]: 3500/3500 agree; notes {'bouton_used_not_bruteforce': 500}
+   note bouton_used_not_bruteforce e.g. ['R1.nim_xor/audit2reg/L6/0', 'R1.nim_xor/audit2reg/L6/1', 'R1.nim_xor/audit2reg/L6/2']
+minimax_tree [reg]: 3500/3500 agree; notes {}
+venn_counting [reg]: 3500/3500 agree; notes {}
+spatial_grid_walk_r2 [reg]: 3500/3500 agree; notes {}
+kinship_descendants_r3 [reg]: 3500/3500 agree; notes {}
+kinship_ancestor_r3 [reg]: 3500/3500 agree; notes {}
+equivalence_classes_r2 [reg]: 3500/3500 agree; notes {'closure': 448}
+   note closure e.g. ['R1.equivalence_classes_r2/audit2reg/L5/14', 'R1.equivalence_classes_r2/audit2reg/L5/16', 'R1.equivalence_classes_r2/audit2reg/L5/20']
+elimination_bracket_r3 [reg]: 3500/3500 agree; notes {}
+containers_queue_line_r2 [reg]: 3500/3500 agree; notes {}
+categories_default_exceptions_r3 [reg]: 3500/3500 agree; notes {}
+conditional_threshold_rule_r3 [reg]: 3500/3500 agree; notes {}
+boolean_lights_r2 [reg]: 3500/3500 agree; notes {}
+graph_shortest_route_r2 [reg]: 3500/3500 agree; notes {}
+containers_stack_piles_r3 [reg]: 3500/3500 agree; notes {}
+categories_follow_r2 [reg]: 3500/3500 agree; notes {'nonempty_reading_gives_yes': 153}
+   note nonempty_reading_gives_yes e.g. ['R1.categories_follow_r2/audit2reg/L0/0', 'R1.categories_follow_r2/audit2reg/L0/9', 'R1.categories_follow_r2/audit2reg/L0/12']
+TOTAL mismatches 0

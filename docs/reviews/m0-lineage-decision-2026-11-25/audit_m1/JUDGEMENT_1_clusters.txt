@@ -1,0 +1,109 @@
+AUDITOR JUDGEMENT 1 -- M1 lineage clustering (written BEFORE reading studies/m0/manifests/m1_batch1_manifest.json or studies/m0/NOTES*.md)
+Auditor: Claude Opus 5.5 (claude-opus-5-5), arbor-auditor context. Astra review: NOT_PERFORMED. Not human approval.
+Audited tree: worktree agent-a0c9d741ea96ce52f, branch claude/m0-impl, HEAD 1b33b7b2.
+
+CONTAMINATION DISCLOSURE: while reading the generators I saw the author's docstrings, which name three lineages "borderline"
+(change_ways vs digit_puzzle; last_digit_power vs crt_congruence; mode_tally vs median_list), and a grep of
+fixtures/M1_BATCH1_SCHEMA.md headings showed the per-lineage "firmness" labels (borderline = change_ways, last_digit_power,
+mode_tally; all others firm). I had not yet formed a pairwise judgement at that point. Nothing else of the author's opinion was read.
+
+RULE (ADR-0033 s6.2, quoted): "Each rule shape is registered with a lineage: the hand-written base rule, a distinct solution
+procedure, from which it derives. Shapes made mechanically from one base rule (by changing parameters, order, negation, names or
+surface frame) share a lineage. The cluster, for G and for every bootstrap, is the lineage."
+LEAD RULING: strict; the general algorithm is the procedure; number system, constraint mix, final question, names, order,
+negation and surface frame are parameters.
+Ambiguous sentence: "a distinct solution procedure" -- at what granularity is "procedure" read (the named method a solver executes
+after translating the words, vs. the hand-written template's own setup). STRICT below = merge whenever the two lineages reduce, after
+translation (surface frame), to one general algorithm whose remaining differences are only the lead's listed parameters
+(final question, constraint mix, number system). LENIENT = merge only when one lineage is a mechanical variant of the other on the
+ADR's own list (parameters, order, negation, names, surface frame), with the final question and the core computation unchanged.
+
+PROCEDURES (one line each; E = existing 16 in lineages_m1.py, N = new 21)
+E  shopping            sum of quantity x unit price over 2-6 lines, then subtract from the amount paid (money in cents)
+E  speed_distance      sum of hours x speed over legs; 40% of L>=2 items: that sum divided by total hours (weighted mean)
+E  pipes_work          divide the stated volume by the net rate (a + b - drain): solve r*t = V
+E  percent_change      multiply the price by successive factors (1 +- p/100)
+E  tip_split           multiply the bill by (1 + tip/100), divide by n people
+E  ratio_share         total / sum(parts) x part_i
+E  mixture             weighted mean (x a + y b)/(x + y), +2 at L>=3
+E  linear_equation     solve k x + m = n, or k x + m = j x + e, for x
+E  consecutive         solve n a + step n(n-1)/2 = S for a, report a + step (n-1)
+E  ages                solve (k+1) b + 2 t = S for b (two unknowns with one substituted)
+E  average_missing     x = n * mean - sum(stated scores)
+E  rectangle           w = P / (2 (k+1)), report k w^2
+E  arithmetic_series   sum of an arithmetic progression of n terms (formula or day-by-day accumulation)
+E  coins               2x2 linear system: x + y = N, a x + b y = T; report one unknown
+E  clock_duration      sum over legs of (arrival - departure) in hh:mm (base-60 subtraction), in minutes
+E  fraction_remainder  n x (1 - 1/a) x (1 - 1/b)
+N  inclusion_exclusion inclusion-exclusion over 2 or 3 sets: none / at least one / exactly one / exactly two
+N  binomial_choose     C(n,k); C(n-1,k-1) with a forced member; C(x,j) C(y,k-j)
+N  slot_permutations   count digit strings of length s from a digit set, with/without repetition, no leading 0, parity of last digit (product rule, restricted slots first)
+N  change_ways         count non-negative integer solutions of c1 x + c2 y + c3 z = T (unbounded combinations)
+N  pigeonhole_worst_case worst-case draws: 1 + sum min(n_i, k-1), or total - min + 1
+N  gcd_lcm             gcd (Euclid / common factors) of 2-4 numbers, or lcm of 2-4 numbers
+N  crt_congruence      smallest positive x with x = r_i mod m_i, coprime moduli (sieve / CRT)
+N  prime_factors       factorise N, then divisor count / largest prime / sum of distinct primes / Omega
+N  last_digit_power    last digit of b^e via the cycle of last digits (e mod 4), combined by sum or product mod 10
+N  quadratic_area      positive root of a quadratic: x(x+d)=A; x^2+(x+d)^2=S; sides from P and A
+N  digit_puzzle        generate-and-test over all 2/3-digit numbers against 2-4 digit clues
+N  pythagoras          a^2 + b^2 = c^2: hypotenuse or missing leg (or perimeter a+b+c)
+N  grid_perimeter      perimeter of a row-convex polyomino: 4 x cells - 2 x shared edges
+N  painted_cube        count unit cubes of an a x b x c block with exactly f exposed painted faces (bottom optionally unpainted)
+N  min_cost_packs      least cost of buying at least N units from singles and 2-3 pack sizes (unbounded min-cost cover; DP or search)
+N  tiered_pricing      marginal-rate piecewise-linear bill: split units over tiers, sum units x rate; or invert the bill to units
+N  recurrence_iterate  iterate a stated recurrence (Fibonacci-like, affine c x + d, or + position) to term n
+N  finite_differences  extend a degree-2/3 polynomial sequence by its difference table
+N  median_list         sort (expanding a frequency table) and take the middle value / mean of the two middle values
+N  mode_tally          tally frequencies; report the argmax value or its count
+N  division_counting   integer division with ceiling/floor: nested ceil(ceil(N/k)/m); floor(b/d) - floor((a-1)/d); ceil(N/k) k - N
+
+STRICT CLUSTERS (merges; reasons)
+S1 linear-solve {linear_equation, ages, consecutive, average_missing, pipes_work, rectangle, coins}
+   reason: after translation each is "isolate the unknown in a linear relation" (coins and ages: substitute one unknown, then the same);
+   differences are surface frame, constraint mix (1 vs 2 equations) and the final question (rectangle reports k w^2, consecutive the largest term).
+S2 weighted-sum {shopping, speed_distance, mixture}
+   reason: sum of products w_i x_i; mixture and speed_distance's average variant divide by sum w_i (identical procedure);
+   shopping subtracts the sum from the amount paid (final question).
+S3 multiplicative-scaling {percent_change, fraction_remainder, tip_split, ratio_share}
+   reason: multiply a stated amount by a chain of rational factors (1 +- p/100; 1 - 1/a; 1/n; p_i / sum p); percent vs unit fraction is number system.
+   ratio_share is the weakest member (needs the sum of the parts first) -- AMBIGUOUS, strict-only.
+S4 counting-by-product-rule {binomial_choose, slot_permutations}       AMBIGUOUS, strict-only
+   reason: both count selections by the multiplication principle; unordered vs ordered (divide by k!) and the restrictions are constraint mix.
+S5 unbounded-knapsack table {change_ways, min_cost_packs}             AMBIGUOUS, strict-only
+   reason: both are the same DP over amounts with unbounded item supply; "count the combinations" vs "minimise cost of at least N" is the final question.
+S6 exposed-faces-of-unit-cells {grid_perimeter, painted_cube}          AMBIGUOUS, strict-only
+   reason: a literal solver loop "for each unit cell, count its faces not shared with another cell of the shape" answers both; 2-D vs 3-D and
+   "total exposed edges" vs "cells with exactly f exposed faces" are parameter / final question.
+S7 arithmetic accumulation {arithmetic_series, recurrence_iterate}     AMBIGUOUS, strict-only (cross existing/new)
+   reason: arithmetic_series is "iterate t_{i+1} = t_i + d and accumulate"; recurrence_iterate's add_index shape is exactly a sum of an
+   arithmetic progression (t_n = a + 2 + 3 + ... + n); both are "apply the stated step rule n times".
+All other lineages are singletons under strict.
+
+LENIENT MERGES
+L1 {percent_change, fraction_remainder}: "spend 1/a of it, then 1/b of what is left" is "falls by 100/a percent, then by 100/b percent,
+   each applied to the price before it" -- a mechanical variant (number system + surface frame) of the same base rule.
+No other merge under lenient.
+
+NEAR-MISSES KEPT APART (both readings)
+- median_list / mode_tally: sort-and-select vs tally-and-argmax; different algorithms (the author's borderline pair; I keep it apart).
+- change_ways / digit_puzzle: counting all solutions of a linear Diophantine equation vs filtering 900 candidates by digit clues; different.
+- last_digit_power / crt_congruence: exponent cycle mod 10 vs solving simultaneous congruences; different.
+- gcd_lcm / prime_factors: gcd/lcm can be done by factorising, but Euclid / listing multiples is the canonical procedure; kept apart (closest strict near-miss in number theory).
+- gcd_lcm (lcm) / crt_congruence: both can be sieved over multiples; CRT needs residue matching; kept apart.
+- recurrence_iterate / finite_differences: finite differences must INFER the rule (difference table) before iterating; kept apart.
+- quadratic_area / pythagoras: quadratic root vs square root of a sum of squares; the quadratic "squares" shape resembles Pythagoras but solves a quadratic; kept apart.
+- quadratic_area / rectangle (E): quadratic vs linear; kept apart.
+- tiered_pricing / S2 weighted-sum: tiered needs the boundary split (min(left, size)) and has an inverse mode; kept apart.
+- coins (E) / change_ways: unique solution of a 2x2 system vs counting all solutions; kept apart.
+- division_counting / pipes_work: ceiling/floor division vs exact division; kept apart.
+- pigeonhole_worst_case / division_counting: worst-case adversary sum vs ceilings; kept apart.
+- inclusion_exclusion / anything in M1: none close.
+- clock_duration / S2 weighted-sum: base-60 subtraction and summation; kept apart (strict reader could argue "evaluate a stated expression", which would collapse all arithmetic lineages; I do not read the ruling that far).
+- tip_split / ratio_share under lenient: kept apart.
+- arithmetic_series / consecutive under lenient: forward AP sum vs inverse; kept apart (strict puts consecutive in S1).
+
+COUNTS (distinct clusters)
+Existing 16: strict 5 (S1 7, S2 3, S3 4, arithmetic_series, clock_duration); lenient 15.
+New 21:      strict 18 (S4, S5, S6 merge 3 pairs); lenient 21.
+Overall 37:  strict 22 (5 + 18 - 1 for the cross merge S7); lenient 36.
+My central estimate (merging only S1, S2, S3-without-ratio_share and L1; S4-S7 apart): existing 6, new 21, overall 27.
