@@ -1,0 +1,7 @@
+SUPERSEDED (2026-11-25, M0 M1 fix round after AUDIT_M0_M1_1 and LEAD_RULINGS_2). Kept unchanged, not deleted.
+
+These 21 fixture files belong to the batch-1 shapes. 17 of them are superseded by revised shapes (ids with a _r2 suffix; fixtures in studies/m0/fixtures/m1_batch1_rev2/):
+  binomial_choose, change_ways, crt_congruence, digit_puzzle, division_counting, gcd_lcm, grid_perimeter, inclusion_exclusion, last_digit_power (by power_remainder_r2),
+  median_list, min_cost_packs (rev2 shape NOT REGISTERED), mode_tally, painted_cube, pigeonhole_worst_case, prime_factors, pythagoras, slot_permutations.
+The 4 remaining files are carried over unchanged and are NOT superseded: finite_differences, quadratic_area, recurrence_iterate, tiered_pricing.
+Reasons per lineage: studies/m0/manifests/m1_batch1_rev2_manifest.json (defects), studies/m0/lineages_m1_rev2.py (docstrings).

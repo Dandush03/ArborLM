@@ -1,0 +1,2925 @@
+{
+ "attempts_and_failures_kept": [
+  "grid_perimeter: first rev2 attempt (random connected blobs grown cell by cell) had the bounding box exact on 0.75 of L0 items and 0.2-0.38 at higher levels; replaced by scattered random sets. Both measured in scratch (grid_try.py, grid_try2.py).",
+  "min_cost_packs: three constructions measured in scratch (mc_try.py, mc_try2.py, mc_try3.py): independent prices with 2-4 packs (greedy 0.13-0.36, 'one kind of pack, ceil' 0.33-0.56), no singles (worse), equal unit prices with 3-4 packs (best heuristic 0.25 in the trial, 0.65 for the continuous relaxation in the final battery). None passes; NOT REGISTERED.",
+  "power_remainder: the first choice p in {7, 11, 13} was wrong on measurement: with p = 11 the exponent's last digit IS the residue mod p - 1, so the copied heuristic was exact (0.65); p = 7 gave a most-frequent-answer rate of 0.32. Replaced by p in {17, 19, 23, 29}.",
+  "division_counting: the 'multiples' shape was measured at 0.27-0.30 of the lineage by 'round((high - low) / d)' once its redraw was withdrawn; dropped.",
+  "The batch-1 shortcut script (m1_shortcut_check.py) and its manifest are kept unchanged and are superseded by m1_shortcut_check_rev2.py for the combined battery."
+ ],
+ "batch": "m1_batch1_rev2",
+ "capacity_policy": "R-5: a lineage-level whose sampled structural lower bound n_eff is below the demand at G = 11 (capacity_fails_levels['G=11']) is NOT REGISTERED at that level pending the human lead (the demand is the lead's to confirm: G = 11 is an even split of 22 strict clusters; an uneven partition raises it). Three of the lineages listed are carried over unchanged from batch 1 (finite_differences, quadratic_area, recurrence_iterate) and were not widened in this round; the named widenings (binomial_choose, prime_factors, pythagoras, digit_puzzle, gcd_lcm, grid_perimeter, painted_cube, pigeonhole_worst_case) were applied and the remainder is what is listed.",
+ "capacity_sample_per_level": 20000,
+ "carried_over_unchanged": [
+  "M1.finite_differences",
+  "M1.quadratic_area",
+  "M1.recurrence_iterate",
+  "M1.tiered_pricing"
+ ],
+ "clusters": {
+  "author_disagreements_not_unmerging": {
+   "S1_linear_solve: coins": "coins solves two linear equations in two unknowns (a count equation and a value equation, by substitution or elimination); the other six isolate one unknown. The author kept it apart (his batch-1 S7).",
+   "S1_linear_solve: pipes_work": "pipes_work is one division, volume / net rate; the author's batch-1 note already called it 'arguably the same as' the linear group, so he does not dispute the merge.",
+   "S3_multiplicative_chain: ratio_share": "The auditor calls it the weakest member (strict only). Dividing a total in a ratio is a proportional split by unit scaling (total / sum of parts x part), not a chain of factors applied to a running value; the author kept it apart (his batch-1 S4).",
+   "S4_product_rule_counting": "slot_permutations fills ordered positions with restrictions (most restricted position first); binomial_choose selects an unordered group and divides out the order. Both are the product rule, so the author does not dispute that the merge is defensible, but he considers the algorithms different (his batch-1 borderline note).",
+   "S5_unbounded_table": "change_ways COUNTS the solutions of a coin equation (a sum over the table), min_cost_packs MINIMISES a cost with overbuying allowed (a min over the table). Same table over amounts; different semiring and different final question. The author kept them apart (his batch-1 borderline note for change_ways was against digit_puzzle, not against this pair).",
+   "S6_exposed_faces: grid_perimeter + painted_cube": "grid_perimeter counts sides between a square and a non-member cell in a 2-D set (rev2: scattered squares); painted_cube counts cubes by number of painted faces in a box by region (corner, edge, face, interior) with the bottom optionally unpainted. 'Count faces not shared with the shape' covers both; the author considers 2-D adjacency counting and 3-D region decomposition different procedures.",
+   "S7_step_rule: arithmetic_series + recurrence_iterate": "Only recurrence_iterate's add_index shape is an arithmetic-progression sum; its Fibonacci-like and affine shapes are unrolled state updates, not sums. The merge is exact for one of three shapes and 'apply the step rule n times' for the rest."
+  },
+  "borderline": {
+   "clock_duration": "Open borderline. The auditor keeps it apart (a sum of differences of clock readings); the author's batch-1 log put it in the weighted-sum group (S1 there). If merged into S2_weighted_sum the strict count is 21, not 22."
+  },
+  "groups": {
+   "S1_linear_solve": [
+    "linear_equation",
+    "ages",
+    "consecutive",
+    "average_missing",
+    "pipes_work",
+    "rectangle",
+    "coins"
+   ],
+   "S2_weighted_sum": [
+    "shopping",
+    "speed_distance",
+    "mixture"
+   ],
+   "S3_multiplicative_chain": [
+    "percent_change",
+    "fraction_remainder",
+    "tip_split",
+    "ratio_share"
+   ],
+   "S4_product_rule_counting": [
+    "binomial_choose",
+    "slot_permutations"
+   ],
+   "S5_unbounded_table": [
+    "change_ways",
+    "min_cost_packs"
+   ],
+   "S6_exposed_faces": [
+    "grid_perimeter",
+    "painted_cube"
+   ],
+   "S7_step_rule": [
+    "arithmetic_series",
+    "recurrence_iterate"
+   ]
+  },
+  "strict_count_over_37": 22
+ },
+ "commands": [
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_shortcut_check_rev2 --set rev2 --per-level 2000 --out <after.json>",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_shortcut_check_rev2 --set batch1 --per-level 2000 --out <before.json>",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage capacity --m 20000 --out <cap.json>",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage fixtures",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage manifest --shortcut-after <after.json> --shortcut-before <before.json> --capacity <cap.json>"
+ ],
+ "defects": [
+  {
+   "defect": "slot_permutations: leading-zero rule unstated (13 of 140 fixture keys depend on it) [R-4]",
+   "disposition": "FIXED BY CONSTRUCTION in slot_permutations_r2: the item always states the rule when 0 is among the digits (first digit may / may not be 0); parity is always stated.",
+   "test": "test_m0_m1_rev2_wording.py::test_slot_permutations_states_the_leading_zero_rule_and_the_key_follows_it"
+  },
+  {
+   "defect": "last_digit_power: gloss 'multiplied by itself E times' (116 of 140 keys change under the literal reading) [R-4]",
+   "disposition": "FIXED in power_remainder_r2: 'the product of E factors, each equal to B'; the literal-reading solver from the text agrees with every key.",
+   "test": "test_m0_m1_rev2_wording.py::test_power_remainder_wording_is_unambiguous_and_has_no_even_exponent_artefact"
+  },
+  {
+   "defect": "last_digit_power: even-exponent artefact for bases ending 4 or 9, and 'never the base digit'",
+   "disposition": "FIXED: the rejection is gone; exponents of such bases are odd and even.",
+   "test": "same"
+  },
+  {
+   "defect": "last_digit_power: '(last digit of base)^(last digit of exponent)' 0.34-0.44 and 'square of the base digit' 0.32-0.37",
+   "disposition": "FIXED BY CONSTRUCTION by changing the asked quantity to the remainder on division by a prime p in {17, 19, 23, 29} (cycle reduction is the same procedure); p - 1 is never a multiple of 5, so the exponent's last digit carries no information. Measured worst heuristic 0.23 against a constant rate of 0.17 (L0)."
+  },
+  {
+   "defect": "digit_puzzle: reversal of a number ending in 0 undefined (7 fixture keys) [R-4]",
+   "disposition": "FIXED: the item defines it ('a leading 0 is dropped, so 120 turned round gives 21'); the unique-answer test uses exactly that definition.",
+   "test": "test_m0_m1_rev2_wording.py::test_digit_puzzle_defines_the_reversal_and_the_key_is_unique_under_it"
+  },
+  {
+   "defect": "gcd_lcm: ask redrawn inside the retry, gcd share 0.65-0.69 at L0-L2 and 0.00-0.01 at L3-L6",
+   "disposition": "FIXED BY CONSTRUCTION: the ask is drawn first and nothing is redrawn but a repeated value; measured mix is a half each at every level.",
+   "test": "test_m0_m1_rev2_generators.py::test_shape_mix_is_the_designs_uniform_mix_at_every_level"
+  },
+  {
+   "defect": "division_counting: shape mix 0.07-0.11 / 0.28 / 0.60-0.65; 'crates' was one ceiling (an identity)",
+   "disposition": "FIXED: shape drawn first; 'crates' replaced by 'pallets' ((N // k) % m, a floor then a remainder, not an identity); the 'multiples' shape is DROPPED (without its redraw 'round((high - low) / d)' is exact on about 0.9 of its items, 0.27-0.30 of the lineage; no construction removes it).",
+   "test": "same"
+  },
+  {
+   "defect": "binomial_choose / slot_permutations / digit_puzzle: repeated structures across levels in the fixtures (28 / 5 groups / 10)",
+   "disposition": "PARTLY BY CONSTRUCTION: ranges widened (capacity) and the rev2 fixtures are structurally de-duplicated across all seven levels of a file. The GENERATOR does not guarantee cross-level disjointness (a level-banded parameter would cut capacity below the demand); the pool builder in core.py de-duplicates on question TEXT only, which is a finding for whoever owns it.",
+   "test": "test_m0_m1_rev2_generators.py::test_fixtures_have_no_repeated_structure_across_levels_and_batch1_had"
+  },
+  {
+   "defect": "min_cost_packs: greedy 0.41-0.46; redraws on five naive plans [R-1]",
+   "disposition": "NOT REGISTERED (see lineages_m1_rev2.NOT_REGISTERED): redraws withdrawn; the best constructed variant (equal unit prices, four or five packs) is still beaten by the continuous relaxation at 0.65."
+  },
+  {
+   "defect": "mode_tally: 'last value listed' 0.27-0.41; redraw on 'first repeated value'",
+   "disposition": "FIXED BY CONSTRUCTION: one mode, 2-4 rivals with one occurrence fewer, a long tail, then shuffled; no redraw. Measured worst 0.27 (L0, 'ceil(n / distinct) + 1' for the count ask) against a constant rate of 0.15; 'last value' is below that."
+  },
+  {
+   "defect": "grid_perimeter: 'bounding box + 4' 0.30-0.35; redraw against the bounding box",
+   "disposition": "FIXED BY CONSTRUCTION: a scattered random set of squares (some touch, some do not), no redraw; bounding-box heuristics are about 0 (compact random blobs were tried and measured first: they keep the perimeter within a few units of the bounding box whatever the generator does). Measured worst 0.26, equal to the constant rate (0.26)."
+  },
+  {
+   "defect": "median_list: redraw so that table multiplicities matter [R-1]",
+   "disposition": "FIXED BY CONSTRUCTION: the table shape is dropped; list shape only. Measured worst 0.13 (mode of the values)."
+  },
+  {
+   "defect": "change_ways: redraws (answer in 4..150; answer != T // largest coin + 1) [R-1]",
+   "disposition": "FIXED BY CONSTRUCTION: T is built from a random combination of the coins (an answer of at least 1 exists); no redraw. Measured worst 0.10, equal to the constant rate."
+  },
+  {
+   "defect": "pigeonhole_worst_case, inclusion_exclusion, painted_cube, crt_congruence: redraws on 'answer is a printed number', 'the cap bites', 'counts equal' [R-1]",
+   "disposition": "FIXED BY CONSTRUCTION: withdrawn (k drawn from 2..max count so a feasible k exists by construction); measured worst 0.20 (pigeonhole '(k - 1) c + 1', L0), 0.18 (painted_cube inner block), 0.13 (crt), 0.06 (inclusion_exclusion)."
+  },
+  {
+   "defect": "capacity counted on text [R-5]",
+   "disposition": "RE-MEASURED on structure at the G written; see capacity (lineage-levels that still fail are listed, and are NOT REGISTERED at those levels pending the lead)."
+  }
+ ],
+ "demand": {
+  "G=11": {
+   "core": 22820,
+   "reserve": 1000
+  },
+  "G=18": {
+   "core": 14340,
+   "reserve": 1000
+  },
+  "G=300": {
+   "core": 1800,
+   "reserve": 1000
+  },
+  "derivation": "ADR-0033 section 6.2: 10 x (ceil(24,000 / G) + 100) on a core level, 10 x 100 on a reserve level (lineage_gates.demand_at_g). G = lineages (strict clusters) per part: 22 strict clusters / 2 parts = 11 [written]; 36 lenient / 2 = 18; the earlier proposal 300."
+ },
+ "effective_lineages": [
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 2220,
+    "1": 4318,
+    "2": 5496,
+    "3": 6174,
+    "4": 6574,
+    "5": 6966,
+    "6": 7150
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=18": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=300": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "capacity_n_eff_per_level": {
+    "0": 225,
+    "1": 392,
+    "2": 570,
+    "3": 780,
+    "4": 967,
+    "5": 1236,
+    "6": 1463
+   },
+   "carried_over_unchanged": false,
+   "family": "counting",
+   "fixture_sha256": "7c077d8e10963d4e99368ea690554434511c37e712d4bdc65dafb42c065cfc0c",
+   "id": "M1.binomial_choose_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.031,
+    "per_level": {
+     "0": {
+      "const": 0.031,
+      "const_heldout": 0.032,
+      "flag": false,
+      "oracle_printed": 0.0085,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.3195,
+      "worst_surface": "spec:O:C(n-1,k)",
+      "worst_surface_rate": 0.025
+     },
+     "1": {
+      "const": 0.027,
+      "const_heldout": 0.011,
+      "flag": false,
+      "oracle_printed": 0.009,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.3185,
+      "worst_surface": "spec:O:C(n-1,k)",
+      "worst_surface_rate": 0.026
+     },
+     "2": {
+      "const": 0.022,
+      "const_heldout": 0.019,
+      "flag": false,
+      "oracle_printed": 0.005,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.3125,
+      "worst_surface": "spec:O:C(n-1,k)",
+      "worst_surface_rate": 0.0195
+     },
+     "3": {
+      "const": 0.023,
+      "const_heldout": 0.021,
+      "flag": false,
+      "oracle_printed": 0.0055,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.351,
+      "worst_surface": "spec:O:C(n-1,k)",
+      "worst_surface_rate": 0.0215
+     },
+     "4": {
+      "const": 0.014,
+      "const_heldout": 0.013,
+      "flag": false,
+      "oracle_printed": 0.0055,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.3385,
+      "worst_surface": "spec:O:C(n-1,k)",
+      "worst_surface_rate": 0.0185
+     },
+     "5": {
+      "const": 0.0145,
+      "const_heldout": 0.014,
+      "flag": false,
+      "oracle_printed": 0.0055,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.325,
+      "worst_surface": "spec:O:C(n,k-1)",
+      "worst_surface_rate": 0.0185
+     },
+     "6": {
+      "const": 0.017,
+      "const_heldout": 0.013,
+      "flag": false,
+      "oracle_printed": 0.0025,
+      "worst_partial": "spec:O:C(n-1,k-1)_always",
+      "worst_partial_rate": 0.3275,
+      "worst_surface": "spec:O:C(n-1,k)",
+      "worst_surface_rate": 0.0175
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.027,
+     "heuristic": "spec:O:C(n-1,k)",
+     "level": "1",
+     "rate": 0.026
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0955,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0955,
+     "heuristic": "spec:O:C(n,k-1)",
+     "level": "0",
+     "rate": 0.0515
+    }
+   },
+   "signature": "5e7aa835013bd72bab8a0318fa554e3d2739d8134fa935c1bb46ab5c2656cdf6",
+   "supersedes": "M1.binomial_choose"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 10091,
+    "1": 13337,
+    "2": 14853,
+    "3": 15711,
+    "4": 16358,
+    "5": 16663,
+    "6": 17193
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1
+    ],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 11306,
+    "1": 20639,
+    "2": 28976,
+    "3": 36515,
+    "4": 44771,
+    "5": 50048,
+    "6": 62147
+   },
+   "carried_over_unchanged": false,
+   "family": "counting",
+   "fixture_sha256": "1ac15e973348b63f0215e86f39efef0d67cd8c8c4ad25f933735e237b94d3563",
+   "id": "M1.change_ways_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.1005,
+    "per_level": {
+     "0": {
+      "const": 0.1005,
+      "const_heldout": 0.097,
+      "flag": false,
+      "oracle_printed": 0.168,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0715,
+      "worst_surface": "spec:A:target_div_biggest_plus1",
+      "worst_surface_rate": 0.0985
+     },
+     "1": {
+      "const": 0.052,
+      "const_heldout": 0.048,
+      "flag": false,
+      "oracle_printed": 0.102,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.033,
+      "worst_surface": "spec:O:target_div_middle_plus1",
+      "worst_surface_rate": 0.0665
+     },
+     "2": {
+      "const": 0.034,
+      "const_heldout": 0.031,
+      "flag": false,
+      "oracle_printed": 0.0685,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0205,
+      "worst_surface": "spec:A:target_div_biggest_plus1",
+      "worst_surface_rate": 0.043
+     },
+     "3": {
+      "const": 0.0285,
+      "const_heldout": 0.024,
+      "flag": false,
+      "oracle_printed": 0.0415,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0105,
+      "worst_surface": "spec:O:target_div_middle_plus1",
+      "worst_surface_rate": 0.036
+     },
+     "4": {
+      "const": 0.021,
+      "const_heldout": 0.016,
+      "flag": false,
+      "oracle_printed": 0.026,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0045,
+      "worst_surface": "spec:O:target_div_middle_plus1",
+      "worst_surface_rate": 0.0215
+     },
+     "5": {
+      "const": 0.0145,
+      "const_heldout": 0.01,
+      "flag": false,
+      "oracle_printed": 0.03,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0065,
+      "worst_surface": "spec:A:target_div_smallest",
+      "worst_surface_rate": 0.0155
+     },
+     "6": {
+      "const": 0.0145,
+      "const_heldout": 0.005,
+      "flag": false,
+      "oracle_printed": 0.014,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0015,
+      "worst_surface": "spec:A:target_div_smallest",
+      "worst_surface_rate": 0.0115
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.1005,
+     "heuristic": "spec:A:target_div_biggest_plus1",
+     "level": "0",
+     "rate": 0.0985
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.1045,
+    "worst_over_levels": {
+     "constant_rate_there": 0.1045,
+     "heuristic": "spec:O:target_div_middle_plus1",
+     "level": "0",
+     "rate": 0.0955
+    }
+   },
+   "signature": "de66aa7cae72037e984756486b092b9f522cdee54b12d63cb47edfcb823270de",
+   "supersedes": "M1.change_ways"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 14575,
+    "1": 17494,
+    "2": 18737,
+    "3": 19254,
+    "4": 19542,
+    "5": 19986,
+    "6": 19994
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 20793,
+    "1": 57634,
+    "2": 133238,
+    "3": 236675,
+    "4": 397594,
+    "5": 14285000,
+    "6": 33331667
+   },
+   "carried_over_unchanged": false,
+   "family": "number_theory",
+   "fixture_sha256": "7c3d80a08e797d68270cf7f6ff0af30a67d91b454bc81812372b86cbfaae4b25",
+   "id": "M1.crt_congruence_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.013,
+    "per_level": {
+     "0": {
+      "const": 0.013,
+      "const_heldout": 0.009,
+      "flag": false,
+      "oracle_printed": 0.125,
+      "worst_partial": "spec:O:constant_deficit_trick",
+      "worst_partial_rate": 0.0605,
+      "worst_surface": "spec:O:largest_mod_plus_its_rem",
+      "worst_surface_rate": 0.131
+     },
+     "1": {
+      "const": 0.009,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0955,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.044,
+      "worst_surface": "spec:O:largest_mod_plus_its_rem",
+      "worst_surface_rate": 0.1085
+     },
+     "2": {
+      "const": 0.0075,
+      "const_heldout": 0.003,
+      "flag": false,
+      "oracle_printed": 0.0815,
+      "worst_partial": "spec:O:constant_deficit_trick",
+      "worst_partial_rate": 0.0435,
+      "worst_surface": "spec:O:largest_mod_plus_its_rem",
+      "worst_surface_rate": 0.0855
+     },
+     "3": {
+      "const": 0.004,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.016,
+      "worst_partial": "spec:A:first_two_only",
+      "worst_partial_rate": 0.107,
+      "worst_surface": "spec:O:largest_mod_plus_its_rem",
+      "worst_surface_rate": 0.021
+     },
+     "4": {
+      "const": 0.0035,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.015,
+      "worst_partial": "spec:A:first_two_only",
+      "worst_partial_rate": 0.094,
+      "worst_surface": "spec:O:largest_mod_plus_its_rem",
+      "worst_surface_rate": 0.016
+     },
+     "5": {
+      "const": 0.0015,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.002,
+      "worst_partial": "spec:A:first_two_only",
+      "worst_partial_rate": 0.01,
+      "worst_surface": "O:second_number",
+      "worst_surface_rate": 0.0015
+     },
+     "6": {
+      "const": 0.0015,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.0005,
+      "worst_partial": "spec:A:first_two_only",
+      "worst_partial_rate": 0.005,
+      "worst_surface": "A:last_number",
+      "worst_surface_rate": 0.0005
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.013,
+     "heuristic": "spec:O:largest_mod_plus_its_rem",
+     "level": "0",
+     "rate": 0.131
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.031,
+    "worst_over_levels": {
+     "constant_rate_there": 0.031,
+     "heuristic": "spec:O:largest_mod_plus_its_rem",
+     "level": "0",
+     "rate": 0.1985
+    }
+   },
+   "signature": "85b2579a417762a87150f4da67c357bcd7a48fd83ab06ae074316ed5339c2583",
+   "supersedes": "M1.crt_congruence"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 8716,
+    "1": 16971,
+    "2": 16958,
+    "3": 16947,
+    "4": 17020,
+    "5": 16631,
+    "6": 16668
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 5267,
+    "1": 50123,
+    "2": 50464,
+    "3": 50413,
+    "4": 52121,
+    "5": 44982,
+    "6": 45639
+   },
+   "carried_over_unchanged": false,
+   "family": "algebra",
+   "fixture_sha256": "e9d6ee35de129093fa425bf2ebb0a5801f9938abd015b6b19ae5f48733b5032b",
+   "id": "M1.digit_puzzle_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0185,
+    "per_level": {
+     "0": {
+      "const": 0.0185,
+      "const_heldout": 0.016,
+      "flag": false,
+      "oracle_printed": 0.004,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.3895,
+      "worst_surface": "spec:O:largest_fit_last_clue",
+      "worst_surface_rate": 0.2315
+     },
+     "1": {
+      "const": 0.005,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.0005,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.3285,
+      "worst_surface": "spec:O:largest_fit_last_clue",
+      "worst_surface_rate": 0.0605
+     },
+     "2": {
+      "const": 0.0045,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.0005,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.3455,
+      "worst_surface": "spec:O:largest_fit_last_clue",
+      "worst_surface_rate": 0.068
+     },
+     "3": {
+      "const": 0.0045,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.001,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.384,
+      "worst_surface": "spec:O:largest_fit_last_clue",
+      "worst_surface_rate": 0.05
+     },
+     "4": {
+      "const": 0.004,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.3915,
+      "worst_surface": "spec:O:largest_fit_last_clue",
+      "worst_surface_rate": 0.0635
+     },
+     "5": {
+      "const": 0.005,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.0005,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.4925,
+      "worst_surface": "spec:O:smallest_fit_last_clue",
+      "worst_surface_rate": 0.0385
+     },
+     "6": {
+      "const": 0.004,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.0015,
+      "worst_partial": "spec:O:smallest_fit_all_but_last",
+      "worst_partial_rate": 0.4775,
+      "worst_surface": "spec:O:largest_fit_last_clue",
+      "worst_surface_rate": 0.048
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.0185,
+     "heuristic": "spec:O:largest_fit_last_clue",
+     "level": "0",
+     "rate": 0.2315
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0315,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0315,
+     "heuristic": "spec:O:median_fit_first_clue",
+     "level": "0",
+     "rate": 0.1675
+    }
+   },
+   "signature": "5e6018a9251f67423443e40b0fa493091a7cc3a8091828c0a60e1a16dfaa8b9a",
+   "supersedes": "M1.digit_puzzle"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 13556,
+    "1": 16264,
+    "2": 17462,
+    "3": 18215,
+    "4": 18674,
+    "5": 19009,
+    "6": 19173
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 19731,
+    "1": 40248,
+    "2": 64785,
+    "3": 98469,
+    "4": 137734,
+    "5": 189384,
+    "6": 224456
+   },
+   "carried_over_unchanged": false,
+   "family": "division",
+   "fixture_sha256": "40e70f0fdcf3d17b65e8fa07631d10fae98b273c9027b82378c667474d0e9e3f",
+   "id": "M1.division_counting_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.1495,
+    "per_level": {
+     "0": {
+      "const": 0.1495,
+      "const_heldout": 0.132,
+      "flag": false,
+      "oracle_printed": 0.01,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.008,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.0525
+     },
+     "1": {
+      "const": 0.131,
+      "const_heldout": 0.133,
+      "flag": false,
+      "oracle_printed": 0.011,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.0095,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.064
+     },
+     "2": {
+      "const": 0.1145,
+      "const_heldout": 0.105,
+      "flag": false,
+      "oracle_printed": 0.0105,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.011,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.0625
+     },
+     "3": {
+      "const": 0.102,
+      "const_heldout": 0.089,
+      "flag": false,
+      "oracle_printed": 0.012,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.011,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.054
+     },
+     "4": {
+      "const": 0.1065,
+      "const_heldout": 0.112,
+      "flag": false,
+      "oracle_printed": 0.0125,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.0085,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.0465
+     },
+     "5": {
+      "const": 0.086,
+      "const_heldout": 0.067,
+      "flag": false,
+      "oracle_printed": 0.0105,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.0075,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.0395
+     },
+     "6": {
+      "const": 0.0805,
+      "const_heldout": 0.08,
+      "flag": false,
+      "oracle_printed": 0.0065,
+      "worst_partial": "spec:O:ceil_of_product",
+      "worst_partial_rate": 0.013,
+      "worst_surface": "spec:A:rounded_quotient",
+      "worst_surface_rate": 0.049
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.131,
+     "heuristic": "spec:A:rounded_quotient",
+     "level": "1",
+     "rate": 0.064
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.08,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0435,
+     "heuristic": "spec:O:floor_boxes_then_ceil",
+     "level": "5",
+     "rate": 0.229
+    }
+   },
+   "signature": "2797543702d20e27dab0af3af817b6ca8da1f907078b8da36de5df6f66931c62",
+   "supersedes": "M1.division_counting"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 3590,
+    "1": 3872,
+    "2": 5173,
+    "3": 5514,
+    "4": 6819,
+    "5": 5477,
+    "6": 5499
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=18": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 3591,
+    "1": 3889,
+    "2": 5304,
+    "3": 5697,
+    "4": 7322,
+    "5": 5659,
+    "6": 5642
+   },
+   "carried_over_unchanged": true,
+   "family": "sequences",
+   "fixture_sha256": null,
+   "id": "M1.finite_differences",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.011,
+    "per_level": {
+     "0": {
+      "const": 0.011,
+      "const_heldout": 0.005,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:quadratic_diffs_for_any_degree",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:ratio_extrapolation",
+      "worst_surface_rate": 0.024
+     },
+     "1": {
+      "const": 0.0105,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:quadratic_diffs_for_any_degree",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:ratio_extrapolation",
+      "worst_surface_rate": 0.014
+     },
+     "2": {
+      "const": 0.0095,
+      "const_heldout": 0.009,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:quadratic_diffs_for_any_degree",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:ratio_extrapolation",
+      "worst_surface_rate": 0.015
+     },
+     "3": {
+      "const": 0.008,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:quadratic_diffs_for_any_degree",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:ratio_extrapolation",
+      "worst_surface_rate": 0.008
+     },
+     "4": {
+      "const": 0.006,
+      "const_heldout": 0.003,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:quadratic_diffs_for_any_degree",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:ratio_extrapolation",
+      "worst_surface_rate": 0.004
+     },
+     "5": {
+      "const": 0.004,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:one_step_even_if_two_asked",
+      "worst_partial_rate": 0.5095,
+      "worst_surface": "spec:O:twice_last",
+      "worst_surface_rate": 0.003
+     },
+     "6": {
+      "const": 0.0035,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:one_step_even_if_two_asked",
+      "worst_partial_rate": 0.5095,
+      "worst_surface": "spec:O:twice_last",
+      "worst_surface_rate": 0.007
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.011,
+     "heuristic": "spec:A:ratio_extrapolation",
+     "level": "0",
+     "rate": 0.024
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.011,
+    "worst_over_levels": {
+     "constant_rate_there": 0.011,
+     "heuristic": "spec:A:ratio_extrapolation",
+     "level": "0",
+     "rate": 0.024
+    }
+   },
+   "signature": "1973156432cf3d0ce2b6b1e1e9e95d557817fb273dbd111c67efb3e88882a71e",
+   "supersedes": null
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 12817,
+    "1": 15772,
+    "2": 17452,
+    "3": 19936,
+    "4": 19959,
+    "5": 20000,
+    "6": 19999
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 18726,
+    "1": 38342,
+    "2": 67954,
+    "3": 3076769,
+    "4": 4877805,
+    "5": null,
+    "6": 199990000
+   },
+   "carried_over_unchanged": false,
+   "family": "number_theory",
+   "fixture_sha256": "157d6e5efcfb9c8ae51bf0a6ccd059962157ffa3112fd4d91104a4b640eeb712",
+   "id": "M1.gcd_lcm_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.028,
+    "per_level": {
+     "0": {
+      "const": 0.028,
+      "const_heldout": 0.023,
+      "flag": false,
+      "oracle_printed": 0.126,
+      "worst_partial": "spec:O:product_over_gcd_all",
+      "worst_partial_rate": 0.4955,
+      "worst_surface": "spec:A:abs_diff_first_two",
+      "worst_surface_rate": 0.076
+     },
+     "1": {
+      "const": 0.024,
+      "const_heldout": 0.009,
+      "flag": false,
+      "oracle_printed": 0.0985,
+      "worst_partial": "spec:O:product_over_gcd_all",
+      "worst_partial_rate": 0.52,
+      "worst_surface": "spec:A:abs_diff_first_two",
+      "worst_surface_rate": 0.0605
+     },
+     "2": {
+      "const": 0.022,
+      "const_heldout": 0.024,
+      "flag": false,
+      "oracle_printed": 0.0995,
+      "worst_partial": "spec:O:product_over_gcd_all",
+      "worst_partial_rate": 0.5125,
+      "worst_surface": "spec:A:abs_diff_first_two",
+      "worst_surface_rate": 0.0575
+     },
+     "3": {
+      "const": 0.0165,
+      "const_heldout": 0.013,
+      "flag": false,
+      "oracle_printed": 0.035,
+      "worst_partial": "spec:O:gcd_of_last_two_or_lcm",
+      "worst_partial_rate": 0.413,
+      "worst_surface": "spec:O:smallest_pairwise_diff",
+      "worst_surface_rate": 0.062
+     },
+     "4": {
+      "const": 0.015,
+      "const_heldout": 0.006,
+      "flag": false,
+      "oracle_printed": 0.0195,
+      "worst_partial": "spec:A:op_of_first_two_only",
+      "worst_partial_rate": 0.4125,
+      "worst_surface": "spec:O:smallest_pairwise_diff",
+      "worst_surface_rate": 0.058
+     },
+     "5": {
+      "const": 0.015,
+      "const_heldout": 0.008,
+      "flag": false,
+      "oracle_printed": 0.016,
+      "worst_partial": "spec:O:gcd_of_last_two_or_lcm",
+      "worst_partial_rate": 0.3355,
+      "worst_surface": "spec:O:smallest_pairwise_diff",
+      "worst_surface_rate": 0.0705
+     },
+     "6": {
+      "const": 0.0135,
+      "const_heldout": 0.01,
+      "flag": false,
+      "oracle_printed": 0.0115,
+      "worst_partial": "spec:A:op_of_first_two_only",
+      "worst_partial_rate": 0.339,
+      "worst_surface": "spec:O:smallest_pairwise_diff",
+      "worst_surface_rate": 0.07
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.028,
+     "heuristic": "spec:A:abs_diff_first_two",
+     "level": "0",
+     "rate": 0.076
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0665,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0665,
+     "heuristic": "A:first_number",
+     "level": "0",
+     "rate": 0.0445
+    }
+   },
+   "signature": "e2a8c7db91b000bcd3721b05dc9e18904c7b6379ddda52edb174df648bafa316",
+   "supersedes": "M1.gcd_lcm"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 19895,
+    "1": 19998,
+    "2": 20000,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 1904667,
+    "1": 99995000,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": false,
+   "family": "geometry",
+   "fixture_sha256": "6e79506d48f22bf97ef9c1adff37723653677a48885a134ec96561b4eb4ed09a",
+   "id": "M1.grid_perimeter_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.2635,
+    "per_level": {
+     "0": {
+      "const": 0.2635,
+      "const_heldout": 0.277,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.263
+     },
+     "1": {
+      "const": 0.2215,
+      "const_heldout": 0.214,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.2375
+     },
+     "2": {
+      "const": 0.211,
+      "const_heldout": 0.205,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.2075
+     },
+     "3": {
+      "const": 0.1915,
+      "const_heldout": 0.188,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.187
+     },
+     "4": {
+      "const": 0.187,
+      "const_heldout": 0.177,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.1285
+     },
+     "5": {
+      "const": 0.1435,
+      "const_heldout": 0.128,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.136
+     },
+     "6": {
+      "const": 0.154,
+      "const_heldout": 0.153,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:2cells_plus_2rows",
+      "worst_surface_rate": 0.106
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.2635,
+     "heuristic": "spec:O:2cells_plus_2rows",
+     "level": "0",
+     "rate": 0.263
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.205,
+    "worst_over_levels": {
+     "constant_rate_there": 0.205,
+     "heuristic": "spec:O:2cells_plus_2",
+     "level": "1",
+     "rate": 0.389
+    }
+   },
+   "signature": "8175d5e0c671e00dceb68d1faca24935610bfb7bbfbd7c7c01255643336486f3",
+   "supersedes": "M1.grid_perimeter"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 4481,
+    "1": 17277,
+    "2": 19383,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 4345,
+    "1": 66398,
+    "2": 320497,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": false,
+   "family": "counting",
+   "fixture_sha256": "e591f22c7a76af05f7f34d431241f63a99ae61a475f4786bc369624fbacfe966",
+   "id": "M1.inclusion_exclusion_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.091,
+    "per_level": {
+     "0": {
+      "const": 0.091,
+      "const_heldout": 0.094,
+      "flag": false,
+      "oracle_printed": 0.117,
+      "worst_partial": "spec:O:triple_sign_error",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:O:total_minus_pairs",
+      "worst_surface_rate": 0.0635
+     },
+     "1": {
+      "const": 0.0455,
+      "const_heldout": 0.038,
+      "flag": false,
+      "oracle_printed": 0.057,
+      "worst_partial": "spec:O:triple_sign_error",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:O:max_minus_min_size",
+      "worst_surface_rate": 0.032
+     },
+     "2": {
+      "const": 0.0335,
+      "const_heldout": 0.029,
+      "flag": false,
+      "oracle_printed": 0.0445,
+      "worst_partial": "spec:O:triple_sign_error",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "A:smallest_number",
+      "worst_surface_rate": 0.0225
+     },
+     "3": {
+      "const": 0.021,
+      "const_heldout": 0.016,
+      "flag": false,
+      "oracle_printed": 0.038,
+      "worst_partial": "spec:O:any_formula_whatever_ask",
+      "worst_partial_rate": 0.4955,
+      "worst_surface": "spec:O:max_minus_min_size",
+      "worst_surface_rate": 0.016
+     },
+     "4": {
+      "const": 0.018,
+      "const_heldout": 0.016,
+      "flag": false,
+      "oracle_printed": 0.03,
+      "worst_partial": "spec:O:any_formula_whatever_ask",
+      "worst_partial_rate": 0.4925,
+      "worst_surface": "A:smallest_number",
+      "worst_surface_rate": 0.0115
+     },
+     "5": {
+      "const": 0.0115,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.0405,
+      "worst_partial": "spec:O:any_formula_whatever_ask",
+      "worst_partial_rate": 0.2385,
+      "worst_surface": "O:abs_diff_first_two",
+      "worst_surface_rate": 0.0075
+     },
+     "6": {
+      "const": 0.0155,
+      "const_heldout": 0.015,
+      "flag": false,
+      "oracle_printed": 0.035,
+      "worst_partial": "spec:O:any_formula_whatever_ask",
+      "worst_partial_rate": 0.2435,
+      "worst_surface": "O:median_of_numbers",
+      "worst_surface_rate": 0.0085
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.091,
+     "heuristic": "spec:O:total_minus_pairs",
+     "level": "0",
+     "rate": 0.0635
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.099,
+    "worst_over_levels": {
+     "constant_rate_there": 0.099,
+     "heuristic": "spec:O:total_minus_pairs",
+     "level": "0",
+     "rate": 0.1135
+    }
+   },
+   "signature": "4b0c7c2cc630b204362a81fbebd58a14159c9a827e37f58b6bfde3e3f20fa648",
+   "supersedes": "M1.inclusion_exclusion"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 19926,
+    "1": 20000,
+    "2": 20000,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 2702568,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": false,
+   "family": "statistics",
+   "fixture_sha256": "e144e8916d85e963708a6edd3bcf15cb3ad7769a44742745ec8ee6e0dc3be214",
+   "id": "M1.median_list_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.06,
+    "per_level": {
+     "0": {
+      "const": 0.06,
+      "const_heldout": 0.047,
+      "flag": false,
+      "oracle_printed": 0.553,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.6255,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.1255
+     },
+     "1": {
+      "const": 0.036,
+      "const_heldout": 0.034,
+      "flag": false,
+      "oracle_printed": 0.4395,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.622,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.0755
+     },
+     "2": {
+      "const": 0.03,
+      "const_heldout": 0.025,
+      "flag": false,
+      "oracle_printed": 0.535,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.6405,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.077
+     },
+     "3": {
+      "const": 0.028,
+      "const_heldout": 0.019,
+      "flag": false,
+      "oracle_printed": 0.458,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.61,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.0665
+     },
+     "4": {
+      "const": 0.022,
+      "const_heldout": 0.015,
+      "flag": false,
+      "oracle_printed": 0.5185,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.5955,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.0555
+     },
+     "5": {
+      "const": 0.021,
+      "const_heldout": 0.011,
+      "flag": false,
+      "oracle_printed": 0.489,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.591,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.066
+     },
+     "6": {
+      "const": 0.02,
+      "const_heldout": 0.014,
+      "flag": false,
+      "oracle_printed": 0.528,
+      "worst_partial": "spec:O:median_of_distinct_values",
+      "worst_partial_rate": 0.5695,
+      "worst_surface": "spec:O:mode_of_values",
+      "worst_surface_rate": 0.046
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.06,
+     "heuristic": "spec:O:mode_of_values",
+     "level": "0",
+     "rate": 0.1255
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0565,
+    "worst_over_levels": {
+     "constant_rate_there": 0.026,
+     "heuristic": "spec:O:mode_of_values",
+     "level": "3",
+     "rate": 0.184
+    }
+   },
+   "signature": "78828d767a583ced6934f0ed9d997daecbb82691177f314bfcb2d6d2697f9b32",
+   "supersedes": "M1.median_list"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 19994,
+    "1": 19998,
+    "2": 19998,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 33331667,
+    "1": 99995000,
+    "2": 99995000,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": false,
+   "family": "pricing",
+   "fixture_sha256": "044dc499d9acbfaa25f7b7932429db0d7f91dda0108e6848095f14ee938910a8",
+   "id": "M1.min_cost_packs_r2",
+   "not_registered": "The audit's 'greedy' tell (0.41-0.47 at L0-L4) is gone, but the tell moved: with the redraws withdrawn (R-1) the best heuristic of the combined battery is the continuous relaxation 'least unit price x need, rounded up' (0.65 at every level with equal unit prices; 'one kind of pack, floor, then singles' reached 0.65 with independent prices in the trial). The optimum of an unbounded min-cost cover is near its linear relaxation for any natural pack system, so no construction was found that makes every cheap plan uninformative. Rev2 shape kept for the record; NOT REGISTERED.",
+   "shortcuts_after": {
+    "flagged_levels": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "max_constant_rate": 0.01,
+    "per_level": {
+     "0": {
+      "const": 0.0075,
+      "const_heldout": 0.003,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 0.9965,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.646
+     },
+     "1": {
+      "const": 0.01,
+      "const_heldout": 0.009,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 0.9965,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.651
+     },
+     "2": {
+      "const": 0.006,
+      "const_heldout": 0.003,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 0.996,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.6165
+     },
+     "3": {
+      "const": 0.0065,
+      "const_heldout": 0.002,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 0.995,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.568
+     },
+     "4": {
+      "const": 0.006,
+      "const_heldout": 0.001,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 0.9955,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.551
+     },
+     "5": {
+      "const": 0.0045,
+      "const_heldout": 0.0,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 0.9995,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.6065
+     },
+     "6": {
+      "const": 0.005,
+      "const_heldout": 0.003,
+      "flag": true,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:exactly_need_dp",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:O:fractional_best_unit_rounded_up",
+      "worst_surface_rate": 0.5835
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.01,
+     "heuristic": "spec:O:fractional_best_unit_rounded_up",
+     "level": "1",
+     "rate": 0.651
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "max_constant_rate": 0.0185,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0185,
+     "heuristic": "spec:O:greedy_largest_first_then_singles",
+     "level": "0",
+     "rate": 0.4725
+    }
+   },
+   "signature": "0f2dc8ac0f8b8db66dd8b0fda3e6fa784c02dd8679b520b152469c783907d22c",
+   "supersedes": "M1.min_cost_packs"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 20000,
+    "1": 20000,
+    "2": 20000,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": null,
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": false,
+   "family": "statistics",
+   "fixture_sha256": "b232ad2379555c1393fb0123d107598f2d7a6e89b1af343b23c69090e25e0142",
+   "id": "M1.mode_tally_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.15,
+    "per_level": {
+     "0": {
+      "const": 0.15,
+      "const_heldout": 0.124,
+      "flag": false,
+      "oracle_printed": 0.664,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.4825,
+      "worst_surface": "spec:O:ceil_n_over_distinct_plus1",
+      "worst_surface_rate": 0.27
+     },
+     "1": {
+      "const": 0.1165,
+      "const_heldout": 0.101,
+      "flag": false,
+      "oracle_printed": 0.667,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.4915,
+      "worst_surface": "spec:O:ceil_n_over_distinct_plus1",
+      "worst_surface_rate": 0.203
+     },
+     "2": {
+      "const": 0.1035,
+      "const_heldout": 0.099,
+      "flag": false,
+      "oracle_printed": 0.617,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.471,
+      "worst_surface": "spec:O:count_of_last_value",
+      "worst_surface_rate": 0.175
+     },
+     "3": {
+      "const": 0.091,
+      "const_heldout": 0.084,
+      "flag": false,
+      "oracle_printed": 0.628,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.4975,
+      "worst_surface": "spec:O:count_of_last_value",
+      "worst_surface_rate": 0.1595
+     },
+     "4": {
+      "const": 0.0775,
+      "const_heldout": 0.073,
+      "flag": false,
+      "oracle_printed": 0.5955,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.4865,
+      "worst_surface": "spec:O:count_of_last_value",
+      "worst_surface_rate": 0.148
+     },
+     "5": {
+      "const": 0.0815,
+      "const_heldout": 0.088,
+      "flag": false,
+      "oracle_printed": 0.583,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.477,
+      "worst_surface": "spec:O:count_of_last_value",
+      "worst_surface_rate": 0.1485
+     },
+     "6": {
+      "const": 0.066,
+      "const_heldout": 0.059,
+      "flag": false,
+      "oracle_printed": 0.602,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.492,
+      "worst_surface": "spec:O:count_of_last_value",
+      "worst_surface_rate": 0.1405
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.15,
+     "heuristic": "spec:O:ceil_n_over_distinct_plus1",
+     "level": "0",
+     "rate": 0.27
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "max_constant_rate": 0.2275,
+    "worst_over_levels": {
+     "constant_rate_there": 0.2275,
+     "heuristic": "spec:O:count_of_last_value",
+     "level": "0",
+     "rate": 0.3915
+    }
+   },
+   "signature": "9ff881a27f25c05cc5e4246e72410c94b4716b697de7eff955a4da2858978fbe",
+   "supersedes": "M1.mode_tally"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 12223,
+    "1": 14488,
+    "2": 16051,
+    "3": 17106,
+    "4": 17867,
+    "5": 18356,
+    "6": 18754
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 16857,
+    "1": 27362,
+    "2": 42050,
+    "3": 60511,
+    "4": 85138,
+    "5": 113760,
+    "6": 150822
+   },
+   "carried_over_unchanged": false,
+   "family": "geometry",
+   "fixture_sha256": "47eee921280674c0fa01b165e13441bcab71fa47a3ac8b559afdf5f490641931",
+   "id": "M1.painted_cube_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.013,
+    "per_level": {
+     "0": {
+      "const": 0.013,
+      "const_heldout": 0.011,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.498,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.1685
+     },
+     "1": {
+      "const": 0.012,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.519,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.1735
+     },
+     "2": {
+      "const": 0.0095,
+      "const_heldout": 0.005,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.514,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.18
+     },
+     "3": {
+      "const": 0.0095,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.489,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.1575
+     },
+     "4": {
+      "const": 0.008,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.5,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.167
+     },
+     "5": {
+      "const": 0.007,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.5085,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.161
+     },
+     "6": {
+      "const": 0.009,
+      "const_heldout": 0.008,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:all_faces_formula_always",
+      "worst_partial_rate": 0.49,
+      "worst_surface": "spec:A:inner_block",
+      "worst_surface_rate": 0.169
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.0095,
+     "heuristic": "spec:A:inner_block",
+     "level": "2",
+     "rate": 0.18
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0495,
+    "worst_over_levels": {
+     "constant_rate_there": 0.022,
+     "heuristic": "spec:A:inner_block",
+     "level": "4",
+     "rate": 0.1815
+    }
+   },
+   "signature": "549f23e25a5367ab003c932847e5a7b9a4075efba49f7ea648a0bf0700a11fe5",
+   "supersedes": "M1.painted_cube"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 13339,
+    "1": 15744,
+    "2": 19746,
+    "3": 19840,
+    "4": 19996,
+    "5": 19996,
+    "6": 19999
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 16303,
+    "1": 33073,
+    "2": 766245,
+    "3": 1234506,
+    "4": 49997500,
+    "5": 49997500,
+    "6": 199990000
+   },
+   "carried_over_unchanged": false,
+   "family": "counting",
+   "fixture_sha256": "0a96b00e2c7509e420513d05c7b582fd4b4e39013c0cc1ec4f124e416d5e653f",
+   "id": "M1.pigeonhole_worst_case_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.035,
+    "per_level": {
+     "0": {
+      "const": 0.035,
+      "const_heldout": 0.024,
+      "flag": false,
+      "oracle_printed": 0.022,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0015,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.197
+     },
+     "1": {
+      "const": 0.0265,
+      "const_heldout": 0.02,
+      "flag": false,
+      "oracle_printed": 0.014,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.184
+     },
+     "2": {
+      "const": 0.018,
+      "const_heldout": 0.008,
+      "flag": false,
+      "oracle_printed": 0.015,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.136
+     },
+     "3": {
+      "const": 0.0165,
+      "const_heldout": 0.006,
+      "flag": false,
+      "oracle_printed": 0.0155,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.001,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.128
+     },
+     "4": {
+      "const": 0.013,
+      "const_heldout": 0.005,
+      "flag": false,
+      "oracle_printed": 0.0115,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.1215
+     },
+     "5": {
+      "const": 0.013,
+      "const_heldout": 0.01,
+      "flag": false,
+      "oracle_printed": 0.009,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.1005
+     },
+     "6": {
+      "const": 0.01,
+      "const_heldout": 0.007,
+      "flag": false,
+      "oracle_printed": 0.0075,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0005,
+      "worst_surface": "spec:A:(k-1)c+1",
+      "worst_surface_rate": 0.099
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.035,
+     "heuristic": "spec:A:(k-1)c+1",
+     "level": "0",
+     "rate": 0.197
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.085,
+    "worst_over_levels": {
+     "constant_rate_there": 0.085,
+     "heuristic": "spec:A:total_minus_min",
+     "level": "0",
+     "rate": 0.041
+    }
+   },
+   "signature": "157f30f9be7b578f1078aa06eb6ddd793d1873bbb70f6b2212e9222fe7dadc45",
+   "supersedes": "M1.pigeonhole_worst_case"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 18273,
+    "1": 19018,
+    "2": 20000,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 109165,
+    "1": 197619,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": false,
+   "family": "number_theory",
+   "fixture_sha256": "213bab22b414fec8d39f3c7063d2e66f189a8287110408bcec7e79104deba257",
+   "id": "M1.power_remainder_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.1735,
+    "per_level": {
+     "0": {
+      "const": 0.1735,
+      "const_heldout": 0.172,
+      "flag": false,
+      "oracle_printed": 0.026,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.001,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.2325
+     },
+     "1": {
+      "const": 0.1605,
+      "const_heldout": 0.169,
+      "flag": false,
+      "oracle_printed": 0.022,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0005,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.21
+     },
+     "2": {
+      "const": 0.0655,
+      "const_heldout": 0.06,
+      "flag": false,
+      "oracle_printed": 0.0175,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.001,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.0995
+     },
+     "3": {
+      "const": 0.0585,
+      "const_heldout": 0.041,
+      "flag": false,
+      "oracle_printed": 0.017,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.1165
+     },
+     "4": {
+      "const": 0.0565,
+      "const_heldout": 0.047,
+      "flag": false,
+      "oracle_printed": 0.015,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0005,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.0975
+     },
+     "5": {
+      "const": 0.059,
+      "const_heldout": 0.054,
+      "flag": false,
+      "oracle_printed": 0.0145,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.0785
+     },
+     "6": {
+      "const": 0.0605,
+      "const_heldout": 0.061,
+      "flag": false,
+      "oracle_printed": 0.012,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.001,
+      "worst_surface": "spec:O:base_pow_exp_last_digit",
+      "worst_surface_rate": 0.075
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.1735,
+     "heuristic": "spec:O:base_pow_exp_last_digit",
+     "level": "0",
+     "rate": 0.2325
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "max_constant_rate": 0.222,
+    "worst_over_levels": {
+     "constant_rate_there": 0.1765,
+     "heuristic": "spec:O:digit_pow_exp_last_digit",
+     "level": "0",
+     "rate": 0.43
+    }
+   },
+   "signature": "c4ef75592ef4010c68813b9425e596992751326d93a1d26565f9550bf0e4c0ac",
+   "supersedes": "M1.last_digit_power"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 3548,
+    "1": 5004,
+    "2": 6923,
+    "3": 14546,
+    "4": 16291,
+    "5": 17264,
+    "6": 18031
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1,
+     2
+    ],
+    "G=18": [
+     1,
+     2
+    ],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 1830,
+    "1": 2595,
+    "2": 4451,
+    "3": 27881,
+    "4": 46166,
+    "5": 64120,
+    "6": 93279
+   },
+   "carried_over_unchanged": false,
+   "family": "number_theory",
+   "fixture_sha256": "9230d0f9477493b22e93b4f5bdf84d6c9fe04e00329b141c2c7d9e23b9986105",
+   "id": "M1.prime_factors_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.1195,
+    "per_level": {
+     "0": {
+      "const": 0.1195,
+      "const_heldout": 0.115,
+      "flag": false,
+      "oracle_printed": 0.163,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.177,
+      "worst_surface": "A:last_number",
+      "worst_surface_rate": 0.115
+     },
+     "1": {
+      "const": 0.117,
+      "const_heldout": 0.117,
+      "flag": false,
+      "oracle_printed": 0.1495,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.1675,
+      "worst_surface": "A:last_number",
+      "worst_surface_rate": 0.102
+     },
+     "2": {
+      "const": 0.1015,
+      "const_heldout": 0.093,
+      "flag": false,
+      "oracle_printed": 0.089,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.161,
+      "worst_surface": "spec:A:digit_count",
+      "worst_surface_rate": 0.0675
+     },
+     "3": {
+      "const": 0.0665,
+      "const_heldout": 0.069,
+      "flag": false,
+      "oracle_printed": 0.017,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.113,
+      "worst_surface": "spec:A:digit_count",
+      "worst_surface_rate": 0.0595
+     },
+     "4": {
+      "const": 0.0635,
+      "const_heldout": 0.068,
+      "flag": false,
+      "oracle_printed": 0.015,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.108,
+      "worst_surface": "spec:A:digit_count",
+      "worst_surface_rate": 0.0535
+     },
+     "5": {
+      "const": 0.062,
+      "const_heldout": 0.036,
+      "flag": false,
+      "oracle_printed": 0.0085,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.1065,
+      "worst_surface": "spec:A:digit_count",
+      "worst_surface_rate": 0.061
+     },
+     "6": {
+      "const": 0.0575,
+      "const_heldout": 0.057,
+      "flag": false,
+      "oracle_printed": 0.0065,
+      "worst_partial": "spec:O:largest_prime_le_29_dividing",
+      "worst_partial_rate": 0.117,
+      "worst_surface": "spec:A:digit_count",
+      "worst_surface_rate": 0.0475
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.1195,
+     "heuristic": "A:last_number",
+     "level": "0",
+     "rate": 0.115
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.114,
+    "worst_over_levels": {
+     "constant_rate_there": 0.114,
+     "heuristic": "spec:A:digit_count",
+     "level": "0",
+     "rate": 0.1125
+    }
+   },
+   "signature": "6c783708809f9551e64a1b6209e59dfe2b23fd32b1e42730bb948ab56955d466",
+   "supersedes": "M1.prime_factors"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 2057,
+    "1": 4608,
+    "2": 6866,
+    "3": 8720,
+    "4": 10167,
+    "5": 11358,
+    "6": 12281
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=18": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 1852,
+    "1": 4278,
+    "2": 6757,
+    "3": 9553,
+    "4": 12299,
+    "5": 15320,
+    "6": 18204
+   },
+   "carried_over_unchanged": false,
+   "family": "geometry",
+   "fixture_sha256": "811a06de1194340c3935e3e9f7f0683ba89111e51df3d20b597fbc70f33f539a",
+   "id": "M1.pythagoras_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0145,
+    "per_level": {
+     "0": {
+      "const": 0.0145,
+      "const_heldout": 0.015,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:hyp_always",
+      "worst_partial_rate": 0.3995,
+      "worst_surface": "spec:O:max_plus_half_min",
+      "worst_surface_rate": 0.003
+     },
+     "1": {
+      "const": 0.009,
+      "const_heldout": 0.008,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:leg_always",
+      "worst_partial_rate": 0.4095,
+      "worst_surface": "spec:O:max_plus_half_min",
+      "worst_surface_rate": 0.0015
+     },
+     "2": {
+      "const": 0.0075,
+      "const_heldout": 0.003,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:hyp_always",
+      "worst_partial_rate": 0.393,
+      "worst_surface": "A:first_number",
+      "worst_surface_rate": 0.0
+     },
+     "3": {
+      "const": 0.0055,
+      "const_heldout": 0.005,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:leg_always",
+      "worst_partial_rate": 0.4105,
+      "worst_surface": "spec:O:max_plus_half_min",
+      "worst_surface_rate": 0.0005
+     },
+     "4": {
+      "const": 0.0055,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:hyp_always",
+      "worst_partial_rate": 0.3975,
+      "worst_surface": "A:first_number",
+      "worst_surface_rate": 0.0
+     },
+     "5": {
+      "const": 0.0055,
+      "const_heldout": 0.003,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:leg_always",
+      "worst_partial_rate": 0.4155,
+      "worst_surface": "A:first_number",
+      "worst_surface_rate": 0.0
+     },
+     "6": {
+      "const": 0.005,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:hyp_always",
+      "worst_partial_rate": 0.4105,
+      "worst_surface": "spec:O:max_plus_half_min",
+      "worst_surface_rate": 0.0005
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.0145,
+     "heuristic": "spec:O:max_plus_half_min",
+     "level": "0",
+     "rate": 0.003
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0445,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0445,
+     "heuristic": "spec:O:max_plus_half_min",
+     "level": "0",
+     "rate": 0.017
+    }
+   },
+   "signature": "4aefa4b0d4be6cb1ca31f3b2c4f488f50f81c4d0ee68e4f3d67ca28802fae712",
+   "supersedes": "M1.pythagoras"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 1855,
+    "1": 3265,
+    "2": 5000,
+    "3": 6837,
+    "4": 8625,
+    "5": 10181,
+    "6": 11553
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=18": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 1856,
+    "1": 3261,
+    "2": 5117,
+    "3": 7293,
+    "4": 9964,
+    "5": 12989,
+    "6": 16307
+   },
+   "carried_over_unchanged": true,
+   "family": "algebra",
+   "fixture_sha256": null,
+   "id": "M1.quadratic_area",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0425,
+    "per_level": {
+     "0": {
+      "const": 0.0425,
+      "const_heldout": 0.038,
+      "flag": false,
+      "oracle_printed": 0.039,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0255,
+      "worst_surface": "spec:A:area_div_d",
+      "worst_surface_rate": 0.0395
+     },
+     "1": {
+      "const": 0.03,
+      "const_heldout": 0.023,
+      "flag": false,
+      "oracle_printed": 0.0265,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0175,
+      "worst_surface": "spec:O:isqrt_minus_d",
+      "worst_surface_rate": 0.0415
+     },
+     "2": {
+      "const": 0.024,
+      "const_heldout": 0.017,
+      "flag": false,
+      "oracle_printed": 0.0165,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0115,
+      "worst_surface": "spec:O:isqrt_minus_d",
+      "worst_surface_rate": 0.0335
+     },
+     "3": {
+      "const": 0.0215,
+      "const_heldout": 0.016,
+      "flag": false,
+      "oracle_printed": 0.017,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.011,
+      "worst_surface": "spec:O:isqrt_minus_d",
+      "worst_surface_rate": 0.026
+     },
+     "4": {
+      "const": 0.019,
+      "const_heldout": 0.015,
+      "flag": false,
+      "oracle_printed": 0.0135,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.01,
+      "worst_surface": "spec:A:area_div_d",
+      "worst_surface_rate": 0.0265
+     },
+     "5": {
+      "const": 0.0175,
+      "const_heldout": 0.013,
+      "flag": false,
+      "oracle_printed": 0.009,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.007,
+      "worst_surface": "spec:O:isqrt_minus_d",
+      "worst_surface_rate": 0.0255
+     },
+     "6": {
+      "const": 0.018,
+      "const_heldout": 0.014,
+      "flag": false,
+      "oracle_printed": 0.012,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.008,
+      "worst_surface": "spec:O:isqrt_minus_d",
+      "worst_surface_rate": 0.0215
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.03,
+     "heuristic": "spec:O:isqrt_minus_d",
+     "level": "1",
+     "rate": 0.0415
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0425,
+    "worst_over_levels": {
+     "constant_rate_there": 0.03,
+     "heuristic": "spec:O:isqrt_minus_d",
+     "level": "1",
+     "rate": 0.0415
+    }
+   },
+   "signature": "2545133a3f6d31f728859efac09134e453b866d6c3be690c1c90d175a58628bd",
+   "supersedes": null
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 5191,
+    "1": 5455,
+    "2": 6420,
+    "3": 7290,
+    "4": 8008,
+    "5": 8629,
+    "6": 9271
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=18": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "G=300": [
+     1
+    ]
+   },
+   "capacity_n_eff_per_level": {
+    "0": 1225,
+    "1": 1672,
+    "2": 2192,
+    "3": 2753,
+    "4": 3404,
+    "5": 4211,
+    "6": 4942
+   },
+   "carried_over_unchanged": true,
+   "family": "sequences",
+   "fixture_sha256": null,
+   "id": "M1.recurrence_iterate",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0125,
+    "per_level": {
+     "0": {
+      "const": 0.0125,
+      "const_heldout": 0.008,
+      "flag": false,
+      "oracle_printed": 0.0035,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0035,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.015
+     },
+     "1": {
+      "const": 0.011,
+      "const_heldout": 0.007,
+      "flag": false,
+      "oracle_printed": 0.0045,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0045,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.011
+     },
+     "2": {
+      "const": 0.0085,
+      "const_heldout": 0.008,
+      "flag": false,
+      "oracle_printed": 0.004,
+      "worst_partial": "spec:O:term_n_minus_1",
+      "worst_partial_rate": 0.004,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.015
+     },
+     "3": {
+      "const": 0.0065,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.004,
+      "worst_partial": "spec:O:term_n_minus_1",
+      "worst_partial_rate": 0.004,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.0095
+     },
+     "4": {
+      "const": 0.006,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0025,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0025,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.007
+     },
+     "5": {
+      "const": 0.006,
+      "const_heldout": 0.002,
+      "flag": false,
+      "oracle_printed": 0.0015,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.0015,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.0085
+     },
+     "6": {
+      "const": 0.006,
+      "const_heldout": 0.0,
+      "flag": false,
+      "oracle_printed": 0.0015,
+      "worst_partial": "spec:O:term_n_minus_1",
+      "worst_partial_rate": 0.0015,
+      "worst_surface": "spec:A:first_times_mult_pow",
+      "worst_surface_rate": 0.0085
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.0125,
+     "heuristic": "spec:A:first_times_mult_pow",
+     "level": "0",
+     "rate": 0.015
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.0125,
+    "worst_over_levels": {
+     "constant_rate_there": 0.0125,
+     "heuristic": "spec:A:first_times_mult_pow",
+     "level": "0",
+     "rate": 0.015
+    }
+   },
+   "signature": "420f9b778288a135f0ef19856a2afb1bc6e919032fa20cb2f9eece208ed8870f",
+   "supersedes": null
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 3737,
+    "1": 3742,
+    "2": 6249,
+    "3": 6258,
+    "4": 5864,
+    "5": 7976,
+    "6": 7925
+   },
+   "capacity_fails_levels": {
+    "G=11": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "G=18": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "G=300": [
+     1,
+     4,
+     5,
+     6
+    ]
+   },
+   "capacity_n_eff_per_level": {
+    "0": 1138,
+    "1": 1170,
+    "2": 2238,
+    "3": 2291,
+    "4": 463,
+    "5": 937,
+    "6": 905
+   },
+   "carried_over_unchanged": false,
+   "family": "counting",
+   "fixture_sha256": "7ed2e886181100c30f4c73c88651c89eef11b348ad60fb949a4daa3a083da888",
+   "id": "M1.slot_permutations_r2",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.063,
+    "per_level": {
+     "0": {
+      "const": 0.059,
+      "const_heldout": 0.049,
+      "flag": false,
+      "oracle_printed": 0.005,
+      "worst_partial": "spec:O:ignore_leading_zero_rule",
+      "worst_partial_rate": 0.65,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.0055
+     },
+     "1": {
+      "const": 0.063,
+      "const_heldout": 0.061,
+      "flag": false,
+      "oracle_printed": 0.004,
+      "worst_partial": "spec:O:ignore_leading_zero_rule",
+      "worst_partial_rate": 0.6475,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.0105
+     },
+     "2": {
+      "const": 0.041,
+      "const_heldout": 0.045,
+      "flag": false,
+      "oracle_printed": 0.0025,
+      "worst_partial": "spec:O:always_no_leading_zero",
+      "worst_partial_rate": 0.6585,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.005
+     },
+     "3": {
+      "const": 0.04,
+      "const_heldout": 0.037,
+      "flag": false,
+      "oracle_printed": 0.002,
+      "worst_partial": "spec:O:always_no_leading_zero",
+      "worst_partial_rate": 0.669,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.004
+     },
+     "4": {
+      "const": 0.0575,
+      "const_heldout": 0.069,
+      "flag": false,
+      "oracle_printed": 0.0005,
+      "worst_partial": "spec:O:ignore_leading_zero_rule",
+      "worst_partial_rate": 0.636,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.0065
+     },
+     "5": {
+      "const": 0.041,
+      "const_heldout": 0.034,
+      "flag": false,
+      "oracle_printed": 0.001,
+      "worst_partial": "spec:O:always_no_leading_zero",
+      "worst_partial_rate": 0.6505,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.0035
+     },
+     "6": {
+      "const": 0.0435,
+      "const_heldout": 0.042,
+      "flag": false,
+      "oracle_printed": 0.002,
+      "worst_partial": "spec:O:ignore_leading_zero_rule",
+      "worst_partial_rate": 0.6235,
+      "worst_surface": "A:sum_numbers",
+      "worst_surface_rate": 0.0025
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.063,
+     "heuristic": "A:sum_numbers",
+     "level": "1",
+     "rate": 0.0105
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.056,
+    "worst_over_levels": {
+     "constant_rate_there": 0.055,
+     "heuristic": "A:sum_numbers",
+     "level": "0",
+     "rate": 0.0065
+    }
+   },
+   "signature": "317be188b5d34f2c877bea51d8b045124ce7da1db7969cfa8115a10e25c24fdf",
+   "supersedes": "M1.slot_permutations"
+  },
+  {
+   "capacity_distinct_canonical_per_level": {
+    "0": 19035,
+    "1": 19597,
+    "2": 20000,
+    "3": 20000,
+    "4": 20000,
+    "5": 20000,
+    "6": 20000
+   },
+   "capacity_fails_levels": {
+    "G=11": [],
+    "G=18": [],
+    "G=300": []
+   },
+   "capacity_n_eff_per_level": {
+    "0": 200391,
+    "1": 488973,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null
+   },
+   "carried_over_unchanged": true,
+   "family": "pricing",
+   "fixture_sha256": null,
+   "id": "M1.tiered_pricing",
+   "not_registered": null,
+   "shortcuts_after": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.009,
+    "per_level": {
+     "0": {
+      "const": 0.0045,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.0015,
+      "worst_partial": "spec:O:skip_middle_tiers",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:units_times_mean_rate",
+      "worst_surface_rate": 0.02
+     },
+     "1": {
+      "const": 0.0045,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.0025,
+      "worst_partial": "spec:O:skip_middle_tiers",
+      "worst_partial_rate": 1.0,
+      "worst_surface": "spec:A:units_times_mean_rate",
+      "worst_surface_rate": 0.016
+     },
+     "2": {
+      "const": 0.0025,
+      "const_heldout": 0.001,
+      "flag": false,
+      "oracle_printed": 0.0035,
+      "worst_partial": "O:most_common_number",
+      "worst_partial_rate": 0.001,
+      "worst_surface": "spec:A:units_times_mean_rate",
+      "worst_surface_rate": 0.002
+     },
+     "3": {
+      "const": 0.009,
+      "const_heldout": 0.003,
+      "flag": false,
+      "oracle_printed": 0.0095,
+      "worst_partial": "spec:O:units_cap_plus_rest_at_last_rate_floor",
+      "worst_partial_rate": 0.4025,
+      "worst_surface": "spec:O:units_from_bill_mean_rate",
+      "worst_surface_rate": 0.0225
+     },
+     "4": {
+      "const": 0.0085,
+      "const_heldout": 0.007,
+      "flag": false,
+      "oracle_printed": 0.001,
+      "worst_partial": "spec:O:units_cap_plus_rest_at_last_rate_floor",
+      "worst_partial_rate": 0.3875,
+      "worst_surface": "spec:O:units_from_bill_mean_rate",
+      "worst_surface_rate": 0.007
+     },
+     "5": {
+      "const": 0.0065,
+      "const_heldout": 0.004,
+      "flag": false,
+      "oracle_printed": 0.0,
+      "worst_partial": "spec:O:units_cap_plus_rest_at_last_rate_floor",
+      "worst_partial_rate": 0.415,
+      "worst_surface": "spec:O:units_from_bill_mean_rate",
+      "worst_surface_rate": 0.0145
+     },
+     "6": {
+      "const": 0.0075,
+      "const_heldout": 0.005,
+      "flag": false,
+      "oracle_printed": 0.0005,
+      "worst_partial": "spec:O:units_cap_plus_rest_at_last_rate_floor",
+      "worst_partial_rate": 0.401,
+      "worst_surface": "spec:O:units_from_bill_mean_rate",
+      "worst_surface_rate": 0.0095
+     }
+    },
+    "worst_over_levels": {
+     "constant_rate_there": 0.009,
+     "heuristic": "spec:O:units_from_bill_mean_rate",
+     "level": "3",
+     "rate": 0.0225
+    }
+   },
+   "shortcuts_before": {
+    "flagged_levels": [],
+    "max_constant_rate": 0.009,
+    "worst_over_levels": {
+     "constant_rate_there": 0.009,
+     "heuristic": "spec:O:units_from_bill_mean_rate",
+     "level": "3",
+     "rate": 0.0225
+    }
+   },
+   "signature": "2b8a62924560f1d7261caacc77621a3f266488405165722bc0e3ea834a2eff5a",
+   "supersedes": null
+  }
+ ],
+ "environment": {
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "python": "3.12.14",
+  "seeds": {
+   "capacity": 777105,
+   "shortcut": 777103
+  },
+  "uv_lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761"
+ },
+ "not_registered": {
+  "M1.min_cost_packs_r2": "The audit's 'greedy' tell (0.41-0.47 at L0-L4) is gone, but the tell moved: with the redraws withdrawn (R-1) the best heuristic of the combined battery is the continuous relaxation 'least unit price x need, rounded up' (0.65 at every level with equal unit prices; 'one kind of pack, floor, then singles' reached 0.65 with independent prices in the trial). The optimum of an unbounded min-cost cover is near its linear relaxation for any natural pack system, so no construction was found that makes every cheap plan uninformative. Rev2 shape kept for the record; NOT REGISTERED."
+ },
+ "note": "Fix round after AUDIT_M0_M1_1 and LEAD_RULINGS_2. New shapes in new files; batch-1 shapes are kept and listed as superseded. Measured numbers are MEASURED on generator output; the demand is ANALYTICAL; n_eff is a SAMPLED lower bound. No model, no solver. Nothing here is registered, approved or scored.",
+ "superseded": {
+  "M1.binomial_choose_r2": "M1.binomial_choose",
+  "M1.change_ways_r2": "M1.change_ways",
+  "M1.crt_congruence_r2": "M1.crt_congruence",
+  "M1.digit_puzzle_r2": "M1.digit_puzzle",
+  "M1.division_counting_r2": "M1.division_counting",
+  "M1.gcd_lcm_r2": "M1.gcd_lcm",
+  "M1.grid_perimeter_r2": "M1.grid_perimeter",
+  "M1.inclusion_exclusion_r2": "M1.inclusion_exclusion",
+  "M1.median_list_r2": "M1.median_list",
+  "M1.min_cost_packs_r2": "M1.min_cost_packs",
+  "M1.mode_tally_r2": "M1.mode_tally",
+  "M1.painted_cube_r2": "M1.painted_cube",
+  "M1.pigeonhole_worst_case_r2": "M1.pigeonhole_worst_case",
+  "M1.power_remainder_r2": "M1.last_digit_power",
+  "M1.prime_factors_r2": "M1.prime_factors",
+  "M1.pythagoras_r2": "M1.pythagoras",
+  "M1.slot_permutations_r2": "M1.slot_permutations"
+ }
+}
