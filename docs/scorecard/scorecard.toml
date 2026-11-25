@@ -13,8 +13,8 @@
 # `uv run --locked python docs/scorecard/render_scorecard.py --check` fails when they are out of step
 # (tests/test_scorecard.py runs it).
 
-updated = "2026-11-21"
-basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0, P10-I-S6 and P10-I-S1"
+updated = "2026-11-25"
+basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0, P10-I-S6, P10-I-S1, P10-I-S2 Part T and P10-I-S2-D0"
 scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
 
 [[row]]
@@ -63,12 +63,14 @@ next = "What the store offers beyond the dense map has to be shown elsewhere (sp
 [[row]]
 title = "Sequential learning from teachers"
 score = 1
-note = "Both teachers now qualify; no student transfer experiment completed yet."
+note = "The transfer was run once, oracle-addressed on a frozen small student: registered negative (a lookup table does as well; retention not shown). Score not yet revisited by the human lead."
 evidence = [
   "P10-S2: TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED; the transfer question was not tested ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)).",
   "P10-I-S2 Part Q: TEACHERS-QUALIFIED (DISJOINT DRAWS) on the third registered attempt, independently recomputed; a qualification of teachers and training material, not a transfer result ([outcome](results/p10is2-partq-run-20261119-attempt3/OUTCOME.md)).",
+  "P10-I-S2 Part T: MILESTONE NOT ESTABLISHED (a lookup baseline does as well: E-table); AGAINST-LOOKUP: LOOKUP SUFFICES; AGAINST-DENSE acquisition DENSE AHEAD, retention NOT EVALUABLE; ACQUISITION-INCONCLUSIVE; RETENTION-INCONCLUSIVE: NOT CHALLENGED, SECOND NOT ACQUIRED; GENERAL-QUALITY PRESERVED; not converged at 8,000 updates; independently recomputed; accepted as registered ([outcome](results/p10is2-partt-run-20261124/OUTCOME.md)).",
+  "P10-I-S2-D0 (exploratory, no label): the retention loss on Part T's stores is MIXED; read competition between stages reaches two thirds of it in 0 of 6 cells, and read-time bank isolation fails the retention arithmetic in all six; independently recomputed ([outcome](results/p10is2d0-run-20261124/OUTCOME.md)).",
 ]
-next = "P10-I-S2 Part T (the transfer itself): implemented, never audited or run; its implementation audit is under way, then rehearsals and a registered run."
+next = "No further transfer study is specified. Part T used addresses supplied by rule; learned addressing and a pretrained backbone with expandable memory (P11-S1 draft) are untested. A learned-composition study has been proposed and is not specified or approved."
 
 [[row]]
 title = "SSD-backed neural-memory advantage"
