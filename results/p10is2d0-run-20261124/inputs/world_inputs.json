@@ -1,0 +1,41 @@
+{
+ "calibration_plan_block": {
+  "U": 8000,
+  "read_layer": 4,
+  "sha256": "cc491c30dda9d4a3360c7d63d2901789cdf6ddbd54180f8a8f0b9de2a3d68909",
+  "store_rate": 0.01
+ },
+ "calibration_record": {
+  "path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-T-calibration/calibration_0.json",
+  "sha256": "cf6573246d84c455a9109dce77d8ce529b9e4883e2539d71b35655ba8e2348ef",
+  "sha256_in_plan": "cf6573246d84c455a9109dce77d8ce529b9e4883e2539d71b35655ba8e2348ef"
+ },
+ "config": {
+  "path": "configs/p10is2_partt.toml",
+  "sha256": "3115ca555a4d09e4a38bc04b0d311d256b683232d112fa72de8e7175eddf9d28"
+ },
+ "item_records": {
+  "sha256": "54589c9fc0782b217d55e9b788a886c90a1c2ce35d2140fb32da8ed5246af938"
+ },
+ "part_q": {
+  "manifest": {
+   "path": "/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-Q-registered3-20261119/manifest.json",
+   "sha256": "3606b124b9e9780aec3dba06b368df1e1687f695522a66ea038dfe0a4482d72d",
+   "sha256_in_plan": "3606b124b9e9780aec3dba06b368df1e1687f695522a66ea038dfe0a4482d72d"
+  },
+  "plan": {
+   "path": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f/studies/p10is2/freeze/partq_plan.json",
+   "sha256": "182e043ff0f93c4bc6be6eb419925d1f5bbb355156f07cfc5e455fc32cc13e43",
+   "sha256_in_plan": "182e043ff0f93c4bc6be6eb419925d1f5bbb355156f07cfc5e455fc32cc13e43"
+  },
+  "run_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-Q-registered3-20261119"
+ },
+ "part_t_run_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-T-registered-20261121",
+ "plan": {
+  "path": "studies/p10is2/freeze/partt_plan.json",
+  "sha256": "75b124b8ed75491504af2a5f28aa5987504bba2c5cfa049226e9e60ed4456033"
+ },
+ "registry": {
+  "sha256": "3aa2d6ca0664aa23857097f6d7e019d600dc422aed6d222f44bff9714e2a5650"
+ }
+}

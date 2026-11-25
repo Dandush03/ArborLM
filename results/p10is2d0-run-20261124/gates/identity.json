@@ -1,0 +1,276 @@
+{
+ "cells": {
+  "r0/AB": {
+   "distinct_queries": 2146,
+   "gates": {
+    "a_equals_e1_plus_e2_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_equals_e1_plus_e2_final": {
+     "largest_deviation": 3.814697265625e-06,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "e1_equals_a_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "g2_zero_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    }
+   }
+  },
+  "r0/BA": {
+   "distinct_queries": 2146,
+   "gates": {
+    "a_equals_e1_plus_e2_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_equals_e1_plus_e2_final": {
+     "largest_deviation": 3.814697265625e-06,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "e1_equals_a_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "g2_zero_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    }
+   }
+  },
+  "r1/AB": {
+   "distinct_queries": 2146,
+   "gates": {
+    "a_equals_e1_plus_e2_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_equals_e1_plus_e2_final": {
+     "largest_deviation": 3.814697265625e-06,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "e1_equals_a_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "g2_zero_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    }
+   }
+  },
+  "r1/BA": {
+   "distinct_queries": 2146,
+   "gates": {
+    "a_equals_e1_plus_e2_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_equals_e1_plus_e2_final": {
+     "largest_deviation": 3.814697265625e-06,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "e1_equals_a_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "g2_zero_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    }
+   }
+  },
+  "r2/AB": {
+   "distinct_queries": 2146,
+   "gates": {
+    "a_equals_e1_plus_e2_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_equals_e1_plus_e2_final": {
+     "largest_deviation": 3.814697265625e-06,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "e1_equals_a_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "g2_zero_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    }
+   }
+  },
+  "r2/BA": {
+   "distinct_queries": 2146,
+   "gates": {
+    "a_equals_e1_plus_e2_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_equals_e1_plus_e2_final": {
+     "largest_deviation": 3.814697265625e-06,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "a_weights_equal_registered_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "b1_equals_m1_read_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "e1_equals_a_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "g2_zero_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_at_append": {
+     "largest_deviation": 0.0,
+     "pass": true
+    },
+    "stage1_frozen_final": {
+     "largest_deviation": 0.0,
+     "pass": true
+    }
+   }
+  }
+ },
+ "largest_deviation": 3.814697265625e-06,
+ "pass": true
+}
