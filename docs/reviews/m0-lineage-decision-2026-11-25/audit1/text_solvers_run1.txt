@@ -1,0 +1,161 @@
+boolean_lights: 140 items, 0 mismatches
+categories_default_exceptions: 140 items, 0 mismatches
+conditional_decision_tree: 140 items, 0 mismatches
+  MISMATCH R1.conditional_threshold_rule/fixture/0/0 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/1 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/2 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/3 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/4 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/5 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/6 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/7 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/8 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/9 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/10 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/11 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/12 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/13 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/14 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/16 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/17 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/18 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/0/19 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/0 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/1 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/2 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/3 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/4 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/5 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/6 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/7 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/8 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/9 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/10 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/11 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/12 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/13 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/14 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/16 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/17 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/18 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/1/19 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/0 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/1 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/2 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/3 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/4 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/5 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/6 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/7 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/8 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/9 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/10 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/11 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/12 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/13 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/14 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/16 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/17 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/18 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/2/19 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/0 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/1 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/2 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/3 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/4 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/5 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/6 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/7 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/8 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/9 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/10 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/11 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/12 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/13 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/14 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/16 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/17 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/18 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/3/19 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/0 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/1 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/2 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/3 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/4 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/5 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/6 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/7 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/8 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/9 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/10 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/11 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/12 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/13 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/14 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/16 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/17 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/18 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/4/19 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/0 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/1 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/2 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/3 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/4 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/5 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/6 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/7 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/8 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/9 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/10 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/11 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/12 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/13 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/14 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/16 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/17 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/18 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/5/19 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/0 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/1 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/2 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/3 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/4 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/5 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/6 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/7 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/8 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/9 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/10 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/11 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/12 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/13 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/14 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/15 key='no' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/16 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/17 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/18 key='yes' mine='ERR AssertionError: ' unique=False
+  MISMATCH R1.conditional_threshold_rule/fixture/6/19 key='no' mine='ERR AssertionError: ' unique=False
+conditional_threshold_rule: 140 items, 140 mismatches
+containers_queue_line: 140 items, 0 mismatches
+containers_stack_piles: 140 items, 0 mismatches
+elimination_bracket: 140 items, 0 mismatches
+elimination_josephus: 140 items, 0 mismatches
+equivalence_classes: 140 items, 0 mismatches
+equivalence_exchange_rates: 140 items, 0 mismatches
+graph_bipartite: 140 items, 0 mismatches
+graph_shortest_route: 140 items, 0 mismatches
+kinship_descendants: 140 items, 0 mismatches
+order_tournament_wins: 140 items, 0 mismatches
+spatial_grid_walk: 140 items, 0 mismatches
+spatial_relative_directions: 140 items, 0 mismatches
+temporal_critical_path: 140 items, 0 mismatches
+temporal_interval_overlap: 140 items, 0 mismatches
+temporal_weekday_shift: 140 items, 0 mismatches
+tracking_accounts: 140 items, 0 mismatches
+TOTAL 2800 items, 140 mismatches

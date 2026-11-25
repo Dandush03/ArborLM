@@ -1,0 +1,38 @@
+boolean_lights: answers {'no': 77, 'yes': 63}; k values {2: 140}
+  asked lamp never toggled -> initial state: fires 31/140, correct when fired 31/31
+categories_default_exceptions: answers {'no': 72, 'yes': 68}; k values {2: 140}
+  all rules about the asked verb agree -> that value (no priority reasoning): fires 87/140, correct when fired 87/87
+  member's own group has a rule -> that value (one lookup): fires 54/140, correct when fired 54/54
+conditional_decision_tree: answers 10 distinct; k values {2: 12, 3: 40, 4: 20, 5: 37, 6: 31}
+conditional_threshold_rule: answers {'no': 92, 'yes': 48}; k values {2: 140}
+  a veto holder voted no -> no (no arithmetic): fires 44/140, correct when fired 44/44
+containers_queue_line: answers 83 distinct; k values {3: 4, 4: 14, 5: 15, 6: 12, 7: 6, 8: 14, 9: 14, 10: 14, 11: 8, 12: 11, 13: 11, 14: 7, 15: 4, 16: 6}
+  back->last joiner / front->last cutter: fires 124/140, correct when fired 99/124
+containers_stack_piles: answers 24 distinct; k values {4: 20, 5: 20, 6: 20, 7: 20, 8: 20, 9: 20, 10: 20}
+  nothing moved onto asked pile -> its initial top: fires 5/140, correct when fired 0/5
+elimination_bracket: answers 90 distinct; k values {4: 60, 8: 60, 16: 20}
+  [runner_up] = top rating in the other half (one max, no simulation): fires 69/140, correct when fired 69/69
+  [beaten_by] = champion (top rating): fires 71/140, correct when fired 28/71
+elimination_josephus: answers 87 distinct; k values {4: 20, 5: 20, 6: 20, 7: 20, 8: 20, 9: 20, 10: 20}
+equivalence_classes: answers {'no': 55, 'cannot be determined': 43, 'yes': 42}; k values {3: 140}
+  query pair stated verbatim -> that answer: fires 68/140, correct when fired 68/68
+  a queried entity never mentioned -> cbd: fires 26/140, correct when fired 26/26
+equivalence_exchange_rates: answers 23 distinct; k values {3: 20, 4: 20, 5: 20, 6: 20, 7: 20, 8: 20, 9: 20}
+graph_bipartite: answers {'yes': 79, 'no': 61}; k values {2: 140}
+graph_shortest_route: answers 24 distinct; k values {4: 20, 5: 40, 6: 40, 7: 40}
+  greedy: nearest neighbour of start: fires 140/140, correct when fired 97/140
+  start-end directly connected (answer is then never the end town): 10/140
+kinship_descendants: answers 89 distinct; k values {5: 20, 6: 20, 7: 20, 8: 20, 9: 20, 10: 20, 11: 20}
+  [grandchildren] answer = the only person with no recorded parent: fires 75/75, correct when fired 67/75
+  [descendants] answer = the only person with no recorded parent: fires 65/65, correct when fired 65/65
+order_tournament_wins: answers 82 distinct; k values {4: 20, 5: 40, 6: 40, 7: 40}
+spatial_grid_walk: answers 139 distinct; k values {5: 2, 7: 10, 8: 19, 9: 15, 10: 6, 11: 9, 12: 8, 13: 8, 14: 14, 15: 9, 16: 9, 17: 4, 18: 4, 19: 3, 20: 10, 21: 3, 22: 1, 23: 3, 24: 3}
+  answer = start cell: fires 140/140, correct when fired 18/140
+spatial_relative_directions: answers 24 distinct; k values {2: 20, 3: 20, 4: 20, 5: 20, 6: 20, 7: 20, 8: 20}
+  answer is an endpoint of the largest single offset: fires 140/140, correct when fired 64/140
+temporal_critical_path: answers 83 distinct; k values {3: 20, 4: 20, 5: 20, 6: 20, 7: 20, 8: 20, 9: 20}
+  longest single job: fires 140/140, correct when fired 41/140
+temporal_interval_overlap: answers {'no': 75, 'yes': 65}; k values {2: 140}
+temporal_weekday_shift: answers 7 distinct; k values {7: 140}
+tracking_accounts: answers 77 distinct; k values {3: 20, 4: 40, 5: 40, 6: 40}
+  same person as at the start: fires 140/140, correct when fired 44/140

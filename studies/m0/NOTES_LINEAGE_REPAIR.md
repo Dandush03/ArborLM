@@ -68,3 +68,60 @@ Inputs: measured machine times above (negligible: under a minute per 100 lineage
 ## Not done
 
 No solver, no registration of the pilot lineages in the core registry, no partition seed run over the new families, no pools, no change to any existing file under `studies/m0/` other than new files, no threshold.
+
+---
+
+## 2026-11-25, round 2: pilot repair, shortcut gate, strict clusters, eight further lineages (implementer: Claude Sonnet 5.5; self-checked)
+
+Basis: the human lead's two statements (`docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS.md`, `HUMAN_LEAD_WORDS_2.md`: "2", then "m0 I already said cluster"); the independent audit of the pilot (`.../audit1/AUDIT_M0_LINEAGES_1.md`, with its judgement, pair table and scripts, copied into the repo). Lead rulings recorded here (arbor-lead, Fable 5.2; not human approval): A strict reading of "a distinct solution procedure", with strictly merged lineages registered as ONE cluster with several shapes and nothing deleted (`lineages_r1_clusters.STRICT_MERGES`); B no strict cluster in both parts, parts by `core.family_partition`'s rule; C a mandatory shortcut gate, measured and not thresholded; D fix or mark NOT REGISTERED the audit's defects, each with a failing-first test; E drop the operation-profile similarity and item-skeleton diversity as distinctness evidence (kept as code, marked `non_evidence_of_distinctness` in `manifests/r1_pilot_stats.json`).
+
+### What was done
+
+- **Strict clusters and parts** (`lineages_r1_clusters.py`, `manifests/r1_clusters.json`). The nine strict merge groups of the audit (23 clusters from its 35 lineages, reproduced by a test). Ruling B read as: a strict cluster that joins two families makes those families ONE key of `core.family_partition`'s rule (shuffle of the sorted keys with the stream of seed 400004, first half A). **This reading is mine (ruling needed).** Result at this commit: 43 registered R1 lineages (13 core and 30 pilot-registry lineages; 12 shapes superseded, 2 core and 10 pilot), **31 strict clusters: part A 13, part B 18**, over 14 family keys. The strict merges tie six families into one key (boolean_state, categories, equivalence, kinship, spatial, temporal), which makes the split lopsided (that key is in part B). The raw `core.family_partition` rule over the 16 original families (not cluster-closed) would place the clusters differently and split two cross-part clusters; I did not use it.
+- **Shortcut gate** (`lineages_r1_shortcuts.py`; table `manifests/r1_shortcuts_table.md`, data `r1_shortcuts.json`). Generic text battery (constant most-frequent key; first, last, most, least mentioned option; option never the first word of a sentence; alphabetically first and last; asked pair stated verbatim; asked entity never mentioned; largest, smallest, last number) plus lineage-specific heuristics read from the structured form. 2,000 items per lineage (400 per core level); a heuristic that does not fire guesses at 1/k; open answers have chance 0. **Measured, not thresholded.** The gate found one defect the audit did not: in the core lineage `R1.kinship_ancestor` the answer was ALWAYS the one parentless person (accuracy 1.000: the chain had k+1 people with the asked child at the bottom).
+- **Shape revisions** (`lineages_r1_rev2.py`, ids ending `_r2`; old files kept; old shapes marked SUPERSEDED, none deleted). Each has a test in `tests/test_m0_r1_rev2.py` asserting the defect in the old shape and its absence in the new (so the new-shape assertions fail on the old shape). Worst relevant heuristic, 2,000 items, before then after:
+
+| Lineage | Defect | Before | After |
+|---|---|---|---|
+| kinship_descendants | answer was the parentless root | parentless 0.947 acc | root excluded from the candidates; worst now alphabetical_first 0.157 acc (excess 0.008) |
+| kinship_ancestor (core) | answer always the parentless root | 1.000 acc | line above the child 1 to 2 generations longer; worst first_mentioned excess 0.076 |
+| equivalence_classes | asked pair stated verbatim; unmentioned entity | verbatim 0.656 acc (excess 0.322) | never stated, both items mentioned; worst constant key excess 0.026 |
+| elimination_bracket | runner-up = best rating of the other half | 0.595 acc (excess 0.420) | matches decided by head-to-head results of a random (non-transitive) tournament; most_wins excess -0.075 |
+| containers_queue_line | last joiner / last let in | 0.685 acc (excess 0.558) | asks position j from the front, plus "front goes to the back"; worst excess 0.041 |
+| categories_default_exceptions | priority rule unused; own group decides; majority sign | majority 0.848 acc (excess 0.348) | asked verb has rules in 2+ groups above the member, of both signs, never in the member's own group; worst excess 0.0015 |
+| conditional_threshold_rule | vetoing no decides | 0.663 acc (excess 0.163) | veto removed; weighted margin rule; worst (yes-count majority) excess 0.059 |
+| boolean_lights | asked lamp never toggled; "the rest are off" | never-toggled 0.610 acc | asked lamp always toggled; wording fixed; worst excess 0.022 |
+| graph_shortest_route | nearest neighbour right | 0.703 acc (excess 0.527) | asks the route length (open numeric answer); worst excess 0.060 |
+| containers_stack_piles | "orange" is a pile and a block; last block moved onto the pile | last-moved 0.558 acc (excess 0.409) | blocks never named like a colour; worst excess 0.053 |
+| spatial_grid_walk | column convention unstated (113/140 keys flip) | n/a | "(column 1 is the westernmost)" in the item |
+| categories_follow (core) | existential import unstated; "cannot be determined" 77.5 % | constant key 0.775 acc | convention stated, answer chosen first (balanced), asked statement never verbatim; constant-key excess 0.065 |
+
+  The generator-side repair `_anti` rejects (with probability 0.6 to 0.95) draws that a named heuristic answers correctly. This pushes those heuristics toward chance but shifts the item distribution toward the cases where the heuristic is wrong; it is a repair of the generator, not of the scorer, and is **a choice I made (ruling needed)**. It repairs only the shortcuts the gate named.
+- **Eight further lineages** (`lineages_r1_new2.py`; six new families): topological_order, activity_selection, mst_cost, instant_runoff, stable_matching, nim_xor, minimax_tree, venn_counting. The module docstring gives the strict-distinctness defence of each and the strict merges an auditor may still make (minimax_tree with other tree evaluations; activity_selection with interval_overlap; topological_order with temporal_critical_path). Checked by hand against one rendered item each: topological_order (Oscar), activity_selection (5), mst_cost (44), instant_runoff (Jon), nim_xor (first), minimax_tree (-2) and venn_counting (2) are correct; stable_matching was not hand-checked. Nim was first built with piles too small for the capacity gate (it failed at levels 0 to 5) and then enlarged; the even-total constraint makes the parity of the total uninformative.
+- **Manifests, fixtures, schema doc** regenerated for the registered pilot lineages (`manifests/r1_pilot_manifest.json`, `fixtures/r1_pilot/*.jsonl`, `fixtures/R1_PILOT_SCHEMA.md`); `fixtures/r1_pilot/SUPERSEDED.txt` lists shapes whose older fixtures must not be solved.
+
+### Results (measured)
+
+- Capacity at G = 300 (1,800 per core level, 1,000 per reserve level): every registered pilot lineage passes at every level; no failures in the final manifest.
+- Shortcut gate, registered lineages only: median worst-heuristic excess 0.026. Largest remaining: `activity_selection` greedy-by-start 0.256 (open numeric answer, chance 0; the answer range is narrow), `minimax_tree` smallest leaf 0.159 (open), `temporal_critical_path` longest job 0.151, `conditional_decision_tree` most-mentioned action 0.149, `spatial_relative_directions` least mentioned 0.134, `tracking_accounts` richest at the start 0.128, `stable_matching` first choice 0.109 (about 0.11 to 0.13 over chance: a measured residual), `venn_counting` constant key 0.090, `order_compare` (core) verbatim pair 0.087. None was fixed; no threshold exists. Unrepaired core lineages cannot be edited here; the list is for the lead.
+- NOT REGISTERED: none (`lineages_r1_clusters.NOT_REGISTERED` is empty). Superseded shapes: 12 (2 core, 10 pilot).
+
+### Distinctness evidence (ruling E)
+
+Operation-profile similarity (0.71 to 0.87 for every nearest neighbour) and item-skeleton diversity are not evidence of distinctness and are kept only as code. The sentence-skeleton Jaccard and the builder signature remain as weak evidence (they catch only literal re-skins). The evidence is the strict-cluster judgement above (the auditor's, plus mine for the eight new lineages, which the auditor has not read).
+
+### Authoring stopped: why
+
+I looked for further strict procedures and judged the remaining candidates merge-prone under the strict reading: Borda or Condorcet tallies (a tally of a pairwise or ranked relation: the `order_tournament_wins` cluster), a sweep for the maximum number of overlapping intervals (the interval family), implicit state-space search (reachability), tree traversal order (pointer chasing), logic-gate circuit evaluation (formula evaluation), calendar and clock arithmetic (a cyclic accumulator), counting paths on a grid (a DAG dynamic programme with a different semiring). Of the eight new lineages I already expect one or two strict merges by an auditor. On this evidence the pace is: first pilot, 20 drafted for about 12 to 14 strict-new; this round, 8 drafted for about 6 to 8; the next round would yield mostly merges. So I stop here at 31 strict clusters in R1 (A 13, B 18) and expect R1 to saturate in the 40s of clusters (about 20 per part) under the strict reading, as the audit estimated. [E]
+
+### Time and machine cost (from the tool log; the caveat in the first section applies: design reasoning is not clocked)
+
+Round 2, tool-visible: fixes, clusters, shortcut gate, 14 revision tests 07:22 to 08:31 (69 min, including my own design work for the repairs); the eight new lineages, their heuristics, the capacity fix, tests and manifests 08:31 to 08:37 (6 min, about 45 s each as written, excluding design). Machine: the full `pilot-r1` run over 55 R1 lineages takes about 52 s (the shortcut gate 11 s); the R1 test files take 26 s.
+
+### Rulings needed (least favourable reading stated)
+
+1. **Partition of strict clusters.** I made the families joined by a cluster one key of the partition rule (result A 13, B 18, lopsided). Alternative: apply the rule to the raw families and move each cross-part cluster whole to part B (the held-out part: least favourable to a held-out claim, because it moves more procedures into the held-out part). Which?
+2. **Generator-side shortcut repair** (`_anti`) as a legitimate fix versus marking such lineages NOT REGISTERED. Least favourable: mark NOT REGISTERED when a named heuristic stays above a bound the lead sets.
+3. **A shortcut-gate bound.** None is registered. Which excess over chance (per heuristic, per level) fails a lineage? Least favourable: the smallest bound that rejects no more than the known defects.
+4. **Residual shortcuts** listed above (nothing fixed): fix, accept, or mark NOT REGISTERED.
+5. **Open-answer chance.** Open answers have chance 0 in section 10.2, so a heuristic's exact-match rate on them reads as pure excess; the gate reports that without a floor. Whether a floor (the answer range) should replace 0 is a specification question.

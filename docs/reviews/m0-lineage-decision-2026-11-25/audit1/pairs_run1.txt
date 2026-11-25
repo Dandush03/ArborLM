@@ -1,0 +1,19 @@
+strict   old      lineages=15 clusters=11
+strict   new      lineages=20 clusters=18
+strict   overall  lineages=35 clusters=23
+  strict multi-member clusters (overall):
+    attribute_rule + conditional_decision_tree
+    boolean_lights + compass_turns
+    categories_default_exceptions + kinship_ancestor + kinship_cousins
+    categories_follow + equivalence_classes
+    equivalence_exchange_rates + event_timeline + spatial_relative_directions + temporal_weekday_shift
+    knights_knaves + one_culprit
+    order_compare + road_reachability
+    order_extreme + order_tournament_wins
+    pet_owners + seating_row
+lenient  old      lineages=15 clusters=14
+lenient  new      lineages=20 clusters=20
+lenient  overall  lineages=35 clusters=34
+  lenient multi-member clusters (overall):
+    order_compare + road_reachability
+pairs: 595 merge both: 1 strict-only: 15 near-miss: 23

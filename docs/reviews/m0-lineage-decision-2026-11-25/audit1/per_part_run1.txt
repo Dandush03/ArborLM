@@ -1,0 +1,7 @@
+strict part A: lineages=17 clusters wholly in part=10 clusters touching part=12
+strict part B: lineages=18 clusters wholly in part=11 clusters touching part=13
+  strict cross-part clusters: ['attribute_rule(A) + conditional_decision_tree(B)', 'equivalence_exchange_rates(B) + event_timeline(A) + spatial_relative_directions(A) + temporal_weekday_shift(A)']
+lenient part A: lineages=17 clusters wholly in part=17 clusters touching part=17
+lenient part B: lineages=18 clusters wholly in part=17 clusters touching part=17
+  lenient cross-part clusters: []
+family_partition rule applied to the 16-family union: {'elimination': 'A', 'spatial': 'A', 'rules': 'A', 'arrangement': 'A', 'graph': 'A', 'conditional': 'A', 'equivalence': 'A', 'kinship': 'A', 'boolean_state': 'B', 'culprit': 'B', 'order': 'B', 'tracking': 'B', 'truth': 'B', 'temporal': 'B', 'containers': 'B', 'categories': 'B'}

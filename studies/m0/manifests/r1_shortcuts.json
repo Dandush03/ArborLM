@@ -1,0 +1,3241 @@
+{
+ "R1.activity_selection": {
+  "chance": 0.0,
+  "heuristics": [
+   {
+    "accuracy": 0.2555,
+    "accuracy_when_fires": 0.2555,
+    "excess_over_chance": 0.2555,
+    "fires": 2000,
+    "heuristic": "greedy_by_start",
+    "worst_level": 1,
+    "worst_level_excess": 0.4025
+   },
+   {
+    "accuracy": 0.2075,
+    "accuracy_when_fires": 0.2075,
+    "excess_over_chance": 0.2075,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.4075
+   },
+   {
+    "accuracy": 0.0445,
+    "accuracy_when_fires": 0.0445,
+    "excess_over_chance": 0.0445,
+    "fires": 2000,
+    "heuristic": "smallest_number",
+    "worst_level": 2,
+    "worst_level_excess": 0.0575
+   },
+   {
+    "accuracy": 0.0095,
+    "accuracy_when_fires": 0.0095,
+    "excess_over_chance": 0.0095,
+    "fires": 2000,
+    "heuristic": "last_number",
+    "worst_level": 4,
+    "worst_level_excess": 0.015
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "largest_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   }
+  ],
+  "id": "R1.activity_selection",
+  "k_mean": 0.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.2555,
+   "accuracy_when_fires": 0.2555,
+   "excess_over_chance": 0.2555,
+   "fires": 2000,
+   "heuristic": "greedy_by_start",
+   "worst_level": 1,
+   "worst_level_excess": 0.4025
+  }
+ },
+ "R1.attribute_rule": {
+  "chance": 0.1519,
+  "heuristics": [
+   {
+    "accuracy": 0.1535,
+    "accuracy_when_fires": 0.1535,
+    "excess_over_chance": 0.0016,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 3,
+    "worst_level_excess": 0.0421
+   },
+   {
+    "accuracy": 0.1519,
+    "accuracy_when_fires": 0.1519,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1519,
+    "accuracy_when_fires": 0.1519,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1519,
+    "accuracy_when_fires": 0.1519,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1445,
+    "accuracy_when_fires": 0.1445,
+    "excess_over_chance": -0.0074,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.01
+   },
+   {
+    "accuracy": 0.018,
+    "accuracy_when_fires": 0.018,
+    "excess_over_chance": -0.1339,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.105
+   }
+  ],
+  "id": "R1.attribute_rule",
+  "k_mean": 6.8,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.1535,
+   "accuracy_when_fires": 0.1535,
+   "excess_over_chance": 0.0016,
+   "fires": 2000,
+   "heuristic": "alphabetical_last",
+   "worst_level": 3,
+   "worst_level_excess": 0.0421
+  }
+ },
+ "R1.boolean_lights": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.6095,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.1095,
+    "fires": 438,
+    "heuristic": "never_toggled_means_initial",
+    "worst_level": 1,
+    "worst_level_excess": 0.1512
+   },
+   {
+    "accuracy": 0.565,
+    "accuracy_when_fires": 0.565,
+    "excess_over_chance": 0.065,
+    "fires": 2000,
+    "heuristic": "initial_state",
+    "worst_level": 1,
+    "worst_level_excess": 0.1325
+   },
+   {
+    "accuracy": 0.5285,
+    "accuracy_when_fires": 0.5285,
+    "excess_over_chance": 0.0285,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 3,
+    "worst_level_excess": 0.0475
+   }
+  ],
+  "id": "R1.boolean_lights",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.6095,
+   "accuracy_when_fires": 1.0,
+   "excess_over_chance": 0.1095,
+   "fires": 438,
+   "heuristic": "never_toggled_means_initial",
+   "worst_level": 1,
+   "worst_level_excess": 0.1512
+  }
+ },
+ "R1.boolean_lights_r2": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.5215,
+    "accuracy_when_fires": 0.5215,
+    "excess_over_chance": 0.0215,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.0325
+   },
+   {
+    "accuracy": 0.5,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "never_toggled_means_initial",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.4505,
+    "accuracy_when_fires": 0.4505,
+    "excess_over_chance": -0.0495,
+    "fires": 2000,
+    "heuristic": "initial_state",
+    "worst_level": 4,
+    "worst_level_excess": 0.005
+   }
+  ],
+  "id": "R1.boolean_lights_r2",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5215,
+   "accuracy_when_fires": 0.5215,
+   "excess_over_chance": 0.0215,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 1,
+   "worst_level_excess": 0.0325
+  }
+ },
+ "R1.categories_default_exceptions": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.8475,
+    "accuracy_when_fires": 0.9404,
+    "excess_over_chance": 0.3475,
+    "fires": 1578,
+    "heuristic": "majority_sign",
+    "worst_level": 1,
+    "worst_level_excess": 0.3938
+   },
+   {
+    "accuracy": 0.8275,
+    "accuracy_when_fires": 0.8275,
+    "excess_over_chance": 0.3275,
+    "fires": 2000,
+    "heuristic": "last_listed",
+    "worst_level": 1,
+    "worst_level_excess": 0.3825
+   },
+   {
+    "accuracy": 0.8095,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.3095,
+    "fires": 1238,
+    "heuristic": "all_rules_agree",
+    "worst_level": 1,
+    "worst_level_excess": 0.3862
+   },
+   {
+    "accuracy": 0.7328,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.2328,
+    "fires": 931,
+    "heuristic": "member_group_rule",
+    "worst_level": 1,
+    "worst_level_excess": 0.2475
+   },
+   {
+    "accuracy": 0.5035,
+    "accuracy_when_fires": 0.5035,
+    "excess_over_chance": 0.0035,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 4,
+    "worst_level_excess": 0.0325
+   }
+  ],
+  "id": "R1.categories_default_exceptions",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.8475,
+   "accuracy_when_fires": 0.9404,
+   "excess_over_chance": 0.3475,
+   "fires": 1578,
+   "heuristic": "majority_sign",
+   "worst_level": 1,
+   "worst_level_excess": 0.3938
+  }
+ },
+ "R1.categories_default_exceptions_r2": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.5015,
+    "accuracy_when_fires": 0.5015,
+    "excess_over_chance": 0.0015,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.0175
+   },
+   {
+    "accuracy": 0.5,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "all_rules_agree",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.5,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "member_group_rule",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.4355,
+    "accuracy_when_fires": 0.241,
+    "excess_over_chance": -0.0645,
+    "fires": 498,
+    "heuristic": "majority_sign",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1495,
+    "accuracy_when_fires": 0.1495,
+    "excess_over_chance": -0.3505,
+    "fires": 2000,
+    "heuristic": "last_listed",
+    "worst_level": 5,
+    "worst_level_excess": -0.335
+   },
+   {
+    "accuracy": 0.012,
+    "accuracy_when_fires": 0.012,
+    "excess_over_chance": -0.488,
+    "fires": 2000,
+    "heuristic": "least_specific_rule",
+    "worst_level": 5,
+    "worst_level_excess": -0.4775
+   }
+  ],
+  "id": "R1.categories_default_exceptions_r2",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5015,
+   "accuracy_when_fires": 0.5015,
+   "excess_over_chance": 0.0015,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 2,
+   "worst_level_excess": 0.0175
+  }
+ },
+ "R1.categories_follow": {
+  "chance": 0.3333,
+  "heuristics": [
+   {
+    "accuracy": 0.775,
+    "accuracy_when_fires": 0.775,
+    "excess_over_chance": 0.4417,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": 0.4892
+   },
+   {
+    "accuracy": 0.3503,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.017,
+    "fires": 51,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": 0.0267
+   },
+   {
+    "accuracy": 0.2795,
+    "accuracy_when_fires": 0.2159,
+    "excess_over_chance": -0.0538,
+    "fires": 917,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 2,
+    "worst_level_excess": -0.0325
+   }
+  ],
+  "id": "R1.categories_follow",
+  "k_mean": 3.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.775,
+   "accuracy_when_fires": 0.775,
+   "excess_over_chance": 0.4417,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": 0.4892
+  }
+ },
+ "R1.categories_follow_r2": {
+  "chance": 0.3333,
+  "heuristics": [
+   {
+    "accuracy": 0.398,
+    "accuracy_when_fires": 0.398,
+    "excess_over_chance": 0.0647,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.0967
+   },
+   {
+    "accuracy": 0.3383,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.005,
+    "fires": 15,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": 0.01
+   },
+   {
+    "accuracy": 0.2737,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.0597,
+    "fires": 358,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 5,
+    "worst_level_excess": -0.0458
+   }
+  ],
+  "id": "R1.categories_follow_r2",
+  "k_mean": 3.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.398,
+   "accuracy_when_fires": 0.398,
+   "excess_over_chance": 0.0647,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 1,
+   "worst_level_excess": 0.0967
+  }
+ },
+ "R1.compass_turns": {
+  "chance": 0.25,
+  "heuristics": [
+   {
+    "accuracy": 0.259,
+    "accuracy_when_fires": 0.259,
+    "excess_over_chance": 0.009,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": 0.0275
+   },
+   {
+    "accuracy": 0.256,
+    "accuracy_when_fires": 0.256,
+    "excess_over_chance": 0.006,
+    "fires": 2000,
+    "heuristic": "start_direction",
+    "worst_level": 5,
+    "worst_level_excess": 0.035
+   }
+  ],
+  "id": "R1.compass_turns",
+  "k_mean": 4.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.259,
+   "accuracy_when_fires": 0.259,
+   "excess_over_chance": 0.009,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": 0.0275
+  }
+ },
+ "R1.conditional_chain": {
+  "chance": 0.3333,
+  "heuristics": [
+   {
+    "accuracy": 0.365,
+    "accuracy_when_fires": 0.365,
+    "excess_over_chance": 0.0317,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.1317
+   }
+  ],
+  "id": "R1.conditional_chain",
+  "k_mean": 3.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.365,
+   "accuracy_when_fires": 0.365,
+   "excess_over_chance": 0.0317,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 1,
+   "worst_level_excess": 0.1317
+  }
+ },
+ "R1.conditional_decision_tree": {
+  "chance": 0.26,
+  "heuristics": [
+   {
+    "accuracy": 0.409,
+    "accuracy_when_fires": 0.409,
+    "excess_over_chance": 0.1491,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.2146
+   },
+   {
+    "accuracy": 0.311,
+    "accuracy_when_fires": 0.311,
+    "excess_over_chance": 0.051,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0746
+   },
+   {
+    "accuracy": 0.3105,
+    "accuracy_when_fires": 0.3105,
+    "excess_over_chance": 0.0505,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0744
+   },
+   {
+    "accuracy": 0.276,
+    "accuracy_when_fires": 0.276,
+    "excess_over_chance": 0.0161,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 5,
+    "worst_level_excess": 0.0402
+   },
+   {
+    "accuracy": 0.26,
+    "accuracy_when_fires": 0.26,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.257,
+    "accuracy_when_fires": 0.257,
+    "excess_over_chance": -0.003,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 1,
+    "worst_level_excess": 0.0171
+   },
+   {
+    "accuracy": 0.1426,
+    "accuracy_when_fires": 0.1426,
+    "excess_over_chance": -0.1173,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0868
+   },
+   {
+    "accuracy": 0.109,
+    "accuracy_when_fires": 0.109,
+    "excess_over_chance": -0.151,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0773
+   }
+  ],
+  "id": "R1.conditional_decision_tree",
+  "k_mean": 4.21,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.409,
+   "accuracy_when_fires": 0.409,
+   "excess_over_chance": 0.1491,
+   "fires": 2000,
+   "heuristic": "most_mentioned",
+   "worst_level": 1,
+   "worst_level_excess": 0.2146
+  }
+ },
+ "R1.conditional_threshold_rule": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.6633,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.1633,
+    "fires": 653,
+    "heuristic": "veto_no_means_no",
+    "worst_level": 5,
+    "worst_level_excess": 0.1963
+   },
+   {
+    "accuracy": 0.62,
+    "accuracy_when_fires": 0.62,
+    "excess_over_chance": 0.12,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 4,
+    "worst_level_excess": 0.1725
+   }
+  ],
+  "id": "R1.conditional_threshold_rule",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.6633,
+   "accuracy_when_fires": 1.0,
+   "excess_over_chance": 0.1633,
+   "fires": 653,
+   "heuristic": "veto_no_means_no",
+   "worst_level": 5,
+   "worst_level_excess": 0.1963
+  }
+ },
+ "R1.conditional_threshold_rule_r2": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.5587,
+    "accuracy_when_fires": 0.6039,
+    "excess_over_chance": 0.0587,
+    "fires": 1131,
+    "heuristic": "yes_count_majority",
+    "worst_level": 5,
+    "worst_level_excess": 0.0875
+   },
+   {
+    "accuracy": 0.5075,
+    "accuracy_when_fires": 0.5075,
+    "excess_over_chance": 0.0075,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 4,
+    "worst_level_excess": 0.035
+   }
+  ],
+  "id": "R1.conditional_threshold_rule_r2",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5587,
+   "accuracy_when_fires": 0.6039,
+   "excess_over_chance": 0.0587,
+   "fires": 1131,
+   "heuristic": "yes_count_majority",
+   "worst_level": 5,
+   "worst_level_excess": 0.0875
+  }
+ },
+ "R1.containers_queue_line": {
+  "chance": 0.1268,
+  "heuristics": [
+   {
+    "accuracy": 0.6852,
+    "accuracy_when_fires": 0.7402,
+    "excess_over_chance": 0.5584,
+    "fires": 1809,
+    "heuristic": "last_joiner_or_last_cutter",
+    "worst_level": 4,
+    "worst_level_excess": 0.6089
+   },
+   {
+    "accuracy": 0.3765,
+    "accuracy_when_fires": 0.3765,
+    "excess_over_chance": 0.2497,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": 0.2772
+   },
+   {
+    "accuracy": 0.1705,
+    "accuracy_when_fires": 0.1705,
+    "excess_over_chance": 0.0437,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0677
+   },
+   {
+    "accuracy": 0.1395,
+    "accuracy_when_fires": 0.1395,
+    "excess_over_chance": 0.0127,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 5,
+    "worst_level_excess": 0.0247
+   },
+   {
+    "accuracy": 0.1215,
+    "accuracy_when_fires": 0.1215,
+    "excess_over_chance": -0.0053,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 3,
+    "worst_level_excess": 0.0196
+   },
+   {
+    "accuracy": 0.0816,
+    "accuracy_when_fires": 0.0793,
+    "excess_over_chance": -0.0452,
+    "fires": 1951,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": -0.0321
+   },
+   {
+    "accuracy": 0.041,
+    "accuracy_when_fires": 0.041,
+    "excess_over_chance": -0.0858,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0678
+   },
+   {
+    "accuracy": 0.0228,
+    "accuracy_when_fires": 0.0228,
+    "excess_over_chance": -0.104,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0818
+   },
+   {
+    "accuracy": 0.014,
+    "accuracy_when_fires": 0.014,
+    "excess_over_chance": -0.1128,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0653
+   }
+  ],
+  "id": "R1.containers_queue_line",
+  "k_mean": 8.76,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.6852,
+   "accuracy_when_fires": 0.7402,
+   "excess_over_chance": 0.5584,
+   "fires": 1809,
+   "heuristic": "last_joiner_or_last_cutter",
+   "worst_level": 4,
+   "worst_level_excess": 0.6089
+  }
+ },
+ "R1.containers_queue_line_r2": {
+  "chance": 0.1343,
+  "heuristics": [
+   {
+    "accuracy": 0.1749,
+    "accuracy_when_fires": 0.1749,
+    "excess_over_chance": 0.0406,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0468
+   },
+   {
+    "accuracy": 0.1635,
+    "accuracy_when_fires": 0.1635,
+    "excess_over_chance": 0.0292,
+    "fires": 1993,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 2,
+    "worst_level_excess": 0.0413
+   },
+   {
+    "accuracy": 0.148,
+    "accuracy_when_fires": 0.148,
+    "excess_over_chance": 0.0137,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 4,
+    "worst_level_excess": 0.0298
+   },
+   {
+    "accuracy": 0.134,
+    "accuracy_when_fires": 0.134,
+    "excess_over_chance": -0.0003,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": 0.0361
+   },
+   {
+    "accuracy": 0.132,
+    "accuracy_when_fires": 0.132,
+    "excess_over_chance": -0.0023,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 5,
+    "worst_level_excess": 0.0361
+   },
+   {
+    "accuracy": 0.1145,
+    "accuracy_when_fires": 0.1145,
+    "excess_over_chance": -0.0198,
+    "fires": 2000,
+    "heuristic": "initial_line_position",
+    "worst_level": 3,
+    "worst_level_excess": 0.0056
+   },
+   {
+    "accuracy": 0.092,
+    "accuracy_when_fires": 0.092,
+    "excess_over_chance": -0.0423,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": -0.0289
+   },
+   {
+    "accuracy": 0.0284,
+    "accuracy_when_fires": 0.0284,
+    "excess_over_chance": -0.1059,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.092
+   },
+   {
+    "accuracy": 0.0135,
+    "accuracy_when_fires": 0.0135,
+    "excess_over_chance": -0.1208,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0914
+   }
+  ],
+  "id": "R1.containers_queue_line_r2",
+  "k_mean": 7.97,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.1749,
+   "accuracy_when_fires": 0.1749,
+   "excess_over_chance": 0.0406,
+   "fires": 2000,
+   "heuristic": "least_mentioned",
+   "worst_level": 1,
+   "worst_level_excess": 0.0468
+  }
+ },
+ "R1.containers_stack_piles": {
+  "chance": 0.1491,
+  "heuristics": [
+   {
+    "accuracy": 0.5576,
+    "accuracy_when_fires": 0.5628,
+    "excess_over_chance": 0.4085,
+    "fires": 1974,
+    "heuristic": "last_block_moved_onto_asked",
+    "worst_level": 4,
+    "worst_level_excess": 0.4413
+   },
+   {
+    "accuracy": 0.1675,
+    "accuracy_when_fires": 0.1675,
+    "excess_over_chance": 0.0184,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.045
+   },
+   {
+    "accuracy": 0.1636,
+    "accuracy_when_fires": 0.1635,
+    "excess_over_chance": 0.0144,
+    "fires": 1872,
+    "heuristic": "initial_top",
+    "worst_level": 4,
+    "worst_level_excess": 0.0353
+   },
+   {
+    "accuracy": 0.1528,
+    "accuracy_when_fires": 0.1528,
+    "excess_over_chance": 0.0037,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 3,
+    "worst_level_excess": 0.0136
+   },
+   {
+    "accuracy": 0.15,
+    "accuracy_when_fires": 0.15,
+    "excess_over_chance": 0.0009,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.04
+   },
+   {
+    "accuracy": 0.1491,
+    "accuracy_when_fires": 0.1491,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1486,
+    "accuracy_when_fires": 0.1486,
+    "excess_over_chance": -0.0005,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0019
+   },
+   {
+    "accuracy": 0.1455,
+    "accuracy_when_fires": 0.1455,
+    "excess_over_chance": -0.0036,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": 0.0264
+   },
+   {
+    "accuracy": 0.143,
+    "accuracy_when_fires": 0.143,
+    "excess_over_chance": -0.0061,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 4,
+    "worst_level_excess": 0.0075
+   },
+   {
+    "accuracy": 0.0485,
+    "accuracy_when_fires": 0.0485,
+    "excess_over_chance": -0.1006,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0611
+   }
+  ],
+  "id": "R1.containers_stack_piles",
+  "k_mean": 7.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5576,
+   "accuracy_when_fires": 0.5628,
+   "excess_over_chance": 0.4085,
+   "fires": 1974,
+   "heuristic": "last_block_moved_onto_asked",
+   "worst_level": 4,
+   "worst_level_excess": 0.4413
+  }
+ },
+ "R1.containers_stack_piles_r2": {
+  "chance": 0.1491,
+  "heuristics": [
+   {
+    "accuracy": 0.2023,
+    "accuracy_when_fires": 0.2032,
+    "excess_over_chance": 0.0531,
+    "fires": 1939,
+    "heuristic": "last_block_moved_onto_asked",
+    "worst_level": 5,
+    "worst_level_excess": 0.0744
+   },
+   {
+    "accuracy": 0.1925,
+    "accuracy_when_fires": 0.1937,
+    "excess_over_chance": 0.0433,
+    "fires": 1915,
+    "heuristic": "initial_top",
+    "worst_level": 1,
+    "worst_level_excess": 0.076
+   },
+   {
+    "accuracy": 0.156,
+    "accuracy_when_fires": 0.156,
+    "excess_over_chance": 0.0069,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 3,
+    "worst_level_excess": 0.0471
+   },
+   {
+    "accuracy": 0.154,
+    "accuracy_when_fires": 0.154,
+    "excess_over_chance": 0.0049,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.025
+   },
+   {
+    "accuracy": 0.1495,
+    "accuracy_when_fires": 0.1495,
+    "excess_over_chance": 0.0004,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": 0.0114
+   },
+   {
+    "accuracy": 0.1491,
+    "accuracy_when_fires": 0.1491,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1491,
+    "accuracy_when_fires": 0.1491,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1491,
+    "accuracy_when_fires": 0.1491,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.145,
+    "accuracy_when_fires": 0.145,
+    "excess_over_chance": -0.0041,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 3,
+    "worst_level_excess": 0.0171
+   },
+   {
+    "accuracy": 0.0495,
+    "accuracy_when_fires": 0.0495,
+    "excess_over_chance": -0.0996,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0661
+   }
+  ],
+  "id": "R1.containers_stack_piles_r2",
+  "k_mean": 7.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.2023,
+   "accuracy_when_fires": 0.2032,
+   "excess_over_chance": 0.0531,
+   "fires": 1939,
+   "heuristic": "last_block_moved_onto_asked",
+   "worst_level": 5,
+   "worst_level_excess": 0.0744
+  }
+ },
+ "R1.elimination_bracket": {
+  "chance": 0.175,
+  "heuristics": [
+   {
+    "accuracy": 0.5946,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.4196,
+    "fires": 1015,
+    "heuristic": "runner_up_is_best_of_other_half",
+    "worst_level": 5,
+    "worst_level_excess": 0.4572
+   },
+   {
+    "accuracy": 0.3414,
+    "accuracy_when_fires": 0.5147,
+    "excess_over_chance": 0.1664,
+    "fires": 985,
+    "heuristic": "knocked_out_by_top_rating",
+    "worst_level": 2,
+    "worst_level_excess": 0.2338
+   },
+   {
+    "accuracy": 0.0135,
+    "accuracy_when_fires": 0.0135,
+    "excess_over_chance": -0.1615,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 3,
+    "worst_level_excess": -0.11
+   }
+  ],
+  "id": "R1.elimination_bracket",
+  "k_mean": 6.4,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5946,
+   "accuracy_when_fires": 1.0,
+   "excess_over_chance": 0.4196,
+   "fires": 1015,
+   "heuristic": "runner_up_is_best_of_other_half",
+   "worst_level": 5,
+   "worst_level_excess": 0.4572
+  }
+ },
+ "R1.elimination_bracket_r2": {
+  "chance": 0.2,
+  "heuristics": [
+   {
+    "accuracy": 0.125,
+    "accuracy_when_fires": 0.125,
+    "excess_over_chance": -0.075,
+    "fires": 2000,
+    "heuristic": "most_wins_logic",
+    "worst_level": 5,
+    "worst_level_excess": -0.0625
+   },
+   {
+    "accuracy": 0.013,
+    "accuracy_when_fires": 0.013,
+    "excess_over_chance": -0.187,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.11
+   }
+  ],
+  "id": "R1.elimination_bracket_r2",
+  "k_mean": 5.6,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.125,
+   "accuracy_when_fires": 0.125,
+   "excess_over_chance": -0.075,
+   "fires": 2000,
+   "heuristic": "most_wins_logic",
+   "worst_level": 5,
+   "worst_level_excess": -0.0625
+  }
+ },
+ "R1.elimination_josephus": {
+  "chance": 0.1491,
+  "heuristics": [
+   {
+    "accuracy": 0.0135,
+    "accuracy_when_fires": 0.0135,
+    "excess_over_chance": -0.1356,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0986
+   }
+  ],
+  "id": "R1.elimination_josephus",
+  "k_mean": 7.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0135,
+   "accuracy_when_fires": 0.0135,
+   "excess_over_chance": -0.1356,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": -0.0986
+  }
+ },
+ "R1.equivalence_classes": {
+  "chance": 0.3333,
+  "heuristics": [
+   {
+    "accuracy": 0.6557,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.3223,
+    "fires": 967,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 4,
+    "worst_level_excess": 0.34
+   },
+   {
+    "accuracy": 0.6557,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.3223,
+    "fires": 967,
+    "heuristic": "stated_pair",
+    "worst_level": 4,
+    "worst_level_excess": 0.34
+   },
+   {
+    "accuracy": 0.504,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.1707,
+    "fires": 512,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.18
+   },
+   {
+    "accuracy": 0.37,
+    "accuracy_when_fires": 0.37,
+    "excess_over_chance": 0.0367,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.0467
+   }
+  ],
+  "id": "R1.equivalence_classes",
+  "k_mean": 3.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.6557,
+   "accuracy_when_fires": 1.0,
+   "excess_over_chance": 0.3223,
+   "fires": 967,
+   "heuristic": "asked_pair_stated_verbatim",
+   "worst_level": 4,
+   "worst_level_excess": 0.34
+  }
+ },
+ "R1.equivalence_classes_r2": {
+  "chance": 0.3333,
+  "heuristics": [
+   {
+    "accuracy": 0.3595,
+    "accuracy_when_fires": 0.3595,
+    "excess_over_chance": 0.0262,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.0692
+   },
+   {
+    "accuracy": 0.3333,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.3333,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.3333,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "stated_pair",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   }
+  ],
+  "id": "R1.equivalence_classes_r2",
+  "k_mean": 3.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.3595,
+   "accuracy_when_fires": 0.3595,
+   "excess_over_chance": 0.0262,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 1,
+   "worst_level_excess": 0.0692
+  }
+ },
+ "R1.equivalence_exchange_rates": {
+  "chance": 0.1769,
+  "heuristics": [
+   {
+    "accuracy": 0.057,
+    "accuracy_when_fires": 0.057,
+    "excess_over_chance": -0.1199,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 4,
+    "worst_level_excess": -0.0579
+   }
+  ],
+  "id": "R1.equivalence_exchange_rates",
+  "k_mean": 6.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.057,
+   "accuracy_when_fires": 0.057,
+   "excess_over_chance": -0.1199,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 4,
+   "worst_level_excess": -0.0579
+  }
+ },
+ "R1.event_timeline": {
+  "chance": 0.1769,
+  "heuristics": [
+   {
+    "accuracy": 0.066,
+    "accuracy_when_fires": 0.066,
+    "excess_over_chance": -0.1109,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0675
+   }
+  ],
+  "id": "R1.event_timeline",
+  "k_mean": 6.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.066,
+   "accuracy_when_fires": 0.066,
+   "excess_over_chance": -0.1109,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": -0.0675
+  }
+ },
+ "R1.graph_bipartite": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.504,
+    "accuracy_when_fires": 0.504,
+    "excess_over_chance": 0.004,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.04
+   }
+  ],
+  "id": "R1.graph_bipartite",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.504,
+   "accuracy_when_fires": 0.504,
+   "excess_over_chance": 0.004,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 2,
+   "worst_level_excess": 0.04
+  }
+ },
+ "R1.graph_shortest_route": {
+  "chance": 0.1752,
+  "heuristics": [
+   {
+    "accuracy": 0.7025,
+    "accuracy_when_fires": 0.7025,
+    "excess_over_chance": 0.5273,
+    "fires": 2000,
+    "heuristic": "nearest_neighbour_of_start",
+    "worst_level": 5,
+    "worst_level_excess": 0.5396
+   },
+   {
+    "accuracy": 0.3842,
+    "accuracy_when_fires": 0.3842,
+    "excess_over_chance": 0.209,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.2275
+   },
+   {
+    "accuracy": 0.318,
+    "accuracy_when_fires": 0.318,
+    "excess_over_chance": 0.1428,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.1725
+   },
+   {
+    "accuracy": 0.18,
+    "accuracy_when_fires": 0.18,
+    "excess_over_chance": 0.0048,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 1,
+    "worst_level_excess": 0.025
+   },
+   {
+    "accuracy": 0.1752,
+    "accuracy_when_fires": 0.1752,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1695,
+    "accuracy_when_fires": 0.1695,
+    "excess_over_chance": -0.0057,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 3,
+    "worst_level_excess": 0.0283
+   },
+   {
+    "accuracy": 0.0505,
+    "accuracy_when_fires": 0.0505,
+    "excess_over_chance": -0.1247,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0954
+   },
+   {
+    "accuracy": 0.0307,
+    "accuracy_when_fires": 0.0307,
+    "excess_over_chance": -0.1446,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.1266
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.1752,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.1429
+   }
+  ],
+  "id": "R1.graph_shortest_route",
+  "k_mean": 5.8,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.7025,
+   "accuracy_when_fires": 0.7025,
+   "excess_over_chance": 0.5273,
+   "fires": 2000,
+   "heuristic": "nearest_neighbour_of_start",
+   "worst_level": 5,
+   "worst_level_excess": 0.5396
+  }
+ },
+ "R1.graph_shortest_route_r2": {
+  "chance": 0.0,
+  "heuristics": [
+   {
+    "accuracy": 0.0595,
+    "accuracy_when_fires": 0.0595,
+    "excess_over_chance": 0.0595,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.065
+   },
+   {
+    "accuracy": 0.0585,
+    "accuracy_when_fires": 0.0585,
+    "excess_over_chance": 0.0585,
+    "fires": 2000,
+    "heuristic": "largest_number",
+    "worst_level": 3,
+    "worst_level_excess": 0.075
+   },
+   {
+    "accuracy": 0.029,
+    "accuracy_when_fires": 0.029,
+    "excess_over_chance": 0.029,
+    "fires": 2000,
+    "heuristic": "last_number",
+    "worst_level": 4,
+    "worst_level_excess": 0.04
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "smallest_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": 0.0,
+    "fires": 139,
+    "heuristic": "direct_road_length",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   }
+  ],
+  "id": "R1.graph_shortest_route_r2",
+  "k_mean": 0.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0595,
+   "accuracy_when_fires": 0.0595,
+   "excess_over_chance": 0.0595,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 2,
+   "worst_level_excess": 0.065
+  }
+ },
+ "R1.instant_runoff": {
+  "chance": 0.2833,
+  "heuristics": [
+   {
+    "accuracy": 0.3509,
+    "accuracy_when_fires": 0.3509,
+    "excess_over_chance": 0.0676,
+    "fires": 2000,
+    "heuristic": "plurality_winner",
+    "worst_level": 1,
+    "worst_level_excess": 0.1967
+   },
+   {
+    "accuracy": 0.0135,
+    "accuracy_when_fires": 0.0135,
+    "excess_over_chance": -0.2698,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 3,
+    "worst_level_excess": -0.2375
+   }
+  ],
+  "id": "R1.instant_runoff",
+  "k_mean": 3.6,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.3509,
+   "accuracy_when_fires": 0.3509,
+   "excess_over_chance": 0.0676,
+   "fires": 2000,
+   "heuristic": "plurality_winner",
+   "worst_level": 1,
+   "worst_level_excess": 0.1967
+  }
+ },
+ "R1.kinship_ancestor": {
+  "chance": 0.1208,
+  "heuristics": [
+   {
+    "accuracy": 1.0,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.8792,
+    "fires": 2000,
+    "heuristic": "parentless_person",
+    "worst_level": 5,
+    "worst_level_excess": 0.9167
+   },
+   {
+    "accuracy": 0.2625,
+    "accuracy_when_fires": 0.2625,
+    "excess_over_chance": 0.1417,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.1933
+   },
+   {
+    "accuracy": 0.1992,
+    "accuracy_when_fires": 0.1992,
+    "excess_over_chance": 0.0784,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.1438
+   },
+   {
+    "accuracy": 0.135,
+    "accuracy_when_fires": 0.135,
+    "excess_over_chance": 0.0142,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0346
+   },
+   {
+    "accuracy": 0.1305,
+    "accuracy_when_fires": 0.1305,
+    "excess_over_chance": 0.0097,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 3,
+    "worst_level_excess": 0.0289
+   },
+   {
+    "accuracy": 0.12,
+    "accuracy_when_fires": 0.12,
+    "excess_over_chance": -0.0008,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 2,
+    "worst_level_excess": 0.0171
+   },
+   {
+    "accuracy": 0.1062,
+    "accuracy_when_fires": 0.1062,
+    "excess_over_chance": -0.0146,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 4,
+    "worst_level_excess": -0.0054
+   },
+   {
+    "accuracy": 0.0135,
+    "accuracy_when_fires": 0.0135,
+    "excess_over_chance": -0.1073,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0683
+   },
+   {
+    "accuracy": 0.0064,
+    "accuracy_when_fires": 0.0064,
+    "excess_over_chance": -0.1143,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0815
+   }
+  ],
+  "id": "R1.kinship_ancestor",
+  "k_mean": 8.8,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 1.0,
+   "accuracy_when_fires": 1.0,
+   "excess_over_chance": 0.8792,
+   "fires": 2000,
+   "heuristic": "parentless_person",
+   "worst_level": 5,
+   "worst_level_excess": 0.9167
+  }
+ },
+ "R1.kinship_ancestor_r2": {
+  "chance": 0.1015,
+  "heuristics": [
+   {
+    "accuracy": 0.1775,
+    "accuracy_when_fires": 0.1775,
+    "excess_over_chance": 0.076,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0862
+   },
+   {
+    "accuracy": 0.125,
+    "accuracy_when_fires": 0.125,
+    "excess_over_chance": 0.0235,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0462
+   },
+   {
+    "accuracy": 0.1055,
+    "accuracy_when_fires": 0.1055,
+    "excess_over_chance": 0.004,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 3,
+    "worst_level_excess": 0.0228
+   },
+   {
+    "accuracy": 0.102,
+    "accuracy_when_fires": 0.102,
+    "excess_over_chance": 0.0005,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 1,
+    "worst_level_excess": 0.0187
+   },
+   {
+    "accuracy": 0.0994,
+    "accuracy_when_fires": 0.0994,
+    "excess_over_chance": -0.0021,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0081
+   },
+   {
+    "accuracy": 0.0557,
+    "accuracy_when_fires": 0.0557,
+    "excess_over_chance": -0.0458,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 5,
+    "worst_level_excess": -0.0373
+   },
+   {
+    "accuracy": 0.014,
+    "accuracy_when_fires": 0.014,
+    "excess_over_chance": -0.0875,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0641
+   },
+   {
+    "accuracy": 0.0035,
+    "accuracy_when_fires": 0.0035,
+    "excess_over_chance": -0.0979,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0735
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.1015,
+    "fires": 2000,
+    "heuristic": "parentless_person",
+    "worst_level": 5,
+    "worst_level_excess": -0.0741
+   }
+  ],
+  "id": "R1.kinship_ancestor_r2",
+  "k_mean": 10.33,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.1775,
+   "accuracy_when_fires": 0.1775,
+   "excess_over_chance": 0.076,
+   "fires": 2000,
+   "heuristic": "first_mentioned",
+   "worst_level": 1,
+   "worst_level_excess": 0.0862
+  }
+ },
+ "R1.kinship_cousins": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.5045,
+    "accuracy_when_fires": 0.5045,
+    "excess_over_chance": 0.0045,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": 0.0325
+   },
+   {
+    "accuracy": 0.5,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.5,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   }
+  ],
+  "id": "R1.kinship_cousins",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5045,
+   "accuracy_when_fires": 0.5045,
+   "excess_over_chance": 0.0045,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": 0.0325
+  }
+ },
+ "R1.kinship_descendants": {
+  "chance": 0.1291,
+  "heuristics": [
+   {
+    "accuracy": 0.9465,
+    "accuracy_when_fires": 0.9465,
+    "excess_over_chance": 0.8174,
+    "fires": 2000,
+    "heuristic": "parentless_person",
+    "worst_level": 5,
+    "worst_level_excess": 0.835
+   },
+   {
+    "accuracy": 0.5863,
+    "accuracy_when_fires": 0.5863,
+    "excess_over_chance": 0.4571,
+    "fires": 2000,
+    "heuristic": "most_children",
+    "worst_level": 2,
+    "worst_level_excess": 0.4876
+   },
+   {
+    "accuracy": 0.3895,
+    "accuracy_when_fires": 0.3895,
+    "excess_over_chance": 0.2604,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.3333
+   },
+   {
+    "accuracy": 0.3612,
+    "accuracy_when_fires": 0.3612,
+    "excess_over_chance": 0.2321,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 3,
+    "worst_level_excess": 0.2562
+   },
+   {
+    "accuracy": 0.1295,
+    "accuracy_when_fires": 0.1295,
+    "excess_over_chance": 0.0004,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 2,
+    "worst_level_excess": 0.0221
+   },
+   {
+    "accuracy": 0.1225,
+    "accuracy_when_fires": 0.1225,
+    "excess_over_chance": -0.0066,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 3,
+    "worst_level_excess": 0.0175
+   },
+   {
+    "accuracy": 0.0278,
+    "accuracy_when_fires": 0.0278,
+    "excess_over_chance": -0.1013,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0892
+   },
+   {
+    "accuracy": 0.013,
+    "accuracy_when_fires": 0.013,
+    "excess_over_chance": -0.1161,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0875
+   },
+   {
+    "accuracy": 0.0065,
+    "accuracy_when_fires": 0.0065,
+    "excess_over_chance": -0.1226,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.095
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.1291,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 5,
+    "worst_level_excess": -0.1
+   }
+  ],
+  "id": "R1.kinship_descendants",
+  "k_mean": 8.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.9465,
+   "accuracy_when_fires": 0.9465,
+   "excess_over_chance": 0.8174,
+   "fires": 2000,
+   "heuristic": "parentless_person",
+   "worst_level": 5,
+   "worst_level_excess": 0.835
+  }
+ },
+ "R1.kinship_descendants_r2": {
+  "chance": 0.1491,
+  "heuristics": [
+   {
+    "accuracy": 0.157,
+    "accuracy_when_fires": 0.157,
+    "excess_over_chance": 0.0079,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 2,
+    "worst_level_excess": 0.0383
+   },
+   {
+    "accuracy": 0.1555,
+    "accuracy_when_fires": 0.1555,
+    "excess_over_chance": 0.0064,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 1,
+    "worst_level_excess": 0.025
+   },
+   {
+    "accuracy": 0.1535,
+    "accuracy_when_fires": 0.1535,
+    "excess_over_chance": 0.0044,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0283
+   },
+   {
+    "accuracy": 0.1471,
+    "accuracy_when_fires": 0.1471,
+    "excess_over_chance": -0.0021,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0274
+   },
+   {
+    "accuracy": 0.1471,
+    "accuracy_when_fires": 0.1471,
+    "excess_over_chance": -0.0021,
+    "fires": 2000,
+    "heuristic": "most_children",
+    "worst_level": 2,
+    "worst_level_excess": 0.0274
+   },
+   {
+    "accuracy": 0.079,
+    "accuracy_when_fires": 0.079,
+    "excess_over_chance": -0.0701,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": -0.05
+   },
+   {
+    "accuracy": 0.0125,
+    "accuracy_when_fires": 0.0125,
+    "excess_over_chance": -0.1366,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0986
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.1491,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.1111
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.1491,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 5,
+    "worst_level_excess": -0.1111
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": -0.1491,
+    "fires": 2000,
+    "heuristic": "parentless_person",
+    "worst_level": 5,
+    "worst_level_excess": -0.1111
+   }
+  ],
+  "id": "R1.kinship_descendants_r2",
+  "k_mean": 7.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.157,
+   "accuracy_when_fires": 0.157,
+   "excess_over_chance": 0.0079,
+   "fires": 2000,
+   "heuristic": "alphabetical_first",
+   "worst_level": 2,
+   "worst_level_excess": 0.0383
+  }
+ },
+ "R1.knights_knaves": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.518,
+    "accuracy_when_fires": 0.518,
+    "excess_over_chance": 0.018,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.0425
+   }
+  ],
+  "id": "R1.knights_knaves",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.518,
+   "accuracy_when_fires": 0.518,
+   "excess_over_chance": 0.018,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 1,
+   "worst_level_excess": 0.0425
+  }
+ },
+ "R1.minimax_tree": {
+  "chance": 0.0,
+  "heuristics": [
+   {
+    "accuracy": 0.159,
+    "accuracy_when_fires": 0.159,
+    "excess_over_chance": 0.159,
+    "fires": 2000,
+    "heuristic": "smallest_number",
+    "worst_level": 2,
+    "worst_level_excess": 0.185
+   },
+   {
+    "accuracy": 0.142,
+    "accuracy_when_fires": 0.142,
+    "excess_over_chance": 0.142,
+    "fires": 2000,
+    "heuristic": "last_number",
+    "worst_level": 4,
+    "worst_level_excess": 0.2075
+   },
+   {
+    "accuracy": 0.0905,
+    "accuracy_when_fires": 0.0905,
+    "excess_over_chance": 0.0905,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 3,
+    "worst_level_excess": 0.12
+   },
+   {
+    "accuracy": 0.0265,
+    "accuracy_when_fires": 0.0265,
+    "excess_over_chance": 0.0265,
+    "fires": 2000,
+    "heuristic": "largest_number",
+    "worst_level": 4,
+    "worst_level_excess": 0.0475
+   }
+  ],
+  "id": "R1.minimax_tree",
+  "k_mean": 0.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.159,
+   "accuracy_when_fires": 0.159,
+   "excess_over_chance": 0.159,
+   "fires": 2000,
+   "heuristic": "smallest_number",
+   "worst_level": 2,
+   "worst_level_excess": 0.185
+  }
+ },
+ "R1.mst_cost": {
+  "chance": 0.0,
+  "heuristics": [
+   {
+    "accuracy": 0.0565,
+    "accuracy_when_fires": 0.0565,
+    "excess_over_chance": 0.0565,
+    "fires": 2000,
+    "heuristic": "smallest_n_minus_1_roads",
+    "worst_level": 1,
+    "worst_level_excess": 0.085
+   },
+   {
+    "accuracy": 0.037,
+    "accuracy_when_fires": 0.037,
+    "excess_over_chance": 0.037,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.0475
+   },
+   {
+    "accuracy": 0.0045,
+    "accuracy_when_fires": 0.0045,
+    "excess_over_chance": 0.0045,
+    "fires": 2000,
+    "heuristic": "largest_number",
+    "worst_level": 2,
+    "worst_level_excess": 0.0125
+   },
+   {
+    "accuracy": 0.001,
+    "accuracy_when_fires": 0.001,
+    "excess_over_chance": 0.001,
+    "fires": 2000,
+    "heuristic": "last_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.0025
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "smallest_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   }
+  ],
+  "id": "R1.mst_cost",
+  "k_mean": 0.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0565,
+   "accuracy_when_fires": 0.0565,
+   "excess_over_chance": 0.0565,
+   "fires": 2000,
+   "heuristic": "smallest_n_minus_1_roads",
+   "worst_level": 1,
+   "worst_level_excess": 0.085
+  }
+ },
+ "R1.nim_xor": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.506,
+    "accuracy_when_fires": 0.506,
+    "excess_over_chance": 0.006,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.0175
+   },
+   {
+    "accuracy": 0.494,
+    "accuracy_when_fires": 0.494,
+    "excess_over_chance": -0.006,
+    "fires": 2000,
+    "heuristic": "odd_total_means_first",
+    "worst_level": 5,
+    "worst_level_excess": 0.005
+   }
+  ],
+  "id": "R1.nim_xor",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.506,
+   "accuracy_when_fires": 0.506,
+   "excess_over_chance": 0.006,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 1,
+   "worst_level_excess": 0.0175
+  }
+ },
+ "R1.one_culprit": {
+  "chance": 0.1967,
+  "heuristics": [
+   {
+    "accuracy": 0.0145,
+    "accuracy_when_fires": 0.0145,
+    "excess_over_chance": -0.1822,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.1542
+   }
+  ],
+  "id": "R1.one_culprit",
+  "k_mean": 5.2,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0145,
+   "accuracy_when_fires": 0.0145,
+   "excess_over_chance": -0.1822,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": -0.1542
+  }
+ },
+ "R1.order_compare": {
+  "chance": 0.3333,
+  "heuristics": [
+   {
+    "accuracy": 0.42,
+    "accuracy_when_fires": 0.4958,
+    "excess_over_chance": 0.0867,
+    "fires": 1067,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 1,
+    "worst_level_excess": 0.1242
+   },
+   {
+    "accuracy": 0.3853,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.052,
+    "fires": 156,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0717
+   },
+   {
+    "accuracy": 0.346,
+    "accuracy_when_fires": 0.346,
+    "excess_over_chance": 0.0127,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 1,
+    "worst_level_excess": 0.0517
+   }
+  ],
+  "id": "R1.order_compare",
+  "k_mean": 3.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.42,
+   "accuracy_when_fires": 0.4958,
+   "excess_over_chance": 0.0867,
+   "fires": 1067,
+   "heuristic": "asked_pair_stated_verbatim",
+   "worst_level": 1,
+   "worst_level_excess": 0.1242
+  }
+ },
+ "R1.order_extreme": {
+  "chance": 0.1769,
+  "heuristics": [
+   {
+    "accuracy": 0.015,
+    "accuracy_when_fires": 0.015,
+    "excess_over_chance": -0.1619,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.1175
+   }
+  ],
+  "id": "R1.order_extreme",
+  "k_mean": 6.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.015,
+   "accuracy_when_fires": 0.015,
+   "excess_over_chance": -0.1619,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": -0.1175
+  }
+ },
+ "R1.order_tournament_wins": {
+  "chance": 0.1752,
+  "heuristics": [
+   {
+    "accuracy": 0.0135,
+    "accuracy_when_fires": 0.0135,
+    "excess_over_chance": -0.1617,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.1354
+   }
+  ],
+  "id": "R1.order_tournament_wins",
+  "k_mean": 5.8,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0135,
+   "accuracy_when_fires": 0.0135,
+   "excess_over_chance": -0.1617,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": -0.1354
+  }
+ },
+ "R1.pet_owners": {
+  "chance": 0.19,
+  "heuristics": [
+   {
+    "accuracy": 0.0145,
+    "accuracy_when_fires": 0.0145,
+    "excess_over_chance": -0.1755,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 4,
+    "worst_level_excess": -0.1467
+   }
+  ],
+  "id": "R1.pet_owners",
+  "k_mean": 5.4,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0145,
+   "accuracy_when_fires": 0.0145,
+   "excess_over_chance": -0.1755,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 4,
+   "worst_level_excess": -0.1467
+  }
+ },
+ "R1.road_reachability": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.5302,
+    "accuracy_when_fires": 1.0,
+    "excess_over_chance": 0.0302,
+    "fires": 121,
+    "heuristic": "asked_entity_never_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0363
+   },
+   {
+    "accuracy": 0.528,
+    "accuracy_when_fires": 0.5802,
+    "excess_over_chance": 0.028,
+    "fires": 698,
+    "heuristic": "asked_pair_stated_verbatim",
+    "worst_level": 2,
+    "worst_level_excess": 0.0475
+   },
+   {
+    "accuracy": 0.505,
+    "accuracy_when_fires": 0.505,
+    "excess_over_chance": 0.005,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 3,
+    "worst_level_excess": 0.05
+   }
+  ],
+  "id": "R1.road_reachability",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5302,
+   "accuracy_when_fires": 1.0,
+   "excess_over_chance": 0.0302,
+   "fires": 121,
+   "heuristic": "asked_entity_never_mentioned",
+   "worst_level": 2,
+   "worst_level_excess": 0.0363
+  }
+ },
+ "R1.seating_row": {
+  "chance": 0.1967,
+  "heuristics": [
+   {
+    "accuracy": 0.014,
+    "accuracy_when_fires": 0.014,
+    "excess_over_chance": -0.1827,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.1467
+   }
+  ],
+  "id": "R1.seating_row",
+  "k_mean": 5.2,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.014,
+   "accuracy_when_fires": 0.014,
+   "excess_over_chance": -0.1827,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": -0.1467
+  }
+ },
+ "R1.spatial_grid_walk": {
+  "chance": 0.0884,
+  "heuristics": [
+   {
+    "accuracy": 0.1495,
+    "accuracy_when_fires": 0.1495,
+    "excess_over_chance": 0.0611,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0779
+   },
+   {
+    "accuracy": 0.1495,
+    "accuracy_when_fires": 0.1495,
+    "excess_over_chance": 0.0611,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0779
+   },
+   {
+    "accuracy": 0.1495,
+    "accuracy_when_fires": 0.1495,
+    "excess_over_chance": 0.0611,
+    "fires": 2000,
+    "heuristic": "start_cell",
+    "worst_level": 2,
+    "worst_level_excess": 0.0779
+   },
+   {
+    "accuracy": 0.0945,
+    "accuracy_when_fires": 0.0945,
+    "excess_over_chance": 0.0061,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.0371
+   },
+   {
+    "accuracy": 0.093,
+    "accuracy_when_fires": 0.093,
+    "excess_over_chance": 0.0046,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0185
+   },
+   {
+    "accuracy": 0.0884,
+    "accuracy_when_fires": 0.0884,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.083,
+    "accuracy_when_fires": 0.083,
+    "excess_over_chance": -0.0054,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 3,
+    "worst_level_excess": 0.006
+   },
+   {
+    "accuracy": 0.0813,
+    "accuracy_when_fires": 0.0813,
+    "excess_over_chance": -0.007,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0028
+   },
+   {
+    "accuracy": 0.002,
+    "accuracy_when_fires": 0.002,
+    "excess_over_chance": -0.0864,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0589
+   }
+  ],
+  "id": "R1.spatial_grid_walk",
+  "k_mean": 12.44,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.1495,
+   "accuracy_when_fires": 0.1495,
+   "excess_over_chance": 0.0611,
+   "fires": 2000,
+   "heuristic": "last_mentioned",
+   "worst_level": 2,
+   "worst_level_excess": 0.0779
+  }
+ },
+ "R1.spatial_grid_walk_r2": {
+  "chance": 0.0884,
+  "heuristics": [
+   {
+    "accuracy": 0.159,
+    "accuracy_when_fires": 0.159,
+    "excess_over_chance": 0.0706,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0811
+   },
+   {
+    "accuracy": 0.159,
+    "accuracy_when_fires": 0.159,
+    "excess_over_chance": 0.0706,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0811
+   },
+   {
+    "accuracy": 0.159,
+    "accuracy_when_fires": 0.159,
+    "excess_over_chance": 0.0706,
+    "fires": 2000,
+    "heuristic": "start_cell",
+    "worst_level": 4,
+    "worst_level_excess": 0.0811
+   },
+   {
+    "accuracy": 0.091,
+    "accuracy_when_fires": 0.091,
+    "excess_over_chance": 0.0026,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 1,
+    "worst_level_excess": 0.0222
+   },
+   {
+    "accuracy": 0.0884,
+    "accuracy_when_fires": 0.0884,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.083,
+    "accuracy_when_fires": 0.083,
+    "excess_over_chance": -0.0054,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0116
+   },
+   {
+    "accuracy": 0.082,
+    "accuracy_when_fires": 0.082,
+    "excess_over_chance": -0.0064,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 3,
+    "worst_level_excess": 0.0202
+   },
+   {
+    "accuracy": 0.0808,
+    "accuracy_when_fires": 0.0808,
+    "excess_over_chance": -0.0076,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0039
+   },
+   {
+    "accuracy": 0.002,
+    "accuracy_when_fires": 0.002,
+    "excess_over_chance": -0.0864,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0544
+   }
+  ],
+  "id": "R1.spatial_grid_walk_r2",
+  "k_mean": 12.42,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.159,
+   "accuracy_when_fires": 0.159,
+   "excess_over_chance": 0.0706,
+   "fires": 2000,
+   "heuristic": "last_mentioned",
+   "worst_level": 4,
+   "worst_level_excess": 0.0811
+  }
+ },
+ "R1.spatial_relative_directions": {
+  "chance": 0.2186,
+  "heuristics": [
+   {
+    "accuracy": 0.3522,
+    "accuracy_when_fires": 0.3522,
+    "excess_over_chance": 0.1336,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.1933
+   },
+   {
+    "accuracy": 0.2769,
+    "accuracy_when_fires": 0.2772,
+    "excess_over_chance": 0.0583,
+    "fires": 1906,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.085
+   },
+   {
+    "accuracy": 0.2587,
+    "accuracy_when_fires": 0.2587,
+    "excess_over_chance": 0.0402,
+    "fires": 2000,
+    "heuristic": "endpoint_of_largest_offset",
+    "worst_level": 1,
+    "worst_level_excess": 0.0554
+   },
+   {
+    "accuracy": 0.2275,
+    "accuracy_when_fires": 0.2275,
+    "excess_over_chance": 0.0089,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 4,
+    "worst_level_excess": 0.0433
+   },
+   {
+    "accuracy": 0.225,
+    "accuracy_when_fires": 0.225,
+    "excess_over_chance": 0.0064,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.0267
+   },
+   {
+    "accuracy": 0.141,
+    "accuracy_when_fires": 0.141,
+    "excess_over_chance": -0.0776,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": -0.0517
+   },
+   {
+    "accuracy": 0.14,
+    "accuracy_when_fires": 0.14,
+    "excess_over_chance": -0.0786,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.0579
+   },
+   {
+    "accuracy": 0.0651,
+    "accuracy_when_fires": 0.0651,
+    "excess_over_chance": -0.1535,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 5,
+    "worst_level_excess": -0.1252
+   },
+   {
+    "accuracy": 0.051,
+    "accuracy_when_fires": 0.051,
+    "excess_over_chance": -0.1676,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0879
+   }
+  ],
+  "id": "R1.spatial_relative_directions",
+  "k_mean": 5.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.3522,
+   "accuracy_when_fires": 0.3522,
+   "excess_over_chance": 0.1336,
+   "fires": 2000,
+   "heuristic": "least_mentioned",
+   "worst_level": 1,
+   "worst_level_excess": 0.1933
+  }
+ },
+ "R1.stable_matching": {
+  "chance": 0.2467,
+  "heuristics": [
+   {
+    "accuracy": 0.3555,
+    "accuracy_when_fires": 0.3555,
+    "excess_over_chance": 0.1088,
+    "fires": 2000,
+    "heuristic": "first_choice",
+    "worst_level": 5,
+    "worst_level_excess": 0.155
+   },
+   {
+    "accuracy": 0.273,
+    "accuracy_when_fires": 0.273,
+    "excess_over_chance": 0.0263,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.0342
+   },
+   {
+    "accuracy": 0.2467,
+    "accuracy_when_fires": 0.2467,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.2467,
+    "accuracy_when_fires": 0.2467,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.2467,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.2395,
+    "accuracy_when_fires": 0.2395,
+    "excess_over_chance": -0.0072,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 3,
+    "worst_level_excess": 0.01
+   },
+   {
+    "accuracy": 0.2355,
+    "accuracy_when_fires": 0.2355,
+    "excess_over_chance": -0.0112,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 5,
+    "worst_level_excess": 0.015
+   },
+   {
+    "accuracy": 0.1865,
+    "accuracy_when_fires": 0.1865,
+    "excess_over_chance": -0.0602,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.0155,
+    "accuracy_when_fires": 0.0155,
+    "excess_over_chance": -0.2312,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 4,
+    "worst_level_excess": -0.185
+   }
+  ],
+  "id": "R1.stable_matching",
+  "k_mean": 4.2,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.3555,
+   "accuracy_when_fires": 0.3555,
+   "excess_over_chance": 0.1088,
+   "fires": 2000,
+   "heuristic": "first_choice",
+   "worst_level": 5,
+   "worst_level_excess": 0.155
+  }
+ },
+ "R1.swap_tracking": {
+  "chance": 0.19,
+  "heuristics": [
+   {
+    "accuracy": 0.198,
+    "accuracy_when_fires": 0.198,
+    "excess_over_chance": 0.008,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 2,
+    "worst_level_excess": 0.04
+   },
+   {
+    "accuracy": 0.1945,
+    "accuracy_when_fires": 0.1945,
+    "excess_over_chance": 0.0045,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 1,
+    "worst_level_excess": 0.0425
+   },
+   {
+    "accuracy": 0.192,
+    "accuracy_when_fires": 0.192,
+    "excess_over_chance": 0.002,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0125
+   },
+   {
+    "accuracy": 0.19,
+    "accuracy_when_fires": 0.19,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.19,
+    "accuracy_when_fires": 0.19,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.19,
+    "accuracy_when_fires": 0.19,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1885,
+    "accuracy_when_fires": 0.1885,
+    "excess_over_chance": -0.0015,
+    "fires": 2000,
+    "heuristic": "own_initial_item",
+    "worst_level": 5,
+    "worst_level_excess": 0.0258
+   },
+   {
+    "accuracy": 0.175,
+    "accuracy_when_fires": 0.175,
+    "excess_over_chance": -0.015,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0325
+   },
+   {
+    "accuracy": 0.0535,
+    "accuracy_when_fires": 0.0535,
+    "excess_over_chance": -0.1365,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 3,
+    "worst_level_excess": -0.1042
+   }
+  ],
+  "id": "R1.swap_tracking",
+  "k_mean": 5.4,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.198,
+   "accuracy_when_fires": 0.198,
+   "excess_over_chance": 0.008,
+   "fires": 2000,
+   "heuristic": "alphabetical_last",
+   "worst_level": 2,
+   "worst_level_excess": 0.04
+  }
+ },
+ "R1.temporal_critical_path": {
+  "chance": 0.1769,
+  "heuristics": [
+   {
+    "accuracy": 0.3282,
+    "accuracy_when_fires": 0.3282,
+    "excess_over_chance": 0.1513,
+    "fires": 2000,
+    "heuristic": "longest_job",
+    "worst_level": 3,
+    "worst_level_excess": 0.1796
+   },
+   {
+    "accuracy": 0.0145,
+    "accuracy_when_fires": 0.0145,
+    "excess_over_chance": -0.1624,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.11
+   }
+  ],
+  "id": "R1.temporal_critical_path",
+  "k_mean": 6.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.3282,
+   "accuracy_when_fires": 0.3282,
+   "excess_over_chance": 0.1513,
+   "fires": 2000,
+   "heuristic": "longest_job",
+   "worst_level": 3,
+   "worst_level_excess": 0.1796
+  }
+ },
+ "R1.temporal_interval_overlap": {
+  "chance": 0.5,
+  "heuristics": [
+   {
+    "accuracy": 0.5305,
+    "accuracy_when_fires": 0.5305,
+    "excess_over_chance": 0.0305,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.08
+   }
+  ],
+  "id": "R1.temporal_interval_overlap",
+  "k_mean": 2.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.5305,
+   "accuracy_when_fires": 0.5305,
+   "excess_over_chance": 0.0305,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 2,
+   "worst_level_excess": 0.08
+  }
+ },
+ "R1.temporal_weekday_shift": {
+  "chance": 0.1429,
+  "heuristics": [
+   {
+    "accuracy": 0.149,
+    "accuracy_when_fires": 0.149,
+    "excess_over_chance": 0.0061,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": 0.0371
+   },
+   {
+    "accuracy": 0.1365,
+    "accuracy_when_fires": 0.1365,
+    "excess_over_chance": -0.0064,
+    "fires": 2000,
+    "heuristic": "anchor_weekday",
+    "worst_level": 3,
+    "worst_level_excess": 0.0071
+   }
+  ],
+  "id": "R1.temporal_weekday_shift",
+  "k_mean": 7.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.149,
+   "accuracy_when_fires": 0.149,
+   "excess_over_chance": 0.0061,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 5,
+   "worst_level_excess": 0.0371
+  }
+ },
+ "R1.topological_order": {
+  "chance": 0.1491,
+  "heuristics": [
+   {
+    "accuracy": 0.161,
+    "accuracy_when_fires": 0.161,
+    "excess_over_chance": 0.0119,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 2,
+    "worst_level_excess": 0.0333
+   },
+   {
+    "accuracy": 0.1491,
+    "accuracy_when_fires": null,
+    "excess_over_chance": 0.0,
+    "fires": 0,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   },
+   {
+    "accuracy": 0.1458,
+    "accuracy_when_fires": 0.1458,
+    "excess_over_chance": -0.0033,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 3,
+    "worst_level_excess": 0.0139
+   },
+   {
+    "accuracy": 0.1435,
+    "accuracy_when_fires": 0.1435,
+    "excess_over_chance": -0.0056,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 1,
+    "worst_level_excess": 0.0375
+   },
+   {
+    "accuracy": 0.136,
+    "accuracy_when_fires": 0.136,
+    "excess_over_chance": -0.0131,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 5,
+    "worst_level_excess": 0.0089
+   },
+   {
+    "accuracy": 0.1326,
+    "accuracy_when_fires": 0.1326,
+    "excess_over_chance": -0.0165,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0097
+   },
+   {
+    "accuracy": 0.122,
+    "accuracy_when_fires": 0.122,
+    "excess_over_chance": -0.0271,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": -0.0125
+   },
+   {
+    "accuracy": 0.078,
+    "accuracy_when_fires": 0.078,
+    "excess_over_chance": -0.0711,
+    "fires": 2000,
+    "heuristic": "jth_alphabetical",
+    "worst_level": 5,
+    "worst_level_excess": -0.0586
+   },
+   {
+    "accuracy": 0.015,
+    "accuracy_when_fires": 0.015,
+    "excess_over_chance": -0.1341,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.0961
+   }
+  ],
+  "id": "R1.topological_order",
+  "k_mean": 7.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.161,
+   "accuracy_when_fires": 0.161,
+   "excess_over_chance": 0.0119,
+   "fires": 2000,
+   "heuristic": "first_mentioned",
+   "worst_level": 2,
+   "worst_level_excess": 0.0333
+  }
+ },
+ "R1.tracking_accounts": {
+  "chance": 0.2133,
+  "heuristics": [
+   {
+    "accuracy": 0.3415,
+    "accuracy_when_fires": 0.3415,
+    "excess_over_chance": 0.1281,
+    "fires": 2000,
+    "heuristic": "richest_or_poorest_at_start",
+    "worst_level": 1,
+    "worst_level_excess": 0.1796
+   },
+   {
+    "accuracy": 0.236,
+    "accuracy_when_fires": 0.236,
+    "excess_over_chance": 0.0227,
+    "fires": 2000,
+    "heuristic": "most_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0523
+   },
+   {
+    "accuracy": 0.225,
+    "accuracy_when_fires": 0.225,
+    "excess_over_chance": 0.0117,
+    "fires": 2000,
+    "heuristic": "first_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0275
+   },
+   {
+    "accuracy": 0.2215,
+    "accuracy_when_fires": 0.2215,
+    "excess_over_chance": 0.0082,
+    "fires": 2000,
+    "heuristic": "alphabetical_last",
+    "worst_level": 2,
+    "worst_level_excess": 0.0325
+   },
+   {
+    "accuracy": 0.2169,
+    "accuracy_when_fires": 0.2235,
+    "excess_over_chance": 0.0036,
+    "fires": 886,
+    "heuristic": "never_sentence_subject",
+    "worst_level": 4,
+    "worst_level_excess": 0.0132
+   },
+   {
+    "accuracy": 0.216,
+    "accuracy_when_fires": 0.216,
+    "excess_over_chance": 0.0027,
+    "fires": 2000,
+    "heuristic": "alphabetical_first",
+    "worst_level": 4,
+    "worst_level_excess": 0.035
+   },
+   {
+    "accuracy": 0.2135,
+    "accuracy_when_fires": 0.2135,
+    "excess_over_chance": 0.0002,
+    "fires": 2000,
+    "heuristic": "last_mentioned",
+    "worst_level": 4,
+    "worst_level_excess": 0.0175
+   },
+   {
+    "accuracy": 0.188,
+    "accuracy_when_fires": 0.188,
+    "excess_over_chance": -0.0253,
+    "fires": 2000,
+    "heuristic": "least_mentioned",
+    "worst_level": 1,
+    "worst_level_excess": 0.0183
+   },
+   {
+    "accuracy": 0.015,
+    "accuracy_when_fires": 0.015,
+    "excess_over_chance": -0.1983,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 5,
+    "worst_level_excess": -0.1517
+   }
+  ],
+  "id": "R1.tracking_accounts",
+  "k_mean": 4.8,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.3415,
+   "accuracy_when_fires": 0.3415,
+   "excess_over_chance": 0.1281,
+   "fires": 2000,
+   "heuristic": "richest_or_poorest_at_start",
+   "worst_level": 1,
+   "worst_level_excess": 0.1796
+  }
+ },
+ "R1.venn_counting": {
+  "chance": 0.0,
+  "heuristics": [
+   {
+    "accuracy": 0.0895,
+    "accuracy_when_fires": 0.0895,
+    "excess_over_chance": 0.0895,
+    "fires": 2000,
+    "heuristic": "constant_most_frequent_key",
+    "worst_level": 2,
+    "worst_level_excess": 0.1075
+   },
+   {
+    "accuracy": 0.0685,
+    "accuracy_when_fires": 0.0685,
+    "excess_over_chance": 0.0685,
+    "fires": 2000,
+    "heuristic": "smallest_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.1175
+   },
+   {
+    "accuracy": 0.0685,
+    "accuracy_when_fires": 0.0685,
+    "excess_over_chance": 0.0685,
+    "fires": 2000,
+    "heuristic": "last_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.1175
+   },
+   {
+    "accuracy": 0.0,
+    "accuracy_when_fires": 0.0,
+    "excess_over_chance": 0.0,
+    "fires": 2000,
+    "heuristic": "largest_number",
+    "worst_level": 1,
+    "worst_level_excess": 0.0
+   }
+  ],
+  "id": "R1.venn_counting",
+  "k_mean": 0.0,
+  "n_items": 2000,
+  "worst": {
+   "accuracy": 0.0895,
+   "accuracy_when_fires": 0.0895,
+   "excess_over_chance": 0.0895,
+   "fires": 2000,
+   "heuristic": "constant_most_frequent_key",
+   "worst_level": 2,
+   "worst_level_excess": 0.1075
+  }
+ }
+}

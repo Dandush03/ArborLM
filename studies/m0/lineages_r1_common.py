@@ -23,6 +23,7 @@ FAMILY_MODULES = (
 )
 YNU = ("yes", "no", "cannot be determined")
 
+EXTRA_MODULES = ("rev2", "new2")  # shape revisions (and, later, further new lineages): imported by load_pilot, not tied to one family
 Builder = Callable[[int, random.Random], Built]
 
 
@@ -48,6 +49,6 @@ def and_(xs: list[str]) -> str:
 
 
 def load_pilot() -> list[Lineage]:
-    for fam in FAMILY_MODULES:
+    for fam in (*FAMILY_MODULES, *EXTRA_MODULES):
         importlib.import_module(f"studies.m0.lineages_r1_{fam}")
     return sorted(PILOT, key=lambda x: x.id)

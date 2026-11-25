@@ -279,45 +279,65 @@ def write_schema(lins: Sequence[Lineage], path: Path, intended: dict[str, str]) 
 
 
 def pilot_r1(per_level: int = 400) -> dict[str, Any]:
+    """Measurements and bookkeeping for the R1 lineages: statistics (old, pilot, revised, new), capacity, fixtures for the registered pilot lineages, the cluster table,
+    the shortcut gate. Ruling E: the operation-profile similarity and the item-skeleton diversity are kept as code but are NOT evidence of distinctness."""
+    from studies.m0 import lineages_r1_clusters as cl
+    from studies.m0 import lineages_r1_shortcuts as sc
     from studies.m0.lineages_r1_common import INTENDED_PART, load_pilot
 
-    new = load_pilot()
+    pilot_all = load_pilot()
     old = lineages_of("R1")
+    everything = [*old, *pilot_all]
     t_all = time.time()
-    records: dict[str, dict[str, Any]] = {}
-    for lin in [*old, *new]:
-        records[lin.id] = lineage_record(lin, per_level)
+    records: dict[str, dict[str, Any]] = {lin.id: lineage_record(lin, per_level) for lin in everything}
     overlaps = overlap_table(records)
     cap: dict[str, Any] = {}
-    for lin in [*old, *new]:
+    for lin in everything:
         t = time.time()
         rows = capacity_rows(lin)
         cap[lin.id] = {"rows": rows, "passed_all": all(r["passed"] for r in rows), "levels_failed": [r["level"] for r in rows if not r["passed"]], "seconds": round(time.time() - t, 2)}
+    t = time.time()
+    short = sc.shortcut_gate(everything, per_level)
+    t_short = time.time() - t
+    registered = [x for x in pilot_all if x.id not in cl.SUPERSEDED and x.id not in cl.NOT_REGISTERED]
     out_dir = ROOT / "studies" / "m0" / "fixtures" / "r1_pilot"
     t = time.time()
-    fx = write_fixtures(new, out_dir)
+    fx = write_fixtures(registered, out_dir)
     t_fix = time.time() - t
-    write_schema(new, ROOT / "studies" / "m0" / "fixtures" / "R1_PILOT_SCHEMA.md", INTENDED_PART)
+    (out_dir / "SUPERSEDED.txt").write_text("Shapes replaced by a revision (ids ending _r2) or not registered; their fixtures, if present, are from the earlier shape and must NOT be solved.\n" + "\n".join(sorted([*cl.SUPERSEDED, *cl.NOT_REGISTERED])) + "\n")
+    write_schema(registered, ROOT / "studies" / "m0" / "fixtures" / "R1_PILOT_SCHEMA.md", INTENDED_PART)
+    parts = cl.clusters_per_part()
+    clusters = {cid: [m.id for m in mem] for cid, mem in sorted(cl.cluster_table().items())}
     manifest = {
-        "batch": "r1_pilot_1",
-        "note": "Pilot batch 1 of the lineage repair. No second solvers exist yet; none of these lineages is registered in core.REGISTRY. Intended parts are the implementer's; the registered partition is by seed.",
-        "new_lineages": [
-            {"id": lin.id, "family": lin.family, "intended_part": INTENDED_PART[lin.id], "file": f"studies/m0/lineages_r1_{lin.family}.py", "signature": records[lin.id]["signature"],
-             "capacity_passed_all_levels": cap[lin.id]["passed_all"], "capacity_levels_failed": cap[lin.id]["levels_failed"], "fixture_sha256": fx[lin.id]}
-            for lin in new
+        "batch": "r1_pilot_1 plus revisions and round 2",
+        "note": "No second solvers exist yet; none of these lineages is registered in core.REGISTRY. Parts are given by lineages_r1_clusters.partition (the registered rule applied to cluster-closed family groups), not by the authors' intended placement.",
+        "lineages": [
+            {"id": lin.id, "family": lin.family, "status": "SUPERSEDED by " + cl.SUPERSEDED[lin.id] if lin.id in cl.SUPERSEDED else ("NOT REGISTERED: " + cl.NOT_REGISTERED[lin.id] if lin.id in cl.NOT_REGISTERED else "registered"),
+             "cluster": cl.cluster_of(lin.id), "file": lin.build.__module__.replace(".", "/") + ".py", "signature": records[lin.id]["signature"],
+             "capacity_passed_all_levels": cap[lin.id]["passed_all"], "capacity_levels_failed": cap[lin.id]["levels_failed"], "fixture_sha256": fx.get(lin.id)}
+            for lin in pilot_all
         ],
         "g_for_capacity": G_PROPOSED,
         "capacity_factor": CAPACITY_FACTOR,
+        "registered_lineages_r1": len(cl.registered_lineages()),
+        "strict_clusters_r1": len(clusters),
+        "strict_clusters_per_part": {p: len(v) for p, v in parts.items()},
     }
     (ROOT / "studies" / "m0" / "manifests" / "r1_pilot_manifest.json").write_text(json.dumps(manifest, indent=1, sort_keys=True))
+    (ROOT / "studies" / "m0" / "manifests" / "r1_clusters.json").write_text(json.dumps({"clusters": clusters, "partition": cl.partition(), "family_groups": cl.family_groups(), "clusters_per_part": parts, "superseded": cl.SUPERSEDED, "not_registered": cl.NOT_REGISTERED}, indent=1, sort_keys=True))
+    (ROOT / "studies" / "m0" / "manifests" / "r1_shortcuts.json").write_text(json.dumps(short, indent=1, sort_keys=True))
+    (ROOT / "studies" / "m0" / "manifests" / "r1_shortcuts_table.md").write_text(
+        "# R1 shortcut gate (measured, not thresholded)\n\nPer lineage: the worst heuristic of the battery of `lineages_r1_shortcuts.py` on 2,000 items (400 per core level), excess = accuracy minus mean chance 1/k "
+        "(open answers: chance 0). A heuristic that does not fire guesses at chance. Lineage-specific heuristics read the structured form.\n\n" + sc.markdown(short, list(cl.SUPERSEDED)))
     stats = {
         "per_level_items": per_level,
         "levels": list(CORE_LEVELS),
+        "non_evidence_of_distinctness": ["_profile / op similarity (max_op_similarity)", "item_skeletons_level3"],
         "records": {k: {kk: vv for kk, vv in v.items() if not kk.startswith("_")} for k, v in sorted(records.items())},
         "overlap": overlaps,
         "capacity": cap,
-        "seconds": {"all": round(time.time() - t_all, 1), "fixtures": round(t_fix, 2)},
-        "new_ids": [lin.id for lin in new],
+        "seconds": {"all": round(time.time() - t_all, 1), "shortcut_gate": round(t_short, 1), "fixtures": round(t_fix, 2)},
+        "new_ids": [lin.id for lin in pilot_all],
     }
     (ROOT / "studies" / "m0" / "manifests" / "r1_pilot_stats.json").write_text(json.dumps(stats, indent=1, sort_keys=True))
     return stats

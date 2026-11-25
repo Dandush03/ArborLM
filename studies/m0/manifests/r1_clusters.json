@@ -1,0 +1,201 @@
+{
+ "clusters": {
+  "R1.activity_selection": [
+   "R1.activity_selection"
+  ],
+  "R1.attribute_rule": [
+   "R1.attribute_rule",
+   "R1.conditional_decision_tree"
+  ],
+  "R1.boolean_lights": [
+   "R1.boolean_lights_r2",
+   "R1.compass_turns"
+  ],
+  "R1.categories_default_exceptions": [
+   "R1.categories_default_exceptions_r2",
+   "R1.kinship_ancestor_r2",
+   "R1.kinship_cousins"
+  ],
+  "R1.categories_follow": [
+   "R1.categories_follow_r2",
+   "R1.equivalence_classes_r2"
+  ],
+  "R1.conditional_chain": [
+   "R1.conditional_chain"
+  ],
+  "R1.conditional_threshold_rule": [
+   "R1.conditional_threshold_rule_r2"
+  ],
+  "R1.containers_queue_line": [
+   "R1.containers_queue_line_r2"
+  ],
+  "R1.containers_stack_piles": [
+   "R1.containers_stack_piles_r2"
+  ],
+  "R1.elimination_bracket": [
+   "R1.elimination_bracket_r2"
+  ],
+  "R1.elimination_josephus": [
+   "R1.elimination_josephus"
+  ],
+  "R1.equivalence_exchange_rates": [
+   "R1.equivalence_exchange_rates",
+   "R1.event_timeline",
+   "R1.spatial_relative_directions",
+   "R1.temporal_weekday_shift"
+  ],
+  "R1.graph_bipartite": [
+   "R1.graph_bipartite"
+  ],
+  "R1.graph_shortest_route": [
+   "R1.graph_shortest_route_r2"
+  ],
+  "R1.instant_runoff": [
+   "R1.instant_runoff"
+  ],
+  "R1.kinship_descendants": [
+   "R1.kinship_descendants_r2"
+  ],
+  "R1.knights_knaves": [
+   "R1.knights_knaves",
+   "R1.one_culprit"
+  ],
+  "R1.minimax_tree": [
+   "R1.minimax_tree"
+  ],
+  "R1.mst_cost": [
+   "R1.mst_cost"
+  ],
+  "R1.nim_xor": [
+   "R1.nim_xor"
+  ],
+  "R1.order_compare": [
+   "R1.order_compare",
+   "R1.road_reachability"
+  ],
+  "R1.order_extreme": [
+   "R1.order_extreme",
+   "R1.order_tournament_wins"
+  ],
+  "R1.pet_owners": [
+   "R1.pet_owners",
+   "R1.seating_row"
+  ],
+  "R1.spatial_grid_walk": [
+   "R1.spatial_grid_walk_r2"
+  ],
+  "R1.stable_matching": [
+   "R1.stable_matching"
+  ],
+  "R1.swap_tracking": [
+   "R1.swap_tracking"
+  ],
+  "R1.temporal_critical_path": [
+   "R1.temporal_critical_path"
+  ],
+  "R1.temporal_interval_overlap": [
+   "R1.temporal_interval_overlap"
+  ],
+  "R1.topological_order": [
+   "R1.topological_order"
+  ],
+  "R1.tracking_accounts": [
+   "R1.tracking_accounts"
+  ],
+  "R1.venn_counting": [
+   "R1.venn_counting"
+  ]
+ },
+ "clusters_per_part": {
+  "A": [
+   "R1.activity_selection",
+   "R1.containers_queue_line",
+   "R1.containers_stack_piles",
+   "R1.graph_bipartite",
+   "R1.graph_shortest_route",
+   "R1.minimax_tree",
+   "R1.nim_xor",
+   "R1.order_compare",
+   "R1.order_extreme",
+   "R1.pet_owners",
+   "R1.stable_matching",
+   "R1.topological_order",
+   "R1.venn_counting"
+  ],
+  "B": [
+   "R1.attribute_rule",
+   "R1.boolean_lights",
+   "R1.categories_default_exceptions",
+   "R1.categories_follow",
+   "R1.conditional_chain",
+   "R1.conditional_threshold_rule",
+   "R1.elimination_bracket",
+   "R1.elimination_josephus",
+   "R1.equivalence_exchange_rates",
+   "R1.instant_runoff",
+   "R1.kinship_descendants",
+   "R1.knights_knaves",
+   "R1.mst_cost",
+   "R1.spatial_grid_walk",
+   "R1.swap_tracking",
+   "R1.temporal_critical_path",
+   "R1.temporal_interval_overlap",
+   "R1.tracking_accounts"
+  ]
+ },
+ "family_groups": {
+  "arrangement": "arrangement",
+  "boolean_state": "boolean_state+categories+equivalence+kinship+spatial+temporal",
+  "categories": "boolean_state+categories+equivalence+kinship+spatial+temporal",
+  "conditional": "conditional+rules",
+  "containers": "containers",
+  "culprit": "culprit+truth",
+  "elimination": "elimination",
+  "equivalence": "boolean_state+categories+equivalence+kinship+spatial+temporal",
+  "games": "games",
+  "graph": "graph+order",
+  "kinship": "boolean_state+categories+equivalence+kinship+spatial+temporal",
+  "matching": "matching",
+  "network": "network",
+  "order": "graph+order",
+  "rules": "conditional+rules",
+  "scheduling": "scheduling",
+  "sets": "sets",
+  "spatial": "boolean_state+categories+equivalence+kinship+spatial+temporal",
+  "temporal": "boolean_state+categories+equivalence+kinship+spatial+temporal",
+  "tracking": "tracking",
+  "truth": "culprit+truth",
+  "voting": "voting"
+ },
+ "not_registered": {},
+ "partition": {
+  "arrangement": "A",
+  "boolean_state+categories+equivalence+kinship+spatial+temporal": "B",
+  "conditional+rules": "B",
+  "containers": "A",
+  "culprit+truth": "B",
+  "elimination": "B",
+  "games": "A",
+  "graph+order": "A",
+  "matching": "A",
+  "network": "B",
+  "scheduling": "A",
+  "sets": "A",
+  "tracking": "B",
+  "voting": "B"
+ },
+ "superseded": {
+  "R1.boolean_lights": "R1.boolean_lights_r2",
+  "R1.categories_default_exceptions": "R1.categories_default_exceptions_r2",
+  "R1.categories_follow": "R1.categories_follow_r2",
+  "R1.conditional_threshold_rule": "R1.conditional_threshold_rule_r2",
+  "R1.containers_queue_line": "R1.containers_queue_line_r2",
+  "R1.containers_stack_piles": "R1.containers_stack_piles_r2",
+  "R1.elimination_bracket": "R1.elimination_bracket_r2",
+  "R1.equivalence_classes": "R1.equivalence_classes_r2",
+  "R1.graph_shortest_route": "R1.graph_shortest_route_r2",
+  "R1.kinship_ancestor": "R1.kinship_ancestor_r2",
+  "R1.kinship_descendants": "R1.kinship_descendants_r2",
+  "R1.spatial_grid_walk": "R1.spatial_grid_walk_r2"
+ }
+}

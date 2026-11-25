@@ -1,0 +1,13 @@
+Shapes replaced by a revision (ids ending _r2) or not registered; their fixtures, if present, are from the earlier shape and must NOT be solved.
+R1.boolean_lights
+R1.categories_default_exceptions
+R1.categories_follow
+R1.conditional_threshold_rule
+R1.containers_queue_line
+R1.containers_stack_piles
+R1.elimination_bracket
+R1.equivalence_classes
+R1.graph_shortest_route
+R1.kinship_ancestor
+R1.kinship_descendants
+R1.spatial_grid_walk
