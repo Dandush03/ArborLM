@@ -124,7 +124,7 @@ def render(rec: Mapping[str, Any], gate_record: Mapping[str, Any], stats_by_cell
     for key, st in stats_by_cell.items():
         lines = []
         for sk, v in st.items():
-            if sk in ("rep", "order"):
+            if not (isinstance(v, dict) and "panel" in v):  # lead decision 1: top-level scalars (rep, order, id, label, oracle_line, pid, task_seconds, worker) are not per-store mappings
                 continue
             lines.append(f"{key} {sk} panel={v['panel']} protected_stage={v['protected_stage']} reads={v['reads']} marker_reads={v['marker_reads']} gates={v['gates']}")
             for kind in ("words", "markers"):
