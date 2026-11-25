@@ -1,0 +1,9 @@
+kind=all   class=cannot be determined   items=  244 plantings=   700 per item=2.87
+kind=all   class=no                     items=  250 plantings=  1875 per item=7.50
+kind=all   class=yes                    items=  265 plantings=   812 per item=3.06
+kind=none  class=cannot be determined   items=  211 plantings=   710 per item=3.36
+kind=none  class=no                     items=  231 plantings=   541 per item=2.34
+kind=none  class=yes                    items=  240 plantings=  1520 per item=6.33
+kind=some  class=cannot be determined   items=  209 plantings=   661 per item=3.16
+kind=some  class=no                     items=  220 plantings=  1450 per item=6.59
+kind=some  class=yes                    items=  230 plantings=   544 per item=2.37

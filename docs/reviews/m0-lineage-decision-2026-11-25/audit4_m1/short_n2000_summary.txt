@@ -1,0 +1,137 @@
+lineage | max|effect| (rule, level) | per-level max signed effect of non-excluded rules | excluded-procedure rules with |effect|>0.10
+M1.ages_r3 | +0.022 (a4:sum_over_k_plus_1, L6) | -0.015 -0.012 +0.011 +0.015 +0.022 -0.016 +0.022 | 
+M1.arithmetic_series_r3 | -0.002 (a4:echo_pos, L1) | -0.001 -0.002 -0.001 -0.002 -0.001 -0.001 -0.001 | 
+M1.average_missing_r3 | +0.014 (a4:target_mean, L2) | +0.011 +0.004 +0.014 -0.007 +0.007 +0.007 -0.004 | 
+M1.binomial_choose_r3 (NOT REGISTERED) | +0.131 (im:product_of_x_times_j, L0) | +0.131 +0.127 +0.074 +0.021 +0.015 +0.009 +0.010 | 
+M1.change_ways_r3 | -0.042 (im:T_over_min_plus_1, L0) | -0.042 -0.010 -0.011 -0.006 +0.007 +0.004 -0.011 | 
+M1.clock_duration_r3 | -0.011 (im:span_incl_waits, L4) | -0.007 -0.005 -0.005 -0.006 -0.011 -0.005 -0.006 | 
+M1.coins_r3 | +0.160 (a4:hi_is_value_over_hi_minus_1, L0) | +0.160 +0.140 +0.128 +0.114 +0.110 +0.087 +0.076 | 
+M1.consecutive_r3 | -0.001 (a4:echo_pos_offset, L0) | -0.001 +0.000 -0.001 +0.000 +0.001 +0.001 +0.001 | {'im:mean_plus_step': ['L0:+0.510', 'L1:+0.507', 'L2:+0.129', 'L3:+0.123']}
+M1.crt_congruence_r3 | +0.054 (im:largest_mod_remainder, L0) | +0.054 +0.051 +0.041 +0.053 +0.046 +0.042 +0.043 | 
+M1.digit_puzzle_r3 (NOT REGISTERED) | +0.277 (im:smallest_meeting_all_but_first, L0) | +0.277 +0.113 +0.137 +0.220 +0.220 +0.167 +0.220 | 
+M1.division_counting_r3 | -0.067 (a4:echo_pos, L2) | -0.058 -0.058 -0.067 -0.045 -0.043 -0.050 -0.046 | {'im:k_minus_remainder_ignores_exact_fit': ['L0:+0.405', 'L1:+0.422', 'L2:+0.396', 'L3:+0.447', 'L4:+0.428', 'L5:+0.442', 'L6:+0.453']}
+M1.finite_differences_r3 | -0.003 (a4:echo_pos, L4) | +0.002 -0.002 -0.001 -0.001 -0.003 -0.001 -0.001 | {'im:next_term_when_asked_later': ['L0:+0.508', 'L1:+0.513', 'L2:+0.497', 'L3:+0.502', 'L4:+0.511']}
+M1.fraction_remainder_r3 | +0.021 (a4:spends_not_left, L3) | +0.011 +0.017 +0.015 +0.021 +0.017 +0.017 +0.019 | 
+M1.gcd_lcm_r3 | +0.024 (im:min_difference, L1) | -0.022 +0.024 +0.022 -0.017 -0.023 -0.020 -0.021 | {'im:product_over_gcd_of_all': ['L0:+0.491', 'L1:+0.492', 'L2:+0.499'], 'a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)': ['L3:+0.475', 'L4:+0.478', 'L5:+0.494', 'L6:+0.478'], 'a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)': ['L3:+0.491', 'L4:+0.476', 'L5:+0.466', 'L6:+0.481']}
+M1.grid_perimeter_r3 | -0.087 (a4:echo_pos, L0) | -0.087 -0.085 -0.081 -0.072 -0.068 -0.072 -0.051 | 
+M1.inclusion_exclusion_r3 | -0.034 (im:any_ignore_overlap, L0) | -0.034 -0.028 -0.017 -0.009 -0.008 +0.009 -0.007 | 
+M1.last_digit_power_r3 | +0.079 (im:exp_mod_p, L0) | +0.079 +0.062 +0.013 +0.017 +0.017 -0.012 +0.012 | {'im:fermat_misapplied_e_mod_p_plus_1': ['L0:+0.105']}
+M1.linear_equation_r3 | -0.015 (im:ignore_constant, L0) | -0.015 -0.013 -0.013 +0.011 +0.007 +0.006 +0.006 | 
+M1.median_list_r3 | +0.089 (im:mode_value, L0) | +0.089 +0.048 +0.068 +0.042 +0.051 +0.043 +0.030 | 
+M1.mixture_r3 | +0.033 (a4:swapped_weights, L3) | +0.021 +0.030 +0.025 +0.033 +0.025 +0.025 +0.031 | 
+M1.mode_tally_r3 | +0.382 (a4:mode_by_visible_ask, L1) | +0.377 +0.382 +0.371 +0.376 +0.372 +0.367 +0.376 | 
+M1.painted_cube_r3 | +0.007 (a4:mode_by_visible_ask, L1) | -0.005 +0.007 -0.005 +0.004 -0.002 -0.004 +0.002 | 
+M1.percent_change_r3 | +0.006 (im:first_step_only, L3) | -0.003 -0.002 +0.004 +0.006 +0.005 -0.003 +0.004 | 
+M1.pigeonhole_worst_case_r3 | +0.287 (a4:all_other_colours_then_k, L1) | +0.273 +0.287 +0.275 +0.252 +0.229 +0.243 +0.257 | 
+M1.pipes_work_r3 | -0.032 (im:ignore_drain, L0) | -0.032 -0.022 -0.020 +0.024 +0.031 +0.025 +0.026 | 
+M1.prime_factors_r3 | -0.072 (im:omega_plus_one, L0) | -0.072 -0.059 -0.054 -0.057 -0.049 +0.051 +0.056 | {'im:largest_le_sqrt': ['L0:+0.141', 'L1:+0.166', 'L2:+0.169', 'L3:+0.176', 'L4:+0.194', 'L5:+0.193', 'L6:+0.196']}
+M1.pythagoras_r3 (NOT REGISTERED) | +0.257 (im:memorised_16_scaled, L0) | +0.257 +0.113 +0.072 +0.051 +0.046 +0.032 +0.028 | 
+M1.quadratic_area_r3 | -0.006 (im:quarter_perimeter, L1) | +0.004 -0.006 -0.004 -0.004 -0.003 +0.003 -0.004 | 
+M1.ratio_share_r3 | +0.051 (a4:equal_split, L1) | +0.043 +0.051 +0.026 +0.024 +0.021 +0.020 +0.016 | {'im:largest_share': ['L0:+0.522', 'L1:+0.542', 'L2:+0.365', 'L3:+0.346', 'L4:+0.273', 'L5:+0.278', 'L6:+0.278'], 'im:smallest_share': ['L0:+0.513', 'L1:+0.501', 'L2:+0.366', 'L3:+0.372', 'L4:+0.277', 'L5:+0.269', 'L6:+0.276']}
+M1.rectangle_r3 | +0.015 (a4:echo_pos_offset, L2) | +0.010 +0.011 +0.015 +0.013 +0.009 +0.012 +0.011 | 
+M1.recurrence_iterate_r3 | +0.005 (a4:echo_pos_offset, L0) | +0.005 -0.002 +0.000 -0.001 +0.000 -0.001 +0.000 | 
+M1.shopping_r3 | +0.029 (im:ignore_counts, L0) | +0.029 +0.002 +0.001 +0.004 +0.004 -0.002 -0.003 | 
+M1.slot_permutations_r3 | +0.098 (a4:mode_by_visible_ask, L6) | +0.067 +0.078 +0.067 +0.066 +0.060 +0.080 +0.098 | {'im:ignore_first_rule': ['L0:+0.150', 'L1:+0.150', 'L2:+0.163', 'L3:+0.150', 'L4:+0.160', 'L5:+0.163', 'L6:+0.119'], 'im:parity_fraction_of_total': ['L0:+0.150', 'L1:+0.150', 'L2:+0.163', 'L3:+0.150', 'L4:+0.160', 'L5:+0.163', 'L6:+0.119']}
+M1.speed_distance_r3 | +0.035 (a4:mean_speed_rounded, L3) | +0.026 +0.017 +0.034 +0.035 +0.025 +0.022 +0.019 | 
+M1.tiered_pricing | -0.007 (im:all_at_first_rate, L3) | -0.002 +0.002 +0.001 -0.007 -0.005 -0.003 -0.003 | 
+M1.tip_split_r3 | -0.001 (a4:echo_pos, L0) | -0.001 +0.000 -0.001 -0.001 -0.001 -0.001 +0.000 | 
+
+Distribution over the 33 registered candidates (max |effect| over levels, non-excluded rules):
+  <=0.10: 30  
+  0.10-0.15: 0  []
+  0.15-0.25: 1  ['coins_r3']
+  >0.25: 2  ['mode_tally_r3', 'pigeonhole_worst_case_r3']
+
+Rules scoring EXACTLY 0.000 at every level on >= 200 applicable items (by-construction zeros; R-13):
+  M1.ages_r3: im:ignore_years (applicable items over 7 levels: 14000)
+  M1.ages_r3: im:wrong_person (applicable items over 7 levels: 14000)
+  M1.ages_r3: im:years_once (applicable items over 7 levels: 14000)
+  M1.arithmetic_series_r3: im:last_day_only (applicable items over 7 levels: 14000)
+  M1.arithmetic_series_r3: im:no_growth (applicable items over 7 levels: 14000)
+  M1.arithmetic_series_r3: im:off_by_one_days (applicable items over 7 levels: 14000)
+  M1.arithmetic_series_r3: im:off_by_one_plus (applicable items over 7 levels: 14000)
+  M1.binomial_choose_r3: im:sum_not_product (applicable items over 7 levels: 14000)
+  M1.clock_duration_r3: im:span_incl_waits (applicable items over 7 levels: 14000)
+  M1.coins_r3: im:value_over_low (applicable items over 7 levels: 14000)
+  M1.consecutive_r3: a4:middle_or_mean (applicable items over 7 levels: 11036)
+  M1.consecutive_r3: im:mean_rounded (applicable items over 7 levels: 14000)
+  M1.finite_differences_r3: im:linear_extrapolation (applicable items over 7 levels: 14000)
+  M1.finite_differences_r3: im:next_term_only (applicable items over 7 levels: 6838)
+  M1.fraction_remainder_r3: a4:n_minus_n_over_a_minus_n_over_b (applicable items over 7 levels: 14000)
+  M1.fraction_remainder_r3: im:both_of_original (applicable items over 7 levels: 14000)
+  M1.fraction_remainder_r3: im:first_step_only (applicable items over 7 levels: 14000)
+  M1.gcd_lcm_r3: a4:smallest_pairwise_gcd (applicable items over 7 levels: 3988)
+  M1.gcd_lcm_r3: im:gcd_of_first_two_printed (applicable items over 7 levels: 3988)
+  M1.gcd_lcm_r3: im:gcd_of_min_and_max (applicable items over 7 levels: 3988)
+  M1.gcd_lcm_r3: im:gcd_of_two_largest (applicable items over 7 levels: 3988)
+  M1.gcd_lcm_r3: im:gcd_of_two_smallest (applicable items over 7 levels: 3988)
+  M1.gcd_lcm_r3: im:lcm_of_first_two_printed (applicable items over 7 levels: 4012)
+  M1.gcd_lcm_r3: im:lcm_of_two_largest (applicable items over 7 levels: 4012)
+  M1.gcd_lcm_r3: im:max_value (applicable items over 7 levels: 7063)
+  M1.gcd_lcm_r3: im:min_value (applicable items over 7 levels: 6937)
+  M1.gcd_lcm_r3: im:product (applicable items over 7 levels: 7063)
+  M1.mixture_r3: a4:packing_added_once_total (applicable items over 7 levels: 8000)
+  M1.mixture_r3: im:ignore_packing (applicable items over 7 levels: 8000)
+  M1.mixture_r3: im:price_of_larger_weight (applicable items over 7 levels: 14000)
+  M1.mode_tally_r3: a4:distinct_values_minus_1 (applicable items over 7 levels: 7087)
+  M1.mode_tally_r3: im:n_minus_ceil_n_over_distinct (applicable items over 7 levels: 7087)
+  M1.painted_cube_r3: a4:inner_block (applicable items over 7 levels: 2295)
+  M1.pigeonhole_worst_case_r3: a4:sum_minus_max_plus_1 (applicable items over 7 levels: 6946)
+  M1.pigeonhole_worst_case_r3: im:k_times_colours (applicable items over 7 levels: 7054)
+  M1.pigeonhole_worst_case_r3: im:max_plus_1 (applicable items over 7 levels: 6946)
+  M1.pigeonhole_worst_case_r3: im:sum_minus_max_plus_1 (applicable items over 7 levels: 6946)
+  M1.pigeonhole_worst_case_r3: im:sum_minus_min (applicable items over 7 levels: 6946)
+  M1.pipes_work_r3: im:ignore_drain (applicable items over 7 levels: 8000)
+  M1.prime_factors_r3: im:omega_plus_one (applicable items over 7 levels: 3482)
+  M1.prime_factors_r3: im:smallest_prime (applicable items over 7 levels: 3452)
+  M1.pythagoras_r3: im:hyp_minus_given (applicable items over 7 levels: 5663)
+  M1.pythagoras_r3: im:legs_plus_max (applicable items over 7 levels: 2785)
+  M1.pythagoras_r3: im:max_plus_half_min (applicable items over 7 levels: 5552)
+  M1.pythagoras_r3: im:sum_legs (applicable items over 7 levels: 5552)
+  M1.pythagoras_r3: im:twice_legs (applicable items over 7 levels: 2785)
+  M1.quadratic_area_r3: im:quarter_perimeter (applicable items over 7 levels: 3519)
+  M1.quadratic_area_r3: im:sqrt_area (applicable items over 7 levels: 10483)
+  M1.quadratic_area_r3: im:sqrt_half_minus_half_d (applicable items over 7 levels: 3517)
+  M1.quadratic_area_r3: im:sqrt_half_sum (applicable items over 7 levels: 3517)
+  M1.quadratic_area_r3: im:sqrt_minus_half_d (applicable items over 7 levels: 6964)
+  M1.rectangle_r3: im:square (applicable items over 7 levels: 14000)
+  M1.rectangle_r3: im:width_only (applicable items over 7 levels: 4234)
+  M1.recurrence_iterate_r3: im:next_term (applicable items over 7 levels: 14000)
+  M1.recurrence_iterate_r3: im:previous_term (applicable items over 7 levels: 14000)
+  M1.shopping_r3: im:one_item_only (applicable items over 7 levels: 14000)
+  M1.slot_permutations_r3: a4:first_then_any_ignoring_overlap_last (applicable items over 7 levels: 6958)
+  M1.slot_permutations_r3: im:swap_repeat_rule (applicable items over 7 levels: 14000)
+  M1.speed_distance_r3: im:first_leg_only (applicable items over 7 levels: 9939)
+  M1.tiered_pricing: im:all_at_first_rate (applicable items over 7 levels: 10815)
+  M1.tiered_pricing: im:all_at_last_rate (applicable items over 7 levels: 10815)
+  M1.tip_split_r3: a4:tip_only_per_person (applicable items over 7 levels: 14000)
+  M1.tip_split_r3: im:ignore_tip (applicable items over 7 levels: 14000)
+  M1.tip_split_r3: im:no_split (applicable items over 7 levels: 14000)
+
+Within-applicable rates of selected rules (rate, applicable n) per level:
+  M1.coins_r3 a4:hi_is_value_over_hi_minus_1: all:0.194 all:0.171 all:0.159 all:0.135 all:0.131 all:0.104 all:0.108
+  M1.coins_r3 im:value_over_high: all:0.015 all:0.013 all:0.009 all:0.015 all:0.011 all:0.005 all:0.011
+  M1.mode_tally_r3 a4:n_minus_4: 0.338/1008 0.309/1030 0.341/1048 0.357/1009 0.309/976 0.324/1012 0.312/1004
+  M1.mode_tally_r3 a4:n_minus_5: 0.340/1008 0.342/1030 0.313/1048 0.319/1009 0.366/976 0.337/1012 0.337/1004
+  M1.mode_tally_r3 a4:n_minus_6: 0.321/1008 0.349/1030 0.346/1048 0.324/1009 0.325/976 0.339/1012 0.352/1004
+  M1.mode_tally_r3 im:first_repeated: 0.165/992 0.148/970 0.167/952 0.178/991 0.145/1024 0.142/988 0.148/996
+  M1.mode_tally_r3 im:most_common_first_half: 0.218/992 0.207/970 0.204/952 0.235/991 0.231/1024 0.228/988 0.219/996
+  M1.pigeonhole_worst_case_r3 a4:all_other_colours_then_k: 0.562/1024 0.592/1002 0.558/1002 0.518/1011 0.466/990 0.484/1011 0.514/1014
+  M1.pigeonhole_worst_case_r3 im:ignore_caps: 0.192/1024 0.160/1002 0.080/1002 0.081/1011 0.045/990 0.057/1011 0.045/1014
+  M1.pigeonhole_worst_case_r3 a4:k_minus_1_times_colours_plus_1: 0.192/1024 0.160/1002 0.080/1002 0.081/1011 0.045/990 0.057/1011 0.045/1014
+  M1.gcd_lcm_r3 im:gcd_of_two_smallest: 0.000/0 0.000/0 0.000/0 0.000/1016 0.000/998 0.000/971 0.000/1003
+  M1.gcd_lcm_r3 im:lcm_of_two_largest: 0.000/0 0.000/0 0.000/0 0.000/984 0.000/1002 0.000/1029 0.000/997
+  M1.gcd_lcm_r3 a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule): 0.000/0 0.000/0 0.000/0 1.000/984 1.000/1002 1.000/1029 1.000/997
+  M1.last_digit_power_r3 im:exp_last_digit: all:0.107 all:0.104 all:0.038 all:0.044 all:0.043 all:0.036 all:0.035
+  M1.last_digit_power_r3 im:fermat_misapplied_e_mod_p_plus_1: all:0.191 all:0.173 all:0.058 all:0.043 all:0.057 all:0.041 all:0.032
+  M1.slot_permutations_r3 im:ignore_first_rule: all:0.198 all:0.195 all:0.212 all:0.199 all:0.203 all:0.203 all:0.173
+  M1.slot_permutations_r3 a4:no_overlap_correction: 0.208/1031 0.256/958 0.231/1004 0.229/998 0.209/984 0.239/989 0.229/994
+  M1.median_list_r3 im:mode_value: all:0.093 all:0.054 all:0.070 all:0.048 all:0.058 all:0.047 all:0.040
+  M1.prime_factors_r3 im:largest_le_sqrt: 0.869/489 0.904/498 0.935/477 0.953/490 0.968/500 0.978/492 0.992/506
+  M1.speed_distance_r3 a4:mean_speed_rounded: all:nan all:nan 0.096/809 0.104/842 0.074/824 0.075/778 0.064/808
+  M1.speed_distance_r3 im:mean_of_speeds: all:nan all:nan 0.038/809 0.045/842 0.016/824 0.018/778 0.015/808
+
+Mode by visible ask vs base (rate - base) per level:
+  M1.mode_tally_r3: +0.377 +0.382 +0.371 +0.376 +0.372 +0.367 +0.376  base 0.029 0.0235 0.029 0.0235 0.0215 0.032 0.0235
+  M1.prime_factors_r3: +0.056 +0.050 +0.039 +0.045 +0.037 +0.051 +0.056  base 0.072 0.0595 0.0545 0.057 0.0485 0.0475 0.0555
+  M1.slot_permutations_r3: +0.067 +0.057 +0.050 +0.039 +0.049 +0.080 +0.098  base 0.0475 0.0445 0.049 0.0485 0.0425 0.04 0.0535

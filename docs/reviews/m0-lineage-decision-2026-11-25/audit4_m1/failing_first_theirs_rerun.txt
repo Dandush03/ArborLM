@@ -1,0 +1,42 @@
+no_retry[M1.finite_differences]: FAILS-ON-OLD -> [0, 1, 2, 3, 4, 5, 6]
+no_retry[M1.recurrence_iterate]: FAILS-ON-OLD -> [0, 1, 2, 3, 4, 5, 6]
+no_retry[M1.tiered_pricing]: would pass on old -> []
+no_retry[M1.shopping]: would pass on old -> []
+no_retry[M1.speed_distance]: FAILS-ON-OLD -> [2, 3, 4, 5, 6]
+no_retry[M1.mixture]: FAILS-ON-OLD -> [0, 1, 2, 3, 4, 5, 6]
+no_retry[M1.percent_change]: FAILS-ON-OLD -> [0, 1, 2, 3, 4, 5, 6]
+no_retry[M1.tip_split]: FAILS-ON-OLD -> [0, 1, 2, 3, 4, 5, 6]
+no_retry[M1.average_missing]: FAILS-ON-OLD -> [4, 5, 6]
+no_retry[M1.clock_duration]: FAILS-ON-OLD -> [3, 4, 5, 6]
+no_retry[M1.fraction_remainder]: would pass on old -> []
+states_format[M1.ages]: FAILS-ON-OLD -> ["L0: no stated answer format: ' is 3 times as old as Esme. In 7 years, their ages will add up to 90. How old is Esme now?'", "L1: no stated answer format: 'is 4 times as old as Hugo. In 9 years, their ages will add up to 128. How
+states_format[M1.arithmetic_series]: FAILS-ON-OLD -> ["L0: no stated answer format: 'e each day than on the day before. How many dollars has Wanda saved in total after 4 days?'", "L1: no stated answer format: 'e each day than on the day before. How many dollars has Quinn saved in to
+states_format[M1.average_missing]: FAILS-ON-OLD -> ["L0: no stated answer format: 'ests. What score is needed on the next test to make the mean of all 4 tests exactly 76.75?'", "L1: no stated answer format: 'ests. What score is needed on the next test to make the mean of all 4 tes
+states_format[M1.clock_duration]: FAILS-ON-OLD -> ["L0: no stated answer format: 'ow many minutes in total is the traveller actually on the move (not waiting between legs)?'", "L1: no stated answer format: 'ow many minutes in total is the traveller actually on the move (not waiti
+states_format[M1.coins]: FAILS-ON-OLD -> ["L0: no stated answer format: 'nt coins. It holds 18 coins worth 625 cents in all. How many 25-cent coins are in the jar?'", "L1: no stated answer format: 'nt coins. It holds 14 coins worth 475 cents in all. How many 50-cent coin
+states_format[M1.consecutive]: FAILS-ON-OLD -> ["L0: no stated answer format: 'The sum of 3 consecutive integers is 33. What is the largest of them?'", "L1: no stated answer format: 'The sum of 3 consecutive integers is 453. What is the largest of them?'", "L2: no stated answe
+states_format[M1.fraction_remainder]: FAILS-ON-OLD -> ["L0: no stated answer format: 't on books, then one sixth of what is left on lunch. How many dollars does Dara have left?'", "L1: no stated answer format: 't on books, then one fifth of what is left on lunch. How many dollars doe
+states_format[M1.linear_equation]: FAILS-ON-OLD -> ["L0: no stated answer format: 'I think of a number. Multiplying it by 2 and then adding 58 gives 102. What is my number?'", "L1: no stated answer format: 'hink of a number. Multiplying it by 2 and then subtracting 2 gives -24. Wh
+states_format[M1.mixture]: FAILS-ON-OLD -> ["L0: no stated answer format: 'ting 12 dollars per kilogram. What is the cost of one kilogram of the mixture, in dollars?'", "L1: no stated answer format: 'sting 3 dollars per kilogram. What is the cost of one kilogram of the mix
+states_format[M1.percent_change]: FAILS-ON-OLD -> ["L0: no stated answer format: 'cent, each change applied to the price just before it. What is the final price in dollars?'", "L1: no stated answer format: 'cent, each change applied to the price just before it. What is the final 
+states_format[M1.pipes_work]: FAILS-ON-OLD -> ["L0: no stated answer format: 'adds 7 litres every minute. How many minutes does it take for the tank to hold 169 litres?'", "L1: no stated answer format: 'adds 7 litres every minute. How many minutes does it take for the tank to
+states_format[M1.ratio_share]: FAILS-ON-OLD -> ["L0: no stated answer format: ' Ned share 126 stickers in the ratio 3:3 (in that order). How many stickers does Yves get?'", "L1: no stated answer format: 'nd Ivy share 36 stickers in the ratio 4:5 (in that order). How many stick
+states_format[M1.rectangle]: FAILS-ON-OLD -> ["L0: no stated answer format: '2 centimetres and its length is 3 times its width. What is its area in square centimetres?'", "L1: no stated answer format: '4 centimetres and its length is 3 times its width. What is its area in sq
+states_format[M1.shopping]: FAILS-ON-OLD -> ["L0: no stated answer format: 'ndles at $0.67 each. Fern pays with $10.00. How many dollars of change does Fern get back?'", "L1: no stated answer format: 'ndles at $0.82 each. Finn pays with $10.00. How many dollars of change do
+states_format[M1.speed_distance]: FAILS-ON-OLD -> ["L0: no stated answer format: 'drives for 1 hours at 31 kilometres per hour. How many kilometres does it travel in total?'", "L1: no stated answer format: 'drives for 5 hours at 70 kilometres per hour. How many kilometres does it
+states_format[M1.tip_split]: FAILS-ON-OLD -> ["L0: no stated answer format: 'bill and splits the total equally between 2 people. How many dollars does each person pay?'", "L1: no stated answer format: 'bill and splits the total equally between 3 people. How many dollars does
+grid_wording[M1.grid_perimeter_r2]: FAILS-ON-OLD -> ["the ambiguous phrase 'squares that do not touch another square' is present"]
+digit_both_readings[M1.digit_puzzle_r2]: FAILS-ON-OLD -> ['exactly once: candidates [] for key 998', 'exactly once: candidates [] for key 995', 'exactly once: candidates [] for key 363', 'exactly once: candidates [] for key 177', 'exactly once: candidates [] for key 232', 'exactly once:
+rule<=0.08[M1.mixture:unweighted_mean]: FAILS-ON-OLD -> ['L0:0.277', 'L1:0.317', 'L2:0.272', 'L3:0.303', 'L4:0.317', 'L5:0.278', 'L6:0.288']
+rule<=0.06[M1.coins:value_over_high]: FAILS-ON-OLD -> ['L0:0.225', 'L1:0.21', 'L2:0.19', 'L3:0.177', 'L4:0.135', 'L5:0.168', 'L6:0.133']
+rule<=0.06[M1.crt_congruence_r2:largest_mod_remainder]: FAILS-ON-OLD -> ['L0:0.118', 'L1:0.132', 'L2:0.093']
+rule<=0.05[M1.speed_distance:sum_speeds_x_mean_hours]: FAILS-ON-OLD -> ['L0:0.22', 'L1:0.178']
+rule<=0.12[M1.pigeonhole_worst_case_r2:ignore_caps]: FAILS-ON-OLD -> ['L0:0.208', 'L1:0.205', 'L2:0.132', 'L3:0.138', 'L6:0.145']
+rule<=0.01[M1.gcd_lcm_r2:gcd_of_two_smallest]: FAILS-ON-OLD -> ['L3:0.43', 'L4:0.385', 'L5:0.33', 'L6:0.378']
+rule<=0.12[M1.pythagoras_r2:memorised_16_scaled]: FAILS-ON-OLD -> ['L0:0.8', 'L1:0.652', 'L2:0.625', 'L3:0.625', 'L4:0.597', 'L5:0.557', 'L6:0.557']
+base<=0.06[M1.mode_tally_r2]: FAILS-ON-OLD -> ['L0:0.121', 'L1:0.131', 'L2:0.088', 'L3:0.077', 'L6:0.061']
+base<=0.12[M1.grid_perimeter_r2]: FAILS-ON-OLD -> ['L0:0.283', 'L1:0.23', 'L2:0.179', 'L3:0.173', 'L4:0.168', 'L5:0.133', 'L6:0.152']
+base<=0.1[M1.power_remainder_r2]: FAILS-ON-OLD -> ['L0:0.151', 'L1:0.168']
+shape_mix[M1.gcd_lcm]: FAILS-ON-OLD -> ['L0: gcd has share 0.61', 'L0: lcm has share 0.39', 'L1: gcd has share 0.69', 'L1: lcm has share 0.31', 'L2: gcd has share 0.67', 'L2: lcm has share 0.33', 'L3: gcd has share 0.01', 'L3: lcm has share 0.99', 'L4: gcd has share 0.
+shape_mix[M1.division_counting]: FAILS-ON-OLD -> ["L0: values ['crates', 'empty_seats', 'multiples'] != ['empty_seats', 'pallets']", "L1: values ['crates', 'empty_seats', 'multiples'] != ['empty_seats', 'pallets']", "L2: values ['crates', 'empty_seats', 'multiples'] != ['empty_s
+shape_mix[M1.pigeonhole_worst_case]: FAILS-ON-OLD -> ['L0: all has share 0.68', 'L0: same has share 0.32', 'L1: all has share 0.66', 'L1: same has share 0.34', 'L2: all has share 0.58', 'L2: same has share 0.42', 'L3: all has share 0.60', 'L3: same has share 0.40', 'L4: all has shar

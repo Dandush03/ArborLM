@@ -1,0 +1,37 @@
+M1.ages_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.arithmetic_series_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.average_missing_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.binomial_choose_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.change_ways_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.clock_duration_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.coins_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.consecutive_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.crt_congruence_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.digit_puzzle_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'contains_means_exactly_one': ['0/300', '0/300', '0/300', '0/300', '0/300', '0/300', '0/300']} nofmt 0
+M1.division_counting_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.finite_differences_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.fraction_remainder_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.gcd_lcm_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.grid_perimeter_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'outer_boundary_only_holes_excluded': ['18/300', '40/300', '41/300', '63/300', '80/300', '103/300', '94/300'], 'sides_of_isolated_squares': ['300/300', '300/300', '300/300', '300/300', '300/300', '300/300', '300/300']} nofmt 0
+M1.inclusion_exclusion_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'both_excludes_all_three': ['0/0', '0/0', '0/0', '300/300', '300/300', '300/300', '300/300']} nofmt 0
+M1.last_digit_power_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.linear_equation_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.median_list_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.mixture_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.mode_tally_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'distinct_other_values': ['145/145', '138/138', '150/150', '151/151', '142/142', '135/135', '166/166']} nofmt 0
+M1.painted_cube_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.percent_change_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'percents_of_original_added': ['300/300', '300/300', '300/300', '299/300', '300/300', '298/300', '299/300']} nofmt 0
+M1.pigeonhole_worst_case_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.pipes_work_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.prime_factors_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.pythagoras_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.quadratic_area_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.ratio_share_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.rectangle_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.recurrence_iterate_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.shopping_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.slot_permutations_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'no_leading_zero_when_unstated': ['63/111', '51/94', '47/101', '47/104', '58/105', '57/109', '59/116']} nofmt 0
+M1.speed_distance_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {'mean_of_speeds': ['0/0', '0/0', '105/117', '108/120', '114/123', '104/111', '112/121']} nofmt 0
+M1.tiered_pricing mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+M1.tip_split_r3 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt(changed/applicable) {} nofmt 0
+TOTAL items 75600 mismatch 0 solver_errors 0

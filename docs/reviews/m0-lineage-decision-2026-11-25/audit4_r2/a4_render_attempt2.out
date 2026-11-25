@@ -1,0 +1,424 @@
+== R2.binary_search_trace L0 [sum] type=number
+Q: A sorted list of 18 numbers (smallest first) is searched for 51. The positions are numbered 1 to 18. The search keeps a lower position (first 1) and an upper position (first 18). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 3, 4, 15, 24, 28, 34, 35, 39, 44, 46, 48, 50, 51, 52, 62, 63, 67, 70. What is the sum of all the numbers the search looks at (a number looked at twice would count twice)?
+A: 245
+
+== R2.binary_search_trace L0 [values] type=list
+Q: A sorted list of 17 numbers (smallest first) is searched for 20. The positions are numbered 1 to 17. The search keeps a lower position (first 1) and an upper position (first 17). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 1, 4, 7, 9, 12, 19, 20, 25, 26, 32, 39, 46, 50, 51, 61, 62, 65. Which numbers does the search look at, in order? Give them separated by commas.
+A: 26, 9, 19, 20
+
+== R2.binary_search_trace L6 [sum] type=number
+Q: A sorted list of 42 numbers (smallest first) is searched for 73. The positions are numbered 1 to 42. The search keeps a lower position (first 1) and an upper position (first 42). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 1, 4, 6, 10, 14, 16, 18, 23, 25, 29, 38, 40, 44, 45, 51, 55, 56, 63, 66, 78, 82, 87, 90, 94, 97, 98, 105, 108, 109, 110, 111, 121, 123, 132, 138, 139, 140, 141, 143, 153, 163, 164. What is the sum of all the numbers the search looks at (a number looked at twice would count twice)?
+A: 369
+
+== R2.binary_search_trace L6 [values] type=list
+Q: A sorted list of 40 numbers (smallest first) is searched for 114. The positions are numbered 1 to 40. The search keeps a lower position (first 1) and an upper position (first 40). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 2, 6, 7, 12, 18, 20, 21, 26, 29, 31, 40, 43, 45, 46, 49, 50, 54, 59, 73, 74, 75, 78, 87, 88, 89, 92, 103, 105, 106, 109, 117, 131, 135, 136, 149, 151, 153, 157, 158, 159. Which numbers does the search look at, in order? Give them separated by commas.
+A: 74, 109, 149, 131, 117
+
+== R2.bracket_match L0 [first_error] type=number
+Q: In the text [[()][](({}([{[{{}())]}]))}] (positions are counted from 1 at the left) every opening bracket should be closed by a closing bracket of the same kind, with brackets opened later closed earlier, but the text breaks this rule. Reading from the left, each closing bracket should match the opening bracket most recently opened and not yet closed. At which position is the first closing bracket that does not match?
+A: 21
+
+== R2.bracket_match L0 [match_all] type=list
+Q: In the correctly nested text ({}[()[][[(){{{}}}]]()])[]() (positions are counted from 1 at the left), every opening bracket is closed by a closing bracket of the same kind, and brackets opened later are closed earlier. For every opening curly bracket, in order from left to right, at which position is the closing bracket that belongs to it? Give the positions separated by commas, in the same order.
+A: 3, 18, 17, 16
+
+== R2.bracket_match L6 [match_all] type=list
+Q: In the correctly nested text {(([][])[{([{}{}()][]{})[](({}[()]))}])} (positions are counted from 1 at the left), every opening bracket is closed by a closing bracket of the same kind, and brackets opened later are closed earlier. For every opening curly bracket, in order from left to right, at which position is the closing bracket that belongs to it? Give the positions separated by commas, in the same order.
+A: 40, 37, 14, 16, 23, 30
+
+== R2.bracket_match L6 [first_error] type=number
+Q: In the text {[[{}[()]{()}]][](({[(){}[()[{()})]]})]} (positions are counted from 1 at the left) every opening bracket should be closed by a closing bracket of the same kind, with brackets opened later closed earlier, but the text breaks this rule. Reading from the left, each closing bracket should match the opening bracket most recently opened and not yet closed. At which position is the first closing bracket that does not match?
+A: 34
+
+== R2.bst_traversal L0 [pre] type=list
+Q: Numbers are put one at a time into a tree. The first number is the top of the tree. Every later number starts at the top and moves down: at each number it meets, it goes to the left if it is smaller and to the right if it is larger, and it stays in the first empty place it reaches. The numbers are put in this order: 41, 25, 80, 22, 18, 29, 97, 78. Read the tree like this: write a number, then everything in its left branch, then everything in its right branch (applied the same way inside each branch). Give the numbers in that reading order, separated by commas.
+A: 41, 25, 22, 18, 29, 80, 78, 97
+
+== R2.bst_traversal L0 [level] type=list
+Q: Numbers are put one at a time into a tree. The first number is the top of the tree. Every later number starts at the top and moves down: at each number it meets, it goes to the left if it is smaller and to the right if it is larger, and it stays in the first empty place it reaches. The numbers are put in this order: 95, 21, 84, 18, 7, 88, 99, 65. Read the tree like this: write the top number, then the numbers one step below it from left to right, then the numbers two steps below it from left to right, and so on. Give the numbers in that reading order, separated by commas.
+A: 95, 21, 99, 18, 84, 7, 65, 88
+
+== R2.bst_traversal L0 [post] type=list
+Q: Numbers are put one at a time into a tree. The first number is the top of the tree. Every later number starts at the top and moves down: at each number it meets, it goes to the left if it is smaller and to the right if it is larger, and it stays in the first empty place it reaches. The numbers are put in this order: 35, 66, 6, 80, 7, 57, 38, 48. Read the tree like this: write everything in a number's left branch, then everything in its right branch, then the number itself (applied the same way inside each branch). Give the numbers in that reading order, separated by commas.
+A: 7, 6, 48, 38, 57, 80, 66, 35
+
+== R2.bst_traversal L6 [level] type=list
+Q: Numbers are put one at a time into a tree. The first number is the top of the tree. Every later number starts at the top and moves down: at each number it meets, it goes to the left if it is smaller and to the right if it is larger, and it stays in the first empty place it reaches. The numbers are put in this order: 41, 15, 44, 35, 10, 50, 12, 87, 64, 8, 75, 82, 14, 37. Read the tree like this: write the top number, then the numbers one step below it from left to right, then the numbers two steps below it from left to right, and so on. Give the numbers in that reading order, separated by commas.
+A: 41, 15, 44, 10, 35, 50, 8, 12, 37, 87, 14, 64, 75, 82
+
+== R2.bst_traversal L6 [post] type=list
+Q: Numbers are put one at a time into a tree. The first number is the top of the tree. Every later number starts at the top and moves down: at each number it meets, it goes to the left if it is smaller and to the right if it is larger, and it stays in the first empty place it reaches. The numbers are put in this order: 40, 98, 12, 46, 87, 89, 73, 56, 22, 25, 28, 10, 71, 18. Read the tree like this: write everything in a number's left branch, then everything in its right branch, then the number itself (applied the same way inside each branch). Give the numbers in that reading order, separated by commas.
+A: 10, 18, 28, 25, 22, 12, 71, 56, 73, 89, 87, 46, 98, 40
+
+== R2.bst_traversal L6 [pre] type=list
+Q: Numbers are put one at a time into a tree. The first number is the top of the tree. Every later number starts at the top and moves down: at each number it meets, it goes to the left if it is smaller and to the right if it is larger, and it stays in the first empty place it reaches. The numbers are put in this order: 54, 53, 75, 77, 92, 68, 30, 47, 89, 66, 70, 24, 73, 59. Read the tree like this: write a number, then everything in its left branch, then everything in its right branch (applied the same way inside each branch). Give the numbers in that reading order, separated by commas.
+A: 54, 53, 30, 24, 47, 75, 68, 66, 59, 70, 73, 77, 92, 89
+
+== R2.cache_eviction L0 [evicted] type=text
+Q: A cache holds at most 4 items and starts empty. Items are requested one after another. If the requested item is already in the cache nothing is removed; if it is not, it is put into the cache, and if the cache was full the item that was requested longest ago (counting its latest request) is removed to make room. Requests in order: compass, orange, umbrella, lantern, drum, umbrella, umbrella, spoon, drum, orange, drum, candle, apple, orange, scarf, lantern, umbrella, umbrella, spoon, spoon, orange, lantern. Which items are removed from the cache to make room, in the order in which they are removed? Write the item names separated by commas.
+A: compass, orange, lantern, umbrella, spoon, drum, candle, apple, orange, scarf
+
+== R2.cache_eviction L0 [contents] type=text
+Q: A cache holds at most 3 items and starts empty. Items are requested one after another. If the requested item is already in the cache nothing is removed; if it is not, it is put into the cache, and if the cache was full the item that was loaded into the cache longest ago is removed to make room (a hit does not change the order). Requests in order: apple, quilt, scarf, ribbon, compass, compass, pencil, pencil, compass, pencil, pencil, compass, ribbon, scarf, compass, compass. After the last request, which items are in the cache, from the one loaded longest ago to the one loaded most recently? Write the item names separated by commas.
+A: compass, pencil, scarf
+
+== R2.cache_eviction L6 [evicted] type=text
+Q: A cache holds at most 4 items and starts empty. Items are requested one after another. If the requested item is already in the cache nothing is removed; if it is not, it is put into the cache, and if the cache was full the item that was loaded into the cache longest ago is removed to make room (a hit does not change the order). Requests in order: quilt, lantern, mirror, teapot, whistle, mirror, whistle, orange, violin, whistle, flute, whistle, violin, hammer, violin, hammer, hammer, flute, flute, ribbon, book, book, ribbon, book, book, book, mirror, hammer, mirror, whistle, mirror, hammer, book, flute, orange, violin, orange. Which items are removed from the cache to make room, in the order in which they are removed? Write the item names separated by commas.
+A: quilt, lantern, mirror, teapot, whistle, orange, violin, flute, hammer, ribbon, book, mirror, whistle
+
+== R2.cache_eviction L6 [contents] type=text
+Q: A cache holds at most 3 items and starts empty. Items are requested one after another. If the requested item is already in the cache nothing is removed; if it is not, it is put into the cache, and if the cache was full the item that was loaded into the cache longest ago is removed to make room (a hit does not change the order). Requests in order: kettle, feather, ribbon, yo-yo, flute, ribbon, flute, flute, ribbon, ribbon, scarf, globe, kettle, globe, yo-yo, teapot, flute, flute, quilt, teapot, quilt, quilt, globe, flute, quilt, quilt. After the last request, which items are in the cache, from the one loaded longest ago to the one loaded most recently? Write the item names separated by commas.
+A: flute, quilt, globe
+
+== R2.caesar_shift L0 [-] type=text
+Q: Shift every letter of 'matar' forward by 8 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+A: uibiz
+
+== R2.caesar_shift L6 [-] type=text
+Q: Shift every letter of 'vazak narok lolax beron' forward by 12 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+A: hmlmw zmdaw xaxmj nqdaz
+
+== R2.cellular_automaton L0 [row] type=text
+Q: A row of 11 cells holds 0s and 1s: 10000110011. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 1, 110 becomes 1, 101 becomes 0, 100 becomes 1, 011 becomes 0, 010 becomes 0, 001 becomes 0, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 2 steps, what does the row look like? Give the digits with no spaces.
+A: 00111001100
+
+== R2.cellular_automaton L6 [row] type=text
+Q: A row of 23 cells holds 0s and 1s: 10100011001101001010111. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 1, 110 becomes 0, 101 becomes 0, 100 becomes 1, 011 becomes 1, 010 becomes 1, 001 becomes 0, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 5 steps, what does the row look like? Give the digits with no spaces.
+A: 10101010101001101010101
+
+== R2.cheapest_network L0 [-] type=number
+Q: The towns Brook, Eastvale, Harrow, Marlow, Norwick, Penrith, Quarry and Ravenna must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Ravenna and Brook would cost 8. A cable between Eastvale and Brook would cost 14. A cable between Penrith and Brook would cost 7. A cable between Quarry and Norwick would cost 11. A cable between Marlow and Brook would cost 1. A cable between Ravenna and Penrith would cost 1. A cable between Quarry and Marlow would cost 13. A cable between Harrow and Norwick would cost 11. A cable between Penrith and Marlow would cost 6. A cable between Quarry and Brook would cost 12. A cable between Norwick and Brook would cost 17. A cable between Quarry and Penrith would cost 13. A cable between Eastvale and Penrith would cost 17. A cable between Ravenna and Marlow would cost 7. A cable between Ravenna and Quarry would cost 14. A cable between Eastvale and Marlow would cost 13. What is the smallest total cost of a set of cables that joins all the towns?
+A: 55
+
+== R2.cheapest_network L6 [-] type=number
+Q: The towns Arden, Harrow, Ivybridge, Kelso, Norwick, Oakham, Penrith, Selby, Upton, Vale and Zennor must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Zennor and Oakham would cost 11. A cable between Kelso and Arden would cost 4. A cable between Zennor and Harrow would cost 9. A cable between Oakham and Upton would cost 10. A cable between Kelso and Norwick would cost 5. A cable between Oakham and Arden would cost 16. A cable between Ivybridge and Upton would cost 12. A cable between Selby and Harrow would cost 10. A cable between Oakham and Norwick would cost 13. A cable between Kelso and Vale would cost 12. A cable between Oakham and Vale would cost 10. A cable between Norwick and Vale would cost 13. A cable between Norwick and Arden would cost 7. A cable between Zennor and Kelso would cost 13. A cable between Selby and Upton would cost 10. A cable between Kelso and Penrith would cost 13. A cable between Penrith and Vale would cost 1. A cable between Oakham and Penrith would cost 9. A cable between Kelso and Oakham would cost 12. A cable between Zennor and Selby would cost 11. A cable between Zennor and Arden would cost 11. A cable between Norwick and Penrith would cost 14. What is the smallest total cost of a set of cables that joins all the towns?
+A: 81
+
+== R2.coin_change_min L0 [fewest] type=list
+Q: You have an unlimited supply of coins worth 3, 16 and 18. For each of the amounts 67, 61, 92, 60 and 47, in this order, what is the smallest number of coins that adds up to exactly that amount? Give the five numbers separated by commas, in the same order as the amounts.
+A: 5, 6, 7, 5, 7
+
+== R2.coin_change_min L6 [fewest] type=list
+Q: You have an unlimited supply of coins worth 4, 8, 16 and 33. For each of the amounts 111, 81, 86, 131 and 103, in this order, what is the smallest number of coins that adds up to exactly that amount? Give the five numbers separated by commas, in the same order as the amounts.
+A: 5, 4, 4, 5, 4
+
+== R2.count_divisible L0 [sum] type=number
+Q: What is the sum of the numbers in this list that are divisible by 3 and greater than 51? List: 58, 16, 92, 23, 51, 28, 95, 26, 95, 63, 68, 18, 22, 64, 52, 16, 89, 47.
+A: 63
+
+== R2.count_divisible L6 [sum] type=number
+Q: What is the sum of the numbers in this list that are divisible by 3 and greater than 171? List: 150, 34, 263, 391, 273, 43, 330, 179, 170, 32, 258, 201, 185, 229, 311, 171, 132, 129, 66, 296, 224, 57, 378, 34, 111, 182, 148, 58, 275, 277, 246, 303, 386, 94, 76, 350, 357, 238, 367, 324, 294, 136.
+A: 2964
+
+== R2.count_letter L0 [-] type=number
+Q: How many times does the letter 'z' appear in total in these words: dezix nozer zibik sizax zemer ribek zazix zadik?
+A: 8
+
+== R2.count_letter L6 [-] type=number
+Q: How many times does the letter 's' appear in total in these words: satax satok losek sasor vomir kakek visok rerak sosex limek sozir koder ronir vaden nevar medek nirir lisek never sobax?
+A: 11
+
+== R2.crt_smallest L0 [-] type=number
+Q: What is the smallest positive whole number that leaves remainder 12 when divided by 17, and leaves remainder 9 when divided by 29?
+A: 386
+
+== R2.crt_smallest L6 [-] type=number
+Q: What is the smallest positive whole number that leaves remainder 2 when divided by 5, and leaves remainder 7 when divided by 17, and leaves remainder 23 when divided by 31?
+A: 2472
+
+== R2.dictionary_rank L0 [word] type=text
+Q: Write every word of 4 letters that can be made from the letters a, d, g, h, k, m, o, q, u, y, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 1991?
+A: guoy
+
+== R2.dictionary_rank L0 [position] type=number
+Q: Write every word of 4 letters that can be made from the letters d, e, f, g, h, q, r, u, w when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word hqeg?
+A: 1521
+
+== R2.dictionary_rank L6 [position] type=number
+Q: Write every word of 7 letters that can be made from the letters a, b, c, d, f, i, m, o, x, y when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word foxmbci?
+A: 287907
+
+== R2.dictionary_rank L6 [word] type=text
+Q: Write every word of 7 letters that can be made from the letters a, b, d, k, l, p, q, r, w when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 169417?
+A: wkbpqad
+
+== R2.digit_root L0 [-] type=number
+Q: Add up the digits of 13469. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+A: 5
+
+== R2.digit_root L6 [-] type=number
+Q: Add up the digits of 24069403871. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+A: 8
+
+== R2.expression_eval L0 [left_to_right] type=number
+Q: Work out 5 - 2 * (3 - 9 * 7) - 2 * 3 by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?
+A: -384
+
+== R2.expression_eval L0 [ranked] type=number
+Q: Work out 9 - 2 + 4 + 7 * (9 + 7). Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?
+A: 123
+
+== R2.expression_eval L6 [left_to_right] type=number
+Q: Work out 17 * (17 + 18 * 12) - (5 - 3) - (17 * 11) - 16 - 3 * 6 by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?
+A: 41592
+
+== R2.expression_eval L6 [ranked] type=number
+Q: Work out 11 * 13 - 8 * 13 + 20 * 2 - 15 * 6 + 11 - (2 - 12) * (13 + 6). Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?
+A: 190
+
+== R2.from_base L0 [-] type=number
+Q: What is the base-3 number 200 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+A: 18
+
+== R2.from_base L6 [-] type=number
+Q: What is the base-4 number 11013212132 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+A: 1341854
+
+== R2.gcd_euclid L0 [gcd] type=number
+Q: What is the greatest common divisor of 696 and 156?
+A: 12
+
+== R2.gcd_euclid L0 [lcm] type=number
+Q: What is the least common multiple of 2400 and 550?
+A: 26400
+
+== R2.gcd_euclid L6 [gcd] type=number
+Q: What is the greatest common divisor of 46440 and 17712?
+A: 216
+
+== R2.gcd_euclid L6 [lcm] type=number
+Q: What is the least common multiple of 10176 and 8352?
+A: 885312
+
+== R2.grid_sum L0 [-] type=number
+Q: A grid has 3 rows and 3 columns. The rows, from top to bottom, are: 7 8 5 / 7 3 4 / 7 4 3. What is the sum of the numbers in row 1?
+A: 20
+
+== R2.grid_sum L6 [-] type=number
+Q: A grid has 6 rows and 6 columns. The rows, from top to bottom, are: 5 5 1 2 1 8 / 6 9 2 8 1 0 / 0 3 2 5 7 1 / 1 1 5 6 1 9 / 7 9 1 9 4 8 / 0 1 6 9 9 3. What is the sum of the numbers in row 2?
+A: 26
+
+== R2.hamming_error_position L0 [-] type=number
+Q: A word of 15 binary digits is written below; position 1 is the leftmost digit. Positions 1, 2, 4, 8, ... (the powers of two) are check positions. The check at position 2^j was chosen so that, among all positions whose number written in binary has a 1 in the place worth 2^j (the check position itself included), the count of 1s is even. The word was correct when it was sent, and at most one digit has been flipped since. Word: 001101010111101. Which position was flipped? Answer 0 if none was.
+A: 6
+
+== R2.hamming_error_position L6 [-] type=number
+Q: A word of 63 binary digits is written below; position 1 is the leftmost digit. Positions 1, 2, 4, 8, ... (the powers of two) are check positions. The check at position 2^j was chosen so that, among all positions whose number written in binary has a 1 in the place worth 2^j (the check position itself included), the count of 1s is even. The word was correct when it was sent, and at most one digit has been flipped since. Word: 011111110101000101001000010111011110101010011101111001111111100. Which position was flipped? Answer 0 if none was.
+A: 25
+
+== R2.hash_probe L0 [checksum] type=number
+Q: A table has 10 slots numbered 0 to 9. A number goes into the slot whose number is the remainder of the number divided by 10; if that slot is taken, it goes into the next slot up (slot 9 is followed by slot 0), and so on until a free slot is found. Numbers are added in this order: 91, 75, 51, 32, 71, 14, 83. After all the numbers are added, add up the NUMBERS OF THE SLOTS that hold a number (for example, if only slots 2 and 5 held numbers the answer would be 7; the numbers held do not matter, only which slots are taken). What is the sum?
+A: 28
+
+== R2.hash_probe L0 [table] type=text
+Q: A table has 10 slots numbered 0 to 9. A number goes into the slot whose number is the remainder of the number divided by 10; if that slot is taken, it goes into the next slot up (slot 9 is followed by slot 0), and so on until a free slot is found. Numbers are added in this order: 50, 62, 37, 11, 30, 23, 84. After all the numbers are added, what does each slot hold, from slot 0 to slot 9? Write the numbers separated by commas, with a dash for a slot that is empty.
+A: 50, 11, 62, 30, 23, 84, -, 37, -, -
+
+== R2.hash_probe L6 [table] type=text
+Q: A table has 16 slots numbered 0 to 15. A number goes into the slot whose number is the remainder of the number divided by 16; if that slot is taken, it goes into the next slot up (slot 15 is followed by slot 0), and so on until a free slot is found. Numbers are added in this order: 61, 11, 28, 39, 99, 66, 22, 45, 89, 41, 83. After all the numbers are added, what does each slot hold, from slot 0 to slot 15? Write the numbers separated by commas, with a dash for a slot that is empty.
+A: -, -, 66, 99, 83, -, 22, 39, -, 89, 41, 11, 28, 61, 45, -
+
+== R2.hash_probe L6 [checksum] type=number
+Q: A table has 16 slots numbered 0 to 15. A number goes into the slot whose number is the remainder of the number divided by 16; if that slot is taken, it goes into the next slot up (slot 15 is followed by slot 0), and so on until a free slot is found. Numbers are added in this order: 43, 79, 33, 13, 72, 87, 42, 74, 67, 49, 80. After all the numbers are added, add up the NUMBERS OF THE SLOTS that hold a number (for example, if only slots 2 and 5 held numbers the answer would be 7; the numbers held do not matter, only which slots are taken). What is the sum?
+A: 82
+
+== R2.interval_scheduling L0 [chosen] type=list
+Q: A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 101 to 103; meeting 2 runs from 76 to 81; meeting 3 runs from 101 to 107; meeting 4 runs from 96 to 99; meeting 5 runs from 31 to 37; meeting 6 runs from 74 to 81; meeting 7 runs from 11 to 14; meeting 8 runs from 83 to 92; meeting 9 runs from 56 to 62; meeting 10 runs from 60 to 69; meeting 11 runs from 77 to 81; meeting 12 runs from 100 to 106; meeting 13 runs from 3 to 10; meeting 14 runs from 35 to 44; meeting 15 runs from 31 to 40; meeting 16 runs from 50 to 58; meeting 17 runs from 97 to 104; meeting 18 runs from 34 to 36; meeting 19 runs from 11 to 15; meeting 20 runs from 60 to 69; meeting 21 runs from 60 to 67; meeting 22 runs from 36 to 38; meeting 23 runs from 12 to 16; meeting 24 runs from 32 to 39; meeting 25 runs from 6 to 14. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+A: 1, 2, 4, 7, 8, 13, 16, 18, 21, 22
+
+== R2.interval_scheduling L6 [chosen] type=list
+Q: A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 122 to 129; meeting 2 runs from 0 to 2; meeting 3 runs from 31 to 40; meeting 4 runs from 129 to 134; meeting 5 runs from 59 to 65; meeting 6 runs from 124 to 129; meeting 7 runs from 120 to 129; meeting 8 runs from 74 to 83; meeting 9 runs from 180 to 186; meeting 10 runs from 73 to 81; meeting 11 runs from 98 to 102; meeting 12 runs from 99 to 108; meeting 13 runs from 4 to 6; meeting 14 runs from 105 to 108; meeting 15 runs from 146 to 151; meeting 16 runs from 57 to 60; meeting 17 runs from 107 to 111; meeting 18 runs from 27 to 32; meeting 19 runs from 76 to 78; meeting 20 runs from 107 to 110; meeting 21 runs from 36 to 45; meeting 22 runs from 173 to 175; meeting 23 runs from 36 to 38; meeting 24 runs from 155 to 163; meeting 25 runs from 152 to 161; meeting 26 runs from 150 to 153; meeting 27 runs from 104 to 113; meeting 28 runs from 52 to 59; meeting 29 runs from 27 to 33; meeting 30 runs from 180 to 184; meeting 31 runs from 81 to 85; meeting 32 runs from 129 to 133; meeting 33 runs from 81 to 87; meeting 34 runs from 150 to 152; meeting 35 runs from 80 to 89; meeting 36 runs from 173 to 177; meeting 37 runs from 54 to 60; meeting 38 runs from 146 to 150; meeting 39 runs from 24 to 28; meeting 40 runs from 2 to 4; meeting 41 runs from 174 to 178; meeting 42 runs from 10 to 16. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+A: 1, 2, 5, 11, 13, 14, 19, 22, 23, 25, 28, 30, 31, 32, 34, 38, 39, 40, 42
+
+== R2.kth_smallest L0 [-] type=number
+Q: What is the number that would be in position 4 if these numbers were sorted from smallest to largest (position 1 is the smallest)? Numbers: 100, 386, 257, 290, 119.
+A: 290
+
+== R2.kth_smallest L6 [-] type=number
+Q: What is the number that would be in position 6 if these numbers were sorted from smallest to largest (position 1 is the smallest)? Numbers: 33, 367, 75, 344, 177, 149, 157, 419, 313, 192, 165, 356, 240, 104, 269, 185, 31.
+A: 157
+
+== R2.lcs_length L0 [-] type=number
+Q: A subsequence of a string is what is left after deleting zero or more of its letters, with the remaining letters kept in their original order (the letters need not be next to each other). What is the length of the longest string that is a subsequence of both 'dgabifhcecgcfckg' and 'dbifccjcjcijdcfigib'?
+A: 9
+
+== R2.lcs_length L6 [-] type=number
+Q: A subsequence of a string is what is left after deleting zero or more of its letters, with the remaining letters kept in their original order (the letters need not be next to each other). What is the length of the longest string that is a subsequence of both 'ahbeeeeffcafhchbafbcbfhgagcgbbgcafec' and 'hbebecefcfhfchbabcbfhagcbbgdcafc'?
+A: 28
+
+== R2.lis_length L0 [-] type=number
+Q: Choose some of these numbers, keeping the order in which they are written, so that each chosen number is larger than the one chosen before it (the chosen numbers need not be next to each other). What is the largest count of numbers you can choose? Numbers: 5, 6, 118, 128, 122, 56, 19, 155, 49, 78, 97, 66, 165, 90, 168, 121, 18.
+A: 8
+
+== R2.lis_length L6 [-] type=number
+Q: Choose some of these numbers, keeping the order in which they are written, so that each chosen number is larger than the one chosen before it (the chosen numbers need not be next to each other). What is the largest count of numbers you can choose? Numbers: 92, 63, 9, 31, 54, 56, 183, 50, 102, 88, 111, 57, 129, 28, 151, 12, 143, 149, 191, 98, 206.
+A: 11
+
+== R2.list_ops L0 [-] type=list
+Q: Start with the list 64, 25, 73, 64. Do these steps in order: remove the last element; add 82 at the end. What is the final list? Give the numbers separated by commas.
+A: 64, 25, 73, 82
+
+== R2.list_ops L6 [-] type=list
+Q: Start with the list 83, 27, 27, 65, 62, 76, 80. Do these steps in order: reverse the list; reverse the list; move the first element to the end; remove the last element; reverse the list; remove the first element; reverse the list; add 31 at the end. What is the final list? Give the numbers separated by commas.
+A: 27, 27, 65, 62, 76, 31
+
+== R2.longest_palindromic_substring L0 [-] type=number
+Q: Look at the string 'bcbcbccbabbbacab'. Find the longest block of letters, all next to each other in the string, that reads the same forwards and backwards. How many letters long is it?
+A: 5
+
+== R2.longest_palindromic_substring L6 [-] type=number
+Q: Look at the string 'addcccaaddadadacbbcbdccdbcbd'. Find the longest block of letters, all next to each other in the string, that reads the same forwards and backwards. How many letters long is it?
+A: 10
+
+== R2.luhn_check L0 [valid] type=yn
+Q: Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 0465682 valid? Answer yes or no.
+A: yes
+
+== R2.luhn_check L0 [check_digit] type=number
+Q: Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 172143 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?
+A: 0
+
+== R2.luhn_check L6 [check_digit] type=number
+Q: Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 753571857696596234 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?
+A: 3
+
+== R2.luhn_check L6 [valid] type=yn
+Q: Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 8395183094026236321 valid? Answer yes or no.
+A: yes
+
+== R2.max_subarray_sum L0 [-] type=number
+Q: Pick a block of one or more numbers that sit next to each other in this row (no gaps). What is the largest total a block can have? Row: -8, -6, -9, -9, 3, 7, -6, 7, -5, 5, 3, -6, 4, 7, -2, -7, -3, -6, -5, 3, 3, -1, 3, 8, -6, 8, -3, 8, -2, 6, 6, -9, -7, -6, -9, -8, -3, 3, 3.
+A: 33
+
+== R2.max_subarray_sum L6 [-] type=number
+Q: Pick a block of one or more numbers that sit next to each other in this row (no gaps). What is the largest total a block can have? Row: -4, 2, -7, -5, 3, -5, -8, 6, -3, 7, -5, 3, -1, 9, -4, 8, 2, -7, -5, -4, 1, -4, 6, -4, 9, -1, 6, -2, 5, 8, 3, -1, 7, -1, -4, -9, -5, 3, -6, 7, -6, 3, -2, 9, -6, 4, 3, -5, 9, -2, -6, -7, 1, 7, -4, 4, -4, 6, -2, 4, -2, 8, -5, -7, -2, -3, -3, -5, -2, -8, -4.
+A: 39
+
+== R2.merge_smallest_cost L0 [-] type=number
+Q: There are piles of stones with these sizes: 8, 19, 5, 13, 9. Any two piles (they need not be next to each other in this list) can be joined into one pile; joining costs as many coins as the size of the new pile. The piles are joined, two at a time, until one pile is left. What is the smallest total number of coins that can be paid?
+A: 121
+
+== R2.merge_smallest_cost L6 [-] type=number
+Q: There are piles of stones with these sizes: 56, 10, 27, 43, 14, 6, 49, 34, 40, 3, 15. Any two piles (they need not be next to each other in this list) can be joined into one pile; joining costs as many coins as the size of the new pile. The piles are joined, two at a time, until one pile is left. What is the smallest total number of coins that can be paid?
+A: 938
+
+== R2.min_heap_ops L0 [-] type=list
+Q: A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 2, 12, 4, 62, 48, 36, 25, 30, 34, 69. Give the row from position 1 to the end, separated by commas.
+A: 2, 12, 4, 30, 48, 36, 25, 62, 34, 69
+
+== R2.min_heap_ops L6 [-] type=list
+Q: A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 46, 74, 45, 99, 42, 28, 25, 44, 22, 6, 62, 76, 79, 78, 8, 69. Give the row from position 1 to the end, separated by commas.
+A: 6, 22, 8, 44, 25, 46, 28, 69, 45, 74, 62, 76, 79, 78, 42, 99
+
+== R2.modular_power L0 [-] type=number
+Q: Multiply together 159 copies of the number 65 (a product with 159 factors, each equal to 65). What is the remainder when this product is divided by 77?
+A: 43
+
+== R2.modular_power L6 [-] type=number
+Q: Multiply together 1867 copies of the number 326 (a product with 1867 factors, each equal to 326). What is the remainder when this product is divided by 703?
+A: 337
+
+== R2.multiples_between L0 [count] type=number
+Q: How many whole numbers from 38 to 285, counting both ends, are multiples of 19?
+A: 14
+
+== R2.multiples_between L0 [sum] type=number
+Q: What is the sum of all the whole numbers from 252 to 396, counting both ends, that are multiples of 12?
+A: 4212
+
+== R2.multiples_between L6 [sum] type=number
+Q: What is the sum of all the whole numbers from 363 to 4334, counting both ends, that are multiples of 11?
+A: 850157
+
+== R2.multiples_between L6 [count] type=number
+Q: How many whole numbers from 770 to 3290, counting both ends, are multiples of 14?
+A: 181
+
+== R2.palindrome_check L0 [-] type=yn
+Q: Ignoring the spaces, does the text 'fhcbkkh icgi kkigcihkkbchf' read the same forwards and backwards? Answer yes or no.
+A: yes
+
+== R2.palindrome_check L6 [-] type=yn
+Q: Ignoring the spaces, does the text 'lfigdig kk difhfijjigi jjifhfidkkg idg ifl' read the same forwards and backwards? Answer yes or no.
+A: yes
+
+== R2.permutation_power L0 [-] type=number
+Q: A mapping on the numbers 1 to 12 sends: 1 goes to 3, 2 goes to 1, 3 goes to 10, 4 goes to 4, 5 goes to 9, 6 goes to 11, 7 goes to 12, 8 goes to 2, 9 goes to 7, 10 goes to 5, 11 goes to 8, 12 goes to 6. Start at 12 and apply the mapping 61 times in a row. Which number do you end on?
+A: 3
+
+== R2.permutation_power L6 [-] type=number
+Q: A mapping on the numbers 1 to 18 sends: 1 goes to 8, 2 goes to 16, 3 goes to 5, 4 goes to 9, 5 goes to 12, 6 goes to 18, 7 goes to 13, 8 goes to 14, 9 goes to 17, 10 goes to 3, 11 goes to 11, 12 goes to 6, 13 goes to 15, 14 goes to 2, 15 goes to 10, 16 goes to 4, 17 goes to 7, 18 goes to 1. Start at 12 and apply the mapping 146 times in a row. Which number do you end on?
+A: 17
+
+== R2.prime_factor_query L0 [largest] type=number
+Q: What is the largest prime number that divides 259675 exactly?
+A: 47
+
+== R2.prime_factor_query L0 [sum_all] type=number
+Q: Write 749177 as a product of prime numbers (for example, 12 is 2 x 2 x 3). Add up the primes in that product, counting a prime as many times as it appears. What is the sum?
+A: 81
+
+== R2.prime_factor_query L6 [sum_all] type=number
+Q: Write 139480691 as a product of prime numbers (for example, 12 is 2 x 2 x 3). Add up the primes in that product, counting a prime as many times as it appears. What is the sum?
+A: 156
+
+== R2.prime_factor_query L6 [largest] type=number
+Q: What is the largest prime number that divides 3336829813 exactly?
+A: 71
+
+== R2.run_length L0 [-] type=text
+Q: Compress caaabbyybbbx by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+A: c1a3b2y2b3x1
+
+== R2.run_length L6 [-] type=text
+Q: Compress aaxyyyxxxxccccccyyyyyaacyyyyyyxxxxxxxzxxxxxxx by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+A: a2x1y3x4c6y5a2c1y6x7z1x7
+
+== R2.sort_list L0 [True] type=list
+Q: Sort these numbers from largest to smallest and give them separated by commas: 43, 33, 9, 38.
+A: 43, 38, 33, 9
+
+== R2.sort_list L0 [False] type=list
+Q: Sort these numbers from smallest to largest and give them separated by commas: -27, 4, 84, 61.
+A: -27, 4, 61, 84
+
+== R2.sort_list L6 [True] type=list
+Q: Sort these numbers from largest to smallest and give them separated by commas: 495, 628, 296, 206, 520, 216, 275, 450, 634, 222.
+A: 634, 628, 520, 495, 450, 296, 275, 222, 216, 206
+
+== R2.sort_list L6 [False] type=list
+Q: Sort these numbers from smallest to largest and give them separated by commas: 599, 385, -30, 55, 149, 355, 17, 195, 634, 594.
+A: -30, 17, 55, 149, 195, 355, 385, 594, 599, 634
+
+== R2.stack_machine L0 [-] type=number
+Q: A stack starts empty. Do these steps in order: push 13, push 9, add the top two (replace them by their sum), push 10, push 15, add the top two (replace them by their sum). What number is on top of the stack at the end?
+A: 25
+
+== R2.stack_machine L6 [-] type=number
+Q: A stack starts empty. Do these steps in order: push 5, push 4, push 9, push 11, add the top two (replace them by their sum), push 16, add the top two (replace them by their sum), add the top two (replace them by their sum), push 18, subtract: second from top minus top (replace both by the result), multiply the top two (replace them by their product), push 9, push 10, swap the top two, push 1, swap the top two, multiply the top two (replace them by their product), multiply the top two (replace them by their product). What number is on top of the stack at the end?
+A: 90
+
+== R2.string_rewrite_nonidentity L0 [-] type=text
+Q: Start with the string ccccab. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'ca' with 'bcb'. What is the final string?
+A: cccbcbb
+
+== R2.string_rewrite_nonidentity L6 [-] type=text
+Q: Start with the string abbaabccccaabacabc. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'cc' with 'ca'; replace every 'c' with 'abc'; replace every 'ba' with 'a'; delete every 'a'. What is the final string?
+A: bbcbcbcbc
+
+== R2.subtraction_game L0 [-] type=yn
+Q: Two players take turns. There are four piles of stones, with 12, 16, 14 and 19 stones. On a turn a player picks ONE pile and removes from it one of these amounts of stones: 1 or 5 or 6 or 7 or 10; an amount can be chosen only if that pile still has at least that many stones. A player who cannot move on their turn loses. Both players play perfectly. Does the player who moves first win? Answer yes or no.
+A: yes
+
+== R2.subtraction_game L6 [-] type=yn
+Q: Two players take turns. There are four piles of stones, with 39, 35, 44 and 52 stones. On a turn a player picks ONE pile and removes from it one of these amounts of stones: 2 or 8 or 11 or 12 or 14 or 15; an amount can be chosen only if that pile still has at least that many stones. A player who cannot move on their turn loses. Both players play perfectly. Does the player who moves first win? Answer yes or no.
+A: no
+
+== R2.to_base_wide L0 [-] type=text
+Q: Write the decimal number 1636 in base 7. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+A: 4525
+
+== R2.to_base_wide L6 [-] type=text
+Q: Write the decimal number 8082714 in base 12. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+A: 28595b6
+

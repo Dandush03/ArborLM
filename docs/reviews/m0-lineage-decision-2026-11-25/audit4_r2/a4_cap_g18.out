@@ -1,0 +1,46 @@
+N draws = 100000; clusters = 36; G = 18; demand per cluster-level = 14350
+
+reading a: FAIL 0, UNRESOLVED 0
+
+reading b: FAIL 0, UNRESOLVED 0
+   passes only through its cluster partner: count_letter L0 (alone D=36, Chao1=36)
+   passes only through its cluster partner: count_letter L1 (alone D=55, Chao1=55)
+   passes only through its cluster partner: count_letter L2 (alone D=78, Chao1=78)
+   passes only through its cluster partner: count_letter L3 (alone D=104, Chao1=106)
+   passes only through its cluster partner: count_letter L4 (alone D=131, Chao1=133)
+   passes only through its cluster partner: count_letter L5 (alone D=161, Chao1=162)
+   passes only through its cluster partner: count_letter L6 (alone D=190, Chao1=201)
+   passes only through its cluster partner: permutation_power L0 (alone D=61, Chao1=61)
+   passes only through its cluster partner: permutation_power L1 (alone D=426, Chao1=426)
+   passes only through its cluster partner: permutation_power L2 (alone D=324, Chao1=324)
+   passes only through its cluster partner: permutation_power L3 (alone D=273, Chao1=273)
+   passes only through its cluster partner: permutation_power L4 (alone D=404, Chao1=404)
+   passes only through its cluster partner: permutation_power L5 (alone D=666, Chao1=666)
+   passes only through its cluster partner: permutation_power L6 (alone D=121, Chao1=121)
+
+reading c: FAIL 8, UNRESOLVED 0
+   FAIL binary_search_trace L0: D=288 Chao1=288
+   FAIL binary_search_trace L1: D=352 Chao1=352
+   FAIL binary_search_trace L2: D=416 Chao1=416
+   FAIL binary_search_trace L3: D=484 Chao1=484
+   FAIL binary_search_trace L4: D=544 Chao1=544
+   FAIL binary_search_trace L5: D=608 Chao1=608
+   FAIL binary_search_trace L6: D=672 Chao1=672
+   FAIL sort_list L0: D=408 Chao1=408
+   passes only through its cluster partner: count_letter L0 (alone D=36, Chao1=36)
+   passes only through its cluster partner: count_letter L1 (alone D=55, Chao1=55)
+   passes only through its cluster partner: count_letter L2 (alone D=78, Chao1=78)
+   passes only through its cluster partner: count_letter L3 (alone D=104, Chao1=106)
+   passes only through its cluster partner: count_letter L4 (alone D=131, Chao1=133)
+   passes only through its cluster partner: count_letter L5 (alone D=161, Chao1=162)
+   passes only through its cluster partner: count_letter L6 (alone D=190, Chao1=201)
+   passes only through its cluster partner: permutation_power L0 (alone D=61, Chao1=61)
+   passes only through its cluster partner: permutation_power L1 (alone D=426, Chao1=426)
+   passes only through its cluster partner: permutation_power L2 (alone D=324, Chao1=324)
+   passes only through its cluster partner: permutation_power L3 (alone D=273, Chao1=273)
+   passes only through its cluster partner: permutation_power L4 (alone D=404, Chao1=404)
+   passes only through its cluster partner: permutation_power L5 (alone D=666, Chao1=666)
+   passes only through its cluster partner: permutation_power L6 (alone D=121, Chao1=121)
+   passes only through its cluster partner: sort_list L1 (alone D=240, Chao1=240)
+   passes only through its cluster partner: sort_list L2 (alone D=1440, Chao1=1440)
+   passes only through its cluster partner: sort_list L3 (alone D=10079, Chao1=10079)

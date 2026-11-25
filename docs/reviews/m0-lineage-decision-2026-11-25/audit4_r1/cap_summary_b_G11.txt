@@ -1,0 +1,11 @@
+G = 11; requirement per cluster and level 22,830 at every level 0-6; 259 rows; 23 clusters
+  boolean_lights L0: cluster-sum S_lo 211,428 ok; even share 11,415; shapes below share (shape, S_lo, distinct seen, N): [('compass_turns', 10343, 2685, 3000)]
+  categories_default_exceptions L0: cluster-sum S_lo 5,345,409 ok; even share 7,610; shapes below share (shape, S_lo, distinct seen, N): [('kinship_ancestor', 2340, 2025, 3000)]
+  topological_order L0: cluster-sum S_lo 176 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 176, 1014, 3000)]
+  topological_order L1: cluster-sum S_lo 315 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 315, 1321, 3000)]
+  topological_order L2: cluster-sum S_lo 357 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 357, 1344, 3000)]
+  topological_order L3: cluster-sum S_lo 718 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 718, 1739, 3000)]
+  topological_order L4: cluster-sum S_lo 806 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 806, 1766, 3000)]
+  topological_order L5: cluster-sum S_lo 1,340 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 1340, 1977, 3000)]
+  topological_order L6: cluster-sum S_lo 1,237 BELOW; even share 22,830; shapes below share (shape, S_lo, distinct seen, N): [('topological_order', 1237, 1968, 3000)]
+cluster-levels flagged (not proven failures): 9

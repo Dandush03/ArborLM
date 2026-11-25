@@ -1,0 +1,5 @@
+R1 37 ['R1.event_timeline_r5', 'R1.spatial_grid_walk_r5', 'R1.venn_counting_r5']
+R2 40 ['R2.coin_change_min', 'R2.count_divisible', 'R2.count_letter', 'R2.crt_smallest', 'R2.digit_root', 'R2.gcd_euclid', 'R2.grid_sum', 'R2.kth_smallest', 'R2.modular_power', 'R2.multiples_between', 'R2.permutation_power', 'R2.prime_factor_query', 'R2.sort_list']
+C1 37 ['C1.bubble_pass', 'C1.coin_change_table_f3', 'C1.counter_list_f3', 'C1.digit_peel_f3', 'C1.euclid_gcd_traced_f3', 'C1.fast_power_f3', 'C1.fib_like_f3', 'C1.fib_shapes_recursive_f3', 'C1.grid_path_table', 'C1.loop_sum', 'C1.majority_vote_scan_f3']
+R2 NOT_REGISTERED: ['R2.chip_toppling', 'R2.deferred_acceptance_partner']
+R2 cluster of crt/gcd/prime/modpow/coin/kth/multiples: {'R2.coin_change_min': 'R2.coin_change_min', 'R2.count_letter': 'R2.count_divisible', 'R2.crt_smallest': 'R2.crt_smallest', 'R2.gcd_euclid': 'R2.gcd_euclid', 'R2.kth_smallest': 'R2.kth_smallest', 'R2.modular_power': 'R2.modular_power', 'R2.multiples_between': 'R2.multiples_between', 'R2.prime_factor_query': 'R2.prime_factor_query', 'R2.sort_list': 'R2.kth_smallest'}

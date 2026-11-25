@@ -1,0 +1,105 @@
+M1.ages_r3                         identical-levels []
+   after  nums/log10ans: 3.0/1.74 3.0/1.8 3.0/1.88 3.0/1.97 3.0/1.98 3.0/2.04 3.0/2.08
+   before (M1.ages) : 3.0/1.2 3.0/1.24 3.0/1.29 3.0/1.32 3.0/1.32 3.0/1.41 3.0/1.43
+M1.arithmetic_series_r3            identical-levels []
+   after  nums/log10ans: 6.0/2.83 6.0/2.96 6.0/3.08 6.0/3.12 6.0/3.18 6.0/3.29 6.0/3.31
+   before (M1.arithmetic_series) : 4.0/2.17 4.0/2.33 4.0/2.44 4.0/2.55 4.0/2.58 4.0/2.68 4.0/2.73
+M1.average_missing_r3              identical-levels ['0=1', '2=3', '4=5']
+   after  nums/log10ans: 7.0/1.83 7.0/1.83 8.0/1.83 8.0/1.84 9.0/1.83 9.0/1.84 10.0/1.84
+   before (M1.average_missing) : 6.0/1.83 6.0/1.84 7.0/1.83 7.0/1.85 8.0/1.84 8.0/1.84 9.0/1.83
+M1.binomial_choose_r3              identical-levels []
+   after  nums/log10ans: 5.0/2.51 5.0/2.76 5.0/3.3 7.0/4.83 7.0/5.45 7.0/6.0 7.0/6.6
+   before (M1.binomial_choose_r2) : 2.6/2.76 2.7/3.2 2.8/3.8 2.7/4.28 2.7/4.52 2.6/5.11 2.6/5.5
+M1.change_ways_r3                  identical-levels []
+   after  nums/log10ans: 4.0/1.16 4.0/1.38 4.0/1.52 4.0/1.63 4.0/1.74 4.0/1.84 4.0/1.93
+   before (M1.change_ways_r2) : 4.0/0.96 4.0/1.2 4.0/1.35 4.0/1.52 4.0/1.66 4.0/1.77 4.0/1.86
+M1.clock_duration_r3               identical-levels ['0=1', '2=3', '4=5']
+   after  nums/log10ans: 11.0/2.2 11.0/2.2 16.0/2.4 16.0/2.4 21.0/2.52 21.0/2.51 26.0/2.63
+   before (M1.clock_duration) : 10.0/2.32 10.0/2.32 15.0/2.51 15.0/2.5 20.0/2.62 20.0/2.62 25.0/2.7
+M1.coins_r3                        identical-levels []
+   after  nums/log10ans: 5.0/1.19 5.0/1.23 5.0/1.26 5.0/1.3 5.0/1.33 5.0/1.35 5.0/1.38
+   before (M1.coins) : 5.0/0.95 5.0/1.0 5.0/1.03 5.0/1.08 5.0/1.11 5.0/1.17 5.0/1.16
+M1.consecutive_r3                  identical-levels []
+   after  nums/log10ans: 2.0/3.13 2.0/3.29 2.5/3.42 2.5/3.55 2.5/3.61 2.5/3.69 2.5/3.75
+   before (M1.consecutive) : 2.0/1.81 2.0/1.98 2.5/2.13 2.5/2.21 2.5/2.33 2.5/2.38 2.5/2.45
+M1.crt_congruence_r3               identical-levels []
+   after  nums/log10ans: 4.0/2.55 4.0/2.66 4.0/2.73 6.0/3.51 6.0/3.64 8.0/5.11 8.0/5.23
+   before (M1.crt_congruence_r2) : 4.0/1.87 4.0/2.06 4.0/2.23 6.0/2.73 6.0/2.84 8.0/4.13 8.0/4.29
+M1.division_counting_r3            identical-levels []
+   after  nums/log10ans: 3.0/0.87 3.0/0.93 3.0/0.99 3.0/0.99 3.0/1.0 3.0/1.04 3.0/1.06
+   before (M1.division_counting_r2) : 3.0/0.63 3.0/0.7 3.0/0.7 3.0/0.74 3.0/0.79 3.0/0.81 3.0/0.88
+M1.finite_differences_r3           identical-levels ['0=1', '1=2', '3=4', '5=6']
+   after  nums/log10ans: 9.0/2.6 9.0/2.58 9.0/2.61 10.0/2.7 10.0/2.71 11.0/3.25 11.0/3.25
+   before (M1.finite_differences) : 9.0/2.09 9.0/2.11 9.0/2.18 10.0/2.3 10.0/2.33 11.0/2.99 11.0/3.0
+M1.fraction_remainder_r3           identical-levels []
+   after  nums/log10ans: 1.0/2.88 1.0/2.93 1.0/3.01 1.0/3.06 1.0/3.1 1.0/3.12 1.0/3.19
+   before (M1.fraction_remainder) : 1.0/1.72 1.0/1.85 1.0/1.93 1.0/1.94 1.0/2.06 1.0/2.09 1.0/2.13
+M1.gcd_lcm_r3                      identical-levels ['0=1', '1=2', '3=4', '5=6']
+   after  nums/log10ans: 3.5/2.57 3.5/2.5 3.5/2.51 4.5/2.7 4.5/2.75 5.5/3.1 5.5/3.22
+   before (M1.gcd_lcm_r2) : 3.5/2.16 3.5/2.4 3.5/2.67 4.5/3.1 4.5/3.23 5.5/3.83 5.5/4.16
+M1.grid_perimeter_r3               identical-levels []
+   after  nums/log10ans: 15.0/1.44 18.4/1.55 22.0/1.64 25.2/1.71 28.8/1.79 31.5/1.83 35.0/1.88
+   before (M1.grid_perimeter_r2) : 15.3/1.46 18.1/1.56 22.0/1.66 25.7/1.73 28.5/1.79 32.0/1.84 34.8/1.89
+M1.inclusion_exclusion_r3          identical-levels []
+   after  nums/log10ans: 5.0/1.25 5.0/1.37 5.0/1.45 9.0/1.76 9.0/1.8 9.0/1.88 9.0/1.96
+   before (M1.inclusion_exclusion_r2) : 5.0/0.91 5.0/1.16 5.0/1.3 9.0/1.61 9.0/1.67 9.0/1.8 9.0/1.9
+M1.last_digit_power_r3             identical-levels []
+   after  nums/log10ans: 5.0/1.25 5.0/1.27 7.0/1.26 7.0/1.28 7.0/1.28 9.0/1.32 9.0/1.29
+   before (M1.power_remainder_r2) : 3.0/0.92 3.0/0.89 5.0/0.97 5.0/0.97 5.0/0.95 7.0/0.94 7.0/0.98
+M1.linear_equation_r3              identical-levels []
+   after  nums/log10ans: 3.0/1.13 3.0/1.27 3.0/1.41 4.0/1.51 4.0/1.59 4.0/1.62 4.0/1.69
+   before (M1.linear_equation) : 3.0/1.13 3.0/1.29 3.0/1.41 4.0/1.48 4.0/1.55 4.0/1.66 4.0/1.68
+M1.median_list_r3                  identical-levels []
+   after  nums/log10ans: 8.5/1.98 9.9/2.1 11.5/2.2 13.0/2.26 14.4/2.33 16.0/2.39 17.5/2.43
+   before (M1.median_list_r2) : 6.5/1.21 7.8/1.39 9.6/1.53 11.0/1.66 12.5/1.74 14.1/1.81 15.5/1.86
+M1.mixture_r3                      identical-levels ['0=1', '1=2', '3=4', '4=5', '5=6']
+   after  nums/log10ans: 4.0/1.2 4.0/1.18 4.0/1.19 5.0/1.3 5.0/1.32 5.0/1.32 5.0/1.32
+   before (M1.mixture) : 4.0/1.21 4.0/1.19 4.0/1.2 5.0/1.26 5.0/1.25 5.0/1.25 5.0/1.26
+M1.mode_tally_r3                   identical-levels []
+   after  nums/log10ans: 46.1/1.53 46.0/1.52 45.8/1.55 46.1/1.59 45.8/1.57 45.5/1.58 45.8/1.62
+   before (M1.mode_tally_r2) : 26.3/0.92 30.8/1.0 35.7/1.04 40.0/1.09 47.0/1.13 51.3/1.18 57.2/1.18
+M1.painted_cube_r3                 identical-levels []
+   after  nums/log10ans: 4.0/2.79 4.0/2.84 4.0/2.93 4.0/3.09 4.0/3.06 4.0/3.18 4.0/3.27
+   before (M1.painted_cube_r2) : 4.0/2.57 4.0/2.67 4.0/2.82 4.0/2.88 4.0/2.96 4.0/3.06 4.0/3.15
+M1.percent_change_r3               identical-levels []
+   after  nums/log10ans: 3.0/1.91 3.0/1.96 3.0/2.03 4.0/2.55 4.0/2.55 4.0/2.59 4.0/2.64
+   before (M1.percent_change) : 3.0/2.22 3.0/2.28 3.0/2.36 4.0/2.56 4.0/2.57 4.0/2.61 4.0/2.65
+M1.pigeonhole_worst_case_r3        identical-levels []
+   after  nums/log10ans: 4.5/1.88 4.5/1.89 5.5/2.1 5.5/2.13 6.5/2.27 6.5/2.31 6.5/2.32
+   before (M1.pigeonhole_worst_case_r2) : 4.5/1.51 4.6/1.57 5.5/1.81 5.5/1.88 6.5/2.04 6.5/2.06 6.5/2.13
+M1.pipes_work_r3                   identical-levels []
+   after  nums/log10ans: 3.0/1.27 3.0/1.33 3.0/1.36 4.0/1.42 4.0/1.42 4.0/1.45 4.0/1.5
+   before (M1.pipes_work) : 3.0/1.06 3.0/1.12 3.0/1.18 4.0/1.23 4.0/1.29 4.0/1.32 4.0/1.38
+M1.prime_factors_r3                identical-levels []
+   after  nums/log10ans: 2.3/1.32 2.3/1.34 2.3/1.37 2.2/1.42 2.2/1.46 2.3/1.47 2.2/1.53
+   before (M1.prime_factors_r2) : 2.2/1.08 2.3/1.1 2.4/1.12 2.2/1.31 2.3/1.34 2.2/1.38 2.2/1.41
+M1.pythagoras_r3                   identical-levels []
+   after  nums/log10ans: 2.0/2.35 2.0/2.68 2.0/2.82 2.0/2.96 2.0/3.02 2.0/3.12 2.0/3.19
+   before (M1.pythagoras_r2) : 2.0/2.25 2.0/2.54 2.0/2.68 2.0/2.82 2.0/2.91 2.0/2.99 2.0/3.05
+M1.quadratic_area_r3               identical-levels []
+   after  nums/log10ans: 2.0/1.88 2.0/1.97 2.0/2.0 2.0/2.04 2.0/2.1 2.0/2.11 2.0/2.15
+   before (M1.quadratic_area) : 2.0/1.22 2.0/1.36 2.0/1.42 2.0/1.48 2.0/1.56 2.0/1.61 2.0/1.66
+M1.ratio_share_r3                  identical-levels []
+   after  nums/log10ans: 3.0/2.23 3.0/2.34 4.0/2.4 4.0/2.51 5.0/2.58 5.0/2.59 5.0/2.71
+   before (M1.ratio_share) : 3.0/1.57 3.0/1.73 4.0/1.89 4.0/1.98 5.0/2.05 5.0/2.18 5.0/2.26
+M1.rectangle_r3                    identical-levels []
+   after  nums/log10ans: 2.0/3.27 2.0/3.37 2.0/3.43 2.0/3.57 2.0/3.62 2.0/3.71 2.0/3.74
+   before (M1.rectangle) : 2.0/2.41 2.0/2.57 2.0/2.76 2.0/2.93 2.0/3.0 2.0/3.12 2.0/3.24
+M1.recurrence_iterate_r3           identical-levels []
+   after  nums/log10ans: 5.0/3.25 5.0/3.36 5.0/3.66 4.9/3.77 5.0/3.98 4.9/4.2 5.0/4.32
+   before (M1.recurrence_iterate) : 4.7/2.49 4.7/2.67 4.6/2.99 4.6/3.05 4.7/3.44 4.7/3.5 4.7/3.81
+M1.shopping_r3                     identical-levels []
+   after  nums/log10ans: 5.0/0.99 7.0/0.97 9.0/0.98 9.0/0.97 11.0/1.0 11.0/0.98 13.0/0.98
+   before (M1.shopping) : 5.0/0.98 7.0/0.98 9.0/0.99 9.0/0.95 11.0/0.97 11.0/0.99 13.0/1.01
+M1.slot_permutations_r3            identical-levels ['0=1', '2=3', '3=4', '5=6']
+   after  nums/log10ans: 7.6/1.53 7.6/1.52 7.6/1.73 7.6/1.75 7.6/1.74 7.7/2.14 7.6/2.12
+   before (M1.slot_permutations_r2) : 8.9/2.0 9.0/2.03 9.1/2.35 9.1/2.34 9.7/2.48 9.7/3.09 9.6/3.06
+M1.speed_distance_r3               identical-levels []
+   after  nums/log10ans: 4.0/2.45 4.0/2.57 6.0/2.41 6.0/2.5 8.0/2.61 8.0/2.71 10.0/2.8
+   before (M1.speed_distance) : 4.0/2.34 4.0/2.45 6.0/2.58 6.0/2.66 8.0/2.87 8.0/2.92 10.0/3.16
+M1.tiered_pricing                  identical-levels []
+   after  nums/log10ans: 4.0/1.01 4.0/1.13 6.0/1.5 6.0/1.77 8.0/1.99 8.0/2.04 8.0/2.09
+   before (M1.tiered_pricing) : 4.0/1.01 4.0/1.13 6.0/1.5 6.0/1.77 8.0/1.99 8.0/2.04 8.0/2.09
+M1.tip_split_r3                    identical-levels []
+   after  nums/log10ans: 3.0/1.76 3.0/1.79 3.0/1.82 3.0/1.84 3.0/1.84 3.0/1.87 3.0/1.87
+   before (M1.tip_split) : 3.0/2.05 3.0/2.03 3.0/2.04 3.0/2.06 3.0/2.09 3.0/2.13 3.0/2.08

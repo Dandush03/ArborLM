@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_audit4_r2_20261125/deliver/a4_render.py", line 4, in <module>
+    from studies.m0.core import build_item
+ModuleNotFoundError: No module named 'studies'
