@@ -31,3 +31,7 @@ Answer keys: zero mismatches against the auditors' independent solvers in all fo
 - The lead's earlier statement to the human lead that only the 0.02 and 0.03 margins would be affected was wrong; the 0.05 margin is in the same position (addendum 1, section 6; reproduced by the reviewer).
 
 Astra review: NOT_PERFORMED
+
+## Correction (same day)
+
+The answer-key sentence above misstates two figures. As the auditors report them: R1 120,400 items; R2 114,800 and 574,000 items; M1 400 items x 7 levels x 37 lineages = 103,600 items, plus 2,380 fixture items; C1 126,000 items. Zero mismatches in each. The original sentence is left as written.
