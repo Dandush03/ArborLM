@@ -1,0 +1,11 @@
+{
+ "identity": {
+  "largest_deviation": 3.814697265625e-06,
+  "pass": true
+ },
+ "no_write": true,
+ "reproduction": {
+  "largest_deviation": 0.0,
+  "pass": true
+ }
+}
