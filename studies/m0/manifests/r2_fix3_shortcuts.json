@@ -1,0 +1,3085 @@
+{
+ "after": {
+  "R2.binary_search_trace": {
+   "cue": [
+    0.059,
+    0.078,
+    0.041,
+    0.043,
+    0.031,
+    0.055,
+    0.027
+   ],
+   "cue_rule": [
+    "[sum] sum: first look + target",
+    "[sum] sum: midpoint rounded UP",
+    "[sum] sum: first look + target",
+    "[sum] sum: first look + target",
+    "[sum] sum: first look + target",
+    "[sum] sum: midpoint rounded UP",
+    "[sum] sum: first look + target"
+   ],
+   "mode": [
+    0.008,
+    0.006,
+    0.008,
+    0.001,
+    0.004,
+    0.002,
+    0.002
+   ],
+   "p": [
+    0.78,
+    0.838,
+    0.81,
+    0.761,
+    0.77,
+    0.821,
+    0.811
+   ]
+  },
+  "R2.bracket_match": {
+   "cue": [
+    0.164,
+    0.172,
+    0.153,
+    0.134,
+    0.115,
+    0.119,
+    0.103
+   ],
+   "cue_rule": [
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds",
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds",
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds",
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds",
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds",
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds",
+    "[first_error] first_error: the position after the first adjacent closer pair of different kinds"
+   ],
+   "mode": [
+    0.119,
+    0.1,
+    0.108,
+    0.087,
+    0.099,
+    0.093,
+    0.088
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.bst_traversal": {
+   "cue": [
+    0.036,
+    0.012,
+    0.008,
+    0.003,
+    0.002,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "[level] insertion order",
+    "[level] insertion order",
+    "[post] reverse insertion order",
+    "[post] reverse insertion order",
+    "[pre] insertion order",
+    "",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.069,
+    0.04,
+    0.012,
+    0.006,
+    0.003,
+    0.001,
+    0.0
+   ]
+  },
+  "R2.cache_eviction": {
+   "cue": [
+    0.092,
+    0.092,
+    0.087,
+    0.047,
+    0.047,
+    0.074,
+    0.046
+   ],
+   "cue_rule": [
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)",
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)",
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)",
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)",
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)",
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)",
+    "[fifo/contents] contents: the last cap distinct requests, oldest first (the LRU contents)"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.092,
+    0.092,
+    0.087,
+    0.047,
+    0.047,
+    0.074,
+    0.046
+   ]
+  },
+  "R2.caesar_shift": {
+   "cue": [
+    0.034,
+    0.039,
+    0.045,
+    0.042,
+    0.052,
+    0.031,
+    0.048
+   ],
+   "cue_rule": [
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.cellular_automaton": {
+   "cue": [
+    0.042,
+    0.023,
+    0.048,
+    0.047,
+    0.011,
+    0.007,
+    0.038
+   ],
+   "cue_rule": [
+    "[row] row: neighbour order reversed (right,cell,left)",
+    "[row] row: neighbour order reversed (right,cell,left)",
+    "[row] one step only",
+    "[row] one step only",
+    "[row] the start row",
+    "[row] the start row",
+    "[row] one step only"
+   ],
+   "mode": [
+    0.009,
+    0.005,
+    0.008,
+    0.004,
+    0.004,
+    0.004,
+    0.003
+   ],
+   "p": [
+    0.179,
+    0.189,
+    0.116,
+    0.114,
+    0.111,
+    0.104,
+    0.058
+   ]
+  },
+  "R2.cheapest_network": {
+   "cue": [
+    0.065,
+    0.066,
+    0.043,
+    0.043,
+    0.03,
+    0.03,
+    0.019
+   ],
+   "cue_rule": [
+    "[-] n-1 cheapest cables",
+    "[-] sum of each town's cheapest cable",
+    "[-] sum of each town's cheapest cable",
+    "[-] n-1 cheapest cables",
+    "[-] sum of each town's cheapest cable",
+    "[-] sum of each town's cheapest cable",
+    "[-] sum of each town's cheapest cable"
+   ],
+   "mode": [
+    0.035,
+    0.044,
+    0.054,
+    0.035,
+    0.035,
+    0.045,
+    0.04
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.coin_change_min": {
+   "cue": [
+    0.111,
+    0.089,
+    0.08,
+    0.081,
+    0.082,
+    0.06,
+    0.049
+   ],
+   "cue_rule": [
+    "[fewest] ceil(amount / largest coin) for each amount",
+    "[fewest] ceil(amount / largest coin) for each amount",
+    "[fewest] ceil(amount / largest coin) for each amount",
+    "[fewest] ceil(amount / largest coin) for each amount",
+    "[fewest] ceil(amount / largest coin) for each amount",
+    "[fewest] ceil(amount / largest coin) for each amount",
+    "[fewest] ceil(amount / largest coin) for each amount"
+   ],
+   "mode": [
+    0.001,
+    0.0,
+    0.0,
+    0.002,
+    0.001,
+    0.001,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.count_divisible": {
+   "cue": [
+    0.029,
+    0.018,
+    0.011,
+    0.005,
+    0.003,
+    0.0,
+    0.002
+   ],
+   "cue_rule": [
+    "[sum] constant 0",
+    "[sum] constant 0",
+    "[sum] constant 0",
+    "[sum] constant 0",
+    "[sum] constant 0",
+    "",
+    "[sum] constant 0"
+   ],
+   "mode": [
+    0.029,
+    0.01,
+    0.011,
+    0.004,
+    0.002,
+    0.001,
+    0.002
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.count_letter": {
+   "cue": [
+    0.082,
+    0.068,
+    0.067,
+    0.05,
+    0.046,
+    0.041,
+    0.034
+   ],
+   "cue_rule": [
+    "[-] number of words",
+    "[-] number of words",
+    "[-] number of words",
+    "[-] number of words",
+    "[-] number of words",
+    "[-] number of words",
+    "[-] number of words"
+   ],
+   "mode": [
+    0.09,
+    0.067,
+    0.053,
+    0.052,
+    0.034,
+    0.04,
+    0.036
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.crt_smallest": {
+   "cue": [
+    0.052,
+    0.045,
+    0.032,
+    0.002,
+    0.002,
+    0.001,
+    0.0
+   ],
+   "cue_rule": [
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    ""
+   ],
+   "mode": [
+    0.009,
+    0.004,
+    0.002,
+    0.001,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.023,
+    0.021,
+    0.022,
+    0.011
+   ]
+  },
+  "R2.dictionary_rank": {
+   "cue": [
+    0.043,
+    0.039,
+    0.003,
+    0.006,
+    0.001,
+    0.001,
+    0.0
+   ],
+   "cue_rule": [
+    "[position] position: index in the FULL sorted alphabet (no removal of used letters)",
+    "[position] position: index in the FULL sorted alphabet (no removal of used letters)",
+    "[position] position: index in the FULL sorted alphabet (no removal of used letters)",
+    "[position] position: index in the FULL sorted alphabet (no removal of used letters)",
+    "[position] position: index in the FULL sorted alphabet (no removal of used letters)",
+    "[position] position: index in the FULL sorted alphabet (no removal of used letters)",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.digit_root": {
+   "cue": [
+    0.093,
+    0.098,
+    0.092,
+    0.101,
+    0.098,
+    0.095,
+    0.097
+   ],
+   "cue_rule": [
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit"
+   ],
+   "mode": [
+    0.103,
+    0.107,
+    0.11,
+    0.121,
+    0.123,
+    0.106,
+    0.104
+   ],
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.expression_eval": {
+   "cue": [
+    0.086,
+    0.083,
+    0.045,
+    0.056,
+    0.015,
+    0.025,
+    0.017
+   ],
+   "cue_rule": [
+    "[ranked] ranked item: strict left to right (ignore precedence)",
+    "[ranked] ranked item: strict left to right (ignore precedence)",
+    "[left_to_right] LTR: usual precedence inside parentheses only (old ambiguity)",
+    "[left_to_right] LTR: usual precedence inside parentheses only (old ambiguity)",
+    "[left_to_right] LTR: usual precedence inside parentheses only (old ambiguity)",
+    "[left_to_right] LTR: usual precedence inside parentheses only (old ambiguity)",
+    "[left_to_right] LTR: usual precedence inside parentheses only (old ambiguity)"
+   ],
+   "mode": [
+    0.026,
+    0.025,
+    0.019,
+    0.022,
+    0.009,
+    0.007,
+    0.003
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.from_base": {
+   "cue": [
+    0.164,
+    0.084,
+    0.037,
+    0.021,
+    0.008,
+    0.004,
+    0.006
+   ],
+   "cue_rule": [
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left"
+   ],
+   "mode": [
+    0.013,
+    0.008,
+    0.004,
+    0.002,
+    0.0,
+    0.0,
+    0.001
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.gcd_euclid": {
+   "cue": [
+    0.083,
+    0.064,
+    0.053,
+    0.057,
+    0.046,
+    0.031,
+    0.028
+   ],
+   "cue_rule": [
+    "[gcd] gcd: a mod b (one Euclid step)",
+    "[gcd] gcd: a mod b (one Euclid step)",
+    "[gcd] gcd: a mod b (one Euclid step)",
+    "[gcd] gcd: a mod b (one Euclid step)",
+    "[gcd] gcd: a mod b (one Euclid step)",
+    "[gcd] gcd: a mod b (one Euclid step)",
+    "[gcd] gcd: a mod b (one Euclid step)"
+   ],
+   "mode": [
+    0.034,
+    0.029,
+    0.02,
+    0.011,
+    0.012,
+    0.011,
+    0.01
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.grid_sum": {
+   "cue": [
+    0.063,
+    0.038,
+    0.043,
+    0.047,
+    0.05,
+    0.024,
+    0.047
+   ],
+   "cue_rule": [
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)"
+   ],
+   "mode": [
+    0.082,
+    0.068,
+    0.057,
+    0.057,
+    0.064,
+    0.049,
+    0.057
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.hamming_error_position": {
+   "cue": [
+    0.13,
+    0.218,
+    0.225,
+    0.179,
+    0.168,
+    0.178,
+    0.153
+   ],
+   "cue_rule": [
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only"
+   ],
+   "mode": [
+    0.08,
+    0.097,
+    0.101,
+    0.106,
+    0.105,
+    0.098,
+    0.112
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.hash_probe": {
+   "cue": [
+    0.13,
+    0.095,
+    0.089,
+    0.063,
+    0.039,
+    0.06,
+    0.025
+   ],
+   "cue_rule": [
+    "[checksum] checksum: all slots 0..n-1 filled from the lowest home",
+    "[checksum] checksum: all slots 0..n-1 filled from the lowest home",
+    "[checksum] checksum: sum of the home slots (every number at home, collisions ignored: distinct homes only)",
+    "[checksum] checksum: sum of the home slots (every number at home, collisions ignored: distinct homes only)",
+    "[checksum] checksum: sum of the home slots (every number at home, collisions ignored: distinct homes only)",
+    "[checksum] checksum: sum of the home slots (every number at home, collisions ignored: distinct homes only)",
+    "[checksum] checksum: sum of the home slots (every number at home, collisions ignored: distinct homes only)"
+   ],
+   "mode": [
+    0.07,
+    0.072,
+    0.079,
+    0.042,
+    0.043,
+    0.041,
+    0.033
+   ],
+   "p": [
+    0.727,
+    0.681,
+    0.736,
+    0.719,
+    0.65,
+    0.745,
+    0.68
+   ]
+  },
+  "R2.interval_scheduling": {
+   "cue": [
+    0.147,
+    0.144,
+    0.099,
+    0.099,
+    0.057,
+    0.057,
+    0.046
+   ],
+   "cue_rule": [
+    "[chosen] shortest first",
+    "[chosen] shortest first",
+    "[chosen] shortest first",
+    "[chosen] shortest first",
+    "[chosen] shortest first",
+    "[chosen] shortest first",
+    "[chosen] shortest first"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.61,
+    0.609,
+    0.558,
+    0.541,
+    0.514,
+    0.519,
+    0.468
+   ]
+  },
+  "R2.kth_smallest": {
+   "cue": [
+    0.336,
+    0.194,
+    0.138,
+    0.101,
+    0.088,
+    0.074,
+    0.067
+   ],
+   "cue_rule": [
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest"
+   ],
+   "mode": [
+    0.003,
+    0.002,
+    0.001,
+    0.003,
+    0.002,
+    0.002,
+    0.003
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.lcs_length": {
+   "cue": [
+    0.215,
+    0.189,
+    0.157,
+    0.133,
+    0.121,
+    0.111,
+    0.093
+   ],
+   "cue_rule": [
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] round(0.6 * shorter length)"
+   ],
+   "mode": [
+    0.138,
+    0.11,
+    0.103,
+    0.091,
+    0.101,
+    0.087,
+    0.084
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.lis_length": {
+   "cue": [
+    0.309,
+    0.241,
+    0.191,
+    0.14,
+    0.119,
+    0.092,
+    0.081
+   ],
+   "cue_rule": [
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start"
+   ],
+   "mode": [
+    0.192,
+    0.152,
+    0.124,
+    0.114,
+    0.11,
+    0.086,
+    0.07
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.list_ops": {
+   "cue": [
+    0.67,
+    0.583,
+    0.471,
+    0.43,
+    0.363,
+    0.324,
+    0.256
+   ],
+   "cue_rule": [
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.longest_palindromic_substring": {
+   "cue": [
+    0.506,
+    0.521,
+    0.521,
+    0.518,
+    0.509,
+    0.525,
+    0.517
+   ],
+   "cue_rule": [
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only"
+   ],
+   "mode": [
+    0.141,
+    0.148,
+    0.153,
+    0.135,
+    0.135,
+    0.143,
+    0.152
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.luhn_check": {
+   "cue": [
+    0.115,
+    0.103,
+    0.114,
+    0.101,
+    0.119,
+    0.104,
+    0.108
+   ],
+   "cue_rule": [
+    "[check_digit] plain digit sum (no doubling)",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] doubling the other parity",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] doubling the other parity"
+   ],
+   "mode": [
+    0.113,
+    0.097,
+    0.1,
+    0.132,
+    0.113,
+    0.102,
+    0.095
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.max_subarray_sum": {
+   "cue": [
+    0.18,
+    0.175,
+    0.188,
+    0.138,
+    0.15,
+    0.136,
+    0.112
+   ],
+   "cue_rule": [
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)",
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)",
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)",
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)",
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)",
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)",
+    "[-] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch)"
+   ],
+   "mode": [
+    0.043,
+    0.043,
+    0.049,
+    0.035,
+    0.041,
+    0.035,
+    0.029
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.merge_smallest_cost": {
+   "cue": [
+    0.312,
+    0.084,
+    0.015,
+    0.021,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "[-] ascending chain (sorted, merge left to right)",
+    "[-] ascending chain (sorted, merge left to right)",
+    "[-] ascending chain (sorted, merge left to right)",
+    "[-] sum * ceil(log2 n)",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.013,
+    0.008,
+    0.004,
+    0.005,
+    0.004,
+    0.002,
+    0.003
+   ],
+   "p": [
+    0.344,
+    0.222,
+    0.129,
+    0.102,
+    0.064,
+    0.044,
+    0.031
+   ]
+  },
+  "R2.min_heap_ops": {
+   "cue": [
+    0.003,
+    0.001,
+    0.001,
+    0.002,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=2] sorted remainder",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.modular_power": {
+   "cue": [
+    0.304,
+    0.298,
+    0.243,
+    0.202,
+    0.164,
+    0.211,
+    0.198
+   ],
+   "cue_rule": [
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)"
+   ],
+   "mode": [
+    0.1,
+    0.086,
+    0.076,
+    0.062,
+    0.06,
+    0.059,
+    0.067
+   ],
+   "p": [
+    0.998,
+    0.999,
+    0.999,
+    0.998,
+    1.0,
+    0.999,
+    0.999
+   ]
+  },
+  "R2.multiples_between": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.022,
+    0.009,
+    0.005,
+    0.008,
+    0.002,
+    0.002,
+    0.003
+   ],
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.palindrome_check": {
+   "cue": [
+    0.206,
+    0.167,
+    0.169,
+    0.154,
+    0.13,
+    0.155,
+    0.139
+   ],
+   "cue_rule": [
+    "[-] outer two letters each side match",
+    "[-] outer two letters each side match",
+    "[-] outer two letters each side match",
+    "[-] outer two letters each side match",
+    "[-] outer two letters each side match",
+    "[-] outer two letters each side match",
+    "[-] outer two letters each side match"
+   ],
+   "mode": [
+    0.048,
+    0.032,
+    0.039,
+    0.026,
+    0.013,
+    0.044,
+    0.033
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.permutation_power": {
+   "cue": [
+    0.106,
+    0.101,
+    0.09,
+    0.078,
+    0.077,
+    0.069,
+    0.053
+   ],
+   "cue_rule": [
+    "[-] one application",
+    "[-] the start",
+    "[-] the start",
+    "[-] one application",
+    "[-] one application",
+    "[-] one application",
+    "[-] one application"
+   ],
+   "mode": [
+    0.085,
+    0.083,
+    0.069,
+    0.071,
+    0.06,
+    0.058,
+    0.049
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.prime_factor_query": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.062,
+    0.048,
+    0.057,
+    0.04,
+    0.056,
+    0.062,
+    0.052
+   ],
+   "p": [
+    0.998,
+    0.995,
+    0.997,
+    0.998,
+    0.998,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.run_length": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.sort_list": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.stack_machine": {
+   "cue": [
+    0.04,
+    0.019,
+    0.024,
+    0.018,
+    0.017,
+    0.018,
+    0.019
+   ],
+   "cue_rule": [
+    "[-] sum of pushed values",
+    "[-] last pushed value",
+    "[-] last pushed value",
+    "[-] last pushed value",
+    "[-] last pushed value",
+    "[-] last pushed value",
+    "[-] last pushed value"
+   ],
+   "mode": [
+    0.033,
+    0.033,
+    0.028,
+    0.038,
+    0.029,
+    0.041,
+    0.041
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.string_rewrite_nonidentity": {
+   "cue": [
+    1.0,
+    0.251,
+    0.254,
+    0.043,
+    0.038,
+    0.007,
+    0.011
+   ],
+   "cue_rule": [
+    "[-] only the first rule",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order"
+   ],
+   "mode": [
+    0.007,
+    0.006,
+    0.008,
+    0.008,
+    0.004,
+    0.009,
+    0.004
+   ],
+   "p": [
+    1.0,
+    0.395,
+    0.416,
+    0.08,
+    0.078,
+    0.016,
+    0.013
+   ]
+  },
+  "R2.subtraction_game": {
+   "cue": [
+    0.133,
+    0.109,
+    0.087,
+    0.089,
+    0.076,
+    0.09,
+    0.097
+   ],
+   "cue_rule": [
+    "[-] count of piles that are a win alone is odd -> yes",
+    "[-] count of piles that are a win alone is odd -> yes",
+    "[-] count of piles that are a win alone is odd -> yes",
+    "[-] count of piles that are a win alone is odd -> yes",
+    "[-] count of piles that are a win alone is odd -> yes",
+    "[-] count of piles that are a win alone is odd -> yes",
+    "[-] count of piles that are a win alone is odd -> yes"
+   ],
+   "mode": [
+    0.007,
+    0.013,
+    0.005,
+    0.006,
+    0.004,
+    0.009,
+    0.005
+   ],
+   "p": [
+    0.322,
+    0.308,
+    0.325,
+    0.306,
+    0.304,
+    0.31,
+    0.315
+   ]
+  },
+  "R2.to_base_wide": {
+   "cue": [
+    0.048,
+    0.025,
+    0.015,
+    0.004,
+    0.003,
+    0.002,
+    0.0
+   ],
+   "cue_rule": [
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    ""
+   ],
+   "mode": [
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "before": {
+  "R2.binary_search_trace": {
+   "cue": [
+    0.381,
+    0.279,
+    0.396,
+    0.204,
+    0.23,
+    0.352,
+    0.205
+   ],
+   "cue_rule": [
+    "[third] third = list value nearest the target (ties low)",
+    "[third] third = list value nearest the target (ties low)",
+    "[third] third: midpoint rounded UP",
+    "[third] third = value at the 1/8 or 7/8 position on the target's side",
+    "[third] third = value at the 1/8 or 7/8 position on the target's side",
+    "[third] third: midpoint rounded UP",
+    "[third] third = value at the 1/8 or 7/8 position on the target's side"
+   ],
+   "mode": [
+    0.035,
+    0.055,
+    0.017,
+    0.021,
+    0.015,
+    0.016,
+    0.017
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.bracket_match": {
+   "cue": [
+    0.515,
+    0.436,
+    0.429,
+    0.433,
+    0.375,
+    0.385,
+    0.359
+   ],
+   "cue_rule": [
+    "[match] match: last_same",
+    "[match] match: next_same",
+    "[match] match: last_same",
+    "[match] match: next_same",
+    "[match] match: next_same",
+    "[match] match: next_same",
+    "[match] match: second_same"
+   ],
+   "mode": [
+    0.221,
+    0.186,
+    0.207,
+    0.175,
+    0.142,
+    0.139,
+    0.118
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.bst_traversal": {
+   "cue": [
+    0.357,
+    0.172,
+    0.078,
+    0.035,
+    0.014,
+    0.006,
+    0.002
+   ],
+   "cue_rule": [
+    "[post] reverse insertion order",
+    "[post] reverse insertion order",
+    "[post] reverse insertion order",
+    "[post] reverse insertion order",
+    "[post] reverse insertion order",
+    "[post] reverse insertion order",
+    "[post] reverse insertion order"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.413,
+    0.258,
+    0.151,
+    0.068,
+    0.041,
+    0.014,
+    0.007
+   ]
+  },
+  "R2.cache_eviction": {
+   "cue": [
+    0.487,
+    0.414,
+    0.516,
+    0.392,
+    0.429,
+    0.399,
+    0.421
+   ],
+   "cue_rule": [
+    "[lru/misses] misses: requests not among the previous cap requests",
+    "[lru/misses] misses: requests not among the previous cap requests",
+    "[lru/misses] misses: requests not among the previous cap requests",
+    "[fifo/present] present: among the last cap DISTINCT requests (LRU answer)",
+    "[lru/misses] misses: requests not among the previous cap requests",
+    "[fifo/present] present: among the last cap DISTINCT requests (LRU answer)",
+    "[lru/misses] misses: requests not among the previous cap requests"
+   ],
+   "mode": [
+    0.275,
+    0.241,
+    0.197,
+    0.212,
+    0.172,
+    0.154,
+    0.162
+   ],
+   "p": [
+    0.594,
+    0.514,
+    0.528,
+    0.437,
+    0.506,
+    0.443,
+    0.391
+   ]
+  },
+  "R2.caesar_shift": {
+   "cue": [
+    0.034,
+    0.039,
+    0.045,
+    0.042,
+    0.052,
+    0.031,
+    0.048
+   ],
+   "cue_rule": [
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards",
+    "[-] shift backwards"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.cellular_automaton": {
+   "cue": [
+    0.725,
+    0.733,
+    0.582,
+    0.594,
+    0.55,
+    0.562,
+    0.507
+   ],
+   "cue_rule": [
+    "[count] row: neighbour order reversed (right,cell,left)",
+    "[count] row: neighbour order reversed (right,cell,left)",
+    "[count] row: neighbour order reversed (right,cell,left)",
+    "[count] row: neighbour order reversed (right,cell,left)",
+    "[count] row: neighbour order reversed (right,cell,left)",
+    "[count] row: neighbour order reversed (right,cell,left)",
+    "[count] row: neighbour order reversed (right,cell,left)"
+   ],
+   "mode": [
+    0.252,
+    0.134,
+    0.158,
+    0.127,
+    0.083,
+    0.079,
+    0.083
+   ],
+   "p": [
+    0.566,
+    0.576,
+    0.48,
+    0.497,
+    0.409,
+    0.395,
+    0.374
+   ]
+  },
+  "R2.cheapest_network": {
+   "cue": [
+    1.0,
+    1.0,
+    1.0,
+    0.766,
+    0.769,
+    0.772,
+    0.573
+   ],
+   "cue_rule": [
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables",
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables",
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables",
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables",
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables",
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables",
+    "[-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables"
+   ],
+   "mode": [
+    0.086,
+    0.088,
+    0.097,
+    0.069,
+    0.072,
+    0.057,
+    0.061
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.chip_toppling": {
+   "cue": [
+    0.989,
+    0.99,
+    0.994,
+    0.996,
+    0.999,
+    0.998,
+    1.0
+   ],
+   "cue_rule": [
+    "[topplings] closed form: Green's function with the conservation final row",
+    "[topplings_of] closed form: Green's function with the conservation final row",
+    "[topplings] closed form: Green's function with the conservation final row",
+    "[topplings_of] closed form: Green's function with the conservation final row",
+    "[topplings_of] closed form: Green's function with the conservation final row",
+    "[topplings_of] closed form: Green's function with the conservation final row",
+    "[topplings] closed form: Green's function with the conservation final row"
+   ],
+   "mode": [
+    0.17,
+    0.106,
+    0.074,
+    0.062,
+    0.039,
+    0.03,
+    0.036
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.coin_change_min": {
+   "cue": [
+    0.197,
+    0.243,
+    0.24,
+    0.123,
+    0.148,
+    0.166,
+    0.172
+   ],
+   "cue_rule": [
+    "[ways] constant 2",
+    "[ways] constant 1",
+    "[ways] constant 1",
+    "[ways] amount // largest + 1",
+    "[ways] constant 1",
+    "[ways] constant 1",
+    "[ways] constant 1"
+   ],
+   "mode": [
+    0.197,
+    0.243,
+    0.24,
+    0.103,
+    0.148,
+    0.166,
+    0.172
+   ],
+   "p": [
+    0.126,
+    0.092,
+    0.095,
+    0.105,
+    0.1,
+    0.085,
+    0.077
+   ]
+  },
+  "R2.count_divisible": {
+   "cue": [
+    0.987,
+    0.98,
+    0.99,
+    0.989,
+    0.986,
+    0.988,
+    0.985
+   ],
+   "cue_rule": [
+    "[-] >= t instead of > t",
+    "[-] >= t instead of > t",
+    "[-] >= t instead of > t",
+    "[-] >= t instead of > t",
+    "[-] >= t instead of > t",
+    "[-] >= t instead of > t",
+    "[-] >= t instead of > t"
+   ],
+   "mode": [
+    0.457,
+    0.32,
+    0.274,
+    0.221,
+    0.203,
+    0.181,
+    0.154
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.count_letter": {
+   "cue": [
+    0.866,
+    0.829,
+    0.789,
+    0.762,
+    0.731,
+    0.72,
+    0.671
+   ],
+   "cue_rule": [
+    "[-] words containing the letter",
+    "[-] words containing the letter",
+    "[-] words containing the letter",
+    "[-] words containing the letter",
+    "[-] words containing the letter",
+    "[-] words containing the letter",
+    "[-] words containing the letter"
+   ],
+   "mode": [
+    0.591,
+    0.397,
+    0.3,
+    0.226,
+    0.188,
+    0.177,
+    0.155
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.crt_smallest": {
+   "cue": [
+    0.052,
+    0.045,
+    0.032,
+    0.002,
+    0.002,
+    0.001,
+    0.0
+   ],
+   "cue_rule": [
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    "[-] r1 + m1 * r2 (first two)",
+    ""
+   ],
+   "mode": [
+    0.009,
+    0.004,
+    0.002,
+    0.001,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.023,
+    0.021,
+    0.022,
+    0.011
+   ]
+  },
+  "R2.dictionary_rank": {
+   "cue": [
+    0.005,
+    0.002,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "[position] position: index in the FULL sorted list (no removal)",
+    "[position] position: index in the FULL sorted list (no removal)",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.041,
+    0.044,
+    0.005,
+    0.006,
+    0.001,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.digit_root": {
+   "cue": [
+    0.093,
+    0.098,
+    0.092,
+    0.101,
+    0.098,
+    0.095,
+    0.097
+   ],
+   "cue_rule": [
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit",
+    "[-] last digit"
+   ],
+   "mode": [
+    0.103,
+    0.107,
+    0.11,
+    0.121,
+    0.123,
+    0.106,
+    0.104
+   ],
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.expression_eval": {
+   "cue": [
+    0.898,
+    0.845,
+    0.795,
+    0.767,
+    0.732,
+    0.7,
+    0.647
+   ],
+   "cue_rule": [
+    "[ranked] ranked: + before - (old 'same symbol' reading)",
+    "[ranked] ranked: + before - (old 'same symbol' reading)",
+    "[ranked] ranked: + before - (old 'same symbol' reading)",
+    "[ranked] ranked: + before - (old 'same symbol' reading)",
+    "[ranked] ranked: + before - (old 'same symbol' reading)",
+    "[ranked] ranked: + before - (old 'same symbol' reading)",
+    "[ranked] ranked: + before - (old 'same symbol' reading)"
+   ],
+   "mode": [
+    0.036,
+    0.03,
+    0.028,
+    0.022,
+    0.011,
+    0.011,
+    0.014
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.from_base": {
+   "cue": [
+    0.164,
+    0.084,
+    0.037,
+    0.021,
+    0.008,
+    0.004,
+    0.006
+   ],
+   "cue_rule": [
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left",
+    "[-] digits read right to left"
+   ],
+   "mode": [
+    0.013,
+    0.008,
+    0.004,
+    0.002,
+    0.0,
+    0.0,
+    0.001
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.gcd_euclid": {
+   "cue": [
+    0.894,
+    0.864,
+    0.859,
+    0.828,
+    0.808,
+    0.756,
+    0.743
+   ],
+   "cue_rule": [
+    "[gcd] gcd: largest prime factor of b",
+    "[gcd] gcd: largest prime factor of b",
+    "[gcd] gcd: largest prime factor of b",
+    "[gcd] gcd: largest prime factor of b",
+    "[gcd] gcd: largest prime factor of b",
+    "[gcd] gcd: largest prime factor of b",
+    "[gcd] gcd: largest prime factor of b"
+   ],
+   "mode": [
+    0.079,
+    0.051,
+    0.032,
+    0.034,
+    0.023,
+    0.024,
+    0.02
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.grid_sum": {
+   "cue": [
+    0.063,
+    0.038,
+    0.043,
+    0.047,
+    0.05,
+    0.024,
+    0.047
+   ],
+   "cue_rule": [
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)",
+    "[-] row i read as column i (or the reverse)"
+   ],
+   "mode": [
+    0.082,
+    0.068,
+    0.057,
+    0.057,
+    0.064,
+    0.049,
+    0.057
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.hamming_error_position": {
+   "cue": [
+    0.13,
+    0.218,
+    0.225,
+    0.179,
+    0.168,
+    0.178,
+    0.153
+   ],
+   "cue_rule": [
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only",
+    "[-] first failing check position only"
+   ],
+   "mode": [
+    0.08,
+    0.097,
+    0.101,
+    0.106,
+    0.105,
+    0.098,
+    0.112
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.hash_probe": {
+   "cue": [
+    0.934,
+    0.965,
+    0.943,
+    0.955,
+    0.969,
+    0.953,
+    0.985
+   ],
+   "cue_rule": [
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home",
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home",
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home",
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home",
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home",
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home",
+    "[probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home"
+   ],
+   "mode": [
+    0.351,
+    0.297,
+    0.257,
+    0.212,
+    0.225,
+    0.204,
+    0.199
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.interval_scheduling": {
+   "cue": [
+    0.209,
+    0.193,
+    0.188,
+    0.175,
+    0.189,
+    0.181,
+    0.174
+   ],
+   "cue_rule": [
+    "[-] shortest first",
+    "[-] shortest first",
+    "[-] shortest first",
+    "[-] shortest first",
+    "[-] shortest first",
+    "[-] shortest first",
+    "[-] shortest first"
+   ],
+   "mode": [
+    0.241,
+    0.257,
+    0.22,
+    0.225,
+    0.233,
+    0.22,
+    0.224
+   ],
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.kth_smallest": {
+   "cue": [
+    0.336,
+    0.194,
+    0.138,
+    0.101,
+    0.088,
+    0.074,
+    0.067
+   ],
+   "cue_rule": [
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest",
+    "[-] k-th largest"
+   ],
+   "mode": [
+    0.003,
+    0.002,
+    0.001,
+    0.003,
+    0.002,
+    0.002,
+    0.003
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.lcs_length": {
+   "cue": [
+    0.463,
+    0.364,
+    0.295,
+    0.274,
+    0.252,
+    0.223,
+    0.178
+   ],
+   "cue_rule": [
+    "[-] greedy matching, better of the two directions",
+    "[-] greedy matching, better of the two directions",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2",
+    "[-] letter-count overlap - 2"
+   ],
+   "mode": [
+    0.267,
+    0.242,
+    0.224,
+    0.205,
+    0.17,
+    0.152,
+    0.151
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.lis_length": {
+   "cue": [
+    0.309,
+    0.241,
+    0.191,
+    0.14,
+    0.119,
+    0.092,
+    0.081
+   ],
+   "cue_rule": [
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start",
+    "[-] best greedy over every start"
+   ],
+   "mode": [
+    0.192,
+    0.152,
+    0.124,
+    0.114,
+    0.11,
+    0.086,
+    0.07
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.list_ops": {
+   "cue": [
+    0.67,
+    0.583,
+    0.471,
+    0.43,
+    0.363,
+    0.324,
+    0.256
+   ],
+   "cue_rule": [
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses",
+    "[-] ignore reverses"
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.longest_palindromic_substring": {
+   "cue": [
+    0.506,
+    0.521,
+    0.521,
+    0.518,
+    0.509,
+    0.525,
+    0.517
+   ],
+   "cue_rule": [
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only",
+    "[-] longest odd palindrome only"
+   ],
+   "mode": [
+    0.141,
+    0.148,
+    0.153,
+    0.135,
+    0.135,
+    0.143,
+    0.152
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.luhn_check": {
+   "cue": [
+    0.115,
+    0.103,
+    0.114,
+    0.101,
+    0.119,
+    0.104,
+    0.108
+   ],
+   "cue_rule": [
+    "[check_digit] plain digit sum (no doubling)",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] doubling the other parity",
+    "[check_digit] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled",
+    "[check_digit] doubling the other parity"
+   ],
+   "mode": [
+    0.113,
+    0.097,
+    0.1,
+    0.132,
+    0.113,
+    0.102,
+    0.095
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.max_subarray_sum": {
+   "cue": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "cue_rule": [
+    "[-] best window of exactly 7 neighbouring numbers",
+    "[-] best window of exactly 7 neighbouring numbers",
+    "[-] best window of exactly 7 neighbouring numbers",
+    "[-] best window of exactly 7 neighbouring numbers",
+    "[-] best window of exactly 7 neighbouring numbers",
+    "[-] best window of exactly 7 neighbouring numbers",
+    "[-] best window of exactly 7 neighbouring numbers"
+   ],
+   "mode": [
+    0.051,
+    0.06,
+    0.056,
+    0.049,
+    0.054,
+    0.052,
+    0.058
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.merge_smallest_cost": {
+   "cue": [
+    0.312,
+    0.084,
+    0.015,
+    0.021,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "[-] ascending chain (sorted, merge left to right)",
+    "[-] ascending chain (sorted, merge left to right)",
+    "[-] ascending chain (sorted, merge left to right)",
+    "[-] sum * ceil(log2 n)",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.013,
+    0.008,
+    0.004,
+    0.005,
+    0.004,
+    0.002,
+    0.003
+   ],
+   "p": [
+    0.344,
+    0.222,
+    0.129,
+    0.102,
+    0.064,
+    0.044,
+    0.031
+   ]
+  },
+  "R2.min_heap_ops": {
+   "cue": [
+    0.169,
+    0.066,
+    0.041,
+    0.012,
+    0.009,
+    0.004,
+    0.0
+   ],
+   "cue_rule": [
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    "[removals=0] insertion order with the minimum swapped to the front",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.modular_power": {
+   "cue": [
+    0.304,
+    0.298,
+    0.243,
+    0.202,
+    0.164,
+    0.211,
+    0.198
+   ],
+   "cue_rule": [
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)",
+    "[-] a^(e mod (m-1)) mod m (Fermat misuse)"
+   ],
+   "mode": [
+    0.1,
+    0.086,
+    0.076,
+    0.062,
+    0.06,
+    0.059,
+    0.067
+   ],
+   "p": [
+    0.998,
+    0.999,
+    0.999,
+    0.998,
+    1.0,
+    0.999,
+    0.999
+   ]
+  },
+  "R2.multiples_between": {
+   "cue": [
+    0.875,
+    0.892,
+    0.891,
+    0.881,
+    0.88,
+    0.885,
+    0.886
+   ],
+   "cue_rule": [
+    "[-] b//m - a//m",
+    "[-] b//m - a//m",
+    "[-] b//m - a//m",
+    "[-] b//m - a//m",
+    "[-] b//m - a//m",
+    "[-] b//m - a//m",
+    "[-] b//m - a//m"
+   ],
+   "mode": [
+    0.063,
+    0.029,
+    0.019,
+    0.015,
+    0.009,
+    0.007,
+    0.009
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.palindrome_check": {
+   "cue": [
+    0.466,
+    0.465,
+    0.467,
+    0.462,
+    0.466,
+    0.459,
+    0.466
+   ],
+   "cue_rule": [
+    "[-] letter counts: at most one odd count",
+    "[-] letter counts: at most one odd count",
+    "[-] letter counts: at most one odd count",
+    "[-] letter counts: at most one odd count",
+    "[-] letter counts: at most one odd count",
+    "[-] letter counts: at most one odd count",
+    "[-] letter counts: at most one odd count"
+   ],
+   "mode": [
+    0.04,
+    0.027,
+    0.006,
+    0.018,
+    0.0,
+    0.016,
+    0.014
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.permutation_power": {
+   "cue": [
+    0.829,
+    0.581,
+    0.759,
+    0.483,
+    0.614,
+    0.551,
+    0.572
+   ],
+   "cue_rule": [
+    "[-] t mod n applications",
+    "[-] t mod n applications",
+    "[-] t mod n applications",
+    "[-] t mod n applications",
+    "[-] t mod n applications",
+    "[-] t mod n applications",
+    "[-] t mod n applications"
+   ],
+   "mode": [
+    0.251,
+    0.188,
+    0.172,
+    0.151,
+    0.129,
+    0.114,
+    0.087
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.prime_factor_query": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.082,
+    0.048,
+    0.057,
+    0.04,
+    0.056,
+    0.062,
+    0.052
+   ],
+   "p": [
+    1.0,
+    0.995,
+    0.997,
+    0.998,
+    0.998,
+    1.0,
+    1.0
+   ]
+  },
+  "R2.run_length": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.sort_list": {
+   "cue": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "cue_rule": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "mode": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.stack_machine": {
+   "cue": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "cue_rule": [
+    "[-] last step is push -> its value; else None",
+    "[-] last step is push -> its value; else None",
+    "[-] last step is push -> its value; else None",
+    "[-] last step is push -> its value; else None",
+    "[-] last step is push -> its value; else None",
+    "[-] last step is push -> its value; else None",
+    "[-] last step is push -> its value; else None"
+   ],
+   "mode": [
+    0.089,
+    0.057,
+    0.071,
+    0.064,
+    0.071,
+    0.081,
+    0.076
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "R2.string_rewrite_nonidentity": {
+   "cue": [
+    1.0,
+    0.251,
+    0.254,
+    0.043,
+    0.038,
+    0.007,
+    0.011
+   ],
+   "cue_rule": [
+    "[-] only the first rule",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order",
+    "[-] rules in reverse order"
+   ],
+   "mode": [
+    0.007,
+    0.006,
+    0.008,
+    0.008,
+    0.004,
+    0.009,
+    0.004
+   ],
+   "p": [
+    1.0,
+    0.395,
+    0.416,
+    0.08,
+    0.078,
+    0.016,
+    0.013
+   ]
+  },
+  "R2.subtraction_game": {
+   "cue": [
+    0.298,
+    0.305,
+    0.3,
+    0.3,
+    0.312,
+    0.31,
+    0.302
+   ],
+   "cue_rule": [
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no",
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no",
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no",
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no",
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no",
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no",
+    "[-] win/lose of each pile alone (grundy != 0) equal -> no"
+   ],
+   "mode": [
+    0.006,
+    0.001,
+    0.016,
+    0.019,
+    0.003,
+    0.005,
+    0.027
+   ],
+   "p": [
+    0.075,
+    0.096,
+    0.061,
+    0.075,
+    0.079,
+    0.057,
+    0.074
+   ]
+  },
+  "R2.to_base_wide": {
+   "cue": [
+    0.048,
+    0.025,
+    0.015,
+    0.004,
+    0.003,
+    0.002,
+    0.0
+   ],
+   "cue_rule": [
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    "[-] digits reversed (least significant first)",
+    ""
+   ],
+   "mode": [
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "n_per_level_and_shape": 2000
+}
