@@ -40,6 +40,16 @@ SUPERSEDED: dict[str, str] = {
     "R1.containers_stack_piles": "R1.containers_stack_piles_r2",
     "R1.categories_follow": "R1.categories_follow_r2",
     "R1.kinship_ancestor": "R1.kinship_ancestor_r2",  # found by the shortcut gate: the answer was always the parentless root
+    # retuned redraw probabilities (ruling 2 of 2025-11-25): the earlier revision is superseded
+    "R1.kinship_descendants_r2": "R1.kinship_descendants_r3",
+    "R1.kinship_ancestor_r2": "R1.kinship_ancestor_r3",
+    "R1.elimination_bracket_r2": "R1.elimination_bracket_r3",
+    "R1.categories_default_exceptions_r2": "R1.categories_default_exceptions_r3",
+    "R1.conditional_threshold_rule_r2": "R1.conditional_threshold_rule_r3",
+    "R1.containers_stack_piles_r2": "R1.containers_stack_piles_r3",
+    "R1.topological_order": "R1.topological_order_r2",
+    "R1.instant_runoff": "R1.instant_runoff_r2",
+    "R1.stable_matching": "R1.stable_matching_r2",
 }
 
 # lineages that are not registered, with the reason (filled in as the gates decide; none yet)
@@ -47,7 +57,10 @@ NOT_REGISTERED: dict[str, str] = {}
 
 
 def base_id(lid: str) -> str:
-    return lid[: -len("_r2")] if lid.endswith("_r2") else lid
+    """The id without a revision suffix (_r2, _r3, ...)."""
+    import re
+
+    return re.sub(r"_r\d+$", "", lid)
 
 
 def cluster_of(lid: str) -> str:

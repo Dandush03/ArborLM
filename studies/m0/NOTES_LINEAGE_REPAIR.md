@@ -125,3 +125,49 @@ Round 2, tool-visible: fixes, clusters, shortcut gate, 14 revision tests 07:22 t
 3. **A shortcut-gate bound.** None is registered. Which excess over chance (per heuristic, per level) fails a lineage? Least favourable: the smallest bound that rejects no more than the known defects.
 4. **Residual shortcuts** listed above (nothing fixed): fix, accept, or mark NOT REGISTERED.
 5. **Open-answer chance.** Open answers have chance 0 in section 10.2, so a heuristic's exact-match rate on them reads as pure excess; the gate reports that without a floor. Whether a floor (the answer range) should replace 0 is a specification question.
+
+---
+
+## 2026-11-25, rulings on the five questions and the two-sided check (arbor-lead, Fable 5.2; not human approval)
+
+1. **Partition.** My reading stands for now (families joined by a strict cluster form one key of `core.family_partition`'s rule): it uses the registered rule and guarantees no cluster spans parts. The 13/18 imbalance and the six-family key are recorded as a consequence. The independent auditor will be asked to challenge this reading. PENDING until that audit.
+2. **Generator-side repair.** Redrawing items that a named heuristic answers correctly is allowed ONLY if the heuristic then sits near chance on BOTH sides; a heuristic pushed clearly below chance is as exploitable as one above (answer its opposite) and is a defect. For every repaired shape each heuristic is recorded with a two-sided reading, and for closed answers also the accuracy of "pick uniformly among the options the heuristic did NOT choose". Where a redraw probability overshot, it is retuned (new revision with a failing-first test of the band; the band is a measurement, not a registered threshold). **This repair conditions the item distribution on a heuristic's outcome; that sentence is in the manifest entry of each repaired lineage (`repair_note`).**
+3. **No shortcut bound is registered.** It is a new registered number and goes to the human lead with the distributions of all four evaluations.
+4. **Residual shortcuts** stay measured and flagged; no fix and no NOT REGISTERED until a bound exists.
+5. **Open answers:** report the heuristic's absolute exact-match rate beside the most-frequent-answer rate and the per-level share; never "excess over chance".
+
+### What was done for the two-sided check
+
+- `lineages_r1_shortcuts.py`: `anti_credit` (the accuracy of picking uniformly among the options a heuristic did not choose; a heuristic that chose every option, or named an option the item does not offer, does not fire), the validity filter (a predicted name that is not among the item's options, or among the entities it mentions when no list is given, is "no prediction": this removed an artefact in which a constant name looked far below chance), `two_sided_markdown`, and a `markdown` that no longer calls open-answer rates "excess".
+- `manifests/r1_two_sided_table.md` (registered lineages and the superseded shapes side by side), `r1_two_sided.json` (per retuned shape: redraw probabilities, before and after), `r1_stats_table_v2.md` (generator statistics for all R1 shapes; replaces `r1_pilot_stats_table.md`, which is kept unchanged and marked SUPERSEDED in `fixtures/r1_pilot/SUPERSEDED.txt`), `r1_shortcuts_table.md` regenerated.
+
+### What overshot, and what was retuned (accuracy minus chance, before then after; anti reading beside)
+
+| Shape | Heuristic | Before (acc - chance) | After (acc - chance / anti - chance) |
+|---|---|---|---|
+| categories_default_exceptions_r2 | least specific rule | -0.488 (the answer's opposite right 99 %) | r3 rebuilt by construction: +0.010 / -0.010 |
+| categories_default_exceptions_r2 | last listed rule | -0.351 | +0.016 |
+| categories_default_exceptions_r2 | majority sign | -0.065 | -0.003 |
+| elimination_bracket_r2 | most wins | -0.075 | -0.012 / +0.001 |
+| topological_order | j-th alphabetical | -0.071 | +0.003 / -0.000 |
+| kinship_descendants_r2 | first mentioned | -0.070 | -0.013 / +0.003 |
+| stable_matching | first choice | +0.109 | -0.004 / +0.002 |
+| instant_runoff | plurality winner | +0.068 | +0.022 / -0.017 |
+| conditional_threshold_rule_r2 | yes-count majority | +0.059 | +0.004 / -0.004 |
+| containers_stack_piles_r2 | last block moved onto the pile | +0.053 | +0.004 / -0.000 |
+| containers_stack_piles_r2 | initial top | +0.043 | -0.009 |
+
+  The new shapes are `kinship_descendants_r3`, `kinship_ancestor_r3`, `elimination_bracket_r3`, `categories_default_exceptions_r3`, `conditional_threshold_rule_r3`, `containers_stack_piles_r3` (`lineages_r1_rev3.py`), and `topological_order_r2`, `instant_runoff_r2`, `stable_matching_r2`; each earlier shape is SUPERSEDED, in the same strict cluster. The redraw probabilities were fitted by iterating generate, measure, adjust (24 rounds of 1,500 test-seed items, mean of the last 8) and are fixed constants in `lineages_r1_rev3.P`. Fitting the probabilities to the measured heuristics uses generator statistics only, no model score.
+- **A repair by redraw cannot fix a coupling.** In `categories_default_exceptions` the majority sign, the last listed rule and the least specific rule are correlated; redrawing to unbias the majority pushed the least specific rule to 0.35 accuracy whatever its own probability. The r3 shape therefore fixes it by construction (five rules; the least specific rule a fair coin against the answer; none or two of the three middle rules agree), with no redraw, and all three heuristics are within 0.02 of chance.
+
+### Residual two-sided departures not caused by a redraw (flagged, not fixed, ruling 4)
+
+These are structural properties of the rule that make a heuristic wrong (or right) more often than chance; "answer its opposite" is an exploit where a heuristic is below chance. Registered closed lineages with a departure above 0.08 on either side: `kinship_descendants_r3` least-mentioned and never-the-subject (accuracy 0, the answer is never a leaf: the opposite reading gains +0.17), `kinship_ancestor_r3` parentless person (-0.10) and least mentioned (-0.10), `spatial_relative_directions` least mentioned (+0.13) and most mentioned (-0.15), `conditional_decision_tree` most mentioned (+0.15) and least mentioned (-0.12), `containers_queue_line_r2` most/least mentioned (-0.11 / +0.04, anti -0.11), `tracking_accounts` richest at the start (+0.13), `temporal_critical_path` longest job (-0.09), `stable_matching_r2` first mentioned (-0.10), `order_compare` (core) verbatim pair (+0.09). The unrepaired core lineages cannot be edited here.
+
+### Open answers (ruling 5)
+
+Reported as the heuristic's absolute exact-match rate beside the most-frequent-answer rate and the per-level rate (`r1_two_sided_table.md`): `activity_selection` greedy-by-start 0.256 exact (most frequent answer 0.208; per level 0.40 / 0.34 / 0.22 / 0.17 / 0.14), `minimax_tree` smallest leaf 0.159 (0.091), `graph_shortest_route_r2` constant key 0.060 (0.060), `mst_cost` smallest n-1 roads 0.057 (0.037), `venn_counting` constant 0.090 (0.090). A greedy rule coinciding with the right answer on a share of items is a property of the item distribution; the per-level shares above are that report.
+
+### Not done
+
+Nothing registered; no fix of the residual shortcuts; the open-answer lineages were not retuned (ruling 5). The calibration script (`experiments/_scratch/m0/calibrate*.py`) is scratch, not in git.

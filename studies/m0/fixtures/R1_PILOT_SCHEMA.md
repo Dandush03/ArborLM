@@ -38,18 +38,20 @@ structured: {"ask": 1, "initial": [1, 0, 1, 0, 1, 0], "lamps": 6, "presses": ["g
 answer: no
 ```
 
-### `R1.categories_default_exceptions_r2` (family categories, intended part ?)
+### `R1.categories_default_exceptions_r3` (family categories, intended part ?)
 
-Same schema as categories_default_exceptions. The asked verb has rules in at least TWO groups above the member's own group, never in the member's own group,
-with at least one rule of each sign, so the most-specific-wins rule is always needed (earlier shape: all rules agreed in 87 of 140, the member's own group
-decided in 54 of 140). Other-verb rules are distractors.
+Same schema as categories_default_exceptions. The asked verb has rules in FIVE groups above the member's own group (never in its own group). The sign vector of the five
+rules (most specific first; the most specific decides) is drawn by CONSTRUCTION so that three trivial shortcuts are independent of the answer: the least specific rule agrees with the
+answer with probability 1/2, and of the three middle rules none or two (equally likely) agree, so that P(majority = answer) = 1/2 and P(a random listed rule = answer) = 1/2,
+with no redraw. (The r2 shape's redraw pushed 'the least specific rule' to 98 % opposite to the answer;
+the r3 draft with three or four rules could not make the majority and the least specific rule both unbiased.) The chain has 6 + level // 2 groups; the member is in the smallest.
 
 Example (level 2):
 
 ```
-question: Every retak is a dorar. Every dorar is a karar. Every karar is a laner. A retak cannot glow. A dorar can swim. A karar cannot swim. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Anja is a retak. Can Anja swim? Answer yes or no.
-structured: {"chain": ["retak", "dorar", "karar", "laner"], "member": "Anja", "rules": [["retak", "glow", false], ["dorar", "swim", true], ["karar", "swim", false]], "verb": "swim"}
-answer: yes
+question: Every lokir is a vosek. Every vosek is a zidan. Every zidan is a karir. Every karir is a tedok. Every tedok is a kemok. Every kemok is a molir. A vosek cannot hum. A tedok cannot glow. A karir can hum. A kemok cannot glow. A zidan cannot glow. A zidan can hum. A kemok can hum. A lokir cannot glow. A molir cannot hum. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Esme is a lokir. Can Esme hum? Answer yes or no.
+structured: {"chain": ["lokir", "vosek", "zidan", "karir", "tedok", "kemok", "molir"], "member": "Esme", "rules": [["vosek", "hum", false], ["tedok", "glow", false], ["karir", "hum", true], ["kemok", "glow", false], ["zidan", "glow", false], ["zidan", "hum", true], ["kemok", "hum", true], ["lokir", "glow", false], ["molir", "hum", false]], "verb": "hum"}
+answer: no
 ```
 
 ### `R1.categories_follow_r2` (family categories, intended part ?)
@@ -80,17 +82,15 @@ structured: {"actions": ["jump", "run", "turn left", "wait"], "facts": {"the bor
 answer: run
 ```
 
-### `R1.conditional_threshold_rule_r2` (family conditional, intended part ?)
+### `R1.conditional_threshold_rule_r3` (family conditional, intended part ?)
 
-structured: {"members": [[name, weight]], "votes": {name: "yes"|"no"|"abstain"}, "margin": D}. The motion passes when (total weight of yes votes) minus (total weight of no
-votes) is at least D; abstentions count for neither. No veto and no second clause (the earlier shape was decided by a vetoing no in 44 of 140 items; a two-clause
-rule lets one clause alone answer about three items in four). Answer yes/no.
+conditional_threshold_rule_r2 with retuned redraw probabilities.
 
 Example (level 2):
 
 ```
-question: A committee votes on a motion. Orla has weight 1, Hana has weight 1, Xena has weight 4, Nora has weight 4, Pete has weight 4, Pia has weight 2. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 3 (members who abstain count for neither side). The votes: Orla abstain, Hana abstain, Xena no, Nora no, Pete no, Pia no. Does the motion pass? Answer yes or no.
-structured: {"margin": 3, "members": [["Orla", 1], ["Hana", 1], ["Xena", 4], ["Nora", 4], ["Pete", 4], ["Pia", 2]], "votes": {"Hana": "abstain", "Nora": "no", "Orla": "abstain", "Pete": "no", "Pia": "no", "Xena": "no"}}
+question: A committee votes on a motion. Yan has weight 1, Pru has weight 1, Edna has weight 1, Milo has weight 3, Hugo has weight 4, Dion has weight 1. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 1 (members who abstain count for neither side). The votes: Yan yes, Pru yes, Edna abstain, Milo no, Hugo abstain, Dion no. Does the motion pass? Answer yes or no.
+structured: {"margin": 1, "members": [["Yan", 1], ["Pru", 1], ["Edna", 1], ["Milo", 3], ["Hugo", 4], ["Dion", 1]], "votes": {"Dion": "no", "Edna": "abstain", "Hugo": "abstain", "Milo": "no", "Pru": "yes", "Yan": "yes"}}
 answer: no
 ```
 
@@ -108,31 +108,28 @@ structured: {"ask": ["position", 3], "line": ["Wanda", "Orla", "Greta", "Marc"],
 answer: Orla
 ```
 
-### `R1.containers_stack_piles_r2` (family containers, intended part ?)
+### `R1.containers_stack_piles_r3` (family containers, intended part ?)
 
-Same schema as containers_stack_piles. Blocks are never named like a pile colour (the earlier shape could have a pile 'orange' and a block 'orange').
-
-Example (level 2):
-
-```
-question: There are three piles of blocks. The purple pile holds, from bottom to top: hammer. The yellow pile holds, from bottom to top: apple and lantern. The black pile holds, from bottom to top: scarf, candle and feather. Move the top block of the black pile onto the yellow pile. Move the top block of the purple pile onto the yellow pile. Move the top block of the yellow pile onto the purple pile. Move the top block of the purple pile onto the black pile. Move the top block of the black pile onto the purple pile. Move the top block of the purple pile onto the yellow pile. Move the top block of the yellow pile onto the black pile. Which block is on top of the yellow pile at the end? Choose from apple, candle, feather, hammer, lantern and scarf.
-structured: {"ask": "the yellow pile", "initial": {"the black pile": ["scarf", "candle", "feather"], "the purple pile": ["hammer"], "the yellow pile": ["apple", "lantern"]}, "ops": [["move", "the black pile", "the yellow pile"], ["move", "the purple pile", "the yellow pile"], ["move", "the yellow pile", "the purple pile"], ["move", "the purple pile", "the black pile"], ["move", "the black pile", "the purple pile"], ["move", "the purple pile", "the yellow pile"], ["move", "the yellow pile", "the black pile"]], "piles": ["the purple pile", "the yellow pile", "the black pile"]}
-answer: feather
-```
-
-### `R1.elimination_bracket_r2` (family elimination, intended part ?)
-
-structured: {"players": [name] in bracket order, "results": [[winner, loser]] (EVERY pair of players, from earlier head-to-head games, not transitive in general),
-"ask": ["runner_up"] | ["beaten_by", name]}. Adjacent players meet in round one; whenever two players meet, the one who won their earlier game wins; winners
-keep their order and are paired adjacent again. Answer: the loser of the final, or the player who knocks the named player out. (The earlier shape decided
-matches by a rating, so the runner-up was the best rating of the other half.) 4 players for levels 0 to 3, 8 for levels 4 to 6.
+containers_stack_piles_r2 with retuned redraw probabilities.
 
 Example (level 2):
 
 ```
-question: A knockout tournament has 4 players listed in bracket order: Ben, Hugo, Hope, Dmitri. In round one the first two listed play each other, the next two play each other, and so on. Whenever two players meet in the tournament, the winner is whoever won their earlier game against each other: Dmitri beat Ben. Hope beat Ben. Dmitri beat Hope. Hugo beat Dmitri. Hugo beat Ben. Hope beat Hugo. The winners keep their order and are paired the same way in the next round, until one player is left. Who loses the final?
-structured: {"ask": ["runner_up"], "players": ["Ben", "Hugo", "Hope", "Dmitri"], "results": [["Dmitri", "Ben"], ["Hope", "Ben"], ["Dmitri", "Hope"], ["Hugo", "Dmitri"], ["Hugo", "Ben"], ["Hope", "Hugo"]]}
-answer: Dmitri
+question: There are three piles of blocks. The blue pile holds, from bottom to top: whistle, ribbon and quilt. The orange pile holds, from bottom to top: hammer. The red pile holds, from bottom to top: scarf and violin. Move the top block of the orange pile onto the blue pile. Move the top block of the red pile onto the blue pile. Move the top block of the blue pile onto the orange pile. Move the top block of the red pile onto the blue pile. Move the top block of the blue pile onto the red pile. Move the top block of the orange pile onto the red pile. Move the top block of the red pile onto the orange pile. Which block is on top of the blue pile at the end? Choose from hammer, quilt, ribbon, scarf, violin and whistle.
+structured: {"ask": "the blue pile", "initial": {"the blue pile": ["whistle", "ribbon", "quilt"], "the orange pile": ["hammer"], "the red pile": ["scarf", "violin"]}, "ops": [["move", "the orange pile", "the blue pile"], ["move", "the red pile", "the blue pile"], ["move", "the blue pile", "the orange pile"], ["move", "the red pile", "the blue pile"], ["move", "the blue pile", "the red pile"], ["move", "the orange pile", "the red pile"], ["move", "the red pile", "the orange pile"]], "piles": ["the blue pile", "the orange pile", "the red pile"]}
+answer: hammer
+```
+
+### `R1.elimination_bracket_r3` (family elimination, intended part ?)
+
+elimination_bracket_r2 with retuned redraw probabilities.
+
+Example (level 2):
+
+```
+question: A knockout tournament has 4 players listed in bracket order: Kate, Oscar, Hank, Glen. In round one the first two listed play each other, the next two play each other, and so on. Whenever two players meet in the tournament, the winner is whoever won their earlier game against each other: Hank beat Oscar. Oscar beat Kate. Oscar beat Glen. Glen beat Hank. Hank beat Kate. Glen beat Kate. The winners keep their order and are paired the same way in the next round, until one player is left. Who loses the final?
+structured: {"ask": ["runner_up"], "players": ["Kate", "Oscar", "Hank", "Glen"], "results": [["Hank", "Oscar"], ["Oscar", "Kate"], ["Oscar", "Glen"], ["Glen", "Hank"], ["Hank", "Kate"], ["Glen", "Kate"]]}
+answer: Glen
 ```
 
 ### `R1.elimination_josephus` (family elimination, intended part A)
@@ -201,45 +198,40 @@ structured: {"end": "Upton", "roads": [["Oakham", "Calder", 7], ["Oakham", "Ivyb
 answer: 10
 ```
 
-### `R1.instant_runoff` (family voting, intended part ?)
+### `R1.instant_runoff_r2` (family voting, intended part ?)
 
-structured: {"candidates": [name], "ballots": [[count, [ranking, best first]]]}. Every ballot ranks every candidate. Repeat: count the first places among the candidates still in; the
-candidate with the fewest is out (never tied in these items) and its ballots go to their next candidate still in; stop when one candidate is left. Answer: the last one left.
-
-Example (level 2):
-
-```
-question: Esme, Jon and Uzi are candidates. 8 voters rank them Esme > Jon > Uzi (best first). 8 voters rank them Jon > Esme > Uzi (best first). 7 voters rank them Jon > Esme > Uzi (best first). 3 voters rank them Uzi > Jon > Esme (best first). 3 voters rank them Esme > Uzi > Jon (best first). 5 voters rank them Esme > Jon > Uzi (best first). The count goes in rounds: each round, every ballot counts for its best candidate still in the race; the candidate with the fewest ballots counting for them is out, and the next round starts. It continues until one candidate is left. Who is left?
-structured: {"ballots": [[8, ["Esme", "Jon", "Uzi"]], [8, ["Jon", "Esme", "Uzi"]], [7, ["Jon", "Esme", "Uzi"]], [3, ["Uzi", "Jon", "Esme"]], [3, ["Esme", "Uzi", "Jon"]], [5, ["Esme", "Jon", "Uzi"]]], "candidates": ["Jon", "Esme", "Uzi"]}
-answer: Jon
-```
-
-### `R1.kinship_ancestor_r2` (family kinship, intended part ?)
-
-Shape revision of the core lineage R1.kinship_ancestor (same schema: {"parent", "child", "generations", "people"}). The line above the asked child is 1 or 2
-generations LONGER than the asked ancestor distance, so the answer is never the parentless root (found by the shortcut gate: the earlier shape's answer was
-always the one person with no recorded parent). Answer: the ancestor k generations above the child (grandparent, great-grandparent, ...).
+instant_runoff with retuned redraw probabilities.
 
 Example (level 2):
 
 ```
-question: Yves is the parent of Hank. Igor is the parent of Tina. Hank is the parent of Vance. Hank is the parent of Sean. Hank is the parent of Boris. Hank is the parent of Igor. Hank is the parent of Kurt. Gwen's parent is Tina. Nobody else has a recorded parent. Who is the grandparent of Gwen? Choose from Boris, Gwen, Hank, Igor, Kurt, Sean, Tina, Vance and Yves.
-structured: {"child": "Gwen", "generations": 2, "parent": {"Boris": "Hank", "Gwen": "Tina", "Hank": "Yves", "Igor": "Hank", "Kurt": "Hank", "Sean": "Hank", "Tina": "Igor", "Vance": "Hank"}, "people": ["Boris", "Gwen", "Hank", "Igor", "Kurt", "Sean", "Tina", "Vance", "Yves"]}
-answer: Igor
+question: Jade, Kate and Leo are candidates. 4 voters rank them Leo > Jade > Kate (best first). 8 voters rank them Leo > Jade > Kate (best first). 2 voters rank them Kate > Leo > Jade (best first). 2 voters rank them Jade > Leo > Kate (best first). 9 voters rank them Jade > Kate > Leo (best first). 8 voters rank them Kate > Jade > Leo (best first). The count goes in rounds: each round, every ballot counts for its best candidate still in the race; the candidate with the fewest ballots counting for them is out, and the next round starts. It continues until one candidate is left. Who is left?
+structured: {"ballots": [[4, ["Leo", "Jade", "Kate"]], [8, ["Leo", "Jade", "Kate"]], [2, ["Kate", "Leo", "Jade"]], [2, ["Jade", "Leo", "Kate"]], [9, ["Jade", "Kate", "Leo"]], [8, ["Kate", "Jade", "Leo"]]], "candidates": ["Jade", "Kate", "Leo"]}
+answer: Jade
 ```
 
-### `R1.kinship_descendants_r2` (family kinship, intended part ?)
+### `R1.kinship_ancestor_r3` (family kinship, intended part ?)
 
-structured: {"people": [name], "parent": {child: parent}, "ask": "grandchildren" | "descendants", "candidates": [name]}. Only people WITH a recorded
-parent are candidates, so the parentless root is never the answer (the earlier shape's answer was the root in 132 of 140 items). Answer: the candidate
-with the most grandchildren (or the most descendants of any depth); unique, and at least one.
+kinship_ancestor_r2 with retuned redraw probabilities.
 
 Example (level 2):
 
 ```
-question: Yves is the parent of Liam. Alma is the parent of Cara. Liam is the parent of Flynn. Yves is the parent of Milo. Milo is the parent of Alma. Yves is the parent of Yan. Nobody else has a recorded parent. Among the people who have a recorded parent, who has the most grandchildren (children of their children)? Choose from Alma, Cara, Flynn, Liam, Milo and Yan.
-structured: {"ask": "grandchildren", "candidates": ["Alma", "Cara", "Flynn", "Liam", "Milo", "Yan"], "parent": {"Alma": "Milo", "Cara": "Alma", "Flynn": "Liam", "Liam": "Yves", "Milo": "Yves", "Yan": "Yves"}, "people": ["Yves", "Liam", "Milo", "Yan", "Alma", "Cara", "Flynn"]}
-answer: Milo
+question: Nora's parent is Will. Stan's parent is Hank. Rhea is the parent of Leo. Pia is the parent of Emil. Hank's parent is Will. Rhea's parent is Will. Ugo's parent is Leo. Pia's parent is Ugo. Nobody else has a recorded parent. Who is the grandparent of Pia? Choose from Emil, Hank, Leo, Nora, Pia, Rhea, Stan, Ugo and Will.
+structured: {"child": "Pia", "generations": 2, "parent": {"Emil": "Pia", "Hank": "Will", "Leo": "Rhea", "Nora": "Will", "Pia": "Ugo", "Rhea": "Will", "Stan": "Hank", "Ugo": "Leo"}, "people": ["Emil", "Hank", "Leo", "Nora", "Pia", "Rhea", "Stan", "Ugo", "Will"]}
+answer: Leo
+```
+
+### `R1.kinship_descendants_r3` (family kinship, intended part ?)
+
+kinship_descendants_r2 with retuned redraw probabilities (P['R1.kinship_descendants_r2']).
+
+Example (level 2):
+
+```
+question: Stan is the parent of Anja. Stan is the parent of Gwen. Stan is the parent of Elsa. Orla is the parent of Lena. Anja is the parent of Tina. Tina is the parent of Orla. Nobody else has a recorded parent. Among the people who have a recorded parent, who has the most descendants (children, their children, and so on, all the way down)? Choose from Anja, Elsa, Gwen, Lena, Orla and Tina.
+structured: {"ask": "descendants", "candidates": ["Anja", "Elsa", "Gwen", "Lena", "Orla", "Tina"], "parent": {"Anja": "Stan", "Elsa": "Stan", "Gwen": "Stan", "Lena": "Orla", "Orla": "Tina", "Tina": "Anja"}, "people": ["Stan", "Anja", "Tina", "Orla", "Elsa", "Lena", "Gwen"]}
+answer: Anja
 ```
 
 ### `R1.minimax_tree` (family games, intended part ?)
@@ -320,18 +312,16 @@ structured: {"anchor": "Calder", "facts": [["Oakham", "south", 1, "Selby"], ["Du
 answer: Brook
 ```
 
-### `R1.stable_matching` (family matching, intended part ?)
+### `R1.stable_matching_r2` (family matching, intended part ?)
 
-structured: {"proposers": [name], "receivers": [name], "prefs_p": {proposer: [receivers, best first]}, "prefs_r": {receiver: [proposers, best first]}, "ask": proposer}.
-Deferred acceptance: every free proposer asks the best receiver not yet asked; a receiver holds the best proposer asked so far and turns the others away; repeat until all are held.
-Answer: the receiver held by `ask` at the end.
+stable_matching with retuned redraw probabilities.
 
 Example (level 2):
 
 ```
-question: Some people ask others to partner with them. Bruno would like, from best to worst: Cleo, Walt, Alma, Tess. Milo would like, from best to worst: Cleo, Alma, Walt, Tess. Jules would like, from best to worst: Walt, Alma, Cleo, Tess. Neva would like, from best to worst: Walt, Alma, Cleo, Tess. Tess would like, from best to worst: Milo, Neva, Bruno, Jules. Alma would like, from best to worst: Neva, Milo, Jules, Bruno. Cleo would like, from best to worst: Jules, Neva, Bruno, Milo. Walt would like, from best to worst: Neva, Bruno, Jules, Milo. Matching goes in turns: a person from Bruno, Jules, Milo and Neva who has no partner asks the best person on their list that they have not asked yet. The person asked keeps the best proposer so far (by their own list) and says no to the others, who then ask the next person on their list. This goes on until everyone in Bruno, Jules, Milo and Neva has a partner. Who is Milo's partner at the end? Choose from Alma, Cleo, Tess and Walt.
-structured: {"ask": "Milo", "prefs_p": {"Bruno": ["Cleo", "Walt", "Alma", "Tess"], "Jules": ["Walt", "Alma", "Cleo", "Tess"], "Milo": ["Cleo", "Alma", "Walt", "Tess"], "Neva": ["Walt", "Alma", "Cleo", "Tess"]}, "prefs_r": {"Alma": ["Neva", "Milo", "Jules", "Bruno"], "Cleo": ["Jules", "Neva", "Bruno", "Milo"], "Tess": ["Milo", "Neva", "Bruno", "Jules"], "Walt": ["Neva", "Bruno", "Jules", "Milo"]}, "proposers": ["Bruno", "Milo", "Jules", "Neva"], "receivers": ["Tess", "Alma", "Cleo", "Walt"]}
-answer: Alma
+question: Some people ask others to partner with them. Ivo would like, from best to worst: Wade, Ada, Wren, Pablo. Lena would like, from best to worst: Pablo, Ada, Wade, Wren. Oscar would like, from best to worst: Pablo, Wade, Ada, Wren. Mona would like, from best to worst: Pablo, Wade, Wren, Ada. Wren would like, from best to worst: Oscar, Lena, Ivo, Mona. Pablo would like, from best to worst: Lena, Mona, Oscar, Ivo. Ada would like, from best to worst: Lena, Mona, Oscar, Ivo. Wade would like, from best to worst: Oscar, Ivo, Lena, Mona. Matching goes in turns: a person from Ivo, Lena, Mona and Oscar who has no partner asks the best person on their list that they have not asked yet. The person asked keeps the best proposer so far (by their own list) and says no to the others, who then ask the next person on their list. This goes on until everyone in Ivo, Lena, Mona and Oscar has a partner. Who is Oscar's partner at the end? Choose from Ada, Pablo, Wade and Wren.
+structured: {"ask": "Oscar", "prefs_p": {"Ivo": ["Wade", "Ada", "Wren", "Pablo"], "Lena": ["Pablo", "Ada", "Wade", "Wren"], "Mona": ["Pablo", "Wade", "Wren", "Ada"], "Oscar": ["Pablo", "Wade", "Ada", "Wren"]}, "prefs_r": {"Ada": ["Lena", "Mona", "Oscar", "Ivo"], "Pablo": ["Lena", "Mona", "Oscar", "Ivo"], "Wade": ["Oscar", "Ivo", "Lena", "Mona"], "Wren": ["Oscar", "Lena", "Ivo", "Mona"]}, "proposers": ["Ivo", "Lena", "Oscar", "Mona"], "receivers": ["Wren", "Pablo", "Ada", "Wade"]}
+answer: Wade
 ```
 
 ### `R1.temporal_critical_path` (family temporal, intended part A)
@@ -373,17 +363,16 @@ structured: {"anchor": ["the town parade", "Sunday"], "ask": "the book sale", "d
 answer: Friday
 ```
 
-### `R1.topological_order` (family scheduling, intended part ?)
+### `R1.topological_order_r2` (family scheduling, intended part ?)
 
-structured: {"jobs": [[name, [prerequisite names]]], "day": j}. One job is done per day; on each day, among the jobs whose prerequisites are all done, the one whose
-name comes first in alphabetical order is done. Answer: the job done on day j (2 <= j <= n).
+topological_order with retuned redraw probabilities.
 
 Example (level 2):
 
 ```
-question: There are 6 jobs and one job is done each day. Maya needs Tina to be done first. Oscar needs Maya to be done first. Dara needs Maya to be done first. Igor needs Maya to be done first. Tina has no prerequisite. Vida needs Dara and Tina to be done first. Each day, among the jobs that can be done (all their prerequisites are already done), the job whose name comes first in alphabetical order is done. Which job is done on day 5? Choose from Dara, Igor, Maya, Oscar, Tina and Vida.
-structured: {"day": 5, "jobs": [["Maya", ["Tina"]], ["Oscar", ["Maya"]], ["Dara", ["Maya"]], ["Igor", ["Maya"]], ["Tina", []], ["Vida", ["Dara", "Tina"]]]}
-answer: Oscar
+question: There are 6 jobs and one job is done each day. Uma needs Ugo and Zane to be done first. Bea needs Opal to be done first. Zane needs Bea and Opal to be done first. Opal has no prerequisite. Nora needs Bea to be done first. Ugo needs Zane to be done first. Each day, among the jobs that can be done (all their prerequisites are already done), the job whose name comes first in alphabetical order is done. Which job is done on day 3? Choose from Bea, Nora, Opal, Ugo, Uma and Zane.
+structured: {"day": 3, "jobs": [["Uma", ["Ugo", "Zane"]], ["Bea", ["Opal"]], ["Zane", ["Bea", "Opal"]], ["Opal", []], ["Nora", ["Bea"]], ["Ugo", ["Zane"]]]}
+answer: Nora
 ```
 
 ### `R1.tracking_accounts` (family tracking, intended part B)

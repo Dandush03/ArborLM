@@ -282,6 +282,7 @@ def pilot_r1(per_level: int = 400) -> dict[str, Any]:
     """Measurements and bookkeeping for the R1 lineages: statistics (old, pilot, revised, new), capacity, fixtures for the registered pilot lineages, the cluster table,
     the shortcut gate. Ruling E: the operation-profile similarity and the item-skeleton diversity are kept as code but are NOT evidence of distinctness."""
     from studies.m0 import lineages_r1_clusters as cl
+    from studies.m0 import lineages_r1_rev3 as r3
     from studies.m0 import lineages_r1_shortcuts as sc
     from studies.m0.lineages_r1_common import INTENDED_PART, load_pilot
 
@@ -300,11 +301,33 @@ def pilot_r1(per_level: int = 400) -> dict[str, Any]:
     short = sc.shortcut_gate(everything, per_level)
     t_short = time.time() - t
     registered = [x for x in pilot_all if x.id not in cl.SUPERSEDED and x.id not in cl.NOT_REGISTERED]
+    reg_ids = sorted(x.id for x in cl.registered_lineages())
+    two_ids = sorted(set(reg_ids) | set(cl.SUPERSEDED))
+    (ROOT / "studies" / "m0" / "manifests" / "r1_two_sided_table.md").write_text(
+        "# R1 two-sided shortcut reading (measured, not thresholded)\n\nRuling 2 of 2025-11-25: a heuristic pushed clearly below chance is as exploitable as one above it. Closed answers: each heuristic's accuracy minus chance, and the accuracy of picking "
+        "uniformly among the options the heuristic did NOT choose, minus chance. Open answers (ruling 5): the heuristic's absolute exact-match rate beside the most-frequent-answer rate and the exact-match rate per level (never 'excess over chance'). "
+        "Rows are the registered lineages and the superseded shapes, so the retuned revisions can be read beside the shapes they replace. A heuristic that names an option the item does not offer does not fire.\n\n"
+        + sc.two_sided_markdown(short, [i for i in two_ids if i in short]))
+    retune = {}
+    for shape, (base, names) in r3.RETUNED.items():
+        row = lambda lid, n: next(h for h in short[lid]["heuristics"] if h["heuristic"] == n)  # noqa: E731
+        retune[shape] = {"retunes": base, "redraw_probabilities": r3.P.get(base, {}),
+                         "before": {n: {"accuracy_minus_chance": row(base, n)["excess_over_chance"], "anti_minus_chance": row(base, n)["anti_excess"]} for n in names if base in short},
+                         "after": {n: {"accuracy_minus_chance": row(shape, n)["excess_over_chance"], "anti_minus_chance": row(shape, n)["anti_excess"]} for n in names}}
+    (ROOT / "studies" / "m0" / "manifests" / "r1_two_sided.json").write_text(json.dumps({"retuned": retune, "note": r3.REPAIR_NOTE}, indent=1, sort_keys=True))
+    rows2 = ["# R1 generator statistics v2 (replaces r1_pilot_stats_table.md)\n", "2,000 items per lineage (400 at each core level), test seed block 953601. Registered lineages and superseded shapes. `top key share` is the rate of the commonest key (the constant guess); "
+             "for open answers it is not compared with a chance level.\n", "| id | status | family | cluster | answers | top key share | chance (closed) | distinct answers | sentence skeletons | capacity failures at G=300 |", "|---|---|---|---|---|---|---|---|---|---|"]
+    for lin in everything:
+        a_, c_ = records[lin.id]["answer"], cap[lin.id]
+        st_ = "superseded" if lin.id in cl.SUPERSEDED else "registered"
+        openans = short[lin.id]["open_answers"]
+        rows2.append(f"| {lin.id} | {st_} | {lin.family} | {cl.cluster_of(lin.id)} | {'open' if openans else 'closed'} | {a_['top_share']} | {'n/a' if openans else a_['chance_mean_1_over_k']} | {a_['distinct_answers']} | {records[lin.id]['sentence_skeletons']} | {c_['levels_failed'] or '-'} |")
+    (ROOT / "studies" / "m0" / "manifests" / "r1_stats_table_v2.md").write_text("\n".join(rows2) + "\n")
     out_dir = ROOT / "studies" / "m0" / "fixtures" / "r1_pilot"
     t = time.time()
     fx = write_fixtures(registered, out_dir)
     t_fix = time.time() - t
-    (out_dir / "SUPERSEDED.txt").write_text("Shapes replaced by a revision (ids ending _r2) or not registered; their fixtures, if present, are from the earlier shape and must NOT be solved.\n" + "\n".join(sorted([*cl.SUPERSEDED, *cl.NOT_REGISTERED])) + "\n")
+    (out_dir / "SUPERSEDED.txt").write_text("Shapes replaced by a revision (ids ending _r2) or not registered; their fixtures, if present, are from the earlier shape and must NOT be solved.\n" + "\n".join(sorted([*cl.SUPERSEDED, *cl.NOT_REGISTERED])) + "\n\nTables:\nstudies/m0/manifests/r1_pilot_stats_table.md is SUPERSEDED by studies/m0/manifests/r1_stats_table_v2.md and r1_two_sided_table.md (the old file is kept unchanged).\n")
     write_schema(registered, ROOT / "studies" / "m0" / "fixtures" / "R1_PILOT_SCHEMA.md", INTENDED_PART)
     parts = cl.clusters_per_part()
     clusters = {cid: [m.id for m in mem] for cid, mem in sorted(cl.cluster_table().items())}
@@ -314,7 +337,8 @@ def pilot_r1(per_level: int = 400) -> dict[str, Any]:
         "lineages": [
             {"id": lin.id, "family": lin.family, "status": "SUPERSEDED by " + cl.SUPERSEDED[lin.id] if lin.id in cl.SUPERSEDED else ("NOT REGISTERED: " + cl.NOT_REGISTERED[lin.id] if lin.id in cl.NOT_REGISTERED else "registered"),
              "cluster": cl.cluster_of(lin.id), "file": lin.build.__module__.replace(".", "/") + ".py", "signature": records[lin.id]["signature"],
-             "capacity_passed_all_levels": cap[lin.id]["passed_all"], "capacity_levels_failed": cap[lin.id]["levels_failed"], "fixture_sha256": fx.get(lin.id)}
+             "capacity_passed_all_levels": cap[lin.id]["passed_all"], "capacity_levels_failed": cap[lin.id]["levels_failed"], "fixture_sha256": fx.get(lin.id),
+             **({"repair_note": r3.REPAIR_NOTE} if lin.id in r3.ANTI_REPAIRED else {})}
             for lin in pilot_all
         ],
         "g_for_capacity": G_PROPOSED,

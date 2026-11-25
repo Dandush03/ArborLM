@@ -1,0 +1,70 @@
+# R1 generator statistics v2 (replaces r1_pilot_stats_table.md)
+
+2,000 items per lineage (400 at each core level), test seed block 953601. Registered lineages and superseded shapes. `top key share` is the rate of the commonest key (the constant guess); for open answers it is not compared with a chance level.
+
+| id | status | family | cluster | answers | top key share | chance (closed) | distinct answers | sentence skeletons | capacity failures at G=300 |
+|---|---|---|---|---|---|---|---|---|---|
+| R1.attribute_rule | registered | rules | R1.attribute_rule | closed | 0.014 | 0.1519 | 122 | 2734 | - |
+| R1.categories_follow | superseded | categories | R1.categories_follow | closed | 0.776 | 0.3333 | 3 | 6 | - |
+| R1.compass_turns | registered | spatial | R1.boolean_lights | closed | 0.269 | 0.25 | 4 | 1964 | - |
+| R1.conditional_chain | registered | conditional | R1.conditional_chain | closed | 0.368 | 0.3333 | 3 | 5120 | - |
+| R1.event_timeline | registered | temporal | R1.equivalence_exchange_rates | closed | 0.064 | 0.1769 | 18 | 295 | - |
+| R1.kinship_ancestor | superseded | kinship | R1.categories_default_exceptions | closed | 0.014 | 0.1208 | 122 | 132 | - |
+| R1.kinship_cousins | registered | kinship | R1.categories_default_exceptions | closed | 0.506 | 0.5 | 2 | 5 | - |
+| R1.knights_knaves | registered | truth | R1.knights_knaves | closed | 0.532 | 0.5 | 2 | 593 | - |
+| R1.one_culprit | registered | culprit | R1.knights_knaves | closed | 0.0135 | 0.1967 | 122 | 801 | - |
+| R1.order_compare | registered | order | R1.order_compare | closed | 0.3505 | 0.3333 | 3 | 3 | - |
+| R1.order_extreme | registered | order | R1.order_extreme | closed | 0.0135 | 0.1769 | 122 | 12 | - |
+| R1.pet_owners | registered | arrangement | R1.pet_owners | closed | 0.0135 | 0.19 | 122 | 126 | - |
+| R1.road_reachability | registered | graph | R1.order_compare | closed | 0.5055 | 0.5 | 2 | 4 | - |
+| R1.seating_row | registered | arrangement | R1.pet_owners | closed | 0.0145 | 0.1967 | 122 | 10 | - |
+| R1.swap_tracking | registered | tracking | R1.swap_tracking | closed | 0.0495 | 0.19 | 24 | 27 | - |
+| R1.activity_selection | registered | scheduling | R1.activity_selection | open | 0.2235 | n/a | 10 | 124 | - |
+| R1.boolean_lights | superseded | boolean_state | R1.boolean_lights | closed | 0.5125 | 0.5 | 2 | 22 | - |
+| R1.boolean_lights_r2 | registered | boolean_state | R1.boolean_lights | closed | 0.507 | 0.5 | 2 | 23 | - |
+| R1.categories_default_exceptions | superseded | categories | R1.categories_default_exceptions | closed | 0.5045 | 0.5 | 2 | 22 | - |
+| R1.categories_default_exceptions_r2 | superseded | categories | R1.categories_default_exceptions | closed | 0.51 | 0.5 | 2 | 22 | - |
+| R1.categories_default_exceptions_r3 | registered | categories | R1.categories_default_exceptions | closed | 0.512 | 0.5 | 2 | 22 | - |
+| R1.categories_follow_r2 | registered | categories | R1.categories_follow | closed | 0.3945 | 0.3333 | 3 | 6 | - |
+| R1.conditional_decision_tree | registered | conditional | R1.attribute_rule | closed | 0.107 | 0.2609 | 10 | 2837 | - |
+| R1.conditional_threshold_rule | superseded | conditional | R1.conditional_threshold_rule | closed | 0.6255 | 0.5 | 2 | 717 | - |
+| R1.conditional_threshold_rule_r2 | superseded | conditional | R1.conditional_threshold_rule | closed | 0.501 | 0.5 | 2 | 1587 | - |
+| R1.conditional_threshold_rule_r3 | registered | conditional | R1.conditional_threshold_rule | closed | 0.534 | 0.5 | 2 | 1573 | - |
+| R1.containers_queue_line | superseded | containers | R1.containers_queue_line | closed | 0.0155 | 0.1265 | 122 | 22 | - |
+| R1.containers_queue_line_r2 | registered | containers | R1.containers_queue_line | closed | 0.0135 | 0.1348 | 122 | 21 | - |
+| R1.containers_stack_piles | superseded | containers | R1.containers_stack_piles | closed | 0.0485 | 0.1491 | 24 | 45 | - |
+| R1.containers_stack_piles_r2 | superseded | containers | R1.containers_stack_piles | closed | 0.05 | 0.1491 | 23 | 45 | - |
+| R1.containers_stack_piles_r3 | registered | containers | R1.containers_stack_piles | closed | 0.0525 | 0.1491 | 23 | 48 | - |
+| R1.elimination_bracket | superseded | elimination | R1.elimination_bracket | closed | 0.015 | 0.175 | 122 | 7 | - |
+| R1.elimination_bracket_r2 | superseded | elimination | R1.elimination_bracket | closed | 0.014 | 0.2 | 122 | 8 | - |
+| R1.elimination_bracket_r3 | registered | elimination | R1.elimination_bracket | closed | 0.014 | 0.2 | 122 | 8 | - |
+| R1.elimination_josephus | registered | elimination | R1.elimination_josephus | closed | 0.0135 | 0.1491 | 122 | 9 | - |
+| R1.equivalence_classes | superseded | equivalence | R1.categories_follow | closed | 0.3665 | 0.3333 | 3 | 4 | - |
+| R1.equivalence_classes_r2 | registered | equivalence | R1.categories_follow | closed | 0.377 | 0.3333 | 3 | 4 | - |
+| R1.equivalence_exchange_rates | registered | equivalence | R1.equivalence_exchange_rates | closed | 0.0515 | 0.1769 | 24 | 13 | - |
+| R1.graph_bipartite | registered | graph | R1.graph_bipartite | closed | 0.507 | 0.5 | 2 | 8 | - |
+| R1.graph_shortest_route | superseded | graph | R1.graph_shortest_route | closed | 0.0505 | 0.1752 | 24 | 6 | - |
+| R1.graph_shortest_route_r2 | registered | graph | R1.graph_shortest_route | open | 0.063 | n/a | 45 | 2 | - |
+| R1.instant_runoff | superseded | voting | R1.instant_runoff | closed | 0.0155 | 0.2833 | 122 | 9 | - |
+| R1.instant_runoff_r2 | registered | voting | R1.instant_runoff | closed | 0.0125 | 0.2833 | 122 | 9 | - |
+| R1.kinship_ancestor_r2 | superseded | kinship | R1.categories_default_exceptions | closed | 0.0145 | 0.1013 | 122 | 135 | - |
+| R1.kinship_ancestor_r3 | registered | kinship | R1.categories_default_exceptions | closed | 0.014 | 0.1015 | 122 | 135 | - |
+| R1.kinship_descendants | superseded | kinship | R1.kinship_descendants | closed | 0.0145 | 0.1291 | 122 | 9 | - |
+| R1.kinship_descendants_r2 | superseded | kinship | R1.kinship_descendants | closed | 0.013 | 0.1491 | 122 | 9 | - |
+| R1.kinship_descendants_r3 | registered | kinship | R1.kinship_descendants | closed | 0.0135 | 0.1491 | 122 | 9 | - |
+| R1.minimax_tree | registered | games | R1.minimax_tree | open | 0.0875 | n/a | 19 | 656 | - |
+| R1.mst_cost | registered | network | R1.mst_cost | open | 0.039 | n/a | 70 | 3 | - |
+| R1.nim_xor | registered | games | R1.nim_xor | closed | 0.5115 | 0.5 | 2 | 8 | - |
+| R1.order_tournament_wins | registered | order | R1.order_extreme | closed | 0.0135 | 0.1752 | 122 | 6 | - |
+| R1.spatial_grid_walk | superseded | spatial | R1.spatial_grid_walk | closed | 0.002 | 0.089 | 1788 | 2058 | - |
+| R1.spatial_grid_walk_r2 | registered | spatial | R1.spatial_grid_walk | closed | 0.002 | 0.0881 | 1761 | 2052 | - |
+| R1.spatial_relative_directions | registered | spatial | R1.equivalence_exchange_rates | closed | 0.0515 | 0.2186 | 24 | 14 | - |
+| R1.stable_matching | superseded | matching | R1.stable_matching | closed | 0.0145 | 0.2467 | 122 | 136 | - |
+| R1.stable_matching_r2 | registered | matching | R1.stable_matching | closed | 0.013 | 0.2467 | 122 | 136 | - |
+| R1.temporal_critical_path | registered | temporal | R1.temporal_critical_path | closed | 0.013 | 0.1769 | 122 | 678 | - |
+| R1.temporal_interval_overlap | registered | temporal | R1.temporal_interval_overlap | closed | 0.5425 | 0.5 | 2 | 15 | - |
+| R1.temporal_weekday_shift | registered | temporal | R1.equivalence_exchange_rates | closed | 0.157 | 0.1429 | 7 | 47 | - |
+| R1.topological_order | superseded | scheduling | R1.topological_order | closed | 0.014 | 0.1491 | 122 | 11 | - |
+| R1.topological_order_r2 | registered | scheduling | R1.topological_order | closed | 0.0155 | 0.1491 | 122 | 11 | - |
+| R1.tracking_accounts | registered | tracking | R1.tracking_accounts | closed | 0.0175 | 0.2133 | 122 | 12 | - |
+| R1.venn_counting | registered | sets | R1.venn_counting | open | 0.092 | n/a | 15 | 254 | - |

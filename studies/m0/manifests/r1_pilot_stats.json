@@ -10,7 +10,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.166
+     "seconds": 0.184
     },
     {
      "attempts": 1800,
@@ -18,7 +18,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.261
+     "seconds": 0.288
     },
     {
      "attempts": 1800,
@@ -26,7 +26,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.25
+     "seconds": 0.274
     },
     {
      "attempts": 1800,
@@ -34,7 +34,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.222
+     "seconds": 0.239
     },
     {
      "attempts": 1800,
@@ -42,7 +42,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.208
+     "seconds": 0.229
     },
     {
      "attempts": 1800,
@@ -50,7 +50,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.205
+     "seconds": 0.221
     },
     {
      "attempts": 1000,
@@ -58,10 +58,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.114
+     "seconds": 0.121
     }
    ],
-   "seconds": 1.43
+   "seconds": 1.56
   },
   "R1.attribute_rule": {
    "levels_failed": [],
@@ -73,86 +73,23 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.026
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.057
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.116
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.137
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.203
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.209
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.136
-    }
-   ],
-   "seconds": 0.89
-  },
-  "R1.boolean_lights": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.014
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
      "seconds": 0.027
     },
     {
      "attempts": 1800,
      "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.059
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.029
+     "seconds": 0.12
     },
     {
      "attempts": 1800,
@@ -160,7 +97,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.035
+     "seconds": 0.15
     },
     {
      "attempts": 1800,
@@ -168,7 +105,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.037
+     "seconds": 0.216
     },
     {
      "attempts": 1800,
@@ -176,7 +113,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.038
+     "seconds": 0.222
     },
     {
      "attempts": 1000,
@@ -184,12 +121,12 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.025
+     "seconds": 0.153
     }
    ],
-   "seconds": 0.21
+   "seconds": 0.95
   },
-  "R1.boolean_lights_r2": {
+  "R1.boolean_lights": {
    "levels_failed": [],
    "passed_all": true,
    "rows": [
@@ -207,7 +144,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.028
+     "seconds": 0.029
     },
     {
      "attempts": 1800,
@@ -215,7 +152,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.03
+     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -223,7 +160,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.036
+     "seconds": 0.038
     },
     {
      "attempts": 1800,
@@ -231,7 +168,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.038
+     "seconds": 0.04
     },
     {
      "attempts": 1800,
@@ -239,7 +176,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.04
+     "seconds": 0.043
     },
     {
      "attempts": 1000,
@@ -247,10 +184,73 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.026
+     "seconds": 0.027
     }
    ],
-   "seconds": 0.21
+   "seconds": 0.22
+  },
+  "R1.boolean_lights_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.032
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.043
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.028
+    }
+   ],
+   "seconds": 0.23
   },
   "R1.categories_default_exceptions": {
    "levels_failed": [],
@@ -262,7 +262,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.011
+     "seconds": 0.012
     },
     {
      "attempts": 1800,
@@ -270,7 +270,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.02
+     "seconds": 0.021
     },
     {
      "attempts": 1800,
@@ -278,7 +278,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.022
     },
     {
      "attempts": 1800,
@@ -286,7 +286,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.023
     },
     {
      "attempts": 1800,
@@ -294,7 +294,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -302,7 +302,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 0.025
     },
     {
      "attempts": 1000,
@@ -310,10 +310,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.014
+     "seconds": 0.015
     }
    ],
-   "seconds": 0.13
+   "seconds": 0.14
   },
   "R1.categories_default_exceptions_r2": {
    "levels_failed": [],
@@ -325,7 +325,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -333,7 +333,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.038
+     "seconds": 0.041
     },
     {
      "attempts": 1800,
@@ -341,7 +341,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.055
+     "seconds": 0.059
     },
     {
      "attempts": 1800,
@@ -349,7 +349,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.056
+     "seconds": 0.061
     },
     {
      "attempts": 1800,
@@ -357,7 +357,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.067
+     "seconds": 0.074
     },
     {
      "attempts": 1800,
@@ -365,7 +365,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.065
+     "seconds": 0.069
     },
     {
      "attempts": 1000,
@@ -373,10 +373,73 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.044
+     "seconds": 0.047
     }
    ],
-   "seconds": 0.35
+   "seconds": 0.38
+  },
+  "R1.categories_default_exceptions_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.014
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.026
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.028
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.017
+    }
+   ],
+   "seconds": 0.16
   },
   "R1.categories_follow": {
    "levels_failed": [],
@@ -388,7 +451,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.076
+     "seconds": 0.084
     },
     {
      "attempts": 1800,
@@ -396,7 +459,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.108
+     "seconds": 0.116
     },
     {
      "attempts": 1800,
@@ -404,7 +467,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.112
+     "seconds": 0.115
     },
     {
      "attempts": 1800,
@@ -412,7 +475,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.23
+     "seconds": 0.243
     },
     {
      "attempts": 1800,
@@ -420,7 +483,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.234
+     "seconds": 0.242
     },
     {
      "attempts": 1800,
@@ -428,7 +491,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.212
+     "seconds": 0.224
     },
     {
      "attempts": 1000,
@@ -436,10 +499,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.244
+     "seconds": 0.257
     }
    ],
-   "seconds": 1.22
+   "seconds": 1.28
   },
   "R1.categories_follow_r2": {
    "levels_failed": [],
@@ -451,7 +514,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.066
+     "seconds": 0.072
     },
     {
      "attempts": 1800,
@@ -459,7 +522,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.125
+     "seconds": 0.133
     },
     {
      "attempts": 1800,
@@ -467,7 +530,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.125
+     "seconds": 0.132
     },
     {
      "attempts": 1800,
@@ -475,7 +538,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.246
+     "seconds": 0.259
     },
     {
      "attempts": 1800,
@@ -483,7 +546,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.257
+     "seconds": 0.272
     },
     {
      "attempts": 1800,
@@ -491,7 +554,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.305
+     "seconds": 0.327
     },
     {
      "attempts": 1000,
@@ -499,10 +562,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.253
+     "seconds": 0.27
     }
    ],
-   "seconds": 1.38
+   "seconds": 1.47
   },
   "R1.compass_turns": {
    "levels_failed": [],
@@ -522,7 +585,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.01
+     "seconds": 0.012
     },
     {
      "attempts": 1800,
@@ -530,7 +593,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.012
+     "seconds": 0.014
     },
     {
      "attempts": 1800,
@@ -554,7 +617,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.018
+     "seconds": 0.02
     },
     {
      "attempts": 1000,
@@ -562,7 +625,7 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.011
+     "seconds": 0.012
     }
    ],
    "seconds": 0.09
@@ -577,7 +640,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.036
+     "seconds": 0.037
     },
     {
      "attempts": 1800,
@@ -585,7 +648,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.091
+     "seconds": 0.095
     },
     {
      "attempts": 1800,
@@ -593,7 +656,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.112
+     "seconds": 0.121
     },
     {
      "attempts": 1800,
@@ -601,7 +664,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.165
+     "seconds": 0.178
     },
     {
      "attempts": 1800,
@@ -609,7 +672,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.199
+     "seconds": 0.207
     },
     {
      "attempts": 1800,
@@ -617,7 +680,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.299
+     "seconds": 0.322
     },
     {
      "attempts": 1000,
@@ -625,10 +688,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.215
+     "seconds": 0.235
     }
    ],
-   "seconds": 1.12
+   "seconds": 1.2
   },
   "R1.conditional_decision_tree": {
    "levels_failed": [],
@@ -640,7 +703,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.012
+     "seconds": 0.013
     },
     {
      "attempts": 1800,
@@ -648,7 +711,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -656,7 +719,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.034
+     "seconds": 0.036
     },
     {
      "attempts": 1800,
@@ -680,7 +743,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.055
+     "seconds": 0.058
     },
     {
      "attempts": 1000,
@@ -688,7 +751,7 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.052
+     "seconds": 0.053
     }
    ],
    "seconds": 0.27
@@ -703,7 +766,259 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.012
+     "seconds": 0.013
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.035
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.023
+    }
+   ],
+   "seconds": 0.2
+  },
+  "R1.conditional_threshold_rule_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.028
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.057
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.083
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.093
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.099
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.106
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.064
+    }
+   ],
+   "seconds": 0.53
+  },
+  "R1.conditional_threshold_rule_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.032
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.068
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.096
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.109
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.118
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.124
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.074
+    }
+   ],
+   "seconds": 0.62
+  },
+  "R1.containers_queue_line": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.009
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.02
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.033
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.021
+    }
+   ],
+   "seconds": 0.16
+  },
+  "R1.containers_queue_line_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.011
     },
     {
      "attempts": 1800,
@@ -727,196 +1042,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.034
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.037
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.041
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.022
-    }
-   ],
-   "seconds": 0.2
-  },
-  "R1.conditional_threshold_rule_r2": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.027
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.058
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.083
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.089
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.096
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.102
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.064
-    }
-   ],
-   "seconds": 0.52
-  },
-  "R1.containers_queue_line": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.009
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.019
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.023
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.025
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.028
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
      "seconds": 0.032
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.02
-    }
-   ],
-   "seconds": 0.15
-  },
-  "R1.containers_queue_line_r2": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.011
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.023
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.026
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -932,7 +1058,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.037
+     "seconds": 0.038
     },
     {
      "attempts": 1000,
@@ -940,10 +1066,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     }
    ],
-   "seconds": 0.18
+   "seconds": 0.19
   },
   "R1.containers_stack_piles": {
    "levels_failed": [],
@@ -963,7 +1089,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.029
+     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -971,7 +1097,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.035
+     "seconds": 0.037
     },
     {
      "attempts": 1800,
@@ -987,7 +1113,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.045
+     "seconds": 0.048
     },
     {
      "attempts": 1800,
@@ -995,7 +1121,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.052
+     "seconds": 0.05
     },
     {
      "attempts": 1000,
@@ -1003,10 +1129,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.03
+     "seconds": 0.031
     }
    ],
-   "seconds": 0.24
+   "seconds": 0.25
   },
   "R1.containers_stack_piles_r2": {
    "levels_failed": [],
@@ -1018,7 +1144,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.163
+     "seconds": 0.167
     },
     {
      "attempts": 1800,
@@ -1026,7 +1152,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.4
+     "seconds": 0.426
     },
     {
      "attempts": 1800,
@@ -1034,7 +1160,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.532
+     "seconds": 0.578
     },
     {
      "attempts": 1800,
@@ -1042,7 +1168,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.61
+     "seconds": 0.692
     },
     {
      "attempts": 1800,
@@ -1050,7 +1176,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.757
+     "seconds": 0.802
     },
     {
      "attempts": 1800,
@@ -1058,7 +1184,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.902
+     "seconds": 0.969
     },
     {
      "attempts": 1000,
@@ -1066,10 +1192,73 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.643
+     "seconds": 0.648
     }
    ],
-   "seconds": 4.01
+   "seconds": 4.28
+  },
+  "R1.containers_stack_piles_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.281
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.726
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.957
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.148
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.395
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.743
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 1.153
+    }
+   ],
+   "seconds": 7.4
   },
   "R1.elimination_bracket": {
    "levels_failed": [],
@@ -1081,7 +1270,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.01
+     "seconds": 0.011
     },
     {
      "attempts": 1800,
@@ -1089,7 +1278,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.017
+     "seconds": 0.019
     },
     {
      "attempts": 1800,
@@ -1097,7 +1286,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.017
+     "seconds": 0.02
     },
     {
      "attempts": 1800,
@@ -1105,7 +1294,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -1113,7 +1302,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -1121,7 +1310,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.025
     },
     {
      "attempts": 1000,
@@ -1129,10 +1318,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.018
+     "seconds": 0.019
     }
    ],
-   "seconds": 0.13
+   "seconds": 0.14
   },
   "R1.elimination_bracket_r2": {
    "levels_failed": [],
@@ -1144,7 +1333,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.04
     },
     {
      "attempts": 1800,
@@ -1152,7 +1341,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.044
+     "seconds": 0.071
     },
     {
      "attempts": 1800,
@@ -1160,7 +1349,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.045
+     "seconds": 0.068
     },
     {
      "attempts": 1800,
@@ -1168,7 +1357,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.044
+     "seconds": 0.068
     },
     {
      "attempts": 1800,
@@ -1176,7 +1365,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.07
+     "seconds": 0.1
     },
     {
      "attempts": 1800,
@@ -1184,7 +1373,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.07
+     "seconds": 0.101
     },
     {
      "attempts": 1000,
@@ -1192,10 +1381,73 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.039
+     "seconds": 0.058
     }
    ],
-   "seconds": 0.34
+   "seconds": 0.51
+  },
+  "R1.elimination_bracket_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.069
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.078
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.063
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.103
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.099
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.055
+    }
+   ],
+   "seconds": 0.51
   },
   "R1.elimination_josephus": {
    "levels_failed": [],
@@ -1215,7 +1467,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.014
+     "seconds": 0.016
     },
     {
      "attempts": 1800,
@@ -1223,7 +1475,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.015
+     "seconds": 0.016
     },
     {
      "attempts": 1800,
@@ -1231,7 +1483,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.015
+     "seconds": 0.016
     },
     {
      "attempts": 1800,
@@ -1239,7 +1491,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.016
+     "seconds": 0.017
     },
     {
      "attempts": 1800,
@@ -1247,7 +1499,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.016
+     "seconds": 0.017
     },
     {
      "attempts": 1000,
@@ -1255,10 +1507,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.009
+     "seconds": 0.01
     }
    ],
-   "seconds": 0.09
+   "seconds": 0.1
   },
   "R1.equivalence_classes": {
    "levels_failed": [],
@@ -1278,7 +1530,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.029
+     "seconds": 0.03
     },
     {
      "attempts": 1800,
@@ -1286,7 +1538,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.036
     },
     {
      "attempts": 1800,
@@ -1294,7 +1546,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.035
+     "seconds": 0.038
     },
     {
      "attempts": 1800,
@@ -1302,7 +1554,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.042
+     "seconds": 0.045
     },
     {
      "attempts": 1800,
@@ -1310,7 +1562,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.044
+     "seconds": 0.047
     },
     {
      "attempts": 1000,
@@ -1321,7 +1573,7 @@
      "seconds": 0.028
     }
    ],
-   "seconds": 0.23
+   "seconds": 0.24
   },
   "R1.equivalence_classes_r2": {
    "levels_failed": [],
@@ -1333,7 +1585,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.02
+     "seconds": 0.021
     },
     {
      "attempts": 1800,
@@ -1341,7 +1593,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.036
+     "seconds": 0.038
     },
     {
      "attempts": 1800,
@@ -1349,7 +1601,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.039
+     "seconds": 0.042
     },
     {
      "attempts": 1800,
@@ -1357,7 +1609,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.041
+     "seconds": 0.044
     },
     {
      "attempts": 1800,
@@ -1365,7 +1617,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.048
+     "seconds": 0.053
     },
     {
      "attempts": 1800,
@@ -1373,7 +1625,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.051
+     "seconds": 0.055
     },
     {
      "attempts": 1000,
@@ -1381,10 +1633,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.036
     }
    ],
-   "seconds": 0.27
+   "seconds": 0.29
   },
   "R1.equivalence_exchange_rates": {
    "levels_failed": [],
@@ -1396,7 +1648,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.007
+     "seconds": 0.008
     },
     {
      "attempts": 1800,
@@ -1404,7 +1656,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.016
+     "seconds": 0.017
     },
     {
      "attempts": 1800,
@@ -1412,7 +1664,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.019
+     "seconds": 0.021
     },
     {
      "attempts": 1800,
@@ -1420,7 +1672,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -1428,7 +1680,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.025
+     "seconds": 0.027
     },
     {
      "attempts": 1800,
@@ -1436,7 +1688,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.028
+     "seconds": 0.031
     },
     {
      "attempts": 1000,
@@ -1444,10 +1696,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.017
+     "seconds": 0.019
     }
    ],
-   "seconds": 0.13
+   "seconds": 0.15
   },
   "R1.event_timeline": {
    "levels_failed": [],
@@ -1475,7 +1727,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.022
     },
     {
      "attempts": 1800,
@@ -1483,7 +1735,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 0.027
     },
     {
      "attempts": 1800,
@@ -1491,7 +1743,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.027
+     "seconds": 0.028
     },
     {
      "attempts": 1800,
@@ -1499,7 +1751,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.031
+     "seconds": 0.033
     },
     {
      "attempts": 1000,
@@ -1507,10 +1759,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.019
+     "seconds": 0.02
     }
    ],
-   "seconds": 0.15
+   "seconds": 0.16
   },
   "R1.graph_bipartite": {
    "levels_failed": [],
@@ -1522,7 +1774,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.01
+     "seconds": 0.012
     },
     {
      "attempts": 1800,
@@ -1530,7 +1782,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.025
     },
     {
      "attempts": 1800,
@@ -1538,7 +1790,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.026
+     "seconds": 0.028
     },
     {
      "attempts": 1800,
@@ -1546,7 +1798,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.03
+     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -1554,7 +1806,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.034
+     "seconds": 0.036
     },
     {
      "attempts": 1800,
@@ -1562,7 +1814,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.039
+     "seconds": 0.041
     },
     {
      "attempts": 1000,
@@ -1570,10 +1822,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 0.026
     }
    ],
-   "seconds": 0.19
+   "seconds": 0.2
   },
   "R1.graph_shortest_route": {
    "levels_failed": [],
@@ -1585,7 +1837,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.027
+     "seconds": 0.029
     },
     {
      "attempts": 1800,
@@ -1593,7 +1845,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.055
+     "seconds": 0.059
     },
     {
      "attempts": 1800,
@@ -1601,7 +1853,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.055
+     "seconds": 0.06
     },
     {
      "attempts": 1800,
@@ -1609,7 +1861,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.058
+     "seconds": 0.061
     },
     {
      "attempts": 1800,
@@ -1617,7 +1869,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.058
+     "seconds": 0.061
     },
     {
      "attempts": 1800,
@@ -1625,7 +1877,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.066
+     "seconds": 0.071
     },
     {
      "attempts": 1000,
@@ -1633,10 +1885,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.037
+     "seconds": 0.039
     }
    ],
-   "seconds": 0.36
+   "seconds": 0.38
   },
   "R1.graph_shortest_route_r2": {
    "levels_failed": [],
@@ -1648,7 +1900,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.025
+     "seconds": 0.026
     },
     {
      "attempts": 1800,
@@ -1656,7 +1908,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.05
+     "seconds": 0.053
     },
     {
      "attempts": 1800,
@@ -1664,7 +1916,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.05
+     "seconds": 0.052
     },
     {
      "attempts": 1800,
@@ -1672,7 +1924,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.052
+     "seconds": 0.056
     },
     {
      "attempts": 1800,
@@ -1680,7 +1932,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.052
+     "seconds": 0.055
     },
     {
      "attempts": 1800,
@@ -1688,7 +1940,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.059
+     "seconds": 0.063
     },
     {
      "attempts": 1000,
@@ -1696,12 +1948,201 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.032
+     "seconds": 0.034
     }
    ],
-   "seconds": 0.32
+   "seconds": 0.34
   },
   "R1.instant_runoff": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.136
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.244
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.237
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.234
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.247
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.258
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.156
+    }
+   ],
+   "seconds": 1.51
+  },
+  "R1.instant_runoff_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.169
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.268
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.262
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.25
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.25
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.269
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.166
+    }
+   ],
+   "seconds": 1.63
+  },
+  "R1.kinship_ancestor": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.018
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    }
+   ],
+   "seconds": 0.13
+  },
+  "R1.kinship_ancestor_r2": {
    "levels_failed": [],
    "passed_all": true,
    "rows": [
@@ -1719,7 +2160,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.161
+     "seconds": 0.194
     },
     {
      "attempts": 1800,
@@ -1727,7 +2168,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.159
+     "seconds": 0.243
     },
     {
      "attempts": 1800,
@@ -1735,7 +2176,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.161
+     "seconds": 0.323
     },
     {
      "attempts": 1800,
@@ -1743,7 +2184,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.174
+     "seconds": 0.353
     },
     {
      "attempts": 1800,
@@ -1751,7 +2192,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.174
+     "seconds": 0.448
     },
     {
      "attempts": 1000,
@@ -1759,12 +2200,12 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.112
+     "seconds": 0.28
     }
    ],
-   "seconds": 1.03
+   "seconds": 1.93
   },
-  "R1.kinship_ancestor": {
+  "R1.kinship_ancestor_r3": {
    "levels_failed": [],
    "passed_all": true,
    "rows": [
@@ -1774,7 +2215,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.007
+     "seconds": 0.09
     },
     {
      "attempts": 1800,
@@ -1782,7 +2223,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.015
+     "seconds": 0.194
     },
     {
      "attempts": 1800,
@@ -1790,7 +2231,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.016
+     "seconds": 0.239
     },
     {
      "attempts": 1800,
@@ -1798,7 +2239,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.02
+     "seconds": 0.308
     },
     {
      "attempts": 1800,
@@ -1806,7 +2247,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.356
     },
     {
      "attempts": 1800,
@@ -1814,7 +2255,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 0.438
     },
     {
      "attempts": 1000,
@@ -1822,73 +2263,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.015
+     "seconds": 0.26
     }
    ],
-   "seconds": 0.12
-  },
-  "R1.kinship_ancestor_r2": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.085
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.177
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.222
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.29
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.328
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.412
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.264
-    }
-   ],
-   "seconds": 1.78
+   "seconds": 1.89
   },
   "R1.kinship_cousins": {
    "levels_failed": [],
@@ -1900,7 +2278,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.022
     },
     {
      "attempts": 1800,
@@ -1908,7 +2286,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.038
+     "seconds": 0.041
     },
     {
      "attempts": 1800,
@@ -1916,7 +2294,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.043
+     "seconds": 0.046
     },
     {
      "attempts": 1800,
@@ -1924,7 +2302,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.043
+     "seconds": 0.046
     },
     {
      "attempts": 1800,
@@ -1932,7 +2310,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.048
+     "seconds": 0.054
     },
     {
      "attempts": 1800,
@@ -1940,7 +2318,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.048
+     "seconds": 0.053
     },
     {
      "attempts": 1000,
@@ -1948,10 +2326,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.03
+     "seconds": 0.032
     }
    ],
-   "seconds": 0.27
+   "seconds": 0.29
   },
   "R1.kinship_descendants": {
    "levels_failed": [],
@@ -1963,7 +2341,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.01
+     "seconds": 0.011
     },
     {
      "attempts": 1800,
@@ -1971,7 +2349,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.022
     },
     {
      "attempts": 1800,
@@ -1979,7 +2357,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 0.025
     },
     {
      "attempts": 1800,
@@ -1987,7 +2365,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.027
+     "seconds": 0.029
     },
     {
      "attempts": 1800,
@@ -1995,7 +2373,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.029
+     "seconds": 0.03
     },
     {
      "attempts": 1800,
@@ -2011,10 +2389,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.019
+     "seconds": 0.02
     }
    ],
-   "seconds": 0.16
+   "seconds": 0.17
   },
   "R1.kinship_descendants_r2": {
    "levels_failed": [],
@@ -2026,7 +2404,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.521
+     "seconds": 0.562
     },
     {
      "attempts": 1800,
@@ -2034,7 +2412,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.472
+     "seconds": 0.513
     },
     {
      "attempts": 1800,
@@ -2042,7 +2420,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.486
+     "seconds": 0.53
     },
     {
      "attempts": 1800,
@@ -2050,7 +2428,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.571
+     "seconds": 0.609
     },
     {
      "attempts": 1800,
@@ -2058,7 +2436,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.663
+     "seconds": 0.728
     },
     {
      "attempts": 1800,
@@ -2066,7 +2444,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.706
+     "seconds": 0.778
     },
     {
      "attempts": 1000,
@@ -2074,10 +2452,73 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.432
+     "seconds": 0.471
     }
    ],
-   "seconds": 3.85
+   "seconds": 4.19
+  },
+  "R1.kinship_descendants_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.518
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.496
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.476
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.592
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.694
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.772
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.486
+    }
+   ],
+   "seconds": 4.03
   },
   "R1.knights_knaves": {
    "levels_failed": [],
@@ -2089,7 +2530,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.013
+     "seconds": 0.015
     },
     {
      "attempts": 1800,
@@ -2097,7 +2538,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.036
     },
     {
      "attempts": 1800,
@@ -2105,7 +2546,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.035
     },
     {
      "attempts": 1800,
@@ -2113,7 +2554,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.05
+     "seconds": 0.055
     },
     {
      "attempts": 1800,
@@ -2121,7 +2562,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.049
+     "seconds": 0.053
     },
     {
      "attempts": 1800,
@@ -2129,7 +2570,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.079
+     "seconds": 0.084
     },
     {
      "attempts": 1000,
@@ -2137,10 +2578,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.043
+     "seconds": 0.045
     }
    ],
-   "seconds": 0.3
+   "seconds": 0.32
   },
   "R1.minimax_tree": {
    "levels_failed": [],
@@ -2176,7 +2617,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.023
     },
     {
      "attempts": 1800,
@@ -2192,7 +2633,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.032
+     "seconds": 0.033
     },
     {
      "attempts": 1000,
@@ -2215,7 +2656,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.081
+     "seconds": 0.084
     },
     {
      "attempts": 1800,
@@ -2223,7 +2664,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.106
+     "seconds": 0.11
     },
     {
      "attempts": 1800,
@@ -2231,7 +2672,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.107
+     "seconds": 0.111
     },
     {
      "attempts": 1800,
@@ -2239,7 +2680,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.095
+     "seconds": 0.097
     },
     {
      "attempts": 1800,
@@ -2247,7 +2688,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.094
+     "seconds": 0.099
     },
     {
      "attempts": 1800,
@@ -2255,7 +2696,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.097
+     "seconds": 0.101
     },
     {
      "attempts": 1000,
@@ -2263,10 +2704,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.053
+     "seconds": 0.056
     }
    ],
-   "seconds": 0.63
+   "seconds": 0.66
   },
   "R1.nim_xor": {
    "levels_failed": [],
@@ -2286,7 +2727,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.045
+     "seconds": 0.046
     },
     {
      "attempts": 2674,
@@ -2294,7 +2735,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.038
+     "seconds": 0.04
     },
     {
      "attempts": 1820,
@@ -2302,7 +2743,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.035
+     "seconds": 0.036
     },
     {
      "attempts": 1814,
@@ -2310,7 +2751,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.046
+     "seconds": 0.045
     },
     {
      "attempts": 1808,
@@ -2329,7 +2770,7 @@
      "seconds": 0.031
     }
    ],
-   "seconds": 0.26
+   "seconds": 0.27
   },
   "R1.one_culprit": {
    "levels_failed": [],
@@ -2341,7 +2782,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.015
+     "seconds": 0.016
     },
     {
      "attempts": 1800,
@@ -2349,7 +2790,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.026
+     "seconds": 0.027
     },
     {
      "attempts": 1800,
@@ -2365,7 +2806,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.036
+     "seconds": 0.037
     },
     {
      "attempts": 1800,
@@ -2373,7 +2814,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.047
+     "seconds": 0.05
     },
     {
      "attempts": 1800,
@@ -2381,7 +2822,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.047
+     "seconds": 0.053
     },
     {
      "attempts": 1000,
@@ -2389,10 +2830,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.038
     }
    ],
-   "seconds": 0.24
+   "seconds": 0.26
   },
   "R1.order_compare": {
    "levels_failed": [],
@@ -2404,7 +2845,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.008
+     "seconds": 0.009
     },
     {
      "attempts": 1800,
@@ -2412,7 +2853,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.015
+     "seconds": 0.017
     },
     {
      "attempts": 1800,
@@ -2420,7 +2861,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.018
+     "seconds": 0.021
     },
     {
      "attempts": 1800,
@@ -2428,7 +2869,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -2436,7 +2877,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.025
+     "seconds": 0.029
     },
     {
      "attempts": 1800,
@@ -2444,7 +2885,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.028
+     "seconds": 0.034
     },
     {
      "attempts": 1000,
@@ -2452,10 +2893,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.018
+     "seconds": 0.019
     }
    ],
-   "seconds": 0.13
+   "seconds": 0.15
   },
   "R1.order_extreme": {
    "levels_failed": [],
@@ -2499,7 +2940,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.013
+     "seconds": 0.014
     },
     {
      "attempts": 1800,
@@ -2538,7 +2979,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.021
+     "seconds": 0.022
     },
     {
      "attempts": 1800,
@@ -2562,7 +3003,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.026
+     "seconds": 0.027
     },
     {
      "attempts": 1800,
@@ -2570,7 +3011,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.035
     },
     {
      "attempts": 1000,
@@ -2601,7 +3042,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.03
+     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -2609,7 +3050,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.053
+     "seconds": 0.056
     },
     {
      "attempts": 1800,
@@ -2617,7 +3058,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.146
+     "seconds": 0.16
     },
     {
      "attempts": 1800,
@@ -2625,7 +3066,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.147
+     "seconds": 0.158
     },
     {
      "attempts": 1800,
@@ -2633,7 +3074,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.146
+     "seconds": 0.158
     },
     {
      "attempts": 1000,
@@ -2641,12 +3082,75 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.083
+     "seconds": 0.085
     }
    ],
-   "seconds": 0.62
+   "seconds": 0.66
   },
   "R1.road_reachability": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.043
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.048
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.024
+    }
+   ],
+   "seconds": 0.23
+  },
+  "R1.seating_row": {
    "levels_failed": [],
    "passed_all": true,
    "rows": [
@@ -2664,7 +3168,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.029
+     "seconds": 0.041
     },
     {
      "attempts": 1800,
@@ -2672,7 +3176,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.106
     },
     {
      "attempts": 1800,
@@ -2680,7 +3184,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.036
+     "seconds": 0.11
     },
     {
      "attempts": 1800,
@@ -2688,7 +3192,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.04
+     "seconds": 0.487
     },
     {
      "attempts": 1800,
@@ -2696,7 +3200,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.043
+     "seconds": 0.496
     },
     {
      "attempts": 1000,
@@ -2704,138 +3208,12 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 1.878
     }
    ],
-   "seconds": 0.22
-  },
-  "R1.seating_row": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.013
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.04
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.099
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.1
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.442
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.446
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 1.724
-    }
-   ],
-   "seconds": 2.86
+   "seconds": 3.13
   },
   "R1.spatial_grid_walk": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.012
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.023
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.026
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.03
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.032
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.037
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.023
-    }
-   ],
-   "seconds": 0.18
-  },
-  "R1.spatial_grid_walk_r2": {
    "levels_failed": [],
    "passed_all": true,
    "rows": [
@@ -2869,7 +3247,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.032
+     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -2885,6 +3263,69 @@
      "level": 5,
      "need": 1800,
      "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.025
+    }
+   ],
+   "seconds": 0.19
+  },
+  "R1.spatial_grid_walk_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.013
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
      "seconds": 0.038
     },
     {
@@ -2893,10 +3334,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.024
+     "seconds": 0.025
     }
    ],
-   "seconds": 0.19
+   "seconds": 0.2
   },
   "R1.spatial_relative_directions": {
    "levels_failed": [],
@@ -2924,7 +3365,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.02
+     "seconds": 0.022
     },
     {
      "attempts": 1800,
@@ -2932,7 +3373,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -2956,10 +3397,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.018
+     "seconds": 0.019
     }
    ],
-   "seconds": 0.14
+   "seconds": 0.15
   },
   "R1.stable_matching": {
    "levels_failed": [],
@@ -2971,7 +3412,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.161
+     "seconds": 0.173
     },
     {
      "attempts": 1800,
@@ -2979,7 +3420,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.289
+     "seconds": 0.31
     },
     {
      "attempts": 1800,
@@ -2987,7 +3428,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.401
+     "seconds": 0.422
     },
     {
      "attempts": 1800,
@@ -2995,7 +3436,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.421
+     "seconds": 0.418
     },
     {
      "attempts": 1800,
@@ -3003,7 +3444,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.577
+     "seconds": 0.575
     },
     {
      "attempts": 1800,
@@ -3011,7 +3452,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.557
+     "seconds": 0.586
     },
     {
      "attempts": 1000,
@@ -3019,10 +3460,73 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.398
+     "seconds": 0.438
     }
    ],
-   "seconds": 2.8
+   "seconds": 2.92
+  },
+  "R1.stable_matching_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.298
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.537
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.749
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.797
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.038
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.801
+    }
+   ],
+   "seconds": 5.26
   },
   "R1.swap_tracking": {
    "levels_failed": [],
@@ -3042,7 +3546,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -3050,7 +3554,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.03
+     "seconds": 0.031
     },
     {
      "attempts": 1800,
@@ -3058,7 +3562,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.035
+     "seconds": 0.037
     },
     {
      "attempts": 1800,
@@ -3066,7 +3570,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.04
+     "seconds": 0.043
     },
     {
      "attempts": 1800,
@@ -3074,7 +3578,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.045
+     "seconds": 0.048
     },
     {
      "attempts": 1000,
@@ -3082,10 +3586,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.028
+     "seconds": 0.032
     }
    ],
-   "seconds": 0.21
+   "seconds": 0.22
   },
   "R1.temporal_critical_path": {
    "levels_failed": [],
@@ -3113,6 +3617,69 @@
      "level": 2,
      "need": 1800,
      "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.023
+    }
+   ],
+   "seconds": 0.18
+  },
+  "R1.temporal_interval_overlap": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
      "seconds": 0.024
     },
     {
@@ -3129,7 +3696,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.033
+     "seconds": 0.029
     },
     {
      "attempts": 1800,
@@ -3137,7 +3704,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.037
+     "seconds": 0.034
     },
     {
      "attempts": 1000,
@@ -3145,70 +3712,7 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.023
-    }
-   ],
-   "seconds": 0.17
-  },
-  "R1.temporal_interval_overlap": {
-   "levels_failed": [],
-   "passed_all": true,
-   "rows": [
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 0,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.011
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 1,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.024
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 2,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.024
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 3,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.028
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 4,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.028
-    },
-    {
-     "attempts": 1800,
-     "found": 1800,
-     "level": 5,
-     "need": 1800,
-     "passed": true,
-     "seconds": 0.033
-    },
-    {
-     "attempts": 1000,
-     "found": 1000,
-     "level": 6,
-     "need": 1000,
-     "passed": true,
-     "seconds": 0.018
+     "seconds": 0.019
     }
    ],
    "seconds": 0.17
@@ -3223,7 +3727,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.013
+     "seconds": 0.012
     },
     {
      "attempts": 1800,
@@ -3231,7 +3735,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.036
+     "seconds": 0.037
     },
     {
      "attempts": 1800,
@@ -3239,7 +3743,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.05
+     "seconds": 0.051
     },
     {
      "attempts": 1800,
@@ -3255,7 +3759,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.079
+     "seconds": 0.08
     },
     {
      "attempts": 1800,
@@ -3263,7 +3767,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.094
+     "seconds": 0.096
     },
     {
      "attempts": 1000,
@@ -3271,7 +3775,7 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.061
+     "seconds": 0.06
     }
    ],
    "seconds": 0.4
@@ -3286,7 +3790,7 @@
      "level": 0,
      "need": 1000,
      "passed": true,
-     "seconds": 0.104
+     "seconds": 0.109
     },
     {
      "attempts": 1800,
@@ -3294,7 +3798,70 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.231
+     "seconds": 0.244
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.284
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.339
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.402
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.449
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.293
+    }
+   ],
+   "seconds": 2.12
+  },
+  "R1.topological_order_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.097
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.223
     },
     {
      "attempts": 1800,
@@ -3310,7 +3877,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.319
+     "seconds": 0.309
     },
     {
      "attempts": 1800,
@@ -3318,7 +3885,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.368
+     "seconds": 0.372
     },
     {
      "attempts": 1800,
@@ -3326,7 +3893,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.414
+     "seconds": 0.422
     },
     {
      "attempts": 1000,
@@ -3334,10 +3901,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.267
+     "seconds": 0.269
     }
    ],
-   "seconds": 1.96
+   "seconds": 1.95
   },
   "R1.tracking_accounts": {
    "levels_failed": [],
@@ -3373,7 +3940,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.04
+     "seconds": 0.038
     },
     {
      "attempts": 1800,
@@ -3397,7 +3964,7 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.031
+     "seconds": 0.03
     }
    ],
    "seconds": 0.23
@@ -3420,7 +3987,7 @@
      "level": 1,
      "need": 1800,
      "passed": true,
-     "seconds": 0.013
+     "seconds": 0.015
     },
     {
      "attempts": 1800,
@@ -3428,7 +3995,7 @@
      "level": 2,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     },
     {
      "attempts": 1800,
@@ -3436,7 +4003,7 @@
      "level": 3,
      "need": 1800,
      "passed": true,
-     "seconds": 0.023
+     "seconds": 0.026
     },
     {
      "attempts": 1800,
@@ -3444,7 +4011,7 @@
      "level": 4,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.025
     },
     {
      "attempts": 1800,
@@ -3452,7 +4019,7 @@
      "level": 5,
      "need": 1800,
      "passed": true,
-     "seconds": 0.022
+     "seconds": 0.024
     },
     {
      "attempts": 1000,
@@ -3460,10 +4027,10 @@
      "level": 6,
      "need": 1000,
      "passed": true,
-     "seconds": 0.012
+     "seconds": 0.013
     }
    ],
-   "seconds": 0.12
+   "seconds": 0.13
   }
  },
  "levels": [
@@ -3479,16 +4046,20 @@
   "R1.boolean_lights_r2",
   "R1.categories_default_exceptions",
   "R1.categories_default_exceptions_r2",
+  "R1.categories_default_exceptions_r3",
   "R1.categories_follow_r2",
   "R1.conditional_decision_tree",
   "R1.conditional_threshold_rule",
   "R1.conditional_threshold_rule_r2",
+  "R1.conditional_threshold_rule_r3",
   "R1.containers_queue_line",
   "R1.containers_queue_line_r2",
   "R1.containers_stack_piles",
   "R1.containers_stack_piles_r2",
+  "R1.containers_stack_piles_r3",
   "R1.elimination_bracket",
   "R1.elimination_bracket_r2",
+  "R1.elimination_bracket_r3",
   "R1.elimination_josephus",
   "R1.equivalence_classes",
   "R1.equivalence_classes_r2",
@@ -3497,9 +4068,12 @@
   "R1.graph_shortest_route",
   "R1.graph_shortest_route_r2",
   "R1.instant_runoff",
+  "R1.instant_runoff_r2",
   "R1.kinship_ancestor_r2",
+  "R1.kinship_ancestor_r3",
   "R1.kinship_descendants",
   "R1.kinship_descendants_r2",
+  "R1.kinship_descendants_r3",
   "R1.minimax_tree",
   "R1.mst_cost",
   "R1.nim_xor",
@@ -3508,10 +4082,12 @@
   "R1.spatial_grid_walk_r2",
   "R1.spatial_relative_directions",
   "R1.stable_matching",
+  "R1.stable_matching_r2",
   "R1.temporal_critical_path",
   "R1.temporal_interval_overlap",
   "R1.temporal_weekday_shift",
   "R1.topological_order",
+  "R1.topological_order_r2",
   "R1.tracking_accounts",
   "R1.venn_counting"
  ],
@@ -3532,7 +4108,7 @@
    "max_sentence_jaccard": 0.001,
    "same_signature": [],
    "with_op": "R1.categories_default_exceptions_r2",
-   "with_sentence": "R1.kinship_descendants_r2"
+   "with_sentence": "R1.kinship_descendants_r3"
   },
   "R1.boolean_lights": {
    "max_op_similarity": 0.864,
@@ -3553,14 +4129,21 @@
    "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.order_tournament_wins",
-   "with_sentence": "R1.categories_default_exceptions_r2"
+   "with_sentence": "R1.categories_default_exceptions_r3"
   },
   "R1.categories_default_exceptions_r2": {
-   "max_op_similarity": 0.765,
+   "max_op_similarity": 0.902,
    "max_sentence_jaccard": 1.0,
    "same_signature": [],
-   "with_op": "R1.boolean_lights",
-   "with_sentence": "R1.categories_default_exceptions"
+   "with_op": "R1.categories_default_exceptions_r3",
+   "with_sentence": "R1.categories_default_exceptions_r3"
+  },
+  "R1.categories_default_exceptions_r3": {
+   "max_op_similarity": 0.902,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.categories_default_exceptions_r2",
+   "with_sentence": "R1.categories_default_exceptions_r2"
   },
   "R1.categories_follow": {
    "max_op_similarity": 0.915,
@@ -3606,10 +4189,23 @@
   },
   "R1.conditional_threshold_rule_r2": {
    "max_op_similarity": 0.777,
-   "max_sentence_jaccard": 0.04,
+   "max_sentence_jaccard": 0.147,
    "same_signature": [],
    "with_op": "R1.order_tournament_wins",
-   "with_sentence": "R1.conditional_threshold_rule"
+   "with_sentence": "R1.conditional_threshold_rule_r3"
+  },
+  "R1.conditional_threshold_rule_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 0.147,
+   "same_signature": [
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.conditional_threshold_rule_r2"
   },
   "R1.containers_queue_line": {
    "max_op_similarity": 0.89,
@@ -3639,19 +4235,41 @@
    "with_op": "R1.containers_stack_piles",
    "with_sentence": "R1.containers_stack_piles"
   },
+  "R1.containers_stack_piles_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 0.86,
+   "same_signature": [
+    "R1.stable_matching_r2"
+   ],
+   "with_op": "R1.stable_matching_r2",
+   "with_sentence": "R1.containers_stack_piles_r2"
+  },
   "R1.elimination_bracket": {
    "max_op_similarity": 0.757,
    "max_sentence_jaccard": 0.364,
    "same_signature": [],
    "with_op": "R1.elimination_bracket_r2",
-   "with_sentence": "R1.elimination_bracket_r2"
+   "with_sentence": "R1.elimination_bracket_r3"
   },
   "R1.elimination_bracket_r2": {
    "max_op_similarity": 0.803,
-   "max_sentence_jaccard": 0.364,
+   "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.swap_tracking",
-   "with_sentence": "R1.elimination_bracket"
+   "with_sentence": "R1.elimination_bracket_r3"
+  },
+  "R1.elimination_bracket_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.elimination_bracket_r2"
   },
   "R1.elimination_josephus": {
    "max_op_similarity": 0.728,
@@ -3700,7 +4318,7 @@
    "max_sentence_jaccard": 0.25,
    "same_signature": [],
    "with_op": "R1.graph_shortest_route_r2",
-   "with_sentence": "R1.kinship_descendants_r2"
+   "with_sentence": "R1.kinship_descendants_r3"
   },
   "R1.graph_shortest_route_r2": {
    "max_op_similarity": 0.81,
@@ -3711,45 +4329,84 @@
   },
   "R1.instant_runoff": {
    "max_op_similarity": 0.849,
-   "max_sentence_jaccard": 0.0,
+   "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.temporal_critical_path",
-   "with_sentence": "R1.venn_counting"
+   "with_sentence": "R1.instant_runoff_r2"
+  },
+  "R1.instant_runoff_r2": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.instant_runoff"
   },
   "R1.kinship_ancestor": {
    "max_op_similarity": 0.788,
    "max_sentence_jaccard": 0.963,
    "same_signature": [],
    "with_op": "R1.order_extreme",
-   "with_sentence": "R1.kinship_ancestor_r2"
+   "with_sentence": "R1.kinship_ancestor_r3"
   },
   "R1.kinship_ancestor_r2": {
    "max_op_similarity": 0.793,
-   "max_sentence_jaccard": 0.963,
+   "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.temporal_weekday_shift",
-   "with_sentence": "R1.kinship_ancestor"
+   "with_sentence": "R1.kinship_ancestor_r3"
+  },
+  "R1.kinship_ancestor_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.kinship_ancestor_r2"
   },
   "R1.kinship_cousins": {
    "max_op_similarity": 0.873,
    "max_sentence_jaccard": 0.167,
    "same_signature": [],
    "with_op": "R1.order_compare",
-   "with_sentence": "R1.kinship_descendants_r2"
+   "with_sentence": "R1.kinship_descendants_r3"
   },
   "R1.kinship_descendants": {
    "max_op_similarity": 0.941,
    "max_sentence_jaccard": 0.5,
    "same_signature": [],
    "with_op": "R1.kinship_descendants_r2",
-   "with_sentence": "R1.kinship_descendants_r2"
+   "with_sentence": "R1.kinship_descendants_r3"
   },
   "R1.kinship_descendants_r2": {
    "max_op_similarity": 0.941,
-   "max_sentence_jaccard": 0.5,
+   "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.kinship_descendants",
-   "with_sentence": "R1.kinship_descendants"
+   "with_sentence": "R1.kinship_descendants_r3"
+  },
+  "R1.kinship_descendants_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.kinship_descendants_r2"
   },
   "R1.knights_knaves": {
    "max_op_similarity": 0.849,
@@ -3805,7 +4462,7 @@
    "max_sentence_jaccard": 0.077,
    "same_signature": [],
    "with_op": "R1.temporal_critical_path",
-   "with_sentence": "R1.elimination_bracket_r2"
+   "with_sentence": "R1.elimination_bracket_r3"
   },
   "R1.pet_owners": {
    "max_op_similarity": 0.733,
@@ -3851,10 +4508,19 @@
   },
   "R1.stable_matching": {
    "max_op_similarity": 0.822,
-   "max_sentence_jaccard": 0.02,
+   "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.swap_tracking",
-   "with_sentence": "R1.spatial_relative_directions"
+   "with_sentence": "R1.stable_matching_r2"
+  },
+  "R1.stable_matching_r2": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.containers_stack_piles_r3"
+   ],
+   "with_op": "R1.containers_stack_piles_r3",
+   "with_sentence": "R1.stable_matching"
   },
   "R1.swap_tracking": {
    "max_op_similarity": 0.849,
@@ -3886,10 +4552,23 @@
   },
   "R1.topological_order": {
    "max_op_similarity": 0.812,
-   "max_sentence_jaccard": 0.333,
+   "max_sentence_jaccard": 1.0,
    "same_signature": [],
    "with_op": "R1.order_compare",
-   "with_sentence": "R1.kinship_descendants_r2"
+   "with_sentence": "R1.topological_order_r2"
+  },
+  "R1.topological_order_r2": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3"
+   ],
+   "with_op": "R1.kinship_descendants_r3",
+   "with_sentence": "R1.topological_order"
   },
   "R1.tracking_accounts": {
    "max_op_similarity": 0.795,
@@ -3929,7 +4608,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.25
+    "sample_and_build": 0.26
    },
    "sentence_skeletons": 124,
    "signature": "3cf49589b990887c4e559fb6f4bdea1ae143039992135d2df7bd71e890cba017"
@@ -4059,10 +4738,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.05
+    "sample_and_build": 0.06
    },
    "sentence_skeletons": 22,
    "signature": "51f2059463b0457b91476950d83c62be5924779453f4c434617f207edccca026"
+  },
+  "R1.categories_default_exceptions_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.024,
+    "top_share": 0.512,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "categories",
+   "id": "R1.categories_default_exceptions_r3",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 22,
+   "signature": "27b4fbd7a7d6d6e0f725dd847fbf8e28778e5253b1dd3071ab06c9761a852279"
   },
   "R1.categories_follow": {
    "answer": {
@@ -4111,7 +4816,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.22
+    "sample_and_build": 0.25
    },
    "sentence_skeletons": 6,
    "signature": "d9d50c736ef6c2f36ccf48e96e4df6f1b7178b08763156228a936dbd7a365413"
@@ -4163,7 +4868,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.18
+    "sample_and_build": 0.2
    },
    "sentence_skeletons": 5120,
    "signature": "4d0c3101aa2659b4bd2e9fcb1359810958b52ee289ea260415619d60aafdd46f"
@@ -4246,6 +4951,32 @@
    "sentence_skeletons": 1587,
    "signature": "71d47e92120b1ff61846a01eae6bad6c849167fd3ad7c368279cc29675986038"
   },
+  "R1.conditional_threshold_rule_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 0.997,
+    "n": 2000,
+    "top_key": "yes",
+    "top_over_chance": 1.068,
+    "top_share": 0.534,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "conditional",
+   "id": "R1.conditional_threshold_rule_r3",
+   "item_skeletons_level3": {
+    "distinct": 372,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.09
+   },
+   "sentence_skeletons": 1573,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
   "R1.containers_queue_line": {
    "answer": {
     "chance_mean_1_over_k": 0.1265,
@@ -4267,7 +4998,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.01
+    "sample_and_build": 0.02
    },
    "sentence_skeletons": 22,
    "signature": "ba86ea54bd79d01a5960ad27a4a251aa1962fd0a8c987c7f10ab952ec195407b"
@@ -4345,10 +5076,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.68
+    "sample_and_build": 0.76
    },
    "sentence_skeletons": 45,
    "signature": "426c1ff6a466dfccbc5e44fa08e54d55c15749062c7cd82fef66c53c3fe4838f"
+  },
+  "R1.containers_stack_piles_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 23,
+    "entropy_over_log_k": 1.608,
+    "n": 2000,
+    "top_key": "quilt",
+    "top_over_chance": 0.352,
+    "top_share": 0.0525,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "containers",
+   "id": "R1.containers_stack_piles_r3",
+   "item_skeletons_level3": {
+    "distinct": 356,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 1.32
+   },
+   "sentence_skeletons": 48,
+   "signature": "d6120e85f1d08a1593edce458196843e0d9db3db5c4cd4a2974f0a5a88fa6cff"
   },
   "R1.elimination_bracket": {
    "answer": {
@@ -4397,10 +5154,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.04
+    "sample_and_build": 0.07
    },
    "sentence_skeletons": 8,
    "signature": "e5a9078ff607d430f60bb5b38dddb5f7a5c24cb6978c65a1120d5a4de522a141"
+  },
+  "R1.elimination_bracket_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.774,
+    "n": 2000,
+    "top_key": "Dell",
+    "top_over_chance": 0.07,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "elimination",
+   "id": "R1.elimination_bracket_r3",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.07
+   },
+   "sentence_skeletons": 8,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
   },
   "R1.elimination_josephus": {
    "answer": {
@@ -4449,7 +5232,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.04
+    "sample_and_build": 0.03
    },
    "sentence_skeletons": 4,
    "signature": "93d040f7dbeabd84638d535ebb41a937edef805e758223641e98ec7d5985ec55"
@@ -4553,7 +5336,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.02
+    "sample_and_build": 0.03
    },
    "sentence_skeletons": 8,
    "signature": "424ebf3515b07d4a82fd4c90a15c1060497abea1ebb543036cdc37d142f6e63e"
@@ -4631,10 +5414,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.17
+    "sample_and_build": 0.26
    },
    "sentence_skeletons": 9,
    "signature": "73a6ab62934554131068948b1f9734397c6a3eb538b0921312da6799ed0e1e8f"
+  },
+  "R1.instant_runoff_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2833,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.732,
+    "n": 2000,
+    "top_key": "Pearl",
+    "top_over_chance": 0.044,
+    "top_share": 0.0125,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "voting",
+   "id": "R1.instant_runoff_r2",
+   "item_skeletons_level3": {
+    "distinct": 39,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.27
+   },
+   "sentence_skeletons": 9,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
   },
   "R1.kinship_ancestor": {
    "answer": {
@@ -4683,10 +5492,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.31
+    "sample_and_build": 0.34
    },
    "sentence_skeletons": 135,
    "signature": "23d3f566aec6f19a491b2a0e7864e154b5405794b17d8d6f5d9b7717c5aab9ab"
+  },
+  "R1.kinship_ancestor_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1015,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.045,
+    "n": 2000,
+    "top_key": "Zed",
+    "top_over_chance": 0.138,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_ancestor_r3",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.34
+   },
+   "sentence_skeletons": 135,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
   },
   "R1.kinship_cousins": {
    "answer": {
@@ -4761,10 +5596,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.66
+    "sample_and_build": 0.73
    },
    "sentence_skeletons": 9,
    "signature": "0db0c4f2037832c7796ffbccc4834e80e0d612b84c26216225542e37835a9df6"
+  },
+  "R1.kinship_descendants_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.45,
+    "n": 2000,
+    "top_key": "Fern",
+    "top_over_chance": 0.091,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_descendants_r3",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.69
+   },
+   "sentence_skeletons": 9,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
   },
   "R1.knights_knaves": {
    "answer": {
@@ -4839,7 +5700,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.09
+    "sample_and_build": 0.1
    },
    "sentence_skeletons": 3,
    "signature": "718d0b5a392b0539eafcd482746a7038e6fdfc715a42d859540d2542751be967"
@@ -4891,7 +5752,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.03
+    "sample_and_build": 0.04
    },
    "sentence_skeletons": 801,
    "signature": "78f099a724a91cdd4018e4cf2df5053b098eedb60697da42f6c578f628a6ad8e"
@@ -5047,7 +5908,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.25
+    "sample_and_build": 0.26
    },
    "sentence_skeletons": 10,
    "signature": "d2c24efab7b7e21a0fd3ec07df2ca9a34da23b245e531c858b1591a74a09bdcd"
@@ -5151,10 +6012,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.47
+    "sample_and_build": 0.51
    },
    "sentence_skeletons": 136,
    "signature": "0c58db1b3292e55e8c6afcfc912da4dd03441ad2015fe247eaafaabdac3cabce"
+  },
+  "R1.stable_matching_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2467,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.329,
+    "n": 2000,
+    "top_key": "Xavi",
+    "top_over_chance": 0.053,
+    "top_share": 0.013,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "matching",
+   "id": "R1.stable_matching_r2",
+   "item_skeletons_level3": {
+    "distinct": 118,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.9
+   },
+   "sentence_skeletons": 136,
+   "signature": "d6120e85f1d08a1593edce458196843e0d9db3db5c4cd4a2974f0a5a88fa6cff"
   },
   "R1.swap_tracking": {
    "answer": {
@@ -5255,7 +6142,7 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.06
+    "sample_and_build": 0.07
    },
    "sentence_skeletons": 47,
    "signature": "69d302bc01eeddd867cfefbf3ba4f46bcaf9da832a0dd2c798dd6f9c216cd5c0"
@@ -5281,10 +6168,36 @@
    },
    "seconds": {
     "answer_stats": 0.0,
-    "sample_and_build": 0.35
+    "sample_and_build": 0.38
    },
    "sentence_skeletons": 11,
    "signature": "809bf18012958e92b88dfaa5bb9268356a158096f7dd9aa280762b8f991e42f4"
+  },
+  "R1.topological_order_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.45,
+    "n": 2000,
+    "top_key": "Fern",
+    "top_over_chance": 0.104,
+    "top_share": 0.0155,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "scheduling",
+   "id": "R1.topological_order_r2",
+   "item_skeletons_level3": {
+    "distinct": 339,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.36
+   },
+   "sentence_skeletons": 11,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
   },
   "R1.tracking_accounts": {
    "answer": {
@@ -5340,8 +6253,8 @@
   }
  },
  "seconds": {
-  "all": 53.4,
-  "fixtures": 0.32,
-  "shortcut_gate": 11.4
+  "all": 94.0,
+  "fixtures": 0.38,
+  "shortcut_gate": 20.4
  }
 }

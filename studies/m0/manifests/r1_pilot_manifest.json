@@ -11,6 +11,7 @@
    "file": "studies/m0/lineages_r1_new2.py",
    "fixture_sha256": "c8164c40a2c082649254d359516816426acb85c84adf834ecfbf032b41dae789",
    "id": "R1.activity_selection",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "3cf49589b990887c4e559fb6f4bdea1ae143039992135d2df7bd71e890cba017",
    "status": "registered"
   },
@@ -53,9 +54,21 @@
    "cluster": "R1.categories_default_exceptions",
    "family": "categories",
    "file": "studies/m0/lineages_r1_rev2.py",
-   "fixture_sha256": "5e34a63a7efefccc7dd646523449f40a15dc175e199dd8357e54b0c622c4f8a4",
+   "fixture_sha256": null,
    "id": "R1.categories_default_exceptions_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "51f2059463b0457b91476950d83c62be5924779453f4c434617f207edccca026",
+   "status": "SUPERSEDED by R1.categories_default_exceptions_r3"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.categories_default_exceptions",
+   "family": "categories",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "1d90b2d5d581c7b3ba1e289e021eb580fd23724728f10773e54c04c63600c8eb",
+   "id": "R1.categories_default_exceptions_r3",
+   "signature": "27b4fbd7a7d6d6e0f725dd847fbf8e28778e5253b1dd3071ab06c9761a852279",
    "status": "registered"
   },
   {
@@ -97,9 +110,22 @@
    "cluster": "R1.conditional_threshold_rule",
    "family": "conditional",
    "file": "studies/m0/lineages_r1_rev2.py",
-   "fixture_sha256": "22eb5c409f6ce8153b7ac1e501b2d253d04525771aa67fc702a38afee12c281a",
+   "fixture_sha256": null,
    "id": "R1.conditional_threshold_rule_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "71d47e92120b1ff61846a01eae6bad6c849167fd3ad7c368279cc29675986038",
+   "status": "SUPERSEDED by R1.conditional_threshold_rule_r3"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.conditional_threshold_rule",
+   "family": "conditional",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "f2ea4f060bc4c17a3e625d15acf0d3c0c7a57679429d49b40eab96e927ed61da",
+   "id": "R1.conditional_threshold_rule_r3",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2",
    "status": "registered"
   },
   {
@@ -141,9 +167,22 @@
    "cluster": "R1.containers_stack_piles",
    "family": "containers",
    "file": "studies/m0/lineages_r1_rev2.py",
-   "fixture_sha256": "3cfee5523fd2eed7f32999f18f774258455a026a9566c9df5ba42d02f83e4882",
+   "fixture_sha256": null,
    "id": "R1.containers_stack_piles_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "426c1ff6a466dfccbc5e44fa08e54d55c15749062c7cd82fef66c53c3fe4838f",
+   "status": "SUPERSEDED by R1.containers_stack_piles_r3"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.containers_stack_piles",
+   "family": "containers",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "96b2829193ec5e6b8ace173f5b7e9524b53b219e41d9b2015b8d4080cbde3c92",
+   "id": "R1.containers_stack_piles_r3",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "d6120e85f1d08a1593edce458196843e0d9db3db5c4cd4a2974f0a5a88fa6cff",
    "status": "registered"
   },
   {
@@ -163,9 +202,22 @@
    "cluster": "R1.elimination_bracket",
    "family": "elimination",
    "file": "studies/m0/lineages_r1_rev2.py",
-   "fixture_sha256": "7f4c3367426288a786a75f0b40ffd7bc6ac434e7c4fc22c358a57e83a8d25d16",
+   "fixture_sha256": null,
    "id": "R1.elimination_bracket_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "e5a9078ff607d430f60bb5b38dddb5f7a5c24cb6978c65a1120d5a4de522a141",
+   "status": "SUPERSEDED by R1.elimination_bracket_r3"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.elimination_bracket",
+   "family": "elimination",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "a51c4af421400ea6882305d20a31066bf24455246224c15c1a218cecf03dbc68",
+   "id": "R1.elimination_bracket_r3",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2",
    "status": "registered"
   },
   {
@@ -251,9 +303,22 @@
    "cluster": "R1.instant_runoff",
    "family": "voting",
    "file": "studies/m0/lineages_r1_new2.py",
-   "fixture_sha256": "dbc7216d3107aad231edd353000530190d354088237c6ab1a67a01ba3144d4d6",
+   "fixture_sha256": null,
    "id": "R1.instant_runoff",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "73a6ab62934554131068948b1f9734397c6a3eb538b0921312da6799ed0e1e8f",
+   "status": "SUPERSEDED by R1.instant_runoff_r2"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.instant_runoff",
+   "family": "voting",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "19050825b31ed8507158c26e0c9ba4dd64b9afb2624ea98a8f3fd8c3865b4b53",
+   "id": "R1.instant_runoff_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2",
    "status": "registered"
   },
   {
@@ -262,9 +327,22 @@
    "cluster": "R1.categories_default_exceptions",
    "family": "kinship",
    "file": "studies/m0/lineages_r1_rev2.py",
-   "fixture_sha256": "a6b876c1d5053f6bc261fe222955b52570da6def4290617597293b39a66f7110",
+   "fixture_sha256": null,
    "id": "R1.kinship_ancestor_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "23d3f566aec6f19a491b2a0e7864e154b5405794b17d8d6f5d9b7717c5aab9ab",
+   "status": "SUPERSEDED by R1.kinship_ancestor_r3"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.categories_default_exceptions",
+   "family": "kinship",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "292b37716e1690d05a01c0536bff1c2d4c2775bcf22942e86eed1efbfd5e5b7f",
+   "id": "R1.kinship_ancestor_r3",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2",
    "status": "registered"
   },
   {
@@ -284,9 +362,22 @@
    "cluster": "R1.kinship_descendants",
    "family": "kinship",
    "file": "studies/m0/lineages_r1_rev2.py",
-   "fixture_sha256": "45f4441314b7cd585439bb4bca715c9c845cf042a1939db89143cfbcc839dcde",
+   "fixture_sha256": null,
    "id": "R1.kinship_descendants_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "0db0c4f2037832c7796ffbccc4834e80e0d612b84c26216225542e37835a9df6",
+   "status": "SUPERSEDED by R1.kinship_descendants_r3"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.kinship_descendants",
+   "family": "kinship",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "e751bd7af9fec03ad332a653b105b8b87345557713480cdd004012aa7eeccd21",
+   "id": "R1.kinship_descendants_r3",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2",
    "status": "registered"
   },
   {
@@ -308,6 +399,7 @@
    "file": "studies/m0/lineages_r1_new2.py",
    "fixture_sha256": "8fcb4cb1be0f1656dbabf13d3f940094af3a8c381b8712c555594cea88a7dec3",
    "id": "R1.mst_cost",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "718d0b5a392b0539eafcd482746a7038e6fdfc715a42d859540d2542751be967",
    "status": "registered"
   },
@@ -372,9 +464,22 @@
    "cluster": "R1.stable_matching",
    "family": "matching",
    "file": "studies/m0/lineages_r1_new2.py",
-   "fixture_sha256": "0aa3a4de2a703bd0ffe8532fcf4c7ea07fc248259237061090cfff59769b9c5c",
+   "fixture_sha256": null,
    "id": "R1.stable_matching",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "0c58db1b3292e55e8c6afcfc912da4dd03441ad2015fe247eaafaabdac3cabce",
+   "status": "SUPERSEDED by R1.stable_matching_r2"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.stable_matching",
+   "family": "matching",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "132df120f2d1eee37cc294b81189b820a62596823fdd2cdfca023be53a039dd3",
+   "id": "R1.stable_matching_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "d6120e85f1d08a1593edce458196843e0d9db3db5c4cd4a2974f0a5a88fa6cff",
    "status": "registered"
   },
   {
@@ -416,9 +521,22 @@
    "cluster": "R1.topological_order",
    "family": "scheduling",
    "file": "studies/m0/lineages_r1_new2.py",
-   "fixture_sha256": "97dafdd52402fbeee08deba508c4969e6a05aca3319b40acfe5ad67c87be81ed",
+   "fixture_sha256": null,
    "id": "R1.topological_order",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
    "signature": "809bf18012958e92b88dfaa5bb9268356a158096f7dd9aa280762b8f991e42f4",
+   "status": "SUPERSEDED by R1.topological_order_r2"
+  },
+  {
+   "capacity_levels_failed": [],
+   "capacity_passed_all_levels": true,
+   "cluster": "R1.topological_order",
+   "family": "scheduling",
+   "file": "studies/m0/lineages_r1_rev3.py",
+   "fixture_sha256": "89d2e36c4672afbcd4d66ed68203f4e29a1ee7d78d79d9805668cad3d6314460",
+   "id": "R1.topological_order_r2",
+   "repair_note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2",
    "status": "registered"
   },
   {

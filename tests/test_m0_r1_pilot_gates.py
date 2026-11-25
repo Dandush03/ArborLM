@@ -38,7 +38,10 @@ def test_pilot_lineages_are_not_in_the_core_registry_and_ids_do_not_collide() ->
 def test_signatures_are_distinct_between_all_fifteen_old_and_twenty_new_builders() -> None:
     sigs = {x.id: lg.signature(x.build) for x in [*lineages_of("R1"), *NEW]}
     assert len(set(sigs.values())) == 35
-    every = {x.id: lg.signature(x.build) for x in [*lineages_of("R1"), *PILOT_ALL]}
+    from studies.m0 import lineages_r1_rev3 as r3
+
+    wrappers = {i for i in r3.RETUNED if i not in ("R1.categories_default_exceptions_r3",)}  # thin calls of an earlier builder with other probabilities: identical code by design
+    every = {x.id: lg.signature(x.build) for x in [*lineages_of("R1"), *PILOT_ALL] if x.id not in wrappers}
     assert len(set(every.values())) == len(every)  # revisions and round-2 builders are not literal copies either
 
 

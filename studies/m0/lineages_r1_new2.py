@@ -22,7 +22,7 @@ import random
 
 from studies.m0.core import Built, Item, Retry
 from studies.m0.lineages_r1_common import and_, pilot, pl
-from studies.m0.lineages_r1_shortcuts import SPECIFIC, credit, generic
+from studies.m0.lineages_r1_shortcuts import ANTI_P, SPECIFIC, credit, generic
 from studies.m0.vocab import NAMES, TOWNS
 
 
@@ -32,7 +32,7 @@ def _anti(b: Built, lid: str, r: random.Random, names: tuple[str, ...], p_reject
     g = generic(it)
     for n in names:
         p = fns[n](it) if n in fns else g.get(n)
-        if p not in (None, []) and credit(p, it) >= 0.5 and r.random() < p_reject:
+        if p not in (None, []) and credit(p, it) >= 0.5 and r.random() < ANTI_P.get(lid, {}).get(n, p_reject):
             raise Retry
     return b
 

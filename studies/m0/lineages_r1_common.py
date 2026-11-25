@@ -23,7 +23,7 @@ FAMILY_MODULES = (
 )
 YNU = ("yes", "no", "cannot be determined")
 
-EXTRA_MODULES = ("rev2", "new2")  # shape revisions (and, later, further new lineages): imported by load_pilot, not tied to one family
+EXTRA_MODULES = ("rev2", "new2", "rev3")  # shape revisions (and, later, further new lineages): imported by load_pilot, not tied to one family
 Builder = Callable[[int, random.Random], Built]
 
 

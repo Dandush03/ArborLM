@@ -19,7 +19,7 @@ from collections import Counter
 from collections.abc import Callable, Sequence
 from typing import Any
 
-from studies.m0.core import ALL_LEVELS, CORE_LEVELS, Item, Lineage
+from studies.m0.core import CORE_LEVELS, Item, Lineage
 from studies.m0.vocab import NAMES, OBJECTS, PSEUDO, TOWNS
 
 Pred = str | list[str] | None
@@ -353,6 +353,7 @@ SPECIFIC: dict[str, dict[str, Callable[[Item], Pred]]] = {
     "R1.containers_queue_line": {"last_joiner_or_last_cutter": _queue_old},
     "R1.containers_queue_line_r2": {"initial_line_position": _queue_initial},
     "R1.categories_default_exceptions": {"all_rules_agree": _def_agree, "member_group_rule": _def_own, "majority_sign": _def_majority, "last_listed": _def_last_listed},
+    "R1.categories_default_exceptions_r3": {"all_rules_agree": _def_agree, "member_group_rule": _def_own, "majority_sign": _def_majority, "last_listed": _def_last_listed, "least_specific_rule": _def_largest_group},
     "R1.categories_default_exceptions_r2": {"all_rules_agree": _def_agree, "member_group_rule": _def_own, "majority_sign": _def_majority, "last_listed": _def_last_listed, "least_specific_rule": _def_largest_group},
     "R1.conditional_threshold_rule": {"veto_no_means_no": _veto_no},
     "R1.conditional_threshold_rule_r2": {"yes_count_majority": _yes_majority},
@@ -373,12 +374,56 @@ SPECIFIC: dict[str, dict[str, Callable[[Item], Pred]]] = {
 }
 
 
+# ---------------------------------------------------------------- redraw-probability override (used by the retuned revisions)
+
+ANTI_P: dict[str, dict[str, float]] = {}
+
+
+class anti_override:  # noqa: N801
+    """Context manager: use the given redraw probabilities (per heuristic name) for lineage id ``lid`` inside the block."""
+
+    def __init__(self, lid: str, probs: dict[str, float]) -> None:
+        self.lid, self.probs = lid, probs
+
+    def __enter__(self) -> None:
+        ANTI_P[self.lid] = self.probs
+
+    def __exit__(self, *a: object) -> None:
+        ANTI_P.pop(self.lid, None)
+
+
 # ---------------------------------------------------------------- scoring
+
+
+def _valid(pred: Pred, it: Item) -> Pred:
+    """A prediction that is not among the item's options does not fire (it is a random guess): ruling 2 reads heuristics on the options actually offered."""
+    if pred is None or pred == []:
+        return pred
+    if it.answer_type == "yn":
+        opts: list[str] | None = ["yes", "no"]
+    elif it.answer_type == "ynu":
+        opts = ["yes", "no", "cannot be determined"]
+    elif it.answer_type in ("name", "text", "word", "letter"):
+        opts = parse_options(it.question)
+        if not opts and it.answer_type in ("name", "text"):
+            opts = list(dict.fromkeys(w for w in _WORD.findall(it.question) if w in _ENT))  # no list in the text: the entities the item mentions
+        if it.answer_type == "word" and not opts and it.k:
+            return pred  # no option list in the text (weekday, directions): keep as is
+    else:
+        return pred
+    if not opts:
+        return pred
+    low = {o.lower() for o in opts}
+    if isinstance(pred, str):
+        return pred if pred.lower() in low else None
+    kept = [x for x in pred if x.lower() in low]
+    return kept or None
 
 
 def credit(pred: Pred, it: Item) -> float | None:
     """Expected credit of one prediction: ties split, no prediction = a random guess (credit 1/k; 0 for open answers)."""
     chance = (1.0 / it.k) if it.k else 0.0
+    pred = _valid(pred, it)
     if pred is None:
         return chance
     if isinstance(pred, str):
@@ -388,14 +433,44 @@ def credit(pred: Pred, it: Item) -> float | None:
     return (1.0 / len(pred)) if it.answer in pred else 0.0
 
 
+def anti_credit(pred: Pred, it: Item) -> float | None:
+    """Credit of "pick uniformly among the options the heuristic did NOT choose" (closed answers only; None for open answers).
+    A heuristic that does not fire leaves nothing to invert, so the credit is the chance 1/k. Ruling 2 of 2025-11-25: a heuristic pushed clearly
+    BELOW chance is as exploitable as one above it (answer its opposite)."""
+    if not it.k:
+        return None
+    pred = _valid(pred, it)
+    if pred is None or pred == []:
+        return 1.0 / it.k
+    chosen = [pred] if isinstance(pred, str) else list(pred)
+    n_chosen = len({c.lower() for c in chosen})
+    if n_chosen >= it.k:
+        return 1.0 / it.k  # the heuristic chose every option: it says nothing, so there is nothing to invert
+    if any(c.lower() == it.answer.lower() for c in chosen):
+        return 0.0
+    return 1.0 / max(1, it.k - n_chosen)
+
+
+def spec_for(lid: str) -> dict[str, Callable[[Item], Pred]]:
+    """Lineage-specific heuristics of a shape; a later revision (_r3, ...) uses those of the nearest earlier revision."""
+    import re
+
+    base = re.sub(r"_r\d+$", "", lid)
+    for cand in (lid, f"{base}_r2", base):
+        if cand in SPECIFIC:
+            return SPECIFIC[cand]
+    return {}
+
+
 def run_battery(lin: Lineage, items: Sequence[Item]) -> dict[str, Any]:
     chance = sum((1.0 / it.k) if it.k else 0.0 for it in items) / len(items)
     keys = Counter(it.answer for it in items)
     rows: list[dict[str, Any]] = []
     per: dict[str, dict[int, list[float]]] = {}
     fired: dict[str, list[float]] = {}
+    anti: dict[str, list[float]] = {}
     const_key = keys.most_common(1)[0][0]
-    spec = SPECIFIC.get(lin.id, {})
+    spec = spec_for(lin.id)
     for it in items:
         preds: dict[str, Pred] = {"constant_most_frequent_key": const_key, **generic(it)}
         for n, fn in spec.items():
@@ -403,16 +478,25 @@ def run_battery(lin: Lineage, items: Sequence[Item]) -> dict[str, Any]:
         for n, p in preds.items():
             c = credit(p, it)
             per.setdefault(n, {}).setdefault(it.level, []).append(c if c is not None else 0.0)
-            if p is not None and p != []:
+            if _valid(p, it) not in (None, []):
                 fired.setdefault(n, []).append(credit(p, it) or 0.0)
+            ac = anti_credit(p, it)
+            if ac is not None:
+                anti.setdefault(n, []).append(ac)
+    open_answers = all(it.k is None for it in items)
     for n, lv in per.items():
         allc = [x for v in lv.values() for x in v]
         acc = sum(allc) / len(allc)
         bylevel = {level: (sum(v) / len(v) - (sum((1.0 / it.k) if it.k else 0.0 for it in items if it.level == level) / max(1, sum(1 for it in items if it.level == level)))) for level, v in lv.items() if len(v) >= 100}
         rows.append({"heuristic": n, "accuracy": round(acc, 4), "excess_over_chance": round(acc - chance, 4), "fires": len(fired.get(n, [])), "accuracy_when_fires": round(sum(fired[n]) / len(fired[n]), 4) if fired.get(n) else None,
-                     "worst_level": max(bylevel, key=lambda x: bylevel[x]) if bylevel else None, "worst_level_excess": round(max(bylevel.values()), 4) if bylevel else None})
+                     "worst_level": max(bylevel, key=lambda x: bylevel[x]) if bylevel else None, "worst_level_excess": round(max(bylevel.values()), 4) if bylevel else None,
+                     "anti_accuracy": round(sum(anti[n]) / len(anti[n]), 4) if anti.get(n) else None,
+                     "anti_excess": round(sum(anti[n]) / len(anti[n]) - chance, 4) if anti.get(n) else None,
+                     "per_level_accuracy": {str(level): round(sum(v) / len(v), 4) for level, v in sorted(lv.items())}})
     rows.sort(key=lambda r: -r["excess_over_chance"])
-    return {"id": lin.id, "n_items": len(items), "chance": round(chance, 4), "k_mean": round(sum(it.k for it in items if it.k) / max(1, sum(1 for it in items if it.k)), 2), "worst": rows[0], "heuristics": rows}
+    two = max(rows, key=lambda r: max(abs(r["excess_over_chance"]), abs(r["anti_excess"]) if r["anti_excess"] is not None else 0.0)) if not open_answers else max(rows, key=lambda r: r["accuracy"])
+    return {"id": lin.id, "n_items": len(items), "chance": round(chance, 4), "open_answers": open_answers, "most_frequent_rate": round(keys.most_common(1)[0][1] / len(items), 4),
+            "k_mean": round(sum(it.k for it in items if it.k) / max(1, sum(1 for it in items if it.k)), 2), "worst": rows[0], "worst_two_sided": two, "heuristics": rows}
 
 
 def shortcut_gate(lins: Sequence[Lineage], per_level: int = 400, levels: Sequence[int] = CORE_LEVELS) -> dict[str, Any]:
@@ -425,11 +509,29 @@ def shortcut_gate(lins: Sequence[Lineage], per_level: int = 400, levels: Sequenc
 
 
 def markdown(results: dict[str, Any], superseded: Sequence[str] = ()) -> str:
-    rows = ["| id | chance | worst heuristic | accuracy | excess over chance | fires | worst level (excess) | note |", "|---|---|---|---|---|---|---|---|"]
+    rows = ["| id | chance | worst heuristic (largest excess above chance) | accuracy | excess over chance | fires | worst level (excess) | note |", "|---|---|---|---|---|---|---|---|"]
     for lid, r in sorted(results.items()):
         w = r["worst"]
-        rows.append(f"| {lid} | {r['chance']} | {w['heuristic']} | {w['accuracy']} | {w['excess_over_chance']} | {w['fires']} | {w['worst_level']} ({w['worst_level_excess']}) | {'superseded' if lid in superseded else ''} |")
+        note = "superseded" if lid in superseded else ""
+        if r.get("open_answers"):
+            rows.append(f"| {lid} | open | {w['heuristic']} | exact-match rate {w['accuracy']} (most-frequent answer {r['most_frequent_rate']}) | n/a (open answer) | {w['fires']} | per level: {w['per_level_accuracy']} | {note} |")
+        else:
+            rows.append(f"| {lid} | {r['chance']} | {w['heuristic']} | {w['accuracy']} | {w['excess_over_chance']} | {w['fires']} | {w['worst_level']} ({w['worst_level_excess']}) | {note} |")
     return "\n".join(rows) + "\n"
 
 
-ALL = ALL_LEVELS
+def two_sided_markdown(results: dict[str, Any], ids: Sequence[str]) -> str:
+    """Two-sided reading (ruling 2): for closed answers each heuristic's accuracy minus chance (above chance is a shortcut, clearly below chance is as
+    exploitable) and the accuracy of picking uniformly among the options the heuristic did NOT choose, minus chance. Open answers (ruling 5): the heuristic's
+    ABSOLUTE exact-match rate beside the most-frequent-answer rate, and the exact-match share per level; never called excess over chance."""
+    rows = ["| id | answers | chance | heuristic (largest two-sided departure) | accuracy | accuracy - chance | anti accuracy - chance | most-frequent-answer rate | per-level accuracy (levels 1-5) |",
+            "|---|---|---|---|---|---|---|---|---|"]
+    for lid in ids:
+        r = results[lid]
+        w = r["worst_two_sided"]
+        lv = " / ".join(f"{w['per_level_accuracy'].get(str(i), '-')}" for i in range(1, 6))
+        if r["open_answers"]:
+            rows.append(f"| {lid} | open | n/a | {w['heuristic']} | exact-match rate {w['accuracy']} | n/a | n/a | {r['most_frequent_rate']} | {lv} |")
+        else:
+            rows.append(f"| {lid} | closed (k about {r['k_mean']}) | {r['chance']} | {w['heuristic']} | {w['accuracy']} | {w['excess_over_chance']:+} | {w['anti_excess']:+} | {r['most_frequent_rate']} | {lv} |")
+    return "\n".join(rows) + "\n"
