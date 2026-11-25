@@ -1,0 +1,328 @@
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL. AUDITOR'S INDEPENDENT RECOMPUTATION; not Astra validation, not human approval.
+ORACLE LINE (Part T): every pass is under the oracle route; task identity is given by rule, not learned.
+
+Denominators (teacher - S0, registered): E_A 0.608079  E_B 0.626241
+
+=== cell r0|AB (first A, second B) ===   POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN
+pass                          s            G         share_differs
+  E_A|M1__reg                0.453381657  +0.513468  0.000
+  E_A|app__a                 0.426809405  +0.469769  0.888
+  E_A|app__d1                0.410193197  +0.442444  0.884
+  E_A|fin__a                 0.381499677  +0.395256  0.935
+  E_A|fin__b1                0.453381657  +0.513468  0.000
+  E_A|fin__c                 0.214138801  +0.120028  0.989
+  E_A|fin__d1                0.407473020  +0.437970  0.886
+  E_A|fin__e1                0.425619870  +0.467813  0.885
+  E_A|fin__g1                0.406761209  +0.436800  0.889
+  E_B|fin__a                 0.434852169  +0.489030  0.000
+  E_B|fin__b2                0.351154794  +0.355380  0.939
+  E_B|fin__c                 0.296060671  +0.267404  0.968
+  E_B|fin__d2                0.194624993  +0.105428  0.988
+  E_B|fin__e1                0.146395800  +0.028414  0.998
+  E_B|fin__e2                0.385016901  +0.409452  0.898
+  E_B|fin__g2                0.388824520  +0.415532  0.882
+first capability, final store (s units; G units; share of T; paired SE in s):
+  T                                        +0.071882  G +0.118212  share +1.0000  se 0.005148
+  i_slot_displacement                      +0.045909  G +0.075498  share +0.6387  se 0.004486
+  ii_softmax_renormalisation               -0.018147  G -0.029843  share -0.2525  se 0.005029
+  iii_stage2_values                        +0.044120  G +0.072557  share +0.6138  se 0.004380
+  i_plus_ii                                +0.027762  G +0.045655  share +0.3862  se None
+  values_alone_b1_minus_g1                 +0.046620  G +0.076668  share +0.6486  se 0.004430
+  competition_given_values_g1_minus_a      +0.025262  G +0.041543  share +0.3514  se 0.004701
+  interaction_iii_minus_values_alone       -0.002500  G -0.004112  share -0.0348  se 0.005533
+  registered F +0.071881980  (iv) F - T -4.163e-17  path sum - T -1.388e-17
+append point: (i) +0.043188 se 0.004689; (ii) -0.016616 se 0.005138; (i)+(ii) +0.026572; final-minus-append (i)+(ii) +0.001190
+   APPEND COST in G: mine -0.043699  registered-record-derived -0.043699
+second capability (effect of stage-1 rows on the second capability's read; not a retention loss):
+  T2_b2_minus_a                    -0.083697  G -0.133650  share +1.0000  se 0.005884
+  i_b2_minus_d2                    +0.156530  G +0.249951  share -1.8702  se 0.007136
+  ii_d2_minus_e2                   -0.190392  G -0.304024  share +2.2748  se 0.007373
+  iii_e2_minus_a                   -0.049835  G -0.079578  share +0.5954  se 0.005094
+  values_alone_b2_minus_g2         -0.037670  G -0.060152  share +0.4501  se 0.005372
+  given_values_g2_minus_a          -0.046028  G -0.073498  share +0.5499  se 0.005250
+  a_minus_e1_stage2_off            +0.288456  G +0.460616  share -3.4464  se 0.007630
+  a_minus_c_second_cost            +0.138791  G +0.221626  share -1.6583  se 0.006586
+  interaction (iii2 - values alone) -0.012166
+COUNTERFACTUAL RET ARITHMETIC [fin__c]: DOES NOT HOLD  F_cf +0.239243  rho_cf 0.2338  | second cost s[a]-s[c] +0.138791  G_second(c) +0.267404  G_second(a) +0.489030  (extra: s[a]-s[g2] +0.046028)  -- not RET
+COUNTERFACTUAL RET ARITHMETIC [fin__g1]: DOES NOT HOLD  F_cf +0.046620  rho_cf 0.8507  | second cost s[a]-s[c] +0.138791  G_second(c) +0.267404  G_second(a) +0.489030  (extra: s[a]-s[g2] +0.046028)  -- not RET
+registered comparators (from registry.json, not recomputed): M-append|AB|0|s:E_A 0.3815; M-append|AB|0|s:E_B 0.4349; M1|AB|0|s:E_A 0.4534; M1|AB|0|s:E_B 0.1243; M-seq|AB|0|s:E_A 0.1806; M-seq|AB|0|s:E_B 0.4477; M-ii|AB|0|s:E_A 0.4555; M-ii|AB|0|s:E_B 0.4389; D-append|AB|0|s:E_A 0.1473; D-append|AB|0|s:E_B 0.4873; D-seq|AB|0|s:E_A 0.1551; D-seq|AB|0|s:E_B 0.5179; D1|AB|0|s:E_A 0.5298; D1|AB|0|s:E_B 0.1431; M-sep|-|0|s:E_A 0.4534; M-sep|-|0|s:E_B 0.4425; D-sep|-|0|s:E_A 0.5298; D-sep|-|0|s:E_B 0.5019; M-joint|-|0|s:E_A 0.4740; M-joint|-|0|s:E_B 0.4539; D-joint|-|0|s:E_A 0.5546; D-joint|-|0|s:E_B 0.4978; E-table|-|0|s:E_A 0.4527; E-table|-|0|s:E_B 0.4579
+  read stats append_first/word: n1 mean 3.1131 med 3.0000 p5 1.0000 p95 5.0000; m1 mean 0.6219 med 0.6370 p5 0.3509 p95 0.8100; displaced_ref_weight mean 0.2504 med 0.2273 p5 0.0726 p95 0.4898; ref_top_row_kept mean 0.9994 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2851 med 0.2631 p5 0.1294 p95 0.5340; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.3535 med 0.2905 p5 0.0884 p95 0.8115; rel[e1] mean 0.2851 med 0.2631 p5 0.1294 p95 0.5340; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7800 med 0.7800 p5 0.7800 p95 0.7800; displaced_ref_weight mean 0.0523 med 0.0523 p5 0.0523 p95 0.0523; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1799 med 0.1799 p5 0.1799 p95 0.1799; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.0625 med 0.0625 p5 0.0625 p95 0.0625; rel[e1] mean 0.1799 med 0.1799 p5 0.1799 p95 0.1799; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first: g1 [5.845227241516113] g2 [0.0] tie-claim violations 0
+  read stats final_first/word: n1 mean 3.1025 med 3.0000 p5 1.0000 p95 5.0000; m1 mean 0.6178 med 0.6458 p5 0.3595 p95 0.7884; displaced_ref_weight mean 0.2493 med 0.2226 p5 0.1069 p95 0.4898; ref_top_row_kept mean 0.9998 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.3794 med 0.3354 p5 0.1829 p95 0.7066; rel[c] mean 0.5310 med 0.5243 p5 0.2475 p95 0.8540; rel[d1] mean 0.3511 med 0.2829 p5 0.1393 p95 0.8148; rel[e1] mean 0.2887 med 0.2662 p5 0.1467 p95 0.5152; rel[g1] mean 0.2504 med 0.2171 p5 0.0721 p95 0.5224; norm_e2_over_ref mean 0.2504 med 0.2171 p5 0.0721 p95 0.5224; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.8225 med 0.8225 p5 0.8225 p95 0.8225; displaced_ref_weight mean 0.0523 med 0.0523 p5 0.0523 p95 0.0523; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1418 med 0.1418 p5 0.1418 p95 0.1418; rel[c] mean 0.3399 med 0.3399 p5 0.3399 p95 0.3399; rel[d1] mean 0.0625 med 0.0625 p5 0.0625 p95 0.0625; rel[e1] mean 0.1359 med 0.1359 p5 0.1359 p95 0.1359; rel[g1] mean 0.0445 med 0.0445 p5 0.0445 p95 0.0445; norm_e2_over_ref mean 0.0445 med 0.0445 p5 0.0445 p95 0.0445; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first: g1 [5.845227241516113] g2 [7.224819660186768] tie-claim violations 0
+  read stats final_second/word: n2 mean 2.5293 med 2.0000 p5 1.0000 p95 5.0000; m2 mean 0.5476 med 0.5661 p5 0.2512 p95 0.7916; displaced_ref_weight mean 0.3849 med 0.3605 p5 0.1570 p95 0.6337; ref_top_row_kept mean 0.9921 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4212 med 0.3803 p5 0.1839 p95 0.7281; rel[c] mean 0.6088 med 0.5769 p5 0.3468 p95 0.9635; rel[d2] mean 0.6811 med 0.5654 p5 0.2245 p95 1.4481; rel[e2] mean 0.2852 med 0.2515 p5 0.1216 p95 0.5091; rel[g2] mean 0.3171 med 0.2813 p5 0.1450 p95 0.5876; norm_e1_over_ref mean 0.3171 med 0.2813 p5 0.1450 p95 0.5876; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second/marker: n2 mean 3.0000 med 3.0000 p5 3.0000 p95 3.0000; m2 mean 0.7189 med 0.7189 p5 0.7189 p95 0.7189; displaced_ref_weight mean 0.2567 med 0.2567 p5 0.2567 p95 0.2567; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2379 med 0.2379 p5 0.2379 p95 0.2379; rel[c] mean 0.4400 med 0.4400 p5 0.4400 p95 0.4400; rel[d2] mean 0.3932 med 0.3932 p5 0.3932 p95 0.3932; rel[e2] mean 0.1865 med 0.1865 p5 0.1865 p95 0.1865; rel[g2] mean 0.1493 med 0.1493 p5 0.1493 p95 0.1493; norm_e1_over_ref mean 0.1493 med 0.1493 p5 0.1493 p95 0.1493; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second: g1 [5.845227241516113] g2 [7.224819660186768] tie-claim violations 0
+
+=== cell r0|BA (first B, second A) ===   POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN
+pass                          s            G         share_differs
+  E_A|fin__a                 0.453009784  +0.512857  0.000
+  E_A|fin__b2                0.377567768  +0.388790  0.934
+  E_A|fin__c                 0.324749674  +0.301930  0.960
+  E_A|fin__d2                0.245814789  +0.172120  0.993
+  E_A|fin__e1                0.153651781  +0.020555  1.000
+  E_A|fin__e2                0.406220092  +0.435910  0.892
+  E_A|fin__g2                0.391163054  +0.411148  0.909
+  E_B|M1__reg                0.442466661  +0.501189  0.000
+  E_B|app__a                 0.434481352  +0.488438  0.841
+  E_B|app__d1                0.402491317  +0.437355  0.843
+  E_B|fin__a                 0.379560616  +0.400739  0.921
+  E_B|fin__b1                0.442466661  +0.501189  0.000
+  E_B|fin__c                 0.148319739  +0.031486  1.000
+  E_B|fin__d1                0.401139646  +0.435197  0.833
+  E_B|fin__e1                0.432682250  +0.485565  0.824
+  E_B|fin__g1                0.387601733  +0.413579  0.885
+first capability, final store (s units; G units; share of T; paired SE in s):
+  T                                        +0.062906  G +0.100450  share +1.0000  se 0.005742
+  i_slot_displacement                      +0.041327  G +0.065992  share +0.6570  se 0.005157
+  ii_softmax_renormalisation               -0.031543  G -0.050368  share -0.5014  se 0.005640
+  iii_stage2_values                        +0.053122  G +0.084826  share +0.8445  se 0.005073
+  i_plus_ii                                +0.009784  G +0.015624  share +0.1555  se None
+  values_alone_b1_minus_g1                 +0.054865  G +0.087610  share +0.8722  se 0.005302
+  competition_given_values_g1_minus_a      +0.008041  G +0.012840  share +0.1278  se 0.005019
+  interaction_iii_minus_values_alone       -0.001743  G -0.002784  share -0.0277  se 0.006345
+  registered F +0.062906045  (iv) F - T -1.388e-17  path sum - T +0.000e+00
+append point: (i) +0.039975 se 0.005285; (ii) -0.031990 se 0.005821; (i)+(ii) +0.007985; final-minus-append (i)+(ii) +0.001799
+   APPEND COST in G: mine -0.012751  registered-record-derived -0.012751
+second capability (effect of stage-1 rows on the second capability's read; not a retention loss):
+  T2_b2_minus_a                    -0.075442  G -0.124066  share +1.0000  se 0.005353
+  i_b2_minus_d2                    +0.131753  G +0.216671  share -1.7464  se 0.005893
+  ii_d2_minus_e2                   -0.160405  G -0.263790  share +2.1262  se 0.006180
+  iii_e2_minus_a                   -0.046790  G -0.076947  share +0.6202  se 0.004841
+  values_alone_b2_minus_g2         -0.013595  G -0.022358  share +0.1802  se 0.004288
+  given_values_g2_minus_a          -0.061847  G -0.101708  share +0.8198  se 0.005027
+  a_minus_e1_stage2_off            +0.299358  G +0.492301  share -3.9681  se 0.007188
+  a_minus_c_second_cost            +0.128260  G +0.210927  share -1.7001  se 0.006195
+  interaction (iii2 - values alone) -0.033194
+COUNTERFACTUAL RET ARITHMETIC [fin__c]: DOES NOT HOLD  F_cf +0.294147  rho_cf 0.0628  | second cost s[a]-s[c] +0.128260  G_second(c) +0.301930  G_second(a) +0.512857  (extra: s[a]-s[g2] +0.061847)  -- not RET
+COUNTERFACTUAL RET ARITHMETIC [fin__g1]: DOES NOT HOLD  F_cf +0.054865  rho_cf 0.8252  | second cost s[a]-s[c] +0.128260  G_second(c) +0.301930  G_second(a) +0.512857  (extra: s[a]-s[g2] +0.061847)  -- not RET
+registered comparators (from registry.json, not recomputed): M-append|BA|0|s:E_A 0.4530; M-append|BA|0|s:E_B 0.3796; M1|BA|0|s:E_A 0.1401; M1|BA|0|s:E_B 0.4425; M-seq|BA|0|s:E_A 0.4610; M-seq|BA|0|s:E_B 0.1287; M-ii|BA|0|s:E_A 0.4586; M-ii|BA|0|s:E_B 0.4458; D-append|BA|0|s:E_A 0.5304; D-append|BA|0|s:E_B 0.1421; D-seq|BA|0|s:E_A 0.5250; D-seq|BA|0|s:E_B 0.1510; D1|BA|0|s:E_A 0.1566; D1|BA|0|s:E_B 0.5019; M-sep|-|0|s:E_A 0.4534; M-sep|-|0|s:E_B 0.4425; D-sep|-|0|s:E_A 0.5298; D-sep|-|0|s:E_B 0.5019; M-joint|-|0|s:E_A 0.4740; M-joint|-|0|s:E_B 0.4539; D-joint|-|0|s:E_A 0.5546; D-joint|-|0|s:E_B 0.4978; E-table|-|0|s:E_A 0.4527; E-table|-|0|s:E_B 0.4579
+  read stats append_first/word: n1 mean 3.4266 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6419 med 0.6721 p5 0.3408 p95 0.8843; displaced_ref_weight mean 0.2441 med 0.2081 p5 0.0722 p95 0.5036; ref_top_row_kept mean 0.9979 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2767 med 0.2300 p5 0.0944 p95 0.5571; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.3437 med 0.2635 p5 0.0685 p95 0.8209; rel[e1] mean 0.2767 med 0.2300 p5 0.0944 p95 0.5571; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7901 med 0.7901 p5 0.7901 p95 0.7901; displaced_ref_weight mean 0.0578 med 0.0578 p5 0.0578 p95 0.0578; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1721 med 0.1721 p5 0.1721 p95 0.1721; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.0686 med 0.0686 p5 0.0686 p95 0.0686; rel[e1] mean 0.1721 med 0.1721 p5 0.1721 p95 0.1721; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first: g1 [5.319930076599121] g2 [0.0] tie-claim violations 0
+  read stats final_first/word: n1 mean 3.4871 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6525 med 0.6689 p5 0.3657 p95 0.8912; displaced_ref_weight mean 0.2387 med 0.2081 p5 0.0722 p95 0.4883; ref_top_row_kept mean 0.9993 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4243 med 0.3729 p5 0.1504 p95 0.8863; rel[c] mean 0.7408 med 0.6963 p5 0.4370 p95 1.2213; rel[d1] mean 0.3367 med 0.2635 p5 0.0685 p95 0.7760; rel[e1] mean 0.2676 med 0.2375 p5 0.0836 p95 0.5251; rel[g1] mean 0.3339 med 0.2761 p5 0.1222 p95 0.7550; norm_e2_over_ref mean 0.3339 med 0.2761 p5 0.1222 p95 0.7550; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.8427 med 0.8427 p5 0.8427 p95 0.8427; displaced_ref_weight mean 0.0578 med 0.0578 p5 0.0578 p95 0.0578; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1759 med 0.1759 p5 0.1759 p95 0.1759; rel[c] mean 0.6042 med 0.6042 p5 0.6042 p95 0.6042; rel[d1] mean 0.0686 med 0.0686 p5 0.0686 p95 0.0686; rel[e1] mean 0.1192 med 0.1192 p5 0.1192 p95 0.1192; rel[g1] mean 0.1298 med 0.1298 p5 0.1298 p95 0.1298; norm_e2_over_ref mean 0.1298 med 0.1298 p5 0.1298 p95 0.1298; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first: g1 [5.319930076599121] g2 [7.939052104949951] tie-claim violations 0
+  read stats final_second/word: n2 mean 2.2202 med 2.0000 p5 1.0000 p95 4.0000; m2 mean 0.5187 med 0.5168 p5 0.3257 p95 0.7470; displaced_ref_weight mean 0.4149 med 0.4175 p5 0.2028 p95 0.6156; ref_top_row_kept mean 0.9992 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.3816 med 0.3650 p5 0.1891 p95 0.5918; rel[c] mean 0.4687 med 0.4450 p5 0.2858 p95 0.7144; rel[d2] mean 0.7413 med 0.6627 p5 0.2727 p95 1.3799; rel[e2] mean 0.2953 med 0.2822 p5 0.1477 p95 0.4783; rel[g2] mean 0.2527 med 0.2325 p5 0.1235 p95 0.4277; norm_e1_over_ref mean 0.2527 med 0.2325 p5 0.1235 p95 0.4277; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second/marker: n2 mean 5.0000 med 5.0000 p5 5.0000 p95 5.0000; m2 mean 0.8996 med 0.8996 p5 0.8996 p95 0.8996; displaced_ref_weight mean 0.0893 med 0.0893 p5 0.0893 p95 0.0893; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.0918 med 0.0918 p5 0.0918 p95 0.0918; rel[c] mean 0.5245 med 0.5245 p5 0.5245 p95 0.5245; rel[d2] mean 0.1086 med 0.1086 p5 0.1086 p95 0.1086; rel[e2] mean 0.0537 med 0.0537 p5 0.0537 p95 0.0537; rel[g2] mean 0.0745 med 0.0745 p5 0.0745 p95 0.0745; norm_e1_over_ref mean 0.0745 med 0.0745 p5 0.0745 p95 0.0745; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second: g1 [5.319930076599121] g2 [7.939052104949951] tie-claim violations 0
+
+=== cell r1|AB (first A, second B) ===   POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN
+pass                          s            G         share_differs
+  E_A|M1__reg                0.453650153  +0.513910  0.000
+  E_A|app__a                 0.419280508  +0.457388  0.885
+  E_A|app__d1                0.402573457  +0.429913  0.883
+  E_A|fin__a                 0.385618093  +0.402029  0.934
+  E_A|fin__b1                0.453650153  +0.513910  0.000
+  E_A|fin__c                 0.262612759  +0.199744  0.988
+  E_A|fin__d1                0.407305012  +0.437694  0.869
+  E_A|fin__e1                0.423361078  +0.464099  0.887
+  E_A|fin__g1                0.410848811  +0.443522  0.887
+  E_B|fin__a                 0.442243411  +0.500833  0.000
+  E_B|fin__b2                0.316050737  +0.299324  0.953
+  E_B|fin__c                 0.323944378  +0.311929  0.970
+  E_B|fin__d2                0.212101184  +0.133335  0.996
+  E_B|fin__e1                0.147309434  +0.029873  1.000
+  E_B|fin__e2                0.305240321  +0.282062  0.946
+  E_B|fin__g2                0.387608167  +0.413589  0.882
+first capability, final store (s units; G units; share of T; paired SE in s):
+  T                                        +0.068032  G +0.111880  share +1.0000  se 0.005188
+  i_slot_displacement                      +0.046345  G +0.076216  share +0.6812  se 0.004596
+  ii_softmax_renormalisation               -0.016056  G -0.026405  share -0.2360  se 0.005267
+  iii_stage2_values                        +0.037743  G +0.062069  share +0.5548  se 0.004744
+  i_plus_ii                                +0.030289  G +0.049811  share +0.4452  se None
+  values_alone_b1_minus_g1                 +0.042801  G +0.070388  share +0.6291  se 0.004737
+  competition_given_values_g1_minus_a      +0.025231  G +0.041493  share +0.3709  se 0.004698
+  interaction_iii_minus_values_alone       -0.005058  G -0.008319  share -0.0744  se 0.005854
+  registered F +0.068032060  (iv) F - T +1.388e-17  path sum - T +1.388e-17
+append point: (i) +0.051077 se 0.004671; (ii) -0.016707 se 0.005175; (i)+(ii) +0.034370; final-minus-append (i)+(ii) -0.004081
+   APPEND COST in G: mine -0.056522  registered-record-derived -0.056522
+second capability (effect of stage-1 rows on the second capability's read; not a retention loss):
+  T2_b2_minus_a                    -0.126193  G -0.201508  share +1.0000  se 0.006595
+  i_b2_minus_d2                    +0.103950  G +0.165990  share -0.8237  se 0.006337
+  ii_d2_minus_e2                   -0.093139  G -0.148727  share +0.7381  se 0.006894
+  iii_e2_minus_a                   -0.137003  G -0.218771  share +1.0857  se 0.006744
+  values_alone_b2_minus_g2         -0.071557  G -0.114265  share +0.5670  se 0.006210
+  given_values_g2_minus_a          -0.054635  G -0.087243  share +0.4330  se 0.004883
+  a_minus_e1_stage2_off            +0.294934  G +0.470959  share -2.3372  se 0.007714
+  a_minus_c_second_cost            +0.118299  G +0.188903  share -0.9374  se 0.006081
+  interaction (iii2 - values alone) -0.065446
+COUNTERFACTUAL RET ARITHMETIC [fin__c]: DOES NOT HOLD  F_cf +0.191037  rho_cf 0.3887  | second cost s[a]-s[c] +0.118299  G_second(c) +0.311929  G_second(a) +0.500833  (extra: s[a]-s[g2] +0.054635)  -- not RET
+COUNTERFACTUAL RET ARITHMETIC [fin__g1]: DOES NOT HOLD  F_cf +0.042801  rho_cf 0.8630  | second cost s[a]-s[c] +0.118299  G_second(c) +0.311929  G_second(a) +0.500833  (extra: s[a]-s[g2] +0.054635)  -- not RET
+registered comparators (from registry.json, not recomputed): M-append|AB|1|s:E_A 0.3856; M-append|AB|1|s:E_B 0.4422; M1|AB|1|s:E_A 0.4537; M1|AB|1|s:E_B 0.1238; M-seq|AB|1|s:E_A 0.1673; M-seq|AB|1|s:E_B 0.4466; M-ii|AB|1|s:E_A 0.4608; M-ii|AB|1|s:E_B 0.4438; D-append|AB|1|s:E_A 0.1566; D-append|AB|1|s:E_B 0.4909; D-seq|AB|1|s:E_A 0.1609; D-seq|AB|1|s:E_B 0.5077; D1|AB|1|s:E_A 0.5290; D1|AB|1|s:E_B 0.1355; M-sep|-|1|s:E_A 0.4537; M-sep|-|1|s:E_B 0.4443; D-sep|-|1|s:E_A 0.5290; D-sep|-|1|s:E_B 0.5037; M-joint|-|1|s:E_A 0.4594; M-joint|-|1|s:E_B 0.4578; D-joint|-|1|s:E_A 0.5515; D-joint|-|1|s:E_B 0.4827; E-table|-|1|s:E_A 0.4598; E-table|-|1|s:E_B 0.4466
+  read stats append_first/word: n1 mean 3.4637 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6469 med 0.6523 p5 0.3456 p95 0.9041; displaced_ref_weight mean 0.2325 med 0.2187 p5 0.0507 p95 0.4840; ref_top_row_kept mean 0.9998 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2669 med 0.2525 p5 0.0703 p95 0.5279; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.3311 med 0.2861 p5 0.0632 p95 0.8050; rel[e1] mean 0.2669 med 0.2525 p5 0.0703 p95 0.5279; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7850 med 0.7850 p5 0.7850 p95 0.7850; displaced_ref_weight mean 0.0585 med 0.0585 p5 0.0585 p95 0.0585; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1708 med 0.1708 p5 0.1708 p95 0.1708; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.0728 med 0.0728 p5 0.0728 p95 0.0728; rel[e1] mean 0.1708 med 0.1708 p5 0.1708 p95 0.1708; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first: g1 [-5.854608535766602] g2 [0.0] tie-claim violations 0
+  read stats final_first/word: n1 mean 3.4598 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6487 med 0.6487 p5 0.3488 p95 0.9105; displaced_ref_weight mean 0.2318 med 0.2193 p5 0.0507 p95 0.4804; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.3594 med 0.3291 p5 0.0744 p95 0.7271; rel[c] mean 0.5421 med 0.5270 p5 0.2998 p95 0.8713; rel[d1] mean 0.3289 med 0.2793 p5 0.0632 p95 0.8044; rel[e1] mean 0.2656 med 0.2559 p5 0.0631 p95 0.5234; rel[g1] mean 0.2431 med 0.2033 p5 0.0433 p95 0.5520; norm_e2_over_ref mean 0.2431 med 0.2033 p5 0.0433 p95 0.5520; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7520 med 0.7520 p5 0.7520 p95 0.7520; displaced_ref_weight mean 0.0585 med 0.0585 p5 0.0585 p95 0.0585; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2669 med 0.2669 p5 0.2669 p95 0.2669; rel[c] mean 0.4802 med 0.4802 p5 0.4802 p95 0.4802; rel[d1] mean 0.0728 med 0.0728 p5 0.0728 p95 0.0728; rel[e1] mean 0.2051 med 0.2051 p5 0.2051 p95 0.2051; rel[g1] mean 0.1483 med 0.1483 p5 0.1483 p95 0.1483; norm_e2_over_ref mean 0.1483 med 0.1483 p5 0.1483 p95 0.1483; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first: g1 [-5.854608535766602] g2 [7.253269672393799] tie-claim violations 0
+  read stats final_second/word: n2 mean 2.6693 med 2.0000 p5 1.0000 p95 6.0000; m2 mean 0.5561 med 0.5496 p5 0.3177 p95 0.8854; displaced_ref_weight mean 0.3794 med 0.3732 p5 0.0912 p95 0.6135; ref_top_row_kept mean 0.9884 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4188 med 0.3763 p5 0.1283 p95 0.7477; rel[c] mean 0.6057 med 0.5785 p5 0.3309 p95 0.9697; rel[d2] mean 0.6603 med 0.5895 p5 0.1422 p95 1.3581; rel[e2] mean 0.2826 med 0.2633 p5 0.0763 p95 0.5104; rel[g2] mean 0.3161 med 0.2852 p5 0.0984 p95 0.6284; norm_e1_over_ref mean 0.3161 med 0.2852 p5 0.0984 p95 0.6284; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second/marker: n2 mean 3.0000 med 3.0000 p5 3.0000 p95 3.0000; m2 mean 0.6494 med 0.6494 p5 0.6494 p95 0.6494; displaced_ref_weight mean 0.2634 med 0.2634 p5 0.2634 p95 0.2634; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2743 med 0.2743 p5 0.2743 p95 0.2743; rel[c] mean 0.5049 med 0.5049 p5 0.5049 p95 0.5049; rel[d2] mean 0.3657 med 0.3657 p5 0.3657 p95 0.3657; rel[e2] mean 0.1516 med 0.1516 p5 0.1516 p95 0.1516; rel[g2] mean 0.2347 med 0.2347 p5 0.2347 p95 0.2347; norm_e1_over_ref mean 0.2347 med 0.2347 p5 0.2347 p95 0.2347; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second: g1 [-5.854608535766602] g2 [7.253269672393799] tie-claim violations 0
+
+=== cell r1|BA (first B, second A) ===   POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN
+pass                          s            G         share_differs
+  E_A|fin__a                 0.448983790  +0.506236  0.000
+  E_A|fin__b2                0.317939766  +0.290731  0.956
+  E_A|fin__c                 0.339296112  +0.325852  0.959
+  E_A|fin__d2                0.169899487  +0.047275  1.000
+  E_A|fin__e1                0.141087442  -0.000107  1.000
+  E_A|fin__e2                0.381520520  +0.395291  0.928
+  E_A|fin__g2                0.373225160  +0.381649  0.922
+  E_B|M1__reg                0.444252675  +0.504041  0.000
+  E_B|app__a                 0.435120604  +0.489459  0.850
+  E_B|app__d1                0.399786040  +0.433035  0.851
+  E_B|fin__a                 0.388731933  +0.415384  0.909
+  E_B|fin__b1                0.444252675  +0.504041  0.000
+  E_B|fin__c                 0.077470973  -0.081647  1.000
+  E_B|fin__d1                0.396447474  +0.427704  0.852
+  E_B|fin__e1                0.436394935  +0.491494  0.851
+  E_B|fin__g1                0.386963253  +0.412560  0.894
+first capability, final store (s units; G units; share of T; paired SE in s):
+  T                                        +0.055521  G +0.088657  share +1.0000  se 0.005647
+  i_slot_displacement                      +0.047805  G +0.076337  share +0.8610  se 0.005096
+  ii_softmax_renormalisation               -0.039947  G -0.063789  share -0.7195  se 0.005645
+  iii_stage2_values                        +0.047663  G +0.076110  share +0.8585  se 0.005432
+  i_plus_ii                                +0.007858  G +0.012547  share +0.1415  se None
+  values_alone_b1_minus_g1                 +0.057289  G +0.091481  share +1.0319  se 0.005277
+  competition_given_values_g1_minus_a      -0.001769  G -0.002824  share -0.0319  se 0.004901
+  interaction_iii_minus_values_alone       -0.009626  G -0.015372  share -0.1734  se 0.006540
+  registered F +0.055520742  (iv) F - T -6.939e-18  path sum - T +6.939e-18
+append point: (i) +0.044467 se 0.005065; (ii) -0.035335 se 0.005738; (i)+(ii) +0.009132; final-minus-append (i)+(ii) -0.001274
+   APPEND COST in G: mine -0.014582  registered-record-derived -0.014582
+second capability (effect of stage-1 rows on the second capability's read; not a retention loss):
+  T2_b2_minus_a                    -0.131044  G -0.215505  share +1.0000  se 0.006420
+  i_b2_minus_d2                    +0.148040  G +0.243456  share -1.1297  se 0.006590
+  ii_d2_minus_e2                   -0.211621  G -0.348016  share +1.6149  se 0.006947
+  iii_e2_minus_a                   -0.067463  G -0.110945  share +0.5148  se 0.005290
+  values_alone_b2_minus_g2         -0.055285  G -0.090918  share +0.4219  se 0.005553
+  given_values_g2_minus_a          -0.075759  G -0.124587  share +0.5781  se 0.005067
+  a_minus_e1_stage2_off            +0.307896  G +0.506343  share -2.3496  se 0.007034
+  a_minus_c_second_cost            +0.109688  G +0.180384  share -0.8370  se 0.005589
+  interaction (iii2 - values alone) -0.012178
+COUNTERFACTUAL RET ARITHMETIC [fin__c]: DOES NOT HOLD  F_cf +0.366782  rho_cf -0.1620  | second cost s[a]-s[c] +0.109688  G_second(c) +0.325852  G_second(a) +0.506236  (extra: s[a]-s[g2] +0.075759)  -- not RET
+COUNTERFACTUAL RET ARITHMETIC [fin__g1]: DOES NOT HOLD  F_cf +0.057289  rho_cf 0.8185  | second cost s[a]-s[c] +0.109688  G_second(c) +0.325852  G_second(a) +0.506236  (extra: s[a]-s[g2] +0.075759)  -- not RET
+registered comparators (from registry.json, not recomputed): M-append|BA|1|s:E_A 0.4490; M-append|BA|1|s:E_B 0.3887; M1|BA|1|s:E_A 0.1403; M1|BA|1|s:E_B 0.4443; M-seq|BA|1|s:E_A 0.4566; M-seq|BA|1|s:E_B 0.0989; M-ii|BA|1|s:E_A 0.4492; M-ii|BA|1|s:E_B 0.4439; D-append|BA|1|s:E_A 0.5245; D-append|BA|1|s:E_B 0.1463; D-seq|BA|1|s:E_A 0.5284; D-seq|BA|1|s:E_B 0.1504; D1|BA|1|s:E_A 0.1422; D1|BA|1|s:E_B 0.5037; M-sep|-|1|s:E_A 0.4537; M-sep|-|1|s:E_B 0.4443; D-sep|-|1|s:E_A 0.5290; D-sep|-|1|s:E_B 0.5037; M-joint|-|1|s:E_A 0.4594; M-joint|-|1|s:E_B 0.4578; D-joint|-|1|s:E_A 0.5515; D-joint|-|1|s:E_B 0.4827; E-table|-|1|s:E_A 0.4598; E-table|-|1|s:E_B 0.4466
+  read stats append_first/word: n1 mean 3.4117 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6374 med 0.6527 p5 0.3498 p95 0.8779; displaced_ref_weight mean 0.2478 med 0.2235 p5 0.0701 p95 0.5006; ref_top_row_kept mean 0.9985 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2793 med 0.2573 p5 0.0776 p95 0.5457; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.3524 med 0.2900 p5 0.0880 p95 0.8164; rel[e1] mean 0.2793 med 0.2573 p5 0.0776 p95 0.5457; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7884 med 0.7884 p5 0.7884 p95 0.7884; displaced_ref_weight mean 0.0474 med 0.0474 p5 0.0474 p95 0.0474; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1767 med 0.1767 p5 0.1767 p95 0.1767; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.0548 med 0.0548 p5 0.0548 p95 0.0548; rel[e1] mean 0.1767 med 0.1767 p5 0.1767 p95 0.1767; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first: g1 [-5.422910213470459] g2 [0.0] tie-claim violations 0
+  read stats final_first/word: n1 mean 3.3331 med 3.0000 p5 1.0000 p95 5.0000; m1 mean 0.6306 med 0.6551 p5 0.3512 p95 0.8384; displaced_ref_weight mean 0.2522 med 0.2250 p5 0.0701 p95 0.4925; ref_top_row_kept mean 0.9992 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4422 med 0.3803 p5 0.1452 p95 0.8966; rel[c] mean 0.7428 med 0.7051 p5 0.3876 p95 1.1926; rel[d1] mean 0.3568 med 0.2920 p5 0.0880 p95 0.7841; rel[e1] mean 0.2827 med 0.2533 p5 0.1082 p95 0.5326; rel[g1] mean 0.3453 med 0.2910 p5 0.0820 p95 0.7712; norm_e2_over_ref mean 0.3453 med 0.2910 p5 0.0820 p95 0.7712; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.8206 med 0.8206 p5 0.8206 p95 0.8206; displaced_ref_weight mean 0.0474 med 0.0474 p5 0.0474 p95 0.0474; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1738 med 0.1738 p5 0.1738 p95 0.1738; rel[c] mean 0.5427 med 0.5427 p5 0.5427 p95 0.5427; rel[d1] mean 0.0548 med 0.0548 p5 0.0548 p95 0.0548; rel[e1] mean 0.1435 med 0.1435 p5 0.1435 p95 0.1435; rel[g1] mean 0.1013 med 0.1013 p5 0.1013 p95 0.1013; norm_e2_over_ref mean 0.1013 med 0.1013 p5 0.1013 p95 0.1013; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first: g1 [-5.422910213470459] g2 [8.124921798706055] tie-claim violations 0
+  read stats final_second/word: n2 mean 2.0735 med 2.0000 p5 1.0000 p95 4.0000; m2 mean 0.4974 med 0.4942 p5 0.3011 p95 0.7473; displaced_ref_weight mean 0.4323 med 0.4283 p5 0.2012 p95 0.6102; ref_top_row_kept mean 0.9966 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.3971 med 0.4083 p5 0.1926 p95 0.6000; rel[c] mean 0.4530 med 0.4413 p5 0.2309 p95 0.6687; rel[d2] mean 0.7962 med 0.7272 p5 0.2532 p95 1.3785; rel[e2] mean 0.3144 med 0.3064 p5 0.1434 p95 0.4968; rel[g2] mean 0.2530 med 0.2403 p5 0.1077 p95 0.4097; norm_e1_over_ref mean 0.2530 med 0.2403 p5 0.1077 p95 0.4097; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second/marker: n2 mean 2.0000 med 2.0000 p5 2.0000 p95 2.0000; m2 mean 0.5625 med 0.5625 p5 0.5625 p95 0.5625; displaced_ref_weight mean 0.3835 med 0.3835 p5 0.3835 p95 0.3835; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2716 med 0.2716 p5 0.2716 p95 0.2716; rel[c] mean 0.3652 med 0.3652 p5 0.3652 p95 0.3652; rel[d2] mean 0.5581 med 0.5581 p5 0.5581 p95 0.5581; rel[e2] mean 0.2059 med 0.2059 p5 0.2059 p95 0.2059; rel[g2] mean 0.1887 med 0.1887 p5 0.1887 p95 0.1887; norm_e1_over_ref mean 0.1887 med 0.1887 p5 0.1887 p95 0.1887; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second: g1 [-5.422910213470459] g2 [8.124921798706055] tie-claim violations 0
+
+=== cell r2|AB (first A, second B) ===   POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN
+pass                          s            G         share_differs
+  E_A|M1__reg                0.448909050  +0.506113  0.000
+  E_A|app__a                 0.420842443  +0.459957  0.875
+  E_A|app__d1                0.407747089  +0.438421  0.859
+  E_A|fin__a                 0.376851695  +0.387613  0.937
+  E_A|fin__b1                0.448909050  +0.506113  0.000
+  E_A|fin__c                 0.133819893  -0.012059  0.997
+  E_A|fin__d1                0.410675070  +0.443236  0.864
+  E_A|fin__e1                0.424919061  +0.466661  0.860
+  E_A|fin__g1                0.391447605  +0.411616  0.895
+  E_B|fin__a                 0.431429333  +0.483564  0.000
+  E_B|fin__b2                0.341205429  +0.339492  0.931
+  E_B|fin__c                 0.327946899  +0.318321  0.967
+  E_B|fin__d2                0.176849852  +0.077044  1.000
+  E_B|fin__e1                0.151427610  +0.036449  1.000
+  E_B|fin__e2                0.376325164  +0.395572  0.888
+  E_B|fin__g2                0.368955986  +0.383805  0.881
+first capability, final store (s units; G units; share of T; paired SE in s):
+  T                                        +0.072057  G +0.118500  share +1.0000  se 0.005407
+  i_slot_displacement                      +0.038234  G +0.062877  share +0.5306  se 0.004682
+  ii_softmax_renormalisation               -0.014244  G -0.023425  share -0.1977  se 0.005096
+  iii_stage2_values                        +0.048067  G +0.079048  share +0.6671  se 0.004785
+  i_plus_ii                                +0.023990  G +0.039452  share +0.3329  se None
+  values_alone_b1_minus_g1                 +0.057461  G +0.094497  share +0.7974  se 0.004877
+  competition_given_values_g1_minus_a      +0.014596  G +0.024003  share +0.2026  se 0.004769
+  interaction_iii_minus_values_alone       -0.009394  G -0.015449  share -0.1304  se 0.005924
+  registered F +0.072057356  (iv) F - T +1.388e-17  path sum - T +0.000e+00
+append point: (i) +0.041162 se 0.004750; (ii) -0.013095 se 0.005074; (i)+(ii) +0.028067; final-minus-append (i)+(ii) -0.004077
+   APPEND COST in G: mine -0.046156  registered-record-derived -0.046156
+second capability (effect of stage-1 rows on the second capability's read; not a retention loss):
+  T2_b2_minus_a                    -0.090224  G -0.144072  share +1.0000  se 0.006482
+  i_b2_minus_d2                    +0.164356  G +0.262448  share -1.8216  se 0.006629
+  ii_d2_minus_e2                   -0.199475  G -0.318528  share +2.2109  se 0.007266
+  iii_e2_minus_a                   -0.055104  G -0.087992  share +0.6107  se 0.005922
+  values_alone_b2_minus_g2         -0.027751  G -0.044313  share +0.3076  se 0.005368
+  given_values_g2_minus_a          -0.062473  G -0.099759  share +0.6924  se 0.005429
+  a_minus_e1_stage2_off            +0.280002  G +0.447115  share -3.1034  se 0.007846
+  a_minus_c_second_cost            +0.103482  G +0.165244  share -1.1470  se 0.006284
+  interaction (iii2 - values alone) -0.027354
+COUNTERFACTUAL RET ARITHMETIC [fin__c]: DOES NOT HOLD  F_cf +0.315089  rho_cf -0.0238  | second cost s[a]-s[c] +0.103482  G_second(c) +0.318321  G_second(a) +0.483564  (extra: s[a]-s[g2] +0.062473)  -- not RET
+COUNTERFACTUAL RET ARITHMETIC [fin__g1]: DOES NOT HOLD  F_cf +0.057461  rho_cf 0.8133  | second cost s[a]-s[c] +0.103482  G_second(c) +0.318321  G_second(a) +0.483564  (extra: s[a]-s[g2] +0.062473)  -- not RET
+registered comparators (from registry.json, not recomputed): M-append|AB|2|s:E_A 0.3769; M-append|AB|2|s:E_B 0.4314; M1|AB|2|s:E_A 0.4489; M1|AB|2|s:E_B 0.1219; M-seq|AB|2|s:E_A 0.0009; M-seq|AB|2|s:E_B 0.4506; M-ii|AB|2|s:E_A 0.4566; M-ii|AB|2|s:E_B 0.4342; D-append|AB|2|s:E_A 0.1464; D-append|AB|2|s:E_B 0.4931; D-seq|AB|2|s:E_A 0.1496; D-seq|AB|2|s:E_B 0.4924; D1|AB|2|s:E_A 0.5386; D1|AB|2|s:E_B 0.1424; M-sep|-|2|s:E_A 0.4489; M-sep|-|2|s:E_B 0.4438; D-sep|-|2|s:E_A 0.5386; D-sep|-|2|s:E_B 0.4836; M-joint|-|2|s:E_A 0.4622; M-joint|-|2|s:E_B 0.4449; D-joint|-|2|s:E_A 0.5388; D-joint|-|2|s:E_B 0.4703; E-table|-|2|s:E_A 0.4554; E-table|-|2|s:E_B 0.4390
+  read stats append_first/word: n1 mean 3.2693 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6331 med 0.6462 p5 0.3637 p95 0.8716; displaced_ref_weight mean 0.2418 med 0.2292 p5 0.0697 p95 0.4723; ref_top_row_kept mean 0.9997 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2752 med 0.2509 p5 0.0965 p95 0.5030; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.3385 med 0.2883 p5 0.0850 p95 0.7681; rel[e1] mean 0.2752 med 0.2509 p5 0.0965 p95 0.5030; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7954 med 0.7954 p5 0.7954 p95 0.7954; displaced_ref_weight mean 0.0895 med 0.0895 p5 0.0895 p95 0.0895; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1609 med 0.1609 p5 0.1609 p95 0.1609; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.0730 med 0.0730 p5 0.0730 p95 0.0730; rel[e1] mean 0.1609 med 0.1609 p5 0.1609 p95 0.1609; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first: g1 [5.799789905548096] g2 [0.0] tie-claim violations 0
+  read stats final_first/word: n1 mean 3.2994 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6369 med 0.6461 p5 0.3807 p95 0.8771; displaced_ref_weight mean 0.2392 med 0.2211 p5 0.0697 p95 0.4602; ref_top_row_kept mean 0.9992 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.3615 med 0.3168 p5 0.1312 p95 0.7079; rel[c] mean 0.5359 med 0.5118 p5 0.3006 p95 0.8791; rel[d1] mean 0.3337 med 0.2946 p5 0.0850 p95 0.7297; rel[e1] mean 0.2720 med 0.2559 p5 0.0917 p95 0.4889; rel[g1] mean 0.2417 med 0.1961 p5 0.0711 p95 0.5536; norm_e2_over_ref mean 0.2417 med 0.1961 p5 0.0711 p95 0.5536; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first/marker: n1 mean 5.0000 med 5.0000 p5 5.0000 p95 5.0000; m1 mean 0.8422 med 0.8422 p5 0.8422 p95 0.8422; displaced_ref_weight mean 0.0377 med 0.0377 p5 0.0377 p95 0.0377; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1995 med 0.1995 p5 0.1995 p95 0.1995; rel[c] mean 0.5052 med 0.5052 p5 0.5052 p95 0.5052; rel[d1] mean 0.0489 med 0.0489 p5 0.0489 p95 0.0489; rel[e1] mean 0.1279 med 0.1279 p5 0.1279 p95 0.1279; rel[g1] mean 0.1473 med 0.1473 p5 0.1473 p95 0.1473; norm_e2_over_ref mean 0.1473 med 0.1473 p5 0.1473 p95 0.1473; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first: g1 [5.799789905548096] g2 [7.054641246795654] tie-claim violations 0
+  read stats final_second/word: n2 mean 2.5268 med 2.0000 p5 1.0000 p95 5.0000; m2 mean 0.5359 med 0.5583 p5 0.3113 p95 0.7567; displaced_ref_weight mean 0.3937 med 0.3789 p5 0.1905 p95 0.5939; ref_top_row_kept mean 0.9912 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4396 med 0.4009 p5 0.2234 p95 0.7582; rel[c] mean 0.6141 med 0.5787 p5 0.3929 p95 0.9541; rel[d2] mean 0.6844 med 0.5659 p5 0.2583 p95 1.3352; rel[e2] mean 0.2995 med 0.2662 p5 0.1448 p95 0.5268; rel[g2] mean 0.3286 med 0.3038 p5 0.1607 p95 0.5951; norm_e1_over_ref mean 0.3286 med 0.3038 p5 0.1607 p95 0.5951; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second/marker: n2 mean 3.0000 med 3.0000 p5 3.0000 p95 3.0000; m2 mean 0.6429 med 0.6429 p5 0.6429 p95 0.6429; displaced_ref_weight mean 0.3053 med 0.3053 p5 0.3053 p95 0.3053; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1960 med 0.1960 p5 0.1960 p95 0.1960; rel[c] mean 0.4126 med 0.4126 p5 0.4126 p95 0.4126; rel[d2] mean 0.4447 med 0.4447 p5 0.4447 p95 0.4447; rel[e2] mean 0.0957 med 0.0957 p5 0.0957 p95 0.0957; rel[g2] mean 0.1767 med 0.1767 p5 0.1767 p95 0.1767; norm_e1_over_ref mean 0.1767 med 0.1767 p5 0.1767 p95 0.1767; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second: g1 [5.799789905548096] g2 [7.054641246795654] tie-claim violations 0
+
+=== cell r2|BA (first B, second A) ===   POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN
+pass                          s            G         share_differs
+  E_A|fin__a                 0.444398631  +0.498695  0.000
+  E_A|fin__b2                0.346100206  +0.337041  0.953
+  E_A|fin__c                 0.326450453  +0.304727  0.966
+  E_A|fin__d2                0.229230688  +0.144847  0.999
+  E_A|fin__e1                0.160821028  +0.032345  1.000
+  E_A|fin__e2                0.381763172  +0.395690  0.922
+  E_A|fin__g2                0.379295262  +0.391631  0.916
+  E_B|M1__reg                0.443752770  +0.503243  0.000
+  E_B|app__a                 0.424927514  +0.473182  0.829
+  E_B|app__d1                0.395984836  +0.426966  0.833
+  E_B|fin__a                 0.357348881  +0.365270  0.941
+  E_B|fin__b1                0.443752770  +0.503243  0.000
+  E_B|fin__c                 0.178626208  +0.079881  0.998
+  E_B|fin__d1                0.398658969  +0.431236  0.837
+  E_B|fin__e1                0.427211008  +0.476828  0.830
+  E_B|fin__g1                0.388277510  +0.414658  0.892
+first capability, final store (s units; G units; share of T; paired SE in s):
+  T                                        +0.086404  G +0.137972  share +1.0000  se 0.006578
+  i_slot_displacement                      +0.045094  G +0.072007  share +0.5219  se 0.004720
+  ii_softmax_renormalisation               -0.028552  G -0.045593  share -0.3304  se 0.005670
+  iii_stage2_values                        +0.069862  G +0.111558  share +0.8086  se 0.006013
+  i_plus_ii                                +0.016542  G +0.026414  share +0.1914  se None
+  values_alone_b1_minus_g1                 +0.055475  G +0.088585  share +0.6420  se 0.005378
+  competition_given_values_g1_minus_a      +0.030929  G +0.049388  share +0.3580  se 0.005556
+  interaction_iii_minus_values_alone       +0.014387  G +0.022973  share +0.1665  se 0.006904
+  registered F +0.086403889  (iv) F - T -6.939e-17  path sum - T +1.388e-17
+append point: (i) +0.047768 se 0.004711; (ii) -0.028943 se 0.005498; (i)+(ii) +0.018825; final-minus-append (i)+(ii) -0.002283
+   APPEND COST in G: mine -0.030061  registered-record-derived -0.030061
+second capability (effect of stage-1 rows on the second capability's read; not a retention loss):
+  T2_b2_minus_a                    -0.098298  G -0.161654  share +1.0000  se 0.005856
+  i_b2_minus_d2                    +0.116870  G +0.192195  share -1.1889  se 0.005960
+  ii_d2_minus_e2                   -0.152532  G -0.250843  share +1.5517  se 0.006372
+  iii_e2_minus_a                   -0.062635  G -0.103005  share +0.6372  se 0.005458
+  values_alone_b2_minus_g2         -0.033195  G -0.054590  share +0.3377  se 0.005054
+  given_values_g2_minus_a          -0.065103  G -0.107064  share +0.6623  se 0.005155
+  a_minus_e1_stage2_off            +0.283578  G +0.466350  share -2.8849  se 0.007211
+  a_minus_c_second_cost            +0.117948  G +0.193969  share -1.1999  se 0.005985
+  interaction (iii2 - values alone) -0.029440
+COUNTERFACTUAL RET ARITHMETIC [fin__c]: DOES NOT HOLD  F_cf +0.265127  rho_cf 0.1587  | second cost s[a]-s[c] +0.117948  G_second(c) +0.304727  G_second(a) +0.498695  (extra: s[a]-s[g2] +0.065103)  -- not RET
+COUNTERFACTUAL RET ARITHMETIC [fin__g1]: DOES NOT HOLD  F_cf +0.055475  rho_cf 0.8240  | second cost s[a]-s[c] +0.117948  G_second(c) +0.304727  G_second(a) +0.498695  (extra: s[a]-s[g2] +0.065103)  -- not RET
+registered comparators (from registry.json, not recomputed): M-append|BA|2|s:E_A 0.4444; M-append|BA|2|s:E_B 0.3573; M1|BA|2|s:E_A 0.1277; M1|BA|2|s:E_B 0.4438; M-seq|BA|2|s:E_A 0.4641; M-seq|BA|2|s:E_B 0.1101; M-ii|BA|2|s:E_A 0.4522; M-ii|BA|2|s:E_B 0.4354; D-append|BA|2|s:E_A 0.5252; D-append|BA|2|s:E_B 0.1435; D-seq|BA|2|s:E_A 0.5520; D-seq|BA|2|s:E_B 0.1511; D1|BA|2|s:E_A 0.1510; D1|BA|2|s:E_B 0.4836; M-sep|-|2|s:E_A 0.4489; M-sep|-|2|s:E_B 0.4438; D-sep|-|2|s:E_A 0.5386; D-sep|-|2|s:E_B 0.4836; M-joint|-|2|s:E_A 0.4622; M-joint|-|2|s:E_B 0.4449; D-joint|-|2|s:E_A 0.5388; D-joint|-|2|s:E_B 0.4703; E-table|-|2|s:E_A 0.4554; E-table|-|2|s:E_B 0.4390
+  read stats append_first/word: n1 mean 3.3954 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6378 med 0.6416 p5 0.3605 p95 0.8784; displaced_ref_weight mean 0.2442 med 0.2310 p5 0.0551 p95 0.4939; ref_top_row_kept mean 0.9993 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.2813 med 0.2686 p5 0.0970 p95 0.5306; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.3451 med 0.3083 p5 0.0638 p95 0.8135; rel[e1] mean 0.2813 med 0.2686 p5 0.0970 p95 0.5306; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7741 med 0.7741 p5 0.7741 p95 0.7741; displaced_ref_weight mean 0.0531 med 0.0531 p5 0.0531 p95 0.0531; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.1863 med 0.1863 p5 0.1863 p95 0.1863; rel[c] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; rel[d1] mean 0.0626 med 0.0626 p5 0.0626 p95 0.0626; rel[e1] mean 0.1863 med 0.1863 p5 0.1863 p95 0.1863; rel[g1] mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; norm_e2_over_ref mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats append_first: g1 [-5.281773567199707] g2 [0.0] tie-claim violations 0
+  read stats final_first/word: n1 mean 3.4048 med 3.0000 p5 1.0000 p95 6.0000; m1 mean 0.6355 med 0.6383 p5 0.3668 p95 0.8788; displaced_ref_weight mean 0.2439 med 0.2310 p5 0.0733 p95 0.4949; ref_top_row_kept mean 0.9997 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4446 med 0.3862 p5 0.1602 p95 0.8977; rel[c] mean 0.7368 med 0.6658 p5 0.3804 p95 1.2329; rel[d1] mean 0.3445 med 0.3096 p5 0.0879 p95 0.8137; rel[e1] mean 0.2826 med 0.2654 p5 0.0967 p95 0.5373; rel[g1] mean 0.3459 med 0.2873 p5 0.0890 p95 0.7707; norm_e2_over_ref mean 0.3459 med 0.2873 p5 0.0890 p95 0.7707; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first/marker: n1 mean 4.0000 med 4.0000 p5 4.0000 p95 4.0000; m1 mean 0.7163 med 0.7163 p5 0.7163 p95 0.7163; displaced_ref_weight mean 0.0531 med 0.0531 p5 0.0531 p95 0.0531; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4044 med 0.4044 p5 0.4044 p95 0.4044; rel[c] mean 0.7002 med 0.7002 p5 0.7002 p95 0.7002; rel[d1] mean 0.0626 med 0.0626 p5 0.0626 p95 0.0626; rel[e1] mean 0.2466 med 0.2466 p5 0.2466 p95 0.2466; rel[g1] mean 0.3221 med 0.3221 p5 0.3221 p95 0.3221; norm_e2_over_ref mean 0.3221 med 0.3221 p5 0.3221 p95 0.3221; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_first: g1 [-5.281773567199707] g2 [8.13672161102295] tie-claim violations 0
+  read stats final_second/word: n2 mean 2.1762 med 2.0000 p5 1.0000 p95 5.0000; m2 mean 0.5089 med 0.5163 p5 0.2994 p95 0.8232; displaced_ref_weight mean 0.4242 med 0.4098 p5 0.1506 p95 0.6048; ref_top_row_kept mean 0.9964 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.3820 med 0.3821 p5 0.1403 p95 0.5878; rel[c] mean 0.4383 med 0.4287 p5 0.2309 p95 0.6512; rel[d2] mean 0.7807 med 0.6694 p5 0.1703 p95 1.4133; rel[e2] mean 0.3031 med 0.3002 p5 0.1103 p95 0.4704; rel[g2] mean 0.2429 med 0.2351 p5 0.0963 p95 0.4069; norm_e1_over_ref mean 0.2429 med 0.2351 p5 0.0963 p95 0.4069; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second/marker: n2 mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; m2 mean 0.3670 med 0.3670 p5 0.3670 p95 0.3670; displaced_ref_weight mean 0.5916 med 0.5916 p5 0.5916 p95 0.5916; ref_top_row_kept mean 1.0000 med 1.0000 p5 1.0000 p95 1.0000; rel[a] mean 0.4648 med 0.4648 p5 0.4648 p95 0.4648; rel[c] mean 0.4641 med 0.4641 p5 0.4641 p95 0.4641; rel[d2] mean 1.1552 med 1.1552 p5 1.1552 p95 1.1552; rel[e2] mean 0.3490 med 0.3490 p5 0.3490 p95 0.3490; rel[g2] mean 0.3101 med 0.3101 p5 0.3101 p95 0.3101; norm_e1_over_ref mean 0.3101 med 0.3101 p5 0.3101 p95 0.3101; ref_norm_zero mean 0.0000 med 0.0000 p5 0.0000 p95 0.0000
+  read stats final_second: g1 [-5.281773567199707] g2 [8.13672161102295] tie-claim violations 0
+
+SUMMARY (path order): MIXED  (cells with (i)+(ii) >= 2/3 T: 0; with (iii) >= 2/3 T: 4)
+SUMMARY (values first): MIXED  (competition-given-values >= 2/3 T: 0; values alone >= 2/3 T: 3)
+ORDER-DEPENDENT: False   cells with T <= 0: []
+per cell shares: r0|AB: T +0.07188 path comp +0.386 vals +0.614 | vfirst comp +0.351 vals +0.649 inter -0.00250; r0|BA: T +0.06291 path comp +0.156 vals +0.844 | vfirst comp +0.128 vals +0.872 inter -0.00174; r1|AB: T +0.06803 path comp +0.445 vals +0.555 | vfirst comp +0.371 vals +0.629 inter -0.00506; r1|BA: T +0.05552 path comp +0.142 vals +0.858 | vfirst comp -0.032 vals +1.032 inter -0.00963; r2|AB: T +0.07206 path comp +0.333 vals +0.667 | vfirst comp +0.203 vals +0.797 inter -0.00939; r2|BA: T +0.08640 path comp +0.191 vals +0.809 | vfirst comp +0.358 vals +0.642 inter +0.01439
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL. AUDITOR'S INDEPENDENT RECOMPUTATION; not Astra validation, not human approval.

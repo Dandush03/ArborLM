@@ -1,0 +1,28 @@
+{
+ "utc": "20261125T072658Z",
+ "pass_pairs_compared": 120,
+ "sequence_mismatches_total": 0,
+ "maxima": {
+  "item": 4.440892098500626e-16,
+  "pass_mean": 5.551115123125783e-17,
+  "derived": 1.5543122344752192e-15,
+  "registered_scale": 0.0,
+  "stat_gate": 0.0,
+  "stat": 3.725290298461914e-08,
+  "stat_n": 0.0
+ },
+ "counts": {
+  "sequences": 120000,
+  "item": 120000,
+  "pass_mean": 120,
+  "derived": 702,
+  "registered_scale": 144,
+  "stat_gate": 18,
+  "stat": 1584,
+  "stat_n": 360
+ },
+ "stat_keys_unmatched": [],
+ "differences": 0,
+ "difference_list": [],
+ "verdict": "RECOMPUTATION AGREES"
+}
