@@ -1,0 +1,4583 @@
+{
+ "base_commit": "e83df603f666120e1f4b43ef54ffe0dbee79f47f",
+ "batch": "c1_batch1",
+ "capacity_factor": 10,
+ "commands": [
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.c1_shortcut_check --per-level 2000 --out studies/m0/manifests/c1_batch1_shortcuts.json",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.c1_batch1_build",
+  "uv run --locked --offline pytest tests/test_m0_c1_*.py"
+ ],
+ "counts": {
+  "log_blocked": 6,
+  "log_entries": 49,
+  "log_held_back": 1,
+  "log_rejected": 17,
+  "new_borderline": 12,
+  "new_clear": 13,
+  "new_delivered": 25
+ },
+ "environment": {
+  "hash_seed": "PYTHONHASHSEED=0",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "python": "3.12.14"
+ },
+ "existing_c1_distinct_strict_procedures": 9,
+ "existing_c1_strict_groups_with_more_than_one_member": {
+  "E1": [
+   "C1.loop_sum",
+   "C1.nested_pairs",
+   "C1.list_build",
+   "C1.string_build"
+  ],
+  "E4": [
+   "C1.string_methods",
+   "C1.slices"
+  ],
+  "E5": [
+   "C1.func_branch",
+   "C1.func_compose"
+  ]
+ },
+ "existing_c1_strict_reading": {
+  "C1.bubble_pass": {
+   "procedure": "one or more adjacent-swap bubble passes over a literal list",
+   "strict_group": "E7"
+  },
+  "C1.cond_chain": {
+   "procedure": "repeated compare-and-subtract on two values (subtractive reduction) for a fixed number of rounds",
+   "strict_group": "E9"
+  },
+  "C1.counter_list": {
+   "procedure": "histogram: add one to counts[data[i] % k] over a literal list",
+   "strict_group": "E6"
+  },
+  "C1.fib_like": {
+   "procedure": "two-register recurrence a, b = b, (a + b) [mod m] through a temporary",
+   "strict_group": "E3"
+  },
+  "C1.func_branch": {
+   "procedure": "evaluate a piecewise non-recursive function at a few arguments and combine the results",
+   "strict_group": "E5"
+  },
+  "C1.func_compose": {
+   "procedure": "evaluate a composition of non-recursive linear functions at one argument",
+   "strict_group": "E5"
+  },
+  "C1.list_build": {
+   "procedure": "range-loop accumulation: append a formula of the index to a list, then sum, maximum or print",
+   "strict_group": "E1"
+  },
+  "C1.loop_sum": {
+   "procedure": "range-loop accumulation: add a term to one accumulator, on iterations selected by a modular test",
+   "strict_group": "E1"
+  },
+  "C1.minmax_track": {
+   "procedure": "running argmax / argmin scan keeping the best value and its position",
+   "strict_group": "E8"
+  },
+  "C1.nested_pairs": {
+   "procedure": "range-loop accumulation over a double loop: count or add when a predicate on (i, j) holds",
+   "strict_group": "E1"
+  },
+  "C1.slices": {
+   "procedure": "evaluate two slices (start, stop, step) of a literal string or list and join or sum them",
+   "strict_group": "E4"
+  },
+  "C1.string_build": {
+   "procedure": "range-loop accumulation: append one of a few letters chosen by index modulo tests, then print, length or reverse",
+   "strict_group": "E1"
+  },
+  "C1.string_methods": {
+   "procedure": "compose a chain of string methods and slices on a literal string, then read text, length or a count",
+   "strict_group": "E4"
+  },
+  "C1.while_counter": {
+   "procedure": "while loop to a stopping test with a step counter (grow, Collatz or subtract shapes)",
+   "strict_group": "E2"
+  }
+ },
+ "families": {
+  "functions": [
+   "C1.recursive_calls"
+  ],
+  "graphs": [
+   "C1.bfs_queue",
+   "C1.union_find_links"
+  ],
+  "lists": [
+   "C1.binary_search",
+   "C1.merge_two_sorted",
+   "C1.sieve_marking"
+  ],
+  "minmax": [
+   "C1.kadane_scan",
+   "C1.majority_vote_scan"
+  ],
+  "references": [
+   "C1.shared_lists"
+  ],
+  "simulation": [
+   "C1.bytecode_loop",
+   "C1.cellular_update",
+   "C1.circle_elimination",
+   "C1.turtle_walk"
+  ],
+  "stacks": [
+   "C1.bracket_matching",
+   "C1.postfix_evaluation"
+  ],
+  "strings": [
+   "C1.mirror_pointers",
+   "C1.run_length_scan"
+  ],
+  "swaps": [
+   "C1.insertion_sort",
+   "C1.partition_pass"
+  ],
+  "tables": [
+   "C1.coin_change_table",
+   "C1.grid_path_table",
+   "C1.string_pair_table"
+  ],
+  "while": [
+   "C1.digit_peel",
+   "C1.euclid_gcd",
+   "C1.fast_power"
+  ]
+ },
+ "g_for_capacity": 300,
+ "log": [
+  {
+   "confidence": "clear",
+   "id": "C1.bfs_queue",
+   "neighbours": "none",
+   "note": "",
+   "procedure": "breadth-first search with an array queue, head and tail pointers and a distance list",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.binary_search",
+   "neighbours": "none",
+   "note": "",
+   "procedure": "halve a sorted-list interval around a midpoint probe until found or empty",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.bracket_matching",
+   "neighbours": "C1.postfix_evaluation (both keep a stack array with a top pointer)",
+   "note": "",
+   "procedure": "stack (array plus top pointer) of open brackets matched against each closing bracket",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.bytecode_loop",
+   "neighbours": "C1.turtle_walk",
+   "note": "",
+   "procedure": "fetch-decode-execute loop over (opcode, argument) pairs with an accumulator, a register and a skip",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.cellular_update",
+   "neighbours": "none",
+   "note": "",
+   "procedure": "synchronous one-dimensional automaton update from an eight-entry rule table into a fresh row",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.circle_elimination",
+   "neighbours": "none",
+   "note": "",
+   "procedure": "Josephus counting: advance K live flags around a ring and strike the flag reached",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.coin_change_table",
+   "neighbours": "C1.string_pair_table and C1.grid_path_table (a lead may count dynamic-programming tabulation once)",
+   "note": "",
+   "procedure": "one-dimensional table over amounts updated from smaller amounts, coin by coin (ways, ordered ways, fewest coins)",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.digit_peel",
+   "neighbours": "C1.euclid_gcd, C1.fast_power, C1.while_counter (all are 'update one or two numbers in a while loop')",
+   "note": "",
+   "procedure": "digit extraction: n mod base, n // base, folded, until n is 0",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.euclid_gcd",
+   "neighbours": "C1.cond_chain (subtractive form of the same gcd reduction; the rules differ in detail: cond_chain doubles on equality and stops after a fixed number of rounds), C1.while_counter (iterate to a stopping test)",
+   "note": "",
+   "procedure": "Euclid's algorithm, remainder form: (a, b) -> (b, a mod b) until b is 0",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.fast_power",
+   "neighbours": "C1.euclid_gcd, C1.digit_peel, C1.while_counter",
+   "note": "",
+   "procedure": "square-and-multiply modular exponentiation over the binary digits of the exponent",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.grid_path_table",
+   "neighbours": "C1.coin_change_table and C1.string_pair_table",
+   "note": "",
+   "procedure": "row-wise table of best (largest, least, or count) right-and-down paths over a grid",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.insertion_sort",
+   "neighbours": "C1.bubble_pass and C1.partition_pass (in-place reordering by swaps or shifts)",
+   "note": "",
+   "procedure": "insertion: shift larger elements of the sorted prefix right to open a hole for the next element",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.kadane_scan",
+   "neighbours": "C1.minmax_track (scan with a running extremum) is the closest existing one; the state update differs",
+   "note": "",
+   "procedure": "maximum-subarray scan: cur = max(cur + x, x), best = max(best, cur)",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.majority_vote_scan",
+   "neighbours": "C1.minmax_track, C1.counter_list (both read a list once)",
+   "note": "",
+   "procedure": "Boyer-Moore pairing scan: a candidate with a count that cancels against different values",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.merge_two_sorted",
+   "neighbours": "none",
+   "note": "",
+   "procedure": "two-pointer merge of two sorted lists, always moving the smaller front element",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.mirror_pointers",
+   "neighbours": "C1.run_length_scan and the string scans (a lead may count 'scan a string with a pointer' once)",
+   "note": "",
+   "procedure": "two pointers walking inward from both ends of a string, comparing the pair they stand on",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.partition_pass",
+   "neighbours": "C1.bubble_pass and C1.insertion_sort",
+   "note": "",
+   "procedure": "Lomuto partition: sweep with a boundary index, swap elements not above the pivot behind it, pivot placed last",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.postfix_evaluation",
+   "neighbours": "C1.bracket_matching",
+   "note": "",
+   "procedure": "reverse-Polish evaluation: push operands, replace the top two by the operator's result",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.recursive_calls",
+   "neighbours": "C1.func_branch and C1.func_compose are non-recursive",
+   "note": "",
+   "procedure": "evaluate a recursive definition by expanding its call tree down to the base cases",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.run_length_scan",
+   "neighbours": "C1.string_build (also builds a string in a loop, but by index tests, not by comparing neighbours)",
+   "note": "",
+   "procedure": "run-length encoding: compare each character with the current run, close the run on a change",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.shared_lists",
+   "neighbours": "none (identity, not arithmetic)",
+   "note": "",
+   "procedure": "track which names share one list through assignment, copy, mutation and function calls",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.sieve_marking",
+   "neighbours": "C1.nested_pairs (nested loop with a modular test) is the closest existing one",
+   "note": "",
+   "procedure": "sieve of Eratosthenes marking: for each still-flagged index, strike its multiples in a flag list",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.string_pair_table",
+   "neighbours": "C1.coin_change_table and C1.grid_path_table",
+   "note": "",
+   "procedure": "two-dimensional table over prefixes of two strings (longest common subsequence, edit distance)",
+   "status": "delivered"
+  },
+  {
+   "confidence": "borderline",
+   "id": "C1.turtle_walk",
+   "neighbours": "C1.bytecode_loop (a state machine driven by a command sequence)",
+   "note": "",
+   "procedure": "position-and-heading state machine over a command string (turn counter modulo 4)",
+   "status": "delivered"
+  },
+  {
+   "confidence": "clear",
+   "id": "C1.union_find_links",
+   "neighbours": "none (pointer chasing appears only here)",
+   "note": "",
+   "procedure": "parent array: find follows links to a root, union hangs one root under another",
+   "status": "delivered"
+  },
+  {
+   "duplicates": [
+    "C1.nested_pairs (the 'mod' shape counts pairs with a modular test)"
+   ],
+   "id": null,
+   "procedure": "trial-division prime count (nested loop, i % d == 0)",
+   "reason": "same strict procedure as an existing lineage; the sieve is the distinct prime procedure and was kept",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "E1: C1.loop_sum, C1.list_build"
+   ],
+   "id": null,
+   "procedure": "prefix sums / running totals",
+   "reason": "range-loop accumulation",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "E1",
+    "C1.digit_peel (the 'rev' shape is the same fold)",
+    "C1.fib_like"
+   ],
+   "id": null,
+   "procedure": "Horner / rolling hash h = h * B + x mod M",
+   "reason": "an accumulator fold; no distinct invariant",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.digit_peel (base below 10 shape)"
+   ],
+   "id": null,
+   "procedure": "base conversion by repeated division",
+   "reason": "the same digit extraction with another base; a shape",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.minmax_track (argmin scan) + the swap of C1.bubble_pass"
+   ],
+   "id": null,
+   "procedure": "selection sort",
+   "reason": "a composition of procedures already present, not a new one",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.string_pair_table",
+    "C1.grid_path_table"
+   ],
+   "id": null,
+   "procedure": "longest increasing subsequence table",
+   "reason": "a further max-over-earlier-cells tabulation; the tabulation trio is already borderline",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "E1"
+   ],
+   "id": null,
+   "procedure": "sliding-window sum (add the entering element, subtract the leaving one)",
+   "reason": "running accumulation with a removal term; not a distinct invariant",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.nested_pairs",
+    "C1.mirror_pointers"
+   ],
+   "id": null,
+   "procedure": "naive substring search with mismatch restart",
+   "reason": "nested loops comparing characters; the early exit is not expressible (no break) and the rest is a predicate over index pairs",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.string_methods (replace chain)"
+   ],
+   "id": null,
+   "procedure": "substitution cipher / character table lookup",
+   "reason": "per-character substitution; string methods beyond upper/lower/replace/count are also absent from the second solver",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.while_counter (subtract shape)",
+    "C1.digit_peel"
+   ],
+   "id": null,
+   "procedure": "greedy denominations / Roman numerals (subtract the largest table value that fits)",
+   "reason": "repeated subtraction against a table; padding",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.union_find_links (the find loop is this walk)"
+   ],
+   "id": null,
+   "procedure": "pointer walk on a functional graph (x = p[x], k times)",
+   "reason": "the same pointer chase without the union",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.while_counter",
+    "C1.euclid_gcd"
+   ],
+   "id": null,
+   "procedure": "integer square root by Newton iteration",
+   "reason": "iterate a state update to a fixed point; padding of the numeric-loop group",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.while_counter (collatz shape)"
+   ],
+   "id": null,
+   "procedure": "Collatz steps",
+   "reason": "already present",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.coin_change_table"
+   ],
+   "id": null,
+   "procedure": "Pascal triangle row update",
+   "reason": "in-place one-dimensional table update",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.minmax_track",
+    "C1.kadane_scan"
+   ],
+   "id": null,
+   "procedure": "best buy-and-sell profit (running minimum, best difference)",
+   "reason": "a running-extremum scan",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.nested_pairs ('less' shape)"
+   ],
+   "id": null,
+   "procedure": "inversion count",
+   "reason": "pairs i < j with xs[i] > xs[j]",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.mirror_pointers (two pointers inward) + swaps"
+   ],
+   "id": null,
+   "procedure": "array rotation by three reversals",
+   "reason": "two-pointer swapping; a composition",
+   "status": "rejected"
+  },
+  {
+   "duplicates": [
+    "C1.digit_peel, C1.euclid_gcd, C1.fast_power"
+   ],
+   "id": null,
+   "procedure": "trial-division factorisation (smallest divisor search, divide out)",
+   "reason": "a named algorithm, but the fourth of one kind (repeated division of one number in a while loop); held back as padding of the numeric-loop group, which is already borderline",
+   "status": "held_back"
+  },
+  {
+   "duplicates": [],
+   "id": null,
+   "procedure": "bitwise operations (and, or, xor, shifts), popcount tricks",
+   "reason": "the grammar has no such operators; adding them needs a grammar and second-solver change (not mine)",
+   "status": "blocked"
+  },
+  {
+   "duplicates": [],
+   "id": null,
+   "procedure": "dictionary / set membership counting",
+   "reason": "no dict, no set, no 'in' operator in the grammar",
+   "status": "blocked"
+  },
+  {
+   "duplicates": [],
+   "id": null,
+   "procedure": "closures, global scope, nonlocal, default arguments, exceptions",
+   "reason": "the second solver runs a function in its own scope only (parameters and locals), and the grammar has no try, global or defaults",
+   "status": "blocked"
+  },
+  {
+   "duplicates": [],
+   "id": null,
+   "procedure": "floating-point arithmetic and rounding",
+   "reason": "no / operator or float literals in the grammar",
+   "status": "blocked"
+  },
+  {
+   "duplicates": [],
+   "id": null,
+   "procedure": "string split / join / find / index / format",
+   "reason": "the second solver implements only upper, lower, replace and count",
+   "status": "blocked"
+  },
+  {
+   "duplicates": [],
+   "id": null,
+   "procedure": "sorted(), pop(), insert(), list comprehensions, tuple unpacking, break/continue",
+   "reason": "not in the grammar or not implemented by the second solver (sorted is allowed by the runner but absent from the tree walker)",
+   "status": "blocked"
+  }
+ ],
+ "new_lineages": [
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.165
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.173
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.192
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.194
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.213
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.127
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2004,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2004,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.56
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.6
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.63
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.68
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.72
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.73
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.78
+     }
+    ],
+    "id": "C1.bfs_queue",
+    "max_op_similarity": 0.788,
+    "max_op_similarity_with": "C1.bytecode_loop",
+    "seconds": 5.9,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "280/326",
+     "1": "337/415",
+     "2": "390/473",
+     "3": "445/542",
+     "4": "498/600",
+     "5": "554/691",
+     "6": "596/727"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "graphs",
+   "file": "studies/m0/lineages_c1_graphs.py",
+   "fixture_sha256": "9c36983c0b831d633bff7c57b192dd0402ce336dd90d073da2d8582a348ee079",
+   "id": "C1.bfs_queue",
+   "procedure": "breadth-first search with an array queue, head and tail pointers and a distance list",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1575,
+    "constant_max_level": "2",
+    "distinct_answers_min": 375,
+    "oracle_any_literal_max": 0.5195,
+    "oracle_stat_max": 0.5765,
+    "worst_rule": "list1_len",
+    "worst_rule_accuracy": 0.1085,
+    "worst_rule_level": "1"
+   },
+   "signature": "fc686eee7b8cdd81ff88725db266ef91d4d08312007e9a22404b1ab7d9894168",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.045
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.086
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.088
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.099
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.109
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.12
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.077
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.32
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.35
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.39
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.43
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.51
+     }
+    ],
+    "id": "C1.binary_search",
+    "max_op_similarity": 0.869,
+    "max_op_similarity_with": "C1.coin_change_table",
+    "seconds": 3.3,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "83/111",
+     "1": "91/113",
+     "2": "110/145",
+     "3": "122/150",
+     "4": "146/186",
+     "5": "160/195",
+     "6": "192/238"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "lists",
+   "file": "studies/m0/lineages_c1_lists.py",
+   "fixture_sha256": "dac705bd0605c1dee86bf2ea0a8d8b0fac373cdcc88d436681af8222caacf41a",
+   "id": "C1.binary_search",
+   "procedure": "halve a sorted-list interval around a midpoint probe until found or empty",
+   "shortcuts_core_levels": {
+    "constant_max": 0.082,
+    "constant_max_level": "1",
+    "distinct_answers_min": 101,
+    "oracle_any_literal_max": 0.2435,
+    "oracle_stat_max": 0.035,
+    "worst_rule": "lit_min",
+    "worst_rule_accuracy": 0.082,
+    "worst_rule_level": "1"
+   },
+   "signature": "6951cde720457d63850373c96cc0f5680ffd049f1885acd2cfcd1ea5c4feda93",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.071
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.127
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.129
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.135
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.135
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.136
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.075
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 3165,
+      "distinct_up_to_renaming": 2000,
+      "draws": 3165,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.79
+     },
+     {
+      "distinct_texts_in_same_draws": 2366,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2366,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.6
+     },
+     {
+      "distinct_texts_in_same_draws": 2031,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2031,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.52
+     },
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.53
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.53
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.52
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.52
+     }
+    ],
+    "id": "C1.bracket_matching",
+    "max_op_similarity": 0.797,
+    "max_op_similarity_with": "C1.postfix_evaluation",
+    "seconds": 4.8,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "154/182",
+     "1": "179/211",
+     "2": "229/263",
+     "3": "299/333",
+     "4": "371/421",
+     "5": "443/490",
+     "6": "514/565"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "stacks",
+   "file": "studies/m0/lineages_c1_stacks.py",
+   "fixture_sha256": "df44acf593cf4797d09a7915212b65d07cba19ef1018688ec3910fe451e85dad",
+   "id": "C1.bracket_matching",
+   "procedure": "stack (array plus top pointer) of open brackets matched against each closing bracket",
+   "shortcuts_core_levels": {
+    "constant_max": 0.211,
+    "constant_max_level": "1",
+    "distinct_answers_min": 20,
+    "oracle_any_literal_max": 0.393,
+    "oracle_stat_max": 0.4395,
+    "worst_rule": "lit_mode",
+    "worst_rule_accuracy": 0.211,
+    "worst_rule_level": "1"
+   },
+   "signature": "e6b54fd7dbd5f60d5d1a016ecb645d440067e54496832d0dba1b045a422b7ad3",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.051
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.115
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.129
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.161
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.165
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.097
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.34
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.43
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.47
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.55
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.59
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.59
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.61
+     }
+    ],
+    "id": "C1.bytecode_loop",
+    "max_op_similarity": 0.788,
+    "max_op_similarity_with": "C1.bfs_queue",
+    "seconds": 4.5,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "137/149",
+     "1": "181/201",
+     "2": "225/259",
+     "3": "285/341",
+     "4": "364/433",
+     "5": "402/467",
+     "6": "481/563"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "simulation",
+   "file": "studies/m0/lineages_c1_simulation.py",
+   "fixture_sha256": "e59e6388c6535d29694dcd290965187823a9481e7afee947de9af8d16c9b3e06",
+   "id": "C1.bytecode_loop",
+   "procedure": "fetch-decode-execute loop over (opcode, argument) pairs with an accumulator, a register and a skip",
+   "shortcuts_core_levels": {
+    "constant_max": 0.0605,
+    "constant_max_level": "2",
+    "distinct_answers_min": 124,
+    "oracle_any_literal_max": 0.303,
+    "oracle_stat_max": 0.121,
+    "worst_rule": "lit_min",
+    "worst_rule_accuracy": 0.0605,
+    "worst_rule_level": "2"
+   },
+   "signature": "8bc937f3b6bd927f270842b27d080c3798c0bfb2fd57e7c244514c10ca67bcae",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.053
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.095
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.1
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.102
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.104
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.107
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.062
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2133,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2133,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.38
+     },
+     {
+      "distinct_texts_in_same_draws": 2055,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2055,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2022,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2022,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2011,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2011,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2003,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2003,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.39
+     },
+     {
+      "distinct_texts_in_same_draws": 2005,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2005,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.39
+     },
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.4
+     }
+    ],
+    "id": "C1.cellular_update",
+    "max_op_similarity": 0.86,
+    "max_op_similarity_with": "C1.insertion_sort",
+    "seconds": 3.3,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "159/194",
+     "1": "349/390",
+     "2": "591/638",
+     "3": "723/723",
+     "4": "990/1049",
+     "5": "1095/1160",
+     "6": "1564/1564"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "simulation",
+   "file": "studies/m0/lineages_c1_simulation.py",
+   "fixture_sha256": "1929e7c36fba53b162185128a6a19302b1ba78629ce877b2a3cdfca3ae5a18d5",
+   "id": "C1.cellular_update",
+   "procedure": "synchronous one-dimensional automaton update from an eight-entry rule table into a fresh row",
+   "shortcuts_core_levels": {
+    "constant_max": 0.053,
+    "constant_max_level": "1",
+    "distinct_answers_min": 80,
+    "oracle_any_literal_max": 0.219,
+    "oracle_stat_max": 0.218,
+    "worst_rule": "echo_printed_initial",
+    "worst_rule_accuracy": 0.0945,
+    "worst_rule_level": "1"
+   },
+   "signature": "37a0f6ccd40c2c39e7926cfb5cf0ec347586074ce9207e9bd8088cb95b122b14",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.043
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.081
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.08
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.082
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.086
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.09
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.049
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 5529,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5529,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.81
+     },
+     {
+      "distinct_texts_in_same_draws": 4013,
+      "distinct_up_to_renaming": 2000,
+      "draws": 4013,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.59
+     },
+     {
+      "distinct_texts_in_same_draws": 3371,
+      "distinct_up_to_renaming": 2000,
+      "draws": 3371,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.5
+     },
+     {
+      "distinct_texts_in_same_draws": 2884,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2884,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.44
+     },
+     {
+      "distinct_texts_in_same_draws": 2636,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2636,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.42
+     },
+     {
+      "distinct_texts_in_same_draws": 2457,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2457,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.39
+     },
+     {
+      "distinct_texts_in_same_draws": 2373,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2373,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.38
+     }
+    ],
+    "id": "C1.circle_elimination",
+    "max_op_similarity": 0.89,
+    "max_op_similarity_with": "C1.sieve_marking",
+    "seconds": 4.0,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "528/1339",
+     "1": "563/1481",
+     "2": "663/1781",
+     "3": "687/2017",
+     "4": "798/2253",
+     "5": "758/2489",
+     "6": "964/2740"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "simulation",
+   "file": "studies/m0/lineages_c1_simulation.py",
+   "fixture_sha256": "649f7dcd0fd8f61f3b9f06eb0e29fbd1f1088123298944cbbe9272bd6e8adc94",
+   "id": "C1.circle_elimination",
+   "procedure": "Josephus counting: advance K live flags around a ring and strike the flag reached",
+   "shortcuts_core_levels": {
+    "constant_max": 0.117,
+    "constant_max_level": "1",
+    "distinct_answers_min": 44,
+    "oracle_any_literal_max": 0.378,
+    "oracle_stat_max": 0.2245,
+    "worst_rule": "lit_min",
+    "worst_rule_accuracy": 0.117,
+    "worst_rule_level": "1"
+   },
+   "signature": "2b35e4119cb862887d5c2c31c1b544425f072cad3a22434183d71a2d849f85fc",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.046
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.079
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.08
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.082
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.083
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.084
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.046
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2489,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2489,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.38
+     },
+     {
+      "distinct_texts_in_same_draws": 2498,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2498,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     },
+     {
+      "distinct_texts_in_same_draws": 2488,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2488,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2472,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2472,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2480,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2480,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     },
+     {
+      "distinct_texts_in_same_draws": 2512,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2512,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2485,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2485,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.38
+     }
+    ],
+    "id": "C1.coin_change_table",
+    "max_op_similarity": 0.869,
+    "max_op_similarity_with": "C1.binary_search",
+    "seconds": 3.1,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "216/685",
+     "1": "359/1008",
+     "2": "474/1232",
+     "3": "615/1445",
+     "4": "705/1636",
+     "5": "832/1915",
+     "6": "1037/2139"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "tables",
+   "file": "studies/m0/lineages_c1_tables.py",
+   "fixture_sha256": "1584c6e72e7cccceaa018844a5ef5f5ec3637c52af105ea1df64758b0f8aee4d",
+   "id": "C1.coin_change_table",
+   "procedure": "one-dimensional table over amounts updated from smaller amounts, coin by coin (ways, ordered ways, fewest coins)",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1715,
+    "constant_max_level": "2",
+    "distinct_answers_min": 104,
+    "oracle_any_literal_max": 0.463,
+    "oracle_stat_max": 0.341,
+    "worst_rule": "lit_min",
+    "worst_rule_accuracy": 0.1415,
+    "worst_rule_level": "1"
+   },
+   "signature": "eba3bcb6b3cb734e64c172a8df1123d46e2fe38120d8909168dc751f0adacabf",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.022
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.041
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.041
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.042
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.042
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.042
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.024
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 3173,
+      "distinct_up_to_renaming": 2000,
+      "draws": 3173,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.24
+     },
+     {
+      "distinct_texts_in_same_draws": 2174,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2174,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.16
+     },
+     {
+      "distinct_texts_in_same_draws": 2057,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2057,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "distinct_texts_in_same_draws": 2022,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2022,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.16
+     },
+     {
+      "distinct_texts_in_same_draws": 2009,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2009,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "distinct_texts_in_same_draws": 2003,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2003,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "distinct_texts_in_same_draws": 2003,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2003,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.16
+     }
+    ],
+    "id": "C1.digit_peel",
+    "max_op_similarity": 0.826,
+    "max_op_similarity_with": "C1.circle_elimination",
+    "seconds": 1.4,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "57/99",
+     "1": "76/122",
+     "2": "87/139",
+     "3": "102/158",
+     "4": "120/177",
+     "5": "140/194",
+     "6": "156/219"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "while",
+   "file": "studies/m0/lineages_c1_while.py",
+   "fixture_sha256": "224dcd5c8502ad104b83fb250df0530a01d6502a7b14a75ce8beb1d866989016",
+   "id": "C1.digit_peel",
+   "procedure": "digit extraction: n mod base, n // base, folded, until n is 0",
+   "shortcuts_core_levels": {
+    "constant_max": 0.099,
+    "constant_max_level": "1",
+    "distinct_answers_min": 450,
+    "oracle_any_literal_max": 0.24,
+    "oracle_stat_max": 0.0,
+    "worst_rule": "lit_mode",
+    "worst_rule_accuracy": 0.083,
+    "worst_rule_level": "1"
+   },
+   "signature": "33e044c1e7914149c6696259ef6015c574496b8f38081dab9696b45f176e8993",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.022
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.038
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.04
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.039
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.042
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.043
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.025
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2713,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2713,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.19
+     },
+     {
+      "distinct_texts_in_same_draws": 2398,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2398,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.18
+     },
+     {
+      "distinct_texts_in_same_draws": 2307,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2307,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.17
+     },
+     {
+      "distinct_texts_in_same_draws": 2134,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2134,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "distinct_texts_in_same_draws": 2104,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2104,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.16
+     },
+     {
+      "distinct_texts_in_same_draws": 2057,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2057,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "distinct_texts_in_same_draws": 2031,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2031,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.15
+     }
+    ],
+    "id": "C1.euclid_gcd",
+    "max_op_similarity": 0.801,
+    "max_op_similarity_with": "C1.kadane_scan",
+    "seconds": 1.4,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "51/102",
+     "1": "54/117",
+     "2": "57/102",
+     "3": "57/117",
+     "4": "72/132",
+     "5": "72/129",
+     "6": "87/132"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "while",
+   "file": "studies/m0/lineages_c1_while.py",
+   "fixture_sha256": "14d7489ea90cc1bdc10dcbfdd5af1f8c5d4165741ff93f790979865324f3aef0",
+   "id": "C1.euclid_gcd",
+   "procedure": "Euclid's algorithm, remainder form: (a, b) -> (b, a mod b) until b is 0",
+   "shortcuts_core_levels": {
+    "constant_max": 0.124,
+    "constant_max_level": "2",
+    "distinct_answers_min": 90,
+    "oracle_any_literal_max": 0.1125,
+    "oracle_stat_max": 0.0,
+    "worst_rule": "lit_max",
+    "worst_rule_accuracy": 0.046,
+    "worst_rule_level": "2"
+   },
+   "signature": "3c60905006eba46bad4999e3014398bb1785a58f5083b55a9d93b2127661f804",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.031
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.059
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.055
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.055
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.055
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.055
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.033
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 5283,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5283,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.59
+     },
+     {
+      "distinct_texts_in_same_draws": 2288,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2288,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.24
+     },
+     {
+      "distinct_texts_in_same_draws": 2076,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2076,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.22
+     },
+     {
+      "distinct_texts_in_same_draws": 2038,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2038,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.23
+     },
+     {
+      "distinct_texts_in_same_draws": 2017,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2017,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.21
+     },
+     {
+      "distinct_texts_in_same_draws": 2005,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2005,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.21
+     },
+     {
+      "distinct_texts_in_same_draws": 2002,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2002,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.22
+     }
+    ],
+    "id": "C1.fast_power",
+    "max_op_similarity": 0.807,
+    "max_op_similarity_with": "C1.digit_peel",
+    "seconds": 2.3,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "64/70",
+     "1": "84/97",
+     "2": "108/124",
+     "3": "133/151",
+     "4": "154/178",
+     "5": "177/205",
+     "6": "196/232"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "while",
+   "file": "studies/m0/lineages_c1_while.py",
+   "fixture_sha256": "2ebe45c18ff083bc07fb87e5d82e8da2e0a78e2f3913f5c1efc09232090bb15e",
+   "id": "C1.fast_power",
+   "procedure": "square-and-multiply modular exponentiation over the binary digits of the exponent",
+   "shortcuts_core_levels": {
+    "constant_max": 0.114,
+    "constant_max_level": "1",
+    "distinct_answers_min": 77,
+    "oracle_any_literal_max": 0.347,
+    "oracle_stat_max": 0.0,
+    "worst_rule": "lit_mode",
+    "worst_rule_accuracy": 0.1145,
+    "worst_rule_level": "1"
+   },
+   "signature": "328b684fa511e65f2f9973a042d8baced16d819e0b636637abb14d747d999bf6",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.07
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.128
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.135
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.143
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.151
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.161
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.094
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2778,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2778,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.68
+     },
+     {
+      "distinct_texts_in_same_draws": 2825,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2825,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.73
+     },
+     {
+      "distinct_texts_in_same_draws": 2486,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2486,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.64
+     },
+     {
+      "distinct_texts_in_same_draws": 2197,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2197,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.6
+     },
+     {
+      "distinct_texts_in_same_draws": 2047,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2047,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.58
+     },
+     {
+      "distinct_texts_in_same_draws": 2002,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2002,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.61
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.62
+     }
+    ],
+    "id": "C1.grid_path_table",
+    "max_op_similarity": 0.844,
+    "max_op_similarity_with": "C1.string_pair_table",
+    "seconds": 5.3,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "195/195",
+     "1": "292/292",
+     "2": "388/388",
+     "3": "518/518",
+     "4": "647/647",
+     "5": "810/810",
+     "6": "972/972"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "tables",
+   "file": "studies/m0/lineages_c1_tables.py",
+   "fixture_sha256": "5e2e068844262c33cb94b4b354177693950959bf82c6f02f87e0db9d92f7f553",
+   "id": "C1.grid_path_table",
+   "procedure": "row-wise table of best (largest, least, or count) right-and-down paths over a grid",
+   "shortcuts_core_levels": {
+    "constant_max": 0.0805,
+    "constant_max_level": "1",
+    "distinct_answers_min": 39,
+    "oracle_any_literal_max": 0.2125,
+    "oracle_stat_max": 0.2495,
+    "worst_rule": "list1_sum",
+    "worst_rule_accuracy": 0.1015,
+    "worst_rule_level": "1"
+   },
+   "signature": "cca2fd8774c666c0afaa877d9771b997078a4cd1c889b2d54e34405cc2c3a2e2",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.041
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.075
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.077
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.079
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.081
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.082
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.047
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2003,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2003,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.28
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.29
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.29
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.32
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.32
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.32
+     }
+    ],
+    "id": "C1.insertion_sort",
+    "max_op_similarity": 0.863,
+    "max_op_similarity_with": "C1.sieve_marking",
+    "seconds": 2.6,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "59/199",
+     "1": "103/256",
+     "2": "145/384",
+     "3": "158/530",
+     "4": "211/603",
+     "5": "283/830",
+     "6": "333/959"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "swaps",
+   "file": "studies/m0/lineages_c1_swaps.py",
+   "fixture_sha256": "36a2ef5b76e2b0d974c499cf7b918de5fb08aec9acbea5efef835007afd5d5b3",
+   "id": "C1.insertion_sort",
+   "procedure": "insertion: shift larger elements of the sorted prefix right to open a hole for the next element",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1055,
+    "constant_max_level": "1",
+    "distinct_answers_min": 680,
+    "oracle_any_literal_max": 0.643,
+    "oracle_stat_max": 0.4445,
+    "worst_rule": "list1_mode",
+    "worst_rule_accuracy": 0.152,
+    "worst_rule_level": "1"
+   },
+   "signature": "3e7707b66f00e006b6a6677af39761f0bbbd2267142ca6da5e9086e3325c1fa0",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.042
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.078
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.079
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.084
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.093
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.092
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.054
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.24
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.25
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.27
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.29
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.34
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.33
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     }
+    ],
+    "id": "C1.kadane_scan",
+    "max_op_similarity": 0.843,
+    "max_op_similarity_with": "C1.insertion_sort",
+    "seconds": 2.6,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "84/84",
+     "1": "111/118",
+     "2": "134/152",
+     "3": "164/186",
+     "4": "194/220",
+     "5": "224/254",
+     "6": "254/288"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "minmax",
+   "file": "studies/m0/lineages_c1_minmax.py",
+   "fixture_sha256": "8fab934c742072b8ee191bca2fd3346c8043c336bf35e7ebf7fa28f602f997e2",
+   "id": "C1.kadane_scan",
+   "procedure": "maximum-subarray scan: cur = max(cur + x, x), best = max(best, cur)",
+   "shortcuts_core_levels": {
+    "constant_max": 0.042,
+    "constant_max_level": "1",
+    "distinct_answers_min": 187,
+    "oracle_any_literal_max": 0.1305,
+    "oracle_stat_max": 0.145,
+    "worst_rule": "list1_sum",
+    "worst_rule_accuracy": 0.1025,
+    "worst_rule_level": "2"
+   },
+   "signature": "7847d0d00c191b7e71770903478ed46b2d7651ca476c6e1e718a66136b0d123d",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.042
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.079
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.084
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.09
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.096
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.053
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2151,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2151,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2007,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2007,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.29
+     },
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.29
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.32
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.32
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.33
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.34
+     }
+    ],
+    "id": "C1.majority_vote_scan",
+    "max_op_similarity": 0.823,
+    "max_op_similarity_with": "C1.run_length_scan",
+    "seconds": 2.7,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "89/93",
+     "1": "115/119",
+     "2": "139/145",
+     "3": "165/171",
+     "4": "189/197",
+     "5": "213/221",
+     "6": "237/249"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "minmax",
+   "file": "studies/m0/lineages_c1_minmax.py",
+   "fixture_sha256": "4892792c13509dbd233cfa70d56f64e539750b36824dabe500c4bb4f559db7dd",
+   "id": "C1.majority_vote_scan",
+   "procedure": "Boyer-Moore pairing scan: a candidate with a count that cancels against different values",
+   "shortcuts_core_levels": {
+    "constant_max": 0.161,
+    "constant_max_level": "1",
+    "distinct_answers_min": 24,
+    "oracle_any_literal_max": 0.3975,
+    "oracle_stat_max": 0.2415,
+    "worst_rule": "list1_max",
+    "worst_rule_accuracy": 0.1195,
+    "worst_rule_level": "3"
+   },
+   "signature": "72e524e2876fc5d1ad369a5edd1dc58f00c51e3ab6312584d9571303bb814795",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.057
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.102
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.105
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.106
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.11
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.113
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.064
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2015,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2015,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.38
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.38
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.4
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.39
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.41
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.43
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.43
+     }
+    ],
+    "id": "C1.merge_two_sorted",
+    "max_op_similarity": 0.84,
+    "max_op_similarity_with": "C1.binary_search",
+    "seconds": 3.5,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "167/243",
+     "1": "203/311",
+     "2": "256/355",
+     "3": "275/419",
+     "4": "311/455",
+     "5": "337/547",
+     "6": "406/599"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "lists",
+   "file": "studies/m0/lineages_c1_lists.py",
+   "fixture_sha256": "b2429692214edbb26cc04b3dcc34d4ad89084138d51d6f6bb6571fef04be11f0",
+   "id": "C1.merge_two_sorted",
+   "procedure": "two-pointer merge of two sorted lists, always moving the smaller front element",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1435,
+    "constant_max_level": "1",
+    "distinct_answers_min": 548,
+    "oracle_any_literal_max": 0.468,
+    "oracle_stat_max": 0.411,
+    "worst_rule": "list1_len",
+    "worst_rule_accuracy": 0.1275,
+    "worst_rule_level": "1"
+   },
+   "signature": "2f59faf5309f7428d90bfad1ef26aed156c85adb1857eaf2ac1ae3a3ddd0af1d",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.035
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.063
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.061
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.06
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.061
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.061
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.034
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2109,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2109,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.24
+     },
+     {
+      "distinct_texts_in_same_draws": 2006,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2006,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.23
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.22
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.22
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.23
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.22
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.23
+     }
+    ],
+    "id": "C1.mirror_pointers",
+    "max_op_similarity": 0.811,
+    "max_op_similarity_with": "C1.partition_pass",
+    "seconds": 2.0,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "53/67",
+     "1": "68/92",
+     "2": "83/107",
+     "3": "102/142",
+     "4": "117/157",
+     "5": "132/182",
+     "6": "147/187"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "strings",
+   "file": "studies/m0/lineages_c1_strings.py",
+   "fixture_sha256": "7a6b17fdafc9a5d5e8a01bff03c439688016b0e8dcb7717a41521ee89ee7eeea",
+   "id": "C1.mirror_pointers",
+   "procedure": "two pointers walking inward from both ends of a string, comparing the pair they stand on",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1055,
+    "constant_max_level": "1",
+    "distinct_answers_min": 604,
+    "oracle_any_literal_max": 0.1795,
+    "oracle_stat_max": 0.157,
+    "worst_rule": "str1_first",
+    "worst_rule_accuracy": 0.1395,
+    "worst_rule_level": "1"
+   },
+   "signature": "c4a05d2b6ae7584389e7ece57f7890ef4d3ceb70ad09b7f235d37d8a073f1b23",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.047
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.087
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.09
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.092
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.052
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.33
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.33
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.35
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.35
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.35
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     }
+    ],
+    "id": "C1.partition_pass",
+    "max_op_similarity": 0.811,
+    "max_op_similarity_with": "C1.mirror_pointers",
+    "seconds": 3.0,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "84/122",
+     "1": "88/145",
+     "2": "98/168",
+     "3": "105/191",
+     "4": "126/214",
+     "5": "133/237",
+     "6": "140/260"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "swaps",
+   "file": "studies/m0/lineages_c1_swaps.py",
+   "fixture_sha256": "c9bfeb192a00cd9bc1bd90f707651a5da0ecf5275960cdc4809f8a980ec968ad",
+   "id": "C1.partition_pass",
+   "procedure": "Lomuto partition: sweep with a boundary index, swap elements not above the pivot behind it, pivot placed last",
+   "shortcuts_core_levels": {
+    "constant_max": 0.0875,
+    "constant_max_level": "1",
+    "distinct_answers_min": 1217,
+    "oracle_any_literal_max": 0.2395,
+    "oracle_stat_max": 0.1415,
+    "worst_rule": "echo_printed_initial",
+    "worst_rule_accuracy": 0.0875,
+    "worst_rule_level": "1"
+   },
+   "signature": "4d5e2c1ac26f8bb7a2d5cfbddfb1e1d2c84c39a3dd7c92c319e9d97772265848",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.073
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.134
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.14
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.15
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.155
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.091
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2014,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2014,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.53
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.54
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.55
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.56
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.58
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.6
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.62
+     }
+    ],
+    "id": "C1.postfix_evaluation",
+    "max_op_similarity": 0.838,
+    "max_op_similarity_with": "C1.coin_change_table",
+    "seconds": 4.9,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "150/158",
+     "1": "212/220",
+     "2": "260/282",
+     "3": "332/344",
+     "4": "372/406",
+     "5": "428/468",
+     "6": "514/530"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "stacks",
+   "file": "studies/m0/lineages_c1_stacks.py",
+   "fixture_sha256": "aab33dfdb54bf947db905b147fc27d3ca46784477e3ad0743dfc69c732644f6a",
+   "id": "C1.postfix_evaluation",
+   "procedure": "reverse-Polish evaluation: push operands, replace the top two by the operator's result",
+   "shortcuts_core_levels": {
+    "constant_max": 0.0165,
+    "constant_max_level": "4",
+    "distinct_answers_min": 540,
+    "oracle_any_literal_max": 0.0775,
+    "oracle_stat_max": 0.0645,
+    "worst_rule": "list1_posum",
+    "worst_rule_accuracy": 0.0155,
+    "worst_rule_level": "1"
+   },
+   "signature": "8da9d03e1aacafe6deefdd3ab758c6f9ed753f47c00120231125c727d5c535cf",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1003,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.036
+     },
+     {
+      "attempts": 1822,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.067
+     },
+     {
+      "attempts": 1821,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.065
+     },
+     {
+      "attempts": 1821,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.068
+     },
+     {
+      "attempts": 1816,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.071
+     },
+     {
+      "attempts": 1817,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.069
+     },
+     {
+      "attempts": 1003,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.04
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 5490,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5672,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.63
+     },
+     {
+      "distinct_texts_in_same_draws": 5297,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5471,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.62
+     },
+     {
+      "distinct_texts_in_same_draws": 5269,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5415,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.6
+     },
+     {
+      "distinct_texts_in_same_draws": 5537,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5706,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.65
+     },
+     {
+      "distinct_texts_in_same_draws": 5475,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5623,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.67
+     },
+     {
+      "distinct_texts_in_same_draws": 5350,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5464,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.66
+     },
+     {
+      "distinct_texts_in_same_draws": 5290,
+      "distinct_up_to_renaming": 2000,
+      "draws": 5423,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.67
+     }
+    ],
+    "id": "C1.recursive_calls",
+    "max_op_similarity": 0.8,
+    "max_op_similarity_with": "C1.string_pair_table",
+    "seconds": 4.9,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "108/296",
+     "1": "154/452",
+     "2": "208/608",
+     "3": "330/738",
+     "4": "567/936",
+     "5": "829/1524",
+     "6": "1050/2476"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "functions",
+   "file": "studies/m0/lineages_c1_functions.py",
+   "fixture_sha256": "94dbcc2e9a661e6fa86961c824a239e7c631906cab1e52612a61194300c70b77",
+   "id": "C1.recursive_calls",
+   "procedure": "evaluate a recursive definition by expanding its call tree down to the base cases",
+   "shortcuts_core_levels": {
+    "constant_max": 0.0225,
+    "constant_max_level": "1",
+    "distinct_answers_min": 345,
+    "oracle_any_literal_max": 0.0355,
+    "oracle_stat_max": 0.008,
+    "worst_rule": "lit_first",
+    "worst_rule_accuracy": 0.0105,
+    "worst_rule_level": "1"
+   },
+   "signature": "2fc25cd3dbcd1c6490118f5520b525e761c23ce94b6fee66baea61198eb5b761",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.047
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.09
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.084
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.082
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.047
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2015,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2015,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.3
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.31
+     }
+    ],
+    "id": "C1.run_length_scan",
+    "max_op_similarity": 0.823,
+    "max_op_similarity_with": "C1.majority_vote_scan",
+    "seconds": 2.7,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "85/113",
+     "1": "112/152",
+     "2": "161/231",
+     "3": "186/262",
+     "4": "256/341",
+     "5": "284/381",
+     "6": "359/476"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "strings",
+   "file": "studies/m0/lineages_c1_strings.py",
+   "fixture_sha256": "4aab691e8ce266a5d3eb09ff04d621a40f384505564d356c8c0ad3a879605ed7",
+   "id": "C1.run_length_scan",
+   "procedure": "run-length encoding: compare each character with the current run, close the run on a change",
+   "shortcuts_core_levels": {
+    "constant_max": 0.0085,
+    "constant_max_level": "1",
+    "distinct_answers_min": 1347,
+    "oracle_any_literal_max": 0.0,
+    "oracle_stat_max": 0.0,
+    "worst_rule": "str1_self",
+    "worst_rule_accuracy": 0.0,
+    "worst_rule_level": "5"
+   },
+   "signature": "9bf41b31740aae7fe75785851cf8338a40fadc472d275514d2538f540d79dbf6",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.164
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.244
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.234
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.222
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.229
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.232
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.133
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.54
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.48
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.48
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.48
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.51
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.55
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.55
+     }
+    ],
+    "id": "C1.shared_lists",
+    "max_op_similarity": 0.709,
+    "max_op_similarity_with": "C1.bfs_queue",
+    "seconds": 5.1,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "34/49",
+     "1": "38/62",
+     "2": "46/73",
+     "3": "51/83",
+     "4": "56/92",
+     "5": "63/92",
+     "6": "66/103"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "references",
+   "file": "studies/m0/lineages_c1_references.py",
+   "fixture_sha256": "2f921fcee1bd96c8ca3772bd480156884d85861e1e4f3081b95d7d7cb52ddb53",
+   "id": "C1.shared_lists",
+   "procedure": "track which names share one list through assignment, copy, mutation and function calls",
+   "shortcuts_core_levels": {
+    "constant_max": 0.044,
+    "constant_max_level": "5",
+    "distinct_answers_min": 784,
+    "oracle_any_literal_max": 0.1405,
+    "oracle_stat_max": 0.1335,
+    "worst_rule": "list1_last",
+    "worst_rule_accuracy": 0.023,
+    "worst_rule_level": "2"
+   },
+   "signature": "2370296eb359c9558055f4668711ffc63d742d5a172a082cf636933995be944a",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.044
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.082
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.088
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.095
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.099
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.105
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.065
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 4287,
+      "distinct_up_to_renaming": 2000,
+      "draws": 4287,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.61
+     },
+     {
+      "distinct_texts_in_same_draws": 2399,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2399,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.36
+     },
+     {
+      "distinct_texts_in_same_draws": 2064,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2064,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.33
+     },
+     {
+      "distinct_texts_in_same_draws": 2010,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2010,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.34
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.37
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.39
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.44
+     }
+    ],
+    "id": "C1.sieve_marking",
+    "max_op_similarity": 0.89,
+    "max_op_similarity_with": "C1.circle_elimination",
+    "seconds": 3.4,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "137/214",
+     "1": "190/295",
+     "2": "264/397",
+     "3": "351/530",
+     "4": "449/659",
+     "5": "556/786",
+     "6": "678/964"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "lists",
+   "file": "studies/m0/lineages_c1_lists.py",
+   "fixture_sha256": "74cb87dadaad9f0e3c14402db4fb94b7417fddd1ff67ec9b5f4d6c0a56e9ace6",
+   "id": "C1.sieve_marking",
+   "procedure": "sieve of Eratosthenes marking: for each still-flagged index, strike its multiples in a flag list",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1855,
+    "constant_max_level": "1",
+    "distinct_answers_min": 62,
+    "oracle_any_literal_max": 0.0715,
+    "oracle_stat_max": 0.066,
+    "worst_rule": "lit_max",
+    "worst_rule_accuracy": 0.044,
+    "worst_rule_level": "5"
+   },
+   "signature": "d3559f10fc10c653c66f0f9322ae97e0cc8435b7ca0424ad6da1c2bcdba44d3a",
+   "strict_confidence": "clear"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.094
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.163
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.165
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.171
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.175
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.175
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.099
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2003,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2003,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.64
+     },
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.64
+     },
+     {
+      "distinct_texts_in_same_draws": 2001,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2001,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.65
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.65
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.65
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.66
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.65
+     }
+    ],
+    "id": "C1.string_pair_table",
+    "max_op_similarity": 0.844,
+    "max_op_similarity_with": "C1.grid_path_table",
+    "seconds": 5.6,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "411/653",
+     "1": "523/836",
+     "2": "1077/1082",
+     "3": "1318/1323",
+     "4": "1031/1627",
+     "5": "1579/1926",
+     "6": "2283/2288"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "tables",
+   "file": "studies/m0/lineages_c1_tables.py",
+   "fixture_sha256": "2210de96a3d2a0c2cc6706a4fc66c6d78c219f4e3b84107ed92e49b1c47eab12",
+   "id": "C1.string_pair_table",
+   "procedure": "two-dimensional table over prefixes of two strings (longest common subsequence, edit distance)",
+   "shortcuts_core_levels": {
+    "constant_max": 0.1795,
+    "constant_max_level": "1",
+    "distinct_answers_min": 89,
+    "oracle_any_literal_max": 0.074,
+    "oracle_stat_max": 0.3475,
+    "worst_rule": "str1_len",
+    "worst_rule_accuracy": 0.0975,
+    "worst_rule_level": "1"
+   },
+   "signature": "fa2e75494ecfe2ccbcb1f612ec4a7c36587f67272d3178050f276db6385e475b",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.085
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.144
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.146
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.145
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.146
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.146
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.084
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 3825,
+      "distinct_up_to_renaming": 2000,
+      "draws": 3825,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 1.08
+     },
+     {
+      "distinct_texts_in_same_draws": 2259,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2259,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.65
+     },
+     {
+      "distinct_texts_in_same_draws": 2050,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2050,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.59
+     },
+     {
+      "distinct_texts_in_same_draws": 2002,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2002,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.57
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.57
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.57
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.57
+     }
+    ],
+    "id": "C1.turtle_walk",
+    "max_op_similarity": 0.837,
+    "max_op_similarity_with": "C1.binary_search",
+    "seconds": 5.5,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "120/166",
+     "1": "158/226",
+     "2": "199/282",
+     "3": "254/374",
+     "4": "308/426",
+     "5": "346/506",
+     "6": "413/612"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "simulation",
+   "file": "studies/m0/lineages_c1_simulation.py",
+   "fixture_sha256": "2fbbe67cbd8dda4f48e5ce657948a582002407f67341061e3729b25f1fe79119",
+   "id": "C1.turtle_walk",
+   "procedure": "position-and-heading state machine over a command string (turn counter modulo 4)",
+   "shortcuts_core_levels": {
+    "constant_max": 0.135,
+    "constant_max_level": "3",
+    "distinct_answers_min": 97,
+    "oracle_any_literal_max": 0.4335,
+    "oracle_stat_max": 0.595,
+    "worst_rule": "lit_max",
+    "worst_rule_accuracy": 0.129,
+    "worst_rule_level": "3"
+   },
+   "signature": "6e4420c7af30c0020713ca78cd3cb70a81e15a88187b73c76609bcadf36d987f",
+   "strict_confidence": "borderline"
+  },
+  {
+   "capacity": {
+    "capacity_gate_g300": [
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 0,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.069
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 1,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.12
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 2,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.128
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 3,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.142
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 4,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.136
+     },
+     {
+      "attempts": 1800,
+      "found": 1800,
+      "level": 5,
+      "need": 1800,
+      "passed": true,
+      "seconds": 0.144
+     },
+     {
+      "attempts": 1000,
+      "found": 1000,
+      "level": 6,
+      "need": 1000,
+      "passed": true,
+      "seconds": 0.079
+     }
+    ],
+    "capacity_passed_all_levels": true,
+    "capacity_up_to_renaming_2000": [
+     {
+      "distinct_texts_in_same_draws": 2030,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2030,
+      "level": 0,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.41
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 1,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.43
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 2,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.45
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 3,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.47
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 4,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.48
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 5,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.49
+     },
+     {
+      "distinct_texts_in_same_draws": 2000,
+      "distinct_up_to_renaming": 2000,
+      "draws": 2000,
+      "level": 6,
+      "need": 2000,
+      "passed": true,
+      "seconds": 0.54
+     }
+    ],
+    "id": "C1.union_find_links",
+    "max_op_similarity": 0.753,
+    "max_op_similarity_with": "C1.postfix_evaluation",
+    "seconds": 4.1,
+    "signature_unique": true,
+    "tree_walker_ticks_median_max_by_level": {
+     "0": "150/269",
+     "1": "203/370",
+     "2": "252/433",
+     "3": "304/623",
+     "4": "353/688",
+     "5": "409/723",
+     "6": "458/821"
+    },
+    "up_to_renaming_passed_all_levels": true
+   },
+   "family": "graphs",
+   "file": "studies/m0/lineages_c1_graphs.py",
+   "fixture_sha256": "991e3248b0b51dfcd2d0e48c25b3c77677ffafcaae750ef9a0c5d8a5871c95b1",
+   "id": "C1.union_find_links",
+   "procedure": "parent array: find follows links to a root, union hangs one root under another",
+   "shortcuts_core_levels": {
+    "constant_max": 0.062,
+    "constant_max_level": "3",
+    "distinct_answers_min": 925,
+    "oracle_any_literal_max": 0.257,
+    "oracle_stat_max": 0.251,
+    "worst_rule": "lit_min",
+    "worst_rule_accuracy": 0.062,
+    "worst_rule_level": "3"
+   },
+   "signature": "154a6d883de85a2222b4d9612c8bce91e3f45c84876e8e020ae8a48d6fa9c273",
+   "strict_confidence": "clear"
+  }
+ ],
+ "note": "C1 batch 1 of the lineage repair (M0, ADR-0033 revision 4). Lineages here are the STRICT reading: a hand-written base rule with a distinct solution procedure (the general algorithm); numbers, constraint mix, printed value, names and surface frame are shapes of one lineage. None is registered in core.REGISTRY; no second-solver entry exists for them yet (the existing tree walker solvers_c1.c1_trace serves them). Self-checked only; not independent review, not Astra validation, not human approval. Counts of lineages are what was reached, not a target.",
+ "seconds": 95.3,
+ "source_sha256": {
+  "c1_batch1_build.py": "a04ab2aed9bb33a712ba87c91d86840eafcb1bf1536bdc3808bae00938bfcd61",
+  "c1_batch1_capacity.py": "270df901bb40b0020c98daa196ae5c377704bb63bd06a0d466c7c59981901b1f",
+  "c1_shortcut_check.py": "7cfb81b0ebe765afa13cccaac65ddde61ad10e4d3d6c064779103f5be49cd3b2",
+  "lineages_c1_common.py": "fa1dbad8ccd3f7e8bb2333ab2e03d210c802fe672db9df2e7106893cb38ca413",
+  "lineages_c1_functions.py": "93b8b7b0d3684f5e8c483437fee91aa0fed2fabd6cd6f8881d770852fa420cba",
+  "lineages_c1_graphs.py": "0e866c8c68a4716ce4a5ac86ec6fc628ff6f66e4aa201f8ce6b5ff0b0d986f39",
+  "lineages_c1_lists.py": "33d922bccb228fa7fa5ad49a9abf16c6e7a61355dae70f2bc9f3a36917ba20b6",
+  "lineages_c1_minmax.py": "30cab0ed43229a66bb511db88e99b3edafc40de68eaf0b6069c9d59aa0198eaf",
+  "lineages_c1_references.py": "fadeaad4d9fd3531aa382f37c6eb9023878fdacd0da56d4635138f448f12c353",
+  "lineages_c1_simulation.py": "58aae7239dc0ab2458d85286bd61a61764acbb4a0a15976e8da141c1964fd960",
+  "lineages_c1_stacks.py": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df",
+  "lineages_c1_strings.py": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16",
+  "lineages_c1_swaps.py": "3043a55b63e5fdfdd8efa3cc24cb50061c53cd3e79e34b1d65d10aad65893225",
+  "lineages_c1_tables.py": "c627249cda92e17f858906de255d1155a37972425de5e0738a2c7095193912af",
+  "lineages_c1_while.py": "6b6631f162de16ee7d5895a414a4c1a473e6e0a8df4913dbca1b3c685cfdabab"
+ }
+}
