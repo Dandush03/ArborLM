@@ -1,0 +1,38 @@
+M1.ages mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.arithmetic_series mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.average_missing mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.binomial_choose_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.change_ways_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.clock_duration mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.coins mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.consecutive mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.crt_congruence_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.digit_puzzle_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {'contains_means_exactly_one': [13, 57, 41, 44, 47, 59, 61]} nofmt 0
+M1.division_counting_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.finite_differences mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.fraction_remainder mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.gcd_lcm_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.grid_perimeter_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {'sides_of_isolated_squares': [399, 400, 400, 400, 400, 400, 400]} nofmt 0
+M1.inclusion_exclusion_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.linear_equation mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.median_list_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.min_cost_packs_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.mixture mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.mode_tally_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.painted_cube_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.percent_change mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.pigeonhole_worst_case_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.pipes_work mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.power_remainder_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.prime_factors_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.pythagoras_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.quadratic_area mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.ratio_share mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.rectangle mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.recurrence_iterate mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.shopping mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.slot_permutations_r2 mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.speed_distance mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+M1.tiered_pricing mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 0
+M1.tip_split mismatch [0, 0, 0, 0, 0, 0, 0] err [0, 0, 0, 0, 0, 0, 0] alt {} nofmt 2800
+PYTHONHASHSEED=0 PYTHONPATH=$W timeout 2400 uv run --locked --offline python   40.05s user 0.97s system 314% cpu 13.040 total

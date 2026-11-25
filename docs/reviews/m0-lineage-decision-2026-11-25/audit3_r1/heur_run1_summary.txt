@@ -1,0 +1,344 @@
+R1.activity_selection_r4  max +1.000
+   L0 +1.000 latest_start_first
+   L1 +1.000 latest_start_first
+   L2 +1.000 latest_start_first
+   L3 +1.000 latest_start_first
+   L4 +1.000 latest_start_first
+   L5 +1.000 latest_start_first
+   L6 +1.000 latest_start_first
+R1.attribute_rule  max +0.800
+   L0 +0.750 drop_negation
+   L1 +0.800 drop_negation
+   L2 +0.581 most_leaves_matched
+   L3 +0.589 most_leaves_matched
+   L4 +0.439 matches_last_leaf
+   L5 +0.441 matches_last_leaf
+   L6 +0.496 matches_last_leaf
+R1.boolean_lights_r4  max +0.099
+   L0 +0.099 wired_switch_count_parity
+   L1 +0.092 wired_switch_count_parity
+   L2 +0.068 wired_switch_count_parity
+   L3 +0.037 wired_switch_count_parity(anti)
+   L4 +0.039 wired_switch_count_parity(anti)
+   L5 +0.041 wired_switch_count_parity(anti)
+   L6 +0.019 each_switch_once
+R1.categories_default_exceptions_r4  max +0.183
+   L0 +0.183 partial_walk_3
+   L1 +0.151 partial_walk_3
+   L2 +0.112 partial_walk_3
+   L3 +0.109 partial_walk_3
+   L4 +0.091 partial_walk_3
+   L5 +0.074 partial_walk_3
+   L6 +0.089 partial_walk_3
+R1.categories_follow_r4  max +0.447
+   L0 +0.447 naive_no_lifting
+   L1 +0.412 naive_no_lifting
+   L2 +0.385 naive_no_lifting
+   L3 +0.402 naive_no_lifting
+   L4 +0.385 naive_no_lifting
+   L5 +0.382 naive_no_lifting
+   L6 +0.414 naive_no_lifting
+R1.compass_turns  max +0.522
+   L0 +0.522 ccw_as_cw
+   L1 +0.403 cw270_as_90
+   L2 +0.344 cw270_as_90
+   L3 +0.340 cw270_as_90
+   L4 +0.309 cw270_as_90
+   L5 +0.302 cw270_as_90
+   L6 +0.255 cw270_as_90
+R1.conditional_chain  max +0.538
+   L0 +0.538 query_is_fact_else_cbd
+   L1 +0.500 query_is_fact_else_cbd
+   L2 +0.449 query_is_fact_else_cbd
+   L3 +0.441 query_is_fact_else_cbd
+   L4 +0.443 query_is_fact_else_cbd
+   L5 +0.419 query_is_fact_else_cbd
+   L6 +0.454 one_step_forward
+R1.conditional_decision_tree_r4  max +0.431
+   L0 +0.336 ignore_last_condition
+   L1 +0.303 ignore_last_condition
+   L2 +0.347 ignore_last_condition
+   L3 +0.330 ignore_last_condition
+   L4 +0.357 ignore_last_condition
+   L5 +0.359 ignore_last_condition
+   L6 +0.431 ignore_last_condition
+R1.conditional_threshold_rule_r4  max +0.296
+   L0 +0.250 strict_gt_D
+   L1 +0.251 strict_gt_D
+   L2 +0.260 strict_gt_D
+   L3 +0.247 strict_gt_D
+   L4 +0.265 strict_gt_D
+   L5 +0.296 strict_gt_D
+   L6 +0.244 strict_gt_D
+R1.containers_queue_line_r2  max +0.485
+   L0 +0.485 ignore_leave
+   L1 +0.394 ignore_leave
+   L2 +0.315 ignore_leave
+   L3 +0.262 ignore_leave
+   L4 +0.259 ignore_leave
+   L5 +0.223 ignore_leave
+   L6 +0.235 ignore_leave
+R1.containers_stack_piles_r4  max +0.800
+   L0 +0.800 ignore_turns
+   L1 +0.341 turn_moves_bottom_to_top
+   L2 +0.293 turn_moves_bottom_to_top
+   L3 +0.232 turn_moves_bottom_to_top
+   L4 +0.185 turn_moves_bottom_to_top
+   L5 +0.143 turn_moves_bottom_to_top
+   L6 +0.113 turn_moves_bottom_to_top
+R1.elimination_bracket_r4  max +0.369
+   L0 +0.171 best_in_each_half
+   L1 +0.168 best_in_each_half
+   L2 +0.168 best_in_each_half
+   L3 +0.085 best_in_each_half
+   L4 +0.143 best_in_each_half
+   L5 +0.358 beater_in_own_half
+   L6 +0.369 beater_in_own_half
+R1.elimination_josephus  max +0.407
+   L0 +0.260 no_removal_index
+   L1 +0.361 no_removal_index
+   L2 +0.336 first_person
+   L3 +0.367 no_removal_index
+   L4 +0.313 no_removal_index
+   L5 +0.407 first_person
+   L6 +0.348 no_removal_index
+R1.equivalence_classes_r2  max +0.294
+   L0 +0.210 common_same_neighbour_else_cbd
+   L1 +0.228 common_same_neighbour_else_cbd
+   L2 +0.247 common_same_neighbour_else_cbd
+   L3 +0.237 common_same_neighbour_else_cbd
+   L4 +0.247 common_same_neighbour_else_cbd
+   L5 +0.294 common_same_neighbour_else_cbd
+   L6 +0.278 common_same_neighbour_else_cbd
+R1.equivalence_exchange_rates  max +0.491
+   L0 +0.491 local_max
+   L1 +0.437 local_max
+   L2 +0.389 most_local_wins
+   L3 +0.332 most_local_wins
+   L4 +0.301 most_local_wins
+   L5 +0.262 most_local_wins
+   L6 +0.270 most_local_wins
+R1.event_timeline  max +0.504
+   L0 +0.504 never_on_the_wrong_side
+   L1 +0.471 end_of_largest_gap
+   L2 +0.472 end_of_largest_gap
+   L3 +0.460 end_of_largest_gap
+   L4 +0.444 end_of_largest_gap
+   L5 +0.434 end_of_largest_gap
+   L6 +0.405 end_of_largest_gap
+R1.graph_bipartite  max +0.500
+   L0 +0.500 triangle_means_no
+   L1 +0.489 triangle_means_no
+   L2 +0.474 triangle_means_no
+   L3 +0.449 triangle_means_no
+   L4 +0.449 triangle_means_no
+   L5 +0.433 triangle_means_no
+   L6 +0.399 triangle_means_no
+R1.graph_shortest_route_r4  max +0.134
+   L0 +0.134 fewest_roads_then_length
+   L1 +0.128 fewest_roads_then_length
+   L2 +0.084 constant_mfk_fitted
+   L3 +0.097 constant_mfk_fitted
+   L4 +0.074 constant_mfk_fitted
+   L5 +0.086 constant_mfk_fitted
+   L6 +0.081 constant_mfk_fitted
+R1.instant_runoff_r4  max +0.398
+   L0 +0.395 top_two_runoff
+   L1 +0.398 top_two_runoff
+   L2 +0.398 one_elimination_then_plurality
+   L3 +0.383 one_elimination_then_plurality
+   L4 +0.371 one_elimination_then_plurality
+   L5 +0.366 one_elimination_then_plurality
+   L6 +0.293 borda
+R1.kinship_ancestor_r4  max +0.074
+   L0 +0.071 root_of_family
+   L1 +0.039 k_minus_1(anti)
+   L2 +0.031 k_minus_1(anti)
+   L3 +0.053 root_of_family
+   L4 +0.041 root_of_family
+   L5 +0.069 root_of_family
+   L6 +0.074 root_of_family
+R1.kinship_cousins  max +0.448
+   L0 +0.410 share_grandparent_any
+   L1 +0.435 share_grandparent_any
+   L2 +0.425 share_grandparent_any
+   L3 +0.433 share_grandparent_any
+   L4 +0.448 share_grandparent_any
+   L5 +0.437 share_grandparent_any
+   L6 +0.439 share_grandparent_any
+R1.kinship_descendants_r4  max +0.672
+   L0 +0.425 deepest_line
+   L1 +0.475 deepest_line
+   L2 +0.548 deepest_line
+   L3 +0.582 deepest_line
+   L4 +0.619 deepest_line
+   L5 +0.635 deepest_line
+   L6 +0.672 deepest_line
+R1.knights_knaves  max +0.270
+   L0 +0.166 self_doubt_means_knight
+   L1 +0.270 accuses_someone_means_knave(anti)
+   L2 +0.265 accuses_someone_means_knave(anti)
+   L3 +0.235 accuses_someone_means_knave(anti)
+   L4 +0.259 accuses_someone_means_knave(anti)
+   L5 +0.204 accuses_someone_means_knave(anti)
+   L6 +0.212 accuses_someone_means_knave(anti)
+R1.minimax_tree_r4  max +0.676
+   L0 +0.676 greedy_best_leaf
+   L1 +0.492 greedy_best_leaf
+   L2 +0.452 greedy_best_leaf
+   L3 +0.357 greedy_best_leaf
+   L4 +0.241 greedy_best_leaf
+   L5 +0.274 greedy_best_leaf
+   L6 +0.178 greedy_best_leaf
+R1.mst_cost_r4  max +0.191
+   L0 +0.170 nearest_neighbour_path
+   L1 +0.181 nearest_neighbour_path
+   L2 +0.191 nearest_neighbour_path
+   L3 +0.053 constant_mfk_fitted
+   L4 +0.051 constant_mfk_fitted
+   L5 +0.056 constant_mfk_fitted
+   L6 +0.040 constant_mfk_fitted
+R1.nim_xor_r4  max +0.413
+   L0 +0.413 bits1_2_parity
+   L1 +0.386 bits1_2_parity
+   L2 +0.376 bits1_2_parity
+   L3 +0.388 bits1_2_parity
+   L4 +0.405 bits1_2_parity
+   L5 +0.392 bits1_2_parity
+   L6 +0.384 bits1_2_parity
+R1.one_culprit  max +0.191
+   L0 +0.071 most_accused
+   L1 +0.082 most_mentioned
+   L2 +0.105 most_accused
+   L3 +0.098 most_accused
+   L4 +0.151 most_accused
+   L5 +0.141 most_accused
+   L6 +0.191 most_accused
+R1.order_compare_r4  max +0.645
+   L0 +0.645 two_step_else_cbd
+   L1 +0.639 two_step_else_cbd
+   L2 +0.624 two_step_else_cbd
+   L3 +0.620 two_step_else_cbd
+   L4 +0.616 two_step_else_cbd
+   L5 +0.601 two_step_else_cbd
+   L6 +0.608 two_step_else_cbd
+R1.order_extreme  max +0.389
+   L0 +0.167 most_mentioned(anti)
+   L1 +0.250 most_mentioned(anti)
+   L2 +0.300 most_mentioned(anti)
+   L3 +0.333 most_mentioned(anti)
+   L4 +0.357 most_mentioned(anti)
+   L5 +0.375 most_mentioned(anti)
+   L6 +0.389 most_mentioned(anti)
+R1.order_tournament_wins  max +0.400
+   L0 +0.400 half_of_results_tally
+   L1 +0.346 half_of_results_tally
+   L2 +0.335 half_of_results_tally
+   L3 +0.285 half_of_results_tally
+   L4 +0.307 half_of_results_tally
+   L5 +0.300 half_of_results_tally
+   L6 +0.303 half_of_results_tally
+R1.pet_owners  max +0.384
+   L0 +0.211 never_excluded_from_pet
+   L1 +0.266 stated_owner
+   L2 +0.299 stated_owner
+   L3 +0.359 stated_owner
+   L4 +0.354 stated_owner
+   L5 +0.384 stated_owner
+   L6 +0.357 stated_owner
+R1.road_reachability  max +0.397
+   L0 +0.397 within_two
+   L1 +0.388 within_two
+   L2 +0.388 within_two
+   L3 +0.331 within_two
+   L4 +0.323 within_two
+   L5 +0.324 within_two
+   L6 +0.341 x_outdeg_ge_2_yes
+R1.seating_row  max +0.193
+   L0 +0.105 stated_seat
+   L1 +0.154 stated_seat
+   L2 +0.193 stated_seat
+   L3 +0.172 stated_seat
+   L4 +0.173 stated_seat
+   L5 +0.179 stated_seat
+   L6 +0.187 stated_seat
+R1.spatial_grid_walk_r2  max +0.663
+   L0 +0.663 ignore_walls
+   L1 +0.600 ignore_walls
+   L2 +0.552 ignore_walls
+   L3 +0.539 ignore_walls
+   L4 +0.528 ignore_walls
+   L5 +0.492 ignore_walls
+   L6 +0.462 ignore_walls
+R1.spatial_relative_directions_r4  max +0.649
+   L0 +0.649 sum_along_path_unsigned
+   L1 +0.591 sum_along_path_unsigned
+   L2 +0.546 sum_along_path_unsigned
+   L3 +0.512 sum_along_path_unsigned
+   L4 +0.492 sum_along_path_unsigned
+   L5 +0.466 sum_along_path_unsigned
+   L6 +0.422 sum_along_path_unsigned
+R1.stable_matching_r4  max +0.525
+   L0 +0.472 receiver_proposing
+   L1 +0.506 receiver_proposing
+   L2 +0.501 receiver_proposing
+   L3 +0.515 receiver_proposing
+   L4 +0.518 receiver_proposing
+   L5 +0.518 receiver_proposing
+   L6 +0.525 receiver_proposing
+R1.swap_tracking  max +0.214
+   L0 +0.214 ignore_rotations
+   L1 +0.173 ignore_rotations
+   L2 +0.167 ignore_rotations
+   L3 +0.186 ignore_rotations
+   L4 +0.098 rotation_reversed
+   L5 +0.080 rotation_reversed
+   L6 +0.075 rotation_reversed
+R1.temporal_critical_path_r4  max +0.860
+   L0 +0.860 greedy_backward
+   L1 +0.814 greedy_backward
+   L2 +0.790 greedy_backward
+   L3 +0.761 greedy_backward
+   L4 +0.727 greedy_backward
+   L5 +0.732 greedy_backward
+   L6 +0.695 greedy_backward
+R1.temporal_interval_overlap  max +0.498
+   L0 +0.492 duration_end_off_by_one
+   L1 +0.491 duration_end_off_by_one
+   L2 +0.498 duration_end_off_by_one
+   L3 +0.493 duration_end_off_by_one
+   L4 +0.497 duration_end_off_by_one
+   L5 +0.498 duration_end_off_by_one
+   L6 +0.495 duration_end_off_by_one
+R1.temporal_weekday_shift  max +0.420
+   L0 +0.420 ignore_before_after
+   L1 +0.390 ignore_before_after
+   L2 +0.325 ignore_before_after
+   L3 +0.293 ignore_before_after
+   L4 +0.331 ignore_before_after
+   L5 +0.285 ignore_before_after
+   L6 +0.237 ignore_before_after
+R1.topological_order_r4  max +0.689
+   L0 +0.689 layered_depth_then_name
+   L1 +0.667 layered_depth_then_name
+   L2 +0.611 layered_depth_then_name
+   L3 +0.555 layered_depth_then_name
+   L4 +0.506 layered_depth_then_name
+   L5 +0.449 layered_depth_then_name
+   L6 +0.462 layered_depth_then_name
+R1.tracking_accounts  max +0.569
+   L0 +0.509 ignore_earnings
+   L1 +0.569 ignore_earnings
+   L2 +0.513 ignore_earnings
+   L3 +0.533 ignore_earnings
+   L4 +0.543 ignore_earnings
+   L5 +0.533 ignore_earnings
+   L6 +0.499 ignore_earnings
+R1.venn_counting_r4  max +1.000
+   L0 +1.000 ignore_triples
+   L1 +1.000 sizes_minus_2pairs
+   L2 +0.070 smallest_number
+   L3 +1.000 pairs_minus_3triples
+   L4 +1.000 pairs_minus_2triples
+   L5 +0.050 constant_mfk_fitted
+   L6 +1.000 pairs_minus_3triples

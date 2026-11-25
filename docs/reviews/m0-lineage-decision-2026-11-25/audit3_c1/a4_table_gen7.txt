@@ -1,0 +1,179 @@
+## Generic rules per level L0..L6 (2-fold CV; open answers, chance 0)
+lineage | MF L0..L6 | MF|shape L0..L6 | BEST generic L0..L6 | any-literal oracle L1-L5 max | distinct keys L3
+C1.bfs_queue | 0.19 0.17 0.15 0.14 0.07 0.13 0.10 | 0.25 0.25 0.15 0.14 0.14 0.13 0.13 | 0.12 0.10 0.07 0.04 0.06 0.06 0.09 | 0.53 | 132
+C1.binary_search | 0.08 0.09 0.03 0.04 0.03 0.02 0.01 | 0.18 0.14 0.07 0.06 0.06 0.03 0.03 | 0.12 0.08 0.03 0.03 0.03 0.01 0.01 | 0.25 | 134
+C1.bracket_matching | 0.29 0.21 0.12 0.17 0.07 0.08 0.05 | 0.32 0.23 0.22 0.17 0.10 0.10 0.14 | 0.27 0.22 0.18 0.17 0.08 0.07 0.07 | 0.38 | 29
+C1.bracket_matching_traced | 0.21 0.22 0.13 0.14 0.13 0.13 0.08 | 0.20 0.23 0.17 0.15 0.12 0.14 0.09 | 0.21 0.22 0.13 0.14 0.13 0.13 0.08 | 0.50 | 42
+C1.bubble_pass | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | 0.08 0.01 0.08 0.02 0.04 0.01 0.03 | 0.00 | 400
+C1.bytecode_loop_r2 | 0.03 0.02 0.04 0.08 0.07 0.04 0.06 | 0.03 0.02 0.04 0.08 0.07 0.04 0.06 | 0.02 0.03 0.02 0.06 0.07 0.05 0.06 | 0.35 | 74
+C1.cellular_update_r2 | 0.05 0.06 0.04 0.02 0.03 0.04 0.04 | 0.06 0.08 0.07 0.06 0.06 0.05 0.07 | 0.05 0.06 0.03 0.02 0.03 0.05 0.02 | 0.17 | 153
+C1.circle_elimination_r2 | 0.07 0.07 0.06 0.05 0.07 0.08 0.04 | 0.06 0.11 0.07 0.06 0.07 0.05 0.07 | 0.06 0.07 0.06 0.07 0.05 0.08 0.05 | 0.29 | 56
+C1.coin_change_table | 0.26 0.16 0.13 0.12 0.14 0.10 0.12 | 0.28 0.18 0.17 0.14 0.15 0.10 0.14 | 0.26 0.16 0.10 0.12 0.10 0.08 0.09 | 0.46 | 96
+C1.cond_chain | 0.06 0.10 0.10 0.15 0.15 0.28 0.28 | 0.04 0.10 0.13 0.20 0.23 0.33 0.34 | 0.17 0.09 0.10 0.14 0.15 0.28 0.28 | 0.36 | 31
+C1.counter_list | 0.08 0.06 0.09 0.08 0.04 0.04 0.04 | 0.08 0.06 0.09 0.08 0.04 0.04 0.04 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | 0.00 | 129
+C1.digit_peel | 0.14 0.06 0.10 0.07 0.08 0.04 0.06 | 0.14 0.14 0.12 0.11 0.10 0.05 0.10 | 0.17 0.12 0.06 0.05 0.04 0.04 0.03 | 0.22 | 126
+C1.euclid_gcd | 0.15 0.15 0.13 0.09 0.12 0.10 0.10 | 0.12 0.08 0.13 0.09 0.12 0.09 0.11 | 0.07 0.07 0.07 0.07 0.02 0.03 0.02 | 0.12 | 81
+C1.euclid_gcd_traced | 0.10 0.08 0.10 0.05 0.13 0.06 0.09 | 0.12 0.09 0.11 0.05 0.14 0.07 0.09 | 0.04 0.03 0.03 0.02 0.03 0.01 0.01 | 0.04 | 175
+C1.fast_power_r2 | 0.08 0.12 0.12 0.10 0.09 0.05 0.08 | 0.10 0.11 0.10 0.08 0.09 0.08 0.08 | 0.09 0.13 0.11 0.11 0.09 0.08 0.11 | 0.35 | 102
+C1.fast_power_traced | 0.15 0.17 0.09 0.08 0.09 0.07 0.08 | 0.15 0.17 0.09 0.08 0.09 0.07 0.08 | 0.20 0.16 0.14 0.11 0.07 0.07 0.08 | 0.37 | 299
+C1.fib_like | 0.06 0.03 0.02 0.02 0.04 0.02 0.03 | 0.04 0.02 0.02 0.03 0.02 0.03 0.03 | 0.03 0.03 0.02 0.03 0.05 0.05 0.06 | 0.12 | 105
+C1.fib_shapes_recursive | 0.01 0.01 0.01 0.01 0.00 0.00 0.00 | 0.01 0.02 0.01 0.01 0.00 0.01 0.00 | 0.01 0.01 0.01 0.00 0.00 0.00 0.00 | 0.04 | 317
+C1.func_branch | 0.01 0.04 0.02 0.01 0.01 0.01 0.01 | 0.02 0.01 0.01 0.00 0.00 0.01 0.01 | 0.02 0.04 0.03 0.02 0.02 0.01 0.01 | 0.09 | 189
+C1.func_compose | 0.01 0.01 0.01 0.18 0.23 0.15 0.18 | 0.03 0.01 0.02 0.18 0.17 0.16 0.13 | 0.00 0.01 0.00 0.18 0.23 0.17 0.18 | 0.38 | 9
+C1.grid_path_table | 0.12 0.10 0.06 0.03 0.02 0.03 0.02 | 0.12 0.10 0.04 0.03 0.02 0.03 0.01 | 0.18 0.12 0.09 0.06 0.02 0.03 0.02 | 0.21 | 56
+C1.insertion_sort | 0.09 0.08 0.10 0.06 0.02 0.02 0.04 | 0.11 0.07 0.09 0.06 0.04 0.04 0.03 | 0.21 0.17 0.10 0.09 0.07 0.09 0.06 | 0.56 | 150
+C1.insertion_sort_traced | 0.28 0.28 0.20 0.20 0.19 0.16 0.14 | 0.29 0.28 0.19 0.23 0.17 0.17 0.12 | 0.26 0.28 0.20 0.20 0.19 0.17 0.14 | 0.51 | 14
+C1.kadane_scan | 0.03 0.03 0.01 0.03 0.01 0.02 0.02 | 0.03 0.05 0.02 0.02 0.02 0.01 0.02 | 0.14 0.10 0.07 0.08 0.07 0.07 0.08 | 0.10 | 151
+C1.kadane_scan_traced | 0.20 0.17 0.21 0.20 0.17 0.14 0.15 | 0.21 0.19 0.23 0.23 0.17 0.14 0.16 | 0.24 0.18 0.22 0.22 0.17 0.14 0.16 | 0.52 | 56
+C1.list_build | 0.14 0.17 0.14 0.10 0.13 0.15 0.14 | 0.15 0.16 0.14 0.12 0.17 0.15 0.16 | 0.06 0.04 0.03 0.04 0.05 0.04 0.03 | 0.14 | 132
+C1.loop_sum | 0.01 0.01 0.01 0.00 0.00 0.00 0.00 | 0.01 0.01 0.00 0.00 0.00 0.00 0.00 | 0.09 0.10 0.02 0.02 0.03 0.05 0.01 | 0.10 | 345
+C1.majority_vote_scan_r2 | 0.09 0.05 0.08 0.10 0.09 0.10 0.10 | 0.14 0.09 0.10 0.13 0.13 0.14 0.12 | 0.09 0.04 0.02 0.03 0.04 0.03 0.02 | 0.13 | 42
+C1.merge_two_sorted_r2 | 0.36 0.23 0.29 0.32 0.21 0.24 0.17 | 0.36 0.23 0.29 0.32 0.21 0.24 0.17 | 0.30 0.30 0.20 0.23 0.21 0.17 0.17 | 0.65 | 10
+C1.minmax_track | 0.09 0.06 0.07 0.04 0.07 0.10 0.06 | 0.09 0.07 0.06 0.07 0.07 0.07 0.06 | 0.24 0.23 0.17 0.20 0.23 0.25 0.17 | 0.56 | 52
+C1.mirror_pointers | 0.21 0.15 0.07 0.06 0.03 0.03 0.01 | 0.20 0.14 0.07 0.06 0.03 0.03 0.01 | 0.21 0.07 0.05 0.03 0.04 0.01 0.01 | 0.15 | 209
+C1.nested_pairs | 0.19 0.15 0.11 0.10 0.07 0.04 0.03 | 0.19 0.15 0.10 0.11 0.07 0.04 0.03 | 0.13 0.11 0.05 0.06 0.06 0.03 0.05 | 0.24 | 87
+C1.partition_pass | 0.08 0.11 0.10 0.07 0.02 0.06 0.05 | 0.08 0.11 0.10 0.07 0.02 0.06 0.05 | 0.10 0.11 0.10 0.07 0.02 0.06 0.05 | 0.26 | 278
+C1.postfix_evaluation | 0.03 0.01 0.01 0.01 0.00 0.00 0.02 | 0.02 0.01 0.02 0.00 0.00 0.00 0.01 | 0.10 0.00 0.01 0.00 0.00 0.01 0.02 | 0.08 | 332
+C1.recursive_calls_r2 | 0.01 0.00 0.00 0.00 0.00 0.00 0.00 | 0.01 0.00 0.00 0.01 0.00 0.00 0.00 | 0.01 0.00 0.00 0.00 0.00 0.00 0.00 | 0.01 | 384
+C1.run_length_scan | 0.02 0.01 0.00 0.00 0.00 0.00 0.00 | 0.01 0.01 0.00 0.00 0.00 0.00 0.00 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | 0.00 | 397
+C1.shared_lists | 0.02 0.01 0.03 0.01 0.04 0.02 0.03 | 0.06 0.05 0.04 0.04 0.06 0.05 0.04 | 0.02 0.01 0.01 0.01 0.01 0.01 0.00 | 0.13 | 196
+C1.sieve_marking_r2 | 0.14 0.10 0.09 0.06 0.08 0.09 0.09 | 0.23 0.17 0.14 0.10 0.11 0.09 0.09 | 0.03 0.01 0.00 0.01 0.00 0.00 0.00 | 0.03 | 113
+C1.slices | 0.08 0.09 0.05 0.09 0.05 0.07 0.06 | 0.08 0.09 0.05 0.09 0.04 0.06 0.05 | 0.08 0.09 0.05 0.09 0.05 0.07 0.06 | 0.07 | 347
+C1.string_build | 0.09 0.06 0.06 0.05 0.08 0.04 0.07 | 0.09 0.06 0.06 0.05 0.08 0.04 0.07 | 0.35 0.34 0.32 0.35 0.33 0.31 0.38 | 0.08 | 264
+C1.string_methods | 0.32 0.25 0.29 0.27 0.26 0.32 0.27 | 0.51 0.35 0.38 0.29 0.24 0.32 0.25 | 0.32 0.25 0.29 0.27 0.26 0.32 0.27 | 0.11 | 164
+C1.string_pair_table | 0.18 0.17 0.12 0.14 0.16 0.12 0.13 | 0.23 0.22 0.18 0.16 0.17 0.15 0.15 | 0.09 0.09 0.02 0.05 0.03 0.02 0.00 | 0.07 | 118
+C1.turtle_walk_r2 | 0.28 0.18 0.13 0.10 0.04 0.04 0.05 | 0.29 0.18 0.14 0.10 0.08 0.05 0.08 | 0.28 0.18 0.13 0.10 0.05 0.04 0.04 | 0.49 | 112
+C1.union_find_links | 0.04 0.05 0.06 0.06 0.07 0.06 0.04 | 0.08 0.06 0.06 0.07 0.08 0.06 0.04 | 0.04 0.05 0.06 0.05 0.07 0.06 0.03 | 0.26 | 262
+C1.while_counter | 0.14 0.12 0.09 0.09 0.09 0.12 0.13 | 0.15 0.10 0.10 0.09 0.12 0.11 0.14 | 0.12 0.08 0.09 0.09 0.12 0.10 0.08 | 0.16 | 35
+
+## Shape-specific rules (S.* shortcut, F.* closed formula): rate inside the shape per level L0..L6 [share of level at L3]; MF inside shape at L3
+C1.binary_search | last_closed_absent|S.bisect_left | 0.67 0.44 0.57 0.68 0.58 0.44 0.78 | share 0.06 | MFshape 0.14
+C1.binary_search | last_closed_absent|S.bisect_left_m1 | 0.33 0.56 0.43 0.32 0.42 0.56 0.22 | share 0.06 | MFshape 0.14
+C1.binary_search | last_closed_absent|S.index_or_bisect | 0.67 0.44 0.57 0.68 0.58 0.44 0.78 | share 0.06 | MFshape 0.14
+C1.binary_search | last_closed_present|F.index_of_target | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.13 | MFshape 0.10
+C1.binary_search | last_closed_present|S.bisect_left | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.13 | MFshape 0.10
+C1.binary_search | last_closed_present|S.bisect_left_m1 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.13 | MFshape 0.10
+C1.binary_search | last_closed_present|S.index_or_bisect | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.13 | MFshape 0.10
+C1.binary_search | last_half_absent|S.bisect_left | 0.33 0.39 0.33 0.68 0.38 0.45 0.26 | share 0.06 | MFshape 0.09
+C1.binary_search | last_half_absent|S.bisect_left_m1 | 0.67 0.61 0.67 0.32 0.62 0.55 0.74 | share 0.06 | MFshape 0.09
+C1.binary_search | last_half_absent|S.index_or_bisect | 0.33 0.39 0.33 0.68 0.38 0.45 0.26 | share 0.06 | MFshape 0.09
+C1.binary_search | last_half_present|S.bisect_left | 0.41 0.62 0.42 0.51 0.30 0.54 0.50 | share 0.10 | MFshape 0.15
+C1.binary_search | last_half_present|S.bisect_left_m1 | 0.59 0.38 0.58 0.49 0.70 0.46 0.50 | share 0.10 | MFshape 0.15
+C1.binary_search | last_half_present|S.index_or_bisect | 0.41 0.62 0.42 0.51 0.30 0.54 0.50 | share 0.10 | MFshape 0.15
+C1.bracket_matching | height|S.opens_minus_closes | 0.48 0.51 0.47 0.24 0.20 0.19 0.16 | share 0.26 | MFshape 0.33
+C1.bracket_matching_traced | height_at|S.opens_minus_closes_prefix | 0.71 0.63 0.56 0.51 0.47 0.41 0.39 | share 0.54 | MFshape 0.25
+C1.bracket_matching_traced | pops|S.sum_pos_all_closers | 0.66 0.57 0.45 0.31 0.27 0.16 0.10 | share 0.46 | MFshape 0.04
+C1.bytecode_loop_r2 | other|S.always_skip | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 1.00 | MFshape 0.08
+C1.bytecode_loop_r2 | other|S.no_skips | 1.00 0.29 0.28 0.39 0.38 0.37 0.39 | share 1.00 | MFshape 0.08
+C1.bytecode_loop_r2 | other|S.sum_all_args | 0.06 0.08 0.06 0.05 0.04 0.03 0.06 | share 1.00 | MFshape 0.08
+C1.cellular_update_r2 | row|S.echo_init_row | 0.05 0.12 0.02 0.05 0.03 0.06 0.01 | share 0.51 | MFshape 0.06
+C1.cellular_update_r2 | weighted|S.echo_init_row | 0.15 0.15 0.07 0.06 0.08 0.04 0.06 | share 0.49 | MFshape 0.05
+C1.cond_chain | a|S.2gcd | 0.22 0.20 0.15 0.28 0.27 0.32 0.34 | share 0.32 | MFshape 0.24
+C1.cond_chain | a|S.gcd | 0.23 0.33 0.48 0.36 0.42 0.46 0.52 | share 0.32 | MFshape 0.24
+C1.cond_chain | b|S.2gcd | 0.10 0.07 0.12 0.13 0.11 0.07 0.08 | share 0.30 | MFshape 0.17
+C1.cond_chain | b|S.gcd | 0.22 0.44 0.43 0.46 0.63 0.71 0.71 | share 0.30 | MFshape 0.17
+C1.cond_chain | sum|S.2gcd | 0.11 0.07 0.12 0.17 0.24 0.38 0.36 | share 0.38 | MFshape 0.19
+C1.cond_chain | sum|S.gcd | 0.00 0.00 0.00 0.01 0.02 0.01 0.02 | share 0.38 | MFshape 0.19
+C1.counter_list | counts|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 1.00 | MFshape 0.08
+C1.digit_peel | countge_b10|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.16 | MFshape 0.22
+C1.digit_peel | countge_b10|S.decimal_digits_of_literal | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.16 | MFshape 0.22
+C1.digit_peel | countge_bN|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.10 | MFshape 0.15
+C1.digit_peel | countge_bN|S.decimal_digits_of_literal | 0.30 0.20 0.29 0.15 0.20 0.14 0.17 | share 0.10 | MFshape 0.15
+C1.digit_peel | even_b10|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.14 | MFshape 0.16
+C1.digit_peel | even_b10|S.decimal_digits_of_literal | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.14 | MFshape 0.16
+C1.digit_peel | even_bN|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.11 | MFshape 0.19
+C1.digit_peel | even_bN|S.decimal_digits_of_literal | 0.13 0.20 0.23 0.19 0.12 0.08 0.12 | share 0.11 | MFshape 0.19
+C1.digit_peel | rev_bN|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.23 | MFshape 0.00
+C1.digit_peel | rev_bN|S.decimal_digits_of_literal | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.23 | MFshape 0.00
+C1.digit_peel | sum_b10|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.14 | MFshape 0.04
+C1.digit_peel | sum_b10|S.decimal_digits_of_literal | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.14 | MFshape 0.04
+C1.digit_peel | sum_bN|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.12 | MFshape 0.10
+C1.digit_peel | sum_bN|S.decimal_digits_of_literal | 0.08 0.21 0.05 0.04 0.08 0.03 0.07 | share 0.12 | MFshape 0.10
+C1.euclid_gcd | gcd|F.gcd | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.33 | MFshape 0.09
+C1.euclid_gcd | gcd|S.literal_x | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.33 | MFshape 0.09
+C1.euclid_gcd | gcd|S.literal_y | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.33 | MFshape 0.09
+C1.euclid_gcd | gcd|S.min_xy | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.33 | MFshape 0.09
+C1.euclid_gcd | quot|F.gcd | 0.09 0.06 0.05 0.07 0.05 0.09 0.08 | share 0.30 | MFshape 0.17
+C1.euclid_gcd | quot|S.literal_x | 0.05 0.01 0.01 0.01 0.00 0.00 0.01 | share 0.30 | MFshape 0.17
+C1.euclid_gcd | quot|S.literal_y | 0.01 0.04 0.01 0.00 0.00 0.00 0.00 | share 0.30 | MFshape 0.17
+C1.euclid_gcd | quot|S.min_xy | 0.04 0.04 0.01 0.01 0.00 0.00 0.01 | share 0.30 | MFshape 0.17
+C1.euclid_gcd | rsum|F.gcd | 0.29 0.32 0.00 0.00 0.00 0.00 0.00 | share 0.38 | MFshape 0.03
+C1.euclid_gcd | rsum|S.literal_x | 0.10 0.11 0.00 0.00 0.00 0.00 0.00 | share 0.38 | MFshape 0.03
+C1.euclid_gcd | rsum|S.literal_y | 0.19 0.19 0.22 0.19 0.00 0.00 0.00 | share 0.38 | MFshape 0.03
+C1.euclid_gcd | rsum|S.min_xy | 0.20 0.18 0.10 0.11 0.00 0.00 0.00 | share 0.38 | MFshape 0.03
+C1.euclid_gcd_traced | bigq|S.first_quotient | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.49 | MFshape 0.10
+C1.euclid_gcd_traced | bigq|S.sum_all_quotients | 0.18 0.24 0.08 0.09 0.01 0.01 0.00 | share 0.49 | MFshape 0.10
+C1.euclid_gcd_traced | bigq|S.sum_quot_ge2_from_2nd | 0.90 0.87 0.92 0.92 0.96 0.92 0.95 | share 0.49 | MFshape 0.10
+C1.euclid_gcd_traced | state|S.gcd_0 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.51 | MFshape 0.01
+C1.euclid_gcd_traced | state|S.state_one_less_round | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.51 | MFshape 0.01
+C1.euclid_gcd_traced | state|S.state_one_more_round | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.51 | MFshape 0.01
+C1.fast_power_r2 | base|F.base_final | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.35 | MFshape 0.18
+C1.fast_power_r2 | base|F.bsum | 0.00 0.02 0.00 0.00 0.00 0.00 0.00 | share 0.35 | MFshape 0.18
+C1.fast_power_r2 | base|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.35 | MFshape 0.18
+C1.fast_power_r2 | base|F.pow | 0.29 0.30 0.33 0.29 0.34 0.33 0.27 | share 0.35 | MFshape 0.18
+C1.fast_power_r2 | bsum|F.base_final | 0.00 0.01 0.00 0.00 0.00 0.00 0.00 | share 0.32 | MFshape 0.01
+C1.fast_power_r2 | bsum|F.bsum | 0.76 0.74 0.77 0.79 0.87 0.85 0.90 | share 0.32 | MFshape 0.01
+C1.fast_power_r2 | bsum|F.closed | 0.76 0.74 0.77 0.79 0.87 0.85 0.90 | share 0.32 | MFshape 0.01
+C1.fast_power_r2 | bsum|F.pow | 0.01 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.32 | MFshape 0.01
+C1.fast_power_r2 | res|F.base_final | 0.25 0.35 0.39 0.36 0.27 0.29 0.24 | share 0.33 | MFshape 0.04
+C1.fast_power_r2 | res|F.bsum | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.33 | MFshape 0.04
+C1.fast_power_r2 | res|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.33 | MFshape 0.04
+C1.fast_power_r2 | res|F.pow | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.33 | MFshape 0.04
+C1.fast_power_traced | oddsum|F.closed | 0.97 0.99 0.98 0.99 0.99 0.99 0.98 | share 0.49 | MFshape 0.01
+C1.fast_power_traced | oddsum|S.all_rounds_bsum | 0.23 0.13 0.06 0.01 0.04 0.01 0.01 | share 0.49 | MFshape 0.01
+C1.fast_power_traced | res_after|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.51 | MFshape 0.16
+C1.fast_power_traced | res_after|S.full_pow | 0.10 0.11 0.15 0.09 0.16 0.17 0.18 | share 0.51 | MFshape 0.16
+C1.insertion_sort | at|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.32 | MFshape 0.05
+C1.insertion_sort | at|S.input_at_idx | 0.55 0.55 0.52 0.49 0.49 0.42 0.50 | share 0.32 | MFshape 0.05
+C1.insertion_sort | list|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.32 | MFshape 0.00
+C1.insertion_sort | shifts|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.36 | MFshape 0.13
+C1.insertion_sort_traced | holesum|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.51 | MFshape 0.18
+C1.insertion_sort_traced | hole|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.49 | MFshape 0.27
+C1.kadane_scan | best|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.31 | MFshape 0.02
+C1.kadane_scan | best|S.max_elem | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.31 | MFshape 0.02
+C1.kadane_scan | best|S.sum_all | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.31 | MFshape 0.02
+C1.kadane_scan | best|S.sum_pos | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.31 | MFshape 0.02
+C1.kadane_scan | curs|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.47 | MFshape 0.00
+C1.kadane_scan | cur|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.22 | MFshape 0.04
+C1.kadane_scan | cur|S.last_elem | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.22 | MFshape 0.04
+C1.kadane_scan_traced | cur_at|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.47 | MFshape 0.06
+C1.kadane_scan_traced | cur_at|S.elem_p_minus_1 | 0.24 0.16 0.18 0.15 0.14 0.12 0.15 | share 0.47 | MFshape 0.06
+C1.kadane_scan_traced | cur_at|S.maxsub_prefix | 0.56 0.58 0.51 0.50 0.44 0.44 0.39 | share 0.47 | MFshape 0.06
+C1.kadane_scan_traced | restarts|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.53 | MFshape 0.37
+C1.kadane_scan_traced | restarts|S.prev_negative | 0.37 0.12 0.08 0.05 0.00 0.01 0.00 | share 0.53 | MFshape 0.37
+C1.list_build | max|S.m_minus_1 | 0.35 0.36 0.35 0.51 0.40 0.41 0.53 | share 0.28 | MFshape 0.34
+C1.majority_vote_scan_r2 | pair|S.last_1 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.53 | MFshape 0.19
+C1.majority_vote_scan_r2 | pair|S.mode_1 | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.53 | MFshape 0.19
+C1.majority_vote_scan_r2 | repl|S.first_elem | 0.13 0.07 0.02 0.03 0.02 0.02 0.01 | share 0.47 | MFshape 0.06
+C1.majority_vote_scan_r2 | repl|S.first_plus_last | 0.12 0.09 0.04 0.02 0.02 0.01 0.03 | share 0.47 | MFshape 0.06
+C1.majority_vote_scan_r2 | repl|S.sum_distinct | 0.10 0.07 0.13 0.09 0.03 0.07 0.05 | share 0.47 | MFshape 0.06
+C1.merge_two_sorted_r2 | switch|S.full_merge_runs | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 1.00 | MFshape 0.32
+C1.merge_two_sorted_r2 | switch|S.min_len_x2 | 0.01 0.02 0.01 0.01 0.00 0.00 0.00 | share 1.00 | MFshape 0.32
+C1.merge_two_sorted_r2 | switch|S.min_len_x2_m1 | 0.11 0.10 0.04 0.04 0.02 0.01 0.00 | share 1.00 | MFshape 0.32
+C1.minmax_track | best|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.36 | MFshape 0.06
+C1.minmax_track | pos|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.27 | MFshape 0.11
+C1.minmax_track | sum|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.37 | MFshape 0.05
+C1.partition_pass | list|S.sorted_prefix | 0.30 0.18 0.12 0.08 0.05 0.05 0.05 | share 0.64 | MFshape 0.00
+C1.partition_pass | list|S.stable_partition | 0.33 0.38 0.35 0.31 0.28 0.27 0.18 | share 0.64 | MFshape 0.00
+C1.partition_pass | swapj|F.closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.36 | MFshape 0.19
+C1.sieve_marking_r2 | indexsum|S.all_ones_start | 0.23 0.14 0.12 0.07 0.08 0.03 0.03 | share 0.48 | MFshape 0.08
+C1.sieve_marking_r2 | indexsum|S.flagged_all | 0.13 0.04 0.01 0.00 0.00 0.01 0.01 | share 0.48 | MFshape 0.08
+C1.sieve_marking_r2 | indexsum|S.flagged_primes_and_01 | 0.39 0.44 0.53 0.43 0.37 0.34 0.34 | share 0.48 | MFshape 0.08
+C1.sieve_marking_r2 | strikesum|S.all_ones_start | 0.61 0.50 0.40 0.36 0.30 0.27 0.27 | share 0.52 | MFshape 0.11
+C1.string_build | len|F.b_minus_a | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.35 | MFshape 0.14
+C1.turtle_walk_r2 | far_half|S.no_back | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.23 | MFshape 0.17
+C1.turtle_walk_r2 | far_half|S.no_turns | 0.55 0.35 0.35 0.26 0.19 0.14 0.12 | share 0.23 | MFshape 0.17
+C1.turtle_walk_r2 | far_half|S.sum_forward | 0.28 0.24 0.28 0.21 0.13 0.08 0.10 | share 0.23 | MFshape 0.17
+C1.turtle_walk_r2 | far_half|S.zero | 0.45 0.27 0.23 0.17 0.11 0.09 0.09 | share 0.23 | MFshape 0.17
+C1.turtle_walk_r2 | pos|S.no_back | 1.00 1.00 1.00 0.26 0.18 0.19 0.06 | share 0.25 | MFshape 0.00
+C1.turtle_walk_r2 | pos|S.no_turns | 0.27 0.12 0.08 0.07 0.04 0.01 0.02 | share 0.25 | MFshape 0.00
+C1.turtle_walk_r2 | pos|S.sum_forward | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.25 | MFshape 0.00
+C1.turtle_walk_r2 | pos|S.zero | 0.06 0.02 0.00 0.02 0.01 0.02 0.00 | share 0.25 | MFshape 0.00
+C1.turtle_walk_r2 | xy|S.no_back | 1.00 1.00 1.00 0.50 0.38 0.40 0.35 | share 0.52 | MFshape 0.12
+C1.turtle_walk_r2 | xy|S.no_turns | 0.32 0.21 0.11 0.12 0.12 0.03 0.04 | share 0.52 | MFshape 0.12
+C1.turtle_walk_r2 | xy|S.sum_forward | 0.13 0.09 0.05 0.02 0.01 0.01 0.01 | share 0.52 | MFshape 0.12
+C1.turtle_walk_r2 | xy|S.zero | 0.34 0.21 0.14 0.11 0.10 0.07 0.07 | share 0.52 | MFshape 0.12
+C1.union_find_links | root|S.query_node | 0.00 0.00 0.00 0.00 0.00 0.00 0.00 | share 0.19 | MFshape 0.30
+C1.while_counter | grow|S.log_estimate | 0.26 0.33 0.28 0.38 0.28 0.34 0.28 | share 0.33 | MFshape 0.21
+C1.while_counter | grow|S.log_estimate_floor | 0.57 0.57 0.58 0.50 0.49 0.49 0.57 | share 0.33 | MFshape 0.21
+C1.while_counter | shrink|F.shrink_closed | 1.00 1.00 1.00 1.00 1.00 1.00 1.00 | share 0.35 | MFshape 0.02

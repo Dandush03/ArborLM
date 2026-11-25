@@ -1,0 +1,9 @@
+shapes 43 my clusters 25 map v2 clusters 27
+DISAGREE R1.attribute_rule R1.elimination_bracket_r4 mine: same | v2: apart
+DISAGREE R1.conditional_chain R1.knights_knaves mine: same | v2: apart
+DISAGREE R1.conditional_chain R1.one_culprit mine: same | v2: apart
+DISAGREE R1.conditional_decision_tree_r4 R1.elimination_bracket_r4 mine: same | v2: apart
+DISAGREE R1.elimination_bracket_r4 R1.minimax_tree_r4 mine: same | v2: apart
+MY CLUSTER SPANS BOTH PARTS under the tabulated cluster_keys split: assignment_enumeration {'R1.conditional_chain': 'A', 'R1.knights_knaves': 'B', 'R1.one_culprit': 'B'}
+part A my clusters wholly in it: 12
+part B my clusters wholly in it: 12

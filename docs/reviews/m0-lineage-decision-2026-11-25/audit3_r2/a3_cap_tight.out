@@ -1,0 +1,87 @@
+R2.cellular_automaton L0 reading A: distinct 6883 of 8000 draws, chao1 ~25923, need 1000
+R2.cellular_automaton L0 reading B: distinct 6883 of 8000 draws, chao1 ~25923, need 1000
+R2.cellular_automaton L1 reading A: distinct 33472 of 40000 draws, chao1 ~111245, need 14340
+R2.cellular_automaton L1 reading B: distinct 33472 of 40000 draws, chao1 ~111245, need 14340
+R2.chip_toppling L0 reading A: distinct 5723 of 8000 draws, chao1 ~13064, need 1000
+R2.chip_toppling L0 reading B: distinct 5723 of 8000 draws, chao1 ~13064, need 1000
+R2.chip_toppling L1 reading A: distinct 29181 of 40000 draws, chao1 ~72849, need 14340
+R2.chip_toppling L1 reading B: distinct 29181 of 40000 draws, chao1 ~72849, need 14340
+R2.coin_change_min L0 reading A: distinct 6135 of 8000 draws, chao1 ~14537, need 1000
+R2.coin_change_min L0 reading B: distinct 6135 of 8000 draws, chao1 ~14537, need 1000
+R2.coin_change_min L1 reading A: distinct 23997 of 40000 draws, chao1 ~35158, need 14340
+R2.coin_change_min L1 reading B: distinct 23997 of 40000 draws, chao1 ~35158, need 14340
+R2.coin_change_min L2 reading A: distinct 30901 of 40000 draws, chao1 ~73084, need 14340
+R2.coin_change_min L2 reading B: distinct 30901 of 40000 draws, chao1 ~73084, need 14340
+R2.crt_smallest L0 reading A: distinct 7036 of 8000 draws, chao1 ~34185, need 1000
+R2.crt_smallest L0 reading B: distinct 7036 of 8000 draws, chao1 ~34185, need 1000
+R2.crt_smallest L1 reading A: distinct 32646 of 40000 draws, chao1 ~119234, need 14340
+R2.crt_smallest L1 reading B: distinct 32646 of 40000 draws, chao1 ~119234, need 14340
+R2.dictionary_rank L0 reading B: distinct 46 of 8000 draws, chao1 ~46, need 1000  BELOW
+R2.dictionary_rank L1 reading B: distinct 46 of 40000 draws, chao1 ~46, need 14340  BELOW
+R2.dictionary_rank L2 reading B: distinct 238 of 40000 draws, chao1 ~238, need 14340  BELOW
+R2.dictionary_rank L3 reading B: distinct 238 of 40000 draws, chao1 ~239, need 14340  BELOW
+R2.dictionary_rank L4 reading B: distinct 1436 of 40000 draws, chao1 ~1436, need 14340  BELOW
+R2.dictionary_rank L5 reading B: distinct 1436 of 40000 draws, chao1 ~1436, need 14340  BELOW
+R2.dictionary_rank L6 reading B: distinct 5456 of 8000 draws, chao1 ~10050, need 1000
+R2.from_base L0 reading A: distinct 3113 of 8000 draws, chao1 ~7993, need 1000
+R2.from_base L0 reading B: distinct 3113 of 8000 draws, chao1 ~7993, need 1000
+R2.from_base L1 reading A: distinct 14957 of 40000 draws, chao1 ~43924, need 14340
+R2.from_base L1 reading B: distinct 14957 of 40000 draws, chao1 ~43924, need 14340
+R2.from_base L2 reading A: distinct 29518 of 40000 draws, chao1 ~259658, need 14340
+R2.from_base L2 reading B: distinct 29518 of 40000 draws, chao1 ~259658, need 14340
+R2.from_base L3 reading A: distinct 32341 of 40000 draws, chao1 ~434420, need 14340
+R2.from_base L3 reading B: distinct 32341 of 40000 draws, chao1 ~434420, need 14340
+R2.from_base L4 reading A: distinct 34137 of 40000 draws, chao1 ~740700, need 14340
+R2.from_base L4 reading B: distinct 34137 of 40000 draws, chao1 ~740700, need 14340
+R2.from_base L5 reading A: distinct 35435 of 40000 draws, chao1 ~1139404, need 14340
+R2.from_base L5 reading B: distinct 35435 of 40000 draws, chao1 ~1139404, need 14340
+R2.gcd_euclid L0 reading A: distinct 6896 of 8000 draws, chao1 ~26138, need 1000
+R2.gcd_euclid L0 reading B: distinct 6896 of 8000 draws, chao1 ~26138, need 1000
+R2.gcd_euclid L1 reading A: distinct 32414 of 40000 draws, chao1 ~91502, need 14340
+R2.gcd_euclid L1 reading B: distinct 32414 of 40000 draws, chao1 ~91502, need 14340
+R2.hamming_error_position L0 reading A: distinct 6944 of 8000 draws, chao1 ~28210, need 1000
+R2.hamming_error_position L0 reading B: distinct 6944 of 8000 draws, chao1 ~28210, need 1000
+R2.hamming_error_position L1 reading A: distinct 22350 of 40000 draws, chao1 ~31622, need 14340
+R2.hamming_error_position L1 reading B: distinct 22350 of 40000 draws, chao1 ~31622, need 14340
+R2.hamming_error_position L2 reading A: distinct 22221 of 40000 draws, chao1 ~30990, need 14340
+R2.hamming_error_position L2 reading B: distinct 22221 of 40000 draws, chao1 ~30990, need 14340
+R2.merge_smallest_cost L0 reading A: distinct 7176 of 8000 draws, chao1 ~37183, need 1000
+R2.merge_smallest_cost L0 reading B: distinct 7176 of 8000 draws, chao1 ~37183, need 1000
+R2.permutation_power L0 reading A: distinct 2399 of 8000 draws, chao1 ~2509, need 1000
+R2.permutation_power L0 reading B: distinct 182 of 8000 draws, chao1 ~182, need 1000  BELOW
+R2.permutation_power L1 reading A: distinct 18259 of 40000 draws, chao1 ~21596, need 14340
+R2.permutation_power L1 reading B: distinct 432 of 40000 draws, chao1 ~432, need 14340  BELOW
+R2.permutation_power L2 reading B: distinct 861 of 40000 draws, chao1 ~872, need 14340  BELOW
+R2.permutation_power L3 reading B: distinct 1590 of 40000 draws, chao1 ~1640, need 14340  BELOW
+R2.permutation_power L4 reading B: distinct 2660 of 40000 draws, chao1 ~2798, need 14340  BELOW
+R2.permutation_power L5 reading B: distinct 4157 of 40000 draws, chao1 ~4478, need 14340  BELOW
+R2.permutation_power L6 reading B: distinct 3464 of 8000 draws, chao1 ~5456, need 1000
+R2.prime_factor_query L0 reading A: distinct 3220 of 8000 draws, chao1 ~3999, need 1000
+R2.prime_factor_query L0 reading B: distinct 3220 of 8000 draws, chao1 ~3999, need 1000
+R2.prime_factor_query L1 reading A: distinct 27620 of 40000 draws, chao1 ~75116, need 14340
+R2.prime_factor_query L1 reading B: distinct 27620 of 40000 draws, chao1 ~75116, need 14340
+R2.prime_factor_query L2 reading A: distinct 27420 of 40000 draws, chao1 ~72765, need 14340
+R2.prime_factor_query L2 reading B: distinct 27420 of 40000 draws, chao1 ~72765, need 14340
+R2.prime_factor_query L3 reading A: distinct 27527 of 40000 draws, chao1 ~74947, need 14340
+R2.prime_factor_query L3 reading B: distinct 27527 of 40000 draws, chao1 ~74947, need 14340
+R2.prime_factor_query L4 reading A: distinct 27559 of 40000 draws, chao1 ~74924, need 14340
+R2.prime_factor_query L4 reading B: distinct 27559 of 40000 draws, chao1 ~74924, need 14340
+R2.prime_factor_query L5 reading A: distinct 27553 of 40000 draws, chao1 ~75303, need 14340
+R2.prime_factor_query L5 reading B: distinct 27553 of 40000 draws, chao1 ~75303, need 14340
+R2.run_length L0 reading A: distinct 3511 of 8000 draws, chao1 ~4087, need 1000
+R2.run_length L0 reading B: distinct 54 of 8000 draws, chao1 ~54, need 1000  BELOW
+R2.run_length L1 reading B: distinct 1280 of 40000 draws, chao1 ~1282, need 14340  BELOW
+R2.run_length L2 reading B: distinct 23832 of 40000 draws, chao1 ~39380, need 14340
+R2.stack_machine L0 reading A: distinct 4767 of 8000 draws, chao1 ~10316, need 1000
+R2.stack_machine L0 reading B: distinct 4767 of 8000 draws, chao1 ~10316, need 1000
+R2.string_rewrite_nonidentity L0 reading B: distinct 5510 of 8000 draws, chao1 ~16114, need 1000
+R2.subtraction_game L0 reading A: distinct 6830 of 8000 draws, chao1 ~25809, need 1000
+R2.subtraction_game L0 reading B: distinct 6830 of 8000 draws, chao1 ~25809, need 1000
+R2.subtraction_game L1 reading A: distinct 31167 of 40000 draws, chao1 ~80460, need 14340
+R2.subtraction_game L1 reading B: distinct 31167 of 40000 draws, chao1 ~80460, need 14340
+R2.subtraction_game L2 reading A: distinct 35995 of 40000 draws, chao1 ~193726, need 14340
+R2.subtraction_game L2 reading B: distinct 35995 of 40000 draws, chao1 ~193726, need 14340
+R2.to_base_wide L0 reading A: distinct 6288 of 8000 draws, chao1 ~15593, need 1000
+R2.to_base_wide L0 reading B: distinct 6288 of 8000 draws, chao1 ~15593, need 1000
+R2.to_base_wide L1 reading A: distinct 29740 of 40000 draws, chao1 ~63979, need 14340
+R2.to_base_wide L1 reading B: distinct 29740 of 40000 draws, chao1 ~63979, need 14340

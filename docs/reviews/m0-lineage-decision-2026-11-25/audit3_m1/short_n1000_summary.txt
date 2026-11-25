@@ -1,0 +1,202 @@
+M1.ages
+   best: L0:echo_best_position 0.022-0.040=-0.018(+-0.009) | L1:echo_best_position 0.019-0.031=-0.012(+-0.009) | L2:echo_best_position 0.030-0.025=+0.005(+-0.011) | L3:echo_best_position 0.013-0.016=-0.003(+-0.007) | L4:echo_best_position 0.020-0.024=-0.004(+-0.009) | L5:echo_best_position 0.020-0.015=+0.005(+-0.009) | L6:echo_best_position 0.008-0.017=-0.009(+-0.005)
+   base: 0.040 0.031 0.025 0.016 0.024 0.015 0.017  echoed-anywhere: 0.05 0.04 0.04 0.03 0.03 0.03 0.02
+M1.arithmetic_series
+   best: L0:echo_best_position 0.000-0.014=-0.014(+-0.002) | L1:echo_best_position 0.000-0.003=-0.003(+-0.002) | L2:echo_best_position 0.000-0.004=-0.004(+-0.002) | L3:echo_best_position 0.000-0.006=-0.006(+-0.002) | L4:echo_best_position 0.000-0.004=-0.004(+-0.002) | L5:echo_best_position 0.000-0.005=-0.005(+-0.002) | L6:echo_best_position 0.000-0.003=-0.003(+-0.002)
+   base: 0.014 0.003 0.004 0.006 0.004 0.005 0.003  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.average_missing
+   best: L0:target_mean_rounded 0.028-0.015=+0.013(+-0.010) | L1:echo_best_position 0.017-0.014=+0.003(+-0.008) | L2:target_mean_rounded 0.017-0.019=-0.002(+-0.008) | L3:target_mean_rounded 0.022-0.016=+0.006(+-0.009) | L4:target_mean_rounded 0.024-0.015=+0.009(+-0.009) | L5:target_mean_rounded 0.020-0.013=+0.007(+-0.009) | L6:target_mean_rounded 0.021-0.019=+0.002(+-0.009)
+   base: 0.015 0.014 0.019 0.016 0.015 0.013 0.019  echoed-anywhere: 0.06 0.06 0.06 0.06 0.08 0.09 0.12
+M1.binomial_choose_r2
+   best: L0:n_minus_1_choose_k__within_applicable 0.069-0.021=+0.048(+-0.016) | L1:n_minus_1_choose_k__within_applicable 0.101-0.017=+0.084(+-0.019) | L2:n_minus_1_choose_k__within_applicable 0.029-0.022=+0.007(+-0.010) | L3:n_minus_1_choose_k__within_applicable 0.050-0.028=+0.022(+-0.013) | L4:n_minus_1_choose_k__within_applicable 0.053-0.007=+0.046(+-0.014) | L5:n_minus_1_choose_k__within_applicable 0.062-0.005=+0.057(+-0.015) | L6:n_minus_1_choose_k__within_applicable 0.051-0.016=+0.035(+-0.014)
+   n_minus_1_choose_k__within_applicable: +0.048 +0.084 +0.007 +0.022 +0.046 +0.057 +0.035
+   base: 0.021 0.017 0.022 0.028 0.007 0.005 0.016  echoed-anywhere: 0.00 0.01 0.00 0.01 0.00 0.00 0.01
+M1.change_ways_r2
+   best: L0:T_over_max_plus_1 0.113-0.072=+0.041(+-0.020) | L1:T_over_max_plus_1 0.070-0.050=+0.020(+-0.016) | L2:T_over_max_plus_1 0.036-0.021=+0.015(+-0.011) | L3:T_over_max_plus_1 0.024-0.020=+0.004(+-0.009) | L4:T_over_min_plus_1 0.021-0.028=-0.007(+-0.009) | L5:T_over_max_plus_1 0.009-0.006=+0.003(+-0.006) | L6:T_over_min_plus_1 0.012-0.006=+0.006(+-0.007)
+   T_over_min_plus_1: -0.050 -0.016 -0.009 -0.005 -0.007 +0.002 +0.006
+   base: 0.072 0.050 0.021 0.020 0.028 0.006 0.006  echoed-anywhere: 0.17 0.10 0.09 0.06 0.02 0.02 0.02
+M1.clock_duration
+   best: L0:echo_best_position 0.005-0.007=-0.002(+-0.004) | L1:echo_best_position 0.003-0.007=-0.004(+-0.003) | L2:echo_best_position 0.005-0.004=+0.001(+-0.004) | L3:echo_best_position 0.000-0.001=-0.001(+-0.002) | L4:echo_best_position 0.000-0.002=-0.002(+-0.002) | L5:echo_best_position 0.005-0.003=+0.002(+-0.004) | L6:echo_best_position 0.000-0.002=-0.002(+-0.002)
+   base: 0.007 0.007 0.004 0.001 0.002 0.003 0.002  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.coins
+   best: L0:value_over_high 0.235-0.067=+0.168(+-0.026) | L1:value_over_high 0.224-0.081=+0.143(+-0.026) | L2:value_over_high 0.173-0.049=+0.124(+-0.023) | L3:value_over_high 0.197-0.044=+0.153(+-0.025) | L4:value_over_high 0.169-0.038=+0.131(+-0.023) | L5:value_over_high 0.173-0.038=+0.135(+-0.023) | L6:value_over_high 0.148-0.031=+0.117(+-0.022)
+   half_count: +0.061 +0.029 +0.044 +0.046 +0.038 +0.035 +0.012
+   value_over_high: +0.168 +0.143 +0.124 +0.153 +0.131 +0.135 +0.117
+   base: 0.067 0.081 0.049 0.044 0.038 0.038 0.031  echoed-anywhere: 0.06 0.06 0.03 0.05 0.04 0.04 0.03
+M1.consecutive
+   best: L0:echo_best_position 0.009-0.003=+0.006(+-0.006) | L1:echo_best_position 0.004-0.002=+0.002(+-0.004) | L2:echo_best_position 0.004-0.002=+0.002(+-0.004) | L3:echo_best_position 0.002-0.001=+0.001(+-0.003) | L4:echo_best_position 0.002-0.000=+0.002(+-0.003) | L5:echo_best_position 0.003-0.001=+0.002(+-0.003) | L6:echo_best_position 0.000-0.002=-0.002(+-0.002)
+   base: 0.003 0.002 0.002 0.001 0.000 0.001 0.002  echoed-anywhere: 0.00 0.00 0.01 0.00 0.01 0.01 0.00
+M1.crt_congruence_r2
+   best: L0:largest_mod_remainder 0.124-0.007=+0.117(+-0.020) | L1:largest_mod_remainder 0.111-0.008=+0.103(+-0.019) | L2:largest_mod_remainder 0.098-0.010=+0.088(+-0.018) | L3:drop_last_condition 0.109-0.000=+0.109(+-0.019) | L4:drop_last_condition 0.100-0.002=+0.098(+-0.019) | L5:drop_last_condition 0.096-0.000=+0.096(+-0.018) | L6:drop_last_condition 0.081-0.000=+0.081(+-0.017)
+   drop_last_condition: +0.091 +0.084 +0.050 +0.109 +0.098 +0.096 +0.081
+   echo_best_position[last/last]:   -     -   +0.059   -     -     -     -  
+   echo_best_position[second/second]: +0.091 +0.084   -   +0.014   -     -     -  
+   largest_mod_remainder: +0.117 +0.103 +0.088 +0.018 +0.010 +0.000 +0.001
+   base: 0.007 0.008 0.010 0.000 0.002 0.000 0.000  echoed-anywhere: 0.12 0.11 0.10 0.02 0.01 0.00 0.00
+M1.digit_puzzle_r2
+   best: L0:echo_best_position 0.000-0.007=-0.007(+-0.002) | L1:echo_best_position 0.003-0.001=+0.002(+-0.003) | L2:echo_best_position 0.000-0.001=-0.001(+-0.002) | L3:echo_best_position 0.004-0.001=+0.003(+-0.004) | L4:echo_best_position 0.000-0.000=+0.000(+-0.002) | L5:echo_best_position 0.002-0.000=+0.002(+-0.003) | L6:echo_best_position 0.000-0.002=-0.002(+-0.002)
+   base: 0.007 0.001 0.001 0.001 0.000 0.000 0.002  echoed-anywhere: 0.01 0.00 0.00 0.00 0.00 0.00 0.00
+M1.division_counting_r2
+   best: L0:k_minus_remainder_ignores_exact_fit__within_applicable 0.937-0.135=+0.802(+-0.015) | L1:k_minus_remainder_ignores_exact_fit__within_applicable 0.931-0.109=+0.822(+-0.016) | L2:k_minus_remainder_ignores_exact_fit__within_applicable 0.952-0.122=+0.830(+-0.013) | L3:k_minus_remainder_ignores_exact_fit__within_applicable 0.946-0.095=+0.851(+-0.014) | L4:k_minus_remainder_ignores_exact_fit__within_applicable 0.966-0.075=+0.891(+-0.011) | L5:k_minus_remainder_ignores_exact_fit__within_applicable 0.954-0.095=+0.859(+-0.013) | L6:k_minus_remainder_ignores_exact_fit__within_applicable 0.938-0.070=+0.868(+-0.015)
+   ceil_boxes_mod_m: -0.071 -0.068 -0.067 -0.034 -0.017 -0.046 -0.026
+   echo_best_position[second/second]: -0.115 -0.096 -0.118 -0.078 -0.067 -0.087 -0.054
+   full_pallets: -0.124 -0.101 -0.111 -0.087 -0.063 -0.089 -0.060
+   full_pallets__within_applicable: -0.113 -0.092 -0.099 -0.079 -0.051 -0.083 -0.051
+   k_minus_remainder_ignores_exact_fit: +0.328 +0.379 +0.377 +0.382 +0.413 +0.386 +0.369
+   k_minus_remainder_ignores_exact_fit__within_applicable: +0.802 +0.822 +0.830 +0.851 +0.891 +0.859 +0.868
+   leftover_items: -0.064 -0.058 -0.080 -0.056 -0.045 -0.049 -0.042
+   remainder: -0.081 -0.060 -0.081 -0.049 -0.048 -0.058 -0.031
+   base: 0.135 0.109 0.122 0.095 0.075 0.095 0.070  echoed-anywhere: 0.02 0.01 0.00 0.02 0.01 0.01 0.02
+M1.finite_differences
+   best: L0:echo_best_position 0.000-0.006=-0.006(+-0.002) | L1:echo_best_position 0.000-0.009=-0.009(+-0.002) | L2:echo_best_position 0.000-0.003=-0.003(+-0.002) | L3:echo_best_position 0.000-0.000=+0.000(+-0.002) | L4:echo_best_position 0.000-0.001=-0.001(+-0.002) | L5:echo_best_position 0.000-0.000=+0.000(+-0.002) | L6:echo_best_position 0.000-0.000=+0.000(+-0.002)
+   base: 0.006 0.009 0.003 0.000 0.001 0.000 0.000  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.fraction_remainder
+   best: L0:both_of_original 0.000-0.030=-0.030(+-0.002) | L1:both_of_original 0.000-0.022=-0.022(+-0.002) | L2:both_of_original 0.000-0.031=-0.031(+-0.002) | L3:both_of_original 0.000-0.014=-0.014(+-0.002) | L4:both_of_original 0.000-0.023=-0.023(+-0.002) | L5:both_of_original 0.000-0.008=-0.008(+-0.002) | L6:both_of_original 0.000-0.009=-0.009(+-0.002)
+   base: 0.030 0.022 0.031 0.014 0.023 0.008 0.009  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.gcd_lcm_r2
+   best: L0:min_difference__within_applicable 0.167-0.017=+0.150(+-0.023) | L1:min_difference__within_applicable 0.149-0.011=+0.138(+-0.022) | L2:min_difference__within_applicable 0.116-0.008=+0.108(+-0.020) | L3:gcd_of_two_smallest__within_applicable 0.768-0.013=+0.755(+-0.026) | L4:gcd_of_two_smallest__within_applicable 0.748-0.006=+0.742(+-0.027) | L5:gcd_of_two_smallest__within_applicable 0.700-0.010=+0.690(+-0.028) | L6:gcd_of_two_smallest__within_applicable 0.668-0.010=+0.658(+-0.029)
+   gcd_of_two_smallest: -0.017 -0.011 -0.008 +0.377 +0.351 +0.326 +0.322
+   gcd_of_two_smallest__within_applicable: -0.017 -0.011 -0.008 +0.755 +0.742 +0.690 +0.658
+   lcm_of_two_largest: -0.017 -0.011 -0.008 +0.088 +0.093 +0.011 +0.006
+   lcm_of_two_largest__within_applicable: -0.017 -0.011 -0.008 +0.192 +0.183 +0.030 +0.022
+   max_value__within_applicable: +0.089 +0.051 +0.073 -0.005 +0.002 -0.010 -0.010
+   min_difference: +0.062 +0.063 +0.052 +0.046 +0.062 +0.061 +0.063
+   min_difference__within_applicable: +0.150 +0.138 +0.108 +0.103 +0.137 +0.138 +0.137
+   min_value__within_applicable: +0.097 +0.082 +0.075 +0.013 +0.019 -0.006 -0.002
+   base: 0.017 0.011 0.008 0.013 0.006 0.010 0.010  echoed-anywhere: 0.12 0.09 0.09 0.03 0.03 0.01 0.02
+M1.grid_perimeter_r2
+   best: L0:bbox_plus_4 0.178-0.223=-0.045(+-0.024) | L1:horizontal_only 0.017-0.235=-0.218(+-0.008) | L2:horizontal_only 0.006-0.187=-0.181(+-0.005) | L3:horizontal_only 0.001-0.192=-0.191(+-0.002) | L4:horizontal_only 0.002-0.176=-0.174(+-0.003) | L5:bbox 0.000-0.141=-0.141(+-0.002) | L6:bbox 0.000-0.128=-0.128(+-0.002)
+   bbox: -0.215 -0.235 -0.187 -0.192 -0.176 -0.141 -0.128
+   bbox_plus_4: -0.045 -0.220 -0.187 -0.192 -0.176 -0.141 -0.128
+   echo_best_position[first/first]: -0.223 -0.235 -0.187 -0.192 -0.176 -0.141 -0.128
+   four_n: -0.221 -0.235 -0.186 -0.192 -0.176 -0.141 -0.128
+   horizontal_only: -0.169 -0.218 -0.181 -0.191 -0.174 -0.141 -0.128
+   two_n_plus_2: -0.213 -0.226 -0.184 -0.192 -0.175 -0.141 -0.128
+   base: 0.223 0.235 0.187 0.192 0.176 0.141 0.128  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.inclusion_exclusion_r2
+   best: L0:echo_best_position 0.050-0.074=-0.024(+-0.013) | L1:echo_best_position 0.027-0.045=-0.018(+-0.010) | L2:echo_best_position 0.018-0.025=-0.007(+-0.008) | L3:echo_best_position 0.022-0.014=+0.008(+-0.009) | L4:echo_best_position 0.006-0.016=-0.010(+-0.005) | L5:echo_best_position 0.008-0.006=+0.002(+-0.005) | L6:echo_best_position 0.005-0.010=-0.005(+-0.004)
+   any_ignore_overlap: -0.074 -0.045 -0.025   -     -     -     -  
+   any_ignore_overlap__within_applicable: -0.074 -0.045 -0.025   -     -     -     -  
+   max_size: -0.061 -0.035 -0.017 -0.014 -0.016 -0.004 -0.009
+   none_ignore_overlap: -0.074 -0.045 -0.025   -     -     -     -  
+   none_ignore_overlap__within_applicable: -0.074 -0.045 -0.025   -     -     -     -  
+   base: 0.074 0.045 0.025 0.014 0.016 0.006 0.010  echoed-anywhere: 0.11 0.06 0.04 0.05 0.03 0.05 0.05
+M1.linear_equation
+   best: L0:echo_best_position 0.016-0.018=-0.002(+-0.008) | L1:ignore_constant 0.009-0.009=-0.000(+-0.006) | L2:ignore_constant 0.011-0.010=+0.001(+-0.006) | L3:sign_error 0.008-0.007=+0.001(+-0.005) | L4:echo_best_position 0.011-0.009=+0.002(+-0.006) | L5:echo_best_position 0.015-0.003=+0.012(+-0.007) | L6:echo_best_position 0.004-0.002=+0.002(+-0.004)
+   base: 0.018 0.009 0.010 0.007 0.009 0.003 0.002  echoed-anywhere: 0.03 0.02 0.02 0.03 0.02 0.02 0.01
+M1.median_list_r2
+   best: L0:mode_value 0.210-0.055=+0.155(+-0.025) | L1:mode_value 0.114-0.029=+0.085(+-0.020) | L2:mode_value 0.115-0.020=+0.095(+-0.020) | L3:mode_value 0.100-0.015=+0.085(+-0.019) | L4:mode_value 0.102-0.008=+0.094(+-0.019) | L5:mode_value 0.071-0.018=+0.053(+-0.016) | L6:mode_value 0.071-0.013=+0.058(+-0.016)
+   echo_best_position[last/first]: +0.052   -   +0.048   -   +0.043   -     -  
+   echo_best_position[second/second]:   -   +0.056   -     -     -   +0.034   -  
+   lower_middle__within_applicable: +0.052 +0.052 +0.072 +0.052 +0.068 +0.032 +0.035
+   mean_rounded: +0.077 +0.027 +0.032 +0.019 +0.033 +0.016 +0.015
+   mode_value: +0.155 +0.085 +0.095 +0.085 +0.094 +0.053 +0.058
+   unsorted_middle: +0.050 +0.041 +0.053 +0.036 +0.042 +0.034 +0.034
+   base: 0.055 0.029 0.020 0.015 0.008 0.018 0.013  echoed-anywhere: 0.57 0.46 0.54 0.46 0.55 0.48 0.52
+M1.min_cost_packs_r2
+   best: L0:relaxation_ceil 0.684-0.012=+0.672(+-0.029) | L1:relaxation_ceil 0.619-0.005=+0.614(+-0.030) | L2:relaxation_ceil 0.623-0.006=+0.617(+-0.030) | L3:relaxation_ceil 0.577-0.004=+0.573(+-0.031) | L4:relaxation_ceil 0.549-0.003=+0.546(+-0.031) | L5:relaxation_ceil 0.600-0.002=+0.598(+-0.030) | L6:relaxation_ceil 0.595-0.001=+0.594(+-0.030)
+   relaxation_ceil: +0.672 +0.614 +0.617 +0.573 +0.546 +0.598 +0.594
+   base: 0.012 0.005 0.006 0.004 0.003 0.002 0.001  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.mixture
+   best: L0:unweighted_mean 0.292-0.023=+0.269(+-0.028) | L1:unweighted_mean 0.292-0.025=+0.267(+-0.028) | L2:unweighted_mean 0.292-0.012=+0.280(+-0.028) | L3:unweighted_mean 0.274-0.017=+0.257(+-0.028) | L4:unweighted_mean 0.292-0.015=+0.277(+-0.028) | L5:unweighted_mean 0.262-0.024=+0.238(+-0.027) | L6:unweighted_mean 0.280-0.031=+0.249(+-0.028)
+   echo_best_position[second/second]: +0.053 +0.047   -     -     -     -     -  
+   unweighted_mean: +0.269 +0.267 +0.280 +0.257 +0.277 +0.238 +0.249
+   base: 0.023 0.025 0.012 0.017 0.015 0.024 0.031  echoed-anywhere: 0.08 0.08 0.08 0.06 0.05 0.05 0.06
+M1.mode_tally_r2
+   best: L0:ceil_n_over_distinct_plus_1__within_applicable 0.541-0.146=+0.395(+-0.031) | L1:ceil_n_over_distinct_plus_1__within_applicable 0.398-0.104=+0.294(+-0.030) | L2:ceil_n_over_distinct_plus_1__within_applicable 0.370-0.104=+0.267(+-0.030) | L3:most_common_first_half__within_applicable 0.345-0.070=+0.275(+-0.029) | L4:most_common_first_half__within_applicable 0.355-0.072=+0.283(+-0.030) | L5:most_common_first_half__within_applicable 0.327-0.060=+0.267(+-0.029) | L6:most_common_first_half__within_applicable 0.346-0.077=+0.269(+-0.029)
+   ceil_n_over_distinct_plus_1: +0.142 +0.088 +0.082 +0.056 +0.046 +0.049 -0.008
+   ceil_n_over_distinct_plus_1__within_applicable: +0.395 +0.294 +0.267 +0.190 +0.161 +0.159 +0.073
+   echo_best_position[last/second_last]: -0.054   -     -     -     -     -   +0.014
+   first_repeated: +0.010 +0.058 +0.043 +0.082 +0.050 +0.067 +0.055
+   first_repeated__within_applicable: +0.187 +0.209 +0.191 +0.225 +0.175 +0.193 +0.167
+   first_value: -0.057 -0.011 -0.010 +0.021 +0.022 +0.005 -0.004
+   first_value__within_applicable: +0.044 +0.075 +0.085 +0.106 +0.119 +0.070 +0.058
+   last_value: -0.062 -0.017 -0.027 +0.024 +0.013 +0.001 +0.012
+   last_value__within_applicable: +0.034 +0.064 +0.051 +0.112 +0.100 +0.061 +0.087
+   max_count_first_half_x2: -0.050 -0.032 -0.005 -0.001 +0.002 +0.001 -0.008
+   max_count_first_half_x2__within_applicable: +0.035 +0.045 +0.093 +0.073 +0.074 +0.062 +0.073
+   most_common_first_half: +0.019 +0.087 +0.065 +0.108 +0.103 +0.104 +0.110
+   most_common_first_half__within_applicable: +0.207 +0.265 +0.235 +0.275 +0.283 +0.267 +0.269
+   base: 0.146 0.104 0.104 0.070 0.072 0.060 0.077  echoed-anywhere: 0.64 0.64 0.63 0.60 0.59 0.59 0.63
+M1.painted_cube_r2
+   best: L0:ignore_bottom_rule_ONLY_on_unpainted_bottom_items__within_applicable 0.006-0.002=+0.004(+-0.005) | L1:ignore_bottom_rule_ONLY_on_unpainted_bottom_items__within_applicable 0.004-0.005=-0.001(+-0.004) | L2:echo_best_position 0.000-0.004=-0.004(+-0.002) | L3:echo_best_position 0.000-0.001=-0.001(+-0.002) | L4:ignore_bottom_rule_ONLY_on_unpainted_bottom_items__within_applicable 0.002-0.005=-0.003(+-0.003) | L5:ignore_bottom_rule_ONLY_on_unpainted_bottom_items__within_applicable 0.004-0.005=-0.001(+-0.004) | L6:echo_best_position 0.000-0.005=-0.005(+-0.002)
+   base: 0.002 0.005 0.004 0.001 0.005 0.005 0.005  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.percent_change
+   best: L0:echo_best_position 0.027-0.002=+0.025(+-0.010) | L1:echo_best_position 0.024-0.003=+0.021(+-0.009) | L2:echo_best_position 0.032-0.003=+0.029(+-0.011) | L3:additive_percents 0.022-0.001=+0.021(+-0.009) | L4:additive_percents 0.020-0.001=+0.019(+-0.009) | L5:additive_percents 0.016-0.001=+0.015(+-0.008) | L6:additive_percents 0.016-0.000=+0.016(+-0.008)
+   base: 0.002 0.003 0.003 0.001 0.001 0.001 0.000  echoed-anywhere: 0.03 0.02 0.03 0.00 0.00 0.00 0.00
+M1.pigeonhole_worst_case_r2
+   best: L0:ignore_caps__within_applicable 0.359-0.024=+0.335(+-0.030) | L1:ignore_caps__within_applicable 0.363-0.019=+0.344(+-0.030) | L2:ignore_caps__within_applicable 0.263-0.010=+0.253(+-0.027) | L3:ignore_caps__within_applicable 0.299-0.011=+0.288(+-0.028) | L4:ignore_caps__within_applicable 0.220-0.007=+0.213(+-0.026) | L5:ignore_caps__within_applicable 0.240-0.009=+0.231(+-0.026) | L6:ignore_caps__within_applicable 0.222-0.005=+0.217(+-0.026)
+   ignore_caps: +0.163 +0.175 +0.127 +0.144 +0.100 +0.108 +0.105
+   ignore_caps__within_applicable: +0.335 +0.344 +0.253 +0.288 +0.213 +0.231 +0.217
+   base: 0.024 0.019 0.010 0.011 0.007 0.009 0.005  echoed-anywhere: 0.02 0.01 0.01 0.02 0.01 0.01 0.00
+M1.pipes_work
+   best: L0:echo_best_position 0.039-0.049=-0.010(+-0.012) | L1:echo_best_position 0.053-0.049=+0.004(+-0.014) | L2:echo_best_position 0.039-0.033=+0.006(+-0.012) | L3:one_pipe 0.089-0.037=+0.052(+-0.018) | L4:echo_best_position 0.094-0.026=+0.068(+-0.018) | L5:echo_best_position 0.096-0.039=+0.057(+-0.018) | L6:echo_best_position 0.089-0.019=+0.070(+-0.018)
+   echo_best_position[last/last]:   -     -     -   +0.037 +0.068 +0.057 +0.070
+   one_pipe: -0.049 -0.049 -0.033 +0.052 +0.058 +0.039 +0.040
+   base: 0.049 0.049 0.033 0.037 0.026 0.039 0.019  echoed-anywhere: 0.08 0.08 0.06 0.14 0.14 0.14 0.13
+M1.power_remainder_r2
+   best: L0:fermat_misapplied_e_mod_p_plus_1 0.251-0.151=+0.100(+-0.027) | L1:fermat_misapplied_e_mod_p_plus_1 0.227-0.162=+0.065(+-0.026) | L2:fermat_misapplied_e_mod_p_plus_1 0.115-0.040=+0.075(+-0.020) | L3:exp_last_digit 0.130-0.050=+0.080(+-0.021) | L4:fermat_misapplied_e_mod_p_plus_1 0.105-0.056=+0.049(+-0.019) | L5:exp_last_digit 0.089-0.058=+0.031(+-0.018) | L6:exp_last_digit 0.095-0.050=+0.045(+-0.018)
+   echo_best_position[second/second]: -0.132 -0.139   -     -     -     -     -  
+   exp_last_digit: +0.079 +0.062 +0.064 +0.080 +0.042 +0.031 +0.045
+   fermat_misapplied_e_mod_p_plus_1: +0.100 +0.065 +0.075 +0.064 +0.049 +0.021 +0.033
+   base: 0.151 0.162 0.040 0.050 0.056 0.058 0.050  echoed-anywhere: 0.02 0.02 0.01 0.01 0.01 0.02 0.02
+M1.prime_factors_r2
+   best: L0:largest_le_sqrt__within_applicable 0.711-0.098=+0.613(+-0.028) | L1:largest_le_sqrt__within_applicable 0.747-0.103=+0.644(+-0.027) | L2:largest_le_sqrt__within_applicable 0.849-0.109=+0.740(+-0.022) | L3:largest_le_sqrt__within_applicable 0.979-0.080=+0.899(+-0.009) | L4:largest_le_sqrt__within_applicable 0.992-0.050=+0.942(+-0.006) | L5:largest_le_sqrt__within_applicable 0.996-0.042=+0.954(+-0.004) | L6:largest_le_sqrt__within_applicable 1.000-0.045=+0.955(+-0.002)
+   distinct_count: -0.027 -0.049 -0.080 -0.046 -0.031 -0.034 -0.036
+   distinct_count__within_applicable: +0.187 +0.113 +0.025 +0.042 +0.025 -0.008 -0.005
+   echo_best_position[last/last]: +0.015 +0.001 -0.064 -0.053 -0.035 -0.035 -0.039
+   largest_le_sqrt: +0.069 +0.077 +0.116 +0.157 +0.186 +0.202 +0.229
+   largest_le_sqrt__within_applicable: +0.613 +0.644 +0.740 +0.899 +0.942 +0.954 +0.955
+   omega_plus_one: -0.098 -0.103 -0.109 -0.080 -0.050 -0.042 -0.045
+   omega_plus_one__within_applicable: -0.098 -0.103 -0.109 -0.080 -0.050 -0.042 -0.045
+   smallest_prime: -0.098 -0.103 -0.109 -0.080 -0.050 -0.042 -0.045
+   smallest_prime__within_applicable: -0.098 -0.103 -0.109 -0.080 -0.050 -0.042 -0.045
+   sum_with_multiplicity: -0.021 -0.032 -0.066 -0.059 -0.033 -0.029 -0.038
+   sum_with_multiplicity__within_applicable: +0.205 +0.165 +0.056 +0.007 +0.018 +0.008 -0.017
+   two_pow_distinct: -0.026 -0.049 -0.076 -0.053 -0.029 -0.033 -0.040
+   two_pow_distinct__within_applicable: +0.177 +0.118 +0.019 +0.033 +0.031 -0.007 -0.025
+   base: 0.098 0.103 0.109 0.080 0.050 0.042 0.045  echoed-anywhere: 0.16 0.15 0.07 0.03 0.02 0.01 0.01
+M1.pythagoras_r2
+   best: L0:memorised_small_triple__within_applicable 1.000-0.013=+0.987(+-0.002) | L1:memorised_small_triple__within_applicable 1.000-0.002=+0.998(+-0.002) | L2:memorised_small_triple__within_applicable 1.000-0.001=+0.999(+-0.002) | L3:memorised_small_triple__within_applicable 1.000-0.000=+1.000(+-0.002) | L4:memorised_small_triple__within_applicable 1.000-0.003=+0.997(+-0.002) | L5:memorised_small_triple__within_applicable 1.000-0.000=+1.000(+-0.002) | L6:memorised_small_triple__within_applicable 1.000-0.002=+0.998(+-0.002)
+   avg__within_applicable: +0.096 +0.098 +0.091 +0.086 +0.084 +0.103 +0.081
+   memorised_small_triple: +0.499 +0.407 +0.399 +0.387 +0.356 +0.395 +0.371
+   memorised_small_triple__within_applicable: +0.987 +0.998 +0.999 +1.000 +0.997 +1.000 +0.998
+   base: 0.013 0.002 0.001 0.000 0.003 0.000 0.002  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.quadratic_area
+   best: L0:echo_best_position 0.043-0.023=+0.020(+-0.013) | L1:echo_best_position 0.024-0.022=+0.002(+-0.009) | L2:echo_best_position 0.015-0.018=-0.003(+-0.007) | L3:echo_best_position 0.014-0.018=-0.004(+-0.007) | L4:echo_best_position 0.011-0.012=-0.001(+-0.006) | L5:echo_best_position 0.012-0.010=+0.002(+-0.007) | L6:echo_best_position 0.014-0.012=+0.002(+-0.007)
+   base: 0.023 0.022 0.018 0.018 0.012 0.010 0.012  echoed-anywhere: 0.04 0.02 0.01 0.01 0.01 0.01 0.01
+M1.ratio_share
+   best: L0:largest_share 0.575-0.027=+0.548(+-0.031) | L1:largest_share 0.586-0.015=+0.571(+-0.030) | L2:largest_share 0.434-0.014=+0.420(+-0.031) | L3:largest_share 0.378-0.020=+0.358(+-0.030) | L4:largest_share 0.295-0.009=+0.286(+-0.028) | L5:largest_share 0.283-0.016=+0.267(+-0.028) | L6:largest_share 0.315-0.009=+0.306(+-0.029)
+   equal_split: +0.147 +0.163 +0.061 +0.038 +0.020 +0.015 +0.015
+   largest_share: +0.548 +0.571 +0.420 +0.358 +0.286 +0.267 +0.306
+   base: 0.027 0.015 0.014 0.020 0.009 0.016 0.009  echoed-anywhere: 0.02 0.01 0.01 0.01 0.01 0.00 0.01
+M1.rectangle
+   best: L0:echo_best_position 0.021-0.010=+0.011(+-0.009) | L1:echo_best_position 0.020-0.011=+0.009(+-0.009) | L2:echo_best_position 0.005-0.009=-0.004(+-0.004) | L3:echo_best_position 0.009-0.014=-0.005(+-0.006) | L4:echo_best_position 0.003-0.006=-0.003(+-0.003) | L5:echo_best_position 0.004-0.003=+0.001(+-0.004) | L6:echo_best_position 0.003-0.008=-0.005(+-0.003)
+   base: 0.010 0.011 0.009 0.014 0.006 0.003 0.008  echoed-anywhere: 0.02 0.02 0.01 0.01 0.01 0.00 0.00
+M1.recurrence_iterate
+   best: L0:echo_best_position 0.005-0.005=+0.000(+-0.004) | L1:echo_best_position 0.005-0.000=+0.005(+-0.004) | L2:echo_best_position 0.001-0.005=-0.004(+-0.002) | L3:echo_best_position 0.002-0.004=-0.002(+-0.003) | L4:echo_best_position 0.002-0.001=+0.001(+-0.003) | L5:echo_best_position 0.004-0.001=+0.003(+-0.004) | L6:echo_best_position 0.001-0.000=+0.001(+-0.002)
+   base: 0.005 0.000 0.005 0.004 0.001 0.001 0.000  echoed-anywhere: 0.01 0.01 0.00 0.00 0.00 0.00 0.00
+M1.shopping
+   best: L0:ignore_counts 0.039-0.000=+0.039(+-0.012) | L1:ignore_counts 0.001-0.001=+0.000(+-0.002) | L2:echo_best_position 0.000-0.001=-0.001(+-0.002) | L3:echo_best_position 0.002-0.001=+0.001(+-0.003) | L4:echo_best_position 0.003-0.005=-0.002(+-0.003) | L5:echo_best_position 0.004-0.004=+0.000(+-0.004) | L6:echo_best_position 0.002-0.004=-0.002(+-0.003)
+   base: 0.000 0.001 0.001 0.001 0.005 0.004 0.004  echoed-anywhere: 0.00 0.00 0.01 0.02 0.02 0.03 0.03
+M1.slot_permutations_r2
+   best: L0:parity_fraction_of_total 0.650-0.054=+0.596(+-0.030) | L1:parity_fraction_of_total 0.665-0.055=+0.610(+-0.029) | L2:parity_fraction_of_total 0.668-0.028=+0.640(+-0.029) | L3:parity_fraction_of_total 0.646-0.042=+0.604(+-0.030) | L4:parity_fraction_of_total 0.635-0.053=+0.582(+-0.030) | L5:parity_fraction_of_total 0.624-0.049=+0.575(+-0.030) | L6:parity_fraction_of_total 0.615-0.029=+0.586(+-0.030)
+   echo_best_position[last/last]:   -   -0.052 -0.023   -     -     -     -  
+   echo_best_position[max/last]: -0.052   -     -     -     -     -     -  
+   echo_best_position[sum/last]:   -     -     -     -   -0.053   -     -  
+   ignore_all_restrictions: -0.053 -0.054 -0.028 -0.041 -0.053 -0.049 -0.029
+   ignore_lead_rule: -0.053 -0.055 -0.027 -0.040 -0.052 -0.046 -0.027
+   ignore_lead_rule__within_applicable: -0.051 -0.055 -0.025 -0.036 -0.050 -0.041 -0.024
+   parity_fraction_of_total: +0.596 +0.610 +0.640 +0.604 +0.582 +0.575 +0.586
+   swap_repeat_rule: -0.052 -0.055 -0.027 -0.039 -0.052 -0.047 -0.029
+   base: 0.054 0.055 0.028 0.042 0.053 0.049 0.029  echoed-anywhere: 0.00 0.00 0.01 0.00 0.00 0.00 0.00
+M1.speed_distance
+   best: L0:sum_speeds_x_mean_hours 0.211-0.004=+0.207(+-0.025) | L1:sum_speeds_x_mean_hours 0.179-0.009=+0.170(+-0.024) | L2:sum_speeds_x_mean_hours__within_applicable 0.027-0.002=+0.025(+-0.010) | L3:mean_of_speeds__within_applicable 0.038-0.000=+0.038(+-0.012) | L4:last_speed__within_applicable 0.008-0.003=+0.005(+-0.005) | L5:mean_of_speeds__within_applicable 0.032-0.000=+0.032(+-0.011) | L6:sum_speeds_x_mean_hours__within_applicable 0.002-0.000=+0.002(+-0.003)
+   sum_speeds_x_mean_hours: +0.207 +0.170 +0.020 +0.020 -0.001 +0.002 +0.002
+   base: 0.004 0.009 0.002 0.000 0.003 0.000 0.000  echoed-anywhere: 0.00 0.00 0.01 0.01 0.00 0.00 0.00
+M1.tiered_pricing
+   best: L0:echo_best_position 0.002-0.000=+0.002(+-0.003) | L1:echo_best_position 0.003-0.001=+0.002(+-0.003) | L2:all_at_first_rate 0.000-0.000=+0.000(+-0.002) | L3:echo_best_position 0.001-0.005=-0.004(+-0.002) | L4:all_at_first_rate 0.000-0.005=-0.005(+-0.002) | L5:all_at_first_rate 0.000-0.002=-0.002(+-0.002) | L6:all_at_first_rate 0.000-0.004=-0.004(+-0.002)
+   base: 0.000 0.001 0.000 0.005 0.005 0.002 0.004  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+M1.tip_split
+   best: L0:echo_best_position 0.000-0.009=-0.009(+-0.002) | L1:echo_best_position 0.000-0.008=-0.008(+-0.002) | L2:echo_best_position 0.002-0.010=-0.008(+-0.003) | L3:echo_best_position 0.004-0.004=+0.000(+-0.004) | L4:echo_best_position 0.003-0.004=-0.001(+-0.003) | L5:echo_best_position 0.005-0.004=+0.001(+-0.004) | L6:echo_best_position 0.000-0.006=-0.006(+-0.002)
+   base: 0.009 0.008 0.010 0.004 0.004 0.004 0.006  echoed-anywhere: 0.00 0.00 0.00 0.00 0.00 0.01 0.00

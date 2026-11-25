@@ -1,0 +1,14 @@
+current  PASS test_mention_counts_see_a_possessive
+current  PASS test_numbers_are_signed_and_structure_counts_are_not_numbers
+current  PASS test_per_level_reporting
+current  PASS test_possessive_form_of_the_answer_is_the_answer
+current  PASS test_possessive_only_answer_counts_in_the_longest_job_reading
+current  PASS test_stated_pair_reads_the_direction_in_which_it_is_stated
+current  PASS test_stated_pair_symmetric_relation_is_unchanged
+9e32b317 FAIL test_mention_counts_see_a_possessive: AssertionError: 
+9e32b317 FAIL test_numbers_are_signed_and_structure_counts_are_not_numbers: AssertionError: 
+9e32b317 FAIL test_per_level_reporting: AssertionError: 
+9e32b317 FAIL test_possessive_form_of_the_answer_is_the_answer: AssertionError: 
+9e32b317 FAIL test_possessive_only_answer_counts_in_the_longest_job_reading: AssertionError: {'heuristic': 'longest_job', 'accuracy': 0.0842, 'excess_over_chance': -0.0927, 'fires': 825, 'accuracy_when_fires': 0.0061, 'worst_level': 5, 'worst_level_exce
+9e32b317 FAIL test_stated_pair_reads_the_direction_in_which_it_is_stated: AssertionError: 
+9e32b317 PASS test_stated_pair_symmetric_relation_is_unchanged

@@ -1,0 +1,145 @@
+R2.binary_search_trace
+   [third] third = list value nearest the target (ties low): acc L0..L6 = 0.36 0.26 0.16 0.13 0.12 0.08 0.07  (max effect +0.36)
+   [third] third = value at the 1/8 or 7/8 position on the target's side: acc L0..L6 = 0.26 0.21 0.32 0.22 0.23 0.32 0.24  (max effect +0.32)
+   [third] third: midpoint rounded UP: acc L0..L6 = 0.00 0.00 0.36 0.00 0.00 0.39 0.00  (max effect +0.39)
+   [values] values: midpoint rounded UP: acc L0..L6 = 0.00 0.00 0.31 0.00 0.00 0.04 0.00  (max effect +0.31)
+R2.bracket_match
+   [valid] yes share 0.50 0.47 0.50 0.49 0.49 0.48 0.50
+   [match] match: last_same: acc L0..L6 = 0.51 0.50 0.41 0.40 0.40 0.31 0.32  (max effect +0.51)
+   [match] match: next_same: acc L0..L6 = 0.45 0.39 0.40 0.41 0.38 0.38 0.37  (max effect +0.45)
+   [match] match: next_same_after_content: acc L0..L6 = 0.45 0.39 0.40 0.41 0.38 0.38 0.37  (max effect +0.45)
+   [match] match: second_same: acc L0..L6 = 0.42 0.41 0.39 0.41 0.36 0.37 0.35  (max effect +0.42)
+   [match] most frequent answer (train draw): acc L0..L6 = 0.25 0.23 0.18 0.17 0.17 0.12 0.13  (max effect +0.25)
+   [valid] valid: depth profile ignoring kinds + the closer at each depth return matches the most recent opener at that depth (kinds only): acc L0..L6 = 0.84 0.80 0.81 0.81 0.80 0.80 0.79  (max effect +0.34)
+   [valid] valid: each kind balanced on its own (depth never negative): acc L0..L6 = 0.66 0.65 0.68 0.71 0.68 0.71 0.73  (max effect +0.23)
+R2.bst_traversal
+   [level] (P) other walk kind (pre<->level): acc L0..L6 = 0.36 0.25 0.15 0.07 0.03 0.02 0.00  (max effect +0.36)
+   [post] reverse insertion order: acc L0..L6 = 0.33 0.18 0.08 0.05 0.00 0.00 0.00  (max effect +0.33)
+   [pre] (P) other walk kind (pre<->level): acc L0..L6 = 0.41 0.21 0.13 0.04 0.03 0.02 0.00  (max effect +0.41)
+R2.cache_eviction
+   [fifo/present] yes share 0.49 0.52 0.51 0.50 0.51 0.51 0.51
+   [fifo/misses] misses: (P) the other policy: acc L0..L6 = 0.60 0.54 0.53 0.42 0.45 0.43 0.43  (max effect +0.60)
+   [fifo/misses] misses: requests not among the previous cap requests: acc L0..L6 = 0.43 0.31 0.41 0.30 0.34 0.29 0.33  (max effect +0.43)
+   [fifo/misses] most frequent answer (train draw): acc L0..L6 = 0.22 0.20 0.21 0.17 0.18 0.13 0.14  (max effect +0.22)
+   [fifo/present] present: among the last cap DISTINCT requests (LRU answer): acc L0..L6 = 0.90 0.90 0.91 0.88 0.90 0.88 0.89  (max effect +0.41)
+   [fifo/present] present: in the last cap requests: acc L0..L6 = 0.86 0.86 0.86 0.85 0.86 0.86 0.85  (max effect +0.36)
+   [fifo/present] present: requested in the second half: acc L0..L6 = 0.76 0.71 0.67 0.68 0.66 0.67 0.68  (max effect +0.26)
+   [lru/misses] misses: (P) the other policy: acc L0..L6 = 0.58 0.47 0.51 0.46 0.48 0.46 0.42  (max effect +0.58)
+   [lru/misses] misses: requests not among the previous cap requests: acc L0..L6 = 0.50 0.44 0.48 0.37 0.46 0.37 0.39  (max effect +0.50)
+   [lru/misses] most frequent answer (train draw): acc L0..L6 = 0.23 0.21 0.17 0.20 0.15 0.14 0.12  (max effect +0.23)
+R2.cellular_automaton
+   [count] (P) periodic boundary: acc L0..L6 = 0.56 0.57 0.52 0.52 0.44 0.42 0.35  (max effect +0.57)
+   [count] most frequent answer (train draw): acc L0..L6 = 0.24 0.22 0.16 0.12 0.10 0.09 0.07  (max effect +0.24)
+   [count] one step only: acc L0..L6 =   -     -   0.38 0.34 0.30 0.28 0.22  (max effect +0.38)
+   [count] row: neighbour order reversed (right,cell,left): acc L0..L6 = 0.74 0.75 0.57 0.62 0.54 0.57 0.51  (max effect +0.75)
+   [row] (P) periodic boundary: acc L0..L6 = 0.55 0.55 0.45 0.41 0.30 0.34 0.27  (max effect +0.55)
+   [row] row: neighbour order reversed (right,cell,left): acc L0..L6 = 0.25 0.25 0.22 0.22 0.20 0.22 0.22  (max effect +0.25)
+R2.cheapest_network
+   [-] cheap cables (<=6) minus the dearest of each triangle + the (g-1) cheapest dear cables: acc L0..L6 = 1.00 1.00 1.00 0.74 0.75 0.76 0.58  (max effect +1.00)
+R2.chip_toppling
+   [topplings] closed form: Green's function with the conservation final row: acc L0..L6 = 0.99 0.98 0.99 1.00 1.00 1.00 1.00  (max effect +1.00)
+   [topplings_of] closed form: Green's function with the conservation final row: acc L0..L6 = 0.99 0.98 0.99 0.99 1.00 1.00 1.00  (max effect +1.00)
+R2.coin_change_min
+   [ways] constant 1: acc L0..L6 = 0.20 0.25 0.25 0.12 0.14 0.15 0.15  (max effect +0.25)
+   [ways] constant 2: acc L0..L6 = 0.19 0.19 0.21 0.12 0.11 0.12 0.13  (max effect +0.21)
+   [ways] most frequent answer (train draw): acc L0..L6 = 0.19 0.25 0.25 0.12 0.14 0.15 0.15  (max effect +0.25)
+R2.count_divisible
+   [-] >= t instead of > t: acc L0..L6 = 0.99 0.98 0.99 0.98 0.99 0.99 0.99  (max effect +0.99)
+   [-] constant 0: acc L0..L6 = 0.47 0.30 0.17 0.11 0.06 0.04 0.03  (max effect +0.47)
+   [-] ignore 'greater than t': acc L0..L6 = 0.74 0.65 0.73 0.69 0.74 0.71 0.74  (max effect +0.74)
+   [-] most frequent answer (train draw): acc L0..L6 = 0.47 0.31 0.23 0.22 0.19 0.17 0.16  (max effect +0.47)
+R2.count_letter
+   [-] most frequent answer (train draw): acc L0..L6 = 0.59 0.40 0.29 0.22 0.19 0.17 0.16  (max effect +0.59)
+   [-] words containing the letter: acc L0..L6 = 0.88 0.84 0.81 0.78 0.73 0.73 0.69  (max effect +0.88)
+R2.digit_root
+   [-] (P) n mod 9 with 0 -> 9 (casting out nines): acc L0..L6 = 1.00 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+R2.expression_eval
+   [left_to_right] LTR item: usual precedence (ignore the stated rule): acc L0..L6 = 0.73 0.64 0.58 0.51 0.41 0.34 0.32  (max effect +0.73)
+   [left_to_right] LTR: usual precedence inside parentheses only (old ambiguity): acc L0..L6 = 0.79 0.69 0.60 0.55 0.47 0.38 0.34  (max effect +0.79)
+   [left_to_right] ignore parentheses, stated rule: acc L0..L6 = 0.33 0.19 0.11 0.06 0.02 0.01 0.01  (max effect +0.33)
+   [left_to_right] ignore parentheses, usual precedence: acc L0..L6 = 0.35 0.24 0.16 0.11 0.06 0.04 0.02  (max effect +0.35)
+   [ranked] ignore parentheses, stated rule: acc L0..L6 = 0.37 0.23 0.14 0.11 0.04 0.03 0.02  (max effect +0.37)
+   [ranked] ignore parentheses, usual precedence: acc L0..L6 = 0.37 0.23 0.14 0.11 0.04 0.03 0.02  (max effect +0.37)
+   [ranked] ranked item: strict left to right (ignore precedence): acc L0..L6 = 0.79 0.71 0.66 0.59 0.53 0.45 0.40  (max effect +0.79)
+   [ranked] ranked: + before - (old 'same symbol' reading): acc L0..L6 = 0.88 0.84 0.81 0.76 0.72 0.71 0.67  (max effect +0.88)
+R2.gcd_euclid
+   [gcd] gcd: largest prime factor of b: acc L0..L6 = 0.88 0.88 0.86 0.79 0.80 0.77 0.77  (max effect +0.88)
+   [gcd] gcd: smallest prime >= 11 dividing b: acc L0..L6 = 0.71 0.62 0.56 0.51 0.44 0.43 0.42  (max effect +0.71)
+R2.hamming_error_position
+   [-] first failing check position only: acc L0..L6 = 0.13 0.22 0.22 0.18 0.18 0.19 0.16  (max effect +0.22)
+R2.hash_probe
+   [probes] most frequent answer (train draw): acc L0..L6 = 0.33 0.29 0.22 0.25 0.24 0.23 0.24  (max effect +0.33)
+   [probes] probes: m - 1 - home  (= len(keys) - home): acc L0..L6 = 0.89 0.92 0.86 0.92 0.94 0.91 0.94  (max effect +0.94)
+   [probes] probes: m - 2 - home + 1 with the block assumed to start at the smallest home: acc L0..L6 = 0.97 0.96 0.95 0.97 0.96 0.97 0.98  (max effect +0.98)
+   [slot] slot: home (key mod m): acc L0..L6 = 0.39 0.32 0.38 0.32 0.31 0.33 0.29  (max effect +0.39)
+   [slot] slot: home + earlier keys with the same home: acc L0..L6 = 0.57 0.50 0.51 0.46 0.43 0.43 0.40  (max effect +0.57)
+   [slot] slot: insertion index (0-based): acc L0..L6 = 0.57 0.61 0.47 0.52 0.58 0.50 0.53  (max effect +0.61)
+   [slot] slot: max(home, number of keys before it + min home): acc L0..L6 = 0.82 0.83 0.75 0.77 0.78 0.73 0.75  (max effect +0.83)
+R2.interval_scheduling
+   [-] latest start first: acc L0..L6 = 1.00 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+   [-] most frequent answer (train draw): acc L0..L6 = 0.22 0.24 0.24 0.25 0.23 0.22 0.20  (max effect +0.25)
+   [-] shortest first: acc L0..L6 = 0.22 0.19 0.17 0.19 0.18 0.19 0.18  (max effect +0.22)
+R2.kth_smallest
+   [-] k-th as written: acc L0..L6 = 0.20 0.14 0.11 0.09 0.07 0.05 0.06  (max effect +0.20)
+   [-] k-th largest: acc L0..L6 = 0.33 0.20 0.14 0.11 0.09 0.08 0.07  (max effect +0.33)
+R2.lcs_length
+   [-] greedy matching, better of the two directions: acc L0..L6 = 0.46 0.36 0.25 0.19 0.15 0.12 0.08  (max effect +0.46)
+   [-] letter-count overlap - 2: acc L0..L6 = 0.31 0.29 0.29 0.27 0.23 0.22 0.19  (max effect +0.31)
+   [-] most frequent answer (train draw): acc L0..L6 = 0.26 0.23 0.21 0.20 0.19 0.17 0.15  (max effect +0.26)
+   [-] round(0.6 * shorter length): acc L0..L6 = 0.25 0.21 0.21 0.19 0.17 0.17 0.15  (max effect +0.25)
+   [-] shorter length - 2: acc L0..L6 = 0.24 0.21 0.17 0.17 0.12 0.12 0.11  (max effect +0.24)
+R2.lis_length
+   [-] best greedy over every start: acc L0..L6 = 0.29 0.22 0.18 0.15 0.12 0.10 0.07  (max effect +0.29)
+R2.list_ops
+   [-] ignore moves to the end: acc L0..L6 = 0.65 0.52 0.42 0.36 0.30 0.24 0.20  (max effect +0.65)
+   [-] ignore reverses: acc L0..L6 = 0.69 0.57 0.49 0.43 0.34 0.32 0.27  (max effect +0.69)
+R2.longest_palindromic_substring
+   [-] longest even palindrome only: acc L0..L6 = 0.48 0.48 0.48 0.48 0.46 0.48 0.48  (max effect +0.48)
+   [-] longest odd palindrome only: acc L0..L6 = 0.52 0.52 0.52 0.52 0.54 0.52 0.52  (max effect +0.54)
+R2.luhn_check
+   [valid] yes share 0.51 0.51 0.51 0.50 0.51 0.51 0.50
+R2.max_subarray_sum
+   [-] best window of exactly 7 neighbouring numbers: acc L0..L6 = 1.00 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+   [-] split at numbers <= -12, best segment total: acc L0..L6 = 0.59 0.59 0.60 0.61 0.59 0.61 0.60  (max effect +0.61)
+   [-] two largest positive runs + the one number between them if adjacent: acc L0..L6 = 1.00 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+R2.merge_smallest_cost
+   [-] (P) adjacent piles only (old misreading): acc L0..L6 = 0.36 0.23 0.14 0.10 0.07 0.04 0.03  (max effect +0.36)
+   [-] ascending chain (sorted, merge left to right): acc L0..L6 = 0.34 0.09 0.01 0.00 0.00 0.00 0.00  (max effect +0.34)
+R2.min_heap_ops
+   [removals=0] (P) Floyd heapify of the whole row, then removals: acc L0..L6 = 0.56 0.52 0.39 0.32 0.26 0.23 0.14  (max effect +0.56)
+   [removals=0] removal by deleting the minimum and keeping the order of the rest: acc L0..L6 = 1.00 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+   [removals=1] (P) Floyd heapify of the whole row, then removals: acc L0..L6 = 0.76 0.55 0.48 0.42 0.34 0.23 0.17  (max effect +0.76)
+   [removals=2] (P) Floyd heapify of the whole row, then removals: acc L0..L6 =   -     -     -   0.43 0.39 0.29 0.23  (max effect +0.43)
+R2.modular_power
+   [-] (P) a^(e mod phi(m)) mod m (Euler; valid when gcd(a,m)=1): acc L0..L6 = 0.99 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+   [-] a^(e mod (m-1)) mod m (Fermat misuse): acc L0..L6 = 0.30 0.32 0.23 0.21 0.17 0.19 0.20  (max effect +0.32)
+R2.multiples_between
+   [-] (b-a)//m: acc L0..L6 = 0.46 0.43 0.45 0.47 0.44 0.44 0.45  (max effect +0.47)
+   [-] (b-a)//m + 1: acc L0..L6 = 0.54 0.57 0.55 0.53 0.56 0.56 0.55  (max effect +0.57)
+   [-] b//m - a//m: acc L0..L6 = 0.89 0.88 0.89 0.88 0.87 0.89 0.89  (max effect +0.89)
+   [-] round((b-a+1)/m): acc L0..L6 = 0.75 0.75 0.77 0.76 0.75 0.76 0.75  (max effect +0.77)
+R2.palindrome_check
+   [-] yes share 0.55 0.53 0.52 0.53 0.52 0.52 0.50
+   [-] letter counts: at most one odd count: acc L0..L6 = 0.96 0.96 0.96 0.96 0.97 0.96 0.96  (max effect +0.47)
+   [-] outer two letters each side match: acc L0..L6 = 0.85 0.77 0.72 0.67 0.66 0.63 0.61  (max effect +0.35)
+R2.permutation_power
+   [-] most frequent answer (train draw): acc L0..L6 = 0.26 0.20 0.16 0.14 0.13 0.10 0.09  (max effect +0.26)
+   [-] one application: acc L0..L6 = 0.53 0.46 0.40 0.37 0.35 0.30 0.31  (max effect +0.53)
+   [-] t applied to the start as a number: ((s-1+t) mod n)+1: acc L0..L6 = 0.35 0.25 0.23 0.16 0.16 0.14 0.11  (max effect +0.35)
+   [-] t mod n applications: acc L0..L6 = 0.83 0.56 0.75 0.48 0.63 0.53 0.56  (max effect +0.83)
+   [-] the start: acc L0..L6 = 0.52 0.46 0.42 0.38 0.36 0.30 0.29  (max effect +0.52)
+R2.prime_factor_query
+   [largest] largest: largest prime <= 97 dividing n, scanning only primes up to 61: acc L0..L6 = 1.00 0.62 0.64 0.64 0.62 0.63 0.64  (max effect +1.00)
+   [largest] largest: largest prime <= sqrt(n) dividing n: acc L0..L6 = 0.95 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+R2.stack_machine
+   [-] last pushed value: acc L0..L6 = 0.59 0.51 0.46 0.44 0.43 0.42 0.41  (max effect +0.59)
+   [-] last step is push -> its value; else None: acc L0..L6 = 1.00 1.00 1.00 1.00 1.00 1.00 1.00  (max effect +1.00)
+R2.string_rewrite_nonidentity
+   [-] (P) all rules applied simultaneously to the start string, leftmost match: acc L0..L6 = 1.00 0.39 0.40 0.09 0.09 0.01 0.01  (max effect +1.00)
+   [-] first occurrence only per rule: acc L0..L6 = 0.44 0.12 0.06 0.01 0.01 0.00 0.00  (max effect +0.44)
+   [-] only the first rule: acc L0..L6 = 1.00 0.00 0.00 0.00 0.01 0.00 0.00  (max effect +1.00)
+   [-] only the last rule, on the start string: acc L0..L6 = 1.00 0.02 0.02 0.01 0.01 0.00 0.00  (max effect +1.00)
+   [-] rules in reverse order: acc L0..L6 = 1.00 0.23 0.22 0.04 0.04 0.01 0.01  (max effect +1.00)
+R2.subtraction_game
+   [-] yes share 0.50 0.51 0.50 0.50 0.51 0.50 0.49
+   [-] win/lose of each pile alone (grundy != 0) equal -> no: acc L0..L6 = 0.79 0.79 0.79 0.80 0.80 0.82 0.81  (max effect +0.32)

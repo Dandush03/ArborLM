@@ -1,0 +1,9 @@
+subtraction_game | 1 in moves (direction fitted on train) | 0.51 0.50 0.50 0.49 0.52 0.48 0.50
+subtraction_game | smallest move even (direction fitted on train) | 0.49 0.50 0.50 0.48 0.51 0.49 0.51
+subtraction_game | all moves odd (direction fitted on train) | 0.52 0.54 0.51 0.52 0.52 0.52 0.50
+subtraction_game | four moves (direction fitted on train) | 0.52 0.52 0.53 0.52 0.51 0.52 0.54
+subtraction_game | piles same parity (direction fitted on train) | 0.55 0.58 0.55 0.54 0.55 0.54 0.51
+subtraction_game | piles differ by < smallest move (direction fitted on train) | 0.59 0.59 0.57 0.57 0.55 0.55 0.54
+subtraction_game | piles congruent mod smallest move (direction fitted on train) | 0.50 0.51 0.51 0.50 0.49 0.53 0.47
+subtraction_game | piles congruent mod (smallest+largest) (direction fitted on train) | 0.63 0.64 0.61 0.58 0.58 0.58 0.56
+bracket_match valid/no: share with a mismatched top-level pair | 0.69(n=610) 0.62(n=647) 0.62(n=604) 0.64(n=621) 0.62(n=616) 0.61(n=608) 0.58(n=596)

@@ -1,0 +1,14 @@
+cond_chain L 0 query stated as a fact: 403 /1000; keys {'no': 279, 'cannot be determined': 468, 'yes': 253}
+cond_chain L 1 query stated as a fact: 366 /1000; keys {'cannot be determined': 467, 'no': 271, 'yes': 262}
+cond_chain L 2 query stated as a fact: 455 /1000; keys {'yes': 292, 'no': 381, 'cannot be determined': 327}
+cond_chain L 3 query stated as a fact: 405 /1000; keys {'yes': 310, 'no': 321, 'cannot be determined': 369}
+cond_chain L 4 query stated as a fact: 483 /1000; keys {'no': 354, 'yes': 353, 'cannot be determined': 293}
+cond_chain L 5 query stated as a fact: 414 /1000; keys {'cannot be determined': 338, 'no': 343, 'yes': 319}
+cond_chain L 6 query stated as a fact: 489 /1000; keys {'yes': 374, 'cannot be determined': 242, 'no': 384}
+L 0 pet_owners asked pet stated verbatim 228 /1000; seating asked seat stated verbatim 158 /1000
+L 1 pet_owners asked pet stated verbatim 355 /1000; seating asked seat stated verbatim 205 /1000
+L 2 pet_owners asked pet stated verbatim 374 /1000; seating asked seat stated verbatim 241 /1000
+L 3 pet_owners asked pet stated verbatim 431 /1000; seating asked seat stated verbatim 215 /1000
+L 4 pet_owners asked pet stated verbatim 425 /1000; seating asked seat stated verbatim 208 /1000
+L 5 pet_owners asked pet stated verbatim 461 /1000; seating asked seat stated verbatim 215 /1000
+L 6 pet_owners asked pet stated verbatim 429 /1000; seating asked seat stated verbatim 218 /1000
