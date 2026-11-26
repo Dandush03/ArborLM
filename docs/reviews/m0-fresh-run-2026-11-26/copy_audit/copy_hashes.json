@@ -1,0 +1,67 @@
+{
+ "studies/m0/fresh_run/c1/f5_closed_forms.py": {
+  "copy_sha256": "7e9455104d0cdb2f2b4cf6f51a2dc2a5abbf50befbbad44d38a00aa1f2604e49",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+  "original_sha256": "9c9936546d9abe70446370ba35301fc00b3c357ea9662bcf218deffe1ab74d75"
+ },
+ "studies/m0/fresh_run/c1/f5b_closed_forms_v2.py": {
+  "copy_sha256": "3429dcda6f69921d789be38607a8af81a42d4d0562f7e86466b32fe385790a37",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+  "original_sha256": "c7d4c7fbf40b6e5df6eef82ca7103dea5774870eeeec955d99fed0cc54e50564"
+ },
+ "studies/m0/fresh_run/m1/m1_fix3_shortcuts.py": {
+  "copy_sha256": "5961ccfc3388267d6d50a4d32e542b9ca3ed05ab5c24ae9306b50098a327c1ee",
+  "original_path": "studies/m0/m1_fix3_shortcuts.py",
+  "original_sha256": "7eef7c7cb64195376d2424ce51b22db97c52b0164d894875310c3576a2552936"
+ },
+ "studies/m0/fresh_run/m1/m1_fix4_battery.py": {
+  "copy_sha256": "17c3de3775bd888dccdd6cb46cea2f6138b4dc0227cd4d3900e0527f15e23d30",
+  "original_path": "studies/m0/m1_fix4_battery.py",
+  "original_sha256": "d83e701f338b93ab54184a3d03ef41b717f538ca8a4a99368457c5416c0e5e6c"
+ },
+ "studies/m0/fresh_run/m1/shortcuts_a3.py": {
+  "copy_sha256": "c3d0bd399cd35e36caee6eaab7e8b163fd3bce538388bfd7804d569d2505aeb2",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py",
+  "original_sha256": "7182713b0932ef6615bacf281c91eb73a37e8bca8098802a43cbafe0bba98a83"
+ },
+ "studies/m0/fresh_run/m1/shortcuts_a4.py": {
+  "copy_sha256": "f6f63e1aaed5a5bc8d02a89f1c65ba5868b6da0b6d6bc74e9d173452adbf6743",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py",
+  "original_sha256": "bd5cd0ef84ccb23f51ae0a364059f4a23c71f12319a1efbf6ae7521943a1f088"
+ },
+ "studies/m0/fresh_run/r1/new_rules_final.py": {
+  "copy_sha256": "a57be6728a81f710d001437eaad624243bd8362a4f683fe9c30e6aa5129bdf60",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+  "original_sha256": "98b896e4f12caa23e8bd384c63a2ea36fce9c97bdf6d2d33de1df5d3c80e0b51"
+ },
+ "studies/m0/fresh_run/r1/r1_fix4_measure.py": {
+  "copy_sha256": "cce2747a072a8aef83862f9e95f925f493d23a280ec491ebaa3a04127507ef72",
+  "original_path": "studies/m0/r1_fix4_measure.py",
+  "original_sha256": "daa131f157391f391017973a3fdb0ba24984648fb5d82beb217a412f67012a68"
+ },
+ "studies/m0/fresh_run/r1/r1_fix4_tells.py": {
+  "copy_sha256": "812e0d38c3c1c167e586091dfceac95b63943e43889b97c0e5eaf311f4eab45a",
+  "original_path": "studies/m0/r1_fix4_tells.py",
+  "original_sha256": "047ed9b9e8bc904547937f7cfebbe1c3afd1e601a59511f9fa92927fbe1d68a7"
+ },
+ "studies/m0/fresh_run/r2/f_new_heur.py": {
+  "copy_sha256": "30710a0f7e0efd0af79e946f099a7071eb89d73c39c47f7b12d23b611bb2e62b",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py",
+  "original_sha256": "bbb0c233b607df80049a3a659007e846401630551f21fe3cb5518c7550d1975c"
+ },
+ "studies/m0/fresh_run/r2/f_rules.py": {
+  "copy_sha256": "5f5fcee11234d40c4df1d603bc851ce6cfdf0a92f506f135a74281b0f93d297f",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+  "original_sha256": "1f29b2b6740a25d034fba7884b189b2a247d3959210c845c8e4e8bd9beef3449"
+ },
+ "studies/m0/fresh_run/r2/f_rules_new.py": {
+  "copy_sha256": "5b3019ced2307d9ab7776158151df14f7e33e74e2fcac73d527352f60c487dc0",
+  "original_path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+  "original_sha256": "3fa3efa21f11a3eb8534e89a8d0a024ccc5f433d5a3dce99e2a7ec09c80cd35a"
+ },
+ "studies/m0/fresh_run/r2/r2_fix4_battery.py": {
+  "copy_sha256": "920d246080a23e36e412a3ae2c669c9864cc1184c4a170cc17f741bbacfed0f9",
+  "original_path": "studies/m0/r2_fix4_battery.py",
+  "original_sha256": "2e48179bf194be7e00411e44e982e7be1c35ab2b0f1a0434fdee8a288ef8b618"
+ }
+}

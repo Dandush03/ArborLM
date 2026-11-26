@@ -1,0 +1,42 @@
+== m1_fix3_shortcuts: 7 import/load lines
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:174: from studies.m0.m1_fix3_shortcuts import spec
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4_attempt1.py:177: from studies.m0.m1_fix3_shortcuts import spec
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:52: import studies.m0.m1_fix3_shortcuts as im
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:50: import studies.m0.m1_fix3_shortcuts as im
+  studies/m0/m1_fix3_checks.py:13: from studies.m0.m1_fix3_shortcuts import spec, stem_of
+  studies/m0/m1_fix4_battery.py:62: from studies.m0.m1_fix3_shortcuts import PROCEDURE
+  studies/m0/m1_fix4_battery.py:101: import studies.m0.m1_fix3_shortcuts as sc
+== r1_fix4_tells: 2 import/load lines
+  studies/m0/r1_fix4_measure.py:26: from studies.m0.r1_fix4_tells import feature_rows
+  tests/test_m0_r1_fix4_tools.py:20: from studies.m0.r1_fix4_tells import feature_rows
+== shortcuts_a4: 4 import/load lines
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:50: a4 = _load(AUD / "audit4_m1" / "shortcuts_a4.py", "shortcuts_a4_final")
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:48: a4 = _load(AUD / "audit4_m1" / "shortcuts_a4.py", "shortcuts_a4_final")
+  studies/m0/m1_fix4_battery.py:90: return _load(A4 / "shortcuts_a4.py", "shortcuts_a4_fix4")
+  tests/test_m0_m1_fix4_survivors.py:81: for p in (A3 / "shortcuts_a3.py", A3 / "common_a3.py", A4 / "shortcuts_a4.py", A4 / "common_a4.py", A4 / "capacity_a4.py"):
+== shortcuts_a3: 4 import/load lines
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:51: a3 = _load(AUD / "audit3_m1" / "shortcuts_a3.py", "shortcuts_a3_final")
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:49: a3 = _load(AUD / "audit3_m1" / "shortcuts_a3.py", "shortcuts_a3_final")
+  studies/m0/m1_fix4_battery.py:96: return common, _load(A3 / "shortcuts_a3.py", "shortcuts_a3_fix4")
+  tests/test_m0_m1_fix4_survivors.py:81: for p in (A3 / "shortcuts_a3.py", A3 / "common_a3.py", A4 / "shortcuts_a4.py", A4 / "common_a4.py", A4 / "capacity_a4.py"):
+== r1_fix4_measure: 0 import/load lines
+== f_new_heur: 2 import/load lines
+  docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:24: from f_new_heur import NEW
+  docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:54: from f_new_heur import NEW
+== new_rules_final: 0 import/load lines
+== f5_closed_forms: 0 import/load lines
+== f5b_closed_forms_v2: 0 import/load lines
+== r2_fix4_battery: 4 import/load lines
+  studies/m0/r2_fix4_build.py:18: from studies.m0.r2_fix4_battery import worst
+  tests/test_m0_r2_fix4_sets.py:134: for f in ("r2_fix4_a3_solvers.py", "r2_fix4_a3_heur.py", "r2_fix4_a4_heur.py", "r2_fix4_battery.py", "r2_fix4_levels.py", "r2_fix4_capacity.py", "r2_fix4_build.py", "r2_fix4_set.py", "lineages_r2_fix4
+  tests/test_m0_r2_fix4_sets.py:157: from studies.m0.r2_fix4_battery import klass
+  tests/test_m0_r2_fix4_sets.py:167: from studies.m0.r2_fix4_battery import run_one, worst
+== f_rules: 2 import/load lines
+  docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_harness_check.py:10: sys.argv = [sys.argv[0], "2000", "/dev/null"]  # f_rules reads N and OUT at import; OUT unused here
+  docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_harness_check.py:11: import f_rules
+== f_rules_new: 0 import/load lines
+== m1_fix4_battery: 4 import/load lines
+  studies/m0/m1_fix4_capacity.py:43: from studies.m0.m1_fix4_battery import _current_set, _load
+  studies/m0/m1_fix4_survivors.py:36: from studies.m0.m1_fix4_battery import procedure_exclusions
+  tests/test_m0_m1_fix4_survivors.py:21: from studies.m0.m1_fix4_battery import A3, A4, procedure_exclusions, summarise
+  tests/test_m0_m1_fix4_survivors.py:86: from studies.m0.m1_fix4_battery import a3_task, a4_task, own_task

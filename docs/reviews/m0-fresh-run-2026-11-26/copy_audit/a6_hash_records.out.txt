@@ -1,0 +1,30 @@
+studies/m0/fresh_run/c1/f5_closed_forms.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/c1/f5b_closed_forms_v2.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/m1/m1_fix3_shortcuts.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/m1/m1_fix4_battery.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/m1/shortcuts_a3.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/m1/shortcuts_a4.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r1/new_rules_final.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r1/r1_fix4_measure.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r1/r1_fix4_tells.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r2/f_new_heur.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r2/f_rules.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r2/f_rules_new.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+studies/m0/fresh_run/r2/r2_fix4_battery.py: orig ends with newline True, copy True; whitespace-only replaced hunks []
+r1: new_rules_final.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan True
+r1: r1_fix4_measure.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan True
+r1: r1_fix4_tells.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan True
+r1: hashes in COPIES.md that are not copy/original hashes: []
+r2: f_new_heur.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+r2: f_rules.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+r2: f_rules_new.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+r2: r2_fix4_battery.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+r2: hashes in COPIES.md that are not copy/original hashes: []
+m1: m1_fix3_shortcuts.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+m1: m1_fix4_battery.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+m1: shortcuts_a3.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+m1: shortcuts_a4.py: both hashes in COPIES.md True; copy hash in plan True; original hash in plan False
+m1: hashes in COPIES.md that are not copy/original hashes: []
+c1: f5_closed_forms.py: both hashes in COPIES.md True; copy hash in plan False; original hash in plan False
+c1: f5b_closed_forms_v2.py: both hashes in COPIES.md True; copy hash in plan False; original hash in plan False
+c1: hashes in COPIES.md that are not copy/original hashes: []

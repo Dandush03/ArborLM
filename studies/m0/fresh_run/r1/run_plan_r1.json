@@ -1,0 +1,1294 @@
+{
+  "bases": {
+    "dry": {
+      "base_integer": "3342082268851962967",
+      "kind": "analytical (sha256 of a fixed string)"
+    },
+    "seed1": {
+      "base_integer": "16103270370041696293",
+      "kind": "analytical (sha256 of a fixed string)"
+    },
+    "seed2": {
+      "base_integer": "10773834973117025986",
+      "kind": "analytical (sha256 of a fixed string)"
+    },
+    "seed3": {
+      "base_integer": "619660634241804713",
+      "kind": "analytical (sha256 of a fixed string)"
+    }
+  },
+  "copies": {
+    "studies/m0/fresh_run/r1/new_rules_final.py": {
+      "copy_sha256": "a57be6728a81f710d001437eaad624243bd8362a4f683fe9c30e6aa5129bdf60",
+      "original": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+      "original_sha256_at_b78e58b1": "98b896e4f12caa23e8bd384c63a2ea36fce9c97bdf6d2d33de1df5d3c80e0b51"
+    },
+    "studies/m0/fresh_run/r1/r1_fix4_measure.py": {
+      "copy_sha256": "cce2747a072a8aef83862f9e95f925f493d23a280ec491ebaa3a04127507ef72",
+      "original": "studies/m0/r1_fix4_measure.py",
+      "original_sha256_at_b78e58b1": "daa131f157391f391017973a3fdb0ba24984648fb5d82beb217a412f67012a68"
+    },
+    "studies/m0/fresh_run/r1/r1_fix4_tells.py": {
+      "copy_sha256": "812e0d38c3c1c167e586091dfceac95b63943e43889b97c0e5eaf311f4eab45a",
+      "original": "studies/m0/r1_fix4_tells.py",
+      "original_sha256_at_b78e58b1": "047ed9b9e8bc904547937f7cfebbe1c3afd1e601a59511f9fa92927fbe1d68a7"
+    }
+  },
+  "dry_run_exclusions": [],
+  "environment_notes": "Variables listed per command are the ones the plan sets. PATH and HOME are inherited from the runner; nothing else is read by the scripts.",
+  "evaluation": "R1",
+  "items_per_level": {
+    "dry": 20,
+    "run": 3000
+  },
+  "plan_kind": "fragment of the run plan, stage 1S point 9 item (vii); not hashed by this file",
+  "script_commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+  "survivor_list": {
+    "lineages": [
+      "R1.boolean_lights_r4",
+      "R1.categories_default_exceptions_r4",
+      "R1.compass_turns",
+      "R1.conditional_threshold_rule_r4",
+      "R1.equivalence_exchange_rates_r6",
+      "R1.knights_knaves_r6",
+      "R1.spatial_grid_walk_r5",
+      "R1.swap_tracking_r5",
+      "R1.temporal_weekday_shift_r6",
+      "R1.venn_counting_r5"
+    ],
+    "path": "studies/m0/manifests/survivor_list_of_record.json",
+    "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+  },
+  "units": {
+    "R1a": {
+      "copies": [
+        "studies/m0/fresh_run/r1/r1_fix4_measure.py",
+        "studies/m0/fresh_run/r1/r1_fix4_tells.py"
+      ],
+      "id_map": {
+        "map": {
+          "R1.boolean_lights_r4": "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4": "R1.categories_default_exceptions_r4",
+          "R1.compass_turns": "R1.compass_turns",
+          "R1.conditional_threshold_rule_r4": "R1.conditional_threshold_rule_r4",
+          "R1.equivalence_exchange_rates_r6": "R1.equivalence_exchange_rates_r6",
+          "R1.knights_knaves_r6": "R1.knights_knaves_r6",
+          "R1.spatial_grid_walk_r5": "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5": "R1.swap_tracking_r5",
+          "R1.temporal_weekday_shift_r6": "R1.temporal_weekday_shift_r6",
+          "R1.venn_counting_r5": "R1.venn_counting_r5"
+        },
+        "rule": "each output file name is <lineage id>.<aud|impl|feat>.jsonl; the id is the survivor-list id"
+      },
+      "items_per_level": {
+        "dry": 20,
+        "run": 3000
+      },
+      "must_contain": {
+        "aud_and_impl_files_for_every_lineage": [
+          "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4",
+          "R1.compass_turns",
+          "R1.conditional_threshold_rule_r4",
+          "R1.equivalence_exchange_rates_r6",
+          "R1.knights_knaves_r6",
+          "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5",
+          "R1.temporal_weekday_shift_r6",
+          "R1.venn_counting_r5"
+        ],
+        "feat_files_empty_by_construction_for": [
+          "R1.compass_turns",
+          "R1.equivalence_exchange_rates_r6",
+          "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5",
+          "R1.temporal_weekday_shift_r6",
+          "R1.venn_counting_r5"
+        ],
+        "feat_files_with_rows_for": [
+          "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4",
+          "R1.conditional_threshold_rule_r4",
+          "R1.knights_knaves_r6"
+        ]
+      },
+      "runs": {
+        "dry": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "-m",
+            "studies.m0.fresh_run.r1.r1_fix4_measure",
+            "20",
+            "9642052695109018261",
+            "5898926463622394619",
+            "688429447831865614",
+            "7004828903879332565",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "M0FR_R1A_FEAT1_FIT": "10959895370947507904",
+            "M0FR_R1A_FEAT1_TEST": "7104822719368297370",
+            "M0FR_R1A_FEAT2_FIT": "18288342007524452630",
+            "M0FR_R1A_FEAT2_TEST": "17667116593709713417",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400, implementer fit 300, lookup fit 3000 and lookup test 1000 per level (r1_fix4_tells.feature_rows) whatever the item count (lead ruling R-47)",
+          "items_per_level": 20,
+          "kind": "dry-run seeds",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "3342082268851962967|R1a|aud_seed",
+              "integer": 9642052695109018261,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|aud_fit",
+              "integer": 5898926463622394619,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|impl_seed",
+              "integer": 688429447831865614,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|impl_fit",
+              "integer": 7004828903879332565,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|feat1_fit",
+              "integer": 10959895370947507904,
+              "role": "feat1_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|feat1_test",
+              "integer": 7104822719368297370,
+              "role": "feat1_test"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|feat2_fit",
+              "integer": 18288342007524452630,
+              "role": "feat2_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1a|feat2_test",
+              "integer": 17667116593709713417,
+              "role": "feat2_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1a/dry/stdout.txt"
+        },
+        "seed1": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "-m",
+            "studies.m0.fresh_run.r1.r1_fix4_measure",
+            "3000",
+            "99048509648598239",
+            "6032306416612730161",
+            "12566962013181140364",
+            "12461268354864723031",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "M0FR_R1A_FEAT1_FIT": "6469840755979506486",
+            "M0FR_R1A_FEAT1_TEST": "10571332153293090484",
+            "M0FR_R1A_FEAT2_FIT": "11061043458860071861",
+            "M0FR_R1A_FEAT2_TEST": "18275690757346002124",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400, implementer fit 300, lookup fit 3000 and lookup test 1000 per level (r1_fix4_tells.feature_rows) whatever the item count (lead ruling R-47)",
+          "items_per_level": 3000,
+          "kind": "run seed index 1",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "16103270370041696293|R1a|aud_seed",
+              "integer": 99048509648598239,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|aud_fit",
+              "integer": 6032306416612730161,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|impl_seed",
+              "integer": 12566962013181140364,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|impl_fit",
+              "integer": 12461268354864723031,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|feat1_fit",
+              "integer": 6469840755979506486,
+              "role": "feat1_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|feat1_test",
+              "integer": 10571332153293090484,
+              "role": "feat1_test"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|feat2_fit",
+              "integer": 11061043458860071861,
+              "role": "feat2_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1a|feat2_test",
+              "integer": 18275690757346002124,
+              "role": "feat2_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed1/stdout.txt"
+        },
+        "seed2": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "-m",
+            "studies.m0.fresh_run.r1.r1_fix4_measure",
+            "3000",
+            "14347082073681892530",
+            "2224176057436576068",
+            "7782504331758928262",
+            "16444283175071476023",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "M0FR_R1A_FEAT1_FIT": "5225609312723397878",
+            "M0FR_R1A_FEAT1_TEST": "16030931605067442171",
+            "M0FR_R1A_FEAT2_FIT": "12489037258477810574",
+            "M0FR_R1A_FEAT2_TEST": "865697799531135293",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400, implementer fit 300, lookup fit 3000 and lookup test 1000 per level (r1_fix4_tells.feature_rows) whatever the item count (lead ruling R-47)",
+          "items_per_level": 3000,
+          "kind": "run seed index 2",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "10773834973117025986|R1a|aud_seed",
+              "integer": 14347082073681892530,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|aud_fit",
+              "integer": 2224176057436576068,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|impl_seed",
+              "integer": 7782504331758928262,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|impl_fit",
+              "integer": 16444283175071476023,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|feat1_fit",
+              "integer": 5225609312723397878,
+              "role": "feat1_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|feat1_test",
+              "integer": 16030931605067442171,
+              "role": "feat1_test"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|feat2_fit",
+              "integer": 12489037258477810574,
+              "role": "feat2_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1a|feat2_test",
+              "integer": 865697799531135293,
+              "role": "feat2_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed2/stdout.txt"
+        },
+        "seed3": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "-m",
+            "studies.m0.fresh_run.r1.r1_fix4_measure",
+            "3000",
+            "7111840952242223467",
+            "6804878371397271302",
+            "4822110630992176125",
+            "1795870029610947483",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "M0FR_R1A_FEAT1_FIT": "7085969302918067133",
+            "M0FR_R1A_FEAT1_TEST": "3127496725241669653",
+            "M0FR_R1A_FEAT2_FIT": "16878966379758776199",
+            "M0FR_R1A_FEAT2_TEST": "7431094289611699802",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400, implementer fit 300, lookup fit 3000 and lookup test 1000 per level (r1_fix4_tells.feature_rows) whatever the item count (lead ruling R-47)",
+          "items_per_level": 3000,
+          "kind": "run seed index 3",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "619660634241804713|R1a|aud_seed",
+              "integer": 7111840952242223467,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "619660634241804713|R1a|aud_fit",
+              "integer": 6804878371397271302,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1a|impl_seed",
+              "integer": 4822110630992176125,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "619660634241804713|R1a|impl_fit",
+              "integer": 1795870029610947483,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1a|feat1_fit",
+              "integer": 7085969302918067133,
+              "role": "feat1_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1a|feat1_test",
+              "integer": 3127496725241669653,
+              "role": "feat1_test"
+            },
+            {
+              "derivation": "619660634241804713|R1a|feat2_fit",
+              "integer": 16878966379758776199,
+              "role": "feat2_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1a|feat2_test",
+              "integer": 7431094289611699802,
+              "role": "feat2_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1a/seed3/stdout.txt"
+        }
+      },
+      "runs_from": "run copy studies/m0/fresh_run/r1/r1_fix4_measure.py (module studies.m0.fresh_run.r1.r1_fix4_measure) which imports the copy of r1_fix4_tells.py",
+      "script": "studies/m0/r1_fix4_measure.py",
+      "seed_roles": [
+        "aud_seed",
+        "aud_fit",
+        "impl_seed",
+        "impl_fit",
+        "feat1_fit",
+        "feat1_test",
+        "feat2_fit",
+        "feat2_test"
+      ]
+    },
+    "R1b": {
+      "copies": [],
+      "id_map": {
+        "map": {
+          "R1.boolean_lights_r4": "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4": "R1.categories_default_exceptions_r4",
+          "R1.compass_turns": "R1.compass_turns",
+          "R1.conditional_threshold_rule_r4": "R1.conditional_threshold_rule_r4",
+          "R1.equivalence_exchange_rates_r6": "R1.equivalence_exchange_rates_r6",
+          "R1.knights_knaves_r6": "R1.knights_knaves_r6",
+          "R1.spatial_grid_walk_r5": "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5": "R1.swap_tracking_r5",
+          "R1.temporal_weekday_shift_r6": "R1.temporal_weekday_shift_r6",
+          "R1.venn_counting_r5": "R1.venn_counting_r5"
+        },
+        "rule": "each output file name is <lineage id>.<aud|impl|feat>.jsonl; the id is the survivor-list id"
+      },
+      "items_per_level": {
+        "dry": 20,
+        "run": 3000
+      },
+      "must_contain": {
+        "aud_and_impl_files_for_every_lineage": [
+          "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4",
+          "R1.compass_turns",
+          "R1.conditional_threshold_rule_r4",
+          "R1.equivalence_exchange_rates_r6",
+          "R1.knights_knaves_r6",
+          "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5",
+          "R1.temporal_weekday_shift_r6",
+          "R1.venn_counting_r5"
+        ],
+        "feat_files_empty_by_construction_for": [
+          "R1.compass_turns",
+          "R1.equivalence_exchange_rates_r6",
+          "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5",
+          "R1.temporal_weekday_shift_r6",
+          "R1.venn_counting_r5"
+        ],
+        "feat_files_with_rows_for": [
+          "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4",
+          "R1.conditional_threshold_rule_r4",
+          "R1.knights_knaves_r6"
+        ]
+      },
+      "runs": {
+        "dry": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+            "20",
+            "18269349003600537885",
+            "4715202151070200041",
+            "13066872143408108431",
+            "3203262675427405743",
+            "5193989310436402216",
+            "6327086452646249430",
+            "20",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400 and implementer fit 300 per level; lookup fit and test draws are n_feat each",
+          "items_per_level": 20,
+          "kind": "dry-run seeds",
+          "n_feat": 20,
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "3342082268851962967|R1b|aud_seed",
+              "integer": 18269349003600537885,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "3342082268851962967|R1b|aud_fit",
+              "integer": 4715202151070200041,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1b|impl_seed",
+              "integer": 13066872143408108431,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "3342082268851962967|R1b|impl_fit",
+              "integer": 3203262675427405743,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1b|feat_fit",
+              "integer": 5193989310436402216,
+              "role": "feat_fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1b|feat_test",
+              "integer": 6327086452646249430,
+              "role": "feat_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1b/dry/stdout.txt"
+        },
+        "seed1": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+            "3000",
+            "12633447773416252968",
+            "15662509032710366897",
+            "7321755159240066509",
+            "12504020912554481155",
+            "6829310525523613266",
+            "11958246379345624081",
+            "3000",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400 and implementer fit 300 per level; lookup fit and test draws are n_feat each",
+          "items_per_level": 3000,
+          "kind": "run seed index 1",
+          "n_feat": 3000,
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "16103270370041696293|R1b|aud_seed",
+              "integer": 12633447773416252968,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "16103270370041696293|R1b|aud_fit",
+              "integer": 15662509032710366897,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1b|impl_seed",
+              "integer": 7321755159240066509,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "16103270370041696293|R1b|impl_fit",
+              "integer": 12504020912554481155,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1b|feat_fit",
+              "integer": 6829310525523613266,
+              "role": "feat_fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1b|feat_test",
+              "integer": 11958246379345624081,
+              "role": "feat_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed1/stdout.txt"
+        },
+        "seed2": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+            "3000",
+            "15734805376014682024",
+            "12963459380180449447",
+            "18089437057444261177",
+            "4769750804237396719",
+            "3444571596514372147",
+            "17095152871330472031",
+            "3000",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400 and implementer fit 300 per level; lookup fit and test draws are n_feat each",
+          "items_per_level": 3000,
+          "kind": "run seed index 2",
+          "n_feat": 3000,
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "10773834973117025986|R1b|aud_seed",
+              "integer": 15734805376014682024,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "10773834973117025986|R1b|aud_fit",
+              "integer": 12963459380180449447,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1b|impl_seed",
+              "integer": 18089437057444261177,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "10773834973117025986|R1b|impl_fit",
+              "integer": 4769750804237396719,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1b|feat_fit",
+              "integer": 3444571596514372147,
+              "role": "feat_fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1b|feat_test",
+              "integer": 17095152871330472031,
+              "role": "feat_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed2/stdout.txt"
+        },
+        "seed3": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+            "3000",
+            "18225617958570964578",
+            "8084222951577580954",
+            "8827054058015078882",
+            "10302189262929586023",
+            "327423375539466466",
+            "9691051152120427905",
+            "3000",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3",
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.equivalence_exchange_rates_r6",
+            "R1.knights_knaves_r6",
+            "R1.spatial_grid_walk_r5",
+            "R1.swap_tracking_r5",
+            "R1.temporal_weekday_shift_r6",
+            "R1.venn_counting_r5"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "fixed_size_draws_in_code": "audit fit 400 and implementer fit 300 per level; lookup fit and test draws are n_feat each",
+          "items_per_level": 3000,
+          "kind": "run seed index 3",
+          "n_feat": 3000,
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.boolean_lights_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.boolean_lights_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.boolean_lights_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.categories_default_exceptions_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.categories_default_exceptions_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.categories_default_exceptions_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.compass_turns.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.compass_turns.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.compass_turns.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.conditional_threshold_rule_r4.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.conditional_threshold_rule_r4.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.conditional_threshold_rule_r4.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.equivalence_exchange_rates_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.equivalence_exchange_rates_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.equivalence_exchange_rates_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.knights_knaves_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.knights_knaves_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.knights_knaves_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.spatial_grid_walk_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.spatial_grid_walk_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.spatial_grid_walk_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.swap_tracking_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.swap_tracking_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.swap_tracking_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.temporal_weekday_shift_r6.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.temporal_weekday_shift_r6.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.temporal_weekday_shift_r6.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.venn_counting_r5.aud.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.venn_counting_r5.feat.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/R1.venn_counting_r5.impl.jsonl",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/stderr.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/stdout.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "619660634241804713|R1b|aud_seed",
+              "integer": 18225617958570964578,
+              "role": "aud_seed"
+            },
+            {
+              "derivation": "619660634241804713|R1b|aud_fit",
+              "integer": 8084222951577580954,
+              "role": "aud_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1b|impl_seed",
+              "integer": 8827054058015078882,
+              "role": "impl_seed"
+            },
+            {
+              "derivation": "619660634241804713|R1b|impl_fit",
+              "integer": 10302189262929586023,
+              "role": "impl_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1b|feat_fit",
+              "integer": 327423375539466466,
+              "role": "feat_fit"
+            },
+            {
+              "derivation": "619660634241804713|R1b|feat_test",
+              "integer": 9691051152120427905,
+              "role": "feat_test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1b/seed3/stdout.txt"
+        }
+      },
+      "runs_from": "the original, as committed (all seeds and lineages are on the command line)",
+      "script": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+      "seed_roles": [
+        "aud_seed",
+        "aud_fit",
+        "impl_seed",
+        "impl_fit",
+        "feat_fit",
+        "feat_test"
+      ]
+    },
+    "R1c": {
+      "copies": [
+        "studies/m0/fresh_run/r1/new_rules_final.py"
+      ],
+      "id_map": {
+        "map": {
+          "R1.boolean_lights_r4": "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4": "R1.categories_default_exceptions_r4",
+          "R1.compass_turns": "R1.compass_turns",
+          "R1.knights_knaves_r6": "R1.knights_knaves_r6",
+          "R1.temporal_weekday_shift_r6": "R1.temporal_weekday_shift_r6"
+        },
+        "rule": "each stdout line begins with the lineage id padded to 36 characters; the id is the survivor-list id"
+      },
+      "items_per_level": {
+        "dry": 20,
+        "run": 3000
+      },
+      "must_contain": {
+        "stdout_lines_with_lineage_id_for": [
+          "R1.boolean_lights_r4",
+          "R1.categories_default_exceptions_r4",
+          "R1.compass_turns",
+          "R1.knights_knaves_r6",
+          "R1.temporal_weekday_shift_r6"
+        ]
+      },
+      "runs": {
+        "dry": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "studies/m0/fresh_run/r1/new_rules_final.py",
+            "20",
+            "12357770532595769842",
+            "7298742721039615523"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f:/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/docs/reviews/m0-lineage-decision-2026-11-25/final_r1"
+          },
+          "fixed_size_draws_in_code": "fit draw of n items per level for each lookup (lead ruling R-47)",
+          "items_per_level": 20,
+          "kind": "dry-run seeds",
+          "note": "results go to standard output only; no output directory is created by the script, so the runner creates output_dir before the command",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1c/dry",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1c/dry/stdout.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1c/dry/stderr.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "3342082268851962967|R1c|fit",
+              "integer": 12357770532595769842,
+              "role": "fit"
+            },
+            {
+              "derivation": "3342082268851962967|R1c|test",
+              "integer": 7298742721039615523,
+              "role": "test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1c/dry/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r1_20261126/attempt1/R1c/dry/stdout.txt"
+        },
+        "seed1": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "studies/m0/fresh_run/r1/new_rules_final.py",
+            "3000",
+            "7098925521966581502",
+            "11363439643167260082"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f:/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/docs/reviews/m0-lineage-decision-2026-11-25/final_r1"
+          },
+          "fixed_size_draws_in_code": "fit draw of n items per level for each lookup (lead ruling R-47)",
+          "items_per_level": 3000,
+          "kind": "run seed index 1",
+          "note": "results go to standard output only; no output directory is created by the script, so the runner creates output_dir before the command",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed1",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed1/stdout.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed1/stderr.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "16103270370041696293|R1c|fit",
+              "integer": 7098925521966581502,
+              "role": "fit"
+            },
+            {
+              "derivation": "16103270370041696293|R1c|test",
+              "integer": 11363439643167260082,
+              "role": "test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed1/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed1/stdout.txt"
+        },
+        "seed2": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "studies/m0/fresh_run/r1/new_rules_final.py",
+            "3000",
+            "11694447839586258658",
+            "5895888421579424137"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f:/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/docs/reviews/m0-lineage-decision-2026-11-25/final_r1"
+          },
+          "fixed_size_draws_in_code": "fit draw of n items per level for each lookup (lead ruling R-47)",
+          "items_per_level": 3000,
+          "kind": "run seed index 2",
+          "note": "results go to standard output only; no output directory is created by the script, so the runner creates output_dir before the command",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed2",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed2/stdout.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed2/stderr.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "10773834973117025986|R1c|fit",
+              "integer": 11694447839586258658,
+              "role": "fit"
+            },
+            {
+              "derivation": "10773834973117025986|R1c|test",
+              "integer": 5895888421579424137,
+              "role": "test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed2/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed2/stdout.txt"
+        },
+        "seed3": {
+          "argv": [
+            "uv",
+            "run",
+            "--locked",
+            "python",
+            "studies/m0/fresh_run/r1/new_rules_final.py",
+            "3000",
+            "16061091096005909391",
+            "12881872630696060536"
+          ],
+          "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+          "env": {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f:/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/docs/reviews/m0-lineage-decision-2026-11-25/final_r1"
+          },
+          "fixed_size_draws_in_code": "fit draw of n items per level for each lookup (lead ruling R-47)",
+          "items_per_level": 3000,
+          "kind": "run seed index 3",
+          "note": "results go to standard output only; no output directory is created by the script, so the runner creates output_dir before the command",
+          "output_dir": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed3",
+          "output_files": [
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed3/stdout.txt",
+            "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed3/stderr.txt"
+          ],
+          "seeds": [
+            {
+              "derivation": "619660634241804713|R1c|fit",
+              "integer": 16061091096005909391,
+              "role": "fit"
+            },
+            {
+              "derivation": "619660634241804713|R1c|test",
+              "integer": 12881872630696060536,
+              "role": "test"
+            }
+          ],
+          "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed3/stderr.txt",
+          "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R1c/seed3/stdout.txt"
+        }
+      },
+      "runs_from": "run copy studies/m0/fresh_run/r1/new_rules_final.py (S2b: the entry R1.conditional_decision_tree_r6 of SPEC removed); fgen is imported from the original through PYTHONPATH (lead ruling R-49)",
+      "script": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+      "seed_roles": [
+        "fit",
+        "test"
+      ]
+    }
+  },
+  "worktree_root": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+}
