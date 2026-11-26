@@ -1,0 +1,36 @@
+{
+  "closure_blob_differs_b78_vs_7cd0ac5a": [
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen4.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics3.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/solvers3.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py"
+  ],
+  "closure_blob_differs_b78_vs_tip": [],
+  "closure_files": 148,
+  "m1_manifest_vs_record": {
+    "manifest_n": 29,
+    "only_manifest": [],
+    "only_record": [],
+    "record_n": 29
+  },
+  "r1c_name_candidates_n": 26,
+  "r1c_names_over_60": [
+    "lookup (asked on at start, #switches wired to it, #presses parity)"
+  ],
+  "r1c_truncation_collisions": {},
+  "tip": "206d45a9b91cd38413c12e543e4d988d4d85d05f"
+}

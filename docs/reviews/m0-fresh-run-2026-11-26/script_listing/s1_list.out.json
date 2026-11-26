@@ -1,0 +1,215 @@
+{
+  "commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+  "diff_vs_text": {
+    "in_rule_not_in_text": [],
+    "in_text_not_in_rule": [],
+    "pattern_c_missing_at_commit": [],
+    "pattern_mismatch": [],
+    "rule_count": 20,
+    "text_count": 20
+  },
+  "listed": [
+    {
+      "blob": "23522882e2b193d1b14f3f4c93471e9597e44368",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+      "pattern": "c",
+      "sha256": "29ff7b07f98392457b6fe05fe06682e1bf413d20e94f696fe14d84271a3691eb"
+    },
+    {
+      "blob": "0676e3b5149a082695ebbaff3f826e80b6e7869f",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py",
+      "pattern": "c",
+      "sha256": "3fa429c9fb8415e4e20da6a14f2a6067162cac7cbd4c8c90aa7dc8e9f9ecc385"
+    },
+    {
+      "blob": "8b147c73cec6ae5b7074a2d9cee62ea6828a1884",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+      "pattern": "c",
+      "sha256": "b6ed2ec95426058a79a8f39ffeff55f7dbc0c4f93fc350a273ca2166a0c6f0df"
+    },
+    {
+      "blob": "e19abffcadd1e6cf98de39805d7ca9a197131d60",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+      "pattern": "b",
+      "sha256": "7c313dca6ce62a3127725f6d3eec28272e115b044a08a9ff0b53f3986a059864"
+    },
+    {
+      "blob": "a44406c154dd45d5f703b1f93100d63f058f0b92",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py",
+      "pattern": "b",
+      "sha256": "1b217ab52fee4ed0c01d6b3d83f1ddedb4d53e6e2a40d2987c4b97cd736169e3"
+    },
+    {
+      "blob": "c134b5b1726ec550807391b3c559f5bc65e7bb5f",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+      "pattern": "b",
+      "sha256": "9c9936546d9abe70446370ba35301fc00b3c357ea9662bcf218deffe1ab74d75"
+    },
+    {
+      "blob": "de59554b0c4ed6bcb9d68c7c80433dfc0afad0c4",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+      "pattern": "b",
+      "sha256": "c7d4c7fbf40b6e5df6eef82ca7103dea5774870eeeec955d99fed0cc54e50564"
+    },
+    {
+      "blob": "8ca45ca027c26e33b656ed78c4a4d4ff17b03494",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      "pattern": "b",
+      "sha256": "7d84f7cf74799674669e58c2d0167defea2eff961b59796f3075fd98f537bbf5"
+    },
+    {
+      "blob": "e87609a3c98b06770a07b9f524bb0b81571ceff5",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      "pattern": "b",
+      "sha256": "7c8e79e51c2d76f3cdcf70914bfd406c00d3f9136c5484f88162344be62b4f17"
+    },
+    {
+      "blob": "56b3b9eace5bc6da4c7a712826076dc3df7a41c5",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+      "pattern": "b",
+      "sha256": "98b896e4f12caa23e8bd384c63a2ea36fce9c97bdf6d2d33de1df5d3c80e0b51"
+    },
+    {
+      "blob": "3705e1aa94671d11be91290e72ee4909c4e2c730",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+      "pattern": "b",
+      "sha256": "d1e11a22d5aa0ed0b47107e98199c82c02d572aed2ef2e7ca90288536784372a"
+    },
+    {
+      "blob": "61100195e5c85a22e5db84b9bc25ed9d0c7a463c",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py",
+      "pattern": "b",
+      "sha256": "bbb0c233b607df80049a3a659007e846401630551f21fe3cb5518c7550d1975c"
+    },
+    {
+      "blob": "bb8919bae36c8decc507d80df961dca7d2ae20f5",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+      "pattern": "b",
+      "sha256": "1f29b2b6740a25d034fba7884b189b2a247d3959210c845c8e4e8bd9beef3449"
+    },
+    {
+      "blob": "16b7b38757916109a3b02d30818d4b9e00f71b6b",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+      "pattern": "b",
+      "sha256": "3fa3efa21f11a3eb8534e89a8d0a024ccc5f433d5a3dce99e2a7ec09c80cd35a"
+    },
+    {
+      "blob": "ee073736c85c58cef75be202b219056b8d4652bc",
+      "path": "studies/m0/c1_fix4_a3_run.py",
+      "pattern": "a",
+      "sha256": "7ab692aa5f91a1063747c5930d03f5ef1426cd01f9cb96a9bf123a4a050cd029"
+    },
+    {
+      "blob": "9beefe9d7fcf2b388f9611cbdcac93e054dff977",
+      "path": "studies/m0/c1_fix4_battery.py",
+      "pattern": "a",
+      "sha256": "e397cd096be39441bc9cf8d4e67c6901d41517c97d9209f39b7dfe40a2b6ce09"
+    },
+    {
+      "blob": "2dd55ec7f8ed6b1939369f19d4fe9ff12033e8c7",
+      "path": "studies/m0/c1_fix4_draw.py",
+      "pattern": "a",
+      "sha256": "b2b8c232d4548a104395a8b7420a11e15c58b7c718b90ca834631354dfed3f73"
+    },
+    {
+      "blob": "221cb349a1dbe27f2a60efc7f00eedb67f1a17ac",
+      "path": "studies/m0/m1_fix4_battery.py",
+      "pattern": "a",
+      "sha256": "d83e701f338b93ab54184a3d03ef41b717f538ca8a4a99368457c5416c0e5e6c"
+    },
+    {
+      "blob": "d3432582582344891a2a169b7bec44e3732fe104",
+      "path": "studies/m0/r1_fix4_measure.py",
+      "pattern": "a",
+      "sha256": "daa131f157391f391017973a3fdb0ba24984648fb5d82beb217a412f67012a68"
+    },
+    {
+      "blob": "8baf7e450e07e4950b2ff4012afc5d7c1f7aca38",
+      "path": "studies/m0/r2_fix4_battery.py",
+      "pattern": "a",
+      "sha256": "2e48179bf194be7e00411e44e982e7be1c35ab2b0f1a0434fdee8a288ef8b618"
+    }
+  ],
+  "near_misses_not_matched": [
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f10_assemble.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f2_keys.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4_pool.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f6_capacity.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f6b_collisions.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f6d_capacity_all_levels.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f7_levels.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f8_consistency.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f9_repro_pool.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/asks_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/build_final_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/cap_cascade_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/cap_summary_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/capacity_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/check_keys_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/compare_repro_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/exclusion_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/levels_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/pool_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/repro_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/templates_a5.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen4.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics3.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/solvers3.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/build_final_json.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/capacity_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/check_keys_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/exclusion_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/levels_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/pool_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/repro_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/samples.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/weekday_hops.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_capacity.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_final_json.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_frombase_digits.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_harness_check.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_interval_diag.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_keys.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_levels.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_summ.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_phrases.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_render.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_repro.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_shapes.py",
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py",
+    "studies/m0/c1_fix4_capacity.py",
+    "studies/m0/c1_fix4_exec.py",
+    "studies/m0/c1_fix4_levels.py",
+    "studies/m0/c1_fix4_rules_table.py",
+    "studies/m0/c1_fix4_survivors.py",
+    "studies/m0/m1_fix4_capacity.py",
+    "studies/m0/m1_fix4_checks.py",
+    "studies/m0/m1_fix4_survivors.py",
+    "studies/m0/m1_fix4_verify.py",
+    "studies/m0/r1_fix4_a3_heur.py",
+    "studies/m0/r1_fix4_a3_solvers.py",
+    "studies/m0/r1_fix4_a4_heur.py",
+    "studies/m0/r1_fix4_capacity.py",
+    "studies/m0/r1_fix4_gen.py",
+    "studies/m0/r1_fix4_levels.py",
+    "studies/m0/r1_fix4_survivors.py",
+    "studies/m0/r1_fix4_table.py",
+    "studies/m0/r1_fix4_tells.py",
+    "studies/m0/r2_fix4_a3_heur.py",
+    "studies/m0/r2_fix4_a3_solvers.py",
+    "studies/m0/r2_fix4_a4_heur.py",
+    "studies/m0/r2_fix4_build.py",
+    "studies/m0/r2_fix4_capacity.py",
+    "studies/m0/r2_fix4_levels.py",
+    "studies/m0/r2_fix4_set.py"
+  ]
+}
