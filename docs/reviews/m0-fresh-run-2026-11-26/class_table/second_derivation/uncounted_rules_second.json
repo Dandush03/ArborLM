@@ -1,0 +1,1020 @@
+{
+ "R1": [
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "abstain_as_no",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "abstain_as_yes",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "all_and",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "all_or",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "chebyshev",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "direction_ignored_p_over_q",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "direction_slip",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:17"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "drop_negation",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "duration_end_off_by_one",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "east_west_mirrored",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "euclid_rounded",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "inclusive_day_reading",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "inverse_answer",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "k_minus_1",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "k_plus_1",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "latest_start_first",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "off_by_one_plus",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "rotation_reversed",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "rotations_reversed",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "signed_axis_merged",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "total_minus_union_wrong_sign",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:16"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "all",
+   "rule": "wrong_first_mover",
+   "class": "M",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:15"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "categories_default_exceptions",
+   "rule": "partial_walk_3",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:13"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "categories_default_exceptions",
+   "rule": "rule_at_distance_1",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:14"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "categories_default_exceptions",
+   "rule": "second_nearest_rule",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:14"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "categories_default_exceptions",
+   "rule": "third_nearest_rule",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:14"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "compass_turns",
+   "rule": "ccw_as_cw",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "compass_turns",
+   "rule": "cw270_as_90",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "compass_turns",
+   "rule": "ignore_180s",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "compass_turns",
+   "rule": "left_right_only",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:12"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "conditional_decision_tree",
+   "rule": "first_cond_only_then_first",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:13"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "conditional_decision_tree",
+   "rule": "ignore_last_condition",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:13"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "conditional_threshold_rule",
+   "rule": "off_by_one_low",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:13"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "conditional_threshold_rule",
+   "rule": "strict_gt_D",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:13"
+  },
+  {
+   "unit_scope": "R1a,R1b",
+   "lineage_scope": "containers_stack_piles",
+   "rule": "turn_moves_bottom_to_top",
+   "class": "EXCL",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py:13"
+  }
+ ],
+ "R2": [
+  {
+   "kind": "klass_clause",
+   "clause_index": 1,
+   "match": "(P",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:35"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 2,
+   "match": "[a3] ignore reverses",
+   "class": "artifact",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:37"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 3,
+   "match": "[a3] ignore moves to the end",
+   "class": "artifact",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:37"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 4,
+   "match": "[a3] removal by deleting the minimum and keeping the order of the rest",
+   "class": "artifact",
+   "depends_on": "shape",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:39"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 5,
+   "match": "[a3] only the first rule",
+   "class": "artifact",
+   "depends_on": "level",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:41"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 6,
+   "match": "[a3] only the last rule, on the start string",
+   "class": "artifact",
+   "depends_on": "level",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:41"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 7,
+   "match": "[a3] rules in reverse order",
+   "class": "artifact",
+   "depends_on": "level",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:41"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 8,
+   "match": "[a3] rules in reverse order",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:43"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 9,
+   "match": "[mine] [cond] rules in reverse order",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:43"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 10,
+   "match": "[mine] [cond] all rules applied to the start string at once (left to right, first matching rule)",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:43"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 11,
+   "match": "[a3] digits read right to left",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:20"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 12,
+   "match": "[a3] k-th largest",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:20"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 13,
+   "match": "[a3] syndrome read with the bits reversed",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:20"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 14,
+   "match": "[a3] doubling the other parity",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:20"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 15,
+   "match": "[a3] check digit: payload total without the new digit",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:21"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 16,
+   "match": "[mine] check digit: payload's own last digit not doubled",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:21"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 17,
+   "match": "[a3] first occurrence only per rule",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:22"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 18,
+   "match": "[a3] largest: largest prime <= sqrt(n) dividing n",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:22"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 19,
+   "match": "[a3] (b-a)//m + 1",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:22"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 20,
+   "match": "[mine] latest start first",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:23"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 21,
+   "match": "[mine] Floyd bottom-up heapify",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:23"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 22,
+   "match": "[mine] inverse mapping t times",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:23"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 23,
+   "match": "letter pairs",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:26"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 24,
+   "match": "[a3] outer two letters each side match",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:26"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 25,
+   "match": "[a3] first letter equals last letter",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:26"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 26,
+   "match": "centres only",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:27"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 27,
+   "match": "[a3] longest odd palindrome only",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:27"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 28,
+   "match": "[a3] longest even palindrome only",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:27"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 29,
+   "match": "longest palindrome of length <= 7",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:27"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 30,
+   "match": "scanning only primes up to 61",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:28"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 31,
+   "match": "first failing check",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:28"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 32,
+   "match": "plain digit sum",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:28"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 33,
+   "match": "count of piles that are a win alone is odd",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:29"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 34,
+   "match": "odd number of piles that are first-player wins alone",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:29"
+  },
+  {
+   "kind": "klass_clause",
+   "clause_index": 35,
+   "match": "[cond] ignore",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py:29"
+  },
+  {
+   "kind": "new_rule",
+   "clause_index": null,
+   "match": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py:137"
+  },
+  {
+   "kind": "new_rule",
+   "clause_index": null,
+   "match": "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)",
+   "class": "P",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py:145"
+  },
+  {
+   "kind": "new_rule",
+   "clause_index": null,
+   "match": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+   "class": "partial",
+   "depends_on": null,
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py:22"
+  }
+ ],
+ "M1": [
+  {
+   "lineage_stem": "consecutive",
+   "prefixed_key": "im:mean_plus_step",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:10"
+  },
+  {
+   "lineage_stem": "division_counting",
+   "prefixed_key": "im:k_minus_remainder_ignores_exact_fit",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:11"
+  },
+  {
+   "lineage_stem": "finite_differences",
+   "prefixed_key": "im:next_term_when_asked_later",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:12"
+  },
+  {
+   "lineage_stem": "gcd_lcm",
+   "prefixed_key": "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:15"
+  },
+  {
+   "lineage_stem": "gcd_lcm",
+   "prefixed_key": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:16"
+  },
+  {
+   "lineage_stem": "gcd_lcm",
+   "prefixed_key": "im:product_over_gcd_of_all",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:14"
+  },
+  {
+   "lineage_stem": "last_digit_power",
+   "prefixed_key": "im:fermat_misapplied_e_mod_p_plus_1",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:22"
+  },
+  {
+   "lineage_stem": "prime_factors",
+   "prefixed_key": "im:largest_le_sqrt",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:19"
+  },
+  {
+   "lineage_stem": "ratio_share",
+   "prefixed_key": "a3:largest_share",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py:82"
+  },
+  {
+   "lineage_stem": "ratio_share",
+   "prefixed_key": "im:largest_share",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:17"
+  },
+  {
+   "lineage_stem": "ratio_share",
+   "prefixed_key": "im:smallest_share",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:18"
+  },
+  {
+   "lineage_stem": "slot_permutations",
+   "prefixed_key": "im:ignore_first_rule",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:20"
+  },
+  {
+   "lineage_stem": "slot_permutations",
+   "prefixed_key": "im:parity_fraction_of_total",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py:21"
+  }
+ ],
+ "C1": [
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+   "rule": "S.all_ones_start",
+   "class": "artefact_a3",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py:24"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+   "rule": "S.no_back",
+   "class": "artefact_a3",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py:24"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+   "rule": "S.no_skips",
+   "class": "artefact_a3",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py:24"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+   "rule": "S.no_turns",
+   "class": "artefact_a3",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py:24"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "EFF_SM",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py:70"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "H.c_semantics",
+   "class": "hazard",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:423"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.all_ones_start",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:292"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.all_rems",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:204"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.all_rounds_weighted",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:203"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.always_skip",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:403"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.arg_minus_1",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:447"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.arg_plus_1",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:448"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.copy_on_alias",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:395"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.count_only",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:348"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.digit_sum",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:246"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.drop_even_branch",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:501"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.drop_mod",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:442"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.drop_outer_mod",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:421"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.flip_rule",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:391"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.ignore_dead_initial",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:497"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.ignore_step",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:565"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.msd_first_fold",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:240"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.msd_first_wsum",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:245"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.never_pop",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:385"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_back",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:408"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_condition",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:347"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_filter",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:342"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_final_close",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:562"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_find",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:390"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_halving",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:215"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_mod_term",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:181"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_skips",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:402"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_tail",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:451"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.no_turns",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:407"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.one_generation",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:416"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.one_less_iter",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:444"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.one_less_round",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:197"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.one_more_iter",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:443"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.one_more_round",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:196"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.one_pass_only",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:488"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.other_order",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:174"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.pop_any_closer",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:384"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.prefix_sum_histogram",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:337"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.rounds_x_final",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:214"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.sorted_neighbours_last",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:470"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.sorted_neighbours_order",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:466"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.start_at_0",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:498"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.step1",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:456"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.sum_before_step",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:185"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.swap_combos_orders",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:374"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.undirected_dist",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:475"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.undirected_distsum",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:480"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.undirected_order",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:467"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.unweighted_R",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:201"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.use_initial_flags",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:295"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py",
+   "rule": "M.weight_k",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py:202"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+   "rule": "H.negative_step_as_positive",
+   "class": "hazard",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py:136"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+   "rule": "M.no_even_branch",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py:124"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+   "rule": "M.style0_everywhere",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py:96"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+   "rule": "H.negative_step_as_positive",
+   "class": "hazard",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py:137"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+   "rule": "M.no_even_branch",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py:125"
+  },
+  {
+   "output_of": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+   "rule": "M.style0_everywhere",
+   "class": "partial",
+   "source": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py:97"
+  },
+  {
+   "output_of": "studies/m0/c1_fix3_battery.py",
+   "rule": "C.algorithm_rerun",
+   "class": "control",
+   "source": "studies/m0/c1_fix3_battery.py:265"
+  },
+  {
+   "output_of": "studies/m0/c1_fix3_battery.py",
+   "rule": "C.algorithm_rerun_after",
+   "class": "control",
+   "source": "studies/m0/c1_fix3_battery.py:213"
+  },
+  {
+   "output_of": "studies/m0/c1_fix3_battery.py",
+   "rule": "C.algorithm_rerun_before",
+   "class": "control",
+   "source": "studies/m0/c1_fix3_battery.py:214"
+  },
+  {
+   "output_of": "studies/m0/c1_fix3_battery.py",
+   "rule": "C.self_check",
+   "class": "control",
+   "source": "studies/m0/c1_fix3_battery.py:439"
+  }
+ ]
+}
