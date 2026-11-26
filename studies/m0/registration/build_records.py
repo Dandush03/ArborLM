@@ -56,6 +56,8 @@ RULINGS_9 = f"{RUN_DIR}/LEAD_RULINGS_9.md"
 DOMAIN_LIST = f"{MANIFESTS}/domain_list.json"
 WORDS_13 = "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_13.md"
 ADR_0033 = "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md"
+RECORDS_CHECK = f"{RUN_DIR}/records_check/RECORDS_CHECK.md"
+GENERATOR_FILES = f"{RUN_DIR}/records_check/registered_generator_files.json"
 WORDS_11 = "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_11.md"
 DROPS_AFTER_FINAL = (
     "docs/reviews/m0-lineage-decision-2026-11-25/cross_evaluation_map/drops_after_final_checks.txt"
@@ -660,6 +662,23 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
     )
 
     # ---- the status record -----------------------------------------------------------------------------------------
+    REGISTRATION_RECORDS = {
+        "survivor_list_of_record": {
+            **ref(inp, SURVIVORS),
+            "role": "the lineage is on it (stage 0)",
+        },
+        "stage2_conditions": {**ref(inp, STAGE2), "role": "every stage-2 condition PASS (stage 2)"},
+        "fresh_run_not_dropped": {
+            **ref(inp, DROPPED),
+            "role": "the 15 lineages the fresh run dropped; the lineage is not among them (stage 1S)",
+        },
+        "candidate_list": {**ref(inp, CANDIDATES), "role": "the lineage is a candidate (stage 2)"},
+        "partition_of_record": {**ref(inp, PARTITION), "role": "its cluster's part (stage 3)"},
+        "capacity_record": {
+            **ref(inp, CAPACITY),
+            "role": "the lineage is in S at the fixed point of stage 4 and its cluster holds a registered lineage",
+        },
+    }
     status: dict[str, dict[str, Any]] = {}
     counts: dict[str, dict[str, int]] = {e: {"REGISTERED": 0, "NOT REGISTERED": 0} for e in EVALS}
     not_registered_by_stage: dict[str, dict[str, int]] = {e: {} for e in EVALS}
@@ -686,6 +705,8 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
         stage_key = None
         if lin in registered:
             entry["status"] = "REGISTERED"
+            entry["stage"] = "stage 5, registration"
+            entry["established_by"] = list(REGISTRATION_RECORDS)
         else:
             entry["status"] = "NOT REGISTERED"
             if lin in removed:
@@ -702,6 +723,7 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
                     f"its own demand not met at {levels_text}"
                 )
                 entry["reason_detail"] = info
+                entry["source_record"] = ref(inp, CAPACITY)
                 stage_key = "stage 4, capacity"
             elif lin in dropped_by_id:
                 d = dropped_by_id[lin]
@@ -728,6 +750,7 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
                     "n_rows_over_the_bound": len(d["all_rows_over_the_bound"]),
                     "source_file": DROPPED,
                 }
+                entry["source_record"] = ref(inp, DROPPED)
                 if lin in WORDING_SEVEN:
                     entry["note"] = WORDING_NOTE
                     entry["note_source"] = WORDS_11
@@ -783,6 +806,17 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
             "and reason. Assembled by code from committed records; no judgement. The map carries no status and is not changed by this file."
         ),
         "version": 1,
+        "completion_note": (
+            "This is the first version of the status record as completed after the independent records check "
+            "(RECORDS_CHECK.md, finding 1): each REGISTERED lineage names the stage that set its status and the records that "
+            "establish it, and each capacity or fresh-run drop names its source record. No count and no status differs from the "
+            "version before the check; nothing had used that version."
+        ),
+        "records_check": {
+            **ref(inp, RECORDS_CHECK),
+            "what": "independent engineering evidence, not Astra validation and not human approval",
+        },
+        "records_establishing_registration": REGISTRATION_RECORDS,
         "status": "First version of the status record, part of G-gen's record of record made at the human lead's domain list of 2026-11-26",
         "counts": {
             "per_evaluation_and_status": counts,
@@ -1134,6 +1168,40 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
             raise Stop(f"ruling {rid} not found in {rel}")
         return m.group(1).strip()
 
+    def ruling_entry(
+        rel: str, rid: str, excerpts: list[str], classification: str
+    ) -> dict[str, Any]:
+        text = inp.text(rel)
+        for ex in excerpts:
+            check(ex in text, f"excerpt of {rid} not found in {rel}")
+        return {
+            **ref(inp, rel),
+            "ruling": rid,
+            "ruling_text_excerpts": excerpts,
+            "classification_of_the_records_check": classification + " (PENDING LEAD REVIEW)",
+            "records_check": ref(inp, RECORDS_CHECK),
+        }
+
+    gap_filling = [
+        ruling_entry(
+            RULINGS_8,
+            "R-46",
+            [
+                "a field is a rule only if its prediction for an item can be computed without that item's answer",
+                "This ruling leans toward passing for the two fields it leaves unread",
+            ],
+            "fills a gap (what a 'rule' is); leans toward passing; not a departure",
+        ),
+        ruling_entry(
+            RULINGS_8,
+            "R-54",
+            [
+                "This reading is the one favourable to the lineages and is reported to the human lead as such",
+            ],
+            "reads 'fixtures carry no answer' as allowing aggregate format lines from the keys; favourable to the lineages; a reading, not a departure",
+        ),
+    ]
+
     departures = {
         "lead_ruling_R_56": {
             **ref(inp, RULINGS_8),
@@ -1149,6 +1217,41 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
                 for k in ("distinct_item_key", "pool_builder", "capacity_runner")
             },
         },
+        "lead_ruling_R_60": ruling_entry(
+            RULINGS_8,
+            "R-60",
+            [
+                "The C1 commands that the final auditor ran with `python -I` ignore `PYTHONHASHSEED`.",
+                "reproducibility across runs is not claimed for those five scripts",
+            ],
+            'departure from ADR-0033 section 6.2 ("Every process runs with PYTHONHASHSEED=0"): five C1 scripts run with -I ignore PYTHONHASHSEED',
+        ),
+        "lead_ruling_R_62_b": ruling_entry(
+            RULINGS_9,
+            "R-62",
+            [
+                "The key also relabels object words, event words and invented category words, as well as personal and place names.",
+                "which is less favourable to passing",
+            ],
+            "departure from the decided reading (i), 'names relabelled only': the key relabels object, event and invented words as well as names; wider, less favourable to passing",
+        ),
+        "lead_ruling_R_62_c": ruling_entry(
+            RULINGS_9,
+            "R-62",
+            [
+                "`R2.caesar_shift` keeps its invented words: there they are the text being shifted, and relabelling them changes the answer",
+                "is reported to the human lead for his confirmation with the capacity results",
+            ],
+            "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; awaiting the human lead's confirmation",
+        ),
+        "lead_ruling_R_66": ruling_entry(
+            RULINGS_9,
+            "R-66",
+            [
+                'otherwise the fixed sentence "not on the survivor list of record; superseded or dropped before it (no single committed reason found)" (141)',
+            ],
+            "against section 8 and section 3 item 6: 141 lineages carry no single committed reason (180 counting the superseded-by tier, 39)",
+        ),
         "family_count_fewer_than_12_is_a_departure_from_ADR_0033_line_268": {
             "applies": bool(departures_family),
             "stops_nothing": True,
@@ -1195,6 +1298,29 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
             }
 
     domain_list_out = domain_list_block(inp)
+    gen = inp.json(GENERATOR_FILES)
+    closure = gen["c_static_import_closure_of_b_recommended_freeze_list"]
+    check(
+        closure["count"] == len(closure["sha256"]) == 49,
+        "the import closure does not hold 49 files",
+    )
+    check(
+        gen["generators_commit"].startswith("7cd0ac5a"),
+        "the generator file list is for another commit",
+    )
+    for path, sha in sorted(closure["sha256"].items()):
+        check(inp.exists(path), f"frozen generator file missing: {path}")
+        check(inp.sha(path) == sha, f"frozen generator file differs: {path}")
+    frozen_generator_files = {
+        "commit": "7cd0ac5a",
+        "commit_full": gen["generators_commit"],
+        "what": "the static import closure of the functions behind the builders of the 65 registered lineages",
+        "source_list": ref(inp, GENERATOR_FILES),
+        "unchanged_since_the_commit": gen["unchanged_since_generators_commit"],
+        "count": len(closure["sha256"]),
+        "files": [{"path": p, "sha256": h} for p, h in sorted(closure["sha256"].items())],
+        "rehashed_in_the_worktree_and_equal": True,
+    }
     ggen = {
         "status": GGEN_STATUS,
         "domain_list": domain_list_out,
@@ -1286,6 +1412,13 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
             "every_hash_of_stage_0": stage_0_hashes,
         },
         "departures": departures,
+        "awaiting_human_lead_confirmation": ["R-62 (c)"],
+        "gap_filling_rulings_that_lean_toward_passing": gap_filling,
+        "frozen_generator_files": frozen_generator_files,
+        "independent_check_of_the_records": {
+            **ref(inp, RECORDS_CHECK),
+            "what": "independent engineering evidence, not Astra validation and not human approval",
+        },
         "lead_rulings": [ref(inp, RULINGS_8), ref(inp, RULINGS_9)],
         "section_9_item_5_reading_per_part": section9,
         "inputs_sha256": {
@@ -1308,6 +1441,8 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
                     WORDS_11,
                     WORDS_13,
                     ADR_0033,
+                    RECORDS_CHECK,
+                    GENERATOR_FILES,
                     DOMAIN_LIST,
                     *HASHES_SEEDS,
                 }
