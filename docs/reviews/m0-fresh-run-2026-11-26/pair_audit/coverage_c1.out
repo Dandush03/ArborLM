@@ -1,0 +1,255 @@
+== solver2_c1.py: statements 611; run on fixtures 357; run on fresh 357; fresh-only 0; never run 254; fixture-only 0
+  NEVER 34 [None]     """A construct the interpreter deliberately does not implement."""
+  NEVER 38 [None]     """A run-time error the real program would also raise (e.g. IndexError)."""
+  NEVER 47 [None]     __slots__ = ("start", "stop", "step")
+  NEVER 59 [values]             while i > self.stop:
+  NEVER 60 [values]                 yield i
+  NEVER 61 [values]                 i += self.step
+  NEVER 65 [None]     __slots__ = ("name", "params", "body", "local_names")
+  NEVER 72 [None]     __slots__ = ("name",)
+  NEVER 93 [type_name]     if isinstance(x, bool):
+  NEVER 94 [type_name]         return "bool"
+  NEVER 95 [type_name]     if isinstance(x, int):
+  NEVER 96 [type_name]         return "int"
+  NEVER 97 [type_name]     if isinstance(x, str):
+  NEVER 98 [type_name]         return "str"
+  NEVER 99 [type_name]     if isinstance(x, list):
+  NEVER 100 [type_name]         return "list"
+  NEVER 101 [type_name]     if x is None:
+  NEVER 102 [type_name]         return "NoneType"
+  NEVER 103 [type_name]     if isinstance(x, RangeObj):
+  NEVER 104 [type_name]         return "range"
+  NEVER 105 [type_name]     if isinstance(x, (Function, Builtin)):
+  NEVER 106 [type_name]         return "function"
+  NEVER 107 [type_name]     return type(x).__name__
+  NEVER 112 [truthy]         return False
+  NEVER 115 [truthy]     if isinstance(x, int):
+  NEVER 116 [truthy]         return x != 0
+  NEVER 117 [truthy]     if isinstance(x, (str, list)):
+  NEVER 118 [truthy]         return len(x) > 0
+  NEVER 119 [truthy]     if isinstance(x, (Function, Builtin, RangeObj)):
+  NEVER 120 [truthy]         return True if not isinstance(x, RangeObj) else any(True for _ in x.values())
+  NEVER 121 [truthy]     raise Unsupported("truth value of " + type_name(x))
+  NEVER 125 [floordiv]     """Python floor division on ints, done from non-negative magnitudes."""
+  NEVER 128 [floordiv]         raise ItemRuntimeError("ZeroDivisionError: integer division or modulo by zero")
+  NEVER 138 [mod]     """Python modulo: a - b * floor(a / b); result has the divisor's sign."""
+  NEVER 154 [int_to_str]         raise ItemRuntimeError("ValueError: int too large to convert to str")
+  NEVER 159 [str_repr]     """Python repr of a str: single quotes unless it has ' and no "."""
+  NEVER 160 [str_repr]     q = '"' if ("'" in s and '"' not in s) else "'"
+  NEVER 161 [str_repr]     out = [q]
+  NEVER 162 [str_repr]     for ch in s:
+  NEVER 163 [str_repr]         if ch == "\\":
+  NEVER 164 [str_repr]             out.append("\\\\")
+  NEVER 165 [str_repr]         elif ch == q:
+  NEVER 166 [str_repr]             out.append("\\" + ch)
+  NEVER 167 [str_repr]         elif ch == "\n":
+  NEVER 168 [str_repr]             out.append("\\n")
+  NEVER 169 [str_repr]         elif ch == "\t":
+  NEVER 170 [str_repr]             out.append("\\t")
+  NEVER 171 [str_repr]         elif ch == "\r":
+  NEVER 172 [str_repr]             out.append("\\r")
+  NEVER 173 [str_repr]         elif " " <= ch <= "~":
+  NEVER 174 [str_repr]             out.append(ch)
+  NEVER 176 [str_repr]             raise Unsupported("repr of non-printable/non-ASCII character %r" % ch)
+  NEVER 177 [str_repr]     out.append(q)
+  NEVER 178 [str_repr]     return "".join(out)
+  NEVER 183 [render_repr]         return "True" if x else "False"
+  NEVER 187 [render_repr]         return str_repr(x)
+  NEVER 189 [render_repr]         return "None"
+  NEVER 193 [render_repr]             return "[...]"
+  NEVER 199 [render_repr]     raise Unsupported("rendering of " + type_name(x))
+  NEVER 203 [render_str]     """What str(x) / print(x) shows: strings bare, everything else as repr."""
+  NEVER 214 [eq]     if isinstance(a, list) and isinstance(b, list):
+  NEVER 215 [eq]         if a is b:
+  NEVER 216 [eq]             return True
+  NEVER 217 [eq]         if len(a) != len(b):
+  NEVER 218 [eq]             return False
+  NEVER 219 [eq]         return all(eq(x, y) for x, y in zip(a, b))
+  NEVER 220 [eq]     if a is None or b is None:
+  NEVER 221 [eq]         return a is b
+  NEVER 222 [eq]     if isinstance(a, (Function, Builtin)) or isinstance(b, (Function, Builtin)):
+  NEVER 223 [eq]         return a is b
+  NEVER 224 [eq]     if type_name(a) != type_name(b) and not (is_int(a) and is_int(b)):
+  NEVER 225 [eq]         return False
+  NEVER 226 [eq]     raise Unsupported("== between %s and %s" % (type_name(a), type_name(b)))
+  NEVER 230 [less]     """a < b with Python's ordering for ints, strs (code points) and lists."""
+  NEVER 233 [less]     if isinstance(a, str) and isinstance(b, str):
+  NEVER 234 [less]         for x, y in zip(a, b):
+  NEVER 235 [less]             if x != y:
+  NEVER 236 [less]                 return ord(x) < ord(y)
+  NEVER 237 [less]         return len(a) < len(b)
+  NEVER 238 [less]     if isinstance(a, list) and isinstance(b, list):
+  NEVER 239 [less]         for x, y in zip(a, b):
+  NEVER 240 [less]             if not eq(x, y):
+  NEVER 241 [less]                 return less(x, y)
+  NEVER 242 [less]         return len(a) < len(b)
+  NEVER 243 [less]     raise ItemRuntimeError("TypeError: '<' not supported between %s and %s" % (type_name(a), type_name(b)))
+  NEVER 260 [compare]     raise Unsupported("comparison operator " + type(op).__name__)
+  NEVER 271 [binop]         raise ItemRuntimeError("TypeError: + between %s and %s" % (type_name(a), type_name(b)))
+  NEVER 275 [binop]         raise ItemRuntimeError("TypeError: - between %s and %s" % (type_name(a), type_name(b)))
+  NEVER 281 [binop]         if is_int(a) and isinstance(b, (str, list)):
+  NEVER 282 [binop]             return repeat(b, as_int(a))
+  NEVER 283 [binop]         raise ItemRuntimeError("TypeError: * between %s and %s" % (type_name(a), type_name(b)))
+  NEVER 287 [binop]         raise ItemRuntimeError("TypeError: // between %s and %s" % (type_name(a), type_name(b)))
+  NEVER 291 [binop]         raise Unsupported("% on " + type_name(a) + " (string formatting)")
+  NEVER 292 [binop]     raise Unsupported("binary operator " + type(op).__name__)
+  NEVER 298 [repeat]     out = []
+  NEVER 299 [repeat]     for _ in range(n):
+  NEVER 300 [repeat]         out.extend(seq)             # shallow: the same element objects repeat
+  NEVER 301 [repeat]     return out
+  NEVER 306 [norm_index]         raise ItemRuntimeError("TypeError: indices must be integers, not " + type_name(i))
+  NEVER 311 [norm_index]         raise ItemRuntimeError("IndexError: index %d out of range for length %d" % (i, n))
+  NEVER 316 [slice_positions]     """Positions selected by seq[lo:hi:st] on a length-n sequence (CPython's
+  NEVER 320 [slice_positions]             raise ItemRuntimeError("TypeError: slice indices must be integers or None")
+  NEVER 323 [slice_positions]         raise ItemRuntimeError("ValueError: slice step cannot be zero")
+  NEVER 332 [slice_positions]                 v = -1 if step < 0 else 0
+  NEVER 359 [do_slice]     raise ItemRuntimeError("TypeError: %s is not sliceable" % type_name(seq))
+  NEVER 370 [ascii_lower]             raise Unsupported("lower() on non-ASCII character")
+  NEVER 382 [ascii_upper]             raise Unsupported("upper() on non-ASCII character")
+  NEVER 387 [str_replace]     """str.replace(old, new) with no count: left-to-right, non-overlapping."""
+  NEVER 390 [str_replace]         return new + "".join(ch + new for ch in s)
+  NEVER 409 [local_names_of]     """Names local to a function: its parameters and every name it binds
+  NEVER 417 [local_names_of]             raise Unsupported(type(n).__name__ + " statement")
+  NEVER 423 [local_names_of]             names.append(n.target.id)
+  NEVER 425 [local_names_of]             names.append(n.target.id)
+  NEVER 427 [local_names_of]             names.append(n.name)
+  NEVER 428 [local_names_of]             continue
+  NEVER 430 [local_names_of]             raise Unsupported("walrus operator")
+  NEVER 447 [lookup]                 raise ItemRuntimeError("UnboundLocalError: " + name)
+  NEVER 453 [lookup]         raise ItemRuntimeError("NameError: " + name)
+  NEVER 464 [tick]             raise Unsupported("step limit exceeded (possible non-terminating program)")
+  NEVER 475 [exec_stmt]                 raise Unsupported("chained assignment a = b = ...")
+  NEVER 482 [exec_stmt]                     raise Unsupported("slice assignment")
+  NEVER 486 [exec_stmt]                     raise ItemRuntimeError("TypeError: item assignment on " + type_name(container))
+  NEVER 489 [exec_stmt]                 raise Unsupported("assignment target " + type(t).__name__)
+  NEVER 492 [exec_stmt]                 raise Unsupported("augmented assignment target " + type(s.target).__name__)
+  NEVER 497 [exec_stmt]                 if isinstance(rhs, list):
+  NEVER 498 [exec_stmt]                     cur.extend(list(rhs))
+  NEVER 499 [exec_stmt]                 elif isinstance(rhs, str):
+  NEVER 500 [exec_stmt]                     cur.extend(ch for ch in rhs)
+  NEVER 502 [exec_stmt]                     raise ItemRuntimeError("TypeError: list += " + type_name(rhs))
+  NEVER 503 [exec_stmt]                 new = cur
+  NEVER 505 [exec_stmt]                 raise Unsupported("list *= (in-place repeat)")
+  NEVER 518 [exec_stmt]                 raise Unsupported("while ... else")
+  NEVER 524 [exec_stmt]                 raise Unsupported("for ... else")
+  NEVER 526 [exec_stmt]                 raise Unsupported("for target " + type(s.target).__name__)
+  NEVER 529 [exec_stmt]                 raise Unsupported("for loop over " + type_name(it) + " (only range is implemented)")
+  NEVER 538 [exec_stmt]                 raise Unsupported("function definition feature beyond plain positional parameters")
+  NEVER 542 [exec_stmt]                 raise Unsupported("return outside function")
+  NEVER 544 [exec_stmt]         elif isinstance(s, ast.Pass):
+  NEVER 545 [exec_stmt]             pass
+  NEVER 547 [exec_stmt]             raise Unsupported("statement " + type(s).__name__)
+  NEVER 555 [eval]             raise Unsupported("constant of type " + type(v).__name__)
+  NEVER 565 [eval]                 raise ItemRuntimeError("TypeError: unary - on " + type_name(v))
+  NEVER 566 [eval]             if isinstance(e.op, ast.UAdd):
+  NEVER 567 [eval]                 if is_int(v):
+  NEVER 568 [eval]                     return as_int(v)
+  NEVER 569 [eval]                 raise ItemRuntimeError("TypeError: unary + on " + type_name(v))
+  NEVER 570 [eval]             if isinstance(e.op, ast.Not):
+  NEVER 571 [eval]                 return not truthy(v)
+  NEVER 572 [eval]             raise Unsupported("unary operator " + type(e.op).__name__)
+  NEVER 584 [eval]                 elif isinstance(e.op, ast.Or):
+  NEVER 585 [eval]                     if truthy(v):
+  NEVER 586 [eval]                         return v
+  NEVER 588 [eval]                     raise Unsupported("boolean operator " + type(e.op).__name__)
+  NEVER 597 [eval]                     raise Unsupported("comparison operator " + type(op).__name__)
+  NEVER 610 [eval]                 raise Unsupported("tuple subscript")
+  NEVER 614 [eval]             raise ItemRuntimeError("TypeError: %s is not subscriptable" % type_name(obj))
+  NEVER 617 [eval]                 raise Unsupported("keyword arguments in a call")
+  NEVER 619 [eval]                 raise Unsupported("starred arguments")
+  NEVER 627 [eval]         raise Unsupported("expression " + type(e).__name__)
+  NEVER 632 [call_method]                 raise ItemRuntimeError("TypeError: append takes one argument")
+  NEVER 641 [call_method]                 raise ItemRuntimeError("TypeError: replace arguments must be str")
+  NEVER 643 [call_method]         raise Unsupported("method %s.%s with %d argument(s)" % (type_name(obj), name, len(args)))
+  NEVER 650 [call]                 raise ItemRuntimeError("TypeError: %s takes %d arguments" % (fn.name, len(fn.params)))
+  NEVER 653 [call]                 raise Unsupported("call depth over %d (CPython would hit its recursion limit)" % MAX_CALL_DEPTH)
+  NEVER 657 [call]                 result = None                          # falling off the end returns None
+  NEVER 663 [call]         raise ItemRuntimeError("TypeError: %s is not callable" % type_name(fn))
+  NEVER 673 [call_builtin]             raise ItemRuntimeError("TypeError: len of " + type_name(args[0]))
+  NEVER 679 [call_builtin]                 raise ItemRuntimeError("TypeError: bad range arguments")
+  NEVER 683 [call_builtin]                 raise ItemRuntimeError("ValueError: range() arg 3 must not be zero")
+  NEVER 688 [call_builtin]                 raise Unsupported("sum over " + type_name(args[0]))
+  NEVER 692 [call_builtin]                     raise ItemRuntimeError("TypeError: sum of " + type_name(x))
+  NEVER 698 [call_builtin]                 raise Unsupported(name + " over " + type_name(items))
+  NEVER 700 [call_builtin]                 raise ItemRuntimeError("ValueError: %s of empty sequence" % name)
+  NEVER 707 [call_builtin]         if name == "abs":
+  NEVER 708 [call_builtin]             self._arity(name, args, 1)
+  NEVER 709 [call_builtin]             if is_int(args[0]):
+  NEVER 710 [call_builtin]                 v = as_int(args[0])
+  NEVER 711 [call_builtin]                 return -v if v < 0 else v
+  NEVER 712 [call_builtin]             raise ItemRuntimeError("TypeError: abs of " + type_name(args[0]))
+  NEVER 713 [call_builtin]         if name == "sorted":
+  NEVER 714 [call_builtin]             self._arity(name, args, 1)
+  NEVER 715 [call_builtin]             if not isinstance(args[0], list):
+  NEVER 716 [call_builtin]                 raise Unsupported("sorted over " + type_name(args[0]))
+  NEVER 717 [call_builtin]             out = []
+  NEVER 718 [call_builtin]             for x in args[0]:      # stable insertion sort using `less`
+  NEVER 719 [call_builtin]                 k = len(out)
+  NEVER 720 [call_builtin]                 while k > 0 and less(x, out[k - 1]):
+  NEVER 721 [call_builtin]                     k -= 1
+  NEVER 722 [call_builtin]                 out.insert(k, x)
+  NEVER 723 [call_builtin]             return out
+  NEVER 724 [call_builtin]         raise Unsupported("builtin " + name)
+  NEVER 729 [_arity]             raise ItemRuntimeError("TypeError: %s takes %d argument(s)" % (name, n))
+  NEVER 741 [run_module]         raise ItemRuntimeError("program printed %d lines, expected exactly 1" % len(interp.lines))
+  NEVER 747 [source_of]         raise Unsupported("question template not recognised")
+  NEVER 752 [solve_c1]     """Answer = the single line the program in the question text prints."""
+  NEVER 764 [_sx]     """structured expression -> ast expression"""
+  NEVER 765 [_sx]     tag = x[0]
+  NEVER 766 [_sx]     if tag == "n":
+  NEVER 767 [_sx]         return ast.Constant(x[1])
+  NEVER 768 [_sx]     if tag == "s":
+  NEVER 769 [_sx]         return ast.Constant(x[1])
+  NEVER 770 [_sx]     if tag == "v":
+  NEVER 771 [_sx]         return ast.Name(x[1], ast.Load())
+  NEVER 772 [_sx]     if tag == "b":
+  NEVER 773 [_sx]         return ast.BinOp(_sx(x[2]), _BIN[x[1]](), _sx(x[3]))
+  NEVER 774 [_sx]     if tag == "c":
+  NEVER 775 [_sx]         return ast.Compare(_sx(x[2]), [_CMP[x[1]]()], [_sx(x[3])])
+  NEVER 776 [_sx]     if tag == "and":
+  NEVER 777 [_sx]         return ast.BoolOp(ast.And(), [_sx(x[1]), _sx(x[2])])
+  NEVER 778 [_sx]     if tag == "or":
+  NEVER 779 [_sx]         return ast.BoolOp(ast.Or(), [_sx(x[1]), _sx(x[2])])
+  NEVER 780 [_sx]     if tag == "not":
+  NEVER 781 [_sx]         return ast.UnaryOp(ast.Not(), _sx(x[1]))
+  NEVER 782 [_sx]     if tag == "list":
+  NEVER 783 [_sx]         return ast.List([_sx(y) for y in x[1:]], ast.Load())
+  NEVER 784 [_sx]     if tag == "idx":
+  NEVER 785 [_sx]         return ast.Subscript(_sx(x[1]), _sx(x[2]), ast.Load())
+  NEVER 786 [_sx]     if tag == "slice":
+  NEVER 788 [_sx]             return None if y is None else _sx(y)
+  NEVER 789 [_sx]         return ast.Subscript(_sx(x[1]), ast.Slice(o(x[2]), o(x[3]), o(x[4])), ast.Load())
+  NEVER 790 [_sx]     if tag == "call":
+  NEVER 791 [_sx]         return ast.Call(ast.Name(x[1], ast.Load()), [_sx(y) for y in x[2:]], [])
+  NEVER 792 [_sx]     if tag == "m":
+  NEVER 793 [_sx]         return ast.Call(ast.Attribute(_sx(x[1]), x[2], ast.Load()), [_sx(y) for y in x[3:]], [])
+  NEVER 794 [_sx]     raise Unsupported("structured expression tag " + repr(tag))
+  NEVER 798 [_ss]     """structured statement -> ast statement"""
+  NEVER 799 [_ss]     tag = s[0]
+  NEVER 800 [_ss]     if tag == "set":
+  NEVER 801 [_ss]         return ast.Assign([ast.Name(s[1], ast.Store())], _sx(s[2]))
+  NEVER 802 [_ss]     if tag == "aug":
+  NEVER 803 [_ss]         return ast.AugAssign(ast.Name(s[1], ast.Store()), _BIN[s[2]](), _sx(s[3]))
+  NEVER 804 [_ss]     if tag == "setidx":
+  NEVER 805 [_ss]         return ast.Assign([ast.Subscript(ast.Name(s[1], ast.Load()), _sx(s[2]), ast.Store())], _sx(s[3]))
+  NEVER 806 [_ss]     if tag == "append":
+  NEVER 807 [_ss]         return ast.Expr(ast.Call(ast.Attribute(ast.Name(s[1], ast.Load()), "append", ast.Load()), [_sx(s[2])], []))
+  NEVER 808 [_ss]     if tag == "for":
+  NEVER 809 [_ss]         step = s[4] if isinstance(s[4], list) else ["n", s[4]]
+  NEVER 810 [_ss]         rng = ast.Call(ast.Name("range", ast.Load()), [_sx(s[2]), _sx(s[3]), _sx(step)], [])
+  NEVER 811 [_ss]         return ast.For(ast.Name(s[1], ast.Store()), rng, [_ss(y) for y in s[5]], [])
+  NEVER 812 [_ss]     if tag == "while":
+  NEVER 813 [_ss]         return ast.While(_sx(s[1]), [_ss(y) for y in s[2]], [])
+  NEVER 814 [_ss]     if tag == "if":
+  NEVER 815 [_ss]         return ast.If(_sx(s[1]), [_ss(y) for y in s[2]], [_ss(y) for y in s[3]])
+  NEVER 816 [_ss]     if tag == "def":
+  NEVER 817 [_ss]         args = ast.arguments(posonlyargs=[], args=[ast.arg(p) for p in s[2]], vararg=None,
+  NEVER 819 [_ss]         return ast.FunctionDef(s[1], args, [_ss(y) for y in s[3]], [], None)
+  NEVER 820 [_ss]     if tag == "ret":
+  NEVER 821 [_ss]         return ast.Return(_sx(s[1]))
+  NEVER 822 [_ss]     if tag == "print":
+  NEVER 823 [_ss]         return ast.Expr(ast.Call(ast.Name("print", ast.Load()), [_sx(y) for y in s[1:]], []))
+  NEVER 824 [_ss]     raise Unsupported("structured statement tag " + repr(tag))
+  NEVER 828 [structured_to_ast]     return ast.Module([_ss(s) for s in program], [])
+  NEVER 832 [solve_c1_structured]     """Cross-check only: the same interpreter over the `structured` tree."""
+  NEVER 833 [solve_c1_structured]     return run_module(structured_to_ast(structured["program"]))

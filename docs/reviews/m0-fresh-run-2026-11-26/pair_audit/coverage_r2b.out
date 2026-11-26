@@ -1,0 +1,41 @@
+== solver2_r2b.py: statements 145; run on fixtures 105; run on fresh 105; fresh-only 0; never run 40; fixture-only 0
+  NEVER 24 [grid_sum]     raise ValueError("unknown 'what': %r" % what)
+  NEVER 27 [parse_text_grid_sum]     m = re.search(r"A grid has (\d+) rows and (\d+) columns\. The rows, from top to bottom, are: (.*?)\. What is the sum of the numbers in (.*)\?$", q
+  NEVER 28 [parse_text_grid_sum]     R, C = int(m.group(1)), int(m.group(2))
+  NEVER 29 [parse_text_grid_sum]     grid = [[int(x) for x in row.split()] for row in m.group(3).split(" / ")]
+  NEVER 30 [parse_text_grid_sum]     assert len(grid) == R and all(len(r) == C for r in grid)
+  NEVER 31 [parse_text_grid_sum]     return {"grid": grid, "what": m.group(4)}
+  NEVER 52 [list_ops]             raise ValueError("unknown op %r" % name)
+  NEVER 58 [parse_text_list_ops]     m = re.fullmatch(r"Start with the list (.*?)\. Do these steps in order: (.*?)\. What is the final list\? Give the numbers separated by commas\.", 
+  NEVER 59 [parse_text_list_ops]     xs = [int(x) for x in m.group(1).split(", ")]
+  NEVER 60 [parse_text_list_ops]     ops = []
+  NEVER 61 [parse_text_list_ops]     for p in m.group(2).split("; "):
+  NEVER 62 [parse_text_list_ops]         a = re.fullmatch(r"add (-?\d+) at the end", p)
+  NEVER 63 [parse_text_list_ops]         ops.append(["append", int(a.group(1))] if a else _LIST_PHRASES[p])
+  NEVER 64 [parse_text_list_ops]     return {"xs": xs, "ops": ops}
+  NEVER 68 [_luhn_total]     """Total per the question: rightmost digit is the 1st; even positions doubled, minus 9 if > 9."""
+  NEVER 87 [luhn_check]     raise ValueError("unknown ask %r" % ask)
+  NEVER 90 [parse_text_luhn_check]     m = re.search(r"One more digit is to be written at the right end of (\d+) so that", q)
+  NEVER 91 [parse_text_luhn_check]     if m:
+  NEVER 92 [parse_text_luhn_check]         return {"digits": [int(c) for c in m.group(1)], "ask": "check_digit"}
+  NEVER 93 [parse_text_luhn_check]     m = re.search(r"Is the number (\d+) valid\? Answer yes or no\.$", q)
+  NEVER 94 [parse_text_luhn_check]     return {"digits": [int(c) for c in m.group(1)], "ask": "valid"}
+  NEVER 117 [min_heap_ops]                     raise ValueError("tie between children; rule does not say which")
+  NEVER 127 [parse_text_min_heap_ops]     m = re.search(r"add these numbers in order: (.*?)\.( Then remove the smallest (\d+) times?\.)? Give the row from position 1 to the end, separated 
+  NEVER 128 [parse_text_min_heap_ops]     return {"xs": [int(x) for x in m.group(1).split(", ")], "removals": int(m.group(3)) if m.group(3) else 0}
+  NEVER 144 [parse_text_run_length]     m = re.match(r"Compress ([a-z]+) by run-length encoding: ", q)
+  NEVER 145 [parse_text_run_length]     return {"s": m.group(1)}
+  NEVER 153 [parse_text_sort_list]     m = re.fullmatch(r"Sort these numbers from (smallest to largest|largest to smallest) and give them separated by commas: (.*)\.", q)
+  NEVER 154 [parse_text_sort_list]     return {"xs": [int(x) for x in m.group(2).split(", ")], "desc": m.group(1) == "largest to smallest"}
+  NEVER 158 [_replace_scan]     """Left-to-right scan over non-overlapping matches of `pat` in s as it is at step start;
+  NEVER 179 [parse_text_string_rewrite_nonidentity]     m = re.fullmatch(r"Start with the string ([a-z]+)\. Do these steps in order, each step scanning left to right over non-overlapping matches in the 
+  NEVER 180 [parse_text_string_rewrite_nonidentity]     rules = []
+  NEVER 181 [parse_text_string_rewrite_nonidentity]     for p in m.group(2).split("; "):
+  NEVER 182 [parse_text_string_rewrite_nonidentity]         a = re.fullmatch(r"replace every '([a-z]+)' with '([a-z]*)'", p)
+  NEVER 183 [parse_text_string_rewrite_nonidentity]         if a:
+  NEVER 184 [parse_text_string_rewrite_nonidentity]             rules.append([a.group(1), a.group(2)])
+  NEVER 186 [parse_text_string_rewrite_nonidentity]             d = re.fullmatch(r"delete every '([a-z]+)'", p)
+  NEVER 187 [parse_text_string_rewrite_nonidentity]             rules.append([d.group(1), ""])
+  NEVER 188 [parse_text_string_rewrite_nonidentity]     return {"s": m.group(1), "rules": rules}
+  NEVER 204 [parse_text_to_base_wide]     m = re.fullmatch(r"Write the decimal number (\d+) in base (\d+)\. Use digits 0-9 and then lowercase letters a-f for ten to fifteen\.", q)
+  NEVER 205 [parse_text_to_base_wide]     return {"n": int(m.group(1)), "base": int(m.group(2))}

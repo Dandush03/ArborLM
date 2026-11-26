@@ -1,0 +1,24 @@
+== solver2_r1.py: statements 163; run on fixtures 140; run on fresh 140; fresh-only 0; never run 23; fixture-only 0
+  NEVER 14 [None]     pass
+  NEVER 25 [boolean_lights]         raise AmbiguousItem("initial length != lamps")
+  NEVER 38 [categories]             raise AmbiguousItem(f"conflicting rules for {group}/{verb}")
+  NEVER 41 [categories]     raise AmbiguousItem(f"no rule about {verb} on the chain")
+  NEVER 59 [_turn_deg]     raise AmbiguousItem(f"unknown turn {t}")
+  NEVER 68 [compass]             raise AmbiguousItem(f"unknown step {kind}")
+  NEVER 70 [compass]         raise AmbiguousItem("not a multiple of 90")
+  NEVER 84 [threshold]             raise AmbiguousItem(f"unknown vote {vote}")
+  NEVER 100 [exchange]                 val[a] = val[b] * q / p
+  NEVER 101 [exchange]                 changed = True
+  NEVER 103 [exchange]                 raise AmbiguousItem("inconsistent rates")
+  NEVER 105 [exchange]         raise AmbiguousItem("y not connected to x")
+  NEVER 108 [exchange]         raise AmbiguousItem(f"non positive-integer answer {ans}")
+  NEVER 126 [_stmt]     raise AmbiguousItem(f"unknown kind {kind}")
+  NEVER 136 [knights]         raise AmbiguousItem(f"asked person's kind not determined: {found}")
+  NEVER 146 [grid_walk]         raise AmbiguousItem(f"unknown convention {s['convention']}")
+  NEVER 150 [grid_walk]         raise AmbiguousItem("start on wall")
+  NEVER 171 [swap_tracking]             raise AmbiguousItem(f"unknown op {op[0]}")
+  NEVER 191 [weekday]                 raise AmbiguousItem("inconsistent links")
+  NEVER 193 [weekday]         raise AmbiguousItem("asked event not connected")
+  NEVER 213 [venn]         raise AmbiguousItem("more than four groups")
+  NEVER 226 [venn]                 raise AmbiguousItem(f"negative region {sub}: {tot}")
+  NEVER 238 [venn]     raise AmbiguousItem(f"unknown ask {ask}")

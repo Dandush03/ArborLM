@@ -1,0 +1,426 @@
+{
+  "errors": 0,
+  "eval": "C1",
+  "interpreter": "3.15.1",
+  "items": 36400,
+  "items_file_sha256": "0a8f5d5f2ff2060dcf5ede4c3c9c347851ccd2d18eb1b82fbbce75784fb824f0",
+  "lineages": {
+    "C1.binary_search_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.12,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.bracket_matching_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.34,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.bytecode_loop_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.19,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.circle_elimination_r2": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.32,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.cond_chain_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.08,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.counter_list_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.18,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.digit_peel_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.07,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.euclid_gcd_traced_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.06,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.fast_power_f4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.08,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.fib_like_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.07,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.fib_shapes_recursive_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.41,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.func_branch_f4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.06,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.func_compose_f4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.07,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.list_build_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.08,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.merge_two_sorted_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.21,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.nested_pairs_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.19,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.postfix_evaluation": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.21,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.recursive_calls_r2": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.25,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.run_length_scan": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.12,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.shared_lists_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.07,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.slices_f4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.03,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.string_build_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.09,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.string_methods_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.03,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.turtle_walk_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.28,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.union_find_links_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.24,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    },
+    "C1.while_counter_f3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.09,
+      "solver": "studies/m0/solvers2/solver2_c1.py"
+    }
+  },
+  "mismatches": 0
+}

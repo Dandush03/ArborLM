@@ -1,0 +1,61 @@
+== solver2_r2a.py: statements 203; run on fixtures 143; run on fresh 143; fresh-only 0; never run 60; fixture-only 0
+  NEVER 35 [binary_search_trace]     raise ValueError("unknown ask %r" % ask)
+  NEVER 39 [parse_binary_search_trace]     m = re.match(r"A sorted list of (\d+) numbers \(smallest first\) is searched for (-?\d+)\.", q)
+  NEVER 40 [parse_binary_search_trace]     xs = [int(t) for t in re.search(r"The list: ([-\d, ]+)\.", q).group(1).split(", ")]
+  NEVER 41 [parse_binary_search_trace]     if "Which numbers does the search look at, in order?" in q:
+  NEVER 42 [parse_binary_search_trace]         ask = "values"
+  NEVER 43 [parse_binary_search_trace]     elif "What is the sum of all the numbers the search looks at" in q:
+  NEVER 44 [parse_binary_search_trace]         ask = "sum"
+  NEVER 46 [parse_binary_search_trace]         raise ValueError("template")
+  NEVER 47 [parse_binary_search_trace]     assert int(m.group(1)) == len(xs)
+  NEVER 48 [parse_binary_search_trace]     return {"xs": xs, "target": int(m.group(2)), "ask": ask}
+  NEVER 61 [caesar_shift]             raise ValueError("unexpected char %r" % ch)
+  NEVER 66 [parse_caesar_shift]     m = re.fullmatch(r"Shift every letter of '([a-z ]+)' forward by (\d+) places in the alphabet, "
+  NEVER 68 [parse_caesar_shift]     return {"text": m.group(1), "k": int(m.group(2))}
+  NEVER 74 [cellular_automaton]         raise ValueError("unknown ask")
+  NEVER 85 [parse_cellular_automaton]     m = re.match(r"A row of (\d+) cells holds 0s and 1s: ([01]+)\.", q)
+  NEVER 86 [parse_cellular_automaton]     table = dict(re.findall(r"([01]{3}) becomes ([01])", q))
+  NEVER 87 [parse_cellular_automaton]     steps = int(re.search(r"After (\d+) steps?, what does the row look like\?", q).group(1))
+  NEVER 88 [parse_cellular_automaton]     assert "The cells beyond the two ends of the row count as 0." in q
+  NEVER 89 [parse_cellular_automaton]     assert int(m.group(1)) == len(m.group(2))
+  NEVER 90 [parse_cellular_automaton]     return {"row": [int(c) for c in m.group(2)], "table": {k: int(v) for k, v in table.items()},
+  NEVER 114 [cheapest_network]         raise ValueError("towns cannot all be joined")
+  NEVER 119 [parse_cheapest_network]     m = re.match(r"The towns (.+?) must be joined by cables", q)
+  NEVER 120 [parse_cheapest_network]     head = m.group(1)
+  NEVER 121 [parse_cheapest_network]     first, last = head.rsplit(" and ", 1)
+  NEVER 122 [parse_cheapest_network]     towns = first.split(", ") + [last]
+  NEVER 123 [parse_cheapest_network]     cables = [[a, b, int(c)] for a, b, c in
+  NEVER 125 [parse_cheapest_network]     return {"towns": towns, "cables": cables}
+  NEVER 131 [count_divisible]         raise ValueError("unknown ask")
+  NEVER 137 [parse_count_divisible]     m = re.match(r"What is the sum of the numbers in this list that are divisible by (\d+) "
+  NEVER 139 [parse_count_divisible]     xs = [int(t) for t in re.search(r"List: ([-\d, ]+)\.$", q).group(1).split(", ")]
+  NEVER 140 [parse_count_divisible]     return {"xs": xs, "m": int(m.group(1)), "t": int(m.group(2)), "ask": "sum"}
+  NEVER 151 [crt_smallest]             raise ValueError("no solution")
+  NEVER 166 [parse_crt_smallest]     pairs = re.findall(r"leaves remainder (\d+) when divided by (\d+)", q)
+  NEVER 167 [parse_crt_smallest]     assert q.startswith("What is the smallest positive whole number that ")
+  NEVER 168 [parse_crt_smallest]     return {"congruences": [[int(r), int(n)] for r, n in pairs]}
+  NEVER 179 [dictionary_rank]         return math.perm(avail_after[0], avail_after[1])
+  NEVER 185 [dictionary_rank]             raise ValueError("k out of range")
+  NEVER 205 [dictionary_rank]     raise ValueError("unknown ask")
+  NEVER 209 [dictionary_rank_brute]     words = ["".join(p) for p in itertools.permutations(sorted(structured["letters"]), structured["length"])]
+  NEVER 210 [dictionary_rank_brute]     if structured["ask"] == "word":
+  NEVER 211 [dictionary_rank_brute]         return words[structured["k"] - 1]
+  NEVER 212 [dictionary_rank_brute]     return str(words.index(structured["word"]) + 1)
+  NEVER 216 [parse_dictionary_rank]     m = re.match(r"Write every word of (\d+) letters that can be made from the letters ([a-z, ]+?) "
+  NEVER 218 [parse_dictionary_rank]     letters = m.group(2).split(", ")
+  NEVER 219 [parse_dictionary_rank]     m1 = re.search(r"Which word has number (\d+)\?$", q)
+  NEVER 220 [parse_dictionary_rank]     m2 = re.search(r"What is the number of the word ([a-z]+)\?$", q)
+  NEVER 221 [parse_dictionary_rank]     if m1:
+  NEVER 222 [parse_dictionary_rank]         return {"letters": letters, "length": int(m.group(1)), "ask": "word", "k": int(m1.group(1)), "word": None}
+  NEVER 223 [parse_dictionary_rank]     return {"letters": letters, "length": int(m.group(1)), "ask": "position", "k": None, "word": m2.group(1)}
+  NEVER 231 [_tokens]             raise ValueError("bad token %r" % t)
+  NEVER 252 [_eval]                 raise ValueError("missing )")
+  NEVER 255 [_eval]             raise ValueError("unary minus found")
+  NEVER 284 [_eval]         raise ValueError("unknown convention %r" % convention)
+  NEVER 288 [_eval]         raise ValueError("trailing tokens")
+  NEVER 297 [parse_expression_eval]     m = re.match(r"Work out (.+?)(\. Use these rules| by this rule, which is not the usual one)", q)
+  NEVER 298 [parse_expression_eval]     conv = "ranked" if m.group(2).startswith(". Use") else "left_to_right"
+  NEVER 299 [parse_expression_eval]     return {"text": m.group(1), "convention": conv}
+  NEVER 309 [from_base]             raise ValueError("digit out of range")
+  NEVER 315 [parse_from_base]     m = re.fullmatch(r"What is the base-(\d+) number ([0-9a-z]+) written in decimal\? \(Digits above 9 are "
+  NEVER 317 [parse_from_base]     return {"digits": m.group(2), "base": int(m.group(1))}

@@ -1,0 +1,136 @@
+R2.binary_search_trace L0 seed=11508209041344744030 items=200
+R2.binary_search_trace L1 seed=6936760391139697108 items=200
+R2.binary_search_trace L2 seed=3575238450912906956 items=200
+R2.binary_search_trace L3 seed=14720153572699533761 items=200
+R2.binary_search_trace L4 seed=9081838182412722463 items=200
+R2.binary_search_trace L5 seed=17236471392276894362 items=200
+R2.binary_search_trace L6 seed=9621702068994009392 items=200
+R2.binary_search_trace done 0.0s
+R2.caesar_shift L0 seed=164596406988821964 items=200
+R2.caesar_shift L1 seed=10630654364183059115 items=200
+R2.caesar_shift L2 seed=5894010668622269322 items=200
+R2.caesar_shift L3 seed=18071157328749202311 items=200
+R2.caesar_shift L4 seed=3438662404036919912 items=200
+R2.caesar_shift L5 seed=16461986415915664748 items=200
+R2.caesar_shift L6 seed=2198406477605859222 items=200
+R2.caesar_shift done 0.0s
+R2.cellular_automaton L0 seed=15828761850796648630 items=200
+R2.cellular_automaton L1 seed=17038575225516037278 items=200
+R2.cellular_automaton L2 seed=4102671049829277816 items=200
+R2.cellular_automaton L3 seed=16034019279475577011 items=200
+R2.cellular_automaton L4 seed=5915495517490601397 items=200
+R2.cellular_automaton L5 seed=8964098090095617571 items=200
+R2.cellular_automaton L6 seed=5465374173169708552 items=200
+R2.cellular_automaton done 0.0s
+R2.cheapest_network L0 seed=74941785867405557 items=200
+R2.cheapest_network L1 seed=15693105136539550980 items=200
+R2.cheapest_network L2 seed=12729202570418289562 items=200
+R2.cheapest_network L3 seed=9638837248816291242 items=200
+R2.cheapest_network L4 seed=374163901810318929 items=200
+R2.cheapest_network L5 seed=16422872153528866190 items=200
+R2.cheapest_network L6 seed=7168313420319406380 items=200
+R2.cheapest_network done 0.1s
+R2.count_divisible L0 seed=14528578168659333142 items=200
+R2.count_divisible L1 seed=2930017062535759810 items=200
+R2.count_divisible L2 seed=1063175004245723525 items=200
+R2.count_divisible L3 seed=1463126698321438078 items=200
+R2.count_divisible L4 seed=12663488003440374395 items=200
+R2.count_divisible L5 seed=15462638472446728738 items=200
+R2.count_divisible L6 seed=4475913087837139999 items=200
+R2.count_divisible done 0.0s
+R2.crt_smallest L0 seed=13602598532274843527 items=200
+R2.crt_smallest L1 seed=14168248293621094414 items=200
+R2.crt_smallest L2 seed=5387239422729885150 items=200
+R2.crt_smallest L3 seed=9529152020420256410 items=200
+R2.crt_smallest L4 seed=6744348419588896173 items=200
+R2.crt_smallest L5 seed=10796676372408865751 items=200
+R2.crt_smallest L6 seed=8061249157762622624 items=200
+R2.crt_smallest done 0.0s
+R2.dictionary_rank L0 seed=7465019503666948207 items=200
+R2.dictionary_rank L1 seed=4238714401770853472 items=200
+R2.dictionary_rank L2 seed=3981972094973569275 items=200
+R2.dictionary_rank L3 seed=3338077986694061223 items=200
+R2.dictionary_rank L4 seed=5692773130932308390 items=200
+R2.dictionary_rank L5 seed=4025386865253225524 items=200
+R2.dictionary_rank L6 seed=4357498157891908819 items=200
+R2.dictionary_rank done 0.0s
+R2.expression_eval L0 seed=6757264641047889963 items=200
+R2.expression_eval L1 seed=7090889975626404572 items=200
+R2.expression_eval L2 seed=17742103759343172334 items=200
+R2.expression_eval L3 seed=9712944003269527337 items=200
+R2.expression_eval L4 seed=11116720265755775626 items=200
+R2.expression_eval L5 seed=1750501658922706324 items=200
+R2.expression_eval L6 seed=2653923433709018854 items=200
+R2.expression_eval done 0.0s
+R2.from_base L0 seed=269849526015581872 items=200
+R2.from_base L1 seed=15090531725430563961 items=200
+R2.from_base L2 seed=666968266770456846 items=200
+R2.from_base L3 seed=8695922755019740792 items=200
+R2.from_base L4 seed=3043856475317734525 items=200
+R2.from_base L5 seed=4148761872463961718 items=200
+R2.from_base L6 seed=9282935087964605727 items=200
+R2.from_base done 0.0s
+R2.grid_sum L0 seed=3387559700948803313 items=200
+R2.grid_sum L1 seed=17732205638050622717 items=200
+R2.grid_sum L2 seed=1656619182650308924 items=200
+R2.grid_sum L3 seed=13995817127172713559 items=200
+R2.grid_sum L4 seed=11300855097905800976 items=200
+R2.grid_sum L5 seed=696707731671249035 items=200
+R2.grid_sum L6 seed=13485388471881875747 items=200
+R2.grid_sum done 0.0s
+R2.list_ops L0 seed=4929925310570894723 items=200
+R2.list_ops L1 seed=14994828928132416469 items=200
+R2.list_ops L2 seed=17136013384817274103 items=200
+R2.list_ops L3 seed=8085820510130954672 items=200
+R2.list_ops L4 seed=12792948612123029098 items=200
+R2.list_ops L5 seed=16070031579706218132 items=200
+R2.list_ops L6 seed=13525700750779493434 items=200
+R2.list_ops done 0.0s
+R2.luhn_check L0 seed=879696493854110837 items=200
+R2.luhn_check L1 seed=14443067292126526536 items=200
+R2.luhn_check L2 seed=15197898564664255118 items=200
+R2.luhn_check L3 seed=3490072702764058487 items=200
+R2.luhn_check L4 seed=528211610482215330 items=200
+R2.luhn_check L5 seed=17036429953287818734 items=200
+R2.luhn_check L6 seed=1869176725011707521 items=200
+R2.luhn_check done 0.0s
+R2.min_heap_ops L0 seed=9810652593673931987 items=200
+R2.min_heap_ops L1 seed=17516596205118429237 items=200
+R2.min_heap_ops L2 seed=18053099710925905632 items=200
+R2.min_heap_ops L3 seed=13638494910397765891 items=200
+R2.min_heap_ops L4 seed=17248618054281731490 items=200
+R2.min_heap_ops L5 seed=16492045448817993457 items=200
+R2.min_heap_ops L6 seed=10503294918385677074 items=200
+R2.min_heap_ops done 0.0s
+R2.run_length L0 seed=6383926261933801545 items=200
+R2.run_length L1 seed=16332830887895790353 items=200
+R2.run_length L2 seed=14247970370830085954 items=200
+R2.run_length L3 seed=7213422314190496234 items=200
+R2.run_length L4 seed=6956957998814251269 items=200
+R2.run_length L5 seed=12119871934426018539 items=200
+R2.run_length L6 seed=18261192478289445746 items=200
+R2.run_length done 0.0s
+R2.sort_list L0 seed=2510523391247400087 items=200
+R2.sort_list L1 seed=13447295515230282264 items=200
+R2.sort_list L2 seed=14928996252387903273 items=200
+R2.sort_list L3 seed=5237049570877148211 items=200
+R2.sort_list L4 seed=16047426244283917200 items=200
+R2.sort_list L5 seed=16279163406512500971 items=200
+R2.sort_list L6 seed=17909985586305060614 items=200
+R2.sort_list done 0.0s
+R2.string_rewrite_nonidentity L0 seed=2894772279758389775 items=200
+R2.string_rewrite_nonidentity L1 seed=2942368528371937400 items=200
+R2.string_rewrite_nonidentity L2 seed=1531087247903448893 items=200
+R2.string_rewrite_nonidentity L3 seed=12144415288885009718 items=200
+R2.string_rewrite_nonidentity L4 seed=7385814338662127337 items=200
+R2.string_rewrite_nonidentity L5 seed=12344915697251924488 items=200
+R2.string_rewrite_nonidentity L6 seed=16122102732586955729 items=200
+R2.string_rewrite_nonidentity done 0.0s
+R2.to_base_wide L0 seed=5755725274127226390 items=200
+R2.to_base_wide L1 seed=12232867857384677048 items=200
+R2.to_base_wide L2 seed=7034775466142518881 items=200
+R2.to_base_wide L3 seed=5824566984762061057 items=200
+R2.to_base_wide L4 seed=17662443414492290321 items=200
+R2.to_base_wide L5 seed=6979706591092566585 items=200
+R2.to_base_wide L6 seed=12163631727414126629 items=200
+R2.to_base_wide done 0.0s
