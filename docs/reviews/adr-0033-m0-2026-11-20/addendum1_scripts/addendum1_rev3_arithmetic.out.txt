@@ -1,0 +1,12 @@
+== A. builder as written: demand per lineage and level, D_w(L)
+  L=3: 81,010  L=5: 49,000  L=8: 31,000  L=10: 25,000  L=12: 21,010  L=15: 17,010  L=20: 13,000  L=25: 10,600  L=30: 9,010
+== B. per-cluster builder: D(G) per cluster and level; D_lin(G, k) per lineage
+  G=1: 241,000  G=2: 121,000  G=3: 81,010  G=4: 61,000  G=5: 49,000
+  G=1: k=1: 241,000  k=2: 120,500  k=3: 80,350
+  G=2: k=1: 121,000  k=2: 60,500  k=3: 40,350
+  G=3: k=1: 81,010  k=2: 40,510  k=3: 27,020
+  G=4: k=1: 61,000  k=2: 30,500  k=3: 20,350
+== C. builder as written: share of a pool held by a cluster of k lineages in a part of L lineages and G clusters
+  G=7, L=10, k=3: share 0.300 against 1/G = 0.143
+  G=10, L=15, k=4: share 0.267 against 1/G = 0.100
+  G=5, L=9, k=4: share 0.444 against 1/G = 0.200
