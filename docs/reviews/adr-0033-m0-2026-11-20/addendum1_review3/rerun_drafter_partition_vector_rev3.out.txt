@@ -1,0 +1,98 @@
+python 3.12.14
+== 1. derived integers (first 8 bytes of SHA-256, big-endian); unchanged from draft 2
+  '400004|cluster-partition|cross'  ->  3111564968117111496
+  '400004|cluster-partition|R1'  ->  12152681357659760304
+  '400004|cluster-partition|R2'  ->  6959284715912682832
+  '400004|cluster-partition|M1'  ->  5748257385449400496
+  '400004|cluster-partition|C1'  ->  14653439660296977361
+== 2. shuffle of ['a'..'h'] (sorted first) on each stream; unchanged from draft 2
+  cross: ['e', 'c', 'b', 'h', 'd', 'f', 'g', 'a']
+     R1: ['d', 'a', 'g', 'h', 'c', 'b', 'e', 'f']
+     R2: ['h', 'd', 'e', 'f', 'b', 'c', 'g', 'a']
+     M1: ['h', 'g', 'e', 'a', 'f', 'd', 'b', 'c']
+     C1: ['e', 'f', 'a', 'd', 'h', 'c', 'g', 'b']
+== 3. section 4 on made-up maps
+-- V1
+   lineages (! = not a candidate): C1.alpha C1.beta C1.delta C1.epsilon! C1.gamma M1.alpha M1.beta M1.delta M1.gamma R1.alpha R1.beta R1.delta! R1.epsilon R1.gamma R1.zeta R2.alpha R2.beta R2.delta R2.epsilon R2.gamma
+   component C1.alpha: ['C1.alpha', 'R2.alpha']
+   component C1.beta: ['C1.beta', 'R2.beta']
+   component C1.epsilon: ['C1.epsilon', 'R1.epsilon']
+   component C1.gamma: ['C1.gamma', 'M1.beta']
+   component M1.alpha: ['M1.alpha', 'R2.gamma']
+   component R1.alpha: ['R1.alpha', 'R1.beta']
+   component R1.delta: ['R1.delta', 'R1.gamma']
+   cross-evaluation clusters in shuffled order (index 0 -> B): ['M1.alpha', 'C1.beta', 'C1.gamma', 'C1.alpha']
+   part A: ['C1.alpha', 'C1.beta', 'C1.epsilon', 'M1.delta', 'M1.gamma', 'R1.alpha']
+   part B: ['C1.delta', 'C1.gamma', 'M1.alpha', 'R1.delta', 'R1.zeta', 'R2.delta', 'R2.epsilon']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (4, 2, 2), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+   cases exercised: none
+-- V2
+   lineages (! = not a candidate): C1.a C1.b C1.c C1.d C1.e C1.f! C1.g! M1.a M1.b M1.c R1.a R1.b R1.c R2.a R2.b R2.c R2.d R2.e
+   component C1.a: ['C1.a', 'R2.a']
+   component C1.b: ['C1.b', 'R2.b']
+   component C1.c: ['C1.c', 'R2.c']
+   component C1.d: ['C1.d', 'M1.a']
+   component C1.e: ['C1.e', 'R1.a']
+   component C1.f: ['C1.f', 'C1.g']
+   cross-evaluation clusters in shuffled order (index 0 -> B): ['C1.d', 'C1.b', 'C1.c', 'C1.a', 'C1.e']
+   part A: ['C1.a', 'C1.b', 'M1.c', 'R1.b']
+   part B: ['C1.c', 'C1.d', 'C1.e', 'M1.b', 'R1.c', 'R2.d', 'R2.e']
+   no part (no candidate lineage): ['C1.f']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (3, 1, 2), 'R2': (5, 2, 3), 'M1': (3, 1, 2), 'C1': (5, 2, 3)}
+   cases exercised: ['a cluster with no candidate lineage (no part)', 'odd |X|']
+-- V3
+   lineages (! = not a candidate): C1.a C1.b C1.c C1.d C1.e! M1.a R1.a R1.e R2.e
+   component C1.e: ['C1.e', 'R1.e', 'R2.e']
+   component M1.a: ['M1.a', 'R1.a']
+   cross-evaluation clusters in shuffled order (index 0 -> B): ['M1.a', 'C1.e']
+   part A: ['C1.c', 'C1.d', 'C1.e']
+   part B: ['C1.a', 'C1.b', 'M1.a']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (2, 1, 1), 'R2': (1, 1, 0), 'M1': (1, 0, 1), 'C1': (4, 2, 2)}
+   cases exercised: ['a_e > floor(N_e/2) in R2']
+-- V4
+   lineages (! = not a candidate): C1.p C1.q M1.p M1.q R1.p R1.q R1.r R1.s R2.p! R2.q R2.r
+   component C1.p: ['C1.p', 'R2.q']
+   component C1.q: ['C1.q', 'M1.p']
+   component R1.p: ['R1.p', 'R1.q', 'R2.p']
+   cross-evaluation clusters in shuffled order (index 0 -> B): ['C1.q', 'C1.p']
+   part A: ['C1.p', 'M1.q', 'R1.s']
+   part B: ['C1.q', 'R1.p', 'R1.r', 'R2.r']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (3, 1, 2), 'R2': (2, 1, 1), 'M1': (2, 1, 1), 'C1': (2, 1, 1)}
+   cases exercised: ['a non-candidate lineage of another evaluation sits in a cluster with two candidates of one evaluation']
+-- V5
+   lineages (! = not a candidate): C1.a C1.b C1.c C1.d C1.e C1.f C1.g M1.b M1.z0 M1.z1 R1.d R1.e R1.g R1.z0 R2.a R2.c R2.f R2.z0
+   component C1.a: ['C1.a', 'R2.a']
+   component C1.b: ['C1.b', 'M1.b']
+   component C1.c: ['C1.c', 'R2.c']
+   component C1.d: ['C1.d', 'R1.d']
+   component C1.e: ['C1.e', 'R1.e']
+   component C1.f: ['C1.f', 'R2.f']
+   component C1.g: ['C1.g', 'R1.g']
+   cross-evaluation clusters in shuffled order (index 0 -> B): ['C1.g', 'C1.c', 'C1.b', 'C1.f', 'C1.d', 'C1.a', 'C1.e']
+   part A: ['C1.a', 'C1.c', 'C1.f', 'M1.z1', 'R1.z0']
+   part B: ['C1.b', 'C1.d', 'C1.e', 'C1.g', 'M1.z0', 'R2.z0']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (4, 1, 3), 'R2': (4, 3, 1), 'M1': (3, 1, 2), 'C1': (7, 3, 4)}
+   cases exercised: ['a_e > floor(N_e/2) in R2', 'clamp k_e = |L_e| in R1', 'odd |X|']
+-- V3 under the reading the text rejects ('any lineage in e'): C1 (4, 1, 3) against (4, 2, 2) under the text; clusters whose part differs: ['C1.d']
+== 4. section 4A on V1 with made-up capacities: the partition above is kept; capacity per evaluation part
+   R1 part A: candidate clusters 2 -> registered G = 1   [G=2: drop ['R1.beta']; G=2: drop ['R1.alpha']; G=1: drop nothing]
+      registered: {'C1.epsilon': ['R1.epsilon']}
+   R1 part B: candidate clusters 2 -> registered G = 2   [G=2: drop nothing]
+      registered: {'R1.delta': ['R1.gamma'], 'R1.zeta': ['R1.zeta']}
+   R2 part A: candidate clusters 2 -> registered G = 2   [G=2: drop nothing]
+      registered: {'C1.alpha': ['R2.alpha'], 'C1.beta': ['R2.beta']}
+   R2 part B: candidate clusters 3 -> registered G = 1   [G=3: drop ['R2.delta']; G=2: drop ['R2.gamma']; G=1: drop nothing]
+      registered: {'R2.epsilon': ['R2.epsilon']}
+   M1 part A: candidate clusters 2 -> registered G = 2   [G=2: drop nothing]
+      registered: {'M1.delta': ['M1.delta'], 'M1.gamma': ['M1.gamma']}
+   M1 part B: candidate clusters 2 -> registered G = 2   [G=2: drop nothing]
+      registered: {'C1.gamma': ['M1.beta'], 'M1.alpha': ['M1.alpha']}
+   C1 part A: candidate clusters 2 -> registered G = 2   [G=2: drop nothing]
+      registered: {'C1.alpha': ['C1.alpha'], 'C1.beta': ['C1.beta']}
+   C1 part B: candidate clusters 2 -> registered G = 0   [G=2: drop ['C1.delta']; G=1: drop ['C1.gamma']; G=0: drop nothing]
+      registered: {}
+   the part of every cluster is as in part 3: nothing is re-shuffled after a capacity drop
