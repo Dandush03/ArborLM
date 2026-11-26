@@ -1,4 +1,5 @@
 {
+  "completion_note": "This is the first version of the status record as completed after the independent records check (RECORDS_CHECK.md, finding 1): each REGISTERED lineage names the stage that set its status and the records that establish it, and each capacity or fresh-run drop names its source record. No count and no status differs from the version before the check; nothing had used that version.",
   "counts": {
     "not_registered_by_stage_per_evaluation": {
       "C1": {
@@ -429,11 +430,20 @@
     "C1.binary_search_f3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.binary_search",
       "group": "C1.binary_search",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.bracket_matching": {
@@ -453,11 +463,20 @@
     "C1.bracket_matching_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.bracket_matching",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.bracket_matching_traced": {
@@ -514,11 +533,20 @@
     "C1.bytecode_loop_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.bytecode_loop",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.bytecode_loop_r2": {
@@ -638,6 +666,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "C1c"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -731,6 +763,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "C1c"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -753,11 +789,20 @@
     "C1.counter_list_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.counter_list_f3",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.digit_peel": {
@@ -777,11 +822,20 @@
     "C1.digit_peel_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.digit_peel",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.euclid_gcd": {
@@ -815,11 +869,20 @@
     "C1.euclid_gcd_traced_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.euclid_gcd",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.fast_power": {
@@ -862,11 +925,20 @@
     "C1.fast_power_f4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.fast_power",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.fast_power_r2": {
@@ -914,11 +986,20 @@
     "C1.fib_like_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.fib_like",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.fib_shapes_recursive": {
@@ -938,11 +1019,20 @@
     "C1.fib_shapes_recursive_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.fib_like",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.func_branch": {
@@ -1004,6 +1094,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "C1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED"
     },
@@ -1047,11 +1141,20 @@
     "C1.func_compose_f4": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.func_branch",
       "group": "C1.func_branch",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.grid_path_table": {
@@ -1172,11 +1275,20 @@
     "C1.list_build_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.list_build",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.loop_sum": {
@@ -1271,11 +1383,20 @@
     "C1.merge_two_sorted_f3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.merge_two_sorted",
       "group": "C1.merge_two_sorted",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.merge_two_sorted_r2": {
@@ -1353,11 +1474,20 @@
     "C1.nested_pairs_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.nested_pairs",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.partition_pass": {
@@ -1401,11 +1531,20 @@
     "C1.postfix_evaluation": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.bracket_matching",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.recursive_calls": {
@@ -1425,21 +1564,39 @@
     "C1.recursive_calls_r2": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.fib_like",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.run_length_scan": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.run_length_scan",
       "group": "C1.run_length_scan",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.shared_lists": {
@@ -1494,6 +1651,10 @@
         "source": "s5",
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "C1a"
+      },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
       },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
@@ -1600,11 +1761,20 @@
     "C1.slices_f4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.slices",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.string_build": {
@@ -1624,11 +1794,20 @@
     "C1.string_build_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.string_build",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.string_methods": {
@@ -1648,11 +1827,20 @@
     "C1.string_methods_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.slices",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.string_pair_table": {
@@ -1695,11 +1883,20 @@
     "C1.turtle_walk_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.turtle_walk",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "C1.turtle_walk_r2": {
@@ -1769,6 +1966,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "C1c"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -1790,11 +1991,20 @@
     "C1.while_counter_f3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "C1",
       "global_cluster": "C1.while_counter",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.ages": {
@@ -1814,11 +2024,20 @@
     "M1.ages_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.ages",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.arithmetic_series": {
@@ -1838,11 +2057,20 @@
     "M1.arithmetic_series_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "C1.fib_like",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.average_missing": {
@@ -1881,11 +2109,20 @@
     "M1.average_missing_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.ages",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.binomial_choose": {
@@ -1975,11 +2212,20 @@
     "M1.change_ways_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "C1.coin_change_table",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.clock_duration": {
@@ -2018,11 +2264,20 @@
     "M1.clock_duration_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.clock_duration",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.coins": {
@@ -2081,11 +2336,20 @@
     "M1.consecutive_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.ages",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.crt_congruence": {
@@ -2119,11 +2383,20 @@
     "M1.crt_congruence_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.crt_congruence",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.digit_puzzle": {
@@ -2248,6 +2521,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "M1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -2288,11 +2565,20 @@
     "M1.finite_differences_r4": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.finite_differences",
       "group": "M1.finite_differences",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.fraction_remainder": {
@@ -2312,11 +2598,20 @@
     "M1.fraction_remainder_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.fraction_remainder",
       "group": "M1.fraction_remainder",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.gcd_lcm": {
@@ -2369,11 +2664,20 @@
     "M1.gcd_lcm_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "C1.euclid_gcd",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.grid_perimeter": {
@@ -2440,6 +2744,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "M1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED"
     },
@@ -2474,11 +2782,20 @@
     "M1.inclusion_exclusion_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.inclusion_exclusion",
       "group": "M1.inclusion_exclusion",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.last_digit_power": {
@@ -2531,6 +2848,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "M1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED"
     },
@@ -2551,11 +2872,20 @@
     "M1.linear_equation_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.ages",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.median_list": {
@@ -2589,11 +2919,20 @@
     "M1.median_list_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.median_list",
       "group": "C1.merge_two_sorted",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.min_cost_packs": {
@@ -2677,11 +3016,20 @@
     "M1.mixture_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.mixture",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.mode_tally": {
@@ -2771,11 +3119,20 @@
     "M1.painted_cube_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.grid_perimeter",
       "group": "M1.grid_perimeter",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.percent_change": {
@@ -2795,11 +3152,20 @@
     "M1.percent_change_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.fraction_remainder",
       "group": "M1.fraction_remainder",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.pigeonhole_worst_case": {
@@ -2875,11 +3241,20 @@
     "M1.pipes_work_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.ages",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.power_remainder_r2": {
@@ -2962,6 +3337,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "M1c"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": false
@@ -3039,11 +3418,20 @@
     "M1.quadratic_area_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.quadratic_area",
       "group": "M1.quadratic_area",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.ratio_share": {
@@ -3095,6 +3483,10 @@
         "source": "results",
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "M1c"
+      },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
       },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED"
@@ -3148,6 +3540,10 @@
         ],
         "round": 1
       },
+      "source_record": {
+        "path": "studies/m0/manifests/capacity_of_record.json",
+        "sha256": "33c393fbd0770520c489c8bd8591a1a0febd3f4273961499619a1d6eaa12fb34"
+      },
       "stage": "stage 4, capacity",
       "status": "NOT REGISTERED"
     },
@@ -3168,11 +3564,20 @@
     "M1.recurrence_iterate_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "C1.fib_like",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.shopping": {
@@ -3192,11 +3597,20 @@
     "M1.shopping_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.mixture",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.slot_permutations": {
@@ -3292,21 +3706,39 @@
     "M1.speed_distance_r3": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.mixture",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.tiered_pricing": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.tiered_pricing",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "M1.tip_split": {
@@ -3326,11 +3758,20 @@
     "M1.tip_split_r3": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "M1",
       "global_cluster": "M1.fraction_remainder",
       "group": "M1.fraction_remainder",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.activity_selection": {
@@ -3472,11 +3913,20 @@
     "R1.boolean_lights_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R1",
       "global_cluster": "R1.boolean_lights",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.categories_default_exceptions": {
@@ -3534,11 +3984,20 @@
     "R1.categories_default_exceptions_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R1",
       "global_cluster": "R1.categories_default_exceptions",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.categories_follow": {
@@ -3623,11 +4082,20 @@
     "R1.compass_turns": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R1",
       "global_cluster": "R1.boolean_lights",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.conditional_chain": {
@@ -3783,11 +4251,20 @@
     "R1.conditional_threshold_rule_r4": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R1",
       "global_cluster": "R1.conditional_threshold_rule",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.containers_queue_line": {
@@ -4190,6 +4667,10 @@
         "source": "aud",
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "R1a"
+      },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
       },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED"
@@ -4709,11 +5190,20 @@
     "R1.knights_knaves_r6": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R1",
       "global_cluster": "R1.conditional_chain",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.minimax_tree": {
@@ -5208,6 +5698,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "R1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -5417,6 +5911,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "R1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -5560,11 +6058,20 @@
     "R1.temporal_weekday_shift_r6": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R1",
       "global_cluster": "R1.equivalence_exchange_rates",
       "group": "M1.fraction_remainder",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R1.topological_order": {
@@ -5754,17 +6261,30 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "R1a"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED"
     },
     "R2.binary_search_trace": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "C1.binary_search",
       "group": "C1.binary_search",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.bracket_match": {
@@ -5841,11 +6361,20 @@
     "R2.caesar_shift": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.caesar_shift",
       "group": "R2.caesar_shift",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.cellular_automaton": {
@@ -5878,17 +6407,30 @@
         ],
         "round": 1
       },
+      "source_record": {
+        "path": "studies/m0/manifests/capacity_of_record.json",
+        "sha256": "33c393fbd0770520c489c8bd8591a1a0febd3f4273961499619a1d6eaa12fb34"
+      },
       "stage": "stage 4, capacity",
       "status": "NOT REGISTERED"
     },
     "R2.cheapest_network": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R1.mst_cost",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.chip_toppling": {
@@ -5932,11 +6474,20 @@
     "R2.count_divisible": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.count_divisible",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.count_letter": {
@@ -5965,11 +6516,20 @@
     "R2.crt_smallest": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "M1.crt_congruence",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.deferred_acceptance_partner": {
@@ -5990,11 +6550,20 @@
     "R2.dictionary_rank": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.dictionary_rank",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.digit_root": {
@@ -6021,21 +6590,39 @@
     "R2.expression_eval": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.expression_eval",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.from_base": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "C1.digit_peel",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.gcd_euclid": {
@@ -6064,11 +6651,20 @@
     "R2.grid_sum": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.grid_sum",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.hamming_error_position": {
@@ -6249,6 +6845,10 @@
         "source_file": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
         "unit": "R2b"
       },
+      "source_record": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
       "stage": "stage 1S, fresh run",
       "status": "NOT REGISTERED",
       "tied_by_borderline_pair": true
@@ -6280,11 +6880,20 @@
     "R2.luhn_check": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.luhn_check",
       "group": "R2.luhn_check",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.max_subarray_sum": {
@@ -6338,11 +6947,20 @@
     "R2.min_heap_ops": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.min_heap_ops",
       "group": "R2.min_heap_ops",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.modular_power": {
@@ -6466,21 +7084,39 @@
     "R2.run_length": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "C1.run_length_scan",
       "group": "C1.run_length_scan",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.sort_list": {
       "candidate": true,
       "cluster_part": "B",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "M1.median_list",
       "group": "C1.merge_two_sorted",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.stack_machine": {
@@ -6523,11 +7159,20 @@
     "R2.string_rewrite_nonidentity": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "R2.string_rewrite",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     },
     "R2.subtraction_game": {
@@ -6571,17 +7216,63 @@
     "R2.to_base_wide": {
       "candidate": true,
       "cluster_part": "A",
+      "established_by": [
+        "survivor_list_of_record",
+        "stage2_conditions",
+        "fresh_run_not_dropped",
+        "candidate_list",
+        "partition_of_record",
+        "capacity_record"
+      ],
       "evaluation": "R2",
       "global_cluster": "C1.digit_peel",
       "group": "C1.bracket_matching",
       "on_survivor_list": true,
       "part_binds_it": true,
+      "stage": "stage 5, registration",
       "status": "REGISTERED"
     }
   },
   "map_sha256": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
   "reason_policy": "A reason is taken only where a committed file states it. Order: drops_after_final_checks.txt; the fix-4 manifests; the NOT_REGISTERED tables of the lineage modules (read with ast, nothing executed); then, only if none of those states one, the supplementary committed tables (SUPERSEDED, DROPPED_AUDIT4 and the like, and the supersession fields of the fix-4 manifests). Where no committed file states a reason the reason is the fixed sentence given in the field.",
-  "script_sha256": "0d5d2889c7e2a2439bafe64e0225d4015094031c1d95ecfc5e4fb27a1e4b0751",
+  "records_check": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+    "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7",
+    "what": "independent engineering evidence, not Astra validation and not human approval"
+  },
+  "records_establishing_registration": {
+    "candidate_list": {
+      "path": "studies/m0/registration/candidate_list.json",
+      "role": "the lineage is a candidate (stage 2)",
+      "sha256": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a"
+    },
+    "capacity_record": {
+      "path": "studies/m0/manifests/capacity_of_record.json",
+      "role": "the lineage is in S at the fixed point of stage 4 and its cluster holds a registered lineage",
+      "sha256": "33c393fbd0770520c489c8bd8591a1a0febd3f4273961499619a1d6eaa12fb34"
+    },
+    "fresh_run_not_dropped": {
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+      "role": "the 15 lineages the fresh run dropped; the lineage is not among them (stage 1S)",
+      "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+    },
+    "partition_of_record": {
+      "path": "studies/m0/manifests/partition_of_record.json",
+      "role": "its cluster's part (stage 3)",
+      "sha256": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9"
+    },
+    "stage2_conditions": {
+      "path": "studies/m0/manifests/stage2_conditions.json",
+      "role": "every stage-2 condition PASS (stage 2)",
+      "sha256": "81d454a2c7045c7ad9bad9a18b2d9f18e5f3e5c02a4590b5a76ebc1368ae3e55"
+    },
+    "survivor_list_of_record": {
+      "path": "studies/m0/manifests/survivor_list_of_record.json",
+      "role": "the lineage is on it (stage 0)",
+      "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+    }
+  },
+  "script_sha256": "eb4bf944d2d2e6a570f9ef7265b8449048d59de5ff7593762ac3723b3dff2b19",
   "status": "First version of the status record, part of G-gen's record of record made at the human lead's domain list of 2026-11-26",
   "version": 1,
   "what": "First version of the status record of ADR-0033 addendum 1 section 3 item 6 and section 4A stage 6: for each of the 345 written lineages of the map of record, the evaluation, the global cluster, the cluster's part and the status with its stage and reason. Assembled by code from committed records; no judgement. The map carries no status and is not changed by this file."

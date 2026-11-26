@@ -879,7 +879,7 @@
       "B": "6/6"
     }
   },
-  "script_sha256": "0d5d2889c7e2a2439bafe64e0225d4015094031c1d95ecfc5e4fb27a1e4b0751",
+  "script_sha256": "eb4bf944d2d2e6a570f9ef7265b8449048d59de5ff7593762ac3723b3dff2b19",
   "section_9_item_5_reading_per_part": {
     "C1.A": "computed as written, with 12 degrees of freedom printed beside every figure (section 9 item 5)",
     "C1.B": "computed as written, with 3 degrees of freedom printed beside every figure (section 9 item 5)",
@@ -893,7 +893,7 @@
   "status": "Part of G-gen's record of record, made at the human lead's domain list of 2026-11-26 (ADR-0033 choice 2, option (a))",
   "status_record_v1": {
     "path": "studies/m0/manifests/status_record_v1.json",
-    "sha256": "b1f94e9d193adb1d327f6ce8e5a6f81bc3b7f813427a2f282237fdd8d55439ae"
+    "sha256": "fcfca4723375c90b06a88538751d6f7423a765ec3702975c4880efce86a7328e"
   },
   "what": "ADR-0033 addendum 1 section 4A stage 5 (registration) and the counts of section 4 item 6: the lineages left in S after stage 4 are registered; G_e,A and G_e,B are the numbers of clusters with a registered lineage. Assembled by code from the map, partition, candidate and capacity records; no judgement."
 }

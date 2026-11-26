@@ -1,4 +1,7 @@
 {
+  "awaiting_human_lead_confirmation": [
+    "R-62 (c)"
+  ],
   "departures": {
     "family_count_fewer_than_12_is_a_departure_from_ADR_0033_line_268": {
       "applies": true,
@@ -132,6 +135,20 @@
       "title": "R-56. The M1a echo rule (audit P3): a departure from the text, in the direction unfavourable to passing.",
       "what": "a departure from the text of stage 1S point 6, in the direction unfavourable to passing, made before any fresh figure existed"
     },
+    "lead_ruling_R_60": {
+      "classification_of_the_records_check": "departure from ADR-0033 section 6.2 (\"Every process runs with PYTHONHASHSEED=0\"): five C1 scripts run with -I ignore PYTHONHASHSEED (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-60",
+      "ruling_text_excerpts": [
+        "The C1 commands that the final auditor ran with `python -I` ignore `PYTHONHASHSEED`.",
+        "reproducibility across runs is not claimed for those five scripts"
+      ],
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    },
     "lead_ruling_R_61": {
       "hashed_late": {
         "capacity_runner": {
@@ -151,6 +168,47 @@
       "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59",
       "title": "R-61. A departure from stage 0: three pieces of code hashed late.",
       "what": "a departure from stage 0: the distinct-item key, the pool builder and the capacity runner were hashed after the partition of record was computed"
+    },
+    "lead_ruling_R_62_b": {
+      "classification_of_the_records_check": "departure from the decided reading (i), 'names relabelled only': the key relabels object, event and invented words as well as names; wider, less favourable to passing (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-62",
+      "ruling_text_excerpts": [
+        "The key also relabels object words, event words and invented category words, as well as personal and place names.",
+        "which is less favourable to passing"
+      ],
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
+    },
+    "lead_ruling_R_62_c": {
+      "classification_of_the_records_check": "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; awaiting the human lead's confirmation (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-62",
+      "ruling_text_excerpts": [
+        "`R2.caesar_shift` keeps its invented words: there they are the text being shifted, and relabelling them changes the answer",
+        "is reported to the human lead for his confirmation with the capacity results"
+      ],
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
+    },
+    "lead_ruling_R_66": {
+      "classification_of_the_records_check": "against section 8 and section 3 item 6: 141 lineages carry no single committed reason (180 counting the superseded-by tier, 39) (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-66",
+      "ruling_text_excerpts": [
+        "otherwise the fixed sentence \"not on the survivor list of record; superseded or dropped before it (no single committed reason found)\" (141)"
+      ],
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
     }
   },
   "domain_list": {
@@ -244,12 +302,258 @@
     },
     "what": "The domain list of ADR-0033 choice 2, as decided by the human lead on 2026-11-26: the input of build_records.py for G-gen's record."
   },
+  "frozen_generator_files": {
+    "commit": "7cd0ac5a",
+    "commit_full": "7cd0ac5a2a2c5261352e66b4a41650576dcfe1be",
+    "count": 49,
+    "files": [
+      {
+        "path": "studies/m0/__init__.py",
+        "sha256": "56e493099672d2c3628af55cbf456c53b12c43ba8e601d602c4ebe2731dbcb2d"
+      },
+      {
+        "path": "studies/m0/c1grammar.py",
+        "sha256": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca"
+      },
+      {
+        "path": "studies/m0/core.py",
+        "sha256": "07907f1e559f6814e52b1307d6b009003130ba7297f0c1fa04fa3185441cc81d"
+      },
+      {
+        "path": "studies/m0/lineages_c1.py",
+        "sha256": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61"
+      },
+      {
+        "path": "studies/m0/lineages_c1_common.py",
+        "sha256": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3.py",
+        "sha256": "f72d85753d920510dec9cce3867497bb190e153f6a11d4365ea5fe98bd0a116e"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3_lists.py",
+        "sha256": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3_numbers.py",
+        "sha256": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3_other.py",
+        "sha256": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix4.py",
+        "sha256": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab"
+      },
+      {
+        "path": "studies/m0/lineages_c1_rev2.py",
+        "sha256": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5"
+      },
+      {
+        "path": "studies/m0/lineages_c1_rev2_traced.py",
+        "sha256": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f"
+      },
+      {
+        "path": "studies/m0/lineages_c1_stacks.py",
+        "sha256": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df"
+      },
+      {
+        "path": "studies/m0/lineages_c1_strings.py",
+        "sha256": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16"
+      },
+      {
+        "path": "studies/m0/lineages_k0.py",
+        "sha256": "594c1867f519cd6598ab67126338d869c8966f32da333bbae341f355a9419d08"
+      },
+      {
+        "path": "studies/m0/lineages_m1.py",
+        "sha256": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af"
+      },
+      {
+        "path": "studies/m0/lineages_m1_common.py",
+        "sha256": "06aa138807d88b950bcceb19526e3f5b75be26e737d2e341b38dabbf5d8546fe"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3.py",
+        "sha256": "041fab82d0f4cb1dd14205bd774f032dbd678c92803511b06afc200999d458c1"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_a.py",
+        "sha256": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_b.py",
+        "sha256": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_c.py",
+        "sha256": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_common.py",
+        "sha256": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix4.py",
+        "sha256": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5"
+      },
+      {
+        "path": "studies/m0/lineages_m1_pricing.py",
+        "sha256": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742"
+      },
+      {
+        "path": "studies/m0/lineages_r1.py",
+        "sha256": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4"
+      },
+      {
+        "path": "studies/m0/lineages_r1_common.py",
+        "sha256": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23"
+      },
+      {
+        "path": "studies/m0/lineages_r1_conditional.py",
+        "sha256": "09a4b715e4b591dc95227dd38553c660bc63f0f255235c79e1c5a6a55160f2c9"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix3_b.py",
+        "sha256": "10d7e98e64cc7eb6226c72e4fc6c3832d0e4c619f5a5230cf4df2953116f13dc"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix3_c.py",
+        "sha256": "ce9f52d260cd17eba50d380116d8223e08dfe097ecfcb25d69b62be1e69498b8"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix3_common.py",
+        "sha256": "fa87936f535cdf4843c41c4e507638b095ab291b10fb9ce402302ae5293a33cc"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix4_a.py",
+        "sha256": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix4_common.py",
+        "sha256": "137479efd834debc1fc956acebfe079ccf4591330f2e6c43a28f17ffb4fe501f"
+      },
+      {
+        "path": "studies/m0/lineages_r1_rev4.py",
+        "sha256": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24"
+      },
+      {
+        "path": "studies/m0/lineages_r1_rev4_common.py",
+        "sha256": "91faaad025290762e7e0757520aa2e279fdeb7d75f62adbadb9a4673a927bfba"
+      },
+      {
+        "path": "studies/m0/lineages_r2.py",
+        "sha256": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573"
+      },
+      {
+        "path": "studies/m0/lineages_r2_codes.py",
+        "sha256": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4"
+      },
+      {
+        "path": "studies/m0/lineages_r2_common.py",
+        "sha256": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff"
+      },
+      {
+        "path": "studies/m0/lineages_r2_dynprog.py",
+        "sha256": "526e99602af7e23ec80268f0eff0c082555f1cf0767f6fad01b2c41792fd4767"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix3.py",
+        "sha256": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix3_b.py",
+        "sha256": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix3_c.py",
+        "sha256": "7f64139719a33c5c0f7f5a702de862590fb6056095074c4dd531fea94f2227c2"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix4.py",
+        "sha256": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6"
+      },
+      {
+        "path": "studies/m0/lineages_r2_graphs.py",
+        "sha256": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9"
+      },
+      {
+        "path": "studies/m0/lineages_r2_parsing.py",
+        "sha256": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4"
+      },
+      {
+        "path": "studies/m0/lineages_r2_rev2.py",
+        "sha256": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa"
+      },
+      {
+        "path": "studies/m0/lineages_r2_structures.py",
+        "sha256": "88b524efc9651f1cce09bb6fb1d5128bd5c4c9bebfc109b97929b96fbe70eddb"
+      },
+      {
+        "path": "studies/m0/scoring.py",
+        "sha256": "e5007eb53456849b45b142a6789ccf933be26e103a2384281253486b615e97a7"
+      },
+      {
+        "path": "studies/m0/solvers_c1.py",
+        "sha256": "aafedb5be92a8dcdfaa4f6ed8587d2fed2eb980a78d9d71791364e1ed2f2360d"
+      },
+      {
+        "path": "studies/m0/vocab.py",
+        "sha256": "2c4036bea7770727b3ec0582f361723c243c145de3479e8d610a384a7a93c286"
+      }
+    ],
+    "rehashed_in_the_worktree_and_equal": true,
+    "source_list": {
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/registered_generator_files.json",
+      "sha256": "4050dd6a6cb2c8ad82d77144df1e261858a035a1b606a11b928e1ed927aef585"
+    },
+    "unchanged_since_the_commit": "git diff --name-status 7cd0ac5a HEAD -- studies/m0 shows only additions (51, all under fresh_run/, registration/, solvers2/); every file below is byte-identical at 7cd0ac5a and HEAD, and the working tree is clean for them",
+    "what": "the static import closure of the functions behind the builders of the 65 registered lineages"
+  },
+  "gap_filling_rulings_that_lean_toward_passing": [
+    {
+      "classification_of_the_records_check": "fills a gap (what a 'rule' is); leans toward passing; not a departure (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-46",
+      "ruling_text_excerpts": [
+        "a field is a rule only if its prediction for an item can be computed without that item's answer",
+        "This ruling leans toward passing for the two fields it leaves unread"
+      ],
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    },
+    {
+      "classification_of_the_records_check": "reads 'fixtures carry no answer' as allowing aggregate format lines from the keys; favourable to the lineages; a reading, not a departure (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-54",
+      "ruling_text_excerpts": [
+        "This reading is the one favourable to the lineages and is reported to the human lead as such"
+      ],
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    }
+  ],
+  "independent_check_of_the_records": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+    "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7",
+    "what": "independent engineering evidence, not Astra validation and not human approval"
+  },
   "inputs_sha256": {
     "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md": "7719f6d456113385a44dac37abeb28b36d6d9fb7eb569a65c7e6ccaaf19ec90b",
     "docs/reviews/m0-fresh-run-2026-11-26/HASH_RECORD.json": "7e00cf45d77dba75e15d8ee0645d4e5ed519dc871a64d1e2fd04cc0098b4ce4b",
     "docs/reviews/m0-fresh-run-2026-11-26/HASH_RECORD_STAGES_2_TO_4.json": "396dd8d170de17a75413ab6678bb526aaf4b5412f3c8a0557515bc0c51be6f7b",
     "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60",
     "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59",
+    "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7",
+    "docs/reviews/m0-fresh-run-2026-11-26/records_check/registered_generator_files.json": "4050dd6a6cb2c8ad82d77144df1e261858a035a1b606a11b928e1ed927aef585",
     "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed1.json": "90f02a8bfbbca7c89756250d3316e1fa2dae5deea3000c6438d96d5529232b63",
     "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed2.json": "87f28a8aa46813d8273328d32bed3b55ee978228dc02c1b7e3d93eec2c0318cd",
     "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed3.json": "f720ac2145da8aea3b8a7068bbcefd799a1d0c1ecbfb2dd7436e19353d5b07f5",
@@ -276,7 +580,7 @@
       "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
     }
   ],
-  "script_sha256": "0d5d2889c7e2a2439bafe64e0225d4015094031c1d95ecfc5e4fb27a1e4b0751",
+  "script_sha256": "eb4bf944d2d2e6a570f9ef7265b8449048d59de5ff7593762ac3723b3dff2b19",
   "section_9_item_5_reading_per_part": {
     "C1.A": "computed as written, with 12 degrees of freedom printed beside every figure (section 9 item 5)",
     "C1.B": "computed as written, with 3 degrees of freedom printed beside every figure (section 9 item 5)",
@@ -1155,7 +1459,7 @@
     },
     "registration_record": {
       "path": "studies/m0/manifests/registration_record.json",
-      "sha256": "e50b69f887fbcc840ee2bf74352768c60abf656fba73a810003ee1c5f40d3e39"
+      "sha256": "5192151759f0aded5643b8458b084daa80bd01692c9374ac04dfa18288ca299d"
     },
     "rounds_of_stage_4_with_every_count": {
       "capacity_record": {
@@ -2473,7 +2777,7 @@
     },
     "status_record_first_version": {
       "path": "studies/m0/manifests/status_record_v1.json",
-      "sha256": "b1f94e9d193adb1d327f6ce8e5a6f81bc3b7f813427a2f282237fdd8d55439ae",
+      "sha256": "fcfca4723375c90b06a88538751d6f7423a765ec3702975c4880efce86a7328e",
       "version": 1
     },
     "survivor_list_of_record": {
