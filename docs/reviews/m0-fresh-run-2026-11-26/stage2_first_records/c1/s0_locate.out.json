@@ -1,0 +1,158 @@
+{
+ "C1.binary_search_f3": {
+  "family": "lists",
+  "file": "studies/m0/lineages_c1_fix3_lists.py",
+  "len": 31,
+  "line": 106
+ },
+ "C1.bracket_matching_f3": {
+  "family": "stacks",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 48,
+  "line": 28
+ },
+ "C1.bytecode_loop_f3": {
+  "family": "simulation",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 46,
+  "line": 196
+ },
+ "C1.circle_elimination_r2": {
+  "family": "simulation",
+  "file": "studies/m0/lineages_c1_rev2.py",
+  "len": 30,
+  "line": 303
+ },
+ "C1.cond_chain_f3": {
+  "family": "conditionals",
+  "file": "studies/m0/lineages_c1_fix3_numbers.py",
+  "len": 14,
+  "line": 84
+ },
+ "C1.counter_list_f3": {
+  "family": "lists",
+  "file": "studies/m0/lineages_c1_fix3_lists.py",
+  "len": 23,
+  "line": 162
+ },
+ "C1.digit_peel_f3": {
+  "family": "while",
+  "file": "studies/m0/lineages_c1_fix3_numbers.py",
+  "len": 28,
+  "line": 123
+ },
+ "C1.euclid_gcd_traced_f3": {
+  "family": "while",
+  "file": "studies/m0/lineages_c1_fix3_numbers.py",
+  "len": 34,
+  "line": 48
+ },
+ "C1.fast_power_f4": {
+  "family": "while",
+  "file": "studies/m0/lineages_c1_fix4.py",
+  "len": 17,
+  "line": 91
+ },
+ "C1.fib_like_f3": {
+  "family": "accumulators",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 14,
+  "line": 361
+ },
+ "C1.fib_shapes_recursive_f3": {
+  "family": "accumulators",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 17,
+  "line": 377
+ },
+ "C1.func_branch_f4": {
+  "family": "functions",
+  "file": "studies/m0/lineages_c1_fix4.py",
+  "len": 18,
+  "line": 114
+ },
+ "C1.func_compose_f4": {
+  "family": "functions",
+  "file": "studies/m0/lineages_c1_fix4.py",
+  "len": 27,
+  "line": 134
+ },
+ "C1.list_build_f3": {
+  "family": "lists",
+  "file": "studies/m0/lineages_c1_fix3_lists.py",
+  "len": 23,
+  "line": 187
+ },
+ "C1.merge_two_sorted_f3": {
+  "family": "lists",
+  "file": "studies/m0/lineages_c1_fix3_lists.py",
+  "len": 20,
+  "line": 58
+ },
+ "C1.nested_pairs_f3": {
+  "family": "nested",
+  "file": "studies/m0/lineages_c1_fix3_lists.py",
+  "len": 18,
+  "line": 212
+ },
+ "C1.postfix_evaluation": {
+  "family": "stacks",
+  "file": "studies/m0/lineages_c1_stacks.py",
+  "len": 31,
+  "line": 72
+ },
+ "C1.recursive_calls_r2": {
+  "family": "functions",
+  "file": "studies/m0/lineages_c1_rev2.py",
+  "len": 30,
+  "line": 229
+ },
+ "C1.run_length_scan": {
+  "family": "strings",
+  "file": "studies/m0/lineages_c1_strings.py",
+  "len": 23,
+  "line": 16
+ },
+ "C1.shared_lists_f3": {
+  "family": "references",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 79,
+  "line": 112
+ },
+ "C1.slices_f4": {
+  "family": "slices",
+  "file": "studies/m0/lineages_c1_fix4.py",
+  "len": 26,
+  "line": 163
+ },
+ "C1.string_build_f3": {
+  "family": "strings",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 16,
+  "line": 437
+ },
+ "C1.string_methods_f3": {
+  "family": "string_methods",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 36,
+  "line": 399
+ },
+ "C1.turtle_walk_f3": {
+  "family": "simulation",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 39,
+  "line": 244
+ },
+ "C1.union_find_links_f3": {
+  "family": "graphs",
+  "file": "studies/m0/lineages_c1_fix3_other.py",
+  "len": 29,
+  "line": 81
+ },
+ "C1.while_counter_f3": {
+  "family": "while",
+  "file": "studies/m0/lineages_c1_fix3_numbers.py",
+  "len": 26,
+  "line": 20
+ }
+}

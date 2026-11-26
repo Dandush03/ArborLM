@@ -1,0 +1,186 @@
+{
+  "evaluation": "R1",
+  "fixture_seed": 14961762383913329776,
+  "lineages": {
+    "R1.boolean_lights_r4": {
+      "levels_distinct": {
+        "reason": "lamps 4+L (4..10), presses 3+2L (3..15) strictly rising at every level; switches 3+L//3. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Start state stated with 'all the lamps not named here are off'; toggle semantics stated per switch; 'Answer yes or no.'",
+        "result": "PASS"
+      }
+    },
+    "R1.categories_default_exceptions_r4": {
+      "levels_distinct": {
+        "reason": "chain c = T+8+2L (17,19,23,25,29,31,35) strictly rising; rules on the asked verb T = 9+2(L//2) (9,9,11,11,13,13,15). Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Linear chain 'Every X is a Y', member in the smallest group, one rule per group on the asked verb, none on the member's own group; precedence convention stated ('the rule about the smaller (more specific) group wins'); 'Answer yes or no.' Cosmetic: 'A' before vowel-initial pseudo-words; does not affect the key.",
+        "result": "PASS"
+      }
+    },
+    "R1.compass_turns": {
+      "levels_distinct": {
+        "reason": "commands 3+2L (3..15) strictly rising. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Turn commands map to fixed multiples of 90 degrees; walks do not change heading; 'Answer north, east, south or west.'",
+        "result": "PASS"
+      }
+    },
+    "R1.conditional_threshold_rule_r4": {
+      "levels_distinct": {
+        "reason": "members 6+L (6..12) strictly rising. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Weights, votes, threshold and the abstention convention stated; 'at least' stated; negative thresholds are printed as e.g. '-18' and are unambiguous; 'Answer yes or no.'",
+        "result": "PASS"
+      }
+    },
+    "R1.equivalence_exchange_rates_r6": {
+      "levels_distinct": {
+        "reason": "spine length 3+L (hops X..Y 3..9) strictly rising; rates 5..13. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Rates form a tree (spine plus hanging items), so every ratio is determined; the answer is a whole number by construction; the question 'How many units of Y ...' fixes an open whole-number answer. Cosmetic: '1 units of' appears; does not affect the key.",
+        "result": "PASS"
+      }
+    },
+    "R1.knights_knaves_r6": {
+      "levels_distinct": {
+        "reason": "people 4+L (4..10) strictly rising. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Knight/knave convention stated; statements unambiguous (self-reference allowed and well defined); a unique solution over all people is enforced by the builder (validity redraw); 'Answer knight or knave.'",
+        "result": "PASS"
+      }
+    },
+    "R1.spatial_grid_walk_r5": {
+      "levels_distinct": {
+        "reason": "grid cells 9,9,12,16,16,20,25 (non-decreasing); free moves 4+L+U(0..3) (support shifts by one at every level); blocked moves 3+L//3; total moves rise at every level. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Orientation (row 1 northernmost, column 1 westernmost), wall cells and the convention 'A move into a wall or off the map does nothing' stated; place names distinct; no place is named 'wall'; 'Choose from' lists every place.",
+        "result": "PASS"
+      }
+    },
+    "R1.swap_tracking_r5": {
+      "levels_distinct": {
+        "reason": "operations 6+2L (6..18) strictly rising; people 5+L//2. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Swap and three-way hand-over stated as simultaneous ('all at once'); 'Choose from' lists every object.",
+        "result": "PASS"
+      }
+    },
+    "R1.temporal_weekday_shift_r6": {
+      "levels_distinct": {
+        "reason": "spine length 5+L (hops anchor..asked 5..11) strictly rising; links 7..15. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. One anchor weekday; links form a tree, so every event's weekday is determined; the question asks for a day of the week (a closed set of seven names). The answer form is stated by the question and not by an explicit list: the auditor's reading, applied to every open or category answer here.",
+        "result": "PASS"
+      }
+    },
+    "R1.venn_counting_r5": {
+      "levels_distinct": {
+        "reason": "groups 2,2,3,3,3,4,4 (non-decreasing, rising overall); the asked read-out changes by level (none, one, none, two, at least two, none, two); region range 1..24+4L and none range 0..30+2L strictly wider at every level. R-40 point (levels 0/1) decided here: levels 0 and 1 are distinct (different read-out and wider number ranges; not a relabel, not one distribution), but the procedure's size (2 groups) does not rise from 0 to 1 (nor from 3 to 4); (c) is met by the number ranges only. Whether level 1 is harder than level 0 is a difficulty question, on which no lineage is failed. PASS under the rule; a stricter reading requiring the procedure's size to rise at every adjacent pair would FAIL it: PENDING LEAD REVIEW. Rule applied to all ten: PASS iff (a) the builder's level parameters differ between every two levels (no two levels share an item distribution), confirmed by no shared normalised text across levels in the 350 fixtures and no two levels equal under a shared-stream identity test; (b) a stated size/steps/depth parameter is non-decreasing from level 0 to 6 and larger at 6; (c) each adjacent pair differs in at least one stated parameter in the direction of more work. Fixtures: 0 shared normalised texts across levels; identity test: no two levels equal.",
+        "result": "PASS"
+      },
+      "map": "see map_of_record",
+      "second_solver": {
+        "fixtures": 350,
+        "mismatches": 0,
+        "reason": "The final R1 auditor's text-only solver covers this lineage (SOLVERS, solvers_final.py:463-476); it imports only re, itertools, collections.deque, fractions.Fraction and heapq and reads only the question string. Recorded agreement (FINAL_R1.md section 1): 0 mismatches, 0 ambiguous, 0 parse errors on 10,500 items per shape (84,000 + 42,000 over 12 shapes). Stage-2 fixture check (seed 14961762383913329776, 50 items per level): agree 350 of 350; mismatch 0; ambiguous 0; parse 0. Caveat common to all ten (not a failure under this condition as briefed): samples.py, the dump the solver was written from, prints the builder's KEY (samples.py:2,15), so the record does not show the sentence of section 8 item 1 that fixtures carry no answer from the first solver: PENDING LEAD REVIEW.",
+        "result": "PASS",
+        "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py"
+      },
+      "wording": {
+        "reason": "Builder code read and 14 rendered fixtures read (2 per level); question stated, answer form stated, key unique by construction and agreed by the text-only solver on 350 of 350 fixtures with 0 'ambiguous'. Group sizes and every intersection stated; 'Each person is counted once in each number that applies to them' fixes the inclusive reading of 'both' and 'all of'; the question fixes an open count.",
+        "result": "PASS"
+      }
+    }
+  }
+}

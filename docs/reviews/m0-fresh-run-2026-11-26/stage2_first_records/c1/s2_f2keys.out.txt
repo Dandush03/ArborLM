@@ -1,0 +1,18 @@
+{
+ "items": 9100,
+ "subprocesses": 18200,
+ "totals": {
+  "n": 9100
+ },
+ "secs": 36.7,
+ "interpreters": {
+  "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/.venv/bin/python3.12": {
+   "version": "3.12.14",
+   "hashseed": "0"
+  },
+  "/opt/homebrew/bin/python3.15": {
+   "version": "3.15.1",
+   "hashseed": "2718281"
+  }
+ }
+}

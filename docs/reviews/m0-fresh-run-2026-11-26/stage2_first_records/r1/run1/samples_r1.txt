@@ -1,0 +1,559 @@
+===== R1.boolean_lights_r4|L0|00 k=2 type=yn
+There are 4 lamps numbered 1 to 4. At the start, all lamps are off. The green switch toggles lamps 1 and 2 (each one goes from on to off or from off to on). The orange switch toggles lamp 4 (each one goes from on to off or from off to on). The yellow switch toggles lamps 2 and 4 (each one goes from on to off or from off to on). The switches are pressed in this order: green, orange, orange. Is lamp 2 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L0|01 k=2 type=yn
+There are 4 lamps numbered 1 to 4. At the start, lamps 3 and 4 are on, and all the lamps not named here are off. The blue switch toggles lamp 3 (each one goes from on to off or from off to on). The white switch toggles lamps 1, 2 and 3 (each one goes from on to off or from off to on). The orange switch toggles lamps 1, 3 and 4 (each one goes from on to off or from off to on). The switches are pressed in this order: white, white, white. Is lamp 1 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L1|00 k=2 type=yn
+There are 5 lamps numbered 1 to 5. At the start, lamps 1, 3 and 4 are on, and all the lamps not named here are off. The white switch toggles lamp 5 (each one goes from on to off or from off to on). The green switch toggles lamps 1 and 2 (each one goes from on to off or from off to on). The purple switch toggles lamps 4 and 5 (each one goes from on to off or from off to on). The switches are pressed in this order: purple, green, white, green, purple. Is lamp 4 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L1|01 k=2 type=yn
+There are 5 lamps numbered 1 to 5. At the start, lamps 1 and 5 are on, and all the lamps not named here are off. The green switch toggles lamps 1 and 2 (each one goes from on to off or from off to on). The red switch toggles lamps 2, 3 and 5 (each one goes from on to off or from off to on). The blue switch toggles lamps 1 and 5 (each one goes from on to off or from off to on). The switches are pressed in this order: green, red, blue, green, blue. Is lamp 3 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L2|00 k=2 type=yn
+There are 6 lamps numbered 1 to 6. At the start, lamps 1, 2, 3 and 5 are on, and all the lamps not named here are off. The green switch toggles lamps 1 and 6 (each one goes from on to off or from off to on). The red switch toggles lamps 2 and 5 (each one goes from on to off or from off to on). The purple switch toggles lamps 1, 5 and 6 (each one goes from on to off or from off to on). The switches are pressed in this order: green, purple, green, green, purple, red, green. Is lamp 2 on at the end? Answer yes or no.
+KEY: 'no'
+
+===== R1.boolean_lights_r4|L2|01 k=2 type=yn
+There are 6 lamps numbered 1 to 6. At the start, lamp 2 is on, and all the lamps not named here are off. The purple switch toggles lamps 3 and 6 (each one goes from on to off or from off to on). The white switch toggles lamps 1, 3 and 6 (each one goes from on to off or from off to on). The green switch toggles lamps 1, 2 and 5 (each one goes from on to off or from off to on). The switches are pressed in this order: green, green, purple, purple, purple, white, green. Is lamp 3 on at the end? Answer yes or no.
+KEY: 'no'
+
+===== R1.boolean_lights_r4|L3|00 k=2 type=yn
+There are 7 lamps numbered 1 to 7. At the start, lamps 2, 3, 4 and 7 are on, and all the lamps not named here are off. The white switch toggles lamps 2, 5 and 6 (each one goes from on to off or from off to on). The red switch toggles lamps 1, 2, 4 and 7 (each one goes from on to off or from off to on). The blue switch toggles lamps 1, 2, 3 and 4 (each one goes from on to off or from off to on). The black switch toggles lamps 4 and 6 (each one goes from on to off or from off to on). The switches are pressed in this order: white, white, white, blue, blue, blue, blue, black, white. Is lamp 2 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L3|01 k=2 type=yn
+There are 7 lamps numbered 1 to 7. At the start, lamps 4 and 5 are on, and all the lamps not named here are off. The white switch toggles lamps 1 and 3 (each one goes from on to off or from off to on). The green switch toggles lamps 1 and 3 (each one goes from on to off or from off to on). The blue switch toggles lamps 1, 2, 3 and 6 (each one goes from on to off or from off to on). The orange switch toggles lamp 5 (each one goes from on to off or from off to on). The switches are pressed in this order: white, white, orange, white, white, blue, green, orange, green. Is lamp 1 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L4|00 k=2 type=yn
+There are 8 lamps numbered 1 to 8. At the start, lamps 1, 3, 4, 6 and 7 are on, and all the lamps not named here are off. The yellow switch toggles lamps 2 and 4 (each one goes from on to off or from off to on). The purple switch toggles lamps 2 and 6 (each one goes from on to off or from off to on). The blue switch toggles lamps 2, 3, 4 and 8 (each one goes from on to off or from off to on). The white switch toggles lamps 3, 5 and 6 (each one goes from on to off or from off to on). The switches are pressed in this order: purple, purple, yellow, yellow, blue, purple, blue, yellow, blue, purple, purple. Is lamp 4 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L4|01 k=2 type=yn
+There are 8 lamps numbered 1 to 8. At the start, lamps 1, 3 and 8 are on, and all the lamps not named here are off. The green switch toggles lamps 1, 3, 4 and 6 (each one goes from on to off or from off to on). The blue switch toggles lamps 2, 3, 7 and 8 (each one goes from on to off or from off to on). The white switch toggles lamps 1, 5, 7 and 8 (each one goes from on to off or from off to on). The purple switch toggles lamps 3, 4, 5 and 8 (each one goes from on to off or from off to on). The switches are pressed in this order: purple, green, purple, blue, purple, purple, green, blue, purple, blue, blue. Is lamp 8 on at the end? Answer yes or no.
+KEY: 'no'
+
+===== R1.boolean_lights_r4|L5|00 k=2 type=yn
+There are 9 lamps numbered 1 to 9. At the start, lamps 2, 5, 6, 7 and 9 are on, and all the lamps not named here are off. The orange switch toggles lamps 6 and 8 (each one goes from on to off or from off to on). The green switch toggles lamps 2, 4, 5 and 7 (each one goes from on to off or from off to on). The purple switch toggles lamps 1, 3, 6 and 8 (each one goes from on to off or from off to on). The white switch toggles lamps 1, 2, 4, 6 and 7 (each one goes from on to off or from off to on). The switches are pressed in this order: white, green, orange, orange, orange, orange, purple, purple, orange, orange, orange, purple, purple. Is lamp 6 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L5|01 k=2 type=yn
+There are 9 lamps numbered 1 to 9. At the start, lamps 3, 5 and 6 are on, and all the lamps not named here are off. The black switch toggles lamps 3, 4 and 5 (each one goes from on to off or from off to on). The blue switch toggles lamps 2 and 9 (each one goes from on to off or from off to on). The orange switch toggles lamps 1, 3, 6 and 7 (each one goes from on to off or from off to on). The yellow switch toggles lamps 4, 5 and 6 (each one goes from on to off or from off to on). The switches are pressed in this order: black, blue, yellow, orange, orange, yellow, blue, yellow, orange, yellow, black, black, yellow. Is lamp 7 on at the end? Answer yes or no.
+KEY: 'yes'
+
+===== R1.boolean_lights_r4|L6|00 k=2 type=yn
+There are 10 lamps numbered 1 to 10. At the start, lamps 2, 3, 5, 7, 8, 9 and 10 are on, and all the lamps not named here are off. The orange switch toggles lamp 4 (each one goes from on to off or from off to on). The green switch toggles lamps 4, 6, 7, 8 and 10 (each one goes from on to off or from off to on). The white switch toggles lamp 6 (each one goes from on to off or from off to on). The red switch toggles lamp 3 (each one goes from on to off or from off to on). The yellow switch toggles lamps 2, 6, 9 and 10 (each one goes from on to off or from off to on). The switches are pressed in this order: yellow, white, yellow, yellow, yellow, green, white, yellow, orange, yellow, white, orange, red, yellow, red. Is lamp 7 on at the end? Answer yes or no.
+KEY: 'no'
+
+===== R1.boolean_lights_r4|L6|01 k=2 type=yn
+There are 10 lamps numbered 1 to 10. At the start, lamps 1, 2 and 6 are on, and all the lamps not named here are off. The white switch toggles lamps 2 and 8 (each one goes from on to off or from off to on). The black switch toggles lamps 2, 3, 4, 5, 8 and 9 (each one goes from on to off or from off to on). The blue switch toggles lamps 2 and 9 (each one goes from on to off or from off to on). The red switch toggles lamps 4, 6, 7 and 10 (each one goes from on to off or from off to on). The orange switch toggles lamps 2, 5, 7 and 9 (each one goes from on to off or from off to on). The switches are pressed in this order: white, blue, orange, black, orange, white, black, orange, black, black, blue, orange, blue, white, blue. Is lamp 2 on at the end? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L0|00 k=2 type=yn
+Every domar is a bokon. Every rizon is a kanok. Every dovix is a mamin. Every tirix is a zebok. Every dorix is a ditex. Every zalor is a domar. Every zebok is a ritox. Every bokon is a tirix. Every ritox is a rizon. Every titon is a riber. Every ditex is a dovix. Every mamin is a limix. Every loban is a dorix. Every kanok is a loban. Every debir is a zalor. Every riber is a debir. A titon cannot swim. A tirix cannot float. A dorix can float. A loban can float. A mamin cannot swim. A loban can swim. A debir cannot float. A zalor cannot swim. A kanok cannot swim. A dovix can float. A kanok can float. A zalor can float. A limix can float. A ditex can swim. A rizon can float. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Orla is a titon. Can Orla float? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L0|01 k=2 type=yn
+Every meton is a dison. Every mavar is a lidak. Every dison is a virir. Every keran is a maden. Every lomir is a mavar. Every lidak is a retak. Every virir is a zidon. Every tevix is a livik. Every retak is a kotex. Every livik is a noror. Every kotex is a rekir. Every zidon is a zedan. Every rekir is a tevix. Every zedan is a keran. Every vezek is a lomir. Every maden is a vezek. A zedan can swim. A kotex can swim. A mavar can swim. A retak can swim. A zidon cannot swim. A lomir can swim. A keran cannot float. A tevix can float. A vezek can float. A lidak can swim. A keran can swim. A retak can float. A meton can float. A maden can swim. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Hope is a meton. Can Hope swim? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L1|00 k=2 type=yn
+Every mokar is a lirak. Every mekin is a dorik. Every sevok is a kemox. Every kazix is a sedix. Every dorik is a motax. Every kinik is a kazix. Every rinek is a vodak. Every tonen is a mekin. Every zokak is a vevan. Every notok is a vinor. Every kemox is a notok. Every lirak is a tonen. Every dasax is a mokar. Every vevan is a sazik. Every motax is a zokak. Every sazik is a kinik. Every vodak is a dasax. Every sedix is a sevok. A notok can swim. A notok can jump. A kazix cannot swim. A vevan cannot swim. A kinik cannot swim. A sedix can swim. A sevok can swim. A vinor can swim. A sedix cannot jump. A rinek can jump. A sazik cannot swim. A vodak cannot jump. A mekin cannot jump. A kemox can swim. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Gwen is a rinek. Can Gwen swim? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L1|01 k=2 type=yn
+Every larex is a ritex. Every tanox is a lovor. Every memik is a vovek. Every sobin is a tebik. Every mozer is a tanox. Every kokir is a mavak. Every vovek is a ninor. Every tebik is a memik. Every nimen is a dezak. Every lebik is a nimen. Every balak is a karir. Every ritex is a mozer. Every dezak is a larex. Every karir is a lebik. Every lolan is a kokir. Every mavak is a sobin. Every lovor is a tilox. Every tilox is a lolan. A tebik cannot glow. A tilox can hum. A mavak cannot hum. A kokir cannot glow. A tanox can glow. A mavak can glow. A lovor cannot hum. A lovor cannot glow. A lebik can hum. A sobin cannot hum. A ritex cannot glow. A memik can glow. A mozer cannot glow. A ninor can glow. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Jon is a balak. Can Jon glow? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L2|00 k=2 type=yn
+Every zibok is a dosen. Every levix is a tekax. Every danox is a kekok. Every kinox is a virir. Every zinar is a danox. Every tekax is a zinar. Every liden is a sodox. Every bosek is a liden. Every domar is a nezak. Every sodox is a kinox. Every vesen is a zolir. Every dosen is a rolok. Every zolir is a zonin. Every razar is a bosek. Every nezak is a vesen. Every zonin is a tovek. Every virir is a zibok. Every sadon is a razar. Every kekok is a vodan. Every ronix is a levix. Every tovek is a sadon. Every rolok is a ronix. A ronix can hum. A domar can hum. A zibok can hum. A rolok cannot climb. A tekax cannot climb. A levix cannot hum. A levix cannot climb. A bosek can climb. A zonin cannot climb. A sadon cannot climb. A liden can climb. A kekok cannot hum. A danox cannot climb. A tekax cannot hum. A dosen cannot climb. A vodan cannot climb. A razar can hum. A razar cannot climb. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Yves is a domar. Can Yves climb? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L2|01 k=2 type=yn
+Every botar is a bizan. Every nizon is a tinik. Every rivin is a valir. Every tinik is a libex. Every marok is a rolar. Every temin is a vozek. Every kavan is a botar. Every zeser is a tater. Every bizan is a nizon. Every valir is a bibek. Every kikek is a lemir. Every biker is a sanan. Every vozek is a kavan. Every zazik is a kikek. Every tater is a zinax. Every rolar is a zazik. Every bibek is a rekok. Every rekok is a momin. Every momin is a temin. Every libex is a marok. Every lemir is a biker. Every sanan is a zeser. A bizan cannot float. A nizon can float. A kikek cannot jump. A rivin can jump. A marok can float. A bibek cannot jump. A biker can jump. A zinax cannot jump. A zazik cannot jump. A biker cannot float. A zeser can float. A tater cannot float. A libex cannot float. A tinik can float. A temin can jump. A libex cannot jump. A sanan cannot float. A zazik cannot float. A zeser cannot jump. A zinax can float. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Hope is a rivin. Can Hope float? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L3|00 k=2 type=yn
+Every nokak is a dolor. Every dolor is a nedak. Every dizax is a voran. Every seten is a sebex. Every voran is a molen. Every detex is a zebek. Every sebex is a tirok. Every diman is a lenon. Every nedak is a balor. Every totex is a diman. Every konek is a seten. Every komir is a dizax. Every sabor is a detex. Every taran is a moren. Every nezox is a totex. Every balor is a danex. Every tonor is a nokak. Every zebek is a nezox. Every tirok is a sabor. Every moren is a savok. Every molen is a taran. Every savok is a konek. Every lenon is a tonor. Every konik is a komir. A nedak cannot hum. A sabor cannot jump. A balor can hum. A nezox cannot jump. A diman cannot hum. A sabor can hum. A lenon cannot hum. A danex cannot hum. A nokak cannot hum. A konek cannot jump. A savok cannot jump. A detex cannot hum. A diman can jump. A dolor can hum. A tonor cannot hum. A zebek can jump. A totex cannot hum. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Wren is a konik. Can Wren hum? Answer yes or no.
+KEY: 'yes'
+
+===== R1.categories_default_exceptions_r4|L3|01 k=2 type=yn
+Every sodon is a zitax. Every beder is a zasik. Every toran is a zomix. Every madar is a sobek. Every zomix is a madar. Every zasik is a komax. Every ribox is a lokek. Every tetar is a ribox. Every lakan is a benon. Every rimer is a zerox. Every benon is a sodon. Every mimok is a sonir. Every sobek is a toten. Every mesan is a rimer. Every zerox is a lakan. Every komax is a dosok. Every revok is a zatar. Every sonir is a beder. Every zitax is a tonir. Every zatar is a mimok. Every dosok is a toran. Every tonir is a sirix. Every lokek is a revok. Every sirix is a tetar. A dosok can hum. A toran can hum. A komax cannot climb. A dosok cannot climb. A beder can hum. A komax can hum. A sobek can hum. A sodon can climb. A mimok can hum. A toten can hum. A zatar can hum. A sonir can climb. A lokek can hum. A zitax cannot climb. A madar can hum. A revok cannot hum. A ribox cannot climb. A zatar can climb. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Liam is a mesan. Can Liam hum? Answer yes or no.
+KEY: 'yes'
+
+===== R1.categories_default_exceptions_r4|L4|00 k=2 type=yn
+Every lazer is a lesax. Every redox is a sitix. Every nalax is a lotex. Every reson is a metok. Every tamen is a salen. Every salen is a kirok. Every bakin is a kadon. Every sisox is a donex. Every tebox is a damik. Every bezix is a seven. Every zezar is a zanok. Every zozer is a zezar. Every mesax is a katok. Every kirok is a bezix. Every zanok is a lalex. Every lotex is a nedex. Every damik is a resor. Every resor is a reson. Every kadon is a nalax. Every barer is a mesax. Every lesax is a zozer. Every batir is a tamen. Every seven is a sisox. Every katok is a bakin. Every donex is a redox. Every lalex is a batir. Every nedex is a tebox. Every metok is a lazer. A sisox can glow. A batir can glow. A bezix can glow. A zanok cannot float. A redox can glow. A kadon cannot float. A katok can float. A donex cannot float. A kirok can glow. A reson can glow. A lazer can glow. A sitix can float. A resor can float. A lalex can glow. A zozer cannot float. A tamen cannot glow. A tamen can float. A sitix cannot glow. A salen can glow. A zezar can glow. A metok can glow. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Edna is a barer. Can Edna glow? Answer yes or no.
+KEY: 'yes'
+
+===== R1.categories_default_exceptions_r4|L4|01 k=2 type=yn
+Every ralik is a misax. Every serek is a zorik. Every timar is a rasar. Every lomik is a kisin. Every soter is a vesin. Every vetin is a veken. Every voken is a lomik. Every vesin is a senek. Every tomer is a vemin. Every kazak is a soren. Every lamin is a zokix. Every bekex is a serek. Every disex is a voken. Every zorik is a kazak. Every veken is a timar. Every zokix is a dibok. Every misax is a saver. Every salix is a vadax. Every dibok is a salix. Every tozex is a ralik. Every senek is a vetin. Every soren is a tozex. Every vadax is a tomer. Every levar is a soter. Every kisin is a lamin. Every vemin is a bekex. Every saver is a levar. Every rasar is a dodin. A kazak cannot jump. A voken cannot jump. A misax cannot swim. A salix cannot swim. A ralik can jump. A zorik cannot swim. A salix cannot jump. A kazak cannot swim. A kisin cannot jump. A veken cannot jump. A zokix cannot swim. A kisin cannot swim. A senek cannot swim. A serek can jump. A lamin can jump. A dibok cannot swim. A zokix can jump. A tozex cannot swim. A lomik cannot swim. A dodin cannot swim. A veken can swim. A voken can swim. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Otto is a disex. Can Otto swim? Answer yes or no.
+KEY: 'yes'
+
+===== R1.categories_default_exceptions_r4|L5|00 k=2 type=yn
+Every zomik is a miver. Every vosin is a latok. Every toran is a tener. Every tezex is a zesox. Every moten is a lizer. Every zinen is a sikon. Every lonon is a vinar. Every zesox is a bevan. Every miver is a risok. Every bevan is a ketox. Every vinar is a risek. Every basak is a nazan. Every letan is a zinen. Every risok is a toran. Every ketox is a bidok. Every lizer is a zizox. Every zizox is a vosin. Every vedan is a lozik. Every latok is a vedan. Every zakan is a letan. Every risek is a meber. Every bidok is a lonon. Every meber is a masox. Every nazan is a tezex. Every lozik is a zakan. Every sikon is a basak. Every nerik is a kemer. Every tener is a saten. Every kemer is a zomik. Every saten is a moten. A bevan can climb. A zinen can climb. A tezex can jump. A lonon cannot climb. A letan cannot climb. A zakan cannot climb. A vinar cannot jump. A nerik can jump. A lozik cannot climb. A toran can climb. A risok cannot jump. A masox cannot climb. A nazan can climb. A basak cannot jump. A meber can climb. A bidok can climb. A bevan cannot jump. A risek cannot climb. A latok cannot jump. A moten cannot climb. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Maya is a nerik. Can Maya climb? Answer yes or no.
+KEY: 'yes'
+
+===== R1.categories_default_exceptions_r4|L5|01 k=2 type=yn
+Every dimir is a bevik. Every nezar is a virix. Every sinak is a letan. Every sotix is a notak. Every virix is a tarok. Every sonan is a lodan. Every niton is a zitax. Every libin is a vokor. Every beder is a sonan. Every lodan is a nosok. Every zitax is a beder. Every rasax is a nalon. Every nalon is a tadan. Every momen is a lemax. Every zikex is a nezar. Every tadan is a niton. Every mizok is a kinor. Every lemax is a sinak. Every letan is a balir. Every tarok is a libin. Every balir is a sotix. Every lakox is a zikex. Every vokor is a timex. Every notak is a rasax. Every kinor is a dimir. Every naker is a dakix. Every dakix is a mizok. Every nosok is a lakox. Every ravex is a momen. Every timex is a naker. A dakix can swim. A zitax cannot swim. A lodan can swim. A nezar can swim. A virix can swim. A tarok cannot swim. A bevik cannot climb. A balir cannot climb. A lakox can swim. A zikex can swim. A zitax can climb. A nosok can climb. A naker cannot climb. A rasax cannot climb. A beder cannot swim. A kinor can climb. A nezar can climb. A naker cannot swim. A niton can swim. A libin can climb. A mizok cannot swim. A sonan can swim. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Ulf is a ravex. Can Ulf swim? Answer yes or no.
+KEY: 'yes'
+
+===== R1.categories_default_exceptions_r4|L6|00 k=2 type=yn
+Every vokar is a vavek. Every karok is a zilik. Every kisak is a dosar. Every bodax is a boren. Every nobix is a kokak. Every nidin is a rekok. Every kener is a sozor. Every kokak is a bodax. Every rilin is a bebar. Every tiven is a bizak. Every vavek is a nidin. Every rekok is a sokir. Every tavax is a mevin. Every tazex is a dotan. Every rokak is a karok. Every bizak is a vokar. Every boren is a nokar. Every senir is a zodak. Every nolik is a rilin. Every sozor is a kisak. Every zilik is a senir. Every bimor is a tazex. Every dosar is a boson. Every sibon is a nolik. Every lidex is a bimor. Every sokir is a rokak. Every dotan is a sibon. Every rarok is a kener. Every zodak is a rarok. Every bezix is a lidex. Every sezer is a nobix. Every mevin is a bezix. Every bebar is a tiven. Every nokar is a tavax. A bodax can hum. A kokak cannot hum. A kisak can hum. A rekok can glow. A rilin cannot hum. A tiven cannot glow. A vokar can glow. A kisak cannot glow. A sokir cannot hum. A karok can glow. A boson can glow. A rarok cannot glow. A rekok cannot hum. A bebar can hum. A vavek cannot glow. A sezer can hum. A sokir cannot glow. A zilik cannot glow. A kener cannot glow. A nokar cannot hum. A senir can glow. A bizak cannot glow. A senir can hum. A nolik can hum. A nidin cannot glow. A sozor cannot glow. A vokar cannot hum. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Iris is a sezer. Can Iris glow? Answer yes or no.
+KEY: 'no'
+
+===== R1.categories_default_exceptions_r4|L6|01 k=2 type=yn
+Every bizen is a zarex. Every mobir is a zovek. Every liben is a bezak. Every semex is a zerex. Every nibir is a rokin. Every betox is a tason. Every ramik is a kavix. Every sabix is a liben. Every ronix is a sezer. Every kivan is a saben. Every zerex is a kazak. Every kazak is a lorek. Every lorek is a kivan. Every zovek is a menik. Every semik is a tokek. Every sakon is a sisor. Every besek is a sakon. Every visar is a bizen. Every darix is a tesin. Every zarex is a besek. Every sisor is a ronix. Every saben is a rokar. Every tiben is a semik. Every tesin is a noner. Every rokin is a darix. Every tason is a mobir. Every noner is a semex. Every loran is a visar. Every bezak is a tiben. Every deban is a betox. Every rokar is a sabix. Every menik is a nibir. Every tokek is a loran. Every sezer is a ramik. A saben can climb. A sisor can jump. A sabix cannot jump. A sakon cannot climb. A nibir cannot jump. A zarex can climb. A loran cannot jump. A visar cannot climb. A sakon cannot jump. A liben can climb. A tokek can climb. A besek cannot climb. A loran cannot climb. A sabix can climb. A sezer cannot climb. A zerex can jump. A ramik cannot climb. A tiben cannot climb. A ramik cannot jump. A sisor can climb. A lorek cannot jump. A kivan can jump. A rokar cannot climb. A zarex can jump. A ronix can climb. A semik cannot jump. A liben can jump. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Ulf is a deban. Can Ulf climb? Answer yes or no.
+KEY: 'yes'
+
+===== R1.compass_turns|L0|00 k=4 type=word
+You are facing east. You walk 90 steps, then turn 270 degrees clockwise, then walk 6 steps. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'north'
+
+===== R1.compass_turns|L0|01 k=4 type=word
+You are facing east. You turn right, then walk 75 steps, then turn right. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'west'
+
+===== R1.compass_turns|L1|00 k=4 type=word
+You are facing north. You turn 90 degrees clockwise, then turn 90 degrees clockwise, then turn left, then turn left, then turn 270 degrees clockwise. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'west'
+
+===== R1.compass_turns|L1|01 k=4 type=word
+You are facing south. You turn left, then turn left, then turn 270 degrees clockwise, then turn 180 degrees clockwise, then turn right. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'south'
+
+===== R1.compass_turns|L2|00 k=4 type=word
+You are facing east. You turn 90 degrees clockwise, then turn 270 degrees clockwise, then walk 36 steps, then turn 180 degrees clockwise, then walk 43 steps, then walk 23 steps, then turn 90 degrees counterclockwise. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'south'
+
+===== R1.compass_turns|L2|01 k=4 type=word
+You are facing east. You turn around, then turn right, then turn 90 degrees clockwise, then walk 53 steps, then turn 270 degrees clockwise, then turn 90 degrees counterclockwise, then turn around. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'east'
+
+===== R1.compass_turns|L3|00 k=4 type=word
+You are facing north. You walk 38 steps, then turn right, then turn 180 degrees clockwise, then turn right, then turn 90 degrees counterclockwise, then turn around, then walk 77 steps, then turn left, then turn 90 degrees clockwise. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'east'
+
+===== R1.compass_turns|L3|01 k=4 type=word
+You are facing north. You turn left, then turn 90 degrees counterclockwise, then turn right, then turn 270 degrees clockwise, then walk 33 steps, then walk 36 steps, then walk 62 steps, then turn 90 degrees counterclockwise, then turn left. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'north'
+
+===== R1.compass_turns|L4|00 k=4 type=word
+You are facing west. You walk 43 steps, then turn 90 degrees clockwise, then turn 90 degrees counterclockwise, then turn 90 degrees clockwise, then turn around, then walk 91 steps, then walk 19 steps, then turn 90 degrees clockwise, then walk 83 steps, then turn 180 degrees clockwise, then turn right. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'south'
+
+===== R1.compass_turns|L4|01 k=4 type=word
+You are facing north. You turn 90 degrees counterclockwise, then turn 180 degrees clockwise, then turn around, then turn 180 degrees clockwise, then walk 72 steps, then turn 90 degrees counterclockwise, then walk 35 steps, then walk 94 steps, then walk 63 steps, then walk 24 steps, then turn left. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'west'
+
+===== R1.compass_turns|L5|00 k=4 type=word
+You are facing north. You turn 180 degrees clockwise, then turn around, then turn 90 degrees clockwise, then walk 9 steps, then turn 270 degrees clockwise, then walk 81 steps, then turn left, then turn right, then walk 20 steps, then turn 270 degrees clockwise, then turn 90 degrees counterclockwise, then turn 270 degrees clockwise, then walk 35 steps. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'east'
+
+===== R1.compass_turns|L5|01 k=4 type=word
+You are facing south. You turn 270 degrees clockwise, then turn around, then turn 180 degrees clockwise, then turn 90 degrees clockwise, then walk 32 steps, then turn 180 degrees clockwise, then turn 270 degrees clockwise, then turn right, then walk 38 steps, then walk 81 steps, then turn 90 degrees counterclockwise, then turn 90 degrees clockwise, then turn around. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'south'
+
+===== R1.compass_turns|L6|00 k=4 type=word
+You are facing south. You turn 180 degrees clockwise, then turn 270 degrees clockwise, then walk 75 steps, then turn 90 degrees counterclockwise, then walk 91 steps, then turn 270 degrees clockwise, then walk 30 steps, then turn right, then turn around, then walk 61 steps, then turn 180 degrees clockwise, then walk 91 steps, then turn 90 degrees counterclockwise, then turn left, then walk 66 steps. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'north'
+
+===== R1.compass_turns|L6|01 k=4 type=word
+You are facing east. You walk 47 steps, then turn 270 degrees clockwise, then turn left, then walk 78 steps, then turn 90 degrees clockwise, then turn left, then turn 180 degrees clockwise, then turn around, then turn around, then turn left, then turn around, then walk 88 steps, then turn 90 degrees counterclockwise, then turn 90 degrees counterclockwise, then turn right. Which direction are you facing now? Answer north, east, south or west.
+KEY: 'east'
+
+===== R1.conditional_threshold_rule_r4|L0|00 k=2 type=yn
+A committee votes on a motion. Liam has weight 9, Leo has weight 5, Greta has weight 9, Stan has weight 8, Yan has weight 6, Opal has weight 8. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -18 (members who abstain count for neither side). The votes: Liam no, Leo yes, Greta yes, Stan no, Yan no, Opal no. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.conditional_threshold_rule_r4|L0|01 k=2 type=yn
+A committee votes on a motion. Viv has weight 8, Lars has weight 1, Hal has weight 9, Fern has weight 1, Sean has weight 4, Lila has weight 6. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 5 (members who abstain count for neither side). The votes: Viv abstain, Lars yes, Hal yes, Fern no, Sean abstain, Lila no. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L1|00 k=2 type=yn
+A committee votes on a motion. Milo has weight 1, Rosa has weight 2, Boris has weight 5, Tina has weight 2, Nell has weight 9, Zed has weight 8, Pia has weight 9. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -15 (members who abstain count for neither side). The votes: Milo yes, Rosa no, Boris abstain, Tina yes, Nell abstain, Zed no, Pia no. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L1|01 k=2 type=yn
+A committee votes on a motion. Vance has weight 9, Sean has weight 6, Tina has weight 6, Kira has weight 9, Joss has weight 9, Hana has weight 3, Ugo has weight 3. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 21 (members who abstain count for neither side). The votes: Vance yes, Sean no, Tina yes, Kira yes, Joss yes, Hana no, Ugo no. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.conditional_threshold_rule_r4|L2|00 k=2 type=yn
+A committee votes on a motion. Xan has weight 1, Joss has weight 4, Walt has weight 2, Uzi has weight 2, Cara has weight 9, Iris has weight 7, Ulf has weight 3, Sean has weight 6. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -10 (members who abstain count for neither side). The votes: Xan yes, Joss yes, Walt no, Uzi no, Cara no, Iris no, Ulf no, Sean yes. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L2|01 k=2 type=yn
+A committee votes on a motion. Felix has weight 6, Sam has weight 9, Yves has weight 1, Lila has weight 4, Xena has weight 1, Rhea has weight 1, Ned has weight 6, Bruno has weight 8. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -17 (members who abstain count for neither side). The votes: Felix no, Sam no, Yves no, Lila yes, Xena abstain, Rhea no, Ned no, Bruno abstain. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L3|00 k=2 type=yn
+A committee votes on a motion. Raul has weight 3, Nell has weight 8, Sia has weight 6, Vic has weight 6, Emil has weight 7, Ulf has weight 7, Alva has weight 3, Kate has weight 5, Thea has weight 5. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -6 (members who abstain count for neither side). The votes: Raul abstain, Nell abstain, Sia no, Vic no, Emil no, Ulf yes, Alva no, Kate yes, Thea yes. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.conditional_threshold_rule_r4|L3|01 k=2 type=yn
+A committee votes on a motion. Ines has weight 9, Wanda has weight 6, Lars has weight 1, Carla has weight 6, Uma has weight 4, Elsa has weight 8, Finn has weight 2, Ben has weight 8, Kenji has weight 4. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 27 (members who abstain count for neither side). The votes: Ines yes, Wanda yes, Lars no, Carla abstain, Uma yes, Elsa yes, Finn no, Ben yes, Kenji no. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.conditional_threshold_rule_r4|L4|00 k=2 type=yn
+A committee votes on a motion. Ben has weight 8, Glen has weight 8, Gus has weight 3, Mona has weight 2, Cass has weight 1, Leo has weight 5, Hana has weight 2, Cleo has weight 2, Uri has weight 1, Dmitri has weight 8. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 28 (members who abstain count for neither side). The votes: Ben yes, Glen yes, Gus yes, Mona yes, Cass no, Leo abstain, Hana yes, Cleo no, Uri no, Dmitri yes. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L4|01 k=2 type=yn
+A committee votes on a motion. Cara has weight 2, Jon has weight 1, Pete has weight 1, Will has weight 7, Kira has weight 5, Leo has weight 7, Neva has weight 4, Lars has weight 8, Tina has weight 1, Sam has weight 6. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 23 (members who abstain count for neither side). The votes: Cara yes, Jon abstain, Pete no, Will abstain, Kira abstain, Leo yes, Neva yes, Lars yes, Tina yes, Sam abstain. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L5|00 k=2 type=yn
+A committee votes on a motion. Felix has weight 2, Leo has weight 2, Lena has weight 4, Nico has weight 1, Hope has weight 7, Glen has weight 7, Zoe has weight 3, Raul has weight 9, Will has weight 9, Yan has weight 5, Ivo has weight 6. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 11 (members who abstain count for neither side). The votes: Felix abstain, Leo no, Lena yes, Nico yes, Hope abstain, Glen no, Zoe no, Raul yes, Will yes, Yan abstain, Ivo abstain. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.conditional_threshold_rule_r4|L5|01 k=2 type=yn
+A committee votes on a motion. Lena has weight 8, Otto has weight 3, Maya has weight 6, Boris has weight 3, Kira has weight 9, Gita has weight 8, Alva has weight 8, Jon has weight 4, Rhea has weight 1, Rex has weight 5, Dell has weight 2. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 8 (members who abstain count for neither side). The votes: Lena yes, Otto no, Maya yes, Boris no, Kira no, Gita yes, Alva no, Jon yes, Rhea yes, Rex yes, Dell no. Does the motion pass? Answer yes or no.
+KEY: 'no'
+
+===== R1.conditional_threshold_rule_r4|L6|00 k=2 type=yn
+A committee votes on a motion. Jon has weight 5, Pia has weight 7, Dmitri has weight 6, Pablo has weight 9, Fay has weight 3, Cleo has weight 5, Vic has weight 2, Stan has weight 3, Ben has weight 2, Wanda has weight 8, Vance has weight 3, Viv has weight 7. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -13 (members who abstain count for neither side). The votes: Jon yes, Pia abstain, Dmitri no, Pablo yes, Fay yes, Cleo no, Vic no, Stan yes, Ben no, Wanda no, Vance no, Viv no. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.conditional_threshold_rule_r4|L6|01 k=2 type=yn
+A committee votes on a motion. Ivo has weight 3, Uzi has weight 9, Tess has weight 7, Jon has weight 5, Sam has weight 2, Flynn has weight 1, Eli has weight 6, Nico has weight 8, Boris has weight 5, Anja has weight 5, Hank has weight 9, Finn has weight 2. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -31 (members who abstain count for neither side). The votes: Ivo no, Uzi no, Tess abstain, Jon abstain, Sam no, Flynn abstain, Eli no, Nico no, Boris yes, Anja no, Hank abstain, Finn no. Does the motion pass? Answer yes or no.
+KEY: 'yes'
+
+===== R1.equivalence_exchange_rates_r6|L0|00 k=None type=number
+9 units of pencil are worth the same as 2 units of scarf. 1 units of whistle are worth the same as 4 units of mirror. 10 units of scarf are worth the same as 18 units of hammer. 4 units of quilt are worth the same as 9 units of pencil. 8 units of scarf are worth the same as 90 units of whistle. How many units of whistle are worth the same as 16 units of quilt?
+KEY: '90'
+
+===== R1.equivalence_exchange_rates_r6|L0|01 k=None type=number
+2 units of book are worth the same as 144 units of whistle. 192 units of pencil are worth the same as 10 units of scarf. 3 units of scarf are worth the same as 4 units of book. 50 units of pencil are worth the same as 2 units of apple. 2 units of book are worth the same as 36 units of orange. How many units of orange are worth the same as 4 units of pencil?
+KEY: '5'
+
+===== R1.equivalence_exchange_rates_r6|L1|00 k=None type=number
+18 units of book are worth the same as 4 units of lantern. 15 units of feather are worth the same as 4 units of scarf. 2 units of book are worth the same as 8 units of hammer. 4 units of umbrella are worth the same as 25 units of feather. 2 units of scarf are worth the same as 1 units of spoon. 125 units of hammer are worth the same as 2 units of umbrella. How many units of scarf are worth the same as 225 units of book?
+KEY: '24'
+
+===== R1.equivalence_exchange_rates_r6|L1|01 k=None type=number
+6 units of spoon are worth the same as 10 units of feather. 6 units of whistle are worth the same as 32 units of globe. 4 units of feather are worth the same as 1 units of whistle. 9 units of globe are worth the same as 1 units of teapot. 10 units of yo-yo are worth the same as 16 units of spoon. 5 units of whistle are worth the same as 32 units of apple. How many units of globe are worth the same as 9 units of yo-yo?
+KEY: '32'
+
+===== R1.equivalence_exchange_rates_r6|L2|00 k=None type=number
+5 units of ribbon are worth the same as 1 units of mirror. 8 units of scarf are worth the same as 50 units of kettle. 25 units of candle are worth the same as 24 units of scarf. 1 units of mirror are worth the same as 10 units of quilt. 6 units of quilt are worth the same as 8 units of whistle. 5 units of yo-yo are worth the same as 6 units of candle. 1 units of candle are worth the same as 10 units of ribbon. How many units of whistle are worth the same as 3 units of yo-yo?
+KEY: '96'
+
+===== R1.equivalence_exchange_rates_r6|L2|01 k=None type=number
+20 units of feather are worth the same as 54 units of quilt. 72 units of flute are worth the same as 25 units of globe. 5 units of globe are worth the same as 4 units of mirror. 3 units of compass are worth the same as 4 units of violin. 2 units of mirror are worth the same as 15 units of compass. 2 units of violin are worth the same as 9 units of ribbon. 10 units of quilt are worth the same as 8 units of flute. How many units of compass are worth the same as 4 units of feather?
+KEY: '18'
+
+===== R1.equivalence_exchange_rates_r6|L3|00 k=None type=number
+50 units of needle are worth the same as 12 units of quilt. 96 units of spoon are worth the same as 50 units of globe. 1 units of spoon are worth the same as 20 units of orange. 30 units of orange are worth the same as 4 units of teapot. 162 units of spoon are worth the same as 200 units of umbrella. 64 units of orange are worth the same as 2 units of hammer. 2 units of compass are worth the same as 5 units of lantern. 12 units of quilt are worth the same as 10 units of compass. 18 units of teapot are worth the same as 25 units of needle. How many units of lantern are worth the same as 81 units of spoon?
+KEY: '150'
+
+===== R1.equivalence_exchange_rates_r6|L3|01 k=None type=number
+48 units of needle are worth the same as 2 units of kettle. 216 units of feather are worth the same as 10 units of drum. 2 units of drum are worth the same as 72 units of yo-yo. 50 units of drum are worth the same as 216 units of whistle. 8 units of kettle are worth the same as 6 units of spoon. 20 units of yo-yo are worth the same as 6 units of needle. 10 units of quilt are worth the same as 48 units of globe. 108 units of yo-yo are worth the same as 2 units of hammer. 16 units of kettle are worth the same as 10 units of quilt. How many units of globe are worth the same as 48 units of feather?
+KEY: '3'
+
+===== R1.equivalence_exchange_rates_r6|L4|00 k=None type=number
+3 units of spoon are worth the same as 4 units of feather. 16 units of orange are worth the same as 150 units of spoon. 2 units of compass are worth the same as 16 units of apple. 5 units of teapot are worth the same as 324 units of pencil. 10 units of scarf are worth the same as 48 units of whistle. 24 units of feather are worth the same as 1 units of scarf. 27 units of whistle are worth the same as 5 units of teapot. 8 units of teapot are worth the same as 54 units of compass. 2 units of whistle are worth the same as 5 units of flute. 50 units of book are worth the same as 24 units of orange. How many units of compass are worth the same as 4 units of book?
+KEY: '6'
+
+===== R1.equivalence_exchange_rates_r6|L4|01 k=None type=number
+1 units of drum are worth the same as 20 units of candle. 10 units of flute are worth the same as 4 units of book. 27 units of yo-yo are worth the same as 40 units of pencil. 6 units of umbrella are worth the same as 4 units of drum. 2 units of mirror are worth the same as 24 units of quilt. 9 units of pencil are worth the same as 2 units of spoon. 2 units of drum are worth the same as 15 units of flute. 5 units of flute are worth the same as 3 units of yo-yo. 80 units of quilt are worth the same as 3 units of umbrella. 1 units of drum are worth the same as 120 units of lantern. How many units of spoon are worth the same as 36 units of mirror?
+KEY: '16'
+
+===== R1.equivalence_exchange_rates_r6|L5|00 k=None type=number
+25 units of scarf are worth the same as 2 units of teapot. 8 units of feather are worth the same as 10 units of drum. 270 units of orange are worth the same as 128 units of feather. 5 units of candle are worth the same as 2 units of scarf. 4 units of drum are worth the same as 54 units of candle. 1 units of book are worth the same as 3 units of mirror. 64 units of hammer are worth the same as 15 units of orange. 2 units of lantern are worth the same as 162 units of yo-yo. 9 units of candle are worth the same as 1 units of book. 15 units of yo-yo are worth the same as 4 units of hammer. 1 units of drum are worth the same as 36 units of pencil. How many units of teapot are worth the same as 500 units of lantern?
+KEY: '648'
+
+===== R1.equivalence_exchange_rates_r6|L5|01 k=None type=number
+250 units of lantern are worth the same as 576 units of spoon. 40 units of scarf are worth the same as 54 units of flute. 45 units of apple are worth the same as 32 units of quilt. 6 units of whistle are worth the same as 1 units of lantern. 10 units of quilt are worth the same as 8 units of ribbon. 64 units of mirror are worth the same as 10 units of apple. 30 units of apple are worth the same as 64 units of violin. 2 units of ribbon are worth the same as 6 units of umbrella. 8 units of scarf are worth the same as 9 units of whistle. 6 units of ribbon are worth the same as 25 units of scarf. 6 units of spoon are worth the same as 125 units of compass. How many units of compass are worth the same as 9 units of mirror?
+KEY: '30'
+
+===== R1.equivalence_exchange_rates_r6|L6|00 k=None type=number
+125 units of scarf are worth the same as 144 units of pencil. 81 units of lantern are worth the same as 4 units of globe. 8 units of scarf are worth the same as 6 units of umbrella. 20 units of book are worth the same as 54 units of needle. 256 units of globe are worth the same as 162 units of candle. 10 units of hammer are worth the same as 9 units of ribbon. 27 units of flute are worth the same as 8 units of hammer. 54 units of pencil are worth the same as 50 units of book. 16 units of compass are worth the same as 30 units of scarf. 15 units of quilt are worth the same as 16 units of compass. 3 units of candle are worth the same as 4 units of quilt. 1 units of ribbon are worth the same as 5 units of lantern. 5 units of candle are worth the same as 6 units of whistle. How many units of pencil are worth the same as 125 units of flute?
+KEY: '16'
+
+===== R1.equivalence_exchange_rates_r6|L6|01 k=None type=number
+64 units of kettle are worth the same as 30 units of needle. 36 units of globe are worth the same as 50 units of scarf. 25 units of lantern are worth the same as 4 units of feather. 4 units of feather are worth the same as 150 units of pencil. 32 units of spoon are worth the same as 9 units of flute. 10 units of umbrella are worth the same as 18 units of lantern. 25 units of needle are worth the same as 192 units of globe. 125 units of scarf are worth the same as 18 units of ribbon. 32 units of umbrella are worth the same as 9 units of yo-yo. 36 units of pencil are worth the same as 10 units of compass. 9 units of pencil are worth the same as 2 units of apple. 12 units of spoon are worth the same as 1 units of umbrella. 18 units of pencil are worth the same as 2 units of kettle. How many units of ribbon are worth the same as 250 units of spoon?
+KEY: '18'
+
+===== R1.knights_knaves_r6|L0|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Xavi says: "at least one of Xavi and Alva is a knave." Eli says: "Anja and Eli are of the same kind." Alva says: "Eli and Anja are both knights." Anja says: "Eli and Alva are of the same kind." Is Alva a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L0|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Fern says: "Kate is a knave." Zed says: "Kate is a knave." Kate says: "Zed and Fern are of the same kind." Ines says: "exactly one of Zed and Fern is a knight." Is Fern a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L1|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Wade says: "Flynn and Wade are both knights." Neva says: "at least one of Thea and Flynn is a knave." Flynn says: "exactly one of Wade and Thea is a knight." Tara says: "exactly one of Tara and Neva is a knight." Thea says: "Tara is a knight." Is Flynn a knight or a knave? Answer knight or knave.
+KEY: 'knight'
+
+===== R1.knights_knaves_r6|L1|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Wren says: "Ulf is a knave." Tara says: "Ulf is a knight." Oscar says: "exactly one of Jon and Oscar is a knight." Ulf says: "exactly one of Oscar and Tara is a knight." Jon says: "Tara is a knight." Is Tara a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L2|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Xavi says: "at least one of Sam and Xavi is a knave." Kai says: "Xavi is a knight." Sam says: "exactly one of Dell and Kai is a knight." Uzi says: "Greta is a knave." Dell says: "at least one of Greta and Sam is a knave." Greta says: "exactly one of Xavi and Sam is a knight." Is Dell a knight or a knave? Answer knight or knave.
+KEY: 'knight'
+
+===== R1.knights_knaves_r6|L2|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Iris says: "Hana is a knight." Dmitri says: "Dmitri and Hana are of the same kind." Hana says: "Pearl is a knave." Pearl says: "Tina is a knight." Tina says: "Hana is a knave." Fay says: "at least one of Fay and Dmitri is a knave." Is Pearl a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L3|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Ivy says: "at least one of Xena and Reed is a knave." Cara says: "Stan is a knave." Stan says: "at least one of Ivy and Reed is a knave." Zed says: "Tara is a knave." Tara says: "Zed and Xena are of the same kind." Xena says: "Zed is a knave." Reed says: "Zed is a knave." Is Cara a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L3|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Bruno says: "at least one of Viv and Lars is a knave." Dara says: "Maya and Viv are of the same kind." Maya says: "exactly one of Viv and Lars is a knight." Lars says: "Dara and Nico are both knights." Nico says: "Lars and Bruno are both knights." Viv says: "Nico is a knave." Leo says: "Bruno and Nico are both knights." Is Leo a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L4|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Dmitri says: "at least one of Vera and Lila is a knave." Uma says: "Rex is a knave." Lila says: "Dmitri and Lila are both knights." Cyrus says: "Ivy is a knight." Thea says: "at least one of Uma and Rex is a knave." Ivy says: "Thea is a knave." Vera says: "Rex is a knight." Rex says: "exactly one of Ivy and Dmitri is a knight." Is Uma a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L4|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Esme says: "Emil and Zita are both knights." Emil says: "Lena is a knight." Ben says: "Nell and Zita are both knights." Zita says: "Pru and Nell are both knights." Lena says: "exactly one of Emil and Pru is a knight." Pru says: "exactly one of Bram and Esme is a knight." Bram says: "Emil is a knave." Nell says: "Zita is a knave." Is Nell a knight or a knave? Answer knight or knave.
+KEY: 'knight'
+
+===== R1.knights_knaves_r6|L5|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Xena says: "Pru and Bruno are of the same kind." Zed says: "Alva is a knight." Maya says: "Pru is a knight." Alva says: "Sean is a knight." Bruno says: "Xena and Zed are both knights." Sean says: "at least one of Bruno and Sean is a knave." Will says: "Bruno and Pru are of the same kind." Opal says: "Alva and Bruno are both knights." Pru says: "at least one of Will and Opal is a knave." Is Bruno a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L5|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Viv says: "Hank and Viv are of the same kind." Jon says: "Jon and Yan are of the same kind." Yan says: "Hank and Milo are of the same kind." Hank says: "exactly one of Viv and Hank is a knight." Milo says: "Jon is a knave." Xena says: "exactly one of Jon and Viv is a knight." Rosa says: "Ugo is a knight." Raul says: "exactly one of Jon and Yan is a knight." Ugo says: "Milo is a knave." Is Hank a knight or a knave? Answer knight or knave.
+KEY: 'knight'
+
+===== R1.knights_knaves_r6|L6|00 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Ivy says: "Zed and Zoe are both knights." Walt says: "Lena and Zita are both knights." Uma says: "at least one of Uma and Ivy is a knave." Zita says: "Uma is a knave." Zed says: "Zita is a knight." Otto says: "exactly one of Uma and Zed is a knight." Lena says: "exactly one of Zoe and Uma is a knight." Dev says: "Zita is a knight." Zoe says: "exactly one of Zoe and Lena is a knight." Tara says: "Otto is a knight." Is Zed a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.knights_knaves_r6|L6|01 k=2 type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Nell says: "Sean and Kurt are of the same kind." Gita says: "Sean is a knave." Nora says: "exactly one of Sean and Fern is a knight." Dara says: "exactly one of Reed and Gita is a knight." Kurt says: "Vida and Reed are both knights." Reed says: "Fern and Sean are of the same kind." Eli says: "Reed is a knave." Vida says: "Nora is a knight." Fern says: "Nell and Nora are both knights." Sean says: "at least one of Reed and Dara is a knave." Is Gita a knight or a knave? Answer knight or knave.
+KEY: 'knave'
+
+===== R1.spatial_grid_walk_r5|L0|00 k=6 type=name
+A map has 3 rows (row 1 is the northernmost) and 3 columns (column 1 is the westernmost). Row 1: wall, Vibik, Vizik. Row 2: wall, Lamen, wall. Row 3: Ratan, Silon, Mavek. You start at Mavek. You move west, then north, then north, then west, then south, then west, then north, then east, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Lamen, Mavek, Ratan, Silon, Vibik and Vizik.
+KEY: 'Vizik'
+
+===== R1.spatial_grid_walk_r5|L0|01 k=7 type=name
+A map has 3 rows (row 1 is the northernmost) and 3 columns (column 1 is the westernmost). Row 1: Lakix, Retix, wall. Row 2: Tonir, Rovon, Soden. Row 3: Tomox, wall, Zibox. You start at Soden. You move north, then west, then west, then east, then east, then north, then north, then south, then north, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Lakix, Retix, Rovon, Soden, Tomox, Tonir and Zibox.
+KEY: 'Soden'
+
+===== R1.spatial_grid_walk_r5|L1|00 k=6 type=name
+A map has 3 rows (row 1 is the northernmost) and 3 columns (column 1 is the westernmost). Row 1: Somax, wall, Redox. Row 2: Nosex, wall, Lakix. Row 3: wall, Toman, Sakak. You start at Toman. You move north, then east, then north, then south, then west, then east, then north, then north, then west, then west, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Lakix, Nosex, Redox, Sakak, Somax and Toman.
+KEY: 'Redox'
+
+===== R1.spatial_grid_walk_r5|L1|01 k=4 type=name
+A map has 3 rows (row 1 is the northernmost) and 3 columns (column 1 is the westernmost). Row 1: wall, Doner, Kivak. Row 2: wall, Kover, wall. Row 3: wall, wall, Nibex. You start at Kover. You move south, then north, then east, then west, then west, then south, then north, then south, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Doner, Kivak, Kover and Nibex.
+KEY: 'Kover'
+
+===== R1.spatial_grid_walk_r5|L2|00 k=11 type=name
+A map has 3 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: Talix, Tomex, Mezax, wall. Row 2: Timax, Demor, Karik, Rabox. Row 3: Bamir, Lader, Divix, Nazor. You start at Talix. You move east, then east, then east, then east, then south, then west, then north, then south, then east, then east, then north, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bamir, Demor, Divix, Karik, Lader, Mezax, Nazor, Rabox, Talix, Timax and Tomex.
+KEY: 'Rabox'
+
+===== R1.spatial_grid_walk_r5|L2|01 k=7 type=name
+A map has 3 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: Moror, Torok, Mimor, wall. Row 2: wall, wall, Ridix, wall. Row 3: wall, Zisor, Tosok, Kevar. You start at Ridix. You move west, then south, then east, then west, then west, then east, then east, then north, then north, then west, then east, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Kevar, Mimor, Moror, Ridix, Torok, Tosok and Zisor.
+KEY: 'Kevar'
+
+===== R1.spatial_grid_walk_r5|L3|00 k=14 type=name
+A map has 4 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: Tozok, Lomex, wall, Menek. Row 2: Laker, Tilex, Dokor, Kamor. Row 3: Dodix, Vinen, Lebek, Kakek. Row 4: Balak, wall, Karok, Tozir. You start at Lomex. You move east, then east, then south, then south, then north, then south, then south, then north, then east, then north, then east, then south, then west, then east, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Balak, Dodix, Dokor, Kakek, Kamor, Karok, Laker, Lebek, Lomex, Menek, Tilex, Tozir, Tozok and Vinen.
+KEY: 'Kakek'
+
+===== R1.spatial_grid_walk_r5|L3|01 k=10 type=name
+A map has 4 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: Sonon, wall, wall, Dirox. Row 2: Viser, Lakin, Zimin, Navix. Row 3: wall, Namon, Molex, wall. Row 4: wall, Vanik, Kotar, wall. You start at Zimin. You move west, then east, then west, then west, then south, then north, then east, then south, then north, then east, then east, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Dirox, Kotar, Lakin, Molex, Namon, Navix, Sonon, Vanik, Viser and Zimin.
+KEY: 'Sonon'
+
+===== R1.spatial_grid_walk_r5|L4|00 k=11 type=name
+A map has 4 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: wall, wall, Madex, Kimon. Row 2: Retir, Takor, wall, Bavix. Row 3: Nalir, Boder, Tarir, Dider. Row 4: wall, Zizor, wall, Sokin. You start at Sokin. You move north, then south, then north, then west, then east, then north, then west, then west, then south, then south, then west, then west, then north, then north, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bavix, Boder, Dider, Kimon, Madex, Nalir, Retir, Sokin, Takor, Tarir and Zizor.
+KEY: 'Dider'
+
+===== R1.spatial_grid_walk_r5|L4|01 k=12 type=name
+A map has 4 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: Raker, wall, wall, Lavan. Row 2: wall, Vodar, Netik, Molox. Row 3: Dirin, Derix, Sikok, Zirex. Row 4: Kazon, Moton, Bibok, wall. You start at Moton. You move west, then east, then north, then north, then west, then south, then east, then east, then north, then west, then north, then north, then north, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bibok, Derix, Dirin, Kazon, Lavan, Molox, Moton, Netik, Raker, Sikok, Vodar and Zirex.
+KEY: 'Netik'
+
+===== R1.spatial_grid_walk_r5|L5|00 k=14 type=name
+A map has 4 rows (row 1 is the northernmost) and 5 columns (column 1 is the westernmost). Row 1: Tatox, Liter, Tamax, wall, Tebik. Row 2: Sikik, wall, Sevar, Voden, Bomor. Row 3: Visox, wall, wall, Bakix, wall. Row 4: wall, Vonar, Votok, Zisix, Zikax. You start at Votok. You move north, then east, then north, then north, then south, then north, then north, then north, then south, then north, then south, then east, then south, then north, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bakix, Bomor, Liter, Sevar, Sikik, Tamax, Tatox, Tebik, Visox, Voden, Vonar, Votok, Zikax and Zisix.
+KEY: 'Zisix'
+
+===== R1.spatial_grid_walk_r5|L5|01 k=13 type=name
+A map has 4 rows (row 1 is the northernmost) and 5 columns (column 1 is the westernmost). Row 1: wall, wall, wall, Ladan, Keton. Row 2: Merik, Kolek, wall, Dozek, Tenex. Row 3: Vokan, Sevek, Tozax, wall, Dimik. Row 4: Zolon, Datar, Vizen, wall, wall. You start at Vokan. You move east, then south, then north, then north, then south, then north, then south, then north, then north, then north, then south, then north, then east, then east, then south, then north, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Datar, Dimik, Dozek, Keton, Kolek, Ladan, Merik, Sevek, Tenex, Tozax, Vizen, Vokan and Zolon.
+KEY: 'Kolek'
+
+===== R1.spatial_grid_walk_r5|L6|00 k=19 type=name
+A map has 5 rows (row 1 is the northernmost) and 5 columns (column 1 is the westernmost). Row 1: Voner, Zenek, Nadok, Temin, Kidex. Row 2: Momik, Kasin, Robax, wall, Sobek. Row 3: Medak, wall, Bomek, wall, Rizir. Row 4: Borok, wall, Ledir, wall, Zarix. Row 5: wall, Levek, Nazan, Sasex, Kebax. You start at Kasin. You move south, then west, then north, then east, then west, then east, then east, then east, then south, then south, then east, then south, then west, then west, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bomek, Borok, Kasin, Kebax, Kidex, Ledir, Levek, Medak, Momik, Nadok, Nazan, Rizir, Robax, Sasex, Sobek, Temin, Voner, Zarix and Zenek.
+KEY: 'Rizir'
+
+===== R1.spatial_grid_walk_r5|L6|01 k=18 type=name
+A map has 5 rows (row 1 is the northernmost) and 5 columns (column 1 is the westernmost). Row 1: Roten, Morer, wall, Bokek, wall. Row 2: Totar, wall, Dever, Lazan, Neden. Row 3: wall, wall, Soton, wall, Leber. Row 4: Keben, Nelok, Zazox, wall, Moton. Row 5: Mitix, Lodik, Lolex, Ninex, Koron. You start at Moton. You move west, then south, then west, then north, then west, then north, then west, then north, then east, then south, then east, then west, then north, then north, then west, then west, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bokek, Dever, Keben, Koron, Lazan, Leber, Lodik, Lolex, Mitix, Morer, Moton, Neden, Nelok, Ninex, Roten, Soton, Totar and Zazox.
+KEY: 'Zazox'
+
+===== R1.swap_tracking_r5|L0|00 k=5 type=text
+At the start Liam holds the flute, Rhea holds the umbrella, Glen holds the apple, Carla holds the compass, Greta holds the orange. Rhea and Liam swap what they are holding. Glen hands their item to Liam, Liam hands theirs to Carla, and Carla hands theirs to Glen, all at once. Greta hands their item to Carla, Carla hands theirs to Glen, and Glen hands theirs to Greta, all at once. Glen hands their item to Rhea, Rhea hands theirs to Carla, and Carla hands theirs to Glen, all at once. Greta hands their item to Carla, Carla hands theirs to Glen, and Glen hands theirs to Greta, all at once. Carla and Liam swap what they are holding. What is Carla holding at the end? Choose from apple, compass, flute, orange and umbrella.
+KEY: 'apple'
+
+===== R1.swap_tracking_r5|L0|01 k=5 type=text
+At the start Nell holds the feather, Sam holds the pencil, Vic holds the kettle, Otto holds the needle, Kenji holds the book. Sam and Otto swap what they are holding. Otto hands their item to Vic, Vic hands theirs to Sam, and Sam hands theirs to Otto, all at once. Nell and Vic swap what they are holding. Kenji hands their item to Vic, Vic hands theirs to Nell, and Nell hands theirs to Kenji, all at once. Sam and Vic swap what they are holding. Kenji and Vic swap what they are holding. What is Nell holding at the end? Choose from book, feather, kettle, needle and pencil.
+KEY: 'feather'
+
+===== R1.swap_tracking_r5|L1|00 k=5 type=text
+At the start Oscar holds the teapot, Emil holds the drum, Dara holds the flute, Marc holds the pencil, Sam holds the orange. Dara and Sam swap what they are holding. Marc hands their item to Oscar, Oscar hands theirs to Sam, and Sam hands theirs to Marc, all at once. Sam and Dara swap what they are holding. Sam and Oscar swap what they are holding. Marc hands their item to Sam, Sam hands theirs to Oscar, and Oscar hands theirs to Marc, all at once. Marc hands their item to Oscar, Oscar hands theirs to Dara, and Dara hands theirs to Marc, all at once. Dara and Marc swap what they are holding. Dara hands their item to Marc, Marc hands theirs to Oscar, and Oscar hands theirs to Dara, all at once. What is Marc holding at the end? Choose from drum, flute, orange, pencil and teapot.
+KEY: 'teapot'
+
+===== R1.swap_tracking_r5|L1|01 k=5 type=text
+At the start Uri holds the scarf, Lena holds the mirror, Tess holds the globe, Nico holds the needle, Oscar holds the pencil. Tess and Uri swap what they are holding. Uri and Oscar swap what they are holding. Oscar hands their item to Tess, Tess hands theirs to Lena, and Lena hands theirs to Oscar, all at once. Lena and Nico swap what they are holding. Tess and Lena swap what they are holding. Nico hands their item to Oscar, Oscar hands theirs to Uri, and Uri hands theirs to Nico, all at once. Tess and Lena swap what they are holding. Oscar hands their item to Uri, Uri hands theirs to Nico, and Nico hands theirs to Oscar, all at once. What is Uri holding at the end? Choose from globe, mirror, needle, pencil and scarf.
+KEY: 'scarf'
+
+===== R1.swap_tracking_r5|L2|00 k=6 type=text
+At the start Felix holds the pencil, Xena holds the feather, Yan holds the teapot, Zita holds the globe, Leo holds the yo-yo, Tina holds the lantern. Leo hands their item to Zita, Zita hands theirs to Tina, and Tina hands theirs to Leo, all at once. Xena hands their item to Tina, Tina hands theirs to Zita, and Zita hands theirs to Xena, all at once. Zita and Leo swap what they are holding. Tina hands their item to Yan, Yan hands theirs to Xena, and Xena hands theirs to Tina, all at once. Tina and Felix swap what they are holding. Leo and Felix swap what they are holding. Leo and Tina swap what they are holding. Xena hands their item to Tina, Tina hands theirs to Zita, and Zita hands theirs to Xena, all at once. Leo and Zita swap what they are holding. Leo and Yan swap what they are holding. What is Yan holding at the end? Choose from feather, globe, lantern, pencil, teapot and yo-yo.
+KEY: 'yo-yo'
+
+===== R1.swap_tracking_r5|L2|01 k=6 type=text
+At the start Rex holds the ribbon, Nico holds the mirror, Quinn holds the flute, Pablo holds the globe, Reed holds the book, Yara holds the whistle. Pablo hands their item to Rex, Rex hands theirs to Nico, and Nico hands theirs to Pablo, all at once. Yara hands their item to Reed, Reed hands theirs to Nico, and Nico hands theirs to Yara, all at once. Rex and Reed swap what they are holding. Rex and Quinn swap what they are holding. Pablo and Yara swap what they are holding. Nico and Yara swap what they are holding. Rex and Nico swap what they are holding. Yara hands their item to Reed, Reed hands theirs to Nico, and Nico hands theirs to Yara, all at once. Pablo hands their item to Reed, Reed hands theirs to Yara, and Yara hands theirs to Pablo, all at once. Pablo and Rex swap what they are holding. What is Yara holding at the end? Choose from book, flute, globe, mirror, ribbon and whistle.
+KEY: 'book'
+
+===== R1.swap_tracking_r5|L3|00 k=6 type=text
+At the start Zara holds the drum, Rosa holds the teapot, Greta holds the whistle, Igor holds the hammer, Zoe holds the spoon, Nell holds the ribbon. Rosa hands their item to Zara, Zara hands theirs to Nell, and Nell hands theirs to Rosa, all at once. Greta hands their item to Rosa, Rosa hands theirs to Igor, and Igor hands theirs to Greta, all at once. Zoe hands their item to Nell, Nell hands theirs to Igor, and Igor hands theirs to Zoe, all at once. Igor hands their item to Rosa, Rosa hands theirs to Greta, and Greta hands theirs to Igor, all at once. Igor and Zoe swap what they are holding. Nell hands their item to Zara, Zara hands theirs to Igor, and Igor hands theirs to Nell, all at once. Nell and Greta swap what they are holding. Igor hands their item to Nell, Nell hands theirs to Rosa, and Rosa hands theirs to Igor, all at once. Zara hands their item to Rosa, Rosa hands theirs to Igor, and Igor hands theirs to Zara, all at once. Greta hands their item to Nell, Nell hands theirs to Rosa, and Rosa hands theirs to Greta, all at once. Nell hands their item to Igor, Igor hands theirs to Zara, and Zara hands theirs to Nell, all at once. Igor and Greta swap what they are holding. What is Igor holding at the end? Choose from drum, hammer, ribbon, spoon, teapot and whistle.
+KEY: 'spoon'
+
+===== R1.swap_tracking_r5|L3|01 k=6 type=text
+At the start Dell holds the candle, Finn holds the umbrella, Tara holds the kettle, Bruno holds the globe, Cyrus holds the compass, Nell holds the feather. Dell and Tara swap what they are holding. Bruno hands their item to Tara, Tara hands theirs to Dell, and Dell hands theirs to Bruno, all at once. Dell hands their item to Tara, Tara hands theirs to Finn, and Finn hands theirs to Dell, all at once. Dell and Nell swap what they are holding. Tara hands their item to Nell, Nell hands theirs to Dell, and Dell hands theirs to Tara, all at once. Finn and Dell swap what they are holding. Finn hands their item to Dell, Dell hands theirs to Bruno, and Bruno hands theirs to Finn, all at once. Cyrus hands their item to Bruno, Bruno hands theirs to Dell, and Dell hands theirs to Cyrus, all at once. Nell hands their item to Cyrus, Cyrus hands theirs to Finn, and Finn hands theirs to Nell, all at once. Cyrus hands their item to Bruno, Bruno hands theirs to Tara, and Tara hands theirs to Cyrus, all at once. Dell hands their item to Bruno, Bruno hands theirs to Nell, and Nell hands theirs to Dell, all at once. Finn and Cyrus swap what they are holding. What is Nell holding at the end? Choose from candle, compass, feather, globe, kettle and umbrella.
+KEY: 'candle'
+
+===== R1.swap_tracking_r5|L4|00 k=7 type=text
+At the start Cass holds the kettle, Raul holds the mirror, Rhea holds the lantern, Hana holds the umbrella, Kate holds the teapot, Oscar holds the scarf, Finn holds the hammer. Raul hands their item to Finn, Finn hands theirs to Oscar, and Oscar hands theirs to Raul, all at once. Hana hands their item to Oscar, Oscar hands theirs to Finn, and Finn hands theirs to Hana, all at once. Oscar and Rhea swap what they are holding. Kate hands their item to Oscar, Oscar hands theirs to Rhea, and Rhea hands theirs to Kate, all at once. Rhea hands their item to Kate, Kate hands theirs to Finn, and Finn hands theirs to Rhea, all at once. Oscar and Finn swap what they are holding. Rhea and Hana swap what they are holding. Hana and Raul swap what they are holding. Hana hands their item to Kate, Kate hands theirs to Rhea, and Rhea hands theirs to Hana, all at once. Kate and Oscar swap what they are holding. Rhea and Hana swap what they are holding. Raul and Kate swap what they are holding. Raul and Cass swap what they are holding. Cass hands their item to Finn, Finn hands theirs to Rhea, and Rhea hands theirs to Cass, all at once. What is Kate holding at the end? Choose from hammer, kettle, lantern, mirror, scarf, teapot and umbrella.
+KEY: 'hammer'
+
+===== R1.swap_tracking_r5|L4|01 k=7 type=text
+At the start Maya holds the spoon, Liam holds the violin, Tess holds the flute, Kenji holds the umbrella, Felix holds the mirror, Will holds the pencil, Fern holds the drum. Felix hands their item to Kenji, Kenji hands theirs to Maya, and Maya hands theirs to Felix, all at once. Felix hands their item to Fern, Fern hands theirs to Kenji, and Kenji hands theirs to Felix, all at once. Tess hands their item to Kenji, Kenji hands theirs to Fern, and Fern hands theirs to Tess, all at once. Tess and Will swap what they are holding. Felix and Tess swap what they are holding. Fern and Maya swap what they are holding. Kenji and Liam swap what they are holding. Kenji and Fern swap what they are holding. Will hands their item to Tess, Tess hands theirs to Felix, and Felix hands theirs to Will, all at once. Felix and Will swap what they are holding. Maya and Fern swap what they are holding. Maya hands their item to Will, Will hands theirs to Liam, and Liam hands theirs to Maya, all at once. Tess hands their item to Will, Will hands theirs to Liam, and Liam hands theirs to Tess, all at once. Will and Liam swap what they are holding. What is Fern holding at the end? Choose from drum, flute, mirror, pencil, spoon, umbrella and violin.
+KEY: 'drum'
+
+===== R1.swap_tracking_r5|L5|00 k=7 type=text
+At the start Reed holds the compass, Gwen holds the globe, Tom holds the kettle, Zita holds the drum, Cleo holds the hammer, Fay holds the book, Pia holds the feather. Zita hands their item to Cleo, Cleo hands theirs to Reed, and Reed hands theirs to Zita, all at once. Cleo and Zita swap what they are holding. Pia and Zita swap what they are holding. Zita and Gwen swap what they are holding. Cleo and Reed swap what they are holding. Tom hands their item to Cleo, Cleo hands theirs to Pia, and Pia hands theirs to Tom, all at once. Cleo and Reed swap what they are holding. Pia and Cleo swap what they are holding. Tom hands their item to Gwen, Gwen hands theirs to Pia, and Pia hands theirs to Tom, all at once. Fay hands their item to Zita, Zita hands theirs to Reed, and Reed hands theirs to Fay, all at once. Tom and Zita swap what they are holding. Tom and Gwen swap what they are holding. Pia hands their item to Gwen, Gwen hands theirs to Cleo, and Cleo hands theirs to Pia, all at once. Gwen hands their item to Zita, Zita hands theirs to Cleo, and Cleo hands theirs to Gwen, all at once. Tom hands their item to Gwen, Gwen hands theirs to Pia, and Pia hands theirs to Tom, all at once. Cleo hands their item to Gwen, Gwen hands theirs to Tom, and Tom hands theirs to Cleo, all at once. What is Fay holding at the end? Choose from book, compass, drum, feather, globe, hammer and kettle.
+KEY: 'kettle'
+
+===== R1.swap_tracking_r5|L5|01 k=7 type=text
+At the start Uzi holds the spoon, Wade holds the quilt, Ivo holds the pencil, Ivy holds the violin, Otto holds the apple, Tara holds the compass, Dara holds the globe. Otto and Ivy swap what they are holding. Wade hands their item to Tara, Tara hands theirs to Dara, and Dara hands theirs to Wade, all at once. Uzi and Ivy swap what they are holding. Wade and Uzi swap what they are holding. Uzi hands their item to Dara, Dara hands theirs to Otto, and Otto hands theirs to Uzi, all at once. Otto and Ivo swap what they are holding. Wade and Tara swap what they are holding. Otto and Ivy swap what they are holding. Tara hands their item to Ivy, Ivy hands theirs to Otto, and Otto hands theirs to Tara, all at once. Ivy and Ivo swap what they are holding. Ivo hands their item to Tara, Tara hands theirs to Wade, and Wade hands theirs to Ivo, all at once. Ivy and Ivo swap what they are holding. Tara and Otto swap what they are holding. Wade hands their item to Uzi, Uzi hands theirs to Ivy, and Ivy hands theirs to Wade, all at once. Dara and Otto swap what they are holding. Otto and Dara swap what they are holding. What is Wade holding at the end? Choose from apple, compass, globe, pencil, quilt, spoon and violin.
+KEY: 'quilt'
+
+===== R1.swap_tracking_r5|L6|00 k=8 type=text
+At the start Stan holds the book, Jade holds the spoon, Fern holds the teapot, Otto holds the globe, Milo holds the lantern, Nora holds the quilt, Bram holds the needle, Zed holds the hammer. Milo and Zed swap what they are holding. Jade hands their item to Fern, Fern hands theirs to Zed, and Zed hands theirs to Jade, all at once. Bram hands their item to Nora, Nora hands theirs to Stan, and Stan hands theirs to Bram, all at once. Jade hands their item to Bram, Bram hands theirs to Nora, and Nora hands theirs to Jade, all at once. Fern hands their item to Nora, Nora hands theirs to Milo, and Milo hands theirs to Fern, all at once. Nora and Stan swap what they are holding. Fern hands their item to Otto, Otto hands theirs to Bram, and Bram hands theirs to Fern, all at once. Stan hands their item to Bram, Bram hands theirs to Zed, and Zed hands theirs to Stan, all at once. Nora hands their item to Otto, Otto hands theirs to Stan, and Stan hands theirs to Nora, all at once. Zed and Fern swap what they are holding. Fern hands their item to Zed, Zed hands theirs to Otto, and Otto hands theirs to Fern, all at once. Jade and Fern swap what they are holding. Nora hands their item to Milo, Milo hands theirs to Otto, and Otto hands theirs to Nora, all at once. Stan hands their item to Jade, Jade hands theirs to Fern, and Fern hands theirs to Stan, all at once. Nora and Stan swap what they are holding. Otto and Milo swap what they are holding. Fern and Stan swap what they are holding. Nora and Otto swap what they are holding. What is Fern holding at the end? Choose from book, globe, hammer, lantern, needle, quilt, spoon and teapot.
+KEY: 'lantern'
+
+===== R1.swap_tracking_r5|L6|01 k=8 type=text
+At the start Wren holds the needle, Dmitri holds the apple, Ulf holds the ribbon, Nora holds the hammer, Igor holds the teapot, Gwen holds the scarf, Pru holds the book, Gita holds the violin. Nora hands their item to Gwen, Gwen hands theirs to Pru, and Pru hands theirs to Nora, all at once. Igor and Nora swap what they are holding. Ulf and Pru swap what they are holding. Igor hands their item to Nora, Nora hands theirs to Dmitri, and Dmitri hands theirs to Igor, all at once. Dmitri hands their item to Pru, Pru hands theirs to Ulf, and Ulf hands theirs to Dmitri, all at once. Ulf hands their item to Wren, Wren hands theirs to Igor, and Igor hands theirs to Ulf, all at once. Ulf hands their item to Nora, Nora hands theirs to Dmitri, and Dmitri hands theirs to Ulf, all at once. Nora and Gita swap what they are holding. Gwen hands their item to Dmitri, Dmitri hands theirs to Pru, and Pru hands theirs to Gwen, all at once. Gwen hands their item to Wren, Wren hands theirs to Dmitri, and Dmitri hands theirs to Gwen, all at once. Nora and Igor swap what they are holding. Gita and Nora swap what they are holding. Gwen and Wren swap what they are holding. Gwen hands their item to Dmitri, Dmitri hands theirs to Nora, and Nora hands theirs to Gwen, all at once. Ulf and Wren swap what they are holding. Gita hands their item to Dmitri, Dmitri hands theirs to Ulf, and Ulf hands theirs to Gita, all at once. Gita and Igor swap what they are holding. Dmitri and Igor swap what they are holding. What is Ulf holding at the end? Choose from apple, book, hammer, needle, ribbon, scarf, teapot and violin.
+KEY: 'teapot'
+
+===== R1.temporal_weekday_shift_r6|L0|00 k=7 type=word
+The boat race took place on a Monday. The boat race took place 123 days after the cycle tour. The boat race took place 207 days before the book sale. The market day took place 66 days after the flower show. The council vote took place 163 days after the bridge opening. The lecture took place 172 days after the boat race. The bridge opening took place 232 days after the flower show. The council vote took place 208 days before the book sale. On which day of the week did the market day take place?
+KEY: 'Sunday'
+
+===== R1.temporal_weekday_shift_r6|L0|01 k=7 type=word
+The concert took place on a Sunday. The concert took place 272 days before the market day. The boat race took place 83 days before the bake-off. The market day took place 150 days before the lecture. The town parade took place 154 days before the boat race. The boat race took place 287 days after the chess final. The lecture took place 72 days after the bake-off. The book sale took place 297 days after the boat race. On which day of the week did the town parade take place?
+KEY: 'Monday'
+
+===== R1.temporal_weekday_shift_r6|L1|00 k=7 type=word
+The cycle tour took place on a Friday. The chess final took place 239 days after the flower show. The boat race took place 74 days after the chess final. The school play took place 155 days after the book sale. The film night took place 290 days before the council vote. The bridge opening took place 228 days before the film night. The book sale took place 177 days after the boat race. The cycle tour took place 27 days after the flower show. The boat race took place 100 days before the council vote. On which day of the week did the bridge opening take place?
+KEY: 'Saturday'
+
+===== R1.temporal_weekday_shift_r6|L1|01 k=7 type=word
+The concert took place on a Tuesday. The school play took place 279 days before the music recital. The school play took place 88 days before the harvest fair. The school play took place 234 days after the art auction. The boat race took place 141 days before the art auction. The concert took place 224 days before the book sale. The film night took place 205 days after the council vote. The book sale took place 259 days after the film night. The film night took place 200 days after the harvest fair. On which day of the week did the boat race take place?
+KEY: 'Thursday'
+
+===== R1.temporal_weekday_shift_r6|L2|00 k=7 type=word
+The town parade took place on a Tuesday. The boat race took place 135 days after the harvest fair. The bridge opening took place 206 days after the town parade. The lecture took place 273 days before the bridge opening. The boat race took place 11 days before the lecture. The quiz night took place 251 days before the harvest fair. The chess final took place 263 days after the quiz night. The boat race took place 263 days after the bake-off. The flower show took place 123 days before the bridge opening. The chess final took place 66 days before the film night. On which day of the week did the film night take place?
+KEY: 'Sunday'
+
+===== R1.temporal_weekday_shift_r6|L2|01 k=7 type=word
+The flower show took place on a Wednesday. The council vote took place 76 days after the music recital. The art auction took place 181 days after the school play. The cycle tour took place 208 days after the town parade. The music recital took place 18 days before the boat race. The concert took place 128 days after the town parade. The art auction took place 153 days after the music recital. The boat race took place 132 days before the town parade. The flower show took place 265 days after the harvest fair. The cycle tour took place 245 days after the harvest fair. On which day of the week did the school play take place?
+KEY: 'Wednesday'
+
+===== R1.temporal_weekday_shift_r6|L3|00 k=7 type=word
+The cycle tour took place on a Thursday. The bridge opening took place 81 days after the bake-off. The school play took place 16 days before the council vote. The music recital took place 145 days before the book sale. The boat race took place 48 days before the school play. The bake-off took place 66 days after the book sale. The film night took place 69 days after the market day. The cycle tour took place 290 days before the boat race. The council vote took place 291 days before the film night. The flower show took place 145 days after the market day. The concert took place 185 days after the music recital. The concert took place 74 days after the film night. On which day of the week did the bake-off take place?
+KEY: 'Sunday'
+
+===== R1.temporal_weekday_shift_r6|L3|01 k=7 type=word
+The market day took place on a Friday. The concert took place 113 days before the boat race. The bake-off took place 50 days after the lecture. The music recital took place 119 days before the lecture. The harvest fair took place 26 days after the cycle tour. The boat race took place 6 days before the flower show. The flower show took place 247 days after the art auction. The harvest fair took place 108 days before the flower show. The bake-off took place 255 days before the concert. The music recital took place 275 days before the town parade. The film night took place 163 days after the bake-off. The cycle tour took place 13 days after the market day. On which day of the week did the music recital take place?
+KEY: 'Monday'
+
+===== R1.temporal_weekday_shift_r6|L4|00 k=7 type=word
+The book sale took place on a Thursday. The harvest fair took place 149 days after the flower show. The town parade took place 61 days before the chess final. The quiz night took place 241 days before the lecture. The film night took place 277 days before the harvest fair. The lecture took place 269 days before the concert. The market day took place 98 days before the quiz night. The bridge opening took place 210 days before the market day. The harvest fair took place 42 days after the book sale. The music recital took place 261 days after the chess final. The town parade took place 132 days after the bridge opening. The lecture took place 64 days before the bake-off. The flower show took place 159 days after the chess final. On which day of the week did the concert take place?
+KEY: 'Saturday'
+
+===== R1.temporal_weekday_shift_r6|L4|01 k=7 type=word
+The concert took place on a Wednesday. The school play took place 70 days after the music recital. The music recital took place 288 days before the market day. The harvest fair took place 200 days before the school play. The chess final took place 59 days after the harvest fair. The market day took place 256 days before the boat race. The flower show took place 225 days before the film night. The concert took place 76 days before the lecture. The lecture took place 160 days before the chess final. The council vote took place 197 days before the music recital. The book sale took place 76 days before the market day. The boat race took place 121 days before the film night. The art auction took place 117 days before the book sale. On which day of the week did the flower show take place?
+KEY: 'Monday'
+
+===== R1.temporal_weekday_shift_r6|L5|00 k=7 type=word
+The flower show took place on a Friday. The market day took place 121 days after the harvest fair. The quiz night took place 150 days before the town parade. The music recital took place 298 days before the book sale. The market day took place 274 days before the bridge opening. The town parade took place 208 days before the film night. The lecture took place 53 days after the harvest fair. The concert took place 206 days after the flower show. The music recital took place 194 days before the art auction. The market day took place 50 days after the quiz night. The lecture took place 172 days before the boat race. The council vote took place 284 days after the boat race. The music recital took place 240 days after the council vote. The flower show took place 185 days before the film night. On which day of the week did the art auction take place?
+KEY: 'Thursday'
+
+===== R1.temporal_weekday_shift_r6|L5|01 k=7 type=word
+The council vote took place on a Saturday. The book sale took place 10 days before the school play. The harvest fair took place 98 days after the council vote. The bridge opening took place 68 days after the bake-off. The town parade took place 181 days after the quiz night. The quiz night took place 72 days after the concert. The town parade took place 145 days after the art auction. The music recital took place 192 days before the cycle tour. The book sale took place 235 days after the town parade. The bridge opening took place 144 days after the flower show. The harvest fair took place 75 days before the school play. The bake-off took place 144 days before the cycle tour. The bridge opening took place 86 days before the concert. The market day took place 146 days before the bridge opening. On which day of the week did the music recital take place?
+KEY: 'Thursday'
+
+===== R1.temporal_weekday_shift_r6|L6|00 k=7 type=word
+The concert took place on a Thursday. The art auction took place 26 days before the flower show. The boat race took place 268 days before the book sale. The boat race took place 244 days before the council vote. The boat race took place 213 days after the cycle tour. The bake-off took place 59 days before the cycle tour. The art auction took place 211 days before the market day. The lecture took place 152 days after the film night. The harvest fair took place 85 days after the chess final. The town parade took place 146 days before the school play. The harvest fair took place 278 days after the flower show. The flower show took place 278 days after the concert. The cycle tour took place 182 days after the bridge opening. The film night took place 78 days after the bridge opening. The town parade took place 248 days before the book sale. The chess final took place 266 days after the school play. On which day of the week did the lecture take place?
+KEY: 'Thursday'
+
+===== R1.temporal_weekday_shift_r6|L6|01 k=7 type=word
+The film night took place on a Thursday. The cycle tour took place 223 days before the book sale. The music recital took place 297 days before the flower show. The flower show took place 138 days before the film night. The concert took place 98 days after the harvest fair. The harvest fair took place 110 days before the town parade. The harvest fair took place 282 days before the lecture. The council vote took place 95 days before the lecture. The film night took place 99 days after the bake-off. The book sale took place 76 days after the town parade. The chess final took place 112 days after the quiz night. The bridge opening took place 126 days after the council vote. The cycle tour took place 77 days before the music recital. The market day took place 30 days after the chess final. The bridge opening took place 164 days after the chess final. The bridge opening took place 4 days after the art auction. On which day of the week did the market day take place?
+KEY: 'Tuesday'
+
+===== R1.venn_counting_r5|L0|00 k=None type=number
+Among 88 people, 47 people are in the baking group; 44 people are in the choir group; 23 are in both the baking and the choir groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+KEY: '20'
+
+===== R1.venn_counting_r5|L0|01 k=None type=number
+Among 72 people, 39 people are in the poetry group; 32 people are in the baking group; 23 are in both the poetry and the baking groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+KEY: '24'
+
+===== R1.venn_counting_r5|L1|00 k=None type=number
+Among 80 people, 41 people are in the choir group; 46 people are in the archery group; 19 are in both the choir and the archery groups. Each person is counted once in each number that applies to them. How many of the people are in exactly one of these groups?
+KEY: '49'
+
+===== R1.venn_counting_r5|L1|01 k=None type=number
+Among 61 people, 40 people are in the rowing group; 45 people are in the poetry group; 28 are in both the rowing and the poetry groups. Each person is counted once in each number that applies to them. How many of the people are in exactly one of these groups?
+KEY: '29'
+
+===== R1.venn_counting_r5|L2|00 k=None type=number
+Among 169 people, 110 people are in the chess group; 78 people are in the rowing group; 60 people are in the poetry group; 56 are in both the chess and the rowing groups; 54 are in both the chess and the poetry groups; 27 are in both the rowing and the poetry groups; 25 are in all of the chess, rowing and poetry groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+KEY: '33'
+
+===== R1.venn_counting_r5|L2|01 k=None type=number
+Among 123 people, 53 people are in the poetry group; 67 people are in the chess group; 85 people are in the diving group; 38 are in both the poetry and the chess groups; 43 are in both the poetry and the diving groups; 53 are in both the chess and the diving groups; 31 are in all of the poetry, chess and diving groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+KEY: '21'
+
+===== R1.venn_counting_r5|L3|00 k=None type=number
+Among 182 people, 55 people are in the rowing group; 88 people are in the chess group; 71 people are in the choir group; 30 are in both the rowing and the chess groups; 13 are in both the rowing and the choir groups; 33 are in both the chess and the choir groups; 10 are in all of the rowing, chess and choir groups. Each person is counted once in each number that applies to them. How many of the people are in exactly two of these groups?
+KEY: '46'
+
+===== R1.venn_counting_r5|L3|01 k=None type=number
+Among 69 people, 55 people are in the diving group; 43 people are in the chess group; 31 people are in the baking group; 36 are in both the diving and the chess groups; 22 are in both the diving and the baking groups; 14 are in both the chess and the baking groups; 12 are in all of the diving, chess and baking groups. Each person is counted once in each number that applies to them. How many of the people are in exactly two of these groups?
+KEY: '36'
+
+===== R1.venn_counting_r5|L4|00 k=None type=number
+Among 201 people, 122 people are in the chess group; 77 people are in the poetry group; 116 people are in the archery group; 50 are in both the chess and the poetry groups; 64 are in both the chess and the archery groups; 51 are in both the poetry and the archery groups; 28 are in all of the chess, poetry and archery groups. Each person is counted once in each number that applies to them. How many of the people are in at least two of these groups?
+KEY: '109'
+
+===== R1.venn_counting_r5|L4|01 k=None type=number
+Among 149 people, 96 people are in the diving group; 80 people are in the choir group; 76 people are in the poetry group; 48 are in both the diving and the choir groups; 32 are in both the diving and the poetry groups; 40 are in both the choir and the poetry groups; 15 are in all of the diving, choir and poetry groups. Each person is counted once in each number that applies to them. How many of the people are in at least two of these groups?
+KEY: '90'
+
+===== R1.venn_counting_r5|L5|00 k=None type=number
+Among 366 people, 129 people are in the choir group; 189 people are in the archery group; 207 people are in the baking group; 204 people are in the chess group; 59 are in both the choir and the archery groups; 86 are in both the choir and the baking groups; 63 are in both the choir and the chess groups; 81 are in both the archery and the baking groups; 122 are in both the archery and the chess groups; 107 are in both the baking and the chess groups; 28 are in all of the choir, archery and baking groups; 41 are in all of the choir, archery and chess groups; 38 are in all of the choir, baking and chess groups; 58 are in all of the archery, baking and chess groups; 17 are in all four groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+KEY: '7'
+
+===== R1.venn_counting_r5|L5|01 k=None type=number
+Among 330 people, 166 people are in the poetry group; 133 people are in the chess group; 157 people are in the archery group; 111 people are in the baking group; 59 are in both the poetry and the chess groups; 76 are in both the poetry and the archery groups; 61 are in both the poetry and the baking groups; 80 are in both the chess and the archery groups; 58 are in both the chess and the baking groups; 36 are in both the archery and the baking groups; 34 are in all of the poetry, chess and archery groups; 29 are in all of the poetry, chess and baking groups; 21 are in all of the poetry, archery and baking groups; 26 are in all of the chess, archery and baking groups; 17 are in all four groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+KEY: '40'
+
+===== R1.venn_counting_r5|L6|00 k=None type=number
+Among 499 people, 279 people are in the baking group; 245 people are in the chess group; 237 people are in the poetry group; 261 people are in the archery group; 132 are in both the baking and the chess groups; 129 are in both the baking and the poetry groups; 148 are in both the baking and the archery groups; 116 are in both the chess and the poetry groups; 157 are in both the chess and the archery groups; 125 are in both the poetry and the archery groups; 56 are in all of the baking, chess and poetry groups; 71 are in all of the baking, chess and archery groups; 80 are in all of the baking, poetry and archery groups; 77 are in all of the chess, poetry and archery groups; 33 are in all four groups. Each person is counted once in each number that applies to them. How many of the people are in exactly two of these groups?
+KEY: '153'
+
+===== R1.venn_counting_r5|L6|01 k=None type=number
+Among 363 people, 188 people are in the poetry group; 184 people are in the chess group; 226 people are in the choir group; 146 people are in the baking group; 79 are in both the poetry and the chess groups; 112 are in both the poetry and the choir groups; 76 are in both the poetry and the baking groups; 114 are in both the chess and the choir groups; 53 are in both the chess and the baking groups; 78 are in both the choir and the baking groups; 48 are in all of the poetry, chess and choir groups; 31 are in all of the poetry, chess and baking groups; 29 are in all of the poetry, choir and baking groups; 25 are in all of the chess, choir and baking groups; 4 are in all four groups. Each person is counted once in each number that applies to them. How many of the people are in exactly two of these groups?
+KEY: '137'

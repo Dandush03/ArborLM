@@ -1,0 +1,1612 @@
+{
+  "fixture_seed": 5773622561510341714,
+  "items_per_level": 50,
+  "label": "400002|stage2-check|R2",
+  "lineages": {
+    "R2.binary_search_trace": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "501182c013a442b6b7d90ba07546283b89d40c00f53e4593a6ed4426503619d9",
+      "levels": {
+        "0": {
+          "n": {
+            "max": 19,
+            "mean": 17.52,
+            "min": 16
+          }
+        },
+        "1": {
+          "n": {
+            "max": 23,
+            "mean": 21.66,
+            "min": 20
+          }
+        },
+        "2": {
+          "n": {
+            "max": 27,
+            "mean": 25.56,
+            "min": 24
+          }
+        },
+        "3": {
+          "n": {
+            "max": 32,
+            "mean": 29.76,
+            "min": 28
+          }
+        },
+        "4": {
+          "n": {
+            "max": 35,
+            "mean": 33.26,
+            "min": 32
+          }
+        },
+        "5": {
+          "n": {
+            "max": 39,
+            "mean": 37.46,
+            "min": 36
+          }
+        },
+        "6": {
+          "n": {
+            "max": 43,
+            "mean": 41.6,
+            "min": 40
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.caesar_shift": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "7d76dbad6299a3616bcd09ff1df907c486cf07ea4bb8b4aa2c3904a2c5204cde",
+      "levels": {
+        "0": {
+          "letters": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          },
+          "words": {
+            "max": 1,
+            "mean": 1.0,
+            "min": 1
+          }
+        },
+        "1": {
+          "letters": {
+            "max": 10,
+            "mean": 10.0,
+            "min": 10
+          },
+          "words": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          }
+        },
+        "2": {
+          "letters": {
+            "max": 15,
+            "mean": 15.0,
+            "min": 15
+          },
+          "words": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "3": {
+          "letters": {
+            "max": 20,
+            "mean": 20.0,
+            "min": 20
+          },
+          "words": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "4": {
+          "letters": {
+            "max": 25,
+            "mean": 25.0,
+            "min": 25
+          },
+          "words": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "5": {
+          "letters": {
+            "max": 30,
+            "mean": 30.0,
+            "min": 30
+          },
+          "words": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "6": {
+          "letters": {
+            "max": 35,
+            "mean": 35.0,
+            "min": 35
+          },
+          "words": {
+            "max": 7,
+            "mean": 7.0,
+            "min": 7
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.cellular_automaton": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "f95a2c7e9dbee6879f0fb95436ab3999ddd46fc51424942d50ec228d0828f6c4",
+      "levels": {
+        "0": {
+          "cells": {
+            "max": 11,
+            "mean": 11.0,
+            "min": 11
+          },
+          "steps": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          }
+        },
+        "1": {
+          "cells": {
+            "max": 13,
+            "mean": 13.0,
+            "min": 13
+          },
+          "steps": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          }
+        },
+        "2": {
+          "cells": {
+            "max": 15,
+            "mean": 15.0,
+            "min": 15
+          },
+          "steps": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "3": {
+          "cells": {
+            "max": 17,
+            "mean": 17.0,
+            "min": 17
+          },
+          "steps": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "4": {
+          "cells": {
+            "max": 19,
+            "mean": 19.0,
+            "min": 19
+          },
+          "steps": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "5": {
+          "cells": {
+            "max": 21,
+            "mean": 21.0,
+            "min": 21
+          },
+          "steps": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "6": {
+          "cells": {
+            "max": 23,
+            "mean": 23.0,
+            "min": 23
+          },
+          "steps": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.cheapest_network": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "80586f74dab44c45749a3d1e141342368d2e133d20747abf2686fc644c711575",
+      "levels": {
+        "0": {
+          "cables": {
+            "max": 16,
+            "mean": 16.0,
+            "min": 16
+          },
+          "towns": {
+            "max": 8,
+            "mean": 8.0,
+            "min": 8
+          }
+        },
+        "1": {
+          "cables": {
+            "max": 18,
+            "mean": 18.0,
+            "min": 18
+          },
+          "towns": {
+            "max": 9,
+            "mean": 9.0,
+            "min": 9
+          }
+        },
+        "2": {
+          "cables": {
+            "max": 20,
+            "mean": 20.0,
+            "min": 20
+          },
+          "towns": {
+            "max": 10,
+            "mean": 10.0,
+            "min": 10
+          }
+        },
+        "3": {
+          "cables": {
+            "max": 22,
+            "mean": 22.0,
+            "min": 22
+          },
+          "towns": {
+            "max": 11,
+            "mean": 11.0,
+            "min": 11
+          }
+        },
+        "4": {
+          "cables": {
+            "max": 24,
+            "mean": 24.0,
+            "min": 24
+          },
+          "towns": {
+            "max": 12,
+            "mean": 12.0,
+            "min": 12
+          }
+        },
+        "5": {
+          "cables": {
+            "max": 26,
+            "mean": 26.0,
+            "min": 26
+          },
+          "towns": {
+            "max": 13,
+            "mean": 13.0,
+            "min": 13
+          }
+        },
+        "6": {
+          "cables": {
+            "max": 28,
+            "mean": 28.0,
+            "min": 28
+          },
+          "towns": {
+            "max": 14,
+            "mean": 14.0,
+            "min": 14
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.count_divisible": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {
+        "set_reading_differs_but_stated": 108
+      },
+      "items": 350,
+      "items_hash": "54a65d4e8fa49129a3d5f7b2cc65594263ee5c9ca8c869f651c77b8a28bfe39c",
+      "levels": {
+        "0": {
+          "max_x": {
+            "max": 99,
+            "mean": 94.12,
+            "min": 76
+          },
+          "n": {
+            "max": 18,
+            "mean": 18.0,
+            "min": 18
+          }
+        },
+        "1": {
+          "max_x": {
+            "max": 99,
+            "mean": 95.3,
+            "min": 86
+          },
+          "n": {
+            "max": 22,
+            "mean": 22.0,
+            "min": 22
+          }
+        },
+        "2": {
+          "max_x": {
+            "max": 199,
+            "mean": 191.68,
+            "min": 172
+          },
+          "n": {
+            "max": 26,
+            "mean": 26.0,
+            "min": 26
+          }
+        },
+        "3": {
+          "max_x": {
+            "max": 199,
+            "mean": 191.88,
+            "min": 170
+          },
+          "n": {
+            "max": 30,
+            "mean": 30.0,
+            "min": 30
+          }
+        },
+        "4": {
+          "max_x": {
+            "max": 299,
+            "mean": 290.98,
+            "min": 273
+          },
+          "n": {
+            "max": 34,
+            "mean": 34.0,
+            "min": 34
+          }
+        },
+        "5": {
+          "max_x": {
+            "max": 299,
+            "mean": 293.56,
+            "min": 273
+          },
+          "n": {
+            "max": 38,
+            "mean": 38.0,
+            "min": 38
+          }
+        },
+        "6": {
+          "max_x": {
+            "max": 399,
+            "mean": 391.32,
+            "min": 366
+          },
+          "n": {
+            "max": 42,
+            "mean": 42.0,
+            "min": 42
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.crt_smallest": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "151feea201e03a044819e2d27cb38dc48b7647984846911ea94eb6d46fe46964",
+      "levels": {
+        "0": {
+          "k": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          },
+          "max_mod": {
+            "max": 29,
+            "mean": 21.42,
+            "min": 5
+          },
+          "min_mod": {
+            "max": 26,
+            "mean": 11.94,
+            "min": 3
+          }
+        },
+        "1": {
+          "k": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          },
+          "max_mod": {
+            "max": 39,
+            "mean": 27.86,
+            "min": 9
+          },
+          "min_mod": {
+            "max": 36,
+            "mean": 17.4,
+            "min": 8
+          }
+        },
+        "2": {
+          "k": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          },
+          "max_mod": {
+            "max": 49,
+            "mean": 36.36,
+            "min": 16
+          },
+          "min_mod": {
+            "max": 46,
+            "mean": 25.32,
+            "min": 13
+          }
+        },
+        "3": {
+          "k": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          },
+          "max_mod": {
+            "max": 59,
+            "mean": 50.0,
+            "min": 29
+          },
+          "min_mod": {
+            "max": 55,
+            "mean": 27.98,
+            "min": 18
+          }
+        },
+        "4": {
+          "k": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          },
+          "max_mod": {
+            "max": 69,
+            "mean": 54.9,
+            "min": 31
+          },
+          "min_mod": {
+            "max": 53,
+            "mean": 31.86,
+            "min": 23
+          }
+        },
+        "5": {
+          "k": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          },
+          "max_mod": {
+            "max": 79,
+            "mean": 66.86,
+            "min": 37
+          },
+          "min_mod": {
+            "max": 60,
+            "mean": 38.62,
+            "min": 28
+          }
+        },
+        "6": {
+          "k": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          },
+          "max_mod": {
+            "max": 89,
+            "mean": 76.8,
+            "min": 45
+          },
+          "min_mod": {
+            "max": 76,
+            "mean": 46.4,
+            "min": 33
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.dictionary_rank": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "badc81695db7da038b7c76af344bd3e922ee0e6f11375e5ea1574c45428dd917",
+      "levels": {
+        "0": {
+          "alphabet": {
+            "max": 11,
+            "mean": 10.18,
+            "min": 9
+          },
+          "length": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "1": {
+          "alphabet": {
+            "max": 12,
+            "mean": 10.22,
+            "min": 9
+          },
+          "length": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "2": {
+          "alphabet": {
+            "max": 9,
+            "mean": 8.12,
+            "min": 7
+          },
+          "length": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "3": {
+          "alphabet": {
+            "max": 10,
+            "mean": 9.12,
+            "min": 8
+          },
+          "length": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "4": {
+          "alphabet": {
+            "max": 10,
+            "mean": 9.26,
+            "min": 8
+          },
+          "length": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "5": {
+          "alphabet": {
+            "max": 11,
+            "mean": 9.88,
+            "min": 9
+          },
+          "length": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "6": {
+          "alphabet": {
+            "max": 11,
+            "mean": 10.18,
+            "min": 9
+          },
+          "length": {
+            "max": 7,
+            "mean": 7.0,
+            "min": 7
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.expression_eval": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "e402f086e7a2033dbb863a20483916b6e8aa35c2ed3d2b4ea9608eb4c874bbfb",
+      "levels": {
+        "0": {
+          "numbers": {
+            "max": 7,
+            "mean": 5.98,
+            "min": 5
+          },
+          "parens": {
+            "max": 1,
+            "mean": 1.0,
+            "min": 1
+          }
+        },
+        "1": {
+          "numbers": {
+            "max": 8,
+            "mean": 6.98,
+            "min": 6
+          },
+          "parens": {
+            "max": 1,
+            "mean": 1.0,
+            "min": 1
+          }
+        },
+        "2": {
+          "numbers": {
+            "max": 10,
+            "mean": 8.66,
+            "min": 7
+          },
+          "parens": {
+            "max": 3,
+            "mean": 1.28,
+            "min": 1
+          }
+        },
+        "3": {
+          "numbers": {
+            "max": 12,
+            "mean": 9.9,
+            "min": 8
+          },
+          "parens": {
+            "max": 3,
+            "mean": 1.44,
+            "min": 1
+          }
+        },
+        "4": {
+          "numbers": {
+            "max": 15,
+            "mean": 11.98,
+            "min": 9
+          },
+          "parens": {
+            "max": 4,
+            "mean": 2.2,
+            "min": 1
+          }
+        },
+        "5": {
+          "numbers": {
+            "max": 19,
+            "mean": 13.34,
+            "min": 10
+          },
+          "parens": {
+            "max": 5,
+            "mean": 2.08,
+            "min": 1
+          }
+        },
+        "6": {
+          "numbers": {
+            "max": 21,
+            "mean": 16.08,
+            "min": 12
+          },
+          "parens": {
+            "max": 7,
+            "mean": 2.82,
+            "min": 1
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.from_base": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "2eb251af99766833175bd639a4498dfec25e0ccdff2fbcdcd007fa2bb3990003",
+      "levels": {
+        "0": {
+          "base": {
+            "max": 8,
+            "mean": 4.06,
+            "min": 2
+          },
+          "digits": {
+            "max": 5,
+            "mean": 3.92,
+            "min": 3
+          }
+        },
+        "1": {
+          "base": {
+            "max": 8,
+            "mean": 3.74,
+            "min": 2
+          },
+          "digits": {
+            "max": 6,
+            "mean": 4.98,
+            "min": 4
+          }
+        },
+        "2": {
+          "base": {
+            "max": 16,
+            "mean": 7.58,
+            "min": 2
+          },
+          "digits": {
+            "max": 7,
+            "mean": 6.08,
+            "min": 5
+          }
+        },
+        "3": {
+          "base": {
+            "max": 16,
+            "mean": 6.72,
+            "min": 2
+          },
+          "digits": {
+            "max": 8,
+            "mean": 6.94,
+            "min": 6
+          }
+        },
+        "4": {
+          "base": {
+            "max": 16,
+            "mean": 7.42,
+            "min": 2
+          },
+          "digits": {
+            "max": 9,
+            "mean": 8.02,
+            "min": 7
+          }
+        },
+        "5": {
+          "base": {
+            "max": 16,
+            "mean": 5.72,
+            "min": 2
+          },
+          "digits": {
+            "max": 10,
+            "mean": 9.04,
+            "min": 8
+          }
+        },
+        "6": {
+          "base": {
+            "max": 16,
+            "mean": 7.28,
+            "min": 2
+          },
+          "digits": {
+            "max": 11,
+            "mean": 9.88,
+            "min": 9
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.grid_sum": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {
+        "diagonal_of_non_square_grid": 54
+      },
+      "items": 350,
+      "items_hash": "b4961e5c2cfc6ce8ff09a6a4cd9e8392c842137c46266285ca7b7c9bf0f10072",
+      "levels": {
+        "0": {
+          "cols": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          },
+          "rows": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "1": {
+          "cols": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          },
+          "rows": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "2": {
+          "cols": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          },
+          "rows": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "3": {
+          "cols": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          },
+          "rows": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "4": {
+          "cols": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          },
+          "rows": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "5": {
+          "cols": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          },
+          "rows": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "6": {
+          "cols": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          },
+          "rows": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.list_ops": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "cc3ba4d3fcef6116a1a22a1d8d96c61c67f4fc72e98e67bc10ee7f5889dfbb6a",
+      "levels": {
+        "0": {
+          "ops": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          },
+          "start_len": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "1": {
+          "ops": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          },
+          "start_len": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "2": {
+          "ops": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          },
+          "start_len": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "3": {
+          "ops": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          },
+          "start_len": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "4": {
+          "ops": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          },
+          "start_len": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "5": {
+          "ops": {
+            "max": 7,
+            "mean": 7.0,
+            "min": 7
+          },
+          "start_len": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "6": {
+          "ops": {
+            "max": 8,
+            "mean": 8.0,
+            "min": 8
+          },
+          "start_len": {
+            "max": 7,
+            "mean": 7.0,
+            "min": 7
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.luhn_check": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "7d18ee339d3be117ca186660eb409108914bcd8339a0fef4860cb45c73fc501e",
+      "levels": {
+        "0": {
+          "digits": {
+            "max": 7,
+            "mean": 6.54,
+            "min": 6
+          }
+        },
+        "1": {
+          "digits": {
+            "max": 9,
+            "mean": 8.58,
+            "min": 8
+          }
+        },
+        "2": {
+          "digits": {
+            "max": 11,
+            "mean": 10.48,
+            "min": 10
+          }
+        },
+        "3": {
+          "digits": {
+            "max": 13,
+            "mean": 12.44,
+            "min": 12
+          }
+        },
+        "4": {
+          "digits": {
+            "max": 15,
+            "mean": 14.54,
+            "min": 14
+          }
+        },
+        "5": {
+          "digits": {
+            "max": 17,
+            "mean": 16.46,
+            "min": 16
+          }
+        },
+        "6": {
+          "digits": {
+            "max": 19,
+            "mean": 18.42,
+            "min": 18
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.min_heap_ops": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "6495f43e65d2a2f69717678ee58a2ebd9e17bc11609b33b6b474206b048118ee",
+      "levels": {
+        "0": {
+          "n": {
+            "max": 10,
+            "mean": 10.0,
+            "min": 10
+          },
+          "removals": {
+            "max": 1,
+            "mean": 0.26,
+            "min": 0
+          }
+        },
+        "1": {
+          "n": {
+            "max": 11,
+            "mean": 11.0,
+            "min": 11
+          },
+          "removals": {
+            "max": 1,
+            "mean": 0.32,
+            "min": 0
+          }
+        },
+        "2": {
+          "n": {
+            "max": 12,
+            "mean": 12.0,
+            "min": 12
+          },
+          "removals": {
+            "max": 1,
+            "mean": 0.34,
+            "min": 0
+          }
+        },
+        "3": {
+          "n": {
+            "max": 13,
+            "mean": 13.0,
+            "min": 13
+          },
+          "removals": {
+            "max": 2,
+            "mean": 0.56,
+            "min": 0
+          }
+        },
+        "4": {
+          "n": {
+            "max": 14,
+            "mean": 14.0,
+            "min": 14
+          },
+          "removals": {
+            "max": 2,
+            "mean": 0.78,
+            "min": 0
+          }
+        },
+        "5": {
+          "n": {
+            "max": 15,
+            "mean": 15.0,
+            "min": 15
+          },
+          "removals": {
+            "max": 2,
+            "mean": 0.64,
+            "min": 0
+          }
+        },
+        "6": {
+          "n": {
+            "max": 16,
+            "mean": 16.0,
+            "min": 16
+          },
+          "removals": {
+            "max": 2,
+            "mean": 0.82,
+            "min": 0
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.run_length": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "f9aa0d331a60525ddbdf0c6d26cee44cfe8fbf492f63f8530d3493d1f4dd54b7",
+      "levels": {
+        "0": {
+          "length": {
+            "max": 21,
+            "mean": 15.26,
+            "min": 10
+          },
+          "runs": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "1": {
+          "length": {
+            "max": 22,
+            "mean": 17.92,
+            "min": 13
+          },
+          "runs": {
+            "max": 7,
+            "mean": 7.0,
+            "min": 7
+          }
+        },
+        "2": {
+          "length": {
+            "max": 34,
+            "mean": 24.18,
+            "min": 18
+          },
+          "runs": {
+            "max": 8,
+            "mean": 8.0,
+            "min": 8
+          }
+        },
+        "3": {
+          "length": {
+            "max": 37,
+            "mean": 27.54,
+            "min": 16
+          },
+          "runs": {
+            "max": 9,
+            "mean": 9.0,
+            "min": 9
+          }
+        },
+        "4": {
+          "length": {
+            "max": 45,
+            "mean": 34.24,
+            "min": 20
+          },
+          "runs": {
+            "max": 10,
+            "mean": 10.0,
+            "min": 10
+          }
+        },
+        "5": {
+          "length": {
+            "max": 50,
+            "mean": 37.76,
+            "min": 24
+          },
+          "runs": {
+            "max": 11,
+            "mean": 11.0,
+            "min": 11
+          }
+        },
+        "6": {
+          "length": {
+            "max": 61,
+            "mean": 47.8,
+            "min": 35
+          },
+          "runs": {
+            "max": 12,
+            "mean": 12.0,
+            "min": 12
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.sort_list": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "9e0eaaf99710011c0dce463b4a32fd27db84705f0ead6401728df240be7c4b10",
+      "levels": {
+        "0": {
+          "n": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "1": {
+          "n": {
+            "max": 5,
+            "mean": 5.0,
+            "min": 5
+          }
+        },
+        "2": {
+          "n": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          }
+        },
+        "3": {
+          "n": {
+            "max": 7,
+            "mean": 7.0,
+            "min": 7
+          }
+        },
+        "4": {
+          "n": {
+            "max": 8,
+            "mean": 8.0,
+            "min": 8
+          }
+        },
+        "5": {
+          "n": {
+            "max": 9,
+            "mean": 9.0,
+            "min": 9
+          }
+        },
+        "6": {
+          "n": {
+            "max": 10,
+            "mean": 10.0,
+            "min": 10
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.string_rewrite_nonidentity": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "92dbb9214df304ea52cdf7d04f160aa6a7c0f7e9fe003ed570b0ebeee5b4a218",
+      "levels": {
+        "0": {
+          "length": {
+            "max": 6,
+            "mean": 6.0,
+            "min": 6
+          },
+          "rules": {
+            "max": 1,
+            "mean": 1.0,
+            "min": 1
+          }
+        },
+        "1": {
+          "length": {
+            "max": 8,
+            "mean": 8.0,
+            "min": 8
+          },
+          "rules": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          }
+        },
+        "2": {
+          "length": {
+            "max": 10,
+            "mean": 10.0,
+            "min": 10
+          },
+          "rules": {
+            "max": 2,
+            "mean": 2.0,
+            "min": 2
+          }
+        },
+        "3": {
+          "length": {
+            "max": 12,
+            "mean": 12.0,
+            "min": 12
+          },
+          "rules": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "4": {
+          "length": {
+            "max": 14,
+            "mean": 14.0,
+            "min": 14
+          },
+          "rules": {
+            "max": 3,
+            "mean": 3.0,
+            "min": 3
+          }
+        },
+        "5": {
+          "length": {
+            "max": 16,
+            "mean": 16.0,
+            "min": 16
+          },
+          "rules": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        },
+        "6": {
+          "length": {
+            "max": 18,
+            "mean": 18.0,
+            "min": 18
+          },
+          "rules": {
+            "max": 4,
+            "mean": 4.0,
+            "min": 4
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    },
+    "R2.to_base_wide": {
+      "covered": true,
+      "error_ids": [],
+      "errors": 0,
+      "flags": {},
+      "items": 350,
+      "items_hash": "063e2e4b82685508491cc23e762d14983b97232058c44cf9104800d41d7d9c7d",
+      "levels": {
+        "0": {
+          "answer_digits": {
+            "max": 11,
+            "mean": 5.76,
+            "min": 3
+          },
+          "base": {
+            "max": 9,
+            "mean": 5.02,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 11,
+            "mean": 9.96,
+            "min": 6
+          }
+        },
+        "1": {
+          "answer_digits": {
+            "max": 13,
+            "mean": 6.54,
+            "min": 4
+          },
+          "base": {
+            "max": 9,
+            "mean": 5.24,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 13,
+            "mean": 12.1,
+            "min": 9
+          }
+        },
+        "2": {
+          "answer_digits": {
+            "max": 15,
+            "mean": 6.24,
+            "min": 4
+          },
+          "base": {
+            "max": 16,
+            "mean": 7.6,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 15,
+            "mean": 14.16,
+            "min": 12
+          }
+        },
+        "3": {
+          "answer_digits": {
+            "max": 16,
+            "mean": 7.22,
+            "min": 4
+          },
+          "base": {
+            "max": 16,
+            "mean": 7.42,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 17,
+            "mean": 16.18,
+            "min": 14
+          }
+        },
+        "4": {
+          "answer_digits": {
+            "max": 19,
+            "mean": 7.36,
+            "min": 4
+          },
+          "base": {
+            "max": 16,
+            "mean": 8.06,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 19,
+            "mean": 18.3,
+            "min": 16
+          }
+        },
+        "5": {
+          "answer_digits": {
+            "max": 21,
+            "mean": 9.58,
+            "min": 5
+          },
+          "base": {
+            "max": 16,
+            "mean": 7.58,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 21,
+            "mean": 20.22,
+            "min": 16
+          }
+        },
+        "6": {
+          "answer_digits": {
+            "max": 23,
+            "mean": 9.14,
+            "min": 5
+          },
+          "base": {
+            "max": 16,
+            "mean": 8.46,
+            "min": 2
+          },
+          "n_bits": {
+            "max": 23,
+            "mean": 21.98,
+            "min": 13
+          }
+        }
+      },
+      "mismatch_ids": [],
+      "mismatches": 0
+    }
+  },
+  "solver": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py",
+  "solver_sha256": "559e918cc7fda6cee2a27027db7b1a929a08adb942860dba78d67a638cd046a5",
+  "total_items": 5950,
+  "total_mismatches_and_errors": 0
+}
