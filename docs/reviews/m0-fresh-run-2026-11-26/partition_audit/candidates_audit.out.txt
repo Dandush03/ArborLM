@@ -1,0 +1,79 @@
+{
+ "candidate_clusters_per_eval": {
+  "C1": 17,
+  "M1": 14,
+  "R1": 5,
+  "R2": 15
+ },
+ "comparison": {
+  "C1": {
+   "equal": true,
+   "impl": 21,
+   "mine": 21,
+   "only_impl": [],
+   "only_mine": []
+  },
+  "M1": {
+   "equal": true,
+   "impl": 24,
+   "mine": 24,
+   "only_impl": [],
+   "only_mine": []
+  },
+  "R1": {
+   "equal": true,
+   "impl": 6,
+   "mine": 6,
+   "only_impl": [],
+   "only_mine": []
+  },
+  "R2": {
+   "equal": true,
+   "impl": 16,
+   "mine": 16,
+   "only_impl": [],
+   "only_mine": []
+  }
+ },
+ "dropped_per_eval": {
+  "C1": [
+   "C1.circle_elimination_r2",
+   "C1.cond_chain_f3",
+   "C1.func_branch_f4",
+   "C1.shared_lists_f3",
+   "C1.union_find_links_f3"
+  ],
+  "M1": [
+   "M1.division_counting_r3",
+   "M1.grid_perimeter_r3",
+   "M1.last_digit_power_r3",
+   "M1.prime_factors_r3",
+   "M1.ratio_share_r3"
+  ],
+  "R1": [
+   "R1.equivalence_exchange_rates_r6",
+   "R1.spatial_grid_walk_r5",
+   "R1.swap_tracking_r5",
+   "R1.venn_counting_r5"
+  ],
+  "R2": [
+   "R2.list_ops"
+  ]
+ },
+ "inputs_sha256": {
+  "dropped": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b",
+  "impl_candidates": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a",
+  "map": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
+  "stage2": "81d454a2c7045c7ad9bad9a18b2d9f18e5f3e5c02a4590b5a76ebc1368ae3e55",
+  "survivors": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+ },
+ "n_dropped": 15,
+ "problems": [],
+ "stage2_entries_not_on_survivor_list": [],
+ "survivor_counts": {
+  "C1": 26,
+  "M1": 29,
+  "R1": 10,
+  "R2": 17
+ }
+}

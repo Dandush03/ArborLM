@@ -1,0 +1,45 @@
+{
+ "random": {
+  "cases": 6000,
+  "disagreements": 0,
+  "examples": [],
+  "flags": {
+   "A_overfull": 508,
+   "a_e_gt_floor_half": 508,
+   "cross_group_3plus_evals": 3958,
+   "eval_with_1_or_2_clusters": 5160,
+   "group_holds_noncandidate_cluster": 2826,
+   "group_w>1": 4396,
+   "group_w_e_gt_floor_half": 5215,
+   "multi_lineage_cluster": 4709,
+   "step2_B_lt_A": 413
+  }
+ },
+ "real": {
+  "cases": 200,
+  "disagreements": 0,
+  "examples": [],
+  "part_size_tally_over_non_registered_seeds": {
+   "C1:A13/B4": 47,
+   "C1:A14/B3": 26,
+   "C1:A15/B2": 8,
+   "C1:A2/B15": 18,
+   "C1:A3/B14": 55,
+   "C1:A4/B13": 46,
+   "M1:A5/B9": 48,
+   "M1:A6/B8": 71,
+   "M1:A8/B6": 62,
+   "M1:A9/B5": 19,
+   "R1:A0/B5": 29,
+   "R1:A1/B4": 90,
+   "R1:A4/B1": 72,
+   "R1:A5/B0": 9,
+   "R2:A10/B5": 8,
+   "R2:A5/B10": 18,
+   "R2:A6/B9": 55,
+   "R2:A7/B8": 46,
+   "R2:A8/B7": 47,
+   "R2:A9/B6": 26
+  }
+ }
+}
